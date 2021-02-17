@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import LearnJapanese from './LearnJapanese';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LearnJapanese />
   </React.StrictMode>,
   document.getElementById('root')
 );
