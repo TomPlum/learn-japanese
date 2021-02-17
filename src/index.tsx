@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './styles/sass/index.scss';
 import LearnJapanese from './LearnJapanese';
 
 ReactDOM.render(
