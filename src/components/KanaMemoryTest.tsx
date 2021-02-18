@@ -38,8 +38,50 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         }
     }
 
+    render() {
+        const {
+            currentKana, correctAnswers, answer, hasAnsweredIncorrectly, hasExhaustedKana
+        } = this.state;
+
+        return (
+            <Container>
+                <p>{correctAnswers + 1}/{this.props.kana.length}</p>
+                {hasAnsweredIncorrectly && <p>That's not right! Try again.</p>}
+                {hasExhaustedKana &&
+                <Form>
+                    <Form.Label>You've answered all the kana!</Form.Label>
+                    <Button variant="info" type="button" onClick={this.reset.bind(this)}>Go Again</Button>
+                </Form>
+                }
+                <KanaTile kana={currentKana} key={currentKana.code}/>
+                <Form>
+                    <Form.Group controlId="answer">
+                        <Form.Control
+                            className={styles.input}
+                            plaintext
+                            disabled={hasExhaustedKana}
+                            value={answer}
+                            placeholder={!hasExhaustedKana ? "enter the romanji for the above kana" : ""}
+                            onChange={(e) => this.setState({answer: e.target.value})}
+                            onKeyPress={this.handleEnterKeySubmit.bind(this)}
+                        />
+                    </Form.Group>
+                    <Button
+                        className={styles.submit}
+                        variant="success"
+                        type="button"
+                        disabled={!answer}
+                        onClick={this.answerQuestion.bind(this)}
+                    >
+                        Answer
+                    </Button>
+                </Form>
+            </Container>
+        );
+    }
+
     answerQuestion = () => {
-        const { currentKana, correctAnswers, askedQuantity, asked, answer } = this.state;
+        const {currentKana, correctAnswers, askedQuantity, asked, answer} = this.state;
 
         if (answer === currentKana.romanji) {
             const updatedAsked = asked.concat(currentKana);
@@ -53,14 +95,9 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     hasAnsweredIncorrectly: false
                 });
             } else {
-                this.setState({
-                    hasExhaustedKana: true,
-                });
+                this.setState({hasExhaustedKana: true});
             }
-            this.setState({
-                asked: updatedAsked,
-                correctAnswers: correctAnswers + 1
-            });
+            this.setState({asked: updatedAsked, correctAnswers: correctAnswers + 1});
         } else {
             this.setState({hasAnsweredIncorrectly: true});
         }
@@ -80,45 +117,15 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         });
     }
 
-    render() {
-        const {
-            currentKana, correctAnswers, answer, hasAnsweredIncorrectly, hasExhaustedKana
-        } = this.state;
-
-        return (
-            <Container>
-                <p>{correctAnswers + 1}/{this.props.kana.length}</p>
-                {hasAnsweredIncorrectly && <p>That's not right! Try again.</p>}
-                {hasExhaustedKana &&
-                    <Form>
-                        <Form.Label>You've answered all the kana!</Form.Label>
-                        <Button variant="info" type="button" onClick={this.reset.bind(this)}>Go Again</Button>
-                    </Form>
-                }
-                <KanaTile kana={currentKana} key={currentKana.code}/>
-                <Form>
-                    <Form.Group controlId="answer">
-                        <Form.Control
-                            className={styles.input}
-                            plaintext
-                            disabled={hasExhaustedKana}
-                            value={answer}
-                            placeholder={!hasExhaustedKana ? "enter the romanji for the above kana" : ""}
-                            onChange={(e) => this.setState({answer: e.target.value})}
-                        />
-                    </Form.Group>
-                    <Button
-                        className={styles.submit}
-                        variant="success"
-                        type="button"
-                        disabled={!answer}
-                        onClick={this.answerQuestion.bind(this)}
-                    >
-                        Answer
-                    </Button>
-                </Form>
-            </Container>
-        );
+    handleEnterKeySubmit = (event: any) => {
+        const { answer } = this.state;
+        if (event.charCode === 13) {
+            event.preventDefault();
+            if (answer) {
+                this.answerQuestion();
+            }
+        }
+        return false;
     }
 }
 
