@@ -1,5 +1,5 @@
 import {Kana} from "../types/Kana";
-import hiragana from "../hiragana";
+import hiragana from "../data/hiragana";
 
 export class KanaRepository {
     readHiragana(): Kana[] {
