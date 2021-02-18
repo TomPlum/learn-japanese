@@ -1,22 +1,16 @@
-import './styles/sass/App.scss';
+import './styles/sass/LearnJapanese.module.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Container, Row} from "react-bootstrap";
+import Header from "./layout/Header";
+import styles from "./styles/sass/LearnJapanese.module.scss";
 
 function LearnJapanese() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/LearnJapanese.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Container fluid className={styles.wrapper}>
+          <Row>
+            <Header />
+          </Row>
+      </Container>
   );
 }
 
