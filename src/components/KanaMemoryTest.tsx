@@ -95,8 +95,9 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         <Form.Control
                             className={styles.input}
                             plaintext
+                            disabled={hasExhaustedKana}
                             value={answer}
-                            placeholder="enter the romanji for the above kana"
+                            placeholder={!hasExhaustedKana ? "enter the romanji for the above kana" : ""}
                             onChange={(e) => this.setState({answer: e.target.value})}
                         />
                     </Form.Group>
