@@ -4,7 +4,7 @@ import hiragana from "../hiragana";
 export class KanaRepository {
     readHiragana(): Kana[] {
         return hiragana.map(character => {
-            return new Kana(character.code)
+            return new Kana(character.code, character.name);
         })
     }
 }

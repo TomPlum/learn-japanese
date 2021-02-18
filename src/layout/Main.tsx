@@ -4,6 +4,7 @@ import KanaMemoryTest from "../components/KanaMemoryTest";
 import {Kana} from "../types/Kana";
 import {KanaRepository} from "../infra/KanaRepository";
 import LoadingSpinner from "./LoadingSpinner";
+import styles from "../styles/sass/layout/Main.module.scss";
 
 interface MainState {
     loading: boolean;
@@ -28,7 +29,7 @@ class Main extends Component<{}, MainState> {
         const { loading, kana } = this.state;
 
         return (
-          <Container>
+          <Container className={styles.wrapper}>
               <LoadingSpinner active={loading} />
               {kana.length > 0 && <KanaMemoryTest kana={kana} />}
           </Container>
