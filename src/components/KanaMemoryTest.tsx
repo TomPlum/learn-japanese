@@ -44,7 +44,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         } = this.state;
 
         return (
-            <Container>
+            <Container className={styles.wrapper}>
                 <p>{correctAnswers + 1}/{this.props.kana.length}</p>
                 {hasAnsweredIncorrectly && <p>That's not right! Try again.</p>}
                 {hasExhaustedKana &&
@@ -73,7 +73,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         disabled={!answer}
                         onClick={this.answerQuestion.bind(this)}
                     >
-                        Answer
+                        Check
                     </Button>
                 </Form>
             </Container>
@@ -118,7 +118,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     handleEnterKeySubmit = (event: any) => {
-        const { answer } = this.state;
+        const {answer} = this.state;
         if (event.charCode === 13) {
             event.preventDefault();
             if (answer) {
