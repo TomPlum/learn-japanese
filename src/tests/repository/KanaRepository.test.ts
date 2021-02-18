@@ -1,4 +1,4 @@
-import {KanaRepository} from "../../infra/KanaRepository";
+import {KanaRepository} from "../../repository/KanaRepository";
 import {Kana} from "../../types/Kana";
 
 describe("Kana Repository", () => {

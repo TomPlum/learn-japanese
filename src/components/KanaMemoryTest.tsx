@@ -4,6 +4,7 @@ import {Button, Container, Form} from "react-bootstrap";
 import KanaTile from "./KanaTile";
 import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
 import {Arrays} from "../utility/Arrays";
+import {RandomNumberGenerator} from "../utility/RandomNumberGenerator";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
@@ -22,10 +23,14 @@ interface KanaMemoryTestState {
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
     constructor(props: KanaMemoryTestProps | Readonly<KanaMemoryTestProps>) {
         super(props);
+
+        const kana = this.props.kana;
+        const initialKana = kana[new RandomNumberGenerator().getRandomArrayIndex(kana)];
+
         this.state = {
-            currentKana: this.props.kana[0],
+            currentKana: initialKana,
             answer: "",
-            asked: [this.props.kana[0]],
+            asked: [initialKana],
             correctAnswers: 0,
             askedQuantity: 1,
             hasAnsweredIncorrectly: false,
@@ -37,13 +42,14 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         const { currentKana, correctAnswers, askedQuantity, asked, answer } = this.state;
 
         if (answer === currentKana.romanji) {
-            let updatedAsked = asked.concat(currentKana);
-            let remainingKana = Arrays.difference(this.props.kana, updatedAsked);
+            const updatedAsked = asked.concat(currentKana);
+            const remainingKana = Arrays.difference(this.props.kana, updatedAsked);
+            const index = new RandomNumberGenerator().getRandomArrayIndex(remainingKana);
 
             if (remainingKana.length > 0) {
                 this.setState({
                     askedQuantity: askedQuantity + 1,
-                    currentKana: remainingKana[0],
+                    currentKana: remainingKana[index],
                     hasAnsweredIncorrectly: false
                 });
             } else {
@@ -76,12 +82,12 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
     render() {
         const {
-            currentKana, correctAnswers, askedQuantity, answer, hasAnsweredIncorrectly, hasExhaustedKana
+            currentKana, correctAnswers, answer, hasAnsweredIncorrectly, hasExhaustedKana
         } = this.state;
 
         return (
             <Container>
-                <p>{correctAnswers}/{askedQuantity}</p>
+                <p>{correctAnswers + 1}/{this.props.kana.length}</p>
                 {hasAnsweredIncorrectly && <p>That's not right! Try again.</p>}
                 {hasExhaustedKana &&
                     <Form>

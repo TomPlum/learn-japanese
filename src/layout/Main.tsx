@@ -2,7 +2,7 @@ import {Component} from "react";
 import {Container} from "react-bootstrap";
 import KanaMemoryTest from "../components/KanaMemoryTest";
 import {Kana} from "../types/Kana";
-import {KanaRepository} from "../infra/KanaRepository";
+import {KanaRepository} from "../repository/KanaRepository";
 import LoadingSpinner from "./LoadingSpinner";
 import styles from "../styles/sass/layout/Main.module.scss";
 
