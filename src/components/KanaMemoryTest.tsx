@@ -12,12 +12,14 @@ interface KanaMemoryTestProps {
 
 interface KanaMemoryTestState {
     currentKana: Kana;
-    answer: string;
+    answer: string | undefined;
     asked: Kana[];
     correctAnswers: number;
     askedQuantity: number;
     hasAnsweredIncorrectly: boolean;
     hasExhaustedKana: boolean;
+    startTime: number;
+    endTime: number | undefined;
 }
 
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
@@ -29,12 +31,14 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
         this.state = {
             currentKana: initialKana,
-            answer: "",
+            answer: undefined,
             asked: [initialKana],
             correctAnswers: 0,
             askedQuantity: 1,
             hasAnsweredIncorrectly: false,
-            hasExhaustedKana: false
+            hasExhaustedKana: false,
+            startTime: Date.now(),
+            endTime: undefined
         }
     }
 
@@ -50,6 +54,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 {hasExhaustedKana &&
                 <Form>
                     <Form.Label>You've answered all the kana!</Form.Label>
+                    <Form.Label>Your Time: {this.getTimeTaken()}</Form.Label>
                     <Button variant="info" type="button" onClick={this.reset.bind(this)}>Go Again</Button>
                 </Form>
                 }
@@ -95,7 +100,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     hasAnsweredIncorrectly: false
                 });
             } else {
-                this.setState({hasExhaustedKana: true});
+                this.setState({hasExhaustedKana: true, endTime: Date.now()});
             }
             this.setState({asked: updatedAsked, correctAnswers: correctAnswers + 1});
         } else {
@@ -113,7 +118,8 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             correctAnswers: 0,
             askedQuantity: 1,
             hasAnsweredIncorrectly: false,
-            hasExhaustedKana: false
+            hasExhaustedKana: false,
+            startTime: Date.now()
         });
     }
 
@@ -127,6 +133,17 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         }
         return false;
     }
+
+    private getTimeTaken(): string {
+        const { startTime, endTime } = this.state;
+        if (!endTime) return "N/A";
+        const delta = endTime - startTime;
+        const s = delta / 1000;
+        const minutes = s / 60;
+        const remainingSeconds = s % 60;
+        return minutes + "m " + remainingSeconds + "s";
+    }
 }
+
 
 export default KanaMemoryTest;

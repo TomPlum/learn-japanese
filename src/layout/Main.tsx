@@ -5,35 +5,59 @@ import {Kana} from "../types/Kana";
 import {KanaRepository} from "../repository/KanaRepository";
 import LoadingSpinner from "./LoadingSpinner";
 import styles from "../styles/sass/layout/Main.module.scss";
+import TestModeMenu, {TestSettings} from "../components/TestModeMenu";
 
 interface MainState {
     loading: boolean;
-    kana: Kana[];
+    kana?: Kana[];
+    testSettings?: TestSettings;
 }
 
 class Main extends Component<{}, MainState> {
     constructor(props: Readonly<{}>) {
         super(props);
         this.state = {
-            loading: true,
-            kana: []
+            loading: false,
+            kana: undefined,
+            testSettings: undefined,
         }
     }
 
-    componentDidMount() {
-        const kana = new KanaRepository().readAllKana();
-        this.setState({kana: kana, loading: false});
+    onTestStart = (settings: TestSettings) => {
+        this.setState({testSettings: settings}, () => this.loadKana());
     }
 
     render() {
-        const { loading, kana } = this.state;
+        const { loading, kana, testSettings } = this.state;
 
         return (
           <Container className={styles.wrapper}>
               <LoadingSpinner active={loading} />
-              {kana.length > 0 && <KanaMemoryTest kana={kana} />}
+              {!testSettings && <TestModeMenu onStart={this.onTestStart}/>}
+              {testSettings && kana && <KanaMemoryTest kana={kana} />}
           </Container>
         );
+    }
+
+    private loadKana() {
+        this.setState({loading: true});
+
+        const repository = new KanaRepository();
+
+        let kana;
+
+        const { testSettings } = this.state;
+        if (testSettings?.includeHiragana && testSettings.includeKatakana) {
+            kana = repository.readAllKana();
+        } else if (testSettings?.includeHiragana) {
+            kana = repository.readHiragana();
+        } else if (testSettings?.includeKatakana) {
+            kana = repository.readKatakana();
+        } else {
+            throw new ReferenceError("Invalid Test Settings: No Kana Selected");
+        }
+
+        this.setState({loading: false, kana});
     }
 }
 
