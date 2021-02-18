@@ -21,7 +21,7 @@ class Main extends Component<{}, MainState> {
     }
 
     componentDidMount() {
-        const kana = new KanaRepository().readHiragana();
+        const kana = new KanaRepository().readAllKana();
         this.setState({kana: kana, loading: false});
     }
 
