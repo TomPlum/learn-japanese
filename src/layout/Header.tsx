@@ -4,7 +4,7 @@ import {Button, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstr
 class Header extends Component {
     render() {
         return (
-            <Navbar bg="dark" expand="lg" fixed="top">
+            <Navbar bg="dark" expand="lg">
                 <Navbar.Brand>Learn Japanese</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
