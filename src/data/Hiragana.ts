@@ -43,6 +43,28 @@ const hiragana = [
         code: "\u3053"
     },
 
+    //K Diacriticals (Dakuten)
+    {
+        name: "ga",
+        code: "\u304C"
+    },
+    {
+        name: "gi",
+        code: "\u304E"
+    },
+    {
+        name: "gu",
+        code: "\u3050"
+    },
+    {
+        name: "ge",
+        code: "\u3052"
+    },
+    {
+        name: "go",
+        code: "\u3054"
+    },
+
     //S Column (Big)
     {
         name: "sa",
@@ -65,6 +87,28 @@ const hiragana = [
         code: "\u305D"
     },
 
+    //S Diacriticals (Dakuten)
+    {
+        name: "za",
+        code: "\u3056"
+    },
+    {
+        name: "ji",
+        code: "\u3058"
+    },
+    {
+        name: "zu",
+        code: "\u305A"
+    },
+    {
+        name: "ze",
+        code: "\u305C"
+    },
+    {
+        name: "zo",
+        code: "\u305E"
+    },
+
     //T Column (Big)
     {
         name: "ta",
@@ -85,6 +129,28 @@ const hiragana = [
     {
         name: "to",
         code: "\u3068"
+    },
+
+    //T Diacriticals (Dakuten)
+    {
+        name: "da",
+        code: "\u3060"
+    },
+    {
+        name: "di",
+        code: "\u3062"
+    },
+    {
+        name: "du",
+        code: "\u3065"
+    },
+    {
+        name: "de",
+        code: "\u3067"
+    },
+    {
+        name: "do",
+        code: "\u3069"
     },
 
     //N Column (Big)
@@ -129,6 +195,50 @@ const hiragana = [
     {
         name: "ho",
         code: "\u307B"
+    },
+
+    //H Diacriticals (Dakuten)
+    {
+        name: "ba",
+        code: "\u3070"
+    },
+    {
+        name: "bi",
+        code: "\u3073"
+    },
+    {
+        name: "bu",
+        code: "\u3076"
+    },
+    {
+        name: "be",
+        code: "\u3079"
+    },
+    {
+        name: "bo",
+        code: "\u307C"
+    },
+
+    //H Diacriticals (Handakuten)
+    {
+        name: "pa",
+        code: "\u3071"
+    },
+    {
+        name: "pi",
+        code: "\u3074"
+    },
+    {
+        name: "pu",
+        code: "\u3077"
+    },
+    {
+        name: "pe",
+        code: "\u307A"
+    },
+    {
+        name: "po",
+        code: "\u307D"
     },
 
     //M Column (Big)
