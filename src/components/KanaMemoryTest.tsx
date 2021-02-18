@@ -1,10 +1,11 @@
 import {Component} from "react";
 import {Kana} from "../types/Kana";
-import {Button, Container, Form} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import KanaTile from "./KanaTile";
 import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
 import {Arrays} from "../utility/Arrays";
 import {RandomNumberGenerator} from "../utility/RandomNumberGenerator";
+import Timer from "./Timer";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
@@ -49,7 +50,14 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
         return (
             <Container className={styles.wrapper}>
-                <p>{correctAnswers + 1}/{this.props.kana.length}</p>
+                <Row noGutters>
+                    <Col>
+                        <p>{correctAnswers + 1}/{this.props.kana.length}</p>
+                    </Col>
+                    <Col>
+                        <Timer className={styles.timer} on={!hasExhaustedKana} key={String(!hasExhaustedKana)}/>
+                    </Col>
+                </Row>
                 {hasAnsweredIncorrectly && <p>That's not right! Try again.</p>}
                 {hasExhaustedKana &&
                 <Form>
