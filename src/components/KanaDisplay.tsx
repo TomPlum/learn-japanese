@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {Kana} from "../types/Kana";
 import {Container} from "react-bootstrap";
-import styles from "../styles/sass/components/KanaTile.module.scss";
+import styles from "../styles/sass/components/KanaDisplay.module.scss";
 
 interface KanaTileProps {
     kana: Kana;
@@ -11,7 +11,7 @@ interface KanaTileState {
     isNotifyingIncorrect: boolean;
 }
 
-class KanaTile extends Component<KanaTileProps, KanaTileState> {
+class KanaDisplay extends Component<KanaTileProps, KanaTileState> {
     constructor(props: KanaTileProps | Readonly<KanaTileProps>) {
         super(props);
         this.state = {
@@ -24,7 +24,9 @@ class KanaTile extends Component<KanaTileProps, KanaTileState> {
 
         return(
           <Container className={styles.wrapper}>
-            <p className={isNotifyingIncorrect ? styles.notifyIncorrect : styles.kana}>{this.props.kana.code}</p>
+            <p className={isNotifyingIncorrect ? styles.notifyIncorrect : styles.kana}>
+                {this.props.kana.code}
+            </p>
           </Container>
         );
     }
@@ -39,4 +41,4 @@ class KanaTile extends Component<KanaTileProps, KanaTileState> {
 
 }
 
-export default KanaTile;
+export default KanaDisplay;

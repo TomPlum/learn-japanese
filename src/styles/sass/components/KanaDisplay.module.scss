@@ -15,6 +15,7 @@ $default-colour: #FFF;
   animation: flashRed ease $notify-animation-time;
   -webkit-animation: flashRed ease $notify-animation-time;
   -moz-animation: flashRed ease $notify-animation-time;
+  animation-fill-mode: forwards;
 }
 
 @keyframes flashRed {

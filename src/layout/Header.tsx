@@ -15,7 +15,7 @@ class Header extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
+                        {/*<Nav.Link href="#home">Home</Nav.Link>
                         <Nav.Link href="#link">Test Me</Nav.Link>
                         <NavDropdown title="Resources" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Gallery</NavDropdown.Item>
@@ -23,7 +23,7 @@ class Header extends Component {
                             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                             <NavDropdown.Divider/>
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown>
+                        </NavDropdown>*/}
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search Kana" className={styles.search}/>

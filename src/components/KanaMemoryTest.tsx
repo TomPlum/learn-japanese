@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Kana} from "../types/Kana";
 import {Button, Col, Container, Form, ProgressBar, Row} from "react-bootstrap";
-import KanaTile from "./KanaTile";
+import KanaDisplay from "./KanaDisplay";
 import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
 import {RandomNumberGenerator} from "../utility/RandomNumberGenerator";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -27,12 +27,12 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     private readonly  rng = new RandomNumberGenerator();
 
     private readonly timer: React.RefObject<Timer>;
-    private readonly kanaTile: React.RefObject<KanaTile>;
+    private readonly kanaDisplay: React.RefObject<KanaDisplay>;
 
     constructor(props: KanaMemoryTestProps | Readonly<KanaMemoryTestProps>) {
         super(props);
         this.timer = React.createRef();
-        this.kanaTile = React.createRef();
+        this.kanaDisplay = React.createRef();
 
         const [ firstKana, remainingKana ] = this.getRandomKana(this.props.kana);
 
@@ -68,7 +68,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     </Col>
                 </Row>
 
-                <KanaTile kana={currentKana} key={currentKana.code} ref={this.kanaTile}/>
+                <KanaDisplay kana={currentKana} key={currentKana.code} ref={this.kanaDisplay}/>
 
                 <Form>
                     <Form.Group controlId="answer">
@@ -126,7 +126,11 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     hasAnsweredIncorrectly: false
                 });
             }
+        } else {
+            if (this.kanaDisplay.current != null) this.kanaDisplay.current.notifyIncorrect();
+            this.setState({hasAnsweredIncorrectly: true});
         }
+
         this.setState({answer: ""});
     }
 
