@@ -1,3 +1,5 @@
+@import "../colours";
+
 .submit {
   width: 100%;
 }
@@ -5,6 +7,7 @@
 .input {
   text-align: center;
   width: 100%;
+  color: #FFF;
 }
 
 .wrapper {
@@ -13,6 +16,11 @@
 
 .timer {
   float: right;
+  color: #FFF;
+}
+
+.close {
+  color: #FFF;
 }
 
 .close:hover {
@@ -22,6 +30,7 @@
 }
 
 .progress {
+  background-color: $dark-2;
   margin-bottom: 15px;
   height: 8px;
 }

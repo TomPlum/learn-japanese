@@ -7,8 +7,8 @@ import styles from "../styles/sass/layout/Header.module.scss";
 class Header extends Component {
     render() {
         return (
-            <Navbar bg="dark" expand="lg">
-                <Navbar.Brand>
+            <Navbar  bg="dark" variant="dark" expand="lg">
+                <Navbar.Brand className={styles.brand}>
                     <FontAwesomeIcon icon={faCircle} className={styles.logo}/>
                     {' '}Learn Japanese
                 </Navbar.Brand>
@@ -26,7 +26,7 @@ class Header extends Component {
                         </NavDropdown>
                     </Nav>
                     <Form inline>
-                        <FormControl type="text" placeholder="Search Kana" className="mr-sm-2"/>
+                        <FormControl type="text" placeholder="Search Kana" className={styles.search}/>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>

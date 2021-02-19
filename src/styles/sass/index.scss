@@ -1,3 +1,5 @@
+@import "colours";
+
 body {
   margin: 0;
   height: 100vh;
@@ -14,7 +16,7 @@ code {
 
 html, body, #root {
   min-height: 100%;
-  //overflow: hidden;
+  background-color: $dark-3;
 }
 
 //Center Input Placeholder Text
