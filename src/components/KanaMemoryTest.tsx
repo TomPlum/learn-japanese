@@ -5,7 +5,9 @@ import KanaTile from "./KanaTile";
 import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
 import {Arrays} from "../utility/Arrays";
 import {RandomNumberGenerator} from "../utility/RandomNumberGenerator";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Timer from "./Timer";
+import {faRedoAlt} from "@fortawesome/free-solid-svg-icons";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
@@ -52,20 +54,13 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             <Container className={styles.wrapper}>
                 <Row noGutters>
                     <Col>
-                        <p>{correctAnswers + 1}/{this.props.kana.length}</p>
+                        <p>{correctAnswers}/{this.props.kana.length}</p>
                     </Col>
                     <Col>
                         <Timer className={styles.timer} on={!hasExhaustedKana} key={String(!hasExhaustedKana)}/>
                     </Col>
                 </Row>
                 {hasAnsweredIncorrectly && <p>That's not right! Try again.</p>}
-                {hasExhaustedKana &&
-                <Form>
-                    <Form.Label>You've answered all the kana!</Form.Label>
-                    <Form.Label>Your Time: {this.getTimeTaken()}</Form.Label>
-                    <Button variant="info" type="button" onClick={this.reset.bind(this)}>Go Again</Button>
-                </Form>
-                }
                 <KanaTile kana={currentKana} key={currentKana.code}/>
                 <Form>
                     <Form.Group controlId="answer">
@@ -81,12 +76,12 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     </Form.Group>
                     <Button
                         className={styles.submit}
-                        variant="success"
+                        variant={!hasExhaustedKana ? "success" : "info"}
                         type="button"
-                        disabled={!answer}
-                        onClick={this.answerQuestion.bind(this)}
+                        disabled={!answer && !hasExhaustedKana}
+                        onClick={!hasExhaustedKana ? this.answerQuestion.bind(this) : this.reset.bind(this)}
                     >
-                        Check
+                        {!hasExhaustedKana ? "Check" : <><FontAwesomeIcon icon={faRedoAlt}/> Restart</>}
                     </Button>
                 </Form>
             </Container>
