@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Kana} from "../types/Kana";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, ProgressBar, Row} from "react-bootstrap";
 import KanaTile from "./KanaTile";
 import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
 import {Arrays} from "../utility/Arrays";
@@ -17,13 +17,9 @@ interface KanaMemoryTestProps {
 interface KanaMemoryTestState {
     currentKana: Kana;
     answer: string | undefined;
-    asked: Kana[];
-    correctAnswers: number;
-    askedQuantity: number;
+    answered: Kana[];
     hasAnsweredIncorrectly: boolean;
     hasExhaustedKana: boolean;
-    startTime: number;
-    endTime: number | undefined;
 }
 
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
@@ -39,24 +35,26 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         this.state = {
             currentKana: initialKana,
             answer: undefined,
-            asked: [initialKana],
-            correctAnswers: 0,
-            askedQuantity: 1,
+            answered: [],
             hasAnsweredIncorrectly: false,
             hasExhaustedKana: false,
-            startTime: Date.now(),
-            endTime: undefined
         }
     }
 
     render() {
-        const {
-            currentKana, answer, hasAnsweredIncorrectly, hasExhaustedKana
-        } = this.state;
+        const { currentKana, answer, hasAnsweredIncorrectly, answered, hasExhaustedKana } = this.state;
+        const { kana } = this.props;
 
         return (
             <Container className={styles.wrapper}>
                 <Row noGutters>
+                    <Col xs={12}>
+                        <ProgressBar
+                            className={styles.progress}
+                            now={(answered.length / kana.length) * 100}
+                            variant={hasExhaustedKana ? "success" : undefined}
+                        />
+                    </Col>
                     <Col>
                         <FontAwesomeIcon icon={faTimes} className={styles.close} onClick={this.close.bind(this)}/>
                     </Col>
@@ -93,24 +91,20 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     answerQuestion = () => {
-        const {currentKana, correctAnswers, askedQuantity, asked, answer} = this.state;
+        const {currentKana, answered, answer} = this.state;
 
         if (answer === currentKana.romanji) {
-            const updatedAsked = asked.concat(currentKana);
-            const remainingKana = Arrays.difference(this.props.kana, updatedAsked);
+            const updatedAnswered = answered.concat(currentKana);
+            const remainingKana = Arrays.difference(this.props.kana, updatedAnswered);
             const index = new RandomNumberGenerator().getRandomArrayIndex(remainingKana);
 
             if (remainingKana.length > 0) {
-                this.setState({
-                    askedQuantity: askedQuantity + 1,
-                    currentKana: remainingKana[index],
-                    hasAnsweredIncorrectly: false
-                });
+                this.setState({currentKana: remainingKana[index], hasAnsweredIncorrectly: false});
             } else {
                 if (this.timer.current != null) this.timer.current.stop();
-                this.setState({hasExhaustedKana: true, endTime: Date.now()});
+                this.setState({hasExhaustedKana: true});
             }
-            this.setState({asked: updatedAsked, correctAnswers: correctAnswers + 1});
+            this.setState({answered: updatedAnswered});
         } else {
             this.setState({hasAnsweredIncorrectly: true});
         }
@@ -122,12 +116,9 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         this.setState({
             currentKana: this.props.kana[0],
             answer: "",
-            asked: [this.props.kana[0]],
-            correctAnswers: 0,
-            askedQuantity: 1,
+            answered: [],
             hasAnsweredIncorrectly: false,
             hasExhaustedKana: false,
-            startTime: Date.now()
         });
         if (this.timer.current != null) this.timer.current.restart();
     }

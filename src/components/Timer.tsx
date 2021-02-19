@@ -1,5 +1,4 @@
 import {Component} from "react";
-import {Container} from "react-bootstrap";
 
 interface TimerProps {
    end?: number;
@@ -34,11 +33,9 @@ class Timer extends Component<TimerProps, TimerState> {
         const { className } = this.props;
 
         return (
-            <Container>
-                <span className={className}>
-                    {this.formatTimeElapsed()}
-                </span>
-            </Container>
+            <span className={className}>
+                {this.formatTimeElapsed()}
+            </span>
         );
     }
 
