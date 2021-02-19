@@ -6,9 +6,11 @@ import {Button, OverlayTrigger} from "react-bootstrap";
 import PopOver from "./PopOver";
 import {Kana} from "../types/Kana";
 import {KanaColumn} from "../types/KanaColumn";
+import {RandomNumberGenerator} from "../utility/RandomNumberGenerator";
 
 interface TipButtonProps {
     kana: Kana;
+    title?: string;
 }
 
 class TipButton extends Component<TipButtonProps> {
@@ -16,14 +18,18 @@ class TipButton extends Component<TipButtonProps> {
         const overlay = <PopOver title={this.getTitle()} text={this.getContent()} />;
         return (
             <OverlayTrigger trigger="focus" placement="left" overlay={overlay}>
-                <Button variant="warning" className={styles.tip}>
+                <Button variant="warning" className={styles.tip} title={this.props.title}>
                     <FontAwesomeIcon icon={faLightbulb}/>
                 </Button>
             </OverlayTrigger>
         );
     }
 
-    private getTitle = () => "Need some guidance?";
+    private getTitle = () => {
+        const titles = ["Need some guidance?", "Stuck?", "Need a hint?"];
+        const index = RandomNumberGenerator.getRandomArrayIndex(titles);
+        return titles[index];
+    };
 
     private getContent = () => {
         const { kana } = this.props;

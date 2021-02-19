@@ -24,8 +24,6 @@ interface KanaMemoryTestState {
 }
 
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
-    private readonly  rng = new RandomNumberGenerator();
-
     private readonly timer: React.RefObject<Timer>;
     private readonly kanaDisplay: React.RefObject<KanaDisplay>;
 
@@ -61,7 +59,12 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         />
                     </Col>
                     <Col>
-                        <FontAwesomeIcon icon={faTimes} className={styles.close} onClick={this.close.bind(this)}/>
+                        <FontAwesomeIcon
+                            icon={faTimes}
+                            className={styles.close}
+                            onClick={this.close.bind(this)}
+                            title="Quit"
+                        />
                     </Col>
                     <Col>
                         <Timer className={styles.timer} ref={this.timer}/>
@@ -85,13 +88,13 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                                 />
                             </Col>
                             <Col xs="auto" className={styles.tipCol}>
-                                <TipButton kana={currentKana} key={currentKana.code} />
+                                <TipButton kana={currentKana} key={currentKana.code} title="Help"/>
                             </Col>
                         </Row>
                     </Form.Group>
                     <Button
                         className={styles.submit}
-                        variant={!hasExhaustedKana ? "success" : "info"}
+                        variant={!hasExhaustedKana ? "success" : "primary"}
                         type="button"
                         disabled={!answer && !hasExhaustedKana}
                         onClick={!hasExhaustedKana ? this.answerQuestion.bind(this) : this.reset.bind(this)}
@@ -166,13 +169,13 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
      * @param pool The array of Kana to choose from.
      * @returns A two-element tuple containing the randomly chosen kana and the trimmed pool.
      */
-    private getRandomKana(pool: Kana[]): [Kana, Kana[]] {
+    private getRandomKana = (pool: Kana[]): [Kana, Kana[]] => {
         const kana = [...pool];
-        const randomKanaIndex = this.rng.getRandomArrayIndex(kana);
+        const randomKanaIndex = RandomNumberGenerator.getRandomArrayIndex(kana);
         const firstKana = kana[randomKanaIndex];
         kana.splice(randomKanaIndex, 1);
         return [firstKana, kana];
-    }
+    };
 }
 
 export default KanaMemoryTest;
