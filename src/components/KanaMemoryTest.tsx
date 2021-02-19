@@ -7,10 +7,11 @@ import {Arrays} from "../utility/Arrays";
 import {RandomNumberGenerator} from "../utility/RandomNumberGenerator";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Timer from "./Timer";
-import {faRedoAlt} from "@fortawesome/free-solid-svg-icons";
+import {faRedoAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
+    onClose: () => void;
 }
 
 interface KanaMemoryTestState {
@@ -50,14 +51,14 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
     render() {
         const {
-            currentKana, askedQuantity, answer, hasAnsweredIncorrectly, hasExhaustedKana
+            currentKana, answer, hasAnsweredIncorrectly, hasExhaustedKana
         } = this.state;
 
         return (
             <Container className={styles.wrapper}>
                 <Row noGutters>
                     <Col>
-                        <p>{askedQuantity}/{this.props.kana.length}</p>
+                        <FontAwesomeIcon icon={faTimes} className={styles.close} onClick={this.close.bind(this)}/>
                     </Col>
                     <Col>
                         <Timer className={styles.timer} ref={this.timer}/>
@@ -141,7 +142,8 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         }
         return false;
     }
-}
 
+    close = () => this.props.onClose();
+}
 
 export default KanaMemoryTest;

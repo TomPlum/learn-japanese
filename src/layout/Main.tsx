@@ -23,9 +23,9 @@ class Main extends Component<{}, MainState> {
         }
     }
 
-    onTestStart = (settings: TestSettings) => {
-        this.setState({testSettings: settings}, () => this.loadKana());
-    }
+    onTestStart = (settings: TestSettings) => this.setState({testSettings: settings}, () => this.loadKana());
+
+    onTestClose = () => this.setState({testSettings: undefined});
 
     render() {
         const { loading, kana, testSettings } = this.state;
@@ -34,7 +34,7 @@ class Main extends Component<{}, MainState> {
           <Container className={styles.wrapper}>
               <LoadingSpinner active={loading} />
               {!testSettings && <TestModeMenu onStart={this.onTestStart}/>}
-              {testSettings && kana && <KanaMemoryTest kana={kana} />}
+              {testSettings && kana && <KanaMemoryTest kana={kana} onClose={this.onTestClose}/>}
           </Container>
         );
     }
