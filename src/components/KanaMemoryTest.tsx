@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import {Kana} from "../types/Kana";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import KanaTile from "./KanaTile";
@@ -26,8 +26,11 @@ interface KanaMemoryTestState {
 }
 
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
+    private readonly timer: React.RefObject<Timer>;
+
     constructor(props: KanaMemoryTestProps | Readonly<KanaMemoryTestProps>) {
         super(props);
+        this.timer = React.createRef();
 
         const kana = this.props.kana;
         const initialKana = kana[new RandomNumberGenerator().getRandomArrayIndex(kana)];
@@ -47,17 +50,17 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
     render() {
         const {
-            currentKana, correctAnswers, answer, hasAnsweredIncorrectly, hasExhaustedKana
+            currentKana, askedQuantity, answer, hasAnsweredIncorrectly, hasExhaustedKana
         } = this.state;
 
         return (
             <Container className={styles.wrapper}>
                 <Row noGutters>
                     <Col>
-                        <p>{correctAnswers}/{this.props.kana.length}</p>
+                        <p>{askedQuantity}/{this.props.kana.length}</p>
                     </Col>
                     <Col>
-                        <Timer className={styles.timer} on={!hasExhaustedKana} key={String(!hasExhaustedKana)}/>
+                        <Timer className={styles.timer} ref={this.timer}/>
                     </Col>
                 </Row>
                 {hasAnsweredIncorrectly && <p>That's not right! Try again.</p>}
@@ -103,6 +106,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     hasAnsweredIncorrectly: false
                 });
             } else {
+                if (this.timer.current != null) this.timer.current.stop();
                 this.setState({hasExhaustedKana: true, endTime: Date.now()});
             }
             this.setState({asked: updatedAsked, correctAnswers: correctAnswers + 1});
@@ -124,6 +128,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             hasExhaustedKana: false,
             startTime: Date.now()
         });
+        if (this.timer.current != null) this.timer.current.restart();
     }
 
     handleEnterKeySubmit = (event: any) => {
@@ -135,16 +140,6 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             }
         }
         return false;
-    }
-
-    private getTimeTaken(): string {
-        const { startTime, endTime } = this.state;
-        if (!endTime) return "N/A";
-        const delta = endTime - startTime;
-        const s = delta / 1000;
-        const minutes = s / 60;
-        const remainingSeconds = s % 60;
-        return minutes + "m " + remainingSeconds + "s";
     }
 }
 
