@@ -44,19 +44,18 @@ class Main extends Component<{}, MainState> {
 
         const repository = new KanaRepository();
 
-        let kana;
+        let kana: Kana[];
 
         const { testSettings } = this.state;
         if (testSettings?.includeHiragana && testSettings.includeKatakana) {
             kana = repository.readAllKana();
         } else if (testSettings?.includeHiragana) {
-            kana = repository.readHiragana().splice(0, 3);
+            kana = repository.readHiragana().splice(0,3);
         } else if (testSettings?.includeKatakana) {
             kana = repository.readKatakana();
         } else {
             throw new ReferenceError("Invalid Test Settings: No Kana Selected");
         }
-
         this.setState({loading: false, kana});
     }
 }

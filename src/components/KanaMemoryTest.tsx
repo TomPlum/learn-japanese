@@ -1,15 +1,13 @@
 import React, {Component} from "react";
 import {Kana} from "../types/Kana";
-import {Button, Col, Container, Form, OverlayTrigger, ProgressBar, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, ProgressBar, Row} from "react-bootstrap";
 import KanaTile from "./KanaTile";
 import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
-import {Arrays} from "../utility/Arrays";
 import {RandomNumberGenerator} from "../utility/RandomNumberGenerator";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Timer from "./Timer";
 import {faRedoAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import TipButton from "./TipButton";
-import PopOver from "./PopOver";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
@@ -19,25 +17,28 @@ interface KanaMemoryTestProps {
 interface KanaMemoryTestState {
     currentKana: Kana;
     answer: string | undefined;
+    remainingKana: Kana[];
     answered: Kana[];
     hasAnsweredIncorrectly: boolean;
     hasExhaustedKana: boolean;
 }
 
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
+    private readonly  rng = new RandomNumberGenerator();
+
     private readonly timer: React.RefObject<Timer>;
-    private readonly displayedKana: React.RefObject<KanaTile>;
+    private readonly kanaTile: React.RefObject<KanaTile>;
 
     constructor(props: KanaMemoryTestProps | Readonly<KanaMemoryTestProps>) {
         super(props);
         this.timer = React.createRef();
-        this.displayedKana = React.createRef();
+        this.kanaTile = React.createRef();
 
-        const kana = this.props.kana;
-        const initialKana = kana[new RandomNumberGenerator().getRandomArrayIndex(kana)];
+        const [ firstKana, remainingKana ] = this.getRandomKana(this.props.kana);
 
         this.state = {
-            currentKana: initialKana,
+            currentKana: firstKana,
+            remainingKana: remainingKana,
             answer: undefined,
             answered: [],
             hasAnsweredIncorrectly: false,
@@ -67,7 +68,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     </Col>
                 </Row>
 
-                <KanaTile kana={currentKana} key={currentKana.code} ref={this.displayedKana}/>
+                <KanaTile kana={currentKana} key={currentKana.code} ref={this.kanaTile}/>
 
                 <Form>
                     <Form.Group controlId="answer">
@@ -103,31 +104,38 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     answerQuestion = () => {
-        const {currentKana, answered, answer} = this.state;
+        const { currentKana, answered, answer, remainingKana } = this.state;
 
         if (answer === currentKana.romanji) {
+            //Add the current kana to the answered array.
             const updatedAnswered = answered.concat(currentKana);
-            const remainingKana = Arrays.intersect(this.props.kana, updatedAnswered);
-            const index = new RandomNumberGenerator().getRandomArrayIndex(remainingKana);
+            this.setState({answered: updatedAnswered});
 
-            if (remainingKana.length > 0) {
-                this.setState({currentKana: remainingKana[index], hasAnsweredIncorrectly: false});
-            } else {
+            if (remainingKana.length === 0) {
+                //If we're out of kana, stop the timer and let the component know the pool has been exhausted.
                 if (this.timer.current != null) this.timer.current.stop();
                 this.setState({hasExhaustedKana: true});
-            }
-            this.setState({answered: updatedAnswered});
-        } else {
-            if (this.displayedKana.current != null) this.displayedKana.current.notifyIncorrect();
-            this.setState({hasAnsweredIncorrectly: true});
-        }
+            } else {
+                //Pick a random remaining kana and remove it from the pool.
+                const [ nextKana, nextRemainingKana ] = this.getRandomKana(remainingKana);
 
+                //Update the next kana to be displayed and the remaining kana with one less.
+                this.setState({
+                    currentKana: nextKana,
+                    remainingKana: nextRemainingKana,
+                    hasAnsweredIncorrectly: false
+                });
+            }
+        }
         this.setState({answer: ""});
     }
 
     reset = () => {
+        const [ nextKana, remainingKana ] = this.getRandomKana(this.props.kana);
+
         this.setState({
-            currentKana: this.props.kana[0],
+            currentKana: nextKana,
+            remainingKana: remainingKana,
             answer: "",
             answered: [],
             hasAnsweredIncorrectly: false,
@@ -148,6 +156,19 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     close = () => this.props.onClose();
+
+    /**
+     * Picks a random Kana from the given pool and removes it.
+     * @param pool The array of Kana to choose from.
+     * @returns A two-element tuple containing the randomly chosen kana and the trimmed pool.
+     */
+    private getRandomKana(pool: Kana[]): [Kana, Kana[]] {
+        const kana = [...pool];
+        const randomKanaIndex = this.rng.getRandomArrayIndex(kana);
+        const firstKana = kana[randomKanaIndex];
+        kana.splice(randomKanaIndex, 1);
+        return [firstKana, kana];
+    }
 }
 
 export default KanaMemoryTest;
