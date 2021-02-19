@@ -26,7 +26,7 @@ class TipButton extends Component<TipButtonProps> {
 
     private getContent = () => {
         const { kana } = this.props;
-        return "This kana is from the " + kana.type + " syllabary.";
+        return "This kana is from the '" + kana.column + "' column in the "+ kana.type + " syllabary.";
     }
 }
 
