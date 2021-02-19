@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Kana} from "../types/Kana";
-import {Button, Col, Container, Form, ProgressBar, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, OverlayTrigger, ProgressBar, Row} from "react-bootstrap";
 import KanaTile from "./KanaTile";
 import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
 import {Arrays} from "../utility/Arrays";
@@ -8,6 +8,8 @@ import {RandomNumberGenerator} from "../utility/RandomNumberGenerator";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Timer from "./Timer";
 import {faRedoAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
+import TipButton from "./TipButton";
+import PopOver from "./PopOver";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
@@ -69,15 +71,22 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
                 <Form>
                     <Form.Group controlId="answer">
-                        <Form.Control
-                            className={styles.input}
-                            plaintext
-                            disabled={hasExhaustedKana}
-                            value={answer}
-                            placeholder={!hasExhaustedKana ? "enter the romanji for the above kana" : ""}
-                            onChange={(e) => this.setState({answer: e.target.value})}
-                            onKeyPress={this.handleEnterKeySubmit.bind(this)}
-                        />
+                        <Row>
+                            <Col xs={true} className={styles.inputCol}>
+                                <Form.Control
+                                    className={styles.input}
+                                    plaintext
+                                    disabled={hasExhaustedKana}
+                                    value={answer}
+                                    placeholder={!hasExhaustedKana ? "enter the romanji for the above kana" : ""}
+                                    onChange={(e) => this.setState({answer: e.target.value})}
+                                    onKeyPress={this.handleEnterKeySubmit.bind(this)}
+                                />
+                            </Col>
+                            <Col xs="auto" className={styles.tipCol}>
+                                <TipButton kana={currentKana} key={currentKana.code} />
+                            </Col>
+                        </Row>
                     </Form.Group>
                     <Button
                         className={styles.submit}
