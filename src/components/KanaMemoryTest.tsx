@@ -24,10 +24,12 @@ interface KanaMemoryTestState {
 
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
     private readonly timer: React.RefObject<Timer>;
+    private readonly displayedKana: React.RefObject<KanaTile>;
 
     constructor(props: KanaMemoryTestProps | Readonly<KanaMemoryTestProps>) {
         super(props);
         this.timer = React.createRef();
+        this.displayedKana = React.createRef();
 
         const kana = this.props.kana;
         const initialKana = kana[new RandomNumberGenerator().getRandomArrayIndex(kana)];
@@ -42,7 +44,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     render() {
-        const { currentKana, answer, hasAnsweredIncorrectly, answered, hasExhaustedKana } = this.state;
+        const { currentKana, answer, answered, hasExhaustedKana } = this.state;
         const { kana } = this.props;
 
         return (
@@ -62,8 +64,9 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         <Timer className={styles.timer} ref={this.timer}/>
                     </Col>
                 </Row>
-                {hasAnsweredIncorrectly && <p>That's not right! Try again.</p>}
-                <KanaTile kana={currentKana} key={currentKana.code}/>
+
+                <KanaTile kana={currentKana} key={currentKana.code} ref={this.displayedKana}/>
+
                 <Form>
                     <Form.Group controlId="answer">
                         <Form.Control
@@ -95,7 +98,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
         if (answer === currentKana.romanji) {
             const updatedAnswered = answered.concat(currentKana);
-            const remainingKana = Arrays.difference(this.props.kana, updatedAnswered);
+            const remainingKana = Arrays.intersect(this.props.kana, updatedAnswered);
             const index = new RandomNumberGenerator().getRandomArrayIndex(remainingKana);
 
             if (remainingKana.length > 0) {
@@ -106,6 +109,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             }
             this.setState({answered: updatedAnswered});
         } else {
+            if (this.displayedKana.current != null) this.displayedKana.current.notifyIncorrect();
             this.setState({hasAnsweredIncorrectly: true});
         }
 

@@ -50,7 +50,7 @@ class Main extends Component<{}, MainState> {
         if (testSettings?.includeHiragana && testSettings.includeKatakana) {
             kana = repository.readAllKana();
         } else if (testSettings?.includeHiragana) {
-            kana = repository.readHiragana();
+            kana = repository.readHiragana().splice(0, 3);
         } else if (testSettings?.includeKatakana) {
             kana = repository.readKatakana();
         } else {

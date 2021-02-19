@@ -2,7 +2,29 @@
   text-align: center;
 }
 
+$default-colour: #FFF;
+
 .kana {
-  color: #FFF;
+  color: $default-colour;
   font-size: 10em;
+}
+
+.notifyIncorrect {
+  $notify-animation-time: 0.75s;
+  font-size: 10em;
+  animation: flashRed ease $notify-animation-time;
+  -webkit-animation: flashRed ease $notify-animation-time;
+  -moz-animation: flashRed ease $notify-animation-time;
+}
+
+@keyframes flashRed {
+  0% {
+    color: $default-colour;
+  }
+  50% {
+    color: red;
+  }
+  100% {
+    color: $default-colour;
+  }
 }
