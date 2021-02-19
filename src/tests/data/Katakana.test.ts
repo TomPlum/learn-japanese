@@ -1,124 +1,189 @@
 import katakana from "../../data/Katakana";
+import each from "jest-each";
+import {KanaData} from "../../data/DataTypes";
+import {KanaColumn} from "../../types/KanaColumn";
 
 describe("Katakana", () => {
-    describe("Vowels", () => {
-        it("a", () => expect(getKatakana("a")).toEqual("ア"));
-        it("i", () => expect(getKatakana("i")).toEqual("イ"));
-        it("u", () => expect(getKatakana("u")).toEqual("ウ"));
-        it("e", () => expect(getKatakana("e")).toEqual("エ"));
-        it("o", () => expect(getKatakana("o")).toEqual("オ"));
+    describe("Unicode Mappings", () => {
+        describe("Vowels", () => {
+            it("a", () => expect(getKatakana("a").code).toEqual("ア"));
+            it("i", () => expect(getKatakana("i").code).toEqual("イ"));
+            it("u", () => expect(getKatakana("u").code).toEqual("ウ"));
+            it("e", () => expect(getKatakana("e").code).toEqual("エ"));
+            it("o", () => expect(getKatakana("o").code).toEqual("オ"));
+        });
+
+        describe("K Column", () => {
+            it("ka", () => expect(getKatakana("ka").code).toEqual("カ"));
+            it("ki", () => expect(getKatakana("ki").code).toEqual("キ"));
+            it("ku", () => expect(getKatakana("ku").code).toEqual("ク"));
+            it("ke", () => expect(getKatakana("ke").code).toEqual("ケ"));
+            it("ko", () => expect(getKatakana("ko").code).toEqual("コ"));
+        });
+
+        describe("K Column Diacritical (Dakuten)", () => {
+            it("ga", () => expect(getKatakana("ga").code).toEqual("ガ"));
+            it("gi", () => expect(getKatakana("gi").code).toEqual("ギ"));
+            it("gu", () => expect(getKatakana("gu").code).toEqual("グ"));
+            it("ge", () => expect(getKatakana("ge").code).toEqual("ゲ"));
+            it("go", () => expect(getKatakana("go").code).toEqual("ゴ"));
+        });
+
+        describe("S Column", () => {
+            it("sa", () => expect(getKatakana("sa").code).toEqual("サ"));
+            it("shi", () => expect(getKatakana("shi").code).toEqual("シ"));
+            it("su", () => expect(getKatakana("su").code).toEqual("ス"));
+            it("se", () => expect(getKatakana("se").code).toEqual("セ"));
+            it("so", () => expect(getKatakana("so").code).toEqual("ソ"));
+        });
+
+        describe("S Column Diacritical (Dakuten)", () => {
+            it("za", () => expect(getKatakana("za").code).toEqual("ザ"));
+            it("ji", () => expect(getKatakana("ji").code).toEqual("ジ"));
+            it("zu", () => expect(getKatakana("zu").code).toEqual("ズ"));
+            it("ze", () => expect(getKatakana("ze").code).toEqual("ゼ"));
+            it("zo", () => expect(getKatakana("zo").code).toEqual("ゾ"));
+        });
+
+        describe("T Column", () => {
+            it("ta", () => expect(getKatakana("ta").code).toEqual("タ"));
+            it("chi", () => expect(getKatakana("chi").code).toEqual("チ"));
+            it("tsu", () => expect(getKatakana("tsu").code).toEqual("ツ"));
+            it("te", () => expect(getKatakana("te").code).toEqual("テ"));
+            it("to", () => expect(getKatakana("to").code).toEqual("ト"));
+        });
+
+        describe("T Column Diacritical (Dakuten)", () => {
+            it("da", () => expect(getKatakana("da").code).toEqual("ダ"));
+            it("di", () => expect(getKatakana("di").code).toEqual("ヂ"));
+            it("du", () => expect(getKatakana("du").code).toEqual("ヅ"));
+            it("de", () => expect(getKatakana("de").code).toEqual("デ"));
+            it("do", () => expect(getKatakana("do").code).toEqual("ド"));
+        });
+
+        describe("N Column", () => {
+            it("na", () => expect(getKatakana("na").code).toEqual("ナ"));
+            it("ni", () => expect(getKatakana("ni").code).toEqual("ニ"));
+            it("nu", () => expect(getKatakana("nu").code).toEqual("ヌ"));
+            it("ne", () => expect(getKatakana("ne").code).toEqual("ネ"));
+            it("no", () => expect(getKatakana("no").code).toEqual("ノ"));
+        });
+
+        describe("H Column", () => {
+            it("ha", () => expect(getKatakana("ha").code).toEqual("ハ"));
+            it("hi", () => expect(getKatakana("hi").code).toEqual("ヒ"));
+            it("hu", () => expect(getKatakana("hu").code).toEqual("フ"));
+            it("he", () => expect(getKatakana("he").code).toEqual("ヘ"));
+            it("ho", () => expect(getKatakana("ho").code).toEqual("ホ"));
+        });
+
+        describe("H Column Diacritical (Dakuten)", () => {
+            it("ba", () => expect(getKatakana("ba").code).toEqual("バ"));
+            it("bi", () => expect(getKatakana("bi").code).toEqual("ビ"));
+            it("bu", () => expect(getKatakana("bu").code).toEqual("ブ"));
+            it("be", () => expect(getKatakana("be").code).toEqual("ベ"));
+            it("bo", () => expect(getKatakana("bo").code).toEqual("ボ"));
+        });
+
+        describe("H Column Diacritical (Handakuten)", () => {
+            it("pa", () => expect(getKatakana("pa").code).toEqual("パ"));
+            it("pi", () => expect(getKatakana("pi").code).toEqual("ピ"));
+            it("pu", () => expect(getKatakana("pu").code).toEqual("プ"));
+            it("pe", () => expect(getKatakana("pe").code).toEqual("ペ"));
+            it("po", () => expect(getKatakana("po").code).toEqual("ポ"));
+        });
+
+        describe("M Column", () => {
+            it("ma", () => expect(getKatakana("ma").code).toEqual("マ"));
+            it("mi", () => expect(getKatakana("mi").code).toEqual("ミ"));
+            it("mu", () => expect(getKatakana("mu").code).toEqual("ム"));
+            it("me", () => expect(getKatakana("me").code).toEqual("メ"));
+            it("mo", () => expect(getKatakana("mo").code).toEqual("モ"));
+        });
+
+        describe("Y Column", () => {
+            it("ya", () => expect(getKatakana("ya").code).toEqual("ヤ"));
+            it("yu", () => expect(getKatakana("yu").code).toEqual("ユ"));
+            it("yo", () => expect(getKatakana("yo").code).toEqual("ヨ"));
+        });
+
+        describe("R Column", () => {
+            it("ra", () => expect(getKatakana("ra").code).toEqual("ラ"));
+            it("ri", () => expect(getKatakana("ri").code).toEqual("リ"));
+            it("ru", () => expect(getKatakana("ru").code).toEqual("ル"));
+            it("re", () => expect(getKatakana("re").code).toEqual("レ"));
+            it("ro", () => expect(getKatakana("ro").code).toEqual("ロ"));
+        });
+
+        describe("W Column", () => {
+            it("wa", () => expect(getKatakana("wa").code).toEqual("ワ"));
+            it("wo", () => expect(getKatakana("wo").code).toEqual("ヲ"));
+        });
+
+        it("n", () => expect(getKatakana("n").code).toEqual("ン"));
     });
 
-    describe("K Column", () => {
-        it("ka", () => expect(getKatakana("ka")).toEqual("カ"));
-        it("ki", () => expect(getKatakana("ki")).toEqual("キ"));
-        it("ku", () => expect(getKatakana("ku")).toEqual("ク"));
-        it("ke", () => expect(getKatakana("ke")).toEqual("ケ"));
-        it("ko", () => expect(getKatakana("ko")).toEqual("コ"));
+    describe("Column Mappings", () => {
+        const vowels = getMultipleKatakana(["a", "i", "u", "e", "o"]);
+        each(vowels).it("Should return the vowel column for '%s'", (kana: KanaData) => {
+            expect(kana.column).toBe(KanaColumn.VOWEL);
+        });
+
+        const k = getMultipleKatakana(["ka", "ki", "ku", "ke", "ko"]);
+        each(k).it("Should return the k column for '%s'", (kana: KanaData) => {
+            expect(kana.column).toBe(KanaColumn.K);
+        });
+
+        const s = getMultipleKatakana(["sa", "shi", "su", "se", "so"]);
+        each(s).it("Should return the s column for '%s'", (kana: KanaData) => {
+            expect(kana.column).toBe(KanaColumn.S);
+        });
+
+        const t = getMultipleKatakana(["ta", "chi", "tsu", "te", "to"]);
+        each(t).it("Should return the t column for '%s'", (kana: KanaData) => {
+            expect(kana.column).toBe(KanaColumn.T);
+        });
+
+        const n = getMultipleKatakana(["na", "ni", "nu", "ne", "no"]);
+        each(n).it("Should return the n column for '%s'", (kana: KanaData) => {
+            expect(kana.column).toBe(KanaColumn.N);
+        });
+
+        const h = getMultipleKatakana(["ha", "hi", "hu", "he", "ho"]);
+        each(h).it("Should return the h column for '%s'", (kana: KanaData) => {
+            expect(kana.column).toBe(KanaColumn.H);
+        });
+
+        const m = getMultipleKatakana(["ma", "mi", "mu", "me", "mo"]);
+        each(m).it("Should return the m column for '%s'", (kana: KanaData) => {
+            expect(kana.column).toBe(KanaColumn.M);
+        });
+
+        const y = getMultipleKatakana(["ya", "yu", "yo"]);
+        each(y).it("Should return the y column for '%s'", (kana: KanaData) => {
+            expect(kana.column).toBe(KanaColumn.Y);
+        });
+
+        const r = getMultipleKatakana(["ra", "ri", "ru", "re", "ro"]);
+        each(r).it("Should return the r column for '%s'", (kana: KanaData) => {
+            expect(kana.column).toBe(KanaColumn.R);
+        });
+
+        const w = getMultipleKatakana(["wa", "wo"]);
+        each(w).it("Should return the w column for '%s'", (kana: KanaData) => {
+            expect(kana.column).toBe(KanaColumn.W);
+        });
+
+        it("Should return the other column for n", () => {
+            expect(getKatakana("n").column).toBe(KanaColumn.OTHER);
+        });
     });
 
-    describe("K Column Diacritical (Dakuten)", () => {
-        it("ga", () => expect(getKatakana("ga")).toEqual("ガ"));
-        it("gi", () => expect(getKatakana("gi")).toEqual("ギ"));
-        it("gu", () => expect(getKatakana("gu")).toEqual("グ"));
-        it("ge", () => expect(getKatakana("ge")).toEqual("ゲ"));
-        it("go", () => expect(getKatakana("go")).toEqual("ゴ"));
-    });
+    function getMultipleKatakana(names: string[]): KanaData[] {
+        return names.map(name => getKatakana(name));
+    }
 
-    describe("S Column", () => {
-        it("sa", () => expect(getKatakana("sa")).toEqual("サ"));
-        it("shi", () => expect(getKatakana("shi")).toEqual("シ"));
-        it("su", () => expect(getKatakana("su")).toEqual("ス"));
-        it("se", () => expect(getKatakana("se")).toEqual("セ"));
-        it("so", () => expect(getKatakana("so")).toEqual("ソ"));
-    });
-
-    describe("S Column Diacritical (Dakuten)", () => {
-        it("za", () => expect(getKatakana("za")).toEqual("ザ"));
-        it("ji", () => expect(getKatakana("ji")).toEqual("ジ"));
-        it("zu", () => expect(getKatakana("zu")).toEqual("ズ"));
-        it("ze", () => expect(getKatakana("ze")).toEqual("ゼ"));
-        it("zo", () => expect(getKatakana("zo")).toEqual("ゾ"));
-    });
-
-    describe("T Column", () => {
-        it("ta", () => expect(getKatakana("ta")).toEqual("タ"));
-        it("chi", () => expect(getKatakana("chi")).toEqual("チ"));
-        it("tsu", () => expect(getKatakana("tsu")).toEqual("ツ"));
-        it("te", () => expect(getKatakana("te")).toEqual("テ"));
-        it("to", () => expect(getKatakana("to")).toEqual("ト"));
-    });
-
-    describe("T Column Diacritical (Dakuten)", () => {
-        it("da", () => expect(getKatakana("da")).toEqual("ダ"));
-        it("di", () => expect(getKatakana("di")).toEqual("ヂ"));
-        it("du", () => expect(getKatakana("du")).toEqual("ヅ"));
-        it("de", () => expect(getKatakana("de")).toEqual("デ"));
-        it("do", () => expect(getKatakana("do")).toEqual("ド"));
-    });
-
-    describe("N Column", () => {
-        it("na", () => expect(getKatakana("na")).toEqual("ナ"));
-        it("ni", () => expect(getKatakana("ni")).toEqual("ニ"));
-        it("nu", () => expect(getKatakana("nu")).toEqual("ヌ"));
-        it("ne", () => expect(getKatakana("ne")).toEqual("ネ"));
-        it("no", () => expect(getKatakana("no")).toEqual("ノ"));
-    });
-
-    describe("H Column", () => {
-        it("ha", () => expect(getKatakana("ha")).toEqual("ハ"));
-        it("hi", () => expect(getKatakana("hi")).toEqual("ヒ"));
-        it("hu", () => expect(getKatakana("hu")).toEqual("フ"));
-        it("he", () => expect(getKatakana("he")).toEqual("ヘ"));
-        it("ho", () => expect(getKatakana("ho")).toEqual("ホ"));
-    });
-
-    describe("H Column Diacritical (Dakuten)", () => {
-        it("ba", () => expect(getKatakana("ba")).toEqual("バ"));
-        it("bi", () => expect(getKatakana("bi")).toEqual("ビ"));
-        it("bu", () => expect(getKatakana("bu")).toEqual("ブ"));
-        it("be", () => expect(getKatakana("be")).toEqual("ベ"));
-        it("bo", () => expect(getKatakana("bo")).toEqual("ボ"));
-    });
-
-    describe("H Column Diacritical (Handakuten)", () => {
-        it("pa", () => expect(getKatakana("pa")).toEqual("パ"));
-        it("pi", () => expect(getKatakana("pi")).toEqual("ピ"));
-        it("pu", () => expect(getKatakana("pu")).toEqual("プ"));
-        it("pe", () => expect(getKatakana("pe")).toEqual("ペ"));
-        it("po", () => expect(getKatakana("po")).toEqual("ポ"));
-    });
-
-    describe("M Column", () => {
-        it("ma", () => expect(getKatakana("ma")).toEqual("マ"));
-        it("mi", () => expect(getKatakana("mi")).toEqual("ミ"));
-        it("mu", () => expect(getKatakana("mu")).toEqual("ム"));
-        it("me", () => expect(getKatakana("me")).toEqual("メ"));
-        it("mo", () => expect(getKatakana("mo")).toEqual("モ"));
-    });
-
-    describe("Y Column", () => {
-        it("ya", () => expect(getKatakana("ya")).toEqual("ヤ"));
-        it("yu", () => expect(getKatakana("yu")).toEqual("ユ"));
-        it("yo", () => expect(getKatakana("yo")).toEqual("ヨ"));
-    });
-
-    describe("R Column", () => {
-        it("ra", () => expect(getKatakana("ra")).toEqual("ラ"));
-        it("ri", () => expect(getKatakana("ri")).toEqual("リ"));
-        it("ru", () => expect(getKatakana("ru")).toEqual("ル"));
-        it("re", () => expect(getKatakana("re")).toEqual("レ"));
-        it("ro", () => expect(getKatakana("ro")).toEqual("ロ"));
-    });
-
-    describe("W Column", () => {
-        it("wa", () => expect(getKatakana("wa")).toEqual("ワ"));
-        it("wo", () => expect(getKatakana("wo")).toEqual("ヲ"));
-    });
-
-    it("n", () => expect(getKatakana("n")).toEqual("ン"));
-
-    function getKatakana(name: string): string {
-        return katakana.filter(entry => entry.name === name)[0].code;
+    function getKatakana(name: string): KanaData {
+        return katakana.filter(entry => entry.name === name)[0];
     }
 });

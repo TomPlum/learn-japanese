@@ -2,6 +2,7 @@ import {Kana} from "../types/Kana";
 import hiragana from "../data/Hiragana";
 import katakana from "../data/Katakana";
 import KanaType from "../types/KanaType";
+import {KanaData} from "../data/DataTypes";
 
 export class KanaRepository {
 
@@ -19,9 +20,7 @@ export class KanaRepository {
         return this.convert(katakana, KanaType.KATAKANA);
     }
 
-    private convert(data: {name: string, code: string}[], type: KanaType): Kana[] {
-        return data.map(character => {
-            return new Kana(character.code, character.name, type);
-        });
+    private convert(data: KanaData[], type: KanaType): Kana[] {
+        return data.map(character => new Kana(character.code, character.name, type));
     }
 }
