@@ -14,6 +14,10 @@ export class Kana {
         this._column = column;
     }
 
+    public isDiagraph (): boolean{
+        return this._code.length === 2;
+    }
+
     get code(): string {
         return this._code;
     }

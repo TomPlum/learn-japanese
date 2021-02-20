@@ -78,6 +78,11 @@ class Main extends Component<{}, MainState> {
         } else {
             throw new ReferenceError("Invalid Test Settings: No Kana Selected");
         }
+
+        if (!testSettings.includeDiagraphs) {
+            kana = kana.filter(kana => !kana.isDiagraph());
+        }
+
         this.setState({loading: false, kana});
     }
 }

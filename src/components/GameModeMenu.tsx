@@ -25,7 +25,8 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
             isConfiguringGameMode: false,
             settings: {
                 includeHiragana: true,
-                includeKatakana: false
+                includeKatakana: false,
+                includeDiagraphs: true
             }
         }
     }

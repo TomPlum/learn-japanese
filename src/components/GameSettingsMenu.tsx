@@ -8,6 +8,7 @@ import {faCheck} from "@fortawesome/free-solid-svg-icons";
 export interface TestSettings {
     includeHiragana: boolean;
     includeKatakana: boolean;
+    includeDiagraphs: boolean;
 }
 
 interface TestModeMenuProps {
@@ -32,7 +33,7 @@ class GameSettingsMenu extends Component<TestModeMenuProps, TestModeMenuState> {
     }
 
     render() {
-        const {selectedHiragana, selectedKatakana} = this.state;
+        const {selectedHiragana, selectedKatakana, includeDiagraphs} = this.state;
 
         return (
             <Container fluid>
@@ -62,6 +63,12 @@ class GameSettingsMenu extends Component<TestModeMenuProps, TestModeMenuState> {
                             onChange={() => this.setState({selectedKatakana: !selectedKatakana})}
                             disabled={selectedKatakana && !selectedHiragana}
                         />
+                        <Form.Check
+                            label="Include Diagraphs"
+                            className={styles.check}
+                            checked={includeDiagraphs}
+                            onChange={() => this.setState({includeDiagraphs: !includeDiagraphs})}
+                        />
                     </Form.Row>
 
                     <Form.Row>
@@ -75,8 +82,12 @@ class GameSettingsMenu extends Component<TestModeMenuProps, TestModeMenuState> {
     }
 
     onConfirmation = () => {
-        const {selectedHiragana, selectedKatakana} = this.state;
-        this.props.onSubmit({includeHiragana: selectedHiragana, includeKatakana: selectedKatakana});
+        const {selectedHiragana, selectedKatakana, includeDiagraphs} = this.state;
+        this.props.onSubmit({
+            includeHiragana: selectedHiragana,
+            includeKatakana: selectedKatakana,
+            includeDiagraphs: includeDiagraphs
+        });
     }
 }
 
