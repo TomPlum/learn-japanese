@@ -8,6 +8,7 @@ import {faCheck} from "@fortawesome/free-solid-svg-icons";
 export interface TestSettings {
     includeHiragana: boolean;
     includeKatakana: boolean;
+    includeDiagraphs: boolean;
 }
 
 interface TestModeMenuProps {
@@ -18,6 +19,7 @@ interface TestModeMenuProps {
 interface TestModeMenuState {
     selectedHiragana: boolean;
     selectedKatakana: boolean;
+    includeDiagraphs: boolean;
 }
 
 class GameSettingsMenu extends Component<TestModeMenuProps, TestModeMenuState> {
@@ -25,24 +27,30 @@ class GameSettingsMenu extends Component<TestModeMenuProps, TestModeMenuState> {
         super(props);
         this.state = {
             selectedHiragana: true,
-            selectedKatakana: false
+            selectedKatakana: false,
+            includeDiagraphs: false
         }
     }
 
     render() {
-        const { selectedHiragana, selectedKatakana } = this.state;
+        const {selectedHiragana, selectedKatakana, includeDiagraphs} = this.state;
 
         return (
-            <Container>
+            <Container fluid>
                 <Form>
                     <Form.Row>
                         <Form.Label className={styles.heading}>{this.props.mode} Game Settings</Form.Label>
                     </Form.Row>
-                    <hr />
+
+                    <Form.Row>
+                        <Form.Label className={styles.label}>Kana</Form.Label>
+                    </Form.Row>
+
                     <Form.Row>
                         <Form.Check
                             inline
                             label="Hiragana"
+                            className={styles.check}
                             checked={selectedHiragana}
                             onChange={() => this.setState({selectedHiragana: !selectedHiragana})}
                             disabled={selectedHiragana && !selectedKatakana}
@@ -50,14 +58,22 @@ class GameSettingsMenu extends Component<TestModeMenuProps, TestModeMenuState> {
                         <Form.Check
                             inline
                             label="Katakana"
+                            className={styles.check}
                             checked={selectedKatakana}
                             onChange={() => this.setState({selectedKatakana: !selectedKatakana})}
                             disabled={selectedKatakana && !selectedHiragana}
                         />
+                        <Form.Check
+                            label="Include Diagraphs"
+                            className={styles.check}
+                            checked={includeDiagraphs}
+                            onChange={() => this.setState({includeDiagraphs: !includeDiagraphs})}
+                        />
                     </Form.Row>
+
                     <Form.Row>
-                        <Button variant="success" block onClick={this.onConfirmation.bind(this)}>
-                            <FontAwesomeIcon icon={faCheck} /> Confirm
+                        <Button variant="success" block onClick={this.onConfirmation} className={styles.confirm}>
+                            <FontAwesomeIcon icon={faCheck}/> Confirm
                         </Button>
                     </Form.Row>
                 </Form>
@@ -66,8 +82,12 @@ class GameSettingsMenu extends Component<TestModeMenuProps, TestModeMenuState> {
     }
 
     onConfirmation = () => {
-        const { selectedHiragana, selectedKatakana } = this.state;
-        this.props.onSubmit({includeHiragana: selectedHiragana, includeKatakana: selectedKatakana});
+        const {selectedHiragana, selectedKatakana, includeDiagraphs} = this.state;
+        this.props.onSubmit({
+            includeHiragana: selectedHiragana,
+            includeKatakana: selectedKatakana,
+            includeDiagraphs: includeDiagraphs
+        });
     }
 }
 
