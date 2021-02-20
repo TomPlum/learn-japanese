@@ -53,6 +53,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 <Row noGutters>
                     <Col xs={12}>
                         <ProgressBar
+                            animated={!hasExhaustedKana}
                             className={styles.progress}
                             now={(answered.length / kana.length) * 100}
                             variant={hasExhaustedKana ? "success" : undefined}

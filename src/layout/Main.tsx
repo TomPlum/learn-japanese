@@ -5,12 +5,15 @@ import {Kana} from "../types/Kana";
 import {KanaRepository} from "../repository/KanaRepository";
 import LoadingSpinner from "./LoadingSpinner";
 import styles from "../styles/sass/layout/Main.module.scss";
-import TestModeMenu, {TestSettings} from "../components/TestModeMenu";
+import {TestSettings} from "../components/TestModeMenu";
+import GameModeMenu from "../components/GameModeMenu";
+import {GameMode} from "../types/GameMode";
 
 interface MainState {
     loading: boolean;
     kana?: Kana[];
     testSettings?: TestSettings;
+    selectedGameMode: GameMode;
 }
 
 class Main extends Component<{}, MainState> {
@@ -20,23 +23,42 @@ class Main extends Component<{}, MainState> {
             loading: false,
             kana: undefined,
             testSettings: undefined,
+            selectedGameMode: GameMode.ROMANJI
         }
     }
 
-    onTestStart = (settings: TestSettings) => this.setState({testSettings: settings}, () => this.loadKana());
+    onGameClose = () => this.setState({testSettings: undefined});
 
-    onTestClose = () => this.setState({testSettings: undefined});
+    onSelectedGameMode = (mode: GameMode, settings: TestSettings) => {
+        this.setState({selectedGameMode: mode, testSettings: settings}, () => this.loadKana());
+    }
 
     render() {
-        const { loading, kana, testSettings } = this.state;
+        const { loading, testSettings } = this.state;
 
         return (
           <Container className={styles.wrapper}>
               <LoadingSpinner active={loading} />
-              {!testSettings && <TestModeMenu onStart={this.onTestStart}/>}
-              {testSettings && kana && <KanaMemoryTest kana={kana} onClose={this.onTestClose}/>}
+              {!testSettings && <GameModeMenu onSelectedMode={this.onSelectedGameMode}/>}
+              {this.renderGame()}
           </Container>
         );
+    }
+
+    private renderGame() {
+        const { kana, testSettings, selectedGameMode } = this.state;
+
+        if (testSettings && kana) {
+            switch (selectedGameMode) {
+                case GameMode.ROMANJI: {
+                    return <KanaMemoryTest kana={kana} onClose={this.onGameClose}/>
+                }
+                default: {
+                    return <p>Bruh</p>
+                }
+            }
+        }
+        return false;
     }
 
     private loadKana() {

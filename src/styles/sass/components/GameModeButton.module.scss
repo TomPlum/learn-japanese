@@ -1,0 +1,36 @@
+@mixin button {
+  height: 100px;
+  max-width: 300px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.selected {
+  @include button;
+}
+
+.notSelected {
+  @include button;
+  background-color: rgba(203, 203, 203, 0.8);
+  border-color: rgba(148, 148, 148, 0.8);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+@mixin icon {
+  font-size: 1.6em;
+}
+
+.iconSelected {
+  @include icon;
+  color: #ee3434;
+}
+
+.iconNotSelected {
+  @include icon;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.name {
+  font-size: 1.1em;
+  margin-bottom: 0;
+}
