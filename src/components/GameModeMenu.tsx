@@ -121,7 +121,7 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
         switch (this.state.selected) {
             case GameMode.ROMANJI: {
                 return "You're shown kana(s) on screen and you must enter the correct romanji. " +
-                    "You're timed, but there's no rush and mistakes aren't punishing.Sike nigga u though";
+                    "You're timed, but there's no rush and mistakes aren't punishing.";
             }
             case GameMode.TIME_ATTACK: {
                 return "You have 5s seconds to answer, 3 tips and 5 lives. A race against the clock!";
