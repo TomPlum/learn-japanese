@@ -5,7 +5,7 @@ import {Kana} from "../types/Kana";
 import {KanaRepository} from "../repository/KanaRepository";
 import LoadingSpinner from "./LoadingSpinner";
 import styles from "../styles/sass/layout/Main.module.scss";
-import {TestSettings} from "../components/TestModeMenu";
+import {TestSettings} from "../components/GameSettingsMenu";
 import GameModeMenu from "../components/GameModeMenu";
 import {GameMode} from "../types/GameMode";
 

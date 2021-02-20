@@ -5,29 +5,23 @@
   margin-bottom: 10px;
 }
 
-.selected {
+.selected, .selected:focus, .selected:active {
   @include button;
+  background-color: rgba(255, 255, 255, 1);
+  border-color: rgba(148, 148, 148, 0.8);
+  color: black;
 }
 
 .notSelected {
   @include button;
-  background-color: rgba(203, 203, 203, 0.8);
+  background-color: rgba(215, 215, 215, 0.6);
   border-color: rgba(148, 148, 148, 0.8);
   color: rgba(0, 0, 0, 0.8);
 }
 
-@mixin icon {
+.icon {
   font-size: 1.6em;
-}
-
-.iconSelected {
-  @include icon;
-  color: #ee3434;
-}
-
-.iconNotSelected {
-  @include icon;
-  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 5px;
 }
 
 .name {

@@ -1,6 +1,6 @@
 import {Component} from "react";
 import {GameMode} from "../types/GameMode";
-import {FontAwesomeIcon, FontAwesomeIconProps} from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 import {Button} from "react-bootstrap";
 import styles from "../styles/sass/components/GameModeButton.module.scss";
@@ -8,6 +8,7 @@ import styles from "../styles/sass/components/GameModeButton.module.scss";
 interface GameModeButtonProps {
     mode: GameMode;
     icon: IconDefinition;
+    iconColour?: string;
     onClick: (mode: GameMode) => void;
     isSelected: boolean;
 }
@@ -25,15 +26,15 @@ class GameModeButton extends Component<GameModeButtonProps> {
     }
 
     render() {
-        const { mode, icon, isSelected } = this.props;
+        const { mode, icon, isSelected, iconColour } = this.props;
 
         return (
             <Button
+                block
                 className={isSelected ? styles.selected : styles.notSelected}
-                disabled={isSelected}
                 onClick={this.handleClick}
             >
-                <FontAwesomeIcon className={isSelected ? styles.iconSelected : styles.iconNotSelected} icon={icon}/>
+                <FontAwesomeIcon className={styles.icon} color={isSelected ? iconColour : "#000"} icon={icon}/>
                 <p className={styles.name}>{mode}</p>
             </Button>
         );

@@ -1,5 +1,9 @@
 import {Component} from "react";
 import {Button, Container, Form} from "react-bootstrap";
+import {GameMode} from "../types/GameMode";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import styles from "../styles/sass/components/GameSettingsMenu.module.scss";
+import {faCheck} from "@fortawesome/free-solid-svg-icons";
 
 export interface TestSettings {
     includeHiragana: boolean;
@@ -7,7 +11,8 @@ export interface TestSettings {
 }
 
 interface TestModeMenuProps {
-    onStart: (settings: TestSettings) => void;
+    mode: GameMode;
+    onSubmit: (settings: TestSettings) => void;
 }
 
 interface TestModeMenuState {
@@ -15,7 +20,7 @@ interface TestModeMenuState {
     selectedKatakana: boolean;
 }
 
-class TestModeMenu extends Component<TestModeMenuProps, TestModeMenuState> {
+class GameSettingsMenu extends Component<TestModeMenuProps, TestModeMenuState> {
     constructor(props: TestModeMenuProps | Readonly<TestModeMenuProps>) {
         super(props);
         this.state = {
@@ -31,8 +36,9 @@ class TestModeMenu extends Component<TestModeMenuProps, TestModeMenuState> {
             <Container>
                 <Form>
                     <Form.Row>
-                        <Form.Label>Test Settings</Form.Label>
+                        <Form.Label className={styles.heading}>{this.props.mode} Game Settings</Form.Label>
                     </Form.Row>
+                    <hr />
                     <Form.Row>
                         <Form.Check
                             inline
@@ -50,17 +56,19 @@ class TestModeMenu extends Component<TestModeMenuProps, TestModeMenuState> {
                         />
                     </Form.Row>
                     <Form.Row>
-                        <Button onClick={this.onStartTest.bind(this)}>Start</Button>
+                        <Button variant="success" block onClick={this.onConfirmation.bind(this)}>
+                            <FontAwesomeIcon icon={faCheck} /> Confirm
+                        </Button>
                     </Form.Row>
                 </Form>
             </Container>
         );
     }
 
-    onStartTest = () => {
+    onConfirmation = () => {
         const { selectedHiragana, selectedKatakana } = this.state;
-        this.props.onStart({includeHiragana: selectedHiragana, includeKatakana: selectedKatakana});
+        this.props.onSubmit({includeHiragana: selectedHiragana, includeKatakana: selectedKatakana});
     }
 }
 
-export default TestModeMenu;
+export default GameSettingsMenu;
