@@ -121,7 +121,7 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
     private getSelectedModeDescription(): string {
         switch (this.state.selected) {
             case GameMode.ROMANJI: {
-                return "You're shown kana(s) on screen and you must enter the correct romanji. " +
+                return "You're shown kana on screen and you must enter the correct romanji. " +
                     "You're timed, but there's no rush and mistakes aren't punishing.";
             }
             case GameMode.TIME_ATTACK: {
