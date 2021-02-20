@@ -126,45 +126,45 @@ describe("Hiragana", () => {
     describe("Column Mappings", () => {
         const vowels = getMultipleHiragana(["a", "i", "u", "e", "o"]);
         each(vowels).it("Should return the vowel column for '%s'", (kana: KanaData) => {
-           expect(kana.column).toBe(KanaColumn.VOWEL); 
+            expect(kana.column).toBe(KanaColumn.VOWEL);
         });
 
-        const k = getMultipleHiragana(["ka", "ki", "ku", "ke", "ko"]);
+        const k = getMultipleHiragana(["ka", "ki", "ku", "ke", "ko", "kya", "kyu", "kyo","gya", "gyu", "gyo"]);
         each(k).it("Should return the k column for '%s'", (kana: KanaData) => {
-           expect(kana.column).toBe(KanaColumn.K); 
+            expect(kana.column).toBe(KanaColumn.K);
         });
 
-        const s = getMultipleHiragana(["sa", "shi", "su", "se", "so"]);
+        const s = getMultipleHiragana(["sa", "shi", "su", "se", "so", "sha", "shu", "sho","ja", "ju","jo"]);
         each(s).it("Should return the s column for '%s'", (kana: KanaData) => {
-           expect(kana.column).toBe(KanaColumn.S); 
+            expect(kana.column).toBe(KanaColumn.S);
         });
 
-        const t = getMultipleHiragana(["ta", "chi", "tsu", "te", "to"]);
+        const t = getMultipleHiragana(["ta", "chi", "tsu", "te", "to", "cha", "chu", "cho"]);
         each(t).it("Should return the t column for '%s'", (kana: KanaData) => {
-           expect(kana.column).toBe(KanaColumn.T); 
+            expect(kana.column).toBe(KanaColumn.T);
         });
 
-        const n = getMultipleHiragana(["na", "ni", "nu", "ne", "no"]);
+        const n = getMultipleHiragana(["na", "ni", "nu", "ne", "no", "nya", "nyu", "nyo"]);
         each(n).it("Should return the n column for '%s'", (kana: KanaData) => {
-           expect(kana.column).toBe(KanaColumn.N); 
+            expect(kana.column).toBe(KanaColumn.N);
         });
 
-        const h = getMultipleHiragana(["ha", "hi", "hu", "he", "ho"]);
+        const h = getMultipleHiragana(["ha", "hi", "hu", "he", "ho", "hya", "hyu", "hyo","bya","byu","byo","pya","pyu","pyo"]);
         each(h).it("Should return the h column for '%s'", (kana: KanaData) => {
-           expect(kana.column).toBe(KanaColumn.H); 
+            expect(kana.column).toBe(KanaColumn.H);
         });
 
-        const m = getMultipleHiragana(["ma", "mi", "mu", "me", "mo"]);
+        const m = getMultipleHiragana(["ma", "mi", "mu", "me", "mo", "mya", "myu", "myo"]);
         each(m).it("Should return the m column for '%s'", (kana: KanaData) => {
-           expect(kana.column).toBe(KanaColumn.M); 
+            expect(kana.column).toBe(KanaColumn.M);
         });
 
         const y = getMultipleHiragana(["ya", "yu", "yo"]);
         each(y).it("Should return the y column for '%s'", (kana: KanaData) => {
-           expect(kana.column).toBe(KanaColumn.Y); 
+            expect(kana.column).toBe(KanaColumn.Y);
         });
 
-        const r = getMultipleHiragana(["ra", "ri", "ru", "re", "ro"]);
+        const r = getMultipleHiragana(["ra", "ri", "ru", "re", "ro", "rya", "ryu", "ryo"]);
         each(r).it("Should return the r column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.R);
         });
@@ -175,9 +175,55 @@ describe("Hiragana", () => {
         });
 
         it("Should return the other column for n", () => {
-           expect(getHiragana("n").column).toBe(KanaColumn.OTHER);
+            expect(getHiragana("n").column).toBe(KanaColumn.OTHER);
         });
     });
+
+    describe("Diagraph Mappings", () => {
+        it("kya", () => expect(getHiragana("kya").code).toEqual("きゃ"));
+        it("kyu", () => expect(getHiragana("kyu").code).toEqual("きゅ"));
+        it("kyo", () => expect(getHiragana("kyo").code).toEqual("きょ"));
+
+        it("sha", () => expect(getHiragana("sha").code).toEqual("しゃ"));
+        it("shu", () => expect(getHiragana("shu").code).toEqual("しゅ"));
+        it("sho", () => expect(getHiragana("sho").code).toEqual("しょ"));
+
+        it("cha", () => expect(getHiragana("cha").code).toEqual("ちゃ"));
+        it("chu", () => expect(getHiragana("chu").code).toEqual("ちゅ"));
+        it("cho", () => expect(getHiragana("cho").code).toEqual("ちょ"));
+
+        it("nya", () => expect(getHiragana("nya").code).toEqual("にゃ"));
+        it("nyu", () => expect(getHiragana("nyu").code).toEqual("にゅ"));
+        it("nya", () => expect(getHiragana("nyo").code).toEqual("にょ"));
+
+        it("hya", () => expect(getHiragana("hya").code).toEqual("ひゃ"));
+        it("hyu", () => expect(getHiragana("hyu").code).toEqual("ひゅ"));
+        it("hyo", () => expect(getHiragana("hyo").code).toEqual("ひょ"));
+
+        it("mya", () => expect(getHiragana("mya").code).toEqual("みゃ"));
+        it("myu", () => expect(getHiragana("myu").code).toEqual("みゅ"));
+        it("myo", () => expect(getHiragana("myo").code).toEqual("みょ"));
+
+        it("rya", () => expect(getHiragana("rya").code).toEqual("りゃ"));
+        it("ryu", () => expect(getHiragana("ryu").code).toEqual("りゅ"));
+        it("ryo", () => expect(getHiragana("ryo").code).toEqual("りょ"));
+
+        it("gya", () => expect(getHiragana("gya").code).toEqual("ぎゃ"));
+        it("gyu", () => expect(getHiragana("gyu").code).toEqual("ぎゅ"));
+        it("gyo", () => expect(getHiragana("gyo").code).toEqual("ぎょ"));
+
+        it("ja", () => expect(getHiragana("ja").code).toEqual("じゃ"));
+        it("ju", () => expect(getHiragana("ju").code).toEqual("じゅ"));
+        it("jo", () => expect(getHiragana("jo").code).toEqual("じょ"));
+
+        it("bya", () => expect(getHiragana("bya").code).toEqual("びゃ"));
+        it("byu", () => expect(getHiragana("byu").code).toEqual("びゅ"));
+        it("byo", () => expect(getHiragana("byo").code).toEqual("びょ"));
+
+        it("pya", () => expect(getHiragana("pya").code).toEqual("ぴゃ"));
+        it("pyu", () => expect(getHiragana("pyu").code).toEqual("ぴゅ"));
+        it("pyo", () => expect(getHiragana("pyo").code).toEqual("ぴょ"));
+    })
 
     function getMultipleHiragana(names: string[]): KanaData[] {
         return names.map(name => getHiragana(name));

@@ -83,6 +83,40 @@ const hiragana: KanaData[] = [
         column: KanaColumn.K
     },
 
+    //K Diagraphs
+    {
+        name: "kya",
+        code: "\u304D\u3083",
+        column: KanaColumn.K
+    },
+    {
+        name: "kyu",
+        code: "\u304D\u3085",
+        column: KanaColumn.K
+    },
+    {
+        name: "kyo",
+        code: "\u304D\u3087",
+        column: KanaColumn.K
+    },
+
+    //K Diacritical Diagraphs
+    {
+        name: "gya",
+        code: "\u304E\u3083",
+        column: KanaColumn.K
+    },
+    {
+        name: "gyu",
+        code: "\u304E\u3085",
+        column: KanaColumn.K
+    },
+    {
+        name: "gyo",
+        code: "\u304E\u3087",
+        column: KanaColumn.K
+    },
+
     //S Column (Big)
     {
         name: "sa",
@@ -134,6 +168,41 @@ const hiragana: KanaData[] = [
     {
         name: "zo",
         code: "\u305E",
+        column: KanaColumn.S
+    },
+
+    //S Diagraphs
+
+    {
+        name: "sha",
+        code: "\u3057\u3083",
+        column: KanaColumn.S
+    },
+    {
+        name: "shu",
+        code: "\u3057\u3085",
+        column: KanaColumn.S
+    },
+    {
+        name: "sho",
+        code: "\u3057\u3087",
+        column: KanaColumn.S
+    },
+
+    //S Diacritical Diagraphs
+    {
+        name: "ja",
+        code: "\u3058\u3083",
+        column: KanaColumn.S
+    },
+    {
+        name: "ju",
+        code: "\u3058\u3085",
+        column: KanaColumn.S
+    },
+    {
+        name: "jo",
+        code: "\u3058\u3087",
         column: KanaColumn.S
     },
 
@@ -191,6 +260,23 @@ const hiragana: KanaData[] = [
         column: KanaColumn.T
     },
 
+    //T Diagraphs
+    {
+        name: "cha",
+        code: "\u3061\u3083",
+        column: KanaColumn.T
+    },
+    {
+        name: "chu",
+        code: "\u3061\u3085",
+        column: KanaColumn.T
+    },
+    {
+        name: "cho",
+        code: "\u3061\u3087",
+        column: KanaColumn.T
+    },
+
     //N Column (Big)
     {
         name: "na",
@@ -217,6 +303,24 @@ const hiragana: KanaData[] = [
         code: "\u306E",
         column: KanaColumn.N
     },
+
+    //N Diagraphs
+    {
+        name: "nya",
+        code: "\u306B\u3083",
+        column: KanaColumn.N
+    },
+    {
+        name: "nyu",
+        code: "\u306B\u3085",
+        column: KanaColumn.N
+    },
+    {
+        name: "nyo",
+        code: "\u306B\u3087",
+        column: KanaColumn.N
+    },
+
 
     //H Column (Big)
     {
@@ -299,6 +403,57 @@ const hiragana: KanaData[] = [
         column: KanaColumn.H
     },
 
+    //H Diagraphs
+    {
+        name: "hya",
+        code: "\u3072\u3083",
+        column: KanaColumn.H
+    },
+    {
+        name: "hyu",
+        code: "\u3072\u3085",
+        column: KanaColumn.H
+    },
+    {
+        name: "hyo",
+        code: "\u3072\u3087",
+        column: KanaColumn.H
+    },
+
+    //H Diacritical Diagraphs (Dakuten)
+    {
+        name: "bya",
+        code: "\u3073\u3083",
+        column: KanaColumn.H
+    },
+    {
+        name: "byu",
+        code: "\u3073\u3085",
+        column: KanaColumn.H
+    },
+    {
+        name: "byo",
+        code: "\u3073\u3087",
+        column: KanaColumn.H
+    },
+
+    //H Diacritical Diagraphs (Handakuten)
+    {
+        name: "pya",
+        code: "\u3074\u3083",
+        column: KanaColumn.H
+    },
+    {
+        name: "pyu",
+        code: "\u3074\u3085",
+        column: KanaColumn.H
+    },
+    {
+        name: "pyo",
+        code: "\u3074\u3087",
+        column: KanaColumn.H
+    },
+
     //M Column (Big)
     {
         name: "ma",
@@ -323,6 +478,23 @@ const hiragana: KanaData[] = [
     {
         name: "mo",
         code: "\u3082",
+        column: KanaColumn.M
+    },
+
+    //M Diagraphs
+    {
+        name: "mya",
+        code: "\u307F\u3083",
+        column: KanaColumn.M
+    },
+    {
+        name: "myu",
+        code: "\u307F\u3085",
+        column: KanaColumn.M
+    },
+    {
+        name: "myo",
+        code: "\u307F\u3087",
         column: KanaColumn.M
     },
 
@@ -367,6 +539,23 @@ const hiragana: KanaData[] = [
     {
         name: "ro",
         code: "\u308D",
+        column: KanaColumn.R
+    },
+
+    //R Diagraphs
+    {
+        name: "rya",
+        code: "\u308A\u3083",
+        column: KanaColumn.R
+    },
+    {
+        name: "ryu",
+        code: "\u308A\u3085",
+        column: KanaColumn.R
+    },
+    {
+        name: "ryo",
+        code: "\u308A\u3087",
         column: KanaColumn.R
     },
 
