@@ -1,17 +1,19 @@
-import React, {Component} from "react";
-import {Kana} from "../types/Kana";
-import {Button, Col, Container, Form, ProgressBar, Row} from "react-bootstrap";
+import React, { Component } from "react";
+import { Kana } from "../types/Kana";
+import { Button, Col, Container, Form, ProgressBar, Row } from "react-bootstrap";
 import KanaDisplay from "./KanaDisplay";
 import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
-import {RandomNumberGenerator} from "../utility/RandomNumberGenerator";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { RandomNumberGenerator } from "../utility/RandomNumberGenerator";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Timer from "./Timer";
-import {faRedoAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
+import { faRedoAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 import TipButton from "./TipButton";
 import RomanjiInput from "./RomanjiInput";
+import { GameSettings } from "../types/GameSettings";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
+    settings: GameSettings;
     onClose: () => void;
 }
 
@@ -34,7 +36,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         this.timer = React.createRef();
         this.kanaDisplay = React.createRef();
 
-        const [ firstKana, remainingKana ] = this.getRandomKana(this.props.kana);
+        const [firstKana, remainingKana] = this.getRandomKana(this.props.kana);
 
         this.state = {
             currentKana: firstKana,
@@ -84,7 +86,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                                 <RomanjiInput
                                     value={answer}
                                     disabled={hasExhaustedKana || paused}
-                                    onChange={(e) => this.setState({answer: e.target.value})}
+                                    onChange={(e) => this.setState({ answer: e.target.value })}
                                     placeholder={paused ? "Paused" : !hasExhaustedKana ? "Enter the romanji" : ""}
                                     onEnterKey={this.answerQuestion}
                                 />
@@ -115,15 +117,15 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         if (answer === currentKana.romanji) {
             //Add the current kana to the answered array.
             const updatedAnswered = answered.concat(currentKana);
-            this.setState({answered: updatedAnswered});
+            this.setState({ answered: updatedAnswered });
 
             if (remainingKana.length === 0) {
                 //If we're out of kana, stop the timer and let the component know the pool has been exhausted.
                 if (this.timer.current != null) this.timer.current.stop();
-                this.setState({hasExhaustedKana: true, paused: false});
+                this.setState({ hasExhaustedKana: true, paused: false });
             } else {
                 //Pick a random remaining kana and remove it from the pool.
-                const [ nextKana, nextRemainingKana ] = this.getRandomKana(remainingKana);
+                const [nextKana, nextRemainingKana] = this.getRandomKana(remainingKana);
 
                 //Update the next kana to be displayed and the remaining kana with one less.
                 this.setState({
@@ -134,14 +136,14 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             }
         } else {
             if (this.kanaDisplay.current != null) this.kanaDisplay.current.notifyIncorrect();
-            this.setState({hasAnsweredIncorrectly: true});
+            this.setState({ hasAnsweredIncorrectly: true });
         }
 
-        this.setState({answer: ""});
+        this.setState({ answer: "" });
     }
 
     reset = () => {
-        const [ nextKana, remainingKana ] = this.getRandomKana(this.props.kana);
+        const [nextKana, remainingKana] = this.getRandomKana(this.props.kana);
 
         this.setState({
             currentKana: nextKana,
@@ -159,7 +161,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
     onPaused = () => {
         const paused = this.state.paused;
-        this.setState({paused: !paused})
+        this.setState({ paused: !paused })
     }
 
     /**

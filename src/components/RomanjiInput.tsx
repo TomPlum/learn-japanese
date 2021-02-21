@@ -1,6 +1,6 @@
-import React, {ChangeEvent, Component} from "react";
+import React, { ChangeEvent, Component } from "react";
 import styles from "../styles/sass/components/RomanjiInput.module.scss";
-import {Form} from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 interface RomanjiInputProps {
     disabled?: boolean;

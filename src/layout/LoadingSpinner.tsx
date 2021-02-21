@@ -1,11 +1,10 @@
-import React from 'react';
-import {Spinner} from "react-bootstrap";
-import {Component} from "react";
+import React, { Component } from 'react';
+import { Spinner } from "react-bootstrap";
 import styles from "../styles/sass/layout/LoadingSpinner.module.scss";
 
 class LoadingSpinner extends Component<{ active: any }> {
     render() {
-        let {active} = this.props;
+        let { active } = this.props;
         if (active) {
             return (
                 <div>

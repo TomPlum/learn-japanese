@@ -1,6 +1,6 @@
-import {Component} from "react";
-import {Kana} from "../types/Kana";
-import {Container} from "react-bootstrap";
+import { Component } from "react";
+import { Kana } from "../types/Kana";
+import { Container } from "react-bootstrap";
 import styles from "../styles/sass/components/KanaDisplay.module.scss";
 
 interface KanaTileProps {
@@ -26,22 +26,22 @@ class KanaDisplay extends Component<KanaTileProps, KanaTileState> {
 
         const colour = isNotifyingIncorrect ? styles.notifyIncorrect : blur ? styles.blur : styles.kana;
 
-        return(
-          <Container className={styles.wrapper}>
-            <p className={colour}>
-                {this.props.kana.code}
-            </p>
-          </Container>
+        return (
+            <Container className={styles.wrapper}>
+                <p className={colour}>
+                    {this.props.kana.code}
+                </p>
+            </Container>
         );
     }
 
     componentDidUpdate(prevProps: Readonly<KanaTileProps>, prevState: Readonly<KanaTileState>, snapshot?: any) {
         if (prevState.isNotifyingIncorrect) {
-            setTimeout(() => this.setState({isNotifyingIncorrect: false}));
+            setTimeout(() => this.setState({ isNotifyingIncorrect: false }));
         }
     }
 
-    notifyIncorrect = () => this.setState({isNotifyingIncorrect: true});
+    notifyIncorrect = () => this.setState({ isNotifyingIncorrect: true });
 
 }
 

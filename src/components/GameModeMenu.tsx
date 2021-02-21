@@ -1,6 +1,6 @@
-import {Component} from "react";
-import {Button, Col, Container, Row} from "react-bootstrap";
-import {GameMode} from "../types/GameMode";
+import { Component } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { GameMode } from "../types/GameMode";
 import {
     faCircle,
     faFire,
@@ -10,12 +10,12 @@ import {
     faStopwatch,
     faVial
 } from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameModeButton from "./GameModeButton";
 import GameSettingsMenu from "./GameSettingsMenu";
 import styles from "../styles/sass/components/GameModeMenu.module.scss";
-import {HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK} from "../data/GameModePresets";
-import {GameSettings} from "../types/GameSettings";
+import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../data/GameModePresets";
+import { GameSettings } from "../types/GameSettings";
 
 interface GameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;
@@ -38,7 +38,7 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
     }
 
     render() {
-        const {isCustomisingSettings, selected} = this.state;
+        const { isCustomisingSettings, selected } = this.state;
 
         return (
             <Container fluid className={styles.wrapper}>
@@ -125,29 +125,39 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
         );
     }
 
-    setCustomSettings = (settings: GameSettings) => this.setState({settings, isCustomisingSettings: false});
+    setCustomSettings = (settings: GameSettings) => this.setState({ settings, isCustomisingSettings: false });
 
     confirmSelected = () => {
-        const {selected, settings} = this.state;
+        const { selected, settings } = this.state;
         this.props.onSelectedMode(selected, settings);
     }
 
     onSelectMode = (mode: GameMode) => {
         let preset: GameSettings = ROMANJI;
         switch (mode) {
-            case GameMode.RELAXED: preset = RELAXED; break;
-            case GameMode.TIME_ATTACK: preset = TIME_ATTACK; break;
-            case GameMode.ROMANJI: preset = ROMANJI; break;
-            case GameMode.KANA: preset = KANA; break;
-            case GameMode.HARDCORE: preset = HARDCORE; break;
+            case GameMode.RELAXED:
+                preset = RELAXED;
+                break;
+            case GameMode.TIME_ATTACK:
+                preset = TIME_ATTACK;
+                break;
+            case GameMode.ROMANJI:
+                preset = ROMANJI;
+                break;
+            case GameMode.KANA:
+                preset = KANA;
+                break;
+            case GameMode.HARDCORE:
+                preset = HARDCORE;
+                break;
         }
 
-        this.setState({selected: mode, settings: preset});
+        this.setState({ selected: mode, settings: preset });
     }
 
     onLaunchCustomSettings = () => {
         this.onSelectMode(GameMode.CUSTOM);
-        this.setState({isCustomisingSettings: true});
+        this.setState({ isCustomisingSettings: true });
     }
 
     private getSelectedModeDescription(): string {
@@ -172,7 +182,8 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
             case GameMode.CUSTOM: {
                 return "Configure any of the available settings to create a customised game mode.";
             }
-            default: return "Please selected a game mode to begin.";
+            default:
+                return "Please selected a game mode to begin.";
         }
     }
 }

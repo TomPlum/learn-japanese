@@ -1,13 +1,13 @@
-import {Component} from "react";
-import {Container} from "react-bootstrap";
+import { Component } from "react";
+import { Container } from "react-bootstrap";
 import KanaMemoryTest from "../components/KanaMemoryTest";
-import {Kana} from "../types/Kana";
-import {KanaConfig, KanaRepository} from "../repository/KanaRepository";
+import { Kana } from "../types/Kana";
+import { KanaConfig, KanaRepository } from "../repository/KanaRepository";
 import LoadingSpinner from "./LoadingSpinner";
 import styles from "../styles/sass/layout/Main.module.scss";
 import GameModeMenu from "../components/GameModeMenu";
-import {GameMode} from "../types/GameMode";
-import {GameSettings} from "../types/GameSettings";
+import { GameMode } from "../types/GameMode";
+import { GameSettings } from "../types/GameSettings";
 
 interface MainState {
     loading: boolean;
@@ -30,42 +30,31 @@ class Main extends Component<{}, MainState> {
         }
     }
 
-    onGameClose = () => this.setState({gameSettings: undefined});
+    onGameClose = () => this.setState({ gameSettings: undefined });
 
     onSelectedGameMode = (mode: GameMode, settings: GameSettings) => {
-        this.setState({selectedGameMode: mode, gameSettings: settings}, () => this.loadKana());
+        this.setState({ selectedGameMode: mode, gameSettings: settings }, () => this.loadKana());
     }
 
     render() {
-        const { loading, gameSettings } = this.state;
+        const { loading, gameSettings, kana } = this.state;
 
         return (
-          <Container className={styles.wrapper}>
-              <LoadingSpinner active={loading} />
-              {!gameSettings && <GameModeMenu onSelectedMode={this.onSelectedGameMode}/>}
-              {this.renderGame()}
-          </Container>
+            <Container className={styles.wrapper}>
+                <LoadingSpinner active={loading}/>
+                {!gameSettings &&
+                <GameModeMenu onSelectedMode={this.onSelectedGameMode}/>
+                }
+
+                {gameSettings && kana &&
+                <KanaMemoryTest kana={kana} settings={gameSettings} onClose={this.onGameClose}/>
+                }
+            </Container>
         );
     }
 
-    private renderGame() {
-        const { kana, gameSettings, selectedGameMode } = this.state;
-
-        if (gameSettings && kana) {
-            switch (selectedGameMode) {
-                case GameMode.ROMANJI: {
-                    return <KanaMemoryTest kana={kana} onClose={this.onGameClose}/>
-                }
-                default: {
-                    return <p>Bruh</p>
-                }
-            }
-        }
-        return false;
-    }
-
     private loadKana() {
-        this.setState({loading: true});
+        this.setState({ loading: true });
 
         const { gameSettings } = this.state;
         const config: KanaConfig = {
@@ -76,7 +65,7 @@ class Main extends Component<{}, MainState> {
 
         const kana = this.kanaRepository.read(config);
 
-        this.setState({loading: false, kana});
+        this.setState({ loading: false, kana });
     }
 }
 

@@ -1,12 +1,12 @@
-import {Component} from "react";
-import {Button, Container, Form} from "react-bootstrap";
-import {GameMode} from "../types/GameMode";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Component } from "react";
+import { Button, Container, Form } from "react-bootstrap";
+import { GameMode } from "../types/GameMode";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../styles/sass/components/GameSettingsMenu.module.scss";
-import {faCheck} from "@fortawesome/free-solid-svg-icons";
-import {GameSettings} from "../types/GameSettings";
-import {TipQuantity} from "../types/TipQuantity";
-import {LifeQuantity} from "../types/LifeQuantity";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { GameSettings } from "../types/GameSettings";
+import { TipQuantity } from "../types/TipQuantity";
+import { LifeQuantity } from "../types/LifeQuantity";
 
 interface GameSettingsMenuProps {
     mode: GameMode;
@@ -34,7 +34,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     render() {
-        const {selectedHiragana, selectedKatakana, includeDiagraphs, tipQuantity} = this.state;
+        const { selectedHiragana, selectedKatakana, includeDiagraphs, tipQuantity } = this.state;
 
         return (
             <Container fluid>
@@ -54,7 +54,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                                 label="Hiragana"
                                 className={styles.check}
                                 checked={selectedHiragana}
-                                onChange={() => this.setState({selectedHiragana: !selectedHiragana})}
+                                onChange={() => this.setState({ selectedHiragana: !selectedHiragana })}
                                 disabled={selectedHiragana && !selectedKatakana}
                             />
                             <Form.Check
@@ -62,14 +62,14 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                                 label="Katakana"
                                 className={styles.check}
                                 checked={selectedKatakana}
-                                onChange={() => this.setState({selectedKatakana: !selectedKatakana})}
+                                onChange={() => this.setState({ selectedKatakana: !selectedKatakana })}
                                 disabled={selectedKatakana && !selectedHiragana}
                             />
                             <Form.Check
                                 label="Include Diagraphs"
                                 className={styles.check}
                                 checked={includeDiagraphs}
-                                onChange={() => this.setState({includeDiagraphs: !includeDiagraphs})}
+                                onChange={() => this.setState({ includeDiagraphs: !includeDiagraphs })}
                             />
                         </Form.Row>
                     </Form.Group>
@@ -85,20 +85,20 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                                 label="1"
                                 className={styles.check}
                                 checked={tipQuantity === TipQuantity.ONE}
-                                onChange={() => this.setState({tipQuantity: TipQuantity.ONE})}
+                                onChange={() => this.setState({ tipQuantity: TipQuantity.ONE })}
                             />
                             <Form.Check
                                 inline
                                 label="3"
                                 className={styles.check}
                                 checked={tipQuantity === TipQuantity.THREE}
-                                onChange={() => this.setState({tipQuantity: TipQuantity.THREE})}
+                                onChange={() => this.setState({ tipQuantity: TipQuantity.THREE })}
                             />
                             <Form.Check
                                 label="Unlimited"
                                 className={styles.check}
                                 checked={tipQuantity === TipQuantity.UNLIMITED}
-                                onChange={() => this.setState({tipQuantity: TipQuantity.UNLIMITED})}
+                                onChange={() => this.setState({ tipQuantity: TipQuantity.UNLIMITED })}
                             />
                         </Form.Row>
                     </Form.Group>
@@ -132,7 +132,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onConfirmation = () => {
-        const {selectedHiragana, selectedKatakana, includeDiagraphs, tipQuantity, lifeQuantity} = this.state;
+        const { selectedHiragana, selectedKatakana, includeDiagraphs, tipQuantity, lifeQuantity } = this.state;
         this.props.onSubmit({
             kana: {
                 includeHiragana: selectedHiragana,

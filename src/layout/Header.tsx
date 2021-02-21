@@ -1,13 +1,13 @@
-import {Component} from "react";
-import {Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import { Component } from "react";
+import { Form, FormControl, Nav, Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCircle} from "@fortawesome/free-solid-svg-icons";
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/sass/layout/Header.module.scss";
 
 class Header extends Component {
     render() {
         return (
-            <Navbar  bg="dark" variant="dark" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg">
                 <Navbar.Brand className={styles.brand}>
                     <FontAwesomeIcon icon={faCircle} className={styles.logo}/>
                     {' '}Learn Japanese

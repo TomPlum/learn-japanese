@@ -1,7 +1,7 @@
-import React, {Component} from "react";
-import {faPause, faPlay} from "@fortawesome/free-solid-svg-icons";
+import React, { Component } from "react";
+import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/sass/components/Timer.module.scss";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface TimerProps {
     end?: number;
@@ -40,29 +40,25 @@ class Timer extends Component<TimerProps, TimerState> {
 
     render() {
         const { paused, isStopped } = this.state;
-        const {className, pausable } = this.props;
+        const { className, pausable } = this.props;
 
         return (
-            <>
+            <span className={className}>
+                {pausable && !isStopped && <FontAwesomeIcon
+                    icon={paused ? faPlay : faPause}
+                    className={styles.pause}
+                    onClick={paused ? this.play : this.pause}
+                    title="Pause"
+                    size="sm"
 
-                <span className={className}>
-                    {pausable && !isStopped && <FontAwesomeIcon
-                        icon={paused ? faPlay : faPause}
-                        className={styles.pause}
-                        onClick={paused ? this.play : this.pause}
-                        title="Pause"
-                        size="sm"
-
-                    />}
-                    {this.formatTimeElapsed()}
-                </span>
-            </>
-
+                />}
+                {this.formatTimeElapsed()}
+            </span>
         );
     }
 
     stop = () => {
-        this.setState({paused: true, isStopped: true});
+        this.setState({ paused: true, isStopped: true });
         clearInterval(this.state.interval);
     }
 
@@ -78,19 +74,19 @@ class Timer extends Component<TimerProps, TimerState> {
 
     private play = () => {
         this.onChangePausedState();
-        this.setState({interval: setInterval(() => this.tick(), 1000), paused: false});
+        this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false });
     }
 
     private pause = () => {
         this.onChangePausedState();
-        this.setState({paused: true});
+        this.setState({ paused: true });
         clearInterval(this.state.interval);
     }
 
-    private tick = () => this.setState({current: this.state.current + 1000});
+    private tick = () => this.setState({ current: this.state.current + 1000 });
 
     private start = () => {
-        this.setState({interval: setInterval(() => this.tick(), 1000), paused: false, isStopped: false});
+        this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false, isStopped: false });
     }
 
     private onChangePausedState = () => {
@@ -98,7 +94,7 @@ class Timer extends Component<TimerProps, TimerState> {
     }
 
     private formatTimeElapsed(): string {
-        const {start, current} = this.state;
+        const { start, current } = this.state;
         const delta = current - start;
         const date = new Date(1000 * Math.round(delta / 1000));
         const hours = date.getUTCHours();
