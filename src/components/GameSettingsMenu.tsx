@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {Button, Col, Container, Form} from "react-bootstrap";
+import {Button, Container, Form} from "react-bootstrap";
 import {GameMode} from "../types/GameMode";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styles from "../styles/sass/components/GameSettingsMenu.module.scss";

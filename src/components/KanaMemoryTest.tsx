@@ -85,7 +85,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                                     plaintext
                                     disabled={hasExhaustedKana || paused}
                                     value={answer}
-                                    placeholder={!hasExhaustedKana ? "enter the romanji for the above kana" : ""}
+                                    placeholder={paused ? "Paused" : !hasExhaustedKana ? "Enter the romanji" : ""}
                                     onChange={(e) => this.setState({answer: e.target.value})}
                                     onKeyPress={this.handleEnterKeySubmit}
                                 />
