@@ -82,6 +82,40 @@ const katakana = [
         column: KanaColumn.K
     },
 
+    //K Diagraphs
+    {
+        name: "kya",
+        code: "\u30AD\u30E3",
+        column: KanaColumn.K
+    },
+    {
+        name: "kyu",
+        code: "\u30AD\u30E5",
+        column: KanaColumn.K
+    },
+    {
+        name: "kyo",
+        code: "\u30AD\u30E7",
+        column: KanaColumn.K
+    },
+
+    //K Diacritical Diagraphs
+    {
+        name: "gya",
+        code: "\u30AE\u30E3",
+        column: KanaColumn.K
+    },
+    {
+        name: "gyu",
+        code: "\u30AE\u30E5",
+        column: KanaColumn.K
+    },
+    {
+        name: "gyo",
+        code: "\u30AE\u30E7",
+        column: KanaColumn.K
+    },
+
     //S Column (Big)
     {
         name: "sa",
@@ -133,6 +167,41 @@ const katakana = [
     {
         name: "zo",
         code: "\u30BE",
+        column: KanaColumn.S
+    },
+
+    //S Diagraphs
+
+    {
+        name: "sha",
+        code: "\u30B7\u30E3",
+        column: KanaColumn.S
+    },
+    {
+        name: "shu",
+        code: "\u30B7\u30E5",
+        column: KanaColumn.S
+    },
+    {
+        name: "sho",
+        code: "\u30B7\u30E7",
+        column: KanaColumn.S
+    },
+
+    //S Diacritical Diagraphs
+    {
+        name: "ja",
+        code: "\u30B8\u30E3",
+        column: KanaColumn.S
+    },
+    {
+        name: "ju",
+        code: "\u30B8\u30E5",
+        column: KanaColumn.S
+    },
+    {
+        name: "jo",
+        code: "\u30B8\u30E7",
         column: KanaColumn.S
     },
 
@@ -190,6 +259,40 @@ const katakana = [
         column: KanaColumn.T
     },
 
+    //T Diagraphs
+    {
+        name: "cha",
+        code: "\u30C1\u30E3",
+        column: KanaColumn.T
+    },
+    {
+        name: "chu",
+        code: "\u30C1\u30E5",
+        column: KanaColumn.T
+    },
+    {
+        name: "cho",
+        code: "\u30C1\u30E7",
+        column: KanaColumn.T
+    },
+
+    //T Diacritical Diagraphs
+    {
+        name: "dya",
+        code: "\u30C2\u30E3",
+        column: KanaColumn.T
+    },
+    {
+        name: "dyu",
+        code: "\u30C2\u30E5",
+        column: KanaColumn.T
+    },
+    {
+        name: "dyo",
+        code: "\u30C2\u30E7",
+        column: KanaColumn.T
+    },
+
     //N Column (Big)
     {
         name: "na",
@@ -214,6 +317,23 @@ const katakana = [
     {
         name: "no",
         code: "\u30CE",
+        column: KanaColumn.N
+    },
+
+    //N Diagraphs
+    {
+        name: "nya",
+        code: "\u30CB\u30E3",
+        column: KanaColumn.N
+    },
+    {
+        name: "nyu",
+        code: "\u30CB\u30E5",
+        column: KanaColumn.N
+    },
+    {
+        name: "nyo",
+        code: "\u30CB\u30E7",
         column: KanaColumn.N
     },
 
@@ -298,6 +418,57 @@ const katakana = [
         column: KanaColumn.H
     },
 
+    //H Diagraphs
+    {
+        name: "hya",
+        code: "\u30D2\u30E3",
+        column: KanaColumn.H
+    },
+    {
+        name: "hyu",
+        code: "\u30D2\u30E5",
+        column: KanaColumn.H
+    },
+    {
+        name: "hyo",
+        code: "\u30D2\u30E7",
+        column: KanaColumn.H
+    },
+
+    //H Diacritical Diagraphs (Dakuten)
+    {
+        name: "bya",
+        code: "\u30D3\u30E3",
+        column: KanaColumn.H
+    },
+    {
+        name: "byu",
+        code: "\u30D3\u30E5",
+        column: KanaColumn.H
+    },
+    {
+        name: "byo",
+        code: "\u30D3\u30E7",
+        column: KanaColumn.H
+    },
+
+    //H Diacritical Diagraphs (Handakuten)
+    {
+        name: "pya",
+        code: "\u30D4\u30E3",
+        column: KanaColumn.H
+    },
+    {
+        name: "pyu",
+        code: "\u30D4\u30E5",
+        column: KanaColumn.H
+    },
+    {
+        name: "pyo",
+        code: "\u30D4\u30E7",
+        column: KanaColumn.H
+    },
+
     //M Column (Big)
     {
         name: "ma",
@@ -322,6 +493,23 @@ const katakana = [
     {
         name: "mo",
         code: "\u30E2",
+        column: KanaColumn.M
+    },
+
+    //M Diagraphs
+    {
+        name: "mya",
+        code: "\u30DF\u30E3",
+        column: KanaColumn.M
+    },
+    {
+        name: "myu",
+        code: "\u30DF\u30E5",
+        column: KanaColumn.M
+    },
+    {
+        name: "myo",
+        code: "\u30DF\u30E7",
         column: KanaColumn.M
     },
 
@@ -366,6 +554,23 @@ const katakana = [
     {
         name: "ro",
         code: "\u30ED",
+        column: KanaColumn.R
+    },
+
+    //R Diagraphs
+    {
+        name: "rya",
+        code: "\u30EA\u30E3",
+        column: KanaColumn.R
+    },
+    {
+        name: "ryu",
+        code: "\u30EA\u30E5",
+        column: KanaColumn.R
+    },
+    {
+        name: "ryo",
+        code: "\u30EA\u30E7",
         column: KanaColumn.R
     },
 

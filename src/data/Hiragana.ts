@@ -277,6 +277,23 @@ const hiragana: KanaData[] = [
         column: KanaColumn.T
     },
 
+    //T Diacritical Diagraphs
+    {
+        name: "dya",
+        code: "\u3062\u3083",
+        column: KanaColumn.T
+    },
+    {
+        name: "dyu",
+        code: "\u3062\u3085",
+        column: KanaColumn.T
+    },
+    {
+        name: "dyo",
+        code: "\u3062\u3087",
+        column: KanaColumn.T
+    },
+
     //N Column (Big)
     {
         name: "na",

@@ -17,7 +17,7 @@ export class KanaRepository {
         let kana: Kana[];
 
         if (config?.includeHiragana && config.includeKatakana) {
-            kana = this.readAllKana().splice(0, 3);
+            kana = this.readAllKana();
         } else if (config?.includeHiragana) {
             kana = this.readHiragana();
         } else if (config?.includeKatakana) {
