@@ -13,7 +13,6 @@ interface MainState {
     loading: boolean;
     kana?: Kana[];
     gameSettings?: GameSettings;
-    selectedGameMode: GameMode;
 }
 
 class Main extends Component<{}, MainState> {
@@ -26,14 +25,7 @@ class Main extends Component<{}, MainState> {
             loading: false,
             kana: undefined,
             gameSettings: undefined,
-            selectedGameMode: GameMode.ROMANJI
         }
-    }
-
-    onGameClose = () => this.setState({ gameSettings: undefined });
-
-    onSelectedGameMode = (mode: GameMode, settings: GameSettings) => {
-        this.setState({ selectedGameMode: mode, gameSettings: settings }, () => this.loadKana());
     }
 
     render() {
@@ -43,15 +35,21 @@ class Main extends Component<{}, MainState> {
             <Container className={styles.wrapper}>
                 <LoadingSpinner active={loading}/>
                 {!gameSettings &&
-                <GameModeMenu onSelectedMode={this.onSelectedGameMode}/>
+                    <GameModeMenu onSelectedMode={this.onSelectedGameMode}/>
                 }
 
                 {gameSettings && kana &&
-                <KanaMemoryTest kana={kana} settings={gameSettings} onClose={this.onGameClose}/>
+                    <KanaMemoryTest kana={kana} settings={gameSettings} onClose={this.onGameClose}/>
                 }
             </Container>
         );
     }
+
+    private onSelectedGameMode = (mode: GameMode, settings: GameSettings) => {
+        this.setState({ gameSettings: settings }, () => this.loadKana());
+    }
+
+    private onGameClose = () => this.setState({ gameSettings: undefined });
 
     private loadKana() {
         this.setState({ loading: true });

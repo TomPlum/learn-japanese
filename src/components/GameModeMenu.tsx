@@ -31,9 +31,9 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
     constructor(props: GameModeMenuProps | Readonly<GameModeMenuProps>) {
         super(props);
         this.state = {
-            selected: GameMode.ROMANJI,
+            selected: GameMode.RELAXED,
             isCustomisingSettings: false,
-            settings: ROMANJI
+            settings: RELAXED
         }
     }
 

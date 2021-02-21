@@ -5,6 +5,7 @@ export interface GameSettings {
     kana: KanaSettings
     tipQuantity: TipQuantity;
     lifeQuantity: LifeQuantity;
+    showTime?: boolean;
 }
 
 export interface KanaSettings {

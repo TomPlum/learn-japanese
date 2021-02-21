@@ -51,7 +51,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
     render() {
         const { currentKana, answer, answered, hasExhaustedKana, paused } = this.state;
-        const { kana } = this.props;
+        const { kana, settings } = this.props;
 
         return (
             <Container className={styles.wrapper}>
@@ -73,7 +73,9 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         />
                     </Col>
                     <Col>
-                        <Timer className={styles.timer} ref={this.timer} pausable onPaused={this.onPaused}/>
+                        {settings.showTime &&
+                            <Timer className={styles.timer} ref={this.timer} pausable onPaused={this.onPaused}/>
+                        }
                     </Col>
                 </Row>
 
