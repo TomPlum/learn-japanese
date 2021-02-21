@@ -8,6 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Timer from "./Timer";
 import {faRedoAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import TipButton from "./TipButton";
+import RomanjiInput from "./RomanjiInput";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
@@ -80,14 +81,12 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     <Form.Group controlId="answer">
                         <Row>
                             <Col xs={true} className={styles.inputCol}>
-                                <Form.Control
-                                    className={styles.input}
-                                    plaintext
-                                    disabled={hasExhaustedKana || paused}
+                                <RomanjiInput
                                     value={answer}
-                                    placeholder={paused ? "Paused" : !hasExhaustedKana ? "Enter the romanji" : ""}
+                                    disabled={hasExhaustedKana || paused}
                                     onChange={(e) => this.setState({answer: e.target.value})}
-                                    onKeyPress={this.handleEnterKeySubmit}
+                                    placeholder={paused ? "Paused" : !hasExhaustedKana ? "Enter the romanji" : ""}
+                                    onEnterKey={this.answerQuestion}
                                 />
                             </Col>
                             <Col xs="auto" className={styles.tipCol}>
@@ -154,17 +153,6 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             hasExhaustedKana: false,
         });
         if (this.timer.current != null) this.timer.current.restart();
-    }
-
-    handleEnterKeySubmit = (event: any) => {
-        const {answer} = this.state;
-        if (event.charCode === 13) {
-            event.preventDefault();
-            if (answer) {
-                this.answerQuestion();
-            }
-        }
-        return false;
     }
 
     close = () => this.props.onClose();
