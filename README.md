@@ -1,5 +1,14 @@
 # Learn Japanese
 
+## About
+After starting the long and arduous journey of learning Japanese, I found lots of online learning materials to get me started. However, I couldn't quite find *exactly* what I wanted, an app for learning kana. So I made one. Partly inspired by Duolingo.
+
+## Contents
+* [Kana](#kana)
+  * [Hiragana](#hiragana)
+  * [Katakana](#katakana)
+* [Game Modes](#game-modes)
+* [References](#references)
 ## Kana
 
 ### Hiragana
@@ -13,7 +22,7 @@
 
 #### Diacriticals
 Syllables beginning with the voiced consonants `g`, `z`, `d` and `b` are spelled with kana from the corresponding
-unvoiced columns (`k`, `s`, `t` and `h`) and the voicing mark, dakuten. [1](#1)
+unvoiced columns (`k`, `s`, `t` and `h`) and the voicing mark, dakuten. [[1]](#1)
 
 Syllables beginning with `p` are spelled with kana from the `h` column and the half-voicing mark, handakuten.
 
@@ -28,7 +37,7 @@ Syllables beginning with `p` are spelled with kana from the `h` column and the h
 #### Diagraphs
 
 Syllables beginning with palatalized consonants are spelled with one of the seven consonantal kana from the i row
-followed by small ya, yu or yo. These digraphs are called yōon. [1](#1)
+followed by small ya, yu or yo. These digraphs are called yōon. [[1]](#1)
 
 |      |   r   |   m   |   h   |   n   |   t   |   s   |   k   |
 |------|-------|-------|-------|-------|-------|-------|-------|
@@ -50,6 +59,20 @@ followed by small ya, yu or yo. These digraphs are called yōon. [1](#1)
 |   |    | ル | ユ | ム | フ | ヌ | ツ | ス | ク | ウ | **u** |
 |   |    | レ |    | メ | ヘ | ネ | テ | セ | ケ | エ | **e** |
 |   | ヲ | ロ | ヨ  | モ | ホ | ノ | ト | ソ | コ | オ | **o** |
+
+## Game Modes
+
+### Relaxed
+
+### Time Attack
+
+### Romanji
+
+### Kana
+
+### Hardcore
+
+### Custom
 
 ## References
 [<a id="1">1</a>] https://en.wikipedia.org/wiki/Kana
