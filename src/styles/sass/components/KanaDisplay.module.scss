@@ -4,9 +4,20 @@
 
 $default-colour: #FFF;
 
-.kana {
+@mixin kana {
   color: $default-colour;
   font-size: 10em;
+}
+
+.blur {
+  @include kana;
+  color: transparent;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.kana {
+  @include kana;
 }
 
 .notifyIncorrect {

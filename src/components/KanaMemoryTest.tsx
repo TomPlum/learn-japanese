@@ -21,6 +21,7 @@ interface KanaMemoryTestState {
     answered: Kana[];
     hasAnsweredIncorrectly: boolean;
     hasExhaustedKana: boolean;
+    paused: boolean;
 }
 
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
@@ -41,11 +42,12 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             answered: [],
             hasAnsweredIncorrectly: false,
             hasExhaustedKana: false,
+            paused: false,
         }
     }
 
     render() {
-        const { currentKana, answer, answered, hasExhaustedKana } = this.state;
+        const { currentKana, answer, answered, hasExhaustedKana, paused } = this.state;
         const { kana } = this.props;
 
         return (
@@ -63,16 +65,16 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         <FontAwesomeIcon
                             icon={faTimes}
                             className={styles.close}
-                            onClick={this.close.bind(this)}
+                            onClick={this.close}
                             title="Quit"
                         />
                     </Col>
                     <Col>
-                        <Timer className={styles.timer} ref={this.timer}/>
+                        <Timer className={styles.timer} ref={this.timer} pausable onPaused={this.onPaused}/>
                     </Col>
                 </Row>
 
-                <KanaDisplay kana={currentKana} key={currentKana.code} ref={this.kanaDisplay}/>
+                <KanaDisplay kana={currentKana} key={currentKana.code} ref={this.kanaDisplay} blur={paused}/>
 
                 <Form>
                     <Form.Group controlId="answer">
@@ -81,24 +83,25 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                                 <Form.Control
                                     className={styles.input}
                                     plaintext
-                                    disabled={hasExhaustedKana}
+                                    disabled={hasExhaustedKana || paused}
                                     value={answer}
                                     placeholder={!hasExhaustedKana ? "enter the romanji for the above kana" : ""}
                                     onChange={(e) => this.setState({answer: e.target.value})}
-                                    onKeyPress={this.handleEnterKeySubmit.bind(this)}
+                                    onKeyPress={this.handleEnterKeySubmit}
                                 />
                             </Col>
                             <Col xs="auto" className={styles.tipCol}>
-                                <TipButton kana={currentKana} key={currentKana.code} title="Help"/>
+                                <TipButton kana={currentKana} key={currentKana.code} title="Help" disabled={paused}/>
                             </Col>
                         </Row>
                     </Form.Group>
+
                     <Button
                         className={styles.submit}
                         variant={!hasExhaustedKana ? "success" : "primary"}
                         type="button"
-                        disabled={!answer && !hasExhaustedKana}
-                        onClick={!hasExhaustedKana ? this.answerQuestion.bind(this) : this.reset.bind(this)}
+                        disabled={!answer && !hasExhaustedKana || paused}
+                        onClick={!hasExhaustedKana ? this.answerQuestion : this.reset}
                     >
                         {!hasExhaustedKana ? "Check" : <><FontAwesomeIcon icon={faRedoAlt}/> Restart</>}
                     </Button>
@@ -118,7 +121,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             if (remainingKana.length === 0) {
                 //If we're out of kana, stop the timer and let the component know the pool has been exhausted.
                 if (this.timer.current != null) this.timer.current.stop();
-                this.setState({hasExhaustedKana: true});
+                this.setState({hasExhaustedKana: true, paused: false});
             } else {
                 //Pick a random remaining kana and remove it from the pool.
                 const [ nextKana, nextRemainingKana ] = this.getRandomKana(remainingKana);
@@ -146,6 +149,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             remainingKana: remainingKana,
             answer: "",
             answered: [],
+            paused: false,
             hasAnsweredIncorrectly: false,
             hasExhaustedKana: false,
         });
@@ -164,6 +168,11 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     close = () => this.props.onClose();
+
+    onPaused = () => {
+        const paused = this.state.paused;
+        this.setState({paused: !paused})
+    }
 
     /**
      * Picks a random Kana from the given pool and removes it.

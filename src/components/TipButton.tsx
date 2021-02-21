@@ -11,14 +11,17 @@ import {RandomNumberGenerator} from "../utility/RandomNumberGenerator";
 interface TipButtonProps {
     kana: Kana;
     title?: string;
+    disabled?: boolean;
 }
 
 class TipButton extends Component<TipButtonProps> {
     render() {
+        const { title, disabled } = this.props;
+
         const overlay = <PopOver title={this.getTitle()} text={this.getContent()} />;
         return (
             <OverlayTrigger trigger="focus" placement="left" overlay={overlay}>
-                <Button variant="warning" className={styles.tip} title={this.props.title}>
+                <Button variant="warning" className={styles.tip} title={title} disabled={disabled}>
                     <FontAwesomeIcon icon={faLightbulb}/>
                 </Button>
             </OverlayTrigger>

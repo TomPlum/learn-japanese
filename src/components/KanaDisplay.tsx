@@ -5,6 +5,7 @@ import styles from "../styles/sass/components/KanaDisplay.module.scss";
 
 interface KanaTileProps {
     kana: Kana;
+    blur?: boolean;
 }
 
 interface KanaTileState {
@@ -21,10 +22,13 @@ class KanaDisplay extends Component<KanaTileProps, KanaTileState> {
 
     render() {
         const { isNotifyingIncorrect } = this.state;
+        const { blur } = this.props;
+
+        const colour = isNotifyingIncorrect ? styles.notifyIncorrect : blur ? styles.blur : styles.kana;
 
         return(
           <Container className={styles.wrapper}>
-            <p className={isNotifyingIncorrect ? styles.notifyIncorrect : styles.kana}>
+            <p className={colour}>
                 {this.props.kana.code}
             </p>
           </Container>
