@@ -1,21 +1,14 @@
 import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { GameMode } from "../types/GameMode";
-import {
-    faCircle,
-    faFire,
-    faFont,
-    faGraduationCap,
-    faPlay,
-    faStopwatch,
-    faVial
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameModeButton from "./GameModeButton";
 import GameSettingsMenu from "./GameSettingsMenu";
 import styles from "../styles/sass/components/GameModeMenu.module.scss";
 import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../data/GameModePresets";
 import { GameSettings } from "../types/GameSettings";
+import { Environment } from "../utility/Environment";
 
 interface GameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;
@@ -160,32 +153,7 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
         this.setState({ isCustomisingSettings: true });
     }
 
-    private getSelectedModeDescription(): string {
-        switch (this.state.selected) {
-            case GameMode.RELAXED: {
-                return "No timers. No lives. No rush. You're learning and want to take your time."
-            }
-            case GameMode.TIME_ATTACK: {
-                return "You have 5s seconds to answer, 3 tips and 5 lives. A race against the clock!";
-            }
-            case GameMode.ROMANJI: {
-                return "You're shown kana on screen and you must enter the correct romanji. " +
-                    "You're timed, but there's no rush and mistakes aren't punishing.";
-            }
-            case GameMode.KANA: {
-                return "You're presented with the romanji for a random kana and four characters to choose from."
-            }
-            case GameMode.HARDCORE: {
-                return "Less time. More options. No hints. 1 life. This test includes all Hiragana, Katakana and " +
-                    "Diagraphs. Can you beat it?"
-            }
-            case GameMode.CUSTOM: {
-                return "Configure any of the available settings to create a customised game mode.";
-            }
-            default:
-                return "Please selected a game mode to begin.";
-        }
-    }
+    private getSelectedModeDescription = () => Environment.variable("MODE_DESC_" + this.state.selected);
 }
 
 export default GameModeMenu;

@@ -114,7 +114,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                                     Object.keys(LifeQuantity)
                                         .map(k => Number(LifeQuantity[k as any]))
                                         .filter(k => !isNaN(k)).map(quantity => {
-                                        return <option>{quantity}</option>
+                                        return <option key={quantity}>{quantity}</option>
                                     })
                                 }
                             </Form.Control>
