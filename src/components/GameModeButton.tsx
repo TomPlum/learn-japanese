@@ -34,7 +34,11 @@ class GameModeButton extends Component<GameModeButtonProps> {
                 className={isSelected ? styles.selected : styles.notSelected}
                 onClick={this.handleClick}
             >
-                <FontAwesomeIcon className={styles.icon} color={isSelected ? iconColour : "#000"} icon={icon}/>
+                <FontAwesomeIcon
+                    className={styles.icon}
+                    color={isSelected ? iconColour : "#000"}
+                    icon={icon}
+                />
                 <p className={styles.name}>{mode}</p>
             </Button>
         );

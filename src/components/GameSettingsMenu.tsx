@@ -3,7 +3,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import { GameMode } from "../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../styles/sass/components/GameSettingsMenu.module.scss";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCircle, faHeart, faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { GameSettings } from "../types/GameSettings";
 import { TipQuantity } from "../types/TipQuantity";
 import { LifeQuantity } from "../types/LifeQuantity";
@@ -45,7 +45,9 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                         </Form.Row>
 
                         <Form.Row>
-                            <Form.Label className={styles.label}>Kana</Form.Label>
+                            <Form.Label className={styles.label}>
+                                <span className={styles.kanaIcon}>あ</span> Kana
+                            </Form.Label>
                         </Form.Row>
 
                         <Form.Row>
@@ -76,7 +78,9 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
                     <Form.Group>
                         <Form.Row>
-                            <Form.Label className={styles.label}>Tips</Form.Label>
+                            <Form.Label className={styles.label}>
+                                <FontAwesomeIcon icon={faLightbulb} className={styles.tipsIcon}/> Tips
+                            </Form.Label>
                         </Form.Row>
 
                         <Form.Row>
@@ -105,7 +109,9 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
                     <Form.Group>
                         <Form.Row>
-                            <Form.Label className={styles.label}>Lives</Form.Label>
+                            <Form.Label className={styles.label}>
+                                <FontAwesomeIcon icon={faHeart} className={styles.livesIcon}/> Lives
+                            </Form.Label>
                         </Form.Row>
 
                         <Form.Row>
