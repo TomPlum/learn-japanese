@@ -55,13 +55,16 @@ class Main extends Component<{}, MainState> {
         this.setState({ loading: true });
 
         const { gameSettings } = this.state;
+        console.log(gameSettings)
         const config: KanaConfig = {
             includeHiragana: gameSettings ? gameSettings.kana.includeHiragana : false,
             includeKatakana: gameSettings ? gameSettings.kana.includeKatakana : false,
             includeDiagraphs: gameSettings ? gameSettings.kana.includeDiagraphs : false
         }
 
+
         const kana = this.kanaRepository.read(config);
+        console.log(kana)
 
         this.setState({ loading: false, kana });
     }

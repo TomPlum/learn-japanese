@@ -99,7 +99,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                                 onChange={() => this.setState({ tipQuantity: TipQuantity.THREE })}
                             />
                             <Form.Check
-                            label="Unlimited"
+                                label="Unlimited"
                                 className={styles.check}
                                 checked={tipQuantity === TipQuantity.UNLIMITED}
                                 onChange={() => this.setState({ tipQuantity: TipQuantity.UNLIMITED })}
@@ -153,7 +153,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 includeDiagraphs: includeDiagraphs,
             },
             tipQuantity: tipQuantity,
-            lifeQuantity: lifeQuantity
+            lives: lifeQuantity
         });
     }
 
