@@ -4,19 +4,46 @@ import katakana from "../data/Katakana";
 import KanaType from "../types/KanaType";
 import {KanaData} from "../data/DataTypes";
 
+export interface KanaConfig {
+    includeHiragana?: boolean;
+    includeKatakana?: boolean;
+    includeDiagraphs?: boolean;
+}
+
 export class KanaRepository {
 
-    readAllKana(): Kana[] {
+    read(config: KanaConfig): Kana[] {
+
+        let kana: Kana[];
+
+        if (config?.includeHiragana && config.includeKatakana) {
+            kana = this.readAllKana();
+        } else if (config?.includeHiragana) {
+            kana = this.readHiragana();
+        } else if (config?.includeKatakana) {
+            kana = this.readKatakana();
+        } else {
+            throw new ReferenceError("Invalid Test Settings: No Kana Selected");
+        }
+
+        if (!config.includeDiagraphs) {
+            kana = kana.filter(kana => !kana.isDiagraph());
+        }
+
+        return kana;
+    }
+
+    private readAllKana(): Kana[] {
         const hiragana = this.readHiragana();
         const katakana = this.readKatakana();
         return hiragana.concat(katakana);
     }
 
-    readHiragana(): Kana[] {
+    private readHiragana(): Kana[] {
         return this.convert(hiragana, KanaType.HIRAGANA);
     }
 
-    readKatakana(): Kana[] {
+    private readKatakana(): Kana[] {
         return this.convert(katakana, KanaType.KATAKANA);
     }
 

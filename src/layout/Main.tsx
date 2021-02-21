@@ -2,53 +2,56 @@ import {Component} from "react";
 import {Container} from "react-bootstrap";
 import KanaMemoryTest from "../components/KanaMemoryTest";
 import {Kana} from "../types/Kana";
-import {KanaRepository} from "../repository/KanaRepository";
+import {KanaConfig, KanaRepository} from "../repository/KanaRepository";
 import LoadingSpinner from "./LoadingSpinner";
 import styles from "../styles/sass/layout/Main.module.scss";
-import {TestSettings} from "../components/GameSettingsMenu";
 import GameModeMenu from "../components/GameModeMenu";
 import {GameMode} from "../types/GameMode";
+import {GameSettings} from "../types/GameSettings";
 
 interface MainState {
     loading: boolean;
     kana?: Kana[];
-    testSettings?: TestSettings;
+    gameSettings?: GameSettings;
     selectedGameMode: GameMode;
 }
 
 class Main extends Component<{}, MainState> {
+
+    private readonly kanaRepository = new KanaRepository();
+
     constructor(props: Readonly<{}>) {
         super(props);
         this.state = {
             loading: false,
             kana: undefined,
-            testSettings: undefined,
+            gameSettings: undefined,
             selectedGameMode: GameMode.ROMANJI
         }
     }
 
-    onGameClose = () => this.setState({testSettings: undefined});
+    onGameClose = () => this.setState({gameSettings: undefined});
 
-    onSelectedGameMode = (mode: GameMode, settings: TestSettings) => {
-        this.setState({selectedGameMode: mode, testSettings: settings}, () => this.loadKana());
+    onSelectedGameMode = (mode: GameMode, settings: GameSettings) => {
+        this.setState({selectedGameMode: mode, gameSettings: settings}, () => this.loadKana());
     }
 
     render() {
-        const { loading, testSettings } = this.state;
+        const { loading, gameSettings } = this.state;
 
         return (
           <Container className={styles.wrapper}>
               <LoadingSpinner active={loading} />
-              {!testSettings && <GameModeMenu onSelectedMode={this.onSelectedGameMode}/>}
+              {!gameSettings && <GameModeMenu onSelectedMode={this.onSelectedGameMode}/>}
               {this.renderGame()}
           </Container>
         );
     }
 
     private renderGame() {
-        const { kana, testSettings, selectedGameMode } = this.state;
+        const { kana, gameSettings, selectedGameMode } = this.state;
 
-        if (testSettings && kana) {
+        if (gameSettings && kana) {
             switch (selectedGameMode) {
                 case GameMode.ROMANJI: {
                     return <KanaMemoryTest kana={kana} onClose={this.onGameClose}/>
@@ -64,24 +67,14 @@ class Main extends Component<{}, MainState> {
     private loadKana() {
         this.setState({loading: true});
 
-        const repository = new KanaRepository();
-
-        let kana: Kana[];
-
-        const { testSettings } = this.state;
-        if (testSettings?.includeHiragana && testSettings.includeKatakana) {
-            kana = repository.readAllKana();
-        } else if (testSettings?.includeHiragana) {
-            kana = repository.readHiragana();
-        } else if (testSettings?.includeKatakana) {
-            kana = repository.readKatakana();
-        } else {
-            throw new ReferenceError("Invalid Test Settings: No Kana Selected");
+        const { gameSettings } = this.state;
+        const config: KanaConfig = {
+            includeHiragana: gameSettings ? gameSettings.kana.includeHiragana : false,
+            includeKatakana: gameSettings ? gameSettings.kana.includeKatakana : false,
+            includeDiagraphs: gameSettings ? gameSettings.kana.includeDiagraphs : false
         }
 
-        if (!testSettings.includeDiagraphs) {
-            kana = kana.filter(kana => !kana.isDiagraph());
-        }
+        const kana = this.kanaRepository.read(config);
 
         this.setState({loading: false, kana});
     }
