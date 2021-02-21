@@ -1,9 +1,9 @@
 import { Component } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Col, Container, Form } from "react-bootstrap";
 import { GameMode } from "../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../styles/sass/components/GameSettingsMenu.module.scss";
-import { faCheck, faCircle, faHeart, faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faHeart, faLightbulb, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { GameSettings } from "../types/GameSettings";
 import { TipQuantity } from "../types/TipQuantity";
 import { LifeQuantity } from "../types/LifeQuantity";
@@ -99,7 +99,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                                 onChange={() => this.setState({ tipQuantity: TipQuantity.THREE })}
                             />
                             <Form.Check
-                                label="Unlimited"
+                            label="Unlimited"
                                 className={styles.check}
                                 checked={tipQuantity === TipQuantity.UNLIMITED}
                                 onChange={() => this.setState({ tipQuantity: TipQuantity.UNLIMITED })}
@@ -128,9 +128,16 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                     </Form.Group>
 
                     <Form.Row>
-                        <Button variant="success" block onClick={this.onConfirmation} className={styles.confirm}>
-                            <FontAwesomeIcon icon={faCheck}/> Confirm
-                        </Button>
+                        <Col className={styles.noGuttersLeft}>
+                            <Button variant="danger" block onClick={this.onReset} className={styles.reset}>
+                                <FontAwesomeIcon icon={faUndo}/> Reset
+                            </Button>
+                        </Col>
+                        <Col className={styles.noGuttersRight}>
+                            <Button variant="success" block onClick={this.onConfirmation} className={styles.confirm}>
+                                <FontAwesomeIcon icon={faCheck}/> Confirm
+                            </Button>
+                        </Col>
                     </Form.Row>
                 </Form>
             </Container>
@@ -147,6 +154,16 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
             },
             tipQuantity: tipQuantity,
             lifeQuantity: lifeQuantity
+        });
+    }
+
+    onReset = () => {
+        this.setState({
+            selectedHiragana: true,
+            selectedKatakana: false,
+            includeDiagraphs: false,
+            tipQuantity: TipQuantity.THREE,
+            lifeQuantity: LifeQuantity.FIVE
         });
     }
 }
