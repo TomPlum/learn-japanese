@@ -12,6 +12,7 @@ import RomanjiInput from "./RomanjiInput";
 import { GameSettings } from "../types/GameSettings";
 import LifeDisplay from "./LifeDisplay";
 import { LifeQuantity } from "../types/LifeQuantity";
+import QuitButton from "./QuitButton";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
@@ -69,12 +70,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         />
                     </Col>
                     <Col>
-                        <FontAwesomeIcon
-                            icon={faTimes}
-                            className={styles.close}
-                            onClick={this.close}
-                            title="Quit"
-                        />
+                        <QuitButton onClick={this.close} />
                     </Col>
                     <Col className={styles.lifeDisplayContainer}>
                         {settings.lives !== LifeQuantity.UNLIMITED && <LifeDisplay hearts={lives} />}
