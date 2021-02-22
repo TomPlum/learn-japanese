@@ -1,8 +1,12 @@
 import { Component } from "react";
-import { Container } from "react-bootstrap";
+import { Accordion, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { FailureReason } from "../types/FailureReason";
 import GameResult from "../types/GameResult";
 import QuitButton from "./QuitButton";
+import Feedback from "./Feedback";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "../styles/sass/components/ResultScreen.module.scss";
 
 interface ResultScreenProps {
     onClose: () => void;
@@ -14,18 +18,23 @@ class ResultScreen extends Component<ResultScreenProps> {
         const { result } = this.props;
 
         return (
-            <Container>
-                <QuitButton onClick={this.props.onClose} />
-                {result.success ?
-                    <>
-                        <p>Congratulations, you won!</p>
-                    </> :
+            <Container className={styles.wrapper}>
+                <Row>
+                    <Col>
+                        <QuitButton onClick={this.props.onClose} />
+                    </Col>
+                </Row>
 
-                    <>
-                        <p>Oh no! {this.getFailureMessage(result)}</p>
-                        <p>You answered {this.getKanaScore(result)} correctly.</p>
-                    </>
-                }
+                <Row>
+                    <Col>
+                        <p className={styles.title}>{this.getTitle(result)}</p>
+                        <p className={styles.score}>{this.getKanaScore(result)}</p>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Feedback kana={result.wrongAnswers} />
+                </Row>
             </Container>
         );
     }
@@ -33,19 +42,29 @@ class ResultScreen extends Component<ResultScreenProps> {
     private getKanaScore = (result: GameResult): string => {
         const correct = result.correctAnswers.size;
         const wrong = [...new Set(result.wrongAnswers.map(kana => kana.code))].length;
-        return correct + "/" + (correct + wrong);
+        return "You answered " + correct + "/" + (correct + wrong) + " correctly.";
     }
 
-    private getFailureMessage = (result: GameResult): string => {
+    private getTitle = (result: GameResult): string => {
+        if (result.success) {
+            return "Congratulations, you won!";
+        }
+
+        let failureMessage = "Oh no! ";
+        let reason: string;
+
         switch (result.reason) {
             case FailureReason.NO_LIVES_REMAINING: {
-                return "You ran out of lives!";
+                reason = "You ran out of lives!";
+                break;
             }
             case FailureReason.NO_TIME_REMAINING: {
-                return "You ran out of time!";
+                reason = "You ran out of time!";
+                break;
             }
-            default: return "You lost.";
+            default: reason = "You lost.";
         }
+        return failureMessage + reason;
     }
 }
 

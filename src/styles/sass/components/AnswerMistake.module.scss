@@ -1,0 +1,39 @@
+.kana {
+  color: #282828;
+  font-size: 2.5em;
+  margin: auto;
+}
+
+.timesWrong {
+  color: #e92f2f;
+}
+
+.romanji {
+  color: #2C2F31;
+  font-weight: 600;
+}
+
+.wrapper {
+  border: 2px solid #737373;
+  border-radius: 10px;
+  background-color: #eeeeee;
+  width: 100px;
+  height: 100px;
+  margin: 3px;
+}
+
+.kanaWrapper {
+  height: 65px;
+  text-align: center;
+}
+
+.infoWrapper {
+  height: 20px;
+}
+
+.col {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

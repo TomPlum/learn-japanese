@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.accordion {
+  width: 100%;
+  text-align: center;
+}
+
+.toggle, .toggle:hover, .toggle:active, .toggle:focus {
+  text-decoration: none;
+  outline: none !important;
+}
+
+.toggle {
+  color: #FFF;
+}
+
+.toggle:hover {
+  color: #309fec;
+}
