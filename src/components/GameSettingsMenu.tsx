@@ -3,7 +3,7 @@ import { Button, Col, Container, Dropdown, Form } from "react-bootstrap";
 import { GameMode } from "../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../styles/sass/components/GameSettingsMenu.module.scss";
-import { faCheck, faHeart, faLightbulb, faUndo } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { GameSettings } from "../types/GameSettings";
 import { TipQuantity } from "../types/TipQuantity";
 import { LifeQuantity } from "../types/LifeQuantity";
@@ -20,6 +20,8 @@ interface GameSettingsMenuState {
     includeDiagraphs: boolean;
     tipQuantity: TipQuantity;
     lifeQuantity: LifeQuantity;
+    isTimed: boolean;
+    isCountDown: boolean;
 }
 
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
@@ -30,12 +32,14 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
             selectedKatakana: false,
             includeDiagraphs: false,
             tipQuantity: TipQuantity.THREE,
-            lifeQuantity: LifeQuantity.FIVE
+            lifeQuantity: LifeQuantity.FIVE,
+            isTimed: true,
+            isCountDown: false
         }
     }
 
     render() {
-        const { selectedHiragana, selectedKatakana, includeDiagraphs, tipQuantity } = this.state;
+        const { selectedHiragana, selectedKatakana, includeDiagraphs, tipQuantity, isTimed, isCountDown } = this.state;
 
         return (
             <Container fluid>
@@ -120,6 +124,30 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                         </Form.Row>
                     </Form.Group>
 
+                    <Form.Group>
+                        <Form.Row>
+                            <Form.Label className={styles.label}>
+                                <FontAwesomeIcon icon={faStopwatch} className={styles.timeIcon}/> Time
+                            </Form.Label>
+                        </Form.Row>
+
+                        <Form.Row>
+                            <Form.Check
+                                inline
+                                label="Timed"
+                                className={styles.check}
+                                checked={isTimed}
+                                onChange={() => this.setState({ isTimed: !isTimed, isCountDown: !isCountDown })}
+                            />
+                            <Form.Check
+                                label="Limited Time per Question"
+                                className={styles.check}
+                                checked={isCountDown}
+                                onChange={() => this.setState({ isTimed: !isTimed, isCountDown: !isCountDown })}
+                            />
+                        </Form.Row>
+                    </Form.Group>
+
                     <Form.Row>
                         <Col className={styles.noGuttersLeft}>
                             <Button variant="danger" block onClick={this.onReset} className={styles.reset}>
@@ -138,7 +166,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onConfirmation = () => {
-        const { selectedHiragana, selectedKatakana, includeDiagraphs, tipQuantity, lifeQuantity } = this.state;
+        const { selectedHiragana, selectedKatakana, includeDiagraphs, tipQuantity, lifeQuantity, isTimed } = this.state;
         this.props.onSubmit({
             kana: {
                 includeHiragana: selectedHiragana,
@@ -146,7 +174,8 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 includeDiagraphs: includeDiagraphs,
             },
             tips: tipQuantity,
-            lives: lifeQuantity
+            lives: lifeQuantity,
+            isTimed: isTimed
         });
     }
 

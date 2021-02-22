@@ -16,14 +16,14 @@ export const RELAXED: GameSettings = {
 
 export const ROMANJI: GameSettings = {
     kana: defaultKanaSettings,
-    showTime: true,
+    isTimed: true,
     tips: TipQuantity.THREE,
     lives: LifeQuantity.FIVE
 }
 
 export const KANA: GameSettings = {
     kana: defaultKanaSettings,
-    showTime: true,
+    isTimed: true,
     tips: TipQuantity.THREE,
     lives: LifeQuantity.FIVE
 }
