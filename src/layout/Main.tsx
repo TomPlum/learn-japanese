@@ -8,11 +8,15 @@ import styles from "../styles/sass/layout/Main.module.scss";
 import GameModeMenu from "../components/GameModeMenu";
 import { GameMode } from "../types/GameMode";
 import { GameSettings } from "../types/GameSettings";
+import ResultScreen from "../components/ResultScreen";
+import GameResult from "../types/GameResult";
 
 interface MainState {
     loading: boolean;
     kana?: Kana[];
     gameSettings?: GameSettings;
+    inResultsScreen: boolean;
+    result?: GameResult;
 }
 
 class Main extends Component<{}, MainState> {
@@ -25,22 +29,31 @@ class Main extends Component<{}, MainState> {
             loading: false,
             kana: undefined,
             gameSettings: undefined,
+            inResultsScreen: false,
+            result: undefined
         }
     }
 
     render() {
-        const { loading, gameSettings, kana } = this.state;
+        const { loading, gameSettings, kana, inResultsScreen, result } = this.state;
 
         return (
             <Container className={styles.wrapper}>
                 <LoadingSpinner active={loading}/>
-                {!gameSettings &&
+                {!gameSettings && !inResultsScreen &&
                     <GameModeMenu onSelectedMode={this.onSelectedGameMode}/>
                 }
 
-                {gameSettings && kana &&
-                    <KanaMemoryTest kana={kana} settings={gameSettings} onClose={this.onGameClose}/>
+                {gameSettings && kana && !inResultsScreen &&
+                    <KanaMemoryTest
+                        kana={kana}
+                        settings={gameSettings}
+                        onClose={this.onGameClose}
+                        onFinish={this.onGameFinish}
+                    />
                 }
+
+                {inResultsScreen && result && <ResultScreen result={result} onClose={this.onResultMenuClose}/>}
             </Container>
         );
     }
@@ -50,6 +63,10 @@ class Main extends Component<{}, MainState> {
     }
 
     private onGameClose = () => this.setState({ gameSettings: undefined });
+
+    private onResultMenuClose = () => this.setState({ inResultsScreen: false, result: undefined });
+
+    private onGameFinish = (result: GameResult) => this.setState({ inResultsScreen: true, result, gameSettings: undefined });
 
     private loadKana() {
         this.setState({ loading: true });

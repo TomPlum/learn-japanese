@@ -72,6 +72,8 @@ class Timer extends Component<TimerProps, TimerState> {
         }, () => this.start());
     }
 
+    getCurrentTime = () => this.formatTimeElapsed();
+
     private play = () => {
         this.onChangePausedState();
         this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false });
