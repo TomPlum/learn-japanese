@@ -1,11 +1,9 @@
 import { Component } from "react";
-import { Accordion, Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { FailureReason } from "../types/FailureReason";
 import GameResult from "../types/GameResult";
 import QuitButton from "./QuitButton";
 import Feedback from "./Feedback";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../styles/sass/components/ResultScreen.module.scss";
 
 interface ResultScreenProps {

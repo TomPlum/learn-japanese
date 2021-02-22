@@ -11,6 +11,11 @@ import { GameSettings } from "../types/GameSettings";
 import ResultScreen from "../components/ResultScreen";
 import GameResult from "../types/GameResult";
 
+interface MainProps {
+    onLaunchTest: () => void;
+    onCloseTest: () => void;
+}
+
 interface MainState {
     loading: boolean;
     kana?: Kana[];
@@ -19,11 +24,11 @@ interface MainState {
     result?: GameResult;
 }
 
-class Main extends Component<{}, MainState> {
+class Main extends Component<MainProps, MainState> {
 
     private readonly kanaRepository = new KanaRepository();
 
-    constructor(props: Readonly<{}>) {
+    constructor(props: MainProps | Readonly<MainProps>) {
         super(props);
         this.state = {
             loading: false,
@@ -59,10 +64,14 @@ class Main extends Component<{}, MainState> {
     }
 
     private onSelectedGameMode = (mode: GameMode, settings: GameSettings) => {
+        this.props.onLaunchTest();
         this.setState({ gameSettings: settings }, () => this.loadKana());
     }
 
-    private onGameClose = () => this.setState({ gameSettings: undefined });
+    private onGameClose = () => {
+        this.props.onCloseTest();
+        this.setState({ gameSettings: undefined });
+    }
 
     private onResultMenuClose = () => this.setState({ inResultsScreen: false, result: undefined });
 

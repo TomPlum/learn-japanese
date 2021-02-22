@@ -26,7 +26,7 @@ class Feedback extends Component<FeedbackProps> {
                             <Card.Body className={styles.wrapper}>
                                 {[...this.getMistakeCounts()]
                                     .map(([kana, times]) => { return {kana: kana, times: times }})
-                                    .sort((a, b) => a.times - b.times)
+                                    .sort((a, b) => b.times - a.times)
                                     .map(mistake => <AnswerMistake key={mistake.kana.code} kana={mistake.kana} times={mistake.times} />)
                                 }
                             </Card.Body>
