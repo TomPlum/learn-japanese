@@ -139,7 +139,7 @@ describe("Hiragana", () => {
             expect(kana.column).toBe(KanaColumn.S);
         });
 
-        const t = getMultipleHiragana(["ta", "chi", "tsu", "te", "to", "cha", "chu", "cho"]);
+        const t = getMultipleHiragana(["ta", "chi", "tsu", "te", "to", "cha", "chu", "cho", "dya","dyu", "dyo"]);
         each(t).it("Should return the t column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.T);
         });
@@ -192,6 +192,10 @@ describe("Hiragana", () => {
         it("chu", () => expect(getHiragana("chu").code).toEqual("ちゅ"));
         it("cho", () => expect(getHiragana("cho").code).toEqual("ちょ"));
 
+        it("dya", () => expect(getHiragana("dya").code).toEqual("ぢゃ"));
+        it("dyu", () => expect(getHiragana("dyu").code).toEqual("ぢゅ"));
+        it("dyo", () => expect(getHiragana("dyo").code).toEqual("ぢょ"));
+
         it("nya", () => expect(getHiragana("nya").code).toEqual("にゃ"));
         it("nyu", () => expect(getHiragana("nyu").code).toEqual("にゅ"));
         it("nya", () => expect(getHiragana("nyo").code).toEqual("にょ"));
@@ -223,7 +227,7 @@ describe("Hiragana", () => {
         it("pya", () => expect(getHiragana("pya").code).toEqual("ぴゃ"));
         it("pyu", () => expect(getHiragana("pyu").code).toEqual("ぴゅ"));
         it("pyo", () => expect(getHiragana("pyo").code).toEqual("ぴょ"));
-    })
+    });
 
     function getMultipleHiragana(names: string[]): KanaData[] {
         return names.map(name => getHiragana(name));

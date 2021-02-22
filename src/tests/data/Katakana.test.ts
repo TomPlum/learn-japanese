@@ -129,32 +129,32 @@ describe("Katakana", () => {
             expect(kana.column).toBe(KanaColumn.VOWEL);
         });
 
-        const k = getMultipleKatakana(["ka", "ki", "ku", "ke", "ko"]);
+        const k = getMultipleKatakana(["ka", "ki", "ku", "ke", "ko", "kya", "kyu", "kyo","gya", "gyu", "gyo"]);
         each(k).it("Should return the k column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.K);
         });
 
-        const s = getMultipleKatakana(["sa", "shi", "su", "se", "so"]);
+        const s = getMultipleKatakana(["sa", "shi", "su", "se", "so", "sha", "shu", "sho","ja", "ju","jo"]);
         each(s).it("Should return the s column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.S);
         });
 
-        const t = getMultipleKatakana(["ta", "chi", "tsu", "te", "to"]);
+        const t = getMultipleKatakana(["ta", "chi", "tsu", "te", "to", "cha", "chu", "cho", "dya", "dyu", "dyo"]);
         each(t).it("Should return the t column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.T);
         });
 
-        const n = getMultipleKatakana(["na", "ni", "nu", "ne", "no"]);
+        const n = getMultipleKatakana(["na", "ni", "nu", "ne", "no", "nya", "nyu", "nyo"]);
         each(n).it("Should return the n column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.N);
         });
 
-        const h = getMultipleKatakana(["ha", "hi", "hu", "he", "ho"]);
+        const h = getMultipleKatakana(["ha", "hi", "hu", "he", "ho", "hya", "hyu", "hyo","bya","byu","byo","pya","pyu","pyo"]);
         each(h).it("Should return the h column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.H);
         });
 
-        const m = getMultipleKatakana(["ma", "mi", "mu", "me", "mo"]);
+        const m = getMultipleKatakana(["ma", "mi", "mu", "me", "mo", "mya", "myu", "myo"]);
         each(m).it("Should return the m column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.M);
         });
@@ -164,7 +164,7 @@ describe("Katakana", () => {
             expect(kana.column).toBe(KanaColumn.Y);
         });
 
-        const r = getMultipleKatakana(["ra", "ri", "ru", "re", "ro"]);
+        const r = getMultipleKatakana(["ra", "ri", "ru", "re", "ro", "rya", "ryu", "ryo"]);
         each(r).it("Should return the r column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.R);
         });
@@ -177,6 +177,56 @@ describe("Katakana", () => {
         it("Should return the other column for n", () => {
             expect(getKatakana("n").column).toBe(KanaColumn.OTHER);
         });
+    });
+
+    describe("Diagraph Mappings", () => {
+        it("kya", () => expect(getKatakana("kya").code).toEqual("キャ"));
+        it("kyu", () => expect(getKatakana("kyu").code).toEqual("キュ"));
+        it("kyo", () => expect(getKatakana("kyo").code).toEqual("キョ"));
+
+        it("sha", () => expect(getKatakana("sha").code).toEqual("シャ"));
+        it("shu", () => expect(getKatakana("shu").code).toEqual("シュ"));
+        it("sho", () => expect(getKatakana("sho").code).toEqual("ショ"));
+
+        it("cha", () => expect(getKatakana("cha").code).toEqual("チャ"));
+        it("chu", () => expect(getKatakana("chu").code).toEqual("チュ"));
+        it("cho", () => expect(getKatakana("cho").code).toEqual("チョ"));
+
+        it("dya", () => expect(getKatakana("dya").code).toEqual("ヂャ"));
+        it("dyu", () => expect(getKatakana("dyu").code).toEqual("ヂュ"));
+        it("dyo", () => expect(getKatakana("dyo").code).toEqual("ヂョ"));
+
+        it("nya", () => expect(getKatakana("nya").code).toEqual("ニャ"));
+        it("nyu", () => expect(getKatakana("nyu").code).toEqual("ニュ"));
+        it("nya", () => expect(getKatakana("nyo").code).toEqual("ニョ"));
+
+        it("hya", () => expect(getKatakana("hya").code).toEqual("ヒャ"));
+        it("hyu", () => expect(getKatakana("hyu").code).toEqual("ヒュ"));
+        it("hyo", () => expect(getKatakana("hyo").code).toEqual("ヒョ"));
+
+        it("mya", () => expect(getKatakana("mya").code).toEqual("ミャ"));
+        it("myu", () => expect(getKatakana("myu").code).toEqual("ミュ"));
+        it("myo", () => expect(getKatakana("myo").code).toEqual("ミョ"));
+
+        it("rya", () => expect(getKatakana("rya").code).toEqual("リャ"));
+        it("ryu", () => expect(getKatakana("ryu").code).toEqual("リュ"));
+        it("ryo", () => expect(getKatakana("ryo").code).toEqual("リョ"));
+
+        it("gya", () => expect(getKatakana("gya").code).toEqual("ギャ"));
+        it("gyu", () => expect(getKatakana("gyu").code).toEqual("ギュ"));
+        it("gyo", () => expect(getKatakana("gyo").code).toEqual("ギョ"));
+
+        it("ja", () => expect(getKatakana("ja").code).toEqual("ジャ"));
+        it("ju", () => expect(getKatakana("ju").code).toEqual("ジュ"));
+        it("jo", () => expect(getKatakana("jo").code).toEqual("ジョ"));
+
+        it("bya", () => expect(getKatakana("bya").code).toEqual("ビャ"));
+        it("byu", () => expect(getKatakana("byu").code).toEqual("ビュ"));
+        it("byo", () => expect(getKatakana("byo").code).toEqual("ビョ"));
+
+        it("pya", () => expect(getKatakana("pya").code).toEqual("ピャ"));
+        it("pyu", () => expect(getKatakana("pyu").code).toEqual("ピュ"));
+        it("pyo", () => expect(getKatakana("pyo").code).toEqual("ピョ"));
     });
 
     function getMultipleKatakana(names: string[]): KanaData[] {
