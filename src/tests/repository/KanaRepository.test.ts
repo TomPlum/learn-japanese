@@ -8,9 +8,9 @@ describe("Kana Repository", () => {
 
     it ("should return 194 total kana", () => {
         const data = repository.read({
-            includeDiagraphs: true,
-            includeKatakana: true,
-            includeHiragana: true,
+            diagraphs: true,
+            katakana: true,
+            hiragana: true,
         })
         expect(data.length).toBe(214);
     } )
@@ -18,7 +18,7 @@ describe("Kana Repository", () => {
     describe("Hiragana", () => {
         describe("Read", () => {
             it("Should convert the JSON values into Kana objects", () => {
-                const response = repository.read({includeHiragana: true});
+                const response = repository.read({hiragana: true});
                 expect(response[0]).toStrictEqual(new Kana("あ", "a", KanaType.HIRAGANA, KanaColumn.VOWEL));
             });
         });
@@ -27,7 +27,7 @@ describe("Kana Repository", () => {
     describe("Katakana", () => {
         describe("Read", () => {
             it("Should convert the JSON values into Kana objects", () => {
-                const response = repository.read({includeKatakana: true});
+                const response = repository.read({katakana: true});
                 expect(response[0]).toStrictEqual(new Kana("ア", "a", KanaType.KATAKANA, KanaColumn.VOWEL));
             });
         });

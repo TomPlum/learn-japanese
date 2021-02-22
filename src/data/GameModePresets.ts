@@ -3,9 +3,9 @@ import {TipQuantity} from "../types/TipQuantity";
 import {LifeQuantity} from "../types/LifeQuantity";
 
 const defaultKanaSettings: KanaSettings = {
-    includeHiragana: true,
-    includeKatakana: true,
-    includeDiagraphs: true,
+    hiragana: true,
+    katakana: true,
+    diagraphs: true,
 };
 
 export const RELAXED: GameSettings = {

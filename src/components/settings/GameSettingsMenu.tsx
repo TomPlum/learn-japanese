@@ -4,10 +4,11 @@ import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/GameSettingsMenu.module.scss";
 import { faCheck, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { GameSettings } from "../../types/GameSettings";
+import { GameSettings, KanaSettings } from "../../types/GameSettings";
 import { TipQuantity } from "../../types/TipQuantity";
 import { LifeQuantity } from "../../types/LifeQuantity";
 import LivesSelector from "./LivesSelector";
+import KanaSettingsForm from "./KanaSettingsForm";
 
 interface GameSettingsMenuProps {
     mode: GameMode;
@@ -15,9 +16,7 @@ interface GameSettingsMenuProps {
 }
 
 interface GameSettingsMenuState {
-    selectedHiragana: boolean;
-    selectedKatakana: boolean;
-    includeDiagraphs: boolean;
+    kanaSettings: KanaSettings;
     tipQuantity: TipQuantity;
     lifeQuantity: LifeQuantity;
     isTimed: boolean;
@@ -28,9 +27,11 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     constructor(props: GameSettingsMenuProps | Readonly<GameSettingsMenuProps>) {
         super(props);
         this.state = {
-            selectedHiragana: true,
-            selectedKatakana: false,
-            includeDiagraphs: false,
+            kanaSettings: {
+                hiragana: true,
+                katakana: false,
+                diagraphs: false
+            },
             tipQuantity: TipQuantity.THREE,
             lifeQuantity: LifeQuantity.FIVE,
             isTimed: true,
@@ -39,7 +40,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     render() {
-        const { selectedHiragana, selectedKatakana, includeDiagraphs, tipQuantity, isTimed, isCountDown } = this.state;
+        const { tipQuantity, isTimed, isCountDown } = this.state;
 
         return (
             <Container fluid>
@@ -55,30 +56,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             </Form.Label>
                         </Form.Row>
 
-                        <Form.Row>
-                            <Form.Check
-                                inline
-                                label="Hiragana"
-                                className={styles.check}
-                                checked={selectedHiragana}
-                                onChange={() => this.setState({ selectedHiragana: !selectedHiragana })}
-                                disabled={selectedHiragana && !selectedKatakana}
-                            />
-                            <Form.Check
-                                inline
-                                label="Katakana"
-                                className={styles.check}
-                                checked={selectedKatakana}
-                                onChange={() => this.setState({ selectedKatakana: !selectedKatakana })}
-                                disabled={selectedKatakana && !selectedHiragana}
-                            />
-                            <Form.Check
-                                label="Include Diagraphs"
-                                className={styles.check}
-                                checked={includeDiagraphs}
-                                onChange={() => this.setState({ includeDiagraphs: !includeDiagraphs })}
-                            />
-                        </Form.Row>
+                        <KanaSettingsForm onSelect={(settings) => this.setState({ kanaSettings: settings })} />
                     </Form.Group>
 
                     <Form.Group>
@@ -166,13 +144,9 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onConfirmation = () => {
-        const { selectedHiragana, selectedKatakana, includeDiagraphs, tipQuantity, lifeQuantity, isTimed } = this.state;
+        const { kanaSettings, tipQuantity, lifeQuantity, isTimed } = this.state;
         this.props.onSubmit({
-            kana: {
-                includeHiragana: selectedHiragana,
-                includeKatakana: selectedKatakana,
-                includeDiagraphs: includeDiagraphs,
-            },
+            kana: kanaSettings,
             tips: tipQuantity,
             lives: lifeQuantity,
             isTimed: isTimed
@@ -181,9 +155,11 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
     onReset = () => {
         this.setState({
-            selectedHiragana: true,
-            selectedKatakana: false,
-            includeDiagraphs: false,
+            kanaSettings: {
+                hiragana: true,
+                katakana: false,
+                diagraphs: false
+            },
             tipQuantity: TipQuantity.THREE,
             lifeQuantity: LifeQuantity.FIVE
         });

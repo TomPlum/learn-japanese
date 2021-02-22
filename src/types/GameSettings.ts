@@ -1,5 +1,5 @@
-import {TipQuantity} from "./TipQuantity";
-import {LifeQuantity} from "./LifeQuantity";
+import { TipQuantity } from "./TipQuantity";
+import { LifeQuantity } from "./LifeQuantity";
 
 export interface GameSettings {
     kana: KanaSettings
@@ -10,9 +10,9 @@ export interface GameSettings {
 }
 
 export interface KanaSettings {
-    includeHiragana?: boolean;
-    includeKatakana?: boolean;
-    includeDiagraphs?: boolean;
+    hiragana?: boolean;
+    katakana?: boolean;
+    diagraphs?: boolean;
 }
 
 export interface TimeSettings {
