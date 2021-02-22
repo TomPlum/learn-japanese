@@ -1,15 +1,15 @@
 import { Component } from "react";
 import { Container } from "react-bootstrap";
-import KanaMemoryTest from "../components/KanaMemoryTest";
-import { Kana } from "../types/Kana";
-import { KanaConfig, KanaRepository } from "../repository/KanaRepository";
-import LoadingSpinner from "./LoadingSpinner";
-import styles from "../styles/sass/layout/Main.module.scss";
-import GameModeMenu from "../components/GameModeMenu";
-import { GameMode } from "../types/GameMode";
-import { GameSettings } from "../types/GameSettings";
-import ResultScreen from "../components/ResultScreen";
-import GameResult from "../types/GameResult";
+import KanaMemoryTest from "../game/KanaMemoryTest";
+import { Kana } from "../../types/Kana";
+import { KanaConfig, KanaRepository } from "../../repository/KanaRepository";
+import LoadingSpinner from "../ui/LoadingSpinner";
+import styles from "../../styles/sass/layout/Main.module.scss";
+import GameModeMenu from "./GameModeMenu";
+import { GameMode } from "../../types/GameMode";
+import { GameSettings } from "../../types/GameSettings";
+import ResultScreen from "../results/ResultScreen";
+import GameResult from "../../types/GameResult";
 
 interface MainProps {
     onLaunchTest: () => void;

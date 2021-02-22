@@ -1,7 +1,7 @@
 import './styles/sass/LearnJapanese.module.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from "./layout/Header";
-import Main from "./layout/Main";
+import Header from "./components/layout/Header";
+import Main from "./components/layout/Main";
 import { Component } from "react";
 
 interface LearnJapaneseState {

@@ -1,10 +1,10 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { FailureReason } from "../types/FailureReason";
-import GameResult from "../types/GameResult";
-import QuitButton from "./QuitButton";
+import { FailureReason } from "../../types/FailureReason";
+import GameResult from "../../types/GameResult";
+import QuitButton from "../ui/QuitButton";
 import Feedback from "./Feedback";
-import styles from "../styles/sass/components/ResultScreen.module.scss";
+import styles from "../../styles/sass/components/ResultScreen.module.scss";
 
 interface ResultScreenProps {
     onClose: () => void;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../styles/sass/components/LifeDisplay.module.scss";
+import styles from "../../styles/sass/components/LifeDisplay.module.scss";
 
 interface LifeDisplayProps {
     hearts: number;

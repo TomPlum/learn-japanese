@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Popover } from "react-bootstrap";
-import styles from "../styles/sass/components/PopOver.module.scss";
+import styles from "../../styles/sass/components/PopOver.module.scss";
 
 interface PopOverProps {
     title: string;

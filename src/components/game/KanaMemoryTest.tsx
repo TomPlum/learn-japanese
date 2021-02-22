@@ -1,20 +1,20 @@
 import React, { Component } from "react";
-import { Kana } from "../types/Kana";
+import { Kana } from "../../types/Kana";
 import { Button, Col, Container, Form, ProgressBar, Row } from "react-bootstrap";
 import KanaDisplay from "./KanaDisplay";
-import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
-import { RandomNumberGenerator } from "../utility/RandomNumberGenerator";
+import styles from "../../styles/sass/components/KanaMemoryTest.module.scss";
+import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Timer from "./Timer";
 import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 import TipButton from "./TipButton";
 import RomanjiInput from "./RomanjiInput";
-import { GameSettings } from "../types/GameSettings";
+import { GameSettings } from "../../types/GameSettings";
 import LifeDisplay from "./LifeDisplay";
-import { LifeQuantity } from "../types/LifeQuantity";
-import QuitButton from "./QuitButton";
-import GameResult from "../types/GameResult";
-import { FailureReason } from "../types/FailureReason";
+import { LifeQuantity } from "../../types/LifeQuantity";
+import QuitButton from "../ui/QuitButton";
+import GameResult from "../../types/GameResult";
+import { FailureReason } from "../../types/FailureReason";
 
 interface KanaMemoryTestProps {
     kana: Kana[];

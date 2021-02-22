@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
+import styles from "../../styles/sass/components/KanaMemoryTest.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Button, OverlayTrigger } from "react-bootstrap";
-import PopOver from "./PopOver";
-import { Kana } from "../types/Kana";
-import { KanaColumn } from "../types/KanaColumn";
-import { RandomNumberGenerator } from "../utility/RandomNumberGenerator";
+import PopOver from "../ui/PopOver";
+import { Kana } from "../../types/Kana";
+import { KanaColumn } from "../../types/KanaColumn";
+import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 
 interface TipButtonProps {
     kana: Kana;

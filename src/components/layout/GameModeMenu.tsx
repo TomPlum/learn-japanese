@@ -1,14 +1,14 @@
 import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { GameMode } from "../types/GameMode";
+import { GameMode } from "../../types/GameMode";
 import { faCircle, faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameModeButton from "./GameModeButton";
-import GameSettingsMenu from "./GameSettingsMenu";
-import styles from "../styles/sass/components/GameModeMenu.module.scss";
-import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../data/GameModePresets";
-import { GameSettings } from "../types/GameSettings";
-import { Environment } from "../utility/Environment";
+import GameSettingsMenu from "../settings/GameSettingsMenu";
+import styles from "../../styles/sass/components/GameModeMenu.module.scss";
+import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../../data/GameModePresets";
+import { GameSettings } from "../../types/GameSettings";
+import { Environment } from "../../utility/Environment";
 
 interface GameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;

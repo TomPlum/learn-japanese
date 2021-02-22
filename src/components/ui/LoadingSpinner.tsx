@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Spinner } from "react-bootstrap";
-import styles from "../styles/sass/layout/LoadingSpinner.module.scss";
+import styles from "../../styles/sass/layout/LoadingSpinner.module.scss";
 
 class LoadingSpinner extends Component<{ active: any }> {
     render() {
