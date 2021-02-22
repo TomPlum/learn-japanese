@@ -22,15 +22,22 @@ class KanaDisplay extends Component<KanaTileProps, KanaTileState> {
 
     render() {
         const { isNotifyingIncorrect } = this.state;
-        const { blur } = this.props;
+        const { blur, kana } = this.props;
 
-        const colour = isNotifyingIncorrect ? styles.notifyIncorrect : blur ? styles.blur : styles.kana;
+        const kanaClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.blur : styles.kana;
+        const leftDiagraphClass = isNotifyingIncorrect ? styles.redKana : '';
+        const rightDiagraphClass = isNotifyingIncorrect ? styles.redKana : '';
 
         return (
             <Container className={styles.wrapper}>
-                <p className={colour}>
-                    {this.props.kana.code}
-                </p>
+                {kana.isDiagraph() ?
+                <>
+                    <p className={leftDiagraphClass + " " + styles.diagraphLeft}>{kana.code[0]}</p>
+                    <p className={rightDiagraphClass + " " + styles.diagraphRight}>{kana.code[1]}</p>
+                </> :
+                <p className={kanaClass}>
+                    {kana.code}
+                </p>}
             </Container>
         );
     }
@@ -42,7 +49,7 @@ class KanaDisplay extends Component<KanaTileProps, KanaTileState> {
     }
 
     notifyIncorrect = () => this.setState({ isNotifyingIncorrect: true });
-
 }
+
 
 export default KanaDisplay;

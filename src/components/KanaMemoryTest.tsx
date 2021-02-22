@@ -6,7 +6,7 @@ import styles from "../styles/sass/components/KanaMemoryTest.module.scss";
 import { RandomNumberGenerator } from "../utility/RandomNumberGenerator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Timer from "./Timer";
-import { faRedoAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 import TipButton from "./TipButton";
 import RomanjiInput from "./RomanjiInput";
 import { GameSettings } from "../types/GameSettings";

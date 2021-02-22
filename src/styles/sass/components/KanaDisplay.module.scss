@@ -1,12 +1,28 @@
-.wrapper {
-  text-align: center;
-}
-
 $default-colour: #FFF;
+$diagraph-margin: -15px;
+$font-size: 10em;
 
 @mixin kana {
   color: $default-colour;
-  font-size: 10em;
+  font-size: $font-size;
+}
+
+@mixin diagraph {
+  @include kana;
+  display: inline;
+}
+
+@mixin flashRedAnimation {
+  $notify-animation-time: 0.75s;
+  font-size: $font-size;
+  animation: flashRed ease $notify-animation-time;
+  -webkit-animation: flashRed ease $notify-animation-time;
+  -moz-animation: flashRed ease $notify-animation-time;
+  animation-fill-mode: forwards;
+}
+
+.wrapper {
+  text-align: center;
 }
 
 .blur {
@@ -20,13 +36,23 @@ $default-colour: #FFF;
   @include kana;
 }
 
-.notifyIncorrect {
-  $notify-animation-time: 0.75s;
-  font-size: 10em;
-  animation: flashRed ease $notify-animation-time;
-  -webkit-animation: flashRed ease $notify-animation-time;
-  -moz-animation: flashRed ease $notify-animation-time;
-  animation-fill-mode: forwards;
+.diagraphLeft {
+  @include diagraph;
+  margin-right: $diagraph-margin;
+}
+
+.diagraphRight {
+  @include diagraph;
+  margin-left: $diagraph-margin;
+}
+
+.redKana {
+  @include flashRedAnimation;
+}
+
+.redDiagraph {
+  @include flashRedAnimation;
+  display: inline;
 }
 
 @keyframes flashRed {
