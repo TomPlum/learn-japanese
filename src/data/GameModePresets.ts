@@ -10,32 +10,32 @@ const defaultKanaSettings: KanaSettings = {
 
 export const RELAXED: GameSettings = {
     kana: defaultKanaSettings,
-    tipQuantity: TipQuantity.UNLIMITED,
+    tips: TipQuantity.UNLIMITED,
     lives: LifeQuantity.UNLIMITED
 }
 
 export const ROMANJI: GameSettings = {
     kana: defaultKanaSettings,
     showTime: true,
-    tipQuantity: TipQuantity.THREE,
+    tips: TipQuantity.THREE,
     lives: LifeQuantity.FIVE
 }
 
 export const KANA: GameSettings = {
     kana: defaultKanaSettings,
     showTime: true,
-    tipQuantity: TipQuantity.THREE,
+    tips: TipQuantity.THREE,
     lives: LifeQuantity.FIVE
 }
 
 export const TIME_ATTACK: GameSettings = {
     kana: defaultKanaSettings,
-    tipQuantity: TipQuantity.THREE,
+    tips: TipQuantity.THREE,
     lives: LifeQuantity.FIVE
 }
 
 export const HARDCORE: GameSettings = {
     kana: defaultKanaSettings,
-    tipQuantity: TipQuantity.ZERO,
+    tips: TipQuantity.ZERO,
     lives: LifeQuantity.ONE
 }

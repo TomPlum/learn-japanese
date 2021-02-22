@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Col, Container, Form } from "react-bootstrap";
+import { Button, Col, Container, Dropdown, Form } from "react-bootstrap";
 import { GameMode } from "../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../styles/sass/components/GameSettingsMenu.module.scss";
@@ -7,6 +7,7 @@ import { faCheck, faHeart, faLightbulb, faUndo } from "@fortawesome/free-solid-s
 import { GameSettings } from "../types/GameSettings";
 import { TipQuantity } from "../types/TipQuantity";
 import { LifeQuantity } from "../types/LifeQuantity";
+import LivesSelector from "./LivesSelector";
 
 interface GameSettingsMenuProps {
     mode: GameMode;
@@ -115,15 +116,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                         </Form.Row>
 
                         <Form.Row>
-                            <Form.Control as="select">
-                                {
-                                    Object.keys(LifeQuantity)
-                                        .map(k => Number(LifeQuantity[k as any]))
-                                        .filter(k => !isNaN(k)).map(quantity => {
-                                        return <option key={quantity}>{quantity}</option>
-                                    })
-                                }
-                            </Form.Control>
+                            <LivesSelector onSelect={(quantity) => this.setState({lifeQuantity: quantity})} />
                         </Form.Row>
                     </Form.Group>
 
@@ -152,7 +145,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 includeKatakana: selectedKatakana,
                 includeDiagraphs: includeDiagraphs,
             },
-            tipQuantity: tipQuantity,
+            tips: tipQuantity,
             lives: lifeQuantity
         });
     }

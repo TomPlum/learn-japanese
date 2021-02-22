@@ -3,7 +3,7 @@ import {LifeQuantity} from "./LifeQuantity";
 
 export interface GameSettings {
     kana: KanaSettings
-    tipQuantity: TipQuantity;
+    tips: TipQuantity;
     lives: LifeQuantity;
     showTime?: boolean;
 }
