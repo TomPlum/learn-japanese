@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Kana } from "../../types/Kana";
 import { Button, Col, Container, Form, ProgressBar, Row } from "react-bootstrap";
 import KanaDisplay from "./KanaDisplay";
-import styles from "../../styles/sass/components/KanaMemoryTest.module.scss";
+import styles from "../../styles/sass/components/game/KanaMemoryTest.module.scss";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Timer from "./Timer";

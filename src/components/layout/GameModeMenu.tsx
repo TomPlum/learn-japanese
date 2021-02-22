@@ -5,7 +5,7 @@ import { faCircle, faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameModeButton from "./GameModeButton";
 import GameSettingsMenu from "../settings/GameSettingsMenu";
-import styles from "../../styles/sass/components/GameModeMenu.module.scss";
+import styles from "../../styles/sass/components/layout/GameModeMenu.module.scss";
 import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../../data/GameModePresets";
 import { GameSettings } from "../../types/GameSettings";
 import { Environment } from "../../utility/Environment";

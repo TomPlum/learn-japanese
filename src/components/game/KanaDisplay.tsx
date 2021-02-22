@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Kana } from "../../types/Kana";
 import { Container } from "react-bootstrap";
-import styles from "../../styles/sass/components/KanaDisplay.module.scss";
+import styles from "../../styles/sass/components/game/KanaDisplay.module.scss";
 
 interface KanaTileProps {
     kana: Kana;

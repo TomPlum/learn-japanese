@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "../../styles/sass/components/KanaMemoryTest.module.scss";
+import styles from "../../styles/sass/components/game/KanaMemoryTest.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Button, OverlayTrigger } from "react-bootstrap";

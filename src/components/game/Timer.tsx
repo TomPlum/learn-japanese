@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../styles/sass/components/Timer.module.scss";
+import styles from "../../styles/sass/components/game/Timer.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface TimerProps {

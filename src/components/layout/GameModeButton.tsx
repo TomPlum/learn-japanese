@@ -3,7 +3,7 @@ import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
-import styles from "../../styles/sass/components/GameModeButton.module.scss";
+import styles from "../../styles/sass/components/layout/GameModeButton.module.scss";
 
 interface GameModeButtonProps {
     mode: GameMode;

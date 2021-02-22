@@ -4,7 +4,7 @@ import KanaMemoryTest from "../game/KanaMemoryTest";
 import { Kana } from "../../types/Kana";
 import { KanaConfig, KanaRepository } from "../../repository/KanaRepository";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import styles from "../../styles/sass/layout/Main.module.scss";
+import styles from "../../styles/sass/components/layout/Main.module.scss";
 import GameModeMenu from "./GameModeMenu";
 import { GameMode } from "../../types/GameMode";
 import { GameSettings } from "../../types/GameSettings";

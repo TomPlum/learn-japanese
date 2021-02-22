@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Button, Col, Container, Form } from "react-bootstrap";
 import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/sass/components/GameSettingsMenu.module.scss";
+import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 import { faCheck, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { GameSettings, KanaSettings } from "../../types/GameSettings";
 import { TipQuantity } from "../../types/TipQuantity";
