@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Col, Container, Form } from "react-bootstrap";
+import { Button, Card, Col, Container, Form } from "react-bootstrap";
 import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
@@ -51,65 +51,63 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
     render() {
         return (
-            <Container fluid>
-                <Form>
-                    <Form.Group>
+            <Container fluid className={styles.wrapper}>
+                <Card bg="dark" className="mb-2">
+                    <Card.Header className={styles.header}>
+                        <span className={styles.kanaIcon}>あ</span> Kana
+                    </Card.Header>
+
+                    <Card.Body>
+                        <KanaSettingsForm onSelect={(settings) => this.setState({ kanaSettings: settings })}/>
+                    </Card.Body>
+                </Card>
+
+                <Card bg="dark" className="mb-2">
+                    <Card.Header className={styles.header}>
+                        <FontAwesomeIcon icon={faLightbulb} className={styles.tipsIcon}/> Tips
+                    </Card.Header>
+
+                    <Card.Body>
+                        <TipSettingsForm onChange={(settings) => this.setState({ tipSettings: settings })}/>
+                    </Card.Body>
+                </Card>
+
+                <Card bg="dark" className="mb-2">
+                    <Card.Header className={styles.header}>
+                        <FontAwesomeIcon icon={faHeart} className={styles.livesIcon}/> Lives
+                    </Card.Header>
+
+                    <Card.Body>
+                        <LifeSettingsForm onChange={(settings) => this.setState({ lifeSettings: settings })}/>
+                    </Card.Body>
+                </Card>
+
+                <Card bg="dark" className="mb-2">
+                    <Card.Header className={styles.header}>
+                        <FontAwesomeIcon icon={faStopwatch} className={styles.timeIcon}/> Time
+                    </Card.Header>
+
+                    <Card.Body>
+                        <TimeSettingsForm onChange={(settings) => this.setState({ timeSettings: settings })}/>
+                    </Card.Body>
+                </Card>
+
+                <Card bg="dark" className="mb-2">
+                    <Card.Body>
                         <Form.Row>
-                            <Form.Label className={styles.heading}>{this.props.mode} Game Settings</Form.Label>
+                            <Col className={styles.noGuttersLeft}>
+                                <Button variant="danger" block onClick={this.onReset} className={styles.reset}>
+                                    <FontAwesomeIcon icon={faUndo}/> Reset
+                                </Button>
+                            </Col>
+                            <Col className={styles.noGuttersRight}>
+                                <Button variant="success" block onClick={this.onConfirmation} className={styles.confirm}>
+                                    <FontAwesomeIcon icon={faCheck}/> Confirm
+                                </Button>
+                            </Col>
                         </Form.Row>
-
-                        <Form.Row>
-                            <Form.Label className={styles.label}>
-                                <span className={styles.kanaIcon}>あ</span> Kana
-                            </Form.Label>
-                        </Form.Row>
-
-                        <KanaSettingsForm onSelect={(settings) => this.setState({ kanaSettings: settings })} />
-                    </Form.Group>
-
-                    <Form.Group>
-                        <Form.Row>
-                            <Form.Label className={styles.label}>
-                                <FontAwesomeIcon icon={faLightbulb} className={styles.tipsIcon}/> Tips
-                            </Form.Label>
-                        </Form.Row>
-
-                        <TipSettingsForm onChange={(settings) => this.setState({ tipSettings: settings})} />
-                    </Form.Group>
-
-                    <Form.Group>
-                        <Form.Row>
-                            <Form.Label className={styles.label}>
-                                <FontAwesomeIcon icon={faHeart} className={styles.livesIcon}/> Lives
-                            </Form.Label>
-                        </Form.Row>
-
-                        <LifeSettingsForm onChange={(settings) => this.setState({ lifeSettings: settings})} />
-                    </Form.Group>
-
-                    <Form.Group>
-                        <Form.Row>
-                            <Form.Label className={styles.label}>
-                                <FontAwesomeIcon icon={faStopwatch} className={styles.timeIcon}/> Time
-                            </Form.Label>
-                        </Form.Row>
-
-                        <TimeSettingsForm onChange={(settings) => this.setState({ timeSettings: settings})} />
-                    </Form.Group>
-
-                    <Form.Row>
-                        <Col className={styles.noGuttersLeft}>
-                            <Button variant="danger" block onClick={this.onReset} className={styles.reset}>
-                                <FontAwesomeIcon icon={faUndo}/> Reset
-                            </Button>
-                        </Col>
-                        <Col className={styles.noGuttersRight}>
-                            <Button variant="success" block onClick={this.onConfirmation} className={styles.confirm}>
-                                <FontAwesomeIcon icon={faCheck}/> Confirm
-                            </Button>
-                        </Col>
-                    </Form.Row>
-                </Form>
+                    </Card.Body>
+                </Card>
             </Container>
         );
     }

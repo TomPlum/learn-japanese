@@ -1,3 +1,13 @@
+.wrapper {
+  overflow: auto;
+  max-width: 500px;
+}
+
+.header {
+  padding: 0.5rem 1.24rem;
+  color: #FFF;
+}
+
 .heading {
   font-size: 1.5em;
   color: #FFF;
@@ -10,10 +20,6 @@
 
 .check label {
   color: white;
-}
-
-.confirm, .reset {
-  margin-top: 10px;
 }
 
 .rule {
@@ -29,15 +35,15 @@
   color: #ffcd20;
 }
 
-.kanaIcon {
-  color: #1785e2;
-  font-size: 1.1em;
-}
-
 .noGuttersLeft {
   padding-left: 0 !important;
 }
 
 .noGuttersRight {
   padding-right: 0 !important;
+}
+
+.kanaIcon {
+  color: #1785e2;
+  font-size: 1.1em;
 }
