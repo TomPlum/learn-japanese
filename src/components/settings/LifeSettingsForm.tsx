@@ -17,7 +17,7 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
     constructor(props: LifeSettingsFormProps | Readonly<LifeSettingsFormProps>) {
         super(props);
         this.state = {
-            enabled: true,
+            enabled: false,
             quantity: LifeQuantity.ZERO
         }
     }

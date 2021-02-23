@@ -15,6 +15,7 @@ import { LifeQuantity } from "../../types/LifeQuantity";
 import QuitButton from "../ui/QuitButton";
 import GameResult from "../../types/GameResult";
 import { FailureReason } from "../../types/FailureReason";
+import { TipQuantity } from "../../types/TipQuantity";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
@@ -40,8 +41,11 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
     constructor(props: KanaMemoryTestProps | Readonly<KanaMemoryTestProps>) {
         super(props);
+
         this.timer = React.createRef();
         this.kanaDisplay = React.createRef();
+
+        const { settings } = this.props;
 
         const [firstKana, remainingKana] = this.getRandomKana(this.props.kana);
 
@@ -53,7 +57,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             answer: undefined,
             hasExhaustedKana: false,
             paused: false,
-            lives: this.props.settings.lives.quantity?.valueOf() ?? LifeQuantity.ZERO,
+            lives: settings.lives.quantity?.valueOf() ?? LifeQuantity.ZERO,
         }
     }
 
@@ -100,7 +104,13 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                                 />
                             </Col>
                             <Col xs="auto" className={styles.tipCol}>
-                                <TipButton kana={currentKana} key={currentKana.code} title="Help" disabled={paused}/>
+                                <TipButton
+                                    kana={currentKana}
+                                    quantity={settings.tips.quantity?.valueOf() ?? TipQuantity.ZERO}
+                                    key={currentKana.code}
+                                    title="Help"
+                                    disabled={paused}
+                                />
                             </Col>
                         </Row>
                     </Form.Group>

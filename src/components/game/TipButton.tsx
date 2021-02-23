@@ -1,43 +1,74 @@
 import React, { Component } from "react";
-import styles from "../../styles/sass/components/game/KanaMemoryTest.module.scss";
+import styles from "../../styles/sass/components/game/TipButton.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Button, OverlayTrigger } from "react-bootstrap";
 import PopOver from "../ui/PopOver";
 import { Kana } from "../../types/Kana";
 import { KanaColumn } from "../../types/KanaColumn";
-import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 
 interface TipButtonProps {
     kana: Kana;
+    quantity: number;
     title?: string;
     disabled?: boolean;
+    onUse?: () => void;
 }
 
-class TipButton extends Component<TipButtonProps> {
+interface TipButtonState {
+    remaining: number;
+}
+
+class TipButton extends Component<TipButtonProps, TipButtonState> {
+    constructor(props: TipButtonProps | Readonly<TipButtonProps>) {
+        super(props);
+        this.state = {
+            remaining: this.props.quantity ?? 0
+        }
+    }
+
     render() {
         const { title, disabled } = this.props;
 
         const overlay = <PopOver title={this.getTitle()} text={this.getContent()}/>;
         return (
             <OverlayTrigger trigger="focus" placement="left" overlay={overlay}>
-                <Button variant="warning" className={styles.tip} title={title} disabled={disabled}>
+                <Button
+                    onClick={this.onClick}
+                    variant="warning"
+                    className={styles.tip}
+                    title={title}
+                    disabled={disabled}
+                >
                     <FontAwesomeIcon icon={faLightbulb}/>
                 </Button>
             </OverlayTrigger>
         );
     }
 
+    onClick = () => this.setState({ remaining: this.state.remaining - 1 })
+
     private getTitle = () => {
-        const titles = ["Need some guidance?", "Stuck?", "Need a hint?"];
-        const index = RandomNumberGenerator.getRandomArrayIndex(titles);
-        return titles[index];
+        const { remaining } = this.state;
+        //const titles = ["Need some guidance?", "Stuck?", "Need a hint?"];
+        //const index = RandomNumberGenerator.getRandomArrayIndex(titles);
+        //return titles[index];
+        if (remaining > 0) {
+            return "Need a hint? (" + remaining + " remaining)";
+        }
+        return "Sorry!";
     };
 
     private getContent = () => {
-        const { kana } = this.props;
+        const { kana, quantity } = this.props;
+        if (this.state.remaining <= 0) {
+            return "You've used all " + quantity + " of your tips.";
+        }
         if (kana.column === KanaColumn.OTHER) {
             return "This kana is exceptional. It is not a consonant nor a vowel."
+        }
+        if (kana.isDiagraph()) {
+            return "This is a diagraph."
         }
         return "This kana is from the '" + kana.column + "' column in the " + kana.type + " syllabary.";
     }
