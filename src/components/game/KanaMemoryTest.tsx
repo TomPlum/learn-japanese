@@ -67,6 +67,21 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         }
     }
 
+    componentDidUpdate() {
+        const { lives, correctAnswers, wrongAnswers} = this.state
+        if (lives === 0) {
+            this.props.onFinish({
+                reason: FailureReason.NO_LIVES_REMAINING,
+                success: false,
+                livesRemaining: 0,
+                totalKanaOffered: this.props.kana.length,
+                correctAnswers: correctAnswers,
+                wrongAnswers: wrongAnswers,
+                duration: this.timer.current?.getCurrentTime() ?? undefined
+            });
+        }
+    }
+
     render() {
         const { currentKana, answer, correctAnswers, hasExhaustedKana, paused, lives, hints } = this.state;
         const { kana, settings } = this.props;
@@ -169,21 +184,11 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 });
             }
         } else {
-            const livesRemaining = lives - 1;
             this.kanaDisplay.current?.notifyIncorrect();
+            const livesRemaining = lives - 1;
 
-            if (livesRemaining === 0) {
-                this.props.onFinish({
-                    reason: FailureReason.NO_LIVES_REMAINING,
-                    success: false,
-                    livesRemaining: 0,
-                    totalKanaOffered: this.props.kana.length,
-                    correctAnswers: correctAnswers,
-                    wrongAnswers: wrongAnswers,
-                    duration: this.timer.current?.getCurrentTime() ?? undefined
-                });
-            }
             this.setState({ lives: livesRemaining, wrongAnswers: wrongAnswers.concat(currentKana) });
+
         }
 
         this.setState({ answer: "" });

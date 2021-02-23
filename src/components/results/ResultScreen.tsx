@@ -39,7 +39,8 @@ class ResultScreen extends Component<ResultScreenProps> {
 
     private getKanaScore = (result: GameResult): string => {
         const correct = result.correctAnswers.size;
-        const wrong = [...new Set(result.wrongAnswers.map(kana => kana.code))].length;
+        const wrong = new Set(result.wrongAnswers).size
+        console.log(result);
         return "You answered " + correct + "/" + (correct + wrong) + " correctly.";
     }
 
