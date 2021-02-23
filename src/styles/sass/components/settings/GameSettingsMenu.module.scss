@@ -4,7 +4,7 @@
 }
 
 .header {
-  padding: 0.5rem 1.24rem;
+  padding: 0.5rem 1rem;
   color: #FFF;
 }
 
@@ -27,15 +27,28 @@
   margin-left: 0;
 }
 
+@mixin icon {
+  margin-right: 3px;
+}
+
+.kanaIcon {
+  @include icon;
+  color: #1785e2;
+  font-size: 1.1em;
+}
+
 .livesIcon {
+  @include icon;
   color: #fa2323;
 }
 
 .tipsIcon {
+  @include icon;
   color: #ffcd20;
 }
 
 .timeIcon {
+  @include icon;
   color: #ea8e2d;
 }
 
@@ -45,9 +58,4 @@
 
 .noGuttersRight {
   padding-right: 0 !important;
-}
-
-.kanaIcon {
-  color: #1785e2;
-  font-size: 1.1em;
 }

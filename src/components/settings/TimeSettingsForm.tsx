@@ -32,21 +32,29 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
         const { timed, countdown } = this.state;
 
         return (
-            <Form.Row>
-                <Form.Check
-                    inline
-                    label="Timed"
-                    className={styles.check}
-                    checked={timed}
-                    onChange={this.onChangeTimed}
-                />
-                <Form.Check
-                    label="Limited Time per Question"
-                    className={styles.check}
-                    checked={countdown}
-                    onChange={this.onChangeCountDown}
-                />
-            </Form.Row>
+            <>
+                <Form.Row>
+                    <Form.Check
+                        inline
+                        label="Timed"
+                        type="switch"
+                        id="time"
+                        className={styles.check}
+                        checked={timed}
+                        onChange={this.onChangeTimed}
+                    />
+                </Form.Row>
+                <Form.Row>
+                    <Form.Check
+                        label="Count Down"
+                        type="switch"
+                        id="countdown"
+                        className={styles.check}
+                        checked={countdown}
+                        onChange={this.onChangeCountDown}
+                    />
+                </Form.Row>
+            </>
         );
     }
 
@@ -54,22 +62,44 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
 
     private onChangeTimed = () => {
         const { timed, countdown } = this.state;
-        if (!timed && !countdown) {
-            this.setState({ timed: true });
-        }
         if (timed) {
             this.setState({ timed: false });
+            if (countdown) {
+                this.setState({ countdown: false })
+            }
+        } else {
+            this.setState({ timed: true, countdown: false });
         }
+      /*  if (!timed && !countdown) {
+            this.setState({ timed: true });
+        }
+        if (!timed && countdown) {
+            this.setState({ timed: true, countdown: false });
+        }
+        if (timed) {
+            this.setState({ timed: false, countdown: true });
+        }*/
     }
 
     private onChangeCountDown = () => {
         const { timed, countdown } = this.state;
-        if (!countdown && !timed) {
-            this.setState({ countdown: true });
-        }
         if (countdown) {
             this.setState({ countdown: false });
+            if (timed) {
+                this.setState({ timed: false })
+            }
+        } else {
+            this.setState({ countdown: true, timed: false });
         }
+       /* if (!countdown && !timed) {
+            this.setState({ countdown: true });
+        }
+        if (!countdown && timed) {
+            this.setState({ countdown: true, timed: false });
+        }
+        if (countdown) {
+            this.setState({ countdown: false, timed: true });
+        }*/
     }
 }
 
