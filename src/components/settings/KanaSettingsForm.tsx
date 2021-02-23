@@ -23,6 +23,13 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
         }
     }
 
+    componentDidUpdate(prevProps:Readonly<KanaSettingsProps>, prevState:Readonly<KanaSettingsState>, snapshot?:any) {
+        if (prevState !== this.state) {
+            const { hiragana, katakana, diagraphs } = this.state;
+            this.props.onSelect({ hiragana, katakana, diagraphs });
+        }
+    }
+
     render() {
         const { hiragana, katakana, diagraphs } = this.state;
 
@@ -33,7 +40,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
                     label="Hiragana"
                     className={styles.check}
                     checked={hiragana}
-                    onChange={() => this.setState({ hiragana: !hiragana }, this.handleChange)}
+                    onChange={() => this.setState({ hiragana: !hiragana })}
                     disabled={hiragana && !katakana}
                 />
                 <Form.Check
@@ -41,22 +48,17 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
                     label="Katakana"
                     className={styles.check}
                     checked={katakana}
-                    onChange={() => this.setState({ katakana: !katakana }, this.handleChange)}
+                    onChange={() => this.setState({ katakana: !katakana })}
                     disabled={katakana && !hiragana}
                 />
                 <Form.Check
                     label="Include Diagraphs"
                     className={styles.check}
                     checked={diagraphs}
-                    onChange={() => this.setState({ diagraphs: !diagraphs }, this.handleChange)}
+                    onChange={() => this.setState({ diagraphs: !diagraphs })}
                 />
             </Form.Row>
         );
-    }
-
-    handleChange = () => {
-        const { hiragana, katakana, diagraphs } = this.state;
-        this.props.onSelect({ hiragana, katakana, diagraphs });
     }
 }
 
