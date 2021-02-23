@@ -4,12 +4,12 @@ import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 import { faCheck, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { GameSettings, KanaSettings, TipSettings } from "../../types/GameSettings";
+import { GameSettings, KanaSettings, LifeSettings, TipSettings } from "../../types/GameSettings";
 import { TipQuantity } from "../../types/TipQuantity";
 import { LifeQuantity } from "../../types/LifeQuantity";
-import LivesSelector from "./LivesSelector";
 import KanaSettingsForm from "./KanaSettingsForm";
 import TipSettingsForm from "./TipSettingsForm";
+import LifeSettingsForm from "./LifeSettingsForm";
 
 interface GameSettingsMenuProps {
     mode: GameMode;
@@ -19,7 +19,7 @@ interface GameSettingsMenuProps {
 interface GameSettingsMenuState {
     kanaSettings: KanaSettings;
     tipSettings: TipSettings;
-    lifeQuantity: LifeQuantity;
+    lifeSettings: LifeSettings;
     isTimed: boolean;
     isCountDown: boolean;
 }
@@ -27,6 +27,7 @@ interface GameSettingsMenuState {
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
     constructor(props: GameSettingsMenuProps | Readonly<GameSettingsMenuProps>) {
         super(props);
+        //TODO: Why are defaults here? They are in the form sub-components.
         this.state = {
             kanaSettings: {
                 hiragana: true,
@@ -37,7 +38,10 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 enabled: true,
                 quantity: TipQuantity.THREE
             },
-            lifeQuantity: LifeQuantity.FIVE,
+            lifeSettings: {
+                enabled: true,
+                quantity: LifeQuantity.FIVE
+            },
             isTimed: true,
             isCountDown: false
         }
@@ -80,9 +84,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             </Form.Label>
                         </Form.Row>
 
-                        <Form.Row>
-                            <LivesSelector onSelect={(quantity) => this.setState({lifeQuantity: quantity})} />
-                        </Form.Row>
+                        <LifeSettingsForm onChange={(settings) => this.setState({ lifeSettings: settings})} />
                     </Form.Group>
 
                     <Form.Group>
@@ -127,11 +129,11 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onConfirmation = () => {
-        const { kanaSettings, tipSettings, lifeQuantity, isTimed } = this.state;
+        const { kanaSettings, tipSettings, lifeSettings, isTimed } = this.state;
         this.props.onSubmit({
             kana: kanaSettings,
             tips: tipSettings,
-            lives: lifeQuantity,
+            lives: lifeSettings,
             isTimed: isTimed
         });
     }
@@ -147,7 +149,10 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 enabled: true,
                 quantity: TipQuantity.THREE
             },
-            lifeQuantity: LifeQuantity.FIVE
+            lifeSettings: {
+                enabled: true,
+                quantity: LifeQuantity.FIVE
+            }
         });
     }
 }

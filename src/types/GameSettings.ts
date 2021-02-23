@@ -4,14 +4,19 @@ import { LifeQuantity } from "./LifeQuantity";
 export interface GameSettings {
     kana: KanaSettings
     tips: TipSettings;
-    lives: LifeQuantity;
+    lives: LifeSettings;
     isTimed?: boolean;
     time?: TimeSettings;
 }
 
+export interface LifeSettings {
+    enabled: boolean;
+    quantity?: LifeQuantity;
+}
+
 export interface TipSettings {
     enabled: boolean;
-    quantity: TipQuantity;
+    quantity?: TipQuantity;
 }
 
 export interface KanaSettings {

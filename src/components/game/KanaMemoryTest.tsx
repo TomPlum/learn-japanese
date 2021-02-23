@@ -53,7 +53,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             answer: undefined,
             hasExhaustedKana: false,
             paused: false,
-            lives: this.props.settings.lives.valueOf(),
+            lives: this.props.settings.lives.quantity?.valueOf() ?? LifeQuantity.ZERO,
         }
     }
 
@@ -76,7 +76,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         <QuitButton onClick={this.close} />
                     </Col>
                     <Col className={styles.lifeDisplayContainer}>
-                        {settings.lives !== LifeQuantity.UNLIMITED && <LifeDisplay hearts={lives} />}
+                        {settings.lives.enabled && <LifeDisplay hearts={lives} />}
                     </Col>
                     <Col>
                         {settings.isTimed &&
