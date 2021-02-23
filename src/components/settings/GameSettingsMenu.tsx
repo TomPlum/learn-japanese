@@ -4,11 +4,12 @@ import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 import { faCheck, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { GameSettings, KanaSettings } from "../../types/GameSettings";
+import { GameSettings, KanaSettings, TipSettings } from "../../types/GameSettings";
 import { TipQuantity } from "../../types/TipQuantity";
 import { LifeQuantity } from "../../types/LifeQuantity";
 import LivesSelector from "./LivesSelector";
 import KanaSettingsForm from "./KanaSettingsForm";
+import TipSettingsForm from "./TipSettingsForm";
 
 interface GameSettingsMenuProps {
     mode: GameMode;
@@ -17,7 +18,7 @@ interface GameSettingsMenuProps {
 
 interface GameSettingsMenuState {
     kanaSettings: KanaSettings;
-    tipQuantity: TipQuantity;
+    tipSettings: TipSettings;
     lifeQuantity: LifeQuantity;
     isTimed: boolean;
     isCountDown: boolean;
@@ -32,7 +33,10 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 katakana: false,
                 diagraphs: false
             },
-            tipQuantity: TipQuantity.THREE,
+            tipSettings: {
+                enabled: true,
+                quantity: TipQuantity.THREE
+            },
             lifeQuantity: LifeQuantity.FIVE,
             isTimed: true,
             isCountDown: false
@@ -40,7 +44,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     render() {
-        const { tipQuantity, isTimed, isCountDown } = this.state;
+        const { isTimed, isCountDown } = this.state;
 
         return (
             <Container fluid>
@@ -66,28 +70,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             </Form.Label>
                         </Form.Row>
 
-                        <Form.Row>
-                            <Form.Check
-                                inline
-                                label="1"
-                                className={styles.check}
-                                checked={tipQuantity === TipQuantity.ONE}
-                                onChange={() => this.setState({ tipQuantity: TipQuantity.ONE })}
-                            />
-                            <Form.Check
-                                inline
-                                label="3"
-                                className={styles.check}
-                                checked={tipQuantity === TipQuantity.THREE}
-                                onChange={() => this.setState({ tipQuantity: TipQuantity.THREE })}
-                            />
-                            <Form.Check
-                                label="Unlimited"
-                                className={styles.check}
-                                checked={tipQuantity === TipQuantity.UNLIMITED}
-                                onChange={() => this.setState({ tipQuantity: TipQuantity.UNLIMITED })}
-                            />
-                        </Form.Row>
+                        <TipSettingsForm onChange={(settings) => this.setState({ tipSettings: settings})} />
                     </Form.Group>
 
                     <Form.Group>
@@ -144,10 +127,10 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onConfirmation = () => {
-        const { kanaSettings, tipQuantity, lifeQuantity, isTimed } = this.state;
+        const { kanaSettings, tipSettings, lifeQuantity, isTimed } = this.state;
         this.props.onSubmit({
             kana: kanaSettings,
-            tips: tipQuantity,
+            tips: tipSettings,
             lives: lifeQuantity,
             isTimed: isTimed
         });
@@ -160,7 +143,10 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 katakana: false,
                 diagraphs: false
             },
-            tipQuantity: TipQuantity.THREE,
+            tipSettings: {
+                enabled: true,
+                quantity: TipQuantity.THREE
+            },
             lifeQuantity: LifeQuantity.FIVE
         });
     }

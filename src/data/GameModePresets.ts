@@ -1,41 +1,46 @@
-import {GameSettings, KanaSettings} from "../types/GameSettings";
-import {TipQuantity} from "../types/TipQuantity";
-import {LifeQuantity} from "../types/LifeQuantity";
+import { GameSettings, KanaSettings, TipSettings } from "../types/GameSettings";
+import { TipQuantity } from "../types/TipQuantity";
+import { LifeQuantity } from "../types/LifeQuantity";
 
 const defaultKanaSettings: KanaSettings = {
     hiragana: true,
     katakana: true,
     diagraphs: true,
-};
+}
+
+const defaultTipSettings: TipSettings = {
+    enabled: true,
+    quantity: TipQuantity.UNLIMITED
+}
 
 export const RELAXED: GameSettings = {
     kana: defaultKanaSettings,
-    tips: TipQuantity.UNLIMITED,
+    tips: defaultTipSettings,
     lives: LifeQuantity.UNLIMITED
 }
 
 export const ROMANJI: GameSettings = {
     kana: defaultKanaSettings,
     isTimed: true,
-    tips: TipQuantity.THREE,
+    tips: { enabled: true, quantity: TipQuantity.THREE },
     lives: LifeQuantity.FIVE
 }
 
 export const KANA: GameSettings = {
     kana: defaultKanaSettings,
     isTimed: true,
-    tips: TipQuantity.THREE,
+    tips: { enabled: true, quantity: TipQuantity.THREE },
     lives: LifeQuantity.FIVE
 }
 
 export const TIME_ATTACK: GameSettings = {
     kana: defaultKanaSettings,
-    tips: TipQuantity.THREE,
+    tips: { enabled: true, quantity: TipQuantity.THREE },
     lives: LifeQuantity.FIVE
 }
 
 export const HARDCORE: GameSettings = {
     kana: defaultKanaSettings,
-    tips: TipQuantity.ZERO,
+    tips: { enabled: false, quantity: TipQuantity.ZERO },
     lives: LifeQuantity.ONE
 }
