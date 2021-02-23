@@ -49,6 +49,13 @@ class TipSettingsForm extends Component<TipSettingsFormProps, TipSettingsFormSta
                     onChange={() => this.setState({ quantity: TipQuantity.THREE })}
                 />
                 <Form.Check
+                    inline
+                    label="5"
+                    className={styles.check}
+                    checked={quantity === TipQuantity.FIVE}
+                    onChange={() => this.setState({ quantity: TipQuantity.FIVE })}
+                />
+                <Form.Check
                     label="Unlimited"
                     className={styles.check}
                     checked={quantity === TipQuantity.UNLIMITED}

@@ -36,7 +36,7 @@ class TipButton extends Component<TipButtonProps, TipButtonState> {
                 <Button
                     onClick={this.onClick}
                     variant="warning"
-                    className={styles.tip}
+                    className={!this.hasExhaustedTips() ? styles.tip : styles.disabled}
                     title={title}
                     disabled={disabled}
                 >
@@ -61,16 +61,20 @@ class TipButton extends Component<TipButtonProps, TipButtonState> {
 
     private getContent = () => {
         const { kana, quantity } = this.props;
-        if (this.state.remaining <= 0) {
+        if (this.hasExhaustedTips()) {
             return "You've used all " + quantity + " of your tips.";
         }
         if (kana.column === KanaColumn.OTHER) {
             return "This kana is exceptional. It is not a consonant nor a vowel."
         }
         if (kana.isDiagraph()) {
-            return "This is a diagraph."
+            return "Diagraphs usually drop the 1st kana's 2nd letter when transcribed."
         }
         return "This kana is from the '" + kana.column + "' column in the " + kana.type + " syllabary.";
+    }
+
+    private hasExhaustedTips = (): boolean => {
+        return this.state.remaining <= 0;
     }
 }
 
