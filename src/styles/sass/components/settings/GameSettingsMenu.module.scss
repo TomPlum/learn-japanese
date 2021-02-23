@@ -1,0 +1,61 @@
+.wrapper {
+  overflow: auto;
+  max-width: 500px;
+}
+
+.header {
+  padding: 0.5rem 1rem;
+  color: #FFF;
+}
+
+.heading {
+  font-size: 1.5em;
+  color: #FFF;
+  text-align: center;
+}
+
+.label {
+  color: #dedede;
+}
+
+.check label {
+  color: white;
+}
+
+.rule {
+  background-color: white;
+  margin-left: 0;
+}
+
+@mixin icon {
+  margin-right: 3px;
+}
+
+.kanaIcon {
+  @include icon;
+  color: #1785e2;
+  font-size: 1.1em;
+}
+
+.livesIcon {
+  @include icon;
+  color: #fa2323;
+}
+
+.tipsIcon {
+  @include icon;
+  color: #ffcd20;
+}
+
+.timeIcon {
+  @include icon;
+  color: #ea8e2d;
+}
+
+.noGuttersLeft {
+  padding-left: 0 !important;
+}
+
+.noGuttersRight {
+  padding-right: 0 !important;
+}

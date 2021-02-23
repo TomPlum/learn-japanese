@@ -1,20 +1,31 @@
-import {TipQuantity} from "./TipQuantity";
-import {LifeQuantity} from "./LifeQuantity";
+import { HintQuantity } from "./HintQuantity";
+import { LifeQuantity } from "./LifeQuantity";
 
 export interface GameSettings {
     kana: KanaSettings
-    tips: TipQuantity;
-    lives: LifeQuantity;
-    isTimed?: boolean;
-    time?: TimeSettings;
+    hints: TipSettings;
+    lives: LifeSettings;
+    time: TimeSettings;
+}
+
+export interface LifeSettings {
+    enabled: boolean;
+    quantity?: LifeQuantity;
+}
+
+export interface TipSettings {
+    enabled: boolean;
+    quantity?: HintQuantity;
 }
 
 export interface KanaSettings {
-    includeHiragana?: boolean;
-    includeKatakana?: boolean;
-    includeDiagraphs?: boolean;
+    hiragana?: boolean;
+    katakana?: boolean;
+    diagraphs?: boolean;
 }
 
 export interface TimeSettings {
-    secondsPerQuestion: number;
+    timed: boolean;
+    countdown: boolean;
+    secondsPerQuestion?: number;
 }

@@ -5,9 +5,9 @@ import KanaType from "../types/KanaType";
 import {KanaData} from "../data/DataTypes";
 
 export interface KanaConfig {
-    includeHiragana?: boolean;
-    includeKatakana?: boolean;
-    includeDiagraphs?: boolean;
+    hiragana?: boolean;
+    katakana?: boolean;
+    diagraphs?: boolean;
 }
 
 export class KanaRepository {
@@ -16,17 +16,17 @@ export class KanaRepository {
 
         let kana: Kana[];
 
-        if (config?.includeHiragana && config.includeKatakana) {
+        if (config?.hiragana && config.katakana) {
             kana = this.readAllKana();
-        } else if (config?.includeHiragana) {
+        } else if (config?.hiragana) {
             kana = this.readHiragana();
-        } else if (config?.includeKatakana) {
+        } else if (config?.katakana) {
             kana = this.readKatakana();
         } else {
             throw new ReferenceError("Invalid Test Settings: No Kana Selected");
         }
 
-        if (!config.includeDiagraphs) {
+        if (!config.diagraphs) {
             kana = kana.filter(kana => !kana.isDiagraph());
         }
 

@@ -1,0 +1,19 @@
+@import "src/styles/sass/colours";
+
+.logo {
+  height: 34px;
+}
+
+.navbar {
+  background-color: $dark-1;
+}
+
+.brand {
+  color: #FFF !important;
+}
+
+.search {
+  color: rgb(181, 175, 166);
+  background-color: rgb(24, 26, 27);
+  border-color: rgb(60, 65, 68);
+}
