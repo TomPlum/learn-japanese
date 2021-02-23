@@ -7,7 +7,7 @@ import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Timer from "./Timer";
 import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
-import TipButton from "./TipButton";
+import HintButton from "./HintButton";
 import RomanjiInput from "./RomanjiInput";
 import { GameSettings } from "../../types/GameSettings";
 import LifeDisplay from "./LifeDisplay";
@@ -15,7 +15,7 @@ import { LifeQuantity } from "../../types/LifeQuantity";
 import QuitButton from "../ui/QuitButton";
 import GameResult from "../../types/GameResult";
 import { FailureReason } from "../../types/FailureReason";
-import { TipQuantity } from "../../types/TipQuantity";
+import { HintQuantity } from "../../types/HintQuantity";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
@@ -33,6 +33,8 @@ interface KanaMemoryTestState {
     hasExhaustedKana: boolean;
     paused: boolean;
     lives: number;
+    hints: number;
+    hasUsedHintThisKana: boolean;
 }
 
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
@@ -58,11 +60,13 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             hasExhaustedKana: false,
             paused: false,
             lives: settings.lives.quantity?.valueOf() ?? LifeQuantity.ZERO,
+            hints: settings.hints.quantity?.valueOf() ?? 0,
+            hasUsedHintThisKana: false
         }
     }
 
     render() {
-        const { currentKana, answer, correctAnswers, hasExhaustedKana, paused, lives } = this.state;
+        const { currentKana, answer, correctAnswers, hasExhaustedKana, paused, lives, hints } = this.state;
         const { kana, settings } = this.props;
 
         return (
@@ -104,12 +108,14 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                                 />
                             </Col>
                             <Col xs="auto" className={styles.tipCol}>
-                                <TipButton
+                                <HintButton
                                     kana={currentKana}
-                                    quantity={settings.tips.quantity?.valueOf() ?? TipQuantity.ZERO}
+                                    quantity={hints}
+                                    totalQuantity={settings.hints?.quantity?.valueOf() ?? 0}
                                     key={currentKana.code}
-                                    title="Help"
-                                    disabled={paused}
+                                    title="Get a Hint"
+                                    disabled={paused || !settings.hints.enabled}
+                                    onUse={() => this.setState({ hasUsedHintThisKana: true })}
                                 />
                             </Col>
                         </Row>
@@ -130,7 +136,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     answerQuestion = () => {
-        const { currentKana, correctAnswers, wrongAnswers, answer, remainingKana, lives } = this.state;
+        const { currentKana, correctAnswers, wrongAnswers, answer, remainingKana, lives, hints } = this.state;
 
         if (answer === currentKana.romanji) {
             //Add the current kana to the correct answers set.
@@ -138,18 +144,23 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
             if (remainingKana.length === 0) {
                 //If we're out of kana, stop the timer and let the component know the pool has been exhausted.
-                if (this.timer.current != null) this.timer.current.stop();
+                this.timer.current?.stop();
                 this.setState({ hasExhaustedKana: true, paused: false });
             } else {
                 //Pick a random remaining kana and remove it from the pool.
                 const [nextKana, nextRemainingKana] = this.getRandomKana(remainingKana);
 
                 //Update the next kana to be displayed and the remaining kana with one less.
-                this.setState({ currentKana: nextKana, remainingKana: nextRemainingKana });
+                this.setState({
+                    currentKana: nextKana,
+                    remainingKana: nextRemainingKana,
+                    hasUsedHintThisKana: false,
+                    hints: hints - 1
+                });
             }
         } else {
             const livesRemaining = lives - 1;
-            if (this.kanaDisplay.current != null) this.kanaDisplay.current.notifyIncorrect();
+            this.kanaDisplay.current?.notifyIncorrect();
 
             if (livesRemaining === 0) {
                 this.props.onFinish({
@@ -159,7 +170,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     totalKanaOffered: this.props.kana.length,
                     correctAnswers: correctAnswers,
                     wrongAnswers: wrongAnswers,
-                    duration: this.timer.current ? this.timer.current.getCurrentTime() : undefined
+                    duration: this.timer.current?.getCurrentTime() ?? undefined
                 });
             }
             this.setState({ lives: livesRemaining, wrongAnswers: wrongAnswers.concat(currentKana) });
@@ -180,15 +191,20 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             paused: false,
             hasExhaustedKana: false,
         });
-        if (this.timer.current != null) this.timer.current.restart();
+        this.timer.current?.restart();
     }
 
-    close = () => this.props.onClose();
-
-    onPaused = () => {
-        const paused = this.state.paused;
-        this.setState({ paused: !paused })
+    private onUseHint = () => {
+        const { hints, hasUsedHintThisKana } = this.state;
+        if (!hasUsedHintThisKana) {
+            this.setState({ hints: hints - 1, hasUsedHintThisKana: true });
+        }
     }
+
+    private close = () => this.props.onClose();
+
+    private onPaused = () => this.setState({ paused: !this.state.paused })
+
 
     /**
      * Picks a random Kana from the given pool and removes it.

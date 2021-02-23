@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { TipSettings } from "../../types/GameSettings";
-import { TipQuantity } from "../../types/TipQuantity";
+import { HintQuantity } from "../../types/HintQuantity";
 import { Form } from "react-bootstrap";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 
@@ -10,15 +10,15 @@ interface TipSettingsFormProps {
 
 interface TipSettingsFormState {
     enabled: boolean;
-    quantity: TipQuantity;
+    quantity: HintQuantity;
 }
 
-class TipSettingsForm extends Component<TipSettingsFormProps, TipSettingsFormState> {
+class HintSettingsForm extends Component<TipSettingsFormProps, TipSettingsFormState> {
     constructor(props: TipSettingsFormProps | Readonly<TipSettingsFormProps>) {
         super(props);
         this.state = {
             enabled: true,
-            quantity: TipQuantity.THREE
+            quantity: HintQuantity.THREE
         }
     }
 
@@ -38,34 +38,34 @@ class TipSettingsForm extends Component<TipSettingsFormProps, TipSettingsFormSta
                     inline
                     label="1"
                     className={styles.check}
-                    checked={quantity === TipQuantity.ONE}
-                    onChange={() => this.setState({ quantity: TipQuantity.ONE })}
+                    checked={quantity === HintQuantity.ONE}
+                    onChange={() => this.setState({ quantity: HintQuantity.ONE })}
                 />
                 <Form.Check
                     inline
                     label="3"
                     className={styles.check}
-                    checked={quantity === TipQuantity.THREE}
-                    onChange={() => this.setState({ quantity: TipQuantity.THREE })}
+                    checked={quantity === HintQuantity.THREE}
+                    onChange={() => this.setState({ quantity: HintQuantity.THREE })}
                 />
                 <Form.Check
                     inline
                     label="5"
                     className={styles.check}
-                    checked={quantity === TipQuantity.FIVE}
-                    onChange={() => this.setState({ quantity: TipQuantity.FIVE })}
+                    checked={quantity === HintQuantity.FIVE}
+                    onChange={() => this.setState({ quantity: HintQuantity.FIVE })}
                 />
                 <Form.Check
                     label="Unlimited"
                     className={styles.check}
-                    checked={quantity === TipQuantity.UNLIMITED}
-                    onChange={() => this.setState({ quantity: TipQuantity.UNLIMITED })}
+                    checked={quantity === HintQuantity.UNLIMITED}
+                    onChange={() => this.setState({ quantity: HintQuantity.UNLIMITED })}
                 />
             </Form.Row>
         );
     }
 
-    reset = () => this.setState({ enabled: true, quantity: TipQuantity.THREE });
+    reset = () => this.setState({ enabled: true, quantity: HintQuantity.THREE });
 }
 
-export default TipSettingsForm;
+export default HintSettingsForm;

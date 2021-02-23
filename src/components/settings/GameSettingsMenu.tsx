@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 import { faCheck, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { GameSettings, KanaSettings, LifeSettings, TimeSettings, TipSettings } from "../../types/GameSettings";
-import { TipQuantity } from "../../types/TipQuantity";
+import { HintQuantity } from "../../types/HintQuantity";
 import { LifeQuantity } from "../../types/LifeQuantity";
 import KanaSettingsForm from "./KanaSettingsForm";
-import TipSettingsForm from "./TipSettingsForm";
+import HintSettingsForm from "./HintSettingsForm";
 import LifeSettingsForm from "./LifeSettingsForm";
 import TimeSettingsForm from "./TimeSettingsForm";
 
@@ -19,7 +19,7 @@ interface GameSettingsMenuProps {
 
 interface GameSettingsMenuState {
     kanaSettings: KanaSettings;
-    tipSettings: TipSettings;
+    hintSettings: TipSettings;
     lifeSettings: LifeSettings;
     timeSettings: TimeSettings;
 }
@@ -27,7 +27,7 @@ interface GameSettingsMenuState {
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
 
     private readonly kana: React.RefObject<KanaSettingsForm>;
-    private readonly tips: React.RefObject<TipSettingsForm>;
+    private readonly hints: React.RefObject<HintSettingsForm>;
     private readonly lives: React.RefObject<LifeSettingsForm>;
     private readonly time: React.RefObject<TimeSettingsForm>;
 
@@ -35,7 +35,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
         super(props);
 
         this.kana = React.createRef();
-        this.tips = React.createRef();
+        this.hints = React.createRef();
         this.lives = React.createRef();
         this.time = React.createRef();
 
@@ -46,9 +46,9 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 katakana: false,
                 diagraphs: false
             },
-            tipSettings: {
+            hintSettings: {
                 enabled: true,
-                quantity: TipQuantity.THREE
+                quantity: HintQuantity.THREE
             },
             lifeSettings: {
                 enabled: true,
@@ -76,11 +76,11 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
                 <Card bg="dark" className="mb-2">
                     <Card.Header className={styles.header}>
-                        <FontAwesomeIcon icon={faLightbulb} className={styles.tipsIcon}/> Tips
+                        <FontAwesomeIcon icon={faLightbulb} className={styles.tipsIcon}/> Hints
                     </Card.Header>
 
                     <Card.Body>
-                        <TipSettingsForm ref={this.tips} onChange={(settings) => this.setState({ tipSettings: settings })}/>
+                        <HintSettingsForm ref={this.hints} onChange={(settings) => this.setState({ hintSettings: settings })}/>
                     </Card.Body>
                 </Card>
 
@@ -125,10 +125,10 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onConfirmation = () => {
-        const { kanaSettings, tipSettings, lifeSettings, timeSettings } = this.state;
+        const { kanaSettings, hintSettings, lifeSettings, timeSettings } = this.state;
         this.props.onSubmit({
             kana: kanaSettings,
-            tips: tipSettings,
+            hints: hintSettings,
             lives: lifeSettings,
             time: timeSettings
         });
@@ -136,7 +136,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
     onReset = () => {
         this.kana.current?.reset();
-        this.tips.current?.reset();
+        this.hints.current?.reset();
         this.lives.current?.reset();
         this.time.current?.reset();
     }

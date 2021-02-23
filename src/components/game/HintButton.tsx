@@ -7,36 +7,25 @@ import PopOver from "../ui/PopOver";
 import { Kana } from "../../types/Kana";
 import { KanaColumn } from "../../types/KanaColumn";
 
-interface TipButtonProps {
+interface HintButtonProps {
     kana: Kana;
-    quantity: number;
+    quantity: number
+    totalQuantity?: number;
     title?: string;
     disabled?: boolean;
     onUse?: () => void;
 }
 
-interface TipButtonState {
-    remaining: number;
-}
-
-class TipButton extends Component<TipButtonProps, TipButtonState> {
-    constructor(props: TipButtonProps | Readonly<TipButtonProps>) {
-        super(props);
-        this.state = {
-            remaining: this.props.quantity ?? 0
-        }
-    }
-
+class HintButton extends Component<HintButtonProps> {
     render() {
-        const { title, disabled } = this.props;
+        const { title, disabled, quantity } = this.props;
 
         const overlay = <PopOver title={this.getTitle()} text={this.getContent()}/>;
         return (
-            <OverlayTrigger trigger="focus" placement="left" overlay={overlay}>
+            <OverlayTrigger onToggle={this.props.onUse} trigger="focus" placement="left" overlay={overlay}>
                 <Button
-                    onClick={this.onClick}
                     variant="warning"
-                    className={!this.hasExhaustedTips() ? styles.tip : styles.disabled}
+                    className={quantity > 0 ? styles.tip : styles.disabled}
                     title={title}
                     disabled={disabled}
                 >
@@ -46,23 +35,22 @@ class TipButton extends Component<TipButtonProps, TipButtonState> {
         );
     }
 
-    onClick = () => this.setState({ remaining: this.state.remaining - 1 })
 
     private getTitle = () => {
-        const { remaining } = this.state;
+        const { quantity, totalQuantity } = this.props;
         //const titles = ["Need some guidance?", "Stuck?", "Need a hint?"];
         //const index = RandomNumberGenerator.getRandomArrayIndex(titles);
         //return titles[index];
-        if (remaining > 0) {
-            return "Need a hint? (" + remaining + " remaining)";
+        if (quantity > 0) {
+            return "Need a hint? (" + (quantity - 1) + "/" + totalQuantity + " remaining)";
         }
         return "Sorry!";
     };
 
     private getContent = () => {
         const { kana, quantity } = this.props;
-        if (this.hasExhaustedTips()) {
-            return "You've used all " + quantity + " of your tips.";
+        if (quantity <= 0) {
+            return "You've used all of your hints.";
         }
         if (kana.column === KanaColumn.OTHER) {
             return "This kana is exceptional. It is not a consonant nor a vowel."
@@ -73,9 +61,6 @@ class TipButton extends Component<TipButtonProps, TipButtonState> {
         return "This kana is from the '" + kana.column + "' column in the " + kana.type + " syllabary.";
     }
 
-    private hasExhaustedTips = (): boolean => {
-        return this.state.remaining <= 0;
-    }
 }
 
-export default TipButton;
+export default HintButton;

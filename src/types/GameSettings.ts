@@ -1,9 +1,9 @@
-import { TipQuantity } from "./TipQuantity";
+import { HintQuantity } from "./HintQuantity";
 import { LifeQuantity } from "./LifeQuantity";
 
 export interface GameSettings {
     kana: KanaSettings
-    tips: TipSettings;
+    hints: TipSettings;
     lives: LifeSettings;
     time: TimeSettings;
 }
@@ -15,7 +15,7 @@ export interface LifeSettings {
 
 export interface TipSettings {
     enabled: boolean;
-    quantity?: TipQuantity;
+    quantity?: HintQuantity;
 }
 
 export interface KanaSettings {
