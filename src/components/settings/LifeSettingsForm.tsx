@@ -39,6 +39,7 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
         );
     }
 
+    reset = () => this.setState({ enabled: false });
 }
 
 export default LifeSettingsForm;

@@ -50,6 +50,8 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
         );
     }
 
+    reset = () => this.setState({ timed: true, countdown: false });
+
     private onChangeTimed = () => {
         const { timed, countdown } = this.state;
         if (!timed && !countdown) {

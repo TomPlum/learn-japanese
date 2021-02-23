@@ -57,6 +57,8 @@ class TipSettingsForm extends Component<TipSettingsFormProps, TipSettingsFormSta
             </Form.Row>
         );
     }
+
+    reset = () => this.setState({ enabled: true, quantity: TipQuantity.THREE });
 }
 
 export default TipSettingsForm;

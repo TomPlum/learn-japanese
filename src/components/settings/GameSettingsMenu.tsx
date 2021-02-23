@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Button, Card, Col, Container, Form } from "react-bootstrap";
 import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,8 +25,20 @@ interface GameSettingsMenuState {
 }
 
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
+
+    private readonly kana: React.RefObject<KanaSettingsForm>;
+    private readonly tips: React.RefObject<TipSettingsForm>;
+    private readonly lives: React.RefObject<LifeSettingsForm>;
+    private readonly time: React.RefObject<TimeSettingsForm>;
+
     constructor(props: GameSettingsMenuProps | Readonly<GameSettingsMenuProps>) {
         super(props);
+
+        this.kana = React.createRef();
+        this.tips = React.createRef();
+        this.lives = React.createRef();
+        this.time = React.createRef();
+
         //TODO: Why are defaults here? They are in the form sub-components.
         this.state = {
             kanaSettings: {
@@ -58,7 +70,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                     </Card.Header>
 
                     <Card.Body>
-                        <KanaSettingsForm onSelect={(settings) => this.setState({ kanaSettings: settings })}/>
+                        <KanaSettingsForm ref={this.kana} onSelect={(settings) => this.setState({ kanaSettings: settings })}/>
                     </Card.Body>
                 </Card>
 
@@ -68,7 +80,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                     </Card.Header>
 
                     <Card.Body>
-                        <TipSettingsForm onChange={(settings) => this.setState({ tipSettings: settings })}/>
+                        <TipSettingsForm ref={this.tips} onChange={(settings) => this.setState({ tipSettings: settings })}/>
                     </Card.Body>
                 </Card>
 
@@ -78,7 +90,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                     </Card.Header>
 
                     <Card.Body>
-                        <LifeSettingsForm onChange={(settings) => this.setState({ lifeSettings: settings })}/>
+                        <LifeSettingsForm ref={this.lives} onChange={(settings) => this.setState({ lifeSettings: settings })}/>
                     </Card.Body>
                 </Card>
 
@@ -88,7 +100,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                     </Card.Header>
 
                     <Card.Body>
-                        <TimeSettingsForm onChange={(settings) => this.setState({ timeSettings: settings })}/>
+                        <TimeSettingsForm ref={this.time} onChange={(settings) => this.setState({ timeSettings: settings })}/>
                     </Card.Body>
                 </Card>
 
@@ -123,25 +135,10 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onReset = () => {
-        this.setState({
-            kanaSettings: {
-                hiragana: true,
-                katakana: false,
-                diagraphs: false
-            },
-            tipSettings: {
-                enabled: true,
-                quantity: TipQuantity.THREE
-            },
-            lifeSettings: {
-                enabled: true,
-                quantity: LifeQuantity.FIVE
-            },
-            timeSettings: {
-                timed: true,
-                countdown: false
-            }
-        });
+        this.kana.current?.reset();
+        this.tips.current?.reset();
+        this.lives.current?.reset();
+        this.time.current?.reset();
     }
 }
 

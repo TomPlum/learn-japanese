@@ -23,7 +23,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
         }
     }
 
-    componentDidUpdate(prevProps:Readonly<KanaSettingsProps>, prevState:Readonly<KanaSettingsState>, snapshot?:any) {
+    componentDidUpdate(prevProps: Readonly<KanaSettingsProps>, prevState: Readonly<KanaSettingsState>, snapshot?: any) {
         if (prevState !== this.state) {
             const { hiragana, katakana, diagraphs } = this.state;
             this.props.onSelect({ hiragana, katakana, diagraphs });
@@ -60,6 +60,8 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
             </Form.Row>
         );
     }
+
+    reset = () => this.setState({ hiragana: true, katakana: false, diagraphs: false });
 }
 
 export default KanaSettingsForm;
