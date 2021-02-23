@@ -9,8 +9,7 @@ class Header extends Component {
         return (
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Navbar.Brand className={styles.brand}>
-                    <FontAwesomeIcon icon={faCircle} className={styles.logo}/>
-                    {' '}Learn Japanese
+                    <img src="logo.png" className={styles.logo} alt="logo"/>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
