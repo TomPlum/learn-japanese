@@ -43,10 +43,10 @@ class Main extends Component<MainProps, MainState> {
         const { loading, gameSettings, kana, inResultsScreen, result } = this.state;
 
         return (
-            <Container className={styles.wrapper}>
+            <Container className={gameSettings ? styles.wrapperFullScreen : styles.wrapper}>
                 <LoadingSpinner active={loading}/>
                 {!gameSettings && !inResultsScreen &&
-                    <GameModeMenu onSelectedMode={this.onSelectedGameMode}/>
+                    <GameModeMenu onSelectedMode={this.startGame}/>
                 }
 
                 {gameSettings && kana && !inResultsScreen &&
@@ -63,7 +63,7 @@ class Main extends Component<MainProps, MainState> {
         );
     }
 
-    private onSelectedGameMode = (mode: GameMode, settings: GameSettings) => {
+    private startGame = (mode: GameMode, settings: GameSettings) => {
         this.props.onLaunchTest();
         this.setState({ gameSettings: settings }, () => this.loadKana());
     }
