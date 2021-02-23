@@ -79,7 +79,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         {settings.lives.enabled && <LifeDisplay hearts={lives} />}
                     </Col>
                     <Col>
-                        {settings.isTimed &&
+                        {settings.time.timed &&
                             <Timer className={styles.timer} ref={this.timer} pausable onPaused={this.onPaused}/>
                         }
                     </Col>

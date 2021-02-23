@@ -4,12 +4,13 @@ import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 import { faCheck, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { GameSettings, KanaSettings, LifeSettings, TipSettings } from "../../types/GameSettings";
+import { GameSettings, KanaSettings, LifeSettings, TimeSettings, TipSettings } from "../../types/GameSettings";
 import { TipQuantity } from "../../types/TipQuantity";
 import { LifeQuantity } from "../../types/LifeQuantity";
 import KanaSettingsForm from "./KanaSettingsForm";
 import TipSettingsForm from "./TipSettingsForm";
 import LifeSettingsForm from "./LifeSettingsForm";
+import TimeSettingsForm from "./TimeSettingsForm";
 
 interface GameSettingsMenuProps {
     mode: GameMode;
@@ -20,8 +21,7 @@ interface GameSettingsMenuState {
     kanaSettings: KanaSettings;
     tipSettings: TipSettings;
     lifeSettings: LifeSettings;
-    isTimed: boolean;
-    isCountDown: boolean;
+    timeSettings: TimeSettings;
 }
 
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
@@ -42,14 +42,14 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 enabled: true,
                 quantity: LifeQuantity.FIVE
             },
-            isTimed: true,
-            isCountDown: false
+            timeSettings: {
+                timed: true,
+                countdown: false
+            },
         }
     }
 
     render() {
-        const { isTimed, isCountDown } = this.state;
-
         return (
             <Container fluid>
                 <Form>
@@ -94,21 +94,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             </Form.Label>
                         </Form.Row>
 
-                        <Form.Row>
-                            <Form.Check
-                                inline
-                                label="Timed"
-                                className={styles.check}
-                                checked={isTimed}
-                                onChange={() => this.setState({ isTimed: !isTimed, isCountDown: !isCountDown })}
-                            />
-                            <Form.Check
-                                label="Limited Time per Question"
-                                className={styles.check}
-                                checked={isCountDown}
-                                onChange={() => this.setState({ isTimed: !isTimed, isCountDown: !isCountDown })}
-                            />
-                        </Form.Row>
+                        <TimeSettingsForm onChange={(settings) => this.setState({ timeSettings: settings})} />
                     </Form.Group>
 
                     <Form.Row>
@@ -129,12 +115,12 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onConfirmation = () => {
-        const { kanaSettings, tipSettings, lifeSettings, isTimed } = this.state;
+        const { kanaSettings, tipSettings, lifeSettings, timeSettings } = this.state;
         this.props.onSubmit({
             kana: kanaSettings,
             tips: tipSettings,
             lives: lifeSettings,
-            isTimed: isTimed
+            time: timeSettings
         });
     }
 
@@ -152,6 +138,10 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
             lifeSettings: {
                 enabled: true,
                 quantity: LifeQuantity.FIVE
+            },
+            timeSettings: {
+                timed: true,
+                countdown: false
             }
         });
     }

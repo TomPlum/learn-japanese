@@ -5,8 +5,7 @@ export interface GameSettings {
     kana: KanaSettings
     tips: TipSettings;
     lives: LifeSettings;
-    isTimed?: boolean;
-    time?: TimeSettings;
+    time: TimeSettings;
 }
 
 export interface LifeSettings {
@@ -26,5 +25,7 @@ export interface KanaSettings {
 }
 
 export interface TimeSettings {
-    secondsPerQuestion: number;
+    timed: boolean;
+    countdown: boolean;
+    secondsPerQuestion?: number;
 }
