@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Form } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 import { KanaSettings } from "../../types/GameSettings";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 
@@ -11,6 +11,7 @@ interface KanaSettingsState {
     hiragana: boolean;
     katakana: boolean;
     diagraphs: boolean;
+    quantity: number;
 }
 
 class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
@@ -19,7 +20,8 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
         this.state = {
             hiragana: true,
             katakana: false,
-            diagraphs: false
+            diagraphs: false,
+            quantity: 50
         }
     }
 
@@ -31,7 +33,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
     }
 
     render() {
-        const { hiragana, katakana, diagraphs } = this.state;
+        const { hiragana, katakana, diagraphs, quantity } = this.state;
 
         return (
             <Form.Row>
@@ -52,11 +54,23 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
                     disabled={katakana && !hiragana}
                 />
                 <Form.Check
-                    label="Include Diagraphs"
+                    label="Diagraphs"
                     className={styles.check}
                     checked={diagraphs}
                     onChange={() => this.setState({ diagraphs: !diagraphs })}
                 />
+
+                <InputGroup hasValidation>
+                    <InputGroup.Prepend>
+                        <InputGroup.Text>Quantity</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                        onChange={(e) => this.setState({ quantity: Number(e.target.value) })}
+                        type="number"
+                        required
+                        isInvalid={quantity < 1 || quantity > 214}
+                    />
+                </InputGroup>
             </Form.Row>
         );
     }

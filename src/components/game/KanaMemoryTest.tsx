@@ -15,6 +15,7 @@ import { LifeQuantity } from "../../types/LifeQuantity";
 import QuitButton from "../ui/QuitButton";
 import GameResult from "../../types/GameResult";
 import { FailureReason } from "../../types/FailureReason";
+import CountDown from "./CountDown";
 
 interface KanaMemoryTestProps {
     kana: Kana[];
@@ -38,12 +39,14 @@ interface KanaMemoryTestState {
 
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
     private readonly timer: React.RefObject<Timer>;
+    private readonly countdown: React.RefObject<CountDown>;
     private readonly kanaDisplay: React.RefObject<KanaDisplay>;
 
     constructor(props: KanaMemoryTestProps | Readonly<KanaMemoryTestProps>) {
         super(props);
 
         this.timer = React.createRef();
+        this.countdown = React.createRef();
         this.kanaDisplay = React.createRef();
 
         const { settings } = this.props;
@@ -88,6 +91,14 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     <Col>
                         {settings.time.timed &&
                             <Timer className={styles.timer} ref={this.timer} pausable onPaused={this.onPaused}/>
+                        }
+                        {settings.time.countdown &&
+                            <CountDown
+                                className={styles.timer}
+                                ref={this.countdown}
+                                value={settings.time?.secondsPerQuestion ?? 10}
+                                onFinish={() => this.countDownTimeElapsed()}
+                            />
                         }
                     </Col>
                 </Row>
@@ -191,6 +202,24 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             hasExhaustedKana: false,
         });
         this.timer.current?.restart();
+    }
+
+    private countDownTimeElapsed = () => {
+        const { lives, wrongAnswers, currentKana, remainingKana, hasUsedHintThisKana, hints } = this.state;
+        this.kanaDisplay.current?.notifyIncorrect();
+        this.countdown.current?.reset();
+        this.setState({ lives: lives - 1, wrongAnswers: wrongAnswers.concat(currentKana), answer: "" });
+
+        //Pick a random remaining kana and remove it from the pool.
+        const [nextKana, nextRemainingKana] = this.getRandomKana(remainingKana);
+
+        //Update the next kana to be displayed and the remaining kana with one less.
+        this.setState({
+            currentKana: nextKana,
+            remainingKana: nextRemainingKana,
+            hasUsedHintThisKana: false,
+            hints: hasUsedHintThisKana ? hints - 1 : hints
+        });
     }
 
     private close = () => this.props.onClose();
