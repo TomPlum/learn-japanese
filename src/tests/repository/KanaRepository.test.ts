@@ -6,7 +6,7 @@ import {KanaColumn} from "../../types/KanaColumn";
 describe("Kana Repository", () => {
     const repository = new KanaRepository();
 
-    it ("should return 194 total kana", () => {
+    it ("Should return 214 total kana", () => {
         const data = repository.read({
             diagraphs: true,
             katakana: true,

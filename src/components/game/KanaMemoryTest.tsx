@@ -15,8 +15,6 @@ import { LifeQuantity } from "../../types/LifeQuantity";
 import QuitButton from "../ui/QuitButton";
 import GameResult from "../../types/GameResult";
 import { FailureReason } from "../../types/FailureReason";
-import { HintQuantity } from "../../types/HintQuantity";
-
 interface KanaMemoryTestProps {
     kana: Kana[];
     settings: GameSettings;
@@ -62,6 +60,21 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             lives: settings.lives.quantity?.valueOf() ?? LifeQuantity.ZERO,
             hints: settings.hints.quantity?.valueOf() ?? 0,
             hasUsedHintThisKana: false
+        }
+    }
+
+    componentDidUpdate() {
+        const { lives, correctAnswers, wrongAnswers} = this.state
+        if (lives === 0) {
+            this.props.onFinish({
+                reason: FailureReason.NO_LIVES_REMAINING,
+                success: false,
+                livesRemaining: 0,
+                totalKanaOffered: this.props.kana.length,
+                correctAnswers: correctAnswers,
+                wrongAnswers: wrongAnswers,
+                duration: this.timer.current?.getCurrentTime() ?? undefined
+            });
         }
     }
 
@@ -159,21 +172,11 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 });
             }
         } else {
-            const livesRemaining = lives - 1;
             this.kanaDisplay.current?.notifyIncorrect();
+            const livesRemaining = lives - 1;
 
-            if (livesRemaining === 0) {
-                this.props.onFinish({
-                    reason: FailureReason.NO_LIVES_REMAINING,
-                    success: false,
-                    livesRemaining: 0,
-                    totalKanaOffered: this.props.kana.length,
-                    correctAnswers: correctAnswers,
-                    wrongAnswers: wrongAnswers,
-                    duration: this.timer.current?.getCurrentTime() ?? undefined
-                });
-            }
             this.setState({ lives: livesRemaining, wrongAnswers: wrongAnswers.concat(currentKana) });
+
         }
 
         this.setState({ answer: "" });
