@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "../../styles/sass/components/game/TipButton.module.scss";
+import styles from "../../styles/sass/components/game/HintButton.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Button, OverlayTrigger } from "react-bootstrap";
@@ -42,10 +42,13 @@ class HintButton extends Component<HintButtonProps> {
         //const index = RandomNumberGenerator.getRandomArrayIndex(titles);
         //return titles[index];
         if (quantity > 0) {
-            return "Need a hint? (" + (quantity - 1) + "/" + totalQuantity + " remaining)";
+            if (quantity <= 10) {
+                return "Need a hint? (" + (quantity - 1) + "/" + totalQuantity + " remaining)";
+            }
+            return "Need a hint?"
         }
         return "Sorry!";
-    };
+    }
 
     private getContent = () => {
         const { kana, quantity } = this.props;
