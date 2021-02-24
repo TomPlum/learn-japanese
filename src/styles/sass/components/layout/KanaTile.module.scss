@@ -1,0 +1,39 @@
+@mixin typeIcon {
+  float: right;
+}
+
+.hiragana {
+  @include typeIcon;
+  color: #ef3636;
+}
+
+.katakana {
+  @include typeIcon;
+  color: #5cdd35;
+}
+
+.kana {
+  color: #282828;
+  font-size: 2.5em;
+  margin: auto;
+}
+
+.wrapper {
+  padding: 5px;
+  border: 2px solid #737373;
+  border-radius: 10px;
+  background-color: #eeeeee;
+  width: 90px;
+  height: 90px;
+}
+
+.kanaWrapper {
+  text-align: center;
+}
+
+.romanji {
+  color: #2C2F31;
+  font-weight: 600;
+  display: block;
+  text-align: center;
+}

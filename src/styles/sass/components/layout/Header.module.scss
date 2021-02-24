@@ -13,7 +13,11 @@
 }
 
 .search {
-  color: rgb(181, 175, 166);
-  background-color: rgb(24, 26, 27);
-  border-color: rgb(60, 65, 68);
+  color: rgb(207, 207, 207);
+  font-size: 1.5em;
+}
+
+.search:hover {
+  transition: 1s ease;
+  color: #FFF
 }

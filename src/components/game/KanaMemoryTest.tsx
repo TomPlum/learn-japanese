@@ -237,7 +237,10 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         });
     }
 
-    private close = () => this.props.onClose();
+    private close = () => {
+        this.reset();
+        this.props.onClose();
+    }
 
     private onPaused = () => this.setState({ paused: !this.state.paused })
 
