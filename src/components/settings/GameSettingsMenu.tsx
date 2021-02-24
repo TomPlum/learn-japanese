@@ -4,7 +4,7 @@ import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 import { faCheck, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { GameSettings, KanaSettings, LifeSettings, TimeSettings, TipSettings } from "../../types/GameSettings";
+import { GameSettings, KanaSettings, LifeSettings, TimeSettings, HintSettings } from "../../types/GameSettings";
 import { HintQuantity } from "../../types/HintQuantity";
 import { LifeQuantity } from "../../types/LifeQuantity";
 import KanaSettingsForm from "./KanaSettingsForm";
@@ -19,7 +19,7 @@ interface GameSettingsMenuProps {
 
 interface GameSettingsMenuState {
     kanaSettings: KanaSettings;
-    hintSettings: TipSettings;
+    hintSettings: HintSettings;
     lifeSettings: LifeSettings;
     timeSettings: TimeSettings;
 }

@@ -1,4 +1,4 @@
-import { GameSettings, KanaSettings, LifeSettings, TimeSettings, TipSettings } from "../types/GameSettings";
+import { GameSettings, KanaSettings, LifeSettings, TimeSettings, HintSettings } from "../types/GameSettings";
 import { HintQuantity } from "../types/HintQuantity";
 import { LifeQuantity } from "../types/LifeQuantity";
 
@@ -9,7 +9,7 @@ const defaultKanaSettings: KanaSettings = {
     diagraphs: true,
 }
 
-const defaultTipSettings: TipSettings = {
+const defaultTipSettings: HintSettings = {
     enabled: true,
     quantity: HintQuantity.UNLIMITED
 }

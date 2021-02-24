@@ -1,11 +1,11 @@
 import { Component } from "react";
-import { TipSettings } from "../../types/GameSettings";
+import { HintSettings } from "../../types/GameSettings";
 import { HintQuantity } from "../../types/HintQuantity";
 import { Form } from "react-bootstrap";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 
 interface TipSettingsFormProps {
-    onChange: (settings: TipSettings) => void;
+    onChange: (settings: HintSettings) => void;
 }
 
 interface TipSettingsFormState {
