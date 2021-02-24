@@ -4,17 +4,11 @@ import katakana from "../data/Katakana";
 import KanaType from "../types/KanaType";
 import {KanaData} from "../data/DataTypes";
 import { Arrays } from "../utility/Arrays";
-
-export interface KanaConfig {
-    hiragana?: boolean;
-    katakana?: boolean;
-    diagraphs?: boolean;
-    quantity?: number;
-}
+import { KanaSettings } from "../types/GameSettings";
 
 export class KanaRepository {
 
-    read(config: KanaConfig): Kana[] {
+    read(config?: KanaSettings): Kana[] {
 
         //TODO: Investigate filter pattern here. Check your design patterns book.
 

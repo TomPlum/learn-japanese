@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Container } from "react-bootstrap";
 import KanaMemoryTest from "../game/KanaMemoryTest";
 import { Kana } from "../../types/Kana";
-import { KanaConfig, KanaRepository } from "../../repository/KanaRepository";
+import { KanaRepository } from "../../repository/KanaRepository";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import styles from "../../styles/sass/components/layout/Main.module.scss";
 import GameModeMenu from "./GameModeMenu";
@@ -79,17 +79,7 @@ class Main extends Component<MainProps, MainState> {
 
     private loadKana() {
         this.setState({ loading: true });
-
-        const { gameSettings } = this.state;
-        const config: KanaConfig = {
-            hiragana: gameSettings ? gameSettings.kana.hiragana : false,
-            katakana: gameSettings ? gameSettings.kana.katakana : false,
-            diagraphs: gameSettings ? gameSettings.kana.diagraphs : false,
-            quantity: gameSettings ? gameSettings.kana.quantity : undefined
-        }
-
-        const kana = this.kanaRepository.read(config);
-
+        const kana = this.kanaRepository.read(this.state.gameSettings?.kana);
         this.setState({ loading: false, kana });
     }
 }

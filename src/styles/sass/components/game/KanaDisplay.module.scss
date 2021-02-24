@@ -1,5 +1,5 @@
 $default-colour: #FFF;
-$diagraph-margin: -15px;
+$diagraph-margin: -12px;
 $font-size: 10em;
 
 @mixin kana {
@@ -27,7 +27,10 @@ $font-size: 10em;
 }
 
 .wrapper {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
 }
 
 .blur {
