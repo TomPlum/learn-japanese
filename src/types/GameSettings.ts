@@ -22,6 +22,7 @@ export interface KanaSettings {
     hiragana?: boolean;
     katakana?: boolean;
     diagraphs?: boolean;
+    quantity?: number;
 }
 
 export interface TimeSettings {

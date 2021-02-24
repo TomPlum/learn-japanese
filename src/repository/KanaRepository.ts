@@ -3,16 +3,20 @@ import hiragana from "../data/Hiragana";
 import katakana from "../data/Katakana";
 import KanaType from "../types/KanaType";
 import {KanaData} from "../data/DataTypes";
+import { Arrays } from "../utility/Arrays";
 
 export interface KanaConfig {
     hiragana?: boolean;
     katakana?: boolean;
     diagraphs?: boolean;
+    quantity?: number;
 }
 
 export class KanaRepository {
 
     read(config: KanaConfig): Kana[] {
+
+        //TODO: Investigate filter pattern here. Check your design patterns book.
 
         let kana: Kana[];
 
@@ -28,6 +32,11 @@ export class KanaRepository {
 
         if (!config.diagraphs) {
             kana = kana.filter(kana => !kana.isDiagraph());
+        }
+
+        if (config.quantity) {
+            Arrays.shuffle(kana);
+            kana = kana.splice(0, config.quantity);
         }
 
         return kana;

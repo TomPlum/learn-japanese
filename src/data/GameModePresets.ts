@@ -50,7 +50,7 @@ export const TIME_ATTACK: GameSettings = {
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },
     lives: { enabled: false },
-    time: { timed: false, countdown: true, secondsPerQuestion: 5 }
+    time: { timed: false, countdown: true, secondsPerQuestion: 10 }
 }
 
 export const HARDCORE: GameSettings = {

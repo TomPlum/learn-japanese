@@ -84,7 +84,8 @@ class Main extends Component<MainProps, MainState> {
         const config: KanaConfig = {
             hiragana: gameSettings ? gameSettings.kana.hiragana : false,
             katakana: gameSettings ? gameSettings.kana.katakana : false,
-            diagraphs: gameSettings ? gameSettings.kana.diagraphs : false
+            diagraphs: gameSettings ? gameSettings.kana.diagraphs : false,
+            quantity: gameSettings ? gameSettings.kana.quantity : undefined
         }
 
         const kana = this.kanaRepository.read(config);

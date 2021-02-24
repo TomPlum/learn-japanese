@@ -27,8 +27,8 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
 
     componentDidUpdate(prevProps: Readonly<KanaSettingsProps>, prevState: Readonly<KanaSettingsState>, snapshot?: any) {
         if (prevState !== this.state) {
-            const { hiragana, katakana, diagraphs } = this.state;
-            this.props.onSelect({ hiragana, katakana, diagraphs });
+            const { hiragana, katakana, diagraphs, quantity } = this.state;
+            this.props.onSelect({ hiragana, katakana, diagraphs, quantity });
         }
     }
 
@@ -68,6 +68,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
                         onChange={(e) => this.setState({ quantity: Number(e.target.value) })}
                         type="number"
                         required
+                        value={quantity}
                         isInvalid={quantity < 1 || quantity > 214}
                     />
                 </InputGroup>
