@@ -17,7 +17,7 @@ import GameResult from "../../types/GameResult";
 import { FailureReason } from "../../types/FailureReason";
 import CountDown from "./CountDown";
 
-interface KanaMemoryTestProps {
+export interface KanaMemoryTestProps {
     kana: Kana[];
     settings: GameSettings;
     onClose: () => void;
@@ -35,6 +35,7 @@ interface KanaMemoryTestState {
     lives: number;
     hints: number;
     hasUsedHintThisKana: boolean;
+    failedToAnswer: number;
 }
 
 class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
@@ -63,13 +64,14 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             paused: false,
             lives: settings.lives.quantity?.valueOf() ?? LifeQuantity.ZERO,
             hints: settings.hints.quantity?.valueOf() ?? 0,
-            hasUsedHintThisKana: false
+            hasUsedHintThisKana: false,
+            failedToAnswer: 0
         }
     }
 
     componentDidUpdate() {
         const { lives, correctAnswers, wrongAnswers} = this.state
-        if (lives === 0) {
+        if (this.props.settings.lives.enabled && lives === 0) {
             this.props.onFinish({
                 reason: FailureReason.NO_LIVES_REMAINING,
                 success: false,
@@ -83,7 +85,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     render() {
-        const { currentKana, answer, correctAnswers, hasExhaustedKana, paused, lives, hints } = this.state;
+        const { currentKana, answer, correctAnswers, failedToAnswer, hasExhaustedKana, paused, lives, hints } = this.state;
         const { kana, settings } = this.props;
 
         return (
@@ -93,7 +95,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         <ProgressBar
                             animated={!hasExhaustedKana}
                             className={styles.progress}
-                            now={(correctAnswers.size / kana.length) * 100}
+                            now={((correctAnswers.size + failedToAnswer) / kana.length) * 100}
                             variant={hasExhaustedKana ? "success" : undefined}
                         />
                     </Col>
@@ -112,7 +114,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                                 className={styles.timer}
                                 ref={this.countdown}
                                 value={settings.time?.secondsPerQuestion ?? 10}
-                                onFinish={() => this.countDownTimeElapsed()}
+                                onFinish={this.countDownTimeElapsed}
                             />
                         }
                     </Col>
@@ -162,6 +164,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
     answerQuestion = () => {
         const { currentKana, correctAnswers, wrongAnswers, answer, remainingKana, lives, hints, hasUsedHintThisKana } = this.state;
+        const { settings } = this.props;
 
         if (answer === currentKana.romanji) {
             //Add the current kana to the correct answers set.
@@ -172,6 +175,9 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 this.timer.current?.stop();
                 this.setState({ hasExhaustedKana: true, paused: false });
             } else {
+                //If we're being timed per kana, reset the timer.
+                this.countdown.current?.reset();
+
                 //Pick a random remaining kana and remove it from the pool.
                 const [nextKana, nextRemainingKana] = this.getRandomKana(remainingKana);
 
@@ -185,10 +191,10 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             }
         } else {
             this.kanaDisplay.current?.notifyIncorrect();
-            const livesRemaining = lives - 1;
-
-            this.setState({ lives: livesRemaining, wrongAnswers: wrongAnswers.concat(currentKana) });
-
+            this.setState({
+                lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives,
+                wrongAnswers: wrongAnswers.concat(currentKana)
+            });
         }
 
         this.setState({ answer: "" });
@@ -206,24 +212,28 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             paused: false,
             hasExhaustedKana: false,
         });
+
         this.timer.current?.restart();
+        this.countdown.current?.reset();
     }
 
     private countDownTimeElapsed = () => {
-        const { lives, wrongAnswers, currentKana, remainingKana, hasUsedHintThisKana, hints } = this.state;
+        const { lives, wrongAnswers, currentKana, remainingKana, hasUsedHintThisKana, hints, failedToAnswer } = this.state;
         this.kanaDisplay.current?.notifyIncorrect();
         this.countdown.current?.reset();
-        this.setState({ lives: lives - 1, wrongAnswers: wrongAnswers.concat(currentKana), answer: "" });
 
         //Pick a random remaining kana and remove it from the pool.
         const [nextKana, nextRemainingKana] = this.getRandomKana(remainingKana);
 
-        //Update the next kana to be displayed and the remaining kana with one less.
         this.setState({
             currentKana: nextKana,
             remainingKana: nextRemainingKana,
             hasUsedHintThisKana: false,
-            hints: hasUsedHintThisKana ? hints - 1 : hints
+            hints: hasUsedHintThisKana ? hints - 1 : hints,
+            lives: this.props.settings.lives.enabled ? lives - 1 : lives,
+            wrongAnswers: wrongAnswers.concat(currentKana),
+            answer: "",
+            failedToAnswer: failedToAnswer + 1
         });
     }
 

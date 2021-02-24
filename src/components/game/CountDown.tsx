@@ -28,13 +28,6 @@ class CountDown extends Component<CountDownProps, CountDownState> {
         clearInterval(this.state.interval);
     }
 
-    componentDidUpdate(prevProps: Readonly<CountDownProps>, prevState: Readonly<CountDownState>) {
-        if (this.state.remaining === 0) {
-            this.props.onFinish();
-            this.reset();
-        }
-    }
-
     render() {
         return (
             <span className={this.props.className}>
@@ -48,8 +41,20 @@ class CountDown extends Component<CountDownProps, CountDownState> {
         this.setState({ remaining: this.props.value, interval: undefined }, () => this.start());
     }
 
-    private decrement = () => this.setState({ remaining: this.state.remaining - 1 });
+    stop = () => {
+        clearInterval(this.state.interval);
+        this.setState({ interval: undefined });
+    }
 
+    private decrement = () => {
+        const { remaining } = this.state;
+        if (remaining === 0) {
+            this.props.onFinish();
+            this.reset();
+        } else {
+            this.setState({ remaining: remaining - 1 });
+        }
+    }
 
     private start = () => this.setState({ interval: setInterval(() => this.decrement(), 1000 )});
 

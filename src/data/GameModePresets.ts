@@ -49,7 +49,7 @@ export const KANA: GameSettings = {
 export const TIME_ATTACK: GameSettings = {
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },
-    lives: defaultLifeSettings,
+    lives: { enabled: false },
     time: { timed: false, countdown: true, secondsPerQuestion: 5 }
 }
 
