@@ -24,6 +24,7 @@ class Header extends Component<HeaderProps> {
                             className={styles.search}
                             icon={faSearch}
                             onClick={this.props.onLaunchSearch}
+                            title="Search Kana"
                         />
                     </Navbar.Text>
                 </Navbar.Collapse>

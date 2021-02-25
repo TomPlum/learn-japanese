@@ -101,8 +101,9 @@ class Search extends Component<SearchProps, SearchState> {
                         />
                         <Form.Label className={styles.label}>Diagraphs</Form.Label>
                     </Col>
-
-                    <Col className={styles.switchWrapper} xs={4}>
+                </Row>
+                <Row>
+                    <Col className={styles.switchWrapper} xs={12}>
                         <Form.Check
                             type="switch"
                             id="diacriticals"
