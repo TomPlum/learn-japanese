@@ -8,6 +8,7 @@ import KanaType from "../../types/KanaType";
 import KanaGrid from "./KanaGrid";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SearchField from "./SearchField";
 
 interface SearchProps {
     onClose: () => void;
@@ -46,8 +47,8 @@ class Search extends Component<SearchProps, SearchState> {
     }
 
     componentDidUpdate(prevProps: Readonly<SearchProps>, prevState: Readonly<SearchState>) {
-        const { search, showKatakana, showHiragana } = this.state;
-        if (prevState.search !== search || prevState.showHiragana !== showHiragana || prevState.showKatakana !== showKatakana) {
+        const { search, kana } = this.state;
+        if (prevState.kana.length === kana.length) {
             const filtered = this.filter(search);
             this.setState({ kana: filtered });
         }
@@ -62,21 +63,7 @@ class Search extends Component<SearchProps, SearchState> {
                 <Container className={styles.searchWrapper}>
                     <Row>
                         <Col>
-                            <InputGroup className={styles.search}>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <FontAwesomeIcon className={styles.search} icon={faSearch}/>
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control
-                                    type="text"
-                                    value={search}
-                                    onChange={this.onSearch}
-                                />
-                                <InputGroup.Append>
-                                    <InputGroup.Text>{kana.length} Results</InputGroup.Text>
-                                </InputGroup.Append>
-                            </InputGroup>
+                            <SearchField onChange={this.onSearch} value={search} append={kana.length + " Results"} />
                         </Col>
                     </Row>
                 </Container>
@@ -120,8 +107,8 @@ class Search extends Component<SearchProps, SearchState> {
         )
     }
 
-    private onSearch = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        this.setState({ search: e.target.value.toLowerCase() });
+    private onSearch = (newSearch: string) => {
+        this.setState({ search: newSearch.toLowerCase() });
     }
 
     private filter = (search: string): Kana[] => {

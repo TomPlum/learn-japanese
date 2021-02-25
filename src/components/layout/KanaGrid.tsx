@@ -11,7 +11,7 @@ interface KanaGridProps {
 class KanaGrid extends Component<KanaGridProps> {
     render() {
         const { kana } = this.props;
-        const Grid = makeResponsive(CSSGrid, { maxWidth: 1920, minPadding: 10 });
+        const Grid = makeResponsive(CSSGrid, { maxWidth: 1920 });
         return (
             <div className={styles.grid}>
                 {kana.length > 0 ? <Grid
