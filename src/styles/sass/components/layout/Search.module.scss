@@ -1,3 +1,5 @@
+@import "../../colours";
+
 .wrapper {
   max-width: 100%;
   overflow-x: hidden;
@@ -6,8 +8,6 @@
 
 .searchWrapper {
   margin: 15px;
-  display: flex;
-  justify-content: center;
   width: 100%;
   max-width: 1920px;
 }
@@ -37,14 +37,29 @@
   @include switch;
 }
 
-.hiraganaSwitch > .custom-control-input:checked > .custom-control-label::before {
-  background-color: red;
+.hiraganaSwitch label::before {
+  background-color: $hiragana-indicator !important;
+  border-color: $hiragana-indicator !important;
+}
+
+.hiraganaSwitch label::after {
+  background-color: #cfcfcf !important;
 }
 
 .katakanaSwitch {
   @include switch;
 }
 
+.katakanaSwitch label::before {
+  background-color: $katakana-indicator !important;
+  border-color: $katakana-indicator !important;
+}
+
 .diagraphSwitch {
   @include switch;
+}
+
+.diagraphSwitch label::before {
+  background-color: $diagraph-indicator !important;
+  border-color: $diagraph-indicator !important;
 }

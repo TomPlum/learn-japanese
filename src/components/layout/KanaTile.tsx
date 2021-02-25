@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/layout/KanaTile.module.scss";
 import KanaType from "../../types/KanaType";
+import KanaTypeIndicator from "./KanaTypeIndicator";
 
 interface KanaTileProps {
     kana: Kana;
@@ -18,11 +19,8 @@ class KanaTile extends Component<KanaTileProps> {
             <Container className={styles.wrapper}>
                 <Row className={styles.typeWrapper}>
                     <Col xs={12}>
-                        <FontAwesomeIcon
-                            icon={faCircle}
-                            size="xs"
-                            className={kana.type === KanaType.HIRAGANA ? styles.hiragana : styles.katakana}
-                        />
+                        <KanaTypeIndicator className={kana.type === KanaType.HIRAGANA ? styles.hiragana : styles.katakana} />
+                        {kana.isDiagraph() && <KanaTypeIndicator className={styles.diagraph} />}
                     </Col>
                 </Row>
 

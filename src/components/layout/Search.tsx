@@ -1,13 +1,11 @@
-import React, { ChangeEvent, Component } from "react";
-import { Col, Container, Form, InputGroup, Row } from "react-bootstrap";
+import React, { Component } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { KanaRepository } from "../../repository/KanaRepository";
 import { Kana } from "../../types/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import styles from "../../styles/sass/components/layout/Search.module.scss";
 import KanaType from "../../types/KanaType";
 import KanaGrid from "./KanaGrid";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SearchField from "./SearchField";
 
 interface SearchProps {
@@ -69,7 +67,7 @@ class Search extends Component<SearchProps, SearchState> {
                 </Container>
 
                 <Row>
-                    <Col className={styles.switchWrapper}>
+                    <Col className={styles.switchWrapper} xs={4}>
                         <Form.Check
                             type="switch"
                             id="hiragana"
@@ -80,7 +78,7 @@ class Search extends Component<SearchProps, SearchState> {
                         <Form.Label className={styles.label}>Hiragana</Form.Label>
                     </Col>
 
-                    <Col>
+                    <Col className={styles.switchWrapper} xs={4}>
                         <Form.Check
                             type="switch"
                             id="katakana"
@@ -91,7 +89,7 @@ class Search extends Component<SearchProps, SearchState> {
                         <Form.Label className={styles.label}>Katakana</Form.Label>
                     </Col>
 
-                    <Col>
+                    <Col className={styles.switchWrapper} xs={4}>
                         <Form.Check
                             type="switch"
                             id="diagraphs"

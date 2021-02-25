@@ -1,15 +1,22 @@
+@import "../../colours";
+
 @mixin typeIcon {
   float: right;
 }
 
 .hiragana {
   @include typeIcon;
-  color: #3a97ff;
+  color: $hiragana-indicator;
 }
 
 .katakana {
   @include typeIcon;
-  color: #5dca41;
+  color: $katakana-indicator;
+}
+
+.diagraph {
+  @include typeIcon;
+  color: $diagraph-indicator;
 }
 
 .typeWrapper {
