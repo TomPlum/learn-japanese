@@ -19,6 +19,11 @@
   color: $diagraph-indicator;
 }
 
+.diacritical {
+  @include typeIcon;
+  color: $diacritical-indicator;
+}
+
 .typeWrapper {
 }
 

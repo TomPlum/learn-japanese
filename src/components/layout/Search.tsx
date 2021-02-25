@@ -19,6 +19,7 @@ interface SearchState {
     showHiragana: boolean;
     showKatakana: boolean;
     showDiagraphs: boolean;
+    showDiacriticals: boolean;
 }
 
 class Search extends Component<SearchProps, SearchState> {
@@ -34,6 +35,7 @@ class Search extends Component<SearchProps, SearchState> {
             showHiragana: true,
             showKatakana: true,
             showDiagraphs: true,
+            showDiacriticals: true
         }
     }
 
@@ -53,7 +55,7 @@ class Search extends Component<SearchProps, SearchState> {
     }
 
     render() {
-        const { loading, search, kana, showHiragana, showKatakana, showDiagraphs } = this.state;
+        const { loading, search, kana, showHiragana, showKatakana, showDiagraphs, showDiacriticals } = this.state;
 
         return (
             <Container className={styles.wrapper}>
@@ -99,6 +101,17 @@ class Search extends Component<SearchProps, SearchState> {
                         />
                         <Form.Label className={styles.label}>Diagraphs</Form.Label>
                     </Col>
+
+                    <Col className={styles.switchWrapper} xs={4}>
+                        <Form.Check
+                            type="switch"
+                            id="diacriticals"
+                            className={styles.diacriticalSwitch}
+                            checked={showDiacriticals}
+                            onChange={() => this.setState({ showDiacriticals: !showDiacriticals })}
+                        />
+                        <Form.Label className={styles.label}>Diacriticals</Form.Label>
+                    </Col>
                 </Row>
                 <KanaGrid kana={kana}/>
             </Container>
@@ -111,7 +124,7 @@ class Search extends Component<SearchProps, SearchState> {
 
     private filter = (search: string): Kana[] => {
         let searched = this.kana.filter(k => k.romanji.includes(search));
-        const { showHiragana, showKatakana, showDiagraphs } = this.state;
+        const { showHiragana, showKatakana, showDiagraphs, showDiacriticals } = this.state;
         if (!showHiragana) {
             searched = searched.filter(k => k.type !== KanaType.HIRAGANA);
         }
@@ -120,6 +133,9 @@ class Search extends Component<SearchProps, SearchState> {
         }
         if (!showDiagraphs) {
             searched = searched.filter(k => !k.isDiagraph());
+        }
+        if (!showDiacriticals) {
+            searched = searched.filter(k => !k.isDiacritical);
         }
         return searched;
     }

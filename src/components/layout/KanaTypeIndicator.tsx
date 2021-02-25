@@ -2,12 +2,16 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/layout/KanaTypeIndicator.module.scss";
 
-const KanaTypeIndicator = ({ className }) => {
+interface KanaTypeIndicatorProps {
+    className?: string;
+}
+
+const KanaTypeIndicator = (props: KanaTypeIndicatorProps) => {
     return (
         <FontAwesomeIcon
             icon={faCircle}
             size="xs"
-            className={className + " " + styles.icon}
+            className={props.className + " " + styles.icon}
         />
     );
 }

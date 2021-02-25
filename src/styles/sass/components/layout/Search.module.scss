@@ -63,3 +63,12 @@
   background-color: $diagraph-indicator !important;
   border-color: $diagraph-indicator !important;
 }
+
+.diacriticalSwitch {
+  @include switch;
+}
+
+.diacriticalSwitch label::before {
+  background-color: $diacritical-indicator !important;
+  border-color: $diacritical-indicator !important;
+}

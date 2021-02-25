@@ -1,8 +1,6 @@
 import { Component } from "react";
 import { Kana } from "../../types/Kana";
 import { Col, Container, Row } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/layout/KanaTile.module.scss";
 import KanaType from "../../types/KanaType";
 import KanaTypeIndicator from "./KanaTypeIndicator";
@@ -21,6 +19,7 @@ class KanaTile extends Component<KanaTileProps> {
                     <Col xs={12}>
                         <KanaTypeIndicator className={kana.type === KanaType.HIRAGANA ? styles.hiragana : styles.katakana} />
                         {kana.isDiagraph() && <KanaTypeIndicator className={styles.diagraph} />}
+                        {kana.isDiacritical && <KanaTypeIndicator className={styles.diacritical} />}
                     </Col>
                 </Row>
 

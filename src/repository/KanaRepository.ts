@@ -51,6 +51,6 @@ export class KanaRepository {
     }
 
     private convert(data: KanaData[], type: KanaType): Kana[] {
-        return data.map(data => new Kana(data.code, data.name, type, data.column));
+        return data.map(data => new Kana(data.code, data.name, type, data.column, data.diacritical));
     }
 }
