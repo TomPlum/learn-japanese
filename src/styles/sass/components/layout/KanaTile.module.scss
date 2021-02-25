@@ -4,17 +4,21 @@
 
 .hiragana {
   @include typeIcon;
-  color: #ef3636;
+  color: #3a97ff;
 }
 
 .katakana {
   @include typeIcon;
-  color: #5cdd35;
+  color: #5dca41;
+}
+
+.typeWrapper {
 }
 
 .kana {
-  color: #282828;
+  color: #1d1d1d;
   font-size: 2.5em;
+  line-height: 50px;
   margin: auto;
 }
 
@@ -22,17 +26,18 @@
   padding: 5px;
   border: 2px solid #737373;
   border-radius: 10px;
-  background-color: #eeeeee;
+  background-color: #e5e5e5;
   width: 90px;
   height: 90px;
 }
 
 .kanaWrapper {
   text-align: center;
+  height: 45px;
 }
 
 .romanji {
-  color: #2C2F31;
+  color: #505456;
   font-weight: 600;
   display: block;
   text-align: center;

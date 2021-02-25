@@ -16,7 +16,7 @@ class KanaTile extends Component<KanaTileProps> {
 
         return (
             <Container className={styles.wrapper}>
-                <Row>
+                <Row className={styles.typeWrapper}>
                     <Col xs={12}>
                         <FontAwesomeIcon
                             icon={faCircle}
@@ -26,13 +26,13 @@ class KanaTile extends Component<KanaTileProps> {
                     </Col>
                 </Row>
 
-                <Row>
+                <Row className={styles.kanaWrapper}>
                     <p className={styles.kana}>{kana.code}</p>
                 </Row>
 
                 <Row>
                     <Col>
-                        <span className={styles.romanji}>{kana.romanji}</span>
+                        <p className={styles.romanji}>{kana.romanji}</p>
                     </Col>
                 </Row>
             </Container>
