@@ -229,6 +229,43 @@ describe("Katakana", () => {
         it("pyo", () => expect(getKatakana("pyo").code).toEqual("ピョ"));
     });
 
+    describe("Is Diacritical", () => {
+        const diacritical = getMultipleKatakana(
+            [
+                "ga", "gi", "gu", "ge", "go",
+                "za", "ji", "zu", "ze", "zo",
+                "ja", "ju", "jo",
+                "da", "di", "du", "de", "do",
+                "dya", "dyu", "dyo",
+                "ba", "bi", "bu", "be", "bo",
+                "pa", "pi", "pu", "pe", "po",
+                "bya", "byu", "byo",
+                "pya", "pyu", "pyo",
+
+            ]
+        );
+        each(diacritical).it("it should have diacritical set to true", (kana) => {
+            expect(kana.diacritical).toBe(true);
+        });
+
+        const regular = getMultipleKatakana([
+            "a", "i", "u", "e", "o",
+            "ka", "ki", "ku", "ke", "ko", "kya", "kyu", "kyo",
+            "sa", "shi", "su", "se", "so", "sha", "shu", "sho",
+            "ta", "chi", "tsu", "te", "to", "cha", "chu", "cho",
+            "na", "ni", "nu", "ne", "no", "nya", "nyu", "nyo",
+            "ha", "hi", "hu", "he", "ho", "hya", "hyu", "hyo",
+            "ma", "mi", "mu", "me", "mo", "mya", "myu", "myo",
+            "ya", "yu", "yo",
+            "ra", "ri", "ru", "re", "ro", "rya", "ryu", "ryo",
+            "wa", "wo",
+            "n"
+        ]);
+        each(regular).it("it should have diacritical set to false", (kana) => {
+            expect(kana.diacritical).toBe(false);
+        });
+    });
+
     function getMultipleKatakana(names: string[]): KanaData[] {
         return names.map(name => getKatakana(name));
     }

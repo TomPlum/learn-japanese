@@ -1,7 +1,7 @@
 import hiragana from "../../data/Hiragana";
 import each from "jest-each";
-import {KanaColumn} from "../../types/KanaColumn";
-import {KanaData} from "../../data/DataTypes";
+import { KanaColumn } from "../../types/KanaColumn";
+import { KanaData } from "../../data/DataTypes";
 
 describe("Hiragana", () => {
     describe("Unicode Mappings", () => {
@@ -129,17 +129,17 @@ describe("Hiragana", () => {
             expect(kana.column).toBe(KanaColumn.VOWEL);
         });
 
-        const k = getMultipleHiragana(["ka", "ki", "ku", "ke", "ko", "kya", "kyu", "kyo","gya", "gyu", "gyo"]);
+        const k = getMultipleHiragana(["ka", "ki", "ku", "ke", "ko", "kya", "kyu", "kyo", "gya", "gyu", "gyo"]);
         each(k).it("Should return the k column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.K);
         });
 
-        const s = getMultipleHiragana(["sa", "shi", "su", "se", "so", "sha", "shu", "sho","ja", "ju","jo"]);
+        const s = getMultipleHiragana(["sa", "shi", "su", "se", "so", "sha", "shu", "sho", "ja", "ju", "jo"]);
         each(s).it("Should return the s column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.S);
         });
 
-        const t = getMultipleHiragana(["ta", "chi", "tsu", "te", "to", "cha", "chu", "cho", "dya","dyu", "dyo"]);
+        const t = getMultipleHiragana(["ta", "chi", "tsu", "te", "to", "cha", "chu", "cho", "dya", "dyu", "dyo"]);
         each(t).it("Should return the t column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.T);
         });
@@ -149,7 +149,7 @@ describe("Hiragana", () => {
             expect(kana.column).toBe(KanaColumn.N);
         });
 
-        const h = getMultipleHiragana(["ha", "hi", "hu", "he", "ho", "hya", "hyu", "hyo","bya","byu","byo","pya","pyu","pyo"]);
+        const h = getMultipleHiragana(["ha", "hi", "hu", "he", "ho", "hya", "hyu", "hyo", "bya", "byu", "byo", "pya", "pyu", "pyo"]);
         each(h).it("Should return the h column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.H);
         });
@@ -227,6 +227,43 @@ describe("Hiragana", () => {
         it("pya", () => expect(getHiragana("pya").code).toEqual("ぴゃ"));
         it("pyu", () => expect(getHiragana("pyu").code).toEqual("ぴゅ"));
         it("pyo", () => expect(getHiragana("pyo").code).toEqual("ぴょ"));
+    });
+
+    describe("Is Diacritical", () => {
+        const diacritical = getMultipleHiragana(
+            [
+                "ga", "gi", "gu", "ge", "go",
+                "za", "ji", "zu", "ze", "zo",
+                "ja", "ju", "jo",
+                "da", "di", "du", "de", "do",
+                "dya", "dyu", "dyo",
+                "ba", "bi", "bu", "be", "bo",
+                "pa", "pi", "pu", "pe", "po",
+                "bya", "byu", "byo",
+                "pya", "pyu", "pyo",
+
+            ]
+        );
+        each(diacritical).it("it should have diacritical set to true", (kana) => {
+            expect(kana.diacritical).toBe(true);
+        });
+
+        const regular = getMultipleHiragana([
+            "a", "i", "u", "e", "o",
+            "ka", "ki", "ku", "ke", "ko", "kya", "kyu", "kyo",
+            "sa", "shi", "su", "se", "so", "sha", "shu", "sho",
+            "ta", "chi", "tsu", "te", "to", "cha", "chu", "cho",
+            "na", "ni", "nu", "ne", "no", "nya", "nyu", "nyo",
+            "ha", "hi", "hu", "he", "ho", "hya", "hyu", "hyo",
+            "ma", "mi", "mu", "me", "mo", "mya", "myu", "myo",
+            "ya", "yu", "yo",
+            "ra", "ri", "ru", "re", "ro", "rya", "ryu", "ryo",
+            "wa", "wo",
+            "n"
+        ]);
+        each(regular).it("it should have diacritical set to false", (kana) => {
+            expect(kana.diacritical).toBe(false);
+        });
     });
 
     function getMultipleHiragana(names: string[]): KanaData[] {
