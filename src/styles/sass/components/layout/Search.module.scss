@@ -1,4 +1,50 @@
-.grid {
+.wrapper {
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+.searchWrapper {
+  margin: 15px;
   display: flex;
   justify-content: center;
+  width: 100%;
+  max-width: 1920px;
+}
+
+.search {
+  width: 100%;
+  max-width: 700px;
+}
+
+.label {
+  color: #FFF;
+  display: block;
+}
+
+@mixin switch {
+  width: 2rem;
+  height: 2.5rem;
+  display: block;
+}
+
+.switchWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.hiraganaSwitch {
+  @include switch;
+}
+
+.hiraganaSwitch > .custom-control-input:checked > .custom-control-label::before {
+  background-color: red;
+}
+
+.katakanaSwitch {
+  @include switch;
+}
+
+.diagraphSwitch {
+  @include switch;
 }

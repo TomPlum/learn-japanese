@@ -15,21 +15,8 @@ class Header extends Component<HeaderProps> {
                 <Navbar.Brand className={styles.brand}>
                     <img src="logo.png" className={styles.logo} alt="logo"/>
                 </Navbar.Brand>
+
                 <FontAwesomeIcon className={styles.search} icon={faSearch} onClick={this.props.onLaunchSearch}/>
-              {/*  <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Test Me</Nav.Link>
-                        <NavDropdown title="Resources" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Gallery</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider/>
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>*/}
             </Navbar>
         );
     }
