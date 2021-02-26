@@ -4,13 +4,14 @@ import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 import { faCheck, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { GameSettings, KanaSettings, LifeSettings, TimeSettings, HintSettings } from "../../types/GameSettings";
+import { GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../../types/GameSettings";
 import { HintQuantity } from "../../types/HintQuantity";
 import { LifeQuantity } from "../../types/LifeQuantity";
 import KanaSettingsForm from "./KanaSettingsForm";
 import HintSettingsForm from "./HintSettingsForm";
 import LifeSettingsForm from "./LifeSettingsForm";
 import TimeSettingsForm from "./TimeSettingsForm";
+import { DisplayType } from "../../types/DisplayType";
 
 interface GameSettingsMenuProps {
     mode: GameMode;
@@ -127,6 +128,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     onConfirmation = () => {
         const { kanaSettings, hintSettings, lifeSettings, timeSettings } = this.state;
         this.props.onSubmit({
+            display: { type: DisplayType.SINGLE_KANA },
             kana: kanaSettings,
             hints: hintSettings,
             lives: lifeSettings,

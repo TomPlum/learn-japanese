@@ -58,64 +58,62 @@ class Search extends Component<SearchProps, SearchState> {
         const { loading, search, kana, showHiragana, showKatakana, showDiagraphs, showDiacriticals } = this.state;
 
         return (
-            <Container className={styles.wrapper}>
+            <div className={styles.wrapper}>
                 <LoadingSpinner active={loading}/>
                 <Container className={styles.searchWrapper}>
+                    <SearchField onChange={this.onSearch} value={search} append={kana.length + " Results"} />
+                </Container>
+
+                <Container>
                     <Row>
-                        <Col>
-                            <SearchField onChange={this.onSearch} value={search} append={kana.length + " Results"} />
+                        <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
+                            <Form.Check
+                                type="switch"
+                                id="hiragana"
+                                className={styles.hiraganaSwitch}
+                                checked={showHiragana}
+                                onChange={() => this.setState({ showHiragana: !showHiragana })}
+                            />
+                            <Form.Label className={styles.label}>Hiragana</Form.Label>
+                        </Col>
+
+                        <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
+                            <Form.Check
+                                type="switch"
+                                id="katakana"
+                                className={styles.katakanaSwitch}
+                                checked={showKatakana}
+                                onChange={() => this.setState({ showKatakana: !showKatakana })}
+                            />
+                            <Form.Label className={styles.label}>Katakana</Form.Label>
+                        </Col>
+
+                        <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
+                            <Form.Check
+                                type="switch"
+                                id="diagraphs"
+                                className={styles.diagraphSwitch}
+                                checked={showDiagraphs}
+                                onChange={() => this.setState({ showDiagraphs: !showDiagraphs })}
+                            />
+                            <Form.Label className={styles.label}>Diagraphs</Form.Label>
+                        </Col>
+
+                        <Col className={styles.switchWrapper} md={3} sm={12} xs={6}>
+                            <Form.Check
+                                type="switch"
+                                id="diacriticals"
+                                className={styles.diacriticalSwitch}
+                                checked={showDiacriticals}
+                                onChange={() => this.setState({ showDiacriticals: !showDiacriticals })}
+                            />
+                            <Form.Label className={styles.label}>Diacriticals</Form.Label>
                         </Col>
                     </Row>
                 </Container>
 
-                <Row>
-                    <Col className={styles.switchWrapper} xs={4}>
-                        <Form.Check
-                            type="switch"
-                            id="hiragana"
-                            className={styles.hiraganaSwitch}
-                            checked={showHiragana}
-                            onChange={() => this.setState({ showHiragana: !showHiragana })}
-                        />
-                        <Form.Label className={styles.label}>Hiragana</Form.Label>
-                    </Col>
-
-                    <Col className={styles.switchWrapper} xs={4}>
-                        <Form.Check
-                            type="switch"
-                            id="katakana"
-                            className={styles.katakanaSwitch}
-                            checked={showKatakana}
-                            onChange={() => this.setState({ showKatakana: !showKatakana })}
-                        />
-                        <Form.Label className={styles.label}>Katakana</Form.Label>
-                    </Col>
-
-                    <Col className={styles.switchWrapper} xs={4}>
-                        <Form.Check
-                            type="switch"
-                            id="diagraphs"
-                            className={styles.diagraphSwitch}
-                            checked={showDiagraphs}
-                            onChange={() => this.setState({ showDiagraphs: !showDiagraphs })}
-                        />
-                        <Form.Label className={styles.label}>Diagraphs</Form.Label>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col className={styles.switchWrapper} xs={12}>
-                        <Form.Check
-                            type="switch"
-                            id="diacriticals"
-                            className={styles.diacriticalSwitch}
-                            checked={showDiacriticals}
-                            onChange={() => this.setState({ showDiacriticals: !showDiacriticals })}
-                        />
-                        <Form.Label className={styles.label}>Diacriticals</Form.Label>
-                    </Col>
-                </Row>
                 <KanaGrid kana={kana}/>
-            </Container>
+            </div>
         )
     }
 

@@ -32,7 +32,7 @@ class Landing extends Component {
                         <p>You have a limited number of lives. Each time you answer incorrectly you lose a life.</p>
                     </Col>
                     <Col xs={10}>
-                        <HintButton quantity={3} kana={new Kana("\u3042", "a", KanaType.HIRAGANA, KanaColumn.VOWEL)} />
+                        <HintButton quantity={3} kana={new Kana("\u3042", "a", KanaType.HIRAGANA, KanaColumn.VOWEL, false)} />
                     </Col>
                 </Row>
 

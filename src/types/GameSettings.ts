@@ -1,11 +1,18 @@
 import { HintQuantity } from "./HintQuantity";
 import { LifeQuantity } from "./LifeQuantity";
+import { DisplayType } from "./DisplayType";
 
 export interface GameSettings {
+    display: DisplaySettings;
     kana: KanaSettings
     hints: HintSettings;
     lives: LifeSettings;
     time: TimeSettings;
+}
+
+export interface DisplaySettings {
+    type: DisplayType;
+    cards?: number;
 }
 
 export interface LifeSettings {
