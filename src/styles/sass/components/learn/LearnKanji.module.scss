@@ -2,7 +2,7 @@
 
 }
 
-.cardWrapper {
+.cardWrapper, .buttonWrapper, .header {
   padding: 0;
   display: flex;
   justify-content: center;
@@ -10,10 +10,14 @@
   align-content: center;
 }
 
+
 .remaining {
   display: block;
   color: #FFF;
 }
 
 .next {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 450px;
 }

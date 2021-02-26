@@ -33,22 +33,21 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
 
         return (
             <Container className={styles.wrapper}>
-                <Row>
+                <Row className={styles.header}>
                     <p className={styles.remaining}>
                         {(kanji.length - remaining.length)}/{kanji.length}
                     </p>
                 </Row>
 
-                <Row noGutters className={styles.cardWrapper}>
+                <Row className={styles.cardWrapper}>
                     <FlashCard kanji={current} key={current.getValue()} />
                 </Row>
 
-                <Row>
-                    <Button className={styles.next} onClick={this.next}>
+                <Row className={styles.buttonWrapper}>
+                    <Button variant="success" className={styles.next} onClick={this.next}>
                         Next
                     </Button>
                 </Row>
-
             </Container>
         );
     }
