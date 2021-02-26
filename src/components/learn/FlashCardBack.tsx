@@ -20,7 +20,7 @@ class FlashCardBack extends Component<FlashCardBackProps> {
                 </Row>
                 <Row>
                     <Col xs={12}>
-                        <KanjiDisplay value={kanji}/>
+                        <KanjiDisplay value={kanji} size={"7em"}/>
                     </Col>
                     <Col xs={12}>
                         <p className={styles.reading}>

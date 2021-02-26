@@ -39,7 +39,7 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
                     </p>
                 </Row>
 
-                <Row>
+                <Row noGutters className={styles.cardWrapper}>
                     <FlashCard kanji={current} key={current.getValue()} />
                 </Row>
 
