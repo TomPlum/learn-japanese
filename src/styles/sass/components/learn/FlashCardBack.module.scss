@@ -1,0 +1,22 @@
+@import "flash-cards";
+
+.wrapper {
+  @include card;
+}
+
+.reading {
+  color: #000000;
+  display: block;
+  margin: 0;
+}
+
+.grade {
+  color: #000000;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  height: 25px;
+  padding: 0 10px;
+}

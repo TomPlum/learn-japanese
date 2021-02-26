@@ -6,75 +6,41 @@ import styles from "../../styles/sass/components/learn/FlashCard.module.scss";
 import KanjiDisplay from "./KanjiDisplay";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactCardFlip from "react-card-flip";
+import FlashCardFront from "./FlashCardFront";
+import FlashCardBack from "./FlashCardBack";
 
 interface FlashCardProps {
     kanji: Kanji;
 }
 
 interface FlashCardState {
-    facingUp: boolean;
+    flipped: boolean;
 }
 
 class FlashCard extends Component<FlashCardProps, FlashCardState> {
     constructor(props: Readonly<FlashCardProps> | FlashCardProps) {
         super(props);
         this.state = {
-            facingUp: true
+            flipped: false
         }
     }
 
     render() {
-        const { facingUp } = this.state;
+        const { flipped } = this.state;
         const { kanji } = this.props;
 
         return (
             <Container className={styles.wrapper}>
-                {facingUp ?
-                    <Container className={styles.frontSideWrapper}>
-                        <Row>
-                            <Col>
-                                <KanjiDisplay value={kanji} />
-                            </Col>
-                        </Row>
-                    </Container>
-
-                    :
-
-                    <Container className={styles.backSideWrapper}>
-                        <Row className={styles.header}>
-                            <p className={styles.grade}>Grade {kanji.grade}</p>
-                        </Row>
-                        <Row>
-                            <Col xs={12}>
-                                <KanjiDisplay value={kanji} />
-                            </Col>
-                            <Col xs={12}>
-                                <p className={styles.reading}>
-                                    On: {this.getReading(ReadingType.ON)}
-                                </p>
-                                <p className={styles.reading}>
-                                    Kun: {this.getReading(ReadingType.KUN)}
-                                </p>
-                                <p className={styles.reading}>
-                                    Meaning(s): {kanji.meanings.join(",")}
-                                </p>
-                            </Col>
-                        </Row>
-                    </Container>
-                }
-                {facingUp &&
-                <Button variant="outline-warning" className={styles.reveal} onClick={() => this.setState({ facingUp: !facingUp })}>
-                    <FontAwesomeIcon icon={faReply} />
-                </Button>}
+                <ReactCardFlip isFlipped={flipped}>
+                    <FlashCardFront kanji={kanji} onClick={this.flip} />
+                    <FlashCardBack kanji={kanji} onClick={this.flip} />
+                </ReactCardFlip>
             </Container>
         );
     }
 
-    private getReading = (type: ReadingType): string => {
-        return this.props.kanji.readings
-            .filter(it => it.type === type)
-            .map(it => it.romanji + "(" + it.kana + ")")[0];
-    }
+    private flip = () => this.setState({ flipped: !this.state.flipped });
 }
 
 export default FlashCard;

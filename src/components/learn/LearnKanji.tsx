@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Kanji } from "../../types/kanji/Kanji";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Container, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import FlashCard from "./FlashCard";
 import styles from "../../styles/sass/components/learn/LearnKanji.module.scss";
@@ -37,11 +37,18 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
                     <p className={styles.remaining}>
                         {(kanji.length - remaining.length)}/{kanji.length}
                     </p>
+                </Row>
+
+                <Row>
                     <FlashCard kanji={current} key={current.getValue()} />
+                </Row>
+
+                <Row>
                     <Button className={styles.next} onClick={this.next}>
                         Next
                     </Button>
                 </Row>
+
             </Container>
         );
     }
