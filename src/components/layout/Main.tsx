@@ -1,15 +1,12 @@
 import { Component } from "react";
 import { Container } from "react-bootstrap";
-import KanaMemoryTest from "../game/KanaMemoryTest";
-import { Kana } from "../../types/Kana";
-import { KanaRepository } from "../../repository/KanaRepository";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import styles from "../../styles/sass/components/layout/Main.module.scss";
-import GameModeMenu from "./GameModeMenu";
-import { GameMode } from "../../types/GameMode";
-import { GameSettings } from "../../types/GameSettings";
 import ResultScreen from "../results/ResultScreen";
 import GameResult from "../../types/GameResult";
+import { KanjiRepository } from "../../repository/KanjiRepository";
+import { Kanji } from "../../types/kanji/Kanji";
+import LearnKanji from "../learn/LearnKanji";
 
 interface MainProps {
     onLaunchTest: () => void;
@@ -18,69 +15,71 @@ interface MainProps {
 
 interface MainState {
     loading: boolean;
-    kana?: Kana[];
-    gameSettings?: GameSettings;
+    kanji?: Kanji[];
+    grade?: number;
     inResultsScreen: boolean;
     result?: GameResult;
 }
 
 class Main extends Component<MainProps, MainState> {
 
-    private readonly kanaRepository = new KanaRepository();
+    private readonly kanjiRepository = new KanjiRepository();
 
     constructor(props: MainProps | Readonly<MainProps>) {
         super(props);
         this.state = {
             loading: false,
-            kana: undefined,
-            gameSettings: undefined,
+            kanji: undefined,
+            grade: undefined,
             inResultsScreen: false,
             result: undefined
         }
     }
 
     render() {
-        const { loading, gameSettings, kana, inResultsScreen, result } = this.state;
+        const { loading, grade, kanji, inResultsScreen, result } = this.state;
 
         return (
-            <Container className={gameSettings ? styles.wrapperFullScreen : styles.wrapper}>
+            <Container className={grade ? styles.wrapperFullScreen : styles.wrapper}>
                 <LoadingSpinner active={loading}/>
-                {!gameSettings && !inResultsScreen &&
-                    <GameModeMenu onSelectedMode={this.startGame}/>
-                }
+                {/*{!grade && !inResultsScreen &&
+                    <KanjiSettingsMenu onSelected={this.startGame}/>
+                }*/}
 
-                {gameSettings && kana && !inResultsScreen &&
+                <LearnKanji kanji={new KanjiRepository().read({ grades: [1] })} />
+
+               {/* {grade && kanji && !inResultsScreen &&
                     <KanaMemoryTest
                         kana={kana}
                         settings={gameSettings}
                         onClose={this.onGameClose}
                         onFinish={this.onGameFinish}
                     />
-                }
+                }*/}
 
                 {inResultsScreen && result && <ResultScreen result={result} onClose={this.onResultMenuClose}/>}
             </Container>
         );
     }
 
-    private startGame = (mode: GameMode, settings: GameSettings) => {
+    private startGame = (grade: number) => {
         this.props.onLaunchTest();
-        this.setState({ gameSettings: settings }, () => this.loadKana());
+        this.setState({ grade }, () => this.loadKanji());
     }
 
     private onGameClose = () => {
         this.props.onCloseTest();
-        this.setState({ gameSettings: undefined });
+        this.setState({ grade: undefined });
     }
 
     private onResultMenuClose = () => this.setState({ inResultsScreen: false, result: undefined });
 
-    private onGameFinish = (result: GameResult) => this.setState({ inResultsScreen: true, result, gameSettings: undefined });
+    private onGameFinish = (result: GameResult) => this.setState({ inResultsScreen: true, result });
 
-    private loadKana() {
+    private loadKanji() {
         this.setState({ loading: true });
-        const kana = this.kanaRepository.read(this.state.gameSettings?.kana);
-        this.setState({ loading: false, kana });
+        const kanji = this.kanjiRepository.read({ grades: [this.state.grade ?? 1] });
+        this.setState({ loading: false, kanji });
     }
 }
 
