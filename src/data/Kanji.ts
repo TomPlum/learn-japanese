@@ -92,3 +92,5 @@ const kanji: KanjiData[] = [
         grade: 1
     }
 ];
+
+export default kanji;

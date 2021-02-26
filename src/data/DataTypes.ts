@@ -12,7 +12,7 @@ export interface KanjiData {
     code: string;
     on: KanjiReading[];
     kun: KanjiReading[];
-    source?: string;
+    source: string;
     meanings: string[];
     grade: number;
 }
