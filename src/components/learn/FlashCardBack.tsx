@@ -18,19 +18,19 @@ class FlashCardBack extends Component<FlashCardBackProps> {
                 <Row className={styles.header}>
                     <p className={styles.grade}>Grade {kanji.grade}</p>
                 </Row>
-                <Row>
-                    <Col xs={12}>
-                        <KanjiDisplay value={kanji} size={"7em"}/>
+                <Row className={styles.body}>
+                    <Col sm={6} xs={12}>
+                        <KanjiDisplay value={kanji} size={"9em"}/>
                     </Col>
-                    <Col xs={12}>
-                        <p className={styles.reading}>
-                            On: {this.getReading(ReadingType.ON)}
+                    <Col sm={6} xs={12}>
+                        <p className={styles.text}>
+                            <strong>On:</strong> {this.getReading(ReadingType.ON)}
                         </p>
-                        <p className={styles.reading}>
-                            Kun: {this.getReading(ReadingType.KUN)}
+                        <p className={styles.text}>
+                            <strong>Kun:</strong> {this.getReading(ReadingType.KUN)}
                         </p>
-                        <p className={styles.reading}>
-                            Meaning(s): {kanji.meanings.join(", ")}
+                        <p className={styles.text}>
+                            <strong>Meaning:</strong> {kanji.meanings.join(", ")}
                         </p>
                     </Col>
                 </Row>

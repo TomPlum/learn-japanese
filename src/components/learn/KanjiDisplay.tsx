@@ -12,7 +12,7 @@ class KanjiDisplay extends Component<KanjiDisplayProps> {
     render() {
         return (
             <Container className={styles.wrapper}>
-                <p className={styles.value} style={{fontSize: this.props.size ?? "8em"}}>
+                <p className={styles.value} style={{fontSize: this.props.size ?? "8em", lineHeight: "1em"}}>
                     {this.props.value.getValue()}
                 </p>
             </Container>

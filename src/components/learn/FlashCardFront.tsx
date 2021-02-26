@@ -14,7 +14,7 @@ class FlashCardFront extends Component<FlashCardFrontProps> {
         return (
             <Container className={styles.wrapper} onClick={this.props.onClick}>
                 <Row>
-                    <KanjiDisplay value={this.props.kanji} size={"11em"}/>
+                    <KanjiDisplay value={this.props.kanji} size={"12em"}/>
                 </Row>
             </Container>
         );
