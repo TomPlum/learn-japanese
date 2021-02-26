@@ -1,32 +1,35 @@
 import { Component } from "react";
-import { Navbar } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/layout/Header.module.scss";
 
-interface HeaderProps {
-    onLaunchSearch: () => void;
-}
-
-class Header extends Component<HeaderProps> {
+class Header extends Component {
     render() {
         return (
-            <Navbar bg="dark" variant="dark" expand={undefined} sticky="top">
+            <Navbar bg="dark" variant="dark" expand="sm" sticky="top">
                 <Navbar.Brand className={styles.brand}>
-                    <img src="logo.png" className={styles.logo} alt="logo"/>
+                    <a href="/">
+                        <img src="logo.png" className={styles.logo} alt="logo"/>
+                    </a>
                 </Navbar.Brand>
 
-                <Navbar.Toggle />
+                <Navbar.Toggle/>
 
-                <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Text>
-                        <FontAwesomeIcon
-                            className={styles.search}
-                            icon={faSearch}
-                            onClick={this.props.onLaunchSearch}
-                            title="Search Kana"
-                        />
-                    </Navbar.Text>
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link href="/">
+                            <FontAwesomeIcon icon={faHome} /> Home
+                        </Nav.Link>
+
+                        <Nav.Link href="/play">
+                            <FontAwesomeIcon icon={faPlay} /> Play
+                        </Nav.Link>
+
+                        <Nav.Link href="/search">
+                            <FontAwesomeIcon icon={faSearch} /> Search
+                        </Nav.Link>
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
         );
