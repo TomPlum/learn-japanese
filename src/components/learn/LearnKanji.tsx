@@ -4,6 +4,7 @@ import { Button, Container, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import FlashCard from "./FlashCard";
 import styles from "../../styles/sass/components/learn/LearnKanji.module.scss";
+import QuitButton from "../ui/QuitButton";
 
 interface LearnKanjiProps {
     kanji: Kanji[];

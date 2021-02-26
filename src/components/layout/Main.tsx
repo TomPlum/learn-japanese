@@ -7,6 +7,7 @@ import Switch from "react-bootstrap/Switch";
 import Game from "../game/Game";
 import Search from "./Search";
 import Landing from "./Landing";
+import KanjiPage from "../pages/KanjiPage";
 
 interface MainState {
     settings?: GameSettings;
@@ -29,6 +30,7 @@ class Main extends Component<{}, MainState> {
                     <Route path="/" component={Landing} exact />
                     <Route path="/play" component={Game}/>
                     <Route path="/search" component={Search}/>
+                    <Route path="/kanji" component={KanjiPage}/>
                 </Switch>
             </Container>
         );

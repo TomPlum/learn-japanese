@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faHome, faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/layout/Header.module.scss";
 
 class Header extends Component {
@@ -24,6 +24,10 @@ class Header extends Component {
 
                         <Nav.Link href="/play">
                             <FontAwesomeIcon icon={faPlay} /> Play
+                        </Nav.Link>
+
+                        <Nav.Link href="/kanji">
+                            <FontAwesomeIcon icon={faCircle} /> Kanji
                         </Nav.Link>
 
                         <Nav.Link href="/search">
