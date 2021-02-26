@@ -1,0 +1,36 @@
+.frontSideWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  border: #FFF 2px solid;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.reading {
+  color: #FFF;
+  display: block;
+}
+
+.grade {
+  color: #FFF;
+  justify-content: flex-end;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  height: 25px;
+}
+
+.reveal {
+  width: 35px;
+  height: 35px;
+  padding: 1px;
+  border-width: 2px;
+  border-radius: 50%;
+}

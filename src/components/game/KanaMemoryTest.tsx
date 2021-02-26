@@ -52,7 +52,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
         const { settings } = this.props;
 
-        const [firstKana, remainingKana] = this.getRandomKana(this.props.kana);
+        const [firstKana, remainingKana] = RandomNumberGenerator.getRandomObject(this.props.kana);
 
         this.state = {
             currentKana: firstKana,
@@ -179,7 +179,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 this.countdown.current?.reset();
 
                 //Pick a random remaining kana and remove it from the pool.
-                const [nextKana, nextRemainingKana] = this.getRandomKana(remainingKana);
+                const [nextKana, nextRemainingKana] = RandomNumberGenerator.getRandomObject(remainingKana);
 
                 //Update the next kana to be displayed and the remaining kana with one less.
                 this.setState({
@@ -201,7 +201,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     reset = () => {
-        const [nextKana, remainingKana] = this.getRandomKana(this.props.kana);
+        const [nextKana, remainingKana] = RandomNumberGenerator.getRandomObject(this.props.kana);
 
         this.setState({
             currentKana: nextKana,
@@ -223,7 +223,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         this.countdown.current?.reset();
 
         //Pick a random remaining kana and remove it from the pool.
-        const [nextKana, nextRemainingKana] = this.getRandomKana(remainingKana);
+        const [nextKana, nextRemainingKana] = RandomNumberGenerator.getRandomObject(remainingKana);
 
         this.setState({
             currentKana: nextKana,
@@ -243,19 +243,6 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     private onPaused = () => this.setState({ paused: !this.state.paused })
-
-    /**
-     * Picks a random Kana from the given pool and removes it.
-     * @param pool The array of Kana to choose from.
-     * @returns A two-element tuple containing the randomly chosen kana and the trimmed pool.
-     */
-    private getRandomKana = (pool: Kana[]): [Kana, Kana[]] => {
-        const kana = [...pool];
-        const randomKanaIndex = RandomNumberGenerator.getRandomArrayIndex(kana);
-        const firstKana = kana[randomKanaIndex];
-        kana.splice(randomKanaIndex, 1);
-        return [firstKana, kana];
-    };
 }
 
 export default KanaMemoryTest;

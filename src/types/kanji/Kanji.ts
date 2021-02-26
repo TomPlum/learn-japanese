@@ -1,6 +1,7 @@
 import { Reading } from "./Reading";
+import JapaneseCharacter from "../JapaneseCharacter";
 
-export class Kanji {
+export class Kanji implements JapaneseCharacter {
     private readonly _character: string;
     private readonly _readings: Reading[];
     private readonly _meanings: string[];
@@ -13,10 +14,6 @@ export class Kanji {
         this._meanings = meanings;
         this._grade = grade;
         this._source = source;
-    }
-
-    get character(): string {
-        return this._character;
     }
 
     get readings(): Reading[] {
@@ -33,5 +30,9 @@ export class Kanji {
 
     get source(): string {
         return this._source;
+    }
+
+    public getValue(): string {
+        return this._character;
     }
 }
