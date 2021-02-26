@@ -7,6 +7,11 @@
   min-height: 100%;
 }
 
+.switch {
+  width: 100%;
+  padding: 0;
+}
+
 .wrapper {
   @include wrapper;
   margin-top: -56px;
