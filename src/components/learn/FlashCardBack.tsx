@@ -32,7 +32,7 @@ class FlashCardBack extends Component<FlashCardBackProps> {
                             {": " + this.getReading(ReadingType.ON)}
                         </p>
                         <p className={styles.text}>
-                            <Inspectable title="Kun'yomi Reading" text={Environment.variable("KUNYOMI_DESC")}>
+                            <Inspectable title="Kun-yomi Reading" text={Environment.variable("KUNYOMI_DESC")}>
                                 <strong>Kun</strong>
                             </Inspectable>
                             {": " + this.getReading(ReadingType.KUN)}

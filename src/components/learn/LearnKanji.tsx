@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Kanji } from "../../types/kanji/Kanji";
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Container, ProgressBar, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import FlashCard from "./FlashCard";
 import styles from "../../styles/sass/components/learn/LearnKanji.module.scss";
@@ -31,13 +31,15 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
         const { current, remaining } = this.state;
         const { kanji } = this.props;
         const hasKanjiRemaining = remaining.length > 0;
-
         return (
             <Container className={styles.wrapper}>
                 <Row className={styles.header}>
-                    <p className={styles.remaining}>
-                        {(kanji.length - remaining.length)}/{kanji.length}
-                    </p>
+                    <ProgressBar
+                        now={((kanji.length - remaining.length) / kanji.length) * 100}
+                        className={styles.progress}
+                        animated={hasKanjiRemaining}
+                        variant={!hasKanjiRemaining ? "success" : undefined}
+                    />
                 </Row>
 
                 <Row className={styles.cardWrapper}>
