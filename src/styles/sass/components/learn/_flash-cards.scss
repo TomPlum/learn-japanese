@@ -1,12 +1,11 @@
 @import "../../mixins";
 
 @mixin card {
-  border: #1aa7e2 5px solid;
+  border: #4189ff 5px solid;
   border-radius: 20px;
   padding: 10px;
   perspective: 1000px;
   background-color: #ffffff;
-  //height: 300px;
   min-height: 300px;
   width: 100%;
   max-width: 450px;

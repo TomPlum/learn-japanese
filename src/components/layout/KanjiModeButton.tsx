@@ -1,6 +1,8 @@
 import { Component } from "react";
-import { Button } from "react-bootstrap";
+import { FormControl, InputGroup } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/KanjiModeButton.module.scss";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface KanjiModeButtonProps {
     grade: number;
@@ -26,14 +28,14 @@ class KanjiModeButton extends Component<KanjiModeButtonProps> {
         const { grade, quantity, isSelected } = this.props;
 
         return (
-            <Button
-                block
-                className={isSelected ? styles.selected : styles.notSelected}
-                onClick={this.handleClick}
-            >
-                <p className={styles.icon}>G{grade}</p>
-                <p className={styles.name}>{quantity} Kanji</p>
-            </Button>
+            <InputGroup className="mb-3">
+                <FormControl as="button" className={isSelected ? styles.selected : styles.notSelected} onClick={this.handleClick}>
+                    <FontAwesomeIcon icon={faChevronRight} /> Grade {grade}
+                </FormControl>
+                <InputGroup.Append className={styles.append}>
+                    <InputGroup.Text >(x{quantity})</InputGroup.Text>
+                </InputGroup.Append>
+            </InputGroup>
         );
     }
 }

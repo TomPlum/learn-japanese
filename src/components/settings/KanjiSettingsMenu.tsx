@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,65 +33,56 @@ class KanjiSettingsMenu extends Component<KanjiSettingsMenuProps, KanjiSettingsM
                     </Col>
                 </Row>
                 <Row>
-                    <Col className={styles.leftColumn}>
-                        <KanjiModeButton
-                            grade={1}
-                            quantity={80}
-                            iconColour={"#fdb40e"}
-                            isSelected={grade === 1}
-                            onClick={this.onSelect}
-                        />
+                    <Col xs={12}>
+                        <ListGroup>
+                            <KanjiModeButton
+                                grade={1}
+                                quantity={80}
+                                iconColour={"#fdb40e"}
+                                isSelected={grade === 1}
+                                onClick={this.onSelect}
+                            />
+                            <KanjiModeButton
+                                grade={2}
+                                quantity={160}
+                                iconColour={"#fdb40e"}
+                                isSelected={grade === 2}
+                                onClick={this.onSelect}
+                            />
+                            <KanjiModeButton
+                                grade={3}
+                                quantity={200}
+                                iconColour={"#fdb40e"}
+                                isSelected={grade === 3}
+                                onClick={this.onSelect}
+                            />
+                            <KanjiModeButton
+                                grade={4}
+                                quantity={200}
+                                iconColour={"#fdb40e"}
+                                isSelected={grade === 4}
+                                onClick={this.onSelect}
+                            />
+                            <KanjiModeButton
+                                grade={5}
+                                quantity={185}
+                                iconColour={"#fdb40e"}
+                                isSelected={grade === 5}
+                                onClick={this.onSelect}
+                            />
+                            <KanjiModeButton
+                                grade={6}
+                                quantity={181}
+                                iconColour={"#fdb40e"}
+                                isSelected={grade === 6}
+                                onClick={this.onSelect}
+                            />
+                        </ListGroup>
                     </Col>
-                    <Col className={styles.rightColumn}>
-                        <KanjiModeButton
-                            grade={2}
-                            quantity={160}
-                            iconColour={"#ff7730"}
-                            isSelected={grade === 2}
-                            onClick={this.onSelect}
-                        />
-                    </Col>
-                </Row>
+                    <Col xs={6}>
+                        <ListGroup>
 
-                <Row>
-                    <Col className={styles.leftColumn}>
-                        <KanjiModeButton
-                            grade={3}
-                            isSelected={grade === 3}
-                            quantity={200}
-                            iconColour={"#1785e2"}
-                            onClick={this.onSelect}
-                        />
-                    </Col>
-                    <Col className={styles.rightColumn}>
-                        <KanjiModeButton
-                            grade={4}
-                            isSelected={grade === 4}
-                            quantity={200}
-                            iconColour={"#a01219"}
-                            onClick={this.onSelect}
-                        />
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col className={styles.leftColumn}>
-                        <KanjiModeButton
-                            grade={5}
-                            quantity={185}
-                            iconColour={"#fc3131"}
-                            isSelected={grade === 5}
-                            onClick={this.onSelect}
-                        />
-                    </Col>
-                    <Col className={styles.rightColumn}>
-                        <KanjiModeButton
-                            grade={6}
-                            quantity={181}
-                            iconColour={"#41d085"}
-                            isSelected={grade === 6}
-                            onClick={this.onSelect}
-                        />
+                        </ListGroup>
                     </Col>
                 </Row>
 

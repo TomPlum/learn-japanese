@@ -1,14 +1,12 @@
 @mixin button {
-  height: 100px;
   max-width: 300px;
-  width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  text-align: left;
 }
 
 .notSelected:hover {
   color: black;
   background-color: #b3b3b3;
-  border: none;
 }
 
 .selected:hover {
@@ -28,14 +26,4 @@
   background-color: rgba(215, 215, 215, 0.6);
   border-color: rgba(148, 148, 148, 0.8);
   color: rgba(0, 0, 0, 0.8);
-}
-
-.icon {
-  font-size: 1.6em;
-  margin-bottom: 5px;
-}
-
-.name {
-  font-size: 1.1em;
-  margin-bottom: 0;
 }
