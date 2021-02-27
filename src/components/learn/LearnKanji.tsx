@@ -12,6 +12,7 @@ interface LearnKanjiProps {
 interface LearnKanjiState {
     current: Kanji;
     remaining: Kanji[];
+    hasPeeked: boolean;
 }
 
 class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
@@ -23,12 +24,13 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
 
         this.state = {
             current: firstKanji,
-            remaining: remainingKanji
+            remaining: remainingKanji,
+            hasPeeked: false
         }
     }
 
     render() {
-        const { current, remaining } = this.state;
+        const { current, remaining, hasPeeked } = this.state;
         const { kanji } = this.props;
         const hasKanjiRemaining = remaining.length > 0;
         return (
@@ -43,14 +45,16 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
                 </Row>
 
                 <Row className={styles.cardWrapper}>
-                    <FlashCard kanji={current} key={current.getValue()} />
+                    <FlashCard kanji={current} key={current.getValue()} onFlip={this.onFlip} />
                 </Row>
 
                 <Row className={styles.buttonWrapper}>
                     <Button
                         variant={hasKanjiRemaining ? "success" : "info"}
                         className={styles.next}
-                        onClick={hasKanjiRemaining ? this.next : this.restart}>
+                        onClick={hasKanjiRemaining ? this.next : this.restart}
+                        disabled={!hasPeeked}
+                    >
                         {hasKanjiRemaining ? "Next" : "Restart"}
                     </Button>
                 </Row>
@@ -61,7 +65,7 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
     private next = () => {
         const { remaining } = this.state;
         const [ next, nextRemaining ] = RandomNumberGenerator.getRandomObject(remaining);
-        this.setState({ current: next, remaining: nextRemaining });
+        this.setState({ current: next, remaining: nextRemaining, hasPeeked: false });
     }
 
     private restart = () => {
@@ -70,6 +74,12 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
             current: firstKanji,
             remaining: remainingKanji
         });
+    }
+
+    private onFlip = (flips: number) => {
+        if (flips > 0) {
+            this.setState({ hasPeeked: true });
+        }
     }
 }
 

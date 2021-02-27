@@ -28,7 +28,9 @@ class FlashCardBack extends Component<FlashCardBackProps> {
 
                 <Row className={styles.body}>
                     <Col sm={6} xs={12}>
-                        <KanjiDisplay value={kanji} size={"8em"}/>
+                        <a href={kanji.source} target="_blank" className={styles.source}>
+                            <KanjiDisplay value={kanji} size={"8em"}/>
+                        </a>
                     </Col>
                     <Col sm={6} xs={12}>
                         <p className={styles.text}>
@@ -53,7 +55,7 @@ class FlashCardBack extends Component<FlashCardBackProps> {
                     <Col xs={12}>
                         {kanji.examples.map(example => {
                             return <p className={styles.example}>
-                                {example.kanji} - {example.kana[0]} - {example.english[0]}
+                                {example.kanji} - {example.kana[0]} - {example.english.join(", ")}
                             </p>
                         })}
                     </Col>

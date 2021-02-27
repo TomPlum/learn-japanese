@@ -59,7 +59,7 @@ const kanji: KanjiData[] = [
         meanings: ["day", "sun"],
         grade: 1,
         examples: [
-            { value: "日", kana: ["ひ"], english: ["day", "days sun", "sunshine", "sunlight"] },
+            { value: "日", kana: ["ひ"], english: ["day", "days", "sun", "sunshine", "sunlight"] },
             { value: "同日", kana: ["どうじつ"], english: ["the same day"] },
             { value: "日米", kana: ["にちべい"], english: ["Japan"] },
             { value: "日本人", kana: ["にほんじん", "にっぽんじん"], english: ["Japanese person", "Japanese people"] },
@@ -75,7 +75,7 @@ const kanji: KanjiData[] = [
         meanings: ["inside", "middle"],
         grade: 1,
         examples: [
-            { value: "中央", kana: ["ちゅうおう"], english: ["centre", "central", "center", "middle"] },
+            { value: "中央", kana: ["ちゅうおう"], english: ["centre", "central"] },
             { value: "中国", kana: ["ちゅうごく"], english: ["China"] },
             { value: "中心", kana: ["ちゅうしん"], english: ["center", "centre", "middle", "heart", "core", "focus"] },
             { value: "中でも", kana: ["なかでも", "にっぽんじん"], english: ["among (other things)", "inter alia"] },

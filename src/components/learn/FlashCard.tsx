@@ -7,17 +7,20 @@ import styles from "../../styles/sass/components/learn/FlashCard.module.scss";
 
 interface FlashCardProps {
     kanji: Kanji;
+    onFlip: (count: number) => void;
 }
 
 interface FlashCardState {
     flipped: boolean;
+    flips: number;
 }
 
 class FlashCard extends Component<FlashCardProps, FlashCardState> {
     constructor(props: Readonly<FlashCardProps> | FlashCardProps) {
         super(props);
         this.state = {
-            flipped: false
+            flipped: false,
+            flips: 0
         }
     }
 
@@ -33,7 +36,11 @@ class FlashCard extends Component<FlashCardProps, FlashCardState> {
         );
     }
 
-    private flip = () => this.setState({ flipped: !this.state.flipped });
+    private flip = () => {
+        const { flipped, flips } = this.state;
+        this.setState({ flipped: !flipped, flips: flips + 1 });
+        this.props.onFlip(flips + 1);
+    }
 }
 
 export default FlashCard;
