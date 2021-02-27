@@ -1,3 +1,5 @@
+@import "../../mixins";
+
 .wrapper {
 
 }
@@ -14,6 +16,7 @@
 .remaining {
   display: block;
   color: #FFF;
+  @include noSelect;
 }
 
 .next {

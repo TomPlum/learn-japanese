@@ -1,5 +1,7 @@
+@import "../../mixins";
+
 @mixin card {
-  border: #1aa7e2 3px solid;
+  border: #1aa7e2 5px solid;
   border-radius: 20px;
   padding: 10px;
   perspective: 1000px;
@@ -9,4 +11,5 @@
   width: 100%;
   max-width: 450px;
   cursor: pointer;
+  @include noSelect;
 }

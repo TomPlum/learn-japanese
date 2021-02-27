@@ -1,3 +1,5 @@
+@import "../../mixins";
+
 .wrapper {
   display: flex;
   justify-content: center;
@@ -6,4 +8,5 @@
 .value {
   color: #000000;
   margin: 0;
+  @include noSelect;
 }
