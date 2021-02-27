@@ -25,9 +25,10 @@ class FlashCardBack extends Component<FlashCardBackProps> {
                         <FontAwesomeIcon icon={faReply} />
                     </Button>
                 </Row>
+
                 <Row className={styles.body}>
                     <Col sm={6} xs={12}>
-                        <KanjiDisplay value={kanji} size={"9em"}/>
+                        <KanjiDisplay value={kanji} size={"8em"}/>
                     </Col>
                     <Col sm={6} xs={12}>
                         <p className={styles.text}>
@@ -45,6 +46,16 @@ class FlashCardBack extends Component<FlashCardBackProps> {
                         <p className={styles.text}>
                             <strong>Meaning:</strong> {kanji.meanings.join(", ")}
                         </p>
+                    </Col>
+                </Row>
+
+                <Row className={styles.footer}>
+                    <Col xs={12}>
+                        {kanji.examples.map(example => {
+                            return <p className={styles.example}>
+                                {example.kanji} - {example.kana[0]} - {example.english[0]}
+                            </p>
+                        })}
                     </Col>
                 </Row>
             </Container>
