@@ -4,6 +4,8 @@ import styles from "../../styles/sass/components/learn/FlashCardBack.module.scss
 import KanjiDisplay from "./KanjiDisplay";
 import { Kanji } from "../../types/kanji/Kanji";
 import { ReadingType } from "../../types/kanji/ReadingType";
+import Inspectable from "../ui/Inspectable";
+import { Environment } from "../../utility/Environment";
 
 interface FlashCardBackProps {
     kanji: Kanji;
@@ -24,10 +26,16 @@ class FlashCardBack extends Component<FlashCardBackProps> {
                     </Col>
                     <Col sm={6} xs={12}>
                         <p className={styles.text}>
-                            <strong>On:</strong> {this.getReading(ReadingType.ON)}
+                            <Inspectable title="On-yomi Reading" text={Environment.variable("ONYOMI_DESC")}>
+                                <strong>On</strong>
+                            </Inspectable>
+                            {": " + this.getReading(ReadingType.ON)}
                         </p>
                         <p className={styles.text}>
-                            <strong>Kun:</strong> {this.getReading(ReadingType.KUN)}
+                            <Inspectable title="Kun'yomi Reading" text={Environment.variable("KUNYOMI_DESC")}>
+                                <strong>Kun</strong>
+                            </Inspectable>
+                            {": " + this.getReading(ReadingType.KUN)}
                         </p>
                         <p className={styles.text}>
                             <strong>Meaning:</strong> {kanji.meanings.join(", ")}

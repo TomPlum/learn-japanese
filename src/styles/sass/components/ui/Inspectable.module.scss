@@ -1,0 +1,13 @@
+.inspectable {
+  color: #000;
+  text-decoration: underline;
+  text-decoration-color: #585858;;
+  text-decoration-style: dotted;
+  transition: ease 0.5s;
+}
+
+.inspectable:hover {
+  color: #ffb428;
+  text-decoration: none;
+  transition: ease 0.5s;
+}
