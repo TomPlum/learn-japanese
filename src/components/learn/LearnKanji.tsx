@@ -4,7 +4,6 @@ import { Button, Container, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import FlashCard from "./FlashCard";
 import styles from "../../styles/sass/components/learn/LearnKanji.module.scss";
-import QuitButton from "../ui/QuitButton";
 
 interface LearnKanjiProps {
     kanji: Kanji[];
@@ -31,6 +30,7 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
     render() {
         const { current, remaining } = this.state;
         const { kanji } = this.props;
+        const hasKanjiRemaining = remaining.length > 0;
 
         return (
             <Container className={styles.wrapper}>
@@ -45,8 +45,11 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
                 </Row>
 
                 <Row className={styles.buttonWrapper}>
-                    <Button variant="success" className={styles.next} onClick={this.next}>
-                        Next
+                    <Button
+                        variant={hasKanjiRemaining ? "success" : "info"}
+                        className={styles.next}
+                        onClick={hasKanjiRemaining ? this.next : this.restart}>
+                        {hasKanjiRemaining ? "Next" : "Restart"}
                     </Button>
                 </Row>
             </Container>
@@ -57,6 +60,14 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
         const { remaining } = this.state;
         const [ next, nextRemaining ] = RandomNumberGenerator.getRandomObject(remaining);
         this.setState({ current: next, remaining: nextRemaining });
+    }
+
+    private restart = () => {
+        const [firstKanji, remainingKanji ] = RandomNumberGenerator.getRandomObject(this.props.kanji);
+        this.setState({
+            current: firstKanji,
+            remaining: remainingKanji
+        });
     }
 }
 
