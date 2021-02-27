@@ -1,11 +1,13 @@
 import { Component } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/learn/FlashCardBack.module.scss";
 import KanjiDisplay from "./KanjiDisplay";
 import { Kanji } from "../../types/kanji/Kanji";
 import { ReadingType } from "../../types/kanji/ReadingType";
 import Inspectable from "../ui/Inspectable";
 import { Environment } from "../../utility/Environment";
+import { faReply } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface FlashCardBackProps {
     kanji: Kanji;
@@ -16,9 +18,12 @@ class FlashCardBack extends Component<FlashCardBackProps> {
     render() {
         const { kanji } = this.props;
         return (
-            <Container className={styles.wrapper} onClick={this.props.onClick}>
+            <Container className={styles.wrapper}>
                 <Row className={styles.header}>
                     <p className={styles.grade}>Grade {kanji.grade}</p>
+                    <Button className={styles.back} variant="outline-danger" onClick={this.props.onClick}>
+                        <FontAwesomeIcon icon={faReply} />
+                    </Button>
                 </Row>
                 <Row className={styles.body}>
                     <Col sm={6} xs={12}>
@@ -32,7 +37,7 @@ class FlashCardBack extends Component<FlashCardBackProps> {
                             {": " + this.getReading(ReadingType.ON)}
                         </p>
                         <p className={styles.text}>
-                            <Inspectable title="Kun'yomi Reading" text={Environment.variable("KUNYOMI_DESC")}>
+                            <Inspectable title="Kun-yomi Reading" text={Environment.variable("KUNYOMI_DESC")}>
                                 <strong>Kun</strong>
                             </Inspectable>
                             {": " + this.getReading(ReadingType.KUN)}
