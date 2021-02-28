@@ -4,6 +4,7 @@ import { Arrays } from "../../utility/Arrays";
 import KanaDisplay from "./KanaDisplay";
 import { Alert, Button, Col, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
+import KanaQuestionBanner from "./KanaQuestionBanner";
 
 interface KanaChoiceQuestionProps {
     expected: Kana;
@@ -45,9 +46,7 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
 
         return (
             <>
-                <Alert className={styles.question} variant="secondary">
-                    Which kana is '{<strong>{expected.romanji}</strong>}'?
-                </Alert>
+                <KanaQuestionBanner value={expected} />
 
                 <Row>
                     {options.map(option => {
