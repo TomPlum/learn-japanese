@@ -161,7 +161,167 @@ const kanji: KanjiData[] = [
             { value: "出場", kana: ["しゅつじょう"], english: ["(stage) appearance", "participation"] },
             { value: "進出", kana: ["しんしゅつ"], english: ["advance", "step forward"] },
         ]
-    }
+    },
+    {
+        name: "三",
+        code: "\u4E09",
+        on: [{ kana: "さん", romanji: "san" }],
+        kun: [{ kana: "み", romanji: "mi" }],
+        source: "https://en.wiktionary.org/wiki/%E4%B8%89#Kanji",
+        meanings: ["three"],
+        grade: 1,
+        examples: [
+            { value: "三", kana: ["さん", "み"], english: ["three"] },
+            { value: "三つ", kana: ["みっつ"], english: ["three things"] },
+            { value: "三月", kana: ["さんがつ"], english: ["March"] },
+            { value: "三人", kana: ["さんにん", "みたり"], english: ["three people"] },
+            { value: "十三", kana: ["じゅうさん"], english: ["thirteen"] },
+        ]
+    },
+    {
+        name: "見",
+        code: "\u898B",
+        on: [{ kana: "けん", romanji: "ken" }],
+        kun: [{ kana: "みる", romanji: "miru" }],
+        source: "https://en.wiktionary.org/wiki/%E8%A6%8B#Kanji",
+        meanings: ["see"],
+        grade: 1,
+        examples: [
+            { value: "意見", kana: ["いけん"], english: ["opinion", "view"] },
+            { value: "会見", kana: ["かいけん"], english: ["interview", "audience"] },
+            { value: "見直し", kana: ["みなおし"], english: ["review", "reconsideration", "revision"] },
+            { value: "見方", kana: ["みかた"], english: ["viewpoint"] },
+            { value: "見通し", kana: ["みとおし"], english: ["perspective", "unobstructed view", "outlook"] },
+        ]
+    },
+    {
+        name: "月",
+        code: "\u6708",
+        on: [{ kana: "がつ", romanji: "gatsu" }],
+        kun: [{ kana: "つき", romanji: "tsuki" }],
+        source: "https://en.wiktionary.org/wiki/%E6%9C%88#Kanji",
+        meanings: ["month,", "moon"],
+        grade: 1,
+        examples: [
+            { value: "一月", kana: ["いちがつ"], english: ["January"] },
+            { value: "九月", kana: ["くがつ"], english: ["September"] },
+            { value: "五月", kana: ["ごがつ"], english: ["May"] },
+            { value: "今月", kana: ["こんげつ"], english: ["this month"] },
+            { value: "三月", kana: ["さんがつ"], english: ["March"] },
+        ]
+    },
+    {
+        name: "生",
+        code: "\u751F",
+        on: [{ kana: "しょう", romanji: "sho" }],
+        kun: [{ kana: "いきる", romanji: "ikiru" }],
+        source: "https://en.wiktionary.org/wiki/%E7%94%9F#Kanji",
+        meanings: ["life,", "genuine", "birth"],
+        grade: 1,
+        examples: [
+            { value: "生きる", kana: ["いきる"], english: ["to live", "to exist"] },
+            { value: "学生", kana: ["がくせい"], english: ["student"] },
+            { value: "生活", kana: ["せいかつ"], english: ["living", "life"] },
+            { value: "生産", kana: ["せいさん"], english: ["production", "manufacture"] },
+            { value: "厚生省", kana: ["こうせいしょう"], english: ["Ministry of Health, Labour and Welfare"] },
+        ]
+    },
+    {
+        name: "五",
+        code: "\u4E94",
+        on: [{ kana: "ご", romanji: "go" }],
+        kun: [{ kana: "いつ", romanji: "itsu" }],
+        source: "https://en.wiktionary.org/wiki/%E4%BA%94#Kanji",
+        meanings: ["five"],
+        grade: 1,
+        examples: [
+            { value: "五", kana: ["ご", "いつ", "い"], english: ["five"] },
+            { value: "五月", kana: ["ごがつ"], english: ["May"] },
+            { value: "十五", kana: ["じゅうご"], english: ["fifteen"] },
+            { value: "五輪", kana: ["ごりん"], english: ["the Olympics"] },
+            { value: "五十", kana: ["ごじゅう", "いそ", "い"], english: ["fifty"] },
+        ]
+    },
+    {
+        name: "上",
+        code: "\u4E0A",
+        on: [{ kana: "じょう", romanji: "jo" }],
+        kun: [{ kana: "うえ", romanji: "ue" }],
+        source: "https://en.wiktionary.org/wiki/%E4%B8%8A#Kanji",
+        meanings: ["above", "up"],
+        grade: 1,
+        examples: [
+            { value: "上がったり", kana: ["あがったり"], english: ["doomed", "in a bad state", "poor"] },
+            { value: "史上", kana: ["しじょう"], english: ["historical"] },
+            { value: "事実上", kana: ["じじつじょう"], english: ["(as a) matter of fact", "actually", "in reality"] },
+            { value: "上げ", kana: ["あげ"], english: ["rise in price", "making a tuck"] },
+            { value: "上昇", kana: ["じょうしょう"], english: ["rising", "ascending", "climbing"] },
+        ]
+    },
+    {
+        name: "四",
+        code: "\u56DB",
+        on: [{ kana: "し", romanji: "shi" }],
+        kun: [{ kana: "よん", romanji: "yon" }],
+        source: "https://en.wiktionary.org/wiki/%E5%9B%9B#Kanji",
+        meanings: ["four"],
+        grade: 1,
+        examples: [
+            { value: "四", kana: ["よん", "し", "よ"], english: ["four"] },
+            { value: "四つ", kana: ["よっつ"], english: ["four things"] },
+            { value: "四月", kana: ["しがつ"], english: ["April"] },
+            { value: "十四", kana: ["じゅうし", "じゅうよん"], english: ["fourteen"] },
+            { value: "四十", kana: ["よんじゅう", "しじゅう", "よそ"], english: ["forty"] },
+        ]
+    },
+    {
+        name: "金",
+        code: "\u91D1",
+        on: [{ kana: "こん", romanji: "kon" }],
+        kun: [{ kana: "かね", romanji: "kane" }],
+        source: "https://en.wiktionary.org/wiki/%E9%87%91#Kanji",
+        meanings: ["gold, money"],
+        grade: 1,
+        examples: [
+            { value: "お金", kana: ["おかね"], english: ["money"] },
+            { value: "金融", kana: ["きんゆう"], english: ["financing", "credit transacting"] },
+            { value: "金利", kana: ["きんり"], english: ["interest rates"] },
+            { value: "献金", kana: ["けんきん"], english: ["donation", "contribution", "offering"] },
+            { value: "資金", kana: ["しきん"], english: ["funds", "capital"] },
+        ]
+    },
+    {
+        name: "九",
+        code: "\u4E5D",
+        on: [{ kana: "きゅう", romanji: "kyū" }],
+        kun: [{ kana: " ここの", romanji: "kokono" }],
+        source: "https://en.wiktionary.org/wiki/%E4%B9%9D#Kanji",
+        meanings: ["nine"],
+        grade: 1,
+        examples: [
+            { value: "九", kana: ["きゅう", "く", "ここの", "この", "ここ"], english: ["nine"] },
+            { value: "九月", kana: ["くがつ"], english: ["September"] },
+            { value: "十九", kana: ["じゅうきゅう"], english: ["nineteen"] },
+            { value: "九州", kana: ["きゅうしゅう"], english: ["Kyushu"] },
+            { value: "九十", kana: ["きゅうじゅう", "くじゅう"], english: ["ninety"] },
+        ]
+    },
+    {
+        name: "入",
+        code: "\u5165",
+        on: [{ kana: "にゅう", romanji: "nyū" }],
+        kun: [{ kana: "いる", romanji: "iru" }],
+        source: "https://en.wiktionary.org/wiki/%E5%85%A5#Kanji",
+        meanings: ["enter", "insert"],
+        grade: 1,
+        examples: [
+            { value: "入り", kana: ["いり"], english: ["entering", "containing"] },
+            { value: "輸入", kana: ["ゆにゅう", "しゅにゅう"], english: ["important", "import", "introduction"] },
+            { value: "購入", kana: ["こうにゅう"], english: ["purchase", "busy"] },
+            { value: "収入", kana: ["しゅうにゅう"], english: ["income", "receipts", "revenue"] },
+            { value: "導入", kana: ["どうにゅう"], english: ["introduction", "bringing in", "leading in"] },
+        ]
+    },
 ];
 
 export default kanji;
