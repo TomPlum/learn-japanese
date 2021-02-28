@@ -146,6 +146,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                         key={currentKana.code}
                         expected={currentKana}
                         wrong={wrong}
+                        hidden={paused}
                         onSubmit={this.answerQuestion}
                     />
                 );

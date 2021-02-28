@@ -42,23 +42,15 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
         const { blur, kana, style } = this.props;
 
         const kanaClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.blur : styles.kana;
-        const leftDiagraphClass = isNotifyingIncorrect ? styles.redKana : '';
-        const rightDiagraphClass = isNotifyingIncorrect ? styles.redKana : '';
+        const leftDiagraphClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.blur : styles.diagraphLeft;
+        const rightDiagraphClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.blur : styles.diagraphRight;
 
         return (
-            <Container className={style?.container ?? styles.wrapper} onClick={() => this.props.onClick?.(kana)}>
+            <Container className={style?.container ? style.container : styles.wrapper} onClick={() => this.props.onClick?.(kana)}>
                 {kana.isDiagraph() ?
                     <>
-                        <DynamicCharacter
-                            value={kana.code[0]}
-                            style={style?.character}
-                            classes={[leftDiagraphClass, styles.diagraphLeft]}
-                        />
-                        <DynamicCharacter
-                            value={kana.code[1]}
-                            style={style?.character}
-                            classes={[rightDiagraphClass, styles.diagraphRight]}
-                        />
+                        <DynamicCharacter value={kana.code[0]} style={style?.character} classes={leftDiagraphClass} />
+                        <DynamicCharacter value={kana.code[1]} style={style?.character} classes={rightDiagraphClass} />
                     </> :
                     <DynamicCharacter value={kana.code} style={style?.character} classes={kanaClass}/>
                 }

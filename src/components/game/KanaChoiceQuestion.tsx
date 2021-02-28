@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { Kana } from "../../types/Kana";
 import { Arrays } from "../../utility/Arrays";
 import KanaDisplay from "./KanaDisplay";
-import { Button, Col, Row } from "react-bootstrap";
+import { Alert, Button, Col, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 
 interface KanaChoiceQuestionProps {
     expected: Kana;
     wrong: Kana[];
+    hidden: boolean;
     onSubmit: (correct: boolean) => void;
 }
 
@@ -39,22 +40,26 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
     }
 
     render() {
-        const { expected } = this.props;
+        const { expected, hidden } = this.props;
         const { selected, options } = this.state;
 
         return (
             <>
-                <p className={styles.question}>Which kana is '{expected.romanji}'?</p>
+                <Alert className={styles.question} variant="primary">
+                    Which kana is '{<strong>{expected.romanji}</strong>}'?
+                </Alert>
+
                 <Row>
                     {options.map(option => {
                         return (
-                            <Col xs={6} md={4}>
+                            <Col xs={6}>
                                 <KanaDisplay
                                     kana={option}
+                                    blur={hidden}
                                     onClick={this.select}
                                     style={{
                                         container: selected === option ? styles.selected : styles.tile,
-                                        character: { size: "md", color: selected === option ? "#34b7de" : "#FFF" }
+                                        character: { size: "md", color: selected === option ? "#34b7de" : undefined }
                                     }}
                                     ref={this.displays.get(option)}
                                 />
