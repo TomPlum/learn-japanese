@@ -42,8 +42,8 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
         const { blur, kana, style } = this.props;
 
         const kanaClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.blur : styles.kana;
-        const leftDiagraphClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.blur : styles.diagraphLeft;
-        const rightDiagraphClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.blur : styles.diagraphRight;
+        const leftDiagraphClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.diagraphBlur : styles.diagraphLeft;
+        const rightDiagraphClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.diagraphBlur : styles.diagraphRight;
 
         return (
             <Container className={style?.container ? style.container : styles.wrapper} onClick={() => this.props.onClick?.(kana)}>

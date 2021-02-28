@@ -23,6 +23,12 @@ $diagraph-margin: -10px;
   animation-fill-mode: forwards;
 }
 
+@mixin blur {
+  color: transparent;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+}
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -32,9 +38,12 @@ $diagraph-margin: -10px;
 
 .blur {
   @include kana;
-  color: transparent;
-  text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
+  @include blur;
+}
+
+.diagraphBlur {
+  @include diagraph;
+  @include blur;
 }
 
 .kana {
