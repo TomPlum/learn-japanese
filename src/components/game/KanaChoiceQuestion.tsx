@@ -18,14 +18,23 @@ interface KanaChoiceQuestionState {
 
 class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQuestionState> {
 
+    private displays = new Map<Kana, React.RefObject<KanaDisplay>>();
+
     constructor(props: Readonly<KanaChoiceQuestionProps> | KanaChoiceQuestionProps) {
         super(props);
 
         const { expected, wrong } = this.props;
 
+        const kana = Arrays.shuffle(wrong.concat(expected));
+
+        kana.map(option => {
+            const ref = React.createRef<KanaDisplay>();
+            this.displays.set(option, ref);
+        });
+
         this.state = {
             selected: undefined,
-            options: Arrays.shuffle(wrong.concat(expected))
+            options: kana
         }
     }
 
@@ -45,9 +54,9 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
                                     onClick={this.select}
                                     style={{
                                         container: selected === option ? styles.selected : styles.tile,
-                                        size: "md",
-                                        color: selected === option ? "#34b7de" : "#FFF"
+                                        character: { size: "md", color: selected === option ? "#34b7de" : "#FFF" }
                                     }}
+                                    ref={this.displays.get(option)}
                                 />
                             </Col>
                         )
@@ -61,9 +70,20 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
         );
     }
 
-    private answer = () => this.props.onSubmit(this.props.expected === this.state.selected)
+    private answer = () => {
+        const selected = this.state.selected;
+        const correct = this.props.expected === selected;
+        if (correct) {
+            this.props.onSubmit(true);
+        } else {
+            if (selected) this.displays.get(selected)?.current?.notifyIncorrect();
+            this.props.onSubmit(false);
+        }
+    }
 
-    private select = (value: Kana) => this.setState({ selected: value });
+    private select = (value: Kana) => {
+        this.setState({ selected: value });
+    }
 
 }
 

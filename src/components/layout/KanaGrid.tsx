@@ -12,7 +12,6 @@ class KanaGrid extends Component<KanaGridProps> {
     render() {
         const { kana } = this.props;
         const Grid = makeResponsive(CSSGrid, { maxWidth: 1920 });
-        // @ts-ignore
         return (
             <div className={styles.grid}>
                 {kana.length > 0 ? <Grid
@@ -20,9 +19,9 @@ class KanaGrid extends Component<KanaGridProps> {
                     gutterHeight={10}
                     layout={layout.simple}
                     columnWidth={90}
-                    duration={100}
-                    itemHeight={90}
                     easing={easings.cubicOut}
+                    duration={100}
+                    columns={4}
                 >
                     {kana.map(k => (
                         <div key={k.code}>

@@ -1,7 +1,8 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Kana } from "../../types/Kana";
 import { Container } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaDisplay.module.scss";
+import DynamicCharacter, { CharacterStyleProps } from "./DynamicCharacter";
 
 interface KanaDisplayProps {
     kana: Kana;
@@ -13,9 +14,7 @@ interface KanaDisplayProps {
 
 interface KanaDisplayStyle {
     container?: string;
-    value?: string;
-    size?: "sm" | "md" | "lg" | "xl";
-    color?: string;
+    character?: CharacterStyleProps;
 }
 
 interface KanaDisplayState {
@@ -36,6 +35,8 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
         }
     }
 
+    notifyIncorrect = () => this.setState({ isNotifyingIncorrect: true });
+
     render() {
         const { isNotifyingIncorrect } = this.state;
         const { blur, kana, style } = this.props;
@@ -47,31 +48,22 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
         return (
             <Container className={style?.container ?? styles.wrapper} onClick={() => this.props.onClick?.(kana)}>
                 {kana.isDiagraph() ?
-                <>
-                    <p className={leftDiagraphClass + " " + styles.diagraphLeft} style={{ fontSize: this.getSize(), color: style?.color }}>
-                        {kana.code[0]}
-                    </p>
-                    <p className={rightDiagraphClass + " " + styles.diagraphRight} style={{ fontSize: this.getSize(), color: style?.color }}>
-                        {kana.code[1]}
-                    </p>
-                </> :
-                <p className={kanaClass} style={{ fontSize: this.getSize(), color: style?.color }}>
-                    {kana.code}
-                </p>}
+                    <>
+                        <DynamicCharacter
+                            value={kana.code[0]}
+                            style={style?.character}
+                            classes={[leftDiagraphClass, styles.diagraphLeft]}
+                        />
+                        <DynamicCharacter
+                            value={kana.code[1]}
+                            style={style?.character}
+                            classes={[rightDiagraphClass, styles.diagraphRight]}
+                        />
+                    </> :
+                    <DynamicCharacter value={kana.code} style={style?.character} classes={kanaClass}/>
+                }
             </Container>
         );
-    }
-
-    notifyIncorrect = () => this.setState({ isNotifyingIncorrect: true });
-
-    private getSize() {
-        switch(this.props.style?.size) {
-            case "sm": return "3em";
-            case "md": return "5em";
-            case "lg": return "8em";
-            case "xl": return "10em";
-            default: return "1em";
-        }
     }
 }
 

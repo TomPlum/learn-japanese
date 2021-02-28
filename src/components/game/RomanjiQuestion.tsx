@@ -49,7 +49,7 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
                     key={kana.code}
                     ref={this.kanaDisplay}
                     blur={hidden}
-                    style={{ size: "xl" }}
+                    style={ { character: { size: "xl" }} }
                 />
 
                 <Form>

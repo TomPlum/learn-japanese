@@ -128,7 +128,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     onConfirmation = () => {
         const { kanaSettings, hintSettings, lifeSettings, timeSettings } = this.state;
         this.props.onSubmit({
-            display: { type: DisplayType.SINGLE_KANA },
+            display: { type: DisplayType.SINGLE_KANA, cards: 1 },
             kana: kanaSettings,
             hints: hintSettings,
             lives: lifeSettings,
