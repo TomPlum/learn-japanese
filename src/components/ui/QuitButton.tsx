@@ -3,7 +3,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/ui/QuitButton.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-interface QuitButtonProps {
+export interface QuitButtonProps {
     onClick: () => void;
 }
 
