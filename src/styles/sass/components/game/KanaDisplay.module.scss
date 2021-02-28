@@ -1,10 +1,8 @@
 $default-colour: #FFF;
-$diagraph-margin: -12px;
-$font-size: 10em;
+$diagraph-margin: -10px;
 
 @mixin kana {
   color: $default-colour;
-  font-size: $font-size;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Old versions of Firefox */
@@ -19,7 +17,6 @@ $font-size: 10em;
 
 @mixin flashRedAnimation {
   $notify-animation-time: 0.75s;
-  font-size: $font-size;
   animation: flashRed ease $notify-animation-time;
   -webkit-animation: flashRed ease $notify-animation-time;
   -moz-animation: flashRed ease $notify-animation-time;
