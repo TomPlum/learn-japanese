@@ -15,14 +15,16 @@ interface KanaSettingsState {
 }
 
 class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
+
+    private readonly defaultState = { hiragana: true, katakana: false, diagraphs: false, quantity: 50 };
+
     constructor(props: KanaSettingsProps | Readonly<KanaSettingsProps>) {
         super(props);
-        this.state = {
-            hiragana: true,
-            katakana: false,
-            diagraphs: false,
-            quantity: 50
-        }
+        this.state = this.defaultState;
+    }
+
+    componentDidMount() {
+        this.props.onSelect(this.defaultState);
     }
 
     componentDidUpdate(prevProps: Readonly<KanaSettingsProps>, prevState: Readonly<KanaSettingsState>, snapshot?: any) {
@@ -76,7 +78,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
         );
     }
 
-    reset = () => this.setState({ hiragana: true, katakana: false, diagraphs: false });
+    reset = () => this.setState(this.defaultState);
 }
 
 export default KanaSettingsForm;

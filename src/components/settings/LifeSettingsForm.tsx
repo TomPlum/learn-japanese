@@ -17,16 +17,16 @@ interface LifeSettingsFormState {
 class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsFormState> {
 
     private readonly selector: React.RefObject<LivesSelector>;
+    private readonly defaultState = { enabled: false, quantity: LifeQuantity.FIVE };
 
     constructor(props: LifeSettingsFormProps | Readonly<LifeSettingsFormProps>) {
         super(props);
-
         this.selector = React.createRef();
+        this.state = this.defaultState;
+    }
 
-        this.state = {
-            enabled: false,
-            quantity: LifeQuantity.FIVE
-        }
+    componentDidMount() {
+        this.props.onChange(this.defaultState);
     }
 
     componentDidUpdate(prevProps: Readonly<LifeSettingsFormProps>, prevState: Readonly<LifeSettingsFormState>) {
@@ -61,7 +61,7 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
 
     reset = () => {
         this.selector.current?.reset();
-        this.setState({ enabled: false, quantity: LifeQuantity.FIVE });
+        this.setState(this.defaultState);
     }
 }
 

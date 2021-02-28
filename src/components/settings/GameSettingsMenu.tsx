@@ -12,6 +12,7 @@ import HintSettingsForm from "./HintSettingsForm";
 import LifeSettingsForm from "./LifeSettingsForm";
 import TimeSettingsForm from "./TimeSettingsForm";
 import { DisplayType } from "../../types/DisplayType";
+import { defaultHintSettings, defaultKanaSettings, defaultLifeSettings, defaultTimeSettings } from "../../data/GameModePresets";
 
 interface GameSettingsMenuProps {
     mode: GameMode;
@@ -40,25 +41,11 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
         this.lives = React.createRef();
         this.time = React.createRef();
 
-        //TODO: Why are defaults here? They are in the form sub-components.
         this.state = {
-            kanaSettings: {
-                hiragana: true,
-                katakana: false,
-                diagraphs: false
-            },
-            hintSettings: {
-                enabled: true,
-                quantity: HintQuantity.THREE
-            },
-            lifeSettings: {
-                enabled: true,
-                quantity: LifeQuantity.FIVE
-            },
-            timeSettings: {
-                timed: true,
-                countdown: false
-            },
+            kanaSettings: defaultKanaSettings,
+            hintSettings: defaultHintSettings,
+            lifeSettings: defaultLifeSettings,
+            timeSettings: defaultTimeSettings,
         }
     }
 
