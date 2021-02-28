@@ -25,7 +25,6 @@ const defaultTimeSettings: TimeSettings = {
     countdown: false
 }
 
-
 // Game Mode Presets
 export const RELAXED: GameSettings = {
     display: { type: DisplayType.SINGLE_KANA },

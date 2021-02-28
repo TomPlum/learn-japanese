@@ -50,9 +50,9 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         this.countdown = React.createRef();
         this.kanaDisplay = React.createRef();
 
-        const { settings } = this.props;
+        const { settings, kana } = this.props;
 
-        const [firstKana, remainingKana] = this.getRandomKana(this.props.kana);
+        const [firstKana, remainingKana] = this.getRandomKana(kana);
 
         this.state = {
             currentKana: firstKana,
@@ -71,12 +71,14 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
     componentDidUpdate() {
         const { lives, correctAnswers, wrongAnswers} = this.state
-        if (this.props.settings.lives.enabled && lives === 0) {
-            this.props.onFinish({
+        const { kana, settings, onFinish } = this.props;
+
+        if (settings.lives.enabled && lives === 0) {
+            onFinish({
                 reason: FailureReason.NO_LIVES_REMAINING,
                 success: false,
                 livesRemaining: 0,
-                totalKanaOffered: this.props.kana.length,
+                totalKanaOffered: kana.length,
                 correctAnswers: correctAnswers,
                 wrongAnswers: wrongAnswers,
                 duration: this.timer.current?.getCurrentTime() ?? undefined
