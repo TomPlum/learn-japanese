@@ -371,7 +371,7 @@ const hiragana: KanaData[] = [
     {
         name: "ちょ",
         code: "\u3061\u3087",
-        romanji: ["chu"],
+        romanji: ["cho"],
         column: KanaColumn.T,
         diacritical: false
     },
