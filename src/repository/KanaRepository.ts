@@ -29,8 +29,7 @@ export class KanaRepository {
         }
 
         if (config.quantity) {
-            Arrays.shuffle(kana);
-            kana = kana.splice(0, config.quantity);
+            kana = Arrays.shuffle(kana).splice(0, config.quantity);
         }
 
         return kana;

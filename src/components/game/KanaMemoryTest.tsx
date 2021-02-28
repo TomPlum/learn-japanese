@@ -12,6 +12,9 @@ import GameResult from "../../types/GameResult";
 import { FailureReason } from "../../types/FailureReason";
 import CountDown from "./CountDown";
 import RomanjiQuestion from "./RomanjiQuestion";
+import { DisplayType } from "../../types/DisplayType";
+import KanaChoiceQuestion from "./KanaChoiceQuestion";
+import { Arrays } from "../../utility/Arrays";
 
 export interface KanaMemoryTestProps {
     kana: Kana[];
@@ -75,7 +78,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     }
 
     render() {
-        const { currentKana, correctAnswers, failedToAnswer, hasExhaustedKana, paused, lives, remainingKana } = this.state;
+        const { correctAnswers, failedToAnswer, hasExhaustedKana, lives, remainingKana } = this.state;
         const { kana, settings } = this.props;
 
         return (
@@ -114,15 +117,40 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     </Col>
                 </Row>
 
-                <RomanjiQuestion
-                    kana={currentKana}
-                    key={currentKana.code}
-                    onSubmit={this.answerQuestion}
-                    hidden={paused}
-                    hintSettings={settings.hints}
-                />
+                {this.getQuestion()}
             </Container>
         );
+    }
+
+    private getQuestion = () => {
+        const { settings, kana } = this.props;
+        const { currentKana, paused } = this.state;
+
+        switch (settings.display.type) {
+            case DisplayType.SINGLE_KANA: {
+                return (
+                    <RomanjiQuestion
+                        kana={currentKana}
+                        key={currentKana.code}
+                        onSubmit={this.answerQuestion}
+                        hidden={paused}
+                        hintSettings={settings.hints}
+                    />
+                );
+            }
+            case DisplayType.MULTIPLE_CARDS: {
+                const options = Arrays.remove(kana, currentKana);
+                const wrong = Arrays.getRandomElements(options, settings.display.cards - 1);
+                return (
+                    <KanaChoiceQuestion
+                        key={currentKana.code}
+                        expected={currentKana}
+                        wrong={wrong}
+                        onSubmit={this.answerQuestion}
+                    />
+                );
+            }
+        }
     }
 
     answerQuestion = (correct: boolean) => {

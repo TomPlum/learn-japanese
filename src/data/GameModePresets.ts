@@ -27,7 +27,7 @@ const defaultTimeSettings: TimeSettings = {
 
 // Game Mode Presets
 export const RELAXED: GameSettings = {
-    display: { type: DisplayType.SINGLE_KANA },
+    display: { type: DisplayType.SINGLE_KANA, cards: 1 },
     kana: defaultKanaSettings,
     hints: defaultTipSettings,
     lives: { enabled: false },
@@ -35,7 +35,7 @@ export const RELAXED: GameSettings = {
 }
 
 export const ROMANJI: GameSettings = {
-    display: { type: DisplayType.SINGLE_KANA },
+    display: { type: DisplayType.SINGLE_KANA, cards: 1 },
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },
     lives: defaultLifeSettings,
@@ -51,7 +51,7 @@ export const KANA: GameSettings = {
 }
 
 export const TIME_ATTACK: GameSettings = {
-    display: { type: DisplayType.SINGLE_KANA },
+    display: { type: DisplayType.SINGLE_KANA, cards: 1 },
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },
     lives: { enabled: false },

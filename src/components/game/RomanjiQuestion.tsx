@@ -44,7 +44,13 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
 
         return (
             <>
-                <KanaDisplay kana={kana} key={kana.code} ref={this.kanaDisplay} blur={hidden}/>
+                <KanaDisplay
+                    kana={kana}
+                    key={kana.code}
+                    ref={this.kanaDisplay}
+                    blur={hidden}
+                    style={{ size: "xl" }}
+                />
 
                 <Form>
                     <Form.Group controlId="answer">

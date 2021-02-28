@@ -12,7 +12,7 @@ export interface GameSettings {
 
 export interface DisplaySettings {
     type: DisplayType;
-    cards?: number;
+    cards: number;
 }
 
 export interface LifeSettings {
