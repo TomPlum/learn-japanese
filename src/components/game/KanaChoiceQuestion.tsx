@@ -46,7 +46,7 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
         return (
             <>
                 <Alert className={styles.question} variant="secondary">
-                    Which kana is '{<strong>{expected.romanji}</strong>}'?
+                    Which kana is '{<strong>{expected.getFullRomanjiString()}</strong>}'?
                 </Alert>
 
                 <Row>

@@ -29,7 +29,7 @@ class KanaTile extends Component<KanaTileProps> {
 
                 <Row>
                     <Col>
-                        <p className={styles.romanji}>{kana.romanji}</p>
+                        <p className={styles.romanji}>{kana.getFullRomanjiString()}</p>
                     </Col>
                 </Row>
             </Container>
