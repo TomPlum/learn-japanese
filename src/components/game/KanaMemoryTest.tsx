@@ -139,13 +139,15 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 );
             }
             case DisplayType.MULTIPLE_CARDS: {
-                const options = Arrays.remove(kana, currentKana);
+                const pool = kana.filter(k => k.isDiagraph() === currentKana.isDiagraph());
+                const options = Arrays.remove(pool, currentKana);
                 const wrong = Arrays.getRandomElements(options, settings.display.cards - 1);
                 return (
                     <KanaChoiceQuestion
                         key={currentKana.code}
                         expected={currentKana}
                         wrong={wrong}
+                        hidden={paused}
                         onSubmit={this.answerQuestion}
                     />
                 );

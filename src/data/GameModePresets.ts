@@ -1,26 +1,31 @@
-import { GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../types/GameSettings";
+import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../types/GameSettings";
 import { HintQuantity } from "../types/HintQuantity";
 import { LifeQuantity } from "../types/LifeQuantity";
 import { DisplayType } from "../types/DisplayType";
 
 // Default Settings
-const defaultKanaSettings: KanaSettings = {
+export const defaultDisplaySettings: DisplaySettings = {
+    type: DisplayType.SINGLE_KANA,
+    cards: 1
+}
+
+export const defaultKanaSettings: KanaSettings = {
     hiragana: true,
     katakana: true,
     diagraphs: true,
 }
 
-const defaultTipSettings: HintSettings = {
+export const defaultHintSettings: HintSettings = {
     enabled: true,
     quantity: HintQuantity.UNLIMITED
 }
 
-const defaultLifeSettings: LifeSettings = {
+export const defaultLifeSettings: LifeSettings = {
     enabled: true,
     quantity: LifeQuantity.FIVE
 }
 
-const defaultTimeSettings: TimeSettings = {
+export const defaultTimeSettings: TimeSettings = {
     timed: true,
     countdown: false
 }
@@ -29,7 +34,7 @@ const defaultTimeSettings: TimeSettings = {
 export const RELAXED: GameSettings = {
     display: { type: DisplayType.SINGLE_KANA, cards: 1 },
     kana: defaultKanaSettings,
-    hints: defaultTipSettings,
+    hints: defaultHintSettings,
     lives: { enabled: false },
     time: { timed: false, countdown: false }
 }

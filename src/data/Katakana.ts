@@ -4,200 +4,231 @@ import { KanaData } from "./DataTypes";
 const katakana: KanaData[] = [
     //Vowels (Big)
     {
-        name: "a",
+        name: "ア",
         code: "\u30A2",
+        romanji: ["a"],
         column: KanaColumn.VOWEL,
         diacritical: false
     },
     {
-        name: "i",
+        name: "イ",
         code: "\u30A4",
+        romanji: ["i"],
         column: KanaColumn.VOWEL,
         diacritical: false
     },
     {
-        name: "u",
+        name: "ウ",
         code: "\u30A6",
+        romanji: ["u"],
         column: KanaColumn.VOWEL,
         diacritical: false
     },
     {
-        name: "e",
+        name: "エ",
         code: "\u30A8",
+        romanji: ["e"],
         column: KanaColumn.VOWEL,
         diacritical: false
     },
     {
-        name: "o",
+        name: "オ",
         code: "\u30AA",
+        romanji: ["o"],
         column: KanaColumn.VOWEL,
         diacritical: false
     },
 
     //K Column (Big)
     {
-        name: "ka",
+        name: "カ",
         code: "\u30AB",
+        romanji: ["ka"],
         column: KanaColumn.K,
         diacritical: false
     },
     {
-        name: "ki",
+        name: "キ",
         code: "\u30AD",
+        romanji: ["ki"],
         column: KanaColumn.K,
         diacritical: false
     },
     {
-        name: "ku",
+        name: "ク",
         code: "\u30AF",
+        romanji: ["ku"],
         column: KanaColumn.K,
         diacritical: false
     },
     {
-        name: "ke",
+        name: "ケ",
         code: "\u30B1",
+        romanji: ["ke"],
         column: KanaColumn.K,
         diacritical: false
     },
     {
-        name: "ko",
+        name: "コ",
         code: "\u30B3",
+        romanji: ["ko"],
         column: KanaColumn.K,
         diacritical: false
     },
 
     //K Diacriticals (Dakuten)
     {
-        name: "ga",
+        name: "ガ",
         code: "\u30AC",
+        romanji: ["ga"],
         column: KanaColumn.K,
         diacritical: true
     },
     {
-        name: "gi",
+        name: "ギ",
         code: "\u30AE",
+        romanji: ["gi"],
         column: KanaColumn.K,
         diacritical: true
     },
     {
-        name: "gu",
+        name: "グ",
         code: "\u30B0",
+        romanji: ["gu"],
         column: KanaColumn.K,
         diacritical: true
     },
     {
-        name: "ge",
+        name: "ゲ",
         code: "\u30B2",
+        romanji: ["ge"],
         column: KanaColumn.K,
         diacritical: true
     },
     {
-        name: "go",
+        name: "ゴ",
         code: "\u30B4",
+        romanji: ["go"],
         column: KanaColumn.K,
         diacritical: true
     },
 
     //K Diagraphs
     {
-        name: "kya",
+        name: "キャ",
         code: "\u30AD\u30E3",
+        romanji: ["kya"],
         column: KanaColumn.K,
         diacritical: false
     },
     {
-        name: "kyu",
+        name: "キュ",
         code: "\u30AD\u30E5",
+        romanji: ["kyu"],
         column: KanaColumn.K,
         diacritical: false
     },
     {
-        name: "kyo",
+        name: "キョ",
         code: "\u30AD\u30E7",
+        romanji: ["kyo"],
         column: KanaColumn.K,
         diacritical: false
     },
 
     //K Diacritical Diagraphs
     {
-        name: "gya",
+        name: "ギャ",
         code: "\u30AE\u30E3",
+        romanji: ["gya"],
         column: KanaColumn.K,
         diacritical: true
     },
     {
-        name: "gyu",
+        name: "ギュ",
         code: "\u30AE\u30E5",
+        romanji: ["gyu"],
         column: KanaColumn.K,
         diacritical: true
     },
     {
-        name: "gyo",
+        name: "ギョ",
         code: "\u30AE\u30E7",
+        romanji: ["gyo"],
         column: KanaColumn.K,
         diacritical: true
     },
 
     //S Column (Big)
     {
-        name: "sa",
+        name: "サ",
         code: "\u30B5",
+        romanji: ["sa"],
         column: KanaColumn.S,
         diacritical: false
     },
     {
-        name: "shi",
+        name: "シ",
         code: "\u30B7",
+        romanji: ["shi"],
         column: KanaColumn.S,
         diacritical: false
     },
     {
-        name: "su",
+        name: "ス",
         code: "\u30B9",
+        romanji: ["su"],
         column: KanaColumn.S,
         diacritical: false
     },
     {
-        name: "se",
+        name: "セ",
         code: "\u30BB",
+        romanji: ["se"],
         column: KanaColumn.S,
         diacritical: false
     },
     {
-        name: "so",
+        name: "ソ",
         code: "\u30BD",
+        romanji: ["so"],
         column: KanaColumn.S,
         diacritical: false
     },
 
     //S Diacriticals (Dakuten)
     {
-        name: "za",
+        name: "ザ",
         code: "\u30B6",
+        romanji: ["za"],
         column: KanaColumn.S,
         diacritical: true
     },
     {
-        name: "ji",
+        name: "シ",
         code: "\u30B8",
+        romanji: ["zi" ,"ji"],
         column: KanaColumn.S,
         diacritical: true
     },
     {
-        name: "zu",
+        name: "ズ",
         code: "\u30BA",
+        romanji: ["zu"],
         column: KanaColumn.S,
         diacritical: true
     },
     {
-        name: "ze",
+        name: "ゼ",
         code: "\u30BC",
+        romanji: ["ze"],
         column: KanaColumn.S,
         diacritical: true
     },
     {
-        name: "zo",
+        name: "ゾ",
         code: "\u30BE",
+        romanji: ["zo"],
         column: KanaColumn.S,
         diacritical: true
     },
@@ -205,499 +236,575 @@ const katakana: KanaData[] = [
     //S Diagraphs
 
     {
-        name: "sha",
+        name: "シャ",
         code: "\u30B7\u30E3",
+        romanji: ["sha"],
         column: KanaColumn.S,
         diacritical: false
     },
     {
-        name: "shu",
+        name: "シュ",
         code: "\u30B7\u30E5",
+        romanji: ["shu"],
         column: KanaColumn.S,
         diacritical: false
 
     },
     {
-        name: "sho",
+        name: "ショ",
         code: "\u30B7\u30E7",
+        romanji: ["sho"],
         column: KanaColumn.S,
         diacritical: false
     },
 
     //S Diacritical Diagraphs
     {
-        name: "ja",
+        name: "ジャ",
         code: "\u30B8\u30E3",
+        romanji: ["zya", "ja"],
         column: KanaColumn.S,
         diacritical: true
     },
     {
-        name: "ju",
+        name: "ジュ",
         code: "\u30B8\u30E5",
+        romanji: ["zyu", "ju"],
         column: KanaColumn.S,
         diacritical: true
     },
     {
-        name: "jo",
+        name: "ジョ",
         code: "\u30B8\u30E7",
+        romanji: ["zyo", "jo"],
         column: KanaColumn.S,
         diacritical: true
     },
 
     //T Column (Big)
     {
-        name: "ta",
+        name: "タ",
         code: "\u30BF",
+        romanji: ["ta"],
         column: KanaColumn.T,
         diacritical: false
     },
     {
-        name: "chi",
+        name: "チ",
         code: "\u30C1",
+        romanji: ["ti", "chi"],
         column: KanaColumn.T,
         diacritical: false
     },
     {
-        name: "tsu",
+        name: "ツ",
         code: "\u30C4",
+        romanji: ["tsu"],
         column: KanaColumn.T,
         diacritical: false
     },
     {
-        name: "te",
+        name: "テ",
         code: "\u30C6",
+        romanji: ["te"],
         column: KanaColumn.T,
         diacritical: false
     },
     {
-        name: "to",
+        name: "ト",
         code: "\u30C8",
+        romanji: ["to"],
         column: KanaColumn.T,
         diacritical: false
     },
 
     //T Diacriticals (Dakuten)
     {
-        name: "da",
+        name: "ダ",
         code: "\u30C0",
+        romanji: ["da"],
         column: KanaColumn.T,
         diacritical: true
     },
     {
-        name: "di",
+        name: "ヂ",
         code: "\u30C2",
+        romanji: ["di", "ji"],
         column: KanaColumn.T,
         diacritical: true
     },
     {
-        name: "du",
+        name: "ヅ",
         code: "\u30C5",
+        romanji: ["du", "zu"],
         column: KanaColumn.T,
         diacritical: true
     },
     {
-        name: "de",
+        name: "デ",
         code: "\u30C7",
+        romanji: ["de"],
         column: KanaColumn.T,
         diacritical: true
     },
     {
-        name: "do",
+        name: "ド",
         code: "\u30C9",
+        romanji: ["do"],
         column: KanaColumn.T,
         diacritical: true
     },
 
     //T Diagraphs
     {
-        name: "cha",
+        name: "チャ",
         code: "\u30C1\u30E3",
+        romanji: ["cha"],
         column: KanaColumn.T,
         diacritical: false
     },
     {
-        name: "chu",
+        name: "チュ",
         code: "\u30C1\u30E5",
+        romanji: ["chu"],
         column: KanaColumn.T,
         diacritical: false
     },
     {
-        name: "cho",
+        name: "チョ",
         code: "\u30C1\u30E7",
+        romanji: ["cho"],
         column: KanaColumn.T,
         diacritical: false
     },
 
     //T Diacritical Diagraphs
     {
-        name: "dya",
+        name: "ヂャ",
         code: "\u30C2\u30E3",
+        romanji: ["dya", "ja"],
         column: KanaColumn.T,
         diacritical: true
     },
     {
-        name: "dyu",
+        name: "ヂュ",
         code: "\u30C2\u30E5",
+        romanji: ["dyu", "ju"],
         column: KanaColumn.T,
         diacritical: true
     },
     {
-        name: "dyo",
+        name: "ヂョ",
         code: "\u30C2\u30E7",
+        romanji: ["dyo", "jo"],
         column: KanaColumn.T,
         diacritical: true
     },
 
     //N Column (Big)
     {
-        name: "na",
+        name: "ナ",
         code: "\u30CA",
+        romanji: ["na"],
         column: KanaColumn.N,
         diacritical: false
     },
     {
-        name: "ni",
+        name: "ニ",
         code: "\u30CB",
+        romanji: ["ni"],
         column: KanaColumn.N,
         diacritical: false
     },
     {
-        name: "nu",
+        name: "ヌ",
         code: "\u30CC",
+        romanji: ["nu"],
         column: KanaColumn.N,
         diacritical: false
     },
     {
-        name: "ne",
+        name: "ネ",
         code: "\u30CD",
+        romanji: ["ne"],
         column: KanaColumn.N,
         diacritical: false
     },
     {
-        name: "no",
+        name: "ノ",
         code: "\u30CE",
+        romanji: ["no"],
         column: KanaColumn.N,
         diacritical: false
     },
 
     //N Diagraphs
     {
-        name: "nya",
+        name: "ニャ",
         code: "\u30CB\u30E3",
+        romanji: ["nya"],
         column: KanaColumn.N,
         diacritical: false
     },
     {
-        name: "nyu",
+        name: "ニュ",
         code: "\u30CB\u30E5",
+        romanji: ["nyu"],
         column: KanaColumn.N,
         diacritical: false
     },
     {
-        name: "nyo",
+        name: "ニョ",
         code: "\u30CB\u30E7",
+        romanji: ["nyo"],
         column: KanaColumn.N,
         diacritical: false
     },
 
     //H Column (Big)
     {
-        name: "ha",
+        name: "ハ",
         code: "\u30CF",
+        romanji: ["ha"],
         column: KanaColumn.H,
         diacritical: false
     },
     {
-        name: "hi",
+        name: "ヒ",
         code: "\u30D2",
+        romanji: ["hi"],
         column: KanaColumn.H,
         diacritical: false
     },
     {
-        name: "hu",
+        name: "フ",
         code: "\u30D5",
+        romanji: ["hu", "fu"],
         column: KanaColumn.H,
         diacritical: false
     },
     {
-        name: "he",
+        name: "ヘ",
         code: "\u30D8",
+        romanji: ["he", "e"],
         column: KanaColumn.H,
         diacritical: false
     },
     {
-        name: "ho",
+        name: "ホ",
         code: "\u30DB",
+        romanji: ["ho"],
         column: KanaColumn.H,
         diacritical: false
     },
 
     //H Diacriticals (Dakuten)
     {
-        name: "ba",
+        name: "バ",
         code: "\u30D0",
+        romanji: ["ba"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "bi",
+        name: "ビ",
         code: "\u30D3",
+        romanji: ["bi"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "bu",
+        name: "ブ",
         code: "\u30D6",
+        romanji: ["bu"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "be",
+        name: "ベ",
         code: "\u30D9",
+        romanji: ["be"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "bo",
+        name: "ボ",
         code: "\u30DC",
+        romanji: ["bo"],
         column: KanaColumn.H,
         diacritical: true
     },
 
     //H Diacriticals (Handakuten)
     {
-        name: "pa",
+        name: "パ",
         code: "\u30D1",
+        romanji: ["pa"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "pi",
+        name: "ピ",
         code: "\u30D4",
+        romanji: ["pi"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "pu",
+        name: "プ",
         code: "\u30D7",
+        romanji: ["pu"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "pe",
+        name: "ペ",
         code: "\u30DA",
+        romanji: ["pe"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "po",
+        name: "ポ",
         code: "\u30DD",
+        romanji: ["po"],
         column: KanaColumn.H,
         diacritical: true
     },
 
     //H Diagraphs
     {
-        name: "hya",
+        name: "ヒャ",
         code: "\u30D2\u30E3",
+        romanji: ["hya"],
         column: KanaColumn.H,
         diacritical: false
     },
     {
-        name: "hyu",
+        name: "ヒュ",
         code: "\u30D2\u30E5",
+        romanji: ["hyu"],
         column: KanaColumn.H,
         diacritical: false
     },
     {
-        name: "hyo",
+        name: "ヒョ",
         code: "\u30D2\u30E7",
+        romanji: ["hyo"],
         column: KanaColumn.H,
         diacritical: false
     },
 
     //H Diacritical Diagraphs (Dakuten)
     {
-        name: "bya",
+        name: "ビャ",
         code: "\u30D3\u30E3",
+        romanji: ["bya"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "byu",
+        name: "ビュ",
         code: "\u30D3\u30E5",
+        romanji: ["byu"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "byo",
+        name: "ビョ",
         code: "\u30D3\u30E7",
+        romanji: ["byo"],
         column: KanaColumn.H,
         diacritical: true
     },
 
     //H Diacritical Diagraphs (Handakuten)
     {
-        name: "pya",
+        name: "ピャ",
         code: "\u30D4\u30E3",
+        romanji: ["pya"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "pyu",
+        name: "ピュ",
         code: "\u30D4\u30E5",
+        romanji: ["pyu"],
         column: KanaColumn.H,
         diacritical: true
     },
     {
-        name: "pyo",
+        name: "ピョ",
         code: "\u30D4\u30E7",
+        romanji: ["pyo"],
         column: KanaColumn.H,
         diacritical: true
     },
 
     //M Column (Big)
     {
-        name: "ma",
+        name: "マ",
         code: "\u30DE",
+        romanji: ["ma"],
         column: KanaColumn.M,
         diacritical: false
     },
     {
-        name: "mi",
+        name: "ミ",
         code: "\u30DF",
+        romanji: ["mi"],
         column: KanaColumn.M,
         diacritical: false
     },
     {
-        name: "mu",
+        name: "ム",
         code: "\u30E0",
+        romanji: ["mu"],
         column: KanaColumn.M,
         diacritical: false
     },
     {
-        name: "me",
+        name: "メ",
         code: "\u30E1",
+        romanji: ["me"],
         column: KanaColumn.M,
         diacritical: false
     },
     {
-        name: "mo",
+        name: "モ",
         code: "\u30E2",
+        romanji: ["mo"],
         column: KanaColumn.M,
         diacritical: false
     },
 
     //M Diagraphs
     {
-        name: "mya",
+        name: "ミャ",
         code: "\u30DF\u30E3",
+        romanji: ["mya"],
         column: KanaColumn.M,
         diacritical: false
     },
     {
-        name: "myu",
+        name: "ミュ",
         code: "\u30DF\u30E5",
+        romanji: ["myu"],
         column: KanaColumn.M,
         diacritical: false
     },
     {
-        name: "myo",
+        name: "ミョ",
         code: "\u30DF\u30E7",
+        romanji: ["myo"],
         column: KanaColumn.M,
         diacritical: false
     },
 
     //Y Column (Big)
     {
-        name: "ya",
+        name: "ヤ",
         code: "\u30E4",
+        romanji: ["ya"],
         column: KanaColumn.Y,
         diacritical: false
     },
     {
-        name: "yu",
+        name: "ユ",
         code: "\u30E6",
+        romanji: ["yu"],
         column: KanaColumn.Y,
         diacritical: false
     },
     {
-        name: "yo",
+        name: "ヨ",
         code: "\u30E8",
+        romanji: ["yo"],
         column: KanaColumn.Y,
         diacritical: false
     },
 
     //R Column (Big)
     {
-        name: "ra",
+        name: "ラ",
         code: "\u30E9",
+        romanji: ["ra"],
         column: KanaColumn.R,
         diacritical: false
     },
     {
-        name: "ri",
+        name: "リ",
         code: "\u30EA",
+        romanji: ["ri"],
         column: KanaColumn.R,
         diacritical: false
     },
     {
-        name: "ru",
+        name: "ル",
         code: "\u30EB",
+        romanji: ["ru"],
         column: KanaColumn.R,
         diacritical: false
     },
     {
-        name: "re",
+        name: "レ",
         code: "\u30EC",
+        romanji: ["re"],
         column: KanaColumn.R,
         diacritical: false
     },
     {
-        name: "ro",
+        name: "ロ",
         code: "\u30ED",
+        romanji: ["ro"],
         column: KanaColumn.R,
         diacritical: false
     },
 
     //R Diagraphs
     {
-        name: "rya",
+        name: "リャ",
         code: "\u30EA\u30E3",
+        romanji: ["rya"],
         column: KanaColumn.R,
         diacritical: false
     },
     {
-        name: "ryu",
+        name: "リュ",
         code: "\u30EA\u30E5",
+        romanji: ["ryu"],
         column: KanaColumn.R,
         diacritical: false
     },
     {
-        name: "ryo",
+        name: "リョ",
         code: "\u30EA\u30E7",
+        romanji: ["ryo"],
         column: KanaColumn.R,
         diacritical: false
     },
 
     //W Column (Big)
     {
-        name: "wa",
+        name: "ワ",
         code: "\u30EF",
+        romanji: ["wa"],
         column: KanaColumn.W,
         diacritical: false
     },
     {
-        name: "wo",
+        name: "ヲ",
         code: "\u30F2",
+        romanji: ["wo"],
         column: KanaColumn.W,
         diacritical: false
     },
 
     //N
     {
-        name: "n",
+        name: "ン",
         code: "\u30F3",
+        romanji: ["n"],
         column: KanaColumn.OTHER,
         diacritical: false
     }

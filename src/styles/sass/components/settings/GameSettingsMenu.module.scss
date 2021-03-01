@@ -8,14 +8,16 @@
   color: #FFF;
 }
 
-.heading {
-  font-size: 1.5em;
+.title {
   color: #FFF;
-  text-align: center;
 }
 
 .label {
   color: #dedede;
+}
+
+.pane {
+  min-height: 150px;
 }
 
 .check label {
@@ -31,6 +33,11 @@
   margin-right: 3px;
 }
 
+.modeIcon {
+  @include icon;
+  color: #FFF;
+}
+
 .kanaIcon {
   @include icon;
   color: #1785e2;
@@ -42,7 +49,7 @@
   color: #fa2323;
 }
 
-.tipsIcon {
+.hintsIcon {
   @include icon;
   color: #ffcd20;
 }

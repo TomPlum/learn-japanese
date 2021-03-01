@@ -49,7 +49,7 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
                     key={kana.code}
                     ref={this.kanaDisplay}
                     blur={hidden}
-                    style={{ size: "xl" }}
+                    style={ { character: { size: "xl" }} }
                 />
 
                 <Form>
@@ -96,7 +96,7 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
         const { answer, hints, hasUsedHintThisQuestion } = this.state;
         const { kana } = this.props;
 
-        if (answer === kana.romanji) {
+        if (kana.romanji.includes(answer)) {
             this.props.onSubmit(true);
             this.setState({
                 hasUsedHintThisQuestion: false,
