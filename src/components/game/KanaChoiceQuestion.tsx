@@ -67,7 +67,7 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
                     })}
                 </Row>
 
-                <Button variant={"success"} type="button" disabled={!selected} onClick={this.answer} block>
+                <Button variant={"success"} type="button" disabled={!selected || hidden} onClick={this.answer} block>
                     Check
                 </Button>
             </>
