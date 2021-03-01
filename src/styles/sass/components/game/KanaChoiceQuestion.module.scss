@@ -1,0 +1,20 @@
+@mixin tile {
+  border-color: #2e6cde;
+  border-width: 2px;
+  border-radius: 10px;
+  min-height: 150px;
+  text-align: center;
+}
+
+.tile {
+  @include tile;
+}
+
+.selected {
+  @include tile;
+}
+
+.question {
+  margin: 15px 0;
+  text-align: center;
+}

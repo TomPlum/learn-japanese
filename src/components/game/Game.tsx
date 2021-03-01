@@ -60,7 +60,7 @@ class Game extends Component<GameProps, GameState> {
     }
 
     private startGame = (mode: GameMode, settings: GameSettings) => {
-        this.setState({ gameSettings: settings }, () => this.loadKana());
+        this.setState({ gameSettings: settings }, this.loadKana);
     }
 
     private onGameClose = () => {
@@ -69,7 +69,11 @@ class Game extends Component<GameProps, GameState> {
 
     private onResultMenuClose = () => this.setState({ inResultsScreen: false, result: undefined });
 
-    private onGameFinish = (result: GameResult) => this.setState({ inResultsScreen: true, result, gameSettings: undefined });
+    private onGameFinish = (result: GameResult) => this.setState({
+        inResultsScreen: true,
+        result,
+        gameSettings: undefined
+    });
 
     private loadKana() {
         this.setState({ loading: true });

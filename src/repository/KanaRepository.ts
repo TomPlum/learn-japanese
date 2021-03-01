@@ -29,8 +29,7 @@ export class KanaRepository {
         }
 
         if (config.quantity) {
-            Arrays.shuffle(kana);
-            kana = kana.splice(0, config.quantity);
+            kana = Arrays.shuffle(kana).splice(0, config.quantity);
         }
 
         return kana;
@@ -51,6 +50,6 @@ export class KanaRepository {
     }
 
     private convert(data: KanaData[], type: KanaType): Kana[] {
-        return data.map(data => new Kana(data.code, data.name, type, data.column, data.diacritical));
+        return data.map(data => new Kana(data.code, data.romanji, type, data.column, data.diacritical));
     }
 }

@@ -1,42 +1,46 @@
-import { GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../types/GameSettings";
+import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../types/GameSettings";
 import { HintQuantity } from "../types/HintQuantity";
 import { LifeQuantity } from "../types/LifeQuantity";
 import { DisplayType } from "../types/DisplayType";
 
 // Default Settings
-const defaultKanaSettings: KanaSettings = {
+export const defaultDisplaySettings: DisplaySettings = {
+    type: DisplayType.SINGLE_KANA,
+    cards: 1
+}
+
+export const defaultKanaSettings: KanaSettings = {
     hiragana: true,
     katakana: true,
     diagraphs: true,
 }
 
-const defaultTipSettings: HintSettings = {
+export const defaultHintSettings: HintSettings = {
     enabled: true,
     quantity: HintQuantity.UNLIMITED
 }
 
-const defaultLifeSettings: LifeSettings = {
+export const defaultLifeSettings: LifeSettings = {
     enabled: true,
     quantity: LifeQuantity.FIVE
 }
 
-const defaultTimeSettings: TimeSettings = {
+export const defaultTimeSettings: TimeSettings = {
     timed: true,
     countdown: false
 }
 
-
 // Game Mode Presets
 export const RELAXED: GameSettings = {
-    display: { type: DisplayType.SINGLE_KANA },
+    display: { type: DisplayType.SINGLE_KANA, cards: 1 },
     kana: defaultKanaSettings,
-    hints: defaultTipSettings,
+    hints: defaultHintSettings,
     lives: { enabled: false },
     time: { timed: false, countdown: false }
 }
 
 export const ROMANJI: GameSettings = {
-    display: { type: DisplayType.SINGLE_KANA },
+    display: { type: DisplayType.SINGLE_KANA, cards: 1 },
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },
     lives: defaultLifeSettings,
@@ -52,7 +56,7 @@ export const KANA: GameSettings = {
 }
 
 export const TIME_ATTACK: GameSettings = {
-    display: { type: DisplayType.SINGLE_KANA },
+    display: { type: DisplayType.SINGLE_KANA, cards: 1 },
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },
     lives: { enabled: false },

@@ -14,15 +14,19 @@ interface TipSettingsFormState {
 }
 
 class HintSettingsForm extends Component<TipSettingsFormProps, TipSettingsFormState> {
+
+    private readonly defaultState = { enabled: true, quantity: HintQuantity.THREE };
+
     constructor(props: TipSettingsFormProps | Readonly<TipSettingsFormProps>) {
         super(props);
-        this.state = {
-            enabled: true,
-            quantity: HintQuantity.THREE
-        }
+        this.state = this.defaultState;
     }
 
-    componentDidUpdate(prevProps: Readonly<TipSettingsFormProps>, prevState: Readonly<TipSettingsFormState>, snapshot?: any) {
+    componentDidMount() {
+        this.props.onChange(this.defaultState);
+    }
+
+    componentDidUpdate(prevProps: Readonly<TipSettingsFormProps>, prevState: Readonly<TipSettingsFormState>) {
         if (prevState !== this.state) {
             const { enabled, quantity } = this.state;
             this.props.onChange({ enabled, quantity });
@@ -65,7 +69,7 @@ class HintSettingsForm extends Component<TipSettingsFormProps, TipSettingsFormSt
         );
     }
 
-    reset = () => this.setState({ enabled: true, quantity: HintQuantity.THREE });
+    reset = () => this.setState(this.defaultState);
 }
 
 export default HintSettingsForm;

@@ -2,6 +2,7 @@ import {Numbers} from "./Numbers";
 import { Kana } from "../types/Kana";
 
 export class RandomNumberGenerator {
+    //TODO: Move to Arrays.ts
     static getRandomArrayIndex<T>(array: T[]): number {
         return Numbers.randomInt(0, array.length - 1);
     }

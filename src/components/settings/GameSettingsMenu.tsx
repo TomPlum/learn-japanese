@@ -1,17 +1,16 @@
 import React, { Component } from "react";
-import { Button, Card, Col, Container, Form } from "react-bootstrap";
+import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
-import { faCheck, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../../types/GameSettings";
-import { HintQuantity } from "../../types/HintQuantity";
-import { LifeQuantity } from "../../types/LifeQuantity";
+import { faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
+import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../../types/GameSettings";
 import KanaSettingsForm from "./KanaSettingsForm";
 import HintSettingsForm from "./HintSettingsForm";
 import LifeSettingsForm from "./LifeSettingsForm";
 import TimeSettingsForm from "./TimeSettingsForm";
-import { DisplayType } from "../../types/DisplayType";
+import { defaultDisplaySettings, defaultHintSettings, defaultKanaSettings, defaultLifeSettings, defaultTimeSettings } from "../../data/GameModePresets";
+import DisplaySettingsForm from "./DisplaySettingsForm";
 
 interface GameSettingsMenuProps {
     mode: GameMode;
@@ -19,6 +18,7 @@ interface GameSettingsMenuProps {
 }
 
 interface GameSettingsMenuState {
+    displaySettings: DisplaySettings;
     kanaSettings: KanaSettings;
     hintSettings: HintSettings;
     lifeSettings: LifeSettings;
@@ -27,6 +27,7 @@ interface GameSettingsMenuState {
 
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
 
+    private readonly display: React.RefObject<DisplaySettingsForm>;
     private readonly kana: React.RefObject<KanaSettingsForm>;
     private readonly hints: React.RefObject<HintSettingsForm>;
     private readonly lives: React.RefObject<LifeSettingsForm>;
@@ -35,100 +36,134 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     constructor(props: GameSettingsMenuProps | Readonly<GameSettingsMenuProps>) {
         super(props);
 
+        this.display = React.createRef();
         this.kana = React.createRef();
         this.hints = React.createRef();
         this.lives = React.createRef();
         this.time = React.createRef();
 
-        //TODO: Why are defaults here? They are in the form sub-components.
         this.state = {
-            kanaSettings: {
-                hiragana: true,
-                katakana: false,
-                diagraphs: false
-            },
-            hintSettings: {
-                enabled: true,
-                quantity: HintQuantity.THREE
-            },
-            lifeSettings: {
-                enabled: true,
-                quantity: LifeQuantity.FIVE
-            },
-            timeSettings: {
-                timed: true,
-                countdown: false
-            },
+            displaySettings: defaultDisplaySettings,
+            kanaSettings: defaultKanaSettings,
+            hintSettings: defaultHintSettings,
+            lifeSettings: defaultLifeSettings,
+            timeSettings: defaultTimeSettings,
         }
     }
 
     render() {
         return (
-            <Container fluid className={styles.wrapper}>
+            <div className={styles.wrapper}>
                 <Card bg="dark" className="mb-2">
-                    <Card.Header className={styles.header}>
-                        <span className={styles.kanaIcon}>あ</span> Kana
-                    </Card.Header>
+                    <Tab.Container defaultActiveKey="mode">
+                        <Card.Header>
+                            <Nav variant="pills">
+                                <Nav.Item>
+                                    <Nav.Link eventKey="mode">
+                                        <FontAwesomeIcon icon={faGamepad} className={styles.modeIcon}/>
+                                    </Nav.Link>
+                                </Nav.Item>
 
-                    <Card.Body>
-                        <KanaSettingsForm ref={this.kana} onSelect={(settings) => this.setState({ kanaSettings: settings })}/>
-                    </Card.Body>
+                                <Nav.Item>
+                                    <Nav.Link eventKey="kana">
+                                        <span className={styles.kanaIcon}>あ</span>
+                                    </Nav.Link>
+                                </Nav.Item>
+
+                                <Nav.Item>
+                                    <Nav.Link eventKey="hints">
+                                        <FontAwesomeIcon icon={faLightbulb} className={styles.hintsIcon}/>
+                                    </Nav.Link>
+                                </Nav.Item>
+
+                                <Nav.Item>
+                                    <Nav.Link eventKey="lives">
+                                        <FontAwesomeIcon icon={faHeart} className={styles.livesIcon}/>
+                                    </Nav.Link>
+                                </Nav.Item>
+
+                                <Nav.Item>
+                                    <Nav.Link eventKey="time">
+                                        <FontAwesomeIcon icon={faStopwatch} className={styles.timeIcon}/>
+                                    </Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                        </Card.Header>
+
+                        <Card.Body>
+                            <Tab.Content>
+                                <Tab.Pane eventKey="mode">
+                                    <Card.Title>Game Mode Settings</Card.Title>
+                                    <DisplaySettingsForm
+                                        ref={this.display}
+                                        onChange={(settings) => this.setState({ displaySettings: settings })}
+                                    />
+                                </Tab.Pane>
+                            </Tab.Content>
+
+                            <Tab.Content>
+                                <Tab.Pane eventKey="kana">
+                                    <KanaSettingsForm
+                                        ref={this.kana}
+                                        onSelect={(settings) => this.setState({ kanaSettings: settings })}
+                                    />
+                                </Tab.Pane>
+                            </Tab.Content>
+
+                            <Tab.Content>
+                                <Tab.Pane eventKey="hints">
+                                    <HintSettingsForm
+                                        ref={this.hints}
+                                      onChange={(settings) => this.setState({ hintSettings: settings })}
+                                    />
+                                </Tab.Pane>
+                            </Tab.Content>
+
+                            <Tab.Content>
+                                <Tab.Pane eventKey="lives">
+                                    <LifeSettingsForm
+                                        ref={this.lives}
+                                        onChange={(settings) => this.setState({ lifeSettings: settings })}
+                                    />
+                                </Tab.Pane>
+                            </Tab.Content>
+
+                            <Tab.Content>
+                                <Tab.Pane eventKey="time">
+                                    <TimeSettingsForm
+                                        ref={this.time}
+                                        onChange={(settings) => this.setState({ timeSettings: settings })}
+                                    />
+                                </Tab.Pane>
+                            </Tab.Content>
+                        </Card.Body>
+
+                        <Card.Footer>
+                            <Form.Row>
+                                <Col className={styles.noGuttersLeft}>
+                                    <Button variant="danger" block onClick={this.onReset} className={styles.reset}>
+                                        <FontAwesomeIcon icon={faUndo}/> Reset
+                                    </Button>
+                                </Col>
+                                <Col className={styles.noGuttersRight}>
+                                    <Button variant="success" block onClick={this.onConfirmation}
+                                            className={styles.confirm}>
+                                        <FontAwesomeIcon icon={faCheck}/> Confirm
+                                    </Button>
+                                </Col>
+                            </Form.Row>
+                        </Card.Footer>
+
+                    </Tab.Container>
                 </Card>
-
-                <Card bg="dark" className="mb-2">
-                    <Card.Header className={styles.header}>
-                        <FontAwesomeIcon icon={faLightbulb} className={styles.tipsIcon}/> Hints
-                    </Card.Header>
-
-                    <Card.Body>
-                        <HintSettingsForm ref={this.hints} onChange={(settings) => this.setState({ hintSettings: settings })}/>
-                    </Card.Body>
-                </Card>
-
-                <Card bg="dark" className="mb-2">
-                    <Card.Header className={styles.header}>
-                        <FontAwesomeIcon icon={faHeart} className={styles.livesIcon}/> Lives
-                    </Card.Header>
-
-                    <Card.Body>
-                        <LifeSettingsForm ref={this.lives} onChange={(settings) => this.setState({ lifeSettings: settings })}/>
-                    </Card.Body>
-                </Card>
-
-                <Card bg="dark" className="mb-2">
-                    <Card.Header className={styles.header}>
-                        <FontAwesomeIcon icon={faStopwatch} className={styles.timeIcon}/> Time
-                    </Card.Header>
-
-                    <Card.Body>
-                        <TimeSettingsForm ref={this.time} onChange={(settings) => this.setState({ timeSettings: settings })}/>
-                    </Card.Body>
-                </Card>
-
-                <Card bg="dark" className="mb-2">
-                    <Card.Body>
-                        <Form.Row>
-                            <Col className={styles.noGuttersLeft}>
-                                <Button variant="danger" block onClick={this.onReset} className={styles.reset}>
-                                    <FontAwesomeIcon icon={faUndo}/> Reset
-                                </Button>
-                            </Col>
-                            <Col className={styles.noGuttersRight}>
-                                <Button variant="success" block onClick={this.onConfirmation} className={styles.confirm}>
-                                    <FontAwesomeIcon icon={faCheck}/> Confirm
-                                </Button>
-                            </Col>
-                        </Form.Row>
-                    </Card.Body>
-                </Card>
-            </Container>
+            </div>
         );
     }
 
     onConfirmation = () => {
-        const { kanaSettings, hintSettings, lifeSettings, timeSettings } = this.state;
+        const { displaySettings, kanaSettings, hintSettings, lifeSettings, timeSettings } = this.state;
         this.props.onSubmit({
-            display: { type: DisplayType.SINGLE_KANA },
+            display: displaySettings,
             kana: kanaSettings,
             hints: hintSettings,
             lives: lifeSettings,
@@ -137,6 +172,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onReset = () => {
+        this.display.current?.reset();
         this.kana.current?.reset();
         this.hints.current?.reset();
         this.lives.current?.reset();

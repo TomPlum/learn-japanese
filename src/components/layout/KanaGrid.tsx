@@ -19,9 +19,9 @@ class KanaGrid extends Component<KanaGridProps> {
                     gutterHeight={10}
                     layout={layout.simple}
                     columnWidth={90}
-                    duration={100}
-                    itemHeight={90}
                     easing={easings.cubicOut}
+                    duration={100}
+                    columns={4}
                 >
                     {kana.map(k => (
                         <div key={k.code}>

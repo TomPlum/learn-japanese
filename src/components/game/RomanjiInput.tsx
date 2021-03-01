@@ -11,6 +11,13 @@ interface RomanjiInputProps {
 }
 
 class RomanjiInput extends Component<RomanjiInputProps> {
+
+    private readonly input = React.createRef<HTMLInputElement>();
+
+    componentDidMount() {
+        this.input?.current?.focus();
+    }
+
     render() {
         const { disabled, value, placeholder, onChange } = this.props;
 
@@ -23,6 +30,7 @@ class RomanjiInput extends Component<RomanjiInputProps> {
                 placeholder={placeholder}
                 onChange={onChange}
                 onKeyPress={this.handleEnterKeySubmit}
+                ref={this.input}
             />
         );
     }

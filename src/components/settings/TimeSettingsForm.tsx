@@ -13,12 +13,16 @@ interface TimeSettingsFormState {
 }
 
 class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsFormState> {
+
+    private readonly defaultState = { timed: true, countdown: false };
+
     constructor(props: TimeSettingsFormProps | Readonly<TimeSettingsFormProps>) {
         super(props);
-        this.state = {
-            timed: true,
-            countdown: false
-        }
+        this.state = this.defaultState;
+    }
+
+    componentDidMount() {
+        this.props.onChange(this.defaultState);
     }
 
     componentDidUpdate(prevProps: Readonly<TimeSettingsFormProps>, prevState: Readonly<TimeSettingsFormState>) {
@@ -58,7 +62,7 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
         );
     }
 
-    reset = () => this.setState({ timed: true, countdown: false });
+    reset = () => this.setState(this.defaultState);
 
     private onChangeTimed = () => {
         const { timed, countdown } = this.state;
@@ -70,15 +74,6 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
         } else {
             this.setState({ timed: true, countdown: false });
         }
-      /*  if (!timed && !countdown) {
-            this.setState({ timed: true });
-        }
-        if (!timed && countdown) {
-            this.setState({ timed: true, countdown: false });
-        }
-        if (timed) {
-            this.setState({ timed: false, countdown: true });
-        }*/
     }
 
     private onChangeCountDown = () => {
@@ -91,15 +86,6 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
         } else {
             this.setState({ countdown: true, timed: false });
         }
-       /* if (!countdown && !timed) {
-            this.setState({ countdown: true });
-        }
-        if (!countdown && timed) {
-            this.setState({ countdown: true, timed: false });
-        }
-        if (countdown) {
-            this.setState({ countdown: false, timed: true });
-        }*/
     }
 }
 
