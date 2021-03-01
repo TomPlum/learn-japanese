@@ -26,7 +26,7 @@ class HintSettingsForm extends Component<TipSettingsFormProps, TipSettingsFormSt
         this.props.onChange(this.defaultState);
     }
 
-    componentDidUpdate(prevProps: Readonly<TipSettingsFormProps>, prevState: Readonly<TipSettingsFormState>, snapshot?: any) {
+    componentDidUpdate(prevProps: Readonly<TipSettingsFormProps>, prevState: Readonly<TipSettingsFormState>) {
         if (prevState !== this.state) {
             const { enabled, quantity } = this.state;
             this.props.onChange({ enabled, quantity });

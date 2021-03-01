@@ -27,7 +27,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
         this.props.onSelect(this.defaultState);
     }
 
-    componentDidUpdate(prevProps: Readonly<KanaSettingsProps>, prevState: Readonly<KanaSettingsState>, snapshot?: any) {
+    componentDidUpdate(prevProps: Readonly<KanaSettingsProps>, prevState: Readonly<KanaSettingsState>) {
         if (prevState !== this.state) {
             const { hiragana, katakana, diagraphs, quantity } = this.state;
             this.props.onSelect({ hiragana, katakana, diagraphs, quantity });

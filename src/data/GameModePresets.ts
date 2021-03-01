@@ -1,9 +1,14 @@
-import { GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../types/GameSettings";
+import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../types/GameSettings";
 import { HintQuantity } from "../types/HintQuantity";
 import { LifeQuantity } from "../types/LifeQuantity";
 import { DisplayType } from "../types/DisplayType";
 
 // Default Settings
+export const defaultDisplaySettings: DisplaySettings = {
+    type: DisplayType.SINGLE_KANA,
+    cards: 1
+}
+
 export const defaultKanaSettings: KanaSettings = {
     hiragana: true,
     katakana: true,
