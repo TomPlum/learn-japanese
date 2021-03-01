@@ -12,9 +12,19 @@ class KanaQuestionBanner extends Component<KanaQuestionBannerProps> {
         const { value } = this.props;
         return (
             <Alert className={styles.question} variant="secondary">
-                Which {value.isDiagraph() ? "diagraph" : "kana"} is '{<strong>{value.getFullRomanjiString()}</strong>}'?
+                Which {value.isDiagraph() ? "diagraph" : "kana"} is {this.getRomanji()} ?
             </Alert>
         );
+    }
+
+    private getRomanji = () => {
+        const value = this.props.value;
+        const romanji = value.romanji;
+        if (romanji.length > 1) {
+            return <><strong>'{romanji[0]}'</strong> or <strong>'{romanji[1]}'</strong></>;
+        } else {
+            return <strong>'{romanji[0]}'</strong>;
+        }
     }
 }
 
