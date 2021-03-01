@@ -7,6 +7,7 @@ import DynamicCharacter, { CharacterStyleProps } from "./DynamicCharacter";
 interface KanaDisplayProps {
     kana: Kana;
     blur?: boolean;
+    index?: number;
     onClick?: (kana: Kana) => void;
     style?: KanaDisplayStyle;
     size?: string;
@@ -31,7 +32,7 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
 
     componentDidUpdate(prevProps: Readonly<KanaDisplayProps>, prevState: Readonly<KanaDisplayState>) {
         if (prevState.isNotifyingIncorrect) {
-            setTimeout(() => this.setState({ isNotifyingIncorrect: false }));
+            this.setState({ isNotifyingIncorrect: false });
         }
     }
 
@@ -39,20 +40,30 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
 
     render() {
         const { isNotifyingIncorrect } = this.state;
-        const { blur, kana, style } = this.props;
+        const { blur, kana, style, index, onClick } = this.props;
 
         const kanaClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.blur : styles.kana;
         const leftDiagraphClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.diagraphBlur : styles.diagraphLeft;
         const rightDiagraphClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.diagraphBlur : styles.diagraphRight;
+        const clickable = onClick ? styles.clickable : "";
 
         return (
             <Container className={style?.container ? style.container : styles.wrapper} onClick={() => this.props.onClick?.(kana)}>
+                {index && !blur && <span className={styles.index} style={{ color: style?.character?.color }}>{index}</span>}
                 {kana.isDiagraph() ?
                     <>
-                        <DynamicCharacter value={kana.code[0]} style={style?.character} classes={leftDiagraphClass} />
-                        <DynamicCharacter value={kana.code[1]} style={style?.character} classes={rightDiagraphClass} />
+                        <DynamicCharacter
+                            value={kana.code[0]}
+                            style={style?.character}
+                            classes={[leftDiagraphClass, styles.diagraphLeft, clickable]}
+                        />
+                        <DynamicCharacter
+                            value={kana.code[1]}
+                            style={style?.character}
+                            classes={[rightDiagraphClass, styles.diagraphRight, clickable]}
+                        />
                     </> :
-                    <DynamicCharacter value={kana.code} style={style?.character} classes={kanaClass}/>
+                    <DynamicCharacter value={kana.code} style={style?.character} classes={[kanaClass, clickable]}/>
                 }
             </Container>
         );

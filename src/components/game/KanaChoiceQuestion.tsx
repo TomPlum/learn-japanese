@@ -21,6 +21,7 @@ interface KanaChoiceQuestionState {
 class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQuestionState> {
 
     private displays = new Map<Kana, React.RefObject<KanaDisplay>>();
+    private indices = new Map<number, Kana>();
 
     constructor(props: Readonly<KanaChoiceQuestionProps> | KanaChoiceQuestionProps) {
         super(props);
@@ -29,9 +30,10 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
 
         const kana = Arrays.shuffle(wrong.concat(expected));
 
-        kana.map(option => {
+        kana.map((option, i) => {
             const ref = React.createRef<KanaDisplay>();
             this.displays.set(option, ref);
+            this.indices.set(i + 1, option);
         });
 
         this.state = {
@@ -40,25 +42,34 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
         }
     }
 
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleKeySelection);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeySelection);
+    }
+
     render() {
         const { expected, hidden } = this.props;
         const { selected, options } = this.state;
 
         return (
-            <>
+            <div>
                 <KanaQuestionBanner value={expected} />
 
                 <Row>
-                    {options.map(option => {
+                    {options.map((option, i) => {
                         return (
                             <Col xs={6}>
                                 <KanaDisplay
                                     kana={option}
                                     blur={hidden}
+                                    index={i + 1}
                                     onClick={this.select}
                                     style={{
                                         container: selected === option ? styles.selected : styles.tile,
-                                        character: { size: "md", color: selected === option ? "#34b7de" : undefined }
+                                        character: { size: "md", color: selected === option ? "#43ea5f" : undefined }
                                     }}
                                     ref={this.displays.get(option)}
                                 />
@@ -70,7 +81,7 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
                 <Button variant={"success"} type="button" disabled={!selected || hidden} onClick={this.answer} block>
                     Check
                 </Button>
-            </>
+            </div>
         );
     }
 
@@ -87,6 +98,19 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
 
     private select = (value: Kana) => {
         this.setState({ selected: value });
+    }
+
+    private handleKeySelection = (e: KeyboardEvent) => {
+        e.preventDefault();
+
+        if ([...this.indices.keys()].map(i => i.toString()).includes(e.key)) {
+            const kana = this.indices.get(Number(e.key));
+            if (kana) this.select(kana);
+        }
+
+        if (this.state.selected && e.key === 'Enter') {
+            this.answer();
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-interface JapaneseCharacterProps {
+interface DynamicCharacterProps {
     value: string;
     classes?: string[] | string;
     style?: CharacterStyleProps;
@@ -11,7 +11,7 @@ export interface CharacterStyleProps {
     color?: string;
 }
 
-export class DynamicCharacter extends Component<JapaneseCharacterProps> {
+export class DynamicCharacter extends Component<DynamicCharacterProps> {
     render() {
         const { value, style } = this.props;
 

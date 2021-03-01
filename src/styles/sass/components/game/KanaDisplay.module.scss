@@ -69,6 +69,16 @@ $diagraph-margin: -10px;
   display: inline;
 }
 
+.index {
+  color: #a5a5a5;
+  float: left;
+  font-size: 0.8em;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
 @keyframes flashRed {
   0% {
     color: $default-colour;
