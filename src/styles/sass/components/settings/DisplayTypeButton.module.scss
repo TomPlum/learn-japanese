@@ -1,0 +1,40 @@
+@mixin button {
+  height: 80px;
+  max-width: 150px;
+  width: 100%;
+}
+
+.notSelected:hover {
+  color: black;
+  background-color: #b3b3b3;
+  border: none;
+}
+
+.selected:hover {
+  color: #000;
+  background-color: #FFF;
+}
+
+.selected, .selected:focus, .selected:active {
+  @include button;
+  background-color: rgba(255, 255, 255, 1);
+  border-color: rgba(148, 148, 148, 0.8);
+  color: black;
+}
+
+.notSelected {
+  @include button;
+  background-color: rgba(215, 215, 215, 0.6);
+  border-color: rgba(148, 148, 148, 0.8);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.icon {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.name {
+  font-size: 1em;
+  margin-bottom: 0;
+}

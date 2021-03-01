@@ -1,8 +1,9 @@
 import { Component } from "react";
 import { DisplaySettings } from "../../types/GameSettings";
 import { DisplayType } from "../../types/DisplayType";
-import { Form } from "react-bootstrap";
-import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
+import DisplayTypeButton from "./DisplayTypeButton";
+import { faStop, faThLarge } from "@fortawesome/free-solid-svg-icons";
+import { Col, Row } from "react-bootstrap";
 
 interface DisplaySettingsFormProps {
     onChange: (settings: DisplaySettings) => void;
@@ -37,30 +38,24 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
         const { type } = this.state;
 
         return (
-            <>
-                <Form.Row>
-                    <Form.Check
-                        inline
-                        label="Romanji"
-                        type="switch"
-                        id="romanji"
-                        className={styles.check}
-                        checked={type === DisplayType.SINGLE_KANA}
-                        onChange={() => this.setState({ type: DisplayType.SINGLE_KANA })}
+            <Row>
+                <Col>
+                    <DisplayTypeButton
+                        text="Romanji"
+                        icon={faStop}
+                        selected={type === DisplayType.SINGLE_KANA}
+                        onClick={() => this.setState({ type: DisplayType.SINGLE_KANA })}
                     />
-                </Form.Row>
-                <Form.Row>
-                    <Form.Check
-                        inline
-                        label="Kana"
-                        type="switch"
-                        id="kana"
-                        className={styles.check}
-                        checked={type === DisplayType.MULTIPLE_CARDS}
-                        onChange={() => this.setState({ type: DisplayType.MULTIPLE_CARDS })}
+                </Col>
+                <Col>
+                    <DisplayTypeButton
+                        text="Kana"
+                        icon={faThLarge}
+                        selected={type === DisplayType.MULTIPLE_CARDS}
+                        onClick={() => this.setState({ type: DisplayType.MULTIPLE_CARDS })}
                     />
-                </Form.Row>
-            </>
+                </Col>
+            </Row>
         );
     }
 
