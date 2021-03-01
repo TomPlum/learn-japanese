@@ -19,7 +19,7 @@ describe("Kana Repository", () => {
         describe("Read", () => {
             it("Should convert the JSON values into Kana objects", () => {
                 const response = repository.read({hiragana: true});
-                expect(response[0]).toStrictEqual(new Kana("あ", "a", KanaType.HIRAGANA, KanaColumn.VOWEL, false));
+                expect(response[0]).toStrictEqual(new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false));
             });
         });
     });
@@ -28,7 +28,7 @@ describe("Kana Repository", () => {
         describe("Read", () => {
             it("Should convert the JSON values into Kana objects", () => {
                 const response = repository.read({katakana: true});
-                expect(response[0]).toStrictEqual(new Kana("ア", "a", KanaType.KATAKANA, KanaColumn.VOWEL, false));
+                expect(response[0]).toStrictEqual(new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false));
             });
         });
     });
