@@ -9,7 +9,7 @@ import { HintSettings } from "../../types/GameSettings";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 
-interface RomanjiQuestionProps {
+export interface RomanjiQuestionProps {
     kana: Kana;
     hidden: boolean;
     hintSettings: HintSettings;
