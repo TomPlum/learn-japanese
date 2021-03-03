@@ -3,7 +3,7 @@ import { faHeart, faInfinity } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/game/LifeDisplay.module.scss";
 
-interface LifeDisplayProps {
+export interface LifeDisplayProps {
     hearts: number;
 }
 
@@ -12,9 +12,9 @@ class LifeDisplay extends Component<LifeDisplayProps> {
         const { hearts } = this.props;
         return (
             <>
-                <FontAwesomeIcon icon={faHeart} className={styles.icon}/>
+                <FontAwesomeIcon icon={faHeart} title="Lives" className={styles.icon}/>
                 <span className={styles.quantity}>
-                    {hearts === 999 ? <FontAwesomeIcon icon={faInfinity}/> : hearts}
+                    {hearts === 999 ? <FontAwesomeIcon icon={faInfinity} title="Infinite"/> : hearts}
                 </span>
             </>
         );
