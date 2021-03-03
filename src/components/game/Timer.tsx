@@ -3,7 +3,7 @@ import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/game/Timer.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-interface TimerProps {
+export interface TimerProps {
     end?: number;
     className?: string;
     pausable?: boolean;
