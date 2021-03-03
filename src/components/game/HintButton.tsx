@@ -7,7 +7,7 @@ import PopOver from "../ui/PopOver";
 import { Kana } from "../../types/Kana";
 import { KanaColumn } from "../../types/KanaColumn";
 
-interface HintButtonProps {
+export interface HintButtonProps {
     kana: Kana;
     quantity: number
     totalQuantity?: number;
@@ -38,9 +38,6 @@ class HintButton extends Component<HintButtonProps> {
 
     private getTitle = () => {
         const { quantity, totalQuantity } = this.props;
-        //const titles = ["Need some guidance?", "Stuck?", "Need a hint?"];
-        //const index = RandomNumberGenerator.getRandomArrayIndex(titles);
-        //return titles[index];
         if (quantity > 0) {
             if (quantity <= 10) {
                 return "Need a hint? (" + (quantity - 1) + "/" + totalQuantity + " remaining)";
