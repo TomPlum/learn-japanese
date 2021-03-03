@@ -98,16 +98,16 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
 
         if (kana.romanji.includes(answer)) {
             this.props.onSubmit(true);
-            this.setState({
-                hasUsedHintThisQuestion: false,
-                hints: hasUsedHintThisQuestion ? hints - 1 : hints
-            });
         } else {
             this.kanaDisplay.current?.notifyIncorrect();
             this.props.onSubmit(false);
         }
 
-        this.setState({ answer: "" });
+        this.setState({
+            answer: "",
+            hasUsedHintThisQuestion: false,
+            hints: hasUsedHintThisQuestion ? hints - 1 : hints
+        });
     }
 }
 

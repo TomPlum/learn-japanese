@@ -25,19 +25,15 @@ const setup = () => {
 
 test('Answer Correctly', () => {
     const { input, submit } = setup();
-
     fireEvent.change(input, { target: { value: 'a'}});
     fireEvent.click(submit);
-
     expect(onSubmitHandler).toHaveBeenCalledWith(true);
 });
 
 test('Answer Incorrectly', () => {
     const { input, submit } = setup();
-
     fireEvent.change(input, { target: { value: 'ha'}});
     fireEvent.click(submit);
-
     expect(onSubmitHandler).toHaveBeenCalledWith(false);
 });
 
