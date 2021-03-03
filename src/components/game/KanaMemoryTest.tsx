@@ -131,7 +131,6 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 return (
                     <RomanjiQuestion
                         kana={currentKana}
-                        key={currentKana.code}
                         onSubmit={this.answerQuestion}
                         hidden={paused}
                         hintSettings={settings.hints}
