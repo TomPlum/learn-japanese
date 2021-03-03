@@ -13,6 +13,7 @@ class LoadingSpinner extends Component<{ active: any }> {
                         animation="border"
                         role="status"
                         variant="danger"
+                        title="Loading"
                     />
                 </div>
             );

@@ -24,6 +24,7 @@ test('Kana with multiple pronunciations should display both separated by \'or\''
 
 //TODO: Fix TypeScript complaints about the parameter types and move to global file as helper function.
 const getByTextWithElements = (text: string) => {
+    // @ts-ignore
     return screen.getByText((content, element) => {
         return content !== '' && element && element.textContent === text;
     });

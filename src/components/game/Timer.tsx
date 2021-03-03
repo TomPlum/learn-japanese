@@ -50,7 +50,6 @@ class Timer extends Component<TimerProps, TimerState> {
                     onClick={paused ? this.play : this.pause}
                     title="Pause"
                     size="sm"
-
                 />}
                 {this.formatTimeElapsed()}
             </span>
