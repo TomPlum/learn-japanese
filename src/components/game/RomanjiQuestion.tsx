@@ -59,7 +59,7 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
                                 <RomanjiInput
                                     value={answer}
                                     disabled={!kana || hidden}
-                                    onChange={(e) => this.setState({ answer: e.target.value })}
+                                    onChange={(value) => this.setState({ answer: value })}
                                     placeholder={hidden ? "Paused" : "Enter the romanji"}
                                     onEnterKey={this.answer}
                                 />

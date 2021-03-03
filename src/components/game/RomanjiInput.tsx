@@ -2,11 +2,11 @@ import React, { ChangeEvent, Component } from "react";
 import styles from "../../styles/sass/components/game/RomanjiInput.module.scss";
 import { Form } from "react-bootstrap";
 
-interface RomanjiInputProps {
+export interface RomanjiInputProps {
     disabled?: boolean;
     value?: string;
     placeholder?: string;
-    onChange?: (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+    onChange?: (value: string) => void;
     onEnterKey?: () => void;
 }
 
@@ -19,7 +19,7 @@ class RomanjiInput extends Component<RomanjiInputProps> {
     }
 
     render() {
-        const { disabled, value, placeholder, onChange } = this.props;
+        const { disabled, value, placeholder } = this.props;
 
         return (
             <Form.Control
@@ -28,7 +28,7 @@ class RomanjiInput extends Component<RomanjiInputProps> {
                 disabled={disabled}
                 value={value}
                 placeholder={placeholder}
-                onChange={onChange}
+                onChange={this.handleOnChange}
                 onKeyPress={this.handleEnterKeySubmit}
                 ref={this.input}
             />
@@ -36,13 +36,17 @@ class RomanjiInput extends Component<RomanjiInputProps> {
     }
 
     private handleEnterKeySubmit = (event: any) => {
-        if (event.charCode === 13) {
+        if (event.key === 'Enter') {
             event.preventDefault();
             if (this.props.value && this.props.onEnterKey) {
                 this.props.onEnterKey();
             }
         }
         return false;
+    }
+
+    private handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        this.props?.onChange?.(e.target.value);
     }
 }
 
