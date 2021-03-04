@@ -4,7 +4,7 @@ import styles from "../../styles/sass/components/layout/Main.module.scss";
 import { GameSettings } from "../../types/GameSettings";
 import { Route } from "react-router-dom";
 import Switch from "react-bootstrap/Switch";
-import Game from "../game/Game";
+import GamePage from "../game/GamePage";
 import Search from "./Search";
 import Landing from "./Landing";
 
@@ -27,7 +27,7 @@ class Main extends Component<{}, MainState> {
             <Container className={settings ? styles.wrapperFullScreen : styles.wrapper}>
                 <Switch className={styles.switch}>
                     <Route path="/" component={Landing} exact />
-                    <Route path="/play" component={Game}/>
+                    <Route path="/play" component={GamePage}/>
                     <Route path="/search" component={Search}/>
                 </Switch>
             </Container>

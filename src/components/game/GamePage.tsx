@@ -9,12 +9,7 @@ import { Kana } from "../../types/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
 
-interface GameProps {
-    onLaunch: () => void;
-    onClose: () => void;
-}
-
-interface GameState {
+interface GamePageState {
     loading: boolean;
     kana?: Kana[];
     gameSettings?: GameSettings;
@@ -22,9 +17,9 @@ interface GameState {
     result?: GameResult;
 }
 
-class Game extends Component<GameProps, GameState> {
+class GamePage extends Component<{ }, GamePageState> {
 
-    constructor(props: GameProps | Readonly<GameProps>) {
+    constructor(props: {} | Readonly<{}>) {
         super(props);
         this.state = {
             loading: false,
@@ -46,15 +41,17 @@ class Game extends Component<GameProps, GameState> {
                 }
 
                 {gameSettings && kana && !inResultsScreen &&
-                <KanaMemoryTest
-                    kana={kana}
-                    settings={gameSettings}
-                    onClose={this.onGameClose}
-                    onFinish={this.onGameFinish}
-                />
+                    <KanaMemoryTest
+                        kana={kana}
+                        settings={gameSettings}
+                        onClose={this.onGameClose}
+                        onFinish={this.onGameFinish}
+                    />
                 }
 
-                {inResultsScreen && result && <ResultScreen result={result} onClose={this.onResultMenuClose}/>}
+                {inResultsScreen && result &&
+                    <ResultScreen result={result} onClose={this.onResultMenuClose}/>
+                }
             </>
         );
     }
@@ -82,4 +79,4 @@ class Game extends Component<GameProps, GameState> {
     }
 }
 
-export default Game;
+export default GamePage;
