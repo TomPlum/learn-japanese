@@ -5,7 +5,7 @@ import DisplayTypeButton from "./DisplayTypeButton";
 import { faStop, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";
 
-interface DisplaySettingsFormProps {
+export interface DisplaySettingsFormProps {
     onChange: (settings: DisplaySettings) => void;
 }
 
