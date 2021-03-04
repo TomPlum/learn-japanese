@@ -46,6 +46,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
                     checked={hiragana}
                     onChange={() => this.setState({ hiragana: !hiragana })}
                     disabled={hiragana && !katakana}
+                    data-testid="Hiragana"
                 />
                 <Form.Check
                     inline
@@ -54,12 +55,14 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
                     checked={katakana}
                     onChange={() => this.setState({ katakana: !katakana })}
                     disabled={katakana && !hiragana}
+                    data-testid="Katakana"
                 />
                 <Form.Check
                     label="Diagraphs"
                     className={styles.check}
                     checked={diagraphs}
                     onChange={() => this.setState({ diagraphs: !diagraphs })}
+                    data-testid="Diagraphs"
                 />
 
                 <InputGroup hasValidation>
@@ -71,6 +74,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
                         type="number"
                         required
                         value={quantity}
+                        placeholder="Enter kana quantity"
                         isInvalid={quantity < 1 || quantity > 214}
                     />
                 </InputGroup>
