@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
-import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 import { faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
@@ -12,8 +11,7 @@ import TimeSettingsForm from "./TimeSettingsForm";
 import { defaultDisplaySettings, defaultHintSettings, defaultKanaSettings, defaultLifeSettings, defaultTimeSettings } from "../../data/GameModePresets";
 import DisplaySettingsForm from "./DisplaySettingsForm";
 
-interface GameSettingsMenuProps {
-    mode: GameMode;
+export interface GameSettingsMenuProps {
     onSubmit: (settings: GameSettings) => void;
 }
 

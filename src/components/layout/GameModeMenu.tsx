@@ -113,7 +113,7 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
                     </Row>
                 </>}
 
-                {isCustomisingSettings && <GameSettingsMenu mode={selected} onSubmit={this.setCustomSettings}/>}
+                {isCustomisingSettings && <GameSettingsMenu onSubmit={this.setCustomSettings}/>}
             </Container>
         );
     }
