@@ -33,6 +33,11 @@ test('Selecting both Hiragana and Katakana should enable both options', () => {
     expect(katakana).not.toBeDisabled();
 });
 
+test('On mount it should call the onSelect event handler with the default settings', () => {
+    setup();
+    expect(onSelectHandler).toHaveBeenCalledWith({ hiragana: true, katakana: false, diagraphs: false, quantity: 50 });
+});
+
 test('Selecting Diagraphs should set the boolean to true in the settings', () => {
     const { diagraphs, rerender } = setup();
     fireEvent.click(diagraphs);
