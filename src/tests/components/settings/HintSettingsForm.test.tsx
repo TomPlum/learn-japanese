@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import HintSettingsForm from "../../../components/settings/HintSettingsForm";
 
 const onChangeHandler = jest.fn();

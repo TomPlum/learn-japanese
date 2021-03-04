@@ -16,7 +16,7 @@ interface DisplaySettingsFormState {
 
 class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySettingsFormState> {
 
-    private readonly defaultState = { type: DisplayType.SINGLE_KANA, cards: 2, };
+    private readonly defaultState = { type: DisplayType.SINGLE_KANA, cards: 1, };
 
     constructor(props: Readonly<DisplaySettingsFormProps> | DisplaySettingsFormProps) {
         super(props);
@@ -44,7 +44,7 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
                         text="Romanji"
                         icon={faStop}
                         selected={type === DisplayType.SINGLE_KANA}
-                        onClick={() => this.setState({ type: DisplayType.SINGLE_KANA })}
+                        onClick={() => this.setState({ type: DisplayType.SINGLE_KANA, cards: 1 })}
                     />
                 </Col>
                 <Col>
@@ -52,7 +52,7 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
                         text="Kana"
                         icon={faThLarge}
                         selected={type === DisplayType.MULTIPLE_CARDS}
-                        onClick={() => this.setState({ type: DisplayType.MULTIPLE_CARDS })}
+                        onClick={() => this.setState({ type: DisplayType.MULTIPLE_CARDS, cards: 4 })}
                     />
                 </Col>
             </Row>
