@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaDisplay.module.scss";
 import DynamicCharacter, { CharacterStyleProps } from "./DynamicCharacter";
 
-interface KanaDisplayProps {
+export interface KanaDisplayProps {
     kana: Kana;
     blur?: boolean;
     index?: number;
