@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-interface CountDownProps {
+export interface CountDownProps {
     value: number;
     className?: string;
     onFinish: () => void;
@@ -30,7 +30,7 @@ class CountDown extends Component<CountDownProps, CountDownState> {
 
     render() {
         return (
-            <span className={this.props.className}>
+            <span className={this.props.className} title="Time Remaining">
                 {this.state.remaining}
             </span>
         );

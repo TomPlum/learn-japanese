@@ -9,7 +9,7 @@ beforeEach(() => {
 afterEach(() => {
     jest.runOnlyPendingTimers();
     jest.useRealTimers();
-})
+});
 
 test('Passing the pausable property as true should render a pause button', () => {
     render(<Timer pausable={true}/>);
