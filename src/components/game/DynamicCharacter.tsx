@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-interface DynamicCharacterProps {
+export interface DynamicCharacterProps {
     value: string;
     classes?: string[] | string;
     style?: CharacterStyleProps;
