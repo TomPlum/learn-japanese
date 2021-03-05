@@ -2,7 +2,7 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/layout/KanaTypeIndicator.module.scss";
 
-interface KanaTypeIndicatorProps {
+export interface KanaTypeIndicatorProps {
     title: string;
     className?: string;
 }
