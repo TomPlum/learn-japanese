@@ -1,6 +1,6 @@
 import { Numbers } from "./Numbers";
 
-export class Arrays {
+export default class Arrays {
     static intersect<T>(arr1: T[], arr2: T[]): T[] {
         if (arr1.length > arr2.length) {
             return arr1.filter(element => arr2.indexOf(element) < 0);
@@ -16,7 +16,7 @@ export class Arrays {
         }
     }*/
 
-    static shuffle<T>(array: T[]): T[] {
+    public static shuffle<T>(array: T[]): T[] {
         const shuffled = [...array];
         for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
