@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import HintButton, { HintButtonProps } from "../../../components/game/HintButton";
 import { Kana } from "../../../types/Kana";
 import KanaType from "../../../types/KanaType";
@@ -99,4 +99,15 @@ test('Blurring Should Remove The Overlay PopOver', async () => {
 
     button.blur();
     await waitForElementToBeRemoved(popover);
+});
+
+test('When tip quantity is 0, it should apply the \'disabled\' class to the button', () => {
+    props.quantity = 0;
+    const { container } = setup();
+    expect(container?.firstChild).toHaveClass('disabled');
+});
+
+test('When tip quantity is greater than 0, it should apply the default \'tip\' class to the button', () => {
+    const { container } = setup();
+    expect(container?.firstChild).toHaveClass('tip');
 });
