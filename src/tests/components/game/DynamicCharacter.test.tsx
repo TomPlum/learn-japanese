@@ -1,6 +1,12 @@
 import { render } from "@testing-library/react";
 import DynamicCharacter, { CharacterStyleProps } from "../../../components/game/DynamicCharacter";
 
+test('Passing style size as \'xs\' should set the font-size to 2.5em', () => {
+    const style: CharacterStyleProps = { size: 'xs' };
+    const { container } = render(<DynamicCharacter value={'a'} style={style} />);
+    expect(container?.firstChild).toHaveProperty('style._values.font-size', '2.5em');
+});
+
 test('Passing style size as \'sm\' should set the font-size to 3em', () => {
     const style: CharacterStyleProps = { size: 'sm' };
     const { container } = render(<DynamicCharacter value={'a'} style={style} />);
@@ -53,3 +59,5 @@ test('Omitting the classes property should not set any classes to the character'
     const { container } = render(<DynamicCharacter value={'a'} />);
     expect(container?.firstChild).not.toHaveClass();
 });
+
+//TODO: Write tests for the diagraph margins. Will need to select both child nodes and check left/right margins

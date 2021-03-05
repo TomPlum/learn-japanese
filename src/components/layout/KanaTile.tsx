@@ -4,6 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/KanaTile.module.scss";
 import KanaType from "../../types/KanaType";
 import KanaTypeIndicator from "./KanaTypeIndicator";
+import KanaDisplay from "../game/KanaDisplay";
 
 export interface KanaTileProps {
     kana: Kana;
@@ -26,9 +27,7 @@ class KanaTile extends Component<KanaTileProps> {
                     </Col>
                 </Row>
 
-                <Row className={styles.kanaWrapper}>
-                    <p className={styles.kana}>{kana.code}</p>
-                </Row>
+                <KanaDisplay kana={kana} style={{ character: { color: "#000", size: "xs" }, container: styles.kanaWrapper  }} />
 
                 <Row>
                     <Col>

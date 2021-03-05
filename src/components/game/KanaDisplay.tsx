@@ -49,18 +49,25 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
 
         return (
             <Container className={style?.container ? style.container : styles.wrapper} onClick={() => this.props.onClick?.(kana)}>
-                {index && !blur && <span className={styles.index} style={{ color: style?.character?.color }}>{index}</span>}
+                {index && !blur &&
+                    <span className={styles.index} style={{ color: style?.character?.color }}>
+                        {index}
+                    </span>
+                }
+
                 {kana.isDiagraph() ?
                     <>
                         <DynamicCharacter
                             value={kana.code[0]}
                             style={style?.character}
                             classes={[leftDiagraphClass, styles.diagraphLeft, clickable]}
+                            isDiagraphLeft={true}
                         />
                         <DynamicCharacter
                             value={kana.code[1]}
                             style={style?.character}
                             classes={[rightDiagraphClass, styles.diagraphRight, clickable]}
+                            isDiagraphRight={true}
                         />
                     </> :
                     <DynamicCharacter value={kana.code} style={style?.character} classes={[kanaClass, clickable]}/>
