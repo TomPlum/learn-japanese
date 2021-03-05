@@ -29,13 +29,13 @@ class RomanjiInput extends Component<RomanjiInputProps> {
                 value={value}
                 placeholder={placeholder}
                 onChange={this.handleOnChange}
-                onKeyPress={this.handleEnterKeySubmit}
+                onKeyPress={this.handleKeyPress}
                 ref={this.input}
             />
         );
     }
 
-    private handleEnterKeySubmit = (event: any) => {
+    private handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             event.preventDefault();
             if (this.props.value && this.props.onEnterKey) {

@@ -20,6 +20,11 @@ const setup = () => {
     }
 }
 
+afterEach(() => {
+    jest.clearAllMocks();
+});
+
+
 test('When the passed disabled property is true it should disable the input field', () => {
     props.disabled = true;
     const { input } = setup();
@@ -32,7 +37,7 @@ test('The passed value property should populate the input field value', () => {
     expect(input).toHaveValue("ka");
 });
 
-test('Changing the input value should call the onChange event handler with the current inputs value', () => {
+test('Changing the input value should call the onChange event handler with the inputs current value', () => {
     const { input } = setup();
     fireEvent.change(input, { target: { value: 'ba' } });
     expect(onChangeHandler).toHaveBeenCalledWith("ba");
@@ -48,7 +53,6 @@ test('Hitting the Enter key should call the onEnterKey event handler when it is 
 //TODO: Why is it still calling the onEnterKey() function when answer is falsy? ('')
 test.skip('Hitting the Enter key when the input value is falsy should not call the onEnterKey event handler', () => {
     const { input } = setup();
-    //fireEvent.change(input, { target: { value: undefined } });
     fireEvent.keyPress(input, { key: 'Enter', code: 13, charCode: 13 });
     expect(onEnterKeyHandler).not.toHaveBeenCalled();
 });
@@ -56,7 +60,7 @@ test.skip('Hitting the Enter key when the input value is falsy should not call t
 test('Hitting the Enter key should not call the onEnterKey event handler when it is un-bound', () => {
     props.onEnterKey = undefined;
     const { input } = setup();
-    fireEvent.keyPress(input, { key: 'Enter', code: 13, charCode: 13 });
+    fireEvent.keyPress(input, { key: 'Enter', keyCode: 13 });
     expect(onEnterKeyHandler).not.toHaveBeenCalled();
 });
 
