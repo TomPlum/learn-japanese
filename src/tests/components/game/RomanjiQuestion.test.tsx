@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import RomanjiQuestion, { RomanjiQuestionProps } from "../../../components/game/RomanjiQuestion";
 import { Kana } from "../../../types/Kana";
 import KanaType from "../../../types/KanaType";
@@ -68,25 +68,18 @@ test('Passing the hidden property has true should disable the Romanji input fiel
 test('Passing the hidden property has true should set the Romanji input placeholder as \'Paused\'', () => {
     props.hidden = true;
     render(<RomanjiQuestion {...props} />);
-    expect(screen.getByPlaceholderText('Paused')).toBeDefined();
+    expect(screen.getByPlaceholderText('Paused')).toBeInTheDocument();
 });
 
-test('Clicking the hint button should trigger the pop-over with the title showing hints remaining', async () => {
+test('Using the hint button twice in the same kana shouldn\'t use another hint', async () => {
     const { hintButton } = setup();
-    fireEvent.click(hintButton);
-    await waitFor(() => expect(screen.findByTitle('Need a hint? (2/3 remaining)')).toBeDefined());
-});
 
-//TODO: The onUse event handler is not getting called. Seems onClick isn't enough to simulate onToggle.
-test.skip('Using the hint button twice in the same kana shouldn\'t use another hint', async () => {
-    const { submit, hintButton } = setup();
+    fireEvent.focus(hintButton);
+    expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 
-    fireEvent.click(hintButton);
-    await waitFor(() => expect(screen.findByTitle('Need a hint? (2/3 remaining)')).toBeDefined());
+    fireEvent.blur(hintButton);
+    await waitForElementToBeRemoved(() => screen.getByTitle('Need a hint? (2/3 remaining)'));
 
-    fireEvent.click(submit); //Click away from pop-over to dismiss.
-    await waitForElementToBeRemoved(() => screen.findByTitle('Need a hint? (2/3 remaining)'));
-
-    fireEvent.click(hintButton);
-    await waitFor(() => expect(screen.findByTitle('Need a hint? (2/3 remaining)')).toBeDefined());
+    fireEvent.focus(hintButton);
+    expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 });
