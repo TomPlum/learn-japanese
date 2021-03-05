@@ -5,7 +5,7 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/GameModeButton.module.scss";
 
-interface GameModeButtonProps {
+export interface GameModeButtonProps {
     mode: GameMode;
     icon: IconDefinition;
     iconColour?: string;
@@ -21,9 +21,7 @@ class GameModeButton extends Component<GameModeButtonProps> {
         }
     }
 
-    handleClick = () => {
-        this.props.onClick(this.props.mode);
-    }
+    handleClick = () => this.props.onClick(this.props.mode);
 
     render() {
         const { mode, icon, isSelected, iconColour } = this.props;
