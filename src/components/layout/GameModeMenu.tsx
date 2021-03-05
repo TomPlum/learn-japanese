@@ -10,7 +10,7 @@ import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../../data/GameMo
 import { GameSettings } from "../../types/GameSettings";
 import { Environment } from "../../utility/Environment";
 
-interface GameModeMenuProps {
+export interface GameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;
 }
 
