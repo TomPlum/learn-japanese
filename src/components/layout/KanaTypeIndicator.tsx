@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/layout/KanaTypeIndicator.module.scss";
 
 interface KanaTypeIndicatorProps {
+    title: string;
     className?: string;
 }
 
@@ -12,6 +13,7 @@ const KanaTypeIndicator = (props: KanaTypeIndicatorProps) => {
             icon={faCircle}
             size="xs"
             className={props.className + " " + styles.icon}
+            title={props.title}
         />
     );
 }

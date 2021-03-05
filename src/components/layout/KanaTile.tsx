@@ -5,7 +5,7 @@ import styles from "../../styles/sass/components/layout/KanaTile.module.scss";
 import KanaType from "../../types/KanaType";
 import KanaTypeIndicator from "./KanaTypeIndicator";
 
-interface KanaTileProps {
+export interface KanaTileProps {
     kana: Kana;
 }
 
@@ -17,9 +17,12 @@ class KanaTile extends Component<KanaTileProps> {
             <Container className={styles.wrapper}>
                 <Row className={styles.typeWrapper}>
                     <Col xs={12}>
-                        <KanaTypeIndicator className={kana.type === KanaType.HIRAGANA ? styles.hiragana : styles.katakana} />
-                        {kana.isDiagraph() && <KanaTypeIndicator className={styles.diagraph} />}
-                        {kana.isDiacritical && <KanaTypeIndicator className={styles.diacritical} />}
+                        <KanaTypeIndicator
+                            className={kana.type === KanaType.HIRAGANA ? styles.hiragana : styles.katakana}
+                            title={kana.type}
+                        />
+                        {kana.isDiagraph() && <KanaTypeIndicator className={styles.diagraph} title="Diagraph" />}
+                        {kana.isDiacritical && <KanaTypeIndicator className={styles.diacritical} title="Diacritical" />}
                     </Col>
                 </Row>
 
