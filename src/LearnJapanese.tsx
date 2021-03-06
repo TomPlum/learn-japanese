@@ -3,13 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Component } from "react";
 import { BrowserRouter as Router, } from "react-router-dom";
 import Main from "./components/layout/Main";
-import Header from "./components/layout/Header";
 
 class LearnJapanese extends Component {
     render() {
         return (
             <Router>
-                <Header />
+                {/*<Header />*/}
                 <Main />
             </Router>
         );

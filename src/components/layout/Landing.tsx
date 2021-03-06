@@ -5,12 +5,36 @@ import Inspectable from "../ui/Inspectable";
 import KanaCarousel from "../../styles/sass/components/KanaCarousel";
 import { faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Kana } from "../../types/Kana";
+import { KanaRepository } from "../../repository/KanaRepository";
 
-class Landing extends Component {
+interface LandingState {
+    kana: Kana[];
+}
+
+class Landing extends Component<{}, LandingState> {
+
+    constructor(props: Readonly<{}> | {}) {
+        super(props);
+        this.state = {
+            kana: []
+        }
+    }
+
+    componentDidMount() {
+        this.setState({ kana: new KanaRepository().read({ hiragana: true, katakana: true })})
+    }
+
     render() {
         return (
-            <Container fluid>
-                <Jumbotron className={styles.jumbotron} fluid>
+            <Container fluid className={styles.wrapper}>
+                <ul className={styles.background}>
+                    {this.state.kana?.map(kana => {
+                        return <li key={kana.code}>{kana.code}</li>
+                    })}
+                </ul>
+
+                <div className={styles.content}>
                     <h1 className={styles.heading}>
                         {'Learn '}
                         <Inspectable
@@ -23,7 +47,13 @@ class Landing extends Component {
                         </Inspectable>
                         {' Kana'}
                     </h1>
-                    <h4>A simple memory training app for learning the Japanese Hiragana and Katakana syllabaries.</h4>
+
+                    <div className={styles.descriptionWrapper}>
+                        <h4 className={styles.description}>
+                            A simple memory training app for learning the Japanese Hiragana and Katakana syllabaries.
+                        </h4>
+                    </div>
+
                     <KanaCarousel />
                     <Button className={styles.play} variant="outline-success" href="/play">
                         <FontAwesomeIcon icon={faPlay} /> Play
@@ -31,7 +61,7 @@ class Landing extends Component {
                     <Button className={styles.search} variant="outline-info" href="/search">
                         <FontAwesomeIcon icon={faSearch} /> Search
                     </Button>
-                </Jumbotron>
+                </div>
             </Container>
         );
     }
