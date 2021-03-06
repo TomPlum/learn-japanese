@@ -1,10 +1,17 @@
-.kana {
-  font-size: 10em;
+@mixin animate {
+  animation: fade 4s ease-in-out infinite;
+  margin: 0;
 }
 
-.animate {
+.kana {
+  @include animate;
   font-size: 10em;
-  animation: fade 4s ease-in-out infinite;
+  height: 1.3em;
+}
+
+.romanji {
+  @include animate;
+  font-size: 1.5em;
 }
 
 @keyframes fade {

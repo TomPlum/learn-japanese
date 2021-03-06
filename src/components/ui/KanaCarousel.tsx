@@ -36,15 +36,13 @@ class KanaCarousel extends Component<any, KanaCarouselState> {
         clearInterval(this.state.interval);
     }
 
+    //TODO: Replace with KanaDisplay. Expose animation class and add it to the DyanmicCharacter arrays
     render() {
         const { current } = this.state;
         return (
             <Container className={styles.wrapper}>
-                <p
-                    className={styles.animate}
-                >
-                    {current?.code}
-                </p>
+                <p className={styles.kana}>{current?.code}</p>
+                <p className={styles.romanji}>{current?.getFullRomanjiString()}</p>
             </Container>
         );
     }
