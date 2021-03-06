@@ -62,7 +62,7 @@ const kanji: KanjiData[] = [
             { value: "日", kana: ["ひ"], english: ["day", "days", "sun", "sunshine", "sunlight"] },
             { value: "同日", kana: ["どうじつ"], english: ["the same day"] },
             { value: "日米", kana: ["にちべい"], english: ["Japan"] },
-            { value: "日本人", kana: ["にほんじん", "にっぽんじん"], english: ["Japanese person", "Japanese people"] },
+            { value: "日本人", kana: ["にほんじん", "にっぽんじん"], english: ["Japanese person (people)"] },
             { value: "毎日", kana: ["まいにち"], english: ["every day"] },
         ]
     },
@@ -320,6 +320,166 @@ const kanji: KanjiData[] = [
             { value: "購入", kana: ["こうにゅう"], english: ["purchase", "busy"] },
             { value: "収入", kana: ["しゅうにゅう"], english: ["income", "receipts", "revenue"] },
             { value: "導入", kana: ["どうにゅう"], english: ["introduction", "bringing in", "leading in"] },
+        ]
+    },
+    {
+        name: "学",
+        code: "\u5B66",
+        on: [{ kana: "がく", romanji: "gaku" }],
+        kun: [{ kana: "まなぶ", romanji: "manabu" }],
+        source: "https://en.wiktionary.org/wiki/%E5%AD%A6#Kanji",
+        meanings: ["study", "learning", "science"],
+        grade: 1,
+        examples: [
+            { value: "学校", kana: ["がっこう"], english: ["school"] },
+            { value: "学生", kana: ["がくせい"], english: ["student"] },
+            { value: "大学", kana: ["だいがく"], english: ["secondary school"] },
+            { value: "医学", kana: ["いがく"], english: ["medical science", "medicine"] },
+            { value: "科学", kana: ["かがく"], english: ["science"] },
+        ]
+    },
+    {
+        name: "円",
+        code: "\u5187",
+        on: [{ kana: "えん", romanji: "en" }],
+        kun: [{ kana: "まる", romanji: "maru" }],
+        source: "https://en.wiktionary.org/wiki/%E5%86%86#Kanji",
+        meanings: ["circle", "yen", "round"],
+        grade: 1,
+        examples: [
+            { value: "円", kana: ["えん", "まる"], english: ["Yen", "money", "circle"] },
+            { value: "円高", kana: ["えんだか"], english: ["valued yen"] },
+            { value: "円安", kana: ["えんやす"], english: ["cheap yen"] },
+            { value: "円相場", kana: ["えんそうば"], english: ["yen exchange rate"] },
+            { value: "一円", kana: ["いちえん"], english: ["whole district", "one yen", "throughout"] },
+        ]
+    },
+    {
+        name: "子",
+        code: "\u5B50",
+        on: [{ kana: "し", romanji: "shi" }],
+        kun: [{ kana: "こ", romanji: "ko" }],
+        source: "https://en.wiktionary.org/wiki/%E5%AD%90#Kanji",
+        meanings: ["child", "sign of the rat"],
+        grade: 1,
+        examples: [
+            { value: "子", kana: ["こ"], english: ["child"] },
+            { value: "子供", kana: ["こども"], english: ["children"] },
+            { value: "女子", kana: ["じょし", "おなご"], english: ["women", "girl"] },
+            { value: "男子", kana: ["だんし"], english: ["youth", "young man"] },
+            { value: "原子力", kana: ["げんしりょく"], english: ["atomic", "energy"] },
+        ]
+    },
+    {
+        name: "八",
+        code: "\u516B",
+        on: [{ kana: "はち", romanji: "hachi" }],
+        kun: [{ kana: "や", romanji: "ya" }],
+        source: "https://en.wiktionary.org/wiki/%E5%85%AB#Kanji",
+        meanings: ["eight"],
+        grade: 1,
+        examples: [
+            { value: "八", kana: ["はち", "や"], english: ["eight"] },
+            { value: "十八", kana: ["じゅうはち"], english: ["eighteen"] },
+            { value: "八月", kana: ["はちがつ"], english: ["August"] },
+            { value: "八十", kana: ["はちじゅう", "やそ"], english: ["eighty"] },
+            { value: "三十八度線", kana: ["さんじゅうはちどせん"], english: ["eighth parallel", "AMONG US"] },
+        ]
+    },
+    {
+        name: "六",
+        code: "\u516D",
+        on: [{ kana: "ろく", romanji: "roku" }],
+        kun: [{ kana: "む", romanji: "mu" }],
+        source: "https://en.wiktionary.org/wiki/%E5%85%AD#Kanji",
+        meanings: ["six"],
+        grade: 1,
+        examples: [
+            { value: "六", kana: ["ろく", "む", "むう"], english: ["six"] },
+            { value: "六月", kana: ["ろくがつ"], english: ["June"] },
+            { value: "六十", kana: ["ろくじゅう", "むそ"], english: ["sixty"] },
+            { value: "六十四分音符", kana: ["ろくじゅうしぶおんぷ"], english: ["64th note"] },
+            { value: "十六", kana: ["じゅうろく"], english: ["sixteen"] },
+        ]
+    },
+    {
+        name: "下",
+        code: "\u4E0B",
+        on: [{ kana: "げ", romanji: "ge" }],
+        kun: [{ kana: "した", romanji: "shita" }],
+        source: "https://en.wiktionary.org/wiki/%E4%B8%8B#Kanji",
+        meanings: ["below", "down", "descend", "give", "low", "inferior"],
+        grade: 1,
+        examples: [
+            { value: "下", kana: ["もと"], english: ["under"] },
+            { value: "下げる", kana: ["さげる"], english: ["to hang", "to lower", "to move back", "to wear"] },
+            { value: "引き下げ", kana: ["ひきさげ"], english: ["reduction", "cut"] },
+            { value: "下り", kana: ["くだり"], english: ["train"] },
+            { value: "下院", kana: ["かいん"], english: ["lower", "house", "lower",] },
+        ]
+    },
+    {
+        name: "気",
+        code: "\u6C17",
+        on: [{ kana: "け", romanji: "ke" }],
+        kun: [{ kana: "いき", romanji: "iki" }],
+        source: "https://en.wiktionary.org/wiki/%E6%B0%97#Kanji",
+        meanings: ["spirit", "mind", "air", "atmosphere", "mood"],
+        grade: 1,
+        examples: [
+            { value: "気", kana: ["き"], english: ["spirit", "mind", "heart", "nature", "disposition"] },
+            { value: "景気", kana: ["けいき"], english: ["condition", "state", "business"] },
+            { value: "人気", kana: ["にんき"], english: ["popular", "popular feeling", "business conditions"] },
+            { value: "気持ち", kana: ["きもち"], english: ["feeling", "sensation", "mood"] },
+            { value: "電気", kana: ["でんき"], english: ["electricity", "light",] },
+        ]
+    },
+    {
+        name: "小",
+        code: "\u5C0F",
+        on: [{ kana: "しょう", romanji: "sho" }],
+        kun: [{ kana: "ちいさい", romanji: "chisai" }],
+        source: "https://en.wiktionary.org/wiki/%E5%B0%8F#Kanji",
+        meanings: ["small", "little"],
+        grade: 1,
+        examples: [
+            { value: "小選挙区", kana: ["しょうせんきょく"], english: ["small electoral district"] },
+            { value: "小学校", kana: ["しょうがっこう"], english: ["primary school", "elementary school"] },
+            { value: "小説", kana: ["しょうせつ"], english: ["novel", "short story"] },
+            { value: "小学生", kana: ["しょうがくせい"], english: ["elementary school student"] },
+            { value: "中小企業", kana: ["ちゅうしょうきぎょう"], english: ["small to medium enterprises",] },
+        ]
+    },
+    {
+        name: "七",
+        code: "\u4E03",
+        on: [{ kana: " しち", romanji: "shichi" }],
+        kun: [{ kana: "なな", romanji: "nana" }],
+        source: "https://en.wiktionary.org/wiki/%E4%B8%83#Kanji",
+        meanings: ["seven"],
+        grade: 1,
+        examples: [
+            { value: "七", kana: ["しち", "なな", "な"], english: ["seven"] },
+            { value: "七月", kana: ["しちがつ"], english: ["July"] },
+            { value: "十七", kana: ["じゅうしち", "じゅうなな"], english: ["seventeen"] },
+            { value: "七十", kana: ["しちじゅう", "ななじゅう", "ななそ"], english: ["seventy"] },
+            { value: "四十七士", kana: ["しじゅうしちし"], english: ["The 47 Ronin",] },
+        ]
+    },
+    {
+        name: "山",
+        code: "\u5C71",
+        on: [{ kana: " せん", romanji: "sen" }],
+        kun: [{ kana: "やま", romanji: "yama" }],
+        source: "https://en.wiktionary.org/wiki/%E5%B1%B1#Kanji",
+        meanings: ["mountain"],
+        grade: 1,
+        examples: [
+            { value: "山", kana: ["やま"], english: ["mountain", "pile", "heap", "climax", "critical point"] },
+            { value: "火山", kana: ["かざん"], english: ["volcano"] },
+            { value: "青山", kana: ["せいざん"], english: ["blue or green mountain", "grave", "burial place"] },
+            { value: "山形", kana: ["やまがた"], english: ["mountain shaped"] },
+            { value: "登山", kana: ["とざん"], english: ["mountain climbing",] },
         ]
     },
 ];
