@@ -8,6 +8,7 @@ import Inspectable from "../ui/Inspectable";
 import { Environment } from "../../utility/Environment";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Arrays from "../../utility/Arrays";
 
 interface FlashCardBackProps {
     kanji: Kanji;
@@ -53,7 +54,7 @@ class FlashCardBack extends Component<FlashCardBackProps> {
 
                 <Row className={styles.footer}>
                     <Col xs={12}>
-                        {kanji.examples.map(example => {
+                        {Arrays.getRandomElements(kanji.examples, 3).map(example => {
                             return <p className={styles.example} key={example.kanji}>
                                 {example.kanji} - {example.kana[0]} - {example.english.join(", ")}
                             </p>
