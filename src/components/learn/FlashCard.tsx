@@ -3,9 +3,8 @@ import { Kanji } from "../../types/kanji/Kanji";
 import ReactCardFlip from "react-card-flip";
 import FlashCardFront from "./FlashCardFront";
 import FlashCardBack from "./FlashCardBack";
-import styles from "../../styles/sass/components/learn/FlashCard.module.scss";
 
-interface FlashCardProps {
+export interface FlashCardProps {
     kanji: Kanji;
     onFlip: (count: number) => void;
 }
