@@ -18,10 +18,10 @@ class FlashCardBack extends Component<FlashCardBackProps> {
     render() {
         const { kanji } = this.props;
         return (
-            <Container className={styles.wrapper}>
+            <Container className={styles.wrapper} data-testid="back">
                 <Row className={styles.header}>
                     <p className={styles.grade}>Grade {kanji.grade}</p>
-                    <Button className={styles.back} variant="outline-danger" onClick={this.props.onClick}>
+                    <Button className={styles.back} variant="outline-danger" onClick={this.props.onClick} title="Reset">
                         <FontAwesomeIcon icon={faReply} />
                     </Button>
                 </Row>
@@ -54,7 +54,7 @@ class FlashCardBack extends Component<FlashCardBackProps> {
                 <Row className={styles.footer}>
                     <Col xs={12}>
                         {kanji.examples.map(example => {
-                            return <p className={styles.example}>
+                            return <p className={styles.example} key={example.kanji}>
                                 {example.kanji} - {example.kana[0]} - {example.english.join(", ")}
                             </p>
                         })}
