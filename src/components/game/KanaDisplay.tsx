@@ -10,7 +10,6 @@ export interface KanaDisplayProps {
     index?: number;
     onClick?: (kana: Kana) => void;
     style?: KanaDisplayStyle;
-    size?: string;
 }
 
 interface KanaDisplayStyle {
