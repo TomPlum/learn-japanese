@@ -184,7 +184,7 @@ const kanji: KanjiData[] = [
         on: [{ kana: "けん", romanji: "ken" }],
         kun: [{ kana: "みる", romanji: "miru" }],
         source: "https://en.wiktionary.org/wiki/%E8%A6%8B#Kanji",
-        meanings: ["see"],
+        meanings: ["see, opinion"],
         grade: 1,
         examples: [
             { value: "意見", kana: ["いけん"], english: ["opinion", "view"] },
@@ -200,7 +200,7 @@ const kanji: KanjiData[] = [
         on: [{ kana: "がつ", romanji: "gatsu" }],
         kun: [{ kana: "つき", romanji: "tsuki" }],
         source: "https://en.wiktionary.org/wiki/%E6%9C%88#Kanji",
-        meanings: ["month,", "moon"],
+        meanings: ["month", "moon"],
         grade: 1,
         examples: [
             { value: "一月", kana: ["いちがつ"], english: ["January"] },
@@ -216,7 +216,7 @@ const kanji: KanjiData[] = [
         on: [{ kana: "しょう", romanji: "sho" }],
         kun: [{ kana: "いきる", romanji: "ikiru" }],
         source: "https://en.wiktionary.org/wiki/%E7%94%9F#Kanji",
-        meanings: ["life,", "genuine", "birth"],
+        meanings: ["life", "genuine", "birth"],
         grade: 1,
         examples: [
             { value: "生きる", kana: ["いきる"], english: ["to live", "to exist"] },
