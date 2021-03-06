@@ -8,6 +8,7 @@ interface KanjiDisplayProps {
     size?: string;
 }
 
+//TODO: Can we not replace this with the Kana display and generify it?
 class KanjiDisplay extends Component<KanjiDisplayProps> {
     render() {
         return (
