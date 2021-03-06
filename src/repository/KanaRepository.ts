@@ -3,7 +3,7 @@ import hiragana from "../data/Hiragana";
 import katakana from "../data/Katakana";
 import KanaType from "../types/KanaType";
 import {KanaData} from "../data/DataTypes";
-import { Arrays } from "../utility/Arrays";
+import Arrays from "../utility/Arrays";
 import { KanaSettings } from "../types/GameSettings";
 
 export class KanaRepository {

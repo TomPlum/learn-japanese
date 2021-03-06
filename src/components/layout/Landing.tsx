@@ -11,7 +11,7 @@ class Landing extends Component {
         return (
             <Container>
                 <Row>
-                    <p>Description</p>
+                    <p>Learn Japanese Kana</p>
                 </Row>
 
                 <hr />

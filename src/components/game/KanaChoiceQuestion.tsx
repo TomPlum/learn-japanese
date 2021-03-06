@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Kana } from "../../types/Kana";
-import { Arrays } from "../../utility/Arrays";
+import Arrays from "../../utility/Arrays";
 import KanaDisplay from "./KanaDisplay";
-import { Alert, Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 import KanaQuestionBanner from "./KanaQuestionBanner";
 
-interface KanaChoiceQuestionProps {
+export interface KanaChoiceQuestionProps {
     expected: Kana;
     wrong: Kana[];
     hidden: boolean;
@@ -86,26 +86,24 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
     }
 
     private answer = () => {
-        const selected = this.state.selected;
-        const correct = this.props.expected === selected;
-        if (correct) {
+        const { selected } = this.state;
+        if (this.props.expected === selected) {
             this.props.onSubmit(true);
         } else {
-            if (selected) this.displays.get(selected)?.current?.notifyIncorrect();
+            this.displays.get(selected as Kana)?.current?.notifyIncorrect();
             this.props.onSubmit(false);
         }
     }
 
-    private select = (value: Kana) => {
-        this.setState({ selected: value });
-    }
+    private select = (value?: Kana) => this.setState({ selected: value });
 
     private handleKeySelection = (e: KeyboardEvent) => {
         e.preventDefault();
 
+        //Handle Numbers (1 - Tile Quantity)
         if ([...this.indices.keys()].map(i => i.toString()).includes(e.key)) {
             const kana = this.indices.get(Number(e.key));
-            if (kana) this.select(kana);
+            this.select(kana);
         }
 
         if (this.state.selected && e.key === 'Enter') {

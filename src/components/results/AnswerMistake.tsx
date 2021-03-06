@@ -23,7 +23,7 @@ class AnswerMistake extends Component<AnswerMistakeProps> {
                         <span className={styles.timesWrong}>x{times}</span>
                     </Col>
                     <Col xs={6} className={styles.col}>
-                        <span className={styles.romanji}>{kana.getFullRomanjiString()}</span>
+                        <span className={styles.romanji}>{kana.romanji[0]}</span>
                     </Col>
                 </Row>
 

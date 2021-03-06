@@ -1,10 +1,11 @@
 import { Component } from "react";
 import { DisplaySettings } from "../../types/GameSettings";
 import { DisplayType } from "../../types/DisplayType";
-import { Form } from "react-bootstrap";
-import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
+import DisplayTypeButton from "./DisplayTypeButton";
+import { faStop, faThLarge } from "@fortawesome/free-solid-svg-icons";
+import { Col, Row } from "react-bootstrap";
 
-interface DisplaySettingsFormProps {
+export interface DisplaySettingsFormProps {
     onChange: (settings: DisplaySettings) => void;
 }
 
@@ -15,7 +16,7 @@ interface DisplaySettingsFormState {
 
 class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySettingsFormState> {
 
-    private readonly defaultState = { type: DisplayType.SINGLE_KANA, cards: 2, };
+    private readonly defaultState = { type: DisplayType.SINGLE_KANA, cards: 1, };
 
     constructor(props: Readonly<DisplaySettingsFormProps> | DisplaySettingsFormProps) {
         super(props);
@@ -37,30 +38,24 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
         const { type } = this.state;
 
         return (
-            <>
-                <Form.Row>
-                    <Form.Check
-                        inline
-                        label="Romanji"
-                        type="switch"
-                        id="romanji"
-                        className={styles.check}
-                        checked={type === DisplayType.SINGLE_KANA}
-                        onChange={() => this.setState({ type: DisplayType.SINGLE_KANA })}
+            <Row>
+                <Col>
+                    <DisplayTypeButton
+                        text="Romanji"
+                        icon={faStop}
+                        selected={type === DisplayType.SINGLE_KANA}
+                        onClick={() => this.setState({ type: DisplayType.SINGLE_KANA, cards: 1 })}
                     />
-                </Form.Row>
-                <Form.Row>
-                    <Form.Check
-                        inline
-                        label="Kana"
-                        type="switch"
-                        id="kana"
-                        className={styles.check}
-                        checked={type === DisplayType.MULTIPLE_CARDS}
-                        onChange={() => this.setState({ type: DisplayType.MULTIPLE_CARDS })}
+                </Col>
+                <Col>
+                    <DisplayTypeButton
+                        text="Kana"
+                        icon={faThLarge}
+                        selected={type === DisplayType.MULTIPLE_CARDS}
+                        onClick={() => this.setState({ type: DisplayType.MULTIPLE_CARDS, cards: 4 })}
                     />
-                </Form.Row>
-            </>
+                </Col>
+            </Row>
         );
     }
 

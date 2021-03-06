@@ -4,11 +4,17 @@ import styles from "../../styles/sass/components/layout/LoadingSpinner.module.sc
 
 class LoadingSpinner extends Component<{ active: any }> {
     render() {
-        let { active } = this.props;
+        const { active } = this.props;
         if (active) {
             return (
                 <div>
-                    <Spinner className={styles.spinner} animation="border" role="status" variant="danger"/>
+                    <Spinner
+                        className={styles.spinner}
+                        animation="border"
+                        role="status"
+                        variant="danger"
+                        title="Loading"
+                    />
                 </div>
             );
         }

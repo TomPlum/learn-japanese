@@ -6,7 +6,7 @@ import QuitButton from "../ui/QuitButton";
 import Feedback from "./Feedback";
 import styles from "../../styles/sass/components/results/ResultScreen.module.scss";
 
-interface ResultScreenProps {
+export interface ResultScreenProps {
     onClose: () => void;
     result: GameResult;
 }
@@ -60,7 +60,6 @@ class ResultScreen extends Component<ResultScreenProps> {
                 reason = "You ran out of time!";
                 break;
             }
-            default: reason = "You lost.";
         }
         return failureMessage + reason;
     }

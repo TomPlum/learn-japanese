@@ -3,7 +3,7 @@ import { TimeSettings } from "../../types/GameSettings";
 import { Form } from "react-bootstrap";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 
-interface TimeSettingsFormProps {
+export interface TimeSettingsFormProps {
     onChange: (settings: TimeSettings) => void;
 }
 
@@ -46,6 +46,7 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                         className={styles.check}
                         checked={timed}
                         onChange={this.onChangeTimed}
+                        data-testid="Timed"
                     />
                 </Form.Row>
                 <Form.Row>
@@ -56,6 +57,7 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                         className={styles.check}
                         checked={countdown}
                         onChange={this.onChangeCountDown}
+                        data-testid="Countdown"
                     />
                 </Form.Row>
             </>
@@ -65,24 +67,18 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
     reset = () => this.setState(this.defaultState);
 
     private onChangeTimed = () => {
-        const { timed, countdown } = this.state;
+        const { timed } = this.state;
         if (timed) {
             this.setState({ timed: false });
-            if (countdown) {
-                this.setState({ countdown: false })
-            }
         } else {
             this.setState({ timed: true, countdown: false });
         }
     }
 
     private onChangeCountDown = () => {
-        const { timed, countdown } = this.state;
+        const { countdown } = this.state;
         if (countdown) {
             this.setState({ countdown: false });
-            if (timed) {
-                this.setState({ timed: false })
-            }
         } else {
             this.setState({ countdown: true, timed: false });
         }

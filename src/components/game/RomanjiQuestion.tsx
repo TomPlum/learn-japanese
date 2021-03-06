@@ -9,7 +9,7 @@ import { HintSettings } from "../../types/GameSettings";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 
-interface RomanjiQuestionProps {
+export interface RomanjiQuestionProps {
     kana: Kana;
     hidden: boolean;
     hintSettings: HintSettings;
@@ -59,7 +59,7 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
                                 <RomanjiInput
                                     value={answer}
                                     disabled={!kana || hidden}
-                                    onChange={(e) => this.setState({ answer: e.target.value })}
+                                    onChange={(value) => this.setState({ answer: value })}
                                     placeholder={hidden ? "Paused" : "Enter the romanji"}
                                     onEnterKey={this.answer}
                                 />
@@ -98,16 +98,16 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
 
         if (kana.romanji.includes(answer)) {
             this.props.onSubmit(true);
-            this.setState({
-                hasUsedHintThisQuestion: false,
-                hints: hasUsedHintThisQuestion ? hints - 1 : hints
-            });
         } else {
             this.kanaDisplay.current?.notifyIncorrect();
             this.props.onSubmit(false);
         }
 
-        this.setState({ answer: "" });
+        this.setState({
+            answer: "",
+            hasUsedHintThisQuestion: false,
+            hints: hasUsedHintThisQuestion ? hints - 1 : hints
+        });
     }
 }
 

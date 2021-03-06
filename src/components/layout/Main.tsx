@@ -1,34 +1,20 @@
 import { Component } from "react";
 import { Container } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/Main.module.scss";
-import { GameSettings } from "../../types/GameSettings";
 import { Route } from "react-router-dom";
 import Switch from "react-bootstrap/Switch";
-import Game from "../game/Game";
+import GamePage from "../game/GamePage";
 import Search from "./Search";
 import Landing from "./Landing";
 import KanjiPage from "../pages/KanjiPage";
 
-interface MainState {
-    settings?: GameSettings;
-}
-
-class Main extends Component<{}, MainState> {
-    constructor(props: {} | Readonly<{}>) {
-        super(props);
-        this.state = {
-            settings: undefined,
-        }
-    }
-
+class Main extends Component {
     render() {
-        const { settings } = this.state;
-
         return (
-            <Container className={settings ? styles.wrapperFullScreen : styles.wrapper}>
+            <Container className={styles.wrapper}>
                 <Switch className={styles.switch}>
                     <Route path="/" component={Landing} exact />
-                    <Route path="/play" component={Game}/>
+                    <Route path="/play" component={GamePage}/>
                     <Route path="/search" component={Search}/>
                     <Route path="/kanji" component={KanjiPage}/>
                 </Switch>

@@ -17,7 +17,7 @@ interface LifeSettingsFormState {
 class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsFormState> {
 
     private readonly selector: React.RefObject<LivesSelector>;
-    private readonly defaultState = { enabled: false, quantity: LifeQuantity.FIVE };
+    private readonly defaultState = { enabled: false, quantity: LifeQuantity.ZERO };
 
     constructor(props: LifeSettingsFormProps | Readonly<LifeSettingsFormProps>) {
         super(props);
@@ -49,6 +49,7 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
                     className={styles.check}
                     checked={enabled}
                     onChange={() => this.setState({ enabled: !enabled })}
+                    data-testid="Enable"
                 />
                 <LivesSelector
                     ref={this.selector}

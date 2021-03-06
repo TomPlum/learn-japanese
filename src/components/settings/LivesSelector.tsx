@@ -19,9 +19,19 @@ class LivesSelector extends Component<LivesSelectorProps, LivesSelectorState> {
         }
     }
 
+    componentDidMount() {
+        this.props.onSelect(LifeQuantity.FIVE);
+    }
+
+    componentDidUpdate(prevProps: Readonly<LivesSelectorProps>, prevState: Readonly<LivesSelectorState>) {
+        if (prevState != this.state) {
+            this.props.onSelect(this.state.selected);
+        }
+    }
+
     render() {
         return (
-            <Form.Control disabled={this.props.disabled} as="select" onChange={this.handleOnChange}>
+            <Form.Control disabled={this.props.disabled} as="select" onChange={this.handleOnChange} data-testid="Lives">
                 {this.getOptions()}
             </Form.Control>
         );

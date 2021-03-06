@@ -1,4 +1,4 @@
-import {Arrays} from "../../utility/Arrays";
+import Arrays from "../../utility/Arrays";
 
 describe("Arrays Utility", () => {
     describe("Intersect", () => {

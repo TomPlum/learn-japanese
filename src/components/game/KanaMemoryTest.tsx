@@ -14,7 +14,7 @@ import CountDown from "./CountDown";
 import RomanjiQuestion from "./RomanjiQuestion";
 import { DisplayType } from "../../types/DisplayType";
 import KanaChoiceQuestion from "./KanaChoiceQuestion";
-import { Arrays } from "../../utility/Arrays";
+import Arrays from "../../utility/Arrays";
 
 export interface KanaMemoryTestProps {
     kana: Kana[];
@@ -131,7 +131,6 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 return (
                     <RomanjiQuestion
                         kana={currentKana}
-                        key={currentKana.code}
                         onSubmit={this.answerQuestion}
                         hidden={paused}
                         hintSettings={settings.hints}

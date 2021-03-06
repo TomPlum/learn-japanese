@@ -3,7 +3,7 @@ import { Alert } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 import { Kana } from "../../types/Kana";
 
-interface KanaQuestionBannerProps {
+export interface KanaQuestionBannerProps {
     value: Kana;
 }
 
@@ -11,7 +11,7 @@ class KanaQuestionBanner extends Component<KanaQuestionBannerProps> {
     render() {
         const { value } = this.props;
         return (
-            <Alert className={styles.question} variant="secondary">
+            <Alert className={styles.question} variant="secondary" aria-labelledby="Kana Question">
                 Which {value.isDiagraph() ? "diagraph" : "kana"} is {this.getRomanji()} ?
             </Alert>
         );

@@ -4,7 +4,7 @@ import { CSSGrid, easings, layout, makeResponsive } from "react-stonecutter";
 import styles from "../../styles/sass/components/layout/KanaGrid.module.scss";
 import KanaTile from "./KanaTile";
 
-interface KanaGridProps {
+export interface KanaGridProps {
     kana: Kana[];
 }
 

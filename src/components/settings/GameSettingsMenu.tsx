@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
-import { GameMode } from "../../types/GameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
 import { faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
@@ -12,8 +11,7 @@ import TimeSettingsForm from "./TimeSettingsForm";
 import { defaultDisplaySettings, defaultHintSettings, defaultKanaSettings, defaultLifeSettings, defaultTimeSettings } from "../../data/GameModePresets";
 import DisplaySettingsForm from "./DisplaySettingsForm";
 
-interface GameSettingsMenuProps {
-    mode: GameMode;
+export interface GameSettingsMenuProps {
     onSubmit: (settings: GameSettings) => void;
 }
 
@@ -92,8 +90,8 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
                         <Card.Body>
                             <Tab.Content>
-                                <Tab.Pane eventKey="mode">
-                                    <Card.Title>Game Mode Settings</Card.Title>
+                                <Tab.Pane eventKey="mode" className={styles.pane}>
+                                    <Card.Title className={styles.title}>Game Mode Settings</Card.Title>
                                     <DisplaySettingsForm
                                         ref={this.display}
                                         onChange={(settings) => this.setState({ displaySettings: settings })}
@@ -102,7 +100,8 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             </Tab.Content>
 
                             <Tab.Content>
-                                <Tab.Pane eventKey="kana">
+                                <Tab.Pane eventKey="kana" className={styles.pane}>
+                                    <Card.Title className={styles.title}>Kana Settings</Card.Title>
                                     <KanaSettingsForm
                                         ref={this.kana}
                                         onSelect={(settings) => this.setState({ kanaSettings: settings })}
@@ -111,7 +110,8 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             </Tab.Content>
 
                             <Tab.Content>
-                                <Tab.Pane eventKey="hints">
+                                <Tab.Pane eventKey="hints" className={styles.pane}>
+                                    <Card.Title className={styles.title}>Hint Settings</Card.Title>
                                     <HintSettingsForm
                                         ref={this.hints}
                                       onChange={(settings) => this.setState({ hintSettings: settings })}
@@ -120,7 +120,8 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             </Tab.Content>
 
                             <Tab.Content>
-                                <Tab.Pane eventKey="lives">
+                                <Tab.Pane eventKey="lives" className={styles.pane}>
+                                    <Card.Title className={styles.title}>Life Settings</Card.Title>
                                     <LifeSettingsForm
                                         ref={this.lives}
                                         onChange={(settings) => this.setState({ lifeSettings: settings })}
@@ -129,7 +130,8 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             </Tab.Content>
 
                             <Tab.Content>
-                                <Tab.Pane eventKey="time">
+                                <Tab.Pane eventKey="time" className={styles.pane}>
+                                    <Card.Title className={styles.title}>Time Settings</Card.Title>
                                     <TimeSettingsForm
                                         ref={this.time}
                                         onChange={(settings) => this.setState({ timeSettings: settings })}
