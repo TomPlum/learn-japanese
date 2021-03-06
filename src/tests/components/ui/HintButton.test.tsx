@@ -86,18 +86,18 @@ test('Disabled Property Should Disable Button', () => {
 
 test('Using Hint Button Should Call onUse Event Handler', () => {
     const { button } = setup();
-    button.focus();
+    fireEvent.focus(button);
     expect(onUseHandler).toHaveBeenCalled();
 });
 
 test('Blurring Should Remove The Overlay PopOver', async () => {
     const { button } = setup();
 
-    button.focus();
+    fireEvent.focus(button);
     const popover = screen.getByTitle('Need a hint? (2/3 remaining)');
     expect(popover).toBeInTheDocument();
 
-    button.blur();
+    fireEvent.blur(button);
     await waitForElementToBeRemoved(popover);
 });
 

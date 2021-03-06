@@ -1,41 +1,22 @@
 import { Component } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import LifeDisplay from "../game/LifeDisplay";
-import HintButton from "../game/HintButton";
-import { Kana } from "../../types/Kana";
-import KanaType from "../../types/KanaType";
-import { KanaColumn } from "../../types/KanaColumn";
+import { Container, Jumbotron } from "react-bootstrap";
+import styles from "../../styles/sass/components/layout/Landing.module.scss";
+import Inspectable from "../ui/Inspectable";
 
 class Landing extends Component {
     render() {
         return (
-            <Container>
-                <Row>
-                    <p>Learn Japanese Kana</p>
-                </Row>
-
-                <hr />
-
-                <Row>
-                    <Col xs={2}>
-                        <LifeDisplay hearts={10} />
-                    </Col>
-                    <Col xs={10}>
-                        <p>You have a limited number of lives. Each time you answer incorrectly you lose a life.</p>
-                    </Col>
-                </Row>
-
-                <hr />
-
-                <Row>
-                    <Col xs={2}>
-                        <p>You have a limited number of lives. Each time you answer incorrectly you lose a life.</p>
-                    </Col>
-                    <Col xs={10}>
-                        <HintButton quantity={3} kana={new Kana("\u3042", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)} />
-                    </Col>
-                </Row>
-
+            <Container fluid>
+                <Jumbotron className={styles.jumbotron} fluid>
+                    <h1 className={styles.heading}>
+                        {'Learn '}
+                        <Inspectable title="Nihongo (日本語)" text="The Kanji in this compound mean 'Sun' (日), 'Origin' (本) and 'Language' (語)." className={styles.japanese} placement="bottom">
+                            <span>Japanese</span>
+                        </Inspectable>
+                        {' Kana'}
+                    </h1>
+                    <h4>A simple memory training app for learning the Japanese Hiragana and Katakana syllabaries.</h4>
+                </Jumbotron>
             </Container>
         );
     }
