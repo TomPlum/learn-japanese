@@ -1,0 +1,26 @@
+.kana {
+  font-size: 10em;
+}
+
+.animate {
+  font-size: 10em;
+  animation: fade 4s ease-in-out infinite;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    top: 0;
+    transform: translateY(-50px);
+  }
+  50% {
+    opacity: 1;
+    top: 25px;
+    transform: translateY(0px);
+  }
+  100% {
+    top: 50px;
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}

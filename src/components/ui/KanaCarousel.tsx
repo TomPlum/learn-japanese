@@ -1,9 +1,9 @@
 import { Component } from "react";
-import { KanaRepository } from "../../../repository/KanaRepository";
-import { Kana } from "../../../types/Kana";
+import { KanaRepository } from "../../repository/KanaRepository";
+import { Kana } from "../../types/Kana";
 import { Container } from "react-bootstrap";
-import KanaDisplay from "../../../components/game/KanaDisplay";
-import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
+import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
+import styles from "../../styles/sass/components/ui/KanaCarousel.module.scss";
 
 interface KanaCarouselState {
     remaining: (Kana | undefined)[]
@@ -22,14 +22,14 @@ class KanaCarousel extends Component<any, KanaCarouselState> {
             remaining: [],
             shown: [],
             current: undefined,
-            interval: undefined
+            interval: undefined,
         }
     }
 
     componentDidMount() {
         const kana = new KanaRepository().read({ hiragana: true, katakana: true, diagraphs: true });
         this.kana = kana;
-        this.setState({ remaining: kana, interval: setInterval(() => this.randomise(), 4000) });
+        this.setState({ remaining: kana, interval: setInterval(() => this.randomise(), 4000) }, this.randomise);
     }
 
     componentWillUnmount() {
@@ -39,8 +39,12 @@ class KanaCarousel extends Component<any, KanaCarouselState> {
     render() {
         const { current } = this.state;
         return (
-            <Container>
-                {current && <KanaDisplay kana={current} style={{ character: { color: "#FFF", size: "xl" } }}/>}
+            <Container className={styles.wrapper}>
+                <p
+                    className={styles.animate}
+                >
+                    {current?.code}
+                </p>
             </Container>
         );
     }
