@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import GameModeMenu from "../../components/layout/GameModeMenu";
-import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../../data/GameModePresets";
-import { GameMode } from "../../types/GameMode";
-import { Environment } from "../../utility/Environment";
+import GameModeMenu from "../../../components/layout/GameModeMenu";
+import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../../../data/GameModePresets";
+import { GameMode } from "../../../types/GameMode";
+import { Environment } from "../../../utility/Environment";
 
 const onSelectModeHandler = jest.fn();
 const environment = jest.fn();

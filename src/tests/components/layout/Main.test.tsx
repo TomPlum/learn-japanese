@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Main from "../../components/layout/Main";
+import Main from "../../../components/layout/Main";
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 
