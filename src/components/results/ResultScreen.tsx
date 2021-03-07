@@ -60,6 +60,9 @@ class ResultScreen extends Component<ResultScreenProps> {
                 reason = "You ran out of time!";
                 break;
             }
+            default: {
+                reason = "You lost.";
+            }
         }
         return failureMessage + reason;
     }

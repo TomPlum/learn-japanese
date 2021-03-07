@@ -35,9 +35,12 @@ export default class Arrays {
 
     static getRandomElements<T>(array: T[], quantity: number): T[] {
         let elements = [];
+        let copy = [...array];
         for (let i = 0; i < quantity; i++) {
-            const index = Numbers.randomInt(0, array.length - 1);
-            elements.push(array[index]);
+            const index = Numbers.randomInt(0, copy.length - 1);
+            const element = copy[index];
+            copy = this.remove(copy, element)
+            elements.push(element);
         }
         return elements;
     }

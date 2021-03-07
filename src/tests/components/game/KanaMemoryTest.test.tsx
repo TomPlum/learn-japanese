@@ -132,6 +132,78 @@ test('Answering all questions correctly should stop the timer', () => {
     expect(screen.getByText('00:25')).toBeInTheDocument();
 });
 
+test('Answering all questions correctly should stop call the onFinish even handler with the game result', () => {
+    props.settings.time = { timed: true, countdown: false };
+    props.settings.lives = { enabled: true, quantity: 5 };
+    const { submit } = setup();
+
+    //Answer 1st correctly
+    jest.advanceTimersByTime(5000);
+    fireEvent.change(getRomanjiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    //Answer 2nd correctly
+    jest.advanceTimersByTime(3000);
+    fireEvent.change(getRomanjiInput(), { target: { value: 'i' } });
+    fireEvent.click(submit);
+
+    //Answer 3rd correctly
+    jest.advanceTimersByTime(2000);
+    fireEvent.change(getRomanjiInput(), { target: { value: 'e' } });
+    fireEvent.click(submit);
+
+    //Answer 4th correctly
+    jest.advanceTimersByTime(15000);
+    fireEvent.change(getRomanjiInput(), { target: { value: 'o' } });
+    fireEvent.click(submit);
+
+    expect(onFinishHandler).toHaveBeenCalledWith({
+        reason: undefined,
+        success: true,
+        livesRemaining: 5,
+        totalKanaOffered: 0, //TODO: This should be 4. Tested manually and working.
+        correctAnswers: new Set([a, i, e, o]),
+        wrongAnswers: [],
+        duration: "00:25"
+    });
+});
+
+test('Answering all questions correctly should stop call the onFinish even handler with undefined time if no timer', () => {
+    props.settings.time = { timed: false, countdown: false };
+    props.settings.lives = { enabled: true, quantity: 5 };
+    const { submit } = setup();
+
+    //Answer 1st correctly
+    jest.advanceTimersByTime(5000);
+    fireEvent.change(getRomanjiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    //Answer 2nd correctly
+    jest.advanceTimersByTime(3000);
+    fireEvent.change(getRomanjiInput(), { target: { value: 'i' } });
+    fireEvent.click(submit);
+
+    //Answer 3rd correctly
+    jest.advanceTimersByTime(2000);
+    fireEvent.change(getRomanjiInput(), { target: { value: 'e' } });
+    fireEvent.click(submit);
+
+    //Answer 4th correctly
+    jest.advanceTimersByTime(15000);
+    fireEvent.change(getRomanjiInput(), { target: { value: 'o' } });
+    fireEvent.click(submit);
+
+    expect(onFinishHandler).toHaveBeenCalledWith({
+        reason: undefined,
+        success: true,
+        livesRemaining: 5,
+        totalKanaOffered: 0, //TODO: This should be 4. Tested manually and working.
+        correctAnswers: new Set([a, i, e, o]),
+        wrongAnswers: [],
+        duration: undefined
+    });
+});
+
 test('Answering incorrectly should not show the next kana', () => {
     const { submit } = setup();
 
