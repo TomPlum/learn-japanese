@@ -3,7 +3,7 @@ import { Button, Container } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/Landing.module.scss";
 import Inspectable from "../ui/Inspectable";
 import KanaCarousel from "../ui/KanaCarousel";
-import { faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPaintBrush, faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Kana } from "../../types/Kana";
 import { KanaRepository } from "../../repository/KanaRepository";
@@ -63,6 +63,10 @@ class Landing extends Component<{}, LandingState> {
 
                     <Button className={styles.play} variant="outline-success" href="/play">
                         <FontAwesomeIcon icon={faPlay} /> Play
+                    </Button>
+
+                    <Button className={styles.play} variant="outline-warning" href="/kanji">
+                        <FontAwesomeIcon icon={faPaintBrush} /> Kanji
                     </Button>
 
                     <Button className={styles.search} variant="outline-info" href="/search">

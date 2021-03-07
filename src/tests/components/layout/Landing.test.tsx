@@ -10,6 +10,7 @@ const setup = () => {
     return {
         play: screen.getByText('Play'),
         search: screen.getByText('Search'),
+        kanji: screen.getByText('Kanji'),
         ...component
     }
 }
@@ -44,6 +45,11 @@ test('Should render the play button', () => {
     expect(play).toBeInTheDocument();
 });
 
+test('Should render the kanji button', () => {
+    const { kanji } = setup();
+    expect(kanji).toBeInTheDocument();
+});
+
 test('Should render the search button', () => {
     const { search } = setup();
     expect(search).toBeInTheDocument();
@@ -57,6 +63,11 @@ test('Should render the kana carousel', () => {
 test('Clicking the play button should route the user to /play', () => {
     const { play } = setup();
     expect(play).toHaveAttribute('href', '/play');
+});
+
+test('Clicking the kanji button should route the user to /kanji', () => {
+    const { kanji } = setup();
+    expect(kanji).toHaveAttribute('href', '/kanji');
 });
 
 test('Clicking the search button should route the user to /search', () => {
