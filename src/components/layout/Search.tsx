@@ -6,7 +6,7 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import styles from "../../styles/sass/components/layout/Search.module.scss";
 import KanaType from "../../types/KanaType";
 import KanaGrid from "./KanaGrid";
-import SearchField from "./SearchField";
+import SearchField from "../ui/SearchField";
 
 interface SearchProps {
     onClose: () => void;
