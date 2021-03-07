@@ -1,9 +1,12 @@
 import { Component } from "react";
-import { KanaRepository } from "../../repository/KanaRepository";
 import { Kana } from "../../types/Kana";
 import { Container } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import styles from "../../styles/sass/components/ui/KanaCarousel.module.scss";
+
+export interface KanaCarouselProps {
+    kana: Kana[];
+}
 
 interface KanaCarouselState {
     remaining: (Kana | undefined)[]
@@ -12,14 +15,12 @@ interface KanaCarouselState {
     current?: Kana;
 }
 
-class KanaCarousel extends Component<any, KanaCarouselState> {
-
-    private kana: Kana[] = [];
+class KanaCarousel extends Component<KanaCarouselProps, KanaCarouselState> {
 
     constructor(props: Readonly<any> | any) {
         super(props);
         this.state = {
-            remaining: [],
+            remaining: this.props.kana,
             shown: [],
             current: undefined,
             interval: undefined,
@@ -27,16 +28,14 @@ class KanaCarousel extends Component<any, KanaCarouselState> {
     }
 
     componentDidMount() {
-        const kana = new KanaRepository().read({ hiragana: true, katakana: true, diagraphs: true });
-        this.kana = kana;
-        this.setState({ remaining: kana, interval: setInterval(() => this.randomise(), 4000) }, this.randomise);
+        this.setState({ interval: setInterval(() => this.randomise(), 4000) }, this.randomise)
     }
 
     componentWillUnmount() {
         clearInterval(this.state.interval);
     }
 
-    //TODO: Replace with KanaDisplay. Expose animation class and add it to the DyanmicCharacter arrays
+    //TODO: Replace with KanaDisplay. Expose animation class and add it to the DynamicCharacter arrays
     render() {
         const { current } = this.state;
         return (
@@ -50,16 +49,12 @@ class KanaCarousel extends Component<any, KanaCarouselState> {
     private randomise = () => {
         let { current, remaining, shown } = this.state;
         if (remaining.length === 0) {
-            this.reset();
+            this.setState({ current: undefined, remaining: this.props.kana, shown: [] }, this.randomise);
         } else {
             const [next, nextRemaining] = RandomNumberGenerator.getRandomObject(remaining);
             if (current) this.setState({ shown: shown.concat(current) });
             this.setState({ remaining: nextRemaining, current: next });
         }
-    }
-
-    private reset = () => {
-        this.setState({ current: undefined, remaining: this.kana, shown: [] });
     }
 }
 
