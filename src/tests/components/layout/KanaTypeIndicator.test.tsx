@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import KanaTypeIndicator from "../../components/layout/KanaTypeIndicator";
+import KanaTypeIndicator from "../../../components/layout/KanaTypeIndicator";
 
 test('Should render icon with passed title', () => {
     render(<KanaTypeIndicator title="Hiragana" className="exampleClass" />);

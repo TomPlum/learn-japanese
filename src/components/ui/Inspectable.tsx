@@ -2,16 +2,24 @@ import React, { ReactElement } from "react";
 import { OverlayTrigger } from "react-bootstrap";
 import PopOver from "./PopOver";
 import styles from "../../styles/sass/components/ui/Inspectable.module.scss";
+import { Placement } from "react-bootstrap/Overlay";
 
-type InspectableProps = {
+export type InspectableProps = {
     title: string;
     text: string;
+    placement?: Placement;
+    className?: string;
 }
 
-const Inspectable: React.FunctionComponent<InspectableProps> = ({ text, title, children }) => {
+const Inspectable: React.FunctionComponent<InspectableProps> = ({ text, title, children, className, placement }) => {
     return (
-        <OverlayTrigger trigger={["hover", "click"]} placement="left" overlay={<PopOver text={text} title={title}/>}>
-            { React.cloneElement(children as ReactElement, { className: styles.inspectable }) }
+        <OverlayTrigger
+            trigger={["hover", "focus", "click"]}
+            rootClose={true}
+            placement={placement ?? "left"}
+            overlay={<PopOver text={text} title={title}/>}
+        >
+            { React.cloneElement(children as ReactElement, { className: styles.inspectable + " " + className }) }
         </OverlayTrigger>
     )
 }

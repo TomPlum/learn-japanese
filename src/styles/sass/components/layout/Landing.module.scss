@@ -1,0 +1,115 @@
+@import "../../mixins";
+@import "../../viewports";
+
+@mixin heading {
+  margin: 10px 0;
+}
+
+@mixin big {
+  .heading {
+    @include heading;
+    font-size: 3.5em;
+    font-weight: 500;
+  }
+
+  .description {
+    font-size: 1.7em;
+    padding: 0 10px;
+    max-width: 1000px;
+  }
+
+  .descriptionWrapper {
+    display: flex;
+    min-width: 100%;
+    justify-content: center;
+    max-width: 500px;
+  }
+
+  .play, .search {
+    width: 175px;
+    font-size: 1.5em;
+    padding: 25px 0;
+    margin: 0 10px;
+    border-width: 5px;
+    border-radius: 50px;
+  }
+}
+
+@include desktop {
+  @include big;
+}
+
+@include tablet {
+  @include big;
+}
+
+@include phone {
+  .heading {
+    @include heading;
+    font-size: 1.6em;
+    font-weight: 500;
+  }
+
+  .description {
+    font-size: 1.1em;
+    padding: 0 10px;
+  }
+
+  .play, .search {
+    width: 125px;
+    font-size: 1.2em;
+    padding: 15px 0;
+    margin: 0 5px;
+    border-width: 4px;
+    border-radius: 50px;
+  }
+}
+
+.japanese {
+  font-weight: 550;
+  background: rgb(254,19,81);
+  background: radial-gradient(circle, rgba(254,19,81,1) 0%, rgba(223,30,30,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  height: 100vh;
+}
+
+.content {
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.background {
+  color: #FFF;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  line-height: 2.5rem;
+  position: absolute;
+  min-height: 100%;
+  height: 100vh;
+  z-index: -1000;
+  overflow-y: hidden;
+}
+
+.background li {
+  @include noSelect;
+  opacity: 0.03;
+  display: block;
+  padding: 20px 1px;
+  text-decoration: none;
+  font-size: 5em;
+}

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Main from "../../components/layout/Main";
+import Main from "../../../components/layout/Main";
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 
@@ -15,7 +15,7 @@ const setup = (route: string) => {
 
 test('Navigating to the root URI should route to the Landing page', () => {
     setup('/');
-    expect(screen.getByText('Learn Japanese Kana')).toBeInTheDocument();
+    expect(screen.getByText('A simple memory training app for learning the Japanese Hiragana and Katakana syllabaries.')).toBeInTheDocument();
 });
 
 test('Navigating to the /play should route to the Game page', () => {

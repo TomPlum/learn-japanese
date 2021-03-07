@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import KanaTile, { KanaTileProps } from "../../components/layout/KanaTile";
-import { Kana } from "../../types/Kana";
-import KanaType from "../../types/KanaType";
-import { KanaColumn } from "../../types/KanaColumn";
+import KanaTile, { KanaTileProps } from "../../../components/layout/KanaTile";
+import { Kana } from "../../../types/Kana";
+import KanaType from "../../../types/KanaType";
+import { KanaColumn } from "../../../types/KanaColumn";
 
 let props: KanaTileProps = { kana: new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false) };
 

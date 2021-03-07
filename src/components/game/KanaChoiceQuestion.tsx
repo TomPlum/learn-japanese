@@ -61,7 +61,7 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
                 <Row>
                     {options.map((option, i) => {
                         return (
-                            <Col xs={6}>
+                            <Col xs={6} key={"col-" + i}>
                                 <KanaDisplay
                                     kana={option}
                                     blur={hidden}

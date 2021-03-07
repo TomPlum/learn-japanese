@@ -47,6 +47,12 @@ test('Should render the correct title when the failure reason is Ran Out Of Time
     expect(screen.getByText('Oh no! You ran out of time!')).toBeInTheDocument();
 });
 
+test('Should render the default title when the failure reason is undefined but success is false', () => {
+    result.reason = undefined;
+    setup();
+    expect(screen.getByText('Oh no! You lost.')).toBeInTheDocument();
+});
+
 test('Clicking the quit button should call the onClose event handler', () => {
     const { quit } = setup();
     fireEvent.click(quit);

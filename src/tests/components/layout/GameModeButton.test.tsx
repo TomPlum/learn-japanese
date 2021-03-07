@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
-import GameModeButton, { GameModeButtonProps } from "../../components/layout/GameModeButton";
-import { GameMode } from "../../types/GameMode";
+import GameModeButton, { GameModeButtonProps } from "../../../components/layout/GameModeButton";
+import { GameMode } from "../../../types/GameMode";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 
 const onClickHandler = jest.fn();

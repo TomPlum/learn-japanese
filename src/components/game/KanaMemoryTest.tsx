@@ -156,7 +156,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
 
     answerQuestion = (correct: boolean) => {
         const { currentKana, correctAnswers, wrongAnswers, remainingKana, lives } = this.state;
-        const { settings } = this.props;
+        const { settings, kana } = this.props;
 
         if (correct) {
             //Add the current kana to the correct answers set.
@@ -166,6 +166,15 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 //If we're out of kana, stop the timer and let the component know the pool has been exhausted.
                 this.timer.current?.stop();
                 this.setState({ hasExhaustedKana: true, paused: false });
+                this.props.onFinish({
+                    reason: undefined,
+                    success: true,
+                    livesRemaining: lives,
+                    totalKanaOffered: kana.length,
+                    correctAnswers: correctAnswers,
+                    wrongAnswers: wrongAnswers,
+                    duration: this.timer.current?.getCurrentTime() ?? undefined
+                });
             } else {
                 //If we're being timed per kana, reset the timer.
                 this.countdown.current?.reset();
