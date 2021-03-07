@@ -15,6 +15,7 @@ interface GamePageState {
     gameSettings?: GameSettings;
     inResultsScreen: boolean;
     result?: GameResult;
+    gameIdentifier: string;
 }
 
 class GamePage extends Component<{ }, GamePageState> {
@@ -26,7 +27,8 @@ class GamePage extends Component<{ }, GamePageState> {
             kana: undefined,
             gameSettings: undefined,
             inResultsScreen: false,
-            result: undefined
+            result: undefined,
+            gameIdentifier: Math.random().toString()
         }
     }
 
@@ -69,7 +71,8 @@ class GamePage extends Component<{ }, GamePageState> {
     private onGameFinish = (result: GameResult) => this.setState({
         inResultsScreen: true,
         result,
-        gameSettings: undefined
+        gameSettings: undefined,
+        gameIdentifier: Math.random().toString()
     });
 
     private loadKana() {
