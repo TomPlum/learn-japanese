@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Container, Jumbotron } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/Landing.module.scss";
 import Inspectable from "../ui/Inspectable";
 import KanaCarousel from "../ui/KanaCarousel";
@@ -7,6 +7,7 @@ import { faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Kana } from "../../types/Kana";
 import { KanaRepository } from "../../repository/KanaRepository";
+import Arrays from "../../utility/Arrays";
 
 interface LandingState {
     kana: Kana[];
@@ -33,7 +34,7 @@ class Landing extends Component<{}, LandingState> {
         return (
             <Container fluid className={styles.wrapper}>
                 <ul className={styles.background}>
-                    {this.state.kana?.map(kana => {
+                    {this.getBackgroundKana().map(kana => {
                         return <li key={kana.code}>{kana.code}</li>
                     })}
                 </ul>
@@ -74,6 +75,7 @@ class Landing extends Component<{}, LandingState> {
 
     private getBackgroundKana = () => {
         const kana = this.state.kana;
+        return Arrays.shuffle(kana);
     }
 }
 

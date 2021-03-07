@@ -1,15 +1,19 @@
+@import "../../mixins";
+
 @mixin animate {
   animation: fade 4s ease-in-out infinite;
   margin: 0;
 }
 
 .kana {
+  @include noSelect;
   @include animate;
   font-size: 10em;
   height: 1.3em;
 }
 
 .romanji {
+  @include noSelect;
   @include animate;
   font-size: 1.5em;
 }
