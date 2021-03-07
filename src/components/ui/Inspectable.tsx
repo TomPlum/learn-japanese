@@ -13,7 +13,12 @@ type InspectableProps = {
 
 const Inspectable: React.FunctionComponent<InspectableProps> = ({ text, title, children, className, placement }) => {
     return (
-        <OverlayTrigger trigger="hover" placement={placement ?? "left"} overlay={<PopOver text={text} title={title}/>}>
+        <OverlayTrigger
+            trigger={["hover", "focus", "click"]}
+            rootClose={true}
+            placement={placement ?? "left"}
+            overlay={<PopOver text={text} title={title}/>}
+        >
             { React.cloneElement(children as ReactElement, { className: styles.inspectable + " " + className }) }
         </OverlayTrigger>
     )
