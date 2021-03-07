@@ -4,6 +4,7 @@ import { Kanji } from "../../types/kanji/Kanji";
 import { Reading } from "../../types/kanji/Reading";
 import { ReadingType } from "../../types/kanji/ReadingType";
 import { Example } from "../../types/kanji/Example";
+import Arrays from "../../utility/Arrays";
 
 const onFlipHandler = jest.fn();
 const kanji = new Kanji(
@@ -23,6 +24,12 @@ const setup = () => {
         ...component
     }
 }
+
+beforeEach(() => {
+    Arrays.getRandomElements = jest.fn().mockImplementation((array: any[], quantity: number) => {
+        return array.splice(0, quantity);
+    });
+});
 
 test.skip('Should start face up, showing only the Kanji character', () => {
     const { front } = setup();
