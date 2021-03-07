@@ -75,24 +75,33 @@ class Landing extends Component<{}, LandingState> {
 
     private getBackgroundKana = () => {
         let kana: Kana[] = [];
+
         const html = document.querySelector('html');
         const pool = this.state.kana;
+
         if (pool.length > 0 && html) {
+            //Calculate the width & height of the viewport in em.
             const fontSize = getComputedStyle(html).fontSize;
             const width = window.innerWidth / parseFloat(fontSize);
             const height = window.innerHeight / parseFloat(fontSize);
-            const kanaPerRow = Math.ceil(width / 5) + 1;
-            const rows = Math.ceil(height / 5);
+
+            //Calculate how many kana fit on a single row, the number of rows and the total required.
+            const kanaPerRow = Math.ceil(width / 5);
+            const rows = Math.ceil(height / 5) + 1;
             const totalKanaRequired = kanaPerRow * rows;
 
             if (totalKanaRequired > pool.length) {
+                //There are 214 kana. If more is needed, find out how many more and push them.
                 const pools = Math.floor(totalKanaRequired / pool.length);
-                console.log(pools);
-                const remaining = totalKanaRequired % pool.length;
-                for(let i = 0; i < pools; i++) {
+                for (let i = 0; i < pools; i++) {
                     kana.push(...pool);
                 }
-                kana.push(...pool.splice(0, remaining));
+
+                //If the number of pools is fractional, push one more row in.
+                const remaining = totalKanaRequired % pool.length;
+                if (remaining) {
+                    kana.push(...pool.splice(0, kanaPerRow));
+                }
             }
         }
 
