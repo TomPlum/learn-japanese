@@ -9,9 +9,9 @@ describe("Arrays Utility", () => {
         });
 
         it("Should return the whole populated array between a non-zero length and empty array", () => {
-           const arr1 = ["A", "B"];
-           const arr2: string[] = [];
-           expect(Arrays.intersect(arr1, arr2)).toEqual(["A", "B"]);
+            const arr1 = ["A", "B"];
+            const arr2: string[] = [];
+            expect(Arrays.intersect(arr1, arr2)).toEqual(["A", "B"]);
         });
 
         it("Should return the difference between two non-zero length arrays when the parameter order is reversed", () => {
@@ -30,6 +30,36 @@ describe("Arrays Utility", () => {
             const arr1 = ["C", "B", "A"];
             const arr2 = ["A", "C", "B"];
             expect(Arrays.intersect(arr1, arr2)).toEqual([]);
+        });
+    });
+
+    describe("Shuffle", () => {
+        it("Should contain the same elements after shuffling", () => {
+            const array = [1, 5, 10, 2];
+            const result = Arrays.shuffle(array);
+            expect(result.sort()).toEqual(array.sort());
+        });
+    });
+
+    describe("Remove", () => {
+        it("Should remove the given element from the array and return the mutated array", () => {
+            const array = ["orange", "banana", "apple"];
+            const result = Arrays.remove(array, "banana");
+            expect(result).toEqual(["orange", "apple"]);
+        });
+
+        it("Should return the original array if the given element does not exist in the array", () => {
+            const array = ["orange", "banana", "apple"];
+            const result = Arrays.remove(array, "pear");
+            expect(result).toEqual(["orange", "banana", "apple"]);
+        });
+    });
+
+    describe("Get Random Elements", () => {
+        it("Should return the given number of elements from the given array", () => {
+            const array = [1, 2, 3, 4, 5, 6];
+            const result = Arrays.getRandomElements(array, 2);
+            expect(result.length).toBe(2);
         });
     });
 });
