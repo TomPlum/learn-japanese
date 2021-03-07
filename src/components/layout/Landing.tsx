@@ -59,9 +59,11 @@ class Landing extends Component<{}, LandingState> {
                     </div>
 
                     <KanaCarousel />
+
                     <Button className={styles.play} variant="outline-success" href="/play">
                         <FontAwesomeIcon icon={faPlay} /> Play
                     </Button>
+
                     <Button className={styles.search} variant="outline-info" href="/search">
                         <FontAwesomeIcon icon={faSearch} /> Search
                     </Button>

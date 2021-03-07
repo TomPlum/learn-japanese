@@ -34,6 +34,21 @@ test('Answering correctly and clicking submit should call the onSubmit event han
     expect(onSubmitHandler).toHaveBeenCalledWith(true);
 });
 
+test('Answering correctly with the second romanji value should call the onSubmit event handler with true', () => {
+    props.kana = new Kana("ふ", ["hu", "fu"], KanaType.HIRAGANA, KanaColumn.H, false);
+    const { input, submit } = setup();
+
+    fireEvent.change(input, { target: { value: 'fu'}});
+    fireEvent.click(submit);
+    expect(onSubmitHandler).toHaveBeenCalledWith(true);
+
+    fireEvent.change(input, { target: { value: 'hu'}});
+    fireEvent.click(submit);
+    expect(onSubmitHandler).toHaveBeenCalledWith(true);
+
+    expect(onSubmitHandler).toHaveBeenCalledTimes(2);
+});
+
 test('Answer incorrectly and clicking submit should call the onSubmit event handler with false', () => {
     const { input, submit } = setup();
     fireEvent.change(input, { target: { value: 'ha'}});
