@@ -1,6 +1,9 @@
 import Arrays from "../../../utility/Arrays";
 import { render, screen } from "@testing-library/react";
 import Landing from "../../../components/layout/Landing";
+import { Kana } from "../../../types/Kana";
+import KanaType from "../../../types/KanaType";
+import { KanaColumn } from "../../../types/KanaColumn";
 
 const setup = () => {
     const component = render(<Landing/>);
@@ -13,7 +16,7 @@ const setup = () => {
 
 beforeEach(() => {
     Arrays.shuffle = jest.fn().mockImplementation((array: any[]) => {
-        return array;
+        return [new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)];
     });
 
     jest.useFakeTimers();

@@ -74,7 +74,28 @@ class Landing extends Component<{}, LandingState> {
     }
 
     private getBackgroundKana = () => {
-        const kana = this.state.kana;
+        let kana: Kana[] = [];
+        const html = document.querySelector('html');
+        const pool = this.state.kana;
+        if (pool.length > 0 && html) {
+            const fontSize = getComputedStyle(html).fontSize;
+            const width = window.innerWidth / parseFloat(fontSize);
+            const height = window.innerHeight / parseFloat(fontSize);
+            const kanaPerRow = Math.ceil(width / 5) + 1;
+            const rows = Math.ceil(height / 5);
+            const totalKanaRequired = kanaPerRow * rows;
+
+            if (totalKanaRequired > pool.length) {
+                const pools = Math.floor(totalKanaRequired / pool.length);
+                console.log(pools);
+                const remaining = totalKanaRequired % pool.length;
+                for(let i = 0; i < pools; i++) {
+                    kana.push(...pool);
+                }
+                kana.push(...pool.splice(0, remaining));
+            }
+        }
+
         return Arrays.shuffle(kana);
     }
 }
