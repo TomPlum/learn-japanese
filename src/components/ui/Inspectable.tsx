@@ -4,7 +4,7 @@ import PopOver from "./PopOver";
 import styles from "../../styles/sass/components/ui/Inspectable.module.scss";
 import { Placement } from "react-bootstrap/Overlay";
 
-type InspectableProps = {
+export type InspectableProps = {
     title: string;
     text: string;
     placement?: Placement;
