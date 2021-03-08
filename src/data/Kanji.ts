@@ -1,6 +1,6 @@
 import { KanjiData } from "./DataTypes";
 
-const kanji: KanjiData[] = [
+const kyoiku: KanjiData[] = [
     {
         name: "人",
         code: "\u4eba",
@@ -340,7 +340,7 @@ const kanji: KanjiData[] = [
     },
     {
         name: "円",
-        code: "\u5187",
+        code: "\u5186",
         on: [{ kana: "えん", romanji: "en" }],
         kun: [{ kana: "まる", romanji: "maru" }],
         source: "https://en.wiktionary.org/wiki/%E5%86%86#Kanji",
@@ -482,6 +482,59 @@ const kanji: KanjiData[] = [
             { value: "登山", kana: ["とざん"], english: ["mountain climbing",] },
         ]
     },
+    {
+        name: "鳥",
+        code: "\u9CE5",
+        on: [{ kana: " ちょう", romanji: "cho" }],
+        kun: [{ kana: "とり", romanji: "tori" }],
+        source: "https://en.wiktionary.org/wiki/%E9%B3%A5#Kanji",
+        meanings: ["bird", "chicken"],
+        grade: 2,
+        examples: [
+            { value: "鳥", kana: ["とり"], english: ["bird meat", "fowl"] },
+            { value: "野鳥", kana: ["やちょう"], english: ["wild bird"] },
+            { value: "鳥類", kana: ["ちょうるい"], english: ["birds"] },
+            { value: "白鳥", kana: ["はくちょう", "しろとり", "しらとり"], english: ["swan"] },
+            { value: "渡り鳥", kana: ["わたりどり"], english: ["migratory bird", "bird of passage",] },
+        ]
+    },
+    {
+        name: "犬",
+        code: "\u72AC",
+        on: [{ kana: "けん", romanji: "ken" }],
+        kun: [{ kana: "いぬ", romanji: "inu" }],
+        source: "https://en.wiktionary.org/wiki/%E7%8A%AC#Kanji",
+        meanings: ["dog"],
+        grade: 1,
+        examples: [
+            { value: "犬", kana: ["いぬ"], english: ["dog"] },
+            { value: "盲導犬", kana: ["もうどうけん"], english: ["guide dog for the blind"] },
+            { value: "愛犬", kana: ["あいけん"], english: ["pet dog"] },
+            { value: "飼い犬", kana: ["かいいぬ"], english: ["pet dog"] },
+            { value: "野犬", kana: ["やけん"], english: ["stray dog",] },
+        ]
+    },
+
 ];
 
-export default kanji;
+
+const joyo: KanjiData[] = kyoiku.concat([
+    {
+        name: "猫",
+        code: "\u732B",
+        on: [{ kana: " みょう", romanji: "myo" }],
+        kun: [{ kana: "ねこ", romanji: "neko" }],
+        source: "https://en.wiktionary.org/wiki/%E7%8C%AB#Kanji",
+        meanings: ["cat", "buzzcat", "loaf"],
+        grade: 2,
+        examples: [
+            { value: "猫", kana: ["ねこ"], english: ["cat"] },
+            { value: "子猫", kana: ["こねこ"], english: ["kitten"] },
+            { value: "野良猫", kana: ["のらねこ"], english: ["stray cat"] },
+            { value: "黒猫", kana: ["くろねこ"], english: ["black cat"] },
+            { value: "飼い猫", kana: ["かいねこ"], english: ["pet cat",] },
+        ]
+    },
+])
+
+export default kyoiku;
