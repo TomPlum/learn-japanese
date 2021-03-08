@@ -4,6 +4,9 @@ import Landing from "../../../components/layout/Landing";
 import { Kana } from "../../../types/Kana";
 import KanaType from "../../../types/KanaType";
 import { KanaColumn } from "../../../types/KanaColumn";
+import { Environment } from "../../../utility/Environment";
+
+const environment = jest.fn();
 
 const setup = () => {
     const component = render(<Landing/>);
@@ -19,6 +22,8 @@ beforeEach(() => {
         return [new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)];
     });
 
+    Environment.variable = environment;
+
     jest.useFakeTimers();
 });
 
@@ -33,10 +38,10 @@ test('Should render the leading heading', () => {
 });
 
 test('Should render the description', () => {
+    environment.mockReturnValue("landing page description");
     setup();
-    expect(screen.getByText(
-        'A simple memory training app for learning the Japanese Hiragana and Katakana syllabaries.'
-    )).toBeInTheDocument();
+    expect(environment).toHaveBeenCalledWith("LANDING_DESC");
+    expect(screen.getByText('landing page description')).toBeInTheDocument();
 });
 
 test('Should render the play button', () => {
