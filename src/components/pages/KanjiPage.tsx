@@ -8,7 +8,7 @@ import KanjiSettingsMenu from "../settings/KanjiSettingsMenu";
 interface KanjiPageState {
     data: Kanji[];
     loading: boolean;
-    grade: number;
+    grades: number[];
 }
 
 class KanjiPage extends Component<any, KanjiPageState> {
@@ -17,29 +17,29 @@ class KanjiPage extends Component<any, KanjiPageState> {
         this.state = {
             data: [],
             loading: false,
-            grade: 1
+            grades: []
         }
     }
 
     render() {
-        const { data, loading, grade } = this.state;
+        const { data, loading, grades } = this.state;
         return (
             <>
                 <LoadingSpinner active={loading} />
                 {data.length === 0 && <KanjiSettingsMenu onSelected={this.onSelectedGrade} />}
-                {grade && data.length > 0 && <LearnKanji kanji={data} />}
+                {grades && data.length > 0 && <LearnKanji kanji={data} />}
             </>
         );
     }
 
-    private onSelectedGrade = (grade: number) => {
+    private onSelectedGrade = (grades: number[]) => {
         this.loadKanji();
-        this.setState({ grade });
+        this.setState({ grades: grades });
     }
 
     private loadKanji = () => {
         this.setState({ loading: true });
-        const kanji = new KanjiRepository().read({ grades: [this.state.grade ?? 1] });
+        const kanji = new KanjiRepository().read({ grades: this.state.grades });
         this.setState({ loading: false, data: kanji });
     }
 }

@@ -1,21 +1,20 @@
 @import "../../mixins";
 
-@mixin animate {
-  animation: fade 4s ease-in-out infinite;
-  margin: 0;
-}
-
 .kana {
   @include noSelect;
-  @include animate;
   font-size: 10em;
   height: 1.3em;
+  margin: 0;
 }
 
 .romanji {
   @include noSelect;
-  @include animate;
   font-size: 1.5em;
+  margin: 0;
+}
+
+.animate {
+  animation: fade 4s ease-in-out infinite;
 }
 
 .wrapper {
@@ -26,17 +25,18 @@
 @keyframes fade {
   0% {
     opacity: 0;
-    top: 0;
-    transform: translateY(-50px);
+    transform: translateY(-120px) rotateX(90deg);
   }
-  50% {
-    opacity: 1;
-    top: 25px;
+  25% {
     transform: translateY(0px);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(0px);
+    opacity: 1;
   }
   100% {
-    top: 50px;
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(120px) rotateX(-75deg);
   }
 }

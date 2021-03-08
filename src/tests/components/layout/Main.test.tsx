@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import Main from "../../../components/layout/Main";
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
+import { Environment } from "../../../utility/Environment";
 
 const setup = (route: string) => {
     const history = createMemoryHistory();
@@ -13,9 +14,13 @@ const setup = (route: string) => {
     );
 }
 
+beforeEach(() => {
+    Environment.variable = jest.fn().mockReturnValue("landing page description")
+});
+
 test('Navigating to the root URI should route to the Landing page', () => {
     setup('/');
-    expect(screen.getByText('A simple memory training app for learning the Japanese Hiragana and Katakana syllabaries.')).toBeInTheDocument();
+    expect(screen.getByText('landing page description')).toBeInTheDocument();
 });
 
 test('Navigating to the /play should route to the Game page', () => {
