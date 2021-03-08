@@ -9,30 +9,23 @@ export interface KanaCarouselProps {
 }
 
 interface KanaCarouselState {
-    remaining: (Kana | undefined)[]
+    remaining: Kana[];
     shown: Kana[];
-    interval: any;
-    current?: Kana;
+    current: Kana;
 }
 
 class KanaCarousel extends Component<KanaCarouselProps, KanaCarouselState> {
 
-    constructor(props: Readonly<any> | any) {
+    constructor(props: KanaCarouselProps | Readonly<KanaCarouselProps>) {
         super(props);
+
+        const [next, remaining] = RandomNumberGenerator.getRandomObject(this.props.kana);
+
         this.state = {
-            remaining: this.props.kana,
-            shown: [],
-            current: undefined,
-            interval: undefined,
+            remaining: remaining,
+            shown: [next],
+            current: next,
         }
-    }
-
-    componentDidMount() {
-        this.setState({ interval: setInterval(() => this.randomise(), 4000) }, this.randomise)
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.state.interval);
     }
 
     //TODO: Replace with KanaDisplay. Expose animation class and add it to the DynamicCharacter arrays
@@ -40,21 +33,22 @@ class KanaCarousel extends Component<KanaCarouselProps, KanaCarouselState> {
         const { current } = this.state;
         return (
             <Container className={styles.wrapper}>
-                <p className={styles.kana}>{current?.code}</p>
-                <p className={styles.romanji}>{current?.getFullRomanjiString()}</p>
+                <div data-testid="animation" onAnimationIteration={this.handleAnimation} className={styles.animate}>
+                    <p className={styles.kana}>{current.code}</p>
+                    <p className={styles.romanji}>{current.getFullRomanjiString()}</p>
+                </div>
             </Container>
         );
     }
 
-    private randomise = () => {
-        let { current, remaining, shown } = this.state;
-        if (remaining.length === 0) {
-            this.setState({ current: undefined, remaining: this.props.kana, shown: [] }, this.randomise);
-        } else {
-            const [next, nextRemaining] = RandomNumberGenerator.getRandomObject(remaining);
-            if (current) this.setState({ shown: shown.concat(current) });
-            this.setState({ remaining: nextRemaining, current: next });
-        }
+    private handleAnimation = () => {
+        const { current, remaining, shown } = this.state;
+        const { kana } = this.props;
+
+        const pool = remaining.length > 0 ? remaining : kana;
+        const [next, nextRemaining] = RandomNumberGenerator.getRandomObject(pool);
+        const shownPool = remaining.length > 0 ? shown.concat(current) : [next];
+        this.setState({ current: next, remaining: nextRemaining, shown: shownPool });
     }
 }
 
