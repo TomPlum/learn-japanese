@@ -1,7 +1,7 @@
 import { KanjiData } from "./DataTypes";
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 
-const kyoiku: KanjiData[] = [
+export const kyoiku: KanjiData[] = [
     {
         name: "人",
         code: "\u4eba",
@@ -518,7 +518,7 @@ const kyoiku: KanjiData[] = [
 ];
 
 
-const joyo: KanjiData[] = kyoiku.concat([
+export const joyo: KanjiData[] = kyoiku.concat([
     {
         name: "猫",
         code: "\u732B",
@@ -536,5 +536,3 @@ const joyo: KanjiData[] = kyoiku.concat([
         ]
     },
 ])
-
-export default kyoiku;

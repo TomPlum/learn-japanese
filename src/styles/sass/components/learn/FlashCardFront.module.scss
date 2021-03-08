@@ -1,9 +1,40 @@
 @import "flash-cards";
+@import "../../colours";
 
-.wrapper {
+@mixin wrapper {
   @include card;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.wrapper-grade-1 {
+  @include wrapper;
+  border: $kyoiku-grade-1 5px solid;
+}
+
+.wrapper-grade-2 {
+  @include wrapper;
+  border: $kyoiku-grade-2 5px solid;
+}
+
+.wrapper-grade-3 {
+  @include wrapper;
+  border: $kyoiku-grade-3 5px solid;
+}
+
+.wrapper-grade-4 {
+  @include wrapper;
+  border: $kyoiku-grade-4 5px solid;
+}
+
+.wrapper-grade-5 {
+  @include wrapper;
+  border: $kyoiku-grade-5 5px solid;
+}
+
+.wrapper-grade-6 {
+  @include wrapper;
+  border: $kyoiku-grade-6 5px solid;
 }

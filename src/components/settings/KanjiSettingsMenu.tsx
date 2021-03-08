@@ -33,8 +33,8 @@ class KanjiSettingsMenu extends Component<KanjiSettingsMenuProps, KanjiSettingsM
                         <h3 className={styles.heading}>Kyōiku Kanji</h3>
                         <p className={styles.desc}>
                             {grades.length > 0 ?
-                                <p>Selected {Arrays.sum(grades.map(it => it.quantity))} Kanji</p>
-                                : <p>Choose one or many grades below to begin.</p>
+                                <span>Selected {Arrays.sum(grades.map(it => it.quantity))} Kanji</span>
+                                : <span>Choose one or many grades below to begin.</span>
                             }
                         </p>
                     </Col>

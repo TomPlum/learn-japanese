@@ -11,10 +11,12 @@ interface FlashCardFrontProps {
 
 class FlashCardFront extends Component<FlashCardFrontProps> {
     render() {
+        const { kanji, onClick } = this.props;
+
         return (
-            <Container className={styles.wrapper} onClick={this.props.onClick} data-testid="front">
+            <Container className={styles["wrapper-grade-" + kanji.grade.value]} onClick={onClick} data-testid="front">
                 <Row>
-                    <KanjiDisplay value={this.props.kanji} size={"12em"}/>
+                    <KanjiDisplay value={kanji} size={"12em"}/>
                 </Row>
             </Container>
         );

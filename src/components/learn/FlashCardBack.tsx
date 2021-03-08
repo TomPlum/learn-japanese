@@ -19,9 +19,9 @@ class FlashCardBack extends Component<FlashCardBackProps> {
     render() {
         const { kanji } = this.props;
         return (
-            <Container className={styles.wrapper} data-testid="back">
+            <Container className={styles["wrapper-grade-" + kanji.grade.value]} data-testid="back">
                 <Row className={styles.header}>
-                    <p className={styles.grade}>Grade {kanji.grade}</p>
+                    <p className={styles.grade}>Grade {kanji.grade.value}</p>
                     <Button className={styles.back} variant="outline-danger" onClick={this.props.onClick} title="Reset">
                         <FontAwesomeIcon icon={faReply} />
                     </Button>

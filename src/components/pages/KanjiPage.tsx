@@ -27,15 +27,14 @@ class KanjiPage extends Component<any, KanjiPageState> {
         return (
             <>
                 <LoadingSpinner active={loading} />
-                {data.length === 0 && <KanjiSettingsMenu onSelected={this.onSelectedGrade} />}
-                {grades && data.length > 0 && <LearnKanji kanji={data} />}
+                {data.length === 0 && <KanjiSettingsMenu onSelected={this.onSelectedGrades} />}
+                {grades.length > 0 && data.length > 0 && <LearnKanji kanji={data} />}
             </>
         );
     }
 
-    private onSelectedGrade = (grades: KyoikuGrade[]) => {
-        this.loadKanji();
-        this.setState({ grades: grades });
+    private onSelectedGrades = (grades: KyoikuGrade[]) => {
+        this.setState({ grades: grades }, this.loadKanji);
     }
 
     private loadKanji = () => {

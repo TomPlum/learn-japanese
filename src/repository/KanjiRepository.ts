@@ -1,10 +1,10 @@
 import { Kanji } from "../types/kanji/Kanji";
-import kanji from "../data/Kanji";
 import { Reading } from "../types/kanji/Reading";
 import { ReadingType } from "../types/kanji/ReadingType";
 import { Example } from "../types/kanji/Example";
 import { KanjiData, KanjiReading } from "../data/DataTypes";
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
+import { kyoiku } from "../data/Kanji";
 
 export interface KanjiSettings {
     grades: KyoikuGrade[];
@@ -12,8 +12,8 @@ export interface KanjiSettings {
 
 export class KanjiRepository {
     public read(settings: KanjiSettings): Kanji[] {
-        return kanji
-            .filter(entry => settings.grades.includes(entry.grade))
+        return kyoiku
+            .filter(entry => settings.grades.map(it => it.value).includes(entry.grade.value))
             .map((result: KanjiData) => {
                 const on = result.on.map((data: KanjiReading) => new Reading(data.romanji, data.kana, ReadingType.ON));
                 const kun = result.kun.map((data: KanjiReading) => new Reading(data.romanji, data.kana, ReadingType.KUN));
