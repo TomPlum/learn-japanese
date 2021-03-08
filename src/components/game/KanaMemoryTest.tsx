@@ -77,6 +77,10 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         }
     }
 
+    componentWillUnmount() {
+        this.reset();
+    }
+
     render() {
         const { correctAnswers, failedToAnswer, hasExhaustedKana, lives, remainingKana } = this.state;
         const { kana, settings } = this.props;

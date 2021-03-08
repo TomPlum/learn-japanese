@@ -8,34 +8,51 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Kana } from "../../types/Kana";
 import { KanaRepository } from "../../repository/KanaRepository";
 import Arrays from "../../utility/Arrays";
+import { Environment } from "../../utility/Environment";
 
 interface LandingState {
-    kana: Kana[];
     height: number;
     width: number;
+    backgroundKana: Kana[];
 }
 
 class Landing extends Component<{}, LandingState> {
 
-    constructor(props: Readonly<{}> | {}) {
+    private readonly kana: Kana[];
+
+    constructor(props: {} | Readonly<{}>) {
         super(props);
+
+        this.kana = new KanaRepository().read({ hiragana: true, katakana: true });
+
         this.state = {
-            kana: [],
             width: window.innerWidth,
-            height: window.innerHeight
+            height: window.innerHeight,
+            backgroundKana: []
         }
     }
 
     componentDidMount() {
-        this.setState({ kana: new KanaRepository().read({ hiragana: true, katakana: true })})
+        this.getBackgroundKana();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
     }
 
     render() {
+        const { backgroundKana } = this.state;
+
         return (
             <Container fluid className={styles.wrapper}>
                 <ul className={styles.background}>
-                    {this.getBackgroundKana().map(kana => {
-                        return <li key={kana.code}>{kana.code}</li>
+                    {backgroundKana.map(kana => {
+                        return (
+                            <li key={Math.random().toString()} data-testid="background-kana">
+                                {kana.code}
+                            </li>
+                        )
                     })}
                 </ul>
 
@@ -55,11 +72,11 @@ class Landing extends Component<{}, LandingState> {
 
                     <div className={styles.descriptionWrapper}>
                         <h4 className={styles.description}>
-                            A simple memory training app for learning the Japanese Hiragana and Katakana syllabaries.
+                            {Environment.variable("LANDING_DESC")}
                         </h4>
                     </div>
 
-                    <KanaCarousel kana={this.state.kana}/>
+                    <KanaCarousel kana={this.kana}/>
 
                     <Button className={styles.play} variant="outline-success" href="/play">
                         <FontAwesomeIcon icon={faPlay} /> Play
@@ -77,11 +94,16 @@ class Landing extends Component<{}, LandingState> {
         );
     }
 
+    private updateWindowDimensions = () => {
+        this.getBackgroundKana();
+        this.setState({ width: window.innerWidth, height: window.innerHeight });
+    }
+
     private getBackgroundKana = () => {
         let kana: Kana[] = [];
 
         const html = document.querySelector('html');
-        const pool = this.state.kana;
+        const pool = [...this.kana];
 
         if (pool.length > 0 && html) {
             //Calculate the width & height of the viewport in em.
@@ -103,13 +125,15 @@ class Landing extends Component<{}, LandingState> {
 
                 //If the number of pools is fractional, push one more row in.
                 const remaining = totalKanaRequired % pool.length;
-                if (remaining) {
+                if (remaining !== 0) {
                     kana.push(...pool.splice(0, kanaPerRow));
                 }
+            } else {
+                kana.push(...pool.splice(0, totalKanaRequired));
             }
         }
 
-        return Arrays.shuffle(kana);
+        this.setState({ backgroundKana: Arrays.shuffle(kana) });
     }
 }
 
