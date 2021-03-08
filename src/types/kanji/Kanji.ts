@@ -1,16 +1,17 @@
 import { Reading } from "./Reading";
 import JapaneseCharacter from "../JapaneseCharacter";
 import { Example } from "./Example";
+import { KyoikuGrade } from "./KyoikuGrade";
 
 export class Kanji implements JapaneseCharacter {
     private readonly _character: string;
     private readonly _readings: Reading[];
     private readonly _meanings: string[];
-    private readonly _grade: number;
+    private readonly _grade: KyoikuGrade;
     private readonly _source: string;
     private readonly _examples: Example[];
 
-    constructor(character: string, readings: Reading[], meanings: string[], grade: number, source: string, examples: Example[]) {
+    constructor(character: string, readings: Reading[], meanings: string[], grade: KyoikuGrade, source: string, examples: Example[]) {
         this._character = character;
         this._readings = readings;
         this._meanings = meanings;
@@ -27,7 +28,7 @@ export class Kanji implements JapaneseCharacter {
         return this._meanings;
     }
 
-    get grade(): number {
+    get grade(): KyoikuGrade {
         return this._grade;
     }
 

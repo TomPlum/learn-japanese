@@ -1,25 +1,25 @@
 import { Component } from "react";
-import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faGraduationCap, faLeaf, faMountain, faPaintBrush, faPlay, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import KanjiModeButton from "../layout/KanjiModeButton";
-import { Environment } from "../../utility/Environment";
+import KyoikuGradeButton from "../layout/KyoikuGradeButton";
 import Arrays from "../../utility/Arrays";
+import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 
 interface KanjiSettingsMenuProps {
-    onSelected: (grades: number[]) => void;
+    onSelected: (grades: KyoikuGrade[]) => void;
 }
 
 interface KanjiSettingsMenuState {
-    grades: number[];
+    grades: KyoikuGrade[];
 }
 
 class KanjiSettingsMenu extends Component<KanjiSettingsMenuProps, KanjiSettingsMenuState> {
     constructor(props: KanjiSettingsMenuProps | Readonly<KanjiSettingsMenuProps>) {
         super(props);
         this.state = {
-            grades: [1]
+            grades: []
         }
     }
 
@@ -30,66 +30,81 @@ class KanjiSettingsMenu extends Component<KanjiSettingsMenuProps, KanjiSettingsM
             <Container fluid className={styles.wrapper}>
                 <Row>
                     <Col className={styles.descWrapper}>
-                        <p className={styles.desc}>{this.getSelectedModeDescription()}</p>
+                        <h3 className={styles.heading}>Kyōiku Kanji</h3>
+                        <p className={styles.desc}>
+                            {grades.length > 0 ?
+                                <p>Selected {Arrays.sum(grades.map(it => it.quantity))} Kanji</p>
+                                : <p>Choose one or many grades below to begin.</p>
+                            }
+                        </p>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col xs={6}>
+                        <KyoikuGradeButton
+                            grade={KyoikuGrade.ONE}
+                            icon={faPaintBrush}
+                            iconColour={"#fdb40e"}
+                            isSelected={grades.includes(KyoikuGrade.ONE)}
+                            onClick={this.onSelect}
+                        />
+                    </Col>
+                    <Col>
+                        <KyoikuGradeButton
+                            grade={KyoikuGrade.TWO}
+                            icon={faSchool}
+                            iconColour={"#fdb40e"}
+                            isSelected={grades.includes(KyoikuGrade.TWO)}
+                            onClick={this.onSelect}
+                        />
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={12}>
-                        <ListGroup>
-                            <KanjiModeButton
-                                grade={1}
-                                quantity={80}
-                                iconColour={"#fdb40e"}
-                                isSelected={grades.includes(1)}
-                                onClick={this.onSelect}
-                            />
-                            <KanjiModeButton
-                                grade={2}
-                                quantity={160}
-                                iconColour={"#fdb40e"}
-                                isSelected={grades.includes(2)}
-                                onClick={this.onSelect}
-                            />
-                            <KanjiModeButton
-                                grade={3}
-                                quantity={200}
-                                iconColour={"#fdb40e"}
-                                isSelected={grades.includes(3)}
-                                onClick={this.onSelect}
-                            />
-                            <KanjiModeButton
-                                grade={4}
-                                quantity={200}
-                                iconColour={"#fdb40e"}
-                                isSelected={grades.includes(4)}
-                                onClick={this.onSelect}
-                            />
-                            <KanjiModeButton
-                                grade={5}
-                                quantity={185}
-                                iconColour={"#fdb40e"}
-                                isSelected={grades.includes(5)}
-                                onClick={this.onSelect}
-                            />
-                            <KanjiModeButton
-                                grade={6}
-                                quantity={181}
-                                iconColour={"#fdb40e"}
-                                isSelected={grades.includes(6)}
-                                onClick={this.onSelect}
-                            />
-                        </ListGroup>
-                    </Col>
                     <Col xs={6}>
-                        <ListGroup>
-
-                        </ListGroup>
+                        <KyoikuGradeButton
+                            grade={KyoikuGrade.THREE}
+                            icon={faLeaf}
+                            iconColour={"#fdb40e"}
+                            isSelected={grades.includes(KyoikuGrade.THREE)}
+                            onClick={this.onSelect}
+                        />
+                    </Col>
+                    <Col>
+                        <KyoikuGradeButton
+                            grade={KyoikuGrade.FOUR}
+                            icon={faSun}
+                            iconColour={"#fdb40e"}
+                            isSelected={grades.includes(KyoikuGrade.FOUR)}
+                            onClick={this.onSelect}
+                        />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={6}>
+                        <KyoikuGradeButton
+                            grade={KyoikuGrade.FIVE}
+                            icon={faMountain}
+                            iconColour={"#fdb40e"}
+                            isSelected={grades.includes(KyoikuGrade.FIVE)}
+                            onClick={this.onSelect}
+                        />
+                    </Col>
+                    <Col>
+                        <KyoikuGradeButton
+                            grade={KyoikuGrade.SIX}
+                            icon={faGraduationCap}
+                            iconColour={"#fdb40e"}
+                            isSelected={grades.includes(KyoikuGrade.SIX)}
+                            onClick={this.onSelect}
+                        />
                     </Col>
                 </Row>
 
                 <Row>
                     <Col>
-                        <Button variant="success" className={styles.playButton} onClick={this.onConfirmSelected}>
+                        <Button variant="success" className={styles.playButton} onClick={this.onConfirmSelected}
+                                disabled={grades.length === 0}>
                             <FontAwesomeIcon size="sm" icon={faPlay}/> Start
                         </Button>
                     </Col>
@@ -98,7 +113,7 @@ class KanjiSettingsMenu extends Component<KanjiSettingsMenuProps, KanjiSettingsM
         );
     }
 
-    onSelect = (grade: number) => {
+    onSelect = (grade: KyoikuGrade) => {
         const { grades } = this.state;
         if (grades.includes(grade)) {
             this.setState({ grades: Arrays.remove(grades, grade) });
@@ -108,8 +123,6 @@ class KanjiSettingsMenu extends Component<KanjiSettingsMenuProps, KanjiSettingsM
     }
 
     onConfirmSelected = () => this.props.onSelected(this.state.grades);
-
-    private getSelectedModeDescription = () => Environment.variable("KANJI_GRADE_DESC" + this.state.grades);
 }
 
 export default KanjiSettingsMenu;

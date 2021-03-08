@@ -1,4 +1,5 @@
 import { KanaColumn } from "../types/KanaColumn";
+import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 
 export interface KanaData {
     name: string;
@@ -15,7 +16,7 @@ export interface KanjiData {
     kun: KanjiReading[];
     source: string;
     meanings: string[];
-    grade: number;
+    grade: KyoikuGrade;
     examples: KanjiExample[];
 }
 
@@ -28,4 +29,9 @@ export interface KanjiExample {
     value: string;
     kana: string[];
     english: string[];
+}
+
+export interface KyoikuGradeData {
+    value: number;
+    quantity: number;
 }

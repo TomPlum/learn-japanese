@@ -4,9 +4,10 @@ import { Reading } from "../types/kanji/Reading";
 import { ReadingType } from "../types/kanji/ReadingType";
 import { Example } from "../types/kanji/Example";
 import { KanjiData, KanjiReading } from "../data/DataTypes";
+import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 
 export interface KanjiSettings {
-    grades: number[];
+    grades: KyoikuGrade[];
 }
 
 export class KanjiRepository {

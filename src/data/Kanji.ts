@@ -1,4 +1,5 @@
 import { KanjiData } from "./DataTypes";
+import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 
 const kyoiku: KanjiData[] = [
     {
@@ -8,7 +9,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "ひと", romanji: "hito" }],
         source: "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
         meanings: ["person"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "外国人", kana: ["がいこくじん"], english: ["foreigner"] },
             { value: "個人", kana: ["こじん"], english: ["individual", "private person", "personal", "private"] },
@@ -25,7 +26,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "ひと", romanji: "hito" }],
         source: "https://en.wiktionary.org/wiki/%E4%B8%80#Kanji",
         meanings: ["one"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "一つ", kana: ["ひとつ"], english: ["one"] },
             { value: "一月", kana: ["いちがつ"], english: ["January"] },
@@ -41,7 +42,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "ふた", romanji: "futa" }],
         source: "https://en.wiktionary.org/wiki/%E4%BA%8C#Kanji",
         meanings: ["two"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "二", kana: ["に", "ふた", "ふ", "ふう"], english: ["two"] },
             { value: "二つ", kana: ["ふたつ"], english: ["two things"] },
@@ -57,7 +58,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "ひ", romanji: "hi" }],
         source: "https://en.wiktionary.org/wiki/%E6%97%A5#Kanji",
         meanings: ["day", "sun"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "日", kana: ["ひ"], english: ["day", "days", "sun", "sunshine", "sunlight"] },
             { value: "同日", kana: ["どうじつ"], english: ["the same day"] },
@@ -73,7 +74,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "なか", romanji: "naka" }],
         source: "https://en.wiktionary.org/wiki/%E4%B8%AD#Kanji",
         meanings: ["inside", "middle"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "中央", kana: ["ちゅうおう"], english: ["centre", "central"] },
             { value: "中国", kana: ["ちゅうごく"], english: ["China"] },
@@ -89,7 +90,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "おお", romanji: "ō" }],
         source: "https://en.wiktionary.org/wiki/%E5%A4%A7#Kanji",
         meanings: ["large"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "大きな", kana: ["おおきな"], english: ["big", "large", "great"] },
             { value: "拡大", kana: ["かくだい"], english: ["magnification", "enlargement", "expansion"] },
@@ -105,7 +106,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "もと", romanji: "moto" }],
         source: "https://en.wiktionary.org/wiki/%E6%9C%AC#Kanji",
         meanings: ["book"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "基本", kana: ["きほん"], english: ["foundation", "basis", "standard"] },
             { value: "日本人", kana: ["にほんじん", "にっぽんじん"], english: ["Japanese person", "Japanese people"] },
@@ -121,7 +122,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "とし", romanji: "toshi" }],
         source: "https://en.wiktionary.org/wiki/%E5%B9%B4#Kanji",
         meanings: ["year"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "年", kana: ["とし"], english: ["year", "age"] },
             { value: "昨年", kana: ["さくねん"], english: ["last year"] },
@@ -137,7 +138,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "と", romanji: "tō" }],
         source: "https://en.wiktionary.org/wiki/%E5%8D%81#Kanji",
         meanings: ["ten"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "十", kana: ["じゅう", "と", "とお"], english: ["ten"] },
             { value: "十一", kana: ["じゅういち", "ジュウイチ"], english: ["eleven"] },
@@ -153,7 +154,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "で", romanji: "de" }],
         source: "https://en.wiktionary.org/wiki/%E5%87%BA#Kanji",
         meanings: ["exit", "leave"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "出す", kana: ["だす"], english: ["to take out", "to get out", "to put out"] },
             { value: "出身", kana: ["しゅっしん"], english: ["person’s origin (town, city, country, etc.)"] },
@@ -169,7 +170,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "み", romanji: "mi" }],
         source: "https://en.wiktionary.org/wiki/%E4%B8%89#Kanji",
         meanings: ["three"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "三", kana: ["さん", "み"], english: ["three"] },
             { value: "三つ", kana: ["みっつ"], english: ["three things"] },
@@ -185,7 +186,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "みる", romanji: "miru" }],
         source: "https://en.wiktionary.org/wiki/%E8%A6%8B#Kanji",
         meanings: ["see, opinion"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "意見", kana: ["いけん"], english: ["opinion", "view"] },
             { value: "会見", kana: ["かいけん"], english: ["interview", "audience"] },
@@ -201,7 +202,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "つき", romanji: "tsuki" }],
         source: "https://en.wiktionary.org/wiki/%E6%9C%88#Kanji",
         meanings: ["month", "moon"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "一月", kana: ["いちがつ"], english: ["January"] },
             { value: "九月", kana: ["くがつ"], english: ["September"] },
@@ -217,7 +218,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "いきる", romanji: "ikiru" }],
         source: "https://en.wiktionary.org/wiki/%E7%94%9F#Kanji",
         meanings: ["life", "genuine", "birth"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "生きる", kana: ["いきる"], english: ["to live", "to exist"] },
             { value: "学生", kana: ["がくせい"], english: ["student"] },
@@ -233,7 +234,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "いつ", romanji: "itsu" }],
         source: "https://en.wiktionary.org/wiki/%E4%BA%94#Kanji",
         meanings: ["five"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "五", kana: ["ご", "いつ", "い"], english: ["five"] },
             { value: "五月", kana: ["ごがつ"], english: ["May"] },
@@ -249,7 +250,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "うえ", romanji: "ue" }],
         source: "https://en.wiktionary.org/wiki/%E4%B8%8A#Kanji",
         meanings: ["above", "up"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "上がったり", kana: ["あがったり"], english: ["doomed", "in a bad state", "poor"] },
             { value: "史上", kana: ["しじょう"], english: ["historical"] },
@@ -265,7 +266,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "よん", romanji: "yon" }],
         source: "https://en.wiktionary.org/wiki/%E5%9B%9B#Kanji",
         meanings: ["four"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "四", kana: ["よん", "し", "よ"], english: ["four"] },
             { value: "四つ", kana: ["よっつ"], english: ["four things"] },
@@ -281,7 +282,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "かね", romanji: "kane" }],
         source: "https://en.wiktionary.org/wiki/%E9%87%91#Kanji",
         meanings: ["gold, money"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "お金", kana: ["おかね"], english: ["money"] },
             { value: "金融", kana: ["きんゆう"], english: ["financing", "credit transacting"] },
@@ -297,7 +298,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: " ここの", romanji: "kokono" }],
         source: "https://en.wiktionary.org/wiki/%E4%B9%9D#Kanji",
         meanings: ["nine"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "九", kana: ["きゅう", "く", "ここの", "この", "ここ"], english: ["nine"] },
             { value: "九月", kana: ["くがつ"], english: ["September"] },
@@ -313,7 +314,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "いる", romanji: "iru" }],
         source: "https://en.wiktionary.org/wiki/%E5%85%A5#Kanji",
         meanings: ["enter", "insert"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "入り", kana: ["いり"], english: ["entering", "containing"] },
             { value: "輸入", kana: ["ゆにゅう", "しゅにゅう"], english: ["important", "import", "introduction"] },
@@ -329,7 +330,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "まなぶ", romanji: "manabu" }],
         source: "https://en.wiktionary.org/wiki/%E5%AD%A6#Kanji",
         meanings: ["study", "learning", "science"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "学校", kana: ["がっこう"], english: ["school"] },
             { value: "学生", kana: ["がくせい"], english: ["student"] },
@@ -345,7 +346,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "まる", romanji: "maru" }],
         source: "https://en.wiktionary.org/wiki/%E5%86%86#Kanji",
         meanings: ["circle", "yen", "round"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "円", kana: ["えん", "まる"], english: ["Yen", "money", "circle"] },
             { value: "円高", kana: ["えんだか"], english: ["valued yen"] },
@@ -361,7 +362,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "こ", romanji: "ko" }],
         source: "https://en.wiktionary.org/wiki/%E5%AD%90#Kanji",
         meanings: ["child", "sign of the rat"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "子", kana: ["こ"], english: ["child"] },
             { value: "子供", kana: ["こども"], english: ["children"] },
@@ -377,7 +378,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "や", romanji: "ya" }],
         source: "https://en.wiktionary.org/wiki/%E5%85%AB#Kanji",
         meanings: ["eight"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "八", kana: ["はち", "や"], english: ["eight"] },
             { value: "十八", kana: ["じゅうはち"], english: ["eighteen"] },
@@ -393,7 +394,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "む", romanji: "mu" }],
         source: "https://en.wiktionary.org/wiki/%E5%85%AD#Kanji",
         meanings: ["six"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "六", kana: ["ろく", "む", "むう"], english: ["six"] },
             { value: "六月", kana: ["ろくがつ"], english: ["June"] },
@@ -409,7 +410,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "した", romanji: "shita" }],
         source: "https://en.wiktionary.org/wiki/%E4%B8%8B#Kanji",
         meanings: ["below", "down", "descend", "give", "low", "inferior"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "下", kana: ["もと"], english: ["under"] },
             { value: "下げる", kana: ["さげる"], english: ["to hang", "to lower", "to move back", "to wear"] },
@@ -425,7 +426,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "いき", romanji: "iki" }],
         source: "https://en.wiktionary.org/wiki/%E6%B0%97#Kanji",
         meanings: ["spirit", "mind", "air", "atmosphere", "mood"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "気", kana: ["き"], english: ["spirit", "mind", "heart", "nature", "disposition"] },
             { value: "景気", kana: ["けいき"], english: ["condition", "state", "business"] },
@@ -441,7 +442,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "ちいさい", romanji: "chisai" }],
         source: "https://en.wiktionary.org/wiki/%E5%B0%8F#Kanji",
         meanings: ["small", "little"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "小選挙区", kana: ["しょうせんきょく"], english: ["small electoral district"] },
             { value: "小学校", kana: ["しょうがっこう"], english: ["primary school", "elementary school"] },
@@ -457,7 +458,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "なな", romanji: "nana" }],
         source: "https://en.wiktionary.org/wiki/%E4%B8%83#Kanji",
         meanings: ["seven"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "七", kana: ["しち", "なな", "な"], english: ["seven"] },
             { value: "七月", kana: ["しちがつ"], english: ["July"] },
@@ -473,7 +474,7 @@ const kyoiku: KanjiData[] = [
         kun: [{ kana: "やま", romanji: "yama" }],
         source: "https://en.wiktionary.org/wiki/%E5%B1%B1#Kanji",
         meanings: ["mountain"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "山", kana: ["やま"], english: ["mountain", "pile", "heap", "climax", "critical point"] },
             { value: "火山", kana: ["かざん"], english: ["volcano"] },
@@ -483,29 +484,13 @@ const kyoiku: KanjiData[] = [
         ]
     },
     {
-        name: "鳥",
-        code: "\u9CE5",
-        on: [{ kana: " ちょう", romanji: "cho" }],
-        kun: [{ kana: "とり", romanji: "tori" }],
-        source: "https://en.wiktionary.org/wiki/%E9%B3%A5#Kanji",
-        meanings: ["bird", "chicken"],
-        grade: 2,
-        examples: [
-            { value: "鳥", kana: ["とり"], english: ["bird meat", "fowl"] },
-            { value: "野鳥", kana: ["やちょう"], english: ["wild bird"] },
-            { value: "鳥類", kana: ["ちょうるい"], english: ["birds"] },
-            { value: "白鳥", kana: ["はくちょう", "しろとり", "しらとり"], english: ["swan"] },
-            { value: "渡り鳥", kana: ["わたりどり"], english: ["migratory bird", "bird of passage",] },
-        ]
-    },
-    {
         name: "犬",
         code: "\u72AC",
         on: [{ kana: "けん", romanji: "ken" }],
         kun: [{ kana: "いぬ", romanji: "inu" }],
         source: "https://en.wiktionary.org/wiki/%E7%8A%AC#Kanji",
         meanings: ["dog"],
-        grade: 1,
+        grade: KyoikuGrade.ONE,
         examples: [
             { value: "犬", kana: ["いぬ"], english: ["dog"] },
             { value: "盲導犬", kana: ["もうどうけん"], english: ["guide dog for the blind"] },
@@ -514,7 +499,22 @@ const kyoiku: KanjiData[] = [
             { value: "野犬", kana: ["やけん"], english: ["stray dog",] },
         ]
     },
-
+    {
+        name: "鳥",
+        code: "\u9CE5",
+        on: [{ kana: " ちょう", romanji: "cho" }],
+        kun: [{ kana: "とり", romanji: "tori" }],
+        source: "https://en.wiktionary.org/wiki/%E9%B3%A5#Kanji",
+        meanings: ["bird", "chicken"],
+        grade: KyoikuGrade.TWO,
+        examples: [
+            { value: "鳥", kana: ["とり"], english: ["bird meat", "fowl"] },
+            { value: "野鳥", kana: ["やちょう"], english: ["wild bird"] },
+            { value: "鳥類", kana: ["ちょうるい"], english: ["birds"] },
+            { value: "白鳥", kana: ["はくちょう", "しろとり", "しらとり"], english: ["swan"] },
+            { value: "渡り鳥", kana: ["わたりどり"], english: ["migratory bird", "bird of passage",] },
+        ]
+    },
 ];
 
 
@@ -526,7 +526,7 @@ const joyo: KanjiData[] = kyoiku.concat([
         kun: [{ kana: "ねこ", romanji: "neko" }],
         source: "https://en.wiktionary.org/wiki/%E7%8C%AB#Kanji",
         meanings: ["cat", "buzzcat", "loaf"],
-        grade: 2,
+        grade: KyoikuGrade.TWO,
         examples: [
             { value: "猫", kana: ["ねこ"], english: ["cat"] },
             { value: "子猫", kana: ["こねこ"], english: ["kitten"] },

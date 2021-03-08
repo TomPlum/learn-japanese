@@ -9,12 +9,9 @@ export default class Arrays {
         }
     }
 
-    /*static shuffle<T>(array: T[]) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }*/
+    static sum(array: number[]): number {
+        return array.reduce((a, b) => a + b, 0);
+    }
 
     public static shuffle<T>(array: T[]): T[] {
         const shuffled = [...array];

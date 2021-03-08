@@ -4,11 +4,12 @@ import { Kanji } from "../../types/kanji/Kanji";
 import { KanjiRepository } from "../../repository/KanjiRepository";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import KanjiSettingsMenu from "../settings/KanjiSettingsMenu";
+import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 
 interface KanjiPageState {
     data: Kanji[];
     loading: boolean;
-    grades: number[];
+    grades: KyoikuGrade[];
 }
 
 class KanjiPage extends Component<any, KanjiPageState> {
@@ -32,7 +33,7 @@ class KanjiPage extends Component<any, KanjiPageState> {
         );
     }
 
-    private onSelectedGrade = (grades: number[]) => {
+    private onSelectedGrade = (grades: KyoikuGrade[]) => {
         this.loadKanji();
         this.setState({ grades: grades });
     }
