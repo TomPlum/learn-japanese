@@ -48,7 +48,11 @@ class Landing extends Component<{}, LandingState> {
             <Container fluid className={styles.wrapper}>
                 <ul className={styles.background}>
                     {backgroundKana.map(kana => {
-                        return <li key={Math.random().toString()}>{kana.code}</li>
+                        return (
+                            <li key={Math.random().toString()} data-testid="background-kana">
+                                {kana.code}
+                            </li>
+                        )
                     })}
                 </ul>
 

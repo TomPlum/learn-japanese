@@ -58,6 +58,7 @@
     "@types/react-stonecutter": "^0.3.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
     "enzyme": "^3.11.0",
+    "mq-polyfill": "^1.1.8",
     "ts-jest": "^26.5.1"
   }
 }
