@@ -501,6 +501,22 @@ export const kyoiku: KanjiData[] = [
         ]
     },
     {
+        name: "百",
+        code: "\u767E",
+        on: [{ kana: "ひゃく", romanji: "hyaku" }],
+        kun: [{ kana: "もも", romanji: "momo" }],
+        source: "https://en.wiktionary.org/wiki/%E7%99%BE#Kanji",
+        meanings: ["hundred"],
+        grade: KyoikuGrade.ONE,
+        examples: [
+            { value: "百", kana: ["ひゃく", "もも"], english: ["hundred"] },
+            { value: "二百", kana: ["にひゃく"], english: ["two hundred"] },
+            { value: "三百", kana: ["さんびゃく"], english: ["three hundred"] },
+            { value: "百貨店", kana: ["ひゃっかてん"], english: ["cleric desk"] },
+            { value: "百万", kana: ["ひゃくまん"], english: ["one million",] },
+        ]
+    },
+    {
         name: "名",
         code: "\u540D",
         on: [{ kana: "みょう", romanji: "myo" }],
@@ -549,6 +565,42 @@ export const kyoiku: KanjiData[] = [
             { value: "前日", kana: ["ぜんじつ", "まえび"], english: ["previous day"] },
         ]
     },
+
+    //Grade 6 Kanji
+
+    {
+        name: "私",
+        code: "\u79C1",
+        on: [{ kana: "し", romanji: "shi" }],
+        kun: [{ kana: "わたくし", romanji: "watashi" }],
+        source: "https://en.wiktionary.org/wiki/%E7%A7%81#Kanji",
+        meanings: ["me", "I"],
+        grade: KyoikuGrade.SIX,
+        examples: [
+            { value: "私", kana: ["わたし", "わたくし"], english: ["I", "me", "personal matter"] },
+            { value: "私立", kana: ["しりつ", "わたくしりつ"], english: ["private (establishment"] },
+            { value: "私邸", kana: ["してい"], english: ["private residence"] },
+            { value: "私的", kana: ["してき"], english: ["personal", "private", "proprietary"] },
+            { value: "私鉄", kana: ["してつ"], english: ["private railway",] },
+        ]
+    },
+    {
+        name: "机",
+        code: "\u673A",
+        on: [{ kana: "き", romanji: "ki" }],
+        kun: [{ kana: "つくえ", romanji: "tsukue" }],
+        source: "https://en.wiktionary.org/wiki/%E6%9C%BA#Kanji",
+        meanings: ["desk", "table"],
+        grade: KyoikuGrade.SIX,
+        examples: [
+            { value: "机", kana: ["つくえ, つき"], english: ["desk"] },
+            { value: "机上", kana: ["きじょう"], english: ["on the desk", "theoretical", "academic"] },
+            { value: "机上の空論", kana: ["きじょうのくうろん"], english: ["academic gossip", "empty theory"] },
+            { value: "事務机", kana: ["じむづくえ"], english: ["cleric desk"] },
+            { value: "書き物机", kana: ["かきものづくえ"], english: ["writing desk",] },
+        ]
+    },
+
 ];
 
 export const joyo: KanjiData[] = kyoiku.concat([
