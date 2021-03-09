@@ -7,7 +7,7 @@ describe("Kanji Repository", () => {
     describe("Kyoiku", () => {
         it("Should read 31 kanji when passing only grade 1", () => {
             const result = repository.read({ grades: [KyoikuGrade.ONE] });
-            expect(result).toHaveLength(32);
+            expect(result).toHaveLength(33);
         });
 
         it("Should read 1 kanji when passing only grade 2", () => {
