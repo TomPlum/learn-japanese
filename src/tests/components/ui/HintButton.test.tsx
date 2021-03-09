@@ -55,11 +55,27 @@ test('Regular Kana Message Text', () => {
     expect(text).toBeInTheDocument()
 });
 
+test('Diacritical Kana Message Text', () => {
+    props.kana = new Kana("ぞ", ["zo"], KanaType.HIRAGANA, KanaColumn.S, true);
+    const { button } = setup();
+    fireEvent.focus(button);
+    const text = screen.getByText('This kana is from the \'vowel\' column in the Hiragana syllabary. Also, notice the diacritical mark.');
+    expect(text).toBeInTheDocument()
+});
+
 test('Diagraph Message Text', () => {
-    props.kana = new Kana("びゃ", ["bya"], KanaType.HIRAGANA, KanaColumn.H, true);
+    props.kana = new Kana("しゅ", ["shu"], KanaType.HIRAGANA, KanaColumn.S, false);
     const { button } = setup();
     fireEvent.focus(button);
     const text = screen.getByText('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed.');
+    expect(text).toBeInTheDocument()
+});
+
+test('Diacritical Diagraph Message Text', () => {
+    props.kana = new Kana("びゃ", ["bya"], KanaType.HIRAGANA, KanaColumn.H, true);
+    const { button } = setup();
+    fireEvent.focus(button);
+    const text = screen.getByText('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed. Also, notice the diacritical mark.');
     expect(text).toBeInTheDocument()
 });
 

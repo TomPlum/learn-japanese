@@ -55,10 +55,17 @@ class HintButton extends Component<HintButtonProps> {
         if (kana.column === KanaColumn.OTHER) {
             return "This kana is exceptional. It is not a consonant nor a vowel."
         }
+
+        let message: string;
+        const diacritical = " Also, notice the diacritical mark.";
+
         if (kana.isDiagraph()) {
-            return "Diagraphs usually drop the 1st kana's 2nd letter when transcribed."
+            message = "Diagraphs usually drop the 1st kana's 2nd letter when transcribed."
+        } else {
+            message = "This kana is from the '" + kana.column + "' column in the " + kana.type + " syllabary.";
         }
-        return "This kana is from the '" + kana.column + "' column in the " + kana.type + " syllabary.";
+
+        return message + (kana.isDiacritical ? diacritical : "");
     }
 
 }
