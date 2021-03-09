@@ -8,5 +8,5 @@ beforeEach(() => {
 
 test('Should render the main layout', () => {
     render(<LearnJapanese />);
-    expect(screen.getByText('landing page description')).toBeInTheDocument();
+    expect(screen.getByTestId('landing-page')).toBeInTheDocument();
 });

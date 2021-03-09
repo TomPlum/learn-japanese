@@ -1,11 +1,13 @@
 import Arrays from "../../../utility/Arrays";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Landing from "../../../components/layout/Landing";
 import { Kana } from "../../../types/Kana";
 import KanaType from "../../../types/KanaType";
 import { KanaColumn } from "../../../types/KanaColumn";
 import { Environment } from "../../../utility/Environment";
 import matchMediaPolyfill from 'mq-polyfill';
+import { getByTextWithMarkup } from "../../Queries";
+import { when } from 'jest-when';
 
 const environment = jest.fn();
 const shuffle = jest.fn();
@@ -16,6 +18,9 @@ const setup = () => {
         play: screen.getByText('Play'),
         search: screen.getByText('Search'),
         kanji: screen.getByText('Kanji'),
+        japaneseInspectable: screen.getByTestId('japanese-inspectable'),
+        hiraganaInspectable: screen.getByTestId('hiragana-inspectable'),
+        katakanaInspectable: screen.getByTestId('katakana-inspectable'),
         ...component
     }
 }
@@ -53,10 +58,15 @@ test('Should render the leading heading', () => {
 });
 
 test('Should render the description', () => {
-    environment.mockReturnValue("landing page description");
+    environment.mockReturnValueOnce("hiragana desc");
+    environment.mockReturnValueOnce("katakana desc");
     setup();
-    expect(environment).toHaveBeenCalledWith("LANDING_DESC");
-    expect(screen.getByText('landing page description')).toBeInTheDocument();
+
+    expect(environment).toHaveBeenCalledWith("HIRAGANA_DESC");
+    expect(environment).toHaveBeenCalledWith("KATAKANA_DESC");
+
+    const description = 'A simple memory training app for learning the Japanese Hiragana and Katakana syllabaries.';
+    expect(getByTextWithMarkup(description)).toBeInTheDocument();
 });
 
 test('Should render the play button', () => {
@@ -93,6 +103,30 @@ test('Clicking the kanji button should route the user to /kanji', () => {
 test('Clicking the search button should route the user to /search', () => {
     const { search } = setup();
     expect(search).toHaveAttribute('href', '/search');
+});
+
+test('Hovering over the \'Japanese\' inspectable text in the heading should render an info overlay', () => {
+    when(environment).calledWith('JAPANESE_KANJI_DESC').mockReturnValue('Japanese Kanji Description');
+    const { japaneseInspectable } = setup();
+    fireEvent.mouseOver(japaneseInspectable);
+    expect(screen.getByTitle('Nihongo (日本語)'));
+    expect(screen.getByText('Japanese Kanji Description'));
+});
+
+test('Hovering over the \'Hiragana\' inspectable text in the description should render an info overlay', () => {
+    when(environment).calledWith('HIRAGANA_DESC').mockReturnValue('Hiragana Description');
+    const { hiraganaInspectable } = setup();
+    fireEvent.mouseOver(hiraganaInspectable);
+    expect(screen.getByTitle('Hiragana (ひらがな)'));
+    expect(screen.getByText('Hiragana Description'));
+});
+
+test('Hovering over the \'Katakana\' inspectable text in the description should render an info overlay', () => {
+    when(environment).calledWith('KATAKANA_DESC').mockReturnValue('Katakana Description');
+    const { katakanaInspectable } = setup();
+    fireEvent.mouseOver(katakanaInspectable);
+    expect(screen.getByTitle('Katakana (カタカナ)'));
+    expect(screen.getByText('Katakana Description'));
 });
 
 //TODO: Below tests don't seem to be updating state and re-rendering new kana when resizing.

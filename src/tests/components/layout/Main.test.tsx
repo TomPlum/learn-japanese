@@ -20,7 +20,7 @@ beforeEach(() => {
 
 test('Navigating to the root URI should route to the Landing page', () => {
     setup('/');
-    expect(screen.getByText('landing page description')).toBeInTheDocument();
+    expect(screen.getByTestId('landing-page')).toBeInTheDocument();
 });
 
 test('Navigating to the /play should route to the Game page', () => {

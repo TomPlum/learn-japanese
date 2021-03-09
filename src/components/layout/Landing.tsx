@@ -45,7 +45,7 @@ class Landing extends Component<{}, LandingState> {
         const { backgroundKana } = this.state;
 
         return (
-            <Container fluid className={styles.wrapper}>
+            <Container fluid className={styles.wrapper} data-testid="landing-page">
                 <ul className={styles.background}>
                     {backgroundKana.map(kana => {
                         return (
@@ -61,18 +61,35 @@ class Landing extends Component<{}, LandingState> {
                         {'Learn '}
                         <Inspectable
                             title="Nihongo (日本語)"
-                            text="The Kanji in this compound mean 'Sun' (日), 'Origin' (本) and 'Language' (語)."
+                            text={Environment.variable("JAPANESE_KANJI_DESC")}
                             className={styles.japanese}
                             placement="top"
                         >
-                            <span>Japanese</span>
+                            <span data-testid="japanese-inspectable">Japanese</span>
                         </Inspectable>
                         {' Kana'}
                     </h1>
 
                     <div className={styles.descriptionWrapper}>
                         <h4 className={styles.description}>
-                            {Environment.variable("LANDING_DESC")}
+                            {'A simple memory training app for learning the Japanese '}
+                            <Inspectable
+                                title={"Hiragana (ひらがな)"}
+                                text={Environment.variable("HIRAGANA_DESC")}
+                                placement="bottom" color="white"
+                            >
+                                <span  data-testid="hiragana-inspectable">Hiragana</span>
+                            </Inspectable>
+                            {' and '}
+                            <Inspectable
+                                title={"Katakana (カタカナ)"}
+                                text={Environment.variable("KATAKANA_DESC")}
+                                placement="bottom"
+                                color="white"
+                            >
+                                <span data-testid="katakana-inspectable">Katakana</span>
+                            </Inspectable>
+                            {' syllabaries.'}
                         </h4>
                     </div>
 

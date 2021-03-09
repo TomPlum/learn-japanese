@@ -50,15 +50,21 @@ test('Should render popover when hovering child element', async () => {
     await waitForElementToBeRemoved(() => screen.getByTitle('example title'));
 });
 
-test('Should apply to the \'inspectable\' class to the child', () => {
+test('Should apply to the \'black\' class to the child by default', () => {
     const { child } = setup();
-    expect(child).toHaveClass('inspectable');
+    expect(child).toHaveClass('black');
 });
 
 test('Passing a className should apply it to the child', () => {
     const { child } = setup();
-    expect(child).toHaveClass('inspectable');
+    expect(child).toHaveClass('black');
     expect(child).toHaveClass('exampleClass');
+});
+
+test('Passing the colour property as \'white\' should apply the white class', () => {
+   props.color = 'white';
+    const { child } = setup();
+   expect(child).toHaveClass('white');
 });
 
 test('Overlay should default to left placement', () => {

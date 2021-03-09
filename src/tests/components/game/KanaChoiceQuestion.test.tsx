@@ -4,6 +4,7 @@ import { Kana } from "../../../types/Kana";
 import KanaType from "../../../types/KanaType";
 import { KanaColumn } from "../../../types/KanaColumn";
 import Arrays from "../../../utility/Arrays";
+import { getByTextWithElements } from "../../Queries";
 
 const onSubmitHandler = jest.fn();
 
@@ -123,11 +124,3 @@ test('Pressing the enter key when no options are selected should not call the on
     fireEvent.keyDown(container, { key: 'Enter', keyCode: 13 });
     expect(onSubmitHandler).not.toHaveBeenCalled();
 });
-
-//TODO: Move to global file
-const getByTextWithElements = (text: string): HTMLElement => {
-    // @ts-ignore
-    return screen.getByText((content, element) => {
-        return content !== '' && element && element.textContent === text;
-    });
-}
