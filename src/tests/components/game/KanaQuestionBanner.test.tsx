@@ -1,8 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import KanaQuestionBanner from "../../../components/game/KanaQuestionBanner";
 import { Kana } from "../../../types/Kana";
 import KanaType from "../../../types/KanaType";
 import { KanaColumn } from "../../../types/KanaColumn";
+import { getByTextWithElements } from "../../Queries";
 
 test('Regular kana should use the word \'kana\' in the banner message', () => {
     const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
@@ -21,11 +22,3 @@ test('Kana with multiple pronunciations should display both separated by \'or\''
     render(<KanaQuestionBanner value={kana} />);
     expect(getByTextWithElements('Which kana is \'fu\' or \'hu\' ?')).toBeInTheDocument();
 });
-
-//TODO: Fix TypeScript complaints about the parameter types and move to global file as helper function.
-const getByTextWithElements = (text: string): HTMLElement => {
-    // @ts-ignore
-    return screen.getByText((content, element) => {
-        return content !== '' && element && element.textContent === text;
-    });
-}

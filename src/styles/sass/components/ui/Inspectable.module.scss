@@ -1,5 +1,4 @@
-.inspectable {
-  color: #000;
+@mixin inspectable {
   text-decoration: underline;
   text-decoration-color: #585858;;
   text-decoration-style: dotted;
@@ -7,8 +6,16 @@
   cursor: pointer;
 }
 
-.inspectable:hover {
+.white:hover, .black:hover {
   color: #ffb428;
   text-decoration: none;
   transition: ease 0.5s;
+}
+
+.white {
+  @include inspectable;
+}
+
+.black {
+  @include inspectable;
 }
