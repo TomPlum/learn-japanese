@@ -59,7 +59,7 @@ test('Diacritical Kana Message Text', () => {
     props.kana = new Kana("ぞ", ["zo"], KanaType.HIRAGANA, KanaColumn.S, true);
     const { button } = setup();
     fireEvent.focus(button);
-    const text = screen.getByText('This kana is from the \'vowel\' column in the Hiragana syllabary. Also, notice the diacritical mark.');
+    const text = screen.getByText('This kana is from the \'s\' column in the Hiragana syllabary. Also, notice the diacritical mark.');
     expect(text).toBeInTheDocument()
 });
 
