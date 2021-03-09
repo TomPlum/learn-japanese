@@ -2,6 +2,7 @@ import { KanjiData } from "./DataTypes";
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 
 export const kyoiku: KanjiData[] = [
+    //Grade 1
     {
         name: "人",
         code: "\u4eba",
@@ -384,7 +385,7 @@ export const kyoiku: KanjiData[] = [
             { value: "十八", kana: ["じゅうはち"], english: ["eighteen"] },
             { value: "八月", kana: ["はちがつ"], english: ["August"] },
             { value: "八十", kana: ["はちじゅう", "やそ"], english: ["eighty"] },
-            { value: "三十八度線", kana: ["さんじゅうはちどせん"], english: ["eighth parallel", "AMONG US"] },
+            { value: "三十八度線", kana: ["さんじゅうはちどせん"], english: ["eighth parallel"] },
         ]
     },
     {
@@ -500,6 +501,23 @@ export const kyoiku: KanjiData[] = [
         ]
     },
     {
+        name: "名",
+        code: "\u540D",
+        on: [{ kana: "みょう", romanji: "myo" }],
+        kun: [{ kana: "な", romanji: "na" }],
+        source: "https://en.wiktionary.org/wiki/%E5%90%8D#Kanji",
+        meanings: ["name"],
+        grade: KyoikuGrade.ONE,
+        examples: [
+            { value: "名前", kana: ["なまえ"], english: ["name", "full name"] },
+            { value: "名誉", kana: ["めいよ"], english: ["honour", "prestige"] },
+            { value: "指名", kana: ["しめい"], english: ["nominate", "designate"] },
+            { value: "氏名", kana: ["しめい"], english: ["full name", "identity"] },
+        ]
+    },
+
+    //Grade 2
+    {
         name: "鳥",
         code: "\u9CE5",
         on: [{ kana: " ちょう", romanji: "cho" }],
@@ -515,8 +533,23 @@ export const kyoiku: KanjiData[] = [
             { value: "渡り鳥", kana: ["わたりどり"], english: ["migratory bird", "bird of passage",] },
         ]
     },
+    {
+        name: "前",
+        code: "\u524D",
+        on: [{ kana: "ぜん", romanji: "zen" }],
+        kun: [{ kana: "まえ ", romanji: "mae" }],
+        source: "https://en.wiktionary.org/wiki/%E5%89%8D#Kanji",
+        meanings: ["before"],
+        grade: KyoikuGrade.TWO,
+        examples: [
+            { value: "午前", kana: ["ごぜん"], english: ["morning", "A.M"] },
+            { value: "前年", kana: ["ぜんねん"], english: ["the previous year"] },
+            { value: "前回", kana: ["ぜんかい"], english: ["last time"] },
+            { value: "前提", kana: ["ぜんてい"], english: ["preamble", "premise", "reason"] },
+            { value: "前日", kana: ["ぜんじつ", "まえび"], english: ["previous day"] },
+        ]
+    },
 ];
-
 
 export const joyo: KanjiData[] = kyoiku.concat([
     {
@@ -525,7 +558,7 @@ export const joyo: KanjiData[] = kyoiku.concat([
         on: [{ kana: " みょう", romanji: "myo" }],
         kun: [{ kana: "ねこ", romanji: "neko" }],
         source: "https://en.wiktionary.org/wiki/%E7%8C%AB#Kanji",
-        meanings: ["cat", "buzzcat", "loaf"],
+        meanings: ["cat"],
         grade: KyoikuGrade.TWO,
         examples: [
             { value: "猫", kana: ["ねこ"], english: ["cat"] },

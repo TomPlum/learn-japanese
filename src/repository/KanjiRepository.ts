@@ -9,7 +9,7 @@ import { kyoiku, joyo } from "../data/Kanji";
 export interface KanjiSettings {
     grades: KyoikuGrade[];
     quantity?: number;
-    joyo: boolean;
+    joyo?: boolean;
 }
 
 export class KanjiRepository {
