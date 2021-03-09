@@ -1,3 +1,5 @@
+@import "../../colours";
+
 .wrapper {
   max-width: 375px;
 }
@@ -33,4 +35,35 @@
 
 .descWrapper {
   height: 100px;
+}
+
+.randomise {
+  margin-bottom: 15px;
+}
+
+.randomise:hover {
+  background: linear-gradient(270deg, $kyoiku-grade-1, $kyoiku-grade-2, $kyoiku-grade-3, $kyoiku-grade-4, $kyoiku-grade-5, $kyoiku-grade-6);
+  background-size: 1200% 1200%;
+  border-color: black;
+
+  $animation-time: 10s;
+  -webkit-animation: AnimatedGradient $animation-time ease-in infinite;
+  -moz-animation: AnimatedGradient $animation-time ease-in infinite;
+  animation: AnimatedGradient $animation-time ease-in infinite;
+}
+
+@-webkit-keyframes AnimatedGradient {
+  0%{background-position:0 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0 50%}
+}
+@-moz-keyframes AnimatedGradient {
+  0%{background-position:0 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0 50%}
+}
+@keyframes AnimatedGradient {
+  0%{background-position:0 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0 50%}
 }

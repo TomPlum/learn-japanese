@@ -20,11 +20,11 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
     constructor(props: Readonly<LearnKanjiProps> | LearnKanjiProps) {
         super(props);
 
-        const [firstKanji, remainingKanji ] = RandomNumberGenerator.getRandomObject(this.props.kanji);
+        const [first, remaining] = RandomNumberGenerator.getRandomObject(this.props.kanji);
 
         this.state = {
-            current: firstKanji,
-            remaining: remainingKanji,
+            current: first,
+            remaining: remaining,
             hasPeeked: false
         }
     }
@@ -69,18 +69,14 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
     }
 
     private restart = () => {
-        const [firstKanji, remainingKanji ] = RandomNumberGenerator.getRandomObject(this.props.kanji);
+        const [first, remaining] = RandomNumberGenerator.getRandomObject(this.props.kanji);
         this.setState({
-            current: firstKanji,
-            remaining: remainingKanji
+            current: first,
+            remaining: remaining
         });
     }
 
-    private onFlip = (flips: number) => {
-        if (flips > 0) {
-            this.setState({ hasPeeked: true });
-        }
-    }
+    private onFlip = (flips: number) => this.setState({ hasPeeked: flips > 0 });
 }
 
 export default LearnKanji;

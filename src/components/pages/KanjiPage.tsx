@@ -1,15 +1,14 @@
 import { Component } from "react";
 import LearnKanji from "../learn/LearnKanji";
 import { Kanji } from "../../types/kanji/Kanji";
-import { KanjiRepository } from "../../repository/KanjiRepository";
+import { KanjiRepository, KanjiSettings } from "../../repository/KanjiRepository";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import KanjiSettingsMenu from "../settings/KanjiSettingsMenu";
-import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 
 interface KanjiPageState {
     data: Kanji[];
     loading: boolean;
-    grades: KyoikuGrade[];
+    settings?: KanjiSettings;
 }
 
 class KanjiPage extends Component<any, KanjiPageState> {
@@ -18,28 +17,28 @@ class KanjiPage extends Component<any, KanjiPageState> {
         this.state = {
             data: [],
             loading: false,
-            grades: []
+            settings: undefined
         }
     }
 
     render() {
-        const { data, loading, grades } = this.state;
+        const { data, loading, settings } = this.state;
         return (
             <>
                 <LoadingSpinner active={loading} />
-                {data.length === 0 && <KanjiSettingsMenu onSelected={this.onSelectedGrades} />}
-                {grades.length > 0 && data.length > 0 && <LearnKanji kanji={data} />}
+                {data.length === 0 && <KanjiSettingsMenu onSelected={this.onSelectedKanji} />}
+                {settings && data.length > 0 && <LearnKanji kanji={data} />}
             </>
         );
     }
 
-    private onSelectedGrades = (grades: KyoikuGrade[]) => {
-        this.setState({ grades: grades }, this.loadKanji);
+    private onSelectedKanji = (settings: KanjiSettings) => {
+        this.setState({ settings }, this.loadKanji);
     }
 
     private loadKanji = () => {
         this.setState({ loading: true });
-        const kanji = new KanjiRepository().read({ grades: this.state.grades });
+        const kanji = new KanjiRepository().read(this.state.settings);
         this.setState({ loading: false, data: kanji });
     }
 }

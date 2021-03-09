@@ -2,7 +2,7 @@ export class KyoikuGrade {
     private readonly _value: number;
     private readonly _quantity: number;
 
-    constructor(value: number, quantity: number) {
+    private constructor(value: number, quantity: number) {
         this._value = value;
         this._quantity = quantity;
     }
