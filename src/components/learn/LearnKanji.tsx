@@ -1,9 +1,10 @@
 import { Component } from "react";
 import { Kanji } from "../../types/kanji/Kanji";
-import { Button, Container, ProgressBar, Row } from "react-bootstrap";
+import { Button, Container, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import FlashCard from "./FlashCard";
 import styles from "../../styles/sass/components/learn/LearnKanji.module.scss";
+import SessionProgressBar from "../ui/SessionProgressBar";
 
 interface LearnKanjiProps {
     kanji: Kanji[];
@@ -36,11 +37,11 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
         return (
             <Container className={styles.wrapper}>
                 <Row className={styles.header}>
-                    <ProgressBar
-                        now={((kanji.length - remaining.length) / kanji.length) * 100}
+                    <SessionProgressBar
+                        inProgress={hasKanjiRemaining}
+                        value={((kanji.length - remaining.length) / kanji.length) * 100}
+                        title={(kanji.length - remaining.length) + "/" + kanji.length}
                         className={styles.progress}
-                        animated={hasKanjiRemaining}
-                        variant={!hasKanjiRemaining ? "success" : undefined}
                     />
                 </Row>
 
