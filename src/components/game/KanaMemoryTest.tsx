@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Kana } from "../../types/Kana";
-import { Col, Container, ProgressBar, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaMemoryTest.module.scss";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import Timer from "./Timer";
@@ -15,6 +15,7 @@ import RomanjiQuestion from "./RomanjiQuestion";
 import { DisplayType } from "../../types/DisplayType";
 import KanaChoiceQuestion from "./KanaChoiceQuestion";
 import Arrays from "../../utility/Arrays";
+import SessionProgressBar from "../ui/SessionProgressBar";
 
 export interface KanaMemoryTestProps {
     kana: Kana[];
@@ -89,11 +90,9 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
             <Container className={styles.wrapper}>
                 <Row noGutters>
                     <Col xs={12}>
-                        <ProgressBar
-                            animated={!hasExhaustedKana}
-                            className={styles.progress}
-                            now={((correctAnswers.size + failedToAnswer) / kana.length) * 100}
-                            variant={hasExhaustedKana ? "success" : undefined}
+                        <SessionProgressBar
+                            inProgress={!hasExhaustedKana}
+                            value={((correctAnswers.size + failedToAnswer) / kana.length) * 100}
                             title={(kana.length - remainingKana.length)  + "/" + kana.length}
                         />
                     </Col>
