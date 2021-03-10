@@ -3,6 +3,8 @@
 @mixin card {
   border-radius: 20px;
   padding: 10px;
+  border-width: 6px;
+  border-style: solid;
   perspective: 1000px;
   background-color: #ffffff;
   min-height: 315px;

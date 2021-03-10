@@ -9,32 +9,32 @@
 
 .wrapper-grade-1 {
   @include wrapper;
-  border: $kyoiku-grade-1 5px solid;
+  border-color: $kyoiku-grade-1;
 }
 
 .wrapper-grade-2 {
   @include wrapper;
-  border: $kyoiku-grade-2 5px solid;
+  border-color: $kyoiku-grade-2;
 }
 
 .wrapper-grade-3 {
   @include wrapper;
-  border: $kyoiku-grade-3 5px solid;
+  border-color: $kyoiku-grade-3;
 }
 
 .wrapper-grade-4 {
   @include wrapper;
-  border: $kyoiku-grade-4 5px solid;
+  border-color: $kyoiku-grade-4;
 }
 
 .wrapper-grade-5 {
   @include wrapper;
-  border: $kyoiku-grade-5 5px solid;
+  border-color: $kyoiku-grade-5;
 }
 
 .wrapper-grade-6 {
   @include wrapper;
-  border: $kyoiku-grade-6 5px solid;
+  border-color: $kyoiku-grade-6;
 }
 
 .text {
