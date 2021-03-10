@@ -7,16 +7,11 @@ import { faPaintBrush, faPlay, faSearch } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Kana } from "../../types/Kana";
 import { KanaRepository } from "../../repository/KanaRepository";
-import Arrays from "../../utility/Arrays";
 import { Environment } from "../../utility/Environment";
+import ParallaxBackground from "./ParallaxBackground";
 
-interface LandingState {
-    height: number;
-    width: number;
-    backgroundKana: Kana[];
-}
 
-class Landing extends Component<{}, LandingState> {
+class Landing extends Component {
 
     private readonly kana: Kana[];
 
@@ -24,37 +19,12 @@ class Landing extends Component<{}, LandingState> {
         super(props);
 
         this.kana = new KanaRepository().read({ hiragana: true, katakana: true });
-
-        this.state = {
-            width: window.innerWidth,
-            height: window.innerHeight,
-            backgroundKana: []
-        }
-    }
-
-    componentDidMount() {
-        this.getBackgroundKana();
-        window.addEventListener('resize', this.updateWindowDimensions);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateWindowDimensions);
     }
 
     render() {
-        const { backgroundKana } = this.state;
-
         return (
             <Container fluid className={styles.wrapper} data-testid="landing-page">
-                <ul className={styles.background}>
-                    {backgroundKana.map(kana => {
-                        return (
-                            <li key={Math.random().toString()} data-testid="background-kana">
-                                {kana.code}
-                            </li>
-                        )
-                    })}
-                </ul>
+                <ParallaxBackground kana={this.kana} />
 
                 <div className={styles.content}>
                     <h1 className={styles.heading}>
@@ -109,48 +79,6 @@ class Landing extends Component<{}, LandingState> {
                 </div>
             </Container>
         );
-    }
-
-    private updateWindowDimensions = () => {
-        this.getBackgroundKana();
-        this.setState({ width: window.innerWidth, height: window.innerHeight });
-    }
-
-    private getBackgroundKana = () => {
-        let kana: Kana[] = [];
-
-        const html = document.querySelector('html');
-        const pool = [...this.kana];
-
-        if (pool.length > 0 && html) {
-            //Calculate the width & height of the viewport in em.
-            const fontSize = getComputedStyle(html).fontSize;
-            const width = window.innerWidth / parseFloat(fontSize);
-            const height = window.innerHeight / parseFloat(fontSize);
-
-            //Calculate how many kana fit on a single row, the number of rows and the total required.
-            const kanaPerRow = Math.ceil(width / 5);
-            const rows = Math.ceil(height / 5) + 1;
-            const totalKanaRequired = kanaPerRow * rows;
-
-            if (totalKanaRequired > pool.length) {
-                //There are 214 kana. If more is needed, find out how many more and push them.
-                const pools = Math.floor(totalKanaRequired / pool.length);
-                for (let i = 0; i < pools; i++) {
-                    kana.push(...pool);
-                }
-
-                //If the number of pools is fractional, push one more row in.
-                const remaining = totalKanaRequired % pool.length;
-                if (remaining !== 0) {
-                    kana.push(...pool.splice(0, kanaPerRow));
-                }
-            } else {
-                kana.push(...pool.splice(0, totalKanaRequired));
-            }
-        }
-
-        this.setState({ backgroundKana: Arrays.shuffle(kana) });
     }
 }
 
