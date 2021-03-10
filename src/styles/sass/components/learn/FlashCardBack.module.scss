@@ -1,5 +1,6 @@
 @import "flash-cards";
 @import "../../colours";
+@import "../../viewports";
 
 @mixin wrapper {
   @include card;
@@ -75,4 +76,22 @@
 
 .source, .source:active, .source:hover {
   text-decoration: none;
+}
+
+@include phone {
+  .display {
+    font-size: 6em;
+  }
+}
+
+@include tablet {
+  .display {
+    font-size: 8em;
+  }
+}
+
+@include desktop {
+  .display {
+    font-size: 8em;
+  }
 }

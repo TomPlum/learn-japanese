@@ -1,12 +1,8 @@
 @import "../../mixins";
 @import "../../colours";
 
-.wrapper {
-
-}
-
 .cardWrapper, .buttonWrapper, .header {
-  padding: 0;
+  padding: 0 10px;
   display: flex;
   justify-content: center;
   align-items: center;

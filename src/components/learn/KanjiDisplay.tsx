@@ -4,17 +4,19 @@ import { Kanji } from "../../types/kanji/Kanji";
 import styles from "../../styles/sass/components/learn/KanjiDisplay.module.scss";
 
 interface KanjiDisplayProps {
-    value: Kanji;
+    kanji: Kanji;
     size?: string;
+    className?: string;
 }
 
 //TODO: Can we not replace this with the Kana display and generify it?
 class KanjiDisplay extends Component<KanjiDisplayProps> {
     render() {
+        const { kanji, size, className } = this.props;
         return (
             <Container className={styles.wrapper}>
-                <p className={styles.value} style={{fontSize: this.props.size ?? "8em", lineHeight: "1em"}}>
-                    {this.props.value.getValue()}
+                <p className={[styles.value, className].join(" ")} style={{fontSize: size ? size : !className ? "8em": undefined, lineHeight: "1em"}}>
+                    {kanji.getValue()}
                 </p>
             </Container>
         );

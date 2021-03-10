@@ -28,12 +28,12 @@ class FlashCardBack extends Component<FlashCardBackProps> {
                 </Row>
 
                 <Row className={styles.body}>
-                    <Col sm={6} xs={12}>
+                    <Col sm={6} xs={4}>
                         <a href={kanji.source} target="_blank" className={styles.source}>
-                            <KanjiDisplay value={kanji} size={"8em"}/>
+                            <KanjiDisplay kanji={kanji} className={styles.display}/>
                         </a>
                     </Col>
-                    <Col sm={6} xs={12}>
+                    <Col sm={6} xs={8}>
                         <p className={styles.text}>
                             <Inspectable title="On-yomi Reading" text={Environment.variable("ONYOMI_DESC")}>
                                 <strong>On</strong>

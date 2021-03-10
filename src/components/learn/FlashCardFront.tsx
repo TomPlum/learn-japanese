@@ -16,7 +16,7 @@ class FlashCardFront extends Component<FlashCardFrontProps> {
         return (
             <Container className={styles["wrapper-grade-" + kanji.grade.value]} onClick={onClick} data-testid="front">
                 <Row>
-                    <KanjiDisplay value={kanji} size={"12em"}/>
+                    <KanjiDisplay kanji={kanji} size={"12em"}/>
                 </Row>
             </Container>
         );
