@@ -9,12 +9,9 @@ export default class Arrays {
         }
     }
 
-    /*static shuffle<T>(array: T[]) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }*/
+    public static copy<T>(array: T[]): T[] {
+        return [...array];
+    }
 
     public static shuffle<T>(array: T[]): T[] {
         const shuffled = [...array];
@@ -35,7 +32,7 @@ export default class Arrays {
 
     static getRandomElements<T>(array: T[], quantity: number): T[] {
         let elements = [];
-        let copy = [...array];
+        let copy = this.copy(array);
         for (let i = 0; i < quantity; i++) {
             const index = Numbers.randomInt(0, copy.length - 1);
             const element = copy[index];
