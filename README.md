@@ -1,4 +1,12 @@
-# Learn Japanese
+# :jp: Learn Japanese
+
+[![GitHub Issues](https://img.shields.io/github/issues/TomPlum/learn-japanese.svg)](https://github.com/TomPlum/learn-japanese/issues)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/TomPlum/learn-japanese?color=brightgreen)
+![GitHub](https://img.shields.io/github/license/TomPlum/learn-japanese?color=informational)
+![GitHub](https://img.shields.io/badge/statement-92%25-success)
+![GitHub](https://img.shields.io/badge/branch-90%25-success)
+![GitHub](https://img.shields.io/badge/function-93%25-success)
+![GitHub](https://img.shields.io/badge/line-93%25-success)
 
 ## About
 After starting the long and arduous journey of learning Japanese, I found lots of online learning materials to get me started. However, I couldn't quite find *exactly* what I wanted, an app for learning kana. So I made one. Partly inspired by Duolingo.
