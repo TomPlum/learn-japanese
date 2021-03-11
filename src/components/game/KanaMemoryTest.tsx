@@ -148,7 +148,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 const chain = new FilterChain<Kana>();
 
                 chain.addFilter(new DiagraphFilter(currentKana.isDiagraph()));
-                chain.addFilter(new KanaTypeFilter(currentKana.type));
+                chain.addFilter(new KanaTypeFilter(currentKana.type, true));
                 chain.addFilter(new ExclusionFilter(currentKana));
 
                 const wrong = Arrays.getRandomElements(chain.execute(kana), settings.display.cards - 1);

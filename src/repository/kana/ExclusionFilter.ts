@@ -1,7 +1,7 @@
-import KanaFilter from "./KanaFilter";
 import { Kana } from "../../types/Kana";
+import { Filter } from "../filter/Filter";
 
-export default class ExclusionFilter implements KanaFilter {
+export default class ExclusionFilter implements Filter<Kana> {
 
     private readonly kana: Kana;
 

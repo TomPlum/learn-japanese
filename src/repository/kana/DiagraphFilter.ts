@@ -1,7 +1,7 @@
-import KanaFilter from "./KanaFilter";
 import { Kana } from "../../types/Kana";
+import { Filter } from "../filter/Filter";
 
-export default class DiagraphFilter implements KanaFilter {
+export default class DiagraphFilter implements Filter<Kana> {
 
     private readonly include: boolean;
 

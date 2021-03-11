@@ -1,7 +1,7 @@
-import KanaFilter from "./KanaFilter";
 import { Kana } from "../../types/Kana";
+import { Filter } from "../filter/Filter";
 
-export default class QuantityFilter implements KanaFilter {
+export default class QuantityFilter implements Filter<Kana> {
 
     private readonly quantity: number;
 
