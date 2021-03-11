@@ -5,34 +5,26 @@ import KanaType from "../types/KanaType";
 import {KanaData} from "../data/DataTypes";
 import Arrays from "../utility/Arrays";
 import { KanaSettings } from "../types/GameSettings";
+import FilterChain from "./filter/FilterChain";
+import HiraganaFilter from "./filter/HiraganaFilter";
+import KatakanaFilter from "./filter/KatakanaFilter";
+import DiagraphFilter from "./filter/DiagraphFilter";
 
 export class KanaRepository {
 
     read(config?: KanaSettings): Kana[] {
+        const kana = this.readAllKana();
+        const chain = new FilterChain();
 
-        //TODO: Investigate filter pattern here. Check your design patterns book.
+        if (!config?.hiragana) chain.addFilter(new HiraganaFilter());
+        if (!config?.katakana) chain.addFilter(new KatakanaFilter());
+        if (!config?.diagraphs) chain.addFilter(new DiagraphFilter());
 
-        let kana: Kana[];
-
-        if (config?.hiragana && config.katakana) {
-            kana = this.readAllKana();
-        } else if (config?.hiragana) {
-            kana = this.readHiragana();
-        } else if (config?.katakana) {
-            kana = this.readKatakana();
-        } else {
-            throw new ReferenceError("Invalid Test Settings: No Kana Selected");
+        if (config?.quantity) {
+            return Arrays.shuffle(kana).splice(0, config.quantity);
         }
 
-        if (!config.diagraphs) {
-            kana = kana.filter(kana => !kana.isDiagraph());
-        }
-
-        if (config.quantity) {
-            kana = Arrays.shuffle(kana).splice(0, config.quantity);
-        }
-
-        return kana;
+        return chain.execute(kana);
     }
 
     private readAllKana(): Kana[] {
@@ -42,11 +34,11 @@ export class KanaRepository {
     }
 
     private readHiragana(): Kana[] {
-        return this.convert(hiragana, KanaType.HIRAGANA);
+        return this.convert(hiragana(), KanaType.HIRAGANA);
     }
 
     private readKatakana(): Kana[] {
-        return this.convert(katakana, KanaType.KATAKANA);
+        return this.convert(katakana(), KanaType.KATAKANA);
     }
 
     private convert(data: KanaData[], type: KanaType): Kana[] {
