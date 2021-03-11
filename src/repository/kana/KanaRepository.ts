@@ -4,19 +4,18 @@ import katakana from "../../data/Katakana";
 import KanaType from "../../types/KanaType";
 import { KanaData } from "../../data/DataTypes";
 import { KanaSettings } from "../../types/GameSettings";
-import HiraganaFilter from "./HiraganaFilter";
-import KatakanaFilter from "./KatakanaFilter";
 import DiagraphFilter from "./DiagraphFilter";
 import FilterChain from "../filter/FilterChain";
 import QuantityFilter from "./QuantityFilter";
+import KanaTypeFilter from "./KanaTypeFilter";
 
 export class KanaRepository {
 
     read(config?: KanaSettings): Kana[] {
         const chain = new FilterChain<Kana>();
 
-        if (!config?.hiragana) chain.addFilter(new HiraganaFilter());
-        if (!config?.katakana) chain.addFilter(new KatakanaFilter());
+        if (!config?.hiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));
+        if (!config?.katakana) chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA));
         if (!config?.diagraphs) chain.addFilter(new DiagraphFilter());
         if (config?.quantity) chain.addFilter(new QuantityFilter(config.quantity));
 
