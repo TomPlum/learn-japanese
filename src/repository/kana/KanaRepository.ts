@@ -1,20 +1,20 @@
-import {Kana} from "../types/Kana";
-import hiragana from "../data/Hiragana";
-import katakana from "../data/Katakana";
-import KanaType from "../types/KanaType";
-import {KanaData} from "../data/DataTypes";
-import Arrays from "../utility/Arrays";
-import { KanaSettings } from "../types/GameSettings";
-import FilterChain from "./filter/FilterChain";
-import HiraganaFilter from "./filter/HiraganaFilter";
-import KatakanaFilter from "./filter/KatakanaFilter";
-import DiagraphFilter from "./filter/DiagraphFilter";
+import {Kana} from "../../types/Kana";
+import hiragana from "../../data/Hiragana";
+import katakana from "../../data/Katakana";
+import KanaType from "../../types/KanaType";
+import {KanaData} from "../../data/DataTypes";
+import Arrays from "../../utility/Arrays";
+import { KanaSettings } from "../../types/GameSettings";
+import HiraganaFilter from "./HiraganaFilter";
+import KatakanaFilter from "./KatakanaFilter";
+import DiagraphFilter from "./DiagraphFilter";
+import FilterChain from "../filter/FilterChain";
 
 export class KanaRepository {
 
     read(config?: KanaSettings): Kana[] {
         const kana = this.readAllKana();
-        const chain = new FilterChain();
+        const chain = new FilterChain<Kana>();
 
         if (!config?.hiragana) chain.addFilter(new HiraganaFilter());
         if (!config?.katakana) chain.addFilter(new KatakanaFilter());

@@ -1,16 +1,17 @@
-import KanaFilter from "./KanaFilter";
-import { Kana } from "../../types/Kana";
+import { Filter } from "./Filter";
 
-export default class FilterChain {
-    private filters = new Set<KanaFilter>();
+export default class FilterChain<T> {
+    private filters = new Set<Filter<any>>();
 
-    public addFilter(filter: KanaFilter) {
+    constructor() { }
+
+    public addFilter(filter: Filter<any>) {
         this.filters.add(filter);
     }
 
-    public execute(kana: Kana[]): Kana[] {
-        let reduced = kana;
-        [...this.filters].forEach((filter: KanaFilter) => {
+    public execute(values: T[]): T[] {
+        let reduced = values;
+        [...this.filters].forEach((filter: Filter<any>) => {
             reduced = filter.apply(reduced);
         });
         return reduced;

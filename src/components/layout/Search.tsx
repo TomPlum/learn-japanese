@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { KanaRepository } from "../../repository/KanaRepository";
+import { KanaRepository } from "../../repository/kana/KanaRepository";
 import { Kana } from "../../types/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import styles from "../../styles/sass/components/layout/Search.module.scss";
