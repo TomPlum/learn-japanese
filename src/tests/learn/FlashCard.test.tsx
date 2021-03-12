@@ -5,13 +5,14 @@ import { Reading } from "../../types/kanji/Reading";
 import { ReadingType } from "../../types/kanji/ReadingType";
 import { Example } from "../../types/kanji/Example";
 import Arrays from "../../utility/Arrays";
+import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 
 const onFlipHandler = jest.fn();
 const kanji = new Kanji(
     '人',
     [new Reading("jin", "じん", ReadingType.ON), new Reading("hito", "ひと", ReadingType.KUN)],
     ["person"],
-    1,
+    KyoikuGrade.ONE,
     "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
     [new Example("外国人", ["がいこくじん"], ["foreigner"])]
 );
