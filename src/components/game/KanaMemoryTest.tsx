@@ -16,10 +16,10 @@ import { DisplayType } from "../../types/DisplayType";
 import KanaChoiceQuestion from "./KanaChoiceQuestion";
 import Arrays from "../../utility/Arrays";
 import SessionProgressBar from "../ui/SessionProgressBar";
-import FilterChain from "../../repository/filter/FilterChain";
-import DiagraphFilter from "../../repository/kana/DiagraphFilter";
-import ExclusionFilter from "../../repository/kana/ExclusionFilter";
-import KanaTypeFilter from "../../repository/kana/KanaTypeFilter";
+import FilterChain from "../../filters/FilterChain";
+import DiagraphFilter from "../../filters/kana/DiagraphFilter";
+import ExclusionFilter from "../../filters/kana/ExclusionFilter";
+import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
 
 export interface KanaMemoryTestProps {
     kana: Kana[];

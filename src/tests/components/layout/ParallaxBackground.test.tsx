@@ -9,7 +9,7 @@ const setup = () => {
 //TODO: Below tests don't seem to be updating state and re-rendering new kana when resizing.
 import { render } from "@testing-library/react";
 import ParallaxBackground from "../../../components/layout/ParallaxBackground";
-import { KanaRepository } from "../../../repository/kana/KanaRepository";
+import { KanaRepository } from "../../../repository/KanaRepository";
 
 test('Viewing in a small viewport should render less than 214 background kana', () => {
     window.resizeTo(375, 812); //iPhone X

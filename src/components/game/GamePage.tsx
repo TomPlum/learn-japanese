@@ -7,7 +7,7 @@ import GameResult from "../../types/GameResult";
 import ResultScreen from "../results/ResultScreen";
 import { Kana } from "../../types/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import { KanaRepository } from "../../repository/kana/KanaRepository";
+import { KanaRepository } from "../../repository/KanaRepository";
 
 interface GamePageState {
     loading: boolean;

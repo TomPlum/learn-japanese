@@ -1,13 +1,13 @@
-import { Kana } from "../../types/Kana";
-import hiragana from "../../data/Hiragana";
-import katakana from "../../data/Katakana";
-import KanaType from "../../types/KanaType";
-import { KanaData } from "../../data/DataTypes";
-import { KanaSettings } from "../../types/GameSettings";
-import DiagraphFilter from "./DiagraphFilter";
-import FilterChain from "../filter/FilterChain";
-import QuantityFilter from "./QuantityFilter";
-import KanaTypeFilter from "./KanaTypeFilter";
+import { Kana } from "../types/Kana";
+import hiragana from "../data/Hiragana";
+import katakana from "../data/Katakana";
+import KanaType from "../types/KanaType";
+import { KanaData } from "../data/DataTypes";
+import { KanaSettings } from "../types/GameSettings";
+import DiagraphFilter from "../filters/kana/DiagraphFilter";
+import FilterChain from "../filters/FilterChain";
+import QuantityFilter from "../filters/kana/QuantityFilter";
+import KanaTypeFilter from "../filters/kana/KanaTypeFilter";
 
 export class KanaRepository {
 

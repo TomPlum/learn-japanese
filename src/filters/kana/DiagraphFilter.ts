@@ -1,5 +1,5 @@
 import { Kana } from "../../types/Kana";
-import { Filter } from "../filter/Filter";
+import { Filter } from "../Filter";
 
 export default class DiagraphFilter implements Filter<Kana> {
 

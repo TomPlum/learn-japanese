@@ -6,7 +6,7 @@ import KanaCarousel from "../ui/KanaCarousel";
 import { faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Kana } from "../../types/Kana";
-import { KanaRepository } from "../../repository/kana/KanaRepository";
+import { KanaRepository } from "../../repository/KanaRepository";
 import { Environment } from "../../utility/Environment";
 import ParallaxBackground from "./ParallaxBackground";
 import HelpButton from "../ui/HelpButton";
