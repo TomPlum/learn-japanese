@@ -7,10 +7,11 @@ import styles from "../../styles/sass/components/layout/Search.module.scss";
 import KanaType from "../../types/KanaType";
 import KanaGrid from "./KanaGrid";
 import SearchField from "../ui/SearchField";
-
-interface SearchProps {
-    onClose: () => void;
-}
+import FilterChain from "../../filters/FilterChain";
+import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
+import DiagraphFilter from "../../filters/kana/DiagraphFilter";
+import DiacriticalFilter from "../../filters/kana/DiacriticalFilter";
+import RomajiFilter from "../../filters/kana/RomajiFilter";
 
 interface SearchState {
     loading: boolean;
@@ -22,7 +23,7 @@ interface SearchState {
     showDiacriticals: boolean;
 }
 
-class Search extends Component<SearchProps, SearchState> {
+class Search extends Component<{ }, SearchState> {
 
     private kana: Kana[] = [];
 
@@ -46,11 +47,10 @@ class Search extends Component<SearchProps, SearchState> {
         this.setState({ loading: false, kana });
     }
 
-    componentDidUpdate(prevProps: Readonly<SearchProps>, prevState: Readonly<SearchState>) {
+    componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<SearchState>) {
         const { search, kana } = this.state;
         if (prevState.kana.length === kana.length) {
-            const filtered = this.filter(search);
-            this.setState({ kana: filtered });
+            this.setState({ kana: this.filter(search) });
         }
     }
 
@@ -73,6 +73,7 @@ class Search extends Component<SearchProps, SearchState> {
                                 className={styles.hiraganaSwitch}
                                 checked={showHiragana}
                                 onChange={() => this.setState({ showHiragana: !showHiragana })}
+                                data-testid="hiragana-switch"
                             />
                             <Form.Label className={styles.label}>Hiragana</Form.Label>
                         </Col>
@@ -84,6 +85,7 @@ class Search extends Component<SearchProps, SearchState> {
                                 className={styles.katakanaSwitch}
                                 checked={showKatakana}
                                 onChange={() => this.setState({ showKatakana: !showKatakana })}
+                                data-testid="katakana-switch"
                             />
                             <Form.Label className={styles.label}>Katakana</Form.Label>
                         </Col>
@@ -95,6 +97,7 @@ class Search extends Component<SearchProps, SearchState> {
                                 className={styles.diagraphSwitch}
                                 checked={showDiagraphs}
                                 onChange={() => this.setState({ showDiagraphs: !showDiagraphs })}
+                                data-testid="diagraphs-switch"
                             />
                             <Form.Label className={styles.label}>Diagraphs</Form.Label>
                         </Col>
@@ -106,6 +109,7 @@ class Search extends Component<SearchProps, SearchState> {
                                 className={styles.diacriticalSwitch}
                                 checked={showDiacriticals}
                                 onChange={() => this.setState({ showDiacriticals: !showDiacriticals })}
+                                data-testid="diacriticals-switch"
                             />
                             <Form.Label className={styles.label}>Diacriticals</Form.Label>
                         </Col>
@@ -122,21 +126,16 @@ class Search extends Component<SearchProps, SearchState> {
     }
 
     private filter = (search: string): Kana[] => {
-        let searched = this.kana.filter(k => k.romanji.includes(search));
+        const chain = new FilterChain<Kana>();
         const { showHiragana, showKatakana, showDiagraphs, showDiacriticals } = this.state;
-        if (!showHiragana) {
-            searched = searched.filter(k => k.type !== KanaType.HIRAGANA);
-        }
-        if (!showKatakana) {
-            searched = searched.filter(k => k.type !== KanaType.KATAKANA);
-        }
-        if (!showDiagraphs) {
-            searched = searched.filter(k => !k.isDiagraph());
-        }
-        if (!showDiacriticals) {
-            searched = searched.filter(k => !k.isDiacritical);
-        }
-        return searched;
+
+        chain.addFilter(new RomajiFilter(search))
+        if (!showHiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));
+        if (!showKatakana) chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA));
+        if (!showDiagraphs) chain.addFilter(new DiagraphFilter());
+        if (!showDiacriticals) chain.addFilter(new DiacriticalFilter());
+
+        return chain.execute(this.kana);
     }
 }
 

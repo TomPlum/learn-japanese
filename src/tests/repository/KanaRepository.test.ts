@@ -1,4 +1,4 @@
-import {KanaRepository} from "../../repository/KanaRepository";
+import { KanaRepository } from "../../repository/KanaRepository";
 import {Kana} from "../../types/Kana";
 import KanaType from "../../types/KanaType";
 import {KanaColumn} from "../../types/KanaColumn";

@@ -11,7 +11,7 @@ import KanaTypeFilter from "../filters/kana/KanaTypeFilter";
 
 export class KanaRepository {
 
-    read(config?: KanaSettings): Kana[] {
+    public read(config?: KanaSettings): Kana[] {
         const chain = new FilterChain<Kana>();
 
         if (!config?.hiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));

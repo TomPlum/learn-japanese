@@ -79,7 +79,8 @@ test('Should render the search button', () => {
 });
 
 test('Should render the kana carousel', () => {
-    shuffle.mockReturnValueOnce([new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]);
+    shuffle.mockReturnValueOnce([new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]); //Parallax BG
+    shuffle.mockReturnValueOnce([ new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]); //Carousel
     setup();
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
