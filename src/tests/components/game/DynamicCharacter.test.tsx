@@ -127,5 +127,3 @@ test('Omitting the classes property should not set any classes to the character'
     const { container } = render(<DynamicCharacter value={'a'} />);
     expect(container?.firstChild).not.toHaveClass();
 });
-
-//TODO: Write tests for the diagraph margins. Will need to select both child nodes and check left/right margins
