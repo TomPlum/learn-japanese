@@ -1,6 +1,8 @@
 import { Kana } from "../../types/Kana";
 import KanaType from "../../types/KanaType";
 import { KanaColumn } from "../../types/KanaColumn";
+import each from "jest-each";
+import { KanaRepository } from "../../repository/KanaRepository";
 
 describe("Kana", () => {
    describe("Is Diagraph", () => {
@@ -71,4 +73,46 @@ describe("Kana", () => {
           expect(romanji[0]).toEqual("a");
       });
    });
+
+   describe("Equality", () => {
+       const kana = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+
+       it("Should return true for a Kana with identical fields", () => {
+           const other = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+           expect(kana.equals(other)).toBe(true);
+       });
+
+       each([null, undefined]).it("Should return false for falsy values", (other: Kana) => {
+           expect(kana.equals(other)).toBe(false);
+       });
+
+       it("Should return false for a different type", () => {
+           expect(kana.equals(new KanaRepository())).toBe(false);
+       });
+
+       it("Should return false for a Kana with a different code", () => {
+           const other = new Kana("あ", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+           expect(kana.equals(other)).toBe(false);
+       });
+
+       it("Should return false for a Kana with a different romaji array", () => {
+           const other = new Kana("え", ["bya"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+           expect(kana.equals(other)).toBe(false);
+       });
+
+       it("Should return false for a Kana with a different KanaType", () => {
+           const other = new Kana("え", ["e"], KanaType.KATAKANA, KanaColumn.VOWEL, false);
+           expect(kana.equals(other)).toBe(false);
+       });
+
+       it("Should return false for a Kana with a different KanaColumn", () => {
+           const other = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.S, false);
+           expect(kana.equals(other)).toBe(false);
+       });
+
+       it("Should return false for a Kana with a different diacritical value", () => {
+           const other = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, true);
+           expect(kana.equals(other)).toBe(false);
+       });
+   })
 });
