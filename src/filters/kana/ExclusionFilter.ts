@@ -10,6 +10,6 @@ export default class ExclusionFilter implements Filter<Kana> {
     }
 
     apply(kana: Kana[]): Kana[] {
-        return kana.filter(kana => kana.romanji !== this.kana.romanji);
+        return kana.filter(kana => !kana.equals(this.kana));
     }
 }
