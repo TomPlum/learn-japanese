@@ -1,6 +1,6 @@
 import Arrays from "../../../utility/Arrays";
 import { fireEvent, render, screen } from "@testing-library/react";
-import Landing from "../../../components/layout/Landing";
+import LandingPage from "../../../components/pages/LandingPage";
 import { Kana } from "../../../types/Kana";
 import KanaType from "../../../types/KanaType";
 import { KanaColumn } from "../../../types/KanaColumn";
@@ -13,7 +13,7 @@ const environment = jest.fn();
 const shuffle = jest.fn();
 
 const setup = () => {
-    const component = render(<Landing/>);
+    const component = render(<LandingPage/>);
     return {
         play: screen.getByText('Play'),
         search: screen.getByText('Search'),

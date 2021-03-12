@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Button, Container } from "react-bootstrap";
-import styles from "../../styles/sass/components/layout/Landing.module.scss";
+import styles from "../../styles/sass/components/pages/LandingPage.module.scss";
 import Inspectable from "../ui/Inspectable";
 import KanaCarousel from "../ui/KanaCarousel";
 import { faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -8,11 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Kana } from "../../types/Kana";
 import { KanaRepository } from "../../repository/KanaRepository";
 import { Environment } from "../../utility/Environment";
-import ParallaxBackground from "./ParallaxBackground";
+import ParallaxBackground from "../layout/ParallaxBackground";
 import HelpButton from "../ui/HelpButton";
 
 
-class Landing extends Component {
+class LandingPage extends Component {
 
     private readonly kana: Kana[];
 
@@ -83,4 +83,4 @@ class Landing extends Component {
     }
 }
 
-export default Landing;
+export default LandingPage;

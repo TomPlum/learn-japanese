@@ -3,9 +3,9 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import { KanaRepository } from "../../repository/KanaRepository";
 import { Kana } from "../../types/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import styles from "../../styles/sass/components/layout/Search.module.scss";
+import styles from "../../styles/sass/components/pages/SearchPage.module.scss";
 import KanaType from "../../types/KanaType";
-import KanaGrid from "./KanaGrid";
+import KanaGrid from "../layout/KanaGrid";
 import SearchField from "../ui/SearchField";
 import FilterChain from "../../filters/FilterChain";
 import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
@@ -13,7 +13,7 @@ import DiagraphFilter from "../../filters/kana/DiagraphFilter";
 import DiacriticalFilter from "../../filters/kana/DiacriticalFilter";
 import RomajiFilter from "../../filters/kana/RomajiFilter";
 
-interface SearchState {
+interface SearchPageState {
     loading: boolean;
     kana: Kana[];
     search: string;
@@ -23,7 +23,7 @@ interface SearchState {
     showDiacriticals: boolean;
 }
 
-class Search extends Component<{ }, SearchState> {
+class SearchPage extends Component<{ }, SearchPageState> {
 
     private kana: Kana[] = [];
 
@@ -47,7 +47,7 @@ class Search extends Component<{ }, SearchState> {
         this.setState({ loading: false, kana });
     }
 
-    componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<SearchState>) {
+    componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<SearchPageState>) {
         const { search, kana } = this.state;
         if (prevState.kana.length === kana.length) {
             this.setState({ kana: this.filter(search) });
@@ -139,4 +139,4 @@ class Search extends Component<{ }, SearchState> {
     }
 }
 
-export default Search;
+export default SearchPage;

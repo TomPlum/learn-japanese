@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Search from "../../components/layout/Search";
+import SearchPage from "../../../components/pages/SearchPage";
 
 const setup = () => {
-    const component = render(<Search />);
+    const component = render(<SearchPage />);
     return {
         search: component.getByPlaceholderText('Enter the romaji'),
         hiragana: component.getByTestId('hiragana-switch'),
