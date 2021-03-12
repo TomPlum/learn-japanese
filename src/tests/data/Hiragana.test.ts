@@ -292,6 +292,6 @@ describe("Hiragana", () => {
     }
 
     function getHiragana(romanji: string[]): KanaData {
-        return hiragana.filter(entry => JSON.stringify(entry.romanji) === JSON.stringify(romanji))[0];
+        return hiragana().filter(entry => JSON.stringify(entry.romanji) === JSON.stringify(romanji))[0];
     }
 });

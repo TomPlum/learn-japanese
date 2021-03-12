@@ -1,6 +1,6 @@
 import { Component } from "react";
 import GameModeMenu from "../layout/GameModeMenu";
-import KanaMemoryTest from "./KanaMemoryTest";
+import KanaMemoryTest from "../game/KanaMemoryTest";
 import { GameMode } from "../../types/GameMode";
 import { GameSettings } from "../../types/GameSettings";
 import GameResult from "../../types/GameResult";

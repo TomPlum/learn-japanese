@@ -16,6 +16,10 @@ import { DisplayType } from "../../types/DisplayType";
 import KanaChoiceQuestion from "./KanaChoiceQuestion";
 import Arrays from "../../utility/Arrays";
 import SessionProgressBar from "../ui/SessionProgressBar";
+import FilterChain from "../../filters/FilterChain";
+import DiagraphFilter from "../../filters/kana/DiagraphFilter";
+import ExclusionFilter from "../../filters/kana/ExclusionFilter";
+import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
 
 export interface KanaMemoryTestProps {
     kana: Kana[];
@@ -141,9 +145,14 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                 );
             }
             case DisplayType.MULTIPLE_CARDS: {
-                const pool = kana.filter(k => k.isDiagraph() === currentKana.isDiagraph());
-                const options = Arrays.remove(pool, currentKana);
-                const wrong = Arrays.getRandomElements(options, settings.display.cards - 1);
+                const chain = new FilterChain<Kana>();
+
+                chain.addFilter(new DiagraphFilter(currentKana.isDiagraph()));
+                chain.addFilter(new KanaTypeFilter(currentKana.type, true));
+                chain.addFilter(new ExclusionFilter(currentKana));
+
+                const wrong = Arrays.getRandomElements(chain.execute(kana), settings.display.cards - 1);
+
                 return (
                     <KanaChoiceQuestion
                         key={currentKana.code}

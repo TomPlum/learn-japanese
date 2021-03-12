@@ -1,38 +1,25 @@
-import {Kana} from "../types/Kana";
+import { Kana } from "../types/Kana";
 import hiragana from "../data/Hiragana";
 import katakana from "../data/Katakana";
 import KanaType from "../types/KanaType";
-import {KanaData} from "../data/DataTypes";
-import Arrays from "../utility/Arrays";
+import { KanaData } from "../data/DataTypes";
 import { KanaSettings } from "../types/GameSettings";
+import DiagraphFilter from "../filters/kana/DiagraphFilter";
+import FilterChain from "../filters/FilterChain";
+import QuantityFilter from "../filters/kana/QuantityFilter";
+import KanaTypeFilter from "../filters/kana/KanaTypeFilter";
 
 export class KanaRepository {
 
-    read(config?: KanaSettings): Kana[] {
+    public read(config?: KanaSettings): Kana[] {
+        const chain = new FilterChain<Kana>();
 
-        //TODO: Investigate filter pattern here. Check your design patterns book.
+        if (!config?.hiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));
+        if (!config?.katakana) chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA));
+        if (!config?.diagraphs) chain.addFilter(new DiagraphFilter());
+        if (config?.quantity) chain.addFilter(new QuantityFilter(config.quantity));
 
-        let kana: Kana[];
-
-        if (config?.hiragana && config.katakana) {
-            kana = this.readAllKana();
-        } else if (config?.hiragana) {
-            kana = this.readHiragana();
-        } else if (config?.katakana) {
-            kana = this.readKatakana();
-        } else {
-            throw new ReferenceError("Invalid Test Settings: No Kana Selected");
-        }
-
-        if (!config.diagraphs) {
-            kana = kana.filter(kana => !kana.isDiagraph());
-        }
-
-        if (config.quantity) {
-            kana = Arrays.shuffle(kana).splice(0, config.quantity);
-        }
-
-        return kana;
+        return chain.execute(this.readAllKana());
     }
 
     private readAllKana(): Kana[] {
@@ -42,11 +29,11 @@ export class KanaRepository {
     }
 
     private readHiragana(): Kana[] {
-        return this.convert(hiragana, KanaType.HIRAGANA);
+        return this.convert(hiragana(), KanaType.HIRAGANA);
     }
 
     private readKatakana(): Kana[] {
-        return this.convert(katakana, KanaType.KATAKANA);
+        return this.convert(katakana(), KanaType.KATAKANA);
     }
 
     private convert(data: KanaData[], type: KanaType): Kana[] {

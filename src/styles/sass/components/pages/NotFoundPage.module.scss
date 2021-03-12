@@ -1,0 +1,48 @@
+@import "../../viewports";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  min-width: 100%;
+}
+
+.content {
+  text-align: center;
+}
+
+.home {
+  width: 7em;
+  font-size: 1.2em;
+  padding: 1em 0;
+  margin: 10px auto;
+  border-width: 4px;
+  border-radius: 50px;
+}
+
+.heading {
+  font-size: 4em;
+  color: #FFF;
+}
+
+@include phone {
+  .description {
+    font-size: 1.5em;
+    color: #d4d4d4;
+  }
+}
+
+@include tablet {
+  .description {
+    font-size: 2em;
+    color: #d4d4d4;
+  }
+}
+
+@include desktop {
+  .description {
+    font-size: 2em;
+    color: #d4d4d4;
+  }
+}

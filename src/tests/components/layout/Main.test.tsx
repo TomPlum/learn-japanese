@@ -32,3 +32,8 @@ test('Navigating to the /search should route to the Search page', () => {
     setup('/search');
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
+
+test('Navigating to an unknown URI should route to the Not Found page', () => {
+    setup('/nope');
+    expect(screen.getByText('Nani!?')).toBeInTheDocument();
+});

@@ -1,5 +1,6 @@
 import KanaType from "./KanaType";
 import {KanaColumn} from "./KanaColumn";
+import Arrays from "../utility/Arrays";
 
 export class Kana {
     private readonly _code: string;
@@ -46,5 +47,15 @@ export class Kana {
 
     get isDiacritical(): boolean {
         return this._isDiacritical;
+    }
+
+    public equals(other: any): boolean {
+        if (!other) return false;
+        if (!(other instanceof Kana)) return false;
+        if (!Arrays.areEqual(this.romanji, other.romanji)) return false;
+        if (other.type !== this.type) return false;
+        if (other.column !== this.column) return false;
+        if (other.isDiacritical !== this.isDiacritical) return false;
+        return other.code === this.code;
     }
 }

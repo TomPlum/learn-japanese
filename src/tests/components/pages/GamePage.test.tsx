@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import GamePage from "../../../components/game/GamePage";
+import GamePage from "../../../components/pages/GamePage";
 
 test('Selecting a game mode should hide the menu and render the game', () => {
    render(<GamePage />);

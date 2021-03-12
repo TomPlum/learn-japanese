@@ -292,6 +292,6 @@ describe("Katakana", () => {
     }
 
     function getKatakana(romanji: string[]): KanaData {
-        return katakana.filter(entry => JSON.stringify(entry.romanji) === JSON.stringify(romanji))[0];
+        return katakana().filter(entry => JSON.stringify(entry.romanji) === JSON.stringify(romanji))[0];
     }
 });

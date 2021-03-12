@@ -1,5 +1,5 @@
-@import "../../mixins";
-@import "../../viewports";
+@import "src/styles/sass/mixins";
+@import "src/styles/sass/viewports";
 
 @mixin heading {
   margin: 10px 0;
@@ -46,7 +46,7 @@
 @include phone {
   .heading {
     @include heading;
-    font-size: 1.6em;
+    font-size: 1.7em;
     font-weight: 500;
   }
 
@@ -81,9 +81,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
   min-height: 100%;
   height: 100vh;
   @include noSelect;
+}
+
+.header {
+  display: flex;
+  height: 150px;
+  max-width: 1000px;
+  justify-content: flex-end;
+  align-items: center;
+  margin: auto;
+  padding: 0 15px;
 }
 
 .content {

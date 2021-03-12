@@ -11,12 +11,12 @@ export interface KanaGridProps {
 class KanaGrid extends Component<KanaGridProps> {
     render() {
         const { kana } = this.props;
-        const Grid = makeResponsive(CSSGrid, { maxWidth: 1920 });
+        const Grid = makeResponsive(CSSGrid, { maxWidth: 1920, defaultColumns: 4});
         return (
             <div className={styles.grid}>
                 {kana.length > 0 ? <Grid
                     gutterWidth={10}
-                    gutterHeight={10}
+                    gutterHeight={0}
                     layout={layout.simple}
                     columnWidth={90}
                     easing={easings.cubicOut}
