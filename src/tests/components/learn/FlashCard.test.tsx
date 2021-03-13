@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import FlashCard from "../../components/learn/FlashCard";
-import { Kanji } from "../../types/kanji/Kanji";
-import { Reading } from "../../types/kanji/Reading";
-import { ReadingType } from "../../types/kanji/ReadingType";
-import { Example } from "../../types/kanji/Example";
-import Arrays from "../../utility/Arrays";
-import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
+import FlashCard from "../../../components/learn/FlashCard";
+import { Kanji } from "../../../types/kanji/Kanji";
+import { Reading } from "../../../types/kanji/Reading";
+import { ReadingType } from "../../../types/kanji/ReadingType";
+import { Example } from "../../../types/kanji/Example";
+import Arrays from "../../../utility/Arrays";
+import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 
 const onFlipHandler = jest.fn();
 const kanji = new Kanji(

@@ -9,6 +9,7 @@ import { Environment } from "../../utility/Environment";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Arrays from "../../utility/Arrays";
+import { Example } from "../../types/kanji/Example";
 
 interface FlashCardBackProps {
     kanji: Kanji;
@@ -54,7 +55,7 @@ class FlashCardBack extends Component<FlashCardBackProps> {
 
                 <Row className={styles.footer}>
                     <Col xs={12}>
-                        {Arrays.getRandomElements(kanji.examples, 3).map(example => {
+                        {this.getExamples().map(example => {
                             return <p className={styles.example} key={example.kanji}>
                                 {example.kanji} - {example.kana[0]} - {example.english.join(", ")}
                             </p>
@@ -69,6 +70,14 @@ class FlashCardBack extends Component<FlashCardBackProps> {
         return this.props.kanji.readings
             .filter(it => it.type === type)
             .map(it => it.romanji + " (" + it.kana + ")")[0];
+    }
+
+    private getExamples = (): Example[] => {
+        const { kanji } = this.props;
+        if (kanji.examples.length > 3) {
+            return Arrays.getRandomElements(kanji.examples, 3);
+        }
+        return kanji.examples;
     }
 }
 

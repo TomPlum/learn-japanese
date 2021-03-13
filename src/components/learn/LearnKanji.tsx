@@ -71,10 +71,7 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
 
     private restart = () => {
         const [first, remaining] = RandomNumberGenerator.getRandomObject(this.props.kanji);
-        this.setState({
-            current: first,
-            remaining: remaining
-        });
+        this.setState({ current: first, remaining: remaining });
     }
 
     private onFlip = (flips: number) => this.setState({ hasPeeked: flips > 0 });

@@ -16,7 +16,6 @@ class Main extends Component {
                     <Route path="/" component={LandingPage} exact />
                     <Route path="/play" component={GamePage}/>
                     <Route path="/search" component={SearchPage}/>
-
                     <Route path="/kanji" component={KanjiPage}/>
                     <Route component={NotFoundPage} />
                 </Switch>
