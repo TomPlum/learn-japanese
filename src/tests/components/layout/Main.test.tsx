@@ -23,6 +23,12 @@ test('Navigating to the /search should route to the Search page', () => {
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
+test('Navigating to the /help should route to the Help page', () => {
+    window.history.pushState({}, 'Help', '/help');
+    render(<Main/>);
+    expect(screen.getByText('Frequently Asked Questions')).toBeInTheDocument();
+});
+
 test('Navigating to an unknown URI should route to the Not Found page', () => {
     window.history.pushState({}, 'Not Found', '/nope');
     render(<Main/>);

@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.content {
+  max-width: 1000px;
+}
+
+.heading {
+  color: #FFF;
+  margin: 25px;
+  text-align: center;
+}
+
+.question {
+  color: #FFF;
+}
+
+.answer {
+  color: #d2d2d2;
+}

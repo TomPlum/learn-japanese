@@ -5,6 +5,7 @@ import GamePage from "../pages/GamePage";
 import SearchPage from "../pages/SearchPage";
 import LandingPage from "../pages/LandingPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import HelpPage from "../pages/HelpPage";
 
 class Main extends Component {
     render() {
@@ -15,6 +16,7 @@ class Main extends Component {
                         <Route exact path="/" component={LandingPage} />
                         <Route exact path="/play" component={GamePage}/>
                         <Route exact path="/search" component={SearchPage}/>
+                        <Route exact path="/help" component={HelpPage} />
                         <Route component={NotFoundPage} />
                     </Switch>
                 </Router>
