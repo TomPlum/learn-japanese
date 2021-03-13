@@ -532,6 +532,51 @@ export function kyoiku(): KanjiData[] {
                 { value: "氏名", kana: ["しめい"], english: ["full name", "identity"] },
             ]
         },
+        {
+            name: "千",
+            code: "\u5343",
+            on: [{ kana: "せん", romanji: "sen" }],
+            kun: [{ kana: "ち", romanji: "chi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8D%83#Kanji",
+            meanings: ["thousand"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "三千", kana: ["さんぜん"], english: ["three thousand"] },
+                { value: "四千", kana: ["よんせん"], english: ["four thousand"] },
+                { value: "千代", kana: ["せんだい"], english: ["thousand years", "very long", "forever"] },
+                { value: "千里", kana: ["せんり"], english: ["1000 ri", "a very long distance"] },
+            ]
+        },
+        {
+            name: "男",
+            code: "\u7537",
+            on: [{ kana: "なん", romanji: "nan" }],
+            kun: [{ kana: "おとこ", romanji: "otoko" }],
+            source: "https://en.wiktionary.org/wiki/%E7%94%B7#Kanji",
+            meanings: ["male"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "男子", kana: ["だんし"], english: ["youth", "young man"] },
+                { value: "男性", kana: ["だんせい"], english: ["male", "masculine gender"] },
+                { value: "長男", kana: ["ちょうなん"], english: ["eldest son"] },
+                { value: "男女", kana: ["だんじょ"], english: ["man and woman", "men and women"] },
+            ]
+        },
+        {
+            name: "土",
+            code: "\u571F",
+            on: [{ kana: "と", romanji: "to" }],
+            kun: [{ kana: "つち", romanji: "tsuchi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%9C%9F#Kanji",
+            meanings: ["soil", "earth"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "土地", kana: ["とち"], english: ["plot of land"] },
+                { value: "領土", kana: ["りょうど"], english: ["dominion", "territory", "position"] },
+                { value: "土曜", kana: ["どよう"], english: ["Saturday"] },
+                { value: "国土", kana: ["こくど"], english: ["country", "territory", "domain", "realm"] },
+            ]
+        },
 
         //Grade 2
         {
