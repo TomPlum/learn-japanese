@@ -34,18 +34,18 @@ class ParallaxBackground extends Component<ParallaxBackgroundProps, ParallaxBack
     componentDidMount() {
         this.getBackgroundKana();
         window.addEventListener('resize', this.updateWindowDimensions);
-        window.addEventListener('mousemove', this.updateMousePosition);
+        //window.addEventListener('mousemove', this.updateMousePosition);
     }
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateWindowDimensions);
-        window.removeEventListener('mousemove', this.updateMousePosition);
+        //window.removeEventListener('mousemove', this.updateMousePosition);
     }
 
     render() {
         const { kana, position } = this.state;
         return (
-            <ul className={styles.background} style={{ transform: 'translate(' }}>
+            <ul className={styles.background}>
                 {kana.map(kana => {
                     return (
                         <li key={Math.random().toString()} data-testid="background-kana">
