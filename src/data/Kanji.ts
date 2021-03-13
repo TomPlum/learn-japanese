@@ -532,6 +532,86 @@ export function kyoiku(): KanjiData[] {
                 { value: "氏名", kana: ["しめい"], english: ["full name", "identity"] },
             ]
         },
+        {
+            name: "女",
+            code: "\u5973",
+            on: [{ kana: "にょ", romanji: "nyo" }],
+            kun: [{ kana: "おんな", romanji: "onna" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A5%B3#Kanji",
+            meanings: ["women", "female"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "女", kana: ["おんな"], english: ["women"] },
+                { value: "女子", kana: ["じょし", "おなご"], english: ["girl"] },
+                { value: "女性", kana: ["じょせい"], english: ["women", "female", "feminine gender"] },
+                { value: "男女", kana: ["だんじょ"], english: ["man and women"] },
+                { value: "彼女", kana: ["かのじょ"], english: ["she", "girlfriend", "sweetheart",] },
+            ]
+        },
+        {
+            name: "先",
+            code: "\u5148",
+            on: [{ kana: "せん", romanji: "sen" }],
+            kun: [{ kana: "さき", romanji: "saki" }],
+            source: "https://en.wiktionary.org/wiki/%E5%85%88#Kanji",
+            meanings: ["before", "ahead", "previous", "future"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "先に", kana: ["さきに"], english: ["before", "earlier than", "ahead", "beyond"] },
+                { value: "先月", kana: ["せんげつ"], english: ["last month"] },
+                { value: "先進国", kana: ["せんしんこく"], english: ["advance"] },
+                { value: "先生", kana: ["せんせい"], english: ["teacher", "master", "doctor"] },
+                { value: "先発", kana: ["せんぱつ"], english: ["forerunner", "advance party", "going on ahead",] },
+            ]
+        },
+        {
+            name: "川",
+            code: "\u5DDD",
+            on: [{ kana: "せん", romanji: "sen" }],
+            kun: [{ kana: "かわ", romanji: "kawa" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B7%9D#Kanji",
+            meanings: ["stream", "river"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "川", kana: ["かわ", "がわ"], english: ["river", "stream"] },
+                { value: "小川", kana: ["おがわ"], english: ["streamlet", "brook"] },
+                { value: "河川", kana: ["かせん"], english: ["rivers"] },
+                { value: "谷川", kana: ["たにがわ"], english: ["mountain stream"] },
+                { value: "江戸川", kana: ["えどがわ"], english: ["Edo River",] },
+            ]
+        },
+        {
+            name: "水",
+            code: "\u6C34",
+            on: [{ kana: "すい", romanji: "sui" }],
+            kun: [{ kana: "みず", romanji: "mizu" }],
+            source: "https://en.wiktionary.org/wiki/%E6%B0%B4#Kanji",
+            meanings: ["water"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "水", kana: ["みず"], english: ["water (cold, fresh)"] },
+                { value: "水準", kana: ["すいじゅん"], english: ["water level"] },
+                { value: "水道", kana: ["すいどう"], english: ["water service", "water supply"] },
+                { value: "水面", kana: ["すいめん", "みなも", "みのも"], english: ["water's surface"] },
+                { value: "水泳", kana: ["すいえい"], english: ["swimming",] },
+            ]
+        },
+        {
+            name: "校",
+            code: "\u6821",
+            on: [{ kana: "きょう", romanji: "kyo" }],
+            kun: [{ kana: "かせ", romanji: "kase" }],
+            source: "https://en.wiktionary.org/wiki/%E6%A0%A1#Kanji",
+            meanings: ["school", "exam", "printing"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "学校", kana: ["がっこう"], english: ["school"] },
+                { value: "高校", kana: ["こうこう"], english: ["senior high school"] },
+                { value: "校長", kana: ["こうちょう"], english: ["principal", "headmaster"] },
+                { value: "高校生", kana: ["こうこうせい"], english: ["senior high school student"] },
+                { value: "小学校", kana: ["しょうがっこう"], english: ["primary school", "elementary school"] },
+            ]
+        },
 
         //Grade 2
         {
