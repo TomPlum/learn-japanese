@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Kana } from "../../types/Kana";
-import { CSSGrid, easings, layout, makeResponsive } from "react-stonecutter";
 import styles from "../../styles/sass/components/layout/KanaGrid.module.scss";
 import KanaTile from "./KanaTile";
+import StackGrid, { transitions } from "react-stack-grid";
 
 export interface KanaGridProps {
     kana: Kana[];
@@ -11,25 +11,30 @@ export interface KanaGridProps {
 class KanaGrid extends Component<KanaGridProps> {
     render() {
         const { kana } = this.props;
-        const Grid = makeResponsive(CSSGrid, { maxWidth: 1920, defaultColumns: 4});
         return (
-            <div className={styles.grid}>
-                {kana.length > 0 ? <Grid
-                    gutterWidth={10}
-                    gutterHeight={0}
-                    layout={layout.simple}
+            <>
+                {kana.length > 0 ? <StackGrid
                     columnWidth={90}
-                    easing={easings.cubicOut}
+                    gutterWidth={10}
+                    gutterHeight={10}
+                    monitorImagesLoaded={false}
                     duration={100}
-                    columns={4}
+                    appear={transitions.scaleDown.appear}
+                    appeared={transitions.scaleDown.appeared}
+                    enter={transitions.scaleDown.enter}
+                    entered={transitions.scaleDown.entered}
+                    leaved={transitions.scaleDown.leaved}
+                    appearDelay={0}
+                    easing="ease-in"
+                    className={styles.grid}
                 >
                     {kana.map(k => (
                         <div key={k.code}>
                             <KanaTile kana={k}/>
                         </div>
                     ))}
-                </Grid> : <p>No results.</p>}
-            </div>
+                </StackGrid> : <p>No results.</p>}
+            </>
         );
     }
 }
