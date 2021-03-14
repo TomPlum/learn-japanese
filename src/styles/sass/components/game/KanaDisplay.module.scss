@@ -22,7 +22,7 @@ $diagraph-margin: -10px;
 }
 
 @mixin blur {
-  color: transparent;
+  color: transparent !important;
   text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
 }
