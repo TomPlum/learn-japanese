@@ -2,7 +2,7 @@
   "name": "learn-japanese",
   "version": "0.1.0-alpha",
   "private": false,
-  "hompage": "https://tomplum.github.io/learn-japanese/",
+  "homepage": "https://tomplum.github.io/learn-japanese/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
