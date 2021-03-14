@@ -55,11 +55,11 @@ test('Passing the index property when the display is not blurred should render t
     expect(screen.getByText('2')).toBeInTheDocument();
 });
 
-test('Passing the index property when the display is blurred should not render the index', () => {
+test('Passing the index property when the display is blurred should not show the index', () => {
     props.index = 2;
     props.blur = true;
     render(<KanaDisplay {...props} />);
-    expect(screen.queryByText('2')).not.toBeInTheDocument();
+    expect(screen.queryByText('2')).toHaveProperty('style._values.visibility', 'hidden');
 });
 
 test('Notify incorrect should append the \'redKana\' class to the kana character', () => {
@@ -67,15 +67,15 @@ test('Notify incorrect should append the \'redKana\' class to the kana character
     const { container, rerender } = render(<KanaDisplay {...props} ref={ref}/>);
 
     //Initially should have the regular kana class
-    expect(container?.firstChild?.firstChild).toHaveClass('kana');
+    expect(container?.firstChild?.childNodes[1]).toHaveClass('kana');
 
     //Calling notifyIncorrect should append the redKana class
     ref.current?.notifyIncorrect();
-    expect(container?.firstChild?.firstChild).toHaveClass('redKana');
+    expect(container?.firstChild?.childNodes[1]).toHaveClass('redKana');
 
     //Upon next render, it should switch back to the kana class again
     rerender(<KanaDisplay {...props} ref={ref}/>);
-    expect(container?.firstChild?.firstChild).toHaveClass('kana');
+    expect(container?.firstChild?.childNodes[1]).toHaveClass('kana');
 });
 
 test('Passing a container style prop should cause that class to be applied to the container', () => {
@@ -92,16 +92,16 @@ test('Not passing a container style prop should default to the containers defaul
 test('If not notifying incorrect, but is blurred, the character should have the \'blur\' class', () => {
     props.blur = true;
     const { container } = render(<KanaDisplay {...props} />);
-    expect(container?.firstChild?.firstChild).toHaveClass('blur');
+    expect(container?.firstChild?.childNodes[1]).toHaveClass('blur');
 });
 
 test('If the onClick event handler is bound, the character should have the \'clickable\' class', () => {
     const { container } = render(<KanaDisplay {...props} />);
-    expect(container?.firstChild?.firstChild).toHaveClass('clickable');
+    expect(container?.firstChild?.childNodes[1]).toHaveClass('clickable');
 });
 
 test('If the onClick event handler is unbound, the character should not have the \'clickable\' class', () => {
     props.onClick = undefined;
     const { container } = render(<KanaDisplay {...props} />);
-    expect(container?.firstChild?.firstChild).not.toHaveClass('clickable');
+    expect(container?.firstChild?.childNodes[1]).not.toHaveClass('clickable');
 });

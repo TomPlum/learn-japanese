@@ -13,3 +13,20 @@ window.matchMedia = window.matchMedia || function() {
         removeListener: function() {}
     };
 };
+
+expect.extend({
+    toHaveStyleProperty(received, style, value) {
+        const hasStyle = received.toHaveProperty('style._values.' + style, value);
+        if (hasStyle) {
+            return {
+                message: () => `${received} has the style ${style} with value ${value}.`,
+                pass: true
+            }
+        } else {
+            return {
+                message: () => `${received} does not have the style ${style}.`,
+                pass: false
+            }
+        }
+    }
+})
