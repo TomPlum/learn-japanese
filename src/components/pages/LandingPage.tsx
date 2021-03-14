@@ -10,7 +10,7 @@ import { KanaRepository } from "../../repository/KanaRepository";
 import { Environment } from "../../utility/Environment";
 import ParallaxBackground from "../layout/ParallaxBackground";
 import HelpButton from "../ui/HelpButton";
-
+import { Link } from "react-router-dom"
 
 class LandingPage extends Component {
 
@@ -29,7 +29,9 @@ class LandingPage extends Component {
 
                 <div className={styles.content}>
                     <div className={styles.header}>
-                        <HelpButton className={styles.help} />
+                        <Link to="/help">
+                            <HelpButton className={styles.help} />
+                        </Link>
                     </div>
 
                     <h1 className={styles.heading}>
@@ -70,13 +72,17 @@ class LandingPage extends Component {
 
                     <KanaCarousel kana={this.kana}/>
 
-                    <Button className={styles.play} variant="outline-success" href="/play">
-                        <FontAwesomeIcon icon={faPlay} /> Play
-                    </Button>
+                    <Link to="/play">
+                        <Button className={styles.play} variant="outline-success">
+                            <FontAwesomeIcon icon={faPlay} /> Play
+                        </Button>
+                    </Link>
 
-                    <Button className={styles.search} variant="outline-info" href="/search">
-                        <FontAwesomeIcon icon={faSearch} /> Search
-                    </Button>
+                    <Link to="/search">
+                        <Button className={styles.search} variant="outline-info">
+                            <FontAwesomeIcon icon={faSearch} /> Search
+                        </Button>
+                    </Link>
                 </div>
             </Container>
         );
