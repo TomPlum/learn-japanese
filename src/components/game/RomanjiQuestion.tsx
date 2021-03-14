@@ -96,7 +96,7 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
         const { answer, hints, hasUsedHintThisQuestion } = this.state;
         const { kana } = this.props;
 
-        if (kana.romanji.includes(answer)) {
+        if (kana.romanji.includes(answer.toLowerCase())) {
             this.props.onSubmit(true);
         } else {
             this.kanaDisplay.current?.notifyIncorrect();
