@@ -28,12 +28,6 @@ class LandingPage extends Component {
                 <ParallaxBackground kana={this.kana} />
 
                 <div className={styles.content}>
-                    <div className={styles.header}>
-                        <Link to="/help">
-                            <HelpButton className={styles.help} />
-                        </Link>
-                    </div>
-
                     <h1 className={styles.heading}>
                         {'Learn '}
                         <Inspectable
@@ -82,6 +76,10 @@ class LandingPage extends Component {
                         <Button className={styles.search} variant="outline-info">
                             <FontAwesomeIcon icon={faSearch} /> Search
                         </Button>
+                    </Link>
+
+                    <Link to="/help">
+                        <HelpButton className={styles.help} />
                     </Link>
                 </div>
             </Container>
