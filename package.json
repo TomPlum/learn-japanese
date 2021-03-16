@@ -1,7 +1,8 @@
 {
   "name": "learn-japanese",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.0-alpha",
+  "private": false,
+  "homepage": "https://tomplum.github.io/learn-japanese/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
@@ -15,15 +16,19 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
-    "react-stonecutter": "^0.3.10",
+    "react-sizeme": "^2.6.12",
+    "react-stack-grid": "^0.7.1",
     "typescript": "^4.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "deploy": "gh-pages -d build -m \"Release | Deployed Latest Build\"",
     "coverage": "react-scripts test --coverage --watchAll",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "reinstall": "npm run clean && npm install",
+    "rebuild": "npm run clean && npm install && npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -60,9 +65,8 @@
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "@types/react-router-dom": "^5.1.7",
-    "@types/react-stonecutter": "^0.3.0",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
-    "enzyme": "^3.11.0",
+    "@types/react-stack-grid": "^0.7.0",
+    "gh-pages": "^3.1.0",
     "jest-when": "^3.2.1",
     "mq-polyfill": "^1.1.8",
     "ts-jest": "^26.5.1"

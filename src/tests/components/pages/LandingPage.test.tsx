@@ -8,15 +8,25 @@ import { Environment } from "../../../utility/Environment";
 import matchMediaPolyfill from 'mq-polyfill';
 import { getByTextWithMarkup } from "../../Queries";
 import { when } from 'jest-when';
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from 'history'
 
 const environment = jest.fn();
 const shuffle = jest.fn();
 
+const history = createMemoryHistory();
+
 const setup = () => {
-    const component = render(<LandingPage/>);
+    const component = render(
+        <Router history={history}>
+            <LandingPage/>
+        </Router>
+    );
+
     return {
         play: screen.getByText('Play'),
         search: screen.getByText('Search'),
+        help: screen.getByText('Help'),
         kanji: screen.getByText('Kanji'),
         japaneseInspectable: screen.getByTestId('japanese-inspectable'),
         hiraganaInspectable: screen.getByTestId('hiragana-inspectable'),
@@ -84,6 +94,11 @@ test('Should render the search button', () => {
     expect(search).toBeInTheDocument();
 });
 
+test('Should render the help button', () => {
+    const { help } = setup();
+    expect(help).toBeInTheDocument();
+});
+
 test('Should render the kana carousel', () => {
     shuffle.mockReturnValueOnce([new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]); //Parallax BG
     shuffle.mockReturnValueOnce([ new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]); //Carousel
@@ -93,17 +108,26 @@ test('Should render the kana carousel', () => {
 
 test('Clicking the play button should route the user to /play', () => {
     const { play } = setup();
-    expect(play).toHaveAttribute('href', '/play');
+    fireEvent.click(play);
+    expect(history.location.pathname).toBe('/play');
 });
 
 test('Clicking the kanji button should route the user to /kanji', () => {
     const { kanji } = setup();
-    expect(kanji).toHaveAttribute('href', '/kanji');
+    fireEvent.click(kanji);
+    expect(history.location.pathname).toBe('/kanji');
 });
 
 test('Clicking the search button should route the user to /search', () => {
     const { search } = setup();
-    expect(search).toHaveAttribute('href', '/search');
+    fireEvent.click(search);
+    expect(history.location.pathname).toBe('/search');
+});
+
+test('Clicking the help button should route the user to /search', () => {
+    const { help } = setup();
+    fireEvent.click(help);
+    expect(history.location.pathname).toBe('/help');
 });
 
 test('Hovering over the \'Japanese\' inspectable text in the heading should render an info overlay', () => {

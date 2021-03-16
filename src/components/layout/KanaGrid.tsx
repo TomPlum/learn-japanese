@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Kana } from "../../types/Kana";
-import { CSSGrid, easings, layout, makeResponsive } from "react-stonecutter";
 import styles from "../../styles/sass/components/layout/KanaGrid.module.scss";
 import KanaTile from "./KanaTile";
+import StackGrid, { transitions } from "react-stack-grid";
 
 export interface KanaGridProps {
     kana: Kana[];
@@ -10,26 +10,33 @@ export interface KanaGridProps {
 
 class KanaGrid extends Component<KanaGridProps> {
     render() {
-        const { kana } = this.props;
-        const Grid = makeResponsive(CSSGrid, { maxWidth: 1920, defaultColumns: 4});
         return (
-            <div className={styles.grid}>
-                {kana.length > 0 ? <Grid
-                    gutterWidth={10}
-                    gutterHeight={0}
-                    layout={layout.simple}
-                    columnWidth={90}
-                    easing={easings.cubicOut}
-                    duration={100}
-                    columns={4}
-                >
-                    {kana.map(k => (
-                        <div key={k.code}>
-                            <KanaTile kana={k}/>
-                        </div>
-                    ))}
-                </Grid> : <p>No results.</p>}
-            </div>
+            <>
+                {this.props.kana.length > 0 ?
+                    <StackGrid
+                        columnWidth={90}
+                        component="div"
+                        gutterWidth={10}
+                        gutterHeight={10}
+                        monitorImagesLoaded={false}
+                        duration={0}
+                        onLayout={() => {console.log("CALLED")}}
+                        appear={transitions.fade.appear}
+                        appeared={transitions.fade.appeared}
+                        enter={transitions.fade.enter}
+                        entered={transitions.fade.entered}
+                        leaved={transitions.fade.leaved}
+                        appearDelay={0}
+                        easing="quartOut"
+                        className={styles.grid}
+                    >
+                        {this.props.kana.map(kana => (
+                            <KanaTile key={kana.code} kana={kana}/>
+                        ))}
+                    </StackGrid> :
+                    <p>No results.</p>
+                }
+            </>
         );
     }
 }

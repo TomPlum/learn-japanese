@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import KanaGrid from "../../../components/layout/KanaGrid";
 import { Kana } from "../../../types/Kana";
 import KanaType from "../../../types/KanaType";
@@ -11,12 +11,12 @@ const kana = [
     new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
 ];
 
-test('Should render a tile for each of the kana', () => {
+test('Should render a tile for each of the kana', async () => {
     render(<KanaGrid kana={kana}/>);
-    expect(screen.getByText('あ')).toBeInTheDocument();
-    expect(screen.getByText('い')).toBeInTheDocument();
-    expect(screen.getByText('え')).toBeInTheDocument();
-    expect(screen.getByText('お')).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText('あ')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('い')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('え')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('お')).toBeInTheDocument());
 });
 
 test('Should not render the grid if there are no kana passed in', () => {
