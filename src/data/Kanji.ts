@@ -657,12 +657,162 @@ export function kyoiku(): KanjiData[] {
                 { value: "国土", kana: ["こくど"], english: ["country", "territory", "domain", "realm"] },
             ]
         },
+        {
+            name: "木",
+            code: "\u6728",
+            on: [{ kana: "もく", romanji: "moku" }],
+            kun: [{ kana: "き", romanji: "ki" }],
+            source: "https://en.wiktionary.org/wiki/%E6%9C%A8#Kanji",
+            meanings: ["tree", "wood"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "青木", kana: ["あおき"], english: ["Japanese laurel", "spotted laurel"] },
+                { value: "木造", kana: ["もくぞう"], english: ["wooden", "made of wood"] },
+                { value: "土木", kana: ["どぼく"], english: ["public works"] },
+                { value: "木材", kana: ["もくざい"], english: ["lumber", "timber", "wood"] },
+            ]
+        },
+        {
+            name: "白",
+            code: "\u767d",
+            on: [{ kana: " びゃく", romanji: "byaku" }],
+            kun: [{ kana: "しろ", romanji: "shiro" }],
+            source: "https://en.wiktionary.org/wiki/%E7%99%BD#Kanji",
+            meanings: ["white"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "白書", kana: ["はくしょ"], english: ["white paper"] },
+                { value: "白人", kana: ["はくじん"], english: ["white person", "Caucasian"] },
+                { value: "空白", kana: ["くうはく"], english: ["blank space", "vacuum", "space", "null"] },
+                { value: "白紙", kana: ["はくし"], english: ["blank paper", "white paper"] },
+            ]
+        },
+        {
+            name: "火",
+            code: "\u706b",
+            on: [{ kana: " か", romanji: "ka" }],
+            kun: [{ kana: "ひ", romanji: "hi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%81%AB#Kanji",
+            meanings: ["fire"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "火山", kana: ["かざん"], english: ["volcano"] },
+                { value: "火災", kana: ["かさい"], english: ["conflagration", "fire"] },
+                { value: "噴火", kana: ["ふんか"], english: ["eruption"] },
+                { value: "火砕流", kana: ["かさいりゅう"], english: ["pyroclastic flow"] },
+            ]
+        },
+        {
+            name: "左",
+            code: "\u5DE6",
+            on: [{ kana: "さ", romanji: "sa" }],
+            kun: [{ kana: "ひだり", romanji: "hidari" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B7%A6#Kanji",
+            meanings: ["left"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "向かって左", kana: ["むかってひだり"], english: ["on the left as one faces it"] },
+                { value: "左翼", kana: ["さよく"], english: ["left wing (political)"] },
+                { value: "左右", kana: ["さゆう"], english: ["left and right", "influence", "control"] },
+            ]
+        },
+        {
+            name: "立",
+            code: "\u7ACB",
+            on: [{ kana: "りつ", romanji: "ritsu" }],
+            kun: [{ kana: "たつ", romanji: "tatsu" }],
+            source: "https://en.wiktionary.org/wiki/%E7%AB%8B#Kanji",
+            meanings: ["stand up"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "立場", kana: ["たちば"], english: ["standpoint", "position", "situation"] },
+                { value: "連立", kana: ["れんりつ"], english: ["alliance", "coalition"] },
+                { value: "国立", kana: ["こくりつ"], english: ["national"] },
+                { value: "成立", kana: ["せいりつ"], english: ["coming into existence", "arrangements"] },
+                { value: "対立", kana: ["たいりつ"], english: ["confrontation", "opposition", "antagonism"] },
+            ]
+        },
+        {
+            name: "車",
+            code: "\u8ECA",
+            on: [{ kana: "しゃ", romanji: "sha" }],
+            kun: [{ kana: "くるま", romanji: "kuruma" }],
+            source: "https://en.wiktionary.org/wiki/%E8%BB%8A#Kanji",
+            meanings: ["vehicle", "car"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "自動車", kana: ["じどうしゃ"], english: ["automobile"] },
+                { value: "下車", kana: ["げしゃ"], english: ["alighting (from train, bus, etc.)"] },
+                { value: "乗用車", kana: ["じょうようしゃ"], english: ["passenger vehicle", "automobile"] },
+                { value: "自転車", kana: ["じてんしゃ"], english: ["bicycle"] },
+            ]
+        },
+        {
+            name: "天",
+            code: "\u5929",
+            on: [{ kana: "てん", romanji: "ten" }],
+            kun: [{ kana: "あま", romanji: "ama" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A4%A9#Kanji",
+            meanings: ["heaven", "sky"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "天皇", kana: ["てんのう", "すめらぎ"], english: ["Emperor of Japan"] },
+                { value: "天気", kana: ["てんき"], english: ["weather", "the elements", "fair weather"] },
+                { value: "天皇陛下", kana: ["てんのうへいか"], english: ["His Majesty the Emperor"] },
+                { value: "天井", kana: ["てんじょう"], english: ["ceiling", "ceiling price"] },
+            ]
+        },
+        {
+            name: "右",
+            code: "\u53F3",
+            on: [{ kana: "う", romanji: "u" }],
+            kun: [{ kana: "みぎ", romanji: "migi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8F%B3#Kanji",
+            meanings: ["right"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "右翼", kana: ["うよく"], english: ["right wing (political)"] },
+                { value: "左右", kana: ["さゆう"], english: ["left and right", "influence", "control"] },
+                { value: "右手", kana: ["みぎて"], english: ["right hand"] },
+            ]
+        },
+        {
+            name: "休",
+            code: "\u4F11",
+            on: [{ kana: "きゅう", romanji: "kyu" }],
+            kun: [{ kana: "やすむ ", romanji: "yasamu" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BC%91#Kanji",
+            meanings: ["rest"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "休み", kana: ["やすみ"], english: ["rest", "recess", "respite", "vacation", "holiday"] },
+                { value: "夏休み", kana: ["なつやすみ"], english: ["summer vacation", "summer holiday"] },
+                { value: "休暇", kana: ["きゅうか"], english: ["holiday", "day off", "furlough"] },
+                { value: "休日", kana: ["きゅうかきゅうか"], english: ["holiday", "day off"] },
+                { value: "休業", kana: ["きゅうぎょう"], english: ["closed (e.g. store)", "business suspended"] },
+            ]
+        },
+        {
+            name: "手",
+            code: "\u624B",
+            on: [{ kana: "しゅ", romanji: "shu" }],
+            kun: [{ kana: "て ", romanji: "te" }],
+            source: "https://en.wiktionary.org/wiki/%E6%89%8B#Kanji",
+            meanings: ["hand"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "選手", kana: ["せんしゅ"], english: ["player (in game)", "team member"] },
+                { value: "選手権", kana: ["せんしゅけん"], english: ["championship", "title (of champion)"] },
+                { value: "相手", kana: ["あいて"], english: ["companion", "partner", "company", "other party"] },
+                { value: "大手", kana: ["おおて"], english: ["front castle gate", "both arms open"] },
+            ]
+        },
 
         //Grade 2
         {
             name: "鳥",
             code: "\u9CE5",
-            on: [{ kana: " ちょう", romanji: "cho" }],
+            on: [{ kana: "ちょう", romanji: "cho" }],
             kun: [{ kana: "とり", romanji: "tori" }],
             source: "https://en.wiktionary.org/wiki/%E9%B3%A5#Kanji",
             meanings: ["bird", "chicken"],
