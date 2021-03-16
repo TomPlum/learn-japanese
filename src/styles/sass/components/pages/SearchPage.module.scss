@@ -15,6 +15,12 @@
   max-width: 1920px;
 }
 
+.controlsWrapper {
+  top: 0;
+  position: sticky;
+  position: -webkit-sticky;
+}
+
 .label {
   color: #FFF;
   display: block;

@@ -10,30 +10,32 @@ export interface KanaGridProps {
 
 class KanaGrid extends Component<KanaGridProps> {
     render() {
-        const { kana } = this.props;
         return (
             <>
-                {kana.length > 0 ? <StackGrid
-                    columnWidth={90}
-                    gutterWidth={10}
-                    gutterHeight={10}
-                    monitorImagesLoaded={false}
-                    duration={100}
-                    appear={transitions.scaleDown.appear}
-                    appeared={transitions.scaleDown.appeared}
-                    enter={transitions.scaleDown.enter}
-                    entered={transitions.scaleDown.entered}
-                    leaved={transitions.scaleDown.leaved}
-                    appearDelay={0}
-                    easing="ease-in"
-                    className={styles.grid}
-                >
-                    {kana.map(k => (
-                        <div key={k.code}>
-                            <KanaTile kana={k}/>
-                        </div>
-                    ))}
-                </StackGrid> : <p>No results.</p>}
+                {this.props.kana.length > 0 ?
+                    <StackGrid
+                        columnWidth={90}
+                        component="div"
+                        gutterWidth={10}
+                        gutterHeight={10}
+                        monitorImagesLoaded={false}
+                        duration={0}
+                        onLayout={() => {console.log("CALLED")}}
+                        appear={transitions.fade.appear}
+                        appeared={transitions.fade.appeared}
+                        enter={transitions.fade.enter}
+                        entered={transitions.fade.entered}
+                        leaved={transitions.fade.leaved}
+                        appearDelay={0}
+                        easing="quartOut"
+                        className={styles.grid}
+                    >
+                        {this.props.kana.map(kana => (
+                            <KanaTile key={kana.code} kana={kana}/>
+                        ))}
+                    </StackGrid> :
+                    <p>No results.</p>
+                }
             </>
         );
     }

@@ -29,11 +29,7 @@ class KanaTile extends Component<KanaTileProps> {
 
                 <KanaDisplay kana={kana} style={{ character: { color: "#000", size: "xs" }, container: styles.kanaWrapper  }} />
 
-                <Row>
-                    <Col>
-                        <p className={styles.romanji}>{kana.getFullRomanjiString()}</p>
-                    </Col>
-                </Row>
+                <p className={styles.romanji}>{kana.getFullRomanjiString()}</p>
             </Container>
         );
     }
