@@ -17,7 +17,7 @@ class Main extends Component {
                         <Route exact path="/" component={LandingPage} />
                         <Route exact path="/play" component={GamePage}/>
                         <Route exact path="/search" component={SearchPage}/>
-                        <Route path="/kanji" component={KanjiPage}/>
+                        <Route exact path="/kanji" component={KanjiPage}/>
                         <Route exact path="/help" component={HelpPage} />
                         <Route component={NotFoundPage} />
                     </Switch>
@@ -25,7 +25,6 @@ class Main extends Component {
             </div>
         );
     }
-
 }
 
 export default Main;
