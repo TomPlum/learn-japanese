@@ -25,13 +25,25 @@
     max-width: 500px;
   }
 
-  .play, .search {
+  .button {
     width: 175px;
     font-size: 1.5em;
     padding: 25px 0;
-    margin: 0 10px;
+    margin: 10px;
     border-width: 5px;
     border-radius: 50px;
+  }
+
+  .buttonWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 190px;
+  }
+
+  .carouselDisplay {
+    height: 1.3em;
+    font-size: 10em !important;
   }
 }
 
@@ -55,13 +67,25 @@
     padding: 0 10px;
   }
 
-  .play, .search {
-    width: 125px;
+  .button {
+    width: 140px;
     font-size: 1.2em;
     padding: 15px 0;
-    margin: 0 5px;
+    margin: 8px;
     border-width: 4px;
     border-radius: 50px;
+  }
+
+  .buttonWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 155px;
+  }
+
+  .carouselDisplay {
+    height: 1.3em;
+    font-size: 7em !important;
   }
 }
 
@@ -105,4 +129,9 @@
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   z-index: 100;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
 }
