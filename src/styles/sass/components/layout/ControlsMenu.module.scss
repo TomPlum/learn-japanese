@@ -1,9 +1,8 @@
 @import "../../viewports";
 
 @mixin linkText {
-  font-weight: 600;
   text-transform: capitalize;
-  font-family: "Montserrat", "Segoe UI", sans-serif;
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
 }
 
 @mixin navbar {
@@ -57,7 +56,7 @@
 
   .linkText {
     @include linkText;
-    font-size: 1em;
+    font-size: 1.2em;
   }
 
   .navbar {

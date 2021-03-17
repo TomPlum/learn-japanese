@@ -21,3 +21,9 @@ test('Clicking the \'Home\' button should route the user to the landing page', (
     fireEvent.click(home);
     expect(history.location.pathname).toBe('/');
 });
+
+test('Clicking the \'Help\' button should route the user to the help page', () => {
+    const { help } = setup();
+    fireEvent.click(help);
+    expect(history.location.pathname).toBe('/help');
+});
