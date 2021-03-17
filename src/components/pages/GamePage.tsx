@@ -9,6 +9,7 @@ import { Kana } from "../../types/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
 import styles from "../../styles/sass/components/pages/GamePage.module.scss";
+import ControlsMenu from "../layout/ControlsMenu";
 
 interface GamePageState {
     loading: boolean;
@@ -38,6 +39,8 @@ class GamePage extends Component<{ }, GamePageState> {
         return (
             <div className={styles.wrapper}>
                 <LoadingSpinner active={loading}/>
+
+                <ControlsMenu />
 
                 {!gameSettings && !inResultsScreen &&
                     <GameModeMenu onSelectedMode={this.startGame}/>

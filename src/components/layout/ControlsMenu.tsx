@@ -1,0 +1,60 @@
+import { Component } from "react";
+import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
+import { faAdjust, faFont, faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
+
+class ControlsMenu extends Component<any, any> {
+    render() {
+        return (
+            <Container className={styles.wrapper} fluid>
+                <Navbar variant="dark" fixed="top" className={styles.navbar}>
+                    <Container className={styles.innerWrapper} fluid>
+                        <Nav className={styles.nav}>
+                            <Row className={styles.row} noGutters>
+                                <Col>
+                                    <Nav.Link href="/" className={styles.navLink}>
+                                        <div>
+                                            <FontAwesomeIcon icon={faHome} className={styles.icon} title="Home" />
+                                        </div>
+                                        <span className={styles.linkText}>HOME</span>
+                                    </Nav.Link>
+                                </Col>
+
+                                <Col>
+                                    <Nav.Link className={styles.navLink}>
+                                        <div>
+                                            <FontAwesomeIcon icon={faAdjust} className={styles.icon} title="Dark Mode" />
+                                        </div>
+                                        <span className={styles.linkText}>LIGHT</span>
+                                    </Nav.Link>
+                                </Col>
+
+                                <Col>
+                                    <Nav.Link className={styles.navLink}>
+                                        <div>
+                                            <FontAwesomeIcon icon={faFont} className={styles.icon} title="Font" />
+                                        </div>
+                                        <span className={styles.linkText}>FONT</span>
+                                    </Nav.Link>
+                                </Col>
+
+                                <Col>
+                                    <Nav.Link className={styles.navLink}>
+                                        <div>
+                                            <FontAwesomeIcon icon={faQuestionCircle} className={styles.icon} title="Help" />
+                                        </div>
+                                        <span className={styles.linkText}>HELP</span>
+                                    </Nav.Link>
+                                </Col>
+                            </Row>
+                        </Nav>
+                    </Container>
+                </Navbar>
+            </Container>
+        );
+    }
+}
+
+export default ControlsMenu;
