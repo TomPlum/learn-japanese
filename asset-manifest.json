@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/learn-japanese/static/css/main.1e3b2c31.chunk.css",
-    "main.js": "/learn-japanese/static/js/main.579b8115.chunk.js",
-    "main.js.map": "/learn-japanese/static/js/main.579b8115.chunk.js.map",
+    "main.css": "/learn-japanese/static/css/main.96569fdd.chunk.css",
+    "main.js": "/learn-japanese/static/js/main.b1b472c0.chunk.js",
+    "main.js.map": "/learn-japanese/static/js/main.b1b472c0.chunk.js.map",
     "runtime-main.js": "/learn-japanese/static/js/runtime-main.1a728225.js",
     "runtime-main.js.map": "/learn-japanese/static/js/runtime-main.1a728225.js.map",
     "static/css/2.150d169a.chunk.css": "/learn-japanese/static/css/2.150d169a.chunk.css",
-    "static/js/2.1f7765af.chunk.js": "/learn-japanese/static/js/2.1f7765af.chunk.js",
-    "static/js/2.1f7765af.chunk.js.map": "/learn-japanese/static/js/2.1f7765af.chunk.js.map",
+    "static/js/2.98b6abc2.chunk.js": "/learn-japanese/static/js/2.98b6abc2.chunk.js",
+    "static/js/2.98b6abc2.chunk.js.map": "/learn-japanese/static/js/2.98b6abc2.chunk.js.map",
     "index.html": "/learn-japanese/index.html",
     "static/css/2.150d169a.chunk.css.map": "/learn-japanese/static/css/2.150d169a.chunk.css.map",
-    "static/css/main.1e3b2c31.chunk.css.map": "/learn-japanese/static/css/main.1e3b2c31.chunk.css.map",
-    "static/js/2.1f7765af.chunk.js.LICENSE.txt": "/learn-japanese/static/js/2.1f7765af.chunk.js.LICENSE.txt"
+    "static/css/main.96569fdd.chunk.css.map": "/learn-japanese/static/css/main.96569fdd.chunk.css.map",
+    "static/js/2.98b6abc2.chunk.js.LICENSE.txt": "/learn-japanese/static/js/2.98b6abc2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1a728225.js",
     "static/css/2.150d169a.chunk.css",
-    "static/js/2.1f7765af.chunk.js",
-    "static/css/main.1e3b2c31.chunk.css",
-    "static/js/main.579b8115.chunk.js"
+    "static/js/2.98b6abc2.chunk.js",
+    "static/css/main.96569fdd.chunk.css",
+    "static/js/main.b1b472c0.chunk.js"
   ]
 }
