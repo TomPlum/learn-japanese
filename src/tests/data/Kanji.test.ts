@@ -2,6 +2,7 @@ import { joyo, kyoiku } from "../../data/Kanji";
 import { KanjiData } from "../../data/DataTypes";
 import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 
+/*
 jest.mock("../../data/Kanji.ts");
 
 let mockKyoiku = kyoiku as jest.MockedFunction<() => KanjiData[]>;
@@ -43,11 +44,12 @@ beforeEach(() => {
         ]
     }]);
 });
+*/
 
-it.skip("Kyoiku should return only Kyoiku", () => {
-    expect(kyoiku()).toHaveLength(1);
+it("Kyoiku should return only Kyoiku", () => {
+    expect(kyoiku()).toHaveLength(55);
 });
 
-it.skip("Joyo should return Joyo & Kyoiku", () => {
-    expect(joyo()).toHaveLength(2);
+it("Joyo should return Joyo & Kyoiku", () => {
+    expect(joyo()).toHaveLength(56);
 });
