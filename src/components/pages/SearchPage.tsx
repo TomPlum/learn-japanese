@@ -58,62 +58,65 @@ class SearchPage extends Component<{ }, SearchPageState> {
         const { loading, search, kana, showHiragana, showKatakana, showDiagraphs, showDiacriticals } = this.state;
 
         return (
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper} data-testid="search-page">
                 <LoadingSpinner active={loading}/>
-                <Container className={styles.searchWrapper}>
-                    <SearchField onChange={this.onSearch} value={search} append={kana.length + " Results"} />
-                </Container>
 
-                <Container>
-                    <Row>
-                        <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
-                            <Form.Check
-                                type="switch"
-                                id="hiragana"
-                                className={styles.hiraganaSwitch}
-                                checked={showHiragana}
-                                onChange={() => this.setState({ showHiragana: !showHiragana })}
-                                data-testid="hiragana-switch"
-                            />
-                            <Form.Label className={styles.label}>Hiragana</Form.Label>
-                        </Col>
+                <Container className={styles.controlsWrapper}>
+                    <Container className={styles.searchWrapper}>
+                        <SearchField onChange={this.onSearch} value={search} append={kana.length + " Results"} />
+                    </Container>
 
-                        <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
-                            <Form.Check
-                                type="switch"
-                                id="katakana"
-                                className={styles.katakanaSwitch}
-                                checked={showKatakana}
-                                onChange={() => this.setState({ showKatakana: !showKatakana })}
-                                data-testid="katakana-switch"
-                            />
-                            <Form.Label className={styles.label}>Katakana</Form.Label>
-                        </Col>
+                    <Container>
+                        <Row>
+                            <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
+                                <Form.Check
+                                    type="switch"
+                                    id="hiragana"
+                                    className={styles.hiraganaSwitch}
+                                    checked={showHiragana}
+                                    onChange={() => this.setState({ showHiragana: !showHiragana })}
+                                    data-testid="hiragana-switch"
+                                />
+                                <Form.Label className={styles.label}>Hiragana</Form.Label>
+                            </Col>
 
-                        <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
-                            <Form.Check
-                                type="switch"
-                                id="diagraphs"
-                                className={styles.diagraphSwitch}
-                                checked={showDiagraphs}
-                                onChange={() => this.setState({ showDiagraphs: !showDiagraphs })}
-                                data-testid="diagraphs-switch"
-                            />
-                            <Form.Label className={styles.label}>Diagraphs</Form.Label>
-                        </Col>
+                            <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
+                                <Form.Check
+                                    type="switch"
+                                    id="katakana"
+                                    className={styles.katakanaSwitch}
+                                    checked={showKatakana}
+                                    onChange={() => this.setState({ showKatakana: !showKatakana })}
+                                    data-testid="katakana-switch"
+                                />
+                                <Form.Label className={styles.label}>Katakana</Form.Label>
+                            </Col>
 
-                        <Col className={styles.switchWrapper} md={3} sm={12} xs={6}>
-                            <Form.Check
-                                type="switch"
-                                id="diacriticals"
-                                className={styles.diacriticalSwitch}
-                                checked={showDiacriticals}
-                                onChange={() => this.setState({ showDiacriticals: !showDiacriticals })}
-                                data-testid="diacriticals-switch"
-                            />
-                            <Form.Label className={styles.label}>Diacriticals</Form.Label>
-                        </Col>
-                    </Row>
+                            <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
+                                <Form.Check
+                                    type="switch"
+                                    id="diagraphs"
+                                    className={styles.diagraphSwitch}
+                                    checked={showDiagraphs}
+                                    onChange={() => this.setState({ showDiagraphs: !showDiagraphs })}
+                                    data-testid="diagraphs-switch"
+                                />
+                                <Form.Label className={styles.label}>Diagraphs</Form.Label>
+                            </Col>
+
+                            <Col className={styles.switchWrapper} md={3} sm={12} xs={6}>
+                                <Form.Check
+                                    type="switch"
+                                    id="diacriticals"
+                                    className={styles.diacriticalSwitch}
+                                    checked={showDiacriticals}
+                                    onChange={() => this.setState({ showDiacriticals: !showDiacriticals })}
+                                    data-testid="diacriticals-switch"
+                                />
+                                <Form.Label className={styles.label}>Diacriticals</Form.Label>
+                            </Col>
+                        </Row>
+                    </Container>
                 </Container>
 
                 <KanaGrid kana={kana}/>

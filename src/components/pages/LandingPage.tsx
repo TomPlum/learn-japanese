@@ -1,15 +1,14 @@
 import { Component } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/LandingPage.module.scss";
 import Inspectable from "../ui/Inspectable";
 import KanaCarousel from "../ui/KanaCarousel";
-import { faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faQuestion, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Kana } from "../../types/Kana";
 import { KanaRepository } from "../../repository/KanaRepository";
 import { Environment } from "../../utility/Environment";
 import ParallaxBackground from "../layout/ParallaxBackground";
-import HelpButton from "../ui/HelpButton";
 import { Link } from "react-router-dom"
 
 class LandingPage extends Component {
@@ -28,12 +27,6 @@ class LandingPage extends Component {
                 <ParallaxBackground kana={this.kana} />
 
                 <div className={styles.content}>
-                    <div className={styles.header}>
-                        <Link to="/help">
-                            <HelpButton className={styles.help} />
-                        </Link>
-                    </div>
-
                     <h1 className={styles.heading}>
                         {'Learn '}
                         <Inspectable
@@ -70,19 +63,33 @@ class LandingPage extends Component {
                         </h4>
                     </div>
 
-                    <KanaCarousel kana={this.kana}/>
+                    <KanaCarousel kana={this.kana} style={{ character: { className: styles.carouselDisplay } }} />
 
-                    <Link to="/play">
-                        <Button className={styles.play} variant="outline-success">
-                            <FontAwesomeIcon icon={faPlay} /> Play
-                        </Button>
-                    </Link>
+                    <Row noGutters={true} className={styles.buttonContainer}>
+                        <Col xs={6} md={3} className={styles.buttonWrapper}>
+                            <Link to="/play">
+                                <Button className={styles.button} variant="outline-success">
+                                    <FontAwesomeIcon icon={faPlay} /> Play
+                                </Button>
+                            </Link>
+                        </Col>
 
-                    <Link to="/search">
-                        <Button className={styles.search} variant="outline-info">
-                            <FontAwesomeIcon icon={faSearch} /> Search
-                        </Button>
-                    </Link>
+                        <Col xs={6} md={3} className={styles.buttonWrapper}>
+                            <Link to="/search">
+                                <Button className={styles.button} variant="outline-info">
+                                    <FontAwesomeIcon icon={faSearch} /> Search
+                                </Button>
+                            </Link>
+                        </Col>
+
+                        <Col xs={6} md={3} className={styles.buttonWrapper}>
+                            <Link to="/help">
+                                <Button variant="outline-warning" className={styles.button} title="Help">
+                                    <FontAwesomeIcon icon={faQuestion} /> Help
+                                </Button>
+                            </Link>
+                        </Col>
+                    </Row>
                 </div>
             </Container>
         );

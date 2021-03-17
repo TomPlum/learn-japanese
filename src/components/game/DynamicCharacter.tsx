@@ -11,6 +11,7 @@ export interface DynamicCharacterProps {
 export interface CharacterStyleProps {
     size?: "xs" | "sm" | "md" | "lg" | "xl";
     color?: string;
+    className?: string;
 }
 
 export class DynamicCharacter extends Component<DynamicCharacterProps> {

@@ -3,9 +3,11 @@ import { Kana } from "../../types/Kana";
 import { Container } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import styles from "../../styles/sass/components/ui/KanaCarousel.module.scss";
+import KanaDisplay, { KanaDisplayStyle } from "../game/KanaDisplay";
 
 export interface KanaCarouselProps {
     kana: Kana[];
+    style?: KanaDisplayStyle;
 }
 
 interface KanaCarouselState {
@@ -28,13 +30,12 @@ class KanaCarousel extends Component<KanaCarouselProps, KanaCarouselState> {
         }
     }
 
-    //TODO: Replace with KanaDisplay. Expose animation class and add it to the DynamicCharacter arrays
     render() {
         const { current } = this.state;
         return (
             <Container className={styles.wrapper}>
                 <div data-testid="animation" onAnimationIteration={this.handleAnimation} className={styles.animate}>
-                    <p className={styles.kana}>{current.code}</p>
+                    <KanaDisplay kana={current} style={this.props.style} />
                     <p className={styles.romanji}>{current.getFullRomanjiString()}</p>
                 </div>
             </Container>
