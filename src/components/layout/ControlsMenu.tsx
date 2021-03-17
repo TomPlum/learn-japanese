@@ -4,6 +4,7 @@ import { faAdjust, faFont, faHome, faQuestionCircle } from "@fortawesome/free-so
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
+import FontSelector from "./FontSelector";
 
 class ControlsMenu extends Component<any, any> {
     render() {
@@ -32,16 +33,11 @@ class ControlsMenu extends Component<any, any> {
                                 </Col>
 
                                 <Col>
-                                    <Nav.Link className={styles.navLink}>
-                                        <div>
-                                            <FontAwesomeIcon icon={faFont} className={styles.icon} title="Font" />
-                                        </div>
-                                        <span className={styles.linkText}>FONT</span>
-                                    </Nav.Link>
+                                    <FontSelector className={styles.navLink} onSelect={() => {}}/>
                                 </Col>
 
                                 <Col>
-                                    <Nav.Link className={styles.navLink}>
+                                    <Nav.Link href="/help" className={styles.navLink}>
                                         <div>
                                             <FontAwesomeIcon icon={faQuestionCircle} className={styles.icon} title="Help" />
                                         </div>
