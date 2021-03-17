@@ -15,7 +15,9 @@ code {
 }
 
 html, body, #root {
-  min-height: 100%;
+  min-height: 100vh;
+  min-height: -webkit-fill-available; //Safari
+  min-height: -moz-available; //Firefox
   background-color: $dark-3;
 }
 

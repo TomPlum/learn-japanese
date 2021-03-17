@@ -8,6 +8,7 @@ import ResultScreen from "../results/ResultScreen";
 import { Kana } from "../../types/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
+import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 
 interface GamePageState {
     loading: boolean;
@@ -35,7 +36,7 @@ class GamePage extends Component<{ }, GamePageState> {
     render() {
         const { loading, gameSettings, kana, inResultsScreen, result } = this.state;
         return (
-            <>
+            <div className={styles.wrapper}>
                 <LoadingSpinner active={loading}/>
 
                 {!gameSettings && !inResultsScreen &&
@@ -54,7 +55,7 @@ class GamePage extends Component<{ }, GamePageState> {
                 {inResultsScreen && result &&
                     <ResultScreen result={result} onClose={this.onResultMenuClose}/>
                 }
-            </>
+            </div>
         );
     }
 
