@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Fade, Row } from "react-bootstrap";
 import { GameType } from "../../types/GameType";
 import KanaGameModeMenu from "./KanaGameModeMenu";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
@@ -52,11 +52,12 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 return (
                     <KanaGameModeMenu
                         onSelectedMode={(type, settings) => this.handleOnStart(settings)}
+                        className={styles.menu}
                     />
                 )
             }
             case GameType.NUMBERS: {
-                return <p>Numbers menu here</p>
+                return <p className={styles.menu} style={{color: '#FFF'}}>Numbers menu here</p>
             }
         }
     }

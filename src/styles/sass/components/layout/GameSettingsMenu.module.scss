@@ -8,3 +8,14 @@
   -webkit-box-shadow: 1px 2px 3px $shadow-colour;
   box-shadow: 1px 2px 3px 4px $shadow-colour;*/
 }
+
+.menu {
+  opacity: 0;
+  animation: fadeIn 0.2s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

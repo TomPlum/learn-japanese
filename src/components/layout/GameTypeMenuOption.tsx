@@ -18,6 +18,7 @@ class GameTypeMenuOption extends Component<GameTypeMenuOptionProps> {
                 onClick={() => this.props?.onClick?.(type)}
                 eventKey={type}
                 active={selected === type}
+                className={styles.item}
             >
                 {React.cloneElement(this.props.children as ReactElement, { className: styles.icon })}
                 <span className={styles.text}>{type}</span>

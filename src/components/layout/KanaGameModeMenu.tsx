@@ -12,6 +12,7 @@ import { Environment } from "../../utility/Environment";
 
 export interface KanaGameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;
+    className?: string;
 }
 
 interface KanaGameModeMenuState {
@@ -34,7 +35,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
         const { isCustomisingSettings, selected } = this.state;
 
         return (
-            <Container fluid className={styles.wrapper}>
+            <Container fluid className={styles.wrapper + " " + this.props.className}>
                 {!isCustomisingSettings && <>
                     <Row>
                         <Col className={styles.descWrapper}>
@@ -107,7 +108,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
                     <Row>
                         <Col>
                             <Button variant="success" className={styles.playButton} onClick={this.confirmSelected}>
-                                <FontAwesomeIcon size="sm" icon={faPlay}/> Start
+                                <FontAwesomeIcon size="xs" icon={faPlay}/> START
                             </Button>
                         </Col>
                     </Row>
