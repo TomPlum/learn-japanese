@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { TimeSettings } from "../../types/GameSettings";
-import { Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 
 export interface TimeSettingsFormProps {
@@ -36,8 +36,8 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
         const { timed, countdown } = this.state;
 
         return (
-            <>
-                <Form.Row>
+            <Row>
+                <Col>
                     <Form.Check
                         inline
                         label="Timed"
@@ -48,8 +48,6 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                         onChange={this.onChangeTimed}
                         data-testid="Timed"
                     />
-                </Form.Row>
-                <Form.Row>
                     <Form.Check
                         label="Count Down"
                         type="switch"
@@ -59,8 +57,8 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                         onChange={this.onChangeCountDown}
                         data-testid="Countdown"
                     />
-                </Form.Row>
-            </>
+                </Col>
+            </Row>
         );
     }
 

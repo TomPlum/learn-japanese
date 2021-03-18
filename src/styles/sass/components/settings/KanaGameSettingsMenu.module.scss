@@ -1,6 +1,6 @@
 .wrapper {
   overflow: auto;
-  max-width: 500px;
+  width: 100%;
 }
 
 .header {
@@ -10,10 +10,17 @@
 
 .title {
   color: #FFF;
+  font-family: 'Ciutadella Rounded Medium', sans-serif;
 }
 
 .label {
   color: #dedede;
+}
+
+.buttonText {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.1em;
+  text-transform: uppercase;
 }
 
 .pane {

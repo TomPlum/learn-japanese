@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { LifeSettings } from "../../types/GameSettings";
 import { LifeQuantity } from "../../types/LifeQuantity";
 import LivesSelector from "./LivesSelector";
-import { Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 
 interface LifeSettingsFormProps {
@@ -40,23 +40,25 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
         const { enabled } = this.state;
 
         return (
-            <Form.Row>
-                <Form.Check
-                    inline
-                    label="Enable"
-                    type="switch"
-                    id="lives"
-                    className={styles.check}
-                    checked={enabled}
-                    onChange={() => this.setState({ enabled: !enabled })}
-                    data-testid="Enable"
-                />
-                <LivesSelector
-                    ref={this.selector}
-                    disabled={!enabled}
-                    onSelect={(quantity) => this.setState({ quantity })}
-                />
-            </Form.Row>
+            <Row>
+                <Col>
+                    <Form.Check
+                        inline
+                        label="Enable"
+                        type="switch"
+                        id="lives"
+                        className={styles.check}
+                        checked={enabled}
+                        onChange={() => this.setState({ enabled: !enabled })}
+                        data-testid="Enable"
+                    />
+                    <LivesSelector
+                        ref={this.selector}
+                        disabled={!enabled}
+                        onSelect={(quantity) => this.setState({ quantity })}
+                    />
+                </Col>
+            </Row>
         );
     }
 

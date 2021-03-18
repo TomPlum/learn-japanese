@@ -17,3 +17,8 @@
 .menu {
   @include fadeIn(0.2s);
 }
+
+.gameTypeMenuWrapper {
+  display: flex;
+  justify-content: center;
+}

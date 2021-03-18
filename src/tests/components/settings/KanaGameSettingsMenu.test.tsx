@@ -8,7 +8,7 @@ let settings: GameSettings;
 
 beforeEach(() => {
    settings = {
-       display: { cards: 1, type: DisplayType.SINGLE_KANA },
+       display: { cards: 1, type: DisplayType.ROMAJI },
        hints: { enabled: true, quantity: 3 },
        kana: { diagraphs: false, hiragana: true, katakana: false, quantity: 50 },
        lives: { enabled: false, quantity: LifeQuantity.FIVE },
@@ -28,7 +28,7 @@ const setup = () => {
         confirm: screen.getByText('Confirm'),
         reset: screen.getByText('Reset'),
         kanaModeButton: screen.getByText('Kana'),
-        romanjiModeButton: screen.getByText('Romanji'),
+        romanjiModeButton: screen.getByText('Rōmaji'),
         ...component
     }
 }
@@ -43,7 +43,7 @@ test('Changing the game mode to Kana and submitting should update the settings',
     const { confirm, kanaModeButton } = setup();
     fireEvent.click(kanaModeButton);
     fireEvent.click(confirm);
-    settings.display = { type: DisplayType.MULTIPLE_CARDS, cards: 4 }
+    settings.display = { type: DisplayType.KANA, cards: 4 }
     expect(onSubmitHandler).toHaveBeenCalledWith(settings);
 });
 

@@ -1,6 +1,7 @@
-.wrapper {
+@import "../../viewports";
+
+@mixin wrapper {
   margin: 0;
-  padding: 128px 50px 50px 50px;
   min-width: 100%;
   max-height: -webkit-fill-available; //Safari
   max-height: -moz-available; //Firefox
@@ -11,3 +12,25 @@
   flex-direction: column;
   align-items: center;
 }
+
+@include desktop {
+  .wrapper {
+    @include wrapper;
+    padding: 128px 50px 50px 50px;
+  }
+}
+
+@include tablet {
+  .wrapper {
+    @include wrapper;
+    padding: 120px 30px 30px 30px;
+  }
+}
+
+@include phone {
+  .wrapper {
+    @include wrapper;
+    padding-top: 90px;
+  }
+}
+

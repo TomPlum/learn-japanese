@@ -29,7 +29,7 @@ beforeEach(() => {
     props = {
         kana: [a, i, e, o],
         settings: {
-            display: { type: DisplayType.SINGLE_KANA, cards: 1 },
+            display: { type: DisplayType.ROMAJI, cards: 1 },
             kana: { hiragana: true },
             hints: { enabled: true, quantity: 999 },
             lives: { enabled: false },
@@ -379,13 +379,13 @@ test('Failing to correctly answer the question before the countdown finishes sho
 });
 
 test('Setting the display type as \'Single Kana\' should render a RomanjiQuestion', () => {
-    props.settings.display = { type: DisplayType.SINGLE_KANA, cards: 1 };
+    props.settings.display = { type: DisplayType.ROMAJI, cards: 1 };
     setup();
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
 test('Setting the display type as \'Multiple Cards\' should render a KanaChoiceQuestion', () => {
-    props.settings.display = { type: DisplayType.MULTIPLE_CARDS, cards: 2 };
+    props.settings.display = { type: DisplayType.KANA, cards: 2 };
     setup();
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('あ')).toBeInTheDocument();

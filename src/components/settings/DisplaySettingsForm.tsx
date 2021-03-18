@@ -2,8 +2,10 @@ import { Component } from "react";
 import { DisplaySettings } from "../../types/GameSettings";
 import { DisplayType } from "../../types/DisplayType";
 import DisplayTypeButton from "./DisplayTypeButton";
-import { faStop, faThLarge } from "@fortawesome/free-solid-svg-icons";
+import { faFont, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";
+import styles from "../../styles/sass/components/settings/DisplaySettingsForm.module.scss";
+import { Environment } from "../../utility/Environment";
 
 export interface DisplaySettingsFormProps {
     onChange: (settings: DisplaySettings) => void;
@@ -16,7 +18,7 @@ interface DisplaySettingsFormState {
 
 class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySettingsFormState> {
 
-    private readonly defaultState = { type: DisplayType.SINGLE_KANA, cards: 1, };
+    private readonly defaultState = { type: DisplayType.ROMAJI, cards: 1, };
 
     constructor(props: Readonly<DisplaySettingsFormProps> | DisplaySettingsFormProps) {
         super(props);
@@ -41,25 +43,30 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
             <Row>
                 <Col>
                     <DisplayTypeButton
-                        text="Romanji"
-                        icon={faStop}
-                        selected={type === DisplayType.SINGLE_KANA}
-                        onClick={() => this.setState({ type: DisplayType.SINGLE_KANA, cards: 1 })}
+                        icon={faFont}
+                        type={DisplayType.ROMAJI}
+                        selected={type}
+                        onClick={(type) => this.setState({ type, cards: 1 })}
                     />
                 </Col>
                 <Col>
                     <DisplayTypeButton
-                        text="Kana"
                         icon={faThLarge}
-                        selected={type === DisplayType.MULTIPLE_CARDS}
-                        onClick={() => this.setState({ type: DisplayType.MULTIPLE_CARDS, cards: 4 })}
+                        type={DisplayType.KANA}
+                        selected={type}
+                        onClick={(type) => this.setState({ type, cards: 4 })}
                     />
+                </Col>
+                <Col xs={12}>
+                    <span className={styles.description}>{this.getDescription()}</span>
                 </Col>
             </Row>
         );
     }
 
     reset = () => this.setState(this.defaultState);
+
+    private getDescription = () => Environment.variable(this.state.type + "_MODE_DESC");
 }
 
 export default DisplaySettingsForm;

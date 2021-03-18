@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 import { faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../../types/GameSettings";
 import KanaSettingsForm from "./KanaSettingsForm";
@@ -10,6 +9,7 @@ import LifeSettingsForm from "./LifeSettingsForm";
 import TimeSettingsForm from "./TimeSettingsForm";
 import { defaultDisplaySettings, defaultHintSettings, defaultKanaSettings, defaultLifeSettings, defaultTimeSettings } from "../../data/GameModePresets";
 import DisplaySettingsForm from "./DisplaySettingsForm";
+import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 
 export interface KanaGameSettingsMenuProps {
     onSubmit: (settings: GameSettings) => void;
@@ -143,14 +143,15 @@ class KanaGameSettingsMenu extends Component<KanaGameSettingsMenuProps, KanaGame
                         <Card.Footer>
                             <Form.Row>
                                 <Col className={styles.noGuttersLeft}>
-                                    <Button variant="danger" block onClick={this.onReset} className={styles.reset}>
-                                        <FontAwesomeIcon icon={faUndo}/> Reset
+                                    <Button variant="danger" block onClick={this.onReset} className={styles.button}>
+                                        <FontAwesomeIcon icon={faUndo}/>
+                                        <span className={styles.buttonText}> Reset</span>
                                     </Button>
                                 </Col>
                                 <Col className={styles.noGuttersRight}>
-                                    <Button variant="success" block onClick={this.onConfirmation}
-                                            className={styles.confirm}>
-                                        <FontAwesomeIcon icon={faCheck}/> Confirm
+                                    <Button variant="success" block onClick={this.onConfirmation} className={styles.button}>
+                                        <FontAwesomeIcon icon={faCheck}/>
+                                        <span className={styles.buttonText}> Confirm</span>
                                     </Button>
                                 </Col>
                             </Form.Row>

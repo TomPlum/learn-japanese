@@ -40,7 +40,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             className={styles.menu}
                         />
                     </Col>
-                    <Col sm={12} md={6} lg={7} xl={8}>
+                    <Col sm={12} md={6} lg={7} xl={8} className={styles.gameTypeMenuWrapper}>
                         {this.getGameTypeMenu()}
                     </Col>
                 </Row>

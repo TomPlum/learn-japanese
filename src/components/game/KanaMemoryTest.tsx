@@ -134,7 +134,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         const { currentKana, paused } = this.state;
 
         switch (settings.display.type) {
-            case DisplayType.SINGLE_KANA: {
+            case DisplayType.ROMAJI: {
                 return (
                     <RomanjiQuestion
                         kana={currentKana}
@@ -144,7 +144,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
                     />
                 );
             }
-            case DisplayType.MULTIPLE_CARDS: {
+            case DisplayType.KANA: {
                 const chain = new FilterChain<Kana>();
 
                 chain.addFilter(new DiagraphFilter(currentKana.isDiagraph()));

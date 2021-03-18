@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { HintSettings } from "../../types/GameSettings";
 import { HintQuantity } from "../../types/HintQuantity";
-import { Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 
 export interface HintSettingsFormProps {
@@ -37,39 +37,41 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
         const { quantity } = this.state;
 
         return (
-            <Form.Row>
-                <Form.Check
-                    inline
-                    label="1"
-                    className={styles.check}
-                    checked={quantity === HintQuantity.ONE}
-                    onChange={() => this.setState({ quantity: HintQuantity.ONE })}
-                    data-testid="1"
-                />
-                <Form.Check
-                    inline
-                    label="3"
-                    className={styles.check}
-                    checked={quantity === HintQuantity.THREE}
-                    onChange={() => this.setState({ quantity: HintQuantity.THREE })}
-                    data-testid="3"
-                />
-                <Form.Check
-                    inline
-                    label="5"
-                    className={styles.check}
-                    checked={quantity === HintQuantity.FIVE}
-                    onChange={() => this.setState({ quantity: HintQuantity.FIVE })}
-                    data-testid="5"
-                />
-                <Form.Check
-                    label="Unlimited"
-                    className={styles.check}
-                    checked={quantity === HintQuantity.UNLIMITED}
-                    onChange={() => this.setState({ quantity: HintQuantity.UNLIMITED })}
-                    data-testid="Unlimited"
-                />
-            </Form.Row>
+            <Row>
+                <Col>
+                    <Form.Check
+                        inline
+                        label="1"
+                        className={styles.check}
+                        checked={quantity === HintQuantity.ONE}
+                        onChange={() => this.setState({ quantity: HintQuantity.ONE })}
+                        data-testid="1"
+                    />
+                    <Form.Check
+                        inline
+                        label="3"
+                        className={styles.check}
+                        checked={quantity === HintQuantity.THREE}
+                        onChange={() => this.setState({ quantity: HintQuantity.THREE })}
+                        data-testid="3"
+                    />
+                    <Form.Check
+                        inline
+                        label="5"
+                        className={styles.check}
+                        checked={quantity === HintQuantity.FIVE}
+                        onChange={() => this.setState({ quantity: HintQuantity.FIVE })}
+                        data-testid="5"
+                    />
+                    <Form.Check
+                        label="Unlimited"
+                        className={styles.check}
+                        checked={quantity === HintQuantity.UNLIMITED}
+                        onChange={() => this.setState({ quantity: HintQuantity.UNLIMITED })}
+                        data-testid="Unlimited"
+                    />
+                </Col>
+            </Row>
         );
     }
 
