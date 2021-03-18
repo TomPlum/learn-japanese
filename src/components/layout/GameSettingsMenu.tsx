@@ -32,10 +32,13 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
     render() {
         return (
-            <Container fluid className={styles.wrapper}>
+            <Container className={styles.wrapper}>
                 <Row>
                     <Col xs={12} sm={4}>
-                        <GameTypeMenu onSelect={(selected) => this.setState({ selectedGameType: selected })} />
+                        <GameTypeMenu
+                            onSelect={(selected) => this.setState({ selectedGameType: selected })}
+                            className={styles.menu}
+                        />
                     </Col>
                     <Col xs={12} sm={8}>
                         {this.getGameTypeMenu()}

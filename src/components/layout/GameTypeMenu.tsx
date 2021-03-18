@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface GameTypeMenuProps {
     onSelect: (type: GameType) => void;
+    className?: string;
 }
 
 interface GameTypeMenuState {
@@ -27,7 +28,7 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
         const { selected } = this.state;
 
         return (
-            <Container fluid>
+            <div className={this.props.className}>
 
                 <Dropdown className={"d-sm-none " + styles.dropdown}>
                     <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -49,16 +50,17 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
                     </Dropdown.Menu>
                 </Dropdown>
 
-                <ListGroup className="d-sm-block d-none">
+                <ListGroup className={"d-sm-block d-none " + styles.menu}>
                     <GameTypeMenuOption type={GameType.KANA} onClick={this.handleChange} selected={selected}>
                         <FontAwesomeIcon fixedWidth icon={faFont} />
                     </GameTypeMenuOption>
+
                     <GameTypeMenuOption type={GameType.NUMBERS} onClick={this.handleChange} selected={selected}>
                         <FontAwesomeIcon fixedWidth icon={faYenSign} />
                     </GameTypeMenuOption>
                 </ListGroup>
 
-            </Container>
+            </div>
         );
     }
 

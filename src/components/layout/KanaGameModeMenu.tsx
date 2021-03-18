@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import { GameMode } from "../../types/GameMode";
 import { faCircle, faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -38,8 +38,10 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
             <Container fluid className={styles.wrapper + " " + this.props.className}>
                 {!isCustomisingSettings && <>
                     <Row>
-                        <Col className={styles.descWrapper}>
-                            <p className={styles.desc}>{this.getSelectedModeDescription()}</p>
+                        <Col>
+                            <Alert className={styles.desc} variant="success">
+                                {this.getSelectedModeDescription()}
+                            </Alert>
                         </Col>
                     </Row>
                     <Row>
@@ -107,7 +109,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
 
                     <Row>
                         <Col>
-                            <Button variant="success" className={styles.playButton} onClick={this.confirmSelected}>
+                            <Button variant="success" className={styles.playButton} block onClick={this.confirmSelected}>
                                 <FontAwesomeIcon size="xs" icon={faPlay}/> START
                             </Button>
                         </Col>

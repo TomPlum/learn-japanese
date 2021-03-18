@@ -10,7 +10,7 @@ const environment = jest.fn();
 const setup = () => {
     const component = render(<KanaGameModeMenu onSelectedMode={onSelectModeHandler} />);
     return {
-        start: component.getByText('Start'),
+        start: component.getByText('START'),
         relaxed: component.getByText('Relaxed'),
         timeAttack: component.getByText('Time Attack'),
         romanji: component.getByText('Romanji'),
@@ -139,7 +139,7 @@ test('Selecting \'Custom\' mode should render the custom settings menu', () => {
     fireEvent.click(custom);
 
     //Game Mode Menu should have been un-mounted
-    expect(screen.queryByText('Start')).not.toBeInTheDocument();
+    expect(screen.queryByText('START')).not.toBeInTheDocument();
 
     //Custom Settings Menu should have been rendered
     expect(screen.getByText('Confirm')).toBeInTheDocument();
