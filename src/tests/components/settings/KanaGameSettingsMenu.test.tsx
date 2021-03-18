@@ -1,4 +1,4 @@
-import GameSettingsMenu, { GameSettingsMenuProps } from "../../../components/settings/GameSettingsMenu";
+import KanaGameSettingsMenu, { KanaGameSettingsMenuProps } from "../../../components/settings/KanaGameSettingsMenu";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { DisplayType } from "../../../types/DisplayType";
 import { GameSettings } from "../../../types/GameSettings";
@@ -18,12 +18,12 @@ beforeEach(() => {
 
 const onSubmitHandler = jest.fn();
 
-let props: GameSettingsMenuProps = {
+let props: KanaGameSettingsMenuProps = {
     onSubmit: onSubmitHandler
 };
 
 const setup = () => {
-    const component = render(<GameSettingsMenu {...props} />);
+    const component = render(<KanaGameSettingsMenu {...props} />);
     return {
         confirm: screen.getByText('Confirm'),
         reset: screen.getByText('Reset'),

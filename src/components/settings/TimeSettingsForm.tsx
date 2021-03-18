@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { TimeSettings } from "../../types/GameSettings";
 import { Form } from "react-bootstrap";
-import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
+import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 
 export interface TimeSettingsFormProps {
     onChange: (settings: TimeSettings) => void;

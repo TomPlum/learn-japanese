@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Form, InputGroup } from "react-bootstrap";
 import { KanaSettings } from "../../types/GameSettings";
-import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
+import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 
 interface KanaSettingsProps {
     onSelect: (settings: KanaSettings) => void;

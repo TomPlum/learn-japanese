@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
+import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 import { faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../../types/GameSettings";
 import KanaSettingsForm from "./KanaSettingsForm";
@@ -11,11 +11,11 @@ import TimeSettingsForm from "./TimeSettingsForm";
 import { defaultDisplaySettings, defaultHintSettings, defaultKanaSettings, defaultLifeSettings, defaultTimeSettings } from "../../data/GameModePresets";
 import DisplaySettingsForm from "./DisplaySettingsForm";
 
-export interface GameSettingsMenuProps {
+export interface KanaGameSettingsMenuProps {
     onSubmit: (settings: GameSettings) => void;
 }
 
-interface GameSettingsMenuState {
+interface KanaGameSettingsMenuState {
     displaySettings: DisplaySettings;
     kanaSettings: KanaSettings;
     hintSettings: HintSettings;
@@ -23,7 +23,7 @@ interface GameSettingsMenuState {
     timeSettings: TimeSettings;
 }
 
-class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
+class KanaGameSettingsMenu extends Component<KanaGameSettingsMenuProps, KanaGameSettingsMenuState> {
 
     private readonly display: React.RefObject<DisplaySettingsForm>;
     private readonly kana: React.RefObject<KanaSettingsForm>;
@@ -31,7 +31,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     private readonly lives: React.RefObject<LifeSettingsForm>;
     private readonly time: React.RefObject<TimeSettingsForm>;
 
-    constructor(props: GameSettingsMenuProps | Readonly<GameSettingsMenuProps>) {
+    constructor(props: KanaGameSettingsMenuProps | Readonly<KanaGameSettingsMenuProps>) {
         super(props);
 
         this.display = React.createRef();
@@ -182,4 +182,4 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 }
 
-export default GameSettingsMenu;
+export default KanaGameSettingsMenu;

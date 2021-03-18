@@ -3,7 +3,7 @@ import { LifeSettings } from "../../types/GameSettings";
 import { LifeQuantity } from "../../types/LifeQuantity";
 import LivesSelector from "./LivesSelector";
 import { Form } from "react-bootstrap";
-import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
+import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 
 interface LifeSettingsFormProps {
     onChange: (settings: LifeSettings) => void;

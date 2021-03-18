@@ -2,7 +2,6 @@ import { Component } from "react";
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import { faAdjust, faFont, faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 import FontSelector from "./FontSelector";
 

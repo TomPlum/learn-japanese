@@ -2,7 +2,7 @@ import { Component } from "react";
 import { HintSettings } from "../../types/GameSettings";
 import { HintQuantity } from "../../types/HintQuantity";
 import { Form } from "react-bootstrap";
-import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
+import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 
 export interface HintSettingsFormProps {
     onChange: (settings: HintSettings) => void;

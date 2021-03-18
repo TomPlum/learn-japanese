@@ -4,24 +4,24 @@ import { GameMode } from "../../types/GameMode";
 import { faCircle, faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameModeButton from "./GameModeButton";
-import GameSettingsMenu from "../settings/GameSettingsMenu";
-import styles from "../../styles/sass/components/layout/GameModeMenu.module.scss";
+import KanaGameSettingsMenu from "../settings/KanaGameSettingsMenu";
+import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
 import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../../data/GameModePresets";
 import { GameSettings } from "../../types/GameSettings";
 import { Environment } from "../../utility/Environment";
 
-export interface GameModeMenuProps {
+export interface KanaGameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;
 }
 
-interface GameModeMenuState {
+interface KanaGameModeMenuState {
     selected: GameMode;
     settings: GameSettings;
     isCustomisingSettings: boolean;
 }
 
-class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
-    constructor(props: GameModeMenuProps | Readonly<GameModeMenuProps>) {
+class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenuState> {
+    constructor(props: KanaGameModeMenuProps | Readonly<KanaGameModeMenuProps>) {
         super(props);
         this.state = {
             selected: GameMode.RELAXED,
@@ -113,7 +113,7 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
                     </Row>
                 </>}
 
-                {isCustomisingSettings && <GameSettingsMenu onSubmit={this.setCustomSettings}/>}
+                {isCustomisingSettings && <KanaGameSettingsMenu onSubmit={this.setCustomSettings}/>}
             </Container>
         );
     }
@@ -156,4 +156,4 @@ class GameModeMenu extends Component<GameModeMenuProps, GameModeMenuState> {
     private getSelectedModeDescription = () => Environment.variable("MODE_DESC_" + this.state.selected);
 }
 
-export default GameModeMenu;
+export default KanaGameModeMenu;
