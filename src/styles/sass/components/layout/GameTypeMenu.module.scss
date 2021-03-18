@@ -1,5 +1,19 @@
 .dropdown {
   width: 100%;
+  margin-bottom: 15px;
+  z-index: 1000;
+}
+
+.dropdownMenu {
+  width: 100%;
+  z-index: 1000;
+}
+
+.dropdownToggle {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.5em;
+  width: 100%;
+  z-index: 1000;
 }
 
 .menu {

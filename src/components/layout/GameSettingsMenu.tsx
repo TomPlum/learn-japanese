@@ -32,7 +32,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
     render() {
         return (
-            <Container className={styles.wrapper}>
+            <div className={styles.wrapper}>
                 <Row className={styles.row}>
                     <Col sm={12} md={6} lg={5} xl={4}>
                         <GameTypeMenu
@@ -44,7 +44,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                         {this.getGameTypeMenu()}
                     </Col>
                 </Row>
-            </Container>
+            </div>
         );
     }
 

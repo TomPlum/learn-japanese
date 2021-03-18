@@ -35,7 +35,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
         const { isCustomisingSettings, selected } = this.state;
 
         return (
-            <Container fluid className={styles.wrapper + " " + this.props.className}>
+            <div className={styles.wrapper + " " + this.props.className}>
                 {!isCustomisingSettings && <>
                     <Row>
                         <Col>
@@ -117,7 +117,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
                 </>}
 
                 {isCustomisingSettings && <KanaGameSettingsMenu onSubmit={this.setCustomSettings}/>}
-            </Container>
+            </div>
         );
     }
 

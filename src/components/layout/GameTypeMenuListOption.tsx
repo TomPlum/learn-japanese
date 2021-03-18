@@ -1,7 +1,7 @@
 import React, { Component, ReactElement } from "react";
 import { GameType } from "../../types/GameType";
 import { ListGroupItem } from "react-bootstrap";
-import styles from "../../styles/sass/components/layout/GameTypeMenuOption.module.scss";
+import styles from "../../styles/sass/components/layout/GameTypeMenuListOption.module.scss";
 
 interface GameTypeMenuOptionProps {
     type: GameType;
@@ -9,7 +9,7 @@ interface GameTypeMenuOptionProps {
     onClick?: (type: GameType) => void;
 }
 
-class GameTypeMenuOption extends Component<GameTypeMenuOptionProps> {
+class GameTypeMenuListOption extends Component<GameTypeMenuOptionProps> {
     render() {
         const { type, selected } = this.props;
         return(
@@ -27,4 +27,4 @@ class GameTypeMenuOption extends Component<GameTypeMenuOptionProps> {
     }
 }
 
-export default GameTypeMenuOption;
+export default GameTypeMenuListOption;
