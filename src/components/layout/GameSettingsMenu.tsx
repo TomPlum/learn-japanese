@@ -1,10 +1,10 @@
 import { Component } from "react";
-import { Col, Container, Fade, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { GameType } from "../../types/GameType";
 import KanaGameModeMenu from "./KanaGameModeMenu";
-import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 import GameTypeMenu from "./GameTypeMenu";
 import { GameSettings } from "../../types/GameSettings";
+import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 
 export interface GameTypeSettings {
     type: GameType;
@@ -33,14 +33,14 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     render() {
         return (
             <Container className={styles.wrapper}>
-                <Row>
-                    <Col xs={12} sm={4}>
+                <Row className={styles.row}>
+                    <Col sm={12} md={6} lg={5} xl={4}>
                         <GameTypeMenu
                             onSelect={(selected) => this.setState({ selectedGameType: selected })}
                             className={styles.menu}
                         />
                     </Col>
-                    <Col xs={12} sm={8}>
+                    <Col sm={12} md={6} lg={7} xl={8}>
                         {this.getGameTypeMenu()}
                     </Col>
                 </Row>
@@ -61,6 +61,9 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
             }
             case GameType.NUMBERS: {
                 return <p className={styles.menu} style={{color: '#FFF'}}>Numbers menu here</p>
+            }
+            case GameType.KANJI: {
+                return <p className={styles.menu} style={{color: '#FFF'}}>Kanji menu here</p>
             }
         }
     }

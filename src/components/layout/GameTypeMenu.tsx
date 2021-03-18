@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Container, Dropdown, ListGroup } from "react-bootstrap";
+import { Dropdown, ListGroup } from "react-bootstrap";
 import { GameType } from "../../types/GameType";
 import styles from "../../styles/sass/components/layout/GameTypeMenu.module.scss";
 import GameTypeMenuOption from "./GameTypeMenuOption";
-import { faFont, faYenSign } from "@fortawesome/free-solid-svg-icons";
+import { faFont, faPaintBrush, faYenSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface GameTypeMenuProps {
@@ -30,7 +30,7 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
         return (
             <div className={this.props.className}>
 
-                <Dropdown className={"d-sm-none " + styles.dropdown}>
+                <Dropdown className={"d-md-none " + styles.dropdown}>
                     <Dropdown.Toggle variant="primary" id="dropdown-basic">
                         {selected}
                     </Dropdown.Toggle>
@@ -50,13 +50,17 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
                     </Dropdown.Menu>
                 </Dropdown>
 
-                <ListGroup className={"d-sm-block d-none " + styles.menu}>
+                <ListGroup className={"d-md-block d-none " + styles.menu}>
                     <GameTypeMenuOption type={GameType.KANA} onClick={this.handleChange} selected={selected}>
                         <FontAwesomeIcon fixedWidth icon={faFont} />
                     </GameTypeMenuOption>
 
                     <GameTypeMenuOption type={GameType.NUMBERS} onClick={this.handleChange} selected={selected}>
                         <FontAwesomeIcon fixedWidth icon={faYenSign} />
+                    </GameTypeMenuOption>
+
+                    <GameTypeMenuOption type={GameType.KANJI} onClick={this.handleChange} selected={selected}>
+                        <FontAwesomeIcon fixedWidth icon={faPaintBrush} />
                     </GameTypeMenuOption>
                 </ListGroup>
 

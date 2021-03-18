@@ -1,4 +1,5 @@
 export enum GameType {
     KANA = "Hiragana & Katakana",
-    NUMBERS = "Numbers & Counting"
+    NUMBERS = "Numbers & Counting",
+    KANJI = "Jōyō Kanji"
 }

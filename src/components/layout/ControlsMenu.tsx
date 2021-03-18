@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { faAdjust, faFont, faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { faAdjust, faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 import FontSelector from "./FontSelector";
@@ -8,7 +8,7 @@ import FontSelector from "./FontSelector";
 class ControlsMenu extends Component<any, any> {
     render() {
         return (
-            <Container className={styles.wrapper} fluid>
+            <div className={styles.wrapper}>
                 <Navbar variant="dark" fixed="top" className={styles.navbar}>
                     <Container className={styles.innerWrapper} fluid>
                         <Nav className={styles.nav}>
@@ -47,7 +47,7 @@ class ControlsMenu extends Component<any, any> {
                         </Nav>
                     </Container>
                 </Navbar>
-            </Container>
+            </div>
         );
     }
 }
