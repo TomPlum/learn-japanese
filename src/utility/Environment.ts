@@ -12,7 +12,7 @@ export class Environment {
         //Prepend 'REACT_APP'.
         const variable = "REACT_APP_" + casing;
 
-        console.log("Reading " + variable + " from " + process.env.NODE_ENV);
+        //console.log("Reading " + variable + " from " + process.env.NODE_ENV);
         return process.env[variable] as string;
     }
 }

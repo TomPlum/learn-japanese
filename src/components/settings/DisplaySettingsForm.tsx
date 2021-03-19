@@ -64,6 +64,9 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
                 </Col>
                 {type === DisplayType.KANA && <Col xs={12}>
                     <Row>
+                        <Col xs={12}>
+                            <p className={styles.quantityDescription}>You'll be shown {cards} kana to choose from.</p>
+                        </Col>
                         <Col>
                             <KanaQuantityButton cards={2} selected={cards} onClick={(quantity => this.handleQuantitySelect(quantity))}>
                                 <span className={"fa-layers fa-fw " + styles.cardsIcon}>

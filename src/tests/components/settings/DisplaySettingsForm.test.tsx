@@ -60,3 +60,32 @@ test('Selecting romaji mode should change the description accordingly', () => {
     expect(environment).toHaveBeenCalledWith('Rōmaji_MODE_DESC');
     expect(screen.getByText('Romaji mode description'))
 });
+
+test('Selecting kana mode should render the 3 quantity buttons', () => {
+    const { kanaModeButton } = setup();
+    fireEvent.click(kanaModeButton);
+    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByText('4')).toBeInTheDocument();
+    expect(screen.getByText('6')).toBeInTheDocument();
+});
+
+test('Selecting 2 kana quantity should update the description', () => {
+    const { kanaModeButton } = setup();
+    fireEvent.click(kanaModeButton);
+    fireEvent.click(screen.getByText('2'));
+    expect(screen.getByText('You\'ll be shown 2 kana to choose from.'));
+});
+
+test('Selecting 4 kana quantity should update the description', () => {
+    const { kanaModeButton } = setup();
+    fireEvent.click(kanaModeButton);
+    fireEvent.click(screen.getByText('4'));
+    expect(screen.getByText('You\'ll be shown 4 kana to choose from.'));
+});
+
+test('Selecting 6 kana quantity should update the description', () => {
+    const { kanaModeButton } = setup();
+    fireEvent.click(kanaModeButton);
+    fireEvent.click(screen.getByText('6'));
+    expect(screen.getByText('You\'ll be shown 6 kana to choose from.'));
+});
