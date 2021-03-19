@@ -6,13 +6,13 @@
 .leftColumn {
   display: flex;
   justify-content: flex-end;
-  padding-right: 10px;
+  padding-right: 6px;
 }
 
 .rightColumn {
   display: flex;
   justify-content: flex-start;
-  padding-left: 10px;
+  padding-left: 5px;
 }
 
 .playButton {
@@ -37,4 +37,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 12px;
 }
