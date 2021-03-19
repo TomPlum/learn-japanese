@@ -2,10 +2,12 @@ import { Component } from "react";
 import { DisplaySettings } from "../../types/GameSettings";
 import { DisplayType } from "../../types/DisplayType";
 import DisplayTypeButton from "./DisplayTypeButton";
-import { faFont, faThLarge } from "@fortawesome/free-solid-svg-icons";
+import { faFont, faGripVertical, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/settings/DisplaySettingsForm.module.scss";
 import { Environment } from "../../utility/Environment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "../../styles/sass/components/settings/DisplaySettingsForm.module.scss";
+import KanaQuantityButton from "./KanaQuantityButton";
 
 export interface DisplaySettingsFormProps {
     onChange: (settings: DisplaySettings) => void;
@@ -37,7 +39,7 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
     }
 
     render() {
-        const { type } = this.state;
+        const { type, cards } = this.state;
 
         return (
             <Row>
@@ -60,11 +62,37 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
                         onClick={(type) => this.setState({ type, cards: 4 })}
                     />
                 </Col>
+                {type === DisplayType.KANA && <Col xs={12}>
+                    <Row>
+                        <Col>
+                            <KanaQuantityButton cards={2} selected={cards} onClick={(quantity => this.handleQuantitySelect(quantity))}>
+                                <span className={"fa-layers fa-fw " + styles.cardsIcon}>
+                                    <FontAwesomeIcon fixedWidth icon={faSquare} transform="left-5 shrink-8" />
+                                    <FontAwesomeIcon fixedWidth icon={faSquare} transform="right-5 shrink-8" />
+                                </span>
+                            </KanaQuantityButton>
+                        </Col>
+                        <Col>
+                            <KanaQuantityButton cards={4} selected={cards} onClick={(quantity) => this.handleQuantitySelect(quantity)}>
+                                <FontAwesomeIcon fixedWidth className={styles.cardsIcon} icon={faThLarge} />
+                            </KanaQuantityButton>
+                        </Col>
+                        <Col>
+                            <KanaQuantityButton cards={6} selected={cards} onClick={(quantity => this.handleQuantitySelect(quantity))}>
+                                <FontAwesomeIcon fixedWidth className={styles.cardsIcon} icon={faGripVertical} transform="grow-4" />
+                            </KanaQuantityButton>
+                        </Col>
+                    </Row>
+                </Col>}
             </Row>
         );
     }
 
     reset = () => this.setState(this.defaultState);
+
+    private handleQuantitySelect = (quantity: number) => {
+        this.setState({ cards: quantity });
+    }
 
     private getDescription = () => Environment.variable(this.state.type + "_MODE_DESC");
 }
