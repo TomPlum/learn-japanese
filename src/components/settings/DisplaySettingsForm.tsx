@@ -41,6 +41,9 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
 
         return (
             <Row>
+                <Col xs={12} className={styles.descriptionWrapper}>
+                    <span className={styles.description}>{this.getDescription()}</span>
+                </Col>
                 <Col>
                     <DisplayTypeButton
                         icon={faFont}
@@ -56,9 +59,6 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
                         selected={type}
                         onClick={(type) => this.setState({ type, cards: 4 })}
                     />
-                </Col>
-                <Col xs={12}>
-                    <span className={styles.description}>{this.getDescription()}</span>
                 </Col>
             </Row>
         );
