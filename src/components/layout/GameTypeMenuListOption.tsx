@@ -4,24 +4,26 @@ import { ListGroupItem } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/GameTypeMenuListOption.module.scss";
 
 interface GameTypeMenuOptionProps {
-    type: GameType;
-    selected: GameType;
-    onClick?: (type: GameType) => void;
+    type?: GameType;
+    text?: string;
+    selected?: GameType;
+    onClick?: (type?: GameType) => void;
+    isHeading?: boolean;
 }
 
 class GameTypeMenuListOption extends Component<GameTypeMenuOptionProps> {
     render() {
-        const { type, selected } = this.props;
+        const { type, text, isHeading, selected, children } = this.props;
         return(
             <ListGroupItem
-                action
+                action={!isHeading}
                 onClick={() => this.props?.onClick?.(type)}
                 eventKey={type}
-                active={selected === type}
-                className={styles.item}
+                active={selected === type && !isHeading}
+                className={!isHeading ? styles.item : styles.heading}
             >
-                {React.cloneElement(this.props.children as ReactElement, { className: styles.icon })}
-                <span className={styles.text}>{type}</span>
+                {children && React.cloneElement(children as ReactElement, { className: styles.icon })}
+                <span className={styles.text}>{text ? text : type}</span>
             </ListGroupItem>
         );
     }

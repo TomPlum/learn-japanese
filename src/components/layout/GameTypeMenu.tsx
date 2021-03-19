@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Dropdown, ListGroup } from "react-bootstrap";
+import { Dropdown, ListGroup, ListGroupItem } from "react-bootstrap";
 import { GameType } from "../../types/GameType";
 import styles from "../../styles/sass/components/layout/GameTypeMenu.module.scss";
 import GameTypeMenuListOption from "./GameTypeMenuListOption";
-import { faFont, faPaintBrush, faYenSign } from "@fortawesome/free-solid-svg-icons";
+import { faFont, faGamepad, faPaintBrush, faYenSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameTypeMenuDropdownOption from "./GameTypeMenuDropdownOption";
 
@@ -31,7 +31,7 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
         return (
             <div className={this.props.className}>
 
-                <Dropdown className={"d-md-none " + styles.dropdown}>
+                <Dropdown className={"d-md-none " + styles.dropdown} data-testid="dropdown">
                     <Dropdown.Toggle variant="primary" className={styles.dropdownToggle} id="select-game-type">
                         <FontAwesomeIcon fixedWidth icon={this.getDropdownToggleIcon()} /> {selected}
                     </Dropdown.Toggle>
@@ -51,7 +51,14 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
                     </Dropdown.Menu>
                 </Dropdown>
 
-                <ListGroup className={"d-md-block d-none " + styles.menu}>
+
+                <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group-header">
+                    <GameTypeMenuListOption text="Select Game Mode" isHeading>
+                        <FontAwesomeIcon fixedWidth icon={faGamepad} />
+                    </GameTypeMenuListOption>
+                </ListGroup>
+
+                <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group">
                     <GameTypeMenuListOption type={GameType.KANA} onClick={this.handleChange} selected={selected}>
                         <FontAwesomeIcon fixedWidth icon={faFont} />
                     </GameTypeMenuListOption>
@@ -77,9 +84,11 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
         }
     }
 
-    private handleChange = (type: GameType) => {
-        this.setState({ selected: type });
-        this.props.onSelect(type);
+    private handleChange = (type?: GameType) => {
+        if (type) {
+            this.setState({ selected: type });
+            this.props.onSelect(type);
+        }
     }
 }
 

@@ -11,11 +11,11 @@ interface GameTypeMenuDropdownOptionProps {
 
 class GameTypeMenuDropdownOption extends Component<GameTypeMenuDropdownOptionProps> {
     render() {
-        const { type, selected, onClick } = this.props;
+        const { type, selected, onClick, children } = this.props;
 
         return (
             <Dropdown.Item onClick={() => onClick(type)} eventKey={type} active={type === selected}>
-                {React.cloneElement(this.props.children as ReactElement, { className: styles.icon })}
+                {children && React.cloneElement(children as ReactElement, { className: styles.icon })}
                 <span className={styles.text}>{type}</span>
             </Dropdown.Item>
         );

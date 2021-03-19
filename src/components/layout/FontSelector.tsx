@@ -74,6 +74,7 @@ class FontSelector extends Component<FontSelectorProps, FontSelectorState> {
                                 onSelect={this.handleSelect}
                                 style={{ fontFamily: font.name }}
                                 className={styles.font}
+                                key={font.name}
                             >
                                 {font.displayName}
                                 {selected === font.name &&
