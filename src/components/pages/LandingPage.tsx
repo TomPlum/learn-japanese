@@ -78,7 +78,8 @@ class LandingPage extends Component {
                         <Col xs={6} md={3} className={styles.buttonWrapper}>
                             <Link to="/kanji">
                                 <Button className={styles.button} variant="outline-danger">
-                                    <FontAwesomeIcon icon={faPaintBrush} /> Kanji
+                                    <FontAwesomeIcon icon={faPaintBrush} className={styles.buttonIcon} />
+                                    <span className={styles.buttonText}> Kanji</span>
                                 </Button>
                             </Link>
                         </Col>
