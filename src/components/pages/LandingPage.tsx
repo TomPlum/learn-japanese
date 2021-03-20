@@ -69,7 +69,8 @@ class LandingPage extends Component {
                         <Col xs={6} md={3} className={styles.buttonWrapper}>
                             <Link to="/play">
                                 <Button className={styles.button} variant="outline-success">
-                                    <FontAwesomeIcon icon={faPlay} /> Play
+                                    <FontAwesomeIcon icon={faPlay} className={styles.buttonIcon} />
+                                    <span className={styles.buttonText}> Play</span>
                                 </Button>
                             </Link>
                         </Col>
@@ -85,7 +86,8 @@ class LandingPage extends Component {
                         <Col xs={6} md={3} className={styles.buttonWrapper}>
                             <Link to="/search">
                                 <Button className={styles.button} variant="outline-info">
-                                    <FontAwesomeIcon icon={faSearch} /> Search
+                                    <FontAwesomeIcon icon={faSearch} className={styles.buttonIcon} />
+                                    <span className={styles.buttonText}> Search</span>
                                 </Button>
                             </Link>
                         </Col>
@@ -93,7 +95,8 @@ class LandingPage extends Component {
                         <Col xs={6} md={3} className={styles.buttonWrapper}>
                             <Link to="/help">
                                 <Button variant="outline-warning" className={styles.button} title="Help">
-                                    <FontAwesomeIcon icon={faQuestion} /> Help
+                                    <FontAwesomeIcon icon={faQuestion} className={styles.buttonIcon} />
+                                    <span className={styles.buttonText}> Help</span>
                                 </Button>
                             </Link>
                         </Col>

@@ -30,6 +30,7 @@ class RomanjiInput extends Component<RomanjiInputProps> {
                 placeholder={placeholder}
                 onChange={this.handleOnChange}
                 onKeyPress={this.handleKeyPress}
+                onFocus={this.handleFocus}
                 ref={this.input}
             />
         );
@@ -47,6 +48,10 @@ class RomanjiInput extends Component<RomanjiInputProps> {
 
     private handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         this.props?.onChange?.(e.target.value);
+    }
+
+    private handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+        e.preventDefault();
     }
 }
 

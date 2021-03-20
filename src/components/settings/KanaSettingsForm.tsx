@@ -1,7 +1,7 @@
 import { Component } from "react";
-import { Form, InputGroup } from "react-bootstrap";
+import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { KanaSettings } from "../../types/GameSettings";
-import styles from "../../styles/sass/components/settings/GameSettingsMenu.module.scss";
+import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
 
 interface KanaSettingsProps {
     onSelect: (settings: KanaSettings) => void;
@@ -38,47 +38,50 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
         const { hiragana, katakana, diagraphs, quantity } = this.state;
 
         return (
-            <Form.Row>
-                <Form.Check
-                    inline
-                    label="Hiragana"
-                    className={styles.check}
-                    checked={hiragana}
-                    onChange={() => this.setState({ hiragana: !hiragana })}
-                    disabled={hiragana && !katakana}
-                    data-testid="Hiragana"
-                />
-                <Form.Check
-                    inline
-                    label="Katakana"
-                    className={styles.check}
-                    checked={katakana}
-                    onChange={() => this.setState({ katakana: !katakana })}
-                    disabled={katakana && !hiragana}
-                    data-testid="Katakana"
-                />
-                <Form.Check
-                    label="Diagraphs"
-                    className={styles.check}
-                    checked={diagraphs}
-                    onChange={() => this.setState({ diagraphs: !diagraphs })}
-                    data-testid="Diagraphs"
-                />
-
-                <InputGroup hasValidation>
-                    <InputGroup.Prepend>
-                        <InputGroup.Text>Quantity</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <Form.Control
-                        onChange={(e) => this.setState({ quantity: Number(e.target.value) })}
-                        type="number"
-                        required
-                        value={quantity}
-                        placeholder="Enter kana quantity"
-                        isInvalid={quantity < 1 || quantity > 214}
+            <Row>
+                <Col>
+                    <Form.Check
+                        inline
+                        label="Hiragana"
+                        className={styles.check}
+                        checked={hiragana}
+                        onChange={() => this.setState({ hiragana: !hiragana })}
+                        disabled={hiragana && !katakana}
+                        data-testid="Hiragana"
                     />
-                </InputGroup>
-            </Form.Row>
+                    <Form.Check
+                        inline
+                        label="Katakana"
+                        className={styles.check}
+                        checked={katakana}
+                        onChange={() => this.setState({ katakana: !katakana })}
+                        disabled={katakana && !hiragana}
+                        data-testid="Katakana"
+                    />
+                    <Form.Check
+                        label="Diagraphs"
+                        className={styles.check}
+                        checked={diagraphs}
+                        onChange={() => this.setState({ diagraphs: !diagraphs })}
+                        data-testid="Diagraphs"
+                    />
+
+                    <InputGroup hasValidation>
+                        <InputGroup.Prepend>
+                            <InputGroup.Text>Quantity</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Form.Control
+                            onChange={(e) => this.setState({ quantity: Number(e.target.value) })}
+                            type="number"
+                            required
+                            value={quantity}
+                            placeholder="Enter kana quantity"
+                            isInvalid={quantity < 1 || quantity > 214}
+                        />
+                    </InputGroup>
+                </Col>
+
+            </Row>
         );
     }
 

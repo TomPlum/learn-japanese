@@ -8,6 +8,7 @@ import { Kana } from "../../types/Kana";
 import { HintSettings } from "../../types/GameSettings";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
+import SubmitButton from "../ui/SubmitButton";
 
 export interface RomanjiQuestionProps {
     kana: Kana;
@@ -78,15 +79,7 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
                         </Row>
                     </Form.Group>
 
-                    <Button
-                        className={styles.submit}
-                        variant={!!kana ? "success" : "primary"}
-                        type="button"
-                        disabled={!answer && !!kana || hidden}
-                        onClick={this.answer}
-                    >
-                        {!!kana ? "Check" : <><FontAwesomeIcon icon={faRedoAlt}/> Restart</>}
-                    </Button>
+                    <SubmitButton onClick={this.answer} disabled={!answer && !!kana || hidden} isRestart={!kana} />
                 </Form>
             </>
         );

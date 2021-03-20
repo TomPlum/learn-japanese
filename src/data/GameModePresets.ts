@@ -5,7 +5,7 @@ import { DisplayType } from "../types/DisplayType";
 
 // Default Settings
 export const defaultDisplaySettings: DisplaySettings = {
-    type: DisplayType.SINGLE_KANA,
+    type: DisplayType.ROMAJI,
     cards: 1
 }
 
@@ -32,7 +32,7 @@ export const defaultTimeSettings: TimeSettings = {
 
 // Game Mode Presets
 export const RELAXED: GameSettings = {
-    display: { type: DisplayType.SINGLE_KANA, cards: 1 },
+    display: { type: DisplayType.ROMAJI, cards: 1 },
     kana: defaultKanaSettings,
     hints: defaultHintSettings,
     lives: { enabled: false },
@@ -40,7 +40,7 @@ export const RELAXED: GameSettings = {
 }
 
 export const ROMANJI: GameSettings = {
-    display: { type: DisplayType.SINGLE_KANA, cards: 1 },
+    display: { type: DisplayType.ROMAJI, cards: 1 },
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },
     lives: defaultLifeSettings,
@@ -48,7 +48,7 @@ export const ROMANJI: GameSettings = {
 }
 
 export const KANA: GameSettings = {
-    display: { type: DisplayType.MULTIPLE_CARDS, cards: 4 },
+    display: { type: DisplayType.KANA, cards: 4 },
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },
     lives: defaultLifeSettings,
@@ -56,7 +56,7 @@ export const KANA: GameSettings = {
 }
 
 export const TIME_ATTACK: GameSettings = {
-    display: { type: DisplayType.SINGLE_KANA, cards: 1 },
+    display: { type: DisplayType.ROMAJI, cards: 1 },
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },
     lives: { enabled: false },
@@ -64,7 +64,7 @@ export const TIME_ATTACK: GameSettings = {
 }
 
 export const HARDCORE: GameSettings = {
-    display: { type: DisplayType.MULTIPLE_CARDS, cards: 6 },
+    display: { type: DisplayType.KANA, cards: 6 },
     kana: defaultKanaSettings,
     hints: { enabled: false },
     lives: { enabled: true, quantity: LifeQuantity.ONE },

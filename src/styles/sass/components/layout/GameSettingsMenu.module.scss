@@ -1,0 +1,24 @@
+@import "../../animations";
+
+.wrapper {
+  max-width: 1400px;
+  width: 100%;
+  min-height: 610px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  width: 100%;
+  height: 100%;
+}
+
+.menu {
+  @include fadeIn(0.2s);
+}
+
+.gameMenuWrapper {
+  display: flex;
+  justify-content: center;
+}
