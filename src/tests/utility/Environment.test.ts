@@ -17,7 +17,7 @@ describe("Environment", () => {
     });
 
     it("Should replace special characters from variable key names", () => {
-        const value = Environment.variable('CONTAINS_SPECIAL_CHARACTERS_ō');
+        const value = Environment.variable('CōNTAINS_SPECIAL_CHARACTERS');
         expect(value).toBe('Special characters should work');
     });
 });

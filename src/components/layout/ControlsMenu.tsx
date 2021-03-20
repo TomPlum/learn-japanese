@@ -4,6 +4,7 @@ import { faAdjust, faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 import FontSelector from "./FontSelector";
+import HashLink from "./HashLink";
 
 class ControlsMenu extends Component<any, any> {
     render() {
@@ -14,12 +15,12 @@ class ControlsMenu extends Component<any, any> {
                         <Nav className={styles.nav}>
                             <Row className={styles.row} noGutters>
                                 <Col>
-                                    <Nav.Link href="/" className={styles.navLink}>
+                                    <HashLink path="/" className={styles.navLink}>
                                         <div>
                                             <FontAwesomeIcon icon={faHome} className={styles.icon} title="Home" />
                                         </div>
                                         <span className={styles.linkText}>HOME</span>
-                                    </Nav.Link>
+                                    </HashLink>
                                 </Col>
 
                                 <Col>
@@ -36,12 +37,12 @@ class ControlsMenu extends Component<any, any> {
                                 </Col>
 
                                 <Col>
-                                    <Nav.Link href="/help" className={styles.navLink}>
+                                    <HashLink path="/help" className={styles.navLink}>
                                         <div>
                                             <FontAwesomeIcon icon={faQuestionCircle} className={styles.icon} title="Help" />
                                         </div>
                                         <span className={styles.linkText}>HELP</span>
-                                    </Nav.Link>
+                                    </HashLink>
                                 </Col>
                             </Row>
                         </Nav>
