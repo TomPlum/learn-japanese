@@ -1,8 +1,10 @@
 @mixin button {
-  height: 100px;
-  max-width: 300px;
+  height: 125px;
   width: 100%;
-  margin-bottom: 10px;
+  max-width: 380px;
+  margin-bottom: 12px;
+  font-size: 1.2em;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
 }
 
 .notSelected:hover {
@@ -32,7 +34,6 @@
 
 .icon {
   font-size: 1.6em;
-  margin-bottom: 5px;
 }
 
 .name {

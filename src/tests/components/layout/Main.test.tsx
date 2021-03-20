@@ -22,25 +22,25 @@ test('Navigating to the root URI should route to the Landing page', () => {
 });
 
 test('Navigating to the /play should route to the Game page', () => {
-    createHashHistory({}).push('/play');
+    createHashHistory().push('/play');
     setup();
     expect(screen.getByText('Relaxed')).toBeInTheDocument();
 });
 
 test('Navigating to the /search should route to the Search page', () => {
-    createHashHistory({}).push('/search');
+    createHashHistory().push('/search');
     setup();
     expect(screen.getByTestId('search-page')).toBeInTheDocument();
 });
 
 test('Navigating to the /help should route to the Help page', () => {
-    createHashHistory({}).push('/help');
+    createHashHistory().push('/help');
     setup();
     expect(screen.getByText('Frequently Asked Questions')).toBeInTheDocument();
 });
 
 test('Navigating to an unknown URI should route to the Not Found page', () => {
-    createHashHistory({}).push('/nope');
+    createHashHistory().push('/nope');
     setup();
     expect(screen.getByText('Nani!?')).toBeInTheDocument();
 });

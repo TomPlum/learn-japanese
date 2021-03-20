@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import GameModeMenu from "../../../components/layout/GameModeMenu";
+import KanaGameModeMenu from "../../../components/layout/KanaGameModeMenu";
 import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../../../data/GameModePresets";
 import { GameMode } from "../../../types/GameMode";
 import { Environment } from "../../../utility/Environment";
@@ -8,9 +8,9 @@ const onSelectModeHandler = jest.fn();
 const environment = jest.fn();
 
 const setup = () => {
-    const component = render(<GameModeMenu onSelectedMode={onSelectModeHandler} />);
+    const component = render(<KanaGameModeMenu onSelectedMode={onSelectModeHandler} />);
     return {
-        start: component.getByText('Start'),
+        start: component.getByText('START'),
         relaxed: component.getByText('Relaxed'),
         timeAttack: component.getByText('Time Attack'),
         romanji: component.getByText('Romanji'),
@@ -139,7 +139,7 @@ test('Selecting \'Custom\' mode should render the custom settings menu', () => {
     fireEvent.click(custom);
 
     //Game Mode Menu should have been un-mounted
-    expect(screen.queryByText('Start')).not.toBeInTheDocument();
+    expect(screen.queryByText('START')).not.toBeInTheDocument();
 
     //Custom Settings Menu should have been rendered
     expect(screen.getByText('Confirm')).toBeInTheDocument();

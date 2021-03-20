@@ -5,6 +5,7 @@ import KanaDisplay from "./KanaDisplay";
 import { Button, Col, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 import KanaQuestionBanner from "./KanaQuestionBanner";
+import SubmitButton from "../ui/SubmitButton";
 
 export interface KanaChoiceQuestionProps {
     expected: Kana;
@@ -78,9 +79,7 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
                     })}
                 </Row>
 
-                <Button variant={"success"} type="button" disabled={!selected || hidden} onClick={this.answer} block>
-                    Check
-                </Button>
+                <SubmitButton onClick={this.answer} disabled={!selected || hidden} />
             </div>
         );
     }

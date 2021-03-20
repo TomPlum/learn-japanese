@@ -1,0 +1,22 @@
+.check {
+  float: right;
+}
+
+.font {
+  font-size: 1.1em;
+}
+
+.menu {
+  width: 100%;
+  max-width: 300px;
+  animation: fade 0.15s ease-in forwards;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

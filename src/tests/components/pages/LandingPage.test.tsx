@@ -60,6 +60,7 @@ beforeEach(() => {
 afterEach(() => {
     jest.runOnlyPendingTimers();
     jest.useRealTimers();
+    jest.restoreAllMocks();
 });
 
 test('Should render the leading heading', () => {

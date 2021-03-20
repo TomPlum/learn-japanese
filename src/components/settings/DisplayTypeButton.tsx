@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "react-bootstrap";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/settings/DisplayTypeButton.module.scss";
+import { DisplayType } from "../../types/DisplayType";
 
 interface DisplayTypeButtonProps {
-    text: string;
+    type: DisplayType;
+    selected: DisplayType;
     icon: IconDefinition;
-    selected: boolean;
-    onClick: () => void;
+    onClick: (type: DisplayType) => void;
 }
 
 class DisplayTypeButton extends Component<DisplayTypeButtonProps> {
@@ -21,19 +22,19 @@ class DisplayTypeButton extends Component<DisplayTypeButtonProps> {
     }
 
     render() {
-        const { icon, onClick, text, selected } = this.props;
+        const { type, selected, icon, onClick } = this.props;
 
         return (
             <Button
                 block
-                className={selected ? styles.selected : styles.notSelected}
-                onClick={onClick}
+                className={selected === type ? styles.selected : styles.notSelected}
+                onClick={() => onClick(type)}
             >
                 <FontAwesomeIcon
                     className={styles.icon}
                     icon={icon}
                 />
-                <p className={styles.name}>{text}</p>
+                <p className={styles.name}>{type}</p>
             </Button>
         );
     }
