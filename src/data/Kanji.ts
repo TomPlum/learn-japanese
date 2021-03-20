@@ -887,6 +887,86 @@ export function kyoiku(): KanjiData[] {
                 { value: "雨量", kana: ["うりょう"], english: ["rainfall"] },
             ]
         },
+        {
+            name: "目",
+            code: "\u76EE",
+            on: [{ kana: "もく", romanji: "moku" }],
+            kun: [{ kana: "め", romanji: "me" }],
+            source: "https://en.wiktionary.org/wiki/%E7%9B%AE#Kanji",
+            meanings: ["eye", "look"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "目的", kana: ["もくてき"], english: ["purpose", "goal", "aim", "objective", "intention"] },
+                { value: "目標", kana: ["もくひょう"], english: ["mark", "objective", "target"] },
+                { value: "注目", kana: ["ちゅうもく"], english: ["notice", "attention", "observation"] },
+                { value: "項目", kana: ["こうもく"], english: ["item, entry"] },
+                { value: "名目", kana: ["めいもく", "みょうもく"], english: ["name", "title", "appellation"] },
+            ]
+        },
+        {
+            name: "正",
+            code: "\u6B63",
+            on: [{ kana: "しょう", romanji: "sho" }],
+            kun: [{ kana: "ただしい", romanji: "tadashii" }],
+            source: "https://en.wiktionary.org/wiki/%E6%AD%A3#Kanji",
+            meanings: ["correct", "justice", "righteous"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "正", kana: ["せい"], english: ["true", "regular", "original"] },
+                { value: "改正", kana: ["かいせい"], english: ["revision", "amendment", "alteration"] },
+                { value: "修正", kana: ["しゅうせい"], english: ["amendment", "correction", "revision", "modification"] },
+                { value: "正式", kana: ["せいしき"], english: ["due form", "official", "formality"] },
+                { value: "正常", kana: ["せいじょう"], english: ["normalcy", "normality", "normal"] },
+            ]
+        },
+        {
+            name: "口",
+            code: "\u53E3",
+            on: [{ kana: "く", romanji: "ku" }],
+            kun: [{ kana: "くち", romanji: "kuchi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8F%A3#Kanji",
+            meanings: ["mouth"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "口", kana: ["くち"], english: ["mouth", "opening", "hole", "gap", "orifice"] },
+                { value: "人口", kana: ["じんこう"], english: ["population", "common talk"] },
+                { value: "窓口", kana: ["まどぐち"], english: ["ticket window", "teller window", "counter"] },
+                { value: "口座", kana: ["こうざ"], english: ["account"] },
+                { value: "入り口", kana: ["いりぐち", "いりくち", "はいりぐち", "は", "いりくち"], english: ["entrance", "entry", "gate", "approach", "mouth"] },
+            ]
+        },
+        {
+            name: "空",
+            code: "\u7A7A",
+            on: [{ kana: "く", romanji: "ku" }],
+            kun: [{ kana: "あく", romanji: "aku" }],
+            source: "https://en.wiktionary.org/wiki/%E7%A9%BA#Kanji",
+            meanings: ["empty", "sky", "void"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "空", kana: ["から"], english: ["emptiness", "vacuum", "blank"] },
+                { value: "空港", kana: ["くうこう"], english: ["airport"] },
+                { value: "航空", kana: ["こうくう"], english: ["aviation"] },
+                { value: "空気", kana: ["くうき"], english: ["air", "atmosphere"] },
+                { value: "航空機", kana: ["こうくうき"], english: ["aircraft", "aeroplane", "airplane"] },
+            ]
+        },
+        {
+            name: "足",
+            code: "\u8DB3",
+            on: [{ kana: "す", romanji: "su" }],
+            kun: [{ kana: "あし", romanji: "ashi" }],
+            source: "https://en.wiktionary.org/wiki/%E8%B6%B3#Kanji",
+            meanings: ["leg", "foot"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "足", kana: ["あし"], english: ["foot", "leg", "pace"] },
+                { value: "不足", kana: ["ふそく"], english: ["insufficiency", "shortage", "deficiency", "lack"] },
+                { value: "発足", kana: ["ほっそく", "はっそく"], english: ["starting", "inauguration", "launch", "founding"] },
+                { value: "満足", kana: ["まんぞく"], english: ["satisfaction", "sufficiency"] },
+                { value: "足並み", kana: ["あしなみ"], english: ["pace", "step"] },
+            ]
+        },
 
         //Grade 2
         {

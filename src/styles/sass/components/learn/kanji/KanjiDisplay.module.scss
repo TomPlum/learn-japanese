@@ -1,4 +1,5 @@
 @import "src/styles/sass/mixins";
+@import "src/styles/sass/colours";
 
 .wrapper {
   display: flex;
@@ -9,4 +10,13 @@
   color: #000000;
   margin: 0;
   @include noSelect;
+}
+
+.source, .source:active, .source:hover, .source:link {
+  text-decoration: none !important;
+  transition: ease 0.5s;
+}
+
+.source:hover {
+  color: $inspect;
 }

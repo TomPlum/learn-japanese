@@ -30,8 +30,8 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
 
                 <Row className={styles.body}>
                     <Col sm={6} xs={4}>
-                        <a href={kanji.source} target="_blank" className={styles.source}>
-                            <KanjiDisplay kanji={kanji} className={styles.display}/>
+                        <a href={kanji.source} target="_blank" className={styles.source} title="Click for Wiki source">
+                            <KanjiDisplay kanji={kanji} className={styles.display} showSource />
                         </a>
                     </Col>
                     <Col sm={6} xs={8}>
