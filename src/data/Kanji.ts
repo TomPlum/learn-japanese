@@ -796,7 +796,7 @@ export function kyoiku(): KanjiData[] {
             name: "手",
             code: "\u624B",
             on: [{ kana: "しゅ", romanji: "shu" }],
-            kun: [{ kana: "て ", romanji: "te" }],
+            kun: [{ kana: "て", romanji: "te" }],
             source: "https://en.wiktionary.org/wiki/%E6%89%8B#Kanji",
             meanings: ["hand"],
             grade: KyoikuGrade.ONE,
@@ -805,6 +805,86 @@ export function kyoiku(): KanjiData[] {
                 { value: "選手権", kana: ["せんしゅけん"], english: ["championship", "title (of champion)"] },
                 { value: "相手", kana: ["あいて"], english: ["companion", "partner", "company", "other party"] },
                 { value: "大手", kana: ["おおて"], english: ["front castle gate", "both arms open"] },
+            ]
+        },
+        {
+            name: "力",
+            code: "\u529B",
+            on: [{ kana: "りき", romanji: "riki" }],
+            kun: [{ kana: "ちから", romanji: "chikara" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8A%9B#Kanji",
+            meanings: ["power", "strong"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "勢力", kana: ["せいりょく"], english: ["influence", "power", "might", "strength", "potency"] },
+                { value: "努力", kana: ["どりょく"], english: ["great effort", "exertion", "endeavour", "endeavor"] },
+                { value: "協力", kana: ["きょうりょく"], english: ["cooperation", "collaboration"] },
+                { value: "権力", kana: ["けんりょく"], english: ["(political) power", "authority", "influence"] },
+                { value: "原子力", kana: ["げんしりょく"], english: ["atomic energy"] },
+            ]
+        },
+        {
+            name: "田",
+            code: "\u7530",
+            on: [{ kana: "でん", romanji: "den" }],
+            kun: [{ kana: "た", romanji: "ta" }],
+            source: "https://en.wiktionary.org/wiki/%E7%94%B0#Kanji",
+            meanings: ["rice field", "rice paddy"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "上田", kana: ["じょうでん"], english: ["high rice field", "very fertile rice field"] },
+                { value: "水田", kana: ["すいでん"], english: ["water filled paddy field"] },
+                { value: "油田", kana: ["ゆでん"], english: ["oil field"] },
+                { value: "田舎", kana: ["いなか"], english: ["rural area", "countryside", "the sticks", "hometown"] },
+                { value: "桑田", kana: ["そうでん"], english: ["mulberry plantation"] },
+            ]
+        },
+        {
+            name: "文",
+            code: "\u6587",
+            on: [{ kana: "もん", romanji: "mon" }, { kana: "ぶん", romanji: "bun" }],
+            kun: [{ kana: "ふみ", romanji: "fumi" }],
+            source: "https://en.wiktionary.org/wiki/%E6%96%87#Kanji",
+            meanings: ["text", "sentence", "literature", "style", "art"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "文", kana: ["ふみ"], english: ["letter", "writings"] },
+                { value: "文化", kana: ["ぶんか"], english: ["culture", "civilization", "civilisation"] },
+                { value: "文学", kana: ["ぶんがく"], english: ["literature"] },
+                { value: "文書", kana: ["ぶんしょ", "もんじょ"], english: ["document", "writing", "letter", "paperwork", "note"] },
+                { value: "文字", kana: ["もじ", "もんじ"], english: ["letter (of alphabet)", "character (literal)"] },
+            ]
+        },
+        {
+            name: "町",
+            code: "\u753A",
+            on: [{ kana: "ちょう", romanji: "chō" }],
+            kun: [{ kana: "まち", romanji: "machi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%94%BA#Kanji",
+            meanings: ["town", "village", "block", "street"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "町", kana: ["まち, ちょう"], english: ["town", "block", "neighbourhood"] },
+                { value: "市町村", kana: ["しちょうそん"], english: ["cities", "towns and villages", "municipalities"] },
+                { value: "同町", kana: ["どうちょう"], english: ["the same town", "that town"] },
+                { value: "町長", kana: ["ちょうちょう"], english: ["town headman", "town mayor"] },
+                { value: "町内", kana: ["ちょうない"], english: ["neighborhood", "neighbourhood", "street", "block"] },
+            ]
+        },
+        {
+            name: "雨",
+            code: "\u96E8",
+            on: [{ kana: "う", romanji: "u" }],
+            kun: [{ kana: "あめ", romanji: "ame" }],
+            source: "https://en.wiktionary.org/wiki/%E9%9B%A8#Kanji",
+            meanings: ["rain"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "雨", kana: ["あめ"], english: ["rain"] },
+                { value: "大雨", kana: ["おおあめ"], english: ["heavy rain"] },
+                { value: "梅雨", kana: ["ばいう", "つゆ"], english: ["rainy season"] },
+                { value: "雨水", kana: ["あまみず", "うすい"], english: ["rain water"] },
+                { value: "雨量", kana: ["うりょう"], english: ["rainfall"] },
             ]
         },
 
