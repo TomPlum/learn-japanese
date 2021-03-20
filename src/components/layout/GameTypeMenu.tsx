@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Dropdown, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Dropdown, ListGroup } from "react-bootstrap";
 import { GameType } from "../../types/GameType";
 import styles from "../../styles/sass/components/layout/GameTypeMenu.module.scss";
 import GameTypeMenuListOption from "./GameTypeMenuListOption";
@@ -38,19 +38,30 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
 
                     <Dropdown.Menu className={styles.dropdownMenu}>
                         <GameTypeMenuDropdownOption type={GameType.KANA} onClick={this.handleChange} selected={selected}>
-                            <FontAwesomeIcon fixedWidth icon={faFont} />
+                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(GameType.KANA)} />
                         </GameTypeMenuDropdownOption>
 
                         <GameTypeMenuDropdownOption type={GameType.NUMBERS} onClick={this.handleChange} selected={selected}>
-                            <FontAwesomeIcon fixedWidth icon={faYenSign} />
+                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(GameType.NUMBERS)} />
                         </GameTypeMenuDropdownOption>
 
                         <GameTypeMenuDropdownOption type={GameType.KANJI} onClick={this.handleChange} selected={selected}>
-                            <FontAwesomeIcon fixedWidth icon={faPaintBrush} />
+                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(GameType.KANJI)} />
+                        </GameTypeMenuDropdownOption>
+
+                        <GameTypeMenuDropdownOption type={GameType.COLOURS} onClick={this.handleChange} selected={selected}>
+                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(GameType.COLOURS)} />
+                        </GameTypeMenuDropdownOption>
+
+                        <GameTypeMenuDropdownOption type={GameType.WEATHER} onClick={this.handleChange} selected={selected}>
+                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(GameType.WEATHER)} />
+                        </GameTypeMenuDropdownOption>
+
+                        <GameTypeMenuDropdownOption type={GameType.CALENDAR} onClick={this.handleChange} selected={selected}>
+                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(GameType.CALENDAR)} />
                         </GameTypeMenuDropdownOption>
                     </Dropdown.Menu>
                 </Dropdown>
-
 
                 <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group-header">
                     <GameTypeMenuListOption text="Select Game Mode" isHeading>
