@@ -76,19 +76,39 @@ followed by small ya, yu or yo. These digraphs are called yōon. [[1]](#1)
 |**yu**| リュ  |  ミュ  |  ヒュ  |  ニュ  |  ヂュ |	 シュ   | キュ  | ピュ  |  ビュ  |  ジュ  |  ギュ  |
 |**yo**| リョ  |  ミョ  |  ヒョ  |  ニョ  |  ヂョ |  ショ   | キョ  | ピョ  |  ビョ  |  ジョ  |  ギョ  |
 
-## Game Modes
+## Kana Game Modes
 
 ### Relaxed
+The simplest mode for learning kana for those who aren't comfortable with all the Hiragana, Katakana and diagraphs.
+There is no timer or lives, and you can use any many tips as you want.
 
 ### Time Attack
+You're timed from 00:00 as soon as the first kana is presented. This mode is for those who are little more comfortable
+with all the kana and wish to test how fast they can answer all 214. A speed run if you will.
 
-### Romanji
+### Rōmaji
+The default game preset for the 'Rōmaji' question type. Here you're shown a single kana and must enter the rōmaji.
+Answering a question incorrectly loses 1 life. You start with 5 lives and 3 hints.
 
 ### Kana
+The default game present for the 'Kana' question type. Here you're given the rōmaji for a random kana and are presented
+with 4 kana on screen. You must select the correct kana for the given rōmaji. Answering a question incorrectly loses
+1 life. You start with 5 lives and 3 hints.
 
 ### Hardcore
+The ultimate challenge for those with the utmost confidence in their Japanese kana knowledge (and reaction times).
+The question pool contains all 214 sounds. Hiragana, Katakana, Diagraphs & Diacriticals. You have 5 seconds to answer
+each question correctly and have only 1 life. Can you beat it?
 
 ### Custom
+Should none of the aforementioned presets work for you, this mode allows to configure any of the available game
+parameters.
+
+- Display (Kana or Rōmaji Question Types)
+- Kana (Syllabary / Diagraphs)
+- Hints (Enabled / Quantity)
+- Lives (Enabled / Quantity)
+- Time (Timer / Count Down)
 
 ## References
 - [<a id="1">1</a>] https://en.wikipedia.org/wiki/Kana
