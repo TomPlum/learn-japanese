@@ -1,5 +1,5 @@
 import { Component } from "react";
-import LearnKanji from "../learn/LearnKanji";
+import LearnKanji from "../learn/kanji/LearnKanji";
 import { Kanji } from "../../types/kanji/Kanji";
 import { KanjiRepository, KanjiSettings } from "../../repository/KanjiRepository";
 import LoadingSpinner from "../ui/LoadingSpinner";

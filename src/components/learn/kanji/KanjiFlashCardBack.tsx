@@ -1,22 +1,22 @@
 import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/learn/FlashCardBack.module.scss";
 import KanjiDisplay from "./KanjiDisplay";
-import { Kanji } from "../../types/kanji/Kanji";
-import { ReadingType } from "../../types/kanji/ReadingType";
-import Inspectable from "../ui/Inspectable";
-import { Environment } from "../../utility/Environment";
+import { Kanji } from "../../../types/kanji/Kanji";
+import { ReadingType } from "../../../types/kanji/ReadingType";
+import Inspectable from "../../ui/Inspectable";
+import { Environment } from "../../../utility/Environment";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Arrays from "../../utility/Arrays";
-import { Example } from "../../types/kanji/Example";
+import Arrays from "../../../utility/Arrays";
+import { Example } from "../../../types/kanji/Example";
+import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
 
-interface FlashCardBackProps {
+interface KanjiFlashCardBackProps {
     kanji: Kanji;
     onClick: () => void;
 }
 
-class FlashCardBack extends Component<FlashCardBackProps> {
+class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
     render() {
         const { kanji } = this.props;
         return (
@@ -81,4 +81,4 @@ class FlashCardBack extends Component<FlashCardBackProps> {
     }
 }
 
-export default FlashCardBack;
+export default KanjiFlashCardBack;

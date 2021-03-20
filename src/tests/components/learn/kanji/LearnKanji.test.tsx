@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import LearnKanji from "../../../components/learn/LearnKanji";
-import { Kanji } from "../../../types/kanji/Kanji";
-import { Reading } from "../../../types/kanji/Reading";
-import { ReadingType } from "../../../types/kanji/ReadingType";
-import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
-import { Example } from "../../../types/kanji/Example";
-import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
+import LearnKanji from "../../../../components/learn/kanji/LearnKanji";
+import { Kanji } from "../../../../types/kanji/Kanji";
+import { Reading } from "../../../../types/kanji/Reading";
+import { ReadingType } from "../../../../types/kanji/ReadingType";
+import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
+import { Example } from "../../../../types/kanji/Example";
+import { RandomNumberGenerator } from "../../../../utility/RandomNumberGenerator";
 
 let kanji: Kanji[];
 

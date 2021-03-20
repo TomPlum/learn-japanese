@@ -1,5 +1,5 @@
-@import "flash-cards";
-@import "../../colours";
+@import "src/styles/sass/components/learn/flash-cards";
+@import "src/styles/sass/colours";
 
 @mixin wrapper {
   @include card;

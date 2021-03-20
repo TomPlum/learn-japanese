@@ -1,15 +1,15 @@
 import { Component } from "react";
 import { Container, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/learn/FlashCardFront.module.scss";
 import KanjiDisplay from "./KanjiDisplay";
-import { Kanji } from "../../types/kanji/Kanji";
+import { Kanji } from "../../../types/kanji/Kanji";
+import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardFront.module.scss";
 
-interface FlashCardFrontProps {
+interface KanjiFlashCardFrontProps {
     kanji: Kanji;
     onClick: () => void;
 }
 
-class FlashCardFront extends Component<FlashCardFrontProps> {
+class KanjiFlashCardFront extends Component<KanjiFlashCardFrontProps> {
     render() {
         const { kanji, onClick } = this.props;
 
@@ -23,4 +23,4 @@ class FlashCardFront extends Component<FlashCardFrontProps> {
     }
 }
 
-export default FlashCardFront;
+export default KanjiFlashCardFront;

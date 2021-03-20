@@ -1,10 +1,10 @@
 import { Component } from "react";
-import { Kanji } from "../../types/kanji/Kanji";
+import { Kanji } from "../../../types/kanji/Kanji";
 import { Button, Container, Row } from "react-bootstrap";
-import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
-import FlashCard from "./FlashCard";
-import styles from "../../styles/sass/components/learn/LearnKanji.module.scss";
-import SessionProgressBar from "../ui/SessionProgressBar";
+import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
+import KanjiFlashCard from "./KanjiFlashCard";
+import styles from "../../../styles/sass/components/learn/kanji/LearnKanji.module.scss";
+import SessionProgressBar from "../../ui/SessionProgressBar";
 
 interface LearnKanjiProps {
     kanji: Kanji[];
@@ -46,7 +46,7 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
                 </Row>
 
                 <Row className={styles.cardWrapper}>
-                    <FlashCard kanji={current} key={current.getValue()} onFlip={this.onFlip} />
+                    <KanjiFlashCard kanji={current} key={current.getValue()} onFlip={this.onFlip} />
                 </Row>
 
                 <Row className={styles.buttonWrapper}>

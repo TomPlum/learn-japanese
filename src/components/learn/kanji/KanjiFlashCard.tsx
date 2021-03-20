@@ -1,21 +1,21 @@
 import { Component } from "react";
-import { Kanji } from "../../types/kanji/Kanji";
+import { Kanji } from "../../../types/kanji/Kanji";
 import ReactCardFlip from "react-card-flip";
-import FlashCardFront from "./FlashCardFront";
-import FlashCardBack from "./FlashCardBack";
+import KanjiFlashCardFront from "./KanjiFlashCardFront";
+import KanjiFlashCardBack from "./KanjiFlashCardBack";
 
-export interface FlashCardProps {
+export interface KanjiFlashCardProps {
     kanji: Kanji;
     onFlip: (count: number) => void;
 }
 
-interface FlashCardState {
+interface KanjiFlashCardState {
     flipped: boolean;
     flips: number;
 }
 
-class FlashCard extends Component<FlashCardProps, FlashCardState> {
-    constructor(props: Readonly<FlashCardProps> | FlashCardProps) {
+class KanjiFlashCard extends Component<KanjiFlashCardProps, KanjiFlashCardState> {
+    constructor(props: Readonly<KanjiFlashCardProps> | KanjiFlashCardProps) {
         super(props);
         this.state = {
             flipped: false,
@@ -29,8 +29,8 @@ class FlashCard extends Component<FlashCardProps, FlashCardState> {
 
         return (
             <ReactCardFlip isFlipped={flipped} infinite={true}>
-                <FlashCardFront kanji={kanji} onClick={this.flip} />
-                <FlashCardBack kanji={kanji} onClick={this.flip} />
+                <KanjiFlashCardFront kanji={kanji} onClick={this.flip} />
+                <KanjiFlashCardBack kanji={kanji} onClick={this.flip} />
             </ReactCardFlip>
         );
     }
@@ -42,4 +42,4 @@ class FlashCard extends Component<FlashCardProps, FlashCardState> {
     }
 }
 
-export default FlashCard;
+export default KanjiFlashCard;

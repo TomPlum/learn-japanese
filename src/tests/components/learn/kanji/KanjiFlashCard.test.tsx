@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import FlashCard from "../../../components/learn/FlashCard";
-import { Kanji } from "../../../types/kanji/Kanji";
-import { Reading } from "../../../types/kanji/Reading";
-import { ReadingType } from "../../../types/kanji/ReadingType";
-import { Example } from "../../../types/kanji/Example";
-import Arrays from "../../../utility/Arrays";
-import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import KanjiFlashCard from "../../../../components/learn/kanji/KanjiFlashCard";
+import { Kanji } from "../../../../types/kanji/Kanji";
+import { Reading } from "../../../../types/kanji/Reading";
+import { ReadingType } from "../../../../types/kanji/ReadingType";
+import { Example } from "../../../../types/kanji/Example";
+import Arrays from "../../../../utility/Arrays";
+import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
 
 const onFlipHandler = jest.fn();
 const kanji = new Kanji(
@@ -18,7 +18,7 @@ const kanji = new Kanji(
 );
 
 const setup = () => {
-    const component = render(<FlashCard kanji={kanji} onFlip={onFlipHandler} />);
+    const component = render(<KanjiFlashCard kanji={kanji} onFlip={onFlipHandler} />);
     return {
         front: component.getByTestId('front'),
         back: component.getByTestId('back'),
