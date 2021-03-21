@@ -1,12 +1,12 @@
 import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
 import { faGraduationCap, faLeaf, faMountain, faPaintBrush, faPlay, faRandom, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KyoikuGradeButton from "../layout/KyoikuGradeButton";
 import Arrays from "../../utility/Arrays";
 import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 import { KanjiSettings } from "../../repository/KanjiRepository";
+import styles from "../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
 
 interface KanjiSettingsMenuProps {
     onSelected: (settings: KanjiSettings) => void;

@@ -4,7 +4,6 @@
   height: 60px;
   border-radius: 15px;
   border-width: 3px;
-  font-size: 1.2em;
   transition: 0.2s ease;
   display: block;
   padding: 10px;
@@ -23,6 +22,15 @@
   box-shadow: none;
   transition: 0.3s ease;
   @include common;
+}
+
+.text {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.3em;
+}
+
+.icon {
+  font-size: 1.2em;
 }
 
 .kyoiku-grade-1 {

@@ -30,7 +30,8 @@ class KyoikuGradeButton extends Component<KyoikuGradeButtonProps> {
 
         return (
             <button className={className} onClick={this.handleClick} aria-selected={isSelected}>
-                <FontAwesomeIcon icon={icon ? icon : faChevronRight} /> Grade {grade.value}
+                <FontAwesomeIcon icon={icon ? icon : faChevronRight} className={styles.icon} fixedWidth />
+                <span className={styles.text}> Grade {grade.value}</span>
             </button>
         );
     }

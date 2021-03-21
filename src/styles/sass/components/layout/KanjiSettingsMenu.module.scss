@@ -2,12 +2,15 @@
 
 .wrapper {
   max-width: 375px;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
 }
 
 .heading {
   text-align: center;
   color: #FFF;
   margin-bottom: 10px;
+  font-size: 2.2em;
+  text-decoration: underline;
 }
 
 .leftColumn {
@@ -20,6 +23,7 @@
 
 .playButton {
   width: 100%;
+  text-transform: uppercase;
 }
 
 .settingsButton {
@@ -31,6 +35,7 @@
   color: #FFF;
   opacity: 0.8;
   text-align: center;
+  font-size: 1.2em;
 }
 
 .descWrapper {
@@ -39,6 +44,7 @@
 
 .randomise {
   margin-bottom: 15px;
+  text-transform: uppercase;
 }
 
 .randomise:hover {
