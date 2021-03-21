@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import KanjiFlashCard from "../../../../components/learn/kanji/KanjiFlashCard";
 import { Kanji } from "../../../../types/kanji/Kanji";
 import { Reading } from "../../../../types/kanji/Reading";
@@ -21,7 +21,6 @@ const setup = () => {
     const component = render(<KanjiFlashCard kanji={kanji} onFlip={onFlipHandler} />);
     return {
         front: component.getByTestId('front'),
-        back: component.getByTestId('back'),
         ...component
     }
 }
@@ -43,9 +42,10 @@ test('Clicking a cards face should call the onFlip event handler', () => {
     expect(onFlipHandler).toHaveBeenCalledWith(1);
 });
 
-test('Clicking a cards face and then the rest button should call the onFlip event handler with 2 flips', () => {
+test('Clicking a cards face and then the reset button should call the onFlip event handler with 2 flips', async () => {
     const { front } = setup();
     fireEvent.click(front);
+    await waitFor(() => expect(screen.getByTestId('back')).toBeInTheDocument());
     fireEvent.click(screen.getByTitle('Reset'));
     expect(onFlipHandler).toHaveBeenCalledWith(2);
 });

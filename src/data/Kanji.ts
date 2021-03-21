@@ -98,7 +98,7 @@ export function kyoiku(): KanjiData[] {
                 { value: "拡大", kana: ["かくだい"], english: ["magnification", "enlargement", "expansion"] },
                 { value: "最大", kana: ["さいだい"], english: ["greatest", "largest", "maximum"] },
                 { value: "大いに", kana: ["おおいに", "にっぽんじん"], english: ["very", "much", "greatly", "a lot of"] },
-                { value: "大会", kana: ["たいかい"], english: ["convention", "tournament", "mass meeting", "rally"] },
+                { value: "大会", kana: ["たいかい"], english: ["convention", "mass meeting", "rally"] },
             ]
         },
         {
@@ -865,10 +865,10 @@ export function kyoiku(): KanjiData[] {
             grade: KyoikuGrade.ONE,
             examples: [
                 { value: "町", kana: ["まち, ちょう"], english: ["town", "block", "neighbourhood"] },
-                { value: "市町村", kana: ["しちょうそん"], english: ["cities", "towns and villages", "municipalities"] },
+                { value: "市町村", kana: ["しちょうそん"], english: ["cities", "municipalities"] },
                 { value: "同町", kana: ["どうちょう"], english: ["the same town", "that town"] },
                 { value: "町長", kana: ["ちょうちょう"], english: ["town headman", "town mayor"] },
-                { value: "町内", kana: ["ちょうない"], english: ["neighborhood", "neighbourhood", "street", "block"] },
+                { value: "町内", kana: ["ちょうない"], english: ["neighbourhood", "street", "block"] },
             ]
         },
         {

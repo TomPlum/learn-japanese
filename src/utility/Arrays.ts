@@ -75,6 +75,6 @@ export default class Arrays {
             copy = this.remove(copy, element)
             elements.push(element);
         }
-        return elements;
+        return elements.filter(it => !!it);
     }
 }

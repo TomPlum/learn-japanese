@@ -2,47 +2,123 @@
 @import "src/styles/sass/colours";
 @import "src/styles/sass/viewports";
 
-@mixin wrapper {
-  @include card;
-  display: flex;
-  flex-wrap: wrap;
+@mixin grade {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  flex: 0 0 auto;
+}
+
+@mixin example {
+  margin: 0;
+}
+
+@mixin text {
+  color: #000000;
+  font-family: "Ciutadella Rounded", sans-serif;
+  align-self: stretch;
+  margin: 5px 0;
+}
+
+@include phone {
+  .wrapper {
+    @include wrapperPhone;
+  }
+
+  .grade {
+    @include grade;
+    font-size: 1.2em;
+  }
+
+  .example {
+    @include example;
+    font-size: 1em;
+  }
+
+  .display {
+    font-size: 7em;
+  }
+
+  .text {
+    @include text;
+    font-size: 1.2em;
+  }
+}
+
+@include tablet {
+  .wrapper {
+    @include wrapperTablet;
+  }
+
+  .grade {
+    @include grade;
+    font-size: 1.3em;
+  }
+
+  .example {
+    @include example;
+    font-size: 1.2em;
+  }
+
+  .display {
+    font-size: 8em;
+  }
+
+  .text {
+    @include text;
+    font-size: 1.4em;
+  }
+}
+
+@include desktop {
+  .wrapper {
+    @include wrapperDesktop
+  }
+
+  .grade {
+    @include grade;
+    font-size: 1.5em;
+  }
+
+  .example {
+    @include example;
+    font-size: 1.4em;
+  }
+
+  .display {
+    font-size: 10em;
+  }
+
+  .text {
+    @include text;
+    font-size: 1.6em;
+  }
 }
 
 .wrapper-grade-1 {
-  @include wrapper;
   border-color: $kyoiku-grade-1;
 }
 
 .wrapper-grade-2 {
-  @include wrapper;
   border-color: $kyoiku-grade-2;
 }
 
 .wrapper-grade-3 {
-  @include wrapper;
   border-color: $kyoiku-grade-3;
 }
 
 .wrapper-grade-4 {
-  @include wrapper;
   border-color: $kyoiku-grade-4;
 }
 
 .wrapper-grade-5 {
-  @include wrapper;
   border-color: $kyoiku-grade-5;
 }
 
 .wrapper-grade-6 {
-  @include wrapper;
   border-color: $kyoiku-grade-6;
 }
 
-.text {
-  color: #000000;
-  align-self: stretch;
-  margin: 5px 0;
-  font-size: 1.1em;
+.label {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
 }
 
 .header {
@@ -55,11 +131,6 @@
   flex: 1 0 100%
 }
 
-.grade {
-  font-family: "Ciutadella Rounded Medium", sans-serif;
-  flex: 0 0 auto;
-}
-
 .body {
   display: flex;
   align-items: center;
@@ -69,26 +140,7 @@
 
 .back {
   border-radius: 50%;
-}
-
-.example {
-  margin: 0;
-}
-
-@include phone {
-  .display {
-    font-size: 6em;
-  }
-}
-
-@include tablet {
-  .display {
-    font-size: 8em;
-  }
-}
-
-@include desktop {
-  .display {
-    font-size: 8em;
-  }
+  border-width: 2px;
+  height: 45px;
+  width: 45px;
 }

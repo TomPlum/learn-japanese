@@ -73,7 +73,7 @@ test('Clicking restart should start the deck again', () => {
     fireEvent.click(screen.getByText('Restart'));
 
     expect(next).toBeInTheDocument();
-    expect(screen.getAllByText('人')).toHaveLength(2);
+    expect(screen.getByText('人')).toBeInTheDocument();
 });
 
 //TODO: How can we test the ReactCardFlip component?

@@ -14,9 +14,9 @@ class KanjiFlashCardFront extends Component<KanjiFlashCardFrontProps> {
         const { kanji, onClick } = this.props;
 
         return (
-            <Container className={styles["wrapper-grade-" + kanji.grade.value]} onClick={onClick} data-testid="front">
+            <Container className={styles["wrapper-grade-" + kanji.grade.value] + " " + styles.wrapper} onClick={onClick} data-testid="front">
                 <Row>
-                    <KanjiDisplay kanji={kanji} size={"12em"}/>
+                    <KanjiDisplay kanji={kanji} />
                 </Row>
             </Container>
         );

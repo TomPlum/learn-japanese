@@ -10,8 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Arrays from "../../../utility/Arrays";
 import { Example } from "../../../types/kanji/Example";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
+import Viewports, { Viewport } from "../../../utility/Viewports";
+import { SizeMeProps, withSize } from "react-sizeme";
 
-interface KanjiFlashCardBackProps {
+interface KanjiFlashCardBackProps extends SizeMeProps {
     kanji: Kanji;
     onClick: () => void;
 }
@@ -20,7 +22,7 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
     render() {
         const { kanji } = this.props;
         return (
-            <Container className={styles["wrapper-grade-" + kanji.grade.value]} data-testid="back">
+            <Container className={styles["wrapper-grade-" + kanji.grade.value] + " " + styles.wrapper} data-testid="back">
                 <Row className={styles.header}>
                     <p className={styles.grade}>Grade {kanji.grade.value}</p>
                     <Button className={styles.back} variant="outline-danger" onClick={this.props.onClick} title="Reset">
@@ -37,18 +39,21 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
                     <Col sm={6} xs={8}>
                         <p className={styles.text}>
                             <Inspectable title="On-yomi Reading" text={Environment.variable("ONYOMI_DESC")}>
-                                <strong>On</strong>
+                                <span className={styles.label}>On</span>
                             </Inspectable>
                             {": " + this.getReading(ReadingType.ON)}
                         </p>
                         <p className={styles.text}>
                             <Inspectable title="Kun-yomi Reading" text={Environment.variable("KUNYOMI_DESC")}>
-                                <strong>Kun</strong>
+                                <span className={styles.label}>Kun</span>
                             </Inspectable>
                             {": " + this.getReading(ReadingType.KUN)}
                         </p>
                         <p className={styles.text}>
-                            <strong>Meaning:</strong> {kanji.meanings.join(", ")}
+                            <Inspectable title="English Meaning" text={Environment.variable("ENGLISH_MEANING_DESC")}>
+                                <span className={styles.label}>Meaning</span>
+                            </Inspectable>
+                            {": " + kanji.meanings.join(", ")}
                         </p>
                     </Col>
                 </Row>
@@ -69,16 +74,32 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
     private getReading = (type: ReadingType): string => {
         return this.props.kanji.readings
             .filter(it => it.type === type)
-            .map(it => it.romanji + " (" + it.kana + ")")[0];
+            .map(it => it.romanji + " (" + it.kana.trim() + ")")[0];
     }
 
     private getExamples = (): Example[] => {
         const { kanji } = this.props;
-        if (kanji.examples.length > 3) {
-            return Arrays.getRandomElements(kanji.examples, 3);
+        const viewport = Viewports.fromFlashCardWidth(this.props.size.width);
+        let examplesQuantity: number;
+        switch (viewport) {
+            case Viewport.PHONE: {
+                examplesQuantity = 3;
+                break;
+            }
+            case Viewport.TABLET: {
+                examplesQuantity = 4;
+                break;
+            }
+            case Viewport.DESKTOP: {
+                examplesQuantity = 5;
+                break;
+            }
+            default: examplesQuantity = 3;
         }
-        return kanji.examples;
+        const examples = Arrays.getRandomElements(kanji.examples, examplesQuantity);
+        console.log(examples);
+        return examples;
     }
 }
 
-export default KanjiFlashCardBack;
+export default withSize()(KanjiFlashCardBack);

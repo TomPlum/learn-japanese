@@ -48,7 +48,7 @@ class LandingPage extends Component {
                                 text={Environment.variable("HIRAGANA_DESC")}
                                 placement="bottom" color="white"
                             >
-                                <span  data-testid="hiragana-inspectable">Hiragana</span>
+                                <span data-testid="hiragana-inspectable">Hiragana</span>
                             </Inspectable>
                             {' and '}
                             <Inspectable
