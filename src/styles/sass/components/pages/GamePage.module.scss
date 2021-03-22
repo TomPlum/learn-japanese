@@ -1,16 +1,15 @@
 @import "../../viewports";
+@import "src/styles/sass/mixins";
 
 @mixin wrapper {
-  margin: 0;
-  min-width: 100%;
-  max-height: -webkit-fill-available; //Safari
-  max-height: -moz-available; //Firefox
-  position: fixed;
-  min-height: 100%;
+  @include fitMobileViewportHeight;
+  @include borderBoxSizing;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  min-height: 100%;
+  width: 100%;
 }
 
 @include desktop {
@@ -31,6 +30,7 @@
   .wrapper {
     @include wrapper;
     padding-top: 90px;
+    padding-bottom: 15px;
   }
 }
 

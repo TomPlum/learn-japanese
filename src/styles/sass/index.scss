@@ -1,5 +1,6 @@
 @import "colours";
 @import "fonts";
+@import "mixins";
 
 body {
   margin: 0;
@@ -16,9 +17,9 @@ code {
 }
 
 html, body, #root {
+  @include fitMobileViewportHeight;
+  @include borderBoxSizing;
   min-height: 100vh;
-  min-height: -webkit-fill-available; //Safari
-  min-height: -moz-available; //Firefox
   background-color: $dark-3;
 }
 

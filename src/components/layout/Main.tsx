@@ -1,11 +1,11 @@
 import { Component } from "react";
-import styles from "../../styles/sass/components/layout/Main.module.scss";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import GamePage from "../pages/GamePage";
 import SearchPage from "../pages/SearchPage";
 import LandingPage from "../pages/LandingPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import HelpPage from "../pages/HelpPage";
+import styles from "../../styles/sass/components/layout/Main.module.scss";
 
 class Main extends Component {
     render() {

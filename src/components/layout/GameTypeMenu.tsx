@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Dropdown, ListGroup } from "react-bootstrap";
 import { GameType } from "../../types/GameType";
-import styles from "../../styles/sass/components/layout/GameTypeMenu.module.scss";
 import GameTypeMenuListOption from "./GameTypeMenuListOption";
 import { faCalendarAlt, faCloudSunRain, faFillDrip, faFont, faGamepad, faPaintBrush, faYenSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameTypeMenuDropdownOption from "./GameTypeMenuDropdownOption";
+import styles from "../../styles/sass/components/layout/GameTypeMenu.module.scss";
 
 interface GameTypeMenuProps {
     onSelect: (type: GameType) => void;

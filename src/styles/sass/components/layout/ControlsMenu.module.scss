@@ -1,4 +1,5 @@
-@import "../../viewports";
+@import "src/styles/sass/viewports";
+@import "src/styles/sass/colours";
 
 @mixin linkText {
   text-transform: capitalize;
@@ -7,6 +8,7 @@
 
 @mixin navbar {
   border-bottom: 2px rgba(146, 146, 146, 0.2) solid;
+  background-color: $dark-3;
 
   $shadow-colour: rgba(255, 255, 255, 0.1);
   -moz-box-shadow: 1px 2px 3px $shadow-colour;
@@ -80,9 +82,4 @@
 
 .innerWrapper {
   max-width: 1200px;
-}
-
-.wrapper {
-  display: flex;
-  justify-content: center;
 }

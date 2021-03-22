@@ -33,17 +33,19 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     render() {
         return (
             <div className={styles.wrapper}>
-                <Row className={styles.row}>
-                    <Col sm={12} md={6} lg={5} xl={4}>
-                        <GameTypeMenu
-                            onSelect={(selected) => this.setState({ selectedGameType: selected })}
-                            className={styles.menu}
-                        />
-                    </Col>
-                    <Col sm={12} md={6} lg={7} xl={8} className={styles.gameMenuWrapper}>
-                        {this.getGameMenu()}
-                    </Col>
-                </Row>
+                <div className={styles.innerWrapper}>
+                    <Row className={styles.row}>
+                        <Col sm={12} md={6} lg={5} xl={4} className={styles.gameModeListWrapper}>
+                            <GameTypeMenu
+                                onSelect={(selected) => this.setState({ selectedGameType: selected })}
+                                className={styles.menu}
+                            />
+                        </Col>
+                        <Col sm={12} md={6} lg={7} xl={8} className={styles.gameMenuWrapper}>
+                            {this.getGameMenu()}
+                        </Col>
+                    </Row>
+                </div>
             </div>
         );
     }
