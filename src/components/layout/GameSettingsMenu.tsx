@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { GameType } from "../../types/GameType";
 import KanaGameModeMenu from "./KanaGameModeMenu";
 import GameTypeMenu from "./GameTypeMenu";
@@ -33,9 +33,9 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     render() {
         return (
             <div className={styles.wrapper}>
-                <div className={styles.innerWrapper}>
+                <Container fluid className={styles.innerWrapper}>
                     <Row className={styles.row}>
-                        <Col sm={12} md={6} lg={5} xl={4} className={styles.gameModeListWrapper}>
+                        <Col sm={12} md={6} lg={5} xl={4}>
                             <GameTypeMenu
                                 onSelect={(selected) => this.setState({ selectedGameType: selected })}
                                 className={styles.menu}
@@ -45,7 +45,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             {this.getGameMenu()}
                         </Col>
                     </Row>
-                </div>
+                </Container>
             </div>
         );
     }
