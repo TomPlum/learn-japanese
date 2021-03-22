@@ -28,8 +28,7 @@ class GameModeButton extends Component<GameModeButtonProps> {
 
         return (
             <Button
-                block
-                className={isSelected ? styles.selected : styles.notSelected}
+                className={(isSelected ? styles.selected : styles.notSelected) + " " + styles.button}
                 onClick={this.handleClick}
             >
                 <FontAwesomeIcon

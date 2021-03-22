@@ -1,10 +1,32 @@
+@import "src/styles/sass/viewports";
+
 @mixin button {
-  height: 125px;
   width: 100%;
   max-width: 380px;
   margin-bottom: 12px;
   font-size: 1.2em;
   font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+@include phone {
+  .button {
+    @include button;
+    height: 100px;
+  }
+}
+
+@include tablet {
+  .button {
+    @include button;
+    height: 125px;
+  }
+}
+
+@include desktop {
+  .button {
+    @include button;
+    height: 130px;
+  }
 }
 
 .notSelected:hover {
@@ -19,14 +41,12 @@
 }
 
 .selected, .selected:focus, .selected:active {
-  @include button;
   background-color: rgba(255, 255, 255, 1);
   border-color: rgba(148, 148, 148, 0.8);
   color: black;
 }
 
 .notSelected {
-  @include button;
   background-color: rgba(215, 215, 215, 0.6);
   border-color: rgba(148, 148, 148, 0.8);
   color: rgba(0, 0, 0, 0.8);

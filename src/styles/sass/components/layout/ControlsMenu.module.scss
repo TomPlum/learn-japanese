@@ -19,7 +19,8 @@
 @include phone {
   .icon {
     font-size: 1.6em;
-    margin: 3px;
+    margin-top: 5px;
+    margin-bottom: -5px;
   }
 
   .linkText {
@@ -30,6 +31,7 @@
   .navbar {
     @include navbar;
     padding: 5px;
+    height: 70px;
   }
 }
 
@@ -47,6 +49,7 @@
   .navbar {
     @include navbar;
     padding: 10px;
+    height: 100px;
   }
 }
 
@@ -64,6 +67,7 @@
   .navbar {
     @include navbar;
     padding: 15px;
+    height: 130px;
   }
 }
 

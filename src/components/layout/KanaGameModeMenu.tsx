@@ -5,10 +5,10 @@ import { faCircle, faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameModeButton from "./GameModeButton";
 import KanaGameSettingsMenu from "../settings/KanaGameSettingsMenu";
-import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
 import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../../data/GameModePresets";
 import { GameSettings } from "../../types/GameSettings";
 import { Environment } from "../../utility/Environment";
+import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
 
 export interface KanaGameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;

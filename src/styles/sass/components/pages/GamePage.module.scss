@@ -15,21 +15,21 @@
 @include desktop {
   .wrapper {
     @include wrapper;
-    padding: 128px 50px 50px 50px;
+    padding: 130px 50px 50px 50px;
   }
 }
 
 @include tablet {
   .wrapper {
     @include wrapper;
-    padding: 120px 30px 30px 30px;
+    padding: 100px 30px 30px 30px;
   }
 }
 
 @include phone {
   .wrapper {
     @include wrapper;
-    padding-top: 90px;
+    padding-top: 70px;
     padding-bottom: 15px;
   }
 }
