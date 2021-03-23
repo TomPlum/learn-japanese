@@ -112,3 +112,9 @@ parameters.
 
 ## References
 - [<a id="1">1</a>] https://en.wikipedia.org/wiki/Kana
+- [<a id="2">2</a>] https://en.wikipedia.org/wiki/Ky%C5%8Diku_kanji
+- [<a id="3">3</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_1_of_4
+- [<a id="4">4</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_2_of_4
+- [<a id="5">5</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_3_of_4
+- [<a id="6">6</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_4_of_4
+- [<a id="7">7</a>] https://en.wikipedia.org/wiki/List_of_j%C5%8Dy%C5%8D_kanji
