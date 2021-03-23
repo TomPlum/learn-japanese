@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Kana } from "../../types/Kana";
 import { Col, Container, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/game/KanaMemoryTest.module.scss";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import Timer from "./Timer";
 import { GameSettings } from "../../types/GameSettings";
@@ -20,15 +19,16 @@ import FilterChain from "../../filters/FilterChain";
 import DiagraphFilter from "../../filters/kana/DiagraphFilter";
 import ExclusionFilter from "../../filters/kana/ExclusionFilter";
 import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
+import styles from "../../styles/sass/components/game/KanaMemoryGame.module.scss";
 
-export interface KanaMemoryTestProps {
+export interface KanaMemoryGameProps {
     kana: Kana[];
     settings: GameSettings;
     onClose: () => void;
     onFinish: (result: GameResult) => void;
 }
 
-interface KanaMemoryTestState {
+interface KanaMemoryGameState {
     currentKana: Kana;
     remainingKana: Kana[];
     correctAnswers: Set<Kana>;
@@ -39,11 +39,11 @@ interface KanaMemoryTestState {
     failedToAnswer: number;
 }
 
-class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState> {
+class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState> {
     private readonly timer: React.RefObject<Timer>;
     private readonly countdown: React.RefObject<CountDown>;
 
-    constructor(props: KanaMemoryTestProps | Readonly<KanaMemoryTestProps>) {
+    constructor(props: KanaMemoryGameProps | Readonly<KanaMemoryGameProps>) {
         super(props);
 
         this.timer = React.createRef();
@@ -247,4 +247,4 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
     private onPaused = () => this.setState({ paused: !this.state.paused })
 }
 
-export default KanaMemoryTest;
+export default KanaMemoryGame;

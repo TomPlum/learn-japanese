@@ -1,4 +1,4 @@
-import KanaMemoryTest, { KanaMemoryTestProps } from "../../../components/game/KanaMemoryTest";
+import KanaMemoryGame, { KanaMemoryGameProps } from "../../../components/game/KanaMemoryGame";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { DisplayType } from "../../../types/DisplayType";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
@@ -23,7 +23,7 @@ const i = new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const e = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const o = new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 
-let props: KanaMemoryTestProps;
+let props: KanaMemoryGameProps;
 
 beforeEach(() => {
     props = {
@@ -69,7 +69,7 @@ afterEach(() => {
 });
 
 const setup = () => {
-    const component = render(<KanaMemoryTest {...props} />);
+    const component = render(<KanaMemoryGame {...props} />);
     return {
         submit: component.getByText('Check'),
         quit: component.getByTitle('Quit'),

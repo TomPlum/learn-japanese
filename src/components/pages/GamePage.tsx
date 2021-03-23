@@ -1,5 +1,5 @@
 import { Component } from "react";
-import KanaMemoryTest from "../game/KanaMemoryTest";
+import KanaMemoryGame from "../game/KanaMemoryGame";
 import GameResult from "../../types/GameResult";
 import ResultScreen from "../results/ResultScreen";
 import { Kana } from "../../types/Kana";
@@ -45,7 +45,7 @@ class GamePage extends Component<{ }, GamePageState> {
                 }
 
                 {settings && kana && !inResultsScreen &&
-                    <KanaMemoryTest
+                    <KanaMemoryGame
                         kana={kana}
                         settings={settings.settings}
                         onClose={this.onGameClose}
