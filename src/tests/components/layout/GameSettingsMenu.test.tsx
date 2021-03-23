@@ -2,7 +2,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import GameSettingsMenu from "../../../components/layout/GameSettingsMenu";
 import { GameType } from "../../../types/GameType";
 import { RELAXED } from "../../../data/GameModePresets";
-import selectEvent from "react-select-event";
 
 
 const onStartHandler = jest.fn();

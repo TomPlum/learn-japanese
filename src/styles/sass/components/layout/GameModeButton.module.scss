@@ -18,14 +18,14 @@
 @include tablet {
   .button {
     @include button;
-    height: 125px;
+    height: 130px;
   }
 }
 
 @include desktop {
   .button {
     @include button;
-    height: 130px;
+    height: 123px;
   }
 }
 

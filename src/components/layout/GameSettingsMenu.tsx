@@ -67,6 +67,15 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
             case GameType.KANJI: {
                 return <p className={styles.menu} style={{color: '#FFF'}}>Kanji menu here</p>
             }
+            case GameType.COLOURS: {
+                return <p className={styles.menu} style={{color: '#FFF'}}>Colours menu here</p>
+            }
+            case GameType.WEATHER: {
+                return <p className={styles.menu} style={{color: '#FFF'}}>Weather menu here</p>
+            }
+            case GameType.CALENDAR: {
+                return <p className={styles.menu} style={{color: '#FFF'}}>Calendar menu here</p>
+            }
         }
     }
 
