@@ -36,7 +36,7 @@ class KanaCarousel extends Component<KanaCarouselProps, KanaCarouselState> {
             <Container className={styles.wrapper}>
                 <div data-testid="animation" onAnimationIteration={this.handleAnimation} className={styles.animate}>
                     <KanaDisplay kana={current} style={this.props.style} />
-                    <p className={styles.romanji}>{current.getFullRomanjiString()}</p>
+                    <p className={styles.romaji}>{current.getFullRomajiString()}</p>
                 </div>
             </Container>
         );

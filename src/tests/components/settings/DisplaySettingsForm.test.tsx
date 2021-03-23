@@ -34,7 +34,7 @@ test('Selecting kana mode should call the onSelect eventHandler', () => {
     expect(onSelectHandler).toHaveBeenCalledWith({ type: DisplayType.KANA, cards: 4 });
 });
 
-test('Selecting romanji mode should call the onSelect eventHandler', () => {
+test('Selecting rōmaji mode should call the onSelect eventHandler', () => {
     const { kanaModeButton, romanjiModeButton } = setup();
     fireEvent.click(kanaModeButton);
     fireEvent.click(romanjiModeButton);

@@ -11,7 +11,7 @@ import QuitButton from "../ui/QuitButton";
 import GameResult from "../../types/GameResult";
 import { FailureReason } from "../../types/FailureReason";
 import CountDown from "./CountDown";
-import RomanjiQuestion from "./RomanjiQuestion";
+import RomajiQuestion from "./RomajiQuestion";
 import { DisplayType } from "../../types/DisplayType";
 import KanaChoiceQuestion from "./KanaChoiceQuestion";
 import Arrays from "../../utility/Arrays";
@@ -136,7 +136,7 @@ class KanaMemoryTest extends Component<KanaMemoryTestProps, KanaMemoryTestState>
         switch (settings.display.type) {
             case DisplayType.ROMAJI: {
                 return (
-                    <RomanjiQuestion
+                    <RomajiQuestion
                         kana={currentKana}
                         onSubmit={this.answerQuestion}
                         hidden={paused}

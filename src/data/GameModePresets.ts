@@ -39,7 +39,7 @@ export const RELAXED: GameSettings = {
     time: { timed: false, countdown: false }
 }
 
-export const ROMANJI: GameSettings = {
+export const ROMAJI: GameSettings = {
     display: { type: DisplayType.ROMAJI, cards: 1 },
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },

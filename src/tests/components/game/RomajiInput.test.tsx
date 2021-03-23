@@ -1,21 +1,21 @@
-import RomanjiInput, { RomanjiInputProps } from "../../../components/game/RomanjiInput";
+import RomajiInput, { RomajiInputProps } from "../../../components/game/RomajiInput";
 import { fireEvent, render } from "@testing-library/react";
 
 const onChangeHandler = jest.fn();
 const onEnterKeyHandler = jest.fn();
 
-let props: RomanjiInputProps = {
+let props: RomajiInputProps = {
     disabled: false,
-    placeholder: "Enter Romanji",
+    placeholder: "Enter Rōmaji",
     value: "",
     onChange: onChangeHandler,
     onEnterKey: onEnterKeyHandler
 };
 
 const setup = () => {
-    const component = render(<RomanjiInput {...props} />);
+    const component = render(<RomajiInput {...props} />);
     return {
-        input: component.getByPlaceholderText('Enter Romanji'),
+        input: component.getByPlaceholderText('Enter Rōmaji'),
         ...component
     }
 }

@@ -1,33 +1,31 @@
 import React, { Component } from "react";
 import KanaDisplay from "./KanaDisplay";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/game/KanaMemoryTest.module.scss";
-import RomanjiInput from "./RomanjiInput";
+import { Col, Form, Row } from "react-bootstrap";
+import RomajiInput from "./RomajiInput";
 import HintButton from "./HintButton";
 import { Kana } from "../../types/Kana";
 import { HintSettings } from "../../types/GameSettings";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 import SubmitButton from "../ui/SubmitButton";
+import styles from "../../styles/sass/components/game/RomajiQuestion.module.scss";
 
-export interface RomanjiQuestionProps {
+export interface RomajiQuestionProps {
     kana: Kana;
     hidden: boolean;
     hintSettings: HintSettings;
     onSubmit: (correct: boolean) => void;
 }
 
-interface RomanjiQuestionState {
+interface RomajiQuestionState {
     answer: string;
     hints: number;
     hasUsedHintThisQuestion: boolean;
 }
 
-class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionState> {
+class RomajiQuestion extends Component<RomajiQuestionProps, RomajiQuestionState> {
 
     private readonly kanaDisplay: React.RefObject<KanaDisplay>;
 
-    constructor(props: Readonly<RomanjiQuestionProps> | RomanjiQuestionProps) {
+    constructor(props: Readonly<RomajiQuestionProps> | RomajiQuestionProps) {
         super(props);
 
         this.kanaDisplay = React.createRef();
@@ -57,11 +55,11 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
                     <Form.Group controlId="answer">
                         <Row>
                             <Col xs={true} className={styles.inputCol}>
-                                <RomanjiInput
+                                <RomajiInput
                                     value={answer}
                                     disabled={!kana || hidden}
                                     onChange={(value) => this.setState({ answer: value })}
-                                    placeholder={hidden ? "Paused" : "Enter the romanji"}
+                                    placeholder={hidden ? "Paused" : "Enter the Rōmaji"}
                                     onEnterKey={this.answer}
                                 />
                             </Col>
@@ -89,7 +87,7 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
         const { answer, hints, hasUsedHintThisQuestion } = this.state;
         const { kana } = this.props;
 
-        if (kana.romanji.includes(answer.toLowerCase())) {
+        if (kana.romaji.includes(answer.toLowerCase())) {
             this.props.onSubmit(true);
         } else {
             this.kanaDisplay.current?.notifyIncorrect();
@@ -104,4 +102,4 @@ class RomanjiQuestion extends Component<RomanjiQuestionProps, RomanjiQuestionSta
     }
 }
 
-export default RomanjiQuestion;
+export default RomajiQuestion;

@@ -1,8 +1,8 @@
 import React, { ChangeEvent, Component } from "react";
-import styles from "../../styles/sass/components/game/RomanjiInput.module.scss";
 import { Form } from "react-bootstrap";
+import styles from "../../styles/sass/components/game/RomajiInput.module.scss";
 
-export interface RomanjiInputProps {
+export interface RomajiInputProps {
     disabled?: boolean;
     value?: string;
     placeholder?: string;
@@ -10,7 +10,7 @@ export interface RomanjiInputProps {
     onEnterKey?: () => void;
 }
 
-class RomanjiInput extends Component<RomanjiInputProps> {
+class RomajiInput extends Component<RomajiInputProps> {
 
     private readonly input = React.createRef<HTMLInputElement>();
 
@@ -55,4 +55,4 @@ class RomanjiInput extends Component<RomanjiInputProps> {
     }
 }
 
-export default RomanjiInput;
+export default RomajiInput;

@@ -77,14 +77,14 @@ const setup = () => {
     }
 }
 
-function getRomanjiInput(): HTMLElement {
-    return screen.getByPlaceholderText('Enter the romanji');
+function getRomajiInput(): HTMLElement {
+    return screen.getByPlaceholderText('Enter the Rōmaji');
 }
 
 test('Answering correctly when there are kana remaining should show the next kana', () => {
     const { submit } = setup();
 
-    fireEvent.change(getRomanjiInput(), { target: { value: 'a' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
     expect(screen.queryByText("あ")).not.toBeInTheDocument();
@@ -97,7 +97,7 @@ test.skip('Answering correctly should advance the progress bar', () => {
 
     expect(screen.getByTitle('1/4')).toBeInTheDocument();
 
-    fireEvent.change(getRomanjiInput(), { target: { value: 'a' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
     expect(screen.getByTitle('2/4')).toBeInTheDocument();
@@ -109,22 +109,22 @@ test('Answering all questions correctly should stop the timer', () => {
 
     //Answer 1st correctly
     jest.advanceTimersByTime(5000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'a' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
     //Answer 2nd correctly
     jest.advanceTimersByTime(3000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'i' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
     fireEvent.click(submit);
 
     //Answer 3rd correctly
     jest.advanceTimersByTime(2000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'e' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
     fireEvent.click(submit);
 
     //Answer 4th correctly
     jest.advanceTimersByTime(15000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'o' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'o' } });
     fireEvent.click(submit);
 
     //Advancing the timer to prove the timer has stopped
@@ -139,22 +139,22 @@ test('Answering all questions correctly should stop call the onFinish even handl
 
     //Answer 1st correctly
     jest.advanceTimersByTime(5000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'a' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
     //Answer 2nd correctly
     jest.advanceTimersByTime(3000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'i' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
     fireEvent.click(submit);
 
     //Answer 3rd correctly
     jest.advanceTimersByTime(2000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'e' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
     fireEvent.click(submit);
 
     //Answer 4th correctly
     jest.advanceTimersByTime(15000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'o' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'o' } });
     fireEvent.click(submit);
 
     expect(onFinishHandler).toHaveBeenCalledWith({
@@ -175,22 +175,22 @@ test('Answering all questions correctly should stop call the onFinish even handl
 
     //Answer 1st correctly
     jest.advanceTimersByTime(5000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'a' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
     //Answer 2nd correctly
     jest.advanceTimersByTime(3000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'i' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
     fireEvent.click(submit);
 
     //Answer 3rd correctly
     jest.advanceTimersByTime(2000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'e' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
     fireEvent.click(submit);
 
     //Answer 4th correctly
     jest.advanceTimersByTime(15000);
-    fireEvent.change(getRomanjiInput(), { target: { value: 'o' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'o' } });
     fireEvent.click(submit);
 
     expect(onFinishHandler).toHaveBeenCalledWith({
@@ -207,7 +207,7 @@ test('Answering all questions correctly should stop call the onFinish even handl
 test('Answering incorrectly should not show the next kana', () => {
     const { submit } = setup();
 
-    fireEvent.change(getRomanjiInput(), { target: { value: 'e' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
     fireEvent.click(submit);
 
     expect(screen.getByText("あ")).toBeInTheDocument();
@@ -222,15 +222,15 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
     jest.advanceTimersByTime(12000);
 
     //Answer 1st correctly
-    fireEvent.change(getRomanjiInput(), { target: { value: 'a' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
     //Answer 2nd correctly
-    fireEvent.change(getRomanjiInput(), { target: { value: 'i' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
     fireEvent.click(submit);
 
     //Answer 3rd incorrectly (Causing us to lose as only 1 life)
-    fireEvent.change(getRomanjiInput(), { target: { value: 'bya' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'bya' } });
     fireEvent.click(submit);
 
     expect(onFinishHandler).toHaveBeenCalledWith({
@@ -250,15 +250,15 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
     const { submit } = setup();
 
     //Answer 1st correctly
-    fireEvent.change(getRomanjiInput(), { target: { value: 'a' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
     //Answer 2nd correctly
-    fireEvent.change(getRomanjiInput(), { target: { value: 'i' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
     fireEvent.click(submit);
 
     //Answer 3rd incorrectly (Causing us to lose as only 1 life)
-    fireEvent.change(getRomanjiInput(), { target: { value: 'bya' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'bya' } });
     fireEvent.click(submit);
 
     expect(onFinishHandler).toHaveBeenCalledWith({
@@ -277,7 +277,7 @@ test('Answering incorrectly when lives are enabled should reduce the lives by 1'
     const { submit } = setup();
 
     expect(screen.getByText('5')).toBeInTheDocument();
-    fireEvent.change(getRomanjiInput(), { target: { value: 'e' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
     fireEvent.click(submit);
 
     expect(screen.getByText('4')).toBeInTheDocument();
@@ -315,7 +315,7 @@ test('Enabling the timer should render the timer', () => {
     expect(screen.queryByText('00:00')).toBeInTheDocument();
 });
 
-test('Pausing the timer when it is enabled should disable the romanji input', () => {
+test('Pausing the timer when it is enabled should disable the rōmaji input', () => {
     props.settings.time = { timed: true, countdown: false };
     setup();
     fireEvent.click(screen.getByTitle('Pause'));
