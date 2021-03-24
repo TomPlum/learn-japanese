@@ -2,7 +2,7 @@
 
 @include desktop {
   .input {
-    height: 50px;
+    height: 60px;
     font-size: 1.2em;
   }
 }
@@ -19,12 +19,4 @@
     height: 40px;
     font-size: 1em;
   }
-}
-
-.inputCol {
-  padding-right: 5px;
-}
-
-.tipCol {
-  padding-left: 5px;
 }

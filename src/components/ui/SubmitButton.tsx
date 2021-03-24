@@ -39,7 +39,6 @@ class SubmitButton extends Component<SubmitButtonProps> {
         const { disabled, onClick } = this.props;
         if (!disabled && e.key === 'Enter') {
             onClick();
-            e.preventDefault();
         }
     }
 }

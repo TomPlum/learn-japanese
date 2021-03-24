@@ -1,16 +1,17 @@
 import React from "react";
-import KanaDisplay from "./KanaDisplay";
+import KanaDisplay, { KanaDisplayStyle } from "./KanaDisplay";
 import { Col, Form, Row } from "react-bootstrap";
 import RomajiInput from "./RomajiInput";
 import { Kana } from "../../types/Kana";
-import styles from "../../styles/sass/components/game/RomajiQuestion.module.scss";
 import { KanaQuestionProps } from "./KanaMemoryGame";
 import KanaQuestion from "./KanaQuestion";
+import styles from "../../styles/sass/components/game/RomajiQuestion.module.scss";
 
 export interface RomajiQuestionProps extends KanaQuestionProps {
     kana: Kana;
     hidden: boolean;
     className?: string;
+    displayStyle?: KanaDisplayStyle;
 }
 
 interface RomajiQuestionState {
@@ -32,7 +33,7 @@ class RomajiQuestion extends KanaQuestion<RomajiQuestionProps, RomajiQuestionSta
     }
 
     render() {
-        const { kana, hidden, className } = this.props;
+        const { kana, hidden, className, displayStyle } = this.props;
         const { answer } = this.state;
 
         return (
@@ -42,13 +43,13 @@ class RomajiQuestion extends KanaQuestion<RomajiQuestionProps, RomajiQuestionSta
                     key={kana.code}
                     ref={this.display}
                     blur={hidden}
-                    style={ { character: { size: "xl" }} }
+                    style={displayStyle}
                 />
 
                 <Form>
                     <Form.Group controlId="answer">
                         <Row>
-                            <Col xs={true} className={styles.inputCol}>
+                            <Col xs={12}>
                                 <RomajiInput
                                     value={answer}
                                     disabled={!kana || hidden}

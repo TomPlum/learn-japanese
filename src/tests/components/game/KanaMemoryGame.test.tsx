@@ -72,7 +72,8 @@ const setup = () => {
     const component = render(<KanaMemoryGame {...props} />);
     return {
         submit: component.getByText('Check'),
-        hintButton: component.getByTitle('Get a Hint'),
+        skip: component.getByText('Skip'),
+        hint: component.getByTitle('Get a Hint'),
         quit: component.getByTitle('Quit'),
         ...component
     }
@@ -304,27 +305,27 @@ test('Disabling lives should not render the LifeDisplay', () => {
 
 test('Enabling hints should render the HintButton in an enabled state', () => {
     props.settings.hints = { enabled: true };
-    const { hintButton } = setup();
-    expect(hintButton).not.toBeDisabled();
+    const { hint } = setup();
+    expect(hint).not.toBeDisabled();
 });
 
 test('Disabling hints should render the HintButton in a disabled state', () => {
     props.settings.hints = { enabled: false };
-    const { hintButton } = setup();
-    expect(hintButton).toBeDisabled();
+    const { hint } = setup();
+    expect(hint).toBeDisabled();
 });
 
 test('Using the hint button twice in the same kana shouldn\'t use another hint', async () => {
     props.settings.hints = { enabled: true, quantity: 3 };
-    const { hintButton } = setup();
+    const { hint } = setup();
 
-    fireEvent.focus(hintButton);
+    fireEvent.focus(hint);
     expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 
-    fireEvent.blur(hintButton);
+    fireEvent.blur(hint);
     await waitForElementToBeRemoved(() => screen.getByTitle('Need a hint? (2/3 remaining)'));
 
-    fireEvent.focus(hintButton);
+    fireEvent.focus(hint);
     expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 });
 
@@ -421,4 +422,30 @@ test('Clicking the quit button should call the onClose event handler', () => {
     const { quit } = setup();
     fireEvent.click(quit);
     expect(onCloseHandler).toHaveBeenCalled();
+});
+
+test('Clicking the skip button should advance to the next question', () => {
+    const { skip } = setup();
+    expect(screen.getByText('あ')).toBeInTheDocument();
+
+    fireEvent.click(skip);
+    expect(screen.getByText('い')).toBeInTheDocument();
+});
+
+test('Clicking the skip button should remove a life if they are enabled', () => {
+    props.settings.lives = { enabled: true, quantity: 5 };
+    const { skip } = setup();
+    expect(screen.getByText('5')).toBeInTheDocument();
+
+    fireEvent.click(skip);
+    expect(screen.getByText('4')).toBeInTheDocument();
+});
+
+test('Pausing should disable the skip button', () => {
+    props.settings.time = { timed: true, countdown: false };
+    const { skip } = setup();
+    expect(skip).not.toBeDisabled();
+
+    fireEvent.click(screen.getByTitle('Pause'));
+    expect(skip).toBeDisabled();
 });

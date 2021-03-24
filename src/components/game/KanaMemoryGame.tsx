@@ -151,10 +151,10 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                 </Row>
 
                 <Row className={styles.footer}>
-                    <Col md={6} xs={5}>
-                        <SkipButton onClick={this.handleSkip} className={styles.skip} />
+                    <Col md={6} xs={5} className={styles.footerLeftCol}>
+                        <SkipButton onClick={this.handleSkip} className={styles.skip} disabled={paused} />
                     </Col>
-                   <Col md={6} xs={7}>
+                   <Col md={6} xs={7} className={styles.footerRightCol}>
                        <ButtonGroup className={styles.buttonGroup}>
                            <HintButton
                                kana={currentKana}
@@ -190,6 +190,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                         kana={currentKana}
                         hidden={paused}
                         className={styles.question}
+                        displayStyle={{ character: { className: styles.romajiDisplay } }}
                         isValid={this.handleAnswerValidity}
                         ref={this.question}
                     />
@@ -219,10 +220,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     answerQuestion = () => {
-        const {
-            currentKana, correctAnswers, wrongAnswers, remainingKana, lives,
-            hasUsedHintThisQuestion, hints
-        } = this.state;
+        const { currentKana, correctAnswers, wrongAnswers, remainingKana, lives } = this.state;
         const { settings, kana } = this.props;
 
         if (this.question.current?.isCorrect()) {
@@ -243,19 +241,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                     duration: this.timer.current?.getCurrentTime() ?? undefined
                 });
             } else {
-                //If we're being timed per kana, reset the timer.
-                this.countdown.current?.reset();
-
-                //Pick a random remaining kana and remove it from the pool.
-                const [nextKana, nextRemainingKana] = RandomNumberGenerator.getRandomObject(remainingKana);
-
-                //Update the next kana to be displayed and the remaining kana with one less.
-                this.setState({
-                    currentKana: nextKana,
-                    remainingKana: nextRemainingKana,
-                    hasUsedHintThisQuestion: false,
-                    hints: hasUsedHintThisQuestion ? hints - 1 : hints
-                });
+                this.advanceNextQuestion();
             }
         } else {
             //If the question was answered incorrectly, update the lives and wrong answer pool.
@@ -287,12 +273,37 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
         this.countdown.current?.reset();
     }
 
+    private advanceNextQuestion() {
+        const { remainingKana, hasUsedHintThisQuestion, hints } = this.state;
+
+        //If we're being timed per kana, reset the timer.
+        this.countdown.current?.reset();
+
+        //Pick a random remaining kana and remove it from the pool.
+        const [nextKana, nextRemainingKana] = RandomNumberGenerator.getRandomObject(remainingKana);
+
+        //Update the next kana to be displayed and the remaining kana with one less.
+        this.setState({
+            currentKana: nextKana,
+            remainingKana: nextRemainingKana,
+            hasUsedHintThisQuestion: false,
+            hints: hasUsedHintThisQuestion ? hints - 1 : hints,
+        });
+    }
+
     private handleAnswerValidity = (valid: boolean) => {
         this.setState({ hasValidAnswer: valid });
     }
 
     private handleSkip = () => {
-
+        const { settings } = this.props;
+        const { wrongAnswers, lives, currentKana, failedToAnswer } = this.state;
+        this.setState({
+            lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives,
+            wrongAnswers: wrongAnswers.concat(currentKana),
+            failedToAnswer: failedToAnswer + 1
+        });
+        this.advanceNextQuestion();
     }
 
     private countDownTimeElapsed = () => {
