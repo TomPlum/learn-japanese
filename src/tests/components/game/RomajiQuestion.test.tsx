@@ -3,82 +3,71 @@ import RomajiQuestion, { RomajiQuestionProps } from "../../../components/game/Ro
 import { Kana } from "../../../types/Kana";
 import KanaType from "../../../types/KanaType";
 import { KanaColumn } from "../../../types/KanaColumn";
+import React from "react";
 
-const onSubmitHandler = jest.fn();
+const isValidHandler = jest.fn();
+const ref = React.createRef<RomajiQuestion>()
 
 let props: RomajiQuestionProps;
 
 beforeEach(() => {
     props = {
         kana: new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
-        hintSettings: { quantity: 3, enabled: true },
         hidden: false,
-        onSubmit: onSubmitHandler
+        isValid: isValidHandler
     };
 });
 
 const setup = () => {
-    const component = render(<RomajiQuestion {...props} />);
+    const component = render(<RomajiQuestion {...props} ref={ref} />);
     return {
         input: component.getByPlaceholderText('Enter the Rōmaji'),
-        submit: component.getByText('Check'),
-        hintButton: component.getByTitle('Get a Hint'),
         ...component
     }
 }
 
-test('Answering correctly and clicking submit should call the onSubmit event handler with true', () => {
-    const { input, submit } = setup();
+test('Answering correctly and calling isCorrect should invoke with true', () => {
+    const { input } = setup();
     fireEvent.change(input, { target: { value: 'a'}});
-    fireEvent.click(submit);
-    expect(onSubmitHandler).toHaveBeenCalledWith(true);
+    const isCorrect = ref.current?.isCorrect();
+    expect(isCorrect).toBe(true);
 });
 
-test('Answering correctly with the wrong casing and clicking submit should call the onSubmit event handler with true', () => {
-    const { input, submit } = setup();
+test('Answering correctly with the wrong casing and calling isCorrect should invoke with true', () => {
+    const { input } = setup();
     fireEvent.change(input, { target: { value: 'A'}});
-    fireEvent.click(submit);
-    expect(onSubmitHandler).toHaveBeenCalledWith(true);
+    const isCorrect = ref.current?.isCorrect();
+    expect(isCorrect).toBe(true);
 });
 
-test('Answering correctly with the second rōmaji value should call the onSubmit event handler with true', () => {
+test('Answering correctly with the second rōmaji value and calling isCorrect should invoke with true', () => {
     props.kana = new Kana("ふ", ["hu", "fu"], KanaType.HIRAGANA, KanaColumn.H, false);
-    const { input, submit } = setup();
+    const { input } = setup();
 
     fireEvent.change(input, { target: { value: 'fu'}});
-    fireEvent.click(submit);
-    expect(onSubmitHandler).toHaveBeenCalledWith(true);
+    expect(ref.current?.isCorrect()).toBe(true);
 
     fireEvent.change(input, { target: { value: 'hu'}});
-    fireEvent.click(submit);
-    expect(onSubmitHandler).toHaveBeenCalledWith(true);
-
-    expect(onSubmitHandler).toHaveBeenCalledTimes(2);
+    expect(ref.current?.isCorrect()).toBe(true);
 });
 
 test('Answer incorrectly and clicking submit should call the onSubmit event handler with false', () => {
-    const { input, submit } = setup();
+    const { input } = setup();
     fireEvent.change(input, { target: { value: 'ha'}});
-    fireEvent.click(submit);
-    expect(onSubmitHandler).toHaveBeenCalledWith(false);
+    expect(ref.current?.isCorrect()).toBe(false);
 });
 
-test('Empty Rōmaji input value should disable the submit button', () => {
-    const { input, submit } = setup();
+test('Empty Rōmaji input value should call the isValid event handler with false', () => {
+    const { input } = setup();
+    fireEvent.change(input, { target: { value: 'ka' }}); //It starts empty so must populate first
     fireEvent.change(input, { target: { value: '' }});
-    expect(submit).toBeDisabled();
+    expect(isValidHandler).toHaveBeenCalledWith(false);
 });
 
-test('Populating the Rōmaji input with a truthy value should enable the submit button', () => {
-    const { input, submit } = setup();
+test('Populating the Rōmaji input with a truthy value should call the isValid event handler with true', () => {
+    const { input } = setup();
     fireEvent.change(input, { target: { value: 'ka' }});
-    expect(submit).not.toBeDisabled();
-});
-
-test('Passing the hints enabled property as false should disable the hint button', () => {
-    props.hintSettings.enabled = false;
-    const { hintButton } = setup();
-    expect(hintButton).toBeDisabled();
+    expect(isValidHandler).toHaveBeenCalledWith(true);
 });
 
 test('Passing the hidden property has true should disable the Rōmaji input field', () => {
@@ -91,17 +80,4 @@ test('Passing the hidden property has true should set the Rōmaji input placehol
     props.hidden = true;
     render(<RomajiQuestion {...props} />);
     expect(screen.getByPlaceholderText('Paused')).toBeInTheDocument();
-});
-
-test('Using the hint button twice in the same kana shouldn\'t use another hint', async () => {
-    const { hintButton } = setup();
-
-    fireEvent.focus(hintButton);
-    expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
-
-    fireEvent.blur(hintButton);
-    await waitForElementToBeRemoved(() => screen.getByTitle('Need a hint? (2/3 remaining)'));
-
-    fireEvent.focus(hintButton);
-    expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 });

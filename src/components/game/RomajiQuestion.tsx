@@ -1,52 +1,46 @@
-import React, { Component } from "react";
+import React from "react";
 import KanaDisplay from "./KanaDisplay";
 import { Col, Form, Row } from "react-bootstrap";
 import RomajiInput from "./RomajiInput";
-import HintButton from "./HintButton";
 import { Kana } from "../../types/Kana";
-import { HintSettings } from "../../types/GameSettings";
-import SubmitButton from "../ui/SubmitButton";
 import styles from "../../styles/sass/components/game/RomajiQuestion.module.scss";
+import { KanaQuestionProps } from "./KanaMemoryGame";
+import KanaQuestion from "./KanaQuestion";
 
-export interface RomajiQuestionProps {
+export interface RomajiQuestionProps extends KanaQuestionProps {
     kana: Kana;
     hidden: boolean;
-    hintSettings: HintSettings;
-    onSubmit: (correct: boolean) => void;
+    className?: string;
 }
 
 interface RomajiQuestionState {
     answer: string;
-    hints: number;
-    hasUsedHintThisQuestion: boolean;
 }
 
-class RomajiQuestion extends Component<RomajiQuestionProps, RomajiQuestionState> {
+class RomajiQuestion extends KanaQuestion<RomajiQuestionProps, RomajiQuestionState> {
 
-    private readonly kanaDisplay: React.RefObject<KanaDisplay>;
+    private readonly display: React.RefObject<KanaDisplay>;
 
     constructor(props: Readonly<RomajiQuestionProps> | RomajiQuestionProps) {
         super(props);
 
-        this.kanaDisplay = React.createRef();
+        this.display = React.createRef();
 
         this.state = {
             answer: "",
-            hints: this.props.hintSettings?.quantity?.valueOf() ?? 0,
-            hasUsedHintThisQuestion: false
         }
     }
 
     render() {
-        const { kana, hidden, hintSettings } = this.props;
-        const { answer, hints } = this.state;
+        const { kana, hidden, className } = this.props;
+        const { answer } = this.state;
 
         return (
-            <>
+            <div className={className}>
                 <KanaDisplay
                     kana={kana}
                     key={kana.code}
-                    ref={this.kanaDisplay}
+                    ref={this.display}
                     blur={hidden}
                     style={ { character: { size: "xl" }} }
                 />
@@ -58,47 +52,35 @@ class RomajiQuestion extends Component<RomajiQuestionProps, RomajiQuestionState>
                                 <RomajiInput
                                     value={answer}
                                     disabled={!kana || hidden}
-                                    onChange={(value) => this.setState({ answer: value })}
+                                    onChange={this.handleInputChange}
                                     placeholder={hidden ? "Paused" : "Enter the Rōmaji"}
-                                    onEnterKey={this.answer}
-                                />
-                            </Col>
-                            <Col xs="auto" className={styles.tipCol}>
-                                <HintButton
-                                    kana={kana}
-                                    quantity={hints}
-                                    totalQuantity={hintSettings.quantity?.valueOf() ?? 0}
-                                    key={kana.code}
-                                    title="Get a Hint"
-                                    disabled={hidden || !hintSettings.enabled}
-                                    onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
+                                    className={styles.input}
                                 />
                             </Col>
                         </Row>
                     </Form.Group>
-
-                    <SubmitButton onClick={this.answer} disabled={!answer && !!kana || hidden} isRestart={!kana} />
                 </Form>
-            </>
+            </div>
         );
     }
 
-    private answer = () => {
-        const { answer, hints, hasUsedHintThisQuestion } = this.state;
+    private handleInputChange = (value: string) => {
+        this.props.isValid(!!value);
+        this.setState({ answer: value });
+    }
+
+    isCorrect = () => {
+        const { answer } = this.state;
         const { kana } = this.props;
 
-        if (kana.romaji.includes(answer.toLowerCase())) {
-            this.props.onSubmit(true);
-        } else {
-            this.kanaDisplay.current?.notifyIncorrect();
-            this.props.onSubmit(false);
-        }
+        this.setState({ answer: "" });
 
-        this.setState({
-            answer: "",
-            hasUsedHintThisQuestion: false,
-            hints: hasUsedHintThisQuestion ? hints - 1 : hints
-        });
+        if (kana.romaji.includes(answer.toLowerCase())) {
+            return true;
+        } else {
+            this.display.current?.notifyIncorrect();
+            return false;
+        }
     }
 }
 

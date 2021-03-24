@@ -9,7 +9,7 @@ import { KanaColumn } from "../../types/KanaColumn";
 
 export interface HintButtonProps {
     kana: Kana;
-    quantity: number
+    remaining: number
     totalQuantity?: number;
     title?: string;
     disabled?: boolean;
@@ -18,14 +18,14 @@ export interface HintButtonProps {
 
 class HintButton extends Component<HintButtonProps> {
     render() {
-        const { title, disabled, quantity } = this.props;
+        const { title, disabled, remaining } = this.props;
 
         const overlay = <PopOver title={this.getTitle()} text={this.getContent()}/>;
         return (
             <OverlayTrigger onToggle={this.props.onUse} trigger={["focus", "click"]} placement="left" rootClose={true} overlay={overlay}>
                 <Button
                     variant="warning"
-                    className={quantity > 0 ? styles.tip : styles.disabled}
+                    className={remaining > 0 ? styles.tip : styles.disabled}
                     title={title}
                     disabled={disabled}
                 >
@@ -37,10 +37,10 @@ class HintButton extends Component<HintButtonProps> {
 
 
     private getTitle = () => {
-        const { quantity, totalQuantity } = this.props;
-        if (quantity > 0) {
-            if (quantity <= 10) {
-                return "Need a hint? (" + (quantity - 1) + "/" + totalQuantity + " remaining)";
+        const { remaining, totalQuantity } = this.props;
+        if (remaining > 0) {
+            if (remaining <= 10) {
+                return "Need a hint? (" + (remaining - 1) + "/" + totalQuantity + " remaining)";
             }
             return "Need a hint?"
         }
@@ -48,8 +48,8 @@ class HintButton extends Component<HintButtonProps> {
     }
 
     private getContent = () => {
-        const { kana, quantity } = this.props;
-        if (quantity <= 0) {
+        const { kana, remaining } = this.props;
+        if (remaining <= 0) {
             return "You've used all of your hints.";
         }
         if (kana.column === KanaColumn.OTHER) {

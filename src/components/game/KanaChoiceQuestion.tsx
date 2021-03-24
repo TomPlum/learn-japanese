@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import { Kana } from "../../types/Kana";
 import Arrays from "../../utility/Arrays";
 import KanaDisplay from "./KanaDisplay";
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 import KanaQuestionBanner from "./KanaQuestionBanner";
-import SubmitButton from "../ui/SubmitButton";
+import { KanaQuestionProps } from "./KanaMemoryGame";
+import KanaQuestion from "./KanaQuestion";
 
-export interface KanaChoiceQuestionProps {
+export interface KanaChoiceQuestionProps extends KanaQuestionProps {
     expected: Kana;
     wrong: Kana[];
     hidden: boolean;
-    onSubmit: (correct: boolean) => void;
 }
 
 interface KanaChoiceQuestionState {
@@ -19,7 +19,7 @@ interface KanaChoiceQuestionState {
     options: Kana[];
 }
 
-class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQuestionState> {
+class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoiceQuestionState> {
 
     private displays = new Map<Kana, React.RefObject<KanaDisplay>>();
     private indices = new Map<number, Kana>();
@@ -78,23 +78,28 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
                         )
                     })}
                 </Row>
-
-                <SubmitButton onClick={this.answer} disabled={!selected || hidden} />
             </div>
         );
     }
 
-    private answer = () => {
+    isCorrect = () => {
         const { selected } = this.state;
         if (this.props.expected === selected) {
-            this.props.onSubmit(true);
+            return true;
         } else {
             this.displays.get(selected as Kana)?.current?.notifyIncorrect();
-            this.props.onSubmit(false);
+            this.setState({ selected: undefined });
+            return false;
         }
     }
 
-    private select = (value?: Kana) => this.setState({ selected: value });
+    private select = (value?: Kana) => {
+        const { selected } = this.state;
+        if (!selected) {
+            this.props.isValid(true);
+        }
+        this.setState({ selected: value });
+    }
 
     private handleKeySelection = (e: KeyboardEvent) => {
         e.preventDefault();
@@ -104,12 +109,7 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
             const kana = this.indices.get(Number(e.key));
             this.select(kana);
         }
-
-        if (this.state.selected && e.key === 'Enter') {
-            this.answer();
-        }
     }
-
 }
 
 export default KanaChoiceQuestion;

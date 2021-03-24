@@ -8,6 +8,7 @@ export interface RomajiInputProps {
     placeholder?: string;
     onChange?: (value: string) => void;
     onEnterKey?: () => void;
+    className?: string;
 }
 
 class RomajiInput extends Component<RomajiInputProps> {
@@ -19,11 +20,11 @@ class RomajiInput extends Component<RomajiInputProps> {
     }
 
     render() {
-        const { disabled, value, placeholder } = this.props;
+        const { disabled, value, placeholder, className } = this.props;
 
         return (
             <Form.Control
-                className={styles.input}
+                className={[styles.input, className].join(" ")}
                 plaintext
                 disabled={disabled}
                 value={value}

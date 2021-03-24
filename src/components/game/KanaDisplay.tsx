@@ -35,7 +35,9 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
         }
     }
 
-    notifyIncorrect = () => this.setState({ isNotifyingIncorrect: true });
+    notifyIncorrect = () => {
+        this.setState({ isNotifyingIncorrect: true });
+    }
 
     render() {
         const { isNotifyingIncorrect } = this.state;

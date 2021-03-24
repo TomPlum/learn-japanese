@@ -1,5 +1,5 @@
 import KanaMemoryGame, { KanaMemoryGameProps } from "../../../components/game/KanaMemoryGame";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import { DisplayType } from "../../../types/DisplayType";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 import { Kana } from "../../../types/Kana";
@@ -72,6 +72,7 @@ const setup = () => {
     const component = render(<KanaMemoryGame {...props} />);
     return {
         submit: component.getByText('Check'),
+        hintButton: component.getByTitle('Get a Hint'),
         quit: component.getByTitle('Quit'),
         ...component
     }
@@ -80,6 +81,11 @@ const setup = () => {
 function getRomajiInput(): HTMLElement {
     return screen.getByPlaceholderText('Enter the Rōmaji');
 }
+
+test('On mount the submit button should be disabled', () => {
+    const { submit } = setup();
+    expect(submit).toBeDisabled();
+});
 
 test('Answering correctly when there are kana remaining should show the next kana', () => {
     const { submit } = setup();
@@ -298,15 +304,30 @@ test('Disabling lives should not render the LifeDisplay', () => {
 
 test('Enabling hints should render the HintButton in an enabled state', () => {
     props.settings.hints = { enabled: true };
-    setup();
-    expect(screen.getByTitle('Get a Hint')).not.toBeDisabled();
+    const { hintButton } = setup();
+    expect(hintButton).not.toBeDisabled();
 });
 
 test('Disabling hints should render the HintButton in a disabled state', () => {
     props.settings.hints = { enabled: false };
-    setup();
-    expect(screen.getByTitle('Get a Hint')).toBeDisabled();
+    const { hintButton } = setup();
+    expect(hintButton).toBeDisabled();
 });
+
+test('Using the hint button twice in the same kana shouldn\'t use another hint', async () => {
+    props.settings.hints = { enabled: true, quantity: 3 };
+    const { hintButton } = setup();
+
+    fireEvent.focus(hintButton);
+    expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
+
+    fireEvent.blur(hintButton);
+    await waitForElementToBeRemoved(() => screen.getByTitle('Need a hint? (2/3 remaining)'));
+
+    fireEvent.focus(hintButton);
+    expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
+});
+
 
 test('Enabling the timer should render the timer', () => {
     props.settings.time = { timed: true, countdown: false };

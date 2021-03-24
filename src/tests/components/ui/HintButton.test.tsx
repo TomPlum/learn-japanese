@@ -12,7 +12,7 @@ beforeEach(() => {
     props = {
         kana: new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
         totalQuantity: 3,
-        quantity: 3,
+        remaining: 3,
         disabled: false,
         title: 'Get a Hint',
         onUse: onUseHandler
@@ -34,7 +34,7 @@ test('Has Hints Remaining Title', () => {
 });
 
 test('Infinite Hints Title', () => {
-    props.quantity = 999;
+    props.remaining = 999;
     const { button } = setup();
     fireEvent.focus(button);
     expect(screen.getByTitle('Need a hint?')).toBeInTheDocument();
@@ -42,7 +42,7 @@ test('Infinite Hints Title', () => {
 
 test('No Remaining Hints Title', () => {
     props.totalQuantity = 5;
-    props.quantity = 0;
+    props.remaining = 0;
     const { button } = setup();
     fireEvent.focus(button);
     expect(screen.getByTitle('Sorry!')).toBeInTheDocument();
@@ -88,7 +88,7 @@ test('Exceptional Kana (n) Message Text', () => {
 });
 
 test('No Hints Remaining Message Text', () => {
-    props.quantity = 0
+    props.remaining = 0
     const { button } = setup();
     fireEvent.focus(button);
     expect(screen.getByText('You\'ve used all of your hints.')).toBeInTheDocument()
@@ -118,7 +118,7 @@ test('Blurring Should Remove The Overlay PopOver', async () => {
 });
 
 test('When tip quantity is 0, it should apply the \'disabled\' class to the button', () => {
-    props.quantity = 0;
+    props.remaining = 0;
     const { container } = setup();
     expect(container?.firstChild).toHaveClass('disabled');
 });

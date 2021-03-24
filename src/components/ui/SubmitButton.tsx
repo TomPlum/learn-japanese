@@ -11,6 +11,14 @@ interface SubmitButtonProps {
 }
 
 class SubmitButton extends Component<SubmitButtonProps> {
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleKeySelection);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeySelection);
+    }
+
     render() {
         const { disabled, isRestart, onClick } = this.props;
         return (
@@ -18,6 +26,15 @@ class SubmitButton extends Component<SubmitButtonProps> {
                 {!isRestart ? "Check" : <><FontAwesomeIcon icon={faRedoAlt}/> Restart</>}
             </Button>
         );
+    }
+
+
+    private handleKeySelection = (e: KeyboardEvent) => {
+        const { disabled, onClick } = this.props;
+        if (!disabled && e.key === 'Enter') {
+            onClick();
+            e.preventDefault();
+        }
     }
 }
 
