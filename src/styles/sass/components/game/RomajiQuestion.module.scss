@@ -7,6 +7,20 @@
   }
 }
 
+@include tablet {
+  .input {
+    height: 50px;
+    font-size: 1.2em;
+  }
+}
+
+@include phone {
+  .input {
+    height: 40px;
+    font-size: 1em;
+  }
+}
+
 .inputCol {
   padding-right: 5px;
 }

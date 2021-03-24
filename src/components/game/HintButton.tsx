@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import styles from "../../styles/sass/components/game/HintButton.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Button, OverlayTrigger } from "react-bootstrap";
 import PopOver from "../ui/PopOver";
 import { Kana } from "../../types/Kana";
 import { KanaColumn } from "../../types/KanaColumn";
+import styles from "../../styles/sass/components/game/HintButton.module.scss";
 
 export interface HintButtonProps {
     kana: Kana;
@@ -13,19 +13,21 @@ export interface HintButtonProps {
     totalQuantity?: number;
     title?: string;
     disabled?: boolean;
+    className?: string;
     onUse?: () => void;
 }
 
 class HintButton extends Component<HintButtonProps> {
     render() {
-        const { title, disabled, remaining } = this.props;
+        const { title, disabled, remaining, className } = this.props;
 
-        const overlay = <PopOver title={this.getTitle()} text={this.getContent()}/>;
+        const overlay = <PopOver title={this.getTitle()} text={this.getContent()} />;
+        const defaultClassName = remaining > 0 ? styles.tip : styles.disabled;
         return (
             <OverlayTrigger onToggle={this.props.onUse} trigger={["focus", "click"]} placement="left" rootClose={true} overlay={overlay}>
                 <Button
                     variant="warning"
-                    className={remaining > 0 ? styles.tip : styles.disabled}
+                    className={[defaultClassName, className].join(" ")}
                     title={title}
                     disabled={disabled}
                 >

@@ -3,13 +3,52 @@
 @import "src/styles/sass/mixins";
 
 @mixin wrapper {
+  @include fitMobileViewportHeight;
   max-width: 1920px;
   height: 100%;
-  @include fitMobileViewportHeight;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: space-between;
+}
+
+@mixin footer {
+
+}
+
+@mixin submit {
+  max-width: 400px;
+  margin: 0 10px;
+}
+
+@mixin hint {
+  margin: 0 10px;
+}
+
+@mixin timer {
+  float: right;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  color: #FFF;
 }
 
 .question {
   height: 100%;
+  max-width: 300px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.questionWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.header, .question, .footer {
+  width: 100%;
 }
 
 @include phone {
@@ -17,9 +56,35 @@
     height: 8px;
   }
 
+  .lives {
+    font-size: 1em;
+  }
+
   .wrapper {
     @include wrapper;
-    padding: 5px 0;
+    padding-top: 20px;
+  }
+
+  .footer {
+    @include footer;
+    height: 75px;
+  }
+
+  .submit {
+    @include submit;
+    height: 50px;
+  }
+
+  .hint {
+    @include hint;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+  }
+
+  .timer {
+    @include timer;
+    font-size: 1em;
   }
 }
 
@@ -32,36 +97,81 @@
     font-size: 1.5em;
   }
 
+  .lives {
+    font-size: 1.5em;
+  }
+
   .wrapper {
     @include wrapper;
-    padding: 20px 0;
+    padding-top: 20px;
+  }
+
+  .footer {
+    @include footer;
+    height: 100px;
+  }
+
+  .submit {
+    @include submit;
+    height: 50px;
+    font-size: 1.6em !important;
+  }
+
+  .hint {
+    @include hint;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+  }
+
+  .timer {
+    @include timer;
+    font-size: 1.5em;
   }
 }
 
 @include desktop {
   .progress {
-    height: 15px;
+    height: 20px;
   }
 
   .quit {
     font-size: 2em;
   }
 
+  .lives {
+    font-size: 2em;
+  }
+
   .wrapper {
     @include wrapper;
-    padding: 30px 0;
+    padding-top: 30px;
   }
-}
 
-.timer {
-  float: right;
-  color: #FFF;
+  .footer {
+    @include footer;
+    height: 150px;
+  }
+
+  .submit {
+    @include submit;
+    height: 50px;
+    font-size: 1.6em !important;
+  }
+
+  .hint {
+    @include hint;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+  }
+
+  .timer {
+    @include timer;
+    font-size: 2em;
+  }
 }
 
 .lifeDisplayContainer {
   text-align: center;
-}
-
-.progress {
-
 }

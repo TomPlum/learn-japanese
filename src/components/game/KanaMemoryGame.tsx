@@ -110,7 +110,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
 
         return (
             <Container className={styles.wrapper}>
-                <Row noGutters>
+                <Row noGutters className={styles.header}>
                     <Col xs={12}>
                         <SessionProgressBar
                             inProgress={!hasExhaustedKana}
@@ -125,7 +125,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                     </Col>
 
                     <Col className={styles.lifeDisplayContainer}>
-                        {settings.lives.enabled && <LifeDisplay hearts={lives} />}
+                        {settings.lives.enabled && <LifeDisplay hearts={lives} className={styles.lives} />}
                     </Col>
 
                     <Col>
@@ -143,28 +143,29 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                     </Col>
                 </Row>
 
-                <Row>
-                    <Col xs={12}>
-                        {this.getQuestion()}
-                    </Col>
+                <Row className={styles.questionWrapper}>
+                    {this.getQuestion()}
                 </Row>
 
-                <Row>
-                    <Col xs={2}>
-                        <HintButton
-                            kana={currentKana}
-                            remaining={hints}
-                            totalQuantity={settings.hints.quantity?.valueOf() ?? 0}
-                            key={currentKana.code}
-                            title="Get a Hint"
-                            disabled={paused || !settings.hints.enabled}
-                            onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
-                        />
+                <Row className={styles.footer}>
+                    <Col sm={6} xs={4}>
+
                     </Col>
-                   <Col xs={10}>
+                   <Col sm={6} xs={8}>
+                       <HintButton
+                           kana={currentKana}
+                           remaining={hints}
+                           totalQuantity={settings.hints.quantity?.valueOf() ?? 0}
+                           key={currentKana.code}
+                           title="Get a Hint"
+                           disabled={paused || !settings.hints.enabled}
+                           className={styles.hint}
+                           onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
+                       />
                        <SubmitButton
                            onClick={this.answerQuestion}
                            disabled={!hasValidAnswer || paused}
+                           className={styles.submit}
                        />
                    </Col>
                 </Row>
