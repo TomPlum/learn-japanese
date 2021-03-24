@@ -8,21 +8,24 @@
   height: 100%;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   align-content: space-between;
 }
 
 @mixin footer {
-
+  min-width: 100%;
 }
 
 @mixin submit {
   max-width: 400px;
-  margin: 0 10px;
+  margin-left: 10px;
+}
+
+@mixin skip {
+  max-width: 150px;
 }
 
 @mixin hint {
-  margin: 0 10px;
+  margin-right: 10px;
 }
 
 @mixin timer {
@@ -45,6 +48,16 @@
   display: flex;
   width: 100%;
   justify-content: center;
+}
+
+.questionWrapperColumn {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonGroup {
+  width: 100%;
+  max-width: 450px;
 }
 
 .header, .question, .footer {
@@ -79,6 +92,13 @@
     @include hint;
     width: 50px;
     height: 50px;
+    font-size: 1.5em;
+  }
+
+  .skip {
+    @include skip;
+    height: 50px;
+    width: 50px;
     font-size: 1.5em;
   }
 
@@ -124,6 +144,12 @@
     font-size: 1.5em;
   }
 
+  .skip {
+    @include skip;
+    height: 50px;
+    font-size: 1.5em;
+  }
+
   .timer {
     @include timer;
     font-size: 1.5em;
@@ -164,6 +190,12 @@
     width: 50px;
     height: 50px;
     font-size: 1.5em;
+  }
+
+  .skip {
+    @include skip;
+    height: 50px;
+    font-size: 1.6em;
   }
 
   .timer {

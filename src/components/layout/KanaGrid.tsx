@@ -20,7 +20,6 @@ class KanaGrid extends Component<KanaGridProps> {
                         gutterHeight={10}
                         monitorImagesLoaded={false}
                         duration={0}
-                        onLayout={() => {console.log("CALLED")}}
                         appear={transitions.fade.appear}
                         appeared={transitions.fade.appeared}
                         enter={transitions.fade.enter}

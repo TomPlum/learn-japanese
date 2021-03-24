@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Kana } from "../../types/Kana";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, ButtonGroup, Col, Container, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import Timer from "./Timer";
 import { GameSettings } from "../../types/GameSettings";
@@ -23,6 +23,7 @@ import styles from "../../styles/sass/components/game/KanaMemoryGame.module.scss
 import SubmitButton from "../ui/SubmitButton";
 import HintButton from "./HintButton";
 import KanaQuestion from "./KanaQuestion";
+import SkipButton from "../ui/SkipButton";
 
 export interface KanaQuestionProps {
     isValid: (valid: boolean) => void;
@@ -144,29 +145,33 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                 </Row>
 
                 <Row className={styles.questionWrapper}>
-                    {this.getQuestion()}
+                    <Col xs={12} className={styles.questionWrapperColumn}>
+                        {this.getQuestion()}
+                    </Col>
                 </Row>
 
                 <Row className={styles.footer}>
-                    <Col sm={6} xs={4}>
-
+                    <Col md={6} xs={5}>
+                        <SkipButton onClick={this.handleSkip} className={styles.skip} />
                     </Col>
-                   <Col sm={6} xs={8}>
-                       <HintButton
-                           kana={currentKana}
-                           remaining={hints}
-                           totalQuantity={settings.hints.quantity?.valueOf() ?? 0}
-                           key={currentKana.code}
-                           title="Get a Hint"
-                           disabled={paused || !settings.hints.enabled}
-                           className={styles.hint}
-                           onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
-                       />
-                       <SubmitButton
-                           onClick={this.answerQuestion}
-                           disabled={!hasValidAnswer || paused}
-                           className={styles.submit}
-                       />
+                   <Col md={6} xs={7}>
+                       <ButtonGroup className={styles.buttonGroup}>
+                           <HintButton
+                               kana={currentKana}
+                               remaining={hints}
+                               totalQuantity={settings.hints.quantity?.valueOf() ?? 0}
+                               key={currentKana.code}
+                               title="Get a Hint"
+                               disabled={paused || !settings.hints.enabled}
+                               className={styles.hint}
+                               onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
+                           />
+                           <SubmitButton
+                               onClick={this.answerQuestion}
+                               disabled={!hasValidAnswer || paused}
+                               className={styles.submit}
+                           />
+                       </ButtonGroup>
                    </Col>
                 </Row>
             </Container>
@@ -284,6 +289,10 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
 
     private handleAnswerValidity = (valid: boolean) => {
         this.setState({ hasValidAnswer: valid });
+    }
+
+    private handleSkip = () => {
+
     }
 
     private countDownTimeElapsed = () => {
