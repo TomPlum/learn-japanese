@@ -319,13 +319,13 @@ test('Using the hint button twice in the same kana shouldn\'t use another hint',
     props.settings.hints = { enabled: true, quantity: 3 };
     const { hint } = setup();
 
-    fireEvent.focus(hint);
+    fireEvent.click(hint);
     expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 
-    fireEvent.blur(hint);
+    fireEvent.click(hint);
     await waitForElementToBeRemoved(() => screen.getByTitle('Need a hint? (2/3 remaining)'));
 
-    fireEvent.focus(hint);
+    fireEvent.click(hint);
     expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 });
 

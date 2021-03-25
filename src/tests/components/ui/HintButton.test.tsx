@@ -29,14 +29,14 @@ const setup = () => {
 
 test('Has Hints Remaining Title', () => {
     const { button } = setup();
-    fireEvent.focus(button);
+    fireEvent.click(button);
     expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 });
 
 test('Infinite Hints Title', () => {
     props.remaining = 999;
     const { button } = setup();
-    fireEvent.focus(button);
+    fireEvent.click(button);
     expect(screen.getByTitle('Need a hint?')).toBeInTheDocument();
 });
 
@@ -44,13 +44,13 @@ test('No Remaining Hints Title', () => {
     props.totalQuantity = 5;
     props.remaining = 0;
     const { button } = setup();
-    fireEvent.focus(button);
+    fireEvent.click(button);
     expect(screen.getByTitle('Sorry!')).toBeInTheDocument();
 });
 
 test('Regular Kana Message Text', () => {
     const { button } = setup();
-    fireEvent.focus(button);
+    fireEvent.click(button);
     const text = screen.getByText('This kana is from the \'vowel\' column in the Hiragana syllabary.');
     expect(text).toBeInTheDocument()
 });
@@ -58,7 +58,7 @@ test('Regular Kana Message Text', () => {
 test('Diacritical Kana Message Text', () => {
     props.kana = new Kana("ぞ", ["zo"], KanaType.HIRAGANA, KanaColumn.S, true);
     const { button } = setup();
-    fireEvent.focus(button);
+    fireEvent.click(button);
     const text = screen.getByText('This kana is from the \'s\' column in the Hiragana syllabary. Also, notice the diacritical mark.');
     expect(text).toBeInTheDocument()
 });
@@ -66,7 +66,7 @@ test('Diacritical Kana Message Text', () => {
 test('Diagraph Message Text', () => {
     props.kana = new Kana("しゅ", ["shu"], KanaType.HIRAGANA, KanaColumn.S, false);
     const { button } = setup();
-    fireEvent.focus(button);
+    fireEvent.click(button);
     const text = screen.getByText('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed.');
     expect(text).toBeInTheDocument()
 });
@@ -74,7 +74,7 @@ test('Diagraph Message Text', () => {
 test('Diacritical Diagraph Message Text', () => {
     props.kana = new Kana("びゃ", ["bya"], KanaType.HIRAGANA, KanaColumn.H, true);
     const { button } = setup();
-    fireEvent.focus(button);
+    fireEvent.click(button);
     const text = screen.getByText('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed. Also, notice the diacritical mark.');
     expect(text).toBeInTheDocument()
 });
@@ -82,7 +82,7 @@ test('Diacritical Diagraph Message Text', () => {
 test('Exceptional Kana (n) Message Text', () => {
     props.kana = new Kana("n", ["n"], KanaType.HIRAGANA, KanaColumn.OTHER, false);
     const { button } = setup();
-    fireEvent.focus(button);
+    fireEvent.click(button);
     const text = screen.getByText('This kana is exceptional. It is not a consonant nor a vowel.');
     expect(text).toBeInTheDocument()
 });
@@ -90,7 +90,7 @@ test('Exceptional Kana (n) Message Text', () => {
 test('No Hints Remaining Message Text', () => {
     props.remaining = 0
     const { button } = setup();
-    fireEvent.focus(button);
+    fireEvent.click(button);
     expect(screen.getByText('You\'ve used all of your hints.')).toBeInTheDocument()
 });
 
@@ -102,18 +102,18 @@ test('Disabled Property Should Disable Button', () => {
 
 test('Using Hint Button Should Call onUse Event Handler', () => {
     const { button } = setup();
-    fireEvent.focus(button);
+    fireEvent.click(button);
     expect(onUseHandler).toHaveBeenCalled();
 });
 
 test('Blurring Should Remove The Overlay PopOver', async () => {
     const { button } = setup();
 
-    fireEvent.focus(button);
+    fireEvent.click(button);
     const popover = screen.getByTitle('Need a hint? (2/3 remaining)');
     expect(popover).toBeInTheDocument();
 
-    fireEvent.blur(button);
+    fireEvent.click(button);
     await waitForElementToBeRemoved(popover);
 });
 
