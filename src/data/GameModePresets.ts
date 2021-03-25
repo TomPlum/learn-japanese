@@ -13,6 +13,7 @@ export const defaultKanaSettings: KanaSettings = {
     hiragana: true,
     katakana: true,
     diagraphs: true,
+    quantity: 50
 }
 
 export const defaultHintSettings: HintSettings = {
@@ -65,7 +66,7 @@ export const TIME_ATTACK: GameSettings = {
 
 export const HARDCORE: GameSettings = {
     display: { type: DisplayType.KANA, cards: 6 },
-    kana: defaultKanaSettings,
+    kana: { hiragana: true, katakana: true, diagraphs: true },
     hints: { enabled: false },
     lives: { enabled: true, quantity: LifeQuantity.ONE },
     time: { timed: false, countdown: true, secondsPerQuestion: 5 }

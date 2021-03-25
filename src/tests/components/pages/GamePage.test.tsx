@@ -4,7 +4,7 @@ import GamePage from "../../../components/pages/GamePage";
 test('Selecting a game mode should hide the menu and render the game', () => {
    render(<GamePage />);
    fireEvent.click(screen.getByText('START'));
-   expect(screen.getByTitle('1/214')).toBeInTheDocument();
+   expect(screen.getByTitle('1/50')).toBeInTheDocument();
 });
 
 test('Quitting the game should close the game window and re-render the menu', () => {

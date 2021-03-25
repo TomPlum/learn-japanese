@@ -32,8 +32,8 @@ class RomajiInput extends Component<RomajiInputProps> {
 
         return (
             <div className={styles.wrapper}>
-                <OverlayTrigger trigger={"hover"} overlay={popover} placement="top" >
-                    <FontAwesomeIcon icon={faInfoCircle} className={styles.icon} />
+                <OverlayTrigger trigger={["hover", "click"]} overlay={popover} placement="top" >
+                    <FontAwesomeIcon icon={faInfoCircle} className={styles.icon} data-testid="help" />
                 </OverlayTrigger>
 
                 <Form.Control
