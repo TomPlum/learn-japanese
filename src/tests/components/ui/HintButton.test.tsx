@@ -123,7 +123,7 @@ test('When tip quantity is 0, it should apply the \'disabled\' class to the butt
     expect(container?.firstChild).toHaveClass('disabled');
 });
 
-test('When tip quantity is greater than 0, it should apply the default \'tip\' class to the button', () => {
+test('When tip quantity is greater than 0, it should apply the default \'button\' class to the button', () => {
     const { container } = setup();
-    expect(container?.firstChild).toHaveClass('tip');
+    expect(container?.firstChild).toHaveClass('button');
 });

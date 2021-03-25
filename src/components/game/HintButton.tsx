@@ -5,6 +5,7 @@ import { Button, OverlayTrigger } from "react-bootstrap";
 import PopOver from "../ui/PopOver";
 import { Kana } from "../../types/Kana";
 import { KanaColumn } from "../../types/KanaColumn";
+import Viewports, { Viewport } from "../../utility/Viewports";
 import styles from "../../styles/sass/components/game/HintButton.module.scss";
 
 export interface HintButtonProps {
@@ -17,12 +18,34 @@ export interface HintButtonProps {
     onUse?: () => void;
 }
 
-class HintButton extends Component<HintButtonProps> {
+interface HintButtonState {
+    viewport: Viewport;
+}
+
+class HintButton extends Component<HintButtonProps, HintButtonState> {
+
+    constructor(props: HintButtonProps | Readonly<HintButtonProps>) {
+        super(props);
+        this.state = {
+            viewport: Viewport.PHONE
+        }
+    }
+
+    componentDidMount() {
+        this.updateViewport();
+        window.addEventListener("resize", this.updateViewport);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateViewport);
+    }
+
     render() {
         const { title, disabled, remaining, className } = this.props;
+        const { viewport } = this.state;
 
         const overlay = <PopOver title={this.getTitle()} text={this.getContent()} />;
-        const defaultClassName = remaining > 0 ? styles.tip : styles.disabled;
+        const defaultClassName = remaining > 0 ? styles.button : styles.disabled;
         return (
             <OverlayTrigger
                 onToggle={this.props.onUse}
@@ -37,7 +60,13 @@ class HintButton extends Component<HintButtonProps> {
                     title={title}
                     disabled={disabled}
                 >
-                    <FontAwesomeIcon icon={faLightbulb}/>
+                    <FontAwesomeIcon icon={faLightbulb} fixedWidth className={styles.icon}/>
+                    {viewport != Viewport.PHONE &&
+                        <>
+                            <span className={styles.text}>HINT</span>
+                            <span className={styles.remaining}>({remaining})</span>
+                        </>
+                    }
                 </Button>
             </OverlayTrigger>
         );
@@ -74,6 +103,11 @@ class HintButton extends Component<HintButtonProps> {
         }
 
         return message + (kana.isDiacritical ? diacritical : "");
+    }
+
+    private updateViewport = () => {
+        console.log(window.innerWidth)
+        this.setState({ viewport: Viewports.fromWidth(window.innerWidth) });
     }
 
 }

@@ -22,7 +22,6 @@ import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
 import styles from "../../styles/sass/components/game/KanaMemoryGame.module.scss";
 import SubmitButton from "../ui/SubmitButton";
 import HintButton from "./HintButton";
-import KanaQuestion from "./KanaQuestion";
 import SkipButton from "../ui/SkipButton";
 
 export interface KanaQuestionProps {
@@ -144,17 +143,17 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                     </Col>
                 </Row>
 
-                <Row className={styles.questionWrapper}>
+                <Row noGutters className={styles.questionWrapper}>
                     <Col xs={12} className={styles.questionWrapperColumn}>
                         {this.getQuestion()}
                     </Col>
                 </Row>
 
-                <Row className={styles.footer}>
-                    <Col md={6} xs={5} className={styles.footerLeftCol}>
+                <Row noGutters className={styles.footer}>
+                    <Col md={5} xs={4} className={styles.footerLeftCol}>
                         <SkipButton onClick={this.handleSkip} className={styles.skip} disabled={paused} />
                     </Col>
-                   <Col md={6} xs={7} className={styles.footerRightCol}>
+                   <Col md={7} xs={8} className={styles.footerRightCol}>
                        <ButtonGroup className={styles.buttonGroup}>
                            <HintButton
                                kana={currentKana}

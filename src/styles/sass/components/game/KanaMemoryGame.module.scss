@@ -17,7 +17,7 @@
 }
 
 @mixin submit {
-  max-width: 400px;
+  max-width: 500px;
   margin-left: 10px;
 }
 
@@ -26,6 +26,7 @@
 }
 
 @mixin hint {
+  height: 50px;
   margin-right: 10px;
 }
 
@@ -70,7 +71,7 @@
 
 .buttonGroup {
   width: 100%;
-  max-width: 450px;
+  max-width: 550px;
 }
 
 .header, .question, .footer {
@@ -103,15 +104,14 @@
 
   .hint {
     @include hint;
-    width: 50px;
-    height: 50px;
+    width: 50px !important;
     font-size: 1.5em;
   }
 
   .skip {
     @include skip;
     height: 50px;
-    width: 50px;
+    width: 50px !important;
     font-size: 1.5em;
   }
 
@@ -156,8 +156,6 @@
 
   .hint {
     @include hint;
-    width: 50px;
-    height: 50px;
     font-size: 1.5em;
   }
 
@@ -208,8 +206,6 @@
 
   .hint {
     @include hint;
-    width: 50px;
-    height: 50px;
     font-size: 1.5em;
   }
 
