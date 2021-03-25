@@ -95,7 +95,7 @@ test('Selecting an option should change its displays character class colour', ()
     setup();
     const option = screen.getByText('え');
     fireEvent.click(option);
-    expect(option).toHaveProperty('style._values.color', 'rgb(67, 234, 95)');
+    expect(option).toHaveProperty('style._values.color', 'rgb(38, 140, 229)');
 });
 
 test('Pressing the number key for a given option index should select it', () => {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Alert } from "react-bootstrap";
-import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 import { Kana } from "../../types/Kana";
+import styles from "../../styles/sass/components/game/KanaQuestionBanner.module.scss";
 
 export interface KanaQuestionBannerProps {
     value: Kana;
@@ -11,7 +11,7 @@ class KanaQuestionBanner extends Component<KanaQuestionBannerProps> {
     render() {
         const { value } = this.props;
         return (
-            <Alert className={styles.question} variant="secondary" aria-labelledby="Kana Question">
+            <Alert className={styles.text} variant="secondary" aria-labelledby="Kana Question">
                 Which {value.isDiagraph() ? "diagraph" : "kana"} is {this.getRomaji()} ?
             </Alert>
         );

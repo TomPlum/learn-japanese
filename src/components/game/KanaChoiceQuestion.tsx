@@ -3,10 +3,10 @@ import { Kana } from "../../types/Kana";
 import Arrays from "../../utility/Arrays";
 import KanaDisplay from "./KanaDisplay";
 import { Col, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 import KanaQuestionBanner from "./KanaQuestionBanner";
 import { KanaQuestionProps } from "./KanaMemoryGame";
 import KanaQuestion from "./KanaQuestion";
+import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 
 export interface KanaChoiceQuestionProps extends KanaQuestionProps {
     expected: Kana;
@@ -56,13 +56,13 @@ class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoic
         const { selected, options } = this.state;
 
         return (
-            <div>
+            <div className={styles.wrapper}>
                 <KanaQuestionBanner value={expected} />
 
                 <Row>
                     {options.map((option, i) => {
                         return (
-                            <Col xs={6} key={"col-" + i}>
+                            <Col lg={options.length == 6 ? 4 : 6} xs={6} key={"col-" + i}>
                                 <KanaDisplay
                                     kana={option}
                                     blur={hidden}
@@ -70,7 +70,7 @@ class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoic
                                     onClick={this.select}
                                     style={{
                                         container: selected === option ? styles.selected : styles.tile,
-                                        character: { size: "md", color: selected === option ? "#43ea5f" : undefined }
+                                        character: { className: styles.kana, color: selected === option ? "#268ce5" : undefined }
                                     }}
                                     ref={this.displays.get(option)}
                                 />
