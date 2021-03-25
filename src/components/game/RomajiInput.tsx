@@ -1,6 +1,9 @@
 import React, { ChangeEvent, Component } from "react";
-import { Form } from "react-bootstrap";
+import { Form, OverlayTrigger } from "react-bootstrap";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/game/RomajiInput.module.scss";
+import PopOver from "../ui/PopOver";
 
 export interface RomajiInputProps {
     disabled?: boolean;
@@ -22,18 +25,29 @@ class RomajiInput extends Component<RomajiInputProps> {
     render() {
         const { disabled, value, placeholder, className } = this.props;
 
+        const popover = <PopOver
+            title="What is Rōmaji?"
+            text={"Enter the roman characters for the given kana. I.e. 'a', 'ke' or 'zu'."}
+        />
+
         return (
-            <Form.Control
-                className={[styles.input, className].join(" ")}
-                plaintext
-                disabled={disabled}
-                value={value}
-                placeholder={placeholder}
-                onChange={this.handleOnChange}
-                onKeyPress={this.handleKeyPress}
-                onFocus={this.handleFocus}
-                ref={this.input}
-            />
+            <div className={styles.wrapper}>
+                <OverlayTrigger trigger={"hover"} overlay={popover} placement="top" >
+                    <FontAwesomeIcon icon={faInfoCircle} className={styles.icon} />
+                </OverlayTrigger>
+
+                <Form.Control
+                    className={[styles.input, className].join(" ")}
+                    plaintext
+                    disabled={disabled}
+                    value={value}
+                    placeholder={placeholder}
+                    onChange={this.handleOnChange}
+                    onKeyPress={this.handleKeyPress}
+                    onFocus={this.handleFocus}
+                    ref={this.input}
+                />
+            </div>
         );
     }
 
