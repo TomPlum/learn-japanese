@@ -12,10 +12,11 @@ interface SessionProgressBarProps {
 class SessionProgressBar extends Component<SessionProgressBarProps> {
     render() {
         const { inProgress, value, title, className } = this.props
+        const barClass = className ? className : styles.progress;
         return (
             <ProgressBar
                 animated={inProgress}
-                className={className ? className : styles.progress}
+                className={[barClass, styles.default].join(" ")}
                 now={value}
                 variant={!inProgress ? "success" : undefined}
                 title={title}

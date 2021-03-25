@@ -18,6 +18,10 @@ window.matchMedia = window.matchMedia || function() {
     };
 };
 
+//Allows testing of components that are wrapped in the sizeMe HOC
+import sizeMe from "react-sizeme";
+sizeMe.noPlaceholders = true;
+
 expect.extend({
     toHaveStyleProperty(received, style, value) {
         const hasStyle = received.toHaveProperty('style._values.' + style, value);

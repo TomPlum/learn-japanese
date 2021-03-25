@@ -10,7 +10,7 @@ test('Should render the passed kana\'s character', () => {
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
-test('Should render the passed kana\'s first romanji', () => {
+test('Should render the passed kana\'s first rōmaji', () => {
     const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
     render(<AnswerMistake kana={kana} times={3} />);
     expect(screen.getByText('a')).toBeInTheDocument();

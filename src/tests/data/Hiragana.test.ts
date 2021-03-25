@@ -287,11 +287,11 @@ describe("Hiragana", () => {
         });
     });
 
-    function getMultipleHiragana(romanji: string[][]): KanaData[] {
-        return romanji.map(array => getHiragana(array));
+    function getMultipleHiragana(romaji: string[][]): KanaData[] {
+        return romaji.map(array => getHiragana(array));
     }
 
-    function getHiragana(romanji: string[]): KanaData {
-        return hiragana().filter(entry => JSON.stringify(entry.romanji) === JSON.stringify(romanji))[0];
+    function getHiragana(romaji: string[]): KanaData {
+        return hiragana().filter(entry => JSON.stringify(entry.romaji) === JSON.stringify(romaji))[0];
     }
 });

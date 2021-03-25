@@ -1,4 +1,8 @@
+@import "src/styles/sass/mixins";
+
 @mixin wrapper {
+  @include fitMobileViewportHeight;
+  @include borderBoxSizing;
   display: flex;
   align-items: center;
   justify-content: center;

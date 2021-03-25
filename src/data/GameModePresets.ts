@@ -13,6 +13,7 @@ export const defaultKanaSettings: KanaSettings = {
     hiragana: true,
     katakana: true,
     diagraphs: true,
+    quantity: 50
 }
 
 export const defaultHintSettings: HintSettings = {
@@ -39,7 +40,7 @@ export const RELAXED: GameSettings = {
     time: { timed: false, countdown: false }
 }
 
-export const ROMANJI: GameSettings = {
+export const ROMAJI: GameSettings = {
     display: { type: DisplayType.ROMAJI, cards: 1 },
     kana: defaultKanaSettings,
     hints: { enabled: true, quantity: HintQuantity.THREE },
@@ -65,7 +66,7 @@ export const TIME_ATTACK: GameSettings = {
 
 export const HARDCORE: GameSettings = {
     display: { type: DisplayType.KANA, cards: 6 },
-    kana: defaultKanaSettings,
+    kana: { hiragana: true, katakana: true, diagraphs: true },
     hints: { enabled: false },
     lives: { enabled: true, quantity: LifeQuantity.ONE },
     time: { timed: false, countdown: true, secondsPerQuestion: 5 }

@@ -3,15 +3,17 @@
 .wrapper {
   max-width: 1400px;
   width: 100%;
-  min-height: 610px;
+  height: 100%;
+  padding: 15px 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .row {
-  width: 100%;
   height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu {
@@ -21,4 +23,10 @@
 .gameMenuWrapper {
   display: flex;
   justify-content: center;
+}
+
+.innerWrapper {
+  height: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
 }

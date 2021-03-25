@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanaGameModeMenu from "../../../components/layout/KanaGameModeMenu";
-import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../../../data/GameModePresets";
+import { HARDCORE, KANA, RELAXED, ROMAJI, TIME_ATTACK } from "../../../data/GameModePresets";
 import { GameMode } from "../../../types/GameMode";
 import { Environment } from "../../../utility/Environment";
 
@@ -13,7 +13,7 @@ const setup = () => {
         start: component.getByText('START'),
         relaxed: component.getByText('Relaxed'),
         timeAttack: component.getByText('Time Attack'),
-        romanji: component.getByText('Romanji'),
+        romaji: component.getByText('Rōmaji'),
         kana: component.getByText('Kana'),
         hardcore: component.getByText('Hardcore'),
         custom: component.getByText('Custom'),
@@ -42,11 +42,11 @@ test('Selecting \'Time Attack\' mode and starting should call the onSelectMode e
     expect(onSelectModeHandler).toHaveBeenCalledWith(GameMode.TIME_ATTACK, TIME_ATTACK);
 });
 
-test('Selecting \'Romanji\' mode and starting should call the onSelectMode event handler', () => {
-    const { start, romanji } = setup();
-    fireEvent.click(romanji);
+test('Selecting \'Rōmaji\' mode and starting should call the onSelectMode event handler', () => {
+    const { start, romaji } = setup();
+    fireEvent.click(romaji);
     fireEvent.click(start);
-    expect(onSelectModeHandler).toHaveBeenCalledWith(GameMode.ROMANJI, ROMANJI);
+    expect(onSelectModeHandler).toHaveBeenCalledWith(GameMode.ROMAJI, ROMAJI);
 });
 
 test('Selecting \'Kana\' mode and starting should call the onSelectMode event handler', () => {
@@ -92,14 +92,14 @@ test('Selecting \'Time Attack\' mode should load the description from the enviro
     expect(screen.getByText('This is the time attack mode description')).toBeInTheDocument();
 });
 
-test('Selecting \'Romanji\' mode should load the description from the environment variables', () => {
-    environment.mockReturnValue("This is the romanji mode description");
-    const { romanji } = setup();
+test('Selecting \'Rōmaji\' mode should load the description from the environment variables', () => {
+    environment.mockReturnValue("This is the rōmaji mode description");
+    const { romaji } = setup();
 
-    fireEvent.click(romanji);
+    fireEvent.click(romaji);
 
-    expect(environment).toHaveBeenCalledWith("MODE_DESC_Romanji");
-    expect(screen.getByText('This is the romanji mode description')).toBeInTheDocument();
+    expect(environment).toHaveBeenCalledWith("MODE_DESC_Rōmaji");
+    expect(screen.getByText('This is the rōmaji mode description')).toBeInTheDocument();
 });
 
 test('Selecting \'Kana\' mode should load the description from the environment variables', () => {

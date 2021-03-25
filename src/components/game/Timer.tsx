@@ -48,7 +48,7 @@ class Timer extends Component<TimerProps, TimerState> {
                     icon={paused ? faPlay : faPause}
                     className={styles.pause}
                     onClick={paused ? this.play : this.pause}
-                    title="Pause"
+                    title={paused ? "Play" : "Pause"}
                     size="sm"
                 />}
                 {this.formatTimeElapsed()}

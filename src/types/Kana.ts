@@ -4,14 +4,14 @@ import Arrays from "../utility/Arrays";
 
 export class Kana {
     private readonly _code: string;
-    private readonly _romanji: string[];
+    private readonly _romaji: string[];
     private readonly _type: KanaType;
     private readonly _column: KanaColumn;
     private readonly _isDiacritical: boolean;
 
-    constructor(code: string, romanji: string[], type: KanaType, column: KanaColumn, isDiacritical: boolean) {
+    constructor(code: string, romaji: string[], type: KanaType, column: KanaColumn, isDiacritical: boolean) {
         this._code = code;
-        this._romanji = romanji;
+        this._romaji = romaji;
         this._type = type;
         this._column = column;
         this._isDiacritical = isDiacritical;
@@ -21,11 +21,11 @@ export class Kana {
         return this._code.length === 2;
     }
 
-    public getFullRomanjiString(): string {
-        if (this.romanji.length === 1) {
-            return this.romanji[0];
+    public getFullRomajiString(): string {
+        if (this.romaji.length === 1) {
+            return this.romaji[0];
         } else {
-            return this.romanji[0] + " (" + this.romanji[1] + ")";
+            return this.romaji[0] + " (" + this.romaji[1] + ")";
         }
     }
 
@@ -33,8 +33,8 @@ export class Kana {
         return this._code;
     }
 
-    get romanji(): string[] {
-        return this._romanji;
+    get romaji(): string[] {
+        return this._romaji;
     }
 
     get type(): KanaType {
@@ -52,7 +52,7 @@ export class Kana {
     public equals(other: any): boolean {
         if (!other) return false;
         if (!(other instanceof Kana)) return false;
-        if (!Arrays.areEqual(this.romanji, other.romanji)) return false;
+        if (!Arrays.areEqual(this.romaji, other.romaji)) return false;
         if (other.type !== this.type) return false;
         if (other.column !== this.column) return false;
         if (other.isDiacritical !== this.isDiacritical) return false;

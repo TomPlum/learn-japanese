@@ -34,16 +34,16 @@ describe("Kana", () => {
    });
 
 
-   describe("Get Full Romanji String", () => {
-       it("Should return the romanji for a Kana with a single pronunciation", () => {
+   describe("Get Full Rōmaji String", () => {
+       it("Should return the rōmaji for a Kana with a single pronunciation", () => {
            const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-           const string = kana.getFullRomanjiString();
+           const string = kana.getFullRomajiString();
            expect(string).toEqual("a");
        });
 
        it("Should return both pronunciations with one in parentheses when a kana has multiple pronunciations", () => {
            const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-           const string = kana.getFullRomanjiString();
+           const string = kana.getFullRomajiString();
            expect(string).toEqual("fu (hu)");
        });
    });
@@ -67,10 +67,10 @@ describe("Kana", () => {
           expect(type).toEqual(KanaType.HIRAGANA);
       });
 
-      it("Should return the Kana romanji", () => {
+      it("Should return the Kana rōmaji", () => {
           const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-          const romanji = kana.romanji;
-          expect(romanji[0]).toEqual("a");
+          const romaji = kana.romaji;
+          expect(romaji[0]).toEqual("a");
       });
    });
 

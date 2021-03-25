@@ -1,4 +1,5 @@
-@import "../../viewports";
+@import "src/styles/sass/viewports";
+@import "src/styles/sass/colours";
 
 @mixin linkText {
   text-transform: capitalize;
@@ -7,6 +8,7 @@
 
 @mixin navbar {
   border-bottom: 2px rgba(146, 146, 146, 0.2) solid;
+  background-color: $dark-3;
 
   $shadow-colour: rgba(255, 255, 255, 0.1);
   -moz-box-shadow: 1px 2px 3px $shadow-colour;
@@ -17,7 +19,8 @@
 @include phone {
   .icon {
     font-size: 1.6em;
-    margin: 3px;
+    margin-top: 5px;
+    margin-bottom: -5px;
   }
 
   .linkText {
@@ -28,6 +31,7 @@
   .navbar {
     @include navbar;
     padding: 5px;
+    height: 70px;
   }
 }
 
@@ -45,6 +49,7 @@
   .navbar {
     @include navbar;
     padding: 10px;
+    height: 100px;
   }
 }
 
@@ -62,6 +67,7 @@
   .navbar {
     @include navbar;
     padding: 15px;
+    height: 130px;
   }
 }
 
@@ -80,9 +86,4 @@
 
 .innerWrapper {
   max-width: 1200px;
-}
-
-.wrapper {
-  display: flex;
-  justify-content: center;
 }

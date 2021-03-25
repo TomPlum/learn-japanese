@@ -47,7 +47,7 @@ test('Changing the game mode to Kana and submitting should update the settings',
     expect(onSubmitHandler).toHaveBeenCalledWith(settings);
 });
 
-test('Changing the game mode to Kana and resetting should default to Romanji', () => {
+test('Changing the game mode to Kana and resetting should default to Rōmaji', () => {
     const { confirm, kanaModeButton, reset } = setup();
     fireEvent.click(kanaModeButton);
     fireEvent.click(reset);

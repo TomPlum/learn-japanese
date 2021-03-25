@@ -1,0 +1,72 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  text-align: center;
+  width: 100%;
+  color: #FFF;
+  border-color: $dark-1;
+  border-width: 2px;
+  border-radius: 6px;
+  transition: ease-in-out 0.5s;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+.input:focus {
+  outline: none;
+  border-color: $light-3;
+}
+
+.input::placeholder {
+  color: $light-1;
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+.icon {
+  position: absolute;
+  margin-left: 18px;
+  font-size: 1.3em;
+  color: #7a7a7a;
+  transition: ease-in-out 0.5s;
+}
+
+.icon:hover {
+  color: #b1b1b1;
+}
+
+/* Input placeholder focus colour change */
+.input::-webkit-input-placeholder {
+  color: #999;
+}
+.input:focus::-webkit-input-placeholder {
+  color: $dark-1;
+}
+
+/* Firefox < 19 */
+.input:-moz-placeholder {
+  color: #999;
+}
+.input:focus:-moz-placeholder {
+  color: $dark-1;
+}
+
+/* Firefox > 19 */
+.input::-moz-placeholder {
+  color: #999;
+}
+.input:focus::-moz-placeholder {
+  color: $dark-1;
+}
+
+/* Internet Explorer 10 */
+.input:-ms-input-placeholder {
+  color: #999;
+}
+.input:focus:-ms-input-placeholder {
+  color: $dark-1;
+}

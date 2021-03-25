@@ -5,3 +5,15 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
+
+@mixin fitMobileViewportHeight {
+  max-height: 100%;
+  max-height: -webkit-fill-available; //Safari
+  max-height: -moz-available; //Firefox
+}
+
+@mixin borderBoxSizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}

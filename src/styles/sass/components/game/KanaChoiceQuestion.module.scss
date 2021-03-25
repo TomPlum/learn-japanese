@@ -1,3 +1,5 @@
+@import "src/styles/sass/viewports";
+
 @mixin tile {
   border-color: #2e6cde;
   border-width: 2px;
@@ -14,7 +16,24 @@
   @include tile;
 }
 
-.question {
-  margin: 15px 0;
-  text-align: center;
+.wrapper {
+  max-width: 500px;
+}
+
+@include phone {
+  .kana {
+    font-size: 5em !important;
+  }
+}
+
+@include tablet {
+  .kana {
+    font-size: 6em !important;
+  }
+}
+
+@include desktop {
+  .kana {
+    font-size: 7em !important;
+  }
 }

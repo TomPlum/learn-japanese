@@ -1,5 +1,5 @@
 export enum GameMode {
-    ROMANJI = "Romanji",
+    ROMAJI = "Rōmaji",
     TIME_ATTACK = "Time Attack",
     HARDCORE = "Hardcore",
     RELAXED = "Relaxed",

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { GameType } from "../../types/GameType";
 import KanaGameModeMenu from "./KanaGameModeMenu";
 import GameTypeMenu from "./GameTypeMenu";
@@ -33,17 +33,19 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     render() {
         return (
             <div className={styles.wrapper}>
-                <Row className={styles.row}>
-                    <Col sm={12} md={6} lg={5} xl={4}>
-                        <GameTypeMenu
-                            onSelect={(selected) => this.setState({ selectedGameType: selected })}
-                            className={styles.menu}
-                        />
-                    </Col>
-                    <Col sm={12} md={6} lg={7} xl={8} className={styles.gameMenuWrapper}>
-                        {this.getGameMenu()}
-                    </Col>
-                </Row>
+                <Container fluid className={styles.innerWrapper}>
+                    <Row className={styles.row}>
+                        <Col sm={12} md={6} lg={5}>
+                            <GameTypeMenu
+                                onSelect={(selected) => this.setState({ selectedGameType: selected })}
+                                className={styles.menu}
+                            />
+                        </Col>
+                        <Col sm={12} md={6} lg={7} className={styles.gameMenuWrapper}>
+                            {this.getGameMenu()}
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         );
     }
@@ -64,6 +66,15 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
             }
             case GameType.KANJI: {
                 return <p className={styles.menu} style={{color: '#FFF'}}>Kanji menu here</p>
+            }
+            case GameType.COLOURS: {
+                return <p className={styles.menu} style={{color: '#FFF'}}>Colours menu here</p>
+            }
+            case GameType.WEATHER: {
+                return <p className={styles.menu} style={{color: '#FFF'}}>Weather menu here</p>
+            }
+            case GameType.CALENDAR: {
+                return <p className={styles.menu} style={{color: '#FFF'}}>Calendar menu here</p>
             }
         }
     }

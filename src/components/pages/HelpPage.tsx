@@ -17,7 +17,7 @@ class HelpPage extends Component {
 
                             <h3 className={styles.question}>What is <strong>'romaji'</strong> ?</h3>
                             <p className={styles.answer}>
-                                Romanji or ローマ字 (rōmaji) is the romanisation of the Japanese written language.
+                                Rōmaji or ローマ字 (rōmaji) is the romanisation of the Japanese written language.
                             </p>
                             <a href="https://www.japanesepod101.com/japanese-romaji/" target="_blank" className={styles.source}>
                                 Source

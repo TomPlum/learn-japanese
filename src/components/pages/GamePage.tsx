@@ -1,13 +1,13 @@
 import { Component } from "react";
-import KanaMemoryTest from "../game/KanaMemoryTest";
+import KanaMemoryGame from "../game/KanaMemoryGame";
 import GameResult from "../../types/GameResult";
 import ResultScreen from "../results/ResultScreen";
 import { Kana } from "../../types/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
-import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 import ControlsMenu from "../layout/ControlsMenu";
 import GameSettingsMenu, { GameTypeSettings } from "../layout/GameSettingsMenu";
+import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 
 interface GamePageState {
     loading: boolean;
@@ -45,7 +45,7 @@ class GamePage extends Component<{ }, GamePageState> {
                 }
 
                 {settings && kana && !inResultsScreen &&
-                    <KanaMemoryTest
+                    <KanaMemoryGame
                         kana={kana}
                         settings={settings.settings}
                         onClose={this.onGameClose}

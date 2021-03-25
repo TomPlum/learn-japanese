@@ -5,10 +5,10 @@ import { faCircle, faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameModeButton from "./GameModeButton";
 import KanaGameSettingsMenu from "../settings/KanaGameSettingsMenu";
-import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
-import { HARDCORE, KANA, RELAXED, ROMANJI, TIME_ATTACK } from "../../data/GameModePresets";
+import { HARDCORE, KANA, RELAXED, ROMAJI, TIME_ATTACK } from "../../data/GameModePresets";
 import { GameSettings } from "../../types/GameSettings";
 import { Environment } from "../../utility/Environment";
+import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
 
 export interface KanaGameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;
@@ -68,8 +68,8 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
                     <Row>
                         <Col className={styles.leftColumn}>
                             <GameModeButton
-                                mode={GameMode.ROMANJI}
-                                isSelected={selected === GameMode.ROMANJI}
+                                mode={GameMode.ROMAJI}
+                                isSelected={selected === GameMode.ROMAJI}
                                 icon={faFont}
                                 iconColour={"#1785e2"}
                                 onClick={this.onSelectMode}
@@ -129,7 +129,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
     }
 
     onSelectMode = (mode: GameMode) => {
-        let preset: GameSettings = ROMANJI;
+        let preset: GameSettings = ROMAJI;
         switch (mode) {
             case GameMode.RELAXED:
                 preset = RELAXED;
@@ -137,8 +137,8 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
             case GameMode.TIME_ATTACK:
                 preset = TIME_ATTACK;
                 break;
-            case GameMode.ROMANJI:
-                preset = ROMANJI;
+            case GameMode.ROMAJI:
+                preset = ROMAJI;
                 break;
             case GameMode.KANA:
                 preset = KANA;

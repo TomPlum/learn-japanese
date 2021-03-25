@@ -1,0 +1,22 @@
+@import "src/styles/sass/viewports";
+
+@include desktop {
+  .input {
+    height: 60px;
+    font-size: 1.2em;
+  }
+}
+
+@include tablet {
+  .input {
+    height: 50px;
+    font-size: 1.2em;
+  }
+}
+
+@include phone {
+  .input {
+    height: 40px;
+    font-size: 1em;
+  }
+}

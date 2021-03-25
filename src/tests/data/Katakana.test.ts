@@ -287,11 +287,11 @@ describe("Katakana", () => {
         });
     });
 
-    function getMultipleKatakana(romanji: string[][]): KanaData[] {
-        return romanji.map(array => getKatakana(array));
+    function getMultipleKatakana(romaji: string[][]): KanaData[] {
+        return romaji.map(array => getKatakana(array));
     }
 
-    function getKatakana(romanji: string[]): KanaData {
-        return katakana().filter(entry => JSON.stringify(entry.romanji) === JSON.stringify(romanji))[0];
+    function getKatakana(romaji: string[]): KanaData {
+        return katakana().filter(entry => JSON.stringify(entry.romaji) === JSON.stringify(romaji))[0];
     }
 });

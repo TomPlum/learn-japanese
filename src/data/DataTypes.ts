@@ -4,7 +4,7 @@ import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 export interface KanaData {
     name: string;
     code: string;
-    romanji: string[];
+    romaji: string[];
     column: KanaColumn;
     diacritical: boolean;
 }

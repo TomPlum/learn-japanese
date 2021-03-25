@@ -5,8 +5,9 @@ import KanaType from "../../../types/KanaType";
 import { KanaColumn } from "../../../types/KanaColumn";
 import Arrays from "../../../utility/Arrays";
 import { getByTextWithElements } from "../../Queries";
+import React from "react";
 
-const onSubmitHandler = jest.fn();
+const isValidHandler = jest.fn();
 
 const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const i = new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
@@ -14,11 +15,11 @@ const e = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const o = new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 
 let props: KanaChoiceQuestionProps
+const ref = React.createRef<KanaChoiceQuestion>();
 
 const setup = () => {
-    const component = render(<KanaChoiceQuestion {...props} />);
+    const component = render(<KanaChoiceQuestion {...props} ref={ref} />);
     return {
-        submit: component.getByText('Check'),
         ...component
     }
 }
@@ -32,7 +33,7 @@ beforeEach(() => {
         expected: a,
         wrong: [i, e, o],
         hidden: false,
-        onSubmit: onSubmitHandler
+        isValid: isValidHandler
     };
 });
 
@@ -44,35 +45,36 @@ test('Should render the expected and all wrong answers', () => {
     expect(screen.getByText('お')).toBeInTheDocument();
 });
 
-test('On mount the submit button should be disabled', () => {
-    const { submit } = setup();
-    expect(submit).toBeDisabled();
-});
-
-test('When hidden, the submit button should be disabled, even if an option is selected', () => {
-    props.hidden = true;
-    const { submit } = setup();
-    fireEvent.click(screen.getByText('あ'));
-    expect(submit).toBeDisabled();
-});
-
 test('Should render the question banner', () => {
     setup();
     expect(getByTextWithElements('Which kana is \'a\' ?')).toBeInTheDocument();
 });
 
-test('Answering correctly should call the onSubmit event handler with true', () => {
-    const { submit } = setup();
+test('Calling the isCorrect function with a correct answer selected should invoke with true', () => {
+    setup();
     fireEvent.click(screen.getByText('あ'));
-    fireEvent.click(submit);
-    expect(onSubmitHandler).toHaveBeenCalledWith(true);
+    const isCorrect = ref.current?.isCorrect();
+    expect(isCorrect).toBe(true);
 });
 
-test('Answering incorrectly should call the onSubmit event handler with false', () => {
-    const { submit } = setup();
+test('Calling the isCorrect function with the wrong answer selected should invoke with false', () => {
+    setup();
     fireEvent.click(screen.getByText('え'));
-    fireEvent.click(submit);
-    expect(onSubmitHandler).toHaveBeenCalledWith(false);
+    const isCorrect = ref.current?.isCorrect();
+    expect(isCorrect).toBe(false);
+});
+
+test('Selecting an option for the first time should call the isValid event handler with true', () => {
+    setup();
+    fireEvent.click(screen.getByText('え'));
+    expect(isValidHandler).toHaveBeenCalledWith(true);
+});
+
+test('Changing the selected option should not call the isValid event handler', () => {
+    setup();
+    fireEvent.click(screen.getByText('え'));
+    fireEvent.click(screen.getByText('あ'));
+    expect(isValidHandler).toHaveBeenCalledTimes(1);
 });
 
 test('On mount all options should be un-selected and have the default \'tile\' class', () => {
@@ -93,7 +95,7 @@ test('Selecting an option should change its displays character class colour', ()
     setup();
     const option = screen.getByText('え');
     fireEvent.click(option);
-    expect(option).toHaveProperty('style._values.color', 'rgb(67, 234, 95)');
+    expect(option).toHaveProperty('style._values.color', 'rgb(38, 140, 229)');
 });
 
 test('Pressing the number key for a given option index should select it', () => {
@@ -110,17 +112,4 @@ test('Pressing the number key for a given option index should select it', () => 
 
     fireEvent.keyDown(container, { key: '4', keyCode: 52 });
     expect(screen.getByText('お').parentElement).toHaveClass('selected');
-});
-
-test('Pressing the enter key when an option is selected should call the onSubmit event handler', () => {
-    const { container } = setup();
-    fireEvent.click(screen.getByText('え'));
-    fireEvent.keyDown(container, { key: 'Enter', keyCode: 13 });
-    expect(onSubmitHandler).toHaveBeenCalled();
-});
-
-test('Pressing the enter key when no options are selected should not call the onSubmit event handler', () => {
-    const { container } = setup();
-    fireEvent.keyDown(container, { key: 'Enter', keyCode: 13 });
-    expect(onSubmitHandler).not.toHaveBeenCalled();
 });

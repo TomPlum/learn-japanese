@@ -1,21 +1,22 @@
-import RomanjiInput, { RomanjiInputProps } from "../../../components/game/RomanjiInput";
-import { fireEvent, render } from "@testing-library/react";
+import RomajiInput, { RomajiInputProps } from "../../../components/game/RomajiInput";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 const onChangeHandler = jest.fn();
 const onEnterKeyHandler = jest.fn();
 
-let props: RomanjiInputProps = {
+let props: RomajiInputProps = {
     disabled: false,
-    placeholder: "Enter Romanji",
+    placeholder: "Enter Rōmaji",
     value: "",
     onChange: onChangeHandler,
     onEnterKey: onEnterKeyHandler
 };
 
 const setup = () => {
-    const component = render(<RomanjiInput {...props} />);
+    const component = render(<RomajiInput {...props} />);
     return {
-        input: component.getByPlaceholderText('Enter Romanji'),
+        input: component.getByPlaceholderText('Enter Rōmaji'),
+        help: component.getByTestId('help'),
         ...component
     }
 }
@@ -74,4 +75,16 @@ test('Hitting any key other than Enter should not call the onEnterKey event hand
 test.skip('Should Focus Input', () => {
     const { input } = setup();
     expect(input).toHaveFocus();
+});
+
+test('Hovering over help should render the popover', () => {
+    const { help } = setup();
+    fireEvent.mouseOver(help);
+    expect(screen.getByTitle('What is Rōmaji?')).toBeInTheDocument();
+});
+
+test('Clicking the help icon should render the popover', () => {
+    const { help } = setup();
+    fireEvent.click(help);
+    expect(screen.getByTitle('What is Rōmaji?')).toBeInTheDocument();
 });
