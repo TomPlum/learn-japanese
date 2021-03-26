@@ -51,7 +51,7 @@ class Timer extends Component<TimerProps, TimerState> {
                     title={paused ? "Play" : "Pause"}
                     size="sm"
                 />}
-                {this.formatTimeElapsed()}
+                <span className={styles.time}>{this.formatTimeElapsed()}</span>
             </span>
         );
     }
