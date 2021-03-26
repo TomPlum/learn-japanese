@@ -1,12 +1,13 @@
 import { Component } from "react";
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { faAdjust, faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 import FontSelector from "./FontSelector";
 import HashLink from "./HashLink";
+import ThemeButton from "../ui/ThemeButton";
+import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 
-class ControlsMenu extends Component<any, any> {
+class ControlsMenu extends Component {
     render() {
         return (
             <Navbar variant="dark" fixed="top" className={styles.navbar}>
@@ -16,32 +17,26 @@ class ControlsMenu extends Component<any, any> {
                             <Col>
                                 <HashLink path="/" className={styles.navLink}>
                                     <div>
-                                        <FontAwesomeIcon icon={faHome} className={styles.icon} title="Home"/>
+                                        <FontAwesomeIcon icon={faHome} className={styles.icon}/>
                                     </div>
-                                    <span className={styles.linkText}>HOME</span>
+                                    <span className={styles.linkText}>Home</span>
                                 </HashLink>
                             </Col>
 
                             <Col>
-                                <Nav.Link className={styles.navLink}>
-                                    <div>
-                                        <FontAwesomeIcon icon={faAdjust} className={styles.icon} title="Dark Mode"/>
-                                    </div>
-                                    <span className={styles.linkText}>LIGHT</span>
-                                </Nav.Link>
+                                <ThemeButton className={styles.navLink} />
                             </Col>
 
                             <Col>
-                                <FontSelector className={styles.navLink} onSelect={() => {
-                                }}/>
+                                <FontSelector className={styles.navLink} onSelect={() => {}}/>
                             </Col>
 
                             <Col>
                                 <HashLink path="/help" className={styles.navLink}>
                                     <div>
-                                        <FontAwesomeIcon icon={faQuestionCircle} className={styles.icon} title="Help"/>
+                                        <FontAwesomeIcon icon={faQuestionCircle} className={styles.icon} />
                                     </div>
-                                    <span className={styles.linkText}>HELP</span>
+                                    <span className={styles.linkText}>Help</span>
                                 </HashLink>
                             </Col>
                         </Row>

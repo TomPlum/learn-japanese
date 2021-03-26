@@ -2,7 +2,7 @@
 @import "src/styles/sass/colours";
 
 @mixin linkText {
-  text-transform: capitalize;
+  text-transform: uppercase;
   font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
 }
 

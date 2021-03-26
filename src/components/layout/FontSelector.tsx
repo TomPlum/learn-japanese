@@ -60,9 +60,9 @@ class FontSelector extends Component<FontSelectorProps, FontSelectorState> {
             <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} className={className}>
                     <div>
-                        <FontAwesomeIcon icon={faFont} className={menuStyles.icon} title="Font" />
+                        <FontAwesomeIcon icon={faFont} className={menuStyles.icon} />
                     </div>
-                    <span className={menuStyles.linkText}>FONT</span>
+                    <span className={menuStyles.linkText}>Font</span>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className={styles.menu}>
