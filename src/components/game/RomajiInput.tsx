@@ -2,15 +2,14 @@ import React, { ChangeEvent, Component } from "react";
 import { Form, OverlayTrigger } from "react-bootstrap";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/sass/components/game/RomajiInput.module.scss";
 import PopOver from "../ui/PopOver";
+import styles from "../../styles/sass/components/game/RomajiInput.module.scss";
 
 export interface RomajiInputProps {
     disabled?: boolean;
     value?: string;
     placeholder?: string;
     onChange?: (value: string) => void;
-    onEnterKey?: () => void;
     className?: string;
 }
 
@@ -43,7 +42,6 @@ class RomajiInput extends Component<RomajiInputProps> {
                     value={value}
                     placeholder={placeholder}
                     onChange={this.handleOnChange}
-                    onKeyPress={this.handleKeyPress}
                     onFocus={this.handleFocus}
                     ref={this.input}
                 />
@@ -51,18 +49,12 @@ class RomajiInput extends Component<RomajiInputProps> {
         );
     }
 
-    private handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            if (this.props.value && this.props.onEnterKey) {
-                this.props.onEnterKey();
-            }
+    private handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        const key = e.target.value;
+        if (key.match(/^[A-Za-z]+$/) || !key) {
+            this.props?.onChange?.(key);
         }
         return false;
-    }
-
-    private handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        this.props?.onChange?.(e.target.value);
     }
 
     private handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
