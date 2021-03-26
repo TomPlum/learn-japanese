@@ -200,18 +200,19 @@
 
   .submit {
     @include submit;
-    height: 50px;
+    height: 60px;
     font-size: 1.6em !important;
   }
 
   .hint {
     @include hint;
+    height: 60px;
     font-size: 1.5em;
   }
 
   .skip {
     @include skip;
-    height: 50px;
+    height: 60px;
     font-size: 1.6em;
   }
 

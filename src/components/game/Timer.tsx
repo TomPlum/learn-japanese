@@ -73,22 +73,22 @@ class Timer extends Component<TimerProps, TimerState> {
 
     getCurrentTime = () => this.formatTimeElapsed();
 
-    private play = () => {
-        this.onChangePausedState();
-        this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false });
+    start = () => {
+        this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false, isStopped: false });
     }
 
-    private pause = () => {
+    pause = () => {
         this.onChangePausedState();
         this.setState({ paused: true });
         clearInterval(this.state.interval);
     }
 
-    private tick = () => this.setState({ current: this.state.current + 1000 });
-
-    private start = () => {
-        this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false, isStopped: false });
+    private play = () => {
+        this.onChangePausedState();
+        this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false });
     }
+
+    private tick = () => this.setState({ current: this.state.current + 1000 });
 
     private onChangePausedState = () => {
         if (this.props.onPaused) this.props.onPaused();

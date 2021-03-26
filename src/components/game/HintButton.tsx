@@ -106,7 +106,6 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
     }
 
     private updateViewport = () => {
-        console.log(window.innerWidth)
         this.setState({ viewport: Viewports.fromWidth(window.innerWidth) });
     }
 

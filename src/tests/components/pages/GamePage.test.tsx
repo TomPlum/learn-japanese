@@ -11,6 +11,7 @@ test('Quitting the game should close the game window and re-render the menu', ()
    render(<GamePage />);
    fireEvent.click(screen.getByText('START'));
    fireEvent.click(screen.getByTitle('Quit'));
+   fireEvent.click(screen.getByText('Yes'));
    expect(screen.getByText('START')).toBeInTheDocument();
 });
 

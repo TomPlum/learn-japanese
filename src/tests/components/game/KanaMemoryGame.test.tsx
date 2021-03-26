@@ -418,10 +418,35 @@ test('Setting the display type as \'Multiple Cards\' should render a KanaChoiceQ
     expect(screen.queryByText('3')).not.toBeInTheDocument();
 });
 
-test('Clicking the quit button should call the onClose event handler', () => {
+test('Clicking the quit button should render the confirmation modal', () => {
     const { quit } = setup();
     fireEvent.click(quit);
+    expect(screen.getByText('Are you sure you want to quit?')).toBeInTheDocument();
+});
+
+
+test('Clicking the quit button should pause the game while the confirmation modal is open', () => {
+    const { quit, skip } = setup();
+    fireEvent.click(quit);
+    expect(skip).toBeDisabled(); //Strange JSDom behaviour here. The timer isn't showing so we can't check that.
+});
+
+test('Clicking the \'Yes\' button from the quit confirmation modal should call the onClose event handler', () => {
+    const { quit } = setup();
+    fireEvent.click(quit);
+    fireEvent.click(screen.getByText('Yes'));
     expect(onCloseHandler).toHaveBeenCalled();
+});
+
+test('Clicking the \'No\' button from the quit confirmation modal should resume the game', () => {
+    const { quit, skip } = setup();
+
+    fireEvent.click(quit);
+    expect(skip).toBeDisabled();
+
+    fireEvent.click(screen.getByText('No'));
+    expect(onCloseHandler).not.toHaveBeenCalled();
+    expect(skip).not.toBeDisabled();
 });
 
 test('Clicking the skip button should advance to the next question', () => {
