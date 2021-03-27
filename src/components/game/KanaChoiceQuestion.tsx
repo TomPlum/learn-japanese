@@ -31,7 +31,7 @@ class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoic
 
         const kana = Arrays.shuffle(wrong.concat(expected));
 
-        kana.map((option, i) => {
+        kana.forEach((option, i) => {
             const ref = React.createRef<KanaDisplay>();
             this.displays.set(option, ref);
             this.indices.set(i + 1, option);
@@ -62,7 +62,7 @@ class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoic
                 <Row>
                     {options.map((option, i) => {
                         return (
-                            <Col lg={options.length == 6 ? 4 : 6} xs={6} key={"col-" + i}>
+                            <Col lg={options.length === 6 ? 4 : 6} xs={6} key={"col-" + i}>
                                 <KanaDisplay
                                     kana={option}
                                     blur={hidden}

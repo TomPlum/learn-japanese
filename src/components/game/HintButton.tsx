@@ -61,7 +61,7 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
                     disabled={disabled}
                 >
                     <FontAwesomeIcon icon={faLightbulb} fixedWidth className={styles.icon}/>
-                    {viewport != Viewport.PHONE &&
+                    {viewport !== Viewport.PHONE &&
                         <>
                             <span className={styles.text}>HINT</span>
                             <span className={styles.remaining}>({remaining})</span>

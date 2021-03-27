@@ -104,13 +104,13 @@ class ParallaxBackground extends Component<ParallaxBackgroundProps, ParallaxBack
     }
 
     private calculateParallax() {
-        const { xMouse, yMouse, width, height } = this.state;
+        /*const { xMouse, yMouse, width, height } = this.state;
         const halfWidth = width / 2;
         const halfHeight = height / 2;
         const xDepth = 0
         const yDepth = 0
         const zDepth = 0
-        this.setState({ position: [xDepth, yDepth, zDepth] });
+        this.setState({ position: [xDepth, yDepth, zDepth] });*/
     }
 }
 

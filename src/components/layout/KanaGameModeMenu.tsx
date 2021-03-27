@@ -1,7 +1,7 @@
 import { Component } from "react";
-import { Alert, Button, Col, Container, Row } from "react-bootstrap";
+import { Alert, Button, Col, Row } from "react-bootstrap";
 import { GameMode } from "../../types/GameMode";
-import { faCircle, faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
+import { faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameModeButton from "./GameModeButton";
 import KanaGameSettingsMenu from "../settings/KanaGameSettingsMenu";

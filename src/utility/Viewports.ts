@@ -1,3 +1,9 @@
+export enum Viewport {
+    PHONE,
+    TABLET,
+    DESKTOP
+}
+
 export default class Viewports {
     public static fromWidth(width: number | null): Viewport {
         if (!width) return Viewport.PHONE;
@@ -24,10 +30,4 @@ export default class Viewports {
             return Viewport.PHONE;
         }
     }
-}
-
-export enum Viewport {
-    PHONE,
-    TABLET,
-    DESKTOP
 }
