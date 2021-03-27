@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import HintSettingsForm from "../../../components/settings/HintSettingsForm";
+import HintSettingsForm from "../../../../components/settings/kana/HintSettingsForm";
 
 const onChangeHandler = jest.fn();
 

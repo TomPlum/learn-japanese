@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { HintSettings } from "../../types/GameSettings";
-import { HintQuantity } from "../../types/HintQuantity";
+import { HintSettings } from "../../../types/GameSettings";
+import { HintQuantity } from "../../../types/HintQuantity";
 import { Col, Form, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
+import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
 
 export interface HintSettingsFormProps {
     onChange: (settings: HintSettings) => void;

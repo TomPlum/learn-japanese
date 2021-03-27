@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import KanaQuantityButton from "../../../components/settings/KanaQuantityButton";
+import KanaQuantityButton from "../../../components/ui/KanaQuantityButton";
 
 const onClickHandler = jest.fn();
 
