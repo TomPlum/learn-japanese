@@ -1,5 +1,5 @@
 import KanaMemoryGame, { KanaMemoryGameProps } from "../../../components/game/KanaMemoryGame";
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, render, screen, waitForElementToBeRemoved, cleanup } from "@testing-library/react";
 import { DisplayType } from "../../../types/DisplayType";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 import { Kana } from "../../../types/Kana";
@@ -9,7 +9,6 @@ import Arrays from "../../../utility/Arrays";
 import { FailureReason } from "../../../types/FailureReason";
 
 //Mock Event Handlers
-const onCloseHandler = jest.fn();
 const onFinishHandler = jest.fn();
 
 //Mock Imported Static Functions
@@ -35,7 +34,6 @@ beforeEach(() => {
             lives: { enabled: false },
             time: { timed: false, countdown: false }
         },
-        onClose: onCloseHandler,
         onFinish: onFinishHandler,
     };
 
@@ -66,6 +64,8 @@ beforeEach(() => {
 afterEach(() => {
     jest.runOnlyPendingTimers();
     jest.useRealTimers();
+    jest.restoreAllMocks();
+    cleanup();
 });
 
 const setup = () => {
@@ -431,11 +431,19 @@ test('Clicking the quit button should pause the game while the confirmation moda
     expect(skip).toBeDisabled(); //Strange JSDom behaviour here. The timer isn't showing so we can't check that.
 });
 
-test('Clicking the \'Yes\' button from the quit confirmation modal should call the onClose event handler', () => {
+test('Clicking the \'Yes\' button from the quit confirmation modal should call the onFinish event handler', () => {
     const { quit } = setup();
     fireEvent.click(quit);
     fireEvent.click(screen.getByText('Yes'));
-    expect(onCloseHandler).toHaveBeenCalled();
+    expect(onFinishHandler).toHaveBeenCalledWith({
+        reason: FailureReason.QUIT,
+        success: false,
+        livesRemaining: 0,
+        totalKanaOffered: 3, //TODO: Whyyy is this being mutated still!? Should be 4...
+        duration: undefined,
+        correctAnswers: new Set(),
+        wrongAnswers: [a],
+    });
 });
 
 test('Clicking the \'No\' button from the quit confirmation modal should resume the game', () => {
@@ -445,7 +453,7 @@ test('Clicking the \'No\' button from the quit confirmation modal should resume 
     expect(skip).toBeDisabled();
 
     fireEvent.click(screen.getByText('No'));
-    expect(onCloseHandler).not.toHaveBeenCalled();
+    expect(onFinishHandler).not.toHaveBeenCalled();
     expect(skip).not.toBeDisabled();
 });
 

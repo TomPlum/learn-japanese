@@ -32,7 +32,6 @@ export interface KanaQuestionProps {
 export interface KanaMemoryGameProps {
     kana: Kana[];
     settings: GameSettings;
-    onClose: () => void;
     onFinish: (result: GameResult) => void;
 }
 
@@ -336,8 +335,20 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     private onQuit = () => {
+        const { lives, correctAnswers, wrongAnswers, currentKana } = this.state
+        const { kana, onFinish } = this.props;
+
+        onFinish({
+            reason: FailureReason.QUIT,
+            success: false,
+            livesRemaining: lives,
+            totalKanaOffered: kana.length,
+            duration: this.timer?.current?.getCurrentTime(),
+            correctAnswers: correctAnswers,
+            wrongAnswers: wrongAnswers.concat(currentKana),
+        });
+
         this.reset();
-        this.props.onClose();
     }
 
     private onClickQuit = () => {

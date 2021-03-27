@@ -48,7 +48,6 @@ class GamePage extends Component<{ }, GamePageState> {
                     <KanaMemoryGame
                         kana={kana}
                         settings={settings.settings}
-                        onClose={this.onGameClose}
                         onFinish={this.onGameFinish}
                     />
                 }
@@ -62,15 +61,11 @@ class GamePage extends Component<{ }, GamePageState> {
 
     private start = (settings: GameTypeSettings) => this.setState({ settings }, this.loadKana);
 
-    private onGameClose = () => {
-        this.setState({ settings: undefined });
-    }
-
     private onResultMenuClose = () => this.setState({ inResultsScreen: false, result: undefined });
 
     private onGameFinish = (result: GameResult) => this.setState({
         inResultsScreen: true,
-        result,
+        result: result,
         settings: undefined,
         gameIdentifier: Math.random().toString()
     });

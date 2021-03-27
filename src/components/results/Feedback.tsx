@@ -2,9 +2,9 @@ import { Component } from "react";
 import { Accordion, Button, Card, Container } from "react-bootstrap";
 import { Kana } from "../../types/Kana";
 import AnswerMistake from "./AnswerMistake";
-import styles from "../../styles/sass/components/results/Feedback.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import styles from "../../styles/sass/components/results/Feedback.module.scss";
 
 export interface FeedbackProps {
     kana: Kana[];
@@ -18,7 +18,7 @@ class Feedback extends Component<FeedbackProps> {
                     <Card className="bg-dark text-white">
                         <Card.Header>
                             <Accordion.Toggle as={Button} eventKey="0" variant="link" className={styles.toggle}>
-                                View your mistakes{' '}
+                                <span className={styles.title}>View your mistakes </span>
                                 <FontAwesomeIcon icon={faChevronDown} />
                             </Accordion.Toggle>
                         </Card.Header>
