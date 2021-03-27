@@ -24,6 +24,7 @@ import HintButton from "./HintButton";
 import SkipButton from "../ui/SkipButton";
 import ConfirmModal from "../ui/ConfirmModal";
 import styles from "../../styles/sass/components/game/KanaMemoryGame.module.scss";
+import { Environment } from "../../utility/Environment";
 
 export interface KanaQuestionProps {
     isValid: (valid: boolean) => void;
@@ -113,8 +114,8 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
         return (
             <Container className={styles.wrapper}>
                 {isQuitting && <ConfirmModal
-                    title={"Are you sure you want to quit?"}
-                    body={"You'll lose your current progress, but you'll see the results of your game thus far."}
+                    title={Environment.variable("QUIT_TITLE")}
+                    body={Environment.variable("QUIT_BODY")}
                     onConfirm={this.onQuit}
                     onDismiss={this.onDismissQuitModal}
                 />}

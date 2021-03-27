@@ -7,6 +7,7 @@ import KanaType from "../../../types/KanaType";
 import { KanaColumn } from "../../../types/KanaColumn";
 import Arrays from "../../../utility/Arrays";
 import { FailureReason } from "../../../types/FailureReason";
+import { Environment } from "../../../utility/Environment";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -15,6 +16,7 @@ const onFinishHandler = jest.fn();
 const shuffle = jest.fn();
 const getRandomObject = jest.fn();
 const getRandomElements = jest.fn();
+const environment = jest.fn();
 
 //Test Kana (Extracted here for reference equality purposes)
 const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
@@ -41,6 +43,7 @@ beforeEach(() => {
     RandomNumberGenerator.getRandomObject = getRandomObject;
     Arrays.shuffle = shuffle;
     Arrays.getRandomElements = getRandomElements;
+    Environment.variable = environment;
 
     //Always returns the first element so it is deterministic
     getRandomObject.mockImplementation((array: any[]) => {
@@ -419,9 +422,12 @@ test('Setting the display type as \'Multiple Cards\' should render a KanaChoiceQ
 });
 
 test('Clicking the quit button should render the confirmation modal', () => {
+    environment.mockReturnValueOnce("Are you sure you want to quit?");
+    environment.mockReturnValueOnce("This is the modal body.");
     const { quit } = setup();
     fireEvent.click(quit);
     expect(screen.getByText('Are you sure you want to quit?')).toBeInTheDocument();
+    expect(screen.getByText('This is the modal body.')).toBeInTheDocument();
 });
 
 
