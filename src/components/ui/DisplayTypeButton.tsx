@@ -5,7 +5,7 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/ui/DisplayTypeButton.module.scss";
 import { DisplayType } from "../../types/DisplayType";
 
-interface DisplayTypeButtonProps {
+export interface DisplayTypeButtonProps {
     type: DisplayType;
     selected: DisplayType;
     icon: IconDefinition;
@@ -23,17 +23,11 @@ class DisplayTypeButton extends Component<DisplayTypeButtonProps> {
 
     render() {
         const { type, selected, icon, onClick } = this.props;
+        const className = selected === type ? styles.selected : styles.notSelected;
 
         return (
-            <Button
-                block
-                className={selected === type ? styles.selected : styles.notSelected}
-                onClick={() => onClick(type)}
-            >
-                <FontAwesomeIcon
-                    className={styles.icon}
-                    icon={icon}
-                />
+            <Button block className={className} onClick={() => onClick(type)}>
+                <FontAwesomeIcon className={styles.icon} icon={icon} />
                 <p className={styles.name}>{type}</p>
             </Button>
         );
