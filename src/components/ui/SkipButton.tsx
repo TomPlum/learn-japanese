@@ -14,8 +14,9 @@ interface SkipButtonProps extends SizeMeProps {
 class SkipButton extends Component<SkipButtonProps> {
     render() {
         const { disabled, className, onClick, size } = this.props;
+        const defaultClass = disabled ? styles.disabled : styles.button;
         return (
-            <Button className={[styles.button, className].join(" ")} onClick={onClick} disabled={disabled} variant="danger">
+            <Button className={[defaultClass, className].join(" ")} onClick={onClick} disabled={disabled} variant="danger">
                 {(size?.width ?? -1) > 105 && <FontAwesomeIcon icon={faForward} />}
                 {' Skip'}
             </Button>

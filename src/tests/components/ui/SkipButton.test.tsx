@@ -18,3 +18,13 @@ test('Passing the disabled prop as false should not disable the button', () => {
     const { container } = render(<SkipButton onClick={onClickHandler} disabled={false} />);
     expect(container.firstChild).not.toBeDisabled();
 });
+
+test('Passing the disabled prop as true should append the \'disabled\' class', () => {
+    const { container } = render(<SkipButton onClick={onClickHandler} disabled={true} />);
+    expect(container.firstChild).toHaveClass('disabled');
+});
+
+test('Passing the disabled prop as false should append the \'button\' class', () => {
+    const { container } = render(<SkipButton onClick={onClickHandler} disabled={false} />);
+    expect(container.firstChild).toHaveClass('button');
+});

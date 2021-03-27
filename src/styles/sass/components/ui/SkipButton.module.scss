@@ -1,10 +1,14 @@
-.button {
+@mixin button {
   font-family: "Ciutadella Rounded Medium", sans-serif;
   text-transform: uppercase;
   background-color: #ab4040;
   border-color: transparent;
   width: 100%;
   min-width: 70px;
+}
+
+.button, .disabled {
+  @include button;
 }
 
 .button:hover {
