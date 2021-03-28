@@ -967,6 +967,150 @@ export function kyoiku(): KanjiData[] {
                 { value: "足並み", kana: ["あしなみ"], english: ["pace", "step"] },
             ]
         },
+        {
+            name: "森",
+            code: "\u68EE",
+            on: [{ kana: "しん", romanji: "shin" }],
+            kun: [{ kana: "もり", romanji: "mori" }],
+            source: "https://en.wiktionary.org/wiki/%E6%A3%AE#Kanji",
+            meanings: ["forest", "woods"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "森", kana: ["もり"], english: ["forest", "grove"] },
+                { value: "森林", kana: ["しんりん"], english: ["forest", "woods"] },
+                { value: "森閑", kana: ["しんかん"], english: ["silence"] },
+                { value: "森厳", kana: ["しんげん"], english: ["solemn"] },
+                { value: "森羅万象", kana: ["しんらばんしょう"], english: ["all things in nature", "the whole creation"] },
+            ]
+        },
+        {
+            name: "王",
+            code: "\u738B",
+            on: [{ kana: "おう", romanji: "ō" }],
+            kun: [{ kana: "おおきみ", romanji: "ōkimi" }, { kana: "きみ", romanji: "kimi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%8E%8B#Kanji",
+            meanings: ["king", "rule", "magnate"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "王", kana: ["おう"], english: ["king", "ruler", "sovereign", "monarch"] },
+                { value: "国王", kana: ["こくおう"], english: ["king"] },
+                { value: "女王", kana: ["じょおう"], english: ["queen"] },
+                { value: "王国", kana: ["おうこく"], english: ["kingdom", "monarchy"] },
+                { value: "王座", kana: ["おうざ"], english: ["throne"] },
+            ]
+        },
+        {
+            name: "玉",
+            code: "\u7389",
+            on: [{ kana: "ぎょく", romanji: "gyoku" }],
+            kun: [{ kana: "たま", romanji: "tama" }],
+            source: "https://en.wiktionary.org/wiki/%E7%8E%89#Kanji",
+            meanings: ["jewel", "ball"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "玉", kana: ["たま"], english: ["ball", "sphere", "coin", "jewel", "pearl", "testicles"] },
+                { value: "目玉", kana: ["めだま"], english: ["eyeball", "special feature", "centerpiece"] },
+                { value: "替え玉", kana: ["かえだま"], english: ["substitute", "double"] },
+                { value: "玉虫色", kana: ["たまむしいろ"], english: ["iridescent", "equivocal", "ambivalent"] },
+                { value: "お年玉", kana: ["おとしだま"], english: ["New Year’s gift"] },
+            ]
+        },
+        {
+            name: "耳",
+            code: "\u8033",
+            on: [{ kana: "じ", romanji: "ji" }, { kana: "に", romanji: "ni" }],
+            kun: [{ kana: "みみ", romanji: "mimi" }],
+            source: "https://en.wiktionary.org/wiki/%E8%80%B3#Kanji",
+            meanings: ["ear"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "耳", kana: ["みみ"], english: ["ear", "hearing", "edge", "crust"] },
+                { value: "耳目", kana: ["じもく"], english: ["eye and ear", "one’s attention", "one’s interest"] },
+                { value: "中耳炎", kana: ["ちゅうじえん"], english: ["tympanitis (inflammation of middle ear)"] },
+                { value: "耳打ち", kana: ["みみうち"], english: ["whisper into a person’s ear"] },
+                { value: "耳鼻咽喉科", kana: ["じびいんこうか"], english: ["otorhinolaryngology", "ear", "nose and throat"] },
+            ]
+        },
+        {
+            name: "糸",
+            code: "\u7CF8",
+            on: [{ kana: "し", romanji: "shi" }],
+            kun: [{ kana: "いと", romanji: "ito" }],
+            source: "https://en.wiktionary.org/wiki/%E7%B3%B8#Kanji",
+            meanings: ["thread"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "糸", kana: ["いと"], english: ["thread", "yarn", "string"] },
+                { value: "糸口", kana: ["いとぐち"], english: ["thread end", "beginning", "clue"] },
+                { value: "毛糸", kana: ["けいと"], english: ["knitting wool"] },
+                { value: "撚糸", kana: ["ねんし"], english: ["twisted thread or yarn"] },
+                { value: "生糸", kana: ["きいと"], english: ["raw silk thread"] },
+            ]
+        },
+        {
+            name: "林",
+            code: "\u6797",
+            on: [{ kana: "りん", romanji: "rin" }],
+            kun: [{ kana: "はやし", romanji: "hayashi" }],
+            source: "https://en.wiktionary.org/wiki/%E6%9E%97#Kanji",
+            meanings: ["woods", "grove"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "林", kana: ["はやし"], english: ["woods", "forest", "copse", "thicket"] },
+                { value: "森林", kana: ["しんりん"], english: ["forest", "woods"] },
+                { value: "農林", kana: ["のうりん"], english: ["agriculture and forestry"] },
+                { value: "山林", kana: ["さんりん"], english: ["mountain forest", "mountains and forest"] },
+                { value: "林業", kana: ["りんぎょう"], english: ["forestry"] },
+            ]
+        },
+        {
+            name: "草",
+            code: "\u8349",
+            on: [{ kana: "そう", romanji: "sō" }],
+            kun: [{ kana: "くさ", romanji: "kusa" }],
+            source: "https://en.wiktionary.org/wiki/%E8%8D%89#Kanji",
+            meanings: ["grass", "weeds", "herbs", "pasture", "write", "draft"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "草", kana: ["くさ"], english: ["grass"] },
+                { value: "草案", kana: ["そうあん"], english: ["draft", "draught"] },
+                { value: "草の根", kana: ["くさのね"], english: ["grassroots", "rank and file", "the roots of grass"] },
+                { value: "草原", kana: ["そうげん", "くさはら"], english: ["plain", "grasslands", "meadows"] },
+                { value: "起草", kana: ["きそう"], english: ["drafting", "draughting", "drawing up a bill"] },
+            ]
+        },
+        {
+            name: "虫",
+            code: "\u866B",
+            on: [{ kana: "ちゅう ", romanji: "chū" }],
+            kun: [{ kana: "むし", romanji: "mushi" }],
+            source: "https://en.wiktionary.org/wiki/%E8%99%AB#Kanji",
+            meanings: ["insect", "bug", "temper"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "虫", kana: ["むし"], english: ["insect"] },
+                { value: "昆虫", kana: ["こんちゅう"], english: ["insect", "bug"] },
+                { value: "殺虫剤", kana: ["さっちゅうざい"], english: ["insecticide", "pesticide"] },
+                { value: "虫歯", kana: ["むしば", "うし"], english: ["cavity", "tooth decay", "decayed tooth", "caries"] },
+                { value: "玉虫色", kana: ["たまむしいろ"], english: ["iridescent", "equivocal", "ambivalent"] },
+            ]
+        },
+        {
+            name: "貝",
+            code: "\u8C9D",
+            on: [{ kana: "ばい ", romanji: "bai" }],
+            kun: [{ kana: "かい", romanji: "kai" }],
+            source: "https://en.wiktionary.org/wiki/%E8%B2%9D#Kanji",
+            meanings: ["shellfish"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "貝", kana: ["かい"], english: ["shell", "shellfish"] },
+                { value: "貝殻", kana: ["かいがら"], english: ["shell"] },
+                { value: "貝塚", kana: ["かいずか", "かいづか"], english: ["shell heap", "shell mound", "kitchen midden"] },
+                { value: "貝", kana: ["ばい", "バイ"], english: ["Japanese babylon (species of shelled mollusk)"] },
+                { value: "巻き貝", kana: ["まきがい"], english: ["snail", "spiral shell"] },
+            ]
+        },
 
         //Grade 2
         {
@@ -978,11 +1122,11 @@ export function kyoiku(): KanjiData[] {
             meanings: ["bird", "chicken"],
             grade: KyoikuGrade.TWO,
             examples: [
-                { value: "鳥", kana: ["とり"], english: ["bird meat", "fowl"] },
-                { value: "野鳥", kana: ["やちょう"], english: ["wild bird"] },
-                { value: "鳥類", kana: ["ちょうるい"], english: ["birds"] },
-                { value: "白鳥", kana: ["はくちょう", "しろとり", "しらとり"], english: ["swan"] },
-                { value: "渡り鳥", kana: ["わたりどり"], english: ["migratory bird", "bird of passage",] },
+                { value: "王", kana: ["おう"], english: ["bird meat", "fowl"] },
+                { value: "国王", kana: ["こくおう"], english: ["wild bird"] },
+                { value: "女王", kana: ["じょおう"], english: ["birds"] },
+                { value: "王国", kana: ["おうこく"], english: ["swan"] },
+                { value: "渡り鳥", kana: ["わたりどり"], english: ["migratory bird", "bird of passage"] },
             ]
         },
         {

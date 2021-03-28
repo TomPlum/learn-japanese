@@ -47,9 +47,9 @@ beforeEach(() => {
 */
 
 it("Kyoiku should return only Kyoiku", () => {
-    expect(kyoiku()).toHaveLength(65);
+    expect(kyoiku()).toHaveLength(74);
 });
 
 it("Joyo should return Joyo & Kyoiku", () => {
-    expect(joyo()).toHaveLength(66);
+    expect(joyo()).toHaveLength(75);
 });
