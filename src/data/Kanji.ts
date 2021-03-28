@@ -1111,6 +1111,166 @@ export function kyoiku(): KanjiData[] {
                 { value: "巻き貝", kana: ["まきがい"], english: ["snail", "spiral shell"] },
             ]
         },
+        {
+            name: "早",
+            code: "\u65E9",
+            on: [{ kana: "そう", romanji: "so" }],
+            kun: [{ kana: "はやい", romanji: "hayai" }],
+            source: "https://en.wiktionary.org/wiki/%E6%97%A9#Kanji",
+            meanings: ["early", "fast"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "早期", kana: ["そうき"], english: ["early stage"] },
+                { value: "早", kana: ["はや"], english: ["already", "now", "by this time"] },
+                { value: "早急", kana: ["さっきゅう", "そうきゅう"], english: ["urgent"] },
+                { value: "早朝", kana: ["そうちょう"], english: ["early morning"] },
+                { value: "早める", kana: ["はやめる"], english: ["to hasten", "to quicken", "to expedite"] },
+            ]
+        },
+        {
+            name: "音",
+            code: "\u97F3",
+            on: [{ kana: "おん", romanji: "on" }],
+            kun: [{ kana: "おと", romanji: "oto" }],
+            source: "https://en.wiktionary.org/wiki/%E9%9F%B3#Kanji",
+            meanings: ["sound", "noise"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "音", kana: ["おと", "ね", "おん"], english: ["sound", "noise"] },
+                { value: "音楽", kana: ["おんがく"], english: ["music", "musical movement"] },
+                { value: "本音", kana: ["ほんね"], english: ["real intention", "motive"] },
+                { value: "騒音", kana: ["そうおん"], english: ["noise"] },
+                { value: "音声", kana: ["おんせい, おんじょう"], english: ["voice"] },
+            ]
+        },
+        {
+            name: "赤",
+            code: "\u8D64",
+            on: [{ kana: "しゃく", romanji: "shaku" }],
+            kun: [{ kana: "あか", romanji: "aka" }],
+            source: "https://en.wiktionary.org/wiki/%E8%B5%A4#Kanji",
+            meanings: ["red"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "赤ちゃん", kana: ["あかちゃん"], english: ["baby", "infant"] },
+                { value: "赤字", kana: ["あかじ"], english: ["deficit"] },
+                { value: "赤松", kana: ["あかまつ"], english: ["Japanese red pine"] },
+                { value: "赤い", kana: ["あかい"], english: ["Red (i.e. communist)"] },
+                { value: "真っ赤", kana: ["まっか"], english: ["bright red", "deep red", "flushed"] },
+            ]
+        },
+        {
+            name: "村",
+            code: "\u6751",
+            on: [{ kana: "そん", romanji: "son" }],
+            kun: [{ kana: "むら", romanji: "mura" }],
+            source: "https://en.wiktionary.org/wiki/%E6%9D%91#Kanji",
+            meanings: ["village", "town"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "村", kana: ["むら"], english: ["village"] },
+                { value: "市町村", kana: ["しちょうそん"], english: ["cities", "towns and villages", "municipalities"] },
+                { value: "農村", kana: ["のうそん"], english: ["agricultural community", "farm village", "rural"] },
+                { value: "山村", kana: ["さんそん"], english: ["mountain village"] },
+                { value: "村長", kana: ["そんちょう"], english: ["village headman"] },
+            ]
+        },
+        {
+            name: "石",
+            code: "\u77F3",
+            on: [{ kana: "じゃく", romanji: "jaku" }],
+            kun: [{ kana: "いし", romanji: "ishi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%9F%B3#Kanji",
+            meanings: ["stone"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "石", kana: ["こく"], english: ["measure of volume"] },
+                { value: "石油", kana: ["せきゆ"], english: ["oil", "petroleum", "kerosene"] },
+                { value: "化石", kana: ["かせき"], english: ["fossil", "petrification", "fossilization"] },
+                { value: "石炭", kana: ["せきたん"], english: ["coal"] },
+                { value: "石橋", kana: ["いしばし", "せっきょう"], english: ["stone bridge"] },
+            ]
+        },
+        {
+            name: "字",
+            code: "\u5B57",
+            on: [{ kana: "じ", romanji: "ji" }],
+            kun: [{ kana: "あざ", romanji: "aza" }],
+            source: "https://en.wiktionary.org/wiki/%E5%AD%97#Kanji",
+            meanings: ["character", "letter", "word", "section of village"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "字", kana: ["あざ"], english: ["section of village"] },
+                { value: "黒字", kana: ["くろじ"], english: ["balance", "figure in black"] },
+                { value: "数字", kana: ["すうじ"], english: ["numeral", "figure", "digit", "numeric character"] },
+                { value: "赤字", kana: ["あかじ"], english: ["deficit"] },
+                { value: "文字", kana: ["もじ", "もんじ"], english: ["letter (of alphabet", "character"] },
+            ]
+        },
+        {
+            name: "花",
+            code: "\u82B1",
+            on: [{ kana: "か", romanji: "ka" }],
+            kun: [{ kana: "はな", romanji: "hana" }],
+            source: "https://en.wiktionary.org/wiki/%E8%8A%B1#Kanji",
+            meanings: ["flower"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "花", kana: ["はな"], english: ["flower", "blossom", "bloom", "petal"] },
+                { value: "花火", kana: ["はなび"], english: ["fireworks"] },
+                { value: "花びら", kana: ["はなびら", "かべん"], english: ["flower petal"] },
+                { value: "花見", kana: ["はなみ"], english: ["cherry blossom viewing", "flowing viewing"] },
+                { value: "花園", kana: ["はなぞの", "かえん"], english: ["flower garden"] },
+            ]
+        },
+        {
+            name: "青",
+            code: "\u9752",
+            on: [{ kana: "しょう", romanji: "shō" }],
+            kun: [{ kana: "あお", romanji: "ao" }],
+            source: "https://en.wiktionary.org/wiki/%E9%9D%92#Kanji",
+            meanings: ["blue", "green"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "青", kana: ["あお"], english: ["blue", "green", "green light"] },
+                { value: "青年", kana: ["せいねん"], english: ["youth", "young man"] },
+                { value: "青山", kana: ["せいざん"], english: ["blue or green mountain", "grave", "burial place"] },
+                { value: "青木", kana: ["あおき", "アオキ"], english: ["Japanese laurel", "spotted laurel"] },
+                { value: "青春", kana: ["せいしゅん"], english: ["youth", "springtime of life", "adolescent"] },
+            ]
+        },
+        {
+            name: "夕",
+            code: "\u5915",
+            on: [{ kana: "せき", romanji: "seki" }],
+            kun: [{ kana: "ゆう", romanji: "yū" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A4%95#Kanji",
+            meanings: ["evening"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "夕", kana: ["ゆう", "ゆうべ", "さくや"], english: ["evening", "last night"] },
+                { value: "夕食", kana: ["ゆうしょく"], english: ["evening meal", "dinner"] },
+                { value: "夕方", kana: ["ゆうがた"], english: ["evening"] },
+                { value: "夕刊", kana: ["ゆうかん"], english: ["evening paper"] },
+                { value: "夕べ", kana: ["ゆう", "ゆうべ", "さくや"], english: ["evening", "last night"] },
+            ]
+        },
+        {
+            name: "竹",
+            code: "\u7AF9",
+            on: [{ kana: "ちく", romanji: "chiku" }],
+            kun: [{ kana: "たけ", romanji: "take" }],
+            source: "https://en.wiktionary.org/wiki/%E7%AB%B9#Kanji",
+            meanings: ["bamboo"],
+            grade: KyoikuGrade.ONE,
+            examples: [
+                { value: "竹", kana: ["たけ"], english: ["bamboo"] },
+                { value: "爆竹", kana: ["ばくちく"], english: ["firecracker"] },
+                { value: "竹林", kana: ["ちくりん", "たけばやし"], english: ["bamboo thicket"] },
+                { value: "竹刀", kana: ["しない"], english: ["fencing stick"] },
+                { value: "青竹", kana: ["あおだけ"], english: ["green bamboo"] },
+            ]
+        },
 
         //Grade 2
         {
@@ -1122,11 +1282,11 @@ export function kyoiku(): KanjiData[] {
             meanings: ["bird", "chicken"],
             grade: KyoikuGrade.TWO,
             examples: [
-                { value: "王", kana: ["おう"], english: ["bird meat", "fowl"] },
-                { value: "国王", kana: ["こくおう"], english: ["wild bird"] },
-                { value: "女王", kana: ["じょおう"], english: ["birds"] },
-                { value: "王国", kana: ["おうこく"], english: ["swan"] },
-                { value: "渡り鳥", kana: ["わたりどり"], english: ["migratory bird", "bird of passage"] },
+                { value: "鳥", kana: ["とり"], english: ["bird meat", "fowl"] },
+                { value: "野鳥", kana: ["やちょう"], english: ["wild bird"] },
+                { value: "鳥類", kana: ["ちょうるい"], english: ["birds"] },
+                { value: "白鳥", kana: ["はくちょう", "しろとり", "しらとり"], english: ["swan"] },
+                { value: "渡り鳥", kana: ["わたりどり"], english: ["migratory bird", "bird of passage",] },
             ]
         },
         {
