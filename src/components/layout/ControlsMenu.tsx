@@ -6,6 +6,7 @@ import FontSelector from "./FontSelector";
 import HashLink from "./HashLink";
 import ThemeButton from "../ui/ThemeButton";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
+import AppModeButton from "../ui/AppModeButton";
 
 class ControlsMenu extends Component {
     render() {
@@ -21,6 +22,10 @@ class ControlsMenu extends Component {
                                     </div>
                                     <span className={styles.linkText}>Home</span>
                                 </HashLink>
+                            </Col>
+
+                            <Col>
+                                <AppModeButton className={styles.navLink} onClick={() => {}} />
                             </Col>
 
                             <Col>
