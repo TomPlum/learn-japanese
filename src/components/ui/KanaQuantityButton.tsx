@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Button } from "react-bootstrap";
-import styles from "../../styles/sass/components/settings/KanaQuantityButton.module.scss";
+import styles from "../../styles/sass/components/ui/KanaQuantityButton.module.scss";
 
 interface KanaQuantityButtonProps {
     cards: number;

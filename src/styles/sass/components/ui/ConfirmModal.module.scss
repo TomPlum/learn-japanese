@@ -1,0 +1,49 @@
+@import "src/styles/sass/mixins";
+
+$border-radius: 12px;
+
+.modal {
+  @include noSelect;
+  border-radius: $border-radius;
+}
+
+.title {
+  font-size: 1.2em;
+}
+
+.header button {
+  font-size: 2em;
+}
+
+.header {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  background-color: #f1f1f1;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+}
+
+.body {
+  font-family: "Ciutadella Rounded", sans-serif;
+  font-size: 1.1em;
+  line-height: 1.4em;
+  padding: 15px;
+}
+
+.footer {
+  padding: 5px;
+}
+
+.yes, .no {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  width: 60px;
+  border-radius: 8px;
+}
+
+.no {
+  margin-left: 5px;
+}

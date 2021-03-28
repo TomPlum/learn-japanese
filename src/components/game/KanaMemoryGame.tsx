@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Kana } from "../../types/Kana";
-import { Button, ButtonGroup, Col, Container, Row } from "react-bootstrap";
+import { ButtonGroup, Col, Container, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import Timer from "./Timer";
 import { GameSettings } from "../../types/GameSettings";
@@ -19,10 +19,12 @@ import FilterChain from "../../filters/FilterChain";
 import DiagraphFilter from "../../filters/kana/DiagraphFilter";
 import ExclusionFilter from "../../filters/kana/ExclusionFilter";
 import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
-import styles from "../../styles/sass/components/game/KanaMemoryGame.module.scss";
 import SubmitButton from "../ui/SubmitButton";
 import HintButton from "./HintButton";
 import SkipButton from "../ui/SkipButton";
+import ConfirmModal from "../ui/ConfirmModal";
+import styles from "../../styles/sass/components/game/KanaMemoryGame.module.scss";
+import { Environment } from "../../utility/Environment";
 
 export interface KanaQuestionProps {
     isValid: (valid: boolean) => void;
@@ -31,7 +33,6 @@ export interface KanaQuestionProps {
 export interface KanaMemoryGameProps {
     kana: Kana[];
     settings: GameSettings;
-    onClose: () => void;
     onFinish: (result: GameResult) => void;
 }
 
@@ -47,6 +48,7 @@ interface KanaMemoryGameState {
     hasValidAnswer: boolean;
     hints: number;
     hasUsedHintThisQuestion: boolean;
+    isQuitting: boolean;
 }
 
 class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState> {
@@ -76,7 +78,8 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
             failedToAnswer: 0,
             hasValidAnswer: false,
             hints: settings.hints.quantity?.valueOf() ?? 0,
-            hasUsedHintThisQuestion: false
+            hasUsedHintThisQuestion: false,
+            isQuitting: false
         }
     }
 
@@ -104,12 +107,19 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     render() {
         const {
             correctAnswers, failedToAnswer, hasExhaustedKana, lives, remainingKana, hasValidAnswer, paused, hints,
-            currentKana
+            currentKana, isQuitting
         } = this.state;
         const { kana, settings } = this.props;
 
         return (
             <Container className={styles.wrapper}>
+                {isQuitting && <ConfirmModal
+                    title={Environment.variable("QUIT_TITLE")}
+                    body={Environment.variable("QUIT_BODY")}
+                    onConfirm={this.onQuit}
+                    onDismiss={this.onDismissQuitModal}
+                />}
+
                 <Row noGutters className={styles.header}>
                     <Col xs={12}>
                         <SessionProgressBar
@@ -121,7 +131,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                     </Col>
 
                     <Col>
-                        <QuitButton onClick={this.close} className={styles.quit} />
+                        <QuitButton onClick={this.onClickQuit} className={styles.quit} />
                     </Col>
 
                     <Col className={styles.lifeDisplayContainer}>
@@ -265,7 +275,8 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
             hasExhaustedKana: false,
             hasValidAnswer: false,
             hints: this.props.settings.hints.quantity?.valueOf() ?? 0,
-            hasUsedHintThisQuestion: false
+            hasUsedHintThisQuestion: false,
+            isQuitting: false
         });
 
         this.timer.current?.restart();
@@ -324,9 +335,31 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
         });
     }
 
-    private close = () => {
+    private onQuit = () => {
+        const { lives, correctAnswers, wrongAnswers, currentKana } = this.state
+        const { kana, onFinish } = this.props;
+
+        onFinish({
+            reason: FailureReason.QUIT,
+            success: false,
+            livesRemaining: lives,
+            totalKanaOffered: kana.length,
+            duration: this.timer?.current?.getCurrentTime(),
+            correctAnswers: correctAnswers,
+            wrongAnswers: wrongAnswers.concat(currentKana),
+        });
+
         this.reset();
-        this.props.onClose();
+    }
+
+    private onClickQuit = () => {
+        this.timer?.current?.pause();
+        this.setState({ isQuitting: true, paused: true });
+    }
+
+    private onDismissQuitModal = () => {
+        this.timer?.current?.start();
+        this.setState({ isQuitting: false, paused: false });
     }
 
     private onPaused = () => this.setState({ paused: !this.state.paused });

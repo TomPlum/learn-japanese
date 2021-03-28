@@ -19,7 +19,7 @@ class HelpPage extends Component {
                             <p className={styles.answer}>
                                 Rōmaji or ローマ字 (rōmaji) is the romanisation of the Japanese written language.
                             </p>
-                            <a href="https://www.japanesepod101.com/japanese-romaji/" target="_blank" className={styles.source}>
+                            <a href="https://www.japanesepod101.com/japanese-romaji/" target="_blank" rel="noreferrer" className={styles.source}>
                                 Source
                             </a>
                         </Col>

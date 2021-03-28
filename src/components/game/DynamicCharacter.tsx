@@ -68,7 +68,7 @@ export class DynamicCharacter extends Component<DynamicCharacterProps> {
             case "xl":
                 return 10;
             default:
-                return 0;
+                return 10;
         }
     }
 }

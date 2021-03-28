@@ -3,13 +3,13 @@ import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
 import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../../types/GameSettings";
-import KanaSettingsForm from "./KanaSettingsForm";
-import HintSettingsForm from "./HintSettingsForm";
-import LifeSettingsForm from "./LifeSettingsForm";
-import TimeSettingsForm from "./TimeSettingsForm";
+import KanaSettingsForm from "./kana/KanaSettingsForm";
+import HintSettingsForm from "./kana/HintSettingsForm";
+import LifeSettingsForm from "./kana/LifeSettingsForm";
+import TimeSettingsForm from "./kana/TimeSettingsForm";
 import { defaultDisplaySettings, defaultHintSettings, defaultKanaSettings, defaultLifeSettings, defaultTimeSettings } from "../../data/GameModePresets";
-import DisplaySettingsForm from "./DisplaySettingsForm";
-import styles from "../../styles/sass/components/settings/KanaGameSettingsMenu.module.scss";
+import DisplaySettingsForm from "./kana/DisplaySettingsForm";
+import styles from "../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
 
 export interface KanaGameSettingsMenuProps {
     onSubmit: (settings: GameSettings) => void;

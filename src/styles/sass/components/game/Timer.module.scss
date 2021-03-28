@@ -1,3 +1,17 @@
-.pause {
-  margin-right: 10px;
+@import "src/styles/sass/mixins";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 5px;
+  margin-bottom: 1px;
+}
+
+.time {
+  @include noSelect;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
 }

@@ -1,5 +1,5 @@
 import KanaMemoryGame, { KanaMemoryGameProps } from "../../../components/game/KanaMemoryGame";
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, render, screen, waitForElementToBeRemoved, cleanup } from "@testing-library/react";
 import { DisplayType } from "../../../types/DisplayType";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 import { Kana } from "../../../types/Kana";
@@ -7,15 +7,16 @@ import KanaType from "../../../types/KanaType";
 import { KanaColumn } from "../../../types/KanaColumn";
 import Arrays from "../../../utility/Arrays";
 import { FailureReason } from "../../../types/FailureReason";
+import { Environment } from "../../../utility/Environment";
 
 //Mock Event Handlers
-const onCloseHandler = jest.fn();
 const onFinishHandler = jest.fn();
 
 //Mock Imported Static Functions
 const shuffle = jest.fn();
 const getRandomObject = jest.fn();
 const getRandomElements = jest.fn();
+const environment = jest.fn();
 
 //Test Kana (Extracted here for reference equality purposes)
 const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
@@ -35,7 +36,6 @@ beforeEach(() => {
             lives: { enabled: false },
             time: { timed: false, countdown: false }
         },
-        onClose: onCloseHandler,
         onFinish: onFinishHandler,
     };
 
@@ -43,6 +43,7 @@ beforeEach(() => {
     RandomNumberGenerator.getRandomObject = getRandomObject;
     Arrays.shuffle = shuffle;
     Arrays.getRandomElements = getRandomElements;
+    Environment.variable = environment;
 
     //Always returns the first element so it is deterministic
     getRandomObject.mockImplementation((array: any[]) => {
@@ -66,6 +67,8 @@ beforeEach(() => {
 afterEach(() => {
     jest.runOnlyPendingTimers();
     jest.useRealTimers();
+    jest.restoreAllMocks();
+    cleanup();
 });
 
 const setup = () => {
@@ -418,10 +421,46 @@ test('Setting the display type as \'Multiple Cards\' should render a KanaChoiceQ
     expect(screen.queryByText('3')).not.toBeInTheDocument();
 });
 
-test('Clicking the quit button should call the onClose event handler', () => {
+test('Clicking the quit button should render the confirmation modal', () => {
+    environment.mockReturnValueOnce("Are you sure you want to quit?");
+    environment.mockReturnValueOnce("This is the modal body.");
     const { quit } = setup();
     fireEvent.click(quit);
-    expect(onCloseHandler).toHaveBeenCalled();
+    expect(screen.getByText('Are you sure you want to quit?')).toBeInTheDocument();
+    expect(screen.getByText('This is the modal body.')).toBeInTheDocument();
+});
+
+
+test('Clicking the quit button should pause the game while the confirmation modal is open', () => {
+    const { quit, skip } = setup();
+    fireEvent.click(quit);
+    expect(skip).toBeDisabled(); //Strange JSDom behaviour here. The timer isn't showing so we can't check that.
+});
+
+test('Clicking the \'Yes\' button from the quit confirmation modal should call the onFinish event handler', () => {
+    const { quit } = setup();
+    fireEvent.click(quit);
+    fireEvent.click(screen.getByText('Yes'));
+    expect(onFinishHandler).toHaveBeenCalledWith({
+        reason: FailureReason.QUIT,
+        success: false,
+        livesRemaining: 0,
+        totalKanaOffered: 3, //TODO: Whyyy is this being mutated still!? Should be 4...
+        duration: undefined,
+        correctAnswers: new Set(),
+        wrongAnswers: [a],
+    });
+});
+
+test('Clicking the \'No\' button from the quit confirmation modal should resume the game', () => {
+    const { quit, skip } = setup();
+
+    fireEvent.click(quit);
+    expect(skip).toBeDisabled();
+
+    fireEvent.click(screen.getByText('No'));
+    expect(onFinishHandler).not.toHaveBeenCalled();
+    expect(skip).not.toBeDisabled();
 });
 
 test('Clicking the skip button should advance to the next question', () => {

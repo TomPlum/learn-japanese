@@ -1,13 +1,13 @@
 import { Component } from "react";
-import { DisplaySettings } from "../../types/GameSettings";
-import { DisplayType } from "../../types/DisplayType";
-import DisplayTypeButton from "./DisplayTypeButton";
+import { DisplaySettings } from "../../../types/GameSettings";
+import { DisplayType } from "../../../types/DisplayType";
+import DisplayTypeButton from "../../ui/DisplayTypeButton";
 import { faFont, faGripVertical, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";
-import { Environment } from "../../utility/Environment";
+import { Environment } from "../../../utility/Environment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/sass/components/settings/DisplaySettingsForm.module.scss";
-import KanaQuantityButton from "./KanaQuantityButton";
+import styles from "../../../styles/sass/components/settings/kana/DisplaySettingsForm.module.scss";
+import KanaQuantityButton from "../../ui/KanaQuantityButton";
 
 export interface DisplaySettingsFormProps {
     onChange: (settings: DisplaySettings) => void;

@@ -8,10 +8,10 @@ const history = createMemoryHistory();
 const setup = () => {
     const component = render(<Router history={history}><ControlsMenu /></Router>);
     return {
-        home: component.getByText('HOME'),
-        mode: component.getByText('LIGHT'),
-        font: component.getByText('FONT'),
-        help: component.getByText('HELP'),
+        home: component.getByText('Home'),
+        mode: component.getByText('Light'),
+        font: component.getByText('Font'),
+        help: component.getByText('Help'),
         ...component
     }
 }

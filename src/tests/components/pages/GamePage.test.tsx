@@ -7,11 +7,12 @@ test('Selecting a game mode should hide the menu and render the game', () => {
    expect(screen.getByTitle('1/50')).toBeInTheDocument();
 });
 
-test('Quitting the game should close the game window and re-render the menu', () => {
+test('Quitting the game should close the game window and re-render the results screen', () => {
    render(<GamePage />);
    fireEvent.click(screen.getByText('START'));
    fireEvent.click(screen.getByTitle('Quit'));
-   expect(screen.getByText('START')).toBeInTheDocument();
+   fireEvent.click(screen.getByText('Yes'));
+   expect(screen.getByText('Oh no! You quit!')).toBeInTheDocument();
 });
 
 //TODO: Test result screen render. Need to emulate a completed game run. Mock RNG and/or Kana Repo?

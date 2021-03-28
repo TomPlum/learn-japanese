@@ -24,7 +24,7 @@ class LivesSelector extends Component<LivesSelectorProps, LivesSelectorState> {
     }
 
     componentDidUpdate(prevProps: Readonly<LivesSelectorProps>, prevState: Readonly<LivesSelectorState>) {
-        if (prevState != this.state) {
+        if (prevState !== this.state) {
             this.props.onSelect(this.state.selected);
         }
     }

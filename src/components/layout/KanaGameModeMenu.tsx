@@ -1,7 +1,7 @@
 import { Component } from "react";
-import { Alert, Button, Col, Container, Row } from "react-bootstrap";
+import { Alert, Button, Col, Row } from "react-bootstrap";
 import { GameMode } from "../../types/GameMode";
-import { faCircle, faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
+import { faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameModeButton from "./GameModeButton";
 import KanaGameSettingsMenu from "../settings/KanaGameSettingsMenu";
@@ -9,6 +9,7 @@ import { HARDCORE, KANA, RELAXED, ROMAJI, TIME_ATTACK } from "../../data/GameMod
 import { GameSettings } from "../../types/GameSettings";
 import { Environment } from "../../utility/Environment";
 import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
+import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
 
 export interface KanaGameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;
@@ -79,7 +80,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
                             <GameModeButton
                                 mode={GameMode.KANA}
                                 isSelected={selected === GameMode.KANA}
-                                icon={faCircle}
+                                icon={faKickstarterK}
                                 iconColour={"#a01219"}
                                 onClick={this.onSelectMode}
                             />

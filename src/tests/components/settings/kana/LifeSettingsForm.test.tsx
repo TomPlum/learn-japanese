@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
-import LifeSettingsForm from "../../../components/settings/LifeSettingsForm";
-import { LifeQuantity } from "../../../types/LifeQuantity";
+import LifeSettingsForm from "../../../../components/settings/kana/LifeSettingsForm";
+import { LifeQuantity } from "../../../../types/LifeQuantity";
 
 const onChangeHandler = jest.fn();
 
