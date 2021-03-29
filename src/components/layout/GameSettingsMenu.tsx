@@ -6,6 +6,7 @@ import GameTypeMenu from "./GameTypeMenu";
 import { GameSettings } from "../../types/GameSettings";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 import { AppMode } from "../../types/AppMode";
+import LearnKanaMenu from "../learn/LearnKanaMenu";
 
 export interface GameTypeSettings {
     type: GameType;
@@ -54,15 +55,26 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     private getGameMenu = () => {
+        const { mode } = this.props;
         const { selectedGameType } = this.state;
         switch (selectedGameType) {
             case GameType.KANA: {
-                return (
-                    <KanaGameModeMenu
-                        onSelectedMode={(mode, settings) => this.handleOnStart(settings)}
-                        className={styles.menu}
-                    />
-                )
+                switch(mode) {
+                    case AppMode.LEARN: {
+                        return (
+                            <LearnKanaMenu onStart={(settings) => {}} />
+                        );
+                    }
+                    case AppMode.PLAY: {
+                        return (
+                            <KanaGameModeMenu
+                                onSelectedMode={(mode, settings) => this.handleOnStart(settings)}
+                                className={styles.menu}
+                            />
+                        );
+                    }
+                }
+                break;
             }
             case GameType.NUMBERS: {
                 return <p className={styles.menu} style={{color: '#FFF'}}>Numbers menu here</p>
