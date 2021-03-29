@@ -1,0 +1,8 @@
+@import "src/styles/sass/components/buttons";
+
+@include ResponsiveMainMenuButtons;
+
+.textIcon {
+  font-size: 2em;
+  font-weight: 600;
+}

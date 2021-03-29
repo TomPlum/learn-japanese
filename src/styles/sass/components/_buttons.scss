@@ -1,0 +1,64 @@
+@import "src/styles/sass/viewports";
+
+@mixin MainMenuButton {
+  width: 100%;
+  max-width: 380px;
+  margin-bottom: 12px;
+  font-size: 1.2em;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+@mixin ResponsiveMainMenuButtons {
+  @include phone {
+    .button {
+      @include MainMenuButton;
+      height: 100px;
+    }
+  }
+
+  @include tablet {
+    .button {
+      @include MainMenuButton;
+      height: 130px;
+    }
+  }
+
+  @include desktop {
+    .button {
+      @include MainMenuButton;
+      height: 123px;
+    }
+  }
+
+  .notSelected:hover {
+    color: black;
+    background-color: #b3b3b3;
+    border: none;
+  }
+
+  .selected:hover {
+    color: #000;
+    background-color: #FFF;
+  }
+
+  .selected, .selected:focus, .selected:active {
+    background-color: rgba(255, 255, 255, 1);
+    border-color: rgba(148, 148, 148, 0.8);
+    color: black;
+  }
+
+  .notSelected {
+    background-color: rgba(215, 215, 215, 0.6);
+    border-color: rgba(148, 148, 148, 0.8);
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .icon {
+    font-size: 1.6em;
+  }
+
+  .name {
+    font-size: 1.1em;
+    margin-bottom: 0;
+  }
+}

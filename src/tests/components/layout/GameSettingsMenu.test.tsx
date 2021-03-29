@@ -16,7 +16,7 @@ const setup = () => {
         colours: component.getByText('Colours'),
         weather: component.getByText('Weather'),
         calendar: component.getByText('Days & Months'),
-        start: screen.getByText('START'),
+        start: screen.getByText('Start'),
         ...component
     }
 }
