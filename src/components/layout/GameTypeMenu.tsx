@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { Dropdown, ListGroup } from "react-bootstrap";
 import { GameType } from "../../types/GameType";
 import GameTypeMenuListOption from "./GameTypeMenuListOption";
-import { faCalendarAlt, faCloudSunRain, faFillDrip, faFont, faGamepad, faPaintBrush, faYenSign } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faCloudSunRain, faFillDrip, faFont, faGamepad, faGraduationCap, faPaintBrush, faYenSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameTypeMenuDropdownOption from "./GameTypeMenuDropdownOption";
 import styles from "../../styles/sass/components/layout/GameTypeMenu.module.scss";
+import { AppMode } from "../../types/AppMode";
 
 interface GameTypeMenuProps {
+    appMode: AppMode;
     onSelect: (type: GameType) => void;
     className?: string;
 }
@@ -27,6 +29,7 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
 
     render() {
         const { selected } = this.state;
+        const { appMode } = this.props;
 
         return (
             <div className={this.props.className}>
@@ -64,8 +67,8 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
                 </Dropdown>
 
                 <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group-header">
-                    <GameTypeMenuListOption text="Select Game Mode" isHeading>
-                        <FontAwesomeIcon fixedWidth icon={faGamepad} />
+                    <GameTypeMenuListOption text={this.getMenuHeading()} onClick={this.handleChange} isHeading>
+                        <FontAwesomeIcon fixedWidth icon={appMode === AppMode.PLAY ? faGamepad : faGraduationCap} />
                     </GameTypeMenuListOption>
                 </ListGroup>
 
@@ -107,6 +110,14 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
             case GameType.COLOURS: return faFillDrip;
             case GameType.WEATHER: return faCloudSunRain;
             case GameType.CALENDAR: return faCalendarAlt;
+        }
+    }
+
+    private getMenuHeading = () => {
+        const { appMode } = this.props;
+        switch (appMode) {
+            case AppMode.PLAY: return "Select Game Mode";
+            case AppMode.LEARN: return "Select Topic"
         }
     }
 

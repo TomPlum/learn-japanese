@@ -7,8 +7,13 @@ import HashLink from "./HashLink";
 import ThemeButton from "../ui/ThemeButton";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 import AppModeButton from "../ui/AppModeButton";
+import { AppMode } from "../../types/AppMode";
 
-class ControlsMenu extends Component {
+export interface ControlsMenuProps {
+    onChangeAppMode: (mode: AppMode) => void;
+}
+
+class ControlsMenu extends Component<ControlsMenuProps> {
     render() {
         return (
             <Navbar variant="dark" fixed="top" className={styles.navbar}>
@@ -25,7 +30,7 @@ class ControlsMenu extends Component {
                             </Col>
 
                             <Col>
-                                <AppModeButton className={styles.navLink} onClick={() => {}} />
+                                <AppModeButton className={styles.navLink} onClick={this.props.onChangeAppMode} />
                             </Col>
 
                             <Col>

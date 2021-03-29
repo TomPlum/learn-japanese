@@ -8,6 +8,7 @@ import { KanaRepository } from "../../repository/KanaRepository";
 import ControlsMenu from "../layout/ControlsMenu";
 import GameSettingsMenu, { GameTypeSettings } from "../layout/GameSettingsMenu";
 import styles from "../../styles/sass/components/pages/GamePage.module.scss";
+import { AppMode } from "../../types/AppMode";
 
 interface GamePageState {
     loading: boolean;
@@ -16,6 +17,7 @@ interface GamePageState {
     inResultsScreen: boolean;
     result?: GameResult;
     gameIdentifier: string;
+    mode: AppMode;
 }
 
 class GamePage extends Component<{ }, GamePageState> {
@@ -28,20 +30,21 @@ class GamePage extends Component<{ }, GamePageState> {
             settings: undefined,
             inResultsScreen: false,
             result: undefined,
-            gameIdentifier: Math.random().toString()
+            gameIdentifier: Math.random().toString(),
+            mode: AppMode.PLAY
         }
     }
 
     render() {
-        const { loading, settings, kana, inResultsScreen, result } = this.state;
+        const { loading, settings, kana, inResultsScreen, result, mode } = this.state;
         return (
             <div className={styles.wrapper}>
                 <LoadingSpinner active={loading}/>
 
-                <ControlsMenu />
+                <ControlsMenu onChangeAppMode={this.handleChangeAppMode} />
 
                 {!settings && !inResultsScreen &&
-                    <GameSettingsMenu onStart={this.start}/>
+                    <GameSettingsMenu onStart={this.start} mode={mode} />
                 }
 
                 {settings && kana && !inResultsScreen &&
@@ -69,6 +72,9 @@ class GamePage extends Component<{ }, GamePageState> {
         settings: undefined,
         gameIdentifier: Math.random().toString()
     });
+
+    private handleChangeAppMode = (mode: AppMode) => this.setState({ mode: mode });
+
 
     private loadKana() {
         this.setState({ loading: true });

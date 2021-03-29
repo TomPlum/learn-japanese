@@ -5,6 +5,7 @@ import KanaGameModeMenu from "./KanaGameModeMenu";
 import GameTypeMenu from "./GameTypeMenu";
 import { GameSettings } from "../../types/GameSettings";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
+import { AppMode } from "../../types/AppMode";
 
 export interface GameTypeSettings {
     type: GameType;
@@ -12,6 +13,7 @@ export interface GameTypeSettings {
 }
 
 export interface GameSettingsMenuProps {
+    mode: AppMode;
     onStart: (settings: GameTypeSettings) => void;
 }
 
@@ -39,6 +41,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             <GameTypeMenu
                                 onSelect={(selected) => this.setState({ selectedGameType: selected })}
                                 className={styles.menu}
+                                appMode={this.props.mode}
                             />
                         </Col>
                         <Col sm={12} md={6} lg={7} className={styles.gameMenuWrapper}>
