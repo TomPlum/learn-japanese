@@ -4,6 +4,7 @@ import { Button, Container, Row } from "react-bootstrap";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../../styles/sass/components/learn/kana/KanaFlashCardBack.module.scss"
+import FlashCardResetButton from "../../ui/FlashCardResetButton";
 
 export interface KanaFlashCardBackProps {
     kana: Kana;
@@ -18,9 +19,7 @@ class KanaFlashCardBack extends Component<KanaFlashCardBackProps> {
             <Container className={styles.wrapper}>
                 <Row className={styles.header}>
                     <p className={styles.type}>{kana.type}</p>
-                    <Button className={styles.back} variant="outline-danger" onClick={onClick} title="Reset">
-                        <FontAwesomeIcon icon={faReply} />
-                    </Button>
+                    <FlashCardResetButton onClick={onClick} />
                 </Row>
 
                 <Row className={styles.body}>
