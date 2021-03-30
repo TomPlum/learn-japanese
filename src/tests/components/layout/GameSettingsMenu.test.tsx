@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import GameSettingsMenu from "../../../components/layout/GameSettingsMenu";
-import { GameType } from "../../../types/GameType";
+import { Topic } from "../../../types/Topic";
 import { RELAXED } from "../../../data/GameModePresets";
 import { AppMode } from "../../../types/AppMode";
 
@@ -8,7 +8,7 @@ import { AppMode } from "../../../types/AppMode";
 const onStartHandler = jest.fn();
 
 const setup = () => {
-    const component = render(<GameSettingsMenu onStart={onStartHandler} mode={AppMode.PLAY}/>);
+    const component = render(<GameSettingsMenu onStartGame={onStartHandler} mode={AppMode.PLAY}/>);
     return {
         kana: component.queryAllByText('Hiragana & Katakana')[1],
         numbers: component.getByText('Numbers & Counting'),
@@ -59,7 +59,7 @@ test('Should switch to \'Days & Months\' game type menu after selecting it', () 
 test('Starting a kana game should call the onStart event handler with correct type and settings', () => {
     const { start } = setup();
     fireEvent.click(start);
-    expect(onStartHandler).toHaveBeenCalledWith({ type: GameType.KANA, settings: RELAXED });
+    expect(onStartHandler).toHaveBeenCalledWith({ type: Topic.KANA, settings: RELAXED });
 });
 
 //TODO: Re-enable once created numbers menu with a start button
@@ -67,5 +67,5 @@ test.skip('Starting a numbers game should call the onStart event handler with co
     const { start, numbers } = setup();
     fireEvent.click(numbers);
     fireEvent.click(start);
-    expect(onStartHandler).toHaveBeenCalledWith({ type: GameType.NUMBERS, settings: undefined });
+    expect(onStartHandler).toHaveBeenCalledWith({ type: Topic.NUMBERS, settings: undefined });
 });

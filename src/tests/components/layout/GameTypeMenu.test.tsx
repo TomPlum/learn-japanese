@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import GameTypeMenu from "../../../components/layout/GameTypeMenu";
-import { GameType } from "../../../types/GameType";
+import { Topic } from "../../../types/Topic";
 import { AppMode } from "../../../types/AppMode";
 
 const onSelectHandler = jest.fn();
@@ -16,7 +16,7 @@ test.skip('Should render the list group when the viewport is sm or greater', () 
 test('Selecting an option should call the onSelect handler', () => {
     const component = render(<GameTypeMenu onSelect={onSelectHandler} appMode={AppMode.PLAY} />);
     fireEvent.click(component.queryAllByText('Hiragana & Katakana')[1]);
-    expect(onSelectHandler).toHaveBeenCalledWith(GameType.KANA);
+    expect(onSelectHandler).toHaveBeenCalledWith(Topic.KANA);
 });
 
 test('Clicking a heading should not call the onSelect event handler', () => {

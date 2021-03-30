@@ -6,14 +6,17 @@ import { Kana } from "../../types/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
 import ControlsMenu from "../layout/ControlsMenu";
-import GameSettingsMenu, { GameTypeSettings } from "../layout/GameSettingsMenu";
+import GameSettingsMenu, { GameTypeSettings, LearnSessionSettings } from "../layout/GameSettingsMenu";
 import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 import { AppMode } from "../../types/AppMode";
+import { KanaSettings } from "../../types/GameSettings";
+import LearnKana from "../learn/kana/LearnKana";
 
 interface GamePageState {
     loading: boolean;
     kana?: Kana[];
-    settings?: GameTypeSettings;
+    gameSettings?: GameTypeSettings;
+    learnSettings?: LearnSessionSettings;
     inResultsScreen: boolean;
     result?: GameResult;
     gameIdentifier: string;
@@ -27,7 +30,8 @@ class GamePage extends Component<{ }, GamePageState> {
         this.state = {
             loading: false,
             kana: undefined,
-            settings: undefined,
+            gameSettings: undefined,
+            learnSettings: undefined,
             inResultsScreen: false,
             result: undefined,
             gameIdentifier: Math.random().toString(),
@@ -36,23 +40,27 @@ class GamePage extends Component<{ }, GamePageState> {
     }
 
     render() {
-        const { loading, settings, kana, inResultsScreen, result, mode } = this.state;
+        const { loading, gameSettings, learnSettings, kana, inResultsScreen, result, mode } = this.state;
         return (
             <div className={styles.wrapper}>
                 <LoadingSpinner active={loading}/>
 
                 <ControlsMenu onChangeAppMode={this.handleChangeAppMode} />
 
-                {!settings && !inResultsScreen &&
-                    <GameSettingsMenu onStart={this.start} mode={mode} />
+                {!gameSettings && !learnSettings && !inResultsScreen &&
+                    <GameSettingsMenu onStartGame={this.startGame} onStartLearn={this.startLearning} mode={mode} />
                 }
 
-                {settings && kana && !inResultsScreen &&
+                {gameSettings && kana && !inResultsScreen &&
                     <KanaMemoryGame
                         kana={kana}
-                        settings={settings.settings}
+                        settings={gameSettings.settings}
                         onFinish={this.onGameFinish}
                     />
+                }
+
+                {learnSettings && kana && !inResultsScreen &&
+                    <LearnKana kana={kana} />
                 }
 
                 {inResultsScreen && result &&
@@ -62,23 +70,28 @@ class GamePage extends Component<{ }, GamePageState> {
         );
     }
 
-    private start = (settings: GameTypeSettings) => this.setState({ settings }, this.loadKana);
+    private startGame = (settings: GameTypeSettings) => {
+        this.setState({ gameSettings: settings }, () => this.loadKana(settings?.settings?.kana));
+    }
+
+    private startLearning = (settings: LearnSessionSettings) => {
+        this.setState({ learnSettings: settings }, () => this.loadKana(settings.settings));
+    }
 
     private onResultMenuClose = () => this.setState({ inResultsScreen: false, result: undefined });
 
     private onGameFinish = (result: GameResult) => this.setState({
         inResultsScreen: true,
         result: result,
-        settings: undefined,
+        gameSettings: undefined,
         gameIdentifier: Math.random().toString()
     });
 
     private handleChangeAppMode = (mode: AppMode) => this.setState({ mode: mode });
 
-
-    private loadKana() {
+    private loadKana(settings: KanaSettings) {
         this.setState({ loading: true });
-        const kana = new KanaRepository().read(this.state.settings?.settings?.kana);
+        const kana = new KanaRepository().read(settings);
         this.setState({ loading: false, kana });
     }
 }

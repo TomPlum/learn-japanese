@@ -1,12 +1,12 @@
 import React, { Component, ReactElement } from "react";
-import { GameType } from "../../types/GameType";
+import { Topic } from "../../types/Topic";
 import { Dropdown } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/GameTypeMenuDropdownOption.module.scss";
 
 interface GameTypeMenuDropdownOptionProps {
-    type: GameType;
-    selected: GameType;
-    onClick: (type: GameType) => void;
+    type: Topic;
+    selected: Topic;
+    onClick: (type: Topic) => void;
 }
 
 class GameTypeMenuDropdownOption extends Component<GameTypeMenuDropdownOptionProps> {
