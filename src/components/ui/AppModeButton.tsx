@@ -8,6 +8,7 @@ import menuStyles from "../../styles/sass/components/layout/ControlsMenu.module.
 export interface AppModeButtonProps {
     onClick: (mode: AppMode) => void;
     className?: string;
+    disabled: boolean;
 }
 
 interface AppModeButtonState {
@@ -30,11 +31,11 @@ class AppModeButton extends Component<AppModeButtonProps, AppModeButtonState> {
     }
 
     render() {
-        const { className } = this.props;
+        const { className, disabled } = this.props;
         const { mode } = this.state;
 
         return (
-            <Nav.Link className={className} onClick={this.handleOnClick}>
+            <Nav.Link className={className} onClick={this.handleOnClick} disabled={disabled}>
                 <div>
                     <FontAwesomeIcon icon={mode === AppMode.PLAY ? faGraduationCap : faGamepad} className={menuStyles.icon} />
                 </div>

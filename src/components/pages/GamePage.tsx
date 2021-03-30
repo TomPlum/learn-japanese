@@ -41,13 +41,14 @@ class GamePage extends Component<{ }, GamePageState> {
 
     render() {
         const { loading, gameSettings, learnSettings, kana, inResultsScreen, result, mode } = this.state;
+        const isInMenu = !gameSettings && !learnSettings && !inResultsScreen;
         return (
             <div className={styles.wrapper}>
                 <LoadingSpinner active={loading}/>
 
-                <ControlsMenu onChangeAppMode={this.handleChangeAppMode} />
+                <ControlsMenu onChangeAppMode={this.handleChangeAppMode} active={isInMenu} />
 
-                {!gameSettings && !learnSettings && !inResultsScreen &&
+                {isInMenu &&
                     <GameSettingsMenu onStartGame={this.startGame} onStartLearn={this.startLearning} mode={mode} />
                 }
 

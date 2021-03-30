@@ -1,14 +1,17 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import GameSettingsMenu from "../../../components/layout/GameSettingsMenu";
+import GameSettingsMenu, { GameSettingsMenuProps } from "../../../components/layout/GameSettingsMenu";
 import { Topic } from "../../../types/Topic";
 import { RELAXED } from "../../../data/GameModePresets";
 import { AppMode } from "../../../types/AppMode";
 
 
-const onStartHandler = jest.fn();
+const onStartGameHandler = jest.fn();
+const onStartLearnHandler = jest.fn();
+
+let props: GameSettingsMenuProps;
 
 const setup = () => {
-    const component = render(<GameSettingsMenu onStartGame={onStartHandler} mode={AppMode.PLAY}/>);
+    const component = render(<GameSettingsMenu {...props} />);
     return {
         kana: component.queryAllByText('Hiragana & Katakana')[1],
         numbers: component.getByText('Numbers & Counting'),
@@ -20,6 +23,14 @@ const setup = () => {
         ...component
     }
 }
+
+beforeEach(() => {
+    props = {
+        onStartGame: onStartGameHandler,
+        onStartLearn: onStartLearnHandler,
+        mode: AppMode.PLAY
+    };
+});
 
 test('Should default to \'Hiragana & Katakana\' game type', () => {
     setup();
@@ -56,16 +67,23 @@ test('Should switch to \'Days & Months\' game type menu after selecting it', () 
     expect(screen.getByText('Calendar menu here')).toBeInTheDocument();
 });
 
-test('Starting a kana game should call the onStart event handler with correct type and settings', () => {
+test('Starting a kana game should call the onStartGame event handler with correct type and settings', () => {
     const { start } = setup();
     fireEvent.click(start);
-    expect(onStartHandler).toHaveBeenCalledWith({ type: Topic.KANA, settings: RELAXED });
+    expect(onStartGameHandler).toHaveBeenCalledWith({ topic: Topic.KANA, settings: RELAXED });
+});
+
+test('Starting a kana learning session should call the onStartLearn event handler with correct type and settings', () => {
+    props.mode = AppMode.LEARN;
+    const { start } = setup();
+    fireEvent.click(start);
+    expect(onStartLearnHandler).toHaveBeenCalledWith({ topic: Topic.KANA, settings: { hiragana: true } });
 });
 
 //TODO: Re-enable once created numbers menu with a start button
-test.skip('Starting a numbers game should call the onStart event handler with correct type', () => {
+test.skip('Starting a numbers game should call the onStartGame event handler with correct type', () => {
     const { start, numbers } = setup();
     fireEvent.click(numbers);
     fireEvent.click(start);
-    expect(onStartHandler).toHaveBeenCalledWith({ type: Topic.NUMBERS, settings: undefined });
+    expect(onStartGameHandler).toHaveBeenCalledWith({ topic: Topic.NUMBERS, settings: undefined });
 });
