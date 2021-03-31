@@ -1,0 +1,30 @@
+@mixin button {
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 325px;
+  display: block;
+}
+
+.button {
+  @include button;
+  opacity: 0.7;
+  //color: rgba(255, 255, 255, 0.5);
+}
+
+.active {
+  @include button;
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.text {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-left: 5px;
+}
+
+.icon {
+  font-size: 1.2em;
+}

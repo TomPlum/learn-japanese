@@ -47,7 +47,7 @@ describe("Hiragana", () => {
 
         describe("T Column", () => {
             it("ta", () => expect(getHiragana(["ta"]).code).toEqual("た"));
-            it("chi", () => expect(getHiragana(["ti", "chi"]).code).toEqual("ち"));
+            it("chi", () => expect(getHiragana(["chi", "ti"]).code).toEqual("ち"));
             it("tsu", () => expect(getHiragana(["tsu"]).code).toEqual("つ"));
             it("te", () => expect(getHiragana(["te"]).code).toEqual("て"));
             it("to", () => expect(getHiragana(["to"]).code).toEqual("と"));
@@ -150,7 +150,7 @@ describe("Hiragana", () => {
         });
 
         const t = getMultipleHiragana([
-            ["ta"], ["ti", "chi"], ["tsu"], ["te"], ["to"],
+            ["ta"], ["chi", "ti"], ["tsu"], ["te"], ["to"],
             ["da"], ["di", "ji"], ["du", "zu"], ["de"], ["do"],
             ["cha"], ["chu"], ["cho"], ["dya", "ja"],
             ["dyu", "ju"], ["dyo", "jo"]
@@ -273,7 +273,7 @@ describe("Hiragana", () => {
             ["a"], ["i"], ["u"], ["e"], ["o"],
             ["ka"], ["ki"], ["ku"], ["ke"], ["ko"], ["kya"], ["kyu"], ["kyo"],
             ["sa"], ["shi"], ["su"], ["se"], ["so"], ["sha"], ["shu"], ["sho"],
-            ["ta"], ["ti", "chi"], ["tsu"], ["te"], ["to"], ["cha"], ["chu"], ["cho"],
+            ["ta"], ["chi", "ti"], ["tsu"], ["te"], ["to"], ["cha"], ["chu"], ["cho"],
             ["na"], ["ni"], ["nu"], ["ne"], ["no"], ["nya"], ["nyu"], ["nyo"],
             ["ha"], ["hi"], ["hu", "fu"], ["he", "e"], ["ho"], ["hya"], ["hyu"], ["hyo"],
             ["ma"], ["mi"], ["mu"], ["me"], ["mo"], ["mya"], ["myu"], ["myo"],

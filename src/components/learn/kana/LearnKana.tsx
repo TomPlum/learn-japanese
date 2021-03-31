@@ -1,10 +1,12 @@
 import { Component } from "react";
 import { Kana } from "../../../types/Kana";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import SessionProgressBar from "../../ui/SessionProgressBar";
 import KanaFlashCard from "./KanaFlashCard";
 import styles from "../../../styles/sass/components/learn/kana/LearnKana.module.scss";
+import MemorisedButton from "../../ui/MemorisedButton";
+import ForgotButton from "../../ui/ForgotButton";
 
 export interface LearnKanaProps {
     kana: Kana[];
@@ -14,6 +16,10 @@ interface LearnKanaState {
     current: Kana;
     remaining: Kana[];
     hasPeeked: boolean;
+    hasRemembered: boolean;
+    hasForgotten: boolean;
+    remembered: Kana[];
+    forgotten: Kana[];
 }
 
 class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
@@ -26,47 +32,71 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
         this.state = {
             current: first,
             remaining: remaining,
-            hasPeeked: false
+            hasPeeked: false,
+            hasRemembered: false,
+            hasForgotten: false,
+            remembered: [],
+            forgotten: []
         }
     }
 
     render() {
-        const { current, remaining, hasPeeked } = this.state;
+        const { current, remaining, hasPeeked, hasRemembered, hasForgotten } = this.state;
         const { kana } = this.props;
         const hasKanaRemaining = remaining.length > 0;
         return (
-            <Container className={styles.wrapper}>
-                <Row className={styles.header}>
-                    <SessionProgressBar
-                        inProgress={hasKanaRemaining}
-                        value={((kana.length - remaining.length) / kana.length) * 100}
-                        title={(kana.length - remaining.length) + "/" + kana.length}
-                        className={styles.progress}
-                    />
-                </Row>
+            <div className={styles.wrapper}>
+                <Container className={styles.innerWrapper}>
+                    <Row className={styles.header}>
+                        <Col>
+                            <SessionProgressBar
+                                inProgress={hasKanaRemaining}
+                                value={((kana.length - remaining.length) / kana.length) * 100}
+                                title={(kana.length - remaining.length) + "/" + kana.length}
+                                className={styles.progress}
+                            />
+                        </Col>
+                    </Row>
 
-                <Row className={styles.cardWrapper}>
-                    <KanaFlashCard kana={current} key={current.code} onFlip={this.onFlip} />
-                </Row>
+                    <Row className={styles.cardWrapper}>
+                        <Col>
+                            <KanaFlashCard kana={current} key={current.code} onFlip={this.onFlip} />
+                        </Col>
+                    </Row>
 
-                <Row className={styles.buttonWrapper}>
-                    <Button
-                        variant={hasKanaRemaining ? "success" : "info"}
-                        className={styles.next}
-                        onClick={hasKanaRemaining ? this.next : this.restart}
-                        disabled={!hasPeeked}
-                    >
-                        {hasKanaRemaining ? "Next" : "Restart"}
-                    </Button>
-                </Row>
-            </Container>
+                    <Row className={styles.buttonWrapper}>
+                        <Col xs={6}>
+                            <ForgotButton onClick={this.onForgot} disabled={!hasPeeked} active={hasForgotten} />
+                        </Col>
+                        <Col xs={6}>
+                            <MemorisedButton onClick={this.onMemorised} disabled={!hasPeeked} active={hasRemembered} />
+                        </Col>
+                        <Col xs={12}>
+                            <Button
+                                variant={hasKanaRemaining ? "primary" : "info"}
+                                className={styles.next}
+                                onClick={hasKanaRemaining ? this.next : this.restart}
+                                disabled={!hasPeeked || (!hasForgotten && !hasRemembered)}
+                            >
+                                {hasKanaRemaining ? "Next" : "Restart"}
+                            </Button>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         );
     }
 
     private next = () => {
         const { remaining } = this.state;
         const [next, nextRemaining] = RandomNumberGenerator.getRandomObject(remaining);
-        this.setState({ current: next, remaining: nextRemaining, hasPeeked: false });
+        this.setState({
+            current: next,
+            remaining: nextRemaining,
+            hasPeeked: false,
+            hasRemembered: false,
+            hasForgotten: false
+        });
     }
 
     private restart = () => {
@@ -75,6 +105,16 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
     }
 
     private onFlip = (flips: number) => this.setState({ hasPeeked: flips > 0 });
+
+    private onMemorised = () => {
+        const { remembered, current } = this.state;
+        this.setState({ hasRemembered: true, hasForgotten: false, remembered: remembered.concat(current) });
+    }
+
+    private onForgot = () => {
+        const { forgotten, current } = this.state;
+        this.setState({ hasForgotten: true, hasRemembered: false, remembered: forgotten.concat(current) });
+    }
 }
 
 export default LearnKana;

@@ -1,12 +1,28 @@
 @import "src/styles/sass/mixins";
 @import "src/styles/sass/colours";
 
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction:row;
+}
+
+.innerWrapper {
+  max-width: 650px;
+}
+
 .cardWrapper, .buttonWrapper, .header {
-  padding: 0 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
+  max-width: 650px;
+}
+
+.buttonWrapper {
+  margin-top: 15px;
 }
 
 .remaining {
@@ -20,13 +36,14 @@
   width: 100%;
   max-width: 650px;
   font-family: "Ciutadella Rounded Medium", sans-serif;
+  text-transform: uppercase;
   font-size: 1.6em;
 }
 
 .progress {
   background-color: $dark-2;
   margin-bottom: 15px;
-  height: 10px;
+  height: 20px;
   width: 100%;
   max-width: 650px;
 }

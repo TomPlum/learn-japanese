@@ -99,9 +99,9 @@ describe("Diagraph Margins", () => {
     });
 });
 
-test('Omitting the size from the style property should default the font-size to 1em', () => {
+test('Omitting the size from the style property should default the font-size to undefined', () => {
     const { container } = render(<DynamicCharacter value={'a'} />);
-    expect(container?.firstChild).toHaveProperty('style._values.font-size', '1em');
+    expect(container?.firstChild).not.toHaveProperty('style._values.font-size');
 });
 
 test('Passing style colour should set the colour on the character', () => {

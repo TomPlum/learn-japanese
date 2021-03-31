@@ -12,7 +12,7 @@
 @include phone {
   .kana {
     @include kana;
-    font-size: 8;
+    font-size: 8em;
   }
 }
 
@@ -26,6 +26,6 @@
 @include desktop {
   .kana {
     @include kana;
-    font-size: 15em !important;
+    font-size: 15em;
   }
 }
