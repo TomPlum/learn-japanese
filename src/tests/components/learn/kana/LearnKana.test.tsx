@@ -3,17 +3,35 @@ import { Kana } from "../../../../types/Kana";
 import KanaType from "../../../../types/KanaType";
 import { KanaColumn } from "../../../../types/KanaColumn";
 import { fireEvent, render, screen } from "@testing-library/react";
-import LearnKana from "../../../../components/learn/kana/LearnKana";
+import LearnKana, { LearnKanaProps } from "../../../../components/learn/kana/LearnKana";
 
-const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-const i = new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-const e = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-const o = new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+let props: LearnKanaProps;
 
-const getRandomObject = jest.fn();
+beforeEach(() => {
+    props = {
+        kana: [
+            new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
+            new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
+            new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
+            new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
+        ]
+    };
+
+    RandomNumberGenerator.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
+        const objects = [...array];
+        const firstKana = objects[0];
+        objects.splice(0, 1);
+        return [firstKana, objects];
+    });
+});
+
+afterEach(() => {
+    jest.resetAllMocks();
+    jest.clearAllMocks();
+});
 
 const setup = () => {
-    const component = render(<LearnKana kana={[a, i, e, o]} />);
+    const component = render(<LearnKana {...props} />);
     return {
         remembered: component.getByTitle('I remembered it'),
         forgot: component.getByTitle('I couldn\'t remember it'),
@@ -21,15 +39,6 @@ const setup = () => {
         ...component
     };
 }
-
-beforeEach(() => {
-    RandomNumberGenerator.getRandomObject = getRandomObject;
-
-    getRandomObject.mockImplementation((array: any[]) => {
-        const element = array[0];
-        return [element, array.splice(1, array.length - 1)];
-    });
-});
 
 test('Should show a random flash card to start', () => {
     setup();
@@ -76,12 +85,12 @@ test('Clicking Next should render the next Kana', () => {
 test('Clicking Next should advance the progress bar', () => {
     const { next, remembered } = setup();
 
-    expect(screen.getByTitle('1/5')).toBeInTheDocument();
+    expect(screen.getByTitle('1/4')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('あ'));
     fireEvent.click(remembered)
     fireEvent.click(next)
 
-    expect(screen.getByTitle('2/5')).toBeInTheDocument();
+    expect(screen.getByTitle('2/4')).toBeInTheDocument();
 });
 

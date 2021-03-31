@@ -47,8 +47,10 @@ beforeEach(() => {
 
     //Always returns the first element so it is deterministic
     getRandomObject.mockImplementation((array: any[]) => {
-        const element = array.splice(0, 1)[0];
-        return [element, array];
+        const objects = [...array];
+        const firstKana = objects[0];
+        objects.splice(0, 1);
+        return [firstKana, objects];
     });
 
     //Always returns the array in the same order so it doesn't shuffle
@@ -101,8 +103,7 @@ test('Answering correctly when there are kana remaining should show the next kan
     expect(screen.getByText("い")).toBeInTheDocument();
 });
 
-//TODO: Something is happening with props in the test... thinks kana is only 2 in length?
-test.skip('Answering correctly should advance the progress bar', () => {
+test('Answering correctly should advance the progress bar', () => {
     const { submit } = setup();
 
     expect(screen.getByTitle('1/4')).toBeInTheDocument();
@@ -171,7 +172,7 @@ test('Answering all questions correctly should stop call the onFinish even handl
         reason: undefined,
         success: true,
         livesRemaining: 5,
-        totalKanaOffered: 0, //TODO: This should be 4. Tested manually and working.
+        totalKanaOffered: 4,
         correctAnswers: new Set([a, i, e, o]),
         wrongAnswers: [],
         duration: "00:25"
@@ -207,7 +208,7 @@ test('Answering all questions correctly should stop call the onFinish even handl
         reason: undefined,
         success: true,
         livesRemaining: 5,
-        totalKanaOffered: 0, //TODO: This should be 4. Tested manually and working.
+        totalKanaOffered: 4,
         correctAnswers: new Set([a, i, e, o]),
         wrongAnswers: [],
         duration: undefined
@@ -247,7 +248,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
         reason: FailureReason.NO_LIVES_REMAINING,
         success: false,
         livesRemaining: 0,
-        totalKanaOffered: 1, //TODO: This should be 4. Tested manually and working.
+        totalKanaOffered: 4,
         correctAnswers: new Set([a, i]),
         wrongAnswers: [e],
         duration: "00:12"
@@ -275,7 +276,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
         reason: FailureReason.NO_LIVES_REMAINING,
         success: false,
         livesRemaining: 0,
-        totalKanaOffered: 1, //TODO: This should be 4. Tested manually and working.
+        totalKanaOffered: 4,
         correctAnswers: new Set([a, i]),
         wrongAnswers: [e],
         duration: undefined
@@ -445,7 +446,7 @@ test('Clicking the \'Yes\' button from the quit confirmation modal should call t
         reason: FailureReason.QUIT,
         success: false,
         livesRemaining: 0,
-        totalKanaOffered: 3, //TODO: Whyyy is this being mutated still!? Should be 4...
+        totalKanaOffered: 4,
         duration: undefined,
         correctAnswers: new Set(),
         wrongAnswers: [a],
