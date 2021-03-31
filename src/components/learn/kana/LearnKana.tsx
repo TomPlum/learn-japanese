@@ -4,8 +4,10 @@ import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import SessionProgressBar from "../../ui/SessionProgressBar";
 import KanaFlashCard from "./KanaFlashCard";
-import styles from "../../../styles/sass/components/learn/kana/LearnKana.module.scss";
 import LearningFeedbackButton, { LearningFeedback } from "../../ui/LearningFeedbackButton";
+import { faEraser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "../../../styles/sass/components/learn/kana/LearnKana.module.scss";
 
 export interface LearnKanaProps {
     kana: Kana[];
@@ -40,12 +42,13 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
     }
 
     render() {
-        const { current, remaining, hasPeeked, hasRemembered, hasForgotten } = this.state;
+        const { current, remaining, hasPeeked, hasRemembered, hasForgotten, remembered, forgotten } = this.state;
         const { kana } = this.props;
         const hasKanaRemaining = remaining.length > 0;
+
         return (
             <div className={styles.wrapper}>
-                <Container className={styles.innerWrapper}>
+                {hasKanaRemaining && <Container className={styles.innerWrapper}>
                     <Row className={styles.header}>
                         <Col>
                             <SessionProgressBar
@@ -91,7 +94,15 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
                             </Button>
                         </Col>
                     </Row>
-                </Container>
+                </Container>}
+
+                {!hasKanaRemaining && <Container className={styles.innerWrapper}>
+                    <h2>You remembered {remembered}/{kana.length}!</h2>
+                    <Button variant="info">
+                        <FontAwesomeIcon icon={faEraser} fixedWidth />
+                        Practice Mistakes
+                    </Button>
+                </Container>}
             </div>
         );
     }

@@ -11,6 +11,7 @@ import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 import { AppMode } from "../../types/AppMode";
 import { KanaSettings } from "../../types/GameSettings";
 import LearnKana from "../learn/kana/LearnKana";
+import SessionID from "../../types/SessionID";
 
 interface GamePageState {
     loading: boolean;
@@ -19,7 +20,7 @@ interface GamePageState {
     learnSettings?: LearnSessionSettings;
     inResultsScreen: boolean;
     result?: GameResult;
-    gameIdentifier: string;
+    sessionKey: SessionID,
     mode: AppMode;
 }
 
@@ -34,13 +35,13 @@ class GamePage extends Component<{ }, GamePageState> {
             learnSettings: undefined,
             inResultsScreen: false,
             result: undefined,
-            gameIdentifier: Math.random().toString(),
+            sessionKey: new SessionID(),
             mode: AppMode.PLAY
         }
     }
 
     render() {
-        const { loading, gameSettings, learnSettings, kana, inResultsScreen, result, mode } = this.state;
+        const { loading, gameSettings, learnSettings, kana, inResultsScreen, result, mode, sessionKey } = this.state;
         const isInMenu = !gameSettings && !learnSettings && !inResultsScreen;
         return (
             <div className={styles.wrapper}>
@@ -54,6 +55,8 @@ class GamePage extends Component<{ }, GamePageState> {
 
                 {gameSettings && kana && !inResultsScreen &&
                     <KanaMemoryGame
+                        key={sessionKey.value}
+                        sessionKey={sessionKey.value}
                         kana={kana}
                         settings={gameSettings.settings}
                         onFinish={this.onGameFinish}
@@ -61,7 +64,7 @@ class GamePage extends Component<{ }, GamePageState> {
                 }
 
                 {learnSettings && kana && !inResultsScreen &&
-                    <LearnKana kana={kana} />
+                    <LearnKana kana={kana} key={sessionKey.value} />
                 }
 
                 {inResultsScreen && result &&
@@ -85,7 +88,7 @@ class GamePage extends Component<{ }, GamePageState> {
         inResultsScreen: true,
         result: result,
         gameSettings: undefined,
-        gameIdentifier: Math.random().toString()
+        sessionKey: new SessionID()
     });
 
     private handleChangeAppMode = (mode: AppMode) => this.setState({ mode: mode });

@@ -34,6 +34,7 @@ export interface KanaMemoryGameProps {
     kana: Kana[];
     settings: GameSettings;
     onFinish: (result: GameResult) => void;
+    sessionKey?: string;
 }
 
 interface KanaMemoryGameState {
@@ -98,6 +99,10 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                 duration: this.timer.current?.getCurrentTime() ?? undefined
             });
         }
+    }
+
+    componentDidMount() {
+        console.log("Starting new game with ID: " + this.props.sessionKey);
     }
 
     componentWillUnmount() {
