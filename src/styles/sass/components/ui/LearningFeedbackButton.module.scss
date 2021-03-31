@@ -1,21 +1,21 @@
-@mixin button {
+.button {
   padding: 10px;
   border-radius: 8px;
   width: 100%;
   max-width: 325px;
   display: block;
+  transition: ease-in-out 0.4s;
+  opacity: 0.7;
 }
 
-.button {
-  @include button;
-  opacity: 0.7;
-  //color: rgba(255, 255, 255, 0.5);
+.inactive {
+  opacity: 0.4;
 }
 
 .active {
-  @include button;
-  background-color: #c82333;
-  border-color: #bd2130;
+  opacity: 1;
+  background-color: #218838;
+  border-color: #1e7e34;
 }
 
 .text {

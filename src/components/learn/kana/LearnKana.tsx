@@ -5,8 +5,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import SessionProgressBar from "../../ui/SessionProgressBar";
 import KanaFlashCard from "./KanaFlashCard";
 import styles from "../../../styles/sass/components/learn/kana/LearnKana.module.scss";
-import MemorisedButton from "../../ui/MemorisedButton";
-import ForgotButton from "../../ui/ForgotButton";
+import LearningFeedbackButton, { LearningFeedback } from "../../ui/LearningFeedbackButton";
 
 export interface LearnKanaProps {
     kana: Kana[];
@@ -66,10 +65,20 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
 
                     <Row className={styles.buttonWrapper}>
                         <Col xs={6}>
-                            <ForgotButton onClick={this.onForgot} disabled={!hasPeeked} active={hasForgotten} />
+                            <LearningFeedbackButton
+                                type={LearningFeedback.FORGOT}
+                                onClick={this.onForgot}
+                                disabled={!hasPeeked}
+                                active={hasForgotten}
+                            />
                         </Col>
                         <Col xs={6}>
-                            <MemorisedButton onClick={this.onMemorised} disabled={!hasPeeked} active={hasRemembered} />
+                            <LearningFeedbackButton
+                                type={LearningFeedback.REMEMBERED}
+                                onClick={this.onMemorised}
+                                disabled={!hasPeeked}
+                                active={hasRemembered}
+                            />
                         </Col>
                         <Col xs={12}>
                             <Button
