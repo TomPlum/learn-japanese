@@ -64,7 +64,7 @@ class GamePage extends Component<{ }, GamePageState> {
                 }
 
                 {learnSettings && kana && !inResultsScreen &&
-                    <LearnKana kana={kana} key={sessionKey.value} />
+                    <LearnKana kana={kana} key={sessionKey.value} onFinish={this.onLearningFinish}/>
                 }
 
                 {inResultsScreen && result &&
@@ -90,6 +90,8 @@ class GamePage extends Component<{ }, GamePageState> {
         gameSettings: undefined,
         sessionKey: new SessionID()
     });
+
+    private onLearningFinish = () => this.setState({ sessionKey: new SessionID(), learnSettings: undefined });
 
     private handleChangeAppMode = (mode: AppMode) => this.setState({ mode: mode });
 

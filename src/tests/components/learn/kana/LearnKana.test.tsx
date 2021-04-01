@@ -5,6 +5,8 @@ import { KanaColumn } from "../../../../types/KanaColumn";
 import { fireEvent, render, screen } from "@testing-library/react";
 import LearnKana, { LearnKanaProps } from "../../../../components/learn/kana/LearnKana";
 
+const onFinishHandler = jest.fn();
+
 let props: LearnKanaProps;
 
 beforeEach(() => {
@@ -14,7 +16,8 @@ beforeEach(() => {
             new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
             new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
             new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
-        ]
+        ],
+        onFinish: onFinishHandler
     };
 
     RandomNumberGenerator.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
@@ -36,6 +39,7 @@ const setup = () => {
         remembered: component.getByTitle('I remembered it'),
         forgot: component.getByTitle('I couldn\'t remember it'),
         next: component.getByText('Next'),
+        quit: component.getByTitle('Quit'),
         ...component
     };
 }
@@ -94,3 +98,8 @@ test('Clicking Next should advance the progress bar', () => {
     expect(screen.getByTitle('2/4')).toBeInTheDocument();
 });
 
+test('Clicking the Quit button should call the onFinish event handler', () => {
+    const { quit } = setup();
+    fireEvent.click(quit);
+    expect(onFinishHandler).toHaveBeenCalled();
+});

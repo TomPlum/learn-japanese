@@ -8,9 +8,11 @@ import LearningFeedbackButton, { LearningFeedback } from "../../ui/LearningFeedb
 import { faEraser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../../styles/sass/components/learn/kana/LearnKana.module.scss";
+import QuitButton from "../../ui/QuitButton";
 
 export interface LearnKanaProps {
     kana: Kana[];
+    onFinish: () => void;
 }
 
 interface LearnKanaState {
@@ -49,6 +51,12 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
         return (
             <div className={styles.wrapper}>
                 {hasKanaRemaining && <Container className={styles.innerWrapper}>
+                    <Row>
+                        <Col>
+                            <QuitButton onClick={this.props.onFinish} />
+                        </Col>
+                    </Row>
+
                     <Row className={styles.header}>
                         <Col>
                             <SessionProgressBar
