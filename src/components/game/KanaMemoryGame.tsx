@@ -110,10 +110,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     render() {
-        const {
-            correctAnswers, failedToAnswer, hasExhaustedKana, lives, remainingKana, hasValidAnswer, paused, hints,
-            currentKana, isQuitting
-        } = this.state;
+        const { hasExhaustedKana, lives, remainingKana, hasValidAnswer, paused, hints, currentKana, isQuitting } = this.state;
         const { kana, settings } = this.props;
 
         return (

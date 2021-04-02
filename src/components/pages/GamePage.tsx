@@ -1,7 +1,7 @@
 import { Component } from "react";
 import KanaMemoryGame from "../game/KanaMemoryGame";
 import GameResult from "../../types/GameResult";
-import ResultScreen from "../results/ResultScreen";
+import GameResultScreen from "../results/GameResultScreen";
 import { Kana } from "../../types/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
@@ -74,7 +74,7 @@ class GamePage extends Component<{ }, GamePageState> {
                 }
 
                 {inResultsScreen && gameResult &&
-                    <ResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
+                    <GameResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
                 }
 
                 {learnSettings && kana && !inResultsScreen &&

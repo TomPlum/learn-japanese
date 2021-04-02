@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import ResultScreen from "../../../components/results/ResultScreen";
+import GameResultScreen from "../../../components/results/GameResultScreen";
 import GameResult from "../../../types/GameResult";
 import { Kana } from "../../../types/Kana";
 import KanaType from "../../../types/KanaType";
@@ -23,7 +23,7 @@ beforeEach(() => {
 const onCloseHandler = jest.fn();
 
 const setup = () => {
-    const component = render(<ResultScreen onClose={onCloseHandler} result={result} />);
+    const component = render(<GameResultScreen onClose={onCloseHandler} result={result} />);
     return {
         quit: component.getByTitle('Quit'),
         ...component
