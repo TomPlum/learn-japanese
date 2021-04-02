@@ -6,7 +6,7 @@ export interface ConfirmModalProps {
     title: string;
     body?: string;
     onConfirm: () => void;
-    onDismiss: () => void;
+    onDismiss?: () => void;
 }
 
 interface ConfirmModalState {
@@ -53,7 +53,7 @@ class ConfirmModal extends Component<ConfirmModalProps, ConfirmModalState> {
 
     private handleNo = () => {
         this.setState({ show: false });
-        this.props.onDismiss();
+        this.props?.onDismiss?.();
     }
 }
 

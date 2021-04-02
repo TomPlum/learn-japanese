@@ -12,6 +12,9 @@ import { AppMode } from "../../types/AppMode";
 import { KanaSettings } from "../../types/GameSettings";
 import LearnKana from "../learn/kana/LearnKana";
 import SessionID from "../../types/SessionID";
+import LearningSessionResult from "../../types/LearningSessionResult";
+import LearningResultScreen from "../results/LearningResultScreen";
+import Arrays from "../../utility/Arrays";
 
 interface GamePageState {
     loading: boolean;
@@ -19,7 +22,8 @@ interface GamePageState {
     gameSettings?: GameTypeSettings;
     learnSettings?: LearnSessionSettings;
     inResultsScreen: boolean;
-    result?: GameResult;
+    gameResult?: GameResult;
+    learningResult?: LearningSessionResult;
     sessionKey: SessionID,
     mode: AppMode;
 }
@@ -34,15 +38,21 @@ class GamePage extends Component<{ }, GamePageState> {
             gameSettings: undefined,
             learnSettings: undefined,
             inResultsScreen: false,
-            result: undefined,
+            gameResult: undefined,
+            learningResult: undefined,
             sessionKey: new SessionID(),
             mode: AppMode.PLAY
         }
     }
 
     render() {
-        const { loading, gameSettings, learnSettings, kana, inResultsScreen, result, mode, sessionKey } = this.state;
-        const isInMenu = !gameSettings && !learnSettings && !inResultsScreen;
+        const {
+            loading, gameSettings, learnSettings, kana, inResultsScreen, gameResult, learningResult,
+            mode, sessionKey
+        } = this.state;
+
+        const isInMenu = !gameSettings && !learnSettings && !inResultsScreen && !learningResult;
+
         return (
             <div className={styles.wrapper}>
                 <LoadingSpinner active={loading}/>
@@ -63,12 +73,20 @@ class GamePage extends Component<{ }, GamePageState> {
                     />
                 }
 
-                {learnSettings && kana && !inResultsScreen &&
-                    <LearnKana kana={kana} key={sessionKey.value} onFinish={this.onLearningFinish}/>
+                {inResultsScreen && gameResult &&
+                    <ResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
                 }
 
-                {inResultsScreen && result &&
-                    <ResultScreen result={result} onClose={this.onResultMenuClose}/>
+                {learnSettings && kana && !inResultsScreen &&
+                    <LearnKana key={sessionKey.value} kana={kana} onFinish={this.onLearningFinish} />
+                }
+
+                {learningResult && inResultsScreen &&
+                    <LearningResultScreen
+                        result={learningResult}
+                        onDismiss={this.onLearningResultMenuClose}
+                        onPractice={this.onPracticeStart}
+                    />
                 }
             </div>
         );
@@ -82,23 +100,41 @@ class GamePage extends Component<{ }, GamePageState> {
         this.setState({ learnSettings: settings }, () => this.loadKana(settings.settings));
     }
 
-    private onResultMenuClose = () => this.setState({ inResultsScreen: false, result: undefined });
+    private onGameResultMenuClose = () => this.setState({ inResultsScreen: false, gameResult: undefined });
+
+    private onLearningResultMenuClose = () => this.setState({
+        learningResult: undefined,
+        learnSettings: undefined,
+        inResultsScreen: false
+    });
 
     private onGameFinish = (result: GameResult) => this.setState({
         inResultsScreen: true,
-        result: result,
+        gameResult: result,
         gameSettings: undefined,
         sessionKey: new SessionID()
     });
 
-    private onLearningFinish = () => this.setState({ sessionKey: new SessionID(), learnSettings: undefined });
+    private onLearningFinish = (result: LearningSessionResult) => {
+        if (result.forgotten.length + result.remembered.length > 0){
+            this.setState({ learningResult: result, inResultsScreen: true });
+        } else {
+            this.onLearningResultMenuClose();
+        }
+        this.setState({ sessionKey: new SessionID() });
+    }
+
+    private onPracticeStart = (kana: Kana[]) => {
+        this.onGameResultMenuClose();
+        this.setState({ kana: Arrays.copy(kana) });
+    }
 
     private handleChangeAppMode = (mode: AppMode) => this.setState({ mode: mode });
 
     private loadKana(settings: KanaSettings) {
         this.setState({ loading: true });
         const kana = new KanaRepository().read(settings);
-        this.setState({ loading: false, kana });
+        this.setState({ loading: false, kana: kana });
     }
 }
 

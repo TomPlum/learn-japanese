@@ -41,7 +41,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
     render() {
         return (
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper} data-testid="game-settings-menu">
                 <Container fluid className={styles.innerWrapper}>
                     <Row className={styles.row}>
                         <Col sm={12} md={6} lg={5}>
