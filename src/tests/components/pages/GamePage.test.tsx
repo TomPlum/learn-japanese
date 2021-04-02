@@ -146,6 +146,4 @@ describe('Learn', () => {
       expect(screen.getByTestId('game-settings-menu')).toBeInTheDocument();
       expect(screen.queryByTestId('learning-results-screen')).not.toBeInTheDocument();
    });
-
-
 });

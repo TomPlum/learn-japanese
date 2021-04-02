@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEraser } from "@fortawesome/free-solid-svg-icons";
 import LearningSessionResult from "../../types/LearningSessionResult";
 import QuitButton from "../ui/QuitButton";
+import styles from "../../styles/sass/components/results/LearningResultScreen.module.scss";
 
 export interface LearningResultScreenProps {
     result: LearningSessionResult;
@@ -17,17 +18,17 @@ class LearningResultScreen extends Component<LearningResultScreenProps> {
         const { result } = this.props;
 
         return (
-            <Container data-testid="learning-results-screen">
-                <Row>
+            <Container data-testid="learning-results-screen" className={styles.wrapper}>
+                <Row className={styles.header}>
                     <Col>
-                        <QuitButton onClick={this.props.onDismiss} />
+                        <QuitButton onClick={this.props.onDismiss} className={styles.quit} />
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
-                        <h2>{this.getTitle()}</h2>
+                    <Col className="text-center">
+                        <h1 className={styles.heading}>{this.getTitle()}</h1>
                         {result.forgotten.length > 0 &&
-                            <Button variant="info" onClick={this.onPractice}>
+                            <Button onClick={this.onPractice} className={styles.mistakes}>
                                 <FontAwesomeIcon icon={faEraser} fixedWidth />
                                 Practice Mistakes
                             </Button>

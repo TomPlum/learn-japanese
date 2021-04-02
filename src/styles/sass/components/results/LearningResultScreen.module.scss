@@ -1,0 +1,34 @@
+.wrapper {
+  width: 100%;
+  max-width: 750px;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+.heading {
+  color: #FFF;
+  text-align: center;
+  margin: 10px;
+}
+
+.quit {
+  font-size: 2em;
+}
+
+.mistakes {
+  font-size: 1.8em;
+  border-radius: 15px;
+  padding: 15px;
+  background-color: #e2aeb4;
+  border-color: #d28289;
+  color: #ffffff;
+  transition: ease-in-out 0.4s;
+}
+
+.mistakes:hover {
+  background-color: #be9398;
+  border-color: #d28289;
+}
+
+.header {
+  margin-bottom: 25px;
+}
