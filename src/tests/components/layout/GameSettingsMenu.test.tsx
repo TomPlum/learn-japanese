@@ -37,6 +37,13 @@ test('Should default to \'Hiragana & Katakana\' game type', () => {
     expect(screen.getByText('Relaxed')).toBeInTheDocument();
 });
 
+test('Should switch to \'Hiragana & Katakana\' game type after selecting it', () => {
+    const { numbers, kana } = setup();
+    fireEvent.click(numbers);
+    fireEvent.click(kana);
+    expect(screen.getByText('Relaxed')).toBeInTheDocument();
+});
+
 test('Should switch to \'Numbers & Counting\' game type menu after selecting it', () => {
     const { numbers } = setup();
     fireEvent.click(numbers);
