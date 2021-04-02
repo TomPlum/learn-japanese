@@ -5,14 +5,14 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import SessionProgressBar from "../../ui/SessionProgressBar";
 import KanaFlashCard from "./KanaFlashCard";
 import LearningFeedbackButton, { LearningFeedback } from "../../ui/LearningFeedbackButton";
-import { faEraser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../../styles/sass/components/learn/kana/LearnKana.module.scss";
 import QuitButton from "../../ui/QuitButton";
+import LearningSessionResult from "../../../types/LearningSessionResult";
+import ConfirmModal from "../../ui/ConfirmModal";
 
 export interface LearnKanaProps {
     kana: Kana[];
-    onFinish: () => void;
+    onFinish: (result: LearningSessionResult) => void;
 }
 
 interface LearnKanaState {
@@ -23,6 +23,7 @@ interface LearnKanaState {
     hasForgotten: boolean;
     remembered: Kana[];
     forgotten: Kana[];
+    paused: boolean;
 }
 
 class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
@@ -39,21 +40,29 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
             hasRemembered: false,
             hasForgotten: false,
             remembered: [],
-            forgotten: []
+            forgotten: [],
+            paused: false
         }
     }
 
     render() {
-        const { current, remaining, hasPeeked, hasRemembered, hasForgotten, remembered, forgotten } = this.state;
+        const { current, remaining, hasPeeked, hasRemembered, hasForgotten, paused } = this.state;
         const { kana } = this.props;
         const hasKanaRemaining = remaining.length > 0;
 
         return (
             <div className={styles.wrapper}>
-                {hasKanaRemaining && <Container className={styles.innerWrapper}>
+                <Container className={styles.innerWrapper}>
+                    {paused && <ConfirmModal
+                        title={"Are you sure you want to quit?"}
+                        body={"You'll lose your progress, but you'll see the results of your session thus far."}
+                        onConfirm={this.onFinish}
+                        onDismiss={() => this.setState({ paused: false })}
+                    />}
+
                     <Row>
                         <Col>
-                            <QuitButton onClick={this.props.onFinish} />
+                            <QuitButton onClick={this.onQuit} className={styles.quit} />
                         </Col>
                     </Row>
 
@@ -61,8 +70,8 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
                         <Col>
                             <SessionProgressBar
                                 inProgress={hasKanaRemaining}
-                                value={((kana.length - remaining.length) / kana.length) * 100}
-                                title={(kana.length - remaining.length) + "/" + kana.length}
+                                quantity={kana.length}
+                                remaining={remaining.length}
                                 className={styles.progress}
                             />
                         </Col>
@@ -93,56 +102,50 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
                         </Col>
                         <Col xs={12}>
                             <Button
-                                variant={hasKanaRemaining ? "primary" : "info"}
+                                variant={!hasKanaRemaining && hasPeeked ? "info" : "primary"}
                                 className={styles.next}
-                                onClick={hasKanaRemaining ? this.next : this.restart}
+                                onClick={hasKanaRemaining ? this.onNext : this.onFinish}
                                 disabled={!hasPeeked || (!hasForgotten && !hasRemembered)}
                             >
-                                {hasKanaRemaining ? "Next" : "Restart"}
+                                {!hasKanaRemaining && hasPeeked ? "Finish" : "Next"}
                             </Button>
                         </Col>
                     </Row>
-                </Container>}
-
-                {!hasKanaRemaining && <Container className={styles.innerWrapper}>
-                    <h2>You remembered {remembered}/{kana.length}!</h2>
-                    <Button variant="info">
-                        <FontAwesomeIcon icon={faEraser} fixedWidth />
-                        Practice Mistakes
-                    </Button>
-                </Container>}
+                </Container>
             </div>
         );
     }
 
-    private next = () => {
-        const { remaining } = this.state;
+    private onNext = () => {
+        const { remaining, hasRemembered, hasForgotten, remembered, forgotten, current } = this.state;
+
         const [next, nextRemaining] = RandomNumberGenerator.getRandomObject(remaining);
         this.setState({
             current: next,
             remaining: nextRemaining,
             hasPeeked: false,
             hasRemembered: false,
-            hasForgotten: false
+            hasForgotten: false,
         });
+
+        if (hasRemembered) this.setState({ remembered: remembered.concat(current) });
+        if (hasForgotten) this.setState({ forgotten: forgotten.concat(current) });
     }
 
-    private restart = () => {
-        const [first, remaining] = RandomNumberGenerator.getRandomObject(this.props.kana);
-        this.setState({ current: first, remaining: remaining });
+    private onFinish = () => {
+        const { remembered, forgotten, hasRemembered, hasForgotten, current } = this.state;
+        const newRemembered = hasRemembered ? remembered.concat(current) : remembered;
+        const newForgotten = hasForgotten ? forgotten.concat(current) : forgotten;
+        this.props.onFinish({ remembered: newRemembered, forgotten: newForgotten });
     }
+
+    private onQuit = () => this.setState({ paused: true });
 
     private onFlip = (flips: number) => this.setState({ hasPeeked: flips > 0 });
 
-    private onMemorised = () => {
-        const { remembered, current } = this.state;
-        this.setState({ hasRemembered: true, hasForgotten: false, remembered: remembered.concat(current) });
-    }
+    private onMemorised = () => this.setState({ hasRemembered: true, hasForgotten: false });
 
-    private onForgot = () => {
-        const { forgotten, current } = this.state;
-        this.setState({ hasForgotten: true, hasRemembered: false, remembered: forgotten.concat(current) });
-    }
+    private onForgot = () => this.setState({ hasForgotten: true, hasRemembered: false });
 }
 
 export default LearnKana;

@@ -129,8 +129,8 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                     <Col xs={12}>
                         <SessionProgressBar
                             inProgress={!hasExhaustedKana}
-                            value={((correctAnswers.size + failedToAnswer) / kana.length) * 100}
-                            title={(kana.length - remainingKana.length)  + "/" + kana.length}
+                            quantity={kana.length}
+                            remaining={remainingKana.length}
                             className={styles.progress}
                         />
                     </Col>

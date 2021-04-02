@@ -8,6 +8,7 @@ import { KanaColumn } from "../../../types/KanaColumn";
 import Arrays from "../../../utility/Arrays";
 import { FailureReason } from "../../../types/FailureReason";
 import { Environment } from "../../../utility/Environment";
+import { v4 } from "uuid";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -37,6 +38,7 @@ beforeEach(() => {
             time: { timed: false, countdown: false }
         },
         onFinish: onFinishHandler,
+        sessionKey: v4()
     };
 
     //Mocked Static Functions

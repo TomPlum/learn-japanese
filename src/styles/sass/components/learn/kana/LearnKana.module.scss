@@ -19,6 +19,7 @@
   align-items: center;
   align-content: center;
   max-width: 650px;
+  margin-bottom: 10px
 }
 
 .buttonWrapper {
@@ -47,4 +48,9 @@
   height: 20px;
   width: 100%;
   max-width: 650px;
+}
+
+.quit {
+  font-size: 2em;
+  margin-bottom: 10px;
 }
