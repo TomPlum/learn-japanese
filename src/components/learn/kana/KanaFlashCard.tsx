@@ -38,8 +38,9 @@ class KanaFlashCard extends Component<KanaFlashCardProps, KanaFlashCardState> {
 
     private flip = () => {
         const { flipped, flips } = this.state;
-        this.setState({ flipped: !flipped, flips: flips + 1 });
-        this.props.onFlip(flips + 1);
+        const newFlipCount = flips + 1;
+        this.setState({ flipped: !flipped, flips: newFlipCount });
+        this.props.onFlip(newFlipCount);
     }
 }
 
