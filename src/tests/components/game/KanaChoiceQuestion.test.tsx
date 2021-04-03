@@ -27,7 +27,7 @@ const setup = () => {
 beforeEach(() => {
     const mockShuffle = jest.fn();
     Arrays.shuffle = mockShuffle;
-    mockShuffle.mockReturnValue([a, i, e, o]);
+    mockShuffle.mockImplementationOnce((array: any[]) => { return array });
 
     props = {
         expected: a,
@@ -91,7 +91,7 @@ test('Selecting an option should change its displays container class to \'select
     expect(option.parentElement).toHaveClass('selected');
 });
 
-test('Selecting an option should change its displays character class colour', () => {
+test('Selecting an option should change its displays\' character class colour', () => {
     setup();
     const option = screen.getByText('え');
     fireEvent.click(option);
@@ -102,14 +102,37 @@ test('Pressing the number key for a given option index should select it', () => 
     const { container } = setup();
 
     fireEvent.keyDown(container, { key: '1', keyCode: 49 });
-    expect(screen.getByText('あ').parentElement).toHaveClass('selected');
-
-    fireEvent.keyDown(container, { key: '2', keyCode: 50 });
     expect(screen.getByText('い').parentElement).toHaveClass('selected');
 
-    fireEvent.keyDown(container, { key: '3', keyCode: 51 });
+    fireEvent.keyDown(container, { key: '2', keyCode: 50 });
     expect(screen.getByText('え').parentElement).toHaveClass('selected');
 
-    fireEvent.keyDown(container, { key: '4', keyCode: 52 });
+    fireEvent.keyDown(container, { key: '3', keyCode: 51 });
     expect(screen.getByText('お').parentElement).toHaveClass('selected');
+
+    fireEvent.keyDown(container, { key: '4', keyCode: 52 });
+    expect(screen.getByText('あ').parentElement).toHaveClass('selected');
+});
+
+test('Pressing a key that is NOT the index of a displayed kana should not select anything', () => {
+    const { container } = setup();
+
+    fireEvent.keyDown(container, { key: 'a', keyCode: 49 });
+
+    expect(screen.getByText('あ').parentElement).not.toHaveClass('selected');
+    expect(screen.getByText('い').parentElement).not.toHaveClass('selected');
+    expect(screen.getByText('え').parentElement).not.toHaveClass('selected');
+    expect(screen.getByText('お').parentElement).not.toHaveClass('selected');
+});
+
+test('Passing 6 kana should place them in columns with a width of 4 on large viewports', () => {
+    props.expected = a;
+    props.wrong = [i, e, o, i, e];
+    const { container } = setup();
+    expect(container?.firstChild?.childNodes[1].firstChild).toHaveClass('col-lg-4');
+});
+
+test('Passing less than 6 kana should place them in columns with a width of 6 on large viewports', () => {
+    const { container } = setup();
+    expect(container?.firstChild?.childNodes[1].firstChild).toHaveClass('col-lg-6');
 });

@@ -1,9 +1,12 @@
+@import "src/styles/sass/mixins";
+
 .icon {
   color: #f12f2f;;
   margin-right: 3px;
 }
 
 .quantity {
+  @include noSelect;
   color: #FFF;
   margin-left: 3px;
   font-family: "Ciutadella Rounded Medium", sans-serif;
