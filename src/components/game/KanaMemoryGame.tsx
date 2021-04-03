@@ -25,6 +25,7 @@ import SkipButton from "../ui/SkipButton";
 import ConfirmModal from "../ui/ConfirmModal";
 import styles from "../../styles/sass/components/game/KanaMemoryGame.module.scss";
 import { Environment } from "../../utility/Environment";
+import ScoreDisplay from "../ui/ScoreDisplay";
 
 export interface KanaQuestionProps {
     isValid: (valid: boolean) => void;
@@ -50,6 +51,7 @@ interface KanaMemoryGameState {
     hints: number;
     hasUsedHintThisQuestion: boolean;
     isQuitting: boolean;
+    score: number;
 }
 
 class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState> {
@@ -80,7 +82,8 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
             hasValidAnswer: false,
             hints: settings.hints.quantity?.valueOf() ?? 0,
             hasUsedHintThisQuestion: false,
-            isQuitting: false
+            isQuitting: false,
+            score: 0
         }
     }
 
@@ -110,7 +113,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     render() {
-        const { hasExhaustedKana, lives, remainingKana, hasValidAnswer, paused, hints, currentKana, isQuitting } = this.state;
+        const { hasExhaustedKana, lives, remainingKana, hasValidAnswer, paused, hints, currentKana, isQuitting, score } = this.state;
         const { kana, settings } = this.props;
 
         return (
@@ -124,16 +127,23 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
 
                 <Row noGutters className={styles.header}>
                     <Col xs={12}>
-                        <SessionProgressBar
-                            inProgress={!hasExhaustedKana}
-                            quantity={kana.length}
-                            remaining={remainingKana.length}
-                            className={styles.progress}
-                        />
+                        <Row>
+                            <Col className={styles.quitWrapper}>
+                                <QuitButton onClick={this.onClickQuit} className={styles.quit} />
+                            </Col>
+                            <Col className={styles.progressWrapper}>
+                                <SessionProgressBar
+                                    inProgress={!hasExhaustedKana}
+                                    quantity={kana.length}
+                                    remaining={remainingKana.length}
+                                    className={styles.progress}
+                                />
+                            </Col>
+                        </Row>
                     </Col>
 
                     <Col>
-                        <QuitButton onClick={this.onClickQuit} className={styles.quit} />
+                        <ScoreDisplay value={score} className={styles.score} />
                     </Col>
 
                     <Col className={styles.lifeDisplayContainer}>
@@ -300,6 +310,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
             remainingKana: nextRemainingKana,
             hasUsedHintThisQuestion: false,
             hints: hasUsedHintThisQuestion ? hints - 1 : hints,
+            score: this.getScore()
         });
     }
 
@@ -365,6 +376,15 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     private onPaused = () => this.setState({ paused: !this.state.paused });
+
+    private getScore = (): number => {
+        const { score, currentKana } = this.state;
+        if (currentKana.isDiagraph()) {
+            return score + 150;
+        } else {
+            return score + 100;
+        }
+    }
 }
 
 export default KanaMemoryGame;

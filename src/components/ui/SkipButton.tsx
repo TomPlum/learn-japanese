@@ -19,7 +19,6 @@ class SkipButton extends Component<SkipButtonProps> {
             <Button className={[defaultClass, className].join(" ")} onClick={onClick} disabled={disabled} variant="danger">
                 {(size?.width ?? -1) > 105 && <FontAwesomeIcon icon={faForward} data-testid="icon"/>}
                 {' Skip'}
-                {console.log(size)}
             </Button>
         );
     }

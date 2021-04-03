@@ -12,6 +12,5 @@
 
 .time {
   @include noSelect;
-  font-feature-settings: "tnum";
-  font-variant-numeric: tabular-nums;
+  @include evenNumericalSpacing;
 }

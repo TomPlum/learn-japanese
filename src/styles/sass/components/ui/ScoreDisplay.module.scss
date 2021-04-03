@@ -1,0 +1,33 @@
+@import "src/styles/sass/mixins";
+
+.value {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  color: #FFFFFF;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper section {
+  justify-content: start !important;
+  background: rgba(0, 0, 0, 0);
+}
+
+.wrapper section > span {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  color: #FFFFFF;
+  padding: 0;
+  margin: 0 2px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  backface-visibility: hidden;
+  transform: perspective(1px) translateZ(0);
+  @include evenNumericalSpacing;
+  @include noSelect;
+}
+
+.wrapper section > span:first-child {
+  margin-left: 0;
+}
+
+.wrapper section > span:last-child {
+  margin-right: 0;
+}
