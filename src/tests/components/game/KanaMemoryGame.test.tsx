@@ -105,6 +105,27 @@ test('Answering correctly when there are kana remaining should show the next kan
     expect(screen.getByText("い")).toBeInTheDocument();
 });
 
+test('Answering correctly after having used a hint that question should reduce the hint quantity by 1', () => {
+    props.settings.hints = { enabled: true, quantity: 5 }
+    const { submit, hint } = setup();
+
+    fireEvent.click(hint);
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    expect(screen.getByText('(4)')).toBeInTheDocument();
+});
+
+test('Answering correctly without using a hint that question should not reduce the hint quantity', () => {
+    props.settings.hints = { enabled: true, quantity: 5 }
+    const { submit } = setup();
+
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    expect(screen.getByText('(5)')).toBeInTheDocument();
+});
+
 test('Answering correctly should advance the progress bar', () => {
     const { submit } = setup();
 
@@ -404,6 +425,27 @@ test('Failing to correctly answer the question before the countdown finishes sho
     expect(screen.getByText('2')).toBeInTheDocument();
     jest.advanceTimersByTime(3000);
     expect(screen.getByText('5')).toBeInTheDocument();
+});
+
+test('Failing to correctly answer the question before the countdown finishes should reduce the hints if one was used', () => {
+    props.settings.time = { timed: false, countdown: true, secondsPerQuestion: 5 };
+    props.settings.hints = { enabled: true, quantity: 5 };
+    const { hint } = setup();
+
+    expect(screen.getByText('(5)')).toBeInTheDocument();
+    fireEvent.click(hint);
+    jest.advanceTimersByTime(6000);
+    expect(screen.getByText('(4)')).toBeInTheDocument();
+});
+
+test('Failing to correctly answer the question before the countdown finishes should not reduce the hints if they weren\'t used', () => {
+    props.settings.time = { timed: false, countdown: true, secondsPerQuestion: 5 };
+    props.settings.hints = { enabled: true, quantity: 5 };
+    setup();
+
+    expect(screen.getByText('(5)')).toBeInTheDocument();
+    jest.advanceTimersByTime(6000);
+    expect(screen.getByText('(5)')).toBeInTheDocument();
 });
 
 test('Setting the display type as \'Single Kana\' should render a RomanjiQuestion', () => {
