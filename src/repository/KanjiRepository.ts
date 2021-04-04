@@ -13,8 +13,6 @@ export interface KanjiSettings {
 }
 
 export class KanjiRepository {
-
-
     public read(settings?: KanjiSettings): Kanji[] {
         if (!settings) return [];
 

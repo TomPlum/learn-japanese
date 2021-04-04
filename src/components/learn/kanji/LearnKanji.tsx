@@ -39,8 +39,8 @@ class LearnKanji extends Component<LearnKanjiProps, LearnKanjiState> {
                 <Row className={styles.header}>
                     <SessionProgressBar
                         inProgress={hasKanjiRemaining}
-                        value={((kanji.length - remaining.length) / kanji.length) * 100}
-                        title={(kanji.length - remaining.length) + "/" + kanji.length}
+                        quantity={kanji.length}
+                        remaining={remaining.length}
                         className={styles.progress}
                     />
                 </Row>
