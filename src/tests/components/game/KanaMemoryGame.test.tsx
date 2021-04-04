@@ -371,6 +371,33 @@ test('Answering incorrectly should not show the next kana', () => {
     expect(screen.getByText("あ")).toBeInTheDocument();
 });
 
+test('Answering incorrectly when on a streak should reset it', () => {
+    props.kana = Array.from({ length: 9 }).map(() => a);
+    const { submit } = setup();
+
+    //Answering 5 correctly
+    Array.from({ length: 5 }).forEach(() => {
+        fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+        fireEvent.click(submit);
+    });
+    expect(screen.getByText('500')).toBeInTheDocument();
+
+    //Now we're on a 5 streak, answering the next one correct should grant a 1.5x multiplier
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('650')).toBeInTheDocument();
+
+    //No we're on a 6 streak, answering the next one incorrectly should reset the streak and not grant any points
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('650')).toBeInTheDocument();
+
+    //No we're back to a 0 streak, answering the next one correctly should reset the multiplier to 1x
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('750')).toBeInTheDocument();
+});
+
 test('Answering incorrectly with 1 life remaining should call the onFinish event handler', () => {
     props.settings.time = { timed: true, countdown: false };
     props.settings.lives = { enabled: true, quantity: 1 };
