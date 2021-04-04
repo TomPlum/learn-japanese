@@ -1,4 +1,4 @@
-export enum GameType {
+export enum Topic {
     KANA = "Hiragana & Katakana",
     NUMBERS = "Numbers & Counting",
     KANJI = "Jōyō Kanji",

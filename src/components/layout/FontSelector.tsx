@@ -48,7 +48,7 @@ class FontSelector extends Component<FontSelectorProps, FontSelectorState> {
 
     render() {
         const fonts: Font[] = [
-            { displayName: "Ciutadella", name: "Ciutadella Rounded"},
+            { displayName: "Ciutadella", name: "Ciutadella Rounded Medium"},
             { displayName: "Montserrat", name: "Montserrat"},
             { displayName: "Segoe UI", name: "Segoe UI"},
         ];
@@ -91,8 +91,8 @@ class FontSelector extends Component<FontSelectorProps, FontSelectorState> {
     }
 
     private handleSelect = (value: string | null) => {
-        this.setState({ selected: value ?? "Unknown" });
-        if (value) this.props.onSelect(value);
+        this.setState({ selected: value! });
+        this.props.onSelect(value!);
     }
 }
 

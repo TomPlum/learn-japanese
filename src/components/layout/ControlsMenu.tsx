@@ -6,9 +6,17 @@ import FontSelector from "./FontSelector";
 import HashLink from "./HashLink";
 import ThemeButton from "../ui/ThemeButton";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
+import AppModeButton from "../ui/AppModeButton";
+import { AppMode } from "../../types/AppMode";
 
-class ControlsMenu extends Component {
+export interface ControlsMenuProps {
+    onChangeAppMode: (mode: AppMode) => void;
+    active: boolean;
+}
+
+class ControlsMenu extends Component<ControlsMenuProps> {
     render() {
+        const { onChangeAppMode, active } = this.props;
         return (
             <Navbar variant="dark" fixed="top" className={styles.navbar}>
                 <Container className={styles.innerWrapper} fluid>
@@ -21,6 +29,10 @@ class ControlsMenu extends Component {
                                     </div>
                                     <span className={styles.linkText}>Home</span>
                                 </HashLink>
+                            </Col>
+
+                            <Col>
+                                <AppModeButton className={styles.navLink} onClick={onChangeAppMode} disabled={!active} />
                             </Col>
 
                             <Col>

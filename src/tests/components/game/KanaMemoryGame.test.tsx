@@ -8,6 +8,7 @@ import { KanaColumn } from "../../../types/KanaColumn";
 import Arrays from "../../../utility/Arrays";
 import { FailureReason } from "../../../types/FailureReason";
 import { Environment } from "../../../utility/Environment";
+import { v4 } from "uuid";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -21,6 +22,7 @@ const environment = jest.fn();
 //Test Kana (Extracted here for reference equality purposes)
 const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const i = new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+const u = new Kana("う", ["u"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const e = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const o = new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 
@@ -28,7 +30,7 @@ let props: KanaMemoryGameProps;
 
 beforeEach(() => {
     props = {
-        kana: [a, i, e, o],
+        kana: [a, i, u, e, o],
         settings: {
             display: { type: DisplayType.ROMAJI, cards: 1 },
             kana: { hiragana: true },
@@ -37,6 +39,7 @@ beforeEach(() => {
             time: { timed: false, countdown: false }
         },
         onFinish: onFinishHandler,
+        sessionKey: v4()
     };
 
     //Mocked Static Functions
@@ -47,8 +50,10 @@ beforeEach(() => {
 
     //Always returns the first element so it is deterministic
     getRandomObject.mockImplementation((array: any[]) => {
-        const element = array.splice(0, 1)[0];
-        return [element, array];
+        const objects = [...array];
+        const firstKana = objects[0];
+        objects.splice(0, 1);
+        return [firstKana, objects];
     });
 
     //Always returns the array in the same order so it doesn't shuffle
@@ -101,16 +106,149 @@ test('Answering correctly when there are kana remaining should show the next kan
     expect(screen.getByText("い")).toBeInTheDocument();
 });
 
-//TODO: Something is happening with props in the test... thinks kana is only 2 in length?
-test.skip('Answering correctly should advance the progress bar', () => {
-    const { submit } = setup();
+test('Answering correctly after having used a hint that question should reduce the hint quantity by 1', () => {
+    props.settings.hints = { enabled: true, quantity: 5 }
+    const { submit, hint } = setup();
 
-    expect(screen.getByTitle('1/4')).toBeInTheDocument();
+    fireEvent.click(hint);
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    expect(screen.getByText('(4)')).toBeInTheDocument();
+});
+
+test('Answering correctly without using a hint that question should not reduce the hint quantity', () => {
+    props.settings.hints = { enabled: true, quantity: 5 }
+    const { submit } = setup();
 
     fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
-    expect(screen.getByTitle('2/4')).toBeInTheDocument();
+    expect(screen.getByText('(5)')).toBeInTheDocument();
+});
+
+test('Answering correctly should advance the progress bar', () => {
+    const { submit } = setup();
+
+    expect(screen.getByTitle('1/5')).toBeInTheDocument();
+
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    expect(screen.getByTitle('2/5')).toBeInTheDocument();
+});
+
+test('Answering regular kana correctly should increase the score by 100 each', () => {
+    const { submit } = setup();
+
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('100')).toBeInTheDocument();
+
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('200')).toBeInTheDocument();
+});
+
+test('Answering multiple correctly consecutively should start a streak', () => {
+    props.kana = [a, i, u, e, o, a]; //Add 6 kana so answering the 5th doesn't end the game
+    const { submit } = setup();
+
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
+    fireEvent.click(submit);
+
+    fireEvent.change(getRomajiInput(), { target: { value: 'u' } });
+    fireEvent.click(submit);
+
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
+    fireEvent.click(submit);
+
+    fireEvent.change(getRomajiInput(), { target: { value: 'o' } });
+    fireEvent.click(submit);
+
+    expect(screen.getByText('5 streak!')).toBeInTheDocument();
+});
+
+test('Answering a diagraph correctly should give 150 points', () => {
+    const diagraph = new Kana("ぴょ", ["pyo"], KanaType.HIRAGANA, KanaColumn.H, true);
+    props.kana = [diagraph, a, e];
+    const { submit } = setup();
+
+    fireEvent.change(getRomajiInput(), { target: { value: 'pyo' } });
+    fireEvent.click(submit);
+
+    expect(screen.getByText('150')).toBeInTheDocument();
+});
+
+test('Answering correctly on a streak of 5 should grant a 1.5x multiplier', () => {
+    props.kana = Array.from({ length: 7 }).map(() => a);
+    const { submit } = setup();
+
+    //Answering 5 correctly
+    Array.from({ length: 5 }).forEach(() => {
+        fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+        fireEvent.click(submit);
+    });
+    expect(screen.getByText('500')).toBeInTheDocument();
+
+    //Now we're on a 5 streak, answering the next one correct should grant a 1.5x multiplier
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('650')).toBeInTheDocument();
+});
+
+test('Answering correctly on a streak of 10 should grant a 2x multiplier', () => {
+    props.kana = Array.from({ length: 12 }).map(() => a);
+    const { submit } = setup();
+
+    //Answering 10 correctly
+    Array.from({ length: 10 }).forEach(() => {
+        fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+        fireEvent.click(submit);
+    });
+    expect(screen.getByText('1250')).toBeInTheDocument();
+
+    //Now we're on a 10 streak, answering the next one correct should grant a 2x multiplier
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('1450')).toBeInTheDocument();
+});
+
+test('Answering correctly on a streak of 25 should grant a 3x multiplier', () => {
+    props.kana = Array.from({ length: 27 }).map(() => a);
+    const { submit } = setup();
+
+    //Answering 25 correctly
+    Array.from({ length: 25 }).forEach(() => {
+        fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+        fireEvent.click(submit);
+    });
+    expect(screen.getByText('4250')).toBeInTheDocument();
+
+    //Now we're on a 25 streak, answering the next one correct should grant a 3x multiplier
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('4550')).toBeInTheDocument();
+});
+
+test('Answering correctly on a streak of 50 should grant a 4x multiplier', () => {
+    props.kana = Array.from({ length: 52 }).map(() => a);
+    const { submit } = setup();
+
+    //Answering 50 correctly
+    Array.from({ length: 50 }).forEach(() => {
+        fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+        fireEvent.click(submit);
+    });
+    expect(screen.getByText('11750')).toBeInTheDocument();
+
+    //Now we're on a 50 streak, answering the next one correct should grant a 4x multiplier
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('12150')).toBeInTheDocument();
 });
 
 test('Answering all questions correctly should stop the timer', () => {
@@ -129,17 +267,22 @@ test('Answering all questions correctly should stop the timer', () => {
 
     //Answer 3rd correctly
     jest.advanceTimersByTime(2000);
-    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'u' } });
     fireEvent.click(submit);
 
     //Answer 4th correctly
+    jest.advanceTimersByTime(2000);
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
+    fireEvent.click(submit);
+
+    //Answer 5th correctly
     jest.advanceTimersByTime(15000);
     fireEvent.change(getRomajiInput(), { target: { value: 'o' } });
     fireEvent.click(submit);
 
     //Advancing the timer to prove the timer has stopped
     jest.advanceTimersByTime(10000);
-    expect(screen.getByText('00:25')).toBeInTheDocument();
+    expect(screen.getByText('00:27')).toBeInTheDocument();
 });
 
 test('Answering all questions correctly should stop call the onFinish even handler with the game result', () => {
@@ -159,10 +302,15 @@ test('Answering all questions correctly should stop call the onFinish even handl
 
     //Answer 3rd correctly
     jest.advanceTimersByTime(2000);
-    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'u' } });
     fireEvent.click(submit);
 
     //Answer 4th correctly
+    jest.advanceTimersByTime(5000);
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
+    fireEvent.click(submit);
+
+    //Answer 5th correctly
     jest.advanceTimersByTime(15000);
     fireEvent.change(getRomajiInput(), { target: { value: 'o' } });
     fireEvent.click(submit);
@@ -171,35 +319,35 @@ test('Answering all questions correctly should stop call the onFinish even handl
         reason: undefined,
         success: true,
         livesRemaining: 5,
-        totalKanaOffered: 0, //TODO: This should be 4. Tested manually and working.
-        correctAnswers: new Set([a, i, e, o]),
+        totalKanaOffered: 5,
+        correctAnswers: new Set([a, i, u, e, o]),
         wrongAnswers: [],
-        duration: "00:25"
+        duration: "00:30"
     });
 });
 
-test('Answering all questions correctly should stop call the onFinish even handler with undefined time if no timer', () => {
+test('Answering all questions correctly should call the onFinish even handler with undefined time if no timer', () => {
     props.settings.time = { timed: false, countdown: false };
     props.settings.lives = { enabled: true, quantity: 5 };
     const { submit } = setup();
 
     //Answer 1st correctly
-    jest.advanceTimersByTime(5000);
     fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
     //Answer 2nd correctly
-    jest.advanceTimersByTime(3000);
     fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
     fireEvent.click(submit);
 
     //Answer 3rd correctly
-    jest.advanceTimersByTime(2000);
-    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
+    fireEvent.change(getRomajiInput(), { target: { value: 'u' } });
     fireEvent.click(submit);
 
     //Answer 4th correctly
-    jest.advanceTimersByTime(15000);
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
+    fireEvent.click(submit);
+
+    //Answer 5th correctly
     fireEvent.change(getRomajiInput(), { target: { value: 'o' } });
     fireEvent.click(submit);
 
@@ -207,8 +355,8 @@ test('Answering all questions correctly should stop call the onFinish even handl
         reason: undefined,
         success: true,
         livesRemaining: 5,
-        totalKanaOffered: 0, //TODO: This should be 4. Tested manually and working.
-        correctAnswers: new Set([a, i, e, o]),
+        totalKanaOffered: 5,
+        correctAnswers: new Set([a, i, u, e, o]),
         wrongAnswers: [],
         duration: undefined
     });
@@ -221,6 +369,33 @@ test('Answering incorrectly should not show the next kana', () => {
     fireEvent.click(submit);
 
     expect(screen.getByText("あ")).toBeInTheDocument();
+});
+
+test('Answering incorrectly when on a streak should reset it', () => {
+    props.kana = Array.from({ length: 9 }).map(() => a);
+    const { submit } = setup();
+
+    //Answering 5 correctly
+    Array.from({ length: 5 }).forEach(() => {
+        fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+        fireEvent.click(submit);
+    });
+    expect(screen.getByText('500')).toBeInTheDocument();
+
+    //Now we're on a 5 streak, answering the next one correct should grant a 1.5x multiplier
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('650')).toBeInTheDocument();
+
+    //No we're on a 6 streak, answering the next one incorrectly should reset the streak and not grant any points
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('650')).toBeInTheDocument();
+
+    //No we're back to a 0 streak, answering the next one correctly should reset the multiplier to 1x
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('750')).toBeInTheDocument();
 });
 
 test('Answering incorrectly with 1 life remaining should call the onFinish event handler', () => {
@@ -247,9 +422,9 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
         reason: FailureReason.NO_LIVES_REMAINING,
         success: false,
         livesRemaining: 0,
-        totalKanaOffered: 1, //TODO: This should be 4. Tested manually and working.
+        totalKanaOffered: 5,
         correctAnswers: new Set([a, i]),
-        wrongAnswers: [e],
+        wrongAnswers: [u],
         duration: "00:12"
     });
 });
@@ -275,9 +450,9 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
         reason: FailureReason.NO_LIVES_REMAINING,
         success: false,
         livesRemaining: 0,
-        totalKanaOffered: 1, //TODO: This should be 4. Tested manually and working.
+        totalKanaOffered: 5,
         correctAnswers: new Set([a, i]),
-        wrongAnswers: [e],
+        wrongAnswers: [u],
         duration: undefined
     });
 });
@@ -403,6 +578,27 @@ test('Failing to correctly answer the question before the countdown finishes sho
     expect(screen.getByText('5')).toBeInTheDocument();
 });
 
+test('Failing to correctly answer the question before the countdown finishes should reduce the hints if one was used', () => {
+    props.settings.time = { timed: false, countdown: true, secondsPerQuestion: 5 };
+    props.settings.hints = { enabled: true, quantity: 5 };
+    const { hint } = setup();
+
+    expect(screen.getByText('(5)')).toBeInTheDocument();
+    fireEvent.click(hint);
+    jest.advanceTimersByTime(6000);
+    expect(screen.getByText('(4)')).toBeInTheDocument();
+});
+
+test('Failing to correctly answer the question before the countdown finishes should not reduce the hints if they weren\'t used', () => {
+    props.settings.time = { timed: false, countdown: true, secondsPerQuestion: 5 };
+    props.settings.hints = { enabled: true, quantity: 5 };
+    setup();
+
+    expect(screen.getByText('(5)')).toBeInTheDocument();
+    jest.advanceTimersByTime(6000);
+    expect(screen.getByText('(5)')).toBeInTheDocument();
+});
+
 test('Setting the display type as \'Single Kana\' should render a RomanjiQuestion', () => {
     props.settings.display = { type: DisplayType.ROMAJI, cards: 1 };
     setup();
@@ -439,13 +635,15 @@ test('Clicking the quit button should pause the game while the confirmation moda
 
 test('Clicking the \'Yes\' button from the quit confirmation modal should call the onFinish event handler', () => {
     const { quit } = setup();
+
     fireEvent.click(quit);
     fireEvent.click(screen.getByText('Yes'));
+
     expect(onFinishHandler).toHaveBeenCalledWith({
         reason: FailureReason.QUIT,
         success: false,
         livesRemaining: 0,
-        totalKanaOffered: 3, //TODO: Whyyy is this being mutated still!? Should be 4...
+        totalKanaOffered: 5,
         duration: undefined,
         correctAnswers: new Set(),
         wrongAnswers: [a],

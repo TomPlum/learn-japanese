@@ -1,13 +1,13 @@
 import React, { Component, ReactElement } from "react";
-import { GameType } from "../../types/GameType";
+import { Topic } from "../../types/Topic";
 import { ListGroupItem } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/GameTypeMenuListOption.module.scss";
 
 interface GameTypeMenuOptionProps {
-    type?: GameType;
+    type?: Topic;
     text?: string;
-    selected?: GameType;
-    onClick?: (type?: GameType) => void;
+    selected?: Topic;
+    onClick?: (type?: Topic) => void;
     isHeading?: boolean;
 }
 

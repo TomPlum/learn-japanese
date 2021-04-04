@@ -293,7 +293,7 @@ function katakana(): KanaData[] {
         {
             name: "チ",
             code: "\u30C1",
-            romaji: ["ti", "chi"],
+            romaji: ["chi", "ti"],
             column: KanaColumn.T,
             diacritical: false
         },

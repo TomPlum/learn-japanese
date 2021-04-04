@@ -3,22 +3,22 @@ import { Col, Container, Row } from "react-bootstrap";
 import GameResult from "../../types/GameResult";
 import QuitButton from "../ui/QuitButton";
 import Feedback from "./Feedback";
-import styles from "../../styles/sass/components/results/ResultScreen.module.scss";
+import styles from "../../styles/sass/components/results/GameResultScreen.module.scss";
 
-export interface ResultScreenProps {
+export interface GameResultScreenProps {
     onClose: () => void;
     result: GameResult;
 }
 
-class ResultScreen extends Component<ResultScreenProps> {
+class GameResultScreen extends Component<GameResultScreenProps> {
     render() {
         const { result } = this.props;
 
         return (
-            <Container className={styles.wrapper}>
+            <Container className={styles.wrapper} data-testid="game-results-screen">
                 <Row>
                     <Col>
-                        <QuitButton onClick={this.props.onClose} className={styles.close} />
+                        <QuitButton onClick={this.props.onClose} className={styles.close}/>
                     </Col>
                 </Row>
 
@@ -30,7 +30,7 @@ class ResultScreen extends Component<ResultScreenProps> {
                 </Row>
 
                 <Row>
-                    <Feedback kana={result.wrongAnswers} />
+                    <Feedback kana={result.wrongAnswers}/>
                 </Row>
             </Container>
         );
@@ -47,4 +47,4 @@ class ResultScreen extends Component<ResultScreenProps> {
     }
 }
 
-export default ResultScreen;
+export default GameResultScreen;

@@ -1,0 +1,64 @@
+@import "src/styles/sass/mixins.scss";
+@import "src/styles/sass/viewports";
+
+@mixin card {
+  border-radius: 25px;
+  padding: 10px;
+  border-style: solid;
+  perspective: 1000px;
+  background-color: #FFF;
+  width: 100%;
+  cursor: pointer;
+  @include noSelect;
+}
+
+@mixin FlashCardFront {
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@mixin FlashCardBack {
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@mixin FlashCardWrapper {
+  @include phone {
+    .wrapper {
+      @include card;
+      max-width: 450px;
+      min-height: 315px;
+      border-width: 6px;
+    }
+  }
+
+  @include tablet {
+    .wrapper {
+      @include card;
+      max-width: 550px;
+      min-height: 375px;
+      border-width: 8px;
+    }
+  }
+
+  @include desktop {
+    .wrapper {
+      @include card;
+      max-width: 650px;
+      min-height: 450px;
+      border-width: 10px;
+    }
+  }
+}
+
+@mixin KanaFlashCard {
+  .wrapper {
+    border-color: #3a97ff;
+  }
+}

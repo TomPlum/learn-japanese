@@ -7,11 +7,11 @@
 
 .icon {
   margin-right: 5px;
-  margin-bottom: 1px;
+  //margin-bottom: 3px;
 }
 
 .time {
   @include noSelect;
-  font-feature-settings: "tnum";
-  font-variant-numeric: tabular-nums;
+  @include evenNumericalSpacing;
+  margin: 0;
 }

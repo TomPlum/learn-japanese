@@ -80,7 +80,12 @@
 
 @include phone {
   .progress {
-    height: 8px;
+    height: 15px;
+    margin-top: 3px;
+  }
+
+  .quit {
+    font-size: 1.2em;
   }
 
   .lives {
@@ -120,6 +125,10 @@
     font-size: 0.95em;
   }
 
+  .score section > span, .score {
+    font-size: 1.1em !important;
+  }
+
   .romajiDisplay {
     font-size: 8em !important;
   }
@@ -127,11 +136,12 @@
 
 @include tablet {
   .progress {
-    height: 15px;
+    height: 22px;
+    margin-top: 3px;
   }
 
   .quit {
-    font-size: 1.5em;
+    font-size: 1.8em;
   }
 
   .lives {
@@ -167,7 +177,11 @@
 
   .timer {
     @include timer;
-    font-size: 1.5em;
+    font-size: 1.7em;
+  }
+
+  .score section > span, .score {
+    font-size: 1.8em !important;
   }
 
   .romajiDisplay {
@@ -177,11 +191,12 @@
 
 @include desktop {
   .progress {
-    height: 20px;
+    height: 28px;
+    margin-top: 5px;
   }
 
   .quit {
-    font-size: 2em;
+    font-size: 2.4em;
   }
 
   .lives {
@@ -218,7 +233,11 @@
 
   .timer {
     @include timer;
-    font-size: 2em;
+    font-size: 2.2em;
+  }
+
+  .score section > span, .score {
+    font-size: 2.4em;
   }
 
   .romajiDisplay {
@@ -228,4 +247,9 @@
 
 .lifeDisplayContainer {
   text-align: center;
+}
+
+.quitWrapper {
+  flex: 0 0 15px;
+  padding-right: 0;
 }

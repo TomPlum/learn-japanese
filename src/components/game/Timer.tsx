@@ -43,7 +43,7 @@ class Timer extends Component<TimerProps, TimerState> {
         const { className, pausable } = this.props;
 
         return (
-            <span className={[className, styles.wrapper].join(" ")}>
+            <div className={[className, styles.wrapper].join(" ")}>
                 {pausable && !isStopped && <FontAwesomeIcon
                     icon={paused ? faPlay : faPause}
                     className={styles.icon}
@@ -53,7 +53,7 @@ class Timer extends Component<TimerProps, TimerState> {
                     fixedWidth
                 />}
                 <span className={styles.time}>{this.formatTimeElapsed()}</span>
-            </span>
+            </div>
         );
     }
 

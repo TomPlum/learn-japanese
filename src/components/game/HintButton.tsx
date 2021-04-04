@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { faInfinity, faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Button, OverlayTrigger } from "react-bootstrap";
 import PopOver from "../ui/PopOver";
 import { Kana } from "../../types/Kana";
@@ -64,14 +64,13 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
                     {viewport !== Viewport.PHONE &&
                         <>
                             <span className={styles.text}>HINT</span>
-                            <span className={styles.remaining}>({remaining})</span>
+                            <span className={styles.remaining}>{this.getRemaining()}</span>
                         </>
                     }
                 </Button>
             </OverlayTrigger>
         );
     }
-
 
     private getTitle = () => {
         const { remaining, totalQuantity } = this.props;
@@ -103,6 +102,14 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
         }
 
         return message + (kana.isDiacritical ? diacritical : "");
+    }
+
+    private getRemaining = () => {
+        const { remaining } = this.props;
+        if (remaining === 999) {
+            return <FontAwesomeIcon icon={faInfinity} size="sm" />;
+        }
+        return "(" + remaining + ")";
     }
 
     private updateViewport = () => {

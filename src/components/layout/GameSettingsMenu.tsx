@@ -1,22 +1,31 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { GameType } from "../../types/GameType";
+import { Topic } from "../../types/Topic";
 import KanaGameModeMenu from "./KanaGameModeMenu";
 import GameTypeMenu from "./GameTypeMenu";
-import { GameSettings } from "../../types/GameSettings";
+import { GameSettings, KanaSettings } from "../../types/GameSettings";
+import { AppMode } from "../../types/AppMode";
+import LearnKanaMenu from "../learn/LearnKanaMenu";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 
 export interface GameTypeSettings {
-    type: GameType;
-    settings: GameSettings;
+    topic: Topic;
+    settings: GameSettings; //TODO: This will need to be generified to support all topics.
+}
+
+export interface LearnSessionSettings {
+    topic: Topic;
+    settings: KanaSettings; //TODO: This will need to be generified to support all topics.
 }
 
 export interface GameSettingsMenuProps {
-    onStart: (settings: GameTypeSettings) => void;
+    mode: AppMode;
+    onStartGame: (settings: GameTypeSettings) => void;
+    onStartLearn: (settings: LearnSessionSettings) => void;
 }
 
 interface GameSettingsMenuState {
-    selectedGameType: GameType;
+    topic: Topic;
     selectedGameSettings?: GameSettings;
 }
 
@@ -25,20 +34,21 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     constructor(props: Readonly<GameSettingsMenuProps> | GameSettingsMenuProps) {
         super(props);
         this.state = {
-            selectedGameType: GameType.KANA,
+            topic: Topic.KANA,
             selectedGameSettings: undefined
         }
     }
 
     render() {
         return (
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper} data-testid="game-settings-menu">
                 <Container fluid className={styles.innerWrapper}>
                     <Row className={styles.row}>
                         <Col sm={12} md={6} lg={5}>
                             <GameTypeMenu
-                                onSelect={(selected) => this.setState({ selectedGameType: selected })}
+                                onSelect={(selected) => this.setState({ topic: selected })}
                                 className={styles.menu}
+                                appMode={this.props.mode}
                             />
                         </Col>
                         <Col sm={12} md={6} lg={7} className={styles.gameMenuWrapper}>
@@ -51,37 +61,53 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     private getGameMenu = () => {
-        const { selectedGameType } = this.state;
-        switch (selectedGameType) {
-            case GameType.KANA: {
-                return (
-                    <KanaGameModeMenu
-                        onSelectedMode={(mode, settings) => this.handleOnStart(settings)}
-                        className={styles.menu}
-                    />
-                )
+        const { mode } = this.props;
+        const { topic } = this.state;
+        switch (topic) {
+            case Topic.KANA: {
+                switch (mode) {
+                    case AppMode.LEARN: {
+                        return (
+                            <LearnKanaMenu onStart={this.onStartLearning}/>
+                        );
+                    }
+                    case AppMode.PLAY: {
+                        return (
+                            <KanaGameModeMenu
+                                onSelectedMode={(mode, settings) => this.onStartGame(settings)}
+                                className={styles.menu}
+                            />
+                        );
+                    }
+                }
+                break;
             }
-            case GameType.NUMBERS: {
-                return <p className={styles.menu} style={{color: '#FFF'}}>Numbers menu here</p>
+            case Topic.NUMBERS: {
+                return <p className={styles.menu} style={{ color: '#FFF' }}>Numbers menu here</p>
             }
-            case GameType.KANJI: {
-                return <p className={styles.menu} style={{color: '#FFF'}}>Kanji menu here</p>
+            case Topic.KANJI: {
+                return <p className={styles.menu} style={{ color: '#FFF' }}>Kanji menu here</p>
             }
-            case GameType.COLOURS: {
-                return <p className={styles.menu} style={{color: '#FFF'}}>Colours menu here</p>
+            case Topic.COLOURS: {
+                return <p className={styles.menu} style={{ color: '#FFF' }}>Colours menu here</p>
             }
-            case GameType.WEATHER: {
-                return <p className={styles.menu} style={{color: '#FFF'}}>Weather menu here</p>
+            case Topic.WEATHER: {
+                return <p className={styles.menu} style={{ color: '#FFF' }}>Weather menu here</p>
             }
-            case GameType.CALENDAR: {
-                return <p className={styles.menu} style={{color: '#FFF'}}>Calendar menu here</p>
+            case Topic.CALENDAR: {
+                return <p className={styles.menu} style={{ color: '#FFF' }}>Calendar menu here</p>
             }
         }
     }
 
-    private handleOnStart = (settings: GameSettings) => {
-        const { selectedGameType } = this.state;
-        this.props.onStart({ settings: settings, type: selectedGameType });
+    private onStartGame = (settings: GameSettings) => {
+        const { topic } = this.state;
+        this.props.onStartGame({ settings: settings, topic: topic });
+    }
+
+    private onStartLearning = (settings: KanaSettings) => {
+        const { topic } = this.state;
+        this.props.onStartLearn({ topic: topic, settings: settings });
     }
 }
 

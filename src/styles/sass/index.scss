@@ -23,6 +23,10 @@ html, body, #root {
   background-color: $dark-3;
 }
 
+.react-card-flip {
+  width: 100%;
+}
+
 //Center Input Placeholder Text
 ::-webkit-input-placeholder {
   text-align: center;

@@ -3,20 +3,20 @@
 @include desktop {
   .input {
     height: 60px;
-    font-size: 1.2em;
+    font-size: 2em;
   }
 }
 
 @include tablet {
   .input {
-    height: 50px;
-    font-size: 1.2em;
+    height: 60px;
+    font-size: 2em;
   }
 }
 
 @include phone {
   .input {
-    height: 40px;
-    font-size: 1em;
+    height: 50px;
+    font-size: 1.6em;
   }
 }

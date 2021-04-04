@@ -1,0 +1,74 @@
+@import "src/styles/sass/mixins";
+@import "src/styles/sass/colours";
+
+@mixin common {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  color: #FFFFFF;
+  padding: 0;
+  margin: 0;
+  @include noSelect;
+}
+
+.value {
+  @include common;
+  margin-left: -2px;
+}
+
+.streak {
+  @include common;
+  font-size: 60%;
+  animation: streak ease-in-out forwards 4s;
+  color: $streak-gold;
+  margin-left: 5px;
+  margin-bottom: 2px;
+}
+
+@keyframes streak {
+  0% {
+    transform: translateX(-70px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper section {
+  justify-content: start !important;
+  background: rgba(0, 0, 0, 0);
+}
+
+.wrapper section > span {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  color: #FFFFFF;
+  padding: 0;
+  margin: 0 2px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  backface-visibility: hidden;
+  transform: perspective(1px) translateZ(0);
+  @include evenNumericalSpacing;
+  @include noSelect;
+}
+
+.wrapper section > span:first-child {
+  margin-left: 0;
+}
+
+.wrapper section > span:last-child {
+  margin-right: 0;
+}

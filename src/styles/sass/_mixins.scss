@@ -17,3 +17,8 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+@mixin evenNumericalSpacing {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}

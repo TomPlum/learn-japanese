@@ -38,7 +38,7 @@ export class DynamicCharacter extends Component<DynamicCharacterProps> {
         return typeof classes === "string" ? classes : classes?.join(" ") ?? undefined;
     }
 
-    private getSize = (): string => {
+    private getSize = (): string | undefined => {
         switch (this.props.style?.size) {
             case "xs":
                 return "2.5em";
@@ -51,7 +51,7 @@ export class DynamicCharacter extends Component<DynamicCharacterProps> {
             case "xl":
                 return "10em";
             default:
-                return "1em";
+                return undefined;
         }
     }
 

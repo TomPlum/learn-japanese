@@ -291,7 +291,7 @@ function hiragana(): KanaData[] {
         {
             name: "ち",
             code: "\u3061",
-            romaji: ["ti", "chi"],
+            romaji: ["chi", "ti"],
             column: KanaColumn.T,
             diacritical: false
         },

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Alert, Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { GameMode } from "../../types/GameMode";
 import { faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,8 @@ import { GameSettings } from "../../types/GameSettings";
 import { Environment } from "../../utility/Environment";
 import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
+import MenuDescription from "../ui/MenuDescription";
+import StartButton from "../ui/StartButton";
 
 export interface KanaGameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;
@@ -40,9 +42,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
                 {!isCustomisingSettings && <>
                     <Row>
                         <Col>
-                            <Alert className={styles.desc} variant="success">
-                                {this.getSelectedModeDescription()}
-                            </Alert>
+                            <MenuDescription text={this.getSelectedModeDescription()} />
                         </Col>
                     </Row>
                     <Row>
@@ -110,9 +110,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
 
                     <Row>
                         <Col>
-                            <Button variant="success" className={styles.playButton} block onClick={this.confirmSelected}>
-                                <FontAwesomeIcon size="xs" icon={faPlay}/> START
-                            </Button>
+                            <StartButton onClick={this.confirmSelected} />
                         </Col>
                     </Row>
                 </>}

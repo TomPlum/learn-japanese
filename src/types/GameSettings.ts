@@ -29,6 +29,7 @@ export interface KanaSettings {
     hiragana?: boolean;
     katakana?: boolean;
     diagraphs?: boolean;
+    diacriticals?: boolean
     quantity?: number;
 }
 

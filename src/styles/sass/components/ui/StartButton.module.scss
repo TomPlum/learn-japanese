@@ -1,0 +1,33 @@
+@import "src/styles/sass/viewports";
+
+@mixin button {
+  width: 100%;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.5em;
+  padding: 10px 0;
+  text-transform: uppercase;
+}
+
+@include phone {
+  .button {
+    @include button;
+    font-size: 1.2em;
+    padding: 5px 0;
+  }
+}
+
+@include tablet {
+  .button {
+    @include button;
+    font-size: 1.3em;
+    padding: 8px 0;
+  }
+}
+
+@include desktop {
+  .button {
+    @include button;
+    font-size: 1.5em;
+    padding: 10px 0;
+  }
+}

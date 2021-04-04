@@ -10,9 +10,11 @@ import { getByTextWithMarkup } from "../../Queries";
 import { when } from 'jest-when';
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from 'history'
+import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 
 const environment = jest.fn();
 const shuffle = jest.fn();
+const getRandomObject = jest.fn();
 
 const history = createMemoryHistory();
 
@@ -51,9 +53,18 @@ beforeEach(() => {
     }
 
     Arrays.shuffle = shuffle;
-
     shuffle.mockImplementation((array: any[]) => {
         return array;
+    });
+
+
+    //Always returns the first element so it is deterministic
+    RandomNumberGenerator.getRandomObject = getRandomObject;
+    getRandomObject.mockImplementation((array: any[]) => {
+        const objects = [...array];
+        const first = objects[0];
+        objects.splice(0, 1);
+        return [first, objects];
     });
 });
 
@@ -101,8 +112,8 @@ test('Should render the help button', () => {
 });
 
 test('Should render the kana carousel', () => {
-    shuffle.mockReturnValueOnce([new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]); //Parallax BG
-    shuffle.mockReturnValueOnce([ new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]); //Carousel
+    getRandomObject.mockReturnValueOnce([new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false), []]); //Parallax BG
+    getRandomObject.mockReturnValueOnce([ new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false), []]); //Carousel
     setup();
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
