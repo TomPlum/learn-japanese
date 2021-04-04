@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import FlipNumbers from 'react-flip-numbers';
 import styles from "../../styles/sass/components/ui/ScoreDisplay.module.scss";
-import Viewports, { Viewport } from "../../utility/Viewports";
 
 export interface ScoreDisplayProps {
     value: number;
+    streak: number;
     className?: string;
 }
 
 interface ScoreDisplayState {
-    width: number;
+    showingStreak: boolean;
 }
 
 class ScoreDisplay extends Component<ScoreDisplayProps, ScoreDisplayState> {
@@ -18,53 +17,42 @@ class ScoreDisplay extends Component<ScoreDisplayProps, ScoreDisplayState> {
         super(props);
 
         this.state = {
-            width: window.innerWidth
+            showingStreak: false
         }
     }
 
     componentDidMount() {
-        this.updateWidth();
-        window.addEventListener("resize", this.updateWidth);
+        this.setState({ showingStreak: this.hasStreakMilestone() });
     }
 
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.updateWidth);
-    }
-
-    componentDidUpdate(prevProps: Readonly<ScoreDisplayProps>, prevState: Readonly<ScoreDisplayState>) {
-        if (prevState.width !== this.state.width) {
-            this.updateWidth();
+    componentDidUpdate(prevProps: Readonly<ScoreDisplayProps>) {
+        if (prevProps.streak !==  this.props.streak) {
+            this.setState({ showingStreak: this.hasStreakMilestone() });
         }
     }
 
     render() {
-        const { value, className } = this.props;
-        const size = this.getValueSize();
+        const { value, className, streak } = this.props;
+        const { showingStreak } = this.state;
+
         return (
-            <div className={[className, styles.wrapper].join(" ")}>
-                <FlipNumbers play numbers={value.toString()} width={size.width} height={size.height} />
+            <div className={[styles.wrapper, className].join(" ")}>
+                <span className={styles.value} title="Score">{value}</span>
+                {this.hasStreakMilestone() && showingStreak &&
+                    <span className={styles.streak} onAnimationEnd={this.onStreakAnimationEnd}>
+                        {streak + " streak!"}
+                    </span>
+                }
             </div>
 
         );
     }
 
-    private getValueSize = (): { width: number, height: number } => {
-        const { width } = this.state;
-        switch (Viewports.fromWidth(width)) {
-            case Viewport.PHONE: {
-                return { width: 10, height: 20 };
-            }
-            case Viewport.TABLET: {
-                return { width: 12, height: 30 };
-            }
-            case Viewport.DESKTOP: {
-                return { width: 20, height: 35 };
-            }
-        }
-    }
+    private onStreakAnimationEnd = () => this.setState({ showingStreak: false });
 
-    private updateWidth = () => {
-        this.setState({ width: window.innerWidth });
+    private hasStreakMilestone = (): boolean => {
+        const { streak } = this.props;
+        return streak !== 0 && streak % 5 === 0;
     }
 }
 

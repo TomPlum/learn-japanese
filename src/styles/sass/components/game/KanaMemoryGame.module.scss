@@ -125,8 +125,8 @@
     font-size: 0.95em;
   }
 
-  .score section > span {
-    font-size: 1em !important;
+  .score section > span, .score {
+    font-size: 1.1em !important;
   }
 
   .romajiDisplay {
@@ -177,11 +177,11 @@
 
   .timer {
     @include timer;
-    font-size: 1.5em;
+    font-size: 1.7em;
   }
 
-  .score section > span {
-    font-size: 1.5em !important;
+  .score section > span, .score {
+    font-size: 1.8em !important;
   }
 
   .romajiDisplay {
@@ -233,10 +233,10 @@
 
   .timer {
     @include timer;
-    font-size: 2em;
+    font-size: 2.2em;
   }
 
-  .score section > span {
+  .score section > span, .score {
     font-size: 2.4em;
   }
 

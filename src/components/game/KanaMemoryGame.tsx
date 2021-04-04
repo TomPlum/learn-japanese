@@ -52,6 +52,7 @@ interface KanaMemoryGameState {
     hasUsedHintThisQuestion: boolean;
     isQuitting: boolean;
     score: number;
+    streak: number;
 }
 
 class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState> {
@@ -83,7 +84,8 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
             hints: settings.hints.quantity?.valueOf() ?? 0,
             hasUsedHintThisQuestion: false,
             isQuitting: false,
-            score: 0
+            score: 0,
+            streak: 0
         }
     }
 
@@ -113,7 +115,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     render() {
-        const { hasExhaustedKana, lives, remainingKana, hasValidAnswer, paused, hints, currentKana, isQuitting, score } = this.state;
+        const { hasExhaustedKana, lives, remainingKana, hasValidAnswer, paused, hints, currentKana, isQuitting, score, streak } = this.state;
         const { kana, settings } = this.props;
 
         return (
@@ -137,13 +139,14 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                                     quantity={kana.length}
                                     remaining={remainingKana.length}
                                     className={styles.progress}
+                                    streak={streak}
                                 />
                             </Col>
                         </Row>
                     </Col>
 
                     <Col>
-                        <ScoreDisplay value={score} className={styles.score} />
+                        <ScoreDisplay value={score} streak={streak} className={styles.score} />
                     </Col>
 
                     <Col className={styles.lifeDisplayContainer}>
@@ -269,6 +272,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
             this.setState({
                 lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives,
                 wrongAnswers: wrongAnswers.concat(currentKana),
+                streak: 0
             });
         }
 
@@ -296,7 +300,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     private advanceNextQuestion() {
-        const { remainingKana, hasUsedHintThisQuestion, hints } = this.state;
+        const { remainingKana, hasUsedHintThisQuestion, hints, streak } = this.state;
 
         //If we're being timed per kana, reset the timer.
         this.countdown.current?.reset();
@@ -310,7 +314,8 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
             remainingKana: nextRemainingKana,
             hasUsedHintThisQuestion: false,
             hints: hasUsedHintThisQuestion ? hints - 1 : hints,
-            score: this.getScore()
+            score: this.getScore(),
+            streak: streak + 1
         });
     }
 
@@ -378,11 +383,12 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     private onPaused = () => this.setState({ paused: !this.state.paused });
 
     private getScore = (): number => {
-        const { score, currentKana } = this.state;
+        const { score, streak, currentKana } = this.state;
+        const multiplier = streak >= 50 ? 4 : streak >= 25 ? 3 : streak >= 10 ? 2 : streak >= 5 ? 1.5 : 1;
         if (currentKana.isDiagraph()) {
-            return score + 150;
+            return score + 150 * multiplier;
         } else {
-            return score + 100;
+            return score + 100 * multiplier;
         }
     }
 }

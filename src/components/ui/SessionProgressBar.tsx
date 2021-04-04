@@ -7,11 +7,12 @@ interface SessionProgressBarProps {
     quantity: number;
     remaining: number;
     className?: string;
+    streak?: number;
 }
 
 class SessionProgressBar extends Component<SessionProgressBarProps> {
     render() {
-        const { inProgress, quantity, remaining, className } = this.props
+        const { inProgress, quantity, remaining, className, streak } = this.props
         const barClass = className ? className : styles.bar;
         return (
             <ProgressBar
@@ -19,7 +20,7 @@ class SessionProgressBar extends Component<SessionProgressBarProps> {
                 className={[barClass, styles.default].join(" ")}
                 now={((quantity - remaining) / quantity) * 100}
                 title={(quantity - remaining) + "/" + quantity}
-                variant={remaining === 0 ? "success" : undefined}
+                variant={remaining === 0 ? "success" : (streak ?? 0) >= 5 ? "warning" : undefined}
             />
         );
     }
