@@ -23,9 +23,9 @@ import SubmitButton from "../ui/SubmitButton";
 import HintButton from "./HintButton";
 import SkipButton from "../ui/SkipButton";
 import ConfirmModal from "../ui/ConfirmModal";
-import styles from "../../styles/sass/components/game/KanaMemoryGame.module.scss";
 import { Environment } from "../../utility/Environment";
 import ScoreDisplay from "../ui/ScoreDisplay";
+import styles from "../../styles/sass/components/game/KanaMemoryGame.module.scss";
 
 export interface KanaQuestionProps {
     isValid: (valid: boolean) => void;
