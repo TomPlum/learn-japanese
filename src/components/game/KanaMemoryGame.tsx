@@ -3,7 +3,7 @@ import { Kana } from "../../types/Kana";
 import { ButtonGroup, Col, Container, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import Timer from "./Timer";
-import { GameSettings } from "../../types/GameSettings";
+import { GameSettings, KanaGameSettings } from "../../types/GameSettings";
 import LifeDisplay from "./LifeDisplay";
 import { LifeQuantity } from "../../types/LifeQuantity";
 import QuitButton from "../ui/QuitButton";
@@ -33,7 +33,7 @@ export interface KanaQuestionProps {
 
 export interface KanaMemoryGameProps {
     kana: Kana[];
-    settings: GameSettings;
+    settings: KanaGameSettings;
     onFinish: (result: GameResult) => void;
     sessionKey?: string;
 }

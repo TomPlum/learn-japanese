@@ -3,19 +3,21 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Topic } from "../../types/Topic";
 import KanaGameModeMenu from "./KanaGameModeMenu";
 import GameTypeMenu from "./GameTypeMenu";
-import { GameSettings, KanaSettings } from "../../types/GameSettings";
+import { GameSettings } from "../../types/GameSettings";
 import { AppMode } from "../../types/AppMode";
 import LearnKanaMenu from "../learn/LearnKanaMenu";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
+import LearnCalendarMenu from "../learn/LearnCalendarMenu";
+import { LearnSettings } from "../../types/LearnSettings";
 
 export interface GameTypeSettings {
     topic: Topic;
-    settings: GameSettings; //TODO: This will need to be generified to support all topics.
+    settings: GameSettings;
 }
 
 export interface LearnSessionSettings {
     topic: Topic;
-    settings: KanaSettings; //TODO: This will need to be generified to support all topics.
+    settings: LearnSettings;
 }
 
 export interface GameSettingsMenuProps {
@@ -26,7 +28,8 @@ export interface GameSettingsMenuProps {
 
 interface GameSettingsMenuState {
     topic: Topic;
-    selectedGameSettings?: GameSettings;
+    gameSettings?: GameSettings;
+    learnSettings?: LearnSettings;
 }
 
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
@@ -35,7 +38,8 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
         super(props);
         this.state = {
             topic: Topic.KANA,
-            selectedGameSettings: undefined
+            gameSettings: undefined,
+            learnSettings: undefined
         }
     }
 
@@ -80,7 +84,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                         );
                     }
                 }
-                break;
+                return false;
             }
             case Topic.NUMBERS: {
                 return <p className={styles.menu} style={{ color: '#FFF' }}>Numbers menu here</p>
@@ -95,7 +99,14 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 return <p className={styles.menu} style={{ color: '#FFF' }}>Weather menu here</p>
             }
             case Topic.CALENDAR: {
-                return <p className={styles.menu} style={{ color: '#FFF' }}>Calendar menu here</p>
+                switch (mode) {
+                    case AppMode.LEARN: {
+                        return <LearnCalendarMenu onStart={this.onStartLearning} />
+                    }
+                    case AppMode.PLAY: {
+                        return <p className={styles.menu} style={{ color: '#FFF' }}>Calendar menu here</p>
+                    }
+                }
             }
         }
     }
@@ -105,7 +116,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
         this.props.onStartGame({ settings: settings, topic: topic });
     }
 
-    private onStartLearning = (settings: KanaSettings) => {
+    private onStartLearning = (settings: LearnSettings) => {
         const { topic } = this.state;
         this.props.onStartLearn({ topic: topic, settings: settings });
     }

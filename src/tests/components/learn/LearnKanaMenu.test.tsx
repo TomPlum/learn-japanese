@@ -80,33 +80,37 @@ test('Should default to \'Hiragana\' preset', () => {
 test('Clicking Start with the Hiragana preset selected should call the onStart event handler', () => {
     const { start } = setup();
     fireEvent.click(start);
-    expect(onStartHandler).toHaveBeenCalledWith({ hiragana: true });
+    expect(onStartHandler).toHaveBeenCalledWith({ kana : { hiragana: true } });
 });
 
 test('Clicking Start with the Katakana preset selected should call the onStart event handler', () => {
     const { start, katakana } = setup();
     fireEvent.click(katakana);
     fireEvent.click(start);
-    expect(onStartHandler).toHaveBeenCalledWith({ katakana: true });
+    expect(onStartHandler).toHaveBeenCalledWith({ kana : { katakana: true } });
 });
 
 test('Clicking Start with the Diacriticals preset selected should call the onStart event handler', () => {
     const { start, diacriticals } = setup();
     fireEvent.click(diacriticals);
     fireEvent.click(start);
-    expect(onStartHandler).toHaveBeenCalledWith({ diacriticals: true });
+    expect(onStartHandler).toHaveBeenCalledWith({ kana: { diacriticals: true } });
 });
 
 test('Clicking Start with the Diagraphs preset selected should call the onStart event handler', () => {
     const { start, diagraphs } = setup();
     fireEvent.click(diagraphs);
     fireEvent.click(start);
-    expect(onStartHandler).toHaveBeenCalledWith({ diagraphs: true });
+    expect(onStartHandler).toHaveBeenCalledWith({ kana: { diagraphs: true } });
 });
 
 test('Clicking Start with the All preset selected should call the onStart event handler', () => {
     const { start, all } = setup();
     fireEvent.click(all);
     fireEvent.click(start);
-    expect(onStartHandler).toHaveBeenCalledWith({ hiragana: true, katakana: true, diagraphs: true, diacriticals: true });
+    expect(onStartHandler).toHaveBeenCalledWith({
+        kana: {
+            hiragana: true, katakana: true, diagraphs: true, diacriticals: true
+        }
+    });
 });

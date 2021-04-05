@@ -114,5 +114,18 @@ describe("Kana", () => {
            const other = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, true);
            expect(kana.equals(other)).toBe(false);
        });
-   })
+   });
+
+   describe("Learnable", () => {
+      it("Should return the kana unicode for the question", () => {
+          const kana = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+          const question = kana.getQuestion();
+          expect(question).toBe("え");
+      });
+      it("Should return the kana romaji string for the answer", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+          const question = kana.getAnswer();
+          expect(question).toBe("fu (hu)");
+      });
+   });
 });

@@ -3,14 +3,16 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LearnKanaMode } from "../../types/LearnKanaMode";
+import { LearnCalendarMode } from "../../types/LearnCalendarMode";
 import styles from "../../styles/sass/components/learn/LearnTopicButton.module.scss";
+import { LearnMode } from "../../types/LearningTopic";
 
 export interface LearnTopicButtonProps {
     icon: IconDefinition | string;
     iconColour?: string;
-    type: LearnKanaMode;
-    selected: LearnKanaMode;
-    onClick: (mode: LearnKanaMode) => void;
+    type: LearnMode;
+    selected: LearnMode;
+    onClick: (mode: LearnMode) => void;
 }
 
 class LearnTopicButton extends Component<LearnTopicButtonProps> {

@@ -43,7 +43,8 @@
       "src/**/*.{ts,tsx}",
       "!src/index.tsx",
       "!src/components/ErrorBoundary.tsx",
-      "!src/components/MainErrorBoundary.tsx"
+      "!src/components/MainErrorBoundary.tsx",
+      "!src/components/ErrorContainer.tsx"
     ]
   },
   "browserslist": {

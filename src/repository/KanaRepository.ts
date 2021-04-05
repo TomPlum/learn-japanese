@@ -11,13 +11,13 @@ import KanaTypeFilter from "../filters/kana/KanaTypeFilter";
 
 export class KanaRepository {
 
-    public read(config?: KanaSettings): Kana[] {
+    public read(config: KanaSettings): Kana[] {
         const chain = new FilterChain<Kana>();
 
-        if (!config?.hiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));
-        if (!config?.katakana) chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA));
-        if (!config?.diagraphs) chain.addFilter(new DiagraphFilter());
-        if (config?.quantity) chain.addFilter(new QuantityFilter(config.quantity));
+        if (!config.hiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));
+        if (!config.katakana) chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA));
+        if (!config.diagraphs) chain.addFilter(new DiagraphFilter());
+        if (config.quantity) chain.addFilter(new QuantityFilter(config.quantity));
 
         return chain.execute(this.readAllKana());
     }
