@@ -7,7 +7,6 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
 import ControlsMenu from "../layout/ControlsMenu";
 import GameSettingsMenu, { GameTypeSettings, LearnSessionSettings } from "../layout/GameSettingsMenu";
-import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 import { AppMode } from "../../types/AppMode";
 import { KanaSettings } from "../../types/GameSettings";
 import LearnKana from "../learn/kana/LearnKana";
@@ -15,6 +14,8 @@ import SessionID from "../../types/SessionID";
 import LearningSessionResult from "../../types/LearningSessionResult";
 import LearningResultScreen from "../results/LearningResultScreen";
 import Arrays from "../../utility/Arrays";
+import MainErrorBoundary from "../MainErrorBoundary";
+import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 
 interface GamePageState {
     loading: boolean;
@@ -28,7 +29,7 @@ interface GamePageState {
     mode: AppMode;
 }
 
-class GamePage extends Component<{ }, GamePageState> {
+class GamePage extends Component<{}, GamePageState> {
 
     constructor(props: {} | Readonly<{}>) {
         super(props);
@@ -55,39 +56,45 @@ class GamePage extends Component<{ }, GamePageState> {
 
         return (
             <div className={styles.wrapper}>
-                <LoadingSpinner active={loading}/>
+                <MainErrorBoundary>
+                    <LoadingSpinner active={loading}/>
 
-                <ControlsMenu onChangeAppMode={this.handleChangeAppMode} active={isInMenu} />
+                    <ControlsMenu onChangeAppMode={this.handleChangeAppMode} active={isInMenu}/>
 
-                {isInMenu &&
-                    <GameSettingsMenu onStartGame={this.startGame} onStartLearn={this.startLearning} mode={mode} />
-                }
+                    {isInMenu &&
+                        <GameSettingsMenu
+                            onStartGame={this.startGame}
+                            onStartLearn={this.startLearning}
+                            mode={mode}
+                        />
+                    }
 
-                {gameSettings && kana && !inResultsScreen &&
-                    <KanaMemoryGame
-                        key={sessionKey.value}
-                        sessionKey={sessionKey.value}
-                        kana={kana}
-                        settings={gameSettings.settings}
-                        onFinish={this.onGameFinish}
-                    />
-                }
+                    {gameSettings && kana && !inResultsScreen &&
+                        <KanaMemoryGame
+                            key={sessionKey.value}
+                            sessionKey={sessionKey.value}
+                            kana={kana}
+                            settings={gameSettings.settings}
+                            onFinish={this.onGameFinish}
+                        />
+                    }
 
-                {inResultsScreen && gameResult &&
-                    <GameResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
-                }
+                    {inResultsScreen && gameResult &&
+                        <GameResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
+                    }
 
-                {learnSettings && kana && !inResultsScreen &&
-                    <LearnKana key={sessionKey.value} kana={kana} onFinish={this.onLearningFinish} />
-                }
+                    {learnSettings && kana && !inResultsScreen &&
+                        <LearnKana key={sessionKey.value} kana={kana} onFinish={this.onLearningFinish}/>
+                    }
 
-                {learningResult && inResultsScreen &&
-                    <LearningResultScreen
-                        result={learningResult}
-                        onDismiss={this.onLearningResultMenuClose}
-                        onPractice={this.onPracticeStart}
-                    />
-                }
+                    {learningResult && inResultsScreen &&
+                        <LearningResultScreen
+                            result={learningResult}
+                            onDismiss={this.onLearningResultMenuClose}
+                            onPractice={this.onPracticeStart}
+                        />
+                    }
+                </MainErrorBoundary>
             </div>
         );
     }
@@ -116,7 +123,7 @@ class GamePage extends Component<{ }, GamePageState> {
     });
 
     private onLearningFinish = (result: LearningSessionResult) => {
-        if (result.forgotten.length + result.remembered.length > 0){
+        if (result.forgotten.length + result.remembered.length > 0) {
             this.setState({ learningResult: result, inResultsScreen: true });
         } else {
             this.onLearningResultMenuClose();

@@ -11,6 +11,10 @@ export interface LearningFeedbackButtonProps {
     onClick: () => void;
 }
 
+export enum LearningFeedback {
+    REMEMBERED, FORGOT
+}
+
 class LearningFeedbackButton extends Component<LearningFeedbackButtonProps> {
     render() {
         const { type, disabled, active, onClick } = this.props;
@@ -49,10 +53,6 @@ class LearningFeedbackButton extends Component<LearningFeedbackButtonProps> {
             case LearningFeedback.FORGOT: return "I couldn't remember it";
         }
     }
-}
-
-export enum LearningFeedback {
-    REMEMBERED, FORGOT
 }
 
 export default LearningFeedbackButton;

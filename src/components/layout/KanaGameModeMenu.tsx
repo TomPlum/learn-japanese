@@ -1,17 +1,16 @@
 import { Component } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { GameMode } from "../../types/GameMode";
-import { faFire, faFont, faGraduationCap, faPlay, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFire, faFont, faGraduationCap, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import GameModeButton from "./GameModeButton";
 import KanaGameSettingsMenu from "../settings/KanaGameSettingsMenu";
 import { HARDCORE, KANA, RELAXED, ROMAJI, TIME_ATTACK } from "../../data/GameModePresets";
 import { GameSettings } from "../../types/GameSettings";
 import { Environment } from "../../utility/Environment";
-import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
 import MenuDescription from "../ui/MenuDescription";
 import StartButton from "../ui/StartButton";
+import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
 
 export interface KanaGameModeMenuProps {
     onSelectedMode: (mode: GameMode, settings: GameSettings) => void;
