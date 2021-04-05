@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { KanaRepository } from "../../repository/KanaRepository";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import styles from "../../styles/sass/components/pages/SearchPage.module.scss";
-import KanaType from "../../types/KanaType";
+import KanaType from "../../types/kana/KanaType";
 import KanaGrid from "../layout/KanaGrid";
 import SearchField from "../ui/SearchField";
 import FilterChain from "../../filters/FilterChain";

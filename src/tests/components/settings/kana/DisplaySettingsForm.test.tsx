@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import DisplaySettingsForm from "../../../../components/settings/kana/DisplaySettingsForm";
-import { DisplayType } from "../../../../types/DisplayType";
+import { DisplayType } from "../../../../types/game/DisplayType";
 import { Environment } from "../../../../utility/Environment";
 
 const onSelectHandler = jest.fn();

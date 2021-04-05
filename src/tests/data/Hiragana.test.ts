@@ -1,6 +1,6 @@
 import hiragana from "../../data/Hiragana";
 import each from "jest-each";
-import { KanaColumn } from "../../types/KanaColumn";
+import { KanaColumn } from "../../types/kana/KanaColumn";
 import { KanaData } from "../../data/DataTypes";
 
 describe("Hiragana", () => {

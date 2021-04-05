@@ -2,7 +2,7 @@ import React from "react";
 import KanaDisplay, { KanaDisplayStyle } from "./KanaDisplay";
 import { Col, Form, Row } from "react-bootstrap";
 import RomajiInput from "./RomajiInput";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import { KanaQuestionProps } from "./KanaMemoryGame";
 import KanaQuestion from "./KanaQuestion";
 import styles from "../../styles/sass/components/game/RomajiQuestion.module.scss";

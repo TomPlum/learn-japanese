@@ -1,5 +1,5 @@
 import React from "react";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import Arrays from "../../utility/Arrays";
 import KanaDisplay from "./KanaDisplay";
 import { Col, Row } from "react-bootstrap";

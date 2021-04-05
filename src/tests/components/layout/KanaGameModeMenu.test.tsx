@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanaGameModeMenu from "../../../components/layout/KanaGameModeMenu";
 import { HARDCORE, KANA, RELAXED, ROMAJI, TIME_ATTACK } from "../../../data/GameModePresets";
-import { GameMode } from "../../../types/GameMode";
+import { KanaGameMode } from "../../../types/game/mode/KanaGameMode";
 import { Environment } from "../../../utility/Environment";
 
 const onSelectModeHandler = jest.fn();
@@ -32,35 +32,35 @@ afterEach(() => {
 test('On mount it should select \'Relaxed\' mode by default', () => {
     const { start } = setup();
     fireEvent.click(start);
-    expect(onSelectModeHandler).toHaveBeenCalledWith(GameMode.RELAXED, RELAXED);
+    expect(onSelectModeHandler).toHaveBeenCalledWith(KanaGameMode.RELAXED, RELAXED);
 });
 
 test('Selecting \'Time Attack\' mode and starting should call the onSelectMode event handler', () => {
     const { start, timeAttack } = setup();
     fireEvent.click(timeAttack);
     fireEvent.click(start);
-    expect(onSelectModeHandler).toHaveBeenCalledWith(GameMode.TIME_ATTACK, TIME_ATTACK);
+    expect(onSelectModeHandler).toHaveBeenCalledWith(KanaGameMode.TIME_ATTACK, TIME_ATTACK);
 });
 
 test('Selecting \'Rōmaji\' mode and starting should call the onSelectMode event handler', () => {
     const { start, romaji } = setup();
     fireEvent.click(romaji);
     fireEvent.click(start);
-    expect(onSelectModeHandler).toHaveBeenCalledWith(GameMode.ROMAJI, ROMAJI);
+    expect(onSelectModeHandler).toHaveBeenCalledWith(KanaGameMode.ROMAJI, ROMAJI);
 });
 
 test('Selecting \'Kana\' mode and starting should call the onSelectMode event handler', () => {
     const { start, kana } = setup();
     fireEvent.click(kana);
     fireEvent.click(start);
-    expect(onSelectModeHandler).toHaveBeenCalledWith(GameMode.KANA, KANA);
+    expect(onSelectModeHandler).toHaveBeenCalledWith(KanaGameMode.KANA, KANA);
 });
 
 test('Selecting \'Hardcore\' mode and starting should call the onSelectMode event handler', () => {
     const { start, hardcore } = setup();
     fireEvent.click(hardcore);
     fireEvent.click(start);
-    expect(onSelectModeHandler).toHaveBeenCalledWith(GameMode.HARDCORE, HARDCORE);
+    expect(onSelectModeHandler).toHaveBeenCalledWith(KanaGameMode.HARDCORE, HARDCORE);
 });
 
 //TODO: Why is this not calling the event handler?
@@ -69,7 +69,7 @@ test.skip('Selecting \'Custom\' mode and selecting should call the onSelectMode 
     fireEvent.click(custom);
     fireEvent.click(screen.getByText('Confirm'));
     fireEvent.click(start);
-    expect(onSelectModeHandler).toHaveBeenCalledWith(GameMode.CUSTOM, RELAXED);
+    expect(onSelectModeHandler).toHaveBeenCalledWith(KanaGameMode.CUSTOM, RELAXED);
 });
 
 test('Selecting \'Relaxed\' mode should load the description from the environment variables', () => {

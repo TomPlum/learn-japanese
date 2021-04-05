@@ -3,7 +3,7 @@ import GamePage from "../../../components/pages/GamePage";
 import hiragana from "../../../data/Hiragana";
 import { KanaData } from "../../../data/DataTypes";
 import katakana from "../../../data/Katakana";
-import { KanaColumn } from "../../../types/KanaColumn";
+import { KanaColumn } from "../../../types/kana/KanaColumn";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 
 

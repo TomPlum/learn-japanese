@@ -1,9 +1,9 @@
-import { Kana } from "../types/Kana";
+import { Kana } from "../types/kana/Kana";
 import hiragana from "../data/Hiragana";
 import katakana from "../data/Katakana";
-import KanaType from "../types/KanaType";
+import KanaType from "../types/kana/KanaType";
 import { KanaData } from "../data/DataTypes";
-import { KanaSettings } from "../types/GameSettings";
+import { KanaSettings } from "../types/game/GameSettings";
 import DiagraphFilter from "../filters/kana/DiagraphFilter";
 import FilterChain from "../filters/FilterChain";
 import QuantityFilter from "../filters/kana/QuantityFilter";

@@ -1,7 +1,7 @@
-import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../types/GameSettings";
-import { HintQuantity } from "../types/HintQuantity";
-import { LifeQuantity } from "../types/LifeQuantity";
-import { DisplayType } from "../types/DisplayType";
+import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../types/game/GameSettings";
+import { HintQuantity } from "../types/game/HintQuantity";
+import { LifeQuantity } from "../types/game/LifeQuantity";
+import { DisplayType } from "../types/game/DisplayType";
 
 // Default Settings
 export const defaultDisplaySettings: DisplaySettings = {

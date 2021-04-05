@@ -3,12 +3,12 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Topic } from "../../types/Topic";
 import KanaGameModeMenu from "./KanaGameModeMenu";
 import GameTypeMenu from "./GameTypeMenu";
-import { GameSettings } from "../../types/GameSettings";
+import { GameSettings } from "../../types/game/GameSettings";
 import { AppMode } from "../../types/AppMode";
 import LearnKanaMenu from "../learn/LearnKanaMenu";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 import LearnCalendarMenu from "../learn/LearnCalendarMenu";
-import { LearnSettings } from "../../types/LearnSettings";
+import { LearnSettings } from "../../types/learn/LearnSettings";
 
 export interface GameTypeSettings {
     topic: Topic;

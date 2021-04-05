@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Kana } from "../../../types/Kana";
+import { Kana } from "../../../types/kana/Kana";
 import ReactCardFlip from "react-card-flip";
 import KanaFlashCardFront from "./KanaFlashCardFront";
 import KanaFlashCardBack from "./KanaFlashCardBack";

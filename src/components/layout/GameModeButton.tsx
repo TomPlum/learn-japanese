@@ -1,15 +1,15 @@
 import { Component } from "react";
-import { GameMode } from "../../types/GameMode";
+import { KanaGameMode } from "../../types/game/mode/KanaGameMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/GameModeButton.module.scss";
 
 export interface GameModeButtonProps {
-    mode: GameMode;
+    mode: KanaGameMode;
     icon: IconDefinition;
     iconColour?: string;
-    onClick: (mode: GameMode) => void;
+    onClick: (mode: KanaGameMode) => void;
     isSelected: boolean;
 }
 

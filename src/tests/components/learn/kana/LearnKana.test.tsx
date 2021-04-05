@@ -1,7 +1,7 @@
 import { RandomNumberGenerator } from "../../../../utility/RandomNumberGenerator";
-import { Kana } from "../../../../types/Kana";
-import KanaType from "../../../../types/KanaType";
-import { KanaColumn } from "../../../../types/KanaColumn";
+import { Kana } from "../../../../types/kana/Kana";
+import KanaType from "../../../../types/kana/KanaType";
+import { KanaColumn } from "../../../../types/kana/KanaColumn";
 import { fireEvent, render, screen } from "@testing-library/react";
 import LearnKana, { LearnKanaProps } from "../../../../components/learn/kana/LearnKana";
 

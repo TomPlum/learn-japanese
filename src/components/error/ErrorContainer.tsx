@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Toast } from "react-bootstrap";
-import Arrays from "../utility/Arrays";
+import Arrays from "../../utility/Arrays";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { v4 } from "uuid";

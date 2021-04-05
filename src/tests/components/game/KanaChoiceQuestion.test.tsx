@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanaChoiceQuestion, { KanaChoiceQuestionProps } from "../../../components/game/KanaChoiceQuestion";
-import { Kana } from "../../../types/Kana";
-import KanaType from "../../../types/KanaType";
-import { KanaColumn } from "../../../types/KanaColumn";
+import { Kana } from "../../../types/kana/Kana";
+import KanaType from "../../../types/kana/KanaType";
+import { KanaColumn } from "../../../types/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
 import { getByTextWithElements } from "../../Queries";
 import React from "react";

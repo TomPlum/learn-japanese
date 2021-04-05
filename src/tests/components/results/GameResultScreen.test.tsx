@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import GameResultScreen from "../../../components/results/GameResultScreen";
-import GameResult from "../../../types/GameResult";
-import { Kana } from "../../../types/Kana";
-import KanaType from "../../../types/KanaType";
-import { KanaColumn } from "../../../types/KanaColumn";
-import { FailureReason } from "../../../types/FailureReason";
+import GameResult from "../../../types/game/GameResult";
+import { Kana } from "../../../types/kana/Kana";
+import KanaType from "../../../types/kana/KanaType";
+import { KanaColumn } from "../../../types/kana/KanaColumn";
+import { FailureReason } from "../../../types/game/FailureReason";
 
 let result: GameResult;
 

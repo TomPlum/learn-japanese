@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Kana } from "../../../types/Kana";
+import { Kana } from "../../../types/kana/Kana";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import SessionProgressBar from "../../ui/SessionProgressBar";
@@ -7,7 +7,7 @@ import KanaFlashCard from "./KanaFlashCard";
 import LearningFeedbackButton, { LearningFeedback } from "../../ui/LearningFeedbackButton";
 import styles from "../../../styles/sass/components/learn/kana/LearnKana.module.scss";
 import QuitButton from "../../ui/QuitButton";
-import LearningSessionResult from "../../../types/LearningSessionResult";
+import LearningSessionResult from "../../../types/learn/LearningSessionResult";
 import ConfirmModal from "../../ui/ConfirmModal";
 
 export interface LearnKanaProps {

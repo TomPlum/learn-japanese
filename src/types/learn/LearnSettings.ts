@@ -1,4 +1,4 @@
-import { KanaSettings } from "./GameSettings";
+import { KanaSettings } from "../game/GameSettings";
 
 export interface LearnSettings {
     kana?: KanaSettings;

@@ -1,8 +1,8 @@
 import { Component } from "react";
 import KanaMemoryGame from "../game/KanaMemoryGame";
-import GameResult from "../../types/GameResult";
+import GameResult from "../../types/game/GameResult";
 import GameResultScreen from "../results/GameResultScreen";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
 import ControlsMenu from "../layout/ControlsMenu";
@@ -10,13 +10,13 @@ import GameSettingsMenu, { GameTypeSettings, LearnSessionSettings } from "../lay
 import { AppMode } from "../../types/AppMode";
 import LearnKana from "../learn/kana/LearnKana";
 import SessionID from "../../types/SessionID";
-import LearningSessionResult from "../../types/LearningSessionResult";
+import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import LearningResultScreen from "../results/LearningResultScreen";
 import Arrays from "../../utility/Arrays";
-import MainErrorBoundary from "../MainErrorBoundary";
+import MainErrorBoundary from "../error/MainErrorBoundary";
 import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 import { Topic } from "../../types/Topic";
-import Learnable from "../../types/Learnable";
+import Learnable from "../../types/learn/Learnable";
 
 interface GamePageState {
     loading: boolean;

@@ -2,10 +2,10 @@ import { Component } from "react";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { LearnKanaMode } from "../../types/LearnKanaMode";
-import { LearnCalendarMode } from "../../types/LearnCalendarMode";
+import { LearnKanaMode } from "../../types/learn/mode/LearnKanaMode";
+import { LearnCalendarMode } from "../../types/learn/mode/LearnCalendarMode";
 import styles from "../../styles/sass/components/learn/LearnTopicButton.module.scss";
-import { LearnMode } from "../../types/LearningTopic";
+import { LearnMode } from "../../types/learn/LearningTopic";
 
 export interface LearnTopicButtonProps {
     icon: IconDefinition | string;

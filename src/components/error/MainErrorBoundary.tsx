@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Toast } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Arrays from "../utility/Arrays";
+import Arrays from "../../utility/Arrays";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
 interface MainErrorBoundaryState {

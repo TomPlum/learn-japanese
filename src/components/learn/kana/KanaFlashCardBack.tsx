@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Kana } from "../../../types/Kana";
+import { Kana } from "../../../types/kana/Kana";
 import { Container, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/learn/kana/KanaFlashCardBack.module.scss"
 import FlashCardResetButton from "../../ui/FlashCardResetButton";

@@ -1,9 +1,9 @@
 import { Component } from "react";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEraser } from "@fortawesome/free-solid-svg-icons";
-import LearningSessionResult from "../../types/LearningSessionResult";
+import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import QuitButton from "../ui/QuitButton";
 import styles from "../../styles/sass/components/results/LearningResultScreen.module.scss";
 

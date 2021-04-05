@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanaFlashCard from "../../../../components/learn/kana/KanaFlashCard";
-import { Kana } from "../../../../types/Kana";
-import KanaType from "../../../../types/KanaType";
-import { KanaColumn } from "../../../../types/KanaColumn";
+import { Kana } from "../../../../types/kana/Kana";
+import KanaType from "../../../../types/kana/KanaType";
+import { KanaColumn } from "../../../../types/kana/KanaColumn";
 
 const onFlipHandler = jest.fn();
 

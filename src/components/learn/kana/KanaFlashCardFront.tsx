@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Kana } from "../../../types/Kana";
+import { Kana } from "../../../types/kana/Kana";
 import { Container, Row } from "react-bootstrap";
 import KanaDisplay from "../../game/KanaDisplay";
 import styles from "../../../styles/sass/components/learn/kana/KanaFlashCardFront.module.scss";

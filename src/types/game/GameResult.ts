@@ -1,4 +1,4 @@
-import { Kana } from "./Kana";
+import { Kana } from "../kana/Kana";
 import { FailureReason } from "./FailureReason";
 
 export default interface GameResult {

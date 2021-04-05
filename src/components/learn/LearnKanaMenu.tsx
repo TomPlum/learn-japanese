@@ -1,13 +1,13 @@
 import { Component } from "react";
 import { Col, Row } from "react-bootstrap";
 import LearnTopicButton from "./LearnTopicButton";
-import { LearnKanaMode } from "../../types/LearnKanaMode";
+import { LearnKanaMode } from "../../types/learn/mode/LearnKanaMode";
 import { Environment } from "../../utility/Environment";
 import MenuDescription from "../ui/MenuDescription";
 import { faVial } from "@fortawesome/free-solid-svg-icons";
 import StartButton from "../ui/StartButton";
-import { LearnSettings } from "../../types/LearnSettings";
-import { LearnMode } from "../../types/LearningTopic";
+import { LearnSettings } from "../../types/learn/LearnSettings";
+import { LearnMode } from "../../types/learn/LearningTopic";
 import styles from "../../styles/sass/components/learn/LearnKanaMenu.module.scss";
 
 export interface LearnKanaMenuProps {

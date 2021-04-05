@@ -1,8 +1,8 @@
 import KanaGameSettingsMenu, { KanaGameSettingsMenuProps } from "../../../components/settings/KanaGameSettingsMenu";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { DisplayType } from "../../../types/DisplayType";
-import { GameSettings } from "../../../types/GameSettings";
-import { LifeQuantity } from "../../../types/LifeQuantity";
+import { DisplayType } from "../../../types/game/DisplayType";
+import { GameSettings } from "../../../types/game/GameSettings";
+import { LifeQuantity } from "../../../types/game/LifeQuantity";
 
 let settings: GameSettings;
 

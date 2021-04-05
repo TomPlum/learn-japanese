@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import LearnTopicButton from "../../../components/learn/LearnTopicButton";
-import { LearnKanaMode } from "../../../types/LearnKanaMode";
+import { LearnKanaMode } from "../../../types/learn/mode/LearnKanaMode";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
 const onClickHandler = jest.fn();

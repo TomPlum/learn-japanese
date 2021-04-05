@@ -1,11 +1,11 @@
 import { Component } from "react";
 import { Col, Row } from "react-bootstrap";
-import { GameMode } from "../../types/GameMode";
+import { KanaGameMode } from "../../types/game/mode/KanaGameMode";
 import { faFire, faFont, faGraduationCap, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import GameModeButton from "./GameModeButton";
 import KanaGameSettingsMenu from "../settings/KanaGameSettingsMenu";
 import { HARDCORE, KANA, RELAXED, ROMAJI, TIME_ATTACK } from "../../data/GameModePresets";
-import { GameSettings } from "../../types/GameSettings";
+import { GameSettings } from "../../types/game/GameSettings";
 import { Environment } from "../../utility/Environment";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
 import MenuDescription from "../ui/MenuDescription";
@@ -13,12 +13,12 @@ import StartButton from "../ui/StartButton";
 import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
 
 export interface KanaGameModeMenuProps {
-    onSelectedMode: (mode: GameMode, settings: GameSettings) => void;
+    onSelectedMode: (mode: KanaGameMode, settings: GameSettings) => void;
     className?: string;
 }
 
 interface KanaGameModeMenuState {
-    selected: GameMode;
+    selected: KanaGameMode;
     settings: GameSettings;
     isCustomisingSettings: boolean;
 }
@@ -27,7 +27,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
     constructor(props: KanaGameModeMenuProps | Readonly<KanaGameModeMenuProps>) {
         super(props);
         this.state = {
-            selected: GameMode.RELAXED,
+            selected: KanaGameMode.RELAXED,
             isCustomisingSettings: false,
             settings: RELAXED
         }
@@ -47,19 +47,19 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
                     <Row>
                         <Col className={styles.leftColumn}>
                             <GameModeButton
-                                mode={GameMode.RELAXED}
+                                mode={KanaGameMode.RELAXED}
                                 icon={faGraduationCap}
                                 iconColour={"#fdb40e"}
-                                isSelected={selected === GameMode.RELAXED}
+                                isSelected={selected === KanaGameMode.RELAXED}
                                 onClick={this.onSelectMode}
                             />
                         </Col>
                         <Col className={styles.rightColumn}>
                             <GameModeButton
-                                mode={GameMode.TIME_ATTACK}
+                                mode={KanaGameMode.TIME_ATTACK}
                                 icon={faStopwatch}
                                 iconColour={"#ff7730"}
-                                isSelected={selected === GameMode.TIME_ATTACK}
+                                isSelected={selected === KanaGameMode.TIME_ATTACK}
                                 onClick={this.onSelectMode}
                             />
                         </Col>
@@ -68,8 +68,8 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
                     <Row>
                         <Col className={styles.leftColumn}>
                             <GameModeButton
-                                mode={GameMode.ROMAJI}
-                                isSelected={selected === GameMode.ROMAJI}
+                                mode={KanaGameMode.ROMAJI}
+                                isSelected={selected === KanaGameMode.ROMAJI}
                                 icon={faFont}
                                 iconColour={"#1785e2"}
                                 onClick={this.onSelectMode}
@@ -77,8 +77,8 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
                         </Col>
                         <Col className={styles.rightColumn}>
                             <GameModeButton
-                                mode={GameMode.KANA}
-                                isSelected={selected === GameMode.KANA}
+                                mode={KanaGameMode.KANA}
+                                isSelected={selected === KanaGameMode.KANA}
                                 icon={faKickstarterK}
                                 iconColour={"#a01219"}
                                 onClick={this.onSelectMode}
@@ -89,19 +89,19 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
                     <Row>
                         <Col className={styles.leftColumn}>
                             <GameModeButton
-                                mode={GameMode.HARDCORE}
+                                mode={KanaGameMode.HARDCORE}
                                 icon={faFire}
                                 iconColour={"#fc3131"}
-                                isSelected={selected === GameMode.HARDCORE}
+                                isSelected={selected === KanaGameMode.HARDCORE}
                                 onClick={this.onSelectMode}
                             />
                         </Col>
                         <Col className={styles.rightColumn}>
                             <GameModeButton
-                                mode={GameMode.CUSTOM}
+                                mode={KanaGameMode.CUSTOM}
                                 icon={faVial}
                                 iconColour={"#41d085"}
-                                isSelected={selected === GameMode.CUSTOM}
+                                isSelected={selected === KanaGameMode.CUSTOM}
                                 onClick={this.onLaunchCustomSettings}
                             />
                         </Col>
@@ -126,22 +126,22 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
         this.props.onSelectedMode(selected, settings);
     }
 
-    onSelectMode = (mode: GameMode) => {
+    onSelectMode = (mode: KanaGameMode) => {
         let preset: GameSettings = ROMAJI;
         switch (mode) {
-            case GameMode.RELAXED:
+            case KanaGameMode.RELAXED:
                 preset = RELAXED;
                 break;
-            case GameMode.TIME_ATTACK:
+            case KanaGameMode.TIME_ATTACK:
                 preset = TIME_ATTACK;
                 break;
-            case GameMode.ROMAJI:
+            case KanaGameMode.ROMAJI:
                 preset = ROMAJI;
                 break;
-            case GameMode.KANA:
+            case KanaGameMode.KANA:
                 preset = KANA;
                 break;
-            case GameMode.HARDCORE:
+            case KanaGameMode.HARDCORE:
                 preset = HARDCORE;
                 break;
         }
@@ -150,7 +150,7 @@ class KanaGameModeMenu extends Component<KanaGameModeMenuProps, KanaGameModeMenu
     }
 
     onLaunchCustomSettings = () => {
-        this.onSelectMode(GameMode.CUSTOM);
+        this.onSelectMode(KanaGameMode.CUSTOM);
         this.setState({ isCustomisingSettings: true });
     }
 

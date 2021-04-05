@@ -5,9 +5,9 @@ import { Environment } from "../../utility/Environment";
 import MenuDescription from "../ui/MenuDescription";
 import { faAlignLeft, faCalendarAlt, faCalendarDay, faClock, faSnowflake, faVial } from "@fortawesome/free-solid-svg-icons";
 import StartButton from "../ui/StartButton";
-import { LearnCalendarMode } from "../../types/LearnCalendarMode";
-import { LearnMode } from "../../types/LearningTopic";
-import { LearnSettings } from "../../types/LearnSettings";
+import { LearnCalendarMode } from "../../types/learn/mode/LearnCalendarMode";
+import { LearnMode } from "../../types/learn/LearningTopic";
+import { LearnSettings } from "../../types/learn/LearnSettings";
 import styles from "../../styles/sass/components/learn/LearnCalendarMenu.module.scss";
 
 export interface LearnCalendarMenuProps {
