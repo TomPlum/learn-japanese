@@ -74,4 +74,18 @@ export default class Arrays {
         }
         return elements;
     }
+
+    static chunked<T>(array: T[], quantity: number): T[][] {
+        return array.reduce((resultArray: T[][], item: T, index: number) => {
+            const chunkIndex = Math.floor(index/quantity)
+
+            if(!resultArray[chunkIndex]) {
+                resultArray[chunkIndex] = [] // start a new chunk
+            }
+
+            resultArray[chunkIndex].push(item)
+
+            return resultArray
+        }, []);
+    }
 }

@@ -5,10 +5,11 @@ import KanaGameModeMenu from "./KanaGameModeMenu";
 import GameTypeMenu from "./GameTypeMenu";
 import { GameSettings } from "../../types/game/GameSettings";
 import { AppMode } from "../../types/AppMode";
-import LearnKanaMenu from "../learn/LearnKanaMenu";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
-import LearnCalendarMenu from "../learn/LearnCalendarMenu";
 import { LearnSettings } from "../../types/learn/LearnSettings";
+import LearnMenu from "../learn/LearnMenu";
+import LearnKanaMode from "../../types/learn/mode/LearnKanaMode";
+import LearnCalendarMode from "../../types/learn/mode/LearnCalendarMode";
 
 export interface GameTypeSettings {
     topic: Topic;
@@ -72,7 +73,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 switch (mode) {
                     case AppMode.LEARN: {
                         return (
-                            <LearnKanaMenu onStart={this.onStartLearning}/>
+                            <LearnMenu key={topic} modes={new LearnKanaMode()} onStart={this.onStartLearning}/>
                         );
                     }
                     case AppMode.PLAY: {
@@ -101,7 +102,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
             case Topic.CALENDAR: {
                 switch (mode) {
                     case AppMode.LEARN: {
-                        return <LearnCalendarMenu onStart={this.onStartLearning} />
+                        return <LearnMenu key={topic} modes={new LearnCalendarMode()} onStart={this.onStartLearning} />
                     }
                     case AppMode.PLAY: {
                         return <p className={styles.menu} style={{ color: '#FFF' }}>Calendar menu here</p>

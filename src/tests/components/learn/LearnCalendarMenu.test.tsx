@@ -1,12 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Environment } from "../../../utility/Environment";
-import LearnCalendarMenu from "../../../components/learn/LearnCalendarMenu";
+import LearnMenu from "../../../components/learn/LearnMenu";
+import LearnCalendarMode from "../../../types/learn/mode/LearnCalendarMode";
 
 const onStartHandler = jest.fn();
 const environment = jest.fn();
 
 const setup = () => {
-    const component = render(<LearnCalendarMenu onStart={onStartHandler} />);
+    const component = render(<LearnMenu modes={new LearnCalendarMode()} onStart={onStartHandler} />);
     return {
         days: component.getByText('Days of the Week'),
         months: component.getByText('Months of the Year'),

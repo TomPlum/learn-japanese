@@ -1,12 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import LearnKanaMenu from "../../../components/learn/LearnKanaMenu";
 import { Environment } from "../../../utility/Environment";
+import LearnMenu from "../../../components/learn/LearnMenu";
+import LearnKanaMode from "../../../types/learn/mode/LearnKanaMode";
 
 const onStartHandler = jest.fn();
 const environment = jest.fn();
 
 const setup = () => {
-    const component = render(<LearnKanaMenu onStart={onStartHandler} />);
+    const component = render(<LearnMenu modes={new LearnKanaMode()} onStart={onStartHandler} />);
     return {
         hiragana: component.getByText('Hiragana'),
         katakana: component.getByText('Katakana'),
