@@ -41,17 +41,18 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
                 </Row>
 
                 {
-                    Arrays.chunked(modes.getLearningTopics(), 2).map((pair: LearningMode[]) => {
-                        return <Row>{
+                    Arrays.chunked(modes.getLearningTopics(), 2).map((pair: LearningMode[], j: number) => {
+                        return <Row key={"row-" + j}>{
                             pair.map((mode: LearningMode, i: number) => {
                                 const isLeft = i % 2 === 0 || i === 0;
                                 const columnClass = isLeft ? styles.leftColumn : styles.rightColumn;
-                                return (<Col className={columnClass}>
+                                return (<Col className={columnClass} key={"col-" + i}>
                                     <LearnTopicButton
                                         icon={mode.icon}
                                         iconColour={mode.colour}
                                         type={mode}
                                         selected={selected}
+                                        key={mode.displayName + "-button"}
                                         onClick={this.onSelect}
                                     />
                                 </Col>);
