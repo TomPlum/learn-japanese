@@ -58,6 +58,10 @@ export class Kana implements Learnable {
         return this.getFullRomajiString();
     }
 
+    getTitle(): string {
+        return this._type;
+    }
+
     public equals(other: any): boolean {
         if (!other) return false;
         if (!(other instanceof Kana)) return false;

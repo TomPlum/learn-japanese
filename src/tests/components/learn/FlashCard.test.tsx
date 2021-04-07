@@ -1,14 +1,21 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import KanaFlashCard from "../../../../components/learn/kana/KanaFlashCard";
-import { Kana } from "../../../../types/kana/Kana";
-import KanaType from "../../../../types/kana/KanaType";
-import { KanaColumn } from "../../../../types/kana/KanaColumn";
+import FlashCard from "../../../components/learn/FlashCard";
+import { Kana } from "../../../types/kana/Kana";
+import { KanaColumn } from "../../../types/kana/KanaColumn";
+import KanaType from "../../../types/kana/KanaType";
+import KanaFlashCardFront from "../../../components/learn/kana/KanaFlashCardFront";
+import KanaFlashCardBack from "../../../components/learn/kana/KanaFlashCardBack";
 
 const onFlipHandler = jest.fn();
 
 const setup = () => {
     const component = render(
-        <KanaFlashCard kana={new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)} onFlip={onFlipHandler}/>
+        <FlashCard
+            data={new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)}
+            onFlip={onFlipHandler}
+            front={KanaFlashCardFront}
+            back={KanaFlashCardBack}
+        />
     );
     return {
         card: component.getByText('あ'),
