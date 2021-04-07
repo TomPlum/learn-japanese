@@ -1,37 +1,38 @@
-import { Component } from "react";
-import { Kana } from "../../../types/kana/Kana";
-import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
+import React, { Component } from "react";
+import LearningSessionResult from "../../types/learn/LearningSessionResult";
+import Learnable from "../../types/learn/Learnable";
+import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import SessionProgressBar from "../../ui/SessionProgressBar";
-import KanaFlashCard from "./KanaFlashCard";
-import LearningFeedbackButton, { LearningFeedback } from "../../ui/LearningFeedbackButton";
-import styles from "../../../styles/sass/components/learn/kana/LearnKana.module.scss";
-import QuitButton from "../../ui/QuitButton";
-import LearningSessionResult from "../../../types/learn/LearningSessionResult";
-import ConfirmModal from "../../ui/ConfirmModal";
+import ConfirmModal from "../ui/ConfirmModal";
+import QuitButton from "../ui/QuitButton";
+import SessionProgressBar from "../ui/SessionProgressBar";
+import LearningFeedbackButton, { LearningFeedback } from "../ui/LearningFeedbackButton";
+import FlashCard, { CardProps } from "./FlashCard";
+import styles from "../../styles/sass/components/learn/Learn.module.scss";
 
-export interface LearnKanaProps {
-    kana: Kana[];
+export interface LearnProps {
+    data: Learnable[];
     onFinish: (result: LearningSessionResult) => void;
+    card: CardProps;
 }
 
-interface LearnKanaState {
-    current: Kana;
-    remaining: Kana[];
+interface LearnState {
+    current: Learnable;
+    remaining: Learnable[];
+    remembered: Learnable[];
+    forgotten: Learnable[];
     hasPeeked: boolean;
+    paused: boolean;
     hasRemembered: boolean;
     hasForgotten: boolean;
-    remembered: Kana[];
-    forgotten: Kana[];
-    paused: boolean;
 }
 
-class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
+class Learn extends Component<LearnProps, LearnState> {
 
-    constructor(props: Readonly<LearnKanaProps> | LearnKanaProps) {
+    constructor(props: Readonly<LearnProps> | LearnProps) {
         super(props);
 
-        const [first, remaining] = RandomNumberGenerator.getRandomObject(this.props.kana);
+        const [first, remaining] = RandomNumberGenerator.getRandomObject(this.props.data);
 
         this.state = {
             current: first,
@@ -47,8 +48,8 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
 
     render() {
         const { current, remaining, hasPeeked, hasRemembered, hasForgotten, paused } = this.state;
-        const { kana } = this.props;
-        const hasKanaRemaining = remaining.length > 0;
+        const { data, card } = this.props;
+        const hasCardsRemaining = remaining.length > 0;
 
         return (
             <div className={styles.wrapper}>
@@ -69,8 +70,8 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
                     <Row className={styles.header}>
                         <Col>
                             <SessionProgressBar
-                                inProgress={hasKanaRemaining}
-                                quantity={kana.length}
+                                inProgress={hasCardsRemaining}
+                                quantity={data.length}
                                 remaining={remaining.length}
                                 className={styles.progress}
                             />
@@ -79,7 +80,13 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
 
                     <Row className={styles.cardWrapper}>
                         <Col>
-                            <KanaFlashCard kana={current} key={current.code} onFlip={this.onFlip} />
+                            <FlashCard
+                                data={current}
+                                key={current.getQuestion()}
+                                onFlip={this.onFlip}
+                                front={card.front}
+                                back={card.back}
+                            />
                         </Col>
                     </Row>
 
@@ -102,12 +109,12 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
                         </Col>
                         <Col xs={12}>
                             <Button
-                                variant={!hasKanaRemaining && hasPeeked ? "info" : "primary"}
+                                variant={!hasCardsRemaining && hasPeeked ? "info" : "primary"}
                                 className={styles.next}
-                                onClick={hasKanaRemaining ? this.onNext : this.onFinish}
+                                onClick={hasCardsRemaining ? this.onNext : this.onFinish}
                                 disabled={!hasPeeked || (!hasForgotten && !hasRemembered)}
                             >
-                                {!hasKanaRemaining && hasPeeked ? "Finish" : "Next"}
+                                {!hasCardsRemaining && hasPeeked ? "Finish" : "Next"}
                             </Button>
                         </Col>
                     </Row>
@@ -148,4 +155,4 @@ class LearnKana extends Component<LearnKanaProps, LearnKanaState> {
     private onForgot = () => this.setState({ hasForgotten: true, hasRemembered: false });
 }
 
-export default LearnKana;
+export default Learn;
