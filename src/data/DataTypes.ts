@@ -7,3 +7,8 @@ export interface KanaData {
     column: KanaColumn;
     diacritical: boolean;
 }
+
+export interface DayData {
+    name: string;
+    kanji: string;
+}
