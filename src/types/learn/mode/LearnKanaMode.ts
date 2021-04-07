@@ -1,7 +1,6 @@
 import LearningMode from "../LearningMode";
 import LearnMenuModes from "./LearnMenuModes";
 import { faVial } from "@fortawesome/free-solid-svg-icons";
-import { Topic } from "../../Topic";
 
 export default class LearnKanaMode implements LearnMenuModes {
     getLearningTopics(): LearningMode[] {

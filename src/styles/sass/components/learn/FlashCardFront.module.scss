@@ -1,0 +1,5 @@
+@import "src/styles/sass/flashcards";
+@import "src/styles/sass/viewports";
+
+@include FlashCardWrapper;
+@include FlashCardFront;
