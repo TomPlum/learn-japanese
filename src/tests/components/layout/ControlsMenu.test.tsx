@@ -42,13 +42,13 @@ test('Clicking the App Mode button should call the onChangeAppMode event handler
 test('Passing active as true should enable the App Mode Button', () => {
     props.active = true;
     const { mode } = setup();
-    expect(mode).not.toBeDisabled();
+    expect(mode.parentElement).not.toHaveAttribute('aria-disabled', 'true');
 });
 
 test('Passing active as false should disable the App Mode Button', () => {
     props.active = false;
     const { mode } = setup();
-    expect(mode).toHaveAttribute('aria-disabled', 'true');
+    expect(mode.parentElement).toHaveAttribute('aria-disabled', 'true');
 });
 
 //TODO: Location is not updating for some reason.

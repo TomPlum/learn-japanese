@@ -160,9 +160,9 @@ describe("Starting Learn Session", () => {
     });
 
     test('Starting a calendar learning session should call the onStartLearn event handler with the correct type and settings', () => {
-        const { start, calendar } = setup();
+        const { calendar } = setup();
         fireEvent.click(calendar);
-        fireEvent.click(start);
+        fireEvent.click(screen.getByText('Start'));
         expect(onStartLearnHandler).toHaveBeenCalledWith({ topic: Topic.CALENDAR, settings: { calendar: { days: true } } });
     });
 
