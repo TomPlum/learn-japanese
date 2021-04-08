@@ -38,10 +38,18 @@ test('Passing type as FORGOT should render the button with \'I couldn\'t remembe
     expect(screen.getByTitle('I couldn\'t remember it')).toBeInTheDocument();
 });
 
-test('Passing active property as true should apply the \'active\' class to the button', () => {
+test('Passing active property as true when type is Remembered should apply the \'active\' class to the button', () => {
+    props.type = LearningFeedback.REMEMBERED;
     props.active = true;
     const { container } = render(<LearningFeedbackButton {...props} />);
-    expect(container.firstChild).toHaveClass('active');
+    expect(container.firstChild).toHaveClass('activeRemembered');
+});
+
+test('Passing active property as true when type is Remembered should apply the \'active\' class to the button', () => {
+    props.type = LearningFeedback.FORGOT;
+    props.active = true;
+    const { container } = render(<LearningFeedbackButton {...props} />);
+    expect(container.firstChild).toHaveClass('activeForgotten');
 });
 
 test('Passing active property as false and disabled as false should apply the \'inactive\' class to the button', () => {

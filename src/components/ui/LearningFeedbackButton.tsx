@@ -25,7 +25,7 @@ class LearningFeedbackButton extends Component<LearningFeedbackButtonProps> {
         return (
             <Button
                 onClick={onClick}
-                className={[active ? activeClass: !disabled ?? styles.inactive, styles.button].join(" ")}
+                className={[active ? activeClass: !disabled ? styles.inactive : "", styles.button].join(" ")}
                 variant={isRemembered ? "success" : "danger"}
                 disabled={disabled}
                 title={this.getTitle()}
