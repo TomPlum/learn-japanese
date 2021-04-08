@@ -35,6 +35,12 @@ const setup = () => {
    const component = render(<GamePage />);
    return {
       mode: component.getByText('Learn'),
+      kana: component.queryAllByText('Hiragana & Katakana')[1],
+      numbers: component.getByText('Numbers & Counting'),
+      kanji: component.getByText('Jōyō Kanji'),
+      colours: component.getByText('Colours'),
+      weather: component.getByText('Weather'),
+      calendar: component.getByText('Days & Months'),
       ...component
    }
 }
@@ -145,5 +151,14 @@ describe('Learn', () => {
       fireEvent.click(screen.getByTitle('Quit')); //Click the close button to dismiss the results screen
       expect(screen.getByTestId('game-settings-menu')).toBeInTheDocument();
       expect(screen.queryByTestId('learning-results-screen')).not.toBeInTheDocument();
+   });
+
+   test('Starting a Calendar learning session should render the correct flash card types', () => {
+      const { mode, calendar } = setup();
+      fireEvent.click(mode); //Switch to Learn
+      fireEvent.click(calendar);
+      fireEvent.click(screen.getByText('Start'));
+      expect(screen.getByText('Monday')).toBeInTheDocument();
+      expect(screen.getByText('月曜日')).toBeInTheDocument();
    });
 });

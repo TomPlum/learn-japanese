@@ -2,13 +2,11 @@ import { Component } from "react";
 import KanaMemoryGame from "../game/KanaMemoryGame";
 import GameResult from "../../types/game/GameResult";
 import GameResultScreen from "../results/GameResultScreen";
-import { Kana } from "../../types/kana/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
 import ControlsMenu from "../layout/ControlsMenu";
 import GameSettingsMenu, { GameTypeSettings, LearnSessionSettings } from "../layout/GameSettingsMenu";
 import { AppMode } from "../../types/AppMode";
-import LearnKana from "../learn/kana/LearnKana";
 import SessionID from "../../types/SessionID";
 import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import LearningResultScreen from "../results/LearningResultScreen";
@@ -17,6 +15,13 @@ import MainErrorBoundary from "../error/MainErrorBoundary";
 import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 import { Topic } from "../../types/Topic";
 import Learnable from "../../types/learn/Learnable";
+import Learn from "../learn/Learn";
+import CalendarFlashCardFront from "../learn/calendar/CalendarFlashCardFront";
+import CalendarFlashCardBack from "../learn/calendar/CalendarFlashCardBack";
+import KanaFlashCardFront from "../learn/kana/KanaFlashCardFront";
+import KanaFlashCardBack from "../learn/kana/KanaFlashCardBack";
+import LearningDataRepository from "../../repository/LearningDataRepository";
+import { CardProps } from "../learn/FlashCard";
 
 interface GamePageState {
     loading: boolean;
@@ -120,21 +125,26 @@ class GamePage extends Component<{}, GamePageState> {
         this.setState({ sessionKey: new SessionID() });
     }
 
-    private onPracticeStart = (kana: Kana[]) => {
+    private onPracticeStart = (data: Learnable[]) => {
         this.onGameResultMenuClose();
-        this.setState({ learnData: Arrays.copy(kana) });
+        this.setState({ learnData: Arrays.copy(data) });
     }
 
     private handleChangeAppMode = (mode: AppMode) => this.setState({ mode: mode });
 
     private getLearning = () => {
         const { learnSettings, sessionKey, learnData } = this.state;
-        switch (learnSettings?.topic) {
-            case Topic.KANA: {
-                const kana = (learnData ?? new KanaRepository().read(learnSettings.settings!.kana!)) as Kana[];
-                return <LearnKana key={sessionKey.value} kana={kana} onFinish={this.onLearningFinish} />;
-            }
-        }
+
+        const data = learnData ?? new LearningDataRepository().read(learnSettings);
+
+        return (
+            <Learn
+                key={sessionKey.value}
+                data={data}
+                onFinish={this.onLearningFinish}
+                card={this.getSelectedTopicCardFaces()}
+            />
+        )
     }
 
     private getGame = () => {
@@ -153,6 +163,14 @@ class GamePage extends Component<{}, GamePageState> {
                 );
             }
         }
+    }
+
+    private getSelectedTopicCardFaces = (): CardProps => {
+        switch (this.state.learnSettings?.topic) {
+            case Topic.KANA: return { front: KanaFlashCardFront, back: KanaFlashCardBack };
+            case Topic.CALENDAR: return { front: CalendarFlashCardFront, back: CalendarFlashCardBack };
+        }
+        throw new Error("Cannot get card faces for invalid learn settings");
     }
 }
 

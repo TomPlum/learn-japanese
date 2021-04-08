@@ -6,11 +6,12 @@ import { faEraser } from "@fortawesome/free-solid-svg-icons";
 import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import QuitButton from "../ui/QuitButton";
 import styles from "../../styles/sass/components/results/LearningResultScreen.module.scss";
+import Learnable from "../../types/learn/Learnable";
 
 export interface LearningResultScreenProps {
     result: LearningSessionResult;
     onDismiss: () => void;
-    onPractice: (mistakes: Kana[]) => void;
+    onPractice: (mistakes: Learnable[]) => void;
 }
 
 class LearningResultScreen extends Component<LearningResultScreenProps> {

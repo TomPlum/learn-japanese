@@ -1,6 +1,6 @@
-import { Kana } from "../kana/Kana";
+import Learnable from "./Learnable";
 
 export default interface LearningSessionResult {
-    remembered: Kana[];
-    forgotten: Kana[];
+    remembered: Learnable[];
+    forgotten: Learnable[];
 }

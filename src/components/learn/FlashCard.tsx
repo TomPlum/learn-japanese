@@ -7,6 +7,7 @@ export interface CardProps {
     back: FunctionComponent<CardFaceProps>;
 }
 
+//TODO: Can the MyComponentFlashCardFront and Back components have explicit sub-types like Kana and CalendarData?
 export interface CardFaceProps {
     data: Learnable;
     onClick: () => void;
