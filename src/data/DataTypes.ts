@@ -10,7 +10,7 @@ export interface KanaData {
 
 export interface DayData {
     name: string;
-    kanji: string;
+    kanji?: string;
     romaji: string;
     kana: string;
     meaning: string;
