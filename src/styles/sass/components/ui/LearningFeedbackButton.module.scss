@@ -5,17 +5,23 @@
   max-width: 325px;
   display: block;
   transition: ease-in-out 0.4s;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 .inactive {
   opacity: 0.4;
 }
 
-.active {
+.activeRemembered {
   opacity: 1;
   background-color: #218838;
   border-color: #1e7e34;
+}
+
+.activeForgotten {
+  opacity: 1;
+  background-color: #bd2130;;
+  border-color: #b21f2d;
 }
 
 .text {
