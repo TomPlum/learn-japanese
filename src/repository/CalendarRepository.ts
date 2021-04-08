@@ -10,6 +10,6 @@ export default class CalendarRepository {
     }
 
     private convert(data: DayData[]) {
-        return data.map(datum => new Day(datum.name, datum.kanji));
+        return data.map(datum => new Day(datum.name, datum.kanji, datum.romaji, datum.kana, datum.meaning));
     }
 }

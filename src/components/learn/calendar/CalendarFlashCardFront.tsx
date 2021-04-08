@@ -5,7 +5,7 @@ import styles from "../../../styles/sass/components/learn/calendar/CalendarFlash
 const CalendarFlashCardFront = (props: CardFaceProps) => {
     const { data, onClick } = props;
     return (
-        <FlashCardFront onClick={onClick}>
+        <FlashCardFront onClick={onClick} className={styles.wrapper}>
             <span className={styles.calendar}>{data.getQuestion()}</span>
         </FlashCardFront>
     );
