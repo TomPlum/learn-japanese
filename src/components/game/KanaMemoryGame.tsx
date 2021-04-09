@@ -135,7 +135,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                             </Col>
                             <Col className={styles.progressWrapper}>
                                 <SessionProgressBar
-                                    inProgress={!hasExhaustedKana}
+                                    inProgress={!hasExhaustedKana && !paused}
                                     quantity={kana.length}
                                     remaining={remainingKana.length}
                                     className={styles.progress}
