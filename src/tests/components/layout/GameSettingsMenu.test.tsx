@@ -102,7 +102,7 @@ describe("Rendering Learn Menus", () => {
     test('Should switch to \'Jōyō Kanji\' learn menu after selecting it', () => {
         const { kanji } = setup();
         fireEvent.click(kanji);
-        expect(screen.getByText('Kanji menu here')).toBeInTheDocument();
+        expect(screen.getByTestId('learn-kanji-menu')).toBeInTheDocument();
     });
 
     test('Should switch to \'Colours\' learn menu after selecting it', () => {

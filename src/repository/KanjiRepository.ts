@@ -2,8 +2,8 @@ import { Kanji } from "../types/kanji/Kanji";
 import { Reading } from "../types/kanji/Reading";
 import { ReadingType } from "../types/kanji/ReadingType";
 import { Example } from "../types/kanji/Example";
-import { KanjiData, KanjiReading } from "../data/DataTypes";
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
+import { KanjiData, KanjiExample, KanjiReading } from "../data/DataTypes";
 import { joyo, kyoiku } from "../data/Kanji";
 
 export interface KanjiSettings {
@@ -40,7 +40,7 @@ export class KanjiRepository {
         return data.map((result: KanjiData) => {
             const on = result.on.map((data: KanjiReading) => new Reading(data.romanji, data.kana, ReadingType.ON));
             const kun = result.kun.map((data: KanjiReading) => new Reading(data.romanji, data.kana, ReadingType.KUN));
-            const examples = result.examples.map(example => {
+            const examples = result.examples.map((example: KanjiExample) => {
                 return new Example(example.value, example.kana, example.english);
             });
             return new Kanji(result.code, on.concat(kun), result.meanings, result.grade, result.source, examples);

@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import KanjiDisplay from "./KanjiDisplay";
-import { Kanji } from "../../../types/kanji/Kanji";
 import { ReadingType } from "../../../types/kanji/ReadingType";
 import Inspectable from "../../ui/Inspectable";
 import { Environment } from "../../../utility/Environment";
@@ -12,20 +11,23 @@ import { Example } from "../../../types/kanji/Example";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
 import Viewports, { Viewport } from "../../../utility/Viewports";
 import { SizeMeProps, withSize } from "react-sizeme";
+import { CardFaceProps } from "../FlashCard";
+import { Kanji } from "../../../types/kanji/Kanji";
 
-interface KanjiFlashCardBackProps extends SizeMeProps {
-    kanji: Kanji;
-    onClick: () => void;
+interface KanjiFlashCardBackProps extends CardFaceProps, SizeMeProps {
+
 }
 
 class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
     render() {
-        const { kanji } = this.props;
+        const { data, onClick } = this.props;
+        const kanji = data as Kanji;
+
         return (
             <Container className={styles["wrapper-grade-" + kanji.grade.value] + " " + styles.wrapper} data-testid="back">
                 <Row className={styles.header}>
                     <p className={styles.grade}>Grade {kanji.grade.value}</p>
-                    <Button className={styles.back} variant="outline-danger" onClick={this.props.onClick} title="Reset">
+                    <Button className={styles.back} variant="outline-danger" onClick={onClick} title="Reset">
                         <FontAwesomeIcon icon={faReply} />
                     </Button>
                 </Row>
@@ -72,13 +74,14 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
     }
 
     private getReading = (type: ReadingType): string => {
-        return this.props.kanji.readings
+        return (this.props.data as Kanji).readings
             .filter(it => it.type === type)
             .map(it => it.romanji + " (" + it.kana.trim() + ")")[0];
     }
 
     private getExamples = (): Example[] => {
-        const { kanji } = this.props;
+        const { data } = this.props;
+        const kanji = data as Kanji;
         const viewport = Viewports.fromFlashCardWidth(this.props.size.width);
         let examplesQuantity: number;
         switch (viewport) {
@@ -96,9 +99,7 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
             }
             default: examplesQuantity = 3;
         }
-        const examples = Arrays.getRandomElements(kanji.examples, examplesQuantity);
-        console.log(examples);
-        return examples;
+        return Arrays.getRandomElements(kanji.examples, examplesQuantity);
     }
 }
 

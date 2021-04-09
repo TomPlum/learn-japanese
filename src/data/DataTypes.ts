@@ -1,4 +1,3 @@
-import { KanaColumn } from "../types/KanaColumn";
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 import { KanaColumn } from "../types/kana/KanaColumn";
 

@@ -1,5 +1,4 @@
-import {Numbers} from "./Numbers";
-import { Kana } from "../types/Kana";
+import { Numbers } from "./Numbers";
 
 export class RandomNumberGenerator {
     //TODO: Move to Arrays.ts

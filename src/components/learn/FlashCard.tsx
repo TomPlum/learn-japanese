@@ -1,10 +1,12 @@
-import React, { Component, FunctionComponent } from "react";
+import React, { Component, ComponentClass, FunctionComponent } from "react";
 import ReactCardFlip from "react-card-flip";
 import Learnable from "../../types/learn/Learnable";
 
+type CardFace = FunctionComponent<CardFaceProps> | ComponentClass<any>;
+
 export interface CardProps {
-    front: FunctionComponent<CardFaceProps>;
-    back: FunctionComponent<CardFaceProps>;
+    front: CardFace;
+    back: CardFace;
 }
 
 //TODO: Can the MyComponentFlashCardFront and Back components have explicit sub-types like Kana and CalendarData?
@@ -36,8 +38,8 @@ class FlashCard extends Component<FlashCardProps, FlashCardState> {
     render() {
         const { flipped } = this.state;
         const { data, front, back } = this.props;
-        const Front: React.FunctionComponent<CardFaceProps> = front;
-        const Back: React.FunctionComponent<CardFaceProps> = back;
+        const Front = front as React.FunctionComponent<CardFaceProps>;
+        const Back = back as React.FunctionComponent<CardFaceProps>;
 
         return (
             <ReactCardFlip isFlipped={flipped} infinite={true}>

@@ -5,7 +5,6 @@ import SearchPage from "../pages/SearchPage";
 import LandingPage from "../pages/LandingPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import HelpPage from "../pages/HelpPage";
-import KanjiPage from "../pages/KanjiPage";
 import styles from "../../styles/sass/components/layout/Main.module.scss";
 
 class Main extends Component {
@@ -17,7 +16,6 @@ class Main extends Component {
                         <Route exact path="/" component={LandingPage}/>
                         <Route exact path="/play" component={GamePage}/>
                         <Route exact path="/search" component={SearchPage}/>
-                        <Route exact path="/kanji" component={KanjiPage}/>
                         <Route exact path="/help" component={HelpPage} />
                         <Route component={NotFoundPage} />
                     </Switch>

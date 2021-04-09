@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, FunctionComponent } from "react";
 import KanaMemoryGame from "../game/KanaMemoryGame";
 import GameResult from "../../types/game/GameResult";
 import GameResultScreen from "../results/GameResultScreen";
@@ -22,6 +22,8 @@ import KanaFlashCardFront from "../learn/kana/KanaFlashCardFront";
 import KanaFlashCardBack from "../learn/kana/KanaFlashCardBack";
 import LearningDataRepository from "../../repository/LearningDataRepository";
 import { CardProps } from "../learn/FlashCard";
+import KanjiFlashCardFront from "../learn/kanji/KanjiFlashCardFront";
+import KanjiFlashCardBack from "../learn/kanji/KanjiFlashCardBack";
 
 interface GamePageState {
     loading: boolean;
@@ -169,6 +171,7 @@ class GamePage extends Component<{}, GamePageState> {
         switch (this.state.learnSettings?.topic) {
             case Topic.KANA: return { front: KanaFlashCardFront, back: KanaFlashCardBack };
             case Topic.CALENDAR: return { front: CalendarFlashCardFront, back: CalendarFlashCardBack };
+            case Topic.KANJI: return { front: KanjiFlashCardFront, back: KanjiFlashCardBack }
         }
         throw new Error("Cannot get card faces for invalid learn settings");
     }

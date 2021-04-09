@@ -3,12 +3,16 @@ import { LearnSessionSettings } from "../../components/layout/GameSettingsMenu";
 import { Topic } from "../../types/Topic";
 import { KanaRepository } from "../../repository/KanaRepository";
 import CalendarRepository from "../../repository/CalendarRepository";
+import { KanjiRepository } from "../../repository/KanjiRepository";
+import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 
 jest.mock('../../repository/KanaRepository');
+jest.mock('../../repository/KanjiRepository');
 jest.mock('../../repository/CalendarRepository');
 
 const mockKanaRepository = jest.fn();
 const mockCalendarRepository = jest.fn();
+const mockKanjiRepository = jest.fn();
 
 beforeEach(() => {
     (KanaRepository as jest.MockedFunction<any>).mockImplementation(() => {
@@ -17,6 +21,10 @@ beforeEach(() => {
 
     (CalendarRepository as jest.MockedFunction<any>).mockImplementation(() => {
         return  { read: mockCalendarRepository }
+    });
+
+    (KanjiRepository as jest.MockedFunction<any>).mockImplementation(() => {
+        return  { read: mockKanjiRepository }
     });
 })
 
@@ -34,6 +42,12 @@ describe("Learn Data Repository", () => {
         const config: LearnSessionSettings = { topic: Topic.CALENDAR, settings: { calendar: { days: true } } };
         repository.read(config);
         expect(mockCalendarRepository).toHaveBeenCalledWith({ days: true });
+    });
+
+    test('Should delegate to the KanjiRepository when the topic is Kanji', () => {
+        const config: LearnSessionSettings = { topic: Topic.KANJI, settings: { kanji: { grades: [KyoikuGrade.ONE] } } };
+        repository.read(config);
+        expect(mockKanjiRepository).toHaveBeenCalledWith({ grades: [KyoikuGrade.ONE] });
     });
 
     test('Passing in falsy settings should return an empty array', () => {
