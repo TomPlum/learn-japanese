@@ -5,9 +5,9 @@ export default class Day implements CalendarData {
     private readonly _kanji: any; //TODO: Change to Kanji once feature merged.
     private readonly _romaji: string;
     private readonly _kana: string;
-    private readonly _meaning: string;
+    private readonly _meaning: string | undefined;
 
-    public constructor(english: string, kanji: any, romaji: string, kana: string, meaning: string) {
+    public constructor(english: string, kanji: any, romaji: string, kana: string, meaning?: string) {
         this._english = english;
         this._kanji = kanji;
         this._romaji = romaji;
@@ -35,7 +35,7 @@ export default class Day implements CalendarData {
         return this._kana;
     }
 
-    getMeaning(): string {
+    getMeaning(): string | undefined {
         return this._meaning;
     }
 }

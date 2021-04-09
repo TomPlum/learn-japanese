@@ -1,18 +1,16 @@
 import CalendarData from "./CalendarData";
 
-export default class Month implements CalendarData {
+export default class TemporalNoun implements CalendarData {
     private readonly _english: string;
     private readonly _kanji: any;
     private readonly _romaji: string;
     private readonly _kana: string;
-    private readonly _meaning: string | undefined;
 
-    public constructor(english: string, kanji: any, romaji: string, kana: string, meaning?: string) {
+    public constructor(english: string, kanji: any, romaji: string, kana: string) {
         this._english = english;
         this._kanji = kanji;
         this._romaji = romaji;
         this._kana = kana;
-        this._meaning = meaning;
     }
 
     getAnswer(): string {
@@ -24,7 +22,7 @@ export default class Month implements CalendarData {
     }
 
     getTitle(): string {
-        return "Month of the Year";
+        return "Temporal Noun / Adverb";
     }
 
     getRomaji(): string {
@@ -36,6 +34,6 @@ export default class Month implements CalendarData {
     }
 
     getMeaning(): string | undefined {
-        return this._meaning;
+        return undefined;
     }
 }

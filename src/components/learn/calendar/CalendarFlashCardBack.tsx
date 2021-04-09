@@ -1,8 +1,8 @@
 import { CardFaceProps } from "../FlashCard";
 import FlashCardBack from "../FlashCardBack";
-import styles from "../../../styles/sass/components/learn/calendar/CalendarFlashCardBack.module.scss"
 import CalendarData from "../../../types/calendar/CalendarData";
 import { Col, Container, Row } from "react-bootstrap";
+import styles from "../../../styles/sass/components/learn/calendar/CalendarFlashCardBack.module.scss"
 
 function CalendarFlashCardBack(props: CardFaceProps) {
     const { data, onClick } = props;
@@ -20,11 +20,11 @@ function CalendarFlashCardBack(props: CardFaceProps) {
                         <p className={styles.romaji}>{value.getKana()} ({value.getRomaji()})</p>
                     </Col>
                 </Row>
-                <Row>
+                {value.getMeaning() && <Row>
                     <Col>
                         <p className={styles.meaning}>Literally meaning: {value.getMeaning()}</p>
                     </Col>
-                </Row>
+                </Row>}
             </Container>
         </FlashCardBack>
     );

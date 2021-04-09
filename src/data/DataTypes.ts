@@ -13,5 +13,5 @@ export interface DayData {
     kanji?: string;
     romaji: string;
     kana: string;
-    meaning: string;
+    meaning?: string;
 }

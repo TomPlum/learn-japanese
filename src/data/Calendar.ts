@@ -143,6 +143,35 @@ export function months(): DayData[] {
     ];
 }
 
+export function nouns(): DayData[] {
+    return [
+        {
+            name: "Tomorrow",
+            kanji: "明日",
+            romaji: "ashita",
+            kana: "あした"
+        },
+        {
+            name: "Yesterday",
+            kanji: "昨日",
+            romaji: "kinō",
+            kana: "きのう"
+        },
+        {
+            name: "The day after tomorrow",
+            kanji: "明後日",
+            romaji: "asatte",
+            kana: "あさって"
+        },
+        {
+            name: "The day before yesterday",
+            kanji: "一昨日",
+            romaji: "ototoi",
+            kana: "おととい"
+        },
+    ];
+}
+
 export function phrases(): DayData[] {
     return [
         {
