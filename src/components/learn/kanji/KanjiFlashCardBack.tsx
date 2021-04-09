@@ -24,7 +24,7 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
         const kanji = data as Kanji;
 
         return (
-            <Container className={styles["wrapper-grade-" + kanji.grade.value] + " " + styles.wrapper} data-testid="back">
+            <Container className={styles["wrapper-grade-" + kanji.grade.value] + " " + styles.wrapper}>
                 <Row className={styles.header}>
                     <p className={styles.grade}>Grade {kanji.grade.value}</p>
                     <Button className={styles.back} variant="outline-danger" onClick={onClick} title="Reset">
@@ -34,9 +34,7 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
 
                 <Row className={styles.body}>
                     <Col sm={6} xs={4}>
-                        <a href={kanji.source} target="_blank" className={styles.source} title="Click for Wiki source">
-                            <KanjiDisplay kanji={kanji} className={styles.display} showSource />
-                        </a>
+                        <KanjiDisplay kanji={kanji} className={styles.display} showSource />
                     </Col>
                     <Col sm={6} xs={8}>
                         <p className={styles.text}>
