@@ -1,18 +1,20 @@
 import KanaGameSettingsMenu, { KanaGameSettingsMenuProps } from "../../../components/settings/KanaGameSettingsMenu";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { DisplayType } from "../../../types/DisplayType";
-import { GameSettings } from "../../../types/GameSettings";
-import { LifeQuantity } from "../../../types/LifeQuantity";
+import { DisplayType } from "../../../types/game/DisplayType";
+import { GameSettings } from "../../../types/game/GameSettings";
+import { LifeQuantity } from "../../../types/game/LifeQuantity";
 
 let settings: GameSettings;
 
 beforeEach(() => {
    settings = {
-       display: { cards: 1, type: DisplayType.ROMAJI },
-       hints: { enabled: true, quantity: 3 },
-       kana: { diagraphs: false, hiragana: true, katakana: false, quantity: 50 },
-       lives: { enabled: false, quantity: LifeQuantity.FIVE },
-       time: { countdown: false, timed: true }
+       kana: {
+           display: { cards: 1, type: DisplayType.ROMAJI },
+           hints: { enabled: true, quantity: 3 },
+           kana: { diagraphs: false, hiragana: true, katakana: false, quantity: 50 },
+           lives: { enabled: false, quantity: LifeQuantity.FIVE },
+           time: { countdown: false, timed: true }
+       }
    };
 });
 
@@ -43,7 +45,7 @@ test('Changing the game mode to Kana and submitting should update the settings',
     const { confirm, kanaModeButton } = setup();
     fireEvent.click(kanaModeButton);
     fireEvent.click(confirm);
-    settings.display = { type: DisplayType.KANA, cards: 4 }
+    settings.kana!.display = { type: DisplayType.KANA, cards: 4 }
     expect(onSubmitHandler).toHaveBeenCalledWith(settings);
 });
 

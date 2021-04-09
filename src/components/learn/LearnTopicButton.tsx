@@ -2,27 +2,28 @@ import { Component } from "react";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { LearnKanaMode } from "../../types/LearnKanaMode";
 import styles from "../../styles/sass/components/learn/LearnTopicButton.module.scss";
+import LearningMode from "../../types/learn/LearningMode";
 
 export interface LearnTopicButtonProps {
     icon: IconDefinition | string;
     iconColour?: string;
-    type: LearnKanaMode;
-    selected: LearnKanaMode;
-    onClick: (mode: LearnKanaMode) => void;
+    type: LearningMode;
+    selected: LearningMode;
+    onClick: (mode: LearningMode) => void;
 }
 
 class LearnTopicButton extends Component<LearnTopicButtonProps> {
 
     render() {
         const { icon, type, selected, iconColour } = this.props;
-        const colour = selected === type ? iconColour : "#000"
+        const isSelected = selected.displayName === type.displayName;
+        const colour = isSelected ? iconColour : "#000"
 
         return (
             <Button
                 onClick={this.handleOnClick}
-                className={(selected === type ? styles.selected : styles.notSelected) + " " + styles.button}
+                className={(isSelected ? styles.selected : styles.notSelected) + " " + styles.button}
             >
                 {this.isFontAwesomeIcon(icon) &&
                     <FontAwesomeIcon
@@ -38,7 +39,7 @@ class LearnTopicButton extends Component<LearnTopicButtonProps> {
                     </span>
                 }
 
-                <p className={styles.name}>{type}</p>
+                <p className={styles.name}>{type.displayName}</p>
             </Button>
         );
     }

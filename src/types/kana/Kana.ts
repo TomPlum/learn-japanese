@@ -1,8 +1,9 @@
 import KanaType from "./KanaType";
 import {KanaColumn} from "./KanaColumn";
-import Arrays from "../utility/Arrays";
+import Arrays from "../../utility/Arrays";
+import Learnable from "../learn/Learnable";
 
-export class Kana {
+export class Kana implements Learnable {
     private readonly _code: string;
     private readonly _romaji: string[];
     private readonly _type: KanaType;
@@ -47,6 +48,18 @@ export class Kana {
 
     get isDiacritical(): boolean {
         return this._isDiacritical;
+    }
+
+    getQuestion(): string {
+        return this._code;
+    }
+
+    getAnswer(): string {
+        return this.getFullRomajiString();
+    }
+
+    getTitle(): string {
+        return this._type;
     }
 
     public equals(other: any): boolean {

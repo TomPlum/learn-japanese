@@ -1,5 +1,6 @@
 import { KanaColumn } from "../types/KanaColumn";
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
+import { KanaColumn } from "../types/kana/KanaColumn";
 
 export interface KanaData {
     name: string;
@@ -7,6 +8,14 @@ export interface KanaData {
     romaji: string[];
     column: KanaColumn;
     diacritical: boolean;
+}
+
+export interface DayData {
+    name: string;
+    kanji?: string;
+    romaji: string;
+    kana: string;
+    meaning?: string;
 }
 
 export interface KanjiData {

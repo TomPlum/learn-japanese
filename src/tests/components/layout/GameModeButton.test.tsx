@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import GameModeButton, { GameModeButtonProps } from "../../../components/layout/GameModeButton";
-import { GameMode } from "../../../types/GameMode";
+import { KanaGameMode } from "../../../types/game/mode/KanaGameMode";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 
 const onClickHandler = jest.fn();
@@ -9,7 +9,7 @@ let props: GameModeButtonProps;
 
 beforeEach(() => {
     props = {
-        mode: GameMode.RELAXED,
+        mode: KanaGameMode.RELAXED,
         isSelected: true,
         icon: faGraduationCap,
         onClick: onClickHandler

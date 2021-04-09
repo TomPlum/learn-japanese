@@ -1,0 +1,8 @@
+@import "src/styles/sass/flashcards";
+
+@include CalendarFlashCard;
+
+.calendar {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 3.5em;
+}

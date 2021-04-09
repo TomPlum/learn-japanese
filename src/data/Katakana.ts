@@ -1,4 +1,4 @@
-import {KanaColumn} from "../types/KanaColumn";
+import {KanaColumn} from "../types/kana/KanaColumn";
 import { KanaData } from "./DataTypes";
 
 function katakana(): KanaData[] {

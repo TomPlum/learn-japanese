@@ -1,5 +1,5 @@
 import { ChangeEvent, Component } from "react";
-import { LifeQuantity } from "../../types/LifeQuantity";
+import { LifeQuantity } from "../../types/game/LifeQuantity";
 import { Form } from "react-bootstrap";
 
 interface LivesSelectorProps {

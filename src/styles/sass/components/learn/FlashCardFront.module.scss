@@ -1,0 +1,11 @@
+@import "src/styles/sass/flashcards";
+@import "src/styles/sass/viewports";
+
+@include FlashCardWrapper;
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}

@@ -3,6 +3,10 @@ import { LifeQuantity } from "./LifeQuantity";
 import { DisplayType } from "./DisplayType";
 
 export interface GameSettings {
+    kana?: KanaGameSettings;
+}
+
+export interface KanaGameSettings {
     display: DisplaySettings;
     kana: KanaSettings
     hints: HintSettings;

@@ -1,4 +1,4 @@
-@import "src/styles/sass/mixins.scss";
+@import "src/styles/sass/mixins";
 @import "src/styles/sass/viewports";
 
 @mixin card {
@@ -10,22 +10,6 @@
   width: 100%;
   cursor: pointer;
   @include noSelect;
-}
-
-@mixin FlashCardFront {
-  .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-@mixin FlashCardBack {
-  .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-  }
 }
 
 @mixin FlashCardWrapper {
@@ -58,6 +42,12 @@
 }
 
 @mixin KanaFlashCard {
+  .wrapper {
+    border-color: #3a97ff;
+  }
+}
+
+@mixin CalendarFlashCard {
   .wrapper {
     border-color: #3a97ff;
   }

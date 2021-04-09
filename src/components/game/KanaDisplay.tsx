@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import { Container } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaDisplay.module.scss";
 import DynamicCharacter, { CharacterStyleProps } from "./DynamicCharacter";

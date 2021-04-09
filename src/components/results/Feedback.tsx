@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Accordion, Button, Card, Container } from "react-bootstrap";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import AnswerMistake from "./AnswerMistake";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";

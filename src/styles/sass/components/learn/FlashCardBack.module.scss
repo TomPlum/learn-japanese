@@ -1,0 +1,31 @@
+@import "src/styles/sass/flashcards";
+
+@include FlashCardWrapper;
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  height: 25px;
+  padding: 0 20px;
+  align-self: stretch;
+  flex: 1 0 100%
+}
+
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 100%;
+  height: 100%;
+}
+
+.title {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.5em;
+}

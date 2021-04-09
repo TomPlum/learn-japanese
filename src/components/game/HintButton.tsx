@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfinity, faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Button, OverlayTrigger } from "react-bootstrap";
 import PopOver from "../ui/PopOver";
-import { Kana } from "../../types/Kana";
-import { KanaColumn } from "../../types/KanaColumn";
+import { Kana } from "../../types/kana/Kana";
+import { KanaColumn } from "../../types/kana/KanaColumn";
 import Viewports, { Viewport } from "../../utility/Viewports";
 import styles from "../../styles/sass/components/game/HintButton.module.scss";
 

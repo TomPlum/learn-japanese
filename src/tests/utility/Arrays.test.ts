@@ -90,4 +90,12 @@ describe("Arrays Utility", () => {
             expect(result.length).toBe(2);
         });
     });
+
+    describe("Chunked", () => {
+        it("Should chunk array when quantity is divisible exactly", () => {
+            const array = [1, 2, 3, 4, 5, 6];
+            const result = Arrays.chunked(array, 2);
+            expect(result).toEqual([[1, 2], [3, 4], [5, 6]]);
+        });
+    });
 });

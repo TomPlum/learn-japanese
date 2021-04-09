@@ -1,9 +1,11 @@
-import { RandomNumberGenerator } from "../../../../utility/RandomNumberGenerator";
-import { Kana } from "../../../../types/Kana";
-import KanaType from "../../../../types/KanaType";
-import { KanaColumn } from "../../../../types/KanaColumn";
+import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
+import { Kana } from "../../../types/kana/Kana";
+import KanaType from "../../../types/kana/KanaType";
+import { KanaColumn } from "../../../types/kana/KanaColumn";
 import { fireEvent, render, screen } from "@testing-library/react";
-import LearnKana, { LearnKanaProps } from "../../../../components/learn/kana/LearnKana";
+import Learn, { LearnProps } from "../../../components/learn/Learn";
+import KanaFlashCardFront from "../../../components/learn/kana/KanaFlashCardFront";
+import KanaFlashCardBack from "../../../components/learn/kana/KanaFlashCardBack";
 
 const onFinishHandler = jest.fn();
 
@@ -12,12 +14,13 @@ const i = new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const e = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const o = new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 
-let props: LearnKanaProps;
+let props: LearnProps;
 
 beforeEach(() => {
     props = {
-        kana: [a, i, e, o],
-        onFinish: onFinishHandler
+        data: [a, i, e, o],
+        onFinish: onFinishHandler,
+        card: { front: KanaFlashCardFront, back: KanaFlashCardBack }
     };
 
     RandomNumberGenerator.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
@@ -34,7 +37,7 @@ afterEach(() => {
 });
 
 const setup = () => {
-    const component = render(<LearnKana {...props} />);
+    const component = render(<Learn {...props} />);
     return {
         remembered: component.getByTitle('I remembered it'),
         forgot: component.getByTitle('I couldn\'t remember it'),

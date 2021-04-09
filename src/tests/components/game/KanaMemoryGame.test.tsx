@@ -1,12 +1,12 @@
 import KanaMemoryGame, { KanaMemoryGameProps } from "../../../components/game/KanaMemoryGame";
 import { fireEvent, render, screen, waitForElementToBeRemoved, cleanup } from "@testing-library/react";
-import { DisplayType } from "../../../types/DisplayType";
+import { DisplayType } from "../../../types/game/DisplayType";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
-import { Kana } from "../../../types/Kana";
-import KanaType from "../../../types/KanaType";
-import { KanaColumn } from "../../../types/KanaColumn";
+import { Kana } from "../../../types/kana/Kana";
+import KanaType from "../../../types/kana/KanaType";
+import { KanaColumn } from "../../../types/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
-import { FailureReason } from "../../../types/FailureReason";
+import { FailureReason } from "../../../types/game/FailureReason";
 import { Environment } from "../../../utility/Environment";
 import { v4 } from "uuid";
 

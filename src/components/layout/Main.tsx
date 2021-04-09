@@ -14,7 +14,7 @@ class Main extends Component {
             <div className={styles.wrapper}>
                 <HashRouter basename={process.env.REACT_APP_BASE_PATH}>
                     <Switch>
-                        <Route exact path="/" component={LandingPage} />
+                        <Route exact path="/" component={LandingPage}/>
                         <Route exact path="/play" component={GamePage}/>
                         <Route exact path="/search" component={SearchPage}/>
                         <Route exact path="/kanji" component={KanjiPage}/>

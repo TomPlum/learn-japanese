@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/results/AnswerMistake.module.scss";
 
 interface AnswerMistakeProps {

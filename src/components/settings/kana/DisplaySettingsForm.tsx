@@ -1,6 +1,6 @@
 import { Component } from "react";
-import { DisplaySettings } from "../../../types/GameSettings";
-import { DisplayType } from "../../../types/DisplayType";
+import { DisplaySettings } from "../../../types/game/GameSettings";
+import { DisplayType } from "../../../types/game/DisplayType";
 import DisplayTypeButton from "../../ui/DisplayTypeButton";
 import { faFont, faGripVertical, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";

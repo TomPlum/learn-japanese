@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import ErrorBoundary from "../../components/ErrorBoundary";
+import ErrorBoundary from "../../../components/error/ErrorBoundary";
 
 function Bomb({ shouldThrow }: { shouldThrow: boolean }) {
     if (shouldThrow) {

@@ -1,26 +1,17 @@
-import { Component } from "react";
-import { Kana } from "../../../types/Kana";
-import { Container, Row } from "react-bootstrap";
 import KanaDisplay from "../../game/KanaDisplay";
+import { CardFaceProps } from "../FlashCard";
+import { Kana } from "../../../types/kana/Kana";
+import FlashCardFront from "../FlashCardFront";
 import styles from "../../../styles/sass/components/learn/kana/KanaFlashCardFront.module.scss";
 
-export interface KanaFlashCardFrontProps {
-    kana: Kana;
-    onClick: () => void;
-}
+const KanaFlashCardFront = (props: CardFaceProps) => {
+    const { data, onClick } = props;
 
-class KanaFlashCardFront extends Component<KanaFlashCardFrontProps> {
-    render() {
-        const { kana, onClick } = this.props;
-
-        return (
-            <Container className={styles.wrapper} onClick={onClick}>
-                <Row>
-                    <KanaDisplay kana={kana} style={{ character: { className: styles.kana } }}/>
-                </Row>
-            </Container>
-        )
-    }
-}
+    return (
+        <FlashCardFront onClick={onClick} className={styles.wrapper}>
+            <KanaDisplay kana={data as Kana} style={{ character: { className: styles.kana } }} />
+        </FlashCardFront>
+    )
+};
 
 export default KanaFlashCardFront;

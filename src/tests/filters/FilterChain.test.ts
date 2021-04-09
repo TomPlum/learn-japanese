@@ -1,7 +1,7 @@
 import FilterChain from "../../filters/FilterChain";
-import { Kana } from "../../types/Kana";
-import KanaType from "../../types/KanaType";
-import { KanaColumn } from "../../types/KanaColumn";
+import { Kana } from "../../types/kana/Kana";
+import KanaType from "../../types/kana/KanaType";
+import { KanaColumn } from "../../types/kana/KanaColumn";
 import DiagraphFilter from "../../filters/kana/DiagraphFilter";
 import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
 

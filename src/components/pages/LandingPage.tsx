@@ -5,7 +5,7 @@ import Inspectable from "../ui/Inspectable";
 import KanaCarousel from "../ui/KanaCarousel";
 import { faPaintBrush, faPlay, faSearch, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import { KanaRepository } from "../../repository/KanaRepository";
 import { Environment } from "../../utility/Environment";
 import ParallaxBackground from "../layout/ParallaxBackground";

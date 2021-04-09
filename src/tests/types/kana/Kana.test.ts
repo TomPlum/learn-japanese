@@ -1,8 +1,8 @@
-import { Kana } from "../../types/Kana";
-import KanaType from "../../types/KanaType";
-import { KanaColumn } from "../../types/KanaColumn";
+import { Kana } from "../../../types/kana/Kana";
+import KanaType from "../../../types/kana/KanaType";
+import { KanaColumn } from "../../../types/kana/KanaColumn";
 import each from "jest-each";
-import { KanaRepository } from "../../repository/KanaRepository";
+import { KanaRepository } from "../../../repository/KanaRepository";
 
 describe("Kana", () => {
    describe("Is Diagraph", () => {
@@ -114,5 +114,18 @@ describe("Kana", () => {
            const other = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, true);
            expect(kana.equals(other)).toBe(false);
        });
-   })
+   });
+
+   describe("Learnable", () => {
+      it("Should return the kana unicode for the question", () => {
+          const kana = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+          const question = kana.getQuestion();
+          expect(question).toBe("え");
+      });
+      it("Should return the kana romaji string for the answer", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+          const question = kana.getAnswer();
+          expect(question).toBe("fu (hu)");
+      });
+   });
 });

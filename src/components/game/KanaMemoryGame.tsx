@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import { ButtonGroup, Col, Container, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import Timer from "./Timer";
-import { GameSettings } from "../../types/GameSettings";
+import { GameSettings, KanaGameSettings } from "../../types/game/GameSettings";
 import LifeDisplay from "./LifeDisplay";
-import { LifeQuantity } from "../../types/LifeQuantity";
+import { LifeQuantity } from "../../types/game/LifeQuantity";
 import QuitButton from "../ui/QuitButton";
-import GameResult from "../../types/GameResult";
-import { FailureReason } from "../../types/FailureReason";
+import GameResult from "../../types/game/GameResult";
+import { FailureReason } from "../../types/game/FailureReason";
 import CountDown from "./CountDown";
 import RomajiQuestion from "./RomajiQuestion";
-import { DisplayType } from "../../types/DisplayType";
+import { DisplayType } from "../../types/game/DisplayType";
 import KanaChoiceQuestion from "./KanaChoiceQuestion";
 import Arrays from "../../utility/Arrays";
 import SessionProgressBar from "../ui/SessionProgressBar";
@@ -33,7 +33,7 @@ export interface KanaQuestionProps {
 
 export interface KanaMemoryGameProps {
     kana: Kana[];
-    settings: GameSettings;
+    settings: KanaGameSettings;
     onFinish: (result: GameResult) => void;
     sessionKey?: string;
 }
@@ -135,7 +135,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                             </Col>
                             <Col className={styles.progressWrapper}>
                                 <SessionProgressBar
-                                    inProgress={!hasExhaustedKana}
+                                    inProgress={!hasExhaustedKana && !paused}
                                     quantity={kana.length}
                                     remaining={remainingKana.length}
                                     className={styles.progress}
