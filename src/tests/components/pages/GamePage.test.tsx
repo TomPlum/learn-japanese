@@ -29,9 +29,18 @@ beforeEach(() => {
       return [first, objects];
    });
 });
-
 const setup = () => {
-   const component = render(<GamePage />);
+   const component = render(<GamePage
+       history={{
+          length: 50,
+          location: { pathname: "/menu/learn", search: "", hash: "", state: undefined },
+          action: "POP",
+          push: jest.fn(), go: jest.fn(), replace: jest.fn(), goForward: jest.fn(), goBack: jest.fn(),
+          block: jest.fn(), listen: jest.fn(), createHref: jest.fn()
+       }}
+       match={{ params: { mode: "play" }, isExact: true, path: "/menu/:mode", url: "/menu/learn" }}
+       location={{ pathname: "/menu/learn", search: "", hash: "", state: undefined }}
+   />);
    return {
       mode: component.getByText('Learn'),
       kana: component.queryAllByText('Hiragana & Katakana')[1],

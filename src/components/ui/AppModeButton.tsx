@@ -7,8 +7,9 @@ import menuStyles from "../../styles/sass/components/layout/ControlsMenu.module.
 
 export interface AppModeButtonProps {
     onClick: (mode: AppMode) => void;
-    className?: string;
+    mode: AppMode;
     disabled: boolean;
+    className?: string;
 }
 
 interface AppModeButtonState {
@@ -19,7 +20,7 @@ class AppModeButton extends Component<AppModeButtonProps, AppModeButtonState> {
     constructor(props: AppModeButtonProps | Readonly<AppModeButtonProps>) {
         super(props);
         this.state = {
-            mode: AppMode.PLAY
+            mode: this.props.mode
         }
     }
 
@@ -37,9 +38,14 @@ class AppModeButton extends Component<AppModeButtonProps, AppModeButtonState> {
         return (
             <Nav.Link className={className} onClick={this.handleOnClick} disabled={disabled}>
                 <div>
-                    <FontAwesomeIcon icon={mode === AppMode.PLAY ? faGraduationCap : faGamepad} className={menuStyles.icon} />
+                    <FontAwesomeIcon
+                        icon={mode === AppMode.PLAY ? faGraduationCap : faGamepad}
+                        className={menuStyles.icon}
+                    />
                 </div>
-                <span className={menuStyles.linkText}>{mode === AppMode.PLAY ? "Learn" : "Play"}</span>
+                <span className={menuStyles.linkText}>
+                    {mode === AppMode.PLAY ? "Learn" : "Play"}
+                </span>
             </Nav.Link>
         );
     }
@@ -49,10 +55,12 @@ class AppModeButton extends Component<AppModeButtonProps, AppModeButtonState> {
         switch(mode) {
             case AppMode.LEARN: {
                 this.setState({ mode: AppMode.PLAY });
+                //this.props.onClick(AppMode.LEARN);
                 break;
             }
             case AppMode.PLAY: {
                 this.setState({ mode: AppMode.LEARN });
+                //this.props.onClick(AppMode.PLAY);
                 break;
             }
         }

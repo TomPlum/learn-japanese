@@ -2,6 +2,7 @@ import { fireEvent, render } from "@testing-library/react";
 import { Router } from "react-router-dom";
 import ControlsMenu, { ControlsMenuProps } from "../../../components/layout/ControlsMenu";
 import { createMemoryHistory } from "history";
+import { AppMode } from "../../../types/AppMode";
 
 const history = createMemoryHistory();
 const onChangeAppModeHandler = jest.fn();
@@ -23,7 +24,8 @@ const setup = () => {
 beforeEach(() => {
     props = {
         active: true,
-        onChangeAppMode: onChangeAppModeHandler
+        onChangeAppMode: onChangeAppModeHandler,
+        startingMode: AppMode.PLAY
     };
 });
 

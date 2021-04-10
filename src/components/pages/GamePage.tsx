@@ -1,4 +1,4 @@
-import { Component, FunctionComponent } from "react";
+import { Component } from "react";
 import KanaMemoryGame from "../game/KanaMemoryGame";
 import GameResult from "../../types/game/GameResult";
 import GameResultScreen from "../results/GameResultScreen";
@@ -24,6 +24,8 @@ import LearningDataRepository from "../../repository/LearningDataRepository";
 import { CardProps } from "../learn/FlashCard";
 import KanjiFlashCardFront from "../learn/kanji/KanjiFlashCardFront";
 import KanjiFlashCardBack from "../learn/kanji/KanjiFlashCardBack";
+import { RouteComponentProps } from "react-router-dom";
+import { StaticContext } from "react-router";
 
 interface GamePageState {
     loading: boolean;
@@ -37,9 +39,13 @@ interface GamePageState {
     learnData?: Learnable[];
 }
 
-class GamePage extends Component<{}, GamePageState> {
+interface PageParameters {
+    mode: string;
+}
 
-    constructor(props: {} | Readonly<{}>) {
+class GamePage extends Component<RouteComponentProps<PageParameters>, GamePageState> {
+
+    constructor(props: RouteComponentProps<PageParameters, StaticContext, unknown> | Readonly<RouteComponentProps<PageParameters, StaticContext, unknown>>) {
         super(props);
         this.state = {
             loading: false,
@@ -54,6 +60,11 @@ class GamePage extends Component<{}, GamePageState> {
         }
     }
 
+    componentDidMount() {
+        const navigationMode = this.props.match.params.mode;
+        this.setState({ mode: navigationMode === "learn" ? AppMode.LEARN : AppMode.PLAY });
+    }
+
     render() {
         const { loading, gameSettings, learnSettings, inResultsScreen, gameResult, learningResult, mode } = this.state;
 
@@ -64,7 +75,7 @@ class GamePage extends Component<{}, GamePageState> {
                 <MainErrorBoundary>
                     <LoadingSpinner active={loading}/>
 
-                    <ControlsMenu onChangeAppMode={this.handleChangeAppMode} active={isInMenu}/>
+                    <ControlsMenu onChangeAppMode={this.handleChangeAppMode} active={isInMenu} startingMode={mode} />
 
                     {isInMenu &&
                         <GameSettingsMenu

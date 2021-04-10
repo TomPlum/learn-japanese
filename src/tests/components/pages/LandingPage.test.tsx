@@ -27,9 +27,9 @@ const setup = () => {
 
     return {
         play: screen.getByText('Play'),
+        learn: screen.getByText('Learn'),
         search: screen.getByText('Search'),
         help: screen.getByText('Help'),
-        kanji: screen.getByText('Kanji'),
         japaneseInspectable: screen.getByTestId('japanese-inspectable'),
         hiraganaInspectable: screen.getByTestId('hiragana-inspectable'),
         katakanaInspectable: screen.getByTestId('katakana-inspectable'),
@@ -96,9 +96,9 @@ test('Should render the play button', () => {
     expect(play).toBeInTheDocument();
 });
 
-test('Should render the kanji button', () => {
-    const { kanji } = setup();
-    expect(kanji).toBeInTheDocument();
+test('Should render the learn button', () => {
+    const { learn } = setup();
+    expect(learn).toBeInTheDocument();
 });
 
 test('Should render the search button', () => {
@@ -118,16 +118,16 @@ test('Should render the kana carousel', () => {
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
-test('Clicking the play button should route the user to /play', () => {
+test('Clicking the play button should route the user to /menu/play', () => {
     const { play } = setup();
     fireEvent.click(play);
-    expect(history.location.pathname).toBe('/play');
+    expect(history.location.pathname).toBe('/menu/play');
 });
 
-test('Clicking the kanji button should route the user to /kanji', () => {
-    const { kanji } = setup();
-    fireEvent.click(kanji);
-    expect(history.location.pathname).toBe('/kanji');
+test('Clicking the learn button should route the user to /menu/learn', () => {
+    const { learn } = setup();
+    fireEvent.click(learn);
+    expect(history.location.pathname).toBe('/menu/learn');
 });
 
 test('Clicking the search button should route the user to /search', () => {

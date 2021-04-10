@@ -11,12 +11,13 @@ import { AppMode } from "../../types/AppMode";
 
 export interface ControlsMenuProps {
     onChangeAppMode: (mode: AppMode) => void;
+    startingMode: AppMode;
     active: boolean;
 }
 
 class ControlsMenu extends Component<ControlsMenuProps> {
     render() {
-        const { onChangeAppMode, active } = this.props;
+        const { onChangeAppMode, startingMode, active } = this.props;
         return (
             <Navbar variant="dark" fixed="top" className={styles.navbar}>
                 <Container className={styles.innerWrapper} fluid>
@@ -32,7 +33,13 @@ class ControlsMenu extends Component<ControlsMenuProps> {
                             </Col>
 
                             <Col>
-                                <AppModeButton className={styles.navLink} onClick={onChangeAppMode} disabled={!active} />
+                                <AppModeButton
+                                    key={startingMode}
+                                    className={styles.navLink}
+                                    mode={startingMode}
+                                    onClick={onChangeAppMode}
+                                    disabled={!active}
+                                />
                             </Col>
 
                             <Col>
