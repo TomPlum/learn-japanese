@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import GamePage from "../../../components/pages/GamePage";
+import MainMenuPage from "../../../components/pages/MainMenuPage";
 import hiragana from "../../../data/Hiragana";
 import { KanaData } from "../../../data/DataTypes";
 import katakana from "../../../data/Katakana";
@@ -30,7 +30,7 @@ beforeEach(() => {
    });
 });
 const setup = () => {
-   const component = render(<GamePage
+   const component = render(<MainMenuPage
        history={{
           length: 50,
           location: { pathname: "/menu/learn", search: "", hash: "", state: undefined },

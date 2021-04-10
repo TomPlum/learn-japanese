@@ -12,7 +12,6 @@ import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import LearningResultScreen from "../results/LearningResultScreen";
 import Arrays from "../../utility/Arrays";
 import MainErrorBoundary from "../error/MainErrorBoundary";
-import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 import { Topic } from "../../types/Topic";
 import Learnable from "../../types/learn/Learnable";
 import Learn from "../learn/Learn";
@@ -26,8 +25,9 @@ import KanjiFlashCardFront from "../learn/kanji/KanjiFlashCardFront";
 import KanjiFlashCardBack from "../learn/kanji/KanjiFlashCardBack";
 import { RouteComponentProps } from "react-router-dom";
 import { StaticContext } from "react-router";
+import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss";
 
-interface GamePageState {
+interface MainMenuPageState {
     loading: boolean;
     gameSettings?: GameTypeSettings;
     learnSettings?: LearnSessionSettings;
@@ -43,7 +43,7 @@ interface PageParameters {
     mode: string;
 }
 
-class GamePage extends Component<RouteComponentProps<PageParameters>, GamePageState> {
+class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMenuPageState> {
 
     constructor(props: RouteComponentProps<PageParameters, StaticContext, unknown> | Readonly<RouteComponentProps<PageParameters, StaticContext, unknown>>) {
         super(props);
@@ -188,4 +188,4 @@ class GamePage extends Component<RouteComponentProps<PageParameters>, GamePageSt
     }
 }
 
-export default GamePage;
+export default MainMenuPage;

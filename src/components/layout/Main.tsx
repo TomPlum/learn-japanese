@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import GamePage from "../pages/GamePage";
+import MainMenuPage from "../pages/MainMenuPage";
 import SearchPage from "../pages/SearchPage";
 import LandingPage from "../pages/LandingPage";
 import NotFoundPage from "../pages/NotFoundPage";
@@ -14,7 +14,7 @@ class Main extends Component {
                 <HashRouter basename={process.env.REACT_APP_BASE_PATH}>
                     <Switch>
                         <Route exact path="/" component={LandingPage}/>
-                        <Route exact path="/menu/:mode" component={GamePage}/>
+                        <Route exact path="/menu/:mode" component={MainMenuPage}/>
                         <Route exact path="/search" component={SearchPage}/>
                         <Route exact path="/help" component={HelpPage} />
                         <Route component={NotFoundPage} />
