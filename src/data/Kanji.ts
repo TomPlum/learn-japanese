@@ -861,7 +861,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "ちょう", romanji: "chō" }],
             kun: [{ kana: "まち", romanji: "machi" }],
             source: "https://en.wiktionary.org/wiki/%E7%94%BA#Kanji",
-            meanings: ["town", "village", "block", "street"],
+            meanings: ["town", "block", "street"],
             grade: KyoikuGrade.ONE,
             examples: [
                 { value: "町", kana: ["まち, ちょう"], english: ["town", "block", "neighbourhood"] },
@@ -1114,7 +1114,7 @@ export function kyoiku(): KanjiData[] {
         {
             name: "早",
             code: "\u65E9",
-            on: [{ kana: "そう", romanji: "so" }],
+            on: [{ kana: "そう", romanji: "sō" }, { kana: "せい", romanji: "sei" }],
             kun: [{ kana: "はやい", romanji: "hayai" }],
             source: "https://en.wiktionary.org/wiki/%E6%97%A9#Kanji",
             meanings: ["early", "fast"],
@@ -1165,7 +1165,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "そん", romanji: "son" }],
             kun: [{ kana: "むら", romanji: "mura" }],
             source: "https://en.wiktionary.org/wiki/%E6%9D%91#Kanji",
-            meanings: ["village", "town"],
+            meanings: ["village"],
             grade: KyoikuGrade.ONE,
             examples: [
                 { value: "村", kana: ["むら"], english: ["village"] },
@@ -1229,7 +1229,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "しょう", romanji: "shō" }],
             kun: [{ kana: "あお", romanji: "ao" }],
             source: "https://en.wiktionary.org/wiki/%E9%9D%92#Kanji",
-            meanings: ["blue", "green"],
+            meanings: ["blue"],
             grade: KyoikuGrade.ONE,
             examples: [
                 { value: "青", kana: ["あお"], english: ["blue", "green", "green light"] },
@@ -1303,6 +1303,166 @@ export function kyoiku(): KanjiData[] {
                 { value: "前回", kana: ["ぜんかい"], english: ["last time"] },
                 { value: "前提", kana: ["ぜんてい"], english: ["preamble", "premise", "reason"] },
                 { value: "前日", kana: ["ぜんじつ", "まえび"], english: ["previous day"] },
+            ]
+        },
+        {
+            name: "高",
+            code: "\u9AD8",
+            on: [{ kana: "こう", romanji: "kō" }],
+            kun: [{ kana: "たかい", romanji: "takai" }],
+            source: "https://en.wiktionary.org/wiki/%E9%AB%98#Kanji",
+            meanings: ["tall", "high", "expensive"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "高さ", kana: ["たかさ"], english: ["height"] },
+                { value: "高校", kana: ["こうこう"], english: ["senior high school"] },
+                { value: "最高", kana: ["さいこう"], english: ["highest", "supreme", "the most"] },
+                { value: "円高", kana: ["えんだか"], english: ["high valued yen"] },
+                { value: "高", kana: ["たか", "だか"], english: ["quantity", "amount", "volume", "number"] },
+            ]
+        },
+        {
+            name: "来",
+            code: "\u6765",
+            on: [{ kana: "らい", romanji: "rai" }],
+            kun: [{ kana: "くる", romanji: "kuru" }],
+            source: "https://en.wiktionary.org/wiki/%E6%9D%A5#Kanji",
+            meanings: ["come", "due", "next", "cause", "become"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "来", kana: ["らい"], english: ["next"] },
+                { value: "以来", kana: ["いらい"], english: ["since", "henceforth"] },
+                { value: "従来", kana: ["じゅうらい"], english: ["up to now", "so far", "traditional"] },
+                { value: "将来", kana: ["しょうらい"], english: ["future", "prospects"] },
+                { value: "来年", kana: ["らいねん"], english: ["next year"] },
+            ]
+        },
+        {
+            name: "北",
+            code: "\u5317",
+            on: [{ kana: "ほく", romanji: "hoku" }],
+            kun: [{ kana: "きた", romanji: "kita" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8C%97#Kanji",
+            meanings: ["north"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "北", kana: ["きた"], english: ["north"] },
+                { value: "北海道", kana: ["ほっかいどう"], english: ["Hokkaido"] },
+                { value: "北京", kana: ["ぺきん"], english: ["Beijing"] },
+                { value: "北朝鮮", kana: ["きたちょうせん"], english: ["North Korea"] },
+                { value: "東北", kana: ["とうほく", "ひがしきた"], english: ["north east"] },
+            ]
+        },
+        {
+            name: "書",
+            code: "\u66F8",
+            on: [{ kana: "しょ", romanji: "sho" }],
+            kun: [{ kana: "かく", romanji: "kaku" }],
+            source: "https://en.wiktionary.org/wiki/%E6%9B%B8#Kanji",
+            meanings: ["write"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "書記", kana: ["きた"], english: ["clerk", "secretary"] },
+                { value: "秘書", kana: ["ほっかいどう"], english: ["private secretary"] },
+                { value: "報告書", kana: ["ぺきん"], english: ["written report"] },
+                { value: "文書", kana: ["きたちょうせん"], english: ["document", "writing", "letter", "paperwork"] },
+                { value: "教科書", kana: ["とうほく", "ひがしきた"], english: ["textbook"] },
+            ]
+        },
+        {
+            name: "西",
+            code: "\u897F",
+            on: [{ kana: "せい", romanji: "sei" }],
+            kun: [{ kana: "にし", romanji: "nishi" }],
+            source: "https://en.wiktionary.org/wiki/%E8%A5%BF#Kanji",
+            meanings: ["west", "Spain"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "西", kana: ["にし"], english: ["west"] },
+                { value: "関西", kana: ["かんさい", "かんせい"], english: ["Kansai"] },
+                { value: "西側", kana: ["にしがわ"], english: ["west side", "west bank"] },
+                { value: "東西", kana: ["とうざい"], english: ["East and West"] },
+                { value: "西欧", kana: ["せいおう"], english: ["Western Europe"] },
+            ]
+        },
+        {
+            name: "外",
+            code: "\u5916",
+            on: [{ kana: "がい", romanji: "gai" }],
+            kun: [{ kana: "そと", romanji: "soto" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A4%96#Kanji",
+            meanings: ["outside"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "外", kana: ["ほか"], english: ["other places and things", "the rest"] },
+                { value: "海外", kana: ["かいがい"], english: ["foreign", "abroad", "overseas"] },
+                { value: "外交", kana: ["がいこう"], english: ["diplomacy"] },
+                { value: "外国", kana: ["がいこく"], english: ["foreign country"] },
+                { value: "外国人", kana: ["がいこくじん"], english: ["foreigner"] },
+            ]
+        },
+        {
+            name: "話",
+            code: "\u8A71",
+            on: [{ kana: "わ", romanji: "wa" }],
+            kun: [{ kana: "はなし", romanji: "hanashi" }],
+            source: "https://en.wiktionary.org/wiki/%E8%A9%B1#Kanji",
+            meanings: ["tale", "talk"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "話", kana: ["はなし"], english: ["talk", "speech", "chat", "story", "conversation"] },
+                { value: "電話", kana: ["でんわ"], english: ["telephone"] },
+                { value: "対話", kana: ["たいわ"], english: ["interactive", "interaction", "conversation"] },
+                { value: "話題", kana: ["わだい"], english: ["topic", "subject"] },
+                { value: "話し合い", kana: ["はなしあい"], english: ["discussion", "conference"] },
+            ]
+        },
+        {
+            name: "午",
+            code: "\u5348",
+            on: [{ kana: "ご", romanji: "go" }],
+            kun: [{ kana: "うま", romanji: "uma" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8D%88#Kanji",
+            meanings: ["noon", "sign of the horse"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "午後", kana: ["ごご"], english: ["afternoon", "p.m"] },
+                { value: "午前", kana: ["ごぜん"], english: ["morning", "a.m"] },
+                { value: "正午", kana: ["しょうご"], english: ["noon", "midday"] },
+                { value: "午", kana: ["うま"], english: ["seventh sign of the Chinese zodiac"] },
+                { value: "午", kana: ["ひる"], english: ["noon", "midday", "daytime", "lunch"] },
+            ]
+        },
+        {
+            name: "半",
+            code: "\u534A",
+            on: [{ kana: "はん", romanji: "han" }],
+            kun: [{ kana: "なかば", romanji: "nakaba" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8D%8A#Kanji",
+            meanings: ["half", "middle", "odd number"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "半", kana: ["はん"], english: ["half"] },
+                { value: "時半", kana: ["じはん"], english: ["about an hour", "short time"] },
+                { value: "後半", kana: ["こうはん"], english: ["second half", "latter half"] },
+                { value: "半ば", kana: ["なかば"], english: ["middle", "half", "semi", "halfway", "partly"] },
+                { value: "半分", kana: ["はんぶん"], english: ["half"] },
+            ]
+        },
+        {
+            name: "電",
+            code: "\u96FB",
+            on: [{ kana: "でん", romanji: "den" }],
+            kun: [{ kana: "いなずま", romanji: "inazuma" }],
+            source: "https://en.wiktionary.org/wiki/%E9%9B%BB#Kanji",
+            meanings: ["electricity"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "電話", kana: ["でんわ"], english: ["telephone"] },
+                { value: "電気", kana: ["でんき"], english: ["electricity", "electric light"] },
+                { value: "電力", kana: ["でんりょく"], english: ["electric power"] },
+                { value: "電子", kana: ["でんし"], english: ["electron", "electronic"] },
+                { value: "電車", kana: ["でんしゃ"], english: ["electric train"] },
             ]
         },
 
