@@ -3,6 +3,8 @@ import LearnMenu from "../../../components/learn/LearnMenu";
 import LearnCalendarMode from "../../../types/learn/mode/LearnCalendarMode";
 import { Environment } from "../../../utility/Environment";
 import LearnKanaMode from "../../../types/learn/mode/LearnKanaMode";
+import LearnKanjiMode from "../../../types/learn/mode/LearnKanjiMode";
+import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 
 describe("Example 1 - Kana", () => {
     const onStartHandler = jest.fn();
@@ -237,5 +239,43 @@ describe("Example 2 - Calendar", () => {
             }
         });
 
+    });
+});
+
+describe("Example 3 - Kanji (Customisable)", () => {
+    const onStartHandler = jest.fn();
+    const environment = jest.fn();
+
+    const setup = () => {
+        const component = render(<LearnMenu modes={new LearnKanjiMode()} onStart={onStartHandler}/>);
+        return {
+            kyoiku: component.getByText('Kyōiku'),
+            joyo: component.getByText('Jōyō'),
+            numbers: component.getByText('Numbers'),
+            colours: component.getByText('Colours'),
+            time: component.getByText('Time'),
+            custom: component.getByText('Custom'),
+            start: component.getByText('Start'),
+            ...component
+        }
+    }
+
+    beforeEach(() => {
+        Environment.variable = environment;
+    });
+
+    test('Selecting the \'Custom\' option should render the respective topics custom menu component', () => {
+        const { custom } = setup();
+        fireEvent.click(custom);
+        expect(screen.getByText('Grade 1')).toBeInTheDocument();
+    });
+
+    test('Clicking start from a custom menu should call the onStart event handler', () => {
+        const { custom } = setup();
+        fireEvent.click(custom);
+        fireEvent.click(screen.getByText('Grade 1'));
+        fireEvent.click(screen.getByText('Grade 2'));
+        fireEvent.click(screen.getByText('Start'));
+        expect(onStartHandler).toHaveBeenCalledWith({ kanji: { grades: [KyoikuGrade.ONE, KyoikuGrade.TWO], joyo: false, quantity: undefined }});
     });
 });

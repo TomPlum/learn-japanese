@@ -2,15 +2,11 @@ import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { faGraduationCap, faLeaf, faMountain, faPaintBrush, faPlay, faRandom, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import KyoikuGradeButton from "../layout/KyoikuGradeButton";
-import Arrays from "../../utility/Arrays";
-import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
-import { KanjiSettings } from "../../repository/KanjiRepository";
-import styles from "../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
-
-interface KanjiSettingsMenuProps {
-    onSelected: (settings: KanjiSettings) => void;
-}
+import KyoikuGradeButton from "../../layout/KyoikuGradeButton";
+import Arrays from "../../../utility/Arrays";
+import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
+import { CustomLearnMenuProps } from "../LearnMenu";
 
 interface KanjiSettingsMenuState {
     grades: KyoikuGrade[];
@@ -18,8 +14,8 @@ interface KanjiSettingsMenuState {
     joyo: boolean;
 }
 
-class KanjiSettingsMenu extends Component<KanjiSettingsMenuProps, KanjiSettingsMenuState> {
-    constructor(props: KanjiSettingsMenuProps | Readonly<KanjiSettingsMenuProps>) {
+class KanjiSettingsMenu extends Component<CustomLearnMenuProps, KanjiSettingsMenuState> {
+    constructor(props: CustomLearnMenuProps | Readonly<CustomLearnMenuProps>) {
         super(props);
         this.state = {
             grades: [],
@@ -139,13 +135,14 @@ class KanjiSettingsMenu extends Component<KanjiSettingsMenuProps, KanjiSettingsM
 
     onSelectRandom = () => this.setState({ quantity: 50, joyo: true, grades: [] })
 
-
     private onConfirmSelected = () => {
         const { grades, quantity, joyo } = this.state;
-        this.props.onSelected({
-            grades: grades,
-            quantity: quantity,
-            joyo: joyo
+        this.props.onSelect({
+            kanji: {
+                grades: grades,
+                quantity: quantity,
+                joyo: joyo
+            }
         });
     }
 

@@ -40,5 +40,17 @@ describe("Kanji", () => {
         it("Should get the examples", () => {
             expect(kanji.examples).toStrictEqual( [new Example("外国人", ["がいこくじん"], ["foreigner"])]);
         });
+
+        it("Should return the Kyoiku grade for the title", () => {
+            expect(kanji.getTitle()).toBe("Grade 1")
+        });
+
+        it("Should return the kanji character for the question", () => {
+            expect(kanji.getQuestion()).toBe("人")
+        });
+
+        it("Should return the first meaning for the answer", () => {
+            expect(kanji.getAnswer()).toBe("person")
+        });
     });
 });

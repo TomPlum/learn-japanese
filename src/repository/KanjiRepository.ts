@@ -7,9 +7,12 @@ import { KanjiData, KanjiExample, KanjiReading } from "../data/DataTypes";
 import { joyo, kyoiku } from "../data/Kanji";
 
 export interface KanjiSettings {
-    grades: KyoikuGrade[];
+    grades?: KyoikuGrade[];
     quantity?: number;
     joyo?: boolean;
+    numbers?: boolean;
+    colours?: boolean;
+    time?: boolean;
 }
 
 export class KanjiRepository {
@@ -28,7 +31,8 @@ export class KanjiRepository {
             return this.convert(data);
         }
 
-        if (settings.grades.length > 0) {
+        if (settings.grades && settings.grades.length > 0) {
+            // @ts-ignore
             const data = kyoiku().filter(entry => settings.grades.map(it => it.value).includes(entry.grade.value));
             return this.convert(data);
         }

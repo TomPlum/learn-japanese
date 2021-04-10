@@ -46,11 +46,11 @@ export class Kanji implements Learnable, JapaneseCharacter {
     }
 
     getAnswer(): string {
-        return this._character;
+        return this.meanings[0];
     }
 
     getQuestion(): string {
-        return this.meanings[0];
+        return this._character;
     }
 
     getTitle(): string {

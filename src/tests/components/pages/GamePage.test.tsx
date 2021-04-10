@@ -6,7 +6,6 @@ import katakana from "../../../data/Katakana";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 
-
 jest.mock("../../../data/Hiragana");
 jest.mock("../../../data/Katakana");
 
@@ -160,5 +159,14 @@ describe('Learn', () => {
       fireEvent.click(screen.getByText('Start'));
       expect(screen.getByText('Monday')).toBeInTheDocument();
       expect(screen.getByText('月曜日')).toBeInTheDocument();
+   });
+
+   test('Starting a Kanji learning session should render the correct flash card types', () => {
+      const { mode, kanji } = setup();
+      fireEvent.click(mode); //Switch to Learn
+      fireEvent.click(kanji);
+      fireEvent.click(screen.getByText('Start'));
+      expect(screen.getByText(': person')).toBeInTheDocument();
+      expect(screen.getAllByText('人')).toBeDefined();
    });
 });

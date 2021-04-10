@@ -10,7 +10,7 @@ import { LearnSettings } from "../../types/learn/LearnSettings";
 import LearnMenu from "../learn/LearnMenu";
 import LearnKanaMode from "../../types/learn/mode/LearnKanaMode";
 import LearnCalendarMode from "../../types/learn/mode/LearnCalendarMode";
-import LearnKyoikuKanjiMode from "../../types/learn/mode/LearnKyoikuKanjiMode";
+import LearnKanjiMode from "../../types/learn/mode/LearnKanjiMode";
 
 export interface GameTypeSettings {
     topic: Topic;
@@ -95,7 +95,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
             case Topic.KANJI: {
                 switch (mode) {
                     case AppMode.LEARN: {
-                        return <LearnMenu modes={new LearnKyoikuKanjiMode()} onStart={this.onStartLearning} />
+                        return <LearnMenu modes={new LearnKanjiMode()} onStart={this.onStartLearning} />
                     }
                     case AppMode.PLAY: {
                         return <p className={styles.menu} style={{ color: '#FFF' }}>Kanji menu here</p>

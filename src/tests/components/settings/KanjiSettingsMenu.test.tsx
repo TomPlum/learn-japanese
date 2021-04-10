@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import KanjiSettingsMenu from "../../../components/settings/KanjiSettingsMenu";
+import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 
 const onSelectedHandler = jest.fn();
 
 const setup = () => {
-    const component = render(<KanjiSettingsMenu onSelected={onSelectedHandler} />);
+    const component = render(<KanjiSettingsMenu onSelect={onSelectedHandler} />);
     return {
         grade1: component.getByText('Grade 1'),
         grade2: component.getByText('Grade 2'),
@@ -84,12 +84,12 @@ test('Clicking start with Kyoiku kanji selected should call the onSelected event
     const { submit, grade1 } = setup();
     fireEvent.click(grade1);
     fireEvent.click(submit);
-    expect(onSelectedHandler).toHaveBeenCalledWith({ grades: [KyoikuGrade.ONE], quantity: undefined, joyo: false });
+    expect(onSelectedHandler).toHaveBeenCalledWith({ kanji: { grades: [KyoikuGrade.ONE], quantity: undefined, joyo: false } });
 });
 
 test('Clicking start with Random 50 selected should call the onSelected event handler with the correct settings', () => {
     const { submit, random } = setup();
     fireEvent.click(random);
     fireEvent.click(submit);
-    expect(onSelectedHandler).toHaveBeenCalledWith({ grades: [], quantity: 50, joyo: true });
+    expect(onSelectedHandler).toHaveBeenCalledWith({ kanji: { grades: [], quantity: 50, joyo: true } });
 });

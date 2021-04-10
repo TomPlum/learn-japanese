@@ -17,4 +17,8 @@ export default class LearnCalendarMode implements LearnMenuModes {
     getTopic(): string {
         return "CALENDAR";
     }
+
+    isCustomisable(): boolean {
+        return false;
+    }
 }

@@ -14,6 +14,8 @@ export class KyoikuGrade {
     public static readonly FIVE = new KyoikuGrade(5, 185);
     public static readonly SIX = new KyoikuGrade(6, 181);
 
+    public static readonly ALL = [KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR, KyoikuGrade.FIVE, KyoikuGrade.SIX]
+
     get value(): number {
         return this._value;
     }
