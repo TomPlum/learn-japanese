@@ -1274,6 +1274,166 @@ export function kyoiku(): KanjiData[] {
 
         //Grade 2
         {
+            name: "国",
+            code: "\u56FD",
+            on: [{ kana: "こく", romanji: "koku" }],
+            kun: [{ kana: "くに", romanji: "kuni" }],
+            source: "https://en.wiktionary.org/wiki/%E5%9B%BD#Kanji",
+            meanings: ["country"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "国", kana: ["くに"], english: ["country", "state", "region"] },
+                { value: "外国", kana: ["がいこく"], english: ["foreign country"] },
+                { value: "外国人", kana: ["がいこくじん"], english: ["foreigner"] },
+                { value: "韓国", kana: ["かんこく"], english: ["(South) Korea"] },
+                { value: "国家", kana: ["こっか"], english: ["state", "country", "nation"] },
+            ]
+        },
+        {
+            name: "時",
+            code: "\u6642",
+            on: [{ kana: "じ", romanji: "ji" }],
+            kun: [{ kana: "とき", romanji: "toki" }],
+            source: "https://en.wiktionary.org/wiki/%E6%99%82#Kanji",
+            meanings: ["time", "hour"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "時", kana: ["とき"], english: ["time", "hour", "occasion", "moment"] },
+                { value: "時間", kana: ["じかん"], english: ["time", "hours"] },
+                { value: "時期", kana: ["じき"], english: ["time", "season", "period", "soon", "shortly"] },
+                { value: "時代", kana: ["じだい"], english: ["period", "epoch", "era", "age", "the times"] },
+                { value: "当時", kana: ["とうじ"], english: ["at that time", "in those days"] },
+            ]
+        },
+        {
+            name: "分",
+            code: "\u5206",
+            on: [{ kana: "ふん", romanji: "fun" }, { kana: "ぶん", romanji: "bun" }],
+            kun: [{ kana: "わかる", romanji: "wakaru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%88%86#Kanji",
+            meanings: ["minute", "understand"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "分け", kana: ["わけ"], english: ["sharing", "division", "draw", "tie"] },
+                { value: "分ける", kana: ["わける"], english: ["to divide", "to separate", "to make distinctions"] },
+                { value: "自分", kana: ["じぶん"], english: ["myself", "yourself", "oneself", "himself", "herself"] },
+                { value: "部分", kana: ["ぶぶん"], english: ["portion", "section", "part"] },
+                { value: "分野", kana: ["ぶんや"], english: ["field", "sphere", "realm", "division", "branch"] },
+            ]
+        },
+        {
+            name: "前",
+            code: "\u524D",
+            on: [{ kana: "ぜん", romanji: "zen" }],
+            kun: [{ kana: "まえ ", romanji: "mae" }],
+            source: "https://en.wiktionary.org/wiki/%E5%89%8D#Kanji",
+            meanings: ["before", "in-front"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "午前", kana: ["ごぜん"], english: ["morning", "A.M"] },
+                { value: "前年", kana: ["ぜんねん"], english: ["the previous year"] },
+                { value: "前回", kana: ["ぜんかい"], english: ["last time"] },
+                { value: "前提", kana: ["ぜんてい"], english: ["preamble", "premise", "reason"] },
+                { value: "前日", kana: ["ぜんじつ", "まえび"], english: ["previous day"] },
+            ]
+        },
+        {
+            name: "東",
+            code: "\u6771",
+            on: [{ kana: "とう", romanji: "tō" }],
+            kun: [{ kana: "ひがし", romanji: "higashi" }, { kana: "あずま", romanji: "azuma" }],
+            source: "https://en.wiktionary.org/wiki/%E6%9D%B1#Kanji",
+            meanings: ["east"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "東", kana: ["ひがし", "ひむかし", "ひんがし"], english: ["east"] },
+                { value: "東京", kana: ["とうきょう"], english: ["Tokyo"] },
+                { value: "中東", kana: ["ちゅうとう"], english: ["Middle East"] },
+                { value: "東海", kana: ["とうかい"], english: ["region south of Tokyo"] },
+                { value: "東北", kana: ["とうほく", "ひがしきた"], english: ["Northeast China"] },
+            ]
+        },
+        {
+            name: "長",
+            code: "\u9577",
+            on: [{ kana: "ちょう", romanji: "chō" }],
+            kun: [{ kana: "ながい", romanji: "nagai" }],
+            source: "https://en.wiktionary.org/wiki/%E9%95%B7#Kanji",
+            meanings: ["long", "leader"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "長", kana: ["ちょう", "おさ"], english: ["chief", "head"] },
+                { value: "委員長", kana: ["いいんちょう"], english: ["committee chairman"] },
+                { value: "会長", kana: ["かいちょう"], english: ["president (of a society), chairman"] },
+                { value: "議長", kana: ["ぎちょう"], english: ["chairman", "speaker"] },
+                { value: "社長", kana: ["しゃちょう"], english: ["company president", "manager", "director"] },
+            ]
+        },
+        {
+            name: "行",
+            code: "\u884C",
+            on: [{ kana: "こう", romanji: "kō" }, { kana: "ぎょう", romanji: "gyō" }],
+            kun: [{ kana: "いく", romanji: "iku" }, { kana: "ゆく", romanji: "yuku" }, { kana: "おこなう ", romanji: "okonau" }],
+            source: "https://en.wiktionary.org/wiki/%E8%A1%8C#Kanji",
+            meanings: ["go", "going", "journey"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "行う", kana: ["おこなう"], english: ["to perform", "to do", "to conduct oneself"] },
+                { value: "行", kana: ["ぎょう"], english: ["line (i.e. of text)", "row", "verse"] },
+                { value: "銀行", kana: ["ぎんこう"], english: ["bank"] },
+                { value: "行政", kana: ["ぎょうせい"], english: ["administration"] },
+                { value: "行動", kana: ["こうどう"], english: ["action", "conduct", "behaviour"] },
+            ]
+        },
+        {
+            name: "後",
+            code: "\u5F8C",
+            on: [{ kana: "ご", romanji: "go" }, { kana: "こう", romanji: "kō" }],
+            kun: [{ kana: "あと", romanji: "ato" }, { kana: "うしろ", romanji: "ushiro" }, { kana: "のち", romanji: "nochi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BE%8C#Kanji",
+            meanings: ["behind", "after", "back", "later"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "後", kana: ["あと"], english: ["behind", "rear", "after", "later", "after one’s death"] },
+                { value: "午後", kana: ["ごご"], english: ["afternoon", "P.M"] },
+                { value: "後ろ", kana: ["うしろ"], english: ["back", "behind", "rear"] },
+                { value: "今後", kana: ["こんご"], english: ["from now on", "hereafter"] },
+                { value: "最後", kana: ["さいご"], english: ["last", "end", "conclusion"] },
+            ]
+        },
+        {
+            name: "間",
+            code: "\u9593",
+            on: [{ kana: "かん", romanji: "kan" }, { kana: "けん", romanji: "ken" }],
+            kun: [{ kana: "あいだ", romanji: "aida" }, { kana: "ま", romanji: "ma" }],
+            source: "https://en.wiktionary.org/wiki/%E9%96%93#Kanji",
+            meanings: ["interval", "space"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "間", kana: ["あいだ"], english: ["space (between)", "gap", "interval", "distance"] },
+                { value: "間もなく", kana: ["まもなく"], english: ["soon", "before long", "in a short time"] },
+                { value: "期間", kana: ["きかん"], english: ["period", "term", "interval"] },
+                { value: "時間", kana: ["じかん"], english: ["time", "hours"] },
+                { value: "人間", kana: ["にんげん"], english: ["human being", "man", "person"] },
+            ]
+        },
+        {
+            name: "今",
+            code: "\u4ECA",
+            on: [{ kana: "こん", romanji: "kon" }],
+            kun: [{ kana: "いま", romanji: "ima" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BB%8A#Kanji",
+            meanings: ["now"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "今", kana: ["いま"], english: ["now", "the present time", "just now", "soon"] },
+                { value: "今や", kana: ["いまや"], english: ["now"] },
+                { value: "今回", kana: ["こんかい"], english: ["now", "this time", "lately"] },
+                { value: "今月", kana: ["こんげつ"], english: ["this month"] },
+                { value: "今後", kana: ["こんご"], english: ["from now on", "hereafter"] },
+            ]
+        },
+        {
             name: "鳥",
             code: "\u9CE5",
             on: [{ kana: "ちょう", romanji: "cho" }],
@@ -1287,22 +1447,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "鳥類", kana: ["ちょうるい"], english: ["birds"] },
                 { value: "白鳥", kana: ["はくちょう", "しろとり", "しらとり"], english: ["swan"] },
                 { value: "渡り鳥", kana: ["わたりどり"], english: ["migratory bird", "bird of passage",] },
-            ]
-        },
-        {
-            name: "前",
-            code: "\u524D",
-            on: [{ kana: "ぜん", romanji: "zen" }],
-            kun: [{ kana: "まえ ", romanji: "mae" }],
-            source: "https://en.wiktionary.org/wiki/%E5%89%8D#Kanji",
-            meanings: ["before"],
-            grade: KyoikuGrade.TWO,
-            examples: [
-                { value: "午前", kana: ["ごぜん"], english: ["morning", "A.M"] },
-                { value: "前年", kana: ["ぜんねん"], english: ["the previous year"] },
-                { value: "前回", kana: ["ぜんかい"], english: ["last time"] },
-                { value: "前提", kana: ["ぜんてい"], english: ["preamble", "premise", "reason"] },
-                { value: "前日", kana: ["ぜんじつ", "まえび"], english: ["previous day"] },
             ]
         },
 
