@@ -28,7 +28,7 @@
     "test": "react-scripts test",
     "deploy": "gh-pages -d build -m \"Release | Deployed Latest Build\"",
     "coverage": "react-scripts test --coverage --watchAll",
-    "eject": "react-scripts eject",
+    "clean": "rm -r node_modules",
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build"
   },
