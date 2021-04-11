@@ -12,7 +12,6 @@ import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import LearningResultScreen from "../results/LearningResultScreen";
 import Arrays from "../../utility/Arrays";
 import MainErrorBoundary from "../error/MainErrorBoundary";
-import styles from "../../styles/sass/components/pages/GamePage.module.scss";
 import { Topic } from "../../types/Topic";
 import Learnable from "../../types/learn/Learnable";
 import Learn from "../learn/Learn";
@@ -22,8 +21,13 @@ import KanaFlashCardFront from "../learn/kana/KanaFlashCardFront";
 import KanaFlashCardBack from "../learn/kana/KanaFlashCardBack";
 import LearningDataRepository from "../../repository/LearningDataRepository";
 import { CardProps } from "../learn/FlashCard";
+import KanjiFlashCardFront from "../learn/kanji/KanjiFlashCardFront";
+import KanjiFlashCardBack from "../learn/kanji/KanjiFlashCardBack";
+import { RouteComponentProps } from "react-router-dom";
+import { StaticContext } from "react-router";
+import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss";
 
-interface GamePageState {
+interface MainMenuPageState {
     loading: boolean;
     gameSettings?: GameTypeSettings;
     learnSettings?: LearnSessionSettings;
@@ -35,9 +39,13 @@ interface GamePageState {
     learnData?: Learnable[];
 }
 
-class GamePage extends Component<{}, GamePageState> {
+interface PageParameters {
+    mode: string;
+}
 
-    constructor(props: {} | Readonly<{}>) {
+class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMenuPageState> {
+
+    constructor(props: RouteComponentProps<PageParameters, StaticContext, unknown> | Readonly<RouteComponentProps<PageParameters, StaticContext, unknown>>) {
         super(props);
         this.state = {
             loading: false,
@@ -52,6 +60,11 @@ class GamePage extends Component<{}, GamePageState> {
         }
     }
 
+    componentDidMount() {
+        const navigationMode = this.props.match.params.mode;
+        this.setState({ mode: navigationMode === "learn" ? AppMode.LEARN : AppMode.PLAY });
+    }
+
     render() {
         const { loading, gameSettings, learnSettings, inResultsScreen, gameResult, learningResult, mode } = this.state;
 
@@ -62,7 +75,7 @@ class GamePage extends Component<{}, GamePageState> {
                 <MainErrorBoundary>
                     <LoadingSpinner active={loading}/>
 
-                    <ControlsMenu onChangeAppMode={this.handleChangeAppMode} active={isInMenu}/>
+                    <ControlsMenu onChangeAppMode={this.handleChangeAppMode} active={isInMenu} startingMode={mode} />
 
                     {isInMenu &&
                         <GameSettingsMenu
@@ -169,9 +182,10 @@ class GamePage extends Component<{}, GamePageState> {
         switch (this.state.learnSettings?.topic) {
             case Topic.KANA: return { front: KanaFlashCardFront, back: KanaFlashCardBack };
             case Topic.CALENDAR: return { front: CalendarFlashCardFront, back: CalendarFlashCardBack };
+            case Topic.KANJI: return { front: KanjiFlashCardFront, back: KanjiFlashCardBack }
         }
         throw new Error("Cannot get card faces for invalid learn settings");
     }
 }
 
-export default GamePage;
+export default MainMenuPage;

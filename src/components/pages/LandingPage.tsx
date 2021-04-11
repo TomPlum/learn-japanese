@@ -3,7 +3,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/LandingPage.module.scss";
 import Inspectable from "../ui/Inspectable";
 import KanaCarousel from "../ui/KanaCarousel";
-import { faPlay, faQuestion, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faGraduationCap, faPlay, faQuestion, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Kana } from "../../types/kana/Kana";
 import { KanaRepository } from "../../repository/KanaRepository";
@@ -48,7 +48,7 @@ class LandingPage extends Component {
                                 text={Environment.variable("HIRAGANA_DESC")}
                                 placement="bottom" color="white"
                             >
-                                <span  data-testid="hiragana-inspectable">Hiragana</span>
+                                <span data-testid="hiragana-inspectable">Hiragana</span>
                             </Inspectable>
                             {' and '}
                             <Inspectable
@@ -67,7 +67,16 @@ class LandingPage extends Component {
 
                     <Row noGutters={true} className={styles.buttonContainer}>
                         <Col xs={6} md={3} className={styles.buttonWrapper}>
-                            <Link to="/play">
+                            <Link to="/menu/learn">
+                                <Button className={styles.button} variant="outline-danger">
+                                    <FontAwesomeIcon icon={faGraduationCap} className={styles.buttonIcon} />
+                                    <span className={styles.buttonText}> Learn</span>
+                                </Button>
+                            </Link>
+                        </Col>
+
+                        <Col xs={6} md={3} className={styles.buttonWrapper}>
+                            <Link to="/menu/play">
                                 <Button className={styles.button} variant="outline-success">
                                     <FontAwesomeIcon icon={faPlay} className={styles.buttonIcon} />
                                     <span className={styles.buttonText}> Play</span>

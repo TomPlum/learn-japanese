@@ -17,4 +17,8 @@ export default class LearnKanaMode implements LearnMenuModes {
     getTopic(): string {
         return "KANA"
     }
+
+    isCustomisable(): boolean {
+        return false;
+    }
 }

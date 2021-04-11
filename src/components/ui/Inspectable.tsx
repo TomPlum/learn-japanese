@@ -13,6 +13,9 @@ export type InspectableProps = {
 }
 
 const Inspectable: React.FunctionComponent<InspectableProps> = ({ text, title, children, className, placement, color }) => {
+    const child = children as ReactElement;
+    const childClasses: string = child && child.props ? child.props.className : "";
+
     return (
         <OverlayTrigger
             trigger={["hover", "focus", "click"]}
@@ -22,7 +25,7 @@ const Inspectable: React.FunctionComponent<InspectableProps> = ({ text, title, c
         >
             {
                 React.cloneElement(children as ReactElement, {
-                    className: color === 'white' ? styles.white : styles.black + " " + className
+                    className: color === 'white' ? styles.white : [styles.black, childClasses, className].join(" ")
                 })
             }
         </OverlayTrigger>

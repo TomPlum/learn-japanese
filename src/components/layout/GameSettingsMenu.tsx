@@ -10,6 +10,7 @@ import { LearnSettings } from "../../types/learn/LearnSettings";
 import LearnMenu from "../learn/LearnMenu";
 import LearnKanaMode from "../../types/learn/mode/LearnKanaMode";
 import LearnCalendarMode from "../../types/learn/mode/LearnCalendarMode";
+import LearnKanjiMode from "../../types/learn/mode/LearnKanjiMode";
 
 export interface GameTypeSettings {
     topic: Topic;
@@ -68,6 +69,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     private getGameMenu = () => {
         const { mode } = this.props;
         const { topic } = this.state;
+        //TODO: We can return a single <LearnMenu/> here. Store the Mode in the selected topic?
         switch (topic) {
             case Topic.KANA: {
                 switch (mode) {
@@ -91,7 +93,15 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 return <p className={styles.menu} style={{ color: '#FFF' }}>Numbers menu here</p>
             }
             case Topic.KANJI: {
-                return <p className={styles.menu} style={{ color: '#FFF' }}>Kanji menu here</p>
+                switch (mode) {
+                    case AppMode.LEARN: {
+                        return <LearnMenu modes={new LearnKanjiMode()} onStart={this.onStartLearning} />
+                    }
+                    case AppMode.PLAY: {
+                        return <p className={styles.menu} style={{ color: '#FFF' }}>Kanji menu here</p>
+                    }
+                }
+                return false;
             }
             case Topic.COLOURS: {
                 return <p className={styles.menu} style={{ color: '#FFF' }}>Colours menu here</p>

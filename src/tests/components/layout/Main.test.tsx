@@ -21,10 +21,16 @@ test('Navigating to the root URI should route to the Landing page', () => {
     expect(screen.getByTestId('landing-page')).toBeInTheDocument();
 });
 
-test('Navigating to the /play should route to the Game page', () => {
-    createHashHistory().push('/play');
+test('Navigating to the /menu/play should route to the main menu in play mode', () => {
+    createHashHistory().push('/menu/play');
     setup();
-    expect(screen.getByText('Relaxed')).toBeInTheDocument();
+    expect(screen.getByText('Learn')).toBeInTheDocument(); //If in play, the mode button shows learn
+});
+
+test('Navigating to the /menu/learn should route to the main menu in learn mode', () => {
+    createHashHistory().push('/menu/learn');
+    setup();
+    expect(screen.getByText('Play')).toBeInTheDocument(); //If in learn, the mode button shows play
 });
 
 test('Navigating to the /search should route to the Search page', () => {

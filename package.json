@@ -42,7 +42,8 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!src/index.tsx",
-      "!src/components/error/**"
+      "!src/components/error/**",
+      "!src/data/Kanji.ts"
     ]
   },
   "browserslist": {

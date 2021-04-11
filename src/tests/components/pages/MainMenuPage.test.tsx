@@ -1,11 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import GamePage from "../../../components/pages/GamePage";
+import MainMenuPage from "../../../components/pages/MainMenuPage";
 import hiragana from "../../../data/Hiragana";
 import { KanaData } from "../../../data/DataTypes";
 import katakana from "../../../data/Katakana";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
-
 
 jest.mock("../../../data/Hiragana");
 jest.mock("../../../data/Katakana");
@@ -30,9 +29,18 @@ beforeEach(() => {
       return [first, objects];
    });
 });
-
 const setup = () => {
-   const component = render(<GamePage />);
+   const component = render(<MainMenuPage
+       history={{
+          length: 50,
+          location: { pathname: "/menu/learn", search: "", hash: "", state: undefined },
+          action: "POP",
+          push: jest.fn(), go: jest.fn(), replace: jest.fn(), goForward: jest.fn(), goBack: jest.fn(),
+          block: jest.fn(), listen: jest.fn(), createHref: jest.fn()
+       }}
+       match={{ params: { mode: "play" }, isExact: true, path: "/menu/:mode", url: "/menu/learn" }}
+       location={{ pathname: "/menu/learn", search: "", hash: "", state: undefined }}
+   />);
    return {
       mode: component.getByText('Learn'),
       kana: component.queryAllByText('Hiragana & Katakana')[1],
@@ -160,5 +168,14 @@ describe('Learn', () => {
       fireEvent.click(screen.getByText('Start'));
       expect(screen.getByText('Monday')).toBeInTheDocument();
       expect(screen.getByText('月曜日')).toBeInTheDocument();
+   });
+
+   test('Starting a Kanji learning session should render the correct flash card types', () => {
+      const { mode, kanji } = setup();
+      fireEvent.click(mode); //Switch to Learn
+      fireEvent.click(kanji);
+      fireEvent.click(screen.getByText('Start'));
+      expect(screen.getByText(': person')).toBeInTheDocument();
+      expect(screen.getAllByText('人')).toBeDefined();
    });
 });

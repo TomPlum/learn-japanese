@@ -1,3 +1,5 @@
+@import "src/styles/sass/colours";
+
 @mixin inspectable {
   text-decoration: underline;
   text-decoration-color: #585858;;
@@ -7,7 +9,7 @@
 }
 
 .white:hover, .black:hover {
-  color: #ffb428;
+  color: $inspect;
   text-decoration: none;
   transition: ease 0.5s;
 }

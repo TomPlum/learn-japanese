@@ -1,4 +1,4 @@
-import {Numbers} from "./Numbers";
+import { Numbers } from "./Numbers";
 
 export class RandomNumberGenerator {
     //TODO: Move to Arrays.ts

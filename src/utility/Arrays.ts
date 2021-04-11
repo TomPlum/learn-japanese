@@ -13,6 +13,9 @@ export default class Arrays {
         }
     }
 
+    static sum(array: number[]): number {
+        return array.reduce((a, b) => a + b, 0);
+    }
     /**
      * Creates a new array by spreading all the elements into another.
      * @return a copy of the given array.
@@ -72,7 +75,7 @@ export default class Arrays {
             copy = this.remove(copy, element)
             elements.push(element);
         }
-        return elements;
+        return elements.filter(it => !!it);
     }
 
     static chunked<T>(array: T[], quantity: number): T[][] {
