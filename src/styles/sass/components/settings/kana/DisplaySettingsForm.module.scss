@@ -1,3 +1,7 @@
+@import "src/styles/sass/components/forms";
+
+@include SubForm;
+
 .description {
   font-family: "Ciutadella Rounded", sans-serif;
   color: #eaeaea;
@@ -7,6 +11,9 @@
   margin-bottom: 10px;
 }
 
+.heading {
+  @include heading;
+}
 
 .quantityDescription {
   margin: 10px 0;
@@ -19,4 +26,10 @@
   font-size: 3em;
   margin: 0;
   border-radius: 5px;
+}
+
+.scoreSwitch {
+  width: 2rem;
+  height: 2.5rem;
+  display: block;
 }

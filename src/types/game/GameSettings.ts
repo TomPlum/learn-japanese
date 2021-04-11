@@ -17,6 +17,7 @@ export interface KanaGameSettings {
 export interface DisplaySettings {
     type: DisplayType;
     cards: number;
+    score: boolean;
 }
 
 export interface LifeSettings {

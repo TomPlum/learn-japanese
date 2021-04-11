@@ -32,7 +32,7 @@ beforeEach(() => {
     props = {
         kana: [a, i, u, e, o],
         settings: {
-            display: { type: DisplayType.ROMAJI, cards: 1 },
+            display: { type: DisplayType.ROMAJI, cards: 1, score: true },
             kana: { hiragana: true },
             hints: { enabled: true, quantity: 999 },
             lives: { enabled: false },
@@ -600,13 +600,13 @@ test('Failing to correctly answer the question before the countdown finishes sho
 });
 
 test('Setting the display type as \'Single Kana\' should render a RomanjiQuestion', () => {
-    props.settings.display = { type: DisplayType.ROMAJI, cards: 1 };
+    props.settings.display = { type: DisplayType.ROMAJI, cards: 1, score: true };
     setup();
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
 test('Setting the display type as \'Multiple Cards\' should render a KanaChoiceQuestion', () => {
-    props.settings.display = { type: DisplayType.KANA, cards: 2 };
+    props.settings.display = { type: DisplayType.KANA, cards: 2, score: true };
     setup();
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('あ')).toBeInTheDocument();
@@ -615,6 +615,18 @@ test('Setting the display type as \'Multiple Cards\' should render a KanaChoiceQ
     expect(screen.getByText('い')).toBeInTheDocument();
 
     expect(screen.queryByText('3')).not.toBeInTheDocument();
+});
+
+test('Setting the display settings score property to true should render the score', () => {
+    props.settings.display = { type: DisplayType.KANA, cards: 2, score: true };
+    setup();
+    expect(screen.getByText('0')).toBeInTheDocument();
+});
+
+test('Setting the display settings score property to false should not render the score', () => {
+    props.settings.display = { type: DisplayType.KANA, cards: 2, score: false };
+    setup();
+    expect(screen.queryByText('0')).not.toBeInTheDocument();
 });
 
 test('Clicking the quit button should render the confirmation modal', () => {

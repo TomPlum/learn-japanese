@@ -11,6 +11,7 @@ const setup = () => {
     return {
         kanaModeButton: screen.getByText('Kana'),
         romanjiModeButton: screen.getByText('Rōmaji'),
+        score: screen.getByTestId('score-switch'),
         ...component
     }
 }
@@ -25,20 +26,20 @@ afterEach(() => {
 
 test('On mount it should call the onSelect event handler with the default settings', () => {
     setup();
-    expect(onSelectHandler).toHaveBeenCalledWith({ type: DisplayType.ROMAJI, cards: 1 });
+    expect(onSelectHandler).toHaveBeenCalledWith({ type: DisplayType.ROMAJI, cards: 1, score: true });
 });
 
 test('Selecting kana mode should call the onSelect eventHandler', () => {
     const { kanaModeButton } = setup();
     fireEvent.click(kanaModeButton);
-    expect(onSelectHandler).toHaveBeenCalledWith({ type: DisplayType.KANA, cards: 4 });
+    expect(onSelectHandler).toHaveBeenCalledWith({ type: DisplayType.KANA, cards: 4, score: true });
 });
 
 test('Selecting rōmaji mode should call the onSelect eventHandler', () => {
     const { kanaModeButton, romanjiModeButton } = setup();
     fireEvent.click(kanaModeButton);
     fireEvent.click(romanjiModeButton);
-    expect(onSelectHandler).toHaveBeenLastCalledWith({ type: DisplayType.ROMAJI, cards: 1 });
+    expect(onSelectHandler).toHaveBeenLastCalledWith({ type: DisplayType.ROMAJI, cards: 1, score: true });
 });
 
 test('Selecting kana mode should change the description accordingly', () => {
@@ -88,4 +89,10 @@ test('Selecting 6 kana quantity should update the description', () => {
     fireEvent.click(kanaModeButton);
     fireEvent.click(screen.getByText('6'));
     expect(screen.getByText('You\'ll be shown 6 kana to choose from.'));
+});
+
+test('Turning off the score tracking system should set the boolean to false', () => {
+    const { score } = setup();
+    fireEvent.click(score);
+    expect(onSelectHandler).toHaveBeenLastCalledWith({ type: DisplayType.ROMAJI, cards: 1, score: false });
 });

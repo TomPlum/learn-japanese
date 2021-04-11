@@ -114,7 +114,7 @@ class KanaGameSettingsMenu extends Component<KanaGameSettingsMenuProps, KanaGame
                                     <Card.Title className={styles.title}>Hint Settings</Card.Title>
                                     <HintSettingsForm
                                         ref={this.hints}
-                                      onChange={(settings) => this.setState({ hintSettings: settings })}
+                                        onChange={(settings) => this.setState({ hintSettings: settings })}
                                     />
                                 </Tab.Pane>
                             </Tab.Content>
@@ -148,6 +148,7 @@ class KanaGameSettingsMenu extends Component<KanaGameSettingsMenuProps, KanaGame
                                         <span className={styles.buttonText}> Reset</span>
                                     </Button>
                                 </Col>
+
                                 <Col className={styles.noGuttersRight}>
                                     <Button variant="success" block onClick={this.onConfirmation} className={styles.button}>
                                         <FontAwesomeIcon icon={faCheck}/>

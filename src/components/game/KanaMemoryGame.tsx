@@ -3,7 +3,7 @@ import { Kana } from "../../types/kana/Kana";
 import { ButtonGroup, Col, Container, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import Timer from "./Timer";
-import { GameSettings, KanaGameSettings } from "../../types/game/GameSettings";
+import { KanaGameSettings } from "../../types/game/GameSettings";
 import LifeDisplay from "./LifeDisplay";
 import { LifeQuantity } from "../../types/game/LifeQuantity";
 import QuitButton from "../ui/QuitButton";
@@ -146,7 +146,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                     </Col>
 
                     <Col>
-                        <ScoreDisplay value={score} streak={streak} className={styles.score} />
+                        {settings.display.score && <ScoreDisplay value={score} streak={streak} className={styles.score} /> }
                     </Col>
 
                     <Col className={styles.lifeDisplayContainer}>

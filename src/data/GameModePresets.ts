@@ -6,7 +6,8 @@ import { DisplayType } from "../types/game/DisplayType";
 // Default Settings
 export const defaultDisplaySettings: DisplaySettings = {
     type: DisplayType.ROMAJI,
-    cards: 1
+    cards: 1,
+    score: true
 }
 
 export const defaultKanaSettings: KanaSettings = {
@@ -34,7 +35,7 @@ export const defaultTimeSettings: TimeSettings = {
 // Game Mode Presets
 export const RELAXED: GameSettings = {
     kana: {
-        display: { type: DisplayType.ROMAJI, cards: 1 },
+        display: { type: DisplayType.ROMAJI, cards: 1, score: false },
         kana: defaultKanaSettings,
         hints: defaultHintSettings,
         lives: { enabled: false },
@@ -44,7 +45,7 @@ export const RELAXED: GameSettings = {
 
 export const ROMAJI: GameSettings = {
     kana: {
-        display: { type: DisplayType.ROMAJI, cards: 1 },
+        display: { type: DisplayType.ROMAJI, cards: 1, score: true },
         kana: defaultKanaSettings,
         hints: { enabled: true, quantity: HintQuantity.THREE },
         lives: defaultLifeSettings,
@@ -54,7 +55,7 @@ export const ROMAJI: GameSettings = {
 
 export const KANA: GameSettings = {
     kana: {
-        display: { type: DisplayType.KANA, cards: 4 },
+        display: { type: DisplayType.KANA, cards: 4, score: true },
         kana: defaultKanaSettings,
         hints: { enabled: true, quantity: HintQuantity.THREE },
         lives: defaultLifeSettings,
@@ -64,7 +65,7 @@ export const KANA: GameSettings = {
 
 export const TIME_ATTACK: GameSettings = {
     kana: {
-        display: { type: DisplayType.ROMAJI, cards: 1 },
+        display: { type: DisplayType.ROMAJI, cards: 1, score: true },
         kana: defaultKanaSettings,
         hints: { enabled: true, quantity: HintQuantity.THREE },
         lives: { enabled: false },
@@ -74,7 +75,7 @@ export const TIME_ATTACK: GameSettings = {
 
 export const HARDCORE: GameSettings = {
     kana: {
-        display: { type: DisplayType.KANA, cards: 6 },
+        display: { type: DisplayType.KANA, cards: 6, score: true },
         kana: { hiragana: true, katakana: true, diagraphs: true },
         hints: { enabled: false },
         lives: { enabled: true, quantity: LifeQuantity.ONE },
