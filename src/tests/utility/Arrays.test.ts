@@ -41,6 +41,14 @@ describe("Arrays Utility", () => {
         });
     });
 
+    describe("Sum", () => {
+        it("Should calculate the cumulative sum of all array elements", () => {
+            const array = [4, 5, 1, 0, 9];
+            const sum = Arrays.sum(array);
+            expect(sum).toBe(19);
+        });
+    });
+
     describe("Sort", () => {
         it("Should return true if the strings are equal and in-order", () => {
             const a = ["a", "b", "c"];
@@ -80,6 +88,14 @@ describe("Arrays Utility", () => {
             const array = [1, 2, 3, 4, 5, 6];
             const result = Arrays.getRandomElements(array, 2);
             expect(result.length).toBe(2);
+        });
+    });
+
+    describe("Chunked", () => {
+        it("Should chunk array when quantity is divisible exactly", () => {
+            const array = [1, 2, 3, 4, 5, 6];
+            const result = Arrays.chunked(array, 2);
+            expect(result).toEqual([[1, 2], [3, 4], [5, 6]]);
         });
     });
 });

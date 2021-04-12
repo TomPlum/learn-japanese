@@ -1,0 +1,57 @@
+@import "src/styles/sass/components/learn/flash-cards";
+@import "src/styles/sass/colours";
+@import "src/styles/sass/viewports";
+
+@mixin frontSizeWrapper {
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+@include phone {
+  .wrapper {
+    @include wrapperPhone;
+    @include frontSizeWrapper;
+    font-size: 1.5em;
+  }
+}
+
+@include tablet {
+  .wrapper {
+    @include wrapperTablet;
+    @include frontSizeWrapper;
+    font-size: 2em;
+  }
+}
+
+@include desktop {
+  .wrapper {
+    @include wrapperDesktop;
+    @include frontSizeWrapper;
+    font-size: 2.4em;
+  }
+}
+
+.wrapper-grade-1 {
+  border-color: $kyoiku-grade-1;
+}
+
+.wrapper-grade-2 {
+  border-color: $kyoiku-grade-2;
+}
+
+.wrapper-grade-3 {
+  border-color: $kyoiku-grade-3;
+}
+
+.wrapper-grade-4 {
+  border-color: $kyoiku-grade-4;
+}
+
+.wrapper-grade-5 {
+  border-color: $kyoiku-grade-5;
+}
+
+.wrapper-grade-6 {
+  border-color: $kyoiku-grade-6;
+}

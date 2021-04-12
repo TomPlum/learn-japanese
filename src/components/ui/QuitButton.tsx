@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface QuitButtonProps {
     onClick: () => void;
+    className?: string;
 }
 
 class QuitButton extends Component<QuitButtonProps> {
@@ -12,7 +13,7 @@ class QuitButton extends Component<QuitButtonProps> {
         return (
             <FontAwesomeIcon
                 icon={faTimes}
-                className={styles.icon}
+                className={[styles.icon, this.props.className].join(" ")}
                 onClick={this.props.onClick}
                 title="Quit"
             />

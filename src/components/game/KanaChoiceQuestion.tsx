@@ -1,16 +1,17 @@
-import React, { Component } from "react";
-import { Kana } from "../../types/Kana";
+import React from "react";
+import { Kana } from "../../types/kana/Kana";
 import Arrays from "../../utility/Arrays";
 import KanaDisplay from "./KanaDisplay";
-import { Button, Col, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
+import { Col, Row } from "react-bootstrap";
 import KanaQuestionBanner from "./KanaQuestionBanner";
+import { KanaQuestionProps } from "./KanaMemoryGame";
+import KanaQuestion from "./KanaQuestion";
+import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 
-export interface KanaChoiceQuestionProps {
+export interface KanaChoiceQuestionProps extends KanaQuestionProps {
     expected: Kana;
     wrong: Kana[];
     hidden: boolean;
-    onSubmit: (correct: boolean) => void;
 }
 
 interface KanaChoiceQuestionState {
@@ -18,7 +19,7 @@ interface KanaChoiceQuestionState {
     options: Kana[];
 }
 
-class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQuestionState> {
+class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoiceQuestionState> {
 
     private displays = new Map<Kana, React.RefObject<KanaDisplay>>();
     private indices = new Map<number, Kana>();
@@ -30,7 +31,7 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
 
         const kana = Arrays.shuffle(wrong.concat(expected));
 
-        kana.map((option, i) => {
+        kana.forEach((option, i) => {
             const ref = React.createRef<KanaDisplay>();
             this.displays.set(option, ref);
             this.indices.set(i + 1, option);
@@ -55,13 +56,13 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
         const { selected, options } = this.state;
 
         return (
-            <div>
+            <div className={styles.wrapper}>
                 <KanaQuestionBanner value={expected} />
 
                 <Row>
                     {options.map((option, i) => {
                         return (
-                            <Col xs={6} key={"col-" + i}>
+                            <Col lg={options.length === 6 ? 4 : 6} xs={6} key={"col-" + i}>
                                 <KanaDisplay
                                     kana={option}
                                     blur={hidden}
@@ -69,7 +70,7 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
                                     onClick={this.select}
                                     style={{
                                         container: selected === option ? styles.selected : styles.tile,
-                                        character: { size: "md", color: selected === option ? "#43ea5f" : undefined }
+                                        character: { className: styles.kana, color: selected === option ? "#268ce5" : undefined }
                                     }}
                                     ref={this.displays.get(option)}
                                 />
@@ -77,25 +78,28 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
                         )
                     })}
                 </Row>
-
-                <Button variant={"success"} type="button" disabled={!selected || hidden} onClick={this.answer} block>
-                    Check
-                </Button>
             </div>
         );
     }
 
-    private answer = () => {
+    isCorrect = () => {
         const { selected } = this.state;
         if (this.props.expected === selected) {
-            this.props.onSubmit(true);
+            return true;
         } else {
             this.displays.get(selected as Kana)?.current?.notifyIncorrect();
-            this.props.onSubmit(false);
+            this.setState({ selected: undefined });
+            return false;
         }
     }
 
-    private select = (value?: Kana) => this.setState({ selected: value });
+    private select = (value?: Kana) => {
+        const { selected } = this.state;
+        if (!selected) {
+            this.props.isValid(true);
+        }
+        this.setState({ selected: value });
+    }
 
     private handleKeySelection = (e: KeyboardEvent) => {
         e.preventDefault();
@@ -105,12 +109,7 @@ class KanaChoiceQuestion extends Component<KanaChoiceQuestionProps, KanaChoiceQu
             const kana = this.indices.get(Number(e.key));
             this.select(kana);
         }
-
-        if (this.state.selected && e.key === 'Enter') {
-            this.answer();
-        }
     }
-
 }
 
 export default KanaChoiceQuestion;

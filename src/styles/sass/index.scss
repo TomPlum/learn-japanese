@@ -1,9 +1,11 @@
 @import "colours";
+@import "fonts";
+@import "mixins";
 
 body {
   margin: 0;
   height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -15,8 +17,14 @@ code {
 }
 
 html, body, #root {
-  min-height: 100%;
+  @include fitMobileViewportHeight;
+  //@include borderBoxSizing;
+  min-height: 100vh;
   background-color: $dark-3;
+}
+
+.react-card-flip {
+  width: 100%;
 }
 
 //Center Input Placeholder Text
@@ -34,4 +42,8 @@ html, body, #root {
 
 :-ms-input-placeholder {
   text-align: center;
+}
+
+.react-card-flip {
+  width: 100%;
 }

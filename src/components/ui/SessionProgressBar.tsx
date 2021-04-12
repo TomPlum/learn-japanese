@@ -4,21 +4,23 @@ import styles from "../../styles/sass/components/ui/SessionProgressBar.module.sc
 
 interface SessionProgressBarProps {
     inProgress: boolean;
-    value: number;
-    title?: string;
+    quantity: number;
+    remaining: number;
     className?: string;
+    streak?: number;
 }
 
 class SessionProgressBar extends Component<SessionProgressBarProps> {
     render() {
-        const { inProgress, value, title, className } = this.props
+        const { inProgress, quantity, remaining, className, streak } = this.props
+        const barClass = className ? className : styles.bar;
         return (
             <ProgressBar
                 animated={inProgress}
-                className={className ? className : styles.progress}
-                now={value}
-                variant={!inProgress ? "success" : undefined}
-                title={title}
+                className={[barClass, styles.default].join(" ")}
+                now={((quantity - remaining) / quantity) * 100}
+                title={(quantity - remaining) + "/" + quantity}
+                variant={remaining === 0 ? "success" : (streak ?? 0) >= 5 ? "warning" : undefined}
             />
         );
     }

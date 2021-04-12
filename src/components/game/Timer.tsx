@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../styles/sass/components/game/Timer.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "../../styles/sass/components/game/Timer.module.scss";
 
 export interface TimerProps {
     end?: number;
@@ -43,16 +43,17 @@ class Timer extends Component<TimerProps, TimerState> {
         const { className, pausable } = this.props;
 
         return (
-            <span className={className}>
+            <div className={[className, styles.wrapper].join(" ")}>
                 {pausable && !isStopped && <FontAwesomeIcon
                     icon={paused ? faPlay : faPause}
-                    className={styles.pause}
+                    className={styles.icon}
                     onClick={paused ? this.play : this.pause}
-                    title="Pause"
+                    title={paused ? "Play" : "Pause"}
                     size="sm"
+                    fixedWidth
                 />}
-                {this.formatTimeElapsed()}
-            </span>
+                <span className={styles.time}>{this.formatTimeElapsed()}</span>
+            </div>
         );
     }
 
@@ -73,22 +74,22 @@ class Timer extends Component<TimerProps, TimerState> {
 
     getCurrentTime = () => this.formatTimeElapsed();
 
-    private play = () => {
-        this.onChangePausedState();
-        this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false });
+    start = () => {
+        this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false, isStopped: false });
     }
 
-    private pause = () => {
+    pause = () => {
         this.onChangePausedState();
         this.setState({ paused: true });
         clearInterval(this.state.interval);
     }
 
-    private tick = () => this.setState({ current: this.state.current + 1000 });
-
-    private start = () => {
-        this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false, isStopped: false });
+    private play = () => {
+        this.onChangePausedState();
+        this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false });
     }
+
+    private tick = () => this.setState({ current: this.state.current + 1000 });
 
     private onChangePausedState = () => {
         if (this.props.onPaused) this.props.onPaused();

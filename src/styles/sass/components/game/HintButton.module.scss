@@ -1,3 +1,26 @@
 .disabled {
   opacity: 0.6;
 }
+
+.button {
+  width: 100%;
+  max-width: 155px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: ease-in-out 0.2s;
+}
+
+.text {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.2em;
+  margin-top: 4px;
+  vertical-align: center;
+}
+
+.remaining {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.05em;
+  margin-left: 4px;
+  margin-top: 3px;
+}

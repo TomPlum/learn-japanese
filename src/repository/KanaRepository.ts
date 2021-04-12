@@ -1,9 +1,9 @@
-import { Kana } from "../types/Kana";
+import { Kana } from "../types/kana/Kana";
 import hiragana from "../data/Hiragana";
 import katakana from "../data/Katakana";
-import KanaType from "../types/KanaType";
+import KanaType from "../types/kana/KanaType";
 import { KanaData } from "../data/DataTypes";
-import { KanaSettings } from "../types/GameSettings";
+import { KanaSettings } from "../types/game/GameSettings";
 import DiagraphFilter from "../filters/kana/DiagraphFilter";
 import FilterChain from "../filters/FilterChain";
 import QuantityFilter from "../filters/kana/QuantityFilter";
@@ -11,13 +11,13 @@ import KanaTypeFilter from "../filters/kana/KanaTypeFilter";
 
 export class KanaRepository {
 
-    public read(config?: KanaSettings): Kana[] {
+    public read(config: KanaSettings): Kana[] {
         const chain = new FilterChain<Kana>();
 
-        if (!config?.hiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));
-        if (!config?.katakana) chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA));
-        if (!config?.diagraphs) chain.addFilter(new DiagraphFilter());
-        if (config?.quantity) chain.addFilter(new QuantityFilter(config.quantity));
+        if (!config.hiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));
+        if (!config.katakana) chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA));
+        if (!config.diagraphs) chain.addFilter(new DiagraphFilter());
+        if (config.quantity) chain.addFilter(new QuantityFilter(config.quantity));
 
         return chain.execute(this.readAllKana());
     }
@@ -37,6 +37,6 @@ export class KanaRepository {
     }
 
     private convert(data: KanaData[], type: KanaType): Kana[] {
-        return data.map(data => new Kana(data.code, data.romanji, type, data.column, data.diacritical));
+        return data.map(data => new Kana(data.code, data.romaji, type, data.column, data.diacritical));
     }
 }

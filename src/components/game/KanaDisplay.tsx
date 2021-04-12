@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import { Container } from "react-bootstrap";
 import styles from "../../styles/sass/components/game/KanaDisplay.module.scss";
 import DynamicCharacter, { CharacterStyleProps } from "./DynamicCharacter";
@@ -35,7 +35,9 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
         }
     }
 
-    notifyIncorrect = () => this.setState({ isNotifyingIncorrect: true });
+    notifyIncorrect = () => {
+        this.setState({ isNotifyingIncorrect: true });
+    }
 
     render() {
         const { isNotifyingIncorrect } = this.state;

@@ -4,6 +4,10 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
+//Test Environment
+import dotenv from 'dotenv';
+dotenv.config({path: './.env.test'});
+
 //Fixes Jest error.
 //See: https://github.com/akiran/react-slick/issues/742#issuecomment-298992238
 window.matchMedia = window.matchMedia || function() {
@@ -13,6 +17,10 @@ window.matchMedia = window.matchMedia || function() {
         removeListener: function() {}
     };
 };
+
+//Allows testing of components that are wrapped in the sizeMe HOC
+import sizeMe from "react-sizeme";
+sizeMe.noPlaceholders = true;
 
 expect.extend({
     toHaveStyleProperty(received, style, value) {

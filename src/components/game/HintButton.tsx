@@ -1,46 +1,82 @@
 import React, { Component } from "react";
-import styles from "../../styles/sass/components/game/HintButton.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { faInfinity, faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Button, OverlayTrigger } from "react-bootstrap";
 import PopOver from "../ui/PopOver";
-import { Kana } from "../../types/Kana";
-import { KanaColumn } from "../../types/KanaColumn";
+import { Kana } from "../../types/kana/Kana";
+import { KanaColumn } from "../../types/kana/KanaColumn";
+import Viewports, { Viewport } from "../../utility/Viewports";
+import styles from "../../styles/sass/components/game/HintButton.module.scss";
 
 export interface HintButtonProps {
     kana: Kana;
-    quantity: number
+    remaining: number
     totalQuantity?: number;
     title?: string;
     disabled?: boolean;
+    className?: string;
     onUse?: () => void;
 }
 
-class HintButton extends Component<HintButtonProps> {
-    render() {
-        const { title, disabled, quantity } = this.props;
+interface HintButtonState {
+    viewport: Viewport;
+}
 
-        const overlay = <PopOver title={this.getTitle()} text={this.getContent()}/>;
+class HintButton extends Component<HintButtonProps, HintButtonState> {
+
+    constructor(props: HintButtonProps | Readonly<HintButtonProps>) {
+        super(props);
+        this.state = {
+            viewport: Viewport.PHONE
+        }
+    }
+
+    componentDidMount() {
+        this.updateViewport();
+        window.addEventListener("resize", this.updateViewport);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateViewport);
+    }
+
+    render() {
+        const { title, disabled, remaining, className } = this.props;
+        const { viewport } = this.state;
+
+        const overlay = <PopOver title={this.getTitle()} text={this.getContent()} />;
+        const defaultClassName = remaining > 0 ? styles.button : styles.disabled;
         return (
-            <OverlayTrigger onToggle={this.props.onUse} trigger="focus" placement="left" overlay={overlay}>
+            <OverlayTrigger
+                onToggle={this.props.onUse}
+                trigger="click"
+                placement="top"
+                rootClose={true}
+                overlay={overlay}
+            >
                 <Button
                     variant="warning"
-                    className={quantity > 0 ? styles.tip : styles.disabled}
+                    className={[defaultClassName, className].join(" ")}
                     title={title}
                     disabled={disabled}
                 >
-                    <FontAwesomeIcon icon={faLightbulb}/>
+                    <FontAwesomeIcon icon={faLightbulb} fixedWidth className={styles.icon}/>
+                    {viewport !== Viewport.PHONE &&
+                        <>
+                            <span className={styles.text}>HINT</span>
+                            <span className={styles.remaining}>{this.getRemaining()}</span>
+                        </>
+                    }
                 </Button>
             </OverlayTrigger>
         );
     }
 
-
     private getTitle = () => {
-        const { quantity, totalQuantity } = this.props;
-        if (quantity > 0) {
-            if (quantity <= 10) {
-                return "Need a hint? (" + (quantity - 1) + "/" + totalQuantity + " remaining)";
+        const { remaining, totalQuantity } = this.props;
+        if (remaining > 0) {
+            if (remaining <= 10) {
+                return "Need a hint? (" + (remaining - 1) + "/" + totalQuantity + " remaining)";
             }
             return "Need a hint?"
         }
@@ -48,8 +84,8 @@ class HintButton extends Component<HintButtonProps> {
     }
 
     private getContent = () => {
-        const { kana, quantity } = this.props;
-        if (quantity <= 0) {
+        const { kana, remaining } = this.props;
+        if (remaining <= 0) {
             return "You've used all of your hints.";
         }
         if (kana.column === KanaColumn.OTHER) {
@@ -66,6 +102,18 @@ class HintButton extends Component<HintButtonProps> {
         }
 
         return message + (kana.isDiacritical ? diacritical : "");
+    }
+
+    private getRemaining = () => {
+        const { remaining } = this.props;
+        if (remaining === 999) {
+            return <FontAwesomeIcon icon={faInfinity} size="sm" />;
+        }
+        return "(" + remaining + ")";
+    }
+
+    private updateViewport = () => {
+        this.setState({ viewport: Viewports.fromWidth(window.innerWidth) });
     }
 
 }

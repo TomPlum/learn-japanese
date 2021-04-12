@@ -1,4 +1,4 @@
-import {KanaColumn} from "../types/KanaColumn";
+import {KanaColumn} from "../types/kana/KanaColumn";
 import { KanaData } from "./DataTypes";
 
 function katakana(): KanaData[] {
@@ -7,35 +7,35 @@ function katakana(): KanaData[] {
         {
             name: "ア",
             code: "\u30A2",
-            romanji: ["a"],
+            romaji: ["a"],
             column: KanaColumn.VOWEL,
             diacritical: false
         },
         {
             name: "イ",
             code: "\u30A4",
-            romanji: ["i"],
+            romaji: ["i"],
             column: KanaColumn.VOWEL,
             diacritical: false
         },
         {
             name: "ウ",
             code: "\u30A6",
-            romanji: ["u"],
+            romaji: ["u"],
             column: KanaColumn.VOWEL,
             diacritical: false
         },
         {
             name: "エ",
             code: "\u30A8",
-            romanji: ["e"],
+            romaji: ["e"],
             column: KanaColumn.VOWEL,
             diacritical: false
         },
         {
             name: "オ",
             code: "\u30AA",
-            romanji: ["o"],
+            romaji: ["o"],
             column: KanaColumn.VOWEL,
             diacritical: false
         },
@@ -44,35 +44,35 @@ function katakana(): KanaData[] {
         {
             name: "カ",
             code: "\u30AB",
-            romanji: ["ka"],
+            romaji: ["ka"],
             column: KanaColumn.K,
             diacritical: false
         },
         {
             name: "キ",
             code: "\u30AD",
-            romanji: ["ki"],
+            romaji: ["ki"],
             column: KanaColumn.K,
             diacritical: false
         },
         {
             name: "ク",
             code: "\u30AF",
-            romanji: ["ku"],
+            romaji: ["ku"],
             column: KanaColumn.K,
             diacritical: false
         },
         {
             name: "ケ",
             code: "\u30B1",
-            romanji: ["ke"],
+            romaji: ["ke"],
             column: KanaColumn.K,
             diacritical: false
         },
         {
             name: "コ",
             code: "\u30B3",
-            romanji: ["ko"],
+            romaji: ["ko"],
             column: KanaColumn.K,
             diacritical: false
         },
@@ -81,35 +81,35 @@ function katakana(): KanaData[] {
         {
             name: "ガ",
             code: "\u30AC",
-            romanji: ["ga"],
+            romaji: ["ga"],
             column: KanaColumn.K,
             diacritical: true
         },
         {
             name: "ギ",
             code: "\u30AE",
-            romanji: ["gi"],
+            romaji: ["gi"],
             column: KanaColumn.K,
             diacritical: true
         },
         {
             name: "グ",
             code: "\u30B0",
-            romanji: ["gu"],
+            romaji: ["gu"],
             column: KanaColumn.K,
             diacritical: true
         },
         {
             name: "ゲ",
             code: "\u30B2",
-            romanji: ["ge"],
+            romaji: ["ge"],
             column: KanaColumn.K,
             diacritical: true
         },
         {
             name: "ゴ",
             code: "\u30B4",
-            romanji: ["go"],
+            romaji: ["go"],
             column: KanaColumn.K,
             diacritical: true
         },
@@ -118,21 +118,21 @@ function katakana(): KanaData[] {
         {
             name: "キャ",
             code: "\u30AD\u30E3",
-            romanji: ["kya"],
+            romaji: ["kya"],
             column: KanaColumn.K,
             diacritical: false
         },
         {
             name: "キュ",
             code: "\u30AD\u30E5",
-            romanji: ["kyu"],
+            romaji: ["kyu"],
             column: KanaColumn.K,
             diacritical: false
         },
         {
             name: "キョ",
             code: "\u30AD\u30E7",
-            romanji: ["kyo"],
+            romaji: ["kyo"],
             column: KanaColumn.K,
             diacritical: false
         },
@@ -141,21 +141,21 @@ function katakana(): KanaData[] {
         {
             name: "ギャ",
             code: "\u30AE\u30E3",
-            romanji: ["gya"],
+            romaji: ["gya"],
             column: KanaColumn.K,
             diacritical: true
         },
         {
             name: "ギュ",
             code: "\u30AE\u30E5",
-            romanji: ["gyu"],
+            romaji: ["gyu"],
             column: KanaColumn.K,
             diacritical: true
         },
         {
             name: "ギョ",
             code: "\u30AE\u30E7",
-            romanji: ["gyo"],
+            romaji: ["gyo"],
             column: KanaColumn.K,
             diacritical: true
         },
@@ -164,35 +164,35 @@ function katakana(): KanaData[] {
         {
             name: "サ",
             code: "\u30B5",
-            romanji: ["sa"],
+            romaji: ["sa"],
             column: KanaColumn.S,
             diacritical: false
         },
         {
             name: "シ",
             code: "\u30B7",
-            romanji: ["shi"],
+            romaji: ["shi"],
             column: KanaColumn.S,
             diacritical: false
         },
         {
             name: "ス",
             code: "\u30B9",
-            romanji: ["su"],
+            romaji: ["su"],
             column: KanaColumn.S,
             diacritical: false
         },
         {
             name: "セ",
             code: "\u30BB",
-            romanji: ["se"],
+            romaji: ["se"],
             column: KanaColumn.S,
             diacritical: false
         },
         {
             name: "ソ",
             code: "\u30BD",
-            romanji: ["so"],
+            romaji: ["so"],
             column: KanaColumn.S,
             diacritical: false
         },
@@ -201,35 +201,35 @@ function katakana(): KanaData[] {
         {
             name: "ザ",
             code: "\u30B6",
-            romanji: ["za"],
+            romaji: ["za"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "シ",
             code: "\u30B8",
-            romanji: ["zi" ,"ji"],
+            romaji: ["zi" ,"ji"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "ズ",
             code: "\u30BA",
-            romanji: ["zu"],
+            romaji: ["zu"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "ゼ",
             code: "\u30BC",
-            romanji: ["ze"],
+            romaji: ["ze"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "ゾ",
             code: "\u30BE",
-            romanji: ["zo"],
+            romaji: ["zo"],
             column: KanaColumn.S,
             diacritical: true
         },
@@ -239,14 +239,14 @@ function katakana(): KanaData[] {
         {
             name: "シャ",
             code: "\u30B7\u30E3",
-            romanji: ["sha"],
+            romaji: ["sha"],
             column: KanaColumn.S,
             diacritical: false
         },
         {
             name: "シュ",
             code: "\u30B7\u30E5",
-            romanji: ["shu"],
+            romaji: ["shu"],
             column: KanaColumn.S,
             diacritical: false
 
@@ -254,7 +254,7 @@ function katakana(): KanaData[] {
         {
             name: "ショ",
             code: "\u30B7\u30E7",
-            romanji: ["sho"],
+            romaji: ["sho"],
             column: KanaColumn.S,
             diacritical: false
         },
@@ -263,21 +263,21 @@ function katakana(): KanaData[] {
         {
             name: "ジャ",
             code: "\u30B8\u30E3",
-            romanji: ["zya", "ja"],
+            romaji: ["zya", "ja"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "ジュ",
             code: "\u30B8\u30E5",
-            romanji: ["zyu", "ju"],
+            romaji: ["zyu", "ju"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "ジョ",
             code: "\u30B8\u30E7",
-            romanji: ["zyo", "jo"],
+            romaji: ["zyo", "jo"],
             column: KanaColumn.S,
             diacritical: true
         },
@@ -286,35 +286,35 @@ function katakana(): KanaData[] {
         {
             name: "タ",
             code: "\u30BF",
-            romanji: ["ta"],
+            romaji: ["ta"],
             column: KanaColumn.T,
             diacritical: false
         },
         {
             name: "チ",
             code: "\u30C1",
-            romanji: ["ti", "chi"],
+            romaji: ["chi", "ti"],
             column: KanaColumn.T,
             diacritical: false
         },
         {
             name: "ツ",
             code: "\u30C4",
-            romanji: ["tsu"],
+            romaji: ["tsu"],
             column: KanaColumn.T,
             diacritical: false
         },
         {
             name: "テ",
             code: "\u30C6",
-            romanji: ["te"],
+            romaji: ["te"],
             column: KanaColumn.T,
             diacritical: false
         },
         {
             name: "ト",
             code: "\u30C8",
-            romanji: ["to"],
+            romaji: ["to"],
             column: KanaColumn.T,
             diacritical: false
         },
@@ -323,35 +323,35 @@ function katakana(): KanaData[] {
         {
             name: "ダ",
             code: "\u30C0",
-            romanji: ["da"],
+            romaji: ["da"],
             column: KanaColumn.T,
             diacritical: true
         },
         {
             name: "ヂ",
             code: "\u30C2",
-            romanji: ["di", "ji"],
+            romaji: ["di", "ji"],
             column: KanaColumn.T,
             diacritical: true
         },
         {
             name: "ヅ",
             code: "\u30C5",
-            romanji: ["du", "zu"],
+            romaji: ["du", "zu"],
             column: KanaColumn.T,
             diacritical: true
         },
         {
             name: "デ",
             code: "\u30C7",
-            romanji: ["de"],
+            romaji: ["de"],
             column: KanaColumn.T,
             diacritical: true
         },
         {
             name: "ド",
             code: "\u30C9",
-            romanji: ["do"],
+            romaji: ["do"],
             column: KanaColumn.T,
             diacritical: true
         },
@@ -360,21 +360,21 @@ function katakana(): KanaData[] {
         {
             name: "チャ",
             code: "\u30C1\u30E3",
-            romanji: ["cha"],
+            romaji: ["cha"],
             column: KanaColumn.T,
             diacritical: false
         },
         {
             name: "チュ",
             code: "\u30C1\u30E5",
-            romanji: ["chu"],
+            romaji: ["chu"],
             column: KanaColumn.T,
             diacritical: false
         },
         {
             name: "チョ",
             code: "\u30C1\u30E7",
-            romanji: ["cho"],
+            romaji: ["cho"],
             column: KanaColumn.T,
             diacritical: false
         },
@@ -383,21 +383,21 @@ function katakana(): KanaData[] {
         {
             name: "ヂャ",
             code: "\u30C2\u30E3",
-            romanji: ["dya", "ja"],
+            romaji: ["dya", "ja"],
             column: KanaColumn.T,
             diacritical: true
         },
         {
             name: "ヂュ",
             code: "\u30C2\u30E5",
-            romanji: ["dyu", "ju"],
+            romaji: ["dyu", "ju"],
             column: KanaColumn.T,
             diacritical: true
         },
         {
             name: "ヂョ",
             code: "\u30C2\u30E7",
-            romanji: ["dyo", "jo"],
+            romaji: ["dyo", "jo"],
             column: KanaColumn.T,
             diacritical: true
         },
@@ -406,35 +406,35 @@ function katakana(): KanaData[] {
         {
             name: "ナ",
             code: "\u30CA",
-            romanji: ["na"],
+            romaji: ["na"],
             column: KanaColumn.N,
             diacritical: false
         },
         {
             name: "ニ",
             code: "\u30CB",
-            romanji: ["ni"],
+            romaji: ["ni"],
             column: KanaColumn.N,
             diacritical: false
         },
         {
             name: "ヌ",
             code: "\u30CC",
-            romanji: ["nu"],
+            romaji: ["nu"],
             column: KanaColumn.N,
             diacritical: false
         },
         {
             name: "ネ",
             code: "\u30CD",
-            romanji: ["ne"],
+            romaji: ["ne"],
             column: KanaColumn.N,
             diacritical: false
         },
         {
             name: "ノ",
             code: "\u30CE",
-            romanji: ["no"],
+            romaji: ["no"],
             column: KanaColumn.N,
             diacritical: false
         },
@@ -443,21 +443,21 @@ function katakana(): KanaData[] {
         {
             name: "ニャ",
             code: "\u30CB\u30E3",
-            romanji: ["nya"],
+            romaji: ["nya"],
             column: KanaColumn.N,
             diacritical: false
         },
         {
             name: "ニュ",
             code: "\u30CB\u30E5",
-            romanji: ["nyu"],
+            romaji: ["nyu"],
             column: KanaColumn.N,
             diacritical: false
         },
         {
             name: "ニョ",
             code: "\u30CB\u30E7",
-            romanji: ["nyo"],
+            romaji: ["nyo"],
             column: KanaColumn.N,
             diacritical: false
         },
@@ -466,35 +466,35 @@ function katakana(): KanaData[] {
         {
             name: "ハ",
             code: "\u30CF",
-            romanji: ["ha"],
+            romaji: ["ha"],
             column: KanaColumn.H,
             diacritical: false
         },
         {
             name: "ヒ",
             code: "\u30D2",
-            romanji: ["hi"],
+            romaji: ["hi"],
             column: KanaColumn.H,
             diacritical: false
         },
         {
             name: "フ",
             code: "\u30D5",
-            romanji: ["hu", "fu"],
+            romaji: ["hu", "fu"],
             column: KanaColumn.H,
             diacritical: false
         },
         {
             name: "ヘ",
             code: "\u30D8",
-            romanji: ["he", "e"],
+            romaji: ["he", "e"],
             column: KanaColumn.H,
             diacritical: false
         },
         {
             name: "ホ",
             code: "\u30DB",
-            romanji: ["ho"],
+            romaji: ["ho"],
             column: KanaColumn.H,
             diacritical: false
         },
@@ -503,35 +503,35 @@ function katakana(): KanaData[] {
         {
             name: "バ",
             code: "\u30D0",
-            romanji: ["ba"],
+            romaji: ["ba"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ビ",
             code: "\u30D3",
-            romanji: ["bi"],
+            romaji: ["bi"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ブ",
             code: "\u30D6",
-            romanji: ["bu"],
+            romaji: ["bu"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ベ",
             code: "\u30D9",
-            romanji: ["be"],
+            romaji: ["be"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ボ",
             code: "\u30DC",
-            romanji: ["bo"],
+            romaji: ["bo"],
             column: KanaColumn.H,
             diacritical: true
         },
@@ -540,35 +540,35 @@ function katakana(): KanaData[] {
         {
             name: "パ",
             code: "\u30D1",
-            romanji: ["pa"],
+            romaji: ["pa"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ピ",
             code: "\u30D4",
-            romanji: ["pi"],
+            romaji: ["pi"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "プ",
             code: "\u30D7",
-            romanji: ["pu"],
+            romaji: ["pu"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ペ",
             code: "\u30DA",
-            romanji: ["pe"],
+            romaji: ["pe"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ポ",
             code: "\u30DD",
-            romanji: ["po"],
+            romaji: ["po"],
             column: KanaColumn.H,
             diacritical: true
         },
@@ -577,21 +577,21 @@ function katakana(): KanaData[] {
         {
             name: "ヒャ",
             code: "\u30D2\u30E3",
-            romanji: ["hya"],
+            romaji: ["hya"],
             column: KanaColumn.H,
             diacritical: false
         },
         {
             name: "ヒュ",
             code: "\u30D2\u30E5",
-            romanji: ["hyu"],
+            romaji: ["hyu"],
             column: KanaColumn.H,
             diacritical: false
         },
         {
             name: "ヒョ",
             code: "\u30D2\u30E7",
-            romanji: ["hyo"],
+            romaji: ["hyo"],
             column: KanaColumn.H,
             diacritical: false
         },
@@ -600,21 +600,21 @@ function katakana(): KanaData[] {
         {
             name: "ビャ",
             code: "\u30D3\u30E3",
-            romanji: ["bya"],
+            romaji: ["bya"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ビュ",
             code: "\u30D3\u30E5",
-            romanji: ["byu"],
+            romaji: ["byu"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ビョ",
             code: "\u30D3\u30E7",
-            romanji: ["byo"],
+            romaji: ["byo"],
             column: KanaColumn.H,
             diacritical: true
         },
@@ -623,21 +623,21 @@ function katakana(): KanaData[] {
         {
             name: "ピャ",
             code: "\u30D4\u30E3",
-            romanji: ["pya"],
+            romaji: ["pya"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ピュ",
             code: "\u30D4\u30E5",
-            romanji: ["pyu"],
+            romaji: ["pyu"],
             column: KanaColumn.H,
             diacritical: true
         },
         {
             name: "ピョ",
             code: "\u30D4\u30E7",
-            romanji: ["pyo"],
+            romaji: ["pyo"],
             column: KanaColumn.H,
             diacritical: true
         },
@@ -646,35 +646,35 @@ function katakana(): KanaData[] {
         {
             name: "マ",
             code: "\u30DE",
-            romanji: ["ma"],
+            romaji: ["ma"],
             column: KanaColumn.M,
             diacritical: false
         },
         {
             name: "ミ",
             code: "\u30DF",
-            romanji: ["mi"],
+            romaji: ["mi"],
             column: KanaColumn.M,
             diacritical: false
         },
         {
             name: "ム",
             code: "\u30E0",
-            romanji: ["mu"],
+            romaji: ["mu"],
             column: KanaColumn.M,
             diacritical: false
         },
         {
             name: "メ",
             code: "\u30E1",
-            romanji: ["me"],
+            romaji: ["me"],
             column: KanaColumn.M,
             diacritical: false
         },
         {
             name: "モ",
             code: "\u30E2",
-            romanji: ["mo"],
+            romaji: ["mo"],
             column: KanaColumn.M,
             diacritical: false
         },
@@ -683,21 +683,21 @@ function katakana(): KanaData[] {
         {
             name: "ミャ",
             code: "\u30DF\u30E3",
-            romanji: ["mya"],
+            romaji: ["mya"],
             column: KanaColumn.M,
             diacritical: false
         },
         {
             name: "ミュ",
             code: "\u30DF\u30E5",
-            romanji: ["myu"],
+            romaji: ["myu"],
             column: KanaColumn.M,
             diacritical: false
         },
         {
             name: "ミョ",
             code: "\u30DF\u30E7",
-            romanji: ["myo"],
+            romaji: ["myo"],
             column: KanaColumn.M,
             diacritical: false
         },
@@ -706,21 +706,21 @@ function katakana(): KanaData[] {
         {
             name: "ヤ",
             code: "\u30E4",
-            romanji: ["ya"],
+            romaji: ["ya"],
             column: KanaColumn.Y,
             diacritical: false
         },
         {
             name: "ユ",
             code: "\u30E6",
-            romanji: ["yu"],
+            romaji: ["yu"],
             column: KanaColumn.Y,
             diacritical: false
         },
         {
             name: "ヨ",
             code: "\u30E8",
-            romanji: ["yo"],
+            romaji: ["yo"],
             column: KanaColumn.Y,
             diacritical: false
         },
@@ -729,35 +729,35 @@ function katakana(): KanaData[] {
         {
             name: "ラ",
             code: "\u30E9",
-            romanji: ["ra"],
+            romaji: ["ra"],
             column: KanaColumn.R,
             diacritical: false
         },
         {
             name: "リ",
             code: "\u30EA",
-            romanji: ["ri"],
+            romaji: ["ri"],
             column: KanaColumn.R,
             diacritical: false
         },
         {
             name: "ル",
             code: "\u30EB",
-            romanji: ["ru"],
+            romaji: ["ru"],
             column: KanaColumn.R,
             diacritical: false
         },
         {
             name: "レ",
             code: "\u30EC",
-            romanji: ["re"],
+            romaji: ["re"],
             column: KanaColumn.R,
             diacritical: false
         },
         {
             name: "ロ",
             code: "\u30ED",
-            romanji: ["ro"],
+            romaji: ["ro"],
             column: KanaColumn.R,
             diacritical: false
         },
@@ -766,21 +766,21 @@ function katakana(): KanaData[] {
         {
             name: "リャ",
             code: "\u30EA\u30E3",
-            romanji: ["rya"],
+            romaji: ["rya"],
             column: KanaColumn.R,
             diacritical: false
         },
         {
             name: "リュ",
             code: "\u30EA\u30E5",
-            romanji: ["ryu"],
+            romaji: ["ryu"],
             column: KanaColumn.R,
             diacritical: false
         },
         {
             name: "リョ",
             code: "\u30EA\u30E7",
-            romanji: ["ryo"],
+            romaji: ["ryo"],
             column: KanaColumn.R,
             diacritical: false
         },
@@ -789,14 +789,14 @@ function katakana(): KanaData[] {
         {
             name: "ワ",
             code: "\u30EF",
-            romanji: ["wa"],
+            romaji: ["wa"],
             column: KanaColumn.W,
             diacritical: false
         },
         {
             name: "ヲ",
             code: "\u30F2",
-            romanji: ["wo"],
+            romaji: ["wo"],
             column: KanaColumn.W,
             diacritical: false
         },
@@ -805,7 +805,7 @@ function katakana(): KanaData[] {
         {
             name: "ン",
             code: "\u30F3",
-            romanji: ["n"],
+            romaji: ["n"],
             column: KanaColumn.OTHER,
             diacritical: false
         }

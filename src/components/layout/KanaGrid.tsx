@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/layout/KanaGrid.module.scss";
 import KanaTile from "./KanaTile";
 import StackGrid, { transitions } from "react-stack-grid";
@@ -20,7 +20,6 @@ class KanaGrid extends Component<KanaGridProps> {
                         gutterHeight={10}
                         monitorImagesLoaded={false}
                         duration={0}
-                        onLayout={() => {console.log("CALLED")}}
                         appear={transitions.fade.appear}
                         appeared={transitions.fade.appeared}
                         enter={transitions.fade.enter}

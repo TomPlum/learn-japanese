@@ -5,25 +5,26 @@
 }
 
 .navbar {
-  background-color: $dark-1;
+}
+
+.nav {
+  width: 100%;
 }
 
 .brand {
   color: #FFF !important;
 }
 
-.search {
-  justify-content: end;
+.link {
   color: rgb(207, 207, 207);
-  font-size: 1.5em;
   transition: 1s ease;
 }
 
-.search:hover {
+.link:hover {
   transition: 1s ease;
   color: #FFF
 }
 
-.search:active {
+.link:active {
   color: $hiragana-indicator;
 }

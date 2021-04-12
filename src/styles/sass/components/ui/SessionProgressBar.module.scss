@@ -1,7 +1,11 @@
 @import "../../colours";
 
-.progress {
-  background-color: $dark-2;
-  margin-bottom: 15px;
+.bar {
   height: 8px;
+}
+
+.default {
+  background-color: $dark-2;
+  margin-bottom: 5px;
+  transition: ease-in-out 0.5s;
 }

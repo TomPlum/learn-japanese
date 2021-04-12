@@ -1,7 +1,7 @@
 import katakana from "../../data/Katakana";
 import each from "jest-each";
 import { KanaData } from "../../data/DataTypes";
-import { KanaColumn } from "../../types/KanaColumn";
+import { KanaColumn } from "../../types/kana/KanaColumn";
 
 describe("Katakana", () => {
     describe("Unicode Mappings", () => {
@@ -47,7 +47,7 @@ describe("Katakana", () => {
 
         describe("T Column", () => {
             it("ta", () => expect(getKatakana(["ta"]).code).toEqual("タ"));
-            it("chi", () => expect(getKatakana(["ti", "chi"]).code).toEqual("チ"));
+            it("chi", () => expect(getKatakana(["chi", "ti"]).code).toEqual("チ"));
             it("tsu", () => expect(getKatakana(["tsu"]).code).toEqual("ツ"));
             it("te", () => expect(getKatakana(["te"]).code).toEqual("テ"));
             it("to", () => expect(getKatakana(["to"]).code).toEqual("ト"));
@@ -150,7 +150,7 @@ describe("Katakana", () => {
         });
 
         const t = getMultipleKatakana([
-            ["ta"], ["ti", "chi"], ["tsu"], ["te"], ["to"],
+            ["ta"], ["chi", "ti"], ["tsu"], ["te"], ["to"],
             ["da"], ["di", "ji"], ["du", "zu"], ["de"], ["do"],
             ["cha"], ["chu"], ["cho"], ["dya", "ja"],
             ["dyu", "ju"], ["dyo", "jo"]
@@ -273,7 +273,7 @@ describe("Katakana", () => {
             ["a"], ["i"], ["u"], ["e"], ["o"],
             ["ka"], ["ki"], ["ku"], ["ke"], ["ko"], ["kya"], ["kyu"], ["kyo"],
             ["sa"], ["shi"], ["su"], ["se"], ["so"], ["sha"], ["shu"], ["sho"],
-            ["ta"], ["ti", "chi"], ["tsu"], ["te"], ["to"], ["cha"], ["chu"], ["cho"],
+            ["ta"], ["chi", "ti"], ["tsu"], ["te"], ["to"], ["cha"], ["chu"], ["cho"],
             ["na"], ["ni"], ["nu"], ["ne"], ["no"], ["nya"], ["nyu"], ["nyo"],
             ["ha"], ["hi"], ["hu", "fu"], ["he", "e"], ["ho"], ["hya"], ["hyu"], ["hyo"],
             ["ma"], ["mi"], ["mu"], ["me"], ["mo"], ["mya"], ["myu"], ["myo"],
@@ -287,11 +287,11 @@ describe("Katakana", () => {
         });
     });
 
-    function getMultipleKatakana(romanji: string[][]): KanaData[] {
-        return romanji.map(array => getKatakana(array));
+    function getMultipleKatakana(romaji: string[][]): KanaData[] {
+        return romaji.map(array => getKatakana(array));
     }
 
-    function getKatakana(romanji: string[]): KanaData {
-        return katakana().filter(entry => JSON.stringify(entry.romanji) === JSON.stringify(romanji))[0];
+    function getKatakana(romaji: string[]): KanaData {
+        return katakana().filter(entry => JSON.stringify(entry.romaji) === JSON.stringify(romaji))[0];
     }
 });

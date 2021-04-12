@@ -1,7 +1,7 @@
 import './styles/sass/LearnJapanese.module.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from "./components/layout/Main";
-import ErrorBoundary from "./components/ErrorBoundary";
+import ErrorBoundary from "./components/error/ErrorBoundary";
 import { Location } from "history";
 import { Component } from "react";
 

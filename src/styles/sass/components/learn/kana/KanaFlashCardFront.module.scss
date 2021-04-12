@@ -1,0 +1,29 @@
+@import "src/styles/sass/flashcards";
+@import "src/styles/sass/viewports";
+
+@include KanaFlashCard;
+
+@mixin kana {
+  color: #000;
+}
+
+@include phone {
+  .kana {
+    @include kana;
+    font-size: 8em;
+  }
+}
+
+@include tablet {
+  .kana {
+    @include kana;
+    font-size: 10em;
+  }
+}
+
+@include desktop {
+  .kana {
+    @include kana;
+    font-size: 15em;
+  }
+}

@@ -1,13 +1,11 @@
+@import "../../mixins";
+
 $default-colour: #FFF;
 $diagraph-margin: -10px;
 
 @mixin kana {
   color: $default-colour;
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  @include noSelect;
 }
 
 @mixin diagraph {
@@ -69,9 +67,10 @@ $diagraph-margin: -10px;
 }
 
 .index {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
   color: #a5a5a5;
   float: left;
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 .clickable {

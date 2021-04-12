@@ -1,0 +1,23 @@
+@import "src/styles/sass/flashcards";
+
+@include CalendarFlashCard;
+
+.kanji {
+  font-size: 5em;
+  margin: 0;
+  text-align: center;
+}
+
+.romaji {
+  text-align: center;
+  margin: 0;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 3em;
+}
+
+.meaning {
+  text-align: center;
+  margin: 0;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 2em;
+}

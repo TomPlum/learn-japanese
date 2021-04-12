@@ -1,0 +1,255 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/viewports";
+@import "src/styles/sass/mixins";
+
+@mixin wrapper {
+  @include fitMobileViewportHeight;
+  max-width: 1200px;
+  max-height: 1200px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+@mixin footer {
+  min-width: 100%;
+}
+
+@mixin submit {
+  max-width: 500px;
+  margin-left: 10px;
+}
+
+@mixin skip {
+  max-width: 150px;
+}
+
+@mixin hint {
+  height: 50px;
+  margin-right: 10px;
+}
+
+@mixin timer {
+  float: right;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  color: #FFF;
+}
+
+.question {
+  height: 100%;
+  max-width: 450px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.questionWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.questionWrapperColumn {
+  display: flex;
+  justify-content: center;
+}
+
+.footerLeftCol {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.footerRightCol {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.buttonGroup {
+  width: 100%;
+  max-width: 550px;
+}
+
+.header, .question, .footer {
+  width: 100%;
+}
+
+@include phone {
+  .progress {
+    height: 15px;
+    margin-top: 3px;
+  }
+
+  .quit {
+    font-size: 1.2em;
+  }
+
+  .lives {
+    font-size: 1em;
+  }
+
+  .wrapper {
+    @include wrapper;
+    padding-top: 20px;
+  }
+
+  .footer {
+    @include footer;
+    height: 75px;
+  }
+
+  .submit {
+    @include submit;
+    height: 50px;
+  }
+
+  .hint {
+    @include hint;
+    width: 50px !important;
+    font-size: 1.5em;
+  }
+
+  .skip {
+    @include skip;
+    height: 50px;
+    width: 50px !important;
+    font-size: 1.5em;
+  }
+
+  .timer {
+    @include timer;
+    font-size: 0.95em;
+  }
+
+  .score section > span, .score {
+    font-size: 1.1em !important;
+  }
+
+  .romajiDisplay {
+    font-size: 8em !important;
+  }
+}
+
+@include tablet {
+  .progress {
+    height: 22px;
+    margin-top: 3px;
+  }
+
+  .quit {
+    font-size: 1.8em;
+  }
+
+  .lives {
+    font-size: 1.5em;
+  }
+
+  .wrapper {
+    @include wrapper;
+    padding-top: 30px;
+  }
+
+  .footer {
+    @include footer;
+    height: 100px;
+  }
+
+  .submit {
+    @include submit;
+    height: 50px;
+    font-size: 1.6em !important;
+  }
+
+  .hint {
+    @include hint;
+    font-size: 1.5em;
+  }
+
+  .skip {
+    @include skip;
+    height: 50px;
+    font-size: 1.5em;
+  }
+
+  .timer {
+    @include timer;
+    font-size: 1.7em;
+  }
+
+  .score section > span, .score {
+    font-size: 1.8em !important;
+  }
+
+  .romajiDisplay {
+    font-size: 11em !important;
+  }
+}
+
+@include desktop {
+  .progress {
+    height: 28px;
+    margin-top: 5px;
+  }
+
+  .quit {
+    font-size: 2.4em;
+  }
+
+  .lives {
+    font-size: 2em;
+  }
+
+  .wrapper {
+    @include wrapper;
+    padding: 30px 0;
+  }
+
+  .footer {
+    @include footer;
+    height: 150px;
+  }
+
+  .submit {
+    @include submit;
+    height: 60px;
+    font-size: 1.6em !important;
+  }
+
+  .hint {
+    @include hint;
+    height: 60px;
+    font-size: 1.5em;
+  }
+
+  .skip {
+    @include skip;
+    height: 60px;
+    font-size: 1.6em;
+  }
+
+  .timer {
+    @include timer;
+    font-size: 2.2em;
+  }
+
+  .score section > span, .score {
+    font-size: 2.4em;
+  }
+
+  .romajiDisplay {
+    font-size: 14em !important;
+  }
+}
+
+.lifeDisplayContainer {
+  text-align: center;
+}
+
+.quitWrapper {
+  flex: 0 0 15px;
+  padding-right: 0;
+}

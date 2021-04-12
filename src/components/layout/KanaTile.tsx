@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/KanaTile.module.scss";
-import KanaType from "../../types/KanaType";
+import KanaType from "../../types/kana/KanaType";
 import KanaTypeIndicator from "./KanaTypeIndicator";
 import KanaDisplay from "../game/KanaDisplay";
 
@@ -29,7 +29,7 @@ class KanaTile extends Component<KanaTileProps> {
 
                 <KanaDisplay kana={kana} style={{ character: { color: "#000", size: "xs" }, container: styles.kanaWrapper  }} />
 
-                <p className={styles.romanji}>{kana.getFullRomanjiString()}</p>
+                <p className={styles.romaji}>{kana.getFullRomajiString()}</p>
             </Container>
         );
     }

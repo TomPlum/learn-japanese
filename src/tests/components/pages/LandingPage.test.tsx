@@ -1,18 +1,20 @@
 import Arrays from "../../../utility/Arrays";
 import { fireEvent, render, screen } from "@testing-library/react";
 import LandingPage from "../../../components/pages/LandingPage";
-import { Kana } from "../../../types/Kana";
-import KanaType from "../../../types/KanaType";
-import { KanaColumn } from "../../../types/KanaColumn";
+import { Kana } from "../../../types/kana/Kana";
+import KanaType from "../../../types/kana/KanaType";
+import { KanaColumn } from "../../../types/kana/KanaColumn";
 import { Environment } from "../../../utility/Environment";
 import matchMediaPolyfill from 'mq-polyfill';
 import { getByTextWithMarkup } from "../../Queries";
 import { when } from 'jest-when';
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from 'history'
+import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 
 const environment = jest.fn();
 const shuffle = jest.fn();
+const getRandomObject = jest.fn();
 
 const history = createMemoryHistory();
 
@@ -25,6 +27,7 @@ const setup = () => {
 
     return {
         play: screen.getByText('Play'),
+        learn: screen.getByText('Learn'),
         search: screen.getByText('Search'),
         help: screen.getByText('Help'),
         japaneseInspectable: screen.getByTestId('japanese-inspectable'),
@@ -50,15 +53,25 @@ beforeEach(() => {
     }
 
     Arrays.shuffle = shuffle;
-
     shuffle.mockImplementation((array: any[]) => {
         return array;
+    });
+
+
+    //Always returns the first element so it is deterministic
+    RandomNumberGenerator.getRandomObject = getRandomObject;
+    getRandomObject.mockImplementation((array: any[]) => {
+        const objects = [...array];
+        const first = objects[0];
+        objects.splice(0, 1);
+        return [first, objects];
     });
 });
 
 afterEach(() => {
     jest.runOnlyPendingTimers();
     jest.useRealTimers();
+    jest.restoreAllMocks();
 });
 
 test('Should render the leading heading', () => {
@@ -83,6 +96,11 @@ test('Should render the play button', () => {
     expect(play).toBeInTheDocument();
 });
 
+test('Should render the learn button', () => {
+    const { learn } = setup();
+    expect(learn).toBeInTheDocument();
+});
+
 test('Should render the search button', () => {
     const { search } = setup();
     expect(search).toBeInTheDocument();
@@ -94,16 +112,22 @@ test('Should render the help button', () => {
 });
 
 test('Should render the kana carousel', () => {
-    shuffle.mockReturnValueOnce([new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]); //Parallax BG
-    shuffle.mockReturnValueOnce([ new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]); //Carousel
+    getRandomObject.mockReturnValueOnce([new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false), []]); //Parallax BG
+    getRandomObject.mockReturnValueOnce([ new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false), []]); //Carousel
     setup();
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
-test('Clicking the play button should route the user to /play', () => {
+test('Clicking the play button should route the user to /menu/play', () => {
     const { play } = setup();
     fireEvent.click(play);
-    expect(history.location.pathname).toBe('/play');
+    expect(history.location.pathname).toBe('/menu/play');
+});
+
+test('Clicking the learn button should route the user to /menu/learn', () => {
+    const { learn } = setup();
+    fireEvent.click(learn);
+    expect(history.location.pathname).toBe('/menu/learn');
 });
 
 test('Clicking the search button should route the user to /search', () => {

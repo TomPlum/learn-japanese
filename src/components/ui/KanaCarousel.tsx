@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import { Container } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import styles from "../../styles/sass/components/ui/KanaCarousel.module.scss";
@@ -36,7 +36,7 @@ class KanaCarousel extends Component<KanaCarouselProps, KanaCarouselState> {
             <Container className={styles.wrapper}>
                 <div data-testid="animation" onAnimationIteration={this.handleAnimation} className={styles.animate}>
                     <KanaDisplay kana={current} style={this.props.style} />
-                    <p className={styles.romanji}>{current.getFullRomanjiString()}</p>
+                    <p className={styles.romaji}>{current.getFullRomajiString()}</p>
                 </div>
             </Container>
         );

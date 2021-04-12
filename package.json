@@ -4,19 +4,23 @@
   "private": false,
   "homepage": "https://tomplum.github.io/learn-japanese/",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "bootstrap": "^4.6.0",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.0",
+    "react-card-flip": "^1.1.0",
     "react-dom": "^17.0.1",
+    "react-flip-numbers": "^3.0.5",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.2",
-    "react-sizeme": "^2.6.12",
+    "react-scripts": "4.0.3",
+    "react-sizeme": "^3.0.1",
     "react-stack-grid": "^0.7.1",
-    "typescript": "^4.1.5"
+    "typescript": "^4.1.5",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,7 +28,7 @@
     "test": "react-scripts test",
     "deploy": "gh-pages -d build -m \"Release | Deployed Latest Build\"",
     "coverage": "react-scripts test --coverage --watchAll",
-    "eject": "react-scripts eject",
+    "clean": "rm -r node_modules",
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build"
   },
@@ -37,7 +41,9 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
-      "!src/index.tsx"
+      "!src/index.tsx",
+      "!src/components/error/**",
+      "!src/data/Kanji.ts"
     ]
   },
   "browserslist": {
@@ -55,7 +61,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.7.1",
+    "@testing-library/user-event": "^13.0.16",
     "@types/jest": "^26.0.20",
     "@types/jest-when": "^2.7.2",
     "@types/node": "^14.14.28",
@@ -63,9 +69,11 @@
     "@types/react-dom": "^17.0.1",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-stack-grid": "^0.7.0",
+    "@types/uuid": "^8.3.0",
     "gh-pages": "^3.1.0",
     "jest-when": "^3.2.1",
     "mq-polyfill": "^1.1.8",
+    "react-select-event": "^5.2.0",
     "ts-jest": "^26.5.1"
   }
 }

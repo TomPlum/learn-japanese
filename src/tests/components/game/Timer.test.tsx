@@ -41,6 +41,13 @@ test('Clicking the pause button once while the timer is running should stop it',
     expect(screen.getByText("00:01")).toBeInTheDocument();
 });
 
+test('Clicking the pause button should change the title to \'Play\'', () => {
+    render(<Timer pausable={true} />);
+    expect(screen.getByTitle('Pause')).toBeInTheDocument();
+    fireEvent.click(screen.getByTitle('Pause'));
+    expect(screen.getByTitle('Play')).toBeInTheDocument();
+});
+
 test('Clicking the pause button twice should stop and start the timer', () => {
     render(<Timer pausable={true} />);
     expect(screen.getByText("00:00")).toBeInTheDocument();

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Kana } from "../../types/Kana";
+import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/results/AnswerMistake.module.scss";
 
 interface AnswerMistakeProps {
@@ -23,7 +23,7 @@ class AnswerMistake extends Component<AnswerMistakeProps> {
                         <span className={styles.timesWrong}>x{times}</span>
                     </Col>
                     <Col xs={6} className={styles.col}>
-                        <span className={styles.romanji}>{kana.romanji[0]}</span>
+                        <span className={styles.romaji}>{kana.romaji[0]}</span>
                     </Col>
                 </Row>
 

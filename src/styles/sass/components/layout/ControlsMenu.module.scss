@@ -1,0 +1,89 @@
+@import "src/styles/sass/viewports";
+@import "src/styles/sass/colours";
+
+@mixin linkText {
+  text-transform: uppercase;
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+}
+
+@mixin navbar {
+  border-bottom: 2px rgba(146, 146, 146, 0.2) solid;
+  background-color: $dark-3;
+
+  $shadow-colour: rgba(255, 255, 255, 0.1);
+  -moz-box-shadow: 1px 2px 3px $shadow-colour;
+  -webkit-box-shadow: 1px 2px 3px $shadow-colour;
+  box-shadow: 1px 2px 3px $shadow-colour;
+}
+
+@include phone {
+  .icon {
+    font-size: 1.6em;
+    margin-top: 5px;
+    margin-bottom: -5px;
+  }
+
+  .linkText {
+    @include linkText;
+    font-size: 0.9em;
+  }
+
+  .navbar {
+    @include navbar;
+    padding: 5px;
+    height: 70px;
+  }
+}
+
+@include tablet {
+  .icon {
+    font-size: 2.5em;
+    margin: 5px;
+  }
+
+  .linkText {
+    @include linkText;
+    font-size: 1em;
+  }
+
+  .navbar {
+    @include navbar;
+    padding: 10px;
+    height: 100px;
+  }
+}
+
+@include desktop {
+  .icon {
+    font-size: 2.5em;
+    margin: 5px;
+  }
+
+  .linkText {
+    @include linkText;
+    font-size: 1.2em;
+  }
+
+  .navbar {
+    @include navbar;
+    padding: 15px;
+    height: 130px;
+  }
+}
+
+.nav {
+  width: 100%;
+}
+
+.navLink {
+  text-align: center;
+  transition: 0.5s ease;
+}
+
+.row {
+  width: 100%;
+}
+
+.innerWrapper {
+  max-width: 1200px;
+}

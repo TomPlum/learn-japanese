@@ -3,8 +3,6 @@ import { Filter } from "./Filter";
 export default class FilterChain<T> {
     private filters = new Set<Filter<T>>();
 
-    constructor() { }
-
     public addFilter(filter: Filter<T>) {
         this.filters.add(filter);
     }

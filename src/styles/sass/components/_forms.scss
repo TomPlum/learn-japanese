@@ -1,0 +1,12 @@
+@mixin heading {
+  font-family: "Ciutadella Rounded", sans-serif;
+  font-size: 1.2em;
+  color: #FFF;
+  margin-bottom: 10px;
+}
+
+@mixin SubForm {
+  .section {
+    margin-bottom: 20px;
+  }
+}
