@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import GameSettingsMenu, { GameSettingsMenuProps } from "../../../components/layout/GameSettingsMenu";
+import SettingsMenu, { GameSettingsMenuProps } from "../../../components/layout/SettingsMenu";
 import Topic from "../../../types/Topic";
 import { RELAXED } from "../../../data/GameModePresets";
 import { AppMode } from "../../../types/AppMode";
@@ -11,7 +11,7 @@ const onStartLearnHandler = jest.fn();
 let props: GameSettingsMenuProps;
 
 const setup = () => {
-    const component = render(<GameSettingsMenu {...props} />);
+    const component = render(<SettingsMenu {...props} />);
     return {
         kana: component.queryAllByText('Hiragana & Katakana')[1],
         numbers: component.getByText('Numbers & Counting'),

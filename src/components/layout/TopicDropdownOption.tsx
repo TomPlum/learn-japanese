@@ -3,13 +3,13 @@ import Topic from "../../types/Topic";
 import { Dropdown } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/GameTypeMenuDropdownOption.module.scss";
 
-interface GameTypeMenuDropdownOptionProps {
+interface TopicDropdownOptionProps {
     type: Topic;
     selected: Topic;
     onClick: (type: Topic) => void;
 }
 
-class GameTypeMenuDropdownOption extends Component<GameTypeMenuDropdownOptionProps> {
+class TopicDropdownOption extends Component<TopicDropdownOptionProps> {
     render() {
         const { type, selected, onClick, children } = this.props;
 
@@ -22,4 +22,4 @@ class GameTypeMenuDropdownOption extends Component<GameTypeMenuDropdownOptionPro
     }
 }
 
-export default GameTypeMenuDropdownOption;
+export default TopicDropdownOption;

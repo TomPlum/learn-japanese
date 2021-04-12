@@ -1,26 +1,26 @@
 import React, { Component } from "react";
 import { Dropdown, ListGroup } from "react-bootstrap";
 import Topic from "../../types/Topic";
-import GameTypeMenuListOption from "./GameTypeMenuListOption";
+import TopicListOption from "./TopicListOption";
 import { faGamepad, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import GameTypeMenuDropdownOption from "./GameTypeMenuDropdownOption";
+import TopicDropdownOption from "./TopicDropdownOption";
 import { AppMode } from "../../types/AppMode";
 import styles from "../../styles/sass/components/layout/GameTypeMenu.module.scss";
 
-interface GameTypeMenuProps {
+interface TopicSelectionMenuProps {
     appMode: AppMode;
     onSelect: (type: Topic) => void;
     className?: string;
 }
 
-interface GameTypeMenuState {
+interface TopicSelectionMenuState {
     selected: Topic;
 }
 
-class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
+class TopicSelectionMenu extends Component<TopicSelectionMenuProps, TopicSelectionMenuState> {
 
-    constructor(props: Readonly<GameTypeMenuProps> | GameTypeMenuProps) {
+    constructor(props: Readonly<TopicSelectionMenuProps> | TopicSelectionMenuProps) {
         super(props);
         this.state = {
             selected: Topic.KANA
@@ -40,34 +40,26 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className={styles.dropdownMenu}>
-                        {
-                            Topic.ALL.map((topic: Topic) => {
-                                return (
-                                    <GameTypeMenuDropdownOption type={topic} onClick={this.handleChange} selected={selected}>
-                                        <FontAwesomeIcon fixedWidth icon={topic.icon} />
-                                    </GameTypeMenuDropdownOption>
-                                )
-                            })
-                        }
+                        {Topic.ALL.map((topic: Topic) =>
+                            <TopicDropdownOption type={topic} onClick={this.handleChange} selected={selected}>
+                                <FontAwesomeIcon fixedWidth icon={topic.icon} />
+                            </TopicDropdownOption>
+                        )}
                     </Dropdown.Menu>
                 </Dropdown>
 
                 <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group-header">
-                    <GameTypeMenuListOption text={this.getMenuHeading()} onClick={this.handleChange} isHeading>
+                    <TopicListOption text={this.getMenuHeading()} onClick={this.handleChange} isHeading>
                         <FontAwesomeIcon fixedWidth icon={appMode === AppMode.PLAY ? faGamepad : faGraduationCap} />
-                    </GameTypeMenuListOption>
+                    </TopicListOption>
                 </ListGroup>
 
                 <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group">
-                    {
-                        Topic.ALL.map((topic: Topic) => {
-                            return (
-                                <GameTypeMenuListOption type={topic} onClick={this.handleChange} selected={selected}>
-                                    <FontAwesomeIcon fixedWidth icon={topic.icon}/>
-                                </GameTypeMenuListOption>
-                            )
-                        })
-                    }
+                    {Topic.ALL.map((topic: Topic) =>
+                        <TopicListOption type={topic} onClick={this.handleChange} selected={selected}>
+                            <FontAwesomeIcon fixedWidth icon={topic.icon}/>
+                        </TopicListOption>
+                    )}
                 </ListGroup>
 
             </div>
@@ -90,4 +82,4 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
     }
 }
 
-export default GameTypeMenu;
+export default TopicSelectionMenu;

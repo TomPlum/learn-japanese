@@ -5,7 +5,7 @@ import GameResultScreen from "../results/GameResultScreen";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
 import ControlsMenu from "../layout/ControlsMenu";
-import GameSettingsMenu, { GameTypeSettings, LearnSessionSettings } from "../layout/GameSettingsMenu";
+import SettingsMenu, { GameTypeSettings, LearnSessionSettings } from "../layout/SettingsMenu";
 import { AppMode } from "../../types/AppMode";
 import SessionID from "../../types/SessionID";
 import LearningSessionResult from "../../types/learn/LearningSessionResult";
@@ -78,7 +78,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                     <ControlsMenu onChangeAppMode={this.handleChangeAppMode} active={isInMenu} startingMode={mode} />
 
                     {isInMenu &&
-                        <GameSettingsMenu
+                        <SettingsMenu
                             onStartGame={this.startGame}
                             onStartLearn={this.startLearning}
                             mode={mode}

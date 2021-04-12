@@ -3,7 +3,7 @@ import Topic from "../../types/Topic";
 import { ListGroupItem } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/GameTypeMenuListOption.module.scss";
 
-interface GameTypeMenuOptionProps {
+interface TopicListOptionProps {
     type?: Topic;
     text?: string;
     selected?: Topic;
@@ -11,7 +11,7 @@ interface GameTypeMenuOptionProps {
     isHeading?: boolean;
 }
 
-class GameTypeMenuListOption extends Component<GameTypeMenuOptionProps> {
+class TopicListOption extends Component<TopicListOptionProps> {
     render() {
         const { type, text, isHeading, selected, children } = this.props;
         return(
@@ -29,4 +29,4 @@ class GameTypeMenuListOption extends Component<GameTypeMenuOptionProps> {
     }
 }
 
-export default GameTypeMenuListOption;
+export default TopicListOption;

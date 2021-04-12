@@ -1,5 +1,5 @@
 import LearningDataRepository from "../../repository/LearningDataRepository";
-import { LearnSessionSettings } from "../../components/layout/GameSettingsMenu";
+import { LearnSessionSettings } from "../../components/layout/SettingsMenu";
 import Topic from "../../types/Topic";
 import { KanaRepository } from "../../repository/KanaRepository";
 import CalendarRepository from "../../repository/CalendarRepository";

@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Topic from "../../types/Topic";
 import KanaGameModeMenu from "./KanaGameModeMenu";
-import GameTypeMenu from "./GameTypeMenu";
+import TopicSelectionMenu from "./TopicSelectionMenu";
 import { GameSettings } from "../../types/game/GameSettings";
 import { AppMode } from "../../types/AppMode";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
@@ -31,7 +31,7 @@ interface GameSettingsMenuState {
     learnSettings?: LearnSettings;
 }
 
-class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
+class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
 
     constructor(props: Readonly<GameSettingsMenuProps> | GameSettingsMenuProps) {
         super(props);
@@ -48,14 +48,15 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                 <Container fluid className={styles.innerWrapper}>
                     <Row className={styles.row}>
                         <Col sm={12} md={6} lg={5}>
-                            <GameTypeMenu
+                            <TopicSelectionMenu
                                 onSelect={(selected) => this.setState({ topic: selected })}
                                 className={styles.menu}
                                 appMode={this.props.mode}
                             />
                         </Col>
+
                         <Col sm={12} md={6} lg={7} className={styles.gameMenuWrapper}>
-                            {this.getGameMenu()}
+                            {this.getMenu()}
                         </Col>
                     </Row>
                 </Container>
@@ -63,7 +64,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
         );
     }
 
-    private getGameMenu = () => {
+    private getMenu = () => {
         const { mode } = this.props;
         const { topic } = this.state;
 
@@ -93,4 +94,4 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 }
 
-export default GameSettingsMenu;
+export default SettingsMenu;

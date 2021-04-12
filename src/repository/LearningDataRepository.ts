@@ -2,7 +2,7 @@ import Topic from "../types/Topic";
 import Learnable from "../types/learn/Learnable";
 import { KanaRepository } from "./KanaRepository";
 import CalendarRepository from "./CalendarRepository";
-import { LearnSessionSettings } from "../components/layout/GameSettingsMenu";
+import { LearnSessionSettings } from "../components/layout/SettingsMenu";
 import { KanjiRepository } from "./KanjiRepository";
 
 export default class LearningDataRepository {
