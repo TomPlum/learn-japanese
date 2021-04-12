@@ -43,3 +43,11 @@ export interface KyoikuGradeData {
     value: number;
     quantity: number;
 }
+
+export interface ColourData {
+    name: string;
+    kanji?: string;
+    kana: string;
+    romaji: string;
+    colour: string;
+}
