@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Dropdown, ListGroup } from "react-bootstrap";
-import { Topic } from "../../types/Topic";
+import Topic from "../../types/Topic";
 import GameTypeMenuListOption from "./GameTypeMenuListOption";
-import { faCalendarAlt, faCloudSunRain, faFillDrip, faFont, faGamepad, faGraduationCap, faPaintBrush, faYenSign } from "@fortawesome/free-solid-svg-icons";
+import { faGamepad, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GameTypeMenuDropdownOption from "./GameTypeMenuDropdownOption";
 import { AppMode } from "../../types/AppMode";
@@ -36,33 +36,19 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
 
                 <Dropdown className={"d-md-none " + styles.dropdown} data-testid="dropdown">
                     <Dropdown.Toggle variant="primary" className={styles.dropdownToggle} id="select-game-type">
-                        <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(selected)} /> {selected}
+                        <FontAwesomeIcon fixedWidth icon={selected.icon} /> {selected.name}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className={styles.dropdownMenu}>
-                        <GameTypeMenuDropdownOption type={Topic.KANA} onClick={this.handleChange} selected={selected}>
-                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.KANA)} />
-                        </GameTypeMenuDropdownOption>
-
-                        <GameTypeMenuDropdownOption type={Topic.NUMBERS} onClick={this.handleChange} selected={selected}>
-                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.NUMBERS)} />
-                        </GameTypeMenuDropdownOption>
-
-                        <GameTypeMenuDropdownOption type={Topic.KANJI} onClick={this.handleChange} selected={selected}>
-                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.KANJI)} />
-                        </GameTypeMenuDropdownOption>
-
-                        <GameTypeMenuDropdownOption type={Topic.COLOURS} onClick={this.handleChange} selected={selected}>
-                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.COLOURS)} />
-                        </GameTypeMenuDropdownOption>
-
-                        <GameTypeMenuDropdownOption type={Topic.WEATHER} onClick={this.handleChange} selected={selected}>
-                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.WEATHER)} />
-                        </GameTypeMenuDropdownOption>
-
-                        <GameTypeMenuDropdownOption type={Topic.CALENDAR} onClick={this.handleChange} selected={selected}>
-                            <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.CALENDAR)} />
-                        </GameTypeMenuDropdownOption>
+                        {
+                            Topic.ALL.map((topic: Topic) => {
+                                return (
+                                    <GameTypeMenuDropdownOption type={topic} onClick={this.handleChange} selected={selected}>
+                                        <FontAwesomeIcon fixedWidth icon={topic.icon} />
+                                    </GameTypeMenuDropdownOption>
+                                )
+                            })
+                        }
                     </Dropdown.Menu>
                 </Dropdown>
 
@@ -73,44 +59,19 @@ class GameTypeMenu extends Component<GameTypeMenuProps, GameTypeMenuState> {
                 </ListGroup>
 
                 <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group">
-                    <GameTypeMenuListOption type={Topic.KANA} onClick={this.handleChange} selected={selected}>
-                        <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.KANA)} />
-                    </GameTypeMenuListOption>
-
-                    <GameTypeMenuListOption type={Topic.NUMBERS} onClick={this.handleChange} selected={selected}>
-                        <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.NUMBERS)} />
-                    </GameTypeMenuListOption>
-
-                    <GameTypeMenuListOption type={Topic.KANJI} onClick={this.handleChange} selected={selected}>
-                        <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.KANJI)} />
-                    </GameTypeMenuListOption>
-
-                    <GameTypeMenuListOption type={Topic.COLOURS} onClick={this.handleChange} selected={selected}>
-                        <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.COLOURS)} />
-                    </GameTypeMenuListOption>
-
-                    <GameTypeMenuListOption type={Topic.WEATHER} onClick={this.handleChange} selected={selected}>
-                        <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.WEATHER)} />
-                    </GameTypeMenuListOption>
-
-                    <GameTypeMenuListOption type={Topic.CALENDAR} onClick={this.handleChange} selected={selected}>
-                        <FontAwesomeIcon fixedWidth icon={this.getGameTypeIcon(Topic.CALENDAR)} />
-                    </GameTypeMenuListOption>
+                    {
+                        Topic.ALL.map((topic: Topic) => {
+                            return (
+                                <GameTypeMenuListOption type={topic} onClick={this.handleChange} selected={selected}>
+                                    <FontAwesomeIcon fixedWidth icon={topic.icon}/>
+                                </GameTypeMenuListOption>
+                            )
+                        })
+                    }
                 </ListGroup>
 
             </div>
         );
-    }
-
-    private getGameTypeIcon = (type: Topic) => {
-        switch(type) {
-            case Topic.KANA: return faFont;
-            case Topic.NUMBERS: return faYenSign;
-            case Topic.KANJI: return faPaintBrush;
-            case Topic.COLOURS: return faFillDrip;
-            case Topic.WEATHER: return faCloudSunRain;
-            case Topic.CALENDAR: return faCalendarAlt;
-        }
     }
 
     private getMenuHeading = () => {

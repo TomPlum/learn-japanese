@@ -5,6 +5,7 @@ export interface LearnSettings {
     kana?: KanaSettings;
     calendar?: LearnCalendarSettings;
     kanji?: KanjiSettings;
+    basics?: LearnBasicsSettings;
 }
 
 export interface LearnCalendarSettings {
@@ -13,4 +14,13 @@ export interface LearnCalendarSettings {
     season?: boolean;
     nouns?: boolean;
     phrases?: boolean;
+}
+
+export interface LearnBasicsSettings {
+    colours?: boolean;
+    animals?: boolean;
+    directions?: boolean;
+    weather?: boolean;
+    family?: boolean;
+    body?: boolean;
 }

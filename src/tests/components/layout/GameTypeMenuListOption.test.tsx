@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import GameTypeMenuListOption from "../../../components/layout/GameTypeMenuListOption";
-import { Topic } from "../../../types/Topic";
+import Topic from "../../../types/Topic";
 
 const onClickHandler = jest.fn();
 

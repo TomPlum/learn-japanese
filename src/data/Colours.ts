@@ -23,6 +23,13 @@ export function colours(): ColourData[] {
             colour: "#ffd500"
         },
         {
+            name: "Bright Golden Yellow",
+            kanji: "山吹色",
+            kana: "やまぶきいろ",
+            romaji: "yamabuki-iro",
+            colour: "#ffc700"
+        },
+        {
             name: "Blue",
             kanji: "青",
             kana: "あお",
@@ -30,11 +37,39 @@ export function colours(): ColourData[] {
             colour: "#0090ff"
         },
         {
+            name: "Light Blue",
+            kanji: "水色",
+            kana: "みずいろ",
+            romaji: "mizu-iro",
+            colour: "#52b2ff"
+        },
+        {
+            name: "Dark Blue",
+            kanji: "紺色",
+            kana: "こんいろ",
+            romaji: "kon-iro",
+            colour: "#003fff"
+        },
+        {
+            name: "Indigo Blue",
+            kanji: "藍色",
+            kana: "あいいろ",
+            romaji: "ai-iro",
+            colour: "#3F00FF"
+        },
+        {
             name: "Red",
             kanji: "赤",
             kana: "あか",
             romaji: "aka",
             colour: "#ff0000"
+        },
+        {
+            name: "Vermilion / Scarlet",
+            kanji: "朱色",
+            kana: "しゅいろ",
+            romaji: "shu-iro",
+            colour: "#E34234"
         },
         {
             name: "Green",
@@ -58,6 +93,13 @@ export function colours(): ColourData[] {
             colour: "#753c02"
         },
         {
+            name: "Dark Brown",
+            kanji: "焦げ茶色",
+            kana: "こげちゃいろ",
+            romaji: "kogecha-iro",
+            colour: "#4a2601"
+        },
+        {
             name: "Pink",
             kana: "ピンク",
             romaji: "pinku",
@@ -68,6 +110,13 @@ export function colours(): ColourData[] {
             kanji: "紫",
             kana: "むらさき",
             romaji: "murasaki",
+            colour: "#9500ff"
+        },
+        {
+            name: "Light Purple",
+            kanji: "藤色",
+            kana: "ふじいろ",
+            romaji: "fuji-iro",
             colour: "#9500ff"
         },
         {
@@ -117,6 +166,20 @@ export function colours(): ColourData[] {
             kana: "にじ",
             romaji: "niji",
             colour: "#ff7700"
+        },
+        {
+            name: "Transparent",
+            kanji: "透明",
+            kana: "とうめい",
+            romaji: "toumei",
+            colour: "rgba(0,255,255,0.32)"
+        },
+        {
+            name: "Dark",
+            kanji: "濃い",
+            kana: "こい",
+            romaji: "koi",
+            colour: "#323232"
         }
     ];
 }

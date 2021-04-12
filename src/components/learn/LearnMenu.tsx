@@ -69,7 +69,7 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
 
                 {!selected.isCustom && <Row>
                     <Col>
-                        <StartButton onClick={this.onStart}/>
+                        <StartButton onClick={this.onStart} />
                     </Col>
                 </Row>}
             </div>

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Topic } from "../../types/Topic";
+import Topic from "../../types/Topic";
 import KanaGameModeMenu from "./KanaGameModeMenu";
 import GameTypeMenu from "./GameTypeMenu";
 import { GameSettings } from "../../types/game/GameSettings";
@@ -8,9 +8,6 @@ import { AppMode } from "../../types/AppMode";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 import { LearnSettings } from "../../types/learn/LearnSettings";
 import LearnMenu from "../learn/LearnMenu";
-import LearnKanaMode from "../../types/learn/mode/LearnKanaMode";
-import LearnCalendarMode from "../../types/learn/mode/LearnCalendarMode";
-import LearnKanjiMode from "../../types/learn/mode/LearnKanjiMode";
 
 export interface GameTypeSettings {
     topic: Topic;
@@ -69,55 +66,18 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     private getGameMenu = () => {
         const { mode } = this.props;
         const { topic } = this.state;
-        //TODO: We can return a single <LearnMenu/> here. Store the Mode in the selected topic?
-        switch (topic) {
-            case Topic.KANA: {
-                switch (mode) {
-                    case AppMode.LEARN: {
-                        return (
-                            <LearnMenu key={topic} modes={new LearnKanaMode()} onStart={this.onStartLearning}/>
-                        );
-                    }
-                    case AppMode.PLAY: {
-                        return (
-                            <KanaGameModeMenu
-                                onSelectedMode={(mode, settings) => this.onStartGame(settings)}
-                                className={styles.menu}
-                            />
-                        );
-                    }
-                }
-                return false;
+
+        switch (mode) {
+            case AppMode.LEARN: {
+                return <LearnMenu key={topic.name} modes={topic.modes} onStart={this.onStartLearning} />;
             }
-            case Topic.NUMBERS: {
-                return <p className={styles.menu} style={{ color: '#FFF' }}>Numbers menu here</p>
-            }
-            case Topic.KANJI: {
-                switch (mode) {
-                    case AppMode.LEARN: {
-                        return <LearnMenu modes={new LearnKanjiMode()} onStart={this.onStartLearning} />
-                    }
-                    case AppMode.PLAY: {
-                        return <p className={styles.menu} style={{ color: '#FFF' }}>Kanji menu here</p>
-                    }
-                }
-                return false;
-            }
-            case Topic.COLOURS: {
-                return <p className={styles.menu} style={{ color: '#FFF' }}>Colours menu here</p>
-            }
-            case Topic.WEATHER: {
-                return <p className={styles.menu} style={{ color: '#FFF' }}>Weather menu here</p>
-            }
-            case Topic.CALENDAR: {
-                switch (mode) {
-                    case AppMode.LEARN: {
-                        return <LearnMenu key={topic} modes={new LearnCalendarMode()} onStart={this.onStartLearning} />
-                    }
-                    case AppMode.PLAY: {
-                        return <p className={styles.menu} style={{ color: '#FFF' }}>Calendar menu here</p>
-                    }
-                }
+            case AppMode.PLAY: {
+                return (
+                    <KanaGameModeMenu
+                        onSelectedMode={(mode, settings) => this.onStartGame(settings)}
+                        className={styles.menu}
+                    />
+                );
             }
         }
     }

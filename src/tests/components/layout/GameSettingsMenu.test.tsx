@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import GameSettingsMenu, { GameSettingsMenuProps } from "../../../components/layout/GameSettingsMenu";
-import { Topic } from "../../../types/Topic";
+import Topic from "../../../types/Topic";
 import { RELAXED } from "../../../data/GameModePresets";
 import { AppMode } from "../../../types/AppMode";
 
@@ -16,8 +16,7 @@ const setup = () => {
         kana: component.queryAllByText('Hiragana & Katakana')[1],
         numbers: component.getByText('Numbers & Counting'),
         kanji: component.getByText('Jōyō Kanji'),
-        colours: component.getByText('Colours'),
-        weather: component.getByText('Weather'),
+        basics: component.getByText('Basics'),
         calendar: component.getByText('Days & Months'),
         start: screen.getByText('Start'),
         ...component
@@ -37,43 +36,6 @@ describe("Rendering Game Menus", () => {
         setup();
         expect(screen.getByText('Relaxed')).toBeInTheDocument();
     });
-
-    test('Should switch to \'Hiragana & Katakana\' game type after selecting it', () => {
-        const { numbers, kana } = setup();
-        fireEvent.click(numbers);
-        fireEvent.click(kana);
-        expect(screen.getByText('Relaxed')).toBeInTheDocument();
-    });
-
-    test('Should switch to \'Numbers & Counting\' game type menu after selecting it', () => {
-        const { numbers } = setup();
-        fireEvent.click(numbers);
-        expect(screen.getByText('Numbers menu here')).toBeInTheDocument();
-    });
-
-    test('Should switch to \'Jōyō Kanji\' game type menu after selecting it', () => {
-        const { kanji } = setup();
-        fireEvent.click(kanji);
-        expect(screen.getByText('Kanji menu here')).toBeInTheDocument();
-    });
-
-    test('Should switch to \'Colours\' game type menu after selecting it', () => {
-        const { colours } = setup();
-        fireEvent.click(colours);
-        expect(screen.getByText('Colours menu here')).toBeInTheDocument();
-    });
-
-    test('Should switch to \'Weather\' game type menu after selecting it', () => {
-        const { weather } = setup();
-        fireEvent.click(weather);
-        expect(screen.getByText('Weather menu here')).toBeInTheDocument();
-    });
-
-    test('Should switch to \'Days & Months\' game type menu after selecting it', () => {
-        const { calendar } = setup();
-        fireEvent.click(calendar);
-        expect(screen.getByText('Calendar menu here')).toBeInTheDocument();
-    });
 });
 
 describe("Rendering Learn Menus", () => {
@@ -86,41 +48,11 @@ describe("Rendering Learn Menus", () => {
         expect(screen.getByTestId('learn-kana-menu')).toBeInTheDocument();
     });
 
-    test('Should switch to \'Hiragana & Katakana\' learn menu after selecting it', () => {
+    test('Should switch to the selected topics learn menu after clicking it', () => {
         const { numbers, kana } = setup();
         fireEvent.click(numbers);
         fireEvent.click(kana);
         expect(screen.getByTestId('learn-kana-menu')).toBeInTheDocument();
-    });
-
-    test('Should switch to \'Numbers & Counting\' learn menu after selecting it', () => {
-        const { numbers } = setup();
-        fireEvent.click(numbers);
-        expect(screen.getByText('Numbers menu here')).toBeInTheDocument();
-    });
-
-    test('Should switch to \'Jōyō Kanji\' learn menu after selecting it', () => {
-        const { kanji } = setup();
-        fireEvent.click(kanji);
-        expect(screen.getByTestId('learn-kanji-menu')).toBeInTheDocument();
-    });
-
-    test('Should switch to \'Colours\' learn menu after selecting it', () => {
-        const { colours } = setup();
-        fireEvent.click(colours);
-        expect(screen.getByText('Colours menu here')).toBeInTheDocument();
-    });
-
-    test('Should switch to \'Weather\' learn menu after selecting it', () => {
-        const { weather } = setup();
-        fireEvent.click(weather);
-        expect(screen.getByText('Weather menu here')).toBeInTheDocument();
-    });
-
-    test('Should switch to \'Days & Months\' learn menu after selecting it', () => {
-        const { calendar } = setup();
-        fireEvent.click(calendar);
-        expect(screen.getByTestId('learn-calendar-menu')).toBeInTheDocument();
     });
 });
 

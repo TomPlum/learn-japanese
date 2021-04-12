@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import GameTypeMenu from "../../../components/layout/GameTypeMenu";
-import { Topic } from "../../../types/Topic";
+import Topic from "../../../types/Topic";
 import { AppMode } from "../../../types/AppMode";
 
 const onSelectHandler = jest.fn();

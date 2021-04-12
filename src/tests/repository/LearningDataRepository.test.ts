@@ -1,6 +1,6 @@
 import LearningDataRepository from "../../repository/LearningDataRepository";
 import { LearnSessionSettings } from "../../components/layout/GameSettingsMenu";
-import { Topic } from "../../types/Topic";
+import Topic from "../../types/Topic";
 import { KanaRepository } from "../../repository/KanaRepository";
 import CalendarRepository from "../../repository/CalendarRepository";
 import { KanjiRepository } from "../../repository/KanjiRepository";
@@ -56,7 +56,7 @@ describe("Learn Data Repository", () => {
     });
 
     test('Passing in an unknown topic should return an empty array', () => {
-        const config: LearnSessionSettings = { topic: Topic.WEATHER, settings: { } };
+        const config: LearnSessionSettings = { topic: Topic.NUMBERS, settings: { } };
         const response = repository.read(config);
         expect(response).toHaveLength(0);
     });

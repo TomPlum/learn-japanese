@@ -12,7 +12,7 @@ import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import LearningResultScreen from "../results/LearningResultScreen";
 import Arrays from "../../utility/Arrays";
 import MainErrorBoundary from "../error/MainErrorBoundary";
-import { Topic } from "../../types/Topic";
+import Topic from "../../types/Topic";
 import Learnable from "../../types/learn/Learnable";
 import Learn from "../learn/Learn";
 import CalendarFlashCardFront from "../learn/calendar/CalendarFlashCardFront";

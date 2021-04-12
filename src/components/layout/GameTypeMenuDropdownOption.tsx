@@ -1,5 +1,5 @@
 import React, { Component, ReactElement } from "react";
-import { Topic } from "../../types/Topic";
+import Topic from "../../types/Topic";
 import { Dropdown } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/GameTypeMenuDropdownOption.module.scss";
 
@@ -14,9 +14,9 @@ class GameTypeMenuDropdownOption extends Component<GameTypeMenuDropdownOptionPro
         const { type, selected, onClick, children } = this.props;
 
         return (
-            <Dropdown.Item onClick={() => onClick(type)} eventKey={type} active={type === selected}>
+            <Dropdown.Item onClick={() => onClick(type)} eventKey={type.name} active={type === selected}>
                 {children && React.cloneElement(children as ReactElement, { className: styles.icon })}
-                <span className={styles.text}>{type}</span>
+                <span className={styles.text}>{type.name}</span>
             </Dropdown.Item>
         );
     }

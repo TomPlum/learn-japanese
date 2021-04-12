@@ -1,5 +1,5 @@
 import React, { Component, ReactElement } from "react";
-import { Topic } from "../../types/Topic";
+import Topic from "../../types/Topic";
 import { ListGroupItem } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/GameTypeMenuListOption.module.scss";
 
@@ -18,12 +18,12 @@ class GameTypeMenuListOption extends Component<GameTypeMenuOptionProps> {
             <ListGroupItem
                 action={!isHeading}
                 onClick={() => this.props?.onClick?.(type)}
-                eventKey={type}
+                eventKey={type?.name}
                 active={selected === type && !isHeading}
                 className={!isHeading ? styles.item : styles.heading}
             >
                 {children && React.cloneElement(children as ReactElement, { className: styles.icon })}
-                <span className={styles.text}>{text ? text : type}</span>
+                <span className={styles.text}>{text ? text : type?.name}</span>
             </ListGroupItem>
         );
     }

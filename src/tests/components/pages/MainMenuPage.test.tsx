@@ -46,8 +46,7 @@ const setup = () => {
       kana: component.queryAllByText('Hiragana & Katakana')[1],
       numbers: component.getByText('Numbers & Counting'),
       kanji: component.getByText('Jōyō Kanji'),
-      colours: component.getByText('Colours'),
-      weather: component.getByText('Weather'),
+      basics: component.getByText('Basics'),
       calendar: component.getByText('Days & Months'),
       ...component
    }
