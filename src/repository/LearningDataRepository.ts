@@ -4,6 +4,7 @@ import { KanaRepository } from "./KanaRepository";
 import CalendarRepository from "./CalendarRepository";
 import { LearnSessionSettings } from "../components/layout/SettingsMenu";
 import { KanjiRepository } from "./KanjiRepository";
+import BasicsRepository from "./BasicsRepository";
 
 export default class LearningDataRepository {
     public read(config?: LearnSessionSettings): Learnable[] {
@@ -20,6 +21,9 @@ export default class LearningDataRepository {
             }
             case Topic.KANJI: {
                 return new KanjiRepository().read(settings.kanji!);
+            }
+            case Topic.BASICS: {
+                return new BasicsRepository().read(settings.basics!);
             }
         }
 

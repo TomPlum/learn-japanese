@@ -5,14 +5,17 @@ import { KanaRepository } from "../../repository/KanaRepository";
 import CalendarRepository from "../../repository/CalendarRepository";
 import { KanjiRepository } from "../../repository/KanjiRepository";
 import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
+import BasicsRepository from "../../repository/BasicsRepository";
 
 jest.mock('../../repository/KanaRepository');
 jest.mock('../../repository/KanjiRepository');
 jest.mock('../../repository/CalendarRepository');
+jest.mock('../../repository/BasicsRepository');
 
 const mockKanaRepository = jest.fn();
 const mockCalendarRepository = jest.fn();
 const mockKanjiRepository = jest.fn();
+const mockBasicsRepository = jest.fn();
 
 beforeEach(() => {
     (KanaRepository as jest.MockedFunction<any>).mockImplementation(() => {
@@ -25,6 +28,10 @@ beforeEach(() => {
 
     (KanjiRepository as jest.MockedFunction<any>).mockImplementation(() => {
         return  { read: mockKanjiRepository }
+    });
+
+    (BasicsRepository as jest.MockedFunction<any>).mockImplementation(() => {
+        return  { read: mockBasicsRepository }
     });
 })
 
@@ -48,6 +55,12 @@ describe("Learn Data Repository", () => {
         const config: LearnSessionSettings = { topic: Topic.KANJI, settings: { kanji: { grades: [KyoikuGrade.ONE] } } };
         repository.read(config);
         expect(mockKanjiRepository).toHaveBeenCalledWith({ grades: [KyoikuGrade.ONE] });
+    });
+
+    test('Should delegate to the BasicsRepository when the topic is Basics', () => {
+        const config: LearnSessionSettings = { topic: Topic.BASICS, settings: { basics: { colours: true } } };
+        repository.read(config);
+        expect(mockBasicsRepository).toHaveBeenCalledWith({ colours: true });
     });
 
     test('Passing in falsy settings should return an empty array', () => {
