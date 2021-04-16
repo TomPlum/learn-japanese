@@ -1,9 +1,9 @@
-import CalendarData from "../../../types/calendar/CalendarData";
+import CommonLearnable from "../../../types/learn/CommonLearnable";
 import TemporalNoun from "../../../types/calendar/TemporalNoun";
 
 describe("Temporal Noun", () => {
 
-    const noun: CalendarData = new TemporalNoun("Tomorrow", "明日", "ashita", "あした");
+    const noun: CommonLearnable = new TemporalNoun("Tomorrow", "明日", "ashita", "あした");
 
     it("Should return the correct title", () => {
         expect(noun.getTitle()).toBe("Temporal Noun / Adverb");

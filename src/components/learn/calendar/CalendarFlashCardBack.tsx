@@ -1,12 +1,12 @@
 import { CardFaceProps } from "../FlashCard";
 import FlashCardBack from "../FlashCardBack";
-import CalendarData from "../../../types/calendar/CalendarData";
+import CommonLearnable from "../../../types/learn/CommonLearnable";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/learn/calendar/CalendarFlashCardBack.module.scss"
 
 function CalendarFlashCardBack(props: CardFaceProps) {
     const { data, onClick } = props;
-    const value = data as CalendarData;
+    const value = data as CommonLearnable;
     return (
         <FlashCardBack title={data.getTitle()} className={styles.wrapper} onReset={onClick}>
             <Container>

@@ -1,9 +1,9 @@
 import Month from "../../../types/calendar/Month";
-import CalendarData from "../../../types/calendar/CalendarData";
+import CommonLearnable from "../../../types/learn/CommonLearnable";
 
 describe("Month", () => {
 
-    const month: CalendarData = new Month("January", "一月", "ichigatsu", "いちがつ", "One Month");
+    const month: CommonLearnable = new Month("January", "一月", "ichigatsu", "いちがつ", "One Month");
 
     it("Should return the correct title", () => {
         expect(month.getTitle()).toBe("Month of the Year");

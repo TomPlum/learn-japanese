@@ -4,11 +4,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import Colour from "../../../types/colour/Colour";
 import styles from "../../../styles/sass/components/learn/calendar/CalendarFlashCardBack.module.scss";
 
-function ColourFlashCardBack(props: CardFaceProps) {
+function BasicsFlashCardBack(props: CardFaceProps) {
     const value = props.data as Colour;
 
     return (
-        <FlashCardBack title={value.name} onReset={props.onClick} >
+        <FlashCardBack title={value.name} onReset={props.onClick} borderColour={props.data instanceof Colour ? props.data.colour : undefined}>
             <Container>
                 <Row>
                     <Col>
@@ -17,8 +17,8 @@ function ColourFlashCardBack(props: CardFaceProps) {
                 </Row>
                 <Row>
                     <Col>
-                        <p className={styles.romaji}>{value.kana}</p>
-                        <p className={styles.romaji}>({value.romaji})</p>
+                        <p className={styles.romaji}>{value.getKana()}</p>
+                        <p className={styles.romaji}>({value.getRomaji()})</p>
                     </Col>
                 </Row>
             </Container>
@@ -26,4 +26,4 @@ function ColourFlashCardBack(props: CardFaceProps) {
     );
 }
 
-export default ColourFlashCardBack;
+export default BasicsFlashCardBack;

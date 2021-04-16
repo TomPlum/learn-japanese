@@ -5,14 +5,17 @@ import styles from "../../styles/sass/components/learn/FlashCardFront.module.scs
 export interface FlashCardFrontProps {
     className?: string;
     onClick: () => void;
+    borderColour?: string;
 }
 
 class FlashCardFront extends Component<FlashCardFrontProps> {
     render() {
-        const { onClick, className, children } = this.props;
+        const { onClick, className, borderColour, children } = this.props;
+
+        const border = borderColour ?? "#3996e5";
 
         return (
-            <Container className={[className, styles.wrapper].join(" ")} onClick={onClick}>
+            <Container className={[className, styles.wrapper].join(" ")} onClick={onClick} style={{ borderColor: border }}>
                 <Row>
                     <Col>
                         {children}

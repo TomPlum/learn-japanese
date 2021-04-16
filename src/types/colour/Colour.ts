@@ -1,13 +1,13 @@
-import Learnable from "../learn/Learnable";
+import CommonLearnable from "../learn/CommonLearnable";
 
-export default class Colour implements Learnable {
+export default class Colour implements CommonLearnable {
     private readonly _name: string;
-    private readonly _kanji: string;
+    private readonly _kanji: string | undefined;
     private readonly _kana: string;
     private readonly _romaji: string;
     private readonly _colour: string;
 
-    constructor(name: string, kanji: string, kana: string, romaji: string, colour: string) {
+    constructor(name: string, kanji: string | undefined, kana: string, romaji: string, colour: string) {
         this._name = name;
         this._kanji = kanji;
         this._kana = kana;
@@ -19,24 +19,24 @@ export default class Colour implements Learnable {
         return this._name;
     }
 
-    get kanji(): string {
-        return this._kanji;
-    }
-
-    get kana(): string {
-        return this._kana;
-    }
-
-    get romaji(): string {
-        return this._romaji;
-    }
-
     get colour(): string {
         return this._colour;
     }
 
-    getAnswer(): string {
+    getKanji(): string | undefined {
         return this._kanji;
+    }
+
+    getKana(): string {
+        return this._kana;
+    }
+
+    getRomaji(): string {
+        return this._romaji;
+    }
+
+    getAnswer(): string {
+        return this._kanji ?? "";
     }
 
     getQuestion(): string {
@@ -45,5 +45,9 @@ export default class Colour implements Learnable {
 
     getTitle(): string {
         return "Colour";
+    }
+
+    getMeaning(): string | undefined {
+        return undefined;
     }
 }

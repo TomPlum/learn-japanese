@@ -1,6 +1,6 @@
-import CalendarData from "./CalendarData";
+import CommonLearnable from "../learn/CommonLearnable";
 
-export default class Day implements CalendarData {
+export default class Day implements CommonLearnable {
     private readonly _english: string;
     private readonly _kanji: any; //TODO: Change to Kanji once feature merged.
     private readonly _romaji: string;

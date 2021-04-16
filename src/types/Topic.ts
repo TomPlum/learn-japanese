@@ -11,6 +11,8 @@ import CalendarFlashCardFront from "../components/learn/calendar/CalendarFlashCa
 import CalendarFlashCardBack from "../components/learn/calendar/CalendarFlashCardBack";
 import KanjiFlashCardFront from "../components/learn/kanji/KanjiFlashCardFront";
 import KanjiFlashCardBack from "../components/learn/kanji/KanjiFlashCardBack";
+import BasicsFlashCardFront from "../components/learn/basics/BasicsFlashCardFront";
+import BasicsFlashCardBack from "../components/learn/basics/BasicsFlashCardBack";
 
 export default class Topic {
     private readonly _name: string;
@@ -18,11 +20,30 @@ export default class Topic {
     private readonly _modes: LearnMenuModes;
     private readonly _cards: CardProps;
 
-    public static KANA = new Topic("Hiragana & Katakana", faFont, new LearnKanaMode(), { front: KanaFlashCardFront, back: KanaFlashCardBack });
-    public static NUMBERS = new Topic("Numbers & Counting", faYenSign, new LearnKanaMode(), { front: KanjiFlashCardFront, back: KanjiFlashCardBack });
-    public static KANJI = new Topic("Jōyō Kanji", faPaintBrush, new LearnKanjiMode(), { front: KanjiFlashCardFront, back: KanjiFlashCardBack });
-    public static BASICS = new Topic("Basics", faAppleAlt, new LearnBasicsMode(), { front: KanjiFlashCardFront, back: KanjiFlashCardBack });
-    public static CALENDAR = new Topic("Days & Months", faCalendarAlt, new LearnCalendarMode(), { front: CalendarFlashCardFront, back: CalendarFlashCardBack });
+    public static KANA = new Topic(
+        "Hiragana & Katakana", faFont, new LearnKanaMode(),
+        { front: KanaFlashCardFront, back: KanaFlashCardBack }
+    );
+
+    public static NUMBERS = new Topic(
+        "Numbers & Counting", faYenSign, new LearnKanaMode(),
+        { front: KanjiFlashCardFront, back: KanjiFlashCardBack }
+    );
+
+    public static KANJI = new Topic(
+        "Jōyō Kanji", faPaintBrush, new LearnKanjiMode(),
+        { front: KanjiFlashCardFront, back: KanjiFlashCardBack }
+    );
+
+    public static BASICS = new Topic(
+        "Basics", faAppleAlt, new LearnBasicsMode(),
+        { front: BasicsFlashCardFront, back: BasicsFlashCardBack }
+    );
+
+    public static CALENDAR = new Topic(
+        "Days & Months", faCalendarAlt, new LearnCalendarMode(),
+        { front: CalendarFlashCardFront, back: CalendarFlashCardBack }
+    );
 
     public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR];
 

@@ -1,6 +1,6 @@
-import CalendarData from "./CalendarData";
+import CommonLearnable from "../learn/CommonLearnable";
 
-export default class Month implements CalendarData {
+export default class Month implements CommonLearnable {
     private readonly _english: string;
     private readonly _kanji: any;
     private readonly _romaji: string;

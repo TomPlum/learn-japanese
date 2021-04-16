@@ -34,7 +34,7 @@ test('Should render the literal meaning', () => {
 });
 
 test('Should not render the meaning when its falsy', () => {
-    const hasFalsyMeaning = new TemporalNoun("Tomorrow", "明日", "ashita", "あした", undefined);
+    const hasFalsyMeaning = new TemporalNoun("Tomorrow", "明日", "ashita", "あした");
     const component = render(<CalendarFlashCardBack data={hasFalsyMeaning} onClick={onClickHandler} />);
     expect(component.queryByText('Literally meaning:')).not.toBeInTheDocument();
 });

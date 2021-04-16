@@ -4,7 +4,7 @@ import Day from "../../../../types/calendar/Day";
 
 const onClickHandler = jest.fn();
 
-const day = new Day("Monday", "月曜日");
+const day = new Day("Monday", "月曜日", "getsuyōbi", "げつようび", "Moon day");
 
 test('Should call the onClick event handler when clicking the card', () => {
     const component = render(<CalendarFlashCardFront data={day} onClick={onClickHandler} />);
