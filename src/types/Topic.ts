@@ -1,4 +1,4 @@
-import { faAppleAlt, faCalendarAlt, faFont, faPaintBrush, faYenSign, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faAppleAlt, faCalendarAlt, faFont, faPaintBrush, faSatellite, faSpellCheck, faYenSign, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import LearnMenuModes from "./learn/mode/LearnMenuModes";
 import LearnKanaMode from "./learn/mode/LearnKanaMode";
 import LearnKanjiMode from "./learn/mode/LearnKanjiMode";
@@ -13,6 +13,7 @@ import KanjiFlashCardFront from "../components/learn/kanji/KanjiFlashCardFront";
 import KanjiFlashCardBack from "../components/learn/kanji/KanjiFlashCardBack";
 import BasicsFlashCardFront from "../components/learn/basics/BasicsFlashCardFront";
 import BasicsFlashCardBack from "../components/learn/basics/BasicsFlashCardBack";
+import LearnSentenceStructureMode from "./learn/mode/LearnSentenceStructureMode";
 
 export default class Topic {
     private readonly _name: string;
@@ -45,7 +46,12 @@ export default class Topic {
         { front: CalendarFlashCardFront, back: CalendarFlashCardBack }
     );
 
-    public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR];
+    public static GRAMMAR = new Topic(
+        "Sentence Structure", faSpellCheck, new LearnSentenceStructureMode(),
+        { front: KanaFlashCardFront, back: KanaFlashCardBack }
+    );
+
+    public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR, Topic.GRAMMAR];
 
     private constructor(name: string, icon: IconDefinition, modes: LearnMenuModes, cards: CardProps) {
         this._name = name;
