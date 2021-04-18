@@ -1609,6 +1609,166 @@ export function kyoiku(): KanjiData[] {
                 { value: "電車", kana: ["でんしゃ"], english: ["electric train"] },
             ]
         },
+        {
+            name: "会",
+            code: "\u4F1A",
+            on: [{ kana: "え", romanji: "e" }, { kana: "かい", romanji: "kai" }],
+            kun: [{ kana: "あう", romanji: "a-u" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BC%9A#Kanji",
+            meanings: ["meet", "party", "association"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "委員会", kana: ["いいんかい"], english: ["committee", "commission", "board", "panel"] },
+                { value: "会員", kana: ["かいいん"], english: ["member", "the membership"] },
+                { value: "会議", kana: ["かいぎ"], english: ["meeting", "conference", "session", "assembly"] },
+                { value: "会見", kana: ["かいけん"], english: ["interview", "audience"] },
+                { value: "会社", kana: ["かいしゃ"], english: ["company", "corporation", "workplace"] },
+            ]
+        },
+        {
+            name: "自",
+            code: "\u81EA",
+            on: [{ kana: "じ", romanji: "ji" }, { kana: "し", romanji: "shi" }],
+            kun: [{ kana: "みずから", romanji: "mizuka-ra" }],
+            source: "https://en.wiktionary.org/wiki/%E8%87%AA#Kanji",
+            meanings: ["oneself"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "自ら", kana: ["みずから"], english: ["for one’s self", "personally"] },
+                { value: "自衛隊", kana: ["じえいたい"], english: ["self defence"] },
+                { value: "自身", kana: ["じしん"], english: ["by oneself", "personally"] },
+                { value: "自然", kana: ["しぜん"], english: ["nature", "spontaneity", "naturally", "spontaneously"] },
+                { value: "自宅", kana: ["じたく"], english: ["one’s home"] },
+            ]
+        },
+        {
+            name: "父",
+            code: "\u7236",
+            on: [{ kana: "ふ", romanji: "fu" }],
+            kun: [{ kana: "ちち", romanji: "chichi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%88%B6#Kanji",
+            meanings: ["father"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "父", kana: ["ちち"], english: ["father (your own)"] },
+                { value: "お父さん", kana: ["おとうさん"], english: ["father (someone elses)"] },
+                { value: "父親", kana: ["ちちおや"], english: ["father"] },
+                { value: "父母", kana: ["ふぼ", "ちちはは"], english: ["father and mother", "parents"] },
+                { value: "祖父", kana: ["そふ", "じじ", "じい"], english: ["grandfather", "old man"] },
+            ]
+        },
+        {
+            name: "方",
+            code: "\u65B9",
+            on: [{ kana: "ほう", romanji: "hō" }],
+            kun: [{ kana: "かた", romanji: "kata" }],
+            source: "https://en.wiktionary.org/wiki/%E6%96%B9#Kanji",
+            meanings: ["direction", "person", "alternative"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "一方", kana: ["いっぽう"], english: ["one (esp. of two)", "the other", "one way"] },
+                { value: "見方", kana: ["みかた"], english: ["viewpoint"] },
+                { value: "地方", kana: ["ちほう", "じかた"], english: ["area", "locality", "district", "region", "province"] },
+                { value: "方向", kana: ["ほうこう"], english: ["direction, orientation, bearing, way"] },
+                { value: "方針", kana: ["ほうしん"], english: ["objective, plan, policy"] },
+            ]
+        },
+        {
+            name: "場",
+            code: "\u5834",
+            on: [{ kana: "じょう", romanji: "jō" }],
+            kun: [{ kana: "ば", romanji: "ba" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A0%B4#Kanji",
+            meanings: ["location", "place"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "現場", kana: ["げんば", "げんじょう"], english: ["actual spot", "scene", "scene of the crime"] },
+                { value: "市場", kana: ["いちば"], english: ["(town) market", "(the) marketplace"] },
+                { value: "場所", kana: ["ばしょ"], english: ["place", "location"] },
+                { value: "立場", kana: ["たちば"], english: ["standpoint", "position", "situation"] },
+                { value: "工場", kana: ["こうじょう", "こうば"], english: ["factory", "plant", "mill", "workshop"] },
+            ]
+        },
+        {
+            name: "同",
+            code: "\u540C",
+            on: [{ kana: "どう", romanji: "dō" }],
+            kun: [{ kana: "おなじ", romanji: "onaji" }],
+            source: "https://en.wiktionary.org/wiki/%E5%90%8C#Kanji",
+            meanings: ["same", "agree", "equal"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "同時", kana: ["どうじ"], english: ["simultaneous(ly)", "concurrent", "same time"] },
+                { value: "同社", kana: ["どうしゃ"], english: ["the same firm"] },
+                { value: "同日", kana: ["どうじつ"], english: ["the same day"] },
+                { value: "共同", kana: ["きょうどう"], english: ["doing together (as equals)", "sharing"] },
+                { value: "同市", kana: ["どうし"], english: ["same city"] },
+            ]
+        },
+        {
+            name: "社",
+            code: "\u793E",
+            on: [{ kana: "しゃ", romanji: "sha" }],
+            kun: [{ kana: "やしろ", romanji: "yashiro" }],
+            source: "https://en.wiktionary.org/wiki/%E7%A4%BE#Kanji",
+            meanings: ["company", "fire", "office", "association"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "会社", kana: ["かいしゃ"], english: ["company", "corporation", "workplace"] },
+                { value: "社会", kana: ["しゃかい"], english: ["society, public"] },
+                { value: "社会党", kana: ["しゃかいとう"], english: ["Socialist Party"] },
+                { value: "社長", kana: ["しゃちょう"], english: ["company president", "manager", "director"] },
+                { value: "同社", kana: ["どうしゃ"], english: ["the same firm"] },
+            ]
+        },
+        {
+            name: "地",
+            code: "\u5730",
+            on: [{ kana: "じ", romanji: "ji" }, { kana: "ち", romanji: "chi" }],
+            kun: [{ kana: "つち", romanji: "tsuchi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%9C%B0#Kanji",
+            meanings: ["ground", "earth"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "地", kana: ["ち"], english: ["earth", "ground", "land", "soil", "territory"] },
+                { value: "現地", kana: ["げんち"], english: ["actual place", "local"] },
+                { value: "地域", kana: ["ちいき"], english: ["area", "region"] },
+                { value: "地球", kana: ["ちきゅう"], english: ["the earth"] },
+                { value: "地区", kana: ["ちく"], english: ["district", "section", "sector"] },
+            ]
+        },
+        {
+            name: "新",
+            code: "\u5730",
+            on: [{ kana: "しん", romanji: "shin" }],
+            kun: [{ kana: "あたらしい", romanji: "atarashii" }],
+            source: "https://en.wiktionary.org/wiki/%E6%96%B0#Kanji",
+            meanings: ["new"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "新た", kana: ["あらた"], english: ["new", "fresh", "novel", "newly", "freshly"] },
+                { value: "新党", kana: ["しんとう"], english: ["new (political) party"] },
+                { value: "新聞", kana: ["しんぶん"], english: ["newspaper"] },
+                { value: "新人", kana: ["しんじん"], english: ["new face", "newcomer"] },
+                { value: "新生", kana: ["しんせい"], english: ["rebirth", "new birth", "nascent"] },
+            ]
+        },
+        {
+            name: "明",
+            code: "\u660E",
+            on: [{ kana: "めい", romanji: "mei" }],
+            kun: [{ kana: "あかるい", romanji: "akarui" }],
+            source: "https://en.wiktionary.org/wiki/%E6%98%8E#Kanji",
+            meanings: ["bright", "light"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "新た", kana: ["あらた"], english: ["obvious", "evident", "clear", "plain"] },
+                { value: "新党", kana: ["しんとう"], english: ["declaration", "statement", "proclamation"] },
+                { value: "新聞", kana: ["しんぶん"], english: ["explanation", "exposition"] },
+                { value: "新人", kana: ["しんじん"], english: ["unknown", "obscure", "indistinct", "uncertain"] },
+                { value: "新生", kana: ["しんせい"], english: ["clear up", "clarify", "define"] },
+            ]
+        },
 
         //Grade 6 Kanji
 
