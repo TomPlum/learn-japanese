@@ -61,7 +61,7 @@ class TopicSelectionMenu extends Component<TopicSelectionMenuProps, TopicSelecti
                 <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group">
                     {Topic.ALL.map((topic: Topic) =>
                         <TopicListOption type={topic} onClick={this.handleChange} selected={selected}>
-                            <FontAwesomeIcon fixedWidth icon={topic.icon}/>
+                            <FontAwesomeIcon fixedWidth icon={topic.icon} className={styles.icon} />
                         </TopicListOption>
                     )}
                 </ListGroup>
