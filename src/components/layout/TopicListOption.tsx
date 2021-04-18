@@ -1,7 +1,7 @@
 import React, { Component, ReactElement } from "react";
 import Topic from "../../types/Topic";
 import { ListGroupItem } from "react-bootstrap";
-import styles from "../../styles/sass/components/layout/GameTypeMenuListOption.module.scss";
+import styles from "../../styles/sass/components/layout/TopicListOption.module.scss";
 
 interface TopicListOptionProps {
     type?: Topic;
@@ -22,7 +22,9 @@ class TopicListOption extends Component<TopicListOptionProps> {
                 active={selected === type && !isHeading}
                 className={!isHeading ? styles.item : styles.heading}
             >
-                {children && React.cloneElement(children as ReactElement, { className: styles.icon })}
+                {children && React.cloneElement(children as ReactElement, {
+                    className: [styles.icon, (children as ReactElement).props.className].join(" ")
+                })}
                 <span className={styles.text}>{text ? text : type?.name}</span>
             </ListGroupItem>
         );

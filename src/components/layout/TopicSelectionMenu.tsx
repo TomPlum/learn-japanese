@@ -6,7 +6,7 @@ import { faGamepad, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TopicDropdownOption from "./TopicDropdownOption";
 import { AppMode } from "../../types/AppMode";
-import styles from "../../styles/sass/components/layout/GameTypeMenu.module.scss";
+import styles from "../../styles/sass/components/layout/TopicSelectionMenu.module.scss";
 
 interface TopicSelectionMenuProps {
     appMode: AppMode;
@@ -50,7 +50,11 @@ class TopicSelectionMenu extends Component<TopicSelectionMenuProps, TopicSelecti
 
                 <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group-header">
                     <TopicListOption text={this.getMenuHeading()} onClick={this.handleChange} isHeading>
-                        <FontAwesomeIcon fixedWidth icon={appMode === AppMode.PLAY ? faGamepad : faGraduationCap} />
+                        <FontAwesomeIcon
+                            fixedWidth
+                            icon={appMode === AppMode.PLAY ? faGamepad : faGraduationCap}
+                            className={appMode === AppMode.LEARN ? styles.learn : styles.play}
+                        />
                     </TopicListOption>
                 </ListGroup>
 
