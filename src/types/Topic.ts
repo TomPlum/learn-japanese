@@ -1,4 +1,4 @@
-import { faAppleAlt, faCalendarAlt, faFont, faPaintBrush, faSatellite, faSpellCheck, faYenSign, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faAppleAlt, faCalendarAlt, faFont, faPaintBrush, faSpellCheck, faYenSign, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import LearnMenuModes from "./learn/mode/LearnMenuModes";
 import LearnKanaMode from "./learn/mode/LearnKanaMode";
 import LearnKanjiMode from "./learn/mode/LearnKanjiMode";
@@ -14,6 +14,7 @@ import KanjiFlashCardBack from "../components/learn/kanji/KanjiFlashCardBack";
 import BasicsFlashCardFront from "../components/learn/basics/BasicsFlashCardFront";
 import BasicsFlashCardBack from "../components/learn/basics/BasicsFlashCardBack";
 import LearnSentenceStructureMode from "./learn/mode/LearnSentenceStructureMode";
+import LearnNumbersMode from "./learn/mode/LearnNumbersMode";
 
 export default class Topic {
     private readonly _name: string;
@@ -27,7 +28,7 @@ export default class Topic {
     );
 
     public static NUMBERS = new Topic(
-        "Numbers & Counting", faYenSign, new LearnKanaMode(),
+        "Numbers & Counting", faYenSign, new LearnNumbersMode(),
         { front: KanjiFlashCardFront, back: KanjiFlashCardBack }
     );
 

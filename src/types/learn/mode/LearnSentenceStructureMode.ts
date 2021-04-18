@@ -1,5 +1,5 @@
 import LearningMode from "../LearningMode";
-import { faCat, faComment, faCompass, faCube, faEllipsisH, faExclamation, faPalette, faRunning } from "@fortawesome/free-solid-svg-icons";
+import { faComment, faCube, faEllipsisH, faExclamation, faRunning } from "@fortawesome/free-solid-svg-icons";
 
 export default class LearnSentenceStructureMode {
     getLearningTopics(): LearningMode[] {
