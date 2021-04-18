@@ -1899,7 +1899,7 @@ export function kyoiku(): KanjiData[] {
         },
         {
             name: "新",
-            code: "\u5730",
+            code: "\u65B0",
             on: [{ kana: "しん", romanji: "shin" }],
             kun: [{ kana: "あたらしい", romanji: "atarashii" }],
             source: "https://en.wiktionary.org/wiki/%E6%96%B0#Kanji",

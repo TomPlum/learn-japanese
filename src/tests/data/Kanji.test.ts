@@ -58,3 +58,9 @@ it("Should return exactly 80 Grade 1 Kyoiku Kanji", () => {
     const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === KyoikuGrade.ONE)
     expect(kanji).toHaveLength(80);
 });
+
+it("Should not return any duplicate unicode values", () => {
+    const kanji = kyoiku().map((kanji: KanjiData) => kanji.code);
+    const unique = new Set(kanji);
+    expect(kanji.length).toBe(unique.size);
+});
