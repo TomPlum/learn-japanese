@@ -1609,6 +1609,166 @@ export function kyoiku(): KanjiData[] {
                 { value: "電車", kana: ["でんしゃ"], english: ["electric train"] },
             ]
         },
+        {
+            name: "語",
+            code: "\u8A9E",
+            on: [{ kana: "ご", romanji: "go" }],
+            kun: [{ kana: "かたらう", romanji: "katarau" }],
+            source: "https://en.wiktionary.org/wiki/%E8%AA%9E#Kanji",
+            meanings: ["word", "speech", "language"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "英語", kana: ["えいご"], english: ["English (language)"] },
+                { value: "日本語", kana: ["にほんご", "にっぽんご"], english: ["Japanese (language)"] },
+                { value: "物語", kana: ["ものがたり"], english: ["tale", "story", "legend"] },
+                { value: "語らう", kana: ["かたらう"], english: ["to talk", "to tell", "to recite", "to pledge"] },
+                { value: "語る", kana: ["かたる"], english: ["to talk", "to tell", "to recite"] },
+            ]
+        },
+        {
+            name: "食",
+            code: "\u98DF",
+            on: [{ kana: "しょく", romanji: "shoku" }],
+            kun: [{ kana: "たべる", romanji: "taberu" }],
+            source: "https://en.wiktionary.org/wiki/%E9%A3%9F#Kanji",
+            meanings: ["eat", "food"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "食", kana: ["しょく"], english: ["meal", "food"] },
+                { value: "食事", kana: ["しょくじ"], english: ["meal to eat"] },
+                { value: "食品", kana: ["しょくひん"], english: ["commodity", "foodstuff"] },
+                { value: "食料", kana: ["しょくりょう"], english: ["food"] },
+                { value: "食糧", kana: ["しょくりょう"], english: ["provisions", "rations", "food supply"] },
+            ]
+        },
+        {
+            name: "南",
+            code: "\u5357",
+            on: [{ kana: "なん", romanji: "nan" }],
+            kun: [{ kana: "みなみ", romanji: "minami" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8D%97#Kanji",
+            meanings: ["south"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "南", kana: ["みなみ"], english: ["south"] },
+                { value: "南アフリカ", kana: ["みなみアフリカ"], english: ["South Africa"] },
+                { value: "南北", kana: ["なんぼく"], english: ["south and north"] },
+                { value: "東南", kana: ["とうなん", "ひがしみなみ"], english: ["south east"] },
+                { value: "南部", kana: ["なんぶ"], english: ["southern part"] },
+            ]
+        },
+        {
+            name: "毎",
+            code: "\u6BCE",
+            on: [{ kana: "まい", romanji: "mai" }],
+            kun: [{ kana: "ごと", romanji: "goto" }],
+            source: "https://en.wiktionary.org/wiki/%E6%AF%8E#Kanji",
+            meanings: ["every"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "毎日", kana: ["まいにち"], english: ["every day"] },
+                { value: "毎年", kana: ["まいとし", "まいねん"], english: ["every year", "yearly", "annually"] },
+                { value: "毎週", kana: ["まいしゅう"], english: ["every week"] },
+                { value: "毎月", kana: ["まいげつ", "まいつき"], english: ["every month", "each month", "monthly"] },
+                { value: "毎回", kana: ["まいかい"], english: ["every time", "each round"] },
+            ]
+        },
+        {
+            name: "読",
+            code: "\u8AAD",
+            on: [{ kana: "どく", romanji: "doku" }],
+            kun: [{ kana: "よむ", romanji: "yomu" }],
+            source: "https://en.wiktionary.org/wiki/%E8%AA%AD#Kanji",
+            meanings: ["read"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "読み", kana: ["よみ"], english: ["reading"] },
+                { value: "読者", kana: ["どくしゃ"], english: ["reader"] },
+                { value: "読書", kana: ["どくしょ", "とくしょ"], english: ["reading"] },
+                { value: "読む", kana: ["よむ"], english: ["to read"] },
+                { value: "積ん読", kana: ["つんどく"], english: ["buying books and not reading them"] },
+            ]
+        },
+        {
+            name: "聞",
+            code: "\u805E",
+            on: [{ kana: "もん", romanji: "mon" }],
+            kun: [{ kana: "きく", romanji: "kiku" }],
+            source: "https://en.wiktionary.org/wiki/%E8%81%9E#Kanji",
+            meanings: ["hear", "ask", "listen"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "聞かす", kana: ["きかす"], english: ["to inform about", "to read to", "to sing for"] },
+                { value: "新聞", kana: ["しんぶん"], english: ["newspaper"] },
+                { value: "新聞社", kana: ["しんぶんしゃ"], english: ["newspaper company"] },
+                { value: "聞き手", kana: ["ききて"], english: ["hearer", "listener", "audience", "interviewer"] },
+                { value: "新聞紙", kana: ["しんぶんし"], english: ["newsprint", "newspaper"] },
+            ]
+        },
+        {
+            name: "何",
+            code: "\u4F55",
+            on: [{ kana: "か", romanji: "ka" }],
+            kun: [{ kana: "なに", romanji: "nani" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BD%95#Kanji",
+            meanings: ["what"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "何", kana: ["なに", "なん"], english: ["what how many (some counter)"] },
+                { value: "何か", kana: ["なにか", "なんか"], english: ["something"] },
+                { value: "何も", kana: ["なにも"], english: ["nothing", "not any"] },
+                { value: "何とか", kana: ["なんとか"], english: ["something", "something or other"] },
+                { value: "何の", kana: ["どの"], english: ["which", "what (way)"] },
+            ]
+        },
+        {
+            name: "万",
+            code: "\u4E07",
+            on: [{ kana: "まん", romanji: "man" }],
+            kun: [{ kana: "よろず", romanji: "yorozu" }],
+            source: "https://en.wiktionary.org/wiki/%E4%B8%87#Kanji",
+            meanings: ["10,000"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "十万", kana: ["じゅうまん"], english: ["100,000", "hundred thousand"] },
+                { value: "百万", kana: ["ひゃくまん"], english: ["1,000,000", "one million", "many"] },
+                { value: "万全", kana: ["ばんぜん"], english: ["perfection", "flawlessness"] },
+                { value: "数万", kana: ["すうまん"], english: ["tens of thousands"] },
+                { value: "万里", kana: ["ばんり"], english: ["thousands of miles"] },
+            ]
+        },
+        {
+            name: "母",
+            code: "\u6BCD",
+            on: [{ kana: "ぼう", romanji: "bō" }],
+            kun: [{ kana: "はは", romanji: "haha" }],
+            source: "https://en.wiktionary.org/wiki/%E6%AF%8D#Kanji",
+            meanings: ["mother"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "母", kana: ["はは"], english: ["mother"] },
+                { value: "お母さん", kana: ["おかあさん"], english: ["mother"] },
+                { value: "母親", kana: ["ははおや"], english: ["mother"] },
+                { value: "父母", kana: ["ふぼ", "ちちはは"], english: ["father and mother, parents"] },
+                { value: "母体", kana: ["ぼたい"], english: ["mother’s body"] },
+            ]
+        },
+        {
+            name: "友",
+            code: "\u53CB",
+            on: [{ kana: "ゆう", romanji: "yū" }],
+            kun: [{ kana: "とも", romanji: "tomo" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8F%8B#Kanji",
+            meanings: ["friend"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "友", kana: ["とも"], english: ["friend", "companion", "pal"] },
+                { value: "友人", kana: ["ゆうじん"], english: ["friend"] },
+                { value: "友好", kana: ["ゆうこう"], english: ["friendship"] },
+                { value: "友達", kana: ["ともだち"], english: ["friend", "companion"] },
+                { value: "住友", kana: ["すみとも"], english: ["Sumitomo (company)"] },
+            ]
+        },
 
         //Grade 6 Kanji
 
