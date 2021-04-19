@@ -51,3 +51,10 @@ export interface ColourData {
     romaji: string;
     colour: string;
 }
+
+export interface NumbersData {
+    name: string;
+    kanji?: string;
+    kana: string[];
+    romaji: string[];
+}
