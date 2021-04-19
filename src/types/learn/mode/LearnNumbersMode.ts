@@ -3,7 +3,7 @@ import LearningMode from "../LearningMode";
 import { faBaby, faRuler, faSort, faSortNumericDown, faStopwatch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { KyoikuGrade } from "../../kanji/KyoikuGrade";
 
-export default class LearnNumbersMode implements LearnMenuModes {
+export default class LearnNumbersMode extends LearnMenuModes {
     getLearningTopics(): LearningMode[] {
         return [
             new LearningMode("Numbers", "#fdb40e", faSortNumericDown, { kanji: { grades: KyoikuGrade.ALL } }),
@@ -17,9 +17,5 @@ export default class LearnNumbersMode implements LearnMenuModes {
 
     getTopic(): string {
         return "NUMBERS"
-    }
-
-    isCustomisable(): boolean {
-        return false;
     }
 }

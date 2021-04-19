@@ -2,7 +2,7 @@ import LearningMode from "../LearningMode";
 import LearnMenuModes from "./LearnMenuModes";
 import { faPalette, faCat, faCompass, faCloudSunRain, faChild, faHandPaper } from "@fortawesome/free-solid-svg-icons";
 
-export default class LearnBasicsMode implements LearnMenuModes {
+export default class LearnBasicsMode extends LearnMenuModes {
     getLearningTopics(): LearningMode[] {
         return [
             new LearningMode("Colours", "#fd0e3e", faPalette, { basics: { colours: true } }),
@@ -16,9 +16,5 @@ export default class LearnBasicsMode implements LearnMenuModes {
 
     getTopic(): string {
         return "BASICS";
-    }
-
-    isCustomisable(): boolean {
-        return false;
     }
 }

@@ -2,7 +2,7 @@ import LearningMode from "../LearningMode";
 import LearnMenuModes from "./LearnMenuModes";
 import { faVial } from "@fortawesome/free-solid-svg-icons";
 
-export default class LearnKanaMode implements LearnMenuModes {
+export default class LearnKanaMode extends LearnMenuModes {
     getLearningTopics(): LearningMode[] {
         return [
             new LearningMode("Hiragana", "#fdb40e", "あ", { kana: { hiragana: true } }),
@@ -16,9 +16,5 @@ export default class LearnKanaMode implements LearnMenuModes {
 
     getTopic(): string {
         return "KANA"
-    }
-
-    isCustomisable(): boolean {
-        return false;
     }
 }

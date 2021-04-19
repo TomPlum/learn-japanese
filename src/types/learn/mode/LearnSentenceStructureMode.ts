@@ -1,7 +1,8 @@
 import LearningMode from "../LearningMode";
 import { faComment, faCube, faEllipsisH, faExclamation, faRunning } from "@fortawesome/free-solid-svg-icons";
+import LearnMenuModes from "./LearnMenuModes";
 
-export default class LearnSentenceStructureMode {
+export default class LearnSentenceStructureMode extends LearnMenuModes {
     getLearningTopics(): LearningMode[] {
         return [
             new LearningMode("Grammar", "#fd0e3e", faExclamation, { basics: { colours: true } }),
@@ -15,9 +16,5 @@ export default class LearnSentenceStructureMode {
 
     getTopic(): string {
         return "SENTENCE";
-    }
-
-    isCustomisable(): boolean {
-        return false;
     }
 }

@@ -5,7 +5,7 @@ import { KyoikuGrade } from "../../kanji/KyoikuGrade";
 import CustomLearningMode from "../CustomLearningMode";
 import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
 
-export default class LearnKanjiMode implements LearnMenuModes {
+export default class LearnKanjiMode extends LearnMenuModes {
     getLearningTopics(): LearningMode[] {
         return [
             new LearningMode("Kyōiku", "#fdb40e", faSchool, { kanji: { grades: KyoikuGrade.ALL } }),

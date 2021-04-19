@@ -2,7 +2,7 @@ import LearningMode from "../LearningMode";
 import LearnMenuModes from "./LearnMenuModes";
 import { faAlignLeft, faCalendarAlt, faCalendarDay, faClock, faSnowflake, faVial } from "@fortawesome/free-solid-svg-icons";
 
-export default class LearnCalendarMode implements LearnMenuModes {
+export default class LearnCalendarMode extends LearnMenuModes {
     getLearningTopics(): LearningMode[] {
         return [
             new LearningMode("Days of the Week", "#fdb40e", faCalendarDay, { calendar: { days: true } }),
@@ -16,9 +16,5 @@ export default class LearnCalendarMode implements LearnMenuModes {
 
     getTopic(): string {
         return "CALENDAR";
-    }
-
-    isCustomisable(): boolean {
-        return false;
     }
 }
