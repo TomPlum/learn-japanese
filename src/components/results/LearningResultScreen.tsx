@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { Kana } from "../../types/kana/Kana";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEraser } from "@fortawesome/free-solid-svg-icons";

@@ -1,6 +1,6 @@
 import LearningMode from "../LearningMode";
 import LearnMenuModes from "./LearnMenuModes";
-import { faClock, faFillDrip, faLeaf, faMountain, faPaintBrush, faSchool, faSun, faYenSign } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faFillDrip, faPaintBrush, faSchool, faYenSign } from "@fortawesome/free-solid-svg-icons";
 import { KyoikuGrade } from "../../kanji/KyoikuGrade";
 import CustomLearningMode from "../CustomLearningMode";
 import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";

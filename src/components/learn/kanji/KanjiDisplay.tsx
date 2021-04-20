@@ -2,7 +2,6 @@ import { Component } from "react";
 import { Container } from "react-bootstrap";
 import { Kanji } from "../../../types/kanji/Kanji";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiDisplay.module.scss";
-import { inspect } from "util";
 
 interface KanjiDisplayProps {
     kanji: Kanji;
