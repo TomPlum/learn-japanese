@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
 }
 
 .content {
@@ -12,12 +13,33 @@
   color: #FFF;
   margin: 25px;
   text-align: center;
+  font-size: 3em;
 }
 
 .question {
   color: #FFF;
+  font-size: 2.5em;
 }
 
 .answer {
+  font-size: 1.5em;
   color: #d2d2d2;
+}
+
+.source {
+  font-size: 1.5em;
+}
+
+.link {
+  transition: ease-in 0.2s;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.sourceIcon {
+  font-size: 1.1em;
+  margin-right: 4px;
+  margin-bottom: 1px;
 }
