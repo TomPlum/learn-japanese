@@ -87,13 +87,13 @@ export default function numbers(): NumbersData[] {
             romaji: ["man"]
         },
         {
-            name: "100,000,000",
+            name: "100 Million",
             kanji: "億",
             kana: ["おく"],
             romaji: ["oku"]
         },
         {
-            name: "1,000,000,000",
+            name: "1 Billion",
             kanji: "兆",
             kana: ["ちょう"],
             romaji: ["chō"]

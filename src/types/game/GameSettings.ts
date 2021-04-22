@@ -1,6 +1,7 @@
 import { HintQuantity } from "./HintQuantity";
 import { LifeQuantity } from "./LifeQuantity";
 import { DisplayType } from "./DisplayType";
+import { LearnSettings } from "../learn/LearningSessionSettings";
 
 export interface GameSettings {
     kana?: KanaGameSettings;
@@ -30,7 +31,7 @@ export interface HintSettings {
     quantity?: HintQuantity;
 }
 
-export interface KanaSettings {
+export interface KanaSettings extends LearnSettings {
     hiragana?: boolean;
     katakana?: boolean;
     diagraphs?: boolean;
