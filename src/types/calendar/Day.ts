@@ -1,14 +1,15 @@
 import { KanjiLearnable } from "../learn/CommonLearnable";
 import JapaneseWord from "../learn/JapaneseWord";
 
-export default class Day implements KanjiLearnable {
+export default class Day extends KanjiLearnable {
     private readonly _english: string;
-    private readonly _kanji: any; //TODO: Change to Kanji once feature merged.
+    private readonly _kanji: string;
     private readonly _romaji: string;
     private readonly _kana: string;
     private readonly _meaning: string | undefined;
 
     public constructor(english: string, kanji: any, romaji: string, kana: string, meaning?: string) {
+        super();
         this._english = english;
         this._kanji = kanji;
         this._romaji = romaji;
@@ -26,14 +27,6 @@ export default class Day implements KanjiLearnable {
 
     getTitle(): string {
         return "Day of the Week";
-    }
-
-    getRomaji(): string {
-        return this._romaji;
-    }
-
-    getKana(): string {
-        return this._kana;
     }
 
     getMeaning(): string | undefined {

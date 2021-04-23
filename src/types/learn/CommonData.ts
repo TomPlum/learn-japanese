@@ -1,7 +1,7 @@
 import JapaneseWord from "./JapaneseWord";
-import CommonLearnable, { KanjiLearnable } from "./CommonLearnable";
+import { KanjiLearnable } from "./CommonLearnable";
 
-export default class CommonData implements KanjiLearnable {
+export default class CommonData extends KanjiLearnable {
 
     private readonly question: string;
     private readonly kanji: string;
@@ -10,6 +10,7 @@ export default class CommonData implements KanjiLearnable {
     private readonly meaning: string | undefined;
 
     constructor(question: string,  words: JapaneseWord[], kanji: string, title: string, meaning?: string) {
+        super();
         this.question = question;
         this.kanji = kanji;
         this.words = words;

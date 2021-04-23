@@ -1,13 +1,24 @@
 import Learnable from "./Learnable";
 import JapaneseWord from "./JapaneseWord";
 
-export default interface CommonLearnable extends Learnable {
-    getWords(): JapaneseWord[];
-    getMeaning(): string | undefined;
+export default abstract class CommonLearnable implements Learnable {
+    abstract getWords(): JapaneseWord[];
+
+    abstract getQuestion(): string;
+
+    abstract getTitle(): string;
+
+    public getMeaning(): string | undefined {
+        return undefined;
+    }
 }
 
-export interface KanjiLearnable extends CommonLearnable {
-    getKanji(): string;
+export abstract class KanjiLearnable extends CommonLearnable {
+    abstract getKanji(): string;
+
+    public getMeaning(): string | undefined {
+        return undefined;
+    }
 }
 
 export interface ExceptionalLearnable extends Learnable {

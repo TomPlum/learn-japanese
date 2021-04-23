@@ -1,7 +1,7 @@
 import { KanjiLearnable } from "../learn/CommonLearnable";
 import JapaneseWord from "../learn/JapaneseWord";
 
-export default class Colour implements KanjiLearnable {
+export default class Colour extends KanjiLearnable {
     private readonly _name: string;
     private readonly _kanji: string | undefined;
     private readonly _kana: string;
@@ -9,15 +9,12 @@ export default class Colour implements KanjiLearnable {
     private readonly _colour: string;
 
     constructor(name: string, kanji: string | undefined, kana: string, romaji: string, colour: string) {
+        super();
         this._name = name;
         this._kanji = kanji;
         this._kana = kana;
         this._romaji = romaji;
         this._colour = colour;
-    }
-
-    get name(): string {
-        return this._name;
     }
 
     get colour(): string {
@@ -26,14 +23,6 @@ export default class Colour implements KanjiLearnable {
 
     getKanji(): string {
         return this._kanji ?? this._name;
-    }
-
-    getKana(): string {
-        return this._kana;
-    }
-
-    getRomaji(): string {
-        return this._romaji;
     }
 
     getWords(): JapaneseWord[] {
@@ -46,9 +35,5 @@ export default class Colour implements KanjiLearnable {
 
     getTitle(): string {
         return this._name;
-    }
-
-    getMeaning(): string | undefined {
-        return undefined;
     }
 }
