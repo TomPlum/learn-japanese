@@ -1,5 +1,6 @@
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 import { KanaColumn } from "../types/kana/KanaColumn";
+import { CounterGroup } from "../types/numbers/CounterGroup";
 
 export interface KanaData {
     name: string;
@@ -57,4 +58,9 @@ export interface NumbersData {
     kanji?: string;
     kana: string[];
     romaji: string[];
+}
+
+export interface CounterData extends NumbersData {
+    group: CounterGroup;
+    example: { kana: string, english: string };
 }
