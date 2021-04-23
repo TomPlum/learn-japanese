@@ -5,8 +5,10 @@ import { Example } from "../types/kanji/Example";
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 import { KanjiData, KanjiExample, KanjiReading } from "../data/DataTypes";
 import { joyo, kyoiku } from "../data/Kanji";
+import { LearnSettings } from "../types/learn/LearningSessionSettings";
+import Repository from "./Repository";
 
-export interface KanjiSettings {
+export interface KanjiSettings extends LearnSettings {
     grades?: KyoikuGrade[];
     quantity?: number;
     joyo?: boolean;
@@ -15,7 +17,7 @@ export interface KanjiSettings {
     time?: boolean;
 }
 
-export class KanjiRepository {
+export class KanjiRepository implements Repository<Kanji> {
     public read(settings?: KanjiSettings): Kanji[] {
         if (!settings) return [];
 

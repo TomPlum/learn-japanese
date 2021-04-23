@@ -1,23 +1,28 @@
 import { CardFaceProps } from "../FlashCard";
 import FlashCardBack from "../FlashCardBack";
-import CommonLearnable from "../../../types/learn/CommonLearnable";
+import { KanjiLearnable } from "../../../types/learn/CommonLearnable";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/learn/calendar/CalendarFlashCardBack.module.scss"
+import JapaneseWord from "../../../types/learn/JapaneseWord";
 
 function CalendarFlashCardBack(props: CardFaceProps) {
     const { data, onClick } = props;
-    const value = data as CommonLearnable;
+
+    const value = data as KanjiLearnable;
+
     return (
-        <FlashCardBack title={data.getTitle()} className={styles.wrapper} onReset={onClick}>
+        <FlashCardBack title={value.getTitle()} className={styles.wrapper} onReset={onClick}>
             <Container>
                 <Row>
                     <Col>
-                        <p className={styles.kanji}>{value.getAnswer()}</p>
+                        <p className={styles.kanji}>{value.getKanji()}</p>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <p className={styles.romaji}>{value.getKana()} ({value.getRomaji()})</p>
+                        {value.getWords().map((word: JapaneseWord) => {
+                            return <p className={styles.text}>{word.kana} ({word.romaji})</p>
+                        })}
                     </Col>
                 </Row>
                 {value.getMeaning() && <Row>

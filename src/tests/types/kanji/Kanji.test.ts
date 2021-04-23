@@ -49,8 +49,8 @@ describe("Kanji", () => {
             expect(kanji.getQuestion()).toBe("人")
         });
 
-        it("Should return the first meaning for the answer", () => {
-            expect(kanji.getAnswer()).toBe("person")
+        it("Should return the first an empty array for the answer", () => {
+            expect(kanji.getAnswer()).toStrictEqual([])
         });
     });
 });

@@ -6,7 +6,7 @@ import TopicSelectionMenu from "./TopicSelectionMenu";
 import { GameSettings } from "../../types/game/GameSettings";
 import { AppMode } from "../../types/AppMode";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
-import { LearnSettings } from "../../types/learn/LearnSettings";
+import { LearningSessionSettings } from "../../types/learn/LearningSessionSettings";
 import LearnMenu from "../learn/LearnMenu";
 
 export interface GameTypeSettings {
@@ -16,7 +16,7 @@ export interface GameTypeSettings {
 
 export interface LearnSessionSettings {
     topic: Topic;
-    settings: LearnSettings;
+    settings: LearningSessionSettings;
 }
 
 export interface GameSettingsMenuProps {
@@ -28,7 +28,7 @@ export interface GameSettingsMenuProps {
 interface GameSettingsMenuState {
     topic: Topic;
     gameSettings?: GameSettings;
-    learnSettings?: LearnSettings;
+    learnSettings?: LearningSessionSettings;
 }
 
 class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
@@ -88,7 +88,7 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
         this.props.onStartGame({ settings: settings, topic: topic });
     }
 
-    private onStartLearning = (settings: LearnSettings) => {
+    private onStartLearning = (settings: LearningSessionSettings) => {
         const { topic } = this.state;
         this.props.onStartLearn({ topic: topic, settings: settings });
     }

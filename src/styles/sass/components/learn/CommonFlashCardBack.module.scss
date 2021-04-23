@@ -1,0 +1,34 @@
+@import "src/styles/sass/flashcards";
+
+@include KanaFlashCard;
+
+.innerWrapper {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  text-align: center;
+}
+
+.kanji {
+  margin: 0;
+  font-size: 8em;
+}
+
+.kana {
+  font-size: 3em;
+  margin: 0;
+}
+
+.romaji {
+  font-size: 3em;
+  margin: 0;
+}
+
+.rightCol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.rightDataWrapper {
+
+}

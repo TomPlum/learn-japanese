@@ -1,8 +1,15 @@
 import Learnable from "./Learnable";
+import JapaneseWord from "./JapaneseWord";
 
-//TODO: If this is used for all data as standard, remove this and put in Learnable
 export default interface CommonLearnable extends Learnable {
-    getRomaji(): string;
-    getKana(): string;
+    getWords(): JapaneseWord[];
     getMeaning(): string | undefined;
+}
+
+export interface KanjiLearnable extends CommonLearnable {
+    getKanji(): string;
+}
+
+export interface ExceptionalLearnable extends Learnable {
+    getAnswer(): string;
 }

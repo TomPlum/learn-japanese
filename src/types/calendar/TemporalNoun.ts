@@ -1,6 +1,7 @@
-import CommonLearnable from "../learn/CommonLearnable";
+import { KanjiLearnable } from "../learn/CommonLearnable";
+import JapaneseWord from "../learn/JapaneseWord";
 
-export default class TemporalNoun implements CommonLearnable {
+export default class TemporalNoun implements KanjiLearnable {
     private readonly _english: string;
     private readonly _kanji: any;
     private readonly _romaji: string;
@@ -13,8 +14,8 @@ export default class TemporalNoun implements CommonLearnable {
         this._kana = kana;
     }
 
-    getAnswer(): string {
-        return this._kanji;
+    getWords(): JapaneseWord[] {
+        return [new JapaneseWord(this._kana, this._romaji)];
     }
 
     getQuestion(): string {
@@ -35,5 +36,9 @@ export default class TemporalNoun implements CommonLearnable {
 
     getMeaning(): string | undefined {
         return undefined;
+    }
+
+    getKanji(): string {
+        return this._kanji;
     }
 }

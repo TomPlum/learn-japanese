@@ -15,6 +15,8 @@ import BasicsFlashCardFront from "../components/learn/basics/BasicsFlashCardFron
 import BasicsFlashCardBack from "../components/learn/basics/BasicsFlashCardBack";
 import LearnSentenceStructureMode from "./learn/mode/LearnSentenceStructureMode";
 import LearnNumbersMode from "./learn/mode/LearnNumbersMode";
+import NumbersFlashCardFront from "../components/learn/numbers/NumbersFlashCardFront";
+import NumbersFlashCardBack from "../components/learn/numbers/NumbersFlashCardBack";
 
 export default class Topic {
     private readonly _name: string;
@@ -29,7 +31,7 @@ export default class Topic {
 
     public static NUMBERS = new Topic(
         "Numbers & Counting", faYenSign, new LearnNumbersMode(),
-        { front: KanjiFlashCardFront, back: KanjiFlashCardBack }
+        { front: NumbersFlashCardFront, back: NumbersFlashCardBack }
     );
 
     public static KANJI = new Topic(

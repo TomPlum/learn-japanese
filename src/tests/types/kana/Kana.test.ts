@@ -122,10 +122,17 @@ describe("Kana", () => {
           const question = kana.getQuestion();
           expect(question).toBe("え");
       });
+
       it("Should return the kana romaji string for the answer", () => {
-          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-          const question = kana.getAnswer();
-          expect(question).toBe("fu (hu)");
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const answer = kana.getAnswer();
+          expect(answer).toBe("fu (hu)");
+      });
+
+      it("Should return the kana type for the title", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const title = kana.getTitle();
+          expect(title).toBe("Hiragana");
       });
    });
 });

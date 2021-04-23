@@ -1,5 +1,5 @@
 import BasicsRepository from "../../repository/BasicsRepository";
-import { LearnBasicsSettings } from "../../types/learn/LearnSettings";
+import { LearnBasicsSettings } from "../../types/learn/LearningSessionSettings";
 
 describe("Basic Repository", () => {
 
@@ -9,5 +9,9 @@ describe("Basic Repository", () => {
         const settings: LearnBasicsSettings = { colours: true };
         const response = repository.read(settings);
         expect(response).toHaveLength(26);
+    });
+
+    it("Should return an empty array when no settings are specified", () => {
+        expect(repository.read({})).toHaveLength(0);
     });
 });

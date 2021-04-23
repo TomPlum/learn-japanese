@@ -1,6 +1,7 @@
-import CommonLearnable from "../learn/CommonLearnable";
+import { KanjiLearnable } from "../learn/CommonLearnable";
+import JapaneseWord from "../learn/JapaneseWord";
 
-export default class Colour implements CommonLearnable {
+export default class Colour implements KanjiLearnable {
     private readonly _name: string;
     private readonly _kanji: string | undefined;
     private readonly _kana: string;
@@ -23,8 +24,8 @@ export default class Colour implements CommonLearnable {
         return this._colour;
     }
 
-    getKanji(): string | undefined {
-        return this._kanji;
+    getKanji(): string {
+        return this._kanji ?? this._name;
     }
 
     getKana(): string {
@@ -35,8 +36,8 @@ export default class Colour implements CommonLearnable {
         return this._romaji;
     }
 
-    getAnswer(): string {
-        return this._kanji ?? "";
+    getWords(): JapaneseWord[] {
+        return [new JapaneseWord(this._kana, this._romaji)];
     }
 
     getQuestion(): string {
@@ -44,7 +45,7 @@ export default class Colour implements CommonLearnable {
     }
 
     getTitle(): string {
-        return "Colour";
+        return this._name;
     }
 
     getMeaning(): string | undefined {

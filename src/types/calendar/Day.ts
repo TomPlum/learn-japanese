@@ -1,6 +1,7 @@
-import CommonLearnable from "../learn/CommonLearnable";
+import { KanjiLearnable } from "../learn/CommonLearnable";
+import JapaneseWord from "../learn/JapaneseWord";
 
-export default class Day implements CommonLearnable {
+export default class Day implements KanjiLearnable {
     private readonly _english: string;
     private readonly _kanji: any; //TODO: Change to Kanji once feature merged.
     private readonly _romaji: string;
@@ -15,8 +16,8 @@ export default class Day implements CommonLearnable {
         this._meaning = meaning;
     }
 
-    getAnswer(): string {
-        return this._kanji;
+    getWords(): JapaneseWord[] {
+        return [new JapaneseWord(this._kana, this._romaji)];
     }
 
     getQuestion(): string {
@@ -37,5 +38,9 @@ export default class Day implements CommonLearnable {
 
     getMeaning(): string | undefined {
         return this._meaning;
+    }
+
+    getKanji(): string {
+        return this._kanji;
     }
 }

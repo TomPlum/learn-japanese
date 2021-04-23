@@ -8,15 +8,15 @@ import MenuDescription from "../ui/MenuDescription";
 import LearnTopicButton from "./LearnTopicButton";
 import StartButton from "../ui/StartButton";
 import Arrays from "../../utility/Arrays";
-import { LearnSettings } from "../../types/learn/LearnSettings";
+import { LearningSessionSettings } from "../../types/learn/LearningSessionSettings";
 
 export interface CustomLearnMenuProps {
-    onSelect: (settings: LearnSettings) => void;
+    onSelect: (settings: LearningSessionSettings) => void;
 }
 
 export interface LearnMenuProps {
     modes: LearnMenuModes;
-    onStart: (settings: LearnSettings) => void;
+    onStart: (settings: LearningSessionSettings) => void;
 }
 
 interface LearnMenuState {

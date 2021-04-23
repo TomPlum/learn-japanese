@@ -17,7 +17,7 @@ import { Kanji } from "../../../types/kanji/Kanji";
 interface KanjiFlashCardBackProps extends CardFaceProps, SizeMeProps {
 
 }
-
+//TODO: Replace redundant bits with FlashCardBack component
 class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
     render() {
         const { data, onClick } = this.props;
@@ -36,6 +36,7 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
                     <Col sm={6} xs={4}>
                         <KanjiDisplay kanji={kanji} className={styles.display} showSource />
                     </Col>
+
                     <Col sm={6} xs={8}>
                         <p className={styles.text}>
                             <Inspectable title="On-yomi Reading" text={Environment.variable("ONYOMI_DESC")}>
