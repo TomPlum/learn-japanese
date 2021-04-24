@@ -6,6 +6,7 @@ import { LearnSessionSettings } from "../components/layout/SettingsMenu";
 import { KanjiRepository } from "./KanjiRepository";
 import BasicsRepository from "./BasicsRepository";
 import NumbersRepository from "./NumbersRepository";
+import SentenceStructureRepository from "./SentenceStructureRepository";
 
 export default class LearningDataRepository {
     public read(config?: LearnSessionSettings): Learnable[] {
@@ -29,8 +30,12 @@ export default class LearningDataRepository {
             case Topic.NUMBERS: {
                 return new NumbersRepository().read(settings.numbers!);
             }
+            case Topic.GRAMMAR: {
+                return new SentenceStructureRepository().read(settings.sentence!);
+            }
+            default: {
+                return [];
+            }
         }
-
-        return [];
     }
 }
