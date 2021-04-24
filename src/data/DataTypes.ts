@@ -1,6 +1,7 @@
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 import { KanaColumn } from "../types/kana/KanaColumn";
 import { CounterGroup } from "../types/numbers/CounterGroup";
+import { AdjectiveType } from "../types/kana/AdjectiveType";
 
 export interface KanaData {
     name: string;
@@ -63,4 +64,12 @@ export interface NumbersData {
 export interface CounterData extends NumbersData {
     group: CounterGroup;
     example: { kana: string, english: string };
+}
+
+export interface AdjectiveData {
+    meanings: string[];
+    kana: string;
+    kanjiForm?: string;
+    type: AdjectiveType;
+
 }
