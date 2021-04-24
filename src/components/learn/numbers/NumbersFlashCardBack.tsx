@@ -12,6 +12,7 @@ const NumbersFlashCardBack = (props: CardFaceProps) => {
             title={value.getTitle()}
             answer={value.getKanji()}
             words={value.getWords()}
+            example={value.getExample()}
             onClick={onClick}
         />
     );

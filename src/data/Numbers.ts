@@ -102,6 +102,7 @@ export default function numbers(): NumbersData[] {
     ];
 }
 
+//https://www.tofugu.com/japanese/japanese-counters-list/
 export function counters(): CounterData[] {
     return [
         {
