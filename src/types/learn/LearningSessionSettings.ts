@@ -11,6 +11,7 @@ export interface LearningSessionSettings {
     kanji?: KanjiSettings;
     basics?: LearnBasicsSettings;
     numbers?: LearnNumbersSettings;
+    sentence?: LearnSentenceStructureSettings;
 }
 
 export interface LearnCalendarSettings extends LearnSettings {
@@ -37,4 +38,13 @@ export interface LearnNumbersSettings extends LearnSettings {
     exceptions?: boolean;
     units?: boolean;
     sequence?: boolean;
+}
+
+export interface LearnSentenceStructureSettings extends LearnSettings {
+    grammar?: boolean;
+    particles?: boolean;
+    endings?: boolean;
+    verbs?: boolean;
+    nouns?: boolean;
+    adjectives?: boolean;
 }

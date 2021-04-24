@@ -17,6 +17,8 @@ import LearnSentenceStructureMode from "./learn/mode/LearnSentenceStructureMode"
 import LearnNumbersMode from "./learn/mode/LearnNumbersMode";
 import NumbersFlashCardFront from "../components/learn/numbers/NumbersFlashCardFront";
 import NumbersFlashCardBack from "../components/learn/numbers/NumbersFlashCardBack";
+import SentenceStructureFlashCardFront from "../components/learn/sentence/SentenceStructureFlashCardFront";
+import SentenceStructureFlashCardBack from "../components/learn/sentence/SentenceStructureFlashCardBack";
 
 export default class Topic {
     private readonly _name: string;
@@ -51,7 +53,7 @@ export default class Topic {
 
     public static GRAMMAR = new Topic(
         "Sentence Structure", faSpellCheck, new LearnSentenceStructureMode(),
-        { front: KanaFlashCardFront, back: KanaFlashCardBack }
+        { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack }
     );
 
     public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR, Topic.GRAMMAR];

@@ -24,3 +24,9 @@ export abstract class KanjiLearnable extends CommonLearnable {
 export interface ExceptionalLearnable extends Learnable {
     getAnswer(): string;
 }
+
+export interface SentenceStructureLearnable extends Learnable {
+    getMeanings(): string[];
+    getKana(): string;
+    getKanjiVariation(): string | undefined;
+}
