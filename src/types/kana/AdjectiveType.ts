@@ -1,3 +1,3 @@
 export enum AdjectiveType {
-    NA, I
+    NA = "な", I = "い"
 }

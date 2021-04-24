@@ -1,6 +1,5 @@
-import Learnable from "../learn/Learnable";
 import { AdjectiveType } from "../kana/AdjectiveType";
-import { ExceptionalLearnable, SentenceStructureLearnable } from "../learn/CommonLearnable";
+import { SentenceStructureLearnable } from "../learn/CommonLearnable";
 
 export default class Adjective implements SentenceStructureLearnable {
 
@@ -21,7 +20,7 @@ export default class Adjective implements SentenceStructureLearnable {
     }
 
     getTitle(): string {
-        return "Adjective";
+        return this.type + " Adjective";
     }
 
     getAnswer(): string {
