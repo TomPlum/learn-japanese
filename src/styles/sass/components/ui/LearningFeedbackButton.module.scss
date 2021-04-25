@@ -42,7 +42,7 @@
 }
 
 .inactive {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .activeRemembered {
@@ -63,6 +63,5 @@
   max-width: 325px;
   display: block;
   transition: ease-in-out 0.4s;
-  opacity: 0.5;
   padding: 10px;
 }

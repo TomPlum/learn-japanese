@@ -49,7 +49,7 @@ test('Passing in a single reading should render a 1 on the controls section', ()
 
 test('Passing in a single reading should render a descriptive title on the number 1', () => {
     const component = render(<KanjiReadingDisplay type={ReadingType.ON} readings={[onReading]} />);
-    expect(component.getByTitle('This kanji has only one Jōyō reading')).toBeInTheDocument();
+    expect(component.getByTitle('This kanji has only one Jōyō on reading')).toBeInTheDocument();
 });
 
 test('Passing in an empty reading array should render N/A', () => {

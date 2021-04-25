@@ -47,7 +47,9 @@ class KanjiReadingDisplay extends Component<KanjiReadingDisplayProps, KanjiReadi
                     <div className={styles.selectedWrapper}>
                         {hasMultipleReadings
                             ? <span className={styles.selected}>{selected + 1}</span>
-                            : <span className={styles.selectedDisabled} title={"This kanji has only one Jōyō reading"}>1</span>
+                            : <span className={styles.selectedDisabled} title={"This kanji has only one Jōyō " + type.toLowerCase() + " reading"}>
+                                1
+                            </span>
                         }
                     </div>
 
