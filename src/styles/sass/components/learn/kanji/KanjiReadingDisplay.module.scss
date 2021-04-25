@@ -1,0 +1,66 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  display: flex;
+  height: 50px;
+}
+
+.controlsWrapper {
+  width: 14px;
+  margin-right: 10px;
+}
+
+.disabled {
+  color: #585858;
+  opacity: 0.3;
+}
+
+.arrow {
+  margin: 0;
+  color: $inspect;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.arrow:hover {
+  color: #2b2b2b;
+}
+
+.arrowWrapper {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  height: 16px;
+  width: 14px;
+}
+
+.selectedWrapper {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 14px;
+  text-align: center;
+}
+
+@mixin selected {
+  margin-top: 1px;
+  line-height: 18px;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+.selected {
+  @include selected;
+  color: #403f3f;
+}
+
+.selectedDisabled {
+  @include selected;
+  color: #414141;
+  opacity: 0.5;
+}
+
+.reading {
+  height: 50px;
+  line-height: 50px;
+}

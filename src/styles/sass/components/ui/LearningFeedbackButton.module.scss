@@ -1,11 +1,44 @@
-.button {
-  padding: 10px;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 325px;
-  display: block;
-  transition: ease-in-out 0.4s;
-  opacity: 0.5;
+@import "src/styles/sass/viewports";
+
+@mixin text {
+  text-transform: uppercase;
+  margin-left: 5px;
+}
+
+@include phone {
+  .text {
+    @include text;
+    font-size: 1em;
+    font-family: "Ciutadella Rounded Bold", sans-serif;
+  }
+
+  .icon {
+    font-size: 1em;
+  }
+}
+
+@include tablet {
+  .text {
+    @include text;
+    font-size: 1.2em;
+    font-family: "Ciutadella Rounded Medium", sans-serif;
+  }
+
+  .icon {
+    font-size: 1.1em;
+  }
+}
+
+@include desktop {
+  .text {
+    @include text;
+    font-size: 1.5em;
+    font-family: "Ciutadella Rounded Medium", sans-serif;
+  }
+
+  .icon {
+    font-size: 1.2em;
+  }
 }
 
 .inactive {
@@ -24,13 +57,12 @@
   border-color: #b21f2d;
 }
 
-.text {
-  font-family: "Ciutadella Rounded Medium", sans-serif;
-  font-size: 1.5em;
-  text-transform: uppercase;
-  margin-left: 5px;
-}
-
-.icon {
-  font-size: 1.2em;
+.button {
+  border-radius: 8px;
+  width: 100%;
+  max-width: 325px;
+  display: block;
+  transition: ease-in-out 0.4s;
+  opacity: 0.5;
+  padding: 10px;
 }

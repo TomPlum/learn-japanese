@@ -1,5 +1,16 @@
 @import "src/styles/sass/mixins";
 @import "src/styles/sass/colours";
+@import "src/styles/sass/viewports";
+
+@include phone {
+  .buttonColumnRight {
+    padding-left: 6px;
+  }
+
+  .buttonColumnLeft {
+    padding-right: 6px;
+  }
+}
 
 .wrapper {
   display: flex;
@@ -27,9 +38,9 @@
 }
 
 .remaining {
+  @include noSelect;
   display: block;
   color: #FFF;
-  @include noSelect;
 }
 
 .next {

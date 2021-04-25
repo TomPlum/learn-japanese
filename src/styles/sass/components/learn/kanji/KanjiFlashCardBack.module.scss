@@ -15,7 +15,6 @@
   color: #000000;
   font-family: "Ciutadella Rounded", sans-serif;
   align-self: stretch;
-  margin: 5px 0;
 }
 
 @include phone {
@@ -34,7 +33,7 @@
   }
 
   .display {
-    font-size: 7em;
+    font-size: 5em;
   }
 
   .text {
@@ -143,4 +142,8 @@
   border-width: 2px;
   height: 45px;
   width: 45px;
+}
+
+.meaningWrapper {
+  margin-left: 24px;
 }

@@ -36,12 +36,12 @@ test('Should render the kanji', () => {
 
 test('Should render the on reading', () => {
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} />);
-    expect(component.getByText(': jin (じん)')).toBeInTheDocument();
+    expect(component.getByText(': じん')).toBeInTheDocument();
 });
 
 test('Should render the kun reading', () => {
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} />);
-    expect(component.getByText(': hito (ひと)')).toBeInTheDocument();
+    expect(component.getByText(': ひと')).toBeInTheDocument();
 });
 
 test('Should render the meanings comma delimited', () => {
@@ -51,7 +51,7 @@ test('Should render the meanings comma delimited', () => {
 
 test('Should render the grade', () => {
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} />);
-    expect(component.getByText('Grade 1')).toBeInTheDocument();
+    expect(component.getByText('Grade 1 Kyōiku')).toBeInTheDocument();
 });
 
 test('Should render the kanji as a link to the source', () => {
@@ -62,22 +62,6 @@ test('Should render the kanji as a link to the source', () => {
 test('Should render the examples', () => {
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} />);
     expect(component.getByText('外国人 - がいこくじん - foreigner')).toBeInTheDocument();
-});
-
-test('Should display the On-Yomi reading description when hovering over the \'On\' text', () => {
-    mockEnvironment.mockReturnValue('Example on reading desc');
-    const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} />);
-    fireEvent.mouseOver(component.getByText('On'));
-    expect(screen.getByTitle('On-yomi Reading')).toBeInTheDocument();
-    expect(screen.getByText('Example on reading desc')).toBeInTheDocument();
-});
-
-test('Should display the Kun-Yomi reading description when hovering over the \'Kun\' text', () => {
-    mockEnvironment.mockReturnValue('Example kun reading desc');
-    const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} />);
-    fireEvent.mouseOver(component.getByText('Kun'));
-    expect(screen.getByTitle('Kun-yomi Reading')).toBeInTheDocument();
-    expect(screen.getByText('Example kun reading desc')).toBeInTheDocument();
 });
 
 test('Should display the meaning reading description when hovering over the \'Meaning\' text', () => {

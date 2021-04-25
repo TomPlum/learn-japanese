@@ -91,7 +91,7 @@ class Learn extends Component<LearnProps, LearnState> {
                     </Row>
 
                     <Row className={styles.buttonWrapper}>
-                        <Col xs={6}>
+                        <Col xs={6} className={styles.buttonColumnLeft}>
                             <LearningFeedbackButton
                                 type={LearningFeedback.FORGOT}
                                 onClick={this.onForgot}
@@ -99,7 +99,7 @@ class Learn extends Component<LearnProps, LearnState> {
                                 active={hasForgotten}
                             />
                         </Col>
-                        <Col xs={6}>
+                        <Col xs={6} className={styles.buttonColumnRight}>
                             <LearningFeedbackButton
                                 type={LearningFeedback.REMEMBERED}
                                 onClick={this.onMemorised}
