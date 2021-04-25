@@ -3,6 +3,7 @@ import JapaneseCharacter from "../JapaneseCharacter";
 import { Example } from "./Example";
 import { KyoikuGrade } from "./KyoikuGrade";
 import Learnable from "../learn/Learnable";
+import JapaneseWord from "../learn/JapaneseWord";
 
 export class Kanji implements Learnable, JapaneseCharacter {
     private readonly _character: string;
@@ -45,8 +46,8 @@ export class Kanji implements Learnable, JapaneseCharacter {
         return this._examples;
     }
 
-    getAnswer(): string {
-        return this.meanings[0];
+    getAnswer(): JapaneseWord[] {
+        return [];
     }
 
     getQuestion(): string {

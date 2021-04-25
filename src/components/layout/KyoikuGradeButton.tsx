@@ -20,8 +20,10 @@ class KyoikuGradeButton extends Component<KyoikuGradeButtonProps> {
         }
     }
 
-    handleClick = () => this.props.onClick(this.props.grade);
-
+    handleClick = () => {
+        const { grade, onClick } = this.props;
+        onClick(grade);
+    }
 
     render() {
         const { grade, isSelected, icon } = this.props;

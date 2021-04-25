@@ -1,9 +1,9 @@
 import KanaType from "./KanaType";
-import {KanaColumn} from "./KanaColumn";
+import { KanaColumn } from "./KanaColumn";
 import Arrays from "../../utility/Arrays";
-import Learnable from "../learn/Learnable";
+import { ExceptionalLearnable } from "../learn/CommonLearnable";
 
-export class Kana implements Learnable {
+export class Kana implements ExceptionalLearnable {
     private readonly _code: string;
     private readonly _romaji: string[];
     private readonly _type: KanaType;

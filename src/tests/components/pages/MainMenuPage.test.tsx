@@ -46,8 +46,7 @@ const setup = () => {
       kana: component.queryAllByText('Hiragana & Katakana')[1],
       numbers: component.getByText('Numbers & Counting'),
       kanji: component.getByText('Jōyō Kanji'),
-      colours: component.getByText('Colours'),
-      weather: component.getByText('Weather'),
+      basics: component.getByText('Basics'),
       calendar: component.getByText('Days & Months'),
       ...component
    }
@@ -59,7 +58,7 @@ test('Selecting a game mode should hide the menu and render the game', () => {
    expect(screen.getByTitle('1/3')).toBeInTheDocument();
 });
 
-test('Changing the AppMode in the ControlsMenu should update the GameSettingsMenu', () => {
+test('Changing the AppMode in the ControlsMenu should update the SettingsMenu', () => {
    const { mode } = setup();
    expect(screen.getByText('Select Game Mode'));
    fireEvent.click(mode);

@@ -1,7 +1,10 @@
 import LearningMode from "../LearningMode";
 
-export default interface LearnMenuModes {
-    getLearningTopics(): LearningMode[];
-    getTopic(): string;
-    isCustomisable(): boolean;
+export default abstract class LearnMenuModes {
+    abstract getLearningTopics(): LearningMode[];
+    abstract getTopic(): string;
+
+    protected isCustomisable(): boolean {
+        return false;
+    }
 }

@@ -1,13 +1,14 @@
-import { LearnCalendarSettings } from "../types/learn/LearnSettings";
-import CalendarData from "../types/calendar/CalendarData";
+import { LearnCalendarSettings } from "../types/learn/LearningSessionSettings";
+import CommonLearnable from "../types/learn/CommonLearnable";
 import { days, months, nouns } from "../data/Calendar";
 import { DayData } from "../data/DataTypes";
 import Day from "../types/calendar/Day";
 import Month from "../types/calendar/Month";
 import TemporalNoun from "../types/calendar/TemporalNoun";
+import Repository from "./Repository";
 
-export default class CalendarRepository {
-    public read(config: LearnCalendarSettings): CalendarData[] {
+export default class CalendarRepository implements Repository<CommonLearnable> {
+    public read(config: LearnCalendarSettings): CommonLearnable[] {
         let data = [];
 
         if (config.months) {

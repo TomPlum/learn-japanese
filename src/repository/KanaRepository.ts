@@ -8,8 +8,9 @@ import DiagraphFilter from "../filters/kana/DiagraphFilter";
 import FilterChain from "../filters/FilterChain";
 import QuantityFilter from "../filters/kana/QuantityFilter";
 import KanaTypeFilter from "../filters/kana/KanaTypeFilter";
+import Repository from "./Repository";
 
-export class KanaRepository {
+export class KanaRepository implements Repository<Kana> {
 
     public read(config: KanaSettings): Kana[] {
         const chain = new FilterChain<Kana>();

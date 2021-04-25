@@ -1,3 +1,4 @@
 export enum ReadingType {
-    ON, KUN
+    ON = "On",
+    KUN = "Kun"
 }

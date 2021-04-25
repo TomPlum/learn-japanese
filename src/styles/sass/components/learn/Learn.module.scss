@@ -1,5 +1,32 @@
 @import "src/styles/sass/mixins";
 @import "src/styles/sass/colours";
+@import "src/styles/sass/viewports";
+
+@include phone {
+  .buttonColumnRight {
+    padding-left: 6px;
+  }
+
+  .buttonColumnLeft {
+    padding-right: 6px;
+  }
+
+  .innerWrapper {
+    max-width: 450px;
+  }
+}
+
+@include tablet {
+  .innerWrapper {
+    max-width: 550px;
+  }
+}
+
+@include desktop {
+  .innerWrapper {
+    max-width: 650px;
+  }
+}
 
 .wrapper {
   display: flex;
@@ -7,10 +34,6 @@
   align-items: center;
   width: 100%;
   flex-direction:row;
-}
-
-.innerWrapper {
-  max-width: 650px;
 }
 
 .cardWrapper, .buttonWrapper, .header {
@@ -27,9 +50,9 @@
 }
 
 .remaining {
+  @include noSelect;
   display: block;
   color: #FFF;
-  @include noSelect;
 }
 
 .next {

@@ -1,11 +1,11 @@
 import LearningMode from "../LearningMode";
 import LearnMenuModes from "./LearnMenuModes";
-import { faClock, faFillDrip, faLeaf, faMountain, faPaintBrush, faSchool, faSun, faYenSign } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faFillDrip, faPaintBrush, faSchool, faYenSign } from "@fortawesome/free-solid-svg-icons";
 import { KyoikuGrade } from "../../kanji/KyoikuGrade";
 import CustomLearningMode from "../CustomLearningMode";
 import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
 
-export default class LearnKanjiMode implements LearnMenuModes {
+export default class LearnKanjiMode extends LearnMenuModes {
     getLearningTopics(): LearningMode[] {
         return [
             new LearningMode("Kyōiku", "#fdb40e", faSchool, { kanji: { grades: KyoikuGrade.ALL } }),

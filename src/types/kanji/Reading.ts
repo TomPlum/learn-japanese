@@ -1,18 +1,18 @@
 import { ReadingType } from "./ReadingType";
 
 export class Reading {
-    private readonly _romanji: string;
+    private readonly _romaji: string;
     private readonly _kana: string;
     private readonly _type: ReadingType;
 
-    constructor(romanji: string, kana: string, type: ReadingType) {
-        this._romanji = romanji;
+    constructor(romaji: string, kana: string, type: ReadingType) {
+        this._romaji = romaji;
         this._kana = kana;
         this._type = type;
     }
 
-    get romanji(): string {
-        return this._romanji;
+    get romaji(): string {
+        return this._romaji;
     }
 
     get kana(): string {

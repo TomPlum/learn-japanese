@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/HelpPage.module.scss";
-import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class HelpPage extends Component {
@@ -19,8 +19,9 @@ class HelpPage extends Component {
                             <p className={styles.answer}>
                                 Rōmaji or ローマ字 (rōmaji) is the romanisation of the Japanese written language.
                             </p>
-                            <a href="https://www.japanesepod101.com/japanese-romaji/" target="_blank" rel="noreferrer" className={styles.source}>
-                                Source
+                            <a href="https://www.japanesepod101.com/japanese-romaji/" target="_blank" rel="noreferrer" className={styles.link}>
+                                <FontAwesomeIcon icon={faLink} fixedWidth className={styles.sourceIcon} />
+                                <span className={styles.source}>Source</span>
                             </a>
                         </Col>
                     </Row>

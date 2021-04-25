@@ -1,5 +1,7 @@
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 import { KanaColumn } from "../types/kana/KanaColumn";
+import { CounterGroup } from "../types/numbers/CounterGroup";
+import { AdjectiveType } from "../types/kana/AdjectiveType";
 
 export interface KanaData {
     name: string;
@@ -42,4 +44,32 @@ export interface KanjiExample {
 export interface KyoikuGradeData {
     value: number;
     quantity: number;
+}
+
+export interface ColourData {
+    name: string;
+    kanji?: string;
+    kana: string;
+    romaji: string;
+    colour: string;
+}
+
+export interface NumbersData {
+    name: string;
+    kanji?: string;
+    kana: string[];
+    romaji: string[];
+}
+
+export interface CounterData extends NumbersData {
+    group: CounterGroup;
+    example: { kana: string, english: string };
+}
+
+export interface AdjectiveData {
+    meanings: string[];
+    kana: string;
+    kanjiForm?: string;
+    type: AdjectiveType;
+
 }
