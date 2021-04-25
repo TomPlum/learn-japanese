@@ -3,6 +3,11 @@
 
 @mixin heading {
   margin: 10px 0;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+@mixin description {
+  font-family: "Ciutadella Rounded", sans-serif;
 }
 
 @mixin button {
@@ -13,11 +18,12 @@
 @mixin big {
   .heading {
     @include heading;
-    font-size: 3.5em;
+    font-size: 4em;
     font-weight: 500;
   }
 
   .description {
+    @include description;
     font-size: 1.7em;
     padding: 0 10px;
     max-width: 900px;
@@ -76,6 +82,7 @@
   }
 
   .description {
+    @include description;
     font-size: 1.1em;
     padding: 0 10px;
   }
