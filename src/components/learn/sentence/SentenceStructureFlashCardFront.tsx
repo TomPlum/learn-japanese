@@ -14,13 +14,13 @@ const SentenceStructureFlashCardFront = (props: CardFaceProps) => {
                 {value.getMeanings().map((meaning: string, i: number) => {
                     if (i < value.getMeanings().length - 1) {
                         return (
-                            <>
+                            <div key={i}>
                                 <p className={styles.meaning}>{meaning}</p>
                                 <p className={styles.or}> or</p>
-                            </>
+                            </div>
                         );
                     } else {
-                        return <p className={styles.meaning}> {meaning}</p>
+                        return <p className={styles.meaning} key={i}> {meaning}</p>
                     }
                 })}
             </div>

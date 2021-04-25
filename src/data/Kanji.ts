@@ -1930,6 +1930,166 @@ export function kyoiku(): KanjiData[] {
             ]
         },
         {
+            name: "京",
+            code: "\u4EAC",
+            on: [{ kana: "きょう", romanji: "kyō" }, { kana: "けい", romanji: "kei" }],
+            kun: [{ kana: "みやこ", romanji: "miyako" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BA%AC#Kanji",
+            meanings: ["capital", "x10^16"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "京", kana: ["きょう", "けい"], english: ["imperial captial"] },
+                { value: "東京", kana: ["とうきょう"], english: ["Tokyo"] },
+                { value: "北京", kana: ["ぺきん"], english: ["Beijing (China)", "Peking"] },
+                { value: "京都", kana: ["きょうと"], english: ["Kyoto"] },
+                { value: "東京証券取引所", kana: ["うきょうしょうけんとりひきじょ"], english: ["Tokyo Stock Exchange (TSE)"] },
+            ]
+        },
+        {
+            name: "言",
+            code: "\u8A00",
+            on: [{ kana: "げん", romanji: "gen" }, { kana: "ごん", romanji: "gon" }],
+            kun: [{ kana: "こと", romanji: "koto" }, { kana: "いう", romanji: "iu" }],
+            source: "https://en.wiktionary.org/wiki/%E8%A8%80#Kanji",
+            meanings: ["say"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "言わば", kana: ["いわば"], english: ["so to speak", "so to call it", "as it were"] },
+                { value: "言う", kana: ["いう", "ゆう"], english: ["to say", "to call (i.e. to give a name)"] },
+                { value: "言", kana: ["げん", "こと"], english: ["word", "remark", "statement"] },
+                { value: "言葉", kana: ["ことば", "けとば"], english: ["language", "dialect", "word", "phrase", "term"] },
+                { value: "宣言", kana: ["せんげん"], english: ["declaration", "proclamation", "announcement"] },
+            ]
+        },
+        {
+            name: "体",
+            code: "\u4F53",
+            on: [{ kana: "たい", romanji: "tai" }],
+            kun: [{ kana: "からだ", romanji: "karada" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BD%93#Kanji",
+            meanings: ["body", "substance", "object"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "体", kana: ["からだ", "しんたい"], english: ["body", "health"] },
+                { value: "具体的", kana: ["ぐたいてき"], english: ["concrete", "tangible", "definite", "specific"] },
+                { value: "全体", kana: ["ぜんたい"], english: ["whole", "entirety", "whatever (is the matter)"] },
+                { value: "体制", kana: ["たいせい"], english: ["order", "system", "structure"] },
+                { value: "団体", kana: ["だんたい"], english: ["organization", "organisation", "association"] },
+            ]
+        },
+        {
+            name: "用",
+            code: "\u7528",
+            on: [{ kana: "よう", romanji: "yō" }],
+            kun: [{ kana: "もちいる", romanji: "mochiiru" }],
+            source: "https://en.wiktionary.org/wiki/%E7%94%A8#Kanji",
+            meanings: ["use", "business", "service", "employ"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "雇用", kana: ["こよう"], english: ["employment (long term)", "hire"] },
+                { value: "採用", kana: ["さいよう"], english: ["use", "adoption", "acceptance", "appointment"] },
+                { value: "使用", kana: ["しよう"], english: ["use", "application", "employment", "utilisation"] },
+                { value: "費用", kana: ["ひよう"], english: ["cost", "expense"] },
+                { value: "利用", kana: ["りよう"], english: ["use", "utilisation", "application"] },
+            ]
+        },
+        {
+            name: "公",
+            code: "\u516C",
+            on: [{ kana: "こう", romanji: "kō" }],
+            kun: [{ kana: "おおやけ", romanji: "ōyake" }],
+            source: "https://en.wiktionary.org/wiki/%E5%85%AC#Kanji",
+            meanings: ["public", "prince", "official", "governmental"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "公園", kana: ["こうえん"], english: ["(public) park"] },
+                { value: "公演", kana: ["こうえん"], english: ["public performance"] },
+                { value: "公開", kana: ["こうかい"], english: ["open to the public"] },
+                { value: "公共", kana: ["こうきょう"], english: ["public", "community", "public service", "society"] },
+                { value: "公式", kana: ["こうしき"], english: ["formality", "formal", "official", "formula"] },
+            ]
+        },
+        {
+            name: "通",
+            code: "\u901A",
+            on: [{ kana: "つう", romanji: "tsū" }],
+            kun: [{ kana: "とおる", romanji: "tōru" }, { kana: "かよう", romanji: "kayou" }],
+            source: "https://en.wiktionary.org/wiki/%E9%80%9A#Kanji",
+            meanings: ["pass-through", "commute", "traffic", "documents", "notes"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "通り", kana: ["どおり"], english: ["in accordance with...", "following..."] },
+                { value: "通信", kana: ["つうしん"], english: ["correspondence", "communication", "transmission"] },
+                { value: "見通し", kana: ["みとおし"], english: ["perspective", "unobstructed view", "outlook"] },
+                { value: "共通", kana: ["きょうつう"], english: ["commonness", "community"] },
+                { value: "交通", kana: ["こうつう"], english: ["communication", "transportation", "traffic"] },
+            ]
+        },
+        {
+            name: "理",
+            code: "\u7406",
+            on: [{ kana: "り", romanji: "ri" }],
+            kun: [{ kana: "ことわり", romanji: "kotowari" }],
+            source: "https://en.wiktionary.org/wiki/%E7%90%86#Kanji",
+            meanings: ["reason", "logic", "arrangement", "justice", "truth"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "理", kana: ["り"], english: ["reason", "principle", "logic"] },
+                { value: "管理", kana: ["かんり"], english: ["control", "management (e.g. of a business)"] },
+                { value: "理事", kana: ["りじ"], english: ["director", "board of directors"] },
+                { value: "理由", kana: ["りゆう"], english: ["reason", "pretext", "motive"] },
+                { value: "処理", kana: ["しょり"], english: ["processing", "dealing with", "treatment"] },
+            ]
+        },
+        {
+            name: "作",
+            code: "\u4F5C",
+            on: [{ kana: "さく", romanji: "saku" }],
+            kun: [{ kana: "つくる", romanji: "tsukuru" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BD%9C#Kanji",
+            meanings: ["make", "production", "prepare", "build"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "作", kana: ["さく"], english: ["a work", "a harvest"] },
+                { value: "作る", kana: ["つくる"], english: ["to make", "to produce", "to manufacture", "to build"] },
+                { value: "作り", kana: ["つくり"], english: ["making", "producing", "manufacturing", "building"] },
+                { value: "作業", kana: ["さぎょう"], english: ["work", "operation", "manufacturing", "fatigue duty"] },
+                { value: "作品", kana: ["さくひん"], english: ["work (e.g. book, film, composition, etc.)"] },
+            ]
+        },
+        {
+            name: "強",
+            code: "\u5F37",
+            on: [{ kana: "きょう", romanji: "kyō" }],
+            kun: [{ kana: "つよい", romanji: "tsuyoi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BC%B7#Kanji",
+            meanings: ["strong"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "強さ", kana: ["つよさ"], english: ["strength", "power"] },
+                { value: "強化", kana: ["きょうか"], english: ["strengthen", "intensify", "reinforce", "solidify"] },
+                { value: "強制", kana: ["きょうせい"], english: ["obligation", "coercion", "compulsion", "enforcement"] },
+                { value: "勉強", kana: ["べんきょう"], english: ["study", "diligence", "discount", "reduction"] },
+                { value: "強める", kana: ["つよめる"], english: ["to strengthen", "to emphasise"] },
+            ]
+        },
+        {
+            name: "野",
+            code: "\u91CE",
+            on: [{ kana: "や", romanji: "ya" }],
+            kun: [{ kana: "の", romanji: "no" }],
+            source: "https://en.wiktionary.org/wiki/%E9%87%8E#Kanji",
+            meanings: ["field", "plains", "rustic", "civilian life"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "野", kana: ["の", "や", "ぬ"], english: ["plain", "field", "hidden (structural) member"] },
+                { value: "分野", kana: ["ぶんや"], english: ["field", "sphere", "realm", "division", "branch"] },
+                { value: "野球", kana: ["やきゅう"], english: ["baseball"] },
+                { value: "野党", kana: ["やとう"], english: ["opposition party", "political opposition"] },
+                { value: "与野党", kana: ["よやとう"], english: ["(political) parties in and out of power"] },
+            ]
+        },
+        {
             name: "思",
             code: "\u601D",
             on: [{ kana: "し", romanji: "shi" }],

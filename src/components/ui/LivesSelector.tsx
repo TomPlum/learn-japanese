@@ -30,9 +30,21 @@ class LivesSelector extends Component<LivesSelectorProps, LivesSelectorState> {
     }
 
     render() {
+        const { selected } = this.state;
+
         return (
             <Form.Control disabled={this.props.disabled} as="select" onChange={this.handleOnChange} data-testid="Lives">
-                {this.getOptions()}
+                {Object.keys(LifeQuantity)
+                    .map(k => Number(LifeQuantity[k as any]))
+                    .filter(k => !isNaN(k))
+                    .map(quantity => {
+                        return (
+                            <option key={quantity} selected={selected.valueOf() === quantity}>
+                                {quantity}
+                            </option>
+                        );
+                    })
+                }
             </Form.Control>
         );
     }
@@ -46,18 +58,6 @@ class LivesSelector extends Component<LivesSelectorProps, LivesSelectorState> {
         this.props.onSelect(quantity);
     }
 
-    private getOptions = () => {
-        return Object.keys(LifeQuantity)
-            .map(k => Number(LifeQuantity[k as any]))
-            .filter(k => !isNaN(k))
-            .map(quantity => {
-                return <option
-                    key={quantity}
-                    selected={this.state.selected.valueOf() === quantity}>
-                    {quantity}
-                </option>
-            });
-    }
 }
 
 export default LivesSelector;

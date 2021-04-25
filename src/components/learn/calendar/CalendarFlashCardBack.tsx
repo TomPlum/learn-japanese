@@ -21,7 +21,7 @@ function CalendarFlashCardBack(props: CardFaceProps) {
                 <Row>
                     <Col>
                         {value.getWords().map((word: JapaneseWord) => {
-                            return <p className={styles.text}>{word.kana} ({word.romaji})</p>
+                            return <p className={styles.text} key={word.romaji}>{word.kana} ({word.romaji})</p>
                         })}
                     </Col>
                 </Row>
