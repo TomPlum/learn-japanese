@@ -10,6 +10,22 @@
   .buttonColumnLeft {
     padding-right: 6px;
   }
+
+  .innerWrapper {
+    max-width: 450px;
+  }
+}
+
+@include tablet {
+  .innerWrapper {
+    max-width: 550px;
+  }
+}
+
+@include desktop {
+  .innerWrapper {
+    max-width: 650px;
+  }
 }
 
 .wrapper {
@@ -18,10 +34,6 @@
   align-items: center;
   width: 100%;
   flex-direction:row;
-}
-
-.innerWrapper {
-  max-width: 650px;
 }
 
 .cardWrapper, .buttonWrapper, .header {
