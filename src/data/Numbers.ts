@@ -193,7 +193,7 @@ export function counters(): CounterData[] {
             example: { kana: "今、大学一年生です", english: "I'm in the first year of university now." }
         },
         {
-            name: "Years",
+            name: "Number of Times",
             kanji: "回",
             kana: ["かい"],
             romaji: ["kai"],
