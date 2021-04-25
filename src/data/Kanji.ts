@@ -2089,6 +2089,166 @@ export function kyoiku(): KanjiData[] {
                 { value: "与野党", kana: ["よやとう"], english: ["(political) parties in and out of power"] },
             ]
         },
+        {
+            name: "思",
+            code: "\u601D",
+            on: [{ kana: "し", romanji: "shi" }],
+            kun: [{ kana: "おもう", romanji: "omou" }],
+            source: "https://en.wiktionary.org/wiki/%E6%80%9D#Kanji",
+            meanings: ["think"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "思わず", kana: ["おもわず"], english: ["unintentionally", "reflexively", "spontaneously"] },
+                { value: "思い", kana: ["おもい"], english: ["thought", "mind", "heart", "feelings", "emotion"] },
+                { value: "思う", kana: ["おもう"], english: ["to think", "to consider", "to believe"] },
+                { value: "意思", kana: ["いし"], english: ["intention", "purpose"] },
+                { value: "思想", kana: ["しそう"], english: ["thought", "idea", "ideology"] },
+            ]
+        },
+        {
+            name: "多",
+            code: "\u591A",
+            on: [{ kana: "た", romanji: "ta" }],
+            kun: [{ kana: "おおい", romanji: "ooi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A4%9A#Kanji",
+            meanings: ["many", "frequent", "much"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "多数", kana: ["たすう"], english: ["great number", "countless", "majority"] },
+                { value: "多様", kana: ["たよう"], english: ["diverse", "varied"] },
+                { value: "多角", kana: ["たかく"], english: ["many sided", "versatile", "polygonal", "diversified"] },
+                { value: "最多", kana: ["さいた"], english: ["the most"] },
+                { value: "多額", kana: ["たがく"], english: ["large amount of money"] },
+            ]
+        },
+        {
+            name: "教",
+            code: "\u6559",
+            on: [{ kana: "きょう", romanji: "kyō" }],
+            kun: [{ kana: "おしえる", romanji: "oshieru" }],
+            source: "https://en.wiktionary.org/wiki/%E6%95%99#Kanji",
+            meanings: ["teach", "faith", "doctorine"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "教育", kana: ["きょういく"], english: ["training", "education"] },
+                { value: "教授", kana: ["きょうじゅ"], english: ["professor", "teaching", "instruction"] },
+                { value: "教師", kana: ["きょうし"], english: ["teacher (classroom)"] },
+                { value: "宗教", kana: ["しゅうきょう"], english: ["religion"] },
+                { value: "教室", kana: ["きょうしつ"], english: ["classroom"] },
+            ]
+        },
+        {
+            name: "近",
+            code: "\u8FD1",
+            on: [{ kana: "きん", romanji: "kin" }],
+            kun: [{ kana: "ちかい", romanji: "chikai" }],
+            source: "https://en.wiktionary.org/wiki/%E8%BF%91#Kanji",
+            meanings: ["near", "early", "akin", "tantamount"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "最近", kana: ["さいきん"], english: ["latest", "most recent", "nowadays"] },
+                { value: "近代", kana: ["きんだい"], english: ["present day", "modern times"] },
+                { value: "付近", kana: ["ふきん"], english: ["neighbourhood", "neighborhood", "vicinity"] },
+                { value: "近鉄", kana: ["きんてつ"], english: ["Kinki Nippon Tetsudou (railway co.)"] },
+                { value: "側近", kana: ["そっきん"], english: ["close associate", "close aide"] },
+            ]
+        },
+        {
+            name: "画",
+            code: "\u753B",
+            on: [{ kana: "が, かく", romanji: "ga, kaku" }],
+            kun: [{ kana: "", romanji: "" }],
+            source: "https://en.wiktionary.org/wiki/%E7%94%BB#Kanji",
+            meanings: ["brush", "stroke"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "画", kana: ["かく"], english: ["stroke (of a kanji"] },
+                { value: "映画", kana: ["えいが"], english: ["movie", "film"] },
+                { value: "計画", kana: ["けいかく"], english: ["plan", "project", "schedule", "scheme", "program"] },
+                { value: "企画", kana: ["きかく"], english: ["planning", "project", "plan", "design"] },
+                { value: "絵画", kana: ["かいが"], english: ["picture", "painting"] },
+            ]
+        },
+        {
+            name: "家",
+            code: "\u5BB6",
+            on: [{ kana: "け, か", romanji: "ka, ke" }],
+            kun: [{ kana: "いえ", romanji: "ie" }],
+            source: "https://en.wiktionary.org/wiki/%E5%AE%B6#Kanji",
+            meanings: ["house", "home"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "家族", kana: ["かぞく"], english: ["family", "members of a family"] },
+                { value: "家庭", kana: ["かてい"], english: ["home", "family", "household"] },
+                { value: "国家", kana: ["こっか"], english: ["state", "country", "nation"] },
+                { value: "政治家", kana: ["せいじか"], english: ["politician", "statesman"] },
+                { value: "作家", kana: ["さっか"], english: ["author", "writer", "novelist", "artist"] },
+            ]
+        },
+        {
+            name: "心",
+            code: "\u5FC3",
+            on: [{ kana: "しん", romanji: "shin" }],
+            kun: [{ kana: "こころ", romanji: "kokoro" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BF%83#Kanji",
+            meanings: ["heart", "mind", "spirit", "heart radical"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "関心", kana: ["かんしん"], english: ["concern", "interest"] },
+                { value: "中心", kana: ["ちゅうしん"], english: ["centre", "middle", "heart", "core", "focus"] },
+                { value: "心不全", kana: ["しんふぜん"], english: ["heart failure"] },
+                { value: "心から", kana: ["しんから", "こころから"], english: ["from the bottom of one’s heart"] },
+                { value: "心臓", kana: ["しんぞう"], english: ["heart"] },
+            ]
+        },
+        {
+            name: "元",
+            code: "\u5143",
+            on: [{ kana: "げん, がん", romanji: "gen, gan" }],
+            kun: [{ kana: "もと", romanji: "moto" }],
+            source: "https://en.wiktionary.org/wiki/%E5%85%83#Kanji",
+            meanings: ["beginning", "former time", "origin"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "元", kana: ["もと"], english: ["concern", "interest"] },
+                { value: "地元", kana: ["じもと"], english: ["centre", "middle", "heart", "core", "focus"] },
+                { value: "元首", kana: ["げんしゅ"], english: ["heart failure"] },
+                { value: "元気", kana: ["げんき"], english: ["from the bottom of one’s heart"] },
+                { value: "元日", kana: ["がんじつ", "がんにち"], english: ["heart"] },
+            ]
+        },
+        {
+            name: "考",
+            code: "\u8003",
+            on: [{ kana: "こう", romanji: "kō" }],
+            kun: [{ kana: "かんがえる", romanji: "kangaeru" }],
+            source: "https://en.wiktionary.org/wiki/%E8%80%83#Kanji",
+            meanings: ["consider", "think over"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "考え", kana: ["かんがえ"], english: ["thinking", "thought", "ideas", "intention"] },
+                { value: "考え方", kana: ["かんがえかた"], english: ["way of thinking"] },
+                { value: "参考", kana: ["さんこう"], english: ["reference, consultation"] },
+                { value: "選考", kana: ["せんこう"], english: ["selection, screening"] },
+                { value: "元日", kana: ["かんがえる"], english: ["to consider", "to think about"] },
+            ]
+        },
+        {
+            name: "海",
+            code: "\u6D77",
+            on: [{ kana: "かい", romanji: "kai" }],
+            kun: [{ kana: "うみ", romanji: "umi" }],
+            source: "https://en.wiktionary.org/wiki/%E6%B5%B7#Kanji",
+            meanings: ["sea", "ocean"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "海", kana: ["うみ", "み", "わた", "わだ"], english: ["sea", "beach"] },
+                { value: "海外", kana: ["かいがい"], english: ["foreign", "abroad", "overseas"] },
+                { value: "北海道", kana: ["ほっかいどう"], english: ["Hokkaido"] },
+                { value: "東海", kana: ["とうかい"], english: ["region south of Tokyo on Pacific Ocean side of Japan, eastern sea"] },
+                { value: "海軍", kana: ["かいぐん"], english: ["navy"] },
+            ]
+        },
 
         //Grade 6 Kanji
 
