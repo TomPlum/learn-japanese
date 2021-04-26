@@ -11,6 +11,7 @@ import styles from "../../../styles/sass/components/learn/kanji/KanjiReadingDisp
 export interface KanjiReadingDisplayProps {
     type: ReadingType;
     readings: Reading[];
+    showRomaji: boolean;
 }
 
 interface KanjiReadingDisplayState {
@@ -68,12 +69,27 @@ class KanjiReadingDisplay extends Component<KanjiReadingDisplayProps, KanjiReadi
                         <span className={commonStyles.label}>{type}</span>
                     </Inspectable>
                     {readings.length > 0
-                        ? <span title={readings[selected].romaji}>{": " + readings[selected].kana}</span>
+                        ? <span title={readings[selected].romaji}>{this.getReadingFormatted()}</span>
                         : <span title={"This kanji has no " + type.toLowerCase() + " reading"}>: N/A</span>
                     }
                 </span>
             </div>
         );
+    }
+
+    private getReadingFormatted = (): string => {
+        const { readings, showRomaji } = this.props;
+        const { selected } = this.state;
+
+        const reading = readings[selected];
+
+        let formatted = ": " + reading.kana;
+
+        if (showRomaji) {
+            formatted += " (" + reading.romaji + ")"
+        }
+
+        return formatted;
     }
 
     private handleNext = () => {

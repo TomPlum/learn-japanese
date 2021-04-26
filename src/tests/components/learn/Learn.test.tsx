@@ -43,6 +43,7 @@ const setup = () => {
         forgot: component.getByTitle('I couldn\'t remember it'),
         next: component.getByText('Next'),
         quit: component.getByTitle('Quit'),
+        showRomaji: component.getByText('Show Rōmaji'),
         ...component
     };
 }
@@ -201,4 +202,21 @@ test('Clicking \'No\' in the confirmation modal should resume and hide the modal
     fireEvent.click(quit);
     fireEvent.click(screen.getByText('No'));
     expect(screen.queryByText('Are you sure you want to quit?')).not.toBeInTheDocument();
+});
+
+test('Clicking the \'Show Romaji\' button should invert it to \'Hide Romaji\'', () => {
+    const { showRomaji } = setup();
+    fireEvent.click(showRomaji);
+    expect(screen.getByText('Hide Rōmaji')).toBeInTheDocument();
+});
+
+test('Clicking the \'Hide Romaji\' button should invert it to \'Show Romaji\'', () => {
+    const { showRomaji } = setup();
+    fireEvent.click(showRomaji);
+
+    const hideRomaji = screen.getByText('Hide Rōmaji');
+    expect(hideRomaji).toBeInTheDocument();
+
+    fireEvent.click(hideRomaji);
+    expect(screen.getByText('Show Rōmaji')).toBeInTheDocument();
 });

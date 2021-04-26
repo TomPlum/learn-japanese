@@ -10,19 +10,19 @@ import Arrays from "../../../utility/Arrays";
 import { Example } from "../../../types/kanji/Example";
 import Viewports, { Viewport } from "../../../utility/Viewports";
 import { SizeMeProps, withSize } from "react-sizeme";
-import { CardFaceProps } from "../FlashCard";
+import { CardBackFaceProps } from "../FlashCard";
 import { Kanji } from "../../../types/kanji/Kanji";
 import KanjiReadingDisplay from "./KanjiReadingDisplay";
 import { Reading } from "../../../types/kanji/Reading";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
 
-interface KanjiFlashCardBackProps extends CardFaceProps, SizeMeProps {
+interface KanjiFlashCardBackProps extends CardBackFaceProps, SizeMeProps {
 
 }
 //TODO: Replace redundant bits with FlashCardBack component
 class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
     render() {
-        const { data, onClick } = this.props;
+        const { data, showRomaji, onClick } = this.props;
         const kanji = data as Kanji;
 
         return (
@@ -40,9 +40,17 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
                     </Col>
 
                     <Col sm={7} xs={8}>
-                        <KanjiReadingDisplay type={ReadingType.ON} readings={this.getReadings(ReadingType.ON)} />
+                        <KanjiReadingDisplay
+                            type={ReadingType.ON}
+                            showRomaji={showRomaji}
+                            readings={this.getReadings(ReadingType.ON)}
+                        />
 
-                        <KanjiReadingDisplay type={ReadingType.KUN} readings={this.getReadings(ReadingType.KUN)} />
+                        <KanjiReadingDisplay
+                            type={ReadingType.KUN}
+                            showRomaji={showRomaji}
+                            readings={this.getReadings(ReadingType.KUN)}
+                        />
 
                         <div className={styles.meaningWrapper}>
                             <p className={styles.text}>
@@ -73,7 +81,6 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
     private getReadings = (type: ReadingType): Reading[] => {
         return (this.props.data as Kanji).readings.filter(it => it.type === type);
     }
-
 
     private getExamples = (): Example[] => {
         const { data } = this.props;
