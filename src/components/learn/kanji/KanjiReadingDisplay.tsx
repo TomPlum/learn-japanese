@@ -105,7 +105,7 @@ class KanjiReadingDisplay extends Component<KanjiReadingDisplayProps, KanjiReadi
     private handleLast = () => {
         const { readings } = this.props;
         const { selected } = this.state;
-        if (selected && selected != 0) {
+        if (selected && selected !== 0) {
             this.setState({ selected: selected - 1 });
         } else {
             this.setState({ selected: readings.length - 1 });

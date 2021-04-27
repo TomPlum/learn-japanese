@@ -21,6 +21,7 @@ class KanjiDisplay extends Component<KanjiDisplayProps> {
                     <a
                         href={kanji.source}
                         target="_blank"
+                        rel="noreferrer"
                         className={[styles.value, className, styles.source].join(" ")}
                         title="Click for Wiki source"
                         style={style}

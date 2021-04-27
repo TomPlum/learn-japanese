@@ -65,13 +65,7 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
 
                 <Row className={styles.footer}>
                     <Col xs={12}>
-                        {this.getExamples().map(example => {
-                            return (
-                                <p className={styles.example} key={example.kanji}>
-                                    {example.kanji} - {example.kana[0]} - {example.english.join(", ")}
-                                </p>
-                            );
-                        })}
+                        {this.getExamples().map(example => this.getFormattedExample(example)) }
                     </Col>
                 </Row>
             </Container>
@@ -80,6 +74,21 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
 
     private getReadings = (type: ReadingType): Reading[] => {
         return (this.props.data as Kanji).readings.filter(it => it.type === type);
+    }
+
+    private getFormattedExample = (example: Example) => {
+        const { data } = this.props;
+        const kanji = example.kanji;
+        return (
+            <p className={styles.example} key={kanji}>
+                {[
+                    [...kanji].map((char: string) => {
+                        return <span className={char === data.getQuestion() ? styles.highlight : ""}>{char}</span>
+                    }),
+                    " - " + example.kana[0] + " - " + example.english.join(", ")
+                ]}
+            </p>
+        );
     }
 
     private getExamples = (): Example[] => {

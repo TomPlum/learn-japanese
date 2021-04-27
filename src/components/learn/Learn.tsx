@@ -8,6 +8,8 @@ import QuitButton from "../ui/QuitButton";
 import SessionProgressBar from "../ui/SessionProgressBar";
 import LearningFeedbackButton, { LearningFeedback } from "../ui/LearningFeedbackButton";
 import FlashCard, { CardProps } from "./FlashCard";
+import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/learn/Learn.module.scss";
 
 export interface LearnProps {
@@ -49,7 +51,7 @@ class Learn extends Component<LearnProps, LearnState> {
     }
 
     render() {
-        const { current, remaining, hasPeeked, hasRemembered, hasForgotten, paused, showRomaji } = this.state;
+        const { current, remaining, hasPeeked, hasRemembered, hasForgotten, paused, showRomaji, remembered, forgotten } = this.state;
         const { data, card } = this.props;
         const hasCardsRemaining = remaining.length > 0;
 
@@ -63,10 +65,21 @@ class Learn extends Component<LearnProps, LearnState> {
                         onDismiss={() => this.setState({ paused: false })}
                     />}
 
-                    <Row>
+                    <Row className={styles.header}>
                         <Col>
                             <QuitButton onClick={this.onQuit} className={styles.quit} />
                         </Col>
+
+                        <Col xs={2}>
+                            <FontAwesomeIcon className={styles.forgottenIcon} icon={faThumbsDown} fixedWidth />
+                            <span className={styles.forgotten} title="Forgotten">{forgotten.length}</span>
+                        </Col>
+
+                        <Col xs={2}>
+                            <FontAwesomeIcon className={styles.rememberedIcon} icon={faThumbsUp} fixedWidth />
+                            <span className={styles.remembered} title="Remembered">{remembered.length}</span>
+                        </Col>
+
                         <Col>
                             <Button
                                 className={styles.showRomaji}

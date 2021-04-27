@@ -8,6 +8,7 @@
 }
 
 @mixin example {
+  font-family: "Ciutadella Rounded", sans-serif;
   margin: 0;
 }
 
@@ -146,4 +147,8 @@
 
 .meaningWrapper {
   margin-left: 24px;
+}
+
+.highlight {
+  color: $inspect;
 }
