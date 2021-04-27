@@ -2148,7 +2148,7 @@ export function kyoiku(): KanjiData[] {
             examples: [
                 { value: "最近", kana: ["さいきん"], english: ["latest", "most recent", "nowadays"] },
                 { value: "近代", kana: ["きんだい"], english: ["present day", "modern times"] },
-                { value: "付近", kana: ["ふきん"], english: ["neighbourhood", "neighborhood", "vicinity"] },
+                { value: "付近", kana: ["ふきん"], english: ["neighbourhood", "vicinity"] },
                 { value: "近鉄", kana: ["きんてつ"], english: ["Kinki Nippon Tetsudou (railway co.)"] },
                 { value: "側近", kana: ["そっきん"], english: ["close associate", "close aide"] },
             ]
@@ -2156,13 +2156,13 @@ export function kyoiku(): KanjiData[] {
         {
             name: "画",
             code: "\u753B",
-            on: [{ kana: "が, かく", romanji: "ga, kaku" }],
-            kun: [{ kana: "", romanji: "" }],
+            on: [{ kana: "が", romanji: "ga" }, { kana: "かく", romanji: "kaku" }],
+            kun: [],
             source: "https://en.wiktionary.org/wiki/%E7%94%BB#Kanji",
             meanings: ["brush", "stroke"],
             grade: KyoikuGrade.TWO,
             examples: [
-                { value: "画", kana: ["かく"], english: ["stroke (of a kanji"] },
+                { value: "画", kana: ["かく"], english: ["stroke (of a kanji)"] },
                 { value: "映画", kana: ["えいが"], english: ["movie", "film"] },
                 { value: "計画", kana: ["けいかく"], english: ["plan", "project", "schedule", "scheme", "program"] },
                 { value: "企画", kana: ["きかく"], english: ["planning", "project", "plan", "design"] },
@@ -2172,7 +2172,7 @@ export function kyoiku(): KanjiData[] {
         {
             name: "家",
             code: "\u5BB6",
-            on: [{ kana: "け, か", romanji: "ka, ke" }],
+            on: [{ kana: "け", romanji: "ke" }, { kana: "か", romanji: "ka" }],
             kun: [{ kana: "いえ", romanji: "ie" }],
             source: "https://en.wiktionary.org/wiki/%E5%AE%B6#Kanji",
             meanings: ["house", "home"],
