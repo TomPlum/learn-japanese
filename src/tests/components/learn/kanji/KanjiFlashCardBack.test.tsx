@@ -60,9 +60,11 @@ test('Should render the kanji as a link to the source', () => {
     expect(component.getByTitle('Click for Wiki source')).toHaveAttribute('href', kanji.source);
 });
 
-test('Should render the examples with the kanji in question highlighted', () => {
+test('Should render the examples display', () => {
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />);
-    expect(getByTextWithMarkup('外国人 - がいこくじん - foreigner')).toBeInTheDocument();
+    expect(getByTextWithMarkup('外国人')).toBeInTheDocument();
+    expect(component.getByText('( がいこくじん )')).toBeInTheDocument();
+    expect(component.getByText('foreigner')).toBeInTheDocument();
 });
 
 test('Should display the meaning reading description when hovering over the \'Meaning\' text', () => {

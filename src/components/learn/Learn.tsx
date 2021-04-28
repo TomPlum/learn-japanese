@@ -70,12 +70,12 @@ class Learn extends Component<LearnProps, LearnState> {
                             <QuitButton onClick={this.onQuit} className={styles.quit} />
                         </Col>
 
-                        <Col xs={2}>
+                        <Col md={2} xs={3}>
                             <FontAwesomeIcon className={styles.forgottenIcon} icon={faThumbsDown} fixedWidth />
                             <span className={styles.forgotten} title="Forgotten">{forgotten.length}</span>
                         </Col>
 
-                        <Col xs={2}>
+                        <Col md={2} xs={3}>
                             <FontAwesomeIcon className={styles.rememberedIcon} icon={faThumbsUp} fixedWidth />
                             <span className={styles.remembered} title="Remembered">{remembered.length}</span>
                         </Col>

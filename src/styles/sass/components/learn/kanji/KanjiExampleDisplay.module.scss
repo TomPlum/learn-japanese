@@ -1,0 +1,90 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/viewports";
+
+@include phone {
+  .title {
+    font-size: 1.2em;
+  }
+
+  .kanji, .highlight  {
+    font-size: 1em;
+  }
+
+  .kana {
+    font-size: 1em;
+  }
+
+  .meaning {
+    font-size: 1em;
+  }
+}
+
+@include tablet {
+  .title {
+    font-size: 1.2em;
+  }
+
+  .kanji, .highlight  {
+    font-size: 1.2em;
+  }
+
+  .kana {
+    font-size: 1.2em;
+  }
+
+  .meaning {
+    font-size: 1.2em;
+  }
+}
+
+@include desktop {
+  .title {
+    font-size: 1.5em;
+  }
+
+  .kanji, .highlight  {
+    font-size: 1.3em;
+  }
+
+  .kana {
+    font-size: 1.3em;
+  }
+
+  .meaning {
+    font-size: 1.3em;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+.textWrapper {
+  text-align: center;
+  width: 100%;
+}
+
+.controllerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.highlight {
+  color: $inspect;
+}
+
+.example {
+  font-family: "Ciutadella Rounded", sans-serif;
+  margin: 0;
+  font-size: 1.4em;
+}
+
+.row {
+  width: 100%;
+}
+
+.kanji, .kana, .meaning, .title {
+  margin: 0;
+}
