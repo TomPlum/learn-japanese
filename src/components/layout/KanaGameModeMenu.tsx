@@ -9,7 +9,7 @@ import { GameSettings } from "../../types/game/GameSettings";
 import { Environment } from "../../utility/Environment";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
 import MenuDescription from "../ui/MenuDescription";
-import StartButton from "../ui/StartButton";
+import StartButton from "../ui/buttons/StartButton";
 import styles from "../../styles/sass/components/layout/KanaGameModeMenu.module.scss";
 
 export interface KanaGameModeMenuProps {

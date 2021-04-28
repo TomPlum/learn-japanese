@@ -1,4 +1,4 @@
-import QuitButton from "../../../components/ui/QuitButton";
+import QuitButton from "../../../../components/ui/buttons/QuitButton";
 import { fireEvent, render, screen } from "@testing-library/react";
 import React from 'react';
 

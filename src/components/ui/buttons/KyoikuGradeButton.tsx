@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { faChevronRight, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
-import styles from "../../styles/sass/components/ui/KyoikuGradeButton.module.scss";
+import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import styles from "../../../styles/sass/components/ui/buttons/KyoikuGradeButton.module.scss";
 
 interface KyoikuGradeButtonProps {
     grade: KyoikuGrade;

@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import StartButton from "../../../components/ui/StartButton";
+import StartButton from "../../../../components/ui/buttons/StartButton";
 
 const onClickHandler = jest.fn();
 

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import LearningFeedbackButton, { LearningFeedback, LearningFeedbackButtonProps } from "../../../components/ui/LearningFeedbackButton";
+import LearningFeedbackButton, { LearningFeedback, LearningFeedbackButtonProps } from "../../../../components/ui/buttons/LearningFeedbackButton";
 
 const onClickHandler = jest.fn();
 

@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { faForward } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SizeMeProps, withSize } from "react-sizeme";
-import styles from "../../styles/sass/components/ui/SkipButton.module.scss";
+import styles from "../../../styles/sass/components/ui/buttons/SkipButton.module.scss";
 
 export interface SkipButtonProps extends SizeMeProps {
     disabled?: boolean;

@@ -2,8 +2,8 @@ import { Component } from "react";
 import { Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGamepad, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
-import { AppMode } from "../../types/AppMode";
-import menuStyles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
+import { AppMode } from "../../../types/AppMode";
+import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
 
 export interface AppModeButtonProps {
     onClick: (mode: AppMode) => void;

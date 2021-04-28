@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { DisplaySettings } from "../../../types/game/GameSettings";
 import { DisplayType } from "../../../types/game/DisplayType";
-import DisplayTypeButton from "../../ui/DisplayTypeButton";
+import DisplayTypeButton from "../../ui/buttons/DisplayTypeButton";
 import { faChevronRight, faFont, faGripVertical, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { Col, Form, Row } from "react-bootstrap";
 import { Environment } from "../../../utility/Environment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import KanaQuantityButton from "../../ui/KanaQuantityButton";
+import KanaQuantityButton from "../../ui/buttons/KanaQuantityButton";
 import styles from "../../../styles/sass/components/settings/kana/DisplaySettingsForm.module.scss";
 
 export interface DisplaySettingsFormProps {

@@ -6,7 +6,7 @@ import { Environment } from "../../utility/Environment";
 import styles from "../../styles/sass/components/learn/LearnKanaMenu.module.scss";
 import MenuDescription from "../ui/MenuDescription";
 import LearnTopicButton from "./LearnTopicButton";
-import StartButton from "../ui/StartButton";
+import StartButton from "../ui/buttons/StartButton";
 import Arrays from "../../utility/Arrays";
 import { LearningSessionSettings } from "../../types/learn/LearningSessionSettings";
 

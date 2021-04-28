@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import ThemeButton from "../../../components/ui/ThemeButton";
+import ThemeButton from "../../../../components/ui/buttons/ThemeButton";
 
 test('The button should default to dark mode and therefore show the light mode text and icon', () => {
     render(<ThemeButton />);

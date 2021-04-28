@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Container, Row } from "react-bootstrap";
-import FlashCardResetButton from "../ui/FlashCardResetButton";
+import FlashCardResetButton from "../ui/buttons/FlashCardResetButton";
 import styles from "../../styles/sass/components/learn/FlashCardBack.module.scss"
 
 export interface FlashCardBackProps {
