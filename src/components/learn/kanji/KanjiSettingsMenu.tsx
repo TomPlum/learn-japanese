@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { faGraduationCap, faLeaf, faMountain, faPaintBrush, faPlay, faRandom, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import KyoikuGradeButton from "../../layout/KyoikuGradeButton";
+import KyoikuGradeButton from "../../ui/KyoikuGradeButton";
 import Arrays from "../../../utility/Arrays";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
