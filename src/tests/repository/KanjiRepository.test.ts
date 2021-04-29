@@ -3,6 +3,7 @@ import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 import { kyoiku, joyo } from "../../data/Kanji";
 import each from "jest-each";
 import { KanjiData } from "../../data/DataTypes";
+import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 
 jest.mock("../../data/Kanji.ts");
 
@@ -27,10 +28,16 @@ beforeEach(() => {
         ]
     };
 
-    let exampleKyoikuKanji2 = exampleKyoikuKanji6;
+    let exampleKyoikuKanji1 =  { ...exampleKyoikuKanji6 };
+    exampleKyoikuKanji1.grade = KyoikuGrade.ONE;
+
+    let exampleKyoikuKanji2 = { ...exampleKyoikuKanji6 };
     exampleKyoikuKanji2.grade = KyoikuGrade.TWO;
 
-    mockKyoiku.mockReturnValue([exampleKyoikuKanji6, exampleKyoikuKanji2]);
+    let exampleKyoikuKanji3 = { ...exampleKyoikuKanji6 };
+    exampleKyoikuKanji3.grade = KyoikuGrade.THREE;
+
+    mockKyoiku.mockReturnValue([exampleKyoikuKanji1, exampleKyoikuKanji2, exampleKyoikuKanji3, exampleKyoikuKanji6]);
 
     const exampleJoyoKanji = {
         name: "猫",
@@ -50,6 +57,13 @@ beforeEach(() => {
     };
 
     mockJoyo.mockReturnValue([exampleJoyoKanji, exampleJoyoKanji, exampleJoyoKanji, exampleJoyoKanji]);
+
+    RandomNumberGenerator.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
+        const objects = [...array];
+        const firstKana = objects[0];
+        objects.splice(0, 1);
+        return [firstKana, objects];
+    });
 });
 
 describe("Kanji Repository", () => {
@@ -73,7 +87,7 @@ describe("Kanji Repository", () => {
     });
 
     it("Should return the specified quantity of Kyoiku Kanji when requested with no Joyo", () => {
-        const settings: KanjiSettings = { joyo: false, grades: [KyoikuGrade.TWO, KyoikuGrade.SIX], quantity: 1 };
+        const settings: KanjiSettings = { joyo: false, grades: [], quantity: 1 };
         const response = repository.read(settings);
         expect(response).toHaveLength(1);
     });
@@ -82,6 +96,12 @@ describe("Kanji Repository", () => {
         const settings: KanjiSettings = { grades: [KyoikuGrade.TWO, KyoikuGrade.SIX] };
         const response = repository.read(settings);
         expect(response).toHaveLength(2);
+    });
+
+    it("Should return N random Kyoiku kanji when both grades and quantity are specified", () => {
+        const settings: KanjiSettings = { grades: [KyoikuGrade.ONE, KyoikuGrade.SIX], quantity: 2 };
+        const response = repository.read(settings);
+        expect(response.map(it => it.grade)).toStrictEqual([KyoikuGrade.ONE, KyoikuGrade.SIX]);
     });
 
     it("Should return all Joyo Kanji if they are not specified, but also no Kyoiku grades are specified", () => {

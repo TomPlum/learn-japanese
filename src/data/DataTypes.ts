@@ -71,5 +71,5 @@ export interface AdjectiveData {
     kana: string;
     kanjiForm?: string;
     type: AdjectiveType;
-
+    genkiLesson?: number;
 }

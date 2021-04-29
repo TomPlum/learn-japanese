@@ -13,7 +13,7 @@ const setup = () => {
         grade4: component.getByText('Grade 4'),
         grade5: component.getByText('Grade 5'),
         grade6: component.getByText('Grade 6'),
-        random: component.getByText('Random 50'),
+        quantity: component.getByPlaceholderText('Quantity'),
         submit: component.getByText('Start'),
         ...component
     }
@@ -50,11 +50,6 @@ test('Un-selecting a grade should remove it from the selection and update the de
    expect(screen.getByText('Selected 80 Kanji')).toBeInTheDocument();
 });
 
-test('Clicking Random 50 should change the description', () => {
-   const { random } = setup();
-   fireEvent.click(random);
-   expect(screen.getByText('Selected 50 random kanji from all grades.')).toBeInTheDocument();
-});
 
 test('Start button should be disabled on load', () => {
     const { submit } = setup();
@@ -74,12 +69,6 @@ test('Selecting multiple grades should enable the submit button', () => {
     expect(submit).not.toBeDisabled();
 });
 
-test('Selecting Random 50 should enable the submit button', () => {
-    const { submit, random } = setup();
-    fireEvent.click(random)
-    expect(submit).not.toBeDisabled();
-});
-
 test('Clicking start with Kyoiku kanji selected should call the onSelected event handler with the selected grades', () => {
     const { submit, grade1 } = setup();
     fireEvent.click(grade1);
@@ -87,9 +76,61 @@ test('Clicking start with Kyoiku kanji selected should call the onSelected event
     expect(onSelectedHandler).toHaveBeenCalledWith({ kanji: { grades: [KyoikuGrade.ONE], quantity: undefined, joyo: false } });
 });
 
-test('Clicking start with Random 50 selected should call the onSelected event handler with the correct settings', () => {
-    const { submit, random } = setup();
-    fireEvent.click(random);
+test('Entering a valid quantity should enable the submit button', () => {
+    const { submit, quantity } = setup();
+    fireEvent.change(quantity, { target: { value: 10 }});
+    expect(submit).not.toBeDisabled();
+});
+
+test('Entering an invalid quantity should NOT enable the submit button', () => {
+    const { submit, quantity } = setup();
+    fireEvent.change(quantity, { target: { value: "a" }});
+    expect(submit).toBeDisabled();
+});
+
+test('Clicking start with a quantity selected should call the onSelected event handler with the quantity', () => {
+    const { submit, quantity } = setup();
+    fireEvent.change(quantity, { target: { value: 10 }});
     fireEvent.click(submit);
-    expect(onSelectedHandler).toHaveBeenCalledWith({ kanji: { grades: [], quantity: 50, joyo: true } });
+    expect(onSelectedHandler).toHaveBeenCalledWith({ kanji: { grades: [], quantity: 10, joyo: false } });
+});
+
+test('Clicking start with a quantity and grade selected should call the onSelected event handler with both', () => {
+    const { grade1, submit, quantity } = setup();
+    fireEvent.change(quantity, { target: { value: 10 }});
+    fireEvent.click(grade1);
+    fireEvent.click(submit);
+    expect(onSelectedHandler).toHaveBeenCalledWith({ kanji: { grades: [KyoikuGrade.ONE], quantity: 10, joyo: false } });
+});
+
+test('Selecting all grades with a quantity specified should render the correct description', () => {
+    const { grade1, grade2, grade3, grade4, grade5, grade6, quantity } = setup();
+
+    fireEvent.click(grade1);
+    fireEvent.click(grade2);
+    fireEvent.click(grade3);
+    fireEvent.click(grade4);
+    fireEvent.click(grade5);
+    fireEvent.click(grade6);
+    fireEvent.change(quantity, { target: { value: 10 }});
+
+    expect(screen.getByText('Selected 10 random kanji from all grades.')).toBeInTheDocument();
+});
+
+test('Selecting more than 1 grade with a quantity specified should render the correct description', () => {
+    const { grade1, grade2, grade3, quantity } = setup();
+
+    fireEvent.click(grade1);
+    fireEvent.click(grade2);
+    fireEvent.click(grade3);
+    fireEvent.change(quantity, { target: { value: 25 }});
+
+    expect(screen.getByText('Selected 25 random kanji from grades 1, 2 & 3.')).toBeInTheDocument();
+});
+
+test('Selecting exactly 1 grade with a quantity specified should render the correct description', () => {
+    const { grade1, quantity } = setup();
+    fireEvent.click(grade1);
+    fireEvent.change(quantity, { target: { value: 15 }});
+    expect(screen.getByText('Selected 15 random kanji from grade 1.')).toBeInTheDocument();
 });
