@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import SkipButton from "../../../components/ui/SkipButton";
+import SkipButton from "../../../../components/ui/buttons/SkipButton";
 import each from "jest-each";
 
 const onClickHandler = jest.fn();

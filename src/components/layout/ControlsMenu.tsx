@@ -4,9 +4,9 @@ import { faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FontSelector from "./FontSelector";
 import HashLink from "./HashLink";
-import ThemeButton from "../ui/ThemeButton";
+import ThemeButton from "../ui/buttons/ThemeButton";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
-import AppModeButton from "../ui/AppModeButton";
+import AppModeButton from "../ui/buttons/AppModeButton";
 import { AppMode } from "../../types/AppMode";
 
 export interface ControlsMenuProps {

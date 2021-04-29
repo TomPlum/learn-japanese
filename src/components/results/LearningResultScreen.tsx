@@ -3,7 +3,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEraser } from "@fortawesome/free-solid-svg-icons";
 import LearningSessionResult from "../../types/learn/LearningSessionResult";
-import QuitButton from "../ui/QuitButton";
+import QuitButton from "../ui/buttons/QuitButton";
 import styles from "../../styles/sass/components/results/LearningResultScreen.module.scss";
 import Learnable from "../../types/learn/Learnable";
 

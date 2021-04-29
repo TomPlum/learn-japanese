@@ -1,12 +1,13 @@
 import { Component } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { faGraduationCap, faLeaf, faMountain, faPaintBrush, faPlay, faRandom, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
+import { Button, Col, Container, FormControl, InputGroup, Row } from "react-bootstrap";
+import { faBalanceScale, faGraduationCap, faLeaf, faMountain, faPaintBrush, faPlay, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import KyoikuGradeButton from "../../layout/KyoikuGradeButton";
+import KyoikuGradeButton from "../../ui/buttons/KyoikuGradeButton";
 import Arrays from "../../../utility/Arrays";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
 import { CustomLearnMenuProps } from "../LearnMenu";
+import TemplateString from "../../../types/TemplateString";
 
 interface KanjiSettingsMenuState {
     grades: KyoikuGrade[];
@@ -101,9 +102,18 @@ class KanjiSettingsMenu extends Component<CustomLearnMenuProps, KanjiSettingsMen
 
                 <Row>
                     <Col>
-                        <Button className={styles.randomise} block variant="primary" onClick={this.onSelectRandom}>
-                            <FontAwesomeIcon icon={faRandom} /> Random 50
-                        </Button>
+                        <InputGroup>
+                            <InputGroup.Prepend>
+                                <InputGroup.Text><FontAwesomeIcon icon={faBalanceScale} fixedWidth /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <FormControl
+                                id="quantity"
+                                placeholder="Quantity"
+                                className={styles.quantity}
+                                type="number"
+                                onChange={(e) => this.setState({ quantity: Number(e.target.value) })}
+                            />
+                        </InputGroup>
                     </Col>
                 </Row>
 
@@ -130,10 +140,7 @@ class KanjiSettingsMenu extends Component<CustomLearnMenuProps, KanjiSettingsMen
         } else {
             this.setState({ grades: grades.concat(grade) });
         }
-        this.setState({ quantity: undefined });
     }
-
-    onSelectRandom = () => this.setState({ quantity: 50, joyo: true, grades: [] })
 
     private onConfirmSelected = () => {
         const { grades, quantity, joyo } = this.state;
@@ -148,10 +155,23 @@ class KanjiSettingsMenu extends Component<CustomLearnMenuProps, KanjiSettingsMen
 
     private getDescription = () => {
         const { grades, quantity } = this.state;
-        if (grades.length > 0){
-            return <span>Selected {Arrays.sum(grades.map(it => it.quantity))} Kanji</span>;
+
+        const template = new TemplateString("Selected {0} random kanji from {1}.");
+
+        if (grades.length > 0) {
+            if (quantity) {
+                if (grades.length > 1) {
+                    if (grades.length == 6) {
+                        return template.format(quantity, "all grades");
+                    }
+                    const gradeNumbers = Arrays.copy(grades).splice(0, grades.length - 1).map(it => it.value).join(", ");
+                    return template.format(quantity, "grades " + gradeNumbers + " & " + grades[grades.length - 1].value);
+                }
+                return template.format(quantity, "grade " + grades[0].value);
+            }
+            return "Selected " + Arrays.sum(grades.map(it => it.quantity)) + " Kanji";
         } else if (quantity && quantity > 0) {
-            return "Selected " + quantity + " random kanji from all grades.";
+            return template.format(quantity, "all grades");
         } else {
             return "Choose one or many grades below to begin.";
         }

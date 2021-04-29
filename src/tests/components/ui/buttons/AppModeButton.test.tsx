@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import AppModeButton from "../../../components/ui/AppModeButton";
-import { AppMode } from "../../../types/AppMode";
+import AppModeButton from "../../../../components/ui/buttons/AppModeButton";
+import { AppMode } from "../../../../types/AppMode";
 
 const onClickHandler = jest.fn();
 

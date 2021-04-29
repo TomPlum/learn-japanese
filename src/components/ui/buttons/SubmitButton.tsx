@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../styles/sass/components/ui/SubmitButton.module.scss";
+import styles from "../../../styles/sass/components/ui/buttons/SubmitButton.module.scss";
 
 interface SubmitButtonProps {
     disabled?: boolean;

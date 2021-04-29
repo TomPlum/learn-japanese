@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import GameResult from "../../types/game/GameResult";
-import QuitButton from "../ui/QuitButton";
+import QuitButton from "../ui/buttons/QuitButton";
 import Feedback from "./Feedback";
 import styles from "../../styles/sass/components/results/GameResultScreen.module.scss";
 

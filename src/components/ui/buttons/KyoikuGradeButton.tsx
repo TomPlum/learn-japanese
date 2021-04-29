@@ -1,15 +1,15 @@
 import { Component } from "react";
-import styles from "../../styles/sass/components/layout/KyoikuGradeButton.module.scss";
 import { faChevronRight, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
+import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import styles from "../../../styles/sass/components/ui/buttons/KyoikuGradeButton.module.scss";
 
 interface KyoikuGradeButtonProps {
     grade: KyoikuGrade;
     iconColour?: string;
     icon?: IconDefinition;
-    onClick: (grade: KyoikuGrade) => void;
     isSelected: boolean;
+    onClick: (grade: KyoikuGrade) => void;
 }
 
 class KyoikuGradeButton extends Component<KyoikuGradeButtonProps> {
@@ -18,11 +18,6 @@ class KyoikuGradeButton extends Component<KyoikuGradeButtonProps> {
         this.state = {
             isSelected: false
         }
-    }
-
-    handleClick = () => {
-        const { grade, onClick } = this.props;
-        onClick(grade);
     }
 
     render() {
@@ -36,6 +31,11 @@ class KyoikuGradeButton extends Component<KyoikuGradeButtonProps> {
                 <span className={styles.text}> Grade {grade.value}</span>
             </button>
         );
+    }
+
+    private handleClick = () => {
+        const { grade, onClick } = this.props;
+        onClick(grade);
     }
 }
 

@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import FlashCardResetButton from "../../../components/ui/FlashCardResetButton";
+import FlashCardResetButton from "../../../../components/ui/buttons/FlashCardResetButton";
 
 const onClickHandler = jest.fn();
 

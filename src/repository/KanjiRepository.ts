@@ -7,6 +7,7 @@ import { KanjiData, KanjiExample, KanjiReading } from "../data/DataTypes";
 import { joyo, kyoiku } from "../data/Kanji";
 import { LearnSettings } from "../types/learn/LearningSessionSettings";
 import Repository from "./Repository";
+import { RandomNumberGenerator } from "../utility/RandomNumberGenerator";
 
 export interface KanjiSettings extends LearnSettings {
     grades?: KyoikuGrade[];
@@ -28,14 +29,27 @@ export class KanjiRepository implements Repository<Kanji> {
             return this.convert(joyo());
         }
 
+        if (settings.quantity && settings.grades && settings.grades.length > 0) {
+            let kanji: Kanji[] = [];
+
+            let availableKanji = this.convert(kyoiku().filter(data => settings.grades?.includes(data.grade)));
+
+            for (let i = 0; i < settings.quantity; i++) {
+                const [randomKanji, remainingKanji] = RandomNumberGenerator.getRandomObject(availableKanji);
+                availableKanji = remainingKanji;
+                kanji.push(randomKanji);
+            }
+
+            return kanji;
+        }
+
         if (settings.quantity) {
             const data = kyoiku().splice(0, settings.quantity);
             return this.convert(data);
         }
 
         if (settings.grades && settings.grades.length > 0) {
-            // @ts-ignore
-            const data = kyoiku().filter(entry => settings.grades.map(it => it.value).includes(entry.grade.value));
+            const data = kyoiku().filter(entry => settings.grades?.map(it => it.value).includes(entry.grade.value));
             return this.convert(data);
         }
 

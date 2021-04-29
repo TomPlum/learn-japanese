@@ -1,9 +1,9 @@
 import { Component } from "react";
-import { Theme } from "../../types/Theme";
+import { Theme } from "../../../types/Theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { Nav } from "react-bootstrap";
-import menuStyles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
+import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
 
 export interface ThemeButtonProps {
     className?: string;

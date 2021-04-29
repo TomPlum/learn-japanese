@@ -2,7 +2,7 @@ import { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
-import styles from "../../styles/sass/components/ui/StartButton.module.scss";
+import styles from "../../../styles/sass/components/ui/buttons/StartButton.module.scss";
 
 export interface StartButtonProps {
     onClick: () => void;

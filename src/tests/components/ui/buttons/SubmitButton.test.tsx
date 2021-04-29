@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import SubmitButton from "../../../components/ui/SubmitButton";
+import SubmitButton from "../../../../components/ui/buttons/SubmitButton";
 
 const onClickHandler = jest.fn();
 

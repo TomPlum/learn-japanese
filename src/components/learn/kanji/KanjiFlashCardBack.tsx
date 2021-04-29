@@ -6,23 +6,17 @@ import Inspectable from "../../ui/Inspectable";
 import { Environment } from "../../../utility/Environment";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Arrays from "../../../utility/Arrays";
-import { Example } from "../../../types/kanji/Example";
-import Viewports, { Viewport } from "../../../utility/Viewports";
-import { SizeMeProps, withSize } from "react-sizeme";
-import { CardFaceProps } from "../FlashCard";
+import { CardBackFaceProps } from "../FlashCard";
 import { Kanji } from "../../../types/kanji/Kanji";
 import KanjiReadingDisplay from "./KanjiReadingDisplay";
 import { Reading } from "../../../types/kanji/Reading";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
+import KanjiExampleDisplay from "./KanjiExampleDisplay";
 
-interface KanjiFlashCardBackProps extends CardFaceProps, SizeMeProps {
-
-}
 //TODO: Replace redundant bits with FlashCardBack component
-class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
+class KanjiFlashCardBack extends Component<CardBackFaceProps> {
     render() {
-        const { data, onClick } = this.props;
+        const { data, showRomaji, onClick } = this.props;
         const kanji = data as Kanji;
 
         return (
@@ -40,9 +34,17 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
                     </Col>
 
                     <Col sm={7} xs={8}>
-                        <KanjiReadingDisplay type={ReadingType.ON} readings={this.getReadings(ReadingType.ON)} />
+                        <KanjiReadingDisplay
+                            type={ReadingType.ON}
+                            showRomaji={showRomaji}
+                            readings={this.getReadings(ReadingType.ON)}
+                        />
 
-                        <KanjiReadingDisplay type={ReadingType.KUN} readings={this.getReadings(ReadingType.KUN)} />
+                        <KanjiReadingDisplay
+                            type={ReadingType.KUN}
+                            showRomaji={showRomaji}
+                            readings={this.getReadings(ReadingType.KUN)}
+                        />
 
                         <div className={styles.meaningWrapper}>
                             <p className={styles.text}>
@@ -57,13 +59,7 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
 
                 <Row className={styles.footer}>
                     <Col xs={12}>
-                        {this.getExamples().map(example => {
-                            return (
-                                <p className={styles.example} key={example.kanji}>
-                                    {example.kanji} - {example.kana[0]} - {example.english.join(", ")}
-                                </p>
-                            );
-                        })}
+                        <KanjiExampleDisplay kanji={kanji} />
                     </Col>
                 </Row>
             </Container>
@@ -74,29 +70,6 @@ class KanjiFlashCardBack extends Component<KanjiFlashCardBackProps> {
         return (this.props.data as Kanji).readings.filter(it => it.type === type);
     }
 
-
-    private getExamples = (): Example[] => {
-        const { data } = this.props;
-        const kanji = data as Kanji;
-        const viewport = Viewports.fromFlashCardWidth(this.props.size.width);
-        let examplesQuantity: number;
-        switch (viewport) {
-            case Viewport.PHONE: {
-                examplesQuantity = 3;
-                break;
-            }
-            case Viewport.TABLET: {
-                examplesQuantity = 4;
-                break;
-            }
-            case Viewport.DESKTOP: {
-                examplesQuantity = 5;
-                break;
-            }
-            default: examplesQuantity = 3;
-        }
-        return Arrays.getRandomElements(kanji.examples, examplesQuantity);
-    }
 }
 
-export default withSize()(KanjiFlashCardBack);
+export default KanjiFlashCardBack;
