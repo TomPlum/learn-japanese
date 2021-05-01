@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import SentenceStructureFlashCardFront from "../../../../components/learn/sentence/SentenceStructureFlashCardFront";
 import Adjective from "../../../../types/sentence/Adjective";
-import { AdjectiveType } from "../../../../types/kana/AdjectiveType";
+import { AdjectiveType } from "../../../../types/sentence/AdjectiveType";
 
 const onClickHandler = jest.fn();
 

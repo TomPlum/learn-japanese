@@ -1,5 +1,5 @@
 import Adjective from "../../../types/sentence/Adjective";
-import { AdjectiveType } from "../../../types/kana/AdjectiveType";
+import { AdjectiveType } from "../../../types/sentence/AdjectiveType";
 
 describe("Adjective Data Object", () => {
 

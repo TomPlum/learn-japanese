@@ -2,7 +2,7 @@ import SentenceStructureRepository from "../../repository/SentenceStructureRepos
 import { LearnSentenceStructureSettings } from "../../types/learn/LearningSessionSettings";
 import { AdjectiveData } from "../../data/DataTypes";
 import { adjectives } from "../../data/SentenceStructure";
-import { AdjectiveType } from "../../types/kana/AdjectiveType";
+import { AdjectiveType } from "../../types/sentence/AdjectiveType";
 import Adjective from "../../types/sentence/Adjective";
 
 jest.mock("../../data/SentenceStructure");

@@ -1,4 +1,4 @@
-import { AdjectiveType } from "../kana/AdjectiveType";
+import { AdjectiveType } from "./AdjectiveType";
 import { SentenceStructureLearnable } from "../learn/CommonLearnable";
 
 export default class Adjective implements SentenceStructureLearnable {

@@ -1,7 +1,8 @@
 import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 import { KanaColumn } from "../types/kana/KanaColumn";
 import { CounterGroup } from "../types/numbers/CounterGroup";
-import { AdjectiveType } from "../types/kana/AdjectiveType";
+import { AdjectiveType } from "../types/sentence/AdjectiveType";
+import { VerbType } from "../types/sentence/VerbType";
 
 export interface KanaData {
     name: string;
@@ -66,10 +67,17 @@ export interface CounterData extends NumbersData {
     example: { kana: string, english: string };
 }
 
-export interface AdjectiveData {
+interface SentenceStructureData {
     meanings: string[];
     kana: string;
     kanjiForm?: string;
-    type: AdjectiveType;
     genkiLesson?: number;
+}
+
+export interface AdjectiveData extends SentenceStructureData {
+    type: AdjectiveType;
+}
+
+export interface VerbData extends SentenceStructureData {
+    type: VerbType;
 }

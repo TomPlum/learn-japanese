@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import Adjective from "../../../../types/sentence/Adjective";
-import { AdjectiveType } from "../../../../types/kana/AdjectiveType";
+import { AdjectiveType } from "../../../../types/sentence/AdjectiveType";
 import SentenceStructureFlashCardBack from "../../../../components/learn/sentence/SentenceStructureFlashCardBack";
 
 const onResetHandler = jest.fn();
