@@ -2249,6 +2249,167 @@ export function kyoiku(): KanjiData[] {
                 { value: "海軍", kana: ["かいぐん"], english: ["navy"] },
             ]
         },
+        {
+            name: "売",
+            code: "\u58F2",
+            on: [{ kana: "ばい", romanji: "bai" }],
+            kun: [{ kana: "うる", romanji: "uru" }, { kana: "うれる", romanji: "ureru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A3%B2#Kanji",
+            meanings: ["sell"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "販売", kana: ["はんばい"], english: ["sales", "selling", "marketing"] },
+                { value: "売り", kana: ["うり"], english: ["sale", "selling", "selling point", "gimmick"] },
+                { value: "売る", kana: ["うる"], english: ["to sell"] },
+                { value: "売買", kana: ["ばいばい"], english: ["trade", "buying and selling"] },
+                { value: "発売", kana: ["はつばい"], english: ["sale", "offering for sale", "release (for sale)"] },
+            ]
+        },
+        {
+            name: "道",
+            code: "\u9053",
+            on: [{ kana: "どう", romanji: "dō" }, { kana: "とう", romanji: "tō" }],
+            kun: [{ kana: "みち", romanji: "michi" }],
+            source: "https://en.wiktionary.org/wiki/%E9%81%93#Kanji",
+            meanings: ["road", "street", "district", "journey", "course"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "道", kana: ["みち"], english: ["road", "street", "way", "path", "course", "route", "lane"] },
+                { value: "報道", kana: ["ほうどう"], english: ["information", "report", "journalism"] },
+                { value: "北海道", kana: ["ほっかいどう"], english: ["Hokkaido"] },
+                { value: "道路", kana: ["どうろ"], english: ["road", "highway"] },
+                { value: "鉄道", kana: ["てつどう"], english: ["railroad"] },
+            ]
+        },
+        {
+            name: "朝",
+            code: "\u671D",
+            on: [{ kana: "ちょう", romanji: "chō" }],
+            kun: [{ kana: "あさ", romanji: "asa" }],
+            source: "https://en.wiktionary.org/wiki/%E6%9C%9D#Kanji",
+            meanings: ["morning", "dynasty", "regime", "epoch", "period", "(North) Korea"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "朝", kana: ["あさ", "あした"], english: ["morning"] },
+                { value: "北朝鮮", kana: ["きたちょうせん"], english: ["North Korea"] },
+                { value: "朝鮮", kana: ["ちょうせん"], english: ["Korea"] },
+                { value: "朝鮮民主主義人民共和国", kana: ["ちょうせんみんし\n" +
+                    "ゅしゅぎじんみんきょうわこく"], english: ["Democratic People’s Republic of Korea (North Korea), DPRK"] },
+                { value: "朝鮮半島", kana: ["ちょうせんはんとう"], english: ["Korean peninsula"] },
+            ]
+        },
+        {
+            name: "広",
+            code: "\u5E83",
+            on: [{ kana: "こう", romanji: "kō" }],
+            kun: [{ kana: "ひろい", romanji: "hiroi" }, { kana: "ひろまる", romanji: "hiromaru" }, { kana: "ひろめる", romanji: "hiromeru" }, { kana: "ひろがる", romanji: "hirogaru" }, { kana: "ひろげる", romanji: "hirogeru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BA%83#Kanji",
+            meanings: ["wide", "broad", "spacious"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "広い", kana: ["ひろい"], english: ["spacious", "vast", "wide"] },
+                { value: "広がり", kana: ["ひろがり"], english: ["spread", "span"] },
+                { value: "広告", kana: ["こうこく"], english: ["advertisement"] },
+                { value: "広げる", kana: ["ひろげる"], english: ["to spread", "to extend", "to expand", "to enlarge"] },
+                { value: "広がった枝", kana: ["ひろがったえだ"], english: ["spreading branches"] },
+            ]
+        },
+        {
+            name: "工",
+            code: "\u5DE5",
+            on: [{ kana: "こう", romanji: "kō" }, { kana: "く", romanji: "ku" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E5%B7%A5#Kanji",
+            meanings: ["craft", "construction", "katakana e radical (no.48)"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "工場", kana: ["こうじょう", "こうば"], english: ["factory", "plant, mill", "workshop"] },
+                { value: "工業", kana: ["こうぎょう"], english: ["(manufacturing) industry"] },
+                { value: "工事", kana: ["こうじ"], english: ["construction work"] },
+                { value: "工作", kana: ["こうさく"], english: ["work", "construction", "handicraft", "maneuvering"] },
+                { value: "加工", kana: ["かこう"], english: ["manufacturing", "processing", "treatment"] },
+            ]
+        },
+        {
+            name: "知",
+            code: "\u77E5",
+            on: [{ kana: "ち", romanji: "chi" }],
+            kun: [{ kana: "しる", romanji: "shiru" }],
+            source: "https://en.wiktionary.org/wiki/%E7%9F%A5#Kanji",
+            meanings: ["know", "wisdom"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "知る", kana: ["しる"], english: ["to know", "to understand", "to be acquainted with"] },
+                { value: "知事", kana: ["ちじ"], english: ["prefectural governor"] },
+                { value: "知らん顔", kana: ["しらんかお"], english: ["unconcerned air", "indifference"] },
+                { value: "県知事", kana: ["けんちじ"], english: ["prefectural governor"] },
+                { value: "知識", kana: ["ちしき"], english: ["knowledge", "information"] },
+            ]
+        },
+        {
+            name: "計",
+            code: "\u8A08",
+            on: [{ kana: "けい", romanji: "kei" }],
+            kun: [{ kana: "はかる", romanji: "hakaru" }, { kana: "はからう", romanji: "hakarau" }],
+            source: "https://en.wiktionary.org/wiki/%E8%A8%88#Kanji",
+            meanings: ["plot", "plan", "scheme", "measure"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "計", kana: ["けい"], english: ["plan", "meter", "measuring device"] },
+                { value: "計画", kana: ["けいかく"], english: ["plan", "project", "schedule", "scheme", "program"] },
+                { value: "合計", kana: ["ごうけい"], english: ["sum total", "total amount"] },
+                { value: "設計", kana: ["せっけい"], english: ["plan, design", "layout"] },
+                { value: "計算", kana: ["けいさん"], english: ["calculation", "reckoning", "count", "forecast"] },
+            ]
+        },
+        {
+            name: "台",
+            code: "\u53F0",
+            on: [{ kana: "だい", romanji: "dai" }, { kana: "たい", romanji: "tai" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E5%8F%B0#Kanji",
+            meanings: ["pedestal", "a stand", "counter for machines and vehicles"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "台", kana: ["だい"], english: ["stand", "rack", "table", "support", "belt"] },
+                { value: "台湾", kana: ["たいわん"], english: ["Taiwan"] },
+                { value: "舞台", kana: ["ぶたい"], english: ["stage (theatre, theater)"] },
+                { value: "台風", kana: ["たいふう"], english: ["typhoon, hurricane"] },
+                { value: "台所", kana: ["だいどころ", "だいどこ"], english: ["kitchen"] },
+            ]
+        },
+        {
+            name: "少",
+            code: "\u5C11",
+            on: [{ kana: "しょう", romanji: "shō" }],
+            kun: [{ kana: "すくない", romanji: "sukunai" }, { kana: " すこし", romanji: "sukoshi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B0%91#Kanji",
+            meanings: ["few", "little"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "少し", kana: ["すこし"], english: ["small quantity", "little", "few, something"] },
+                { value: "少なくとも", kana: ["すくなくとも"], english: ["at least"] },
+                { value: "少年", kana: ["しょうねん"], english: ["boys, juveniles"] },
+                { value: "減少", kana: ["げんしょう"], english: ["decrease, reduction, decline"] },
+                { value: "少数", kana: ["しょうすう"], english: ["minority, few"] },
+            ]
+        },
+        {
+            name: "止",
+            code: "\u6B62",
+            on: [{ kana: "し", romanji: "shi" }],
+            kun: [{ kana: "とまる", romanji: "tomaru" }, { kana: " とめる", romanji: "tomeru" }],
+            source: "https://en.wiktionary.org/wiki/%E6%AD%A2#Kanji",
+            meanings: ["stop", "halt"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "禁止", kana: ["きんし"], english: ["prohibition", "inhibition", "ban"] },
+                { value: "停止", kana: ["ていし"], english: ["suspension", "interruption", "stoppage", "ban"] },
+                { value: "防止", kana: ["ぼうし"], english: ["prevention", "check"] },
+                { value: "中止", kana: ["ちゅうし"], english: ["suspension", "stoppage", "discontinuance"] },
+                { value: "廃止", kana: ["はいし"], english: ["abolition", "repeal"] },
+            ]
+        },
 
         //Grade 6 Kanji
 
