@@ -1,14 +1,14 @@
-import { AdjectiveType } from "./AdjectiveType";
 import { SentenceStructureLearnable } from "../learn/CommonLearnable";
+import { VerbType } from "./VerbType";
 
-export default class Adjective implements SentenceStructureLearnable {
+export default class Verb implements SentenceStructureLearnable {
 
     private readonly meanings: string[];
     private readonly kanjiVariant: string | undefined;
-    private readonly type: AdjectiveType;
+    private readonly type: VerbType;
     private readonly kana: string;
 
-    constructor(meanings: string[], kanjiVariant: string | undefined, type: AdjectiveType, kana: string) {
+    constructor(meanings: string[], kanjiVariant: string | undefined, type: VerbType, kana: string) {
         this.meanings = meanings;
         this.kanjiVariant = kanjiVariant;
         this.type = type;
@@ -20,7 +20,7 @@ export default class Adjective implements SentenceStructureLearnable {
     }
 
     getTitle(): string {
-        return this.type + " Adjective";
+        return this.type + " Verb";
     }
 
     getKana(): string {

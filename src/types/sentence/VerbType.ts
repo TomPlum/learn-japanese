@@ -1,14 +1,14 @@
 export enum VerbType {
-    RU,
-    U,
-    TSU,
-    RU_U,
-    MU,
-    BU,
-    NU,
-    KU,
-    KU_EXCEPTIONAL,
-    GU,
-    SU,
-    IRREGULAR
+    RU = "る",
+    U = "う",
+    TSU = "つ",
+    RU_U = "う (ending in る)",
+    MU = "む",
+    BU = "ぶ",
+    NU = "ぬ",
+    KU = "く",
+    KU_EXCEPTIONAL = "く (exceptional)",
+    GU = "ぐ",
+    SU = "す",
+    IRREGULAR = "Irregular"
 }
