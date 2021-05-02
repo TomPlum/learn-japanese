@@ -2249,6 +2249,166 @@ export function kyoiku(): KanjiData[] {
                 { value: "海軍", kana: ["かいぐん"], english: ["navy"] },
             ]
         },
+        {
+            name: "切",
+            code: "\u5207",
+            on: [{ kana: "せつ", romanji: "setsu" }, { kana: "せつ", romanji: "setsu" }],
+            kun: [{ kana: "きる", romanji: "kiru" }, { kana: "きれる", romanji: "kireru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%88%87#Kanji",
+            meanings: ["cut"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "大切", kana: ["たいせつ"], english: ["important", "valuable", "worthy of care"] },
+                { value: "切っ掛け", kana: ["きっかけ"], english: ["chance", "start", "cue", "excuse", "motive", "impetus"] },
+                { value: "一切", kana: ["いっさい"], english: ["all", "everything", "without exception", "the whole"] },
+                { value: "適切", kana: ["てきせつ"], english: ["pertinent", "appropriate", "adequate", "relevance"] },
+                { value: "切り", kana: ["きり"], english: ["limits", "end", "bounds", "period"] },
+            ]
+        },
+        {
+            name: "店",
+            code: "\u5E97",
+            on: [{ kana: "てん", romanji: "ten" }],
+            kun: [{ kana: "みせ", romanji: "mise" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BA%97#Kanji",
+            meanings: ["store", "shop"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "支店", kana: ["してん"], english: ["branch store (office)"] },
+                { value: "百貨店", kana: ["ひゃっかてん"], english: ["(department) store(s)"] },
+                { value: "書店", kana: ["しょてん"], english: ["bookshop, bookstore"] },
+                { value: "店舗", kana: ["てんぽ"], english: ["shop", "store"] },
+                { value: "商店", kana: ["しょうてん"], english: ["shop", "small store", "business", "firm"] },
+            ]
+        },
+        {
+            name: "答",
+            code: "\u7B54",
+            on: [{ kana: "とう", romanji: "tō" }],
+            kun: [{ kana: "こたえる", romanji: "kotaeru" }, { kana: "こたえ", romanji: "kotae" }],
+            source: "https://en.wiktionary.org/wiki/%E7%AD%94#Kanji",
+            meanings: ["answer", "solution"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "答え", kana: ["こたえ", "いらえ"], english: ["response", "reply", "answer", "solution"] },
+                { value: "回答", kana: ["かいとう"], english: ["reply", "answer"] },
+                { value: "答申", kana: ["とうしん"], english: ["report", "reply", "findings"] },
+                { value: "答弁", kana: ["とうべん"], english: ["response", "reply", "answer", "defence", "defense"] },
+                { value: "応答", kana: ["おうとう"], english: ["reply", "answer", "response"] },
+            ]
+        },
+        {
+            name: "帰",
+            code: "\u5E30",
+            on: [{ kana: "き", romanji: "ki" }],
+            kun: [{ kana: "かえる", romanji: "kaeru" }, { kana: "かえす", romanji: "kaesu" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B8%B0#Kanji",
+            meanings: ["return", "homecoming", "arrive at", "lead to"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "帰り", kana: ["かえり"], english: ["return", "coming back"] },
+                { value: "帰国", kana: ["きこく"], english: ["return to one’s country"] },
+                { value: "復帰", kana: ["ふっき"], english: ["return", "comeback", "reinstatement"] },
+                { value: "帰還", kana: ["きかん"], english: ["repatriation", "(electrical) feedback"] },
+                { value: "帰宅", kana: ["きたく"], english: ["returning home"] },
+            ]
+        },
+        {
+            name: "歌",
+            code: "\u6B4C",
+            on: [{ kana: "か", romanji: "ka" }],
+            kun: [{ kana: "うた", romanji: "uta" }, { kana: "うたう", romanji: "utau" }],
+            source: "https://en.wiktionary.org/wiki/%E6%AD%8C#Kanji",
+            meanings: ["song", "sing"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "歌", kana: ["うた"], english: ["song", "classical Japanese poetry (esp. tanka)"] },
+                { value: "歌手", kana: ["かしゅ"], english: ["singer"] },
+                { value: "歌舞伎", kana: ["かぶき"], english: ["kabuki", "Japanese classical drama"] },
+                { value: "短歌", kana: ["たんか"], english: ["tanka", "syllable Japanese poem"] },
+                { value: "歌劇", kana: ["かげき"], english: ["opera"] },
+            ]
+        },
+        {
+            name: "楽",
+            code: "\u697D",
+            on: [{ kana: "がく", romanji: "gaku" }, { kana: "らく", romanji: "raku" }],
+            kun: [{ kana: "たのしい", romanji: "tanoshii" }],
+            source: "https://en.wiktionary.org/wiki/%E6%A5%BD#Kanji",
+            meanings: ["music", "pleasure", "comfort"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "楽しみ", kana: ["たのしみ"], english: ["enjoyment", "pleasure", "diversion", "amusement"] },
+                { value: "音楽", kana: ["おんがく"], english: ["music", "musical movement"] },
+                { value: "楽", kana: ["らく"], english: ["comfort", "ease"] },
+                { value: "楽器", kana: ["がっき"], english: ["musical instrument"] },
+                { value: "倶楽部", kana: ["くらぶ", "クラブ"], english: ["club", "fraternity", "sorority", "clubhouse"] },
+            ]
+        },
+        {
+            name: "親",
+            code: "\u89AA",
+            on: [{ kana: "しん", romanji: "shin" }],
+            kun: [{ kana: "おや", romanji: "oya" }, { kana: "したしい", romanji: "shitashii" }, { kana: "したしむ", romanji: "shitashimu" }],
+            source: "https://en.wiktionary.org/wiki/%E8%A6%AA#Kanji",
+            meanings: ["parent", "intimacy", "relative", "familiarity"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "親", kana: ["おや"], english: ["parent", "dealer (in cards)", "founder"] },
+                { value: "父親", kana: ["ちちおや"], english: ["father"] },
+                { value: "母親", kana: ["ははおや"], english: ["mother"] },
+                { value: "両親", kana: ["りょうしん", "ふたおや"], english: ["parents, both parents"] },
+                { value: "親子", kana: ["おやこ", "しんし"], english: ["parent and child"] },
+            ]
+        },
+        {
+            name: "夜",
+            code: "\u591C",
+            on: [{ kana: "や", romanji: "ya" }],
+            kun: [{ kana: "よる", romanji: "yoru" }, { kana: "よ", romanji: "yo" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A4%9C#Kanji",
+            meanings: ["night", "evening"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "夜", kana: ["よる", "よ"], english: ["evening", "night"] },
+                { value: "深夜", kana: ["しんや"], english: ["late at night"] },
+                { value: "日夜", kana: ["にちや"], english: ["day and night", "always"] },
+                { value: "夜間", kana: ["やかん"], english: ["at night", "nighttime"] },
+                { value: "前夜", kana: ["ぜんや"], english: ["last night", "the previous night"] },
+            ]
+        },
+        {
+            name: "古",
+            code: "\u53E4",
+            on: [{ kana: "こ", romanji: "ko" }],
+            kun: [{ kana: "ふるい", romanji: "furui" }, { kana: "ふるす", romanji: "furusu" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8F%A4#Kanji",
+            meanings: ["old"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "古", kana: ["いにしえ"], english: ["antiquity", "ancient times"] },
+                { value: "古代", kana: ["こだい"], english: ["ancient times"] },
+                { value: "古典", kana: ["こてん"], english: ["old book", "classics", "classic"] },
+                { value: "古墳", kana: ["こふん"], english: ["ancient tomb"] },
+                { value: "考古学", kana: ["こうこがく"], english: ["archaeology"] },
+            ]
+        },
+        {
+            name: "買",
+            code: "\u8CB7",
+            on: [{ kana: "ばい", romanji: "bai" }],
+            kun: [{ kana: "かう", romanji: "kau" }],
+            source: "https://en.wiktionary.org/wiki/%E8%B2%B7#Kanji",
+            meanings: ["buy"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "買い", kana: ["かい"], english: ["buying", "buyer", "purchase"] },
+                { value: "売買", kana: ["ばいばい"], english: ["trade", "buying and selling"] },
+                { value: "買う", kana: ["かう"], english: ["to buy", "to value", "to have a high opinion"] },
+                { value: "買収", kana: ["ばいしゅう"], english: ["buying", "purchase", "corruption", "bribery"] },
+                { value: "買い物", kana: ["かいもの"], english: ["shopping", "purchased goods"] },
+            ]
+        },
 
         //Grade 6 Kanji
 
