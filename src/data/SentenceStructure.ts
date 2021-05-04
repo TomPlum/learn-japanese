@@ -201,7 +201,7 @@ export function verbs(): VerbData[] {
             genkiLesson: 6
         },
         {
-            meanings: ["to turn off, to erase"],
+            meanings: ["to turn off", "to erase"],
             kana: "けす",
             kanjiForm: "消す",
             type: VerbType.SU,
