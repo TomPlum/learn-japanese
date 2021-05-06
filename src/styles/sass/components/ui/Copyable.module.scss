@@ -1,0 +1,10 @@
+@import "src/styles/sass/colours";
+
+.tooltip {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.2em;
+}
+
+.active {
+  color: $inspect !important;
+}
