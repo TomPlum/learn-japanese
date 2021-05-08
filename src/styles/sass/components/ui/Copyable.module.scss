@@ -2,9 +2,14 @@
 
 .tooltip {
   font-family: "Ciutadella Rounded Medium", sans-serif;
-  font-size: 1.2em;
+  font-size: 1.1em;
+  padding: 2px;
 }
 
 .active {
   color: $inspect !important;
+}
+
+.paragraph {
+  margin: 0;
 }
