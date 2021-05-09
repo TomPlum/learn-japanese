@@ -98,4 +98,18 @@ describe("Arrays Utility", () => {
             expect(result).toEqual([[1, 2], [3, 4], [5, 6]]);
         });
     });
+
+    describe("Max", () => {
+        it("Should return the maximum value", () => {
+            const array = [1, 4, 10];
+            const result = Arrays.max(array);
+            expect(result).toBe(10);
+        });
+
+        it("Should return the maximum even if it appears twice", () => {
+            const array = [10, 1, 4, 10];
+            const result = Arrays.max(array);
+            expect(result).toBe(10);
+        });
+    });
 });

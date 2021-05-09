@@ -47,6 +47,15 @@ export default class Arrays {
     }
 
     /**
+     * Returns the largest value in the given array.
+     * @param array An array of numbers.
+     * @return The largest value.
+     */
+    public static max<T extends number>(array: T[]): T {
+        return array.reduce((a: T, b: T) => a > b ? a : b);
+    }
+
+    /**
      * Removes an element from an array.
      * @param array The array to remove from.
      * @param value The value of the element to remove.
