@@ -41,7 +41,7 @@ export interface LearnNumbersSettings extends LearnSettings {
 }
 
 export interface LearnSentenceStructureSettings extends LearnSettings {
-    grammar?: boolean;
+    adverbs?: boolean;
     particles?: boolean;
     endings?: boolean;
     verbs?: boolean;

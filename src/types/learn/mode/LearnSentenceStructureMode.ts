@@ -5,7 +5,7 @@ import LearnMenuModes from "./LearnMenuModes";
 export default class LearnSentenceStructureMode extends LearnMenuModes {
     getLearningTopics(): LearningMode[] {
         return [
-            new LearningMode("Grammar", "#fd0e3e", faExclamation, { sentence: { grammar: true } }),
+            new LearningMode("Adverbs", "#fd0e3e", faExclamation, { sentence: { adverbs: true } }),
             new LearningMode("Particles", "#ff7730", "を", { sentence: { particles: true } }),
             new LearningMode("Endings", "#1785e2", faEllipsisH, { sentence: { endings: true } }),
             new LearningMode("Verbs", "#e3c93a", faRunning, { sentence: { verbs: true } }),
