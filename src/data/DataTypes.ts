@@ -81,3 +81,11 @@ export interface AdjectiveData extends SentenceStructureData {
 export interface VerbData extends SentenceStructureData {
     type: VerbType;
 }
+
+export interface AdverbData extends SentenceStructureData {
+
+}
+
+export interface ExpressionData extends SentenceStructureData {
+
+}

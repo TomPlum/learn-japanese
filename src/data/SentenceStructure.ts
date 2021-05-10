@@ -1,4 +1,4 @@
-import { AdjectiveData, VerbData } from "./DataTypes";
+import { AdjectiveData, AdverbData, ExpressionData, VerbData } from "./DataTypes";
 import { AdjectiveType } from "../types/sentence/AdjectiveType";
 import { VerbType } from "../types/sentence/VerbType";
 
@@ -344,6 +344,159 @@ export function verbs(): VerbData[] {
             kana: "もってくる",
             kanjiForm: "持ってくる",
             type: VerbType.IRREGULAR,
+            genkiLesson: 6
+        },
+    ];
+}
+
+export function adverbs(): AdverbData[] {
+    return [
+        {
+            meanings: ["not much"],
+            kana: "あまり~",
+            genkiLesson: 3
+        },
+        {
+            meanings: ["not at all"],
+            kana: "ぜんぜん~",
+            kanjiForm: "全然",
+            genkiLesson: 3
+        },
+        {
+            meanings: ["usually"],
+            kana: "たいてい",
+            genkiLesson: 3
+        },
+        {
+            meanings: ["a little"],
+            kana: "ちょっと",
+            genkiLesson: 3
+        },
+        {
+            meanings: ["sometimes"],
+            kana: "ときどき",
+            kanjiForm: "時々",
+            genkiLesson: 3
+        },
+        {
+            meanings: ["often", "much"],
+            kana: "よく",
+            genkiLesson: 3
+        },
+        {
+            meanings: ["about"],
+            kana: "~ぐらい",
+            genkiLesson: 4
+        },
+        {
+            meanings: ["so", "therefore"],
+            kana:　"だから",
+            genkiLesson: 4
+        },
+        {
+            meanings: ["many", "a lot"],
+            kana:　"たくさん",
+            genkiLesson: 4
+        },
+        {
+            meanings: ["and", "together (with a person)"],
+            kana:　"~と",
+            genkiLesson: 4
+        },
+        {
+            meanings: ["why"],
+            kana:　"どうして",
+            genkiLesson: 4
+        },
+        {
+            meanings: ["alone"],
+            kana:　"ひとりで",
+            kanjiForm: "一人で",
+            genkiLesson: 4
+        },
+        {
+            meanings: ["together"],
+            kana: "いっしょに",
+            kanjiForm: "一緒に",
+            genkiLesson: 5
+        },
+        {
+            meanings: ["very"],
+            kana: "とても",
+            genkiLesson: 5
+        },
+        {
+            meanings: ["extremely"],
+            kana: "すごく",
+            genkiLesson: 5
+        },
+        {
+            meanings: ["slowly", "leisurely", "unhurriedly"],
+            kana: "ゆっくり",
+            genkiLesson: 6
+        }
+    ];
+}
+
+export function expressions(): ExpressionData[] {
+    return [
+        {
+            meanings: ["That's right", "Let me see"],
+            kana: "そうですね",
+            genkiLesson: 3
+        },
+        {
+            meanings: ["but"],
+            kana: "でも",
+            genkiLesson: 3
+        },
+        {
+            meanings: ["How about...?", "How is...?"],
+            kana: "どうですか",
+            genkiLesson: 3
+        },
+        {
+            meanings: ["yes"],
+            kana: "ええ",
+            genkiLesson: 3
+        },
+        {
+            meanings: ["Hello? (On the phone)"],
+            kana: "もしもし",
+            genkiLesson: 4
+        },
+        {
+            meanings: ["It's okay", "Not to worry", "Everything is under control"],
+            kana: "だいじょうぶ",
+            kanjiForm: "大丈夫",
+            genkiLesson: 5
+        },
+        {
+            meanings: ["What kind of..."],
+            kana: "どんな",
+            genkiLesson: 5
+        },
+        {
+            meanings: ["later on"],
+            kana: "あとで",
+            kanjiForm: "後で",
+            genkiLesson: 6
+        },
+        {
+            meanings: ["right away"],
+            kana: "すぐ",
+            genkiLesson: 6
+        },
+        {
+            meanings: ["That would be fine", "That wouldn't be necessary"],
+            kana: "けっこうです",
+            kanjiForm: "結構です",
+            genkiLesson: 6
+        },
+        {
+            meanings: ["Really?"],
+            kana: "ほんとうですか",
+            kanjiForm: "本当ですか",
             genkiLesson: 6
         },
     ];
