@@ -6,27 +6,40 @@ export default class RomajiGenerator {
     private readonly hiragana: KanaData[] = hiragana();
     private readonly katakana: KanaData[] = katakana();
 
-    private readonly longSounds = new Map([["uu", "ū"], ["oo", "ō"], ["ou", "ō"]]);
+    private readonly longSounds = new Map([
+        ["aa", "ā"], ["ii", "ī"], ["uu", "ū"], ["ee", "ē"], ["oo", "ō"], ["ou", "ō"],
+        ["aー", "ā"], ["iー", "ī"], ["uー", "ū"], ["eー", "ē"], ["oー", "ō"],
+    ]);
+    private readonly sokuons = ["っ", "ッ"];
 
     public generate(kana: string): string {
-        let romaji = [...kana].map((char: string) => {
-            const hiraganaRomaji = this.hiragana.find((it: KanaData) => it.name === char)?.romaji;
-            const katakanaRomaji = this.katakana.find((it: KanaData) => it.name === char)?.romaji;
+        let kanaWithDiagraphsReplaced = kana;
 
-            if (hiraganaRomaji) {
-                return hiraganaRomaji[0];
+        //Replace Diagraphs
+        const hiraganaDiagraphs = hiragana().filter((it: KanaData) => it.name.length === 2);
+        const katakanaDiagraphs = katakana().filter((it: KanaData) => it.name.length === 2);
+
+        hiraganaDiagraphs.concat(katakanaDiagraphs).forEach((data: KanaData) => {
+           kanaWithDiagraphsReplaced = kanaWithDiagraphsReplaced.replaceAll(data.code, data.romaji[0]);
+        });
+
+        //Replace Sokuons
+        const sokuonsReplaced = [...kanaWithDiagraphsReplaced].map((char: string, i: number) => {
+            if (i < kanaWithDiagraphsReplaced.length - 1 && this.sokuons.includes(char)) {
+                //TODO: What is the sokuon is before a diagraph?;
+                const kana = this.hiragana.concat(this.katakana).find((it: KanaData) => it.code === kanaWithDiagraphsReplaced[i + 1]);
+                return kana?.column ?? char;
             }
+            return char;
+        });
 
-            if (katakanaRomaji) {
-                return katakanaRomaji[0];
-            }
-
-            throw new Error(char + " is not a valid Hiragana or Katakana character");
+        //Replace Kana
+        let romaji = [...sokuonsReplaced].map((char: string) => {
+            return this.hiragana.concat(this.katakana).find((it: KanaData) => it.code === char)?.romaji[0] ?? char;
         }).join("");
 
-        this.longSounds.forEach((value: string, key: string) => {
-            romaji = romaji.replaceAll(key, value)
-        });
+        //Replace Long Sounds w/Macron Variants
+        this.longSounds.forEach((value: string, key: string) => romaji = romaji.replaceAll(key, value));
 
         return romaji;
     }
