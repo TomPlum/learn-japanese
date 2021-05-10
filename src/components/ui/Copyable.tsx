@@ -1,8 +1,8 @@
-import React, { Component, ReactElement, ReactNode } from "react";
+import React, { Component, ReactElement } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
 import { Placement } from "react-bootstrap/Overlay";
 import styles from "../../styles/sass/components/ui/Copyable.module.scss";
-import Arrays from "../../utility/Arrays";
+import ComponentTree from "../../utility/ComponentTree";
 
 export interface CopyableProps {
     className?: string;
@@ -15,11 +15,6 @@ interface CopyableState {
     hasFailed: boolean;
     active: boolean;
     successTimeout: any;
-}
-
-interface Node {
-    value: any;
-    depth: number;
 }
 
 class Copyable extends Component<CopyableProps, CopyableState> {
@@ -42,8 +37,6 @@ class Copyable extends Component<CopyableProps, CopyableState> {
     render() {
         const { className, inline, placement } = this.props;
         const { hasWritten, hasFailed, active } = this.state;
-
-        //console.log(this.getAllChildren())
 
         return (
             <p
@@ -69,52 +62,16 @@ class Copyable extends Component<CopyableProps, CopyableState> {
     }
 
     private copyToClipBoard = async () => {
-        const value = this.getLeafChildValue();
+        const value = new ComponentTree(this.props.children).getFirstLeafNode();
         await navigator.clipboard.writeText(value)
             .then(this.restartCopyTimer)
-            .catch(() => this.setState({ hasWritten: false, hasFailed: true}));
+            .catch(() => this.setState({ hasWritten: false, hasFailed: true }));
     }
 
     private restartCopyTimer = () => {
         clearTimeout(this.state.successTimeout);
         this.setState({ hasWritten: true, hasFailed: false });
         setTimeout(() => this.setState({ hasWritten: false }), 1500);
-    }
-
-    private getLeafChildValue(): any {
-        let children = [];
-        children.push(this.props.children);
-
-        let leaves: Node[] = [];
-
-        let depth = 1;
-
-        while (children.length > 0) {
-            children.sort()
-            const child = children.pop();
-            console.log("POPPED", child)
-
-            if (child?.props?.children) {
-                const nestedChild: any | any[] = child.props.children;
-                console.log("Nested Child", nestedChild)
-
-                if (Array.isArray(nestedChild)) {
-                    children.push(...nestedChild);
-                    leaves.push(...[...nestedChild].map(it => { return { value: it, depth: depth } }));
-                } else {
-                    children.push(nestedChild);
-                    leaves.push({ value: nestedChild, depth: depth });
-                }
-
-                depth++;
-            } else {
-                depth--;
-            }
-            console.log("Depth", depth)
-        }
-
-        console.log(leaves)
-        return leaves.reduce((a, b) => a.depth > b.depth ? a : b).value?.trim();
     }
 }
 

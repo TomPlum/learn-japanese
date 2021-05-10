@@ -14,7 +14,7 @@ class RomajiDisplay extends Component<RomajiDisplayProps> {
     render() {
         const { kana, className } = this.props;
         return (
-            <Copyable className={className}>
+            <Copyable className={className} placement="bottom" inline>
                 <span>
                     <span className={styles.parenthesis}>( </span>
 

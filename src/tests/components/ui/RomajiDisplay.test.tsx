@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import RomajiDisplay from "../../../components/ui/RomajiDisplay";
 import { Environment } from "../../../utility/Environment";
 
@@ -29,6 +29,6 @@ test('Hovering over the romaji should display the inspectable popover', () => {
 
     fireEvent.mouseOver(component.getByText('suki'));
 
-    expect(component.getByTitle('Why is the rōmaji incorrect?')).toBeInTheDocument();
-    expect(component.getByText('test-title')).toBeInTheDocument();
+    expect(screen.getByTitle('Why is the rōmaji incorrect?')).toBeInTheDocument();
+    expect(screen.getByText('test-title')).toBeInTheDocument();
 });
