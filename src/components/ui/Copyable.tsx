@@ -1,8 +1,8 @@
 import React, { Component, ReactElement } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
 import { Placement } from "react-bootstrap/Overlay";
-import styles from "../../styles/sass/components/ui/Copyable.module.scss";
 import ComponentTree from "../../utility/ComponentTree";
+import styles from "../../styles/sass/components/ui/Copyable.module.scss";
 
 export interface CopyableProps {
     className?: string;

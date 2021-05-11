@@ -54,19 +54,19 @@ test('Passing in an empty reading array should render N/A', () => {
 
 test('Passing the showRomaji property as true should show the romaji', () => {
     const component = render(<KanjiReadingDisplay type={ReadingType.ON} readings={[onReading]} showRomaji={true} />);
-    expect(component.getByText(': なん (nan)')).toBeInTheDocument();
+    expect(component.getByText('なん (nan)')).toBeInTheDocument();
 });
 
 test('Clicking the last (up) arrow when there are multiple readings and the first is selected, should wrap round to the end kana', () => {
     const component = render(<KanjiReadingDisplay type={ReadingType.ON} readings={[onReading, onReading, onReadingTwo]} showRomaji={false} />);
-    expect(component.getByText(': なん')).toBeInTheDocument();
+    expect(component.getByText('なん')).toBeInTheDocument();
     fireEvent.click(component.getByTitle('Last'));
-    expect(component.getByText(': こく')).toBeInTheDocument();
+    expect(component.getByText('こく')).toBeInTheDocument();
 });
 
 test('Clicking the next (down) arrow when there are multiple readings should change the kana', () => {
     const component = render(<KanjiReadingDisplay type={ReadingType.ON} readings={[onReading, onReadingTwo]} showRomaji={false} />);
-    expect(component.getByText(': なん')).toBeInTheDocument();
+    expect(component.getByText('なん')).toBeInTheDocument();
     fireEvent.click(component.getByTitle('Next'));
-    expect(component.getByText(': こく')).toBeInTheDocument();
+    expect(component.getByText('こく')).toBeInTheDocument();
 });

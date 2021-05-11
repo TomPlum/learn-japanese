@@ -37,12 +37,12 @@ test('Should render the kanji', () => {
 
 test('Should render the on reading', () => {
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />);
-    expect(component.getByText(': じん')).toBeInTheDocument();
+    expect(component.getByText('じん')).toBeInTheDocument();
 });
 
 test('Should render the kun reading', () => {
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />);
-    expect(component.getByText(': ひと')).toBeInTheDocument();
+    expect(component.getByText('ひと')).toBeInTheDocument();
 });
 
 test('Should render the meanings comma delimited', () => {
@@ -63,7 +63,7 @@ test('Should render the kanji as a link to the source', () => {
 test('Should render the examples display', () => {
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />);
     expect(getByTextWithMarkup('外国人')).toBeInTheDocument();
-    expect(component.getByText('( がいこくじん )')).toBeInTheDocument();
+    expect(getByTextWithMarkup('( がいこくじん )')).toBeInTheDocument();
     expect(component.getByText('foreigner')).toBeInTheDocument();
 });
 

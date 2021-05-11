@@ -4,6 +4,7 @@ import { Kanji } from "../../../types/kanji/Kanji";
 import SpinnerController from "../../ui/SpinnerController";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiExampleDisplay.module.scss";
+import Copyable from "../../ui/Copyable";
 
 export interface KanjiExampleDisplayProps {
     kanji: Kanji;
@@ -47,12 +48,14 @@ class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExamp
                         <p className={styles.example}>
                             {[...selected.kanji].map((char: string, i: number) => {
                                 const className = char === kanji.getValue() ? styles.highlight : styles.kanji;
-                                return <span className={className} key={i}>{char}</span>
+                                return <Copyable className={className} inline><span key={i}>{char}</span></Copyable>
                             })}
                         </p>
 
                         <p className={styles.kana}>
-                            ( {selected.kana.join(" or ")} )
+                            <span>( </span>
+                            <Copyable inline><span>{selected.kana.join(" or ")}</span></Copyable>
+                            <span> )</span>
                         </p>
 
                         <p className={styles.meaning}>

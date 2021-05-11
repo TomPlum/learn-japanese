@@ -6,6 +6,7 @@ import { ReadingType } from "../../../types/kanji/ReadingType";
 import commonStyles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiReadingDisplay.module.scss";
 import SpinnerController from "../../ui/SpinnerController";
+import Copyable from "../../ui/Copyable";
 
 export interface KanjiReadingDisplayProps {
     type: ReadingType;
@@ -42,8 +43,16 @@ class KanjiReadingDisplay extends Component<KanjiReadingDisplayProps, KanjiReadi
                     <Inspectable title={this.getTitle()} text={this.getText()}>
                         <span className={commonStyles.label}>{type}</span>
                     </Inspectable>
+
                     {readings.length > 0
-                        ? <span title={selected.romaji}>{this.getReadingFormatted()}</span>
+                        ? (
+                            <>
+                                <span>: </span>
+                                <Copyable inline>
+                                    <span>{this.getReadingFormatted()}</span>
+                                </Copyable>
+                            </>
+                        )
                         : <span title={"This kanji has no " + type.toLowerCase() + " reading"}>: N/A</span>
                     }
                 </span>
@@ -55,7 +64,7 @@ class KanjiReadingDisplay extends Component<KanjiReadingDisplayProps, KanjiReadi
         const { showRomaji } = this.props;
         const { selected } = this.state;
 
-        let formatted = ": " + selected.kana;
+        let formatted = selected.kana;
 
         if (showRomaji) {
             formatted += " (" + selected.romaji + ")"
