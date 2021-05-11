@@ -62,7 +62,7 @@ class Copyable extends Component<CopyableProps, CopyableState> {
     }
 
     private copyToClipBoard = async () => {
-        const value = new ComponentTree(this.props.children).getFirstLeafNode();
+        const value = new ComponentTree(this.props.children).getDeepestLeafNode();
         await navigator.clipboard.writeText(value)
             .then(this.restartCopyTimer)
             .catch(() => this.setState({ hasWritten: false, hasFailed: true }));
