@@ -6,26 +6,27 @@ const mockClipboard = jest.fn();
 Object.defineProperty(navigator, "clipboard", {
     value: {
         writeText: mockClipboard,
-    },
+    }
 });
 
-jest.spyOn(navigator.clipboard, "writeText");
+//jest.spyOn(navigator.clipboard, "writeText");
 
 const setup = () => {
     const component = render(<Copyable><p>test</p></Copyable>);
     return {
-        text: component.getByText('test'),
+        text: component.getByTitle('Click to copy'),
         ...component
     }
 }
 
-/*test('Should copy the text contents to the clipboard when clicking the it', async () => {
+test('Should copy the text contents to the clipboard when clicking it', async () => {
     const { text } = setup();
     fireEvent.click(text);
     expect(mockClipboard).toHaveBeenLastCalledWith('test');
-});*/
+});
 
-test('Should copy the text contents to the clipboard when clicking the it', async () => {
+/*
+test('Should copy the text contents to the clipboard when clicking it', async () => {
     const component = render(
         <Copyable>
             <span>
@@ -39,4 +40,4 @@ test('Should copy the text contents to the clipboard when clicking the it', asyn
     );
     fireEvent.click(component.getByText('expected-value'));
     expect(mockClipboard).toHaveBeenLastCalledWith('expected-value');
-});
+});*/

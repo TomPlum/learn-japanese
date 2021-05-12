@@ -30,8 +30,10 @@ class LandingPage extends Component {
                     <h1 className={styles.heading}>
                         {'Learn '}
                         <Inspectable
-                            title="Nihongo (日本語)"
-                            text={Environment.variable("JAPANESE_KANJI_DESC")}
+                            popover={{
+                                title: "Nihongo (日本語)",
+                                text: Environment.variable("JAPANESE_KANJI_DESC")
+                            }}
                             className={styles.japanese}
                             placement="top"
                         >
@@ -44,16 +46,20 @@ class LandingPage extends Component {
                         <h4 className={styles.description}>
                             {'A simple memory training app for learning the Japanese '}
                             <Inspectable
-                                title={"Hiragana (ひらがな)"}
-                                text={Environment.variable("HIRAGANA_DESC")}
+                                popover={{
+                                    title: "Hiragana (ひらがな)",
+                                    text: Environment.variable("HIRAGANA_DESC")
+                                }}
                                 placement="bottom" color="white"
                             >
                                 <span data-testid="hiragana-inspectable">Hiragana</span>
                             </Inspectable>
                             {' and '}
                             <Inspectable
-                                title={"Katakana (カタカナ)"}
-                                text={Environment.variable("KATAKANA_DESC")}
+                                popover={{
+                                    title: "Katakana (カタカナ)",
+                                    text: Environment.variable("KATAKANA_DESC")
+                                }}
                                 placement="bottom"
                                 color="white"
                             >

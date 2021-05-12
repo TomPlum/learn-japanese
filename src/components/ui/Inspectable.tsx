@@ -1,12 +1,12 @@
 import React, { Component, ReactElement, ReactNode } from "react";
 import { OverlayTrigger } from "react-bootstrap";
-import PopOver from "./PopOver";
+import PopOver, { PopOverProps } from "./PopOver";
 import styles from "../../styles/sass/components/ui/Inspectable.module.scss";
-import { Placement } from "react-bootstrap/Overlay";
+import { OverlayChildren, Placement } from "react-bootstrap/Overlay";
+import PropTypes from "prop-types";
 
 export type InspectableProps = {
-    title: string;
-    text: string;
+    popover: PopOverProps;
     placement?: Placement;
     className?: string;
     color?: 'white' | 'black';
@@ -14,7 +14,7 @@ export type InspectableProps = {
 
 class Inspectable extends Component<InspectableProps> {
     render() {
-        const { text, title, className, placement, color } = this.props;
+        const { popover, className, placement, color } = this.props;
 
         const classes = color === 'white' ? [styles.white] : [styles.black, className ?? ""]
 
@@ -23,7 +23,7 @@ class Inspectable extends Component<InspectableProps> {
                 trigger={["hover", "focus", "click"]}
                 rootClose={true}
                 placement={placement ?? "left"}
-                overlay={<PopOver text={text} title={title} />}
+                overlay={<PopOver {...popover} />}
                 defaultShow={false}
             >
                 {

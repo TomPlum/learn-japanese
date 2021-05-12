@@ -28,7 +28,6 @@ class KanjiReadingDisplay extends Component<KanjiReadingDisplayProps, KanjiReadi
     }
 
     render() {
-        const { selected } = this.state;
         const { type, readings } = this.props;
 
         return (
@@ -40,7 +39,7 @@ class KanjiReadingDisplay extends Component<KanjiReadingDisplayProps, KanjiReadi
                 />
 
                 <span className={[commonStyles.text, styles.reading].join(" ")}>
-                    <Inspectable title={this.getTitle()} text={this.getText()}>
+                    <Inspectable popover={{ title: this.getTitle(), text: this.getText() }}>
                         <span className={commonStyles.label}>{type}</span>
                     </Inspectable>
 
