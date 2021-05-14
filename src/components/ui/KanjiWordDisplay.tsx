@@ -22,7 +22,7 @@ class KanjiWordDisplay extends Component<KanjiWordDisplayProps> {
                     const kanji = repository.getByValue(char);
                     if (kanji) {
                         const overlay = (
-                            <div>
+                            <div key={kanji.getValue() + "-popover"}>
                                 <KanjiReadingDisplay
                                     type={ReadingType.ON}
                                     readings={kanji.readings.filter(it => it.type === ReadingType.ON)}
@@ -36,14 +36,22 @@ class KanjiWordDisplay extends Component<KanjiWordDisplayProps> {
                             </div>
                         );
                         return (
-                            <Copyable className={className} placement="top" inline>
-                                <Inspectable popover={{ title: kanji.meanings.join(", "), text: overlay  }} className={className}>
-                                    <span>{char}</span>
+                            <Copyable className={className} placement="top" key={"copyable" + char} inline>
+                                <Inspectable
+                                    key={"inspectable-" + char}
+                                    className={className}
+                                    popover={{ title: kanji.meanings.join(", "), text: overlay  }}
+                                >
+                                    <span key={char}>{char}</span>
                                 </Inspectable>
                             </Copyable>
                         )
                     } else {
-                        return <span className={className}>{char}</span>
+                        return (
+                            <span key={char} className={className}>
+                                {char}
+                            </span>
+                        )
                     }
                 })
             }</div>

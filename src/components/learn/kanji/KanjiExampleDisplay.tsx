@@ -45,18 +45,26 @@ class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExamp
                     </Col>
 
                     <Col className={styles.textWrapper}>
-                        <p className={styles.example}>
+                        <span className={styles.example}>
                             {[...selected.kanji].map((char: string, i: number) => {
                                 const className = char === kanji.getValue() ? styles.highlight : styles.kanji;
-                                return <Copyable className={className} inline><span key={i}>{char}</span></Copyable>
+                                return (
+                                    <Copyable className={className} key={"copyable-" + i} inline>
+                                        <span key={i}>{char}</span>
+                                    </Copyable>
+                                );
                             })}
-                        </p>
+                        </span>
 
-                        <p className={styles.kana}>
+                        <span className={styles.kana}>
                             <span>( </span>
-                            <Copyable inline><span>{selected.kana.join(" or ")}</span></Copyable>
+
+                            <Copyable inline>
+                                <span>{selected.kana.join(" or ")}</span>
+                            </Copyable>
+
                             <span> )</span>
-                        </p>
+                        </span>
 
                         <p className={styles.meaning}>
                             { selected.english.join(", ") }

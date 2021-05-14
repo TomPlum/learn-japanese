@@ -2,6 +2,7 @@ import { fireEvent, render } from "@testing-library/react";
 import Adjective from "../../../../types/sentence/Adjective";
 import { AdjectiveType } from "../../../../types/sentence/AdjectiveType";
 import SentenceStructureFlashCardBack from "../../../../components/learn/sentence/SentenceStructureFlashCardBack";
+import { getByTextWithMarkup } from "../../../Queries";
 
 const onResetHandler = jest.fn();
 
@@ -14,8 +15,8 @@ test('Clicking the reset button should call the onReset event handler', () => {
 });
 
 test('Should render the kanji variation', () => {
-    const component = render(<SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />);
-    expect(component.getByText('面白い')).toBeInTheDocument();
+    render(<SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />);
+    expect(getByTextWithMarkup('面白い')).toBeInTheDocument();
 });
 
 test('Should render the kana', () => {

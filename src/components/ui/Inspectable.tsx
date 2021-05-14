@@ -2,8 +2,7 @@ import React, { Component, ReactElement, ReactNode } from "react";
 import { OverlayTrigger } from "react-bootstrap";
 import PopOver, { PopOverProps } from "./PopOver";
 import styles from "../../styles/sass/components/ui/Inspectable.module.scss";
-import { OverlayChildren, Placement } from "react-bootstrap/Overlay";
-import PropTypes from "prop-types";
+import { Placement } from "react-bootstrap/Overlay";
 
 export type InspectableProps = {
     popover: PopOverProps;
