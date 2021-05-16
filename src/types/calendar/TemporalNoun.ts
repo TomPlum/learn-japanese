@@ -1,5 +1,4 @@
-import { KanjiLearnable } from "../learn/CommonLearnable";
-import JapaneseWord from "../learn/JapaneseWord";
+import { KanjiLearnable } from "../learn/Learnable";
 
 export default class TemporalNoun extends KanjiLearnable {
     private readonly _english: string;
@@ -15,8 +14,8 @@ export default class TemporalNoun extends KanjiLearnable {
         this._kana = kana;
     }
 
-    getWords(): JapaneseWord[] {
-        return [new JapaneseWord(this._kana, this._romaji)];
+    getKana(): string[] {
+        return [this._kana];
     }
 
     getQuestion(): string {
@@ -27,11 +26,11 @@ export default class TemporalNoun extends KanjiLearnable {
         return "Temporal Noun / Adverb";
     }
 
-    getMeaning(): string | undefined {
-        return undefined;
+    getKanjiVariation(): string {
+        return this._kanji;
     }
 
-    getKanji(): string {
-        return this._kanji;
+    getMeanings(): string[] | undefined {
+        return [this._english];
     }
 }

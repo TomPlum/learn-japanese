@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LearningSessionResult from "../../types/learn/LearningSessionResult";
-import Learnable from "../../types/learn/Learnable";
+import { Learnable } from "../../types/learn/Learnable";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import ConfirmModal from "../ui/ConfirmModal";

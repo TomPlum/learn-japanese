@@ -6,7 +6,7 @@ describe("Colour", () => {
     const colour = new Colour("Red", "赤", "あか", "aka", "#ff0000");
 
     it("Should return a single word for the words array", () => {
-        expect(colour.getWords()).toStrictEqual([new JapaneseWord("あか", "aka")]);
+        expect(colour.getKana()).toStrictEqual(["あか"]);
     });
 
     it("Should return the colour name in English for the question", () => {

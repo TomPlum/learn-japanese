@@ -45,25 +45,34 @@ class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExamp
                     </Col>
 
                     <Col className={styles.textWrapper}>
-                        <span className={styles.example}>
-                            {[...selected.kanji].map((char: string, i: number) => {
-                                const className = char === kanji.getValue() ? styles.highlight : styles.kanji;
-                                return (
-                                    <Copyable className={className} key={"copyable-" + i} inline>
-                                        <span key={i}>{char}</span>
-                                    </Copyable>
-                                );
-                            })}
-                        </span>
+                        <Copyable className={styles.kanji}>
+                            <span className={styles.example}>
+                                {selected.kanji}
+                            </span>
+                        </Copyable>
 
-                        <span className={styles.kana}>
-                            <span>( </span>
 
-                            <Copyable inline>
-                                <span>{selected.kana.join(" or ")}</span>
-                            </Copyable>
-
-                            <span> )</span>
+                        <span>
+                            <span className={styles.kana}>( </span>
+                            {
+                                selected.kana.map((value: string, i: number) => {
+                                    if (i < selected.kana.length - 1) {
+                                        return [
+                                            <Copyable className={styles.kana} inline>
+                                                <span>{value}</span>
+                                            </Copyable>,
+                                            <span> or </span>
+                                        ];
+                                    } else {
+                                        return (
+                                            <Copyable className={styles.kana} inline>
+                                                <span>{value}</span>
+                                            </Copyable>
+                                        );
+                                    }
+                                })
+                            }
+                            <span className={styles.kana}> )</span>
                         </span>
 
                         <p className={styles.meaning}>

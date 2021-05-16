@@ -1,5 +1,4 @@
-import { KanjiLearnable } from "../learn/CommonLearnable";
-import JapaneseWord from "../learn/JapaneseWord";
+import { KanjiLearnable } from "../learn/Learnable";
 
 export default class Month extends KanjiLearnable {
     private readonly _english: string;
@@ -17,8 +16,8 @@ export default class Month extends KanjiLearnable {
         this._meaning = meaning;
     }
 
-    getWords(): JapaneseWord[] {
-        return [new JapaneseWord(this._kana, this._romaji)];
+    getKana(): string[] {
+        return [this._kana];
     }
 
     getQuestion(): string {
@@ -29,11 +28,11 @@ export default class Month extends KanjiLearnable {
         return "Month of the Year";
     }
 
-    getMeaning(): string | undefined {
-        return this._meaning;
+    getMeanings(): string[] | undefined {
+        return [this._english];
     }
 
-    getKanji(): string {
+    getKanjiVariation(): string {
         return this._kanji;
     }
 }

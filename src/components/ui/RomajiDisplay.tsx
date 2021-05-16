@@ -19,7 +19,9 @@ class RomajiDisplay extends Component<RomajiDisplayProps> {
                     <span className={styles.parenthesis}>( </span>
 
                     <Inspectable popover={{ title: "Why is the rōmaji incorrect?", text: Environment.variable("ROMAJI_GENERATION_DESC") }}>
-                        <span>{new RomajiGenerator().generate(kana)}</span>
+                        <span className={styles.romaji}>
+                            {new RomajiGenerator().generate(kana)}
+                        </span>
                     </Inspectable>
 
                     <span className={styles.parenthesis}> )</span>

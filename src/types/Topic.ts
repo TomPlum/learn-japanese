@@ -7,8 +7,6 @@ import LearnCalendarMode from "./learn/mode/LearnCalendarMode";
 import { CardProps } from "../components/learn/FlashCard";
 import KanaFlashCardFront from "../components/learn/kana/KanaFlashCardFront";
 import KanaFlashCardBack from "../components/learn/kana/KanaFlashCardBack";
-import CalendarFlashCardFront from "../components/learn/calendar/CalendarFlashCardFront";
-import CalendarFlashCardBack from "../components/learn/calendar/CalendarFlashCardBack";
 import KanjiFlashCardFront from "../components/learn/kanji/KanjiFlashCardFront";
 import KanjiFlashCardBack from "../components/learn/kanji/KanjiFlashCardBack";
 import BasicsFlashCardFront from "../components/learn/basics/BasicsFlashCardFront";
@@ -48,7 +46,7 @@ export default class Topic {
 
     public static CALENDAR = new Topic(
         "Days & Months", faCalendarAlt, new LearnCalendarMode(),
-        { front: CalendarFlashCardFront, back: CalendarFlashCardBack }
+        { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack }
     );
 
     public static GRAMMAR = new Topic(

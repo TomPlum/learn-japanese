@@ -1,7 +1,7 @@
 import FlashCardBack from "../FlashCardBack";
 import { CardFaceProps } from "../FlashCard";
 import styles from "../../../styles/sass/components/learn/kana/KanaFlashCardBack.module.scss"
-import { ExceptionalLearnable } from "../../../types/learn/CommonLearnable";
+import { ExceptionalLearnable } from "../../../types/learn/Learnable";
 
 const KanaFlashCardBack = (props: CardFaceProps) => {
     const { data, onClick } = props;

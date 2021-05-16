@@ -1,6 +1,6 @@
 import React, { Component, ComponentClass, FunctionComponent } from "react";
 import ReactCardFlip from "react-card-flip";
-import Learnable from "../../types/learn/Learnable";
+import { Learnable } from "../../types/learn/Learnable";
 
 type CardFaceFront = FunctionComponent<CardFaceProps> | ComponentClass<any>;
 type CardFaceBack= FunctionComponent<CardBackFaceProps> | ComponentClass<any>;
@@ -10,7 +10,7 @@ export interface CardProps {
     back: CardFaceBack;
 }
 
-//TODO: Can the MyComponentFlashCardFront and Back components have explicit sub-types like Kana and CommonLearnable?
+//TODO: Can the MyComponentFlashCardFront and Back components have explicit sub-types like Kana and Learnable?
 export interface CardFaceProps {
     data: Learnable;
     onClick: () => void;

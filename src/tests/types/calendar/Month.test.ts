@@ -1,5 +1,5 @@
 import Month from "../../../types/calendar/Month";
-import { KanjiLearnable } from "../../../types/learn/CommonLearnable";
+import { KanjiLearnable } from "../../../types/learn/Learnable";
 import JapaneseWord from "../../../types/learn/JapaneseWord";
 
 describe("Month", () => {
@@ -11,7 +11,7 @@ describe("Month", () => {
     });
 
     it("Should return the kanji as the answer", () => {
-        expect(month.getKanji()).toBe("一月");
+        expect(month.getKanjiVariation()).toBe("一月");
     });
 
     it("Should return the english word as the question", () => {
@@ -19,10 +19,10 @@ describe("Month", () => {
     });
 
     it("Should return the Japanese Words", () => {
-        expect(month.getWords()).toStrictEqual([new JapaneseWord("いちがつ", "ichigatsu")]);
+        expect(month.getKana()).toStrictEqual(["いちがつ"]);
     });
 
     it("Should return the meaning", () => {
-        expect(month.getMeaning()).toBe("One Month");
+        expect(month.getMeanings()).toStrictEqual(["January"]);
     });
 });

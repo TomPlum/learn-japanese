@@ -1,17 +1,15 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import LearnMenu from "../../../components/learn/LearnMenu";
-import LearnCalendarMode from "../../../types/learn/mode/LearnCalendarMode";
 import { Environment } from "../../../utility/Environment";
-import LearnKanaMode from "../../../types/learn/mode/LearnKanaMode";
-import LearnKanjiMode from "../../../types/learn/mode/LearnKanjiMode";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import Topic from "../../../types/Topic";
 
 describe("Example 1 - Kana", () => {
     const onStartHandler = jest.fn();
     const environment = jest.fn();
 
     const setup = () => {
-        const component = render(<LearnMenu modes={new LearnKanaMode()} onStart={onStartHandler} />);
+        const component = render(<LearnMenu topic={Topic.KANA} onStart={onStartHandler} />);
         return {
             hiragana: component.getByText('Hiragana'),
             katakana: component.getByText('Katakana'),
@@ -126,7 +124,7 @@ describe("Example 2 - Calendar", () => {
     const environment = jest.fn();
 
     const setup = () => {
-        const component = render(<LearnMenu modes={new LearnCalendarMode()} onStart={onStartHandler}/>);
+        const component = render(<LearnMenu topic={Topic.CALENDAR} onStart={onStartHandler}/>);
         return {
             days: component.getByText('Days of the Week'),
             months: component.getByText('Months of the Year'),
@@ -247,7 +245,7 @@ describe("Example 3 - Kanji (Customisable)", () => {
     const environment = jest.fn();
 
     const setup = () => {
-        const component = render(<LearnMenu modes={new LearnKanjiMode()} onStart={onStartHandler}/>);
+        const component = render(<LearnMenu topic={Topic.KANJI} onStart={onStartHandler}/>);
         return {
             kyoiku: component.getByText('Kyōiku'),
             joyo: component.getByText('Jōyō'),

@@ -70,7 +70,13 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
 
         switch (mode) {
             case AppMode.LEARN: {
-                return <LearnMenu key={topic.name} modes={topic.modes} onStart={this.onStartLearning} />;
+                return (
+                    <LearnMenu
+                        key={topic.name}
+                        topic={topic}
+                        onStart={this.onStartLearning}
+                    />
+                );
             }
             case AppMode.PLAY: {
                 return (

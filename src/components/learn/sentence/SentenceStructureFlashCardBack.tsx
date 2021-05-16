@@ -1,15 +1,15 @@
 import FlashCardBack from "../FlashCardBack";
 import { CardBackFaceProps } from "../FlashCard";
-import { SentenceStructureLearnable } from "../../../types/learn/CommonLearnable";
 import RomajiDisplay from "../../ui/RomajiDisplay";
 import Copyable from "../../ui/Copyable";
-import styles from "../../../styles/sass/components/learn/sentence/SentenceStructureFlashCardBack.module.scss"
 import KanjiWordDisplay from "../../ui/KanjiWordDisplay";
+import { KanjiLearnable } from "../../../types/learn/Learnable";
+import styles from "../../../styles/sass/components/learn/sentence/SentenceStructureFlashCardBack.module.scss"
 
 const SentenceStructureFlashCardBack = (props: CardBackFaceProps) => {
     const { data, onClick } = props;
 
-    const value = data as SentenceStructureLearnable;
+    const value = data as KanjiLearnable;
     const kanjiVariation = value.getKanjiVariation();
 
     return (
@@ -25,7 +25,7 @@ const SentenceStructureFlashCardBack = (props: CardBackFaceProps) => {
                 </Copyable>
 
                 {props.showRomaji &&
-                    <RomajiDisplay kana={value.getKana()} className={styles.romaji} />
+                    <RomajiDisplay kana={value.getKana()[0]} className={styles.romaji} />
                 }
             </div>
         </FlashCardBack>

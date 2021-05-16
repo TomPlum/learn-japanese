@@ -1,4 +1,4 @@
-import Learnable from "../types/learn/Learnable";
+import { Learnable } from "../types/learn/Learnable";
 import { LearnBasicsSettings } from "../types/learn/LearningSessionSettings";
 import { colours } from "../data/Colours";
 import { ColourData } from "../data/DataTypes";

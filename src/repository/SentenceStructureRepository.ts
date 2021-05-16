@@ -1,14 +1,14 @@
 import Repository from "./Repository";
-import { SentenceStructureLearnable } from "../types/learn/CommonLearnable";
 import { LearnSentenceStructureSettings } from "../types/learn/LearningSessionSettings";
 import { adjectives, adverbs, expressions, verbs } from "../data/SentenceStructure";
 import { AdjectiveData, AdverbData, ExpressionData, VerbData } from "../data/DataTypes";
 import Adjective from "../types/sentence/Adjective";
 import Verb from "../types/sentence/Verb";
 import Definition from "../types/sentence/Definition";
+import { KanjiLearnable } from "../types/learn/Learnable";
 
-export default class SentenceStructureRepository implements Repository<SentenceStructureLearnable> {
-    read(settings: LearnSentenceStructureSettings): SentenceStructureLearnable[] {
+export default class SentenceStructureRepository implements Repository<KanjiLearnable> {
+    read(settings: LearnSentenceStructureSettings): KanjiLearnable[] {
 
         if (settings.adjectives) {
             return adjectives().map((it: AdjectiveData) => new Adjective(it.meanings, it.kanjiForm, it.type, it.kana));

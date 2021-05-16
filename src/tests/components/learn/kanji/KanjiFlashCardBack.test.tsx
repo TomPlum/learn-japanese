@@ -62,7 +62,7 @@ test('Should render the kanji as a link to the source', () => {
 
 test('Should render the examples display', () => {
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />);
-    expect(getByTextWithMarkup('外国人')).toBeInTheDocument();
+    expect(component.getByText('外国人')).toBeInTheDocument();
     expect(getByTextWithMarkup('( がいこくじん )')).toBeInTheDocument();
     expect(component.getByText('foreigner')).toBeInTheDocument();
 });

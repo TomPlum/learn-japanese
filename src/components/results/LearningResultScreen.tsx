@@ -5,7 +5,7 @@ import { faEraser } from "@fortawesome/free-solid-svg-icons";
 import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import QuitButton from "../ui/buttons/QuitButton";
 import styles from "../../styles/sass/components/results/LearningResultScreen.module.scss";
-import Learnable from "../../types/learn/Learnable";
+import { Learnable } from "../../types/learn/Learnable";
 
 export interface LearningResultScreenProps {
     result: LearningSessionResult;

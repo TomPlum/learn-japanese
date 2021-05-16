@@ -1,7 +1,7 @@
-import { SentenceStructureLearnable } from "../learn/CommonLearnable";
+import { KanjiLearnable } from "../learn/Learnable";
 import { VerbType } from "./VerbType";
 
-export default class Verb implements SentenceStructureLearnable {
+export default class Verb extends KanjiLearnable {
 
     private readonly meanings: string[];
     private readonly kanjiVariant: string | undefined;
@@ -9,6 +9,7 @@ export default class Verb implements SentenceStructureLearnable {
     private readonly kana: string;
 
     constructor(meanings: string[], kanjiVariant: string | undefined, type: VerbType, kana: string) {
+        super();
         this.meanings = meanings;
         this.kanjiVariant = kanjiVariant;
         this.type = type;
@@ -23,8 +24,8 @@ export default class Verb implements SentenceStructureLearnable {
         return this.type + " Verb";
     }
 
-    getKana(): string {
-        return this.kana;
+    getKana(): string[] {
+        return [this.kana];
     }
 
     getKanjiVariation(): string | undefined {

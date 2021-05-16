@@ -1,11 +1,10 @@
 import { Reading } from "./Reading";
-import JapaneseCharacter from "../JapaneseCharacter";
 import { Example } from "./Example";
 import { KyoikuGrade } from "./KyoikuGrade";
-import Learnable from "../learn/Learnable";
+import { Learnable } from "../learn/Learnable";
 import JapaneseWord from "../learn/JapaneseWord";
 
-export class Kanji implements Learnable, JapaneseCharacter {
+export class Kanji implements Learnable {
     private readonly _character: string;
     private readonly _readings: Reading[];
     private readonly _meanings: string[];

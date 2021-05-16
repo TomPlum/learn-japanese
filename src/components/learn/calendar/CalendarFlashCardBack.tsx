@@ -1,11 +1,11 @@
-import { CardFaceProps } from "../FlashCard";
+import { CardBackFaceProps } from "../FlashCard";
 import FlashCardBack from "../FlashCardBack";
-import { KanjiLearnable } from "../../../types/learn/CommonLearnable";
+import { KanjiLearnable } from "../../../types/learn/Learnable";
 import { Col, Container, Row } from "react-bootstrap";
+import RomajiDisplay from "../../ui/RomajiDisplay";
 import styles from "../../../styles/sass/components/learn/calendar/CalendarFlashCardBack.module.scss"
-import JapaneseWord from "../../../types/learn/JapaneseWord";
 
-function CalendarFlashCardBack(props: CardFaceProps) {
+function CalendarFlashCardBack(props: CardBackFaceProps) {
     const { data, onClick } = props;
 
     const value = data as KanjiLearnable;
@@ -15,19 +15,27 @@ function CalendarFlashCardBack(props: CardFaceProps) {
             <Container>
                 <Row>
                     <Col>
-                        <p className={styles.kanji}>{value.getKanji()}</p>
+                        <p className={styles.kanji}>{value.getKanjiVariation()}</p>
                     </Col>
                 </Row>
+
                 <Row>
                     <Col>
-                        {value.getWords().map((word: JapaneseWord) => {
-                            return <p className={styles.text} key={word.romaji}>{word.kana} ({word.romaji})</p>
-                        })}
+                        <p className={styles.text} key={value.getKana()[0]}>
+                            {value.getKana()[0]}
+                        </p>
                     </Col>
                 </Row>
-                {value.getMeaning() && <Row>
+
+                {props.showRomaji && <Row>
                     <Col>
-                        <p className={styles.meaning}>Literally meaning: {value.getMeaning()}</p>
+                        <RomajiDisplay kana={value.getKana()[0]} className={styles.romaji} />
+                    </Col>
+                </Row>}
+
+                {value.getMeanings() && <Row>
+                    <Col>
+                        <p className={styles.meaning}>Literally meaning: {value.getMeanings()}</p>
                     </Col>
                 </Row>}
             </Container>

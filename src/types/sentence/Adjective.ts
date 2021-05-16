@@ -1,7 +1,7 @@
 import { AdjectiveType } from "./AdjectiveType";
-import { SentenceStructureLearnable } from "../learn/CommonLearnable";
+import { KanjiLearnable } from "../learn/Learnable";
 
-export default class Adjective implements SentenceStructureLearnable {
+export default class Adjective extends KanjiLearnable {
 
     private readonly meanings: string[];
     private readonly kanjiVariant: string | undefined;
@@ -9,6 +9,7 @@ export default class Adjective implements SentenceStructureLearnable {
     private readonly kana: string;
 
     constructor(meanings: string[], kanjiVariant: string | undefined, type: AdjectiveType, kana: string) {
+        super();
         this.meanings = meanings;
         this.kanjiVariant = kanjiVariant;
         this.type = type;
@@ -23,15 +24,15 @@ export default class Adjective implements SentenceStructureLearnable {
         return this.type + " Adjective";
     }
 
-    getKana(): string {
-        return this.kana;
-    }
-
     getKanjiVariation(): string | undefined {
         return this.kanjiVariant;
     }
 
-    getMeanings(): string[] {
+    getMeanings(): string[] | undefined {
         return this.meanings;
+    }
+
+    getKana(): string[] {
+        return [this.kana];
     }
 }

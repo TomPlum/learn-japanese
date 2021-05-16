@@ -1,6 +1,6 @@
 import { CardFaceProps } from "../FlashCard";
 import CommonFlashCardBack from "../CommonFlashCardBack";
-import { KanjiLearnable } from "../../../types/learn/CommonLearnable";
+import { KanjiLearnable } from "../../../types/learn/Learnable";
 
 const NumbersFlashCardBack = (props: CardFaceProps) => {
     const { data, onClick } = props;
@@ -10,8 +10,8 @@ const NumbersFlashCardBack = (props: CardFaceProps) => {
     return (
         <CommonFlashCardBack
             title={value.getTitle()}
-            answer={value.getKanji()}
-            words={value.getWords()}
+            answer={value.getKanjiVariation() ?? ""}
+            kana={value.getKana()}
             example={value.getExample()}
             onClick={onClick}
         />
