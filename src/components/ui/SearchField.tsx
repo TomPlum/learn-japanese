@@ -7,12 +7,13 @@ import React, { Component } from "react";
 interface SearchFieldProps {
     value?: string;
     append?: string;
+    placeholder?: string;
     onChange: (value: string) => void;
 }
 
 class SearchField extends Component<SearchFieldProps> {
     render() {
-        const { value, append } = this.props;
+        const { value, append, placeholder } = this.props;
         return (
             <InputGroup className={styles.inputGroup}>
                 <InputGroup.Prepend>
@@ -20,16 +21,22 @@ class SearchField extends Component<SearchFieldProps> {
                         <FontAwesomeIcon icon={faSearch}/>
                     </InputGroup.Text>
                 </InputGroup.Prepend>
+
                 <Form.Control
                     type="text"
                     value={value}
                     className={styles.input}
+                    placeholder={placeholder ?? "Enter search term"}
                     onChange={(e) => this.props.onChange(e.target.value)}
-                    placeholder="Enter the romaji"
                 />
-                <InputGroup.Append>
-                    <InputGroup.Text>{append}</InputGroup.Text>
-                </InputGroup.Append>
+
+                {append && (
+                    <InputGroup.Append>
+                        <InputGroup.Text>
+                            {append}
+                        </InputGroup.Text>
+                    </InputGroup.Append>
+                )}
             </InputGroup>
         );
     }
