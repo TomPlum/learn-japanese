@@ -123,10 +123,10 @@ describe("Kana", () => {
           expect(question).toBe("え");
       });
 
-      it("Should return the kana romaji string for the answer", () => {
+      it("Should return the kana romaji string for the meanings", () => {
           const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
-          const answer = kana.getAnswer();
-          expect(answer).toBe("fu (hu)");
+          const answer = kana.getMeanings();
+          expect(answer).toStrictEqual(["fu", "hu"]);
       });
 
       it("Should return the kana type for the title", () => {

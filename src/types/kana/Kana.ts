@@ -1,9 +1,9 @@
 import KanaType from "./KanaType";
 import { KanaColumn } from "./KanaColumn";
 import Arrays from "../../utility/Arrays";
-import { ExceptionalLearnable } from "../learn/Learnable";
+import { KanjiLearnable } from "../learn/Learnable";
 
-export class Kana implements ExceptionalLearnable {
+export class Kana extends KanjiLearnable {
     private readonly _code: string;
     private readonly _romaji: string[];
     private readonly _type: KanaType;
@@ -11,6 +11,7 @@ export class Kana implements ExceptionalLearnable {
     private readonly _isDiacritical: boolean;
 
     constructor(code: string, romaji: string[], type: KanaType, column: KanaColumn, isDiacritical: boolean) {
+        super();
         this._code = code;
         this._romaji = romaji;
         this._type = type;
@@ -54,12 +55,16 @@ export class Kana implements ExceptionalLearnable {
         return this._code;
     }
 
-    getAnswer(): string {
-        return this.getFullRomajiString();
-    }
-
     getTitle(): string {
         return this._type;
+    }
+
+    getKana(): string[] {
+        return [this._code];
+    }
+
+    getMeanings(): string[] | undefined {
+        return this.romaji;
     }
 
     public equals(other: any): boolean {

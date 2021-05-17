@@ -2,7 +2,7 @@ export abstract class Learnable {
     abstract getQuestion(): string;
     abstract getTitle(): string;
 }
-
+//TODO: Make KanjiLearnable -> Learnable. Delete getQuestion() and replace w/meanings. Can instanceof in Search.tsx then
 export abstract class KanjiLearnable extends Learnable {
 
     abstract getKana(): string[];
@@ -15,10 +15,6 @@ export abstract class KanjiLearnable extends Learnable {
     public getKanjiVariation(): string | undefined {
         return undefined;
     }
-}
-
-export interface ExceptionalLearnable extends Learnable {
-    getAnswer(): string;
 }
 
 export interface LearningExample {
