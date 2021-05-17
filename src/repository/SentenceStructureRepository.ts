@@ -5,10 +5,10 @@ import { AdjectiveData, AdverbData, ExpressionData, VerbData } from "../data/Dat
 import Adjective from "../types/sentence/Adjective";
 import Verb from "../types/sentence/Verb";
 import Definition from "../types/sentence/Definition";
-import { KanjiLearnable } from "../types/learn/Learnable";
+import { Learnable } from "../types/learn/Learnable";
 
-export default class SentenceStructureRepository implements Repository<KanjiLearnable> {
-    read(settings: LearnSentenceStructureSettings): KanjiLearnable[] {
+export default class SentenceStructureRepository implements Repository<Learnable> {
+    read(settings: LearnSentenceStructureSettings): Learnable[] {
 
         if (settings.adjectives) {
             return adjectives().map((it: AdjectiveData) => new Adjective(it.meanings, it.kanjiForm, it.type, it.kana));

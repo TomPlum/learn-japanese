@@ -9,7 +9,7 @@ export default class NumbersRepository implements Repository<CommonData> {
         if (settings.numbers) {
             return numbers().map((number: NumbersData) => {
                 const kanji = this.convertKanji(number);
-                return new CommonData(number.name, number.kana, kanji, "Number");
+                return new CommonData(number.name, number.kana, kanji, "Number", number.name);
             });
         }
 
@@ -17,7 +17,7 @@ export default class NumbersRepository implements Repository<CommonData> {
             return counters().map((counter: CounterData) => {
                 const kanji = this.convertKanji(counter);
                 const title = "Counter - " + counter.group;
-                return new CommonData(counter.name, counter.kana, kanji, title, undefined, counter.example);
+                return new CommonData(counter.name, counter.kana, kanji, title, counter.name, counter.example);
             });
         }
 

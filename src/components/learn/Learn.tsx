@@ -106,7 +106,7 @@ class Learn extends Component<LearnProps, LearnState> {
                         <Col>
                             <FlashCard
                                 data={current}
-                                key={current.getQuestion()}
+                                key={current.getMeanings()[0]}
                                 onFlip={this.onFlip}
                                 front={card.front}
                                 back={card.back}

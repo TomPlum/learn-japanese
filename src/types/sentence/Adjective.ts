@@ -1,7 +1,7 @@
 import { AdjectiveType } from "./AdjectiveType";
-import { KanjiLearnable } from "../learn/Learnable";
+import { Learnable } from "../learn/Learnable";
 
-export default class Adjective extends KanjiLearnable {
+export default class Adjective extends Learnable {
 
     private readonly meanings: string[];
     private readonly kanjiVariant: string | undefined;
@@ -16,10 +16,6 @@ export default class Adjective extends KanjiLearnable {
         this.kana = kana;
     }
 
-    getQuestion(): string {
-        return this.meanings.join(" or ");
-    }
-
     getTitle(): string {
         return this.type + " Adjective";
     }
@@ -28,7 +24,7 @@ export default class Adjective extends KanjiLearnable {
         return this.kanjiVariant;
     }
 
-    getMeanings(): string[] | undefined {
+    getMeanings(): string[] {
         return this.meanings;
     }
 

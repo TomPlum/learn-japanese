@@ -1,6 +1,6 @@
-import { KanjiLearnable } from "../learn/Learnable";
+import { Learnable } from "../learn/Learnable";
 
-export default class Month extends KanjiLearnable {
+export default class Month extends Learnable {
     private readonly _english: string;
     private readonly _kanji: string;
     private readonly _romaji: string;
@@ -20,15 +20,11 @@ export default class Month extends KanjiLearnable {
         return [this._kana];
     }
 
-    getQuestion(): string {
-        return this._english;
-    }
-
     getTitle(): string {
         return "Month of the Year";
     }
 
-    getMeanings(): string[] | undefined {
+    getMeanings(): string[] {
         return [this._english];
     }
 

@@ -1,6 +1,6 @@
-import { KanjiLearnable } from "../learn/Learnable";
+import { Learnable } from "../learn/Learnable";
 
-export default class Definition extends KanjiLearnable {
+export default class Definition extends Learnable {
 
     private readonly meanings: string[];
     private readonly kanjiVariant: string | undefined;
@@ -25,10 +25,6 @@ export default class Definition extends KanjiLearnable {
 
     getMeanings(): string[] {
         return this.meanings;
-    }
-
-    getQuestion(): string {
-        return this.meanings.join(" or ");
     }
 
     getTitle(): string {

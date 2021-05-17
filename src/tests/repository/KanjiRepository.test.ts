@@ -115,7 +115,7 @@ describe("Kanji Repository", () => {
     describe("Get By Value", () => {
         it("Should return the kanji if a code matches the request", () => {
             const kanji = repository.getByValue("猫");
-            expect(kanji?.meanings).toStrictEqual(['cat']);
+            expect(kanji?.getMeanings()).toStrictEqual(['cat']);
         });
 
         it("Should return undefined if the request does not match any kanji", () => {

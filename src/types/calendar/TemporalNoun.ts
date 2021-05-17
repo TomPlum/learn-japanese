@@ -1,6 +1,6 @@
-import { KanjiLearnable } from "../learn/Learnable";
+import { Learnable } from "../learn/Learnable";
 
-export default class TemporalNoun extends KanjiLearnable {
+export default class TemporalNoun extends Learnable {
     private readonly _english: string;
     private readonly _kanji: string;
     private readonly _romaji: string;
@@ -18,10 +18,6 @@ export default class TemporalNoun extends KanjiLearnable {
         return [this._kana];
     }
 
-    getQuestion(): string {
-        return this._english;
-    }
-
     getTitle(): string {
         return "Temporal Noun / Adverb";
     }
@@ -30,7 +26,7 @@ export default class TemporalNoun extends KanjiLearnable {
         return this._kanji;
     }
 
-    getMeanings(): string[] | undefined {
+    getMeanings(): string[] {
         return [this._english];
     }
 }

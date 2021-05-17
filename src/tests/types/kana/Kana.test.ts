@@ -117,12 +117,6 @@ describe("Kana", () => {
    });
 
    describe("Learnable", () => {
-      it("Should return the kana unicode for the question", () => {
-          const kana = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-          const question = kana.getQuestion();
-          expect(question).toBe("え");
-      });
-
       it("Should return the kana romaji string for the meanings", () => {
           const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
           const answer = kana.getMeanings();

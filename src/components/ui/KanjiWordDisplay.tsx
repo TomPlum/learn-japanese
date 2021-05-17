@@ -40,7 +40,7 @@ class KanjiWordDisplay extends Component<KanjiWordDisplayProps> {
                                 <Inspectable
                                     key={"inspectable-" + char}
                                     className={className}
-                                    popover={{ title: kanji.meanings.join(", "), text: overlay  }}
+                                    popover={{ title: kanji.getMeanings().join(", "), text: overlay  }}
                                 >
                                     <span key={char}>{char}</span>
                                 </Inspectable>

@@ -1,7 +1,7 @@
-import { KanjiLearnable } from "../learn/Learnable";
 import { VerbType } from "./VerbType";
+import { Learnable } from "../learn/Learnable";
 
-export default class Verb extends KanjiLearnable {
+export default class Verb extends Learnable {
 
     private readonly meanings: string[];
     private readonly kanjiVariant: string | undefined;
@@ -14,10 +14,6 @@ export default class Verb extends KanjiLearnable {
         this.kanjiVariant = kanjiVariant;
         this.type = type;
         this.kana = kana;
-    }
-
-    getQuestion(): string {
-        return this.meanings.join(" or ");
     }
 
     getTitle(): string {

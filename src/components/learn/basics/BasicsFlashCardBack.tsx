@@ -8,7 +8,7 @@ function BasicsFlashCardBack(props: CardFaceProps) {
     return (
         <CommonFlashCardBack
             title={value.getTitle()}
-            answer={value.getKanji()}
+            answer={value.getKanjiVariation()}
             kana={value.getKana()}
             onClick={props.onClick}
             borderColour={props.data instanceof Colour ? props.data.colour : undefined}

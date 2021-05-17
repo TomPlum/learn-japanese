@@ -29,7 +29,7 @@ describe("Numbers Repository", function () {
     it("Should return numbers as CommonData objects when the 'numbers' boolean is passed as true", () => {
         const settings: LearnNumbersSettings = { numbers: true };
         const response = repository.read(settings);
-        expect(response).toStrictEqual([new CommonData("1", ["いち"], "一", "Number")]);
+        expect(response).toStrictEqual([new CommonData("1", ["いち"], "一", "Number", "1")]);
     });
 
     it("Should return counters as CommonData objects when the 'counters' boolean is passed as true", () => {
@@ -41,7 +41,7 @@ describe("Numbers Repository", function () {
                 ["まい"],
                 "枚",
                 "Counter - Must Know",
-                undefined,
+                "Flat",
                 { english: "I need 100 pieces of origami paper.", kana: "100枚の折り紙が必要です"}
             )]
         );
@@ -56,6 +56,6 @@ describe("Numbers Repository", function () {
         mockNumbers.mockReturnValueOnce([ { name: "1", kana: ["いち"], romaji: ["ichi"] }]);
         const settings: LearnNumbersSettings = { numbers: true };
         const response = repository.read(settings);
-        expect(response).toStrictEqual([new CommonData("1", ["いち"], "", "Number")]);
+        expect(response).toStrictEqual([new CommonData("1", ["いち"], "", "Number", "1")]);
     });
 });

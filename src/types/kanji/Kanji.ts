@@ -2,9 +2,9 @@ import { Reading } from "./Reading";
 import { Example } from "./Example";
 import { KyoikuGrade } from "./KyoikuGrade";
 import { Learnable } from "../learn/Learnable";
-import JapaneseWord from "../learn/JapaneseWord";
 
-export class Kanji implements Learnable {
+export class Kanji extends Learnable {
+
     private readonly _character: string;
     private readonly _readings: Reading[];
     private readonly _meanings: string[];
@@ -13,6 +13,7 @@ export class Kanji implements Learnable {
     private readonly _examples: Example[];
 
     constructor(character: string, readings: Reading[], meanings: string[], grade: KyoikuGrade, source: string, examples: Example[]) {
+        super();
         this._character = character;
         this._readings = readings;
         this._meanings = meanings;
@@ -23,10 +24,6 @@ export class Kanji implements Learnable {
 
     get readings(): Reading[] {
         return this._readings;
-    }
-
-    get meanings(): string[] {
-        return this._meanings;
     }
 
     get grade(): KyoikuGrade {
@@ -45,15 +42,15 @@ export class Kanji implements Learnable {
         return this._examples;
     }
 
-    getAnswer(): JapaneseWord[] {
-        return [];
-    }
-
-    getQuestion(): string {
-        return this._character;
-    }
-
     getTitle(): string {
         return "Grade " + this.grade.value;
+    }
+
+    getKana(): string[] {
+        throw new Error("Method not implemented.");
+    }
+
+    getMeanings(): string[] {
+        return this._meanings;
     }
 }

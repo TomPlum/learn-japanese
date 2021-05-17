@@ -1,6 +1,5 @@
 import FlashCardBack from "../FlashCardBack";
 import { CardFaceProps } from "../FlashCard";
-import { KanjiLearnable } from "../../../types/learn/Learnable";
 import styles from "../../../styles/sass/components/learn/kana/KanaFlashCardBack.module.scss"
 import DefinitionList from "../DefinitionList";
 
@@ -10,7 +9,7 @@ const KanaFlashCardBack = (props: CardFaceProps) => {
     return (
         <FlashCardBack title={data.getTitle()} onReset={onClick} className={styles.wrapper}>
             <div className={styles.romaji}>
-                <DefinitionList words={(data as KanjiLearnable).getMeanings()} mode="inline" />
+                <DefinitionList words={data.getMeanings()} mode="inline" />
             </div>
         </FlashCardBack>
     );

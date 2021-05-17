@@ -1,6 +1,6 @@
-import { KanjiLearnable } from "../learn/Learnable";
+import { Learnable } from "../learn/Learnable";
 
-export default class Day extends KanjiLearnable {
+export default class Day extends Learnable {
     private readonly _english: string;
     private readonly _kanji: string;
     private readonly _romaji: string;
@@ -20,15 +20,11 @@ export default class Day extends KanjiLearnable {
         return [this._kana];
     }
 
-    getQuestion(): string {
-        return this._english;
-    }
-
     getTitle(): string {
         return "Day of the Week";
     }
 
-    getMeanings(): string[] | undefined {
+    getMeanings(): string[] {
         return [this._english]
     }
 

@@ -1,6 +1,6 @@
-import { KanjiLearnable } from "../learn/Learnable";
+import { Learnable } from "../learn/Learnable";
 
-export default class Colour extends KanjiLearnable {
+export default class Colour extends Learnable {
     private readonly _name: string;
     private readonly _kanji: string | undefined;
     private readonly _kana: string;
@@ -20,7 +20,7 @@ export default class Colour extends KanjiLearnable {
         return this._colour;
     }
 
-    getKanji(): string {
+    getKanjiVariation(): string {
         return this._kanji ?? this._name;
     }
 
@@ -28,15 +28,11 @@ export default class Colour extends KanjiLearnable {
         return [this._kana];
     }
 
-    getQuestion(): string {
-        return this._name;
-    }
-
     getTitle(): string {
         return this._name;
     }
 
-    getMeanings(): string[] | undefined {
+    getMeanings(): string[] {
         return [this._name];
     }
 }

@@ -51,7 +51,7 @@ class KanjiFlashCardBack extends Component<CardBackFaceProps> {
                                 <Inspectable popover={{ title: "English Meaning", text: Environment.variable("ENGLISH_MEANING_DESC") }}>
                                     <span className={styles.label}>Meaning</span>
                                 </Inspectable>
-                                {": " + kanji.meanings.join(", ")}
+                                {": " + kanji.getMeanings().join(", ")}
                             </p>
                         </div>
                     </Col>

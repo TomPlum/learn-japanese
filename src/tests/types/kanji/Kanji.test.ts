@@ -26,7 +26,7 @@ describe("Kanji", () => {
         });
 
         it("Should get the meanings", () => {
-            expect(kanji.meanings).toStrictEqual(["person"]);
+            expect(kanji.getMeanings()).toStrictEqual(["person"]);
         });
 
         it("Should get the grade", () => {
@@ -43,14 +43,6 @@ describe("Kanji", () => {
 
         it("Should return the Kyoiku grade for the title", () => {
             expect(kanji.getTitle()).toBe("Grade 1")
-        });
-
-        it("Should return the kanji character for the question", () => {
-            expect(kanji.getQuestion()).toBe("人")
-        });
-
-        it("Should return the first an empty array for the answer", () => {
-            expect(kanji.getAnswer()).toStrictEqual([])
         });
     });
 });

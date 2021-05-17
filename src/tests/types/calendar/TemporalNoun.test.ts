@@ -1,17 +1,12 @@
-import { KanjiLearnable } from "../../../types/learn/Learnable";
 import TemporalNoun from "../../../types/calendar/TemporalNoun";
-import JapaneseWord from "../../../types/learn/JapaneseWord";
+import { Learnable } from "../../../types/learn/Learnable";
 
 describe("Temporal Noun", () => {
 
-    const noun: KanjiLearnable = new TemporalNoun("Tomorrow", "明日", "ashita", "あした");
+    const noun: Learnable = new TemporalNoun("Tomorrow", "明日", "ashita", "あした");
 
     it("Should return the correct title", () => {
         expect(noun.getTitle()).toBe("Temporal Noun / Adverb");
-    });
-
-    it("Should return the english word as the question", () => {
-        expect(noun.getQuestion()).toBe("Tomorrow");
     });
 
     it("Should return the Japanese Words", () => {

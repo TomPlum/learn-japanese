@@ -1,9 +1,9 @@
 import KanaType from "./KanaType";
 import { KanaColumn } from "./KanaColumn";
 import Arrays from "../../utility/Arrays";
-import { KanjiLearnable } from "../learn/Learnable";
+import { Learnable } from "../learn/Learnable";
 
-export class Kana extends KanjiLearnable {
+export class Kana extends Learnable {
     private readonly _code: string;
     private readonly _romaji: string[];
     private readonly _type: KanaType;
@@ -51,10 +51,6 @@ export class Kana extends KanjiLearnable {
         return this._isDiacritical;
     }
 
-    getQuestion(): string {
-        return this._code;
-    }
-
     getTitle(): string {
         return this._type;
     }
@@ -63,7 +59,7 @@ export class Kana extends KanjiLearnable {
         return [this._code];
     }
 
-    getMeanings(): string[] | undefined {
+    getMeanings(): string[] {
         return this.romaji;
     }
 
