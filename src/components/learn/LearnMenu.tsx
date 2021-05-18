@@ -82,7 +82,7 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
                     </Col>
 
                     <Col xs={2} className="pl-2">
-                        <Button className={styles.search} onClick={() => this.setState({ searching: true })}>
+                        <Button className={styles.search} onClick={() => this.setState({ searching: true })} title="Search">
                             <FontAwesomeIcon icon={faSearch} fixedWidth/>
                         </Button>
                     </Col>

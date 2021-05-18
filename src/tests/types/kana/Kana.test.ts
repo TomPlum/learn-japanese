@@ -128,5 +128,23 @@ describe("Kana", () => {
           const title = kana.getTitle();
           expect(title).toBe("Hiragana");
       });
+
+      it("Should return the character for the kana", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const title = kana.getKana();
+          expect(title).toStrictEqual(["ふ"]);
+      });
+
+      it("Should return undefined for the kanji variation", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const title = kana.getKanjiVariation();
+          expect(title).toBeUndefined();
+      });
+
+      it("Should return undefined for the example", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const title = kana.getExample();
+          expect(title).toBeUndefined();
+      });
    });
 });

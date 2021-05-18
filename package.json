@@ -43,7 +43,9 @@
       "src/**/*.{ts,tsx}",
       "!src/index.tsx",
       "!src/components/error/**",
-      "!src/data/Kanji.ts"
+      "!src/data/Kanji.ts",
+      "!src/data/Numbers.ts",
+      "!src/data/SentenceStructure.ts"
     ]
   },
   "browserslist": {

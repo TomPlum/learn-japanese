@@ -1,0 +1,30 @@
+@import "src/styles/sass/viewports";
+
+@include desktop {
+  .wrapper {
+    height: 575px;
+  }
+}
+
+@include tablet {
+  .wrapper {
+    height: 575px;
+  }
+}
+
+@include phone {
+  .wrapper {
+
+  }
+}
+
+.results {
+  overflow: scroll;
+  overflow-x: hidden;
+  max-height: 525px;
+  //padding-right: 8px;
+}
+
+.search {
+  margin-bottom: 10px;
+}

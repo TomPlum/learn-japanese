@@ -2,6 +2,7 @@ import { Reading } from "./Reading";
 import { Example } from "./Example";
 import { KyoikuGrade } from "./KyoikuGrade";
 import { Learnable } from "../learn/Learnable";
+import { ReadingType } from "./ReadingType";
 
 export class Kanji extends Learnable {
 
@@ -47,10 +48,27 @@ export class Kanji extends Learnable {
     }
 
     getKana(): string[] {
-        throw new Error("Method not implemented.");
+        const on = this._readings.filter((reading: Reading) => reading.type === ReadingType.ON);
+        const kun = this._readings.filter((reading: Reading) => reading.type === ReadingType.KUN);
+
+        let response = [];
+
+        if (on.length > 0) {
+            response.push(on[0].kana);
+        }
+
+        if (kun.length > 0) {
+            response.push(kun[0].kana);
+        }
+
+        return response;
     }
 
     getMeanings(): string[] {
         return this._meanings;
+    }
+
+    getKanjiVariation(): string | undefined {
+        return this._character;
     }
 }

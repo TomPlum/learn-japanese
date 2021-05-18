@@ -8,14 +8,15 @@ interface SearchFieldProps {
     value?: string;
     append?: string;
     placeholder?: string;
+    className?: string;
     onChange: (value: string) => void;
 }
 
 class SearchField extends Component<SearchFieldProps> {
     render() {
-        const { value, append, placeholder } = this.props;
+        const { value, append, placeholder, className } = this.props;
         return (
-            <InputGroup className={styles.inputGroup}>
+            <InputGroup className={[styles.inputGroup, className].join(" ")}>
                 <InputGroup.Prepend>
                     <InputGroup.Text>
                         <FontAwesomeIcon icon={faSearch}/>

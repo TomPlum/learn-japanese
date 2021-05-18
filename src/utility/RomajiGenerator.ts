@@ -26,7 +26,7 @@ export default class RomajiGenerator {
         //Replace Sokuons
         const sokuonsReplaced = [...kanaWithDiagraphsReplaced].map((char: string, i: number) => {
             if (i < kanaWithDiagraphsReplaced.length - 1 && this.sokuons.includes(char)) {
-                //TODO: What is the sokuon is before a diagraph?;
+                //TODO: What if the sokuon is before a diagraph?;
                 const kana = this.hiragana.concat(this.katakana).find((it: KanaData) => it.code === kanaWithDiagraphsReplaced[i + 1]);
                 return kana?.column ?? char;
             }

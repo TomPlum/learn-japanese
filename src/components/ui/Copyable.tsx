@@ -35,7 +35,7 @@ class Copyable extends Component<CopyableProps, CopyableState> {
     }
 
     render() {
-        const { className, inline, placement } = this.props;
+        const { className, inline, placement, children } = this.props;
         const { hasWritten, hasFailed, active } = this.state;
 
         return (
@@ -47,8 +47,8 @@ class Copyable extends Component<CopyableProps, CopyableState> {
                 className={styles.paragraph}
                 style={{ display: inline ? "inline" : "block" }}
             >
-                 {React.cloneElement(this.props.children as ReactElement, {
-                     className: [active ? styles.active : styles.element, className].join(" "),
+                 {React.cloneElement(children as ReactElement, {
+                     className: [(active ? styles.active : styles.element), className].join(" "),
                      ref: this.ref
                  })}
 

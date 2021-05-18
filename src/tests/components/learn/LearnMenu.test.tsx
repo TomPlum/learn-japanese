@@ -133,6 +133,7 @@ describe("Example 2 - Calendar", () => {
             phrases: component.getByText('Common Phrases'),
             all: component.getByText('Everything'),
             start: component.getByText('Start'),
+            search: component.getByTitle('Search'),
             ...component
         }
     }
@@ -236,7 +237,13 @@ describe("Example 2 - Calendar", () => {
                 phrases: true
             }
         });
+    });
 
+    test('Clicking the Search button should launch the search menu with the selected topic', () => {
+        const { days, search } = setup();
+        fireEvent.click(days);
+        fireEvent.click(search);
+        expect(screen.getByText('Monday')).toBeInTheDocument();
     });
 });
 

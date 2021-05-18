@@ -5,9 +5,9 @@ import KanaGameModeMenu from "./KanaGameModeMenu";
 import TopicSelectionMenu from "./TopicSelectionMenu";
 import { GameSettings } from "../../types/game/GameSettings";
 import { AppMode } from "../../types/AppMode";
-import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 import { LearningSessionSettings } from "../../types/learn/LearningSessionSettings";
 import LearnMenu from "../learn/LearnMenu";
+import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 
 export interface GameTypeSettings {
     topic: Topic;
