@@ -161,7 +161,7 @@ class KanjiSettingsMenu extends Component<CustomLearnMenuProps, KanjiSettingsMen
         if (grades.length > 0) {
             if (quantity) {
                 if (grades.length > 1) {
-                    if (grades.length == 6) {
+                    if (grades.length === 6) {
                         return template.format(quantity, "all grades");
                     }
                     const gradeNumbers = Arrays.copy(grades).splice(0, grades.length - 1).map(it => it.value).join(", ");
