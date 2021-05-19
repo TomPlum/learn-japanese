@@ -67,7 +67,7 @@ export interface CounterData extends NumbersData {
     example: { kana: string, english: string };
 }
 
-interface SentenceStructureData {
+export interface SentenceStructureData {
     meanings: string[];
     kana: string;
     kanjiForm?: string;

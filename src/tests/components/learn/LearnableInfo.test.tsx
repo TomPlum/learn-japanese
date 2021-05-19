@@ -1,9 +1,8 @@
 import { render } from "@testing-library/react";
 import LearnableInfo from "../../../components/learn/LearnableInfo";
-import Adjective from "../../../types/sentence/Adjective";
-import { AdjectiveType } from "../../../types/sentence/AdjectiveType";
+import Definition from "../../../types/sentence/Definition";
 
-const adjective = new Adjective(["interesting", "funny"], "面白い", AdjectiveType.I, "おもしろい");
+const adjective = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective");
 
 test('Should render the meanings', () => {
     const component = render(<LearnableInfo value={adjective} />);
@@ -21,7 +20,7 @@ test('Should render the kana', () => {
 });
 
 test('Should render a hyphen if the kanji variation is undefined', () => {
-    const adjective = new Adjective(["interesting", "funny"], undefined, AdjectiveType.I, "おもしろい");
+    const adjective = new Definition(["interesting", "funny"], undefined, "おもしろい", "い Adjective");
     const component = render(<LearnableInfo value={adjective} />);
     expect(component.getByText('-')).toBeInTheDocument();
 });

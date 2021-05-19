@@ -1,12 +1,11 @@
 import { fireEvent, render } from "@testing-library/react";
-import Adjective from "../../../../types/sentence/Adjective";
-import { AdjectiveType } from "../../../../types/sentence/AdjectiveType";
 import SentenceStructureFlashCardBack from "../../../../components/learn/sentence/SentenceStructureFlashCardBack";
 import { getByTextWithMarkup } from "../../../Queries";
+import Definition from "../../../../types/sentence/Definition";
 
 const onResetHandler = jest.fn();
 
-const adjective = new Adjective(["interesting", "funny"], "面白い", AdjectiveType.I, "おもしろい");
+const adjective = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective");
 
 test('Clicking the reset button should call the onReset event handler', () => {
     const component = render(<SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />);

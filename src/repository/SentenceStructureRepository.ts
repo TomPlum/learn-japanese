@@ -1,9 +1,7 @@
 import Repository from "./Repository";
 import { LearnSentenceStructureSettings } from "../types/learn/LearningSessionSettings";
 import { adjectives, adverbs, expressions, verbs } from "../data/SentenceStructure";
-import { AdjectiveData, AdverbData, ExpressionData, VerbData } from "../data/DataTypes";
-import Adjective from "../types/sentence/Adjective";
-import Verb from "../types/sentence/Verb";
+import { AdjectiveData, AdverbData, ExpressionData, SentenceStructureData, VerbData } from "../data/DataTypes";
 import Definition from "../types/sentence/Definition";
 import { Learnable } from "../types/learn/Learnable";
 
@@ -11,11 +9,11 @@ export default class SentenceStructureRepository implements Repository<Learnable
     read(settings: LearnSentenceStructureSettings): Learnable[] {
 
         if (settings.adjectives) {
-            return adjectives().map((it: AdjectiveData) => new Adjective(it.meanings, it.kanjiForm, it.type, it.kana));
+            return adjectives().map((it: AdjectiveData) => this.convert(it, it.type + " Adjective"));
         }
         
         if (settings.verbs) {
-            return verbs().map((it: VerbData) => new Verb(it.meanings, it.kanjiForm, it.type, it.kana));
+            return verbs().map((it: VerbData) => this.convert(it, it.type + " Verb"));
         }
 
         if (settings.adverbs) {
@@ -27,5 +25,9 @@ export default class SentenceStructureRepository implements Repository<Learnable
         }
 
         return [];
+    }
+
+    private convert(data: SentenceStructureData, title: string): Definition {
+        return new Definition(data.meanings, data.kanjiForm, data.kana, title);
     }
 }

@@ -1,13 +1,12 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Search from "../../../components/learn/Search";
-import Adjective from "../../../types/sentence/Adjective";
-import { AdjectiveType } from "../../../types/sentence/AdjectiveType";
+import Definition from "../../../types/sentence/Definition";
 
 const setup = () => {
     const data = [
-        new Adjective(["to like"], "好き", AdjectiveType.NA, "すきな"),
-        new Adjective(["beautiful or clean"], undefined, AdjectiveType.NA, "きれいな"),
-        new Adjective(["quiet"], "静か", AdjectiveType.NA, "しずかな")
+        new Definition(["to like"], "好き","すきな", "な Adjective"),
+        new Definition(["beautiful or clean"], undefined, "きれいな", "な Adjective"),
+        new Definition(["quiet"], "静か", "しずかな", "な Adjective")
     ];
 
     const component = render(<Search data={data} />);
