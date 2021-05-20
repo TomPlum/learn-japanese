@@ -6,6 +6,7 @@ import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import QuitButton from "../ui/buttons/QuitButton";
 import styles from "../../styles/sass/components/results/LearningResultScreen.module.scss";
 import { Learnable } from "../../types/learn/Learnable";
+import { PieChart, Pie, ResponsiveContainer } from "recharts";
 
 export interface LearningResultScreenProps {
     result: LearningSessionResult;
@@ -24,15 +25,31 @@ class LearningResultScreen extends Component<LearningResultScreenProps> {
                         <QuitButton onClick={this.props.onDismiss} className={styles.quit} />
                     </Col>
                 </Row>
+
                 <Row>
-                    <Col className="text-center">
+                    <Col className="text-center" xs={12}>
                         <h1 className={styles.heading}>{this.getTitle()}</h1>
                         {result.forgotten.length > 0 &&
                             <Button onClick={this.onPractice} className={styles.mistakes}>
-                                <FontAwesomeIcon icon={faEraser} fixedWidth />
-                                Practice Mistakes
+                                <FontAwesomeIcon icon={faEraser} fixedWidth /> Practice Mistakes
                             </Button>
                         }
+                    </Col>
+
+                    <Col xs={12}>
+                        {result.forgotten.length > 0 && (
+                            <ResponsiveContainer>
+                                <PieChart>
+                                    <Pie
+                                        data={[
+                                            { value: result.remembered.length, colour: "#d73a3a" },
+                                            { value: result.forgotten.length, colour: "#4ecf46" }
+                                        ]}
+                                        dataKey="value"
+                                    />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        )}
                     </Col>
                 </Row>
             </Container>
