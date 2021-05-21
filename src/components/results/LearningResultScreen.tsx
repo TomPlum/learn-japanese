@@ -6,7 +6,7 @@ import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import QuitButton from "../ui/buttons/QuitButton";
 import styles from "../../styles/sass/components/results/LearningResultScreen.module.scss";
 import { Learnable } from "../../types/learn/Learnable";
-import { PieChart, Pie, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 
 export interface LearningResultScreenProps {
     result: LearningSessionResult;
@@ -17,6 +17,11 @@ export interface LearningResultScreenProps {
 class LearningResultScreen extends Component<LearningResultScreenProps> {
     render() {
         const { result } = this.props;
+
+        const data = [
+            { value: result.remembered.length, colour: "#4ecf46" },
+            { value: result.forgotten.length, colour: "#d73a3a" }
+        ];
 
         return (
             <Container data-testid="learning-results-screen" className={styles.wrapper}>
@@ -38,17 +43,16 @@ class LearningResultScreen extends Component<LearningResultScreenProps> {
 
                     <Col xs={12}>
                         {result.forgotten.length > 0 && (
-                            <ResponsiveContainer>
-                                <PieChart>
-                                    <Pie
-                                        data={[
-                                            { value: result.remembered.length, colour: "#d73a3a" },
-                                            { value: result.forgotten.length, colour: "#4ecf46" }
-                                        ]}
-                                        dataKey="value"
-                                    />
-                                </PieChart>
-                            </ResponsiveContainer>
+                            <PieChart width={250} height={250}>
+                                <Pie
+                                    data={data}
+                                    dataKey="value"
+                                    animationBegin={0}
+                                    innerRadius={35}
+                                >
+                                    {data.map((entry, i) => <Cell key={`cell-${i}`} fill={entry.colour}/>)}
+                                </Pie>
+                            </PieChart>
                         )}
                     </Col>
                 </Row>
@@ -66,7 +70,10 @@ class LearningResultScreen extends Component<LearningResultScreenProps> {
         return "You remembered " + rememberedQuantity + "/" + (rememberedQuantity + forgottenQuantity) + "!";
     }
 
-    private onPractice = () => this.props.onPractice(this.props.result.forgotten);
+    private onPractice = () => {
+        const { result, onPractice } = this.props;
+        onPractice(result.forgotten);
+    }
 
 }
 
