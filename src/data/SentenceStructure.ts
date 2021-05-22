@@ -174,6 +174,13 @@ export function adjectives(): AdjectiveData[] {
             type: AdjectiveType.NA,
             genkiLesson: 5
         },
+        {
+            meanings: ["tough (situation)"],
+            kana: "たいへんな",
+            kanjiForm: "大変",
+            type: AdjectiveType.NA,
+            genkiLesson: 6
+        },
     ];
 }
 
