@@ -2591,7 +2591,7 @@ export function kyoiku(): KanjiData[] {
             code: "\u5408",
             on: [{ kana: "ごう", romanji: "gō" }],
             kun: [{ kana: "あう", romanji: "au" }],
-            source: "https://en.m.wikipedia.org/wiki/Ky%C5%8Diku_kanji",
+            source: "https://en.wiktionary.org/wiki/%E5%90%88#Kanji",
             meanings: ["fit", "suit", "join"],
             grade: KyoikuGrade.TWO,
             examples: [
