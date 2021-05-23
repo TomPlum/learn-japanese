@@ -2570,6 +2570,166 @@ export function kyoiku(): KanjiData[] {
                 { value: "買い物", kana: ["かいもの"], english: ["shopping", "purchased goods"] },
             ]
         },
+        {
+            name: "秋",
+            code: "\u79CB",
+            on: [{ kana: "しゅう", romanji: "shū" }],
+            kun: [{ kana: "あき", romanji: "aki" }],
+            source: "https://en.wiktionary.org/wiki/%E7%A7%8B#Kanji",
+            meanings: ["autumn"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "秋", kana: ["あき"], english: ["autumn", "fall"] },
+                { value: "今秋", kana: ["こんしゅう"], english: ["this (next, last) autumn (fall)"] },
+                { value: "昨秋", kana: ["さくしゅう"], english: ["autumn of last year", "fall of last year"] },
+                { value: "春秋", kana: ["しゅんじゅう", "はるあき"], english: ["spring and autumn", "spring and fall"] },
+                { value: "千秋楽", kana: ["せんしゅうらく"], english: ["concluding festivities"] },
+            ]
+        },
+        {
+            name: "合",
+            code: "\u5408",
+            on: [{ kana: "ごう", romanji: "gō" }],
+            kun: [{ kana: "あう", romanji: "au" }],
+            source: "https://en.m.wikipedia.org/wiki/Ky%C5%8Diku_kanji",
+            meanings: ["fit", "suit", "join"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "合", kana: ["ごう"], english: ["0.18039 litres"] },
+                { value: "合意", kana: ["ごうい"], english: ["agreement", "consent", "mutual understanding"] },
+                { value: "試合", kana: ["しあい"], english: ["match", "game", "bout", "contest"] },
+                { value: "連合", kana: ["れんごう"], english: ["union, alliance", "combination"] },
+                { value: "総合", kana: ["そうごう"], english: ["synthesis", "coordination", "putting together"] },
+            ]
+        },
+        {
+            name: "内",
+            code: "\u5185",
+            on: [{ kana: "ない", romanji: "nai" }, { kana: "だい", romanji: "dai" }],
+            kun: [{ kana: "うち", romanji: "uchi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%86%85#Kanji",
+            meanings: ["inside", "within", "between", "among", "house", "house"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "内", kana: ["うち"], english: ["inside", "within", "while", "among", "amongst"] },
+                { value: "国内", kana: ["こくない"], english: ["internal", "domestic"] },
+                { value: "市内", kana: ["しない"], english: ["(within a) city", "local"] },
+                { value: "都内", kana: ["とない"], english: ["metropolitan area"] },
+                { value: "内閣", kana: ["ないかく"], english: ["cabinet", "(government) ministry"] },
+            ]
+        },
+        {
+            name: "米",
+            code: "\u7C73",
+            on: [{ kana: "まい", romanji: "mai" }, { kana: "べい", romanji: "bei" }],
+            kun: [{ kana: "こめ", romanji: "kome" }],
+            source: "https://en.wiktionary.org/wiki/%E7%B1%B3#Kanji",
+            meanings: ["rice", "USA", "metre"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "日米", kana: ["にちべい"], english: ["Japan", "America"] },
+                { value: "米国", kana: ["べいこく"], english: ["America", "USA"] },
+                { value: "全米", kana: ["ぜんべい"], english: ["American"] },
+                { value: "対米", kana: ["たいべい"], english: ["relating to the USA", "toward America"] },
+                { value: "訪米", kana: ["ほうべい"], english: ["visit to America"] },
+            ]
+        },
+        {
+            name: "首",
+            code: "\u9996",
+            on: [{ kana: "しゅ", romanji: "shu" }],
+            kun: [{ kana: "くび", romanji: "kubi" }],
+            source: "https://en.wiktionary.org/wiki/%E9%A6%96#Kanji",
+            meanings: ["neck", "counter for songs and poems"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "首", kana: ["くび", "クビ"], english: ["neck", "head", "unemployed person"] },
+                { value: "首相", kana: ["しゅしょう"], english: ["Prime Minister", "Chancellor (Germany, Austria)"] },
+                { value: "首脳", kana: ["しゅのう"], english: ["head", "brains", "leading spirit"] },
+                { value: "首都", kana: ["しゅと"], english: ["capital city", "metropolis"] },
+                { value: "党首", kana: ["とうしゅ"], english: ["party leader"] },
+            ]
+        },
+        {
+            name: "夏",
+            code: "\u590F",
+            on: [{ kana: "げ", romanji: "ge" }, { kana: "か", romanji: "ka" }],
+            kun: [{ kana: "なつ", romanji: "natsu" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A4%8F#Kanji",
+            meanings: ["summer"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "夏", kana: ["なつ"], english: ["summer"] },
+                { value: "夏休み", kana: ["なつやすみ"], english: ["summer vacation", "summer holiday"] },
+                { value: "今夏", kana: ["こんか"], english: ["this summer", "next summer", "last summer"] },
+                { value: "冷夏", kana: ["れいか"], english: ["a cool summer"] },
+                { value: "夏場", kana: ["なつば"], english: ["summertime"] },
+            ]
+        },
+        {
+            name: "市",
+            code: "\u5E02",
+            on: [{ kana: "し", romanji: "shi" }],
+            kun: [{ kana: "いち", romanji: "ichi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B8%82#Kanji",
+            meanings: ["market", "city", "town"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "市場", kana: ["いちば"], english: ["(town) market", "the marketplace"] },
+                { value: "市内", kana: ["しない"], english: ["within a city", "local"] },
+                { value: "市民", kana: ["しみん"], english: ["citizen", "townspeople"] },
+                { value: "都市", kana: ["とし"], english: ["town", "city", "municipal", "urban"] },
+                { value: "同市", kana: ["どうし"], english: ["same city"] },
+            ]
+        },
+        {
+            name: "回",
+            code: "\u56DE",
+            on: [{ kana: "え", romanji: "e" },{ kana: "かい", romanji: "kai" }],
+            kun: [{ kana: "まわす", romanji: "mawasu" }, { kana: "まわる", romanji: "mawaru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%9B%9E#Kanji",
+            meanings: ["times", "round", "game", "revolve", "counter for occurrences"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "回", kana: ["かい"], english: ["counter for occurrences"] },
+                { value: "回復", kana: ["かいふく"], english: ["recovery (from illness)", "improvement"] },
+                { value: "今回", kana: ["こんかい"], english: ["now", "this time", "lately"] },
+                { value: "回答", kana: ["かいとう"], english: ["reply", "answer"] },
+                { value: "前回", kana: ["ぜんかい"], english: ["last time", "last installment", "last instalment"] },
+            ]
+        },
+        {
+            name: "当",
+            code: "\u5F53",
+            on: [{ kana: "とう", romanji: "tō" }],
+            kun: [{ kana: "あたる", romanji: "ataru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BD%93#Kanji",
+            meanings: ["hit", "right", "appropriate", "himself"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "", kana: [""], english: ["authorities", "this office"] },
+                { value: "", kana: [""], english: ["at that time", "in those days"] },
+                { value: "", kana: [""], english: ["at first"] },
+                { value: "", kana: [""], english: ["(in) charge"] },
+                { value: "", kana: [""], english: ["hit", "success", "reaching the mark"] },
+            ]
+        },
+        {
+            name: "数",
+            code: "\u6570",
+            on: [{ kana: "す", romanji: "su" }, { kana: "すう", romanji: "sū" }],
+            kun: [{ kana: "かぞえる", romanji: "kazoreu" }],
+            source: "https://en.wiktionary.org/wiki/%E6%95%B0#Kanji",
+            meanings: ["number", "strengh", "fate", "law", "figures"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "", kana: [""], english: ["number", "amount"] },
+                { value: "", kana: [""], english: ["numeral", "figure", "digit", "numeric character"] },
+                { value: "", kana: [""], english: ["great number", "countless", "majority"] },
+                { value: "", kana: [""], english: ["constant", "literal"] },
+                { value: "", kana: [""], english: ["minority", "few"] },
+            ]
+        },
 
         //Grade 6 Kanji
 
