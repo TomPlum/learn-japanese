@@ -261,21 +261,21 @@ function hiragana(): KanaData[] {
         {
             name: "じゃ",
             code: "\u3058\u3083",
-            romaji: ["zya", "ja"],
+            romaji: ["ja", "zya"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "じゅ",
             code: "\u3058\u3085",
-            romaji: ["zyu", "ju"],
+            romaji: ["ju", "zyu"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "じょ",
             code: "\u3058\u3087",
-            romaji: ["zyo", "jo"],
+            romaji: ["jo", "zyo"],
             column: KanaColumn.S,
             diacritical: true
         },

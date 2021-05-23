@@ -16,7 +16,7 @@ export interface DayData {
     name: string;
     kanji?: string;
     romaji: string;
-    kana: string;
+    kana?: string;
     meaning?: string;
 }
 
@@ -67,7 +67,7 @@ export interface CounterData extends NumbersData {
     example: { kana: string, english: string };
 }
 
-interface SentenceStructureData {
+export interface SentenceStructureData {
     meanings: string[];
     kana: string;
     kanjiForm?: string;
@@ -80,4 +80,12 @@ export interface AdjectiveData extends SentenceStructureData {
 
 export interface VerbData extends SentenceStructureData {
     type: VerbType;
+}
+
+export interface AdverbData extends SentenceStructureData {
+
+}
+
+export interface ExpressionData extends SentenceStructureData {
+
 }

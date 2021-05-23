@@ -5,6 +5,7 @@ import { faFillDrip } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Colour from "../../../types/colour/Colour";
 import styles from "../../../styles/sass/components/learn/basics/BasicsFlashCardFront.module.scss";
+import DefinitionList from "../DefinitionList";
 
 function BasicsFlashCardFront(props: CardFaceProps) {
     return (
@@ -21,7 +22,7 @@ function BasicsFlashCardFront(props: CardFaceProps) {
                         />
                     </div>
                 )}
-                <p className={styles.name}>{props.data.getQuestion()}</p>
+                <DefinitionList words={props.data.getMeanings()} mode="stacked" />
             </Container>
         </FlashCardFront>
     );

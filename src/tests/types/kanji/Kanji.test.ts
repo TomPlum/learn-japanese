@@ -26,7 +26,44 @@ describe("Kanji", () => {
         });
 
         it("Should get the meanings", () => {
-            expect(kanji.meanings).toStrictEqual(["person"]);
+            expect(kanji.getMeanings()).toStrictEqual(["person"]);
+        });
+
+        it("Should return the first on and kun reading for the kana", () => {
+            expect(kanji.getKana()).toStrictEqual(["じん", "ひと"]);
+        });
+
+        it("Should omit the on reading from the array if there isn't one when getting the kana", () => {
+            const kanji = new Kanji('人',
+                [new Reading("hito", "ひと", ReadingType.KUN)],
+                ["person"],
+                KyoikuGrade.ONE,
+                "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
+                [new Example("外国人", ["がいこくじん"], ["foreigner"])]
+            );
+            expect(kanji.getKana()).toStrictEqual(["ひと"]);
+        });
+
+        it("Should omit the kun reading from the array if there isn't one when getting the kana", () => {
+            const kanji = new Kanji('人',
+                [new Reading("jin", "じん", ReadingType.ON)],
+                ["person"],
+                KyoikuGrade.ONE,
+                "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
+                [new Example("外国人", ["がいこくじん"], ["foreigner"])]
+            );
+            expect(kanji.getKana()).toStrictEqual(["じん"]);
+        });
+
+        it("Should return an empty array if there are no readings when getting the kana", () => {
+            const kanji = new Kanji('人',
+                [],
+                ["person"],
+                KyoikuGrade.ONE,
+                "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
+                [new Example("外国人", ["がいこくじん"], ["foreigner"])]
+            );
+            expect(kanji.getKana()).toStrictEqual([]);
         });
 
         it("Should get the grade", () => {
@@ -38,19 +75,15 @@ describe("Kanji", () => {
         });
 
         it("Should get the examples", () => {
-            expect(kanji.examples).toStrictEqual( [new Example("外国人", ["がいこくじん"], ["foreigner"])]);
+            expect(kanji.examples).toStrictEqual([new Example("外国人", ["がいこくじん"], ["foreigner"])]);
         });
 
         it("Should return the Kyoiku grade for the title", () => {
-            expect(kanji.getTitle()).toBe("Grade 1")
+            expect(kanji.getTitle()).toBe("Grade 1");
         });
 
-        it("Should return the kanji character for the question", () => {
-            expect(kanji.getQuestion()).toBe("人")
-        });
-
-        it("Should return the first an empty array for the answer", () => {
-            expect(kanji.getAnswer()).toStrictEqual([])
+        it("Should return the character for the kanji variation", () => {
+            expect(kanji.getKanjiVariation()).toBe('人');
         });
     });
 });

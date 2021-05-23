@@ -6,13 +6,13 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import { KanaRepository } from "../../repository/KanaRepository";
 import ControlsMenu from "../layout/ControlsMenu";
 import SettingsMenu, { GameTypeSettings, LearnSessionSettings } from "../layout/SettingsMenu";
-import { AppMode } from "../../types/AppMode";
+import { AppMode, fromString } from "../../types/AppMode";
 import SessionID from "../../types/SessionID";
 import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import LearningResultScreen from "../results/LearningResultScreen";
 import Arrays from "../../utility/Arrays";
 import MainErrorBoundary from "../error/MainErrorBoundary";
-import Learnable from "../../types/learn/Learnable";
+import { Learnable } from "../../types/learn/Learnable";
 import Learn from "../learn/Learn";
 import LearningDataRepository from "../../repository/LearningDataRepository";
 import { RouteComponentProps } from "react-router-dom";
@@ -54,7 +54,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
 
     componentDidMount() {
         const navigationMode = this.props.match.params.mode;
-        this.setState({ mode: navigationMode === "learn" ? AppMode.LEARN : AppMode.PLAY });
+        this.setState({ mode: fromString(navigationMode) });
     }
 
     render() {
@@ -77,24 +77,28 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                         />
                     }
 
-                    {gameSettings && !inResultsScreen && <KanaMemoryGame
-                        key={sessionKey.value}
-                        sessionKey={sessionKey.value}
-                        kana={new KanaRepository().read(gameSettings.settings.kana!.kana)}
-                        settings={gameSettings.settings.kana!}
-                        onFinish={this.onGameFinish}
-                    />}
+                    {gameSettings && !inResultsScreen &&
+                        <KanaMemoryGame
+                            key={sessionKey.value}
+                            sessionKey={sessionKey.value}
+                            kana={new KanaRepository().read(gameSettings.settings.kana!.kana)}
+                            settings={gameSettings.settings.kana!}
+                            onFinish={this.onGameFinish}
+                        />
+                    }
 
                     {inResultsScreen && gameResult &&
                         <GameResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
                     }
 
-                    {learnSettings && !inResultsScreen && <Learn
+                    {learnSettings && !inResultsScreen &&
+                        <Learn
                             key={sessionKey.value}
                             data={learnData ?? new LearningDataRepository().read(learnSettings)}
                             onFinish={this.onLearningFinish}
                             card={learnSettings?.topic.cards!}
-                    />}
+                        />
+                    }
 
                     {learningResult && inResultsScreen &&
                         <LearningResultScreen

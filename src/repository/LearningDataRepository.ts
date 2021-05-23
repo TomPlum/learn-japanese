@@ -1,5 +1,5 @@
 import Topic from "../types/Topic";
-import Learnable from "../types/learn/Learnable";
+import { Learnable } from "../types/learn/Learnable";
 import { KanaRepository } from "./KanaRepository";
 import CalendarRepository from "./CalendarRepository";
 import { LearnSessionSettings } from "../components/layout/SettingsMenu";

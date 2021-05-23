@@ -1,11 +1,10 @@
 import { fireEvent, render } from "@testing-library/react";
 import SentenceStructureFlashCardFront from "../../../../components/learn/sentence/SentenceStructureFlashCardFront";
-import Adjective from "../../../../types/sentence/Adjective";
-import { AdjectiveType } from "../../../../types/sentence/AdjectiveType";
+import Definition from "../../../../types/sentence/Definition";
 
 const onClickHandler = jest.fn();
 
-const adjective = new Adjective(["interesting", "funny"], "面白い", AdjectiveType.I, "おもしろい");
+const adjective = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective");
 
 test('Clicking the card face should call the onClick event handler', () => {
     const component = render(<SentenceStructureFlashCardFront data={adjective} onClick={onClickHandler} />);

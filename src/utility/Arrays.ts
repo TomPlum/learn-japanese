@@ -47,6 +47,15 @@ export default class Arrays {
     }
 
     /**
+     * Returns the largest value in the given array.
+     * @param array An array of numbers.
+     * @return The largest value.
+     */
+    public static max<T extends number>(array: T[]): T {
+        return array.reduce((a: T, b: T) => a > b ? a : b);
+    }
+
+    /**
      * Removes an element from an array.
      * @param array The array to remove from.
      * @param value The value of the element to remove.
@@ -78,6 +87,11 @@ export default class Arrays {
         return elements.filter(it => !!it);
     }
 
+    /**
+     * Generates a 2-Dimensional array of arrays of the specified length;
+     * @param array The array to split.
+     * @param quantity The size of the arrays.
+     */
     static chunked<T>(array: T[], quantity: number): T[][] {
         return array.reduce((resultArray: T[][], item: T, index: number) => {
             const chunkIndex = Math.floor(index/quantity)

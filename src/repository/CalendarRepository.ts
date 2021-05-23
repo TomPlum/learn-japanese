@@ -1,40 +1,34 @@
 import { LearnCalendarSettings } from "../types/learn/LearningSessionSettings";
-import CommonLearnable from "../types/learn/CommonLearnable";
-import { days, months, nouns } from "../data/Calendar";
+import { Learnable } from "../types/learn/Learnable";
+import { days, months, nouns, phrases } from "../data/Calendar";
 import { DayData } from "../data/DataTypes";
-import Day from "../types/calendar/Day";
-import Month from "../types/calendar/Month";
-import TemporalNoun from "../types/calendar/TemporalNoun";
 import Repository from "./Repository";
+import Definition from "../types/sentence/Definition";
 
-export default class CalendarRepository implements Repository<CommonLearnable> {
-    public read(config: LearnCalendarSettings): CommonLearnable[] {
+export default class CalendarRepository implements Repository<Learnable> {
+    public read(config: LearnCalendarSettings): Learnable[] {
         let data = [];
 
         if (config.months) {
-            data.push(...this.convertMonths(months()));
+            data.push(...this.convert(months(), "Month of the Year"));
         }
 
         if (config.days) {
-            data.push(...this.convertDays(days()));
+            data.push(...this.convert(days(), "Day of the Week"));
         }
 
         if (config.nouns) {
-            data.push(...this.convertNouns(nouns()));
+            data.push(...this.convert(nouns(), "Temporal Noun / Adverb"));
+        }
+
+        if (config.phrases) {
+            data.push(...this.convert(phrases(), "Common Phrase"));
         }
 
         return data;
     }
 
-    private convertDays(data: DayData[]): Day[] {
-        return data.map(datum => new Day(datum.name, datum.kanji, datum.romaji, datum.kana, datum.meaning));
-    }
-
-    private convertMonths(data: DayData[]): Month[] {
-        return data.map(datum => new Month(datum.name, datum.kanji, datum.romaji, datum.kana, datum.meaning));
-    }
-
-    private convertNouns(data: DayData[]): TemporalNoun[] {
-        return data.map(datum => new TemporalNoun(datum.name, datum.kanji, datum.romaji, datum.kana));
+    private convert(data: DayData[], title: string): Definition[] {
+        return data.map(it => new Definition([it.name], it.kanji, it.kana ?? "", title));
     }
 }

@@ -3,7 +3,6 @@ import { LearnNumbersSettings } from "../../types/learn/LearningSessionSettings"
 import { CounterData, NumbersData } from "../../data/DataTypes";
 import numbers, { counters } from "../../data/Numbers";
 import CommonData from "../../types/learn/CommonData";
-import JapaneseWord from "../../types/learn/JapaneseWord";
 import { CounterGroup } from "../../types/numbers/CounterGroup";
 
 jest.mock("../../data/Numbers");
@@ -30,7 +29,7 @@ describe("Numbers Repository", function () {
     it("Should return numbers as CommonData objects when the 'numbers' boolean is passed as true", () => {
         const settings: LearnNumbersSettings = { numbers: true };
         const response = repository.read(settings);
-        expect(response).toStrictEqual([new CommonData("1", [new JapaneseWord("いち", "ichi")], "一", "Number")]);
+        expect(response).toStrictEqual([new CommonData("1", ["いち"], "一", "Number", "1")]);
     });
 
     it("Should return counters as CommonData objects when the 'counters' boolean is passed as true", () => {
@@ -39,10 +38,10 @@ describe("Numbers Repository", function () {
         expect(response).toStrictEqual(
             [new CommonData(
                 "Flat",
-                [new JapaneseWord("まい", "mai")],
+                ["まい"],
                 "枚",
                 "Counter - Must Know",
-                undefined,
+                "Flat",
                 { english: "I need 100 pieces of origami paper.", kana: "100枚の折り紙が必要です"}
             )]
         );
@@ -57,6 +56,6 @@ describe("Numbers Repository", function () {
         mockNumbers.mockReturnValueOnce([ { name: "1", kana: ["いち"], romaji: ["ichi"] }]);
         const settings: LearnNumbersSettings = { numbers: true };
         const response = repository.read(settings);
-        expect(response).toStrictEqual([new CommonData("1", [new JapaneseWord("いち", "ichi")], "", "Number")]);
+        expect(response).toStrictEqual([new CommonData("1", ["いち"], "", "Number", "1")]);
     });
 });

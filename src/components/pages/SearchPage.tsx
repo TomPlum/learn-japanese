@@ -63,7 +63,12 @@ class SearchPage extends Component<{ }, SearchPageState> {
 
                 <Container className={styles.controlsWrapper}>
                     <Container className={styles.searchWrapper}>
-                        <SearchField onChange={this.onSearch} value={search} append={kana.length + " Results"} />
+                        <SearchField
+                            onChange={this.onSearch}
+                            value={search}
+                            append={kana.length + " Results"}
+                            placeholder="Enter the rōmaji"
+                        />
                     </Container>
 
                     <Container>

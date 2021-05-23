@@ -4,7 +4,7 @@ import SearchPage from "../../../components/pages/SearchPage";
 const setup = () => {
     const component = render(<SearchPage />);
     return {
-        search: component.getByPlaceholderText('Enter the romaji'),
+        search: component.getByPlaceholderText('Enter the rōmaji'),
         hiragana: component.getByTestId('hiragana-switch'),
         katakana: component.getByTestId('katakana-switch'),
         diagraphs: component.getByTestId('diagraphs-switch'),

@@ -69,44 +69,58 @@ beforeEach(() => {
 describe("Kanji Repository", () => {
     const repository = new KanjiRepository();
 
-    each([null, undefined]).it("Should return an empty array if the settings are falsy", (settings) => {
-        const response = repository.read(settings);
-        expect(response).toHaveLength(0);
+    describe("Read", () => {
+        each([null, undefined]).it("Should return an empty array if the settings are falsy", (settings) => {
+            const response = repository.read(settings);
+            expect(response).toHaveLength(0);
+        });
+
+        it("Should return all Joyo Kanji if they are requested with no quantity", () => {
+            const settings: KanjiSettings = { joyo: true, grades: [] };
+            const response = repository.read(settings);
+            expect(response).toHaveLength(4);
+        });
+
+        it("Should return the specified quantity of Joyo Kanji when requested", () => {
+            const settings: KanjiSettings = { joyo: true, grades: [], quantity: 1 };
+            const response = repository.read(settings);
+            expect(response).toHaveLength(1);
+        });
+
+        it("Should return the specified quantity of Kyoiku Kanji when requested with no Joyo", () => {
+            const settings: KanjiSettings = { joyo: false, grades: [], quantity: 1 };
+            const response = repository.read(settings);
+            expect(response).toHaveLength(1);
+        });
+
+        it("Should return all Kyoiku Kanji when only grades are specific in the request", () => {
+            const settings: KanjiSettings = { grades: [KyoikuGrade.TWO, KyoikuGrade.SIX] };
+            const response = repository.read(settings);
+            expect(response).toHaveLength(2);
+        });
+
+        it("Should return N random Kyoiku kanji when both grades and quantity are specified", () => {
+            const settings: KanjiSettings = { grades: [KyoikuGrade.ONE, KyoikuGrade.SIX], quantity: 2 };
+            const response = repository.read(settings);
+            expect(response.map(it => it.grade)).toStrictEqual([KyoikuGrade.ONE, KyoikuGrade.SIX]);
+        });
+
+        it("Should return all Joyo Kanji if they are not specified, but also no Kyoiku grades are specified", () => {
+            const settings: KanjiSettings = { joyo: false, grades: [] };
+            const response = repository.read(settings);
+            expect(response).toHaveLength(4)
+        });
     });
 
-    it("Should return all Joyo Kanji if they are requested with no quantity", () => {
-        const settings: KanjiSettings = { joyo: true, grades: [] };
-        const response = repository.read(settings);
-        expect(response).toHaveLength(4);
-    });
+    describe("Get By Value", () => {
+        it("Should return the kanji if a code matches the request", () => {
+            const kanji = repository.getByValue("猫");
+            expect(kanji?.getMeanings()).toStrictEqual(['cat']);
+        });
 
-    it("Should return the specified quantity of Joyo Kanji when requested", () => {
-        const settings: KanjiSettings = { joyo: true, grades: [], quantity: 1 };
-        const response = repository.read(settings);
-        expect(response).toHaveLength(1);
-    });
-
-    it("Should return the specified quantity of Kyoiku Kanji when requested with no Joyo", () => {
-        const settings: KanjiSettings = { joyo: false, grades: [], quantity: 1 };
-        const response = repository.read(settings);
-        expect(response).toHaveLength(1);
-    });
-
-    it("Should return all Kyoiku Kanji when only grades are specific in the request", () => {
-        const settings: KanjiSettings = { grades: [KyoikuGrade.TWO, KyoikuGrade.SIX] };
-        const response = repository.read(settings);
-        expect(response).toHaveLength(2);
-    });
-
-    it("Should return N random Kyoiku kanji when both grades and quantity are specified", () => {
-        const settings: KanjiSettings = { grades: [KyoikuGrade.ONE, KyoikuGrade.SIX], quantity: 2 };
-        const response = repository.read(settings);
-        expect(response.map(it => it.grade)).toStrictEqual([KyoikuGrade.ONE, KyoikuGrade.SIX]);
-    });
-
-    it("Should return all Joyo Kanji if they are not specified, but also no Kyoiku grades are specified", () => {
-        const settings: KanjiSettings = { joyo: false, grades: [] };
-        const response = repository.read(settings);
-        expect(response).toHaveLength(4)
+        it("Should return undefined if the request does not match any kanji", () => {
+           const kanji = repository.getByValue("a");
+           expect(kanji).toBeUndefined();
+        });
     });
 });

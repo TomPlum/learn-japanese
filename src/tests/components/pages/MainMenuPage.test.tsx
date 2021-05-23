@@ -166,7 +166,6 @@ describe('Learn', () => {
       fireEvent.click(calendar);
       fireEvent.click(screen.getByText('Start'));
       expect(screen.getByText('Monday')).toBeInTheDocument();
-      expect(screen.getByText('月曜日')).toBeInTheDocument();
    });
 
    test('Starting a Kanji learning session should render the correct flash card types', () => {

@@ -143,7 +143,7 @@ describe("Katakana", () => {
             ["sa"], ["shi"], ["su"], ["se"], ["so"],
             ["za"], ["zi", "ji"], ["zu"], ["ze"], ["zo"],
             ["sha"], ["shu"], ["sho"],
-            ["zya", "ja"], ["zyu", "ju"], ["zyo", "jo"]
+            ["ja", "zya"], ["ju", "zyu"], ["jo", "zyo"]
         ]);
         each(s).it("Should return the s column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.S);
@@ -238,9 +238,9 @@ describe("Katakana", () => {
         it("gyu", () => expect(getKatakana(["gyu"]).code).toEqual("ギュ"));
         it("gyo", () => expect(getKatakana(["gyo"]).code).toEqual("ギョ"));
 
-        it("ja", () => expect(getKatakana(["zya", "ja"]).code).toEqual("ジャ"));
-        it("ju", () => expect(getKatakana(["zyu", "ju"]).code).toEqual("ジュ"));
-        it("jo", () => expect(getKatakana(["zyo", "jo"]).code).toEqual("ジョ"));
+        it("ja", () => expect(getKatakana(["ja", "zya"]).code).toEqual("ジャ"));
+        it("ju", () => expect(getKatakana(["ju", "zyu"]).code).toEqual("ジュ"));
+        it("jo", () => expect(getKatakana(["jo", "zyo"]).code).toEqual("ジョ"));
 
         it("bya", () => expect(getKatakana(["bya"]).code).toEqual("ビャ"));
         it("byu", () => expect(getKatakana(["byu"]).code).toEqual("ビュ"));
@@ -259,7 +259,7 @@ describe("Katakana", () => {
                 ["da"], ["di", "ji"], ["du", "zu"], ["de"], ["do"],
                 ["ba"], ["bi"], ["bu"], ["be"], ["bo"],
                 ["pa"], ["pi"], ["pu"], ["pe"], ["po"],
-                ["zya", "ja"], ["zyu", "ju"], ["zyo", "jo"],
+                ["ja", "zya"], ["ju", "zyu"], ["jo", "zyo"],
                 ["dya", "ja"], ["dyu", "ju"], ["dyo", "jo"],
                 ["bya"], ["byu"], ["byo"],
                 ["pya"], ["pyu"], ["pyo"],

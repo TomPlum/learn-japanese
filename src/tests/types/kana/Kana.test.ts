@@ -117,22 +117,34 @@ describe("Kana", () => {
    });
 
    describe("Learnable", () => {
-      it("Should return the kana unicode for the question", () => {
-          const kana = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-          const question = kana.getQuestion();
-          expect(question).toBe("え");
-      });
-
-      it("Should return the kana romaji string for the answer", () => {
+      it("Should return the kana romaji string for the meanings", () => {
           const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
-          const answer = kana.getAnswer();
-          expect(answer).toBe("fu (hu)");
+          const answer = kana.getMeanings();
+          expect(answer).toStrictEqual(["fu", "hu"]);
       });
 
       it("Should return the kana type for the title", () => {
           const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
           const title = kana.getTitle();
           expect(title).toBe("Hiragana");
+      });
+
+      it("Should return the character for the kana", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const title = kana.getKana();
+          expect(title).toStrictEqual(["ふ"]);
+      });
+
+      it("Should return undefined for the kanji variation", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const title = kana.getKanjiVariation();
+          expect(title).toBeUndefined();
+      });
+
+      it("Should return undefined for the example", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const title = kana.getExample();
+          expect(title).toBeUndefined();
       });
    });
 });

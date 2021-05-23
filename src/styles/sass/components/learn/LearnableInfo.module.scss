@@ -1,0 +1,16 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  background-color: #FFF;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  margin-top: 8px;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1.1em;
+  transition: all ease-in 0.1s;
+}
+
+.wrapper:hover {
+  font-family: "Ciutadella Rounded Bold", sans-serif;
+  background-color: #F8F9FA;
+}

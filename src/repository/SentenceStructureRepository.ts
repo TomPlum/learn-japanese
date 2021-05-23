@@ -1,22 +1,33 @@
 import Repository from "./Repository";
-import { SentenceStructureLearnable } from "../types/learn/CommonLearnable";
 import { LearnSentenceStructureSettings } from "../types/learn/LearningSessionSettings";
-import { adjectives, verbs } from "../data/SentenceStructure";
-import { AdjectiveData, VerbData } from "../data/DataTypes";
-import Adjective from "../types/sentence/Adjective";
-import Verb from "../types/sentence/Verb";
+import { adjectives, adverbs, expressions, verbs } from "../data/SentenceStructure";
+import { AdjectiveData, AdverbData, ExpressionData, SentenceStructureData, VerbData } from "../data/DataTypes";
+import Definition from "../types/sentence/Definition";
+import { Learnable } from "../types/learn/Learnable";
 
-export default class SentenceStructureRepository implements Repository<SentenceStructureLearnable> {
-    read(settings: LearnSentenceStructureSettings): SentenceStructureLearnable[] {
+export default class SentenceStructureRepository implements Repository<Learnable> {
+    read(settings: LearnSentenceStructureSettings): Learnable[] {
 
         if (settings.adjectives) {
-            return adjectives().map((it: AdjectiveData) => new Adjective(it.meanings, it.kanjiForm, it.type, it.kana));
+            return adjectives().map((it: AdjectiveData) => this.convert(it, it.type + " Adjective"));
         }
         
         if (settings.verbs) {
-            return verbs().map((it: VerbData) => new Verb(it.meanings, it.kanjiForm, it.type, it.kana));
+            return verbs().map((it: VerbData) => this.convert(it, it.type + " Verb"));
+        }
+
+        if (settings.adverbs) {
+            return adverbs().map((it: AdverbData) => new Definition(it.meanings, it.kanjiForm, it.kana, "Adverb"));
+        }
+
+        if (settings.expressions) {
+            return expressions().map((it: ExpressionData) => new Definition(it.meanings, it.kanjiForm, it.kana, "Expression"));
         }
 
         return [];
+    }
+
+    private convert(data: SentenceStructureData, title: string): Definition {
+        return new Definition(data.meanings, data.kanjiForm, data.kana, title);
     }
 }

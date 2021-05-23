@@ -1,9 +1,7 @@
 import { KanaSettings } from "../game/GameSettings";
 import { KanjiSettings } from "../../repository/KanjiRepository";
 
-export interface LearnSettings {
-
-}
+export interface LearnSettings { }
 
 export interface LearningSessionSettings {
     kana?: KanaSettings;
@@ -41,9 +39,9 @@ export interface LearnNumbersSettings extends LearnSettings {
 }
 
 export interface LearnSentenceStructureSettings extends LearnSettings {
-    grammar?: boolean;
+    adverbs?: boolean;
     particles?: boolean;
-    endings?: boolean;
+    expressions?: boolean;
     verbs?: boolean;
     nouns?: boolean;
     adjectives?: boolean;

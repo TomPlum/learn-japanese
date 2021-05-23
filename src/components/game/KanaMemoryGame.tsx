@@ -107,7 +107,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     componentDidMount() {
-        console.log("Starting new game with ID: " + this.props.sessionKey);
+        //console.log("Starting new game with ID: " + this.props.sessionKey);
     }
 
     componentWillUnmount() {

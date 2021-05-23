@@ -56,6 +56,14 @@ export class KanjiRepository implements Repository<Kanji> {
         return this.convert(joyo());
     }
 
+    public getByValue(value: string): Kanji | undefined {
+        const match = joyo().find((entry: KanjiData) => entry.code === value);
+        if (match) {
+            return this.convert([match])[0];
+        }
+        return undefined;
+    }
+
     private convert = (data: KanjiData[]): Kanji[] => {
         return data.map((result: KanjiData) => {
             const on = result.on.map((data: KanjiReading) => new Reading(data.romanji, data.kana, ReadingType.ON));

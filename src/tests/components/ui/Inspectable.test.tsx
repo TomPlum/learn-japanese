@@ -14,8 +14,10 @@ const setup = () => {
 
 beforeEach(() => {
     props = {
-        title: "example title",
-        text: "example text",
+        popover: {
+            title: "example title",
+            text: "example text"
+        },
         className: "exampleClass"
     }
 });
