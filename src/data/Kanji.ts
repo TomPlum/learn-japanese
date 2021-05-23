@@ -2570,9 +2570,168 @@ export function kyoiku(): KanjiData[] {
                 { value: "買い物", kana: ["かいもの"], english: ["shopping", "purchased goods"] },
             ]
         },
+        {
+            name: "図",
+            code: "\u56F3",
+            on: [{ kana: "ず", romanji: "zu" }, { kana: "と", romanji: "to" }],
+            kun: [{ kana: "はかる", romanji: "hakaru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%9B%B3#Kanji",
+            meanings: ["map", "drawing"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "図", kana: ["ず"], english: ["figure (e.g. Fig 1)", "drawing", "picture"] },
+                { value: "意図", kana: ["いと"], english: ["intention", "aim", "design"] },
+                { value: "構図", kana: ["こうず"], english: ["composition"] },
+                { value: "図書館", kana: ["としょかん", "ずしょかん"], english: ["library"] },
+                { value: "地図", kana: ["ちず"], english: ["map"] },
+            ]
+        },
+        {
+            name: "室",
+            code: "\u5BA4",
+            on: [{ kana: "しつ", romanji: "shitsu" }, { kana: "しち", romanji: "shichi" }],
+            kun: [{ kana: "むろ", romanji: "muro" }],
+            source: "https://en.wiktionary.org/wiki/%E5%AE%A4#Kanji",
+            meanings: ["room", "apartment"," chamber", "greenhouse", "cellar"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "教室", kana: ["きょうしつ"], english: ["classroom"] },
+                { value: "室長", kana: ["しつちょう"], english: ["room monitor"] },
+                { value: "室内", kana: ["しつない"], english: ["indoor", "inside the room"] },
+                { value: "皇室", kana: ["こうしつ"], english: ["Imperial household"] },
+                { value: "会議室", kana: ["かいぎしつ"], english: ["conference room", "council room"] },
+            ]
+        },
+        {
+            name: "風",
+            code: "\u98A8",
+            on: [{ kana: "ふ", romanji: "fu" }, { kana: "ふう", romanji: "fū" }],
+            kun: [{ kana: "かぜ", romanji: "kaze" }, { kana: "かざ", romanji: "kaza" }],
+            source: "https://en.wiktionary.org/wiki/%E9%A2%A8#Kanji",
+            meanings: ["wind", "air", "style", "manner"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "風景", kana: ["ふうけい"], english: ["scenery"] },
+                { value: "台風", kana: ["たいふう"], english: ["typhoon", "hurricane"] },
+                { value: "風土", kana: ["ふうど"], english: ["natural features", "topography", "climate"] },
+                { value: "風速", kana: ["ふうそく"], english: ["wind speed"] },
+                { value: "風潮", kana: ["ふうちょう"], english: ["tide", "current", "tendency"] },
+            ]
+        },
+        {
+            name: "黒",
+            code: "\u9ED2",
+            on: [{ kana: "こく", romanji: "koku" }],
+            kun: [{ kana: "くろ", romanji: "kuro" }, { kana: "くろい", romanji: "kuroi" }],
+            source: "https://en.wiktionary.org/wiki/%E9%BB%92#Kanji",
+            meanings: ["black"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "黒", kana: ["くろ"], english: ["black", "dark", "bad guy"] },
+                { value: "黒字", kana: ["くろじ"], english: ["balance (figure) in the black"] },
+                { value: "黒人", kana: ["こくじん"], english: ["black person"] },
+                { value: "黒海", kana: ["こっかい"], english: ["Black Sea"] },
+                { value: "黒い", kana: ["くろい"], english: ["black", "dark", "illicit", "wicked", "underground"] },
+            ]
+        },
+        {
+            name: "色",
+            code: "\u8272",
+            on: [{ kana: "しょく", romanji: "shoku" }, { kana: "しき", romanji: "shiki" }],
+            kun: [{ kana: "いろ", romanji: "iro" }],
+            source: "https://en.wiktionary.org/wiki/%E8%89%B2#Kanji",
+            meanings: ["colour"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "色", kana: ["いろ"], english: ["colour", "complexion", "appearance, look"] },
+                { value: "色彩", kana: ["しきさい"], english: ["colour", "hue", "tints"] },
+                { value: "特色", kana: ["とくしょく"], english: ["characteristic", "feature", "idiosyncrasy"] },
+                { value: "難色", kana: ["なんしょく"], english: ["disapproval"] },
+                { value: "黄色", kana: ["きいろ", "こうしょく", "おうしょく"], english: ["yellow", "amber"] },
+            ]
+        },
+        {
+            name: "週",
+            code: "\u9031",
+            on: [{ kana: "しゅう", romanji: "shū" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E9%80%B1#Kanji",
+            meanings: ["week"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "週", kana: ["しゅう"], english: ["week"] },
+                { value: "週刊", kana: ["しゅうかん"], english: ["published weekly"] },
+                { value: "一週間", kana: ["いっしゅうかん"], english: ["one week"] },
+                { value: "今週", kana: ["こんしゅう"], english: ["this week"] },
+                { value: "先週", kana: ["せんしゅう"], english: ["last week", "the week before"] },
+            ]
+        },
+        {
+            name: "歩",
+            code: "\u6B69",
+            on: [{ kana: "ほ", romanji: "ho" }, { kana: "ぶ", romanji: "bu" }, { kana: "ふ", romanji: "fu" }],
+            kun: [{ kana: "あるく", romanji: "aruku" }, { kana: "あゆむ", romanji: "ayumu" }],
+            source: "https://en.wiktionary.org/wiki/%E6%AD%A9#Kanji",
+            meanings: ["walk", "counter for steps"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "歩", kana: ["ほ"], english: ["step", "stride", "counter for steps"] },
+                { value: "公定歩合", kana: ["こうていぶあい"], english: ["official discount (bank) rate"] },
+                { value: "一歩", kana: ["いっぽ"], english: ["(a) step", "level", "stage", "small degree"] },
+                { value: "譲歩", kana: ["じょうほ"], english: ["concession", "conciliation", "compromise"] },
+                { value: "歩み", kana: ["あゆみ"], english: ["walking", "progress", "advance"] },
+            ]
+        },
+        {
+            name: "紙",
+            code: "\u7D19",
+            on: [{ kana: "し", romanji: "shi" }],
+            kun: [{ kana: "かみ", romanji: "kami" }],
+            source: "https://en.wiktionary.org/wiki/%E7%B4%99#Kanji",
+            meanings: ["paper"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "紙", kana: ["かみ"], english: ["paper"] },
+                { value: "手紙", kana: ["てがみ"], english: ["letter"] },
+                { value: "用紙", kana: ["ようし"], english: ["blank form"] },
+                { value: "紙面", kana: ["しめん"], english: ["space (page)"] },
+                { value: "白紙", kana: ["はくし"], english: ["blank paper", "white paper"] },
+            ]
+        },
+        {
+            name: "春",
+            code: "\u6625",
+            on: [{ kana: "しゅん", romanji: "shun" }],
+            kun: [{ kana: "はる", romanji: "haru" }],
+            source: "https://en.wiktionary.org/wiki/%E6%98%A5#Kanji",
+            meanings: ["spring (season)"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "春", kana: ["はる"], english: ["spring", "springtime", "new year"] },
+                { value: "今春", kana: ["こんしゅん"], english: ["this spring", "spring this year"] },
+                { value: "春闘", kana: ["しゅんとう"], english: ["spring offensive (Japanese unions)"] },
+                { value: "来春", kana: ["らいしゅん", "らいはる"], english: ["next spring"] },
+                { value: "青春", kana: ["せいしゅん"], english: ["youth", "springtime of life", "adolescent"] },
+            ]
+        },
+        {
+            name: "走",
+            code: "\u8D70",
+            on: [{ kana: "そう", romanji: "sō" }],
+            kun: [{ kana: "はしる", romanji: "hashiru" }],
+            source: "https://en.wiktionary.org/wiki/%E8%B5%B0#Kanji",
+            meanings: ["run"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "走り", kana: ["はしり"], english: ["the first (harvest)"] },
+                { value: "走る", kana: ["はしる"], english: ["to run", "to travel (movement of vehicles)"] },
+                { value: "走者", kana: ["そうしゃ"], english: ["runner"] },
+                { value: "走行", kana: ["そうこう"], english: ["running a wheeled vehicle (e.g. car)"] },
+                { value: "滑走", kana: ["かっそう"], english: ["glide", "volplane"] },
+            ]
+        },
 
         //Grade 6 Kanji
-
         {
             name: "私",
             code: "\u79C1",
