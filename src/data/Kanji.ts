@@ -786,7 +786,7 @@ export function kyoiku(): KanjiData[] {
             grade: KyoikuGrade.ONE,
             examples: [
                 { value: "休み", kana: ["やすみ"], english: ["rest", "recess", "respite", "vacation", "holiday"] },
-                { value: "夏休み", kana: ["なつやすみ"], english: ["summer vacation", "summer holiday"] },
+                { value: "夏休み", kana: ["なつやすみ"], english: ["summer holiday"] },
                 { value: "休暇", kana: ["きゅうか"], english: ["holiday", "day off", "furlough"] },
                 { value: "休日", kana: ["きゅうかきゅうか"], english: ["holiday", "day off"] },
                 { value: "休業", kana: ["きゅうぎょう"], english: ["closed (e.g. store)", "business suspended"] },
@@ -2768,7 +2768,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "ない", romanji: "nai" }, { kana: "だい", romanji: "dai" }],
             kun: [{ kana: "うち", romanji: "uchi" }],
             source: "https://en.wiktionary.org/wiki/%E5%86%85#Kanji",
-            meanings: ["inside", "within", "between", "among", "house", "house"],
+            meanings: ["inside", "within", "between", "among", "house"],
             grade: KyoikuGrade.TWO,
             examples: [
                 { value: "内", kana: ["うち"], english: ["inside", "within", "while", "among", "amongst"] },
@@ -2855,7 +2855,7 @@ export function kyoiku(): KanjiData[] {
                 { value: "回復", kana: ["かいふく"], english: ["recovery (from illness)", "improvement"] },
                 { value: "今回", kana: ["こんかい"], english: ["now", "this time", "lately"] },
                 { value: "回答", kana: ["かいとう"], english: ["reply", "answer"] },
-                { value: "前回", kana: ["ぜんかい"], english: ["last time", "last installment", "last instalment"] },
+                { value: "前回", kana: ["ぜんかい"], english: ["last time", "last installment"] },
             ]
         },
         {
