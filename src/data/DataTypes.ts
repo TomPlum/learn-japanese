@@ -33,7 +33,7 @@ export interface KanjiData {
 
 export interface KanjiReading {
     kana: string;
-    romanji: string;
+    romaji: string;
 }
 
 export interface KanjiExample {

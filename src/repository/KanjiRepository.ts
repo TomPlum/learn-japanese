@@ -66,8 +66,8 @@ export class KanjiRepository implements Repository<Kanji> {
 
     private convert = (data: KanjiData[]): Kanji[] => {
         return data.map((result: KanjiData) => {
-            const on = result.on.map((data: KanjiReading) => new Reading(data.romanji, data.kana, ReadingType.ON));
-            const kun = result.kun.map((data: KanjiReading) => new Reading(data.romanji, data.kana, ReadingType.KUN));
+            const on = result.on.map((data: KanjiReading) => new Reading(data.romaji, data.kana, ReadingType.ON));
+            const kun = result.kun.map((data: KanjiReading) => new Reading(data.romaji, data.kana, ReadingType.KUN));
             const examples = result.examples.map((example: KanjiExample) => {
                 return new Example(example.value, example.kana, example.english);
             });
