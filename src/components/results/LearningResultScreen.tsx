@@ -32,7 +32,7 @@ class LearningResultScreen extends Component<LearningResultScreenProps> {
                 </Row>
 
                 <Row>
-                    <Col className="text-center" xs={12}>
+                    <Col className="text-center" md={result.forgotten.length > 0 ? 6 : 12} xs={12}>
                         <h1 className={styles.heading}>{this.getTitle()}</h1>
                         {result.forgotten.length > 0 &&
                             <Button onClick={this.onPractice} className={styles.mistakes}>
@@ -41,7 +41,7 @@ class LearningResultScreen extends Component<LearningResultScreenProps> {
                         }
                     </Col>
 
-                    <Col xs={12}>
+                    <Col md={6} xs={12}>
                         {result.forgotten.length > 0 && (
                             <PieChart width={250} height={250}>
                                 <Pie
