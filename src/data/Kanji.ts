@@ -35,7 +35,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "一般", kana: ["いっぱん"], english: ["general", "liberal", "universal", "ordinary"] },
                 { value: "一番", kana: ["いちばん"], english: ["best", "first", "number one", "game", "round", "bout"] },
                 { value: "一部", kana: ["いちぶ"], english: ["one part", "one portion", "one section", "some"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "二",
@@ -51,7 +52,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "十二", kana: ["じゅうに"], english: ["twelve"] },
                 { value: "十二月", kana: ["じゅうにがつ"], english: ["December"] },
                 { value: "二月", kana: ["にがつ"], english: ["February"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "日",
@@ -179,7 +181,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "三月", kana: ["さんがつ"], english: ["March"] },
                 { value: "三人", kana: ["さんにん", "みたり"], english: ["three people"] },
                 { value: "十三", kana: ["じゅうさん"], english: ["thirteen"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "見",
@@ -243,7 +246,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "十五", kana: ["じゅうご"], english: ["fifteen"] },
                 { value: "五輪", kana: ["ごりん"], english: ["the Olympics"] },
                 { value: "五十", kana: ["ごじゅう", "いそ", "い"], english: ["fifty"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "上",
@@ -275,7 +279,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "四月", kana: ["しがつ"], english: ["April"] },
                 { value: "十四", kana: ["じゅうし", "じゅうよん"], english: ["fourteen"] },
                 { value: "四十", kana: ["よんじゅう", "しじゅう", "よそ"], english: ["forty"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "金",
@@ -307,7 +312,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "十九", kana: ["じゅうきゅう"], english: ["nineteen"] },
                 { value: "九州", kana: ["きゅうしゅう"], english: ["Kyushu"] },
                 { value: "九十", kana: ["きゅうじゅう", "くじゅう"], english: ["ninety"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "入",
@@ -387,7 +393,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "八月", kana: ["はちがつ"], english: ["August"] },
                 { value: "八十", kana: ["はちじゅう", "やそ"], english: ["eighty"] },
                 { value: "三十八度線", kana: ["さんじゅうはちどせん"], english: ["eighth parallel"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "六",
@@ -403,7 +410,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "六十", kana: ["ろくじゅう", "むそ"], english: ["sixty"] },
                 { value: "六十四分音符", kana: ["ろくじゅうしぶおんぷ"], english: ["64th note"] },
                 { value: "十六", kana: ["じゅうろく"], english: ["sixteen"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "下",
@@ -467,7 +475,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "十七", kana: ["じゅうしち", "じゅうなな"], english: ["seventeen"] },
                 { value: "七十", kana: ["しちじゅう", "ななじゅう", "ななそ"], english: ["seventy"] },
                 { value: "四十七士", kana: ["しじゅうしちし"], english: ["The 47 Ronin",] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "山",
@@ -515,7 +524,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "三百", kana: ["さんびゃく"], english: ["three hundred"] },
                 { value: "百貨店", kana: ["ひゃっかてん"], english: ["cleric desk"] },
                 { value: "百万", kana: ["ひゃくまん"], english: ["one million",] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "名",
@@ -625,7 +635,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "四千", kana: ["よんせん"], english: ["four thousand"] },
                 { value: "千代", kana: ["せんだい"], english: ["thousand years", "very long", "forever"] },
                 { value: "千里", kana: ["せんり"], english: ["1000 ri", "a very long distance"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "男",
@@ -760,7 +771,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "天気", kana: ["てんき"], english: ["weather", "the elements", "fair weather"] },
                 { value: "天皇陛下", kana: ["てんのうへいか"], english: ["His Majesty the Emperor"] },
                 { value: "天井", kana: ["てんじょう"], english: ["ceiling", "ceiling price"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "右",
@@ -1735,7 +1747,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "万全", kana: ["ばんぜん"], english: ["perfection", "flawlessness"] },
                 { value: "数万", kana: ["すうまん"], english: ["tens of thousands"] },
                 { value: "万里", kana: ["ばんり"], english: ["thousands of miles"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "母",
@@ -2204,7 +2217,7 @@ export function kyoiku(): KanjiData[] {
         {
             name: "元",
             code: "\u5143",
-            on: [{ kana: "げん, がん", romaji: "gen, gan" }],
+            on: [{ kana: "げん", romaji: "gen" }, { kana: "げん", romaji: "gen" }],
             kun: [{ kana: "もと", romaji: "moto" }],
             source: "https://en.wiktionary.org/wiki/%E5%85%83#Kanji",
             meanings: ["beginning", "former time", "origin"],
@@ -2712,7 +2725,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "春闘", kana: ["しゅんとう"], english: ["spring offensive (Japanese unions)"] },
                 { value: "来春", kana: ["らいしゅん", "らいはる"], english: ["next spring"] },
                 { value: "青春", kana: ["せいしゅん"], english: ["youth", "springtime of life", "adolescent"] },
-            ]
+            ],
+            tags: ["season"]
         },
         {
             name: "走",
@@ -2744,7 +2758,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "昨秋", kana: ["さくしゅう"], english: ["autumn of last year", "fall of last year"] },
                 { value: "春秋", kana: ["しゅんじゅう", "はるあき"], english: ["spring and autumn", "spring and fall"] },
                 { value: "千秋楽", kana: ["せんしゅうらく"], english: ["concluding festivities"] },
-            ]
+            ],
+            tags: ["season"]
         },
         {
             name: "合",
@@ -2824,7 +2839,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "今夏", kana: ["こんか"], english: ["this summer", "next summer", "last summer"] },
                 { value: "冷夏", kana: ["れいか"], english: ["a cool summer"] },
                 { value: "夏場", kana: ["なつば"], english: ["summertime"] },
-            ]
+            ],
+            tags: ["season"]
         },
         {
             name: "市",

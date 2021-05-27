@@ -29,6 +29,7 @@ export interface KanjiData {
     meanings: string[];
     grade: KyoikuGrade;
     examples: KanjiExample[];
+    tags?: string[];
 }
 
 export interface KanjiReading {
