@@ -1,0 +1,20 @@
+@import "src/styles/sass/colours";
+
+@mixin common {
+  color: $dark-2;
+  border-radius: 10px;
+  padding: 1px 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: all ease 0.05s;
+}
+
+.wrapper {
+  @include common;
+  background-color: #d4d4d4;
+}
+
+.active {
+  @include common;
+  background-color: $bootstrap-green;
+}
