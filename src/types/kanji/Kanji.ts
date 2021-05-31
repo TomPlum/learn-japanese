@@ -12,8 +12,9 @@ export class Kanji extends Learnable {
     private readonly _grade: KyoikuGrade;
     private readonly _source: string;
     private readonly _examples: Example[];
+    private readonly _tags: string[];
 
-    constructor(character: string, readings: Reading[], meanings: string[], grade: KyoikuGrade, source: string, examples: Example[]) {
+    constructor(character: string, readings: Reading[], meanings: string[], grade: KyoikuGrade, source: string, examples: Example[], tags: string[]) {
         super();
         this._character = character;
         this._readings = readings;
@@ -21,6 +22,7 @@ export class Kanji extends Learnable {
         this._grade = grade;
         this._source = source;
         this._examples = examples;
+        this._tags = tags;
     }
 
     get readings(): Reading[] {
@@ -70,5 +72,9 @@ export class Kanji extends Learnable {
 
     getKanjiVariation(): string | undefined {
         return this._character;
+    }
+
+    getTags(): string[] {
+        return this._tags;
     }
 }

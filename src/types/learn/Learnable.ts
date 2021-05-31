@@ -10,6 +10,10 @@ export abstract class Learnable {
     public getKanjiVariation(): string | undefined {
         return undefined;
     }
+
+    public getTags(): string[] {
+        return [];
+    }
 }
 
 export interface LearningExample {
