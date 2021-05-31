@@ -3005,7 +3005,7 @@ export function kyoiku(): KanjiData[] {
                 { value: "牛肉", kana: ["ぎゅうにく"], english: ["beef"] },
                 { value: "筋肉", kana: ["きんにく"], english: ["muscle", "sinew"] },
                 { value: "肉親", kana: ["にくしん"], english: ["blood relationship", "blood relative"] },
-                { value: "肉体", kana: ["にくたい"], english: ["the body, the flesh"] },
+                { value: "肉体", kana: ["にくたい"], english: ["the body", "the flesh"] },
             ]
         },
 
@@ -3036,10 +3036,10 @@ export function kyoiku(): KanjiData[] {
             grade: KyoikuGrade.TWO,
             examples: [
                 { value: "門", kana: ["かど, もん"], english: ["gate"] },
-                { value: "部門", kana: ["ぶもん"], english: ["class, group, category, department, field"] },
-                { value: "専門", kana: ["せんもん"], english: ["speciality, specialty, subject of study"] },
+                { value: "部門", kana: ["ぶもん"], english: ["class", "group", "category", "department", "field"] },
+                { value: "専門", kana: ["せんもん"], english: ["speciality", "subject of study"] },
                 { value: "専門家", kana: ["せんもんか"], english: ["specialist"] },
-                { value: "専門学校", kana: ["せんもんがっこう", "せんもんガッコウ", "せんもんガッコ"], english: ["vocational school, technical school"] },
+                { value: "専門学校", kana: ["せんもんがっこう", "せんもんガッコウ", "せんもんガッコ"], english: ["vocational school", "technical school"] },
             ]
         },
 
@@ -3052,9 +3052,9 @@ export function kyoiku(): KanjiData[] {
             meanings: ["daytime", "noon"],
             grade: KyoikuGrade.TWO,
             examples: [
-                { value: "昼", kana: ["ひる"], english: ["noon, midday; daytime; lunch"] },
-                { value: "昼食", kana: ["ちゅうしょく", "ちゅうじき", "ひるげ"], english: ["lunch, midday meal"] },
-                { value: "昼間", kana: ["ひるま", "ちゅうかん"], english: ["daytime, during the day"] },
+                { value: "昼", kana: ["ひる"], english: ["noon", "midday", "daytime", "lunch"] },
+                { value: "昼食", kana: ["ちゅうしょく", "ちゅうじき", "ひるげ"], english: ["lunch", "midday meal"] },
+                { value: "昼間", kana: ["ひるま", "ちゅうかん"], english: ["daytime", "during the day"] },
                 { value: "昼過ぎ", kana: ["ひるすぎ"], english: ["afternoon"] },
                 { value: "昼夜", kana: ["ちゅうや"], english: ["day and night"] },
             ]
