@@ -2906,6 +2906,166 @@ export function kyoiku(): KanjiData[] {
                 { value: "少数", kana: ["しょうすう"], english: ["minority", "few"] },
             ]
         },
+        {
+            name: "記",
+            code: "\u8A18",
+            on: [{ kana: "き", romaji: "ki" }],
+            kun: [{ kana: "しるす", romaji: "shirusu" }],
+            source: "https://en.wiktionary.org/wiki/%E8%A8%98#Kanji",
+            meanings: ["record", "scribe", "account", "narrative"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "記事", kana: ["きじ"], english: ["article", "news story", "report", "account"] },
+                { value: "記者", kana: ["きしゃ"], english: ["reporter"] },
+                { value: "記録", kana: ["きろく"], english: ["record", "minutes", "document"] },
+                { value: "書記", kana: ["しょき"], english: ["clerk", "secretary"] },
+                { value: "記念", kana: ["きねん"], english: ["commemoration", "memory"] },
+            ]
+        },
+        {
+            name: "活",
+            code: "\u6D3B",
+            on: [{ kana: " かつ", romaji: "katsu" }],
+            kun: [{ kana: "いきる", romaji: "ikiru" }],
+            source: "https://en.wiktionary.org/wiki/%E6%B4%BB#Kanji",
+            meanings: ["active", "lively", "living", "being helped"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "活動", kana: ["かつどう"], english: ["action", "activity"] },
+                { value: "生活", kana: ["せいかつ"], english: ["living", "life (one’s daily existence)"] },
+                { value: "活発", kana: ["かっぱつ"], english: ["vigour", "active", "lively"] },
+                { value: "活性", kana: ["かっせい"], english: ["activity"] },
+                { value: "活躍", kana: ["かつやく"], english: ["activity (esp. energetic)", "great efforts"] },
+            ]
+        },
+        {
+            name: "交",
+            code: "\u4EA4",
+            on: [{ kana: "こう", romaji: "kō" }],
+            kun: [{ kana: "まじわる", romaji: "majiwaru" }, { kana: "まじる", romaji: "majiru" }, { kana: "かう", romaji: "kau" }, { kana: "かわす", romaji: "kawasu" }, { kana: "まじえる", romaji: "majieru" }, { kana: "まぜる", romaji: "mazeru" }, { kana: "まざる", romaji: "mazaru" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BA%A4#Kanji",
+            meanings: ["intersect", "mingle", "mixing", "association"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "外交", kana: ["がいこう"], english: ["diplomacy"] },
+                { value: "交渉", kana: ["こうしょう"], english: ["negotiations", "discussions", "connection"] },
+                { value: "交流", kana: ["こうりゅう"], english: ["intercourse", "(cultural) exchange"] },
+                { value: "交換", kana: ["こうかん"], english: ["exchange", "interchange", "switching", "reciprocity"] },
+                { value: "交通", kana: ["こうつう"], english: ["communication", "transportation", "traffic"] },
+            ]
+        },
+        {
+            name: "引",
+            code: "\u5F15",
+            on: [{ kana: "いん", romaji: "in" }],
+            kun: [{ kana: "ひく", romaji: "hiku" }, { kana: "ひける", romaji: "hikeru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BC%95#Kanji",
+            meanings: ["pull", "tug", "jerk", "admit", "install", "quote", "refer to"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "取引", kana: ["とりひき"], english: ["transactions", "dealings", "business"] },
+                { value: "引き下げ", kana: ["ひきさげ"], english: ["reduction", "cut"] },
+                { value: "引き上げ", kana: ["ひきあげ"], english: ["pulling up", "drawing up", "salvage"] },
+                { value: "引退", kana: ["いんたい"], english: ["retire"] },
+                { value: "隠し引き出し", kana: ["かくしひきだし"], english: ["secret withdrawal"] },
+            ]
+        },
+        {
+            name: "曜",
+            code: "\u66DC",
+            on: [{ kana: "よう", romaji: "yō" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E6%9B%9C#Kanji",
+            meanings: ["weekday"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "土曜", kana: ["どよう"], english: ["Saturday"] },
+                { value: "曜日", kana: ["ようび"], english: ["Day of the week"] },
+                { value: "日曜", kana: ["にちよう"], english: ["Sunday"] },
+                { value: "金曜", kana: ["きんよう"], english: ["Friday"] },
+                { value: "月曜", kana: ["げつよう"], english: ["Monday"] },
+            ]
+        },
+        {
+            name: "点",
+            code: "\u70B9",
+            on: [{ kana: "てん", romaji: "ten" }],
+            kun: [{ kana: "ぼち", romaji: "bochi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%82%B9#Kanji",
+            meanings: ["point", "spot", "mark", "speck", "decimal point"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "点", kana: ["てん"], english: ["spot", "mark", "point", "dot", "mark (e.g. in exam)"] },
+                { value: "焦点", kana: ["しょうてん"], english: ["focus (e.g. photographic)", "focal point"] },
+                { value: "拠点", kana: ["きょてん"], english: ["position", "location", "base", "point"] },
+                { value: "時点", kana: ["じてん"], english: ["point in time", "occasion"] },
+                { value: "得点", kana: ["とくてん"], english: ["score", "points made", "marks obtained", "runs"] },
+            ]
+        },
+        {
+            name: "原",
+            code: "\u539F",
+            on: [{ kana: "げん", romaji: "gen" }],
+            kun: [{ kana: "はら", romaji: "hara" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8E%9F#Kanji",
+            meanings: ["meadow", "original", "primitive", "field", "plain", "tundra"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "原因", kana: ["げんいん"], english: ["cause", "origin", "source"] },
+                { value: "原則", kana: ["げんそく"], english: ["principle", "general rule"] },
+                { value: "原子力", kana: ["げんしりょく"], english: ["atomic energy"] },
+                { value: "原告", kana: ["げんこく"], english: ["plaintiff", "accuser", "prosecutor"] },
+                { value: "原発", kana: ["げんぱつ"], english: ["nuclear power plant", "nuclear power supply"] },
+            ]
+        },
+        {
+            name: "組",
+            code: "\u7D44",
+            on: [{ kana: "そ", romaji: "so" }],
+            kun: [{ kana: "くみ", romaji: "kumi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%B5%84#Kanji",
+            meanings: ["team", "association", "braid", "plait", "construct", "unite", "cooperate", "grapple"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "組", kana: ["くみ"], english: ["set (of items)", "group (of people)"] },
+                { value: "組織", kana: ["そしき"], english: ["organisation", "structure"] },
+                { value: "番組", kana: ["ばんぐみ"], english: ["program (e.g. TV)", "programme"] },
+                { value: "組合", kana: ["くみあい"], english: ["association", "union"] },
+                { value: "労組", kana: ["ろうそ", "ろうくみ"], english: ["labour union"] },
+            ]
+        },
+        {
+            name: "直",
+            code: "\u76F4",
+            on: [{ kana: "じき", romaji: "jiki" }, { kana: "ちょく", romaji: "choku" }],
+            kun: [{ kana: "ただちに", romaji: "tadachini" }, { kana: "なおす", romaji: "naosu" }],
+            source: "https://en.wiktionary.org/wiki/%E7%9B%B4#Kanji",
+            meanings: ["straightaway", "honesty", "frankness", "fix", "repair"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "直", kana: ["じき"], english: ["soon", "in a moment", "before long", "shortly"] },
+                { value: "直ちに", kana: ["ただちに"], english: ["at once", "immediately", "directly", "in person"] },
+                { value: "見直し", kana: ["みなおし"], english: ["review", "reconsideration", "revision"] },
+                { value: "直後", kana: ["ちょくご"], english: ["immediately following"] },
+                { value: "直接", kana: ["ちょくせつ"], english: ["direct", "immediate", "personal", "firsthand"] },
+            ]
+        },
+        {
+            name: "番",
+            code: "\u756A",
+            on: [{ kana: "ばん", romaji: "ban" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E7%95%AA#Kanji",
+            meanings: ["number", "turn", "number in a series"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "一番", kana: ["いちばん"], english: ["best", "first", "number one", "game", "round", "bout"] },
+                { value: "番組", kana: ["ばんぐみ"], english: ["program (e.g. TV)", "programme"] },
+                { value: "番号", kana: ["ばんごう"], english: ["number", "series of digits"] },
+                { value: "本番", kana: ["ほんばん"], english: ["performance", "take"] },
+                { value: "番手", kana: ["ばんて"], english: ["(yarn) count", "nth place (e.g. in a race)"] },
+            ]
+        },
 
         //Grade 6 Kanji
         {

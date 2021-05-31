@@ -12,8 +12,8 @@ beforeEach(() => {
     mockKyoiku.mockReturnValue([{
         name: "人",
         code: "\u4eba",
-        on: [{ kana: "じん", romanji: "jin" }],
-        kun: [{ kana: "ひと", romanji: "hito" }],
+        on: [{ kana: "じん", romaji: "jin" }],
+        kun: [{ kana: "ひと", romaji: "hito" }],
         source: "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
         meanings: ["person"],
         grade: KyoikuGrade.ONE,
@@ -30,8 +30,8 @@ beforeEach(() => {
     mockJoyo.mockReturnValue([ {
         name: "猫",
         code: "\u732B",
-        on: [{ kana: " みょう", romanji: "myo" }],
-        kun: [{ kana: "ねこ", romanji: "neko" }],
+        on: [{ kana: " みょう", romaji: "myo" }],
+        kun: [{ kana: "ねこ", romaji: "neko" }],
         source: "https://en.wiktionary.org/wiki/%E7%8C%AB#Kanji",
         meanings: ["cat"],
         grade: KyoikuGrade.TWO,
@@ -47,11 +47,11 @@ beforeEach(() => {
 */
 
 it("Kyoiku should return only Kyoiku", () => {
-    expect(kyoiku()).toHaveLength(183);
+    expect(kyoiku()).toHaveLength(193);
 });
 
 it("Joyo should return Joyo & Kyoiku", () => {
-    expect(joyo()).toHaveLength(184);
+    expect(joyo()).toHaveLength(194);
 });
 
 it("Should return exactly 80 Grade 1 Kyoiku Kanji", () => {
