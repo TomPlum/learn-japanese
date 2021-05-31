@@ -3067,6 +3067,159 @@ export function kyoiku(): KanjiData[] {
             ]
         },
 
+        {
+            name: "算",
+            code: "\u7B97",
+            on: [{ kana: "さん", romaji: "san" }],
+            kun: [{ kana: "かぞえる", romaji: "kazoeru" }],
+            source: "https://en.wiktionary.org/wiki/%E7%AE%97#Kanji",
+            meanings: ["calculate", "divining", "number", "abacus", "probability"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "予算", kana: ["よさん"], english: ["estimate", "budget"] },
+                { value: "決算", kana: ["けっさん"], english: ["balance sheet", "settlement of accounts"] },
+                { value: "通算", kana: ["つうさん"], english: ["total"] },
+                { value: "計算", kana: ["けいさん"], english: ["calculation", "reckoning", "count", "forecast"] },
+                { value: "補正予算", kana: ["ほせいよさん"], english: ["revised or supplementary budget"] },
+            ]
+        },
+
+        {
+            name: "線",
+            code: "\u7DDA",
+            on: [{ kana: "せん", romaji: "sen" }],
+            kun: [{ kana: "いと", romaji: "ito" }],
+            source: "https://en.wiktionary.org/wiki/%E7%B7%9A#Kanji",
+            meanings: ["line", "track"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "線", kana: ["せん"], english: ["line (also telephone, railway)", "wire", "beam"] },
+                { value: "路線", kana: ["ろせん"], english: ["route, line", "alignment"] },
+                { value: "新幹線", kana: ["しんかんせん"], english: ["bullet train (very high speed)", "Shinkansen"] },
+                { value: "打線", kana: ["だせん"], english: ["baseball lineup"] },
+                { value: "戦線", kana: ["せんせん"], english: ["war front"] },
+            ]
+        },
+
+        {
+            name: "形",
+            code: "\u5F62",
+            on: [{ kana: "ぎょう", romaji: "gyō" }, { kana: "けい", romaji: "kei" }],
+            kun: [{ kana: "かた", romaji: "kata" },{ kana: "かたち", romaji: "katachi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BD%A2#Kanji",
+            meanings: ["shape", "form", "style"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "形", kana: ["かたち", "よう"], english: ["form", "shape", "figure", "visage"] },
+                { value: "形式", kana: ["けいしき"], english: ["form (as opposed to substance)", "formality"] },
+                { value: "形成", kana: ["けいせい"], english: ["formation", "molding", "taking form"] },
+                { value: "形態", kana: ["けいたい"], english: ["form", "shape", "figure"] },
+                { value: "人形", kana: ["にんぎょう"], english: ["doll", "puppet", "figure"] },
+            ]
+        },
+
+        {
+            name: "頭",
+            code: "\u982D",
+            on: [{ kana: "ず", romaji: "zu" }, { kana: "とう", romaji: "tō" },{ kana: "と", romaji: "to" }],
+            kun: [{ kana: "あたま", romaji: "atama" }, { kana: "かしら", romaji: "kashira" }],
+            source: "https://en.wiktionary.org/wiki/%E9%A0%AD#Kanji",
+            meanings: ["head", "counter for large animals"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "冒頭", kana: ["ぼうとう"], english: ["beginning", "start", "outset"] },
+                { value: "先頭", kana: ["せんとう"], english: ["head", "lead", "vanguard", "first"] },
+                { value: "店頭", kana: ["てんとう"], english: ["shop front", "counter", "shop"] },
+                { value: "頭取", kana: ["とうどり"], english: ["bank", "president"] },
+                { value: "街頭", kana: ["がいとう"], english: ["in the street"] },
+            ]
+        },
+
+        {
+            name: "冬",
+            code: "\u51AC",
+            on: [{ kana: "とう", romaji: "tō" }],
+            kun: [{ kana: " ふゆ", romaji: "fuyu" }],
+            source: "https://en.wiktionary.org/wiki/%E5%86%AC#Kanji",
+            meanings: ["winter"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "冬", kana: ["ふゆ"], english: ["winter"] },
+                { value: "冬季", kana: ["とうき"], english: ["season of winter"] },
+                { value: "暖冬", kana: ["だんとう"], english: ["mild winter", "warm winter"] },
+                { value: "冬場", kana: ["ふゆば"], english: ["the winter season"] },
+                { value: "越冬", kana: ["えっとう"], english: ["passing the winter"] },
+            ]
+        },
+
+        {
+            name: "肉",
+            code: "\u8089",
+            on: [{ kana: "にく", romaji: "niku" }],
+            kun: [{ kana: "しし", romaji: "shishi" }],
+            source: "https://en.wiktionary.org/wiki/%E8%82%89#Kanji",
+            meanings: ["meat"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "肉", kana: ["にく", "しし"], english: ["flesh", "meat"] },
+                { value: "牛肉", kana: ["ぎゅうにく"], english: ["beef"] },
+                { value: "筋肉", kana: ["きんにく"], english: ["muscle", "sinew"] },
+                { value: "肉親", kana: ["にくしん"], english: ["blood relationship", "blood relative"] },
+                { value: "肉体", kana: ["にくたい"], english: ["the body", "the flesh"] },
+            ]
+        },
+
+        {
+            name: "声",
+            code: "\u58F0",
+            on: [{ kana: "しょう", romaji: "shō" },{ kana: "せい", romaji: "sei" }],
+            kun: [{ kana: "こえ", romaji: "koe" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A3%B0#Kanji",
+            meanings: ["voice"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "声", kana: ["こえ"], english: ["voice"] },
+                { value: "声明", kana: ["せいめい"], english: ["declaration", "statement", "proclamation"] },
+                { value: "音声", kana: ["おんせい", "おんじょう"], english: ["voice", "(the concept of) sound"] },
+                { value: "歓声", kana: ["かんせい"], english: ["cheer", "shout of joy"] },
+                { value: "声援", kana: ["せいえん"], english: ["encouragement", "cheering", "support"] },
+            ]
+        },
+
+        {
+            name: "門",
+            code: "\u9580",
+            on: [{ kana: "もん", romaji: "mon" }],
+            kun: [{ kana: "かど", romaji: "kado" }],
+            source: "https://en.wiktionary.org/wiki/%E9%96%80#Kanji",
+            meanings: ["gate", "counter for cannons"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "門", kana: ["かど, もん"], english: ["gate"] },
+                { value: "部門", kana: ["ぶもん"], english: ["class", "group", "category", "department", "field"] },
+                { value: "専門", kana: ["せんもん"], english: ["speciality", "subject of study"] },
+                { value: "専門家", kana: ["せんもんか"], english: ["specialist"] },
+                { value: "専門学校", kana: ["せんもんがっこう", "せんもんガッコウ", "せんもんガッコ"], english: ["vocational school", "technical school"] },
+            ]
+        },
+
+        {
+            name: "昼",
+            code: "\u663C",
+            on: [{ kana: "ちゅう", romaji: "chū" }],
+            kun: [{ kana: "ひる", romaji: "hiru" }],
+            source: "https://en.wiktionary.org/wiki/%E6%98%BC#Kanji",
+            meanings: ["daytime", "noon"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "昼", kana: ["ひる"], english: ["noon", "midday", "daytime", "lunch"] },
+                { value: "昼食", kana: ["ちゅうしょく", "ちゅうじき", "ひるげ"], english: ["lunch", "midday meal"] },
+                { value: "昼間", kana: ["ひるま", "ちゅうかん"], english: ["daytime", "during the day"] },
+                { value: "昼過ぎ", kana: ["ひるすぎ"], english: ["afternoon"] },
+                { value: "昼夜", kana: ["ちゅうや"], english: ["day and night"] },
+            ]
+        },
+
         //Grade 6 Kanji
         {
             name: "私",
