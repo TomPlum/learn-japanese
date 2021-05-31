@@ -112,4 +112,12 @@ describe("Arrays Utility", () => {
             expect(result).toBe(10);
         });
     });
+
+    describe("Distinct", () => {
+        it("Should return only distinct elements", () => {
+            const array = ["one", "two", "one", "three"];
+            const result = Arrays.distinct(array);
+            expect(result).toStrictEqual(["one", "two", "three"]);
+        });
+    });
 });

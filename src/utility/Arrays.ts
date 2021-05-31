@@ -105,4 +105,13 @@ export default class Arrays {
             return resultArray
         }, []);
     }
+
+    /**
+     * Filters out duplicate elements.
+     * @param array The array of elements to reduce.
+     * @return array The filtered array containing only unique elements.
+     */
+    static distinct<T>(array: T[]): T[] {
+        return array.filter((value, index, self) => self.indexOf(value) === index);
+    }
 }
