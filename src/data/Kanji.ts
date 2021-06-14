@@ -3139,7 +3139,7 @@ export function kyoiku(): KanjiData[] {
             name: "冬",
             code: "\u51AC",
             on: [{ kana: "とう", romaji: "tō" }],
-            kun: [{ kana: " ふゆ", romaji: "fuyu" }],
+            kun: [{ kana: "ふゆ", romaji: "fuyu" }],
             source: "https://en.wiktionary.org/wiki/%E5%86%AC#Kanji",
             meanings: ["winter"],
             grade: KyoikuGrade.TWO,
