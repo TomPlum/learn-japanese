@@ -181,6 +181,68 @@ export function adjectives(): AdjectiveData[] {
             type: AdjectiveType.NA,
             genkiLesson: 6
         },
+        {
+            meanings: ["long"],
+            kana: "ながい",
+            kanjiForm: "長い",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["short (length)"],
+            kana: "みじかい",
+            kanjiForm: "短い",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["fast"],
+            kana: "はやい",
+            kanjiForm: "早い",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["tall (stature)"],
+            kana: "せがたかい",
+            kanjiForm: "背が高い",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["short (stature)"],
+            kana: "せがひくい",
+            kanjiForm: "背が低い",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["bright", "smart", "clever"],
+            kana: "あたまがいい",
+            kanjiForm: "頭がいい",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["cute"],
+            kana: "かわいい",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["kind"],
+            kana: "しんせつな",
+            kanjiForm: "親切",
+            type: AdjectiveType.NA,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["convenient"],
+            kana: "べんりな",
+            kanjiForm: "便利な",
+            type: AdjectiveType.NA,
+            genkiLesson: 7
+        }
     ];
 }
 
@@ -353,6 +415,79 @@ export function verbs(): VerbData[] {
             type: VerbType.IRREGULAR,
             genkiLesson: 6
         },
+        {
+            meanings: ["to sing"],
+            kana: "うたう",
+            kanjiForm: "歌う",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to put on (a hat)"],
+            kana: "かぶる",
+            type: VerbType.RU_U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to put on (items below your waist)"],
+            kana: "はく",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to get to know"],
+            kana: "しる",
+            kanjiForm: "知る",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to live"],
+            kana: "すむ",
+            kanjiForm: "住む",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to work"],
+            kana: "はたらく",
+            kanjiForm: "働く",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to gain weight"],
+            kana: "ふとる",
+            kanjiForm: "太る",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to put on (glasses)"],
+            kana: "(めがねを) かける",
+            type: VerbType.RU,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to put on (clothes above your waist)"],
+            kana: "きる",
+            kanjiForm: "着る",
+            type: VerbType.RU,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to lose weight"],
+            kana: "やせる",
+            type: VerbType.RU,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to get married"],
+            kana: "けっこんする",
+            kanjiForm: "結婚する",
+            type: VerbType.IRREGULAR,
+            genkiLesson: 7
+        }
     ];
 }
 
@@ -441,6 +576,16 @@ export function adverbs(): AdverbData[] {
             meanings: ["slowly", "leisurely", "unhurriedly"],
             kana: "ゆっくり",
             genkiLesson: 6
+        },
+        {
+            meanings: ["of course"],
+            kana: "もちろん",
+            genkiLesson: 7
+        },
+        {
+            meanings: ["if you like"],
+            kana: "よかったら",
+            genkiLesson: 7
         }
     ];
 }
@@ -504,6 +649,12 @@ export function expressions(): ExpressionData[] {
             meanings: ["Really?"],
             kana: "ほんとうですか",
             kanjiForm: "本当ですか",
+            genkiLesson: 6
+        },
+        {
+            meanings: ["Nothing in particular"],
+            kana: "べつに + negative",
+            kanjiForm: "別に",
             genkiLesson: 6
         },
     ];
