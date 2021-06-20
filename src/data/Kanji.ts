@@ -3220,6 +3220,176 @@ export function kyoiku(): KanjiData[] {
             ]
         },
 
+        {
+            name: "兄",
+            code: "\u5144",
+            on: [{ kana: "きょう", romaji: "kyō" }, { kana: "けい", romaji: "kei" }],
+            kun: [{ kana: "あに", romaji: "ani" }],
+            source: "https://en.wiktionary.org/wiki/%E5%85%84#Kanji",
+            meanings: ["older brother"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "兄", kana: ["あに"], english: ["older brother"] },
+                { value: "兄弟", kana: ["きょうだい", "けいてい"], english: ["siblings", "brothers and sisters"] },
+                { value: "兄ちゃん", kana: ["あんちゃん"], english: ["(my) older brother"] },
+                { value: "兄さん", kana: ["にいさん", "あにさん"], english: ["older brother", "elder brother"] },
+                { value: "実兄", kana: ["じっけい"], english: ["one’s own elder brother"] },
+            ]
+        },
+
+        {
+            name: "馬",
+            code: "\u99AC",
+            on: [{ kana: "ば", romaji: "ba" }],
+            kun: [{ kana: "うま", romaji: "uma" }, { kana: "ま", romaji: "ma" }],
+            source: "https://en.wiktionary.org/wiki/%E9%A6%AC#Kanji",
+            meanings: ["horse"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "馬", kana: ["うま"], english: ["horse", "promoted bishop (shogi)"] },
+                { value: "出馬", kana: ["しゅつば"], english: ["going on horseback", "going in person"] },
+                { value: "競馬", kana: ["けいば"], english: ["horse racing"] },
+                { value: "馬場", kana: ["ばば"], english: ["horse riding ground"] },
+                { value: "競馬場", kana: ["けいばじょう"], english: ["racecourse", "race track"] },
+            ]
+        },
+
+        {
+            name: "船",
+            code: "\u8239",
+            on: [{ kana: "せん", romaji: "sen" }],
+            kun: [{ kana: "ふな", romaji: "funa" }, { kana: "ふね", romaji: "fune" }],
+            source: "https://en.wiktionary.org/wiki/%E8%88%B9#Kanji",
+            meanings: ["ship, boat"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "船", kana: ["ふね"], english: ["ship", "boat", "watercraft", "vessel", "steamship"] },
+                { value: "漁船", kana: ["ぎょせん"], english: ["fishing boat"] },
+                { value: "船長", kana: ["せんちょう"], english: ["ship’s captain"] },
+                { value: "船舶", kana: ["せんぱく"], english: ["ship"] },
+                { value: "造船", kana: ["ぞうせん"], english: ["shipbuilding"] },
+            ]
+        },
+
+        {
+            name: "岩",
+            code: "\u5CA9",
+            on: [{ kana: "がん", romaji: "gan" }],
+            kun: [{ kana: "いわ", romaji: "iwa" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B2%A9#Kanji",
+            meanings: ["boulder", "rock", "cliff"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "岩", kana: ["いわ", "いわお"], english: ["rock", "crag"] },
+                { value: "溶岩", kana: ["ようがん"], english: ["lava"] },
+                { value: "岩間", kana: ["いわま"], english: ["among rocks"] },
+                { value: "一枚岩", kana: ["いちまいいわ"], english: ["monolithic"] },
+                { value: "岩石", kana: ["がんせき"], english: ["rock"] },
+            ]
+        },
+
+        {
+            name: "\u59B9",
+            code: "\u59B9",
+            on: [{ kana: "まい", romaji: "mai" }, { kana: "ばい", romaji: "bai" }],
+            kun: [{ kana: "いもうと", romaji: "imōto" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A6%B9#Kanji",
+            meanings: ["younger sister"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "妹", kana: ["いもうと"], english: ["younger sister"] },
+                { value: "姉妹", kana: ["しまい", "きょうだい"], english: ["sisters"] },
+                { value: "弟妹", kana: ["ていまい"], english: ["younger brother and sister"] },
+                { value: "義妹", kana: ["ぎまい", "いもうと"], english: ["sister in law (younger)"] },
+                { value: "実妹", kana: ["じつまい"], english: ["one’s younger sister"] },
+            ]
+        },
+
+        {
+            name: "魚",
+            code: "\u9B5A",
+            on: [{ kana: "ご", romaji: "go" }, { kana: "ぎょ", romaji: "gyo" }],
+            kun: [{ kana: "うお", romaji: "uo" }, { kana: "さかな", romaji: "sakana" }],
+            source: "https://en.wiktionary.org/wiki/%E9%AD%9A#Kanji",
+            meanings: ["sakana"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "魚", kana: ["さかな", "うお"], english: ["fish"] },
+                { value: "魚介類", kana: ["ぎょかいるい"], english: ["marine products", "seafood", "fish and shellfish"] },
+                { value: "金魚", kana: ["きんぎょ"], english: ["goldfish"] },
+                { value: "魚類", kana: ["ぎょるい"], english: ["the fishes"] },
+                { value: "稚魚", kana: ["ちぎょ"], english: ["fry (young fish)"] },
+            ]
+        },
+
+        {
+            name: "園",
+            code: "\u5712",
+            on: [{ kana: "えん", romaji: "en" }],
+            kun: [{ kana: "その", romaji: "sono" }],
+            source: "https://en.wiktionary.org/wiki/%E5%9C%92#Kanji",
+            meanings: ["park", "garden", "yard", "farm"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "園", kana: ["その", "えん"], english: ["garden", "orchard", "park"] },
+                { value: "公園", kana: ["こうえん"], english: ["(public) park"] },
+                { value: "学園", kana: ["がくえん"], english: ["academy", "campus"] },
+                { value: "動物園", kana: ["どうぶつえん"], english: ["zoo", "zoological gardens"] },
+                { value: "幼稚園", kana: ["ようちえん"], english: ["kindergarten"] },
+            ]
+        },
+
+        {
+            name: "顔",
+            code: "\u9854",
+            on: [{ kana: "がん", romaji: "gan" }],
+            kun: [{ kana: "かお", romaji: "kao" }],
+            source: "https://en.wiktionary.org/wiki/%E9%A1%94#Kanji",
+            meanings: ["face", "expression"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "顔", kana: ["かお"], english: ["face (person)"] },
+                { value: "知らん顔", kana: ["しらんかお"], english: ["unconcerned air", "indifference"] },
+                { value: "笑顔", kana: ["えがお"], english: ["smiling face", "smile"] },
+                { value: "顔ぶれ", kana: ["かおぶれ"], english: ["personnel", "member"] },
+                { value: "似顔", kana: ["にがお"], english: ["portrait", "likeness"] },
+            ]
+        },
+
+        {
+            name: "羽",
+            code: "\u7FBD",
+            on: [{ kana: "う", romaji: "u" }],
+            kun: [{ kana: "は", romaji: "ha" }, { kana: "はね", romaji: "hane" }],
+            source: "https://en.wiktionary.org/wiki/%E7%BE%BD#Kanji",
+            meanings: ["feathers", "counter for birds", "rabbits"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "羽", kana: ["わ", "ば", "ぱ"], english: ["counter for birds and rabbits"] },
+                { value: "羽根", kana: ["はね"], english: ["feather", "plume", "wing", "blade", "fan", "propeller"] },
+                { value: "羽毛", kana: ["うもう"], english: ["feathers", "plumage", "down"] },
+                { value: "羽目", kana: ["はめ"], english: ["panel", "wainscoting", "wainscotting", "plight", "fix"] },
+                { value: "白羽", kana: ["しらは"], english: ["white feather"] },
+            ]
+        },
+
+        {
+            name: "角",
+            code: "\u89D2",
+            on: [{ kana: "かく", romaji: "kaku" }],
+            kun: [{ kana: "かど", romaji: "kado" }, { kana: "つの", romaji: "tsuno" }],
+            source: "https://en.wiktionary.org/wiki/%E8%A7%92#Kanji",
+            meanings: ["angle", "corner", "square", "horn", "antlers"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "角", kana: ["かど"], english: ["corner", "edge"] },
+                { value: "多角", kana: ["たかく"], english: ["many sided", "versatile", "polygonal", "diversified"] },
+                { value: "一角", kana: ["いっかく", "イッカク"], english: ["corner", "section", "point", "one horn"] },
+                { value: "角度", kana: ["かくど"], english: ["angle"] },
+                { value: "内角", kana: ["ないかく"], english: ["interior angle", "inside corner"] },
+            ]
+        },
+
         //Grade 6 Kanji
         {
             name: "私",
