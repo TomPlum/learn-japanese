@@ -3473,7 +3473,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "ご", romaji: "go" }, { kana: "ぎょ", romaji: "gyo" }],
             kun: [{ kana: "うお", romaji: "uo" }, { kana: "さかな", romaji: "sakana" }],
             source: "https://en.wiktionary.org/wiki/%E9%AD%9A#Kanji",
-            meanings: ["sakana"],
+            meanings: ["fish"],
             grade: KyoikuGrade.TWO,
             examples: [
                 { value: "魚", kana: ["さかな", "うお"], english: ["fish"] },
