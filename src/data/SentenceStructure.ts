@@ -181,6 +181,89 @@ export function adjectives(): AdjectiveData[] {
             type: AdjectiveType.NA,
             genkiLesson: 6
         },
+        {
+            meanings: ["long"],
+            kana: "ながい",
+            kanjiForm: "長い",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["short (length)"],
+            kana: "みじかい",
+            kanjiForm: "短い",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["fast"],
+            kana: "はやい",
+            kanjiForm: "早い",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["tall (stature)"],
+            kana: "せがたかい",
+            kanjiForm: "背が高い",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["short (stature)"],
+            kana: "せがひくい",
+            kanjiForm: "背が低い",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["bright", "smart", "clever"],
+            kana: "あたまがいい",
+            kanjiForm: "頭がいい",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["cute"],
+            kana: "かわいい",
+            type: AdjectiveType.I,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["kind"],
+            kana: "しんせつな",
+            kanjiForm: "親切",
+            type: AdjectiveType.NA,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["convenient"],
+            kana: "べんりな",
+            kanjiForm: "便利な",
+            type: AdjectiveType.NA,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["skillful", "good at"],
+            kana: "じょうずな",
+            kanjiForm: "上手",
+            type: AdjectiveType.NA,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["clumsy", "poor at"],
+            kana: "へたな",
+            kanjiForm: "下手",
+            type: AdjectiveType.NA,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["famous"],
+            kana: "ゆうめいな",
+            kanjiForm: "有名",
+            type: AdjectiveType.NA,
+            genkiLesson: 8
+        }
     ];
 }
 
@@ -353,6 +436,190 @@ export function verbs(): VerbData[] {
             type: VerbType.IRREGULAR,
             genkiLesson: 6
         },
+        {
+            meanings: ["to sing"],
+            kana: "うたう",
+            kanjiForm: "歌う",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to put on (a hat)"],
+            kana: "かぶる",
+            type: VerbType.RU_U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to put on (items below your waist)"],
+            kana: "はく",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to get to know"],
+            kana: "しる",
+            kanjiForm: "知る",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to live"],
+            kana: "すむ",
+            kanjiForm: "住む",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to work"],
+            kana: "はたらく",
+            kanjiForm: "働く",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to gain weight"],
+            kana: "ふとる",
+            kanjiForm: "太る",
+            type: VerbType.U,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to put on (glasses)"],
+            kana: "(めがねを) かける",
+            type: VerbType.RU,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to put on (clothes above your waist)"],
+            kana: "きる",
+            kanjiForm: "着る",
+            type: VerbType.RU,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to lose weight"],
+            kana: "やせる",
+            type: VerbType.RU,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to get married"],
+            kana: "けっこんする",
+            kanjiForm: "結婚する",
+            type: VerbType.IRREGULAR,
+            genkiLesson: 7
+        },
+        {
+            meanings: ["to wash"],
+            kana: "あらう",
+            kanjiForm: "洗う",
+            type: VerbType.U,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to say"],
+            kana: "いう",
+            kanjiForm: "言う",
+            type: VerbType.U,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to need"],
+            kana: "いる",
+            type: VerbType.U,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to be late"],
+            kana: "おそくなる",
+            kanjiForm: "遅くなる",
+            type: VerbType.RU_U,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to take a bath"],
+            kana: "おふろにはいる",
+            kanjiForm: "お風呂に入る",
+            type: VerbType.RU_U,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to think"],
+            kana: "おもう",
+            kanjiForm: "思う",
+            type: VerbType.U,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to cut"],
+            kana: "きる",
+            kanjiForm: "切る",
+            type: VerbType.RU_U,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to make"],
+            kana: "つくる",
+            kanjiForm: "作る",
+            type: VerbType.RU_U,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["(rain / snow) falls"],
+            kana: "(あめ / ゆき　が) ふる",
+            kanjiForm: "(雨 / 雪 が)　降る",
+            type: VerbType.RU_U,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to take (a thing)"],
+            kana: "もっていく",
+            kanjiForm: "持っていく",
+            type: VerbType.U,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to throw away"],
+            kana: "すてる",
+            kanjiForm: "捨てる",
+            type: VerbType.RU,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to begin"],
+            kana: "はじめる",
+            kanjiForm: "始める",
+            type: VerbType.RU,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to drive"],
+            kana: "うんてんする",
+            kanjiForm: "運転する",
+            type: VerbType.IRREGULAR,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to do laundry"],
+            kana: "せんたくする",
+            kanjiForm: "洗濯する",
+            type: VerbType.IRREGULAR,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to clean"],
+            kana: "そうじする",
+            kanjiForm: "掃除する",
+            type: VerbType.IRREGULAR,
+            genkiLesson: 8
+        },
+        {
+            meanings: ["to cook"],
+            kana: "りょうりする",
+            kanjiForm: "料理する",
+            type: VerbType.IRREGULAR,
+            genkiLesson: 8
+        }
     ];
 }
 
@@ -441,6 +708,41 @@ export function adverbs(): AdverbData[] {
             meanings: ["slowly", "leisurely", "unhurriedly"],
             kana: "ゆっくり",
             genkiLesson: 6
+        },
+        {
+            meanings: ["of course"],
+            kana: "もちろん",
+            genkiLesson: 7
+        },
+        {
+            meanings: ["if you like"],
+            kana: "よかったら",
+            genkiLesson: 7
+        },
+        {
+            meanings: ["always"],
+            kana: "いつも",
+            genkiLesson: 8
+        },
+        {
+            meanings: ["everybody", "all people"],
+            kana: "みんなで",
+            genkiLesson: 8
+        },
+        {
+            meanings: ["not...yet"],
+            kana: "まだ + negative",
+            genkiLesson: 8
+        },
+        {
+            meanings: ["about...", "concerning..."],
+            kana: "~について",
+            genkiLesson: 8
+        },
+        {
+            meanings: ["how"],
+            kana: "どう",
+            genkiLesson: 8
         }
     ];
 }
@@ -506,5 +808,39 @@ export function expressions(): ExpressionData[] {
             kanjiForm: "本当ですか",
             genkiLesson: 6
         },
+        {
+            meanings: ["Nothing in particular"],
+            kana: "べつに + negative",
+            kanjiForm: "別に",
+            genkiLesson: 7
+        },
+        {
+            meanings: ["uh-huh", "yes"],
+            kana: "うん",
+            genkiLesson: 8
+        },
+        {
+            meanings: ["uh-uh", "no"],
+            kana: "ううん",
+            genkiLesson: 8
+        },
+        {
+            meanings: ["do something (late)"],
+            kana: "おそく",
+            kanjiForm: "遅く",
+            genkiLesson: 8
+        },
+        {
+            meanings: ["Cheers! (a toast)"],
+            kana: "かんぱい",
+            kanjiForm: "乾杯",
+            genkiLesson: 8
+        },
+        {
+            meanings: ["That's too bad."],
+            kana: "ざんねん (ですね)",
+            kanjiForm: "残念",
+            genkiLesson: 8
+        }
     ];
 }

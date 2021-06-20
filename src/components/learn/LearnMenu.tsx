@@ -44,8 +44,8 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
         const { topic } = this.props;
 
         const CustomSettingsMenu = selected.menu as React.FunctionComponent<CustomLearnMenuProps>;
-
         const renderMenu = !selected.isCustom && !searching;
+        const data = this.getSelectedTopicData();
 
         return (
             <div className={styles.wrapper} data-testid={"learn-" + topic.modes.getTopic().toLowerCase() + "-menu"}>
@@ -88,7 +88,7 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
                     </Col>
                 </Row>}
 
-                {searching && <Search data={this.getSelectedTopicData()} />}
+                {searching && <Search data={data} tags={Arrays.distinct(data.flatMap(it => it.getTags()))} />}
             </div>
         );
     }
@@ -108,7 +108,6 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
         const { topic } = this.props;
         return new LearningDataRepository().read({ topic: topic, settings: selected.settings });
     }
-
 
     private getDescription = () => {
         return Environment.variable("LEARN_" + this.props.topic.modes.getTopic() + "_" + this.state.selected.displayName + "_DESC");

@@ -66,14 +66,6 @@ describe("Example 1 - Kana", () => {
         expect(screen.getByText('All description')).toBeInTheDocument();
     });
 
-    test('Selecting \'Custom\' preset should change the description', () => {
-        environment.mockReturnValue('Custom description');
-        const { custom } = setup();
-        fireEvent.click(custom);
-        expect(environment).toHaveBeenCalledWith('LEARN_KANA_Custom_DESC');
-        expect(screen.getByText('Custom description')).toBeInTheDocument();
-    });
-
     test('Should default to \'Hiragana\' preset', () => {
         const { start } = setup();
         fireEvent.click(start);

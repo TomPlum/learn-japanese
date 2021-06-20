@@ -9,7 +9,7 @@ const setup = () => {
         new Definition(["quiet"], "静か", "しずかな", "な Adjective")
     ];
 
-    const component = render(<Search data={data} />);
+    const component = render(<Search data={data} tags={["number", "season"]} />);
 
     return {
         search: component.getByPlaceholderText('Search via english, kana, kanji...'),
@@ -56,4 +56,8 @@ test('Searching via the kanji should show the result', () => {
     expect(screen.getByText('to like')).toBeInTheDocument();
     expect(screen.queryByText('beautiful or clean')).not.toBeInTheDocument();
     expect(screen.queryByText('quiet')).not.toBeInTheDocument();
+});
+
+test('Selecting a tag should filter the results to only the Kanji with that tag', () => {
+    const { search } = setup();
 });
