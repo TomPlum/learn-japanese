@@ -3219,6 +3219,168 @@ export function kyoiku(): KanjiData[] {
                 { value: "昼夜", kana: ["ちゅうや"], english: ["day and night"] },
             ]
         },
+        {
+            name: "茶",
+            code: "\u8336",
+            on: [{ kana: "ちゃ", romaji: "cha" }, { kana: "さ", romaji: "sa" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E8%8C%B6#Kanji",
+            meanings: ["tea"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "茶", kana: ["ちゃ"], english: ["tea", "tea plant"] },
+                { value: "お茶", kana: ["おちゃ"], english: ["tea", "tea break"] },
+                { value: "喫茶店", kana: ["きっさてん"], english: ["coffee lounge", "coffee shop"] },
+                { value: "紅茶", kana: ["こうちゃ"], english: ["black tea"] },
+                { value: "茶色", kana: ["ちゃいろ"], english: ["light brown", "tawny"] },
+            ]
+        },
+        {
+            name: "光",
+            code: "\u5149",
+            on: [{ kana: "こう", romaji: "kō" }],
+            kun: [{ kana: "ひかり", romaji: "hikari" }, { kana: "ひかる", romaji: "hikaru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%85%89#Kanji",
+            meanings: ["light", "ray"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "光", kana: ["ひかり"], english: ["light"] },
+                { value: "観光", kana: ["かんこう"], english: ["sightseeing"] },
+                { value: "光景", kana: ["こうけい"], english: ["scene", "spectacle"] },
+                { value: "日光", kana: ["にっこう"], english: ["sunlight"] },
+                { value: "脚光", kana: ["きゃっこう"], english: ["footlight", "limelight"] },
+            ]
+        },
+        {
+            name: "弟",
+            code: "\u5F1F",
+            on: [{ kana: "だい", romaji: "dai" }, { kana: "てい", romaji: "tei" }],
+            kun: [{ kana: "おとうと", romaji: "otōto" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BC%9F#Kanji",
+            meanings: ["younger brother"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "弟", kana: ["おとうと", "おと", "おとと", "てい"], english: ["younger brother", "pupil", "apprentice"] },
+                { value: "兄弟", kana: ["きょうだい", "けいてい"], english: ["siblings", "brothers and sisters"] },
+                { value: "弟子", kana: ["でし", "ていし"], english: ["pupil", "disciple", "adherent", "follower"] },
+                { value: "実弟", kana: ["じってい"], english: ["one’s (biological) younger brother"] },
+                { value: "子弟", kana: ["してい"], english: ["young(er) people"] },
+            ],
+            tags: ["family"]
+        },
+        {
+            name: "丸",
+            code: "\u4E38",
+            on: [{ kana: "がん", romaji: "gan" }],
+            kun: [{ kana: "まる", romaji: "maru" }],
+            source: "https://en.wiktionary.org/wiki/%E4%B8%B8#Kanji",
+            meanings: ["circle", "round", "full", "month", "perfection"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "日の丸", kana: ["ひのまる"], english: ["outline of the sun (esp. represented as a redcircle)", "Japanese flag"] },
+                { value: "丸刈り", kana: ["まるがり"], english: ["close clipping"] },
+                { value: "丸い", kana: ["まるい", "まろい"], english: ["round", "circular", "spherical", "harmonious", "calm"] },
+                { value: "丸ごと", kana: ["丸ごと"], english: ["in its entirety", "whole, wholly"] },
+                { value: "丸太", kana: ["まるた"], english: ["log"] },
+            ]
+        },
+        {
+            name: "戸",
+            code: "\u6238",
+            on: [{ kana: "こ", romaji: "ko" }],
+            kun: [{ kana: "と", romaji: "to" }],
+            source: "https://en.wiktionary.org/wiki/%E6%88%B8#Kanji",
+            meanings: ["door", "counter for houses"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "戸", kana: ["と"], english: ["door (esp. Japanese style)"] },
+                { value: "江戸", kana: ["えど"], english: ["old name of Tokyo"] },
+                { value: "江戸川", kana: ["えどがわ"], english: ["Edo River"] },
+                { value: "井戸", kana: ["いど"], english: ["water well"] },
+                { value: "戸惑い", kana: ["とまどい"], english: ["being at sea", "losing one’s bearings"] },
+            ]
+        },
+        {
+            name: "谷",
+            code: "\u8C37",
+            on: [{ kana: "こく", romaji: "koku" }],
+            kun: [{ kana: "たに", romaji: "tani" }],
+            source: "https://en.wiktionary.org/wiki/%E8%B0%B7#Kanji",
+            meanings: ["valley"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "谷", kana: ["たに"], english: ["valley"] },
+                { value: "谷川", kana: ["たにがわ"], english: ["mountain stream"] },
+                { value: "谷間", kana: ["たにま", "たにあい"], english: ["valley", "ravine", "chasm", "dell", "cleavage"] },
+                { value: "渓谷", kana: ["けいこく"], english: ["valley", "ravine", "canyon"] },
+                { value: "峡谷", kana: ["きょうこく"], english: ["glen", "ravine", "gorge", "canyon"] },
+            ]
+        },
+        {
+            name: "科",
+            code: "\u79D1",
+            on: [{ kana: "か", romaji: "ka" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E7%A7%91#Kanji",
+            meanings: ["section", "department", "course"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "科", kana: ["か"], english: ["department", "section"] },
+                { value: "科学", kana: ["かがく"], english: ["science"] },
+                { value: "教科書", kana: ["きょうかしょ"], english: ["textbook", "text book"] },
+                { value: "学科", kana: ["がっか"], english: ["study subject", "course of study"] },
+                { value: "外科", kana: ["げか"], english: ["surgical department"] },
+            ]
+        },
+        {
+            name: "細",
+            code: "\u7D30",
+            on: [{ kana: "さい", romaji: "sai" }],
+            kun: [{ kana: "ほそい", romaji: "hosoi" }, { kana: "こまかい", romaji: "komakai" }],
+            source: "https://en.wiktionary.org/wiki/%E7%B4%B0#Kanji",
+            meanings: ["dainty", "get thin", "taper", "slender", "narrow"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "細かい", kana: ["こまかい"], english: ["small", "fine", "minute", "minor", "trivial"] },
+                { value: "細胞", kana: ["さいぼう", "さいほう"], english: ["cell (biology)"] },
+                { value: "細かく", kana: ["こまかく"], english: ["minutely", "finely"] },
+                { value: "細か", kana: ["こまか"], english: ["small", "fine", "detailed", "stingy"] },
+                { value: "詳細", kana: ["しょうさい"], english: ["detail", "particulars"] },
+            ]
+        },
+        {
+            name: "太",
+            code: "\u592A",
+            on: [{ kana: "た", romaji: "ta" }, { kana: "たい", romaji: "tai" }],
+            kun: [{ kana: "ふとい", romaji: "futoi" }, { kana: "ふとる", romaji: "futoru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A4%AA#Kanji",
+            meanings: ["plump", "thick", "big around"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "太平洋", kana: ["たいへいよう"], english: ["Pacific Ocean"] },
+                { value: "皇太子", kana: ["こうたいし"], english: ["crown prince"] },
+                { value: "太陽", kana: ["たいよう"], english: ["sun", "solar"] },
+                { value: "太平洋戦争", kana: ["たいへいようせんそう"], english: ["the Pacific War"] },
+                { value: "太鼓", kana: ["たいこ"], english: ["drum"] },
+            ]
+        },
+        {
+            name: "牛",
+            code: "\u725B",
+            on: [{ kana: "ぎゅう", romaji: "gyū" }],
+            kun: [{ kana: "うし", romaji: "ushi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%89%9B#Kanji",
+            meanings: ["cow"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "牛", kana: ["うし", "ぎゅう"], english: ["cattle", "cow", "ox", "oxen", "beef"] },
+                { value: "牛肉", kana: ["ぎゅうにく"], english: ["beef"] },
+                { value: "牛乳", kana: ["ぎゅうにゅう"], english: ["cow's milk"] },
+                { value: "牛歩", kana: ["ぎゅうほ"], english: ["snail’s pace", "slow progress"] },
+                { value: "和牛", kana: ["わぎゅう"], english: ["Wagyu beef", "Japanese beef"] },
+            ],
+            tags: ["animal"]
+        },
 
         //Grade 6 Kanji
         {
