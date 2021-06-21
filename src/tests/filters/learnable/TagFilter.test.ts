@@ -2,7 +2,8 @@ import { Kanji } from "../../../types/kanji/Kanji";
 import { Reading } from "../../../types/kanji/Reading";
 import { ReadingType } from "../../../types/kanji/ReadingType";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
-import TagFilter from "../../../filters/kanji/TagFilter";
+import TagFilter from "../../../filters/learnable/TagFilter";
+import { Learnable } from "../../../types/learn/Learnable";
 
 const data = [
     new Kanji("一", [new Reading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]),
@@ -15,13 +16,13 @@ describe("Tag Filter", () => {
     it("Should return only the kanji that have the given tag", () => {
         const filter = new TagFilter(["animal"]);
         const response = filter.apply(data);
-        expect(response.map((kanji: Kanji) => kanji.getValue())).toStrictEqual(["魚", "鳥"]);
+        expect(response.map((kanji: Learnable) => kanji.getKanjiVariation())).toStrictEqual(["魚", "鳥"]);
     });
 
     it("Should return all matching kanji if multiple matching tags are passed", () => {
         const filter = new TagFilter(["animal", "number"]);
         const response = filter.apply(data);
-        expect(response.map((kanji: Kanji) => kanji.getValue())).toStrictEqual(["一", "魚", "鳥"]);
+        expect(response.map((kanji: Learnable) => kanji.getKanjiVariation())).toStrictEqual(["一", "魚", "鳥"]);
     });
 
     it("Should return the whole dataset if the passed tag doesn't match any", () => {
