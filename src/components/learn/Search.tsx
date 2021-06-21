@@ -52,7 +52,7 @@ class Search extends Component<SearchProps, SearchState> {
 
                 <Row className={styles.results}>
                     {results.map((result: Learnable) => {
-                        return <LearnableInfo value={result} />;
+                        return <LearnableInfo value={result} key={result.getMeanings().join("-")} />;
                     })}
                 </Row>
             </Container>
