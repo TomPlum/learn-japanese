@@ -82,3 +82,17 @@ test('Selecting a tag should filter the results to only the Kanji with that tag'
     expect(screen.getByText('fish')).toBeInTheDocument();
     expect(screen.getByText('bird')).toBeInTheDocument();
 });
+
+test('Selecting a tag and searching should filter only results with that tag and matching the search term', () => {
+    const { search } = setup();
+
+    fireEvent.click(screen.getByText('animal')); //Should return bird and fish
+    fireEvent.change(search, { target: { value: 'か' } }); //Should return only fish
+
+    expect(screen.getByText('fish')).toBeInTheDocument();
+    expect(screen.queryByText('to like')).not.toBeInTheDocument();
+    expect(screen.queryByText('beautiful or clean')).not.toBeInTheDocument();
+    expect(screen.queryByText('quiet')).not.toBeInTheDocument();
+    expect(screen.queryByText('one')).not.toBeInTheDocument();
+    expect(screen.queryByText('bird')).not.toBeInTheDocument();
+});

@@ -61,10 +61,10 @@ class Search extends Component<SearchProps, SearchState> {
 
     private getResults = (): Learnable[] => {
         const { search, selectedTags } = this.state;
-        const { data } = this.props;
+        let { data } = this.props;
 
         if (selectedTags.length > 0) {
-            return data.filter((result: Learnable) => {
+            data = data.filter((result: Learnable) => {
                 return result.getTags().some((tag: string) => selectedTags.includes(tag));
             });
         }
