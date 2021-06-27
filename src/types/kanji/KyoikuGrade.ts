@@ -13,6 +13,8 @@ export class KyoikuGrade {
     public static readonly FOUR = new KyoikuGrade(4, 200);
     public static readonly FIVE = new KyoikuGrade(5, 185);
     public static readonly SIX = new KyoikuGrade(6, 181);
+    public static readonly SEVEN = new KyoikuGrade(7, 0);
+    public static readonly EIGHT = new KyoikuGrade(8, 0);
 
     public static readonly ALL = [KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR, KyoikuGrade.FIVE, KyoikuGrade.SIX]
 

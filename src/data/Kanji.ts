@@ -3570,6 +3570,168 @@ export function kyoiku(): KanjiData[] {
                 { value: "内角", kana: ["ないかく"], english: ["interior angle", "inside corner"] },
             ]
         },
+        {
+            name: "池",
+            code: "\u6C60",
+            on: [{ kana: "ち", romaji: "chi" }],
+            kun: [{ kana: "いけ", romaji: "ike" }],
+            source: "https://en.wiktionary.org/wiki/%E6%B1%A0#Kanji",
+            meanings: ["pond", "cistern", "pool", "reservoir"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "池", kana: ["いけ"], english: ["pond"] },
+                { value: "電池", kana: ["でんち"], english: ["battery"] },
+                { value: "太陽電池", kana: ["たいようでんち"], english: ["solar battery"] },
+                { value: "乾電池", kana: ["かんでんち"], english: ["dry cell", "battery"] },
+                { value: "貯水池", kana: ["ちょすいち"], english: ["reservoir"] },
+            ]
+        },
+        {
+            name: "姉",
+            code: "\u59C9",
+            on: [{ kana: "し", romaji: "shi" }],
+            kun: [{ kana: "あね", romaji: "ane" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A7%89#Kanji",
+            meanings: ["older sister"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "姉", kana: ["あね"], english: ["older sister", "elder sister"] },
+                { value: "姉妹", kana: ["しまい", "きょうだい"], english: ["sisters"] },
+                { value: "姉さん", kana: ["ねえさん", "あねさん"], english: ["elder sister", "young lady"] },
+                { value: "義姉", kana: ["ぎし", "あね"], english: ["sister in-law"] },
+                { value: "姉", kana: ["し"], english: ["honorific suffix used after the name of a woman of equal or higher status"] },
+            ],
+            tags: ["family"]
+        },
+        {
+            name: "遠",
+            code: "\u9060",
+            on: [{ kana: "えん", romaji: "en" }, { kana: "おん", romaji: "on" }],
+            kun: [{ kana: "とおい", romaji: "tōi" }],
+            source: "https://en.wiktionary.org/wiki/%E9%81%A0#Kanji",
+            meanings: ["distant", "far"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "遠", kana: ["とお"], english: ["distant"] },
+                { value: "永遠", kana: ["えいえん"], english: ["eternity", "perpetuity", "immortality", "permanence"] },
+                { value: "遠征", kana: ["えんせい"], english: ["expedition", "campaign", "(performer’s) tour"] },
+                { value: "望遠鏡", kana: ["ぼうえんきょう"], english: ["telescope"] },
+                { value: "遠隔", kana: ["えんかく"], english: ["distant", "remote", "isolated"] },
+            ]
+        },
+        {
+            name: "弱",
+            code: "\u5F31",
+            on: [{ kana: "じゃく", romaji: "jaku" }],
+            kun: [{ kana: "よわい", romaji: "yowai" }, { kana: "よわる", romaji: "yowaru" }, { kana: "よわまる", romaji: "yowamaru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BC%B1#Kanji",
+            meanings: ["weak", "frail"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "弱点", kana: ["じゃくてん"], english: ["weak point", "weakness"] },
+                { value: "弱者", kana: ["じゃくしゃ"], english: ["weak person"] },
+                { value: "弱体", kana: ["じゃくたい"], english: ["weak (organisation)"] },
+                { value: "弱み", kana: ["よわみ"], english: ["weakness"] },
+                { value: "弱気", kana: ["よわき"], english: ["timid", "faint hearted"] },
+            ]
+        },
+        {
+            name: "雪",
+            code: "\u96EA",
+            on: [{ kana: "せつ", romaji: "setsu" }],
+            kun: [{ kana: "ゆき", romaji: "yuki" }],
+            source: "https://en.wiktionary.org/wiki/%E9%9B%AA#Kanji",
+            meanings: ["snow"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "雪", kana: ["ゆき"], english: ["snow"] },
+                { value: "雪辱", kana: ["せつじょく"], english: ["vindication of honour"] },
+                { value: "積雪", kana: ["せきせつ"], english: ["fallen snow"] },
+                { value: "大雪", kana: ["おおゆき", "たいせつ"], english: ["heavy snow"] },
+                { value: "吹雪", kana: ["ふぶき"], english: ["snow storm", "blizzard"] },
+            ],
+            tags: ["weather"]
+        },
+        {
+            name: "星",
+            code: "\u661F",
+            on: [{ kana: "せい", romaji: "sei" }, { kana: "しょう", romaji: "shō" }],
+            kun: [{ kana: "ほし", romaji: "hoshi" }],
+            source: "https://en.wiktionary.org/wiki/%E6%98%9F#Kanji",
+            meanings: ["star", "spot", "dot", "mark"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "星", kana: ["ほし"], english: ["star"] },
+                { value: "衛星", kana: ["えいせい"], english: ["satellite"] },
+                { value: "通信衛星", kana: ["つうしんえいせい"], english: ["communication satellite"] },
+                { value: "木星", kana: ["もくせい"], english: ["Jupiter (planet)"] },
+                { value: "惑星", kana: ["わくせい"], english: ["planet"] },
+            ]
+        },
+        {
+            name: "寺",
+            code: "\u5BFA",
+            on: [{ kana: "じ", romaji: "ji" }],
+            kun: [{ kana: "てら", romaji: "tera" }],
+            source: "https://en.wiktionary.org/wiki/%E5%AF%BA#Kanji",
+            meanings: ["Buddhist Temple"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "寺", kana: ["てら"], english: ["temple (Buddhist)"] },
+                { value: "寺院", kana: ["じいん"], english: ["temple"] },
+                { value: "国分寺", kana: ["こくぶんじ"], english: ["(Nara Era) state provincial temples"] },
+                { value: "禅寺", kana: ["ぜんでら"], english: ["Zen temple"] },
+                { value: "寺子屋", kana: ["てらこや"], english: ["temple elementary school (during the Edoperiod)"] },
+            ]
+        },
+        {
+            name: "絵",
+            code: "\u7D75",
+            on: [{ kana: "え", romaji: "e" }, { kana: "かい", romaji: "kai" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E7%B5%B5#Kanji",
+            meanings: ["picture", "drawing", "painting", "sketch"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "絵", kana: ["え"], english: ["picture", "drawing", "painting", "sketch"] },
+                { value: "絵画", kana: ["かいが"], english: ["picture", "painting"] },
+                { value: "絵本", kana: ["えほん"], english: ["picture book"] },
+                { value: "絵の具", kana: ["えのぐ"], english: ["colours, paints"] },
+                { value: "浮世絵", kana: ["うきよえ"], english: ["ukiyoe (colour print of everyday life in the Edoperiod)"] },
+            ]
+        },
+        {
+            name: "晴",
+            code: "\u6674",
+            on: [{ kana: "せい", romaji: "sei" }],
+            kun: [{ kana: "はれる", romaji: "hareru" }, { kana: "はれ", romaji: "hare" }],
+            source: "https://en.wiktionary.org/wiki/%E6%99%B4#Kanji",
+            meanings: ["clear"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "晴れ", kana: ["はれ"], english: ["clear weather", "public", "formal"] },
+                { value: "素晴らしい", kana: ["すばらしい", "すんばらしい"], english: ["wonderful", "splendid", "magnificent"] },
+                { value: "晴れる", kana: ["はれる"], english: ["to clear up", "to clear away", "to be sunny"] },
+                { value: "快晴", kana: ["かいせい"], english: ["good weather"] },
+                { value: "晴天", kana: ["せいてん"], english: ["fine weather"] },
+            ]
+        },
+        {
+            name: "毛",
+            code: "\u6BDB",
+            on: [{ kana: "もう", romaji: "mō" }],
+            kun: [{ kana: "け", romaji: "ke" }],
+            source: "https://en.wiktionary.org/wiki/%E6%AF%9B#Kanji",
+            meanings: ["hair", "fur", "feather"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "毛", kana: ["け"], english: ["hair", "fur"] },
+                { value: "毛布", kana: ["もうふ"], english: ["blanket"] },
+                { value: "毛皮", kana: ["けがわ", "もうひ"], english: ["fur", "skin", "pelt"] },
+                { value: "髪の毛", kana: ["かみのけ"], english: ["hair (head)"] },
+                { value: "羽毛", kana: ["うもう"], english: ["feathers", "plumage", "down"] },
+            ]
+        },
 
         //Grade 6 Kanji
         {
@@ -3616,7 +3778,7 @@ export function joyo(): KanjiData[] {
             kun: [{ kana: "ねこ", romaji: "neko" }],
             source: "https://en.wiktionary.org/wiki/%E7%8C%AB#Kanji",
             meanings: ["cat"],
-            grade: KyoikuGrade.TWO,
+            grade: KyoikuGrade.EIGHT,
             examples: [
                 { value: "猫", kana: ["ねこ"], english: ["cat"] },
                 { value: "子猫", kana: ["こねこ"], english: ["kitten"] },
