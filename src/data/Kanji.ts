@@ -377,7 +377,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "女子", kana: ["じょし", "おなご"], english: ["women", "girl"] },
                 { value: "男子", kana: ["だんし"], english: ["youth", "young man"] },
                 { value: "原子力", kana: ["げんしりょく"], english: ["atomic", "energy"] },
-            ]
+            ],
+            tags: ["family"]
         },
         {
             name: "八",
@@ -508,7 +509,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "愛犬", kana: ["あいけん"], english: ["pet dog"] },
                 { value: "飼い犬", kana: ["かいいぬ"], english: ["pet dog"] },
                 { value: "野犬", kana: ["やけん"], english: ["stray dog",] },
-            ]
+            ],
+            tags: ["animal"]
         },
         {
             name: "百",
@@ -696,7 +698,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "白人", kana: ["はくじん"], english: ["white person", "Caucasian"] },
                 { value: "空白", kana: ["くうはく"], english: ["blank space", "vacuum", "space", "null"] },
                 { value: "白紙", kana: ["はくし"], english: ["blank paper", "white paper"] },
-            ]
+            ],
+            tags: ["colour"]
         },
         {
             name: "火",
@@ -725,7 +728,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "向かって左", kana: ["むかってひだり"], english: ["on the left as one faces it"] },
                 { value: "左翼", kana: ["さよく"], english: ["left wing (political)"] },
                 { value: "左右", kana: ["さゆう"], english: ["left and right", "influence", "control"] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "立",
@@ -786,7 +790,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "右翼", kana: ["うよく"], english: ["right wing (political)"] },
                 { value: "左右", kana: ["さゆう"], english: ["left and right", "influence", "control"] },
                 { value: "右手", kana: ["みぎて"], english: ["right hand"] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "休",
@@ -817,7 +822,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "選手権", kana: ["せんしゅけん"], english: ["championship", "title (of champion)"] },
                 { value: "相手", kana: ["あいて"], english: ["companion", "partner", "company", "other party"] },
                 { value: "大手", kana: ["おおて"], english: ["front castle gate", "both arms open"] },
-            ]
+            ],
+            tags: ["body"]
         },
         {
             name: "力",
@@ -897,7 +903,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "梅雨", kana: ["ばいう", "つゆ"], english: ["rainy season"] },
                 { value: "雨水", kana: ["あまみず", "うすい"], english: ["rain water"] },
                 { value: "雨量", kana: ["うりょう"], english: ["rainfall"] },
-            ]
+            ],
+            tags: ["weather"]
         },
         {
             name: "目",
@@ -913,7 +920,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "注目", kana: ["ちゅうもく"], english: ["notice", "attention", "observation"] },
                 { value: "項目", kana: ["こうもく"], english: ["item, entry"] },
                 { value: "名目", kana: ["めいもく", "みょうもく"], english: ["name", "title", "appellation"] },
-            ]
+            ],
+            tags: ["body"]
         },
         {
             name: "正",
@@ -945,7 +953,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "窓口", kana: ["まどぐち"], english: ["ticket window", "teller window", "counter"] },
                 { value: "口座", kana: ["こうざ"], english: ["account"] },
                 { value: "入り口", kana: ["いりぐち", "いりくち", "はいりぐち", "は", "いりくち"], english: ["entrance", "entry", "gate", "approach", "mouth"] },
-            ]
+            ],
+            tags: ["body"]
         },
         {
             name: "空",
@@ -977,7 +986,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "発足", kana: ["ほっそく", "はっそく"], english: ["starting", "inauguration", "launch", "founding"] },
                 { value: "満足", kana: ["まんぞく"], english: ["satisfaction", "sufficiency"] },
                 { value: "足並み", kana: ["あしなみ"], english: ["pace", "step"] },
-            ]
+            ],
+            tags: ["body"]
         },
         {
             name: "森",
@@ -1041,7 +1051,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "中耳炎", kana: ["ちゅうじえん"], english: ["tympanitis (inflammation of middle ear)"] },
                 { value: "耳打ち", kana: ["みみうち"], english: ["whisper into a person’s ear"] },
                 { value: "耳鼻咽喉科", kana: ["じびいんこうか"], english: ["otorhinolaryngology", "ear", "nose and throat"] },
-            ]
+            ],
+            tags: ["body"]
         },
         {
             name: "糸",
@@ -1169,7 +1180,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "赤松", kana: ["あかまつ"], english: ["Japanese red pine"] },
                 { value: "赤い", kana: ["あかい"], english: ["Red (i.e. communist)"] },
                 { value: "真っ赤", kana: ["まっか"], english: ["bright red", "deep red", "flushed"] },
-            ]
+            ],
+            tags: ["colour"]
         },
         {
             name: "村",
@@ -1249,7 +1261,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "青山", kana: ["せいざん"], english: ["blue or green mountain", "grave", "burial place"] },
                 { value: "青木", kana: ["あおき", "アオキ"], english: ["Japanese laurel", "spotted laurel"] },
                 { value: "青春", kana: ["せいしゅん"], english: ["youth", "springtime of life", "adolescent"] },
-            ]
+            ],
+            tags: ["colour"]
         },
         {
             name: "夕",
@@ -1363,7 +1376,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "中東", kana: ["ちゅうとう"], english: ["Middle East"] },
                 { value: "東海", kana: ["とうかい"], english: ["region south of Tokyo"] },
                 { value: "東北", kana: ["とうほく", "ひがしきた"], english: ["Northeast China"] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "長",
@@ -1459,7 +1473,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "鳥類", kana: ["ちょうるい"], english: ["birds"] },
                 { value: "白鳥", kana: ["はくちょう", "しろとり", "しらとり"], english: ["swan"] },
                 { value: "渡り鳥", kana: ["わたりどり"], english: ["migratory bird", "bird of passage",] },
-            ]
+            ],
+            tags: ["animal"]
         },
         {
             name: "高",
@@ -1507,7 +1522,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "北京", kana: ["ぺきん"], english: ["Beijing"] },
                 { value: "北朝鮮", kana: ["きたちょうせん"], english: ["North Korea"] },
                 { value: "東北", kana: ["とうほく", "ひがしきた"], english: ["north east"] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "書",
@@ -1539,7 +1555,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "西側", kana: ["にしがわ"], english: ["west side", "west bank"] },
                 { value: "東西", kana: ["とうざい"], english: ["East and West"] },
                 { value: "西欧", kana: ["せいおう"], english: ["Western Europe"] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "外",
@@ -1667,7 +1684,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "南北", kana: ["なんぼく"], english: ["south and north"] },
                 { value: "東南", kana: ["とうなん", "ひがしみなみ"], english: ["south east"] },
                 { value: "南部", kana: ["なんぶ"], english: ["southern part"] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "毎",
@@ -1764,7 +1782,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "母親", kana: ["ははおや"], english: ["mother"] },
                 { value: "父母", kana: ["ふぼ", "ちちはは"], english: ["father and mother, parents"] },
                 { value: "母体", kana: ["ぼたい"], english: ["mother’s body"] },
-            ]
+            ],
+            tags: ["family"]
         },
         {
             name: "友",
@@ -1828,7 +1847,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "父親", kana: ["ちちおや"], english: ["father"] },
                 { value: "父母", kana: ["ふぼ", "ちちはは"], english: ["father and mother", "parents"] },
                 { value: "祖父", kana: ["そふ", "じじ", "じい"], english: ["grandfather", "old man"] },
-            ]
+            ],
+            tags: ["family"]
         },
         {
             name: "方",
@@ -2196,7 +2216,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "国家", kana: ["こっか"], english: ["state", "country", "nation"] },
                 { value: "政治家", kana: ["せいじか"], english: ["politician", "statesman"] },
                 { value: "作家", kana: ["さっか"], english: ["author", "writer", "novelist", "artist"] },
-            ]
+            ],
+            tags: ["family"]
         },
         {
             name: "心",
@@ -2533,7 +2554,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "母親", kana: ["ははおや"], english: ["mother"] },
                 { value: "両親", kana: ["りょうしん", "ふたおや"], english: ["parents, both parents"] },
                 { value: "親子", kana: ["おやこ", "しんし"], english: ["parent and child"] },
-            ]
+            ],
+            tags: ["family"]
         },
         {
             name: "夜",
@@ -2629,7 +2651,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "風土", kana: ["ふうど"], english: ["natural features", "topography", "climate"] },
                 { value: "風速", kana: ["ふうそく"], english: ["wind speed"] },
                 { value: "風潮", kana: ["ふうちょう"], english: ["tide", "current", "tendency"] },
-            ]
+            ],
+            tags: ["weather"]
         },
         {
             name: "黒",
@@ -2645,7 +2668,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "黒人", kana: ["こくじん"], english: ["black person"] },
                 { value: "黒海", kana: ["こっかい"], english: ["Black Sea"] },
                 { value: "黒い", kana: ["くろい"], english: ["black", "dark", "illicit", "wicked", "underground"] },
-            ]
+            ],
+            tags: ["colour"]
         },
         {
             name: "色",
@@ -3219,7 +3243,168 @@ export function kyoiku(): KanjiData[] {
                 { value: "昼夜", kana: ["ちゅうや"], english: ["day and night"] },
             ]
         },
-
+        {
+            name: "茶",
+            code: "\u8336",
+            on: [{ kana: "ちゃ", romaji: "cha" }, { kana: "さ", romaji: "sa" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E8%8C%B6#Kanji",
+            meanings: ["tea"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "茶", kana: ["ちゃ"], english: ["tea", "tea plant"] },
+                { value: "お茶", kana: ["おちゃ"], english: ["tea", "tea break"] },
+                { value: "喫茶店", kana: ["きっさてん"], english: ["coffee lounge", "coffee shop"] },
+                { value: "紅茶", kana: ["こうちゃ"], english: ["black tea"] },
+                { value: "茶色", kana: ["ちゃいろ"], english: ["light brown", "tawny"] },
+            ]
+        },
+        {
+            name: "光",
+            code: "\u5149",
+            on: [{ kana: "こう", romaji: "kō" }],
+            kun: [{ kana: "ひかり", romaji: "hikari" }, { kana: "ひかる", romaji: "hikaru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%85%89#Kanji",
+            meanings: ["light", "ray"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "光", kana: ["ひかり"], english: ["light"] },
+                { value: "観光", kana: ["かんこう"], english: ["sightseeing"] },
+                { value: "光景", kana: ["こうけい"], english: ["scene", "spectacle"] },
+                { value: "日光", kana: ["にっこう"], english: ["sunlight"] },
+                { value: "脚光", kana: ["きゃっこう"], english: ["footlight", "limelight"] },
+            ]
+        },
+        {
+            name: "弟",
+            code: "\u5F1F",
+            on: [{ kana: "だい", romaji: "dai" }, { kana: "てい", romaji: "tei" }],
+            kun: [{ kana: "おとうと", romaji: "otōto" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BC%9F#Kanji",
+            meanings: ["younger brother"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "弟", kana: ["おとうと", "おと", "おとと", "てい"], english: ["younger brother", "pupil", "apprentice"] },
+                { value: "兄弟", kana: ["きょうだい", "けいてい"], english: ["siblings", "brothers and sisters"] },
+                { value: "弟子", kana: ["でし", "ていし"], english: ["pupil", "disciple", "adherent", "follower"] },
+                { value: "実弟", kana: ["じってい"], english: ["one’s (biological) younger brother"] },
+                { value: "子弟", kana: ["してい"], english: ["young(er) people"] },
+            ],
+            tags: ["family"]
+        },
+        {
+            name: "丸",
+            code: "\u4E38",
+            on: [{ kana: "がん", romaji: "gan" }],
+            kun: [{ kana: "まる", romaji: "maru" }],
+            source: "https://en.wiktionary.org/wiki/%E4%B8%B8#Kanji",
+            meanings: ["circle", "round", "full", "month", "perfection"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "日の丸", kana: ["ひのまる"], english: ["outline of the sun (esp. represented as a redcircle)", "Japanese flag"] },
+                { value: "丸刈り", kana: ["まるがり"], english: ["close clipping"] },
+                { value: "丸い", kana: ["まるい", "まろい"], english: ["round", "circular", "spherical", "harmonious", "calm"] },
+                { value: "丸ごと", kana: ["丸ごと"], english: ["in its entirety", "whole, wholly"] },
+                { value: "丸太", kana: ["まるた"], english: ["log"] },
+            ]
+        },
+        {
+            name: "戸",
+            code: "\u6238",
+            on: [{ kana: "こ", romaji: "ko" }],
+            kun: [{ kana: "と", romaji: "to" }],
+            source: "https://en.wiktionary.org/wiki/%E6%88%B8#Kanji",
+            meanings: ["door", "counter for houses"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "戸", kana: ["と"], english: ["door (esp. Japanese style)"] },
+                { value: "江戸", kana: ["えど"], english: ["old name of Tokyo"] },
+                { value: "江戸川", kana: ["えどがわ"], english: ["Edo River"] },
+                { value: "井戸", kana: ["いど"], english: ["water well"] },
+                { value: "戸惑い", kana: ["とまどい"], english: ["being at sea", "losing one’s bearings"] },
+            ]
+        },
+        {
+            name: "谷",
+            code: "\u8C37",
+            on: [{ kana: "こく", romaji: "koku" }],
+            kun: [{ kana: "たに", romaji: "tani" }],
+            source: "https://en.wiktionary.org/wiki/%E8%B0%B7#Kanji",
+            meanings: ["valley"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "谷", kana: ["たに"], english: ["valley"] },
+                { value: "谷川", kana: ["たにがわ"], english: ["mountain stream"] },
+                { value: "谷間", kana: ["たにま", "たにあい"], english: ["valley", "ravine", "chasm", "dell", "cleavage"] },
+                { value: "渓谷", kana: ["けいこく"], english: ["valley", "ravine", "canyon"] },
+                { value: "峡谷", kana: ["きょうこく"], english: ["glen", "ravine", "gorge", "canyon"] },
+            ]
+        },
+        {
+            name: "科",
+            code: "\u79D1",
+            on: [{ kana: "か", romaji: "ka" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E7%A7%91#Kanji",
+            meanings: ["section", "department", "course"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "科", kana: ["か"], english: ["department", "section"] },
+                { value: "科学", kana: ["かがく"], english: ["science"] },
+                { value: "教科書", kana: ["きょうかしょ"], english: ["textbook", "text book"] },
+                { value: "学科", kana: ["がっか"], english: ["study subject", "course of study"] },
+                { value: "外科", kana: ["げか"], english: ["surgical department"] },
+            ]
+        },
+        {
+            name: "細",
+            code: "\u7D30",
+            on: [{ kana: "さい", romaji: "sai" }],
+            kun: [{ kana: "ほそい", romaji: "hosoi" }, { kana: "こまかい", romaji: "komakai" }],
+            source: "https://en.wiktionary.org/wiki/%E7%B4%B0#Kanji",
+            meanings: ["dainty", "get thin", "taper", "slender", "narrow"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "細かい", kana: ["こまかい"], english: ["small", "fine", "minute", "minor", "trivial"] },
+                { value: "細胞", kana: ["さいぼう", "さいほう"], english: ["cell (biology)"] },
+                { value: "細かく", kana: ["こまかく"], english: ["minutely", "finely"] },
+                { value: "細か", kana: ["こまか"], english: ["small", "fine", "detailed", "stingy"] },
+                { value: "詳細", kana: ["しょうさい"], english: ["detail", "particulars"] },
+            ]
+        },
+        {
+            name: "太",
+            code: "\u592A",
+            on: [{ kana: "た", romaji: "ta" }, { kana: "たい", romaji: "tai" }],
+            kun: [{ kana: "ふとい", romaji: "futoi" }, { kana: "ふとる", romaji: "futoru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A4%AA#Kanji",
+            meanings: ["plump", "thick", "big around"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "太平洋", kana: ["たいへいよう"], english: ["Pacific Ocean"] },
+                { value: "皇太子", kana: ["こうたいし"], english: ["crown prince"] },
+                { value: "太陽", kana: ["たいよう"], english: ["sun", "solar"] },
+                { value: "太平洋戦争", kana: ["たいへいようせんそう"], english: ["the Pacific War"] },
+                { value: "太鼓", kana: ["たいこ"], english: ["drum"] },
+            ]
+        },
+        {
+            name: "牛",
+            code: "\u725B",
+            on: [{ kana: "ぎゅう", romaji: "gyū" }],
+            kun: [{ kana: "うし", romaji: "ushi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%89%9B#Kanji",
+            meanings: ["cow"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "牛", kana: ["うし", "ぎゅう"], english: ["cattle", "cow", "ox", "oxen", "beef"] },
+                { value: "牛肉", kana: ["ぎゅうにく"], english: ["beef"] },
+                { value: "牛乳", kana: ["ぎゅうにゅう"], english: ["cow's milk"] },
+                { value: "牛歩", kana: ["ぎゅうほ"], english: ["snail’s pace", "slow progress"] },
+                { value: "和牛", kana: ["わぎゅう"], english: ["Wagyu beef", "Japanese beef"] },
+            ],
+            tags: ["animal"]
+        },
         {
             name: "兄",
             code: "\u5144",
@@ -3234,9 +3419,9 @@ export function kyoiku(): KanjiData[] {
                 { value: "兄ちゃん", kana: ["あんちゃん"], english: ["(my) older brother"] },
                 { value: "兄さん", kana: ["にいさん", "あにさん"], english: ["older brother", "elder brother"] },
                 { value: "実兄", kana: ["じっけい"], english: ["one’s own elder brother"] },
-            ]
+            ],
+            tags: ["family"]
         },
-
         {
             name: "馬",
             code: "\u99AC",
@@ -3251,9 +3436,9 @@ export function kyoiku(): KanjiData[] {
                 { value: "競馬", kana: ["けいば"], english: ["horse racing"] },
                 { value: "馬場", kana: ["ばば"], english: ["horse riding ground"] },
                 { value: "競馬場", kana: ["けいばじょう"], english: ["racecourse", "race track"] },
-            ]
+            ],
+            tags: ["animal"]
         },
-
         {
             name: "船",
             code: "\u8239",
@@ -3270,7 +3455,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "造船", kana: ["ぞうせん"], english: ["shipbuilding"] },
             ]
         },
-
         {
             name: "岩",
             code: "\u5CA9",
@@ -3287,7 +3471,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "岩石", kana: ["がんせき"], english: ["rock"] },
             ]
         },
-
         {
             name: "\u59B9",
             code: "\u59B9",
@@ -3302,16 +3485,16 @@ export function kyoiku(): KanjiData[] {
                 { value: "弟妹", kana: ["ていまい"], english: ["younger brother and sister"] },
                 { value: "義妹", kana: ["ぎまい", "いもうと"], english: ["sister in law (younger)"] },
                 { value: "実妹", kana: ["じつまい"], english: ["one’s younger sister"] },
-            ]
+            ],
+            tags: ["family"]
         },
-
         {
             name: "魚",
             code: "\u9B5A",
             on: [{ kana: "ご", romaji: "go" }, { kana: "ぎょ", romaji: "gyo" }],
             kun: [{ kana: "うお", romaji: "uo" }, { kana: "さかな", romaji: "sakana" }],
             source: "https://en.wiktionary.org/wiki/%E9%AD%9A#Kanji",
-            meanings: ["sakana"],
+            meanings: ["fish"],
             grade: KyoikuGrade.TWO,
             examples: [
                 { value: "魚", kana: ["さかな", "うお"], english: ["fish"] },
@@ -3319,9 +3502,9 @@ export function kyoiku(): KanjiData[] {
                 { value: "金魚", kana: ["きんぎょ"], english: ["goldfish"] },
                 { value: "魚類", kana: ["ぎょるい"], english: ["the fishes"] },
                 { value: "稚魚", kana: ["ちぎょ"], english: ["fry (young fish)"] },
-            ]
+            ],
+            tags: ["animal"]
         },
-
         {
             name: "園",
             code: "\u5712",
@@ -3338,7 +3521,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "幼稚園", kana: ["ようちえん"], english: ["kindergarten"] },
             ]
         },
-
         {
             name: "顔",
             code: "\u9854",
@@ -3353,9 +3535,9 @@ export function kyoiku(): KanjiData[] {
                 { value: "笑顔", kana: ["えがお"], english: ["smiling face", "smile"] },
                 { value: "顔ぶれ", kana: ["かおぶれ"], english: ["personnel", "member"] },
                 { value: "似顔", kana: ["にがお"], english: ["portrait", "likeness"] },
-            ]
+            ],
+            tags: ["body"]
         },
-
         {
             name: "羽",
             code: "\u7FBD",
@@ -3372,7 +3554,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "白羽", kana: ["しらは"], english: ["white feather"] },
             ]
         },
-
         {
             name: "角",
             code: "\u89D2",

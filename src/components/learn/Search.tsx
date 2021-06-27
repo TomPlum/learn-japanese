@@ -52,7 +52,7 @@ class Search extends Component<SearchProps, SearchState> {
 
                 <Row className={styles.results}>
                     {results.map((result: Learnable) => {
-                        return <LearnableInfo value={result} />;
+                        return <LearnableInfo value={result} key={result.getMeanings().join("-")} />;
                     })}
                 </Row>
             </Container>
@@ -61,12 +61,19 @@ class Search extends Component<SearchProps, SearchState> {
 
     private getResults = (): Learnable[] => {
         const { search, selectedTags } = this.state;
-        return this.props.data.filter((result: Learnable) => {
+        let { data } = this.props;
+
+        if (selectedTags.length > 0) {
+            data = data.filter((result: Learnable) => {
+                return result.getTags().some((tag: string) => selectedTags.includes(tag));
+            });
+        }
+
+        return data.filter((result: Learnable) => {
             const matchesMeaning = result.getMeanings().some((meaning: string) => meaning.includes(search));
             const matchesKana = result.getKana().some((kana: string) => kana.includes(search));
             const matchesKanji = result.getKanjiVariation()?.includes(search);
-            const matchesSelectedTag = result.getTags().some((tag: string) => selectedTags.includes(tag));
-            return matchesMeaning || matchesKana || matchesKanji || matchesSelectedTag;
+            return matchesMeaning || matchesKana || matchesKanji;
         });
     }
 

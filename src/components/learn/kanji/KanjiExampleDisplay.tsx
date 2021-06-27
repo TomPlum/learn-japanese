@@ -58,15 +58,15 @@ class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExamp
                                 selected.kana.map((value: string, i: number) => {
                                     if (i < selected.kana.length - 1) {
                                         return [
-                                            <Copyable className={styles.kana} inline>
-                                                <span>{value}</span>
+                                            <Copyable className={styles.kana} key={`copyable-${i}`} inline>
+                                                <span key={value}>{value}</span>
                                             </Copyable>,
-                                            <span> or </span>
+                                            <span key={`or-${i}`}> or </span>
                                         ];
                                     } else {
                                         return (
-                                            <Copyable className={styles.kana} inline>
-                                                <span>{value}</span>
+                                            <Copyable className={styles.kana} key={`copyable-${i}`} inline>
+                                                <span key={value}>{value}</span>
                                             </Copyable>
                                         );
                                     }
