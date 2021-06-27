@@ -3734,6 +3734,178 @@ export function kyoiku(): KanjiData[] {
             ]
         },
 
+        {
+            name: "雲",
+            code: "\u96F2",
+            on: [{ kana: "うん", romaji: "un" }],
+            kun: [{ kana: "くも", romaji: "kumo" }],
+            source: "https://en.wiktionary.org/wiki/%E9%9B%B2#Kanji",
+            meanings: ["cloud"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "雲", kana: ["くも"], english: ["cloud"] },
+                { value: "暗雲", kana: ["あんうん"], english: ["dark clouds"] },
+                { value: "雲行き", kana: ["くもゆき"], english: ["weather", "look of the sky", "situation"] },
+                { value: "青雲", kana: ["せいうん"], english: ["blue sky", "high rank"] },
+                { value: "星雲", kana: ["せいうん"], english: ["nebula", "galaxy"] },
+            ],
+            tags: ["weather"]
+        },
+
+        {
+            name: "才",
+            code: "\u624D",
+            on: [{ kana: "さい", romaji: "sai" }],
+            kun: [{ kana: "わずかに", romaji: "wazukani" }],
+            source: "https://en.wiktionary.org/wiki/%E6%89%8D#Kanji",
+            meanings: ["genius", "years old", "cubic shaku", "ability"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "才", kana: ["さい"], english: ["years old", "ability", "gift", "talent", "aptitude"] },
+                { value: "才能", kana: ["さいのう"], english: ["talent", "ability"] },
+                { value: "天才", kana: ["てんさい"], english: ["genius", "prodigy", "natural gift"] },
+                { value: "漫才", kana: ["まんざい"], english: ["comedian", "comic dialogue"] },
+                { value: "秀才", kana: ["しゅうさい"], english: ["prodigy"] },
+            ]
+        },
+
+        {
+            name: "里",
+            code: "\u91CC",
+            on: [{ kana: "り", romaji: "ri" }],
+            kun: [{ kana: "さと", romaji: "sato" }],
+            source: "https://en.wiktionary.org/wiki/%E9%87%8C#Kanji",
+            meanings: ["ri", "village", "parent's home", "league"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "里", kana: ["り"], english: ["ri (old Japanese unit of distance)"] },
+                { value: "千里", kana: ["せんり"], english: ["1000 ri, (a) long distance"] },
+                { value: "郷里", kana: ["きょうり"], english: ["birth place", "home town"] },
+                { value: "万里", kana: ["ばんり"], english: ["thousands of miles"] },
+                { value: "里子", kana: ["さとご"], english: ["foster child"] },
+            ]
+        },
+
+        {
+            name: "刀",
+            code: "\u5200",
+            on: [{ kana: "とう", romaji: "tō" }],
+            kun: [{ kana: "かたな", romaji: "katana" }],
+            source: "https://en.wiktionary.org/wiki/%E5%88%80#Kanji",
+            meanings: ["sword", "saber", "knife"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "刀", kana: ["かたな", "とう"], english: ["single edged sword", "katana", "dagger", "knife"] },
+                { value: "太刀打ち", kana: ["たちうち"], english: ["crossing swords", "opposition", "contention"] },
+                { value: "宝刀", kana: ["ほうとう"], english: ["treasured sword"] },
+                { value: "日本刀", kana: ["にほんとう"], english: ["Japanese sword"] },
+                { value: "刀剣", kana: ["とうけん"], english: ["swords", "cold steel"] },
+            ]
+        },
+
+        {
+            name: "汽",
+            code: "\u6C7D",
+            on: [{ kana: "き", romaji: "ki" }],
+            kun: [{ kana: "みずけ", romaji: "mizuke" }],
+            source: "https://en.wiktionary.org/wiki/%E6%B1%BD#Kanji",
+            meanings: ["vapour", "steam"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "汽車", kana: ["きしゃ"], english: ["train (steam)"] },
+                { value: "汽船", kana: ["きせん"], english: ["steamship", "steamboat", "steamer"] },
+                { value: "汽笛", kana: ["きてき"], english: ["steam whistle"] },
+                { value: "汽車賃", kana: ["きしゃちん"], english: ["train fare"] },
+                { value: "汽水", kana: ["きすい"], english: ["brackish water"] },
+            ]
+        },
+
+        {
+            name: "黄",
+            code: "\u9EC4",
+            on: [{ kana: "おう", romaji: "ō" }, { kana: "こう", romaji: "kō" }],
+            kun: [{ kana: "き", romaji: "ki" }, { kana: "こ", romaji: "ko" }],
+            source: "https://en.wiktionary.org/wiki/%E9%BB%84#Kanji",
+            meanings: ["yellow"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "黄", kana: ["き"], english: ["yellow"] },
+                { value: "黄金", kana: ["おうごん", "こがね", "きがね", "くがね"], english: ["gold"] },
+                { value: "硫黄", kana: ["いおう"], english: ["sulfur (S), sulphur"] },
+                { value: "黄色", kana: ["きいろ", "こうしょく", "おうしょく"], english: ["yellow, amber"] },
+                { value: "黄金時代", kana: ["おうごんじだい"], english: ["Golden Age"] },
+            ],
+            tags: ["colour"]
+        },
+
+        {
+            name: "鳴",
+            code: "\u9CF4",
+            on: [{ kana: "めい", romaji: "mei" }],
+            kun: [{ kana: "なく", romaji: "naku" }, { kana: "なる", romaji: "naru" }, { kana: "ならす", romaji: "narasu" }],
+            source: "https://en.wiktionary.org/wiki/%E9%B3%B4#Kanji",
+            meanings: ["chirp", "cry", "bark", "sound", "ring", "echo", "honk"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "鳴り", kana: ["なり"], english: ["ringing", "sound"] },
+                { value: "悲鳴", kana: ["ひめい"], english: ["shriek", "scream"] },
+                { value: "鳴き声", kana: ["なきごえ"], english: ["cry (esp. animal)", "roar"] },
+                { value: "鳴門", kana: ["なると", "なるとまき"], english: ["steamed fish", "paste cake"] },
+                { value: "怒鳴り込む", kana: ["どなりこむ"], english: ["to storm in with a yell"] },
+            ]
+        },
+
+        {
+            name: "麦",
+            code: "\u9EA6",
+            on: [{ kana: "ばく", romaji: "baku" }],
+            kun: [{ kana: "むぎ", romaji: "mugi" }],
+            source: "https://en.wiktionary.org/wiki/%E9%BA%A6#Kanji",
+            meanings: ["barley", "wheat"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "麦", kana: ["むぎ"], english: ["wheat", "barley", "oat"] },
+                { value: "小麦", kana: ["こむぎ"], english: ["wheat"] },
+                { value: "小麦粉", kana: ["こむぎこ"], english: ["wheat flour"] },
+                { value: "麦芽", kana: ["ばくが"], english: ["malt"] },
+                { value: "大麦", kana: ["おおむぎ"], english: ["barley (Hordeum vulgare)"] },
+            ]
+        },
+
+        {
+            name: "矢",
+            code: "\u77E2",
+            on: [{ kana: "し", romaji: "shi" }],
+            kun: [{ kana: "や", romaji: "ya" }],
+            source: "https://en.wiktionary.org/wiki/%E7%9F%A2#Kanji",
+            meanings: ["dart", "arrow"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "矢", kana: ["や", "さ"], english: ["arrow"] },
+                { value: "矢先", kana: ["やさき"], english: ["arrowhead", "brunt", "target"] },
+                { value: "矢面", kana: ["やおもて"], english: ["bearing the full brunt of something"] },
+                { value: "矢継ぎ早", kana: ["やつぎばや"], english: ["rapid succession (e.g. questions)"] },
+                { value: "一矢", kana: ["いっし"], english: ["an arrow, (a) retort"] },
+            ]
+        },
+
+        {
+            name: "弓",
+            code: "\u5F13",
+            on: [{ kana: "きゅう", romaji: "kyū" }],
+            kun: [{ kana: "たらし", romaji: "tarashi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BC%93#Kanji",
+            meanings: ["bow"],
+            grade: KyoikuGrade.TWO,
+            examples: [
+                { value: "弓", kana: ["ゆみ"], english: ["bow (and arrow)"] },
+                { value: "洋弓", kana: ["ようきゅう"], english: ["Western style archery"] },
+                { value: "弓道", kana: ["きゅうどう"], english: ["(Japanese) archery"] },
+                { value: "弓矢", kana: ["ゆみや", "きゅうし"], english: ["bow and arrow"] },
+                { value: "弓のこ", kana: ["ゆみのこ"], english: ["hacksaw"] },
+            ]
+        },
+
         //Grade 6 Kanji
         {
             name: "私",
