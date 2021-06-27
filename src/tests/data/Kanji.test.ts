@@ -47,16 +47,21 @@ beforeEach(() => {
 */
 
 it("Kyoiku should return only Kyoiku", () => {
-    expect(kyoiku()).toHaveLength(232);
+    expect(kyoiku()).toHaveLength(242);
 });
 
 it("Joyo should return Joyo & Kyoiku", () => {
-    expect(joyo()).toHaveLength(233);
+    expect(joyo()).toHaveLength(243);
 });
 
 it("Should return exactly 80 Grade 1 Kyoiku Kanji", () => {
     const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === KyoikuGrade.ONE)
     expect(kanji).toHaveLength(80);
+});
+
+it("Should return exactly 160 Grade 2 Kyoiku Kanji", () => {
+    const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === KyoikuGrade.TWO)
+    expect(kanji).toHaveLength(160);
 });
 
 it("Should not return any duplicate unicode values", () => {
