@@ -3714,7 +3714,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "晴れる", kana: ["はれる"], english: ["to clear up", "to clear away", "to be sunny"] },
                 { value: "快晴", kana: ["かいせい"], english: ["good weather"] },
                 { value: "晴天", kana: ["せいてん"], english: ["fine weather"] },
-            ]
+            ],
+            tags: ["weather"]
         },
         {
             name: "毛",
