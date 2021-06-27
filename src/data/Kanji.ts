@@ -3733,7 +3733,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "羽毛", kana: ["うもう"], english: ["feathers", "plumage", "down"] },
             ]
         },
-
         {
             name: "雲",
             code: "\u96F2",
@@ -3751,7 +3750,6 @@ export function kyoiku(): KanjiData[] {
             ],
             tags: ["weather"]
         },
-
         {
             name: "才",
             code: "\u624D",
@@ -3768,7 +3766,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "秀才", kana: ["しゅうさい"], english: ["prodigy"] },
             ]
         },
-
         {
             name: "里",
             code: "\u91CC",
@@ -3785,7 +3782,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "里子", kana: ["さとご"], english: ["foster child"] },
             ]
         },
-
         {
             name: "刀",
             code: "\u5200",
@@ -3802,7 +3798,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "刀剣", kana: ["とうけん"], english: ["swords", "cold steel"] },
             ]
         },
-
         {
             name: "汽",
             code: "\u6C7D",
@@ -3819,7 +3814,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "汽水", kana: ["きすい"], english: ["brackish water"] },
             ]
         },
-
         {
             name: "黄",
             code: "\u9EC4",
@@ -3837,7 +3831,6 @@ export function kyoiku(): KanjiData[] {
             ],
             tags: ["colour"]
         },
-
         {
             name: "鳴",
             code: "\u9CF4",
@@ -3854,7 +3847,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "怒鳴り込む", kana: ["どなりこむ"], english: ["to storm in with a yell"] },
             ]
         },
-
         {
             name: "麦",
             code: "\u9EA6",
@@ -3871,7 +3863,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "大麦", kana: ["おおむぎ"], english: ["barley (Hordeum vulgare)"] },
             ]
         },
-
         {
             name: "矢",
             code: "\u77E2",
@@ -3888,7 +3879,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "一矢", kana: ["いっし"], english: ["an arrow, (a) retort"] },
             ]
         },
-
         {
             name: "弓",
             code: "\u5F13",
