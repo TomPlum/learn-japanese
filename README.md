@@ -16,6 +16,7 @@ However, I couldn't quite find *exactly* what I wanted, an app for learning kana
 * [Kana](#kana)
   * [Hiragana](#hiragana)
   * [Katakana](#katakana)
+* [Learning Topics](#learning-topics)
 * [Game Modes](#game-modes)
 * [References](#references)
 ## Kana
@@ -76,6 +77,15 @@ followed by small ya, yu or yo. These digraphs are called yōon. [[1]](#1)
 |**ya**| リャ  |  ミャ  |  ヒャ  |  ニャ  |  ヂャ |  シャ   | キャ  | ピャ  |  ビャ  |  ジャ  |  ギャ  |
 |**yu**| リュ  |  ミュ  |  ヒュ  |  ニュ  |  ヂュ |	 シュ   | キュ  | ピュ  |  ビュ  |  ジュ  |  ギュ  |
 |**yo**| リョ  |  ミョ  |  ヒョ  |  ニョ  |  ヂョ |  ショ   | キョ  | ピョ  |  ビョ  |  ジョ  |  ギョ  |
+
+## Learning Topics
+
+- Hiragana & Katakana
+- Numbers & Counting
+- Jōyō Kanji
+- Basics (Colours, Animals, Directions, Weather, Family, Body)
+- Days & Months
+- Sentence Structure
 
 ## Kana Game Modes
 
