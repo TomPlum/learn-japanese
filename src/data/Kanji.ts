@@ -19,7 +19,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "人間", kana: ["にんげん"], english: ["human being", "man", "person"] },
                 { value: "人気", kana: ["にんき"], english: ["popular", "popular feeling", "business conditions"] },
 
-            ]
+            ],
+            tags: ["family"]
         },
         {
             name: "一",
@@ -69,7 +70,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "日米", kana: ["にちべい"], english: ["Japan"] },
                 { value: "日本人", kana: ["にほんじん", "にっぽんじん"], english: ["Japanese person (people)"] },
                 { value: "毎日", kana: ["まいにち"], english: ["every day"] },
-            ]
+            ],
+            tags: ["calendar"]
         },
         {
             name: "中",
@@ -85,7 +87,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "中心", kana: ["ちゅうしん"], english: ["center", "centre", "middle", "heart", "core", "focus"] },
                 { value: "中でも", kana: ["なかでも", "にっぽんじん"], english: ["among (other things)", "inter alia"] },
                 { value: "中間", kana: ["ちゅうかん"], english: ["middle", "midway", "interim"] },
-            ]
+            ],
+            tags: ["position"]
         },
         {
             name: "大",
@@ -133,7 +136,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "前年", kana: ["ぜんねん"], english: ["the preceding year", "the previous year"] },
                 { value: "年間", kana: ["ねんかん"], english: ["year (period of)"] },
                 { value: "来年", kana: ["らいねん"], english: ["next year"] },
-            ]
+            ],
+            tags: ["time"]
         },
         {
             name: "十",
@@ -149,7 +153,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "十一月", kana: ["じゅういちがつ"], english: ["November"] },
                 { value: "十九", kana: ["じゅうきゅう"], english: ["nineteen"] },
                 { value: "十月", kana: ["じゅうがつ"], english: ["October"] },
-            ]
+            ],
+            tags: ["number"]
         },
         {
             name: "出",
@@ -198,7 +203,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "見直し", kana: ["みなおし"], english: ["review", "reconsideration", "revision"] },
                 { value: "見方", kana: ["みかた"], english: ["viewpoint"] },
                 { value: "見通し", kana: ["みとおし"], english: ["perspective", "unobstructed view", "outlook"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "月",
@@ -214,7 +220,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "五月", kana: ["ごがつ"], english: ["May"] },
                 { value: "今月", kana: ["こんげつ"], english: ["this month"] },
                 { value: "三月", kana: ["さんがつ"], english: ["March"] },
-            ]
+            ],
+            tags: ["time"]
         },
         {
             name: "生",
@@ -263,7 +270,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "事実上", kana: ["じじつじょう"], english: ["(as a) matter of fact", "actually", "in reality"] },
                 { value: "上げ", kana: ["あげ"], english: ["rise in price", "making a tuck"] },
                 { value: "上昇", kana: ["じょうしょう"], english: ["rising", "ascending", "climbing"] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "四",
@@ -329,7 +337,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "購入", kana: ["こうにゅう"], english: ["purchase", "busy"] },
                 { value: "収入", kana: ["しゅうにゅう"], english: ["income", "receipts", "revenue"] },
                 { value: "導入", kana: ["どうにゅう"], english: ["introduction", "bringing in", "leading in"] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "学",
@@ -428,7 +437,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "引き下げ", kana: ["ひきさげ"], english: ["reduction", "cut"] },
                 { value: "下り", kana: ["くだり"], english: ["train"] },
                 { value: "下院", kana: ["かいん"], english: ["lower", "house", "lower",] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "気",
@@ -460,7 +470,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "小説", kana: ["しょうせつ"], english: ["novel", "short story"] },
                 { value: "小学生", kana: ["しょうがくせい"], english: ["elementary school student"] },
                 { value: "中小企業", kana: ["ちゅうしょうきぎょう"], english: ["small to medium enterprises",] },
-            ]
+            ],
+            tags: ["size"]
         },
         {
             name: "七",
@@ -558,7 +569,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "女性", kana: ["じょせい"], english: ["women", "female", "feminine gender"] },
                 { value: "男女", kana: ["だんじょ"], english: ["man and women"] },
                 { value: "彼女", kana: ["かのじょ"], english: ["she", "girlfriend", "sweetheart",] },
-            ]
+            ],
+            tags: ["family"]
         },
         {
             name: "先",
@@ -606,7 +618,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "水道", kana: ["すいどう"], english: ["water service", "water supply"] },
                 { value: "水面", kana: ["すいめん", "みなも", "みのも"], english: ["water's surface"] },
                 { value: "水泳", kana: ["すいえい"], english: ["swimming",] },
-            ]
+            ],
+            tags: ["food"]
         },
         {
             name: "校",
@@ -653,7 +666,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "男性", kana: ["だんせい"], english: ["male", "masculine gender"] },
                 { value: "長男", kana: ["ちょうなん"], english: ["eldest son"] },
                 { value: "男女", kana: ["だんじょ"], english: ["man and woman", "men and women"] },
-            ]
+            ],
+            tags: ["family"]
         },
         {
             name: "土",
