@@ -790,7 +790,6 @@ export function kyoiku(): KanjiData[] {
                 { value: "天皇陛下", kana: ["てんのうへいか"], english: ["His Majesty the Emperor"] },
                 { value: "天井", kana: ["てんじょう"], english: ["ceiling", "ceiling price"] },
             ],
-            tags: ["number"]
         },
         {
             name: "右",
@@ -1162,7 +1161,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "早急", kana: ["さっきゅう", "そうきゅう"], english: ["urgent"] },
                 { value: "早朝", kana: ["そうちょう"], english: ["early morning"] },
                 { value: "早める", kana: ["はやめる"], english: ["to hasten", "to quicken", "to expedite"] },
-            ]
+            ],
+            tags: ["adjective"]
         },
         {
             name: "音",
@@ -1292,7 +1292,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "夕方", kana: ["ゆうがた"], english: ["evening"] },
                 { value: "夕刊", kana: ["ゆうかん"], english: ["evening paper"] },
                 { value: "夕べ", kana: ["ゆう", "ゆうべ", "さくや"], english: ["evening", "last night"] },
-            ]
+            ],
+            tags: ["time"]
         },
         {
             name: "竹",
@@ -1342,7 +1343,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "時期", kana: ["じき"], english: ["time", "season", "period", "soon", "shortly"] },
                 { value: "時代", kana: ["じだい"], english: ["period", "epoch", "era", "age", "the times"] },
                 { value: "当時", kana: ["とうじ"], english: ["at that time", "in those days"] },
-            ]
+            ],
+            tags: ["time"]
         },
         {
             name: "分",
@@ -1358,7 +1360,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "自分", kana: ["じぶん"], english: ["myself", "yourself", "oneself", "himself", "herself"] },
                 { value: "部分", kana: ["ぶぶん"], english: ["portion", "section", "part"] },
                 { value: "分野", kana: ["ぶんや"], english: ["field", "sphere", "realm", "division", "branch"] },
-            ]
+            ],
+            tags: ["time"]
         },
         {
             name: "前",
@@ -1374,7 +1377,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "前回", kana: ["ぜんかい"], english: ["last time"] },
                 { value: "前提", kana: ["ぜんてい"], english: ["preamble", "premise", "reason"] },
                 { value: "前日", kana: ["ぜんじつ", "まえび"], english: ["previous day"] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "東",
@@ -1423,7 +1427,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "銀行", kana: ["ぎんこう"], english: ["bank"] },
                 { value: "行政", kana: ["ぎょうせい"], english: ["administration"] },
                 { value: "行動", kana: ["こうどう"], english: ["action", "conduct", "behaviour"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "後",
@@ -1439,7 +1444,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "後ろ", kana: ["うしろ"], english: ["back", "behind", "rear"] },
                 { value: "今後", kana: ["こんご"], english: ["from now on", "hereafter"] },
                 { value: "最後", kana: ["さいご"], english: ["last", "end", "conclusion"] },
-            ]
+            ],
+            tags: ["direction"]
         },
         {
             name: "間",
@@ -1455,7 +1461,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "期間", kana: ["きかん"], english: ["period", "term", "interval"] },
                 { value: "時間", kana: ["じかん"], english: ["time", "hours"] },
                 { value: "人間", kana: ["にんげん"], english: ["human being", "man", "person"] },
-            ]
+            ],
+            tags: ["time"]
         },
         {
             name: "今",
@@ -1471,7 +1478,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "今回", kana: ["こんかい"], english: ["now", "this time", "lately"] },
                 { value: "今月", kana: ["こんげつ"], english: ["this month"] },
                 { value: "今後", kana: ["こんご"], english: ["from now on", "hereafter"] },
-            ]
+            ],
+            tags: ["time"]
         },
         {
             name: "鳥",
@@ -1504,7 +1512,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "最高", kana: ["さいこう"], english: ["highest", "supreme", "the most"] },
                 { value: "円高", kana: ["えんだか"], english: ["high valued yen"] },
                 { value: "高", kana: ["たか", "だか"], english: ["quantity", "amount", "volume", "number"] },
-            ]
+            ],
+            tags: ["adjective"]
         },
         {
             name: "来",
@@ -1520,7 +1529,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "従来", kana: ["じゅうらい"], english: ["up to now", "so far", "traditional"] },
                 { value: "将来", kana: ["しょうらい"], english: ["future", "prospects"] },
                 { value: "来年", kana: ["らいねん"], english: ["next year"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "北",
@@ -1553,7 +1563,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "報告書", kana: ["ぺきん"], english: ["written report"] },
                 { value: "文書", kana: ["きたちょうせん"], english: ["document", "writing", "letter", "paperwork"] },
                 { value: "教科書", kana: ["とうほく", "ひがしきた"], english: ["textbook"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "西",
@@ -1602,7 +1613,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "対話", kana: ["たいわ"], english: ["interactive", "interaction", "conversation"] },
                 { value: "話題", kana: ["わだい"], english: ["topic", "subject"] },
                 { value: "話し合い", kana: ["はなしあい"], english: ["discussion", "conference"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "午",
@@ -1618,7 +1630,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "正午", kana: ["しょうご"], english: ["noon", "midday"] },
                 { value: "午", kana: ["うま"], english: ["seventh sign of the Chinese zodiac"] },
                 { value: "午", kana: ["ひる"], english: ["noon", "midday", "daytime", "lunch"] },
-            ]
+            ],
+            tags: ["time"]
         },
         {
             name: "半",
@@ -1634,7 +1647,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "後半", kana: ["こうはん"], english: ["second half", "latter half"] },
                 { value: "半ば", kana: ["なかば"], english: ["middle", "half", "semi", "halfway", "partly"] },
                 { value: "半分", kana: ["はんぶん"], english: ["half"] },
-            ]
+            ],
+            tags: ["time", "size"]
         },
         {
             name: "電",
@@ -1682,7 +1696,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "食品", kana: ["しょくひん"], english: ["commodity", "foodstuff"] },
                 { value: "食料", kana: ["しょくりょう"], english: ["food"] },
                 { value: "食糧", kana: ["しょくりょう"], english: ["provisions", "rations", "food supply"] },
-            ]
+            ],
+            tags: ["verb", "food"]
         },
         {
             name: "南",
@@ -1731,7 +1746,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "読書", kana: ["どくしょ", "とくしょ"], english: ["reading"] },
                 { value: "読む", kana: ["よむ"], english: ["to read"] },
                 { value: "積ん読", kana: ["つんどく"], english: ["buying books and not reading them"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "聞",

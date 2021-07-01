@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import LearningMode from "../../types/learn/LearningMode";
 import { Environment } from "../../utility/Environment";
 import MenuDescription from "../ui/MenuDescription";
 import LearnTopicButton from "./LearnTopicButton";
@@ -14,6 +13,10 @@ import { Learnable } from "../../types/learn/Learnable";
 import LearningDataRepository from "../../repository/LearningDataRepository";
 import Topic from "../../types/Topic";
 import styles from "../../styles/sass/components/learn/LearnMenu.module.scss";
+import { SessionSettings } from "../../types/game/GameSettings";
+import SessionMode from "../../types/SessionMode";
+import { AppMode } from "../../types/AppMode";
+import { MenuModes } from "../../types/MenuModes";
 
 export interface CustomLearnMenuProps {
     onSelect: (settings: LearningSessionSettings) => void;
@@ -21,11 +24,12 @@ export interface CustomLearnMenuProps {
 
 export interface LearnMenuProps {
     topic: Topic;
-    onStart: (settings: LearningSessionSettings) => void;
+    appMode: AppMode;
+    onStart: (settings: SessionSettings) => void;
 }
 
 interface LearnMenuState {
-    selected: LearningMode;
+    selected: SessionMode;
     searching: boolean;
 }
 
@@ -34,30 +38,36 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
     constructor(props: Readonly<LearnMenuProps> | LearnMenuProps) {
         super(props);
         this.state = {
-            selected: props.topic.modes.getLearningTopics()[0],
+            selected: this.getMenuModes().getModes()[0],
             searching: false
+        }
+    }
+
+    componentDidUpdate(prevProps: Readonly<LearnMenuProps>, prevState: Readonly<LearnMenuState>) {
+        if (prevProps.appMode != this.props.appMode) {
+            this.setState({ selected: this.getMenuModes().getModes()[0] });
         }
     }
 
     render() {
         const { selected, searching } = this.state;
-        const { topic } = this.props;
+        const { appMode } = this.props;
 
         const CustomSettingsMenu = selected.menu as React.FunctionComponent<CustomLearnMenuProps>;
-        const renderMenu = !selected.isCustom && !searching;
-        const data = this.getSelectedTopicData();
+        const renderMenu = !selected.custom && !searching;
+        const modes = this.getMenuModes();
 
         return (
-            <div className={styles.wrapper} data-testid={"learn-" + topic.modes.getTopic().toLowerCase() + "-menu"}>
+            <div className={styles.wrapper} data-testid={"learn-" + modes.getTopic().toLowerCase() + "-menu"}>
                 {renderMenu && <Row>
                     <Col>
                         <MenuDescription text={this.getDescription()}/>
                     </Col>
                 </Row>}
 
-                {renderMenu && Arrays.chunked(topic.modes.getLearningTopics(), 2).map((pair: LearningMode[], j: number) => {
+                {renderMenu && Arrays.chunked(modes.getModes(), 2).map((pair: SessionMode[], j: number) => {
                     return <Row key={"row-" + j}>{
-                        pair.map((mode: LearningMode, i: number) => {
+                        pair.map((mode: SessionMode, i: number) => {
                             const isLeft = i % 2 === 0 || i === 0;
                             const columnClass = isLeft ? styles.leftColumn : styles.rightColumn;
                             return (<Col className={columnClass} key={"col-" + i}>
@@ -74,28 +84,32 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
                     }</Row>
                 })}
 
-                {selected.isCustom && !searching && <CustomSettingsMenu onSelect={this.onSelectCustomSettings}/>}
+                {selected.custom && !searching && <CustomSettingsMenu onSelect={this.onSelectCustomSettings}/>}
 
                 {renderMenu && <Row>
-                    <Col className="pr-1">
+                    <Col className={appMode == AppMode.LEARN ? "pr-1" : undefined}>
                         <StartButton onClick={this.onStart}/>
                     </Col>
 
-                    <Col xs={2} className="pl-2">
-                        <Button className={styles.search} onClick={() => this.setState({ searching: true })} title="Search">
+                    {appMode === AppMode.LEARN && <Col xs={2} className="pl-2">
+                        <Button className={styles.search} onClick={() => this.setState({ searching: true })}
+                                title="Search">
                             <FontAwesomeIcon icon={faSearch} fixedWidth/>
                         </Button>
-                    </Col>
+                    </Col>}
                 </Row>}
 
-                {searching && <Search data={data} tags={Arrays.distinct(data.flatMap(it => it.getTags()))} />}
+                {searching && <Search
+                    data={this.getSelectedTopicData()}
+                    tags={Arrays.distinct(this.getSelectedTopicData().flatMap(it => it.getTags()))}
+                />}
             </div>
         );
     }
 
     private onStart = () => this.props.onStart(this.state.selected.settings);
 
-    private onSelect = (mode: LearningMode) => {
+    private onSelect = (mode: SessionMode) => {
         this.setState({ selected: mode });
     }
 
@@ -110,7 +124,15 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
     }
 
     private getDescription = () => {
-        return Environment.variable("LEARN_" + this.props.topic.modes.getTopic() + "_" + this.state.selected.displayName + "_DESC");
+        const { appMode } = this.props;
+        const { selected } = this.state;
+        const prefix = appMode === AppMode.LEARN ? "LEARN_" : "PLAY_";
+        return Environment.variable(prefix + this.getMenuModes().getTopic() + "_" + selected.displayName + "_DESC");
+    }
+
+    private getMenuModes = (): MenuModes => {
+        const { topic, appMode } = this.props;
+        return appMode === AppMode.LEARN ? topic.modes : topic.playModes;
     }
 }
 

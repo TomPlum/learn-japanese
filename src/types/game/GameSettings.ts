@@ -3,7 +3,10 @@ import { LifeQuantity } from "./LifeQuantity";
 import { DisplayType } from "./DisplayType";
 import { LearnSettings } from "../learn/LearningSessionSettings";
 
-export interface GameSettings {
+export interface SessionSettings { }
+
+
+export interface GameSettings extends SessionSettings {
     kana?: KanaGameSettings;
 }
 

@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Topic from "../../types/Topic";
-import KanaGameModeMenu from "./KanaGameModeMenu";
 import TopicSelectionMenu from "./TopicSelectionMenu";
 import { GameSettings } from "../../types/game/GameSettings";
 import { AppMode } from "../../types/AppMode";
@@ -64,25 +63,14 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
         const { mode } = this.props;
         const { topic } = this.state;
 
-        switch (mode) {
-            case AppMode.LEARN: {
-                return (
-                    <LearnMenu
-                        key={topic.name}
-                        topic={topic}
-                        onStart={this.onStartLearning}
-                    />
-                );
-            }
-            case AppMode.PLAY: {
-                return (
-                    <KanaGameModeMenu
-                        onSelectedMode={(mode, settings) => this.onStartGame(settings)}
-                        className={styles.menu}
-                    />
-                );
-            }
-        }
+        return (
+            <LearnMenu
+                key={topic.name}
+                topic={topic}
+                appMode={mode}
+                onStart={mode == AppMode.LEARN ? this.onStartLearning : this.onStartGame}
+            />
+        );
     }
 
     private onStartGame = (settings: GameSettings) => {
@@ -92,7 +80,7 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
 
     private onStartLearning = (settings: LearningSessionSettings) => {
         const { topic } = this.state;
-        this.props.onStartLearn({ topic: topic, settings: settings });
+        this.props.onStartLearn({ settings: settings, topic: topic });
     }
 }
 

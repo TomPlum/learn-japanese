@@ -1,37 +1,38 @@
 import React from "react";
-import { Kana } from "../../types/kana/Kana";
 import Arrays from "../../utility/Arrays";
-import KanaDisplay from "./KanaDisplay";
 import { Col, Row } from "react-bootstrap";
+import { Learnable } from "../../types/learn/Learnable";
+import KanaQuestion from "./KanaQuestion";
+import KanaDisplay from "./KanaDisplay";
 import KanaQuestionBanner from "./KanaQuestionBanner";
 import { KanaQuestionProps } from "./KanaMemoryGame";
-import KanaQuestion from "./KanaQuestion";
+import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 
-export interface KanaChoiceQuestionProps extends KanaQuestionProps {
-    expected: Kana;
-    wrong: Kana[];
+export interface LearnableChoiceQuestionProps extends KanaQuestionProps {
+    expected: Learnable;
+    wrong: Learnable[];
     hidden: boolean;
 }
 
-interface KanaChoiceQuestionState {
-    selected?: Kana;
-    options: Kana[];
+interface LearnableChoiceQuestionState {
+    selected?: Learnable;
+    options: Learnable[];
 }
 
-class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoiceQuestionState> {
+class LearnableChoiceQuestion extends KanaQuestion<LearnableChoiceQuestionProps, LearnableChoiceQuestionState> {
 
-    private displays = new Map<Kana, React.RefObject<KanaDisplay>>();
-    private indices = new Map<number, Kana>();
+    private displays = new Map<Learnable, React.RefObject<KanaDisplay>>();
+    private indices = new Map<number, Learnable>();
 
-    constructor(props: Readonly<KanaChoiceQuestionProps> | KanaChoiceQuestionProps) {
+    constructor(props: Readonly<LearnableChoiceQuestionProps> | LearnableChoiceQuestionProps) {
         super(props);
 
         const { expected, wrong } = this.props;
 
-        const kana = Arrays.shuffle(wrong.concat(expected));
+        const Learnable = Arrays.shuffle(wrong.concat(expected));
 
-        kana.forEach((option, i) => {
+        Learnable.forEach((option, i) => {
             const ref = React.createRef<KanaDisplay>();
             this.displays.set(option, ref);
             this.indices.set(i + 1, option);
@@ -39,7 +40,7 @@ class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoic
 
         this.state = {
             selected: undefined,
-            options: kana
+            options: Learnable
         }
     }
 
@@ -57,14 +58,14 @@ class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoic
 
         return (
             <div className={styles.wrapper}>
-                <KanaQuestionBanner value={expected} />
+                <KanaQuestionBanner value={expected as Kana} />
 
                 <Row>
                     {options.map((option, i) => {
                         return (
                             <Col lg={options.length === 6 ? 4 : 6} xs={6} key={"col-" + i}>
                                 <KanaDisplay
-                                    kana={option}
+                                    kana={option as Kana}
                                     blur={hidden}
                                     index={i + 1}
                                     onClick={this.select}
@@ -87,13 +88,13 @@ class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoic
         if (this.props.expected === selected) {
             return true;
         } else {
-            this.displays.get(selected as Kana)?.current?.notifyIncorrect();
+            this.displays.get(selected as Learnable)?.current?.notifyIncorrect();
             this.setState({ selected: undefined });
             return false;
         }
     }
 
-    private select = (value?: Kana) => {
+    private select = (value?: Learnable) => {
         const { selected } = this.state;
         if (!selected) {
             this.props.isValid(true);
@@ -106,10 +107,10 @@ class KanaChoiceQuestion extends KanaQuestion<KanaChoiceQuestionProps, KanaChoic
 
         //Handle Numbers (1 - Tile Quantity)
         if ([...this.indices.keys()].map(i => i.toString()).includes(e.key)) {
-            const kana = this.indices.get(Number(e.key));
-            this.select(kana);
+            const Learnable = this.indices.get(Number(e.key));
+            this.select(Learnable);
         }
     }
 }
 
-export default KanaChoiceQuestion;
+export default LearnableChoiceQuestion;

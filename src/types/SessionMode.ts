@@ -1,19 +1,17 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { LearningSessionSettings } from "./LearningSessionSettings";
+import { SessionSettings } from "./game/GameSettings";
 import React from "react";
 
-export default class LearningMode {
+class SessionMode {
     private readonly _displayName: string;
     private readonly _colour: string;
     private readonly _icon: IconDefinition | string;
-    private readonly _settings: LearningSessionSettings;
+    private readonly _settings: SessionSettings;
     private readonly _custom: boolean;
     private readonly _menu: React.FunctionComponent | React.ComponentClass<any> | undefined = undefined;
 
-    public constructor(
-        displayName: string, colour: string, icon: IconDefinition | string, settings: LearningSessionSettings,
-        custom: boolean = false, menu: React.FunctionComponent | React.ComponentClass<any> | undefined = undefined
-    ) {
+    constructor(displayName: string, colour: string, icon: IconDefinition | string, settings: SessionSettings,
+                custom = false, menu: React.FunctionComponent | React.ComponentClass<any> | undefined = undefined) {
         this._displayName = displayName;
         this._colour = colour;
         this._icon = icon;
@@ -34,11 +32,11 @@ export default class LearningMode {
         return this._icon;
     }
 
-    get settings(): LearningSessionSettings {
+    get settings(): SessionSettings {
         return this._settings;
     }
 
-    get isCustom(): boolean {
+    get custom(): boolean {
         return this._custom;
     }
 
@@ -46,3 +44,5 @@ export default class LearningMode {
         return this._menu;
     }
 }
+
+export default SessionMode;

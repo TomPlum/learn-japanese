@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import KanaChoiceQuestion, { KanaChoiceQuestionProps } from "../../../components/game/KanaChoiceQuestion";
+import KanaChoiceQuestion, { LearnableChoiceQuestionProps } from "../../../components/game/KanaChoiceQuestion";
 import { Kana } from "../../../types/kana/Kana";
 import KanaType from "../../../types/kana/KanaType";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
@@ -14,7 +14,7 @@ const i = new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const e = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const o = new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 
-let props: KanaChoiceQuestionProps
+let props: LearnableChoiceQuestionProps
 const ref = React.createRef<KanaChoiceQuestion>();
 
 const setup = () => {

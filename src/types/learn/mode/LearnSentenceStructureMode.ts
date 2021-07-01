@@ -1,16 +1,16 @@
-import LearningMode from "../LearningMode";
 import { faComment, faCube, faExclamation, faFire, faRunning } from "@fortawesome/free-solid-svg-icons";
-import LearnMenuModes from "./LearnMenuModes";
+import SessionMode from "../../SessionMode";
+import { MenuModes } from "../../MenuModes";
 
-export default class LearnSentenceStructureMode extends LearnMenuModes {
-    getLearningTopics(): LearningMode[] {
+export default class LearnSentenceStructureMode implements MenuModes {
+    getModes(): SessionMode[] {
         return [
-            new LearningMode("Adverbs", "#5641d0", faExclamation, { sentence: { adverbs: true } }),
-            new LearningMode("Particles", "#ff7730", "を", { sentence: { particles: true } }),
-            new LearningMode("Expressions", "#1785e2", faComment, { sentence: { expressions: true } }),
-            new LearningMode("Verbs", "#e3c93a", faRunning, { sentence: { verbs: true } }),
-            new LearningMode("Nouns", "#4fdb4b", faCube, { sentence: { nouns: true} }),
-            new LearningMode("Adjectives", "#fd0e3e", faFire, { sentence:  { adjectives: true } })
+            new SessionMode("Adverbs", "#5641d0", faExclamation, { sentence: { adverbs: true } }),
+            new SessionMode("Particles", "#ff7730", "を", { sentence: { particles: true } }),
+            new SessionMode("Expressions", "#1785e2", faComment, { sentence: { expressions: true } }),
+            new SessionMode("Verbs", "#e3c93a", faRunning, { sentence: { verbs: true } }),
+            new SessionMode("Nouns", "#4fdb4b", faCube, { sentence: { nouns: true} }),
+            new SessionMode("Adjectives", "#fd0e3e", faFire, { sentence:  { adjectives: true } })
         ];
     }
 
