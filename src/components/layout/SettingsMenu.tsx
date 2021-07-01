@@ -27,8 +27,6 @@ export interface GameSettingsMenuProps {
 
 interface GameSettingsMenuState {
     topic: Topic;
-    gameSettings?: GameSettings;
-    learnSettings?: LearningSessionSettings;
 }
 
 class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
@@ -37,8 +35,6 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
         super(props);
         this.state = {
             topic: Topic.KANA,
-            gameSettings: undefined,
-            learnSettings: undefined
         }
     }
 
