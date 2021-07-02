@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import LearnMenu from "../../../components/learn/LearnMenu";
+import ModeSelectionMenu from "../../../components/learn/ModeSelectionMenu";
 import { Environment } from "../../../utility/Environment";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import Topic from "../../../types/Topic";
@@ -10,7 +10,7 @@ describe("Example 1 - Kana", () => {
     const environment = jest.fn();
 
     const setup = () => {
-        const component = render(<LearnMenu topic={Topic.KANA} appMode={AppMode.LEARN} onStart={onStartHandler} />);
+        const component = render(<ModeSelectionMenu topic={Topic.KANA} appMode={AppMode.LEARN} onStart={onStartHandler} />);
         return {
             hiragana: component.getByText('Hiragana'),
             katakana: component.getByText('Katakana'),
@@ -117,7 +117,7 @@ describe("Example 2 - Calendar", () => {
     const environment = jest.fn();
 
     const setup = () => {
-        const component = render(<LearnMenu topic={Topic.CALENDAR} appMode={AppMode.LEARN} onStart={onStartHandler}/>);
+        const component = render(<ModeSelectionMenu topic={Topic.CALENDAR} appMode={AppMode.LEARN} onStart={onStartHandler}/>);
         return {
             days: component.getByText('Days of the Week'),
             months: component.getByText('Months of the Year'),
@@ -245,7 +245,7 @@ describe("Example 3 - Kanji (Customisable)", () => {
     const environment = jest.fn();
 
     const setup = () => {
-        const component = render(<LearnMenu topic={Topic.KANJI} appMode={AppMode.LEARN} onStart={onStartHandler}/>);
+        const component = render(<ModeSelectionMenu topic={Topic.KANJI} appMode={AppMode.LEARN} onStart={onStartHandler}/>);
         return {
             kyoiku: component.getByText('Kyōiku'),
             joyo: component.getByText('Jōyō'),

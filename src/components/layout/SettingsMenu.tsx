@@ -5,7 +5,7 @@ import TopicSelectionMenu from "./TopicSelectionMenu";
 import { GameSettings } from "../../types/game/GameSettings";
 import { AppMode } from "../../types/AppMode";
 import { LearningSessionSettings } from "../../types/learn/LearningSessionSettings";
-import LearnMenu from "../learn/LearnMenu";
+import ModeSelectionMenu from "../learn/ModeSelectionMenu";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 
 export interface GameTypeSettings {
@@ -64,7 +64,7 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
         const { topic } = this.state;
 
         return (
-            <LearnMenu
+            <ModeSelectionMenu
                 key={topic.name}
                 topic={topic}
                 appMode={mode}

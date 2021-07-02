@@ -12,30 +12,30 @@ import Search from "./Search";
 import { Learnable } from "../../types/learn/Learnable";
 import LearningDataRepository from "../../repository/LearningDataRepository";
 import Topic from "../../types/Topic";
-import styles from "../../styles/sass/components/learn/LearnMenu.module.scss";
 import { SessionSettings } from "../../types/game/GameSettings";
 import SessionMode from "../../types/SessionMode";
 import { AppMode } from "../../types/AppMode";
 import { MenuModes } from "../../types/MenuModes";
+import styles from "../../styles/sass/components/learn/ModeSelectionMenu.module.scss";
 
 export interface CustomLearnMenuProps {
     onSelect: (settings: LearningSessionSettings) => void;
 }
 
-export interface LearnMenuProps {
+export interface ModeSelectionMenuProps {
     topic: Topic;
     appMode: AppMode;
     onStart: (settings: SessionSettings) => void;
 }
 
-interface LearnMenuState {
+interface ModeSelectionMenuState {
     selected: SessionMode;
     searching: boolean;
 }
 
-class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
+class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionMenuState> {
 
-    constructor(props: Readonly<LearnMenuProps> | LearnMenuProps) {
+    constructor(props: Readonly<ModeSelectionMenuProps> | ModeSelectionMenuProps) {
         super(props);
         this.state = {
             selected: this.getMenuModes().getModes()[0],
@@ -43,7 +43,7 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
         }
     }
 
-    componentDidUpdate(prevProps: Readonly<LearnMenuProps>, prevState: Readonly<LearnMenuState>) {
+    componentDidUpdate(prevProps: Readonly<ModeSelectionMenuProps>, prevState: Readonly<ModeSelectionMenuState>) {
         if (prevProps.appMode != this.props.appMode) {
             this.setState({ selected: this.getMenuModes().getModes()[0] });
         }
@@ -136,4 +136,4 @@ class LearnMenu extends Component<LearnMenuProps, LearnMenuState> {
     }
 }
 
-export default LearnMenu;
+export default ModeSelectionMenu;

@@ -6,7 +6,7 @@ import KyoikuGradeButton from "../../ui/buttons/KyoikuGradeButton";
 import Arrays from "../../../utility/Arrays";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
-import { CustomLearnMenuProps } from "../LearnMenu";
+import { CustomLearnMenuProps } from "../ModeSelectionMenu";
 import TemplateString from "../../../types/TemplateString";
 
 interface KanjiSettingsMenuState {
