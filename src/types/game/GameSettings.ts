@@ -5,17 +5,12 @@ import { LearnSettings } from "../learn/LearningSessionSettings";
 
 export interface SessionSettings { }
 
-
 export interface GameSettings extends SessionSettings {
-    kana?: KanaGameSettings;
-}
-
-export interface KanaGameSettings {
-    display: DisplaySettings;
-    kana: KanaSettings
     hints: HintSettings;
     lives: LifeSettings;
     time: TimeSettings;
+    display: DisplaySettings;
+    kana?: KanaSettings;
 }
 
 export interface DisplaySettings {

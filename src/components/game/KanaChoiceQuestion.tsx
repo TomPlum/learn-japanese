@@ -2,17 +2,16 @@ import React from "react";
 import Arrays from "../../utility/Arrays";
 import { Col, Row } from "react-bootstrap";
 import { Learnable } from "../../types/learn/Learnable";
-import KanaQuestion from "./KanaQuestion";
+import GameQuestion from "./GameQuestion";
 import KanaDisplay from "./KanaDisplay";
 import KanaQuestionBanner from "./KanaQuestionBanner";
-import { KanaQuestionProps } from "./KanaMemoryGame";
+import { GameQuestionProps } from "./KanaMemoryGame";
 import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 
-export interface LearnableChoiceQuestionProps extends KanaQuestionProps {
+export interface LearnableChoiceQuestionProps extends GameQuestionProps {
     expected: Learnable;
     wrong: Learnable[];
-    hidden: boolean;
 }
 
 interface LearnableChoiceQuestionState {
@@ -20,7 +19,7 @@ interface LearnableChoiceQuestionState {
     options: Learnable[];
 }
 
-class LearnableChoiceQuestion extends KanaQuestion<LearnableChoiceQuestionProps, LearnableChoiceQuestionState> {
+class LearnableChoiceQuestion extends GameQuestion<LearnableChoiceQuestionProps, LearnableChoiceQuestionState> {
 
     private displays = new Map<Learnable, React.RefObject<KanaDisplay>>();
     private indices = new Map<number, Learnable>();

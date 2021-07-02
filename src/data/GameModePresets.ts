@@ -34,51 +34,41 @@ export const defaultTimeSettings: TimeSettings = {
 
 // Game Mode Presets
 export const RELAXED: GameSettings = {
-    kana: {
-        display: { type: DisplayType.ROMAJI, cards: 1, score: false },
-        kana: defaultKanaSettings,
-        hints: defaultHintSettings,
-        lives: { enabled: false },
-        time: { timed: false, countdown: false }
-    }
+    kana: defaultKanaSettings,
+    display: { type: DisplayType.ROMAJI, cards: 1, score: false },
+    hints: defaultHintSettings,
+    lives: { enabled: false },
+    time: { timed: false, countdown: false }
 }
 
 export const ROMAJI: GameSettings = {
-    kana: {
-        display: { type: DisplayType.ROMAJI, cards: 1, score: true },
-        kana: defaultKanaSettings,
-        hints: { enabled: true, quantity: HintQuantity.THREE },
-        lives: defaultLifeSettings,
-        time: defaultTimeSettings
-    }
+    kana: defaultKanaSettings,
+    display: { type: DisplayType.ROMAJI, cards: 1, score: true },
+    hints: { enabled: true, quantity: HintQuantity.THREE },
+    lives: defaultLifeSettings,
+    time: defaultTimeSettings
 }
 
 export const KANA: GameSettings = {
-    kana: {
-        display: { type: DisplayType.KANA, cards: 4, score: true },
-        kana: defaultKanaSettings,
-        hints: { enabled: true, quantity: HintQuantity.THREE },
-        lives: defaultLifeSettings,
-        time: defaultTimeSettings
-    }
+    kana: defaultKanaSettings,
+    display: { type: DisplayType.KANA, cards: 4, score: true },
+    hints: { enabled: true, quantity: HintQuantity.THREE },
+    lives: defaultLifeSettings,
+    time: defaultTimeSettings
 }
 
 export const TIME_ATTACK: GameSettings = {
-    kana: {
-        display: { type: DisplayType.ROMAJI, cards: 1, score: true },
-        kana: defaultKanaSettings,
-        hints: { enabled: true, quantity: HintQuantity.THREE },
-        lives: { enabled: false },
-        time: { timed: false, countdown: true, secondsPerQuestion: 10 }
-    }
+    kana: defaultKanaSettings,
+    display: { type: DisplayType.ROMAJI, cards: 1, score: true },
+    hints: { enabled: true, quantity: HintQuantity.THREE },
+    lives: { enabled: false },
+    time: { timed: false, countdown: true, secondsPerQuestion: 10 }
 }
 
 export const HARDCORE: GameSettings = {
-    kana: {
-        display: { type: DisplayType.KANA, cards: 6, score: true },
-        kana: { hiragana: true, katakana: true, diagraphs: true },
-        hints: { enabled: false },
-        lives: { enabled: true, quantity: LifeQuantity.ONE },
-        time: { timed: false, countdown: true, secondsPerQuestion: 5 }
-    }
+    kana: { hiragana: true, katakana: true, diagraphs: true },
+    display: { type: DisplayType.KANA, cards: 6, score: true },
+    hints: { enabled: false },
+    lives: { enabled: true, quantity: LifeQuantity.ONE },
+    time: { timed: false, countdown: true, secondsPerQuestion: 5 }
 }

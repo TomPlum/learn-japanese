@@ -167,13 +167,11 @@ class KanaGameSettingsMenu extends Component<KanaGameSettingsMenuProps, KanaGame
     onConfirmation = () => {
         const { displaySettings, kanaSettings, hintSettings, lifeSettings, timeSettings } = this.state;
         this.props.onSubmit({
-            kana: {
-                display: displaySettings,
-                kana: kanaSettings,
-                hints: hintSettings,
-                lives: lifeSettings,
-                time: timeSettings
-            }
+            display: displaySettings,
+            kana: kanaSettings,
+            hints: hintSettings,
+            lives: lifeSettings,
+            time: timeSettings
         });
     }
 

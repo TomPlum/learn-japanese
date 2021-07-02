@@ -2,11 +2,11 @@ import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Topic from "../../types/Topic";
 import TopicSelectionMenu from "./TopicSelectionMenu";
-import { GameSettings } from "../../types/game/GameSettings";
+import { GameSettings, SessionSettings } from "../../types/game/GameSettings";
 import { AppMode } from "../../types/AppMode";
-import { LearningSessionSettings } from "../../types/learn/LearningSessionSettings";
 import ModeSelectionMenu from "../learn/ModeSelectionMenu";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
+import { LearningSessionSettings } from "../../types/learn/LearningSessionSettings";
 
 export interface GameTypeSettings {
     topic: Topic;
@@ -68,19 +68,20 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
                 key={topic.name}
                 topic={topic}
                 appMode={mode}
-                onStart={mode == AppMode.LEARN ? this.onStartLearning : this.onStartGame}
+                onStart={this.onStart}
             />
         );
     }
 
-    private onStartGame = (settings: GameSettings) => {
+    private onStart = (settings: SessionSettings) => {
         const { topic } = this.state;
-        this.props.onStartGame({ settings: settings, topic: topic });
-    }
+        const { mode, onStartGame, onStartLearn } = this.props;
+        if (mode === AppMode.LEARN) {
+            onStartLearn({ settings: settings as LearningSessionSettings, topic: topic });
+        } else {
+            onStartGame({ settings: settings as GameSettings, topic: topic});
+        }
 
-    private onStartLearning = (settings: LearningSessionSettings) => {
-        const { topic } = this.state;
-        this.props.onStartLearn({ settings: settings, topic: topic });
     }
 }
 

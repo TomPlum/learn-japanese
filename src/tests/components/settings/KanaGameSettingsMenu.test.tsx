@@ -8,13 +8,11 @@ let settings: GameSettings;
 
 beforeEach(() => {
    settings = {
-       kana: {
-           display: { cards: 1, type: DisplayType.ROMAJI, score: true },
-           hints: { enabled: true, quantity: 3 },
-           kana: { diagraphs: false, hiragana: true, katakana: false, quantity: 50 },
-           lives: { enabled: false, quantity: LifeQuantity.FIVE },
-           time: { countdown: false, timed: true }
-       }
+       kana: { diagraphs: false, hiragana: true, katakana: false, quantity: 50 },
+       display: { cards: 1, type: DisplayType.ROMAJI, score: true },
+       hints: { enabled: true, quantity: 3 },
+       lives: { enabled: false, quantity: LifeQuantity.FIVE },
+       time: { countdown: false, timed: true }
    };
 });
 
@@ -45,7 +43,7 @@ test('Changing the game mode to Kana and submitting should update the settings',
     const { confirm, kanaModeButton } = setup();
     fireEvent.click(kanaModeButton);
     fireEvent.click(confirm);
-    settings.kana!.display = { type: DisplayType.KANA, cards: 4, score: true }
+    settings.display = { type: DisplayType.KANA, cards: 4, score: true }
     expect(onSubmitHandler).toHaveBeenCalledWith(settings);
 });
 

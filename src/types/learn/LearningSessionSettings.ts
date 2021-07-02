@@ -1,9 +1,9 @@
 import { KanaSettings, SessionSettings } from "../game/GameSettings";
 import { KanjiSettings } from "../../repository/KanjiRepository";
 
-export interface LearnSettings extends SessionSettings { }
+export interface LearnSettings { }
 
-export interface LearningSessionSettings {
+export interface LearningSessionSettings extends SessionSettings {
     kana?: KanaSettings;
     calendar?: LearnCalendarSettings;
     kanji?: KanjiSettings;

@@ -3,13 +3,12 @@ import KanaDisplay, { KanaDisplayStyle } from "./KanaDisplay";
 import { Col, Form, Row } from "react-bootstrap";
 import RomajiInput from "./RomajiInput";
 import { Kana } from "../../types/kana/Kana";
-import { KanaQuestionProps } from "./KanaMemoryGame";
-import KanaQuestion from "./KanaQuestion";
+import { GameQuestionProps } from "./KanaMemoryGame";
+import GameQuestion from "./GameQuestion";
 import styles from "../../styles/sass/components/game/RomajiQuestion.module.scss";
 
-export interface RomajiQuestionProps extends KanaQuestionProps {
+export interface RomajiQuestionProps extends GameQuestionProps {
     kana: Kana;
-    hidden: boolean;
     className?: string;
     displayStyle?: KanaDisplayStyle;
 }
@@ -18,7 +17,7 @@ interface RomajiQuestionState {
     answer: string;
 }
 
-class RomajiQuestion extends KanaQuestion<RomajiQuestionProps, RomajiQuestionState> {
+class RomajiQuestion extends GameQuestion<RomajiQuestionProps, RomajiQuestionState> {
 
     private readonly display: React.RefObject<KanaDisplay>;
 

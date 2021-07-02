@@ -21,8 +21,8 @@ import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss"
 
 interface MainMenuPageState {
     loading: boolean;
-    gameSettings?: GameTypeSettings;
-    learnSettings?: LearnSessionSettings;
+    gameConfig?: GameTypeSettings;
+    learnConfig?: LearnSessionSettings;
     inResultsScreen: boolean;
     gameResult?: GameResult;
     learningResult?: LearningSessionResult;
@@ -41,8 +41,8 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
         super(props);
         this.state = {
             loading: false,
-            gameSettings: undefined,
-            learnSettings: undefined,
+            gameConfig: undefined,
+            learnConfig: undefined,
             inResultsScreen: false,
             gameResult: undefined,
             learningResult: undefined,
@@ -58,9 +58,9 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
     }
 
     render() {
-        const { loading, gameSettings, learnSettings, inResultsScreen, gameResult, learningResult, mode, sessionKey, learnData } = this.state;
+        const { loading, gameConfig, learnConfig, inResultsScreen, gameResult, learningResult, mode, sessionKey, learnData } = this.state;
 
-        const isInMenu = !gameSettings && !learnSettings && !inResultsScreen && !learningResult;
+        const isInMenu = !gameConfig && !learnConfig && !inResultsScreen && !learningResult;
 
         return (
             <div className={styles.wrapper}>
@@ -77,12 +77,12 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                         />
                     }
 
-                    {gameSettings && !inResultsScreen &&
+                    {gameConfig && !inResultsScreen &&
                         <KanaMemoryGame
                             key={sessionKey.value}
                             sessionKey={sessionKey.value}
-                            kana={new KanaRepository().read(gameSettings.settings.kana!.kana)}
-                            settings={gameSettings.settings.kana!}
+                            kana={new KanaRepository().read(gameConfig.settings.kana!)}
+                            settings={gameConfig.settings!}
                             onFinish={this.onGameFinish}
                         />
                     }
@@ -91,12 +91,12 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                         <GameResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
                     }
 
-                    {learnSettings && !inResultsScreen &&
+                    {learnConfig && !inResultsScreen &&
                         <Learn
                             key={sessionKey.value}
-                            data={learnData ?? new LearningDataRepository().read(learnSettings)}
+                            data={learnData ?? new LearningDataRepository().read(learnConfig)}
                             onFinish={this.onLearningFinish}
-                            card={learnSettings?.topic.cards!}
+                            card={learnConfig?.topic.cards!}
                         />
                     }
 
@@ -112,15 +112,15 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
         );
     }
 
-    private startGame = (settings: GameTypeSettings) => this.setState({ gameSettings: settings });
+    private startGame = (settings: GameTypeSettings) => this.setState({ gameConfig: settings });
 
-    private startLearning = (settings: LearnSessionSettings) => this.setState({ learnSettings: settings });
+    private startLearning = (settings: LearnSessionSettings) => this.setState({ learnConfig: settings });
 
     private onGameResultMenuClose = () => this.setState({ inResultsScreen: false, gameResult: undefined });
 
     private onLearningResultMenuClose = () => this.setState({
         learningResult: undefined,
-        learnSettings: undefined,
+        learnConfig: undefined,
         inResultsScreen: false,
         learnData: undefined
     });
@@ -128,7 +128,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
     private onGameFinish = (result: GameResult) => this.setState({
         inResultsScreen: true,
         gameResult: result,
-        gameSettings: undefined,
+        gameConfig: undefined,
         sessionKey: new SessionID()
     });
 
