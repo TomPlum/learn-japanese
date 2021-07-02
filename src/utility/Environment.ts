@@ -3,8 +3,11 @@ export class Environment {
         //Replace spaces with underscores.
         const underscores = name.replaceAll(" ", "_");
 
+        //Remove single quotes
+        const special = underscores.replaceAll("'", "");
+
         //Replace diacritical marks with their regular counterparts.
-        const diacritics = underscores.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const diacritics = special.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
         //Convert to uppercase.
         const casing = diacritics.toUpperCase();
