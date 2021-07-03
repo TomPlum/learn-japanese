@@ -259,6 +259,15 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                     />
                 );
             }
+            case DisplayType.MEANING: {
+                return (
+                    <LearnableMeaningQuestion
+                        data={currentQuestion}
+                        hidden={paused}
+                        isValid={this.handleAnswerValidity}
+                    />
+                );
+            }
         }
     }
 

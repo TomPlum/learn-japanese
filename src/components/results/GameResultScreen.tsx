@@ -30,7 +30,7 @@ class GameResultScreen extends Component<GameResultScreenProps> {
                 </Row>
 
                 <Row>
-                    <Feedback kana={result.wrongAnswers}/>
+                    <Feedback data={result.wrongAnswers}/>
                 </Row>
             </Container>
         );
