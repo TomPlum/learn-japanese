@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import KanaChoiceQuestion, { LearnableChoiceQuestionProps } from "../../../components/game/KanaChoiceQuestion";
-import { Kana } from "../../../types/kana/Kana";
-import KanaType from "../../../types/kana/KanaType";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
-import Arrays from "../../../utility/Arrays";
-import { getByTextWithElements } from "../../Queries";
+import KanaChoiceQuestion, { LearnableChoiceQuestionProps } from "../../../../components/game/questions/KanaChoiceQuestion";
+import { Kana } from "../../../../types/kana/Kana";
+import KanaType from "../../../../types/kana/KanaType";
+import { KanaColumn } from "../../../../types/kana/KanaColumn";
+import Arrays from "../../../../utility/Arrays";
+import { getByTextWithElements } from "../../../Queries";
 import React from "react";
 
 const isValidHandler = jest.fn();
