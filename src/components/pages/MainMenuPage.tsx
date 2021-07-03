@@ -1,5 +1,5 @@
 import { Component } from "react";
-import KanaMemoryGame from "../game/KanaMemoryGame";
+import MemoryGame from "../game/MemoryGame";
 import GameResult from "../../types/game/GameResult";
 import GameResultScreen from "../results/GameResultScreen";
 import LoadingSpinner from "../ui/LoadingSpinner";
@@ -78,7 +78,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                     }
 
                     {gameConfig && !inResultsScreen &&
-                        <KanaMemoryGame
+                        <MemoryGame
                             key={sessionKey.value}
                             sessionKey={sessionKey.value}
                             data={new KanaRepository().read(gameConfig.settings.kana!)}

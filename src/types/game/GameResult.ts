@@ -6,7 +6,7 @@ export default interface GameResult {
     success: boolean;
     duration?: string;
     livesRemaining: number;
-    totalKanaOffered: number;
+    totalQuestionsOffered: number;
     correctAnswers: Set<Learnable>;
     wrongAnswers: Learnable[];
 }

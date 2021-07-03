@@ -15,7 +15,7 @@ beforeEach(() => {
         correctAnswers: new Set<Kana>(),
         reason: FailureReason.NO_LIVES_REMAINING,
         duration: "00:25",
-        totalKanaOffered: 1,
+        totalQuestionsOffered: 1,
         livesRemaining: 0,
     };
 });

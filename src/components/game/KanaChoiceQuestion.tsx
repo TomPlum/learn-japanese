@@ -5,7 +5,7 @@ import { Learnable } from "../../types/learn/Learnable";
 import GameQuestion from "./GameQuestion";
 import KanaDisplay from "./KanaDisplay";
 import KanaQuestionBanner from "./KanaQuestionBanner";
-import { GameQuestionProps } from "./KanaMemoryGame";
+import { GameQuestionProps } from "./MemoryGame";
 import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/game/KanaChoiceQuestion.module.scss";
 
