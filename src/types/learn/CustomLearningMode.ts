@@ -1,6 +1,6 @@
 import { faVial } from "@fortawesome/free-solid-svg-icons";
 import React, { ComponentClass } from "react";
-import SessionMode from "../SessionMode";
+import SessionMode from "../session/SessionMode";
 
 export default class CustomLearningMode extends SessionMode {
     constructor(menu: React.FunctionComponent | ComponentClass<any>) {

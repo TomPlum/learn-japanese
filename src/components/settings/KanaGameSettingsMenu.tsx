@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../../types/game/GameSettings";
+import GameSettings, { DisplaySettings, GameSettingsBuilder, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../../types/session/GameSettings";
 import KanaSettingsForm from "./kana/KanaSettingsForm";
 import HintSettingsForm from "./kana/HintSettingsForm";
 import LifeSettingsForm from "./kana/LifeSettingsForm";
@@ -166,13 +166,14 @@ class KanaGameSettingsMenu extends Component<KanaGameSettingsMenuProps, KanaGame
 
     onConfirmation = () => {
         const { displaySettings, kanaSettings, hintSettings, lifeSettings, timeSettings } = this.state;
-        this.props.onSubmit({
-            display: displaySettings,
-            kana: kanaSettings,
-            hints: hintSettings,
-            lives: lifeSettings,
-            time: timeSettings
-        });
+        const settings = new GameSettingsBuilder()
+            .withDisplaySettings(displaySettings)
+            .withKanaSettings(kanaSettings)
+            .withHintSettings(hintSettings)
+            .withLifeSettings(lifeSettings)
+            .withTimeSettings(timeSettings)
+            .build();
+        this.props.onSubmit(settings);
     }
 
     onReset = () => {

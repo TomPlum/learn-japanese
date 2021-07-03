@@ -1,4 +1,4 @@
-import SessionMode from "./SessionMode";
+import SessionMode from "./session/SessionMode";
 
 export interface MenuModes {
     getModes(): SessionMode[];

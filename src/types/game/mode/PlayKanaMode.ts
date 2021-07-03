@@ -1,7 +1,7 @@
 import { faFire, faFont, faGraduationCap, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
 import { HARDCORE, KANA, RELAXED, ROMAJI, TIME_ATTACK } from "../../../data/GameModePresets";
-import SessionMode from "../../SessionMode";
+import SessionMode from "../../session/SessionMode";
 import { MenuModes } from "../../MenuModes";
 
 export default class PlayKanaMode implements MenuModes {

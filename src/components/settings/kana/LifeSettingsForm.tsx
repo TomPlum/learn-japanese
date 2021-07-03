@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LifeSettings } from "../../../types/game/GameSettings";
+import { LifeSettings } from "../../../types/session/GameSettings";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import LivesSelector from "../../ui/LivesSelector";
 import { Col, Form, Row } from "react-bootstrap";

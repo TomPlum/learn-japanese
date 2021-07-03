@@ -1,5 +1,5 @@
 import { faBaby, faRuler, faSort, faSortNumericDown, faStopwatch, faTimes } from "@fortawesome/free-solid-svg-icons";
-import SessionMode from "../../SessionMode";
+import SessionMode from "../../session/SessionMode";
 import { MenuModes } from "../../MenuModes";
 
 export default class LearnNumbersMode implements MenuModes {

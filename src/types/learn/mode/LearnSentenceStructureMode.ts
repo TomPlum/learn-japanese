@@ -1,5 +1,5 @@
 import { faComment, faCube, faExclamation, faFire, faRunning } from "@fortawesome/free-solid-svg-icons";
-import SessionMode from "../../SessionMode";
+import SessionMode from "../../session/SessionMode";
 import { MenuModes } from "../../MenuModes";
 
 export default class LearnSentenceStructureMode implements MenuModes {

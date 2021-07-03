@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Topic from "../../types/Topic";
 import TopicSelectionMenu from "./TopicSelectionMenu";
-import { GameSettings, SessionSettings } from "../../types/game/GameSettings";
+import GameSettings, { SessionSettings } from "../../types/session/GameSettings";
 import { AppMode } from "../../types/AppMode";
 import ModeSelectionMenu from "../learn/ModeSelectionMenu";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";

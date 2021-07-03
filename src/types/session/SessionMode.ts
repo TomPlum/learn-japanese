@@ -1,5 +1,5 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { SessionSettings } from "./game/GameSettings";
+import { SessionSettings } from "./GameSettings";
 import React from "react";
 
 class SessionMode {

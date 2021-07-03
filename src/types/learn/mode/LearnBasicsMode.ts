@@ -1,6 +1,6 @@
 import { faPalette, faCat, faCompass, faCloudSunRain, faChild, faHandPaper } from "@fortawesome/free-solid-svg-icons";
 import { MenuModes } from "../../MenuModes";
-import SessionMode from "../../SessionMode";
+import SessionMode from "../../session/SessionMode";
 
 export default class LearnBasicsMode implements MenuModes {
     getModes(): SessionMode[] {

@@ -1,5 +1,5 @@
 import { faVial } from "@fortawesome/free-solid-svg-icons";
-import SessionMode from "../../SessionMode";
+import SessionMode from "../../session/SessionMode";
 import { MenuModes } from "../../MenuModes";
 
 export default class LearnKanaMode implements MenuModes {

@@ -9,6 +9,7 @@ import Arrays from "../../../utility/Arrays";
 import { FailureReason } from "../../../types/game/FailureReason";
 import { Environment } from "../../../utility/Environment";
 import { v4 } from "uuid";
+import { GameSettingsBuilder } from "../../../types/session/GameSettings";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -31,13 +32,14 @@ let props: MemoryGameProps;
 beforeEach(() => {
     props = {
         data: [a, i, u, e, o],
-        settings: {
-            display: { type: DisplayType.ROMAJI, cards: 1, score: true },
-            kana: { hiragana: true },
-            hints: { enabled: true, quantity: 999 },
-            lives: { enabled: false },
-            time: { timed: false, countdown: false }
-        },
+        settings: new GameSettingsBuilder()
+            .withDisplaySettings({ type: DisplayType.ROMAJI, cards: 1, score: true })
+            .withKanaSettings({ hiragana: true })
+            .withHintSettings({ enabled: true, quantity: 999 })
+            .withLifeSettings({ enabled: false })
+            .withTimeSettings({ timed: false, countdown: false })
+            .build()
+        ,
         onFinish: onFinishHandler,
         sessionKey: v4()
     };
@@ -107,7 +109,8 @@ test('Answering correctly when there are kana remaining should show the next kan
 });
 
 test('Answering correctly after having used a hint that question should reduce the hint quantity by 1', () => {
-    props.settings.hints = { enabled: true, quantity: 5 }
+    props.settings = new GameSettingsBuilder().withHintSettings({ enabled: true, quantity: 5 }).build();
+
     const { submit, hint } = setup();
 
     fireEvent.click(hint);
@@ -118,7 +121,8 @@ test('Answering correctly after having used a hint that question should reduce t
 });
 
 test('Answering correctly without using a hint that question should not reduce the hint quantity', () => {
-    props.settings.hints = { enabled: true, quantity: 5 }
+    props.settings = new GameSettingsBuilder().withHintSettings({ enabled: true, quantity: 5 }).build();
+
     const { submit } = setup();
 
     fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
@@ -252,7 +256,8 @@ test('Answering correctly on a streak of 50 should grant a 4x multiplier', () =>
 });
 
 test('Answering all questions correctly should stop the timer', () => {
-    props.settings.time = { timed: true, countdown: false };
+    props.settings = new GameSettingsBuilder().withTimeSettings({ timed: true, countdown: false }).build();
+
     const { submit } = setup();
 
     //Answer 1st correctly
@@ -286,8 +291,12 @@ test('Answering all questions correctly should stop the timer', () => {
 });
 
 test('Answering all questions correctly should stop call the onFinish even handler with the game result', () => {
-    props.settings.time = { timed: true, countdown: false };
-    props.settings.lives = { enabled: true, quantity: 5 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: true, countdown: false })
+        .withLifeSettings({ enabled: true, quantity: 5 })
+        .build();
+
     const { submit } = setup();
 
     //Answer 1st correctly
@@ -319,7 +328,7 @@ test('Answering all questions correctly should stop call the onFinish even handl
         reason: undefined,
         success: true,
         livesRemaining: 5,
-        totalKanaOffered: 5,
+        totalQuestionsOffered: 5,
         correctAnswers: new Set([a, i, u, e, o]),
         wrongAnswers: [],
         duration: "00:30"
@@ -327,8 +336,12 @@ test('Answering all questions correctly should stop call the onFinish even handl
 });
 
 test('Answering all questions correctly should call the onFinish even handler with undefined time if no timer', () => {
-    props.settings.time = { timed: false, countdown: false };
-    props.settings.lives = { enabled: true, quantity: 5 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: false })
+        .withLifeSettings({ enabled: true, quantity: 5 })
+        .build();
+
     const { submit } = setup();
 
     //Answer 1st correctly
@@ -355,7 +368,7 @@ test('Answering all questions correctly should call the onFinish even handler wi
         reason: undefined,
         success: true,
         livesRemaining: 5,
-        totalKanaOffered: 5,
+        totalQuestionsOffered: 5,
         correctAnswers: new Set([a, i, u, e, o]),
         wrongAnswers: [],
         duration: undefined
@@ -399,8 +412,12 @@ test('Answering incorrectly when on a streak should reset it', () => {
 });
 
 test('Answering incorrectly with 1 life remaining should call the onFinish event handler', () => {
-    props.settings.time = { timed: true, countdown: false };
-    props.settings.lives = { enabled: true, quantity: 1 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: true, countdown: false })
+        .withLifeSettings({ enabled: true, quantity: 1 })
+        .build();
+
     const { submit } = setup();
 
     //Advance the time, lets assume it took 12 seconds
@@ -422,7 +439,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
         reason: FailureReason.NO_LIVES_REMAINING,
         success: false,
         livesRemaining: 0,
-        totalKanaOffered: 5,
+        totalQuestionsOffered: 5,
         correctAnswers: new Set([a, i]),
         wrongAnswers: [u],
         duration: "00:12"
@@ -430,8 +447,12 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
 });
 
 test('Answering incorrectly with 1 life remaining should call the onFinish event handler with undefined duration if no timer', () => {
-    props.settings.time = { timed: false, countdown: false };
-    props.settings.lives = { enabled: true, quantity: 1 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: false })
+        .withLifeSettings({ enabled: true, quantity: 1 })
+        .build();
+
     const { submit } = setup();
 
     //Answer 1st correctly
@@ -450,7 +471,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
         reason: FailureReason.NO_LIVES_REMAINING,
         success: false,
         livesRemaining: 0,
-        totalKanaOffered: 5,
+        totalQuestionsOffered: 5,
         correctAnswers: new Set([a, i]),
         wrongAnswers: [u],
         duration: undefined
@@ -458,7 +479,11 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
 });
 
 test('Answering incorrectly when lives are enabled should reduce the lives by 1', () => {
-    props.settings.lives = { enabled: true, quantity: 5 }
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withLifeSettings({ enabled: true, quantity: 5 })
+        .build();
+
     const { submit } = setup();
 
     expect(screen.getByText('5')).toBeInTheDocument();
@@ -469,32 +494,36 @@ test('Answering incorrectly when lives are enabled should reduce the lives by 1'
 });
 
 test('Enabling lives should render the LifeDisplay', () => {
-    props.settings.lives = { enabled: true, quantity: 10 };
+    props.settings = new GameSettingsBuilder().fromExisting(props.settings).withLifeSettings({ enabled: true, quantity: 10 }).build();
     setup();
     expect(screen.getByTitle('Lives')).toBeInTheDocument();
     expect(screen.getByText('10')).toBeInTheDocument();
 });
 
 test('Disabling lives should not render the LifeDisplay', () => {
-    props.settings.lives = { enabled: false };
+    props.settings = new GameSettingsBuilder().fromExisting(props.settings).withLifeSettings({ enabled: false }).build();
     setup();
     expect(screen.queryByTitle('Lives')).not.toBeInTheDocument();
 });
 
 test('Enabling hints should render the HintButton in an enabled state', () => {
-    props.settings.hints = { enabled: true };
+    props.settings = new GameSettingsBuilder().fromExisting(props.settings).withHintSettings({ enabled: true }).build();
     const { hint } = setup();
     expect(hint).not.toBeDisabled();
 });
 
 test('Disabling hints should render the HintButton in a disabled state', () => {
-    props.settings.hints = { enabled: false };
+    props.settings = new GameSettingsBuilder().withHintSettings({ enabled: false }).build();
     const { hint } = setup();
     expect(hint).toBeDisabled();
 });
 
 test('Using the hint button twice in the same kana shouldn\'t use another hint', async () => {
-    props.settings.hints = { enabled: true, quantity: 3 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withHintSettings({ enabled: true, quantity: 3 })
+        .build();
+
     const { hint } = setup();
 
     fireEvent.click(hint);
@@ -509,47 +538,76 @@ test('Using the hint button twice in the same kana shouldn\'t use another hint',
 
 
 test('Enabling the timer should render the timer', () => {
-    props.settings.time = { timed: true, countdown: false };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: true, countdown: false })
+        .build();
     setup();
     expect(screen.getByTitle('Pause')).toBeInTheDocument();
     expect(screen.queryByText('00:00')).toBeInTheDocument();
 });
 
 test('Pausing the timer when it is enabled should disable the rōmaji input', () => {
-    props.settings.time = { timed: true, countdown: false };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: true, countdown: false })
+        .build();
+
     setup();
     fireEvent.click(screen.getByTitle('Pause'));
     expect(screen.getByPlaceholderText('Paused')).toBeDisabled()
 });
 
 test('Disabling the timer should not render the timer', () => {
-    props.settings.time = { timed: false, countdown: false };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: false })
+        .build();
+
     setup();
+
     expect(screen.queryByTitle('Pause')).not.toBeInTheDocument();
     expect(screen.queryByText('00:00')).not.toBeInTheDocument();
 });
 
 test('Enabling the countdown should render the countdown', () => {
-    props.settings.time = { timed: false, countdown: true };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: true })
+        .build();
+
     setup();
+
     expect(screen.getByTitle('Time Remaining')).toBeInTheDocument();
 });
 
 test('Enabling the countdown with 10 seconds should render the countdown starting at 10', () => {
-    props.settings.time = { timed: false, countdown: true, secondsPerQuestion: 10 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 10 })
+        .build();
+
     setup();
+
     expect(screen.getByTitle('Time Remaining')).toBeInTheDocument();
     expect(screen.getByText('10')).toBeInTheDocument();
 });
 
 test('Disabling the countdown should not render the countdown', () => {
-    props.settings.time = { timed: false, countdown: false };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: false })
+        .build();
     setup();
     expect(screen.queryByTitle('Time Remaining')).not.toBeInTheDocument();
 });
 
 test('Failing to correctly answer the question before the countdown finishes should present the next kana', () => {
-    props.settings.time = { timed: false, countdown: true, secondsPerQuestion: 5 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+        .build();
+
     setup();
 
     expect(screen.getByText('あ')).toBeInTheDocument();
@@ -558,8 +616,12 @@ test('Failing to correctly answer the question before the countdown finishes sho
 });
 
 test('Failing to correctly answer the question before the countdown finishes should subtract a life if enabled', () => {
-    props.settings.time = { timed: false, countdown: true, secondsPerQuestion: 5 };
-    props.settings.lives = { enabled: true, quantity: 10 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+        .withLifeSettings({ enabled: true, quantity: 10 })
+        .build();
+
     setup();
 
     expect(screen.getByText('10')).toBeInTheDocument();
@@ -568,7 +630,11 @@ test('Failing to correctly answer the question before the countdown finishes sho
 });
 
 test('Failing to correctly answer the question before the countdown finishes should reset the countdown', () => {
-    props.settings.time = { timed: false, countdown: true, secondsPerQuestion: 5 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+        .build();
+
     setup();
 
     expect(screen.getByText('5')).toBeInTheDocument();
@@ -579,8 +645,12 @@ test('Failing to correctly answer the question before the countdown finishes sho
 });
 
 test('Failing to correctly answer the question before the countdown finishes should reduce the hints if one was used', () => {
-    props.settings.time = { timed: false, countdown: true, secondsPerQuestion: 5 };
-    props.settings.hints = { enabled: true, quantity: 5 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+        .withHintSettings({ enabled: true, quantity: 5 })
+        .build();
+
     const { hint } = setup();
 
     expect(screen.getByText('(5)')).toBeInTheDocument();
@@ -590,8 +660,12 @@ test('Failing to correctly answer the question before the countdown finishes sho
 });
 
 test('Failing to correctly answer the question before the countdown finishes should not reduce the hints if they weren\'t used', () => {
-    props.settings.time = { timed: false, countdown: true, secondsPerQuestion: 5 };
-    props.settings.hints = { enabled: true, quantity: 5 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+        .withHintSettings({ enabled: true, quantity: 5 })
+        .build();
+
     setup();
 
     expect(screen.getByText('(5)')).toBeInTheDocument();
@@ -600,14 +674,22 @@ test('Failing to correctly answer the question before the countdown finishes sho
 });
 
 test('Setting the display type as \'Single Kana\' should render a RomanjiQuestion', () => {
-    props.settings.display = { type: DisplayType.ROMAJI, cards: 1, score: true };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withDisplaySettings({ type: DisplayType.ROMAJI, cards: 1, score: true })
+        .build();
     setup();
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
 test('Setting the display type as \'Multiple Cards\' should render a KanaChoiceQuestion', () => {
-    props.settings.display = { type: DisplayType.KANA, cards: 2, score: true };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withDisplaySettings({ type: DisplayType.KANA, cards: 2, score: true })
+        .build();
+
     setup();
+
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('あ')).toBeInTheDocument();
 
@@ -618,13 +700,19 @@ test('Setting the display type as \'Multiple Cards\' should render a KanaChoiceQ
 });
 
 test('Setting the display settings score property to true should render the score', () => {
-    props.settings.display = { type: DisplayType.KANA, cards: 2, score: true };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withDisplaySettings({ type: DisplayType.KANA, cards: 2, score: true })
+        .build();
     setup();
     expect(screen.getByText('0')).toBeInTheDocument();
 });
 
 test('Setting the display settings score property to false should not render the score', () => {
-    props.settings.display = { type: DisplayType.KANA, cards: 2, score: false };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withDisplaySettings({ type: DisplayType.KANA, cards: 2, score: false })
+        .build();
     setup();
     expect(screen.queryByText('0')).not.toBeInTheDocument();
 });
@@ -655,7 +743,7 @@ test('Clicking the \'Yes\' button from the quit confirmation modal should call t
         reason: FailureReason.QUIT,
         success: false,
         livesRemaining: 0,
-        totalKanaOffered: 5,
+        totalQuestionsOffered: 5,
         duration: undefined,
         correctAnswers: new Set(),
         wrongAnswers: [a],
@@ -682,7 +770,10 @@ test('Clicking the skip button should advance to the next question', () => {
 });
 
 test('Clicking the skip button should remove a life if they are enabled', () => {
-    props.settings.lives = { enabled: true, quantity: 5 };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withLifeSettings({ enabled: true, quantity: 5 })
+        .build();
     const { skip } = setup();
     expect(screen.getByText('5')).toBeInTheDocument();
 
@@ -691,7 +782,10 @@ test('Clicking the skip button should remove a life if they are enabled', () => 
 });
 
 test('Pausing should disable the skip button', () => {
-    props.settings.time = { timed: true, countdown: false };
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings({ timed: true, countdown: false })
+        .build();
     const { skip } = setup();
     expect(skip).not.toBeDisabled();
 

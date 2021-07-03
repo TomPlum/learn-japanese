@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { TimeSettings } from "../../../types/game/GameSettings";
+import { TimeSettings } from "../../../types/session/GameSettings";
 import { Col, Form, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
 

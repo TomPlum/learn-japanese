@@ -23,11 +23,11 @@ import SkipButton from "../ui/buttons/SkipButton";
 import ConfirmModal from "../ui/ConfirmModal";
 import { Environment } from "../../utility/Environment";
 import ScoreDisplay from "../ui/ScoreDisplay";
-import { GameSettings } from "../../types/game/GameSettings";
 import LearnableMeaningQuestion from "./questions/LearnableMeaningQuestion";
 import { Learnable } from "../../types/learn/Learnable";
 import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/game/MemoryGame.module.scss";
+import GameSettings from "../../types/session/GameSettings";
 
 export interface GameQuestionProps {
     hidden: boolean;

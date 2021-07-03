@@ -3,7 +3,7 @@ import hiragana from "../data/Hiragana";
 import katakana from "../data/Katakana";
 import KanaType from "../types/kana/KanaType";
 import { KanaData } from "../data/DataTypes";
-import { KanaSettings } from "../types/game/GameSettings";
+import { KanaSettings } from "../types/session/GameSettings";
 import DiagraphFilter from "../filters/kana/DiagraphFilter";
 import FilterChain from "../filters/FilterChain";
 import QuantityFilter from "../filters/kana/QuantityFilter";

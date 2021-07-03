@@ -7,7 +7,7 @@ import { KanaRepository } from "../../repository/KanaRepository";
 import ControlsMenu from "../layout/ControlsMenu";
 import SettingsMenu, { GameTypeSettings, LearnSessionSettings } from "../layout/SettingsMenu";
 import { AppMode, fromString } from "../../types/AppMode";
-import SessionID from "../../types/SessionID";
+import SessionID from "../../types/session/SessionID";
 import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import LearningResultScreen from "../results/LearningResultScreen";
 import Arrays from "../../utility/Arrays";

@@ -3,7 +3,7 @@ import { KyoikuGrade } from "../../kanji/KyoikuGrade";
 import CustomLearningMode from "../CustomLearningMode";
 import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
 import { MenuModes } from "../../MenuModes";
-import SessionMode from "../../SessionMode";
+import SessionMode from "../../session/SessionMode";
 
 export default class LearnKanjiMode implements MenuModes {
     getModes(): SessionMode[] {
