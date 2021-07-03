@@ -31,6 +31,27 @@ export class Kana extends Learnable {
         }
     }
 
+    public getHint(): string {
+        if (this.column === KanaColumn.OTHER) {
+            return "This kana is exceptional. It is not a consonant nor a vowel."
+        }
+
+        let message: string;
+        const diacritical = " Also, notice the diacritical mark.";
+
+        if (this.isDiagraph()) {
+            message = "Diagraphs usually drop the 1st kana's 2nd letter when transcribed."
+        } else {
+            message = "This kana is from the '" + this.column + "' column in the " + this.type + " syllabary.";
+        }
+
+        return message + (this.isDiacritical ? diacritical : "");
+    }
+
+    public getBaseScore(): number {
+        return this.isDiagraph() ? 150 : 100;
+    }
+
     get code(): string {
         return this._code;
     }

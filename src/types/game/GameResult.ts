@@ -1,5 +1,5 @@
-import { Kana } from "../kana/Kana";
 import { FailureReason } from "./FailureReason";
+import { Learnable } from "../learn/Learnable";
 
 export default interface GameResult {
     reason?: FailureReason;
@@ -7,6 +7,6 @@ export default interface GameResult {
     duration?: string;
     livesRemaining: number;
     totalKanaOffered: number;
-    correctAnswers: Set<Kana>;
-    wrongAnswers: Kana[];
+    correctAnswers: Set<Learnable>;
+    wrongAnswers: Learnable[];
 }

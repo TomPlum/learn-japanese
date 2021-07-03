@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Kana } from "../../types/kana/Kana";
 import { ButtonGroup, Col, Container, Row } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import Timer from "./Timer";
@@ -26,6 +25,9 @@ import { Environment } from "../../utility/Environment";
 import ScoreDisplay from "../ui/ScoreDisplay";
 import styles from "../../styles/sass/components/game/KanaMemoryGame.module.scss";
 import { GameSettings } from "../../types/game/GameSettings";
+import LearnableMeaningQuestion from "./LearnableMeaningQuestion";
+import { Learnable } from "../../types/learn/Learnable";
+import { Kana } from "../../types/kana/Kana";
 
 export interface GameQuestionProps {
     hidden: boolean;
@@ -33,18 +35,18 @@ export interface GameQuestionProps {
 }
 
 export interface KanaMemoryGameProps {
-    kana: Kana[];
+    data: Learnable[];
     settings: GameSettings;
     onFinish: (result: GameResult) => void;
     sessionKey?: string;
 }
 
 interface KanaMemoryGameState {
-    currentKana: Kana;
-    remainingKana: Kana[];
-    correctAnswers: Set<Kana>;
-    wrongAnswers: Kana[];
-    hasExhaustedKana: boolean;
+    currentQuestion: Learnable;
+    remainingQuestions: Learnable[];
+    correctAnswers: Set<Learnable>;
+    wrongAnswers: Learnable[];
+    hasExhaustedQuestions: boolean;
     paused: boolean;
     lives: number;
     failedToAnswer: number;
@@ -68,16 +70,16 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
         this.countdown = React.createRef();
         this.question = React.createRef();
 
-        const { settings, kana } = this.props;
+        const { settings, data } = this.props;
 
-        const [firstKana, remainingKana] = RandomNumberGenerator.getRandomObject(kana);
+        const [firstKana, remainingKana] = RandomNumberGenerator.getRandomObject(data);
 
         this.state = {
-            currentKana: firstKana,
-            remainingKana: remainingKana,
-            correctAnswers: new Set<Kana>(),
+            currentQuestion: firstKana,
+            remainingQuestions: remainingKana,
+            correctAnswers: new Set<Learnable>(),
             wrongAnswers: [],
-            hasExhaustedKana: false,
+            hasExhaustedQuestions: false,
             paused: false,
             lives: settings.lives.quantity?.valueOf() ?? LifeQuantity.ZERO,
             failedToAnswer: 0,
@@ -92,14 +94,14 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
 
     componentDidUpdate() {
         const { lives, correctAnswers, wrongAnswers} = this.state
-        const { kana, settings, onFinish } = this.props;
+        const { data, settings, onFinish } = this.props;
 
         if (settings.lives.enabled && lives === 0) {
             onFinish({
                 reason: FailureReason.NO_LIVES_REMAINING,
                 success: false,
                 livesRemaining: 0,
-                totalKanaOffered: kana.length,
+                totalKanaOffered: data.length,
                 correctAnswers: correctAnswers,
                 wrongAnswers: wrongAnswers,
                 duration: this.timer.current?.getCurrentTime() ?? undefined
@@ -116,17 +118,19 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     render() {
-        const { hasExhaustedKana, lives, remainingKana, hasValidAnswer, paused, hints, currentKana, isQuitting, score, streak } = this.state;
-        const { kana, settings } = this.props;
+        const { hasExhaustedQuestions, lives, remainingQuestions, hasValidAnswer, paused, hints, currentQuestion, isQuitting, score, streak } = this.state;
+        const { data, settings } = this.props;
 
         return (
             <Container className={styles.wrapper}>
-                {isQuitting && <ConfirmModal
-                    title={Environment.variable("QUIT_TITLE")}
-                    body={Environment.variable("QUIT_BODY")}
-                    onConfirm={this.onQuit}
-                    onDismiss={this.onDismissQuitModal}
-                />}
+                {isQuitting && (
+                    <ConfirmModal
+                        title={Environment.variable("QUIT_TITLE")}
+                        body={Environment.variable("QUIT_BODY")}
+                        onConfirm={this.onQuit}
+                        onDismiss={this.onDismissQuitModal}
+                    />
+                )}
 
                 <Row noGutters className={styles.header}>
                     <Col xs={12}>
@@ -136,9 +140,9 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                             </Col>
                             <Col className={styles.progressWrapper}>
                                 <SessionProgressBar
-                                    inProgress={!hasExhaustedKana && !paused}
-                                    quantity={kana.length}
-                                    remaining={remainingKana.length}
+                                    inProgress={!hasExhaustedQuestions && !paused}
+                                    quantity={data.length}
+                                    remaining={remainingQuestions.length}
                                     className={styles.progress}
                                     streak={streak}
                                 />
@@ -147,11 +151,22 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                     </Col>
 
                     <Col>
-                        {settings.display.score && <ScoreDisplay value={score} streak={streak} className={styles.score} /> }
+                        {settings.display.score &&
+                            <ScoreDisplay
+                                value={score}
+                                streak={streak}
+                                className={styles.score}
+                            />
+                        }
                     </Col>
 
                     <Col className={styles.lifeDisplayContainer}>
-                        {settings.lives.enabled && <LifeDisplay hearts={lives} className={styles.lives} />}
+                        {settings.lives.enabled &&
+                            <LifeDisplay
+                                hearts={lives}
+                                className={styles.lives}
+                            />
+                        }
                     </Col>
 
                     <Col>
@@ -179,18 +194,20 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
                     <Col md={5} xs={4} className={styles.footerLeftCol}>
                         <SkipButton onClick={this.handleSkip} className={styles.skip} disabled={paused} />
                     </Col>
+
                    <Col md={7} xs={8} className={styles.footerRightCol}>
                        <ButtonGroup className={styles.buttonGroup}>
                            <HintButton
-                               kana={currentKana}
+                               data={currentQuestion}
                                remaining={hints}
                                totalQuantity={settings.hints.quantity?.valueOf() ?? 0}
-                               key={currentKana.code}
+                               key={currentQuestion.getKana().join("-")}
                                title="Get a Hint"
                                disabled={paused || !settings.hints.enabled}
                                className={styles.hint}
                                onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
                            />
+
                            <SubmitButton
                                onClick={this.answerQuestion}
                                disabled={!hasValidAnswer || paused}
@@ -204,15 +221,15 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     private getQuestion = () => {
-        const { settings, kana } = this.props;
-        const { currentKana, paused } = this.state;
+        const { settings, data } = this.props;
+        const { currentQuestion, paused } = this.state;
 
         switch (settings.display.type) {
             case DisplayType.ROMAJI: {
                 return (
                     <RomajiQuestion
-                        key={currentKana.code}
-                        kana={currentKana}
+                        key={(currentQuestion as Kana).code}
+                        kana={currentQuestion as Kana} //TODO: Refactor RomajiQuestion so it takes Learnable. It displays some field and you enter romaji
                         hidden={paused}
                         className={styles.question}
                         displayStyle={{ character: { className: styles.romajiDisplay } }}
@@ -223,17 +240,18 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
             }
             case DisplayType.KANA: {
                 const chain = new FilterChain<Kana>();
+                const kana = currentQuestion as Kana;
 
-                chain.addFilter(new DiagraphFilter(currentKana.isDiagraph()));
-                chain.addFilter(new KanaTypeFilter(currentKana.type, true));
-                chain.addFilter(new ExclusionFilter(currentKana));
+                chain.addFilter(new DiagraphFilter(kana.isDiagraph()));
+                chain.addFilter(new KanaTypeFilter(kana.type, true));
+                chain.addFilter(new ExclusionFilter(kana));
 
-                const wrong = Arrays.getRandomElements(chain.execute(kana), settings.display.cards - 1);
+                const wrong = Arrays.getRandomElements(chain.execute(data as Kana[]), settings.display.cards - 1);
 
                 return (
                     <KanaChoiceQuestion
-                        key={currentKana.code}
-                        expected={currentKana}
+                        key={kana.code}
+                        expected={kana}
                         wrong={wrong}
                         hidden={paused}
                         isValid={this.handleAnswerValidity}
@@ -245,22 +263,22 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     answerQuestion = () => {
-        const { currentKana, correctAnswers, wrongAnswers, remainingKana, lives } = this.state;
-        const { settings, kana } = this.props;
+        const { currentQuestion, correctAnswers, wrongAnswers, remainingQuestions, lives } = this.state;
+        const { settings, data } = this.props;
 
         if (this.question.current?.isCorrect()) {
             //Add the current kana to the correct answers set.
-            this.setState({ correctAnswers: correctAnswers.add(currentKana)});
+            this.setState({ correctAnswers: correctAnswers.add(currentQuestion)});
 
-            if (remainingKana.length === 0) {
+            if (remainingQuestions.length === 0) {
                 //If we're out of kana, stop the timer and let the component know the pool has been exhausted.
                 this.timer.current?.stop();
-                this.setState({ hasExhaustedKana: true, paused: false });
+                this.setState({ hasExhaustedQuestions: true, paused: false });
                 this.props.onFinish({
                     reason: undefined,
                     success: true,
                     livesRemaining: lives,
-                    totalKanaOffered: kana.length,
+                    totalKanaOffered: data.length,
                     correctAnswers: correctAnswers,
                     wrongAnswers: wrongAnswers,
                     duration: this.timer.current?.getCurrentTime() ?? undefined
@@ -272,7 +290,7 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
             //If the question was answered incorrectly, update the lives and wrong answer pool.
             this.setState({
                 lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives,
-                wrongAnswers: wrongAnswers.concat(currentKana),
+                wrongAnswers: wrongAnswers.concat(currentQuestion),
                 streak: 0
             });
         }
@@ -281,15 +299,15 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     reset = () => {
-        const [nextKana, remainingKana] = RandomNumberGenerator.getRandomObject(this.props.kana);
+        const [nextKana, remainingKana] = RandomNumberGenerator.getRandomObject(this.props.data);
 
         this.setState({
-            currentKana: nextKana,
-            remainingKana: remainingKana,
-            correctAnswers: new Set<Kana>(),
+            currentQuestion: nextKana,
+            remainingQuestions: remainingKana,
+            correctAnswers: new Set<Learnable>(),
             wrongAnswers: [],
             paused: false,
-            hasExhaustedKana: false,
+            hasExhaustedQuestions: false,
             hasValidAnswer: false,
             hints: this.props.settings.hints.quantity?.valueOf() ?? 0,
             hasUsedHintThisQuestion: false,
@@ -301,18 +319,18 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     private advanceNextQuestion() {
-        const { remainingKana, hasUsedHintThisQuestion, hints, streak } = this.state;
+        const { remainingQuestions, hasUsedHintThisQuestion, hints, streak } = this.state;
 
         //If we're being timed per kana, reset the timer.
         this.countdown.current?.reset();
 
         //Pick a random remaining kana and remove it from the pool.
-        const [nextKana, nextRemainingKana] = RandomNumberGenerator.getRandomObject(remainingKana);
+        const [nextKana, nextRemainingKana] = RandomNumberGenerator.getRandomObject(remainingQuestions);
 
         //Update the next kana to be displayed and the remaining kana with one less.
         this.setState({
-            currentKana: nextKana,
-            remainingKana: nextRemainingKana,
+            currentQuestion: nextKana,
+            remainingQuestions: nextRemainingKana,
             hasUsedHintThisQuestion: false,
             hints: hasUsedHintThisQuestion ? hints - 1 : hints,
             score: this.getScore(),
@@ -326,28 +344,28 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
 
     private handleSkip = () => {
         const { settings } = this.props;
-        const { wrongAnswers, lives, currentKana, failedToAnswer } = this.state;
+        const { wrongAnswers, lives, currentQuestion, failedToAnswer } = this.state;
         this.setState({
             lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives,
-            wrongAnswers: wrongAnswers.concat(currentKana),
+            wrongAnswers: wrongAnswers.concat(currentQuestion),
             failedToAnswer: failedToAnswer + 1
         });
         this.advanceNextQuestion();
     }
 
     private countDownTimeElapsed = () => {
-        const { lives, wrongAnswers, currentKana, remainingKana, failedToAnswer, hasUsedHintThisQuestion, hints } = this.state;
+        const { lives, wrongAnswers, currentQuestion, remainingQuestions, failedToAnswer, hasUsedHintThisQuestion, hints } = this.state;
         //this.kanaDisplay.current?.notifyIncorrect(); TODO: Can we notify the question components of incorrectness when timer runs out?
         this.countdown.current?.reset();
 
         //Pick a random remaining kana and remove it from the pool.
-        const [nextKana, nextRemainingKana] = RandomNumberGenerator.getRandomObject(remainingKana);
+        const [nextKana, nextRemainingKana] = RandomNumberGenerator.getRandomObject(remainingQuestions);
 
         this.setState({
-            currentKana: nextKana,
-            remainingKana: nextRemainingKana,
+            currentQuestion: nextKana,
+            remainingQuestions: nextRemainingKana,
             lives: this.props.settings.lives.enabled ? lives - 1 : lives,
-            wrongAnswers: wrongAnswers.concat(currentKana),
+            wrongAnswers: wrongAnswers.concat(currentQuestion),
             failedToAnswer: failedToAnswer + 1,
             hasUsedHintThisQuestion: false,
             hints: hasUsedHintThisQuestion ? hints - 1 : hints
@@ -355,17 +373,17 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     }
 
     private onQuit = () => {
-        const { lives, correctAnswers, wrongAnswers, currentKana } = this.state
-        const { kana, onFinish } = this.props;
+        const { lives, correctAnswers, wrongAnswers, currentQuestion } = this.state
+        const { data, onFinish } = this.props;
 
         onFinish({
             reason: FailureReason.QUIT,
             success: false,
             livesRemaining: lives,
-            totalKanaOffered: kana.length,
+            totalKanaOffered: data.length,
             duration: this.timer?.current?.getCurrentTime(),
             correctAnswers: correctAnswers,
-            wrongAnswers: wrongAnswers.concat(currentKana),
+            wrongAnswers: wrongAnswers.concat(currentQuestion),
         });
 
         this.reset();
@@ -384,13 +402,9 @@ class KanaMemoryGame extends Component<KanaMemoryGameProps, KanaMemoryGameState>
     private onPaused = () => this.setState({ paused: !this.state.paused });
 
     private getScore = (): number => {
-        const { score, streak, currentKana } = this.state;
+        const { score, streak, currentQuestion } = this.state;
         const multiplier = streak >= 50 ? 4 : streak >= 25 ? 3 : streak >= 10 ? 2 : streak >= 5 ? 1.5 : 1;
-        if (currentKana.isDiagraph()) {
-            return score + 150 * multiplier;
-        } else {
-            return score + 100 * multiplier;
-        }
+        return score + currentQuestion.getBaseScore() * multiplier;
     }
 }
 

@@ -30,4 +30,8 @@ export default class Definition extends Learnable {
     getTitle(): string {
         return this.type;
     }
+
+    getHint(): string {
+        return "It starts with " + this.getKana()[0];
+    }
 }

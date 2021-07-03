@@ -146,5 +146,45 @@ describe("Kana", () => {
           const title = kana.getExample();
           expect(title).toBeUndefined();
       });
+
+      describe("Hint Message", () => {
+          it('Should return a message hinting about the column and syllabary for a regular kana', () => {
+              const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+              const text = kana.getHint();
+              expect(text).toBe('This kana is from the \'vowel\' column in the Hiragana syllabary.');
+          });
+
+          it('Should return a message about diacriticals for a kana with a diacritical mark', () => {
+              const kana = new Kana("ぞ", ["zo"], KanaType.HIRAGANA, KanaColumn.S, true);
+              const text = kana.getHint();
+              expect(text).toBe('This kana is from the \'s\' column in the Hiragana syllabary. Also, notice the diacritical mark.');
+          });
+
+          it('Should return a diagraph specific message for a kana that is a diagraph', () => {
+              const kana = new Kana("しゅ", ["shu"], KanaType.HIRAGANA, KanaColumn.S, false);
+              const text = kana.getHint();
+              expect(text).toBe('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed.');
+          });
+
+          it('Should return a combination of relevant messages for a kana that is a diagraph with a diacritical mark', () => {
+              const kana = new Kana("びゃ", ["bya"], KanaType.HIRAGANA, KanaColumn.H, true);
+              const text = kana.getHint();
+              expect(text).toBe('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed. Also, notice the diacritical mark.');
+          });
+      });
+
+      describe("Base Score", () => {
+         it("Should return 100 for a regular kana", () => {
+             const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+             const score = kana.getBaseScore();
+             expect(score).toBe(100);
+         });
+
+         it("Should return 150 for a diagraph kana", () => {
+             const kana = new Kana("しゅ", ["shu"], KanaType.HIRAGANA, KanaColumn.S, false);
+             const score = kana.getBaseScore();
+             expect(score).toBe(150);
+         });
+      });
    });
 });

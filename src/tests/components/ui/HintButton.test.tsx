@@ -10,7 +10,7 @@ let props: HintButtonProps;
 
 beforeEach(() => {
     props = {
-        kana: new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
+        data: new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
         totalQuantity: 3,
         remaining: 3,
         disabled: false,
@@ -48,39 +48,15 @@ test('No Remaining Hints Title', () => {
     expect(screen.getByTitle('Sorry!')).toBeInTheDocument();
 });
 
-test('Regular Kana Message Text', () => {
+test('Hint Message', () => {
     const { button } = setup();
     fireEvent.click(button);
     const text = screen.getByText('This kana is from the \'vowel\' column in the Hiragana syllabary.');
     expect(text).toBeInTheDocument()
 });
 
-test('Diacritical Kana Message Text', () => {
-    props.kana = new Kana("ぞ", ["zo"], KanaType.HIRAGANA, KanaColumn.S, true);
-    const { button } = setup();
-    fireEvent.click(button);
-    const text = screen.getByText('This kana is from the \'s\' column in the Hiragana syllabary. Also, notice the diacritical mark.');
-    expect(text).toBeInTheDocument()
-});
-
-test('Diagraph Message Text', () => {
-    props.kana = new Kana("しゅ", ["shu"], KanaType.HIRAGANA, KanaColumn.S, false);
-    const { button } = setup();
-    fireEvent.click(button);
-    const text = screen.getByText('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed.');
-    expect(text).toBeInTheDocument()
-});
-
-test('Diacritical Diagraph Message Text', () => {
-    props.kana = new Kana("びゃ", ["bya"], KanaType.HIRAGANA, KanaColumn.H, true);
-    const { button } = setup();
-    fireEvent.click(button);
-    const text = screen.getByText('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed. Also, notice the diacritical mark.');
-    expect(text).toBeInTheDocument()
-});
-
 test('Exceptional Kana (n) Message Text', () => {
-    props.kana = new Kana("n", ["n"], KanaType.HIRAGANA, KanaColumn.OTHER, false);
+    props.data = new Kana("n", ["n"], KanaType.HIRAGANA, KanaColumn.OTHER, false);
     const { button } = setup();
     fireEvent.click(button);
     const text = screen.getByText('This kana is exceptional. It is not a consonant nor a vowel.');

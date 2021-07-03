@@ -81,7 +81,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                         <KanaMemoryGame
                             key={sessionKey.value}
                             sessionKey={sessionKey.value}
-                            kana={new KanaRepository().read(gameConfig.settings.kana!)}
+                            data={new KanaRepository().read(gameConfig.settings.kana!)}
                             settings={gameConfig.settings!}
                             onFinish={this.onGameFinish}
                         />

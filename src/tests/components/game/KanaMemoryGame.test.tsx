@@ -30,7 +30,7 @@ let props: KanaMemoryGameProps;
 
 beforeEach(() => {
     props = {
-        kana: [a, i, u, e, o],
+        data: [a, i, u, e, o],
         settings: {
             display: { type: DisplayType.ROMAJI, cards: 1, score: true },
             kana: { hiragana: true },
@@ -151,7 +151,7 @@ test('Answering regular kana correctly should increase the score by 100 each', (
 });
 
 test('Answering multiple correctly consecutively should start a streak', () => {
-    props.kana = [a, i, u, e, o, a]; //Add 6 kana so answering the 5th doesn't end the game
+    props.data = [a, i, u, e, o, a]; //Add 6 kana so answering the 5th doesn't end the game
     const { submit } = setup();
 
     fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
@@ -174,7 +174,7 @@ test('Answering multiple correctly consecutively should start a streak', () => {
 
 test('Answering a diagraph correctly should give 150 points', () => {
     const diagraph = new Kana("ぴょ", ["pyo"], KanaType.HIRAGANA, KanaColumn.H, true);
-    props.kana = [diagraph, a, e];
+    props.data = [diagraph, a, e];
     const { submit } = setup();
 
     fireEvent.change(getRomajiInput(), { target: { value: 'pyo' } });
@@ -184,7 +184,7 @@ test('Answering a diagraph correctly should give 150 points', () => {
 });
 
 test('Answering correctly on a streak of 5 should grant a 1.5x multiplier', () => {
-    props.kana = Array.from({ length: 7 }).map(() => a);
+    props.data = Array.from({ length: 7 }).map(() => a);
     const { submit } = setup();
 
     //Answering 5 correctly
@@ -201,7 +201,7 @@ test('Answering correctly on a streak of 5 should grant a 1.5x multiplier', () =
 });
 
 test('Answering correctly on a streak of 10 should grant a 2x multiplier', () => {
-    props.kana = Array.from({ length: 12 }).map(() => a);
+    props.data = Array.from({ length: 12 }).map(() => a);
     const { submit } = setup();
 
     //Answering 10 correctly
@@ -218,7 +218,7 @@ test('Answering correctly on a streak of 10 should grant a 2x multiplier', () =>
 });
 
 test('Answering correctly on a streak of 25 should grant a 3x multiplier', () => {
-    props.kana = Array.from({ length: 27 }).map(() => a);
+    props.data = Array.from({ length: 27 }).map(() => a);
     const { submit } = setup();
 
     //Answering 25 correctly
@@ -235,7 +235,7 @@ test('Answering correctly on a streak of 25 should grant a 3x multiplier', () =>
 });
 
 test('Answering correctly on a streak of 50 should grant a 4x multiplier', () => {
-    props.kana = Array.from({ length: 52 }).map(() => a);
+    props.data = Array.from({ length: 52 }).map(() => a);
     const { submit } = setup();
 
     //Answering 50 correctly
@@ -372,7 +372,7 @@ test('Answering incorrectly should not show the next kana', () => {
 });
 
 test('Answering incorrectly when on a streak should reset it', () => {
-    props.kana = Array.from({ length: 9 }).map(() => a);
+    props.data = Array.from({ length: 9 }).map(() => a);
     const { submit } = setup();
 
     //Answering 5 correctly

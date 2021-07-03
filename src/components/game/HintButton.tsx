@@ -3,13 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfinity, faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import { Button, OverlayTrigger } from "react-bootstrap";
 import PopOver from "../ui/PopOver";
-import { Kana } from "../../types/kana/Kana";
-import { KanaColumn } from "../../types/kana/KanaColumn";
 import Viewports, { Viewport } from "../../utility/Viewports";
 import styles from "../../styles/sass/components/game/HintButton.module.scss";
+import { Learnable } from "../../types/learn/Learnable";
 
 export interface HintButtonProps {
-    kana: Kana;
+    data: Learnable;
     remaining: number
     totalQuantity?: number;
     title?: string;
@@ -84,24 +83,13 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
     }
 
     private getContent = () => {
-        const { kana, remaining } = this.props;
+        const { data, remaining } = this.props;
+
         if (remaining <= 0) {
             return "You've used all of your hints.";
         }
-        if (kana.column === KanaColumn.OTHER) {
-            return "This kana is exceptional. It is not a consonant nor a vowel."
-        }
 
-        let message: string;
-        const diacritical = " Also, notice the diacritical mark.";
-
-        if (kana.isDiagraph()) {
-            message = "Diagraphs usually drop the 1st kana's 2nd letter when transcribed."
-        } else {
-            message = "This kana is from the '" + kana.column + "' column in the " + kana.type + " syllabary.";
-        }
-
-        return message + (kana.isDiacritical ? diacritical : "");
+        return data.getHint();
     }
 
     private getRemaining = () => {
