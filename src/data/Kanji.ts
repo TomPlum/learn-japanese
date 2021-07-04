@@ -4088,6 +4088,167 @@ export function kyoiku(): KanjiData[] {
                 { value: "主催", kana: ["しゅさい"], english: ["organisation", "sponsorship"] },
             ]
         },
+        {
+            name: "題",
+            code: "\u984C",
+            on: [{ kana: "だい", romaji: "dai" }],
+            kun: [{ kana: "ひたい", romaji: "hitai" }],
+            source: "https://en.wiktionary.org/wiki/%E9%A1%8C#Kanji",
+            meanings: ["topic", "subject"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "課題", kana: ["かだい"], english: ["subject", "theme", "task", "challenge", "issue"] },
+                { value: "問題", kana: ["もんだい"], english: ["problem", "question"] },
+                { value: "話題", kana: ["わだい"], english: ["topic", "subject"] },
+                { value: "題", kana: ["だい"], english: ["title", "subject", "theme", "topic"] },
+                { value: "問題点", kana: ["もんだいてん"], english: ["the point at issue"] },
+            ]
+        },
+        {
+            name: "度",
+            code: "\u5EA6",
+            on: [{ kana: "ど", romaji: "do" }, { kana: "と", romaji: "to" }, { kana: "たく", romaji: "taku" }],
+            kun: [{ kana: "たび ", romaji: "tabi" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BA%A6#Kanji",
+            meanings: ["degrees", "occurrence", "time", "counter for occurrences"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "制度", kana: ["せいど"], english: ["system", "institution", "organization"] },
+                { value: "程度", kana: ["ていど"], english: ["degree", "amount", "grade", "standard"] },
+                { value: "今度", kana: ["こんど"], english: ["now, this time", "next time", "another time"] },
+                { value: "態度", kana: ["たいど"], english: ["attitude", "manner", "behaviour"] },
+                { value: "何度", kana: ["なんど"], english: ["how many times?", "how often?"] },
+            ],
+            tags: ["counter"]
+        },
+        {
+            name: "世",
+            code: "\u4E16",
+            on: [{ kana: "せ", romaji: "se" }, { kana: "せい", romaji: "sei" }],
+            kun: [{ kana: "よ", romaji: "yo" }],
+            source: "https://en.wiktionary.org/wiki/%E4%B8%96#Kanji",
+            meanings: ["generation", "world", "society", "public"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "世", kana: ["よ"], english: ["world", "society", "age", "generation"] },
+                { value: "世界", kana: ["せかい"], english: ["the world", "society", "the universe"] },
+                { value: "世代", kana: ["せだい"], english: ["generation", "the world", "the age"] },
+                { value: "世論", kana: ["せろん, よろん"], english: ["public opinion"] },
+                { value: "世界的", kana: ["せかいてき"], english: ["global", "international", "world famous"] },
+            ]
+        },
+        {
+            name: "院",
+            code: "\u9662",
+            on: [{ kana: "えん", romaji: "en" }],
+            kun: [{ kana: "いん", romaji: "in" }],
+            source: "https://en.wiktionary.org/wiki/%E9%99%A2#Kanji",
+            meanings: ["Institution", "temple", "mansion", "school"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "参院", kana: ["さんいん"], english: ["House of Councillors"] },
+                { value: "衆院", kana: ["しゅういん"], english: ["lower house of the Diet"] },
+                { value: "病院", kana: ["びょういん"], english: ["hospital"] },
+                { value: "下院", kana: ["かいん"], english: ["lower house", "lower (legislative) body"] },
+                { value: "上院", kana: ["じょういん"], english: ["Upper House", "Senate", "Lords"] },
+            ]
+        },
+        {
+            name: "重",
+            code: "\u91CD",
+            on: [{ kana: "じゅう", romaji: "jū" }, { kana: "ちょう", romaji: "chō" }],
+            kun: [{ kana: "え", romaji: "e" }, { kana: "かさなる", romaji: "kasanaru" }],
+            source: "https://en.wiktionary.org/wiki/%E9%87%8D#Kanji",
+            meanings: ["heavy", "heap up", "pile up", "nest of boxes", "fold"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "重さ", kana: ["おもさ"], english: ["weight"] },
+                { value: "重要", kana: ["じゅうよう"], english: ["important", "momentous", "essential", "principal"] },
+                { value: "重大", kana: ["じゅうだい"], english: ["serious", "important", "significant", "grave"] },
+                { value: "重み", kana: ["おもみ"], english: ["importance", "weight", "dignity", "emphasis"] },
+                { value: "貴重", kana: ["きちょう"], english: ["precious", "valuable"] },
+            ]
+        },
+        {
+            name: "意",
+            code: "\u610F",
+            on: [{ kana: "い", romaji: "i" }],
+            kun: [{ kana: "こころ", romaji: "kokoro" }],
+            source: "https://en.wiktionary.org/wiki/%E6%84%8F#Kanji",
+            meanings: ["idea", "mind", "heart", "taste", "thought", "desire","care, liking"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "意見", kana: ["いけん"], english: ["opinion", "view"] },
+                { value: "意味", kana: ["いみ"], english: ["meaning", "significance"] },
+                { value: "合意", kana: ["ごうい"], english: ["agreement", "consent", "mutual understanding"] },
+                { value: "意向", kana: ["いこう"], english: ["intention", "idea", "inclination"] },
+                { value: "意思", kana: ["いし"], english: ["intention", "purpose"] },
+            ]
+        },
+        {
+            name: "持",
+            code: "\u6301",
+            on: [{ kana: "じ", romaji: "ji" }],
+            kun: [{ kana: "もつ", romaji: "motsu" }],
+            source: "https://en.wiktionary.org/wiki/%E6%8C%81#Kanji",
+            meanings: ["hold, have"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "維持", kana: ["いじ"], english: ["maintenance", "preservation", "improvement"] },
+                { value: "支持", kana: ["しじ"], english: ["support", "maintenance"] },
+                { value: "気持ち", kana: ["きもち"], english: ["feeling", "sensation", "mood"] },
+                { value: "持ち", kana: ["もち"], english: ["hold", "charge", "keep possession", "in charge"] },
+                { value: "持つ", kana: ["もつ"], english: ["to hold", "to carry", "to possess"] },
+            ]
+        },
+        {
+            name: "安",
+            code: "\u5B89",
+            on: [{ kana: "あん", romaji: "an" }],
+            kun: [{ kana: "やすい ", romaji: "yasui" }],
+            source: "https://en.wiktionary.org/wiki/%E5%AE%89#Kanji",
+            meanings: ["relax", "cheap", "low", "quiet", "rested", "contented", "peaceful"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "安全", kana: ["あんぜん"], english: ["safety", "security"] },
+                { value: "安保", kana: ["あんぽ"], english: ["US Japan Security Treaty", "safety", "security"] },
+                { value: "安全保障", kana: ["あんぜんほしょう"], english: ["security guarantee (e.g. military security"] },
+                { value: "安定", kana: ["あんてい"], english: ["stability", "equilibrium"] },
+                { value: "不安", kana: ["ふあん"], english: ["anxiety", "uneasiness", "insecurity", "suspense"] },
+            ]
+        },
+        {
+            name: "界",
+            code: "\u754C",
+            on: [{ kana: "かい", romaji: "kai" }],
+            kun: [{ kana: "さかい ", romaji: "sakai" }],
+            source: "https://en.wiktionary.org/wiki/%E7%95%8C#Kanji",
+            meanings: ["world"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "業界", kana: ["ぎょうかい"], english: ["industry, business"] },
+                { value: "世界", kana: ["せかい"], english: ["the world, society, the universe"] },
+                { value: "政界", kana: ["せいかい"], english: ["political world"] },
+                { value: "財界", kana: ["ざいかい"], english: ["financial world"] },
+                { value: "限界", kana: ["げんかい"], english: ["limit, bound"] },
+            ]
+        },
+        {
+            name: "集",
+            code: "\u96C6",
+            on: [{ kana: "しゅう", romaji: "shū" }],
+            kun: [{ kana: "あつまる", romaji: "atsumaru" }, { kana: "あつめる", romaji: "atsumeru" }, { kana: "つどう", romaji: "tsudou" }],
+            source: "https://en.wiktionary.org/wiki/%E9%9B%86#Kanji",
+            meanings: ["gather", "meet", "congregate", "swarm", "flock"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "集める", kana: ["あつめる"], english: ["to collect", "to assemble", "to gather"] },
+                { value: "集会", kana: ["しゅうかい"], english: ["meeting", "assembly"] },
+                { value: "集団", kana: ["しゅうだん"], english: ["group", "mass"] },
+                { value: "編集", kana: ["へんしゅう"], english: ["editing", "compilation"] },
+                { value: "集中", kana: ["しゅうちゅう"], english: ["concentration", "convergence", "centralization"] },
+            ]
+        },
 
         //Grade 6 Kanji
         {
