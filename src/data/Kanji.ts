@@ -3926,6 +3926,169 @@ export function kyoiku(): KanjiData[] {
             ]
         },
 
+        //Grade 3
+        {
+            name: "事",
+            code: "\u4E8B",
+            on: [{ kana: "じ", romaji: "ji" }],
+            kun: [{ kana: "こと", romaji: "koto" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BA%8B#Kanji",
+            meanings: ["matter", "thing", "fact", "business", "reason", "possibly"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "事", kana: ["こと"], english: ["thing", "matter", "fact", "circumstances", "business"] },
+                { value: "幹事", kana: ["かんじ"], english: ["executive secretary", "coordinator", "organizer"] },
+                { value: "記事", kana: ["きじ"], english: ["article", "news story", "report", "account"] },
+                { value: "軍事", kana: ["ぐんじ"], english: ["military affairs"] },
+                { value: "仕事", kana: ["しごと"], english: ["work", "job", "business", "occupation", "employment"] },
+            ]
+        },
+        {
+            name: "者",
+            code: "\u8005",
+            on: [{ kana: "しゃ", romaji: "sha" }],
+            kun: [{ kana: "もの", romaji: "mono" }],
+            source: "https://en.wiktionary.org/wiki/%E8%80%85#Kanji",
+            meanings: ["someone", "person"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "患者", kana: ["かんじゃ"], english: ["a patient"] },
+                { value: "関係者", kana: ["かんけいしゃ"], english: ["authorised people"] },
+                { value: "記者", kana: ["きしゃ"], english: ["reporter"] },
+                { value: "業者", kana: ["ぎょうしゃ"], english: ["trader", "merchant"] },
+                { value: "容疑者", kana: ["ようぎしゃ"], english: ["suspect person"] },
+            ]
+        },
+        {
+            name: "員",
+            code: "\u54E1",
+            on: [{ kana: "いん", romaji: "in" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E5%93%A1",
+            meanings: ["employee", "member", "number"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "委員", kana: ["いいん"], english: ["committee member"] },
+                { value: "委員会", kana: ["いいんかい"], english: ["committee", "commission", "board", "panel"] },
+                { value: "委員長", kana: ["いいんちょう"], english: ["committee chairman"] },
+                { value: "会員", kana: ["かいいん"], english: ["member", "the membership"] },
+                { value: "議員", kana: ["ぎいん"], english: ["member of the Diet", "congress or parliament"] },
+            ]
+        },
+        {
+            name: "問",
+            code: "\u554F",
+            on: [{ kana: "もん", romaji: "mon" }],
+            kun: [{ kana: "とう", romaji: "tou" }, { kana: "とん", romaji: "ton" }],
+            source: "https://en.wiktionary.org/wiki/%E5%95%8F#Kanji",
+            meanings: ["question", "ask", "problem"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "問う", kana: ["とう"], english: ["to ask", "to question", "to inquire"] },
+                { value: "問", kana: ["もん"], english: ["counter for questions"] },
+                { value: "質問", kana: ["しつもん"], english: ["question", "inquiry", "enquiry"] },
+                { value: "訪問", kana: ["ほうもん"], english: ["call", "visit"] },
+                { value: "問題", kana: ["もんだい"], english: ["problem", "question"] },
+            ]
+        },
+        {
+            name: "動",
+            code: "\u52D5",
+            on: [{ kana: "どう", romaji: "dō" }],
+            kun: [{ kana: "うごく", romaji: "ugoku" }, { kana: "うごかす", romaji: "ugokasu" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8B%95#Kanji",
+            meanings: ["move", "motion", "change", "confusion", "shift", "shake"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "動", kana: ["どう"], english: ["motion", "change", "confusion"] },
+                { value: "動き", kana: ["うごき"], english: ["movement", "activity", "trend", "development"] },
+                { value: "運動", kana: ["うんどう"], english: ["motion", "exercise"] },
+                { value: "活動", kana: ["かつどう"], english: ["action", "activity"] },
+                { value: "行動", kana: ["こうどう"], english: ["action", "conduct", "behaviour"] },
+            ]
+        },
+        {
+            name: "発",
+            code: "\u767A",
+            on: [{ kana: "はつ", romaji: "hatsu" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E7%99%BA#Kanji",
+            meanings: ["discharge", "departure", "publish", "emit", "start from", "disclose", "counter for gunshots"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "発", kana: ["はつ"], english: ["departure", "departing (from ...)"] },
+                { value: "開発", kana: ["かいはつ"], english: ["development", "exploitation"] },
+                { value: "発言", kana: ["はつげん"], english: ["utterance", "speech", "proposal"] },
+                { value: "発行", kana: ["はっこう"], english: ["issue (publications)", "publishing"] },
+                { value: "発展", kana: ["はってん"], english: ["development", "growth"] },
+            ]
+        },
+        {
+            name: "業",
+            code: "\u696D",
+            on: [{ kana: "ぎょう", romaji: "gyō" }, { kana: "ごう", romaji: "gō" }],
+            kun: [{ kana: "わざ", romaji: "waza" }],
+            source: "https://en.wiktionary.org/wiki/%E6%A5%AD#Kanji",
+            meanings: ["business", "vocation", "arts", "performance"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "業", kana: ["ごう"], english: ["karma (i.e. actions committed in a former life)"] },
+                { value: "企業", kana: ["きぎょう"], english: ["enterprise", "undertaking", "corporation"] },
+                { value: "業界", kana: ["ぎょうかい"], english: ["industry", "business"] },
+                { value: "業者", kana: ["ぎょうしゃ"], english: ["trader", "merchant"] },
+                { value: "作業", kana: ["さぎょう"], english: ["work", "operation", "manufacturing", "fatigue duty"] },
+            ]
+        },
+        {
+            name: "開",
+            code: "\u958B",
+            on: [{ kana: "かい", romaji: "kai" }],
+            kun: [{ kana: "あける", romaji: "akeru" }, { kana: "ひらく", romaji: "hiraku" }, { kana: "ひらける", romaji: "hirakeru" }, { kana: "あく", romaji: "aku" }],
+            source: "https://en.wiktionary.org/wiki/%E9%96%8B#Kanji",
+            meanings: ["open", "unfold", "unseal"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "開発", kana: ["かいはつ"], english: ["development", "exploitation"] },
+                { value: "開催", kana: ["かいさい"], english: ["holding a meeting", "open an exhibition"] },
+                { value: "開始", kana: ["かいし"], english: ["start", "commencement", "beginning", "initiation"] },
+                { value: "開放", kana: ["かいほう"], english: ["open", "throw open", "liberalization"] },
+                { value: "公開", kana: ["こうかい"], english: ["open to the public"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "代",
+            code: "\u4EE3",
+            on: [{ kana: "だい", romaji: "dai" }, { kana: "たい", romaji: "tai" }],
+            kun: [{ kana: "かわる", romaji: "kawaru" }, { kana: "よ", romaji: "yo" }, { kana: "かえる", romaji: "kaeru" }, { kana: "しろ", romaji: "shiro" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BB%A3#Kanji",
+            meanings: ["substitute", "change", "convert", "replace", "period", "age", "counter for decades of ages", "eras", "generation", "charge", "rate", "fee"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "代わり", kana: ["かわり", "がわり"], english: ["substitute", "deputy", "proxy", "alternate", "relief"] },
+                { value: "時代", kana: ["じだい"], english: ["period", "epoch", "era", "age", "the times"] },
+                { value: "代表", kana: ["だいひょう"], english: ["representative", "representation", "delegation"] },
+                { value: "現代", kana: ["げんだい"], english: ["nowadays", "modern era", "modern times"] },
+                { value: "世代", kana: ["せだい"], english: ["generation", "the world", "the age"] },
+            ]
+        },
+        {
+            name: "主",
+            code: "\u4E3B",
+            on: [{ kana: "しゅ", romaji: "shu" }],
+            kun: [{ kana: "おも", romaji: "omo" }, { kana: "ぬし", romaji: "nushi" }],
+            source: "https://en.wiktionary.org/wiki/%E4%B8%BB#Kanji",
+            meanings: ["lord", "chief", "master", "main thing", "principal"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "主に", kana: ["おもに"], english: ["mainly", "primarily"] },
+                { value: "喪主", kana: ["もしゅ"], english: ["chief mourner"] },
+                { value: "民主", kana: ["みんしゅ"], english: ["democracy", "popular sovereignty", "democratic"] },
+                { value: "主義", kana: ["しゅぎ"], english: ["doctrine", "rule", "principle"] },
+                { value: "主催", kana: ["しゅさい"], english: ["organisation", "sponsorship"] },
+            ]
+        },
+
         //Grade 6 Kanji
         {
             name: "私",
