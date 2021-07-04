@@ -2747,7 +2747,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "一歩", kana: ["いっぽ"], english: ["(a) step", "level", "stage", "small degree"] },
                 { value: "譲歩", kana: ["じょうほ"], english: ["concession", "conciliation", "compromise"] },
                 { value: "歩み", kana: ["あゆみ"], english: ["walking", "progress", "advance"] },
-            ]
+            ],
+            tags: ["counter"]
         },
         {
             name: "紙",
@@ -2877,7 +2878,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "首脳", kana: ["しゅのう"], english: ["head", "brains", "leading spirit"] },
                 { value: "首都", kana: ["しゅと"], english: ["capital city", "metropolis"] },
                 { value: "党首", kana: ["とうしゅ"], english: ["party leader"] },
-            ]
+            ],
+            tags: ["counter"]
         },
         {
             name: "夏",
@@ -2926,7 +2928,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "今回", kana: ["こんかい"], english: ["now", "this time", "lately"] },
                 { value: "回答", kana: ["かいとう"], english: ["reply", "answer"] },
                 { value: "前回", kana: ["ぜんかい"], english: ["last time", "last installment"] },
-            ]
+            ],
+            tags: ["counter"]
         },
         {
             name: "当",
@@ -3186,7 +3189,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "店頭", kana: ["てんとう"], english: ["shop front", "counter", "shop"] },
                 { value: "頭取", kana: ["とうどり"], english: ["bank", "president"] },
                 { value: "街頭", kana: ["がいとう"], english: ["in the street"] },
-            ]
+            ],
+            tags: ["counter"]
         },
 
         {
@@ -3254,7 +3258,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "専門", kana: ["せんもん"], english: ["speciality", "subject of study"] },
                 { value: "専門家", kana: ["せんもんか"], english: ["specialist"] },
                 { value: "専門学校", kana: ["せんもんがっこう", "せんもんガッコウ", "せんもんガッコ"], english: ["vocational school", "technical school"] },
-            ]
+            ],
+            tags: ["counter"]
         },
 
         {
@@ -3582,7 +3587,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "羽毛", kana: ["うもう"], english: ["feathers", "plumage", "down"] },
                 { value: "羽目", kana: ["はめ"], english: ["panel", "wainscoting", "wainscotting", "plight", "fix"] },
                 { value: "白羽", kana: ["しらは"], english: ["white feather"] },
-            ]
+            ],
+            tags: ["counter"]
         },
         {
             name: "角",
@@ -3989,7 +3995,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "質問", kana: ["しつもん"], english: ["question", "inquiry", "enquiry"] },
                 { value: "訪問", kana: ["ほうもん"], english: ["call", "visit"] },
                 { value: "問題", kana: ["もんだい"], english: ["problem", "question"] },
-            ]
+            ],
+            tags: ["counter"]
         },
         {
             name: "動",
@@ -4021,7 +4028,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "発言", kana: ["はつげん"], english: ["utterance", "speech", "proposal"] },
                 { value: "発行", kana: ["はっこう"], english: ["issue (publications)", "publishing"] },
                 { value: "発展", kana: ["はってん"], english: ["development", "growth"] },
-            ]
+            ],
+            tags: ["counter"]
         },
         {
             name: "業",
@@ -4070,7 +4078,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "代表", kana: ["だいひょう"], english: ["representative", "representation", "delegation"] },
                 { value: "現代", kana: ["げんだい"], english: ["nowadays", "modern era", "modern times"] },
                 { value: "世代", kana: ["せだい"], english: ["generation", "the world", "the age"] },
-            ]
+            ],
+            tags: ["counter"]
         },
         {
             name: "主",
