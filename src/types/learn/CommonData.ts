@@ -38,4 +38,8 @@ export default class CommonData extends Learnable {
     getExample(): LearningExample | undefined {
         return this.example;
     }
+
+    getHint(): string {
+        return "It starts with " + this.getKana()[0][0];
+    }
 }

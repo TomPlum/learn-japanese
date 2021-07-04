@@ -77,4 +77,8 @@ export class Kanji extends Learnable {
     getTags(): string[] {
         return this._tags;
     }
+
+    getHint(): string {
+        return "It's Grade " + this.grade + " and starts with " + this.getKana()[0][0];
+    }
 }

@@ -1,6 +1,6 @@
 import { Learnable } from "../types/learn/Learnable";
-import { LearnSettings } from "../types/learn/LearningSessionSettings";
+import DataSettings from "../types/session/DataSettings";
 
 export default interface Repository<T extends Learnable> {
-    read(settings: LearnSettings): T[]
+    read(settings: DataSettings): T[]
 }

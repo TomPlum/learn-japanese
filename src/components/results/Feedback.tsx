@@ -5,9 +5,10 @@ import AnswerMistake from "./AnswerMistake";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/results/Feedback.module.scss";
+import { Learnable } from "../../types/learn/Learnable";
 
 export interface FeedbackProps {
-    kana: Kana[];
+    data: Learnable[];
 }
 
 class Feedback extends Component<FeedbackProps> {
@@ -22,16 +23,17 @@ class Feedback extends Component<FeedbackProps> {
                                 <FontAwesomeIcon icon={faChevronDown} />
                             </Accordion.Toggle>
                         </Card.Header>
+
                         <Accordion.Collapse eventKey="0">
                             <Card.Body className={styles.wrapper}>
                                 {[...this.getMistakeCounts()]
-                                    .map(([kana, times]) => { return { kana: kana, times: times }})
+                                    .map(([data, times]) => { return { data: data, times: times }})
                                     .sort((a, b) => b.times - a.times)
                                     .map(mistake => {
                                         return(
                                             <AnswerMistake
-                                                key={mistake.kana.code}
-                                                kana={mistake.kana}
+                                                key={mistake.data.getKana().join("-")}
+                                                value={mistake.data}
                                                 times={mistake.times}
                                             />
                                         )
@@ -45,8 +47,8 @@ class Feedback extends Component<FeedbackProps> {
         );
     }
 
-    private getMistakeCounts = (): Map<Kana, number> => {
-        return this.props.kana.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map<Kana, number>());
+    private getMistakeCounts = (): Map<Learnable, number> => {
+        return this.props.data.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map<Learnable, number>());
     }
 }
 

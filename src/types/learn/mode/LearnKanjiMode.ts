@@ -1,27 +1,25 @@
-import LearningMode from "../LearningMode";
-import LearnMenuModes from "./LearnMenuModes";
 import { faClock, faFillDrip, faPaintBrush, faSchool, faYenSign } from "@fortawesome/free-solid-svg-icons";
 import { KyoikuGrade } from "../../kanji/KyoikuGrade";
 import CustomLearningMode from "../CustomLearningMode";
 import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
+import { LearnMenuModes } from "../../MenuModes";
+import { KanjiSettingsBuilder, LearnSettings } from "../../session/DataSettings";
+import LearnMode from "../../session/LearnMode";
 
-export default class LearnKanjiMode extends LearnMenuModes {
-    getLearningTopics(): LearningMode[] {
+export default class LearnKanjiMode implements LearnMenuModes {
+    getModes(): LearnMode[] {
+        const defaultLearnSettings = new LearnSettings();
         return [
-            new LearningMode("Kyōiku", "#fdb40e", faSchool, { kanji: { grades: KyoikuGrade.ALL } }),
-            new LearningMode("Jōyō", "#ff7730", faPaintBrush, { kanji: { joyo: true } }),
-            new LearningMode("Numbers", "#1785e2", faYenSign, { kanji: { numbers: true } }),
-            new LearningMode("Colours", "#a01219", faFillDrip, { kanji: { colours: true } }),
-            new LearningMode("Time", "#fc3131", faClock, { kanji: { time: true } }),
+            new LearnMode("Kyōiku", "#fdb40e", faSchool, new KanjiSettingsBuilder().withGrades(KyoikuGrade.ALL).build(), defaultLearnSettings),
+            new LearnMode("Jōyō", "#ff7730", faPaintBrush, new KanjiSettingsBuilder().withJoyoKanji(true).build(), defaultLearnSettings),
+            new LearnMode("Numbers", "#1785e2", faYenSign, new KanjiSettingsBuilder().withTags(["number"]).build(), defaultLearnSettings),
+            new LearnMode("Colours", "#a01219", faFillDrip, new KanjiSettingsBuilder().withTags(["colour"]).build(), defaultLearnSettings),
+            new LearnMode("Time", "#fc3131", faClock, new KanjiSettingsBuilder().withTags(["time"]).build(), defaultLearnSettings),
             new CustomLearningMode(KanjiSettingsMenu)
         ];
     }
 
     getTopic(): string {
         return "KANJI"
-    }
-
-    isCustomisable(): boolean {
-        return true;
     }
 }

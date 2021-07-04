@@ -1,15 +1,18 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import LearnMenu from "../../../components/learn/LearnMenu";
+import ModeSelectionMenu from "../../../components/learn/ModeSelectionMenu";
 import { Environment } from "../../../utility/Environment";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import Topic from "../../../types/Topic";
+import { AppMode } from "../../../types/AppMode";
+import { CalendarSettingsBuilder, KanaSettingsBuilder, KanjiSettingsBuilder, LearnSettings } from "../../../types/session/DataSettings";
+import { SessionSettings } from "../../../types/session/SessionSettings";
 
 describe("Example 1 - Kana", () => {
     const onStartHandler = jest.fn();
     const environment = jest.fn();
 
     const setup = () => {
-        const component = render(<LearnMenu topic={Topic.KANA} onStart={onStartHandler} />);
+        const component = render(<ModeSelectionMenu topic={Topic.KANA} appMode={AppMode.LEARN} onStart={onStartHandler} />);
         return {
             hiragana: component.getByText('Hiragana'),
             katakana: component.getByText('Katakana'),
@@ -75,39 +78,38 @@ describe("Example 1 - Kana", () => {
     test('Clicking Start with the Hiragana preset selected should call the onStart event handler', () => {
         const { start } = setup();
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({ kana : { hiragana: true } });
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new KanaSettingsBuilder().withHiragana().build(), new LearnSettings()));
     });
 
     test('Clicking Start with the Katakana preset selected should call the onStart event handler', () => {
         const { start, katakana } = setup();
         fireEvent.click(katakana);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({ kana : { katakana: true } });
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new KanaSettingsBuilder().withKatakana().build(), new LearnSettings()));
     });
 
     test('Clicking Start with the Diacriticals preset selected should call the onStart event handler', () => {
         const { start, diacriticals } = setup();
         fireEvent.click(diacriticals);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({ kana: { diacriticals: true } });
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new KanaSettingsBuilder().withDiacriticals().build(), new LearnSettings()));
     });
 
     test('Clicking Start with the Diagraphs preset selected should call the onStart event handler', () => {
         const { start, diagraphs } = setup();
         fireEvent.click(diagraphs);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({ kana: { diagraphs: true } });
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new KanaSettingsBuilder().withDiagraphs().build(), new LearnSettings()));
     });
 
     test('Clicking Start with the All preset selected should call the onStart event handler', () => {
         const { start, all } = setup();
         fireEvent.click(all);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({
-            kana: {
-                hiragana: true, katakana: true, diagraphs: true, diacriticals: true
-            }
-        });
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(
+            new KanaSettingsBuilder().withEverything().build(),
+            new LearnSettings()
+        ));
     });
 });
 
@@ -116,7 +118,7 @@ describe("Example 2 - Calendar", () => {
     const environment = jest.fn();
 
     const setup = () => {
-        const component = render(<LearnMenu topic={Topic.CALENDAR} onStart={onStartHandler}/>);
+        const component = render(<ModeSelectionMenu topic={Topic.CALENDAR} appMode={AppMode.LEARN} onStart={onStartHandler}/>);
         return {
             days: component.getByText('Days of the Week'),
             months: component.getByText('Months of the Year'),
@@ -185,50 +187,57 @@ describe("Example 2 - Calendar", () => {
     test('Clicking Start with the \'Days of the Week\' preset selected should call the onStart event handler', () => {
         const { start } = setup();
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({ calendar: { days: true } });
+        expect(onStartHandler).toHaveBeenCalledWith(
+            SessionSettings.forLearning(new CalendarSettingsBuilder().withDays().build(), new LearnSettings())
+        );
     });
 
     test('Clicking Start with the \'Months of the Year\' preset selected should call the onStart event handler', () => {
         const { start, months } = setup();
         fireEvent.click(months);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({ calendar: { months: true } });
+        expect(onStartHandler).toHaveBeenCalledWith(
+            SessionSettings.forLearning(new CalendarSettingsBuilder().withMonths().build(), new LearnSettings())
+        );
     });
 
     test('Clicking Start with the \'Temporal Nouns\' preset selected should call the onStart event handler', () => {
         const { start, nouns } = setup();
         fireEvent.click(nouns);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({ calendar: { nouns: true } });
+        expect(onStartHandler).toHaveBeenCalledWith(
+            SessionSettings.forLearning(new CalendarSettingsBuilder().withTemporalNouns().build(), new LearnSettings())
+        );
     });
 
     test('Clicking Start with the \'Seasonal\' preset selected should call the onStart event handler', () => {
         const { start, seasonal } = setup();
         fireEvent.click(seasonal);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({ calendar: { season: true } });
+        expect(onStartHandler).toHaveBeenCalledWith(
+            SessionSettings.forLearning(new CalendarSettingsBuilder().withSeasons().build(), new LearnSettings())
+        );
     });
 
     test('Clicking Start with the \'Common Phrases\' preset selected should call the onStart event handler', () => {
         const { start, phrases } = setup();
         fireEvent.click(phrases);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({ calendar: { phrases: true } });
+        expect(onStartHandler).toHaveBeenCalledWith(
+            SessionSettings.forLearning(new CalendarSettingsBuilder().withPhrases().build(), new LearnSettings())
+        );
     });
 
     test('Clicking Start with the \'Everything\' preset selected should call the onStart event handler', () => {
         const { start, all } = setup();
         fireEvent.click(all);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith({
-            calendar: {
-                days: true,
-                months: true,
-                season: true,
-                nouns: true,
-                phrases: true
-            }
-        });
+        expect(onStartHandler).toHaveBeenCalledWith(
+            SessionSettings.forLearning(
+                new CalendarSettingsBuilder().withDays().withMonths().withPhrases().withTemporalNouns().withSeasons().build(),
+                new LearnSettings()
+            )
+        );
     });
 
     test('Clicking the Search button should launch the search menu with the selected topic', () => {
@@ -244,7 +253,7 @@ describe("Example 3 - Kanji (Customisable)", () => {
     const environment = jest.fn();
 
     const setup = () => {
-        const component = render(<LearnMenu topic={Topic.KANJI} onStart={onStartHandler}/>);
+        const component = render(<ModeSelectionMenu topic={Topic.KANJI} appMode={AppMode.LEARN} onStart={onStartHandler}/>);
         return {
             kyoiku: component.getByText('Kyōiku'),
             joyo: component.getByText('Jōyō'),
@@ -273,6 +282,11 @@ describe("Example 3 - Kanji (Customisable)", () => {
         fireEvent.click(screen.getByText('Grade 1'));
         fireEvent.click(screen.getByText('Grade 2'));
         fireEvent.click(screen.getByText('Start'));
-        expect(onStartHandler).toHaveBeenCalledWith({ kanji: { grades: [KyoikuGrade.ONE, KyoikuGrade.TWO], joyo: false, quantity: undefined }});
+        expect(onStartHandler).toHaveBeenCalledWith(
+            SessionSettings.forLearning(
+                new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE, KyoikuGrade.TWO]).withJoyoKanji(false).build(),
+                new LearnSettings()
+            )
+        );
     });
 });

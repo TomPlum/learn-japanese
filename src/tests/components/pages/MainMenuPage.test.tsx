@@ -41,6 +41,7 @@ const setup = () => {
        match={{ params: { mode: "play" }, isExact: true, path: "/menu/:mode", url: "/menu/learn" }}
        location={{ pathname: "/menu/learn", search: "", hash: "", state: undefined }}
    />);
+
    return {
       mode: component.getByText('Learn'),
       kana: component.queryAllByText('Hiragana & Katakana')[1],

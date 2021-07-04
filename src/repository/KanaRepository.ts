@@ -3,16 +3,17 @@ import hiragana from "../data/Hiragana";
 import katakana from "../data/Katakana";
 import KanaType from "../types/kana/KanaType";
 import { KanaData } from "../data/DataTypes";
-import { KanaSettings } from "../types/game/GameSettings";
 import DiagraphFilter from "../filters/kana/DiagraphFilter";
 import FilterChain from "../filters/FilterChain";
 import QuantityFilter from "../filters/kana/QuantityFilter";
 import KanaTypeFilter from "../filters/kana/KanaTypeFilter";
 import Repository from "./Repository";
+import { KanaSettings } from "../types/session/DataSettings";
 
 export class KanaRepository implements Repository<Kana> {
 
     public read(config: KanaSettings): Kana[] {
+        console.log("Kana Quantity: " + config.quantity);
         const chain = new FilterChain<Kana>();
 
         if (!config.hiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));

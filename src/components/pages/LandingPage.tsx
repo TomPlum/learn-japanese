@@ -10,6 +10,7 @@ import { KanaRepository } from "../../repository/KanaRepository";
 import { Environment } from "../../utility/Environment";
 import ParallaxBackground from "../layout/ParallaxBackground";
 import { Link } from "react-router-dom"
+import { KanaSettingsBuilder } from "../../types/session/DataSettings";
 
 class LandingPage extends Component {
 
@@ -18,7 +19,7 @@ class LandingPage extends Component {
     constructor(props: {} | Readonly<{}>) {
         super(props);
 
-        this.kana = new KanaRepository().read({ hiragana: true, katakana: true });
+        this.kana = new KanaRepository().read(new KanaSettingsBuilder().withHiragana().withKatakana().build());
     }
 
     render() {

@@ -5,7 +5,7 @@ import KanaType from "../../../types/kana/KanaType";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
 
 let props: FeedbackProps = {
-    kana: []
+    data: []
 };
 
 const setup = () => {
@@ -17,7 +17,7 @@ const setup = () => {
 }
 
 test('A single kana with one failure instance should render 1 tile', () => {
-    props.kana = [new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)];
+    props.data = [new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)];
     const { accordion } = setup();
 
     fireEvent.click(accordion);
@@ -30,7 +30,7 @@ test('A single kana with one failure instance should render 1 tile', () => {
 test('Multiple kana should render multiple tiles with their respective mistakes', () => {
     const bya = new Kana("びゃ", ["bya"], KanaType.HIRAGANA, KanaColumn.H, true);
     const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-    props.kana = [a, bya, bya];
+    props.data = [a, bya, bya];
 
     const { accordion } = setup();
     fireEvent.click(accordion);

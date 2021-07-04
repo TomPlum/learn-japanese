@@ -6,8 +6,10 @@ import KyoikuGradeButton from "../../ui/buttons/KyoikuGradeButton";
 import Arrays from "../../../utility/Arrays";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
-import { CustomLearnMenuProps } from "../LearnMenu";
+import { CustomLearnMenuProps } from "../ModeSelectionMenu";
 import TemplateString from "../../../types/TemplateString";
+import { KanjiSettingsBuilder, LearnSettings } from "../../../types/session/DataSettings";
+import { SessionSettings } from "../../../types/session/SessionSettings";
 
 interface KanjiSettingsMenuState {
     grades: KyoikuGrade[];
@@ -144,13 +146,9 @@ class KanjiSettingsMenu extends Component<CustomLearnMenuProps, KanjiSettingsMen
 
     private onConfirmSelected = () => {
         const { grades, quantity, joyo } = this.state;
-        this.props.onSelect({
-            kanji: {
-                grades: grades,
-                quantity: quantity,
-                joyo: joyo
-            }
-        });
+        const dataSettings = new KanjiSettingsBuilder().withGrades(grades).withJoyoKanji(joyo).withQuantity(quantity).build();
+        const settings = SessionSettings.forLearning(dataSettings, new LearnSettings());
+        this.props.onSelect(settings);
     }
 
     private getDescription = () => {

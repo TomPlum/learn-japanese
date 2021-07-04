@@ -35,7 +35,7 @@ class Learn extends Component<LearnProps, LearnState> {
     constructor(props: Readonly<LearnProps> | LearnProps) {
         super(props);
 
-        const [first, remaining] = RandomNumberGenerator.getRandomObject(this.props.data);
+        const [first, remaining] = RandomNumberGenerator.getRandomObject(props.data);
 
         this.state = {
             current: first,

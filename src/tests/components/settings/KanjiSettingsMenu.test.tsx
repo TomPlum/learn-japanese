@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import { SessionSettings } from "../../../types/session/SessionSettings";
+import { KanjiSettingsBuilder, LearnSettings } from "../../../types/session/DataSettings";
 
 const onSelectedHandler = jest.fn();
 
@@ -73,7 +75,12 @@ test('Clicking start with Kyoiku kanji selected should call the onSelected event
     const { submit, grade1 } = setup();
     fireEvent.click(grade1);
     fireEvent.click(submit);
-    expect(onSelectedHandler).toHaveBeenCalledWith({ kanji: { grades: [KyoikuGrade.ONE], quantity: undefined, joyo: false } });
+    expect(onSelectedHandler).toHaveBeenCalledWith(
+        SessionSettings.forLearning(
+            new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withJoyoKanji(false).build(),
+            new LearnSettings()
+        )
+    );
 });
 
 test('Entering a valid quantity should enable the submit button', () => {
@@ -92,7 +99,12 @@ test('Clicking start with a quantity selected should call the onSelected event h
     const { submit, quantity } = setup();
     fireEvent.change(quantity, { target: { value: 10 }});
     fireEvent.click(submit);
-    expect(onSelectedHandler).toHaveBeenCalledWith({ kanji: { grades: [], quantity: 10, joyo: false } });
+    expect(onSelectedHandler).toHaveBeenCalledWith(
+        SessionSettings.forLearning(
+            new KanjiSettingsBuilder().withJoyoKanji(false).withQuantity(10).build(),
+            new LearnSettings()
+        )
+    );
 });
 
 test('Clicking start with a quantity and grade selected should call the onSelected event handler with both', () => {
@@ -100,7 +112,12 @@ test('Clicking start with a quantity and grade selected should call the onSelect
     fireEvent.change(quantity, { target: { value: 10 }});
     fireEvent.click(grade1);
     fireEvent.click(submit);
-    expect(onSelectedHandler).toHaveBeenCalledWith({ kanji: { grades: [KyoikuGrade.ONE], quantity: 10, joyo: false } });
+    expect(onSelectedHandler).toHaveBeenCalledWith(
+        SessionSettings.forLearning(
+            new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withJoyoKanji(false).withQuantity(10).build(),
+            new LearnSettings()
+        )
+    );
 });
 
 test('Selecting all grades with a quantity specified should render the correct description', () => {

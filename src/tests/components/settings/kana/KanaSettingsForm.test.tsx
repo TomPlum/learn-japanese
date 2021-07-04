@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanaSettingsForm from "../../../../components/settings/kana/KanaSettingsForm";
+import { KanaSettingsBuilder } from "../../../../types/session/DataSettings";
 
 const onSelectHandler = jest.fn();
 
@@ -35,19 +36,19 @@ test('Selecting both Hiragana and Katakana should enable both options', () => {
 
 test('On mount it should call the onSelect event handler with the default settings', () => {
     setup();
-    expect(onSelectHandler).toHaveBeenCalledWith({ hiragana: true, katakana: false, diagraphs: false, quantity: 50 });
+    expect(onSelectHandler).toHaveBeenCalledWith(new KanaSettingsBuilder().withHiragana().build());
 });
 
 test('Selecting Diagraphs should set the boolean to true in the settings', () => {
     const { diagraphs, rerender } = setup();
     fireEvent.click(diagraphs);
     rerender(<KanaSettingsForm onSelect={onSelectHandler}/>);
-    expect(onSelectHandler).toHaveBeenCalledWith({ hiragana: true, katakana: false, diagraphs: true, quantity: 50 });
+    expect(onSelectHandler).toHaveBeenCalledWith(new KanaSettingsBuilder().withHiragana().withDiagraphs().build());
 });
 
 test('Changing the kana quantity should update the value in the settings', () => {
     const { quantity, rerender } = setup();
     fireEvent.change(quantity, { target: { value: 75 } });
     rerender(<KanaSettingsForm onSelect={onSelectHandler}/>);
-    expect(onSelectHandler).toHaveBeenCalledWith({ hiragana: true, katakana: false, diagraphs: false, quantity: 75 });
+    expect(onSelectHandler).toHaveBeenCalledWith(new KanaSettingsBuilder().withHiragana().withQuantity(75).build());
 });

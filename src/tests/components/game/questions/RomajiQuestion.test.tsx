@@ -1,8 +1,8 @@
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
-import RomajiQuestion, { RomajiQuestionProps } from "../../../components/game/RomajiQuestion";
-import { Kana } from "../../../types/kana/Kana";
-import KanaType from "../../../types/kana/KanaType";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
+import RomajiQuestion, { RomajiQuestionProps } from "../../../../components/game/questions/RomajiQuestion";
+import { Kana } from "../../../../types/kana/Kana";
+import KanaType from "../../../../types/kana/KanaType";
+import { KanaColumn } from "../../../../types/kana/KanaColumn";
 import React from "react";
 
 const isValidHandler = jest.fn();

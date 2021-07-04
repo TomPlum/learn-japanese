@@ -2,18 +2,16 @@ import React, { Component } from "react";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { DisplaySettings, GameSettings, HintSettings, KanaSettings, LifeSettings, TimeSettings } from "../../types/game/GameSettings";
+import { DisplaySettings, GameSettingsBuilder, HintSettings, LifeSettings, TimeSettings } from "../../types/session/GameSettings";
 import KanaSettingsForm from "./kana/KanaSettingsForm";
 import HintSettingsForm from "./kana/HintSettingsForm";
 import LifeSettingsForm from "./kana/LifeSettingsForm";
 import TimeSettingsForm from "./kana/TimeSettingsForm";
-import { defaultDisplaySettings, defaultHintSettings, defaultKanaSettings, defaultLifeSettings, defaultTimeSettings } from "../../data/GameModePresets";
 import DisplaySettingsForm from "./kana/DisplaySettingsForm";
 import styles from "../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
-
-export interface KanaGameSettingsMenuProps {
-    onSubmit: (settings: GameSettings) => void;
-}
+import { KanaSettings, KanaSettingsBuilder } from "../../types/session/DataSettings";
+import { CustomLearnMenuProps } from "../learn/ModeSelectionMenu";
+import { SessionSettings } from "../../types/session/SessionSettings";
 
 interface KanaGameSettingsMenuState {
     displaySettings: DisplaySettings;
@@ -23,7 +21,7 @@ interface KanaGameSettingsMenuState {
     timeSettings: TimeSettings;
 }
 
-class KanaGameSettingsMenu extends Component<KanaGameSettingsMenuProps, KanaGameSettingsMenuState> {
+class KanaGameSettingsMenu extends Component<CustomLearnMenuProps, KanaGameSettingsMenuState> {
 
     private readonly display: React.RefObject<DisplaySettingsForm>;
     private readonly kana: React.RefObject<KanaSettingsForm>;
@@ -31,7 +29,7 @@ class KanaGameSettingsMenu extends Component<KanaGameSettingsMenuProps, KanaGame
     private readonly lives: React.RefObject<LifeSettingsForm>;
     private readonly time: React.RefObject<TimeSettingsForm>;
 
-    constructor(props: KanaGameSettingsMenuProps | Readonly<KanaGameSettingsMenuProps>) {
+    constructor(props: CustomLearnMenuProps | Readonly<CustomLearnMenuProps>) {
         super(props);
 
         this.display = React.createRef();
@@ -40,12 +38,14 @@ class KanaGameSettingsMenu extends Component<KanaGameSettingsMenuProps, KanaGame
         this.lives = React.createRef();
         this.time = React.createRef();
 
+        const defaults = new GameSettingsBuilder().build();
+
         this.state = {
-            displaySettings: defaultDisplaySettings,
-            kanaSettings: defaultKanaSettings,
-            hintSettings: defaultHintSettings,
-            lifeSettings: defaultLifeSettings,
-            timeSettings: defaultTimeSettings,
+            displaySettings: defaults.display,
+            kanaSettings: new KanaSettingsBuilder().withHiragana().build(),
+            hintSettings: defaults.hints,
+            lifeSettings: defaults.lives,
+            timeSettings: defaults.time,
         }
     }
 
@@ -166,15 +166,17 @@ class KanaGameSettingsMenu extends Component<KanaGameSettingsMenuProps, KanaGame
 
     onConfirmation = () => {
         const { displaySettings, kanaSettings, hintSettings, lifeSettings, timeSettings } = this.state;
-        this.props.onSubmit({
-            kana: {
-                display: displaySettings,
-                kana: kanaSettings,
-                hints: hintSettings,
-                lives: lifeSettings,
-                time: timeSettings
-            }
-        });
+
+        const gameSettings = new GameSettingsBuilder()
+            .withDisplaySettings(displaySettings)
+            .withHintSettings(hintSettings)
+            .withLifeSettings(lifeSettings)
+            .withTimeSettings(timeSettings)
+            .build();
+
+        const settings = SessionSettings.forGame(kanaSettings, gameSettings);
+
+        this.props.onSelect(settings);
     }
 
     onReset = () => {

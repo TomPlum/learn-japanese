@@ -1,5 +1,4 @@
 import { faAppleAlt, faCalendarAlt, faFont, faPaintBrush, faSpellCheck, faYenSign, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import LearnMenuModes from "./learn/mode/LearnMenuModes";
 import LearnKanaMode from "./learn/mode/LearnKanaMode";
 import LearnKanjiMode from "./learn/mode/LearnKanjiMode";
 import LearnBasicsMode from "./learn/mode/LearnBasicsMode";
@@ -17,49 +16,54 @@ import NumbersFlashCardFront from "../components/learn/numbers/NumbersFlashCardF
 import NumbersFlashCardBack from "../components/learn/numbers/NumbersFlashCardBack";
 import SentenceStructureFlashCardFront from "../components/learn/sentence/SentenceStructureFlashCardFront";
 import SentenceStructureFlashCardBack from "../components/learn/sentence/SentenceStructureFlashCardBack";
+import PlayKanjiModes from "./game/mode/PlayKanjiModes";
+import PlayKanaMode from "./game/mode/PlayKanaMode";
+import { LearnMenuModes, PlayMenuModes } from "./MenuModes";
 
 export default class Topic {
     private readonly _name: string;
     private readonly _icon: IconDefinition;
     private readonly _modes: LearnMenuModes;
+    private readonly _playModes: PlayMenuModes;
     private readonly _cards: CardProps;
 
     public static KANA = new Topic(
-        "Hiragana & Katakana", faFont, new LearnKanaMode(),
+        "Hiragana & Katakana", faFont, new LearnKanaMode(), new PlayKanaMode(),
         { front: KanaFlashCardFront, back: KanaFlashCardBack }
     );
 
     public static NUMBERS = new Topic(
-        "Numbers & Counting", faYenSign, new LearnNumbersMode(),
+        "Numbers & Counting", faYenSign, new LearnNumbersMode(), new PlayKanjiModes(),
         { front: NumbersFlashCardFront, back: NumbersFlashCardBack }
     );
 
     public static KANJI = new Topic(
-        "Jōyō Kanji", faPaintBrush, new LearnKanjiMode(),
+        "Jōyō Kanji", faPaintBrush, new LearnKanjiMode(), new PlayKanjiModes(),
         { front: KanjiFlashCardFront, back: KanjiFlashCardBack }
     );
 
     public static BASICS = new Topic(
-        "Basics", faAppleAlt, new LearnBasicsMode(),
+        "Basics", faAppleAlt, new LearnBasicsMode(), new PlayKanjiModes(),
         { front: BasicsFlashCardFront, back: BasicsFlashCardBack }
     );
 
     public static CALENDAR = new Topic(
-        "Days & Months", faCalendarAlt, new LearnCalendarMode(),
+        "Days & Months", faCalendarAlt, new LearnCalendarMode(), new PlayKanjiModes(),
         { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack }
     );
 
     public static GRAMMAR = new Topic(
-        "Sentence Structure", faSpellCheck, new LearnSentenceStructureMode(),
+        "Sentence Structure", faSpellCheck, new LearnSentenceStructureMode(), new PlayKanjiModes(),
         { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack }
     );
 
     public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR, Topic.GRAMMAR];
 
-    private constructor(name: string, icon: IconDefinition, modes: LearnMenuModes, cards: CardProps) {
+    private constructor(name: string, icon: IconDefinition, modes: LearnMenuModes, playModes: PlayMenuModes, cards: CardProps) {
         this._name = name;
         this._icon = icon;
         this._modes = modes;
+        this._playModes = playModes;
         this._cards = cards;
     }
 
@@ -77,5 +81,9 @@ export default class Topic {
 
     get cards(): CardProps {
         return this._cards;
+    }
+
+    get playModes(): PlayMenuModes {
+        return this._playModes;
     }
 }

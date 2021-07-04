@@ -1,12 +1,12 @@
 import Repository from "./Repository";
-import { LearnSentenceStructureSettings } from "../types/learn/LearningSessionSettings";
 import { adjectives, adverbs, expressions, verbs } from "../data/SentenceStructure";
 import { AdjectiveData, AdverbData, ExpressionData, SentenceStructureData, VerbData } from "../data/DataTypes";
 import Definition from "../types/sentence/Definition";
 import { Learnable } from "../types/learn/Learnable";
+import { SentenceStructureSettings } from "../types/session/DataSettings";
 
 export default class SentenceStructureRepository implements Repository<Learnable> {
-    read(settings: LearnSentenceStructureSettings): Learnable[] {
+    read(settings: SentenceStructureSettings): Learnable[] {
 
         if (settings.adjectives) {
             return adjectives().map((it: AdjectiveData) => this.convert(it, it.type + " Adjective"));

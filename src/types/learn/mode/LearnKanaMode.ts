@@ -1,16 +1,19 @@
-import LearningMode from "../LearningMode";
-import LearnMenuModes from "./LearnMenuModes";
 import { faVial } from "@fortawesome/free-solid-svg-icons";
+import { LearnMenuModes } from "../../MenuModes";
+import LearnMode from "../../session/LearnMode";
+import { KanaSettingsBuilder, LearnSettings } from "../../session/DataSettings";
 
-export default class LearnKanaMode extends LearnMenuModes {
-    getLearningTopics(): LearningMode[] {
+export default class LearnKanaMode implements LearnMenuModes {
+    getModes(): LearnMode[] {
+        const defaultLearnSettings = new LearnSettings();
+        
         return [
-            new LearningMode("Hiragana", "#fdb40e", "あ", { kana: { hiragana: true } }),
-            new LearningMode("Katakana", "#ff7730", "ア", { kana: { katakana: true } }),
-            new LearningMode("Diacriticals", "#1785e2", "ざ", { kana: { diacriticals: true } }),
-            new LearningMode("Diagraphs", "#a01219", "きゃ", { kana: { diagraphs: true } }),
-            new LearningMode("All", "#fc3131", "あア", { kana: { hiragana: true, katakana: true, diagraphs: true, diacriticals: true } }),
-            new LearningMode("Custom", "#41d085", faVial, {})
+            new LearnMode("Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), defaultLearnSettings),
+            new LearnMode("Katakana", "#ff7730", "ア", new KanaSettingsBuilder().withKatakana().build(), defaultLearnSettings),
+            new LearnMode("Diacriticals", "#1785e2", "ざ", new KanaSettingsBuilder().withDiacriticals().build(), defaultLearnSettings),
+            new LearnMode("Diagraphs", "#a01219", "きゃ", new KanaSettingsBuilder().withDiagraphs().build(), defaultLearnSettings),
+            new LearnMode("All", "#fc3131", "あア", new KanaSettingsBuilder().withEverything().build(), defaultLearnSettings),
+            new LearnMode("Custom", "#41d085", faVial, new KanaSettingsBuilder().build(), defaultLearnSettings)
         ];
     }
 

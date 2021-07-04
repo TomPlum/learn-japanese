@@ -1,6 +1,4 @@
 import LearningDataRepository from "../../repository/LearningDataRepository";
-import { LearnSessionSettings } from "../../components/layout/SettingsMenu";
-import Topic from "../../types/Topic";
 import { KanaRepository } from "../../repository/KanaRepository";
 import CalendarRepository from "../../repository/CalendarRepository";
 import { KanjiRepository } from "../../repository/KanjiRepository";
@@ -8,6 +6,7 @@ import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 import BasicsRepository from "../../repository/BasicsRepository";
 import NumbersRepository from "../../repository/NumbersRepository";
 import SentenceStructureRepository from "../../repository/SentenceStructureRepository";
+import DataSettings, { BasicsSettingsBuilder, CalendarSettingsBuilder, KanaSettingsBuilder, KanjiSettingsBuilder, NumbersSettingsBuilder, SentenceStructureSettingsBuilder } from "../../types/session/DataSettings";
 
 jest.mock('../../repository/KanaRepository');
 jest.mock('../../repository/KanjiRepository');
@@ -54,39 +53,39 @@ describe("Learn Data Repository", () => {
     const repository = new LearningDataRepository();
 
     test('Should delegate to the KanaRepository when the topic is Kana', () => {
-        const config: LearnSessionSettings = { topic: Topic.KANA, settings: { kana: { hiragana: true } } };
+        const config: DataSettings = new KanaSettingsBuilder().withHiragana().build();
         repository.read(config);
-        expect(mockKanaRepository).toHaveBeenCalledWith({ hiragana: true });
+        expect(mockKanaRepository).toHaveBeenCalledWith(config);
     });
 
     test('Should delegate to the CalendarRepository when the topic is Calendar', () => {
-        const config: LearnSessionSettings = { topic: Topic.CALENDAR, settings: { calendar: { days: true } } };
+        const config: DataSettings = new CalendarSettingsBuilder().withDays().build();
         repository.read(config);
-        expect(mockCalendarRepository).toHaveBeenCalledWith({ days: true });
+        expect(mockCalendarRepository).toHaveBeenCalledWith(config);
     });
 
     test('Should delegate to the KanjiRepository when the topic is Kanji', () => {
-        const config: LearnSessionSettings = { topic: Topic.KANJI, settings: { kanji: { grades: [KyoikuGrade.ONE] } } };
+        const config: DataSettings = new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).build();
         repository.read(config);
-        expect(mockKanjiRepository).toHaveBeenCalledWith({ grades: [KyoikuGrade.ONE] });
+        expect(mockKanjiRepository).toHaveBeenCalledWith(config);
     });
 
     test('Should delegate to the BasicsRepository when the topic is Basics', () => {
-        const config: LearnSessionSettings = { topic: Topic.BASICS, settings: { basics: { colours: true } } };
+        const config: DataSettings = new BasicsSettingsBuilder().withColours().build();
         repository.read(config);
-        expect(mockBasicsRepository).toHaveBeenCalledWith({ colours: true });
+        expect(mockBasicsRepository).toHaveBeenCalledWith(config);
     });
 
     test('Should delegate to the NumbersRepository when the topic is Numbers & Counting', () => {
-        const config: LearnSessionSettings = { topic: Topic.NUMBERS, settings: { numbers: { numbers: true } } };
+        const config: DataSettings = new NumbersSettingsBuilder().withNumbers().build();
         repository.read(config);
-        expect(mockNumbersRepository).toHaveBeenCalledWith({ numbers: true });
+        expect(mockNumbersRepository).toHaveBeenCalledWith(config);
     });
 
     test('Should delegate to the SentenceStructureRepository when the topic is Sentence Structure', () => {
-        const config: LearnSessionSettings = { topic: Topic.GRAMMAR, settings: { sentence: { nouns: true } } };
+        const config: DataSettings = new SentenceStructureSettingsBuilder().withNouns().build();
         repository.read(config);
-        expect(mockSentenceStructureRepository).toHaveBeenCalledWith({ nouns: true });
+        expect(mockSentenceStructureRepository).toHaveBeenCalledWith(config);
     });
 
     test('Passing in falsy settings should return an empty array', () => {
