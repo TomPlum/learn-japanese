@@ -1,21 +1,25 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { SessionSettings } from "./GameSettings";
 import React from "react";
+import DataSettings from "./DataSettings";
+import { ModeSettings } from "./GameSettings";
 
-class SessionMode {
+abstract class SessionMode {
     private readonly _displayName: string;
     private readonly _colour: string;
     private readonly _icon: IconDefinition | string;
-    private readonly _settings: SessionSettings;
+    private readonly _dataSettings: DataSettings;
+    private readonly _modeSettings: ModeSettings;
     private readonly _custom: boolean;
     private readonly _menu: React.FunctionComponent | React.ComponentClass<any> | undefined = undefined;
 
-    constructor(displayName: string, colour: string, icon: IconDefinition | string, settings: SessionSettings,
-                custom = false, menu: React.FunctionComponent | React.ComponentClass<any> | undefined = undefined) {
+    protected constructor(displayName: string, colour: string, icon: IconDefinition | string,
+                          dataSettings: DataSettings, modeSettings: ModeSettings,
+                          custom = false, menu: React.FunctionComponent | React.ComponentClass<any> | undefined = undefined) {
         this._displayName = displayName;
         this._colour = colour;
         this._icon = icon;
-        this._settings = settings;
+        this._dataSettings = dataSettings;
+        this._modeSettings = modeSettings;
         this._custom = custom;
         this._menu = menu;
     }
@@ -32,8 +36,12 @@ class SessionMode {
         return this._icon;
     }
 
-    get settings(): SessionSettings {
-        return this._settings;
+    get dataSettings(): DataSettings {
+        return this._dataSettings;
+    }
+
+    get modeSettings(): ModeSettings {
+        return this._modeSettings;
     }
 
     get custom(): boolean {

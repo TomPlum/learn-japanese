@@ -1,5 +1,7 @@
 export enum DisplayType {
     ROMAJI = "Rōmaji",
     KANA = "Kana",
-    MEANING = "Meaning"
+    MEANING = "Meaning",
+    KANJI = "Kanji",
+    RANDOM = "Random"
 }

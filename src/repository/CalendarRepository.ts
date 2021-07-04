@@ -1,12 +1,12 @@
-import { LearnCalendarSettings } from "../types/learn/LearningSessionSettings";
 import { Learnable } from "../types/learn/Learnable";
 import { days, months, nouns, phrases } from "../data/Calendar";
 import { DayData } from "../data/DataTypes";
 import Repository from "./Repository";
 import Definition from "../types/sentence/Definition";
+import { CalendarSettings } from "../types/session/DataSettings";
 
 export default class CalendarRepository implements Repository<Learnable> {
-    public read(config: LearnCalendarSettings): Learnable[] {
+    public read(config: CalendarSettings): Learnable[] {
         let data = [];
 
         if (config.months) {

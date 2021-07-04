@@ -1,23 +1,20 @@
 import { HintQuantity } from "../game/HintQuantity";
 import { LifeQuantity } from "../game/LifeQuantity";
 import { DisplayType } from "../game/DisplayType";
-import { LearnSettings } from "../learn/LearningSessionSettings";
 
-export interface SessionSettings {}
+export interface ModeSettings { }
 
-export default class GameSettings implements SessionSettings {
+export default class GameSettings implements ModeSettings {
     private readonly _hints: HintSettings;
     private readonly _lives: LifeSettings;
     private readonly _time: TimeSettings;
     private readonly _display: DisplaySettings;
-    private readonly _kana?: KanaSettings;
 
-    public constructor(hints: HintSettings, lives: LifeSettings, time: TimeSettings, display: DisplaySettings, kana?: KanaSettings) {
+    public constructor(hints: HintSettings, lives: LifeSettings, time: TimeSettings, display: DisplaySettings) {
         this._hints = hints;
         this._lives = lives;
         this._time = time;
         this._display = display;
-        this._kana = kana;
     }
 
     get hints(): HintSettings {
@@ -35,10 +32,6 @@ export default class GameSettings implements SessionSettings {
     get display(): DisplaySettings {
         return this._display;
     }
-
-    get kana(): KanaSettings | undefined {
-        return this._kana;
-    }
 }
 
 export class GameSettingsBuilder {
@@ -46,14 +39,12 @@ export class GameSettingsBuilder {
     private _lives: LifeSettings = { enabled: true, quantity: LifeQuantity.FIVE };
     private _time: TimeSettings = { timed: true, countdown: false };
     private _display: DisplaySettings = { type: DisplayType.ROMAJI, cards: 1, score: true };
-    private _kana?: KanaSettings = { hiragana: true, katakana: true, diagraphs: true, quantity: 50 };
 
     public fromExisting(settings: GameSettings): GameSettingsBuilder {
         this._hints = settings.hints;
         this._lives = settings.lives;
         this._time = settings.time;
         this._display = settings.display;
-        this._kana = settings.kana;
         return this;
     }
 
@@ -77,13 +68,8 @@ export class GameSettingsBuilder {
         return this;
     }
 
-    public withKanaSettings(kana: KanaSettings): GameSettingsBuilder {
-        this._kana = kana;
-        return this;
-    }
-
     public build(): GameSettings {
-        return new GameSettings(this._hints, this._lives, this._time, this._display, this._kana);
+        return new GameSettings(this._hints, this._lives, this._time, this._display);
     }
 }
 
@@ -101,14 +87,6 @@ export interface LifeSettings {
 export interface HintSettings {
     enabled: boolean;
     quantity?: HintQuantity;
-}
-
-export interface KanaSettings extends LearnSettings {
-    hiragana?: boolean;
-    katakana?: boolean;
-    diagraphs?: boolean;
-    diacriticals?: boolean
-    quantity?: number;
 }
 
 export interface TimeSettings {

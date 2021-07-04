@@ -2,26 +2,14 @@ import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Topic from "../../types/Topic";
 import TopicSelectionMenu from "./TopicSelectionMenu";
-import GameSettings, { SessionSettings } from "../../types/session/GameSettings";
 import { AppMode } from "../../types/AppMode";
 import ModeSelectionMenu from "../learn/ModeSelectionMenu";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
-import { LearningSessionSettings } from "../../types/learn/LearningSessionSettings";
-
-export interface GameTypeSettings {
-    topic: Topic;
-    settings: GameSettings;
-}
-
-export interface LearnSessionSettings {
-    topic: Topic;
-    settings: LearningSessionSettings;
-}
+import { SessionSettings } from "../../types/session/SessionSettings";
 
 export interface GameSettingsMenuProps {
     mode: AppMode;
-    onStartGame: (settings: GameTypeSettings) => void;
-    onStartLearn: (settings: LearnSessionSettings) => void;
+    onStart: (settings: SessionSettings) => void;
 }
 
 interface GameSettingsMenuState {
@@ -38,6 +26,9 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
     }
 
     render() {
+        const { mode } = this.props;
+        const { topic } = this.state;
+
         return (
             <div className={styles.wrapper} data-testid="game-settings-menu">
                 <Container fluid className={styles.innerWrapper}>
@@ -46,12 +37,17 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
                             <TopicSelectionMenu
                                 onSelect={(selected) => this.setState({ topic: selected })}
                                 className={styles.menu}
-                                appMode={this.props.mode}
+                                appMode={mode}
                             />
                         </Col>
 
                         <Col sm={12} md={6} lg={7} className={styles.gameMenuWrapper}>
-                            {this.getMenu()}
+                            <ModeSelectionMenu
+                                key={topic.name}
+                                topic={topic}
+                                appMode={mode}
+                                onStart={this.onSelectMode}
+                            />
                         </Col>
                     </Row>
                 </Container>
@@ -59,29 +55,8 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
         );
     }
 
-    private getMenu = () => {
-        const { mode } = this.props;
-        const { topic } = this.state;
-
-        return (
-            <ModeSelectionMenu
-                key={topic.name}
-                topic={topic}
-                appMode={mode}
-                onStart={this.onStart}
-            />
-        );
-    }
-
-    private onStart = (settings: SessionSettings) => {
-        const { topic } = this.state;
-        const { mode, onStartGame, onStartLearn } = this.props;
-        if (mode === AppMode.LEARN) {
-            onStartLearn({ settings: settings as LearningSessionSettings, topic: topic });
-        } else {
-            onStartGame({ settings: settings as GameSettings, topic: topic});
-        }
-
+    private onSelectMode = (settings: SessionSettings) => {
+        this.props.onStart(settings);
     }
 }
 

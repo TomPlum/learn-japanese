@@ -2,17 +2,19 @@ import { faClock, faFillDrip, faPaintBrush, faSchool, faYenSign } from "@fortawe
 import { KyoikuGrade } from "../../kanji/KyoikuGrade";
 import CustomLearningMode from "../CustomLearningMode";
 import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
-import { MenuModes } from "../../MenuModes";
-import SessionMode from "../../session/SessionMode";
+import { LearnMenuModes } from "../../MenuModes";
+import { KanjiSettingsBuilder, LearnSettings } from "../../session/DataSettings";
+import LearnMode from "../../session/LearnMode";
 
-export default class LearnKanjiMode implements MenuModes {
-    getModes(): SessionMode[] {
+export default class LearnKanjiMode implements LearnMenuModes {
+    getModes(): LearnMode[] {
+        const defaultLearnSettings = new LearnSettings();
         return [
-            new SessionMode("Kyōiku", "#fdb40e", faSchool, { kanji: { grades: KyoikuGrade.ALL } }),
-            new SessionMode("Jōyō", "#ff7730", faPaintBrush, { kanji: { joyo: true } }),
-            new SessionMode("Numbers", "#1785e2", faYenSign, { kanji: { numbers: true } }),
-            new SessionMode("Colours", "#a01219", faFillDrip, { kanji: { colours: true } }),
-            new SessionMode("Time", "#fc3131", faClock, { kanji: { time: true } }),
+            new LearnMode("Kyōiku", "#fdb40e", faSchool, new KanjiSettingsBuilder().withGrades(KyoikuGrade.ALL).build(), defaultLearnSettings),
+            new LearnMode("Jōyō", "#ff7730", faPaintBrush, new KanjiSettingsBuilder().withJoyoKanji(true).build(), defaultLearnSettings),
+            new LearnMode("Numbers", "#1785e2", faYenSign, new KanjiSettingsBuilder().withTags(["number"]).build(), defaultLearnSettings),
+            new LearnMode("Colours", "#a01219", faFillDrip, new KanjiSettingsBuilder().withTags(["colour"]).build(), defaultLearnSettings),
+            new LearnMode("Time", "#fc3131", faClock, new KanjiSettingsBuilder().withTags(["time"]).build(), defaultLearnSettings),
             new CustomLearningMode(KanjiSettingsMenu)
         ];
     }

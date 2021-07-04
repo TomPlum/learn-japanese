@@ -3,9 +3,8 @@ import MemoryGame from "../game/MemoryGame";
 import GameResult from "../../types/game/GameResult";
 import GameResultScreen from "../results/GameResultScreen";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import { KanaRepository } from "../../repository/KanaRepository";
 import ControlsMenu from "../layout/ControlsMenu";
-import SettingsMenu, { GameTypeSettings, LearnSessionSettings } from "../layout/SettingsMenu";
+import SettingsMenu  from "../layout/SettingsMenu";
 import { AppMode, fromString } from "../../types/AppMode";
 import SessionID from "../../types/session/SessionID";
 import LearningSessionResult from "../../types/learn/LearningSessionResult";
@@ -18,17 +17,21 @@ import LearningDataRepository from "../../repository/LearningDataRepository";
 import { RouteComponentProps } from "react-router-dom";
 import { StaticContext } from "react-router";
 import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss";
+import { SessionSettings } from "../../types/session/SessionSettings";
+import GameSettings from "../../types/session/GameSettings";
+import DataSettings, { LearnSettings } from "../../types/session/DataSettings";
 
 interface MainMenuPageState {
     loading: boolean;
-    gameConfig?: GameTypeSettings;
-    learnConfig?: LearnSessionSettings;
+    gameConfig?: GameSettings;
+    learnConfig?: LearnSettings;
+    dataConfig?: DataSettings;
     inResultsScreen: boolean;
     gameResult?: GameResult;
     learningResult?: LearningSessionResult;
     sessionKey: SessionID,
     mode: AppMode;
-    learnData?: Learnable[];
+    data?: Learnable[];
 }
 
 interface PageParameters {
@@ -43,12 +46,13 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
             loading: false,
             gameConfig: undefined,
             learnConfig: undefined,
+            dataConfig: undefined,
             inResultsScreen: false,
             gameResult: undefined,
             learningResult: undefined,
             sessionKey: new SessionID(),
             mode: AppMode.PLAY,
-            learnData: undefined
+            data: undefined
         }
     }
 
@@ -58,7 +62,10 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
     }
 
     render() {
-        const { loading, gameConfig, learnConfig, inResultsScreen, gameResult, learningResult, mode, sessionKey, learnData } = this.state;
+        const {
+            loading, gameConfig, learnConfig, dataConfig, inResultsScreen, gameResult, learningResult, mode,
+            sessionKey, data
+        } = this.state;
 
         const isInMenu = !gameConfig && !learnConfig && !inResultsScreen && !learningResult;
 
@@ -71,8 +78,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
 
                     {isInMenu &&
                         <SettingsMenu
-                            onStartGame={this.startGame}
-                            onStartLearn={this.startLearning}
+                            onStart={this.onStartModeSelection}
                             mode={mode}
                         />
                     }
@@ -81,8 +87,8 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                         <MemoryGame
                             key={sessionKey.value}
                             sessionKey={sessionKey.value}
-                            data={new KanaRepository().read(gameConfig.settings.kana!)}
-                            settings={gameConfig.settings!}
+                            data={this.getLearnableData()}
+                            settings={gameConfig}
                             onFinish={this.onGameFinish}
                         />
                     }
@@ -94,9 +100,9 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                     {learnConfig && !inResultsScreen &&
                         <Learn
                             key={sessionKey.value}
-                            data={learnData ?? new LearningDataRepository().read(learnConfig)}
+                            data={data ?? this.getLearnableData()}
                             onFinish={this.onLearningFinish}
-                            card={learnConfig?.topic.cards!}
+                            card={dataConfig?.topic.cards!}
                         />
                     }
 
@@ -112,9 +118,17 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
         );
     }
 
-    private startGame = (settings: GameTypeSettings) => this.setState({ gameConfig: settings });
+    private getLearnableData = (): Learnable[] => {
+        return new LearningDataRepository().read(this.state.dataConfig);
+    }
 
-    private startLearning = (settings: LearnSessionSettings) => this.setState({ learnConfig: settings });
+    private onStartModeSelection = (settings: SessionSettings) => {
+        this.setState({
+            gameConfig: settings.gameSettings,
+            learnConfig: settings.learnSettings,
+            dataConfig: settings.dataSettings
+        });
+    }
 
     private onGameResultMenuClose = () => this.setState({ inResultsScreen: false, gameResult: undefined });
 
@@ -122,7 +136,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
         learningResult: undefined,
         learnConfig: undefined,
         inResultsScreen: false,
-        learnData: undefined
+        data: undefined
     });
 
     private onGameFinish = (result: GameResult) => this.setState({
@@ -143,7 +157,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
 
     private onPracticeStart = (data: Learnable[]) => {
         this.onGameResultMenuClose();
-        this.setState({ learnData: Arrays.copy(data) });
+        this.setState({ data: Arrays.copy(data) });
     }
 
     private handleChangeAppMode = (mode: AppMode) => this.setState({ mode: mode });

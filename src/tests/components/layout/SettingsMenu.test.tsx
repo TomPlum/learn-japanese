@@ -3,10 +3,11 @@ import SettingsMenu, { GameSettingsMenuProps } from "../../../components/layout/
 import Topic from "../../../types/Topic";
 import { RELAXED } from "../../../data/GameModePresets";
 import { AppMode } from "../../../types/AppMode";
+import { SessionSettings } from "../../../types/session/SessionSettings";
+import { CalendarSettingsBuilder, KanaSettingsBuilder, LearnSettings } from "../../../types/session/DataSettings";
 
 
-const onStartGameHandler = jest.fn();
-const onStartLearnHandler = jest.fn();
+const onStartHandler = jest.fn();
 
 let props: GameSettingsMenuProps;
 
@@ -25,8 +26,7 @@ const setup = () => {
 
 beforeEach(() => {
     props = {
-        onStartGame: onStartGameHandler,
-        onStartLearn: onStartLearnHandler,
+        onStart: onStartHandler,
         mode: AppMode.PLAY
     };
 });
@@ -60,7 +60,7 @@ describe("Starting Game", () => {
     test('Starting a kana game should call the onStartGame event handler with correct type and settings', () => {
         const { start } = setup();
         fireEvent.click(start);
-        expect(onStartGameHandler).toHaveBeenCalledWith({ topic: Topic.KANA, settings: RELAXED });
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forGame(new KanaSettingsBuilder().withEverything().build(), RELAXED));
     });
 
     //TODO: Re-enable once implemented calendar game
@@ -68,7 +68,7 @@ describe("Starting Game", () => {
         const { start, calendar } = setup();
         fireEvent.click(calendar);
         fireEvent.click(start);
-        expect(onStartGameHandler).toHaveBeenCalledWith({ topic: Topic.CALENDAR, settings: undefined });
+        expect(onStartHandler).toHaveBeenCalledWith({ topic: Topic.CALENDAR, settings: undefined });
     });
 
     //TODO: Re-enable once created numbers menu with a start button
@@ -76,7 +76,7 @@ describe("Starting Game", () => {
         const { start, numbers } = setup();
         fireEvent.click(numbers);
         fireEvent.click(start);
-        expect(onStartGameHandler).toHaveBeenCalledWith({ topic: Topic.NUMBERS, settings: undefined });
+        expect(onStartHandler).toHaveBeenCalledWith({ topic: Topic.NUMBERS, settings: undefined });
     });
 });
 
@@ -88,14 +88,14 @@ describe("Starting Learn Session", () => {
     test('Starting a kana learning session should call the onStartLearn event handler with correct type and settings', () => {
         const { start } = setup();
         fireEvent.click(start);
-        expect(onStartLearnHandler).toHaveBeenCalledWith({ topic: Topic.KANA, settings: { kana: { hiragana: true } } });
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new KanaSettingsBuilder().withHiragana().build(), new LearnSettings()));
     });
 
     test('Starting a calendar learning session should call the onStartLearn event handler with the correct type and settings', () => {
         const { calendar } = setup();
         fireEvent.click(calendar);
         fireEvent.click(screen.getByText('Start'));
-        expect(onStartLearnHandler).toHaveBeenCalledWith({ topic: Topic.CALENDAR, settings: { calendar: { days: true } } });
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new CalendarSettingsBuilder().withDays().build(), new LearnSettings()));
     });
 
 })

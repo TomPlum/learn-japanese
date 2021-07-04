@@ -18,13 +18,13 @@ import SentenceStructureFlashCardFront from "../components/learn/sentence/Senten
 import SentenceStructureFlashCardBack from "../components/learn/sentence/SentenceStructureFlashCardBack";
 import PlayKanjiModes from "./game/mode/PlayKanjiModes";
 import PlayKanaMode from "./game/mode/PlayKanaMode";
-import { MenuModes } from "./MenuModes";
+import { LearnMenuModes, PlayMenuModes } from "./MenuModes";
 
 export default class Topic {
     private readonly _name: string;
     private readonly _icon: IconDefinition;
-    private readonly _modes: MenuModes;
-    private readonly _playModes: MenuModes;
+    private readonly _modes: LearnMenuModes;
+    private readonly _playModes: PlayMenuModes;
     private readonly _cards: CardProps;
 
     public static KANA = new Topic(
@@ -59,7 +59,7 @@ export default class Topic {
 
     public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR, Topic.GRAMMAR];
 
-    private constructor(name: string, icon: IconDefinition, modes: MenuModes, playModes: MenuModes, cards: CardProps) {
+    private constructor(name: string, icon: IconDefinition, modes: LearnMenuModes, playModes: PlayMenuModes, cards: CardProps) {
         this._name = name;
         this._icon = icon;
         this._modes = modes;
@@ -75,7 +75,7 @@ export default class Topic {
         return this._icon;
     }
 
-    get modes(): MenuModes {
+    get modes(): LearnMenuModes {
         return this._modes;
     }
 
@@ -83,7 +83,7 @@ export default class Topic {
         return this._cards;
     }
 
-    get playModes(): MenuModes {
+    get playModes(): PlayMenuModes {
         return this._playModes;
     }
 }

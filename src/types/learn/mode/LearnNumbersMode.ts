@@ -1,16 +1,37 @@
 import { faBaby, faRuler, faSort, faSortNumericDown, faStopwatch, faTimes } from "@fortawesome/free-solid-svg-icons";
-import SessionMode from "../../session/SessionMode";
-import { MenuModes } from "../../MenuModes";
+import { LearnMenuModes } from "../../MenuModes";
+import LearnMode from "../../session/LearnMode";
+import { LearnSettings, NumbersSettingsBuilder } from "../../session/DataSettings";
 
-export default class LearnNumbersMode implements MenuModes {
-    getModes(): SessionMode[] {
+export default class LearnNumbersMode implements LearnMenuModes {
+    getModes(): LearnMode[] {
+        const defaultLearnSettings = new LearnSettings();
+
         return [
-            new SessionMode("Numbers", "#fdb40e", faSortNumericDown, { numbers: { numbers: true } }),
-            new SessionMode("Counters", "#ff7730", faStopwatch, { numbers: { counters: true } }),
-            new SessionMode("Age", "#1785e2", faBaby, { numbers: { age: true } }),
-            new SessionMode("Exceptions", "#a01219", faTimes, { numbers: { exceptions: true } }),
-            new SessionMode("Units", "#fc3131", faRuler, { numbers: { units: true } }),
-            new SessionMode("Sequence", "#fc3131", faSort, { numbers: { sequence: true } }),
+            new LearnMode("Numbers", "#fdb40e", faSortNumericDown,
+                new NumbersSettingsBuilder().withNumbers().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Counters", "#ff7730", faStopwatch,
+                new NumbersSettingsBuilder().withCounters().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Age", "#1785e2", faBaby,
+                new NumbersSettingsBuilder().withAge().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Exceptions", "#a01219", faTimes,
+                new NumbersSettingsBuilder().withExceptions().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Units", "#fc3131", faRuler,
+                new NumbersSettingsBuilder().withUnits().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Sequence", "#fc3131", faSort,
+                new NumbersSettingsBuilder().withSequence().build(),
+                defaultLearnSettings
+            )
         ];
     }
 

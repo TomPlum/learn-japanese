@@ -1,18 +1,23 @@
 import { faFire, faFont, faGraduationCap, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
 import { HARDCORE, KANA, RELAXED, ROMAJI, TIME_ATTACK } from "../../../data/GameModePresets";
-import SessionMode from "../../session/SessionMode";
-import { MenuModes } from "../../MenuModes";
+import { PlayMenuModes } from "../../MenuModes";
+import PlayMode from "../../session/PlayMode";
+import { GameSettingsBuilder } from "../../session/GameSettings";
+import { KanaSettingsBuilder } from "../../session/DataSettings";
+import KanaGameSettingsMenu from "../../../components/settings/KanaGameSettingsMenu";
 
-export default class PlayKanaMode implements MenuModes {
-    getModes(): SessionMode[] {
+export default class PlayKanaMode implements PlayMenuModes {
+    getModes(): PlayMode[] {
+        const defaultKanaSettings = new KanaSettingsBuilder().withEverything().build();
+
         return [
-            new SessionMode("Relaxed", "#fdb40e", faGraduationCap, RELAXED),
-            new SessionMode("Time Attack", "#ff7730", faStopwatch, TIME_ATTACK),
-            new SessionMode("Rōmaji", "#1785e2", faFont, ROMAJI),
-            new SessionMode("Kana", "#a01219", faKickstarterK, KANA),
-            new SessionMode("Hardcore", "#fc3131", faFire, HARDCORE),
-            new SessionMode("Custom", "#41d085", faVial, {})
+            new PlayMode("Relaxed", "#fdb40e", faGraduationCap, defaultKanaSettings, RELAXED),
+            new PlayMode("Time Attack", "#ff7730", faStopwatch, defaultKanaSettings, TIME_ATTACK),
+            new PlayMode("Rōmaji", "#1785e2", faFont, defaultKanaSettings, ROMAJI),
+            new PlayMode("Kana", "#a01219", faKickstarterK, defaultKanaSettings, KANA),
+            new PlayMode("Hardcore", "#fc3131", faFire, new KanaSettingsBuilder().withEverything().withMaxQuantity().build(), HARDCORE),
+            new PlayMode("Custom", "#41d085", faVial, defaultKanaSettings, new GameSettingsBuilder().build(), true, KanaGameSettingsMenu)
         ];
     }
 

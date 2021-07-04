@@ -3,13 +3,8 @@ import { HintQuantity } from "../../../types/game/HintQuantity";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { DisplayType } from "../../../types/game/DisplayType";
 
-describe("Session Settings", () => {
+describe("Game Settings", () => {
     describe("Builder", () => {
-        it("Should set default Kana settings if not specified", () => {
-            const settings = new GameSettingsBuilder().build();
-            expect(settings.kana).toStrictEqual({ hiragana: true, katakana: true, diagraphs: true, quantity: 50 });
-        });
-
         it("Should set default Hint settings if not specified", () => {
             const settings = new GameSettingsBuilder().build();
             expect(settings.hints).toStrictEqual({ enabled: true, quantity: HintQuantity.UNLIMITED });
@@ -32,14 +27,12 @@ describe("Session Settings", () => {
 
         it("Should override settings when specified", () => {
             const settings = new GameSettingsBuilder()
-                .withKanaSettings({ hiragana: true, katakana: true, diagraphs: true })
                 .withDisplaySettings({ type: DisplayType.KANA, cards: 6, score: true })
                 .withHintSettings({ enabled: false })
                 .withLifeSettings({ enabled: true, quantity: LifeQuantity.ONE })
                 .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
                 .build();
 
-            expect(settings.kana).toStrictEqual({ hiragana: true, katakana: true, diagraphs: true });
             expect(settings.display).toStrictEqual({ type: DisplayType.KANA, cards: 6, score: true });
             expect(settings.hints).toStrictEqual({ enabled: false });
             expect(settings.lives).toStrictEqual({ enabled: true, quantity: LifeQuantity.ONE });

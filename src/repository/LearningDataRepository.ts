@@ -2,36 +2,34 @@ import Topic from "../types/Topic";
 import { Learnable } from "../types/learn/Learnable";
 import { KanaRepository } from "./KanaRepository";
 import CalendarRepository from "./CalendarRepository";
-import { LearnSessionSettings } from "../components/layout/SettingsMenu";
 import { KanjiRepository } from "./KanjiRepository";
 import BasicsRepository from "./BasicsRepository";
 import NumbersRepository from "./NumbersRepository";
 import SentenceStructureRepository from "./SentenceStructureRepository";
+import DataSettings, { BasicsSettings, CalendarSettings, KanaSettings, KanjiSettings, NumbersSettings, SentenceStructureSettings } from "../types/session/DataSettings";
 
 export default class LearningDataRepository {
-    public read(config?: LearnSessionSettings): Learnable[] {
-        if (!config) return [];
+    public read(settings?: DataSettings): Learnable[] {
+        if (!settings) return [];
 
-        const settings = config.settings;
-
-        switch (config.topic) {
+        switch (settings.topic) {
             case Topic.KANA: {
-                return new KanaRepository().read(settings.kana!);
+                return new KanaRepository().read(settings as KanaSettings);
             }
             case Topic.CALENDAR: {
-                return new CalendarRepository().read(settings.calendar!);
+                return new CalendarRepository().read(settings as CalendarSettings);
             }
             case Topic.KANJI: {
-                return new KanjiRepository().read(settings.kanji!);
+                return new KanjiRepository().read(settings as KanjiSettings);
             }
             case Topic.BASICS: {
-                return new BasicsRepository().read(settings.basics!);
+                return new BasicsRepository().read(settings as BasicsSettings);
             }
             case Topic.NUMBERS: {
-                return new NumbersRepository().read(settings.numbers!);
+                return new NumbersRepository().read(settings as NumbersSettings);
             }
             case Topic.GRAMMAR: {
-                return new SentenceStructureRepository().read(settings.sentence!);
+                return new SentenceStructureRepository().read(settings as SentenceStructureSettings);
             }
             default: {
                 return [];

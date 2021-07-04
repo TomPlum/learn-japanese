@@ -1,11 +1,11 @@
 import Repository from "./Repository";
 import CommonData from "../types/learn/CommonData";
-import { LearnNumbersSettings } from "../types/learn/LearningSessionSettings";
 import { CounterData, NumbersData } from "../data/DataTypes";
 import numbers, { counters } from "../data/Numbers";
+import { NumbersSettings } from "../types/session/DataSettings";
 
 export default class NumbersRepository implements Repository<CommonData> {
-    read(settings: LearnNumbersSettings): CommonData[] {
+    read(settings: NumbersSettings): CommonData[] {
         if (settings.numbers) {
             return numbers().map((number: NumbersData) => {
                 const kanji = this.convertKanji(number);

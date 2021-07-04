@@ -1,16 +1,37 @@
-import { faPalette, faCat, faCompass, faCloudSunRain, faChild, faHandPaper } from "@fortawesome/free-solid-svg-icons";
-import { MenuModes } from "../../MenuModes";
-import SessionMode from "../../session/SessionMode";
+import { faCat, faChild, faCloudSunRain, faCompass, faHandPaper, faPalette } from "@fortawesome/free-solid-svg-icons";
+import { LearnMenuModes } from "../../MenuModes";
+import LearnMode from "../../session/LearnMode";
+import { BasicsSettingsBuilder, LearnSettings } from "../../session/DataSettings";
 
-export default class LearnBasicsMode implements MenuModes {
-    getModes(): SessionMode[] {
+export default class LearnBasicsMode implements LearnMenuModes {
+    getModes(): LearnMode[] {
+        const defaultLearnSettings = new LearnSettings();
+
         return [
-            new SessionMode("Colours", "#fd0e3e", faPalette, { basics: { colours: true } }),
-            new SessionMode("Animals", "#ff7730", faCat, { basics: { animals: true } }),
-            new SessionMode("Directions", "#1785e2", faCompass, { basics: { directions: true } }),
-            new SessionMode("Weather", "#e3c93a", faCloudSunRain, { basics: { weather: true } }),
-            new SessionMode("Family", "#3ee939", faChild, { basics: { family: true} }),
-            new SessionMode("Body", "#5641d0", faHandPaper, { basics:  { body: true } })
+            new LearnMode("Colours", "#fd0e3e", faPalette,
+                new BasicsSettingsBuilder().withColours().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Animals", "#ff7730", faCat,
+                new BasicsSettingsBuilder().withAnimals().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Directions", "#1785e2", faCompass,
+                new BasicsSettingsBuilder().withDirections().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Weather", "#e3c93a", faCloudSunRain,
+                new BasicsSettingsBuilder().withWeather().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Family", "#3ee939", faChild,
+                new BasicsSettingsBuilder().withFamily().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Body", "#5641d0", faHandPaper,
+                new BasicsSettingsBuilder().withBody().build(),
+                defaultLearnSettings
+            )
         ];
     }
 

@@ -2,24 +2,14 @@ import { Kanji } from "../types/kanji/Kanji";
 import { Reading } from "../types/kanji/Reading";
 import { ReadingType } from "../types/kanji/ReadingType";
 import { Example } from "../types/kanji/Example";
-import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 import { KanjiData, KanjiExample, KanjiReading } from "../data/DataTypes";
 import { joyo, kyoiku } from "../data/Kanji";
-import { LearnSettings } from "../types/learn/LearningSessionSettings";
 import Repository from "./Repository";
 import { RandomNumberGenerator } from "../utility/RandomNumberGenerator";
-
-export interface KanjiSettings extends LearnSettings {
-    grades?: KyoikuGrade[];
-    quantity?: number;
-    joyo?: boolean;
-    numbers?: boolean;
-    colours?: boolean;
-    time?: boolean;
-}
+import { KanjiSettings } from "../types/session/DataSettings";
 
 export class KanjiRepository implements Repository<Kanji> {
-    public read(settings?: KanjiSettings): Kanji[] {
+    public read(settings: KanjiSettings): Kanji[] {
         if (!settings) return [];
 
         if (settings.joyo) {

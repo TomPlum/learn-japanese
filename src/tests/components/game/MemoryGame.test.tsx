@@ -34,7 +34,6 @@ beforeEach(() => {
         data: [a, i, u, e, o],
         settings: new GameSettingsBuilder()
             .withDisplaySettings({ type: DisplayType.ROMAJI, cards: 1, score: true })
-            .withKanaSettings({ hiragana: true })
             .withHintSettings({ enabled: true, quantity: 999 })
             .withLifeSettings({ enabled: false })
             .withTimeSettings({ timed: false, countdown: false })

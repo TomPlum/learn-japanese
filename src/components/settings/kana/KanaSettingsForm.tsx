@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
-import { KanaSettings } from "../../../types/session/GameSettings";
 import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
+import { KanaSettings, KanaSettingsBuilder } from "../../../types/session/DataSettings";
 
 interface KanaSettingsProps {
     onSelect: (settings: KanaSettings) => void;
@@ -16,11 +16,16 @@ interface KanaSettingsState {
 
 class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
 
-    private readonly defaultState = { hiragana: true, katakana: false, diagraphs: false, quantity: 50 };
+    private readonly defaultState = new KanaSettingsBuilder().withHiragana().build();
 
     constructor(props: KanaSettingsProps | Readonly<KanaSettingsProps>) {
         super(props);
-        this.state = this.defaultState;
+        this.state = {
+            hiragana: this.defaultState.hiragana,
+            katakana: this.defaultState.katakana,
+            diagraphs: this.defaultState.diagraphs,
+            quantity: this.defaultState.quantity ?? 50
+        }
     }
 
     componentDidMount() {
@@ -30,7 +35,13 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
     componentDidUpdate(prevProps: Readonly<KanaSettingsProps>, prevState: Readonly<KanaSettingsState>) {
         if (prevState !== this.state) {
             const { hiragana, katakana, diagraphs, quantity } = this.state;
-            this.props.onSelect({ hiragana, katakana, diagraphs, quantity });
+            const settings = new KanaSettingsBuilder()
+                .withHiragana(hiragana)
+                .withKatakana(katakana)
+                .withDiagraphs(diagraphs)
+                .withQuantity(quantity)
+                .build();
+            this.props.onSelect(settings);
         }
     }
 
@@ -85,7 +96,12 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
         );
     }
 
-    reset = () => this.setState(this.defaultState);
+    reset = () => this.setState({
+        hiragana: this.defaultState.hiragana,
+        katakana: this.defaultState.katakana,
+        diagraphs: this.defaultState.diagraphs,
+        quantity: this.defaultState.quantity ?? 50
+    });
 }
 
 export default KanaSettingsForm;

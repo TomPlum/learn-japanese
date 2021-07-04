@@ -5,6 +5,7 @@ import {KanaColumn} from "../../types/kana/KanaColumn";
 import hiragana from "../../data/Hiragana";
 import { KanaData } from "../../data/DataTypes";
 import katakana from "../../data/Katakana";
+import { KanaSettingsBuilder } from "../../types/session/DataSettings";
 
 jest.mock("../../data/Hiragana");
 jest.mock("../../data/Katakana");
@@ -34,7 +35,7 @@ describe("Kana Repository", () => {
     const repository = new KanaRepository();
 
     it("Should return only the quantity specified when the config parameter is passed", () => {
-        const data = repository.read({ hiragana: true, quantity: 3 });
+        const data = repository.read(new KanaSettingsBuilder().withHiragana().withQuantity(3).build());
         expect(data).toHaveLength(3);
     });
 
@@ -42,7 +43,7 @@ describe("Kana Repository", () => {
         describe("Read", () => {
             it("Should convert the JSON values into Kana objects", () => {
                 mockHiragana.mockReturnValue([{ name: "あ", code: "\u3042", romaji: ["a"], column: KanaColumn.VOWEL, diacritical: false }]);
-                const response = repository.read({ hiragana: true });
+                const response = repository.read(new KanaSettingsBuilder().withHiragana().build());
                 expect(response[0]).toStrictEqual(new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false));
             });
         });
@@ -52,7 +53,7 @@ describe("Kana Repository", () => {
         describe("Read", () => {
             it("Should convert the JSON values into Kana objects", () => {
                 mockKatakana.mockReturnValue([{ name: "ア", code: "\u30A2", romaji: ["a"], column: KanaColumn.VOWEL, diacritical: false }]);
-                const response = repository.read({ katakana: true });
+                const response = repository.read(new KanaSettingsBuilder().withKatakana().build());
                 expect(response[0]).toStrictEqual(new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false));
             });
         });
