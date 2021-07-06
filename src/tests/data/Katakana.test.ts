@@ -249,6 +249,11 @@ describe("Katakana", () => {
         it("pya", () => expect(getKatakana(["pya"]).code).toEqual("ピャ"));
         it("pyu", () => expect(getKatakana(["pyu"]).code).toEqual("ピュ"));
         it("pyo", () => expect(getKatakana(["pyo"]).code).toEqual("ピョ"));
+
+        it("Should return a total of 36 diagraphs", () => {
+            const diagraphs = katakana().filter(data => data.name.length === 2);
+            expect(diagraphs).toHaveLength(36);
+        });
     });
 
     describe("Is Diacritical", () => {

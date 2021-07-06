@@ -34,13 +34,18 @@ export class KanaSettings extends DataSettings {
     private readonly _katakana: boolean;
     private readonly _diagraphs: boolean;
     private readonly _diacriticals: boolean;
+    private readonly _regular: boolean;
+    private readonly _onlyDiagraphs: boolean;
 
-    constructor(hiragana: boolean, katakana: boolean, diagraphs: boolean, diacriticals: boolean, quantity?: number) {
+    constructor(hiragana: boolean, katakana: boolean, diagraphs: boolean, diacriticals: boolean, regular: boolean,
+                onlyDiagraphs: boolean, quantity?: number) {
         super(Topic.KANA, quantity)
         this._hiragana = hiragana;
         this._katakana = katakana;
         this._diagraphs = diagraphs;
         this._diacriticals = diacriticals;
+        this._regular = regular;
+        this._onlyDiagraphs = onlyDiagraphs;
     }
 
     get hiragana(): boolean {
@@ -58,14 +63,24 @@ export class KanaSettings extends DataSettings {
     get diacriticals(): boolean {
         return this._diacriticals;
     }
+
+    get regular(): boolean {
+        return this._regular;
+    }
+
+    get onlyDiagraphs(): boolean {
+        return this._onlyDiagraphs;
+    }
 }
 
 export class KanaSettingsBuilder {
     private _hiragana: boolean = false;
     private _katakana: boolean = false;
+    private _regular: boolean = true;
     private _diagraphs: boolean = false;
+    private _onlyDiagraphs: boolean = false;
     private _diacriticals: boolean = false;
-    private _quantity: number | undefined = 50;
+    private _quantity: number | undefined;
 
     withHiragana(include: boolean = true): KanaSettingsBuilder {
         this._hiragana = include;
@@ -77,8 +92,18 @@ export class KanaSettingsBuilder {
         return this;
     }
 
+    withRegularKana(include: boolean = true): KanaSettingsBuilder {
+        this._regular = include;
+        return this;
+    }
+
     withDiagraphs(include: boolean = true): KanaSettingsBuilder {
         this._diagraphs = include;
+        return this;
+    }
+
+    withOnlyDiagraphs(include: boolean = true): KanaSettingsBuilder {
+        this._onlyDiagraphs = include;
         return this;
     }
 
@@ -87,7 +112,7 @@ export class KanaSettingsBuilder {
         return this;
     }
 
-    withQuantity(quantity: number): KanaSettingsBuilder {
+    withQuantity(quantity?: number): KanaSettingsBuilder {
         this._quantity = quantity;
         return this;
     }
@@ -106,7 +131,10 @@ export class KanaSettingsBuilder {
     }
 
     build(): KanaSettings {
-        return new KanaSettings(this._hiragana, this._katakana, this._diagraphs, this._diacriticals, this._quantity);
+        return new KanaSettings(
+            this._hiragana, this._katakana, this._diagraphs, this._diacriticals,
+            this._regular, this._onlyDiagraphs, this._quantity
+        );
     }
 }
 

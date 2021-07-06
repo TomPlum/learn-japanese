@@ -8,6 +8,7 @@ import Repository from "./Repository";
 import { RandomNumberGenerator } from "../utility/RandomNumberGenerator";
 import { KanjiSettings } from "../types/session/DataSettings";
 
+//TODO: Integrate Kanji Filters & create new ones for grades etc.
 export class KanjiRepository implements Repository<Kanji> {
     public read(settings: KanjiSettings): Kanji[] {
         if (!settings) return [];

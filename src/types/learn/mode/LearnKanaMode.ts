@@ -8,12 +8,42 @@ export default class LearnKanaMode implements LearnMenuModes {
         const defaultLearnSettings = new LearnSettings();
         
         return [
-            new LearnMode("Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), defaultLearnSettings),
-            new LearnMode("Katakana", "#ff7730", "ア", new KanaSettingsBuilder().withKatakana().build(), defaultLearnSettings),
-            new LearnMode("Diacriticals", "#1785e2", "ざ", new KanaSettingsBuilder().withDiacriticals().build(), defaultLearnSettings),
-            new LearnMode("Diagraphs", "#a01219", "きゃ", new KanaSettingsBuilder().withDiagraphs().build(), defaultLearnSettings),
-            new LearnMode("All", "#fc3131", "あア", new KanaSettingsBuilder().withEverything().build(), defaultLearnSettings),
-            new LearnMode("Custom", "#41d085", faVial, new KanaSettingsBuilder().build(), defaultLearnSettings)
+            new LearnMode("Hiragana", "#fdb40e", "あ",
+                new KanaSettingsBuilder().withHiragana().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Katakana", "#ff7730", "ア",
+                new KanaSettingsBuilder().withKatakana().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Diacriticals", "#1785e2", "ざ",
+                new KanaSettingsBuilder()
+                    .withHiragana()
+                    .withKatakana()
+                    .withDiacriticals()
+                    .withDiagraphs(false)
+                    .withRegularKana(false)
+                    .withMaxQuantity()
+                    .build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Diagraphs", "#a01219", "きゃ",
+                new KanaSettingsBuilder()
+                    .withHiragana()
+                    .withKatakana()
+                    .withOnlyDiagraphs()
+                    .withMaxQuantity()
+                    .build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("All", "#fc3131", "あア",
+                new KanaSettingsBuilder().withEverything().build(),
+                defaultLearnSettings
+            ),
+            new LearnMode("Custom", "#41d085", faVial,
+                new KanaSettingsBuilder().build(),
+                defaultLearnSettings
+            )
         ];
     }
 

@@ -249,6 +249,11 @@ describe("Hiragana", () => {
         it("pya", () => expect(getHiragana(["pya"]).code).toEqual("ぴゃ"));
         it("pyu", () => expect(getHiragana(["pyu"]).code).toEqual("ぴゅ"));
         it("pyo", () => expect(getHiragana(["pyo"]).code).toEqual("ぴょ"));
+
+        it("Should return a total of 36 diagraphs", () => {
+            const diagraphs = hiragana().filter(data => data.name.length === 2);
+            expect(diagraphs).toHaveLength(36);
+        });
     });
 
     describe("Is Diacritical", () => {
