@@ -9,7 +9,7 @@ import { KanjiSettingsBuilder } from "../../session/DataSettings";
 
 export default class PlayKanjiModes implements PlayMenuModes {
     getModes(): PlayMode[] {
-        const defaultKanjiSettings = new KanjiSettingsBuilder().withJoyoKanji().build();
+        const defaultKanjiSettings = new KanjiSettingsBuilder().withJoyoKanji().withQuantity(25).build();
 
         return [
             new PlayMode("Kanji", "#6857ee", faPaintBrush,
@@ -18,8 +18,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                     .withDisplaySettings({ type: DisplayType.KANJI, score: true, cards: 4 })
                     .build()
             ),
-            new PlayMode(
-                "Meaning", "#65cd3a", faSchool,
+            new PlayMode("Meaning", "#65cd3a", faSchool,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
                     .withDisplaySettings({ type: DisplayType.MEANING, score: true, cards: 4 })

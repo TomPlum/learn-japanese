@@ -61,7 +61,7 @@ interface MemoryGameState {
 class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     private readonly timer: React.RefObject<Timer>;
     private readonly countdown: React.RefObject<CountDown>;
-    private readonly question: React.RefObject<any>; //TODO: Can we type as KanaQuestion here?
+    private readonly question: React.RefObject<any>; //TODO: Can we type as GameQuestion here?
 
     constructor(props: MemoryGameProps | Readonly<MemoryGameProps>) {
         super(props);
