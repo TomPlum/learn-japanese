@@ -5,7 +5,7 @@ import MenuDescription from "../ui/MenuDescription";
 import LearnTopicButton from "./LearnTopicButton";
 import StartButton from "../ui/buttons/StartButton";
 import Arrays from "../../utility/Arrays";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCogs, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "./Search";
 import { Learnable } from "../../types/learn/Learnable";
@@ -93,7 +93,7 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
 
                 {renderMenu && (
                     <Row>
-                        <Col className={appMode == AppMode.LEARN ? "pr-1" : undefined}>
+                        <Col className="pr-1">
                             <StartButton onClick={this.onStart} />
                         </Col>
 
@@ -102,6 +102,14 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
                                 <Button className={styles.search} onClick={() => this.setState({ searching: true })}
                                         title="Search">
                                     <FontAwesomeIcon icon={faSearch} fixedWidth/>
+                                </Button>
+                            </Col>
+                        )}
+
+                        {appMode === AppMode.PLAY && (
+                            <Col xs={2} className="pl-2">
+                                <Button variant="secondary" className={styles.settings} onClick={() => {}} title="Game Settings">
+                                    <FontAwesomeIcon icon={faCogs} fixedWidth/>
                                 </Button>
                             </Col>
                         )}
