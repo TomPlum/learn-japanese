@@ -290,6 +290,11 @@ describe("Hiragana", () => {
         each(regular).it("it should have diacritical set to false", (kana) => {
             expect(kana.diacritical).toBe(false);
         });
+
+        it("Should return exactly 25 diacritical (non-diagraph) kana", () => {
+            const diacriticals = hiragana().filter(data => data.diacritical && data.code.length === 1);
+            expect(diacriticals.length).toBe(25);
+        });
     });
 
     function getMultipleHiragana(romaji: string[][]): KanaData[] {
