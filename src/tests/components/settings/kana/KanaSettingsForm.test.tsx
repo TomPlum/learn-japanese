@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanaSettingsForm from "../../../../components/settings/kana/KanaSettingsForm";
-import { KanaSettingsBuilder } from "../../../../types/session/DataSettings";
+import { KanaSettingsBuilder } from "../../../../types/session/settings/data/KanaSettings";
 
 const onSelectHandler = jest.fn();
 

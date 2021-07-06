@@ -17,9 +17,10 @@ import LearningDataRepository from "../../repository/LearningDataRepository";
 import { RouteComponentProps } from "react-router-dom";
 import { StaticContext } from "react-router";
 import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss";
-import { SessionSettings } from "../../types/session/SessionSettings";
-import GameSettings from "../../types/session/GameSettings";
-import DataSettings, { LearnSettings } from "../../types/session/DataSettings";
+import { SessionSettings } from "../../types/session/settings/SessionSettings";
+import GameSettings from "../../types/session/settings/GameSettings";
+import DataSettings  from "../../types/session/settings/data/DataSettings";
+import LearnSettings from "../../types/session/settings/LearnSettings";
 
 interface MainMenuPageState {
     loading: boolean;

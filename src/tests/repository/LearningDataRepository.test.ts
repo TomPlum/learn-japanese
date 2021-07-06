@@ -6,7 +6,13 @@ import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 import BasicsRepository from "../../repository/BasicsRepository";
 import NumbersRepository from "../../repository/NumbersRepository";
 import SentenceStructureRepository from "../../repository/SentenceStructureRepository";
-import DataSettings, { BasicsSettingsBuilder, CalendarSettingsBuilder, KanaSettingsBuilder, KanjiSettingsBuilder, NumbersSettingsBuilder, SentenceStructureSettingsBuilder } from "../../types/session/DataSettings";
+import DataSettings from "../../types/session/settings/data/DataSettings";
+import { NumbersSettingsBuilder } from "../../types/session/settings/data/NumbersSettings";
+import { BasicsSettingsBuilder } from "../../types/session/settings/data/BasicsSettings";
+import { KanjiSettingsBuilder } from "../../types/session/settings/data/KanjiSettings";
+import { CalendarSettingsBuilder } from "../../types/session/settings/data/CalendarSettings";
+import { SentenceStructureSettingsBuilder } from "../../types/session/settings/data/SentenceStructureSettings";
+import { KanaSettingsBuilder } from "../../types/session/settings/data/KanaSettings";
 
 jest.mock('../../repository/KanaRepository');
 jest.mock('../../repository/KanjiRepository');

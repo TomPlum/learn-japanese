@@ -1,8 +1,8 @@
 import { faVial } from "@fortawesome/free-solid-svg-icons";
 import React, { ComponentClass } from "react";
-import SessionMode from "../session/SessionMode";
 import LearnMode from "../session/LearnMode";
-import { KanaSettingsBuilder, LearnSettings } from "../session/DataSettings";
+import { KanaSettingsBuilder } from "../session/settings/data/KanaSettings";
+import LearnSettings from "../session/settings/LearnSettings";
 
 export default class CustomLearningMode extends LearnMode {
     constructor(menu: React.FunctionComponent | ComponentClass<any>) {

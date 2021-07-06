@@ -10,7 +10,7 @@ import { KanaRepository } from "../../repository/KanaRepository";
 import { Environment } from "../../utility/Environment";
 import ParallaxBackground from "../layout/ParallaxBackground";
 import { Link } from "react-router-dom"
-import { KanaSettingsBuilder } from "../../types/session/DataSettings";
+import { KanaSettingsBuilder } from "../../types/session/settings/data/KanaSettings";
 
 class LandingPage extends Component {
 

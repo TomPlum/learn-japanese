@@ -1,4 +1,4 @@
-import { GameSettingsBuilder } from "../types/session/GameSettings";
+import { GameSettingsBuilder } from "../types/session/settings/GameSettings";
 import { HintQuantity } from "../types/game/HintQuantity";
 import { LifeQuantity } from "../types/game/LifeQuantity";
 import { DisplayType } from "../types/game/DisplayType";

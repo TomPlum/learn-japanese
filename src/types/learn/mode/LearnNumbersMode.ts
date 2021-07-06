@@ -1,7 +1,8 @@
 import { faBaby, faRuler, faSort, faSortNumericDown, faStopwatch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { LearnMenuModes } from "../../MenuModes";
 import LearnMode from "../../session/LearnMode";
-import { LearnSettings, NumbersSettingsBuilder } from "../../session/DataSettings";
+import LearnSettings from "../../session/settings/LearnSettings";
+import { NumbersSettingsBuilder } from "../../session/settings/data/NumbersSettings";
 
 export default class LearnNumbersMode implements LearnMenuModes {
     getModes(): LearnMode[] {

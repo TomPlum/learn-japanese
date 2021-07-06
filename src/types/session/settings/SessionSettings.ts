@@ -1,5 +1,6 @@
-import DataSettings, { LearnSettings } from "./DataSettings";
+import DataSettings from "./data/DataSettings";
 import GameSettings from "./GameSettings";
+import LearnSettings from "./LearnSettings";
 
 export class SessionSettings {
     private readonly _gameSettings: GameSettings | undefined;

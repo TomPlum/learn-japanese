@@ -3,8 +3,10 @@ import SettingsMenu, { GameSettingsMenuProps } from "../../../components/layout/
 import Topic from "../../../types/Topic";
 import { RELAXED } from "../../../data/GameModePresets";
 import { AppMode } from "../../../types/AppMode";
-import { SessionSettings } from "../../../types/session/SessionSettings";
-import { CalendarSettingsBuilder, KanaSettingsBuilder, LearnSettings } from "../../../types/session/DataSettings";
+import { SessionSettings } from "../../../types/session/settings/SessionSettings";
+import { CalendarSettingsBuilder } from "../../../types/session/settings/data/CalendarSettings";
+import { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
+import LearnSettings from "../../../types/session/settings/LearnSettings";
 
 
 const onStartHandler = jest.fn();
@@ -88,14 +90,20 @@ describe("Starting Learn Session", () => {
     test('Starting a kana learning session should call the onStartLearn event handler with correct type and settings', () => {
         const { start } = setup();
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new KanaSettingsBuilder().withHiragana().build(), new LearnSettings()));
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(
+            new KanaSettingsBuilder().withHiragana().build(),
+            new LearnSettings())
+        );
     });
 
     test('Starting a calendar learning session should call the onStartLearn event handler with the correct type and settings', () => {
         const { calendar } = setup();
         fireEvent.click(calendar);
         fireEvent.click(screen.getByText('Start'));
-        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new CalendarSettingsBuilder().withDays().build(), new LearnSettings()));
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(
+            new CalendarSettingsBuilder().withDays().build(),
+            new LearnSettings())
+        );
     });
 
 })

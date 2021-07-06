@@ -11,13 +11,13 @@ import Search from "./Search";
 import { Learnable } from "../../types/learn/Learnable";
 import LearningDataRepository from "../../repository/LearningDataRepository";
 import Topic from "../../types/Topic";
-import GameSettings from "../../types/session/GameSettings";
+import GameSettings from "../../types/session/settings/GameSettings";
 import SessionMode from "../../types/session/SessionMode";
 import { AppMode } from "../../types/AppMode";
 import { MenuModes } from "../../types/MenuModes";
-import { LearnSettings } from "../../types/session/DataSettings";
-import { SessionSettings } from "../../types/session/SessionSettings";
+import { SessionSettings } from "../../types/session/settings/SessionSettings";
 import styles from "../../styles/sass/components/learn/ModeSelectionMenu.module.scss";
+import LearnSettings from "../../types/session/settings/LearnSettings";
 
 export interface CustomLearnMenuProps {
     onSelect: (settings: SessionSettings) => void;

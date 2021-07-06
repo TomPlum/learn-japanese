@@ -5,7 +5,7 @@ import { KanaColumn } from "../../types/kana/KanaColumn";
 import hiragana from "../../data/Hiragana";
 import { KanaData } from "../../data/DataTypes";
 import katakana from "../../data/Katakana";
-import { KanaSettingsBuilder } from "../../types/session/DataSettings";
+import { KanaSettingsBuilder } from "../../types/session/settings/data/KanaSettings";
 
 jest.mock("../../data/Hiragana");
 jest.mock("../../data/Katakana");

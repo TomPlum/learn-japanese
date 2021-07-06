@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DisplaySettings } from "../../../types/session/GameSettings";
+import { DisplaySettings } from "../../../types/session/settings/GameSettings";
 import { DisplayType } from "../../../types/game/DisplayType";
 import DisplayTypeButton from "../../ui/buttons/DisplayTypeButton";
 import { faChevronRight, faFont, faGripVertical, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";

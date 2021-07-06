@@ -1,8 +1,7 @@
-import { HintQuantity } from "../game/HintQuantity";
-import { LifeQuantity } from "../game/LifeQuantity";
-import { DisplayType } from "../game/DisplayType";
-
-export interface ModeSettings { }
+import { HintQuantity } from "../../game/HintQuantity";
+import { LifeQuantity } from "../../game/LifeQuantity";
+import { DisplayType } from "../../game/DisplayType";
+import ModeSettings from "./ModeSettings";
 
 export default class GameSettings implements ModeSettings {
     private readonly _hints: HintSettings;

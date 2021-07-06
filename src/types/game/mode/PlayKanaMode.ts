@@ -3,9 +3,9 @@ import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
 import { HARDCORE, KANA, RELAXED, ROMAJI, TIME_ATTACK } from "../../../data/GameModePresets";
 import { PlayMenuModes } from "../../MenuModes";
 import PlayMode from "../../session/PlayMode";
-import { GameSettingsBuilder } from "../../session/GameSettings";
-import { KanaSettingsBuilder } from "../../session/DataSettings";
 import KanaGameSettingsMenu from "../../../components/settings/KanaGameSettingsMenu";
+import { KanaSettingsBuilder } from "../../session/settings/data/KanaSettings";
+import { GameSettingsBuilder } from "../../session/settings/GameSettings";
 
 export default class PlayKanaMode implements PlayMenuModes {
     getModes(): PlayMode[] {

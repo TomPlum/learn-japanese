@@ -8,7 +8,7 @@ import FilterChain from "../filters/FilterChain";
 import QuantityFilter from "../filters/kana/QuantityFilter";
 import KanaTypeFilter from "../filters/kana/KanaTypeFilter";
 import Repository from "./Repository";
-import { KanaSettings } from "../types/session/DataSettings";
+import KanaSettings from "../types/session/settings/data/KanaSettings";
 import DiacriticalFilter from "../filters/kana/DiacriticalFilter";
 import RegularKanaFilter from "../filters/kana/RegularKanaFilter";
 

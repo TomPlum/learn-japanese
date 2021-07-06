@@ -1,11 +1,11 @@
 import KanaGameSettingsMenu from "../../../components/settings/KanaGameSettingsMenu";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { DisplayType } from "../../../types/game/DisplayType";
-import GameSettings, { GameSettingsBuilder } from "../../../types/session/GameSettings";
+import GameSettings, { GameSettingsBuilder } from "../../../types/session/settings/GameSettings";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { CustomLearnMenuProps } from "../../../components/learn/ModeSelectionMenu";
-import { SessionSettings } from "../../../types/session/SessionSettings";
-import { KanaSettingsBuilder } from "../../../types/session/DataSettings";
+import { SessionSettings } from "../../../types/session/settings/SessionSettings";
+import { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
 
 let settings: GameSettings;
 

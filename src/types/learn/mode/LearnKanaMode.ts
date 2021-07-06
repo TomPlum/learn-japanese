@@ -1,7 +1,8 @@
 import { faVial } from "@fortawesome/free-solid-svg-icons";
 import { LearnMenuModes } from "../../MenuModes";
 import LearnMode from "../../session/LearnMode";
-import { KanaSettingsBuilder, LearnSettings } from "../../session/DataSettings";
+import LearnSettings from "../../session/settings/LearnSettings";
+import { KanaSettingsBuilder } from "../../session/settings/data/KanaSettings";
 
 export default class LearnKanaMode implements LearnMenuModes {
     getModes(): LearnMode[] {

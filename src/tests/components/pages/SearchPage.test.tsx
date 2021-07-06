@@ -39,7 +39,7 @@ test('Toggling the Diagraphs button off should hide all diagraphs from the scree
 test('Toggling the Diacriticals button off should hide all diacritical Kana from the screen', () => {
     const { diacriticals } = setup();
     fireEvent.click(diacriticals);
-    expect(screen.getByText('137 Results')).toBeInTheDocument();
+    expect(screen.getByText('134 Results')).toBeInTheDocument();
 });
 
 test('Searching should reduce the kana to match the term', () => {

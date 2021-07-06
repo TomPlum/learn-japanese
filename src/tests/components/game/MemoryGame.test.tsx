@@ -9,7 +9,7 @@ import Arrays from "../../../utility/Arrays";
 import { FailureReason } from "../../../types/game/FailureReason";
 import { Environment } from "../../../utility/Environment";
 import { v4 } from "uuid";
-import { GameSettingsBuilder } from "../../../types/session/GameSettings";
+import { GameSettingsBuilder } from "../../../types/session/settings/GameSettings";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();

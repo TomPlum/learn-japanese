@@ -1,7 +1,8 @@
 import { faCat, faChild, faCloudSunRain, faCompass, faHandPaper, faPalette } from "@fortawesome/free-solid-svg-icons";
 import { LearnMenuModes } from "../../MenuModes";
 import LearnMode from "../../session/LearnMode";
-import { BasicsSettingsBuilder, LearnSettings } from "../../session/DataSettings";
+import LearnSettings from "../../session/settings/LearnSettings";
+import { BasicsSettingsBuilder } from "../../session/settings/data/BasicsSettings";
 
 export default class LearnBasicsMode implements LearnMenuModes {
     getModes(): LearnMode[] {

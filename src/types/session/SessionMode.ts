@@ -1,7 +1,7 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
-import DataSettings from "./DataSettings";
-import { ModeSettings } from "./GameSettings";
+import DataSettings from "./settings/data/DataSettings";
+import ModeSettings from "./settings/ModeSettings";
 
 abstract class SessionMode {
     private readonly _displayName: string;

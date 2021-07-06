@@ -1,7 +1,8 @@
 import { faAlignLeft, faCalendarAlt, faCalendarDay, faClock, faSnowflake, faVial } from "@fortawesome/free-solid-svg-icons";
 import { LearnMenuModes } from "../../MenuModes";
 import LearnMode from "../../session/LearnMode";
-import { CalendarSettingsBuilder, LearnSettings } from "../../session/DataSettings";
+import { CalendarSettingsBuilder } from "../../session/settings/data/CalendarSettings";
+import LearnSettings from "../../session/settings/LearnSettings";
 
 export default class LearnCalendarMode implements LearnMenuModes {
     getModes(): LearnMode[] {

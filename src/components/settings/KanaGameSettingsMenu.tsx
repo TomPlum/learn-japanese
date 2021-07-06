@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { DisplaySettings, GameSettingsBuilder, HintSettings, LifeSettings, TimeSettings } from "../../types/session/GameSettings";
+import { DisplaySettings, GameSettingsBuilder, HintSettings, LifeSettings, TimeSettings } from "../../types/session/settings/GameSettings";
 import KanaSettingsForm from "./kana/KanaSettingsForm";
 import HintSettingsForm from "./kana/HintSettingsForm";
 import LifeSettingsForm from "./kana/LifeSettingsForm";
 import TimeSettingsForm from "./kana/TimeSettingsForm";
 import DisplaySettingsForm from "./kana/DisplaySettingsForm";
 import styles from "../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
-import { KanaSettings, KanaSettingsBuilder } from "../../types/session/DataSettings";
 import { CustomLearnMenuProps } from "../learn/ModeSelectionMenu";
-import { SessionSettings } from "../../types/session/SessionSettings";
+import { SessionSettings } from "../../types/session/settings/SessionSettings";
+import KanaSettings, { KanaSettingsBuilder } from "../../types/session/settings/data/KanaSettings";
 
 interface KanaGameSettingsMenuState {
     displaySettings: DisplaySettings;
