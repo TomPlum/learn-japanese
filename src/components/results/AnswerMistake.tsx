@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/results/AnswerMistake.module.scss";
 import { Learnable } from "../../types/learn/Learnable";
 import RomajiGenerator from "../../utility/RomajiGenerator";

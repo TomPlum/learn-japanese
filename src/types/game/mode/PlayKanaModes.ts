@@ -7,7 +7,7 @@ import KanaGameSettingsMenu from "../../../components/settings/KanaGameSettingsM
 import { KanaSettingsBuilder } from "../../session/settings/data/KanaSettings";
 import { GameSettingsBuilder } from "../../session/settings/GameSettings";
 
-export default class PlayKanaMode implements PlayMenuModes {
+export default class PlayKanaModes implements PlayMenuModes {
     getModes(): PlayMode[] {
         const defaultKanaSettings = new KanaSettingsBuilder().withEverything().build();
 

@@ -4,7 +4,7 @@ import LearnMode from "../../session/LearnMode";
 import LearnSettings from "../../session/settings/LearnSettings";
 import { NumbersSettingsBuilder } from "../../session/settings/data/NumbersSettings";
 
-export default class LearnNumbersMode implements LearnMenuModes {
+export default class LearnNumbersModes implements LearnMenuModes {
     getModes(): LearnMode[] {
         const defaultLearnSettings = new LearnSettings();
 

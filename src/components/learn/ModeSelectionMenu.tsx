@@ -45,7 +45,7 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
     }
 
     componentDidUpdate(prevProps: Readonly<ModeSelectionMenuProps>, prevState: Readonly<ModeSelectionMenuState>) {
-        if (prevProps.appMode != this.props.appMode) {
+        if (prevProps.appMode !== this.props.appMode) {
             this.setState({ selected: this.getMenuModes().getModes()[0] });
         }
     }

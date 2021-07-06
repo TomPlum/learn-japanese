@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import LearnTopicButton from "../../../components/learn/LearnTopicButton";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import LearnKanaMode from "../../../types/learn/mode/LearnKanaMode";
+import LearnKanaModes from "../../../types/learn/mode/LearnKanaModes";
 
 const onClickHandler = jest.fn();
 
@@ -9,8 +9,8 @@ test('Should accept string icon', () => {
     render(
         <LearnTopicButton
             icon="ICON"
-            type={new LearnKanaMode().getModes()[0]}
-            selected={new LearnKanaMode().getModes()[0]}
+            type={new LearnKanaModes().getModes()[0]}
+            selected={new LearnKanaModes().getModes()[0]}
             onClick={onClickHandler}
         />
     );
@@ -22,8 +22,8 @@ test('Should accept Font Awesome icon', () => {
     render(
         <LearnTopicButton
             icon={faCircle}
-            type={new LearnKanaMode().getModes()[0]}
-            selected={new LearnKanaMode().getModes()[0]}
+            type={new LearnKanaModes().getModes()[0]}
+            selected={new LearnKanaModes().getModes()[0]}
             onClick={onClickHandler}
         />
     );
@@ -34,8 +34,8 @@ test('Should have the class \'selected\' when the passed type matches the select
     const { container } = render(
         <LearnTopicButton
             icon={faCircle}
-            type={new LearnKanaMode().getModes()[0]}
-            selected={new LearnKanaMode().getModes()[0]}
+            type={new LearnKanaModes().getModes()[0]}
+            selected={new LearnKanaModes().getModes()[0]}
             onClick={onClickHandler}
         />
     );
@@ -46,8 +46,8 @@ test('Should have the class \'notSelected\' when the passed type does not match 
     const { container } = render(
         <LearnTopicButton
             icon={faCircle}
-            type={new LearnKanaMode().getModes()[0]}
-            selected={new LearnKanaMode().getModes()[1]}
+            type={new LearnKanaModes().getModes()[0]}
+            selected={new LearnKanaModes().getModes()[1]}
             onClick={onClickHandler}
         />
     );
@@ -58,8 +58,8 @@ test('Clicking the button should call the onClick event handler with the passed 
     const component = render(
         <LearnTopicButton
             icon={faCircle}
-            type={new LearnKanaMode().getModes()[0]}
-            selected={new LearnKanaMode().getModes()[0]}
+            type={new LearnKanaModes().getModes()[0]}
+            selected={new LearnKanaModes().getModes()[0]}
             onClick={onClickHandler}
         />
     );

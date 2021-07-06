@@ -4,7 +4,7 @@ import LearnMode from "../../session/LearnMode";
 import LearnSettings from "../../session/settings/LearnSettings";
 import { BasicsSettingsBuilder } from "../../session/settings/data/BasicsSettings";
 
-export default class LearnBasicsMode implements LearnMenuModes {
+export default class LearnBasicsModes implements LearnMenuModes {
     getModes(): LearnMode[] {
         const defaultLearnSettings = new LearnSettings();
 

@@ -4,7 +4,7 @@ import LearnMode from "../../session/LearnMode";
 import { SentenceStructureSettingsBuilder } from "../../session/settings/data/SentenceStructureSettings";
 import LearnSettings from "../../session/settings/LearnSettings";
 
-export default class LearnSentenceStructureMode implements LearnMenuModes {
+export default class LearnSentenceStructureModes implements LearnMenuModes {
     getModes(): LearnMode[] {
         const defaultLearnSettings = new LearnSettings();
 
