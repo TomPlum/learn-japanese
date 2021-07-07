@@ -2,7 +2,7 @@ import { faCircle, faPaintBrush, faRandom, faSchool, faStar } from "@fortawesome
 import { PlayMenuModes } from "../../MenuModes";
 import CustomLearningMode from "../../learn/CustomLearningMode";
 import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
-import { GameSettingsBuilder } from "../../session/settings/GameSettings";
+import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 import { DisplayType } from "../DisplayType";
 import PlayMode from "../../session/PlayMode";
 import { KanjiSettingsBuilder } from "../../session/settings/data/KanjiSettings";

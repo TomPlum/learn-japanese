@@ -18,7 +18,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { StaticContext } from "react-router";
 import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss";
 import { SessionSettings } from "../../types/session/settings/SessionSettings";
-import GameSettings from "../../types/session/settings/GameSettings";
+import GameSettings from "../../types/session/settings/game/GameSettings";
 import DataSettings  from "../../types/session/settings/data/DataSettings";
 import LearnSettings from "../../types/session/settings/LearnSettings";
 

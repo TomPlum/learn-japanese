@@ -5,7 +5,7 @@ import { PlayMenuModes } from "../../MenuModes";
 import PlayMode from "../../session/PlayMode";
 import KanaGameSettingsMenu from "../../../components/settings/KanaGameSettingsMenu";
 import { KanaSettingsBuilder } from "../../session/settings/data/KanaSettings";
-import { GameSettingsBuilder } from "../../session/settings/GameSettings";
+import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 
 export default class PlayKanaModes implements PlayMenuModes {
     getModes(): PlayMode[] {

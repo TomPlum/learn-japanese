@@ -1,6 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import LifeSettingsForm from "../../../../components/settings/kana/LifeSettingsForm";
 import { LifeQuantity } from "../../../../types/game/LifeQuantity";
+import { LifeSettingsBuilder } from "../../../../types/session/settings/game/LifeSettings";
 
 const onChangeHandler = jest.fn();
 
@@ -13,21 +14,25 @@ const setup = () => {
     }
 }
 
+beforeEach(() => {
+    jest.restoreAllMocks();
+});
+
 test('Lives should default to off', () => {
     setup();
-    expect(onChangeHandler).toHaveBeenCalledWith({ enabled: false, quantity: LifeQuantity.ZERO });
+    expect(onChangeHandler).toHaveBeenCalledWith(new LifeSettingsBuilder().isEnabled(false).build());
 });
 
 test('Selecting \'enable\' should set lives to enabled in the settings', () => {
     const { enable, rerender } = setup();
     fireEvent.click(enable);
     rerender(<LifeSettingsForm onChange={onChangeHandler} />);
-    expect(onChangeHandler).toHaveBeenCalledWith({ enabled: true, quantity: LifeQuantity.FIVE });
+    expect(onChangeHandler).toHaveBeenCalledWith(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.FIVE).build());
 });
 
 test('Changing the lives selector should call the onChange event handler', () => {
     const { enable, lives } = setup();
     fireEvent.click(enable);
     fireEvent.change(lives, { target: { value: 3 }} )
-    expect(onChangeHandler).toHaveBeenCalledWith({ enabled: true, quantity: LifeQuantity.THREE });
+    expect(onChangeHandler).toHaveBeenCalledWith(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.THREE).build());
 });

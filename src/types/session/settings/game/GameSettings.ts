@@ -1,7 +1,8 @@
-import { HintQuantity } from "../../game/HintQuantity";
-import { LifeQuantity } from "../../game/LifeQuantity";
-import { DisplayType } from "../../game/DisplayType";
-import ModeSettings from "./ModeSettings";
+import { HintQuantity } from "../../../game/HintQuantity";
+import { LifeQuantity } from "../../../game/LifeQuantity";
+import { DisplayType } from "../../../game/DisplayType";
+import ModeSettings from "../ModeSettings";
+import LifeSettings, { LifeSettingsBuilder } from "./LifeSettings";
 
 export default class GameSettings implements ModeSettings {
     private readonly _hints: HintSettings;
@@ -35,7 +36,7 @@ export default class GameSettings implements ModeSettings {
 
 export class GameSettingsBuilder {
     private _hints: HintSettings = { enabled: true, quantity: HintQuantity.UNLIMITED };
-    private _lives: LifeSettings = { enabled: true, quantity: LifeQuantity.FIVE };
+    private _lives: LifeSettings = new LifeSettingsBuilder().build();
     private _time: TimeSettings = { timed: true, countdown: false };
     private _display: DisplaySettings = { type: DisplayType.ROMAJI, cards: 1, score: true };
 
@@ -76,11 +77,6 @@ export interface DisplaySettings {
     type: DisplayType;
     cards: number;
     score: boolean;
-}
-
-export interface LifeSettings {
-    enabled: boolean;
-    quantity?: LifeQuantity;
 }
 
 export interface HintSettings {

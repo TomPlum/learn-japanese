@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { LifeSettings } from "../../../types/session/settings/GameSettings";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import LivesSelector from "../../ui/LivesSelector";
 import { Col, Form, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
+import LifeSettings, { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
 
 interface LifeSettingsFormProps {
     onChange: (settings: LifeSettings) => void;
@@ -17,12 +17,15 @@ interface LifeSettingsFormState {
 class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsFormState> {
 
     private readonly selector: React.RefObject<LivesSelector>;
-    private readonly defaultState = { enabled: false, quantity: LifeQuantity.ZERO };
+    private readonly defaultState = new LifeSettingsBuilder().isEnabled(false).withQuantity(LifeQuantity.ZERO).build();
 
     constructor(props: LifeSettingsFormProps | Readonly<LifeSettingsFormProps>) {
         super(props);
         this.selector = React.createRef();
-        this.state = this.defaultState;
+        this.state = {
+            enabled: this.defaultState.enabled,
+            quantity: this.defaultState.quantity
+        }
     }
 
     componentDidMount() {
@@ -32,7 +35,8 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
     componentDidUpdate(prevProps: Readonly<LifeSettingsFormProps>, prevState: Readonly<LifeSettingsFormState>) {
         if (prevState !== this.state) {
             const { enabled, quantity } = this.state;
-            this.props.onChange({ enabled, quantity });
+            const settings = new LifeSettingsBuilder().isEnabled(enabled).withQuantity(quantity).build();
+            this.props.onChange(settings);
         }
     }
 
@@ -64,7 +68,10 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
 
     reset = () => {
         this.selector.current?.reset();
-        this.setState(this.defaultState);
+        this.setState({
+            enabled: this.defaultState.enabled,
+            quantity: this.defaultState.quantity
+        });
     }
 }
 

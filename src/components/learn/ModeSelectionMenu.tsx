@@ -11,7 +11,7 @@ import Search from "./Search";
 import { Learnable } from "../../types/learn/Learnable";
 import LearningDataRepository from "../../repository/LearningDataRepository";
 import Topic from "../../types/Topic";
-import GameSettings from "../../types/session/settings/GameSettings";
+import GameSettings from "../../types/session/settings/game/GameSettings";
 import SessionMode from "../../types/session/SessionMode";
 import { AppMode } from "../../types/AppMode";
 import { MenuModes } from "../../types/MenuModes";

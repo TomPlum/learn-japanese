@@ -1,5 +1,5 @@
 import MemoryGame, { MemoryGameProps } from "../../../components/game/MemoryGame";
-import { fireEvent, render, screen, waitForElementToBeRemoved, cleanup } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import { DisplayType } from "../../../types/game/DisplayType";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 import { Kana } from "../../../types/kana/Kana";
@@ -9,7 +9,9 @@ import Arrays from "../../../utility/Arrays";
 import { FailureReason } from "../../../types/game/FailureReason";
 import { Environment } from "../../../utility/Environment";
 import { v4 } from "uuid";
-import { GameSettingsBuilder } from "../../../types/session/settings/GameSettings";
+import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
+import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
+import { LifeQuantity } from "../../../types/game/LifeQuantity";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -35,7 +37,7 @@ beforeEach(() => {
         settings: new GameSettingsBuilder()
             .withDisplaySettings({ type: DisplayType.ROMAJI, cards: 1, score: true })
             .withHintSettings({ enabled: true, quantity: 999 })
-            .withLifeSettings({ enabled: false })
+            .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
             .withTimeSettings({ timed: false, countdown: false })
             .build()
         ,
@@ -293,7 +295,7 @@ test('Answering all questions correctly should stop call the onFinish even handl
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings({ timed: true, countdown: false })
-        .withLifeSettings({ enabled: true, quantity: 5 })
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
         .build();
 
     const { submit } = setup();
@@ -338,7 +340,7 @@ test('Answering all questions correctly should call the onFinish even handler wi
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings({ timed: false, countdown: false })
-        .withLifeSettings({ enabled: true, quantity: 5 })
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
         .build();
 
     const { submit } = setup();
@@ -414,7 +416,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings({ timed: true, countdown: false })
-        .withLifeSettings({ enabled: true, quantity: 1 })
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.ONE).build())
         .build();
 
     const { submit } = setup();
@@ -449,7 +451,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings({ timed: false, countdown: false })
-        .withLifeSettings({ enabled: true, quantity: 1 })
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.ONE).build())
         .build();
 
     const { submit } = setup();
@@ -480,7 +482,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
 test('Answering incorrectly when lives are enabled should reduce the lives by 1', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withLifeSettings({ enabled: true, quantity: 5 })
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
         .build();
 
     const { submit } = setup();
@@ -493,14 +495,20 @@ test('Answering incorrectly when lives are enabled should reduce the lives by 1'
 });
 
 test('Enabling lives should render the LifeDisplay', () => {
-    props.settings = new GameSettingsBuilder().fromExisting(props.settings).withLifeSettings({ enabled: true, quantity: 10 }).build();
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.TEN).build())
+        .build();
     setup();
     expect(screen.getByTitle('Lives')).toBeInTheDocument();
     expect(screen.getByText('10')).toBeInTheDocument();
 });
 
 test('Disabling lives should not render the LifeDisplay', () => {
-    props.settings = new GameSettingsBuilder().fromExisting(props.settings).withLifeSettings({ enabled: false }).build();
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
+        .build();
     setup();
     expect(screen.queryByTitle('Lives')).not.toBeInTheDocument();
 });
@@ -618,7 +626,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
-        .withLifeSettings({ enabled: true, quantity: 10 })
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.TEN).build())
         .build();
 
     setup();
@@ -771,7 +779,7 @@ test('Clicking the skip button should advance to the next question', () => {
 test('Clicking the skip button should remove a life if they are enabled', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withLifeSettings({ enabled: true, quantity: 5 })
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
         .build();
     const { skip } = setup();
     expect(screen.getByText('5')).toBeInTheDocument();

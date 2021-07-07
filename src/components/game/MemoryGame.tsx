@@ -27,7 +27,7 @@ import LearnableMeaningQuestion from "./questions/LearnableMeaningQuestion";
 import { Learnable } from "../../types/learn/Learnable";
 import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/game/MemoryGame.module.scss";
-import GameSettings from "../../types/session/settings/GameSettings";
+import GameSettings from "../../types/session/settings/game/GameSettings";
 
 export interface GameQuestionProps {
     hidden: boolean;

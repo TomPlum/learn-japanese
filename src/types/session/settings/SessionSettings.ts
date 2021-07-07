@@ -1,5 +1,5 @@
 import DataSettings from "./data/DataSettings";
-import GameSettings from "./GameSettings";
+import GameSettings from "./game/GameSettings";
 import LearnSettings from "./LearnSettings";
 
 export class SessionSettings {
