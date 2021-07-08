@@ -1,5 +1,4 @@
 import { HintQuantity } from "../../../game/HintQuantity";
-import { LifeQuantity } from "../../../game/LifeQuantity";
 import { DisplayType } from "../../../game/DisplayType";
 import ModeSettings from "../ModeSettings";
 import LifeSettings, { LifeSettingsBuilder } from "./LifeSettings";

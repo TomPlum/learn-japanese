@@ -7,7 +7,7 @@ import { KanaSettingsBuilder } from "../../session/settings/data/KanaSettings";
 export default class LearnKanaModes implements LearnMenuModes {
     getModes(): LearnMode[] {
         const defaultLearnSettings = new LearnSettings();
-        
+
         return [
             new LearnMode("Hiragana", "#fdb40e", "あ",
                 new KanaSettingsBuilder().withHiragana().build(),

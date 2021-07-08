@@ -1,5 +1,5 @@
 import { faAppleAlt, faCalendarAlt, faFont, faPaintBrush, faSpellCheck, faYenSign, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import LearnKanaModes from "./learn/mode/LearnKanaModes";
+import LearnNumbersModes from "./learn/mode/LearnNumbersModes";
 import LearnKanjiModes from "./learn/mode/LearnKanjiModes";
 import LearnBasicsModes from "./learn/mode/LearnBasicsModes";
 import LearnCalendarModes from "./learn/mode/LearnCalendarModes";
@@ -11,7 +11,6 @@ import KanjiFlashCardBack from "../components/learn/kanji/KanjiFlashCardBack";
 import BasicsFlashCardFront from "../components/learn/basics/BasicsFlashCardFront";
 import BasicsFlashCardBack from "../components/learn/basics/BasicsFlashCardBack";
 import LearnSentenceStructureModes from "./learn/mode/LearnSentenceStructureModes";
-import LearnNumbersModes from "./learn/mode/LearnNumbersModes";
 import NumbersFlashCardFront from "../components/learn/numbers/NumbersFlashCardFront";
 import NumbersFlashCardBack from "../components/learn/numbers/NumbersFlashCardBack";
 import SentenceStructureFlashCardFront from "../components/learn/sentence/SentenceStructureFlashCardFront";
@@ -19,6 +18,7 @@ import SentenceStructureFlashCardBack from "../components/learn/sentence/Sentenc
 import PlayKanjiModes from "./game/mode/PlayKanjiModes";
 import PlayKanaModes from "./game/mode/PlayKanaModes";
 import { LearnMenuModes, PlayMenuModes } from "./MenuModes";
+import LearnKanaModes from "./learn/mode/LearnKanaModes";
 
 export default class Topic {
     private readonly _name: string;
