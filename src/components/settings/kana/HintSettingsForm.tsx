@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { HintSettings } from "../../../types/session/settings/game/GameSettings";
 import { HintQuantity } from "../../../types/game/HintQuantity";
 import { Col, Form, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
+import HintSettings, { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
 
 export interface HintSettingsFormProps {
     onChange: (settings: HintSettings) => void;
@@ -15,11 +15,14 @@ interface HintSettingsFormState {
 
 class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsFormState> {
 
-    private readonly defaultState = { enabled: true, quantity: HintQuantity.THREE };
+    private readonly defaultState = new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build();
 
     constructor(props: HintSettingsFormProps | Readonly<HintSettingsFormProps>) {
         super(props);
-        this.state = this.defaultState;
+        this.state = {
+            enabled: this.defaultState.enabled,
+            quantity: this.defaultState.quantity
+        }
     }
 
     componentDidMount() {
@@ -29,7 +32,8 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
     componentDidUpdate(prevProps: Readonly<HintSettingsFormProps>, prevState: Readonly<HintSettingsFormState>) {
         if (prevState !== this.state) {
             const { enabled, quantity } = this.state;
-            this.props.onChange({ enabled, quantity });
+            const settings = new HintSettingsBuilder().isEnabled(enabled).withQuantity(quantity).build()
+            this.props.onChange(settings);
         }
     }
 
@@ -75,7 +79,10 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
         );
     }
 
-    reset = () => this.setState(this.defaultState);
+    reset = () => this.setState({
+        enabled: this.defaultState.enabled,
+        quantity: this.defaultState.quantity
+    });
 }
 
 export default HintSettingsForm;

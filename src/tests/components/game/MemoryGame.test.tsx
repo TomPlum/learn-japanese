@@ -12,6 +12,8 @@ import { v4 } from "uuid";
 import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
 import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
+import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
+import { HintQuantity } from "../../../types/game/HintQuantity";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -36,7 +38,7 @@ beforeEach(() => {
         data: [a, i, u, e, o],
         settings: new GameSettingsBuilder()
             .withDisplaySettings({ type: DisplayType.ROMAJI, cards: 1, score: true })
-            .withHintSettings({ enabled: true, quantity: 999 })
+            .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.UNLIMITED).build())
             .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
             .withTimeSettings({ timed: false, countdown: false })
             .build()
@@ -110,7 +112,9 @@ test('Answering correctly when there are kana remaining should show the next kan
 });
 
 test('Answering correctly after having used a hint that question should reduce the hint quantity by 1', () => {
-    props.settings = new GameSettingsBuilder().withHintSettings({ enabled: true, quantity: 5 }).build();
+    props.settings = new GameSettingsBuilder()
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build())
+        .build();
 
     const { submit, hint } = setup();
 
@@ -122,7 +126,9 @@ test('Answering correctly after having used a hint that question should reduce t
 });
 
 test('Answering correctly without using a hint that question should not reduce the hint quantity', () => {
-    props.settings = new GameSettingsBuilder().withHintSettings({ enabled: true, quantity: 5 }).build();
+    props.settings = new GameSettingsBuilder()
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build())
+        .build();
 
     const { submit } = setup();
 
@@ -514,13 +520,15 @@ test('Disabling lives should not render the LifeDisplay', () => {
 });
 
 test('Enabling hints should render the HintButton in an enabled state', () => {
-    props.settings = new GameSettingsBuilder().fromExisting(props.settings).withHintSettings({ enabled: true }).build();
+    props.settings = new GameSettingsBuilder().fromExisting(props.settings)
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
+        .build();
     const { hint } = setup();
     expect(hint).not.toBeDisabled();
 });
 
 test('Disabling hints should render the HintButton in a disabled state', () => {
-    props.settings = new GameSettingsBuilder().withHintSettings({ enabled: false }).build();
+    props.settings = new GameSettingsBuilder().withHintSettings(new HintSettingsBuilder().isEnabled(false).build()).build();
     const { hint } = setup();
     expect(hint).toBeDisabled();
 });
@@ -528,7 +536,7 @@ test('Disabling hints should render the HintButton in a disabled state', () => {
 test('Using the hint button twice in the same kana shouldn\'t use another hint', async () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withHintSettings({ enabled: true, quantity: 3 })
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
         .build();
 
     const { hint } = setup();
@@ -655,7 +663,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
-        .withHintSettings({ enabled: true, quantity: 5 })
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build())
         .build();
 
     const { hint } = setup();
@@ -670,7 +678,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
-        .withHintSettings({ enabled: true, quantity: 5 })
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build())
         .build();
 
     setup();

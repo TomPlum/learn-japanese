@@ -1,5 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import HintSettingsForm from "../../../../components/settings/kana/HintSettingsForm";
+import { HintSettingsBuilder } from "../../../../types/session/settings/game/HintSettings";
+import { HintQuantity } from "../../../../types/game/HintQuantity";
 
 const onChangeHandler = jest.fn();
 
@@ -16,33 +18,33 @@ const setup = () => {
 
 test('Hint quantity should default to 3', () => {
     setup();
-    expect(onChangeHandler).toHaveBeenCalledWith({ enabled: true, quantity: 3 });
+    expect(onChangeHandler).toHaveBeenCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build());
 });
 
 test('Selecting 1 hint should set the value to 1', () => {
     const { one, rerender } = setup();
     fireEvent.click(one);
     rerender(<HintSettingsForm onChange={onChangeHandler} />);
-    expect(onChangeHandler).toHaveBeenCalledWith({ enabled: true, quantity: 1 });
+    expect(onChangeHandler).toHaveBeenCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.ONE).build());
 });
 
 test('Selecting 3 hints should set the value to 3', () => {
     const { three, rerender } = setup();
     fireEvent.click(three);
     rerender(<HintSettingsForm onChange={onChangeHandler} />);
-    expect(onChangeHandler).toHaveBeenCalledWith({ enabled: true, quantity: 3 });
+    expect(onChangeHandler).toHaveBeenCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build());
 });
 
 test('Selecting 5 hints should set the value to 5', () => {
     const { five, rerender } = setup();
     fireEvent.click(five);
     rerender(<HintSettingsForm onChange={onChangeHandler} />);
-    expect(onChangeHandler).toHaveBeenCalledWith({ enabled: true, quantity: 5 });
+    expect(onChangeHandler).toHaveBeenCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build());
 });
 
 test('Selecting unlimited hints should set the value to 999', () => {
     const { unlimited, rerender } = setup();
     fireEvent.click(unlimited);
     rerender(<HintSettingsForm onChange={onChangeHandler} />);
-    expect(onChangeHandler).toHaveBeenCalledWith({ enabled: true, quantity: 999 });
+    expect(onChangeHandler).toHaveBeenCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.UNLIMITED).build());
 });

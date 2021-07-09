@@ -7,13 +7,15 @@ import { CustomLearnMenuProps } from "../../../components/learn/ModeSelectionMen
 import { SessionSettings } from "../../../types/session/settings/SessionSettings";
 import { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
 import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
+import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
+import { HintQuantity } from "../../../types/game/HintQuantity";
 
 let settings: GameSettings;
 
 beforeEach(() => {
    settings = new GameSettingsBuilder()
        .withDisplaySettings({ cards: 1, type: DisplayType.ROMAJI, score: true })
-       .withHintSettings({ enabled: true, quantity: 3 })
+       .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
        .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).withQuantity(LifeQuantity.FIVE).build())
        .withTimeSettings({ countdown: false, timed: true })
        .build();
