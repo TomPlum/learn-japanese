@@ -9,7 +9,7 @@ import DataSettings from "./DataSettings";
 export default class CalendarSettings extends DataSettings {
     private readonly _days: boolean;
     private readonly _months: boolean;
-    private readonly _season: boolean;
+    private readonly _seasons: boolean;
     private readonly _nouns: boolean;
     private readonly _phrases: boolean;
 
@@ -17,7 +17,7 @@ export default class CalendarSettings extends DataSettings {
         super(Topic.CALENDAR, quantity);
         this._days = days;
         this._months = months;
-        this._season = season;
+        this._seasons = season;
         this._nouns = nouns;
         this._phrases = phrases;
     }
@@ -30,8 +30,8 @@ export default class CalendarSettings extends DataSettings {
         return this._months;
     }
 
-    get season(): boolean {
-        return this._season;
+    get seasons(): boolean {
+        return this._seasons;
     }
 
     get nouns(): boolean {
