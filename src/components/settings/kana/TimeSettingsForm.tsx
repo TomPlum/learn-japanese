@@ -2,6 +2,7 @@ import { Component } from "react";
 import { TimeSettings } from "../../../types/session/settings/game/GameSettings";
 import { Col, Form, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
+import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 
 export interface TimeSettingsFormProps {
     onChange: (settings: TimeSettings) => void;
@@ -14,11 +15,14 @@ interface TimeSettingsFormState {
 
 class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsFormState> {
 
-    private readonly defaultState = { timed: true, countdown: false };
+    private readonly defaultState = new TimeSettingsBuilder().isTimed().isCountDown(false).build();
 
     constructor(props: TimeSettingsFormProps | Readonly<TimeSettingsFormProps>) {
         super(props);
-        this.state = this.defaultState;
+        this.state = {
+            timed: this.defaultState.timed,
+            countdown: this.defaultState.countdown
+        };
     }
 
     componentDidMount() {
@@ -28,7 +32,8 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
     componentDidUpdate(prevProps: Readonly<TimeSettingsFormProps>, prevState: Readonly<TimeSettingsFormState>) {
         if (prevState !== this.state) {
             const { timed, countdown } = this.state;
-            this.props.onChange({ timed, countdown });
+            const settings = new TimeSettingsBuilder().isTimed(timed).isCountDown(countdown).build();
+            this.props.onChange(settings);
         }
     }
 

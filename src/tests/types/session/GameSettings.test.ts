@@ -3,6 +3,7 @@ import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { DisplayType } from "../../../types/game/DisplayType";
 import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
 import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
+import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 
 describe("Game Settings", () => {
     describe("Builder", () => {
@@ -23,7 +24,7 @@ describe("Game Settings", () => {
 
         it("Should set default Time settings if not specified", () => {
             const settings = new GameSettingsBuilder().build();
-            expect(settings.time).toStrictEqual({ timed: true, countdown: false });
+            expect(settings.time).toStrictEqual(new TimeSettingsBuilder().isTimed().build());
         });
 
         it("Should override settings when specified", () => {
@@ -31,13 +32,13 @@ describe("Game Settings", () => {
                 .withDisplaySettings({ type: DisplayType.KANA, cards: 6, score: true })
                 .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
                 .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.ONE).build())
-                .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+                .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
                 .build();
 
             expect(settings.display).toStrictEqual({ type: DisplayType.KANA, cards: 6, score: true });
             expect(settings.hints).toStrictEqual(new HintSettingsBuilder().isEnabled(false).build());
             expect(settings.lives).toStrictEqual(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.ONE).build());
-            expect(settings.time).toStrictEqual({ timed: false, countdown: true, secondsPerQuestion: 5 });
+            expect(settings.time).toStrictEqual(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build());
         });
 
         it("Should build upon the existing values when creating from an existing settings object", () => {

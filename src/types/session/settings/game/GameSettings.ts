@@ -2,6 +2,7 @@ import { DisplayType } from "../../../game/DisplayType";
 import ModeSettings from "../ModeSettings";
 import LifeSettings, { LifeSettingsBuilder } from "./LifeSettings";
 import HintSettings, { HintSettingsBuilder } from "./HintSettings";
+import { TimeSettingsBuilder } from "./TimeSettings";
 
 export default class GameSettings implements ModeSettings {
     private readonly _hints: HintSettings;
@@ -36,7 +37,7 @@ export default class GameSettings implements ModeSettings {
 export class GameSettingsBuilder {
     private _hints: HintSettings = new HintSettingsBuilder().build();
     private _lives: LifeSettings = new LifeSettingsBuilder().build();
-    private _time: TimeSettings = { timed: true, countdown: false };
+    private _time: TimeSettings = new TimeSettingsBuilder().build();
     private _display: DisplaySettings = { type: DisplayType.ROMAJI, cards: 1, score: true };
 
     public fromExisting(settings: GameSettings): GameSettingsBuilder {

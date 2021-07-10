@@ -14,6 +14,7 @@ import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSe
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
 import { HintQuantity } from "../../../types/game/HintQuantity";
+import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -40,7 +41,7 @@ beforeEach(() => {
             .withDisplaySettings({ type: DisplayType.ROMAJI, cards: 1, score: true })
             .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.UNLIMITED).build())
             .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
-            .withTimeSettings({ timed: false, countdown: false })
+            .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
             .build()
         ,
         onFinish: onFinishHandler,
@@ -263,7 +264,8 @@ test('Answering correctly on a streak of 50 should grant a 4x multiplier', () =>
 });
 
 test('Answering all questions correctly should stop the timer', () => {
-    props.settings = new GameSettingsBuilder().withTimeSettings({ timed: true, countdown: false }).build();
+    props.settings = new GameSettingsBuilder()
+        .withTimeSettings(new TimeSettingsBuilder().isTimed().isCountDown(false).build()).build();
 
     const { submit } = setup();
 
@@ -300,7 +302,7 @@ test('Answering all questions correctly should stop the timer', () => {
 test('Answering all questions correctly should stop call the onFinish even handler with the game result', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: true, countdown: false })
+        .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
         .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
         .build();
 
@@ -345,7 +347,7 @@ test('Answering all questions correctly should stop call the onFinish even handl
 test('Answering all questions correctly should call the onFinish even handler with undefined time if no timer', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: false })
+        .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
         .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
         .build();
 
@@ -421,7 +423,7 @@ test('Answering incorrectly when on a streak should reset it', () => {
 test('Answering incorrectly with 1 life remaining should call the onFinish event handler', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: true, countdown: false })
+        .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
         .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.ONE).build())
         .build();
 
@@ -456,7 +458,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
 test('Answering incorrectly with 1 life remaining should call the onFinish event handler with undefined duration if no timer', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: false })
+        .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
         .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.ONE).build())
         .build();
 
@@ -555,7 +557,7 @@ test('Using the hint button twice in the same kana shouldn\'t use another hint',
 test('Enabling the timer should render the timer', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: true, countdown: false })
+        .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
         .build();
     setup();
     expect(screen.getByTitle('Pause')).toBeInTheDocument();
@@ -565,7 +567,7 @@ test('Enabling the timer should render the timer', () => {
 test('Pausing the timer when it is enabled should disable the rōmaji input', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: true, countdown: false })
+        .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
         .build();
 
     setup();
@@ -576,7 +578,7 @@ test('Pausing the timer when it is enabled should disable the rōmaji input', ()
 test('Disabling the timer should not render the timer', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: false })
+        .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
         .build();
 
     setup();
@@ -588,7 +590,7 @@ test('Disabling the timer should not render the timer', () => {
 test('Enabling the countdown should render the countdown', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: true })
+        .withTimeSettings(new TimeSettingsBuilder().isCountDown().build())
         .build();
 
     setup();
@@ -599,7 +601,7 @@ test('Enabling the countdown should render the countdown', () => {
 test('Enabling the countdown with 10 seconds should render the countdown starting at 10', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 10 })
+        .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(10).build())
         .build();
 
     setup();
@@ -611,7 +613,7 @@ test('Enabling the countdown with 10 seconds should render the countdown startin
 test('Disabling the countdown should not render the countdown', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: false })
+        .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
         .build();
     setup();
     expect(screen.queryByTitle('Time Remaining')).not.toBeInTheDocument();
@@ -620,7 +622,7 @@ test('Disabling the countdown should not render the countdown', () => {
 test('Failing to correctly answer the question before the countdown finishes should present the next kana', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+        .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
         .build();
 
     setup();
@@ -633,7 +635,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
 test('Failing to correctly answer the question before the countdown finishes should subtract a life if enabled', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+        .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
         .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.TEN).build())
         .build();
 
@@ -647,7 +649,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
 test('Failing to correctly answer the question before the countdown finishes should reset the countdown', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+        .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
         .build();
 
     setup();
@@ -662,7 +664,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
 test('Failing to correctly answer the question before the countdown finishes should reduce the hints if one was used', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+        .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
         .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build())
         .build();
 
@@ -677,7 +679,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
 test('Failing to correctly answer the question before the countdown finishes should not reduce the hints if they weren\'t used', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: false, countdown: true, secondsPerQuestion: 5 })
+        .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
         .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build())
         .build();
 
@@ -799,7 +801,7 @@ test('Clicking the skip button should remove a life if they are enabled', () => 
 test('Pausing should disable the skip button', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withTimeSettings({ timed: true, countdown: false })
+        .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
         .build();
     const { skip } = setup();
     expect(skip).not.toBeDisabled();
