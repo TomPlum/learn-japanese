@@ -4491,6 +4491,7 @@ export function kyoiku(): KanjiData[] {
             source: "https://en.wiktionary.org/wiki/%E7%BF%92#Kanji",
             meanings: ["learn"],
             grade: KyoikuGrade.THREE,
+            tags: ["verb"],
             examples: [
                 { value: "", kana: [""], english: ["practice", "practise"] },
                 { value: "", kana: [""], english: ["study", "learning", "tutorial"] },
