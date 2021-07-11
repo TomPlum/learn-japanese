@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
-import { KanaSettings, KanaSettingsBuilder } from "../../../types/session/DataSettings";
+import KanaSettings, { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
 
 interface KanaSettingsProps {
     onSelect: (settings: KanaSettings) => void;
@@ -11,7 +11,7 @@ interface KanaSettingsState {
     hiragana: boolean;
     katakana: boolean;
     diagraphs: boolean;
-    quantity: number;
+    quantity?: number;
 }
 
 class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
@@ -24,7 +24,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
             hiragana: this.defaultState.hiragana,
             katakana: this.defaultState.katakana,
             diagraphs: this.defaultState.diagraphs,
-            quantity: this.defaultState.quantity ?? 50
+            quantity: this.defaultState.quantity
         }
     }
 
@@ -87,7 +87,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
                             required
                             value={quantity}
                             placeholder="Enter kana quantity"
-                            isInvalid={quantity < 1 || quantity > 214}
+                            isInvalid={!quantity || quantity < 1 || quantity > 214}
                         />
                     </InputGroup>
                 </Col>
@@ -100,7 +100,7 @@ class KanaSettingsForm extends Component<KanaSettingsProps, KanaSettingsState> {
         hiragana: this.defaultState.hiragana,
         katakana: this.defaultState.katakana,
         diagraphs: this.defaultState.diagraphs,
-        quantity: this.defaultState.quantity ?? 50
+        quantity: this.defaultState.quantity
     });
 }
 

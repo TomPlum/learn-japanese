@@ -143,21 +143,21 @@ function hiragana(): KanaData[] {
             code: "\u304E\u3083",
             romaji: ["gya"],
             column: KanaColumn.K,
-            diacritical: false
+            diacritical: true
         },
         {
             name: "ぎゅ",
             code: "\u304E\u3085",
             romaji: ["gyu"],
             column: KanaColumn.K,
-            diacritical: false
+            diacritical: true
         },
         {
             name: "ぎょ",
             code: "\u304E\u3087",
             romaji: ["gyo"],
             column: KanaColumn.K,
-            diacritical: false
+            diacritical: true
         },
 
         //S Column (Big)

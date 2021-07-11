@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import DisplayTypeButton, { DisplayTypeButtonProps } from "../../../../components/ui/buttons/DisplayTypeButton";
-import { DisplayType } from "../../../../types/game/DisplayType";
+import { QuestionType } from "../../../../types/game/QuestionType";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
 const onClickHandler = jest.fn();
@@ -9,8 +9,8 @@ let props: DisplayTypeButtonProps;
 
 beforeEach(() => {
     props = {
-        type: DisplayType.KANA,
-        selected: DisplayType.KANA,
+        type: QuestionType.KANA,
+        selected: QuestionType.KANA,
         icon: faCircle,
         onClick: onClickHandler
     };
@@ -36,7 +36,7 @@ test('Passing selected the same as type should append the selected class', () =>
 });
 
 test('Passing selected different from type should append the notSelected class', () => {
-    props.selected = DisplayType.ROMAJI;
+    props.selected = QuestionType.ROMAJI;
     const { container } = setup();
     expect(container.firstChild).toHaveClass('notSelected');
 });

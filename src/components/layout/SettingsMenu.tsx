@@ -5,7 +5,7 @@ import TopicSelectionMenu from "./TopicSelectionMenu";
 import { AppMode } from "../../types/AppMode";
 import ModeSelectionMenu from "../learn/ModeSelectionMenu";
 import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
-import { SessionSettings } from "../../types/session/SessionSettings";
+import { SessionSettings } from "../../types/session/settings/SessionSettings";
 
 export interface GameSettingsMenuProps {
     mode: AppMode;

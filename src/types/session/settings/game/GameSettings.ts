@@ -1,20 +1,20 @@
-import { HintQuantity } from "../game/HintQuantity";
-import { LifeQuantity } from "../game/LifeQuantity";
-import { DisplayType } from "../game/DisplayType";
-
-export interface ModeSettings { }
+import ModeSettings from "../ModeSettings";
+import LifeSettings, { LifeSettingsBuilder } from "./LifeSettings";
+import HintSettings, { HintSettingsBuilder } from "./HintSettings";
+import TimeSettings, { TimeSettingsBuilder } from "./TimeSettings";
+import QuestionSettings, { QuestionSettingsBuilder } from "./QuestionSettings";
 
 export default class GameSettings implements ModeSettings {
     private readonly _hints: HintSettings;
     private readonly _lives: LifeSettings;
     private readonly _time: TimeSettings;
-    private readonly _display: DisplaySettings;
+    private readonly _question: QuestionSettings;
 
-    public constructor(hints: HintSettings, lives: LifeSettings, time: TimeSettings, display: DisplaySettings) {
+    public constructor(hints: HintSettings, lives: LifeSettings, time: TimeSettings, display: QuestionSettings) {
         this._hints = hints;
         this._lives = lives;
         this._time = time;
-        this._display = display;
+        this._question = display;
     }
 
     get hints(): HintSettings {
@@ -29,22 +29,22 @@ export default class GameSettings implements ModeSettings {
         return this._time;
     }
 
-    get display(): DisplaySettings {
-        return this._display;
+    get question(): QuestionSettings {
+        return this._question;
     }
 }
 
 export class GameSettingsBuilder {
-    private _hints: HintSettings = { enabled: true, quantity: HintQuantity.UNLIMITED };
-    private _lives: LifeSettings = { enabled: true, quantity: LifeQuantity.FIVE };
-    private _time: TimeSettings = { timed: true, countdown: false };
-    private _display: DisplaySettings = { type: DisplayType.ROMAJI, cards: 1, score: true };
+    private _hints: HintSettings = new HintSettingsBuilder().build();
+    private _lives: LifeSettings = new LifeSettingsBuilder().build();
+    private _time: TimeSettings = new TimeSettingsBuilder().build();
+    private _display: QuestionSettings = new QuestionSettingsBuilder().build();
 
     public fromExisting(settings: GameSettings): GameSettingsBuilder {
         this._hints = settings.hints;
         this._lives = settings.lives;
         this._time = settings.time;
-        this._display = settings.display;
+        this._display = settings.question;
         return this;
     }
 
@@ -63,7 +63,7 @@ export class GameSettingsBuilder {
         return this;
     }
 
-    public withDisplaySettings(display: DisplaySettings): GameSettingsBuilder {
+    public withQuestionSettings(display: QuestionSettings): GameSettingsBuilder {
         this._display = display;
         return this;
     }
@@ -71,26 +71,4 @@ export class GameSettingsBuilder {
     public build(): GameSettings {
         return new GameSettings(this._hints, this._lives, this._time, this._display);
     }
-}
-
-export interface DisplaySettings {
-    type: DisplayType;
-    cards: number;
-    score: boolean;
-}
-
-export interface LifeSettings {
-    enabled: boolean;
-    quantity?: LifeQuantity;
-}
-
-export interface HintSettings {
-    enabled: boolean;
-    quantity?: HintQuantity;
-}
-
-export interface TimeSettings {
-    timed: boolean;
-    countdown: boolean;
-    secondsPerQuestion?: number;
 }

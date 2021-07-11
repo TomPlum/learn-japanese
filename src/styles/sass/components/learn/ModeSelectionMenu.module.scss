@@ -12,7 +12,7 @@
 }
 
 @include phone {
-  .search {
+  .search, .settings {
     @include search;
     font-size: 1.2em;
     padding: 5px 0;
@@ -20,7 +20,7 @@
 }
 
 @include tablet {
-  .search {
+  .search, .settings {
     @include search;
     font-size: 1.3em;
     padding: 8px 0;
@@ -28,7 +28,7 @@
 }
 
 @include desktop {
-  .search {
+  .search, .settings {
     @include search;
     font-size: 1.5em;
     padding: 10px 0;

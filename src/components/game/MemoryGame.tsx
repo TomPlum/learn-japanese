@@ -9,7 +9,7 @@ import GameResult from "../../types/game/GameResult";
 import { FailureReason } from "../../types/game/FailureReason";
 import CountDown from "./CountDown";
 import RomajiQuestion from "./questions/RomajiQuestion";
-import { DisplayType } from "../../types/game/DisplayType";
+import { QuestionType } from "../../types/game/QuestionType";
 import KanaChoiceQuestion from "./questions/KanaChoiceQuestion";
 import Arrays from "../../utility/Arrays";
 import SessionProgressBar from "../ui/SessionProgressBar";
@@ -27,7 +27,7 @@ import LearnableMeaningQuestion from "./questions/LearnableMeaningQuestion";
 import { Learnable } from "../../types/learn/Learnable";
 import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/game/MemoryGame.module.scss";
-import GameSettings from "../../types/session/GameSettings";
+import GameSettings from "../../types/session/settings/game/GameSettings";
 
 export interface GameQuestionProps {
     hidden: boolean;
@@ -61,7 +61,7 @@ interface MemoryGameState {
 class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     private readonly timer: React.RefObject<Timer>;
     private readonly countdown: React.RefObject<CountDown>;
-    private readonly question: React.RefObject<any>; //TODO: Can we type as KanaQuestion here?
+    private readonly question: React.RefObject<any>; //TODO: Can we type as GameQuestion here?
 
     constructor(props: MemoryGameProps | Readonly<MemoryGameProps>) {
         super(props);
@@ -138,6 +138,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                             <Col className={styles.quitWrapper}>
                                 <QuitButton onClick={this.onClickQuit} className={styles.quit} />
                             </Col>
+
                             <Col className={styles.progressWrapper}>
                                 <SessionProgressBar
                                     inProgress={!hasExhaustedQuestions && !paused}
@@ -151,7 +152,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                     </Col>
 
                     <Col>
-                        {settings.display.score &&
+                        {settings.question.score &&
                             <ScoreDisplay
                                 value={score}
                                 streak={streak}
@@ -224,8 +225,8 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         const { settings, data } = this.props;
         const { currentQuestion, paused } = this.state;
 
-        switch (settings.display.type) {
-            case DisplayType.ROMAJI: {
+        switch (settings.question.type) {
+            case QuestionType.ROMAJI: {
                 return (
                     <RomajiQuestion
                         key={(currentQuestion as Kana).code}
@@ -238,7 +239,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                     />
                 );
             }
-            case DisplayType.KANA: {
+            case QuestionType.KANA: {
                 const chain = new FilterChain<Kana>();
                 const kana = currentQuestion as Kana;
 
@@ -246,7 +247,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                 chain.addFilter(new KanaTypeFilter(kana.type, true));
                 chain.addFilter(new ExclusionFilter(kana));
 
-                const wrong = Arrays.getRandomElements(chain.execute(data as Kana[]), settings.display.cards - 1);
+                const wrong = Arrays.getRandomElements(chain.execute(data as Kana[]), settings.question.cards - 1);
 
                 return (
                     <KanaChoiceQuestion
@@ -259,7 +260,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                     />
                 );
             }
-            case DisplayType.MEANING: {
+            case QuestionType.MEANING: {
                 return (
                     <LearnableMeaningQuestion
                         data={currentQuestion}

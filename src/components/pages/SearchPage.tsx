@@ -12,7 +12,7 @@ import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
 import DiagraphFilter from "../../filters/kana/DiagraphFilter";
 import DiacriticalFilter from "../../filters/kana/DiacriticalFilter";
 import RomajiFilter from "../../filters/kana/RomajiFilter";
-import { KanaSettingsBuilder } from "../../types/session/DataSettings";
+import { KanaSettingsBuilder } from "../../types/session/settings/data/KanaSettings";
 
 interface SearchPageState {
     loading: boolean;
@@ -43,7 +43,7 @@ class SearchPage extends Component<{ }, SearchPageState> {
 
     componentDidMount() {
         this.setState({ loading: true });
-        const config = new KanaSettingsBuilder().withHiragana().withKatakana().withDiagraphs().withMaxQuantity().build();
+        const config = new KanaSettingsBuilder().withEverything().withMaxQuantity().build();
         const kana = new KanaRepository().read(config);
         this.kana = kana;
         this.setState({ loading: false, kana });

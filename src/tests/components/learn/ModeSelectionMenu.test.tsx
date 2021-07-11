@@ -4,8 +4,11 @@ import { Environment } from "../../../utility/Environment";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import Topic from "../../../types/Topic";
 import { AppMode } from "../../../types/AppMode";
-import { CalendarSettingsBuilder, KanaSettingsBuilder, KanjiSettingsBuilder, LearnSettings } from "../../../types/session/DataSettings";
-import { SessionSettings } from "../../../types/session/SessionSettings";
+import { SessionSettings } from "../../../types/session/settings/SessionSettings";
+import { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
+import LearnSettings from "../../../types/session/settings/LearnSettings";
+import { CalendarSettingsBuilder } from "../../../types/session/settings/data/CalendarSettings";
+import { KanjiSettingsBuilder } from "../../../types/session/settings/data/KanjiSettings";
 
 describe("Example 1 - Kana", () => {
     const onStartHandler = jest.fn();
@@ -78,28 +81,37 @@ describe("Example 1 - Kana", () => {
     test('Clicking Start with the Hiragana preset selected should call the onStart event handler', () => {
         const { start } = setup();
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new KanaSettingsBuilder().withHiragana().build(), new LearnSettings()));
+        const settings = SessionSettings.forLearning(new KanaSettingsBuilder().withHiragana().build(), new LearnSettings());
+        expect(onStartHandler).toHaveBeenCalledWith(settings);
     });
 
     test('Clicking Start with the Katakana preset selected should call the onStart event handler', () => {
         const { start, katakana } = setup();
         fireEvent.click(katakana);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new KanaSettingsBuilder().withKatakana().build(), new LearnSettings()));
+        const settings = SessionSettings.forLearning(new KanaSettingsBuilder().withKatakana().build(), new LearnSettings());
+        expect(onStartHandler).toHaveBeenCalledWith(settings);
     });
 
     test('Clicking Start with the Diacriticals preset selected should call the onStart event handler', () => {
         const { start, diacriticals } = setup();
         fireEvent.click(diacriticals);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new KanaSettingsBuilder().withDiacriticals().build(), new LearnSettings()));
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(
+            new KanaSettingsBuilder().withHiragana().withKatakana().withDiacriticals()
+                .withDiagraphs(false).withRegularKana(false).withMaxQuantity().build(),
+            new LearnSettings())
+        );
     });
 
     test('Clicking Start with the Diagraphs preset selected should call the onStart event handler', () => {
         const { start, diagraphs } = setup();
         fireEvent.click(diagraphs);
         fireEvent.click(start);
-        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(new KanaSettingsBuilder().withDiagraphs().build(), new LearnSettings()));
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(
+            new KanaSettingsBuilder() .withHiragana().withKatakana().withOnlyDiagraphs().withMaxQuantity().build(),
+            new LearnSettings())
+        );
     });
 
     test('Clicking Start with the All preset selected should call the onStart event handler', () => {

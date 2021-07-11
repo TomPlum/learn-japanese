@@ -43,7 +43,7 @@ class ParallaxBackground extends Component<ParallaxBackgroundProps, ParallaxBack
     }
 
     render() {
-        const { kana, position } = this.state;
+        const { kana } = this.state;
         return (
             <ul className={styles.background}>
                 {kana.map(kana => {

@@ -3,10 +3,11 @@ import { KyoikuGrade } from "../../kanji/KyoikuGrade";
 import CustomLearningMode from "../CustomLearningMode";
 import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
 import { LearnMenuModes } from "../../MenuModes";
-import { KanjiSettingsBuilder, LearnSettings } from "../../session/DataSettings";
 import LearnMode from "../../session/LearnMode";
+import { KanjiSettingsBuilder } from "../../session/settings/data/KanjiSettings";
+import LearnSettings from "../../session/settings/LearnSettings";
 
-export default class LearnKanjiMode implements LearnMenuModes {
+export default class LearnKanjiModes implements LearnMenuModes {
     getModes(): LearnMode[] {
         const defaultLearnSettings = new LearnSettings();
         return [

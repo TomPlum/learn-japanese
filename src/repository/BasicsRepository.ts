@@ -3,7 +3,7 @@ import { colours } from "../data/Colours";
 import { ColourData } from "../data/DataTypes";
 import Colour from "../types/colour/Colour";
 import Repository from "./Repository";
-import { BasicsSettings } from "../types/session/DataSettings";
+import BasicsSettings from "../types/session/settings/data/BasicsSettings";
 
 export default class BasicsRepository implements Repository<Learnable> {
     public read(settings: BasicsSettings): Learnable[] {

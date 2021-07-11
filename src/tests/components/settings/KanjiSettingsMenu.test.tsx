@@ -1,8 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
-import { SessionSettings } from "../../../types/session/SessionSettings";
-import { KanjiSettingsBuilder, LearnSettings } from "../../../types/session/DataSettings";
+import { SessionSettings } from "../../../types/session/settings/SessionSettings";
+import { KanjiSettingsBuilder } from "../../../types/session/settings/data/KanjiSettings";
+import LearnSettings from "../../../types/session/settings/LearnSettings";
 
 const onSelectedHandler = jest.fn();
 

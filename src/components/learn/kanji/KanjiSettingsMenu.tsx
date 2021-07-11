@@ -8,8 +8,9 @@ import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
 import { CustomLearnMenuProps } from "../ModeSelectionMenu";
 import TemplateString from "../../../types/TemplateString";
-import { KanjiSettingsBuilder, LearnSettings } from "../../../types/session/DataSettings";
-import { SessionSettings } from "../../../types/session/SessionSettings";
+import { SessionSettings } from "../../../types/session/settings/SessionSettings";
+import { KanjiSettingsBuilder } from "../../../types/session/settings/data/KanjiSettings";
+import LearnSettings from "../../../types/session/settings/LearnSettings";
 
 interface KanjiSettingsMenuState {
     grades: KyoikuGrade[];

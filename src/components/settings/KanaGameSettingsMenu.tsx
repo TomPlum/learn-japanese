@@ -2,19 +2,23 @@ import React, { Component } from "react";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import { DisplaySettings, GameSettingsBuilder, HintSettings, LifeSettings, TimeSettings } from "../../types/session/GameSettings";
+import { GameSettingsBuilder } from "../../types/session/settings/game/GameSettings";
 import KanaSettingsForm from "./kana/KanaSettingsForm";
 import HintSettingsForm from "./kana/HintSettingsForm";
 import LifeSettingsForm from "./kana/LifeSettingsForm";
 import TimeSettingsForm from "./kana/TimeSettingsForm";
-import DisplaySettingsForm from "./kana/DisplaySettingsForm";
+import QuestionSettingsForm from "./kana/QuestionSettingsForm";
 import styles from "../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
-import { KanaSettings, KanaSettingsBuilder } from "../../types/session/DataSettings";
 import { CustomLearnMenuProps } from "../learn/ModeSelectionMenu";
-import { SessionSettings } from "../../types/session/SessionSettings";
+import { SessionSettings } from "../../types/session/settings/SessionSettings";
+import KanaSettings, { KanaSettingsBuilder } from "../../types/session/settings/data/KanaSettings";
+import LifeSettings from "../../types/session/settings/game/LifeSettings";
+import HintSettings from "../../types/session/settings/game/HintSettings";
+import TimeSettings from "../../types/session/settings/game/TimeSettings";
+import QuestionSettings from "../../types/session/settings/game/QuestionSettings";
 
 interface KanaGameSettingsMenuState {
-    displaySettings: DisplaySettings;
+    questionSettings: QuestionSettings;
     kanaSettings: KanaSettings;
     hintSettings: HintSettings;
     lifeSettings: LifeSettings;
@@ -23,7 +27,7 @@ interface KanaGameSettingsMenuState {
 
 class KanaGameSettingsMenu extends Component<CustomLearnMenuProps, KanaGameSettingsMenuState> {
 
-    private readonly display: React.RefObject<DisplaySettingsForm>;
+    private readonly display: React.RefObject<QuestionSettingsForm>;
     private readonly kana: React.RefObject<KanaSettingsForm>;
     private readonly hints: React.RefObject<HintSettingsForm>;
     private readonly lives: React.RefObject<LifeSettingsForm>;
@@ -41,7 +45,7 @@ class KanaGameSettingsMenu extends Component<CustomLearnMenuProps, KanaGameSetti
         const defaults = new GameSettingsBuilder().build();
 
         this.state = {
-            displaySettings: defaults.display,
+            questionSettings: defaults.question,
             kanaSettings: new KanaSettingsBuilder().withHiragana().build(),
             hintSettings: defaults.hints,
             lifeSettings: defaults.lives,
@@ -92,9 +96,9 @@ class KanaGameSettingsMenu extends Component<CustomLearnMenuProps, KanaGameSetti
                             <Tab.Content>
                                 <Tab.Pane eventKey="mode" className={styles.pane}>
                                     <Card.Title className={styles.title}>Game Mode Settings</Card.Title>
-                                    <DisplaySettingsForm
+                                    <QuestionSettingsForm
                                         ref={this.display}
-                                        onChange={(settings) => this.setState({ displaySettings: settings })}
+                                        onChange={(settings) => this.setState({ questionSettings: settings })}
                                     />
                                 </Tab.Pane>
                             </Tab.Content>
@@ -165,10 +169,10 @@ class KanaGameSettingsMenu extends Component<CustomLearnMenuProps, KanaGameSetti
     }
 
     onConfirmation = () => {
-        const { displaySettings, kanaSettings, hintSettings, lifeSettings, timeSettings } = this.state;
+        const { questionSettings, kanaSettings, hintSettings, lifeSettings, timeSettings } = this.state;
 
         const gameSettings = new GameSettingsBuilder()
-            .withDisplaySettings(displaySettings)
+            .withQuestionSettings(questionSettings)
             .withHintSettings(hintSettings)
             .withLifeSettings(lifeSettings)
             .withTimeSettings(timeSettings)

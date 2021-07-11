@@ -263,6 +263,55 @@ export function adjectives(): AdjectiveData[] {
             kanjiForm: "有名",
             type: AdjectiveType.NA,
             genkiLesson: 8
+        },
+        {
+            meanings: ["blue"],
+            kana: "あおい",
+            kanjiForm: "青い",
+            type: AdjectiveType.I,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["red"],
+            kana: "あかい",
+            kanjiForm: "赤い",
+            type: AdjectiveType.I,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["black"],
+            kana: "くろい",
+            kanjiForm: "黒い",
+            type: AdjectiveType.I,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["white"],
+            kana: "しろい",
+            kanjiForm: "白い",
+            type: AdjectiveType.I,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["lonely"],
+            kana: "さびしい",
+            kanjiForm: "寂しい",
+            type: AdjectiveType.I,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["young"],
+            kana: "わかい",
+            kanjiForm: "若い",
+            type: AdjectiveType.I,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["mean-spirited"],
+            kana: "いじわるな",
+            kanjiForm: "意地悪",
+            type: AdjectiveType.NA,
+            genkiLesson: 9
         }
     ];
 }
@@ -619,7 +668,83 @@ export function verbs(): VerbData[] {
             kanjiForm: "料理する",
             type: VerbType.IRREGULAR,
             genkiLesson: 8
-        }
+        },
+        {
+            meanings: ["to dance"],
+            kana: "おどる",
+            kanjiForm: "踊る",
+            type: VerbType.RU_U,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["something ends"],
+            kana: "おわる",
+            kanjiForm: "終わる",
+            type: VerbType.RU_U,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["to take medicine"],
+            kana: "くすりをのむ",
+            kanjiForm: "薬を飲む",
+            type: VerbType.U,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["to be popular"],
+            kana: "にんきがある",
+            kanjiForm: "人気がある",
+            type: VerbType.RU_U,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["something begins"],
+            kana: "はじまる",
+            kanjiForm: "始まる",
+            type: VerbType.RU_U,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["to play (an instrument)"],
+            kana: "ひく",
+            kanjiForm: "弾く",
+            type: VerbType.U,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["to get (from somebody)"],
+            kana: "もらう",
+            type: VerbType.U,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["to memorise"],
+            kana: "おぼえる",
+            kanjiForm: "覚える",
+            type: VerbType.RU,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["to appear", "to attend", "to exit"],
+            kana: "でる",
+            kanjiForm: "出る",
+            type: VerbType.RU,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["to exercise"],
+            kana: "うんどうする",
+            kanjiForm: "運動する",
+            type: VerbType.IRREGULAR,
+            genkiLesson: 9
+        },
+        {
+            meanings: ["to take a walk"],
+            kana: "さんぽする",
+            kanjiForm: "散歩する",
+            type: VerbType.IRREGULAR,
+            genkiLesson: 9
+        },
     ];
 }
 
@@ -743,6 +868,11 @@ export function adverbs(): AdverbData[] {
             meanings: ["how"],
             kana: "どう",
             genkiLesson: 8
+        },
+        {
+            meanings: ["already"],
+            kana: "もう",
+            genkiLesson: 9
         }
     ];
 }
@@ -841,6 +971,38 @@ export function expressions(): ExpressionData[] {
             kana: "ざんねん (ですね)",
             kanjiForm: "残念",
             genkiLesson: 8
+        },
+        {
+            meanings: ["(I think) so"],
+            kana: "そう",
+            genkiLesson: 9
+        },
+        {
+            meanings: ["from..."],
+            kana: "から",
+            genkiLesson: 9
+        },
+        {
+            meanings: ["to (a place/time)"],
+            kana: "まで",
+            genkiLesson: 9
+        },
+        {
+            meanings: ["by all means"],
+            kana: "ぜひ",
+            kanjiForm: "是非",
+            genkiLesson: 9
+        },
+        {
+            meanings: ["by the way"],
+            kana: "ところで",
+            genkiLesson: 9
+        },
+        {
+            meanings: ["all"],
+            kana: "みんな",
+            kanjiForm: "皆",
+            genkiLesson: 9
         }
     ];
 }

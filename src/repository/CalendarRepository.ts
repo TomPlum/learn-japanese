@@ -3,7 +3,7 @@ import { days, months, nouns, phrases } from "../data/Calendar";
 import { DayData } from "../data/DataTypes";
 import Repository from "./Repository";
 import Definition from "../types/sentence/Definition";
-import { CalendarSettings } from "../types/session/DataSettings";
+import CalendarSettings from "../types/session/settings/data/CalendarSettings";
 
 export default class CalendarRepository implements Repository<Learnable> {
     public read(config: CalendarSettings): Learnable[] {

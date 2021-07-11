@@ -5,19 +5,19 @@ import MenuDescription from "../ui/MenuDescription";
 import LearnTopicButton from "./LearnTopicButton";
 import StartButton from "../ui/buttons/StartButton";
 import Arrays from "../../utility/Arrays";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCogs, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "./Search";
 import { Learnable } from "../../types/learn/Learnable";
 import LearningDataRepository from "../../repository/LearningDataRepository";
 import Topic from "../../types/Topic";
-import GameSettings from "../../types/session/GameSettings";
+import GameSettings from "../../types/session/settings/game/GameSettings";
 import SessionMode from "../../types/session/SessionMode";
 import { AppMode } from "../../types/AppMode";
 import { MenuModes } from "../../types/MenuModes";
-import { LearnSettings } from "../../types/session/DataSettings";
-import { SessionSettings } from "../../types/session/SessionSettings";
+import { SessionSettings } from "../../types/session/settings/SessionSettings";
 import styles from "../../styles/sass/components/learn/ModeSelectionMenu.module.scss";
+import LearnSettings from "../../types/session/settings/LearnSettings";
 
 export interface CustomLearnMenuProps {
     onSelect: (settings: SessionSettings) => void;
@@ -45,7 +45,7 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
     }
 
     componentDidUpdate(prevProps: Readonly<ModeSelectionMenuProps>, prevState: Readonly<ModeSelectionMenuState>) {
-        if (prevProps.appMode != this.props.appMode) {
+        if (prevProps.appMode !== this.props.appMode) {
             this.setState({ selected: this.getMenuModes().getModes()[0] });
         }
     }
@@ -93,7 +93,7 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
 
                 {renderMenu && (
                     <Row>
-                        <Col className={appMode == AppMode.LEARN ? "pr-1" : undefined}>
+                        <Col className="pr-1">
                             <StartButton onClick={this.onStart} />
                         </Col>
 
@@ -102,6 +102,14 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
                                 <Button className={styles.search} onClick={() => this.setState({ searching: true })}
                                         title="Search">
                                     <FontAwesomeIcon icon={faSearch} fixedWidth/>
+                                </Button>
+                            </Col>
+                        )}
+
+                        {appMode === AppMode.PLAY && (
+                            <Col xs={2} className="pl-2">
+                                <Button variant="secondary" className={styles.settings} onClick={() => {}} title="Game Settings">
+                                    <FontAwesomeIcon icon={faCogs} fixedWidth/>
                                 </Button>
                             </Col>
                         )}

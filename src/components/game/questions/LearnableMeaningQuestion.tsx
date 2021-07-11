@@ -1,7 +1,7 @@
 import { Learnable } from "../../../types/learn/Learnable";
 import GameQuestion from "../GameQuestion";
 import { Form } from "react-bootstrap";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { GameQuestionProps } from "../MemoryGame";
 
 export interface LearnableMeaningQuestionProps extends GameQuestionProps {
@@ -34,16 +34,27 @@ class LearnableMeaningQuestion extends GameQuestion<LearnableMeaningQuestionProp
                     disabled={hidden}
                     value={answer}
                     placeholder={"Enter the meaning"}
-                    onChange={(e) => this.setState({ answer: e.target.value })}
+                    onChange={this.handleInputChange}
                 />
             </div>
         );
     }
 
+
     isCorrect = () => {
         const { data } = this.props;
         const { answer } = this.state;
-        return data.getMeanings().some((meaning: string) => meaning === answer);
+        console.log(data.getMeanings())
+        return data.getMeanings().some((meaning: string) => {
+            console.log("Does " + meaning + " equal " + answer + "?");
+            return meaning.trim().toLowerCase() === answer.trim().toLowerCase()
+        });
+    }
+
+    private handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        const value = e.target.value;
+        this.props.isValid(!!value);
+        this.setState({ answer: value });
     }
 }
 

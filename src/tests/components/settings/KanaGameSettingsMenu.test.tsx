@@ -1,20 +1,25 @@
 import KanaGameSettingsMenu from "../../../components/settings/KanaGameSettingsMenu";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { DisplayType } from "../../../types/game/DisplayType";
-import GameSettings, { GameSettingsBuilder } from "../../../types/session/GameSettings";
+import { QuestionType } from "../../../types/game/QuestionType";
+import GameSettings, { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { CustomLearnMenuProps } from "../../../components/learn/ModeSelectionMenu";
-import { SessionSettings } from "../../../types/session/SessionSettings";
-import { KanaSettingsBuilder } from "../../../types/session/DataSettings";
+import { SessionSettings } from "../../../types/session/settings/SessionSettings";
+import { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
+import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
+import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
+import { HintQuantity } from "../../../types/game/HintQuantity";
+import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
+import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
 
 let settings: GameSettings;
 
 beforeEach(() => {
    settings = new GameSettingsBuilder()
-       .withDisplaySettings({ cards: 1, type: DisplayType.ROMAJI, score: true })
-       .withHintSettings({ enabled: true, quantity: 3 })
-       .withLifeSettings({ enabled: false, quantity: LifeQuantity.FIVE })
-       .withTimeSettings({ countdown: false, timed: true })
+       .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).withCardQuantity(1).withScoreTracking(true).build())
+       .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
+       .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).withQuantity(LifeQuantity.FIVE).build())
+       .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
        .build();
 });
 
@@ -50,11 +55,11 @@ test('Changing the game mode to Kana and submitting should update the settings',
     const { confirm, kanaModeButton } = setup();
 
     fireEvent.click(kanaModeButton);
-    fireEvent.click(confirm);
 
+    fireEvent.click(confirm);
     settings = new GameSettingsBuilder()
         .fromExisting(settings)
-        .withDisplaySettings({ type: DisplayType.KANA, cards: 4, score: true })
+        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(4).withScoreTracking(true).build())
         .build();
 
     expect(onSubmitHandler).toHaveBeenCalledWith(SessionSettings.forGame(

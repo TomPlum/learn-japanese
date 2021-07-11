@@ -1,9 +1,10 @@
 import { faComment, faCube, faExclamation, faFire, faRunning } from "@fortawesome/free-solid-svg-icons";
 import { LearnMenuModes } from "../../MenuModes";
 import LearnMode from "../../session/LearnMode";
-import { LearnSettings, SentenceStructureSettingsBuilder } from "../../session/DataSettings";
+import { SentenceStructureSettingsBuilder } from "../../session/settings/data/SentenceStructureSettings";
+import LearnSettings from "../../session/settings/LearnSettings";
 
-export default class LearnSentenceStructureMode implements LearnMenuModes {
+export default class LearnSentenceStructureModes implements LearnMenuModes {
     getModes(): LearnMode[] {
         const defaultLearnSettings = new LearnSettings();
 
