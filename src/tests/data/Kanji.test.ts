@@ -47,11 +47,11 @@ beforeEach(() => {
 */
 
 it("Kyoiku should return only Kyoiku", () => {
-    expect(kyoiku()).toHaveLength(262);
+    expect(kyoiku()).toHaveLength(302);
 });
 
 it("Joyo should return Joyo & Kyoiku", () => {
-    expect(joyo()).toHaveLength(263);
+    expect(joyo()).toHaveLength(303);
 });
 
 it("Should return exactly 80 Grade 1 Kyoiku Kanji", () => {
