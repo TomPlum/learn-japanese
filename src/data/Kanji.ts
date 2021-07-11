@@ -4212,7 +4212,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "気持ち", kana: ["きもち"], english: ["feeling", "sensation", "mood"] },
                 { value: "持ち", kana: ["もち"], english: ["hold", "charge", "keep possession", "in charge"] },
                 { value: "持つ", kana: ["もつ"], english: ["to hold", "to carry", "to possess"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "安",
@@ -4408,7 +4409,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "住民", kana: ["じゅうみん"], english: ["citizens", "inhabitants", "residents", "population"] },
                 { value: "住所", kana: ["じゅうしょ"], english: ["address (e.g. of house)", "residence", "domicile"] },
                 { value: "在住", kana: ["ざいじゅう"], english: ["resident"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "有",
@@ -4424,7 +4426,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "有力", kana: ["ゆうりょく"], english: ["influential", "prominent", "strong", "likely"] },
                 { value: "有権者", kana: ["ゆうけんしゃ"], english: ["voter", "constituent"] },
                 { value: "有名", kana: ["ゆうめい"], english: ["famous", "fame"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "銀",
@@ -4637,7 +4640,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "研究者", kana: ["けんきゅうしゃ"], english: ["researcher"] },
                 { value: "究明", kana: ["きゅうめい"], english: ["investigation (esp. in academic and scientific contexts)"] },
                 { value: "研究員", kana: ["けんきゅういん"], english: ["researcher"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "着",
@@ -4681,12 +4685,13 @@ export function kyoiku(): KanjiData[] {
             meanings: ["escort", "send"],
             grade: KyoikuGrade.THREE,
             examples: [
-                { value: "送る", kana: ["おくる"], english: ["to send (a thing)", "to dispatch", "to despatch"] },
+                { value: "送る", kana: ["おくる"], english: ["to send (a thing)", "to dispatch"] },
                 { value: "放送", kana: ["ほうそう"], english: ["broadcast", "broadcasting"] },
                 { value: "輸送", kana: ["ゆそう"], english: ["transport", "transportation"] },
                 { value: "送り", kana: ["おくり"], english: ["seeing off", "sending off", "funeral", "escapement"] },
                 { value: "先送り", kana: ["さきおくり"], english: ["postpone"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "研",
@@ -4694,7 +4699,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "げん", romaji: "gen" }],
             kun: [{ kana: "けん", romaji: "ken" }, { kana: "とぐ", romaji: "togu" }],
             source: "https://en.wiktionary.org/wiki/%E7%A0%94#Kanji",
-            meanings: ["polish, study of, sharpen"],
+            meanings: ["polish", "study of", "sharpen"],
             grade: KyoikuGrade.THREE,
             examples: [
                 { value: "研究", kana: ["けんきゅう"], english: ["study", "research", "investigation"] },
@@ -4710,7 +4715,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "き", romaji: "ki" }],
             kun: [{ kana: "おきる", romaji: "okiru" }, { kana: "おこる", romaji: "okoru" }, { kana: "おこす", romaji: "okosu" }],
             source: "https://en.wiktionary.org/wiki/%E8%B5%B7#Kanji",
-            meanings: ["rouse, wake up, get up"],
+            meanings: ["rouse", "wake up", "get up"],
             grade: KyoikuGrade.THREE,
             examples: [
                 { value: "起訴", kana: ["きそ"], english: ["prosecution", "indictment"] },
@@ -4718,7 +4723,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "起用", kana: ["きよう"], english: ["appointment (to a position, job, etc.)"] },
                 { value: "起こる", kana: ["おこる"], english: ["to occur", "to happen"] },
                 { value: "提起", kana: ["ていき"], english: ["bring suit", "file a claim", "raise a question"] },
-            ]
+            ],
+            tags: ["verb"]
         },
         {
             name: "病",
@@ -4726,7 +4732,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "びょう", romaji: "byō" }, { kana: "へい", romaji: "hei" }],
             kun: [{ kana: "やむ", romaji: "yamu" }, { kana: "やまい", romaji: "yamai" }],
             source: "https://en.wiktionary.org/wiki/%E7%97%85#Kanji",
-            meanings: ["ill, sick"],
+            meanings: ["ill", "sick"],
             grade: KyoikuGrade.THREE,
             examples: [
                 { value: "病院", kana: ["びょういん"], english: ["hospital"] },
@@ -4911,7 +4917,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "調整", kana: ["ちょうせい"], english: ["regulation", "adjustment", "tuning", "modification"] },
                 { value: "協調", kana: ["きょうちょう"], english: ["cooperation", "conciliation", "harmony"] },
                 { value: "好調", kana: ["こうちょう"], english: ["favourable", "favorable", "promising"] },
-            ]
+            ],
+            tags: ["verb"]
         },
 
         //Grade 6 Kanji
