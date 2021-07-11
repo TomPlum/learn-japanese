@@ -1,40 +1,50 @@
 import React, { Component } from "react";
-import { DisplaySettings } from "../../../types/session/settings/game/GameSettings";
-import { DisplayType } from "../../../types/game/DisplayType";
+import { QuestionType } from "../../../types/game/QuestionType";
 import DisplayTypeButton from "../../ui/buttons/DisplayTypeButton";
 import { faChevronRight, faFont, faGripVertical, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { Col, Form, Row } from "react-bootstrap";
 import { Environment } from "../../../utility/Environment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KanaQuantityButton from "../../ui/buttons/KanaQuantityButton";
-import styles from "../../../styles/sass/components/settings/kana/DisplaySettingsForm.module.scss";
+import styles from "../../../styles/sass/components/settings/kana/QuestionSettingsForm.module.scss";
+import QuestionSettings, { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
 
-export interface DisplaySettingsFormProps {
-    onChange: (settings: DisplaySettings) => void;
+export interface QuestionSettingsFormProps {
+    onChange: (settings: QuestionSettings) => void;
 }
 
-interface DisplaySettingsFormState {
-    type: DisplayType;
+interface QuestionSettingsFormState {
+    type: QuestionType;
     cards: number;
     score: boolean;
 }
 
-class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySettingsFormState> {
+class QuestionSettingsForm extends Component<QuestionSettingsFormProps, QuestionSettingsFormState> {
 
-    private readonly defaultState = { type: DisplayType.ROMAJI, cards: 1, score: true };
+    private readonly defaultState = new QuestionSettingsBuilder()
+        .withType(QuestionType.ROMAJI)
+        .withCardQuantity(1)
+        .withScoreTracking(true)
+        .build();
 
-    constructor(props: Readonly<DisplaySettingsFormProps> | DisplaySettingsFormProps) {
+    constructor(props: Readonly<QuestionSettingsFormProps> | QuestionSettingsFormProps) {
         super(props);
-        this.state = this.defaultState;
+        this.state = {
+            type: this.defaultState.type,
+            cards: this.defaultState.cards,
+            score: this.defaultState.score
+        }
     }
 
     componentDidMount() {
         this.props.onChange(this.defaultState);
     }
 
-    componentDidUpdate(prevProps: Readonly<DisplaySettingsFormProps>, prevState: Readonly<DisplaySettingsFormState>) {
+    componentDidUpdate(prevProps: Readonly<QuestionSettingsFormProps>, prevState: Readonly<QuestionSettingsFormState>) {
         if (prevState !== this.state) {
-            this.props.onChange(this.state);
+            const { type, cards, score } = this.state;
+            const settings = new QuestionSettingsBuilder().withType(type).withCardQuantity(cards).withScoreTracking(score).build();
+            this.props.onChange(settings);
         }
     }
 
@@ -57,7 +67,7 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
                     <Col>
                         <DisplayTypeButton
                             icon={faFont}
-                            type={DisplayType.ROMAJI}
+                            type={QuestionType.ROMAJI}
                             selected={type}
                             onClick={(type) => this.setState({ type, cards: 1 })}
                         />
@@ -66,7 +76,7 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
                     <Col>
                         <DisplayTypeButton
                             icon={faThLarge}
-                            type={DisplayType.KANA}
+                            type={QuestionType.KANA}
                             selected={type}
                             onClick={(type) => this.setState({ type, cards: 4 })}
                         />
@@ -74,7 +84,7 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
                 </Row>
 
 
-                {type === DisplayType.KANA &&
+                {type === QuestionType.KANA &&
                     <Row className={styles.section}>
                         <Col xs={12}>
                             <p className={styles.quantityDescription}>You'll be shown {cards} kana to choose from.</p>
@@ -126,7 +136,10 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
         );
     }
 
-    reset = () => this.setState(this.defaultState);
+    reset = () => this.setState({
+        type: this.defaultState.type,
+        cards: this.defaultState.cards
+    });
 
     private handleQuantitySelect = (quantity: number) => {
         this.setState({ cards: quantity });
@@ -135,4 +148,4 @@ class DisplaySettingsForm extends Component<DisplaySettingsFormProps, DisplaySet
     private getDescription = () => Environment.variable(this.state.type + "_MODE_DESC");
 }
 
-export default DisplaySettingsForm;
+export default QuestionSettingsForm;

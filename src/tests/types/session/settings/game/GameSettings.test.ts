@@ -1,9 +1,11 @@
-import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
-import { LifeQuantity } from "../../../types/game/LifeQuantity";
-import { DisplayType } from "../../../types/game/DisplayType";
-import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
-import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
-import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
+import { GameSettingsBuilder } from "../../../../../types/session/settings/game/GameSettings";
+import { LifeQuantity } from "../../../../../types/game/LifeQuantity";
+import { QuestionType } from "../../../../../types/game/QuestionType";
+import LifeSettings, { LifeSettingsBuilder } from "../../../../../types/session/settings/game/LifeSettings";
+import HintSettings, { HintSettingsBuilder } from "../../../../../types/session/settings/game/HintSettings";
+import TimeSettings, { TimeSettingsBuilder } from "../../../../../types/session/settings/game/TimeSettings";
+import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../types/session/settings/game/QuestionSettings";
+import { HintQuantity } from "../../../../../types/game/HintQuantity";
 
 describe("Game Settings", () => {
     describe("Builder", () => {
@@ -19,7 +21,9 @@ describe("Game Settings", () => {
 
         it("Should set default Display settings if not specified", () => {
             const settings = new GameSettingsBuilder().build();
-            expect(settings.display).toStrictEqual({ type: DisplayType.ROMAJI, cards: 1, score: true });
+            expect(settings.question).toStrictEqual(
+                new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).withCardQuantity(1).withScoreTracking(false).build()
+            );
         });
 
         it("Should set default Time settings if not specified", () => {
@@ -29,16 +33,16 @@ describe("Game Settings", () => {
 
         it("Should override settings when specified", () => {
             const settings = new GameSettingsBuilder()
-                .withDisplaySettings({ type: DisplayType.KANA, cards: 6, score: true })
+                .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(6).withScoreTracking(true).build())
                 .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
                 .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.ONE).build())
                 .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
                 .build();
 
-            expect(settings.display).toStrictEqual({ type: DisplayType.KANA, cards: 6, score: true });
-            expect(settings.hints).toStrictEqual(new HintSettingsBuilder().isEnabled(false).build());
-            expect(settings.lives).toStrictEqual(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.ONE).build());
-            expect(settings.time).toStrictEqual(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build());
+            expect(settings.question).toStrictEqual(new QuestionSettings(QuestionType.KANA, 6, true));
+            expect(settings.hints).toStrictEqual(new HintSettings(false, HintQuantity.UNLIMITED));
+            expect(settings.lives).toStrictEqual(new LifeSettings(true, LifeQuantity.ONE));
+            expect(settings.time).toStrictEqual(new TimeSettings(true, true, 5));
         });
 
         it("Should build upon the existing values when creating from an existing settings object", () => {

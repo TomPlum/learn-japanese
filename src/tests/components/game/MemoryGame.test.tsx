@@ -1,6 +1,6 @@
 import MemoryGame, { MemoryGameProps } from "../../../components/game/MemoryGame";
 import { cleanup, fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
-import { DisplayType } from "../../../types/game/DisplayType";
+import { QuestionType } from "../../../types/game/QuestionType";
 import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 import { Kana } from "../../../types/kana/Kana";
 import KanaType from "../../../types/kana/KanaType";
@@ -15,6 +15,7 @@ import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
 import { HintQuantity } from "../../../types/game/HintQuantity";
 import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
+import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -38,7 +39,7 @@ beforeEach(() => {
     props = {
         data: [a, i, u, e, o],
         settings: new GameSettingsBuilder()
-            .withDisplaySettings({ type: DisplayType.ROMAJI, cards: 1, score: true })
+            .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).withCardQuantity(1).withScoreTracking(true).build())
             .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.UNLIMITED).build())
             .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
             .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
@@ -690,19 +691,19 @@ test('Failing to correctly answer the question before the countdown finishes sho
     expect(screen.getByText('(5)')).toBeInTheDocument();
 });
 
-test('Setting the display type as \'Single Kana\' should render a RomanjiQuestion', () => {
+test('Setting the question type as \'Romaji\' should render a RomajiQuestion', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withDisplaySettings({ type: DisplayType.ROMAJI, cards: 1, score: true })
+        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).build())
         .build();
     setup();
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
-test('Setting the display type as \'Multiple Cards\' should render a KanaChoiceQuestion', () => {
+test('Setting the question type as \'Kana\' should render a KanaChoiceQuestion', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withDisplaySettings({ type: DisplayType.KANA, cards: 2, score: true })
+        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(2).build())
         .build();
 
     setup();
@@ -716,19 +717,19 @@ test('Setting the display type as \'Multiple Cards\' should render a KanaChoiceQ
     expect(screen.queryByText('3')).not.toBeInTheDocument();
 });
 
-test('Setting the display settings score property to true should render the score', () => {
+test('Setting the game settings score property to true should render the score', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withDisplaySettings({ type: DisplayType.KANA, cards: 2, score: true })
+        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(2).withScoreTracking(true).build())
         .build();
     setup();
     expect(screen.getByText('0')).toBeInTheDocument();
 });
 
-test('Setting the display settings score property to false should not render the score', () => {
+test('Setting the game settings score property to false should not render the score', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withDisplaySettings({ type: DisplayType.KANA, cards: 2, score: false })
+        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(2).withScoreTracking(false).build())
         .build();
     setup();
     expect(screen.queryByText('0')).not.toBeInTheDocument();

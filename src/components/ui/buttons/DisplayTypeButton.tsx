@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "react-bootstrap";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../styles/sass/components/ui/buttons/DisplayTypeButton.module.scss";
-import { DisplayType } from "../../../types/game/DisplayType";
+import { QuestionType } from "../../../types/game/QuestionType";
 
 export interface DisplayTypeButtonProps {
-    type: DisplayType;
-    selected: DisplayType;
+    type: QuestionType;
+    selected: QuestionType;
     icon: IconDefinition;
-    onClick: (type: DisplayType) => void;
+    onClick: (type: QuestionType) => void;
 }
 
 class DisplayTypeButton extends Component<DisplayTypeButtonProps> {

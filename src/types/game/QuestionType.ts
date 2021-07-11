@@ -1,4 +1,4 @@
-export enum DisplayType {
+export enum QuestionType {
     ROMAJI = "Rōmaji",
     KANA = "Kana",
     MEANING = "Meaning",

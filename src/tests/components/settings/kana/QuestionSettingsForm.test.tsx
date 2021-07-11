@@ -1,13 +1,14 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import DisplaySettingsForm from "../../../../components/settings/kana/DisplaySettingsForm";
-import { DisplayType } from "../../../../types/game/DisplayType";
+import QuestionSettingsForm from "../../../../components/settings/kana/QuestionSettingsForm";
+import { QuestionType } from "../../../../types/game/QuestionType";
 import { Environment } from "../../../../utility/Environment";
+import { QuestionSettingsBuilder } from "../../../../types/session/settings/game/QuestionSettings";
 
 const onSelectHandler = jest.fn();
 const environment = jest.fn();
 
 const setup = () => {
-    const component = render(<DisplaySettingsForm onChange={onSelectHandler}/>);
+    const component = render(<QuestionSettingsForm onChange={onSelectHandler}/>);
     return {
         kanaModeButton: screen.getByText('Kana'),
         romanjiModeButton: screen.getByText('Rōmaji'),
@@ -26,20 +27,26 @@ afterEach(() => {
 
 test('On mount it should call the onSelect event handler with the default settings', () => {
     setup();
-    expect(onSelectHandler).toHaveBeenCalledWith({ type: DisplayType.ROMAJI, cards: 1, score: true });
+    expect(onSelectHandler).toHaveBeenCalledWith(
+        new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).withCardQuantity(1).withScoreTracking(true).build()
+    );
 });
 
 test('Selecting kana mode should call the onSelect eventHandler', () => {
     const { kanaModeButton } = setup();
     fireEvent.click(kanaModeButton);
-    expect(onSelectHandler).toHaveBeenCalledWith({ type: DisplayType.KANA, cards: 4, score: true });
+    expect(onSelectHandler).toHaveBeenCalledWith(
+        new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(4).withScoreTracking(true).build()
+    );
 });
 
 test('Selecting rōmaji mode should call the onSelect eventHandler', () => {
     const { kanaModeButton, romanjiModeButton } = setup();
     fireEvent.click(kanaModeButton);
     fireEvent.click(romanjiModeButton);
-    expect(onSelectHandler).toHaveBeenLastCalledWith({ type: DisplayType.ROMAJI, cards: 1, score: true });
+    expect(onSelectHandler).toHaveBeenLastCalledWith(
+        new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).withCardQuantity(1).withScoreTracking(true).build()
+    );
 });
 
 test('Selecting kana mode should change the description accordingly', () => {
@@ -94,5 +101,7 @@ test('Selecting 6 kana quantity should update the description', () => {
 test('Turning off the score tracking system should set the boolean to false', () => {
     const { score } = setup();
     fireEvent.click(score);
-    expect(onSelectHandler).toHaveBeenLastCalledWith({ type: DisplayType.ROMAJI, cards: 1, score: false });
+    expect(onSelectHandler).toHaveBeenLastCalledWith(
+        new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).withCardQuantity(1).withScoreTracking(false).build()
+    );
 });

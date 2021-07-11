@@ -1,6 +1,6 @@
 import KanaGameSettingsMenu from "../../../components/settings/KanaGameSettingsMenu";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { DisplayType } from "../../../types/game/DisplayType";
+import { QuestionType } from "../../../types/game/QuestionType";
 import GameSettings, { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { CustomLearnMenuProps } from "../../../components/learn/ModeSelectionMenu";
@@ -10,12 +10,13 @@ import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSe
 import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
 import { HintQuantity } from "../../../types/game/HintQuantity";
 import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
+import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
 
 let settings: GameSettings;
 
 beforeEach(() => {
    settings = new GameSettingsBuilder()
-       .withDisplaySettings({ cards: 1, type: DisplayType.ROMAJI, score: true })
+       .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).withCardQuantity(1).withScoreTracking(true).build())
        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
        .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).withQuantity(LifeQuantity.FIVE).build())
        .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
@@ -58,7 +59,7 @@ test('Changing the game mode to Kana and submitting should update the settings',
     fireEvent.click(confirm);
     settings = new GameSettingsBuilder()
         .fromExisting(settings)
-        .withDisplaySettings({ type: DisplayType.KANA, cards: 4, score: true })
+        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(4).withScoreTracking(true).build())
         .build();
 
     expect(onSubmitHandler).toHaveBeenCalledWith(SessionSettings.forGame(
