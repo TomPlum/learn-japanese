@@ -12,7 +12,8 @@ describe("Kanji", () => {
             ["person"],
             KyoikuGrade.ONE,
             "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
-            [new Example("外国人", ["がいこくじん"], ["foreigner"])]
+            [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+            []
         );
 
         it("Should get the readings", () => {
@@ -39,7 +40,8 @@ describe("Kanji", () => {
                 ["person"],
                 KyoikuGrade.ONE,
                 "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
-                [new Example("外国人", ["がいこくじん"], ["foreigner"])]
+                [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+                []
             );
             expect(kanji.getKana()).toStrictEqual(["ひと"]);
         });
@@ -50,7 +52,8 @@ describe("Kanji", () => {
                 ["person"],
                 KyoikuGrade.ONE,
                 "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
-                [new Example("外国人", ["がいこくじん"], ["foreigner"])]
+                [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+                []
             );
             expect(kanji.getKana()).toStrictEqual(["じん"]);
         });
@@ -61,7 +64,8 @@ describe("Kanji", () => {
                 ["person"],
                 KyoikuGrade.ONE,
                 "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
-                [new Example("外国人", ["がいこくじん"], ["foreigner"])]
+                [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+                []
             );
             expect(kanji.getKana()).toStrictEqual([]);
         });
@@ -84,6 +88,10 @@ describe("Kanji", () => {
 
         it("Should return the character for the kanji variation", () => {
             expect(kanji.getKanjiVariation()).toBe('人');
+        });
+
+        it("Should construct a hint message based on the grade and starting kana", () => {
+            expect(kanji.getHint()).toBe("It's Grade 1 and starts with じ.")
         });
     });
 });
