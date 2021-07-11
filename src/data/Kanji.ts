@@ -4422,6 +4422,171 @@ export function kyoiku(): KanjiData[] {
                 { value: "有名", kana: ["ゆうめい"], english: ["famous", "fame"] },
             ]
         },
+        {
+            name: "銀",
+            code: "\u9280",
+            on: [{ kana: "ぎん", romaji: "gin" }],
+            kun: [{ kana: "しろがね", romaji: "shirogane" }],
+            source: "https://en.wiktionary.org/wiki/%E9%8A%80#Kanji",
+            meanings: ["silver"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "銀", kana: ["ぎん", "しろがね"], english: ["silver", "silver coin", "silver paint"] },
+                { value: "銀行", kana: ["ぎんこう"], english: ["bank"] },
+                { value: "銀座", kana: ["ぎんざ"], english: ["Ginza (shopping district in Tokyo)"] },
+                { value: "住友銀行", kana: ["すみともぎんこう"], english: ["Sumitomo Bank"] },
+                { value: "日本銀行", kana: ["にっぽんぎんこう", "にほんぎんこ"], english: ["Bank of Japan"] },
+            ],
+            tags: ["colour"]
+        },
+        {
+            name: "仕",
+            code: "\u4ED5",
+            on: [{ kana: "し", romaji: "shi" }, { kana: "じ", romaji: "ji" }],
+            kun: [{ kana: "つかえる", romaji: "tsukaeru" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BB%95#Kanji",
+            meanings: ["serve", "attend", "doing", "official"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "仕事", kana: ["しごと"], english: ["work", "job", "business", "occupation", "employment"] },
+                { value: "仕組み", kana: ["しくみ"], english: ["structure", "construction", "arrangement"] },
+                { value: "仕方", kana: ["しかた"], english: ["way", "method", "means", "resource", "course"] },
+                { value: "仕掛け", kana: ["しかけ"], english: ["device", "trick", "mechanism", "gadget"] },
+                { value: "仕手", kana: ["して"], english: ["doer", "performer"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "味",
+            code: "\u5473",
+            on: [{ kana: "み", romaji: "mi" }],
+            kun: [{ kana: "あじ", romaji: "aji" }, { kana: "あじわう", romaji: "ajiwau" }],
+            source: "https://en.wiktionary.org/wiki/%E5%91%B3#Kanji",
+            meanings: ["flavour", "taste"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "味", kana: ["あじ"], english: ["flavour", "taste", "charm", "style"] },
+                { value: "意味", kana: ["いみ"], english: ["meaning", "significance"] },
+                { value: "興味", kana: ["きょうみ"], english: ["interest (in something)"] },
+                { value: "趣味", kana: ["しゅみ"], english: ["hobby", "tastes", "preference"] },
+                { value: "味わい", kana: ["あじわい"], english: ["flavour", "meaning", "significance"] },
+            ],
+            tags: ["food"]
+        },
+        {
+            name: "注",
+            code: "\u6CE8",
+            on: [{ kana: "ちゅう", romaji: "chū" }],
+            kun: [{ kana: "そそぐ", romaji: "sosogu" }],
+            source: "https://en.wiktionary.org/wiki/%E6%B3%A8#Kanji",
+            meanings: ["pour", "irrigate", "shed (tears)", "flow into", "concentrate on", "notes", "comment", "annotate"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "注", kana: ["ちゅう"], english: ["annotation", "explanatory note", "comment"] },
+                { value: "注目", kana: ["ちゅうもく"], english: ["notice", "attention", "observation"] },
+                { value: "受注", kana: ["じゅちゅう"], english: ["accepting orders"] },
+                { value: "注意", kana: ["ちゅうい"], english: ["caution", "being careful", "attention (heed)"] },
+                { value: "注文", kana: ["ちゅうもん"], english: ["order", "request"] },
+            ]
+        },
+        {
+            name: "館",
+            code: "\u9928",
+            on: [{ kana: "かん", romaji: "kan" }],
+            kun: [{ kana: "やかた", romaji: "yakata" }, { kana: "たて", romaji: "tate" }],
+            source: "https://en.wiktionary.org/wiki/%E9%A4%A8#Kanji",
+            meanings: ["building", "mansion", "large building", "palace"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "会館", kana: ["かいかん"], english: ["meeting hall", "assembly hall"] },
+                { value: "大使館", kana: ["たいしかん"], english: ["embassy"] },
+                { value: "美術館", kana: ["びじゅつかん"], english: ["art gallery", "art museum"] },
+                { value: "博物館", kana: ["はくぶつかん"], english: ["museum"] },
+                { value: "図書館", kana: ["としょかん", "ずしょかん"], english: ["library"] },
+            ]
+        },
+        {
+            name: "医",
+            code: "\u533B",
+            on: [{ kana: "い", romaji: "i" }],
+            kun: [{ kana: "いやす", romaji: "iyasu" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8C%BB#Kanji",
+            meanings: ["doctor", "medicine"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "医療", kana: ["いりょう"], english: ["medical care", "medical treatment"] },
+                { value: "医学", kana: ["いがく"], english: ["medical science", "medicine"] },
+                { value: "医師", kana: ["いし"], english: ["doctor", "physician"] },
+                { value: "医", kana: ["い"], english: ["medicine", "the healing art", "healing", "curing"] },
+                { value: "医薬品", kana: ["いやくひん"], english: ["medical supplies"] },
+            ],
+            tags: ["occupation"]
+        },
+        {
+            name: "去",
+            code: "\u53BB",
+            on: [{ kana: "きょ", romaji: "kyo" }, { kana: "こ", romaji: "ko" }],
+            kun: [{ kana: "さる", romaji: "saru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8E%BB#Kanji",
+            meanings: ["gone", "past", "quit", "leave", "elapse", "eliminate", "divorce"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "過去", kana: ["かこ"], english: ["the past", "bygone days", "the previous"] },
+                { value: "死去", kana: ["しきょ"], english: ["death"] },
+                { value: "撤去", kana: ["てっきょ"], english: ["withdrawal", "revocation", "repeal", "demolition"] },
+                { value: "除去", kana: ["じょきょ"], english: ["removal", "getting rid of"] },
+                { value: "去年", kana: ["きょねん", "こぞ"], english: ["last year"] },
+            ]
+        },
+        {
+            name: "写",
+            code: "\u5199",
+            on: [{ kana: "しゃ", romaji: "sha" }],
+            kun: [{ kana: "うつす", romaji: "utsusu" }, { kana: "うつる", romaji: "utsuru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%86%99#Kanji",
+            meanings: ["copy", "be photographed", "describe"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "写真", kana: ["しゃしん"], english: ["photograph", "photo", "movie"] },
+                { value: "写真集", kana: ["しゃしんしゅう"], english: ["collection of photographs", "photoalbum"] },
+                { value: "写る", kana: ["うつる"], english: ["to be photographed", "to be projected"] },
+                { value: "描写", kana: ["びょうしゃ"], english: ["depiction", "description", "portrayal"] },
+                { value: "青写真", kana: ["あおじゃしん"], english: ["blueprint", "plan"] },
+            ]
+        },
+        {
+            name: "悪",
+            code: "\u60AA",
+            on: [{ kana: "あく", romaji: "aku" }],
+            kun: [{ kana: "わるい", romaji: "warui" }],
+            source: "https://en.wiktionary.org/wiki/%E6%82%AA#Kanji",
+            meanings: ["bad", "vice", "rascal", "false", "evil", "wrong"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "悪", kana: ["あく"], english: ["evil", "wickedness"] },
+                { value: "悪化", kana: ["あっか"], english: ["(suffer) deterioration", "growing worse"] },
+                { value: "最悪", kana: ["さいあく"], english: ["the worst"] },
+                { value: "悪さ", kana: ["わるさ"], english: ["badness", "mean mischief"] },
+                { value: "悪質", kana: ["あくしつ"], english: ["bad quality", "malignancy", "vicious", "malignant"] },
+            ],
+            tags: ["adjective"]
+        },
+        {
+            name: "屋",
+            code: "\u5C4B",
+            on: [{ kana: "おく", romaji: "oku" }],
+            kun: [{ kana: "や", romaji: "ya" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B1%8B#Kanji",
+            meanings: ["roof", "house", "shop", "dealer", "seller"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "部屋", kana: ["へや"], english: ["room", "sumo stable"] },
+                { value: "屋根", kana: ["やね"], english: ["roof"] },
+                { value: "総会屋", kana: ["そうかいや"], english: ["extortionist that threatens to disruptstock"] },
+                { value: "小屋", kana: ["こや"], english: ["hut", "cabin", "shed", "(animal) pen"] },
+                { value: "屋上", kana: ["おくじょう"], english: ["rooftop"] },
+            ]
+        },
 
         //Grade 6 Kanji
         {
