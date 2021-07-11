@@ -4460,11 +4460,11 @@ export function kyoiku(): KanjiData[] {
             meanings: ["reality", "truth"],
             grade: KyoikuGrade.THREE,
             examples: [
-                { value: "", kana: [""], english: ["truth", "reality", "sincerity", "honesty", "fidelity"] },
-                { value: "", kana: [""], english: ["as a matter of fact", "by the way"] },
-                { value: "", kana: [""], english: ["indeed", "really", "absolutely", "truly", "actually"] },
-                { value: "", kana: [""], english: ["reality"] },
-                { value: "", kana: [""], english: ["fact", "truth", "reality"] },
+                { value: "実", kana: ["じつ", "じち"], english: ["truth", "reality", "sincerity", "honesty", "fidelity"] },
+                { value: "実は", kana: ["じつは"], english: ["as a matter of fact", "by the way"] },
+                { value: "実に", kana: ["じつに", "まことに", "げに", "しんに"], english: ["indeed", "really", "absolutely", "truly", "actually"] },
+                { value: "現実", kana: ["げんじつ"], english: ["reality"] },
+                { value: "事実", kana: ["じじつ"], english: ["fact", "truth", "reality"] },
             ]
         },
         {
@@ -4476,11 +4476,11 @@ export function kyoiku(): KanjiData[] {
             meanings: ["whole", "entire, all", "complete", "fulfill"],
             grade: KyoikuGrade.THREE,
             examples: [
-                { value: "", kana: [""], english: ["safety", "security"] },
-                { value: "", kana: [""], english: ["whole", "entirety", "whatever (is the matter)"] },
-                { value: "", kana: [""], english: ["country wide", "nation wide", "whole country"] },
-                { value: "", kana: [""], english: ["security guarantee (e.g. military security"] },
-                { value: "", kana: [""], english: ["all members (unanimity)", "all hands"] },
+                { value: "安全", kana: ["あんぜん"], english: ["safety", "security"] },
+                { value: "全体", kana: ["ぜんたい"], english: ["whole", "entirety", "whatever (is the matter)"] },
+                { value: "全国", kana: ["ぜんこく", "ぜんごく"], english: ["country wide", "nation wide", "whole country"] },
+                { value: "安全保障", kana: ["あんぜんほしょう"], english: ["security guarantee (e.g. military security"] },
+                { value: "全員", kana: ["ぜんいん"], english: ["all members (unanimity)", "all hands"] },
             ]
         },
         {
@@ -4493,11 +4493,11 @@ export function kyoiku(): KanjiData[] {
             grade: KyoikuGrade.THREE,
             tags: ["verb"],
             examples: [
-                { value: "", kana: [""], english: ["practice", "practise"] },
-                { value: "", kana: [""], english: ["study", "learning", "tutorial"] },
-                { value: "", kana: [""], english: ["practice", "exercises", "manoeuvres"] },
-                { value: "", kana: [""], english: ["custom", "habit", "manners"] },
-                { value: "", kana: [""], english: ["short course", "training"] },
+                { value: "練習", kana: ["れんしゅう"], english: ["practice", "practise"] },
+                { value: "学習", kana: ["がくしゅう"], english: ["study", "learning", "tutorial"] },
+                { value: "演習", kana: ["えんしゅう"], english: ["practice", "exercises", "manoeuvres"] },
+                { value: "習慣", kana: ["しゅうかん"], english: ["custom", "habit", "manners"] },
+                { value: "講習", kana: ["こうしゅう"], english: ["short course", "training"] },
             ]
         },
         {
@@ -4509,11 +4509,11 @@ export function kyoiku(): KanjiData[] {
             meanings: ["section", "bureau", "dept", "class", "copy", "part", "portion", "counter for copies of a newspaper or magazine"],
             grade: KyoikuGrade.THREE,
             examples: [
-                { value: "", kana: [""], english: ["one part", "one portion", "one section", "some"] },
-                { value: "", kana: [""], english: ["management", "(executive) staff", "leaders"] },
-                { value: "", kana: [""], english: ["head (chief"] },
-                { value: "", kana: [""], english: ["portion", "section", "part"] },
-                { value: "", kana: [""], english: ["class", "group", "category", "department", "field"] },
+                { value: "一部", kana: ["いちぶ"], english: ["one part", "one portion", "one section", "some"] },
+                { value: "幹部", kana: ["かんぶ"], english: ["management", "(executive) staff", "leaders"] },
+                { value: "部長", kana: ["ぶちょう"], english: ["head (chief"] },
+                { value: "部分", kana: ["ぶぶん"], english: ["portion", "section", "part"] },
+                { value: "部門", kana: ["ぶもん"], english: ["class", "group", "category", "department", "field"] },
             ]
         },
         {
@@ -4541,11 +4541,11 @@ export function kyoiku(): KanjiData[] {
             meanings: ["decide", "fix", "agree upon", "appoint"],
             grade: KyoikuGrade.THREE,
             examples: [
-                { value: "", kana: [""], english: ["always", "without fail", "usually", "regularly"] },
-                { value: "", kana: [""], english: ["never", "by no means", "decidedly", "indisputably"] },
-                { value: "", kana: [""], english: ["settlement", "solution", "resolution"] },
-                { value: "", kana: [""], english: ["resolution", "vote", "decision"] },
-                { value: "", kana: [""], english: ["decision", "determination"] },
+                { value: "決まって", kana: ["きまって"], english: ["always", "without fail", "usually", "regularly"] },
+                { value: "決して", kana: ["けっして, けして"], english: ["never", "by no means", "decidedly", "indisputably"] },
+                { value: "解決", kana: ["かいけつ"], english: ["settlement", "solution", "resolution"] },
+                { value: "決議", kana: ["けつぎ"], english: ["resolution", "vote", "decision"] },
+                { value: "決定", kana: ["けってい"], english: ["decision", "determination"] },
             ]
         },
         {
@@ -4573,11 +4573,11 @@ export function kyoiku(): KanjiData[] {
             meanings: ["tune", "tone", "meter", "key (music)", "writing", "style", "prepare", "exorcise", "investigate"],
             grade: KyoikuGrade.THREE,
             examples: [
-                { value: "", kana: [""], english: ["investigation", "inspection", "examination", "tune"] },
-                { value: "", kana: [""], english: ["investigation", "examination", "inquiry", "enquiry"] },
-                { value: "", kana: [""], english: ["regulation", "adjustment", "tuning", "modification"] },
-                { value: "", kana: [""], english: ["cooperation", "conciliation", "harmony"] },
-                { value: "", kana: [""], english: ["favourable", "favorable", "promising"] },
+                { value: "調べ", kana: ["しらべ"], english: ["investigation", "inspection", "examination", "tune"] },
+                { value: "調査", kana: ["ちょうさ"], english: ["investigation", "examination", "inquiry", "enquiry"] },
+                { value: "調整", kana: ["ちょうせい"], english: ["regulation", "adjustment", "tuning", "modification"] },
+                { value: "協調", kana: ["きょうちょう"], english: ["cooperation", "conciliation", "harmony"] },
+                { value: "好調", kana: ["こうちょう"], english: ["favourable", "favorable", "promising"] },
             ]
         },
 
