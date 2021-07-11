@@ -16,15 +16,13 @@ export default class PlayKanjiModes implements PlayMenuModes {
             new PlayMode("Kanji", "#6857ee", faPaintBrush,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
-                    .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANJI).withCardQuantity(4).build())
-                    .withScoreTracking(true)
+                    .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANJI).withCardQuantity(4).withScoreTracking(true).build())
                     .build()
             ),
             new PlayMode("Meaning", "#65cd3a", faSchool,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
-                    .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.MEANING).withCardQuantity(4).build())
-                    .withScoreTracking(true)
+                    .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.MEANING).withCardQuantity(4).withScoreTracking(true).build())
                     .build()
             ),
             new PlayMode("On'yomi", "#eacd35", faStar,
@@ -38,8 +36,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
             new PlayMode("Random", "#3cabca", faRandom,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
-                    .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.RANDOM).withCardQuantity(4).build())
-                    .withScoreTracking(true)
+                    .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.RANDOM).withCardQuantity(4).withScoreTracking(true).build())
                     .build()
             ),
             new CustomLearningMode(KanjiSettingsMenu)
