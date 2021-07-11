@@ -4258,6 +4258,170 @@ export function kyoiku(): KanjiData[] {
                 { value: "集中", kana: ["しゅうちゅう"], english: ["concentration", "convergence", "centralization"] },
             ]
         },
+        {
+            name: "物",
+            code: "\u7269",
+            on: [{ kana: "もつ", romaji: "motsu" }, { kana: "ぶつ", romaji: "butsu" }],
+            kun: [{ kana: "もの", romaji: "mono" }],
+            source: "https://en.wiktionary.org/wiki/%E7%89%A9#Kanji",
+            meanings: ["thing", "object", "matter"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "人物", kana: ["じんぶつ"], english: ["character", "personality", "person", "man"] },
+                { value: "動物", kana: ["どうぶつ"], english: ["animal"] },
+                { value: "建物", kana: ["たてもの"], english: ["building"] },
+                { value: "物価", kana: ["ぶっか"], english: ["prices of commodities", "prices (in general)"] },
+                { value: "物語", kana: ["ものがたり"], english: ["tale", "story", "legend"] },
+            ]
+        },
+        {
+            name: "品",
+            code: "\u54C1",
+            on: [{ kana: "ひん", romaji: "hin" }],
+            kun: [{ kana: "しな", romaji: "shina" }],
+            source: "https://en.wiktionary.org/wiki/%E5%93%81#Kanji",
+            meanings: ["article", "counter for meal courses", "goods"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "作品", kana: ["さくひん"], english: ["work (e.g. book, film, composition, etc.)"] },
+                { value: "商品", kana: ["しょうひん"], english: ["commodity", "article of commerce", "goods", "stock"] },
+                { value: "製品", kana: ["せいひん"], english: ["manufactured goods", "finished goods", "product"] },
+                { value: "食品", kana: ["しょくひん"], english: ["commodity", "foodstuff"] },
+                { value: "部品", kana: ["ぶひん"], english: ["parts", "accessories"] },
+            ],
+            tags: ["counter"]
+        },
+        {
+            name: "始",
+            code: "\u59CB",
+            on: [{ kana: "し", romaji: "shi" }],
+            kun: [{ kana: "はじめる", romaji: "hajimeru" }, { kana: "はじまる", romaji: "hajimaru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A7%8B#Kanji",
+            meanings: ["begin", "commerce"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "開始", kana: ["かいし"], english: ["start", "commencement", "beginning", "initiation"] },
+                { value: "始まり", kana: ["はじまり"], english: ["origin", "beginning"] },
+                { value: "終始", kana: ["しゅうし"], english: ["from beginning to end"] },
+                { value: "始める", kana: ["はじめる"], english: ["to start", "to begin", "to commence", "to initiate"] },
+                { value: "始め", kana: ["はじめ"], english: ["beginning", "start", "origin"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "終",
+            code: "\u7D42",
+            on: [{ kana: "しゅう", romaji: "shū" }],
+            kun: [{ kana: "おわる", romaji: "owaru" }, { kana: "おえる", romaji: "oeru" }],
+            source: "https://en.wiktionary.org/wiki/%E7%B5%82#Kanji",
+            meanings: ["end", "finish"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "終わり", kana: ["おわり"], english: ["the end"] },
+                { value: "最終", kana: ["さいしゅう"], english: ["last", "final", "closing"] },
+                { value: "終える", kana: ["おえる"], english: ["to finish"] },
+                { value: "終結", kana: ["しゅうけつ"], english: ["end", "close"] },
+                { value: "最終的", kana: ["さいしゅうてき"], english: ["finally"] },
+            ]
+        },
+        {
+            name: "真",
+            code: "\u771F",
+            on: [{ kana: "しん", romaji: "shin" }],
+            kun: [{ kana: "ま", romaji: "ma" }],
+            source: "https://en.wiktionary.org/wiki/%E7%9C%9F#Kanji",
+            meanings: ["true"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "写真", kana: ["しゃしん"], english: [""] },
+                { value: "真の", kana: ["しんの"], english: [""] },
+                { value: "真相", kana: ["しんそう"], english: [""] },
+                { value: "真実", kana: ["しんじつ", "さな", "さね"], english: [""] },
+                { value: "真ん中", kana: ["まんなか"], english: ["まなか"] },
+            ]
+        },
+        {
+            name: "使",
+            code: "\u4F7F",
+            on: [{ kana: "し", romaji: "shi" }],
+            kun: [{ kana: "つかう ", romaji: "tsukau" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BD%BF#Kanji",
+            meanings: ["use"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "使わす", kana: ["つかわす"], english: ["to send", "to dispatch"] },
+                { value: "使う", kana: ["つかう"], english: ["to use (a thing, method, etc.)"] },
+                { value: "使用", kana: ["しよう"], english: ["use", "application", "employment", "utilisation"] },
+                { value: "大使", kana: ["たいし"], english: ["ambassador"] },
+                { value: "行使", kana: ["こうし"], english: ["use", "exercise"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "死",
+            code: "\u6B7B",
+            on: [{ kana: "し", romaji: "shi" }],
+            kun: [{ kana: "しぬ", romaji: "shinu" }],
+            source: "https://en.wiktionary.org/wiki/%E6%AD%BB#Kanji",
+            meanings: ["death", "die"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "死", kana: ["し"], english: ["death", "decease"] },
+                { value: "死者", kana: ["ししゃ"], english: ["casualty", "deceased"] },
+                { value: "脳死", kana: ["のうし"], english: ["brain death"] },
+                { value: "死亡", kana: ["しぼう"], english: ["death", "mortality"] },
+                { value: "二死", kana: ["にし"], english: ["two out (e.g. in baseball)"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "運",
+            code: "\u904B",
+            on: [{ kana: "うん", romaji: "un" }],
+            kun: [{ kana: "はこぶ ", romaji: "hakobu" }],
+            source: "https://en.wiktionary.org/wiki/%E9%81%8B#Kanji",
+            meanings: ["carry", "luck", "destiny", "fate", "lot", "transport", "progress", "advance"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "運", kana: ["うん"], english: ["fortune", "luck"] },
+                { value: "運ぶ", kana: ["はこぶ"], english: ["to carry", "to transport", "to move", "to convey"] },
+                { value: "運動", kana: ["うんどう"], english: ["motion", "exercise"] },
+                { value: "運営", kana: ["うんえい"], english: ["management", "administration", "operation"] },
+                { value: "運転", kana: ["うんてん"], english: ["operation", "motion", "driving"] },
+            ]
+        },
+        {
+            name: "住",
+            code: "\u4F4F",
+            on: [{ kana: "じゅう", romaji: "jū" }],
+            kun: [{ kana: "すむ", romaji: "sumu" }, { kana: "すまう", romaji: "sumau" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BD%8F#Kanji",
+            meanings: ["dwell", "reside", "live", "inhabit"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "住", kana: ["じゅう"], english: ["dwelling", "living"] },
+                { value: "住宅", kana: ["じゅうたく"], english: ["residence", "housing", "residential building"] },
+                { value: "住民", kana: ["じゅうみん"], english: ["citizens", "inhabitants", "residents", "population"] },
+                { value: "住所", kana: ["じゅうしょ"], english: ["address (e.g. of house)", "residence", "domicile"] },
+                { value: "在住", kana: ["ざいじゅう"], english: ["resident"] },
+            ]
+        },
+        {
+            name: "有",
+            code: "\u6709",
+            on: [{ kana: "ゆう", romaji: "yū" }, { kana: "う", romaji: "u" }],
+            kun: [{ kana: "ある", romaji: "aru" }],
+            source: "https://en.wiktionary.org/wiki/%E6%9C%89#Kanji",
+            meanings: ["possess", "have", "exist", "happen", "occur", "approx"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "有", kana: ["ゆう"], english: ["existence", "possession", "having"] },
+                { value: "有効", kana: ["ゆうこう"], english: ["validity", "legality", "availability"] },
+                { value: "有力", kana: ["ゆうりょく"], english: ["influential", "prominent", "strong", "likely"] },
+                { value: "有権者", kana: ["ゆうけんしゃ"], english: ["voter", "constituent"] },
+                { value: "有名", kana: ["ゆうめい"], english: ["famous", "fame"] },
+            ]
+        },
 
         //Grade 6 Kanji
         {
