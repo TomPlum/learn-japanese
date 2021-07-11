@@ -1,5 +1,5 @@
 import { joyo, kyoiku } from "../../data/Kanji";
-import { KanjiData } from "../../data/DataTypes";
+import { KanjiData, KanjiExample } from "../../data/DataTypes";
 import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 
 /*
@@ -46,26 +46,65 @@ beforeEach(() => {
 });
 */
 
-it("Kyoiku should return only Kyoiku", () => {
-    expect(kyoiku()).toHaveLength(302);
-});
+describe("Kanji Data", () => {
+    it("Kyoiku should return only Kyoiku", () => {
+        expect(kyoiku()).toHaveLength(302);
+    });
 
-it("Joyo should return Joyo & Kyoiku", () => {
-    expect(joyo()).toHaveLength(303);
-});
+    it("Joyo should return Joyo & Kyoiku", () => {
+        expect(joyo()).toHaveLength(303);
+    });
 
-it("Should return exactly 80 Grade 1 Kyoiku Kanji", () => {
-    const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === KyoikuGrade.ONE)
-    expect(kanji).toHaveLength(80);
-});
+    it("Should return exactly 80 Grade 1 Kyoiku Kanji", () => {
+        const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === KyoikuGrade.ONE)
+        expect(kanji).toHaveLength(80);
+    });
 
-it("Should return exactly 160 Grade 2 Kyoiku Kanji", () => {
-    const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === KyoikuGrade.TWO)
-    expect(kanji).toHaveLength(160);
-});
+    it("Should return exactly 160 Grade 2 Kyoiku Kanji", () => {
+        const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === KyoikuGrade.TWO)
+        expect(kanji).toHaveLength(160);
+    });
 
-it("Should not return any duplicate unicode values", () => {
-    const kanji = kyoiku().map((kanji: KanjiData) => kanji.code);
-    const unique = new Set(kanji);
-    expect(kanji.length).toBe(unique.size);
+    describe("Validation", () => {
+        it("Should not contain any kanji that have commas in their meaning arrays", () => {
+            const invalid = joyo().filter((kanji: KanjiData) => {
+                return kanji.meanings.some((meaning: string) => meaning.includes(","))
+            });
+
+            if (invalid.length > 0) {
+                console.log(invalid.length + " Kanji failed meanings validation. These were:\n");
+                invalid.forEach((kanji: KanjiData) => {
+                    console.log(kanji.code + " -> " + kanji.meanings);
+                });
+            }
+
+            expect(invalid).toHaveLength(0);
+        });
+
+        it("Should not return any duplicate unicode values", () => {
+            const kanji = kyoiku().map((kanji: KanjiData) => kanji.code);
+            const unique = new Set(kanji);
+            expect(kanji.length).toBe(unique.size);
+        });
+
+        it("Should not contain any kanji that have missing example kana", () => {
+            const invalid = joyo().filter((kanji: KanjiData) => {
+                return kanji.examples.some((example: KanjiExample) => {
+                    return example.kana.some((kana: string) => !kana || kana === "");
+                });
+            });
+
+            if (invalid.length > 0) {
+                console.log(invalid.length + " Kanji failed examples kana validation. These were:\n");
+                invalid.forEach((kanji: KanjiData) => {
+                    console.log(kanji.code + " -> " + kanji.examples
+                        .filter(it => it.kana.filter(it => !it || it === ""))
+                        .map(it => it.english)
+                    );
+                });
+            }
+
+            expect(invalid).toHaveLength(0);
+        });
+    });
 });

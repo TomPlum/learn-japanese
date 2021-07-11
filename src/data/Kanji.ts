@@ -195,7 +195,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "けん", romaji: "ken" }, { kana: "げん", romaji: "gen" }],
             kun: [{ kana: "みる", romaji: "miru" }],
             source: "https://en.wiktionary.org/wiki/%E8%A6%8B#Kanji",
-            meanings: ["see, opinion"],
+            meanings: ["see", "opinion"],
             grade: KyoikuGrade.ONE,
             examples: [
                 { value: "意見", kana: ["いけん"], english: ["opinion", "view"] },
@@ -296,7 +296,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "こん", romaji: "kon" }, { kana: "きん", romaji: "kin" }],
             kun: [{ kana: "かね", romaji: "kane" }, { kana: "かな", romaji: "kana" }],
             source: "https://en.wiktionary.org/wiki/%E9%87%91#Kanji",
-            meanings: ["gold, money"],
+            meanings: ["gold", "money"],
             grade: KyoikuGrade.ONE,
             examples: [
                 { value: "お金", kana: ["おかね"], english: ["money"] },
@@ -1788,7 +1788,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "まん", romaji: "man" }],
             kun: [{ kana: "よろず", romaji: "yorozu" }],
             source: "https://en.wiktionary.org/wiki/%E4%B8%87#Kanji",
-            meanings: ["10,000"],
+            meanings: ["ten thousand"],
             grade: KyoikuGrade.TWO,
             examples: [
                 { value: "十万", kana: ["じゅうまん"], english: ["100,000", "hundred thousand"] },
@@ -3484,7 +3484,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "せん", romaji: "sen" }],
             kun: [{ kana: "ふな", romaji: "funa" }, { kana: "ふね", romaji: "fune" }],
             source: "https://en.wiktionary.org/wiki/%E8%88%B9#Kanji",
-            meanings: ["ship, boat"],
+            meanings: ["ship", "boat"],
             grade: KyoikuGrade.TWO,
             examples: [
                 { value: "船", kana: ["ふね"], english: ["ship", "boat", "watercraft", "vessel", "steamship"] },
@@ -4188,7 +4188,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "い", romaji: "i" }],
             kun: [{ kana: "こころ", romaji: "kokoro" }],
             source: "https://en.wiktionary.org/wiki/%E6%84%8F#Kanji",
-            meanings: ["idea", "mind", "heart", "taste", "thought", "desire","care, liking"],
+            meanings: ["idea", "mind", "heart", "taste", "thought", "desire", "care", "liking"],
             grade: KyoikuGrade.THREE,
             examples: [
                 { value: "意見", kana: ["いけん"], english: ["opinion", "view"] },
@@ -4204,7 +4204,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "じ", romaji: "ji" }],
             kun: [{ kana: "もつ", romaji: "motsu" }],
             source: "https://en.wiktionary.org/wiki/%E6%8C%81#Kanji",
-            meanings: ["hold, have"],
+            meanings: ["hold", "have"],
             grade: KyoikuGrade.THREE,
             examples: [
                 { value: "維持", kana: ["いじ"], english: ["maintenance", "preservation", "improvement"] },
@@ -4812,7 +4812,7 @@ export function kyoiku(): KanjiData[] {
             on: [{ kana: "ぜん", romaji: "zen" }],
             kun: [{ kana: "すべて", romaji: "subete" }, { kana: "まったく", romaji: "mattaku" }],
             source: "https://en.wiktionary.org/wiki/%E5%85%A8#Kanji",
-            meanings: ["whole", "entire, all", "complete", "fulfill"],
+            meanings: ["whole", "entire", "all", "complete", "fulfill"],
             grade: KyoikuGrade.THREE,
             examples: [
                 { value: "安全", kana: ["あんぜん"], english: ["safety", "security"] },
