@@ -68,7 +68,9 @@ describe("Kanji Data", () => {
     describe("Validation", () => {
         it("Should not contain any kanji that have commas in their meaning arrays", () => {
             const invalid = joyo().filter((kanji: KanjiData) => {
-                return kanji.meanings.some((meaning: string) => meaning.includes(","))
+                const hasComma = kanji.meanings.some((meaning: string) => meaning.includes(","))
+                const isEmpty = kanji.meanings.some((meaning: string) => !meaning);
+                return hasComma || isEmpty;
             });
 
             if (invalid.length > 0) {
@@ -87,10 +89,25 @@ describe("Kanji Data", () => {
             expect(kanji.length).toBe(unique.size);
         });
 
+        it("Should not contain any kanji that have missing example kanji", () => {
+            const invalid = joyo().filter((kanji: KanjiData) => {
+                return kanji.examples.some((example: KanjiExample) => !example.value);
+            });
+
+            if (invalid.length > 0) {
+                console.log(invalid.length + " Kanji failed examples kanji validation. These were:\n");
+                invalid.forEach((kanji: KanjiData) => {
+                    console.log(kanji.code + " -> " + kanji.examples.filter(it => !it.value).map(it => it.value));
+                });
+            }
+
+            expect(invalid).toHaveLength(0);
+        });
+
         it("Should not contain any kanji that have missing example kana", () => {
             const invalid = joyo().filter((kanji: KanjiData) => {
                 return kanji.examples.some((example: KanjiExample) => {
-                    return example.kana.some((kana: string) => !kana || kana === "");
+                    return example.kana.some((kana: string) => !kana);
                 });
             });
 
@@ -98,10 +115,54 @@ describe("Kanji Data", () => {
                 console.log(invalid.length + " Kanji failed examples kana validation. These were:\n");
                 invalid.forEach((kanji: KanjiData) => {
                     console.log(kanji.code + " -> " + kanji.examples
-                        .filter(it => it.kana.filter(it => !it || it === ""))
+                        .filter(it => it.kana.filter(it => !it))
                         .map(it => it.english)
                     );
                 });
+            }
+
+            expect(invalid).toHaveLength(0);
+        });
+
+        it("Should not contain any kanji that have missing example english", () => {
+            const invalid = joyo().filter((kanji: KanjiData) => {
+                return kanji.examples.some((example: KanjiExample) => {
+                    return example.english.some((english: string) => !english);
+                });
+            });
+
+            if (invalid.length > 0) {
+                console.log(invalid.length + " Kanji failed examples english validation. These were:\n");
+                invalid.forEach((kanji: KanjiData) => {
+                    console.log(kanji.code + " -> " + kanji.examples
+                        .filter(it => it.english.filter(it => !it))
+                        .map(it => it.kana[0])
+                    );
+                });
+            }
+
+            expect(invalid).toHaveLength(0);
+        });
+
+        it("Should not contain any kanji that have no readings", () => {
+            const invalid = joyo().filter((kanji: KanjiData) => {
+                return !kanji.on && !kanji.kun;
+            });
+
+            if (invalid.length > 0) {
+                console.log(invalid.length + " Kanji failed readings validation. These were:\n");
+                invalid.forEach((kanji: KanjiData) => console.log(kanji.code));
+            }
+
+            expect(invalid).toHaveLength(0);
+        });
+
+        it("Should not contain any kanji that have no source", () => {
+            const invalid = joyo().filter((kanji: KanjiData) =>  !kanji.source);
+
+            if (invalid.length > 0) {
+                console.log(invalid.length + " Kanji failed source validation. These were:\n");
+                invalid.forEach((kanji: KanjiData) => console.log(kanji.code));
             }
 
             expect(invalid).toHaveLength(0);
