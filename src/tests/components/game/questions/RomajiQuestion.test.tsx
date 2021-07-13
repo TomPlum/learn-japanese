@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import RomajiQuestion, { RomajiQuestionProps } from "../../../../components/game/questions/RomajiQuestion";
 import { Kana } from "../../../../types/kana/Kana";
 import KanaType from "../../../../types/kana/KanaType";
@@ -29,15 +29,13 @@ const setup = () => {
 test('Answering correctly and calling isCorrect should invoke with true', () => {
     const { input } = setup();
     fireEvent.change(input, { target: { value: 'a'}});
-    const isCorrect = ref.current?.isCorrect();
-    expect(isCorrect).toBe(true);
+    expect(ref.current?.isCorrect()).toBe(true);
 });
 
 test('Answering correctly with the wrong casing and calling isCorrect should invoke with true', () => {
     const { input } = setup();
     fireEvent.change(input, { target: { value: 'A'}});
-    const isCorrect = ref.current?.isCorrect();
-    expect(isCorrect).toBe(true);
+    expect(ref.current?.isCorrect()).toBe(true);
 });
 
 test('Answering correctly with the second rōmaji value and calling isCorrect should invoke with true', () => {

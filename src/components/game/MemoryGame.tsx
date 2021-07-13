@@ -225,6 +225,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         const { settings, data } = this.props;
         const { currentQuestion, paused } = this.state;
 
+        //TODO: Extract into a QuestionRegistry component (Maybe Strategy pattern?)
         switch (settings.question.type) {
             case QuestionType.ROMAJI: {
                 return (
@@ -263,9 +264,11 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             case QuestionType.MEANING: {
                 return (
                     <LearnableMeaningQuestion
+                        key={currentQuestion.getKana().join("-")}
                         data={currentQuestion}
                         hidden={paused}
                         isValid={this.handleAnswerValidity}
+                        ref={this.question}
                     />
                 );
             }

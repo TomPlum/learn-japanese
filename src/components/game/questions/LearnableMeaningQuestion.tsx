@@ -1,11 +1,12 @@
 import { Learnable } from "../../../types/learn/Learnable";
 import GameQuestion from "../GameQuestion";
-import { Form } from "react-bootstrap";
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { GameQuestionProps } from "../MemoryGame";
+import EnglishInput from "../EnglishInput";
+import styles from "../../../styles/sass/components/game/questions/LearnableMeaningQuestion.module.scss"
 
 export interface LearnableMeaningQuestionProps extends GameQuestionProps {
-    data: Learnable;
+    data?: Learnable;
 }
 
 interface LearnableMeaningQuestionState {
@@ -26,33 +27,37 @@ class LearnableMeaningQuestion extends GameQuestion<LearnableMeaningQuestionProp
         const { answer } = this.state;
 
         return (
-            <div>
-                <span>{data.getKanjiVariation() ?? data.getKana()[0]}</span>
+            <div className={styles.wrapper}>
+                <span className={styles.kana}>
+                    {this.getQuestion()}
+                </span>
                 
-                <Form.Control
-                    plaintext
-                    disabled={hidden}
+                <EnglishInput
                     value={answer}
-                    placeholder={"Enter the meaning"}
+                    disabled={!data || hidden}
+                    className={styles.input}
+                    placeholder={"English Meaning"}
                     onChange={this.handleInputChange}
                 />
             </div>
         );
     }
 
-
     isCorrect = () => {
-        const { data } = this.props;
-        const { answer } = this.state;
-        console.log(data.getMeanings())
-        return data.getMeanings().some((meaning: string) => {
-            console.log("Does " + meaning + " equal " + answer + "?");
-            return meaning.trim().toLowerCase() === answer.trim().toLowerCase()
-        });
+        return this.props.data?.getMeanings().some((meaning: string) => {
+            return meaning.trim().toLowerCase() === this.state.answer.trim().toLowerCase()
+        }) ?? false;
     }
 
-    private handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        const value = e.target.value;
+    private getQuestion = (): string => {
+        const { data } = this.props;
+        if (data) {
+            return data.getKanjiVariation() ?? data.getKana()[0]
+        }
+        return "N/A";
+    }
+
+    private handleInputChange = (value: string) => {
         this.props.isValid(!!value);
         this.setState({ answer: value });
     }

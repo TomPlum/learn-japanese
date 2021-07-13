@@ -1,0 +1,45 @@
+@import "src/styles/sass/viewports";
+
+.wrapper {
+  text-align: center;
+}
+
+@mixin kana {
+  color: #FFF;
+}
+
+@include desktop {
+  .input {
+    height: 60px;
+    font-size: 2em;
+  }
+
+  .kana {
+    @include kana;
+    font-size: 12em;
+  }
+}
+
+@include tablet {
+  .input {
+    height: 60px;
+    font-size: 2em;
+  }
+
+  .kana {
+    @include kana;
+    font-size: 8em;
+  }
+}
+
+@include phone {
+  .input {
+    height: 50px;
+    font-size: 1.6em;
+  }
+
+  .kana {
+    @include kana;
+    font-size: 8em;
+  }
+}
