@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import KanjiWordDisplay from "../../../components/ui/KanjiWordDisplay";
+import KanjiWordDisplay from "../../../../components/ui/display/KanjiWordDisplay";
 
 test('Should render the character if it does not match a known Kanji character', () => {
     const component = render(<KanjiWordDisplay value={"き"} />);

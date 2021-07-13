@@ -1,9 +1,9 @@
 import { Component } from "react";
-import Inspectable from "./Inspectable";
-import RomajiGenerator from "../../utility/RomajiGenerator";
-import { Environment } from "../../utility/Environment";
-import Copyable from "./Copyable";
-import styles from "../../styles/sass/components/ui/RomajiDisplay.module.scss";
+import Inspectable from "../Inspectable";
+import RomajiGenerator from "../../../utility/RomajiGenerator";
+import { Environment } from "../../../utility/Environment";
+import Copyable from "../Copyable";
+import styles from "../../../styles/sass/components/ui/display/RomajiDisplay.module.scss";
 
 export interface RomajiDisplayProps {
     kana: string;

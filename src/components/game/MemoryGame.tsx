@@ -22,7 +22,7 @@ import HintButton from "./HintButton";
 import SkipButton from "../ui/buttons/SkipButton";
 import ConfirmModal from "../ui/ConfirmModal";
 import { Environment } from "../../utility/Environment";
-import ScoreDisplay from "../ui/ScoreDisplay";
+import ScoreDisplay from "../ui/display/ScoreDisplay";
 import LearnableMeaningQuestion from "./questions/LearnableMeaningQuestion";
 import { Learnable } from "../../types/learn/Learnable";
 import { Kana } from "../../types/kana/Kana";

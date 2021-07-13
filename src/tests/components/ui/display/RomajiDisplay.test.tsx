@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import RomajiDisplay from "../../../components/ui/RomajiDisplay";
-import { Environment } from "../../../utility/Environment";
+import RomajiDisplay from "../../../../components/ui/display/RomajiDisplay";
+import { Environment } from "../../../../utility/Environment";
 
 const environment = jest.fn();
 

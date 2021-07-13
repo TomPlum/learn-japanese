@@ -1,7 +1,7 @@
 import { CardBackFaceProps } from "../FlashCard";
 import FlashCardBack from "../FlashCardBack";
 import { Col, Container, Row } from "react-bootstrap";
-import RomajiDisplay from "../../ui/RomajiDisplay";
+import RomajiDisplay from "../../ui/display/RomajiDisplay";
 import styles from "../../../styles/sass/components/learn/calendar/CalendarFlashCardBack.module.scss"
 
 function CalendarFlashCardBack(props: CardBackFaceProps) {

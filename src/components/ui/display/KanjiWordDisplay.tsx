@@ -1,9 +1,9 @@
 import { Component } from "react";
-import { KanjiRepository } from "../../repository/KanjiRepository";
-import Inspectable from "./Inspectable";
-import Copyable from "./Copyable";
-import KanjiReadingDisplay from "../learn/kanji/KanjiReadingDisplay";
-import { ReadingType } from "../../types/kanji/ReadingType";
+import { KanjiRepository } from "../../../repository/KanjiRepository";
+import Inspectable from "../Inspectable";
+import Copyable from "../Copyable";
+import KanjiReadingDisplay from "../../learn/kanji/KanjiReadingDisplay";
+import { ReadingType } from "../../../types/kanji/ReadingType";
 
 export interface KanjiWordDisplayProps {
     value: string;

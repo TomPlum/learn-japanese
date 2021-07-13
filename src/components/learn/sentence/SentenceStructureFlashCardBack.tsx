@@ -1,8 +1,8 @@
 import FlashCardBack from "../FlashCardBack";
 import { CardBackFaceProps } from "../FlashCard";
-import RomajiDisplay from "../../ui/RomajiDisplay";
+import RomajiDisplay from "../../ui/display/RomajiDisplay";
 import Copyable from "../../ui/Copyable";
-import KanjiWordDisplay from "../../ui/KanjiWordDisplay";
+import KanjiWordDisplay from "../../ui/display/KanjiWordDisplay";
 import styles from "../../../styles/sass/components/learn/sentence/SentenceStructureFlashCardBack.module.scss"
 
 const SentenceStructureFlashCardBack = (props: CardBackFaceProps) => {

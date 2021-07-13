@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import ScoreDisplay from "../../../components/ui/ScoreDisplay";
+import ScoreDisplay from "../../../../components/ui/display/ScoreDisplay";
 import each from "jest-each";
 
 test('Should render the passed value', () => {
