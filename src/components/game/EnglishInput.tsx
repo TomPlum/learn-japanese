@@ -1,8 +1,8 @@
 import React, { ChangeEvent, Component } from "react";
-import PopOver from "../ui/PopOver";
 import GameInputField from "./GameInputField";
+import PopOver from "../ui/PopOver";
 
-export interface RomajiInputProps {
+export interface EnglishInputProps {
     disabled?: boolean;
     value?: string;
     placeholder?: string;
@@ -10,14 +10,14 @@ export interface RomajiInputProps {
     onChange?: (value: string) => void;
 }
 
-class RomajiInput extends Component<RomajiInputProps> {
+class EnglishInput extends Component<EnglishInputProps> {
 
     render() {
         const { disabled, value, placeholder, className } = this.props;
 
         const popover = <PopOver
-            title="What is Rōmaji?"
-            text={"Enter the roman characters for the given kana. I.e. 'a', 'ke' or 'zu'."}
+            title="English Meaning"
+            text={"Enter one of the meanings as a single English word."}
         />
 
         return (
@@ -34,11 +34,11 @@ class RomajiInput extends Component<RomajiInputProps> {
 
     private handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const key = e.target.value;
-        if (key.match(/^[A-Za-z]+$/) || !key) {
+        if (key.match(/^[A-Za-z\s]*$/) || !key) {
             this.props?.onChange?.(key);
         }
         return false;
     }
 }
 
-export default RomajiInput;
+export default EnglishInput;

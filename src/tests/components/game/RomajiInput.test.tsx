@@ -42,12 +42,6 @@ test('Changing the input value should call the onChange event handler with the i
     expect(onChangeHandler).toHaveBeenCalledWith("ba");
 });
 
-//TODO: Jest's toHaveFocus() seems to return the element wrapped in <body> and <div> tags so assertion fails.
-test.skip('Should Focus Input', () => {
-    const { input } = setup();
-    expect(input).toHaveFocus();
-});
-
 test('Hovering over help should render the popover', () => {
     const { help } = setup();
     fireEvent.mouseOver(help);
