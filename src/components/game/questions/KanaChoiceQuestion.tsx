@@ -2,12 +2,12 @@ import React from "react";
 import Arrays from "../../../utility/Arrays";
 import { Col, Row } from "react-bootstrap";
 import { Learnable } from "../../../types/learn/Learnable";
-import GameQuestion from "../GameQuestion";
 import KanaDisplay from "../KanaDisplay";
 import KanaQuestionBanner from "../KanaQuestionBanner";
 import { GameQuestionProps } from "../MemoryGame";
 import { Kana } from "../../../types/kana/Kana";
 import styles from "../../../styles/sass/components/game/questions/KanaChoiceQuestion.module.scss";
+import GameQuestion from "../../../types/game/GameQuestion";
 
 export interface LearnableChoiceQuestionProps extends GameQuestionProps {
     expected: Learnable;

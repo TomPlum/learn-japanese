@@ -4,7 +4,7 @@ import { Col, Form, Row } from "react-bootstrap";
 import RomajiInput from "../../ui/fields/RomajiInput";
 import { Kana } from "../../../types/kana/Kana";
 import { GameQuestionProps } from "../MemoryGame";
-import GameQuestion from "../GameQuestion";
+import GameQuestion from "../../../types/game/GameQuestion";
 import styles from "../../../styles/sass/components/game/questions/RomajiQuestion.module.scss";
 
 export interface RomajiQuestionProps extends GameQuestionProps {
