@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import SearchField from "../../../components/ui/SearchField";
+import SearchField from "../../../../components/ui/fields/SearchField";
 
 const onChangeHandler = jest.fn();
 

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, Component } from "react";
 import GameInputField from "./GameInputField";
-import PopOver from "../ui/PopOver";
+import PopOver from "../PopOver";
 
 export interface EnglishInputProps {
     disabled?: boolean;

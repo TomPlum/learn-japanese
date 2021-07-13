@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import GameInputField, { GameInputFieldProps } from "../../../components/game/GameInputField";
-import PopOver from "../../../components/ui/PopOver";
+import GameInputField, { GameInputFieldProps } from "../../../../components/ui/fields/GameInputField";
+import PopOver from "../../../../components/ui/PopOver";
 
 const popover = <PopOver title="Popover Title" text="Popover Text" />
 

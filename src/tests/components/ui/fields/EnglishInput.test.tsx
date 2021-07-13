@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import EnglishInput, { EnglishInputProps } from "../../../components/game/EnglishInput";
+import EnglishInput, { EnglishInputProps } from "../../../../components/ui/fields/EnglishInput";
 import each from "jest-each";
 
 const onChangeHandler = jest.fn();

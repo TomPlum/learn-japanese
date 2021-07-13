@@ -6,7 +6,7 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import styles from "../../styles/sass/components/pages/SearchPage.module.scss";
 import KanaType from "../../types/kana/KanaType";
 import KanaGrid from "../layout/KanaGrid";
-import SearchField from "../ui/SearchField";
+import SearchField from "../ui/fields/SearchField";
 import FilterChain from "../../filters/FilterChain";
 import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
 import DiagraphFilter from "../../filters/kana/DiagraphFilter";

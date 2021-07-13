@@ -1,7 +1,7 @@
 import React from "react";
 import KanaDisplay, { KanaDisplayStyle } from "../KanaDisplay";
 import { Col, Form, Row } from "react-bootstrap";
-import RomajiInput from "../RomajiInput";
+import RomajiInput from "../../ui/fields/RomajiInput";
 import { Kana } from "../../../types/kana/Kana";
 import { GameQuestionProps } from "../MemoryGame";
 import GameQuestion from "../GameQuestion";

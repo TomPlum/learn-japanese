@@ -3,7 +3,7 @@ import { Form, OverlayTrigger } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { OverlayChildren } from "react-bootstrap/Overlay";
-import styles from "../../styles/sass/components/game/GameInputField.module.scss";
+import styles from "../../../styles/sass/components/ui/fields/GameInputField.module.scss";
 
 export interface GameInputFieldProps {
     disabled?: boolean;

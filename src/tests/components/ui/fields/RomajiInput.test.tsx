@@ -1,4 +1,4 @@
-import RomajiInput, { RomajiInputProps } from "../../../components/game/RomajiInput";
+import RomajiInput, { RomajiInputProps } from "../../../../components/ui/fields/RomajiInput";
 import { fireEvent, render, screen } from "@testing-library/react";
 import each from "jest-each";
 

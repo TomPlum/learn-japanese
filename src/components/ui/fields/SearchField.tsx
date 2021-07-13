@@ -1,8 +1,8 @@
 import { Form, InputGroup } from "react-bootstrap";
-import styles from "../../styles/sass/components/ui/SearchField.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import React, { Component } from "react";
+import styles from "../../../styles/sass/components/ui/fields/SearchField.module.scss";
 
 interface SearchFieldProps {
     value?: string;

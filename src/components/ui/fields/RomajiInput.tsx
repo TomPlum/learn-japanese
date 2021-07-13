@@ -1,5 +1,5 @@
 import React, { ChangeEvent, Component } from "react";
-import PopOver from "../ui/PopOver";
+import PopOver from "../PopOver";
 import GameInputField from "./GameInputField";
 
 export interface RomajiInputProps {

@@ -2,7 +2,7 @@ import { Learnable } from "../../../types/learn/Learnable";
 import GameQuestion from "../GameQuestion";
 import React from "react";
 import { GameQuestionProps } from "../MemoryGame";
-import EnglishInput from "../EnglishInput";
+import EnglishInput from "../../ui/fields/EnglishInput";
 import styles from "../../../styles/sass/components/game/questions/LearnableMeaningQuestion.module.scss"
 
 export interface LearnableMeaningQuestionProps extends GameQuestionProps {
