@@ -4651,14 +4651,14 @@ export function kyoiku(): KanjiData[] {
             source: "https://en.wiktionary.org/wiki/%E7%9D%80#Kanji",
             meanings: ["don", "arrive", "wear", "counter for suits of clothing"],
             grade: KyoikuGrade.THREE,
-            tags: ["counter"],
             examples: [
                 { value: "決着", kana: ["けっちゃく"], english: ["conclusion", "decision", "end", "settlement"] },
                 { value: "着実", kana: ["ちゃくじつ"], english: ["steady", "sound", "trustworthy", "solid"] },
                 { value: "落ち着いた", kana: ["おちついた"], english: ["quiet", "calm", "composed"] },
                 { value: "癒着", kana: ["ゆちゃく"], english: ["adhesion"] },
                 { value: "着る", kana: ["きる"], english: ["to wear (in modern Japanese)"] },
-            ]
+            ],
+            tags: ["counter"]
         },
         {
             name: "待",
@@ -4853,7 +4853,8 @@ export function kyoiku(): KanjiData[] {
                 { value: "部長", kana: ["ぶちょう"], english: ["head (chief"] },
                 { value: "部分", kana: ["ぶぶん"], english: ["portion", "section", "part"] },
                 { value: "部門", kana: ["ぶもん"], english: ["class", "group", "category", "department", "field"] },
-            ]
+            ],
+            tags: ["counter"]
         },
         {
             name: "定",
