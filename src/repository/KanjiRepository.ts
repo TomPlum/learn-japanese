@@ -7,6 +7,7 @@ import { joyo, kyoiku } from "../data/Kanji";
 import Repository from "./Repository";
 import { RandomNumberGenerator } from "../utility/RandomNumberGenerator";
 import KanjiSettings from "../types/session/settings/data/KanjiSettings";
+import Arrays from "../utility/Arrays";
 
 //TODO: Integrate Kanji Filters & create new ones for grades etc.
 export class KanjiRepository implements Repository<Kanji> {
@@ -15,7 +16,8 @@ export class KanjiRepository implements Repository<Kanji> {
 
         if (settings.joyo) {
             if (settings.quantity) {
-                return this.convert(joyo()).splice(0, settings.quantity);
+                const data = Arrays.getRandomElements(joyo(), settings.quantity);
+                return this.convert(data);
             }
             return this.convert(joyo());
         }
