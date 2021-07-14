@@ -2,7 +2,7 @@ import React from "react";
 import Arrays from "../../../utility/Arrays";
 import { Col, Row } from "react-bootstrap";
 import { Learnable } from "../../../types/learn/Learnable";
-import KanaDisplay from "../KanaDisplay";
+import KanaDisplay from "../../ui/display/KanaDisplay";
 import KanaQuestionBanner from "../KanaQuestionBanner";
 import { GameQuestionProps } from "../MemoryGame";
 import { Kana } from "../../../types/kana/Kana";

@@ -3,7 +3,7 @@ import { Kana } from "../../types/kana/Kana";
 import { Container } from "react-bootstrap";
 import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import styles from "../../styles/sass/components/ui/KanaCarousel.module.scss";
-import KanaDisplay, { KanaDisplayStyle } from "../game/KanaDisplay";
+import KanaDisplay, { KanaDisplayStyle } from "./display/KanaDisplay";
 
 export interface KanaCarouselProps {
     kana: Kana[];
