@@ -7,6 +7,7 @@ import { QuestionType } from "../QuestionType";
 import PlayMode from "../../session/PlayMode";
 import { KanjiSettingsBuilder } from "../../session/settings/data/KanjiSettings";
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";
+import { LearnableField } from "../../learn/LearnableField";
 
 export default class PlayKanjiModes implements PlayMenuModes {
     getModes(): PlayMode[] {
@@ -16,13 +17,27 @@ export default class PlayKanjiModes implements PlayMenuModes {
             new PlayMode("Kanji", "#6857ee", faPaintBrush,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
-                    .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANJI).withCardQuantity(4).withScoreTracking(true).build())
+                    .withQuestionSettings(
+                        new QuestionSettingsBuilder()
+                            .withFields(LearnableField.MEANING, LearnableField.KANJI)
+                            .withType(QuestionType.CHOICE)
+                            .withCardQuantity(4)
+                            .withScoreTracking(true)
+                            .build()
+                    )
                     .build()
             ),
             new PlayMode("Meaning", "#65cd3a", faSchool,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
-                    .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.MEANING).withCardQuantity(4).withScoreTracking(true).build())
+                    .withQuestionSettings(
+                        new QuestionSettingsBuilder()
+                            .withFields(LearnableField.KANJI, LearnableField.MEANING)
+                            .withType(QuestionType.TEXT)
+                            .withCardQuantity(4)
+                            .withScoreTracking(true)
+                            .build()
+                    )
                     .build()
             ),
             new PlayMode("On'yomi", "#eacd35", faStar,
@@ -36,7 +51,14 @@ export default class PlayKanjiModes implements PlayMenuModes {
             new PlayMode("Random", "#3cabca", faRandom,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
-                    .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.RANDOM).withCardQuantity(4).withScoreTracking(true).build())
+                    .withQuestionSettings(
+                        new QuestionSettingsBuilder()
+                            .withFields(LearnableField.RANDOM, LearnableField.RANDOM)
+                            .withType(QuestionType.RANDOM)
+                            .withCardQuantity(4)
+                            .withScoreTracking(true)
+                            .build()
+                    )
                     .build()
             ),
             new CustomLearningMode(KanjiSettingsMenu)
