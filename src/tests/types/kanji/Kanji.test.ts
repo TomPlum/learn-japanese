@@ -94,4 +94,18 @@ describe("Kanji", () => {
             expect(kanji.getHint()).toBe("It's Grade 1 and starts with じ.")
         });
     });
+
+    describe("Equality", () => {
+        it("Should return true when two Kanji have the same character", () => {
+            const first = new Kanji("一", [new Reading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]);
+            const second = new Kanji("一", [new Reading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]);
+            expect(first.equals(second)).toBe(true);
+        });
+
+        it("Should return false when two Kanji have different characters", () => {
+            const first = new Kanji("一", [new Reading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]);
+            const second = new Kanji("魚", [new Reading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]);
+            expect(first.equals(second)).toBe(false);
+        });
+    });
 });
