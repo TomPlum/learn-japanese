@@ -1,4 +1,4 @@
-import { LearnableField } from "./LearnableField";
+import LearnableField from "./LearnableField";
 import RomajiGenerator from "../../utility/RomajiGenerator";
 
 /**

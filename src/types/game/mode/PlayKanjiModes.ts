@@ -7,7 +7,7 @@ import { QuestionType } from "../QuestionType";
 import PlayMode from "../../session/PlayMode";
 import { KanjiSettingsBuilder } from "../../session/settings/data/KanjiSettings";
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";
-import { LearnableField } from "../../learn/LearnableField";
+import LearnableField from "../../learn/LearnableField";
 
 export default class PlayKanjiModes implements PlayMenuModes {
     getModes(): PlayMode[] {

@@ -1,7 +1,7 @@
 import { Kana } from "../../../types/kana/Kana";
 import KanaType from "../../../types/kana/KanaType";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
-import { LearnableField } from "../../../types/learn/LearnableField";
+import LearnableField from "../../../types/learn/LearnableField";
 import CommonData from "../../../types/learn/CommonData";
 import { Kanji } from "../../../types/kanji/Kanji";
 import { Reading } from "../../../types/kanji/Reading";

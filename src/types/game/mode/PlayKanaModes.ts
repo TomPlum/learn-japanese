@@ -12,7 +12,7 @@ import { HintQuantity } from "../HintQuantity";
 import { LifeSettingsBuilder } from "../../session/settings/game/LifeSettings";
 import { TimeSettingsBuilder } from "../../session/settings/game/TimeSettings";
 import { LifeQuantity } from "../LifeQuantity";
-import { LearnableField } from "../../learn/LearnableField";
+import LearnableField from "../../learn/LearnableField";
 import FilterChain from "../../../filters/FilterChain";
 import DiagraphFilter from "../../../filters/kana/DiagraphFilter";
 import { Kana } from "../../kana/Kana";
