@@ -1,7 +1,7 @@
 import { Kana } from "../../../types/kana/Kana";
 import KanaType from "../../../types/kana/KanaType";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
-import ExclusionFilter from "../../../filters/kana/ExclusionFilter";
+import ExclusionFilter from "../../../filters/learnable/ExclusionFilter";
 
 describe("Exclusion Filter", () => {
     const data = [

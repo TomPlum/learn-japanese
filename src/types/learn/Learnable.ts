@@ -19,6 +19,10 @@ export abstract class Learnable {
     public getTags(): string[] {
         return [];
     }
+
+    public equals(other: Learnable): boolean {
+        return this != other;
+    }
 }
 
 export interface LearningExample {
