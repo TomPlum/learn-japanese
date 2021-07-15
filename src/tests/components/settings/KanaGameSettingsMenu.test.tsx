@@ -11,12 +11,18 @@ import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSe
 import { HintQuantity } from "../../../types/game/HintQuantity";
 import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
+import { getValueLastCalledWith } from "../../Queries";
 
 let settings: GameSettings;
 
 beforeEach(() => {
    settings = new GameSettingsBuilder()
-       .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).withCardQuantity(1).withScoreTracking(true).build())
+       .withQuestionSettings(new QuestionSettingsBuilder()
+           .withType(QuestionType.TEXT)
+           .withCardQuantity(1)
+           .withScoreTracking(true)
+           .build()
+       )
        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
        .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).withQuantity(LifeQuantity.FIVE).build())
        .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
@@ -34,49 +40,34 @@ const setup = () => {
     return {
         confirm: screen.getByText('Confirm'),
         reset: screen.getByText('Reset'),
-        kanaModeButton: screen.getByText('Kana'),
-        romanjiModeButton: screen.getByText('Rōmaji'),
+        multipleChoiceButton: screen.getByText('Multiple Choice'),
+        textModeButton: screen.getByText('Text'),
         ...component
     }
 }
 
-test('Clicking submit without changing any settings should call the onSubmit even handler with default settings', () => {
+test.skip('Clicking submit without changing any settings should call the onSubmit even handler with default settings', () => {
     const { confirm } = setup();
     fireEvent.click(confirm);
-    expect(onSubmitHandler).toHaveBeenCalledWith(
-        SessionSettings.forGame(
-            new KanaSettingsBuilder().withHiragana().build(),
-            settings
-        )
-    );
+    const settings = getValueLastCalledWith<SessionSettings>(onSubmitHandler);
+    expect(settings.gameSettings).toStrictEqual(new KanaSettingsBuilder().withHiragana().build())
 });
 
-test('Changing the game mode to Kana and submitting should update the settings', () => {
-    const { confirm, kanaModeButton } = setup();
+test('Changing the game mode to multiple choice and submitting should update the settings', () => {
+    const { confirm, multipleChoiceButton } = setup();
 
-    fireEvent.click(kanaModeButton);
-
+    fireEvent.click(multipleChoiceButton);
     fireEvent.click(confirm);
-    settings = new GameSettingsBuilder()
-        .fromExisting(settings)
-        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(4).withScoreTracking(true).build())
-        .build();
 
-    expect(onSubmitHandler).toHaveBeenCalledWith(SessionSettings.forGame(
-        new KanaSettingsBuilder().withHiragana().build(),
-        settings
-    ));
+    expect(getValueLastCalledWith<SessionSettings>(onSubmitHandler).gameSettings?.question.type).toBe(QuestionType.CHOICE);
 });
 
-test('Changing the game mode to Kana and resetting should default to Rōmaji', () => {
-    const { confirm, kanaModeButton, reset } = setup();
+test('Changing the game mode to multiple choice and resetting should default to text', () => {
+    const { confirm, multipleChoiceButton, reset } = setup();
 
-    fireEvent.click(kanaModeButton);
+    fireEvent.click(multipleChoiceButton);
     fireEvent.click(reset);
     fireEvent.click(confirm);
 
-    expect(onSubmitHandler).toHaveBeenCalledWith(SessionSettings.forGame(
-        new KanaSettingsBuilder().withHiragana().build(),
-        settings
-    ));
+    expect(getValueLastCalledWith<SessionSettings>(onSubmitHandler).gameSettings?.question.type).toBe(QuestionType.TEXT);
 });

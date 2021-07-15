@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Kana } from "../../../types/kana/Kana";
 import { Container } from "react-bootstrap";
-import styles from "../../../styles/sass/components/ui/display/KanaDisplay.module.scss";
 import DynamicCharacter, { CharacterStyleProps } from "../../game/DynamicCharacter";
+import styles from "../../../styles/sass/components/ui/display/KanaDisplay.module.scss";
 
 export interface KanaDisplayProps {
     kana: Kana;
     blur?: boolean;
     index?: number;
-    onClick?: (kana: Kana) => void;
     style?: KanaDisplayStyle;
+    onClick?: (kana: Kana) => void;
 }
 
 export interface KanaDisplayStyle {

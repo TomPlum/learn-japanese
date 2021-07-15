@@ -54,6 +54,17 @@ export class QuestionSettingsBuilder {
     private _wrongOptionsFilterChain: (data: any) => FilterChain<any> = () => new FilterChain(); //TODO: Can't satisfy TS compiler with explicit type here
     private _score: boolean = false;
 
+    fromExisting(settings: QuestionSettings): QuestionSettingsBuilder {
+        this._questionField = settings.questionField;
+        this._answerField = settings.answerField;
+        this._type = settings.type;
+        this._cards  =settings.cards;
+        this._wrongOptionsFilterChain = settings.answerFilter;
+        this._score = settings.score;
+
+        return this;
+    }
+
     withFields(question: LearnableField, answer: LearnableField): QuestionSettingsBuilder {
         this._questionField = question;
         this._answerField = answer;

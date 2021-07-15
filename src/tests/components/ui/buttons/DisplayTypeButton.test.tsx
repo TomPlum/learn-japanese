@@ -9,8 +9,8 @@ let props: DisplayTypeButtonProps;
 
 beforeEach(() => {
     props = {
-        type: QuestionType.KANA,
-        selected: QuestionType.KANA,
+        type: QuestionType.CHOICE,
+        selected: QuestionType.CHOICE,
         icon: faCircle,
         onClick: onClickHandler
     };
@@ -19,7 +19,7 @@ beforeEach(() => {
 const setup = () => {
     const component  = render(<DisplayTypeButton {...props} />);
     return {
-        button: component.getByText('Kana'),
+        button: component.getByText('Multiple Choice'),
         ...component
     }
 }
@@ -36,7 +36,7 @@ test('Passing selected the same as type should append the selected class', () =>
 });
 
 test('Passing selected different from type should append the notSelected class', () => {
-    props.selected = QuestionType.ROMAJI;
+    props.selected = QuestionType.TEXT;
     const { container } = setup();
     expect(container.firstChild).toHaveClass('notSelected');
 });

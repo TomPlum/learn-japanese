@@ -1,25 +1,25 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import RomajiQuestion, { RomajiQuestionProps } from "../../../../components/game/questions/RomajiQuestion";
-import { Kana } from "../../../../types/kana/Kana";
-import KanaType from "../../../../types/kana/KanaType";
-import { KanaColumn } from "../../../../types/kana/KanaColumn";
+import TextQuestion, { TextQuestionProps } from "../../../../components/game/questions/TextQuestion";
 import React from "react";
+import LearnableField from "../../../../types/learn/LearnableField";
 
 const isValidHandler = jest.fn();
-const ref = React.createRef<RomajiQuestion>()
+const ref = React.createRef<TextQuestion>()
 
-let props: RomajiQuestionProps;
+let props: TextQuestionProps;
 
 beforeEach(() => {
     props = {
-        kana: new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
+        question: "あ",
+        answers: ["a"],
+        answerField: LearnableField.ROMAJI,
         hidden: false,
         isValid: isValidHandler
     };
 });
 
 const setup = () => {
-    const component = render(<RomajiQuestion {...props} ref={ref} />);
+    const component = render(<TextQuestion {...props} ref={ref} />);
     return {
         input: component.getByPlaceholderText('Enter the Rōmaji'),
         ...component
@@ -39,7 +39,8 @@ test('Answering correctly with the wrong casing and calling isCorrect should inv
 });
 
 test('Answering correctly with the second rōmaji value and calling isCorrect should invoke with true', () => {
-    props.kana = new Kana("ふ", ["hu", "fu"], KanaType.HIRAGANA, KanaColumn.H, false);
+    props.question = "ふ";
+    props.answers = ["hu", "fu"];
     const { input } = setup();
 
     fireEvent.change(input, { target: { value: 'fu'}});
@@ -70,12 +71,12 @@ test('Populating the Rōmaji input with a truthy value should call the isValid e
 
 test('Passing the hidden property has true should disable the Rōmaji input field', () => {
     props.hidden = true;
-    render(<RomajiQuestion {...props} />);
+    render(<TextQuestion {...props} />);
     expect(screen.getByPlaceholderText('Paused')).toBeDisabled();
 });
 
 test('Passing the hidden property has true should set the Rōmaji input placeholder as \'Paused\'', () => {
     props.hidden = true;
-    render(<RomajiQuestion {...props} />);
+    render(<TextQuestion {...props} />);
     expect(screen.getByPlaceholderText('Paused')).toBeInTheDocument();
 });

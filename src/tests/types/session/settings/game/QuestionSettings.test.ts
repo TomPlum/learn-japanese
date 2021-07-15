@@ -1,6 +1,6 @@
 import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../types/session/settings/game/QuestionSettings";
 import { QuestionType } from "../../../../../types/game/QuestionType";
-import { LearnableField } from "../../../../../types/learn/LearnableField";
+import LearnableField from "../../../../../types/learn/LearnableField";
 import FilterChain from "../../../../../filters/FilterChain";
 import { Learnable } from "../../../../../types/learn/Learnable";
 import { Kana } from "../../../../../types/kana/Kana";

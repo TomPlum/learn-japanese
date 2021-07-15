@@ -22,7 +22,7 @@ interface QuestionSettingsFormState {
 class QuestionSettingsForm extends Component<QuestionSettingsFormProps, QuestionSettingsFormState> {
 
     private readonly defaultState = new QuestionSettingsBuilder()
-        .withType(QuestionType.ROMAJI)
+        .withType(QuestionType.TEXT)
         .withCardQuantity(1)
         .withScoreTracking(true)
         .build();
@@ -56,7 +56,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                 <Row className={styles.section}>
                     <Col xs={12}>
                         <h5 className={styles.heading}>
-                            <FontAwesomeIcon icon={faChevronRight}/> Kana Display Type
+                            <FontAwesomeIcon icon={faChevronRight}/> Question Type
                         </h5>
                     </Col>
 
@@ -67,7 +67,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                     <Col>
                         <DisplayTypeButton
                             icon={faFont}
-                            type={QuestionType.ROMAJI}
+                            type={QuestionType.TEXT}
                             selected={type}
                             onClick={(type) => this.setState({ type, cards: 1 })}
                         />
@@ -76,7 +76,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                     <Col>
                         <DisplayTypeButton
                             icon={faThLarge}
-                            type={QuestionType.KANA}
+                            type={QuestionType.CHOICE}
                             selected={type}
                             onClick={(type) => this.setState({ type, cards: 4 })}
                         />
@@ -84,7 +84,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                 </Row>
 
 
-                {type === QuestionType.KANA &&
+                {type === QuestionType.CHOICE &&
                     <Row className={styles.section}>
                         <Col xs={12}>
                             <p className={styles.quantityDescription}>You'll be shown {cards} kana to choose from.</p>
@@ -138,7 +138,8 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
 
     reset = () => this.setState({
         type: this.defaultState.type,
-        cards: this.defaultState.cards
+        cards: this.defaultState.cards,
+        score: this.defaultState.score
     });
 
     private handleQuantitySelect = (quantity: number) => {

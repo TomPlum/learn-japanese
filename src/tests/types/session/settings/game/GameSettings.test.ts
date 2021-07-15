@@ -6,7 +6,7 @@ import HintSettings, { HintSettingsBuilder } from "../../../../../types/session/
 import TimeSettings, { TimeSettingsBuilder } from "../../../../../types/session/settings/game/TimeSettings";
 import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../types/session/settings/game/QuestionSettings";
 import { HintQuantity } from "../../../../../types/game/HintQuantity";
-import { LearnableField } from "../../../../../types/learn/LearnableField";
+import LearnableField from "../../../../../types/learn/LearnableField";
 import FilterChain from "../../../../../filters/FilterChain";
 import MeaningFilter from "../../../../../filters/learnable/MeaningFilter";
 import { Learnable } from "../../../../../types/learn/Learnable";

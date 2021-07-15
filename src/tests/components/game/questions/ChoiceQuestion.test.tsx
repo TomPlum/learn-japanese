@@ -1,11 +1,12 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import KanaChoiceQuestion, { LearnableChoiceQuestionProps } from "../../../../components/game/questions/KanaChoiceQuestion";
+import KanaChoiceQuestion, { ChoiceQuestionProps } from "../../../../components/game/questions/ChoiceQuestion";
 import { Kana } from "../../../../types/kana/Kana";
 import KanaType from "../../../../types/kana/KanaType";
 import { KanaColumn } from "../../../../types/kana/KanaColumn";
 import Arrays from "../../../../utility/Arrays";
 import { getByTextWithElements } from "../../../Queries";
 import React from "react";
+import LearnableField from "../../../../types/learn/LearnableField";
 
 const isValidHandler = jest.fn();
 
@@ -14,7 +15,7 @@ const i = new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const e = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const o = new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 
-let props: LearnableChoiceQuestionProps
+let props: ChoiceQuestionProps
 const ref = React.createRef<KanaChoiceQuestion>();
 
 const setup = () => {
@@ -30,8 +31,10 @@ beforeEach(() => {
     mockShuffle.mockImplementationOnce((array: any[]) => { return array });
 
     props = {
-        expected: a,
-        wrong: [i, e, o],
+        questionField: LearnableField.ROMAJI,
+        answerField: LearnableField.KANA,
+        question: a,
+        wrong: [i.code, e.code, o.code],
         hidden: false,
         isValid: isValidHandler
     };
@@ -47,7 +50,7 @@ test('Should render the expected and all wrong answers', () => {
 
 test('Should render the question banner', () => {
     setup();
-    expect(getByTextWithElements('Which kana is \'a\' ?')).toBeInTheDocument();
+    expect(getByTextWithElements('What is the kana for \'a\' ?')).toBeInTheDocument();
 });
 
 test('Calling the isCorrect function with a correct answer selected should invoke with true', () => {
@@ -126,8 +129,7 @@ test('Pressing a key that is NOT the index of a displayed kana should not select
 });
 
 test('Passing 6 kana should place them in columns with a width of 4 on large viewports', () => {
-    props.expected = a;
-    props.wrong = [i, e, o, i, e];
+    props.wrong = [i, e, o, i, e].map(it => it.code);
     const { container } = setup();
     expect(container?.firstChild?.childNodes[1].firstChild).toHaveClass('col-lg-4');
 });

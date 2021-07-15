@@ -1,6 +1,6 @@
 export enum QuestionType {
-    TEXT,
-    CHOICE,
-    AUDIO,
-    RANDOM
+    TEXT = "Text",
+    CHOICE = "Multiple Choice",
+    AUDIO = "Audio",
+    RANDOM = "Random"
 }

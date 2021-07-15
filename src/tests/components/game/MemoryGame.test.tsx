@@ -16,6 +16,7 @@ import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSe
 import { HintQuantity } from "../../../types/game/HintQuantity";
 import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
+import LearnableField from "../../../types/learn/LearnableField";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -39,7 +40,13 @@ beforeEach(() => {
     props = {
         data: [a, i, u, e, o],
         settings: new GameSettingsBuilder()
-            .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).withCardQuantity(1).withScoreTracking(true).build())
+            .withQuestionSettings(new QuestionSettingsBuilder()
+                .withType(QuestionType.TEXT)
+                .withFields(LearnableField.KANA, LearnableField.ROMAJI)
+                .withCardQuantity(1)
+                .withScoreTracking(true)
+                .build()
+            )
             .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.UNLIMITED).build())
             .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
             .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
@@ -691,19 +698,24 @@ test('Failing to correctly answer the question before the countdown finishes sho
     expect(screen.getByText('(5)')).toBeInTheDocument();
 });
 
-test('Setting the question type as \'Romaji\' should render a RomajiQuestion', () => {
+test('Setting the question type as \'Text\' should render a TextQuestion', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).build())
+        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.TEXT).build())
         .build();
     setup();
     expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
-test('Setting the question type as \'Kana\' should render a KanaChoiceQuestion', () => {
+test('Setting the question type as \'Choice\' should render a ChoiceQuestion', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(2).build())
+        .withQuestionSettings(new QuestionSettingsBuilder()
+            .withFields(LearnableField.ROMAJI, LearnableField.KANA)
+            .withType(QuestionType.CHOICE)
+            .withCardQuantity(2)
+            .build()
+        )
         .build();
 
     setup();
@@ -720,7 +732,7 @@ test('Setting the question type as \'Kana\' should render a KanaChoiceQuestion',
 test('Setting the game settings score property to true should render the score', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(2).withScoreTracking(true).build())
+        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.CHOICE).withCardQuantity(2).withScoreTracking(true).build())
         .build();
     setup();
     expect(screen.getByText('0')).toBeInTheDocument();
@@ -729,7 +741,7 @@ test('Setting the game settings score property to true should render the score',
 test('Setting the game settings score property to false should not render the score', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(2).withScoreTracking(false).build())
+        .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.CHOICE).withCardQuantity(2).withScoreTracking(false).build())
         .build();
     setup();
     expect(screen.queryByText('0')).not.toBeInTheDocument();

@@ -8,26 +8,21 @@ import QuitButton from "../ui/buttons/QuitButton";
 import GameResult from "../../types/game/GameResult";
 import { FailureReason } from "../../types/game/FailureReason";
 import CountDown from "./CountDown";
-import RomajiQuestion from "./questions/RomajiQuestion";
 import { QuestionType } from "../../types/game/QuestionType";
-import KanaChoiceQuestion from "./questions/KanaChoiceQuestion";
-import Arrays from "../../utility/Arrays";
 import SessionProgressBar from "../ui/SessionProgressBar";
-import FilterChain from "../../filters/FilterChain";
-import DiagraphFilter from "../../filters/kana/DiagraphFilter";
-import ExclusionFilter from "../../filters/kana/ExclusionFilter";
-import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
 import SubmitButton from "../ui/buttons/SubmitButton";
 import HintButton from "./HintButton";
 import SkipButton from "../ui/buttons/SkipButton";
 import ConfirmModal from "../ui/ConfirmModal";
 import { Environment } from "../../utility/Environment";
 import ScoreDisplay from "../ui/display/ScoreDisplay";
-import LearnableMeaningQuestion from "./questions/LearnableMeaningQuestion";
 import { Learnable } from "../../types/learn/Learnable";
-import { Kana } from "../../types/kana/Kana";
 import styles from "../../styles/sass/components/game/MemoryGame.module.scss";
 import GameSettings from "../../types/session/settings/game/GameSettings";
+import ExclusionFilter from "../../filters/learnable/ExclusionFilter";
+import Arrays from "../../utility/Arrays";
+import TextQuestion from "./questions/TextQuestion";
+import ChoiceQuestion from "./questions/ChoiceQuestion";
 
 export interface GameQuestionProps {
     hidden: boolean;
@@ -225,47 +220,59 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         const { settings, data } = this.props;
         const { currentQuestion, paused } = this.state;
 
+        const questionField = settings.question.questionField;
+        const answerField = settings.question.answerField;
+
         //TODO: Extract into a QuestionRegistry component (Maybe Strategy pattern?)
         switch (settings.question.type) {
-            case QuestionType.ROMAJI: {
-                return (
-                    <RomajiQuestion
-                        key={(currentQuestion as Kana).code}
-                        kana={currentQuestion as Kana} //TODO: Refactor RomajiQuestion so it takes Learnable. It displays some field and you enter romaji
-                        hidden={paused}
-                        className={styles.question}
-                        displayStyle={{ character: { className: styles.romajiDisplay } }}
-                        isValid={this.handleAnswerValidity}
-                        ref={this.question}
-                    />
-                );
-            }
-            case QuestionType.KANA: {
-                const chain = new FilterChain<Kana>();
-                const kana = currentQuestion as Kana;
+            case QuestionType.TEXT: {
+                const question = currentQuestion.getFieldValues(questionField)[0];
+                const answers = currentQuestion.getFieldValues(answerField);
 
-                chain.addFilter(new DiagraphFilter(kana.isDiagraph()));
-                chain.addFilter(new KanaTypeFilter(kana.type, true));
-                chain.addFilter(new ExclusionFilter(kana));
-
-                const wrong = Arrays.getRandomElements(chain.execute(data as Kana[]), settings.question.cards - 1);
+                if (!question) {
+                    throw new Error(currentQuestion + " has no value in its " + questionField + " field");
+                }
 
                 return (
-                    <KanaChoiceQuestion
-                        key={kana.code}
-                        expected={kana}
-                        wrong={wrong}
-                        hidden={paused}
-                        isValid={this.handleAnswerValidity}
-                        ref={this.question}
-                    />
-                );
-            }
-            case QuestionType.MEANING: {
-                return (
-                    <LearnableMeaningQuestion
+                    <TextQuestion
                         key={currentQuestion.getKana().join("-")}
-                        data={currentQuestion}
+                        question={question}
+                        answers={answers}
+                        answerField={answerField}
+                        hidden={paused}
+                        isValid={this.handleAnswerValidity}
+                        ref={this.question}
+                    />
+                );
+            }
+            case QuestionType.CHOICE: {
+                //What the user is going to be asked. Usually just a single string, but some kana have multiple romaji.
+                const questions = currentQuestion; //.getFieldValues(questionField);
+
+                //What the expected answer is going to be. For a choice question, it's only ever going to be one.
+                const expectedAnswer = currentQuestion.getFieldValues(answerField)[0];
+
+                //What wrong options will be presented? Takes the answer filter from the settings and excludes the question.
+                //We then filter our Learnable data and retrieve n options. Then we map chosen answer fields for them.
+                const chain = settings.question.answerFilter(currentQuestion).withFilter(new ExclusionFilter(currentQuestion));
+                const wrong = Arrays.getRandomElements(chain.execute(data), settings.question.cards - 1);
+                const wrongAnswerOptions = wrong.map((answer: Learnable) => answer.getFieldValues(answerField)[0]);
+
+                if (!expectedAnswer) {
+                    throw new Error(currentQuestion + " has no value for its " + questionField + " field.");
+                }
+
+                if (!wrongAnswerOptions) {
+                    throw new Error("")
+                }
+
+                return (
+                    <ChoiceQuestion
+                        key={currentQuestion.getKana().join("-")} //TODO: Implement Learnable getID()?
+                        question={questions}
+                        questionField={questionField}
+                        answerField={answerField}
+                        wrong={wrongAnswerOptions.flatMap(answer => answer ? [answer] : [])}
                         hidden={paused}
                         isValid={this.handleAnswerValidity}
                         ref={this.question}
