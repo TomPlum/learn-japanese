@@ -14,10 +14,6 @@ export interface AnswerInputFieldProps {
 
 class AnswerInputField extends Component<AnswerInputFieldProps> {
 
-    constructor(props: Readonly<AnswerInputFieldProps> | AnswerInputFieldProps) {
-        super(props);
-    }
-
     render() {
         const { value, disabled, placeholder, className, field } = this.props;
 

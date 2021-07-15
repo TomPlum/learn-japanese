@@ -83,6 +83,6 @@ export class Kanji extends Learnable {
     }
 
     equals(other: Learnable): boolean {
-        return this.getKanjiVariation() == other.getKanjiVariation();
+        return this.getKanjiVariation() === other.getKanjiVariation();
     }
 }

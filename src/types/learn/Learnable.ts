@@ -136,7 +136,7 @@ export abstract class Learnable {
      * @return true if they are equal, false if not.
      */
     public equals(other: Learnable): boolean {
-        return this != other;
+        return this !== other;
     }
 }
 

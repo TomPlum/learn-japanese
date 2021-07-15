@@ -19,7 +19,7 @@ class QuestionDisplay extends Component<QuestionDisplayProps, QuestionDisplaySta
     }
 
     render() {
-        const { question, blur } = this.props;
+        const { question } = this.props;
 
         return (
             <div>
