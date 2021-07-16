@@ -2,10 +2,10 @@ import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { GameQuestionProps } from "../MemoryGame";
 import GameQuestion from "../../../types/game/GameQuestion";
-import styles from "../../../styles/sass/components/game/questions/RomajiQuestion.module.scss";
 import QuestionDisplay from "../../ui/display/QuestionDisplay";
 import AnswerInputField from "../../ui/fields/AnswerInputField";
 import LearnableField from "../../../types/learn/LearnableField";
+import styles from "../../../styles/sass/components/game/questions/TextQuestion.module.scss";
 
 export interface TextQuestionProps extends GameQuestionProps {
     question: string;
@@ -37,7 +37,7 @@ class TextQuestion extends GameQuestion<TextQuestionProps, TextQuestionState> {
         const { answer } = this.state;
 
         return (
-            <div className={className}>
+            <div className={[className, styles.wrapper].join(" ")}>
                 <QuestionDisplay
                     question={question}
                     blur={hidden}
