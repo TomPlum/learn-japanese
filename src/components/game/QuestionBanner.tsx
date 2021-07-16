@@ -24,16 +24,18 @@ class QuestionBanner extends Component<QuestionBannerProps> {
 
         return (
             <Alert variant="info" className={[className, styles.wrapper].join(" ")}>
-                {'What is the '}
-                <strong>{answerField.name.toLowerCase()}</strong>
-                {' for '}
+                {'What is the '}<strong>{answerField.name.toLowerCase()}</strong>{' for '}
+
                 {displayValues.map((questionValue: string, i: number) => {
                     return <>
                         {'"'}<strong key={i}>{questionValue}</strong>{'"'}
-                        {i < displayValues.length - 1 ? ' or ' : ''}
+                        <span key={`or${i}`}>
+                            {i < displayValues.length - 1 ? " or " : ""}
+                        </span>
                     </>;
                 })}
                 {' ?'}
+
                 {extraValues.length > 0 && (
                     <OverlayTrigger
                         trigger={["click", "hover"]}

@@ -1,6 +1,6 @@
 import React from "react";
 import Arrays from "../../../utility/Arrays";
-import { Alert, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { GameQuestionProps } from "../MemoryGame";
 import styles from "../../../styles/sass/components/game/questions/KanaChoiceQuestion.module.scss";
 import GameQuestion from "../../../types/game/GameQuestion";
@@ -102,7 +102,7 @@ class ChoiceQuestion extends GameQuestion<ChoiceQuestionProps, ChoiceQuestionSta
         if (expected === selected) {
             return true;
         } else {
-            if (selected) this.displays.get(selected)?.current?.notifyIncorrect();
+            this.displays.get(selected!)?.current?.notifyIncorrect();
             this.setState({ selected: undefined });
             return false;
         }

@@ -3,7 +3,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import { useState } from "react";
 import styles from "../../../styles/sass/components/ui/display/DynamicDisplay.module.scss";
 
-const DynamicDisplay = (props: { value: string, className?: string }) => {
+const DynamicDisplay = (props: { value: string, className?: string, style?: {} }) => {
     const [loading, setLoading] = useState(true);
 
     return (
@@ -11,7 +11,7 @@ const DynamicDisplay = (props: { value: string, className?: string }) => {
             <LoadingSpinner active={loading}/>
 
             <Textfit mode="single" forceSingleModeWidth={false} onReady={() => setLoading(false)}>
-                <span className={[props.className, styles.value].join(" ")}>
+                <span style={props.style} className={[props.className, styles.value].join(" ")}>
                     {props.value}
                 </span>
             </Textfit>

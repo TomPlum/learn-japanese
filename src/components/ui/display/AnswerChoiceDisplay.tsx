@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "../../../styles/sass/components/ui/display/AnswerChoiceDisplay.module.scss";
 import { KanaDisplayStyle } from "./KanaDisplay";
+import DynamicDisplay from "./DynamicDisplay";
 
 export interface AnswerChoiceDisplayProps {
     value: string;
@@ -45,9 +46,11 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
                     {index}
                 </span>
 
-                <span style={{ color: style?.character?.color }} className={[valueClass, clickable].join(" ")}>
-                    {value}
-                </span>
+                <DynamicDisplay
+                    value={value}
+                    style={{ color: style?.character?.color }}
+                    className={[valueClass, clickable].join(" ")}
+                />
             </div>
         );
     }

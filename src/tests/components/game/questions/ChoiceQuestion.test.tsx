@@ -50,7 +50,7 @@ test('Should render the expected and all wrong answers', () => {
 
 test('Should render the question banner', () => {
     setup();
-    expect(getByTextWithElements('What is the kana for \'a\' ?')).toBeInTheDocument();
+    expect(getByTextWithElements('What is the kana for "a" ?')).toBeInTheDocument();
 });
 
 test('Calling the isCorrect function with a correct answer selected should invoke with true', () => {
@@ -91,7 +91,7 @@ test('Selecting an option should change its displays container class to \'select
     setup();
     const option = screen.getByText('え');
     fireEvent.click(option);
-    expect(option.parentElement).toHaveClass('selected');
+    expect(getAnswerChoiceDisplayWrapperFor("え")).toHaveClass('selected');
 });
 
 test('Selecting an option should change its displays\' character class colour', () => {
@@ -105,16 +105,16 @@ test('Pressing the number key for a given option index should select it', () => 
     const { container } = setup();
 
     fireEvent.keyDown(container, { key: '1', keyCode: 49 });
-    expect(screen.getByText('い').parentElement).toHaveClass('selected');
+    expect(getAnswerChoiceDisplayWrapperFor('い')).toHaveClass('selected');
 
     fireEvent.keyDown(container, { key: '2', keyCode: 50 });
-    expect(screen.getByText('え').parentElement).toHaveClass('selected');
+    expect(getAnswerChoiceDisplayWrapperFor('え')).toHaveClass('selected');
 
     fireEvent.keyDown(container, { key: '3', keyCode: 51 });
-    expect(screen.getByText('お').parentElement).toHaveClass('selected');
+    expect(getAnswerChoiceDisplayWrapperFor('お')).toHaveClass('selected');
 
     fireEvent.keyDown(container, { key: '4', keyCode: 52 });
-    expect(screen.getByText('あ').parentElement).toHaveClass('selected');
+    expect(getAnswerChoiceDisplayWrapperFor('あ')).toHaveClass('selected');
 });
 
 test('Pressing a key that is NOT the index of a displayed kana should not select anything', () => {
@@ -122,10 +122,10 @@ test('Pressing a key that is NOT the index of a displayed kana should not select
 
     fireEvent.keyDown(container, { key: 'a', keyCode: 49 });
 
-    expect(screen.getByText('あ').parentElement).not.toHaveClass('selected');
-    expect(screen.getByText('い').parentElement).not.toHaveClass('selected');
-    expect(screen.getByText('え').parentElement).not.toHaveClass('selected');
-    expect(screen.getByText('お').parentElement).not.toHaveClass('selected');
+    expect(getAnswerChoiceDisplayWrapperFor('あ')).not.toHaveClass('selected');
+    expect(getAnswerChoiceDisplayWrapperFor('い')).not.toHaveClass('selected');
+    expect(getAnswerChoiceDisplayWrapperFor('え')).not.toHaveClass('selected');
+    expect(getAnswerChoiceDisplayWrapperFor('お')).not.toHaveClass('selected');
 });
 
 test('Passing 6 kana should place them in columns with a width of 4 on large viewports', () => {
@@ -138,3 +138,13 @@ test('Passing less than 6 kana should place them in columns with a width of 6 on
     const { container } = setup();
     expect(container?.firstChild?.childNodes[1].firstChild).toHaveClass('col-lg-6');
 });
+
+test("It should throw an exception if the passed Learnable has a falsy value for the given answer field", () => {
+    props.question = new Kana(undefined!, [], KanaType.HIRAGANA, KanaColumn.H, false);
+    expect(() => setup()).toThrow("Expected Answer is null");
+});
+
+function getAnswerChoiceDisplayWrapperFor(value: string) {
+    //The wrapper element for the AnswerChoiceDisplay is the 4th parent above the <span> that wraps the value.
+    return screen.getByText(value).parentElement?.parentElement?.parentElement?.parentElement;
+}
