@@ -23,7 +23,7 @@ export default class TimeSettings {
 }
 
 export class TimeSettingsBuilder {
-    private _timed: boolean = true;
+    private _timed: boolean = false;
     private _countdown: boolean = false;
     private _secondsPerQuestion: number = 0;
 

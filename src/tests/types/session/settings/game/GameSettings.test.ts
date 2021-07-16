@@ -32,7 +32,7 @@ describe("Game Settings", () => {
 
         it("Should set default Time settings if not specified", () => {
             const settings = new GameSettingsBuilder().build();
-            expect(settings.time).toStrictEqual(new TimeSettingsBuilder().isTimed().build());
+            expect(settings.time).toStrictEqual(new TimeSettingsBuilder().build());
         });
 
         it("Should override settings when specified", () => {
@@ -54,7 +54,7 @@ describe("Game Settings", () => {
             expect(settings.question).toStrictEqual(new QuestionSettings(LearnableField.KANJI, LearnableField.MEANING, QuestionType.CHOICE, 6, answerFilter, true));
             expect(settings.hints).toStrictEqual(new HintSettings(false, HintQuantity.UNLIMITED));
             expect(settings.lives).toStrictEqual(new LifeSettings(true, LifeQuantity.ONE));
-            expect(settings.time).toStrictEqual(new TimeSettings(true, true, 5));
+            expect(settings.time).toStrictEqual(new TimeSettings(false, true, 5));
         });
 
         it("Should build upon the existing values when creating from an existing settings object", () => {
