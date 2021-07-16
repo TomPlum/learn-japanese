@@ -7,6 +7,7 @@ import GameQuestion from "../../../types/game/GameQuestion";
 import AnswerChoiceDisplay from "../../ui/display/AnswerChoiceDisplay";
 import LearnableField from "../../../types/learn/LearnableField";
 import { Learnable } from "../../../types/learn/Learnable";
+import QuestionBanner from "../QuestionBanner";
 
 export interface ChoiceQuestionProps extends GameQuestionProps {
     question: Learnable;
@@ -61,9 +62,11 @@ class ChoiceQuestion extends GameQuestion<ChoiceQuestionProps, ChoiceQuestionSta
 
         return (
             <div className={styles.wrapper}>
-                <Alert variant="info">{/*TODO: Extract to it's own component and style*/}
-                    What is the {answerField.name.toLowerCase()} for '{question.getFieldValues(questionField)[0]}' ?
-                </Alert>
+                <QuestionBanner
+                    question={question}
+                    questionField={questionField}
+                    answerField={answerField}
+                />
 
                 <Row>
                     {options.map((option, i) => {

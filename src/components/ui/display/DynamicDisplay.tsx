@@ -18,4 +18,5 @@ const DynamicDisplay = (props: { value: string, className?: string }) => {
         </div>
     );
 }
+
 export default DynamicDisplay;
