@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Reading } from "../../../types/kanji/Reading";
+import { KanjiReading } from "../../../types/kanji/KanjiReading";
 import Inspectable from "../../ui/Inspectable";
 import { Environment } from "../../../utility/Environment";
 import { ReadingType } from "../../../types/kanji/ReadingType";
@@ -10,12 +10,12 @@ import Copyable from "../../ui/Copyable";
 
 export interface KanjiReadingDisplayProps {
     type: ReadingType;
-    readings: Reading[];
+    readings: KanjiReading[];
     showRomaji: boolean;
 }
 
 interface KanjiReadingDisplayState {
-    selected: Reading;
+    selected: KanjiReading;
 }
 
 class KanjiReadingDisplay extends Component<KanjiReadingDisplayProps, KanjiReadingDisplayState> {
@@ -35,7 +35,7 @@ class KanjiReadingDisplay extends Component<KanjiReadingDisplayProps, KanjiReadi
                 <SpinnerController
                     values={readings}
                     disabledTitle={"This kanji has only one Jōyō " + type.toLowerCase() + " reading"}
-                    onChange={(value: Reading) => this.setState({ selected: value })}
+                    onChange={(value: KanjiReading) => this.setState({ selected: value })}
                 />
 
                 <span className={[commonStyles.text, styles.reading].join(" ")}>

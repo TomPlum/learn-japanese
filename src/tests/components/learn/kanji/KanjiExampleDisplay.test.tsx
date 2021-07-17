@@ -1,5 +1,5 @@
 import { Kanji } from "../../../../types/kanji/Kanji";
-import { Reading } from "../../../../types/kanji/Reading";
+import { KanjiReading } from "../../../../types/kanji/KanjiReading";
 import { ReadingType } from "../../../../types/kanji/ReadingType";
 import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
 import { Example } from "../../../../types/kanji/Example";
@@ -7,7 +7,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiExampleDisplay from "../../../../components/learn/kanji/KanjiExampleDisplay";
 import { getByTextWithMarkup } from "../../../Queries";
 
-const readings = [new Reading("jin", "じん", ReadingType.ON), new Reading("hito", "ひと", ReadingType.KUN)];
+const readings = [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)];
 const source = "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji";
 const meanings = ["person"];
 const grade = KyoikuGrade.ONE;

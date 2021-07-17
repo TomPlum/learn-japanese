@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import Search from "../../../components/learn/Search";
 import Definition from "../../../types/sentence/Definition";
 import { Kanji } from "../../../types/kanji/Kanji";
-import { Reading } from "../../../types/kanji/Reading";
+import { KanjiReading } from "../../../types/kanji/KanjiReading";
 import { ReadingType } from "../../../types/kanji/ReadingType";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 
@@ -11,9 +11,9 @@ const setup = () => {
         new Definition(["to like"], "好き","すきな", "な Adjective"),
         new Definition(["beautiful or clean"], undefined, "きれいな", "な Adjective"),
         new Definition(["quiet"], "静か", "しずかな", "な Adjective"),
-        new Kanji("一", [new Reading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]),
-        new Kanji("魚", [new Reading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]),
-        new Kanji("鳥", [new Reading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, "", [], ["animal"]),
+        new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]),
+        new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]),
+        new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, "", [], ["animal"]),
     ];
 
     const component = render(<Search data={data} tags={["number", "animal"]} />);

@@ -4,7 +4,7 @@ import { KanaColumn } from "../../../types/kana/KanaColumn";
 import LearnableField from "../../../types/learn/LearnableField";
 import CommonData from "../../../types/learn/CommonData";
 import { Kanji } from "../../../types/kanji/Kanji";
-import { Reading } from "../../../types/kanji/Reading";
+import { KanjiReading } from "../../../types/kanji/KanjiReading";
 import { ReadingType } from "../../../types/kanji/ReadingType";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 
@@ -29,7 +29,7 @@ describe("Learnable", () => {
         });
 
         it("Should return the kanji variation when specifying the kanji field", () => {
-            const data = new Kanji("魚", [new Reading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]);
+            const data = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]);
             const fieldValues = data.getFieldValues(LearnableField.KANJI);
             expect(fieldValues).toStrictEqual(["魚"]);
         });

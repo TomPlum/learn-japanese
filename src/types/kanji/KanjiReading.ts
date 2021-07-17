@@ -1,6 +1,6 @@
 import { ReadingType } from "./ReadingType";
 
-export class Reading {
+export class KanjiReading {
     private readonly _romaji: string;
     private readonly _kana: string;
     private readonly _type: ReadingType;

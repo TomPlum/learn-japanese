@@ -8,6 +8,7 @@ import PlayMode from "../../session/PlayMode";
 import { KanjiSettingsBuilder } from "../../session/settings/data/KanjiSettings";
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";
 import LearnableField from "../../learn/LearnableField";
+import { TimeSettingsBuilder } from "../../session/settings/game/TimeSettings";
 
 export default class PlayKanjiModes implements PlayMenuModes {
     getModes(): PlayMode[] {
@@ -17,6 +18,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
             new PlayMode("Kanji", "#6857ee", faPaintBrush,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
+                    .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
                     .withQuestionSettings(
                         new QuestionSettingsBuilder()
                             .withFields(LearnableField.MEANING, LearnableField.KANJI)
@@ -24,8 +26,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                             .withCardQuantity(4)
                             .withScoreTracking(true)
                             .build()
-                    )
-                    .build()
+                    ).build()
             ),
             new PlayMode("Meaning", "#65cd3a", faSchool,
                 defaultKanjiSettings,
@@ -37,12 +38,19 @@ export default class PlayKanjiModes implements PlayMenuModes {
                             .withCardQuantity(4)
                             .withScoreTracking(true)
                             .build()
-                    )
-                    .build()
+                    ).build()
             ),
             new PlayMode("On'yomi", "#eacd35", faStar,
                 defaultKanjiSettings,
-                new GameSettingsBuilder().build()
+                new GameSettingsBuilder()
+                    .withQuestionSettings(
+                        new QuestionSettingsBuilder()
+                            .withFields(LearnableField.KANJI, LearnableField.MEANING)
+                            .withType(QuestionType.TEXT)
+                            .withCardQuantity(4)
+                            .withScoreTracking(true)
+                            .build()
+                    ).build()
             ),
             new PlayMode("Kun'yomi", "#e21717", faCircle,
                 defaultKanjiSettings,

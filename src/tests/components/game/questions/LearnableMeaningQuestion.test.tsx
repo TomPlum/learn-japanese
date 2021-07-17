@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import LearnableMeaningQuestion, { LearnableMeaningQuestionProps } from "../../../../components/game/questions/LearnableMeaningQuestion";
 import { Kanji } from "../../../../types/kanji/Kanji";
-import { Reading } from "../../../../types/kanji/Reading";
+import { KanjiReading } from "../../../../types/kanji/KanjiReading";
 import { ReadingType } from "../../../../types/kanji/ReadingType";
 import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
 import each from "jest-each";
@@ -12,7 +12,7 @@ import Definition from "../../../../types/sentence/Definition";
 const isValidHandler = jest.fn();
 const ref = React.createRef<LearnableMeaningQuestion>();
 
-const fish = new Kanji("魚", [new Reading("sakana", "さかな", ReadingType.KUN)], ["fish", "sea creature"], KyoikuGrade.TWO, "", [], ["animal"]);
+const fish = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish", "sea creature"], KyoikuGrade.TWO, "", [], ["animal"]);
 
 let props: LearnableMeaningQuestionProps;
 

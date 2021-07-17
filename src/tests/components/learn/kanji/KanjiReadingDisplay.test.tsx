@@ -1,13 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiReadingDisplay from "../../../../components/learn/kanji/KanjiReadingDisplay";
 import { ReadingType } from "../../../../types/kanji/ReadingType";
-import { Reading } from "../../../../types/kanji/Reading";
+import { KanjiReading } from "../../../../types/kanji/KanjiReading";
 import { Environment } from "../../../../utility/Environment";
 
-const onReading = new Reading("nan", "なん", ReadingType.ON);
-const kunReading = new Reading("minami", "みなみ", ReadingType.KUN);
+const onReading = new KanjiReading("nan", "なん", ReadingType.ON);
+const kunReading = new KanjiReading("minami", "みなみ", ReadingType.KUN);
 
-const onReadingTwo = new Reading("koku", "こく", ReadingType.ON);
+const onReadingTwo = new KanjiReading("koku", "こく", ReadingType.ON);
 
 const mockEnvironment = jest.fn();
 

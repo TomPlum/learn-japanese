@@ -1,5 +1,6 @@
 import LearnableField from "./LearnableField";
 import RomajiGenerator from "../../utility/RomajiGenerator";
+import { KanjiReading } from "../kanji/KanjiReading";
 
 /**
  * The base class for all data objects in the application.
@@ -82,6 +83,24 @@ export abstract class Learnable {
                 throw new ReferenceError("Invalid Learnable Field: " + field);
             }
         }
+    }
+
+    /**
+     * Currently only used by {@link Kanji} as they have different types of readings.
+     * The on'yomi readings are the original Chinese ones.
+     * @return reading The Chinese on'yomi readings.
+     */
+    public getOnyomiReadings(): KanjiReading[] {
+        return [];
+    }
+
+    /**
+     * Currently only used by {@link Kanji} as they have different types of readings.
+     * The kun'yomi readings are the newer Japanese ones.
+     * @return reading The Japanese kun'yomi readings.
+     */
+    public getKunyomiReadings(): KanjiReading[] {
+        return [];
     }
 
     /**

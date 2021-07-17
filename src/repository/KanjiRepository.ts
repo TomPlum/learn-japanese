@@ -1,8 +1,8 @@
 import { Kanji } from "../types/kanji/Kanji";
-import { Reading } from "../types/kanji/Reading";
+import { KanjiReading } from "../types/kanji/KanjiReading";
 import { ReadingType } from "../types/kanji/ReadingType";
 import { Example } from "../types/kanji/Example";
-import { KanjiData, KanjiExample, KanjiReading } from "../data/DataTypes";
+import { KanjiData, KanjiExample, KanjiReadingData } from "../data/DataTypes";
 import { joyo, kyoiku } from "../data/Kanji";
 import Repository from "./Repository";
 import { RandomNumberGenerator } from "../utility/RandomNumberGenerator";
@@ -56,8 +56,8 @@ export class KanjiRepository implements Repository<Kanji> {
 
     private convert = (data: KanjiData[]): Kanji[] => {
         return data.map((result: KanjiData) => {
-            const on = result.on.map((data: KanjiReading) => new Reading(data.romaji, data.kana, ReadingType.ON));
-            const kun = result.kun.map((data: KanjiReading) => new Reading(data.romaji, data.kana, ReadingType.KUN));
+            const on = result.on.map((data: KanjiReadingData) => new KanjiReading(data.romaji, data.kana, ReadingType.ON));
+            const kun = result.kun.map((data: KanjiReadingData) => new KanjiReading(data.romaji, data.kana, ReadingType.KUN));
             const examples = result.examples.map((it: KanjiExample) => new Example(it.value, it.kana, it.english));
             const tags = result.tags ?? [];
             return new Kanji(result.code, on.concat(kun), result.meanings, result.grade, result.source, examples, tags);

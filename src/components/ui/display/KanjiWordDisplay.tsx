@@ -25,12 +25,12 @@ class KanjiWordDisplay extends Component<KanjiWordDisplayProps> {
                             <div key={kanji.getValue() + "-popover"}>
                                 <KanjiReadingDisplay
                                     type={ReadingType.ON}
-                                    readings={kanji.readings.filter(it => it.type === ReadingType.ON)}
+                                    readings={kanji.getOnyomiReadings()}
                                     showRomaji={false}
                                 />
                                 <KanjiReadingDisplay
                                     type={ReadingType.KUN}
-                                    readings={kanji.readings.filter(it => it.type === ReadingType.KUN)}
+                                    readings={kanji.getKunyomiReadings()}
                                     showRomaji={false}
                                 />
                             </div>

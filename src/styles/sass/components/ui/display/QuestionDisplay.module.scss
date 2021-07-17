@@ -1,10 +1,12 @@
 @import "src/styles/sass/viewports";
+@import "src/styles/sass/mixins";
 
 .wrapper {
   text-align: center;
 }
 
 .question {
+  @include noSelect;
   color: #FFF;
   font-family: "Ciutadella Rounded Medium", sans-serif;
 }
