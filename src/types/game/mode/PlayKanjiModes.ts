@@ -39,12 +39,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                     ).build()
             ),
             new PlayMode("On'yomi", "#eacd35", faStar,
-                new KanjiSettingsBuilder()
-                    .withJoyoKanji()
-                    .withOnyomiReadings()
-                    .withKunyomiReadings(false)
-                    .withQuantity(25)
-                    .build(),
+                defaultKanjiSettings,
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()
                         .withFields(LearnableField.KANJI, LearnableField.ONYOMI_READING)
@@ -55,12 +50,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                     ).build()
             ),
             new PlayMode("Kun'yomi", "#e21717", faCircle,
-                new KanjiSettingsBuilder()
-                    .withJoyoKanji()
-                    .withKunyomiReadings()
-                    .withOnyomiReadings(false)
-                    .withQuantity(25)
-                    .build(),
+                defaultKanjiSettings,
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()
                         .withFields(LearnableField.KANJI, LearnableField.KUNYOMI_READING)

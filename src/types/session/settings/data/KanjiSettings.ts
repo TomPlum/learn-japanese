@@ -10,16 +10,12 @@ import DataSettings from "./DataSettings";
 export default class KanjiSettings extends DataSettings {
     private readonly _grades: KyoikuGrade[];
     private readonly _joyo: boolean;
-    private readonly _onyomi: boolean;
-    private readonly _kunyomi: boolean;
     private readonly _tags: string[]
 
-    constructor(grades: KyoikuGrade[], joyo: boolean, tags: string[], onyomi: boolean, kunyomi: boolean, quantity?: number) {
+    constructor(grades: KyoikuGrade[], joyo: boolean, tags: string[], quantity?: number) {
         super(Topic.KANJI, quantity);
         this._grades = grades;
         this._joyo = joyo;
-        this._onyomi = onyomi;
-        this._kunyomi = kunyomi;
         this._tags = tags;
     }
 
@@ -31,14 +27,6 @@ export default class KanjiSettings extends DataSettings {
         return this._joyo;
     }
 
-    get onyomi(): boolean {
-        return this._onyomi;
-    }
-
-    get kunyomi(): boolean {
-        return this._kunyomi;
-    }
-
     get tags(): string[] {
         return this._tags;
     }
@@ -47,8 +35,6 @@ export default class KanjiSettings extends DataSettings {
 export class KanjiSettingsBuilder {
     private _grades: KyoikuGrade[] = [];
     private _joyo: boolean = false;
-    private _onyomi: boolean = true;
-    private _kunyomi: boolean = true;
     private _tags: string[] = [];
     private _quantity: number | undefined;
 
@@ -67,22 +53,12 @@ export class KanjiSettingsBuilder {
         return this;
     }
 
-    withOnyomiReadings(include: boolean = true): KanjiSettingsBuilder {
-        this._onyomi = include;
-        return this;
-    }
-
-    withKunyomiReadings(include: boolean = true): KanjiSettingsBuilder {
-        this._kunyomi = include;
-        return this;
-    }
-
     withQuantity(quantity?: number): KanjiSettingsBuilder {
         this._quantity = quantity;
         return this;
     }
 
     build(): KanjiSettings {
-        return new KanjiSettings(this._grades, this._joyo, this._tags, this._onyomi, this._kunyomi, this._quantity);
+        return new KanjiSettings(this._grades, this._joyo, this._tags, this._quantity);
     }
 }
