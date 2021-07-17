@@ -167,14 +167,19 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
                     <Col>
                         {settings.time.timed &&
-                            <Timer className={styles.timer} ref={this.timer} pausable onPaused={this.onPaused}/>
+                            <Timer
+                                pausable
+                                ref={this.timer}
+                                onPaused={this.onPaused}
+                                className={styles.timer}
+                            />
                         }
                         {settings.time.countdown &&
                             <CountDown
-                                className={styles.timer}
                                 ref={this.countdown}
-                                value={settings.time?.secondsPerQuestion ?? 10}
+                                className={styles.timer}
                                 onFinish={this.countDownTimeElapsed}
+                                value={settings.time?.secondsPerQuestion ?? 10}
                             />
                         }
                     </Col>
@@ -194,20 +199,20 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                    <Col md={7} xs={8} className={styles.footerRightCol}>
                        <ButtonGroup className={styles.buttonGroup}>
                            <HintButton
-                               data={currentQuestion}
                                remaining={hints}
-                               totalQuantity={settings.hints.quantity?.valueOf() ?? 0}
-                               key={currentQuestion.getKana().join("-")}
                                title="Get a Hint"
-                               disabled={paused || !settings.hints.enabled}
+                               data={currentQuestion}
                                className={styles.hint}
+                               key={currentQuestion.getUniqueID()}
+                               disabled={paused || !settings.hints.enabled}
+                               totalQuantity={settings.hints.quantity?.valueOf() ?? 0}
                                onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
                            />
 
                            <SubmitButton
+                               className={styles.submit}
                                onClick={this.answerQuestion}
                                disabled={!hasValidAnswer || paused}
-                               className={styles.submit}
                            />
                        </ButtonGroup>
                    </Col>
@@ -235,7 +240,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
                 return (
                     <TextQuestion
-                        key={currentQuestion.getKana().join("-")}
+                        key={currentQuestion.getUniqueID()}
                         question={question}
                         answers={answers}
                         answerField={answerField}
@@ -268,7 +273,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
                 return (
                     <ChoiceQuestion
-                        key={currentQuestion.getKana().join("-")} //TODO: Implement Learnable getID()?
+                        key={currentQuestion.getUniqueID()}
                         question={questions}
                         questionField={questionField}
                         answerField={answerField}

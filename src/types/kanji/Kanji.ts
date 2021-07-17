@@ -90,6 +90,10 @@ export class Kanji extends Learnable {
         return "It's Grade " + this.grade.value + " and starts with " + this.getKana()[0][0] + ".";
     }
 
+    getUniqueID(): string {
+        return this._character;
+    }
+
     equals(other: Learnable): boolean {
         return this.getKanjiVariation() === other.getKanjiVariation();
     }

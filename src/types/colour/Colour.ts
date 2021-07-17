@@ -37,6 +37,10 @@ export default class Colour extends Learnable {
     }
 
     getHint(): string {
-        return "It begins with " + this.getKanjiVariation()[0];
+        return "It begins with " + this._kana[0];
+    }
+
+    getUniqueID(): string {
+        return this._name + "-" + this._kana;
     }
 }

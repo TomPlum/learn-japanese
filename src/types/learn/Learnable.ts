@@ -1,6 +1,7 @@
 import LearnableField from "./LearnableField";
 import RomajiGenerator from "../../utility/RomajiGenerator";
 import { KanjiReading } from "../kanji/KanjiReading";
+import { v4 as uuid } from "uuid";
 
 /**
  * The base class for all data objects in the application.
@@ -152,6 +153,15 @@ export abstract class Learnable {
      */
     public getTags(): string[] {
         return [];
+    }
+
+    /**
+     * Uniquely identifies a data object.
+     * Defaults to a V4 UUID.
+     * @return id a unique ID.
+     */
+    public getUniqueID(): string {
+        return uuid();
     }
 
     /**

@@ -31,7 +31,7 @@ class Feedback extends Component<FeedbackProps> {
                                     .map(mistake => {
                                         return(
                                             <AnswerMistake
-                                                key={mistake.data.getKana().join("-")}
+                                                key={mistake.data.getUniqueID()}
                                                 value={mistake.data}
                                                 times={mistake.times}
                                             />

@@ -101,6 +101,10 @@ describe("Kanji", () => {
         it("Should construct a hint message based on the grade and starting kana", () => {
             expect(kanji.getHint()).toBe("It's Grade 1 and starts with じ.")
         });
+
+        it("Should return the kanji character for the unique ID", () => {
+            expect(kanji.getUniqueID()).toBe("人");
+        });
     });
 
     describe("Equality", () => {

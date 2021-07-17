@@ -99,6 +99,12 @@ describe("Learnable", () => {
             expect(value).toStrictEqual([]);
         });
 
+        it("Unique ID should default to a random v4 UUID", () => {
+            const data = new NoOptionalOverrides();
+            const id = data.getUniqueID();
+            expect(id).toMatch(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
+        });
+
         it("Equals should use default === equality", () => {
             const obj1 = new NoOptionalOverrides();
             const obj2 = new NoOptionalOverrides();
