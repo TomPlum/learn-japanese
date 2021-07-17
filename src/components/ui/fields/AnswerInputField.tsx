@@ -4,10 +4,10 @@ import LearnableField from "../../../types/learn/LearnableField";
 import PopOver from "../PopOver";
 
 export interface AnswerInputFieldProps {
+    value: string;
     disabled?: boolean;
-    value?: string;
-    placeholder?: string;
     className?: string;
+    placeholder?: string;
     field: LearnableField;
     onChange?: (value: string) => void;
 }

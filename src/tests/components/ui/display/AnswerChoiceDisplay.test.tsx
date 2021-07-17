@@ -40,18 +40,18 @@ test('Passing the index property when the display is blurred should not show the
 
 test('Notify incorrect should append the \'red\' class to the value', () => {
     const ref = React.createRef<AnswerChoiceDisplay>();
-    const { container, rerender } = render(<AnswerChoiceDisplay {...props} ref={ref}/>);
+    const { rerender } = render(<AnswerChoiceDisplay {...props} ref={ref}/>);
 
-    //Initially should have the regular kana class
-    expect(container?.firstChild?.childNodes[1]).toHaveClass('value');
+    //Initially should have the value class
+    expect(screen.getByText('あ')).toHaveClass('value');
 
-    //Calling notifyIncorrect should append the redKana class
+    //Calling notifyIncorrect should append the red class
     ref.current?.notifyIncorrect();
-    expect(container?.firstChild?.childNodes[1]).toHaveClass('red');
+    expect(screen.getByText('あ')).toHaveClass('red');
 
-    //Upon next render, it should switch back to the kana class again
+    //Upon next render, it should switch back to the value class again
     rerender(<AnswerChoiceDisplay {...props} ref={ref}/>);
-    expect(container?.firstChild?.childNodes[1]).toHaveClass('value');
+    expect(screen.getByText('あ')).toHaveClass('value');
 });
 
 test('Passing a container style prop should cause that class to be applied to the container', () => {
@@ -67,17 +67,17 @@ test('Not passing a container style prop should default to the containers defaul
 
 test('If not notifying incorrect, but is blurred, the character should have the \'blur\' class', () => {
     props.blur = true;
-    const { container } = render(<AnswerChoiceDisplay {...props} />);
-    expect(container?.firstChild?.childNodes[1]).toHaveClass('blur');
+    render(<AnswerChoiceDisplay {...props} />);
+    expect(screen.getByText('あ')).toHaveClass('blur');
 });
 
 test('If the onClick event handler is bound, the character should have the \'clickable\' class', () => {
-    const { container } = render(<AnswerChoiceDisplay {...props} />);
-    expect(container?.firstChild?.childNodes[1]).toHaveClass('clickable');
+    render(<AnswerChoiceDisplay {...props} />);
+    expect(screen.getByText('あ')).toHaveClass('clickable');
 });
 
 test('If the onClick event handler is unbound, the character should not have the \'clickable\' class', () => {
     props.onClick = undefined;
-    const { container } = render(<AnswerChoiceDisplay {...props} />);
-    expect(container?.firstChild?.childNodes[1]).not.toHaveClass('clickable');
+    render(<AnswerChoiceDisplay {...props} />);
+    expect(screen.getByText('あ')).not.toHaveClass('clickable');
 });

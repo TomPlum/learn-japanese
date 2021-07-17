@@ -13,7 +13,7 @@ export default class LearnableField {
     public static MEANING = new LearnableField(
         "English Meaning",
         "Enter one of the meanings as a single English word.",
-        /^[A-Za-z\\s]*$/
+        /^[A-Za-z\s]*$/
     );
 
     public static KANJI = new LearnableField("Kanji", "Select the kanji character that matches.", /.*/);
@@ -23,7 +23,7 @@ export default class LearnableField {
     public static ROMAJI = new LearnableField(
         "Rōmaji",
         "Enter the roman characters for the given kana. I.e. 'a', 'ke' or 'zu'.",
-        /.*/
+        /^[A-Za-z]*$/
     );
 
     public static RANDOM = new LearnableField("Random", "", /.*/);
