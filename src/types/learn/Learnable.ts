@@ -62,9 +62,9 @@ export abstract class Learnable {
      *
      * @param field The field whose data is to be retrieved.
      * @throws error If the given field is unknown.
-     * @return value The value of the given field.
+     * @return value The values for the given field. Can be empty.
      */
-    public getFieldValues(field: LearnableField): (string | undefined)[] {
+    public getFieldValues(field: LearnableField): string[] {
         switch (field) {
             case LearnableField.ROMAJI: {
                 const generator = new RomajiGenerator();
@@ -77,7 +77,14 @@ export abstract class Learnable {
                 return this.getMeanings();
             }
             case LearnableField.KANJI: {
-                return [this.getKanjiVariation()];
+                const kanji = this.getKanjiVariation();
+                return kanji !== null && kanji !== undefined ? [kanji] : [];
+            }
+            case LearnableField.ONYOMI_READING: {
+                return this.getOnyomiReadings().map((reading: KanjiReading) => reading.kana);
+            }
+            case LearnableField.KUNYOMI_READING: {
+                return this.getKunyomiReadings().map((reading: KanjiReading) => reading.kana);
             }
             default: {
                 throw new ReferenceError("Invalid Learnable Field: " + field);
@@ -155,7 +162,7 @@ export abstract class Learnable {
      * @return true if they are equal, false if not.
      */
     public equals(other: Learnable): boolean {
-        return this !== other;
+        return this === other;
     }
 }
 

@@ -57,7 +57,7 @@ class QuestionBanner extends Component<QuestionBannerProps> {
 
     private getQuestionValues = (): [string[], string[]] => {
         const { question, questionField } = this.props;
-        const questionValues = question.getFieldValues(questionField).flatMap(it => it ? [it] : []);
+        const questionValues = question.getFieldValues(questionField);
         if (questionValues.length > 2) {
             return [questionValues.slice(0, 2), questionValues.slice(2)];
         } else if (questionValues.length > 0) {

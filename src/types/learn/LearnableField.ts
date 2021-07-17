@@ -4,12 +4,6 @@ export default class LearnableField {
     private readonly _description: string;
     private readonly _validationRegex: RegExp;
 
-    private constructor(name: string, description: string, validationRegex: RegExp) {
-        this._name = name;
-        this._description = description;
-        this._validationRegex = validationRegex;
-    }
-
     public static MEANING = new LearnableField(
         "English Meaning",
         "Enter one of the meanings as a single English word.",
@@ -26,7 +20,17 @@ export default class LearnableField {
         /^[A-Za-z]*$/
     );
 
+    public static ONYOMI_READING = new LearnableField("On'Yomi Reading", "Enter the original Chinese reading", /^[A-Za-z]*$/);
+
+    public static KUNYOMI_READING = new LearnableField("Kun'Yomi Reading", "Enter the Japanese reading", /^[A-Za-z]*$/);
+
     public static RANDOM = new LearnableField("Random", "", /.*/);
+
+    private constructor(name: string, description: string, validationRegex: RegExp) {
+        this._name = name;
+        this._description = description;
+        this._validationRegex = validationRegex;
+    }
 
     get name(): string {
         return this._name;
