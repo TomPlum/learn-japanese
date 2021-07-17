@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import LearnableField from "../../types/learn/LearnableField";
 import { Learnable } from "../../types/learn/Learnable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/sass/components/game/QuestionBanner.module.scss";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import PopOver from "../ui/PopOver";
+import styles from "../../styles/sass/components/game/QuestionBanner.module.scss";
 
 export interface QuestionBannerProps {
     question: Learnable;

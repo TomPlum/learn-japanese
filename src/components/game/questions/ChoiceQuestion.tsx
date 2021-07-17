@@ -66,6 +66,7 @@ class ChoiceQuestion extends GameQuestion<ChoiceQuestionProps, ChoiceQuestionSta
                     question={question}
                     questionField={questionField}
                     answerField={answerField}
+                    className={styles.question}
                 />
 
                 <Row>

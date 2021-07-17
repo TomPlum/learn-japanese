@@ -30,11 +30,19 @@
     padding: 15px 0;
     min-height: 170px;
   }
+
+  .question {
+    font-size: 1.4em;
+  }
 }
 
 @include desktop {
   .display {
     padding: 15px 0;
     height: 200px;
+  }
+
+  .question {
+    font-size: 1.6em;
   }
 }
