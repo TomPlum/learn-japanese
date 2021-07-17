@@ -2,12 +2,12 @@ import React from "react";
 import Arrays from "../../../utility/Arrays";
 import { Col, Row } from "react-bootstrap";
 import { GameQuestionProps } from "../MemoryGame";
-import styles from "../../../styles/sass/components/game/questions/KanaChoiceQuestion.module.scss";
 import GameQuestion from "../../../types/game/GameQuestion";
 import AnswerChoiceDisplay from "../../ui/display/AnswerChoiceDisplay";
 import LearnableField from "../../../types/learn/LearnableField";
 import { Learnable } from "../../../types/learn/Learnable";
 import QuestionBanner from "../QuestionBanner";
+import styles from "../../../styles/sass/components/game/questions/ChoiceQuestion.module.scss";
 
 export interface ChoiceQuestionProps extends GameQuestionProps {
     question: Learnable;
@@ -78,9 +78,8 @@ class ChoiceQuestion extends GameQuestion<ChoiceQuestionProps, ChoiceQuestionSta
                                     index={i + 1}
                                     onClick={this.select}
                                     style={{
-                                        container: selected === option ? styles.selected : styles.tile,
+                                        container: [styles.display, selected === option ? styles.selected : styles.tile],
                                         character: {
-                                            className: styles.kana,
                                             color: selected === option ? "#268ce5" : "#FFF"
                                         }
                                     }}

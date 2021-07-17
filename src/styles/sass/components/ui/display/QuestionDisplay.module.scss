@@ -1,3 +1,5 @@
+@import "src/styles/sass/viewports";
+
 .wrapper {
   text-align: center;
 }
@@ -5,4 +7,22 @@
 .question {
   color: #FFF;
   font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+@include desktop {
+  .display {
+    height: 280px;
+  }
+}
+
+@include tablet {
+  .display {
+    height: 200px;
+  }
+}
+
+@include phone {
+  .display {
+    height: 180px;
+  }
 }

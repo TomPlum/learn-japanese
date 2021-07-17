@@ -13,7 +13,7 @@ export interface KanaDisplayProps {
 }
 
 export interface KanaDisplayStyle {
-    container?: string;
+    container?: string[];
     character?: CharacterStyleProps;
 }
 
@@ -43,7 +43,7 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
         const { isNotifyingIncorrect } = this.state;
         const { blur, kana, style, index, onClick } = this.props;
 
-        const containerClass = style?.container ? style.container : styles.wrapper;
+        const containerClass = style?.container ? style.container : [styles.wrapper];
         const kanaClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.blur : styles.kana;
         const leftDiagraphClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.diagraphBlur : styles.diagraphLeft;
         const rightDiagraphClass = isNotifyingIncorrect ? styles.redKana : blur ? styles.diagraphBlur : styles.diagraphRight;
@@ -54,7 +54,7 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
         const indexColour = style?.character?.color;
 
         return (
-            <Container className={containerClass} onClick={this.handleContainerClick}>
+            <Container className={containerClass.join("")} onClick={this.handleContainerClick}>
                 <span className={styles.index} style={{ color: indexColour, visibility: indexVisibility }}>
                     {index}
                 </span>

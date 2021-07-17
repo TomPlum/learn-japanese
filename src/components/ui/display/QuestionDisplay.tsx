@@ -8,7 +8,7 @@ export interface QuestionDisplayProps {
 }
 
 interface QuestionDisplayState {
-
+    //TODO: Write a wrapper component that makes its child flash red and use across all 3 displays.
 }
 
 class QuestionDisplay extends Component<QuestionDisplayProps, QuestionDisplayState> {
@@ -24,7 +24,11 @@ class QuestionDisplay extends Component<QuestionDisplayProps, QuestionDisplaySta
         const { question } = this.props;
 
         return (
-            <DynamicDisplay value={question} className={styles.question} />
+            <DynamicDisplay
+                value={question}
+                style={{ container: [styles.display] }}
+                className={styles.question}
+            />
         );
     }
 

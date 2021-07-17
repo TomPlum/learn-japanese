@@ -4,7 +4,6 @@
 @mixin value {
   color: #FFF;
   font-family: "Ciutadella Rounded Medium", sans-serif;
-  font-size: 3em;
   @include noSelect;
 }
 
