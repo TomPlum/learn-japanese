@@ -4955,6 +4955,169 @@ export function kyoiku(): KanjiData[] {
                 { value: "書き物机", kana: ["かきものづくえ"], english: ["writing desk",] },
             ]
         },
+        {
+            name: "化",
+            code: "\u5316",
+            on: [{ kana: "か", romaji: "ka" }, { kana: "け", romaji: "ke" }],
+            kun: [{ kana: "ばける", romaji: "bakeru" }, { kana: "ばかす", romaji: "bakasu" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8C%96#Kanji",
+            meanings: ["change", "take the form of", "influence", "enchant", "delude"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "強化", kana: ["きょうか"], english: ["strengthen", "intensify", "reinforce", "solidify"] },
+                { value: "文化", kana: ["ぶんか"], english: ["culture", "civilisation"] },
+                { value: "変化", kana: ["へんか"], english: ["change", "variation", "alteration", "mutation"] },
+                { value: "悪化", kana: ["あっか"], english: ["(suffer) deterioration", "growing worse"] },
+                { value: "化学", kana: ["かがく", "ばけがく"], english: ["chemistry"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "期",
+            code: "\u671F",
+            on: [{ kana: "き", romaji: "ki" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E6%9C%9F#Kanji",
+            meanings: ["period", "time", "date", "term"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "期間", kana: ["きかん"], english: ["period", "term", "interval"] },
+                { value: "期待", kana: ["きたい"], english: ["expectation", "anticipation", "hope"] },
+                { value: "時期", kana: ["じき"], english: ["time", "season", "period", "soon", "shortly"] },
+                { value: "早期", kana: ["そうき"], english: ["early stage"] },
+                { value: "長期", kana: ["ちょうき"], english: ["long time period"] },
+            ],
+            tags: ["time"]
+        },
+        {
+            name: "都",
+            code: "\u90FD",
+            on: [{ kana: "と", romaji: "to" }, { kana: "つ", romaji: "tsu" }],
+            kun: [{ kana: "みやこ", romaji: "miyako" }],
+            source: "https://en.wiktionary.org/wiki/%E9%83%BD#Kanji",
+            meanings: ["metropolis", "capital"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "都", kana: ["みやこ"], english: ["capital", "metropolis"] },
+                { value: "都市", kana: ["とし"], english: ["town", "city", "municipal", "urban"] },
+                { value: "都内", kana: ["とない"], english: ["metropolitan area"] },
+                { value: "京都", kana: ["きょうと"], english: ["Kyoto"] },
+                { value: "首都", kana: ["しゅと"], english: ["capital city", "metropolis"] },
+            ]
+        },
+        {
+            name: "平",
+            code: "\u5E73",
+            on: [{ kana: "へい", romaji: "hei" }, { kana: "びょう", romaji: "byō" }],
+            kun: [{ kana: "ひら", romaji: "hira" }, { kana: "たいら", romaji: "taira" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B9%B3#Kanji",
+            meanings: ["even", "flat", "peace"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "平和", kana: ["へいわ"], english: ["peace", "harmony"] },
+                { value: "和平", kana: ["わへい"], english: ["peace"] },
+                { value: "平均", kana: ["へいきん", "へいぎん"], english: ["average", "mean", "balance", "equilibrium"] },
+                { value: "太平洋", kana: ["たいへいよう"], english: ["Pacific Ocean"] },
+                { value: "平成", kana: ["へいせい"], english: ["Heisei era (1989.1.8?)"] },
+            ]
+        },
+        {
+            name: "区",
+            code: "\u533A",
+            on: [{ kana: "く", romaji: "ku" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E5%8C%BA#Kanji",
+            meanings: ["ward", "district"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "区", kana: ["く"], english: ["ward", "district", "section"] },
+                { value: "地区", kana: ["ちく"], english: ["district", "section", "sector"] },
+                { value: "小選挙区", kana: ["しょうせんきょく"], english: ["small electoral district"] },
+                { value: "区内", kana: ["くない"], english: ["in the ward or borough"] },
+                { value: "区域", kana: ["くいき"], english: ["limits", "boundary", "domain", "zone", "sphere"] },
+            ]
+        },
+        {
+            name: "駅",
+            code: "\u99C5",
+            on: [{ kana: "えき", romaji: "eki" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E9%A7%85#Kanji",
+            meanings: ["station"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "駅", kana: ["えき"], english: ["station"] },
+                { value: "駅前", kana: ["えきまえ"], english: ["in front of station"] },
+                { value: "駅伝", kana: ["えきでん"], english: ["stagecoach", "post horse"] },
+                { value: "宿駅", kana: ["しゅくえき"], english: ["post town", "relay station", "stage"] },
+                { value: "駅員", kana: ["えきいん"], english: ["station attendant"] },
+            ]
+        },
+        {
+            name: "取",
+            code: "\u53D6",
+            on: [{ kana: "しゅ", romaji: "shu" }],
+            kun: [{ kana: "とる", romaji: "toru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8F%96#Kanji",
+            meanings: ["take", "fetch", "take up"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "取る", kana: ["とる"], english: ["to take", "to pick up", "to harvest", "to earn"] },
+                { value: "取引", kana: ["とりひき"], english: ["transactions", "dealings", "business"] },
+                { value: "取材", kana: ["しゅざい"], english: ["collecting data (e.g. for a newspaper article)", "covering an event"] },
+                { value: "取っ手", kana: ["とって", "はしゅ"], english: ["handle", "grip", "knob"] },
+                { value: "取締役", kana: ["とりしまりやく"], english: ["company director", "board member"] },
+            ]
+        },
+        {
+            name: "和",
+            code: "\u548C",
+            on: [{ kana: "わ", romaji: "wa" }],
+            kun: [{ kana: "やわらぐ", romaji: "yawaragu" }, { kana: "なごやか", romaji: "nagoyaka" }],
+            source: "https://en.wiktionary.org/wiki/%E5%92%8C#Kanji",
+            meanings: ["harmony", "Japanese style", "peace", "soften", "Japan"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "平和", kana: ["へいわ"], english: ["peace", "harmony"] },
+                { value: "和平", kana: ["わへい"], english: ["peace"] },
+                { value: "グアテマラ共和国", kana: ["グアテマラきょうわこく"], english: ["Republic of Guatemala"] },
+                { value: "緩和", kana: ["かんわ"], english: ["relief", "mitigation", "alleviation", "relaxation"] },
+                { value: "朝鮮民主主義人民共和国", kana: ["ちょうせんみんしゅしゅぎじんみんきょうわこく"], english: ["Democratic People’s Republic of Korea (NorthKorea)", "DPRK"] },
+            ]
+        },
+        {
+            name: "受",
+            code: "\u53D7",
+            on: [{ kana: "じゅ", romaji: "ju" }],
+            kun: [{ kana: "うける", romaji: "ukeru" }, { kana: "うかる", romaji: "ukaru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8F%97#Kanji",
+            meanings: ["accept", "undergo", "answer (phone)", "take", "get", "catch", "receive"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "受け", kana: ["うけ"], english: ["popularity", "favour", "reception", "defense"] },
+                { value: "受験", kana: ["じゅけん"], english: ["taking an examination"] },
+                { value: "受け入れ", kana: ["うけいれ"], english: ["receiving", "acceptance"] },
+                { value: "受賞", kana: ["じゅしょう"], english: ["winning (a prize)"] },
+                { value: "受注", kana: ["じゅちゅう"], english: ["accepting orders"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "洋",
+            code: "\u6D0B",
+            on: [{ kana: "よう", romaji: "yō" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E6%B4%8B#Kanji",
+            meanings: ["ocean", "western style"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "太平洋", kana: ["たいへいよう"], english: ["Pacific Ocean"] },
+                { value: "東洋", kana: ["とうよう"], english: ["Orient"] },
+                { value: "海洋", kana: ["かいよう"], english: ["ocean"] },
+                { value: "大西洋", kana: ["たいせいよう"], english: ["Atlantic Ocean"] },
+                { value: "西洋", kana: ["せいよう"], english: ["the west, Western countries"] },
+            ]
+        },
     ];
 }
 
