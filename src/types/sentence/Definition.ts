@@ -32,6 +32,10 @@ export default class Definition extends Learnable {
     }
 
     getHint(): string {
-        return "It starts with " + this.getKana()[0];
+        return "It starts with " + this.kana[0];
+    }
+
+    getUniqueID(): string {
+        return this.meanings.join("-")
     }
 }

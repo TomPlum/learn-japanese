@@ -1,4 +1,5 @@
-@import "../../mixins";
+@import "src/styles/sass/mixins";
+@import "src/styles/sass/animations";
 
 $default-colour: #FFF;
 $diagraph-margin: -10px;
@@ -11,20 +12,6 @@ $diagraph-margin: -10px;
 @mixin diagraph {
   @include kana;
   display: inline;
-}
-
-@mixin flashRedAnimation {
-  $notify-animation-time: 0.75s;
-  animation: flashRed ease $notify-animation-time;
-  -webkit-animation: flashRed ease $notify-animation-time;
-  -moz-animation: flashRed ease $notify-animation-time;
-  animation-fill-mode: forwards;
-}
-
-@mixin blur {
-  color: transparent !important;
-  text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
 }
 
 .wrapper {
@@ -75,16 +62,4 @@ $diagraph-margin: -10px;
 
 .clickable {
   cursor: pointer;
-}
-
-@keyframes flashRed {
-  0% {
-    color: $default-colour;
-  }
-  50% {
-    color: red;
-  }
-  100% {
-    color: $default-colour;
-  }
 }

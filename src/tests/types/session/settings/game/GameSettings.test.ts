@@ -6,6 +6,10 @@ import HintSettings, { HintSettingsBuilder } from "../../../../../types/session/
 import TimeSettings, { TimeSettingsBuilder } from "../../../../../types/session/settings/game/TimeSettings";
 import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../types/session/settings/game/QuestionSettings";
 import { HintQuantity } from "../../../../../types/game/HintQuantity";
+import LearnableField from "../../../../../types/learn/LearnableField";
+import FilterChain from "../../../../../filters/FilterChain";
+import MeaningFilter from "../../../../../filters/learnable/MeaningFilter";
+import { Learnable } from "../../../../../types/learn/Learnable";
 
 describe("Game Settings", () => {
     describe("Builder", () => {
@@ -22,27 +26,35 @@ describe("Game Settings", () => {
         it("Should set default Display settings if not specified", () => {
             const settings = new GameSettingsBuilder().build();
             expect(settings.question).toStrictEqual(
-                new QuestionSettingsBuilder().withType(QuestionType.ROMAJI).withCardQuantity(1).withScoreTracking(false).build()
+                new QuestionSettingsBuilder().withWrongOptionsFilterChain(settings.question.answerFilter).build()
             );
         });
 
         it("Should set default Time settings if not specified", () => {
             const settings = new GameSettingsBuilder().build();
-            expect(settings.time).toStrictEqual(new TimeSettingsBuilder().isTimed().build());
+            expect(settings.time).toStrictEqual(new TimeSettingsBuilder().build());
         });
 
         it("Should override settings when specified", () => {
+            const answerFilter = () => new FilterChain<Learnable>().withFilter(new MeaningFilter("hello"))
             const settings = new GameSettingsBuilder()
-                .withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.KANA).withCardQuantity(6).withScoreTracking(true).build())
+                .withQuestionSettings(new QuestionSettingsBuilder()
+                    .withFields(LearnableField.KANJI, LearnableField.MEANING)
+                    .withWrongOptionsFilterChain(answerFilter)
+                    .withType(QuestionType.CHOICE)
+                    .withCardQuantity(6)
+                    .withScoreTracking(true)
+                    .build()
+                )
                 .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
                 .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.ONE).build())
                 .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
                 .build();
 
-            expect(settings.question).toStrictEqual(new QuestionSettings(QuestionType.KANA, 6, true));
+            expect(settings.question).toStrictEqual(new QuestionSettings(LearnableField.KANJI, LearnableField.MEANING, QuestionType.CHOICE, 6, answerFilter, true));
             expect(settings.hints).toStrictEqual(new HintSettings(false, HintQuantity.UNLIMITED));
             expect(settings.lives).toStrictEqual(new LifeSettings(true, LifeQuantity.ONE));
-            expect(settings.time).toStrictEqual(new TimeSettings(true, true, 5));
+            expect(settings.time).toStrictEqual(new TimeSettings(false, true, 5));
         });
 
         it("Should build upon the existing values when creating from an existing settings object", () => {

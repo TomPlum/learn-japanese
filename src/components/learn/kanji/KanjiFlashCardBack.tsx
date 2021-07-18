@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CardBackFaceProps } from "../FlashCard";
 import { Kanji } from "../../../types/kanji/Kanji";
 import KanjiReadingDisplay from "./KanjiReadingDisplay";
-import { Reading } from "../../../types/kanji/Reading";
+import { KanjiReading } from "../../../types/kanji/KanjiReading";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
 import KanjiExampleDisplay from "./KanjiExampleDisplay";
 
@@ -66,7 +66,7 @@ class KanjiFlashCardBack extends Component<CardBackFaceProps> {
         );
     }
 
-    private getReadings = (type: ReadingType): Reading[] => {
+    private getReadings = (type: ReadingType): KanjiReading[] => {
         return (this.props.data as Kanji).readings.filter(it => it.type === type);
     }
 

@@ -84,6 +84,10 @@ export class Kana extends Learnable {
         return this.romaji;
     }
 
+    getUniqueID(): string {
+        return this._code;
+    }
+
     public equals(other: any): boolean {
         if (!other) return false;
         if (!(other instanceof Kana)) return false;

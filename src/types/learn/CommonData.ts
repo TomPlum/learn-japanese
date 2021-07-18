@@ -42,4 +42,8 @@ export default class CommonData extends Learnable {
     getHint(): string {
         return "It starts with " + this.getKana()[0][0];
     }
+
+    getUniqueID(): string {
+        return this.meaning + "-" + this.kana.join("-");
+    }
 }

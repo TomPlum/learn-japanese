@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import KanjiFlashCardFront from "../../../../components/learn/kanji/KanjiFlashCardFront";
 import { Kanji } from "../../../../types/kanji/Kanji";
-import { Reading } from "../../../../types/kanji/Reading";
+import { KanjiReading } from "../../../../types/kanji/KanjiReading";
 import { ReadingType } from "../../../../types/kanji/ReadingType";
 import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
 import { Example } from "../../../../types/kanji/Example";
@@ -10,7 +10,7 @@ const onClickHandler = jest.fn();
 
 const kanji = new Kanji(
     "人",
-    [new Reading("jin", "じん", ReadingType.ON), new Reading("hito", "ひと", ReadingType.KUN)],
+    [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)],
     ["person"],
     KyoikuGrade.ONE,
     "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",

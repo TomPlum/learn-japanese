@@ -3,7 +3,7 @@ import { KyoikuGrade } from "../../../../../types/kanji/KyoikuGrade";
 
 describe("Kanji Settings", () => {
     describe('Builder', function () {
-        it("Should default to falsy values", () => {
+        it("Should default values correctly", () => {
             const settings = new KanjiSettingsBuilder().build();
             expect(settings).toStrictEqual(new KanjiSettings([], false, [], undefined));
         });

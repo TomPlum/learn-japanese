@@ -2,9 +2,9 @@ import TimeSettings, { TimeSettingsBuilder } from "../../../../../types/session/
 
 describe("Time Settings", () => {
     describe("Builder", () => {
-        it("Should default to timed true and countdown false", () => {
+        it("Should default to everything turned off", () => {
             const settings = new TimeSettingsBuilder().build();
-            expect(settings).toStrictEqual(new TimeSettings(true, false, 0));
+            expect(settings).toStrictEqual(new TimeSettings(false, false, 0));
         });
 
         it("Should set timed to true when no args passed", () => {

@@ -1,0 +1,30 @@
+@import "src/styles/sass/viewports";
+@import "src/styles/sass/mixins";
+
+.wrapper {
+  text-align: center;
+}
+
+.question {
+  @include noSelect;
+  color: #FFF;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+@include desktop {
+  .display {
+    height: 280px;
+  }
+}
+
+@include tablet {
+  .display {
+    height: 200px;
+  }
+}
+
+@include phone {
+  .display {
+    height: 180px;
+  }
+}

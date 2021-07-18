@@ -23,8 +23,8 @@ export interface DayData {
 export interface KanjiData {
     name?: string;
     code: string;
-    on: KanjiReading[];
-    kun: KanjiReading[];
+    on: KanjiReadingData[];
+    kun: KanjiReadingData[];
     source: string;
     meanings: string[];
     grade: KyoikuGrade;
@@ -32,7 +32,7 @@ export interface KanjiData {
     tags?: string[];
 }
 
-export interface KanjiReading {
+export interface KanjiReadingData {
     kana: string;
     romaji: string;
 }

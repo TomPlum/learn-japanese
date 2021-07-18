@@ -4,7 +4,6 @@
   border-color: #2e6cde;
   border-width: 2px;
   border-radius: 10px;
-  min-height: 150px;
   text-align: center;
 }
 
@@ -17,23 +16,33 @@
 }
 
 .wrapper {
-  max-width: 500px;
+  max-width: 600px;
 }
 
 @include phone {
-  .kana {
-    font-size: 5em !important;
+  .display {
+    height: 120px;
   }
 }
 
 @include tablet {
-  .kana {
-    font-size: 6em !important;
+  .display {
+    padding: 15px 0;
+    min-height: 170px;
+  }
+
+  .question {
+    font-size: 1.4em;
   }
 }
 
 @include desktop {
-  .kana {
-    font-size: 7em !important;
+  .display {
+    padding: 15px 0;
+    height: 200px;
+  }
+
+  .question {
+    font-size: 1.6em;
   }
 }

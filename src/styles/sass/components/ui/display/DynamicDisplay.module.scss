@@ -1,0 +1,11 @@
+.wrapper {
+  text-align: center;
+  flex-grow : 1;
+  min-height: 50px;
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

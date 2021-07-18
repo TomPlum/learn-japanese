@@ -1,7 +1,6 @@
 export enum QuestionType {
-    ROMAJI = "Rōmaji",
-    KANA = "Kana",
-    MEANING = "Meaning",
-    KANJI = "Kanji",
+    TEXT = "Text",
+    CHOICE = "Multiple Choice",
+    AUDIO = "Audio",
     RANDOM = "Random"
 }

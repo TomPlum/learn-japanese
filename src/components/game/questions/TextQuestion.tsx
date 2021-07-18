@@ -1,27 +1,28 @@
 import React from "react";
-import KanaDisplay, { KanaDisplayStyle } from "../KanaDisplay";
 import { Col, Form, Row } from "react-bootstrap";
-import RomajiInput from "../../ui/fields/RomajiInput";
-import { Kana } from "../../../types/kana/Kana";
 import { GameQuestionProps } from "../MemoryGame";
 import GameQuestion from "../../../types/game/GameQuestion";
-import styles from "../../../styles/sass/components/game/questions/RomajiQuestion.module.scss";
+import QuestionDisplay from "../../ui/display/QuestionDisplay";
+import AnswerInputField from "../../ui/fields/AnswerInputField";
+import LearnableField from "../../../types/learn/LearnableField";
+import styles from "../../../styles/sass/components/game/questions/TextQuestion.module.scss";
 
-export interface RomajiQuestionProps extends GameQuestionProps {
-    kana: Kana;
+export interface TextQuestionProps extends GameQuestionProps {
+    question: string;
+    answerField: LearnableField;
+    answers: (string | undefined)[];
     className?: string;
-    displayStyle?: KanaDisplayStyle;
 }
 
-interface RomajiQuestionState {
+interface TextQuestionState {
     answer: string;
 }
 
-class RomajiQuestion extends GameQuestion<RomajiQuestionProps, RomajiQuestionState> {
+class TextQuestion extends GameQuestion<TextQuestionProps, TextQuestionState> {
 
-    private readonly display: React.RefObject<KanaDisplay>;
+    private readonly display: React.RefObject<QuestionDisplay>;
 
-    constructor(props: Readonly<RomajiQuestionProps> | RomajiQuestionProps) {
+    constructor(props: Readonly<TextQuestionProps> | TextQuestionProps) {
         super(props);
 
         this.display = React.createRef();
@@ -32,28 +33,28 @@ class RomajiQuestion extends GameQuestion<RomajiQuestionProps, RomajiQuestionSta
     }
 
     render() {
-        const { kana, hidden, className, displayStyle } = this.props;
+        const { question, hidden, className, answerField } = this.props;
         const { answer } = this.state;
 
         return (
-            <div className={className}>
-                <KanaDisplay
-                    kana={kana}
-                    key={kana.code}
-                    ref={this.display}
+            <div className={[className, styles.wrapper].join(" ")}>
+                <QuestionDisplay
+                    question={question}
                     blur={hidden}
-                    style={displayStyle}
+                    key={question}
+                    ref={this.display}
                 />
 
                 <Form>
                     <Form.Group controlId="answer">
                         <Row>
                             <Col xs={12}>
-                                <RomajiInput
+                                <AnswerInputField
                                     value={answer}
-                                    disabled={!kana || hidden}
+                                    field={answerField}
+                                    disabled={!question || hidden}
                                     onChange={this.handleInputChange}
-                                    placeholder={hidden ? "Paused" : "Enter the Rōmaji"}
+                                    placeholder={hidden ? "Paused" : answerField.name}
                                     className={styles.input}
                                 />
                             </Col>
@@ -71,11 +72,11 @@ class RomajiQuestion extends GameQuestion<RomajiQuestionProps, RomajiQuestionSta
 
     isCorrect = () => {
         const { answer } = this.state;
-        const { kana } = this.props;
+        const { answers } = this.props;
 
         this.setState({ answer: "" });
 
-        if (kana.romaji.includes(answer.toLowerCase())) {
+        if (answers.includes(answer.toLowerCase())) {
             return true;
         } else {
             this.display.current?.notifyIncorrect();
@@ -84,4 +85,4 @@ class RomajiQuestion extends GameQuestion<RomajiQuestionProps, RomajiQuestionSta
     }
 }
 
-export default RomajiQuestion;
+export default TextQuestion;

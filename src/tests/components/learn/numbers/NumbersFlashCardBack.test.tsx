@@ -9,7 +9,8 @@ const number = new CommonData(
     "0",
     ["れい","ゼロ", "マル"],
     "一",
-    "Number"
+    "Number",
+    "0"
 );
 
 test('Clicking the reset button should call the onReset event handler', () => {

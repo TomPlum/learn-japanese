@@ -147,6 +147,12 @@ describe("Kana", () => {
           expect(title).toBeUndefined();
       });
 
+      it("Should return the kana character for the unique ID", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const id = kana.getUniqueID();
+          expect(id).toBe("ふ");
+      });
+
       describe("Hint Message", () => {
           it('Should return a message hinting about the column and syllabary for a regular kana', () => {
               const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);

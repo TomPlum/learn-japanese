@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import KanaDisplay, { KanaDisplayProps } from "../../../components/game/KanaDisplay";
-import { Kana } from "../../../types/kana/Kana";
-import KanaType from "../../../types/kana/KanaType";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
+import KanaDisplay, { KanaDisplayProps } from "../../../../components/ui/display/KanaDisplay";
+import { Kana } from "../../../../types/kana/Kana";
+import KanaType from "../../../../types/kana/KanaType";
+import { KanaColumn } from "../../../../types/kana/KanaColumn";
 import React from "react";
 
 const onClickHandler = jest.fn();
@@ -79,7 +79,7 @@ test('Notify incorrect should append the \'redKana\' class to the kana character
 });
 
 test('Passing a container style prop should cause that class to be applied to the container', () => {
-    props.style = { container: 'containerClass' }
+    props.style = { container: ['containerClass'] }
     const { container } = render(<KanaDisplay {...props} />);
     expect(container.firstChild).toHaveClass('containerClass');
 });

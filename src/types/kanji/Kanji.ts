@@ -1,4 +1,4 @@
-import { Reading } from "./Reading";
+import { KanjiReading } from "./KanjiReading";
 import { Example } from "./Example";
 import { KyoikuGrade } from "./KyoikuGrade";
 import { Learnable } from "../learn/Learnable";
@@ -7,14 +7,14 @@ import { ReadingType } from "./ReadingType";
 export class Kanji extends Learnable {
 
     private readonly _character: string;
-    private readonly _readings: Reading[];
+    private readonly _readings: KanjiReading[];
     private readonly _meanings: string[];
     private readonly _grade: KyoikuGrade;
     private readonly _source: string;
     private readonly _examples: Example[];
     private readonly _tags: string[];
 
-    constructor(character: string, readings: Reading[], meanings: string[], grade: KyoikuGrade, source: string, examples: Example[], tags: string[]) {
+    constructor(character: string, readings: KanjiReading[], meanings: string[], grade: KyoikuGrade, source: string, examples: Example[], tags: string[]) {
         super();
         this._character = character;
         this._readings = readings;
@@ -25,7 +25,7 @@ export class Kanji extends Learnable {
         this._tags = tags;
     }
 
-    get readings(): Reading[] {
+    get readings(): KanjiReading[] {
         return this._readings;
     }
 
@@ -50,8 +50,8 @@ export class Kanji extends Learnable {
     }
 
     getKana(): string[] {
-        const on = this._readings.filter((reading: Reading) => reading.type === ReadingType.ON);
-        const kun = this._readings.filter((reading: Reading) => reading.type === ReadingType.KUN);
+        const on = this.getOnyomiReadings();
+        const kun = this.getKunyomiReadings();
 
         let response = [];
 
@@ -74,6 +74,14 @@ export class Kanji extends Learnable {
         return this._character;
     }
 
+    getOnyomiReadings(): KanjiReading[] {
+        return this._readings.filter((reading: KanjiReading) => reading.type === ReadingType.ON)
+    }
+
+    getKunyomiReadings(): KanjiReading[] {
+        return this._readings.filter((reading: KanjiReading) => reading.type === ReadingType.KUN)
+    }
+
     getTags(): string[] {
         return this._tags;
     }
@@ -82,8 +90,11 @@ export class Kanji extends Learnable {
         return "It's Grade " + this.grade.value + " and starts with " + this.getKana()[0][0] + ".";
     }
 
+    getUniqueID(): string {
+        return this._character;
+    }
 
     equals(other: Learnable): boolean {
-        return this.getKanjiVariation() == other.getKanjiVariation();
+        return this.getKanjiVariation() === other.getKanjiVariation();
     }
 }

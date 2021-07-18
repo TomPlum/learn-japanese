@@ -8,3 +8,23 @@
     opacity: 1;
   }
 }
+
+@mixin flashRedAnimation {
+  $notify-animation-time: 0.75s;
+  animation: flashRed ease $notify-animation-time;
+  -webkit-animation: flashRed ease $notify-animation-time;
+  -moz-animation: flashRed ease $notify-animation-time;
+  animation-fill-mode: forwards;
+}
+
+@keyframes flashRed {
+  0% {
+    color: #FFF;
+  }
+  50% {
+    color: red;
+  }
+  100% {
+    color: #FFF;
+  }
+}
