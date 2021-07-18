@@ -1,8 +1,8 @@
 import { Textfit } from 'react-textfit';
 import LoadingSpinner from "../LoadingSpinner";
 import { useState } from "react";
-import styles from "../../../styles/sass/components/ui/display/DynamicDisplay.module.scss";
 import { KanaDisplayStyle } from "./KanaDisplay";
+import styles from "../../../styles/sass/components/ui/display/DynamicDisplay.module.scss";
 
 const DynamicDisplay = (props: { value: string, className?: string, style?: KanaDisplayStyle }) => {
     const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const DynamicDisplay = (props: { value: string, className?: string, style?: Kana
                 max={600}
                 forceSingleModeWidth={false}
                 onReady={() => setLoading(false)}
-                className={props.style?.container?.join(" ")}
+                className={[styles.text].concat(props.style?.container ?? []).join(" ")}
             >
                 <span style={props.style?.character} className={[props.className, styles.value].join(" ")}>
                     {props.value}
