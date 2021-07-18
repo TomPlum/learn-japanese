@@ -21,7 +21,7 @@ beforeEach(() => {
 const setup = () => {
     const component = render(<TextQuestion {...props} ref={ref} />);
     return {
-        input: component.getByPlaceholderText('Enter the Rōmaji'),
+        input: component.getByPlaceholderText('Rōmaji'),
         ...component
     }
 }

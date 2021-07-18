@@ -102,7 +102,7 @@ const setup = () => {
 }
 
 function getRomajiInput(): HTMLElement {
-    return screen.getByPlaceholderText('Enter the Rōmaji');
+    return screen.getByPlaceholderText('Rōmaji');
 }
 
 test('On mount the submit button should be disabled', () => {

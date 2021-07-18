@@ -54,7 +54,7 @@ class TextQuestion extends GameQuestion<TextQuestionProps, TextQuestionState> {
                                     field={answerField}
                                     disabled={!question || hidden}
                                     onChange={this.handleInputChange}
-                                    placeholder={hidden ? "Paused" : "Enter the Rōmaji"}
+                                    placeholder={hidden ? "Paused" : answerField.name}
                                     className={styles.input}
                                 />
                             </Col>

@@ -56,6 +56,18 @@ describe("Learnable", () => {
             expect(fieldValues).toStrictEqual(["ひと"]);
         });
 
+        it("Should return the kanji variant if the data object has one when specifying the Japanese field", () => {
+            const data = new CommonData("0", ["れい", "ゼロ", "マル"], "零", "Number", "Zero");
+            const fieldValues = data.getFieldValues(LearnableField.JAPANESE);
+            expect(fieldValues).toStrictEqual(["零"]);
+        });
+
+        it("Should return the kana if the data object has no kanji variant when specifying the Japanese field", () => {
+            const data = new Definition(["not much"], undefined, "あまり", "Adverb");
+            const fieldValues = data.getFieldValues(LearnableField.JAPANESE);
+            expect(fieldValues).toStrictEqual(["あまり"]);
+        });
+
         it.skip("Should throw an exception when passing in an unknown field type", () => {
             const data = new Definition(["not much"], undefined, "あまり", "Adverb");
             //How can we test this without adding in an unused LearnableField export?

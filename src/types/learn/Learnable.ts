@@ -81,6 +81,10 @@ export abstract class Learnable {
                 const kanji = this.getKanjiVariation();
                 return kanji !== null && kanji !== undefined ? [kanji] : [];
             }
+            case LearnableField.JAPANESE: {
+                const kanji = this.getKanjiVariation();
+                return kanji ? [kanji] : this.getKana();
+            }
             case LearnableField.ONYOMI_READING: {
                 return this.getOnyomiReadings().map((reading: KanjiReading) => reading.kana);
             }

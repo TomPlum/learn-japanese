@@ -19,6 +19,7 @@ import PlayKanjiModes from "./game/mode/PlayKanjiModes";
 import PlayKanaModes from "./game/mode/PlayKanaModes";
 import { LearnMenuModes, PlayMenuModes } from "./MenuModes";
 import LearnKanaModes from "./learn/mode/LearnKanaModes";
+import PlaySentenceStructureModes from "./game/mode/PlaySentenceStructureModes";
 
 export default class Topic {
     private readonly _name: string;
@@ -53,7 +54,7 @@ export default class Topic {
     );
 
     public static GRAMMAR = new Topic(
-        "Sentence Structure", faSpellCheck, new LearnSentenceStructureModes(), new PlayKanjiModes(),
+        "Sentence Structure", faSpellCheck, new LearnSentenceStructureModes(), new PlaySentenceStructureModes(),
         { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack }
     );
 
