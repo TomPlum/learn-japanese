@@ -4,8 +4,8 @@ import Topic from "../../types/Topic";
 import TopicSelectionMenu from "./TopicSelectionMenu";
 import { AppMode } from "../../types/AppMode";
 import ModeSelectionMenu from "../learn/ModeSelectionMenu";
-import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 import { SessionSettings } from "../../types/session/settings/SessionSettings";
+import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
 
 export interface GameSettingsMenuProps {
     mode: AppMode;
@@ -35,9 +35,9 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
                     <Row className={styles.row}>
                         <Col sm={12} md={6} lg={5}>
                             <TopicSelectionMenu
-                                onSelect={(selected) => this.setState({ topic: selected })}
-                                className={styles.menu}
                                 appMode={mode}
+                                className={styles.menu}
+                                onSelect={(selected) => this.setState({ topic: selected })}
                             />
                         </Col>
 
