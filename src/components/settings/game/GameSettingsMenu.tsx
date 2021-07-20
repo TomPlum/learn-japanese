@@ -4,7 +4,6 @@ import HintSettingsForm from "./HintSettingsForm";
 import LifeSettingsForm from "./LifeSettingsForm";
 import TimeSettingsForm from "./TimeSettingsForm";
 import GameSettings, { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
-import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +11,7 @@ import QuestionSettings from "../../../types/session/settings/game/QuestionSetti
 import HintSettings from "../../../types/session/settings/game/HintSettings";
 import LifeSettings from "../../../types/session/settings/game/LifeSettings";
 import TimeSettings from "../../../types/session/settings/game/TimeSettings";
+import styles from "../../../styles/sass/components/settings/game/GameSettingsMenu.module.scss";
 
 export interface GameSettingsMenuProps {
     onSelect: (settings: GameSettings) => void;

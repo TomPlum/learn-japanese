@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
-import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
+import styles from "../../../styles/sass/components/settings/game/GameSettingsMenu.module.scss";
 import KanaSettings, { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
 
 interface KanaSettingsProps {

@@ -34,7 +34,7 @@ class TopicSelectionMenu extends Component<TopicSelectionMenuProps, TopicSelecti
         return (
             <div className={this.props.className}>
 
-                <Dropdown className={"d-md-none " + styles.dropdown} data-testid="dropdown">
+                <Dropdown className={"d-lg-none " + styles.dropdown} data-testid="dropdown">
                     <Dropdown.Toggle variant="primary" className={styles.dropdownToggle} id="select-game-type">
                         <FontAwesomeIcon fixedWidth icon={selected.icon} /> {selected.name}
                     </Dropdown.Toggle>
@@ -48,7 +48,7 @@ class TopicSelectionMenu extends Component<TopicSelectionMenuProps, TopicSelecti
                     </Dropdown.Menu>
                 </Dropdown>
 
-                <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group-header">
+                <ListGroup className={"d-lg-block d-none " + styles.menu} data-testid="list-group-header">
                     <TopicListOption text={this.getMenuHeading()} onClick={this.handleChange} isHeading>
                         <FontAwesomeIcon
                             fixedWidth
@@ -58,7 +58,7 @@ class TopicSelectionMenu extends Component<TopicSelectionMenuProps, TopicSelecti
                     </TopicListOption>
                 </ListGroup>
 
-                <ListGroup className={"d-md-block d-none " + styles.menu} data-testid="list-group">
+                <ListGroup className={"d-lg-block d-none " + styles.menu} data-testid="list-group">
                     {Topic.ALL.map((topic: Topic) =>
                         <TopicListOption type={topic} onClick={this.handleChange} selected={selected} key={topic.name}>
                             <FontAwesomeIcon fixedWidth icon={topic.icon} className={styles.icon} />

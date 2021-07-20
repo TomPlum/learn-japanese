@@ -5,7 +5,7 @@ import TopicSelectionMenu from "./TopicSelectionMenu";
 import { AppMode } from "../../types/AppMode";
 import ModeSelectionMenu from "../learn/ModeSelectionMenu";
 import { SessionSettings } from "../../types/session/settings/SessionSettings";
-import styles from "../../styles/sass/components/layout/GameSettingsMenu.module.scss";
+import styles from "../../styles/sass/components/layout/SettingsMenu.module.scss";
 
 export interface GameSettingsMenuProps {
     mode: AppMode;
@@ -33,7 +33,7 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
             <div className={styles.wrapper} data-testid="game-settings-menu">
                 <Container fluid className={styles.innerWrapper}>
                     <Row className={styles.row}>
-                        <Col sm={12} md={6} lg={5}>
+                        <Col sm={12} lg={5}>
                             <TopicSelectionMenu
                                 appMode={mode}
                                 className={styles.menu}
@@ -41,7 +41,7 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
                             />
                         </Col>
 
-                        <Col sm={12} md={6} lg={7} className={styles.gameMenuWrapper}>
+                        <Col sm={12} lg={7} className={styles.gameMenuWrapper}>
                             <ModeSelectionMenu
                                 key={topic.name}
                                 topic={topic}

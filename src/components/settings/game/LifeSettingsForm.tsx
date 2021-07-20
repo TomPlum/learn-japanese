@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import LivesSelector from "../../ui/LivesSelector";
 import { Col, Form, Row } from "react-bootstrap";
-import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
+import styles from "../../../styles/sass/components/settings/game/GameSettingsMenu.module.scss";
 import LifeSettings, { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
 
 interface LifeSettingsFormProps {

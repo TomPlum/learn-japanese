@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Col, Form, Row } from "react-bootstrap";
-import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
+import styles from "../../../styles/sass/components/settings/game/GameSettingsMenu.module.scss";
 import TimeSettings, { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 
 export interface TimeSettingsFormProps {

@@ -6,7 +6,7 @@ import { Col, Form, Row } from "react-bootstrap";
 import { Environment } from "../../../utility/Environment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KanaQuantityButton from "../../ui/buttons/KanaQuantityButton";
-import styles from "../../../styles/sass/components/settings/kana/QuestionSettingsForm.module.scss";
+import styles from "../../../styles/sass/components/settings/game/QuestionSettingsForm.module.scss";
 import QuestionSettings, { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
 
 export interface QuestionSettingsFormProps {
