@@ -113,14 +113,16 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
                         {appMode === AppMode.PLAY && (
                             <Col xs={2} className="pl-2">
                                 <Button
-                                    variant="secondary"
                                     title="Game Settings"
                                     className={styles.settings}
+                                    variant={!!customGameSettings ? "primary" : "secondary"}
                                     onClick={() => this.setState({ isConfiguringGame: true})}
                                 >
                                     <FontAwesomeIcon
+                                        fixedWidth
+                                        spin={!!customGameSettings}
                                         icon={!!customGameSettings ? faCog : faCogs}
-                                        fixedWidth spin={!!customGameSettings}
+                                        className={styles.spin}
                                     />
                                 </Button>
                             </Col>
@@ -138,6 +140,7 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
                 {isConfiguringGame && (
                     <GameSettingsMenu
                         onQuit={() => this.setState({ isConfiguringGame: false })}
+                        onReset={() => this.setState({ customGameSettings: undefined })}
                         onSelect={settings => this.setState({ customGameSettings: settings, isConfiguringGame: false })}
                     />
                 )}

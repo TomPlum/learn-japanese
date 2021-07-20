@@ -43,9 +43,9 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
 
                         <Col sm={12} lg={7} className={styles.gameMenuWrapper}>
                             <ModeSelectionMenu
-                                key={topic.name}
                                 topic={topic}
                                 appMode={mode}
+                                key={topic.name}
                                 onStart={this.onSelectMode}
                             />
                         </Col>

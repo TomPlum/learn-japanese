@@ -10,9 +10,13 @@
 .title {
   color: #FFF;
   font-family: 'Ciutadella Rounded Medium', sans-serif;
-  font-size: 1.5em;
   padding-bottom: 10px;
   border-bottom: 1px solid #007bff;;
+}
+
+.titleText {
+  font-size: 1.5em;
+  margin-left: 5px;
 }
 
 .label {
@@ -39,10 +43,10 @@
 }
 
 @mixin icon {
-  margin-right: 3px;
+  font-size: 1.3em;
 }
 
-.modeIcon {
+.questionIcon {
   @include icon;
   color: #FFF;
 }

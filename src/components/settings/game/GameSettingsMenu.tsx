@@ -6,7 +6,7 @@ import TimeSettingsForm from "./TimeSettingsForm";
 import GameSettings, { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faCheck, faHeart, faLightbulb, faQuestionCircle, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
 import QuestionSettings from "../../../types/session/settings/game/QuestionSettings";
 import HintSettings from "../../../types/session/settings/game/HintSettings";
 import LifeSettings from "../../../types/session/settings/game/LifeSettings";
@@ -14,8 +14,9 @@ import TimeSettings from "../../../types/session/settings/game/TimeSettings";
 import styles from "../../../styles/sass/components/settings/game/GameSettingsMenu.module.scss";
 
 export interface GameSettingsMenuProps {
-    onSelect: (settings: GameSettings) => void;
     onQuit: () => void;
+    onReset: () => void;
+    onSelect: (settings: GameSettings) => void;
 }
 
 interface GameSettingsMenuState {
@@ -53,12 +54,12 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
         return (
             <div className={styles.wrapper}>
                 <Card bg="dark" className="mb-2">
-                    <Tab.Container defaultActiveKey="mode">
+                    <Tab.Container defaultActiveKey="question">
                         <Card.Header>
-                            <Nav variant="pills">
+                            <Nav variant="pills" fill>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="mode">
-                                        <FontAwesomeIcon icon={faGamepad} className={styles.modeIcon}/>
+                                    <Nav.Link eventKey="question">
+                                        <FontAwesomeIcon icon={faQuestionCircle} className={styles.questionIcon}/>
                                     </Nav.Link>
                                 </Nav.Item>
 
@@ -84,8 +85,16 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
                         <Card.Body>
                             <Tab.Content>
-                                <Tab.Pane eventKey="mode" className={styles.pane}>
-                                    <Card.Title className={styles.title}>Game Mode Settings</Card.Title>
+                                <Tab.Pane eventKey="question" className={styles.pane}>
+                                    <Card.Title className={styles.title}>
+                                        <FontAwesomeIcon
+                                            fixedWidth
+                                            icon={faQuestionCircle}
+                                            className={styles.questionIcon}
+                                        />
+                                        <span className={styles.titleText}>Question Settings</span>
+                                    </Card.Title>
+
                                     <QuestionSettingsForm
                                         ref={this.display}
                                         onChange={(settings) => this.setState({ questionSettings: settings })}
@@ -95,7 +104,15 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
                             <Tab.Content>
                                 <Tab.Pane eventKey="hints" className={styles.pane}>
-                                    <Card.Title className={styles.title}>Hint Settings</Card.Title>
+                                    <Card.Title className={styles.title}>
+                                        <FontAwesomeIcon
+                                            fixedWidth
+                                            icon={faLightbulb}
+                                            className={styles.hintsIcon}
+                                        />
+                                        <span className={styles.titleText}>Hint Settings</span>
+                                    </Card.Title>
+
                                     <HintSettingsForm
                                         ref={this.hints}
                                         onChange={(settings) => this.setState({ hintSettings: settings })}
@@ -105,7 +122,15 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
                             <Tab.Content>
                                 <Tab.Pane eventKey="lives" className={styles.pane}>
-                                    <Card.Title className={styles.title}>Life Settings</Card.Title>
+                                    <Card.Title className={styles.title}>
+                                        <FontAwesomeIcon
+                                            fixedWidth
+                                            icon={faHeart}
+                                            className={styles.livesIcon}
+                                        />
+                                        <span className={styles.titleText}>Life Settings</span>
+                                    </Card.Title>
+
                                     <LifeSettingsForm
                                         ref={this.lives}
                                         onChange={(settings) => this.setState({ lifeSettings: settings })}
@@ -115,7 +140,15 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
                             <Tab.Content>
                                 <Tab.Pane eventKey="time" className={styles.pane}>
-                                    <Card.Title className={styles.title}>Time Settings</Card.Title>
+                                    <Card.Title className={styles.title}>
+                                        <FontAwesomeIcon
+                                            fixedWidth
+                                            icon={faStopwatch}
+                                            className={styles.timeIcon}
+                                        />
+                                        <span className={styles.titleText}>Time Settings</span>
+                                    </Card.Title>
+
                                     <TimeSettingsForm
                                         ref={this.time}
                                         onChange={(settings) => this.setState({ timeSettings: settings })}
@@ -173,6 +206,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
         this.hints.current?.reset();
         this.lives.current?.reset();
         this.time.current?.reset();
+        this.props.onReset();
     }
 }
 
