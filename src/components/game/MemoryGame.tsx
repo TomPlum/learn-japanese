@@ -53,6 +53,11 @@ interface MemoryGameState {
     streak: number;
 }
 
+/**
+ * The core component for driving game logic.
+ * Encapsulates logic for game answers, timers, lives, hints and score.
+ * The questions are orchestrated in here, but their logic is encapsulated
+ */
 class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     private readonly timer: React.RefObject<Timer>;
     private readonly countdown: React.RefObject<CountDown>;
@@ -91,6 +96,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         const { lives, correctAnswers, wrongAnswers} = this.state
         const { data, settings, onFinish } = this.props;
 
+        //Listens for a game failure. If we're out of lives, call onFinish().
         if (settings.lives.enabled && lives === 0) {
             onFinish({
                 reason: FailureReason.NO_LIVES_REMAINING,
@@ -234,28 +240,22 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                 const question = currentQuestion.getFieldValues(questionField)[0];
                 const answers = currentQuestion.getFieldValues(answerField);
 
-                if (!question) {
-                    throw new Error(currentQuestion + " has no value in its " + questionField + " field");
-                }
-
                 return (
                     <TextQuestion
-                        key={currentQuestion.getUniqueID()}
-                        question={question}
-                        answers={answers}
-                        answerField={answerField}
                         hidden={paused}
-                        isValid={this.handleAnswerValidity}
+                        answers={answers}
                         ref={this.question}
+                        question={question}
+                        answerField={answerField}
+                        key={currentQuestion.getUniqueID()}
+                        isValid={this.handleAnswerValidity}
                     />
                 );
             }
             case QuestionType.CHOICE: {
                 //What the user is going to be asked. Usually just a single string, but some kana have multiple romaji.
+                //Also, what the expected answer is going to be. For a choice question, it's only ever going to be one.
                 const questions = currentQuestion; //.getFieldValues(questionField);
-
-                //What the expected answer is going to be. For a choice question, it's only ever going to be one.
-                const expectedAnswer = currentQuestion.getFieldValues(answerField)[0];
 
                 //What wrong options will be presented? Takes the answer filter from the settings and excludes the question.
                 //We then filter our Learnable data and retrieve n options. Then we map chosen answer fields for them.
@@ -263,24 +263,16 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                 const wrong = Arrays.getRandomElements(chain.execute(data), settings.question.cards - 1);
                 const wrongAnswerOptions = wrong.map((answer: Learnable) => answer.getFieldValues(answerField)[0]);
 
-                if (!expectedAnswer) {
-                    throw new Error(currentQuestion + " has no value for its " + questionField + " field.");
-                }
-
-                if (!wrongAnswerOptions) {
-                    throw new Error("")
-                }
-
                 return (
                     <ChoiceQuestion
-                        key={currentQuestion.getUniqueID()}
-                        question={questions}
-                        questionField={questionField}
-                        answerField={answerField}
-                        wrong={wrongAnswerOptions.flatMap(answer => answer ? [answer] : [])}
                         hidden={paused}
-                        isValid={this.handleAnswerValidity}
                         ref={this.question}
+                        question={questions}
+                        answerField={answerField}
+                        questionField={questionField}
+                        key={currentQuestion.getUniqueID()}
+                        isValid={this.handleAnswerValidity}
+                        wrong={wrongAnswerOptions.flatMap(answer => answer ? [answer] : [])}
                     />
                 );
             }
@@ -296,9 +288,15 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             this.setState({ correctAnswers: correctAnswers.add(currentQuestion)});
 
             if (remainingQuestions.length === 0) {
-                //If we're out of questions, stop the timer and let the component know the pool has been exhausted.
+                //If we're out of questions...
+
+                //Stop the timer / countdown.
                 this.timer.current?.stop();
+
+                //Set the questions as exhausted and ensure paused is false.
                 this.setState({ hasExhaustedQuestions: true, paused: false });
+
+                //Notify the consuming parent of the game ending and pass data for results screen.
                 this.props.onFinish({
                     reason: undefined,
                     success: true,
@@ -354,12 +352,12 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
         //Update the next question to be displayed and the remaining questions with one less.
         this.setState({
-            currentQuestion: nextQuestion,
-            remainingQuestions: nextRemainingQuestions,
-            hasUsedHintThisQuestion: false,
-            hints: hasUsedHintThisQuestion ? hints - 1 : hints,
+            streak: streak + 1,
             score: this.getScore(),
-            streak: streak + 1
+            currentQuestion: nextQuestion,
+            hasUsedHintThisQuestion: false,
+            remainingQuestions: nextRemainingQuestions,
+            hints: hasUsedHintThisQuestion ? hints - 1 : hints
         });
     }
 
@@ -370,11 +368,13 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     private handleSkip = () => {
         const { settings } = this.props;
         const { wrongAnswers, lives, currentQuestion, failedToAnswer } = this.state;
+
         this.setState({
-            lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives,
+            failedToAnswer: failedToAnswer + 1,
             wrongAnswers: wrongAnswers.concat(currentQuestion),
-            failedToAnswer: failedToAnswer + 1
+            lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives
         });
+
         this.advanceNextQuestion();
     }
 
@@ -388,12 +388,12 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
         this.setState({
             currentQuestion: nextQuestion,
-            remainingQuestions: nextRemainingQuestions,
-            lives: this.props.settings.lives.enabled ? lives - 1 : lives,
-            wrongAnswers: wrongAnswers.concat(currentQuestion),
-            failedToAnswer: failedToAnswer + 1,
             hasUsedHintThisQuestion: false,
-            hints: hasUsedHintThisQuestion ? hints - 1 : hints
+            failedToAnswer: failedToAnswer + 1,
+            remainingQuestions: nextRemainingQuestions,
+            wrongAnswers: wrongAnswers.concat(currentQuestion),
+            hints: hasUsedHintThisQuestion ? hints - 1 : hints,
+            lives: this.props.settings.lives.enabled ? lives - 1 : lives
         });
     }
 
@@ -402,13 +402,13 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         const { data, onFinish } = this.props;
 
         onFinish({
-            reason: FailureReason.QUIT,
             success: false,
             livesRemaining: lives,
+            reason: FailureReason.QUIT,
+            correctAnswers: correctAnswers,
             totalQuestionsOffered: data.length,
             duration: this.timer?.current?.getCurrentTime(),
-            correctAnswers: correctAnswers,
-            wrongAnswers: wrongAnswers.concat(currentQuestion),
+            wrongAnswers: wrongAnswers.concat(currentQuestion)
         });
 
         this.reset();
