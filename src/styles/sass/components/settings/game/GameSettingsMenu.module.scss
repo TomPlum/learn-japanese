@@ -33,10 +33,6 @@
   min-height: 150px;
 }
 
-.check label {
-  color: white;
-}
-
 .rule {
   background-color: white;
   margin-left: 0;
@@ -44,6 +40,10 @@
 
 @mixin icon {
   font-size: 1.3em;
+}
+
+.navIcon {
+  font-size: 1.8em !important;
 }
 
 .questionIcon {

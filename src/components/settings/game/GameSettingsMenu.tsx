@@ -59,25 +59,45 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             <Nav variant="pills" fill>
                                 <Nav.Item>
                                     <Nav.Link eventKey="question">
-                                        <FontAwesomeIcon icon={faQuestionCircle} className={styles.questionIcon}/>
+                                        <FontAwesomeIcon
+                                            fixedWidth
+                                            icon={faQuestionCircle}
+                                            title="Question Settings"
+                                            className={[styles.questionIcon, styles.navIcon].join(" ")}
+                                        />
                                     </Nav.Link>
                                 </Nav.Item>
 
                                 <Nav.Item>
                                     <Nav.Link eventKey="hints">
-                                        <FontAwesomeIcon icon={faLightbulb} className={styles.hintsIcon}/>
+                                        <FontAwesomeIcon
+                                            fixedWidth
+                                            icon={faLightbulb}
+                                            title="Hint Settings"
+                                            className={[styles.hintsIcon, styles.navIcon].join(" ")}
+                                        />
                                     </Nav.Link>
                                 </Nav.Item>
 
                                 <Nav.Item>
                                     <Nav.Link eventKey="lives">
-                                        <FontAwesomeIcon icon={faHeart} className={styles.livesIcon}/>
+                                        <FontAwesomeIcon
+                                            fixedWidth
+                                            icon={faHeart}
+                                            title="Life Settings"
+                                            className={[styles.livesIcon, styles.navIcon].join(" ")}
+                                        />
                                     </Nav.Link>
                                 </Nav.Item>
 
                                 <Nav.Item>
                                     <Nav.Link eventKey="time">
-                                        <FontAwesomeIcon icon={faStopwatch} className={styles.timeIcon}/>
+                                        <FontAwesomeIcon
+                                            fixedWidth
+                                            icon={faStopwatch}
+                                            title="Time Settings"
+                                            className={[styles.timeIcon, styles.navIcon].join(" ")}
+                                        />
                                     </Nav.Link>
                                 </Nav.Item>
                             </Nav>

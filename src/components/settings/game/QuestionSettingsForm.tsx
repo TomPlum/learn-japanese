@@ -6,8 +6,8 @@ import { Col, Form, Row } from "react-bootstrap";
 import { Environment } from "../../../utility/Environment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KanaQuantityButton from "../../ui/buttons/KanaQuantityButton";
-import styles from "../../../styles/sass/components/settings/game/QuestionSettingsForm.module.scss";
 import QuestionSettings, { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
+import styles from "../../../styles/sass/components/settings/game/QuestionSettingsForm.module.scss";
 
 export interface QuestionSettingsFormProps {
     onChange: (settings: QuestionSettings) => void;
@@ -55,6 +55,11 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
             <>
                 <Row className={styles.section}>
                     <Col xs={12}>
+                        <p className={styles.leadingDescription}>
+                            Configure settings regarding the types of question you'll be asked.
+                        </p>
+                    </Col>
+                    <Col xs={12}>
                         <h5 className={styles.heading}>
                             <FontAwesomeIcon icon={faChevronRight}/> Question Type
                         </h5>
@@ -87,7 +92,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                 {type === QuestionType.CHOICE &&
                     <Row className={styles.section}>
                         <Col xs={12}>
-                            <p className={styles.quantityDescription}>You'll be shown {cards} kana to choose from.</p>
+                            <p className={styles.description}>You'll be shown {cards} answers to choose from.</p>
                         </Col>
 
                         <Col>
@@ -101,13 +106,22 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
 
                         <Col>
                             <KanaQuantityButton cards={4} selected={cards} onClick={this.handleQuantitySelect}>
-                                <FontAwesomeIcon fixedWidth className={styles.cardsIcon} icon={faThLarge}/>
+                                <FontAwesomeIcon
+                                    fixedWidth
+                                    icon={faThLarge}
+                                    className={styles.cardsIcon}
+                                />
                             </KanaQuantityButton>
                         </Col>
 
                         <Col>
                             <KanaQuantityButton cards={6} selected={cards} onClick={this.handleQuantitySelect}>
-                                <FontAwesomeIcon fixedWidth className={styles.cardsIcon} icon={faGripVertical} transform="grow-4"/>
+                                <FontAwesomeIcon
+                                    fixedWidth
+                                    icon={faGripVertical}
+                                    transform="grow-5 rotate-90"
+                                    className={styles.cardsIcon}
+                                />
                             </KanaQuantityButton>
                         </Col>
                     </Row>
@@ -118,17 +132,19 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                         <h5 className={styles.heading}>
                             <FontAwesomeIcon icon={faChevronRight}/> Track Score
                         </h5>
-                        <p className={styles.quantityDescription}>
-                            You gain 100 or 150 points per correctly answered kana or diagraph respectively.
+
+                        <p className={styles.description}>
+                            You gain a base score per correctly answered question.
                             Streaking will increase your multiplier.
                         </p>
+
                         <Form.Check
-                            type="switch"
                             id="score"
-                            className={styles.scoreSwitch}
+                            type="switch"
                             checked={score}
-                            onChange={() => this.setState({ score: !score })}
                             data-testid="score-switch"
+                            className={styles.scoreSwitch}
+                            onChange={() => this.setState({ score: !score })}
                         />
                     </Col>
                 </Row>

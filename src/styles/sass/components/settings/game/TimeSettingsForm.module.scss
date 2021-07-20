@@ -1,0 +1,11 @@
+@import "src/styles/sass/components/forms";
+
+@include SubForm;
+
+.active {
+  color: #FFF;
+}
+
+.inactive {
+  opacity: 0.6;
+}

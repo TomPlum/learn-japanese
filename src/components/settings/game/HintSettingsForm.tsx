@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { HintQuantity } from "../../../types/game/HintQuantity";
 import { Col, Form, Row } from "react-bootstrap";
-import styles from "../../../styles/sass/components/settings/game/GameSettingsMenu.module.scss";
 import HintSettings, { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
+import styles from "../../../styles/sass/components/settings/game/HintSettingsForm.module.scss";
 
 export interface HintSettingsFormProps {
     onChange: (settings: HintSettings) => void;
@@ -43,6 +43,11 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
         return (
             <Row>
                 <Col>
+                    <p className={styles.leadingDescription}>
+                        Hints allow you to reveal a small piece of information about the current question if you're
+                        struggling.
+                    </p>
+
                     <Form.Check
                         inline
                         label="1"
@@ -51,6 +56,7 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
                         onChange={() => this.setState({ quantity: HintQuantity.ONE })}
                         data-testid="1"
                     />
+
                     <Form.Check
                         inline
                         label="3"
@@ -59,6 +65,7 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
                         onChange={() => this.setState({ quantity: HintQuantity.THREE })}
                         data-testid="3"
                     />
+
                     <Form.Check
                         inline
                         label="5"
@@ -67,6 +74,7 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
                         onChange={() => this.setState({ quantity: HintQuantity.FIVE })}
                         data-testid="5"
                     />
+
                     <Form.Check
                         label="Unlimited"
                         className={styles.check}

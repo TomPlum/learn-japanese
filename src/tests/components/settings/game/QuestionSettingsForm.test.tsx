@@ -83,21 +83,21 @@ test('Selecting 2 kana quantity should update the description', () => {
     const { multipleChoiceButton } = setup();
     fireEvent.click(multipleChoiceButton);
     fireEvent.click(screen.getByText('2'));
-    expect(screen.getByText('You\'ll be shown 2 kana to choose from.'));
+    expect(screen.getByText('You\'ll be shown 2 answers to choose from.'));
 });
 
 test('Selecting 4 kana quantity should update the description', () => {
     const { multipleChoiceButton } = setup();
     fireEvent.click(multipleChoiceButton);
     fireEvent.click(screen.getByText('4'));
-    expect(screen.getByText('You\'ll be shown 4 kana to choose from.'));
+    expect(screen.getByText('You\'ll be shown 4 answers to choose from.'));
 });
 
 test('Selecting 6 kana quantity should update the description', () => {
     const { multipleChoiceButton } = setup();
     fireEvent.click(multipleChoiceButton);
     fireEvent.click(screen.getByText('6'));
-    expect(screen.getByText('You\'ll be shown 6 kana to choose from.'));
+    expect(screen.getByText('You\'ll be shown 6 answers to choose from.'));
 });
 
 test('Turning off the score tracking system should set the boolean to false', () => {
