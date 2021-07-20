@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import LifeSettingsForm from "../../../../components/settings/kana/LifeSettingsForm";
+import LifeSettingsForm from "../../../../components/settings/game/LifeSettingsForm";
 import { LifeQuantity } from "../../../../types/game/LifeQuantity";
 import { LifeSettingsBuilder } from "../../../../types/session/settings/game/LifeSettings";
 

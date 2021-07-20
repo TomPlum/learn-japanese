@@ -6,7 +6,7 @@ import KyoikuGradeButton from "../../ui/buttons/KyoikuGradeButton";
 import Arrays from "../../../utility/Arrays";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
-import { CustomLearnMenuProps } from "../ModeSelectionMenu";
+import { CustomLearnMenuProps } from "../../learn/ModeSelectionMenu";
 import TemplateString from "../../../types/TemplateString";
 import { SessionSettings } from "../../../types/session/settings/SessionSettings";
 import { KanjiSettingsBuilder } from "../../../types/session/settings/data/KanjiSettings";
@@ -18,7 +18,7 @@ interface KanjiSettingsMenuState {
     joyo: boolean;
 }
 
-class KanjiSettingsMenu extends Component<CustomLearnMenuProps, KanjiSettingsMenuState> {
+class KanjiSettingsForm extends Component<CustomLearnMenuProps, KanjiSettingsMenuState> {
     constructor(props: CustomLearnMenuProps | Readonly<CustomLearnMenuProps>) {
         super(props);
         this.state = {
@@ -177,4 +177,4 @@ class KanjiSettingsMenu extends Component<CustomLearnMenuProps, KanjiSettingsMen
     }
 }
 
-export default KanjiSettingsMenu;
+export default KanjiSettingsForm;

@@ -1,14 +1,14 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
-import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
-import { SessionSettings } from "../../../types/session/settings/SessionSettings";
-import { KanjiSettingsBuilder } from "../../../types/session/settings/data/KanjiSettings";
-import LearnSettings from "../../../types/session/settings/LearnSettings";
+import KanjiSettingsForm from "../../../../components/settings/data/KanjiSettingsForm";
+import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
+import { SessionSettings } from "../../../../types/session/settings/SessionSettings";
+import { KanjiSettingsBuilder } from "../../../../types/session/settings/data/KanjiSettings";
+import LearnSettings from "../../../../types/session/settings/LearnSettings";
 
 const onSelectedHandler = jest.fn();
 
 const setup = () => {
-    const component = render(<KanjiSettingsMenu onSelect={onSelectedHandler} />);
+    const component = render(<KanjiSettingsForm onSelect={onSelectedHandler} />);
     return {
         grade1: component.getByText('Grade 1'),
         grade2: component.getByText('Grade 2'),

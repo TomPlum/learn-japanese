@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import HintSettingsForm from "../../../../components/settings/kana/HintSettingsForm";
+import HintSettingsForm from "../../../../components/settings/game/HintSettingsForm";
 import { HintSettingsBuilder } from "../../../../types/session/settings/game/HintSettings";
 import { HintQuantity } from "../../../../types/game/HintQuantity";
 

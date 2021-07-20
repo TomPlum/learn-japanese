@@ -2,7 +2,6 @@ import { faFire, faFont, faGraduationCap, faStopwatch, faVial } from "@fortaweso
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
 import { PlayMenuModes } from "../../MenuModes";
 import PlayMode from "../../session/PlayMode";
-import KanaGameSettingsMenu from "../../../components/settings/KanaGameSettingsMenu";
 import { KanaSettingsBuilder } from "../../session/settings/data/KanaSettings";
 import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";
@@ -18,6 +17,7 @@ import DiagraphFilter from "../../../filters/kana/DiagraphFilter";
 import { Kana } from "../../kana/Kana";
 import { Learnable } from "../../learn/Learnable";
 import KanaTypeFilter from "../../../filters/kana/KanaTypeFilter";
+import KanaSettingsForm from "../../../components/settings/data/KanaSettingsForm";
 
 export default class PlayKanaModes implements PlayMenuModes {
     getModes(): PlayMode[] {
@@ -104,7 +104,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                 new KanaSettingsBuilder().withEverything().build(),
                 new GameSettingsBuilder().build(),
                 true,
-                KanaGameSettingsMenu
+                KanaSettingsForm
             )
         ];
     }

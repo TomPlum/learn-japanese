@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import QuestionSettingsForm from "./kana/QuestionSettingsForm";
-import HintSettingsForm from "./kana/HintSettingsForm";
-import LifeSettingsForm from "./kana/LifeSettingsForm";
-import TimeSettingsForm from "./kana/TimeSettingsForm";
-import GameSettings, { GameSettingsBuilder } from "../../types/session/settings/game/GameSettings";
-import styles from "../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
+import QuestionSettingsForm from "./QuestionSettingsForm";
+import HintSettingsForm from "./HintSettingsForm";
+import LifeSettingsForm from "./LifeSettingsForm";
+import TimeSettingsForm from "./TimeSettingsForm";
+import GameSettings, { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
+import styles from "../../../styles/sass/components/settings/kana/KanaGameSettingsMenu.module.scss";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faCheck, faGamepad, faHeart, faLightbulb, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import QuestionSettings from "../../types/session/settings/game/QuestionSettings";
-import HintSettings from "../../types/session/settings/game/HintSettings";
-import LifeSettings from "../../types/session/settings/game/LifeSettings";
-import TimeSettings from "../../types/session/settings/game/TimeSettings";
+import QuestionSettings from "../../../types/session/settings/game/QuestionSettings";
+import HintSettings from "../../../types/session/settings/game/HintSettings";
+import LifeSettings from "../../../types/session/settings/game/LifeSettings";
+import TimeSettings from "../../../types/session/settings/game/TimeSettings";
 
 export interface GameSettingsMenuProps {
     onSelect: (settings: GameSettings) => void;

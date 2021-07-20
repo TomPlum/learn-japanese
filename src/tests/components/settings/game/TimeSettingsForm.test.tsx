@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import TimeSettingsForm from "../../../../components/settings/kana/TimeSettingsForm";
+import TimeSettingsForm from "../../../../components/settings/game/TimeSettingsForm";
 import { TimeSettingsBuilder } from "../../../../types/session/settings/game/TimeSettings";
 
 const onChangeHandler = jest.fn();

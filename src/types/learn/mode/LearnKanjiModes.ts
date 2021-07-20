@@ -1,7 +1,7 @@
 import { faClock, faFillDrip, faPaintBrush, faSchool, faYenSign } from "@fortawesome/free-solid-svg-icons";
 import { KyoikuGrade } from "../../kanji/KyoikuGrade";
 import CustomLearningMode from "../CustomLearningMode";
-import KanjiSettingsMenu from "../../../components/learn/kanji/KanjiSettingsMenu";
+import KanjiSettingsForm from "../../../components/settings/data/KanjiSettingsForm";
 import { LearnMenuModes } from "../../MenuModes";
 import LearnMode from "../../session/LearnMode";
 import { KanjiSettingsBuilder } from "../../session/settings/data/KanjiSettings";
@@ -16,7 +16,7 @@ export default class LearnKanjiModes implements LearnMenuModes {
             new LearnMode("Numbers", "#1785e2", faYenSign, new KanjiSettingsBuilder().withTags(["number"]).build(), defaultLearnSettings),
             new LearnMode("Colours", "#a01219", faFillDrip, new KanjiSettingsBuilder().withTags(["colour"]).build(), defaultLearnSettings),
             new LearnMode("Time", "#fc3131", faClock, new KanjiSettingsBuilder().withTags(["time"]).build(), defaultLearnSettings),
-            new CustomLearningMode(KanjiSettingsMenu)
+            new CustomLearningMode(KanjiSettingsForm)
         ];
     }
 

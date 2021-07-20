@@ -17,7 +17,7 @@ import { AppMode } from "../../types/AppMode";
 import { MenuModes } from "../../types/MenuModes";
 import { SessionSettings } from "../../types/session/settings/SessionSettings";
 import LearnSettings from "../../types/session/settings/LearnSettings";
-import GameSettingsMenu from "../settings/GameSettingsMenu";
+import GameSettingsMenu from "../settings/game/GameSettingsMenu";
 import styles from "../../styles/sass/components/learn/ModeSelectionMenu.module.scss";
 
 export interface CustomLearnMenuProps {

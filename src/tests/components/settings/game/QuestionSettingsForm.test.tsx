@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import QuestionSettingsForm from "../../../../components/settings/kana/QuestionSettingsForm";
+import QuestionSettingsForm from "../../../../components/settings/game/QuestionSettingsForm";
 import { QuestionType } from "../../../../types/game/QuestionType";
 import { Environment } from "../../../../utility/Environment";
 import QuestionSettings from "../../../../types/session/settings/game/QuestionSettings";
