@@ -62,7 +62,9 @@ test("It should not call the onChange handler if the value does not match the pa
 
 test("It should set the help pop-over title and text to the data in the passed field", () => {
     const { help } = setup();
+
     fireEvent.mouseOver(help);
+
     expect(screen.getByTitle("English Meaning"));
-    expect(screen.getByText("Enter one of the meanings as a single English word."));
+    expect(screen.getByText("The meaning of the word or character in English. Usually a single word."));
 });
