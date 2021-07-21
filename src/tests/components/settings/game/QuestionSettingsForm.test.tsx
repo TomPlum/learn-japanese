@@ -4,6 +4,8 @@ import { QuestionType } from "../../../../types/game/QuestionType";
 import { Environment } from "../../../../utility/Environment";
 import QuestionSettings from "../../../../types/session/settings/game/QuestionSettings";
 import { getValueLastCalledWith } from "../../../Queries";
+import userEvent from "@testing-library/user-event";
+import LearnableField from "../../../../types/learn/LearnableField";
 
 const onSelectHandler = jest.fn();
 const environment = jest.fn();
@@ -11,9 +13,11 @@ const environment = jest.fn();
 const setup = () => {
     const component = render(<QuestionSettingsForm onChange={onSelectHandler}/>);
     return {
-        multipleChoiceButton: screen.getByText('Multiple Choice'),
-        textModeButton: screen.getByText('Text'),
-        score: screen.getByTestId('score-switch'),
+        multipleChoiceButton: component.getByText('Multiple Choice'),
+        textModeButton: component.getByText('Text'),
+        questionFieldSelector: component.getAllByTestId('learnable-field-selector')[0],
+        answerFieldSelector: component.getAllByTestId('learnable-field-selector')[1],
+        score: component.getByTestId('score-switch'),
         ...component
     }
 }
@@ -104,4 +108,38 @@ test('Turning off the score tracking system should set the boolean to false', ()
     const { score } = setup();
     fireEvent.click(score);
     expect(getValueLastCalledWith<QuestionSettings>(onSelectHandler).score).toBe(false);
+});
+
+test('The question field should default to romaji', () => {
+    const { questionFieldSelector } = setup();
+    expect(questionFieldSelector).toHaveValue('Rōmaji');
+});
+
+test('The answer field should default to kana', () => {
+    const { answerFieldSelector } = setup();
+    expect(answerFieldSelector).toHaveValue('Kana');
+});
+
+test('Selecting a question field value should remove it from the answer field selector', () => {
+    const { questionFieldSelector, answerFieldSelector } = setup();
+    userEvent.selectOptions(questionFieldSelector, "Japanese");
+    expect(() => userEvent.selectOptions(answerFieldSelector, "Japanese")).toThrow('Value "Japanese" not found in options');
+});
+
+test('Selecting an answer field value should remove it from the question field selector', () => {
+    const { questionFieldSelector, answerFieldSelector } = setup();
+    userEvent.selectOptions(answerFieldSelector, "English Meaning");
+    expect(() => userEvent.selectOptions(questionFieldSelector, "English Meaning")).toThrow('Value "English Meaning" not found in options');
+});
+
+test('Changing the question field should call the onSelect event handler with the updated settings', () => {
+    const { questionFieldSelector } = setup();
+    userEvent.selectOptions(questionFieldSelector, "English Meaning");
+    expect(getValueLastCalledWith<QuestionSettings>(onSelectHandler).questionField).toBe(LearnableField.MEANING);
+});
+
+test('Changing the answer field should call the onSelect event handler with the updated settings', () => {
+    const { answerFieldSelector } = setup();
+    userEvent.selectOptions(answerFieldSelector, "On'Yomi Reading");
+    expect(getValueLastCalledWith<QuestionSettings>(onSelectHandler).answerField).toBe(LearnableField.ONYOMI_READING);
 });

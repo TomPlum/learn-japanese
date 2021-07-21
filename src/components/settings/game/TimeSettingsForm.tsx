@@ -103,7 +103,6 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                             value={seconds}
                             variant="primary"
                             disabled={timed}
-                            data-testid="seconds-slider"
                             onChange={this.onChangeCountDownSeconds}
                         />
                     )}

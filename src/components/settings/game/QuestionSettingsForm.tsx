@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KanaQuantityButton from "../../ui/buttons/KanaQuantityButton";
 import QuestionSettings, { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
 import styles from "../../../styles/sass/components/settings/game/QuestionSettingsForm.module.scss";
+import LearnableField from "../../../types/learn/LearnableField";
+import LearnableFieldSelector from "../../ui/LearnableFieldSelector";
 
 export interface QuestionSettingsFormProps {
     onChange: (settings: QuestionSettings) => void;
@@ -17,6 +19,8 @@ interface QuestionSettingsFormState {
     type: QuestionType;
     cards: number;
     score: boolean;
+    questionField: LearnableField;
+    answerField: LearnableField;
 }
 
 class QuestionSettingsForm extends Component<QuestionSettingsFormProps, QuestionSettingsFormState> {
@@ -24,6 +28,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
     private readonly defaultState = new QuestionSettingsBuilder()
         .withType(QuestionType.TEXT)
         .withCardQuantity(1)
+        .withFields(LearnableField.ROMAJI, LearnableField.KANA)
         .withScoreTracking(true)
         .build();
 
@@ -32,7 +37,9 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
         this.state = {
             type: this.defaultState.type,
             cards: this.defaultState.cards,
-            score: this.defaultState.score
+            score: this.defaultState.score,
+            questionField: this.defaultState.questionField,
+            answerField: this.defaultState.answerField
         }
     }
 
@@ -42,14 +49,21 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
 
     componentDidUpdate(prevProps: Readonly<QuestionSettingsFormProps>, prevState: Readonly<QuestionSettingsFormState>) {
         if (prevState !== this.state) {
-            const { type, cards, score } = this.state;
-            const settings = new QuestionSettingsBuilder().withType(type).withCardQuantity(cards).withScoreTracking(score).build();
+            const { type, cards, score, questionField, answerField } = this.state;
+
+            const settings = new QuestionSettingsBuilder()
+                .withType(type)
+                .withCardQuantity(cards)
+                .withScoreTracking(score)
+                .withFields(questionField, answerField)
+                .build();
+
             this.props.onChange(settings);
         }
     }
 
     render() {
-        const { type, cards, score } = this.state;
+        const { type, cards, score, questionField, answerField } = this.state;
 
         return (
             <>
@@ -130,6 +144,39 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                 <Row className={styles.section}>
                     <Col xs={12}>
                         <h5 className={styles.heading}>
+                            <FontAwesomeIcon icon={faChevronRight}/> Question & Answer Fields
+                        </h5>
+                    </Col>
+
+                    <Col xs={12}>
+                        <p className={styles.description}>
+                            Select which piece of information you are given in the question and what you must give
+                            as the answer. You cannot select the same field for both.
+                        </p>
+                    </Col>
+
+                    <Col xs={6}>
+                        <h6 className={styles.heading}>Give me the...</h6>
+                        <LearnableFieldSelector
+                            exclude={answerField}
+                            default={questionField}
+                            onSelect={(field: LearnableField) => this.setState({ questionField: field })}
+                        />
+                    </Col>
+
+                    <Col xs={6}>
+                        <h6 className={styles.heading}>Ask me the...</h6>
+                        <LearnableFieldSelector
+                            exclude={questionField}
+                            default={answerField}
+                            onSelect={(field: LearnableField) => this.setState({ answerField: field })}
+                        />
+                    </Col>
+                </Row>
+
+                <Row className={styles.section}>
+                    <Col xs={12}>
+                        <h5 className={styles.heading}>
                             <FontAwesomeIcon icon={faChevronRight}/> Track Score
                         </h5>
 
@@ -155,7 +202,9 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
     reset = () => this.setState({
         type: this.defaultState.type,
         cards: this.defaultState.cards,
-        score: this.defaultState.score
+        score: this.defaultState.score,
+        questionField: this.defaultState.questionField,
+        answerField: this.defaultState.answerField
     });
 
     private handleQuantitySelect = (quantity: number) => {

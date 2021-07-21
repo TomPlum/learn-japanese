@@ -60,6 +60,7 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
                         onChange={() => this.setState({ enabled: !enabled })}
                         data-testid="Enable"
                     />
+
                     <LivesSelector
                         ref={this.selector}
                         disabled={!enabled}
