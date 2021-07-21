@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import TimeSettingsForm from "../../../../components/settings/game/TimeSettingsForm";
 import { TimeSettingsBuilder } from "../../../../types/session/settings/game/TimeSettings";
-import { getByTextWithElements, getByTextWithMarkup } from "../../../Queries";
 
 const onChangeHandler = jest.fn();
 
@@ -81,7 +80,7 @@ test('Selecting countdown and dragging the slider should change the seconds per 
 
     fireEvent.click(countdown);
 
-    const rangeSlider = container.firstChild?.firstChild?.childNodes[5].firstChild!;
+    const rangeSlider = container.firstChild?.firstChild?.childNodes[5].firstChild!; // Bad! :( How else can we select?
     fireEvent.change(rangeSlider, { target: { value: 45 }});
 
     expect(onChangeHandler).toHaveBeenLastCalledWith(

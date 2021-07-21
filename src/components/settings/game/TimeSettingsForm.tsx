@@ -74,7 +74,7 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                         />
                     </h5>
 
-                    <p className={[styles.description, countdown ? styles.inactive : styles.active].join(" ")}>
+                    <p className={[styles.description, timed ? styles.active : styles.inactive].join(" ")}>
                         You'll simply be timed starting from 00:00 and the timer will stop when you finish the game
                         or lose. Useful for speed-running certain topics to test your mastery.
                     </p>
@@ -91,7 +91,7 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                         />
                     </h5>
 
-                    <p className={[styles.description, timed ? styles.inactive : styles.active].join(" ")}>
+                    <p className={[styles.description, countdown ? styles.active : styles.inactive].join(" ")}>
                         You'll have a set number of seconds to answer each question. Failing to answer correctly in
                         the given time will lose you a life. Answering correctly will reset the timer.
                         {countdown && <span> Select the number of seconds per question below:</span>}
