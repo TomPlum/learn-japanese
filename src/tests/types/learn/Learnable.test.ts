@@ -27,7 +27,7 @@ describe("Learnable", () => {
         it("Should return a list of romaji strings when specifying the romaji field", () => {
             const data = new Kana("へ", ["he", "e"], KanaType.HIRAGANA, KanaColumn.H, false);
             const fieldValues = data.getFieldValues(LearnableField.ROMAJI);
-            expect(fieldValues).toStrictEqual(["he"]);
+            expect(fieldValues).toStrictEqual(["he", "e"]);
         });
 
         it("Should return the kanji variation when specifying the kanji field", () => {

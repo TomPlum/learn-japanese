@@ -68,8 +68,7 @@ export abstract class Learnable {
     public getFieldValues(field: LearnableField): string[] {
         switch (field) {
             case LearnableField.ROMAJI: {
-                const generator = new RomajiGenerator();
-                return this.getKana().map((kana: string) => generator.generate(kana));
+                return this.getRomaji();
             }
             case LearnableField.KANA: {
                 return this.getKana();
@@ -147,6 +146,22 @@ export abstract class Learnable {
      */
     public getKanjiVariation(): string | undefined {
         return undefined;
+    }
+
+    /**
+     * Rōmaji is the Romanisation of the Japanese language.
+     *
+     * The {@link RomajiGenerator} can convert a kana string into Rōmaji and
+     * the default implementation of this function does so based on its kana.
+     *
+     * However, some data objects, like {@link Kana} itself, has a single kana value,
+     * but has multiple sounds and therefore rōmaji values. I.e. ヘ -> "he" or "e".
+     * This function can therefore be overridden and different values can be provided.
+     *
+     * @return rōmaji The Romanised variations of the objects' kana.
+     */
+    public getRomaji(): string[] {
+        return this.getKana().map((kana: string) => new RomajiGenerator().generate(kana));
     }
 
     /**

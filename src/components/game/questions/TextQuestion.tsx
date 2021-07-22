@@ -10,7 +10,7 @@ import styles from "../../../styles/sass/components/game/questions/TextQuestion.
 export interface TextQuestionProps extends GameQuestionProps {
     question: string;
     answerField: LearnableField;
-    answers: (string | undefined)[];
+    answers: string[];
     className?: string;
 }
 

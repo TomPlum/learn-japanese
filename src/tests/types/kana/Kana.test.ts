@@ -69,7 +69,7 @@ describe("Kana", () => {
 
       it("Should return the Kana rōmaji", () => {
           const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-          const romaji = kana.romaji;
+          const romaji = kana.getRomaji();
           expect(romaji[0]).toEqual("a");
       });
    });

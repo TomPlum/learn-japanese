@@ -61,6 +61,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                             .build()
                     )
                     .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
+                    .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
                     .build()
             ),
             new PlayMode("Kana", "#a01219", faKickstarterK,

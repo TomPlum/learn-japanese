@@ -24,10 +24,12 @@ export class Kana extends Learnable {
     }
 
     public getFullRomajiString(): string {
-        if (this.romaji.length === 1) {
-            return this.romaji[0];
+        const romaji = this.getRomaji();
+
+        if (romaji.length === 1) {
+            return romaji[0];
         } else {
-            return this.romaji[0] + " (" + this.romaji[1] + ")";
+            return romaji[0] + " (" + romaji[1] + ")";
         }
     }
 
@@ -56,10 +58,6 @@ export class Kana extends Learnable {
         return this._code;
     }
 
-    get romaji(): string[] {
-        return this._romaji;
-    }
-
     get type(): KanaType {
         return this._type;
     }
@@ -81,17 +79,21 @@ export class Kana extends Learnable {
     }
 
     getMeanings(): string[] {
-        return this.romaji;
+        return this._romaji;
     }
 
     getUniqueID(): string {
         return this._code;
     }
 
+    getRomaji(): string[] {
+        return this._romaji;
+    }
+
     public equals(other: any): boolean {
         if (!other) return false;
         if (!(other instanceof Kana)) return false;
-        if (!Arrays.areEqual(this.romaji, other.romaji)) return false;
+        if (!Arrays.areEqual(this.getRomaji(), other.getRomaji())) return false;
         if (other.type !== this.type) return false;
         if (other.column !== this.column) return false;
         if (other.isDiacritical !== this.isDiacritical) return false;
