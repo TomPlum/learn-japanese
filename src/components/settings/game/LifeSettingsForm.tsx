@@ -1,6 +1,5 @@
 import React, { ChangeEvent, Component } from "react";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
-import LivesSelector from "../../ui/LivesSelector";
 import { Col, Form, Row } from "react-bootstrap";
 import LifeSettings, { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
 import styles from "../../../styles/sass/components/settings/game/LifeSettingsForm.module.scss";
@@ -17,12 +16,10 @@ interface LifeSettingsFormState {
 
 class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsFormState> {
 
-    private readonly selector: React.RefObject<LivesSelector>;
     private readonly defaultState = new LifeSettingsBuilder().isEnabled(false).withQuantity(LifeQuantity.ZERO).build();
 
     constructor(props: LifeSettingsFormProps | Readonly<LifeSettingsFormProps>) {
         super(props);
-        this.selector = React.createRef();
         this.state = {
             enabled: this.defaultState.enabled,
             quantity: this.defaultState.quantity,
@@ -88,7 +85,6 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
     }
 
     reset = () => {
-        this.selector.current?.reset();
         this.setState({
             enabled: this.defaultState.enabled,
             quantity: this.defaultState.quantity,
