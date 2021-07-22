@@ -1,4 +1,7 @@
 import LearnableField from "../../../types/learn/LearnableField";
+import katakana from "../../../data/Katakana";
+import hiragana from "../../../data/Hiragana";
+import { joyo } from "../../../data/Kanji";
 
 describe("Learnable Field", () => {
     describe("From Name String", () => {
@@ -36,6 +39,28 @@ describe("Learnable Field", () => {
 
         it("Should throw an exception if an unknown name is passed", () => {
             expect(() => LearnableField.fromNameString("Blah")).toThrow("Invalid Learnable Field Name: Blah");
+        });
+    });
+
+    describe("Validation Regex", () => {
+        it("Kana", () => {
+            const kana = hiragana().concat(katakana()).map(it => it.code);
+            kana.forEach(kana => expect(kana).toMatch(LearnableField.KANA.validationRegex));
+        });
+
+        it("Kanji", () => {
+            const kanji = joyo().map(it => it.code);
+            kanji.forEach(kana => expect(kana).toMatch(LearnableField.KANJI.validationRegex));
+        });
+
+        it("On'Yomi Readings", () => {
+            const readings = joyo().flatMap(it => it.on).map(it => it.kana);
+            readings.forEach(kana => expect(kana).toMatch(LearnableField.ONYOMI_READING.validationRegex));
+        });
+
+        it("Kun'Yomi Readings", () => {
+            const readings = joyo().flatMap(it => it.kun).map(it => it.kana);
+            readings.forEach(kana => expect(kana).toMatch(LearnableField.KUNYOMI_READING.validationRegex));
         });
     });
 

@@ -5,12 +5,12 @@ export default class LearnableField {
     private readonly _validationRegex: RegExp;
 
     public static MEANING = new LearnableField("English Meaning", "The meaning of the word or character in English. Usually a single word.", /^[A-Za-z\s]*$/);
-    public static KANJI = new LearnableField("Kanji", "Some words can be expressed as a single Kanji.", /.*/);
-    public static KANA = new LearnableField("Kana", "The Japanese syllabaries are kana. All words can expressed in Hiragana or Katakana.", /^[A-Za-z]+$/);
+    public static KANJI = new LearnableField("Kanji", "Some words can be expressed as a single Kanji.", /^[一-龯]*$/);
+    public static KANA = new LearnableField("Kana", "The Japanese syllabaries are kana. All words can expressed in Hiragana or Katakana.", /^[ぁ-んァ-ン]+$/);
     public static JAPANESE = new LearnableField("Japanese", "Some words can be expressed in all kanji or a mixture of kanji and kana.", /^[A-Za-z]*$/)
     public static ROMAJI = new LearnableField("Rōmaji", "The romanisation of Japanese kana. I.e. 'a', 'ke' or 'zu'.", /^[A-Za-z]*$/);
-    public static ONYOMI_READING = new LearnableField("On'Yomi Reading", "The original Chinese readings of a kanji character.", /^[A-Za-z]*$/);
-    public static KUNYOMI_READING = new LearnableField("Kun'Yomi Reading", "The Japanese readings of a kanji character.", /^[A-Za-z]*$/);
+    public static ONYOMI_READING = new LearnableField("On'Yomi Reading", "The original Chinese readings of a kanji character in Hiragana.", /^[ぁ-んァ-ン]+$/);
+    public static KUNYOMI_READING = new LearnableField("Kun'Yomi Reading", "The Japanese readings of a kanji character in Hiragana.", /^[ぁ-んァ-ン]+$/);
     public static RANDOM = new LearnableField("Random", "A random selection of any of the available data fields.", /.*/);
 
     private constructor(name: string, description: string, validationRegex: RegExp) {
