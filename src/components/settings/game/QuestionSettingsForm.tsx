@@ -10,6 +10,7 @@ import QuestionSettings, { QuestionSettingsBuilder } from "../../../types/sessio
 import styles from "../../../styles/sass/components/settings/game/QuestionSettingsForm.module.scss";
 import LearnableField from "../../../types/learn/LearnableField";
 import LearnableFieldSelector from "../../ui/select/LearnableFieldSelector";
+import ScrollableContainer from "../../ui/ScrollableContainer";
 
 export interface QuestionSettingsFormProps {
     onChange: (settings: QuestionSettings) => void;
@@ -66,7 +67,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
         const { type, cards, score, questionField, answerField } = this.state;
 
         return (
-            <>
+            <ScrollableContainer height={338.5}>
                 <Row className={styles.section}>
                     <Col xs={12}>
                         <p className={styles.leadingDescription}>
@@ -195,7 +196,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                         />
                     </Col>
                 </Row>
-            </>
+            </ScrollableContainer>
         );
     }
 

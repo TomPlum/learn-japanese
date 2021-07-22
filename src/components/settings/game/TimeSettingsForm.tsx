@@ -3,6 +3,7 @@ import { Col, Form, Row } from "react-bootstrap";
 import TimeSettings, { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 import styles from "../../../styles/sass/components/settings/game/TimeSettingsForm.module.scss";
 import RangeSlider from "react-bootstrap-range-slider";
+import ScrollableContainer from "../../ui/ScrollableContainer";
 
 export interface TimeSettingsFormProps {
     onChange: (settings: TimeSettings) => void;
@@ -53,66 +54,68 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
         const { timed, countdown, seconds } = this.state;
 
         return (
-            <Row>
-                <Col>
-                    <div className={styles.descriptionWrapper}>
-                        <p className={styles.leadingDescription}>
-                            Configure the style of timer you want for the game or disable it entirely.
+            <ScrollableContainer height={338.5}>
+                <Row>
+                    <Col>
+                        <div className={styles.descriptionWrapper}>
+                            <p className={styles.leadingDescription}>
+                                Configure the style of timer you want for the game or disable it entirely.
+                            </p>
+                        </div>
+
+                        <h5 className={styles.heading}>
+                            <Form.Check
+                                inline
+                                type="switch"
+                                label="Timed"
+                                id="time"
+                                className={styles.check}
+                                checked={timed}
+                                onChange={this.onChangeTimed}
+                                data-testid="Timed"
+                            />
+                        </h5>
+
+                        <p className={[styles.description, timed ? styles.active : styles.inactive].join(" ")}>
+                            You'll simply be timed starting from 00:00 and the timer will stop when you finish the game
+                            or lose. Useful for speed-running certain topics to test your mastery.
                         </p>
-                    </div>
 
-                    <h5 className={styles.heading}>
-                        <Form.Check
-                            inline
-                            type="switch"
-                            label="Timed"
-                            id="time"
-                            className={styles.check}
-                            checked={timed}
-                            onChange={this.onChangeTimed}
-                            data-testid="Timed"
-                        />
-                    </h5>
+                        <h5 className={styles.heading}>
+                            <Form.Check
+                                type="switch"
+                                label="Count Down"
+                                id="countdown"
+                                className={styles.check}
+                                checked={countdown}
+                                onChange={this.onChangeCountDown}
+                                data-testid="Countdown"
+                            />
+                        </h5>
 
-                    <p className={[styles.description, timed ? styles.active : styles.inactive].join(" ")}>
-                        You'll simply be timed starting from 00:00 and the timer will stop when you finish the game
-                        or lose. Useful for speed-running certain topics to test your mastery.
-                    </p>
+                        <p className={[styles.description, countdown ? styles.active : styles.inactive].join(" ")}>
+                            You'll have a set number of seconds to answer each question. Failing to answer correctly in
+                            the given time will lose you a life. Answering correctly will reset the timer.
+                            {countdown && <span> Select the number of seconds per question below:</span>}
+                        </p>
 
-                    <h5 className={styles.heading}>
-                        <Form.Check
-                            type="switch"
-                            label="Count Down"
-                            id="countdown"
-                            className={styles.check}
-                            checked={countdown}
-                            onChange={this.onChangeCountDown}
-                            data-testid="Countdown"
-                        />
-                    </h5>
-
-                    <p className={[styles.description, countdown ? styles.active : styles.inactive].join(" ")}>
-                        You'll have a set number of seconds to answer each question. Failing to answer correctly in
-                        the given time will lose you a life. Answering correctly will reset the timer.
-                        {countdown && <span> Select the number of seconds per question below:</span>}
-                    </p>
-
-                    {countdown && (
-                        <RangeSlider
-                            min={0} max={60}
-                            value={seconds}
-                            variant="primary"
-                            disabled={timed}
-                            tooltip="auto"
-                            tooltipPlacement="bottom"
-                            inputProps={{}}
-                            data-testid="seconds-slider"
-                            onAfterChange={() => {}} //TODO: Remove once lib is updated to not enforce this prop.
-                            onChange={this.onChangeCountDownSeconds}
-                         />
-                    )}
-                </Col>
-            </Row>
+                        {countdown && (
+                            <RangeSlider
+                                min={0} max={60}
+                                value={seconds}
+                                variant="primary"
+                                disabled={timed}
+                                tooltip="auto"
+                                tooltipPlacement="bottom"
+                                inputProps={{}}
+                                data-testid="seconds-slider"
+                                onAfterChange={() => {}} //TODO: Remove once lib is updated to not enforce this prop.
+                                onChange={this.onChangeCountDownSeconds}
+                             />
+                        )}
+                    </Col>
+                </Row>
+            </ScrollableContainer>
         );
     }
 

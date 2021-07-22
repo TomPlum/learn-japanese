@@ -4,6 +4,7 @@ import { Col, Form, Row } from "react-bootstrap";
 import LifeSettings, { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
 import styles from "../../../styles/sass/components/settings/game/LifeSettingsForm.module.scss";
 import RangeSlider from "react-bootstrap-range-slider";
+import ScrollableContainer from "../../ui/ScrollableContainer";
 
 interface LifeSettingsFormProps {
     onChange: (settings: LifeSettings) => void;
@@ -42,45 +43,47 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
         const { enabled, quantity } = this.state;
 
         return (
-            <Row>
-                <Col xs={12}>
-                    <p className={styles.leadingDescription}>
-                        Configure the number of lives you start with. For an added challenge you can give yourself only
-                        a few, or unlimited if you're playing more casually.
-                    </p>
+            <ScrollableContainer height={338.5}>
+                <Row>
+                    <Col xs={12}>
+                        <p className={styles.leadingDescription}>
+                            Configure the number of lives you start with. For an added challenge you can give yourself only
+                            a few, or unlimited if you're playing more casually.
+                        </p>
 
-                    <Form.Check
-                        inline
-                        type="switch"
-                        id="lives"
-                        label="Enabled"
-                        className={styles.check}
-                        checked={enabled}
-                        onChange={() => this.setState({ enabled: !enabled })}
-                        data-testid="enable-lives"
-                    />
-                </Col>
+                        <Form.Check
+                            inline
+                            type="switch"
+                            id="lives"
+                            label="Enabled"
+                            className={styles.check}
+                            checked={enabled}
+                            onChange={() => this.setState({ enabled: !enabled })}
+                            data-testid="enable-lives"
+                        />
+                    </Col>
 
-                <Col xs={12}>
-                    <p className={styles.leadingDescription}>
-                        Select the number of lives you want to start the game with. You can choose between 1 and 10.
-                        Disabling will give you infinite.
-                    </p>
+                    <Col xs={12}>
+                        <p className={styles.leadingDescription}>
+                            Select the number of lives you want to start the game with. You can choose between 1 and 10.
+                            Disabling will give you infinite.
+                        </p>
 
-                    <RangeSlider
-                        min={1} max={10}
-                        value={quantity.valueOf()}
-                        variant="primary"
-                        disabled={!enabled}
-                        tooltip={enabled ? "auto": "off"}
-                        tooltipPlacement="bottom"
-                        inputProps={{}}
-                        data-testid="life-quantity-slider"
-                        onAfterChange={() => {}} //TODO: Remove this one the lib makes it non-mandatory
-                        onChange={(e: ChangeEvent, value: number) => this.setState({ quantity: value })}
-                    />
-                </Col>
-            </Row>
+                        <RangeSlider
+                            min={1} max={10}
+                            value={quantity.valueOf()}
+                            variant="primary"
+                            disabled={!enabled}
+                            tooltip={enabled ? "auto": "off"}
+                            tooltipPlacement="bottom"
+                            inputProps={{}}
+                            data-testid="life-quantity-slider"
+                            onAfterChange={() => {}} //TODO: Remove this one the lib makes it non-mandatory
+                            onChange={(e: ChangeEvent, value: number) => this.setState({ quantity: value })}
+                        />
+                    </Col>
+                </Row>
+            </ScrollableContainer>
         );
     }
 

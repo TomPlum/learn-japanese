@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+  padding-right: 10px; //Accounts for the track
+}
+
+/* width */
+.container::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.container::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

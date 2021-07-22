@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import HintSettings, { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
-import styles from "../../../styles/sass/components/settings/game/HintSettingsForm.module.scss";
 import RangeSlider from "react-bootstrap-range-slider";
+import ScrollableContainer from "../../ui/ScrollableContainer";
+import styles from "../../../styles/sass/components/settings/game/HintSettingsForm.module.scss";
 
 export interface HintSettingsFormProps {
     onChange: (settings: HintSettings) => void;
@@ -49,62 +50,66 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
         const { enabled, quantity, infinite } = this.state;
 
         return (
-            <Row>
-                <Col xs={12}>
-                    <p className={styles.leadingDescription}>
-                        Hints allow you to reveal a small piece of information about the current question if you're
-                        struggling.
-                    </p>
+            <ScrollableContainer height={338.5}>
+                <Row>
+                    <Col xs={12}>
+                        <p className={styles.leadingDescription}>
+                            Hints allow you to reveal a small piece of information about the current question if you're
+                            struggling.
+                        </p>
 
-                    <Form.Check
-                        inline
-                        type="switch"
-                        label="Enabled"
-                        id="hint-quantity"
-                        className={styles.check}
-                        checked={enabled}
-                        onChange={() => this.setState({ enabled: !enabled, infinite: false })}
-                        data-testid="enable-hints"
-                    />
-                </Col>
+                        <Form.Check
+                            inline
+                            type="switch"
+                            label="Enabled"
+                            id="hint-quantity"
+                            className={styles.check}
+                            checked={enabled}
+                            onChange={() => this.setState({ enabled: !enabled, infinite: false })}
+                            data-testid="enable-hints"
+                        />
+                    </Col>
 
-                <Col xs={12}>
-                    <p className={styles.leadingDescription}>
-                        Select the number of hints you want for the entire game. You only get to use one per question.
-                    </p>
+                    <Col xs={12}>
+                        <p className={styles.leadingDescription}>
+                            Select the number of hints you want for the entire game. You only get to use one per
+                            question.
+                        </p>
 
-                    <RangeSlider
-                        min={1} max={10}
-                        value={quantity}
-                        variant="primary"
-                        disabled={!enabled || infinite}
-                        tooltip={enabled && !infinite ? "auto": "off"}
-                        tooltipPlacement="bottom"
-                        inputProps={{}}
-                        data-testid="hint-quantity-slider"
-                        onAfterChange={() => {}} //TODO: Remove this one the lib makes it non-mandatory
-                        onChange={this.onChangeHintQuantity}
-                    />
-                </Col>
+                        <RangeSlider
+                            min={1} max={10}
+                            value={quantity}
+                            variant="primary"
+                            disabled={!enabled || infinite}
+                            tooltip={enabled && !infinite ? "auto" : "off"}
+                            tooltipPlacement="bottom"
+                            inputProps={{}}
+                            data-testid="hint-quantity-slider"
+                            onAfterChange={() => {
+                            }} //TODO: Remove this one the lib makes it non-mandatory
+                            onChange={this.onChangeHintQuantity}
+                        />
+                    </Col>
 
-                <Col xs={12}>
-                    <p className={styles.leadingDescription}>
-                        Remove the quantity cap and use as many hints as you'd like.
-                    </p>
+                    <Col xs={12}>
+                        <p className={styles.leadingDescription}>
+                            Remove the quantity cap and use as many hints as you'd like.
+                        </p>
 
-                    <Form.Check
-                        inline
-                        type="switch"
-                        label="Infinite Hints"
-                        id="infinite-hints"
-                        className={styles.check}
-                        checked={infinite}
-                        disabled={!enabled}
-                        onChange={() => this.setState({ infinite: !infinite })}
-                        data-testid="enable-infinite-hints"
-                    />
-                </Col>
-            </Row>
+                        <Form.Check
+                            inline
+                            type="switch"
+                            label="Infinite Hints"
+                            id="infinite-hints"
+                            className={styles.check}
+                            checked={infinite}
+                            disabled={!enabled}
+                            onChange={() => this.setState({ infinite: !infinite })}
+                            data-testid="enable-infinite-hints"
+                        />
+                    </Col>
+                </Row>
+            </ScrollableContainer>
         );
     }
 
