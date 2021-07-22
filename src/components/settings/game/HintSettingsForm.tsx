@@ -1,8 +1,9 @@
-import { Component } from "react";
+import React, { ChangeEvent, Component } from "react";
 import { HintQuantity } from "../../../types/game/HintQuantity";
 import { Col, Form, Row } from "react-bootstrap";
 import HintSettings, { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
 import styles from "../../../styles/sass/components/settings/game/HintSettingsForm.module.scss";
+import RangeSlider from "react-bootstrap-range-slider";
 
 export interface HintSettingsFormProps {
     onChange: (settings: HintSettings) => void;
@@ -11,6 +12,7 @@ export interface HintSettingsFormProps {
 interface HintSettingsFormState {
     enabled: boolean;
     quantity: HintQuantity;
+    infinite: boolean;
 }
 
 class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsFormState> {
@@ -21,7 +23,8 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
         super(props);
         this.state = {
             enabled: this.defaultState.enabled,
-            quantity: this.defaultState.quantity
+            quantity: this.defaultState.quantity,
+            infinite: false
         }
     }
 
@@ -38,11 +41,11 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
     }
 
     render() {
-        const { quantity } = this.state;
+        const { enabled, quantity, infinite } = this.state;
 
         return (
             <Row>
-                <Col>
+                <Col xs={12}>
                     <p className={styles.leadingDescription}>
                         Hints allow you to reveal a small piece of information about the current question if you're
                         struggling.
@@ -50,37 +53,50 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
 
                     <Form.Check
                         inline
-                        label="1"
+                        type="switch"
+                        label="Enabled"
+                        id="hint-quantity"
                         className={styles.check}
-                        checked={quantity === HintQuantity.ONE}
-                        onChange={() => this.setState({ quantity: HintQuantity.ONE })}
-                        data-testid="1"
+                        checked={enabled}
+                        onChange={() => this.setState({ enabled: !enabled, infinite: false })}
+                        data-testid="enable-hints"
                     />
+                </Col>
+
+                <Col xs={12}>
+                    <p className={styles.leadingDescription}>
+                        Select the number of hints you want for the entire game. You only get to use one per question.
+                    </p>
+
+                    <RangeSlider
+                        min={1} max={10}
+                        value={quantity.valueOf()}
+                        variant="primary"
+                        disabled={!enabled || infinite}
+                        tooltip={enabled && !infinite ? "auto": "off"}
+                        tooltipPlacement="bottom"
+                        inputProps={{}}
+                        data-testid="hint-quantity-slider"
+                        onAfterChange={() => {}} //TODO: Remove this one the lib makes it non-mandatory
+                        onChange={this.onChangeHintQuantity}
+                    />
+                </Col>
+
+                <Col xs={12}>
+                    <p className={styles.leadingDescription}>
+                        Remove the quantity cap and use as many hints as you'd like.
+                    </p>
 
                     <Form.Check
                         inline
-                        label="3"
+                        type="switch"
+                        label="Infinite Hints"
+                        id="infinite-hints"
                         className={styles.check}
-                        checked={quantity === HintQuantity.THREE}
-                        onChange={() => this.setState({ quantity: HintQuantity.THREE })}
-                        data-testid="3"
-                    />
-
-                    <Form.Check
-                        inline
-                        label="5"
-                        className={styles.check}
-                        checked={quantity === HintQuantity.FIVE}
-                        onChange={() => this.setState({ quantity: HintQuantity.FIVE })}
-                        data-testid="5"
-                    />
-
-                    <Form.Check
-                        label="Unlimited"
-                        className={styles.check}
-                        checked={quantity === HintQuantity.UNLIMITED}
-                        onChange={() => this.setState({ quantity: HintQuantity.UNLIMITED })}
-                        data-testid="Unlimited"
+                        checked={infinite}
+                        disabled={!enabled}
+                        onChange={() => this.setState({ infinite: !infinite })}
+                        data-testid="enable-infinite-hints"
                     />
                 </Col>
             </Row>
@@ -89,8 +105,13 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
 
     reset = () => this.setState({
         enabled: this.defaultState.enabled,
-        quantity: this.defaultState.quantity
+        quantity: this.defaultState.quantity,
+        infinite: false
     });
+
+    private onChangeHintQuantity = (e: React.ChangeEvent, value: number) => {
+        this.setState({ quantity: value });
+    }
 }
 
 export default HintSettingsForm;

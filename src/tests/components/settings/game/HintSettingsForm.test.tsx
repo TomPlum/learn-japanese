@@ -1,50 +1,60 @@
 import { fireEvent, render } from "@testing-library/react";
 import HintSettingsForm from "../../../../components/settings/game/HintSettingsForm";
-import { HintSettingsBuilder } from "../../../../types/session/settings/game/HintSettings";
-import { HintQuantity } from "../../../../types/game/HintQuantity";
+import HintSettings, { HintSettingsBuilder } from "../../../../types/session/settings/game/HintSettings";
+import { getValueLastCalledWith } from "../../../Queries";
+import React from "react";
 
 const onChangeHandler = jest.fn();
+const ref = React.createRef<HintSettingsForm>();
 
 const setup = () => {
-    const component = render(<HintSettingsForm onChange={onChangeHandler} />);
+    const component = render(<HintSettingsForm onChange={onChangeHandler} ref={ref} />);
     return {
-        one: component.getByTestId('1'),
-        three: component.getByTestId('3'),
-        five: component.getByTestId('5'),
-        unlimited: component.getByTestId('Unlimited'),
+        enable: component.getByTestId('enable-hints'),
+        quantity: component.getByTestId('hint-quantity-slider'),
+        infinite: component.getByTestId('enable-infinite-hints'),
         ...component
     }
 }
 
-test('Hint quantity should default to 3', () => {
+test('Enabled should default to on', () => {
     setup();
-    expect(onChangeHandler).toHaveBeenCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build());
+    expect(getValueLastCalledWith<HintSettings>(onChangeHandler).enabled).toBe(true);
 });
 
-test('Selecting 1 hint should set the value to 1', () => {
-    const { one, rerender } = setup();
-    fireEvent.click(one);
-    rerender(<HintSettingsForm onChange={onChangeHandler} />);
-    expect(onChangeHandler).toHaveBeenCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.ONE).build());
+test('Clicking Enabled should disable hints', () => {
+    const { enable } = setup();
+    fireEvent.click(enable);
+    expect(getValueLastCalledWith<HintSettings>(onChangeHandler).enabled).toBe(false);
 });
 
-test('Selecting 3 hints should set the value to 3', () => {
-    const { three, rerender } = setup();
-    fireEvent.click(three);
-    rerender(<HintSettingsForm onChange={onChangeHandler} />);
-    expect(onChangeHandler).toHaveBeenCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build());
+test('Disabling hints should disable the quantity slider', () => {
+    const { enable, quantity } = setup();
+    fireEvent.click(enable);
+    expect(quantity).toBeDisabled();
 });
 
-test('Selecting 5 hints should set the value to 5', () => {
-    const { five, rerender } = setup();
-    fireEvent.click(five);
-    rerender(<HintSettingsForm onChange={onChangeHandler} />);
-    expect(onChangeHandler).toHaveBeenCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build());
+test('Disabling hints should disable the infinite switch', () => {
+    const { enable, infinite } = setup();
+    fireEvent.click(enable);
+    expect(infinite).toBeDisabled();
 });
 
-test('Selecting unlimited hints should set the value to 999', () => {
-    const { unlimited, rerender } = setup();
-    fireEvent.click(unlimited);
-    rerender(<HintSettingsForm onChange={onChangeHandler} />);
-    expect(onChangeHandler).toHaveBeenCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.UNLIMITED).build());
+test('Enabling infinite hints should disable the quantity slider', () => {
+    const { infinite, quantity } = setup();
+    fireEvent.click(infinite);
+    expect(quantity).toBeDisabled();
+});
+
+test('Changing the quantity slider should update the hint quantity', () => {
+    const { quantity } = setup();
+    fireEvent.change(quantity, { target: { value: 8} });
+    expect(getValueLastCalledWith<HintSettings>(onChangeHandler).quantity).toBe(8);
+});
+
+test('Calling reset should reset the HintSettings to their defaults', () => {
+    const { enable } = setup();
+    fireEvent.click(enable);
+    ref?.current?.reset();
+    expect(onChangeHandler).toHaveBeenLastCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(3).build());
 });

@@ -76,12 +76,10 @@ test('De-selecting countdown should remove the extra bit of descriptive text', (
 });
 
 test('Selecting countdown and dragging the slider should change the seconds per question value', () => {
-    const { container, countdown } = setup();
+    const { countdown } = setup();
 
     fireEvent.click(countdown);
-
-    const rangeSlider = container.firstChild?.firstChild?.childNodes[5].firstChild!; // Bad! :( How else can we select?
-    fireEvent.change(rangeSlider, { target: { value: 45 }});
+    fireEvent.change(screen.getByTestId('seconds-slider'), { target: { value: 45 }});
 
     expect(onChangeHandler).toHaveBeenLastCalledWith(
         new TimeSettingsBuilder().isTimed(false).isCountDown().withSecondsPerQuestion(45).build()

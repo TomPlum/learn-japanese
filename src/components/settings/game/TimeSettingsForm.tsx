@@ -103,8 +103,13 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                             value={seconds}
                             variant="primary"
                             disabled={timed}
+                            tooltip="auto"
+                            tooltipPlacement="bottom"
+                            inputProps={{}}
+                            data-testid="seconds-slider"
+                            onAfterChange={() => {}} //TODO: Remove once lib is updated to not enforce this prop.
                             onChange={this.onChangeCountDownSeconds}
-                        />
+                         />
                     )}
                 </Col>
             </Row>
@@ -135,8 +140,8 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
         }
     }
 
-    private onChangeCountDownSeconds = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({ seconds: Number(e.target.value) })
+    private onChangeCountDownSeconds = (e: ChangeEvent, value: number) => {
+        this.setState({ seconds: value })
     }
 }
 
