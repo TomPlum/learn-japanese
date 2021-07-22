@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Dropdown, Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faFont } from "@fortawesome/free-solid-svg-icons";
-import menuStyles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
-import styles from "../../styles/sass/components/layout/FontSelector.module.scss";
+import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import styles from "../../../styles/sass/components/ui/select/FontSelector.module.scss";
 
 type CustomToggleProps = {
     onClick: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;

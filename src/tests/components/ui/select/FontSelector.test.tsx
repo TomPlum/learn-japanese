@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import FontSelector from "../../../components/layout/FontSelector";
+import FontSelector from "../../../../components/ui/select/FontSelector";
 
 const onSelectHandler = jest.fn();
 

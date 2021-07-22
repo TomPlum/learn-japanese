@@ -9,7 +9,7 @@ import KanaQuantityButton from "../../ui/buttons/KanaQuantityButton";
 import QuestionSettings, { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
 import styles from "../../../styles/sass/components/settings/game/QuestionSettingsForm.module.scss";
 import LearnableField from "../../../types/learn/LearnableField";
-import LearnableFieldSelector from "../../ui/LearnableFieldSelector";
+import LearnableFieldSelector from "../../ui/select/LearnableFieldSelector";
 
 export interface QuestionSettingsFormProps {
     onChange: (settings: QuestionSettings) => void;
