@@ -84,7 +84,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             lives: settings.lives.quantity?.valueOf() ?? LifeQuantity.ZERO,
             failedToAnswer: 0,
             hasValidAnswer: false,
-            hints: settings.hints.quantity?.valueOf() ?? 0,
+            hints: settings.hints.quantity,
             hasUsedHintThisQuestion: false,
             isQuitting: false,
             score: 0,
@@ -211,7 +211,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                                className={styles.hint}
                                key={currentQuestion.getUniqueID()}
                                disabled={paused || !settings.hints.enabled}
-                               totalQuantity={settings.hints.quantity?.valueOf() ?? 0}
+                               totalQuantity={settings.hints.unlimited ? undefined : settings.hints.quantity}
                                onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
                            />
 
@@ -332,7 +332,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             paused: false,
             hasExhaustedQuestions: false,
             hasValidAnswer: false,
-            hints: this.props.settings.hints.quantity?.valueOf() ?? 0,
+            hints: this.props.settings.hints.quantity,
             hasUsedHintThisQuestion: false,
             isQuitting: false
         });

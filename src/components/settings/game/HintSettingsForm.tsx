@@ -1,5 +1,4 @@
-import React, { ChangeEvent, Component } from "react";
-import { HintQuantity } from "../../../types/game/HintQuantity";
+import React, { Component } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import HintSettings, { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
 import styles from "../../../styles/sass/components/settings/game/HintSettingsForm.module.scss";
@@ -11,20 +10,20 @@ export interface HintSettingsFormProps {
 
 interface HintSettingsFormState {
     enabled: boolean;
-    quantity: HintQuantity;
+    quantity: number;
     infinite: boolean;
 }
 
 class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsFormState> {
 
-    private readonly defaultState = new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build();
+    private readonly defaultState = new HintSettingsBuilder().isEnabled().withQuantity(3).areUnlimited(false).build();
 
     constructor(props: HintSettingsFormProps | Readonly<HintSettingsFormProps>) {
         super(props);
         this.state = {
             enabled: this.defaultState.enabled,
             quantity: this.defaultState.quantity,
-            infinite: false
+            infinite: this.defaultState.unlimited
         }
     }
 
@@ -34,8 +33,14 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
 
     componentDidUpdate(prevProps: Readonly<HintSettingsFormProps>, prevState: Readonly<HintSettingsFormState>) {
         if (prevState !== this.state) {
-            const { enabled, quantity } = this.state;
-            const settings = new HintSettingsBuilder().isEnabled(enabled).withQuantity(quantity).build()
+            const { enabled, quantity, infinite } = this.state;
+
+            const settings = new HintSettingsBuilder()
+                .isEnabled(enabled)
+                .withQuantity(quantity)
+                .areUnlimited(infinite)
+                .build();
+
             this.props.onChange(settings);
         }
     }
@@ -70,7 +75,7 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
 
                     <RangeSlider
                         min={1} max={10}
-                        value={quantity.valueOf()}
+                        value={quantity}
                         variant="primary"
                         disabled={!enabled || infinite}
                         tooltip={enabled && !infinite ? "auto": "off"}
@@ -106,7 +111,7 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
     reset = () => this.setState({
         enabled: this.defaultState.enabled,
         quantity: this.defaultState.quantity,
-        infinite: false
+        infinite: this.defaultState.unlimited
     });
 
     private onChangeHintQuantity = (e: React.ChangeEvent, value: number) => {

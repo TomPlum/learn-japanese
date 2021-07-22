@@ -5,7 +5,6 @@ import LifeSettings, { LifeSettingsBuilder } from "../../../../../types/session/
 import HintSettings, { HintSettingsBuilder } from "../../../../../types/session/settings/game/HintSettings";
 import TimeSettings, { TimeSettingsBuilder } from "../../../../../types/session/settings/game/TimeSettings";
 import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../types/session/settings/game/QuestionSettings";
-import { HintQuantity } from "../../../../../types/game/HintQuantity";
 import LearnableField from "../../../../../types/learn/LearnableField";
 import FilterChain from "../../../../../filters/FilterChain";
 import MeaningFilter from "../../../../../filters/learnable/MeaningFilter";
@@ -52,7 +51,7 @@ describe("Game Settings", () => {
                 .build();
 
             expect(settings.question).toStrictEqual(new QuestionSettings(LearnableField.KANJI, LearnableField.MEANING, QuestionType.CHOICE, 6, answerFilter, true));
-            expect(settings.hints).toStrictEqual(new HintSettings(false, HintQuantity.UNLIMITED));
+            expect(settings.hints).toStrictEqual(new HintSettings(false, 0, false));
             expect(settings.lives).toStrictEqual(new LifeSettings(true, LifeQuantity.ONE));
             expect(settings.time).toStrictEqual(new TimeSettings(false, true, 5));
         });

@@ -13,7 +13,6 @@ import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSe
 import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
-import { HintQuantity } from "../../../types/game/HintQuantity";
 import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
 import LearnableField from "../../../types/learn/LearnableField";
@@ -47,7 +46,7 @@ beforeEach(() => {
                 .withScoreTracking(true)
                 .build()
             )
-            .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.UNLIMITED).build())
+            .withHintSettings(new HintSettingsBuilder().isEnabled().areUnlimited().build())
             .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
             .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
             .build()
@@ -122,7 +121,7 @@ test('Answering correctly when there are kana remaining should show the next kan
 
 test('Answering correctly after having used a hint that question should reduce the hint quantity by 1', () => {
     props.settings = new GameSettingsBuilder()
-        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build())
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(5).build())
         .build();
 
     const { submit, hint } = setup();
@@ -136,7 +135,7 @@ test('Answering correctly after having used a hint that question should reduce t
 
 test('Answering correctly without using a hint that question should not reduce the hint quantity', () => {
     props.settings = new GameSettingsBuilder()
-        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build())
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(5).build())
         .build();
 
     const { submit } = setup();
@@ -531,7 +530,7 @@ test('Disabling lives should not render the LifeDisplay', () => {
 
 test('Enabling hints should render the HintButton in an enabled state', () => {
     props.settings = new GameSettingsBuilder().fromExisting(props.settings)
-        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(3).build())
         .build();
     const { hint } = setup();
     expect(hint).not.toBeDisabled();
@@ -546,7 +545,7 @@ test('Disabling hints should render the HintButton in a disabled state', () => {
 test('Using the hint button twice in the same kana shouldn\'t use another hint', async () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(3).build())
         .build();
 
     const { hint } = setup();
@@ -673,7 +672,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
-        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build())
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(5).build())
         .build();
 
     const { hint } = setup();
@@ -688,7 +687,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
-        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.FIVE).build())
+        .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(5).build())
         .build();
 
     setup();

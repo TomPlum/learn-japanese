@@ -46,6 +46,12 @@ test('Enabling infinite hints should disable the quantity slider', () => {
     expect(quantity).toBeDisabled();
 });
 
+test('Enabling infinite hints should set unlimited in the settings', () => {
+    const { infinite } = setup();
+    fireEvent.click(infinite);
+    expect(getValueLastCalledWith<HintSettings>(onChangeHandler).unlimited).toBe(true);
+});
+
 test('Changing the quantity slider should update the hint quantity', () => {
     const { quantity } = setup();
     fireEvent.change(quantity, { target: { value: 8} });

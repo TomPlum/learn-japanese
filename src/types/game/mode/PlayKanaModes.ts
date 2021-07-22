@@ -7,7 +7,6 @@ import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";
 import { QuestionType } from "../QuestionType";
 import { HintSettingsBuilder } from "../../session/settings/game/HintSettings";
-import { HintQuantity } from "../HintQuantity";
 import { LifeSettingsBuilder } from "../../session/settings/game/LifeSettings";
 import { TimeSettingsBuilder } from "../../session/settings/game/TimeSettings";
 import { LifeQuantity } from "../LifeQuantity";
@@ -45,7 +44,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                             .withScoreTracking(true)
                             .build()
                     )
-                    .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
+                    .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(3).build())
                     .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
                     .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(10).build())
                     .build()
@@ -60,7 +59,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                             .withScoreTracking(true)
                             .build()
                     )
-                    .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
+                    .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(3).build())
                     .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
                     .build()
             ),
@@ -80,7 +79,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                             .withScoreTracking(true)
                             .build()
                     )
-                    .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(HintQuantity.THREE).build())
+                    .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(3).build())
                     .build()
             ),
             new PlayMode("Hardcore", "#fc3131", faFire,

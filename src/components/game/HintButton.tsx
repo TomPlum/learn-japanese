@@ -73,8 +73,9 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
 
     private getTitle = () => {
         const { remaining, totalQuantity } = this.props;
+
         if (remaining > 0) {
-            if (remaining <= 10) {
+            if (totalQuantity) {
                 return "Need a hint? (" + (remaining - 1) + "/" + totalQuantity + " remaining)";
             }
             return "Need a hint?"
@@ -93,8 +94,8 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
     }
 
     private getRemaining = () => {
-        const { remaining } = this.props;
-        if (remaining === 999) {
+        const { remaining, totalQuantity } = this.props;
+        if (!totalQuantity) {
             return <FontAwesomeIcon icon={faInfinity} size="sm" />;
         }
         return "(" + remaining + ")";

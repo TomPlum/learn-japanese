@@ -34,7 +34,7 @@ test('Has Hints Remaining Title', () => {
 });
 
 test('Infinite Hints Title', () => {
-    props.remaining = 999;
+    props.totalQuantity = undefined;
     const { button } = setup();
     fireEvent.click(button);
     expect(screen.getByTitle('Need a hint?')).toBeInTheDocument();
