@@ -5,7 +5,6 @@ import { Example } from "../types/kanji/Example";
 import { KanjiData, KanjiExample, KanjiReadingData } from "../data/DataTypes";
 import { joyo, kyoiku } from "../data/Kanji";
 import Repository from "./Repository";
-import { RandomNumberGenerator } from "../utility/RandomNumberGenerator";
 import KanjiSettings from "../types/session/settings/data/KanjiSettings";
 import Arrays from "../utility/Arrays";
 
@@ -28,7 +27,7 @@ export class KanjiRepository implements Repository<Kanji> {
             let availableKanji = this.convert(kyoiku().filter(data => settings.grades?.includes(data.grade)));
 
             for (let i = 0; i < settings.quantity; i++) {
-                const [randomKanji, remainingKanji] = RandomNumberGenerator.getRandomObject(availableKanji);
+                const [randomKanji, remainingKanji] = Arrays.getRandomObject(availableKanji);
                 availableKanji = remainingKanji;
                 kanji.push(randomKanji);
             }

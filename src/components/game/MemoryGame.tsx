@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { ButtonGroup, Col, Container, Row } from "react-bootstrap";
-import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import Timer from "./Timer";
 import LifeDisplay from "./LifeDisplay";
 import { LifeQuantity } from "../../types/game/LifeQuantity";
@@ -72,7 +71,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
         const { settings, data } = this.props;
 
-        const [firstQuestion, remainingQuestions] = RandomNumberGenerator.getRandomObject(data);
+        const [firstQuestion, remainingQuestions] = Arrays.getRandomObject(data);
 
         this.state = {
             currentQuestion: firstQuestion,
@@ -321,7 +320,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     }
 
     reset = () => {
-        const [nextQuestion, remainingQuestions] = RandomNumberGenerator.getRandomObject(this.props.data);
+        const [nextQuestion, remainingQuestions] = Arrays.getRandomObject(this.props.data);
 
         this.setState({
             currentQuestion: nextQuestion,
@@ -347,7 +346,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         this.countdown.current?.reset();
 
         //Pick a random remaining question and remove it from the pool.
-        const [nextQuestion, nextRemainingQuestions] = RandomNumberGenerator.getRandomObject(remainingQuestions);
+        const [nextQuestion, nextRemainingQuestions] = Arrays.getRandomObject(remainingQuestions);
 
         //Update the next question to be displayed and the remaining questions with one less.
         this.setState({
@@ -383,7 +382,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         this.countdown.current?.reset();
 
         //Pick a random remaining question and remove it from the pool.
-        const [nextQuestion, nextRemainingQuestions] = RandomNumberGenerator.getRandomObject(remainingQuestions);
+        const [nextQuestion, nextRemainingQuestions] = Arrays.getRandomObject(remainingQuestions);
 
         this.setState({
             currentQuestion: nextQuestion,

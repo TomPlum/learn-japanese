@@ -1,7 +1,6 @@
 import MemoryGame, { MemoryGameProps } from "../../../components/game/MemoryGame";
 import { cleanup, fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import { QuestionType } from "../../../types/game/QuestionType";
-import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 import { Kana } from "../../../types/kana/Kana";
 import KanaType from "../../../types/kana/KanaType";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
@@ -56,7 +55,7 @@ beforeEach(() => {
     };
 
     //Mocked Static Functions
-    RandomNumberGenerator.getRandomObject = getRandomObject;
+    Arrays.getRandomObject = getRandomObject;
     Arrays.shuffle = shuffle;
     Arrays.getRandomElements = getRandomElements;
     Environment.variable = environment;

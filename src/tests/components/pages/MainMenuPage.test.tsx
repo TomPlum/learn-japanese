@@ -4,7 +4,7 @@ import hiragana from "../../../data/Hiragana";
 import { KanaData } from "../../../data/DataTypes";
 import katakana from "../../../data/Katakana";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
-import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
+import Arrays from "../../../utility/Arrays";
 
 jest.mock("../../../data/Hiragana");
 jest.mock("../../../data/Katakana");
@@ -22,7 +22,7 @@ beforeEach(() => {
       { name: "ア", code: "\u30A2", romaji: ["a"], column: KanaColumn.VOWEL, diacritical: false },
    ]);
 
-   RandomNumberGenerator.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
+   Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
       const objects = [...array];
       const first = objects[0];
       objects.splice(0, 1);

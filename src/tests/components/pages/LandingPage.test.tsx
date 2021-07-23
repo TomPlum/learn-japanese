@@ -10,7 +10,6 @@ import { getByTextWithMarkup } from "../../Queries";
 import { when } from 'jest-when';
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from 'history'
-import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 
 const environment = jest.fn();
 const shuffle = jest.fn();
@@ -59,7 +58,7 @@ beforeEach(() => {
 
 
     //Always returns the first element so it is deterministic
-    RandomNumberGenerator.getRandomObject = getRandomObject;
+    Arrays.getRandomObject = getRandomObject;
     getRandomObject.mockImplementation((array: any[]) => {
         const objects = [...array];
         const first = objects[0];

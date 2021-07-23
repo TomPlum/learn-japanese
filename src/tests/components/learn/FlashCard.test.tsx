@@ -15,6 +15,7 @@ const setup = () => {
             onFlip={onFlipHandler}
             front={KanaFlashCardFront}
             back={KanaFlashCardBack}
+            showRomaji={false}
         />
     );
     return {

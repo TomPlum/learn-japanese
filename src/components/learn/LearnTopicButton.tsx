@@ -25,7 +25,7 @@ class LearnTopicButton extends Component<LearnTopicButtonProps> {
                 onClick={this.handleOnClick}
                 className={(isSelected ? styles.selected : styles.notSelected) + " " + styles.button}
             >
-                {this.isFontAwesomeIcon(icon) &&
+                {this.isFontAwesomeIcon() &&
                     <FontAwesomeIcon
                         icon={icon as IconDefinition}
                         fixedWidth
@@ -34,7 +34,7 @@ class LearnTopicButton extends Component<LearnTopicButtonProps> {
                     />
                 }
 
-                {!this.isFontAwesomeIcon(icon) &&
+                {!this.isFontAwesomeIcon() &&
                     <span className={styles.textIcon} style={{ color: colour }}>
                         {icon}
                     </span>
@@ -47,7 +47,8 @@ class LearnTopicButton extends Component<LearnTopicButtonProps> {
 
     private handleOnClick = () => this.props.onClick(this.props.type);
 
-    private isFontAwesomeIcon(icon: IconDefinition | string) {
+    private isFontAwesomeIcon() {
+        const icon: IconDefinition | string = this.props.icon;
         return !(typeof icon === 'string');
     }
 }

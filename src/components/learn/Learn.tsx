@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import LearningSessionResult from "../../types/learn/LearningSessionResult";
 import { Learnable } from "../../types/learn/Learnable";
-import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import ConfirmModal from "../ui/ConfirmModal";
 import QuitButton from "../ui/buttons/QuitButton";
@@ -10,6 +9,7 @@ import LearningFeedbackButton, { LearningFeedback } from "../ui/buttons/Learning
 import FlashCard, { CardProps } from "./FlashCard";
 import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Arrays from "../../utility/Arrays";
 import styles from "../../styles/sass/components/learn/Learn.module.scss";
 
 export interface LearnProps {
@@ -35,7 +35,7 @@ class Learn extends Component<LearnProps, LearnState> {
     constructor(props: Readonly<LearnProps> | LearnProps) {
         super(props);
 
-        const [first, remaining] = RandomNumberGenerator.getRandomObject(props.data);
+        const [first, remaining] = Arrays.getRandomObject(props.data);
 
         this.state = {
             current: first,
@@ -151,7 +151,7 @@ class Learn extends Component<LearnProps, LearnState> {
     private onNext = () => {
         const { remaining, hasRemembered, hasForgotten, remembered, forgotten, current } = this.state;
 
-        const [next, nextRemaining] = RandomNumberGenerator.getRandomObject(remaining);
+        const [next, nextRemaining] = Arrays.getRandomObject(remaining);
         this.setState({
             current: next,
             remaining: nextRemaining,

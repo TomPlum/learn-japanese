@@ -79,7 +79,7 @@ export default class Arrays {
         let elements = [];
         let copy = this.copy(array);
         for (let i = 0; i < quantity; i++) {
-            const index = Numbers.randomInt(0, copy.length - 1);
+            const index = Arrays.getRandomArrayIndex(copy);
             const element = copy[index];
             copy = this.remove(copy, element)
             elements.push(element);
@@ -114,4 +114,26 @@ export default class Arrays {
     static distinct<T>(array: T[]): T[] {
         return array.filter((value, index, self) => self.indexOf(value) === index);
     }
+
+    /**
+     * Generates a random index from the given array.
+     * @param array The array to choose an index from.
+     * @return index The integer value of the chosen index.
+     */
+    static getRandomArrayIndex<T>(array: T[]): number {
+        return Numbers.randomInt(0, array.length - 1);
+    }
+
+    /**
+     * Picks a random object from the given array.
+     * @param pool The array of objects to choose from.
+     * @returns tuple A tuple containing the randomly chosen object and the trimmed pool.
+     */
+    static getRandomObject = <T>(pool: T[]): [T, T[]] => {
+        const objects = [...pool];
+        const randomIndex = Arrays.getRandomArrayIndex(objects);
+        const randomObject = objects[randomIndex];
+        objects.splice(randomIndex, 1);
+        return [randomObject, objects];
+    };
 }

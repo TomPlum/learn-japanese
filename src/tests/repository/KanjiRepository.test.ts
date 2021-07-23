@@ -2,8 +2,8 @@ import { KanjiRepository } from "../../repository/KanjiRepository";
 import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
 import { joyo, kyoiku } from "../../data/Kanji";
 import { KanjiData } from "../../data/DataTypes";
-import { RandomNumberGenerator } from "../../utility/RandomNumberGenerator";
 import { KanjiSettingsBuilder } from "../../types/session/settings/data/KanjiSettings";
+import Arrays from "../../utility/Arrays";
 
 jest.mock("../../data/Kanji.ts");
 
@@ -59,7 +59,7 @@ beforeEach(() => {
 
     mockJoyo.mockReturnValue([exampleJoyoKanji, exampleJoyoKanji, exampleJoyoKanji, exampleKyoikuKanji6]);
 
-    RandomNumberGenerator.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
+    Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
         const objects = [...array];
         const firstKana = objects[0];
         objects.splice(0, 1);
