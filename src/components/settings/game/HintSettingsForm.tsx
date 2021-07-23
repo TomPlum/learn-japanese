@@ -82,11 +82,7 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
                             variant="primary"
                             disabled={!enabled || infinite}
                             tooltip={enabled && !infinite ? "auto" : "off"}
-                            tooltipPlacement="bottom"
-                            inputProps={{}}
                             data-testid="hint-quantity-slider"
-                            onAfterChange={() => {
-                            }} //TODO: Remove this one the lib makes it non-mandatory
                             onChange={this.onChangeHintQuantity}
                         />
                     </Col>

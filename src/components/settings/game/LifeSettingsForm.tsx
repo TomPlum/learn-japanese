@@ -2,9 +2,9 @@ import React, { ChangeEvent, Component } from "react";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { Col, Form, Row } from "react-bootstrap";
 import LifeSettings, { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
-import styles from "../../../styles/sass/components/settings/game/LifeSettingsForm.module.scss";
 import RangeSlider from "react-bootstrap-range-slider";
 import ScrollableContainer from "../../ui/ScrollableContainer";
+import styles from "../../../styles/sass/components/settings/game/LifeSettingsForm.module.scss";
 
 interface LifeSettingsFormProps {
     onChange: (settings: LifeSettings) => void;
@@ -75,10 +75,7 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
                             variant="primary"
                             disabled={!enabled}
                             tooltip={enabled ? "auto": "off"}
-                            tooltipPlacement="bottom"
-                            inputProps={{}}
                             data-testid="life-quantity-slider"
-                            onAfterChange={() => {}} //TODO: Remove this one the lib makes it non-mandatory
                             onChange={(e: ChangeEvent, value: number) => this.setState({ quantity: value })}
                         />
                     </Col>
