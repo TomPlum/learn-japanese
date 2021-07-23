@@ -44,7 +44,6 @@ class ScoreDisplay extends Component<ScoreDisplayProps, ScoreDisplayState> {
                     </span>
                 }
             </div>
-
         );
     }
 
