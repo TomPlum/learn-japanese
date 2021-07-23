@@ -1,5 +1,11 @@
 @import "src/styles/sass/mixins";
 
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .icon {
   color: #f12f2f;;
   margin-right: 3px;
@@ -11,4 +17,8 @@
   margin-left: 3px;
   font-family: "Ciutadella Rounded Medium", sans-serif;
   font-size: 1.2em;
+}
+
+.infinite {
+  font-size: 0.8em;
 }

@@ -2,6 +2,7 @@ import LifeDisplay, { LifeDisplayProps } from "../../../components/game/LifeDisp
 import { render, screen } from "@testing-library/react";
 
 let props: LifeDisplayProps = {
+    enabled: true,
     hearts: 5
 };
 
@@ -13,18 +14,18 @@ const setup = () => {
     }
 }
 
-test('Should Render Heart Icon', () => {
+test('Should render the heart icon if the lives quantity is greater than 1', () => {
    const { icon } = setup();
    expect(icon).toBeInTheDocument();
 });
 
-test('Should Render Initial Lives Quantity', () => {
+test('Should render the quantity', () => {
    setup();
    expect(screen.getByText('5')).toBeInTheDocument();
 });
 
-test('Should Render Infinity Symbol When Lives -> 999', () => {
-    props.hearts = 999;
+test('Should render an infinity icon when lives are disabled.', () => {
+    props.enabled = false;
     setup();
     expect(screen.getByTitle('Infinite')).toBeInTheDocument();
 });

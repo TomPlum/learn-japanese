@@ -163,12 +163,11 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                     </Col>
 
                     <Col className={styles.lifeDisplayContainer}>
-                        {settings.lives.enabled &&
-                            <LifeDisplay
-                                hearts={lives}
-                                className={styles.lives}
-                            />
-                        }
+                        <LifeDisplay
+                            hearts={lives}
+                            className={styles.lives}
+                            enabled={settings.lives.enabled}
+                        />
                     </Col>
 
                     <Col>
@@ -375,7 +374,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives
         });
 
-        this.advanceNextQuestion();
+        this.advanceNextQuestion(); //TODO: Stop giving points if the user skips. Maybe lose some?
     }
 
     private countDownTimeElapsed = () => {

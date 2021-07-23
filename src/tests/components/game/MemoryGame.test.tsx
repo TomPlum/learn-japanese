@@ -519,15 +519,6 @@ test('Enabling lives should render the LifeDisplay', () => {
     expect(screen.getByText('10')).toBeInTheDocument();
 });
 
-test('Disabling lives should not render the LifeDisplay', () => {
-    props.settings = new GameSettingsBuilder()
-        .fromExisting(props.settings)
-        .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
-        .build();
-    setup();
-    expect(screen.queryByTitle('Lives')).not.toBeInTheDocument();
-});
-
 test('Enabling hints should render the HintButton in an enabled state', () => {
     props.settings = new GameSettingsBuilder().fromExisting(props.settings)
         .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(3).build())
