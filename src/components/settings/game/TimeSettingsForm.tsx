@@ -54,7 +54,7 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
         const { timed, countdown, seconds } = this.state;
 
         return (
-            <ScrollableContainer height={338.5}>
+            <ScrollableContainer height={344}>
                 <Row>
                     <Col>
                         <div className={styles.descriptionWrapper}>

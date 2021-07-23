@@ -67,7 +67,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
         const { type, cards, score, questionField, answerField } = this.state;
 
         return (
-            <ScrollableContainer height={338.5}>
+            <ScrollableContainer height={344}>
                 <Row className={styles.section}>
                     <Col xs={12}>
                         <p className={styles.leadingDescription}>

@@ -1,3 +1,4 @@
+//TODO: Remove this. Unlimited is pointless as disabled is infinite lives.
 export enum LifeQuantity {
     ZERO = 0,
     ONE = 1,

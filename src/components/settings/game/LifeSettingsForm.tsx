@@ -43,7 +43,8 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
         const { enabled, quantity } = this.state;
 
         return (
-            <ScrollableContainer height={338.5}>
+            //TODO: Put in a class
+            <ScrollableContainer height={344}>
                 <Row>
                     <Col xs={12}>
                         <p className={styles.leadingDescription}>

@@ -50,7 +50,7 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
         const { enabled, quantity, infinite } = this.state;
 
         return (
-            <ScrollableContainer height={338.5}>
+            <ScrollableContainer height={344}>
                 <Row>
                     <Col xs={12}>
                         <p className={styles.leadingDescription}>
