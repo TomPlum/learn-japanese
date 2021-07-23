@@ -6,7 +6,7 @@ import TimeSettingsForm from "./TimeSettingsForm";
 import GameSettings, { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
 import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faCheck, faHeart, faHeartbeat, faLightbulb, faQuestionCircle, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faCheck, faHeartbeat, faLightbulb, faQuestionCircle, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
 import QuestionSettings from "../../../types/session/settings/game/QuestionSettings";
 import HintSettings from "../../../types/session/settings/game/HintSettings";
 import LifeSettings from "../../../types/session/settings/game/LifeSettings";
@@ -145,7 +145,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                                     <Card.Title className={styles.title}>
                                         <FontAwesomeIcon
                                             fixedWidth
-                                            icon={faHeart}
+                                            icon={faHeartbeat}
                                             className={styles.livesIcon}
                                         />
                                         <span className={styles.titleText}>Life Settings</span>
