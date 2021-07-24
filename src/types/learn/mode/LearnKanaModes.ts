@@ -4,7 +4,7 @@ import LearnMode from "../../session/LearnMode";
 import LearnSettings from "../../session/settings/LearnSettings";
 import { KanaSettingsBuilder } from "../../session/settings/data/KanaSettings";
 
-export default class LearnKanaModes implements LearnMenuModes {
+class LearnKanaModes implements LearnMenuModes {
     getModes(): LearnMode[] {
         const defaultLearnSettings = new LearnSettings();
 
@@ -52,3 +52,5 @@ export default class LearnKanaModes implements LearnMenuModes {
         return "KANA"
     }
 }
+
+export default LearnKanaModes;
