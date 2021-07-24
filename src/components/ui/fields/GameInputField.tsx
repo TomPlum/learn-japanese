@@ -16,25 +16,19 @@ export interface GameInputFieldProps {
 
 class GameInputField extends Component<GameInputFieldProps> {
 
-    private readonly input = React.createRef<HTMLInputElement>();
-
-    componentDidMount() {
-        this.input?.current?.focus();
-    }
-
     render() {
         const { disabled, value, placeholder, className, helpPopover, onChange } = this.props;
 
         return (
             <div className={styles.wrapper}>
                 <OverlayTrigger trigger={["hover", "click"]} overlay={helpPopover} placement="top">
-                    <FontAwesomeIcon icon={faInfoCircle} className={styles.icon} data-testid="help"/>
+                    <FontAwesomeIcon icon={faInfoCircle} className={styles.icon} data-testid="game-input-help"/>
                 </OverlayTrigger>
 
                 <Form.Control
+                    autoFocus
                     plaintext
                     value={value}
-                    ref={this.input}
                     disabled={disabled}
                     onChange={onChange}
                     placeholder={placeholder}

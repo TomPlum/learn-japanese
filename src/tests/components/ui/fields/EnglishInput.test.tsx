@@ -17,7 +17,7 @@ const setup = () => {
     const component = render(<EnglishInput {...props} />);
     return {
         input: component.getByPlaceholderText('English Meaning'),
-        help: component.getByTestId('help'),
+        help: component.getByTestId('game-input-help'),
         ...component
     }
 }

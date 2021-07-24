@@ -28,7 +28,7 @@ const setup = () => {
     const component = render(<LearnableMeaningQuestion {...props} ref={ref} />);
     return {
         input: component.getByPlaceholderText('English Meaning'),
-        inputHelp: component.getByTestId('help')
+        inputHelp: component.getByTestId('game-input-help')
     }
 }
 

@@ -10,7 +10,7 @@ const setup = () => {
     const component = render(<RomajiInput {...props} />);
     return {
         input: component.getByPlaceholderText('Enter Rōmaji'),
-        help: component.getByTestId('help'),
+        help: component.getByTestId('game-input-help'),
         ...component
     }
 }
