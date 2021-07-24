@@ -27,79 +27,72 @@ const setup = () => {
     }
 }
 
-test('Has Hints Remaining Title', () => {
+test('Renders overlay title', async () => {
     const { button } = setup();
     fireEvent.click(button);
-    expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
+    expect(await screen.findByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 });
 
-test('Infinite Hints Title', () => {
+test('Renders correct overlay title for infinite hints', async () => {
     props.totalQuantity = undefined;
     const { button } = setup();
     fireEvent.click(button);
-    expect(screen.getByTitle('Need a hint?')).toBeInTheDocument();
+    expect(await screen.findByTitle('Need a hint?')).toBeInTheDocument();
 });
 
-test('No Remaining Hints Title', () => {
+test('Renders correct overlay title for no hints remaining', async () => {
     props.totalQuantity = 5;
     props.remaining = 0;
     const { button } = setup();
     fireEvent.click(button);
-    expect(screen.getByTitle('Sorry!')).toBeInTheDocument();
+    expect(await screen.findByTitle('Sorry!')).toBeInTheDocument();
 });
 
-test('Hint Message', () => {
+test('Renders correct overlay body text for kana hint', async () => {
     const { button } = setup();
     fireEvent.click(button);
-    const text = screen.getByText('This kana is from the \'vowel\' column in the Hiragana syllabary.');
+    const text = await screen.findByText('This kana is from the \'vowel\' column in the Hiragana syllabary.');
     expect(text).toBeInTheDocument()
 });
 
-test('Exceptional Kana (n) Message Text', () => {
-    props.data = new Kana("n", ["n"], KanaType.HIRAGANA, KanaColumn.OTHER, false);
-    const { button } = setup();
-    fireEvent.click(button);
-    const text = screen.getByText('This kana is exceptional. It is not a consonant nor a vowel.');
-    expect(text).toBeInTheDocument()
-});
-
-test('No Hints Remaining Message Text', () => {
+test('Renders correct overlay body text for when the user has exhausted all their hints', async () => {
     props.remaining = 0
     const { button } = setup();
     fireEvent.click(button);
-    expect(screen.getByText('You\'ve used all of your hints.')).toBeInTheDocument()
+    expect(await screen.findByText('You\'ve used all of your hints.')).toBeInTheDocument()
 });
 
-test('Disabled Property Should Disable Button', () => {
+test('Should disable the hint button when the disabled property is passed as true', () => {
     props.disabled = true;
     const { button } = setup();
     expect(button).toBeDisabled();
 });
 
-test('Using Hint Button Should Call onUse Event Handler', () => {
+test('Clicking the hint button should call the onUse event handler', async () => {
     const { button } = setup();
     fireEvent.click(button);
+    await screen.findByTitle('Need a hint? (2/3 remaining)');
     expect(onUseHandler).toHaveBeenCalled();
 });
 
-test('Blurring Should Remove The Overlay PopOver', async () => {
+test('Blurring the button should stop rendering the overlay', async () => {
     const { button } = setup();
 
     fireEvent.click(button);
-    const popover = screen.getByTitle('Need a hint? (2/3 remaining)');
+    const popover = await screen.findByTitle('Need a hint? (2/3 remaining)');
     expect(popover).toBeInTheDocument();
 
     fireEvent.click(button);
     await waitForElementToBeRemoved(popover);
 });
 
-test('When tip quantity is 0, it should apply the \'disabled\' class to the button', () => {
+test('Should apply the \'disabled\' className to the button when the user has exhausted all their hints', () => {
     props.remaining = 0;
     const { container } = setup();
     expect(container?.firstChild).toHaveClass('disabled');
 });
 
-test('When tip quantity is greater than 0, it should apply the default \'button\' class to the button', () => {
+test('Should apply the default \'button\' className to the button when the user has hints remaining', () => {
     const { container } = setup();
     expect(container?.firstChild).toHaveClass('button');
 });
