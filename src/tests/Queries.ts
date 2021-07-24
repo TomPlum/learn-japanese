@@ -26,6 +26,13 @@ export const getByTextWithElements = (text: string): HTMLElement => {
     });
 }
 
+export const findByTextWithElements = async (text: string): Promise<HTMLElement> => {
+    // @ts-ignore
+    return await screen.findByText((content, element) => {
+        return content !== '' && element && element.textContent === text;
+    });
+}
+
 /**
  * Returns the value of the first parameter of the last call to the given function.
  * @see https://jestjs.io/docs/mock-functions#mock-property

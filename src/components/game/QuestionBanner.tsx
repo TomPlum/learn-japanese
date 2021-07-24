@@ -27,12 +27,12 @@ class QuestionBanner extends Component<QuestionBannerProps> {
                 {'What is the '}<strong>{answerField.name.toLowerCase()}</strong>{' for '}
 
                 {displayValues.map((questionValue: string, i: number) => {
-                    return <>
+                    return <div key={`value-${i}`}>
                         {'"'}<strong key={i}>{questionValue}</strong>{'"'}
                         <span key={`or${i}`}>
                             {i < displayValues.length - 1 ? " or " : ""}
                         </span>
-                    </>;
+                    </div>;
                 })}
                 {' ?'}
 
