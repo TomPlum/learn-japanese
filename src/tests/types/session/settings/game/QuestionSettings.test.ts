@@ -11,7 +11,7 @@ describe("Question Settings", () => {
         it("Should set defaults", () => {
             const settings = new QuestionSettingsBuilder().build();
             expect(settings).toMatchObject(new QuestionSettings(
-                LearnableField.KANA, LearnableField.ROMAJI, QuestionType.TEXT, 1, settings.answerFilter, false
+                LearnableField.KANA, LearnableField.ROMAJI, QuestionType.TEXT, 1, 1, settings.answerFilter, false
             ));
         });
 
@@ -39,6 +39,11 @@ describe("Question Settings", () => {
         it("Should set score tracking to true when not passing an arg", () => {
             const settings = new QuestionSettingsBuilder().withScoreTracking(false).build();
             expect(settings.score).toBe(false);
+        });
+
+        it("Should set the quantity when specified", () => {
+            const settings = new QuestionSettingsBuilder().withQuantity(3).build();
+            expect(settings.quantity).toBe(3);
         });
 
         it("Should set the wrong optional filter chain function when specifying", () => {
