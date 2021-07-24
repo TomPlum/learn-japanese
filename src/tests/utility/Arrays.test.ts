@@ -120,4 +120,20 @@ describe("Arrays Utility", () => {
             expect(result).toStrictEqual(["one", "two", "three"]);
         });
     });
+
+    describe("Get Random Array Index", () => {
+        it("Should return an index in the range of the array size", () => {
+            const array = [1, 2, 3, 4, 5];
+            const result = Arrays.getRandomArrayIndex(array);
+            expect(result).toBeGreaterThanOrEqual(0);
+            expect(result).toBeLessThanOrEqual(4);
+        });
+    });
+
+    describe("Get Random Object", () => {
+        const array = [1, 4, 5, 2, 6];
+        const [random, remaining] = Arrays.getRandomObject(array);
+        expect(array).toContain(random);
+        expect(remaining).toStrictEqual(array.filter(it => it !== random));
+    });
 });
