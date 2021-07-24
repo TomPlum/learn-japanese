@@ -1,8 +1,8 @@
-import { Textfit } from 'react-textfit';
 import LoadingSpinner from "../LoadingSpinner";
 import { useState } from "react";
 import { KanaDisplayStyle } from "./KanaDisplay";
 import styles from "../../../styles/sass/components/ui/display/DynamicDisplay.module.scss";
+import { Textfit } from "@tomplum/react-textfit";
 
 const DynamicDisplay = (props: { value: string, className?: string, style?: KanaDisplayStyle }) => {
     const [loading, setLoading] = useState(true);
