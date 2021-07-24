@@ -23,12 +23,12 @@ test('Should display the romaji for the given kana', () => {
     expect(component.getByText('suki')).toBeInTheDocument();
 });
 
-test('Hovering over the romaji should display the inspectable popover', () => {
+test('Hovering over the romaji should display the inspectable popover', async () => {
     environment.mockReturnValueOnce('test-title');
     const component = render(<RomajiDisplay kana={"すき"}/>);
 
     fireEvent.mouseOver(component.getByText('suki'));
 
-    expect(screen.getByTitle('Why is the rōmaji incorrect?')).toBeInTheDocument();
-    expect(screen.getByText('test-title')).toBeInTheDocument();
+    expect(await screen.findByTitle('Why is the rōmaji incorrect?')).toBeInTheDocument();
+    expect(await screen.findByText('test-title')).toBeInTheDocument();
 });

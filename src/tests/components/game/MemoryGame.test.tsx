@@ -541,13 +541,13 @@ test('Using the hint button twice in the same kana shouldn\'t use another hint',
     const { hint } = setup();
 
     fireEvent.click(hint);
-    expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
+    expect(await screen.findByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 
     fireEvent.click(hint);
     await waitForElementToBeRemoved(() => screen.getByTitle('Need a hint? (2/3 remaining)'));
 
     fireEvent.click(hint);
-    expect(screen.getByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
+    expect(await screen.findByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 });
 
 

@@ -47,12 +47,12 @@ test('It should call the onSelect event handler when changing the option', () =>
     expect(onSelectHandler).toHaveBeenLastCalledWith(LearnableField.KANJI);
 });
 
-test('It should render an inline help icon that shows the name and description of the selected field', () => {
+test('It should render an inline help icon that shows the name and description of the selected field', async () => {
     const { field, help } = setup();
 
     userEvent.selectOptions(field, "Japanese");
     fireEvent.mouseOver(help);
 
-    expect(screen.getByTitle("Japanese")).toBeInTheDocument();
-    expect(screen.getByText(LearnableField.JAPANESE.description)).toBeInTheDocument();
+    expect(await screen.findByTitle("Japanese")).toBeInTheDocument();
+    expect(await screen.findByText(LearnableField.JAPANESE.description)).toBeInTheDocument();
 });

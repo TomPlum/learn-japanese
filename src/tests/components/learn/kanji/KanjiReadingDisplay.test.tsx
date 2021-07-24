@@ -25,20 +25,20 @@ test('Passing the reading type as KUN should render the Kun label', () => {
     expect(component.getByText('Kun')).toBeInTheDocument();
 });
 
-test('Should display the On-Yomi reading description when hovering over the \'On\' text', () => {
+test('Should display the On-Yomi reading description when hovering over the \'On\' text', async () => {
     mockEnvironment.mockReturnValue('Example on reading desc');
     const component = render(<KanjiReadingDisplay type={ReadingType.ON} readings={[onReading]} showRomaji={false} />);
     fireEvent.mouseOver(component.getByText('On'));
-    expect(screen.getByTitle('On-yomi Reading')).toBeInTheDocument();
-    expect(screen.getByText('Example on reading desc')).toBeInTheDocument();
+    expect(await screen.findByTitle('On-yomi Reading')).toBeInTheDocument();
+    expect(await screen.findByText('Example on reading desc')).toBeInTheDocument();
 });
 
-test('Should display the Kun-Yomi reading description when hovering over the \'Kun\' text', () => {
+test('Should display the Kun-Yomi reading description when hovering over the \'Kun\' text', async () => {
     mockEnvironment.mockReturnValue('Example kun reading desc');
     const component = render(<KanjiReadingDisplay type={ReadingType.KUN} readings={[kunReading]} showRomaji={false} />);
     fireEvent.mouseOver(component.getByText('Kun'));
-    expect(screen.getByTitle('Kun-yomi Reading')).toBeInTheDocument();
-    expect(screen.getByText('Example kun reading desc')).toBeInTheDocument();
+    expect(await screen.findByTitle('Kun-yomi Reading')).toBeInTheDocument();
+    expect(await screen.findByText('Example kun reading desc')).toBeInTheDocument();
 });
 
 test('Passing in a single reading should render a descriptive title on the number 1', () => {

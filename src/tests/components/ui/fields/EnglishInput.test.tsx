@@ -22,11 +22,11 @@ const setup = () => {
     }
 }
 
-test("Hovering over the help icon should display a popover", () => {
+test("Hovering over the help icon should display a popover", async () => {
     const { help } = setup();
     fireEvent.mouseOver(help);
-    expect(screen.getByTitle('English Meaning')).toBeInTheDocument();
-    expect(screen.getByText('Enter one of the meanings as a single English word.')).toBeInTheDocument();
+    expect(await screen.findByTitle('English Meaning')).toBeInTheDocument();
+    expect(await screen.findByText('Enter one of the meanings as a single English word.')).toBeInTheDocument();
 });
 
 test("Passing in the disabled prop as true should disable the field", () => {

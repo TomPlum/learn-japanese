@@ -11,12 +11,12 @@ const setup = () => {
     }
 }
 
-test('Clicking the toggle should render the menu', () => {
+test('Clicking the toggle should render the menu', async () => {
     const { toggle } = setup();
     fireEvent.click(toggle);
-    expect(screen.getByText('Ciutadella')).toBeInTheDocument();
-    expect(screen.getByText('Montserrat')).toBeInTheDocument();
-    expect(screen.getByText('Segoe UI')).toBeInTheDocument();
+    expect(await screen.findByText('Ciutadella')).toBeInTheDocument();
+    expect(await screen.findByText('Montserrat')).toBeInTheDocument();
+    expect(await screen.findByText('Segoe UI')).toBeInTheDocument();
 });
 
 test('Clicking a font option from the menu should call the onSelect event handler with that font', () => {

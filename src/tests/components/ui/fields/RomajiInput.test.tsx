@@ -42,16 +42,16 @@ test('Changing the input value should call the onChange event handler with the i
     expect(onChangeHandler).toHaveBeenCalledWith("ba");
 });
 
-test('Hovering over help should render the popover', () => {
+test('Hovering over help should render the popover', async () => {
     const { help } = setup();
     fireEvent.mouseOver(help);
-    expect(screen.getByTitle('What is Rōmaji?')).toBeInTheDocument();
+    expect(await screen.findByTitle('What is Rōmaji?')).toBeInTheDocument();
 });
 
-test('Clicking the help icon should render the popover', () => {
+test('Clicking the help icon should render the popover', async () => {
     const { help } = setup();
     fireEvent.click(help);
-    expect(screen.getByTitle('What is Rōmaji?')).toBeInTheDocument();
+    expect(await screen.findByTitle('What is Rōmaji?')).toBeInTheDocument();
 });
 
 each([

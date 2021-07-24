@@ -17,7 +17,8 @@ const kanji = new Kanji(
     ["person", "fake-example"],
     KyoikuGrade.ONE,
     "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
-    [new Example("外国人", ["がいこくじん"], ["foreigner"])]
+    [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+    []
 );
 
 beforeEach(() => {
@@ -67,12 +68,14 @@ test('Should render the examples display', () => {
     expect(component.getByText('foreigner')).toBeInTheDocument();
 });
 
-test('Should display the meaning reading description when hovering over the \'Meaning\' text', () => {
+test('Should display the meaning reading description when hovering over the \'Meaning\' text', async () => {
     mockEnvironment.mockReturnValue('Example meaning desc');
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />);
+
     fireEvent.mouseOver(component.getByText('Meaning'));
-    expect(screen.getByTitle('English Meaning')).toBeInTheDocument();
-    expect(screen.getByText('Example meaning desc')).toBeInTheDocument();
+
+    expect(await screen.findByTitle('English Meaning')).toBeInTheDocument();
+    expect(await screen.findByText('Example meaning desc')).toBeInTheDocument();
 });
 
 test('Should assign a dynamic class to the container based on the grade', () => {

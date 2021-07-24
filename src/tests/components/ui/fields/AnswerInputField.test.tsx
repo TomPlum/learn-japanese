@@ -60,11 +60,11 @@ test("It should not call the onChange handler if the value does not match the pa
     expect(onChangeHandler).not.toHaveBeenCalled();
 });
 
-test("It should set the help pop-over title and text to the data in the passed field", () => {
+test("It should set the help pop-over title and text to the data in the passed field", async () => {
     const { help } = setup();
 
     fireEvent.mouseOver(help);
 
-    expect(screen.getByTitle("English Meaning"));
-    expect(screen.getByText("The meaning of the word or character in English. Usually a single word."));
+    expect(await screen.findByTitle("English Meaning"));
+    expect(await screen.findByText("The meaning of the word or character in English. Usually a single word."));
 });
