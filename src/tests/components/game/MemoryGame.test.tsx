@@ -21,7 +21,7 @@ const onFinishHandler = jest.fn();
 
 //Mock Imported Static Functions
 const shuffle = jest.fn();
-const getRandomObject = jest.fn();
+const getRandomObjects = jest.fn();
 const getRandomElements = jest.fn();
 const environment = jest.fn();
 
@@ -55,17 +55,17 @@ beforeEach(() => {
     };
 
     //Mocked Static Functions
-    Arrays.getRandomObject = getRandomObject;
+    Arrays.getRandomObjects = getRandomObjects;
     Arrays.shuffle = shuffle;
     Arrays.getRandomElements = getRandomElements;
     Environment.variable = environment;
 
     //Always returns the first element so it is deterministic
-    getRandomObject.mockImplementation((array: any[]) => {
+    getRandomObjects.mockImplementation((array: any[]) => {
         const objects = [...array];
         const firstKana = objects[0];
         objects.splice(0, 1);
-        return [firstKana, objects];
+        return [[firstKana], objects];
     });
 
     //Always returns the array in the same order so it doesn't shuffle

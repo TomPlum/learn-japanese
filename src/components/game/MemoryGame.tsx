@@ -36,7 +36,7 @@ export interface MemoryGameProps {
 }
 
 interface MemoryGameState {
-    currentQuestion: Learnable;
+    currentQuestion: Learnable[];
     remainingQuestions: Learnable[];
     correctAnswers: Set<Learnable>;
     wrongAnswers: Learnable[];
@@ -71,7 +71,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
         const { settings, data } = this.props;
 
-        const [firstQuestion, remainingQuestions] = Arrays.getRandomObject(data);
+        const [firstQuestion, remainingQuestions] = this.getNextQuestion(data);
 
         this.state = {
             currentQuestion: firstQuestion,
@@ -205,9 +205,9 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                            <HintButton
                                remaining={hints}
                                title="Get a Hint"
-                               data={currentQuestion}
+                               data={currentQuestion[0]}
                                className={styles.hint}
-                               key={currentQuestion.getUniqueID()}
+                               key={currentQuestion.map(q => q.getUniqueID()).join("-")}
                                disabled={paused || !settings.hints.enabled}
                                totalQuantity={settings.hints.unlimited ? undefined : settings.hints.quantity}
                                onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
@@ -232,11 +232,13 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         const questionField = settings.question.questionField;
         const answerField = settings.question.answerField;
 
+        const currentQuestionID = currentQuestion.map(q => q.getUniqueID()).join("-")
+
         //TODO: Extract into a QuestionRegistry component (Maybe Strategy pattern?)
         switch (settings.question.type) {
             case QuestionType.TEXT: {
-                const question = currentQuestion.getFieldValues(questionField)[0];
-                const answers = currentQuestion.getFieldValues(answerField);
+                const question = currentQuestion[0].getFieldValues(questionField)[0];
+                const answers = currentQuestion[0].getFieldValues(answerField);
 
                 return (
                     <TextQuestion
@@ -245,7 +247,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                         ref={this.question}
                         question={question}
                         answerField={answerField}
-                        key={currentQuestion.getUniqueID()}
+                        key={currentQuestionID}
                         isValid={this.handleAnswerValidity}
                     />
                 );
@@ -253,11 +255,11 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             case QuestionType.CHOICE: {
                 //What the user is going to be asked. Usually just a single string, but some kana have multiple romaji.
                 //Also, what the expected answer is going to be. For a choice question, it's only ever going to be one.
-                const questions = currentQuestion; //.getFieldValues(questionField);
+                const questions = currentQuestion[0];
 
                 //What wrong options will be presented? Takes the answer filter from the settings and excludes the question.
                 //We then filter our Learnable data and retrieve n options. Then we map chosen answer fields for them.
-                const chain = settings.question.answerFilter(currentQuestion).withFilter(new ExclusionFilter(currentQuestion));
+                const chain = settings.question.answerFilter(currentQuestion).withFilter(new ExclusionFilter(currentQuestion[0]));
                 const wrong = Arrays.getRandomElements(chain.execute(data), settings.question.cards - 1);
                 const wrongAnswerOptions = wrong.map((answer: Learnable) => answer.getFieldValues(answerField)[0]);
 
@@ -268,7 +270,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                         question={questions}
                         answerField={answerField}
                         questionField={questionField}
-                        key={currentQuestion.getUniqueID()}
+                        key={currentQuestionID}
                         isValid={this.handleAnswerValidity}
                         wrong={wrongAnswerOptions.flatMap(answer => answer ? [answer] : [])}
                     />
@@ -283,7 +285,8 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
         if (this.question.current?.isCorrect()) {
             //Add the current question to the correct answers set.
-            this.setState({ correctAnswers: correctAnswers.add(currentQuestion)});
+            currentQuestion.forEach(question => correctAnswers.add(question));
+            this.setState({ correctAnswers: correctAnswers });
 
             if (remainingQuestions.length === 0) {
                 //If we're out of questions...
@@ -320,7 +323,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     }
 
     reset = () => {
-        const [nextQuestion, remainingQuestions] = Arrays.getRandomObject(this.props.data);
+        const [nextQuestion, remainingQuestions] = this.getNextQuestion(this.props.data);
 
         this.setState({
             currentQuestion: nextQuestion,
@@ -346,13 +349,13 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         this.countdown.current?.reset();
 
         //Pick a random remaining question and remove it from the pool.
-        const [nextQuestion, nextRemainingQuestions] = Arrays.getRandomObject(remainingQuestions);
+        const [nextQuestions, nextRemainingQuestions] = this.getNextQuestion(remainingQuestions)
 
         //Update the next question to be displayed and the remaining questions with one less.
         this.setState({
             streak: streak + 1,
             score: this.getScore(),
-            currentQuestion: nextQuestion,
+            currentQuestion: nextQuestions,
             hasUsedHintThisQuestion: false,
             remainingQuestions: nextRemainingQuestions,
             hints: hasUsedHintThisQuestion ? hints - 1 : hints
@@ -382,10 +385,10 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         this.countdown.current?.reset();
 
         //Pick a random remaining question and remove it from the pool.
-        const [nextQuestion, nextRemainingQuestions] = Arrays.getRandomObject(remainingQuestions);
+        const [nextQuestions, nextRemainingQuestions] = this.getNextQuestion(remainingQuestions);
 
         this.setState({
-            currentQuestion: nextQuestion,
+            currentQuestion: nextQuestions,
             hasUsedHintThisQuestion: false,
             failedToAnswer: failedToAnswer + 1,
             remainingQuestions: nextRemainingQuestions,
@@ -424,10 +427,15 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
     private onPaused = () => this.setState({ paused: !this.state.paused });
 
+    private getNextQuestion = (data: Learnable[]): [Learnable[], Learnable[]] => {
+        const quantity = this.props.settings.question.quantity;
+        return Arrays.getRandomObjects(data, quantity);
+    }
+
     private getScore = (): number => {
         const { score, streak, currentQuestion } = this.state;
         const multiplier = streak >= 50 ? 4 : streak >= 25 ? 3 : streak >= 10 ? 2 : streak >= 5 ? 1.5 : 1;
-        return score + currentQuestion.getBaseScore() * multiplier;
+        return score + currentQuestion[0].getBaseScore() * multiplier;
     }
 }
 

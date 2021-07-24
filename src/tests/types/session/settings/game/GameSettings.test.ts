@@ -50,7 +50,7 @@ describe("Game Settings", () => {
                 .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
                 .build();
 
-            expect(settings.question).toStrictEqual(new QuestionSettings(LearnableField.KANJI, LearnableField.MEANING, QuestionType.CHOICE, 6, answerFilter, true));
+            expect(settings.question).toStrictEqual(new QuestionSettings(LearnableField.KANJI, LearnableField.MEANING, QuestionType.CHOICE, 6, 1, answerFilter, true));
             expect(settings.hints).toStrictEqual(new HintSettings(false, 0, false));
             expect(settings.lives).toStrictEqual(new LifeSettings(true, LifeQuantity.ONE));
             expect(settings.time).toStrictEqual(new TimeSettings(false, true, 5));
