@@ -131,9 +131,19 @@ describe("Arrays Utility", () => {
     });
 
     describe("Get Random Object", () => {
-        const array = [1, 4, 5, 2, 6];
-        const [random, remaining] = Arrays.getRandomObject(array);
-        expect(array).toContain(random);
-        expect(remaining).toStrictEqual(array.filter(it => it !== random));
+        it("Should retrieve a random object and return it with the remaining pool", () => {
+            const array = [1, 4, 5, 2, 6];
+            const [random, remaining] = Arrays.getRandomObject(array);
+            expect(array).toContain(random);
+            expect(remaining).toStrictEqual(array.filter(it => it !== random));
+        });
+    });
+
+    describe("Get Random Objects", () => {
+        it("Should retrieve the number specified of random objects and return it with the remaining pool", () => {
+            const array = [1, 4, 5, 2, 6];
+            const [random, remaining] = Arrays.getRandomObjects(array, 3);
+            expect(remaining).toStrictEqual(array.filter(it => !random.includes(it)));
+        });
     });
 });

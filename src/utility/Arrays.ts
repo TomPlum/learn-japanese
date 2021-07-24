@@ -136,4 +136,22 @@ export default class Arrays {
         objects.splice(randomIndex, 1);
         return [randomObject, objects];
     };
+
+    /**
+     * Picks n random object from the given array.
+     * @param pool The array of objects to choose from.
+     * @param quantity The number of objects to randomly choose.
+     * @returns tuple A tuple containing the randomly chosen objects and the remaining pool.
+     */
+    static getRandomObjects = <T>(pool: T[], quantity: number): [T[], T[]] => {
+        const objects = [...pool];
+        let randomObjects = [];
+        for (let i = 0; i < quantity; i++) {
+            const randomIndex = Arrays.getRandomArrayIndex(objects);
+            const randomObject = objects[randomIndex];
+            objects.splice(randomIndex, 1);
+            randomObjects.push(randomObject);
+        }
+        return [randomObjects, objects];
+    };
 }
