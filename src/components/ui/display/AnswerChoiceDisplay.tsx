@@ -13,6 +13,8 @@ export interface AnswerChoiceDisplayProps {
     onMouseUp?: (value: string) => void;
     onMouseOver?: (value: string) => void;
     onMouseOut?: (value: string) => void;
+    onTouchStart?: (value: string) => void;
+    onTouchEnd?: (value: string) => void;
 }
 
 interface AnswerChoiceDisplayState {
@@ -35,7 +37,9 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
     }
 
     render() {
-        const { value, blur, index, style, onClick, onMouseUp, onMouseDown, onMouseOver, onMouseOut } = this.props;
+        const { value, blur, index, style, onClick, onMouseUp, onMouseDown, onMouseOver, onMouseOut,
+            onTouchStart, onTouchEnd
+        } = this.props;
         const { isNotifyingIncorrect } = this.state;
 
         const containerClass = style?.container ? style.container : [styles.wrapper];
@@ -51,6 +55,8 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
                 onMouseDown={() => onMouseDown?.(value)}
                 onMouseOver={() => onMouseOver?.(value)}
                 onMouseOut={() => onMouseOut?.(value)}
+                onTouchStart={() => onTouchStart?.(value)}
+                onTouchEnd={() => onTouchEnd?.(value)}
                 className={containerClass.join(" ")}
             >
                 <span className={styles.index} style={{ color: "#76bfcb", visibility: indexVisibility }}>

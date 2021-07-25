@@ -7,6 +7,8 @@ const onMouseDownHandler = jest.fn();
 const onMouseUpHandler = jest.fn();
 const onMouseOverHandler = jest.fn();
 const onMouseOutHandler = jest.fn();
+const onTouchStart = jest.fn();
+const onTouchEnd = jest.fn();
 
 let props: AnswerChoiceDisplayProps;
 
@@ -17,7 +19,9 @@ beforeEach(() => {
         onMouseDown: onMouseDownHandler,
         onMouseUp: onMouseUpHandler,
         onMouseOver: onMouseOverHandler,
-        onMouseOut: onMouseOutHandler
+        onMouseOut: onMouseOutHandler,
+        onTouchStart: onTouchStart,
+        onTouchEnd: onTouchEnd
     };
 });
 
@@ -54,6 +58,18 @@ test('Mousing out the value should call the onMouseOut event handler', () => {
     render(<AnswerChoiceDisplay {...props} />);
     fireEvent.mouseOut(screen.getByText('あ'));
     expect(onMouseOutHandler).toHaveBeenCalledWith('あ');
+});
+
+test('Touching down on the value should call the onTouchStart event handler', () => {
+    render(<AnswerChoiceDisplay {...props} />);
+    fireEvent.touchStart(screen.getByText('あ'));
+    expect(onTouchStart).toHaveBeenCalledWith('あ');
+});
+
+test('Touching up on the value should call the onTouchEnd event handler', () => {
+    render(<AnswerChoiceDisplay {...props} />);
+    fireEvent.touchEnd(screen.getByText('あ'));
+    expect(onTouchEnd).toHaveBeenCalledWith('あ');
 });
 
 test('Passing the index property when the display is not blurred should render the index', () => {

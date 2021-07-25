@@ -36,10 +36,12 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
 
     componentDidMount() {
         this.container?.current?.addEventListener("mousemove", this.handleCursorMove)
+        this.container?.current?.addEventListener("touchmove", this.handleTouchMove)
     }
 
     componentWillUnmount() {
         this.container?.current?.removeEventListener("mousemove", this.handleCursorMove)
+        this.container?.current?.removeEventListener("touchmove", this.handleTouchMove)
     }
 
     render() {
@@ -54,12 +56,14 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
                     const answer = data.get(question)!;
 
                     return (
-                        <Row className={styles.row}>
-                            <Col xs={3}>
+                        <Row className={[styles.row, "justify-content-around"].join(" ")}>
+                            <Col xs={5} md={4}>
                                 <AnswerChoiceDisplay
                                     value={question}
                                     onMouseUp={this.resetSelected}
+                                    onTouchEnd={this.resetSelected}
                                     onMouseDown={this.handleQuestionSelection}
+                                    onTouchStart={this.handleQuestionSelection}
                                     style={{
                                         container: [question, styles.display],
                                         character: { className: this.getQuestionValueClassName(question) }
@@ -67,17 +71,19 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
                                 />
                             </Col>
 
-                            <Col xs={6}>
+                            <Col xs={2} md={4}>
 
                             </Col>
 
-                            <Col xs={3}>
+                            <Col xs={5} md={4}>
                                 <AnswerChoiceDisplay
                                     value={answer}
                                     onMouseUp={this.handleAnswerAttempt}
+                                    onTouchEnd={this.handleAnswerAttempt}
                                     onMouseDown={this.handleAnswerChange}
+                                    onTouchStart={this.handleAnswerChange}
                                     onMouseOver={(value: string) => this.setState({ hoveredAnswer: value })}
-                                    onMouseOut={() => this.setState({ hoveredAnswer: undefined })}
+                                    onMouseOut={this.resetHoveredAnswer}
                                     style={{
                                         container: [answer, styles.display],
                                         character: { className: this.getAnswerValueClassName(answer) }
@@ -162,8 +168,17 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
         this.setState({ selected: undefined });
     }
 
+    private resetHoveredAnswer = () => {
+        this.setState({ hoveredAnswer: undefined });
+    }
+
     private handleCursorMove = (e: MouseEvent) => {
         this.setState({ xCursor: e.pageX, yCursor: e.pageY });
+    }
+
+    private handleTouchMove = (e: TouchEvent) => {
+        const touch = e.touches[0];
+        this.setState({ xCursor: touch.pageX, yCursor: touch.pageY });
     }
 
     private handleAnswerChange = (selectedAnswer: string) => {

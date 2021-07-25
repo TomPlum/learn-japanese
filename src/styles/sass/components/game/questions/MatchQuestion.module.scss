@@ -1,6 +1,6 @@
 @import "src/styles/sass/viewports";
 
-$select-colour: #2e6cde;
+$select-colour: #4594e9;
 
 .wrapper {
   max-width: 600px;
@@ -45,7 +45,7 @@ $select-colour: #2e6cde;
 }
 
 @mixin display {
-  border: #7a7a7a 2px solid;
+  border: #a09a9a 1px solid;
   border-radius: 10px;
   z-index: 1000;
 }
