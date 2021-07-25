@@ -1,40 +1,30 @@
+@import "src/styles/sass/viewports";
+
+$select-colour: #2e6cde;
+
 .wrapper {
   max-width: 600px;
 }
 
-@mixin value {
-  //font-size: 5em;
-}
-
 .question {
-  @include value;
   cursor: pointer;
 }
 
 .question:hover {
   transition: all ease 0.1s;
-  color: #2e6cde;
+  color: $select-colour;
 }
 
 .answer {
-  @include value;
   cursor: pointer;
 }
 
 .selected {
-  @include value;
-  color: #2e6cde;
+  color: $select-colour;
 }
 
 .matched {
-  @include value;
   color: #7a7a7a;
-}
-
-.display {
-  border: #7a7a7a 2px solid;
-  border-radius: 10px;
-  height: 150px;
 }
 
 .row {
@@ -52,4 +42,31 @@
   border-color: #2e6cde;
   border-width: 5px;
   z-index: -10;
+}
+
+@mixin display {
+  border: #7a7a7a 2px solid;
+  border-radius: 10px;
+  z-index: 1000;
+}
+
+@include desktop {
+  .display {
+    @include display;
+    height: 150px;
+  }
+}
+
+@include tablet {
+  .display {
+    @include display;
+    height: 150px;
+  }
+}
+
+@include phone {
+  .display {
+    @include display;
+    height: 100px;
+  }
 }

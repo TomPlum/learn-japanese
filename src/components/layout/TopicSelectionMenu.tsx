@@ -29,10 +29,10 @@ class TopicSelectionMenu extends Component<TopicSelectionMenuProps, TopicSelecti
 
     render() {
         const { selected } = this.state;
-        const { appMode } = this.props;
+        const { appMode, className } = this.props;
 
         return (
-            <div className={this.props.className}>
+            <div className={className}>
 
                 <Dropdown className={"d-lg-none " + styles.dropdown} data-testid="dropdown">
                     <Dropdown.Toggle variant="primary" className={styles.dropdownToggle} id="select-game-type">

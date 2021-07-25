@@ -1,4 +1,5 @@
-@import "../../animations";
+@import "src/styles/sass/animations";
+@import "src/styles/sass/viewports";
 
 .wrapper {
   max-width: 1400px;
@@ -15,13 +16,30 @@
   justify-content: center;
 }
 
-.menu {
+.topicMenu {
   @include fadeIn(0.2s);
+  width: 100%;
 }
 
 .gameMenuWrapper {
   display: flex;
   justify-content: center;
+  padding: 0;
+}
+
+@include phone {
+  .topicSelectionMenuWrapper {
+    padding: 0;
+  }
+}
+
+@include tablet {
+  .topicSelectionMenuWrapper {
+    display: flex;
+    justify-content: center;
+    max-width: 768px;
+    padding: 0;
+  }
 }
 
 .innerWrapper {

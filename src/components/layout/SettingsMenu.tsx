@@ -33,10 +33,10 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
             <div className={styles.wrapper} data-testid="game-settings-menu">
                 <Container fluid className={styles.innerWrapper}>
                     <Row className={styles.row}>
-                        <Col sm={12} lg={5}>
+                        <Col sm={12} lg={5} className={styles.topicSelectionMenuWrapper}>
                             <TopicSelectionMenu
                                 appMode={mode}
-                                className={styles.menu}
+                                className={styles.topicMenu}
                                 onSelect={(selected) => this.setState({ topic: selected })}
                             />
                         </Col>

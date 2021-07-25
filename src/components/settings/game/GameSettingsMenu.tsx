@@ -177,7 +177,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             </Tab.Content>
                         </Card.Body>
 
-                        <Card.Footer>
+                        <Card.Footer className={styles.footer}>
                             <Form.Row>
                                 <Col className={styles.noGuttersLeft}>
                                     <Button variant="danger" block onClick={() => this.props.onQuit()} className={styles.button}>

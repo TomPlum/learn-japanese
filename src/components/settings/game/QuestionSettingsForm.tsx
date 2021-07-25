@@ -88,7 +88,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                         <span className={styles.description}>{this.getDescription()}</span>
                     </Col>
 
-                    <Col>
+                    <Col className={styles.noGuttersRight}>
                         <DisplayTypeButton
                             icon={faFont}
                             type={QuestionType.TEXT}
@@ -97,7 +97,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                         />
                     </Col>
 
-                    <Col>
+                    <Col className={[styles.noGuttersLeft, styles.noGuttersRight].join(" ")}>
                         <DisplayTypeButton
                             icon={faThLarge}
                             type={QuestionType.CHOICE}
@@ -106,7 +106,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                         />
                     </Col>
 
-                    <Col>
+                    <Col className={styles.noGuttersLeft}>
                         <DisplayTypeButton
                             icon={faHandPointer}
                             type={QuestionType.MATCH}
@@ -123,7 +123,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                             <p className={styles.description}>You'll be shown {cards} answers to choose from.</p>
                         </Col>
 
-                        <Col>
+                        <Col className={styles.noGuttersRight}>
                             <KanaQuantityButton cards={2} selected={cards} onClick={this.handleQuantitySelect}>
                             <span className={"fa-layers fa-fw " + styles.cardsIcon}>
                                 <FontAwesomeIcon fixedWidth icon={faSquare} transform="left-5 shrink-8"/>
@@ -132,7 +132,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                             </KanaQuantityButton>
                         </Col>
 
-                        <Col>
+                        <Col className={[styles.noGuttersLeft, styles.noGuttersRight].join(" ")}>
                             <KanaQuantityButton cards={4} selected={cards} onClick={this.handleQuantitySelect}>
                                 <FontAwesomeIcon
                                     fixedWidth
@@ -142,7 +142,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                             </KanaQuantityButton>
                         </Col>
 
-                        <Col>
+                        <Col className={styles.noGuttersLeft}>
                             <KanaQuantityButton cards={6} selected={cards} onClick={this.handleQuantitySelect}>
                                 <FontAwesomeIcon
                                     fixedWidth

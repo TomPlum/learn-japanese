@@ -103,7 +103,7 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
                         </Col>
 
                         {appMode === AppMode.LEARN && (
-                            <Col xs={2} className="pl-2">
+                            <Col xs={3} sm={2} className="pl-2">
                                 <Button className={styles.search} onClick={() => this.setState({ searching: true })} title="Search">
                                     <FontAwesomeIcon icon={faSearch} fixedWidth/>
                                 </Button>
@@ -111,7 +111,7 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
                         )}
 
                         {appMode === AppMode.PLAY && (
-                            <Col xs={2} className="pl-2">
+                            <Col xs={3} sm={2} className="pl-2">
                                 <Button
                                     title="Game Settings"
                                     className={styles.settings}
