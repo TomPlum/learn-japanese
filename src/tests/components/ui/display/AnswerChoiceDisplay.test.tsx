@@ -3,13 +3,17 @@ import React from "react";
 import AnswerChoiceDisplay, { AnswerChoiceDisplayProps } from "../../../../components/ui/display/AnswerChoiceDisplay";
 
 const onClickHandler = jest.fn();
+const onMouseDownHandler = jest.fn();
+const onMouseUpHandler = jest.fn();
 
 let props: AnswerChoiceDisplayProps;
 
 beforeEach(() => {
     props = {
         value: "あ",
-        onClick: onClickHandler
+        onClick: onClickHandler,
+        onMouseDown: onMouseDownHandler,
+        onMouseUp: onMouseUpHandler
     };
 });
 
@@ -22,6 +26,18 @@ test('Clicking the value should call the onClick event handler', () => {
     render(<AnswerChoiceDisplay {...props} />);
     fireEvent.click(screen.getByText('あ'));
     expect(onClickHandler).toHaveBeenCalled();
+});
+
+test('Clicking the value should call the onMouseDown event handler', () => {
+    render(<AnswerChoiceDisplay {...props} />);
+    fireEvent.mouseDown(screen.getByText('あ'));
+    expect(onMouseDownHandler).toHaveBeenCalledWith('あ')
+});
+
+test('Clicking the value should call the onMouseUp event handler', () => {
+    render(<AnswerChoiceDisplay {...props} />);
+    fireEvent.mouseUp(screen.getByText('あ'));
+    expect(onMouseUpHandler).toHaveBeenCalledWith('あ');
 });
 
 test('Passing the index property when the display is not blurred should render the index', () => {

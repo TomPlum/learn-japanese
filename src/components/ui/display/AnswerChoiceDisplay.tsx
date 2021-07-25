@@ -9,6 +9,8 @@ export interface AnswerChoiceDisplayProps {
     index?: number;
     style?: KanaDisplayStyle;
     onClick?: (value: string) => void;
+    onMouseDown?: (value: string) => void;
+    onMouseUp?: (value: string) => void;
 }
 
 interface AnswerChoiceDisplayState {
@@ -41,7 +43,12 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
         const indexVisibility = index && !blur ? 'visible' : 'hidden';
 
         return (
-            <div className={containerClass.join(" ")} onClick={this.handleClick}>
+            <div
+                onClick={this.handleClick}
+                onMouseUp={this.handleMouseUp}
+                onMouseDown={this.handleMouseDown}
+                className={containerClass.join(" ")}
+            >
                 <span className={styles.index} style={{ color: "#76bfcb", visibility: indexVisibility }}>
                     {index}
                 </span>
@@ -49,7 +56,7 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
                 <DynamicDisplay
                     value={value}
                     style={style}
-                    className={[valueClass, clickable].join(" ")}
+                    className={[valueClass, clickable, style?.character?.className].join(" ")}
                 />
             </div>
         );
@@ -61,6 +68,14 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
 
     private handleClick = () => {
         this.props.onClick?.(this.props.value);
+    }
+
+    private handleMouseDown = () => {
+        this.props.onMouseDown?.(this.props.value);
+    }
+
+    private handleMouseUp = () => {
+        this.props.onMouseUp?.(this.props.value);
     }
 }
 
