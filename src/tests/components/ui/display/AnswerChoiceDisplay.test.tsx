@@ -5,6 +5,8 @@ import AnswerChoiceDisplay, { AnswerChoiceDisplayProps } from "../../../../compo
 const onClickHandler = jest.fn();
 const onMouseDownHandler = jest.fn();
 const onMouseUpHandler = jest.fn();
+const onMouseOverHandler = jest.fn();
+const onMouseOutHandler = jest.fn();
 
 let props: AnswerChoiceDisplayProps;
 
@@ -13,7 +15,9 @@ beforeEach(() => {
         value: "あ",
         onClick: onClickHandler,
         onMouseDown: onMouseDownHandler,
-        onMouseUp: onMouseUpHandler
+        onMouseUp: onMouseUpHandler,
+        onMouseOver: onMouseOverHandler,
+        onMouseOut: onMouseOutHandler
     };
 });
 
@@ -28,16 +32,28 @@ test('Clicking the value should call the onClick event handler', () => {
     expect(onClickHandler).toHaveBeenCalled();
 });
 
-test('Clicking the value should call the onMouseDown event handler', () => {
+test('Mousing down the value should call the onMouseDown event handler', () => {
     render(<AnswerChoiceDisplay {...props} />);
     fireEvent.mouseDown(screen.getByText('あ'));
     expect(onMouseDownHandler).toHaveBeenCalledWith('あ')
 });
 
-test('Clicking the value should call the onMouseUp event handler', () => {
+test('Mousing up the value should call the onMouseUp event handler', () => {
     render(<AnswerChoiceDisplay {...props} />);
     fireEvent.mouseUp(screen.getByText('あ'));
     expect(onMouseUpHandler).toHaveBeenCalledWith('あ');
+});
+
+test('Mousing over the value should call the onMouseOver event handler', () => {
+    render(<AnswerChoiceDisplay {...props} />);
+    fireEvent.mouseOver(screen.getByText('あ'));
+    expect(onMouseOverHandler).toHaveBeenCalledWith('あ');
+});
+
+test('Mousing out the value should call the onMouseOut event handler', () => {
+    render(<AnswerChoiceDisplay {...props} />);
+    fireEvent.mouseOut(screen.getByText('あ'));
+    expect(onMouseOutHandler).toHaveBeenCalledWith('あ');
 });
 
 test('Passing the index property when the display is not blurred should render the index', () => {

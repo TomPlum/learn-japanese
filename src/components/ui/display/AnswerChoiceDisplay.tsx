@@ -11,6 +11,8 @@ export interface AnswerChoiceDisplayProps {
     onClick?: (value: string) => void;
     onMouseDown?: (value: string) => void;
     onMouseUp?: (value: string) => void;
+    onMouseOver?: (value: string) => void;
+    onMouseOut?: (value: string) => void;
 }
 
 interface AnswerChoiceDisplayState {
@@ -33,7 +35,7 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
     }
 
     render() {
-        const { value, blur, index, style, onClick } = this.props;
+        const { value, blur, index, style, onClick, onMouseUp, onMouseDown, onMouseOver, onMouseOut } = this.props;
         const { isNotifyingIncorrect } = this.state;
 
         const containerClass = style?.container ? style.container : [styles.wrapper];
@@ -44,9 +46,11 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
 
         return (
             <div
-                onClick={this.handleClick}
-                onMouseUp={this.handleMouseUp}
-                onMouseDown={this.handleMouseDown}
+                onClick={() => onClick?.(value)}
+                onMouseUp={() => onMouseUp?.(value) }
+                onMouseDown={() => onMouseDown?.(value)}
+                onMouseOver={() => onMouseOver?.(value)}
+                onMouseOut={() => onMouseOut?.(value)}
                 className={containerClass.join(" ")}
             >
                 <span className={styles.index} style={{ color: "#76bfcb", visibility: indexVisibility }}>
@@ -56,7 +60,7 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
                 <DynamicDisplay
                     value={value}
                     style={style}
-                    className={[valueClass, clickable, style?.character?.className].join(" ")}
+                    className={[valueClass, clickable].join(" ")}
                 />
             </div>
         );
@@ -66,17 +70,6 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
         this.setState({ isNotifyingIncorrect: true });
     }
 
-    private handleClick = () => {
-        this.props.onClick?.(this.props.value);
-    }
-
-    private handleMouseDown = () => {
-        this.props.onMouseDown?.(this.props.value);
-    }
-
-    private handleMouseUp = () => {
-        this.props.onMouseUp?.(this.props.value);
-    }
 }
 
 export default AnswerChoiceDisplay;
