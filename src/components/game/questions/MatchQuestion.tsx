@@ -4,8 +4,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import AnswerChoiceDisplay from "../../ui/display/AnswerChoiceDisplay";
 import GameQuestion from "../../../types/game/GameQuestion";
 import LineTo from "react-lineto";
-import styles from "../../../styles/sass/components/game/questions/MatchQuestion.module.scss";
 import Maps from "../../../utility/Maps";
+import styles from "../../../styles/sass/components/game/questions/MatchQuestion.module.scss";
 
 export interface MatchQuestionProps extends GameQuestionProps {
     data: Map<string, string>;
@@ -35,12 +35,10 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
     }
 
     componentDidMount() {
-        this.container?.current?.addEventListener("mouseup", this.handleContainerMouseUp);
         this.container?.current?.addEventListener("mousemove", this.handleCursorMove)
     }
 
     componentWillUnmount() {
-        this.container?.current?.removeEventListener("mouseup", this.handleContainerMouseUp);
         this.container?.current?.removeEventListener("mousemove", this.handleCursorMove)
     }
 
@@ -49,7 +47,7 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
         const { xCursor, yCursor } = this.state;
 
         return (
-            <Container className={styles.wrapper} ref={this.container}>
+            <Container className={styles.wrapper} ref={this.container} onMouseUp={this.resetSelected}>
                 <div style={{ left: xCursor, top: yCursor }} className={styles.cursor} />
 
                 {[...data.keys()].map((question: string) => {
@@ -60,12 +58,12 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
                             <Col xs={3}>
                                 <AnswerChoiceDisplay
                                     value={question}
+                                    onMouseUp={this.resetSelected}
+                                    onMouseDown={this.handleQuestionSelection}
                                     style={{
                                         container: [question, styles.display],
                                         character: { className: this.getQuestionValueClassName(question) }
                                     }}
-                                    onMouseDown={this.handleQuestionSelection}
-                                    onMouseUp={() => this.setState({ selected: undefined })}
                                 />
                             </Col>
 
@@ -89,14 +87,14 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
 
                             {this.getConnectorRenderCondition(question) && (
                                 <LineTo
-                                    from={question}
-                                    toAnchor="left"
-                                    fromAnchor="right"
-                                    borderWidth={5}
-                                    borderColor="#fff"
                                     delay={0}
+                                    from={question}
                                     className={styles.connector}
+                                    toAnchor="left" fromAnchor="right"
+                                    borderWidth={5} borderColor="#fff"
+                                    borderStyle={this.getConnectorStyle(question)}
                                     to={this.getConnectorTarget(question)}
+                                    data-testid={question + "-connector"}
                                 />
                             )}
                         </Row>
@@ -131,7 +129,7 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
         isValid(data.size === answer.size)
     }
 
-    private getQuestionValueClassName = (value: string) => {
+    private getQuestionValueClassName = (value: string): string => {
         const { selected, answer } = this.state;
         if (answer.has(value)) {
             return styles.matched;
@@ -142,7 +140,7 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
         }
     }
 
-    private getAnswerValueClassName = (value: string) => {
+    private getAnswerValueClassName = (value: string): string => {
         const { selected, answer, hoveredAnswer } = this.state;
         if ([...answer.values()].includes(value)) {
             return styles.matched;
@@ -160,10 +158,8 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
         }
     }
 
-    private handleContainerMouseUp = (e: Event) => {
-        if (e.currentTarget === e.target) {
-            this.setState({ selected: undefined });
-        }
+    private resetSelected = () => {
+        this.setState({ selected: undefined });
     }
 
     private handleCursorMove = (e: MouseEvent) => {
@@ -194,6 +190,11 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
         const questionIsSelected = question === selected;
         const questionHasMatchedAnswer = answer.has(question);
         return questionIsSelected || questionHasMatchedAnswer;
+    }
+
+    private getConnectorStyle = (question: string): string => {
+        const { answer } = this.state;
+        return answer.has(question) ? "solid" : "dashed";
     }
 }
 

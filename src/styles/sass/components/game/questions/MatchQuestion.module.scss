@@ -8,10 +8,17 @@
 
 .question {
   @include value;
+  cursor: pointer;
+}
+
+.question:hover {
+  transition: all ease 0.1s;
+  color: #2e6cde;
 }
 
 .answer {
   @include value;
+  cursor: pointer;
 }
 
 .selected {
@@ -31,7 +38,7 @@
 }
 
 .row {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .cursor {
