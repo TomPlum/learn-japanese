@@ -4922,39 +4922,6 @@ export function kyoiku(): KanjiData[] {
             tags: ["verb"]
         },
 
-        //Grade 6 Kanji
-        {
-            name: "私",
-            code: "\u79C1",
-            on: [{ kana: "し", romaji: "shi" }],
-            kun: [{ kana: "わたくし", romaji: "watashi" }],
-            source: "https://en.wiktionary.org/wiki/%E7%A7%81#Kanji",
-            meanings: ["me", "I"],
-            grade: KyoikuGrade.SIX,
-            examples: [
-                { value: "私", kana: ["わたし", "わたくし"], english: ["I", "me", "personal matter"] },
-                { value: "私立", kana: ["しりつ", "わたくしりつ"], english: ["private (establishment"] },
-                { value: "私邸", kana: ["してい"], english: ["private residence"] },
-                { value: "私的", kana: ["してき"], english: ["personal", "private", "proprietary"] },
-                { value: "私鉄", kana: ["してつ"], english: ["private railway",] },
-            ]
-        },
-        {
-            name: "机",
-            code: "\u673A",
-            on: [{ kana: "き", romaji: "ki" }],
-            kun: [{ kana: "つくえ", romaji: "tsukue" }],
-            source: "https://en.wiktionary.org/wiki/%E6%9C%BA#Kanji",
-            meanings: ["desk", "table"],
-            grade: KyoikuGrade.SIX,
-            examples: [
-                { value: "机", kana: ["つくえ, つき"], english: ["desk"] },
-                { value: "机上", kana: ["きじょう"], english: ["on the desk", "theoretical", "academic"] },
-                { value: "机上の空論", kana: ["きじょうのくうろん"], english: ["academic gossip", "empty theory"] },
-                { value: "事務机", kana: ["じむづくえ"], english: ["cleric desk"] },
-                { value: "書き物机", kana: ["かきものづくえ"], english: ["writing desk",] },
-            ]
-        },
         {
             name: "化",
             code: "\u5316",
@@ -5119,6 +5086,166 @@ export function kyoiku(): KanjiData[] {
             ]
         },
         {
+            name: "県",
+            code: "\u770C",
+            on: [{ kana: "けん", romaji: "ken" }],
+            kun: [{ kana: "かける", romaji: "kakeru" }],
+            source: "https://en.wiktionary.org/wiki/%E7%9C%8C#Kanji",
+            meanings: ["prefecture"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "県警", kana: ["けんけい"], english: ["prefectural police"] },
+                { value: "同県", kana: ["どうけん"], english: ["the same prefecture"] },
+                { value: "県知事", kana: ["けんちじ"], english: ["prefectural governor"] },
+                { value: "県内", kana: ["けんない"], english: ["within the prefecture"] },
+                { value: "都道府県", kana: ["とどうふけん"], english: ["administrative divisions of Japan:"] },
+            ]
+        },
+        {
+            name: "指",
+            code: "\u6307",
+            on: [{ kana: "し", romaji: "shi" }],
+            kun: [{ kana: "ゆび", romaji: "yubi" }, { kana: "さす", romaji: "sasu" }],
+            source: "https://en.wiktionary.org/wiki/%E6%8C%87#Kanji",
+            meanings: ["finger", "point"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "指", kana: ["ゆび", "および", "おゆび"], english: ["finger", "toe", "digit"] },
+                { value: "指導", kana: ["しどう"], english: ["leadership", "guidance", "coaching"] },
+                { value: "指揮", kana: ["しき"], english: ["command", "direction"] },
+                { value: "指定", kana: ["してい"], english: ["designation", "specification", "assignment"] },
+                { value: "指名", kana: ["しめい"], english: ["name", "nominate", "designate"] },
+            ]
+        },
+        {
+            name: "予",
+            code: "\u4E88",
+            on: [{ kana: "よ", romaji: "yo" }],
+            kun: [{ kana: "あらかじめ", romaji: "arakajime" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BA%88#Kanji_1",
+            meanings: ["beforehand"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "予算", kana: ["よさん"], english: ["estimate", "budget"] },
+                { value: "予定", kana: ["よてい"], english: ["plans", "arrangement", "schedule", "program"] },
+                { value: "予選", kana: ["よせん"], english: ["nomination", "primary", "preliminary contest"] },
+                { value: "予想", kana: ["よそう"], english: ["expectation", "anticipation", "prediction"] },
+                { value: "予測", kana: ["よそく"], english: ["prediction", "estimation"] },
+            ]
+        },
+        {
+            name: "勝",
+            code: "\u52DD",
+            on: [{ kana: "しょう", romaji: "shō" }],
+            kun: [{ kana: "かつ", romaji: "katsu" }, { kana: "すぐれる", romaji: "sugureru" }, { kana: "まさる", romaji: "masaru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8B%9D#Kanji",
+            meanings: ["win"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "勝る", kana: ["まさる"], english: ["to excel", "to surpass", "to exceed"] },
+                { value: "勝ち", kana: ["かち"], english: ["win", "victory"] },
+                { value: "優勝", kana: ["ゆうしょう"], english: ["overall victory", "championship"] },
+                { value: "決勝", kana: ["けっしょう"], english: ["decision of a contest", "finals (in sports)"] },
+                { value: "勝利", kana: ["しょうり"], english: ["victory", "triumph", "conquest", "success", "win"] },
+            ]
+        },
+        {
+            name: "委",
+            code: "\u59D4",
+            on: [{ kana: "い", romaji: "i" }],
+            kun: [{ kana: "ゆだねる", romaji: "yudaneru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%A7%94#Kanji",
+            meanings: ["committee", "entrust to", "leave to", "devote", "discard"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "委員", kana: ["いいん"], english: ["committee member"] },
+                { value: "委員会", kana: ["いいんかい"], english: ["committee", "commission", "board", "panel"] },
+                { value: "委員長", kana: ["いいんちょう"], english: ["committee chairman"] },
+                { value: "公取委", kana: ["こうとりい"], english: ["Fair Trade Commission"] },
+                { value: "委託", kana: ["いたく"], english: ["consign (goods (for sale) to a firm)"] },
+            ]
+        },
+        {
+            name: "進",
+            code: "\u9032",
+            on: [{ kana: "しん", romaji: "shin" }],
+            kun: [{ kana: "すすむ", romaji: "susumu" }, { kana: "すすめる", romaji: "susumeru" }],
+            source: "https://en.wiktionary.org/wiki/%E9%80%B2#Kanji",
+            meanings: ["advance", "proceed", "progress", "promote"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "推進", kana: ["すいしん"], english: ["propulsion", "driving force", "implementation"] },
+                { value: "進出", kana: ["しんしゅつ"], english: ["advance", "step forward"] },
+                { value: "先進国", kana: ["せんしんこく"], english: ["advanced (developed) country"] },
+                { value: "進展", kana: ["しんてん"], english: ["progress", "development"] },
+                { value: "促進", kana: ["そくしん"], english: ["promotion", "acceleration", "encouragement"] },
+            ]
+        },
+        {
+            name: "旅",
+            code: "\u65C5",
+            on: [{ kana: "ろ", romaji: "ro" }, { kana: "りょ", romaji: "ryo" }],
+            kun: [{ kana: "たび", romaji: "tabi" }],
+            source: "https://en.wiktionary.org/wiki/%E6%97%85#Kanji",
+            meanings: ["trip", "travel"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "旅", kana: ["たび"], english: ["travel", "trip", "journey"] },
+                { value: "旅行", kana: ["りょこう"], english: ["travel", "trip"] },
+                { value: "旅客", kana: ["りょかく", "りょきゃく"], english: ["passenger (transport)"] },
+                { value: "旅館", kana: ["りょかん"], english: ["Japanese hotel", "inn", "ryokan"] },
+                { value: "旅客機", kana: ["りょかくき", "りょかっき"], english: ["passenger plane"] },
+            ]
+        },
+        {
+            name: "向",
+            code: "\u5411",
+            on: [{ kana: "こう", romaji: "kō" }],
+            kun: [{ kana: "むく", romaji: "muku" }, { kana: "むける", romaji: "mukeru" }, { kana: "むかう", romaji: "mukau" }, { kana: "むこう", romaji: "mukō" }],
+            source: "https://en.wiktionary.org/wiki/%E5%90%91#Kanji",
+            meanings: ["yonder", "facing", "beyond", "confront", "defy", "tend","toward", "approach"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "方向", kana: ["ほうこう"], english: ["direction, orientation", "bearing", "way"] },
+                { value: "意向", kana: ["いこう"], english: ["intention", "idea", "inclination"] },
+                { value: "傾向", kana: ["けいこう"], english: ["tendency", "trend", "inclination"] },
+                { value: "向き", kana: ["むき"], english: ["direction", "orientation", "aspect", "situation"] },
+                { value: "向上", kana: ["こうじょう"], english: ["elevation", "rise", "improvement", "advancement"] },
+            ]
+        },
+        {
+            name: "面",
+            code: "\u9762",
+            on: [{ kana: "めん", romaji: "men" }],
+            kun: [{ kana: "おも", romaji: "omo" }, { kana: "おもて", romaji: "omote" }, { kana: "つら", romaji: "tsura" }],
+            source: "https://en.wiktionary.org/wiki/%E9%9D%A2#Kanji",
+            meanings: ["mask", "face", "features", "surface"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "面", kana: ["つら"], english: ["face (often derog. or vulg.)", "mug", "surface"] },
+                { value: "全面", kana: ["ぜんめん"], english: ["whole surface", "entire"] },
+                { value: "当面", kana: ["とうめん"], english: ["current", "urgent", "pressing", "impending"] },
+                { value: "場面", kana: ["ばめん"], english: ["scene", "setting (e.g. of novel)"] },
+                { value: "画面", kana: ["がめん"], english: ["terminal screen", "scene", "picture"] },
+            ]
+        },
+        {
+            name: "反",
+            code: "\u53CD",
+            on: [{ kana: "ほん", romaji: "hon" },{ kana: "はん", romaji: "han" }],
+            kun: [{ kana: "たん", romaji: "tan" },{ kana: "そらす", romaji: "sorasu" }, { kana: "そる", romaji: "soru" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8F%8D#Kanji",
+            meanings: ["anti"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "違反", kana: ["いはん"], english: ["violation (of law), transgression"] },
+                { value: "反対", kana: ["はんたい"], english: ["opposition", "resistance", "antagonism", "hostility"] },
+                { value: "反発", kana: ["はんぱつ"], english: ["to repel", "to oppose", "to revolt"] },
+                { value: "反応", kana: ["はんのう"], english: ["reaction", "response"] },
+                { value: "反省", kana: ["はんせい"], english: ["reflection", "reconsideration", "introspection"] },
+            ]
+        },
+        {
             name: "所",
             code: "\u6240",
             on: [{ kana: "しょ", romaji: "sho" }],
@@ -5280,6 +5407,40 @@ export function kyoiku(): KanjiData[] {
                 { value: "正式", kana: ["せいしき"], english: ["due form", "official", "formality"] },
                 { value: "方式", kana: ["ほうしき"], english: ["form", "method", "system", "formula"] },
                 { value: "形式", kana: ["けいしき"], english: ["form (as opposed to substance)", "formality"] },
+            ]
+        },
+
+        //Grade 6 Kanji
+        {
+            name: "私",
+            code: "\u79C1",
+            on: [{ kana: "し", romaji: "shi" }],
+            kun: [{ kana: "わたくし", romaji: "watashi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%A7%81#Kanji",
+            meanings: ["me", "I"],
+            grade: KyoikuGrade.SIX,
+            examples: [
+                { value: "私", kana: ["わたし", "わたくし"], english: ["I", "me", "personal matter"] },
+                { value: "私立", kana: ["しりつ", "わたくしりつ"], english: ["private (establishment"] },
+                { value: "私邸", kana: ["してい"], english: ["private residence"] },
+                { value: "私的", kana: ["してき"], english: ["personal", "private", "proprietary"] },
+                { value: "私鉄", kana: ["してつ"], english: ["private railway",] },
+            ]
+        },
+        {
+            name: "机",
+            code: "\u673A",
+            on: [{ kana: "き", romaji: "ki" }],
+            kun: [{ kana: "つくえ", romaji: "tsukue" }],
+            source: "https://en.wiktionary.org/wiki/%E6%9C%BA#Kanji",
+            meanings: ["desk", "table"],
+            grade: KyoikuGrade.SIX,
+            examples: [
+                { value: "机", kana: ["つくえ, つき"], english: ["desk"] },
+                { value: "机上", kana: ["きじょう"], english: ["on the desk", "theoretical", "academic"] },
+                { value: "机上の空論", kana: ["きじょうのくうろん"], english: ["academic gossip", "empty theory"] },
+                { value: "事務机", kana: ["じむづくえ"], english: ["cleric desk"] },
+                { value: "書き物机", kana: ["かきものづくえ"], english: ["writing desk",] },
             ]
         },
     ];
