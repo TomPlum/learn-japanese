@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { QuestionType } from "../../../types/game/QuestionType";
 import DisplayTypeButton from "../../ui/buttons/DisplayTypeButton";
-import { faChevronRight, faFont, faGripVertical, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faFont, faGripVertical, faHandPointer, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { Col, Form, Row } from "react-bootstrap";
 import { Environment } from "../../../utility/Environment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,6 +20,7 @@ interface QuestionSettingsFormState {
     type: QuestionType;
     cards: number;
     score: boolean;
+    questions: number;
     questionField: LearnableField;
     answerField: LearnableField;
 }
@@ -29,6 +30,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
     private readonly defaultState = new QuestionSettingsBuilder()
         .withType(QuestionType.TEXT)
         .withCardQuantity(1)
+        .withQuantity(1)
         .withFields(LearnableField.ROMAJI, LearnableField.KANA)
         .withScoreTracking(true)
         .build();
@@ -39,6 +41,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
             type: this.defaultState.type,
             cards: this.defaultState.cards,
             score: this.defaultState.score,
+            questions: this.defaultState.quantity,
             questionField: this.defaultState.questionField,
             answerField: this.defaultState.answerField
         }
@@ -50,12 +53,13 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
 
     componentDidUpdate(prevProps: Readonly<QuestionSettingsFormProps>, prevState: Readonly<QuestionSettingsFormState>) {
         if (prevState !== this.state) {
-            const { type, cards, score, questionField, answerField } = this.state;
+            const { type, cards, score, questions, questionField, answerField } = this.state;
 
             const settings = new QuestionSettingsBuilder()
                 .withType(type)
                 .withCardQuantity(cards)
                 .withScoreTracking(score)
+                .withQuantity(questions)
                 .withFields(questionField, answerField)
                 .build();
 
@@ -99,6 +103,15 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                             type={QuestionType.CHOICE}
                             selected={type}
                             onClick={(type) => this.setState({ type, cards: 4 })}
+                        />
+                    </Col>
+
+                    <Col>
+                        <DisplayTypeButton
+                            icon={faHandPointer}
+                            type={QuestionType.MATCH}
+                            selected={type}
+                            onClick={(type) => this.setState({ type, questions: 3 })}
                         />
                     </Col>
                 </Row>
@@ -204,6 +217,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
         type: this.defaultState.type,
         cards: this.defaultState.cards,
         score: this.defaultState.score,
+        questions: this.defaultState.quantity,
         questionField: this.defaultState.questionField,
         answerField: this.defaultState.answerField
     });

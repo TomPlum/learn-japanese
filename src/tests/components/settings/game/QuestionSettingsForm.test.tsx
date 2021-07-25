@@ -15,6 +15,7 @@ const setup = () => {
     return {
         multipleChoiceButton: component.getByText('Multiple Choice'),
         textModeButton: component.getByText('Text'),
+        matchModeButton: component.getByText('Match'),
         questionFieldSelector: component.getAllByTestId('learnable-field-selector')[0],
         answerFieldSelector: component.getAllByTestId('learnable-field-selector')[1],
         score: component.getByTestId('score-switch'),
@@ -55,27 +56,27 @@ test('Selecting text mode should call the onSelect eventHandler with the updated
     expect(getValueLastCalledWith<QuestionSettings>(onSelectHandler).type).toBe(QuestionType.TEXT);
 });
 
-test('Selecting kana mode should change the description accordingly', () => {
-    environment.mockReturnValue('Kana mode description');
+test('Selecting multiple choice mode should change the description accordingly', () => {
+    environment.mockReturnValue('Multiple choice mode description');
     const { multipleChoiceButton } = setup();
 
     fireEvent.click(multipleChoiceButton);
 
     expect(environment).toHaveBeenCalledWith('Multiple Choice_MODE_DESC');
-    expect(screen.getByText('Kana mode description'))
+    expect(screen.getByText('Multiple choice mode description'))
 });
 
-test('Selecting romaji mode should change the description accordingly', () => {
-    environment.mockReturnValue('Romaji mode description');
+test('Selecting text mode should change the description accordingly', () => {
+    environment.mockReturnValue('Text mode description');
     const { textModeButton } = setup();
 
     fireEvent.click(textModeButton);
 
     expect(environment).toHaveBeenCalledWith('Text_MODE_DESC');
-    expect(screen.getByText('Romaji mode description'))
+    expect(screen.getByText('Text mode description'))
 });
 
-test('Selecting kana mode should render the 3 quantity buttons', () => {
+test('Selecting multiple choice mode should render the 3 quantity buttons', () => {
     const { multipleChoiceButton } = setup();
     fireEvent.click(multipleChoiceButton);
     expect(screen.getByText('2')).toBeInTheDocument();
@@ -83,21 +84,21 @@ test('Selecting kana mode should render the 3 quantity buttons', () => {
     expect(screen.getByText('6')).toBeInTheDocument();
 });
 
-test('Selecting 2 kana quantity should update the description', () => {
+test('Selecting 2 answer quantity should update the description', () => {
     const { multipleChoiceButton } = setup();
     fireEvent.click(multipleChoiceButton);
     fireEvent.click(screen.getByText('2'));
     expect(screen.getByText('You\'ll be shown 2 answers to choose from.'));
 });
 
-test('Selecting 4 kana quantity should update the description', () => {
+test('Selecting 4 answer quantity should update the description', () => {
     const { multipleChoiceButton } = setup();
     fireEvent.click(multipleChoiceButton);
     fireEvent.click(screen.getByText('4'));
     expect(screen.getByText('You\'ll be shown 4 answers to choose from.'));
 });
 
-test('Selecting 6 kana quantity should update the description', () => {
+test('Selecting 6 answer quantity should update the description', () => {
     const { multipleChoiceButton } = setup();
     fireEvent.click(multipleChoiceButton);
     fireEvent.click(screen.getByText('6'));
@@ -142,4 +143,21 @@ test('Changing the answer field should call the onSelect event handler with the 
     const { answerFieldSelector } = setup();
     userEvent.selectOptions(answerFieldSelector, "On'Yomi Reading");
     expect(getValueLastCalledWith<QuestionSettings>(onSelectHandler).answerField).toBe(LearnableField.ONYOMI_READING);
+});
+
+test('Selecting the match question type should change the description accordingly', () => {
+    environment.mockReturnValue('Match question type description');
+    const { matchModeButton } = setup();
+
+    fireEvent.click(matchModeButton);
+
+    expect(environment).toHaveBeenCalledWith('Match_MODE_DESC');
+    expect(screen.getByText('Match question type description'))
+});
+
+test('Selecting match should call the onSelect event handler with the Match question type and 3 quantity', () => {
+    const { matchModeButton } = setup();
+    fireEvent.click(matchModeButton);
+    expect(getValueLastCalledWith<QuestionSettings>(onSelectHandler).type).toBe(QuestionType.MATCH);
+    expect(getValueLastCalledWith<QuestionSettings>(onSelectHandler).quantity).toBe(3);
 });
