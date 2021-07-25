@@ -1,0 +1,48 @@
+.wrapper {
+  max-width: 600px;
+}
+
+@mixin value {
+  //font-size: 5em;
+}
+
+.question {
+  @include value;
+}
+
+.answer {
+  @include value;
+}
+
+.selected {
+  @include value;
+  color: #2e6cde;
+}
+
+.matched {
+  @include value;
+  color: #7a7a7a;
+}
+
+.display {
+  border: #7a7a7a 2px solid;
+  border-radius: 10px;
+  height: 150px;
+}
+
+.row {
+  margin-bottom: 10px;
+}
+
+.cursor {
+  width: 1px;
+  height: 1px;
+  position: fixed;
+  pointer-events: none;
+}
+
+.connector {
+  border-color: #2e6cde;
+  border-width: 5px;
+  z-index: -10;
+}

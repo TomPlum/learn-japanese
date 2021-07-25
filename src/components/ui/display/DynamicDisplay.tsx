@@ -6,6 +6,7 @@ import { Textfit } from "@tomplum/react-textfit";
 
 const DynamicDisplay = (props: { value: string, className?: string, style?: KanaDisplayStyle }) => {
     const [loading, setLoading] = useState(true);
+    const style = props.style;
 
     return (
         <div className={styles.wrapper}>
@@ -17,9 +18,12 @@ const DynamicDisplay = (props: { value: string, className?: string, style?: Kana
                 max={600}
                 forceSingleModeWidth={false}
                 onReady={() => setLoading(false)}
-                className={[styles.text].concat(props.style?.container ?? []).join(" ")}
+                className={[styles.text].concat(style?.container ?? []).join(" ")}
             >
-                <span style={props.style?.character} className={[props.className, styles.value].join(" ")}>
+                <span
+                    style={style?.character}
+                    className={[props.className, styles.value, style?.character?.className].join(" ")}
+                >
                     {props.value}
                 </span>
             </Textfit>
