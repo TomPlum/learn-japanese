@@ -5118,6 +5118,170 @@ export function kyoiku(): KanjiData[] {
                 { value: "西洋", kana: ["せいよう"], english: ["the west, Western countries"] },
             ]
         },
+        {
+            name: "所",
+            code: "\u6240",
+            on: [{ kana: "しょ", romaji: "sho" }],
+            kun: [{ kana: "ところ", romaji: "tokoro" }],
+            source: "https://en.wiktionary.org/wiki/%E6%89%80#Kanji",
+            meanings: ["place"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "事務所", kana: ["じむしょ"], english: ["office"] },
+                { value: "場所", kana: ["ばしょ"], english: ["place", "location"] },
+                { value: "研究所", kana: ["けんきゅうしょ", "けんきゅうじょ"], english: ["research establishment (institute, laboratory)"] },
+                { value: "所得", kana: ["しょとく"], english: ["income", "earnings"] },
+                { value: "住所", kana: ["じゅうしょ"], english: ["address (e.g. of house)", "residence", "domicile"] },
+            ]
+        },
+        {
+            name: "係",
+            code: "\u4FC2",
+            on: [{ kana: "けい", romaji: "kei" }],
+            kun: [{ kana: "かかる", romaji: "kakaru" }, { kana: "かかり", romaji: "kakari" }],
+            source: "https://en.wiktionary.org/wiki/%E4%BF%82#Kanji",
+            meanings: ["person in charge", "connection", "duty", "concern oneself"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "係", kana: ["かかり"], english: ["official", "duty", "person in charge"] },
+                { value: "関係", kana: ["かんけい"], english: ["relation", "connection"] },
+                { value: "関係者", kana: ["かんけいしゃ"], english: ["authorised people"] },
+                { value: "人間関係", kana: ["にんげんかんけい"], english: ["human relations"] },
+                { value: "係長", kana: ["かかりちょう"], english: ["chief clerk"] },
+            ]
+        },
+        {
+            name: "投",
+            code: "\u6295",
+            on: [{ kana: "とう", romaji: "tō" }],
+            kun: [{ kana: "なげる", romaji: "nageru" }],
+            source: "https://en.wiktionary.org/wiki/%E6%8A%95#Kanji",
+            meanings: ["throw", "discard", "abandon", "launch into", "join", "invest in", "hurl", "give up", "sell at a loss"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "投資", kana: ["とうし"], english: ["investment"] },
+                { value: "投手", kana: ["とうしゅ"], english: ["(baseball) pitcher"] },
+                { value: "投票", kana: ["とうひょう"], english: ["voting", "poll"] },
+                { value: "国民投票", kana: ["こくみんとうひょう"], english: ["national referendum"] },
+                { value: "投球", kana: ["とうきゅう"], english: ["pitching", "throwing a ball"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "島",
+            code: "\u5CF6",
+            on: [{ kana: "とう", romaji: "tō" }],
+            kun: [{ kana: "しま", romaji: "shima" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B3%B6#Kanji",
+            meanings: ["island"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "島", kana: ["しま"], english: ["island", "territory (of a prostitute)"] },
+                { value: "朝鮮半島", kana: ["ちょうせんはんとう"], english: ["Korean peninsula"] },
+                { value: "中島", kana: ["なかじま"], english: ["island in a pond or river"] },
+                { value: "小島", kana: ["こじま"], english: ["small island", "islet"] },
+                { value: "半島", kana: ["はんとう"], english: ["peninsula"] },
+            ]
+        },
+        {
+            name: "服",
+            code: "\u670D",
+            on: [{ kana: "ふく", romaji: "fuku" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E6%9C%8D#Kanji",
+            meanings: ["clothing", "admit", "obey", "discharge"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "服", kana: ["ふく"], english: ["clothes (esp. Western clothes)"] },
+                { value: "制服", kana: ["せいふく"], english: ["uniform"] },
+                { value: "服装", kana: ["ふくそう"], english: ["garments"] },
+                { value: "不服", kana: ["ふふく"], english: ["dissatisfaction", "discontent", "disapproval"] },
+                { value: "洋服", kana: ["ようふく"], english: ["Western-style clothes (cf traditional Japanese clothes)"] },
+            ],
+            tags: ["clothes"]
+        },
+        {
+            name: "次",
+            code: "\u6B21",
+            on: [{ kana: "じ", romaji: "ji" }, { kana: "し", romaji: "shi" }],
+            kun: [{ kana: "つぐ", romaji: "tsugu" }, { kana: "つぎ", romaji: "tsugi" }],
+            source: "https://en.wiktionary.org/wiki/%E6%AC%A1#Kanji",
+            meanings: ["next", "order", "sequence"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "次官", kana: ["じかん"], english: ["vice-minister", "undersecretary"] },
+                { value: "事務次官", kana: ["じむじかん"], english: ["permanent vice-president", "undersecretary"] },
+                { value: "次期", kana: ["じき"], english: ["next term", "next period", "next version"] },
+                { value: "次長", kana: ["じちょう"], english: ["vice", "assistant director", "vice-director"] },
+                { value: "次々", kana: ["つぎつぎ"], english: ["in succession", "one by one"] },
+            ]
+        },
+        {
+            name: "感",
+            code: "\u611F",
+            on: [{ kana: "かん", romaji: "kan" }],
+            kun: [{ kana: "かんじる", romaji: "kanjiru" }, { kana: "かまける", romaji: "kamakeru" }],
+            source: "https://en.wiktionary.org/wiki/%E6%84%9F#Kanji",
+            meanings: ["emotion", "feeling", "sensation"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "感じ", kana: ["かんじ"], english: ["feeling", "sense", "impression"] },
+                { value: "感覚", kana: ["かんかく"], english: ["sense", "sensation", "feeling"] },
+                { value: "感染", kana: ["かんせん"], english: ["infection", "contagion"] },
+                { value: "感じる", kana: ["かんじる"], english: ["to feel", "to sense", "to experience"] },
+                { value: "感情", kana: ["かんじょう"], english: ["emotion", "feeling", "feelings", "sentiment"] },
+            ]
+        },
+        {
+            name: "打",
+            code: "\u6253",
+            on: [{ kana: "だ", romaji: "da" }],
+            kun: [{ kana: "うつ", romaji: "utsu" }],
+            source: "https://en.wiktionary.org/wiki/%E6%89%93#Kanji",
+            meanings: ["strike", "hit", "knock", "pound", "dozen"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "打つ", kana: ["うつ"], english: ["to hit (something inanimate)", "to strike"] },
+                { value: "本塁打", kana: ["ほんるいだ"], english: ["home run (baseball)"] },
+                { value: "打撃", kana: ["だげき"], english: ["blow", "shock", "strike", "damage"] },
+                { value: "打線", kana: ["だせん"], english: ["baseball lineup"] },
+                { value: "安打", kana: ["あんだ"], english: ["safe hit (baseball)"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "両",
+            code: "\u4E21",
+            on: [{ kana: "りょう", romaji: "ryō" }],
+            kun: [{ kana: "ふたつ", romaji: "futatsu" }],
+            source: "https://en.wiktionary.org/wiki/%E4%B8%A1#Kanji_1",
+            meanings: ["both", "old Japanese coin", "counter for carriages", "two"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "両国", kana: ["りょうこく", "りょうごく"], english: ["both countries"] },
+                { value: "両党", kana: ["りょうとう"], english: ["both political parties"] },
+                { value: "両親", kana: ["りょうしん", "ふたおや"], english: ["parents", "both parents"] },
+                { value: "車両", kana: ["しゃりょう"], english: ["rolling stock", "railroad cars", "vehicles"] },
+                { value: "両院", kana: ["りょういん"], english: ["both Houses of Parliament"] },
+            ],
+            tags: ["counter"]
+        },
+        {
+            name: "式",
+            code: "\u5F0F",
+            on: [{ kana: "しき", romaji: "shiki" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E5%BC%8F#Kanji",
+            meanings: ["style", "ceremony", "rite", "function", "method", "system", "form", "expression"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "株式", kana: ["かぶしき"], english: ["stock (company)"] },
+                { value: "公式", kana: ["こうしき"], english: ["formality", "formal", "official", "formula"] },
+                { value: "正式", kana: ["せいしき"], english: ["due form", "official", "formality"] },
+                { value: "方式", kana: ["ほうしき"], english: ["form", "method", "system", "formula"] },
+                { value: "形式", kana: ["けいしき"], english: ["form (as opposed to substance)", "formality"] },
+            ]
+        },
     ];
 }
 
