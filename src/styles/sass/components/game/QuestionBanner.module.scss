@@ -1,4 +1,6 @@
-.wrapper {
+@import "src/styles/sass/viewports";
+
+@mixin wrapper {
   text-align: center;
   font-family: "Ciutadella Rounded Medium", sans-serif;
   font-size: 1.2em;
@@ -7,4 +9,23 @@
 
 .aka {
   margin-left: 5px;
+}
+
+@include phone {
+  .wrapper {
+    @include wrapper;
+    padding: 5px 10px;
+  }
+}
+
+@include tablet {
+  .wrapper {
+    @include wrapper;
+  }
+}
+
+@include desktop {
+  .wrapper {
+    @include wrapper;
+  }
 }

@@ -80,16 +80,16 @@
 
 @include phone {
   .progress {
-    height: 15px;
+    height: 18px;
     margin-top: 3px;
   }
 
   .quit {
-    font-size: 1.2em;
+    font-size: 1.55em;
   }
 
   .lives {
-    font-size: 1em;
+    font-size: 1.1em;
   }
 
   .wrapper {
@@ -122,11 +122,11 @@
 
   .timer {
     @include timer;
-    font-size: 0.95em;
+    font-size: 1.1em;
   }
 
   .score section > span, .score {
-    font-size: 1.1em !important;
+    font-size: 1.3em !important;
   }
 
   .romajiDisplay {

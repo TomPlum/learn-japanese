@@ -45,6 +45,7 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
 
         const overlay = <PopOver title={this.getTitle()} text={this.getContent()} />;
         const defaultClassName = remaining > 0 ? styles.button : styles.disabled;
+
         return (
             <OverlayTrigger
                 onToggle={this.props.onUse}

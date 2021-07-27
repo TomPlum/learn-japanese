@@ -1,14 +1,19 @@
-.disabled {
-  opacity: 0.6;
-}
-
-.button {
+@mixin default {
   width: 100%;
   max-width: 155px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: ease-in-out 0.2s;
+}
+
+.disabled {
+  @include default;
+  opacity: 0.6;
+}
+
+.button {
+  @include default;
 }
 
 .text {
