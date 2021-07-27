@@ -33,7 +33,6 @@ class TopicSelectionMenu extends Component<TopicSelectionMenuProps, TopicSelecti
 
         return (
             <div className={className}>
-
                 <Dropdown className={"d-lg-none " + styles.dropdown} data-testid="dropdown">
                     <Dropdown.Toggle variant="primary" className={styles.dropdownToggle} id="select-game-type">
                         <FontAwesomeIcon fixedWidth icon={selected.icon} /> {selected.name}
@@ -65,7 +64,6 @@ class TopicSelectionMenu extends Component<TopicSelectionMenuProps, TopicSelecti
                         </TopicListOption>
                     )}
                 </ListGroup>
-
             </div>
         );
     }
