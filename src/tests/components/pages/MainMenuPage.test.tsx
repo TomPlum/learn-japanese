@@ -1,16 +1,30 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import MainMenuPage from "../../../components/pages/MainMenuPage";
 import hiragana from "../../../data/Hiragana";
-import { KanaData } from "../../../data/DataTypes";
+import { DayData, KanaData, KanjiData } from "../../../data/DataTypes";
 import katakana from "../../../data/Katakana";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
+import { joyo, kyoiku } from "../../../data/Kanji";
+import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import { days } from "../../../data/Calendar";
 
+//Mock scrollIntoView() as it doesn't exist in JSDom
+const scrollIntoView = jest.fn();
+window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
+
+//Database File Mocks
 jest.mock("../../../data/Hiragana");
 jest.mock("../../../data/Katakana");
+jest.mock("../../../data/Kanji");
+jest.mock("../../../data/Calendar");
 
+//Database Function Mocks
 const mockHiragana = hiragana as jest.MockedFunction<() => KanaData[]>;
 const mockKatakana = katakana as jest.MockedFunction<() => KanaData[]>;
+const mockKyoiku = kyoiku as jest.MockedFunction<() => KanjiData[]>;
+const mockJoyo = joyo as jest.MockedFunction<() => KanjiData[]>;
+const mockDays = days as jest.MockedFunction<() => DayData[]>;
 
 beforeEach(() => {
    mockHiragana.mockReturnValue([
@@ -22,6 +36,39 @@ beforeEach(() => {
       { name: "ア", code: "\u30A2", romaji: ["a"], column: KanaColumn.VOWEL, diacritical: false },
    ]);
 
+   mockKyoiku.mockReturnValue([
+      {
+         name: "人",
+         code: "\u4eba",
+         on: [{ kana: "じん", romaji: "jin" }, { kana: "にん", romaji: "nin" }],
+         kun: [{ kana: "ひと", romaji: "hito" }],
+         source: "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
+         meanings: ["person"],
+         grade: KyoikuGrade.ONE,
+         examples: [
+            { value: "外国人", kana: ["がいこくじん"], english: ["foreigner"] },
+            { value: "個人", kana: ["こじん"], english: ["individual", "private person", "personal", "private"] },
+            { value: "三人", kana: ["さんにん", "みたり"], english: ["three people"] },
+            { value: "人間", kana: ["にんげん"], english: ["human being", "man", "person"] },
+            { value: "人気", kana: ["にんき"], english: ["popular", "popular feeling", "business conditions"] },
+
+         ],
+         tags: ["family"]
+      }
+   ]);
+
+   mockDays.mockReturnValue([
+      {
+         name: "Monday",
+         kanji: "月曜日",
+         romaji: "getsuyōbi",
+         kana: "げつようび",
+         meaning: "Moon day"
+      }
+   ]);
+
+   mockJoyo.mockReturnValue([]);
+
    Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
       const objects = [...array];
       const first = objects[0];
@@ -29,17 +76,18 @@ beforeEach(() => {
       return [first, objects];
    });
 });
+
 const setup = () => {
    const component = render(<MainMenuPage
        history={{
           length: 50,
-          location: { pathname: "/menu/learn", search: "", hash: "", state: undefined },
+          location: { pathname: "/menu/play", search: "", hash: "", state: undefined },
           action: "POP",
           push: jest.fn(), go: jest.fn(), replace: jest.fn(), goForward: jest.fn(), goBack: jest.fn(),
           block: jest.fn(), listen: jest.fn(), createHref: jest.fn()
        }}
-       match={{ params: { mode: "play" }, isExact: true, path: "/menu/:mode", url: "/menu/learn" }}
-       location={{ pathname: "/menu/learn", search: "", hash: "", state: undefined }}
+       match={{ params: { mode: "play" }, isExact: true, path: "/menu/:mode", url: "/menu/play" }}
+       location={{ pathname: "/menu/play", search: "", hash: "", state: undefined }}
    />);
 
    return {
@@ -172,7 +220,7 @@ describe('Learn', () => {
    test('Starting a Kanji learning session should render the correct flash card types', () => {
       const { mode, kanji } = setup();
       fireEvent.click(mode); //Switch to Learn
-      fireEvent.click(kanji);
+      fireEvent.click(kanji); //Select Kanji topic
       fireEvent.click(screen.getByText('Start'));
       expect(screen.getByText(': person')).toBeInTheDocument();
       expect(screen.getAllByText('人')).toBeDefined();

@@ -38,13 +38,13 @@ export class GameSettingsBuilder {
     private _hints: HintSettings = new HintSettingsBuilder().build();
     private _lives: LifeSettings = new LifeSettingsBuilder().build();
     private _time: TimeSettings = new TimeSettingsBuilder().build();
-    private _display: QuestionSettings = new QuestionSettingsBuilder().build();
+    private _question: QuestionSettings = new QuestionSettingsBuilder().build();
 
     public fromExisting(settings: GameSettings): GameSettingsBuilder {
         this._hints = settings.hints;
         this._lives = settings.lives;
         this._time = settings.time;
-        this._display = settings.question;
+        this._question = settings.question;
         return this;
     }
 
@@ -64,11 +64,11 @@ export class GameSettingsBuilder {
     }
 
     public withQuestionSettings(display: QuestionSettings): GameSettingsBuilder {
-        this._display = display;
+        this._question = display;
         return this;
     }
 
     public build(): GameSettings {
-        return new GameSettings(this._hints, this._lives, this._time, this._display);
+        return new GameSettings(this._hints, this._lives, this._time, this._question);
     }
 }

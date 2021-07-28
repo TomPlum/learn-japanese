@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Topic from "../../types/Topic";
 import TopicSelectionMenu from "./TopicSelectionMenu";
@@ -18,10 +18,22 @@ interface GameSettingsMenuState {
 
 class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
 
+    private readonly modeMenu = React.createRef<HTMLDivElement>();
+
     constructor(props: Readonly<GameSettingsMenuProps> | GameSettingsMenuProps) {
         super(props);
         this.state = {
             topic: Topic.KANA,
+        }
+    }
+
+    componentDidMount() {
+        this.modeMenu.current?.scrollIntoView();
+    }
+
+    componentDidUpdate(prevProps: Readonly<GameSettingsMenuProps>, prevState: Readonly<GameSettingsMenuState>) {
+        if (prevState.topic !== this.state.topic) {
+            this.modeMenu.current?.scrollIntoView();
         }
     }
 
@@ -37,11 +49,11 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
                             <TopicSelectionMenu
                                 appMode={mode}
                                 className={styles.topicMenu}
-                                onSelect={(selected) => this.setState({ topic: selected })}
+                                onSelect={this.onSelectTopic}
                             />
                         </Col>
 
-                        <Col sm={12} lg={7} className={styles.gameMenuWrapper}>
+                        <Col sm={12} lg={7} className={styles.gameMenuWrapper} ref={this.modeMenu}>
                             <ModeSelectionMenu
                                 topic={topic}
                                 appMode={mode}
@@ -57,6 +69,10 @@ class SettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuStat
 
     private onSelectMode = (settings: SessionSettings) => {
         this.props.onStart(settings);
+    }
+
+    private onSelectTopic = (topic: Topic) => {
+        this.setState({ topic: topic });
     }
 }
 

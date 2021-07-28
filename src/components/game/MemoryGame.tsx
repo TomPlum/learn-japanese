@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { ButtonGroup, Col, Container, Row } from "react-bootstrap";
 import Timer from "./Timer";
 import LifeDisplay from "./LifeDisplay";
-import { LifeQuantity } from "../../types/game/LifeQuantity";
 import QuitButton from "../ui/buttons/QuitButton";
 import GameResult from "../../types/game/GameResult";
 import { FailureReason } from "../../types/game/FailureReason";
@@ -22,6 +21,7 @@ import ExclusionFilter from "../../filters/learnable/ExclusionFilter";
 import Arrays from "../../utility/Arrays";
 import TextQuestion from "./questions/TextQuestion";
 import ChoiceQuestion from "./questions/ChoiceQuestion";
+import MatchQuestion from "./questions/MatchQuestion";
 
 export interface GameQuestionProps {
     hidden: boolean;
@@ -80,7 +80,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             wrongAnswers: [],
             hasExhaustedQuestions: false,
             paused: false,
-            lives: settings.lives.quantity?.valueOf() ?? LifeQuantity.ZERO,
+            lives: settings.lives.quantity,
             failedToAnswer: 0,
             hasValidAnswer: false,
             hints: settings.hints.quantity,
@@ -151,7 +151,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                         </Row>
                     </Col>
 
-                    <Col>
+                    <Col xs={4}>
                         {settings.question.score &&
                             <ScoreDisplay
                                 value={score}
@@ -161,7 +161,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                         }
                     </Col>
 
-                    <Col className={styles.lifeDisplayContainer}>
+                    <Col xs={4} className={styles.lifeDisplayContainer}>
                         <LifeDisplay
                             hearts={lives}
                             className={styles.lives}
@@ -169,7 +169,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                         />
                     </Col>
 
-                    <Col>
+                    <Col xs={4}>
                         {settings.time.timed &&
                             <Timer
                                 pausable
@@ -183,7 +183,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                                 ref={this.countdown}
                                 className={styles.timer}
                                 onFinish={this.countDownTimeElapsed}
-                                value={settings.time?.secondsPerQuestion ?? 10}
+                                value={settings.time?.secondsPerQuestion}
                             />
                         }
                     </Col>
@@ -196,11 +196,11 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                 </Row>
 
                 <Row noGutters className={styles.footer}>
-                    <Col md={5} xs={4} className={styles.footerLeftCol}>
+                    <Col md={5} xs={3} className={styles.footerLeftCol}>
                         <SkipButton onClick={this.handleSkip} className={styles.skip} disabled={paused} />
                     </Col>
 
-                   <Col md={7} xs={8} className={styles.footerRightCol}>
+                   <Col md={7} xs={9} className={styles.footerRightCol}>
                        <ButtonGroup className={styles.buttonGroup}>
                            <HintButton
                                remaining={hints}
@@ -232,7 +232,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         const questionField = settings.question.questionField;
         const answerField = settings.question.answerField;
 
-        const currentQuestionID = currentQuestion.map(q => q.getUniqueID()).join("-")
+        const currentQuestionID = currentQuestion.map(q => q.getUniqueID()).join("-");
 
         //TODO: Extract into a QuestionRegistry component (Maybe Strategy pattern?)
         switch (settings.question.type) {
@@ -272,9 +272,27 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                         questionField={questionField}
                         key={currentQuestionID}
                         isValid={this.handleAnswerValidity}
-                        wrong={wrongAnswerOptions.flatMap(answer => answer ? [answer] : [])}
+                        wrong={wrongAnswerOptions}
                     />
                 );
+            }
+            case QuestionType.MATCH: {
+                console.log(currentQuestion);
+                const questionData = new Map(currentQuestion.map(data => {
+                    const question = data.getFieldValues(questionField)[0];
+                    const answer = data.getFieldValues(answerField)[0];
+                    return [question, answer]
+                }));
+
+                return (
+                    <MatchQuestion
+                        hidden={paused}
+                        data={questionData}
+                        ref={this.question}
+                        key={currentQuestionID}
+                        isValid={this.handleAnswerValidity}
+                   />
+                )
             }
         }
     }

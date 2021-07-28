@@ -45,7 +45,6 @@ test('On mount it should call the onSelect event handler with the default settin
 test('Selecting multiple choice mode should call the onSelect eventHandler', () => {
     const { multipleChoiceButton } = setup();
     fireEvent.click(multipleChoiceButton);
-    console.log("THIS ONE")
     expect(getValueLastCalledWith<QuestionSettings>(onSelectHandler).type).toBe(QuestionType.CHOICE);
 });
 

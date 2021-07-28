@@ -13,6 +13,9 @@ import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSe
 import LearnableField from "../../../types/learn/LearnableField";
 import { getValueLastCalledWith } from "../../Queries";
 
+//Mock scrollIntoView() as it doesn't exist in JSDom
+const scrollIntoView = jest.fn();
+window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
 
 const onStartHandler = jest.fn();
 
@@ -36,6 +39,18 @@ beforeEach(() => {
         onStart: onStartHandler,
         mode: AppMode.PLAY
     };
+});
+
+test('Should call scroll into view on mount', () => {
+    setup();
+    expect(scrollIntoView).toHaveBeenCalled();
+});
+
+test('Should call scroll into view when changing topic', () => {
+    const { kanji } = setup();
+    expect(scrollIntoView).toHaveBeenCalled();
+    fireEvent.click(kanji);
+    expect(scrollIntoView).toHaveBeenCalledTimes(2);
 });
 
 describe("Rendering Game Menus", () => {

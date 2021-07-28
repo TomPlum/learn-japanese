@@ -60,12 +60,12 @@ beforeEach(() => {
     Arrays.getRandomElements = getRandomElements;
     Environment.variable = environment;
 
-    //Always returns the first element so it is deterministic
+    //Always returns the first n elements in order so it is deterministic
     getRandomObjects.mockImplementation((array: any[]) => {
-        const objects = [...array];
-        const firstKana = objects[0];
-        objects.splice(0, 1);
-        return [[firstKana], objects];
+        const quantity = props.settings.question.quantity;
+        const questions = Arrays.copy(array).splice(0, quantity);
+        const remaining = Arrays.copy(array).splice(quantity, array.length);
+        return [questions, remaining];
     });
 
     //Always returns the array in the same order so it doesn't shuffle
@@ -716,6 +716,29 @@ test('Setting the question type as \'Choice\' should render a ChoiceQuestion', (
     expect(screen.getByText('い')).toBeInTheDocument();
 
     expect(screen.queryByText('3')).not.toBeInTheDocument();
+});
+
+test('Setting the question type as \'Match\' should render a MatchQuestion', () => {
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withQuestionSettings(new QuestionSettingsBuilder()
+            .withFields(LearnableField.ROMAJI, LearnableField.KANA)
+            .withType(QuestionType.MATCH)
+            .withQuantity(3)
+            .build()
+        ).build();
+
+    setup();
+
+    //Questions
+    expect(screen.getByText('a')).toBeInTheDocument();
+    expect(screen.getByText('i')).toBeInTheDocument();
+    expect(screen.getByText('u')).toBeInTheDocument();
+
+    //Answers
+    expect(screen.getByText('あ')).toBeInTheDocument();
+    expect(screen.getByText('い')).toBeInTheDocument();
+    expect(screen.getByText('う')).toBeInTheDocument();
 });
 
 test('Setting the game settings score property to true should render the score', () => {
