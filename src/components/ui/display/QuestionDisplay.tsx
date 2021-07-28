@@ -21,12 +21,14 @@ class QuestionDisplay extends Component<QuestionDisplayProps, QuestionDisplaySta
     }
 
     render() {
-        const { question } = this.props;
+        const { question, blur } = this.props;
+
+        const valueClass = blur ? styles.blur : styles.value;
 
         return (
             <DynamicDisplay
                 value={question}
-                style={{ container: [styles.display] }}
+                style={{ container: [styles.display], character: { className: valueClass } }}
                 className={styles.question}
             />
         );
