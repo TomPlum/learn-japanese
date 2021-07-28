@@ -168,6 +168,24 @@ test('Answering regular kana correctly should increase the score by 100 each', (
     expect(screen.getByText('200')).toBeInTheDocument();
 });
 
+test('Skipping a question should decrease the score by the current questions base score', () => {
+    const { submit, skip } = setup();
+
+    //Answer first correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('100')).toBeInTheDocument();
+
+    //Answer second correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
+    fireEvent.click(submit);
+    expect(screen.getByText('200')).toBeInTheDocument();
+
+    //Skip third
+    fireEvent.click(skip);
+    expect(screen.getByText('100')).toBeInTheDocument();
+});
+
 test('Answering multiple correctly consecutively should start a streak', () => {
     props.data = [a, i, u, e, o, a]; //Add 6 kana so answering the 5th doesn't end the game
     const { submit } = setup();

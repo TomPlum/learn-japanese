@@ -360,7 +360,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         this.countdown.current?.reset();
     }
 
-    private advanceNextQuestion() {
+    private advanceNextQuestion(skipScore: boolean = false) {
         const { remainingQuestions, hasUsedHintThisQuestion, hints, streak } = this.state;
 
         //If we're being timed per question, reset the timer.
@@ -372,7 +372,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         //Update the next question to be displayed and the remaining questions with one less.
         this.setState({
             streak: streak + 1,
-            score: this.getScore(),
+            score: this.getScore(skipScore),
             currentQuestion: nextQuestions,
             hasUsedHintThisQuestion: false,
             remainingQuestions: nextRemainingQuestions,
@@ -394,7 +394,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives
         });
 
-        this.advanceNextQuestion(); //TODO: Stop giving points if the user skips. Maybe lose some?
+        this.advanceNextQuestion(true);
     }
 
     private countDownTimeElapsed = () => {
@@ -450,10 +450,17 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         return Arrays.getRandomObjects(data, quantity);
     }
 
-    private getScore = (): number => {
+    private getScore = (hasSkipped: boolean): number => {
         const { score, streak, currentQuestion } = this.state;
+
+        const baseScore = currentQuestion[0].getBaseScore();
+
+        if (hasSkipped) {
+            return score - baseScore;
+        }
+
         const multiplier = streak >= 50 ? 4 : streak >= 25 ? 3 : streak >= 10 ? 2 : streak >= 5 ? 1.5 : 1;
-        return score + currentQuestion[0].getBaseScore() * multiplier;
+        return score + baseScore * multiplier;
     }
 }
 

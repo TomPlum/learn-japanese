@@ -191,22 +191,24 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                 <Row className={styles.section}>
                     <Col xs={12}>
                         <h5 className={styles.heading}>
-                            <FontAwesomeIcon icon={faChevronRight}/> Track Score
+                            <FontAwesomeIcon icon={faChevronRight}/> Score
                         </h5>
-
-                        <p className={styles.description}>
-                            You gain a base score per correctly answered question.
-                            Streaking will increase your multiplier.
-                        </p>
 
                         <Form.Check
                             id="score"
                             type="switch"
+                            label="Track Score"
                             checked={score}
                             data-testid="score-switch"
-                            className={styles.scoreSwitch}
+                            className={styles.check}
                             onChange={() => this.setState({ score: !score })}
                         />
+
+                        <p className={styles.description}>
+                            You gain a base score per question answered correctly.
+                            Streaking will increase your multiplier exponentially, but breaking it
+                            will reset to the base. Skipping a question will lose you the 1 x the base score.
+                        </p>
                     </Col>
                 </Row>
             </ScrollableContainer>
