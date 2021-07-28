@@ -22,9 +22,16 @@ interface MatchQuestionState {
 class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState> {
 
     private readonly container = React.createRef<HTMLDivElement>();
+    private readonly displays: Map<string, React.RefObject<AnswerChoiceDisplay>> = new Map();
 
     constructor(props: Readonly<MatchQuestionProps> | MatchQuestionProps) {
         super(props);
+
+        const keyValues = [...props.data.keys()].concat([...props.data.values()]);
+        keyValues.forEach((value: string) => {
+            this.displays.set(value, React.createRef<AnswerChoiceDisplay>());
+        });
+
         this.state = {
             answer: new Map(),
             selected: undefined,
@@ -60,6 +67,7 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
                             <Col xs={5} md={4}>
                                 <AnswerChoiceDisplay
                                     value={question}
+                                    ref={this.displays.get(question)}
                                     onMouseUp={this.resetSelected}
                                     onTouchEnd={this.resetSelected}
                                     onMouseDown={this.handleQuestionSelection}
@@ -78,6 +86,7 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
                             <Col xs={5} md={4}>
                                 <AnswerChoiceDisplay
                                     value={answer}
+                                    ref={this.displays.get(answer)}
                                     onMouseUp={this.handleAnswerAttempt}
                                     onTouchEnd={this.handleAnswerAttempt}
                                     onMouseDown={this.handleAnswerChange}
@@ -97,8 +106,9 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
                                     from={question}
                                     className={styles.connector}
                                     toAnchor="left" fromAnchor="right"
-                                    borderWidth={5} borderColor="#fff"
+                                    borderWidth={5}
                                     borderStyle={this.getConnectorStyle(question)}
+                                    borderColor={this.getConnectorColour(question)}
                                     to={this.getConnectorTarget(question)}
                                     data-testid={question + "-connector"}
                                 />
@@ -116,6 +126,7 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
         const isCorrect = Maps.areEqual(data, answer);
 
         if (!isCorrect) {
+            this.displays.forEach((ref: React.RefObject<AnswerChoiceDisplay>) => ref.current?.notifyIncorrect());
             this.setState({ selected: undefined, hoveredAnswer: undefined, answer: new Map() });
         }
 
@@ -210,6 +221,11 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
     private getConnectorStyle = (question: string): string => {
         const { answer } = this.state;
         return answer.has(question) ? "solid" : "dashed";
+    }
+
+    private getConnectorColour = (question: string) => {
+        const { answer } = this.state;
+        return answer.has(question) ? "#7a7a7a" : "#4594e9";
     }
 }
 
