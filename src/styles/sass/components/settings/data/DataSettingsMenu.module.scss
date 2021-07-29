@@ -1,0 +1,39 @@
+.wrapper {
+}
+
+.card {
+  padding: 20px;
+}
+
+.scrollable {
+  height: 418px;
+}
+
+.title {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  color: #FFF;
+  text-align: center;
+  font-size: 2em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #007bff;
+}
+
+.noGuttersLeft {
+  padding-left: 0 !important;
+}
+
+.noGuttersRight {
+  padding-right: 0 !important;
+}
+
+.button {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  padding: 6px 8px;
+  transition: all ease 0.2s;
+}
+
+.footer {
+  padding: 0;
+}
