@@ -8,6 +8,7 @@ let props: ToggleSwitchProps;
 beforeEach(() => {
     props = {
         enabled: true,
+        disabled: false,
         className: "mySwitch",
         label: "test-switch",
         onChange: onChangeHandler
@@ -44,4 +45,10 @@ test('Toggling the switch should call the onChange event handler', () => {
     const { toggle } = setup();
     fireEvent.click(toggle);
     expect(onChangeHandler).toHaveBeenCalled();
+});
+
+test('Passing disabled as true should disable the switch', () => {
+    props.disabled = true;
+    const { toggle } = setup();
+    expect(toggle).toBeDisabled();
 });
