@@ -1,16 +1,35 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import KanaSettingsForm from "../../../../components/settings/data/KanaSettingsForm";
-import { KanaSettingsBuilder } from "../../../../types/session/settings/data/KanaSettings";
+import KanaSettings, { KanaSettingsBuilder } from "../../../../types/session/settings/data/KanaSettings";
+import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu";
+import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 
-const onSelectHandler = jest.fn();
+const onConfirmHandler = jest.fn();
+const onResetHandler = jest.fn();
+const onQuitHandler = jest.fn();
+
+let props: DataSettingsMenuProps<KanaSettings>;
+
+beforeEach(() => {
+   props = {
+       title: "Hiragana & Katakana",
+       icon: faAddressCard,
+       onConfirm: onConfirmHandler,
+       onQuit: onQuitHandler,
+       onReset: onResetHandler
+   };
+});
 
 const setup = () => {
-    const component = render(<KanaSettingsForm onSelect={onSelectHandler}/>);
+    const component = render(<KanaSettingsForm {...props} />);
     return {
-        hiragana: screen.getByTestId('Hiragana'),
-        katakana: screen.getByTestId('Katakana'),
-        diagraphs: screen.getByTestId('Diagraphs'),
-        quantity: screen.getByPlaceholderText('Enter kana quantity'),
+        hiragana: component.getByTestId('hiragana'),
+        katakana: component.getByTestId('katakana'),
+        diagraphs: component.getByTestId('diagraphs'),
+        quantity: component.getByPlaceholderText('Quantity'),
+        back: component.getByText('Back'),
+        reset: component.getByText('Reset'),
+        confirm: component.getByText('Confirm'),
         ...component
     }
 }
@@ -34,21 +53,34 @@ test('Selecting both Hiragana and Katakana should enable both options', () => {
     expect(katakana).not.toBeDisabled();
 });
 
-test('On mount it should call the onSelect event handler with the default settings', () => {
-    setup();
-    expect(onSelectHandler).toHaveBeenCalledWith(new KanaSettingsBuilder().withHiragana().build());
-});
+test('Clicking confirm should call the confirm event handler with the custom data settings', () => {
+    const { quantity, diagraphs, katakana, confirm } = setup();
 
-test('Selecting Diagraphs should set the boolean to true in the settings', () => {
-    const { diagraphs, rerender } = setup();
     fireEvent.click(diagraphs);
-    rerender(<KanaSettingsForm onSelect={onSelectHandler}/>);
-    expect(onSelectHandler).toHaveBeenCalledWith(new KanaSettingsBuilder().withHiragana().withDiagraphs().build());
+    fireEvent.click(katakana);
+    fireEvent.change(quantity, { target: { value: 75 } });
+    fireEvent.click(confirm);
+
+    expect(onConfirmHandler).toHaveBeenCalledWith(
+        new KanaSettingsBuilder().withHiragana().withKatakana().withDiagraphs().withQuantity(75).build()
+    );
 });
 
-test('Changing the kana quantity should update the value in the settings', () => {
-    const { quantity, rerender } = setup();
-    fireEvent.change(quantity, { target: { value: 75 } });
-    rerender(<KanaSettingsForm onSelect={onSelectHandler}/>);
-    expect(onSelectHandler).toHaveBeenCalledWith(new KanaSettingsBuilder().withHiragana().withQuantity(75).build());
+test('Clicking reset should reset the form to its default state', () => {
+    const { katakana, confirm, reset } = setup();
+
+    //Change defaults
+    fireEvent.click(katakana);
+
+    //Reset
+    fireEvent.click(reset);
+
+    expect(onResetHandler).toHaveBeenCalled();
+    expect(confirm.parentElement).toBeDisabled();
 });
+
+test('Clicking back should call the onQuit event handler', () => {
+    const { back } = setup();
+    fireEvent.click(back);
+    expect(onQuitHandler).toHaveBeenCalled();
+})

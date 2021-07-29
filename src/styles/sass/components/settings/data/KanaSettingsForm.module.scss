@@ -1,0 +1,23 @@
+.switch {
+  display: block;
+}
+
+@mixin description {
+  font-family: "Ciutadella Rounded", sans-serif;
+  font-size: 1em;
+}
+
+.description {
+  @include description;
+  color: #FFF;
+}
+
+.disabled {
+  @include description;
+  color: #bab2b2;
+}
+
+.quantity {
+  text-align: center;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+}

@@ -201,7 +201,6 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                                 </Col>
                             </Form.Row>
                         </Card.Footer>
-
                     </Tab.Container>
                 </Card>
             </div>

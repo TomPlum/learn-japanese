@@ -1,7 +1,6 @@
 import { faCircle, faPaintBrush, faRandom, faSchool, faStar } from "@fortawesome/free-solid-svg-icons";
 import { PlayMenuModes } from "../../MenuModes";
 import CustomLearningMode from "../../learn/CustomLearningMode";
-import KanjiSettingsForm from "../../../components/settings/data/KanjiSettingsForm";
 import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 import { QuestionType } from "../QuestionType";
 import PlayMode from "../../session/PlayMode";
@@ -72,7 +71,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                     )
                     .build()
             ),
-            new CustomLearningMode(KanjiSettingsForm)
+            new CustomLearningMode()
         ];
     }
 

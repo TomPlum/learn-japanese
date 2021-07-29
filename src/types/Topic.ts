@@ -20,6 +20,9 @@ import PlayKanaModes from "./game/mode/PlayKanaModes";
 import { LearnMenuModes, PlayMenuModes } from "./MenuModes";
 import LearnKanaModes from "./learn/mode/LearnKanaModes";
 import PlaySentenceStructureModes from "./game/mode/PlaySentenceStructureModes";
+import React from "react";
+import KanaSettingsForm from "../components/settings/data/KanaSettingsForm";
+import KanjiSettingsForm from "../components/settings/data/KanjiSettingsForm";
 
 export default class Topic {
     private readonly _name: string;
@@ -27,10 +30,12 @@ export default class Topic {
     private readonly _modes: LearnMenuModes;
     private readonly _playModes: PlayMenuModes;
     private readonly _cards: CardProps;
+    private readonly _menu: React.FunctionComponent | React.ComponentClass<any> | undefined;
 
     public static KANA = new Topic(
         "Hiragana & Katakana", faFont, new LearnKanaModes(), new PlayKanaModes(),
-        { front: KanaFlashCardFront, back: KanaFlashCardBack }
+        { front: KanaFlashCardFront, back: KanaFlashCardBack },
+        KanaSettingsForm
     );
 
     public static NUMBERS = new Topic(
@@ -40,7 +45,8 @@ export default class Topic {
 
     public static KANJI = new Topic(
         "Jōyō Kanji", faPaintBrush, new LearnKanjiModes(), new PlayKanjiModes(),
-        { front: KanjiFlashCardFront, back: KanjiFlashCardBack }
+        { front: KanjiFlashCardFront, back: KanjiFlashCardBack },
+        KanjiSettingsForm
     );
 
     public static BASICS = new Topic(
@@ -60,12 +66,14 @@ export default class Topic {
 
     public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR, Topic.GRAMMAR];
 
-    private constructor(name: string, icon: IconDefinition, modes: LearnMenuModes, playModes: PlayMenuModes, cards: CardProps) {
+    private constructor(name: string, icon: IconDefinition, modes: LearnMenuModes, playModes: PlayMenuModes,
+                        cards: CardProps, menu: React.FunctionComponent | React.ComponentClass<any> | undefined = undefined) {
         this._name = name;
         this._icon = icon;
         this._modes = modes;
         this._playModes = playModes;
         this._cards = cards;
+        this._menu = menu;
     }
 
     get name(): string {
@@ -86,5 +94,9 @@ export default class Topic {
 
     get playModes(): PlayMenuModes {
         return this._playModes;
+    }
+
+    get menu(): React.FunctionComponent | React.ComponentClass<any> | undefined {
+        return this._menu;
     }
 }

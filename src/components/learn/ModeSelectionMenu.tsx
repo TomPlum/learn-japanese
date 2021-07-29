@@ -5,7 +5,7 @@ import MenuDescription from "../ui/MenuDescription";
 import LearnTopicButton from "./LearnTopicButton";
 import StartButton from "../ui/buttons/StartButton";
 import Arrays from "../../utility/Arrays";
-import { faCog, faCogs, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faCogs, faSearch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "./Search";
 import { Learnable } from "../../types/learn/Learnable";
@@ -19,10 +19,8 @@ import { SessionSettings } from "../../types/session/settings/SessionSettings";
 import LearnSettings from "../../types/session/settings/LearnSettings";
 import GameSettingsMenu from "../settings/game/GameSettingsMenu";
 import styles from "../../styles/sass/components/learn/ModeSelectionMenu.module.scss";
-
-export interface CustomLearnMenuProps {
-    onSelect: (settings: SessionSettings) => void;
-}
+import DataSettings from "../../types/session/settings/data/DataSettings";
+import { DataSettingsMenuProps } from "../settings/data/DataSettingsMenu";
 
 export interface ModeSelectionMenuProps {
     topic: Topic;
@@ -33,7 +31,9 @@ export interface ModeSelectionMenuProps {
 interface ModeSelectionMenuState {
     selected: SessionMode;
     customGameSettings?: GameSettings;
+    customDataSettings?: DataSettings;
     isConfiguringGame: boolean;
+    isConfiguringData: boolean;
     searching: boolean;
 }
 
@@ -45,7 +45,9 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
             selected: this.getMenuModes().getModes()[0],
             searching: false,
             isConfiguringGame: false,
-            customGameSettings: undefined
+            isConfiguringData: false,
+            customGameSettings: undefined,
+            customDataSettings: undefined
         }
     }
 
@@ -56,11 +58,11 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
     }
 
     render() {
-        const { selected, searching, isConfiguringGame, customGameSettings } = this.state;
-        const { appMode } = this.props;
+        const { selected, searching, isConfiguringGame, isConfiguringData, customGameSettings, customDataSettings } = this.state;
+        const { appMode, topic } = this.props;
 
-        const CustomSettingsMenu = selected.menu as React.FunctionComponent<CustomLearnMenuProps>;
-        const renderMenu = !selected.custom && !searching && !isConfiguringGame;
+        const DataSettingsMenu = topic.menu as React.FunctionComponent<DataSettingsMenuProps<any>>;
+        const renderMenu = !searching && !isConfiguringGame && !isConfiguringData;
         const modes = this.getMenuModes();
 
         return (
@@ -92,14 +94,27 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
                     }</Row>
                 })}
 
-                {selected.custom && !searching &&
-                    <CustomSettingsMenu onSelect={this.onSelectCustomSettings} />
-                }
-
                 {renderMenu && (
                     <Row>
                         <Col className="pr-1">
                             <StartButton onClick={this.onStart} />
+                        </Col>
+
+                        <Col xs={3} sm={2} className="pl-2 pr-1">
+                            <Button
+                                disabled={!topic.menu}
+                                className={styles.settings}
+                                variant={!!customGameSettings ? "primary" : "info"}
+                                onClick={() => this.setState({ isConfiguringData: true})}
+                                title={!topic.menu ? "This topic does not have data settings" : "Data Settings"}
+                            >
+                                <FontAwesomeIcon
+                                    fixedWidth
+                                    pulse={!!customDataSettings}
+                                    icon={faVial}
+                                    className={styles.spin}
+                                />
+                            </Button>
                         </Col>
 
                         {appMode === AppMode.LEARN && (
@@ -144,21 +159,34 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
                         onSelect={settings => this.setState({ customGameSettings: settings, isConfiguringGame: false })}
                     />
                 )}
+
+                {isConfiguringData &&
+                    <DataSettingsMenu
+                        title={topic.name}
+                        icon={topic.icon}
+                        onQuit={() => this.setState({ isConfiguringData: false })}
+                        onReset={() => this.setState({ customDataSettings: undefined })}
+                        onConfirm={settings => this.setState({ customDataSettings: settings, isConfiguringData: false })}
+                    />
+                }
             </div>
         );
     }
 
     private onStart = () => {
-        const { selected, customGameSettings } = this.state;
+        const { selected, customGameSettings, customDataSettings } = this.state;
         const { onStart, appMode } = this.props;
+
+        const dataSettings = customDataSettings ?? selected.dataSettings;
+
         switch (appMode) {
             case AppMode.PLAY: {
                 const gameSettings = customGameSettings ?? selected.modeSettings as GameSettings;
-                onStart(SessionSettings.forGame(selected.dataSettings, gameSettings));
+                onStart(SessionSettings.forGame(dataSettings, gameSettings));
                 break;
             }
             case AppMode.LEARN: {
-                onStart(SessionSettings.forLearning(selected.dataSettings, selected.modeSettings as LearnSettings));
+                onStart(SessionSettings.forLearning(dataSettings, selected.modeSettings as LearnSettings));
                 break;
             }
         }
@@ -166,10 +194,6 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
 
     private onSelect = (mode: SessionMode) => {
         this.setState({ selected: mode });
-    }
-
-    private onSelectCustomSettings = (settings: SessionSettings) => {
-        this.props.onStart(settings);
     }
 
     private getSelectedTopicData = (): Learnable[] => {

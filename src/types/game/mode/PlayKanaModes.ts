@@ -1,4 +1,4 @@
-import { faFire, faFont, faGraduationCap, faStopwatch, faVial } from "@fortawesome/free-solid-svg-icons";
+import { faBezierCurve, faFire, faFont, faGraduationCap, faHourglassStart } from "@fortawesome/free-solid-svg-icons";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
 import { PlayMenuModes } from "../../MenuModes";
 import PlayMode from "../../session/PlayMode";
@@ -16,7 +16,6 @@ import DiagraphFilter from "../../../filters/kana/DiagraphFilter";
 import { Kana } from "../../kana/Kana";
 import { Learnable } from "../../learn/Learnable";
 import KanaTypeFilter from "../../../filters/kana/KanaTypeFilter";
-import KanaSettingsForm from "../../../components/settings/data/KanaSettingsForm";
 
 export default class PlayKanaModes implements PlayMenuModes {
     getModes(): PlayMode[] {
@@ -34,7 +33,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                     .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
                     .build()
             ),
-            new PlayMode("Time Attack", "#ff7730", faStopwatch,
+            new PlayMode("Time Attack", "#ff7730", faHourglassStart,
                 new KanaSettingsBuilder().withEverything().build(),
                 new GameSettingsBuilder()
                     .withQuestionSettings(
@@ -82,29 +81,35 @@ export default class PlayKanaModes implements PlayMenuModes {
                     .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(3).build())
                     .build()
             ),
+            new PlayMode("Match", "#56d94d", faBezierCurve,
+                new KanaSettingsBuilder().withEverything().withQuantity(45).build(),
+                new GameSettingsBuilder()
+                    .withQuestionSettings(new QuestionSettingsBuilder()
+                        .withFields(LearnableField.KANA, LearnableField.ROMAJI)
+                        .withType(QuestionType.MATCH)
+                        .withQuantity(3)
+                        .withScoreTracking(true)
+                        .build()
+                    )
+                    .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
+                    .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.FIVE).build())
+                    .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
+                    .build()
+            ),
             new PlayMode("Hardcore", "#fc3131", faFire,
                 new KanaSettingsBuilder().withEverything().withMaxQuantity().build(),
                 new GameSettingsBuilder()
-                    .withQuestionSettings(
-                        new QuestionSettingsBuilder()
-                            .withFields(LearnableField.ROMAJI, LearnableField.KANA)
-                            .withType(QuestionType.CHOICE)
-                            .withCardQuantity(6)
-                            .withScoreTracking(true)
-                            .build()
+                    .withQuestionSettings(new QuestionSettingsBuilder()
+                        .withFields(LearnableField.ROMAJI, LearnableField.KANA)
+                        .withType(QuestionType.CHOICE)
+                        .withCardQuantity(6)
+                        .withScoreTracking(true)
+                        .build()
                     )
                     .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
                     .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.ONE).build())
                     .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
                     .build()
-            ),
-            new PlayMode("Custom",
-                "#41d085",
-                faVial,
-                new KanaSettingsBuilder().withEverything().build(),
-                new GameSettingsBuilder().build(),
-                true,
-                KanaSettingsForm
             )
         ];
     }

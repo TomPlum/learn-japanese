@@ -1,36 +1,44 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import ModeSelectionMenu from "../../../components/learn/ModeSelectionMenu";
+import ModeSelectionMenu, { ModeSelectionMenuProps } from "../../../components/learn/ModeSelectionMenu";
 import { Environment } from "../../../utility/Environment";
-import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import Topic from "../../../types/Topic";
 import { AppMode } from "../../../types/AppMode";
 import { SessionSettings } from "../../../types/session/settings/SessionSettings";
-import { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
+import KanaSettings, { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
 import LearnSettings from "../../../types/session/settings/LearnSettings";
 import { CalendarSettingsBuilder } from "../../../types/session/settings/data/CalendarSettings";
-import { KanjiSettingsBuilder } from "../../../types/session/settings/data/KanjiSettings";
+import { getValueLastCalledWith } from "../../Queries";
 
-describe("Example 1 - Kana", () => {
+describe("Example 1 - Kana (Customisable)", () => {
     const onStartHandler = jest.fn();
     const environment = jest.fn();
 
+    let props: ModeSelectionMenuProps;
+
+    beforeEach(() => {
+        props = {
+            topic: Topic.KANA,
+            appMode: AppMode.LEARN,
+            onStart: onStartHandler
+        };
+
+        Environment.variable = environment;
+    });
+
+
     const setup = () => {
-        const component = render(<ModeSelectionMenu topic={Topic.KANA} appMode={AppMode.LEARN} onStart={onStartHandler} />);
+        const component = render(<ModeSelectionMenu {...props} />);
         return {
             hiragana: component.getByText('Hiragana'),
             katakana: component.getByText('Katakana'),
             diacriticals: component.getByText('Diacriticals'),
             diagraphs: component.getByText('Diagraphs'),
             all: component.getByText('All'),
-            custom: component.getByText('Custom'),
+            dataSettings: component.getByTitle('Data Settings'),
             start: component.getByText('Start'),
             ...component
         }
     }
-
-    beforeEach(() => {
-        Environment.variable = environment;
-    });
 
     test('Selecting \'Hiragana\' preset should change the description', () => {
         environment.mockReturnValue('Hiragana description');
@@ -122,6 +130,120 @@ describe("Example 1 - Kana", () => {
             new KanaSettingsBuilder().withEverything().build(),
             new LearnSettings()
         ));
+    });
+
+    test('Setting the AppMode to Learn should render the search button', () => {
+        props.appMode = AppMode.LEARN;
+        setup();
+        expect(screen.getByTitle('Search')).toBeInTheDocument();
+    });
+
+    test('Setting the AppMode to Learn should render the data settings button', () => {
+        props.appMode = AppMode.LEARN;
+        setup();
+        expect(screen.getByTitle('Data Settings')).toBeInTheDocument();
+    });
+
+    test('Clicking the data settings button in Learn mode should render the data settings menu', () => {
+        props.appMode = AppMode.LEARN;
+        const { dataSettings } = setup();
+        fireEvent.click(dataSettings);
+        expect(screen.getByText('Hiragana & Katakana Settings')).toBeInTheDocument();
+    });
+
+    test('Clicking the back button in the data settings menu should return to the preset menu', () => {
+        props.appMode = AppMode.LEARN;
+        const { dataSettings } = setup();
+
+        //Open Data Settings Menu
+        fireEvent.click(dataSettings);
+        expect(screen.getByText('Hiragana & Katakana Settings')).toBeInTheDocument();
+
+        //Close Data Settings Menu
+        fireEvent.click(screen.getByText('Back'));
+        expect(screen.getByTitle('Data Settings')).toBeInTheDocument();
+    });
+
+    test('Resetting in the data settings menu should default back to the preset data settings', () => {
+        props.appMode = AppMode.LEARN;
+        render(<ModeSelectionMenu {...props} />);
+
+        //Open Data Settings
+        fireEvent.click(screen.getByTitle('Data Settings'));
+
+        //Configure Something
+        fireEvent.click(screen.getByTestId('katakana'));
+        fireEvent.change(screen.getByPlaceholderText('Quantity'), { target: { value: 25 }});
+
+        //Confirming should use the custom game settings
+        fireEvent.click(screen.getByText('Confirm'));
+        fireEvent.click(screen.getByText('Start'));
+        expect((getValueLastCalledWith<SessionSettings>(onStartHandler).dataSettings as KanaSettings).katakana).toBe(true);
+
+        //Resetting should default back to the selected preset settings
+        fireEvent.click(screen.getByTitle('Data Settings'));
+        fireEvent.click(screen.getByText('Reset'));
+        fireEvent.change(screen.getByPlaceholderText('Quantity'), { target: { value: 25 }}); //Kana defaults to undefined quantity, so we need to set that
+        fireEvent.click(screen.getByText('Confirm'));
+        fireEvent.click(screen.getByText('Start'));
+        expect((getValueLastCalledWith<SessionSettings>(onStartHandler).dataSettings as KanaSettings).katakana).toBe(false);
+    });
+
+    test('Setting the AppMode to Play should render the game settings button', () => {
+        props.appMode = AppMode.PLAY;
+        render(<ModeSelectionMenu {...props} />);
+        expect(screen.getByTitle('Game Settings')).toBeInTheDocument();
+    });
+
+    test('Setting the AppMode to Play with a topic that has no custom menu should disable the data settings', () => {
+        props.appMode = AppMode.PLAY;
+        props.topic = Topic.CALENDAR;
+        render(<ModeSelectionMenu {...props} />);
+        expect(screen.getByTitle('This topic does not have data settings')).toBeDisabled();
+    });
+
+    test('Clicking the game settings button in Play mode should launch the game settings menu', () => {
+        props.appMode = AppMode.PLAY;
+        render(<ModeSelectionMenu {...props} />);
+        fireEvent.click(screen.getByTitle('Game Settings'));
+        expect(screen.getAllByText('Question Settings').length).toBeGreaterThan(0);
+    });
+
+    test('Quitting the game settings menu should return back to the preset screen', () => {
+        props.appMode = AppMode.PLAY;
+        render(<ModeSelectionMenu {...props} />);
+
+        //Open Game Settings
+        fireEvent.click(screen.getByTitle('Game Settings'));
+        expect(screen.getAllByText('Question Settings').length).toBeGreaterThan(0);
+
+        //Quit
+        fireEvent.click(screen.getByText('Back'));
+        expect(screen.getByTitle('Game Settings')).toBeInTheDocument();
+    });
+
+    test('Resetting in the game settings menu should default back to the preset game settings', () => {
+        props.appMode = AppMode.PLAY;
+        render(<ModeSelectionMenu {...props} />);
+
+        //Open Game Settings
+        fireEvent.click(screen.getByTitle('Game Settings'));
+
+        //Configure Something
+        fireEvent.click(screen.getByTitle('Time Settings'));
+        fireEvent.click(screen.getByTestId('Countdown'));
+
+        //Confirming should use the custom game settings
+        fireEvent.click(screen.getByText('Confirm'));
+        fireEvent.click(screen.getByText('Start'));
+        expect(getValueLastCalledWith<SessionSettings>(onStartHandler).gameSettings?.time.countdown).toBe(true);
+
+        //Resetting should default back to the selected preset settings
+        fireEvent.click(screen.getByTitle('Game Settings'));
+        fireEvent.click(screen.getByText('Reset'));
+        fireEvent.click(screen.getByText('Confirm'));
+        fireEvent.click(screen.getByText('Start'));
+        expect(getValueLastCalledWith<SessionSettings>(onStartHandler).gameSettings?.time.countdown).toBe(false);
     });
 });
 
@@ -257,48 +379,5 @@ describe("Example 2 - Calendar", () => {
         fireEvent.click(days);
         fireEvent.click(search);
         expect(screen.getByText('Monday')).toBeInTheDocument();
-    });
-});
-
-describe("Example 3 - Kanji (Customisable)", () => {
-    const onStartHandler = jest.fn();
-    const environment = jest.fn();
-
-    const setup = () => {
-        const component = render(<ModeSelectionMenu topic={Topic.KANJI} appMode={AppMode.LEARN} onStart={onStartHandler}/>);
-        return {
-            kyoiku: component.getByText('Kyōiku'),
-            joyo: component.getByText('Jōyō'),
-            numbers: component.getByText('Numbers'),
-            colours: component.getByText('Colours'),
-            time: component.getByText('Time'),
-            custom: component.getByText('Custom'),
-            start: component.getByText('Start'),
-            ...component
-        }
-    }
-
-    beforeEach(() => {
-        Environment.variable = environment;
-    });
-
-    test('Selecting the \'Custom\' option should render the respective topics custom menu component', () => {
-        const { custom } = setup();
-        fireEvent.click(custom);
-        expect(screen.getByText('Grade 1')).toBeInTheDocument();
-    });
-
-    test('Clicking start from a custom menu should call the onStart event handler', () => {
-        const { custom } = setup();
-        fireEvent.click(custom);
-        fireEvent.click(screen.getByText('Grade 1'));
-        fireEvent.click(screen.getByText('Grade 2'));
-        fireEvent.click(screen.getByText('Start'));
-        expect(onStartHandler).toHaveBeenCalledWith(
-            SessionSettings.forLearning(
-                new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE, KyoikuGrade.TWO]).withJoyoKanji(false).build(),
-                new LearnSettings()
-            )
-        );
     });
 });

@@ -2,13 +2,29 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiSettingsForm from "../../../../components/settings/data/KanjiSettingsForm";
 import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
 import { SessionSettings } from "../../../../types/session/settings/SessionSettings";
-import { KanjiSettingsBuilder } from "../../../../types/session/settings/data/KanjiSettings";
+import KanjiSettings, { KanjiSettingsBuilder } from "../../../../types/session/settings/data/KanjiSettings";
 import LearnSettings from "../../../../types/session/settings/LearnSettings";
+import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
+import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu";
 
-const onSelectedHandler = jest.fn();
+const onConfirmHandler = jest.fn();
+const onResetHandler = jest.fn();
+const onQuitHandler = jest.fn();
+
+let props: DataSettingsMenuProps<KanjiSettings>;
+
+beforeEach(() => {
+   props = {
+       title: "Kanji",
+       icon: faPaintBrush,
+       onConfirm: onConfirmHandler,
+       onReset: onResetHandler,
+       onQuit: onQuitHandler
+   };
+});
 
 const setup = () => {
-    const component = render(<KanjiSettingsForm onSelect={onSelectedHandler} />);
+    const component = render(<KanjiSettingsForm {...props} />);
     return {
         grade1: component.getByText('Grade 1'),
         grade2: component.getByText('Grade 2'),
@@ -17,15 +33,12 @@ const setup = () => {
         grade5: component.getByText('Grade 5'),
         grade6: component.getByText('Grade 6'),
         quantity: component.getByPlaceholderText('Quantity'),
-        submit: component.getByText('Start'),
+        back: component.getByText('Back'),
+        reset: component.getByText('Reset'),
+        confirm: component.getByText('Confirm'),
         ...component
     }
 }
-
-test('It should render the title', () => {
-    setup();
-    expect(screen.getByText('Kyōiku Kanji')).toBeInTheDocument();
-})
 
 test('It should render the default description on load', () => {
     setup();
@@ -53,71 +66,61 @@ test('Un-selecting a grade should remove it from the selection and update the de
    expect(screen.getByText('Selected 80 Kanji')).toBeInTheDocument();
 });
 
-
-test('Start button should be disabled on load', () => {
-    const { submit } = setup();
-    expect(submit).toBeDisabled();
+test('Confirm button should be disabled on load', () => {
+    const { confirm } = setup();
+    expect(confirm.parentElement).toBeDisabled();
 });
 
-test('Selecting a single grade should enable the submit button', () => {
-    const { submit, grade4 } = setup();
+test('Selecting a single grade should enable the confirm button', () => {
+    const { confirm, grade4 } = setup();
     fireEvent.click(grade4)
-    expect(submit).not.toBeDisabled();
+    expect(confirm.parentElement).not.toBeDisabled();
 });
 
-test('Selecting multiple grades should enable the submit button', () => {
-    const { submit, grade4, grade6 } = setup();
+test('Selecting multiple grades should enable the confirm button', () => {
+    const { confirm, grade4, grade6 } = setup();
     fireEvent.click(grade4)
     fireEvent.click(grade6)
-    expect(submit).not.toBeDisabled();
+    expect(confirm.parentElement).not.toBeDisabled();
 });
 
 test('Clicking start with Kyoiku kanji selected should call the onSelected event handler with the selected grades', () => {
-    const { submit, grade1 } = setup();
+    const { confirm, grade1 } = setup();
     fireEvent.click(grade1);
-    fireEvent.click(submit);
-    expect(onSelectedHandler).toHaveBeenCalledWith(
-        SessionSettings.forLearning(
-            new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withJoyoKanji(false).build(),
-            new LearnSettings()
-        )
+    fireEvent.click(confirm);
+    expect(onConfirmHandler).toHaveBeenCalledWith(
+        new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withJoyoKanji(false).build()
     );
 });
 
-test('Entering a valid quantity should enable the submit button', () => {
-    const { submit, quantity } = setup();
+test('Entering a valid quantity should enable the confirm button', () => {
+    const { confirm, quantity } = setup();
     fireEvent.change(quantity, { target: { value: 10 }});
-    expect(submit).not.toBeDisabled();
+    expect(confirm.parentElement).not.toBeDisabled();
 });
 
-test('Entering an invalid quantity should NOT enable the submit button', () => {
-    const { submit, quantity } = setup();
+test('Entering an invalid quantity should NOT enable the confirm button', () => {
+    const { confirm, quantity } = setup();
     fireEvent.change(quantity, { target: { value: "a" }});
-    expect(submit).toBeDisabled();
+    expect(confirm.parentElement).toBeDisabled();
 });
 
 test('Clicking start with a quantity selected should call the onSelected event handler with the quantity', () => {
-    const { submit, quantity } = setup();
+    const { confirm, quantity } = setup();
     fireEvent.change(quantity, { target: { value: 10 }});
-    fireEvent.click(submit);
-    expect(onSelectedHandler).toHaveBeenCalledWith(
-        SessionSettings.forLearning(
-            new KanjiSettingsBuilder().withJoyoKanji(false).withQuantity(10).build(),
-            new LearnSettings()
-        )
+    fireEvent.click(confirm);
+    expect(onConfirmHandler).toHaveBeenCalledWith(
+        new KanjiSettingsBuilder().withJoyoKanji(false).withQuantity(10).build()
     );
 });
 
 test('Clicking start with a quantity and grade selected should call the onSelected event handler with both', () => {
-    const { grade1, submit, quantity } = setup();
+    const { grade1, confirm, quantity } = setup();
     fireEvent.change(quantity, { target: { value: 10 }});
     fireEvent.click(grade1);
-    fireEvent.click(submit);
-    expect(onSelectedHandler).toHaveBeenCalledWith(
-        SessionSettings.forLearning(
-            new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withJoyoKanji(false).withQuantity(10).build(),
-            new LearnSettings()
-        )
+    fireEvent.click(confirm);
+    expect(onConfirmHandler).toHaveBeenCalledWith(
+        new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withJoyoKanji(false).withQuantity(10).build()
     );
 });
 
@@ -151,4 +154,26 @@ test('Selecting exactly 1 grade with a quantity specified should render the corr
     fireEvent.click(grade1);
     fireEvent.change(quantity, { target: { value: 15 }});
     expect(screen.getByText('Selected 15 random kanji from grade 1.')).toBeInTheDocument();
+});
+
+test('Clicking reset should reset the form to its default state', () => {
+    const { grade1, quantity, reset } = setup();
+
+    //Change some settings
+    fireEvent.click(grade1);
+    fireEvent.change(quantity, { target: { value: 20 }});
+    expect(screen.getByText('Selected 20 random kanji from grade 1.'));
+
+    //Reset
+    fireEvent.click(reset);
+
+    //Should be reset to default
+    expect(screen.getByText('Choose one or many grades below to begin.'));
+});
+
+
+test('Clicking the back button should call the onQuit event handler', () => {
+    const { back } = setup();
+    fireEvent.click(back);
+    expect(onQuitHandler).toHaveBeenCalled();
 });

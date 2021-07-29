@@ -1,16 +1,14 @@
 import { Component } from "react";
-import { Button, Col, Container, FormControl, InputGroup, Row } from "react-bootstrap";
-import { faBalanceScale, faGraduationCap, faLeaf, faMountain, faPaintBrush, faPlay, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
+import { Col, Container, FormControl, InputGroup, Row } from "react-bootstrap";
+import { faBalanceScale, faGraduationCap, faLeaf, faMountain, faPaintBrush, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KyoikuGradeButton from "../../ui/buttons/KyoikuGradeButton";
 import Arrays from "../../../utility/Arrays";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
-import { CustomLearnMenuProps } from "../../learn/ModeSelectionMenu";
 import TemplateString from "../../../types/TemplateString";
-import { SessionSettings } from "../../../types/session/settings/SessionSettings";
-import { KanjiSettingsBuilder } from "../../../types/session/settings/data/KanjiSettings";
-import LearnSettings from "../../../types/session/settings/LearnSettings";
+import KanjiSettings, { KanjiSettingsBuilder } from "../../../types/session/settings/data/KanjiSettings";
+import DataSettingsMenu, { DataSettingsMenuProps } from "./DataSettingsMenu";
 
 interface KanjiSettingsMenuState {
     grades: KyoikuGrade[];
@@ -18,8 +16,8 @@ interface KanjiSettingsMenuState {
     joyo: boolean;
 }
 
-class KanjiSettingsForm extends Component<CustomLearnMenuProps, KanjiSettingsMenuState> {
-    constructor(props: CustomLearnMenuProps | Readonly<CustomLearnMenuProps>) {
+class KanjiSettingsForm extends Component<DataSettingsMenuProps<KanjiSettings>, KanjiSettingsMenuState> {
+    constructor(props: DataSettingsMenuProps<KanjiSettings> | Readonly<DataSettingsMenuProps<KanjiSettings>>) {
         super(props);
         this.state = {
             grades: [],
@@ -29,110 +27,102 @@ class KanjiSettingsForm extends Component<CustomLearnMenuProps, KanjiSettingsMen
     }
 
     render() {
-        const { grades, quantity } = this.state;
+        const { title, icon, onQuit } = this.props;
+        const { grades } = this.state;
 
         return (
-            <Container fluid className={styles.wrapper}>
-                <Row>
-                    <Col className={styles.descWrapper}>
-                        <h3 className={styles.heading}>Kyōiku Kanji</h3>
-                        <p className={styles.desc}>
-                            {this.getDescription()}
-                        </p>
-                    </Col>
-                </Row>
+            <DataSettingsMenu title={title} icon={icon} onQuit={onQuit} onReset={this.onReset} onConfirm={this.confirm} isValid={this.validate}>
+                <Container fluid className={styles.wrapper}>
+                    <Row>
+                        <Col>
+                            <p className={styles.desc}>
+                                {this.getDescription()}
+                            </p>
+                        </Col>
+                    </Row>
 
-                <Row>
-                    <Col xs={6}>
-                        <KyoikuGradeButton
-                            grade={KyoikuGrade.ONE}
-                            icon={faPaintBrush}
-                            iconColour={"#fdb40e"}
-                            isSelected={grades.includes(KyoikuGrade.ONE)}
-                            onClick={this.onSelectGrade}
-                        />
-                    </Col>
-                    <Col>
-                        <KyoikuGradeButton
-                            grade={KyoikuGrade.TWO}
-                            icon={faSchool}
-                            iconColour={"#fdb40e"}
-                            isSelected={grades.includes(KyoikuGrade.TWO)}
-                            onClick={this.onSelectGrade}
-                        />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={6}>
-                        <KyoikuGradeButton
-                            grade={KyoikuGrade.THREE}
-                            icon={faLeaf}
-                            iconColour={"#fdb40e"}
-                            isSelected={grades.includes(KyoikuGrade.THREE)}
-                            onClick={this.onSelectGrade}
-                        />
-                    </Col>
-                    <Col>
-                        <KyoikuGradeButton
-                            grade={KyoikuGrade.FOUR}
-                            icon={faSun}
-                            iconColour={"#fdb40e"}
-                            isSelected={grades.includes(KyoikuGrade.FOUR)}
-                            onClick={this.onSelectGrade}
-                        />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={6}>
-                        <KyoikuGradeButton
-                            grade={KyoikuGrade.FIVE}
-                            icon={faMountain}
-                            iconColour={"#fdb40e"}
-                            isSelected={grades.includes(KyoikuGrade.FIVE)}
-                            onClick={this.onSelectGrade}
-                        />
-                    </Col>
-                    <Col>
-                        <KyoikuGradeButton
-                            grade={KyoikuGrade.SIX}
-                            icon={faGraduationCap}
-                            iconColour={"#fdb40e"}
-                            isSelected={grades.includes(KyoikuGrade.SIX)}
-                            onClick={this.onSelectGrade}
-                        />
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col>
-                        <InputGroup>
-                            <InputGroup.Prepend>
-                                <InputGroup.Text><FontAwesomeIcon icon={faBalanceScale} fixedWidth /></InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <FormControl
-                                id="quantity"
-                                placeholder="Quantity"
-                                className={styles.quantity}
-                                type="number"
-                                onChange={(e) => this.setState({ quantity: Number(e.target.value) })}
+                    <Row>
+                        <Col xs={6}>
+                            <KyoikuGradeButton
+                                grade={KyoikuGrade.ONE}
+                                icon={faPaintBrush}
+                                iconColour={"#fdb40e"}
+                                isSelected={grades.includes(KyoikuGrade.ONE)}
+                                onClick={this.onSelectGrade}
                             />
-                        </InputGroup>
-                    </Col>
-                </Row>
+                        </Col>
+                        <Col>
+                            <KyoikuGradeButton
+                                grade={KyoikuGrade.TWO}
+                                icon={faSchool}
+                                iconColour={"#fdb40e"}
+                                isSelected={grades.includes(KyoikuGrade.TWO)}
+                                onClick={this.onSelectGrade}
+                            />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={6}>
+                            <KyoikuGradeButton
+                                grade={KyoikuGrade.THREE}
+                                icon={faLeaf}
+                                iconColour={"#fdb40e"}
+                                isSelected={grades.includes(KyoikuGrade.THREE)}
+                                onClick={this.onSelectGrade}
+                            />
+                        </Col>
+                        <Col>
+                            <KyoikuGradeButton
+                                grade={KyoikuGrade.FOUR}
+                                icon={faSun}
+                                iconColour={"#fdb40e"}
+                                isSelected={grades.includes(KyoikuGrade.FOUR)}
+                                onClick={this.onSelectGrade}
+                            />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={6}>
+                            <KyoikuGradeButton
+                                grade={KyoikuGrade.FIVE}
+                                icon={faMountain}
+                                iconColour={"#fdb40e"}
+                                isSelected={grades.includes(KyoikuGrade.FIVE)}
+                                onClick={this.onSelectGrade}
+                            />
+                        </Col>
+                        <Col>
+                            <KyoikuGradeButton
+                                grade={KyoikuGrade.SIX}
+                                icon={faGraduationCap}
+                                iconColour={"#fdb40e"}
+                                isSelected={grades.includes(KyoikuGrade.SIX)}
+                                onClick={this.onSelectGrade}
+                            />
+                        </Col>
+                    </Row>
 
-                <Row>
-                    <Col>
-                        <Button
-                            variant="success"
-                            className={styles.playButton}
-                            onClick={this.onConfirmSelected}
-                            disabled={grades.length === 0 && !quantity}
-                        >
-                            <FontAwesomeIcon size="sm" icon={faPlay} /> Start
-                        </Button>
-                    </Col>
-                </Row>
-            </Container>
+                    <Row>
+                        <Col>
+                            <InputGroup>
+                                <InputGroup.Prepend>
+                                    <InputGroup.Text>
+                                        <FontAwesomeIcon icon={faBalanceScale} fixedWidth/>
+                                    </InputGroup.Text>
+                                </InputGroup.Prepend>
+
+                                <FormControl
+                                    id="quantity"
+                                    type="number"
+                                    placeholder="Quantity"
+                                    className={styles.quantity}
+                                    onChange={(e) => this.setState({ quantity: Number(e.target.value) })}
+                                />
+                            </InputGroup>
+                        </Col>
+                    </Row>
+                </Container>
+            </DataSettingsMenu>
         );
     }
 
@@ -145,11 +135,10 @@ class KanjiSettingsForm extends Component<CustomLearnMenuProps, KanjiSettingsMen
         }
     }
 
-    private onConfirmSelected = () => {
+    private confirm = () => {
         const { grades, quantity, joyo } = this.state;
         const dataSettings = new KanjiSettingsBuilder().withGrades(grades).withJoyoKanji(joyo).withQuantity(quantity).build();
-        const settings = SessionSettings.forLearning(dataSettings, new LearnSettings());
-        this.props.onSelect(settings);
+        this.props.onConfirm(dataSettings);
     }
 
     private getDescription = () => {
@@ -174,6 +163,20 @@ class KanjiSettingsForm extends Component<CustomLearnMenuProps, KanjiSettingsMen
         } else {
             return "Choose one or many grades below to begin.";
         }
+    }
+
+    private onReset = () => {
+        this.setState({
+            grades: [],
+            quantity: undefined,
+            joyo: false
+        });
+        this.props.onReset();
+    }
+
+    private validate = () => {
+        const { grades, quantity } = this.state;
+        return grades.length > 0 || !!quantity
     }
 }
 
