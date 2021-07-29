@@ -59,11 +59,11 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
             <Container className={styles.wrapper} ref={this.container} onMouseUp={this.resetSelected}>
                 <div style={{ left: xCursor, top: yCursor }} className={styles.cursor} />
 
-                {[...data.keys()].map((question: string) => {
+                {[...data.keys()].map((question: string, i: number) => {
                     const answer = data.get(question)!;
 
                     return (
-                        <Row className={[styles.row, "justify-content-around"].join(" ")}>
+                        <Row className={[styles.row, "justify-content-around"].join(" ")} key={`row-${i}`}>
                             <Col xs={5} md={4}>
                                 <AnswerChoiceDisplay
                                     value={question}

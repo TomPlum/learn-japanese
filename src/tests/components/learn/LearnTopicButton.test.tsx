@@ -1,11 +1,13 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import LearnTopicButton, { LearnTopicButtonProps } from "../../../components/learn/LearnTopicButton";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import LearnKanaModes from "../../../types/learn/mode/LearnKanaModes";
+import LearnMode from "../../../types/session/LearnMode";
+import { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
+import LearnSettings from "../../../types/session/settings/LearnSettings";
 
 const onClickHandler = jest.fn();
 
-const mode = new LearnKanaModes().getModes()[0];
+const mode = new LearnMode("Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings());
 
 let props: LearnTopicButtonProps;
 
@@ -19,27 +21,25 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(
-        <LearnTopicButton {...props} />
-    );
+    const component = render(<LearnTopicButton {...props} />);
 
     return {
-        icon: component.getByText('Icon'),
+        icon: component.getByText('ICON'),
         button: component.getByText('Hiragana'),
         ...component
     }
 }
 
 test('Should accept string icon', () => {
-   const { button, icon } = setup();
+    const { button, icon } = setup();
     expect(icon).toBeInTheDocument();
     expect(button).toBeInTheDocument();
 });
 
 test('Should accept Font Awesome icon', () => {
     props.icon = faCircle;
-    const { button } = setup();
-    expect(button).toBeInTheDocument();
+    render(<LearnTopicButton {...props} />)
+    expect(screen.getByText('Hiragana')).toBeInTheDocument();
 });
 
 test('Should have the class \'selected\' when the passed type matches the selected prop', () => {
@@ -48,6 +48,7 @@ test('Should have the class \'selected\' when the passed type matches the select
 });
 
 test('Should have the class \'notSelected\' when the passed type does not match the selected prop', () => {
+    props.selected = new LearnMode("Katakana", "#fdb40e", "あ", new KanaSettingsBuilder().build(), new LearnSettings());
     const { container } = setup();
     expect(container.firstChild).toHaveClass('notSelected');
 });

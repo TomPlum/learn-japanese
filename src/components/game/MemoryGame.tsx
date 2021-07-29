@@ -277,7 +277,6 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                 );
             }
             case QuestionType.MATCH: {
-                console.log(currentQuestion);
                 const questionData = new Map(currentQuestion.map(data => {
                     const question = data.getFieldValues(questionField)[0];
                     const answer = data.getFieldValues(answerField)[0];

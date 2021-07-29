@@ -141,26 +141,32 @@ test('Clicking the help button should route the user to /search', () => {
     expect(history.location.pathname).toBe('/help');
 });
 
-test('Hovering over the \'Japanese\' inspectable text in the heading should render an info overlay', () => {
+test('Hovering over the \'Japanese\' inspectable text in the heading should render an info overlay', async () => {
     when(environment).calledWith('JAPANESE_KANJI_DESC').mockReturnValue('Japanese Kanji Description');
     const { japaneseInspectable } = setup();
+
     fireEvent.mouseOver(japaneseInspectable);
-    expect(screen.getByTitle('Nihongo (日本語)'));
-    expect(screen.getByText('Japanese Kanji Description'));
+
+    expect(await screen.findByTitle('Nihongo (日本語)'));
+    expect(await screen.findByText('Japanese Kanji Description'));
 });
 
-test('Hovering over the \'Hiragana\' inspectable text in the description should render an info overlay', () => {
+test('Hovering over the \'Hiragana\' inspectable text in the description should render an info overlay', async () => {
     when(environment).calledWith('HIRAGANA_DESC').mockReturnValue('Hiragana Description');
     const { hiraganaInspectable } = setup();
+
     fireEvent.mouseOver(hiraganaInspectable);
-    expect(screen.getByTitle('Hiragana (ひらがな)'));
-    expect(screen.getByText('Hiragana Description'));
+
+    expect(await screen.findByTitle('Hiragana (ひらがな)'));
+    expect(await screen.findByText('Hiragana Description'));
 });
 
-test('Hovering over the \'Katakana\' inspectable text in the description should render an info overlay', () => {
+test('Hovering over the \'Katakana\' inspectable text in the description should render an info overlay', async () => {
     when(environment).calledWith('KATAKANA_DESC').mockReturnValue('Katakana Description');
     const { katakanaInspectable } = setup();
+
     fireEvent.mouseOver(katakanaInspectable);
-    expect(screen.getByTitle('Katakana (カタカナ)'));
-    expect(screen.getByText('Katakana Description'));
+
+    expect(await screen.findByTitle('Katakana (カタカナ)'));
+    expect(await screen.findByText('Katakana Description'));
 });
