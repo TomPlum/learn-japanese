@@ -13,6 +13,7 @@ import DiagraphFilter from "../../filters/kana/DiagraphFilter";
 import DiacriticalFilter from "../../filters/kana/DiacriticalFilter";
 import RomajiFilter from "../../filters/kana/RomajiFilter";
 import { KanaSettingsBuilder } from "../../types/session/settings/data/KanaSettings";
+import ToggleSwitch from "../ui/ToggleSwitch";
 
 interface SearchPageState {
     loading: boolean;
@@ -24,6 +25,7 @@ interface SearchPageState {
     showDiacriticals: boolean;
 }
 
+//TODO: Migrated to function component and use hooks
 class SearchPage extends Component<{ }, SearchPageState> {
 
     private kana: Kana[] = [];
@@ -76,51 +78,43 @@ class SearchPage extends Component<{ }, SearchPageState> {
                     <Container>
                         <Row>
                             <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
-                                <Form.Check
-                                    type="switch"
-                                    id="hiragana"
-                                    className={styles.hiraganaSwitch}
-                                    checked={showHiragana}
-                                    onChange={() => this.setState({ showHiragana: !showHiragana })}
+                                <ToggleSwitch
+                                    label="Hiragana"
+                                    enabled={showHiragana}
                                     data-testid="hiragana-switch"
+                                    className={styles.hiraganaSwitch}
+                                    onChange={() => this.setState({ showHiragana: !showHiragana })}
                                 />
-                                <Form.Label className={styles.label}>Hiragana</Form.Label>
                             </Col>
 
                             <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
-                                <Form.Check
-                                    type="switch"
-                                    id="katakana"
-                                    className={styles.katakanaSwitch}
-                                    checked={showKatakana}
-                                    onChange={() => this.setState({ showKatakana: !showKatakana })}
+                                <ToggleSwitch
+                                    label="Katakana"
+                                    enabled={showKatakana}
                                     data-testid="katakana-switch"
+                                    className={styles.katakanaSwitch}
+                                    onChange={() => this.setState({ showKatakana: !showKatakana })}
                                 />
-                                <Form.Label className={styles.label}>Katakana</Form.Label>
                             </Col>
 
                             <Col className={styles.switchWrapper} md={3} sm={4} xs={6}>
-                                <Form.Check
-                                    type="switch"
-                                    id="diagraphs"
-                                    className={styles.diagraphSwitch}
-                                    checked={showDiagraphs}
-                                    onChange={() => this.setState({ showDiagraphs: !showDiagraphs })}
+                                <ToggleSwitch
+                                    label="Diagraphs"
+                                    enabled={showDiagraphs}
                                     data-testid="diagraphs-switch"
+                                    className={styles.diagraphSwitch}
+                                    onChange={() => this.setState({ showDiagraphs: !showDiagraphs })}
                                 />
-                                <Form.Label className={styles.label}>Diagraphs</Form.Label>
                             </Col>
 
                             <Col className={styles.switchWrapper} md={3} sm={12} xs={6}>
-                                <Form.Check
-                                    type="switch"
-                                    id="diacriticals"
-                                    className={styles.diacriticalSwitch}
-                                    checked={showDiacriticals}
-                                    onChange={() => this.setState({ showDiacriticals: !showDiacriticals })}
+                                <ToggleSwitch
+                                    label="Diacriticals"
+                                    enabled={showDiacriticals}
                                     data-testid="diacriticals-switch"
+                                    className={styles.diacriticalSwitch}
+                                    onChange={() => this.setState({ showDiacriticals: !showDiacriticals })}
                                 />
-                                <Form.Label className={styles.label}>Diacriticals</Form.Label>
                             </Col>
                         </Row>
                     </Container>

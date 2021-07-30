@@ -1,10 +1,11 @@
 import React, { ChangeEvent, Component } from "react";
 import { LifeQuantity } from "../../../types/game/LifeQuantity";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import LifeSettings, { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
 import RangeSlider from "react-bootstrap-range-slider";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 import styles from "../../../styles/sass/components/settings/game/LifeSettingsForm.module.scss";
+import ToggleSwitch from "../../ui/ToggleSwitch";
 
 interface LifeSettingsFormProps {
     onChange: (settings: LifeSettings) => void;
@@ -51,15 +52,12 @@ class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsForm
                             a few, or unlimited if you're playing more casually.
                         </p>
 
-                        <Form.Check
-                            inline
-                            type="switch"
-                            id="lives"
-                            label="Enabled"
+                        <ToggleSwitch
+                            label="Enable"
+                            enabled={enabled}
                             className={styles.check}
-                            checked={enabled}
-                            onChange={() => this.setState({ enabled: !enabled })}
                             data-testid="enable-lives"
+                            onChange={() => this.setState({ enabled: !enabled })}
                         />
                     </Col>
 

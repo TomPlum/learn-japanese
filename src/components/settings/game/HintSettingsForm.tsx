@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import HintSettings, { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
 import RangeSlider from "react-bootstrap-range-slider";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 import styles from "../../../styles/sass/components/settings/game/HintSettingsForm.module.scss";
+import ToggleSwitch from "../../ui/ToggleSwitch";
 
 export interface HintSettingsFormProps {
     onChange: (settings: HintSettings) => void;
@@ -58,15 +59,12 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
                             struggling.
                         </p>
 
-                        <Form.Check
-                            inline
-                            type="switch"
+                        <ToggleSwitch
+                            enabled={enabled}
                             label="Enabled"
-                            id="hint-quantity"
                             className={styles.check}
-                            checked={enabled}
-                            onChange={() => this.setState({ enabled: !enabled, infinite: false })}
                             data-testid="enable-hints"
+                            onChange={() => this.setState({ enabled: !enabled, infinite: false })}
                         />
                     </Col>
 
@@ -92,16 +90,13 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
                             Remove the quantity cap and use as many hints as you'd like.
                         </p>
 
-                        <Form.Check
-                            inline
-                            type="switch"
-                            label="Infinite Hints"
-                            id="infinite-hints"
-                            className={styles.check}
-                            checked={infinite}
+                        <ToggleSwitch
+                            enabled={infinite}
                             disabled={!enabled}
-                            onChange={() => this.setState({ infinite: !infinite })}
+                            label="Infinite Hints"
+                            className={styles.check}
                             data-testid="enable-infinite-hints"
+                            onChange={() => this.setState({ infinite: !infinite })}
                         />
                     </Col>
                 </Row>

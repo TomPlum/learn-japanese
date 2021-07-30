@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { QuestionType } from "../../../types/game/QuestionType";
 import DisplayTypeButton from "../../ui/buttons/DisplayTypeButton";
 import { faChevronRight, faFont, faGripVertical, faHandPointer, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { Environment } from "../../../utility/Environment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KanaQuantityButton from "../../ui/buttons/KanaQuantityButton";
@@ -11,6 +11,7 @@ import styles from "../../../styles/sass/components/settings/game/QuestionSettin
 import LearnableField from "../../../types/learn/LearnableField";
 import LearnableFieldSelector from "../../ui/select/LearnableFieldSelector";
 import ScrollableContainer from "../../ui/ScrollableContainer";
+import ToggleSwitch from "../../ui/ToggleSwitch";
 
 export interface QuestionSettingsFormProps {
     onChange: (settings: QuestionSettings) => void;
@@ -194,11 +195,9 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                             <FontAwesomeIcon icon={faChevronRight}/> Score
                         </h5>
 
-                        <Form.Check
-                            id="score"
-                            type="switch"
+                        <ToggleSwitch
                             label="Track Score"
-                            checked={score}
+                            enabled={score}
                             data-testid="score-switch"
                             className={styles.check}
                             onChange={() => this.setState({ score: !score })}

@@ -1,9 +1,10 @@
 import React, { ChangeEvent, Component } from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import TimeSettings, { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 import styles from "../../../styles/sass/components/settings/game/TimeSettingsForm.module.scss";
 import RangeSlider from "react-bootstrap-range-slider";
 import ScrollableContainer from "../../ui/ScrollableContainer";
+import ToggleSwitch from "../../ui/ToggleSwitch";
 
 export interface TimeSettingsFormProps {
     onChange: (settings: TimeSettings) => void;
@@ -64,15 +65,12 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                         </div>
 
                         <h5 className={styles.heading}>
-                            <Form.Check
-                                inline
-                                type="switch"
+                            <ToggleSwitch
                                 label="Timed"
-                                id="time"
-                                className={styles.check}
-                                checked={timed}
-                                onChange={this.onChangeTimed}
+                                enabled={timed}
                                 data-testid="Timed"
+                                className={styles.check}
+                                onChange={this.onChangeTimed}
                             />
                         </h5>
 
@@ -82,14 +80,12 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                         </p>
 
                         <h5 className={styles.heading}>
-                            <Form.Check
-                                type="switch"
+                            <ToggleSwitch
                                 label="Count Down"
-                                id="countdown"
-                                className={styles.check}
-                                checked={countdown}
-                                onChange={this.onChangeCountDown}
+                                enabled={countdown}
                                 data-testid="Countdown"
+                                className={styles.check}
+                                onChange={this.onChangeCountDown}
                             />
                         </h5>
 
