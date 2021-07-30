@@ -5,7 +5,7 @@ import MenuDescription from "../ui/MenuDescription";
 import LearnTopicButton from "./LearnTopicButton";
 import StartButton from "../ui/buttons/StartButton";
 import Arrays from "../../utility/Arrays";
-import { faCog, faCogs, faSearch, faVial } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faCogs, faDatabase, faSearch, faVial } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "./Search";
 import { Learnable } from "../../types/learn/Learnable";
@@ -100,33 +100,33 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
                             <StartButton onClick={this.onStart} />
                         </Col>
 
-                        <Col xs={3} sm={2} className="pl-2 pr-1">
+                        <Col xs={2} className="pl-2 pr-2">
                             <Button
                                 disabled={!topic.menu}
                                 className={styles.settings}
-                                variant={!!customGameSettings ? "primary" : "info"}
+                                variant={!!customDataSettings ? "primary" : "info"}
                                 onClick={() => this.setState({ isConfiguringData: true})}
                                 title={!topic.menu ? "This topic does not have data settings" : "Data Settings"}
                             >
                                 <FontAwesomeIcon
                                     fixedWidth
-                                    pulse={!!customDataSettings}
-                                    icon={faVial}
+                                    icon={faDatabase}
                                     className={styles.spin}
+                                    spin={!!customDataSettings}
                                 />
                             </Button>
                         </Col>
 
                         {appMode === AppMode.LEARN && (
-                            <Col xs={3} sm={2} className="pl-2">
-                                <Button className={styles.search} onClick={() => this.setState({ searching: true })} title="Search">
+                            <Col xs={2} className="pl-1">
+                                <Button className={styles.search} title="Search" onClick={() => this.setState({ searching: true })}>
                                     <FontAwesomeIcon icon={faSearch} fixedWidth/>
                                 </Button>
                             </Col>
                         )}
 
                         {appMode === AppMode.PLAY && (
-                            <Col xs={3} sm={2} className="pl-2">
+                            <Col xs={2} className="pl-1">
                                 <Button
                                     title="Game Settings"
                                     className={styles.settings}
@@ -135,9 +135,9 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
                                 >
                                     <FontAwesomeIcon
                                         fixedWidth
+                                        className={styles.spin}
                                         spin={!!customGameSettings}
                                         icon={!!customGameSettings ? faCog : faCogs}
-                                        className={styles.spin}
                                     />
                                 </Button>
                             </Col>
