@@ -23,7 +23,7 @@ class DataSettingsMenu extends Component<DataSettingsMenuProps<any>> {
             <div className={styles.wrapper}>
                 <Card bg="dark" className={[styles.card, "mb-2"].join(" ")}>
                     <p className={styles.title}>
-                        <FontAwesomeIcon icon={icon} fixedWidth />
+                        <FontAwesomeIcon icon={icon} className={styles.icon} fixedWidth />
                         <span>{title} Settings</span>
                     </p>
 
