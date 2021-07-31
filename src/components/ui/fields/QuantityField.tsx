@@ -5,7 +5,7 @@ import { faBalanceScale } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../styles/sass/components/ui/fields/QuantityField.module.scss";
 
 export interface QuantityFieldProps {
-    value: number;
+    value?: number;
     className?: string;
     isValid?: () => boolean;
     onChange?: (value: number) => void;
@@ -40,7 +40,9 @@ class QuantityField extends Component<QuantityFieldProps> {
 
     private isValid = (): boolean => {
         const { value, isValid } = this.props;
-        return (isValid?.() ?? true) && value > 0;
+        const isCustomValid = isValid?.() ?? true;
+        const isValidNumber = !!value && /^[0-9]+$/.test(value.toString());
+        return isCustomValid && isValidNumber;
     }
 }
 

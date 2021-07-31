@@ -1,11 +1,10 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
-import { Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/settings/data/KanaSettingsForm.module.scss";
 import KanaSettings, { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
 import ToggleSwitch from "../../ui/ToggleSwitch";
 import DataSettingsMenu, { DataSettingsMenuProps } from "./DataSettingsMenu";
-import { faBalanceScale } from "@fortawesome/free-solid-svg-icons";
+import QuantityField from "../../ui/fields/QuantityField";
 
 interface KanaSettingsState {
     hiragana: boolean;
@@ -33,7 +32,7 @@ class KanaSettingsForm extends Component<DataSettingsMenuProps<KanaSettings>, Ka
         const { hiragana, katakana, diagraphs, quantity } = this.state;
 
         return (
-            <DataSettingsMenu title={title} icon={icon} onQuit={onQuit} onReset={this.reset} onConfirm={this.confirm} isValid={this.isValid}>
+            <DataSettingsMenu title={title} icon={icon} onQuit={onQuit} onReset={this.reset} onConfirm={this.confirm} isValid={this.validate}>
                 <Row>
                     <Col>
                         <ToggleSwitch
@@ -80,24 +79,13 @@ class KanaSettingsForm extends Component<DataSettingsMenuProps<KanaSettings>, Ka
                             respective kana.
                         </p>
 
-                        <InputGroup hasValidation>
-                            <InputGroup.Prepend>
-                                <InputGroup.Text>
-                                    <FontAwesomeIcon icon={faBalanceScale} fixedWidth />
-                                </InputGroup.Text>
-                            </InputGroup.Prepend>
-
-                            <Form.Control
-                                required
-                                type="number"
-                                placeholder="Quantity"
-                                className={styles.quantity}
-                                isInvalid={!quantity || quantity < 1 || quantity > 214}
-                                onChange={(e) => this.setState({ quantity: Number(e.target.value) })}
-                            />
-                        </InputGroup>
+                        <QuantityField
+                            value={quantity}
+                            className={styles.quantity}
+                            isValid={this.validate}
+                            onChange={(value: number) => this.setState({ quantity: value })}
+                        />
                     </Col>
-
                 </Row>
             </DataSettingsMenu>
         );
@@ -126,9 +114,9 @@ class KanaSettingsForm extends Component<DataSettingsMenuProps<KanaSettings>, Ka
         this.props.onConfirm(settings);
     }
 
-    private isValid = (): boolean => {
+    private validate = (): boolean => {
         const { quantity } = this.state;
-        return !!quantity && quantity > 0;
+        return !!quantity && quantity > 0 && quantity <= 214
     }
 }
 

@@ -1,13 +1,13 @@
 import { Component } from "react";
-import { Col, Container, FormControl, InputGroup, Row } from "react-bootstrap";
-import { faBalanceScale, faGraduationCap, faLeaf, faMountain, faPaintBrush, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Col, Container, Row } from "react-bootstrap";
+import { faGraduationCap, faLeaf, faMountain, faPaintBrush, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
 import KyoikuGradeButton from "../../ui/buttons/KyoikuGradeButton";
 import Arrays from "../../../utility/Arrays";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import TemplateString from "../../../types/TemplateString";
 import KanjiSettings, { KanjiSettingsBuilder } from "../../../types/session/settings/data/KanjiSettings";
 import DataSettingsMenu, { DataSettingsMenuProps } from "./DataSettingsMenu";
+import QuantityField from "../../ui/fields/QuantityField";
 import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
 
 interface KanjiSettingsMenuState {
@@ -28,7 +28,7 @@ class KanjiSettingsForm extends Component<DataSettingsMenuProps<KanjiSettings>, 
 
     render() {
         const { title, icon, onQuit } = this.props;
-        const { grades } = this.state;
+        const { grades, quantity } = this.state;
 
         return (
             <DataSettingsMenu title={title} icon={icon} onQuit={onQuit} onReset={this.onReset} onConfirm={this.confirm} isValid={this.validate}>
@@ -104,21 +104,11 @@ class KanjiSettingsForm extends Component<DataSettingsMenuProps<KanjiSettings>, 
 
                     <Row>
                         <Col>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <FontAwesomeIcon icon={faBalanceScale} fixedWidth/>
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-
-                                <FormControl
-                                    id="quantity"
-                                    type="number"
-                                    placeholder="Quantity"
-                                    className={styles.quantity}
-                                    onChange={(e) => this.setState({ quantity: Number(e.target.value) })}
-                                />
-                            </InputGroup>
+                            <QuantityField
+                                value={quantity}
+                                className={styles.quantity}
+                                onChange={(value: number) => this.setState(({ quantity: value }))}
+                            />
                         </Col>
                     </Row>
                 </Container>
