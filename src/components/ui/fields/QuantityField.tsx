@@ -1,0 +1,47 @@
+import { Component } from "react";
+import { Form, InputGroup } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBalanceScale } from "@fortawesome/free-solid-svg-icons";
+import styles from "../../../styles/sass/components/ui/fields/QuantityField.module.scss";
+
+export interface QuantityFieldProps {
+    value: number;
+    className?: string;
+    isValid?: () => boolean;
+    onChange?: (value: number) => void;
+}
+
+class QuantityField extends Component<QuantityFieldProps> {
+    render() {
+        const { value, className, onChange } = this.props;
+
+        return (
+            <InputGroup hasValidation>
+                <InputGroup.Prepend>
+                    <InputGroup.Text>
+                        <FontAwesomeIcon icon={faBalanceScale} className={styles.icon} fixedWidth />
+                        <span className={styles.description}>Quantity</span>
+                    </InputGroup.Text>
+                </InputGroup.Prepend>
+
+                <Form.Control
+                    required
+                    type="number"
+                    value={value}
+                    placeholder="Quantity"
+                    isValid={this.isValid()}
+                    isInvalid={!this.isValid()}
+                    className={[className, styles.input].join(" ")}
+                    onChange={(e) => onChange?.(Number(e.target.value))}
+                />
+            </InputGroup>
+        );
+    }
+
+    private isValid = (): boolean => {
+        const { value, isValid } = this.props;
+        return (isValid?.() ?? true) && value > 0;
+    }
+}
+
+export default QuantityField;
