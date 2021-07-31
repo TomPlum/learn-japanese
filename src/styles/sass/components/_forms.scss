@@ -37,3 +37,26 @@
     font-family: "Ciutadella Rounded Medium", sans-serif;
   }
 }
+
+@mixin DataSettingsForm {
+  .description {
+    font-family: "Ciutadella Rounded", sans-serif;
+    font-size: 1em;
+    color: #FFF;
+  }
+
+  .disabled {
+    font-family: "Ciutadella Rounded", sans-serif;
+    font-size: 1em;
+    color: #bab2b2;
+  }
+
+  .switch {
+    display: block;
+  }
+
+  .quantity {
+    text-align: center;
+    font-family: "Ciutadella Rounded Medium", sans-serif;
+  }
+}

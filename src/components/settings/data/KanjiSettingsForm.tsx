@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KyoikuGradeButton from "../../ui/buttons/KyoikuGradeButton";
 import Arrays from "../../../utility/Arrays";
 import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
-import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
 import TemplateString from "../../../types/TemplateString";
 import KanjiSettings, { KanjiSettingsBuilder } from "../../../types/session/settings/data/KanjiSettings";
 import DataSettingsMenu, { DataSettingsMenuProps } from "./DataSettingsMenu";
+import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
 
 interface KanjiSettingsMenuState {
     grades: KyoikuGrade[];

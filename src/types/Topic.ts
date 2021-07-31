@@ -23,6 +23,7 @@ import PlaySentenceStructureModes from "./game/mode/PlaySentenceStructureModes";
 import React from "react";
 import KanaSettingsForm from "../components/settings/data/KanaSettingsForm";
 import KanjiSettingsForm from "../components/settings/data/KanjiSettingsForm";
+import SentenceStructureForm from "../components/settings/data/SentenceStructureForm";
 
 export default class Topic {
     private readonly _name: string;
@@ -61,7 +62,8 @@ export default class Topic {
 
     public static GRAMMAR = new Topic(
         "Sentence Structure", faSpellCheck, new LearnSentenceStructureModes(), new PlaySentenceStructureModes(),
-        { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack }
+        { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack },
+        SentenceStructureForm
     );
 
     public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR, Topic.GRAMMAR];

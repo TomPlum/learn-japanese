@@ -64,3 +64,9 @@ test('Should disable the confirm button when the isValid function returns false'
     const { confirm } = setup();
     expect(confirm.parentElement).toBeDisabled();
 });
+
+test('Should enable the confirm button when the isValid function is not bound', () => {
+    props.isValid = undefined;
+    const { confirm } = setup();
+    expect(confirm.parentElement).not.toBeDisabled();
+});

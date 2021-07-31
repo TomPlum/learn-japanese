@@ -3,8 +3,8 @@ import ScrollableContainer from "../../ui/ScrollableContainer";
 import { Button, Card, Col, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faCheck, faUndo, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../../styles/sass/components/settings/data/DataSettingsMenu.module.scss";
 import DataSettings from "../../../types/session/settings/data/DataSettings";
+import styles from "../../../styles/sass/components/settings/data/DataSettingsMenu.module.scss";
 
 export interface DataSettingsMenuProps<T extends DataSettings> {
     title: string;
@@ -49,7 +49,7 @@ class DataSettingsMenu extends Component<DataSettingsMenuProps<any>> {
                             </Col>
 
                             <Col className={styles.noGuttersRight}>
-                                <Button variant="success" block onClick={onConfirm} className={styles.button} disabled={!isValid?.()}>
+                                <Button variant="success" block onClick={onConfirm} className={styles.button} disabled={isValid ? !isValid() : false}>
                                     <FontAwesomeIcon icon={faCheck}/>
                                     <span className={styles.buttonText}> Confirm</span>
                                 </Button>
