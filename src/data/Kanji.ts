@@ -5409,6 +5409,171 @@ export function kyoiku(): KanjiData[] {
                 { value: "形式", kana: ["けいしき"], english: ["form (as opposed to substance)", "formality"] },
             ]
         },
+        {
+            name: "神",
+            code: "\u795E",
+            on: [{ kana: "しん", romaji: "shin" }, { kana: "じん", romaji: "jin" }],
+            kun: [{ kana: "かみ", romaji: "kami" }, { kana: "かん", romaji: "kan" }, { kana: "こう", romaji: "kō" }],
+            source: "https://en.wiktionary.org/wiki/%E7%A5%9E#Kanji",
+            meanings: ["gods", "mind", "soul"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "神", kana: ["かみ"], english: ["god", "deity", "divinity", "spirit", "kami"] },
+                { value: "精神", kana: ["せいしん"], english: ["mind", "soul", "heart", "spirit", "intention"] },
+                { value: "阪神", kana: ["はんしん"], english: ["Osaka-Kobe Hanshin (company name: rail-way)"] },
+                { value: "神経", kana: ["しんけい"], english: ["nerve", "sensitivity"] },
+                { value: "神社", kana: ["じんじゃ"], english: ["Shinto shrine"] },
+            ]
+        },
+        {
+            name: "育",
+            code: "\u80B2",
+            on: [{ kana: "いく", romaji: "iku" }],
+            kun: [{ kana: "そだつ", romaji: "sodatsu" }, { kana: "そだてる", romaji: "sodateru" }, { kana: "はぐくむ", romaji: "hagukumu" }],
+            source: "https://en.wiktionary.org/wiki/%E8%82%B2#Kanji",
+            meanings: ["bring up", "grow up", "raise", "rear"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "教育", kana: ["きょういく"], english: ["training", "education"] },
+                { value: "体育", kana: ["たいいく"], english: ["physical education", "gymnastics", "athletics"] },
+                { value: "育児", kana: ["いくじ"], english: ["childcare", "nursing", "upbringing"] },
+                { value: "保育", kana: ["ほいく"], english: ["nursing", "nurturing", "rearing", "lactation"] },
+                { value: "育成", kana: ["いくせい"], english: ["rearing", "training", "nurture", "cultivation"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "想",
+            code: "\u60F3",
+            on: [{ kana: "そう", romaji: "sō" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E6%83%B3#Kanji",
+            meanings: ["concept", "think", "idea", "thought"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "構想", kana: ["こうそう"], english: ["plan", "plot", "idea", "conception"] },
+                { value: "予想", kana: ["よそう"], english: ["expectation", "anticipation", "prediction"] },
+                { value: "思想", kana: ["しそう"], english: ["thought", "idea", "ideology"] },
+                { value: "感想", kana: ["かんそう"], english: ["impressions", "thoughts"] },
+                { value: "発想", kana: ["はっそう"], english: ["expression (e.g. in music)", "idea", "conception"] },
+            ]
+        },
+        {
+            name: "州",
+            code: "\u5DDE",
+            on: [{ kana: "しゅう", romaji: "shū" }],
+            kun: [{ kana: "す", romaji: "su" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B7%9E#Kanji",
+            meanings: ["state", "province"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "州", kana: ["しゅう"], english: ["state", "province", "county (UK)"] },
+                { value: "欧州", kana: ["おうしゅう"], english: ["Europe"] },
+                { value: "九州", kana: ["きゅうしゅう"], english: ["Kyushu (southernmost of the four main islandsof Japan)"] },
+                { value: "州都", kana: ["しゅうと"], english: ["capital (city) of a state"] },
+                { value: "州政府", kana: ["しゅうせいふ"], english: ["state government"] },
+            ]
+        },
+        {
+            name: "追",
+            code: "\u8FFD",
+            on: [{ kana: "つい", romaji: "tsui" }],
+            kun: [{ kana: "おう", romaji: "ou" }],
+            source: "https://en.wiktionary.org/wiki/%E8%BF%BD#Kanji",
+            meanings: ["chase", "drive away", "follow", "pursue", "mean-while"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "追う", kana: ["おう"], english: ["to chase", "to run after", "to pursue"] },
+                { value: "追加", kana: ["ついか"], english: ["addition", "supplement", "append (e.g. to a file)"] },
+                { value: "追い込む", kana: ["おいこむ"], english: ["to herd", "to corner", "to drive"] },
+                { value: "追及", kana: ["ついきゅう"], english: ["investigation (e.g. into someone’s guilt)"] },
+                { value: "追放", kana: ["ついほう"], english: ["exile", "banishment"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "配",
+            code: "\u914D",
+            on: [{ kana: "はい", romaji: "hai" }],
+            kun: [{ kana: "くばる", romaji: "kubaru" }],
+            source: "https://en.wiktionary.org/wiki/%E9%85%8D#Kanji",
+            meanings: ["distribute", "spouse", "exile", "rationing"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "支配", kana: ["しはい"], english: ["rule", "control", "direction"] },
+                { value: "心配", kana: ["しんぱい"], english: ["worry", "concern", "anxiety", "care", "help", "aid"] },
+                { value: "配分", kana: ["はいぶん"], english: ["distribution", "allotment"] },
+                { value: "配慮", kana: ["はいりょ"], english: ["consideration", "concern", "forethought"] },
+                { value: "配当", kana: ["はいとう"], english: ["dividend", "share"] },
+            ]
+        },
+        {
+            name: "乗",
+            code: "\u4E57",
+            on: [{ kana: "じょう", romaji: "jō" }],
+            kun: [{ kana: "のる", romaji: "noru" }],
+            source: "https://en.wiktionary.org/wiki/%E4%B9%97#Kanji",
+            meanings: ["ride", "power", "multiplication", "record", "counter for vehicles", "board", "mount", "join"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "乗り", kana: ["のり"], english: ["riding", "ride", "spread (of paints)"] },
+                { value: "乗用車", kana: ["じょうようしゃ"], english: ["passenger vehicle", "automobile"] },
+                { value: "乗客", kana: ["じょうきゃく", "じょうかく"], english: ["passenger"] },
+                { value: "乗せる", kana: ["のせる"], english: ["to place on (something)", "to take on board"] },
+                { value: "乗員", kana: ["じょういん"], english: ["crew"] },
+            ],
+            tags: ["counter", "verb"]
+        },
+        {
+            name: "農",
+            code: "\u8FB2",
+            on: [{ kana: "のう", romaji: "nō" }],
+            kun: [],
+            source: "https://en.wiktionary.org/wiki/%E8%BE%B2#Kanji",
+            meanings: ["agriculture", "farmers"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "農", kana: ["のう"], english: ["farming", "agriculture"] },
+                { value: "農業", kana: ["のうぎょう"], english: ["agriculture"] },
+                { value: "農家", kana: ["のうか"], english: ["farmer", "farm family"] },
+                { value: "農協", kana: ["のうきょう"], english: ["agricultural cooperative"] },
+                { value: "農村", kana: ["のうそん"], english: ["agricultural community", "farm village", "rural"] },
+            ]
+        },
+        {
+            name: "助",
+            code: "\u52A9",
+            on: [{ kana: "じょ", romaji: "jo" }],
+            kun: [{ kana: "たすける", romaji: "tasukeru" }, { kana: "たすかる", romaji: "tasukaru" }, { kana: "すけ", romaji: "suke" }],
+            source: "https://en.wiktionary.org/wiki/%E5%8A%A9#Kanji",
+            meanings: ["help", "rescue", "assist"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "援助", kana: ["えんじょ"], english: ["assistance", "aid", "support"] },
+                { value: "補助", kana: ["ほじょ"], english: ["assistance", "support", "aid", "auxiliary"] },
+                { value: "助教授", kana: ["じょきょうじゅ"], english: ["assistant professor"] },
+                { value: "助成", kana: ["じょせい"], english: ["assisting", "assistance", "fostering", "aiding"] },
+                { value: "助手", kana: ["じょしゅ", "すけて"], english: ["helper", "helpmeet", "assistant", "tutor"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "商",
+            code: "\u5546",
+            on: [{ kana: "しょう", romaji: "shō" }],
+            kun: [{ kana: "あきなう", romaji: "akinau" }],
+            source: "https://en.wiktionary.org/wiki/%E5%95%86#Kanji",
+            meanings: ["make a deal", "selling", "dealing in", "merchant"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "商", kana: ["しょう"], english: ["quotient", "dealing", "dealer", "store"] },
+                { value: "商品", kana: ["しょうひん"], english: ["commodity", "article of commerce", "goods", "stock"] },
+                { value: "商業", kana: ["しょうぎょう"], english: ["commerce", "trade", "business"] },
+                { value: "商社", kana: ["しょうしゃ"], english: ["trading company", "firm"] },
+                { value: "通商", kana: ["つうしょう"], english: ["commerce", "trade"] },
+            ],
+            tags: ["verb"]
+        },
 
         //Grade 6 Kanji
         {
