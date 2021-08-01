@@ -5410,6 +5410,168 @@ export function kyoiku(): KanjiData[] {
             ]
         },
         {
+            name: "談",
+            code: "\u8AC7",
+            on: [{ kana: "だん", romaji: "dan" }],
+            kun: [{ kana: "かたる", romaji: "kataru" }],
+            source: "https://en.wiktionary.org/wiki/%E8%AB%87#Kanji",
+            meanings: ["discuss", "talk"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "会談", kana: ["かいだん"], english: ["conversation", "conference", "discussion"] },
+                { value: "相談", kana: ["そうだん"], english: ["consultation", "discussion"] },
+                { value: "懇談", kana: ["こんだん"], english: ["informal talk"] },
+                { value: "談合", kana: ["だんごう"], english: ["consultation", "discussion", "conference"] },
+                { value: "相談役", kana: ["そうだんやく"], english: ["counselor", "counsellor", "adviser", "advisor"] },
+            ],
+            tags: ["verb"]
+        },
+        {
+            name: "局",
+            code: "\u5C40",
+            on: [{ kana: "きょく", romaji: "kyoku" }],
+            kun: [{ kana: "つぼね", romaji: "tsubone" }],
+            source: "https://en.wiktionary.org/wiki/%E5%B1%80#Kanji",
+            meanings: ["office"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "局", kana: ["きょく"], english: ["channel (i.e. TV or radio)", "station"] },
+                { value: "事務局", kana: ["じむきょく"], english: ["secretariat", "executive office"] },
+                { value: "当局", kana: ["とうきょく"], english: ["authorities", "this office"] },
+                { value: "局長", kana: ["きょくちょう"], english: ["bureau director", "office chief"] },
+                { value: "結局", kana: ["けっきょく"], english: ["after all", "eventually"] },
+            ]
+        },
+        {
+            name: "球",
+            code: "\u7403",
+            on: [{ kana: "きゅう", romaji: "kyū" }],
+            kun: [{ kana: "たま", romaji: "tama" }],
+            source: "https://en.wiktionary.org/wiki/%E7%90%83#Kanji",
+            meanings: ["ball", "sphere"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "球", kana: ["きゅう", "たま"], english: ["globe", "sphere", "ball"] },
+                { value: "地球", kana: ["ちきゅう"], english: ["the earth"] },
+                { value: "野球", kana: ["やきゅう"], english: ["baseball"] },
+                { value: "球場", kana: ["きゅうじょう"], english: ["baseball stadium"] },
+                { value: "球団", kana: ["きゅうだん"], english: ["baseball team"] },
+            ]
+        },
+        {
+            name: "身",
+            code: "\u8EAB",
+            on: [{ kana: "しん", romaji: "shin" }],
+            kun: [{ kana: "み", romaji: "mi" }],
+            source: "https://en.wiktionary.org/wiki/%E8%BA%AB#Kanji",
+            meanings: ["somebody", "person", "one’s station in life"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "身", kana: ["み"], english: ["body", "oneself", "one’s place", "one’s position"] },
+                { value: "自身", kana: ["じしん"], english: ["by oneself", "personally"] },
+                { value: "出身", kana: ["しゅっしん"], english: ["person’s origin (town, city, country, etc.)"] },
+                { value: "中身", kana: ["なかみ"], english: ["contents", "interior", "substance", "filling"] },
+                { value: "身長", kana: ["しんちょう"], english: ["height (of body)", "stature"] },
+            ]
+        },
+        {
+            name: "飲",
+            code: "\u98F2",
+            on: [{ kana: "いん", romaji: "in" }],
+            kun: [{ kana: "のむ", romaji: "nomu" }],
+            source: "https://en.wiktionary.org/wiki/%E9%A3%B2#Kanji",
+            meanings: ["drink", "smoke", "take"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "飲食", kana: ["いんしょく"], english: ["food and drink", "eating and drinking"] },
+                { value: "飲料", kana: ["いんりょう"], english: ["a drink"] },
+                { value: "飲酒", kana: ["いんしゅ"], english: ["drinking alcohol (sake)"] },
+                { value: "飲み物", kana: ["のみもの"], english: ["drink", "beverage"] },
+                { value: "飲み水", kana: ["のみみず"], english: ["drinking water"] },
+            ],
+            tags: ["verb", "food"]
+        },
+        {
+            name: "流",
+            code: "\u6D41",
+            on: [{ kana: "る", romaji: "ru" }, { kana: "りゅう", romaji: "ryū" }],
+            kun: [{ kana: "ながれる", romaji: "nagareru" }, { kana: "ながす", romaji: "nagasu" }],
+            source: "https://en.wiktionary.org/wiki/%E6%B5%81#Kanji",
+            meanings: ["current", "a sink", "flow", "forfeit"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "流れ", kana: ["ながれ"], english: ["stream", "current", "flow"] },
+                { value: "交流", kana: ["こうりゅう"], english: ["intercourse", "(cultural) exchange"] },
+                { value: "流す", kana: ["ながす"], english: ["to drain", "to pour", "to spill", "to shed (blood"] },
+                { value: "流通", kana: ["りゅうつう"], english: ["circulation of money or goods"] },
+                { value: "主流", kana: ["しゅりゅう"], english: ["main current (stream)", "mainline", "mainstream"] },
+            ]
+        },
+        {
+            name: "放",
+            code: "\u653E",
+            on: [{ kana: "ほう", romaji: "hō" }],
+            kun: [{ kana: "はなす", romaji: "hanasu" }, { kana: "はなつ", romaji: "hanatsu" }, { kana: "はなれる", romaji: "hanareru" },{ kana: "ほうる", romaji: "hōru" },{ kana: "ゆるす", romaji: "yurusu" }],
+            source: "https://en.wiktionary.org/wiki/%E6%94%BE#Kanji",
+            meanings: ["set free", "release", "fire", "shoot", "emit", "banish","liberate"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "放る", kana: ["ほうる", "ほる"], english: ["to let go, to abandon", "to leave undone"] },
+                { value: "放送", kana: ["ほうそう"], english: ["broadcast", "broadcasting"] },
+                { value: "開放", kana: ["かいほう"], english: ["open", "throw open", "liberalization"] },
+                { value: "解放", kana: ["かいほう"], english: ["release", "unleashing", "liberation", "emancipation"] },
+                { value: "民放", kana: ["みんぽう"], english: ["commercial broadcast"] },
+            ]
+        },
+        {
+            name: "役",
+            code: "\u5F79",
+            on: [{ kana: "やく", romaji: "yaku" },{ kana: "えき", romaji: "eki" }],
+            kun: [{ kana: "つとめ", romaji: "tsutome" }],
+            source: "https://en.wiktionary.org/wiki/%E5%BD%B9#Kanji",
+            meanings: ["duty", "war", "campaign", "drafted labor", "office","service", "role"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "役", kana: ["やく"], english: ["use", "service", "role", "position"] },
+                { value: "役割", kana: ["やくわり"], english: ["part", "assigning (allotment of) parts", "role"] },
+                { value: "役員", kana: ["やくいん"], english: ["officer", "official", "executive", "staff"] },
+                { value: "取締役", kana: ["とりしまりやく"], english: ["company director", "board member"] },
+                { value: "懲役", kana: ["ちょうえき"], english: ["penal servitude"] },
+            ]
+        },
+        {
+            name: "由",
+            code: "\u7531",
+            on: [{ kana: "ゆ", romaji: "yu" }, { kana: "ゆう", romaji: "yū" }],
+            kun: [{ kana: "ゆい", romaji: "yui" }, { kana: "よし", romaji: "yoshi" }],
+            source: "https://en.wiktionary.org/wiki/%E7%94%B1#Kanji",
+            meanings: ["wherefore", "a reason"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "由", kana: ["よし"], english: ["reason", "significance", "cause"] },
+                { value: "自由", kana: ["じゆう"], english: ["freedom", "liberty", "as it pleases you"] },
+                { value: "理由", kana: ["りゆう"], english: ["reason", "pretext", "motive"] },
+                { value: "経由", kana: ["けいゆ"], english: ["go by the way", "via"] },
+                { value: "不自由", kana: ["ふじゆう"], english: ["discomfort", "inconvenience", "poverty", "want"] },
+            ]
+        },
+        {
+            name: "消",
+            code: "\u6D88",
+            on: [{ kana: "しょう", romaji: "shō" }],
+            kun: [{ kana: "きえる", romaji: "kieru" }],
+            source: "https://en.wiktionary.org/wiki/%E6%B6%88#Kanji",
+            meanings: ["extinguish", "blow out", "turn off", "neutralize","cancel"],
+            grade: KyoikuGrade.THREE,
+            examples: [
+                { value: "消費", kana: ["しょうひ"], english: ["consumption", "expenditure"] },
+                { value: "消費者", kana: ["しょうひしゃ"], english: ["consumer"] },
+                { value: "消費税", kana: ["しょうひぜい"], english: ["consumption tax (incl. sales tax, VAT"] },
+                { value: "解消", kana: ["かいしょう"], english: ["cancellation", "liquidation", "resolution"] },
+                { value: "消極的", kana: ["しょうきょくてき"], english: ["negative", "half-hearted", "passive", "unmotivated"] },
+            ]
+        },
+        {
             name: "神",
             code: "\u795E",
             on: [{ kana: "しん", romaji: "shin" }, { kana: "じん", romaji: "jin" }],
