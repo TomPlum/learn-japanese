@@ -205,6 +205,31 @@ test('Skipping a question should decrease the score by the current questions bas
     expect(screen.getByText('100')).toBeInTheDocument();
 });
 
+test('Skipping a question reset the players streak', () => {
+    props.data = [a, i, u, e, o, a]; //Add 6 kana so answering the 5th doesn't end the game
+    const { submit, skip } = setup();
+
+    //Answer first correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    //Answer second correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
+    fireEvent.click(submit);
+
+    //Answer third correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'u' } });
+    fireEvent.click(submit);
+
+    //Answer fourth correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
+    fireEvent.click(submit);
+
+    //Skip 5th (where we would have got a streak if correct
+    fireEvent.click(skip);
+    expect(screen.queryByText('5 streak!')).not.toBeInTheDocument();
+});
+
 test('Answering multiple correctly consecutively should start a streak', () => {
     props.data = [a, i, u, e, o, a]; //Add 6 kana so answering the 5th doesn't end the game
     const { submit } = setup();

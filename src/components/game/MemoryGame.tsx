@@ -363,7 +363,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         this.countdown.current?.reset();
     }
 
-    private advanceNextQuestion(skipScore: boolean = false) {
+    private advanceNextQuestion(skip: boolean = false) {
         const { remainingQuestions, hasUsedHintThisQuestion, hints, streak } = this.state;
 
         //If we're being timed per question, reset the timer.
@@ -374,8 +374,8 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
         //Update the next question to be displayed and the remaining questions with one less.
         this.setState({
-            streak: streak + 1,
-            score: this.getScore(skipScore),
+            streak: skip ? 0 : streak + 1,
+            score: this.getScore(skip),
             currentQuestion: nextQuestions,
             hasUsedHintThisQuestion: false,
             remainingQuestions: nextRemainingQuestions,
