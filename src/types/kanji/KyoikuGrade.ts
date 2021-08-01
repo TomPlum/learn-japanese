@@ -15,6 +15,10 @@ export class KyoikuGrade {
     public static readonly SIX = new KyoikuGrade(6, 181);
     public static readonly SEVEN = new KyoikuGrade(7, 0);
     public static readonly EIGHT = new KyoikuGrade(8, 0);
+    public static readonly NINE = new KyoikuGrade(9, 0);
+    public static readonly TEN = new KyoikuGrade(10, 0);
+    public static readonly ELEVEN = new KyoikuGrade(11, 0);
+    public static readonly TWELVE = new KyoikuGrade(12, 0);
 
     public static readonly ALL = [KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR, KyoikuGrade.FIVE, KyoikuGrade.SIX]
 
