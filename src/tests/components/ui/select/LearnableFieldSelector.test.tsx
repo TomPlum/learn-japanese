@@ -53,6 +53,6 @@ test('It should render an inline help icon that shows the name and description o
     userEvent.selectOptions(field, "Japanese");
     fireEvent.mouseOver(help);
 
-    expect(await screen.findByTitle("Japanese")).toBeInTheDocument();
+    expect(await screen.findAllByText("Japanese")).toHaveLength(2);
     expect(await screen.findByText(LearnableField.JAPANESE.description)).toBeInTheDocument();
 });

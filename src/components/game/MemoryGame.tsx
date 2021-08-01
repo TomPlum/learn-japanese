@@ -118,7 +118,11 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     }
 
     render() {
-        const { hasExhaustedQuestions, lives, remainingQuestions, hasValidAnswer, paused, hints, currentQuestion, isQuitting, score, streak } = this.state;
+        const {
+            hasExhaustedQuestions, lives, remainingQuestions, hasValidAnswer, paused, currentQuestion,
+            isQuitting, score, streak, hints
+        } = this.state;
+
         const { data, settings } = this.props;
 
         return (
@@ -141,11 +145,11 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
                             <Col className={styles.progressWrapper}>
                                 <SessionProgressBar
-                                    inProgress={!hasExhaustedQuestions && !paused}
-                                    quantity={data.length}
-                                    remaining={remainingQuestions.length}
-                                    className={styles.progress}
                                     streak={streak}
+                                    quantity={data.length}
+                                    className={styles.progress}
+                                    remaining={remainingQuestions.length}
+                                    inProgress={!hasExhaustedQuestions && !paused}
                                 />
                             </Col>
                         </Row>
@@ -204,12 +208,12 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                        <ButtonGroup className={styles.buttonGroup}>
                            <HintButton
                                remaining={hints}
-                               title="Get a Hint"
-                               data={currentQuestion[0]}
                                className={styles.hint}
-                               key={currentQuestion.map(q => q.getUniqueID()).join("-")}
+                               data={currentQuestion[0]}
+                               infinite={settings.hints.unlimited}
+                               quantity={settings.hints.quantity}
                                disabled={paused || !settings.hints.enabled}
-                               totalQuantity={settings.hints.unlimited ? undefined : settings.hints.quantity}
+                               key={currentQuestion.map(q => q.getUniqueID()).join("-")}
                                onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
                            />
 

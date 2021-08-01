@@ -29,7 +29,7 @@ test('Should display the On-Yomi reading description when hovering over the \'On
     mockEnvironment.mockReturnValue('Example on reading desc');
     const component = render(<KanjiReadingDisplay type={ReadingType.ON} readings={[onReading]} showRomaji={false} />);
     fireEvent.mouseOver(component.getByText('On'));
-    expect(await screen.findByTitle('On-yomi Reading')).toBeInTheDocument();
+    expect(await screen.findByText('On-yomi Reading')).toBeInTheDocument();
     expect(await screen.findByText('Example on reading desc')).toBeInTheDocument();
 });
 
@@ -37,7 +37,7 @@ test('Should display the Kun-Yomi reading description when hovering over the \'K
     mockEnvironment.mockReturnValue('Example kun reading desc');
     const component = render(<KanjiReadingDisplay type={ReadingType.KUN} readings={[kunReading]} showRomaji={false} />);
     fireEvent.mouseOver(component.getByText('Kun'));
-    expect(await screen.findByTitle('Kun-yomi Reading')).toBeInTheDocument();
+    expect(await screen.findByText('Kun-yomi Reading')).toBeInTheDocument();
     expect(await screen.findByText('Example kun reading desc')).toBeInTheDocument();
 });
 

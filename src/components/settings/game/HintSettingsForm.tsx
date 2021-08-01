@@ -54,26 +54,21 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
             <ScrollableContainer className={styles.formWrapper}>
                 <Row>
                     <Col xs={12}>
-                        <p className={styles.leadingDescription}>
-                            Hints allow you to reveal a small piece of information about the current question if you're
-                            struggling.
-                        </p>
-
                         <ToggleSwitch
                             enabled={enabled}
-                            label="Enabled"
+                            label="Enable"
                             className={styles.check}
                             data-testid="enable-hints"
                             onChange={() => this.setState({ enabled: !enabled, infinite: false })}
                         />
+
+                        <p className={styles.leadingDescription}>
+                            Hints allow you to reveal a small piece of information about the current question if you're
+                            struggling.
+                        </p>
                     </Col>
 
                     <Col xs={12}>
-                        <p className={styles.leadingDescription}>
-                            Select the number of hints you want for the entire game. You only get to use one per
-                            question.
-                        </p>
-
                         <RangeSlider
                             min={1} max={10}
                             value={quantity}
@@ -83,13 +78,14 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
                             data-testid="hint-quantity-slider"
                             onChange={this.onChangeHintQuantity}
                         />
+
+                        <p className={styles.leadingDescription}>
+                            Select the number of hints you want for the entire game. You only get to use one per
+                            question.
+                        </p>
                     </Col>
 
                     <Col xs={12}>
-                        <p className={styles.leadingDescription}>
-                            Remove the quantity cap and use as many hints as you'd like.
-                        </p>
-
                         <ToggleSwitch
                             enabled={infinite}
                             disabled={!enabled}
@@ -98,6 +94,10 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
                             data-testid="enable-infinite-hints"
                             onChange={() => this.setState({ infinite: !infinite })}
                         />
+
+                        <p className={styles.leadingDescription}>
+                            Remove the quantity cap and use as many hints as you'd like.
+                        </p>
                     </Col>
                 </Row>
             </ScrollableContainer>

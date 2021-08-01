@@ -45,13 +45,13 @@ test('Changing the input value should call the onChange event handler with the i
 test('Hovering over help should render the popover', async () => {
     const { help } = setup();
     fireEvent.mouseOver(help);
-    expect(await screen.findByTitle('What is Rōmaji?')).toBeInTheDocument();
+    expect(await screen.findByText('What is Rōmaji?')).toBeInTheDocument();
 });
 
 test('Clicking the help icon should render the popover', async () => {
     const { help } = setup();
     fireEvent.click(help);
-    expect(await screen.findByTitle('What is Rōmaji?')).toBeInTheDocument();
+    expect(await screen.findByText('What is Rōmaji?')).toBeInTheDocument();
 });
 
 each([

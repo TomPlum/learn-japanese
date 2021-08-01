@@ -28,14 +28,14 @@ beforeEach(() => {
 test('Should render the help popover when hovering over the help icon', async () => {
     const { help } = setup();
     fireEvent.mouseOver(help);
-    expect(await screen.findByTitle('Popover Title')).toBeInTheDocument();
+    expect(await screen.findByText('Popover Title')).toBeInTheDocument();
     expect(await screen.findByText('Popover Text')).toBeInTheDocument();
 });
 
 test('Should render the help popover when clicking the help icon', async () => {
     const { help } = setup();
     fireEvent.click(help);
-    expect(await screen.findByTitle('Popover Title')).toBeInTheDocument();
+    expect(await screen.findByText('Popover Title')).toBeInTheDocument();
     expect(await screen.findByText('Popover Text')).toBeInTheDocument();
 });
 

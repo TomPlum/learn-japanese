@@ -74,7 +74,7 @@ test('Should display the meaning reading description when hovering over the \'Me
 
     fireEvent.mouseOver(component.getByText('Meaning'));
 
-    expect(await screen.findByTitle('English Meaning')).toBeInTheDocument();
+    expect(await screen.findByText('English Meaning')).toBeInTheDocument();
     expect(await screen.findByText('Example meaning desc')).toBeInTheDocument();
 });
 

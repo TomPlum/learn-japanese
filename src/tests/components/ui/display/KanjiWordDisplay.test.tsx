@@ -9,5 +9,5 @@ test('Should render the character if it does not match a known Kanji character',
 test('Should render the character as Inspectable if it is a known Kanji character', async () => {
     const component = render(<KanjiWordDisplay value={"猫"} />);
     fireEvent.mouseOver(component.getByText('猫'));
-    expect(await screen.findByTitle('cat')).toBeInTheDocument();
+    expect(await screen.findByText('cat')).toBeInTheDocument();
 });

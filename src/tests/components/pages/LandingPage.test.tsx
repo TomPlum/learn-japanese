@@ -147,7 +147,7 @@ test('Hovering over the \'Japanese\' inspectable text in the heading should rend
 
     fireEvent.mouseOver(japaneseInspectable);
 
-    expect(await screen.findByTitle('Nihongo (日本語)'));
+    expect(await screen.findByText('Nihongo (日本語)'));
     expect(await screen.findByText('Japanese Kanji Description'));
 });
 
@@ -157,7 +157,7 @@ test('Hovering over the \'Hiragana\' inspectable text in the description should 
 
     fireEvent.mouseOver(hiraganaInspectable);
 
-    expect(await screen.findByTitle('Hiragana (ひらがな)'));
+    expect(await screen.findByText('Hiragana (ひらがな)'));
     expect(await screen.findByText('Hiragana Description'));
 });
 
@@ -167,6 +167,6 @@ test('Hovering over the \'Katakana\' inspectable text in the description should 
 
     fireEvent.mouseOver(katakanaInspectable);
 
-    expect(await screen.findByTitle('Katakana (カタカナ)'));
+    expect(await screen.findByText('Katakana (カタカナ)'));
     expect(await screen.findByText('Katakana Description'));
 });

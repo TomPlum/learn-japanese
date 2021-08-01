@@ -1,3 +1,5 @@
+@import "src/styles/sass/colours";
+
 @mixin default {
   width: 100%;
   max-width: 155px;
@@ -20,6 +22,7 @@
   font-family: "Ciutadella Rounded Medium", sans-serif;
   font-size: 1.2em;
   margin-top: 4px;
+  margin-left: 3px;
   vertical-align: center;
 }
 
@@ -28,4 +31,12 @@
   font-size: 1.05em;
   margin-left: 4px;
   margin-top: 3px;
+}
+
+.icon {
+  margin-right: 3px;
+}
+
+.hint {
+  color: #000;
 }

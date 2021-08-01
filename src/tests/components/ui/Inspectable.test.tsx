@@ -26,30 +26,30 @@ test('Should render popover when clicking child element', async () => {
     const { child } = setup();
 
     fireEvent.click(child);
-    expect(await screen.findByTitle('example title')).toBeInTheDocument();
+    expect(await screen.findByText('example title')).toBeInTheDocument();
 
     fireEvent.click(child);
-    await waitForElementToBeRemoved(() => screen.getByTitle('example title'));
+    await waitForElementToBeRemoved(() => screen.getByText('example title'));
 });
 
 test('Should render popover when focusing child element', async () => {
     const { child } = setup();
 
     fireEvent.focus(child);
-    expect(await screen.findByTitle('example title')).toBeInTheDocument();
+    expect(await screen.findByText('example title')).toBeInTheDocument();
 
     fireEvent.blur(child);
-    await waitForElementToBeRemoved(() => screen.getByTitle('example title'));
+    await waitForElementToBeRemoved(() => screen.getByText('example title'));
 });
 
 test('Should render popover when hovering child element', async () => {
     const { child } = setup();
 
     fireEvent.mouseOver(child);
-    expect(await screen.findByTitle('example title')).toBeInTheDocument();
+    expect(await screen.findByText('example title')).toBeInTheDocument();
 
     fireEvent.mouseOut(child);
-    await waitForElementToBeRemoved(() => screen.getByTitle('example title'));
+    await waitForElementToBeRemoved(() => screen.getByText('example title'));
 });
 
 test('Should apply to the \'black\' class to the child by default', () => {
@@ -72,14 +72,14 @@ test('Passing the colour property as \'white\' should apply the white class', ()
 test('Overlay should default to left placement', async () => {
     const { child } = setup();
     fireEvent.click(child);
-    expect(await screen.findByTitle('example title')).toHaveAttribute('x-placement', 'left');
+    expect((await screen.findByText('example title')).parentElement).toHaveAttribute('x-placement', 'left');
 });
 
 test('Passing the placement property should override the overlays default placement', async () => {
     props.placement = 'top';
     const { child } = setup();
     fireEvent.click(child);
-    expect(await screen.findByTitle('example title')).toHaveAttribute('x-placement', 'top');
+    expect((await screen.findByText('example title')).parentElement).toHaveAttribute('x-placement', 'top');
 });
 
 test('Should render the text in the body of the overlay', async () => {

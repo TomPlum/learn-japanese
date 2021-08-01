@@ -118,31 +118,50 @@ test('Answering correctly when there are kana remaining should show the next kan
     expect(screen.getByText("い")).toBeInTheDocument();
 });
 
-test('Answering correctly after having used a hint that question should reduce the hint quantity by 1', () => {
+test('Answering correctly after having used a hint that question should reduce the hint quantity by 1', async () => {
     props.settings = new GameSettingsBuilder()
         .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(5).build())
         .build();
 
     const { submit, hint } = setup();
 
+    //We should start with the full 5 hints remaining
     fireEvent.click(hint);
+    expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
+
+    //Use a hint for the current question
+    fireEvent.click(screen.getByText('Click to Reveal'));
+    expect(await screen.findByText('Need a hint? (4/5 remaining)'));
+    expect(await screen.findByText('This kana is from the \'vowel\' column in the Hiragana syllabary.'));
+
+    //Answer the question correctly and submit
     fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
-    expect(screen.getByText('(4)')).toBeInTheDocument();
+    //We should now see the hint quantity reduced by 1
+    fireEvent.click(screen.getByText('HINT'));
+    expect(await screen.findByText('Click to Reveal')).toBeInTheDocument();
+    expect(await screen.findByText('Need a hint? (4/5 remaining)')).toBeInTheDocument();
 });
 
-test('Answering correctly without using a hint that question should not reduce the hint quantity', () => {
+test('Answering correctly without using a hint that question should not reduce the hint quantity', async () => {
     props.settings = new GameSettingsBuilder()
         .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(5).build())
         .build();
 
-    const { submit } = setup();
+    const { submit, hint } = setup();
 
+    //We should start with the full 5 hints remaining
+    fireEvent.click(hint);
+    expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
+
+    //Answer the current question correctly and submit to advance
     fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
     fireEvent.click(submit);
 
-    expect(screen.getByText('(5)')).toBeInTheDocument();
+    //We should still see the full 5 hints remaining having not used one.
+    fireEvent.click(screen.getByText('HINT'));
+    expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
 });
 
 test('Answering correctly should advance the progress bar', () => {
@@ -558,14 +577,19 @@ test('Using the hint button twice in the same kana shouldn\'t use another hint',
 
     const { hint } = setup();
 
+    //Reveal the hint
     fireEvent.click(hint);
-    expect(await screen.findByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Click to Reveal'));
+    expect(await screen.findByText('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 
+    //Click the button again to blur the popover and close it.
     fireEvent.click(hint);
-    await waitForElementToBeRemoved(() => screen.getByTitle('Need a hint? (2/3 remaining)'));
+    await waitForElementToBeRemoved(() => screen.getByText('Need a hint? (2/3 remaining)'));
 
+    //Click the hint button again, it should still show the same hint and not reduce the quantity
     fireEvent.click(hint);
-    expect(await screen.findByTitle('Need a hint? (2/3 remaining)')).toBeInTheDocument();
+    expect(screen.queryByText('Click to Reveal')).not.toBeInTheDocument();
+    expect(await screen.findByText('Need a hint? (2/3 remaining)')).toBeInTheDocument();
 });
 
 
@@ -676,7 +700,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     expect(screen.getByText('5')).toBeInTheDocument();
 });
 
-test('Failing to correctly answer the question before the countdown finishes should reduce the hints if one was used', () => {
+test('Failing to correctly answer the question before the countdown finishes should reduce the hints if one was used', async () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
@@ -685,24 +709,40 @@ test('Failing to correctly answer the question before the countdown finishes sho
 
     const { hint } = setup();
 
-    expect(screen.getByText('(5)')).toBeInTheDocument();
+    //We should start with the full 5 hints remaining
     fireEvent.click(hint);
+    expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
+
+    //Use a hint
+    fireEvent.click(screen.getByText('Click to Reveal'));
+
+    //Deplete countdown time
     jest.advanceTimersByTime(6000);
-    expect(screen.getByText('(4)')).toBeInTheDocument();
+
+    //The hint quantity should be reduced by 1
+    fireEvent.click(screen.getByText('HINT'));
+    expect(await screen.findByText('Need a hint? (4/5 remaining)')).toBeInTheDocument();
 });
 
-test('Failing to correctly answer the question before the countdown finishes should not reduce the hints if they weren\'t used', () => {
+test('Failing to correctly answer the question before the countdown finishes should not reduce the hints if they weren\'t used', async () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
         .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(5).build())
         .build();
 
-    setup();
+    const { hint } = setup();
 
-    expect(screen.getByText('(5)')).toBeInTheDocument();
+    //We should start with all 5
+    fireEvent.click(hint);
+    expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
+
+    //Deplete the countdown timer
     jest.advanceTimersByTime(6000);
-    expect(screen.getByText('(5)')).toBeInTheDocument();
+
+    //We should have 5 on the next question
+    fireEvent.click(screen.getByText('HINT'));
+    expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
 });
 
 test('Setting the question type as \'Text\' should render a TextQuestion', () => {

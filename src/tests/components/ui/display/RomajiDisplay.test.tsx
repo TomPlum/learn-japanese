@@ -29,6 +29,6 @@ test('Hovering over the romaji should display the inspectable popover', async ()
 
     fireEvent.mouseOver(component.getByText('suki'));
 
-    expect(await screen.findByTitle('Why is the rōmaji incorrect?')).toBeInTheDocument();
+    expect(await screen.findByText('Why is the rōmaji incorrect?')).toBeInTheDocument();
     expect(await screen.findByText('test-title')).toBeInTheDocument();
 });

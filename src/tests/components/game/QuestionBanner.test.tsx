@@ -46,7 +46,7 @@ test("It should display the question in the correct format when there are more t
     expect(helpButton).toBeInTheDocument();
 
     fireEvent.mouseOver(helpButton);
-    expect(await screen.findByTitle("Also Known As"));
+    expect(await screen.findByText("Also Known As"));
     expect(await screen.findByText("meaning3, meaning4"));
 });
 

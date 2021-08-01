@@ -10,10 +10,10 @@ export interface PopOverProps {
 
 class PopOver extends Component<PopOverProps> {
     render() {
-        const { title, text, className } = this.props;
+        const { title, text, className, ...rest } = this.props;
 
         return (
-            <Popover id="popover" className={[styles.popover, className].join(" ")} {...this.props}>
+            <Popover id="popover" className={[styles.popover, className].join(" ")} {...rest}>
                 <Popover.Title as="h3" className={styles.title}>{title}</Popover.Title>
                 <Popover.Content className={styles.text}>{text}</Popover.Content>
             </Popover>

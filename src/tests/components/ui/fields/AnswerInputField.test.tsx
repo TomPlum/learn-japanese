@@ -65,6 +65,6 @@ test("It should set the help pop-over title and text to the data in the passed f
 
     fireEvent.mouseOver(help);
 
-    expect(await screen.findByTitle("English Meaning"));
+    expect(await screen.findByText("English Meaning"));
     expect(await screen.findByText("The meaning of the word or character in English. Usually a single word."));
 });

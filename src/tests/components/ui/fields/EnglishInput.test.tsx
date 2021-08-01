@@ -25,7 +25,7 @@ const setup = () => {
 test("Hovering over the help icon should display a popover", async () => {
     const { help } = setup();
     fireEvent.mouseOver(help);
-    expect(await screen.findByTitle('English Meaning')).toBeInTheDocument();
+    expect(await screen.findByText('English Meaning')).toBeInTheDocument();
     expect(await screen.findByText('Enter one of the meanings as a single English word.')).toBeInTheDocument();
 });
 
