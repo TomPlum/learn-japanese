@@ -5,7 +5,7 @@ import MenuDescription from "../ui/MenuDescription";
 import LearnTopicButton from "./LearnTopicButton";
 import StartButton from "../ui/buttons/StartButton";
 import Arrays from "../../utility/Arrays";
-import { faCog, faCogs, faDatabase, faSearch, faVial } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faCogs, faDatabase, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "./Search";
 import { Learnable } from "../../types/learn/Learnable";

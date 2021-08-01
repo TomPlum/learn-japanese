@@ -106,7 +106,7 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
     }
 
     private getRemaining = () => {
-        const { infinite, remaining } = this.props;
+        const { remaining } = this.props;
         const { revealed } = this.state;
 
         if (revealed) {
