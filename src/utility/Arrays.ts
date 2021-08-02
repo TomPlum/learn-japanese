@@ -75,7 +75,7 @@ export default class Arrays {
      * @param quantity The number of elements to return.
      * @return An array of all randomly selected elements.
      */
-    static getRandomElements<T>(array: T[], quantity: number): T[] {
+    static getRandomElements<T>(array: T[], quantity: number = 1): T[] {
         let elements = [];
         let copy = this.copy(array);
         for (let i = 0; i < quantity; i++) {

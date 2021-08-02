@@ -42,7 +42,7 @@ export class KanaRepository implements Repository<Kana> {
         }
 
         if (config.quantity) {
-            chain.addFilter(new QuantityFilter(config.quantity));
+            chain.addFilter(new QuantityFilter(config.quantity, true));
         }
 
         return chain.execute(this.getAllKana());
