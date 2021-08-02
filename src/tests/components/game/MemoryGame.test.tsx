@@ -25,6 +25,10 @@ const getRandomObjects = jest.fn();
 const getRandomElements = jest.fn();
 const environment = jest.fn();
 
+//Mock Audio (JSDom Doesn't Support)
+const playAudio = jest.fn();
+window.HTMLMediaElement.prototype.play = playAudio;
+
 //Test Kana (Extracted here for reference equality purposes)
 const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
 const i = new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
@@ -77,6 +81,9 @@ beforeEach(() => {
     getRandomElements.mockImplementation((array: any[], quantity: number) => {
         return array.splice(0, quantity);
     });
+
+    //Mock Audio - Promise returns undefined otherwise
+    playAudio.mockResolvedValue(jest.fn());
 
     jest.useFakeTimers();
 });
@@ -185,6 +192,16 @@ test('Answering regular kana correctly should increase the score by 100 each', (
     fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
     fireEvent.click(submit);
     expect(screen.getByText('200')).toBeInTheDocument();
+});
+
+test('Answering correctly should play the success sound effect', () => {
+    const { submit } = setup();
+
+    //Answer question successfully
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    expect(playAudio).toHaveBeenCalled();
 });
 
 test('Skipping a question should decrease the score by the current questions base score', () => {
@@ -452,6 +469,37 @@ test('Answering all questions correctly should call the onFinish even handler wi
     });
 });
 
+test('Answering all questions correctly should play the finish sound effect after the last question', () => {
+    props.settings = new GameSettingsBuilder()
+        .fromExisting(props.settings)
+        .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
+        .build();
+
+    const { submit } = setup();
+
+    //Answer 1st correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    //Answer 2nd correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
+    fireEvent.click(submit);
+
+    //Answer 3rd correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'u' } });
+    fireEvent.click(submit);
+
+    //Answer 4th correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
+    fireEvent.click(submit);
+
+    //Answer 5th correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'o' } });
+    fireEvent.click(submit);
+
+    expect(playAudio).toHaveBeenCalledTimes(6);
+});
+
 test('Answering incorrectly should not show the next kana', () => {
     const { submit } = setup();
 
@@ -568,6 +616,16 @@ test('Answering incorrectly when lives are enabled should reduce the lives by 1'
     fireEvent.click(submit);
 
     expect(screen.getByText('4')).toBeInTheDocument();
+});
+
+test('Answering incorrectly should play the wrong sound effect', () => {
+    const { submit } = setup();
+
+    //Answer question incorrectly
+    fireEvent.change(getRomajiInput(), { target: { value: 'hi' } });
+    fireEvent.click(submit);
+
+    expect(playAudio).toHaveBeenCalled();
 });
 
 test('Enabling lives should render the LifeDisplay', () => {

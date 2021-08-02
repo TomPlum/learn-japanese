@@ -22,6 +22,9 @@ import Arrays from "../../utility/Arrays";
 import TextQuestion from "./questions/TextQuestion";
 import ChoiceQuestion from "./questions/ChoiceQuestion";
 import MatchQuestion from "./questions/MatchQuestion";
+import finish from "../../sound/finish.wav";
+import success from "../../sound/correct.wav";
+import wrong from "../../sound/wrong.wav";
 
 export interface GameQuestionProps {
     hidden: boolean;
@@ -305,12 +308,17 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         const { settings, data } = this.props;
 
         if (this.question.current?.isCorrect()) {
+            //Play the success sound effect
+            this.getAudio(success).play().catch(e => console.log(e));
+
             //Add the current question to the correct answers set.
             currentQuestion.forEach(question => correctAnswers.add(question));
             this.setState({ correctAnswers: correctAnswers });
 
+            //If we're out of questions...
             if (remainingQuestions.length === 0) {
-                //If we're out of questions...
+                //Play the finish sound
+                this.getAudio(finish).play().catch(e => console.log(e));
 
                 //Stop the timer / countdown.
                 this.timer.current?.stop();
@@ -332,6 +340,9 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                 this.advanceNextQuestion();
             }
         } else {
+            //Play the wrong sound effect
+            this.getAudio(wrong).play().catch(e => console.log(e));
+
             //If the question was answered incorrectly, update the lives and wrong answer pool.
             this.setState({
                 lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives,
@@ -465,6 +476,15 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         const multiplier = streak >= 50 ? 4 : streak >= 25 ? 3 : streak >= 10 ? 2 : streak >= 5 ? 1.5 : 1;
         return score + baseScore * multiplier;
     }
+
+    private getAudio = (source: string): HTMLAudioElement => {
+        const audio = new Audio(source);
+        audio.autoplay = false;
+        audio.style.display = "none";
+        audio.volume = 0.3;
+        return audio;
+    }
 }
+
 
 export default MemoryGame;
