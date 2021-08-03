@@ -1,3 +1,5 @@
+import Arrays from "./Arrays";
+
 export default class Maps {
     /**
      * Checks if the given two maps are equal. They should have;
@@ -20,5 +22,22 @@ export default class Maps {
         }
 
         return true;
+    }
+
+    /**
+     * Shuffles the keys and values for the given map.
+     * @param map The map to shuffle.
+     * @return map A copy of the map with the shuffled keys and values.
+     */
+    public static shuffle<K, V>(map: Map<K, V>): Map<K, V> {
+        const keys = Arrays.shuffle([...map.keys()]);
+        const values = Arrays.shuffle([...map.values()]);
+
+        const shuffled = new Map<K, V>();
+        for (let i = 0; i < map.size; i++) {
+            shuffled.set(keys[i], values[i]);
+        }
+
+        return shuffled;
     }
 }

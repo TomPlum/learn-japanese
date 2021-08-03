@@ -23,6 +23,7 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
 
     private readonly container = React.createRef<HTMLDivElement>();
     private readonly displays: Map<string, React.RefObject<AnswerChoiceDisplay>> = new Map();
+    private readonly values = new Map<string, string>();
 
     constructor(props: Readonly<MatchQuestionProps> | MatchQuestionProps) {
         super(props);
@@ -31,6 +32,8 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
         keyValues.forEach((value: string) => {
             this.displays.set(value, React.createRef<AnswerChoiceDisplay>());
         });
+
+        this.values = Maps.shuffle(props.data);
 
         this.state = {
             answer: new Map(),
@@ -52,15 +55,14 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
     }
 
     render() {
-        const { data } = this.props;
         const { xCursor, yCursor } = this.state;
 
         return (
             <Container className={styles.wrapper} ref={this.container} onMouseUp={this.resetSelected}>
                 <div style={{ left: xCursor, top: yCursor }} className={styles.cursor} />
 
-                {[...data.keys()].map((question: string, i: number) => {
-                    const answer = data.get(question)!;
+                {[...this.values.keys()].map((question: string, i: number) => {
+                    const answer = this.values.get(question)!;
 
                     return (
                         <Row className={[styles.row, "justify-content-around"].join(" ")} key={`row-${i}`}>
