@@ -30,6 +30,10 @@
   margin-right: 10px;
 }
 
+@mixin volume {
+  margin-left: 10px;
+}
+
 @mixin timer {
   float: right;
   font-family: "Ciutadella Rounded Medium", sans-serif;
@@ -120,6 +124,12 @@
     font-size: 1.5em;
   }
 
+  .volume {
+    @include volume;
+    height: 50px;
+    font-size: 1.5em;
+  }
+
   .timer {
     @include timer;
     font-size: 1.1em;
@@ -171,6 +181,12 @@
 
   .skip {
     @include skip;
+    height: 50px;
+    font-size: 1.5em;
+  }
+
+  .volume {
+    @include volume;
     height: 50px;
     font-size: 1.5em;
   }
@@ -228,6 +244,13 @@
   .skip {
     @include skip;
     height: 60px;
+    font-size: 1.6em;
+  }
+
+  .volume {
+    @include volume;
+    height: 60px;
+    width: 60px;
     font-size: 1.6em;
   }
 

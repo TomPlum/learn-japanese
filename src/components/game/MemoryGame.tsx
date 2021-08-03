@@ -25,6 +25,7 @@ import MatchQuestion from "./questions/MatchQuestion";
 import finish from "../../sound/finish.wav";
 import success from "../../sound/correct.wav";
 import wrong from "../../sound/wrong.wav";
+import VolumeController from "../ui/VolumeController";
 
 export interface GameQuestionProps {
     hidden: boolean;
@@ -53,6 +54,7 @@ interface MemoryGameState {
     isQuitting: boolean;
     score: number;
     streak: number;
+    volume: number;
 }
 
 /**
@@ -90,7 +92,8 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             hasUsedHintThisQuestion: false,
             isQuitting: false,
             score: 0,
-            streak: 0
+            streak: 0,
+            volume: 0.7
         }
     }
 
@@ -205,7 +208,16 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
                 <Row noGutters className={styles.footer}>
                     <Col md={5} xs={3} className={styles.footerLeftCol}>
-                        <SkipButton onClick={this.handleSkip} className={styles.skip} disabled={paused} />
+                        <SkipButton
+                            disabled={paused}
+                            className={styles.skip}
+                            onClick={this.handleSkip}
+                        />
+
+                        <VolumeController
+                            className={styles.volume}
+                            onVolumeChange={(value: number) => this.setState({ volume: value })}
+                        />
                     </Col>
 
                    <Col md={7} xs={9} className={styles.footerRightCol}>
@@ -481,10 +493,11 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     }
 
     private getAudio = (source: string): HTMLAudioElement => {
+        const { volume } = this.state;
         const audio = new Audio(source);
         audio.autoplay = false;
         audio.style.display = "none";
-        audio.volume = 0.3;
+        audio.volume = volume;
         return audio;
     }
 }
