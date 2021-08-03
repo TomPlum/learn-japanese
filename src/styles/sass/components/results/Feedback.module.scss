@@ -4,24 +4,16 @@
   flex-wrap: wrap;
 }
 
-.accordion {
-  width: 100%;
-  text-align: center;
+.header {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.3em;
+  padding: 15px 15px 10px 15px;
 }
 
-.toggle, .toggle:hover, .toggle:active, .toggle:focus {
-  text-decoration: none;
-  outline: none !important;
+.modal {
+  border-radius: 15px;
 }
 
-.toggle {
-  color: #FFF;
-}
-
-.toggle:hover {
-  color: #309fec;
-}
-
-.title {
-  font-size: 1.5em;
+.header button {
+  font-size: 2em;
 }

@@ -1,7 +1,12 @@
-.title {
-  font-size: 2em;
-  margin-bottom: 0;
+@import "src/styles/sass/colours";
+
+.header {
+  margin-bottom: 25px;
   text-align: center;
+}
+
+.title {
+  font-size: 3em;
   color: #FFF;
 }
 
@@ -13,10 +18,88 @@
 
 .wrapper {
   font-family: "Ciutadella Rounded Medium", sans-serif;
-  max-width: 1000px;
-  padding: 0
+  max-width: 625px;
+  //border: 1px solid $light-2;
+  padding: 20px;
+  border-radius: 25px;
 }
 
-.close {
+@mixin button {
+  font-size: 1.3em;
+  padding: 10px 15px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.finish {
+  @include button;
+  float: right;
+  width: 100px;
+}
+
+.mistakes {
+  @include button;
+  float: left;
+  background-color: #be9398 !important;
+  border-color: #d28289 !important;
+}
+
+.mistakes:hover {
+  background-color: #a37e83 !important;
+  border-color: #d28289 !important;
+}
+
+.mistakes:focus {
+  background-color: #a37e83 !important;
+  border-color: #d28289 !important;
+  box-shadow: none !important;
+}
+
+.titleIcon {
+  color: #2e6cde;
+  font-size: 2.5em;
+  margin-right: 10px;
+}
+
+.icon {
   font-size: 2em;
+  margin-right: 5px;
+}
+
+.heart {
+  color: $lives;
+}
+
+.duration {
+  color: $time;
+}
+
+.hint {
+  color: $hints;
+}
+
+.name {
+  color: #FFF;
+  font-size: 2em;
+}
+
+.attribute {
+  display: flex;
+  align-items: center;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.summary {
+  display: flex;
+  align-items: flex-start;
+  max-width: 400px;
+}
+
+.footer {
+  margin-top: 50px;
 }

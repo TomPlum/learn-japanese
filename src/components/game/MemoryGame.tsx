@@ -95,16 +95,17 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     }
 
     componentDidUpdate() {
-        const { lives, correctAnswers, wrongAnswers} = this.state
-        const { data, settings, onFinish } = this.props;
+        const { lives, correctAnswers, wrongAnswers, hints } = this.state
+        const { settings, onFinish } = this.props;
 
         //Listens for a game failure. If we're out of lives, call onFinish().
         if (settings.lives.enabled && lives === 0) {
             onFinish({
+                settings: settings,
                 reason: FailureReason.NO_LIVES_REMAINING,
                 success: false,
                 livesRemaining: 0,
-                totalQuestionsOffered: data.length,
+                hintsRemaining: hints,
                 correctAnswers: correctAnswers,
                 wrongAnswers: wrongAnswers,
                 duration: this.timer.current?.getCurrentTime() ?? undefined
@@ -304,8 +305,8 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     }
 
     answerQuestion = () => {
-        const { currentQuestion, correctAnswers, wrongAnswers, remainingQuestions, lives } = this.state;
-        const { settings, data } = this.props;
+        const { currentQuestion, correctAnswers, wrongAnswers, remainingQuestions, lives, hints } = this.state;
+        const { settings } = this.props;
 
         if (this.question.current?.isCorrect()) {
             //Play the success sound effect
@@ -328,10 +329,11 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
                 //Notify the consuming parent of the game ending and pass data for results screen.
                 this.props.onFinish({
+                    settings: settings,
                     reason: undefined,
                     success: true,
                     livesRemaining: lives,
-                    totalQuestionsOffered: data.length,
+                    hintsRemaining: hints,
                     correctAnswers: correctAnswers,
                     wrongAnswers: wrongAnswers,
                     duration: this.timer.current?.getCurrentTime() ?? undefined
@@ -431,15 +433,16 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     }
 
     private onQuit = () => {
-        const { lives, correctAnswers, wrongAnswers, currentQuestion } = this.state
-        const { data, onFinish } = this.props;
+        const { lives, correctAnswers, wrongAnswers, currentQuestion, hints } = this.state
+        const { settings, onFinish } = this.props;
 
         onFinish({
+            settings: settings,
             success: false,
             livesRemaining: lives,
+            hintsRemaining: hints,
             reason: FailureReason.QUIT,
             correctAnswers: correctAnswers,
-            totalQuestionsOffered: data.length,
             duration: this.timer?.current?.getCurrentTime(),
             wrongAnswers: wrongAnswers.concat(currentQuestion)
         });

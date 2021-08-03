@@ -1,3 +1,5 @@
+@import "src/styles/sass/colours";
+
 .wrapper {
   overflow: auto;
   width: 100%;
@@ -60,25 +62,19 @@
   color: #FFF;
 }
 
-.kanaIcon {
-  @include icon;
-  color: #1785e2;
-  font-size: 1.1em;
-}
-
 .livesIcon {
   @include icon;
-  color: #e73232;
+  color: $lives;
 }
 
 .hintsIcon {
   @include icon;
-  color: #ffcd20;
+  color: $hints;
 }
 
 .timeIcon {
   @include icon;
-  color: #ea8e2d;
+  color: $time;
 }
 
 .noGuttersLeft {

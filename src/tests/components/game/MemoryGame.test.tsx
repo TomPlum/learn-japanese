@@ -388,6 +388,7 @@ test('Answering all questions correctly should stop call the onFinish even handl
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
+        .withHintSettings(new HintSettingsBuilder().withQuantity(5).build())
         .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
         .build();
 
@@ -419,10 +420,11 @@ test('Answering all questions correctly should stop call the onFinish even handl
     fireEvent.click(submit);
 
     expect(onFinishHandler).toHaveBeenCalledWith({
+        settings: props.settings,
         reason: undefined,
         success: true,
         livesRemaining: 5,
-        totalQuestionsOffered: 5,
+        hintsRemaining: 5,
         correctAnswers: new Set([a, i, u, e, o]),
         wrongAnswers: [],
         duration: "00:30"
@@ -433,6 +435,7 @@ test('Answering all questions correctly should call the onFinish even handler wi
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
+        .withHintSettings(new HintSettingsBuilder().withQuantity(3).build())
         .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
         .build();
 
@@ -459,10 +462,11 @@ test('Answering all questions correctly should call the onFinish even handler wi
     fireEvent.click(submit);
 
     expect(onFinishHandler).toHaveBeenCalledWith({
+        settings: props.settings,
         reason: undefined,
         success: true,
         livesRemaining: 5,
-        totalQuestionsOffered: 5,
+        hintsRemaining: 3,
         correctAnswers: new Set([a, i, u, e, o]),
         wrongAnswers: [],
         duration: undefined
@@ -540,6 +544,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
+        .withHintSettings(new HintSettingsBuilder().withQuantity(3).build())
         .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.ONE).build())
         .build();
 
@@ -561,10 +566,11 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
     fireEvent.click(submit);
 
     expect(onFinishHandler).toHaveBeenCalledWith({
+        settings: props.settings,
         reason: FailureReason.NO_LIVES_REMAINING,
         success: false,
         livesRemaining: 0,
-        totalQuestionsOffered: 5,
+        hintsRemaining: 3,
         correctAnswers: new Set([a, i]),
         wrongAnswers: [u],
         duration: "00:12"
@@ -575,6 +581,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
+        .withHintSettings(new HintSettingsBuilder().withQuantity(3).build())
         .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.ONE).build())
         .build();
 
@@ -593,10 +600,11 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
     fireEvent.click(submit);
 
     expect(onFinishHandler).toHaveBeenCalledWith({
+        settings: props.settings,
         reason: FailureReason.NO_LIVES_REMAINING,
         success: false,
         livesRemaining: 0,
-        totalQuestionsOffered: 5,
+        hintsRemaining: 3,
         correctAnswers: new Set([a, i]),
         wrongAnswers: [u],
         duration: undefined
@@ -923,10 +931,11 @@ test('Clicking the \'Yes\' button from the quit confirmation modal should call t
     fireEvent.click(screen.getByText('Yes'));
 
     expect(onFinishHandler).toHaveBeenCalledWith({
+        settings: props.settings,
         reason: FailureReason.QUIT,
         success: false,
         livesRemaining: 0,
-        totalQuestionsOffered: 5,
+        hintsRemaining: 0,
         duration: undefined,
         correctAnswers: new Set(),
         wrongAnswers: [a],

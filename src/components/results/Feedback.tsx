@@ -1,48 +1,45 @@
 import { Component } from "react";
-import { Accordion, Button, Card, Container } from "react-bootstrap";
+import { Card, Modal } from "react-bootstrap";
 import AnswerMistake from "./AnswerMistake";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../styles/sass/components/results/Feedback.module.scss";
 import { Learnable } from "../../types/learn/Learnable";
+import styles from "../../styles/sass/components/results/Feedback.module.scss";
 
 export interface FeedbackProps {
     data: Learnable[];
+    show: boolean;
+    onClose: () => void;
 }
 
 class Feedback extends Component<FeedbackProps> {
     render() {
-        return (
-            <Container>
-                <Accordion className={styles.accordion}>
-                    <Card className="bg-dark text-white">
-                        <Card.Header>
-                            <Accordion.Toggle as={Button} eventKey="0" variant="link" className={styles.toggle}>
-                                <span className={styles.title}>View your mistakes </span>
-                                <FontAwesomeIcon icon={faChevronDown} />
-                            </Accordion.Toggle>
-                        </Card.Header>
+        const { show, data, onClose } = this.props;
 
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body className={styles.wrapper}>
-                                {[...this.getMistakeCounts()]
-                                    .map(([data, times]) => { return { data: data, times: times }})
-                                    .sort((a, b) => b.times - a.times)
-                                    .map(mistake => {
-                                        return(
-                                            <AnswerMistake
-                                                key={mistake.data.getUniqueID()}
-                                                value={mistake.data}
-                                                times={mistake.times}
-                                            />
-                                        )
-                                    })
-                                }
-                            </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                </Accordion>
-            </Container>
+        const size = data.length < 5 ? "sm" : "lg"
+
+        return (
+            <Modal centered show={show} onHide={onClose} contentClassName={styles.modal} size={size}>
+                <Modal.Header closeButton className={styles.header}>
+                    Mistakes
+                </Modal.Header>
+
+                <Modal.Body className={styles.body}>
+                    <Card.Body className={styles.wrapper}>
+                        {[...this.getMistakeCounts()]
+                            .map(([data, times]) => { return { data: data, times: times }})
+                            .sort((a, b) => b.times - a.times)
+                            .map(mistake => {
+                                return(
+                                    <AnswerMistake
+                                        key={mistake.data.getUniqueID()}
+                                        value={mistake.data}
+                                        times={mistake.times}
+                                    />
+                                )
+                            })
+                        }
+                    </Card.Body>
+                </Modal.Body>
+            </Modal>
         );
     }
 
