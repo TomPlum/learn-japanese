@@ -40,6 +40,7 @@ class VolumeController extends Component<VolumeControllerProps, VolumeController
                         max={100}
                         value={volume}
                         disabled={muted}
+                        tooltipPlacement="top"
                         data-testid="volume-slider"
                         onChange={this.changeVolume}
                     />

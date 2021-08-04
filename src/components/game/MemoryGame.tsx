@@ -54,7 +54,6 @@ interface MemoryGameState {
     isQuitting: boolean;
     score: number;
     streak: number;
-    volume: number;
 }
 
 /**
@@ -66,6 +65,8 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     private readonly timer: React.RefObject<Timer>;
     private readonly countdown: React.RefObject<CountDown>;
     private readonly question: React.RefObject<any>; //TODO: Can we type as GameQuestion here?
+
+    private volume: number = 0.7;
 
     constructor(props: MemoryGameProps | Readonly<MemoryGameProps>) {
         super(props);
@@ -93,7 +94,6 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             isQuitting: false,
             score: 0,
             streak: 0,
-            volume: 0.7
         }
     }
 
@@ -216,7 +216,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
                         <VolumeController
                             className={styles.volume}
-                            onVolumeChange={(value: number) => this.setState({ volume: value })}
+                            onVolumeChange={(value: number) => this.volume = value}
                         />
                     </Col>
 
@@ -493,11 +493,10 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
     }
 
     private getAudio = (source: string): HTMLAudioElement => {
-        const { volume } = this.state;
         const audio = new Audio(source);
         audio.autoplay = false;
         audio.style.display = "none";
-        audio.volume = volume;
+        audio.volume = this.volume;
         return audio;
     }
 }
