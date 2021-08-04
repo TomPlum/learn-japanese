@@ -113,8 +113,8 @@
 
   .hint {
     @include hint;
-    width: 50px !important;
     font-size: 1.5em;
+    margin-right: 5px;
   }
 
   .skip {
@@ -127,7 +127,9 @@
   .volume {
     @include volume;
     height: 50px;
+    width: 50px;
     font-size: 1.5em;
+    margin-left: 5px;
   }
 
   .timer {
@@ -142,12 +144,17 @@
   .romajiDisplay {
     font-size: 8em !important;
   }
+
+  .buttonGroup {
+    max-width: 400px;
+  }
 }
 
 @include tablet {
   .progress {
     height: 22px;
     margin-top: 3px;
+    padding-left: 3px;
   }
 
   .quit {
@@ -239,6 +246,7 @@
     @include hint;
     height: 60px;
     font-size: 1.5em;
+    padding: 10px 18px;
   }
 
   .skip {

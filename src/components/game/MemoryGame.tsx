@@ -15,7 +15,6 @@ import ConfirmModal from "../ui/ConfirmModal";
 import { Environment } from "../../utility/Environment";
 import ScoreDisplay from "../ui/display/ScoreDisplay";
 import { Learnable } from "../../types/learn/Learnable";
-import styles from "../../styles/sass/components/game/MemoryGame.module.scss";
 import GameSettings from "../../types/session/settings/game/GameSettings";
 import ExclusionFilter from "../../filters/learnable/ExclusionFilter";
 import Arrays from "../../utility/Arrays";
@@ -26,6 +25,7 @@ import finish from "../../sound/finish.wav";
 import success from "../../sound/correct.wav";
 import wrong from "../../sound/wrong.wav";
 import VolumeController from "../ui/VolumeController";
+import styles from "../../styles/sass/components/game/MemoryGame.module.scss";
 
 export interface GameQuestionProps {
     hidden: boolean;
@@ -207,7 +207,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                 </Row>
 
                 <Row noGutters className={styles.footer}>
-                    <Col md={5} xs={3} className={styles.footerLeftCol}>
+                    <Col md={4} xs={5} className={styles.footerLeftCol}>
                         <SkipButton
                             disabled={paused}
                             className={styles.skip}
@@ -220,7 +220,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                         />
                     </Col>
 
-                   <Col md={7} xs={9} className={styles.footerRightCol}>
+                   <Col md={8} xs={7} className={styles.footerRightCol}>
                        <ButtonGroup className={styles.buttonGroup}>
                            <HintButton
                                remaining={hints}

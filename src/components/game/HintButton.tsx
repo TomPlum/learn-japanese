@@ -69,7 +69,13 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
 
         return (
             <OverlayTrigger trigger="click" placement="top" rootClose={true} overlay={overlay}>
-                <Button title="Get a Hint" variant="warning" disabled={disabled} className={buttonClasses}>
+                <Button
+                    title="Get a Hint"
+                    variant="warning"
+                    disabled={disabled}
+                    className={buttonClasses}
+                    style={{ width: viewport === Viewport.PHONE ? "50px" : "auto"}}
+                >
                     <FontAwesomeIcon icon={icon} className={styles.icon}/>
                     {viewport !== Viewport.PHONE && <span className={styles.text}>HINT</span>}
                 </Button>
