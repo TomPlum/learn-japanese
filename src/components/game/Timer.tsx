@@ -44,15 +44,20 @@ class Timer extends Component<TimerProps, TimerState> {
 
         return (
             <div className={[className, styles.wrapper].join(" ")}>
-                {pausable && !isStopped && <FontAwesomeIcon
-                    icon={paused ? faPlay : faPause}
-                    className={styles.icon}
-                    onClick={paused ? this.play : this.pause}
-                    title={paused ? "Play" : "Pause"}
-                    size="sm"
-                    fixedWidth
-                />}
-                <span className={styles.time}>{this.formatTimeElapsed()}</span>
+                {pausable && !isStopped && (
+                    <FontAwesomeIcon
+                        size="sm"
+                        fixedWidth
+                        className={styles.icon}
+                        title={paused ? "Play" : "Pause"}
+                        icon={paused ? faPlay : faPause}
+                        onClick={paused ? this.play : this.pause}
+                    />
+                )}
+
+                <span className={styles.time}>
+                    {this.formatTimeElapsed()}
+                </span>
             </div>
         );
     }
