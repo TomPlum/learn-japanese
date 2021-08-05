@@ -3,6 +3,7 @@ import { OverlayTrigger } from "react-bootstrap";
 import PopOver, { PopOverProps } from "./PopOver";
 import styles from "../../styles/sass/components/ui/Inspectable.module.scss";
 import { Placement } from "react-bootstrap/Overlay";
+import ComponentTree from "../../utility/ComponentTree";
 
 export type InspectableProps = {
     popover: PopOverProps;
@@ -13,7 +14,7 @@ export type InspectableProps = {
 
 class Inspectable extends Component<InspectableProps> {
     render() {
-        const { popover, className, placement, color } = this.props;
+        const { popover, className, placement, color, children } = this.props;
 
         const classes = color === 'white' ? [styles.white] : [styles.black, className ?? ""]
 
@@ -26,44 +27,13 @@ class Inspectable extends Component<InspectableProps> {
                 defaultShow={false}
             >
                 {
-                    this.addClassToLeafChild(classes)
+                    new ComponentTree(children).addPropsToLeafNode((leaf: ReactElement) => {
+                        return { className: classes.concat(leaf.props.className).join(" ") }
+                    })
                 }
             </OverlayTrigger>
         );
     }
-
-    private addClassToLeafChild(classNames: string[]): ReactElement {
-        let response: ReactNode;
-
-        const children: ReactElement[] = this.getAllChildren();
-
-        children.reverse().forEach((child: ReactNode, i: number) => {
-            if (i === children.length - 1) {
-                const leaf = children[i];
-                const existingClasses = leaf.props.className;
-                response = React.cloneElement(leaf, { className: classNames.concat(existingClasses).join(" ") });
-            } else {
-                const nextChild = children[i];
-                response = React.cloneElement(nextChild, nextChild.props, response)
-            }
-        });
-
-        return response as ReactElement;
-    }
-
-    private getAllChildren(): ReactElement[] {
-        let child = this.props.children as ReactElement;
-
-        let children: ReactElement[] = [];
-
-        while (child.props && child.props.children) {
-            children.push(child);
-            child = child.props.children;
-        }
-
-        return children;
-    }
-
 }
 
 export default Inspectable;

@@ -20,7 +20,8 @@ interface TextQuestionState {
 
 class TextQuestion extends GameQuestion<TextQuestionProps, TextQuestionState> {
 
-    private readonly display: React.RefObject<QuestionDisplay>;
+    //TODO: typeof QuestionDisplay doesn't work for some reason
+    private readonly display: React.RefObject<any>;
 
     constructor(props: Readonly<TextQuestionProps> | TextQuestionProps) {
         super(props);
@@ -39,10 +40,10 @@ class TextQuestion extends GameQuestion<TextQuestionProps, TextQuestionState> {
         return (
             <div className={[className, styles.wrapper].join(" ")}>
                 <QuestionDisplay
-                    question={question}
                     blur={hidden}
                     key={question}
                     ref={this.display}
+                    question={question}
                 />
 
                 <Form>

@@ -1,3 +1,9 @@
+@import "src/styles/sass/animations";
+
+.active {
+  @include flashRedAnimation;
+}
+
 .wrapper {
   text-align: center;
   flex-grow : 1;

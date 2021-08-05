@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactElement, ReactNode } from "react";
 
 class Node {
     private readonly _value: any;
@@ -29,13 +29,51 @@ class Node {
 export default class ComponentTree {
     private depth = 0;
     private visited: Node[] = [];
+    private readonly root: ReactNode;
 
     constructor(root: ReactNode) {
+        this.root = root;
         this.doDepthFirstTraversal(Node.fromRoot(root));
     }
 
     public getDeepestLeafNode() {
         return this.visited.length > 0 ? this.visited.reduce((a, b) => a.depth > b.depth ? a : b).value : undefined;
+    }
+
+    /**
+     * Adds the given properties to the leaf nodes of the {@link root} element.
+     * @param props A function taking the leaf node and returning the new properties.
+     * @return tree A copy of the whole element tree with the updated leaf node.
+     */
+    public addPropsToLeafNode(props?: (el: React.ReactElement) => {}): ReactElement {
+        let response: ReactNode;
+
+        const children: ReactElement[] = this.getAllChildren();
+
+        children.reverse().forEach((child: ReactNode, i: number) => {
+            if (i === children.length - 1) {
+                const leaf = children[i];
+                response = React.cloneElement(leaf, props ? props(leaf) : leaf.props);
+            } else {
+                const nextChild = children[i];
+                response = React.cloneElement(nextChild, nextChild.props, response)
+            }
+        });
+
+        return response as ReactElement;
+    }
+
+    private getAllChildren(): ReactElement[] {
+        let child = this.root as ReactElement;
+
+        let children = [];
+
+        while (child.props && child.props.children) {
+            children.push(child);
+            child = child.props.children;
+        }
+
+        return children;
     }
 
     private doDepthFirstTraversal(node: Node) {

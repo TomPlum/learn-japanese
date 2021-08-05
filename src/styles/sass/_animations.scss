@@ -10,7 +10,7 @@
 }
 
 @mixin flashRedAnimation {
-  $notify-animation-time: 0.75s;
+  $notify-animation-time: 0.65s;
   animation: flashRed ease $notify-animation-time;
   -webkit-animation: flashRed ease $notify-animation-time;
   -moz-animation: flashRed ease $notify-animation-time;

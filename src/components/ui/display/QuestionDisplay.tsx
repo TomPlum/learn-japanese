@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { useImperativeHandle, useRef } from "react";
 import DynamicDisplay from "./DynamicDisplay";
 import styles from "../../../styles/sass/components/ui/display/QuestionDisplay.module.scss";
 
@@ -7,36 +7,23 @@ export interface QuestionDisplayProps {
     blur?: boolean;
 }
 
-interface QuestionDisplayState {
-    //TODO: Write a wrapper component that makes its child flash red and use across all 3 displays.
-}
+const QuestionDisplay = React.forwardRef((props: { question: string, blur?: boolean }, ref) => {
 
-class QuestionDisplay extends Component<QuestionDisplayProps, QuestionDisplayState> {
+    //TODO: typeof DynamicDisplay doesn't work for some reason
+    const display = useRef<any>();
 
-    constructor(props: Readonly<QuestionDisplayProps> | QuestionDisplayProps) {
-        super(props);
-        this.state = {
+    useImperativeHandle(ref, () => ({
+        notifyIncorrect: () => display.current?.notify()
+    }));
 
-        }
-    }
-
-    render() {
-        const { question, blur } = this.props;
-
-        const valueClass = blur ? styles.blur : styles.value;
-
-        return (
-            <DynamicDisplay
-                value={question}
-                style={{ container: [styles.display], character: { className: valueClass } }}
-                className={styles.question}
-            />
-        );
-    }
-
-    public notifyIncorrect = () => {
-
-    }
-}
+    return (
+       <DynamicDisplay
+           ref={display}
+           value={props.question}
+           style={{ container: [styles.display], character: { className: props.blur ? styles.blur : styles.value } }}
+           className={styles.question}
+       />
+    );
+});
 
 export default QuestionDisplay;

@@ -1,5 +1,7 @@
 import ComponentTree from "../../utility/ComponentTree";
 import Copyable from "../../components/ui/Copyable";
+import DynamicDisplay from "../../components/ui/display/DynamicDisplay";
+import { ReactElement } from "react";
 
 describe("Component Tree", () => {
     describe("Get Deepest Leaf Node", () => {
@@ -48,6 +50,49 @@ describe("Component Tree", () => {
             );
             const leaf = tree.getDeepestLeafNode();
             expect(leaf).toBe('I\'m a leaf!');
+        });
+    });
+
+    describe("Add Props To Leaf Node", () => {
+        it("Should add the props to the child if it's directly below the root", () => {
+            const tree = new ComponentTree(
+                <div>
+                    <span>test</span>
+                </div>
+            );
+
+            const updatedTree = tree.addPropsToLeafNode(() => {
+                return { className: "myClass"}
+            });
+
+            expect(updatedTree.props.className).toBe("myClass");
+        });
+
+        it("Should keep the existing props if no function is passed in", () => {
+            const tree = new ComponentTree(
+                <div>
+                    <span className="myClass">test</span>
+                </div>
+            );
+
+            const updatedTree = tree.addPropsToLeafNode();
+
+            expect(updatedTree.props.children.props.className).toBe("myClass")
+        });
+
+        it.skip("Should pass leaf node into function so it's properties can accessed", () => {
+            const tree = new ComponentTree(
+                <div>
+                    <span title="myTitle">test</span>
+                </div>
+            );
+
+            const updatedTree = tree.addPropsToLeafNode((el: ReactElement) => {
+                return { className: "myClass", title: el.props.title }
+            });
+
+            expect(updatedTree.props.children.props.className).toBe("myClass");
+            expect(updatedTree.props.children.props.title).toBe("myTitle");
         });
     });
 });
