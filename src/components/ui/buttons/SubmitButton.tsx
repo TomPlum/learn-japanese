@@ -24,9 +24,10 @@ class SubmitButton extends Component<SubmitButtonProps> {
         const { disabled, isRestart, onClick, className } = this.props;
         return (
             <Button
-                variant={!isRestart ? "success" : "info"}
-                disabled={disabled}
                 onClick={onClick}
+                disabled={disabled}
+                type="button"
+                variant={!isRestart ? "success" : "info"}
                 className={[styles.button, className].join(" ")}
             >
                 {!isRestart ? "Check" : <><FontAwesomeIcon icon={faRedoAlt}/> Restart</>}
@@ -34,11 +35,12 @@ class SubmitButton extends Component<SubmitButtonProps> {
         );
     }
 
-
     private handleKeySelection = (e: KeyboardEvent) => {
         const { disabled, onClick } = this.props;
         if (!disabled && e.key === 'Enter') {
             onClick();
+            e.preventDefault();
+            e.stopPropagation();
         }
     }
 }
