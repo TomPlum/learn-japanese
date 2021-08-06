@@ -77,8 +77,8 @@ test('Renders correct overlay body text for when the user has exhausted all thei
 
 test('Should disable the hint button when the disabled property is passed as true', () => {
     props.disabled = true;
-    const { button } = setup();
-    expect(button).toBeDisabled();
+    render(<HintButton {...props} />);
+    expect(screen.getByTitle('Hints are disabled.')).toBeDisabled();
 });
 
 test('Revealing the hint button should call the onUse event handler', async () => {

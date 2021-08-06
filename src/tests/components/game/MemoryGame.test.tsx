@@ -656,8 +656,8 @@ test('Enabling hints should render the HintButton in an enabled state', () => {
 
 test('Disabling hints should render the HintButton in a disabled state', () => {
     props.settings = new GameSettingsBuilder().withHintSettings(new HintSettingsBuilder().isEnabled(false).build()).build();
-    const { hint } = setup();
-    expect(hint).toBeDisabled();
+    render(<MemoryGame {...props} />);
+    expect(screen.getByTitle('Hints are disabled.')).toBeDisabled();
 });
 
 test('Using the hint button twice in the same kana shouldn\'t use another hint', async () => {

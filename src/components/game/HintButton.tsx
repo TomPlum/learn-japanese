@@ -70,7 +70,7 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
         return (
             <OverlayTrigger trigger="click" placement="top" rootClose={true} overlay={overlay}>
                 <Button
-                    title="Get a Hint"
+                    title={!disabled ? "Get a Hint" : "Hints are disabled."}
                     variant="warning"
                     disabled={disabled}
                     className={buttonClasses}
