@@ -17,11 +17,9 @@ export interface AnswerChoiceDisplayProps {
     onTouchEnd?: (value: string) => void;
 }
 
-interface AnswerChoiceDisplayState {
-    isNotifyingIncorrect: boolean;
-}
+class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps> {
 
-class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoiceDisplayState> {
+    private display = React.createRef<any>();
 
     constructor(props: Readonly<AnswerChoiceDisplayProps> | AnswerChoiceDisplayProps) {
         super(props);
@@ -30,20 +28,13 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
         }
     }
 
-    componentDidUpdate(prevProps: Readonly<AnswerChoiceDisplayProps>, prevState: Readonly<AnswerChoiceDisplayState>) {
-        if (prevState.isNotifyingIncorrect) {
-            this.setState({ isNotifyingIncorrect: false });
-        }
-    }
-
     render() {
         const { value, blur, index, style, onClick, onMouseUp, onMouseDown, onMouseOver, onMouseOut,
             onTouchStart, onTouchEnd
         } = this.props;
-        const { isNotifyingIncorrect } = this.state;
 
         const containerClass = style?.container ? style.container : [styles.wrapper];
-        const valueClass = isNotifyingIncorrect ? styles.red : blur ? styles.blur : styles.value;
+        const valueClass = blur ? styles.blur : styles.value;
         const clickable = onClick ? styles.clickable : "";
 
         const indexVisibility = index && !blur ? 'visible' : 'hidden';
@@ -66,6 +57,7 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
                 <DynamicDisplay
                     value={value}
                     style={style}
+                    ref={this.display}
                     className={[valueClass, clickable].join(" ")}
                 />
             </div>
@@ -73,9 +65,8 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps, AnswerChoi
     }
 
     notifyIncorrect = () => {
-        this.setState({ isNotifyingIncorrect: true });
+        this.display?.current?.notify();
     }
-
 }
 
 export default AnswerChoiceDisplay;

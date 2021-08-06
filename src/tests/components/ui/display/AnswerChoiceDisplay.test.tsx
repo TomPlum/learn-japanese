@@ -86,22 +86,6 @@ test('Passing the index property when the display is blurred should not show the
     expect(screen.queryByText('2')).toHaveProperty('style._values.visibility', 'hidden');
 });
 
-test('Notify incorrect should append the \'red\' class to the value', () => {
-    const ref = React.createRef<AnswerChoiceDisplay>();
-    const { rerender } = render(<AnswerChoiceDisplay {...props} ref={ref}/>);
-
-    //Initially should have the value class
-    expect(screen.getByText('あ')).toHaveClass('value');
-
-    //Calling notifyIncorrect should append the red class
-    ref.current?.notifyIncorrect();
-    expect(screen.getByText('あ')).toHaveClass('red');
-
-    //Upon next render, it should switch back to the value class again
-    rerender(<AnswerChoiceDisplay {...props} ref={ref}/>);
-    expect(screen.getByText('あ')).toHaveClass('value');
-});
-
 test('Passing a container style prop should cause that class to be applied to the container', () => {
     props.style = { container: ['containerClass'] }
     const { container } = render(<AnswerChoiceDisplay {...props} />);
