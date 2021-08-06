@@ -19,9 +19,9 @@ const DynamicDisplay = React.forwardRef((props: { value: string, className?: str
             <LoadingSpinner active={loading}/>
 
             <Textfit
-                mode="single"
                 min={20}
                 max={600}
+                mode="single"
                 forceSingleModeWidth={false}
                 onReady={() => setLoading(false)}
                 className={[styles.text].concat(style?.container ?? []).join(" ")}

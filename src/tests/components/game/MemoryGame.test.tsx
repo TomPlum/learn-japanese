@@ -5,7 +5,7 @@ import { Kana } from "../../../types/kana/Kana";
 import KanaType from "../../../types/kana/KanaType";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
-import { FailureReason } from "../../../types/game/FailureReason";
+import { GameFinishReason } from "../../../types/game/GameFinishReason";
 import { Environment } from "../../../utility/Environment";
 import { v4 } from "uuid";
 import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
@@ -421,8 +421,9 @@ test('Answering all questions correctly should stop call the onFinish even handl
 
     expect(onFinishHandler).toHaveBeenCalledWith({
         settings: props.settings,
-        reason: undefined,
+        reason: GameFinishReason.EXHAUSTED_QUESTIONS,
         success: true,
+        score: 400,
         livesRemaining: 5,
         hintsRemaining: 5,
         correctAnswers: new Set([a, i, u, e, o]),
@@ -463,8 +464,9 @@ test('Answering all questions correctly should call the onFinish even handler wi
 
     expect(onFinishHandler).toHaveBeenCalledWith({
         settings: props.settings,
-        reason: undefined,
+        reason: GameFinishReason.EXHAUSTED_QUESTIONS,
         success: true,
+        score: 400,
         livesRemaining: 5,
         hintsRemaining: 3,
         correctAnswers: new Set([a, i, u, e, o]),
@@ -567,9 +569,10 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
 
     expect(onFinishHandler).toHaveBeenCalledWith({
         settings: props.settings,
-        reason: FailureReason.NO_LIVES_REMAINING,
+        reason: GameFinishReason.NO_LIVES_REMAINING,
         success: false,
         livesRemaining: 0,
+        score: 200,
         hintsRemaining: 3,
         correctAnswers: new Set([a, i]),
         wrongAnswers: [u],
@@ -601,9 +604,10 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
 
     expect(onFinishHandler).toHaveBeenCalledWith({
         settings: props.settings,
-        reason: FailureReason.NO_LIVES_REMAINING,
+        reason: GameFinishReason.NO_LIVES_REMAINING,
         success: false,
         livesRemaining: 0,
+        score: 200,
         hintsRemaining: 3,
         correctAnswers: new Set([a, i]),
         wrongAnswers: [u],
@@ -932,8 +936,9 @@ test('Clicking the \'Yes\' button from the quit confirmation modal should call t
 
     expect(onFinishHandler).toHaveBeenCalledWith({
         settings: props.settings,
-        reason: FailureReason.QUIT,
+        reason: GameFinishReason.QUIT,
         success: false,
+        score: 0,
         livesRemaining: 0,
         hintsRemaining: 0,
         duration: undefined,

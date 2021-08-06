@@ -4,11 +4,12 @@ import GameResult from "../../../types/game/GameResult";
 import { Kana } from "../../../types/kana/Kana";
 import KanaType from "../../../types/kana/KanaType";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
-import { FailureReason } from "../../../types/game/FailureReason";
+import { GameFinishReason } from "../../../types/game/GameFinishReason";
 import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
 import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
 import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
 import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
+import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
 
 let result: GameResult;
 
@@ -18,8 +19,9 @@ beforeEach(() => {
         success: false,
         wrongAnswers: [new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)],
         correctAnswers: new Set<Kana>(),
-        reason: FailureReason.NO_LIVES_REMAINING,
+        reason: GameFinishReason.NO_LIVES_REMAINING,
         duration: "00:25",
+        score: 5400,
         livesRemaining: 0,
         hintsRemaining: 0
     };
@@ -37,7 +39,7 @@ const setup = () => {
 }
 
 test('Should render the congratulatory title when the user was successful', () => {
-    result.success = true;
+    result.reason = GameFinishReason.EXHAUSTED_QUESTIONS;
     setup();
     expect(screen.getByText('Congratulations, you won!')).toBeInTheDocument();
 });
@@ -48,7 +50,7 @@ test('Should render the correct title when the failure reason is No Lives Remain
 });
 
 test('Should render the correct title when the failure reason is Ran Out Of Time', () => {
-    result.reason = FailureReason.NO_TIME_REMAINING;
+    result.reason = GameFinishReason.NO_TIME_REMAINING;
     setup();
     expect(screen.getByText('Oh no! You ran out of time!')).toBeInTheDocument();
 });
@@ -96,6 +98,18 @@ test('Should not render the hints remaining if hints were disabled', () => {
     result.settings = new GameSettingsBuilder().withTimeSettings(new TimeSettingsBuilder().isTimed(false).build()).build();
     setup();
     expect(screen.queryByText('Completion Time')).not.toBeInTheDocument();
+});
+
+test('Should render the score if the scoring was enabled', () => {
+    result.settings = new GameSettingsBuilder().withQuestionSettings(new QuestionSettingsBuilder().withScoreTracking().build()).build();
+    setup();
+    expect(screen.getByText('5400 Points Scored')).toBeInTheDocument();
+});
+
+test('Should not render the score if the scoring was disabled', () => {
+    result.settings = new GameSettingsBuilder().withQuestionSettings(new QuestionSettingsBuilder().withScoreTracking(false).build()).build();
+    setup();
+    expect(screen.queryByText('Points Scored')).not.toBeInTheDocument();
 });
 
 test('Clicking the mistakes button should render the modal', () => {

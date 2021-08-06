@@ -2,11 +2,11 @@ import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import GameResult from "../../types/game/GameResult";
 import Feedback from "./Feedback";
-import { faEraser, faGlassCheers, faHeartbeat, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import Arrays from "../../utility/Arrays";
+import { faAward, faEraser, faGlassCheers, faHeartbeat, faHeartBroken, faHourglassEnd, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import styles from "../../styles/sass/components/results/GameResultScreen.module.scss";
+import { GameFinishReason } from "../../types/game/GameFinishReason";
 
 export interface GameResultScreenProps {
     onClose: () => void;
@@ -44,10 +44,11 @@ class GameResultScreen extends Component<GameResultScreenProps, GameResultScreen
                         <div>
                             <FontAwesomeIcon
                                 fixedWidth
-                                icon={this.getTitleIcon()}
                                 className={styles.titleIcon}
+                                icon={this.getTitleIcon().icon}
+                                style={{ color: this.getTitleIcon().colour }}
                             />
-                            <span className={styles.title}>{this.getTitle(result)}</span>
+                            <span className={styles.title}>{result.reason}</span>
                         </div>
                         {!result.success && <p className={styles.score}>{this.getScore(result)}</p>}
                     </Col>
@@ -55,6 +56,19 @@ class GameResultScreen extends Component<GameResultScreenProps, GameResultScreen
 
                 <div className={styles.body}>
                     <Row className={styles.summary}>
+                        {result.settings.question.score && (
+                            <Col xs={12}>
+                                <div className={styles.attribute}>
+                                    <FontAwesomeIcon
+                                        fixedWidth
+                                        icon={faAward}
+                                        className={[styles.icon, styles.award].join(" ")}
+                                    />
+                                    <span className={styles.name}>{result.score} Points Scored</span>
+                                </div>
+                            </Col>
+                        )}
+
                         {result.settings.lives.enabled && (
                             <Col xs={12}>
                                 <div className={styles.attribute}>
@@ -132,13 +146,22 @@ class GameResultScreen extends Component<GameResultScreenProps, GameResultScreen
         return "You answered " + correct + "/" + (correct + wrong) + " correctly.";
     }
 
-    private getTitle = (result: GameResult): string => {
-        return result.success ? "Congratulations, you won!" : "Oh no! " + result.reason;
-    }
-
-    private getTitleIcon = (): IconDefinition => {
-        const icons = [faGlassCheers];
-        return Arrays.getRandomElements(icons)[0];
+    private getTitleIcon = (): { icon: IconDefinition, colour: string} => {
+        const { result } = this.props;
+        switch (result.reason) {
+            case GameFinishReason.EXHAUSTED_QUESTIONS: {
+                return { icon: faGlassCheers, colour: "#2e6cde" };
+            }
+            case GameFinishReason.QUIT: {
+                return { icon: faTimes, colour: "#d43232" };
+            }
+            case GameFinishReason.NO_LIVES_REMAINING: {
+                return { icon: faHeartBroken, colour: "#d43232" };
+            }
+            case GameFinishReason.NO_TIME_REMAINING: {
+                return { icon: faHourglassEnd, colour: "#db8632" };
+            }
+        }
     }
 
     private hide = () => {
