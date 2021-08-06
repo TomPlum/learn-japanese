@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import MatchQuestion, { MatchQuestionProps } from "../../../../components/game/questions/MatchQuestion";
 import React from "react";
 
@@ -43,7 +43,7 @@ test('Answering all questions correctly should cause isCorrect() to return true'
     fireEvent.mouseDown(questionThree);
     fireEvent.mouseUp(answerThree);
 
-    expect(ref?.current?.isCorrect()).toBe(true);
+    expect(isCorrect()).toBe(true);
 });
 
 
@@ -62,7 +62,7 @@ test('Answering one of questions wrong should cause isCorrect() to return false'
     fireEvent.mouseDown(questionThree);
     fireEvent.mouseUp(answerTwo);
 
-    expect(ref?.current?.isCorrect()).toBe(false);
+    expect(isCorrect()).toBe(false);
 });
 
 test('Answering only one question should call the isValid event handler with false', () => {
@@ -191,3 +191,11 @@ test('Selecting a question but letting go of the mouse while still hovered on th
     fireEvent.mouseUp(questionOne);
     expect(questionOne).toHaveClass('question');
 });
+
+function isCorrect(): boolean {
+    let isCorrect = false;
+    act(() => {
+        isCorrect = ref?.current?.isCorrect() ?? false;
+    });
+    return isCorrect;
+}

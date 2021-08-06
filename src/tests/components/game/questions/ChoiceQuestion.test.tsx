@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import KanaChoiceQuestion, { ChoiceQuestionProps } from "../../../../components/game/questions/ChoiceQuestion";
 import { Kana } from "../../../../types/kana/Kana";
 import KanaType from "../../../../types/kana/KanaType";
@@ -63,7 +63,10 @@ test('Calling the isCorrect function with a correct answer selected should invok
 test('Calling the isCorrect function with the wrong answer selected should invoke with false', () => {
     setup();
     fireEvent.click(screen.getByText('え'));
-    const isCorrect = ref.current?.isCorrect();
+
+    let isCorrect;
+    act(() => { isCorrect = ref.current?.isCorrect() });
+
     expect(isCorrect).toBe(false);
 });
 

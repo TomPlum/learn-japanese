@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import TextQuestion, { TextQuestionProps } from "../../../../components/game/questions/TextQuestion";
 import React from "react";
 import LearnableField from "../../../../types/learn/LearnableField";
@@ -53,7 +53,11 @@ test('Answering correctly with the second rōmaji value and calling isCorrect sh
 test('Answer incorrectly and clicking submit should call the onSubmit event handler with false', () => {
     const { input } = setup();
     fireEvent.change(input, { target: { value: 'ha'}});
-    expect(ref.current?.isCorrect()).toBe(false);
+
+    let isCorrect;
+    act(() => {isCorrect = ref.current?.isCorrect() });
+
+    expect(isCorrect).toBe(false);
 });
 
 test('Empty Rōmaji input value should call the isValid event handler with false', () => {
