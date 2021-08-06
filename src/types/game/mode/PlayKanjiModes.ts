@@ -1,6 +1,5 @@
-import { faCircle, faPaintBrush, faRandom, faSchool, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faBezierCurve, faCircle, faPaintBrush, faRandom, faSchool, faStar } from "@fortawesome/free-solid-svg-icons";
 import { PlayMenuModes } from "../../MenuModes";
-import CustomLearningMode from "../../learn/CustomLearningMode";
 import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 import { QuestionType } from "../QuestionType";
 import PlayMode from "../../session/PlayMode";
@@ -59,6 +58,18 @@ export default class PlayKanjiModes implements PlayMenuModes {
                         .build()
                     ).build()
             ),
+            new PlayMode("Match", "#e79711", faBezierCurve,
+                new KanjiSettingsBuilder().withJoyoKanji().withQuantity(80).build(),
+                new GameSettingsBuilder()
+                    .withQuestionSettings(new QuestionSettingsBuilder()
+                        .withFields(LearnableField.KANJI, LearnableField.MEANING)
+                        .withType(QuestionType.MATCH)
+                        .withScoreTracking(true)
+                        .withQuantity(4)
+                        .build()
+                    )
+                    .build()
+            ),
             new PlayMode("Random", "#3cabca", faRandom,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
@@ -70,8 +81,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                         .build()
                     )
                     .build()
-            ),
-            new CustomLearningMode()
+            )
         ];
     }
 
