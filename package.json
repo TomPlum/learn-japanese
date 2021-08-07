@@ -49,7 +49,8 @@
       "!src/index.tsx",
       "!src/components/error/**",
       "!src/data/**",
-      "!src/types/game/mode/**"
+      "!src/types/game/mode/**",
+      "!src/types/learn/mode/**"
     ]
   },
   "browserslist": {
