@@ -1,11 +1,10 @@
 import LifeSettings, { LifeSettingsBuilder } from "../../../../../types/session/settings/game/LifeSettings";
-import { LifeQuantity } from "../../../../../types/game/LifeQuantity";
 
 describe("Life Settings", () => {
     describe("Builder", () => {
         it("Should default to enabled with 5 lives", () => {
             const settings = new LifeSettingsBuilder().build();
-            expect(settings).toStrictEqual(new LifeSettings(true, LifeQuantity.FIVE));
+            expect(settings).toStrictEqual(new LifeSettings(true, 5));
         });
 
         describe("Is Enabled", () => {
@@ -30,13 +29,13 @@ describe("Life Settings", () => {
             it("Should set life quantity to 0 when passing enabled as false", () => {
                 const settings = new LifeSettingsBuilder().isEnabled(false).build();
                 const lifeQuantity = settings.quantity;
-                expect(lifeQuantity).toBe(LifeQuantity.ZERO);
+                expect(lifeQuantity).toBe(0);
             });
         });
 
         describe("Quantity", () => {
             it("Should set the quantity to the given quantity when passed", () => {
-                const settings = new LifeSettingsBuilder().withQuantity(LifeQuantity.TEN).build();
+                const settings = new LifeSettingsBuilder().withQuantity(10).build();
                 const lifeQuantity = settings.quantity;
                 expect(lifeQuantity).toBe(10);
             });

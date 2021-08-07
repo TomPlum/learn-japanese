@@ -10,7 +10,6 @@ import { Environment } from "../../../utility/Environment";
 import { v4 } from "uuid";
 import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
 import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
-import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
 import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
@@ -389,7 +388,7 @@ test('Answering all questions correctly should stop call the onFinish even handl
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
         .withHintSettings(new HintSettingsBuilder().withQuantity(5).build())
-        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(5).build())
         .build();
 
     const { submit } = setup();
@@ -437,7 +436,7 @@ test('Answering all questions correctly should call the onFinish even handler wi
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
         .withHintSettings(new HintSettingsBuilder().withQuantity(3).build())
-        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(5).build())
         .build();
 
     const { submit } = setup();
@@ -547,7 +546,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
         .withHintSettings(new HintSettingsBuilder().withQuantity(3).build())
-        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.ONE).build())
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(1).build())
         .build();
 
     const { submit } = setup();
@@ -585,7 +584,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
         .withHintSettings(new HintSettingsBuilder().withQuantity(3).build())
-        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.ONE).build())
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(1).build())
         .build();
 
     const { submit } = setup();
@@ -618,7 +617,7 @@ test('Answering incorrectly with 1 life remaining should call the onFinish event
 test('Answering incorrectly when lives are enabled should reduce the lives by 1', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(5).build())
         .build();
 
     const { submit } = setup();
@@ -643,7 +642,7 @@ test('Answering incorrectly should play the wrong sound effect', () => {
 test('Enabling lives should render the LifeDisplay', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.TEN).build())
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(10).build())
         .build();
     setup();
     expect(screen.getByTitle('Lives')).toBeInTheDocument();
@@ -770,7 +769,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
         .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
-        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.TEN).build())
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(10).build())
         .build();
 
     setup();
@@ -969,7 +968,7 @@ test('Clicking the skip button should advance to the next question', () => {
 test('Clicking the skip button should remove a life if they are enabled', () => {
     props.settings = new GameSettingsBuilder()
         .fromExisting(props.settings)
-        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.FIVE).build())
+        .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(5).build())
         .build();
     const { skip } = setup();
     expect(screen.getByText('5')).toBeInTheDocument();

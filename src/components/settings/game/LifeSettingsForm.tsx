@@ -1,5 +1,4 @@
 import React, { ChangeEvent, Component } from "react";
-import { LifeQuantity } from "../../../types/game/LifeQuantity";
 import { Col, Row } from "react-bootstrap";
 import LifeSettings, { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
 import RangeSlider from "react-bootstrap-range-slider";
@@ -13,12 +12,12 @@ interface LifeSettingsFormProps {
 
 interface LifeSettingsFormState {
     enabled: boolean;
-    quantity: LifeQuantity;
+    quantity: number;
 }
 
 class LifeSettingsForm extends Component<LifeSettingsFormProps, LifeSettingsFormState> {
 
-    private readonly defaultState = new LifeSettingsBuilder().isEnabled(false).withQuantity(LifeQuantity.ZERO).build();
+    private readonly defaultState = new LifeSettingsBuilder().isEnabled(false).withQuantity(0).build();
 
     constructor(props: LifeSettingsFormProps | Readonly<LifeSettingsFormProps>) {
         super(props);

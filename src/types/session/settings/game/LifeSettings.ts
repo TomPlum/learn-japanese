@@ -1,10 +1,9 @@
-import { LifeQuantity } from "../../../game/LifeQuantity";
 
 export default class LifeSettings {
     private readonly _enabled: boolean;
-    private readonly _quantity: LifeQuantity;
+    private readonly _quantity: number;
 
-    constructor(enabled: boolean, quantity: LifeQuantity) {
+    constructor(enabled: boolean, quantity: number) {
         this._enabled = enabled;
         this._quantity = quantity;
     }
@@ -13,24 +12,24 @@ export default class LifeSettings {
         return this._enabled;
     }
 
-    get quantity(): LifeQuantity {
+    get quantity(): number {
         return this._quantity;
     }
 }
 
 export class LifeSettingsBuilder {
     private _enabled: boolean = true;
-    private _quantity: LifeQuantity = LifeQuantity.FIVE;
+    private _quantity: number = 5;
 
     isEnabled(enabled: boolean = true): LifeSettingsBuilder {
         this._enabled = enabled;
         if (!enabled) {
-            this._quantity = LifeQuantity.ZERO;
+            this._quantity = 0;
         }
         return this;
     }
 
-    withQuantity(quantity: LifeQuantity): LifeSettingsBuilder {
+    withQuantity(quantity: number): LifeSettingsBuilder {
         this._quantity = quantity;
         return this;
     }

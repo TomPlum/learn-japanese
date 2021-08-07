@@ -9,7 +9,6 @@ import LearnableField from "../../learn/LearnableField";
 import { HintSettingsBuilder } from "../../session/settings/game/HintSettings";
 import { TimeSettingsBuilder } from "../../session/settings/game/TimeSettings";
 import { LifeSettingsBuilder } from "../../session/settings/game/LifeSettings";
-import { LifeQuantity } from "../LifeQuantity";
 
 class PlaySentenceStructureModes implements PlayMenuModes {
     getModes(): PlayMode[] {
@@ -33,7 +32,7 @@ class PlaySentenceStructureModes implements PlayMenuModes {
                         .build())
                     .withHintSettings(new HintSettingsBuilder().withQuantity(5).build())
                     .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
-                    .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.FIVE).build()
+                    .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(5).build()
                 ).build()
             ),
             new PlayMode("Meaning", "#57afd9", faGrinBeam,   new SentenceStructureSettingsBuilder()
@@ -51,7 +50,7 @@ class PlaySentenceStructureModes implements PlayMenuModes {
                         .build())
                     .withHintSettings(new HintSettingsBuilder().withQuantity(5).build())
                     .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
-                    .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.FIVE).build()
+                    .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(5).build()
                 ).build()
             ),
             new PlayMode("Placeholder 3", "#000", faCircle, defaultDataSettings,

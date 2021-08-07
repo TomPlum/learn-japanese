@@ -9,7 +9,6 @@ import { QuestionType } from "../QuestionType";
 import { HintSettingsBuilder } from "../../session/settings/game/HintSettings";
 import { LifeSettingsBuilder } from "../../session/settings/game/LifeSettings";
 import { TimeSettingsBuilder } from "../../session/settings/game/TimeSettings";
-import { LifeQuantity } from "../LifeQuantity";
 import LearnableField from "../../learn/LearnableField";
 import FilterChain from "../../../filters/FilterChain";
 import DiagraphFilter from "../../../filters/kana/DiagraphFilter";
@@ -92,7 +91,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                         .build()
                     )
                     .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
-                    .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.FIVE).build())
+                    .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(5).build())
                     .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
                     .build()
             ),
@@ -107,7 +106,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                         .build()
                     )
                     .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
-                    .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(LifeQuantity.ONE).build())
+                    .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(1).build())
                     .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
                     .build()
             )

@@ -1,6 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
 import LifeSettingsForm from "../../../../components/settings/game/LifeSettingsForm";
-import { LifeQuantity } from "../../../../types/game/LifeQuantity";
 import { LifeSettingsBuilder } from "../../../../types/session/settings/game/LifeSettings";
 
 const onChangeHandler = jest.fn();
@@ -23,7 +22,7 @@ test('Selecting \'enable\' should set lives to enabled in the settings', () => {
     const { enable } = setup();
     fireEvent.click(enable);
     expect(onChangeHandler).toHaveBeenLastCalledWith(
-        new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.ZERO).build()
+        new LifeSettingsBuilder().isEnabled().withQuantity(0).build()
     );
 });
 
@@ -32,6 +31,6 @@ test('Changing the lives selector should call the onChange event handler', () =>
     fireEvent.click(enable);
     fireEvent.change(lives, { target: { value: 3 }} )
     expect(onChangeHandler).toHaveBeenLastCalledWith(
-        new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.THREE).build()
+        new LifeSettingsBuilder().isEnabled().withQuantity(3).build()
     );
 });

@@ -1,5 +1,4 @@
 import { GameSettingsBuilder } from "../../../../../types/session/settings/game/GameSettings";
-import { LifeQuantity } from "../../../../../types/game/LifeQuantity";
 import { QuestionType } from "../../../../../types/game/QuestionType";
 import LifeSettings, { LifeSettingsBuilder } from "../../../../../types/session/settings/game/LifeSettings";
 import HintSettings, { HintSettingsBuilder } from "../../../../../types/session/settings/game/HintSettings";
@@ -46,13 +45,13 @@ describe("Game Settings", () => {
                     .build()
                 )
                 .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
-                .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.ONE).build())
+                .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(1).build())
                 .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
                 .build();
 
             expect(settings.question).toStrictEqual(new QuestionSettings(LearnableField.KANJI, LearnableField.MEANING, QuestionType.CHOICE, 6, 1, answerFilter, true));
             expect(settings.hints).toStrictEqual(new HintSettings(false, 0, false));
-            expect(settings.lives).toStrictEqual(new LifeSettings(true, LifeQuantity.ONE));
+            expect(settings.lives).toStrictEqual(new LifeSettings(true, 1));
             expect(settings.time).toStrictEqual(new TimeSettings(false, true, 5));
         });
 
@@ -61,11 +60,11 @@ describe("Game Settings", () => {
 
             const newSettings = new GameSettingsBuilder()
                 .fromExisting(settings)
-                .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.ONE).build())
+                .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(1).build())
                 .build();
 
             expect(newSettings.hints).toStrictEqual(new HintSettingsBuilder().isEnabled(false).build());
-            expect(newSettings.lives).toStrictEqual(new LifeSettingsBuilder().isEnabled().withQuantity(LifeQuantity.ONE).build());
+            expect(newSettings.lives).toStrictEqual(new LifeSettingsBuilder().isEnabled().withQuantity(1).build());
         });
     });
 });
