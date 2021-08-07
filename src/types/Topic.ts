@@ -25,6 +25,7 @@ import KanaSettingsForm from "../components/settings/data/KanaSettingsForm";
 import KanjiSettingsForm from "../components/settings/data/KanjiSettingsForm";
 import SentenceStructureForm from "../components/settings/data/SentenceStructureForm";
 import PlayBasicsModes from "./game/mode/PlayBasicsModes";
+import PlayCalendarModes from "./game/mode/PlayCalendarModes";
 
 export default class Topic {
     private readonly _name: string;
@@ -57,7 +58,7 @@ export default class Topic {
     );
 
     public static CALENDAR = new Topic(
-        "Days & Months", faCalendarAlt, new LearnCalendarModes(), new PlayKanjiModes(),
+        "Days & Months", faCalendarAlt, new LearnCalendarModes(), new PlayCalendarModes(),
         { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack }
     );
 
