@@ -26,6 +26,7 @@ import KanjiSettingsForm from "../components/settings/data/KanjiSettingsForm";
 import SentenceStructureForm from "../components/settings/data/SentenceStructureForm";
 import PlayBasicsModes from "./game/mode/PlayBasicsModes";
 import PlayCalendarModes from "./game/mode/PlayCalendarModes";
+import PlayNumbersModes from "./game/mode/PlayNumbersModes";
 
 export default class Topic {
     private readonly _name: string;
@@ -42,7 +43,7 @@ export default class Topic {
     );
 
     public static NUMBERS = new Topic(
-        "Numbers & Counting", faYenSign, new LearnNumbersModes(), new PlayKanjiModes(),
+        "Numbers & Counting", faYenSign, new LearnNumbersModes(), new PlayNumbersModes(),
         { front: NumbersFlashCardFront, back: NumbersFlashCardBack }
     );
 
