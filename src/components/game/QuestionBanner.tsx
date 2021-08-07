@@ -59,7 +59,7 @@ class QuestionBanner extends Component<QuestionBannerProps> {
 
     private getQuestionValues = (): [string[], string[]] => {
         const { question, questionField } = this.props;
-        const questionValues = question.getFieldValues(questionField);
+        const questionValues = question.getFieldValues(questionField).map(it => it.toLowerCase());
         if (questionValues.length > 2) {
             return [questionValues.slice(0, 2), questionValues.slice(2)];
         } else if (questionValues.length > 0) {

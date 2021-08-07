@@ -24,6 +24,7 @@ import React from "react";
 import KanaSettingsForm from "../components/settings/data/KanaSettingsForm";
 import KanjiSettingsForm from "../components/settings/data/KanjiSettingsForm";
 import SentenceStructureForm from "../components/settings/data/SentenceStructureForm";
+import PlayBasicsModes from "./game/mode/PlayBasicsModes";
 
 export default class Topic {
     private readonly _name: string;
@@ -51,7 +52,7 @@ export default class Topic {
     );
 
     public static BASICS = new Topic(
-        "Basics", faAppleAlt, new LearnBasicsModes(), new PlayKanjiModes(),
+        "Basics", faAppleAlt, new LearnBasicsModes(), new PlayBasicsModes(),
         { front: BasicsFlashCardFront, back: BasicsFlashCardBack }
     );
 

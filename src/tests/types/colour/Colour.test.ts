@@ -16,10 +16,6 @@ describe("Colour", () => {
         expect(colour.getKanjiVariation()).toBe("赤");
     });
 
-    it("Should return the name when the colour has no Kanji character", () => {
-        expect(new Colour("Red", undefined, "あか", "aka", "#ff0000").getKanjiVariation()).toBe("Red");
-    });
-
     it("Should return the hint", () => {
         expect(colour.getHint()).toBe("It begins with あ");
     });

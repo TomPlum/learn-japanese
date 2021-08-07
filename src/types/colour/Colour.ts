@@ -20,8 +20,8 @@ export default class Colour extends Learnable {
         return this._colour;
     }
 
-    getKanjiVariation(): string {
-        return this._kanji ?? this._name;
+    getKanjiVariation(): string | undefined {
+        return this._kanji;
     }
 
     getKana(): string[] {
