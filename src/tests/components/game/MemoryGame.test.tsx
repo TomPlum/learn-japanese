@@ -101,6 +101,7 @@ const setup = () => {
         skip: component.getByText('Skip'),
         hint: component.getByTitle('Get a Hint'),
         quit: component.getByTitle('Quit'),
+        volume: component.getByTitle('Volume'),
         ...component
     }
 }
@@ -987,4 +988,49 @@ test('Pausing should disable the skip button', () => {
 
     fireEvent.click(screen.getByTitle('Pause'));
     expect(skip).toBeDisabled();
+});
+
+test('Audio exceptions should be swallowed and logged', () => {
+    playAudio.mockRejectedValue(new Error("Broken"));
+    const { submit } = setup();
+
+    //Answer 1st correctly to hit the success sound effect.
+    fireEvent.change(getRomajiInput(), { target: { value: 'a' } });
+    fireEvent.click(submit);
+
+    //Answer 2nd in-correctly to hit the wrong sound effect.
+    fireEvent.change(getRomajiInput(), { target: { value: 'wo' } });
+    fireEvent.click(submit);
+
+    //Now answer 2nd correctly to continue
+    fireEvent.change(getRomajiInput(), { target: { value: 'i' } });
+    fireEvent.click(submit);
+
+    //Answer 3rd correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'u' } });
+    fireEvent.click(submit);
+
+    //Answer 4th correctly
+    fireEvent.change(getRomajiInput(), { target: { value: 'e' } });
+    fireEvent.click(submit);
+
+    //Answer 5th correctly to trigger the game-end sound effect
+    fireEvent.change(getRomajiInput(), { target: { value: 'o' } });
+    fireEvent.click(submit);
+
+    //TODO: Can we test console.log has been fired?
+});
+
+test('Interacting with the volume mixer should change the game volume', async () => {
+    const { volume } = setup();
+
+    //Bring up the slider overlay
+    fireEvent.mouseEnter(volume);
+    const slider = await screen.findByTestId('volume-slider');
+    expect(slider).toBeInTheDocument();
+
+    //Change the value
+    fireEvent.change(slider, { target: { value: 20 }});
+
+    //TODO: Can we expect some mock audio context object to have changed?
 });
