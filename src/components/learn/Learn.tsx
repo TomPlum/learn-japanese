@@ -66,21 +66,21 @@ class Learn extends Component<LearnProps, LearnState> {
                     />}
 
                     <Row className={styles.header}>
-                        <Col>
+                        <Col md={4} xs={2} className={styles.col}>
                             <QuitButton onClick={this.onQuit} className={styles.quit} />
                         </Col>
 
-                        <Col md={2} xs={3}>
+                        <Col md={2} xs={3} className={styles.col}>
                             <FontAwesomeIcon className={styles.forgottenIcon} icon={faThumbsDown} fixedWidth />
                             <span className={styles.forgotten} title="Forgotten">{forgotten.length}</span>
                         </Col>
 
-                        <Col md={2} xs={3}>
+                        <Col md={2} xs={3} className={styles.col}>
                             <FontAwesomeIcon className={styles.rememberedIcon} icon={faThumbsUp} fixedWidth />
                             <span className={styles.remembered} title="Remembered">{remembered.length}</span>
                         </Col>
 
-                        <Col>
+                        <Col xs={4} className={styles.col}>
                             <Button
                                 className={styles.showRomaji}
                                 variant="warning"
@@ -92,7 +92,7 @@ class Learn extends Component<LearnProps, LearnState> {
                     </Row>
 
                     <Row className={styles.header}>
-                        <Col>
+                        <Col className={styles.col}>
                             <SessionProgressBar
                                 inProgress={hasCardsRemaining && !paused}
                                 quantity={data.length}
@@ -103,7 +103,7 @@ class Learn extends Component<LearnProps, LearnState> {
                     </Row>
 
                     <Row className={styles.cardWrapper}>
-                        <Col>
+                        <Col className={styles.col}>
                             <FlashCard
                                 data={current}
                                 key={current.getMeanings()[0]}
@@ -116,28 +116,30 @@ class Learn extends Component<LearnProps, LearnState> {
                     </Row>
 
                     <Row className={styles.buttonWrapper}>
-                        <Col xs={6} className={styles.buttonColumnLeft}>
+                        <Col xs={6} className={[styles.buttonColumnLeft, styles.col].join(" ")}>
                             <LearningFeedbackButton
-                                type={LearningFeedback.FORGOT}
-                                onClick={this.onForgot}
                                 disabled={!hasPeeked}
                                 active={hasForgotten}
+                                onClick={this.onForgot}
+                                type={LearningFeedback.FORGOT}
+                                className={styles.rememberedButton}
                             />
                         </Col>
-                        <Col xs={6} className={styles.buttonColumnRight}>
+                        <Col xs={6} className={[styles.buttonColumnRight, styles.col].join(" ")}>
                             <LearningFeedbackButton
-                                type={LearningFeedback.REMEMBERED}
-                                onClick={this.onMemorised}
                                 disabled={!hasPeeked}
                                 active={hasRemembered}
+                                onClick={this.onMemorised}
+                                type={LearningFeedback.REMEMBERED}
+                                className={styles.forgottenButton}
                             />
                         </Col>
-                        <Col xs={12}>
+                        <Col xs={12} className={styles.col}>
                             <Button
-                                variant={!hasCardsRemaining && hasPeeked ? "info" : "primary"}
                                 className={styles.next}
                                 onClick={hasCardsRemaining ? this.onNext : this.onFinish}
                                 disabled={!hasPeeked || (!hasForgotten && !hasRemembered)}
+                                variant={!hasCardsRemaining && hasPeeked ? "info" : "primary"}
                             >
                                 {!hasCardsRemaining && hasPeeked ? "Finish" : "Next"}
                             </Button>
