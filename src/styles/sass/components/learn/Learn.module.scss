@@ -23,7 +23,7 @@
   }
 
   .showRomaji {
-    width: 100px !important;
+    width: 110px !important;
     font-size: 0.8em;
   }
 
@@ -39,6 +39,10 @@
   .buttonWrapper {
     margin-top: 10px;
   }
+
+  .progress {
+    height: 20px;
+  }
 }
 
 @include tablet {
@@ -53,6 +57,10 @@
 
   .buttonWrapper {
     margin-top: 15px;
+  }
+
+  .progress {
+    height: 30px;
   }
 }
 
@@ -76,6 +84,10 @@
 
   .buttonColumnLeft {
     padding-right: 8px !important;
+  }
+
+  .progress {
+    height: 30px;
   }
 }
 
@@ -112,7 +124,6 @@
 
 .progress {
   background-color: $dark-2;
-  height: 30px;
   width: 100%;
   max-width: 650px;
 }

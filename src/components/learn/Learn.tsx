@@ -94,10 +94,10 @@ class Learn extends Component<LearnProps, LearnState> {
                     <Row className={styles.header}>
                         <Col className={styles.col}>
                             <SessionProgressBar
-                                inProgress={hasCardsRemaining && !paused}
                                 quantity={data.length}
-                                remaining={remaining.length}
                                 className={styles.progress}
+                                remaining={remaining.length}
+                                inProgress={hasCardsRemaining && !paused}
                             />
                         </Col>
                     </Row>
