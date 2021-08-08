@@ -12,6 +12,7 @@ import KanjiReadingDisplay from "./KanjiReadingDisplay";
 import { KanjiReading } from "../../../types/kanji/KanjiReading";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
 import KanjiExampleDisplay from "./KanjiExampleDisplay";
+import KanjiMeaningDisplay from "./KanjiMeaningDisplay";
 
 //TODO: Replace redundant bits with FlashCardBack component
 class KanjiFlashCardBack extends Component<CardBackFaceProps> {
@@ -51,7 +52,7 @@ class KanjiFlashCardBack extends Component<CardBackFaceProps> {
                                 <Inspectable popover={{ title: "English Meaning", text: Environment.variable("ENGLISH_MEANING_DESC") }}>
                                     <span className={styles.label}>Meaning</span>
                                 </Inspectable>
-                                {": " + kanji.getMeanings().join(", ")}
+                                {': '}<KanjiMeaningDisplay meanings={kanji.getMeanings()} />
                             </p>
                         </div>
                     </Col>

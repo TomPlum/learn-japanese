@@ -48,7 +48,7 @@ test('Should render the kun reading', () => {
 
 test('Should render the meanings comma delimited', () => {
     const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />);
-    expect(component.getByText(': person, fake-example')).toBeInTheDocument();
+    expect(component.getByText('person, fake-example')).toBeInTheDocument();
 });
 
 test('Should render the grade', () => {

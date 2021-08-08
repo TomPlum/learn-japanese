@@ -1,0 +1,19 @@
+@import "src/styles/sass/colours";
+
+.icon {
+  color: #000;
+  border: 2px solid $inspect;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+  transition: all ease 0.2s;
+}
+
+.icon:hover {
+  color: #2e6cde;
+}
+
+.meanings {
+  margin-right: 5px;
+}

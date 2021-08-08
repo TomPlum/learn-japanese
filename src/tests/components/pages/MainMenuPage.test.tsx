@@ -222,7 +222,7 @@ describe('Learn', () => {
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(kanji); //Select Kanji topic
       fireEvent.click(screen.getByText('Start'));
-      expect(screen.getByText(': person')).toBeInTheDocument();
+      expect(screen.getByText('person')).toBeInTheDocument();
       expect(screen.getAllByText('人')).toBeDefined();
    });
 });
