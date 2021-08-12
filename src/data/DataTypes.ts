@@ -43,11 +43,6 @@ export interface KanjiExample {
     english: string[];
 }
 
-export interface KyoikuGradeData {
-    value: number;
-    quantity: number;
-}
-
 export interface ColourData {
     name: string;
     kanji?: string;
