@@ -49,17 +49,17 @@ describe("Learnable Field", () => {
         });
 
         it("Kanji", () => {
-            const kanji = joyo().map(it => it.code);
+            const kanji = joyo().map(it => it.name);
             kanji.forEach(kana => expect(kana).toMatch(LearnableField.KANJI.validationRegex));
         });
 
         it("On'Yomi Readings", () => {
-            const readings = joyo().flatMap(it => it.on).map(it => it.kana);
+            const readings = joyo().flatMap(it => it.on);
             readings.forEach(kana => expect(kana).toMatch(LearnableField.ONYOMI_READING.validationRegex));
         });
 
         it("Kun'Yomi Readings", () => {
-            const readings = joyo().flatMap(it => it.kun).map(it => it.kana);
+            const readings = joyo().flatMap(it => it.kun);
             readings.forEach(kana => expect(kana).toMatch(LearnableField.KUNYOMI_READING.validationRegex));
         });
     });

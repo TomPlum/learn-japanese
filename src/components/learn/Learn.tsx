@@ -14,8 +14,8 @@ import styles from "../../styles/sass/components/learn/Learn.module.scss";
 
 export interface LearnProps {
     data: Learnable[];
-    onFinish: (result: LearningSessionResult) => void;
     card: CardProps;
+    onFinish: (result: LearningSessionResult) => void;
 }
 
 interface LearnState {

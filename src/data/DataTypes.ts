@@ -1,4 +1,3 @@
-import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 import { KanaColumn } from "../types/kana/KanaColumn";
 import { CounterGroup } from "../types/numbers/CounterGroup";
 import { AdjectiveType } from "../types/sentence/AdjectiveType";
@@ -21,20 +20,16 @@ export interface DayData {
 }
 
 export interface KanjiData {
-    name?: string;
-    code: string;
-    on: KanjiReadingData[];
-    kun: KanjiReadingData[];
+    name: string;
+    on: string[];
+    kun: string[];
     source: string;
     meanings: string[];
-    grade: KyoikuGrade;
+    grade?: number;
+    jlpt?: number;
+    strokes?: number;
     examples: KanjiExample[];
     tags?: string[];
-}
-
-export interface KanjiReadingData {
-    kana: string;
-    romaji: string;
 }
 
 export interface KanjiExample {

@@ -9,8 +9,8 @@ export default class LearnableField {
     public static KANA = new LearnableField("Kana", "The Japanese syllabaries are kana. All words can expressed in Hiragana or Katakana.", /^[ぁ-んァ-ン]+$/);
     public static JAPANESE = new LearnableField("Japanese", "Some words can be expressed in all kanji or a mixture of kanji and kana.", /^[A-Za-z]*$/)
     public static ROMAJI = new LearnableField("Rōmaji", "The romanisation of Japanese kana. I.e. 'a', 'ke' or 'zu'.", /^[A-Za-z]*$/);
-    public static ONYOMI_READING = new LearnableField("On'Yomi Reading", "The original Chinese readings of a kanji character in Hiragana.", /^[ぁ-んァ-ン]+$/);
-    public static KUNYOMI_READING = new LearnableField("Kun'Yomi Reading", "The Japanese readings of a kanji character in Hiragana.", /^[ぁ-んァ-ン]+$/);
+    public static ONYOMI_READING = new LearnableField("On'Yomi Reading", "The original Chinese readings of a kanji character in Hiragana.", /^[ぁ-ゔゞァ-・ヽヾ゛゜ー]+$/);
+    public static KUNYOMI_READING = new LearnableField("Kun'Yomi Reading", "The Japanese readings of a kanji character in Hiragana.", /^[ぁ-ゔゞァ-・ヽヾ゛゜ー]+$/);
     public static RANDOM = new LearnableField("Random", "A random selection of any of the available data fields.", /.*/);
 
     private constructor(name: string, description: string, validationRegex: RegExp) {

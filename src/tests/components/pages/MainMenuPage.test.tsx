@@ -6,7 +6,6 @@ import katakana from "../../../data/Katakana";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
 import { joyo, kyoiku } from "../../../data/Kanji";
-import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 import { days } from "../../../data/Calendar";
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
@@ -39,12 +38,11 @@ beforeEach(() => {
    mockKyoiku.mockReturnValue([
       {
          name: "人",
-         code: "\u4eba",
-         on: [{ kana: "じん", romaji: "jin" }, { kana: "にん", romaji: "nin" }],
-         kun: [{ kana: "ひと", romaji: "hito" }],
+         on: ["じん", "にん"],
+         kun: ["ひと"],
          source: "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
          meanings: ["person"],
-         grade: KyoikuGrade.ONE,
+         grade: 1,
          examples: [
             { value: "外国人", kana: ["がいこくじん"], english: ["foreigner"] },
             { value: "個人", kana: ["こじん"], english: ["individual", "private person", "personal", "private"] },

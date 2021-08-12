@@ -1,12 +1,14 @@
-import { Kanji } from "../types/kanji/Kanji";
 import { KanjiReading } from "../types/kanji/KanjiReading";
 import { ReadingType } from "../types/kanji/ReadingType";
 import { Example } from "../types/kanji/Example";
-import { KanjiData, KanjiExample, KanjiReadingData } from "../data/DataTypes";
-import { joyo, kyoiku } from "../data/Kanji";
+import { KanjiData, KanjiExample } from "../data/DataTypes";
 import Repository from "./Repository";
 import KanjiSettings from "../types/session/settings/data/KanjiSettings";
 import Arrays from "../utility/Arrays";
+import { Kanji } from "../types/kanji/Kanji";
+import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
+import RomajiGenerator from "../utility/RomajiGenerator";
+import { joyo, kyoiku } from "../data/Kanji";
 
 //TODO: Integrate Kanji Filters & create new ones for grades etc.
 export class KanjiRepository implements Repository<Kanji> {
@@ -24,7 +26,8 @@ export class KanjiRepository implements Repository<Kanji> {
         if (settings.quantity && settings.grades && settings.grades.length > 0) {
             let kanji: Kanji[] = [];
 
-            let availableKanji = this.convert(kyoiku().filter(data => settings.grades?.includes(data.grade)));
+            let kyoikuKanji = this.convert(kyoiku());
+            let availableKanji = kyoikuKanji.filter(data => settings.grades?.includes(data.grade));
 
             for (let i = 0; i < settings.quantity; i++) {
                 const [randomKanji, remainingKanji] = Arrays.getRandomObject(availableKanji);
@@ -41,8 +44,8 @@ export class KanjiRepository implements Repository<Kanji> {
         }
 
         if (settings.grades && settings.grades.length > 0) {
-            const data = kyoiku().filter(entry => settings.grades?.map(it => it.value).includes(entry.grade.value));
-            return this.convert(data);
+            let kyoikuKanji = this.convert(kyoiku());
+            return kyoikuKanji.filter(entry => settings.grades?.map(it => it.value).includes(entry.grade.value));
         }
 
         return this.convert(joyo());
@@ -54,12 +57,14 @@ export class KanjiRepository implements Repository<Kanji> {
     }
 
     private convert = (data: KanjiData[]): Kanji[] => {
+        const romaji = new RomajiGenerator();
         return data.map((result: KanjiData) => {
-            const on = result.on.map((data: KanjiReadingData) => new KanjiReading(data.romaji, data.kana, ReadingType.ON));
-            const kun = result.kun.map((data: KanjiReadingData) => new KanjiReading(data.romaji, data.kana, ReadingType.KUN));
+            const on = result.on.map(reading => new KanjiReading(romaji.generate(reading), reading, ReadingType.ON));
+            const kun = result.kun.map(reading => new KanjiReading(romaji.generate(reading), reading, ReadingType.KUN));
             const examples = result.examples.map((it: KanjiExample) => new Example(it.value, it.kana, it.english));
+            const grade = KyoikuGrade.fromInteger(result.grade);
             const tags = result.tags ?? [];
-            return new Kanji(result.code, on.concat(kun), result.meanings, result.grade, result.source, examples, tags);
+            return new Kanji(result.name, on.concat(kun), result.meanings, grade, result.source, examples, tags);
         });
     }
 }

@@ -19,7 +19,7 @@ describe("Kyoiku Grade", () => {
 
         it("Grade 4", () => {
             expect(KyoikuGrade.FOUR.value).toBe(4);
-            expect(KyoikuGrade.FOUR.quantity).toBe(200);
+            expect(KyoikuGrade.FOUR.quantity).toBe(220);
         });
 
         it("Grade 5", () => {

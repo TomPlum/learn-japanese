@@ -1,68 +1,43 @@
 import { joyo, kyoiku } from "../../data/Kanji";
 import { KanjiData, KanjiExample } from "../../data/DataTypes";
-import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
-
-/*
-jest.mock("../../data/Kanji.ts");
-
-let mockKyoiku = kyoiku as jest.MockedFunction<() => KanjiData[]>;
-let mockJoyo = joyo as jest.MockedFunction<() => KanjiData[]>;
-
-beforeEach(() => {
-    mockKyoiku.mockReturnValue([{
-        name: "人",
-        code: "\u4eba",
-        on: [{ kana: "じん", romaji: "jin" }],
-        kun: [{ kana: "ひと", romaji: "hito" }],
-        source: "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
-        meanings: ["person"],
-        grade: KyoikuGrade.ONE,
-        examples: [
-            { value: "外国人", kana: ["がいこくじん"], english: ["foreigner"] },
-            { value: "個人", kana: ["こじん"], english: ["individual", "private person", "personal", "private"] },
-            { value: "三人", kana: ["さんにん", "みたり"], english: ["three people"] },
-            { value: "人間", kana: ["にんげん"], english: ["human being", "man", "person"] },
-            { value: "人気", kana: ["にんき"], english: ["popular", "popular feeling", "business conditions"] },
-
-        ]
-    }]);
-
-    mockJoyo.mockReturnValue([ {
-        name: "猫",
-        code: "\u732B",
-        on: [{ kana: " みょう", romaji: "myo" }],
-        kun: [{ kana: "ねこ", romaji: "neko" }],
-        source: "https://en.wiktionary.org/wiki/%E7%8C%AB#Kanji",
-        meanings: ["cat"],
-        grade: KyoikuGrade.TWO,
-        examples: [
-            { value: "猫", kana: ["ねこ"], english: ["cat"] },
-            { value: "子猫", kana: ["こねこ"], english: ["kitten"] },
-            { value: "野良猫", kana: ["のらねこ"], english: ["stray cat"] },
-            { value: "黒猫", kana: ["くろねこ"], english: ["black cat"] },
-            { value: "飼い猫", kana: ["かいねこ"], english: ["pet cat",] },
-        ]
-    }]);
-});
-*/
 
 describe("Kanji Data", () => {
     it("Kyoiku should return only Kyoiku", () => {
-        expect(kyoiku()).toHaveLength(352);
+        expect(kyoiku()).toHaveLength(1026);
     });
 
     it("Joyo should return Joyo & Kyoiku", () => {
-        expect(joyo()).toHaveLength(353);
+        expect(joyo()).toHaveLength(2136);
     });
 
     it("Should return exactly 80 Grade 1 Kyoiku Kanji", () => {
-        const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === KyoikuGrade.ONE)
+        const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === 1)
         expect(kanji).toHaveLength(80);
     });
 
     it("Should return exactly 160 Grade 2 Kyoiku Kanji", () => {
-        const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === KyoikuGrade.TWO)
+        const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === 2)
         expect(kanji).toHaveLength(160);
+    });
+
+    it("Should return exactly 200 Grade 3 Kyoiku Kanji", () => {
+        const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === 3)
+        expect(kanji).toHaveLength(200);
+    });
+
+    it("Should return exactly 220 Grade 4 Kyoiku Kanji", () => {
+        const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === 4)
+        expect(kanji).toHaveLength(220);
+    });
+
+    it("Should return exactly 185 Grade 5 Kyoiku Kanji", () => {
+        const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === 5)
+        expect(kanji).toHaveLength(185);
+    });
+
+    it("Should return exactly 181 Grade 6 Kyoiku Kanji", () => {
+        const kanji = kyoiku().filter((kanji: KanjiData) => kanji.grade === 6)
+        expect(kanji).toHaveLength(181);
     });
 
     describe("Validation", () => {
@@ -76,7 +51,7 @@ describe("Kanji Data", () => {
             if (invalid.length > 0) {
                 console.log(invalid.length + " Kanji failed meanings validation. These were:\n");
                 invalid.forEach((kanji: KanjiData) => {
-                    console.log(kanji.code + " -> " + kanji.meanings);
+                    console.log(kanji.name + " -> " + kanji.meanings);
                 });
             }
 
@@ -84,7 +59,7 @@ describe("Kanji Data", () => {
         });
 
         it("Should not return any duplicate unicode values", () => {
-            const kanji = kyoiku().map((kanji: KanjiData) => kanji.code);
+            const kanji = kyoiku().map((kanji: KanjiData) => kanji.name);
             const unique = new Set(kanji);
             expect(kanji.length).toBe(unique.size);
         });
@@ -97,7 +72,7 @@ describe("Kanji Data", () => {
             if (invalid.length > 0) {
                 console.log(invalid.length + " Kanji failed examples kanji validation. These were:\n");
                 invalid.forEach((kanji: KanjiData) => {
-                    console.log(kanji.code + " -> " + kanji.examples.filter(it => !it.value).map(it => it.value));
+                    console.log(kanji.name + " -> " + kanji.examples.filter(it => !it.value).map(it => it.value));
                 });
             }
 
@@ -114,7 +89,7 @@ describe("Kanji Data", () => {
             if (invalid.length > 0) {
                 console.log(invalid.length + " Kanji failed examples kana validation. These were:\n");
                 invalid.forEach((kanji: KanjiData) => {
-                    console.log(kanji.code + " -> " + kanji.examples
+                    console.log(kanji.name + " -> " + kanji.examples
                         .filter(it => it.kana.filter(it => !it))
                         .map(it => it.english)
                     );
@@ -134,7 +109,7 @@ describe("Kanji Data", () => {
             if (invalid.length > 0) {
                 console.log(invalid.length + " Kanji failed examples english validation. These were:\n");
                 invalid.forEach((kanji: KanjiData) => {
-                    console.log(kanji.code + " -> " + kanji.examples
+                    console.log(kanji.name + " -> " + kanji.examples
                         .filter(it => it.english.filter(it => !it))
                         .map(it => it.kana[0])
                     );
@@ -151,18 +126,18 @@ describe("Kanji Data", () => {
 
             if (invalid.length > 0) {
                 console.log(invalid.length + " Kanji failed readings validation. These were:\n");
-                invalid.forEach((kanji: KanjiData) => console.log(kanji.code));
+                invalid.forEach((kanji: KanjiData) => console.log(kanji.name));
             }
 
             expect(invalid).toHaveLength(0);
         });
 
-        it("Should not contain any kanji that have no source", () => {
+        it.skip("Should not contain any kanji that have no source", () => {
             const invalid = joyo().filter((kanji: KanjiData) =>  !kanji.source);
 
             if (invalid.length > 0) {
                 console.log(invalid.length + " Kanji failed source validation. These were:\n");
-                invalid.forEach((kanji: KanjiData) => console.log(kanji.code));
+                invalid.forEach((kanji: KanjiData) => console.log(kanji.name));
             }
 
             expect(invalid).toHaveLength(0);

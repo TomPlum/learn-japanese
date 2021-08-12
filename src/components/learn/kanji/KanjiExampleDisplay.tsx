@@ -11,7 +11,7 @@ export interface KanjiExampleDisplayProps {
 }
 
 interface KanjiExampleDisplayState {
-    selected: Example;
+    selected?: Example;
 }
 
 class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExampleDisplayState> {
@@ -19,7 +19,7 @@ class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExamp
     constructor(props: Readonly<KanjiExampleDisplayProps> | KanjiExampleDisplayProps) {
         super(props);
         this.state = {
-            selected: props.kanji.examples[0]
+            selected: props.kanji.examples.length > 0 ? props.kanji.examples[0] : undefined
         }
     }
 
@@ -44,7 +44,7 @@ class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExamp
                         />
                     </Col>
 
-                    <Col className={styles.textWrapper}>
+                    {selected && <Col className={styles.textWrapper}>
                         <Copyable className={styles.kanji}>
                             <span className={styles.example}>
                                 {selected.kanji}
@@ -76,9 +76,9 @@ class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExamp
                         </span>
 
                         <p className={styles.meaning}>
-                            { selected.english.join(", ") }
+                            {selected.english.join(", ")}
                         </p>
-                    </Col>
+                    </Col>}
                 </Row>
             </Container>
         );

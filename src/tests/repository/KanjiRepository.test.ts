@@ -13,12 +13,11 @@ let mockJoyo = joyo as jest.MockedFunction<() => KanjiData[]>;
 beforeEach(() => {
     const exampleKyoikuKanji6 = {
         name: "机",
-        code: "\u673A",
-        on: [{ kana: "き", romaji: "ki" }],
-        kun: [{ kana: "つくえ", romaji: "tsukue" }],
+        on: ["き"],
+        kun: ["つくえ"],
         source: "https://en.wiktionary.org/wiki/%E6%9C%BA#Kanji",
         meanings: ["desk", "table"],
-        grade: KyoikuGrade.SIX,
+        grade: 6,
         examples: [
             { value: "机", kana: ["つくえ, つき"], english: ["desk"] },
             { value: "机上", kana: ["きじょう"], english: ["on the desk", "theoretical", "academic"] },
@@ -30,24 +29,24 @@ beforeEach(() => {
     };
 
     let exampleKyoikuKanji1 =  { ...exampleKyoikuKanji6 };
-    exampleKyoikuKanji1.grade = KyoikuGrade.ONE;
+    exampleKyoikuKanji1.grade = 1;
 
     let exampleKyoikuKanji2 = { ...exampleKyoikuKanji6 };
-    exampleKyoikuKanji2.grade = KyoikuGrade.TWO;
+    exampleKyoikuKanji2.grade = 2;
 
     let exampleKyoikuKanji3 = { ...exampleKyoikuKanji6 };
-    exampleKyoikuKanji3.grade = KyoikuGrade.THREE;
+    exampleKyoikuKanji3.grade = 3;
 
     mockKyoiku.mockReturnValue([exampleKyoikuKanji1, exampleKyoikuKanji2, exampleKyoikuKanji3, exampleKyoikuKanji6]);
 
     const exampleJoyoKanji = {
         name: "猫",
         code: "\u732B",
-        on: [{ kana: " みょう", romaji: "myo" }],
-        kun: [{ kana: "ねこ", romaji: "neko" }],
+        on: ["みょう"],
+        kun: ["ねこ"],
         source: "https://en.wiktionary.org/wiki/%E7%8C%AB#Kanji",
         meanings: ["cat"],
-        grade: KyoikuGrade.TWO,
+        grade: 2,
         examples: [
             { value: "猫", kana: ["ねこ"], english: ["cat"] },
             { value: "子猫", kana: ["こねこ"], english: ["kitten"] },
