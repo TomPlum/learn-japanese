@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FontSelector from "../ui/select/FontSelector";
 import HashLink from "./HashLink";
@@ -11,13 +11,16 @@ import { AppMode } from "../../types/AppMode";
 
 export interface ControlsMenuProps {
     onChangeAppMode: (mode: AppMode) => void;
+    onLaunchLoginModal: () => void;
     startingMode: AppMode;
     active: boolean;
 }
 
 class ControlsMenu extends Component<ControlsMenuProps> {
+
     render() {
-        const { onChangeAppMode, startingMode, active } = this.props;
+        const { onChangeAppMode, onLaunchLoginModal, startingMode, active } = this.props;
+
         return (
             <Navbar variant="dark" fixed="top" className={styles.navbar}>
                 <Container className={styles.innerWrapper} fluid>
@@ -50,13 +53,22 @@ class ControlsMenu extends Component<ControlsMenuProps> {
                                 <FontSelector className={styles.navLink} onSelect={() => {}}/>
                             </Col>
 
-                            <Col>
+                        {/*    <Col>
                                 <HashLink path="/help" className={styles.navLink}>
                                     <div>
                                         <FontAwesomeIcon icon={faQuestionCircle} className={styles.icon} />
                                     </div>
                                     <span className={styles.linkText}>Help</span>
                                 </HashLink>
+                            </Col>*/}
+
+                            <Col>
+                                <Nav.Link className={styles.navLink} onClick={onLaunchLoginModal} disabled={!active}>
+                                    <div>
+                                        <FontAwesomeIcon icon={faUser} className={styles.icon} />
+                                    </div>
+                                    <span className={styles.linkText}>Login</span>
+                                </Nav.Link>
                             </Col>
                         </Row>
                     </Nav>
