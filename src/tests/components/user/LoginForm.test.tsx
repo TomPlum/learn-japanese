@@ -1,10 +1,12 @@
 import { fireEvent, render } from "@testing-library/react";
 import LoginForm from "../../../components/user/LoginForm";
+import { Provider } from "react-redux";
+import { userStore } from "../../../store";
 
 const onSuccessHandler = jest.fn();
 
 const setup = () => {
-    const component = render(<LoginForm onSuccess={onSuccessHandler}/>);
+    const component = render(<Provider store={userStore}><LoginForm onSuccess={onSuccessHandler}/></Provider>);
 
     return {
         username: component.getByPlaceholderText('Username'),

@@ -1,5 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import UserForm, { LoginRegistrationFormProps } from "../../../components/user/UserForm";
+import { Provider } from "react-redux";
+import { userStore } from "../../../store";
 
 let props: LoginRegistrationFormProps;
 
@@ -14,7 +16,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<UserForm {...props} />);
+    const component = render(<Provider store={userStore}><UserForm {...props} /></Provider>);
     return {
         switchForm: component.getByText("I don't have an account"),
         close: component.getByText('Close'),

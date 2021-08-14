@@ -22,6 +22,8 @@ import GameSettings from "../../types/session/settings/game/GameSettings";
 import DataSettings  from "../../types/session/settings/data/DataSettings";
 import LearnSettings from "../../types/session/settings/LearnSettings";
 import UserForm from "../user/UserForm";
+import { userStore } from "../../store";
+import { Provider } from "react-redux";
 
 interface MainMenuPageState {
     loading: boolean;
@@ -75,62 +77,64 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
 
         return (
             <div className={styles.wrapper}>
-                <MainErrorBoundary>
-                    <LoadingSpinner active={loading}/>
+                <Provider store={userStore}>
+                    <MainErrorBoundary>
+                        <LoadingSpinner active={loading}/>
 
-                    <ControlsMenu
-                        active={isInMenu}
-                        startingMode={mode}
-                        onChangeAppMode={this.handleChangeAppMode}
-                        onLaunchLoginModal={() => this.setState({ inLoginModal: true })}
-                    />
+                            <ControlsMenu
+                                active={isInMenu}
+                                startingMode={mode}
+                                onChangeAppMode={this.handleChangeAppMode}
+                                onLaunchLoginModal={() => this.setState({ inLoginModal: true })}
+                            />
 
-                    {isInMenu &&
-                        <SettingsMenu
-                            onStart={this.onStartModeSelection}
-                            mode={mode}
-                        />
-                    }
+                        {isInMenu &&
+                            <SettingsMenu
+                                onStart={this.onStartModeSelection}
+                                mode={mode}
+                            />
+                        }
 
-                    {gameConfig && !inResultsScreen &&
-                        <MemoryGame
-                            key={sessionKey.value}
-                            sessionKey={sessionKey.value}
-                            data={this.getLearnableData()}
-                            settings={gameConfig}
-                            onFinish={this.onGameFinish}
-                        />
-                    }
+                        {gameConfig && !inResultsScreen &&
+                            <MemoryGame
+                                key={sessionKey.value}
+                                sessionKey={sessionKey.value}
+                                data={this.getLearnableData()}
+                                settings={gameConfig}
+                                onFinish={this.onGameFinish}
+                            />
+                        }
 
-                    {inResultsScreen && gameResult &&
-                        <GameResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
-                    }
+                        {inResultsScreen && gameResult &&
+                            <GameResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
+                        }
 
-                    {learnConfig && !inResultsScreen &&
-                        <Learn
-                            key={sessionKey.value}
-                            data={data ?? this.getLearnableData()}
-                            onFinish={this.onLearningFinish}
-                            card={dataConfig?.topic.cards!}
-                        />
-                    }
+                        {learnConfig && !inResultsScreen &&
+                            <Learn
+                                key={sessionKey.value}
+                                data={data ?? this.getLearnableData()}
+                                onFinish={this.onLearningFinish}
+                                card={dataConfig?.topic.cards!}
+                            />
+                        }
 
-                    {learningResult && inResultsScreen &&
-                        <LearningResultScreen
-                            result={learningResult}
-                            onDismiss={this.onLearningResultMenuClose}
-                            onPractice={this.onPracticeStart}
-                        />
-                    }
+                        {learningResult && inResultsScreen &&
+                            <LearningResultScreen
+                                result={learningResult}
+                                onDismiss={this.onLearningResultMenuClose}
+                                onPractice={this.onPracticeStart}
+                            />
+                        }
 
-                    {inLoginModal && (
-                        <UserForm
-                            location={""}
-                            show={inLoginModal}
-                            onClose={() => this.setState({ inLoginModal: false })}
-                        />
-                    )}
-                </MainErrorBoundary>
+                        {inLoginModal && (
+                            <UserForm
+                                location={""}
+                                show={inLoginModal}
+                                onClose={() => this.setState({ inLoginModal: false })}
+                            />
+                        )}
+                    </MainErrorBoundary>
+                </Provider>
             </div>
         );
     }

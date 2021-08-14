@@ -3,6 +3,8 @@ import { Router } from "react-router-dom";
 import ControlsMenu, { ControlsMenuProps } from "../../../components/layout/ControlsMenu";
 import { createMemoryHistory } from "history";
 import { AppMode } from "../../../types/AppMode";
+import { Provider } from "react-redux";
+import { userStore } from "../../../store";
 
 const history = createMemoryHistory();
 const onChangeAppModeHandler = jest.fn();
@@ -11,7 +13,14 @@ const onLaunchLoginModalHandler = jest.fn();
 let props: ControlsMenuProps;
 
 const setup = () => {
-    const component = render(<Router history={history}><ControlsMenu {...props} /></Router>);
+    const component = render(
+        <Router history={history}>
+            <Provider store={userStore}>
+                <ControlsMenu {...props} />
+            </Provider>
+        </Router>
+    );
+
     return {
         home: component.getByText('Home'),
         mode: component.getByText('Learn'),
