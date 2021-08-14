@@ -21,6 +21,7 @@ import { SessionSettings } from "../../types/session/settings/SessionSettings";
 import GameSettings from "../../types/session/settings/game/GameSettings";
 import DataSettings  from "../../types/session/settings/data/DataSettings";
 import LearnSettings from "../../types/session/settings/LearnSettings";
+import UserForm from "../user/UserForm";
 
 interface MainMenuPageState {
     loading: boolean;
@@ -33,6 +34,7 @@ interface MainMenuPageState {
     sessionKey: SessionID,
     mode: AppMode;
     data?: Learnable[];
+    inLoginModal: boolean;
 }
 
 interface PageParameters {
@@ -53,7 +55,8 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
             learningResult: undefined,
             sessionKey: new SessionID(),
             mode: AppMode.PLAY,
-            data: undefined
+            data: undefined,
+            inLoginModal: false,
         }
     }
 
@@ -65,7 +68,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
     render() {
         const {
             loading, gameConfig, learnConfig, dataConfig, inResultsScreen, gameResult, learningResult, mode,
-            sessionKey, data
+            sessionKey, data, inLoginModal
         } = this.state;
 
         const isInMenu = !gameConfig && !learnConfig && !inResultsScreen && !learningResult;
@@ -75,7 +78,12 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                 <MainErrorBoundary>
                     <LoadingSpinner active={loading}/>
 
-                    <ControlsMenu onChangeAppMode={this.handleChangeAppMode} active={isInMenu} startingMode={mode} />
+                    <ControlsMenu
+                        active={isInMenu}
+                        startingMode={mode}
+                        onChangeAppMode={this.handleChangeAppMode}
+                        onLaunchLoginModal={() => this.setState({ inLoginModal: true })}
+                    />
 
                     {isInMenu &&
                         <SettingsMenu
@@ -114,6 +122,14 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                             onPractice={this.onPracticeStart}
                         />
                     }
+
+                    {inLoginModal && (
+                        <UserForm
+                            location={""}
+                            show={inLoginModal}
+                            onClose={() => this.setState({ inLoginModal: false })}
+                        />
+                    )}
                 </MainErrorBoundary>
             </div>
         );

@@ -95,6 +95,7 @@ const setup = () => {
       kanji: component.getByText('Jōyō Kanji'),
       basics: component.getByText('Basics'),
       calendar: component.getByText('Days & Months'),
+      login: component.getByText('Login'),
       ...component
    }
 }
@@ -110,6 +111,25 @@ test('Changing the AppMode in the ControlsMenu should update the SettingsMenu', 
    expect(screen.getByText('Select Game Mode'));
    fireEvent.click(mode);
    expect(screen.getByText('Select Topic'));
+});
+
+test('Clicking the login button while not logged in should launch the user modal', () => {
+   const { login } = setup();
+   fireEvent.click(login);
+   expect(screen.getByTestId('user-modal')).toBeInTheDocument();
+});
+
+test('Clicking "x" close button in the user modal should close it', () => {
+   const { login } = setup();
+
+   //Clicking login should load the modal
+   fireEvent.click(login);
+   const userModal = screen.getByTestId('user-modal');
+   expect(userModal).toBeInTheDocument();
+
+   //Clicking the 'x' button should close it
+   fireEvent.click(screen.getByText('Close'));
+   expect(userModal).not.toBeInTheDocument();
 });
 
 describe('Play', () => {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import styles from "../../styles/sass/components/user/LoginRegistrationForm.module.scss";
+import styles from "../../styles/sass/components/user/UserForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
