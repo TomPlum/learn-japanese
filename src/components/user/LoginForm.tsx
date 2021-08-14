@@ -22,7 +22,7 @@ const LoginForm = (props: LoginFormProps) => {
     const handleSubmit = () => {
         setLoading(true);
         //TODO: Hit REST API and get JWT token
-        dispatchUser(setUser({ username: username, nickname: "Tom" }));
+        dispatchUser(setUser({ username: username, nickname: "" }));
         setLoading(false);
         props.onSuccess();
     }

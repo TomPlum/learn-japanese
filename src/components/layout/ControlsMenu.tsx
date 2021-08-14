@@ -1,5 +1,5 @@
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { faHome, faUser, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FontSelector from "../ui/select/FontSelector";
 import HashLink from "./HashLink";
@@ -7,7 +7,7 @@ import ThemeButton from "../ui/buttons/ThemeButton";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 import AppModeButton from "../ui/buttons/AppModeButton";
 import { AppMode } from "../../types/AppMode";
-import { useUserSelector } from "../../hooks";
+import UserButton from "../user/UserButton";
 
 export interface ControlsMenuProps {
     onChangeAppMode: (mode: AppMode) => void;
@@ -18,11 +18,6 @@ export interface ControlsMenuProps {
 
 const ControlsMenu = (props: ControlsMenuProps) => {
     const { onChangeAppMode, onLaunchLoginModal, startingMode, active } = props;
-
-    const userState = useUserSelector(state => state.user);
-    const user = userState.user;
-    const userNickname = user?.nickname;
-    const username = user?.username;
 
     return (
         <Navbar variant="dark" fixed="top" className={styles.navbar}>
@@ -67,14 +62,7 @@ const ControlsMenu = (props: ControlsMenuProps) => {
                         </Col>*/}
 
                         <Col>
-                            <Nav.Link className={styles.navLink} onClick={onLaunchLoginModal} disabled={!active}>
-                                <div>
-                                    <FontAwesomeIcon icon={user ? faUserTie : faUser} className={styles.icon}/>
-                                </div>
-                                <span className={styles.linkText}>
-                                {!!user ? userNickname ? user.nickname : username : 'Login'}
-                            </span>
-                            </Nav.Link>
+                           <UserButton onClick={onLaunchLoginModal} disabled={!active} />
                         </Col>
                     </Row>
                 </Nav>

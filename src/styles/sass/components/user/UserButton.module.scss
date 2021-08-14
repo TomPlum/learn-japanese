@@ -1,0 +1,41 @@
+@import "src/styles/sass/mixins";
+@import "src/styles/sass/animations";
+
+@mixin toggle {
+  background-color: transparent !important;
+  border: none;
+  padding: 0;
+}
+
+.toggle {
+  @include toggle;
+  color: rgba(255,255,255,.5);
+}
+
+.disabled {
+  @include toggle;
+  color: rgba(255,255,255,.25);
+}
+
+.toggle:hover {
+  color: #FFF;
+}
+
+.toggle:focus, .toggle:active {
+  outline: 0;
+  border: none;
+  box-shadow: none;
+  @include noSelect;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dropdown {
+  //@include fadeIn(0.5);
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.1em;
+}
+
+.dropdown a {
+  padding: 5px 15px;
+  transition: all ease 0.2s;
+}
