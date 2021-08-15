@@ -21,11 +21,11 @@
   color: #FFF;
 }
 
-.toggle:focus, .toggle:active {
+.toggle:focus, .toggle:active, .dropdown:focus, .dropdown:active {
+  @include noSelect;
   outline: 0;
   border: none;
   box-shadow: none;
-  @include noSelect;
   -webkit-tap-highlight-color: transparent;
 }
 
