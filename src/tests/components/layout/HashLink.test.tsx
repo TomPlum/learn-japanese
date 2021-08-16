@@ -15,3 +15,8 @@ test('Passing a className property should append it to the link component', () =
     const { container } = render(<HashLink path="/path" className="example-class" />);
     expect(container.firstChild).toHaveClass('example-class');
 });
+
+test('Should disable the link when the disabled property is passed as true', () => {
+    const { container } = render(<HashLink path="/path" disabled={true} />);
+    expect(container.firstChild).toHaveAttribute('aria-disabled', "true");
+});
