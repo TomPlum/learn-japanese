@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Theme } from "../../../types/Theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faLightbulb, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { Nav } from "react-bootstrap";
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
 
@@ -28,7 +28,7 @@ class ThemeButton extends Component<ThemeButtonProps, ThemeButtonState> {
         return (
             <Nav.Link className={className} onClick={this.handleOnClick}>
                 <div>
-                    <FontAwesomeIcon icon={theme === Theme.DARK ? faSun : faMoon} className={menuStyles.icon} />
+                    <FontAwesomeIcon icon={theme === Theme.DARK ? faLightbulb : faMoon} className={menuStyles.icon} />
                 </div>
                 <span className={menuStyles.linkText}>{theme === Theme.DARK ? "Light" : "Dark"}</span>
             </Nav.Link>
