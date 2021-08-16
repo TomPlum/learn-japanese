@@ -1,5 +1,5 @@
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FontSelector from "../ui/select/FontSelector";
 import HashLink from "./HashLink";
@@ -52,14 +52,14 @@ const ControlsMenu = (props: ControlsMenuProps) => {
                             }}/>
                         </Col>
 
-                        {/*    <Col>
+                        <Col>
                             <HashLink path="/help" className={styles.navLink}>
                                 <div>
                                     <FontAwesomeIcon icon={faQuestionCircle} className={styles.icon} />
                                 </div>
                                 <span className={styles.linkText}>Help</span>
                             </HashLink>
-                        </Col>*/}
+                        </Col>
 
                         <Col>
                            <UserButton onClick={onLaunchLoginModal} disabled={!active} />
