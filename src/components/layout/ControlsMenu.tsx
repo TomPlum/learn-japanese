@@ -25,7 +25,7 @@ const ControlsMenu = (props: ControlsMenuProps) => {
                 <Nav className={styles.nav}>
                     <Row className={styles.row} noGutters>
                         <Col>
-                            <HashLink path="/" className={styles.navLink}>
+                            <HashLink path="/" className={styles.navLink} disabled={!active}>
                                 <div>
                                     <FontAwesomeIcon icon={faHome} className={styles.icon}/>
                                 </div>

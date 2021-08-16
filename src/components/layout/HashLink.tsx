@@ -1,20 +1,19 @@
-import { Component } from "react";
 import { Nav } from "react-bootstrap";
+import React from "react";
 
 interface HashLinkProps {
     path: string;
+    disabled?: boolean;
     className?: string;
 }
 
-class HashLink extends Component<HashLinkProps> {
-    render() {
-        const { path, className, children } = this.props;
-        return (
-            <Nav.Link href={process.env.REACT_APP_BASE_PATH + path} className={className}>
-                {children}
-            </Nav.Link>
-        );
-    }
+const HashLink = (props: React.PropsWithChildren<HashLinkProps>) => {
+    const { path, className, disabled, children } = props;
+    return (
+        <Nav.Link href={process.env.REACT_APP_BASE_PATH + path} className={className} disabled={disabled}>
+            {children}
+        </Nav.Link>
+    );
 }
 
 export default HashLink;

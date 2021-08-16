@@ -12,11 +12,11 @@ export interface UserButtonProps {
     disabled: boolean;
 }
 
+
 const UserButton = React.forwardRef((props: UserButtonProps, ref: React.ForwardedRef<HTMLDivElement>) => {
     const userDispatch = useUserDispatch();
     const userSelector = useUserSelector(state => state.user);
     const user = userSelector.user;
-    console.log(user)
     const userNickname = user?.nickname;
     const username = user?.username;
 
@@ -33,11 +33,17 @@ const UserButton = React.forwardRef((props: UserButtonProps, ref: React.Forwarde
 
     const disabled = props.disabled;
 
-    const CustomToggle = React.forwardRef((props: { children: ReactChildren, onClick: React.MouseEvent }, ref: React.Ref<HTMLAnchorElement>) => (
-        <Nav.Link ref={ref} onClick={(e: React.MouseEvent) => handleClick(e, props.onClick)} className={menuStyles.navLink}>
-            {props.children}
-        </Nav.Link>
-    ));
+    type CustomToggleProps = { children: ReactChildren, onClick: React.MouseEvent };
+
+    const CustomToggle = React.forwardRef((props: CustomToggleProps, ref: React.Ref<HTMLAnchorElement>) => {
+        const handleToggleClick = (e: React.MouseEvent) => handleClick(e, props.onClick);
+
+        return (
+            <Nav.Link ref={ref} disabled={disabled} onClick={handleToggleClick} className={menuStyles.navLink}>
+                {props.children}
+            </Nav.Link>
+        );
+    });
 
     return (
         <Dropdown ref={ref}>
