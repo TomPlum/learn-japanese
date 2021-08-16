@@ -75,10 +75,18 @@ test('Renders correct overlay body text for when the user has exhausted all thei
     expect(await screen.findByText('You\'ve already used your 3 hints.')).toBeInTheDocument()
 });
 
-test('Should disable the hint button when the disabled property is passed as true', () => {
+test('Should render the disabled info title when the button is disabled', async () => {
     props.disabled = true;
     render(<HintButton {...props} />);
-    expect(screen.getByTitle('Hints are disabled.')).toBeDisabled();
+    fireEvent.click(screen.getByTitle('Hints are disabled.'));
+    expect(await screen.findByText('Hints are disabled')).toBeInTheDocument();
+});
+
+test('Should render the disabled info body when the button is disabled', async () => {
+    props.disabled = true;
+    render(<HintButton {...props} />);
+    fireEvent.click(screen.getByTitle('Hints are disabled.'));
+    expect(await screen.findByText('You\'ll have to choose a preset with hints enabled or customise the game settings.')).toBeInTheDocument();
 });
 
 test('Revealing the hint button should call the onUse event handler', async () => {

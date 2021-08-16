@@ -7,6 +7,7 @@ import { KanjiSettingsBuilder } from "../../session/settings/data/KanjiSettings"
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";
 import LearnableField from "../../learn/LearnableField";
 import { TimeSettingsBuilder } from "../../session/settings/game/TimeSettings";
+import { HintSettingsBuilder } from "../../session/settings/game/HintSettings";
 
 export default class PlayKanjiModes implements PlayMenuModes {
     getModes(): PlayMode[] {
@@ -17,6 +18,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
                     .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
+                    .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
                     .withQuestionSettings(new QuestionSettingsBuilder()
                         .withFields(LearnableField.MEANING, LearnableField.KANJI)
                         .withType(QuestionType.CHOICE)

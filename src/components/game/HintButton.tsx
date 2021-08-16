@@ -72,7 +72,6 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
                 <Button
                     title={!disabled ? "Get a Hint" : "Hints are disabled."}
                     variant="warning"
-                    disabled={disabled}
                     className={buttonClasses}
                     style={{ width: viewport === Viewport.PHONE ? "50px" : "auto"}}
                 >
@@ -85,7 +84,11 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
 
     private getTitle = () => {
         const { revealed } = this.state;
-        const { quantity, remaining, infinite } = this.props;
+        const { quantity, remaining, infinite, disabled } = this.props;
+
+        if (disabled) {
+            return "Hints are disabled"
+        }
 
         if (remaining === 1 && revealed) {
             return "This is your last hint!"
@@ -102,7 +105,11 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
     }
 
     private getContent = () => {
-        const { data, quantity, remaining } = this.props;
+        const { data, quantity, remaining, disabled } = this.props;
+
+        if (disabled) {
+            return "You'll have to choose a preset with hints enabled or customise the game settings.";
+        }
 
         if (remaining <= 0) {
             return "You've already used your " + quantity + " hints.";
