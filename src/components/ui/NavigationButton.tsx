@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import React, { PropsWithChildren, useRef, useState } from "react";
 import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
+import HashLink from "../layout/HashLink";
 
 export interface NavigationButtonProps {
     text: string;
@@ -40,9 +41,9 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
                 <FontAwesomeIcon key={`${key}-icon`} icon={props.icon} className={styles.itemIcon} fixedWidth />
             )}
 
-            <a href={props.href} onClick={handleClick} className={className} style={props.style} key={key}>
+            <HashLink path={props.href} onClick={handleClick} className={className} style={props.style} key={key}>
                 {props.children}
-            </a>
+            </HashLink>
         </div>
     );
 };

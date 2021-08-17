@@ -1,5 +1,5 @@
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FontSelectorButton from "../ui/buttons/FontSelectorButton";
 import HashLink from "./HashLink";
@@ -8,6 +8,7 @@ import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss
 import AppModeButton from "../ui/buttons/AppModeButton";
 import { AppMode } from "../../types/AppMode";
 import UserButton from "../user/UserButton";
+import HelpButton from "../ui/buttons/HelpButton";
 
 export interface ControlsMenuProps {
     onChangeAppMode: (mode: AppMode) => void;
@@ -52,12 +53,7 @@ const ControlsMenu = (props: ControlsMenuProps) => {
                         </Col>
 
                         <Col>
-                            <HashLink path="/help" className={styles.navLink}>
-                                <div>
-                                    <FontAwesomeIcon icon={faQuestionCircle} className={styles.icon} />
-                                </div>
-                                <span className={styles.linkText}>Help</span>
-                            </HashLink>
+                            <HelpButton />
                         </Col>
 
                         <Col>
