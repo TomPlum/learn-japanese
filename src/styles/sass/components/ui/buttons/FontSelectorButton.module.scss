@@ -1,9 +1,19 @@
+@import "src/styles/sass/colours";
+
 .check {
   float: right;
 }
 
 .font {
   font-size: 1.1em;
+}
+
+.selected {
+  color: $bootstrap-green;
+}
+
+.inactive {
+  color: $bootstrap-red;
 }
 
 .menu {

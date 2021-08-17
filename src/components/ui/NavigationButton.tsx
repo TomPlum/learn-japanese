@@ -8,6 +8,7 @@ import HashLink from "../layout/HashLink";
 export interface NavigationButtonProps {
     text: string;
     icon: IconDefinition;
+    width?: number;
     className?: string;
     menuClass?: string;
     iconClass?: string;
@@ -20,6 +21,7 @@ export interface NavigationButtonProps {
 
 export interface ItemProps {
     icon?: IconDefinition;
+    iconClass?: string;
     className?: string;
     href?: string;
     style?: {};
@@ -38,7 +40,12 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
     return (
         <div className={styles.itemWrapper} key={`${key}-wrapper`}>
             {props.icon && (
-                <FontAwesomeIcon key={`${key}-icon`} icon={props.icon} className={styles.itemIcon} fixedWidth />
+                <FontAwesomeIcon
+                    fixedWidth
+                    icon={props.icon}
+                    key={`${key}-icon`}
+                    className={[styles.itemIcon, props.iconClass].join(" ")}
+                />
             )}
 
             <HashLink path={props.href} onClick={handleClick} className={className} style={props.style} key={key}>
@@ -80,7 +87,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
             </Nav.Link>
 
             <Overlay show={show} target={targetRef} placement="bottom" container={ref.current} rootClose={!props.stickyMenu} onHide={handleHide}>
-                <Popover id={props.text + "-button"} className={styles.popover}>
+                <Popover id={props.text + "-button"} className={styles.popover} style={{ width: props.width }}>
                     <Popover.Content className={styles.content}>
                         {props.children}
                     </Popover.Content>

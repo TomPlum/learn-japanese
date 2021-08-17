@@ -38,13 +38,16 @@ const FontSelectorButton = (props: FontSelectorProps) => {
             textClass={menuStyles.linkText}
         >
             {fonts.map((font: Font) => {
+                const isSelected = selected === font.displayName;
+
                 return (
                     <NavigationButton.Item
                         onClick={handleSelect}
                         key={font.displayName}
                         className={styles.font}
+                        iconClass={isSelected ? styles.selected : styles.inactive}
                         style={{ fontFamily: font.name }}
-                        icon={selected === font.displayName ? faCheck : faCircle}
+                        icon={isSelected ? faCheck : faCircle}
                     >
                         {font.displayName}
                     </NavigationButton.Item>

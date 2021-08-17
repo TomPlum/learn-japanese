@@ -33,6 +33,10 @@
   background-color: $dark-1;
 }
 
+.itemWrapper:hover a {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
 .item {
   @include noSelect;
   padding: 12px 15px;
@@ -52,7 +56,6 @@
 
 .item:hover {
   text-decoration: none;
-  color: $light-1;
 }
 
 .itemIcon {
