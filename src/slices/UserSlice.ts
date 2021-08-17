@@ -5,7 +5,7 @@ export interface User {
     nickname?: string;
 }
 
-interface UserState {
+export interface UserState {
     user?: User
 }
 
@@ -27,5 +27,4 @@ export const userSlice = createSlice({
 });
 
 export const { setUser, clearUser } = userSlice.actions
-
 export default userSlice.reducer;
