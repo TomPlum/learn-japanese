@@ -48,8 +48,7 @@ const ControlsMenu = (props: ControlsMenuProps) => {
                         </Col>
 
                         <Col>
-                            <FontSelector className={styles.navLink} onSelect={() => {
-                            }}/>
+                            <FontSelector className={styles.navLink} />
                         </Col>
 
                         <Col>

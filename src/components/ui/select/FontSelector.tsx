@@ -3,10 +3,10 @@ import { faCheck, faFont } from "@fortawesome/free-solid-svg-icons";
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
 import styles from "../../../styles/sass/components/ui/select/FontSelector.module.scss";
 import NavigationButton from "../NavigationButton";
+import { faCircle } from "@fortawesome/free-regular-svg-icons";
 
 interface FontSelectorProps {
     className?: string;
-    onSelect: (font: string) => void;
 }
 
 interface Font {
@@ -20,7 +20,6 @@ const FontSelector = (props: FontSelectorProps) => {
 
     const handleSelect = (value: string) => {
         setSelected(value);
-        props.onSelect(value);
     }
 
     const fonts: Font[] = [
@@ -41,11 +40,11 @@ const FontSelector = (props: FontSelectorProps) => {
             {fonts.map((font: Font) => {
                 return (
                     <NavigationButton.Item
+                        onClick={handleSelect}
                         key={font.displayName}
                         className={styles.font}
                         style={{ fontFamily: font.name }}
-                        icon={selected === font.displayName ? faCheck : undefined}
-                        onClick={(name: string) => handleSelect(fonts.find(it => it.displayName === name)?.name!)}
+                        icon={selected === font.displayName ? faCheck : faCircle}
                     >
                         {font.displayName}
                     </NavigationButton.Item>
