@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import FontSelector from "../../../../components/ui/select/FontSelector";
+import FontSelectorButton from "../../../../components/ui/buttons/FontSelectorButton";
 
 const setup = () => {
-    const component = render(<FontSelector />);
+    const component = render(<FontSelectorButton />);
     return {
         toggle: component.getByText('Font'),
         ...component

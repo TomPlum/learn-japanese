@@ -1,7 +1,7 @@
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import { faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FontSelector from "../ui/select/FontSelector";
+import FontSelectorButton from "../ui/buttons/FontSelectorButton";
 import HashLink from "./HashLink";
 import ThemeButton from "../ui/buttons/ThemeButton";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
@@ -48,7 +48,7 @@ const ControlsMenu = (props: ControlsMenuProps) => {
                         </Col>
 
                         <Col>
-                            <FontSelector className={styles.navLink} />
+                            <FontSelectorButton className={styles.navLink} />
                         </Col>
 
                         <Col>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { faCheck, faFont } from "@fortawesome/free-solid-svg-icons";
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
-import styles from "../../../styles/sass/components/ui/select/FontSelector.module.scss";
+import styles from "../../../styles/sass/components/ui/buttons/FontSelectorButton.module.scss";
 import NavigationButton from "../NavigationButton";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";
 
@@ -14,7 +14,7 @@ interface Font {
     name: string;
 }
 
-const FontSelector = (props: FontSelectorProps) => {
+const FontSelectorButton = (props: FontSelectorProps) => {
 
     const [selected, setSelected] = useState("Ciutadella");
 
@@ -54,4 +54,4 @@ const FontSelector = (props: FontSelectorProps) => {
     );
 }
 
-export default FontSelector;
+export default FontSelectorButton;
