@@ -1,0 +1,58 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  padding: 0;
+}
+
+.popover > div::after {
+  border-bottom-color: $dark-1 !important;
+}
+
+.popover {
+  width: 160px;
+  animation: fade 0.05s ease-in forwards;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.1em;
+  background-color: $dark-2;
+  border: 2px solid $dark-1;
+  border-radius: 12px;
+}
+
+.item {
+  @include noSelect;
+  padding: 12px 15px;
+  display: block;
+  color: $light-2;
+  transition: all ease 0.25s;
+  text-decoration: none;
+}
+
+.item:nth-child(n+1) {
+  border-bottom: 2px solid $dark-1;
+}
+
+.item:last-child {
+  border: none;
+}
+
+.item:hover {
+  cursor: pointer;
+  text-decoration: none;
+  color: $light-1;
+  background-color: $dark-1;
+}
+
+.link {
+  transition: all ease 0.25s;
+  text-align: center;
+}
+
+.link:hover {
+  color: $light-1 !important;
+}
