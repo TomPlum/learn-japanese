@@ -19,9 +19,9 @@ test('Clicking the toggle should render the menu', async () => {
     expect(await screen.findByText('Segoe UI')).toBeInTheDocument();
 });
 
-test('Clicking a font option from the menu should call the onSelect event handler with that font', () => {
+test('Clicking a font option from the menu should call the onSelect event handler with that font', async () => {
     const { toggle } = setup();
     fireEvent.click(toggle);
-    fireEvent.click(screen.getByText('Ciutadella'));
+    fireEvent.click(await screen.findByText('Ciutadella'));
     expect(onSelectHandler).toHaveBeenCalledWith('Ciutadella Rounded Medium');
 });

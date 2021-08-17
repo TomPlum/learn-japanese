@@ -21,6 +21,7 @@ export interface ItemProps {
     icon?: IconDefinition;
     className?: string;
     href?: string;
+    style?: {};
     onClick?: (value: string) => void;
 }
 
@@ -30,10 +31,16 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
         props.onClick?.(props.children as string)
     }
 
+    const className = [props.className, styles.item].join(" ");
+    const key = props.children?.toString();
+
     return (
-        <div className={styles.itemWrapper}>
-            {props.icon && <FontAwesomeIcon icon={props.icon} className={styles.itemIcon} fixedWidth />}
-            <a href={props.href} onClick={handleClick} className={[props.className, styles.item].join(" ")}>
+        <div className={styles.itemWrapper} key={`${key}-wrapper`}>
+            {props.icon && (
+                <FontAwesomeIcon key={`${key}-icon`} icon={props.icon} className={styles.itemIcon} fixedWidth />
+            )}
+
+            <a href={props.href} onClick={handleClick} className={className} style={props.style} key={key}>
                 {props.children}
             </a>
         </div>
