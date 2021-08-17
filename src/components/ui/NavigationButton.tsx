@@ -13,22 +13,30 @@ export interface NavigationButtonProps {
     textClass?: string;
     disabled?: boolean;
     stickyMenu?: boolean;
+    disableDropdown?: boolean;
     onClick?: () => void;
 }
 
-const Item = (props: PropsWithChildren<{ icon?: IconDefinition, onClick?: (value: string) => void, className?: string }>) => {
+export interface ItemProps {
+    icon?: IconDefinition;
+    className?: string;
+    href?: string;
+    onClick?: (value: string) => void;
+}
+
+const Item = (props: PropsWithChildren<ItemProps>) => {
 
     const handleClick = () => {
         props.onClick?.(props.children as string)
     }
 
     return (
-        <>
-            {props.icon && <FontAwesomeIcon icon={props.icon} fixedWidth />}
-            <a onClick={handleClick} className={[props.className, styles.item].join(" ")}>
+        <div className={styles.itemWrapper}>
+            {props.icon && <FontAwesomeIcon icon={props.icon} className={styles.itemIcon} fixedWidth />}
+            <a href={props.href} onClick={handleClick} className={[props.className, styles.item].join(" ")}>
                 {props.children}
             </a>
-        </>
+        </div>
     );
 };
 
@@ -38,7 +46,11 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
     const targetRef = useRef(null);
 
     const handleClick = () => {
-        setShow(!show);
+        if (!props.disableDropdown) {
+            setShow(!show);
+        } else {
+            props.onClick?.();
+        }
     };
 
     const handleHide = () => {
@@ -59,7 +71,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                 </span>
             </Nav.Link>
 
-            <Overlay show={show} target={targetRef} placement="bottom" container={ref.current} rootClose={props.stickyMenu} onHide={handleHide}>
+            <Overlay show={show} target={targetRef} placement="bottom" container={ref.current} rootClose={!props.stickyMenu} onHide={handleHide}>
                 <Popover id={props.text + "-button"} className={styles.popover}>
                     <Popover.Content className={styles.content}>
                         {props.children}

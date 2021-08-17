@@ -1,81 +1,57 @@
-import React, { ReactChildren } from "react";
-import { Dropdown, Nav } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import { faChartBar, faDoorOpen, faUser, faUserCircle, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { useUserDispatch, useUserSelector } from "../../hooks";
 import { clearUser } from "../../slices/UserSlice";
-import styles from "../../styles/sass/components/user/UserButton.module.scss";
 import menuStyles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
+import NavigationButton from "../ui/NavigationButton";
 
 export interface UserButtonProps {
     onClick: () => void;
     disabled: boolean;
 }
 
-
-const UserButton = React.forwardRef((props: UserButtonProps, ref: React.ForwardedRef<HTMLDivElement>) => {
+const UserButton = (props: UserButtonProps) => {
     const userDispatch = useUserDispatch();
     const userSelector = useUserSelector(state => state.user);
     const user = userSelector.user;
-    const userNickname = user?.nickname;
-    const username = user?.username;
 
-    const handleClick = (e: React.MouseEvent, parentEvent: any) => {
-        if (user) {
-            parentEvent(e);
-            e.preventDefault();
+    const getButtonText = (): string => {
+        if (userSelector.user) {
+            const user = userSelector.user;
+            if (user.nickname) {
+                return user.nickname;
+            } else {
+                return user.username;
+            }
         } else {
-            props.onClick();
-            e.stopPropagation();
+            return "Login";
         }
-        return false;
     }
 
-    const disabled = props.disabled;
-
-    type CustomToggleProps = { children: ReactChildren, onClick: React.MouseEvent };
-
-    const CustomToggle = React.forwardRef((props: CustomToggleProps, ref: React.Ref<HTMLAnchorElement>) => {
-        const handleToggleClick = (e: React.MouseEvent) => handleClick(e, props.onClick);
-
-        return (
-            <Nav.Link ref={ref} disabled={disabled} onClick={handleToggleClick} className={menuStyles.navLink}>
-                {props.children}
-            </Nav.Link>
-        );
-    });
-
     return (
-        <Dropdown ref={ref}>
-            <Dropdown.Toggle as={CustomToggle} className={disabled ? styles.disabled : styles.toggle}>
-                <div>
-                    <FontAwesomeIcon icon={user ? faUserTie : faUser} className={menuStyles.icon}/>
-                </div>
-                <span className={menuStyles.linkText}>
-                   {user ? userNickname ? user.nickname : username : 'Login'}
-                </span>
-            </Dropdown.Toggle>
+        <NavigationButton
+            text={getButtonText()}
+            onClick={props.onClick}
+            disableDropdown={!user}
+            disabled={props.disabled}
+            iconClass={menuStyles.icon}
+            textClass={menuStyles.linkText}
+            icon={user ? faUserTie : faUser}
+            stickyMenu={false}
+        >
+            <NavigationButton.Item icon={faUserCircle}>
+                Profile
+            </NavigationButton.Item>
 
-            {user && (
-                <Dropdown.Menu className={styles.dropdown}>
-                    <Dropdown.Item>
-                        <FontAwesomeIcon icon={faUserCircle} fixedWidth/>
-                        {' Profile'}
-                    </Dropdown.Item>
+            <NavigationButton.Item icon={faChartBar}>
+                Stats
+            </NavigationButton.Item>
 
-                    <Dropdown.Item>
-                        <FontAwesomeIcon icon={faChartBar} fixedWidth/>
-                        {' Stats'}
-                    </Dropdown.Item>
-
-                    <Dropdown.Item onClick={() => userDispatch(clearUser())}>
-                        <FontAwesomeIcon icon={faDoorOpen} fixedWidth/>
-                        {' Logout'}
-                    </Dropdown.Item>
-                </Dropdown.Menu>
-            )}
-        </Dropdown>
+            <NavigationButton.Item icon={faDoorOpen} onClick={() => userDispatch(clearUser())}>
+                Logout
+            </NavigationButton.Item>
+        </NavigationButton>
     );
-});
+}
 
 export default UserButton;

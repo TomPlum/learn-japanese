@@ -24,28 +24,41 @@
   border-radius: 12px;
 }
 
+.itemWrapper {
+  transition: all ease 0.25s;
+  cursor: pointer;
+}
+
+.itemWrapper:hover {
+  background-color: $dark-1;
+}
+
 .item {
   @include noSelect;
   padding: 12px 15px;
-  display: block;
+  display: inline-block;
   color: $light-2;
   transition: all ease 0.25s;
   text-decoration: none;
 }
 
-.item:nth-child(n+1) {
+.itemWrapper:nth-child(n+1) {
   border-bottom: 2px solid $dark-1;
 }
 
-.item:last-child {
+.itemWrapper:last-child {
   border: none;
 }
 
 .item:hover {
-  cursor: pointer;
   text-decoration: none;
   color: $light-1;
-  background-color: $dark-1;
+}
+
+.itemIcon {
+  color: #FFF;
+  margin-left: 10px;
+  margin-right: -6px;
 }
 
 .link {
