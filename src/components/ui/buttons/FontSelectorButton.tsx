@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { faCheck, faFont } from "@fortawesome/free-solid-svg-icons";
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
-import styles from "../../../styles/sass/components/ui/buttons/FontSelectorButton.module.scss";
 import NavigationButton from "../NavigationButton";
+import { useFontDispatch } from "../../../hooks";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";
+import styles from "../../../styles/sass/components/ui/buttons/FontSelectorButton.module.scss";
+import { setFont } from "../../../slices/FontSlice";
 
 interface FontSelectorProps {
     className?: string;
@@ -16,10 +18,12 @@ interface Font {
 
 const FontSelectorButton = (props: FontSelectorProps) => {
 
-    const [selected, setSelected] = useState("Ciutadella");
+    const [selected, setSelected] = useState("Gothic");
+    const fontDispatcher = useFontDispatch();
 
     const handleSelect = (value: string) => {
         setSelected(value);
+        fontDispatcher(setFont(value));
     }
 
     const fonts: Font[] = [
@@ -34,6 +38,7 @@ const FontSelectorButton = (props: FontSelectorProps) => {
             stickyMenu
             icon={faFont}
             menuClass={styles.menu}
+            className={props.className}
             iconClass={menuStyles.icon}
             textClass={menuStyles.linkText}
         >
