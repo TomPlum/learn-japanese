@@ -14,7 +14,6 @@ export interface NavigationButtonProps {
     iconClass?: string;
     textClass?: string;
     disabled?: boolean;
-    stickyMenu?: boolean;
     disableDropdown?: boolean;
     onClick?: () => void;
 }
@@ -86,7 +85,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                 </span>
             </Nav.Link>
 
-            <Overlay show={show} target={targetRef} placement="bottom" container={ref.current} rootClose={!props.stickyMenu} onHide={handleHide}>
+            <Overlay show={show} target={targetRef} placement="bottom" container={ref.current} rootClose={true} onHide={handleHide}>
                 <Popover id={props.text + "-button"} className={styles.popover} style={{ width: props.width }}>
                     <Popover.Content className={styles.content}>
                         {props.children}

@@ -37,7 +37,6 @@ const FontSelectorButton = (props: FontSelectorProps) => {
     return (
         <NavigationButton
             text="Font"
-            stickyMenu
             icon={faFont}
             menuClass={styles.menu}
             className={props.className}

@@ -35,7 +35,6 @@ const UserButton = (props: UserButtonProps) => {
             iconClass={menuStyles.icon}
             textClass={menuStyles.linkText}
             icon={user ? faUserTie : faUser}
-            stickyMenu={false}
         >
             <NavigationButton.Item icon={faUserCircle}>
                 Profile
