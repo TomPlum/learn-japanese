@@ -1,9 +1,10 @@
-import { Nav, Overlay, Popover } from "react-bootstrap";
+import { Form, Nav, Overlay, Popover } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import React, { PropsWithChildren, useRef, useState } from "react";
+import React, { PropsWithChildren, ReactElement, ReactNode, useRef, useState } from "react";
 import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
 import HashLink from "../layout/HashLink";
+import SearchField from "./fields/SearchField";
 
 export interface NavigationButtonProps {
     text: string;
@@ -15,6 +16,7 @@ export interface NavigationButtonProps {
     textClass?: string;
     disabled?: boolean;
     disableDropdown?: boolean;
+    searchable?: boolean;
     onClick?: () => void;
 }
 
@@ -56,6 +58,7 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
 
 const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
     const [show, setShow] = useState(false);
+    const [search, setSearch] = useState("");
     const ref = useRef(null);
     const targetRef = useRef(null);
 
@@ -87,8 +90,21 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
 
             <Overlay show={show} target={targetRef} placement="bottom" container={ref.current} rootClose={true} onHide={handleHide}>
                 <Popover id={props.text + "-button"} className={styles.popover} style={{ width: props.width }}>
+                    {props.searchable && <Form.Control
+                        type="text"
+                        value={search}
+                        placeholder="Search"
+                        className={styles.search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />}
+
                     <Popover.Content className={styles.content}>
-                        {props.children}
+                        {
+                            React.Children.map(props.children, (child) => child)?.filter((child: ReactNode) => {
+                                const value = (child as ReactElement).props.children.toString();
+                                return search === "" || value.toLowerCase().includes(search.toLowerCase());
+                            })
+                        }
                     </Popover.Content>
                 </Popover>
             </Overlay>

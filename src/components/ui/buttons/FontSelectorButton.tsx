@@ -36,6 +36,7 @@ const FontSelectorButton = (props: FontSelectorProps) => {
 
     return (
         <NavigationButton
+            searchable
             text="Font"
             icon={faFont}
             menuClass={styles.menu}

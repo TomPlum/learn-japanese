@@ -72,3 +72,21 @@
 .link:hover {
   color: $light-1 !important;
 }
+
+.search {
+  color: #FFF;
+  border-radius: 12px !important;
+  background-color: $dark-2;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 2px solid $dark-1 !important;
+}
+
+.search:focus {
+  color: #FFF;
+  background-color: $dark-2;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+}
