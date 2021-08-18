@@ -4,7 +4,6 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import React, { PropsWithChildren, ReactElement, ReactNode, useRef, useState } from "react";
 import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
 import HashLink from "../layout/HashLink";
-import SearchField from "./fields/SearchField";
 
 export interface NavigationButtonProps {
     text: string;
@@ -59,6 +58,7 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
 const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
+    const [expandSearch, setExpandSearch] = useState(false);
     const ref = useRef(null);
     const targetRef = useRef(null);
 
@@ -74,13 +74,30 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
         setShow(false);
     };
 
+    const handleExited = () => {
+        setSearch("")
+        setExpandSearch(false);
+    }
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const search = e.target.value;
+        setSearch(search);
+        if (!search) {
+            setExpandSearch(false);
+        }
+    }
+
     const className = [props.className, styles.link].join(" ");
 
     return (
         <div ref={ref} className={styles.container}>
             <Nav.Link className={className} onClick={handleClick} disabled={props.disabled}>
                 <div>
-                    <FontAwesomeIcon icon={props.icon} className={props.iconClass} />
+                    <FontAwesomeIcon
+                        fixedWidth
+                        icon={props.icon}
+                        className={props.iconClass}
+                    />
                 </div>
 
                 <span ref={targetRef} className={props.textClass}>
@@ -88,14 +105,24 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                 </span>
             </Nav.Link>
 
-            <Overlay show={show} target={targetRef} placement="bottom" container={ref.current} rootClose={true} onHide={handleHide}>
+            <Overlay
+                show={show}
+                rootClose={true}
+                placement="bottom"
+                target={targetRef}
+                onHide={handleHide}
+                onExited={handleExited}
+                container={ref.current}
+            >
                 <Popover id={props.text + "-button"} className={styles.popover} style={{ width: props.width }}>
                     {props.searchable && <Form.Control
                         type="text"
                         value={search}
                         placeholder="Search"
+                        onChange={handleSearch}
                         className={styles.search}
-                        onChange={(e) => setSearch(e.target.value)}
+                        onFocus={() => setExpandSearch(true)}
+                        style={{ height: expandSearch ? 45 : 30 }}
                     />}
 
                     <Popover.Content className={styles.content}>

@@ -81,6 +81,7 @@
   border-right: none;
   border-left: none;
   border-bottom: 2px solid $dark-1 !important;
+  transition: height ease-in-out 0.5s;
 }
 
 .search:focus {
