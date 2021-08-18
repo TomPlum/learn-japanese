@@ -12,12 +12,10 @@ export interface UserButtonProps {
 
 const UserButton = (props: UserButtonProps) => {
     const userDispatch = useUserDispatch();
-    const userSelector = useUserSelector(state => state.user);
-    const user = userSelector.user;
+    const user = useUserSelector(state => state.user.user);
 
     const getButtonText = (): string => {
-        if (userSelector.user) {
-            const user = userSelector.user;
+        if (user) {
             if (user.nickname) {
                 return user.nickname;
             } else {

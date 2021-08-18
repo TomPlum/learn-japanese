@@ -14,6 +14,10 @@
     @include frontSizeWrapper;
     font-size: 1.5em;
   }
+
+  .display {
+    height: 275px;
+  }
 }
 
 @include tablet {
@@ -22,6 +26,10 @@
     @include frontSizeWrapper;
     font-size: 2em;
   }
+
+  .display {
+    height: 335px;
+  }
 }
 
 @include desktop {
@@ -29,6 +37,10 @@
     @include wrapperDesktop;
     @include frontSizeWrapper;
     font-size: 2.4em;
+  }
+
+  .display {
+    height: 410px;
   }
 }
 

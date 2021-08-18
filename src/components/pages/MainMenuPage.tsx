@@ -22,7 +22,7 @@ import GameSettings from "../../types/session/settings/game/GameSettings";
 import DataSettings  from "../../types/session/settings/data/DataSettings";
 import LearnSettings from "../../types/session/settings/LearnSettings";
 import UserForm from "../user/UserForm";
-import { userStore } from "../../store";
+import { store } from "../../store";
 import { Provider } from "react-redux";
 
 interface MainMenuPageState {
@@ -77,7 +77,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
 
         return (
             <div className={styles.wrapper}>
-                <Provider store={userStore}>
+                <Provider store={store}>
                     <MainErrorBoundary>
                         <LoadingSpinner active={loading}/>
 

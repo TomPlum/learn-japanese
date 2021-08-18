@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, screen } from "@testing-library/react";
 import KanaChoiceQuestion, { ChoiceQuestionProps } from "../../../../components/game/questions/ChoiceQuestion";
 import { Kana } from "../../../../types/kana/Kana";
 import KanaType from "../../../../types/kana/KanaType";
@@ -7,6 +7,7 @@ import Arrays from "../../../../utility/Arrays";
 import { getByTextWithElements } from "../../../Queries";
 import React from "react";
 import LearnableField from "../../../../types/learn/LearnableField";
+import renderReduxConsumer from "../../../renderReduxConsumer";
 
 const isValidHandler = jest.fn();
 
@@ -19,7 +20,7 @@ let props: ChoiceQuestionProps
 const ref = React.createRef<KanaChoiceQuestion>();
 
 const setup = () => {
-    const component = render(<KanaChoiceQuestion {...props} ref={ref} />);
+    const component = renderReduxConsumer(<KanaChoiceQuestion {...props} ref={ref} />);
     return {
         ...component
     }

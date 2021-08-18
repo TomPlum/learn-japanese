@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import UserForm, { LoginRegistrationFormProps } from "../../../components/user/UserForm";
+import UserForm, { UserFormProps } from "../../../components/user/UserForm";
 import { Provider } from "react-redux";
-import { userStore } from "../../../store";
+import { store } from "../../../store";
 
-let props: LoginRegistrationFormProps;
+let props: UserFormProps;
 
 const onCloseHandler = jest.fn();
 
@@ -16,7 +16,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<Provider store={userStore}><UserForm {...props} /></Provider>);
+    const component = render(<Provider store={store}><UserForm {...props} /></Provider>);
     return {
         switchForm: component.getByText("I don't have an account"),
         close: component.getByText('Close'),

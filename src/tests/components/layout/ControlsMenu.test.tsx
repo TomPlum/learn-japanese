@@ -4,7 +4,7 @@ import ControlsMenu, { ControlsMenuProps } from "../../../components/layout/Cont
 import { createMemoryHistory } from "history";
 import { AppMode } from "../../../types/AppMode";
 import { Provider } from "react-redux";
-import { userStore } from "../../../store";
+import { store } from "../../../store";
 
 const history = createMemoryHistory();
 const onChangeAppModeHandler = jest.fn();
@@ -15,7 +15,7 @@ let props: ControlsMenuProps;
 const setup = () => {
     const component = render(
         <Router history={history}>
-            <Provider store={userStore}>
+            <Provider store={store}>
                 <ControlsMenu {...props} />
             </Provider>
         </Router>

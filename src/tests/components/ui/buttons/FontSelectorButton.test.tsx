@@ -1,8 +1,9 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import FontSelectorButton from "../../../../components/ui/buttons/FontSelectorButton";
+import renderReduxConsumer from "../../../renderReduxConsumer";
 
 const setup = () => {
-    const component = render(<FontSelectorButton />);
+    const component = renderReduxConsumer(<FontSelectorButton />);
     return {
         toggle: component.getByText('Font'),
         ...component
@@ -12,7 +13,8 @@ const setup = () => {
 test('Clicking the toggle should render the menu', async () => {
     const { toggle } = setup();
     fireEvent.click(toggle);
-    expect(await screen.findByText('Ciutadella')).toBeInTheDocument();
-    expect(await screen.findByText('Montserrat')).toBeInTheDocument();
-    expect(await screen.findByText('Segoe UI')).toBeInTheDocument();
+    expect(await screen.findByText('Default')).toBeInTheDocument();
+    expect(await screen.findByText('Handwriting')).toBeInTheDocument();
+    expect(await screen.findByText('Gothic')).toBeInTheDocument();
+    expect(await screen.findByText('Mincho')).toBeInTheDocument();
 });

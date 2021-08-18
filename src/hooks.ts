@@ -1,9 +1,8 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import type { UserState, UserDispatch, FontDispatch } from './store'
-import { FontState } from "./slices/FontSlice";
+import type { AppDispatch, RootState } from './store'
 
-export const useUserDispatch = () => useDispatch<UserDispatch>();
-export const useUserSelector: TypedUseSelectorHook<UserState> = useSelector
+export const useUserDispatch = () => useDispatch<AppDispatch>();
+export const useUserSelector: TypedUseSelectorHook<RootState> = useSelector
 
-export const useFontDispatch = () => useDispatch<FontDispatch>();
-export const useFontSelector: TypedUseSelectorHook<FontState> = useSelector
+export const useFontDispatch = () => useDispatch<AppDispatch>();
+export const useFontSelector: TypedUseSelectorHook<RootState> = useSelector

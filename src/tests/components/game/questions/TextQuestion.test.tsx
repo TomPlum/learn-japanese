@@ -1,7 +1,8 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, screen } from "@testing-library/react";
 import TextQuestion, { TextQuestionProps } from "../../../../components/game/questions/TextQuestion";
 import React from "react";
 import LearnableField from "../../../../types/learn/LearnableField";
+import renderReduxConsumer from "../../../renderReduxConsumer";
 
 const isValidHandler = jest.fn();
 const ref = React.createRef<TextQuestion>()
@@ -19,7 +20,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<TextQuestion {...props} ref={ref} />);
+    const component = renderReduxConsumer(<TextQuestion {...props} ref={ref} />);
     return {
         input: component.getByPlaceholderText('Rōmaji'),
         ...component
@@ -75,12 +76,12 @@ test('Populating the Rōmaji input with a truthy value should call the isValid e
 
 test('Passing the hidden property has true should disable the Rōmaji input field', () => {
     props.hidden = true;
-    render(<TextQuestion {...props} />);
+    renderReduxConsumer(<TextQuestion {...props} />);
     expect(screen.getByPlaceholderText('Paused')).toBeDisabled();
 });
 
 test('Passing the hidden property has true should set the Rōmaji input placeholder as \'Paused\'', () => {
     props.hidden = true;
-    render(<TextQuestion {...props} />);
+    renderReduxConsumer(<TextQuestion {...props} />);
     expect(screen.getByPlaceholderText('Paused')).toBeInTheDocument();
 });

@@ -1,5 +1,5 @@
 import MemoryGame, { MemoryGameProps } from "../../../components/game/MemoryGame";
-import { cleanup, fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { cleanup, fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import { QuestionType } from "../../../types/game/QuestionType";
 import { Kana } from "../../../types/kana/Kana";
 import KanaType from "../../../types/kana/KanaType";
@@ -14,6 +14,7 @@ import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSe
 import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
 import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
 import LearnableField from "../../../types/learn/LearnableField";
+import renderReduxConsumer from "../../renderReduxConsumer";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -95,7 +96,7 @@ afterEach(() => {
 });
 
 const setup = () => {
-    const component = render(<MemoryGame {...props} />);
+    const component = renderReduxConsumer(<MemoryGame {...props} />);
     return {
         submit: component.getByText('Check'),
         skip: component.getByText('Skip'),
@@ -660,7 +661,7 @@ test('Enabling hints should render the HintButton in an enabled state', () => {
 
 test('Disabling hints should render the HintButton in a disabled state', async () => {
     props.settings = new GameSettingsBuilder().withHintSettings(new HintSettingsBuilder().isEnabled(false).build()).build();
-    render(<MemoryGame {...props} />);
+    renderReduxConsumer(<MemoryGame {...props} />);
     fireEvent.click(screen.getByTitle('Hints are disabled.'));
     expect(await screen.findByText('Hints are disabled')).toBeInTheDocument();
 });

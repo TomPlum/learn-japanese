@@ -1,6 +1,7 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, screen } from "@testing-library/react";
 import MatchQuestion, { MatchQuestionProps } from "../../../../components/game/questions/MatchQuestion";
 import React from "react";
+import renderReduxConsumer from "../../../renderReduxConsumer";
 
 let props: MatchQuestionProps;
 
@@ -16,7 +17,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<MatchQuestion {...props} ref={ref} />);
+    const component = renderReduxConsumer(<MatchQuestion {...props} ref={ref} />);
     return {
         questionOne: component.getByText('pa'),
         questionTwo: component.getByText('yo'),

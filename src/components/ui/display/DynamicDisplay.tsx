@@ -3,10 +3,12 @@ import React, { useImperativeHandle, useState } from "react";
 import { KanaDisplayStyle } from "./KanaDisplay";
 import { Textfit } from "@tomplum/react-textfit";
 import styles from "../../../styles/sass/components/ui/display/DynamicDisplay.module.scss";
+import { useFontSelector } from "../../../hooks";
 
 const DynamicDisplay = React.forwardRef((props: { value: string, className?: string, style?: KanaDisplayStyle }, ref) => {
     const [loading, setLoading] = useState(true);
     const [active, setActive] = useState(false);
+    const selectedFont = useFontSelector(state => state.font.selected);
 
     useImperativeHandle(ref, () => ({
         notify: () => setActive(true)
@@ -27,8 +29,8 @@ const DynamicDisplay = React.forwardRef((props: { value: string, className?: str
                 className={[styles.text].concat(style?.container ?? []).join(" ")}
             >
                 <span
-                    style={style?.character}
                     onAnimationEnd={() => setActive(false)}
+                    style={{ color: style?.character?.color, fontFamily: selectedFont }}
                     className={[props.className, styles.value, style?.character?.className, active ? styles.active : ""].join(" ")}
                 >
                     {props.value}

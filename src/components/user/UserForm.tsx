@@ -6,19 +6,19 @@ import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 
-export interface LoginRegistrationFormProps {
+export interface UserFormProps {
     show: boolean;
     location: string;
     onClose: () => void;
 }
 
-interface LoginRegistrationFormState {
+interface UserFormState {
     login: boolean;
 }
 
-class UserForm extends Component<LoginRegistrationFormProps, LoginRegistrationFormState> {
+class UserForm extends Component<UserFormProps, UserFormState> {
 
-    constructor(props: Readonly<LoginRegistrationFormProps> | LoginRegistrationFormProps) {
+    constructor(props: Readonly<UserFormProps> | UserFormProps) {
         super(props);
         this.state = {
             login: true,

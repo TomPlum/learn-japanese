@@ -5,7 +5,7 @@ export interface FontState {
 }
 
 const initialState: FontState = {
-    selected: "Gothic"
+    selected: ""
 }
 
 export const fontSlice = createSlice({
