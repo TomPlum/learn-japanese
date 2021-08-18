@@ -23,9 +23,9 @@ const FontSelectorButton = (props: FontSelectorProps) => {
     }
 
     const fonts: Font[] = [
-        { displayName: "Ciutadella", name: "Ciutadella Rounded Medium" },
-        { displayName: "Montserrat", name: "Montserrat" },
-        { displayName: "Segoe UI", name: "Segoe UI" },
+        { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
+        { displayName: "Gothic", name: "K Gothic" },
+        { displayName: "Mincho", name: "Appli Mincho" }, //アプリ明朝 <- Name in Japanese
     ];
 
     return (
