@@ -3,6 +3,7 @@ import { faChartBar, faDoorOpen, faUser, faUserCircle, faUserTie } from "@fortaw
 import { useUserDispatch, useUserSelector } from "../../hooks";
 import { clearUser } from "../../slices/UserSlice";
 import menuStyles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
+import styles from "../../styles/sass/components/user/UserButton.module.scss";
 import NavigationButton from "../ui/NavigationButton";
 
 export interface UserButtonProps {
@@ -36,15 +37,15 @@ const UserButton = (props: UserButtonProps) => {
             textClass={menuStyles.linkText}
             icon={user ? faUserTie : faUser}
         >
-            <NavigationButton.Item icon={faUserCircle}>
+            <NavigationButton.Item icon={faUserCircle} iconClass={styles.profile}>
                 Profile
             </NavigationButton.Item>
 
-            <NavigationButton.Item icon={faChartBar}>
+            <NavigationButton.Item icon={faChartBar} iconClass={styles.stats}>
                 Stats
             </NavigationButton.Item>
 
-            <NavigationButton.Item icon={faDoorOpen} onClick={() => userDispatch(clearUser())}>
+            <NavigationButton.Item icon={faDoorOpen} onClick={() => userDispatch(clearUser())} iconClass={styles.logout}>
                 Logout
             </NavigationButton.Item>
         </NavigationButton>
