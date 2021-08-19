@@ -99,11 +99,11 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                     <FontAwesomeIcon
                         fixedWidth
                         icon={props.icon}
-                        className={props.iconClass}
+                        className={[props.iconClass, show ? styles.active : "", styles.icon].join(" ")}
                     />
                 </div>
 
-                <span ref={targetRef} className={props.textClass}>
+                <span ref={targetRef} className={[props.textClass, show ? styles.active : "", styles.text].join(" ")}>
                     {props.text}
                 </span>
             </Nav.Link>

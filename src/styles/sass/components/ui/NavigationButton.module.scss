@@ -91,3 +91,11 @@
   box-shadow: none;
   outline: none;
 }
+
+.active {
+  color: #FFF;
+}
+
+.icon, .text {
+  transition: color ease-in-out 0.2s;
+}
