@@ -32,10 +32,12 @@ const FontSelectorButton = (props: FontSelectorProps) => {
         { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
         { displayName: "Gothic", name: "K Gothic" },
         { displayName: "Mincho", name: "Appli Mincho" }, //アプリ明朝 <- Name in Japanese
+        { displayName: "Test", name: "Test" }
     ];
 
     return (
         <NavigationButton
+            show={4}
             searchable
             text="Font"
             icon={faFont}

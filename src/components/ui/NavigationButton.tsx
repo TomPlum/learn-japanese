@@ -4,6 +4,8 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import React, { PropsWithChildren, ReactElement, ReactNode, useRef, useState } from "react";
 import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
 import HashLink from "../layout/HashLink";
+import ScrollableContainer from "./ScrollableContainer";
+import ConditionalWrapper from "./ConditionalWrapper";
 
 export interface NavigationButtonProps {
     text: string;
@@ -16,6 +18,7 @@ export interface NavigationButtonProps {
     disabled?: boolean;
     disableDropdown?: boolean;
     searchable?: boolean;
+    show?: number;
     onClick?: () => void;
 }
 
@@ -126,12 +129,20 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                     />}
 
                     <Popover.Content className={styles.content}>
-                        {
-                            React.Children.map(props.children, (child) => child)?.filter((child: ReactNode) => {
-                                const value = (child as ReactElement).props.children.toString();
-                                return search === "" || value.toLowerCase().includes(search.toLowerCase());
-                            })
-                        }
+                        <ConditionalWrapper
+                            condition={!!props.show}
+                            wrapper={(children) => (
+                                <ScrollableContainer height={props.show! * 55} hideScrollBar>
+                                    {children}
+                                </ScrollableContainer>
+                            )}>
+                            <>{
+                                React.Children.map(props.children, (child) => child)?.filter((child: ReactNode) => {
+                                    const value = (child as ReactElement).props.children.toString();
+                                    return search === "" || value.toLowerCase().includes(search.toLowerCase());
+                                })
+                            }</>
+                        </ConditionalWrapper>
                     </Popover.Content>
                 </Popover>
             </Overlay>

@@ -25,3 +25,8 @@
 .container::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.hideScroll {
+  overflow-y: scroll;
+  padding-right: 0;
+}
