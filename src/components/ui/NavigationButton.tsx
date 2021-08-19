@@ -2,10 +2,10 @@ import { Form, Nav, Overlay, Popover } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import React, { PropsWithChildren, ReactElement, ReactNode, useRef, useState } from "react";
-import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
 import HashLink from "../layout/HashLink";
 import ScrollableContainer from "./ScrollableContainer";
 import ConditionalWrapper from "./ConditionalWrapper";
+import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
 
 export interface NavigationButtonProps {
     text: string;
