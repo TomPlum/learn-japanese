@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import styles from "../../styles/sass/components/user/UserForm.module.scss";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -17,9 +17,29 @@ const LoginForm = (props: LoginFormProps) => {
     const [usernameValid, setUsernameValid] = useState(false);
     const [passwordValid, setPasswordValid] = useState(false);
     const [loading, setLoading] = useState(false);
+    const usernameField = useRef<HTMLInputElement>(null);
     const dispatchUser = useUserDispatch();
 
-    const handleSubmit = () => {
+    const formValid = usernameValid && passwordValid;
+
+    useEffect(() =>  usernameField?.current?.focus(), []);
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (formValid && e.key === 'Enter') {
+                login();
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        }
+    }, [username, password]);
+
+    const login = () => {
         setLoading(true);
         //TODO: Hit REST API and get JWT token
         dispatchUser(setUser({ username: username, nickname: "" }));
@@ -30,13 +50,13 @@ const LoginForm = (props: LoginFormProps) => {
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const username = e.target.value;
         setUsername(username);
-        setUsernameValid(!!username);
+        setUsernameValid(username.length > 0);
     }
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const password = e.target.value;
         setPassword(password);
-        setPasswordValid(!!password);
+        setPasswordValid(password.length > 0);
     }
 
     return (
@@ -46,6 +66,7 @@ const LoginForm = (props: LoginFormProps) => {
                 <Form.Control
                     required
                     value={username}
+                    ref={usernameField}
                     placeholder="Username"
                     isValid={usernameValid}
                     isInvalid={!usernameValid}
@@ -67,7 +88,7 @@ const LoginForm = (props: LoginFormProps) => {
             </Form.Group>
 
             <Form.Group>
-                <Button className={styles.login} variant={"success"} onClick={handleSubmit} disabled={!(usernameValid && passwordValid)}>
+                <Button className={styles.login} variant="success" onClick={login} disabled={!formValid}>
                     {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth/>}
                     {' Login'}
                 </Button>
