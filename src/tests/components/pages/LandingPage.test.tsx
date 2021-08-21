@@ -110,11 +110,11 @@ test('Should render the help button', () => {
     expect(help).toBeInTheDocument();
 });
 
-test('Should render the kana carousel', () => {
+test('Should render the kana carousel', async () => {
     getRandomObject.mockReturnValueOnce([new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false), []]); //Parallax BG
     getRandomObject.mockReturnValueOnce([ new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false), []]); //Carousel
     setup();
-    expect(screen.getByText('あ')).toBeInTheDocument();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
 });
 
 test('Clicking the play button should route the user to /menu/play', () => {

@@ -15,7 +15,7 @@ import SentenceStructureSettings from "../types/session/settings/data/SentenceSt
 import NumbersSettings from "../types/session/settings/data/NumbersSettings";
 
 export default class LearningDataRepository {
-    public read(settings?: DataSettings): Learnable[] {
+    public async read(settings?: DataSettings): Promise<Learnable[]> {
         if (!settings) return [];
 
         switch (settings.topic) {

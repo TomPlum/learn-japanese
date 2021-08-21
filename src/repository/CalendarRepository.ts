@@ -6,7 +6,7 @@ import Definition from "../types/sentence/Definition";
 import CalendarSettings from "../types/session/settings/data/CalendarSettings";
 
 export default class CalendarRepository implements Repository<Learnable> {
-    public read(config: CalendarSettings): Learnable[] {
+    public read(config: CalendarSettings): Promise<Learnable[]> {
         let data = [];
 
         if (config.months) {
@@ -25,7 +25,7 @@ export default class CalendarRepository implements Repository<Learnable> {
             data.push(...this.convert(phrases(), "Common Phrase"));
         }
 
-        return data;
+        return Promise.all(data);
     }
 
     private convert(data: DayData[], title: string): Definition[] {

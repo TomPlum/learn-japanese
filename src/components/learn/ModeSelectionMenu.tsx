@@ -5,7 +5,7 @@ import MenuDescription from "../ui/MenuDescription";
 import LearnTopicButton from "./LearnTopicButton";
 import StartButton from "../ui/buttons/StartButton";
 import Arrays from "../../utility/Arrays";
-import { faCog, faCogs, faDatabase, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch, faCog, faCogs, faDatabase, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "./Search";
 import { Learnable } from "../../types/learn/Learnable";
@@ -35,6 +35,8 @@ interface ModeSelectionMenuState {
     isConfiguringGame: boolean;
     isConfiguringData: boolean;
     searching: boolean;
+    searchData: Learnable[];
+    loading: boolean;
 }
 
 class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionMenuState> {
@@ -47,7 +49,9 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
             isConfiguringGame: false,
             isConfiguringData: false,
             customGameSettings: undefined,
-            customDataSettings: undefined
+            customDataSettings: undefined,
+            loading: false,
+            searchData: []
         }
     }
 
@@ -58,7 +62,9 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
     }
 
     render() {
-        const { selected, searching, isConfiguringGame, isConfiguringData, customGameSettings, customDataSettings } = this.state;
+        const { selected, searching, isConfiguringGame, isConfiguringData,
+            customGameSettings, customDataSettings, searchData, loading
+        } = this.state;
         const { appMode, topic } = this.props;
 
         const DataSettingsMenu = topic.menu as React.FunctionComponent<DataSettingsMenuProps<any>>;
@@ -119,8 +125,8 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
 
                         {appMode === AppMode.LEARN && (
                             <Col xs={2} className="pl-1">
-                                <Button className={styles.search} title="Search" onClick={() => this.setState({ searching: true })}>
-                                    <FontAwesomeIcon icon={faSearch} fixedWidth/>
+                                <Button className={styles.search} title="Search" onClick={this.startSearch}>
+                                    <FontAwesomeIcon icon={loading ? faCircleNotch : faSearch} spin={loading} fixedWidth/>
                                 </Button>
                             </Col>
                         )}
@@ -147,8 +153,8 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
 
                 {searching && (
                     <Search
-                        data={this.getSelectedTopicData()}
-                        tags={Arrays.distinct(this.getSelectedTopicData().flatMap(it => it.getTags()))}
+                        data={searchData}
+                        tags={Arrays.distinct(searchData.flatMap(it => it.getTags()))}
                     />
                 )}
 
@@ -196,8 +202,12 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
         this.setState({ selected: mode });
     }
 
-    private getSelectedTopicData = (): Learnable[] => {
-        return new LearningDataRepository().read(this.state.selected.dataSettings);
+    private startSearch = () => {
+        this.setState({ loading: true }, () => {
+            new LearningDataRepository().read(this.state.selected.dataSettings).then(data => {
+                this.setState({ loading: false, searchData: data, searching: true });
+            }).catch(e => this.setState({ loading: false }));
+        });
     }
 
     private getDescription = () => {

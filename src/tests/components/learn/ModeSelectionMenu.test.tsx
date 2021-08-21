@@ -374,10 +374,10 @@ describe("Example 2 - Calendar", () => {
         );
     });
 
-    test('Clicking the Search button should launch the search menu with the selected topic', () => {
+    test('Clicking the Search button should launch the search menu with the selected topic', async () => {
         const { days, search } = setup();
         fireEvent.click(days);
         fireEvent.click(search);
-        expect(screen.getByText('Monday')).toBeInTheDocument();
+        expect(await screen.findByText('Monday')).toBeInTheDocument();
     });
 });

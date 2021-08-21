@@ -12,7 +12,7 @@ import { joyo, kyoiku } from "../data/Kanji";
 
 //TODO: Integrate Kanji Filters & create new ones for grades etc.
 export class KanjiRepository implements Repository<Kanji> {
-    public read(settings: KanjiSettings): Kanji[] {
+    public async read(settings: KanjiSettings): Promise<Kanji[]> {
         if (!settings) return [];
 
         if (settings.joyo) {

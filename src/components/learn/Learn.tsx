@@ -56,7 +56,7 @@ class Learn extends Component<LearnProps, LearnState> {
         const hasCardsRemaining = remaining.length > 0;
 
         return (
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper} data-testid="learn">
                 <Container className={styles.innerWrapper}>
                     {paused && <ConfirmModal
                         title={"Are you sure you want to quit?"}

@@ -95,7 +95,8 @@ describe("Learn Data Repository", () => {
     });
 
     test('Passing in falsy settings should return an empty array', () => {
-        const response = repository.read(undefined);
-        expect(response).toHaveLength(0);
+       return repository.read(undefined).then(response => {
+           expect(response).toHaveLength(0);
+       });
     });
 });

@@ -124,7 +124,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         const { data, settings } = this.props;
 
         return (
-            <Container className={styles.wrapper}>
+            <Container className={styles.wrapper} data-testid="memory-game">
                 {isQuitting && (
                     <ConfirmModal
                         onConfirm={this.onQuit}

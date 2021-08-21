@@ -39,34 +39,44 @@ describe("Kana Repository", () => {
     const repository = new KanaRepository();
 
     it("Should return only the quantity specified when the config parameter is passed", () => {
-        const config = new KanaSettingsBuilder().withHiragana().withQuantity(3).build();
-        const data = repository.read(config);
-        expect(data).toHaveLength(3);
+        const settings = new KanaSettingsBuilder().withHiragana().withQuantity(3).build();
+        return repository.read(settings).then(response => {
+            expect(response).toHaveLength(3);
+        });
     });
 
     it("Should return only diacriticals when specifying diacriticals", () => {
-        const config = new KanaSettingsBuilder().withHiragana().withKatakana().withDiacriticals().withDiagraphs(false).withRegularKana(false).build();
-        const data = repository.read(config);
-        expect(data.map((data: Kana) => data.code)).toStrictEqual(["ぎ", "ズ"]);
+        const settings = new KanaSettingsBuilder()
+            .withHiragana().withKatakana().withDiacriticals()
+            .withDiagraphs(false).withRegularKana(false)
+            .build();
+
+        return repository.read(settings).then(response => {
+            expect(response.map((data: Kana) => data.code)).toStrictEqual(["ぎ", "ズ"]);
+        });
     });
 
     it("Should return max quantity when passed as undefined", () => {
-        const config = new KanaSettingsBuilder().withHiragana().withMaxQuantity().build();
-        const data = repository.read(config);
-        expect(data).toHaveLength(5);
+        const settings = new KanaSettingsBuilder().withHiragana().withMaxQuantity().build();
+        return repository.read(settings).then(response => {
+            expect(response).toHaveLength(5);
+        });
     });
 
     it("Should return only diagraphs when specifying them", () => {
-        const config = new KanaSettingsBuilder().withHiragana().withKatakana().withOnlyDiagraphs().build();
-        const data = repository.read(config);
-        expect(data.map((data: Kana) => data.code)).toStrictEqual(["ぎゃ", "シャ"]);
+        const settings = new KanaSettingsBuilder().withHiragana().withKatakana().withOnlyDiagraphs().build();
+        return repository.read(settings).then(response => {
+            expect(response.map((data: Kana) => data.code)).toStrictEqual(["ぎゃ", "シャ"]);
+        });
     });
 
     it("Should return all kana when specifying everything", () => {
-        const config = new KanaSettingsBuilder().withEverything().build();
-        const data = repository.read(config);
-        expect(data.map((data: Kana) => data.code)).toStrictEqual(["あ", "い", "う", "え", "お", "ぎ", "ぎゃ", "ア", "イ", "ウ", "エ", "オ", "ズ", "シャ"]);
-    })
+        const settings = new KanaSettingsBuilder().withEverything().build();
+        return repository.read(settings).then(response => {
+            const expected = ["あ", "い", "う", "え", "お", "ぎ", "ぎゃ", "ア", "イ", "ウ", "エ", "オ", "ズ", "シャ"];
+            expect(response.map((data: Kana) => data.code)).toStrictEqual(expected);
+        });
+    });
 
     describe("Hiragana", () => {
         describe("Read", () => {
@@ -78,8 +88,12 @@ describe("Kana Repository", () => {
                     column: KanaColumn.VOWEL,
                     diacritical: false
                 }]);
-                const response = repository.read(new KanaSettingsBuilder().withHiragana().build());
-                expect(response[0]).toStrictEqual(new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false));
+
+                const settings = new KanaSettingsBuilder().withHiragana().build();
+
+                return repository.read(settings).then(response => {
+                    expect(response[0]).toStrictEqual(new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false));
+                });
             });
         });
     });
@@ -94,8 +108,10 @@ describe("Kana Repository", () => {
                     column: KanaColumn.VOWEL,
                     diacritical: false
                 }]);
-                const response = repository.read(new KanaSettingsBuilder().withKatakana().build());
-                expect(response[0]).toStrictEqual(new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false));
+                const settings = new KanaSettingsBuilder().withKatakana().build();
+                return repository.read(settings).then(response => {
+                    expect(response[0]).toStrictEqual(new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false));
+                });
             });
         });
     });

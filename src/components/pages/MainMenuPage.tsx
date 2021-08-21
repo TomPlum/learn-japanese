@@ -35,7 +35,7 @@ interface MainMenuPageState {
     learningResult?: LearningSessionResult;
     sessionKey: SessionID,
     mode: AppMode;
-    data?: Learnable[];
+    data: Learnable[];
     inLoginModal: boolean;
 }
 
@@ -57,7 +57,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
             learningResult: undefined,
             sessionKey: new SessionID(),
             mode: AppMode.PLAY,
-            data: undefined,
+            data: [],
             inLoginModal: false,
         }
     }
@@ -73,7 +73,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
             sessionKey, data, inLoginModal
         } = this.state;
 
-        const isInMenu = !gameConfig && !learnConfig && !inResultsScreen && !learningResult;
+        const isInMenu = !gameConfig && !learnConfig && !inResultsScreen && !learningResult && !loading;
 
         return (
             <div className={styles.wrapper}>
@@ -81,12 +81,12 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                     <MainErrorBoundary>
                         <LoadingSpinner active={loading}/>
 
-                            <ControlsMenu
-                                active={isInMenu}
-                                startingMode={mode}
-                                onChangeAppMode={this.handleChangeAppMode}
-                                onLaunchLoginModal={() => this.setState({ inLoginModal: true })}
-                            />
+                        <ControlsMenu
+                            active={isInMenu}
+                            startingMode={mode}
+                            onChangeAppMode={this.handleChangeAppMode}
+                            onLaunchLoginModal={() => this.setState({ inLoginModal: true })}
+                        />
 
                         {isInMenu &&
                             <SettingsMenu
@@ -95,11 +95,11 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                             />
                         }
 
-                        {gameConfig && !inResultsScreen &&
+                        {gameConfig && !inResultsScreen && data.length > 0 &&
                             <MemoryGame
                                 key={sessionKey.value}
                                 sessionKey={sessionKey.value}
-                                data={this.getLearnableData()}
+                                data={data}
                                 settings={gameConfig}
                                 onFinish={this.onGameFinish}
                             />
@@ -109,10 +109,10 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                             <GameResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
                         }
 
-                        {learnConfig && !inResultsScreen &&
+                        {learnConfig && !inResultsScreen && data.length > 0 &&
                             <Learn
                                 key={sessionKey.value}
-                                data={data ?? this.getLearnableData()}
+                                data={data}
                                 onFinish={this.onLearningFinish}
                                 card={dataConfig?.topic.cards!}
                             />
@@ -139,15 +139,15 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
         );
     }
 
-    private getLearnableData = (): Learnable[] => {
-        return new LearningDataRepository().read(this.state.dataConfig);
-    }
-
     private onStartModeSelection = (settings: SessionSettings) => {
         this.setState({
             gameConfig: settings.gameSettings,
             learnConfig: settings.learnSettings,
-            dataConfig: settings.dataSettings
+            dataConfig: settings.dataSettings,
+            loading: true
+        }, () => {
+            new LearningDataRepository().read(settings.dataSettings)
+                .then(data => this.setState({ data: data, loading: false }));
         });
     }
 
@@ -157,7 +157,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
         learningResult: undefined,
         learnConfig: undefined,
         inResultsScreen: false,
-        data: undefined
+        data: []
     });
 
     private onGameFinish = (result: GameResult) => this.setState({

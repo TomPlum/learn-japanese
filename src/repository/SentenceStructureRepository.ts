@@ -6,25 +6,27 @@ import { Learnable } from "../types/learn/Learnable";
 import SentenceStructureSettings from "../types/session/settings/data/SentenceStructureSettings";
 
 export default class SentenceStructureRepository implements Repository<Learnable> {
-    read(settings: SentenceStructureSettings): Learnable[] {
+    read(settings: SentenceStructureSettings): Promise<Learnable[]> {
+
+        const data = [];
 
         if (settings.adjectives) {
-            return adjectives().map((it: AdjectiveData) => this.convert(it, it.type + " Adjective"));
+            data.push(...adjectives().map((it: AdjectiveData) => this.convert(it, it.type + " Adjective")));
         }
-        
+
         if (settings.verbs) {
-            return verbs().map((it: VerbData) => this.convert(it, it.type + " Verb"));
+            data.push(...verbs().map((it: VerbData) => this.convert(it, it.type + " Verb")));
         }
 
         if (settings.adverbs) {
-            return adverbs().map((it: AdverbData) => new Definition(it.meanings, it.kanjiForm, it.kana, "Adverb"));
+            data.push(...adverbs().map((it: AdverbData) => this.convert(it, "Adverb")));
         }
 
         if (settings.expressions) {
-            return expressions().map((it: ExpressionData) => new Definition(it.meanings, it.kanjiForm, it.kana, "Expression"));
+            data.push(...expressions().map((it: ExpressionData) => this.convert(it, "Expression")));
         }
 
-        return [];
+        return Promise.all(data);
     }
 
     private convert(data: SentenceStructureData, title: string): Definition {

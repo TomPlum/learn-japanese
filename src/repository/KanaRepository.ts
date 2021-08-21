@@ -14,7 +14,7 @@ import RegularKanaFilter from "../filters/kana/RegularKanaFilter";
 
 export class KanaRepository implements Repository<Kana> {
 
-    public read(config: KanaSettings): Kana[] {
+    public read(config: KanaSettings): Promise<Kana[]> {
         const chain = new FilterChain<Kana>();
 
         if (!config.hiragana) {
@@ -45,7 +45,7 @@ export class KanaRepository implements Repository<Kana> {
             chain.addFilter(new QuantityFilter(config.quantity, true));
         }
 
-        return chain.execute(this.getAllKana());
+        return Promise.all(chain.execute(this.getAllKana()));
     }
 
     private getAllKana(): Kana[] {

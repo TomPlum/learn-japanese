@@ -37,35 +37,40 @@ describe("Sentence Structure Repository", () => {
 
     it("Should return the adjectives when the adjectives property is passed as true", () => {
         const settings = new SentenceStructureSettingsBuilder().withAdjectives().build();
-        const response = repository.read(settings);
-        expect(mockAdjectives).toHaveBeenCalled();
-        expect(response).toStrictEqual([new Definition(["small"], "小さい", "ちいさい", "い Adjective")]);
+        return repository.read(settings).then(response => {
+            expect(mockAdjectives).toHaveBeenCalled();
+            expect(response).toStrictEqual([new Definition(["small"], "小さい", "ちいさい", "い Adjective")]);
+        });
     });
 
     it("Should return the verbs when the verbs property is passed as true", () => {
         const settings = new SentenceStructureSettingsBuilder().withVerbs().build();
-        const response = repository.read(settings);
-        expect(mockVerbs).toHaveBeenCalled();
-        expect(response).toStrictEqual([new Definition(["to use"], "使う", "つかう", "う Verb")]);
+        return repository.read(settings).then(response => {
+            expect(mockVerbs).toHaveBeenCalled();
+            expect(response).toStrictEqual([new Definition(["to use"], "使う", "つかう", "う Verb")]);
+        });
     });
 
     it("Should return the adverbs when the adverbs property is passed as true", () => {
         const settings = new SentenceStructureSettingsBuilder().withAdverbs().build();
-        const response = repository.read(settings);
-        expect(mockAdverbs).toHaveBeenCalled();
-        expect(response).toStrictEqual([new Definition(["not much"], undefined, "あまり~", "Adverb")]);
+        return repository.read(settings).then(response => {
+            expect(mockAdverbs).toHaveBeenCalled();
+            expect(response).toStrictEqual([new Definition(["not much"], undefined, "あまり~", "Adverb")]);
+        });
     });
 
     it("Should return the expressions when the expressions property is passed as true", () => {
         const settings = new SentenceStructureSettingsBuilder().withExpressions().build();
-        const response = repository.read(settings);
-        expect(mockExpressions).toHaveBeenCalled();
-        expect(response).toStrictEqual([new Definition(["That's right", "Let me see"], undefined, "そうですね", "Expression")]);
+        return repository.read(settings).then(response => {
+            expect(mockExpressions).toHaveBeenCalled();
+            expect(response).toStrictEqual([new Definition(["That's right", "Let me see"], undefined, "そうですね", "Expression")]);
+        });
     });
 
     it("Should return an empty array if no settings are passed", () => {
         const settings = new SentenceStructureSettingsBuilder().build();
-        const response = repository.read(settings);
-        expect(response).toHaveLength(0);
+        return repository.read(settings).then(response => {
+            expect(response).toHaveLength(0);
+        });
     });
 });

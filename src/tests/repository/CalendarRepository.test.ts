@@ -31,33 +31,38 @@ describe("Calendar Repository", () => {
 
     it("Should return the days when the days property is true", () => {
         const settings = new CalendarSettingsBuilder().withDays().build();
-        const response = repository.read(settings);
-        expect(mockDays).toHaveBeenCalled();
-        expect(response[0]).toStrictEqual(new Definition(["Monday"], "月曜日", "げつようび", "Day of the Week"));
+        return repository.read(settings).then(response => {
+            expect(mockDays).toHaveBeenCalled();
+            expect(response[0]).toStrictEqual(new Definition(["Monday"], "月曜日", "げつようび", "Day of the Week"));
+        });
     });
 
     it("Should return the months when the months property is true", () => {
         const settings = new CalendarSettingsBuilder().withMonths().build();
-        const response = repository.read(settings);
-        expect(mockMonths).toHaveBeenCalled();
-        expect(response[0]).toStrictEqual(new Definition(["January"], "一月", "いちがつ", "Month of the Year"));
+        return repository.read(settings).then(response => {
+            expect(mockMonths).toHaveBeenCalled();
+            expect(response[0]).toStrictEqual(new Definition(["January"], "一月", "いちがつ", "Month of the Year"));
+        });
     });
 
     it("Should return the temporal nouns when the nouns property is true", () => {
         const settings = new CalendarSettingsBuilder().withTemporalNouns().build();
-        const response = repository.read(settings);
-        expect(response[0]).toStrictEqual(new Definition(["Tomorrow"], "明日", "あした", "Temporal Noun / Adverb"));
+        return repository.read(settings).then(response => {
+            expect(response[0]).toStrictEqual(new Definition(["Tomorrow"], "明日", "あした", "Temporal Noun / Adverb"));
+        });
     });
 
     it("Should return the common phrases when the phrases property is true", () => {
         const settings = new CalendarSettingsBuilder().withPhrases().build();
-        const response = repository.read(settings);
-        expect(response[0]).toStrictEqual(new Definition(["What day is it today?"], "今日は何曜日ですか", "", "Common Phrase"));
+        return repository.read(settings).then(response => {
+            expect(response[0]).toStrictEqual(new Definition(["What day is it today?"], "今日は何曜日ですか", "", "Common Phrase"));
+        });
     });
 
     it("Should return an empty array when no properties are passed", () => {
         const settings = new CalendarSettingsBuilder().build();
-        const response = repository.read(settings);
-        expect(response).toHaveLength(0);
+        return repository.read(settings).then(response => {
+            expect(response).toHaveLength(0);
+        });
     });
 });

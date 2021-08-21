@@ -100,10 +100,10 @@ const setup = () => {
    }
 }
 
-test('Selecting a game mode should hide the menu and render the game', () => {
+test('Selecting a game mode should hide the menu and render the game', async () => {
    setup();
    fireEvent.click(screen.getByText('Start'));
-   expect(screen.getByTitle('1/3')).toBeInTheDocument();
+   expect(await screen.findByTestId('memory-game')).toBeInTheDocument();
 });
 
 test('Changing the AppMode in the ControlsMenu should update the SettingsMenu', () => {
@@ -133,11 +133,14 @@ test('Clicking "x" close button in the user modal should close it', () => {
 });
 
 describe('Play', () => {
-   test('Quitting the game should close the game window and re-render the results screen', () => {
+   test('Quitting the game should close the game window and re-render the results screen', async () => {
       setup();
       fireEvent.click(screen.getByText('Start'));
+      expect(await screen.findByTestId('memory-game')).toBeInTheDocument(); //Should render the memory game
+
       fireEvent.click(screen.getByTitle('Quit'));
       fireEvent.click(screen.getByText('Yes'));
+
       expect(screen.getByText('Oh no! You quit!')).toBeInTheDocument();
    });
 
@@ -166,32 +169,39 @@ describe('Play', () => {
 });
 
 describe('Learn', () => {
-   test('Quitting a learning session without having flipped a card should re-render the menu', () => {
+   test('Quitting a learning session without having flipped a card should re-render the menu', async () => {
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
+      expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
+
       fireEvent.click(screen.getByTitle('Quit')); //Open the Quit confirmation modal
       fireEvent.click(screen.getByText('Yes')); //Confirm you want to quit (Without having flipped the first card)
+
       expect(screen.getByTestId('game-settings-menu')).toBeInTheDocument();
       expect(screen.queryByTestId('learning-results-screen')).not.toBeInTheDocument();
    });
 
-   test('Quitting a learning session mid-session (having flipped one or more cards) should show the result screen', () => {
+   test('Quitting a learning session mid-session (having flipped one or more cards) should show the result screen', async () => {
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
+      expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
+
       fireEvent.click(screen.getByText('あ')); //Flip the first card
       fireEvent.click(screen.getByText('Remembered It!')); //Mark the card as remembered
       fireEvent.click(screen.getByTitle('Quit')); //Open the Quit confirmation modal
       fireEvent.click(screen.getByText('Yes')); //Confirm you want to quit
+
       expect(screen.getByTestId('learning-results-screen')).toBeInTheDocument();
       expect(screen.queryByTestId('game-settings-menu')).not.toBeInTheDocument();
    });
 
-   test('Clicking \'Practice Mistakes\' on the learning results screen should start a new session with the mistakes', () => {
+   test('Clicking \'Practice Mistakes\' on the learning results screen should start a new session with the mistakes', async () => {
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
+      expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
       fireEvent.click(screen.getByText('あ')); //Flip the first card
       fireEvent.click(screen.getByText('Forgot It')); //Mark the card as forgot
@@ -210,10 +220,11 @@ describe('Learn', () => {
       expect(screen.getByText('Finish')).toBeInTheDocument(); //If it omitted our mistake, flipping this card should be the last.
    });
 
-   test('Dismissing the learning results screen should close it and re-render the main menu', () => {
+   test('Dismissing the learning results screen should close it and re-render the main menu', async () => {
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
+      expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
       fireEvent.click(screen.getByText('あ')); //Flip the first card
       fireEvent.click(screen.getByText('Forgot It')); //Mark the card as forgot
@@ -227,20 +238,20 @@ describe('Learn', () => {
       expect(screen.queryByTestId('learning-results-screen')).not.toBeInTheDocument();
    });
 
-   test('Starting a Calendar learning session should render the correct flash card types', () => {
+   test('Starting a Calendar learning session should render the correct flash card types', async () => {
       const { mode, calendar } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(calendar);
       fireEvent.click(screen.getByText('Start'));
-      expect(screen.getByText('Monday')).toBeInTheDocument();
+      expect(await screen.findByText('Monday')).toBeInTheDocument();
    });
 
-   test('Starting a Kanji learning session should render the correct flash card types', () => {
+   test('Starting a Kanji learning session should render the correct flash card types', async  () => {
       const { mode, kanji } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(kanji); //Select Kanji topic
       fireEvent.click(screen.getByText('Start'));
-      expect(screen.getByText('person')).toBeInTheDocument();
+      expect(await screen.findByText('person')).toBeInTheDocument();
       expect(screen.getAllByText('人')).toBeDefined();
    });
 });
