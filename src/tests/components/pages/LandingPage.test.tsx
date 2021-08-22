@@ -56,7 +56,6 @@ beforeEach(() => {
         return array;
     });
 
-
     //Always returns the first element so it is deterministic
     Arrays.getRandomObject = getRandomObject;
     getRandomObject.mockImplementation((array: any[]) => {

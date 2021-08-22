@@ -1,14 +1,11 @@
 import { KanjiRepository } from "../../repository/KanjiRepository";
 import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
-import { joyo, kyoiku } from "../../data/Kanji";
-import { KanjiData } from "../../data/DataTypes";
 import { KanjiSettingsBuilder } from "../../types/session/settings/data/KanjiSettings";
 import Arrays from "../../utility/Arrays";
+import axios from "axios";
 
-jest.mock("../../data/Kanji.ts");
-
-let mockKyoiku = kyoiku as jest.MockedFunction<() => KanjiData[]>;
-let mockJoyo = joyo as jest.MockedFunction<() => KanjiData[]>;
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 beforeEach(() => {
     const exampleKyoikuKanji6 = {
@@ -37,8 +34,6 @@ beforeEach(() => {
     let exampleKyoikuKanji3 = { ...exampleKyoikuKanji6 };
     exampleKyoikuKanji3.grade = 3;
 
-    mockKyoiku.mockReturnValue([exampleKyoikuKanji1, exampleKyoikuKanji2, exampleKyoikuKanji3, exampleKyoikuKanji6]);
-
     const exampleJoyoKanji = {
         name: "猫",
         code: "\u732B",
@@ -46,7 +41,7 @@ beforeEach(() => {
         kun: ["ねこ"],
         source: "https://en.wiktionary.org/wiki/%E7%8C%AB#Kanji",
         meanings: ["cat"],
-        grade: 2,
+        grade: 8,
         examples: [
             { value: "猫", kana: ["ねこ"], english: ["cat"] },
             { value: "子猫", kana: ["こねこ"], english: ["kitten"] },
@@ -56,7 +51,12 @@ beforeEach(() => {
         ],
     };
 
-    mockJoyo.mockReturnValue([exampleJoyoKanji, exampleJoyoKanji, exampleJoyoKanji, exampleKyoikuKanji6]);
+    mockedAxios.get.mockResolvedValueOnce({
+        data: {
+            data: [exampleKyoikuKanji1, exampleKyoikuKanji2, exampleKyoikuKanji3, exampleKyoikuKanji6,
+                exampleJoyoKanji, exampleJoyoKanji, exampleJoyoKanji]
+        }
+    });
 
     Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
         const objects = [...array];
@@ -80,7 +80,7 @@ describe("Kanji Repository", () => {
         it("Should return all Joyo Kanji if they are requested with no quantity", () => {
             const settings = new KanjiSettingsBuilder().withJoyoKanji().build();
             return repository.read(settings).then(response => {
-                expect(response).toHaveLength(4);
+                expect(response).toHaveLength(7);
             });
         });
 
@@ -115,30 +115,34 @@ describe("Kanji Repository", () => {
         it("Should return all Joyo Kanji if they are not specified, but also no Kyoiku grades are specified", () => {
             const settings = new KanjiSettingsBuilder().build();
             return repository.read(settings).then(response => {
-                expect(response).toHaveLength(4)
+                expect(response).toHaveLength(7)
             });
         });
     });
 
     describe("Get By Value", () => {
         it("Should return the kanji if a code matches the request", () => {
-            const kanji = repository.getByValue("猫");
-            expect(kanji?.getMeanings()).toStrictEqual(['cat']);
+            return repository.getByValue("猫").then(kanji => {
+                expect(kanji?.getMeanings()).toStrictEqual(['cat']);
+            });
         });
 
         it("Should return undefined if the request does not match any kanji", () => {
-           const kanji = repository.getByValue("a");
-           expect(kanji).toBeUndefined();
+           return repository.getByValue("a").then(kanji => {
+               expect(kanji).toBeUndefined();
+           });
         });
 
         it("Should return the tags if the kanji has any", () => {
-            const kanji = repository.getByValue("机");
-            expect(kanji?.getTags()).toStrictEqual(["furniture"]);
+            return repository.getByValue("机").then(kanji => {
+                expect(kanji?.getTags()).toStrictEqual(["furniture"]);
+            });
         });
 
         it("Should return any empty array if the kanji has no tags", () => {
-            const kanji = repository.getByValue("猫");
-            expect(kanji?.getTags()).toStrictEqual([]);
+            return repository.getByValue("猫").then(kanji => {
+                expect(kanji?.getTags()).toStrictEqual([]);
+            });
         });
     });
 });

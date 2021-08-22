@@ -146,7 +146,8 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
             dataConfig: settings.dataSettings,
             loading: true
         }, () => {
-            new LearningDataRepository().read(settings.dataSettings)
+            new LearningDataRepository()
+                .read(settings.dataSettings)
                 .then(data => this.setState({ data: data, loading: false }));
         });
     }

@@ -21,8 +21,8 @@ jest.mock("../../../data/Calendar");
 //Database Function Mocks
 const mockHiragana = hiragana as jest.MockedFunction<() => KanaData[]>;
 const mockKatakana = katakana as jest.MockedFunction<() => KanaData[]>;
-const mockKyoiku = kyoiku as jest.MockedFunction<() => KanjiData[]>;
-const mockJoyo = joyo as jest.MockedFunction<() => KanjiData[]>;
+const mockKyoiku = kyoiku as jest.MockedFunction<() => Promise<KanjiData[]>>;
+const mockJoyo = joyo as jest.MockedFunction<() => Promise<KanjiData[]>>;
 const mockDays = days as jest.MockedFunction<() => DayData[]>;
 
 beforeEach(() => {
@@ -35,7 +35,7 @@ beforeEach(() => {
       { name: "ア", code: "\u30A2", romaji: ["a"], column: KanaColumn.VOWEL, diacritical: false },
    ]);
 
-   mockKyoiku.mockReturnValue([
+   mockKyoiku.mockResolvedValue([
       {
          name: "人",
          on: ["じん", "にん"],
@@ -65,7 +65,7 @@ beforeEach(() => {
       }
    ]);
 
-   mockJoyo.mockReturnValue([]);
+   mockJoyo.mockResolvedValue([]);
 
    Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
       const objects = [...array];
@@ -241,7 +241,7 @@ describe('Learn', () => {
    test('Starting a Calendar learning session should render the correct flash card types', async () => {
       const { mode, calendar } = setup();
       fireEvent.click(mode); //Switch to Learn
-      fireEvent.click(calendar);
+      fireEvent.click(calendar); //Select calendar topic
       fireEvent.click(screen.getByText('Start'));
       expect(await screen.findByText('Monday')).toBeInTheDocument();
    });

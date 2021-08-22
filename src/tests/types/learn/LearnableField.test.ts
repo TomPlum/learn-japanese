@@ -1,7 +1,10 @@
 import LearnableField from "../../../types/learn/LearnableField";
 import katakana from "../../../data/Katakana";
 import hiragana from "../../../data/Hiragana";
-import { joyo } from "../../../data/Kanji";
+import { Kanji } from "../../../types/kanji/Kanji";
+import { KanjiReading } from "../../../types/kanji/KanjiReading";
+import { ReadingType } from "../../../types/kanji/ReadingType";
+import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
 
 describe("Learnable Field", () => {
     describe("From Name String", () => {
@@ -49,17 +52,30 @@ describe("Learnable Field", () => {
         });
 
         it("Kanji", () => {
-            const kanji = joyo().map(it => it.name);
-            kanji.forEach(kana => expect(kana).toMatch(LearnableField.KANJI.validationRegex));
+            const kanji = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]);
+            expect(kanji.getValue()).toMatch(LearnableField.KANJI.validationRegex);
         });
 
         it("On'Yomi Readings", () => {
-            const readings = joyo().flatMap(it => it.on);
-            readings.forEach(kana => expect(kana).toMatch(LearnableField.ONYOMI_READING.validationRegex));
+            const readings = new Kanji("鳥",
+                [new KanjiReading("tori", "とり", ReadingType.ON)],
+                ["bird"],
+                KyoikuGrade.TWO,
+                "", [],
+                ["animal"]
+            ).getOnyomiReadings().map(it => it.kana);
+
+            readings.forEach(reading => expect(reading).toMatch(LearnableField.ONYOMI_READING.validationRegex));
         });
 
         it("Kun'Yomi Readings", () => {
-            const readings = joyo().flatMap(it => it.kun);
+            const readings = new Kanji("魚",
+                [new KanjiReading("sakana", "さかな", ReadingType.KUN)],
+                ["fish"],
+                KyoikuGrade.TWO, "",
+                [], ["animal"]
+            ).getKunyomiReadings().map(it => it.kana);
+
             readings.forEach(kana => expect(kana).toMatch(LearnableField.KUNYOMI_READING.validationRegex));
         });
     });

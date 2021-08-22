@@ -13,50 +13,60 @@ import { joyo, kyoiku } from "../data/Kanji";
 //TODO: Integrate Kanji Filters & create new ones for grades etc.
 export class KanjiRepository implements Repository<Kanji> {
     public async read(settings: KanjiSettings): Promise<Kanji[]> {
-        if (!settings) return [];
-
+        // If requested joyo, then give them all joyo (or quantity if specified).
         if (settings.joyo) {
-            if (settings.quantity) {
-                const data = Arrays.getRandomElements(joyo(), settings.quantity);
-                return this.convert(data);
-            }
-            return this.convert(joyo());
+            return joyo().then(joyo => {
+                if (!settings) return [];
+
+                if (settings.quantity) {
+                    const data = Arrays.getRandomElements(joyo, settings.quantity);
+                    return this.convert(data);
+                }
+                return this.convert(joyo);
+            });
         }
 
-        if (settings.quantity && settings.grades && settings.grades.length > 0) {
-            let kanji: Kanji[] = [];
-
-            let kyoikuKanji = this.convert(kyoiku());
-            let availableKanji = kyoikuKanji.filter(data => settings.grades?.includes(data.grade));
-
-            for (let i = 0; i < settings.quantity; i++) {
-                const [randomKanji, remainingKanji] = Arrays.getRandomObject(availableKanji);
-                availableKanji = remainingKanji;
-                kanji.push(randomKanji);
-            }
-
-            return kanji;
-        }
-
-        if (settings.quantity) {
-            const data = kyoiku().splice(0, settings.quantity);
-            return this.convert(data);
-        }
-
+        // If not requested joyo and there are grades, give kyoiku
         if (settings.grades && settings.grades.length > 0) {
-            let kyoikuKanji = this.convert(kyoiku());
-            return kyoikuKanji.filter(entry => settings.grades?.map(it => it.value).includes(entry.grade.value));
+            return kyoiku().then(kyoiku => {
+                // If specified quantity, give random quantity from those grades
+                if (settings.quantity) {
+                    let kanji: Kanji[] = [];
+
+                    let kyoikuKanji = this.convert(kyoiku);
+                    let availableKanji = kyoikuKanji.filter(data => settings.grades?.includes(data.grade));
+
+                    for (let i = 0; i < settings.quantity; i++) {
+                        const [randomKanji, remainingKanji] = Arrays.getRandomObject(availableKanji);
+                        availableKanji = remainingKanji;
+                        kanji.push(randomKanji);
+                    }
+
+                    return kanji;
+                } else {
+                    // Else, all from those grades
+                    return this.convert(kyoiku).filter(entry => settings.grades?.map(it => it.value).includes(entry.grade.value));
+                }
+            });
         }
 
-        return this.convert(joyo());
+        // If not specified joyo or kyoiku, but quantity, then give quantity from ALL kanji.
+        if (settings.quantity) {
+            return kyoiku().then(kanji => this.convert(kanji.splice(0, settings.quantity)));
+        }
+
+        //If we've specific nothing, then give the whole lot.
+        return joyo().then(kanji => this.convert(kanji));
     }
 
-    public getByValue(value: string): Kanji | undefined {
-        const match = joyo().find((entry: KanjiData) => entry.name === value);
-        return match ? this.convert([match])[0] : undefined;
+    public async getByValue(value: string): Promise<Kanji | undefined> {
+        return joyo().then(data => {
+            const match = data.find((entry: KanjiData) => entry.name === value);
+            return match ? this.convert([match])[0] : undefined;
+        });
     }
 
-    private convert = (data: KanjiData[]): Kanji[] => {
+    public convert = (data: KanjiData[]): Kanji[] => {
         const romaji = new RomajiGenerator();
         return data.map((result: KanjiData) => {
             const on = result.on.map(reading => new KanjiReading(romaji.generate(reading), reading, ReadingType.ON));
