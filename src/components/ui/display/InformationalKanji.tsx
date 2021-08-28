@@ -41,7 +41,7 @@ const InformationalKanji = (props: { value: string, className?: string }) => {
     );
 
     const title = kanji?.getMeanings().slice(0, 4).join(", ") ?? "Loading...";
-    console.log(title)
+
     return (
         <Copyable className={props.className} placement="top" key={"copyable" + kanji?.getValue()} inline>
             <Inspectable key={"inspectable-" +  kanji?.getValue()} className={props.className} popover={{ title: title, text: overlay }}>
