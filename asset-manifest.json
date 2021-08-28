@@ -1,24 +1,27 @@
 {
   "files": {
-    "main.css": "/learn-japanese/static/css/main.3c8491f8.chunk.css",
-    "main.js": "/learn-japanese/static/js/main.2c23a84d.chunk.js",
-    "main.js.map": "/learn-japanese/static/js/main.2c23a84d.chunk.js.map",
+    "main.css": "/learn-japanese/static/css/main.9e4061a7.chunk.css",
+    "main.js": "/learn-japanese/static/js/main.9c0da0c6.chunk.js",
+    "main.js.map": "/learn-japanese/static/js/main.9c0da0c6.chunk.js.map",
     "runtime-main.js": "/learn-japanese/static/js/runtime-main.bc08818f.js",
     "runtime-main.js.map": "/learn-japanese/static/js/runtime-main.bc08818f.js.map",
-    "static/css/2.4c97ca4f.chunk.css": "/learn-japanese/static/css/2.4c97ca4f.chunk.css",
-    "static/js/2.fb82734d.chunk.js": "/learn-japanese/static/js/2.fb82734d.chunk.js",
-    "static/js/2.fb82734d.chunk.js.map": "/learn-japanese/static/js/2.fb82734d.chunk.js.map",
+    "static/css/2.d15c2034.chunk.css": "/learn-japanese/static/css/2.d15c2034.chunk.css",
+    "static/js/2.7b6035e1.chunk.js": "/learn-japanese/static/js/2.7b6035e1.chunk.js",
+    "static/js/2.7b6035e1.chunk.js.map": "/learn-japanese/static/js/2.7b6035e1.chunk.js.map",
     "index.html": "/learn-japanese/index.html",
-    "static/css/2.4c97ca4f.chunk.css.map": "/learn-japanese/static/css/2.4c97ca4f.chunk.css.map",
-    "static/css/main.3c8491f8.chunk.css.map": "/learn-japanese/static/css/main.3c8491f8.chunk.css.map",
-    "static/js/2.fb82734d.chunk.js.LICENSE.txt": "/learn-japanese/static/js/2.fb82734d.chunk.js.LICENSE.txt",
-    "static/media/index.scss": "/learn-japanese/static/media/Ciutadella Rounded.3a979adf.ttf"
+    "static/css/2.d15c2034.chunk.css.map": "/learn-japanese/static/css/2.d15c2034.chunk.css.map",
+    "static/css/main.9e4061a7.chunk.css.map": "/learn-japanese/static/css/main.9e4061a7.chunk.css.map",
+    "static/js/2.7b6035e1.chunk.js.LICENSE.txt": "/learn-japanese/static/js/2.7b6035e1.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "/learn-japanese/static/media/appli-mincho.b5e2640d.otf",
+    "static/media/correct.a921a9f2.wav": "/learn-japanese/static/media/correct.a921a9f2.wav",
+    "static/media/finish.fe95e484.wav": "/learn-japanese/static/media/finish.fe95e484.wav",
+    "static/media/wrong.c9e53d6b.wav": "/learn-japanese/static/media/wrong.c9e53d6b.wav"
   },
   "entrypoints": [
     "static/js/runtime-main.bc08818f.js",
-    "static/css/2.4c97ca4f.chunk.css",
-    "static/js/2.fb82734d.chunk.js",
-    "static/css/main.3c8491f8.chunk.css",
-    "static/js/main.2c23a84d.chunk.js"
+    "static/css/2.d15c2034.chunk.css",
+    "static/js/2.7b6035e1.chunk.js",
+    "static/css/main.9e4061a7.chunk.css",
+    "static/js/main.9c0da0c6.chunk.js"
   ]
 }
