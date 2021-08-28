@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import SentenceStructureFlashCardBack from "../../../../components/learn/sentence/SentenceStructureFlashCardBack";
 import { getByTextWithMarkup } from "../../../Queries";
-import Definition from "../../../../types/sentence/Definition";
+import Definition from "../../../../domain/sentence/Definition";
 
 const onResetHandler = jest.fn();
 

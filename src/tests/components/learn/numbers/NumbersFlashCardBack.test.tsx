@@ -1,4 +1,4 @@
-import CommonData from "../../../../types/learn/CommonData";
+import CommonData from "../../../../domain/learn/CommonData";
 import { fireEvent, render } from "@testing-library/react";
 import NumbersFlashCardBack from "../../../../components/learn/numbers/NumbersFlashCardBack";
 import { getByTextWithMarkup } from "../../../Queries";

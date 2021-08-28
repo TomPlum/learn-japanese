@@ -1,5 +1,5 @@
 import React, { Component, ReactElement } from "react";
-import Topic from "../../types/Topic";
+import Topic from "../../domain/Topic";
 import { ListGroupItem } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/TopicListOption.module.scss";
 

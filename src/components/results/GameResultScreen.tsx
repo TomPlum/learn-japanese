@@ -1,12 +1,12 @@
 import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import GameResult from "../../types/game/GameResult";
+import GameResult from "../../domain/game/GameResult";
 import Feedback from "./Feedback";
 import { faAward, faEraser, faGlassCheers, faHeartbeat, faHeartBroken, faHourglassEnd, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import styles from "../../styles/sass/components/results/GameResultScreen.module.scss";
-import { GameFinishReason } from "../../types/game/GameFinishReason";
+import { GameFinishReason } from "../../domain/game/GameFinishReason";
 
 export interface GameResultScreenProps {
     onClose: () => void;

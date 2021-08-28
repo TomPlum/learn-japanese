@@ -1,15 +1,15 @@
 import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import KanjiDisplay from "./KanjiDisplay";
-import { ReadingType } from "../../../types/kanji/ReadingType";
+import { ReadingType } from "../../../domain/kanji/ReadingType";
 import Inspectable from "../../ui/Inspectable";
 import { Environment } from "../../../utility/Environment";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CardBackFaceProps } from "../FlashCard";
-import { Kanji } from "../../../types/kanji/Kanji";
+import { Kanji } from "../../../domain/kanji/Kanji";
 import KanjiReadingDisplay from "./KanjiReadingDisplay";
-import { KanjiReading } from "../../../types/kanji/KanjiReading";
+import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
 import KanjiExampleDisplay from "./KanjiExampleDisplay";
 import KanjiMeaningDisplay from "./KanjiMeaningDisplay";

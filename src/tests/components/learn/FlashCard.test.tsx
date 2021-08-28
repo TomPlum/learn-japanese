@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import FlashCard from "../../../components/learn/FlashCard";
-import { Kana } from "../../../types/kana/Kana";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
-import KanaType from "../../../types/kana/KanaType";
+import { Kana } from "../../../domain/kana/Kana";
+import { KanaColumn } from "../../../domain/kana/KanaColumn";
+import KanaType from "../../../domain/kana/KanaType";
 import KanaFlashCardFront from "../../../components/learn/kana/KanaFlashCardFront";
 import KanaFlashCardBack from "../../../components/learn/kana/KanaFlashCardBack";
 

@@ -2,7 +2,7 @@ import React from "react";
 import { GameQuestionProps } from "../MemoryGame";
 import { Col, Container, Row } from "react-bootstrap";
 import AnswerChoiceDisplay from "../../ui/display/AnswerChoiceDisplay";
-import GameQuestion from "../../../types/game/GameQuestion";
+import GameQuestion from "../../../domain/game/GameQuestion";
 import LineTo from "react-lineto";
 import Maps from "../../../utility/Maps";
 import styles from "../../../styles/sass/components/game/questions/MatchQuestion.module.scss";

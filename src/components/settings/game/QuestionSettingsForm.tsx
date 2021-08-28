@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { QuestionType } from "../../../types/game/QuestionType";
+import { QuestionType } from "../../../domain/game/QuestionType";
 import DisplayTypeButton from "../../ui/buttons/DisplayTypeButton";
 import { faChevronRight, faFont, faGripVertical, faHandPointer, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";
 import { Environment } from "../../../utility/Environment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KanaQuantityButton from "../../ui/buttons/KanaQuantityButton";
-import QuestionSettings, { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
+import QuestionSettings, { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings";
 import styles from "../../../styles/sass/components/settings/game/QuestionSettingsForm.module.scss";
-import LearnableField from "../../../types/learn/LearnableField";
+import LearnableField from "../../../domain/learn/LearnableField";
 import LearnableFieldSelector from "../../ui/select/LearnableFieldSelector";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 import ToggleSwitch from "../../ui/ToggleSwitch";

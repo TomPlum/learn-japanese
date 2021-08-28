@@ -1,8 +1,8 @@
 import Repository from "./Repository";
-import CommonData from "../types/learn/CommonData";
+import CommonData from "../domain/learn/CommonData";
 import { CounterData, NumbersData } from "../data/DataTypes";
 import numbers, { counters } from "../data/Numbers";
-import NumbersSettings from "../types/session/settings/data/NumbersSettings";
+import NumbersSettings from "../domain/session/settings/data/NumbersSettings";
 
 export default class NumbersRepository implements Repository<CommonData> {
     read(settings: NumbersSettings): Promise<CommonData[]> {

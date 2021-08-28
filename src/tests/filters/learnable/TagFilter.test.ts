@@ -1,9 +1,9 @@
-import { Kanji } from "../../../types/kanji/Kanji";
-import { KanjiReading } from "../../../types/kanji/KanjiReading";
-import { ReadingType } from "../../../types/kanji/ReadingType";
-import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import { Kanji } from "../../../domain/kanji/Kanji";
+import { KanjiReading } from "../../../domain/kanji/KanjiReading";
+import { ReadingType } from "../../../domain/kanji/ReadingType";
+import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 import TagFilter from "../../../filters/learnable/TagFilter";
-import { Learnable } from "../../../types/learn/Learnable";
+import { Learnable } from "../../../domain/learn/Learnable";
 
 const data = [
     new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]),

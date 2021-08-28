@@ -1,8 +1,8 @@
-import { Kanji } from "../../../types/kanji/Kanji";
-import { KanjiReading } from "../../../types/kanji/KanjiReading";
-import { ReadingType } from "../../../types/kanji/ReadingType";
-import { Example } from "../../../types/kanji/Example";
-import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import { Kanji } from "../../../domain/kanji/Kanji";
+import { KanjiReading } from "../../../domain/kanji/KanjiReading";
+import { ReadingType } from "../../../domain/kanji/ReadingType";
+import { Example } from "../../../domain/kanji/Example";
+import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 
 describe("Kanji", () => {
     describe("Getters", () => {

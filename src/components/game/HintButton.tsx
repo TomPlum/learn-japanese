@@ -5,7 +5,7 @@ import { faLightbulb as regularBulb } from "@fortawesome/free-regular-svg-icons"
 import { Button, OverlayTrigger } from "react-bootstrap";
 import PopOver from "../ui/PopOver";
 import Viewports, { Viewport } from "../../utility/Viewports";
-import { Learnable } from "../../types/learn/Learnable";
+import { Learnable } from "../../domain/learn/Learnable";
 import styles from "../../styles/sass/components/game/HintButton.module.scss";
 import RevealableText from "../ui/RevealableText";
 

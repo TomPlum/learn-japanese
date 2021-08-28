@@ -1,5 +1,5 @@
 import BasicsRepository from "../../repository/BasicsRepository";
-import BasicsSettings, { BasicsSettingsBuilder } from "../../types/session/settings/data/BasicsSettings";
+import BasicsSettings, { BasicsSettingsBuilder } from "../../domain/session/settings/data/BasicsSettings";
 
 describe("Basic Repository", () => {
 

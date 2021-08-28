@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import QuestionSettingsForm from "../../../../components/settings/game/QuestionSettingsForm";
-import { QuestionType } from "../../../../types/game/QuestionType";
+import { QuestionType } from "../../../../domain/game/QuestionType";
 import { Environment } from "../../../../utility/Environment";
-import QuestionSettings from "../../../../types/session/settings/game/QuestionSettings";
+import QuestionSettings from "../../../../domain/session/settings/game/QuestionSettings";
 import { getValueLastCalledWith } from "../../../Queries";
 import userEvent from "@testing-library/user-event";
-import LearnableField from "../../../../types/learn/LearnableField";
+import LearnableField from "../../../../domain/learn/LearnableField";
 
 const onSelectHandler = jest.fn();
 const environment = jest.fn();

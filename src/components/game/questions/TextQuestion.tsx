@@ -1,10 +1,10 @@
 import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { GameQuestionProps } from "../MemoryGame";
-import GameQuestion from "../../../types/game/GameQuestion";
+import GameQuestion from "../../../domain/game/GameQuestion";
 import QuestionDisplay from "../../ui/display/QuestionDisplay";
 import AnswerInputField from "../../ui/fields/AnswerInputField";
-import LearnableField from "../../../types/learn/LearnableField";
+import LearnableField from "../../../domain/learn/LearnableField";
 import styles from "../../../styles/sass/components/game/questions/TextQuestion.module.scss";
 
 export interface TextQuestionProps extends GameQuestionProps {

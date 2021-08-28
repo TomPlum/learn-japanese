@@ -1,6 +1,6 @@
-import Definition from "../../../types/sentence/Definition";
+import Definition from "../../../domain/sentence/Definition";
 import KanaFilter from "../../../filters/learnable/KanaFilter";
-import { Learnable } from "../../../types/learn/Learnable";
+import { Learnable } from "../../../domain/learn/Learnable";
 import each from "jest-each";
 
 const data = [

@@ -1,7 +1,7 @@
 import QuestionBanner, { QuestionBannerProps } from "../../../components/game/QuestionBanner";
 import { fireEvent, render, screen } from "@testing-library/react";
-import Definition from "../../../types/sentence/Definition";
-import LearnableField from "../../../types/learn/LearnableField";
+import Definition from "../../../domain/sentence/Definition";
+import LearnableField from "../../../domain/learn/LearnableField";
 import { findByTextWithElements } from "../../Queries";
 
 let props: QuestionBannerProps;

@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/results/AnswerMistake.module.scss";
-import { Learnable } from "../../types/learn/Learnable";
+import { Learnable } from "../../domain/learn/Learnable";
 import RomajiGenerator from "../../utility/RomajiGenerator";
 
 interface AnswerMistakeProps {

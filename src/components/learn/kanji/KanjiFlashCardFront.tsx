@@ -1,5 +1,5 @@
 import { Container, Row } from "react-bootstrap";
-import { Kanji } from "../../../types/kanji/Kanji";
+import { Kanji } from "../../../domain/kanji/Kanji";
 import { CardFaceProps } from "../FlashCard";
 import DynamicDisplay from "../../ui/display/DynamicDisplay";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardFront.module.scss";

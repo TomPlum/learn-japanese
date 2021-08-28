@@ -1,8 +1,8 @@
 import CalendarRepository from "../../repository/CalendarRepository";
 import { DayData } from "../../data/DataTypes";
 import { days, months, nouns, phrases } from "../../data/Calendar";
-import Definition from "../../types/sentence/Definition";
-import { CalendarSettingsBuilder } from "../../types/session/settings/data/CalendarSettings";
+import Definition from "../../domain/sentence/Definition";
+import { CalendarSettingsBuilder } from "../../domain/session/settings/data/CalendarSettings";
 
 jest.mock("../../data/Calendar");
 

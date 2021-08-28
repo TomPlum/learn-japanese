@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import KyoikuGradeButton from "../../../../components/ui/buttons/KyoikuGradeButton";
-import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
+import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
 
 const onClickHandler = jest.fn();
 

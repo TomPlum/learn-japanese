@@ -1,4 +1,4 @@
-import CommonData from "../../../types/learn/CommonData";
+import CommonData from "../../../domain/learn/CommonData";
 
 describe("Common Data Object", () => {
     const data = new CommonData("1", ["いち"], "一", "Number", "1", { kana: "kana", english: "english" });

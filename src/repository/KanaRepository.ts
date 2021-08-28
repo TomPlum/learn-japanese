@@ -1,14 +1,14 @@
-import { Kana } from "../types/kana/Kana";
+import { Kana } from "../domain/kana/Kana";
 import hiragana from "../data/Hiragana";
 import katakana from "../data/Katakana";
-import KanaType from "../types/kana/KanaType";
+import KanaType from "../domain/kana/KanaType";
 import { KanaData } from "../data/DataTypes";
 import DiagraphFilter from "../filters/kana/DiagraphFilter";
 import FilterChain from "../filters/FilterChain";
 import QuantityFilter from "../filters/kana/QuantityFilter";
 import KanaTypeFilter from "../filters/kana/KanaTypeFilter";
 import Repository from "./Repository";
-import KanaSettings from "../types/session/settings/data/KanaSettings";
+import KanaSettings from "../domain/session/settings/data/KanaSettings";
 import DiacriticalFilter from "../filters/kana/DiacriticalFilter";
 import RegularKanaFilter from "../filters/kana/RegularKanaFilter";
 

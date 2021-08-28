@@ -8,18 +8,18 @@ import Arrays from "../../utility/Arrays";
 import { faCircleNotch, faCog, faCogs, faDatabase, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "./Search";
-import { Learnable } from "../../types/learn/Learnable";
+import { Learnable } from "../../domain/learn/Learnable";
 import LearningDataRepository from "../../repository/LearningDataRepository";
-import Topic from "../../types/Topic";
-import GameSettings from "../../types/session/settings/game/GameSettings";
-import SessionMode from "../../types/session/SessionMode";
-import { AppMode } from "../../types/AppMode";
-import { MenuModes } from "../../types/MenuModes";
-import { SessionSettings } from "../../types/session/settings/SessionSettings";
-import LearnSettings from "../../types/session/settings/LearnSettings";
+import Topic from "../../domain/Topic";
+import GameSettings from "../../domain/session/settings/game/GameSettings";
+import SessionMode from "../../domain/session/SessionMode";
+import { AppMode } from "../../domain/AppMode";
+import { MenuModes } from "../../domain/MenuModes";
+import { SessionSettings } from "../../domain/session/settings/SessionSettings";
+import LearnSettings from "../../domain/session/settings/LearnSettings";
 import GameSettingsMenu from "../settings/game/GameSettingsMenu";
 import styles from "../../styles/sass/components/learn/ModeSelectionMenu.module.scss";
-import DataSettings from "../../types/session/settings/data/DataSettings";
+import DataSettings from "../../domain/session/settings/data/DataSettings";
 import { DataSettingsMenuProps } from "../settings/data/DataSettingsMenu";
 
 export interface ModeSelectionMenuProps {

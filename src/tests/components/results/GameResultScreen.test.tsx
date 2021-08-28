@@ -1,15 +1,15 @@
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import GameResultScreen from "../../../components/results/GameResultScreen";
-import GameResult from "../../../types/game/GameResult";
-import { Kana } from "../../../types/kana/Kana";
-import KanaType from "../../../types/kana/KanaType";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
-import { GameFinishReason } from "../../../types/game/GameFinishReason";
-import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
-import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
-import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
-import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
-import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
+import GameResult from "../../../domain/game/GameResult";
+import { Kana } from "../../../domain/kana/Kana";
+import KanaType from "../../../domain/kana/KanaType";
+import { KanaColumn } from "../../../domain/kana/KanaColumn";
+import { GameFinishReason } from "../../../domain/game/GameFinishReason";
+import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
+import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings";
+import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings";
+import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings";
+import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings";
 
 let result: GameResult;
 

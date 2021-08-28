@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import AnswerMistake from "../../../components/results/AnswerMistake";
-import { Kana } from "../../../types/kana/Kana";
-import KanaType from "../../../types/kana/KanaType";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
+import { Kana } from "../../../domain/kana/Kana";
+import KanaType from "../../../domain/kana/KanaType";
+import { KanaColumn } from "../../../domain/kana/KanaColumn";
 
 test('Should render the passed kana\'s character', () => {
     const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);

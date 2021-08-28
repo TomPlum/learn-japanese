@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Dropdown, ListGroup } from "react-bootstrap";
-import Topic from "../../types/Topic";
+import Topic from "../../domain/Topic";
 import TopicListOption from "./TopicListOption";
 import { faGamepad, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TopicDropdownOption from "./TopicDropdownOption";
-import { AppMode } from "../../types/AppMode";
+import { AppMode } from "../../domain/AppMode";
 import styles from "../../styles/sass/components/layout/TopicSelectionMenu.module.scss";
 
 interface TopicSelectionMenuProps {

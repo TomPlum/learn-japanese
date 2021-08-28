@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Alert } from "react-bootstrap";
-import { Kana } from "../../types/kana/Kana";
+import { Kana } from "../../domain/kana/Kana";
 import styles from "../../styles/sass/components/game/KanaQuestionBanner.module.scss";
 
 export interface KanaQuestionBannerProps {

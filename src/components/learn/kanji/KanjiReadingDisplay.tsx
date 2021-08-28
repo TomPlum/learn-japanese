@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { KanjiReading } from "../../../types/kanji/KanjiReading";
+import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import Inspectable from "../../ui/Inspectable";
 import { Environment } from "../../../utility/Environment";
-import { ReadingType } from "../../../types/kanji/ReadingType";
+import { ReadingType } from "../../../domain/kanji/ReadingType";
 import commonStyles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiReadingDisplay.module.scss";
 import SpinnerController from "../../ui/SpinnerController";

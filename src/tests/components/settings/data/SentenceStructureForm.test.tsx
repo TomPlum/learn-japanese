@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import SentenceStructureForm from "../../../../components/settings/data/SentenceStructureForm";
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu";
-import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../../../../types/session/settings/data/SentenceStructureSettings";
+import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../../../../domain/session/settings/data/SentenceStructureSettings";
 import { faSpellCheck } from "@fortawesome/free-solid-svg-icons";
 import { getValueLastCalledWith } from "../../../Queries";
 

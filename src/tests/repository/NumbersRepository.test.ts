@@ -1,9 +1,9 @@
 import NumbersRepository from "../../repository/NumbersRepository";
 import { CounterData, NumbersData } from "../../data/DataTypes";
 import numbers, { counters } from "../../data/Numbers";
-import CommonData from "../../types/learn/CommonData";
-import { CounterGroup } from "../../types/numbers/CounterGroup";
-import { NumbersSettingsBuilder } from "../../types/session/settings/data/NumbersSettings";
+import CommonData from "../../domain/learn/CommonData";
+import { CounterGroup } from "../../domain/numbers/CounterGroup";
+import { NumbersSettingsBuilder } from "../../domain/session/settings/data/NumbersSettings";
 
 jest.mock("../../data/Numbers");
 

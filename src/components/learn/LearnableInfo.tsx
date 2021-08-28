@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Learnable } from "../../types/learn/Learnable";
+import { Learnable } from "../../domain/learn/Learnable";
 import { Col, Container, Row } from "react-bootstrap";
 import Copyable from "../ui/Copyable";
 import styles from "../../styles/sass/components/learn/LearnableInfo.module.scss";

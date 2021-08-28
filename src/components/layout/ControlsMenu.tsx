@@ -6,7 +6,7 @@ import HashLink from "./HashLink";
 import ThemeButton from "../ui/buttons/ThemeButton";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 import AppModeButton from "../ui/buttons/AppModeButton";
-import { AppMode } from "../../types/AppMode";
+import { AppMode } from "../../domain/AppMode";
 import UserButton from "../user/UserButton";
 import HelpButton from "../ui/buttons/HelpButton";
 

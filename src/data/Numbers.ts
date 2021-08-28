@@ -1,5 +1,5 @@
 import { CounterData, NumbersData } from "./DataTypes";
-import { CounterGroup } from "../types/numbers/CounterGroup";
+import { CounterGroup } from "../domain/numbers/CounterGroup";
 
 export default function numbers(): NumbersData[] {
     return [

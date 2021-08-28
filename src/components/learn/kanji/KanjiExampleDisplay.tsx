@@ -1,6 +1,6 @@
 import { Component } from "react";
-import { Example } from "../../../types/kanji/Example";
-import { Kanji } from "../../../types/kanji/Kanji";
+import { Example } from "../../../domain/kanji/Example";
+import { Kanji } from "../../../domain/kanji/Kanji";
 import SpinnerController from "../../ui/SpinnerController";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiExampleDisplay.module.scss";

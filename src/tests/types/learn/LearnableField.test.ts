@@ -1,10 +1,10 @@
-import LearnableField from "../../../types/learn/LearnableField";
+import LearnableField from "../../../domain/learn/LearnableField";
 import katakana from "../../../data/Katakana";
 import hiragana from "../../../data/Hiragana";
-import { Kanji } from "../../../types/kanji/Kanji";
-import { KanjiReading } from "../../../types/kanji/KanjiReading";
-import { ReadingType } from "../../../types/kanji/ReadingType";
-import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import { Kanji } from "../../../domain/kanji/Kanji";
+import { KanjiReading } from "../../../domain/kanji/KanjiReading";
+import { ReadingType } from "../../../domain/kanji/ReadingType";
+import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 
 describe("Learnable Field", () => {
     describe("From Name String", () => {

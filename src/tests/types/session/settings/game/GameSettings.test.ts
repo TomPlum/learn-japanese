@@ -1,13 +1,13 @@
-import { GameSettingsBuilder } from "../../../../../types/session/settings/game/GameSettings";
-import { QuestionType } from "../../../../../types/game/QuestionType";
-import LifeSettings, { LifeSettingsBuilder } from "../../../../../types/session/settings/game/LifeSettings";
-import HintSettings, { HintSettingsBuilder } from "../../../../../types/session/settings/game/HintSettings";
-import TimeSettings, { TimeSettingsBuilder } from "../../../../../types/session/settings/game/TimeSettings";
-import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../types/session/settings/game/QuestionSettings";
-import LearnableField from "../../../../../types/learn/LearnableField";
+import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
+import { QuestionType } from "../../../../../domain/game/QuestionType";
+import LifeSettings, { LifeSettingsBuilder } from "../../../../../domain/session/settings/game/LifeSettings";
+import HintSettings, { HintSettingsBuilder } from "../../../../../domain/session/settings/game/HintSettings";
+import TimeSettings, { TimeSettingsBuilder } from "../../../../../domain/session/settings/game/TimeSettings";
+import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../domain/session/settings/game/QuestionSettings";
+import LearnableField from "../../../../../domain/learn/LearnableField";
 import FilterChain from "../../../../../filters/FilterChain";
 import MeaningFilter from "../../../../../filters/learnable/MeaningFilter";
-import { Learnable } from "../../../../../types/learn/Learnable";
+import { Learnable } from "../../../../../domain/learn/Learnable";
 
 describe("Game Settings", () => {
     describe("Builder", () => {

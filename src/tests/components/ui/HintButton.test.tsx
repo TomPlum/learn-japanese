@@ -1,8 +1,8 @@
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import HintButton, { HintButtonProps } from "../../../components/game/HintButton";
-import { Kana } from "../../../types/kana/Kana";
-import KanaType from "../../../types/kana/KanaType";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
+import { Kana } from "../../../domain/kana/Kana";
+import KanaType from "../../../domain/kana/KanaType";
+import { KanaColumn } from "../../../domain/kana/KanaColumn";
 
 const onUseHandler = jest.fn();
 

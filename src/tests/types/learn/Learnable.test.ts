@@ -1,14 +1,14 @@
-import { Kana } from "../../../types/kana/Kana";
-import KanaType from "../../../types/kana/KanaType";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
-import LearnableField from "../../../types/learn/LearnableField";
-import CommonData from "../../../types/learn/CommonData";
-import { Kanji } from "../../../types/kanji/Kanji";
-import { KanjiReading } from "../../../types/kanji/KanjiReading";
-import { ReadingType } from "../../../types/kanji/ReadingType";
-import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
-import Definition from "../../../types/sentence/Definition";
-import { Learnable } from "../../../types/learn/Learnable";
+import { Kana } from "../../../domain/kana/Kana";
+import KanaType from "../../../domain/kana/KanaType";
+import { KanaColumn } from "../../../domain/kana/KanaColumn";
+import LearnableField from "../../../domain/learn/LearnableField";
+import CommonData from "../../../domain/learn/CommonData";
+import { Kanji } from "../../../domain/kanji/Kanji";
+import { KanjiReading } from "../../../domain/kanji/KanjiReading";
+import { ReadingType } from "../../../domain/kanji/ReadingType";
+import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
+import Definition from "../../../domain/sentence/Definition";
+import { Learnable } from "../../../domain/learn/Learnable";
 
 describe("Learnable", () => {
     describe("Get Field Values", () => {

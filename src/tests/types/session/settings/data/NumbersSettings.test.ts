@@ -1,4 +1,4 @@
-import NumbersSettings, { NumbersSettingsBuilder } from "../../../../../types/session/settings/data/NumbersSettings";
+import NumbersSettings, { NumbersSettingsBuilder } from "../../../../../domain/session/settings/data/NumbersSettings";
 
 describe("Numbers Settings", () => {
     describe("Builder", () => {

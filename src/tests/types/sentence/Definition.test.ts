@@ -1,4 +1,4 @@
-import Definition from "../../../types/sentence/Definition";
+import Definition from "../../../domain/sentence/Definition";
 
 describe("Definition Data Object", () => {
     const definition = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective");

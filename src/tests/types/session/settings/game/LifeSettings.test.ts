@@ -1,4 +1,4 @@
-import LifeSettings, { LifeSettingsBuilder } from "../../../../../types/session/settings/game/LifeSettings";
+import LifeSettings, { LifeSettingsBuilder } from "../../../../../domain/session/settings/game/LifeSettings";
 
 describe("Life Settings", () => {
     describe("Builder", () => {

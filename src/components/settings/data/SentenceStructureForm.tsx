@@ -1,6 +1,6 @@
 import { Component } from "react";
 import DataSettingsMenu, { DataSettingsMenuProps } from "./DataSettingsMenu";
-import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../../../types/session/settings/data/SentenceStructureSettings";
+import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../../../domain/session/settings/data/SentenceStructureSettings";
 import { Col, Row } from "react-bootstrap";
 import ToggleSwitch from "../../ui/ToggleSwitch";
 import styles from "../../../styles/sass/components/settings/data/SentenceStructureForm.module.scss";

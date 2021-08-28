@@ -1,6 +1,6 @@
 import React, { ChangeEvent, Component } from "react";
 import { Form, OverlayTrigger } from "react-bootstrap";
-import LearnableField from "../../../types/learn/LearnableField";
+import LearnableField from "../../../domain/learn/LearnableField";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import PopOver from "../PopOver";

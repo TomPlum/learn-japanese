@@ -1,4 +1,4 @@
-import TemplateString from "../../types/TemplateString";
+import TemplateString from "../../domain/TemplateString";
 
 describe("Template String", () => {
     it("Should replace a single placeholder", () => {

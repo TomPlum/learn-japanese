@@ -1,4 +1,4 @@
-import BasicsSettings, { BasicsSettingsBuilder } from "../../../../../types/session/settings/data/BasicsSettings";
+import BasicsSettings, { BasicsSettingsBuilder } from "../../../../../domain/session/settings/data/BasicsSettings";
 
 describe("Basics Settings", () => {
     describe("Builder", () => {

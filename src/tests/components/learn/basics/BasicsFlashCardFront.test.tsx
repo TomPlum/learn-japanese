@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import BasicsFlashCardFront from "../../../../components/learn/basics/BasicsFlashCardFront";
-import Colour from "../../../../types/colour/Colour";
+import Colour from "../../../../domain/colour/Colour";
 
 const onClickHandler = jest.fn();
 

@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Feedback, { FeedbackProps } from "../../../components/results/Feedback";
-import { Kana } from "../../../types/kana/Kana";
-import KanaType from "../../../types/kana/KanaType";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
+import { Kana } from "../../../domain/kana/Kana";
+import KanaType from "../../../domain/kana/KanaType";
+import { KanaColumn } from "../../../domain/kana/KanaColumn";
 
 const onCloseHandler = jest.fn();
 

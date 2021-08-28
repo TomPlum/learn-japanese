@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Card, Modal } from "react-bootstrap";
 import AnswerMistake from "./AnswerMistake";
-import { Learnable } from "../../types/learn/Learnable";
+import { Learnable } from "../../domain/learn/Learnable";
 import styles from "../../styles/sass/components/results/Feedback.module.scss";
 
 export interface FeedbackProps {

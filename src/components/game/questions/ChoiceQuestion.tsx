@@ -2,10 +2,10 @@ import React from "react";
 import Arrays from "../../../utility/Arrays";
 import { Col, Row } from "react-bootstrap";
 import { GameQuestionProps } from "../MemoryGame";
-import GameQuestion from "../../../types/game/GameQuestion";
+import GameQuestion from "../../../domain/game/GameQuestion";
 import AnswerChoiceDisplay from "../../ui/display/AnswerChoiceDisplay";
-import LearnableField from "../../../types/learn/LearnableField";
-import { Learnable } from "../../../types/learn/Learnable";
+import LearnableField from "../../../domain/learn/LearnableField";
+import { Learnable } from "../../../domain/learn/Learnable";
 import QuestionBanner from "../QuestionBanner";
 import styles from "../../../styles/sass/components/game/questions/ChoiceQuestion.module.scss";
 

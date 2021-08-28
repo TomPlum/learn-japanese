@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import SentenceStructureFlashCardFront from "../../../../components/learn/sentence/SentenceStructureFlashCardFront";
-import Definition from "../../../../types/sentence/Definition";
+import Definition from "../../../../domain/sentence/Definition";
 
 const onClickHandler = jest.fn();
 

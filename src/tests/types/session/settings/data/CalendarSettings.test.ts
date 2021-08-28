@@ -1,4 +1,4 @@
-import CalendarSettings, { CalendarSettingsBuilder } from "../../../../../types/session/settings/data/CalendarSettings";
+import CalendarSettings, { CalendarSettingsBuilder } from "../../../../../domain/session/settings/data/CalendarSettings";
 
 describe("Calendar Settings", () => {
     describe("Builder", () => {

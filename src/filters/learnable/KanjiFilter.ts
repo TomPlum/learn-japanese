@@ -1,5 +1,5 @@
 import { Filter } from "../Filter";
-import { Learnable } from "../../types/learn/Learnable";
+import { Learnable } from "../../domain/learn/Learnable";
 
 class KanjiFilter implements Filter<Learnable> {
 

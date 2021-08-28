@@ -9,8 +9,8 @@ import ParallaxBackground from "../layout/ParallaxBackground";
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { KanaRepository } from "../../repository/KanaRepository";
-import { KanaSettingsBuilder } from "../../types/session/settings/data/KanaSettings";
-import { Kana } from "../../types/kana/Kana";
+import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
+import { Kana } from "../../domain/kana/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 
 const LandingPage = () => {

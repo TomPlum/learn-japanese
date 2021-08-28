@@ -3,7 +3,7 @@ import MainMenuPage from "../../../components/pages/MainMenuPage";
 import hiragana from "../../../data/Hiragana";
 import { DayData, KanaData, KanjiData } from "../../../data/DataTypes";
 import katakana from "../../../data/Katakana";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
+import { KanaColumn } from "../../../domain/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
 import { joyo, kyoiku } from "../../../data/Kanji";
 import { days } from "../../../data/Calendar";

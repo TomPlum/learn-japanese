@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Kana } from "../../types/kana/Kana";
+import { Kana } from "../../domain/kana/Kana";
 import styles from "../../styles/sass/components/layout/ParallaxBackground.module.scss";
 import Arrays from "../../utility/Arrays";
 

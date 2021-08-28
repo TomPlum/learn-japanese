@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import LifeSettingsForm from "../../../../components/settings/game/LifeSettingsForm";
-import { LifeSettingsBuilder } from "../../../../types/session/settings/game/LifeSettings";
+import { LifeSettingsBuilder } from "../../../../domain/session/settings/game/LifeSettings";
 
 const onChangeHandler = jest.fn();
 

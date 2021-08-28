@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { KanaRepository } from "../../repository/KanaRepository";
-import { Kana } from "../../types/kana/Kana";
+import { Kana } from "../../domain/kana/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import styles from "../../styles/sass/components/pages/SearchPage.module.scss";
-import KanaType from "../../types/kana/KanaType";
+import KanaType from "../../domain/kana/KanaType";
 import KanaGrid from "../layout/KanaGrid";
 import SearchField from "../ui/fields/SearchField";
 import FilterChain from "../../filters/FilterChain";
@@ -12,7 +12,7 @@ import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
 import DiagraphFilter from "../../filters/kana/DiagraphFilter";
 import DiacriticalFilter from "../../filters/kana/DiacriticalFilter";
 import RomajiFilter from "../../filters/kana/RomajiFilter";
-import { KanaSettingsBuilder } from "../../types/session/settings/data/KanaSettings";
+import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
 import ToggleSwitch from "../ui/ToggleSwitch";
 
 const SearchPage = () => {

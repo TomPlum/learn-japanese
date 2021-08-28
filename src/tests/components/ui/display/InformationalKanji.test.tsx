@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import InformationalKanji from "../../../../components/ui/display/InformationalKanji";
 import { KanjiRepository } from "../../../../repository/KanjiRepository";
-import { Kanji } from "../../../../types/kanji/Kanji";
-import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
+import { Kanji } from "../../../../domain/kanji/Kanji";
+import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
 
 /*const { getByValue } = mock(import("../../../../repository/KanjiRepository"), () => {
     getByValue: jest.fn()

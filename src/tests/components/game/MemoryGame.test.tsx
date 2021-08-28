@@ -1,19 +1,19 @@
 import MemoryGame, { MemoryGameProps } from "../../../components/game/MemoryGame";
 import { cleanup, fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
-import { QuestionType } from "../../../types/game/QuestionType";
-import { Kana } from "../../../types/kana/Kana";
-import KanaType from "../../../types/kana/KanaType";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
+import { QuestionType } from "../../../domain/game/QuestionType";
+import { Kana } from "../../../domain/kana/Kana";
+import KanaType from "../../../domain/kana/KanaType";
+import { KanaColumn } from "../../../domain/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
-import { GameFinishReason } from "../../../types/game/GameFinishReason";
+import { GameFinishReason } from "../../../domain/game/GameFinishReason";
 import { Environment } from "../../../utility/Environment";
 import { v4 } from "uuid";
-import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
-import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
-import { HintSettingsBuilder } from "../../../types/session/settings/game/HintSettings";
-import { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
-import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
-import LearnableField from "../../../types/learn/LearnableField";
+import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
+import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings";
+import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings";
+import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings";
+import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings";
+import LearnableField from "../../../domain/learn/LearnableField";
 import renderReduxConsumer from "../../renderReduxConsumer";
 
 //Mock Event Handlers

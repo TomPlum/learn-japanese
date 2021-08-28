@@ -1,4 +1,4 @@
-import { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
+import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 
 const setup = () => {
     const kana = new KanaRepository().read(new KanaSettingsBuilder().withHiragana().withKatakana().build());

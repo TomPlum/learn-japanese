@@ -1,5 +1,5 @@
-import KanjiSettings, { KanjiSettingsBuilder } from "../../../../../types/session/settings/data/KanjiSettings";
-import { KyoikuGrade } from "../../../../../types/kanji/KyoikuGrade";
+import KanjiSettings, { KanjiSettingsBuilder } from "../../../../../domain/session/settings/data/KanjiSettings";
+import { KyoikuGrade } from "../../../../../domain/kanji/KyoikuGrade";
 
 describe("Kanji Settings", () => {
     describe('Builder', function () {

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Kanji } from "../../../types/kanji/Kanji";
+import { Kanji } from "../../../domain/kanji/Kanji";
 import { KanjiRepository } from "../../../repository/KanjiRepository";
 import Copyable from "../Copyable";
 import Inspectable from "../Inspectable";
 import KanjiReadingDisplay from "../../learn/kanji/KanjiReadingDisplay";
-import { ReadingType } from "../../../types/kanji/ReadingType";
+import { ReadingType } from "../../../domain/kanji/ReadingType";
 import LoadingSpinner from "../LoadingSpinner";
 
 const InformationalKanji = (props: { value: string, className?: string }) => {

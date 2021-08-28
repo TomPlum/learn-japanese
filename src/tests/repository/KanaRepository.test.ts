@@ -1,11 +1,11 @@
 import { KanaRepository } from "../../repository/KanaRepository";
-import { Kana } from "../../types/kana/Kana";
-import KanaType from "../../types/kana/KanaType";
-import { KanaColumn } from "../../types/kana/KanaColumn";
+import { Kana } from "../../domain/kana/Kana";
+import KanaType from "../../domain/kana/KanaType";
+import { KanaColumn } from "../../domain/kana/KanaColumn";
 import hiragana from "../../data/Hiragana";
 import { KanaData } from "../../data/DataTypes";
 import katakana from "../../data/Katakana";
-import { KanaSettingsBuilder } from "../../types/session/settings/data/KanaSettings";
+import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
 
 jest.mock("../../data/Hiragana");
 jest.mock("../../data/Katakana");

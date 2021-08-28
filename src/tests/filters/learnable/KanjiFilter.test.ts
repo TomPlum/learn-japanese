@@ -1,6 +1,6 @@
-import CommonData from "../../../types/learn/CommonData";
+import CommonData from "../../../domain/learn/CommonData";
 import KanjiFilter from "../../../filters/learnable/KanjiFilter";
-import { Learnable } from "../../../types/learn/Learnable";
+import { Learnable } from "../../../domain/learn/Learnable";
 import each from "jest-each";
 
 const data = [

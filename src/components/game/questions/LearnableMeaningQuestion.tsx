@@ -1,8 +1,8 @@
-import { Learnable } from "../../../types/learn/Learnable";
+import { Learnable } from "../../../domain/learn/Learnable";
 import React from "react";
 import { GameQuestionProps } from "../MemoryGame";
 import EnglishInput from "../../ui/fields/EnglishInput";
-import GameQuestion from "../../../types/game/GameQuestion";
+import GameQuestion from "../../../domain/game/GameQuestion";
 import styles from "../../../styles/sass/components/game/questions/LearnableMeaningQuestion.module.scss"
 
 export interface LearnableMeaningQuestionProps extends GameQuestionProps {
@@ -31,7 +31,7 @@ class LearnableMeaningQuestion extends GameQuestion<LearnableMeaningQuestionProp
                 <span className={styles.kana}>
                     {this.getQuestion()}
                 </span>
-                
+
                 <EnglishInput
                     value={answer}
                     disabled={!data || hidden}

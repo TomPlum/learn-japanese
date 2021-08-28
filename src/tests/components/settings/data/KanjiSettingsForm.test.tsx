@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiSettingsForm from "../../../../components/settings/data/KanjiSettingsForm";
-import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
-import { SessionSettings } from "../../../../types/session/settings/SessionSettings";
-import KanjiSettings, { KanjiSettingsBuilder } from "../../../../types/session/settings/data/KanjiSettings";
-import LearnSettings from "../../../../types/session/settings/LearnSettings";
+import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
+import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
+import KanjiSettings, { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings";
+import LearnSettings from "../../../../domain/session/settings/LearnSettings";
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu";
 

@@ -1,5 +1,5 @@
-import KanaType from "../../types/kana/KanaType";
-import { Kana } from "../../types/kana/Kana";
+import KanaType from "../../domain/kana/KanaType";
+import { Kana } from "../../domain/kana/Kana";
 import { Filter } from "../Filter";
 
 export default class KanaTypeFilter implements Filter<Kana> {

@@ -1,4 +1,4 @@
-import Colour from "../../../types/colour/Colour";
+import Colour from "../../../domain/colour/Colour";
 
 describe("Colour", () => {
 

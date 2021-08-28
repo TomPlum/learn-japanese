@@ -1,7 +1,7 @@
 import { Alert, OverlayTrigger } from "react-bootstrap";
 import React, { Component } from "react";
-import LearnableField from "../../types/learn/LearnableField";
-import { Learnable } from "../../types/learn/Learnable";
+import LearnableField from "../../domain/learn/LearnableField";
+import { Learnable } from "../../domain/learn/Learnable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import PopOver from "../ui/PopOver";

@@ -1,5 +1,5 @@
 import { CardFaceProps } from "../FlashCard";
-import Colour from "../../../types/colour/Colour";
+import Colour from "../../../domain/colour/Colour";
 import CommonFlashCardBack from "../CommonFlashCardBack";
 
 function BasicsFlashCardBack(props: CardFaceProps) {

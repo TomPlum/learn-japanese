@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import DisplayTypeButton, { DisplayTypeButtonProps } from "../../../../components/ui/buttons/DisplayTypeButton";
-import { QuestionType } from "../../../../types/game/QuestionType";
+import { QuestionType } from "../../../../domain/game/QuestionType";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
 const onClickHandler = jest.fn();

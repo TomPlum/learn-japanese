@@ -1,4 +1,4 @@
-import TimeSettings, { TimeSettingsBuilder } from "../../../../../types/session/settings/game/TimeSettings";
+import TimeSettings, { TimeSettingsBuilder } from "../../../../../domain/session/settings/game/TimeSettings";
 
 describe("Time Settings", () => {
     describe("Builder", () => {

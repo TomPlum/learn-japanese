@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import CalendarFlashCardBack from "../../../../components/learn/calendar/CalendarFlashCardBack";
-import Definition from "../../../../types/sentence/Definition";
+import Definition from "../../../../domain/sentence/Definition";
 
 const onClickHandler = jest.fn();
 

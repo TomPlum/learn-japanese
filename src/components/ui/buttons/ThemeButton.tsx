@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Theme } from "../../../types/Theme";
+import { Theme } from "../../../domain/Theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { Nav } from "react-bootstrap";

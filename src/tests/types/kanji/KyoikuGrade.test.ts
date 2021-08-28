@@ -1,4 +1,4 @@
-import { KyoikuGrade } from "../../../types/kanji/KyoikuGrade";
+import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 
 describe("Kyoiku Grade", () => {
     describe("Static Grade Presets", () => {

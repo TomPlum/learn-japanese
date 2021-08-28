@@ -1,5 +1,5 @@
 import { Filter } from "../Filter";
-import { Kana } from "../../types/kana/Kana";
+import { Kana } from "../../domain/kana/Kana";
 
 export default class DiacriticalFilter implements Filter<Kana> {
 

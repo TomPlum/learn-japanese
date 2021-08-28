@@ -1,4 +1,4 @@
-import HintSettings, { HintSettingsBuilder } from "../../../../../types/session/settings/game/HintSettings";
+import HintSettings, { HintSettingsBuilder } from "../../../../../domain/session/settings/game/HintSettings";
 
 describe("Hint Settings", () => {
     describe("Builder", () => {

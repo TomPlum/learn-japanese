@@ -1,10 +1,10 @@
 import { fireEvent } from "@testing-library/react";
 import KanjiFlashCardFront from "../../../../components/learn/kanji/KanjiFlashCardFront";
-import { Kanji } from "../../../../types/kanji/Kanji";
-import { KanjiReading } from "../../../../types/kanji/KanjiReading";
-import { ReadingType } from "../../../../types/kanji/ReadingType";
-import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
-import { Example } from "../../../../types/kanji/Example";
+import { Kanji } from "../../../../domain/kanji/Kanji";
+import { KanjiReading } from "../../../../domain/kanji/KanjiReading";
+import { ReadingType } from "../../../../domain/kanji/ReadingType";
+import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
+import { Example } from "../../../../domain/kanji/Example";
 import renderReduxConsumer from "../../../renderReduxConsumer";
 
 const onClickHandler = jest.fn();

@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Col, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/settings/data/KanaSettingsForm.module.scss";
-import KanaSettings, { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
+import KanaSettings, { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import ToggleSwitch from "../../ui/ToggleSwitch";
 import DataSettingsMenu, { DataSettingsMenuProps } from "./DataSettingsMenu";
 import QuantityField from "../../ui/fields/QuantityField";

@@ -1,18 +1,18 @@
-import Topic from "../types/Topic";
-import { Learnable } from "../types/learn/Learnable";
+import Topic from "../domain/Topic";
+import { Learnable } from "../domain/learn/Learnable";
 import { KanaRepository } from "./KanaRepository";
 import CalendarRepository from "./CalendarRepository";
 import { KanjiRepository } from "./KanjiRepository";
 import BasicsRepository from "./BasicsRepository";
 import NumbersRepository from "./NumbersRepository";
 import SentenceStructureRepository from "./SentenceStructureRepository";
-import DataSettings from "../types/session/settings/data/DataSettings";
-import KanaSettings from "../types/session/settings/data/KanaSettings";
-import CalendarSettings from "../types/session/settings/data/CalendarSettings";
-import KanjiSettings from "../types/session/settings/data/KanjiSettings";
-import BasicsSettings from "../types/session/settings/data/BasicsSettings";
-import SentenceStructureSettings from "../types/session/settings/data/SentenceStructureSettings";
-import NumbersSettings from "../types/session/settings/data/NumbersSettings";
+import DataSettings from "../domain/session/settings/data/DataSettings";
+import KanaSettings from "../domain/session/settings/data/KanaSettings";
+import CalendarSettings from "../domain/session/settings/data/CalendarSettings";
+import KanjiSettings from "../domain/session/settings/data/KanjiSettings";
+import BasicsSettings from "../domain/session/settings/data/BasicsSettings";
+import SentenceStructureSettings from "../domain/session/settings/data/SentenceStructureSettings";
+import NumbersSettings from "../domain/session/settings/data/NumbersSettings";
 
 export default class LearningDataRepository {
     public async read(settings?: DataSettings): Promise<Learnable[]> {

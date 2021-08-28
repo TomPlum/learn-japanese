@@ -1,16 +1,16 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import SettingsMenu, { GameSettingsMenuProps } from "../../../components/layout/SettingsMenu";
-import Topic from "../../../types/Topic";
-import { AppMode } from "../../../types/AppMode";
-import { SessionSettings } from "../../../types/session/settings/SessionSettings";
-import { CalendarSettingsBuilder } from "../../../types/session/settings/data/CalendarSettings";
-import { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
-import LearnSettings from "../../../types/session/settings/LearnSettings";
-import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
-import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
-import { QuestionType } from "../../../types/game/QuestionType";
-import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
-import LearnableField from "../../../types/learn/LearnableField";
+import Topic from "../../../domain/Topic";
+import { AppMode } from "../../../domain/AppMode";
+import { SessionSettings } from "../../../domain/session/settings/SessionSettings";
+import { CalendarSettingsBuilder } from "../../../domain/session/settings/data/CalendarSettings";
+import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
+import LearnSettings from "../../../domain/session/settings/LearnSettings";
+import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
+import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings";
+import { QuestionType } from "../../../domain/game/QuestionType";
+import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings";
+import LearnableField from "../../../domain/learn/LearnableField";
 import { getValueLastCalledWith } from "../../Queries";
 
 //Mock scrollIntoView() as it doesn't exist in JSDom

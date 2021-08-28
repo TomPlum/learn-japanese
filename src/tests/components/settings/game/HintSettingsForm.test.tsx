@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import HintSettingsForm from "../../../../components/settings/game/HintSettingsForm";
-import HintSettings, { HintSettingsBuilder } from "../../../../types/session/settings/game/HintSettings";
+import HintSettings, { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings";
 import { getValueLastCalledWith } from "../../../Queries";
 import React from "react";
 

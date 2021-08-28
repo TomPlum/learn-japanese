@@ -1,6 +1,6 @@
 import { AdjectiveData, AdverbData, ExpressionData, VerbData } from "./DataTypes";
-import { AdjectiveType } from "../types/sentence/AdjectiveType";
-import { VerbType } from "../types/sentence/VerbType";
+import { AdjectiveType } from "../domain/sentence/AdjectiveType";
+import { VerbType } from "../domain/sentence/VerbType";
 
 export function adjectives(): AdjectiveData[] {
     return [

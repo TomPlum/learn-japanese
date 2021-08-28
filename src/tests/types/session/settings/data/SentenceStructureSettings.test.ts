@@ -1,4 +1,4 @@
-import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../../../../../types/session/settings/data/SentenceStructureSettings";
+import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../../../../../domain/session/settings/data/SentenceStructureSettings";
 
 describe('Sentence Structure Settings', () => {
     describe("Builder", () => {

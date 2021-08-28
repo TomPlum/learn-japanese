@@ -1,9 +1,9 @@
-import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../types/session/settings/game/QuestionSettings";
-import { QuestionType } from "../../../../../types/game/QuestionType";
-import LearnableField from "../../../../../types/learn/LearnableField";
+import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../domain/session/settings/game/QuestionSettings";
+import { QuestionType } from "../../../../../domain/game/QuestionType";
+import LearnableField from "../../../../../domain/learn/LearnableField";
 import FilterChain from "../../../../../filters/FilterChain";
-import { Learnable } from "../../../../../types/learn/Learnable";
-import { Kana } from "../../../../../types/kana/Kana";
+import { Learnable } from "../../../../../domain/learn/Learnable";
+import { Kana } from "../../../../../domain/kana/Kana";
 import DiagraphFilter from "../../../../../filters/kana/DiagraphFilter";
 
 describe("Question Settings", () => {

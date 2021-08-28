@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import NumbersFlashCardFront from "../../../../components/learn/numbers/NumbersFlashCardFront";
-import CommonData from "../../../../types/learn/CommonData";
+import CommonData from "../../../../domain/learn/CommonData";
 
 const onClickHandler = jest.fn();
 

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, Component } from "react";
 import { Col, Row } from "react-bootstrap";
-import TimeSettings, { TimeSettingsBuilder } from "../../../types/session/settings/game/TimeSettings";
+import TimeSettings, { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings";
 import styles from "../../../styles/sass/components/settings/game/TimeSettingsForm.module.scss";
 import RangeSlider from "react-bootstrap-range-slider";
 import ScrollableContainer from "../../ui/ScrollableContainer";

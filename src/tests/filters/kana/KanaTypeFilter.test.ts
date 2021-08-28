@@ -1,6 +1,6 @@
-import { Kana } from "../../../types/kana/Kana";
-import KanaType from "../../../types/kana/KanaType";
-import { KanaColumn } from "../../../types/kana/KanaColumn";
+import { Kana } from "../../../domain/kana/Kana";
+import KanaType from "../../../domain/kana/KanaType";
+import { KanaColumn } from "../../../domain/kana/KanaColumn";
 import KanaTypeFilter from "../../../filters/kana/KanaTypeFilter";
 
 describe("Kana Type Filter", () => {

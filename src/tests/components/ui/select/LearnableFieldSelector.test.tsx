@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import LearnableFieldSelector, { LearnableFieldSelectorProps } from "../../../../components/ui/select/LearnableFieldSelector";
-import LearnableField from "../../../../types/learn/LearnableField";
+import LearnableField from "../../../../domain/learn/LearnableField";
 import userEvent from "@testing-library/user-event";
 
 const onSelectHandler = jest.fn();

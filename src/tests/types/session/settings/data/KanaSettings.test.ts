@@ -1,4 +1,4 @@
-import KanaSettings, { KanaSettingsBuilder } from "../../../../../types/session/settings/data/KanaSettings";
+import KanaSettings, { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";
 
 describe('Kana Settings', function () {
     describe('Builder', () => {

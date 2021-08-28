@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Topic from "../../types/Topic";
+import Topic from "../../domain/Topic";
 import TopicSelectionMenu from "./TopicSelectionMenu";
-import { AppMode } from "../../types/AppMode";
+import { AppMode } from "../../domain/AppMode";
 import ModeSelectionMenu from "../learn/ModeSelectionMenu";
-import { SessionSettings } from "../../types/session/settings/SessionSettings";
+import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 import styles from "../../styles/sass/components/layout/SettingsMenu.module.scss";
 
 export interface GameSettingsMenuProps {

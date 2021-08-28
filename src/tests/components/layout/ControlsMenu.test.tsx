@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react";
 import { Router } from "react-router-dom";
 import ControlsMenu, { ControlsMenuProps } from "../../../components/layout/ControlsMenu";
 import { createMemoryHistory } from "history";
-import { AppMode } from "../../../types/AppMode";
+import { AppMode } from "../../../domain/AppMode";
 import { Provider } from "react-redux";
 import { store } from "../../../store";
 

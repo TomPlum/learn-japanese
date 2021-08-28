@@ -1,9 +1,9 @@
 import { fireEvent, screen } from "@testing-library/react";
-import { Kanji } from "../../../../types/kanji/Kanji";
-import { KanjiReading } from "../../../../types/kanji/KanjiReading";
-import { ReadingType } from "../../../../types/kanji/ReadingType";
-import { KyoikuGrade } from "../../../../types/kanji/KyoikuGrade";
-import { Example } from "../../../../types/kanji/Example";
+import { Kanji } from "../../../../domain/kanji/Kanji";
+import { KanjiReading } from "../../../../domain/kanji/KanjiReading";
+import { ReadingType } from "../../../../domain/kanji/ReadingType";
+import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
+import { Example } from "../../../../domain/kanji/Example";
 import KanjiFlashCardBack from "../../../../components/learn/kanji/KanjiFlashCardBack";
 import { Environment } from "../../../../utility/Environment";
 import { getByTextWithMarkup } from "../../../Queries";

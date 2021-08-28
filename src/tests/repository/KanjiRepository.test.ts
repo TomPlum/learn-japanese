@@ -1,6 +1,6 @@
 import { KanjiRepository } from "../../repository/KanjiRepository";
-import { KyoikuGrade } from "../../types/kanji/KyoikuGrade";
-import { KanjiSettingsBuilder } from "../../types/session/settings/data/KanjiSettings";
+import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
+import { KanjiSettingsBuilder } from "../../domain/session/settings/data/KanjiSettings";
 import Arrays from "../../utility/Arrays";
 import axios from "axios";
 

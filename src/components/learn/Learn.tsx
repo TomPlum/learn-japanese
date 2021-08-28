@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import LearningSessionResult from "../../types/learn/LearningSessionResult";
-import { Learnable } from "../../types/learn/Learnable";
+import LearningSessionResult from "../../domain/learn/LearningSessionResult";
+import { Learnable } from "../../domain/learn/Learnable";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import ConfirmModal from "../ui/ConfirmModal";
 import QuitButton from "../ui/buttons/QuitButton";

@@ -1,7 +1,7 @@
 import { act, fireEvent, screen } from "@testing-library/react";
 import TextQuestion, { TextQuestionProps } from "../../../../components/game/questions/TextQuestion";
 import React from "react";
-import LearnableField from "../../../../types/learn/LearnableField";
+import LearnableField from "../../../../domain/learn/LearnableField";
 import renderReduxConsumer from "../../../renderReduxConsumer";
 
 const isValidHandler = jest.fn();

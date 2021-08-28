@@ -1,12 +1,12 @@
-import { KanjiReading } from "../types/kanji/KanjiReading";
-import { ReadingType } from "../types/kanji/ReadingType";
-import { Example } from "../types/kanji/Example";
+import { KanjiReading } from "../domain/kanji/KanjiReading";
+import { ReadingType } from "../domain/kanji/ReadingType";
+import { Example } from "../domain/kanji/Example";
 import { KanjiData, KanjiExample } from "../data/DataTypes";
 import Repository from "./Repository";
-import KanjiSettings from "../types/session/settings/data/KanjiSettings";
+import KanjiSettings from "../domain/session/settings/data/KanjiSettings";
 import Arrays from "../utility/Arrays";
-import { Kanji } from "../types/kanji/Kanji";
-import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
+import { Kanji } from "../domain/kanji/Kanji";
+import { KyoikuGrade } from "../domain/kanji/KyoikuGrade";
 import RomajiGenerator from "../utility/RomajiGenerator";
 import { joyo, kyoiku } from "../data/Kanji";
 

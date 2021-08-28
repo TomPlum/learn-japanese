@@ -1,6 +1,6 @@
 import React, { ChangeEvent, Component } from "react";
 import GameInputField from "./GameInputField";
-import LearnableField from "../../../types/learn/LearnableField";
+import LearnableField from "../../../domain/learn/LearnableField";
 import PopOver from "../PopOver";
 
 export interface AnswerInputFieldProps {

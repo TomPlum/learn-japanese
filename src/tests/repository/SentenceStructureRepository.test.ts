@@ -1,10 +1,10 @@
 import SentenceStructureRepository from "../../repository/SentenceStructureRepository";
 import { AdjectiveData, AdverbData, ExpressionData, VerbData } from "../../data/DataTypes";
 import { adjectives, adverbs, expressions, verbs } from "../../data/SentenceStructure";
-import { AdjectiveType } from "../../types/sentence/AdjectiveType";
-import { VerbType } from "../../types/sentence/VerbType";
-import Definition from "../../types/sentence/Definition";
-import { SentenceStructureSettingsBuilder } from "../../types/session/settings/data/SentenceStructureSettings";
+import { AdjectiveType } from "../../domain/sentence/AdjectiveType";
+import { VerbType } from "../../domain/sentence/VerbType";
+import Definition from "../../domain/sentence/Definition";
+import { SentenceStructureSettingsBuilder } from "../../domain/session/settings/data/SentenceStructureSettings";
 
 jest.mock("../../data/SentenceStructure");
 
