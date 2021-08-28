@@ -14,7 +14,6 @@ import { v4 as uuid } from "uuid";
  * That could be anything from a Kanji character, to a compass direction, to a grammar particle.
  */
 export abstract class Learnable {
-
     /**
      * Used by a {@link FlashCardBack} to display what the thing is.
      * It's left up to the given implementation to decide what it's title display as.
