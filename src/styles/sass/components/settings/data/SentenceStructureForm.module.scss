@@ -1,0 +1,7 @@
+@import "src/styles/sass/components/forms";
+
+@include DataSettingsForm;
+
+.quantityWrapper {
+  margin-bottom: 20px;
+}

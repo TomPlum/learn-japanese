@@ -20,4 +20,9 @@ describe("Environment", () => {
         const value = Environment.variable('CōNTAINS_SPECIAL_CHARACTERS');
         expect(value).toBe('Special characters should work');
     });
+
+    it("Should remove single quotes from variable key names", () => {
+        const value = Environment.variable("HAS_SINGLE_QUOTE_ON'YOMI");
+        expect(value).toBe('Key containing single quote');
+    });
 });

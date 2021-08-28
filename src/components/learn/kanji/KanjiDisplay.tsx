@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Container } from "react-bootstrap";
 import { Kanji } from "../../../types/kanji/Kanji";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiDisplay.module.scss";
+import DynamicDisplay from "../../ui/display/DynamicDisplay";
 
 interface KanjiDisplayProps {
     kanji: Kanji;
@@ -26,13 +27,13 @@ class KanjiDisplay extends Component<KanjiDisplayProps> {
                         title="Click for Wiki source"
                         style={style}
                     >
-                        {kanji.getValue()}
+                        <DynamicDisplay value={kanji.getValue()} />
                     </a> :
                     <p
                         className={[styles.value, className].join(" ")}
                         style={style}
                     >
-                        {kanji.getValue()}
+                        <DynamicDisplay value={kanji.getValue()} />
                     </p>
                 }
             </Container>

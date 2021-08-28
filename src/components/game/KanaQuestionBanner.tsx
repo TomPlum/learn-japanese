@@ -19,7 +19,7 @@ class KanaQuestionBanner extends Component<KanaQuestionBannerProps> {
 
     private getRomaji = () => {
         const value = this.props.value;
-        const romaji = value.romaji;
+        const romaji = value.getRomaji();
         if (romaji.length > 1) {
             return <><strong>'{romaji[0]}'</strong> or <strong>'{romaji[1]}'</strong></>;
         } else {

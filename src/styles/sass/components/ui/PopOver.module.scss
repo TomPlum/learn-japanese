@@ -1,13 +1,13 @@
+@import "src/styles/sass/mixins";
+
 .title {
+  @include noSelect;
   font-family: "Ciutadella Rounded Medium", sans-serif;
   font-size: 1.2em;
 }
 
 .text {
+  @include noSelect;
   font-family: "Ciutadella Rounded", sans-serif;
   font-size: 1.2em;
-}
-
-.popover {
-
 }

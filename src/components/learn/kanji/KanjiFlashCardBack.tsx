@@ -9,9 +9,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CardBackFaceProps } from "../FlashCard";
 import { Kanji } from "../../../types/kanji/Kanji";
 import KanjiReadingDisplay from "./KanjiReadingDisplay";
-import { Reading } from "../../../types/kanji/Reading";
+import { KanjiReading } from "../../../types/kanji/KanjiReading";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
 import KanjiExampleDisplay from "./KanjiExampleDisplay";
+import KanjiMeaningDisplay from "./KanjiMeaningDisplay";
 
 //TODO: Replace redundant bits with FlashCardBack component
 class KanjiFlashCardBack extends Component<CardBackFaceProps> {
@@ -48,10 +49,10 @@ class KanjiFlashCardBack extends Component<CardBackFaceProps> {
 
                         <div className={styles.meaningWrapper}>
                             <p className={styles.text}>
-                                <Inspectable title="English Meaning" text={Environment.variable("ENGLISH_MEANING_DESC")}>
+                                <Inspectable popover={{ title: "English Meaning", text: Environment.variable("ENGLISH_MEANING_DESC") }}>
                                     <span className={styles.label}>Meaning</span>
                                 </Inspectable>
-                                {": " + kanji.meanings.join(", ")}
+                                {': '}<KanjiMeaningDisplay meanings={kanji.getMeanings()} />
                             </p>
                         </div>
                     </Col>
@@ -66,7 +67,7 @@ class KanjiFlashCardBack extends Component<CardBackFaceProps> {
         );
     }
 
-    private getReadings = (type: ReadingType): Reading[] => {
+    private getReadings = (type: ReadingType): KanjiReading[] => {
         return (this.props.data as Kanji).readings.filter(it => it.type === type);
     }
 

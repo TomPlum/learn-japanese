@@ -25,3 +25,22 @@ export const getByTextWithElements = (text: string): HTMLElement => {
         return content !== '' && element && element.textContent === text;
     });
 }
+
+export const findByTextWithElements = async (text: string): Promise<HTMLElement> => {
+    // @ts-ignore
+    return await screen.findByText((content, element) => {
+        return content !== '' && element && element.textContent === text;
+    });
+}
+
+/**
+ * Returns the value of the first parameter of the last call to the given function.
+ * @see https://jestjs.io/docs/mock-functions#mock-property
+ * @param fn A Jest Mock function
+ * @return value of the first parameter
+ */
+export const getValueLastCalledWith = <T>(fn: jest.Mock): T => {
+    const calls = fn.mock.calls;
+    const lastCall = calls[calls.length - 1];
+    return lastCall[0]; //First arg
+}

@@ -11,7 +11,7 @@ export default class RomajiFilter implements Filter<Kana> {
 
     apply(values: Kana[]): Kana[] {
         if (this.search) {
-            return values.filter(kana => kana.romaji.some(romaji => romaji.includes(this.search)));
+            return values.filter(kana => kana.getRomaji().some(romaji => romaji.includes(this.search)));
         }
         return values;
     }

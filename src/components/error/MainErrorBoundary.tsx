@@ -30,7 +30,7 @@ class MainErrorBoundary extends Component<any, MainErrorBoundaryState> {
     }
 
     render() {
-        {this.state.hasError && this.state.errors.map((error: Error) => {
+        this.state.hasError && this.state.errors.map((error: Error) => {
             return (
                 <Toast>
                     <Toast.Header>
@@ -42,7 +42,7 @@ class MainErrorBoundary extends Component<any, MainErrorBoundaryState> {
                     </Toast.Body>
                 </Toast>
             );
-        })}
+        })
         return this.props.children;
     }
 

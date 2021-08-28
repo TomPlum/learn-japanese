@@ -1,8 +1,6 @@
-.disabled {
-  opacity: 0.6;
-}
+@import "src/styles/sass/colours";
 
-.button {
+@mixin default {
   width: 100%;
   max-width: 155px;
   display: flex;
@@ -11,10 +9,20 @@
   transition: ease-in-out 0.2s;
 }
 
+.disabled {
+  @include default;
+  opacity: 0.6;
+}
+
+.button {
+  @include default;
+}
+
 .text {
   font-family: "Ciutadella Rounded Medium", sans-serif;
   font-size: 1.2em;
   margin-top: 4px;
+  margin-left: 8px;
   vertical-align: center;
 }
 
@@ -23,4 +31,8 @@
   font-size: 1.05em;
   margin-left: 4px;
   margin-top: 3px;
+}
+
+.hint {
+  color: #000;
 }

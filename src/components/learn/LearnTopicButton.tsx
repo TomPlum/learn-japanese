@@ -3,14 +3,14 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/learn/LearnTopicButton.module.scss";
-import LearningMode from "../../types/learn/LearningMode";
+import SessionMode from "../../types/session/SessionMode";
 
 export interface LearnTopicButtonProps {
     icon: IconDefinition | string;
     iconColour?: string;
-    type: LearningMode;
-    selected: LearningMode;
-    onClick: (mode: LearningMode) => void;
+    type: SessionMode;
+    selected: SessionMode;
+    onClick: (mode: SessionMode) => void;
 }
 
 class LearnTopicButton extends Component<LearnTopicButtonProps> {
@@ -25,7 +25,7 @@ class LearnTopicButton extends Component<LearnTopicButtonProps> {
                 onClick={this.handleOnClick}
                 className={(isSelected ? styles.selected : styles.notSelected) + " " + styles.button}
             >
-                {this.isFontAwesomeIcon(icon) &&
+                {this.isFontAwesomeIcon() &&
                     <FontAwesomeIcon
                         icon={icon as IconDefinition}
                         fixedWidth
@@ -33,7 +33,8 @@ class LearnTopicButton extends Component<LearnTopicButtonProps> {
                         style={{ color: colour }}
                     />
                 }
-                {!this.isFontAwesomeIcon(icon) &&
+
+                {!this.isFontAwesomeIcon() &&
                     <span className={styles.textIcon} style={{ color: colour }}>
                         {icon}
                     </span>
@@ -46,7 +47,8 @@ class LearnTopicButton extends Component<LearnTopicButtonProps> {
 
     private handleOnClick = () => this.props.onClick(this.props.type);
 
-    private isFontAwesomeIcon(icon: IconDefinition | string) {
+    private isFontAwesomeIcon() {
+        const icon: IconDefinition | string = this.props.icon;
         return !(typeof icon === 'string');
     }
 }

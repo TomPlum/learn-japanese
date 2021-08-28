@@ -7,6 +7,11 @@ export default class FilterChain<T> {
         this.filters.add(filter);
     }
 
+    public withFilter(filter: Filter<T>): FilterChain<T> {
+        this.filters.add(filter);
+        return this;
+    }
+
     public execute(values: T[]): T[] {
         let reduced = values;
         [...this.filters].forEach((filter: Filter<T>) => {

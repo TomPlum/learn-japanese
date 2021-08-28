@@ -1,12 +1,15 @@
-import { Kana } from "../kana/Kana";
-import { FailureReason } from "./FailureReason";
+import { GameFinishReason } from "./GameFinishReason";
+import { Learnable } from "../learn/Learnable";
+import GameSettings from "../session/settings/game/GameSettings";
 
 export default interface GameResult {
-    reason?: FailureReason;
+    settings: GameSettings;
+    reason: GameFinishReason;
     success: boolean;
     duration?: string;
+    score?: number;
     livesRemaining: number;
-    totalKanaOffered: number;
-    correctAnswers: Set<Kana>;
-    wrongAnswers: Kana[];
+    hintsRemaining: number;
+    correctAnswers: Set<Learnable>;
+    wrongAnswers: Learnable[];
 }

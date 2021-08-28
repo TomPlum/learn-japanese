@@ -1,0 +1,58 @@
+@import "src/styles/sass/viewports";
+
+.wrapper {
+}
+
+.card {
+  padding: 20px;
+}
+
+.scrollable {
+  height: 403px;
+  padding-bottom: 15px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.button {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  padding: 6px 4px;
+  transition: all ease 0.2s;
+}
+
+.footer {
+  padding: 15px 0 0 0;
+}
+
+@mixin title {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  color: #FFF;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #007bff;
+}
+
+@include phone {
+  .title {
+    @include title;
+    font-size: 1.4em;
+  }
+}
+
+@include tablet {
+  .title {
+    @include title;
+    font-size: 1.7em;
+  }
+}
+
+@include desktop {
+  .title {
+    @include title;
+    font-size: 2em;
+  }
+}

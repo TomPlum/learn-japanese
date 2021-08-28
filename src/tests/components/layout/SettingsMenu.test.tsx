@@ -1,12 +1,23 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import SettingsMenu, { GameSettingsMenuProps } from "../../../components/layout/SettingsMenu";
 import Topic from "../../../types/Topic";
-import { RELAXED } from "../../../data/GameModePresets";
 import { AppMode } from "../../../types/AppMode";
+import { SessionSettings } from "../../../types/session/settings/SessionSettings";
+import { CalendarSettingsBuilder } from "../../../types/session/settings/data/CalendarSettings";
+import { KanaSettingsBuilder } from "../../../types/session/settings/data/KanaSettings";
+import LearnSettings from "../../../types/session/settings/LearnSettings";
+import { GameSettingsBuilder } from "../../../types/session/settings/game/GameSettings";
+import { QuestionSettingsBuilder } from "../../../types/session/settings/game/QuestionSettings";
+import { QuestionType } from "../../../types/game/QuestionType";
+import { LifeSettingsBuilder } from "../../../types/session/settings/game/LifeSettings";
+import LearnableField from "../../../types/learn/LearnableField";
+import { getValueLastCalledWith } from "../../Queries";
 
+//Mock scrollIntoView() as it doesn't exist in JSDom
+const scrollIntoView = jest.fn();
+window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
 
-const onStartGameHandler = jest.fn();
-const onStartLearnHandler = jest.fn();
+const onStartHandler = jest.fn();
 
 let props: GameSettingsMenuProps;
 
@@ -25,10 +36,21 @@ const setup = () => {
 
 beforeEach(() => {
     props = {
-        onStartGame: onStartGameHandler,
-        onStartLearn: onStartLearnHandler,
+        onStart: onStartHandler,
         mode: AppMode.PLAY
     };
+});
+
+test('Should call scroll into view on mount', () => {
+    setup();
+    expect(scrollIntoView).toHaveBeenCalled();
+});
+
+test('Should call scroll into view when changing topic', () => {
+    const { kanji } = setup();
+    expect(scrollIntoView).toHaveBeenCalled();
+    fireEvent.click(kanji);
+    expect(scrollIntoView).toHaveBeenCalledTimes(2);
 });
 
 describe("Rendering Game Menus", () => {
@@ -60,7 +82,17 @@ describe("Starting Game", () => {
     test('Starting a kana game should call the onStartGame event handler with correct type and settings', () => {
         const { start } = setup();
         fireEvent.click(start);
-        expect(onStartGameHandler).toHaveBeenCalledWith({ topic: Topic.KANA, settings: RELAXED });
+        const settings = getValueLastCalledWith<SessionSettings>(onStartHandler);
+        expect(settings.dataSettings).toStrictEqual(new KanaSettingsBuilder().withEverything().build());
+        /*expect(settings.gameSettings).toBe(new GameSettingsBuilder()
+            .withQuestionSettings(new QuestionSettingsBuilder()
+                .withFields(LearnableField.KANA, LearnableField.ROMAJI)
+                .withType(QuestionType.TEXT)
+                .withScoreTracking(false)
+                .build()
+            )
+            .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
+            .build());*/ //TODO: Stupid function equality not working for answerFilter
     });
 
     //TODO: Re-enable once implemented calendar game
@@ -68,7 +100,7 @@ describe("Starting Game", () => {
         const { start, calendar } = setup();
         fireEvent.click(calendar);
         fireEvent.click(start);
-        expect(onStartGameHandler).toHaveBeenCalledWith({ topic: Topic.CALENDAR, settings: undefined });
+        expect(onStartHandler).toHaveBeenCalledWith({ topic: Topic.CALENDAR, settings: undefined });
     });
 
     //TODO: Re-enable once created numbers menu with a start button
@@ -76,7 +108,7 @@ describe("Starting Game", () => {
         const { start, numbers } = setup();
         fireEvent.click(numbers);
         fireEvent.click(start);
-        expect(onStartGameHandler).toHaveBeenCalledWith({ topic: Topic.NUMBERS, settings: undefined });
+        expect(onStartHandler).toHaveBeenCalledWith({ topic: Topic.NUMBERS, settings: undefined });
     });
 });
 
@@ -88,14 +120,20 @@ describe("Starting Learn Session", () => {
     test('Starting a kana learning session should call the onStartLearn event handler with correct type and settings', () => {
         const { start } = setup();
         fireEvent.click(start);
-        expect(onStartLearnHandler).toHaveBeenCalledWith({ topic: Topic.KANA, settings: { kana: { hiragana: true } } });
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(
+            new KanaSettingsBuilder().withHiragana().build(),
+            new LearnSettings())
+        );
     });
 
     test('Starting a calendar learning session should call the onStartLearn event handler with the correct type and settings', () => {
         const { calendar } = setup();
         fireEvent.click(calendar);
         fireEvent.click(screen.getByText('Start'));
-        expect(onStartLearnHandler).toHaveBeenCalledWith({ topic: Topic.CALENDAR, settings: { calendar: { days: true } } });
+        expect(onStartHandler).toHaveBeenCalledWith(SessionSettings.forLearning(
+            new CalendarSettingsBuilder().withDays().build(),
+            new LearnSettings())
+        );
     });
 
 })

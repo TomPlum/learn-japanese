@@ -1,21 +1,30 @@
 import React, { Component } from "react";
-import { faHeart, faInfinity } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faHeartBroken, faInfinity } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/sass/components/game/LifeDisplay.module.scss";
 
 export interface LifeDisplayProps {
+    enabled: boolean;
     hearts: number;
     className?: string;
 }
 
 class LifeDisplay extends Component<LifeDisplayProps> {
     render() {
-        const { hearts, className } = this.props;
+        const { hearts, enabled, className } = this.props;
         return (
-            <div className={className}>
-                <FontAwesomeIcon icon={faHeart} title="Lives" className={styles.icon}/>
+            <div className={[className, styles.wrapper].join(" ")}>
+                <FontAwesomeIcon
+                    icon={enabled && hearts === 1 ? faHeartBroken : faHeart}
+                    title="Lives"
+                    className={styles.icon}
+                />
+
                 <span className={styles.quantity}>
-                    {hearts === 999 ? <FontAwesomeIcon icon={faInfinity} title="Infinite"/> : hearts}
+                    {!enabled ?
+                        <FontAwesomeIcon className={styles.infinite} icon={faInfinity} title="Infinite"/>
+                        : hearts
+                    }
                 </span>
             </div>
         );

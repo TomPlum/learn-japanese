@@ -3,27 +3,52 @@ import hiragana from "../data/Hiragana";
 import katakana from "../data/Katakana";
 import KanaType from "../types/kana/KanaType";
 import { KanaData } from "../data/DataTypes";
-import { KanaSettings } from "../types/game/GameSettings";
 import DiagraphFilter from "../filters/kana/DiagraphFilter";
 import FilterChain from "../filters/FilterChain";
 import QuantityFilter from "../filters/kana/QuantityFilter";
 import KanaTypeFilter from "../filters/kana/KanaTypeFilter";
 import Repository from "./Repository";
+import KanaSettings from "../types/session/settings/data/KanaSettings";
+import DiacriticalFilter from "../filters/kana/DiacriticalFilter";
+import RegularKanaFilter from "../filters/kana/RegularKanaFilter";
 
 export class KanaRepository implements Repository<Kana> {
 
-    public read(config: KanaSettings): Kana[] {
+    public read(config: KanaSettings): Promise<Kana[]> {
         const chain = new FilterChain<Kana>();
 
-        if (!config.hiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));
-        if (!config.katakana) chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA));
-        if (!config.diagraphs) chain.addFilter(new DiagraphFilter());
-        if (config.quantity) chain.addFilter(new QuantityFilter(config.quantity));
+        if (!config.hiragana) {
+            chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));
+        }
 
-        return chain.execute(this.readAllKana());
+        if (!config.katakana) {
+            chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA));
+        }
+
+        if (!config.regular) {
+            chain.addFilter(new RegularKanaFilter())
+        }
+
+        if (config.onlyDiagraphs) {
+            chain.addFilter(new DiagraphFilter(true, true));
+        } else {
+            if (!config.diagraphs) {
+                chain.addFilter(new DiagraphFilter());
+            }
+
+            if (!config.diacriticals) {
+                chain.addFilter(new DiacriticalFilter(false, config.diagraphs));
+            }
+        }
+
+        if (config.quantity) {
+            chain.addFilter(new QuantityFilter(config.quantity, true));
+        }
+
+        return Promise.all(chain.execute(this.getAllKana()));
     }
 
-    private readAllKana(): Kana[] {
+    private getAllKana(): Kana[] {
         const hiragana = this.readHiragana();
         const katakana = this.readKatakana();
         return hiragana.concat(katakana);

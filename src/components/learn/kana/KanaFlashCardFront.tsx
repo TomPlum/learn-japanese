@@ -1,4 +1,4 @@
-import KanaDisplay from "../../game/KanaDisplay";
+import KanaDisplay from "../../ui/display/KanaDisplay";
 import { CardFaceProps } from "../FlashCard";
 import { Kana } from "../../../types/kana/Kana";
 import FlashCardFront from "../FlashCardFront";

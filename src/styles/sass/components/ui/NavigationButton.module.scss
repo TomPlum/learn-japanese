@@ -1,0 +1,101 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  padding: 0;
+}
+
+.popover > div::after {
+  border-bottom-color: $dark-1 !important;
+}
+
+.popover {
+  width: 165px;
+  animation: fade 0.05s ease-in forwards;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.1em;
+  background-color: $dark-2;
+  border: 2px solid $dark-1;
+  border-radius: 12px;
+}
+
+.itemWrapper {
+  transition: all ease 0.25s;
+  cursor: pointer;
+}
+
+.itemWrapper:hover {
+  background-color: $dark-1;
+}
+
+.itemWrapper:hover a {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.item {
+  @include noSelect;
+  padding: 12px 15px;
+  display: inline-block;
+  color: $light-2;
+  transition: all ease 0.25s;
+  text-decoration: none;
+}
+
+.itemWrapper:nth-child(n+1) {
+  border-bottom: 2px solid $dark-1;
+}
+
+.itemWrapper:last-child {
+  border: none;
+}
+
+.item:hover {
+  text-decoration: none;
+}
+
+.itemIcon {
+  color: #FFF;
+  margin-left: 10px;
+  margin-right: -4px;
+}
+
+.link {
+  transition: all ease 0.25s;
+  text-align: center;
+}
+
+.link:hover {
+  color: $light-1 !important;
+}
+
+.search {
+  color: #FFF;
+  border-radius: 12px 12px 0 0 !important;
+  background-color: $dark-2;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 2px solid $dark-1 !important;
+  transition: height ease-in-out 0.5s;
+}
+
+.search:focus {
+  color: #FFF;
+  background-color: $dark-2;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+}
+
+.active {
+  color: #FFF;
+}
+
+.icon, .text {
+  transition: color ease-in-out 0.2s;
+}

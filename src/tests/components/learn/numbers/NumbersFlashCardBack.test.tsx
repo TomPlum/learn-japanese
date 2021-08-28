@@ -1,15 +1,16 @@
 import CommonData from "../../../../types/learn/CommonData";
-import JapaneseWord from "../../../../types/learn/JapaneseWord";
 import { fireEvent, render } from "@testing-library/react";
 import NumbersFlashCardBack from "../../../../components/learn/numbers/NumbersFlashCardBack";
+import { getByTextWithMarkup } from "../../../Queries";
 
 const onResetHandler = jest.fn();
 
 const number = new CommonData(
     "0",
-    [new JapaneseWord("れい", "rei"), new JapaneseWord("ゼロ", "zero"), new JapaneseWord("マル", "maru")],
+    ["れい","ゼロ", "マル"],
     "一",
-    "Number"
+    "Number",
+    "0"
 );
 
 test('Clicking the reset button should call the onReset event handler', () => {
@@ -29,6 +30,6 @@ test('Should render the kana', () => {
 });
 
 test('Should render the romaji', () => {
-    const component = render(<NumbersFlashCardBack data={number} onClick={onResetHandler} />);
-    expect(component.getByText('(rei or zero or maru)')).toBeInTheDocument();
+    render(<NumbersFlashCardBack data={number} onClick={onResetHandler} />);
+    expect(getByTextWithMarkup('(rei or zero or maru)')).toBeInTheDocument();
 });

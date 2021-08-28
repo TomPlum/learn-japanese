@@ -1,0 +1,86 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  overflow: auto;
+  width: 100%;
+}
+
+.header {
+  padding: 0.5rem 1rem;
+}
+
+.footer {
+  padding: 10px 15px;
+}
+
+.title {
+  color: #FFF;
+  font-family: 'Ciutadella Rounded Medium', sans-serif;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #007bff;;
+}
+
+.titleText {
+  font-size: 1.5em;
+  margin-left: 5px;
+}
+
+.label {
+  color: #dedede;
+}
+
+.button {
+  padding: 6px 8px;
+}
+
+.buttonText {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.1em;
+  text-transform: uppercase;
+}
+
+.pane {
+  min-height: 150px;
+}
+
+.rule {
+  background-color: white;
+  margin-left: 0;
+}
+
+@mixin icon {
+  font-size: 1.3em;
+}
+
+.navIcon {
+  font-size: 1.8em !important;
+}
+
+.questionIcon {
+  @include icon;
+  color: #FFF;
+}
+
+.livesIcon {
+  @include icon;
+  color: $lives;
+}
+
+.hintsIcon {
+  @include icon;
+  color: $hints;
+}
+
+.timeIcon {
+  @include icon;
+  color: $time;
+}
+
+.noGuttersLeft {
+  padding-left: 0 !important;
+}
+
+.noGuttersRight {
+  padding-right: 0 !important;
+}

@@ -98,4 +98,52 @@ describe("Arrays Utility", () => {
             expect(result).toEqual([[1, 2], [3, 4], [5, 6]]);
         });
     });
+
+    describe("Max", () => {
+        it("Should return the maximum value", () => {
+            const array = [1, 4, 10];
+            const result = Arrays.max(array);
+            expect(result).toBe(10);
+        });
+
+        it("Should return the maximum even if it appears twice", () => {
+            const array = [10, 1, 4, 10];
+            const result = Arrays.max(array);
+            expect(result).toBe(10);
+        });
+    });
+
+    describe("Distinct", () => {
+        it("Should return only distinct elements", () => {
+            const array = ["one", "two", "one", "three"];
+            const result = Arrays.distinct(array);
+            expect(result).toStrictEqual(["one", "two", "three"]);
+        });
+    });
+
+    describe("Get Random Array Index", () => {
+        it("Should return an index in the range of the array size", () => {
+            const array = [1, 2, 3, 4, 5];
+            const result = Arrays.getRandomArrayIndex(array);
+            expect(result).toBeGreaterThanOrEqual(0);
+            expect(result).toBeLessThanOrEqual(4);
+        });
+    });
+
+    describe("Get Random Object", () => {
+        it("Should retrieve a random object and return it with the remaining pool", () => {
+            const array = [1, 4, 5, 2, 6];
+            const [random, remaining] = Arrays.getRandomObject(array);
+            expect(array).toContain(random);
+            expect(remaining).toStrictEqual(array.filter(it => it !== random));
+        });
+    });
+
+    describe("Get Random Objects", () => {
+        it("Should retrieve the number specified of random objects and return it with the remaining pool", () => {
+            const array = [1, 4, 5, 2, 6];
+            const [random, remaining] = Arrays.getRandomObjects(array, 3);
+            expect(remaining).toStrictEqual(array.filter(it => !random.includes(it)));
+        });
+    });
 });

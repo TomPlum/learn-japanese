@@ -1,0 +1,72 @@
+@import "src/styles/sass/viewports";
+
+$select-colour: #4594e9;
+
+.wrapper {
+  max-width: 600px;
+}
+
+.question {
+  cursor: pointer;
+}
+
+.question:hover {
+  transition: all ease 0.1s;
+  color: $select-colour;
+}
+
+.answer {
+  cursor: pointer;
+}
+
+.selected {
+  color: $select-colour;
+}
+
+.matched {
+  color: #7a7a7a;
+}
+
+.row {
+  margin-bottom: 15px;
+}
+
+.cursor {
+  width: 1px;
+  height: 1px;
+  position: fixed;
+  pointer-events: none;
+}
+
+.connector {
+  border-color: #2e6cde;
+  border-width: 5px;
+  z-index: -10;
+}
+
+@mixin display {
+  border: #bfbfbf 1px solid;
+  border-radius: 10px;
+  z-index: 1000;
+}
+
+@include desktop {
+  .display {
+    @include display;
+    height: 150px;
+  }
+}
+
+@include tablet {
+  .display {
+    @include display;
+    height: 150px;
+  }
+}
+
+@include phone {
+  .display {
+    @include display;
+    height: 100px;
+  }
+}

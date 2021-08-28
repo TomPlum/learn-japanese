@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Kana } from "../../types/kana/Kana";
-import styles from "../../styles/sass/components/layout/KanaGrid.module.scss";
 import KanaTile from "./KanaTile";
 import StackGrid, { transitions } from "react-stack-grid";
+import styles from "../../styles/sass/components/layout/KanaGrid.module.scss";
 
 export interface KanaGridProps {
     kana: Kana[];
@@ -33,7 +33,7 @@ class KanaGrid extends Component<KanaGridProps> {
                             <KanaTile key={kana.code} kana={kana}/>
                         ))}
                     </StackGrid> :
-                    <p>No results.</p>
+                    <p className={styles.noResults}>No results.</p>
                 }
             </>
         );

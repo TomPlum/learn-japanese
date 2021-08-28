@@ -8,6 +8,7 @@ export interface LearningFeedbackButtonProps {
     type: LearningFeedback;
     disabled: boolean;
     active: boolean;
+    className?: string;
     onClick: () => void;
 }
 
@@ -17,7 +18,7 @@ export enum LearningFeedback {
 
 class LearningFeedbackButton extends Component<LearningFeedbackButtonProps> {
     render() {
-        const { type, disabled, active, onClick } = this.props;
+        const { type, disabled, active, onClick, className } = this.props;
 
         const isRemembered = type === LearningFeedback.REMEMBERED;
         const activeClass = isRemembered ? styles.activeRemembered : styles.activeForgotten;
@@ -25,7 +26,7 @@ class LearningFeedbackButton extends Component<LearningFeedbackButtonProps> {
         return (
             <Button
                 onClick={onClick}
-                className={[active ? activeClass: !disabled ? styles.inactive : "", styles.button].join(" ")}
+                className={[active ? activeClass: !disabled ? styles.inactive : "", styles.button, className].join(" ")}
                 variant={isRemembered ? "success" : "danger"}
                 disabled={disabled}
                 title={this.getTitle()}

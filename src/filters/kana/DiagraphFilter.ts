@@ -4,9 +4,11 @@ import { Filter } from "../Filter";
 export default class DiagraphFilter implements Filter<Kana> {
 
     private readonly include: boolean;
+    private readonly includeDiacriticals: boolean;
 
-    constructor(include: boolean = false) {
+    constructor(include: boolean = false, includeDiacriticals: boolean = true) {
         this.include = include;
+        this.includeDiacriticals = includeDiacriticals;
     }
 
     apply(kana: Kana[]): Kana[] {

@@ -1,17 +1,41 @@
 @import "src/styles/sass/mixins";
+@import "src/styles/sass/viewports";
 
 .wrapper {
   display: flex;
   align-items: center;
 }
 
-.icon {
-  margin-right: 5px;
-  //margin-bottom: 3px;
+@mixin icon {
+  cursor: pointer;
 }
 
 .time {
   @include noSelect;
   @include evenNumericalSpacing;
   margin: 0;
+}
+
+@include desktop {
+  .icon {
+    @include icon;
+    margin-right: 5px;
+    margin-bottom: 3px;
+  }
+}
+
+@include tablet {
+  .icon {
+    @include icon;
+    margin-right: 4px;
+    margin-bottom: 1px;
+  }
+}
+
+@include phone {
+  .icon {
+    @include icon;
+    margin-right: 3px;
+    margin-bottom: 2px;
+  }
 }

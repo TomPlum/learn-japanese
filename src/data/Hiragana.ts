@@ -143,21 +143,21 @@ function hiragana(): KanaData[] {
             code: "\u304E\u3083",
             romaji: ["gya"],
             column: KanaColumn.K,
-            diacritical: false
+            diacritical: true
         },
         {
             name: "ぎゅ",
             code: "\u304E\u3085",
             romaji: ["gyu"],
             column: KanaColumn.K,
-            diacritical: false
+            diacritical: true
         },
         {
             name: "ぎょ",
             code: "\u304E\u3087",
             romaji: ["gyo"],
             column: KanaColumn.K,
-            diacritical: false
+            diacritical: true
         },
 
         //S Column (Big)
@@ -261,21 +261,21 @@ function hiragana(): KanaData[] {
         {
             name: "じゃ",
             code: "\u3058\u3083",
-            romaji: ["zya", "ja"],
+            romaji: ["ja", "zya"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "じゅ",
             code: "\u3058\u3085",
-            romaji: ["zyu", "ju"],
+            romaji: ["ju", "zyu"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "じょ",
             code: "\u3058\u3087",
-            romaji: ["zyo", "jo"],
+            romaji: ["jo", "zyo"],
             column: KanaColumn.S,
             diacritical: true
         },

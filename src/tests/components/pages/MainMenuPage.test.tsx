@@ -1,16 +1,29 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import MainMenuPage from "../../../components/pages/MainMenuPage";
 import hiragana from "../../../data/Hiragana";
-import { KanaData } from "../../../data/DataTypes";
+import { DayData, KanaData, KanjiData } from "../../../data/DataTypes";
 import katakana from "../../../data/Katakana";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
-import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
+import Arrays from "../../../utility/Arrays";
+import { joyo, kyoiku } from "../../../data/Kanji";
+import { days } from "../../../data/Calendar";
 
+//Mock scrollIntoView() as it doesn't exist in JSDom
+const scrollIntoView = jest.fn();
+window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
+
+//Database File Mocks
 jest.mock("../../../data/Hiragana");
 jest.mock("../../../data/Katakana");
+jest.mock("../../../data/Kanji");
+jest.mock("../../../data/Calendar");
 
+//Database Function Mocks
 const mockHiragana = hiragana as jest.MockedFunction<() => KanaData[]>;
 const mockKatakana = katakana as jest.MockedFunction<() => KanaData[]>;
+const mockKyoiku = kyoiku as jest.MockedFunction<() => Promise<KanjiData[]>>;
+const mockJoyo = joyo as jest.MockedFunction<() => Promise<KanjiData[]>>;
+const mockDays = days as jest.MockedFunction<() => DayData[]>;
 
 beforeEach(() => {
    mockHiragana.mockReturnValue([
@@ -22,25 +35,59 @@ beforeEach(() => {
       { name: "ア", code: "\u30A2", romaji: ["a"], column: KanaColumn.VOWEL, diacritical: false },
    ]);
 
-   RandomNumberGenerator.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
+   mockKyoiku.mockResolvedValue([
+      {
+         name: "人",
+         on: ["じん", "にん"],
+         kun: ["ひと"],
+         source: "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
+         meanings: ["person"],
+         grade: 1,
+         examples: [
+            { value: "外国人", kana: ["がいこくじん"], english: ["foreigner"] },
+            { value: "個人", kana: ["こじん"], english: ["individual", "private person", "personal", "private"] },
+            { value: "三人", kana: ["さんにん", "みたり"], english: ["three people"] },
+            { value: "人間", kana: ["にんげん"], english: ["human being", "man", "person"] },
+            { value: "人気", kana: ["にんき"], english: ["popular", "popular feeling", "business conditions"] },
+
+         ],
+         tags: ["family"]
+      }
+   ]);
+
+   mockDays.mockReturnValue([
+      {
+         name: "Monday",
+         kanji: "月曜日",
+         romaji: "getsuyōbi",
+         kana: "げつようび",
+         meaning: "Moon day"
+      }
+   ]);
+
+   mockJoyo.mockResolvedValue([]);
+
+   Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
       const objects = [...array];
       const first = objects[0];
       objects.splice(0, 1);
       return [first, objects];
    });
 });
+
 const setup = () => {
    const component = render(<MainMenuPage
        history={{
           length: 50,
-          location: { pathname: "/menu/learn", search: "", hash: "", state: undefined },
+          location: { pathname: "/menu/play", search: "", hash: "", state: undefined },
           action: "POP",
           push: jest.fn(), go: jest.fn(), replace: jest.fn(), goForward: jest.fn(), goBack: jest.fn(),
           block: jest.fn(), listen: jest.fn(), createHref: jest.fn()
        }}
-       match={{ params: { mode: "play" }, isExact: true, path: "/menu/:mode", url: "/menu/learn" }}
-       location={{ pathname: "/menu/learn", search: "", hash: "", state: undefined }}
+       match={{ params: { mode: "play" }, isExact: true, path: "/menu/:mode", url: "/menu/play" }}
+       location={{ pathname: "/menu/play", search: "", hash: "", state: undefined }}
    />);
+
    return {
       mode: component.getByText('Learn'),
       kana: component.queryAllByText('Hiragana & Katakana')[1],
@@ -48,14 +95,15 @@ const setup = () => {
       kanji: component.getByText('Jōyō Kanji'),
       basics: component.getByText('Basics'),
       calendar: component.getByText('Days & Months'),
+      login: component.getByText('Login'),
       ...component
    }
 }
 
-test('Selecting a game mode should hide the menu and render the game', () => {
+test('Selecting a game mode should hide the menu and render the game', async () => {
    setup();
    fireEvent.click(screen.getByText('Start'));
-   expect(screen.getByTitle('1/3')).toBeInTheDocument();
+   expect(await screen.findByTestId('memory-game')).toBeInTheDocument();
 });
 
 test('Changing the AppMode in the ControlsMenu should update the SettingsMenu', () => {
@@ -65,12 +113,34 @@ test('Changing the AppMode in the ControlsMenu should update the SettingsMenu', 
    expect(screen.getByText('Select Topic'));
 });
 
+test('Clicking the login button while not logged in should launch the user modal', () => {
+   const { login } = setup();
+   fireEvent.click(login);
+   expect(screen.getByTestId('user-modal')).toBeInTheDocument();
+});
+
+test('Clicking "x" close button in the user modal should close it', () => {
+   const { login } = setup();
+
+   //Clicking login should load the modal
+   fireEvent.click(login);
+   const userModal = screen.getByTestId('user-modal');
+   expect(userModal).toBeInTheDocument();
+
+   //Clicking the 'x' button should close it
+   fireEvent.click(screen.getByText('Close'));
+   expect(userModal).not.toBeInTheDocument();
+});
+
 describe('Play', () => {
-   test('Quitting the game should close the game window and re-render the results screen', () => {
+   test('Quitting the game should close the game window and re-render the results screen', async () => {
       setup();
       fireEvent.click(screen.getByText('Start'));
+      expect(await screen.findByTestId('memory-game')).toBeInTheDocument(); //Should render the memory game
+
       fireEvent.click(screen.getByTitle('Quit'));
       fireEvent.click(screen.getByText('Yes'));
+
       expect(screen.getByText('Oh no! You quit!')).toBeInTheDocument();
    });
 
@@ -99,32 +169,39 @@ describe('Play', () => {
 });
 
 describe('Learn', () => {
-   test('Quitting a learning session without having flipped a card should re-render the menu', () => {
+   test('Quitting a learning session without having flipped a card should re-render the menu', async () => {
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
+      expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
+
       fireEvent.click(screen.getByTitle('Quit')); //Open the Quit confirmation modal
       fireEvent.click(screen.getByText('Yes')); //Confirm you want to quit (Without having flipped the first card)
+
       expect(screen.getByTestId('game-settings-menu')).toBeInTheDocument();
       expect(screen.queryByTestId('learning-results-screen')).not.toBeInTheDocument();
    });
 
-   test('Quitting a learning session mid-session (having flipped one or more cards) should show the result screen', () => {
+   test('Quitting a learning session mid-session (having flipped one or more cards) should show the result screen', async () => {
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
+      expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
+
       fireEvent.click(screen.getByText('あ')); //Flip the first card
       fireEvent.click(screen.getByText('Remembered It!')); //Mark the card as remembered
       fireEvent.click(screen.getByTitle('Quit')); //Open the Quit confirmation modal
       fireEvent.click(screen.getByText('Yes')); //Confirm you want to quit
+
       expect(screen.getByTestId('learning-results-screen')).toBeInTheDocument();
       expect(screen.queryByTestId('game-settings-menu')).not.toBeInTheDocument();
    });
 
-   test('Clicking \'Practice Mistakes\' on the learning results screen should start a new session with the mistakes', () => {
+   test('Clicking \'Practice Mistakes\' on the learning results screen should start a new session with the mistakes', async () => {
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
+      expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
       fireEvent.click(screen.getByText('あ')); //Flip the first card
       fireEvent.click(screen.getByText('Forgot It')); //Mark the card as forgot
@@ -143,10 +220,11 @@ describe('Learn', () => {
       expect(screen.getByText('Finish')).toBeInTheDocument(); //If it omitted our mistake, flipping this card should be the last.
    });
 
-   test('Dismissing the learning results screen should close it and re-render the main menu', () => {
+   test('Dismissing the learning results screen should close it and re-render the main menu', async () => {
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
+      expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
       fireEvent.click(screen.getByText('あ')); //Flip the first card
       fireEvent.click(screen.getByText('Forgot It')); //Mark the card as forgot
@@ -160,21 +238,20 @@ describe('Learn', () => {
       expect(screen.queryByTestId('learning-results-screen')).not.toBeInTheDocument();
    });
 
-   test('Starting a Calendar learning session should render the correct flash card types', () => {
+   test('Starting a Calendar learning session should render the correct flash card types', async () => {
       const { mode, calendar } = setup();
       fireEvent.click(mode); //Switch to Learn
-      fireEvent.click(calendar);
+      fireEvent.click(calendar); //Select calendar topic
       fireEvent.click(screen.getByText('Start'));
-      expect(screen.getByText('Monday')).toBeInTheDocument();
-      expect(screen.getByText('月曜日')).toBeInTheDocument();
+      expect(await screen.findByText('Monday')).toBeInTheDocument();
    });
 
-   test('Starting a Kanji learning session should render the correct flash card types', () => {
+   test('Starting a Kanji learning session should render the correct flash card types', async  () => {
       const { mode, kanji } = setup();
       fireEvent.click(mode); //Switch to Learn
-      fireEvent.click(kanji);
+      fireEvent.click(kanji); //Select Kanji topic
       fireEvent.click(screen.getByText('Start'));
-      expect(screen.getByText(': person')).toBeInTheDocument();
+      expect(await screen.findByText('person')).toBeInTheDocument();
       expect(screen.getAllByText('人')).toBeDefined();
    });
 });

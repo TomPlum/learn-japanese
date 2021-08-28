@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfinity, faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { faLightbulb as solidBulb } from "@fortawesome/free-solid-svg-icons";
+import { faLightbulb as regularBulb } from "@fortawesome/free-regular-svg-icons";
 import { Button, OverlayTrigger } from "react-bootstrap";
 import PopOver from "../ui/PopOver";
-import { Kana } from "../../types/kana/Kana";
-import { KanaColumn } from "../../types/kana/KanaColumn";
 import Viewports, { Viewport } from "../../utility/Viewports";
+import { Learnable } from "../../types/learn/Learnable";
 import styles from "../../styles/sass/components/game/HintButton.module.scss";
+import RevealableText from "../ui/RevealableText";
 
 export interface HintButtonProps {
-    kana: Kana;
-    remaining: number
-    totalQuantity?: number;
-    title?: string;
+    data: Learnable;
+    quantity: number;
+    remaining: number;
+    infinite: boolean;
     disabled?: boolean;
     className?: string;
     onUse?: () => void;
@@ -20,6 +21,8 @@ export interface HintButtonProps {
 
 interface HintButtonState {
     viewport: Viewport;
+    isLastHint: boolean;
+    revealed: boolean;
 }
 
 class HintButton extends Component<HintButtonProps, HintButtonState> {
@@ -27,7 +30,9 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
     constructor(props: HintButtonProps | Readonly<HintButtonProps>) {
         super(props);
         this.state = {
-            viewport: Viewport.PHONE
+            viewport: Viewport.PHONE,
+            isLastHint: false,
+            revealed: false
         }
     }
 
@@ -41,81 +46,102 @@ class HintButton extends Component<HintButtonProps, HintButtonState> {
     }
 
     render() {
-        const { title, disabled, remaining, className } = this.props;
-        const { viewport } = this.state;
+        const { disabled, className, remaining } = this.props;
+        const { viewport, revealed } = this.state;
 
-        const overlay = <PopOver title={this.getTitle()} text={this.getContent()} />;
+        const overlay = (
+            <PopOver
+                title={this.getTitle()}
+                text={
+                    <RevealableText
+                        value={this.getContent()}
+                        disabled={revealed || remaining <= 0}
+                        className={styles.hint}
+                        onReveal={this.onHintUse}
+                    />
+                }
+            />
+        );
+
         const defaultClassName = remaining > 0 ? styles.button : styles.disabled;
+        const buttonClasses = [defaultClassName, className].join(" ");
+        const icon = remaining > 0 ? solidBulb : regularBulb
+
         return (
-            <OverlayTrigger
-                onToggle={this.props.onUse}
-                trigger="click"
-                placement="top"
-                rootClose={true}
-                overlay={overlay}
-            >
+            <OverlayTrigger trigger="click" placement="top" rootClose={true} overlay={overlay}>
                 <Button
+                    title={!disabled ? "Get a Hint" : "Hints are disabled."}
                     variant="warning"
-                    className={[defaultClassName, className].join(" ")}
-                    title={title}
-                    disabled={disabled}
+                    className={buttonClasses}
+                    style={{ width: viewport === Viewport.PHONE ? "50px" : "auto"}}
                 >
-                    <FontAwesomeIcon icon={faLightbulb} fixedWidth className={styles.icon}/>
-                    {viewport !== Viewport.PHONE &&
-                        <>
-                            <span className={styles.text}>HINT</span>
-                            <span className={styles.remaining}>{this.getRemaining()}</span>
-                        </>
-                    }
+                    <FontAwesomeIcon icon={icon} className={styles.icon}/>
+                    {viewport !== Viewport.PHONE && <span className={styles.text}>HINT</span>}
                 </Button>
             </OverlayTrigger>
         );
     }
 
     private getTitle = () => {
-        const { remaining, totalQuantity } = this.props;
-        if (remaining > 0) {
-            if (remaining <= 10) {
-                return "Need a hint? (" + (remaining - 1) + "/" + totalQuantity + " remaining)";
-            }
-            return "Need a hint?"
+        const { revealed } = this.state;
+        const { quantity, remaining, infinite, disabled } = this.props;
+
+        if (disabled) {
+            return "Hints are disabled"
         }
-        return "Sorry!";
+
+        if (remaining === 1 && revealed) {
+            return "This is your last hint!"
+        }
+
+        if (remaining > 0) {
+            if (infinite) {
+                return "Need a hint?"
+            }
+
+            return "Need a hint? (" + this.getRemaining() + "/" + quantity + " remaining)";
+        }
+        return "Sorry! You're out of hints.";
     }
 
     private getContent = () => {
-        const { kana, remaining } = this.props;
+        const { data, quantity, remaining, disabled } = this.props;
+
+        if (disabled) {
+            return "You'll have to choose a preset with hints enabled or customise the game settings.";
+        }
+
         if (remaining <= 0) {
-            return "You've used all of your hints.";
-        }
-        if (kana.column === KanaColumn.OTHER) {
-            return "This kana is exceptional. It is not a consonant nor a vowel."
+            return "You've already used your " + quantity + " hints.";
         }
 
-        let message: string;
-        const diacritical = " Also, notice the diacritical mark.";
-
-        if (kana.isDiagraph()) {
-            message = "Diagraphs usually drop the 1st kana's 2nd letter when transcribed."
-        } else {
-            message = "This kana is from the '" + kana.column + "' column in the " + kana.type + " syllabary.";
-        }
-
-        return message + (kana.isDiacritical ? diacritical : "");
+        return data.getHint();
     }
 
     private getRemaining = () => {
         const { remaining } = this.props;
-        if (remaining === 999) {
-            return <FontAwesomeIcon icon={faInfinity} size="sm" />;
+        const { revealed } = this.state;
+
+        if (revealed) {
+            return remaining - 1;
         }
-        return "(" + remaining + ")";
+
+        return remaining;
     }
 
     private updateViewport = () => {
         this.setState({ viewport: Viewports.fromWidth(window.innerWidth) });
     }
 
+    private onHintUse = () => {
+        const { revealed } = this.state;
+        const { onUse } = this.props;
+
+        if (!revealed) {
+            this.setState({ revealed: true });
+            onUse?.();
+        }
+    }
 }
 
 export default HintButton;

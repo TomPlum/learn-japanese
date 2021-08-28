@@ -1,52 +1,50 @@
 import { Component } from "react";
-import { Accordion, Button, Card, Container } from "react-bootstrap";
-import { Kana } from "../../types/kana/Kana";
+import { Card, Modal } from "react-bootstrap";
 import AnswerMistake from "./AnswerMistake";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { Learnable } from "../../types/learn/Learnable";
 import styles from "../../styles/sass/components/results/Feedback.module.scss";
 
 export interface FeedbackProps {
-    kana: Kana[];
+    data: Learnable[];
+    show: boolean;
+    onClose: () => void;
 }
 
 class Feedback extends Component<FeedbackProps> {
     render() {
+        const { show, data, onClose } = this.props;
+
+        const size = data.length < 5 ? "sm" : "lg"
+
         return (
-            <Container>
-                <Accordion className={styles.accordion}>
-                    <Card className="bg-dark text-white">
-                        <Card.Header>
-                            <Accordion.Toggle as={Button} eventKey="0" variant="link" className={styles.toggle}>
-                                <span className={styles.title}>View your mistakes </span>
-                                <FontAwesomeIcon icon={faChevronDown} />
-                            </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body className={styles.wrapper}>
-                                {[...this.getMistakeCounts()]
-                                    .map(([kana, times]) => { return { kana: kana, times: times }})
-                                    .sort((a, b) => b.times - a.times)
-                                    .map(mistake => {
-                                        return(
-                                            <AnswerMistake
-                                                key={mistake.kana.code}
-                                                kana={mistake.kana}
-                                                times={mistake.times}
-                                            />
-                                        )
-                                    })
-                                }
-                            </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                </Accordion>
-            </Container>
+            <Modal centered show={show} onHide={onClose} contentClassName={styles.modal} size={size}>
+                <Modal.Header closeButton className={styles.header}>
+                    Mistakes
+                </Modal.Header>
+
+                <Modal.Body className={styles.body}>
+                    <Card.Body className={styles.wrapper}>
+                        {[...this.getMistakeCounts()]
+                            .map(([data, times]) => { return { data: data, times: times }})
+                            .sort((a, b) => b.times - a.times)
+                            .map(mistake => {
+                                return(
+                                    <AnswerMistake
+                                        key={mistake.data.getUniqueID()}
+                                        value={mistake.data}
+                                        times={mistake.times}
+                                    />
+                                )
+                            })
+                        }
+                    </Card.Body>
+                </Modal.Body>
+            </Modal>
         );
     }
 
-    private getMistakeCounts = (): Map<Kana, number> => {
-        return this.props.kana.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map<Kana, number>());
+    private getMistakeCounts = (): Map<Learnable, number> => {
+        return this.props.data.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map<Learnable, number>());
     }
 }
 

@@ -39,10 +39,6 @@
   font-size: 1.2em;
 }
 
-.descWrapper {
-  height: 100px;
-}
-
 .randomise {
   margin-bottom: 15px;
   text-transform: uppercase;
@@ -73,9 +69,4 @@
   0%{background-position:0 50%}
   50%{background-position:100% 50%}
   100%{background-position:0 50%}
-}
-
-.quantity {
-  font-family: "Ciutadella Rounded Medium", sans-serif;
-  text-align: center;
 }

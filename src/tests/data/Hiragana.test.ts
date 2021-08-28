@@ -143,7 +143,7 @@ describe("Hiragana", () => {
             ["sa"], ["shi"], ["su"], ["se"], ["so"],
             ["za"], ["zi", "ji"], ["zu"], ["ze"], ["zo"],
             ["sha"], ["shu"], ["sho"],
-            ["zya", "ja"], ["zyu", "ju"], ["zyo", "jo"]
+            ["ja", "zya"], ["ju", "zyu"], ["jo", "zyo"]
         ]);
         each(s).it("Should return the s column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.S);
@@ -238,9 +238,9 @@ describe("Hiragana", () => {
         it("gyu", () => expect(getHiragana(["gyu"]).code).toEqual("ぎゅ"));
         it("gyo", () => expect(getHiragana(["gyo"]).code).toEqual("ぎょ"));
 
-        it("ja", () => expect(getHiragana(["zya", "ja"]).code).toEqual("じゃ"));
-        it("ju", () => expect(getHiragana(["zyu", "ju"]).code).toEqual("じゅ"));
-        it("jo", () => expect(getHiragana(["zyo", "jo"]).code).toEqual("じょ"));
+        it("ja", () => expect(getHiragana(["ja", "zya"]).code).toEqual("じゃ"));
+        it("ju", () => expect(getHiragana(["ju", "zyu"]).code).toEqual("じゅ"));
+        it("jo", () => expect(getHiragana(["jo", "zyo"]).code).toEqual("じょ"));
 
         it("bya", () => expect(getHiragana(["bya"]).code).toEqual("びゃ"));
         it("byu", () => expect(getHiragana(["byu"]).code).toEqual("びゅ"));
@@ -249,6 +249,11 @@ describe("Hiragana", () => {
         it("pya", () => expect(getHiragana(["pya"]).code).toEqual("ぴゃ"));
         it("pyu", () => expect(getHiragana(["pyu"]).code).toEqual("ぴゅ"));
         it("pyo", () => expect(getHiragana(["pyo"]).code).toEqual("ぴょ"));
+
+        it("Should return a total of 36 diagraphs", () => {
+            const diagraphs = hiragana().filter(data => data.name.length === 2);
+            expect(diagraphs).toHaveLength(36);
+        });
     });
 
     describe("Is Diacritical", () => {
@@ -259,7 +264,7 @@ describe("Hiragana", () => {
                 ["da"], ["di", "ji"], ["du", "zu"], ["de"], ["do"],
                 ["ba"], ["bi"], ["bu"], ["be"], ["bo"],
                 ["pa"], ["pi"], ["pu"], ["pe"], ["po"],
-                ["zya", "ja"], ["zyu", "ju"], ["zyo", "jo"],
+                ["ja", "zya"], ["ju", "zyu"], ["jo", "zyo"],
                 ["dya", "ja"], ["dyu", "ju"], ["dyo", "jo"],
                 ["bya"], ["byu"], ["byo"],
                 ["pya"], ["pyu"], ["pyo"],
@@ -284,6 +289,11 @@ describe("Hiragana", () => {
         ]);
         each(regular).it("it should have diacritical set to false", (kana) => {
             expect(kana.diacritical).toBe(false);
+        });
+
+        it("Should return exactly 25 diacritical (non-diagraph) kana", () => {
+            const diacriticals = hiragana().filter(data => data.diacritical && data.code.length === 1);
+            expect(diacriticals.length).toBe(25);
         });
     });
 

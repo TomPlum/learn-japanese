@@ -143,7 +143,7 @@ describe("Katakana", () => {
             ["sa"], ["shi"], ["su"], ["se"], ["so"],
             ["za"], ["zi", "ji"], ["zu"], ["ze"], ["zo"],
             ["sha"], ["shu"], ["sho"],
-            ["zya", "ja"], ["zyu", "ju"], ["zyo", "jo"]
+            ["ja", "zya"], ["ju", "zyu"], ["jo", "zyo"]
         ]);
         each(s).it("Should return the s column for '%s'", (kana: KanaData) => {
             expect(kana.column).toBe(KanaColumn.S);
@@ -238,9 +238,9 @@ describe("Katakana", () => {
         it("gyu", () => expect(getKatakana(["gyu"]).code).toEqual("ギュ"));
         it("gyo", () => expect(getKatakana(["gyo"]).code).toEqual("ギョ"));
 
-        it("ja", () => expect(getKatakana(["zya", "ja"]).code).toEqual("ジャ"));
-        it("ju", () => expect(getKatakana(["zyu", "ju"]).code).toEqual("ジュ"));
-        it("jo", () => expect(getKatakana(["zyo", "jo"]).code).toEqual("ジョ"));
+        it("ja", () => expect(getKatakana(["ja", "zya"]).code).toEqual("ジャ"));
+        it("ju", () => expect(getKatakana(["ju", "zyu"]).code).toEqual("ジュ"));
+        it("jo", () => expect(getKatakana(["jo", "zyo"]).code).toEqual("ジョ"));
 
         it("bya", () => expect(getKatakana(["bya"]).code).toEqual("ビャ"));
         it("byu", () => expect(getKatakana(["byu"]).code).toEqual("ビュ"));
@@ -249,6 +249,11 @@ describe("Katakana", () => {
         it("pya", () => expect(getKatakana(["pya"]).code).toEqual("ピャ"));
         it("pyu", () => expect(getKatakana(["pyu"]).code).toEqual("ピュ"));
         it("pyo", () => expect(getKatakana(["pyo"]).code).toEqual("ピョ"));
+
+        it("Should return a total of 36 diagraphs", () => {
+            const diagraphs = katakana().filter(data => data.name.length === 2);
+            expect(diagraphs).toHaveLength(36);
+        });
     });
 
     describe("Is Diacritical", () => {
@@ -259,7 +264,7 @@ describe("Katakana", () => {
                 ["da"], ["di", "ji"], ["du", "zu"], ["de"], ["do"],
                 ["ba"], ["bi"], ["bu"], ["be"], ["bo"],
                 ["pa"], ["pi"], ["pu"], ["pe"], ["po"],
-                ["zya", "ja"], ["zyu", "ju"], ["zyo", "jo"],
+                ["ja", "zya"], ["ju", "zyu"], ["jo", "zyo"],
                 ["dya", "ja"], ["dyu", "ju"], ["dyo", "jo"],
                 ["bya"], ["byu"], ["byo"],
                 ["pya"], ["pyu"], ["pyo"],
@@ -284,6 +289,11 @@ describe("Katakana", () => {
         ]);
         each(regular).it("it should have diacritical set to false", (kana) => {
             expect(kana.diacritical).toBe(false);
+        });
+
+        it("Should return exactly 25 diacritical (non-diagraph) kana", () => {
+            const diacriticals = katakana().filter(data => data.diacritical && data.code.length === 1);
+            expect(diacriticals.length).toBe(25);
         });
     });
 

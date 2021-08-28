@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Spinner } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/LoadingSpinner.module.scss";
+import { Variant } from "react-bootstrap/types";
 
-class LoadingSpinner extends Component<{ active: any }> {
+class LoadingSpinner extends Component<{ active: boolean, className?: string, variant?: Variant }> {
     render() {
-        const { active } = this.props;
+        const { active, variant, className } = this.props;
         if (active) {
             return (
-                <div>
+                <div className={className}>
                     <Spinner
-                        className={styles.spinner}
-                        animation="border"
                         role="status"
-                        variant="danger"
                         title="Loading"
+                        animation="border"
+                        className={styles.spinner}
+                        variant={variant ?? "primary"}
                     />
                 </div>
             );

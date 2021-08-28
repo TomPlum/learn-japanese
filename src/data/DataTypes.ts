@@ -1,7 +1,7 @@
-import { KyoikuGrade } from "../types/kanji/KyoikuGrade";
 import { KanaColumn } from "../types/kana/KanaColumn";
 import { CounterGroup } from "../types/numbers/CounterGroup";
-import { AdjectiveType } from "../types/kana/AdjectiveType";
+import { AdjectiveType } from "../types/sentence/AdjectiveType";
+import { VerbType } from "../types/sentence/VerbType";
 
 export interface KanaData {
     name: string;
@@ -15,35 +15,27 @@ export interface DayData {
     name: string;
     kanji?: string;
     romaji: string;
-    kana: string;
+    kana?: string;
     meaning?: string;
 }
 
 export interface KanjiData {
-    name?: string;
-    code: string;
-    on: KanjiReading[];
-    kun: KanjiReading[];
+    name: string;
+    on: string[];
+    kun: string[];
     source: string;
     meanings: string[];
-    grade: KyoikuGrade;
+    grade?: number;
+    jlpt?: number;
+    strokes?: number;
     examples: KanjiExample[];
-}
-
-export interface KanjiReading {
-    kana: string;
-    romanji: string;
+    tags?: string[];
 }
 
 export interface KanjiExample {
     value: string;
     kana: string[];
     english: string[];
-}
-
-export interface KyoikuGradeData {
-    value: number;
-    quantity: number;
 }
 
 export interface ColourData {
@@ -66,10 +58,25 @@ export interface CounterData extends NumbersData {
     example: { kana: string, english: string };
 }
 
-export interface AdjectiveData {
+export interface SentenceStructureData {
     meanings: string[];
     kana: string;
     kanjiForm?: string;
-    type: AdjectiveType;
     genkiLesson?: number;
+}
+
+export interface AdjectiveData extends SentenceStructureData {
+    type: AdjectiveType;
+}
+
+export interface VerbData extends SentenceStructureData {
+    type: VerbType;
+}
+
+export interface AdverbData extends SentenceStructureData {
+
+}
+
+export interface ExpressionData extends SentenceStructureData {
+
 }

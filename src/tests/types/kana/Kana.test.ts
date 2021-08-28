@@ -69,7 +69,7 @@ describe("Kana", () => {
 
       it("Should return the Kana rōmaji", () => {
           const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-          const romaji = kana.romaji;
+          const romaji = kana.getRomaji();
           expect(romaji[0]).toEqual("a");
       });
    });
@@ -117,22 +117,80 @@ describe("Kana", () => {
    });
 
    describe("Learnable", () => {
-      it("Should return the kana unicode for the question", () => {
-          const kana = new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
-          const question = kana.getQuestion();
-          expect(question).toBe("え");
-      });
-
-      it("Should return the kana romaji string for the answer", () => {
+      it("Should return the kana romaji string for the meanings", () => {
           const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
-          const answer = kana.getAnswer();
-          expect(answer).toBe("fu (hu)");
+          const answer = kana.getMeanings();
+          expect(answer).toStrictEqual(["fu", "hu"]);
       });
 
       it("Should return the kana type for the title", () => {
           const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
           const title = kana.getTitle();
           expect(title).toBe("Hiragana");
+      });
+
+      it("Should return the character for the kana", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const title = kana.getKana();
+          expect(title).toStrictEqual(["ふ"]);
+      });
+
+      it("Should return undefined for the kanji variation", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const title = kana.getKanjiVariation();
+          expect(title).toBeUndefined();
+      });
+
+      it("Should return undefined for the example", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const title = kana.getExample();
+          expect(title).toBeUndefined();
+      });
+
+      it("Should return the kana character for the unique ID", () => {
+          const kana = new Kana("ふ", ["fu", "hu"], KanaType.HIRAGANA, KanaColumn.H, false);
+          const id = kana.getUniqueID();
+          expect(id).toBe("ふ");
+      });
+
+      describe("Hint Message", () => {
+          it('Should return a message hinting about the column and syllabary for a regular kana', () => {
+              const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+              const text = kana.getHint();
+              expect(text).toBe('This kana is from the \'vowel\' column in the Hiragana syllabary.');
+          });
+
+          it('Should return a message about diacriticals for a kana with a diacritical mark', () => {
+              const kana = new Kana("ぞ", ["zo"], KanaType.HIRAGANA, KanaColumn.S, true);
+              const text = kana.getHint();
+              expect(text).toBe('This kana is from the \'s\' column in the Hiragana syllabary. Also, notice the diacritical mark.');
+          });
+
+          it('Should return a diagraph specific message for a kana that is a diagraph', () => {
+              const kana = new Kana("しゅ", ["shu"], KanaType.HIRAGANA, KanaColumn.S, false);
+              const text = kana.getHint();
+              expect(text).toBe('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed.');
+          });
+
+          it('Should return a combination of relevant messages for a kana that is a diagraph with a diacritical mark', () => {
+              const kana = new Kana("びゃ", ["bya"], KanaType.HIRAGANA, KanaColumn.H, true);
+              const text = kana.getHint();
+              expect(text).toBe('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed. Also, notice the diacritical mark.');
+          });
+      });
+
+      describe("Base Score", () => {
+         it("Should return 100 for a regular kana", () => {
+             const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+             const score = kana.getBaseScore();
+             expect(score).toBe(100);
+         });
+
+         it("Should return 150 for a diagraph kana", () => {
+             const kana = new Kana("しゅ", ["shu"], KanaType.HIRAGANA, KanaColumn.S, false);
+             const score = kana.getBaseScore();
+             expect(score).toBe(150);
+         });
       });
    });
 });

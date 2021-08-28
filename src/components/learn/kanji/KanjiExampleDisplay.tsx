@@ -4,13 +4,14 @@ import { Kanji } from "../../../types/kanji/Kanji";
 import SpinnerController from "../../ui/SpinnerController";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/learn/kanji/KanjiExampleDisplay.module.scss";
+import Copyable from "../../ui/Copyable";
 
 export interface KanjiExampleDisplayProps {
     kanji: Kanji;
 }
 
 interface KanjiExampleDisplayState {
-    selected: Example;
+    selected?: Example;
 }
 
 class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExampleDisplayState> {
@@ -18,7 +19,7 @@ class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExamp
     constructor(props: Readonly<KanjiExampleDisplayProps> | KanjiExampleDisplayProps) {
         super(props);
         this.state = {
-            selected: props.kanji.examples[0]
+            selected: props.kanji.examples.length > 0 ? props.kanji.examples[0] : undefined
         }
     }
 
@@ -43,22 +44,41 @@ class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExamp
                         />
                     </Col>
 
-                    <Col className={styles.textWrapper}>
-                        <p className={styles.example}>
-                            {[...selected.kanji].map((char: string, i: number) => {
-                                const className = char === kanji.getValue() ? styles.highlight : styles.kanji;
-                                return <span className={className} key={i}>{char}</span>
-                            })}
-                        </p>
+                    {selected && <Col className={styles.textWrapper}>
+                        <Copyable className={styles.kanji}>
+                            <span className={styles.example}>
+                                {selected.kanji}
+                            </span>
+                        </Copyable>
 
-                        <p className={styles.kana}>
-                            ( {selected.kana.join(" or ")} )
-                        </p>
+
+                        <span>
+                            <span className={styles.kana}>( </span>
+                            {
+                                selected.kana.map((value: string, i: number) => {
+                                    if (i < selected.kana.length - 1) {
+                                        return [
+                                            <Copyable className={styles.kana} key={`copyable-${i}`} inline>
+                                                <span key={value}>{value}</span>
+                                            </Copyable>,
+                                            <span key={`or-${i}`}> or </span>
+                                        ];
+                                    } else {
+                                        return (
+                                            <Copyable className={styles.kana} key={`copyable-${i}`} inline>
+                                                <span key={value}>{value}</span>
+                                            </Copyable>
+                                        );
+                                    }
+                                })
+                            }
+                            <span className={styles.kana}> )</span>
+                        </span>
 
                         <p className={styles.meaning}>
-                            { selected.english.join(", ") }
+                            {selected.english.join(", ")}
                         </p>
-                    </Col>
+                    </Col>}
                 </Row>
             </Container>
         );

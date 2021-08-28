@@ -1,17 +1,35 @@
 import Repository from "./Repository";
-import { SentenceStructureLearnable } from "../types/learn/CommonLearnable";
-import { LearnSentenceStructureSettings } from "../types/learn/LearningSessionSettings";
-import { adjectives } from "../data/SentenceStructure";
-import { AdjectiveData } from "../data/DataTypes";
-import Adjective from "../types/sentence/Adjective";
+import { adjectives, adverbs, expressions, verbs } from "../data/SentenceStructure";
+import { AdjectiveData, AdverbData, ExpressionData, SentenceStructureData, VerbData } from "../data/DataTypes";
+import Definition from "../types/sentence/Definition";
+import { Learnable } from "../types/learn/Learnable";
+import SentenceStructureSettings from "../types/session/settings/data/SentenceStructureSettings";
 
-export default class SentenceStructureRepository implements Repository<SentenceStructureLearnable> {
-    read(settings: LearnSentenceStructureSettings): SentenceStructureLearnable[] {
+export default class SentenceStructureRepository implements Repository<Learnable> {
+    read(settings: SentenceStructureSettings): Promise<Learnable[]> {
+
+        const data = [];
 
         if (settings.adjectives) {
-            return adjectives().map((it: AdjectiveData) => new Adjective(it.meanings, it.kanjiForm, it.type, it.kana));
+            data.push(...adjectives().map((it: AdjectiveData) => this.convert(it, it.type + " Adjective")));
         }
 
-        return [];
+        if (settings.verbs) {
+            data.push(...verbs().map((it: VerbData) => this.convert(it, it.type + " Verb")));
+        }
+
+        if (settings.adverbs) {
+            data.push(...adverbs().map((it: AdverbData) => this.convert(it, "Adverb")));
+        }
+
+        if (settings.expressions) {
+            data.push(...expressions().map((it: ExpressionData) => this.convert(it, "Expression")));
+        }
+
+        return Promise.all(data);
+    }
+
+    private convert(data: SentenceStructureData, title: string): Definition {
+        return new Definition(data.meanings, data.kanjiForm, data.kana, title);
     }
 }

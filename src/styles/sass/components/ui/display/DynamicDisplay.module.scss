@@ -1,0 +1,21 @@
+@import "src/styles/sass/animations";
+
+.active {
+  @include flashRedAnimation;
+}
+
+.wrapper {
+  text-align: center;
+  flex-grow : 1;
+  min-height: 50px;
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.value {
+  transition: color ease-in-out 0.2s;
+}

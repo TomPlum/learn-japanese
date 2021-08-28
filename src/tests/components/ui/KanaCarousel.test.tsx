@@ -1,12 +1,12 @@
-import { RandomNumberGenerator } from "../../../utility/RandomNumberGenerator";
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanaCarousel from "../../../components/ui/KanaCarousel";
 import { Kana } from "../../../types/kana/Kana";
 import KanaType from "../../../types/kana/KanaType";
 import { KanaColumn } from "../../../types/kana/KanaColumn";
+import Arrays from "../../../utility/Arrays";
 
 beforeEach(() => {
-    RandomNumberGenerator.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
+    Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
         const element = array[0];
         return [element, array.splice(1, array.length - 1)];
     });

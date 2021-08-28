@@ -47,6 +47,15 @@ export default class Arrays {
     }
 
     /**
+     * Returns the largest value in the given array.
+     * @param array An array of numbers.
+     * @return The largest value.
+     */
+    public static max<T extends number>(array: T[]): T {
+        return array.reduce((a: T, b: T) => a > b ? a : b);
+    }
+
+    /**
      * Removes an element from an array.
      * @param array The array to remove from.
      * @param value The value of the element to remove.
@@ -66,11 +75,11 @@ export default class Arrays {
      * @param quantity The number of elements to return.
      * @return An array of all randomly selected elements.
      */
-    static getRandomElements<T>(array: T[], quantity: number): T[] {
+    static getRandomElements<T>(array: T[], quantity: number = 1): T[] {
         let elements = [];
         let copy = this.copy(array);
         for (let i = 0; i < quantity; i++) {
-            const index = Numbers.randomInt(0, copy.length - 1);
+            const index = Arrays.getRandomArrayIndex(copy);
             const element = copy[index];
             copy = this.remove(copy, element)
             elements.push(element);
@@ -78,6 +87,11 @@ export default class Arrays {
         return elements.filter(it => !!it);
     }
 
+    /**
+     * Generates a 2-Dimensional array of arrays of the specified length;
+     * @param array The array to split.
+     * @param quantity The size of the arrays.
+     */
     static chunked<T>(array: T[], quantity: number): T[][] {
         return array.reduce((resultArray: T[][], item: T, index: number) => {
             const chunkIndex = Math.floor(index/quantity)
@@ -91,4 +105,53 @@ export default class Arrays {
             return resultArray
         }, []);
     }
+
+    /**
+     * Filters out duplicate elements.
+     * @param array The array of elements to reduce.
+     * @return array The filtered array containing only unique elements.
+     */
+    static distinct<T>(array: T[]): T[] {
+        return array.filter((value, index, self) => self.indexOf(value) === index);
+    }
+
+    /**
+     * Generates a random index from the given array.
+     * @param array The array to choose an index from.
+     * @return index The integer value of the chosen index.
+     */
+    static getRandomArrayIndex<T>(array: T[]): number {
+        return Numbers.randomInt(0, array.length - 1);
+    }
+
+    /**
+     * Picks a random object from the given array.
+     * @param pool The array of objects to choose from.
+     * @returns tuple A tuple containing the randomly chosen object and the trimmed pool.
+     */
+    static getRandomObject = <T>(pool: T[]): [T, T[]] => {
+        const objects = [...pool];
+        const randomIndex = Arrays.getRandomArrayIndex(objects);
+        const randomObject = objects[randomIndex];
+        objects.splice(randomIndex, 1);
+        return [randomObject, objects];
+    };
+
+    /**
+     * Picks n random object from the given array.
+     * @param pool The array of objects to choose from.
+     * @param quantity The number of objects to randomly choose.
+     * @returns tuple A tuple containing the randomly chosen objects and the remaining pool.
+     */
+    static getRandomObjects = <T>(pool: T[], quantity: number): [T[], T[]] => {
+        const objects = [...pool];
+        let randomObjects = [];
+        for (let i = 0; i < quantity; i++) {
+            const randomIndex = Arrays.getRandomArrayIndex(objects);
+            const randomObject = objects[randomIndex];
+            objects.splice(randomIndex, 1);
+            randomObjects.push(randomObject);
+        }
+        return [randomObjects, objects];
+    };
 }

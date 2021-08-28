@@ -1,0 +1,48 @@
+@import "src/styles/sass/viewports";
+
+@mixin tile {
+  border-color: #2e6cde;
+  border-width: 2px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.tile {
+  @include tile;
+}
+
+.selected {
+  @include tile;
+}
+
+.wrapper {
+  max-width: 600px;
+}
+
+@include phone {
+  .display {
+    height: 120px;
+  }
+}
+
+@include tablet {
+  .display {
+    padding: 15px 0;
+    min-height: 170px;
+  }
+
+  .question {
+    font-size: 1.4em;
+  }
+}
+
+@include desktop {
+  .display {
+    padding: 15px 0;
+    height: 200px;
+  }
+
+  .question {
+    font-size: 1.6em;
+  }
+}

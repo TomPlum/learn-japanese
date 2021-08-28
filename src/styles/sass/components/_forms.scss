@@ -1,12 +1,62 @@
-@mixin heading {
-  font-family: "Ciutadella Rounded", sans-serif;
-  font-size: 1.2em;
-  color: #FFF;
-  margin-bottom: 10px;
+@mixin SubForm {
+  .formWrapper {
+    height: 344px;
+  }
+
+  .section {
+    margin-bottom: 30px;
+  }
+
+  .description {
+    margin: 10px 0;
+    font-family: "Ciutadella Rounded", sans-serif;
+    color: #eaeaea;
+  }
+
+  .leadingDescription {
+    margin: 10px 0;
+    font-family: "Ciutadella Rounded", sans-serif;
+    font-size: 1.1em;
+    color: #eaeaea;
+  }
+
+  .descriptionWrapper {
+    margin-bottom: 10px;
+  }
+
+  .heading {
+    font-family: "Ciutadella Rounded", sans-serif;
+    font-size: 1.2em;
+    color: #FFF;
+    margin-bottom: 10px;
+  }
+
+  .check label {
+    color: white;
+    font-size: 1.1em;
+    font-family: "Ciutadella Rounded Medium", sans-serif;
+  }
 }
 
-@mixin SubForm {
-  .section {
-    margin-bottom: 20px;
+@mixin DataSettingsForm {
+  .description {
+    font-family: "Ciutadella Rounded", sans-serif;
+    font-size: 1em;
+    color: #FFF;
+  }
+
+  .disabled {
+    font-family: "Ciutadella Rounded", sans-serif;
+    font-size: 1em;
+    color: #bab2b2;
+  }
+
+  .switch {
+    display: block;
+  }
+
+  .quantity {
+    text-align: center;
+    font-family: "Ciutadella Rounded Medium", sans-serif;
   }
 }

@@ -1,0 +1,18 @@
+@import "src/styles/sass/components/forms";
+
+@include SubForm;
+
+.cardsIcon {
+  padding: 5px;
+  font-size: 3em;
+  margin: 0;
+  border-radius: 5px;
+}
+
+.noGuttersLeft {
+  padding-left: 3px !important;
+}
+
+.noGuttersRight {
+  padding-right: 3px !important;
+}

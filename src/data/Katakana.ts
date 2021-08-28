@@ -263,21 +263,21 @@ function katakana(): KanaData[] {
         {
             name: "ジャ",
             code: "\u30B8\u30E3",
-            romaji: ["zya", "ja"],
+            romaji: ["ja", "zya"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "ジュ",
             code: "\u30B8\u30E5",
-            romaji: ["zyu", "ju"],
+            romaji: ["ju", "zyu"],
             column: KanaColumn.S,
             diacritical: true
         },
         {
             name: "ジョ",
             code: "\u30B8\u30E7",
-            romaji: ["zyo", "jo"],
+            romaji: ["jo", "zyo"],
             column: KanaColumn.S,
             diacritical: true
         },

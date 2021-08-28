@@ -1,0 +1,19 @@
+.menu {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.2em;
+  padding: 0.4rem 0.4rem;
+}
+
+.menu option {
+  font-size: 0.9em;
+}
+
+.icon {
+  position: absolute;
+  font-size: 1.2em;
+  right: 0;
+  margin-right: 40px;
+  margin-top: 12px;
+  color: #545454;
+  transition: ease-in-out 0.5s;
+}
