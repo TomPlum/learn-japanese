@@ -1,6 +1,6 @@
 {
   "name": "learn-japanese",
-  "version": "0.2.1-alpha",
+  "version": "0.3.1-alpha",
   "private": false,
   "homepage": "https://tomplum.github.io/learn-japanese/",
   "dependencies": {
@@ -34,7 +34,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "deploy": "gh-pages -d build -m \"Release | Deployed Latest Build\"",
+    "deploy": "npm run build && gh-pages -d build -m \"Release | Deployed Latest Build\"",
     "coverage": "react-scripts test --coverage --watchAll",
     "clean": "rm -r node_modules",
     "reinstall": "npm run clean && npm install",
