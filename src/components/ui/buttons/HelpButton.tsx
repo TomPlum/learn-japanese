@@ -1,5 +1,5 @@
 import NavigationButton from "../NavigationButton";
-import { faBook, faInfoCircle, faPaintBrush, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faBrain, faInfoCircle, faPaintBrush, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
 import styles from "../../../styles/sass/components/ui/buttons/HelpButton.module.scss";
 
@@ -12,6 +12,10 @@ const HelpButton = () => {
 
             <NavigationButton.Item icon={faBook} href="/help" iconClass={styles.genki}>
                 Genki Knowledge Bank
+            </NavigationButton.Item>
+
+            <NavigationButton.Item icon={faBrain} href="/help" iconClass={styles.sm2}>
+                SuperMemo2 Algorithm
             </NavigationButton.Item>
 
             <NavigationButton.Item icon={faQuestion} href="/help" iconClass={styles.faq}>

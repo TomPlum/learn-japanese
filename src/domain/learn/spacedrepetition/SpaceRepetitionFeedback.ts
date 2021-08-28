@@ -1,4 +1,5 @@
 import { Learnable } from "../Learnable";
+import { Confidence } from "./Confidence";
 
 class SpaceRepetitionFeedback {
     private readonly _question: Learnable;

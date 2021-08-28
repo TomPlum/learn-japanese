@@ -3,7 +3,7 @@
  * answering a memory question. The value is consumed by the SM2 algorithm
  * to determine when a question should next be asked to that user.
  */
-enum Confidence {
+export enum Confidence {
     /**
      * A complete blackout. The user had absolutely no idea.
      */

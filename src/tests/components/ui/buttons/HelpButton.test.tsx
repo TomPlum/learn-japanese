@@ -21,6 +21,12 @@ test('Clicking on the genki knowledge bank link should route to the help page', 
     expect(await screen.findByText('Genki Knowledge Bank')).toHaveAttribute('href', "/example-base-path/help");
 });
 
+test('Clicking on the super memo 2 algorithm link should route to the help page', async () => {
+    const { button } = setup();
+    fireEvent.click(button);
+    expect(await screen.findByText('SuperMemo2 Algorithm')).toHaveAttribute('href', "/example-base-path/help");
+});
+
 test('Clicking on the FAQs link should route to the help page', async () => {
     const { button } = setup();
     fireEvent.click(button);
