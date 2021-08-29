@@ -79,7 +79,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
             <div className={styles.wrapper}>
                 <Provider store={store}>
                     <MainErrorBoundary>
-                        <LoadingSpinner active={loading}/>
+                        <LoadingSpinner active={loading} />
 
                         <ControlsMenu
                             active={isInMenu}
@@ -90,39 +90,42 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
 
                         {isInMenu &&
                             <SettingsMenu
-                                onStart={this.onStartModeSelection}
                                 mode={mode}
+                                onStart={this.onStartModeSelection}
                             />
                         }
 
                         {gameConfig && !inResultsScreen && data.length > 0 &&
                             <MemoryGame
-                                key={sessionKey.value}
-                                sessionKey={sessionKey.value}
                                 data={data}
                                 settings={gameConfig}
+                                key={sessionKey.value}
                                 onFinish={this.onGameFinish}
+                                sessionKey={sessionKey.value}
                             />
                         }
 
                         {inResultsScreen && gameResult &&
-                            <GameResultScreen result={gameResult} onClose={this.onGameResultMenuClose}/>
+                            <GameResultScreen
+                                result={gameResult}
+                                onClose={this.onGameResultMenuClose}
+                            />
                         }
 
                         {learnConfig && !inResultsScreen && data.length > 0 &&
                             <Learn
-                                key={sessionKey.value}
                                 data={data}
-                                onFinish={this.onLearningFinish}
+                                key={sessionKey.value}
                                 card={dataConfig?.topic.cards!}
+                                onFinish={this.onLearningFinish}
                             />
                         }
 
                         {learningResult && inResultsScreen &&
                             <LearningResultScreen
                                 result={learningResult}
-                                onDismiss={this.onLearningResultMenuClose}
                                 onPractice={this.onPracticeStart}
+                                onDismiss={this.onLearningResultMenuClose}
                             />
                         }
 
