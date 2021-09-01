@@ -23,6 +23,6 @@
     "downlevelIteration": true
   },
   "include": [
-    "src", "decs.d.ts", "cypress/integration"
+    "src", "decs.d.ts", "cypress/**"
   ]
 }

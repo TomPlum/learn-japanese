@@ -1,8 +1,6 @@
 describe('Example', () => {
     it('Anything', () => {
-        Cypress.Commands.add('class', (className) => {
-            return cy.get('[class*=' + className + "]")
-        })
+
         cy.visit('https://tomplum.github.io/learn-japanese/#/');
         cy.class('buttonContainer').contains('Learn').click()
         cy.url().should('include', '/menu/learn')
