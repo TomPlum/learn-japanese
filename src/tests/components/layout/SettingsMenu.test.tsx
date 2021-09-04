@@ -1,16 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import SettingsMenu, { GameSettingsMenuProps } from "../../../components/layout/SettingsMenu";
+import SettingsMenu, { SettingsMenuProps } from "../../../components/layout/SettingsMenu";
 import Topic from "../../../domain/Topic";
 import { AppMode } from "../../../domain/AppMode";
 import { SessionSettings } from "../../../domain/session/settings/SessionSettings";
 import { CalendarSettingsBuilder } from "../../../domain/session/settings/data/CalendarSettings";
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
-import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
-import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings";
-import { QuestionType } from "../../../domain/game/QuestionType";
-import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings";
-import LearnableField from "../../../domain/learn/LearnableField";
 import { getValueLastCalledWith } from "../../Queries";
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
@@ -19,7 +14,7 @@ window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
 
 const onStartHandler = jest.fn();
 
-let props: GameSettingsMenuProps;
+let props: SettingsMenuProps;
 
 const setup = () => {
     const component = render(<SettingsMenu {...props} />);
