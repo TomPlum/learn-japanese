@@ -1,76 +1,43 @@
-import React, { Component } from "react";
+import React from "react";
 import { Container, Toast } from "react-bootstrap";
 import Arrays from "../../utility/Arrays";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import { v4 } from "uuid";
+import { Error, removeError } from "../../slices/ErrorSlice";
+import { useErrorDispatch, useErrorSelector } from "../../hooks";
+import styles from "../../styles/sass/components/error/ErrorContainer.module.scss"
 
-export interface ApplicationError {
-    id: string;
-    value: Error;
-}
+const ErrorContainer = () => {
 
-export interface ErrorContainerProps {
-    errors: Error[];
-}
+    const errorDispatcher = useErrorDispatch();
+    const errors = useErrorSelector(state => state.error.errors);
 
-interface ErrorContainerState {
-    active: ApplicationError[];
-}
-
-class ErrorContainer extends Component<ErrorContainerProps, ErrorContainerState> {
-
-    constructor(props: Readonly<ErrorContainerProps> | ErrorContainerProps) {
-        super(props);
-        this.state = {
-            active: []
-        }
+    const onDismiss = (id: string) => {
+        errorDispatcher(removeError(id));
     }
 
-    componentDidMount() {
-        this.convertErrors();
-    }
-
-    componentDidUpdate(prevProps: Readonly<ErrorContainerProps>, prevState: Readonly<ErrorContainerState>) {
-        if (prevProps.errors !== this.props.errors) {
-            this.setState({ active: this.convertErrors() });
-        }
-    }
-
-    render() {
-        const { active } = this.state;
-
-        return (
-            <Container>
-                {active.map((error: ApplicationError) => {
-                    return (
-                        <Toast onClose={() => this.onDismiss(error.id)}>
-                            <Toast.Header>
-                                <FontAwesomeIcon icon={faExclamationCircle} fixedWidth/>
-                                {this.getHeader()}
-                            </Toast.Header>
-                            <Toast.Body>
-                                {error.value.message}
-                            </Toast.Body>
-                        </Toast>
-                    );
-                })}
-            </Container>
-        );
-    }
-
-    private onDismiss = (id: string) => {
-        this.setState({ active: this.state.active.filter((error: ApplicationError) => error.id === id) });
-    }
-
-    private getHeader = (): string => {
+    const getHeader = (): string => {
         const headers = ["Oh no!", "Oops!", "Whoops!", "Oh dear!", "Something went wrong."];
         return Arrays.getRandomElements(headers, 1)[0];
     }
 
-    private convertErrors = (): ApplicationError[] => {
-        return this.props.errors.map((error: Error) => { return { id: v4(), value: error } });
-    }
+    return (
+        <Container className={styles.wrapper}>
+            {errors.map((error: Error) => {
+                return (
+                    <Toast onClose={() => onDismiss(error.id)}>
+                        <Toast.Header>
+                            <FontAwesomeIcon icon={faExclamationCircle} fixedWidth />
+                            {getHeader()}
+                        </Toast.Header>
+                        <Toast.Body>
+                            {error.body}
+                        </Toast.Body>
+                    </Toast>
+                );
+            })}
+        </Container>
+    );
 }
 
 export default ErrorContainer;

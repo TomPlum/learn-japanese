@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userReducer from './slices/UserSlice'
 import fontReducer from './slices/FontSlice'
+import errorReducer from './slices/ErrorSlice'
 
 export const store = configureStore({
     reducer: {
         user: userReducer,
-        font: fontReducer
+        font: fontReducer,
+        error: errorReducer
     }
 });
 

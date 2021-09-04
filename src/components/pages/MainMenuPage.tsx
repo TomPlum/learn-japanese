@@ -4,7 +4,7 @@ import GameResult from "../../domain/game/GameResult";
 import GameResultScreen from "../results/GameResultScreen";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import ControlsMenu from "../layout/ControlsMenu";
-import SettingsMenu  from "../layout/SettingsMenu";
+import SettingsMenu from "../layout/SettingsMenu";
 import { AppMode, fromString } from "../../domain/AppMode";
 import SessionID from "../../domain/session/SessionID";
 import LearningSessionResult from "../../domain/learn/LearningSessionResult";
@@ -19,11 +19,12 @@ import { StaticContext } from "react-router";
 import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss";
 import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 import GameSettings from "../../domain/session/settings/game/GameSettings";
-import DataSettings  from "../../domain/session/settings/data/DataSettings";
+import DataSettings from "../../domain/session/settings/data/DataSettings";
 import LearnSettings from "../../domain/session/settings/LearnSettings";
 import UserForm from "../user/UserForm";
 import { store } from "../../store";
 import { Provider } from "react-redux";
+import ErrorContainer from "../error/ErrorContainer";
 
 interface MainMenuPageState {
     loading: boolean;
@@ -78,6 +79,7 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
         return (
             <div className={styles.wrapper}>
                 <Provider store={store}>
+                    <ErrorContainer />
                     <MainErrorBoundary>
                         <LoadingSpinner active={loading} />
 
