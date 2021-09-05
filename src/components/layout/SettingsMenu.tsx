@@ -6,6 +6,8 @@ import { AppMode } from "../../domain/AppMode";
 import ModeSelectionMenu from "../learn/ModeSelectionMenu";
 import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 import styles from "../../styles/sass/components/layout/SettingsMenu.module.scss";
+import { useErrorDispatch } from "../../hooks";
+import { addError } from "../../slices/ErrorSlice";
 
 export interface SettingsMenuProps {
     mode: AppMode;
@@ -16,6 +18,7 @@ const SettingsMenu = (props: SettingsMenuProps) => {
 
     const modeMenu = useRef<HTMLDivElement>(null);
     const [topic, setTopic] = useState<Topic>(Topic.KANA);
+    const errorDispatcher = useErrorDispatch();
 
     useEffect(() => {
         modeMenu.current?.scrollIntoView();
@@ -31,6 +34,7 @@ const SettingsMenu = (props: SettingsMenuProps) => {
 
     const onSelectTopic = (topic: Topic) => {
         setTopic(topic);
+        errorDispatcher(addError({ title: "500 - Test Error Message", body: "We've Been Tricked, We've Been Backstabbed and We've Been Quite Possibly, Bamboozled" }));
     }
 
     return (
