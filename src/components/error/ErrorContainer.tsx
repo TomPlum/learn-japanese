@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Container, Toast } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import { Error, removeError } from "../../slices/ErrorSlice";
+import { removeError } from "../../slices/ErrorSlice";
 import { useErrorDispatch, useErrorSelector } from "../../hooks";
 import styles from "../../styles/sass/components/error/ErrorContainer.module.scss"
 import dayjs from "dayjs";
 import Copyable from "../ui/Copyable";
-import { days } from "../../data/Calendar";
 
 const ErrorContainer = () => {
 
@@ -35,9 +34,9 @@ const ErrorContainer = () => {
 
     return (
         <Container className={styles.wrapper}>
-            {errors.map((error: Error) => {
+            {Object.entries(errors).map(([id, error]) => {
                 return (
-                    <Toast onClose={() => onDismiss(error.id)} key={error.id} className={styles.toast} animation>
+                    <Toast onClose={() => onDismiss(id)} key={id} className={styles.toast} animation>
                         <Toast.Header className={styles.header}>
                             <FontAwesomeIcon icon={faExclamationCircle} fixedWidth className={styles.icon} />
                             <strong className={styles.title}>
