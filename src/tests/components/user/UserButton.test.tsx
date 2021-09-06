@@ -2,14 +2,12 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import UserButton, { UserButtonProps } from "../../../components/user/UserButton";
 import userReducer, { setUser, User } from "../../../slices/UserSlice";
-import configureStore from 'redux-mock-store'
 import { createStore } from 'redux';
 
 let props: UserButtonProps;
 
 const onClickHandler = jest.fn();
 let initialState: { user?: User };
-const mockStore = configureStore([]);
 // @ts-ignore
 const store = createStore(userReducer, initialState);
 
@@ -18,7 +16,6 @@ beforeEach(() => {
         disabled: false,
         onClick: onClickHandler
     };
-    //mockStore(initialState);
 });
 
 const setup = () => {

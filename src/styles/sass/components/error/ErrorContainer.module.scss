@@ -39,3 +39,40 @@
 .icon {
   color: #9f3333;
 }
+
+.controllerIcon {
+  color: #312e2e;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrapper span {
+  font-size: 1.4em;
+}
+
+.reset {
+  color: #cd3a3a;
+  transition: all ease-in-out 0.3s;
+}
+
+.reset:hover {
+  color: #a03636;
+  cursor: pointer;
+}
+
+.clearAll {
+  transition: all ease-in-out 0.3s;
+}
+
+.clearAll:hover {
+  color: #575555;
+  cursor: pointer;
+}
+
+.controllerBody {
+  padding: 10px;
+}

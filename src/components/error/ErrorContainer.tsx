@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Container, Toast } from "react-bootstrap";
+import { Col, Container, Row, Toast } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import { removeError } from "../../slices/ErrorSlice";
+import { faExclamationCircle, faRedoAlt, faTools, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { addControllerMessage, addError, clearErrors, NotificationType, removeError } from "../../slices/ErrorSlice";
 import { useErrorDispatch, useErrorSelector } from "../../hooks";
 import styles from "../../styles/sass/components/error/ErrorContainer.module.scss"
 import dayjs from "dayjs";
@@ -13,6 +13,7 @@ const ErrorContainer = () => {
     const errorDispatcher = useErrorDispatch();
     const errors = useErrorSelector(state => state.error.errors);
     const [trigger, setTrigger] = useState(false);
+    const [hasControllerMessage, setHasControllerMessage] = useState(false);
 
     useEffect(() => {
         setTimeout(() => {
@@ -20,9 +21,20 @@ const ErrorContainer = () => {
         }, 60 * 1000);
     }, [trigger]);
 
+    useEffect(() => {
+        if (Object.values(errors).length > 4 && !hasControllerMessage) {
+            errorDispatcher(addControllerMessage());
+            setHasControllerMessage(true);
+        }
+    }, [errors]);
+
     const onDismiss = (id: string) => {
-        console.log("Removing Error w/ID: " + id);
         errorDispatcher(removeError(id));
+    }
+
+    const onClearErrors = () => {
+        errorDispatcher(clearErrors());
+        setHasControllerMessage(false);
     }
 
     const getTime = (time: number) => {
@@ -34,11 +46,11 @@ const ErrorContainer = () => {
 
     return (
         <Container className={styles.wrapper}>
-            {Object.entries(errors).map(([id, error]) => {
-                return (
+            {Object.entries(errors).sort(([_, error]) => error.precedence).map(([id, error]) => {
+                return error.type !== NotificationType.SPECIAL ? (
                     <Toast onClose={() => onDismiss(id)} key={id} className={styles.toast} animation>
                         <Toast.Header className={styles.header}>
-                            <FontAwesomeIcon icon={faExclamationCircle} fixedWidth className={styles.icon} />
+                            <FontAwesomeIcon icon={faExclamationCircle} fixedWidth className={styles.icon}/>
                             <strong className={styles.title}>
                                 <Copyable>
                                     <span>{error.title}</span>
@@ -53,6 +65,26 @@ const ErrorContainer = () => {
                             <Copyable>
                                 <span>{error.body}</span>
                             </Copyable>
+                        </Toast.Body>
+                    </Toast>
+                ) : (
+                    <Toast onClose={() => onDismiss(id)} key={id} className={styles.toast} animation>
+                        <Toast.Header className={styles.header}>
+                            <FontAwesomeIcon icon={faTools} fixedWidth className={styles.controllerIcon}/>
+                            <strong className={styles.title}>
+                                {error.title}
+                            </strong>
+                        </Toast.Header>
+
+                        <Toast.Body className={styles.controllerBody}>
+                            <Row className={styles.iconWrapper} onClick={onClearErrors}>
+                                <FontAwesomeIcon
+                                    icon={faTrashAlt}
+                                    fixedWidth size="3x"
+                                    className={styles.reset}
+                                />
+                                <span className={styles.clearAll}>Clear all notifications</span>
+                            </Row>
                         </Toast.Body>
                     </Toast>
                 );

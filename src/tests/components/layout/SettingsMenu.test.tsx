@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import SettingsMenu, { SettingsMenuProps } from "../../../components/layout/SettingsMenu";
 import Topic from "../../../domain/Topic";
 import { AppMode } from "../../../domain/AppMode";
@@ -7,6 +7,7 @@ import { CalendarSettingsBuilder } from "../../../domain/session/settings/data/C
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import { getValueLastCalledWith } from "../../Queries";
+import renderReduxConsumer from "../../renderReduxConsumer";
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
 const scrollIntoView = jest.fn();
@@ -17,7 +18,7 @@ const onStartHandler = jest.fn();
 let props: SettingsMenuProps;
 
 const setup = () => {
-    const component = render(<SettingsMenu {...props} />);
+    const component = renderReduxConsumer(<SettingsMenu {...props} />);
     return {
         kana: component.queryAllByText('Hiragana & Katakana')[1],
         numbers: component.getByText('Numbers & Counting'),
