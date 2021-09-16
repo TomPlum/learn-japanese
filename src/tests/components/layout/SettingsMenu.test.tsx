@@ -46,7 +46,7 @@ test('Should call scroll into view when changing topic', () => {
     const { kanji } = setup();
     expect(scrollIntoView).toHaveBeenCalled();
     fireEvent.click(kanji);
-    expect(scrollIntoView).toHaveBeenCalledTimes(2);
+    expect(scrollIntoView).toHaveBeenCalledTimes(3);
 });
 
 describe("Rendering Game Menus", () => {
