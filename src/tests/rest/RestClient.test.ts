@@ -1,5 +1,6 @@
 import RestClient from "../../rest/RestClient";
 import axios, { AxiosStatic } from "axios";
+import { Environment } from "../../utility/Environment";
 
 interface AxiosMock extends AxiosStatic {
     mockResolvedValue: Function
@@ -14,6 +15,13 @@ interface ExampleResponse {
 }
 
 describe("Rest Client", () => {
+    const environment = jest.fn();
+
+    beforeEach(() => {
+        Environment.variable = environment;
+        environment.mockReturnValue("https://japanese.tomplumpton.me/learn-japanese")
+    });
+
     describe("GET", () => {
         it("Should map the response JSON to the specified type when the API call is successful", async () => {
             mockedAxios.mockResolvedValue({ data: { value: "test-value" } });
@@ -62,6 +70,15 @@ describe("Rest Client", () => {
                 });
             });
         });
+
+        it("Should throw an error if the endpoint is undefined", async () => {
+            await expect(() => RestClient.get("")).rejects.toThrow("Endpoint is not defined!");
+        });
+
+        it("Should throw an error if the host is undefined", async () => {
+            environment.mockReturnValueOnce(undefined);
+            await expect(() => RestClient.get("")).rejects.toThrow("Host URI is not defined!");
+        });
     });
 
     describe("POST", () => {
@@ -78,6 +95,15 @@ describe("Rest Client", () => {
                     }
                 )
             });
+        });
+
+        it("Should throw an error if the endpoint is undefined", async () => {
+            await expect(() => RestClient.post("", {})).rejects.toThrow("Endpoint is not defined!");
+        });
+
+        it("Should throw an error if the host is undefined", async () => {
+            environment.mockReturnValueOnce(undefined);
+            await expect(() => RestClient.post("", {})).rejects.toThrow("Host URI is not defined!");
         });
     });
 });

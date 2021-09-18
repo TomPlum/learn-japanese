@@ -7,8 +7,6 @@ export interface APIResponse<T> {
 }
 
 class RestClient {
-    private static readonly host = Environment.variable("API_HOST_URI")
-
     private constructor() { }
 
     static async get<T>(endpoint: string): Promise<APIResponse<T>> {
@@ -20,7 +18,9 @@ class RestClient {
     }
 
     private static async makeRestRequest<T>(method: Method, endpoint: string, body?: object): Promise<APIResponse<T>> {
-        if (!this.host) {
+        const host = Environment.variable("API_HOST_URI");
+
+        if (!host) {
             throw new ReferenceError('Host URI is not defined!');
         }
 
@@ -28,7 +28,7 @@ class RestClient {
             throw new ReferenceError("Endpoint is not defined!");
         }
 
-        const URI = this.host + endpoint;
+        const URI = host + endpoint;
         //console.log("Sending " + method + " request to " + URI);
 
         return await axios(URI, {
