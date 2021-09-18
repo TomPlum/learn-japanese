@@ -2,7 +2,7 @@ import axios, { Method } from "axios"
 import { Environment } from "../utility/Environment";
 
 export interface APIResponse<T> {
-    data: any;
+    data: T | undefined;
     errors: Error[];
 }
 

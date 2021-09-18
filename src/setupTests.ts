@@ -22,6 +22,7 @@ window.matchMedia = window.matchMedia || function() {
 import sizeMe from "react-sizeme";
 sizeMe.noPlaceholders = true;
 
+//Custom Jest assertion for testing CSS styles
 expect.extend({
     toHaveStyleProperty(received, style, value) {
         const hasStyle = received.toHaveProperty('style._values.' + style, value);
@@ -37,4 +38,28 @@ expect.extend({
             }
         }
     }
-})
+});
+
+//Mocks local storage for testing
+export const localStorageMock = (function() {
+    let store = new Map()
+    return {
+        getItem(key: string):string {
+            return store.get(key);
+        },
+
+        setItem: function(key: string, value: string) {
+            store.set(key, value);
+        },
+
+        clear: function() {
+            store = new Map();
+        },
+
+        removeItem: function(key: string) {
+            store.delete(key)
+        }
+    };
+})();
+
+Object.defineProperty(window, 'localStorage', { value: localStorageMock });
