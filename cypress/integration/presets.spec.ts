@@ -1,66 +1,60 @@
+import {Numbers} from "../../src/utility/Numbers";
+
 describe('Hiragana & Katakana', () => {
-    it('Relaxed', () => startPresetAndQuit('Relaxed'));
-    it('Time Attack', () => startPresetAndQuit('Time Attack'));
-    it('Rōmaji', () => startPresetAndQuit('Rōmaji'));
-    it('Kana', () => startPresetAndQuit('Kana'));
-    it('Match', () => startPresetAndQuit('Match'));
-    it('Hardcore', () => startPresetAndQuit('Hardcore'));
+    it('Relaxed', () => cy.startAndQuit('Relaxed'));
+    it('Time Attack', () => cy.startAndQuit('Time Attack'));
+    it('Rōmaji', () => cy.startAndQuit('Rōmaji'));
+    it('Kana', () => cy.startAndQuit('Kana'));
+    it('Match', () => cy.startAndQuit('Match'));
+    it('Hardcore', () => cy.startAndQuit('Hardcore'));
 });
+
 describe('Numbers & Counting', () => {
     const topic = 'Numbers & Counting';
-    it('Numbers', () => startPresetAndQuit('Numbers', topic));
-    it('Counters', () => startPresetAndQuit('Counters', topic));
-    it('Age', () => startPresetAndQuit('Age', topic));
-    it('Exceptions', () => startPresetAndQuit('Exceptions', topic));
-    it('Units', () => startPresetAndQuit('Units', topic));
-    it('Sequence', () => startPresetAndQuit('Sequence', topic));
+    it('Numbers', () => cy.startAndQuit('Numbers', topic));
+    it('Counters', () => cy.startAndQuit('Counters', topic));
+    it.skip('Age', () => cy.startAndQuit('Age', topic));
+    it.skip('Exceptions', () => cy.startAndQuit('Exceptions', topic));
+    it.skip('Units', () => cy.startAndQuit('Units', topic));
+    it.skip('Sequence', () => cy.startAndQuit('Sequence', topic));
 });
+
 describe('Jōyō Kanji', () => {
     const topic = 'Jōyō Kanji';
-    it('Kanji', () => startPresetAndQuit('Kanji', topic));
-    it('Meaning', () => startPresetAndQuit('Meaning', topic));
-    it('On\'yomi', () => startPresetAndQuit('On\'yomi', topic));
-    it('Kun\'yomi', () => startPresetAndQuit('Kun\'yomi', topic));
-    it('Match', () => startPresetAndQuit('Match', topic));
-    it('Random', () => startPresetAndQuit('Random', topic));
+    it('Kanji', () => cy.startAndQuit('Kanji', topic));
+    it('Meaning', () => cy.startAndQuit('Meaning', topic));
+    it('On\'yomi', () => cy.startAndQuit('On\'yomi', topic));
+    it('Kun\'yomi', () => cy.startAndQuit('Kun\'yomi', topic));
+    it('Match', () => cy.startAndQuit('Match', topic));
+    it('Random', () => cy.startAndQuit('Random', topic));
 });
+
 describe('Basics', () => {
     const topic = 'Basics';
-    it('Colours', () => startPresetAndQuit('Colours', topic));
-    it('Animals', () => startPresetAndQuit('Animals', topic));
-    it('Directions', () => startPresetAndQuit('Directions', topic));
-    it('Weather', () => startPresetAndQuit('Weather', topic));
-    it('Family', () => startPresetAndQuit('Family', topic));
-    it('Body', () => startPresetAndQuit('Body', topic));
+    it('Colours', () => cy.startAndQuit('Colours', topic));
+    it.skip('Animals', () => cy.startAndQuit('Animals', topic));
+    it.skip('Directions', () => cy.startAndQuit('Directions', topic));
+    it.skip('Weather', () => cy.startAndQuit('Weather', topic));
+    it.skip('Family', () => cy.startAndQuit('Family', topic));
+    it.skip('Body', () => cy.startAndQuit('Body', topic));
 });
+
 describe('Days & Months', () => {
     const topic = 'Days & Months';
-    it('Days of the Week', () => startPresetAndQuit('Days of the Week', topic));
-    it('Months of the Year', () => startPresetAndQuit('Months of the Year', topic));
-    it('Temporal Nouns', () => startPresetAndQuit('Temporal Nouns', topic));
-    it('Seasonal', () => startPresetAndQuit('Seasonal', topic));
-    it('Common Phrases', () => startPresetAndQuit('Common Phrases', topic));
-    it('Everything', () => startPresetAndQuit('Everything', topic));
+    it('Days of the Week', () => cy.startAndQuit('Days of the Week', topic));
+    it('Months of the Year', () => cy.startAndQuit('Months of the Year', topic));
+    it('Temporal Nouns', () => cy.startAndQuit('Temporal Nouns', topic));
+    it.skip('Seasonal', () => cy.startAndQuit('Seasonal', topic));
+    it('Common Phrases', () => cy.startAndQuit('Common Phrases', topic));
+    it('Everything', () => cy.startAndQuit('Everything', topic));
 });
+
 describe('Sentence Structure', () => {
     const topic = 'Sentence Structure';
-    it('Japanese', () => startPresetAndQuit('Japanese', topic));
-    it('Meaning', () => startPresetAndQuit('Meaning', topic));
-    it('Placeholder 3', () => startPresetAndQuit('Placeholder 3', topic));
-    it('Placeholder 4', () => startPresetAndQuit('Placeholder 4', topic));
-    it('Placeholder 5', () => startPresetAndQuit('Placeholder 5 ', topic));
-    it('Placeholder 6', () => startPresetAndQuit('Placeholder 6 ', topic));
+    it('Japanese', () => cy.startAndQuit('Japanese', topic));
+    it('Meaning', () => cy.startAndQuit('Meaning', topic));
+    it.skip('Placeholder 3', () => cy.startAndQuit('Placeholder 3', topic));
+    it.skip('Placeholder 4', () => cy.startAndQuit('Placeholder 4', topic));
+    it.skip('Placeholder 5', () => cy.startAndQuit('Placeholder 5 ', topic));
+    it.skip('Placeholder 6', () => cy.startAndQuit('Placeholder 6 ', topic));
 });
-
-
-function startPresetAndQuit(presetName: string, topicName?: string) {
-    cy.visit('https://tomplum.github.io/learn-japanese/#/');
-    cy.class('buttonContainer').contains('Play').click();
-    cy.url().should('include', '/menu/play');
-    if(topicName) cy.contains(topicName).click();
-    cy.contains(presetName).click();
-    cy.contains('Start').click();
-    cy.class('QuitButton_icon').click();
-    cy.class('ConfirmModal_yes').click();
-    cy.contains('Finish').click();
-}
