@@ -1,4 +1,5 @@
 import {Numbers} from "../../src/utility/Numbers";
+import {Topic} from "../support/Topic";
 
 describe('Hiragana & Katakana', () => {
     it('Relaxed', () => cy.startAndQuit('Relaxed'));
@@ -10,7 +11,7 @@ describe('Hiragana & Katakana', () => {
 });
 
 describe('Numbers & Counting', () => {
-    const topic = 'Numbers & Counting';
+    const topic = Topic.NUMBERS;
     it('Numbers', () => cy.startAndQuit('Numbers', topic));
     it('Counters', () => cy.startAndQuit('Counters', topic));
     it.skip('Age', () => cy.startAndQuit('Age', topic));
@@ -20,7 +21,7 @@ describe('Numbers & Counting', () => {
 });
 
 describe('Jōyō Kanji', () => {
-    const topic = 'Jōyō Kanji';
+    const topic = Topic.KANJI;
     it('Kanji', () => cy.startAndQuit('Kanji', topic));
     it('Meaning', () => cy.startAndQuit('Meaning', topic));
     it('On\'yomi', () => cy.startAndQuit('On\'yomi', topic));
@@ -30,7 +31,7 @@ describe('Jōyō Kanji', () => {
 });
 
 describe('Basics', () => {
-    const topic = 'Basics';
+    const topic = Topic.BASICS;
     it('Colours', () => cy.startAndQuit('Colours', topic));
     it.skip('Animals', () => cy.startAndQuit('Animals', topic));
     it.skip('Directions', () => cy.startAndQuit('Directions', topic));
@@ -40,7 +41,7 @@ describe('Basics', () => {
 });
 
 describe('Days & Months', () => {
-    const topic = 'Days & Months';
+    const topic = Topic.DAYS;
     it('Days of the Week', () => cy.startAndQuit('Days of the Week', topic));
     it('Months of the Year', () => cy.startAndQuit('Months of the Year', topic));
     it('Temporal Nouns', () => cy.startAndQuit('Temporal Nouns', topic));
@@ -50,7 +51,7 @@ describe('Days & Months', () => {
 });
 
 describe('Sentence Structure', () => {
-    const topic = 'Sentence Structure';
+    const topic = Topic.SENTENCE;
     it('Japanese', () => cy.startAndQuit('Japanese', topic));
     it('Meaning', () => cy.startAndQuit('Meaning', topic));
     it.skip('Placeholder 3', () => cy.startAndQuit('Placeholder 3', topic));
