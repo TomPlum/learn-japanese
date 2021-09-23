@@ -24,12 +24,13 @@ describe("Rest Client", () => {
 
     describe("GET", () => {
         it("Should map the response JSON to the specified type when the API call is successful", async () => {
-            mockedAxios.mockResolvedValue({ data: { value: "test-value" } });
+            mockedAxios.mockResolvedValue({ data: { value: "test-value" }, status: 200 });
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").then(response => {
                 expect(response).toStrictEqual({
                     data: { value: "test-value" },
-                    errors: []
+                    errors: [],
+                    status: 200
                 });
             });
         });
@@ -49,24 +50,38 @@ describe("Rest Client", () => {
             });
         });
 
-        it("Should return an error response when the API doesn't return any data", () => {
-            mockedAxios.mockResolvedValue({ data: undefined, statusText: "Oh No" });
+        it("Should return an error response when the promise is rejected and the error has a response", () => {
+            mockedAxios.mockRejectedValue({ response: { data: "He's dead Jim.", status: 500 }});
 
-            return RestClient.get<ExampleResponse>("/kanji/by-character/人").then(response => {
+            return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
                     data: undefined,
-                    errors: [new Error("Oh No")]
+                    status: 500,
+                    errors: [new Error("He's dead Jim.")]
                 });
             });
         });
 
-        it("Should return an error response when the promise is rejected", () => {
-            mockedAxios.mockRejectedValue("He's dead Jim.");
+        it("Should return an error response when the promise is rejected and the error has a request", () => {
+            mockedAxios.mockRejectedValue({ request: { status: 500 }});
 
-            return RestClient.get<ExampleResponse>("/kanji/by-character/人").then(response => {
+            return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
                     data: undefined,
-                    errors: [new Error("He's dead Jim.")]
+                    status: 500,
+                    errors: [new Error("No response returned from the API")]
+                });
+            });
+        });
+
+        it("Should return an error response when the promise is rejected and the error has not request or response", () => {
+            mockedAxios.mockRejectedValue({});
+
+            return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
+                expect(response).toStrictEqual({
+                    data: undefined,
+                    status: 400,
+                    errors: [new Error("Something went wrong while setting up the request.")]
                 });
             });
         });
@@ -93,7 +108,7 @@ describe("Rest Client", () => {
                         headers: { "Content-Type": "application/json", },
                         data: "{\"request\":\"Hello\"}"
                     }
-                )
+                );
             });
         });
 

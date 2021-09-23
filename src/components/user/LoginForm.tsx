@@ -70,7 +70,7 @@ const LoginForm = (props: LoginFormProps) => {
             } else {
                 dispatchNotification(addError({
                     title: "Login Error",
-                    body: e.message
+                    body: e
                 }));
                 props.onSuccess();
             }
