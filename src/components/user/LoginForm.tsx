@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Alert, Button, Form, Modal } from "react-bootstrap";
 import styles from "../../styles/sass/components/user/UserForm.module.scss";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { useUserDispatch } from "../../hooks";
-import { setUser } from "../../slices/UserSlice";
+import { useUserDispatch, useErrorDispatch } from "../../hooks";
+import { setJWT, setUser } from "../../slices/UserSlice";
+import auth from "../../service/AuthenticationService";
+import { addError } from "../../slices/ErrorSlice";
 
 export interface LoginFormProps {
     onSuccess: () => void;
@@ -17,8 +19,12 @@ const LoginForm = (props: LoginFormProps) => {
     const [usernameValid, setUsernameValid] = useState(false);
     const [passwordValid, setPasswordValid] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [badCredentials, setBadCredentials] = useState(false);
+
     const usernameField = useRef<HTMLInputElement>(null);
+
     const dispatchUser = useUserDispatch();
+    const dispatchNotification = useErrorDispatch();
 
     const formValid = usernameValid && passwordValid;
 
@@ -41,10 +47,36 @@ const LoginForm = (props: LoginFormProps) => {
 
     const login = () => {
         setLoading(true);
-        //TODO: Hit REST API and get JWT token
-        dispatchUser(setUser({ username: username, nickname: "" }));
-        setLoading(false);
-        props.onSuccess();
+
+        auth.login(username, password).then(res => {
+            dispatchUser(setUser({
+                username: res.username,
+                email: res.email,
+                nickname: res.nickname,
+                roles: res.roles,
+                locked: res.locked,
+                expired: res.expired,
+                credentialsExpired: res.credentialsExpired,
+                enabled: res.enabled
+            }));
+
+            dispatchUser(setJWT(res.token));
+            props.onSuccess();
+        }).catch(e => {
+            if (e == "AUTHENTICATION_ERROR") {
+                setBadCredentials(true);
+                setPassword("")
+                setPasswordValid(false)
+            } else {
+                dispatchNotification(addError({
+                    title: "Login Error",
+                    body: e.message
+                }));
+                props.onSuccess();
+            }
+        }).finally(() => {
+            setLoading(false);
+        });
     }
 
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +93,8 @@ const LoginForm = (props: LoginFormProps) => {
 
     return (
         <Modal.Body className={styles.body}>
+            {badCredentials && <Alert variant="danger">Username or password is incorrect.</Alert>}
+
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
@@ -88,7 +122,7 @@ const LoginForm = (props: LoginFormProps) => {
             </Form.Group>
 
             <Form.Group>
-                <Button className={styles.login} variant="success" onClick={login} disabled={!formValid}>
+                <Button className={styles.login} variant="success" onClick={login} disabled={!formValid || loading}>
                     {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth/>}
                     {' Login'}
                 </Button>
