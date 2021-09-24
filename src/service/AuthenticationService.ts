@@ -1,4 +1,4 @@
-import RestClient from "../rest/RestClient";
+import RestClient, { APIResponse } from "../rest/RestClient";
 
 export interface LoginResponse {
     username: string;
@@ -19,18 +19,13 @@ export interface SignUpResponse {
 }
 
 const register = (username: string, email: string, password: string, nickname?: string): Promise<SignUpResponse> => {
-    return RestClient.post<SignUpResponse>("/user/register", {
-        username: username,
-        email: email,
-        password: password,
-        nickname: nickname
-    }).then(response => {
+    const request = { username: username, email: email, password: password, nickname: nickname };
+
+    return RestClient.post<SignUpResponse>("/user/register", request).then(response => {
         if (!response.data) {
             throw Error("No data returned post user-registration.");
         }
         return response.data;
-    }).catch(e => {
-        throw Error(e);
     });
 }
 
@@ -38,15 +33,18 @@ const login = (username: string, password: string): Promise<LoginResponse> => {
     return RestClient.post<LoginResponse>("/user/login", {
         username: username,
         password: password
-    }).then(response => {
+    }).then((response: APIResponse<LoginResponse>) => {
         if (response?.data?.token) {
             localStorage.setItem("user", JSON.stringify(response.data))
         } else {
-            throw ReferenceError("No valid JWT returned for user [" + response?.data?.username + "]");
+            return Promise.reject({ errors: "An error occurred when trying to authenticate the user."} );
         }
         return response.data;
-    }).catch(e => {
-        throw Error(e);
+    }).catch((response: APIResponse<LoginResponse>) => {
+        if (response.status === 401) {
+            return Promise.reject("AUTHENTICATION_ERROR");
+        }
+        return Promise.reject("Unknown login error: " + response.errors);
     });
 }
 

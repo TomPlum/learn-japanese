@@ -45,7 +45,7 @@ describe("Authentication Service", () => {
             });
         });
 
-        it("Should throw an exception if there is no JWT in the response", async () => {
+        it("Should reject with an error message if there is no JWT in the response", async () => {
             const user = {
                 username: "TomPlum42",
                 email: "tom@hotmail.com",
@@ -59,9 +59,23 @@ describe("Authentication Service", () => {
 
             restPost.mockResolvedValueOnce({ data: user });
 
-            await expect(() => {
-                return authentication.login("TomPlum42", "MyPassword")
-            }).rejects.toThrow("No valid JWT returned for user [TomPlum42]");
+            return authentication.login("TomPlum42", "MyPassword").catch(e => {
+                expect(e).toEqual("Unknown login error: An error occurred when trying to authenticate the user.");
+            });
+        });
+
+        it("Should reject with AUTHENTICATION_ERROR if the API returns a 401", async () => {
+            restPost.mockRejectedValueOnce({ status: 401 });
+            return authentication.login("TomPlum42", "MyPassword").catch(e => {
+                expect(e).toEqual("AUTHENTICATION_ERROR");
+            });
+        });
+
+        it("Should reject with an unknown error if the API returns an unknown response status code", async () => {
+            restPost.mockRejectedValueOnce({ status: 865, errors: ["Sad face"] });
+            return authentication.login("TomPlum42", "MyPassword").catch(e => {
+                expect(e).toEqual("Unknown login error: Sad face");
+            });
         });
 
         it("Should return the user details from the API if the call is successful", async () => {
