@@ -57,7 +57,8 @@ const LoginForm = (props: LoginFormProps) => {
                 locked: res.locked,
                 expired: res.expired,
                 credentialsExpired: res.credentialsExpired,
-                enabled: res.enabled
+                enabled: res.enabled,
+                creationDate: "some date"
             }));
 
             dispatchUser(setJWT(res.token));

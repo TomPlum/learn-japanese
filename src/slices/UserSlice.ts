@@ -9,6 +9,7 @@ export interface User {
     expired: boolean;
     credentialsExpired: boolean;
     enabled: boolean;
+    creationDate: string;
 }
 
 export interface UserState {

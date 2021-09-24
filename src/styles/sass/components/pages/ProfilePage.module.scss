@@ -1,0 +1,52 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  max-width: 1200px;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+.sidebar, .main {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: $light-1;
+}
+
+.heading {
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+}
+
+.label {
+  margin: 0;
+  color: $light-3;
+  font-size: 1.1em;
+}
+
+.value {
+  font-size: 1.3em;
+}
+
+.edit, .save, .spinner {
+  float: right;
+}
+
+.edit {
+  color: $dark-3;
+  transition: all ease-in-out 0.2s;
+}
+
+.edit:hover {
+  color: $dark-1;
+  cursor: pointer;
+}
+
+.save {
+  color: $bootstrap-green;
+}
+
+.save:hover {
+  cursor: pointer;
+}
+
+.spinner {
+  color: $bootstrap-info;
+}
