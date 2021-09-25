@@ -41,17 +41,18 @@ const About = (props: AboutProps) => {
     }
 
     return (
-        <Card className={styles.card} border="primary">
+        <Card className={styles.card} border="info">
             <Card.Body>
                 <h2 className={styles.heading}>
                     About
-                    {editing ? <FontAwesomeIcon
-                        size="sm"
-                        title="Save"
-                        icon={faCheckCircle}
-                        onClick={onFinishEditing}
-                        className={[styles.save, styles.icon].join(" ")}
-                    /> : saving ?
+                    {editing ?
+                        <FontAwesomeIcon
+                            size="sm"
+                            title="Save"
+                            icon={faCheckCircle}
+                            onClick={onFinishEditing}
+                            className={[styles.save, styles.icon].join(" ")}
+                        /> : saving ?
                         <FontAwesomeIcon
                             size="sm"
                             spin={true}
@@ -65,7 +66,8 @@ const About = (props: AboutProps) => {
                             icon={faPencilAlt}
                             onClick={onClickEdit}
                             className={[styles.edit, styles.icon].join(" ")}
-                        />}
+                        />
+                    }
                 </h2>
 
                 <p className={styles.label}>Joined</p>

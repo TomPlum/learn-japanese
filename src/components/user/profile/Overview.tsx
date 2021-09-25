@@ -3,7 +3,7 @@ import styles from "../../../styles/sass/components/user/profile/Overview.module
 
 const Overview = () => {
     return (
-        <Card className={styles.card}>
+        <Card className={styles.card} border="primary">
             <Card.Body>
                 <h2 className={styles.heading}>Overview</h2>
             </Card.Body>
