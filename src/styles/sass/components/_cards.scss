@@ -1,0 +1,43 @@
+@import "src/styles/sass/colours";
+
+.card {
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  border-radius: 20px;
+  height: 380px;
+  width: 380px;
+}
+
+.heading {
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+}
+
+.label {
+  margin: 0;
+  color: $light-3;
+  font-size: 1.1em;
+}
+
+.value {
+  font-size: 1.3em;
+}
+
+.icon {
+  float: right;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.spinner {
+  color: $bootstrap-info;
+}
+
+.save {
+  color: $bootstrap-green;
+}
+
+.save:hover {
+  cursor: pointer;
+}
+
