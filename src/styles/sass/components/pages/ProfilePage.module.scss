@@ -5,10 +5,9 @@
   font-family: "Ciutadella Rounded Medium", sans-serif;
 }
 
-.sidebar, .main {
-  padding: 20px;
+.card {
   border-radius: 20px;
-  background-color: $light-1;
+  height: 380px;
 }
 
 .heading {
@@ -25,16 +24,16 @@
   font-size: 1.3em;
 }
 
-.edit, .save, .spinner {
+.edit, .save, .spinner, .refresh {
   float: right;
 }
 
-.edit {
+.edit, .refresh {
   color: $dark-3;
   transition: all ease-in-out 0.2s;
 }
 
-.edit:hover {
+.edit:hover, .refresh:hover {
   color: $dark-1;
   cursor: pointer;
 }
