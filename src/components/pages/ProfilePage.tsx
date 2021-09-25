@@ -26,7 +26,7 @@ const ProfilePage = () => {
                 <Ranks />
                 <Overview />
                 <Stats />
-                <Preferences />
+                <Preferences user={user} />
                 <DangerZone />
             </CardColumns>
         </Container>

@@ -10,8 +10,13 @@ import { faCheckCircle, faCircleNotch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
 import { AppMode } from "../../../domain/AppMode";
+import { User } from "../../../slices/UserSlice";
 
-const Preferences = () => {
+export interface PreferencesProps {
+    user?: User;
+}
+
+const Preferences = (props: PreferencesProps) => {
 
     const fontDispatcher = useFontDispatch();
 
@@ -54,7 +59,7 @@ const Preferences = () => {
     }
 
     return (
-        <Card className={styles.card}>
+        <Card className={styles.card} border="secondary">
             <Card.Body>
                 <h2 className={styles.heading}>
                     Preferences
