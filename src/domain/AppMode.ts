@@ -1,5 +1,6 @@
 export enum AppMode {
-    LEARN, PLAY
+    LEARN = "Learn",
+    PLAY = "Play"
 }
 
 export function fromString(value: string): AppMode {

@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import { useFontDispatch } from "../../../hooks";
 import { Font, fonts } from "../../ui/buttons/FontSelectorButton";
 import { setFont } from "../../../slices/FontSlice";
-import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
 import { Theme } from "../../../domain/Theme";
 import { Language } from "../../../domain/Language";
 import { HighScorePreference } from "../../../domain/HighScorePreference";
 import { faCheckCircle, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
+import { AppMode } from "../../../domain/AppMode";
 
 const Preferences = () => {
 
@@ -18,6 +19,7 @@ const Preferences = () => {
     const [theme, setTheme] = useState(Theme.DARK.toString());
     const [language, setLanguage] = useState(Language.ENGLISH.toString());
     const [highScorePreference, setHighScorePreference] = useState(HighScorePreference.ASK_EACH_TIME.toString());
+    const [appMode, setAppMode] = useState(AppMode.PLAY.toString());
     const [changes, setChanges] = useState(false);
     const [saving, setSaving] = useState(false);
 
@@ -39,6 +41,11 @@ const Preferences = () => {
 
     const onSelectHighScorePreference = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
         setHighScorePreference((event.target as HTMLSelectElement).textContent!);
+        setChanges(true);
+    }
+
+    const onSetAppMode = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
+        setAppMode((event.target as HTMLSelectElement).textContent!);
         setChanges(true);
     }
 
@@ -66,7 +73,7 @@ const Preferences = () => {
                 </h2>
 
                 <Row className={styles.row}>
-                    <Col xs={6}>
+                    <Col xs={6} className={styles.col}>
                         <p className={styles.label}>Default font</p>
                     </Col>
                     <Col xs={6}>
@@ -82,7 +89,7 @@ const Preferences = () => {
                 </Row>
 
                 <Row className={styles.row}>
-                    <Col xs={6}>
+                    <Col xs={6} className={styles.col}>
                         <p className={styles.label}>Theme</p>
                     </Col>
                     <Col xs={6}>
@@ -98,7 +105,7 @@ const Preferences = () => {
                 </Row>
 
                 <Row className={styles.row}>
-                    <Col xs={6}>
+                    <Col xs={6} className={styles.col}>
                         <p className={styles.label}>Language</p>
                     </Col>
                     <Col xs={6}>
@@ -114,7 +121,7 @@ const Preferences = () => {
                 </Row>
 
                 <Row className={styles.row}>
-                    <Col xs={6}>
+                    <Col xs={6} className={styles.col}>
                         <p className={styles.label}>Highscores</p>
                     </Col>
                     <Col xs={6}>
@@ -123,6 +130,22 @@ const Preferences = () => {
                             <Dropdown.Menu>
                                 {Object.values(HighScorePreference).map((preference: string) => {
                                     return <Dropdown.Item key={preference}>{preference}</Dropdown.Item>
+                                })}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
+                </Row>
+
+                <Row className={styles.row}>
+                    <Col xs={6} className={styles.col}>
+                        <p className={styles.label}>Default App Mode</p>
+                    </Col>
+                    <Col xs={6}>
+                        <Dropdown className={styles.dropdown} onSelect={onSetAppMode}>
+                            <Dropdown.Toggle variant="light">{appMode}</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {Object.values(AppMode).map((mode: string) => {
+                                    return <Dropdown.Item key={mode}>{mode}</Dropdown.Item>
                                 })}
                             </Dropdown.Menu>
                         </Dropdown>

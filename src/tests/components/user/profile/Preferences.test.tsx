@@ -9,6 +9,7 @@ const setup = () => {
         theme: component.getByText('Dark Mode'),
         language: component.getByText('English'),
         highScores: component.getByText('Ask Each Time'),
+        appMode: component.getByText('Play'),
         ...component
     }
 }
@@ -47,6 +48,19 @@ test('Should render the save button if the default language changes', () => {
     //Change the default language preference
     fireEvent.click(language);
     fireEvent.click(screen.getByText('日本語'));
+
+    //It should render the save button
+    expect(screen.getByTitle('Save')).toBeInTheDocument();
+});
+
+test('Should render the save button if the default app mode changes', () => {
+    //Should not render the button on mount
+    const { appMode } = setup();
+    expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
+
+    //Change the default app mode preference
+    fireEvent.click(appMode);
+    fireEvent.click(screen.getByText('Learn'));
 
     //It should render the save button
     expect(screen.getByTitle('Save')).toBeInTheDocument();
