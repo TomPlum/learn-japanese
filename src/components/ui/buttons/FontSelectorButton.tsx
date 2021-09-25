@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { faCheck, faFont } from "@fortawesome/free-solid-svg-icons";
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
 import NavigationButton from "../NavigationButton";
-import { useFontDispatch, useFontSelector } from "../../../hooks";
+import { useFontDispatch } from "../../../hooks";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import styles from "../../../styles/sass/components/ui/buttons/FontSelectorButton.module.scss";
 import { setFont } from "../../../slices/FontSlice";
@@ -11,10 +11,18 @@ interface FontSelectorProps {
     className?: string;
 }
 
-interface Font {
+export interface Font {
     displayName: string;
     name: string;
 }
+
+export const fonts: Font[] = [
+    { displayName: "Default", name: "" },
+    { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
+    { displayName: "Gothic", name: "K Gothic" },
+    { displayName: "Mincho", name: "Appli Mincho" }, //アプリ明朝 <- Name in Japanese
+    { displayName: "Test", name: "Test" }
+];
 
 const FontSelectorButton = (props: FontSelectorProps) => {
 
@@ -26,14 +34,6 @@ const FontSelectorButton = (props: FontSelectorProps) => {
         const font = fonts.find(it => it.displayName === value)?.name!;
         fontDispatcher(setFont(font));
     }
-
-    const fonts: Font[] = [
-        { displayName: "Default", name: "" },
-        { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
-        { displayName: "Gothic", name: "K Gothic" },
-        { displayName: "Mincho", name: "Appli Mincho" }, //アプリ明朝 <- Name in Japanese
-        { displayName: "Test", name: "Test" }
-    ];
 
     return (
         <NavigationButton
