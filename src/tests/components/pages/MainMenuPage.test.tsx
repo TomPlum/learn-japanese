@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import MainMenuPage from "../../../components/pages/MainMenuPage";
 import hiragana from "../../../data/Hiragana";
 import { DayData, KanaData, KanjiData } from "../../../data/DataTypes";
@@ -7,6 +7,7 @@ import { KanaColumn } from "../../../domain/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
 import { joyo, kyoiku } from "../../../data/Kanji";
 import { days } from "../../../data/Calendar";
+import renderReduxConsumer from "../../renderReduxConsumer";
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
 const scrollIntoView = jest.fn();
@@ -76,7 +77,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-   const component = render(<MainMenuPage
+   const component = renderReduxConsumer(<MainMenuPage
        history={{
           length: 50,
           location: { pathname: "/menu/play", search: "", hash: "", state: undefined },

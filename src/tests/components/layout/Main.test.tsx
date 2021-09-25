@@ -1,15 +1,16 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import Main from "../../../components/layout/Main";
 import { Environment } from "../../../utility/Environment";
 import { createHashHistory } from "history";
 import { HashRouter } from "react-router-dom";
+import renderReduxConsumer from "../../renderReduxConsumer";
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
 const scrollIntoView = jest.fn();
 window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
 
 const setup = () => {
-    render(
+    renderReduxConsumer(
         <HashRouter>
             <Main/>
         </HashRouter>
