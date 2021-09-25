@@ -1,1 +1,52 @@
 @import "src/styles/sass/components/cards";
+@import "src/styles/sass/mixins";
+
+.unlock {
+  color: $dark-3;
+  transition: all ease-in-out 0.2s;
+}
+
+.unlock {
+  color: $dark-1;
+  cursor: pointer;
+}
+
+.unlocked, .locked {
+  transition: all ease-in-out 0.3s;
+}
+
+.locked {
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+  filter: blur(4px);
+  background: inherit;
+  pointer-events: none;
+  @include noSelect;
+}
+
+.row:first-child {
+  margin-top: 20px;
+}
+
+.row {
+  margin-bottom: 15px;
+}
+
+.button {
+  width: 100px;
+  float: right;
+}
+
+.info {
+  margin-left: 3px;
+  transition: all ease-in-out 0.2s;
+}
+
+.info:hover {
+  color: $dark-2;
+  cursor: pointer;
+}

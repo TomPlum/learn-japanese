@@ -49,8 +49,8 @@ const About = (props: AboutProps) => {
                         size="sm"
                         title="Save"
                         icon={faCheckCircle}
-                        className={[styles.save, styles.icon].join(" ")}
                         onClick={onFinishEditing}
+                        className={[styles.save, styles.icon].join(" ")}
                     /> : saving ?
                         <FontAwesomeIcon
                             size="sm"

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { OverlayChildren } from "react-bootstrap/Overlay";
 import styles from "../../../styles/sass/components/ui/fields/GameInputField.module.scss";
+import InfoButton from "../buttons/InfoButton";
 
 export interface GameInputFieldProps {
     disabled?: boolean;
@@ -21,9 +22,7 @@ class GameInputField extends Component<GameInputFieldProps> {
 
         return (
             <div className={styles.wrapper}>
-                <OverlayTrigger trigger={["hover", "click"]} overlay={helpPopover} placement="top">
-                    <FontAwesomeIcon icon={faInfoCircle} className={styles.icon} data-testid="game-input-help"/>
-                </OverlayTrigger>
+                <InfoButton popover={helpPopover} className={styles.icon} data-testid="game-input-help" />
 
                 <Form.Control
                     autoFocus

@@ -1,13 +1,17 @@
 @import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
 
 .card {
   font-family: "Ciutadella Rounded Medium", sans-serif;
   border-radius: 20px;
   height: 380px;
   width: 380px;
+  border-width: 3px;
+  margin-bottom: 23px !important;
 }
 
 .heading {
+  @include noSelect;
   font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
 }
 
