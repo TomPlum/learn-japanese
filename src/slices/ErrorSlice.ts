@@ -28,7 +28,7 @@ export const errorSlice = createSlice({
         addError: (state, action: PayloadAction<{ title: string, body?: string }>) => {
             state.errors[v4().valueOf()] = {
                 ...action.payload,
-                time: new Date().valueOf(),
+                time: Date.now(),
                 type: NotificationType.ERROR,
                 precedence: 99
             };

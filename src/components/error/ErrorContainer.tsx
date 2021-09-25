@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row, Toast } from "react-bootstrap";
+import { Container, Row, Toast } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationCircle, faRedoAlt, faTools, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { addControllerMessage, addError, clearErrors, NotificationType, removeError } from "../../slices/ErrorSlice";
+import { faExclamationCircle, faTools, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { addControllerMessage, clearErrors, NotificationType, removeError } from "../../slices/ErrorSlice";
 import { useErrorDispatch, useErrorSelector } from "../../hooks";
 import styles from "../../styles/sass/components/error/ErrorContainer.module.scss"
 import dayjs from "dayjs";
@@ -16,9 +16,11 @@ const ErrorContainer = () => {
     const [hasControllerMessage, setHasControllerMessage] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
             setTrigger(!trigger);
         }, 60 * 1000);
+
+        return () => clearTimeout(timeout);
     }, [trigger]);
 
     useEffect(() => {

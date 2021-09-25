@@ -52,10 +52,10 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!src/index.tsx",
-      "!src/components/error/**",
       "!src/data/**",
       "!src/types/game/mode/**",
-      "!src/types/learn/mode/**"
+      "!src/types/learn/mode/**",
+      "!src/tests"
     ]
   },
   "browserslist": {
