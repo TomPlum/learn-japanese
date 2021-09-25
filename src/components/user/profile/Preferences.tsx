@@ -64,13 +64,14 @@ const Preferences = () => {
                         className={[styles.spinner, styles.icon].join(" ")}
                     /> : undefined}
                 </h2>
-                <Row>
+
+                <Row className={styles.row}>
                     <Col xs={6}>
                         <p className={styles.label}>Default font</p>
                     </Col>
                     <Col xs={6}>
                         <Dropdown className={styles.dropdown} onSelect={onSelectDefaultFont}>
-                            <Dropdown.Toggle variant="light">{font}</Dropdown.Toggle>
+                            <Dropdown.Toggle variant="light" data-testid="font">{font}</Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {fonts.map((font: Font) => {
                                     return <Dropdown.Item key={font.displayName}>{font.displayName}</Dropdown.Item>
@@ -80,13 +81,13 @@ const Preferences = () => {
                     </Col>
                 </Row>
 
-                <Row>
+                <Row className={styles.row}>
                     <Col xs={6}>
                         <p className={styles.label}>Theme</p>
                     </Col>
                     <Col xs={6}>
                         <Dropdown className={styles.dropdown} onSelect={onSelectTheme}>
-                            <Dropdown.Toggle variant="light">{theme}</Dropdown.Toggle>
+                            <Dropdown.Toggle variant="light" data-testid="theme">{theme}</Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {Object.values(Theme).map((theme: string) => {
                                     return <Dropdown.Item key={theme}>{theme}</Dropdown.Item>
@@ -96,7 +97,7 @@ const Preferences = () => {
                     </Col>
                 </Row>
 
-                <Row>
+                <Row className={styles.row}>
                     <Col xs={6}>
                         <p className={styles.label}>Language</p>
                     </Col>
@@ -112,7 +113,7 @@ const Preferences = () => {
                     </Col>
                 </Row>
 
-                <Row>
+                <Row className={styles.row}>
                     <Col xs={6}>
                         <p className={styles.label}>Highscores</p>
                     </Col>

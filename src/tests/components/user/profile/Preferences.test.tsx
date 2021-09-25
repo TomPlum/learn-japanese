@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import Preferences from "../../../../components/user/profile/Preferences";
 import renderReduxConsumer from "../../../renderReduxConsumer";
 
@@ -12,15 +12,6 @@ const setup = () => {
         ...component
     }
 }
-
-test('Changing the default font should update the selected value on the toggle', async () => {
-    const { font } = setup();
-
-    fireEvent.click(font);
-    fireEvent.click(screen.getByText('Handwriting'));
-
-    expect(await screen.findByText('Handwriting')).toBeInTheDocument();
-});
 
 test('Should render the save button if the default font preference changes', () => {
     //Should not render the button on mount
