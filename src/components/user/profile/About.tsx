@@ -15,7 +15,7 @@ const About = (props: AboutProps) => {
 
     const [editing, setEditing] = useState(false);
     const [saving, setSaving] = useState(false);
-    const [nickname, setNickname] = useState(props.user?.nickname);
+    const [nickname, setNickname] = useState(props.user?.nickname ?? "N/A");
 
     const onClickEdit = () => {
         setEditing(true);
@@ -78,11 +78,19 @@ const About = (props: AboutProps) => {
 
                 <p className={styles.label}>Nickname</p>
                 {editing ?
-                    <FormControl value={nickname} onChange={onNicknameChange} placeholder="Nickname"/> :
-                    <p className={styles.value}>{nickname}</p>
+                    <FormControl value={nickname} onChange={onNicknameChange} placeholder="Nickname"/>
+                    : <p className={styles.value}>{nickname}</p>
                 }
 
-                <p className={styles.label}>Email</p>
+                <p className={styles.label}>Email
+                    <FontAwesomeIcon
+                        size="sm"
+                        fixedWidth
+                        title="Verified"
+                        icon={faCheckCircle}
+                        className={styles.save}
+                    />
+                </p>
                 <p className={styles.value}>{props.user.email}</p>
             </Card.Body>
         </Card>

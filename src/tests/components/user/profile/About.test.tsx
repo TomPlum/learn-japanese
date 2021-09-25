@@ -2,19 +2,19 @@ import { User } from "../../../../slices/UserSlice";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import About from "../../../../components/user/profile/About";
 
-const setup = () => {
-    const user: User = {
-        username: "TomPlum42",
-        nickname: "Tom",
-        email: "tom@hotmail.com",
-        creationDate: "2021-08-09T00:00",
-        enabled: true,
-        credentialsExpired: false,
-        locked: false,
-        expired: false,
-        roles: ["user"]
-    }
+const user: User = {
+    username: "TomPlum42",
+    nickname: "Tom",
+    email: "tom@hotmail.com",
+    creationDate: "2021-08-09T00:00",
+    enabled: true,
+    credentialsExpired: false,
+    locked: false,
+    expired: false,
+    roles: ["user"]
+}
 
+const setup = () => {
     const component = render(<About user={user} />);
 
     return {
@@ -40,6 +40,12 @@ test('It should render the user account username', () => {
 test('It should render the user account nickname', () => {
     const component = setup();
     expect(component.getByText('Tom')).toBeInTheDocument();
+});
+
+test('It should render the user account nickname as N/A if the user does not have one set', () => {
+    user.nickname = undefined;
+    const component = setup();
+    expect(component.getByText('N/A')).toBeInTheDocument();
 });
 
 test('It should render the user account email', () => {
