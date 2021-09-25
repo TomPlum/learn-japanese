@@ -37,6 +37,7 @@ export const userSlice = createSlice({
         },
         clearUser: (state) => {
             state.user = undefined;
+            state.token = undefined;
             localStorage.removeItem("user");
         }
     }
