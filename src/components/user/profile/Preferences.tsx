@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
 import { AppMode } from "../../../domain/AppMode";
 import { User } from "../../../slices/UserSlice";
+import { CardsPerDay } from "../../../domain/learn/spacedrepetition/CardsPerDay";
 
 export interface PreferencesProps {
     user?: User;
@@ -25,6 +26,8 @@ const Preferences = (props: PreferencesProps) => {
     const [language, setLanguage] = useState(Language.ENGLISH.toString());
     const [highScorePreference, setHighScorePreference] = useState(HighScorePreference.ASK_EACH_TIME.toString());
     const [appMode, setAppMode] = useState(AppMode.PLAY.toString());
+    const [cardsPerDay, setCardsPerDay] = useState(CardsPerDay.TEN.valueOf());
+
     const [changes, setChanges] = useState(false);
     const [saving, setSaving] = useState(false);
 
@@ -53,6 +56,12 @@ const Preferences = (props: PreferencesProps) => {
         setAppMode((event.target as HTMLSelectElement).textContent!);
         setChanges(true);
     }
+
+    const onSetCardsPerDay = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
+        setCardsPerDay(Number((event.target as HTMLSelectElement).textContent!));
+        setChanges(true);
+    }
+
 
     const onSaveChanges = () => {
         setChanges(false);
@@ -151,6 +160,22 @@ const Preferences = (props: PreferencesProps) => {
                             <Dropdown.Menu>
                                 {Object.values(AppMode).map((mode: string) => {
                                     return <Dropdown.Item key={mode}>{mode}</Dropdown.Item>
+                                })}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
+                </Row>
+
+                <Row className={styles.row}>
+                    <Col xs={6} className={styles.col}>
+                        <p className={styles.label}>Cards Per Day</p>
+                    </Col>
+                    <Col xs={6}>
+                        <Dropdown className={styles.dropdown} onSelect={onSetCardsPerDay}>
+                            <Dropdown.Toggle variant="light">{cardsPerDay}</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {Object.values(CardsPerDay).filter(it => typeof it === "number").map(cards => {
+                                    return <Dropdown.Item key={cards}>{cards}</Dropdown.Item>
                                 })}
                             </Dropdown.Menu>
                         </Dropdown>

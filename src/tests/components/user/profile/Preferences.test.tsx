@@ -10,6 +10,7 @@ const setup = () => {
         language: component.getByText('English'),
         highScores: component.getByText('Ask Each Time'),
         appMode: component.getByText('Play'),
+        cardsPerDay: component.getByText('10'),
         ...component
     }
 }
@@ -74,6 +75,19 @@ test('Should render the save button if the default high-scores changes', () => {
     //Change the default high-scores preference
     fireEvent.click(highScores);
     fireEvent.click(screen.getByText('Never Submit'));
+
+    //It should render the save button
+    expect(screen.getByTitle('Save')).toBeInTheDocument();
+});
+
+test('Should render the save button if the default cards per-day changes', () => {
+    //Should not render the button on mount
+    const { cardsPerDay } = setup();
+    expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
+
+    //Change the default cards per day preference
+    fireEvent.click(cardsPerDay);
+    fireEvent.click(screen.getByText('5'));
 
     //It should render the save button
     expect(screen.getByTitle('Save')).toBeInTheDocument();

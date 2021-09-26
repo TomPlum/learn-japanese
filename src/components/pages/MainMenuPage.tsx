@@ -22,8 +22,6 @@ import GameSettings from "../../domain/session/settings/game/GameSettings";
 import DataSettings from "../../domain/session/settings/data/DataSettings";
 import LearnSettings from "../../domain/session/settings/LearnSettings";
 import UserForm from "../user/UserForm";
-import { store } from "../../store";
-import { Provider } from "react-redux";
 import ErrorContainer from "../error/ErrorContainer";
 
 interface MainMenuPageState {

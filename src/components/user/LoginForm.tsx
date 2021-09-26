@@ -64,7 +64,7 @@ const LoginForm = (props: LoginFormProps) => {
             dispatchUser(setJWT(res.token));
             props.onSuccess();
         }).catch(e => {
-            if (e == "AUTHENTICATION_ERROR") {
+            if (e === "AUTHENTICATION_ERROR") {
                 setBadCredentials(true);
                 setPassword("")
                 setPasswordValid(false)
