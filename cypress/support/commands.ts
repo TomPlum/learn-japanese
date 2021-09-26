@@ -8,10 +8,15 @@ Cypress.Commands.add('getByTitle', (titleName) => {
     return cy.get('[title="' + titleName + '"]')
 })
 
-Cypress.Commands.add('startGame', (presetName: string, topicName?: Topic) => {
+Cypress.Commands.add('selectTopic', (presetName: string, topicName?: Topic) => {
     cy.navigateToMenu()
     if(topicName) cy.class('topicSelectionMenuWrapper').contains(topicName).click();
     cy.class('ModeSelectionMenu_wrapper').contains(presetName).click();
+})
+
+Cypress.Commands.add('startGame', () => {
+    cy.selectTopic();
+    cy.contains('Start').click();
 })
 
 Cypress.Commands.add('navigateToMenu', () => {
@@ -22,7 +27,6 @@ Cypress.Commands.add('navigateToMenu', () => {
 
 Cypress.Commands.add('startAndQuit', (presetName: string, topicName?: Topic) => {
     cy.startGame(presetName, topicName)
-    cy.contains('Start').click();
     cy.class('QuitButton_icon').click();
     cy.class('ConfirmModal_yes').click();
     cy.contains('Finish').click();
