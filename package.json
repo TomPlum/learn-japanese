@@ -95,6 +95,7 @@
     "react-select-event": "^5.3.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-mock-store": "^1.5.4",
-    "ts-jest": "^27.0.4"
+    "ts-jest": "^27.0.4",
+    "ts-mockito": "^2.6.1"
   }
 }

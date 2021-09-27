@@ -1,8 +1,12 @@
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 
 const setup = () => {
-    const kana = new KanaRepository().read(new KanaSettingsBuilder().withHiragana().withKatakana().build());
-    const component = render(<ParallaxBackground kana={kana} />);
+    const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+    const allKana = [];
+    for (let i = 0; i < 214; i++) {
+        allKana.push(kana);
+    }
+    const component = render(<ParallaxBackground kana={allKana} />);
     return {
         ...component
     }
@@ -12,6 +16,9 @@ const setup = () => {
 import { render, screen } from "@testing-library/react";
 import ParallaxBackground from "../../../components/layout/ParallaxBackground";
 import { KanaRepository } from "../../../repository/KanaRepository";
+import { Kana } from "../../../domain/kana/Kana";
+import KanaType from "../../../domain/kana/KanaType";
+import { KanaColumn } from "../../../domain/kana/KanaColumn";
 
 test.skip('Viewing in a small viewport should render less than 214 background kana', () => {
     window.resizeTo(375, 812); //iPhone X

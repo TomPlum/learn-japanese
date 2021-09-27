@@ -1,73 +1,50 @@
 import { fireEvent, screen } from "@testing-library/react";
 import MainMenuPage from "../../../components/pages/MainMenuPage";
-import hiragana from "../../../data/Hiragana";
-import { DayData, KanaData, KanjiData } from "../../../data/DataTypes";
-import katakana from "../../../data/Katakana";
 import { KanaColumn } from "../../../domain/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
-import { joyo, kyoiku } from "../../../data/Kanji";
-import { days } from "../../../data/Calendar";
 import renderReduxConsumer from "../../renderReduxConsumer";
+import { Kanji } from "../../../domain/kanji/Kanji";
+import { Example } from "../../../domain/kanji/Example";
+import { KanjiReading } from "../../../domain/kanji/KanjiReading";
+import { ReadingType } from "../../../domain/kanji/ReadingType";
+import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
+import { Kana } from "../../../domain/kana/Kana";
+import KanaType from "../../../domain/kana/KanaType";
+import Definition from "../../../domain/sentence/Definition";
+
+const mockLearningDataRepository = jest.fn();
+jest.mock("../../../repository/LearningDataRepository", () => {
+   return function () {
+      return {
+         read: mockLearningDataRepository
+      };
+   }
+});
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
 const scrollIntoView = jest.fn();
 window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
 
-//Database File Mocks
-jest.mock("../../../data/Hiragana");
-jest.mock("../../../data/Katakana");
-jest.mock("../../../data/Kanji");
-jest.mock("../../../data/Calendar");
+const kanjiGradeOne = new Kanji(
+    "人",
+    [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)],
+    ["person"],
+    KyoikuGrade.ONE,
+    "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
+    [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+    []
+);
 
-//Database Function Mocks
-const mockHiragana = hiragana as jest.MockedFunction<() => KanaData[]>;
-const mockKatakana = katakana as jest.MockedFunction<() => KanaData[]>;
-const mockKyoiku = kyoiku as jest.MockedFunction<() => Promise<KanjiData[]>>;
-const mockJoyo = joyo as jest.MockedFunction<() => Promise<KanjiData[]>>;
-const mockDays = days as jest.MockedFunction<() => DayData[]>;
+const hiragana = [
+   new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
+   new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
+];
+
+const katakana = [new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false)];
+
+const day = new Definition(["Monday"], "月曜日", "げつようび", "Day of the Week");
 
 beforeEach(() => {
-   mockHiragana.mockReturnValue([
-      { name: "あ", code: "\u3042", romaji: ["a"], column: KanaColumn.VOWEL, diacritical: false },
-      { name: "い", code: "\u3044", romaji: ["i"], column: KanaColumn.VOWEL, diacritical: false },
-   ]);
-
-   mockKatakana.mockReturnValue([
-      { name: "ア", code: "\u30A2", romaji: ["a"], column: KanaColumn.VOWEL, diacritical: false },
-   ]);
-
-   mockKyoiku.mockResolvedValue([
-      {
-         name: "人",
-         on: ["じん", "にん"],
-         kun: ["ひと"],
-         source: "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
-         meanings: ["person"],
-         grade: 1,
-         examples: [
-            { value: "外国人", kana: ["がいこくじん"], english: ["foreigner"] },
-            { value: "個人", kana: ["こじん"], english: ["individual", "private person", "personal", "private"] },
-            { value: "三人", kana: ["さんにん", "みたり"], english: ["three people"] },
-            { value: "人間", kana: ["にんげん"], english: ["human being", "man", "person"] },
-            { value: "人気", kana: ["にんき"], english: ["popular", "popular feeling", "business conditions"] },
-
-         ],
-         tags: ["family"]
-      }
-   ]);
-
-   mockDays.mockReturnValue([
-      {
-         name: "Monday",
-         kanji: "月曜日",
-         romaji: "getsuyōbi",
-         kana: "げつようび",
-         meaning: "Moon day"
-      }
-   ]);
-
-   mockJoyo.mockResolvedValue([]);
-
    Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
       const objects = [...array];
       const first = objects[0];
@@ -102,6 +79,7 @@ const setup = () => {
 }
 
 test('Selecting a game mode should hide the menu and render the game', async () => {
+   mockLearningDataRepository.mockResolvedValueOnce(hiragana);
    setup();
    fireEvent.click(screen.getByText('Start'));
    expect(await screen.findByTestId('memory-game')).toBeInTheDocument();
@@ -135,7 +113,9 @@ test('Clicking "x" close button in the user modal should close it', () => {
 
 describe('Play', () => {
    test('Quitting the game should close the game window and re-render the results screen', async () => {
+      mockLearningDataRepository.mockResolvedValueOnce(hiragana);
       setup();
+
       fireEvent.click(screen.getByText('Start'));
       expect(await screen.findByTestId('memory-game')).toBeInTheDocument(); //Should render the memory game
 
@@ -171,6 +151,8 @@ describe('Play', () => {
 
 describe('Learn', () => {
    test('Quitting a learning session without having flipped a card should re-render the menu', async () => {
+      mockLearningDataRepository.mockResolvedValueOnce(hiragana);
+
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
@@ -184,6 +166,8 @@ describe('Learn', () => {
    });
 
    test('Quitting a learning session mid-session (having flipped one or more cards) should show the result screen', async () => {
+      mockLearningDataRepository.mockResolvedValueOnce(hiragana);
+
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
@@ -199,6 +183,8 @@ describe('Learn', () => {
    });
 
    test('Clicking \'Practice Mistakes\' on the learning results screen should start a new session with the mistakes', async () => {
+      mockLearningDataRepository.mockResolvedValueOnce(hiragana);
+
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
@@ -222,6 +208,8 @@ describe('Learn', () => {
    });
 
    test('Dismissing the learning results screen should close it and re-render the main menu', async () => {
+      mockLearningDataRepository.mockResolvedValueOnce(hiragana);
+
       const { mode } = setup();
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
@@ -240,18 +228,24 @@ describe('Learn', () => {
    });
 
    test('Starting a Calendar learning session should render the correct flash card types', async () => {
+      mockLearningDataRepository.mockResolvedValueOnce([day]);
       const { mode, calendar } = setup();
+
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(calendar); //Select calendar topic
       fireEvent.click(screen.getByText('Start'));
+
       expect(await screen.findByText('Monday')).toBeInTheDocument();
    });
 
    test('Starting a Kanji learning session should render the correct flash card types', async  () => {
+      mockLearningDataRepository.mockResolvedValueOnce([kanjiGradeOne]);
       const { mode, kanji } = setup();
+
       fireEvent.click(mode); //Switch to Learn
       fireEvent.click(kanji); //Select Kanji topic
       fireEvent.click(screen.getByText('Start'));
+
       expect(await screen.findByText('person')).toBeInTheDocument();
       expect(screen.getAllByText('人')).toBeDefined();
    });

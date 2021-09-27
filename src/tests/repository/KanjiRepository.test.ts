@@ -1,147 +1,140 @@
-import { KanjiRepository } from "../../repository/KanjiRepository";
+import { KanjiRepository, KanjiResponseModel } from "../../repository/KanjiRepository";
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
 import { KanjiSettingsBuilder } from "../../domain/session/settings/data/KanjiSettings";
-import Arrays from "../../utility/Arrays";
-import axios from "axios";
+import * as originalRestClient from "../../rest/RestClient";
+import { Kanji } from "../../domain/kanji/Kanji";
+import { KanjiReading } from "../../domain/kanji/KanjiReading";
+import KanjiConverter from "../../converter/KanjiConverter";
+import { anything, instance, mock, when } from "ts-mockito";
+import { ReadingType } from "../../domain/kanji/ReadingType";
+import { Example } from "../../domain/kanji/Example";
 
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+jest.mock("../../rest/RestClient");
+
+const mockRestClient = (originalRestClient as jest.Mocked<typeof originalRestClient>).default;
+const mockKanjiConverter = mock(KanjiConverter);
+
+const mockPost = jest.fn();
+const mockGet = jest.fn();
+
+const exampleKanji = new Kanji("小",
+    [new KanjiReading("shō", "しょう", ReadingType.ON), new KanjiReading("chīsai", "ちいさい", ReadingType.KUN)],
+    ["small", "little"],
+    KyoikuGrade.ONE,
+    "https://en.wiktionary.org/wiki/%E5%B0%8F#Kanji",
+    [new Example("小説", ["しょうせつ"], ["novel", "short story"])],
+    ["size"]
+);
+
+const exampleKanjiResponseData: KanjiResponseModel = {
+    character: "小",
+    grade: 1,
+    strokes: 3,
+    jlpt: 4,
+    source: "https://en.wiktionary.org/wiki/%E5%B0%8F#Kanji",
+    meanings: ["small", "little"],
+    readings: [{ value: "ちいさい", type: "kun" }, { value: "しょう", type: "on" }],
+    examples: [{ value: "小説", kana: ["しょうせつ"], english: ["novel", "short story"] }],
+    tags: ["size"]
+};
 
 beforeEach(() => {
-    const exampleKyoikuKanji6 = {
-        name: "机",
-        on: ["き"],
-        kun: ["つくえ"],
-        source: "https://en.wiktionary.org/wiki/%E6%9C%BA#Kanji",
-        meanings: ["desk", "table"],
-        grade: 6,
-        examples: [
-            { value: "机", kana: ["つくえ, つき"], english: ["desk"] },
-            { value: "机上", kana: ["きじょう"], english: ["on the desk", "theoretical", "academic"] },
-            { value: "机上の空論", kana: ["きじょうのくうろん"], english: ["academic gossip", "empty theory"] },
-            { value: "事務机", kana: ["じむづくえ"], english: ["cleric desk"] },
-            { value: "書き物机", kana: ["かきものづくえ"], english: ["writing desk",] },
-        ],
-        tags: ["furniture"]
-    };
-
-    let exampleKyoikuKanji1 =  { ...exampleKyoikuKanji6 };
-    exampleKyoikuKanji1.grade = 1;
-
-    let exampleKyoikuKanji2 = { ...exampleKyoikuKanji6 };
-    exampleKyoikuKanji2.grade = 2;
-
-    let exampleKyoikuKanji3 = { ...exampleKyoikuKanji6 };
-    exampleKyoikuKanji3.grade = 3;
-
-    const exampleJoyoKanji = {
-        name: "猫",
-        code: "\u732B",
-        on: ["みょう"],
-        kun: ["ねこ"],
-        source: "https://en.wiktionary.org/wiki/%E7%8C%AB#Kanji",
-        meanings: ["cat"],
-        grade: 8,
-        examples: [
-            { value: "猫", kana: ["ねこ"], english: ["cat"] },
-            { value: "子猫", kana: ["こねこ"], english: ["kitten"] },
-            { value: "野良猫", kana: ["のらねこ"], english: ["stray cat"] },
-            { value: "黒猫", kana: ["くろねこ"], english: ["black cat"] },
-            { value: "飼い猫", kana: ["かいねこ"], english: ["pet cat"] },
-        ],
-    };
-
-    mockedAxios.get.mockResolvedValueOnce({
-        data: {
-            data: [exampleKyoikuKanji1, exampleKyoikuKanji2, exampleKyoikuKanji3, exampleKyoikuKanji6,
-                exampleJoyoKanji, exampleJoyoKanji, exampleJoyoKanji]
-        }
-    });
-
-    Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
-        const objects = [...array];
-        const firstKana = objects[0];
-        objects.splice(0, 1);
-        return [firstKana, objects];
-    });
+    mockRestClient.post = mockPost;
+    mockRestClient.get = mockGet;
+    when(mockKanjiConverter.convert(anything())).thenReturn([exampleKanji]);
 });
 
 describe("Kanji Repository", () => {
-    const repository = new KanjiRepository();
+    const repository = new KanjiRepository(instance(mockKanjiConverter));
 
     describe("Read", () => {
-        it.skip("Should return an empty array if the settings are empty", () => {
+        it("Should call the /kanji/by-grade endpoint with empty grades and no quantity when settings are empty", () => {
+            mockPost.mockResolvedValueOnce({ data: [] });
             const settings = new KanjiSettingsBuilder().build();
-            return repository.read(settings).then(response => {
-                expect(response).toHaveLength(0);
+            return repository.read(settings).then(() => {
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [], quantity: undefined });
             });
         });
 
-        it("Should return all Joyo Kanji if they are requested with no quantity", () => {
-            const settings = new KanjiSettingsBuilder().withJoyoKanji().build();
-            return repository.read(settings).then(response => {
-                expect(response).toHaveLength(7);
+        it("Should call the /kanji/by-grade endpoint with the quantity if specified", () => {
+            mockPost.mockResolvedValueOnce({ data: [] });
+            const settings = new KanjiSettingsBuilder().withJoyoKanji().withQuantity(50).build();
+            return repository.read(settings).then(() => {
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [], quantity: 50 });
             });
         });
 
-        it("Should return the specified quantity of Joyo Kanji when requested", () => {
-            const settings = new KanjiSettingsBuilder().withJoyoKanji().withQuantity(1).build();
-            return repository.read(settings).then(response => {
-                expect(response).toHaveLength(1);
-            });
-        });
-
-        it("Should return the specified quantity of Kyoiku Kanji when requested with no Joyo", () => {
-            const settings = new KanjiSettingsBuilder().withQuantity(1).build();
-            return repository.read(settings).then(response => {
-                expect(response).toHaveLength(1);
-            });
-        });
-
-        it("Should return all Kyoiku Kanji when only grades are specific in the request", () => {
+        it("Should call the /kanji/by-grade endpoint with the specified grades", () => {
+            mockPost.mockResolvedValueOnce({ data: [] });
             const settings = new KanjiSettingsBuilder().withGrades([KyoikuGrade.TWO, KyoikuGrade.SIX]).build();
-            return repository.read(settings).then(response => {
-                expect(response).toHaveLength(2);
+            return repository.read(settings).then(() => {
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [2, 6], quantity: undefined });
             });
         });
 
-        it("Should return N random Kyoiku kanji when both grades and quantity are specified", () => {
-            const settings = new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE, KyoikuGrade.SIX]).withQuantity(2).build();
-            return repository.read(settings).then(response => {
-                expect(response.map(it => it.grade)).toStrictEqual([KyoikuGrade.ONE, KyoikuGrade.SIX]);
+        it("Should call the /kanji/by-grade endpoint with the specified grades and quantity", () => {
+            mockPost.mockResolvedValueOnce({ data: [] });
+            const settings = new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withQuantity(120).build();
+            return repository.read(settings).then(() => {
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [1], quantity: 120 });
             });
         });
 
-        it("Should return all Joyo Kanji if they are not specified, but also no Kyoiku grades are specified", () => {
+        it("Should return an empty array if there is no data in the API response", () => {
+            mockPost.mockResolvedValueOnce({ data: undefined });
             const settings = new KanjiSettingsBuilder().build();
             return repository.read(settings).then(response => {
-                expect(response).toHaveLength(7)
+                expect(response).toStrictEqual([]);
+            });
+        });
+
+        it("Should return the converted kanji objects when there is valid data in the API response", () => {
+            mockPost.mockResolvedValueOnce({ data: [exampleKanjiResponseData] });
+            const settings = new KanjiSettingsBuilder().build();
+            return repository.read(settings).then(response => {
+                expect(response).toStrictEqual([exampleKanji]);
+            });
+        });
+
+        it("Should reject the promise if the API call returns an error", () => {
+            mockPost.mockRejectedValueOnce("Internal Server Error");
+            const settings = new KanjiSettingsBuilder().build();
+            return repository.read(settings).catch(response => {
+                expect(response).toBe("Internal Server Error");
             });
         });
     });
 
     describe("Get By Value", () => {
-        it("Should return the kanji if a code matches the request", () => {
-            return repository.getByValue("猫").then(kanji => {
-                expect(kanji?.getMeanings()).toStrictEqual(['cat']);
+        it("Should call the /kanji/by-character endpoint with the given kanji character", () => {
+            mockGet.mockResolvedValueOnce({ data: exampleKanjiResponseData });
+            const kanjiCharacter = "小";
+            return repository.getByValue(kanjiCharacter).then(() => {
+                expect(mockGet).toHaveBeenLastCalledWith("/kanji/by-character/小");
             });
         });
 
-        it("Should return undefined if the request does not match any kanji", () => {
-           return repository.getByValue("a").then(kanji => {
-               expect(kanji).toBeUndefined();
-           });
-        });
-
-        it("Should return the tags if the kanji has any", () => {
-            return repository.getByValue("机").then(kanji => {
-                expect(kanji?.getTags()).toStrictEqual(["furniture"]);
+        it("Should return the kanji if it is preset in the API response", () => {
+            mockGet.mockResolvedValueOnce({ data: exampleKanjiResponseData });
+            const kanjiCharacter = "小";
+            return repository.getByValue(kanjiCharacter).then(response => {
+                expect(response).toStrictEqual(exampleKanji)
             });
         });
 
-        it("Should return any empty array if the kanji has no tags", () => {
-            return repository.getByValue("猫").then(kanji => {
-                expect(kanji?.getTags()).toStrictEqual([]);
+        it("Should return undefined if the kanji is no found", () => {
+            mockGet.mockResolvedValueOnce({ data: undefined });
+            const kanjiCharacter = "小";
+            return repository.getByValue(kanjiCharacter).then(response => {
+                expect(response).toBeUndefined();
+            });
+        });
+
+        it("Should reject the promise if the API call returns an error", () => {
+            mockGet.mockRejectedValueOnce("Internal Server Error");
+            const kanjiCharacter = "小";
+            return repository.getByValue(kanjiCharacter).catch(response => {
+                expect(response).toBe("Internal Server Error");
             });
         });
     });
