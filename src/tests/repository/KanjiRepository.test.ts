@@ -1,19 +1,17 @@
 import { KanjiRepository, KanjiResponseModel } from "../../repository/KanjiRepository";
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
 import { KanjiSettingsBuilder } from "../../domain/session/settings/data/KanjiSettings";
-import * as originalRestClient from "../../rest/RestClient";
+import RestClient from "../../rest/RestClient";
 import { Kanji } from "../../domain/kanji/Kanji";
 import { KanjiReading } from "../../domain/kanji/KanjiReading";
-import KanjiConverter from "../../converter/KanjiConverter";
-import { anything, instance, mock, when } from "ts-mockito";
 import { ReadingType } from "../../domain/kanji/ReadingType";
 import { Example } from "../../domain/kanji/Example";
 
-jest.mock("../../rest/RestClient");
+//Mock Kanji Converter
+const mockConverter = jest.fn();
+jest.mock("../../converter/KanjiConverter", () => function() { return { convert: mockConverter } });
 
-const mockRestClient = (originalRestClient as jest.Mocked<typeof originalRestClient>).default;
-const mockKanjiConverter = mock(KanjiConverter);
-
+//Mock RestClient Methods
 const mockPost = jest.fn();
 const mockGet = jest.fn();
 
@@ -39,13 +37,13 @@ const exampleKanjiResponseData: KanjiResponseModel = {
 };
 
 beforeEach(() => {
-    mockRestClient.post = mockPost;
-    mockRestClient.get = mockGet;
-    when(mockKanjiConverter.convert(anything())).thenReturn([exampleKanji]);
+    RestClient.post = mockPost;
+    RestClient.get = mockGet;
+    mockConverter.mockImplementation(() => [exampleKanji]);
 });
 
 describe("Kanji Repository", () => {
-    const repository = new KanjiRepository(instance(mockKanjiConverter));
+    const repository = new KanjiRepository();
 
     describe("Read", () => {
         it("Should call the /kanji/by-grade endpoint with empty grades and no quantity when settings are empty", () => {

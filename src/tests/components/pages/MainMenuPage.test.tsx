@@ -12,19 +12,17 @@ import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
 import Definition from "../../../domain/sentence/Definition";
 
+//Mock Learning Data Repository
 const mockLearningDataRepository = jest.fn();
 jest.mock("../../../repository/LearningDataRepository", () => {
-   return function () {
-      return {
-         read: mockLearningDataRepository
-      };
-   }
+   return function () { return { read: mockLearningDataRepository } }
 });
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
 const scrollIntoView = jest.fn();
 window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
 
+//Data
 const kanjiGradeOne = new Kanji(
     "人",
     [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)],
@@ -39,8 +37,6 @@ const hiragana = [
    new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
    new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
 ];
-
-const katakana = [new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false)];
 
 const day = new Definition(["Monday"], "月曜日", "げつようび", "Day of the Week");
 

@@ -29,11 +29,7 @@ export interface ExampleResponseModel {
 
 export class KanjiRepository implements Repository<Kanji> {
 
-    private readonly converter;
-
-    constructor(converter: KanjiConverter = new KanjiConverter()) {
-        this.converter = converter;
-    }
+    private readonly converter = new KanjiConverter()
 
     /**
      * Retrieves kanji based on the given settings.
