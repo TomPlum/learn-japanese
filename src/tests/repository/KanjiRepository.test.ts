@@ -58,7 +58,7 @@ describe("Kanji Repository", () => {
             mockPost.mockResolvedValueOnce({ data: [] });
             const settings = new KanjiSettingsBuilder().withJoyoKanji().withQuantity(50).build();
             return repository.read(settings).then(() => {
-                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [], quantity: 50 });
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [1,2,3,4,5,6,8], quantity: 50 });
             });
         });
 

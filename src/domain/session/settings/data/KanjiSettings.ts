@@ -9,22 +9,16 @@ import DataSettings from "./DataSettings";
  */
 export default class KanjiSettings extends DataSettings {
     private readonly _grades: KyoikuGrade[];
-    private readonly _joyo: boolean;
     private readonly _tags: string[]
 
-    constructor(grades: KyoikuGrade[], joyo: boolean, tags: string[], quantity?: number) {
+    constructor(grades: KyoikuGrade[], tags: string[], quantity?: number) {
         super(Topic.KANJI, quantity);
         this._grades = grades;
-        this._joyo = joyo;
         this._tags = tags;
     }
 
     get grades(): KyoikuGrade[] {
         return this._grades;
-    }
-
-    get joyo(): boolean {
-        return this._joyo;
     }
 
     get tags(): string[] {
@@ -34,7 +28,6 @@ export default class KanjiSettings extends DataSettings {
 
 export class KanjiSettingsBuilder {
     private _grades: KyoikuGrade[] = [];
-    private _joyo: boolean = false;
     private _tags: string[] = [];
     private _quantity: number | undefined;
 
@@ -44,7 +37,14 @@ export class KanjiSettingsBuilder {
     }
 
     withJoyoKanji(include: boolean = true): KanjiSettingsBuilder {
-        this._joyo = include;
+        if (include) {
+            this._grades = [
+                KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR,
+                KyoikuGrade.FIVE, KyoikuGrade.SIX, KyoikuGrade.EIGHT
+            ];
+        } else {
+            this._grades = [];
+        }
         return this;
     }
 
@@ -59,6 +59,6 @@ export class KanjiSettingsBuilder {
     }
 
     build(): KanjiSettings {
-        return new KanjiSettings(this._grades, this._joyo, this._tags, this._quantity);
+        return new KanjiSettings(this._grades, this._tags, this._quantity);
     }
 }

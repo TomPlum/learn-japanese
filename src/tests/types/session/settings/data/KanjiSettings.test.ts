@@ -5,7 +5,7 @@ describe("Kanji Settings", () => {
     describe('Builder', function () {
         it("Should default values correctly", () => {
             const settings = new KanjiSettingsBuilder().build();
-            expect(settings).toStrictEqual(new KanjiSettings([], false, [], undefined));
+            expect(settings).toStrictEqual(new KanjiSettings([], [], undefined));
         });
 
         it("Should set grades to the specified", () => {
@@ -13,14 +13,17 @@ describe("Kanji Settings", () => {
             expect(settings.grades).toStrictEqual([KyoikuGrade.TWO, KyoikuGrade.SIX]);
         });
 
-        it("Should set joyo to true when specifying but not passing any arg", () => {
+        it("Should add set grades to 1,2,3,4,5,6,8 to to the list when specifying joyo but not passing any arg", () => {
             const settings = new KanjiSettingsBuilder().withJoyoKanji().build();
-            expect(settings.joyo).toBe(true);
+            expect(settings.grades).toStrictEqual([
+                KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR,
+                KyoikuGrade.FIVE, KyoikuGrade.SIX, KyoikuGrade.EIGHT
+            ]);
         });
 
-        it("Should set joyo to false when specifying", () => {
+        it("Should remove grade 8 from the list when specifying joyo as false", () => {
             const settings = new KanjiSettingsBuilder().withJoyoKanji(false).build();
-            expect(settings.joyo).toBe(false);
+            expect(settings.grades).toStrictEqual([]);
         });
 
         it("Should set tags to the specified", () => {
