@@ -24,7 +24,7 @@ it.skip('Completes a full game of the Rōmaji preset', () => {
 
 });
 
-it('Check that lives are working correctly', () => {
+it.skip('Check that lives are working correctly', () => {
 
     //Navigates to Joyo Kanji topic preset selection screen and starts the Rōmaji game
     cy.navigateToMenu();
@@ -32,11 +32,24 @@ it('Check that lives are working correctly', () => {
     cy.contains('Start').click();
 
     //Gets number of lives, types in an incorrect answer into the answer box and submits the wrong answer
-    let lives = cy.class('LifeDisplay_quantity')
     cy.get('input[placeholder=Rōmaji').type('Tomiscringe')
     cy.class('SubmitButton_button').click()
 
     //Checks that the number of lives has gone from 5 to 4
     cy.class('LifeDisplay_quantity').contains(4)
+});
 
+it('Check that the game ends when you have zero lives', () => {
+
+    //Navigates to Joyo Kanji topic preset selection screen and starts the Rōmaji game
+    cy.navigateToMenu();
+    cy.selectTopic('Rōmaji');
+    cy.contains('Start').click();
+
+    for (let i = 0; i < 5; i++) {
+        //Gets number of lives, types in an incorrect answer into the answer box and submits the wrong answer
+        cy.get('input[placeholder=Rōmaji').type('Tomiscringe')
+        cy.class('SubmitButton_button').click()
+    }
+    cy.contains('Oh no! You ran out of lives!')
 });
