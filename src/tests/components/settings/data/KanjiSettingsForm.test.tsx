@@ -1,9 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiSettingsForm from "../../../../components/settings/data/KanjiSettingsForm";
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
-import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
 import KanjiSettings, { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings";
-import LearnSettings from "../../../../domain/session/settings/LearnSettings";
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu";
 
@@ -89,7 +87,7 @@ test('Clicking start with Kyoiku kanji selected should call the onSelected event
     fireEvent.click(grade1);
     fireEvent.click(confirm);
     expect(onConfirmHandler).toHaveBeenCalledWith(
-        new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withJoyoKanji(false).build()
+        new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).build()
     );
 });
 
@@ -110,7 +108,7 @@ test('Clicking start with a quantity selected should call the onSelected event h
     fireEvent.change(quantity, { target: { value: 10 }});
     fireEvent.click(confirm);
     expect(onConfirmHandler).toHaveBeenCalledWith(
-        new KanjiSettingsBuilder().withJoyoKanji(false).withQuantity(10).build()
+        new KanjiSettingsBuilder().withQuantity(10).build()
     );
 });
 
@@ -120,7 +118,7 @@ test('Clicking start with a quantity and grade selected should call the onSelect
     fireEvent.click(grade1);
     fireEvent.click(confirm);
     expect(onConfirmHandler).toHaveBeenCalledWith(
-        new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withJoyoKanji(false).withQuantity(10).build()
+        new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withQuantity(10).build()
     );
 });
 
@@ -170,7 +168,6 @@ test('Clicking reset should reset the form to its default state', () => {
     //Should be reset to default
     expect(screen.getByText('Choose one or many grades below to begin.'));
 });
-
 
 test('Clicking the back button should call the onQuit event handler', () => {
     const { back } = setup();

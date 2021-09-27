@@ -10,19 +10,17 @@ import DataSettingsMenu, { DataSettingsMenuProps } from "./DataSettingsMenu";
 import QuantityField from "../../ui/fields/QuantityField";
 import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
 
-interface KanjiSettingsMenuState {
+interface KanjiSettingsFormState {
     grades: KyoikuGrade[];
     quantity?: number;
-    joyo: boolean;
 }
 
-class KanjiSettingsForm extends Component<DataSettingsMenuProps<KanjiSettings>, KanjiSettingsMenuState> {
+class KanjiSettingsForm extends Component<DataSettingsMenuProps<KanjiSettings>, KanjiSettingsFormState> {
     constructor(props: DataSettingsMenuProps<KanjiSettings> | Readonly<DataSettingsMenuProps<KanjiSettings>>) {
         super(props);
         this.state = {
             grades: [],
             quantity: undefined,
-            joyo: false
         }
     }
 
@@ -126,8 +124,8 @@ class KanjiSettingsForm extends Component<DataSettingsMenuProps<KanjiSettings>, 
     }
 
     private confirm = () => {
-        const { grades, quantity, joyo } = this.state;
-        const dataSettings = new KanjiSettingsBuilder().withGrades(grades).withJoyoKanji(joyo).withQuantity(quantity).build();
+        const { grades, quantity } = this.state;
+        const dataSettings = new KanjiSettingsBuilder().withGrades(grades).withQuantity(quantity).build();
         this.props.onConfirm(dataSettings);
     }
 
@@ -156,11 +154,7 @@ class KanjiSettingsForm extends Component<DataSettingsMenuProps<KanjiSettings>, 
     }
 
     private onReset = () => {
-        this.setState({
-            grades: [],
-            quantity: undefined,
-            joyo: false
-        });
+        this.setState({ grades: [], quantity: undefined });
         this.props.onReset();
     }
 
