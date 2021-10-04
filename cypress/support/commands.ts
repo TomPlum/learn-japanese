@@ -20,7 +20,7 @@ Cypress.Commands.add('startGame', () => {
 })
 
 Cypress.Commands.add('navigateToMenu', () => {
-    cy.visit('https://tomplum.github.io/learn-japanese/#/');
+    cy.visit('http://localhost:3001/learn-japanese#/');
     cy.class('buttonContainer').contains('Play').click();
     cy.url().should('include', '/menu/play');
 })
