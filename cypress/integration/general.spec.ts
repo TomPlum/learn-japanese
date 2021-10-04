@@ -53,3 +53,17 @@ it('Check that the game ends when you have zero lives', () => {
     }
     cy.contains('Oh no! You ran out of lives!')
 });
+
+it('Check the skip button works correctly', () => {
+    cy.navigateToMenu();
+    cy.selectTopic('Rōmaji');
+    cy.contains('Start').click();
+
+    cy.contains('Skip').click();
+    cy.class('LifeDisplay_quantity').contains(4)
+
+})
+
+it('Check that points work', () => {
+
+})
