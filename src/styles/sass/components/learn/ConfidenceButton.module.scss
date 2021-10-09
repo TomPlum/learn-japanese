@@ -1,0 +1,23 @@
+@import "src/styles/sass/colours";
+
+.button, .button:active {
+  color: $light-1 !important;
+  height: 50px;
+  font-size: 1.3em;
+  border-radius: 8px;
+  border-color: #1d1d1d;
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+  opacity: 0.5;
+  transition: all ease-in-out 0.2s;
+}
+
+.button:hover {
+  opacity: 0.9;
+  border-color: #1d1d1d;
+  color: #000;
+}
+
+.selected {
+  color: $dark-2 !important;
+  opacity: 1.0;
+}

@@ -11,6 +11,7 @@ import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Arrays from "../../utility/Arrays";
 import styles from "../../styles/sass/components/learn/Learn.module.scss";
+import ConfidenceSelector from "./ConfidenceSelector";
 
 export interface LearnProps {
     data: Learnable[];
@@ -134,6 +135,7 @@ class Learn extends Component<LearnProps, LearnState> {
                                 className={styles.forgottenButton}
                             />
                         </Col>
+                        {/*<ConfidenceSelector onSelect={() => {}} />*/}
                         <Col xs={12} className={styles.col}>
                             <Button
                                 className={styles.next}
