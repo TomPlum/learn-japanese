@@ -8,10 +8,11 @@ import { Language } from "../../../domain/Language";
 import { HighScorePreference } from "../../../domain/HighScorePreference";
 import { faCheckCircle, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
 import { AppMode } from "../../../domain/AppMode";
 import { User } from "../../../slices/UserSlice";
 import { CardsPerDay } from "../../../domain/learn/spacedrepetition/CardsPerDay";
+import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
+import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
 
 export interface PreferencesProps {
     user?: User;
@@ -27,6 +28,7 @@ const Preferences = (props: PreferencesProps) => {
     const [highScorePreference, setHighScorePreference] = useState(HighScorePreference.ASK_EACH_TIME.toString());
     const [appMode, setAppMode] = useState(AppMode.PLAY.toString());
     const [cardsPerDay, setCardsPerDay] = useState(CardsPerDay.TEN.valueOf());
+    const [confidenceMenuStyle, setConfidenceMenuStyle] = useState(ConfidenceMenuStyle.NUMBERS.toString());
 
     const [changes, setChanges] = useState(false);
     const [saving, setSaving] = useState(false);
@@ -62,6 +64,10 @@ const Preferences = (props: PreferencesProps) => {
         setChanges(true);
     }
 
+    const onSetConfidenceMenuStyle = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
+        setConfidenceMenuStyle((event.target as HTMLSelectElement).textContent!);
+        setChanges(true);
+    }
 
     const onSaveChanges = () => {
         setChanges(false);
@@ -174,8 +180,24 @@ const Preferences = (props: PreferencesProps) => {
                         <Dropdown className={styles.dropdown} onSelect={onSetCardsPerDay}>
                             <Dropdown.Toggle variant="light">{cardsPerDay}</Dropdown.Toggle>
                             <Dropdown.Menu>
-                                {Object.values(CardsPerDay).filter(it => typeof it === "number").map(cards => {
+                                {Object.values(CardsPerDay).filter(it => !isNaN(+it)).map(cards => {
                                     return <Dropdown.Item key={cards}>{cards}</Dropdown.Item>
+                                })}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
+                </Row>
+
+                <Row className={styles.row}>
+                    <Col xs={6} className={styles.col}>
+                        <p className={styles.label}>Confidence Menu Style</p>
+                    </Col>
+                    <Col xs={6}>
+                        <Dropdown className={styles.dropdown} onSelect={onSetConfidenceMenuStyle}>
+                            <Dropdown.Toggle variant="light">{confidenceMenuStyle}</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {Object.values(ConfidenceMenuStyle).map(style => {
+                                    return <Dropdown.Item key={style}>{style}</Dropdown.Item>
                                 })}
                             </Dropdown.Menu>
                         </Dropdown>

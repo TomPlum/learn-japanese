@@ -22,7 +22,7 @@
   right: 0;
   bottom: 0;
   box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
-  filter: blur(4px);
+  filter: blur(2px);
   background: inherit;
   pointer-events: none;
   @include noSelect;

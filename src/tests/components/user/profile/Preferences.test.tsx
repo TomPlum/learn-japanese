@@ -11,6 +11,7 @@ const setup = () => {
         highScores: component.getByText('Ask Each Time'),
         appMode: component.getByText('Play'),
         cardsPerDay: component.getByText('10'),
+        confidenceMenuStyle: component.getByText('Numbers 1 to 6'),
         ...component
     }
 }
@@ -88,6 +89,19 @@ test('Should render the save button if the default cards per-day changes', () =>
     //Change the default cards per day preference
     fireEvent.click(cardsPerDay);
     fireEvent.click(screen.getByText('5'));
+
+    //It should render the save button
+    expect(screen.getByTitle('Save')).toBeInTheDocument();
+});
+
+test('Should render the save button if the default confidence menu style changes', () => {
+    //Should not render the button on mount
+    const { confidenceMenuStyle } = setup();
+    expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
+
+    //Change the default confidence menu style preference
+    fireEvent.click(confidenceMenuStyle);
+    fireEvent.click(screen.getByText('Emoji Faces'));
 
     //It should render the save button
     expect(screen.getByTitle('Save')).toBeInTheDocument();
