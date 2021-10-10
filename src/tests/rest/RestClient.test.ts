@@ -1,6 +1,8 @@
 import RestClient from "../../rest/RestClient";
 import axios, { AxiosStatic } from "axios";
 import { Environment } from "../../utility/Environment";
+import { store } from "../../store";
+import { setUser } from "../../slices/UserSlice";
 
 interface AxiosMock extends AxiosStatic {
     mockResolvedValue: Function
@@ -19,7 +21,19 @@ describe("Rest Client", () => {
 
     beforeEach(() => {
         Environment.variable = environment;
-        environment.mockReturnValue("https://japanese.tomplumpton.me/learn-japanese")
+        environment.mockReturnValue("https://japanese.tomplumpton.me/learn-japanese");
+        store.dispatch(setUser({
+            username: "TomPlum42",
+            nickname: "Tom",
+            email: "tom@hotmail.com",
+            creationDate: "2021-08-09T00:00",
+            expired: false,
+            locked: false,
+            credentialsExpired: false,
+            enabled: true,
+            roles: ["user"],
+            token: "TOKEN"
+        }));
     });
 
     describe("GET", () => {

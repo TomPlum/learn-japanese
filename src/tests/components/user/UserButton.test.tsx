@@ -36,7 +36,8 @@ test('Should display the users nickname if they have one and they are logged in'
         locked: false,
         credentialsExpired: false,
         enabled: true,
-        roles: ["user"]
+        roles: ["user"],
+        token: "TOKEN"
     }));
 
     setup();
@@ -54,7 +55,8 @@ test('Should display the users username if they don\'t have a nickname are logge
         locked: false,
         credentialsExpired: false,
         enabled: true,
-        roles: ["user"]
+        roles: ["user"],
+        token: "TOKEN"
     }));
 
     setup();
@@ -77,7 +79,8 @@ test('Clicking the button should show the dropdown menu if they are logged in', 
         locked: false,
         credentialsExpired: false,
         enabled: true,
-        roles: ["user"]
+        roles: ["user"],
+        token: "TOKEN"
     }));
 
     setup();
@@ -102,7 +105,7 @@ test('Clicking the button should call the onClick event handler', () => {
     expect(onClickHandler).toHaveBeenCalled();
 });
 
-test('Clicking the logout button should dispatch the clearUser event', async () => {
+test('Clicking the logout button should clear the user from the redux store', async () => {
     store.dispatch(setUser({
         username: "TomPlum42",
         nickname: "Tom",
@@ -112,7 +115,8 @@ test('Clicking the logout button should dispatch the clearUser event', async () 
         locked: false,
         credentialsExpired: false,
         enabled: true,
-        roles: ["user"]
+        roles: ["user"],
+        token: "TOKEN"
     }));
 
     setup();
@@ -123,5 +127,5 @@ test('Clicking the logout button should dispatch the clearUser event', async () 
     //Click logout
     fireEvent.click(await screen.findByText('Logout'));
 
-    expect(store.getState().user).toStrictEqual({ token: undefined, user: undefined });
+    expect(store.getState().user).toStrictEqual({ user: undefined });
 });

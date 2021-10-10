@@ -18,7 +18,8 @@ const user: User = {
     credentialsExpired: false,
     locked: false,
     expired: false,
-    roles: ["user"]
+    roles: ["user"],
+    token: "TOKEN"
 }
 
 const setup = () => {
@@ -125,7 +126,7 @@ test('After updating user details, if the user service returns an error, then it
 //TODO: Pissing me off. Works fine but refuses to work here. Nickname is somehow undefined
 test.skip('After updating user details, if the user service returns an error, then it should reset the nickname', async () => {
     mockUserService.mockResolvedValueOnce({ success: false, error: "User is not authenticated." });
-    const { edit, rerender } = setup();
+    const { edit } = setup();
 
     //Start Editing
     fireEvent.click(edit!);

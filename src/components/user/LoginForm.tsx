@@ -4,7 +4,7 @@ import { Alert, Button, Form, Modal } from "react-bootstrap";
 import styles from "../../styles/sass/components/user/UserForm.module.scss";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useUserDispatch, useErrorDispatch } from "../../hooks";
-import { setJWT, setUser } from "../../slices/UserSlice";
+import { setUser } from "../../slices/UserSlice";
 import auth from "../../service/AuthenticationService";
 import { addError } from "../../slices/ErrorSlice";
 
@@ -58,10 +58,9 @@ const LoginForm = (props: LoginFormProps) => {
                 expired: res.expired,
                 credentialsExpired: res.credentialsExpired,
                 enabled: res.enabled,
-                creationDate: res.creationDate
+                creationDate: res.creationDate,
+                token: res.token
             }));
-
-            dispatchUser(setJWT(res.token));
             props.onSuccess();
         }).catch(e => {
             if (e === "AUTHENTICATION_ERROR") {

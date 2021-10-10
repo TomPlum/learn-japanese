@@ -9,7 +9,7 @@ const onSuccessHandler = jest.fn();
 const loginService = auth.login as jest.MockedFunction<() => Promise<LoginResponse>>;
 
 const validLoginResponse = {
-    username: "TomPlum42", email: "tom@hotmail.com", nickname: "Tom", roles: ["admin"],
+    username: "TomPlum42", email: "tom@hotmail.com", nickname: "Tom", roles: ["admin"], creationDate: "2021-10-15",
     locked: false, expired: false, credentialsExpired: false, enabled: true, token: "TOKEN"
 };
 

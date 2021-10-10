@@ -10,18 +10,17 @@ export interface User {
     credentialsExpired: boolean;
     enabled: boolean;
     creationDate: string;
+    token: string;
 }
 
 export interface UserState {
     user?: User;
-    token?: string;
 }
 
 const user = localStorage.getItem("user");
 
 const initialState: UserState = {
     user: user ? JSON.parse(user) : undefined,
-    token: undefined
 }
 
 export const userSlice = createSlice({
@@ -37,16 +36,12 @@ export const userSlice = createSlice({
                 localStorage.setItem("user", JSON.stringify(state.user));
             }
         },
-        setJWT: (state, action: PayloadAction<string>) => {
-            state.token = action.payload;
-        },
         clearUser: (state) => {
             state.user = undefined;
-            state.token = undefined;
             localStorage.removeItem("user");
         }
     }
 });
 
-export const { setUser, updateNickname, clearUser, setJWT } = userSlice.actions
+export const { setUser, updateNickname, clearUser } = userSlice.actions
 export default userSlice.reducer;
