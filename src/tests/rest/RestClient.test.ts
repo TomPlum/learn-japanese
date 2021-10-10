@@ -121,4 +121,29 @@ describe("Rest Client", () => {
             await expect(() => RestClient.post("", {})).rejects.toThrow("Host URI is not defined!");
         });
     });
+
+    describe("PUT", () => {
+        it("Should call axios with the correct URI and configuration", () => {
+            mockedAxios.mockResolvedValue({ status: 201 });
+
+            return RestClient.put<undefined>("/user/set-nickname/tom").then(() => {
+                expect(mockedAxios).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
+                    {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json", }
+                    }
+                );
+            });
+        });
+
+        it("Should throw an error if the endpoint is undefined", async () => {
+            await expect(() => RestClient.put("", {})).rejects.toThrow("Endpoint is not defined!");
+        });
+
+        it("Should throw an error if the host is undefined", async () => {
+            environment.mockReturnValueOnce(undefined);
+            await expect(() => RestClient.put("", {})).rejects.toThrow("Host URI is not defined!");
+        });
+    });
 });

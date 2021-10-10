@@ -12,8 +12,12 @@ class RestClient {
         return await RestClient.makeRestRequest<T>("GET", endpoint);
     }
 
-    static async post<T>(endpoint: string, body: {}):  Promise<APIResponse<T>> {
+    static async post<T>(endpoint: string, body: {}): Promise<APIResponse<T>> {
         return await RestClient.makeRestRequest<T>("POST", endpoint, body);
+    }
+
+    static async put<T>(endpoint: string, body?: {}): Promise<APIResponse<T>> {
+        return await RestClient.makeRestRequest<T>("PUT", endpoint, body);
     }
 
     private static async makeRestRequest<T>(method: Method, endpoint: string, body?: object): Promise<APIResponse<T>> {
