@@ -28,9 +28,9 @@ describe("Rest Client", () => {
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").then(response => {
                 expect(response).toStrictEqual({
-                    data: { value: "test-value" },
-                    errors: [],
-                    status: 200
+                    status: 200,
+                    error: undefined,
+                    data: { value: "test-value" }
                 });
             });
         });
@@ -55,9 +55,21 @@ describe("Rest Client", () => {
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
-                    data: undefined,
+                    data: "He's dead Jim.",
                     status: 500,
-                    errors: [new Error("He's dead Jim.")]
+                    error: undefined
+                });
+            });
+        });
+
+        it("Should return an authentication error if the promise is rejected with a response and 401 status", () => {
+            mockedAxios.mockRejectedValue({ response: { error: "Unauthorised.", status: 401 }});
+
+            return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
+                expect(response).toStrictEqual({
+                    data: undefined,
+                    status: 401,
+                    error: "User is not authenticated."
                 });
             });
         });
@@ -69,7 +81,7 @@ describe("Rest Client", () => {
                 expect(response).toStrictEqual({
                     data: undefined,
                     status: 500,
-                    errors: [new Error("No response returned from the API")]
+                    error: "No response returned from the API"
                 });
             });
         });
@@ -81,7 +93,7 @@ describe("Rest Client", () => {
                 expect(response).toStrictEqual({
                     data: undefined,
                     status: 400,
-                    errors: [new Error("Something went wrong while setting up the request.")]
+                    error: "Something went wrong while setting up the request."
                 });
             });
         });
@@ -131,6 +143,21 @@ describe("Rest Client", () => {
                     "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
                     {
                         method: "PUT",
+                        headers: { "Content-Type": "application/json", }
+                    }
+                );
+            });
+        });
+
+        it("Should call axios with the correct the given request body if one is passed", () => {
+            mockedAxios.mockResolvedValue({ status: 201 });
+
+            return RestClient.put<undefined>("/user/set-nickname/tom", { key: "value" }).then(() => {
+                expect(mockedAxios).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
+                    {
+                        method: "PUT",
+                        data: "{\"key\":\"value\"}",
                         headers: { "Content-Type": "application/json", }
                     }
                 );
