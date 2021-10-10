@@ -34,6 +34,7 @@ describe("Authentication Service", () => {
                 locked: false,
                 expired: false,
                 credentialsExpired: false,
+                creationDate: "2021-10-15",
                 enabled: true,
                 token: "TOKEN"
             };

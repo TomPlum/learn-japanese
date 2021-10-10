@@ -8,6 +8,7 @@ export interface LoginResponse {
     locked: boolean;
     expired: boolean;
     credentialsExpired: boolean;
+    creationDate:string;
     enabled: boolean;
     token: string;
 }
