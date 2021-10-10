@@ -94,7 +94,7 @@ const Preferences = (props: PreferencesProps) => {
 
                 <Row className={styles.row}>
                     <Col xs={6} className={styles.col}>
-                        <p className={styles.label}>Default font</p>
+                        <p className={styles.label}>Default Font</p>
                     </Col>
                     <Col xs={6}>
                         <Dropdown className={styles.dropdown} onSelect={onSelectDefaultFont}>

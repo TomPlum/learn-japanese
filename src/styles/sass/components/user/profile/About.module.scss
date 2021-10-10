@@ -9,3 +9,9 @@
   color: $dark-1;
   cursor: pointer;
 }
+
+.errorContainer {
+  margin-top: 3px;
+  font-size: 1.1em;
+  text-overflow: ellipsis;
+}

@@ -38,14 +38,14 @@ const login = (username: string, password: string): Promise<LoginResponse> => {
         if (response?.data?.token) {
             localStorage.setItem("user", JSON.stringify(response.data))
         } else {
-            return Promise.reject({ errors: "An error occurred when trying to authenticate the user."} );
+            return Promise.reject({ error: "An error occurred when trying to authenticate the user."} );
         }
         return response.data;
     }).catch((response: APIResponse<LoginResponse>) => {
         if (response.status === 401) {
             return Promise.reject("AUTHENTICATION_ERROR");
         }
-        return Promise.reject("Unknown login error: " + response.errors);
+        return Promise.reject("Unknown login error: " + response.error);
     });
 }
 

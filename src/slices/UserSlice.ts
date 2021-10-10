@@ -24,13 +24,18 @@ const initialState: UserState = {
     token: undefined
 }
 
-
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<User>) => {
             state.user = action.payload;
+        },
+        updateNickname: (state, action: PayloadAction<string>) => {
+            if (state.user) {
+                state.user.nickname = action.payload;
+                localStorage.setItem("user", JSON.stringify(state.user));
+            }
         },
         setJWT: (state, action: PayloadAction<string>) => {
             state.token = action.payload;
@@ -43,5 +48,5 @@ export const userSlice = createSlice({
     }
 });
 
-export const { setUser, clearUser, setJWT } = userSlice.actions
+export const { setUser, updateNickname, clearUser, setJWT } = userSlice.actions
 export default userSlice.reducer;

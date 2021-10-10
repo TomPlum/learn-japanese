@@ -73,7 +73,7 @@ describe("Authentication Service", () => {
         });
 
         it("Should reject with an unknown error if the API returns an unknown response status code", async () => {
-            restPost.mockRejectedValueOnce({ status: 865, errors: ["Sad face"] });
+            restPost.mockRejectedValueOnce({ status: 865, error: "Sad face" });
             return authentication.login("TomPlum42", "MyPassword").catch(e => {
                 expect(e).toEqual("Unknown login error: Sad face");
             });

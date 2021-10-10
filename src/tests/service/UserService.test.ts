@@ -29,7 +29,7 @@ describe("User Service", () => {
     });
 
     it("Should return true if the API response is rejected", () => {
-        restClient.mockRejectedValueOnce({ errors: [{ message: "Internal Server Error" }] });
+        restClient.mockRejectedValueOnce({ error: "Internal Server Error" });
         return service.setNickname("tom").then(response => {
             expect(response).toStrictEqual({ success: false, error: "Internal Server Error" });
         });

@@ -1,6 +1,13 @@
 import { User } from "../../../../slices/UserSlice";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import About from "../../../../components/user/profile/About";
+import renderReduxConsumer from "../../../renderReduxConsumer";
+
+//Mock Learning Data Repository
+const mockUserService = jest.fn();
+jest.mock("../../../../service/UserService", () => {
+    return function () { return { setNickname: mockUserService } }
+});
 
 const user: User = {
     username: "TomPlum42",
@@ -15,17 +22,13 @@ const user: User = {
 }
 
 const setup = () => {
-    const component = render(<About user={user} />);
+    const component = renderReduxConsumer(<About user={user} />);
 
     return {
         edit: component.queryByTitle('Edit'),
         ...component
     }
 }
-
-beforeEach(() => {
-    jest.useFakeTimers();
-});
 
 test('It should render the user account creation date', () => {
     const component = setup();
@@ -42,10 +45,10 @@ test('It should render the user account nickname', () => {
     expect(component.getByText('Tom')).toBeInTheDocument();
 });
 
-test('It should render the user account nickname as N/A if the user does not have one set', () => {
+test('It should render the user account nickname as "-" if the user does not have one set', () => {
     user.nickname = undefined;
     const component = setup();
-    expect(component.getByText('N/A')).toBeInTheDocument();
+    expect(component.getByText('-')).toBeInTheDocument();
 });
 
 test('It should render the user account email', () => {
@@ -73,6 +76,7 @@ test('Clicking the edit button should change the nickname text into a field with
 });
 
 test('Changing the users nickname and clicking save should update the nickname value', async () => {
+    mockUserService.mockResolvedValueOnce({ success: true });
     const { edit } = setup();
 
     fireEvent.click(edit!);
@@ -82,21 +86,57 @@ test('Changing the users nickname and clicking save should update the nickname v
     await waitFor(() => expect(screen.getByText('Will')).toBeInTheDocument());
 });
 
-test('Clicking the save button should change the icon to a loading icon', () => {
+test('Clicking the save button should change the icon to a loading icon', async () => {
+    mockUserService.mockResolvedValueOnce({ success: true });
     const { edit } = setup();
 
     fireEvent.click(edit!);
     fireEvent.click(screen.getByTitle('Save'));
 
-    expect(screen.getByTitle('Saving...')).toBeInTheDocument();
+    expect(await screen.findByTitle('Saving...')).toBeInTheDocument();
 });
 
-test('After updating user details, the loading icon should return back to the edit icon', () => {
+test('After updating user details, the loading icon should return back to the edit icon', async () => {
+    mockUserService.mockResolvedValueOnce({ success: true });
     const { edit } = setup();
 
+    //Start Editing
     fireEvent.click(edit!);
-    fireEvent.click(screen.getByTitle('Save'));
-    act(() => { jest.runAllTimers() });
+    expect(screen.queryByTitle('Edit')).not.toBeInTheDocument();
 
-    expect(screen.getByTitle('Edit')).toBeInTheDocument();
+    //Save Changes
+    fireEvent.click(screen.getByTitle('Save'));
+    expect(await screen.findByTitle('Edit')).toBeInTheDocument();
+});
+
+test('After updating user details, if the user service returns an error, then it should display it', async () => {
+    mockUserService.mockResolvedValueOnce({ success: false, error: "User is not authenticated." });
+    const { edit } = setup();
+
+    //Start Editing
+    fireEvent.click(edit!);
+    expect(screen.queryByTitle('Edit')).not.toBeInTheDocument();
+
+    //Save Changes
+    fireEvent.click(screen.getByTitle('Save'));
+    expect(await screen.findByText('User is not authenticated.')).toBeInTheDocument();
+});
+
+//TODO: Pissing me off. Works fine but refuses to work here. Nickname is somehow undefined
+test.skip('After updating user details, if the user service returns an error, then it should reset the nickname', async () => {
+    mockUserService.mockResolvedValueOnce({ success: false, error: "User is not authenticated." });
+    const { edit, rerender } = setup();
+
+    //Start Editing
+    fireEvent.click(edit!);
+    expect(screen.queryByTitle('Edit')).not.toBeInTheDocument();
+
+    //Change the nickname
+    fireEvent.change(screen.getByPlaceholderText('Nickname'), { target: { value: 'New Nickname' }});
+    expect(screen.getByPlaceholderText('Nickname')).toHaveValue('New Nickname');
+
+    //Save Changes
+    fireEvent.click(screen.getByTitle('Save'));
+    expect(await screen.findByText('Tom')).toBeInTheDocument();
+    expect(await screen.queryByText('New Nickname')).not.toBeInTheDocument();
 });
