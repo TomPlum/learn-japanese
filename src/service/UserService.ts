@@ -37,4 +37,17 @@ export default class UserService {
             return { error: response.error };
         })
     }
+
+    /**
+     * Updates the application preferences of the current user in context.
+     * @param preferences The updated preferences selection.
+     * @return response true if successful, else false with the reason.
+     */
+    public async updatePreferences(preferences: UserPreferences): Promise<UpdateResponse> {
+        return RestClient.put("/user/update-preferences", preferences).then(() => {
+            return { success: true };
+        }).catch((response: APIResponse<UpdateResponse>) => {
+            return { success: false, error: response.error };
+        });
+    }
 }

@@ -41,7 +41,6 @@ describe("User Service", () => {
     });
 
     describe("Get Preferences", () => {
-
         const validPreferencesResponse = {
             defaultFont: "Gothic",
             theme: "Dark Mode",
@@ -71,6 +70,39 @@ describe("User Service", () => {
             return service.getPreferences().then((response: DataResponse<UserPreferences>) => {
                 expect(response.data).toBeUndefined();
                 expect(response.error).toBe("Internal Server Error");
+            });
+        });
+    });
+
+    describe("Update Preferences", () => {
+        const request = {
+            defaultFont: "Gothic",
+            theme: "Dark Mode",
+            language: "English",
+            highScores: "Ask Each Time",
+            defaultMode: "Play",
+            cardsPerDay: 10,
+            confidenceMenuStyle: "Numbers 1 - 6"
+        };
+
+        it("Should call the rest client with the correct endpoint and request body", () => {
+            restPut.mockResolvedValueOnce({ });
+            return service.updatePreferences(request).then(() => {
+                expect(restPut).toHaveBeenCalledWith("/user/update-preferences", request);
+            });
+        });
+
+        it("Should return true if the API call was successful", () => {
+            restPut.mockResolvedValueOnce({ });
+            return service.updatePreferences(request).then(response => {
+                expect(response).toStrictEqual({ success: true });
+            });
+        });
+
+        it("Should return false and an error message if the API call failed", () => {
+            restPut.mockRejectedValueOnce({ error: "Internal Server Error" });
+            return service.updatePreferences(request).then(response => {
+                expect(response).toStrictEqual({ success: false, error: "Internal Server Error" });
             });
         });
     });
