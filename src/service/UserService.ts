@@ -1,8 +1,9 @@
 import RestClient, { APIResponse } from "../rest/RestClient";
 import UpdateResponse from "../rest/UpdateResponse";
 import DataResponse from "../rest/DataResponse";
+import { UserPreferences } from "../slices/UserSlice";
 
-export interface UserPreferences {
+export interface UserPreferencesResponse {
     defaultFont: string;
     theme: string;
     language: string;
@@ -30,7 +31,7 @@ export default class UserService {
      * Gets the application preferences of the current user in context.
      * @return response The users preferences or an error if not found.
      */
-    public async getPreferences(): Promise<DataResponse<UserPreferences>> {
+    public async getPreferences(): Promise<DataResponse<UserPreferencesResponse>> {
         return RestClient.get<UserPreferences>("/user/preferences").then(response => {
             return { data: response.data };
         }).catch(response => {

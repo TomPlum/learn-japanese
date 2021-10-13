@@ -1,4 +1,4 @@
 export enum ConfidenceMenuStyle {
-    NUMBERS = "Numbers 1 to 6",
+    NUMBERS = "Numbers 1 - 6",
     EMOJI = "Emoji Faces"
 }

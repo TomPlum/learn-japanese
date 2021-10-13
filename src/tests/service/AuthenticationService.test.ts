@@ -1,5 +1,5 @@
 import RestClient from "../../rest/RestClient";
-import authentication from "../../service/AuthenticationService";
+import authentication, { LoginResponse } from "../../service/AuthenticationService";
 import { localStorageMock } from "../../setupTests";
 
 describe("Authentication Service", () => {
@@ -26,7 +26,7 @@ describe("Authentication Service", () => {
         });
 
         it("Should set the user in local storage if the response has a token", async () => {
-            const user = {
+            const user: LoginResponse = {
                 username: "TomPlum42",
                 email: "tom@hotmail.com",
                 nickname: "Tom",
@@ -36,7 +36,16 @@ describe("Authentication Service", () => {
                 credentialsExpired: false,
                 creationDate: "2021-10-15",
                 enabled: true,
-                token: "TOKEN"
+                token: "TOKEN",
+                preferences: {
+                    defaultFont: "Gothic",
+                    theme: "Dark Mode",
+                    language: "English",
+                    highScores: "Ask Each Time",
+                    defaultMode: "Play",
+                    cardsPerDay: 10,
+                    confidenceMenuStyle: "Numbers 1 - 6"
+                }
             };
 
             restPost.mockResolvedValueOnce({ data: user });
