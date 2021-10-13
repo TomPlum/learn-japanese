@@ -59,8 +59,18 @@ const LoginForm = (props: LoginFormProps) => {
                 credentialsExpired: res.credentialsExpired,
                 enabled: res.enabled,
                 creationDate: res.creationDate,
-                token: res.token
+                token: res.token,
+                preferences: {
+                    defaultFont: res.preferences.defaultFont,
+                    language: res.preferences.language,
+                    theme: res.preferences.theme,
+                    confidenceMenuStyle: res.preferences.confidenceMenuStyle,
+                    highScores: res.preferences.highScores,
+                    cardsPerDay: res.preferences.cardsPerDay,
+                    defaultMode: res.preferences.defaultMode
+                }
             }));
+
             props.onSuccess();
         }).catch(e => {
             if (e === "AUTHENTICATION_ERROR") {

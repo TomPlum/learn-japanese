@@ -1,17 +1,40 @@
 import { fireEvent, screen } from "@testing-library/react";
 import Preferences from "../../../../components/user/profile/Preferences";
 import renderReduxConsumer from "../../../renderReduxConsumer";
+import { User } from "../../../../slices/UserSlice";
+
+const user: User = {
+    username: "TomPlum42",
+    email: "tom@hotmail.com",
+    nickname: "Tom",
+    roles: ["admin"],
+    creationDate: "2021-10-15",
+    locked: false,
+    expired: false,
+    credentialsExpired: false,
+    enabled: true,
+    token: "TOKEN",
+    preferences: {
+        defaultFont: "Gothic",
+        theme: "Dark Mode",
+        language: "English",
+        highScores: "Ask Each Time",
+        defaultMode: "Play",
+        cardsPerDay: 10,
+        confidenceMenuStyle: "Numbers 1 - 6"
+    }
+}
 
 const setup = () => {
-    const component = renderReduxConsumer(<Preferences />);
+    const component = renderReduxConsumer(<Preferences user={user} />);
     return {
-        font: component.getByText('Default'),
+        font: component.getByText('Gothic'),
         theme: component.getByText('Dark Mode'),
         language: component.getByText('English'),
         highScores: component.getByText('Ask Each Time'),
         appMode: component.getByText('Play'),
         cardsPerDay: component.getByText('10'),
-        confidenceMenuStyle: component.getByText('Numbers 1 to 6'),
+        confidenceMenuStyle: component.getByText('Numbers 1 - 6'),
         ...component
     }
 }

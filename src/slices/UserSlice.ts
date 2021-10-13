@@ -11,6 +11,17 @@ export interface User {
     enabled: boolean;
     creationDate: string;
     token: string;
+    preferences: UserPreferences;
+}
+
+export interface UserPreferences {
+    defaultFont: string;
+    theme: string;
+    language: string;
+    highScores: string;
+    defaultMode: string;
+    cardsPerDay: number;
+    confidenceMenuStyle: string;
 }
 
 export interface UserState {

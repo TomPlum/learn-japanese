@@ -33,7 +33,17 @@ const user: User = {
     credentialsExpired: false,
     locked: false,
     expired: false,
-    roles: ["user"]
+    roles: ["user"],
+    token: "TOKEN",
+    preferences: {
+        defaultFont: "Gothic",
+        theme: "Dark Mode",
+        language: "English",
+        highScores: "Ask Each Time",
+        defaultMode: "Play",
+        cardsPerDay: 10,
+        confidenceMenuStyle: "Numbers 1 - 6"
+    }
 }
 
 test('Given an undefined user in context, it should redirect', () => {

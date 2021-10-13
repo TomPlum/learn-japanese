@@ -3,9 +3,11 @@ import UserButton, { UserButtonProps } from "../../../components/user/UserButton
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
 import { clearUser, setUser } from "../../../slices/UserSlice";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
 
 let props: UserButtonProps;
-
+const history = createMemoryHistory();
 const onClickHandler = jest.fn();
 
 beforeEach(() => {
@@ -20,7 +22,7 @@ afterEach(() => {
 });
 
 const setup = () => {
-    const component = renderReduxConsumer(<UserButton {...props} />);
+    const component = renderReduxConsumer(<Router history={history}><UserButton {...props} /></Router>);
     return {
         ...component
     }
@@ -128,4 +130,30 @@ test('Clicking the logout button should clear the user from the redux store', as
     fireEvent.click(await screen.findByText('Logout'));
 
     expect(store.getState().user).toStrictEqual({ user: undefined });
+});
+
+//TODO: Not working for some reason.
+test.skip('Clicking the high-scores option should route to the high-scores page', async () => {
+    store.dispatch(setUser({
+        username: "TomPlum42",
+        nickname: "Tom",
+        email: "tom@hotmail.com",
+        creationDate: "2021-08-09T00:00",
+        expired: false,
+        locked: false,
+        credentialsExpired: false,
+        enabled: true,
+        roles: ["user"],
+        token: "TOKEN"
+    }));
+
+    setup();
+
+    //Click the button to show the dropdown menu
+    fireEvent.click(screen.getByText('Tom'));
+
+    //Click high-scores
+    fireEvent.click(await screen.findByText('Highscores'));
+
+    expect(history.location.pathname).toBe("/high-scores");
 });

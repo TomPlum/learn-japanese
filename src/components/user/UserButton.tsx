@@ -1,5 +1,5 @@
 import React from "react";
-import { faChartBar, faDoorOpen, faUser, faUserCircle, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { faChartBar, faDoorOpen, faTrophy, faUser, faUserCircle, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { useUserDispatch, useUserSelector } from "../../hooks";
 import { clearUser } from "../../slices/UserSlice";
 import menuStyles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
@@ -27,6 +27,10 @@ const UserButton = (props: UserButtonProps) => {
         }
     }
 
+    const handleLogout = () => {
+        userDispatch(clearUser());
+    }
+
     return (
         <NavigationButton
             text={getButtonText()}
@@ -41,11 +45,15 @@ const UserButton = (props: UserButtonProps) => {
                 Profile
             </NavigationButton.Item>
 
-            <NavigationButton.Item icon={faChartBar} iconClass={styles.stats}>
+            <NavigationButton.Item icon={faChartBar} iconClass={styles.stats} href="/profile#stats">
                 Stats
             </NavigationButton.Item>
 
-            <NavigationButton.Item icon={faDoorOpen} onClick={() => userDispatch(clearUser())} iconClass={styles.logout}>
+            <NavigationButton.Item icon={faTrophy} iconClass={styles.highscores} href="/high-scores">
+                Highscores
+            </NavigationButton.Item>
+
+            <NavigationButton.Item icon={faDoorOpen} onClick={handleLogout} iconClass={styles.logout}>
                 Logout
             </NavigationButton.Item>
         </NavigationButton>
