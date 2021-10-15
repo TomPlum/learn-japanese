@@ -41,6 +41,12 @@ export const userSlice = createSlice({
         setUser: (state, action: PayloadAction<User>) => {
             state.user = action.payload;
         },
+        setPreferences: (state, action: PayloadAction<UserPreferences>) => {
+            if (state.user) {
+                state.user.preferences = action.payload;
+                localStorage.setItem("user", JSON.stringify(state.user));
+            }
+        },
         updateNickname: (state, action: PayloadAction<string>) => {
             if (state.user) {
                 state.user.nickname = action.payload;
@@ -54,5 +60,5 @@ export const userSlice = createSlice({
     }
 });
 
-export const { setUser, updateNickname, clearUser } = userSlice.actions
+export const { setUser, setPreferences, updateNickname, clearUser } = userSlice.actions
 export default userSlice.reducer;

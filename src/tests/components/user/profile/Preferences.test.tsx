@@ -1,7 +1,13 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import Preferences from "../../../../components/user/profile/Preferences";
 import renderReduxConsumer from "../../../renderReduxConsumer";
 import { User } from "../../../../slices/UserSlice";
+
+//Mock User Service
+const mockUserService = jest.fn();
+jest.mock("../../../../service/UserService", () => {
+    return function () { return { updatePreferences: mockUserService } }
+});
 
 const user: User = {
     username: "TomPlum42",
@@ -130,8 +136,9 @@ test('Should render the save button if the default confidence menu style changes
     expect(screen.getByTitle('Save')).toBeInTheDocument();
 });
 
-test('Clicking the save button should remove it after the save is complete', () => {
+test('Clicking the save button should remove it after the save is complete', async () => {
     //Should not render the button on mount
+    mockUserService.mockResolvedValueOnce({ success: true });
     const { highScores } = setup();
     expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
 
@@ -143,5 +150,96 @@ test('Clicking the save button should remove it after the save is complete', () 
     fireEvent.click(screen.getByTitle('Save'));
 
     //It should stop rendering it
-    expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByTitle('Save')).not.toBeInTheDocument());
+});
+
+test('Clicking the save button should call the user service with the updated preferences', async () => {
+    mockUserService.mockResolvedValueOnce({ success: true });
+    const { font, theme, language, highScores, appMode, cardsPerDay, confidenceMenuStyle } = setup();
+
+    //Change the font
+    fireEvent.click(font);
+    fireEvent.click(screen.getByText('Mincho'));
+
+    //Change the theme
+    fireEvent.click(theme);
+    fireEvent.click(screen.getByText('Light Mode'));
+
+    //Change the language
+    fireEvent.click(language);
+    fireEvent.click(screen.getByText('日本語'));
+
+    //Change the high-scores
+    fireEvent.click(highScores);
+    fireEvent.click(screen.getByText('Never Submit'));
+
+    //Change the default app mode
+    fireEvent.click(appMode);
+    fireEvent.click(screen.getByText('Learn'));
+
+    //Change the cards per day
+    fireEvent.click(cardsPerDay);
+    fireEvent.click(screen.getByText('20'));
+
+    //Change the confidence menu style
+    fireEvent.click(confidenceMenuStyle);
+    fireEvent.click(screen.getByText('Emoji Faces'));
+
+    //Save the changes
+    fireEvent.click(screen.getByTitle('Save'));
+
+    await waitFor(() => {
+        expect(mockUserService).toHaveBeenCalledWith({
+            defaultFont: "Mincho",
+            theme: "Light Mode",
+            language: "日本語",
+            highScores: "Never Submit",
+            defaultMode: "Learn",
+            cardsPerDay: 20,
+            confidenceMenuStyle: "Emoji Faces",
+        });
+    });
+});
+
+test('Should render the error message on screen if the user service returns an error', async () => {
+    mockUserService.mockRejectedValueOnce({ success: false, error: "An internal server error occurred."});
+    const { font } = setup();
+
+    //Change the font
+    fireEvent.click(font);
+    fireEvent.click(screen.getByText('Mincho'));
+    fireEvent.click(screen.getByTitle('Save'));
+
+    await waitFor(() => expect(screen.getByText('An internal server error occurred.')).toBeInTheDocument());
+});
+
+test('Should render the error message on screen if the user service call resolves but with failure', async () => {
+    mockUserService.mockResolvedValueOnce({ success: false, error: "An internal server error occurred."});
+    const { font } = setup();
+
+    //Change the font
+    fireEvent.click(font);
+    fireEvent.click(screen.getByText('Mincho'));
+    fireEvent.click(screen.getByTitle('Save'));
+
+    await waitFor(() => expect(screen.getByText('An internal server error occurred.')).toBeInTheDocument());
+});
+
+test('Should stop rendering the error message if the update is retried and it succeeds', async () => {
+    mockUserService.mockResolvedValueOnce({ success: false, error: "An internal server error occurred."});
+    mockUserService.mockResolvedValueOnce({ success: true });
+    const { font } = setup();
+
+    //Change the font
+    fireEvent.click(font);
+    fireEvent.click(screen.getByText('Mincho'));
+    fireEvent.click(screen.getByTitle('Save'));
+
+    //Should render error
+    await waitFor(() => expect(screen.getByText('An internal server error occurred.')).toBeInTheDocument());
+
+    //Retry
+    fireEvent.click(screen.getByTitle('Retry'));
+
+    await waitFor(() => expect(screen.queryByText('An internal server error occurred.')).not.toBeInTheDocument());
 });

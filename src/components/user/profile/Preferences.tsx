@@ -1,40 +1,37 @@
 import { Card, Col, Dropdown, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import { useFontDispatch } from "../../../hooks";
+import { useUserDispatch } from "../../../hooks";
 import { Font, fonts } from "../../ui/buttons/FontSelectorButton";
-import { setFont } from "../../../slices/FontSlice";
 import { Theme } from "../../../domain/Theme";
 import { Language } from "../../../domain/Language";
 import { HighScorePreference } from "../../../domain/HighScorePreference";
-import { faCheckCircle, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faCircleNotch, faRedo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AppMode } from "../../../domain/AppMode";
-import { User } from "../../../slices/UserSlice";
+import { setPreferences, User } from "../../../slices/UserSlice";
 import { CardsPerDay } from "../../../domain/learn/spacedrepetition/CardsPerDay";
 import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
 import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
 import UserService from "../../../service/UserService";
 
 export interface PreferencesProps {
-    user?: User;
+    user: User;
 }
 
 const Preferences = (props: PreferencesProps) => {
 
-    const fontDispatcher = useFontDispatch();
+    const userDispatcher = useUserDispatch();
     const userService = new UserService();
 
     useEffect(() => {
-        if (props.user && props.user.preferences) {
-            const preferences = props.user.preferences;
-            setSelectedFont(preferences.defaultFont);
-            setTheme(preferences.theme);
-            setLanguage(preferences.language);
-            setHighScorePreference(preferences.highScores);
-            setAppMode(preferences.defaultMode);
-            setCardsPerDay(preferences.cardsPerDay);
-            setConfidenceMenuStyle(preferences.confidenceMenuStyle);
-        }
+        const preferences = props.user.preferences;
+        setSelectedFont(preferences.defaultFont);
+        setTheme(preferences.theme);
+        setLanguage(preferences.language);
+        setHighScorePreference(preferences.highScores);
+        setAppMode(preferences.defaultMode);
+        setCardsPerDay(preferences.cardsPerDay);
+        setConfidenceMenuStyle(preferences.confidenceMenuStyle);
     }, []);
 
     const [font, setSelectedFont] = useState(fonts[0].displayName);
@@ -47,10 +44,10 @@ const Preferences = (props: PreferencesProps) => {
 
     const [changes, setChanges] = useState(false);
     const [saving, setSaving] = useState(false);
+    const [error, setError] = useState<string | undefined>(undefined);
 
     const onSelectDefaultFont = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
         setSelectedFont((event.target as HTMLSelectElement).textContent!);
-        fontDispatcher(setFont(font));
         setChanges(true);
     }
 
@@ -85,27 +82,68 @@ const Preferences = (props: PreferencesProps) => {
     }
 
     const onSaveChanges = () => {
+        setError(undefined);
         setChanges(false);
+        setSaving(true);
+
+        const updatedPreferences = {
+            defaultMode: appMode,
+            cardsPerDay: cardsPerDay,
+            highScores: highScorePreference,
+            confidenceMenuStyle: confidenceMenuStyle,
+            language: language,
+            theme: theme,
+            defaultFont: font
+        };
+
+        userService.updatePreferences(updatedPreferences).then(response => {
+            if (response.success) {
+                userDispatcher(setPreferences(updatedPreferences));
+            } else {
+                setError(response.error)
+            }
+        }).catch(response => {
+            setError(response.error);
+        }).finally(() => {
+            setSaving(false);
+        });
     }
 
     return (
         <Card className={styles.card} border="secondary">
             <Card.Body>
-                <h2 className={styles.heading}>
-                    Preferences
-                    {changes ? <FontAwesomeIcon
-                        size="sm"
-                        title="Save"
-                        icon={faCheckCircle}
-                        onClick={onSaveChanges}
-                        className={[styles.save, styles.icon].join(" ")}
-                    /> : saving ? <FontAwesomeIcon
-                        size="sm"
-                        title="Saving..."
-                        icon={faCircleNotch}
-                        className={[styles.spinner, styles.icon].join(" ")}
-                    /> : undefined}
-                </h2>
+                <Row>
+                    <Col xs={5}>
+                        <h2 className={styles.heading}>Preferences</h2>
+                    </Col>
+
+                    <Col xs={5} className={styles.errorContainer}>
+                        <span className={styles.error}>{error}</span>
+                    </Col>
+
+                    <Col xs={2}>
+                        <h2 className={styles.heading}>
+                            {changes ? <FontAwesomeIcon
+                                size="sm"
+                                title="Save"
+                                icon={faCheckCircle}
+                                onClick={onSaveChanges}
+                                className={[styles.save, styles.icon].join(" ")}
+                            /> : saving ? <FontAwesomeIcon
+                                size="sm"
+                                title="Saving..."
+                                icon={faCircleNotch}
+                                className={[styles.spinner, styles.icon].join(" ")}
+                            /> : error ? <FontAwesomeIcon
+                                size="sm"
+                                title="Retry"
+                                icon={faRedo}
+                                onClick={onSaveChanges}
+                                className={[styles.retry, styles.icon].join(" ")}
+                            /> : undefined}
+                        </h2>
+                    </Col>
+                </Row>
 
                 <Row className={styles.row}>
                     <Col xs={6} className={styles.col}>
