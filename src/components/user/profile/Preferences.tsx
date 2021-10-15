@@ -130,6 +130,7 @@ const Preferences = (props: PreferencesProps) => {
                                 onClick={onSaveChanges}
                                 className={[styles.save, styles.icon].join(" ")}
                             /> : saving ? <FontAwesomeIcon
+                                spin
                                 size="sm"
                                 title="Saving..."
                                 icon={faCircleNotch}
