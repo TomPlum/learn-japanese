@@ -32,7 +32,16 @@ describe("Rest Client", () => {
             credentialsExpired: false,
             enabled: true,
             roles: ["user"],
-            token: "TOKEN"
+            token: "TOKEN",
+            preferences: {
+                defaultFont: "Gothic",
+                theme: "Dark Mode",
+                language: "English",
+                highScores: "Ask Each Time",
+                defaultMode: "Play",
+                cardsPerDay: 10,
+                confidenceMenuStyle: "Numbers 1 - 6"
+            }
         }));
     });
 
@@ -185,6 +194,31 @@ describe("Rest Client", () => {
         it("Should throw an error if the host is undefined", async () => {
             environment.mockReturnValueOnce(undefined);
             await expect(() => RestClient.put("", {})).rejects.toThrow("Host URI is not defined!");
+        });
+    });
+
+    describe("DELETE", () => {
+        it("Should call axios with the correct URI and configuration", () => {
+            mockedAxios.mockResolvedValue({ status: 204 });
+
+            return RestClient.delete<undefined>("/user/delete").then(() => {
+                expect(mockedAxios).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/user/delete",
+                    {
+                        method: "DELETE",
+                        headers: { "Content-Type": "application/json", }
+                    }
+                );
+            });
+        });
+
+        it("Should throw an error if the endpoint is undefined", async () => {
+            await expect(() => RestClient.delete("", {})).rejects.toThrow("Endpoint is not defined!");
+        });
+
+        it("Should throw an error if the host is undefined", async () => {
+            environment.mockReturnValueOnce(undefined);
+            await expect(() => RestClient.delete("", {})).rejects.toThrow("Host URI is not defined!");
         });
     });
 });

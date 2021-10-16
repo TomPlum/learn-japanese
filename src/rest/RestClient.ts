@@ -24,6 +24,10 @@ class RestClient {
         return await RestClient.makeRestRequest<T>("PUT", endpoint, body);
     }
 
+    static async delete<T>(endpoint: string, body?: {}): Promise<APIResponse<T>> {
+        return await RestClient.makeRestRequest<T>("DELETE", endpoint, body);
+    }
+
     private static async makeRestRequest<T>(method: Method, endpoint: string, body?: object): Promise<APIResponse<T>> {
         const host = Environment.variable("API_HOST_URI");
 
