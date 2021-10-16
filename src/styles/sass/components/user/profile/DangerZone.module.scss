@@ -6,9 +6,8 @@
   transition: all ease-in-out 0.2s;
 }
 
-.unlock {
+.unlock:hover {
   color: $dark-1;
-  cursor: pointer;
 }
 
 .unlocked, .locked {
@@ -23,9 +22,6 @@
   bottom: 0;
   box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
   filter: blur(2px);
-  background: inherit;
-  pointer-events: none;
-  @include noSelect;
 }
 
 .row:first-child {

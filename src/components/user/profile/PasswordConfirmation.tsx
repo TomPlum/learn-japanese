@@ -19,6 +19,12 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
         field.current?.focus();
     }, []);
 
+    const confirm = () => {
+        props.onSubmit(password);
+    }
+
+    const disabled = password.length == 0;
+
     return (
         <div className={styles.wrapper}>
             <Alert variant="warning" className={styles.alert}>
@@ -44,7 +50,7 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
                 I've changed my mind
             </Button>
 
-            <Button variant="danger" onClick={() => props.onSubmit(password)} disabled={password.length == 0} block>
+            <Button variant="danger" onClick={confirm} disabled={disabled} className={styles.confirm} block>
                 Delete my account
             </Button>
 
