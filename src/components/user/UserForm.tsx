@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import styles from "../../styles/sass/components/user/UserForm.module.scss";
 import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
@@ -12,42 +12,38 @@ export interface UserFormProps {
     onClose: () => void;
 }
 
-interface UserFormState {
-    login: boolean;
-}
+const UserForm = (props: UserFormProps) => {
 
-class UserForm extends Component<UserFormProps, UserFormState> {
+    const { show, onClose } = props;
+    const [login, setLogin] = useState(true);
+    const [registeredUsername, setRegisteredUsername] = useState("");
 
-    constructor(props: Readonly<UserFormProps> | UserFormProps) {
-        super(props);
-        this.state = {
-            login: true,
-        }
+    const onSuccessfulRegistration = (username: string) => {
+        setRegisteredUsername(username);
+        setLogin(true);
     }
 
-    render() {
-        const { show, onClose } = this.props;
-        const { login } = this.state;
+    return (
+        <Modal contentClassName={styles.modal} centered backdrop="static" onHide={onClose} show={show} data-testid="user-modal">
+            <Modal.Header className={styles.header} closeButton onHide={onClose}>
+                <Modal.Title>
+                    <FontAwesomeIcon icon={login ? faUser : faUserPlus} fixedWidth />
+                    {login ? "Login" : " Register"}
+                </Modal.Title>
+            </Modal.Header>
 
-        return (
-            <Modal contentClassName={styles.modal} centered backdrop="static" onHide={onClose} show={show} data-testid="user-modal">
-                <Modal.Header className={styles.header} closeButton onHide={onClose}>
-                    <Modal.Title>
-                        <FontAwesomeIcon icon={login ? faUser : faUserPlus} fixedWidth />
-                        {login ? "Login" : " Register"}
-                    </Modal.Title>
-                </Modal.Header>
+            {login ?
+                <LoginForm onSuccess={onClose} username={registeredUsername} />
+                : <RegistrationForm onSuccess={onSuccessfulRegistration} />
+            }
 
-                {login ? <LoginForm onSuccess={onClose}/> : <RegistrationForm onSuccess={onClose} /> }
-
-                <Modal.Footer className={styles.footer}>
-                    <p className={styles.footerText} onClick={() => this.setState({ login: !login })}>
-                        {login ? "I don't have an account" : "I already have an account"}
-                    </p>
-                </Modal.Footer>
-            </Modal>
-        )
-    }
+            <Modal.Footer className={styles.footer}>
+                <p className={styles.footerText} onClick={() => setLogin(!login)}>
+                    {login ? "I don't have an account" : "I already have an account"}
+                </p>
+            </Modal.Footer>
+        </Modal>
+    )
 }
 
 export default UserForm;

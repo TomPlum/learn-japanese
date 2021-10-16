@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Alert, Button, Form, Modal } from "react-bootstrap";
 import styles from "../../styles/sass/components/user/UserForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import authService from "../../service/AuthenticationService";
 
 export interface RegistrationFormProps {
-    onSuccess: () => void;
+    onSuccess: (username: string) => void;
 }
 
 const RegistrationForm = (props: RegistrationFormProps) => {
@@ -15,12 +16,15 @@ const RegistrationForm = (props: RegistrationFormProps) => {
     const [nickname, setNickname] = useState("");
     const [password, setPassword] = useState("");
     const [secondPassword, setSecondPassword] = useState("");
+
     const [validEmail, setValidEmail] = useState(false);
     const [validUsername, setValidUsername] = useState(false);
     const [validNickName, setValidNickName] = useState(true);
     const [validPassword, setValidPassword] = useState(false);
     const [validSecondPassword, setValidSecondPassword] = useState(false);
+
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | undefined>(undefined);
     const [emailFocused, setEmailFocused] = useState(false);
 
     const isFormValid = (): boolean => {
@@ -62,15 +66,31 @@ const RegistrationForm = (props: RegistrationFormProps) => {
         setValidSecondPassword(isValid);
     }
 
-    /**
-     * 1 x Lowercase Letter, 1 x Uppercase Letter, 1 x Digit, 1 x Special Character, Length >= 8 and <= 36
-     */
     const isPasswordValid = (value: string): boolean => {
+        // 1 x Lowercase Letter, 1 x Uppercase Letter, 1 x Digit, 1 x Special Character, Length >= 8 and <= 36
         return /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,36}$)/.test(value);
+    }
+
+    const registerUser = () => {
+        setLoading(true);
+        setError(undefined);
+
+        authService.register(username, email, password, nickname).then(response => {
+            if (response.data) {
+                props.onSuccess(username);
+            } else {
+                setError(response.error);
+            }
+        }).catch(response => {
+            setError(response.error)
+            setLoading(false);
+        });
     }
 
     return (
         <Modal.Body className={styles.body}>
+            {error && <Alert variant="danger">{error}</Alert> }
+
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address*</Form.Label>
                 <Form.Control
@@ -139,7 +159,7 @@ const RegistrationForm = (props: RegistrationFormProps) => {
             </Form.Group>
 
             <Form.Group>
-                <Button className={styles.button} variant="info" disabled={!isFormValid()} onClick={props.onSuccess}>
+                <Button className={styles.button} variant="info" disabled={!isFormValid()} onClick={registerUser}>
                     {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth />}
                     {' Register'}
                 </Button>

@@ -1,5 +1,6 @@
 import RestClient, { APIResponse } from "../rest/RestClient";
 import { UserPreferencesResponse } from "./UserService";
+import DataResponse from "../rest/DataResponse";
 
 export interface LoginResponse {
     username: string;
@@ -21,14 +22,14 @@ export interface SignUpResponse {
     nickname?: string;
 }
 
-const register = (username: string, email: string, password: string, nickname?: string): Promise<SignUpResponse> => {
+const register = (username: string, email: string, password: string, nickname?: string): Promise<DataResponse<SignUpResponse>> => {
     const request = { username: username, email: email, password: password, nickname: nickname };
 
     return RestClient.post<SignUpResponse>("/user/register", request).then(response => {
         if (!response.data) {
-            throw Error("No data returned post user-registration.");
+            return { success: false, error: "No data returned post user-registration." };
         }
-        return response.data;
+        return { success: true, data: response.data };
     });
 }
 
