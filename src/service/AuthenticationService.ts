@@ -1,6 +1,7 @@
 import RestClient, { APIResponse } from "../rest/RestClient";
 import { UserPreferencesResponse } from "./UserService";
 import DataResponse from "../rest/DataResponse";
+import UpdateResponse from "../rest/UpdateResponse";
 
 export interface LoginResponse {
     username: string;
@@ -56,4 +57,12 @@ const logout = () => {
     localStorage.removeItem("user");
 }
 
-export default { register, login, logout };
+const deleteAccount = (password: string) => {
+    return RestClient.delete<UpdateResponse>("/user/delete", { password: password }).then(() => {
+        return { success: true };
+    }).catch(response => {
+        return { success: false, error: response.error };
+    });
+}
+
+export default { register, login, logout, deleteAccount };

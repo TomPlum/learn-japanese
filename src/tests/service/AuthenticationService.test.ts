@@ -5,10 +5,12 @@ import { localStorageMock } from "../../setupTests";
 describe("Authentication Service", () => {
     const restGet = jest.fn();
     const restPost = jest.fn();
+    const restDelete = jest.fn();
 
     beforeEach(() => {
         RestClient.get = restGet;
         RestClient.post = restPost;
+        RestClient.delete = restDelete;
     });
 
     afterEach(() => {
@@ -115,7 +117,7 @@ describe("Authentication Service", () => {
             });
         });
 
-        it("Should throw an exception if there is no data in the response", async () => {
+        it("Should return an error if there is no data in the response", async () => {
             restPost.mockResolvedValueOnce({ data: undefined });
             return authentication.register("TomPlum", "tom@hotmail.com", "MyPassword", "Tom").then(response => {
                 expect(response.error).toBe("No data returned post user-registration.");
@@ -140,6 +142,29 @@ describe("Authentication Service", () => {
             authentication.logout();
 
             expect(localStorageMock.getItem("user")).toBeUndefined();
+        });
+    });
+
+    describe("Delete Account", () => {
+        it("Should call the correct endpoint and request body", async () => {
+            restDelete.mockResolvedValueOnce({ });
+            return authentication.deleteAccount("MyPassword").then(() => {
+                expect(restDelete).toHaveBeenLastCalledWith("/user/delete", { password: "MyPassword" });
+            });
+        });
+
+        it("Should return true if the API call succeeds", async () => {
+            restDelete.mockResolvedValueOnce({ });
+            return authentication.deleteAccount("MyPassword").then(response => {
+                expect(response).toStrictEqual({ success: true });
+            });
+        });
+
+        it("Should return false if the API call fails", async () => {
+            restDelete.mockRejectedValueOnce({ error: "Internal Server Error" });
+            return authentication.deleteAccount("MyPassword").then(response => {
+                expect(response).toStrictEqual({ success: false, error: "Internal Server Error" });
+            });
         });
     });
 });
