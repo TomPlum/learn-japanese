@@ -117,16 +117,16 @@ describe("Authentication Service", () => {
 
         it("Should throw an exception if there is no data in the response", async () => {
             restPost.mockResolvedValueOnce({ data: undefined });
-            await expect(() => {
-                return authentication.register("TomPlum", "tom@hotmail.com", "MyPassword", "Tom")
-            }).rejects.toThrow("No data returned post user-registration.");
+            return authentication.register("TomPlum", "tom@hotmail.com", "MyPassword", "Tom").then(response => {
+                expect(response.error).toBe("No data returned post user-registration.");
+            })
         });
 
         it("Should return the user details from the API if the call is successful", async () => {
             const user = { username: "TomPlum42", email: "tom@hotmail.com", nickname: "Tom" };
             restPost.mockResolvedValueOnce({ data: user });
             return authentication.register("TomPlum", "tom@hotmail.com", "MyPassword", "Tom").then(response => {
-                expect(response).toStrictEqual(user);
+                expect(response).toStrictEqual({ success: true, data: user });
             });
         });
     });
