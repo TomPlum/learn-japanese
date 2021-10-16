@@ -36,8 +36,7 @@ class RestClient {
         }
 
         const URI = host + endpoint;
-        console.log("Sending " + method + " request to " + URI);
-        console.log(store.getState())
+        //console.log("Sending " + method + " request to " + URI);
 
         return await axios(URI, {
             method: method,
@@ -46,14 +45,14 @@ class RestClient {
             },
             data: body ? JSON.stringify(body) : undefined
         }).then(async response => {
-            console.log("Successfully received " + response.status + " response");
+            //console.log("Successfully received " + response.status + " response");
             return {
                 error: undefined,
                 data: response.data,
                 status: response.status
             };
         }).catch((e: AxiosError) => {
-            console.log("An error occurred while making a request to " + endpoint, e);
+            //console.log("An error occurred while making a request to " + endpoint, e);
             if (e.response) {
                 if (e.response.status === 401) {
                     return Promise.reject({
