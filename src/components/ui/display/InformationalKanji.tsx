@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Kanji } from "../../../domain/kanji/Kanji";
-import { KanjiRepository } from "../../../repository/KanjiRepository";
+import KanjiRepository from "../../../repository/KanjiRepository";
 import Copyable from "../Copyable";
 import Inspectable from "../Inspectable";
 import KanjiReadingDisplay from "../../learn/kanji/KanjiReadingDisplay";

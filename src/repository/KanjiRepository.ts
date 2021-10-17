@@ -27,7 +27,7 @@ export interface ExampleResponseModel {
     english: string[];
 }
 
-export class KanjiRepository implements Repository<Kanji> {
+export default class KanjiRepository implements Repository<Kanji> {
 
     private readonly converter = new KanjiConverter()
 

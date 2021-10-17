@@ -81,15 +81,17 @@ afterEach(() => {
     jest.restoreAllMocks();
 });
 
-test('Should render the leading heading', () => {
+test('Should render the leading heading', async () => {
     setup();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
     expect(screen.getByText('Japanese')).toBeInTheDocument();
 });
 
-test('Should render the description', () => {
+test('Should render the description', async () => {
     environment.mockReturnValueOnce("hiragana desc");
     environment.mockReturnValueOnce("katakana desc");
     setup();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
 
     expect(environment).toHaveBeenCalledWith("HIRAGANA_DESC");
     expect(environment).toHaveBeenCalledWith("KATAKANA_DESC");

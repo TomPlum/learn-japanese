@@ -1,4 +1,4 @@
-import { KanjiRepository, KanjiResponseModel } from "../../repository/KanjiRepository";
+import KanjiRepository, { KanjiResponseModel } from "../../repository/KanjiRepository";
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
 import { KanjiSettingsBuilder } from "../../domain/session/settings/data/KanjiSettings";
 import RestClient from "../../rest/RestClient";
