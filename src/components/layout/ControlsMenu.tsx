@@ -24,7 +24,7 @@ const ControlsMenu = (props: ControlsMenuProps) => {
         <Navbar variant="dark" fixed="top" className={styles.navbar}>
             <Container className={styles.innerWrapper} fluid>
                 <Nav className={styles.nav}>
-                    <Row className={styles.row} noGutters>
+                    <Row className={[styles.row, "g-0"].join(" ")}>
                         <Col>
                             <HashLink path="/" className={styles.navLink} disabled={!active}>
                                 <div>

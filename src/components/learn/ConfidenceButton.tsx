@@ -14,12 +14,10 @@ const ConfidenceButton = (props: ConfidenceButtonProps) => {
         props.onClick(props.value);
     }
 
+    const selectedClass = props.selected === props.value ? styles.selected : undefined;
+
     return (
-        <Button
-            block
-            onClick={handleClick}
-            className={[props.className, styles.button, props.selected === props.value ? styles.selected : undefined].join(" ")}
-        >
+        <Button onClick={handleClick} className={[props.className, styles.button, selectedClass].join(" ")}>
             {props.value.valueOf()}
         </Button>
     );

@@ -34,7 +34,7 @@ class VolumeController extends Component<VolumeControllerProps, VolumeController
         const overlay = (
             <Popover id="volume-slider" className={styles.volume}  onMouseLeave={this.hideVolume}
                      onMouseEnter={this.showVolume}>
-                <Popover.Content className={styles.text}>
+                <Popover.Body className={styles.text}>
                     <RangeSlider
                         min={0}
                         max={100}
@@ -44,7 +44,7 @@ class VolumeController extends Component<VolumeControllerProps, VolumeController
                         data-testid="volume-slider"
                         onChange={this.changeVolume}
                     />
-                </Popover.Content>
+                </Popover.Body>
             </Popover>
         );
 

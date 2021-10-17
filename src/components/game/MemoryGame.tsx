@@ -134,7 +134,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                     />
                 )}
 
-                <Row noGutters className={styles.header}>
+                <Row className={[styles.header, "g-0"].join(" ")}>
                     <Col xs={12}>
                         <Row>
                             <Col className={styles.quitWrapper}>
@@ -191,13 +191,13 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                     </Col>
                 </Row>
 
-                <Row noGutters className={styles.questionWrapper}>
+                <Row className={[styles.questionWrapper, "g-0"].join(" ")}>
                     <Col xs={12} className={styles.questionWrapperColumn}>
                         {this.getQuestion()}
                     </Col>
                 </Row>
 
-                <Row noGutters className={styles.footer}>
+                <Row className={[styles.footer, "g-0"].join(" ")}>
                     <Col md={4} xs={5} className={styles.footerLeftCol}>
                         <SkipButton
                             disabled={paused}

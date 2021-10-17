@@ -1,13 +1,13 @@
 import React, { Component, ReactElement } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
-import { Placement } from "react-bootstrap/Overlay";
 import ComponentTree from "../../utility/ComponentTree";
 import styles from "../../styles/sass/components/ui/Copyable.module.scss";
+import { Placement } from "react-bootstrap/types";
 
 export interface CopyableProps {
     className?: string;
     inline?: boolean;
-    placement?: Placement
+    placement?: Placement;
 }
 
 interface CopyableState {

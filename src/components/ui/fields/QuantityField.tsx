@@ -17,12 +17,10 @@ class QuantityField extends Component<QuantityFieldProps> {
 
         return (
             <InputGroup hasValidation>
-                <InputGroup.Prepend>
-                    <InputGroup.Text>
-                        <FontAwesomeIcon icon={faBalanceScale} className={styles.icon} fixedWidth />
-                        <span className={styles.description}>Quantity</span>
-                    </InputGroup.Text>
-                </InputGroup.Prepend>
+                <InputGroup.Text>
+                    <FontAwesomeIcon icon={faBalanceScale} className={styles.icon} fixedWidth />
+                    <span className={styles.description}>Quantity</span>
+                </InputGroup.Text>
 
                 <Form.Control
                     required

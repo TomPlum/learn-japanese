@@ -1,6 +1,6 @@
 import { useUserSelector } from "../../hooks";
 import { Redirect } from "react-router-dom";
-import { Button, Card, CardColumns, Col, Container, Row, Table } from "react-bootstrap";
+import { Button, Card, Col, Container, Row, Table } from "react-bootstrap";
 import { faRedo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import About from "../user/profile/About";
@@ -21,14 +21,14 @@ const ProfilePage = () => {
 
     return (
         <Container fluid className={styles.wrapper}>
-            <CardColumns>
+            <Row>
                 <About user={user} />
                 <Ranks />
                 <Overview />
                 <Stats />
                 <Preferences user={user} />
                 <DangerZone />
-            </CardColumns>
+            </Row>
         </Container>
     )
 }

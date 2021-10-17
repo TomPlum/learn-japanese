@@ -44,7 +44,7 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
         });
     }
 
-    const disabled = password.length == 0;
+    const disabled = password.length === 0;
 
     return (
         <div className={styles.wrapper}>
@@ -75,11 +75,11 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
                 onChange={e => setPassword(e.target.value)}
             />
 
-            <Button variant="success" onClick={props.onDismiss} block>
+            <Button variant="success" onClick={props.onDismiss} className={styles.dismiss}>
                 I've changed my mind
             </Button>
 
-            <Button variant="danger" onClick={deleteAccount} disabled={disabled} className={styles.confirm} block>
+            <Button variant="danger" onClick={deleteAccount} disabled={disabled} className={styles.confirm}>
                 {loading && <FontAwesomeIcon icon={faSpinner} fixedWidth spin />}
                 Delete my account
             </Button>

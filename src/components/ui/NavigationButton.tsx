@@ -63,7 +63,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
     const [search, setSearch] = useState("");
     const [expandSearch, setExpandSearch] = useState(false);
     const ref = useRef(null);
-    const targetRef = useRef(null);
+    const targetRef = useRef<HTMLDivElement>(null);
 
     const handleClick = () => {
         if (!props.disableDropdown) {
@@ -128,7 +128,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                         style={{ height: expandSearch ? 45 : 30 }}
                     />}
 
-                    <Popover.Content className={styles.content}>
+                    <Popover.Body className={styles.content}>
                         <ConditionalWrapper
                             condition={!!props.show}
                             wrapper={(children) => (
@@ -143,7 +143,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                                 })
                             }</>
                         </ConditionalWrapper>
-                    </Popover.Content>
+                    </Popover.Body>
                 </Popover>
             </Overlay>
         </div>

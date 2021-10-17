@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ScrollableContainer from "../../ui/ScrollableContainer";
-import { Button, Card, Col, Form } from "react-bootstrap";
+import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faCheck, faUndo, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import DataSettings from "../../../domain/session/settings/data/DataSettings";
@@ -33,28 +33,28 @@ class DataSettingsMenu extends Component<DataSettingsMenuProps<any>> {
 
                     {/*TODO: Pull this out into component?*/}
                     <Card.Footer className={styles.footer}>
-                        <Form.Row>
+                        <Row>
                             <Col className={styles.noGuttersLeft}>
-                                <Button variant="danger" block onClick={onQuit} className={styles.button}>
+                                <Button variant="danger" onClick={onQuit} className={styles.button}>
                                     <FontAwesomeIcon icon={faArrowLeft} />
                                     <span className={styles.buttonText}> Back</span>
                                 </Button>
                             </Col>
 
                             <Col className={[styles.noGuttersLeft, styles.noGuttersRight].join(" ")}>
-                                <Button variant="warning" block onClick={onReset} className={styles.button}>
+                                <Button variant="warning" onClick={onReset} className={styles.button}>
                                     <FontAwesomeIcon icon={faUndo}/>
                                     <span className={styles.buttonText}> Reset</span>
                                 </Button>
                             </Col>
 
                             <Col className={styles.noGuttersRight}>
-                                <Button variant="success" block onClick={onConfirm} className={styles.button} disabled={isValid ? !isValid() : false}>
+                                <Button variant="success" onClick={onConfirm} className={styles.button} disabled={isValid ? !isValid() : false}>
                                     <FontAwesomeIcon icon={faCheck}/>
                                     <span className={styles.buttonText}> Confirm</span>
                                 </Button>
                             </Col>
-                        </Form.Row>
+                        </Row>
                     </Card.Footer>
                 </Card>
             </div>
