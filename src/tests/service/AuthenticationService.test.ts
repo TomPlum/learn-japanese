@@ -161,9 +161,23 @@ describe("Authentication Service", () => {
         });
 
         it("Should return false if the API call fails", async () => {
-            restDelete.mockRejectedValueOnce({ error: "Internal Server Error" });
+            restDelete.mockRejectedValueOnce({ data: { error: "Internal Server Error" } });
             return authentication.deleteAccount("MyPassword").then(response => {
-                expect(response).toStrictEqual({ success: false, error: "Internal Server Error" });
+                expect(response.success).toBe(false);
+            });
+        });
+
+        it("Should return incorrect password message if the API returns PASSWORD_DOES_NOT_MATCH", async () => {
+            restDelete.mockRejectedValueOnce({ data: { error: "PASSWORD_DOES_NOT_MATCH" } });
+            return authentication.deleteAccount("MyPassword").then(response => {
+                expect(response.error).toBe("Your password is incorrect.");
+            });
+        });
+
+        it("Should return a generic error message if the API call fails with an unknown error code", async () => {
+            restDelete.mockRejectedValueOnce({ data: { error: "UNKNOWN_CODE" } });
+            return authentication.deleteAccount("MyPassword").then(response => {
+                expect(response.error).toBe("Something went wrong. Please try again.");
             });
         });
     });

@@ -57,11 +57,15 @@ const logout = () => {
     localStorage.removeItem("user");
 }
 
-const deleteAccount = (password: string) => {
+const deleteAccount = (password: string): Promise<UpdateResponse> => {
     return RestClient.delete<UpdateResponse>("/user/delete", { password: password }).then(() => {
         return { success: true };
     }).catch(response => {
-        return { success: false, error: response.error };
+        return {
+            success: false,
+            error: response.data.error === "PASSWORD_DOES_NOT_MATCH" ?
+                "Your password is incorrect." : "Something went wrong. Please try again."
+        };
     });
 }
 
