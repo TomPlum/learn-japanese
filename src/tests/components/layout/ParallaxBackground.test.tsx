@@ -15,7 +15,7 @@ const setup = () => {
 //TODO: Below tests don't seem to be updating state and re-rendering new kana when resizing.
 import { render, screen } from "@testing-library/react";
 import ParallaxBackground from "../../../components/layout/ParallaxBackground";
-import { KanaRepository } from "../../../repository/KanaRepository";
+import KanaRepository from "../../../repository/KanaRepository";
 import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
 import { KanaColumn } from "../../../domain/kana/KanaColumn";

@@ -12,7 +12,7 @@ import KanaSettings from "../domain/session/settings/data/KanaSettings";
 import DiacriticalFilter from "../filters/kana/DiacriticalFilter";
 import RegularKanaFilter from "../filters/kana/RegularKanaFilter";
 
-export class KanaRepository implements Repository<Kana> {
+export default class KanaRepository implements Repository<Kana> {
 
     public read(config: KanaSettings): Promise<Kana[]> {
         const chain = new FilterChain<Kana>();

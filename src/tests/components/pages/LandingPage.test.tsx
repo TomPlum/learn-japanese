@@ -14,6 +14,10 @@ import { createMemoryHistory } from 'history'
 const environment = jest.fn();
 const shuffle = jest.fn();
 const getRandomObject = jest.fn();
+const mockKanaRepository = jest.fn();
+jest.mock("../../../repository/KanaRepository", () => {
+    return function() { return { read: mockKanaRepository } };
+});
 
 const history = createMemoryHistory();
 
@@ -64,6 +68,11 @@ beforeEach(() => {
         objects.splice(0, 1);
         return [first, objects];
     });
+
+    //Mock Kana Repository Response
+    mockKanaRepository.mockResolvedValueOnce([
+        new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
+    ]);
 });
 
 afterEach(() => {
@@ -89,23 +98,27 @@ test('Should render the description', () => {
     expect(getByTextWithMarkup(description)).toBeInTheDocument();
 });
 
-test('Should render the play button', () => {
+test('Should render the play button', async () => {
     const { play } = setup();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
     expect(play).toBeInTheDocument();
 });
 
-test('Should render the learn button', () => {
+test('Should render the learn button', async () => {
     const { learn } = setup();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
     expect(learn).toBeInTheDocument();
 });
 
-test('Should render the search button', () => {
+test('Should render the search button', async () => {
     const { search } = setup();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
     expect(search).toBeInTheDocument();
 });
 
-test('Should render the help button', () => {
+test('Should render the help button', async () => {
     const { help } = setup();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
     expect(help).toBeInTheDocument();
 });
 
@@ -116,26 +129,30 @@ test('Should render the kana carousel', async () => {
     expect(await screen.findByText('あ')).toBeInTheDocument();
 });
 
-test('Clicking the play button should route the user to /menu/play', () => {
+test('Clicking the play button should route the user to /menu/play', async () => {
     const { play } = setup();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
     fireEvent.click(play);
     expect(history.location.pathname).toBe('/menu/play');
 });
 
-test('Clicking the learn button should route the user to /menu/learn', () => {
+test('Clicking the learn button should route the user to /menu/learn', async () => {
     const { learn } = setup();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
     fireEvent.click(learn);
     expect(history.location.pathname).toBe('/menu/learn');
 });
 
-test('Clicking the search button should route the user to /search', () => {
+test('Clicking the search button should route the user to /search', async () => {
     const { search } = setup();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
     fireEvent.click(search);
     expect(history.location.pathname).toBe('/search');
 });
 
-test('Clicking the help button should route the user to /search', () => {
+test('Clicking the help button should route the user to /search', async () => {
     const { help } = setup();
+    expect(await screen.findByText('あ')).toBeInTheDocument();
     fireEvent.click(help);
     expect(history.location.pathname).toBe('/help');
 });
