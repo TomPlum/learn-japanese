@@ -45,10 +45,6 @@ const DangerZone = () => {
          You'll need to provide your password for confirmation."
     />
 
-    const onDeleteAccount = (password: string) => {
-
-    }
-
     const confirm = () => {
         setConfirmation(true);
     }
@@ -80,7 +76,6 @@ const DangerZone = () => {
 
                 {confirmation ? (
                     <PasswordConfirmation
-                        onSubmit={onDeleteAccount}
                         alertInfo={deleteAccountPopover}
                         onDismiss={() => setConfirmation(false)}
                     />

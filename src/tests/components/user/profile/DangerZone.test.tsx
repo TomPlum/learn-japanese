@@ -1,8 +1,9 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import DangerZone from "../../../../components/user/profile/DangerZone";
+import renderReduxConsumer from "../../../renderReduxConsumer";
 
 const setup = () => {
-    const component = render(<DangerZone />);
+    const component = renderReduxConsumer(<DangerZone />);
     return {
         unlock: component.getByTitle('Un-Lock'),
         clearLocalStorage: component.getByText('Clear'),

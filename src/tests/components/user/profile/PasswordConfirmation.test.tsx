@@ -1,9 +1,11 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import PasswordConfirmation from "../../../../components/user/profile/PasswordConfirmation";
 import PopOver from "../../../../components/ui/PopOver";
+import renderReduxConsumer from "../../../renderReduxConsumer";
+import authService from "../../../../service/AuthenticationService";
 
-const onSubmitHandler = jest.fn();
 const onDismissHandler = jest.fn();
+const deleteAccountService = jest.fn();
 
 const deleteAccountPopover = <PopOver
     title="Delete Account"
@@ -12,8 +14,7 @@ const deleteAccountPopover = <PopOver
 />
 
 const setup = () => {
-    const component = render(<PasswordConfirmation
-        onSubmit={onSubmitHandler}
+    const component = renderReduxConsumer(<PasswordConfirmation
         onDismiss={onDismissHandler}
         alertInfo={deleteAccountPopover}
     />);
@@ -25,6 +26,10 @@ const setup = () => {
         ...component
     }
 }
+
+beforeEach(() => {
+    authService.deleteAccount = deleteAccountService;
+});
 
 test('Should focus the password field on mount', () => {
     const { password } = setup();
@@ -52,11 +57,34 @@ test('Entering a password value should enable the delete my account button', () 
     expect(password).not.toBeDisabled();
 });
 
-test('Clicking the delete account button should call the onSubmitHandler with the password value', () => {
+test('Clicking the delete account button should call the delete account service with the password value', () => {
+    deleteAccountService.mockResolvedValueOnce({ success: true });
     const { password, confirm } = setup();
+
     fireEvent.change(password, { target: { value: "MyPassword123-" }});
     fireEvent.click(confirm);
-    expect(onSubmitHandler).toHaveBeenLastCalledWith("MyPassword123-");
+
+    expect(deleteAccountService).toHaveBeenLastCalledWith("MyPassword123-");
+});
+
+test('Should display the error message if the auth service resolves with an error', async () => {
+    deleteAccountService.mockResolvedValueOnce({ success: false, error: "Your password is incorrect." });
+    const { password, confirm } = setup();
+
+    fireEvent.change(password, { target: { value: "MyPassword123-" }});
+    fireEvent.click(confirm);
+
+    expect(await screen.findByText('Your password is incorrect.')).toBeInTheDocument();
+});
+
+test('Should display the error message if the auth service promise is rejected', async () => {
+    deleteAccountService.mockRejectedValueOnce({ error: "Internal server error" });
+    const { password, confirm } = setup();
+
+    fireEvent.change(password, { target: { value: "MyPassword123-" }});
+    fireEvent.click(confirm);
+
+    expect(await screen.findByText('Internal server error')).toBeInTheDocument();
 });
 
 test('Clicking the "I\'ve changed my mind" button should call the onDismiss event handler', () => {
