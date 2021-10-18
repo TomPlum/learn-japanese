@@ -23,7 +23,7 @@ const setup = () => {
     const component = render(<Provider store={store}><UserForm {...props} /></Provider>);
     return {
         switchForm: component.getByText("I don't have an account"),
-        close: component.getByText('Close'),
+        close: component.getByLabelText('Close'),
         ...component
     }
 }

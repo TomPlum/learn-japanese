@@ -125,6 +125,6 @@ test('Clicking the close button in the mistakes modal should hide it', async () 
     const modal = screen.getByText('Mistakes');
     expect(modal).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText('Close'));
+    fireEvent.click(screen.getByLabelText('Close'));
     await waitForElementToBeRemoved(modal);
 });

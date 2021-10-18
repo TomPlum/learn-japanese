@@ -50,6 +50,6 @@ test('Should not render the modal if the show property is passed as false', () =
 
 test('Clicking the close button should call the onClose event handler', () => {
     render(<Feedback {...props} />);
-    fireEvent.click(screen.getByText('Close'));
+    fireEvent.click(screen.getByLabelText('Close'));
     expect(onCloseHandler).toHaveBeenCalled();
 });

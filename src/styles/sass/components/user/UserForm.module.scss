@@ -12,7 +12,6 @@ $border-radius: 12px;
 }
 
 .header button {
-  font-size: 2em;
   transition: all ease 0.2s;
 }
 
@@ -21,7 +20,7 @@ $border-radius: 12px;
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
   background-color: #f1f1f1;
-  padding: 15px;
+  padding: 12px 15px;
   display: flex;
   align-items: center;
 }

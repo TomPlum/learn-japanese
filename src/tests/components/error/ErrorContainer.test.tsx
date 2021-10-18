@@ -41,7 +41,7 @@ test('Clicking the X on an error should remove it from the screen', () => {
     expect(component.getByText("Example Body")).toBeInTheDocument();
 
     //Click the 'x' to dismiss it
-    fireEvent.click(component.getByText('Close'))
+    fireEvent.click(component.getByLabelText('Close'))
 
     //It should disappear
     expect(component.queryByText("Example Title")).not.toBeInTheDocument();
@@ -139,6 +139,6 @@ it('Should dismiss the controller message when clicking the "x"', () => {
     const component = setup();
 
     expect(screen.getByText("Too many notifications?")).toBeInTheDocument();
-    fireEvent.click(component.getByText('Close'));
+    fireEvent.click(component.getByLabelText('Close'));
     expect(screen.queryByText("Too many notifications?")).not.toBeInTheDocument();
 });
