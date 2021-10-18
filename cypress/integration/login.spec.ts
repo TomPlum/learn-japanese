@@ -4,8 +4,8 @@ it.skip('User can login', () => {
 
     //Types in the username and password and logs in.
     cy.contains('Login').click();
-    cy.get('input[placeholder=Username').type('Tester');
-    cy.get('input[placeholder=Password').type('password123-');
+    cy.get('input[placeholder=Username]').type('Tester');
+    cy.get('input[placeholder=Password]').type('password123-');
     cy.class('UserForm').find('button').contains('Login').click();
 
     //Checks that the login model disappears and that login has changed to the users nickname.
@@ -20,8 +20,8 @@ it.skip('Username or password is wrong', () => {
 
     //Incorrectly types in the username and password and attempts to login
     cy.contains('Login').click();
-    cy.get('input[placeholder=Username').type('Tester');
-    cy.get('input[placeholder=Password').type('wrongpassword');
+    cy.get('input[placeholder=Username]').type('Tester');
+    cy.get('input[placeholder=Password']).type('wrongpassword');
     cy.class('UserForm').find('button').contains('Login').click();
 
     //Checks the error message shows and that the user model still exists.
