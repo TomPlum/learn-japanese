@@ -2,7 +2,7 @@ import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
 import { KanaColumn } from "../../../domain/kana/KanaColumn";
 import each from "jest-each";
-import { KanaRepository } from "../../../repository/KanaRepository";
+import KanaRepository from "../../../repository/KanaRepository";
 
 describe("Kana", () => {
    describe("Is Diagraph", () => {

@@ -4,14 +4,18 @@ import { faLock, faLockOpen } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import InfoButton from "../../ui/buttons/InfoButton";
 import PopOver from "../../ui/PopOver";
+import PasswordConfirmation from "./PasswordConfirmation";
 import styles from "../../../styles/sass/components/user/profile/DangerZone.module.scss";
 
 const DangerZone = () => {
 
     const [locked, setLocked] = useState(true);
+    const [confirmation, setConfirmation] = useState(false);
 
     const onToggleLock = () => {
-        setLocked(!locked);
+        if (!confirmation) {
+            setLocked(!locked);
+        }
     }
 
     const localStoragePopover = <PopOver
@@ -41,6 +45,10 @@ const DangerZone = () => {
          You'll need to provide your password for confirmation."
     />
 
+    const confirm = () => {
+        setConfirmation(true);
+    }
+
     return (
         <Card className={styles.card} border="danger">
             <Card.Body>
@@ -61,72 +69,89 @@ const DangerZone = () => {
                             title="Lock"
                             icon={faLockOpen}
                             onClick={onToggleLock}
-                            className={[styles.unlock, styles.icon].join(" ")}
+                            className={[styles.unlock, confirmation ? styles.disabledIcon : styles.icon].join(" ")}
                         />
                     }
                 </h2>
 
-                <div className={locked ? styles.locked : styles.unlocked}>
-                    <Row className={styles.row}>
-                        <Col xs={5} className={styles.col}>
-                            <p className={styles.label}>Clear Local Storage</p>
-                        </Col>
-                        <Col xs={1} className={styles.col}>
-                            <InfoButton popover={localStoragePopover} className={styles.info} />
-                        </Col>
-                        <Col xs={6}>
-                            <Button variant="warning" className={styles.button} disabled={locked}>Clear</Button>
-                        </Col>
-                    </Row>
+                {confirmation ? (
+                    <PasswordConfirmation
+                        alertInfo={deleteAccountPopover}
+                        onDismiss={() => setConfirmation(false)}
+                    />
+                ) : (
+                    <div className={locked ? styles.locked : styles.unlocked}>
+                        <Row className={styles.row}>
+                            <Col xs={5} className={styles.col}>
+                                <p className={styles.label}>Clear Local Storage</p>
+                            </Col>
+                            <Col xs={1} className={styles.col}>
+                                <InfoButton popover={localStoragePopover} className={styles.info} />
+                            </Col>
+                            <Col xs={6}>
+                                <Button variant="warning" className={styles.button} disabled={locked}>
+                                    Clear
+                                </Button>
+                            </Col>
+                        </Row>
 
-                    <Row className={styles.row}>
-                        <Col xs={5} className={styles.col}>
-                            <p className={styles.label}>Reset Highscores</p>
-                        </Col>
-                        <Col xs={1} className={styles.col}>
-                            <InfoButton popover={resetHighScorePopover} className={styles.info} />
-                        </Col>
-                        <Col xs={6}>
-                            <Button variant="danger" className={styles.button} disabled={locked}>Reset</Button>
-                        </Col>
-                    </Row>
+                        <Row className={styles.row}>
+                            <Col xs={5} className={styles.col}>
+                                <p className={styles.label}>Reset Highscores</p>
+                            </Col>
+                            <Col xs={1} className={styles.col}>
+                                <InfoButton popover={resetHighScorePopover} className={styles.info} />
+                            </Col>
+                            <Col xs={6}>
+                                <Button variant="danger" className={styles.button} disabled={locked}>
+                                    Reset
+                                </Button>
+                            </Col>
+                        </Row>
 
-                    <Row className={styles.row}>
-                        <Col xs={5} className={styles.col}>
-                            <p className={styles.label}>Reset Stats</p>
-                        </Col>
-                        <Col xs={1} className={styles.col}>
-                            <InfoButton popover={resetStats} className={styles.info} />
-                        </Col>
-                        <Col xs={6}>
-                            <Button variant="danger" className={styles.button} disabled={locked}>Reset</Button>
-                        </Col>
-                    </Row>
+                        <Row className={styles.row}>
+                            <Col xs={5} className={styles.col}>
+                                <p className={styles.label}>Reset Stats</p>
+                            </Col>
+                            <Col xs={1} className={styles.col}>
+                                <InfoButton popover={resetStats} className={styles.info} />
+                            </Col>
+                            <Col xs={6}>
+                                <Button variant="danger" className={styles.button} disabled={locked}>
+                                    Reset
+                                </Button>
+                            </Col>
+                        </Row>
 
-                    <Row className={styles.row}>
-                        <Col xs={5} className={styles.col}>
-                            <p className={styles.label}>Reset Flash Cards</p>
-                        </Col>
-                        <Col xs={1} className={styles.col}>
-                            <InfoButton popover={resetFlashCard} className={styles.info} />
-                        </Col>
-                        <Col xs={6}>
-                            <Button variant="danger" className={styles.button} disabled={locked}>Reset</Button>
-                        </Col>
-                    </Row>
+                        <Row className={styles.row}>
+                            <Col xs={5} className={styles.col}>
+                                <p className={styles.label}>Reset Flash Cards</p>
+                            </Col>
+                            <Col xs={1} className={styles.col}>
+                                <InfoButton popover={resetFlashCard} className={styles.info} />
+                            </Col>
+                            <Col xs={6}>
+                                <Button variant="danger" className={styles.button} disabled={locked}>
+                                    Reset
+                                </Button>
+                            </Col>
+                        </Row>
 
-                    <Row className={styles.row}>
-                        <Col xs={5} className={styles.col}>
-                            <p className={styles.label}>Delete Account</p>
-                        </Col>
-                        <Col xs={1} className={styles.col}>
-                            <InfoButton popover={deleteAccountPopover} className={styles.info} />
-                        </Col>
-                        <Col xs={6}>
-                            <Button variant="danger" className={styles.button} disabled={locked}>Delete</Button>
-                        </Col>
-                    </Row>
-                </div>
+                        <Row className={styles.row}>
+                            <Col xs={5} className={styles.col}>
+                                <p className={styles.label}>Delete Account</p>
+                            </Col>
+                            <Col xs={1} className={styles.col}>
+                                <InfoButton popover={deleteAccountPopover} className={styles.info} />
+                            </Col>
+                            <Col xs={6}>
+                                <Button variant="danger" className={styles.button} disabled={locked} onClick={confirm}>
+                                    Delete
+                                </Button>
+                            </Col>
+                        </Row>
+                    </div>
+                )}
             </Card.Body>
         </Card>
     );

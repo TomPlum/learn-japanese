@@ -1,8 +1,14 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import RegistrationForm from "../../../components/user/RegistrationForm";
+import authService from "../../../service/AuthenticationService";
 import each from "jest-each";
 
 const onSuccessHandler = jest.fn();
+const mockRegister = jest.fn();
+
+beforeEach(() => {
+    authService.register = mockRegister;
+});
 
 const setup = () => {
     const component = render(<RegistrationForm onSuccess={onSuccessHandler} />);
@@ -53,10 +59,25 @@ test('When all fields are valid, the register button should be enabled', () => {
     expect(register).not.toBeDisabled();
 });
 
-test('Clicking the register button when it is enabled should call the onSuccess event handler', () => {
+test('Clicking the register button when it is enabled should call the onSuccess event handler', async () => {
+    mockRegister.mockResolvedValueOnce({ data: { success: true } });
     setValidFields();
     fireEvent.click(screen.getByText('Register'));
-    expect(onSuccessHandler).toHaveBeenCalled();
+    await waitFor(() => expect(onSuccessHandler).toHaveBeenCalledWith("TomPlum42"));
+});
+
+test('When register returns an error it should display it in an alert if the promise resolved', async () => {
+    mockRegister.mockResolvedValueOnce({ error: "Internal Server Error." });
+    setValidFields();
+    fireEvent.click(screen.getByText('Register'));
+    await waitFor(() => expect(screen.getByText('Internal Server Error.')).toBeInTheDocument());
+});
+
+test('When register returns an error it should display it in an alert if the promise was rejected', async () => {
+    mockRegister.mockRejectedValueOnce({ error: "Internal Server Error." });
+    setValidFields();
+    fireEvent.click(screen.getByText('Register'));
+    await waitFor(() => expect(screen.getByText('Internal Server Error.')).toBeInTheDocument());
 });
 
 test('Focusing the email field should show the info text', () => {

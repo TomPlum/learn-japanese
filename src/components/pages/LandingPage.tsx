@@ -8,7 +8,7 @@ import { Environment } from "../../utility/Environment";
 import ParallaxBackground from "../layout/ParallaxBackground";
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react";
-import { KanaRepository } from "../../repository/KanaRepository";
+import KanaRepository from "../../repository/KanaRepository";
 import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
 import { Kana } from "../../domain/kana/Kana";
 import LoadingSpinner from "../ui/LoadingSpinner";
@@ -17,10 +17,12 @@ const LandingPage = () => {
     const [kana, setKana] = useState<Kana[]>([]);
     const [loading, setLoading] = useState(false);
 
+    const kanaRepository = new KanaRepository();
+
     useEffect(() => {
         setLoading(true);
         const settings = new KanaSettingsBuilder().withHiragana().withKatakana().build();
-        new KanaRepository().read(settings).then(data => {
+        kanaRepository.read(settings).then(data => {
             setKana(data);
             setLoading(false);
         });

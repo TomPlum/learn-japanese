@@ -1,8 +1,8 @@
 import Topic from "../domain/Topic";
 import { Learnable } from "../domain/learn/Learnable";
-import { KanaRepository } from "./KanaRepository";
+import KanaRepository from "./KanaRepository";
 import CalendarRepository from "./CalendarRepository";
-import { KanjiRepository } from "./KanjiRepository";
+import KanjiRepository from "./KanjiRepository";
 import BasicsRepository from "./BasicsRepository";
 import NumbersRepository from "./NumbersRepository";
 import SentenceStructureRepository from "./SentenceStructureRepository";

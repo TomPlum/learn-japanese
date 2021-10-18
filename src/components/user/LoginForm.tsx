@@ -9,26 +9,34 @@ import auth from "../../service/AuthenticationService";
 import { addError } from "../../slices/ErrorSlice";
 
 export interface LoginFormProps {
+    username?: string;
     onSuccess: () => void;
 }
 
 const LoginForm = (props: LoginFormProps) => {
 
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState(props.username ?? "");
     const [password, setPassword] = useState("")
-    const [usernameValid, setUsernameValid] = useState(false);
+    const [usernameValid, setUsernameValid] = useState(!!props.username);
     const [passwordValid, setPasswordValid] = useState(false);
     const [loading, setLoading] = useState(false);
     const [badCredentials, setBadCredentials] = useState(false);
 
     const usernameField = useRef<HTMLInputElement>(null);
+    const passwordField = useRef<HTMLInputElement>(null);
 
     const dispatchUser = useUserDispatch();
     const dispatchNotification = useErrorDispatch();
 
     const formValid = usernameValid && passwordValid;
 
-    useEffect(() =>  usernameField?.current?.focus(), []);
+    useEffect(() =>  {
+        if (username) {
+            passwordField.current?.focus();
+        } else {
+            usernameField?.current?.focus();
+        }
+    }, []);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -78,10 +86,7 @@ const LoginForm = (props: LoginFormProps) => {
                 setPassword("")
                 setPasswordValid(false)
             } else {
-                dispatchNotification(addError({
-                    title: "Login Error",
-                    body: e
-                }));
+                dispatchNotification(addError({ title: "Login Error", body: e }));
                 props.onSuccess();
             }
         }).finally(() => {
@@ -104,6 +109,7 @@ const LoginForm = (props: LoginFormProps) => {
     return (
         <Modal.Body className={styles.body}>
             {badCredentials && <Alert variant="danger">Username or password is incorrect.</Alert>}
+            {props.username && <Alert variant="success">Registration successful. You can log-in below.</Alert>}
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Username</Form.Label>
@@ -124,6 +130,7 @@ const LoginForm = (props: LoginFormProps) => {
                     required
                     type="password"
                     value={password}
+                    ref={passwordField}
                     placeholder="Password"
                     isValid={passwordValid}
                     isInvalid={!passwordValid}

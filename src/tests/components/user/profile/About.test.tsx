@@ -3,7 +3,7 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import About from "../../../../components/user/profile/About";
 import renderReduxConsumer from "../../../renderReduxConsumer";
 
-//Mock Learning Data Repository
+//Mock User Service
 const mockUserService = jest.fn();
 jest.mock("../../../../service/UserService", () => {
     return function () { return { setNickname: mockUserService } }
@@ -19,7 +19,16 @@ const user: User = {
     locked: false,
     expired: false,
     roles: ["user"],
-    token: "TOKEN"
+    token: "TOKEN",
+    preferences: {
+        defaultFont: "Gothic",
+        theme: "Dark Mode",
+        language: "English",
+        highScores: "Ask Each Time",
+        defaultMode: "Play",
+        cardsPerDay: 10,
+        confidenceMenuStyle: "Numbers 1 - 6"
+    }
 }
 
 const setup = () => {

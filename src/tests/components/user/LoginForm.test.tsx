@@ -7,6 +7,7 @@ jest.mock("../../../service/AuthenticationService");
 
 const onSuccessHandler = jest.fn();
 const loginService = auth.login as jest.MockedFunction<() => Promise<LoginResponse>>;
+let registeredUsername: string | undefined = undefined;
 
 const validLoginResponse = {
     username: "TomPlum42",
@@ -31,7 +32,7 @@ const validLoginResponse = {
 };
 
 const setup = () => {
-    const component = renderReduxConsumer(<LoginForm onSuccess={onSuccessHandler}/>);
+    const component = renderReduxConsumer(<LoginForm onSuccess={onSuccessHandler} username={registeredUsername} />);
 
     return {
         username: component.getByPlaceholderText('Username'),
@@ -200,4 +201,22 @@ test('When the auth service returns an an authentication error then it should in
     fireEvent.click(login);
 
     await waitFor(() => expect(login).toBeDisabled());
+});
+
+test('When the username prop is passed then it should populate the username field with it', () => {
+    registeredUsername = "TomPlum42";
+    const { username } = setup();
+    expect(username).toHaveValue("TomPlum42");
+});
+
+test('When the username prop is passed then it should render a success alert', () => {
+    registeredUsername = "TomPlum42";
+    setup();
+    expect(screen.getByText('Registration successful. You can log-in below.')).toBeInTheDocument();
+});
+
+test('When the username prop is passed then it should focus the password field', () => {
+    registeredUsername = "TomPlum42";
+    const { password } = setup();
+    expect(password).toHaveFocus();
 });
