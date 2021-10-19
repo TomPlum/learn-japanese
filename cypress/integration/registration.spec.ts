@@ -1,14 +1,16 @@
 afterEach(() => {
     cy.request({
-        url: "/user/login",
+        url: Cypress.env('host') + "/user/login",
         body: {"username": "Testing", "password": "Testing123-"},
+        method: "POST"
     }).then(response => {
         cy.request({
-            url: "/user/delete",
-            body: {"password": "TomGay1-"},
-            headers: {"Authorization": response.body.token}
+            url: Cypress.env('host') + "/user/delete",
+            body: {"password": "Testing123-"},
+            headers: {"Authorization": "Bearer " + response.body.token},
+            method: "DELETE"
         }).then(response => {
-            expect(response.status).to.eq(200);
+            expect(response.status).to.eq(204);
         });
     });
 });
@@ -30,6 +32,8 @@ it('Register a new user', () => {
     cy.get('button').contains('Register').click();
 
     cy.contains('Register').should('not.exist');
+    cy.contains('Login').should('exist')
+    cy.get('input[placeholder="Username"]').
 
     cy.class('UserForm').should('exist').should('be.visible');
     cy.contains('Login');
