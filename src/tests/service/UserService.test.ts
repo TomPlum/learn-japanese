@@ -1,6 +1,7 @@
-import UserService, { UserPreferences } from "../../service/UserService";
+import UserService from "../../service/UserService";
 import RestClient from "../../rest/RestClient";
 import DataResponse from "../../rest/DataResponse";
+import { UserPreferences } from "../../slices/UserSlice";
 
 const restPut = jest.fn();
 const restGet = jest.fn();
@@ -9,6 +10,108 @@ RestClient.get = restGet;
 
 describe("User Service", () => {
     const service = new UserService();
+
+    describe("Username Exists", () => {
+        it("Should call the rest client with the correct endpoint", () => {
+            restGet.mockResolvedValueOnce({});
+            return service.usernameExists("TomPlum").then(() => {
+                expect(restGet).toHaveBeenCalledWith("/user/exists?username=TomPlum");
+            });
+        });
+
+        it("Should return exists true if the API returns true", () => {
+            restGet.mockResolvedValueOnce({ data: { exists: true } });
+            return service.usernameExists("TomPlum").then(response => {
+                expect(response.exists).toBe(true);
+            });
+        });
+
+        it("Should return exists false if the API returns false", () => {
+            restGet.mockResolvedValueOnce({ data: { exists: false } });
+            return service.usernameExists("TomPlum").then(response => {
+                expect(response.exists).toBe(false);
+            });
+        });
+
+        it("Should return exists false if the API does return an exists property", () => {
+            restGet.mockResolvedValueOnce({ data: { error: "Oh no" } });
+            return service.usernameExists("TomPlum").then(response => {
+                expect(response.exists).toBe(false);
+            });
+        });
+
+        it("Should return the error message if the API returns one", () => {
+            restGet.mockResolvedValueOnce({ data: { error: "Oh no" } });
+            return service.usernameExists("TomPlum").then(response => {
+                expect(response.error).toBe("Oh no");
+            });
+        });
+
+        it("Should return exists false if the API call is rejected", () => {
+            restGet.mockRejectedValueOnce({ data: { error: "You must provide a valid query parameter" } });
+            return service.usernameExists("TomPlum").then(response => {
+                expect(response.exists).toBe(false);
+            });
+        });
+
+        it("Should return the error message if the API call is rejected", () => {
+            restGet.mockRejectedValueOnce({ data: { error: "You must provide a valid query parameter" } });
+            return service.usernameExists("TomPlum").then(response => {
+                expect(response.error).toBe("You must provide a valid query parameter");
+            });
+        });
+    });
+
+    describe("Email Exists", () => {
+        it("Should call the rest client with the correct endpoint", () => {
+            restGet.mockResolvedValueOnce({});
+            return service.emailAlreadyRegistered("tomplum@hotmail.com").then(() => {
+                expect(restGet).toHaveBeenCalledWith("/user/exists?email=tomplum@hotmail.com");
+            });
+        });
+
+        it("Should return exists true if the API returns true", () => {
+            restGet.mockResolvedValueOnce({ data: { exists: true } });
+            return service.emailAlreadyRegistered("tomplum@hotmail.com").then(response => {
+                expect(response.exists).toBe(true);
+            });
+        });
+
+        it("Should return exists false if the API returns false", () => {
+            restGet.mockResolvedValueOnce({ data: { exists: false } });
+            return service.emailAlreadyRegistered("tomplum@hotmail.com").then(response => {
+                expect(response.exists).toBe(false);
+            });
+        });
+
+        it("Should return exists false if the API does return an exists property", () => {
+            restGet.mockResolvedValueOnce({ data: { error: "Oh no" } });
+            return service.emailAlreadyRegistered("tomplum@hotmail.com").then(response => {
+                expect(response.exists).toBe(false);
+            });
+        });
+
+        it("Should return the error message if the API returns one", () => {
+            restGet.mockResolvedValueOnce({ data: { error: "Oh no" } });
+            return service.emailAlreadyRegistered("tomplum@hotmail.com").then(response => {
+                expect(response.error).toBe("Oh no");
+            });
+        });
+
+        it("Should return exists false if the API call is rejected", () => {
+            restGet.mockRejectedValueOnce({ data: { error: "You must provide a valid query parameter" } });
+            return service.emailAlreadyRegistered("tomplum@hotmail.com").then(response => {
+                expect(response.exists).toBe(false);
+            });
+        });
+
+        it("Should return the error message if the API call is rejected", () => {
+            restGet.mockRejectedValueOnce({ data: { error: "You must provide a valid query parameter" } });
+            return service.emailAlreadyRegistered("tomplum@hotmail.com").then(response => {
+                expect(response.error).toBe("You must provide a valid query parameter");
+            });
+        });
+    });
 
     describe("Set Nickname", () => {
         it("Should call the rest client with the correct endpoint", () => {
