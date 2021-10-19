@@ -123,7 +123,7 @@ class Learn extends Component<LearnProps, LearnState> {
                                 active={hasForgotten}
                                 onClick={this.onForgot}
                                 type={LearningFeedback.FORGOT}
-                                className={styles.rememberedButton}
+                                className={styles.forgottenButton}
                             />
                         </Col>
                         <Col xs={6} className={[styles.buttonColumnRight, styles.col].join(" ")}>
@@ -132,7 +132,7 @@ class Learn extends Component<LearnProps, LearnState> {
                                 active={hasRemembered}
                                 onClick={this.onMemorised}
                                 type={LearningFeedback.REMEMBERED}
-                                className={styles.forgottenButton}
+                                className={styles.rememberedButton}
                             />
                         </Col>
                         {/*<ConfidenceSelector onSelect={() => {}} />*/}
