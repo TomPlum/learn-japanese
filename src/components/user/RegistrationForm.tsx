@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 import styles from "../../styles/sass/components/user/UserForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import authService from "../../service/AuthenticationService";
+import UserService from "../../service/UserService";
+import InfoButton from "../ui/buttons/InfoButton";
+import PopOver from "../ui/PopOver";
 
 export interface RegistrationFormProps {
     onSuccess: (username: string) => void;
 }
 
 const RegistrationForm = (props: RegistrationFormProps) => {
+
+    const userService = new UserService();
 
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -23,9 +28,30 @@ const RegistrationForm = (props: RegistrationFormProps) => {
     const [validPassword, setValidPassword] = useState(false);
     const [validSecondPassword, setValidSecondPassword] = useState(false);
 
+    const [userExists, setUserExists] = useState(false);
+    const [emailExists, setEmailExists] = useState(false);
+
     const [loading, setLoading] = useState(false);
+    const [userEligibilityLoading, setUserEligibilityLoading] = useState(false);
+    const [emailEligibilityLoading, setEmailEligibilityLoading] = useState(false);
     const [error, setError] = useState<string | undefined>(undefined);
     const [emailFocused, setEmailFocused] = useState(false);
+
+    useEffect(() => {
+        if (validUsername) {
+            checkUsernameEligibility();
+        }
+    }, [username]);
+
+    useEffect(() => {
+        if (validEmail) {
+            checkEmailEligibility();
+        }
+    }, [email]);
+
+    useEffect(() => {
+        setValidSecondPassword(password === secondPassword);
+    }, [password, secondPassword]);
 
     const isFormValid = (): boolean => {
         return validEmail && validUsername && validNickName && validPassword && validSecondPassword;
@@ -71,6 +97,41 @@ const RegistrationForm = (props: RegistrationFormProps) => {
         return /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,36}$)/.test(value);
     }
 
+    const getPasswordPolicyFailureReason = () => {
+        if (!/(?=.*[a-z])/.test(password)) {
+            return "Password must contain at least one lowercase character.";
+        }
+
+        if (!/(?=.*[A-Z])/.test(password)) {
+            return "Password must contain at least one uppercase character.";
+        }
+
+        if (!/(?=.*[0-9])/.test(password)) {
+            return "Password must contain at least one number.";
+        }
+
+        if (!/(?=.*[^A-Za-z0-9])/.test(password)) {
+            return "Password must contain at least one special character.";
+        }
+
+        if (!/(?=.{8,36}$)/.test(password)) {
+            return "Password must be between 8 and 36 characters (inclusive).";
+        }
+    }
+
+    const passwordPolicyInfo = <PopOver
+        title="Password Policy"
+        text={<div>
+            <ul className={styles.list}>
+                <li>At least 1 lowercase letter</li>
+                <li>At least 1 uppercase letter</li>
+                <li>At least 1 number</li>
+                <li>At least 1 special character</li>
+                <li>Be between 3 and 36 characters</li>
+            </ul>
+        </div>}
+    />
+
     const registerUser = () => {
         setLoading(true);
         setError(undefined);
@@ -84,6 +145,40 @@ const RegistrationForm = (props: RegistrationFormProps) => {
         }).catch(response => {
             setError(response.error)
             setLoading(false);
+        });
+    }
+
+    const checkUsernameEligibility = () => {
+        setUserEligibilityLoading(true);
+        userService.usernameExists(username).then(response => {
+            setUserExists(response.exists);
+            setValidUsername(!response.exists);
+
+            if (response.error) {
+                setError(response.error);
+            }
+        }).catch(response => {
+            setError(response.error);
+            setUserExists(false);
+        }).finally(() => {
+            setUserEligibilityLoading(false);
+        });
+    }
+
+    const checkEmailEligibility = () => {
+        setEmailEligibilityLoading(true);
+        userService.emailAlreadyRegistered(email).then(response => {
+            setEmailExists(response.exists);
+            setValidEmail(!response.exists);
+
+            if (response.error) {
+                setError(response.error);
+            }
+        }).catch(response => {
+            setError(response.error);
+            setEmailExists(false);
+        }).finally(() => {
+            setEmailEligibilityLoading(false);
         });
     }
 
@@ -104,9 +199,29 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     onFocus={() => setEmailFocused(true)}
                     onBlur={() => setEmailFocused(false)}
                 />
-                {emailFocused && <Form.Text className="text-muted">
-                    Your email address will not be shared with anyone else.
-                </Form.Text>}
+
+                {emailFocused && email.length === 0 && (
+                    <Form.Text className="text-muted">
+                        Your email address will not be shared with anyone else.
+                    </Form.Text>
+                )}
+
+                {emailExists && !emailEligibilityLoading && (
+                    <Form.Text className="text-muted">
+                        This email address is already registered.
+                    </Form.Text>
+                )}
+
+                {!emailExists && !emailEligibilityLoading && validEmail && (
+                    <Form.Text className="text-muted">Email address is available.</Form.Text>
+                )}
+
+                {emailEligibilityLoading && (
+                    <Form.Text className="text-muted">
+                        <FontAwesomeIcon icon={faSpinner} spin fixedWidth />
+                        Checking email address eligibility...
+                    </Form.Text>
+                )}
             </Form.Group>
 
             <Form.Group>
@@ -119,6 +234,21 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     isInvalid={!validUsername}
                     onChange={handleUsernameChange}
                 />
+
+                {userExists && !userEligibilityLoading && (
+                    <Form.Text className="text-muted">This username is already taken.</Form.Text>
+                )}
+
+                {!userExists && !userEligibilityLoading && validUsername && (
+                    <Form.Text className="text-muted">Username is available.</Form.Text>
+                )}
+
+                {userEligibilityLoading && (
+                    <Form.Text className="text-muted">
+                        <FontAwesomeIcon icon={faSpinner} spin fixedWidth />
+                        Checking username eligibility...
+                    </Form.Text>
+                )}
             </Form.Group>
 
             <Form.Group>
@@ -143,10 +273,17 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     isInvalid={!validPassword}
                     onChange={handlePasswordChange}
                 />
+
+                {!validPassword && password.length > 0 && (
+                    <Form.Text className="text-muted">
+                        <InfoButton popover={passwordPolicyInfo} />
+                        {getPasswordPolicyFailureReason()}
+                    </Form.Text>
+                )}
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>Re-Enter Password*</Form.Label>
+                <Form.Label>Confirm Password*</Form.Label>
                 <Form.Control
                     required
                     type="password"
@@ -156,6 +293,10 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     isInvalid={!validSecondPassword}
                     onChange={handleSecondPasswordChange}
                 />
+
+                {password !== secondPassword && validPassword && (
+                    <Form.Text className="text-muted">Passwords do not match.</Form.Text>
+                )}
             </Form.Group>
 
             <Form.Group>

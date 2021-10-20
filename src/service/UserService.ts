@@ -13,7 +13,47 @@ export interface UserPreferencesResponse {
     confidenceMenuStyle: string;
 }
 
+export interface UserExistsResponse {
+    exists: boolean;
+    error?: string;
+}
+
 export default class UserService {
+
+    /**
+     * Checks if a user with the given username already exists.
+     * @param username The username to search for.
+     * @return boolean true if exists, else false.
+     */
+    public async usernameExists(username: string): Promise<UserExistsResponse> {
+        return RestClient.get<UserExistsResponse>("/user/exists?username=" + username.trim()).then(response => {
+            if (response.data?.exists) {
+                return { exists: response.data?.exists };
+            } else {
+                return { exists: false, error: response.data?.error }
+            }
+        }).catch(response => {
+            return { exists: false, error: response.data?.error };
+        });
+    }
+
+    /**
+     * Checks if a user with the given email address already exists.
+     * @param email The email to search for.
+     * @return boolean true if exists, else false.
+     */
+    public async emailAlreadyRegistered(email: string): Promise<UserExistsResponse> {
+        return RestClient.get<UserExistsResponse>("/user/exists?email=" + email.trim()).then(response => {
+            if (response.data?.exists) {
+                return { exists: true };
+            } else {
+                return { exists: false, error: response.data?.error }
+            }
+        }).catch(response => {
+            return { exists: false, error: response.data?.error };
+        });
+    }
+
     /**
      * Updates the nickname of the current user in context.
      * @param nickname The desired new nickname of the user.
