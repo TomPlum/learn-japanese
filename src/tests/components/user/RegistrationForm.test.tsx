@@ -187,6 +187,50 @@ test('Should render an error message if the email eligibility service rejects th
     expect(await screen.findByText('Failed to get email eligibility'));
 });
 
+test('Should render the password policy rule about lowercase characters if there aren\'t any', () => {
+    const { password } = setup();
+    fireEvent.change(password, { target: { value: 'A' }});
+    expect(screen.getByText('Password must contain at least one lowercase character.'));
+});
+
+test('Should render the password policy rule about uppercase characters if there aren\'t any', () => {
+    const { password } = setup();
+    fireEvent.change(password, { target: { value: 'a' }});
+    expect(screen.getByText('Password must contain at least one uppercase character.'));
+});
+
+test('Should render the password policy rule about numbers if there aren\'t any', () => {
+    const { password } = setup();
+    fireEvent.change(password, { target: { value: 'aA' }});
+    expect(screen.getByText('Password must contain at least one number.'));
+});
+
+test('Should render the password policy rule about special characters if there aren\'t any', () => {
+    const { password } = setup();
+    fireEvent.change(password, { target: { value: 'aA1' }});
+    expect(screen.getByText('Password must contain at least one special character.'));
+});
+
+test('Should render the password policy rule about length if it it too short.', () => {
+    const { password } = setup();
+    fireEvent.change(password, { target: { value: 'aA1-' }});
+    expect(screen.getByText('Password must be between 8 and 36 characters (inclusive).'));
+});
+
+test('Should render the passwords do not match error if the first password is valid and the second does not match', () => {
+    const { password, secondPassword } = setup();
+    fireEvent.change(password, { target: { value: 'Password123-' }});
+    fireEvent.change(secondPassword, { target: { value: 'Password123' }});
+    expect(screen.getByText('Passwords do not match.')).toBeInTheDocument();
+});
+
+test('Should not render the passwords do not match error if the first password is invalid', () => {
+    const { password, secondPassword } = setup();
+    fireEvent.change(password, { target: { value: 'Pa' }});
+    fireEvent.change(secondPassword, { target: { value: 'Password123' }});
+    expect(screen.queryByText('Passwords do not match.')).not.toBeInTheDocument();
+});
+
 async function setValidFields() {
     const { email, username, nickname, secondPassword, password, register  } = setup();
     fireEvent.change(email, { target: { value: 'thomas.plumpton@domain.com' }});

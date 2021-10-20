@@ -47,6 +47,10 @@ const RegistrationForm = (props: RegistrationFormProps) => {
         }
     }, [email]);
 
+    useEffect(() => {
+        setValidSecondPassword(password === secondPassword);
+    }, [password, secondPassword]);
+
     const isFormValid = (): boolean => {
         return validEmail && validUsername && validNickName && validPassword && validSecondPassword;
     }
@@ -89,6 +93,28 @@ const RegistrationForm = (props: RegistrationFormProps) => {
     const isPasswordValid = (value: string): boolean => {
         // 1 x Lowercase Letter, 1 x Uppercase Letter, 1 x Digit, 1 x Special Character, Length >= 8 and <= 36
         return /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,36}$)/.test(value);
+    }
+
+    const getPasswordPolicyFailureReason = () => {
+        if (!/(?=.*[a-z])/.test(password)) {
+            return "Password must contain at least one lowercase character.";
+        }
+
+        if (!/(?=.*[A-Z])/.test(password)) {
+            return "Password must contain at least one uppercase character.";
+        }
+
+        if (!/(?=.*[0-9])/.test(password)) {
+            return "Password must contain at least one number.";
+        }
+
+        if (!/(?=.*[^A-Za-z0-9])/.test(password)) {
+            return "Password must contain at least one special character.";
+        }
+
+        if (!/(?=.{8,36}$)/.test(password)) {
+            return "Password must be between 8 and 36 characters (inclusive).";
+        }
     }
 
     const registerUser = () => {
@@ -232,6 +258,10 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     isInvalid={!validPassword}
                     onChange={handlePasswordChange}
                 />
+
+                {!validPassword && password.length > 0 && (
+                    <Form.Text className="text-muted">{getPasswordPolicyFailureReason()}</Form.Text>
+                )}
             </Form.Group>
 
             <Form.Group>
@@ -245,6 +275,10 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     isInvalid={!validSecondPassword}
                     onChange={handleSecondPasswordChange}
                 />
+
+                {password !== secondPassword && validPassword && (
+                    <Form.Text className="text-muted">Passwords do not match.</Form.Text>
+                )}
             </Form.Group>
 
             <Form.Group>
