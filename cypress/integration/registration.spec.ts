@@ -1,4 +1,4 @@
-afterEach(() => {
+beforeEach(() => {
     cy.request({
         url: Cypress.env('host') + "/user/login",
         body: {"username": "Testing", "password": "Testing123-"},
@@ -38,5 +38,4 @@ it('Register a new user', () => {
     cy.class('UserForm').should('exist').should('be.visible');
     cy.contains('Login');
     cy.get('input[placeholder="Username"]').should('have.value', 'Testing')
-
 });

@@ -41,7 +41,7 @@
     "clean": "rm -r node_modules",
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build",
-    "cypress:open": "cypress open"
+    "cypress": "cypress open"
   },
   "eslintConfig": {
     "extends": [
