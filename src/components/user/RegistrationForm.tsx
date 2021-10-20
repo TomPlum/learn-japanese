@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import authService from "../../service/AuthenticationService";
 import UserService from "../../service/UserService";
+import InfoButton from "../ui/buttons/InfoButton";
+import PopOver from "../ui/PopOver";
 
 export interface RegistrationFormProps {
     onSuccess: (username: string) => void;
@@ -116,6 +118,19 @@ const RegistrationForm = (props: RegistrationFormProps) => {
             return "Password must be between 8 and 36 characters (inclusive).";
         }
     }
+
+    const passwordPolicyInfo = <PopOver
+        title="Password Policy"
+        text={<div>
+            <ul className={styles.list}>
+                <li>At least 1 lowercase letter</li>
+                <li>At least 1 uppercase letter</li>
+                <li>At least 1 number</li>
+                <li>At least 1 special character</li>
+                <li>Be between 3 and 36 characters</li>
+            </ul>
+        </div>}
+    />
 
     const registerUser = () => {
         setLoading(true);
@@ -260,7 +275,10 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                 />
 
                 {!validPassword && password.length > 0 && (
-                    <Form.Text className="text-muted">{getPasswordPolicyFailureReason()}</Form.Text>
+                    <Form.Text className="text-muted">
+                        <InfoButton popover={passwordPolicyInfo} />
+                        {getPasswordPolicyFailureReason()}
+                    </Form.Text>
                 )}
             </Form.Group>
 

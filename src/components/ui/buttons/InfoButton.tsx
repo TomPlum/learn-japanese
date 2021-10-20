@@ -12,7 +12,7 @@ export interface InfoButtonProps {
 const InfoButton = (props: InfoButtonProps) => {
     return (
         <OverlayTrigger trigger={["hover", "click"]} overlay={props.popover} placement="top">
-            <FontAwesomeIcon icon={faInfoCircle} className={props.className} {...props} />
+            <FontAwesomeIcon icon={faInfoCircle} fixedWidth className={props.className} {...props} />
         </OverlayTrigger>
     )
 }
