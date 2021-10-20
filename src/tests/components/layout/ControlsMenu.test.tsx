@@ -73,7 +73,7 @@ test('Passing active as false should disable the Login Button', () => {
 test('Passing active as false should disable the Home Button', () => {
     props.active = false;
     const { home } = setup();
-    expect(home.parentElement).toHaveAttribute('aria-disabled', 'true');
+    expect(home.parentElement).toHaveClass('disabled');
 });
 
 test('Clicking the login button while not logged in should call the onLaunchLogin event handler', () => {

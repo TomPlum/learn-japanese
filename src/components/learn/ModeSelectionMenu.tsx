@@ -206,7 +206,7 @@ class ModeSelectionMenu extends Component<ModeSelectionMenuProps, ModeSelectionM
         this.setState({ loading: true }, () => {
             new LearningDataRepository().read(this.state.selected.dataSettings).then(data => {
                 this.setState({ loading: false, searchData: data, searching: true });
-            }).catch(e => this.setState({ loading: false }));
+            }).catch(() => this.setState({ loading: false }));
         });
     }
 
