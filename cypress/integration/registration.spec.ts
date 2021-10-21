@@ -2,16 +2,19 @@ beforeEach(() => {
     cy.request({
         url: Cypress.env('host') + "/user/login",
         body: {"username": "Testing", "password": "Testing123-"},
-        method: "POST"
+        method: "POST",
+        failOnStatusCode: false
     }).then(response => {
-        cy.request({
-            url: Cypress.env('host') + "/user/delete",
-            body: {"password": "Testing123-"},
-            headers: {"Authorization": "Bearer " + response.body.token},
-            method: "DELETE"
-        }).then(response => {
-            expect(response.status).to.eq(204);
-        });
+        if(response.isOkStatusCode){
+            cy.request({
+                url: Cypress.env('host') + "/user/delete",
+                body: {"password": "Testing123-"},
+                headers: {"Authorization": "Bearer " + response.body.token},
+                method: "DELETE"
+            }).then(response => {
+                expect(response.status).to.eq(204);
+            });
+        }
     });
 });
 
@@ -32,10 +35,7 @@ it('Register a new user', () => {
     cy.get('button').contains('Register').click();
 
     cy.contains('Register').should('not.exist');
-    cy.contains('Login').should('exist')
-    cy.get('input[placeholder="Username"]').
-
+    cy.contains('Login').should('exist');
     cy.class('UserForm').should('exist').should('be.visible');
-    cy.contains('Login');
-    cy.get('input[placeholder="Username"]').should('have.value', 'Testing')
+    cy.get('input[placeholder="Username"]').should('have.value', 'Testing');
 });
