@@ -1,4 +1,5 @@
 import {Topic} from "./Topic";
+import {User} from "../../src/slices/UserSlice";
 
 Cypress.Commands.add('class', (className) => {
     return cy.get('[class*=' + className + "]")
@@ -31,3 +32,33 @@ Cypress.Commands.add('startAndQuit', (presetName: string, topicName?: Topic) => 
     cy.class('ConfirmModal_yes').click();
     cy.contains('Finish').click();
 });
+
+Cypress.Commands.add('login', () => {
+    cy.request({
+        url: Cypress.env('host') + "/user/login",
+        body: {"username": "Testing", "password": "Testing123-"},
+        method: "POST",
+    }).then((res:Response<User>) => {
+        localStorage.setItem('user', JSON.stringify({
+            username: res.username,
+            email: res.email,
+            nickname: res.nickname,
+            roles: res.roles,
+            locked: res.locked,
+            expired: res.expired,
+            credentialsExpired: res.credentialsExpired,
+            enabled: res.enabled,
+            creationDate: res.creationDate,
+            token: res.token,
+            preferences: {
+                defaultFont: res.preferences.defaultFont,
+                language: res.preferences.language,
+                theme: res.preferences.theme,
+                confidenceMenuStyle: res.preferences.confidenceMenuStyle,
+                highScores: res.preferences.highScores,
+                cardsPerDay: res.preferences.cardsPerDay,
+                defaultMode: res.preferences.defaultMode
+            }
+        }))
+    })
+})
