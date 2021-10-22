@@ -117,7 +117,7 @@ class Learn extends Component<LearnProps, LearnState> {
                     </Row>
 
                     <Row className={styles.buttonWrapper}>
-                        <Col xs={6} className={[styles.buttonColumnLeft, styles.col].join(" ")}>
+                       {/* <Col xs={6} className={[styles.buttonColumnLeft, styles.col].join(" ")}>
                             <LearningFeedbackButton
                                 disabled={!hasPeeked}
                                 active={hasForgotten}
@@ -134,8 +134,8 @@ class Learn extends Component<LearnProps, LearnState> {
                                 type={LearningFeedback.REMEMBERED}
                                 className={styles.rememberedButton}
                             />
-                        </Col>
-                        {/*<ConfidenceSelector onSelect={() => {}} />*/}
+                        </Col>*/}
+                        <ConfidenceSelector onSelect={() => {}} />
                         <Col xs={12} className={styles.col}>
                             <Button
                                 className={styles.next}

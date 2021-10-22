@@ -20,7 +20,7 @@ const ConfidenceButton = (props: ConfidenceButtonProps) => {
             onClick={handleClick}
             className={[props.className, styles.button, props.selected === props.value ? styles.selected : undefined].join(" ")}
         >
-            {props.value.valueOf()}
+            {props.value.valueOf() + 1}
         </Button>
     );
 }
