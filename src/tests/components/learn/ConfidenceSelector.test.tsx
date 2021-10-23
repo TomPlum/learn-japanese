@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import ConfidenceSelector, { ConfidenceSelectorProps } from "../../../components/learn/ConfidenceSelector";
 import { Confidence } from "../../../domain/learn/spacedrepetition/Confidence";
-import { findByTextWithElements } from "../../Queries";
 
 let props: ConfidenceSelectorProps;
 const onSelectHandler = jest.fn();
@@ -67,4 +66,15 @@ it("Should render the info menu when hovering over the button", async () => {
     const { info } = setup();
     fireEvent.mouseOver(info);
     expect(await screen.findByRole('tooltip')).toBeInTheDocument();
+});
+
+it("Should disable all the buttons when setting disabled as true", () => {
+    props.disabled = true;
+    const { one, two, three, four, five, six } = setup();
+    expect(one).toBeDisabled();
+    expect(two).toBeDisabled();
+    expect(three).toBeDisabled();
+    expect(four).toBeDisabled();
+    expect(five).toBeDisabled();
+    expect(six).toBeDisabled();
 });
