@@ -44,7 +44,7 @@ const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
         <Container>
             <Row>
                 <Col className={styles.titleWrapper}>
-                    <InfoButton popover={info} className={styles.info} /> {/* TODO: Replace w/side panel once on Bootstrap 5 */}
+                    <InfoButton popover={info} className={styles.info} data-testid="info" /> {/* TODO: Replace w/side panel once on Bootstrap 5 */}
                     <span>Confidence Rating</span>
                 </Col>
             </Row>
