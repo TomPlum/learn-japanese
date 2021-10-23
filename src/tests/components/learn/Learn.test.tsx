@@ -1,11 +1,12 @@
 import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
 import { KanaColumn } from "../../../domain/kana/KanaColumn";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import Learn, { LearnProps } from "../../../components/learn/Learn";
 import KanaFlashCardFront from "../../../components/learn/kana/KanaFlashCardFront";
 import KanaFlashCardBack from "../../../components/learn/kana/KanaFlashCardBack";
 import Arrays from "../../../utility/Arrays";
+import renderReduxConsumer from "../../renderReduxConsumer";
 
 const onFinishHandler = jest.fn();
 
@@ -37,7 +38,7 @@ afterEach(() => {
 });
 
 const setup = () => {
-    const component = render(<Learn {...props} />);
+    const component = renderReduxConsumer(<Learn {...props} />);
     return {
         remembered: component.getByTitle('Perfect'),
         forgot: component.getByTitle('Blackout'),

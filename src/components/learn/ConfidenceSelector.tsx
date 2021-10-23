@@ -1,12 +1,13 @@
-import { Confidence } from "../../domain/learn/spacedrepetition/Confidence";
+import Confidence from "../../domain/learn/spacedrepetition/Confidence";
 import { Col, Container, Row } from "react-bootstrap";
 import ConfidenceButton from "./ConfidenceButton";
 import { useState } from "react";
 import InfoButton from "../ui/buttons/InfoButton";
 import PopOver from "../ui/PopOver";
-import styles from "../../styles/sass/components/learn/ConfidenceSelector.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
+import ConfidenceInfoItem from "./ConfidenceInfoItem";
+import styles from "../../styles/sass/components/learn/ConfidenceSelector.module.scss";
 
 export interface ConfidenceSelectorProps {
     disabled: boolean;
@@ -14,7 +15,6 @@ export interface ConfidenceSelectorProps {
 }
 
 const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
-
     const [selected, setSelected] = useState<Confidence>();
 
     const handleSelect = (value: Confidence) => {
@@ -30,12 +30,12 @@ const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
         </>}
         text={<div>
             <ul>
-                <li><span className={styles.one}>1</span>A complete blackout. You had absolutely no idea.</li>
-                <li><span className={styles.two}>2</span>You gave an incorrect answer, but you realised you knew it afterwards.</li>
-                <li><span className={styles.three}>3</span>You gave an incorrect answer, but it was obvious to you afterwards.</li>
-                <li><span className={styles.four}>4</span>You gave the correct answer, but had serious trouble remembering.</li>
-                <li><span className={styles.five}>5</span>You gave the correct answer after some hesitation.</li>
-                <li><span className={styles.six}>6</span>You gave the correct answer with no hesitation at all.</li>
+                <ConfidenceInfoItem className={styles.one} confidence={Confidence.BLACKOUT} />
+                <ConfidenceInfoItem className={styles.two} confidence={Confidence.INCORRECT_BUT_REMEMBERED} />
+                <ConfidenceInfoItem className={styles.three} confidence={Confidence.INCORRECT_OBVIOUS_AFTERWARDS} />
+                <ConfidenceInfoItem className={styles.four} confidence={Confidence.CORRECT_DIFFICULT_MEMORY} />
+                <ConfidenceInfoItem className={styles.five} confidence={Confidence.CORRECT_SMALL_HESITATION} />
+                <ConfidenceInfoItem className={styles.six} confidence={Confidence.PERFECT} />
             </ul>
         </div>}
     />
@@ -52,7 +52,6 @@ const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
             <Row className={styles.row}>
                 <Col xs={4} md={2}>
                     <ConfidenceButton
-                        title="Blackout"
                         selected={selected}
                         className={styles.one}
                         onClick={handleSelect}
@@ -67,7 +66,6 @@ const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
                         className={styles.two}
                         onClick={handleSelect}
                         disabled={props.disabled}
-                        title="Incorrect, but knew"
                         value={Confidence.INCORRECT_BUT_REMEMBERED}
                     />
                 </Col>
@@ -78,7 +76,6 @@ const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
                         onClick={handleSelect}
                         className={styles.three}
                         disabled={props.disabled}
-                        title="Incorrect, but was obvious"
                         value={Confidence.INCORRECT_OBVIOUS_AFTERWARDS}
                     />
                 </Col>
@@ -89,7 +86,6 @@ const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
                         onClick={handleSelect}
                         className={styles.four}
                         disabled={props.disabled}
-                        title="Correct, but difficult to remember"
                         value={Confidence.CORRECT_DIFFICULT_MEMORY}
                     />
                 </Col>
@@ -100,14 +96,12 @@ const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
                         onClick={handleSelect}
                         className={styles.five}
                         disabled={props.disabled}
-                        title="Correct, small hesitation"
                         value={Confidence.CORRECT_SMALL_HESITATION}
                     />
                 </Col>
 
                 <Col xs={4} md={2}>
                     <ConfidenceButton
-                        title="Perfect"
                         selected={selected}
                         className={styles.six}
                         onClick={handleSelect}

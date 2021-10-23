@@ -51,7 +51,7 @@
 
 .confidence ul {
   list-style: none;
-  padding-left: 5px;
+  padding-left: 0;
   font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
   margin-bottom: 0;
 }
@@ -78,32 +78,32 @@
   @include evenNumericalSpacing;
 }
 
-span.one {
+span.one, svg.one {
   background-color: transparent !important;
   color: #db3a3a;
 }
 
-span.two {
+span.two, svg.two {
   background-color: transparent !important;
   color: #ee7d41;
 }
 
-span.three {
+span.three, svg.three {
   background-color: transparent !important;
   color: #e7ca41;
 }
 
-span.four {
+span.four, svg.four {
   background-color: transparent !important;
   color: #4e7bec;
 }
 
-span.five {
+span.five, svg.five {
   background-color: transparent !important;
   color: #42cbc6;
 }
 
-span.six {
+span.six, svg.six {
   background-color: transparent !important;
   color: #41db4e;
 }

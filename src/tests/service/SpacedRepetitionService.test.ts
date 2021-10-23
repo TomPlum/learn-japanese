@@ -3,7 +3,7 @@ import { mocked } from "ts-jest/utils";
 import SpaceRepetitionRepository from "../../repository/SpaceRepetitionRepository";
 import SpaceRepetitionFeedback from "../../domain/learn/spacedrepetition/SpaceRepetitionFeedback";
 import Definition from "../../domain/sentence/Definition";
-import { Confidence } from "../../domain/learn/spacedrepetition/Confidence";
+import Confidence from "../../domain/learn/spacedrepetition/Confidence";
 import SpaceRepetitionDetails from "../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
 import { getValueLastCalledWith } from "../Queries";
 import each from "jest-each";

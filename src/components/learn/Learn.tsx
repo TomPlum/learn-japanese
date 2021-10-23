@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Arrays from "../../utility/Arrays";
 import styles from "../../styles/sass/components/learn/Learn.module.scss";
 import ConfidenceSelector from "./ConfidenceSelector";
-import { Confidence } from "../../domain/learn/spacedrepetition/Confidence";
+import Confidence from "../../domain/learn/spacedrepetition/Confidence";
 
 export interface LearnProps {
     data: Learnable[];
@@ -62,7 +62,7 @@ const Learn = (props: LearnProps) => {
     const onFlip = (flips: number) => setHasPeeked(flips > 0);
 
     const onSelectConfidenceRating = (confidence: Confidence) => {
-        if (confidence < 3) {
+        if (confidence.value < 3) {
             setHasForgotten(true);
             setHasRemembered(false);
         } else {

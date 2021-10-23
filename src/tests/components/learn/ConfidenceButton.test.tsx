@@ -1,12 +1,16 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import ConfidenceButton, { ConfidenceButtonProps } from "../../../components/learn/ConfidenceButton";
-import { Confidence } from "../../../domain/learn/spacedrepetition/Confidence";
+import Confidence from "../../../domain/learn/spacedrepetition/Confidence";
+import renderReduxConsumer from "../../renderReduxConsumer";
+import { store } from "../../../store";
+import { setUser } from "../../../slices/UserSlice";
+import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
 
 let props: ConfidenceButtonProps;
 const onClickHandler = jest.fn();
 
 const setup = () => {
-    const component = render(<ConfidenceButton {...props} />);
+    const component = renderReduxConsumer(<ConfidenceButton {...props} />);
     return {
         button: component.getByText('6'),
         ...component
@@ -19,9 +23,30 @@ beforeEach(() => {
         disabled: false,
         selected: Confidence.PERFECT,
         className: 'menu',
-        title: 'Perfect',
         onClick: onClickHandler
     }
+
+    store.dispatch(setUser({
+        username: "TomPlum42",
+        nickname: "Tom",
+        email: "tom@hotmail.com",
+        creationDate: "2021-08-09T00:00",
+        expired: false,
+        locked: false,
+        credentialsExpired: false,
+        enabled: true,
+        roles: ["user"],
+        token: "TOKEN",
+        preferences: {
+            defaultFont: "Mincho",
+            theme: "Dark",
+            language: "English",
+            highScores: "Auto-Submit",
+            cardsPerDay: 10,
+            defaultMode: "Play",
+            confidenceMenuStyle: ConfidenceMenuStyle.NUMBERS
+        }
+    }));
 });
 
 it("Should call the onClick event handler with the Confidence value upon clicking the button", () => {

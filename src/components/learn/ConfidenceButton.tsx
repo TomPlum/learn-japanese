@@ -1,10 +1,12 @@
 import { Button } from "react-bootstrap";
-import { Confidence } from "../../domain/learn/spacedrepetition/Confidence";
+import Confidence from "../../domain/learn/spacedrepetition/Confidence";
 import styles from "../../styles/sass/components/learn/ConfidenceButton.module.scss";
+import { useUserSelector } from "../../hooks";
+import { ConfidenceMenuStyle } from "../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface ConfidenceButtonProps {
     value: Confidence;
-    title: string;
     className: string;
     disabled: boolean;
     selected: Confidence | undefined;
@@ -13,7 +15,8 @@ export interface ConfidenceButtonProps {
 
 const ConfidenceButton = (props: ConfidenceButtonProps) => {
 
-    const { value, title, className, disabled, selected, onClick } = props;
+    const { value, className, disabled, selected, onClick } = props;
+    const preferences = useUserSelector(state => state.user.user?.preferences);
 
     const handleClick = () => {
         onClick(props.value);
@@ -25,12 +28,15 @@ const ConfidenceButton = (props: ConfidenceButtonProps) => {
     return (
         <Button
             block
-            title={title}
+            title={value.name}
             disabled={disabled}
             onClick={handleClick}
             className={[className, buttonClass, selectedClass].join(" ")}
         >
-            {value.valueOf() + 1}
+            {preferences?.confidenceMenuStyle === ConfidenceMenuStyle.NUMBERS ?
+                value.value + 1 :
+                <FontAwesomeIcon icon={value.icon} />
+            }
         </Button>
     );
 }

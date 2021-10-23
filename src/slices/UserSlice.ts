@@ -40,6 +40,7 @@ export const userSlice = createSlice({
     reducers: {
         setUser: (state, action: PayloadAction<User>) => {
             state.user = action.payload;
+            localStorage.setItem("user", JSON.stringify(state.user));
         },
         setPreferences: (state, action: PayloadAction<UserPreferences>) => {
             if (state.user) {

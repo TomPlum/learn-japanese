@@ -1,12 +1,16 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import ConfidenceSelector, { ConfidenceSelectorProps } from "../../../components/learn/ConfidenceSelector";
-import { Confidence } from "../../../domain/learn/spacedrepetition/Confidence";
+import Confidence from "../../../domain/learn/spacedrepetition/Confidence";
+import renderReduxConsumer from "../../renderReduxConsumer";
+import { setUser, UserPreferences } from "../../../slices/UserSlice";
+import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
+import { store } from "../../../store";
 
 let props: ConfidenceSelectorProps;
 const onSelectHandler = jest.fn();
 
 const setup = () => {
-    const component = render(<ConfidenceSelector {...props} />);
+    const component = renderReduxConsumer(<ConfidenceSelector {...props} />);
     return {
         one: component.getByText('1'),
         two: component.getByText('2'),
@@ -20,6 +24,28 @@ const setup = () => {
 }
 
 beforeEach(() => {
+    store.dispatch(setUser({
+        username: "TomPlum42",
+        nickname: "Tom",
+        email: "tom@hotmail.com",
+        creationDate: "2021-08-09T00:00",
+        expired: false,
+        locked: false,
+        credentialsExpired: false,
+        enabled: true,
+        roles: ["user"],
+        token: "TOKEN",
+        preferences: {
+            defaultFont: "Mincho",
+            theme: "Dark",
+            language: "English",
+            highScores: "Auto-Submit",
+            cardsPerDay: 10,
+            defaultMode: "Play",
+            confidenceMenuStyle: ConfidenceMenuStyle.NUMBERS
+        }
+    }));
+
     props = {
         disabled: false,
         onSelect: onSelectHandler
