@@ -3,24 +3,34 @@ import { Confidence } from "../../domain/learn/spacedrepetition/Confidence";
 import styles from "../../styles/sass/components/learn/ConfidenceButton.module.scss";
 
 export interface ConfidenceButtonProps {
-    className: string;
     value: Confidence;
+    title: string;
+    className: string;
+    disabled: boolean;
     selected: Confidence | undefined;
     onClick: (value: Confidence) => void;
 }
 
 const ConfidenceButton = (props: ConfidenceButtonProps) => {
+
+    const { value, title, className, disabled, selected, onClick } = props;
+
     const handleClick = () => {
-        props.onClick(props.value);
+        onClick(props.value);
     }
+
+    const buttonClass = disabled ? styles.disabled : styles.button;
+    const selectedClass = selected === value ? styles.selected : undefined;
 
     return (
         <Button
             block
+            title={title}
+            disabled={disabled}
             onClick={handleClick}
-            className={[props.className, styles.button, props.selected === props.value ? styles.selected : undefined].join(" ")}
+            className={[className, buttonClass, selectedClass].join(" ")}
         >
-            {props.value.valueOf() + 1}
+            {value.valueOf() + 1}
         </Button>
     );
 }
