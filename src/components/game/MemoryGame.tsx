@@ -313,7 +313,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
         if (this.question.current?.isCorrect()) {
             //Play the success sound effect
-            this.getAudio(success).play().catch(e => console.log(e));
+            this.getAudio(success).play().catch(() => {});
 
             //Add the current question to the correct answers set.
             currentQuestion.forEach(question => correctAnswers.add(question));
@@ -322,7 +322,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             //If we're out of questions...
             if (remainingQuestions.length === 0) {
                 //Play the finish sound
-                this.getAudio(finish).play().catch(e => console.log(e));
+                this.getAudio(finish).play().catch(() => {});
 
                 //Stop the timer / countdown.
                 this.timer.current?.stop();
@@ -337,7 +337,7 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             }
         } else {
             //Play the wrong sound effect
-            this.getAudio(wrong).play().catch(e => console.log(e));
+            this.getAudio(wrong).play().catch(() => {});
 
             //If the question was answered incorrectly, update the lives and wrong answer pool.
             this.setState({
