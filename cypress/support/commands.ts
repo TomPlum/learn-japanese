@@ -1,5 +1,6 @@
 import {Topic} from "./Topic";
 import {User} from "../../src/slices/UserSlice";
+import Response = Cypress.Response;
 
 Cypress.Commands.add('class', (className) => {
     return cy.get('[class*=' + className + "]")
@@ -38,26 +39,26 @@ Cypress.Commands.add('login', () => {
         url: Cypress.env('host') + "/user/login",
         body: {"username": "Testing", "password": "Testing123-"},
         method: "POST",
-    }).then((res:Response<User>) => {
+    }).then((res: Response<User>) => {
         localStorage.setItem('user', JSON.stringify({
-            username: res.username,
-            email: res.email,
-            nickname: res.nickname,
-            roles: res.roles,
-            locked: res.locked,
-            expired: res.expired,
-            credentialsExpired: res.credentialsExpired,
-            enabled: res.enabled,
-            creationDate: res.creationDate,
-            token: res.token,
+            username: res.body.username,
+            email: res.body.email,
+            nickname: res.body.nickname,
+            roles: res.body.roles,
+            locked: res.body.locked,
+            expired: res.body.expired,
+            credentialsExpired: res.body.credentialsExpired,
+            enabled: res.body.enabled,
+            creationDate: res.body.creationDate,
+            token: res.body.token,
             preferences: {
-                defaultFont: res.preferences.defaultFont,
-                language: res.preferences.language,
-                theme: res.preferences.theme,
-                confidenceMenuStyle: res.preferences.confidenceMenuStyle,
-                highScores: res.preferences.highScores,
-                cardsPerDay: res.preferences.cardsPerDay,
-                defaultMode: res.preferences.defaultMode
+                defaultFont: res.body.preferences.defaultFont,
+                language: res.body.preferences.language,
+                theme: res.body.preferences.theme,
+                confidenceMenuStyle: res.body.preferences.confidenceMenuStyle,
+                highScores: res.body.preferences.highScores,
+                cardsPerDay: res.body.preferences.cardsPerDay,
+                defaultMode: res.body.preferences.defaultMode
             }
         }))
     })
