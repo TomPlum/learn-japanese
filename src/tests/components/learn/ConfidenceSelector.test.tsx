@@ -2,9 +2,17 @@ import { fireEvent, screen } from "@testing-library/react";
 import ConfidenceSelector, { ConfidenceSelectorProps } from "../../../components/learn/ConfidenceSelector";
 import Confidence from "../../../domain/learn/spacedrepetition/Confidence";
 import renderReduxConsumer from "../../renderReduxConsumer";
-import { setUser, UserPreferences } from "../../../slices/UserSlice";
+import { setUser } from "../../../slices/UserSlice";
 import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
 import { store } from "../../../store";
+import SpaceRepetitionFeedback from "../../../domain/learn/spacedrepetition/SpaceRepetitionFeedback";
+import Definition from "../../../domain/sentence/Definition";
+import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
+
+const mockGetDaysTillNextReview = jest.fn();
+jest.mock("../../../service/SpacedRepetitionService", () => {
+    return function() { return { getDaysTillNextReview: mockGetDaysTillNextReview } };
+});
 
 let props: ConfidenceSelectorProps;
 const onSelectHandler = jest.fn();
@@ -46,9 +54,14 @@ beforeEach(() => {
         }
     }));
 
+    mockGetDaysTillNextReview.mockReturnValue(5);
+
+    const definition = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective");
+    const spaceRepetitionDetails = new SpaceRepetitionDetails(2.5, 0, 0, "2021-12-12");
     props = {
         disabled: false,
-        onSelect: onSelectHandler
+        onSelect: onSelectHandler,
+        feedback: new SpaceRepetitionFeedback(definition, Confidence.PERFECT, spaceRepetitionDetails)
     }
 });
 
@@ -103,4 +116,18 @@ it("Should disable all the buttons when setting disabled as true", () => {
     expect(four).toBeDisabled();
     expect(five).toBeDisabled();
     expect(six).toBeDisabled();
+});
+
+it("Should display the number of days until next review if more than 1", () => {
+    mockGetDaysTillNextReview.mockReset().mockReturnValue(6);
+    const { one } = setup();
+    fireEvent.click(one);
+    expect(screen.getByText('You\'ll see this card again in 6 days')).toBeInTheDocument();
+});
+
+it("Should display a message that you'll see the card again tomorrow if the day interval is 1", () => {
+    mockGetDaysTillNextReview.mockReset().mockReturnValue(1);
+    const { six } = setup();
+    fireEvent.click(six);
+    expect(screen.getByText('You\'ll see this card again tomorrow')).toBeInTheDocument();
 });

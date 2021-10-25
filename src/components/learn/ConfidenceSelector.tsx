@@ -8,18 +8,35 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import ConfidenceInfoItem from "./ConfidenceInfoItem";
 import styles from "../../styles/sass/components/learn/ConfidenceSelector.module.scss";
+import SpacedRepetitionService from "../../service/SpacedRepetitionService";
+import SpaceRepetitionFeedback from "../../domain/learn/spacedrepetition/SpaceRepetitionFeedback";
+import TemplateString from "../../domain/TemplateString";
 
 export interface ConfidenceSelectorProps {
     disabled: boolean;
+    feedback: SpaceRepetitionFeedback;
     onSelect: (confidence: Confidence) => void;
 }
 
 const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
+
+    const { disabled, feedback, onSelect } = props;
+
     const [selected, setSelected] = useState<Confidence>();
+    const service = new SpacedRepetitionService();
 
     const handleSelect = (value: Confidence) => {
-        props.onSelect(value);
+        onSelect(value);
         setSelected(value);
+    }
+
+    const getDaysMessage = () => {
+        const days = service.getDaysTillNextReview(feedback);
+        if (days === 1) {
+            return "You'll see this card again tomorrow";
+        } else {
+            return new TemplateString("You'll see this card again in {0} days").format(days);
+        }
     }
 
     const info = <PopOver
@@ -47,6 +64,9 @@ const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
                     <InfoButton popover={info} className={styles.info} data-testid="info" /> {/* TODO: Replace w/side panel once on Bootstrap 5 */}
                     <span>Confidence Rating</span>
                 </Col>
+                <Col className={styles.titleWrapper}>
+                    {feedback.confidence && !disabled && <span className={styles.days}>{getDaysMessage()}</span>}
+                </Col>
             </Row>
 
             <Row className={styles.row}>
@@ -55,7 +75,7 @@ const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
                         selected={selected}
                         className={styles.one}
                         onClick={handleSelect}
-                        disabled={props.disabled}
+                        disabled={disabled}
                         value={Confidence.BLACKOUT}
                     />
                 </Col>

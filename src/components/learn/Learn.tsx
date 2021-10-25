@@ -12,6 +12,8 @@ import Arrays from "../../utility/Arrays";
 import styles from "../../styles/sass/components/learn/Learn.module.scss";
 import ConfidenceSelector from "./ConfidenceSelector";
 import Confidence from "../../domain/learn/spacedrepetition/Confidence";
+import SpaceRepetitionFeedback from "../../domain/learn/spacedrepetition/SpaceRepetitionFeedback";
+import SpaceRepetitionDetails from "../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
 
 export interface LearnProps {
     data: Learnable[];
@@ -30,6 +32,7 @@ const Learn = (props: LearnProps) => {
     const [hasPeeked, setHasPeeked] = useState(false);
     const [hasRemembered, setHasRemembered] = useState(false);
     const [hasForgotten, setHasForgotten] = useState(false);
+    const [confidence, setConfidence] = useState<Confidence | undefined>(undefined);
     const [remembered, setRemembered] = useState<Learnable[]>([]);
     const [forgotten, setForgotten] = useState<Learnable[]>([]);
 
@@ -62,6 +65,8 @@ const Learn = (props: LearnProps) => {
     const onFlip = (flips: number) => setHasPeeked(flips > 0);
 
     const onSelectConfidenceRating = (confidence: Confidence) => {
+        setConfidence(confidence);
+
         if (confidence.value < 3) {
             setHasForgotten(true);
             setHasRemembered(false);
@@ -136,6 +141,7 @@ const Learn = (props: LearnProps) => {
                 <Row className={styles.buttonWrapper}>
                     <ConfidenceSelector
                         disabled={!hasPeeked}
+                        feedback={new SpaceRepetitionFeedback(current, confidence!, new SpaceRepetitionDetails(2.5, 0, 0, "2021-10-23"))}
                         key={current.getUniqueID()}
                         onSelect={onSelectConfidenceRating}
                     />

@@ -41,7 +41,7 @@ export default class Confidence {
      * The user gave a correct response but had serious difficulty remembering
      * the answer.
      */
-    public static CORRECT_DIFFICULT_MEMORY = new Confidence(3, "Correct, but difficult to remember", "You gave the correct answer, but had serious trouble remembering", faSmile);
+    public static CORRECT_DIFFICULT_MEMORY = new Confidence(3, "Correct, but difficult to remember", "You gave the correct answer, but had serious trouble remembering.", faSmile);
 
     /**
      * The user gave a correct response after some hesitation.

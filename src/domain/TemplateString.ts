@@ -1,9 +1,8 @@
-export default class TemplateString extends String {
+export default class TemplateString {
 
     private readonly value: string;
 
     constructor(props: string) {
-        super(props);
         this.value = props;
     }
 
