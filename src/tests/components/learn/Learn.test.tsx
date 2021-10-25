@@ -1,11 +1,12 @@
 import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
 import { KanaColumn } from "../../../domain/kana/KanaColumn";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import Learn, { LearnProps } from "../../../components/learn/Learn";
 import KanaFlashCardFront from "../../../components/learn/kana/KanaFlashCardFront";
 import KanaFlashCardBack from "../../../components/learn/kana/KanaFlashCardBack";
 import Arrays from "../../../utility/Arrays";
+import renderReduxConsumer from "../../renderReduxConsumer";
 
 const onFinishHandler = jest.fn();
 
@@ -37,10 +38,10 @@ afterEach(() => {
 });
 
 const setup = () => {
-    const component = render(<Learn {...props} />);
+    const component = renderReduxConsumer(<Learn {...props} />);
     return {
-        remembered: component.getByTitle('I remembered it'),
-        forgot: component.getByTitle('I couldn\'t remember it'),
+        remembered: component.getByTitle('Perfect'),
+        forgot: component.getByTitle('Blackout'),
         next: component.getByText('Next'),
         quit: component.getByTitle('Quit'),
         showRomaji: component.getByText('Show Rōmaji'),
@@ -108,15 +109,15 @@ test('Getting to the last kana should not change the Next button to Finish if th
     const { next, remembered } = setup();
 
     fireEvent.click(screen.getByText('あ'));
-    fireEvent.click(remembered);
+    fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('い'));
-    fireEvent.click(remembered);
+    fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('え'));
-    fireEvent.click(remembered);
+    fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
     //We're now at the last card (お)
@@ -124,18 +125,18 @@ test('Getting to the last kana should not change the Next button to Finish if th
 });
 
 test('Getting to the last kana and flipping the card should change the Next button to Finish', () => {
-    const { next, remembered, forgot } = setup();
+    const { next, forgot } = setup();
 
     fireEvent.click(screen.getByText('あ'));
     fireEvent.click(forgot);
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('い'));
-    fireEvent.click(remembered);
+    fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('え'));
-    fireEvent.click(remembered);
+    fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('お'));
@@ -143,44 +144,44 @@ test('Getting to the last kana and flipping the card should change the Next butt
 });
 
 test('Clicking Finish should call the onFinish event handler with the results', () => {
-    const { next, remembered, forgot } = setup();
+    const { next, remembered } = setup();
 
     fireEvent.click(screen.getByText('あ'));
     fireEvent.click(remembered);
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('い'));
-    fireEvent.click(forgot);
+    fireEvent.click(screen.getByTitle('Blackout'));
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('え'));
-    fireEvent.click(remembered);
+    fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('お'));
-    fireEvent.click(forgot); //Forgetting the last one here should still be included upon finishing
+    fireEvent.click(screen.getByTitle('Blackout')); //Forgetting the last one here should still be included upon finishing
     fireEvent.click(screen.getByText('Finish'));
 
     expect(onFinishHandler).toHaveBeenCalledWith({ remembered: [a, e], forgotten: [i, o] });
 });
 
 test('Clicking Finish should include the last display kana in the results', () => {
-    const { next, remembered, forgot } = setup();
+    const { next, remembered } = setup();
 
     fireEvent.click(screen.getByText('あ'));
     fireEvent.click(remembered);
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('い'));
-    fireEvent.click(forgot);
+    fireEvent.click(screen.getByTitle('Blackout'));
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('え'));
-    fireEvent.click(remembered);
+    fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
     fireEvent.click(screen.getByText('お'));
-    fireEvent.click(remembered); //Remembering the last one here should still be included upon finishing
+    fireEvent.click(screen.getByTitle('Perfect')); //Remembering the last one here should still be included upon finishing
     fireEvent.click(screen.getByText('Finish'));
 
     expect(onFinishHandler).toHaveBeenCalledWith({ remembered: [a, e, o], forgotten: [i] });
@@ -224,7 +225,7 @@ test('Clicking the \'Hide Romaji\' button should invert it to \'Show Romaji\'', 
 });
 
 test('Marking a card as \'Remembered\' should increase the counter by 1', () => {
-    const { next, remembered } = setup();
+    const { next, remembered, rememberedCounter } = setup();
 
     expect(screen.getAllByText('0')).toHaveLength(2);
 
@@ -232,12 +233,12 @@ test('Marking a card as \'Remembered\' should increase the counter by 1', () => 
     fireEvent.click(remembered);
     fireEvent.click(next);
 
-    expect(screen.getByText('1')).toBeDefined();
+    expect(rememberedCounter).toBeDefined();
 });
 
 
 test('Marking a card as \'Forgotten\' should increase the counter by 1', () => {
-    const { next, forgot } = setup();
+    const { next, forgot, forgottenCounter } = setup();
 
     expect(screen.getAllByText('0')).toHaveLength(2);
 
@@ -245,5 +246,5 @@ test('Marking a card as \'Forgotten\' should increase the counter by 1', () => {
     fireEvent.click(forgot);
     fireEvent.click(next);
 
-    expect(screen.getByText('1')).toBeDefined();
+    expect(forgottenCounter).toBeDefined();
 });

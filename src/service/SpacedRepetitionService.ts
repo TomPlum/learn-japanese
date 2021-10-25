@@ -12,8 +12,12 @@ class SpacedRepetitionService {
         this.repository = repository;
     }
 
+    public getDaysTillNextReview(feedback: SpaceRepetitionFeedback) {
+        return supermemo(feedback.details, feedback.confidence.value).interval;
+    }
+
     public update(feedback: SpaceRepetitionFeedback) {
-        const { interval, repetition, efactor } = supermemo(feedback.details, feedback.confidence);
+        const { interval, repetition, efactor } = supermemo(feedback.details, feedback.confidence.value);
         const dueDate = dayjs(Date.now()).add(interval, 'day').toISOString();
         const updatedDetails = new SpaceRepetitionDetails(efactor, interval, repetition, dueDate);
         this.repository.update(updatedDetails);

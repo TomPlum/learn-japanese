@@ -1,5 +1,5 @@
 import { Learnable } from "../Learnable";
-import { Confidence } from "./Confidence";
+import Confidence from "./Confidence";
 import SpaceRepetitionDetails from "./SpaceRepetitionDetails";
 
 class SpaceRepetitionFeedback {

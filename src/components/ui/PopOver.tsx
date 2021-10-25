@@ -3,7 +3,7 @@ import { Popover } from "react-bootstrap";
 import styles from "../../styles/sass/components/ui/PopOver.module.scss";
 
 export interface PopOverProps {
-    title: string;
+    title: Element | JSX.Element | string;
     text: Element | JSX.Element | string;
     className?: string;
 }
