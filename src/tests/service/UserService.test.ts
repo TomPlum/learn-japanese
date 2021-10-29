@@ -1,6 +1,6 @@
 import UserService from "../../service/UserService";
 import RestClient from "../../rest/RestClient";
-import DataResponse from "../../rest/DataResponse";
+import DataResponse from "../../rest/response/DataResponse";
 import { UserPreferences } from "../../slices/UserSlice";
 
 const restPut = jest.fn();

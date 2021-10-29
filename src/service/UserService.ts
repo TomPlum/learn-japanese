@@ -1,6 +1,6 @@
 import RestClient, { APIResponse } from "../rest/RestClient";
-import UpdateResponse from "../rest/UpdateResponse";
-import DataResponse from "../rest/DataResponse";
+import UpdateResponse from "../rest/response/UpdateResponse";
+import DataResponse from "../rest/response/DataResponse";
 import { UserPreferences } from "../slices/UserSlice";
 
 export interface UserPreferencesResponse {

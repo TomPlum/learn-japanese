@@ -6,7 +6,7 @@ import { updateNickname, User } from "../../../slices/UserSlice";
 import dayjs from "dayjs";
 import { Numbers } from "../../../utility/Numbers";
 import UserService from "../../../service/UserService";
-import UpdateResponse from "../../../rest/UpdateResponse";
+import UpdateResponse from "../../../rest/response/UpdateResponse";
 import styles from "../../../styles/sass/components/user/profile/About.module.scss";
 import { useUserDispatch } from "../../../hooks";
 
