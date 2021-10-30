@@ -7,6 +7,10 @@ export interface Message<T> {
     body?: T;
 }
 
+/**
+ * Interfaces with API endpoints that exchange with a message broker.
+ * Queues and asynchronously dispatches API requests and retries failed messages.
+ */
 class MessageQueue {
 
     private static readonly _key = "mq";
@@ -30,8 +34,12 @@ class MessageQueue {
     public static fromLocalStorage() {
         const queueString = localStorage.getItem(MessageQueue._key)
         if (queueString) {
-            const messages: Message<any>[] = JSON.parse(queueString);
-            return new MessageQueue(messages);
+            try {
+                const messages: Message<any>[] = JSON.parse(queueString);
+                return new MessageQueue(messages);
+            } catch (e) {
+                return new MessageQueue([]);
+            }
         }
         return new MessageQueue([]);
     }
@@ -52,11 +60,11 @@ class MessageQueue {
     public async resolve() {
         if (this._messages.length > 0) {
             const message = this._messages.pop()!;
-            await this.doResolve(message);
+            await this.doResolve(message).then(() => {
+                const queueString = JSON.stringify(this._messages);
+                localStorage.setItem(MessageQueue._key, queueString);
+            });
         }
-
-        const queueString = JSON.stringify(this._messages);
-        localStorage.setItem(MessageQueue._key, queueString);
     }
 
     /**
@@ -65,17 +73,22 @@ class MessageQueue {
      * @param request The message to resolve.
      */
     private async doResolve(request: Message<any>) {
-        RestClient.send(request.method, request.endpoint, request.body).then((response: APIResponse<any>) => {
+        return RestClient.send(request.method, request.endpoint, request.body).then((response: APIResponse<any>) => {
             if (response.status >= 200 && response.status < 300) {
                 const nextMessage = this._messages.pop();
                 if (nextMessage) {
                     this.doResolve(nextMessage);
                 }
+            } else  {
+                return Promise.reject();
             }
-            return Promise.reject();
         }).catch(() => {
-            this.enqueue(request);
+            this.doResolve(request);
         });
+    }
+
+    get messages(): Message<any>[] {
+        return this._messages;
     }
 }
 
