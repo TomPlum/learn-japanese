@@ -1,0 +1,82 @@
+import RestClient, { APIResponse } from "./RestClient";
+import { Method } from "axios";
+
+export interface Message<T> {
+    method: Method;
+    endpoint: string;
+    body?: T;
+}
+
+class MessageQueue {
+
+    private static readonly _key = "mq";
+
+    private readonly _messages: Message<any>[] = [];
+
+    /**
+     * Use the {@link fromLocalStorage} static factory constructor.
+     * @param messages The messages to enqueue by default.
+     */
+    private constructor(messages: Message<any>[]) {
+        this._messages = messages;
+    }
+
+    /**
+     * Creates a new {@link MessageQueue} instance and populates the
+     * messages stored in the browsers' local storage. Defaults the queue
+     * to an empty array if there is nothing found in the local storage.
+     * @returns queue A new message queue instance.
+     */
+    public static fromLocalStorage() {
+        const queueString = localStorage.getItem(MessageQueue._key)
+        if (queueString) {
+            const messages: Message<any>[] = JSON.parse(queueString);
+            return new MessageQueue(messages);
+        }
+        return new MessageQueue([]);
+    }
+
+    /**
+     * Enqueues the given request in the queue.
+     * @param request The message to enqueue.
+     */
+    public enqueue<T>(request: Message<T>) {
+        this._messages.push(request);
+    }
+
+    /**
+     * Resolves all outstanding messages in the queue.
+     * API requests are asynchronously fired until all have
+     * successfully resolved.
+     */
+    public async resolve() {
+        if (this._messages.length > 0) {
+            const message = this._messages.pop()!;
+            await this.doResolve(message);
+        }
+
+        const queueString = JSON.stringify(this._messages);
+        localStorage.setItem(MessageQueue._key, queueString);
+    }
+
+    /**
+     * Recursively resolves any outstanding messages in the queue.
+     * If an API call fails, that message is pushed back into the queue.
+     * @param request The message to resolve.
+     */
+    private async doResolve(request: Message<any>) {
+        RestClient.send(request.method, request.endpoint, request.body).then((response: APIResponse<any>) => {
+            if (response.status >= 200 && response.status < 300) {
+                const nextMessage = this._messages.pop();
+                if (nextMessage) {
+                    this.doResolve(nextMessage);
+                }
+            }
+            return Promise.reject();
+        }).catch(() => {
+            this.enqueue(request);
+        });
+    }
+}
+
+export default MessageQueue;

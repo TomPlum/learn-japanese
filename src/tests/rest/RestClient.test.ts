@@ -221,4 +221,8 @@ describe("Rest Client", () => {
             await expect(() => RestClient.delete("", {})).rejects.toThrow("Host URI is not defined!");
         });
     });
+
+    describe("Send", () => {
+        test.todo("Test the send function")
+    });
 });
