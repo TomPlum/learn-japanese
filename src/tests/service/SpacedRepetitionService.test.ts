@@ -1,6 +1,6 @@
 import SpacedRepetitionService from "../../service/SpacedRepetitionService";
 import { mocked } from "ts-jest/utils";
-import SpaceRepetitionRepository from "../../repository/SpaceRepetitionRepository";
+import FlashCardRepository from "../../repository/FlashCardRepository";
 import SpaceRepetitionFeedback from "../../domain/learn/spacedrepetition/SpaceRepetitionFeedback";
 import Confidence from "../../domain/learn/spacedrepetition/Confidence";
 import SpaceRepetitionDetails from "../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
@@ -12,7 +12,7 @@ jest.mock("../../repository/SpaceRepetitionRepository");
 
 describe("Space Repetition Service", () => {
 
-    const repository = mocked(new SpaceRepetitionRepository(), true);
+    const repository = mocked(new FlashCardRepository(), true);
     const service = new SpacedRepetitionService(repository);
 
     beforeEach(() => {

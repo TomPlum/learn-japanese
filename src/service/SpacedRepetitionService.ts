@@ -1,15 +1,15 @@
 import SpaceRepetitionFeedback from "../domain/learn/spacedrepetition/SpaceRepetitionFeedback";
 import SpaceRepetitionDetails from "../domain/learn/spacedrepetition/SpaceRepetitionDetails";
-import SpaceRepetitionRepository from "../repository/SpaceRepetitionRepository";
+import FlashCardRepository from "../repository/FlashCardRepository";
 import { supermemo } from "supermemo";
 import dayjs from 'dayjs';
 import { FlashCard } from "../domain/learn/FlashCard";
 
 class SpacedRepetitionService {
 
-    private readonly repository: SpaceRepetitionRepository;
+    private readonly repository: FlashCardRepository;
 
-    constructor(repository = new SpaceRepetitionRepository()) {
+    constructor(repository = new FlashCardRepository()) {
         this.repository = repository;
     }
 

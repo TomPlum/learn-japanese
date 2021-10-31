@@ -1,7 +1,7 @@
 import MessageQueue from "../rest/MessageQueue";
 import { FlashCard } from "../domain/learn/FlashCard";
 
-class SpaceRepetitionRepository {
+class FlashCardRepository {
 
     private readonly queue = MessageQueue.fromLocalStorage();
 
@@ -20,4 +20,4 @@ class SpaceRepetitionRepository {
     }
 }
 
-export default SpaceRepetitionRepository;
+export default FlashCardRepository;
