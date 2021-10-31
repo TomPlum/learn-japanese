@@ -1,28 +1,21 @@
-import { Learnable } from "../Learnable";
 import Confidence from "./Confidence";
-import SpaceRepetitionDetails from "./SpaceRepetitionDetails";
+import { FlashCard } from "../FlashCard";
 
 class SpaceRepetitionFeedback {
-    private readonly _question: Learnable;
     private readonly _confidence: Confidence;
-    private readonly _details: SpaceRepetitionDetails;
+    private readonly _card: FlashCard;
 
-    constructor(question: Learnable, confidence: Confidence, item: SpaceRepetitionDetails) {
-        this._question = question;
+    constructor(card: FlashCard, confidence: Confidence) {
         this._confidence = confidence;
-        this._details = item;
-    }
-
-    get question(): Learnable {
-        return this._question;
+        this._card = card;
     }
 
     get confidence(): Confidence {
         return this._confidence;
     }
 
-    get details(): SpaceRepetitionDetails {
-        return this._details;
+    get card(): FlashCard {
+        return this._card;
     }
 }
 

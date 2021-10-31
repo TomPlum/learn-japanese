@@ -6,6 +6,7 @@ import ConfirmModal from "../ui/ConfirmModal";
 import QuitButton from "../ui/buttons/QuitButton";
 import SessionProgressBar from "../ui/SessionProgressBar";
 import FlashCard, { CardProps } from "./FlashCard";
+import { FlashCard as FlashCardDomain }from "../../domain/learn/FlashCard";
 import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Arrays from "../../utility/Arrays";
@@ -141,7 +142,7 @@ const Learn = (props: LearnProps) => {
                 <Row className={styles.buttonWrapper}>
                     <ConfidenceSelector
                         disabled={!hasPeeked}
-                        feedback={new SpaceRepetitionFeedback(current, confidence!, new SpaceRepetitionDetails(2.5, 0, 0, "2021-10-23"))}
+                        feedback={new SpaceRepetitionFeedback(new FlashCardDomain(1, new SpaceRepetitionDetails(2.5, 0, 0, "2021-10-23")), confidence!)}
                         key={current.getUniqueID()}
                         onSelect={onSelectConfidenceRating}
                     />
