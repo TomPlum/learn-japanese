@@ -223,6 +223,19 @@ describe("Rest Client", () => {
     });
 
     describe("Send", () => {
-        test.todo("Test the send function")
+        it("Should call axios with the correct method, URI and configuration", () => {
+            mockedAxios.mockResolvedValue({ status: 204 });
+
+            return RestClient.send<undefined>("GET", "/test/endpoint", { value: "test" }).then(() => {
+                expect(mockedAxios).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/test/endpoint",
+                    {
+                        method: "GET",
+                        headers: { "Content-Type": "application/json", },
+                        data: "{\"value\":\"test\"}"
+                    }
+                );
+            });
+        });
     });
 });
