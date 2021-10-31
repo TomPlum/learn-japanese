@@ -59,8 +59,8 @@ test("Resolving the queue should re-enqueue a message if its API request fails",
 
     expect(mockRestClient).toHaveBeenCalledTimes(3);
     expect(mockRestClient).toHaveBeenNthCalledWith(1, "PUT", "/example", { value: 5 });
-    expect(mockRestClient).toHaveBeenNthCalledWith(2, "POST", "/update", { value: 1 });
-    expect(mockRestClient).toHaveBeenNthCalledWith(3, "PUT", "/example", { value: 5 });
+    expect(mockRestClient).toHaveBeenNthCalledWith(2, "PUT", "/example", { value: 5 });
+    expect(mockRestClient).toHaveBeenNthCalledWith(3, "POST", "/update", { value: 1 });
 });
 
 test("Resolving the queue should not fire any API requests if there are no queued messages", () => {
@@ -69,12 +69,12 @@ test("Resolving the queue should not fire any API requests if there are no queue
     expect(mockRestClient).not.toHaveBeenCalled();
 });
 
-test("Resolving the queue should update the local storage afterwards", () => {
+test("Resolving the queue should update the local storage afterwards", async () => {
     localStorage.setItem("mq", JSON.stringify([{ method: "POST", endpoint: "/update", body: { value: 1 } }]));
     mockRestClient.mockResolvedValue({ status: 200 });
     const queue = MessageQueue.fromLocalStorage();
 
-    queue.resolve();
+    await queue.resolve();
 
     expect(JSON.parse(localStorage.getItem("mq")!)).toStrictEqual([]);
 });
