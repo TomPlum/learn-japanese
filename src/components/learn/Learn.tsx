@@ -142,7 +142,7 @@ const Learn = (props: LearnProps) => {
                 <Row className={styles.buttonWrapper}>
                     <ConfidenceSelector
                         disabled={!hasPeeked}
-                        feedback={new SpaceRepetitionFeedback(new FlashCardDomain(1, new SpaceRepetitionDetails(2.5, 0, 0, "2021-10-23")), confidence!)}
+                        feedback={new SpaceRepetitionFeedback(new FlashCardDomain(1, current, new SpaceRepetitionDetails(2.5, 0, 0, "2021-10-23")), confidence!)}
                         key={current.getUniqueID()}
                         onSelect={onSelectConfidenceRating}
                     />

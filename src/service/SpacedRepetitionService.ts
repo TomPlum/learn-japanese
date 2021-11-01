@@ -21,7 +21,7 @@ class SpacedRepetitionService {
         const { interval, repetition, efactor } = supermemo(feedback.card.details, feedback.confidence.value);
         const dueDate = dayjs(Date.now()).add(interval, 'day').toISOString();
         const updatedDetails = new SpaceRepetitionDetails(efactor, interval, repetition, dueDate);
-        const card = new FlashCard(feedback.card.id, updatedDetails)
+        const card = new FlashCard(feedback.card.id, feedback.card.value, updatedDetails)
         this.repository.update(card);
     }
 }
