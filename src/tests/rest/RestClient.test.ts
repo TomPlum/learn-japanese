@@ -66,7 +66,7 @@ describe("Rest Client", () => {
                     "https://japanese.tomplumpton.me/learn-japanese/kanji/by-character/人",
                     {
                         method: "GET",
-                        headers: { "Content-Type": "application/json", },
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" },
                         data: undefined
                     }
                 )
@@ -140,7 +140,7 @@ describe("Rest Client", () => {
                     "https://japanese.tomplumpton.me/learn-japanese/kanji/by-character/人",
                     {
                         method: "POST",
-                        headers: { "Content-Type": "application/json", },
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" },
                         data: "{\"request\":\"Hello\"}"
                     }
                 );
@@ -166,7 +166,7 @@ describe("Rest Client", () => {
                     "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
                     {
                         method: "PUT",
-                        headers: { "Content-Type": "application/json", }
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" }
                     }
                 );
             });
@@ -181,7 +181,7 @@ describe("Rest Client", () => {
                     {
                         method: "PUT",
                         data: "{\"key\":\"value\"}",
-                        headers: { "Content-Type": "application/json", }
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" }
                     }
                 );
             });
@@ -206,7 +206,7 @@ describe("Rest Client", () => {
                     "https://japanese.tomplumpton.me/learn-japanese/user/delete",
                     {
                         method: "DELETE",
-                        headers: { "Content-Type": "application/json", }
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" }
                     }
                 );
             });
@@ -231,7 +231,7 @@ describe("Rest Client", () => {
                     "https://japanese.tomplumpton.me/learn-japanese/test/endpoint",
                     {
                         method: "GET",
-                        headers: { "Content-Type": "application/json", },
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" },
                         data: "{\"value\":\"test\"}"
                     }
                 );

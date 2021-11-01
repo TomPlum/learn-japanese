@@ -2,9 +2,6 @@ import axios, { AxiosError, Method } from "axios"
 import { Environment } from "../utility/Environment";
 import { store } from "../store";
 
-//Set the Authorization header
-axios.defaults.headers.common['Authorization'] = `Bearer ${store.getState().user.user?.token}`;
-
 export interface APIResponse<T> {
     data: T | undefined;
     status: number;
@@ -49,7 +46,8 @@ class RestClient {
         return await axios(URI, {
             method: method,
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${store.getState().user.user?.token}`
             },
             data: body ? JSON.stringify(body) : undefined
         }).then(async response => {
