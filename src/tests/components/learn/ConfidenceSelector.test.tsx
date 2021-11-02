@@ -8,6 +8,7 @@ import { store } from "../../../store";
 import SpaceRepetitionFeedback from "../../../domain/learn/spacedrepetition/SpaceRepetitionFeedback";
 import Definition from "../../../domain/sentence/Definition";
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
+import { FlashCard } from "../../../domain/learn/FlashCard";
 
 const mockGetDaysTillNextReview = jest.fn();
 jest.mock("../../../service/SpacedRepetitionService", () => {
@@ -61,7 +62,7 @@ beforeEach(() => {
     props = {
         disabled: false,
         onSelect: onSelectHandler,
-        feedback: new SpaceRepetitionFeedback(definition, Confidence.PERFECT, spaceRepetitionDetails)
+        feedback: new SpaceRepetitionFeedback(new FlashCard(1, definition, spaceRepetitionDetails), Confidence.PERFECT)
     }
 });
 
