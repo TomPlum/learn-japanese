@@ -5,15 +5,24 @@ import { supermemo } from "supermemo";
 import dayjs from 'dayjs';
 import { FlashCard } from "../domain/learn/FlashCard";
 
+export interface FlashCardsResponse {
+    cards: FlashCard[];
+    error?: string;
+}
+
 class SpacedRepetitionService {
 
-    private readonly repository: FlashCardRepository;
+    private readonly repository = new FlashCardRepository();
 
-    constructor(repository = new FlashCardRepository()) {
-        this.repository = repository;
+    public getKanjiFlashCards(): Promise<FlashCardsResponse> {
+        return this.repository.getKanjiFlashCards().then(response => {
+            return { cards: response };
+        }).catch(response => {
+            return { cards: [], error: response.error };
+        });
     }
 
-    public getDaysTillNextReview(feedback: SpaceRepetitionFeedback) {
+    public getDaysTillNextReview(feedback: SpaceRepetitionFeedback): number {
         return supermemo(feedback.card.details, feedback.confidence.value).interval;
     }
 

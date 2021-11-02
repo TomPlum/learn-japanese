@@ -27,6 +27,12 @@ describe("Flash Card Repository", () => {
     const repository = new FlashCardRepository();
 
     describe("Get Kanji Flash Cards", () => {
+        it("Should call the rest client with the correct endpoint", () => {
+            mockRestClient.mockResolvedValue({ data: [] });
+            repository.getKanjiFlashCards();
+            expect(mockRestClient).toHaveBeenCalledWith("/learn/flash-cards/kanji");
+        });
+
         it("Should return an array of flash cards if the user has any outstanding", () => {
             mockRestClient.mockResolvedValue({
                 data: [{
