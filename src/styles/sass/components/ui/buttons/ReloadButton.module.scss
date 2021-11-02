@@ -1,0 +1,7 @@
+.icon {
+  transition: all ease-in-out 0.4s;
+}
+
+.icon:hover {
+  transform: rotateZ(270deg);
+}
