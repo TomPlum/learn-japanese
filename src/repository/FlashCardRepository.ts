@@ -24,7 +24,7 @@ class FlashCardRepository {
      * @return cards A list of outstanding flash cards.
      */
     public getKanjiFlashCards(): Promise<FlashCard[]> {
-        return RestClient.get<FlashCardsResponse[]>("/learn/kanji-flash-cards/kanji").then(response => {
+        return RestClient.get<FlashCardsResponse[]>("/learn/flash-cards/kanji").then(response => {
             if (response.data) {
                 const data = response.data;
                 return data.map(el => {
