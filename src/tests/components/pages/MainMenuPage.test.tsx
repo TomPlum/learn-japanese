@@ -170,7 +170,7 @@ describe('Learn', () => {
       expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
       fireEvent.click(screen.getByText('あ')); //Flip the first card
-      fireEvent.click(screen.getByTitle('Perfect')); //Mark the card as remembered
+      fireEvent.click(screen.getByTitle('I remembered it')); //Mark the card as remembered
       fireEvent.click(screen.getByTitle('Quit')); //Open the Quit confirmation modal
       fireEvent.click(screen.getByText('Yes')); //Confirm you want to quit
 
@@ -187,11 +187,11 @@ describe('Learn', () => {
       expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
       fireEvent.click(screen.getByText('あ')); //Flip the first card
-      fireEvent.click(screen.getByTitle('Blackout')); //Mark the card as forgot
+      fireEvent.click(screen.getByTitle('I couldn\'t remember it')); //Mark the card as forgot
       fireEvent.click(screen.getByText('Next')); //Click next to go to the next card
 
       fireEvent.click(screen.getByText('い')); //Flip the first card
-      fireEvent.click(screen.getByTitle('Perfect')); //Mark the card as remembered
+      fireEvent.click(screen.getByTitle('I remembered it')); //Mark the card as remembered
       fireEvent.click(screen.getByText('Finish')); //Click finish to end the session
 
       expect(screen.getByTestId('learning-results-screen')).toBeInTheDocument(); //Should render results screen
@@ -212,7 +212,7 @@ describe('Learn', () => {
       expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
       fireEvent.click(screen.getByText('あ')); //Flip the first card
-      fireEvent.click(screen.getByTitle('Blackout')); //Mark the card as forgot
+      fireEvent.click(screen.getByTitle('I couldn\'t remember it')); //Mark the card as forgot
       fireEvent.click(screen.getByText('Next')); //Click next to go to the next card
 
       fireEvent.click(screen.getByTitle('Quit')); //Open the Quit confirmation modal

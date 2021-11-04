@@ -1,36 +1,39 @@
 import React, { useState } from "react";
-import LearningSessionResult from "../../domain/learn/LearningSessionResult";
-import { Learnable } from "../../domain/learn/Learnable";
+import { OnlineLearningSessionResult } from "../../domain/learn/LearningSessionResult";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import ConfirmModal from "../ui/ConfirmModal";
 import QuitButton from "../ui/buttons/QuitButton";
 import SessionProgressBar from "../ui/SessionProgressBar";
 import FlashCard, { CardProps } from "./FlashCard";
+import { FlashCard as FlashCardDomain } from "../../domain/learn/FlashCard";
 import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Arrays from "../../utility/Arrays";
 import styles from "../../styles/sass/components/learn/Learn.module.scss";
-import LearningFeedbackButton, { LearningFeedback } from "../ui/buttons/LearningFeedbackButton";
+import ConfidenceSelector from "./ConfidenceSelector";
+import Confidence from "../../domain/learn/spacedrepetition/Confidence";
+import SpaceRepetitionFeedback from "../../domain/learn/spacedrepetition/SpaceRepetitionFeedback";
 
-export interface LearnProps {
-    data: Learnable[];
+export interface LearnOnlineProps {
+    data: FlashCardDomain[];
     card: CardProps;
-    onFinish: (result: LearningSessionResult) => void;
+    onFinish: (result: OnlineLearningSessionResult) => void;
 }
 
-const Learn = (props: LearnProps) => {
+const LearnOnline = (props: LearnOnlineProps) => {
 
     const [first, initialRemaining] = Arrays.getRandomObject(props.data);
 
-    const [current, setCurrent] = useState<Learnable>(first);
-    const [remaining, setRemaining] = useState<Learnable[]>(initialRemaining);
+    const [current, setCurrent] = useState<FlashCardDomain>(first);
+    const [remaining, setRemaining] = useState<FlashCardDomain[]>(initialRemaining);
     const [paused, setPaused] = useState(false);
     const [showRomaji, setShowRomaji] = useState(false);
     const [hasPeeked, setHasPeeked] = useState(false);
     const [hasRemembered, setHasRemembered] = useState(false);
     const [hasForgotten, setHasForgotten] = useState(false);
-    const [remembered, setRemembered] = useState<Learnable[]>([]);
-    const [forgotten, setForgotten] = useState<Learnable[]>([]);
+    const [confidence, setConfidence] = useState<Confidence | undefined>(undefined);
+    const [remembered, setRemembered] = useState<FlashCardDomain[]>([]);
+    const [forgotten, setForgotten] = useState<FlashCardDomain[]>([]);
 
     const onNext = () => {
         const [next, nextRemaining] = Arrays.getRandomObject(remaining);
@@ -60,14 +63,16 @@ const Learn = (props: LearnProps) => {
 
     const onFlip = (flips: number) => setHasPeeked(flips > 0);
 
-    const onMemorised = () => {
-        setHasRemembered(true);
-        setHasForgotten(false);
-    }
+    const onSelectConfidenceRating = (confidence: Confidence) => {
+        setConfidence(confidence);
 
-    const onForgot = () => {
-        setHasForgotten(true);
-        setHasRemembered(false);
+        if (confidence.value < 3) {
+            setHasForgotten(true);
+            setHasRemembered(false);
+        } else {
+            setHasRemembered(true);
+            setHasForgotten(false);
+        }
     }
 
     const hasCardsRemaining = remaining.length > 0;
@@ -122,8 +127,8 @@ const Learn = (props: LearnProps) => {
                 <Row className={styles.cardWrapper}>
                     <Col className={styles.col}>
                         <FlashCard
-                            data={current}
-                            key={current.getMeanings()[0]}
+                            data={current.value}
+                            key={current.value.getMeanings()[0]}
                             onFlip={onFlip}
                             front={props.card.front}
                             back={props.card.back}
@@ -133,24 +138,12 @@ const Learn = (props: LearnProps) => {
                 </Row>
 
                 <Row className={styles.buttonWrapper}>
-                    <Col xs={6} className={[styles.buttonColumnLeft, styles.col].join(" ")}>
-                        <LearningFeedbackButton
-                            disabled={!hasPeeked}
-                            active={hasForgotten}
-                            onClick={onForgot}
-                            type={LearningFeedback.FORGOT}
-                            className={styles.forgottenButton}
-                        />
-                    </Col>
-                    <Col xs={6} className={[styles.buttonColumnRight, styles.col].join(" ")}>
-                        <LearningFeedbackButton
-                            disabled={!hasPeeked}
-                            active={hasRemembered}
-                            onClick={onMemorised}
-                            type={LearningFeedback.REMEMBERED}
-                            className={styles.rememberedButton}
-                        />
-                    </Col>
+                    <ConfidenceSelector
+                        disabled={!hasPeeked}
+                        feedback={new SpaceRepetitionFeedback(current, confidence!)}
+                        key={current.id}
+                        onSelect={onSelectConfidenceRating}
+                    />
 
                     <Col xs={12} className={styles.col}>
                         <Button
@@ -168,4 +161,4 @@ const Learn = (props: LearnProps) => {
     );
 }
 
-export default Learn;
+export default LearnOnline;
