@@ -23,6 +23,7 @@ import DataSettings from "../../domain/session/settings/data/DataSettings";
 import LearnSettings from "../../domain/session/settings/LearnSettings";
 import UserForm from "../user/UserForm";
 import ErrorContainer from "../error/ErrorContainer";
+import CardContainer from "../cards/CardContainer";
 
 interface MainMenuPageState {
     loading: boolean;
@@ -86,6 +87,8 @@ class MainMenuPage extends Component<RouteComponentProps<PageParameters>, MainMe
                         onChangeAppMode={this.handleChangeAppMode}
                         onLaunchLoginModal={() => this.setState({ inLoginModal: true })}
                     />
+
+                    <CardContainer />
 
                     {isInMenu &&
                         <SettingsMenu
