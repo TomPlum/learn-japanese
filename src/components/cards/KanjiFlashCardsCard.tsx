@@ -36,7 +36,7 @@ const KanjiFlashCardsCard = (props: KanjiFlashCardsCardProps) => {
                 setError(response.error ?? "Error loading cards.");
             }
         }).catch(response => {
-            setError(response.error);
+            setError(response.error ?? "Error loading cards.");
         }).finally(() => {
             setLoading(false);
         });
@@ -69,7 +69,7 @@ const KanjiFlashCardsCard = (props: KanjiFlashCardsCardProps) => {
                         <p className={styles.label}>{(cards.length > 1 ? "Cards" : "Card") + " to Review"}</p>
                     </Col>
                     <Col>
-                        <Button>Review</Button>
+                        <Button disabled={!!error}>Review</Button>
                     </Col>
                 </Row>
             </Card.Body>

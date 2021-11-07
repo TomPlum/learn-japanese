@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiFlashCardsCard from "../../../components/cards/KanjiFlashCardsCard";
 import { User } from "../../../slices/UserSlice";
 import Definition from "../../../domain/sentence/Definition";
@@ -65,7 +65,24 @@ test('Should render the error message if one is returned from a failed API respo
 });
 
 test('Should render a default error message if there are no cards or error message in the response', async () => {
-    mockGetKanjiFlashCards.mockRejectedValue({ cards: [], error: undefined });
+    mockGetKanjiFlashCards.mockResolvedValue({ cards: [], error: undefined });
     await setup();
     expect(await screen.findByText('Error loading cards.')).toBeInTheDocument();
+});
+
+test('Should render a default error message if the service promise is rejected and there is no message', async () => {
+    mockGetKanjiFlashCards.mockRejectedValue({ error: undefined });
+    await setup();
+    expect(await screen.findByText('Error loading cards.')).toBeInTheDocument();
+});
+
+test('Clicking the refresh button should call the service method', async () => {
+    mockGetKanjiFlashCards.mockResolvedValue({ cards: [flashCard] });
+    await setup();
+
+    expect(await screen.findByText('Card to Review'));
+    fireEvent.click(screen.getByTitle('Refresh'));
+
+    expect(await screen.findByText('Card to Review'));
+    expect(mockGetKanjiFlashCards).toHaveBeenCalledTimes(2);
 });
