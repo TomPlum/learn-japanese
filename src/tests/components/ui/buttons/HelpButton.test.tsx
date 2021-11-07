@@ -15,10 +15,10 @@ test('Clicking on the kanji bank link should route to the help page', async () =
     expect(await screen.findByText('Jōyō Kanji Bank')).toHaveAttribute('href', "/example-base-path/help");
 });
 
-test('Clicking on the genki knowledge bank link should route to the help page', async () => {
+test('Clicking on the genki knowledge bank link should route to the genki page', async () => {
     const { button } = setup();
     fireEvent.click(button);
-    expect(await screen.findByText('Genki Knowledge Bank')).toHaveAttribute('href', "/example-base-path/help");
+    expect(await screen.findByText('Genki Knowledge Bank')).toHaveAttribute('href', "/example-base-path/genki");
 });
 
 test('Clicking on the super memo 2 algorithm link should route to the help page', async () => {

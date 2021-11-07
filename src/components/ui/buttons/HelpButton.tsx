@@ -10,7 +10,7 @@ const HelpButton = () => {
                 Jōyō Kanji Bank
             </NavigationButton.Item>
 
-            <NavigationButton.Item icon={faBook} href="/help" iconClass={styles.genki}>
+            <NavigationButton.Item icon={faBook} href="/genki" iconClass={styles.genki}>
                 Genki Knowledge Bank
             </NavigationButton.Item>
 
