@@ -7,7 +7,7 @@ import ProfilePage from "../pages/ProfilePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import HelpPage from "../pages/HelpPage";
 import styles from "../../styles/sass/components/layout/Main.module.scss";
-import GenkiIndex from "../pages/GenkiIndex";
+import GenkiIndexPage from "../pages/GenkiIndexPage";
 
 class Main extends Component {
     render() {
@@ -20,7 +20,7 @@ class Main extends Component {
                         <Route exact path="/search" component={SearchPage}/>
                         <Route exact path="/help" component={HelpPage} />
                         <Route exact path="/profile" component={ProfilePage} />
-                        <Route exact path="/genki" component={GenkiIndex} />
+                        <Route exact path="/genki" component={GenkiIndexPage} />
                         <Route component={NotFoundPage} />
                     </Switch>
                 </HashRouter>
