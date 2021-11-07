@@ -86,3 +86,15 @@ test('Clicking the refresh button should call the service method', async () => {
     expect(await screen.findByText('Card to Review'));
     expect(mockGetKanjiFlashCards).toHaveBeenCalledTimes(2);
 });
+
+test('Should disable the review button if there are no cards to review', async () => {
+    mockGetKanjiFlashCards.mockResolvedValue({ cards: [] });
+    const { review } = await setup();
+    expect(review).toBeDisabled();
+});
+
+test('Should enable the review button if there are cards to review', async () => {
+    mockGetKanjiFlashCards.mockResolvedValue({ cards: [flashCard, flashCard] });
+    const { review } = await setup();
+    expect(review).not.toBeDisabled();
+});

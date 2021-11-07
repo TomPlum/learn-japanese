@@ -69,7 +69,7 @@ const KanjiFlashCardsCard = (props: KanjiFlashCardsCardProps) => {
                         <p className={styles.label}>{(cards.length !== 1 ? "Cards" : "Card") + " to Review"}</p>
                     </Col>
                     <Col>
-                        <Button disabled={!!error}>Review</Button>
+                        <Button disabled={!!error || cards.length === 0}>Review</Button>
                     </Col>
                 </Row>
             </Card.Body>
