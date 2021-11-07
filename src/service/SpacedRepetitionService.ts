@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { FlashCard } from "../domain/learn/FlashCard";
 
 export interface FlashCardsResponse {
-    cards: FlashCard[];
+    cards?: FlashCard[];
     error?: string;
 }
 
@@ -18,7 +18,7 @@ class SpacedRepetitionService {
         return this.repository.getKanjiFlashCards().then(response => {
             return { cards: response };
         }).catch(response => {
-            return { cards: [], error: response.error };
+            return { cards: undefined, error: response.error };
         });
     }
 

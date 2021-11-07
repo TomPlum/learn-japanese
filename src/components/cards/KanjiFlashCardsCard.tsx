@@ -27,11 +27,11 @@ const KanjiFlashCardsCard = (props: KanjiFlashCardsCardProps) => {
 
     const loadKanjiFlashCards = () => {
         setLoading(true);
+        setError(undefined);
 
         service.getKanjiFlashCards().then((response: FlashCardsResponse) => {
-            if (response.cards.length > 0) {
+            if (response.cards) {
                 setCards(response.cards);
-                setError(undefined);
             } else {
                 setError(response.error ?? "Error loading cards.");
             }
@@ -66,7 +66,7 @@ const KanjiFlashCardsCard = (props: KanjiFlashCardsCardProps) => {
                     <Col>
                         {!loading && <span className={styles.value}>{cards.length}</span>}
                         <LoadingSpinner active={loading} className={styles.loading} />
-                        <p className={styles.label}>{(cards.length > 1 ? "Cards" : "Card") + " to Review"}</p>
+                        <p className={styles.label}>{(cards.length !== 1 ? "Cards" : "Card") + " to Review"}</p>
                     </Col>
                     <Col>
                         <Button disabled={!!error}>Review</Button>

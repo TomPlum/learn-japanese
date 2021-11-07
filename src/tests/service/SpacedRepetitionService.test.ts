@@ -50,10 +50,10 @@ describe("Spaced Repetition Service", () => {
             });
         });
 
-        it("Should return an empty array if the API call is unsuccessful", () => {
+        it("Should return undefined cards if the API call is unsuccessful", () => {
             mockGetKanjiFlashCards.mockRejectedValueOnce({});
             return service.getKanjiFlashCards().then(response => {
-                expect(response.cards).toStrictEqual([]);
+                expect(response.cards).toBeUndefined();
             });
         });
     });

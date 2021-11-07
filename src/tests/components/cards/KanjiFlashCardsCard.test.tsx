@@ -59,13 +59,13 @@ test('Should render the cards to review in singular form if there is only 1 card
 });
 
 test('Should render the error message if one is returned from a failed API response', async () => {
-    mockGetKanjiFlashCards.mockRejectedValue({ cards: [], error: "Something went wrong."});
+    mockGetKanjiFlashCards.mockRejectedValue({ cards: undefined, error: "Something went wrong."});
     await setup();
     expect(await screen.findByText('Something went wrong.')).toBeInTheDocument();
 });
 
-test('Should render a default error message if there are no cards or error message in the response', async () => {
-    mockGetKanjiFlashCards.mockResolvedValue({ cards: [], error: undefined });
+test('Should render a default error message if there are undefined cards and no error message in the response', async () => {
+    mockGetKanjiFlashCards.mockResolvedValue({ cards: undefined, error: undefined });
     await setup();
     expect(await screen.findByText('Error loading cards.')).toBeInTheDocument();
 });
