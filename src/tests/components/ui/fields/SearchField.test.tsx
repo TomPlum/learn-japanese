@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import SearchField, { SearchFieldProps } from "../../../../components/ui/fields/SearchField";
 
 const onChangeHandler = jest.fn();
+const onClearHandler = jest.fn();
 
 let props: SearchFieldProps;
 
@@ -19,7 +20,9 @@ beforeEach(() => {
         append: "Results",
         placeholder: "Enter the romaji",
         value: "test",
-        onChange: onChangeHandler
+        onChange: onChangeHandler,
+        enableClear: false,
+        onClear: onClearHandler
     };
 });
 
@@ -57,4 +60,23 @@ test('Passing the disabled prop as false should disable the input', () => {
     props.disabled = false;
     setup();
     expect(screen.getByPlaceholderText('Enter the romaji')).not.toBeDisabled();
+});
+
+test('Passing enableClear as true should render a clear button', () => {
+    props.enableClear = true;
+    setup();
+    expect(screen.getByTitle('Clear Search')).toBeInTheDocument();
+});
+
+test('Passing enableClear as false should not render a clear button', () => {
+    props.enableClear = false;
+    setup();
+    expect(screen.queryByTitle('Clear Search')).not.toBeInTheDocument();
+});
+
+test('Clicking the clear button should call the onClear event handler', () => {
+    props.enableClear = true;
+    setup();
+    fireEvent.click(screen.getByTitle('Clear Search'));
+    expect(onClearHandler).toHaveBeenCalled();
 });

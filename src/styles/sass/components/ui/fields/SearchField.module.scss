@@ -1,3 +1,5 @@
+@import "src/styles/sass/colours";
+
 .inputGroup {
   width: 100%;
   max-width: 700px;
@@ -5,4 +7,18 @@
 
 .input::placeholder {
   text-align: left;
+}
+
+.clear {
+  color: $light-3;
+  position: absolute;
+  top: 10px;
+  right: 115px;
+  z-index: 999;
+  transition: color ease-in-out 0.2s;
+  cursor: pointer;
+}
+
+.clear:hover {
+  color: $dark-1;
 }
