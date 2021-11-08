@@ -49,6 +49,8 @@ const GenkiIndexPage = () => {
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState(globalFilter);
 
+    const hasError = !!error;
+
     useEffect(() => {
         setLoading(true);
         setError(undefined);
@@ -83,21 +85,30 @@ const GenkiIndexPage = () => {
     return (
         <Container fluid className={styles.wrapper}>
 
-            <Alert variant={!!error ? "danger" : "success"} className={styles.banner}>{
-                !error ? <>
-                    <FontAwesomeIcon
-                        spin={loading}
-                        className={styles.spinner}
-                        icon={loading ? faCircleNotch : faCheckCircle}
-                    />
-                    <span>
-                        {!loading ? `Showing ${data.current.length} definitions from Genki I and II.` : "Loading..."}
-                    </span>
-                </> : <>
-                    <FontAwesomeIcon icon={faExclamationCircle} className={styles.spinner}/>
-                    <span>{error}</span>
-                </>
-            }</Alert>
+            {hasError && <Alert variant="danger" className={styles.banner}>
+                <FontAwesomeIcon icon={faExclamationCircle} className={styles.spinner}/>
+                <span>{error}</span>
+            </Alert>}
+
+            {!hasError && !loading && <Alert variant="success" className={styles.banner}>
+                <FontAwesomeIcon
+                    spin={loading}
+                    icon={faCheckCircle}
+                    className={styles.spinner}
+                />
+                <span>
+                    {`Showing ${data.current.length} definitions from Genki I and II.`}
+                </span>
+            </Alert>}
+
+            {loading && <Alert variant="info">
+                <FontAwesomeIcon
+                    spin
+                    icon={faCircleNotch}
+                    className={styles.spinner}
+                />
+                <span>Loading...</span>
+            </Alert>}
 
             <SearchField
                 enableClear
