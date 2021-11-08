@@ -11,12 +11,45 @@
 .table {
   width: 100%;
   border-spacing: 0;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.table th {
+  background-color: $dark-1;
+  border: 2px solid $light-3;
+  color: $light-1;
+}
+
+.table tbody tr td {
+  margin-bottom: 5px;
+}
+
+.table th:first-of-type {
+  border-top-left-radius: 6px;
+}
+
+.table th:last-of-type {
+  border-top-right-radius: 6px;
+}
+
+.table tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 6px;
+}
+
+.table tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 6px;
+}
+
+.table tbody tr td, .table thead tr th {
+  padding: 10px;
 }
 
 .genkiOne {
   color: $dark-2;
-  background-color: #faab69;
-  border: 2px solid #fb8102;
+  background-color: $genki-1-light;
+  border: 2px solid $genki-1-dark;
   transition: all ease-in-out 0.2s;
 }
 
@@ -26,8 +59,9 @@
 
 .genkiTwo {
   color: $dark-2;
-  background-color: #89cf87;
-  border: 2px solid #33b639;
+  background-color: $genki-2-light;
+  border: 2px solid $genki-2-dark;
+  border-radius: 5px;
   transition: all ease-in-out 0.2s;
 }
 
@@ -46,4 +80,8 @@
 
 .banner {
   transition: all ease-in-out 0.2s;
+}
+
+.sort {
+  float: right;
 }

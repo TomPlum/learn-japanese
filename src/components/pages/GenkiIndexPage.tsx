@@ -3,11 +3,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Container } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/GenkiIndexPage.module.scss";
 import SearchField from "../ui/fields/SearchField";
-import { faCheckCircle, faCircleNotch, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faChevronDown, faChevronUp, faCircleNotch, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from "react-table";
+import { HeaderGroup, Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, UseSortByColumnProps, useTable } from "react-table";
 import { AnimatePresence, motion } from "framer-motion";
-import Pagination from "../ui/table/Pagination";
+import TablePagination from "../ui/table/TablePagination";
+import Copyable from "../ui/Copyable";
 
 interface TableData {
     lesson: number;
@@ -37,7 +38,7 @@ const GenkiIndexPage = () => {
         // @ts-ignore
         getTableProps, getTableBodyProps, headerGroups, prepareRow, page, canPreviousPage, canNextPage,
         // @ts-ignore
-        pageOptions, pageCount, gotoPage, nextPage, previousPage, setPageSize, state: { pageIndex, pageSize, globalFilter },
+        pageOptions, pageCount, gotoPage, nextPage, previousPage, setPageSize, state: { pageIndex, globalFilter },
         // @ts-ignore
         setGlobalFilter, preGlobalFilteredRows
     } = table
@@ -94,6 +95,7 @@ const GenkiIndexPage = () => {
                 disabled={loading}
                 onChange={onSearch}
                 className={styles.search}
+                placeholder="Search for a meaning, kana, kanji or lesson"
                 append={`${preGlobalFilteredRows?.length ?? 0} Results`}
             />
 
@@ -102,13 +104,22 @@ const GenkiIndexPage = () => {
                     <thead>
                     {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>{
-                            headerGroup.headers.map(column => (
+                            headerGroup.headers.map((column: any) => (
                                 <motion.th {...column.getHeaderProps({
                                     // @ts-ignore
                                     layoutTransition: spring,
-                                    style: { minWidth: column.minWidth }
+                                    style: { minWidth: column.minWidth },
+                                    // @ts-ignore
+                                    ...column.getSortByToggleProps()
                                 })}>
-                                    {column.render('Header')}
+                                    <span>{column.render('Header')}</span>
+                                    <span>
+                                        {
+                                            column.isSortedDesc ?
+                                                <FontAwesomeIcon icon={faChevronDown} className={styles.sort} /> :
+                                                <FontAwesomeIcon icon={faChevronUp} className={styles.sort} />
+                                        }
+                                    </span>
                                 </motion.th>
                             ))
                         }</tr>
@@ -131,7 +142,11 @@ const GenkiIndexPage = () => {
                                         return (
                                             // @ts-ignore
                                             <motion.td {...cell.getCellProps({ layoutTransition: spring })}>
-                                                {cell.render('Cell')}
+                                                <Copyable>
+                                                    <span>
+                                                        {cell.render('Cell')}
+                                                    </span>
+                                                </Copyable>
                                             </motion.td>
                                         )
                                     })
@@ -142,14 +157,14 @@ const GenkiIndexPage = () => {
                     </tbody>
                 </table>
 
-                <Pagination
+                <TablePagination
+                    onNextPage={nextPage}
+                    canNextPage={canNextPage}
                     currentPage={pageIndex + 1}
+                    onPreviousPage={previousPage}
+                    onFirstPage={() => gotoPage(0)}
                     totalPages={pageOptions.length}
                     canPreviousPage={canPreviousPage}
-                    canNextPage={canNextPage}
-                    onPreviousPage={previousPage}
-                    onNextPage={nextPage}
-                    onFirstPage={() => gotoPage(0)}
                     onLastPage={() => gotoPage(pageCount - 1)}
                     onChangeQuantity={(value: number) => setPageSize(value)}
                 />
