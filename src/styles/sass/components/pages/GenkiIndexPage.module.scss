@@ -10,6 +10,7 @@
 
 .table {
   width: 100%;
+  border-collapse: separate;
   border-spacing: 0;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -18,32 +19,39 @@
 
 .table th {
   background-color: $dark-1;
-  border: 2px solid $light-3;
+  border-right: 2px solid $light-3;
+  border-bottom: 2px solid $light-3;
+  border-top: 2px solid $light-3;
   color: $light-1;
+  transition: color ease-in-out 0.2s;
 }
 
-.table tbody tr td {
-  margin-bottom: 5px;
+.table th:hover {
+  color: #FFF;
+}
+
+.table th:first-child {
+  border-left: 2px solid $light-3;
 }
 
 .table th:first-of-type {
-  border-top-left-radius: 6px;
+  border-top-left-radius: 10px;
 }
 
 .table th:last-of-type {
-  border-top-right-radius: 6px;
+  border-top-right-radius: 10px;
 }
 
 .table tr:last-of-type td:first-of-type {
-  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 10px;
 }
 
-.table tr:last-of-type td:last-of-type {
-  border-bottom-right-radius: 6px;
+.table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
 }
 
 .table tbody tr td, .table thead tr th {
-  padding: 10px;
+  padding: 12px;
 }
 
 .genkiOne {

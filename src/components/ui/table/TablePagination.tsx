@@ -2,6 +2,8 @@ import React from "react";
 import Form from "react-bootstrap/esm/Form";
 import { Col, Container, Pagination, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/ui/table/TablePagination.module.scss";
+import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface PaginationProps {
     currentPage: number;
@@ -27,8 +29,14 @@ const TablePagination = (props: PaginationProps) => {
             <Row>
                 <Col md={10} xs={7}>
                     <Pagination className={styles.pagination}>
-                        <Pagination.First onClick={props.onFirstPage} disabled={!props.canPreviousPage} />
-                        <Pagination.Prev onClick={props.onPreviousPage} disabled={!props.canPreviousPage} />
+                        <Pagination.First onClick={props.onFirstPage} disabled={!props.canPreviousPage}>
+                            <FontAwesomeIcon icon={faAngleDoubleLeft} title="First Page" fixedWidth />
+                        </Pagination.First>
+
+                        <Pagination.Prev onClick={props.onPreviousPage} disabled={!props.canPreviousPage}>
+                            <FontAwesomeIcon icon={faChevronLeft} size="sm" title="Previous Page" fixedWidth/>
+                        </Pagination.Prev>
+
                         <Pagination.Item>
                             <span>
                                 Page{' '}
@@ -37,8 +45,14 @@ const TablePagination = (props: PaginationProps) => {
                                 </strong>
                             </span>
                         </Pagination.Item>
-                        <Pagination.Next onClick={props.onNextPage} disabled={!props.canNextPage} />
-                        <Pagination.Last onClick={props.onLastPage} disabled={!props.canNextPage} />
+
+                        <Pagination.Next onClick={props.onNextPage} disabled={!props.canNextPage}>
+                            <FontAwesomeIcon icon={faChevronRight} size="sm" title="Next Page" fixedWidth />
+                        </Pagination.Next>
+
+                        <Pagination.Item onClick={props.onLastPage} disabled={!props.canNextPage}>
+                            <FontAwesomeIcon icon={faAngleDoubleRight} title="Last Page" fixedWidth />
+                        </Pagination.Item>
                     </Pagination>
                 </Col>
 
