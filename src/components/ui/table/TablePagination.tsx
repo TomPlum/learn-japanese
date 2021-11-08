@@ -4,7 +4,7 @@ import styles from "../../../styles/sass/components/ui/table/TablePagination.mod
 import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export interface PaginationProps {
+export interface TablePaginationProps {
     currentPage: number;
     totalPages: number;
     canPreviousPage: boolean;
@@ -16,11 +16,16 @@ export interface PaginationProps {
     onChangeQuantity: (quantity: number) => void;
 }
 
-const TablePagination = (props: PaginationProps) => {
+const TablePagination = (props: TablePaginationProps) => {
+
+    const {
+        currentPage, totalPages, canPreviousPage, canNextPage, onPreviousPage, onNextPage, onFirstPage,
+        onLastPage, onChangeQuantity
+    } = props;
 
     const onChangeShow = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const quantity = Number(e.target.value);
-        props.onChangeQuantity(quantity);
+        onChangeQuantity(quantity);
     }
 
     return (
@@ -28,35 +33,35 @@ const TablePagination = (props: PaginationProps) => {
             <Row>
                 <Col md={10} xs={7}>
                     <Pagination className={styles.pagination}>
-                        <Pagination.First onClick={props.onFirstPage} disabled={!props.canPreviousPage}>
-                            <FontAwesomeIcon icon={faAngleDoubleLeft} title="First Page" fixedWidth />
+                        <Pagination.First onClick={onFirstPage} disabled={!canPreviousPage} title="First Page">
+                            <FontAwesomeIcon icon={faAngleDoubleLeft} fixedWidth />
                         </Pagination.First>
 
-                        <Pagination.Prev onClick={props.onPreviousPage} disabled={!props.canPreviousPage}>
-                            <FontAwesomeIcon icon={faChevronLeft} size="sm" title="Previous Page" fixedWidth/>
+                        <Pagination.Prev onClick={onPreviousPage} disabled={!canPreviousPage} title="Previous Page">
+                            <FontAwesomeIcon icon={faChevronLeft} size="sm" fixedWidth/>
                         </Pagination.Prev>
 
                         <Pagination.Item>
                             <span>
                                 Page{' '}
                                 <strong>
-                                    {props.currentPage} of {props.totalPages}
+                                    {currentPage} of {totalPages}
                                 </strong>
                             </span>
                         </Pagination.Item>
 
-                        <Pagination.Next onClick={props.onNextPage} disabled={!props.canNextPage}>
-                            <FontAwesomeIcon icon={faChevronRight} size="sm" title="Next Page" fixedWidth />
+                        <Pagination.Next onClick={onNextPage} disabled={!canNextPage} title="Next Page">
+                            <FontAwesomeIcon icon={faChevronRight} size="sm" fixedWidth />
                         </Pagination.Next>
 
-                        <Pagination.Item onClick={props.onLastPage} disabled={!props.canNextPage}>
-                            <FontAwesomeIcon icon={faAngleDoubleRight} title="Last Page" fixedWidth />
+                        <Pagination.Item onClick={onLastPage} disabled={!canNextPage} title="Last Page">
+                            <FontAwesomeIcon icon={faAngleDoubleRight} fixedWidth />
                         </Pagination.Item>
                     </Pagination>
                 </Col>
 
                 <Col md={2} xs={5}>
-                    <Form.Control as="select" custom onChange={onChangeShow}>
+                    <Form.Control as="select" custom onChange={onChangeShow} title="Rows per Page">
                         {[10, 20, 30, 40, 50].map(pageSize => (
                             <option key={pageSize} value={pageSize}>
                                 Show {pageSize}
