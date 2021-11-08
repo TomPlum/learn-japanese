@@ -4,17 +4,18 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import React, { Component } from "react";
 import styles from "../../../styles/sass/components/ui/fields/SearchField.module.scss";
 
-interface SearchFieldProps {
+export interface SearchFieldProps {
     value?: string;
     append?: string;
     placeholder?: string;
     className?: string;
+    disabled?: boolean;
     onChange: (value: string) => void;
 }
 
 class SearchField extends Component<SearchFieldProps> {
     render() {
-        const { value, append, placeholder, className } = this.props;
+        const { value, append, placeholder, disabled, className } = this.props;
         return (
             <InputGroup className={[styles.inputGroup, className].join(" ")}>
                 <InputGroup.Prepend>
@@ -26,6 +27,7 @@ class SearchField extends Component<SearchFieldProps> {
                 <Form.Control
                     type="text"
                     value={value}
+                    disabled={disabled}
                     className={styles.input}
                     placeholder={placeholder ?? "Enter search term"}
                     onChange={(e) => this.props.onChange(e.target.value)}
