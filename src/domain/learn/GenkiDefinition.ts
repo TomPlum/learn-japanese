@@ -15,6 +15,10 @@ class GenkiDefinition extends Learnable {
         this._kanji = kanji;
     }
 
+    getLesson(): number {
+        return this._lesson;
+    }
+
     getHint(): string {
         return "There is no hint for Genki definitions yet.";
     }

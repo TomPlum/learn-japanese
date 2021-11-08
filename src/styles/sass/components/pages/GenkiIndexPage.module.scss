@@ -1,30 +1,6 @@
-@import "src/styles/sass/colours";
-
 .wrapper {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   max-width: 1500px;
-}
-
-.genkiOne {
-  color: $dark-2;
-  background-color: #faab69;
-  border: 2px solid #fb8102;
-  transition: all ease-in-out 0.2s;
-}
-
-.genkiOne:hover {
-  background-color: #de985d;
-}
-
-.genkiTwo {
-  color: $dark-2;
-  background-color: #89cf87;
-  border: 2px solid #33b639;
-  transition: all ease-in-out 0.2s;
-}
-
-.genkiTwo:hover {
-  background-color: #77b676;
 }
 
 .search {
@@ -34,4 +10,8 @@
 
 .spinner {
   margin-right: 10px;
+}
+
+.banner {
+  transition: all ease-in-out 0.2s;
 }
