@@ -80,3 +80,12 @@ test('Clicking the clear button should call the onClear event handler', () => {
     fireEvent.click(screen.getByTitle('Clear Search'));
     expect(onClearHandler).toHaveBeenCalled();
 });
+
+test('Should not render the clear button if enableClear is true but the value is falsy', () => {
+    props.enableClear = true;
+    props.value = "";
+
+    setup();
+
+    expect(screen.queryByTitle('Clear Search')).not.toBeInTheDocument();
+});

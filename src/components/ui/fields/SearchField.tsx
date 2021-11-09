@@ -36,7 +36,7 @@ const SearchField = (props: SearchFieldProps) => {
                 onChange={(e) => onChange(e.target.value)}
             />
 
-            {enableClear && <FontAwesomeIcon
+            {enableClear && value && <FontAwesomeIcon
                 fixedWidth
                 onClick={onClear}
                 title="Clear Search"
