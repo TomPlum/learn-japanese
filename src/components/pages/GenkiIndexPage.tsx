@@ -2,7 +2,7 @@ import GenkiService from "../../service/GenkiService";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Container } from "react-bootstrap";
 import SearchField from "../ui/fields/SearchField";
-import { faCheckCircle, faChevronDown, faChevronUp, faCircleNotch, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faCircleNotch, faExclamationCircle, faSort, faSortDown, faSortUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from "react-table";
 import { AnimatePresence, motion } from "framer-motion";
@@ -47,7 +47,7 @@ const GenkiIndexPage = () => {
 
     const [error, setError] = useState<string | undefined>(undefined);
     const [loading, setLoading] = useState(false);
-    const [search, setSearch] = useState(globalFilter);
+    const [search, setSearch] = useState(globalFilter ?? "");
 
     const hasError = !!error;
 
@@ -85,30 +85,26 @@ const GenkiIndexPage = () => {
     return (
         <Container fluid className={styles.wrapper}>
 
-            {hasError && <Alert variant="danger" className={styles.banner}>
-                <FontAwesomeIcon icon={faExclamationCircle} className={styles.spinner}/>
-                <span>{error}</span>
-            </Alert>}
+            {hasError && (
+                <Alert variant="danger" className={styles.banner}>
+                    <FontAwesomeIcon icon={faExclamationCircle} className={styles.spinner} />
+                    <span>{error}</span>
+                </Alert>
+            )}
 
-            {!hasError && !loading && <Alert variant="success" className={styles.banner}>
-                <FontAwesomeIcon
-                    spin={loading}
-                    icon={faCheckCircle}
-                    className={styles.spinner}
-                />
-                <span>
-                    {`Showing ${data.current.length} definitions from Genki I and II.`}
-                </span>
-            </Alert>}
+            {!hasError && !loading && (
+                <Alert variant="success" className={styles.banner}>
+                    <FontAwesomeIcon spin={loading} icon={faCheckCircle} className={styles.spinner} />
+                    <span>{`Showing ${data.current.length} definitions from Genki I and II.`}</span>
+                </Alert>
+            )}
 
-            {loading && <Alert variant="info">
-                <FontAwesomeIcon
-                    spin
-                    icon={faCircleNotch}
-                    className={styles.spinner}
-                />
-                <span>Loading...</span>
-            </Alert>}
+            {loading && (
+                <Alert variant="info">
+                    <FontAwesomeIcon spin icon={faCircleNotch} className={styles.spinner} />
+                    <span>Loading...</span>
+                </Alert>
+            )}
 
             <SearchField
                 enableClear
@@ -117,8 +113,8 @@ const GenkiIndexPage = () => {
                 onChange={onSearch}
                 className={styles.search}
                 onClear={() => setSearch(undefined)}
-                placeholder="Search for a meaning, kana, kanji or lesson"
                 append={`${preGlobalFilteredRows?.length ?? 0} Results`}
+                placeholder="Search for a meaning, kana, kanji or lesson"
             />
 
             {data.current && <>
@@ -135,11 +131,11 @@ const GenkiIndexPage = () => {
                                     ...column.getSortByToggleProps()
                                 })}>
                                     <span>{column.render('Header')}</span>
-                                    <span>
-                                        {column.isSortedDesc ?
-                                            <FontAwesomeIcon icon={faChevronDown} className={styles.sort} /> :
-                                            <FontAwesomeIcon icon={faChevronUp} className={styles.sort} />}
-                                    </span>
+                                    <span>{column.isSorted ? column.isSortedDesc ?
+                                        <FontAwesomeIcon icon={faSortDown} className={styles.sort} title="Default Order" /> :
+                                        <FontAwesomeIcon icon={faSortUp} className={styles.sort} title="Sort Desc" /> :
+                                        <FontAwesomeIcon icon={faSort} className={styles.sort} title="Sort Asc" />
+                                    }</span>
                                 </motion.th>
                             ))
                         }</tr>
@@ -163,10 +159,8 @@ const GenkiIndexPage = () => {
                                             return (
                                                 // @ts-ignore
                                                 <motion.td {...cell.getCellProps({ layoutTransition: spring })}>
-                                                    <Copyable>
-                                                        <span>
-                                                            {cell.render('Cell')}
-                                                        </span>
+                                                    <Copyable valueProvider={it => it.props.cell.value}>
+                                                        <span>{cell.render('Cell')}</span>
                                                     </Copyable>
                                                 </motion.td>
                                             )

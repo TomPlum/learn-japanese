@@ -4,6 +4,10 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
+// Fixes an issue with useAsyncDebounce from the react-table library.
+// It fixes the 'regeneratorRuntime is not defined` error when running a test that consumes the function.
+import 'regenerator-runtime/runtime';
+
 //Test Environment
 import dotenv from 'dotenv';
 dotenv.config({path: './.env.test'});
