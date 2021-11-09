@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import TablePagination, { TablePaginationProps } from "../../../../components/ui/table/TablePagination";
 import userEvent from "@testing-library/user-event";
 import { getByTextWithElements } from "../../../Queries";
@@ -106,4 +106,10 @@ test('Passing canPreviousPage as false should disable the first button', () => {
 test('Should render the current and total pages', () => {
     setup();
     expect(getByTextWithElements('Page 3 of 10')).toBeInTheDocument();
+});
+
+test('Should render No Results in if the total pages are 0', () => {
+    props.totalPages = 0;
+    setup();
+    expect(screen.getByText('No Results')).toBeInTheDocument();
 });

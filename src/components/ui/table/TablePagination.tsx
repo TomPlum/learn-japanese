@@ -42,12 +42,8 @@ const TablePagination = (props: TablePaginationProps) => {
                         </Pagination.Prev>
 
                         <Pagination.Item>
-                            <span>
-                                Page{' '}
-                                <strong>
-                                    {currentPage} of {totalPages}
-                                </strong>
-                            </span>
+                            {totalPages > 0 && <span>Page{' '}<strong>{currentPage} of {totalPages}</strong></span>}
+                            {totalPages === 0 && <span className="text-muted">No Results</span>}
                         </Pagination.Item>
 
                         <Pagination.Next onClick={onNextPage} disabled={!canNextPage} title="Next Page">
