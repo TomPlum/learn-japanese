@@ -44,7 +44,7 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
         });
     }
 
-    const disabled = password.length == 0;
+    const disabled = password.length === 0;
 
     return (
         <div className={styles.wrapper}>

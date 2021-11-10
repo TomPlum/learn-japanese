@@ -1,7 +1,5 @@
 import React, { ChangeEvent, Component } from "react";
-import { Form, OverlayTrigger } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { Form } from "react-bootstrap";
 import { OverlayChildren } from "react-bootstrap/Overlay";
 import styles from "../../../styles/sass/components/ui/fields/GameInputField.module.scss";
 import InfoButton from "../buttons/InfoButton";
