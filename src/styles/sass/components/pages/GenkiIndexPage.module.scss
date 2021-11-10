@@ -1,4 +1,5 @@
 @import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
 
 .wrapper {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
@@ -79,7 +80,7 @@
 
 .search {
   min-width: 100%;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
 }
 
 .spinner {
@@ -92,4 +93,26 @@
 
 .sort {
   float: right;
+}
+
+.noResults {
+  @include noSelect;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  border-left: 2px solid $light-3;
+  border-right: 2px solid $light-3;
+  border-bottom: 2px solid $light-3;
+  padding: 15px;
+  min-width: 100%;
+  color: $light-1;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 150px;
+  background-color: $dark-2;
+}
+
+.icon {
+  margin-right: 5px;
 }

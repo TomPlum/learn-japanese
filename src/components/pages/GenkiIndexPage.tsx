@@ -2,7 +2,7 @@ import GenkiService from "../../service/GenkiService";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Container } from "react-bootstrap";
 import SearchField from "../ui/fields/SearchField";
-import { faCheckCircle, faCircleNotch, faExclamationCircle, faSort, faSortDown, faSortUp } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faCircleNotch, faExclamationCircle, faSearchMinus, faSort, faSortDown, faSortUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from "react-table";
 import { AnimatePresence, motion } from "framer-motion";
@@ -38,7 +38,7 @@ const GenkiIndexPage = () => {
 
     const {
         // @ts-ignore
-        getTableProps, getTableBodyProps, headerGroups, prepareRow, page, canPreviousPage, canNextPage,
+        getTableProps, getTableBodyProps, headerGroups, prepareRow, page, canPreviousPage, canNextPage, rows,
         // @ts-ignore
         pageOptions, pageCount, gotoPage, nextPage, previousPage, setPageSize, state: { pageIndex, globalFilter },
         // @ts-ignore
@@ -112,8 +112,8 @@ const GenkiIndexPage = () => {
                 disabled={loading}
                 onChange={onSearch}
                 className={styles.search}
-                onClear={() => setSearch(undefined)}
-                append={`${preGlobalFilteredRows?.length ?? 0} Results`}
+                onClear={() => onSearch("")}
+                append={`${rows.length} Results`}
                 placeholder="Search for a meaning, kana, kanji or lesson"
             />
 
@@ -171,6 +171,11 @@ const GenkiIndexPage = () => {
                         }</AnimatePresence>
                     </tbody>
                 </table>
+
+                {rows.length === 0 && <div className={styles.noResults}>
+                    <FontAwesomeIcon icon={faSearchMinus} fixedWidth size="sm" className={styles.icon} />
+                    <span>{`No results for '${search}'...`}</span>
+                </div>}
 
                 <TablePagination
                     onNextPage={nextPage}

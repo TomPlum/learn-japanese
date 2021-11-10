@@ -2,21 +2,24 @@ import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-l
 import GenkiIndexPage from "../../../components/pages/GenkiIndexPage";
 import GenkiDefinition from "../../../domain/learn/GenkiDefinition";
 import { findByTextWithElements } from "../../Queries";
+import userEvent from "@testing-library/user-event";
 
 const mockGetAllVocab = jest.fn();
 jest.mock("../../../service/GenkiService", () => {
     return function() { return { getAllVocab: mockGetAllVocab } };
 });
 
-const mockClipboard = jest.fn();
-//Object.defineProperty(navigator, "clipboard", { value: { writeText: mockClipboard } });
+const mockClipboard = jest.fn().mockImplementation(() => Promise.resolve());
 Object.assign(navigator, { clipboard: { writeText: mockClipboard } });
 
 
 beforeEach(() => {
-    mockClipboard.mockResolvedValue(() => {});
-    mockClipboard.mockReset();
-})
+    jest.spyOn(navigator.clipboard, "writeText");
+});
+
+afterEach(() => {
+    jest.resetAllMocks();
+});
 
 const setup = () => {
     const component = render(<GenkiIndexPage />);
@@ -212,6 +215,36 @@ test('Should render the first page when clicking the first button', async () => 
     expect(await findByTextWithElements('Page 1 of 4')).toBeInTheDocument();
 });
 
+test('Clicking the clear button in the search field should reset the search term', async () => {
+    mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
+    const { search } = setup();
+    expect(await screen.findByText('Showing 3 definitions from Genki I and II.')).toBeInTheDocument();
+
+    fireEvent.change(search, { target: { value: "language" }});
+    expect(await screen.findByText('1 Results')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTitle('Clear Search'));
+    expect(await screen.findByText('3 Results')).toBeInTheDocument();
+});
+
+test('It should display an empty table state with message if there are no search results', async () => {
+    mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
+    const { search } = setup();
+
+    fireEvent.change(search, { target: { value: "zzzzzz" }});
+    expect(await screen.findByText('No results for \'zzzzzz\'...'));
+});
+
+test('It should render the selected number of rows when changing the option in the pagination', async () => {
+    mockGetAllVocab.mockResolvedValueOnce({ definitions: elevenDefinitions.concat(elevenDefinitions) });
+    const { rows } = setup();
+    expect(await screen.findByText('Showing 22 definitions from Genki I and II.')).toBeInTheDocument();
+    expect(screen.getAllByRole('row')).toHaveLength(11) // Includes header row
+
+    userEvent.selectOptions(rows, 'Show 20');
+    expect(screen.getAllByRole('row')).toHaveLength(21) // Includes header row
+});
+
 describe("Copying Values", () => {
     test('Clicking a kana value should copy it to the clipboard', async () => {
         mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
@@ -221,7 +254,7 @@ describe("Copying Values", () => {
         expect(mockClipboard).toHaveBeenLastCalledWith('がくせい');
     });
 
-    test.skip('Clicking a romaji value should copy it to the clipboard', async () => {
+    test('Clicking a romaji value should copy it to the clipboard', async () => {
         mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
         setup();
 
@@ -229,7 +262,7 @@ describe("Copying Values", () => {
         expect(mockClipboard).toHaveBeenLastCalledWith('gogo');
     });
 
-    test.skip('Clicking a kanji value should copy it to the clipboard', async () => {
+    test('Clicking a kanji value should copy it to the clipboard', async () => {
         mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
         setup();
 
@@ -554,5 +587,4 @@ describe("Sorting", () => {
         expect(rows[2]).toHaveTextContent('2');
         expect(rows[3]).toHaveTextContent('3');
     });
-
 });
