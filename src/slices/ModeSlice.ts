@@ -3,10 +3,12 @@ import { AppMode } from "../domain/AppMode";
 
 export interface ModeState {
     mode: AppMode;
+    active: boolean; // Whether or not the nav bar is active (all icons clickable)
 }
 
 const initialState: ModeState = {
-    mode: AppMode.PLAY
+    mode: AppMode.PLAY,
+    active: true
 }
 
 export const modeSlice = createSlice({
@@ -19,9 +21,12 @@ export const modeSlice = createSlice({
         },
         setApplicationMode: (state, action: PayloadAction<AppMode>) => {
             state.mode = action.payload
+        },
+        setActive: (state, action: PayloadAction<boolean>) => {
+            state.active = action.payload;
         }
     }
 });
 
-export const { switchApplicationMode, setApplicationMode } = modeSlice.actions
+export const { switchApplicationMode, setApplicationMode, setActive } = modeSlice.actions
 export default modeSlice.reducer;

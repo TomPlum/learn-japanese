@@ -11,6 +11,9 @@ import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
 import Definition from "../../../domain/sentence/Definition";
+import { store } from "../../../store";
+import { setActive, setApplicationMode } from "../../../slices/ModeSlice";
+import { AppMode } from "../../../domain/AppMode";
 
 //Mock Learning Data Repository
 const mockLearningDataRepository = jest.fn();
@@ -47,6 +50,9 @@ beforeEach(() => {
       objects.splice(0, 1);
       return [first, objects];
    });
+
+   store.dispatch(setActive(true));
+   store.dispatch(setApplicationMode(AppMode.LEARN));
 });
 
 const setup = () => {
@@ -81,17 +87,10 @@ test('Selecting a game mode should hide the menu and render the game', async () 
    expect(await screen.findByTestId('memory-game')).toBeInTheDocument();
 });
 
-test('Changing the AppMode in the ControlsMenu should update the SettingsMenu', () => {
-   const { mode } = setup();
-   expect(screen.getByText('Select Game Mode'));
-   fireEvent.click(mode);
-   expect(screen.getByText('Select Topic'));
-});
-
-test('Clicking the login button while not logged in should launch the user modal', () => {
+test('Clicking the login button while not logged in should launch the user modal', async () => {
    const { login } = setup();
    fireEvent.click(login);
-   expect(screen.getByTestId('user-modal')).toBeInTheDocument();
+   expect(await screen.findByTestId('user-modal')).toBeInTheDocument();
 });
 
 test('Clicking "x" close button in the user modal should close it', () => {

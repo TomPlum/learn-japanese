@@ -4,7 +4,7 @@ import ControlsMenu, { ControlsMenuProps } from "../../../components/layout/Cont
 import { createMemoryHistory } from "history";
 import { AppMode } from "../../../domain/AppMode";
 import { store } from "../../../store";
-import { setApplicationMode } from "../../../slices/ModeSlice";
+import { setActive, setApplicationMode } from "../../../slices/ModeSlice";
 import renderReduxConsumer from "../../renderReduxConsumer";
 
 const history = createMemoryHistory();
@@ -31,9 +31,9 @@ const setup = () => {
 
 beforeEach(() => {
     props = {
-        active: true,
         onLaunchLoginModal: onLaunchLoginModalHandler
     };
+    store.dispatch(setActive(true));
     store.dispatch(setApplicationMode(AppMode.LEARN));
 });
 
@@ -44,25 +44,25 @@ test('Clicking the \'Home\' button should route the user to the landing page', (
 });
 
 test('Passing active as true should enable the App Mode Button', () => {
-    props.active = true;
+    store.dispatch(setActive(true));
     const { mode } = setup();
     expect(mode.parentElement).not.toHaveAttribute('aria-disabled', 'true');
 });
 
 test.skip('Passing active as false should disable the App Mode Button', () => {
-    props.active = false;
+    store.dispatch(setActive(false));
     const { mode } = setup();
     expect(mode.parentElement).toHaveAttribute('aria-disabled', 'true');
 });
 
 test('Passing active as false should disable the Login Button', () => {
-    props.active = false;
+    store.dispatch(setActive(false));
     const { login } = setup();
     expect(login.parentElement).toHaveAttribute('aria-disabled', 'true');
 });
 
 test('Passing active as false should disable the Home Button', () => {
-    props.active = false;
+    store.dispatch(setActive(false));
     const { home } = setup();
     expect(home.parentElement).toHaveAttribute('aria-disabled', 'true');
 });

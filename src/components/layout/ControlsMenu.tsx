@@ -8,14 +8,16 @@ import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss
 import AppModeButton from "../ui/buttons/AppModeButton";
 import UserButton from "../user/UserButton";
 import HelpButton from "../ui/buttons/HelpButton";
+import { useModeSelector } from "../../hooks";
 
 export interface ControlsMenuProps {
     onLaunchLoginModal: () => void;
-    active: boolean;
 }
 
 const ControlsMenu = (props: ControlsMenuProps) => {
-    const { onLaunchLoginModal, active } = props;
+    const { onLaunchLoginModal } = props;
+
+    const active = useModeSelector(state => state.mode.active);
 
     return (
         <Navbar variant="dark" fixed="top" className={styles.navbar}>

@@ -24,7 +24,7 @@ import UserForm from "../user/UserForm";
 import ErrorContainer from "../error/ErrorContainer";
 import CardContainer from "../cards/CardContainer";
 import { useModeDispatch } from "../../hooks";
-import { setApplicationMode } from "../../slices/ModeSlice";
+import { setActive, setApplicationMode } from "../../slices/ModeSlice";
 
 interface PageParameters {
     mode: string;
@@ -61,6 +61,7 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
                 setData(data);
             }).finally(() => {
                 setLoading(false);
+                modeDispatcher(setActive(false));
             });
     }
 
@@ -81,6 +82,7 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
         setGameConfig(undefined);
         setInResultsScreen(true);
         setSessionKey(new SessionID());
+        modeDispatcher(setActive(true));
     }
 
     const onLearningFinish = (result: LearningSessionResult) => {
@@ -91,6 +93,7 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
             onLearningResultMenuClose();
         }
         setSessionKey(new SessionID());
+        modeDispatcher(setActive(true));
     }
 
     const onPracticeStart = (data: Learnable[]) => {
@@ -106,10 +109,7 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
             <MainErrorBoundary>
                 <LoadingSpinner active={loading} />
 
-                <ControlsMenu
-                    active={isInMenu}
-                    onLaunchLoginModal={() => setInLoginModal(true)}
-                />
+                <ControlsMenu onLaunchLoginModal={() => setInLoginModal(true)} />
 
                 <CardContainer />
 
