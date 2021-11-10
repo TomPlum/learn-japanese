@@ -10,16 +10,6 @@ jest.mock("../../../service/GenkiService", () => {
 });
 
 const mockClipboard = jest.fn().mockImplementation(() => Promise.resolve());
-Object.assign(navigator, { clipboard: { writeText: mockClipboard } });
-
-
-beforeEach(() => {
-    jest.spyOn(navigator.clipboard, "writeText");
-});
-
-afterEach(() => {
-    jest.resetAllMocks();
-});
 
 const setup = () => {
     const component = render(<GenkiIndexPage />);

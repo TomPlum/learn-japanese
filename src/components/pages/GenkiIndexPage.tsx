@@ -88,10 +88,7 @@ const GenkiIndexPage = () => {
         });
     }
 
-    const onSearch = useAsyncDebounce((value: string) => {
-        setSearch(value);
-        setGlobalFilter(value);
-    }, 200);
+    const onFilter = useAsyncDebounce((value: string) => setGlobalFilter(value), 200);
 
     return (
         <Container fluid className={styles.wrapper}>
@@ -121,10 +118,16 @@ const GenkiIndexPage = () => {
                 enableClear
                 value={search}
                 disabled={loading}
-                onChange={onSearch}
                 className={styles.search}
-                onClear={() => onSearch("")}
                 append={`${rows.length} Results`}
+                onChange={(value: string) => {
+                    setSearch(value);
+                    onFilter(value);
+                }}
+                onClear={() => {
+                    setSearch("");
+                    onFilter("");
+                }}
                 placeholder="Search for a meaning, kana, kanji or lesson"
             />
 
