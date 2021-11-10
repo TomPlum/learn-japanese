@@ -8,7 +8,6 @@ import RegistrationForm from "./RegistrationForm";
 
 export interface UserFormProps {
     show: boolean;
-    location: string;
     onClose: () => void;
 }
 

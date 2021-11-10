@@ -3,7 +3,6 @@ import MemoryGame from "../game/MemoryGame";
 import GameResult from "../../domain/game/GameResult";
 import GameResultScreen from "../results/GameResultScreen";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import ControlsMenu from "../layout/ControlsMenu";
 import SettingsMenu from "../layout/SettingsMenu";
 import { fromString } from "../../domain/AppMode";
 import SessionID from "../../domain/session/SessionID";
@@ -20,7 +19,6 @@ import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 import GameSettings from "../../domain/session/settings/game/GameSettings";
 import DataSettings from "../../domain/session/settings/data/DataSettings";
 import LearnSettings from "../../domain/session/settings/LearnSettings";
-import UserForm from "../user/UserForm";
 import ErrorContainer from "../error/ErrorContainer";
 import CardContainer from "../cards/CardContainer";
 import { useModeDispatch } from "../../hooks";
@@ -41,7 +39,6 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
     const [learningResult, setLearningResult] = useState<LearningSessionResult | undefined>(undefined);
     const [sessionKey, setSessionKey] = useState(new SessionID());
     const [data, setData] = useState<Learnable[]>([]);
-    const [inLoginModal, setInLoginModal] = useState(false);
 
     const modeDispatcher = useModeDispatch();
 
@@ -109,8 +106,6 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
             <MainErrorBoundary>
                 <LoadingSpinner active={loading} />
 
-                <ControlsMenu onLaunchLoginModal={() => setInLoginModal(true)} />
-
                 <CardContainer />
 
                 {isInMenu &&
@@ -150,14 +145,6 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
                         onDismiss={onLearningResultMenuClose}
                     />
                 }
-
-                {inLoginModal && (
-                    <UserForm
-                        location={""}
-                        show={inLoginModal}
-                        onClose={() => setInLoginModal(false)}
-                    />
-                )}
             </MainErrorBoundary>
         </div>
     );

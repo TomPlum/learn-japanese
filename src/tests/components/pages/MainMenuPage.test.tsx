@@ -69,13 +69,11 @@ const setup = () => {
    />);
 
    return {
-      mode: component.getByText('Learn'),
       kana: component.queryAllByText('Hiragana & Katakana')[1],
       numbers: component.getByText('Numbers & Counting'),
       kanji: component.getByText('Jōyō Kanji'),
       basics: component.getByText('Basics'),
       calendar: component.getByText('Days & Months'),
-      login: component.getByText('Login'),
       ...component
    }
 }
@@ -85,25 +83,6 @@ test('Selecting a game mode should hide the menu and render the game', async () 
    setup();
    fireEvent.click(screen.getByText('Start'));
    expect(await screen.findByTestId('memory-game')).toBeInTheDocument();
-});
-
-test('Clicking the login button while not logged in should launch the user modal', async () => {
-   const { login } = setup();
-   fireEvent.click(login);
-   expect(await screen.findByTestId('user-modal')).toBeInTheDocument();
-});
-
-test('Clicking "x" close button in the user modal should close it', () => {
-   const { login } = setup();
-
-   //Clicking login should load the modal
-   fireEvent.click(login);
-   const userModal = screen.getByTestId('user-modal');
-   expect(userModal).toBeInTheDocument();
-
-   //Clicking the 'x' button should close it
-   fireEvent.click(screen.getByText('Close'));
-   expect(userModal).not.toBeInTheDocument();
 });
 
 describe('Play', () => {
@@ -148,8 +127,8 @@ describe('Learn', () => {
    test('Quitting a learning session without having flipped a card should re-render the menu', async () => {
       mockLearningDataRepository.mockResolvedValueOnce(hiragana);
 
-      const { mode } = setup();
-      fireEvent.click(mode); //Switch to Learn
+      setup();
+      store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
       expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
@@ -163,8 +142,8 @@ describe('Learn', () => {
    test('Quitting a learning session mid-session (having flipped one or more cards) should show the result screen', async () => {
       mockLearningDataRepository.mockResolvedValueOnce(hiragana);
 
-      const { mode } = setup();
-      fireEvent.click(mode); //Switch to Learn
+      setup();
+      store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
       expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
@@ -180,8 +159,8 @@ describe('Learn', () => {
    test('Clicking \'Practice Mistakes\' on the learning results screen should start a new session with the mistakes', async () => {
       mockLearningDataRepository.mockResolvedValueOnce(hiragana);
 
-      const { mode } = setup();
-      fireEvent.click(mode); //Switch to Learn
+      setup();
+      store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
       expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
@@ -205,8 +184,8 @@ describe('Learn', () => {
    test('Dismissing the learning results screen should close it and re-render the main menu', async () => {
       mockLearningDataRepository.mockResolvedValueOnce(hiragana);
 
-      const { mode } = setup();
-      fireEvent.click(mode); //Switch to Learn
+      setup();
+      store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
       fireEvent.click(screen.getByText('Start')); //Start the default Hiragana mode
       expect(await screen.findByTestId('learn')).toBeInTheDocument(); //Should render the learn component
 
@@ -224,9 +203,9 @@ describe('Learn', () => {
 
    test('Starting a Calendar learning session should render the correct flash card types', async () => {
       mockLearningDataRepository.mockResolvedValueOnce([day]);
-      const { mode, calendar } = setup();
+      const { calendar } = setup();
 
-      fireEvent.click(mode); //Switch to Learn
+      store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
       fireEvent.click(calendar); //Select calendar topic
       fireEvent.click(screen.getByText('Start'));
 
@@ -235,9 +214,9 @@ describe('Learn', () => {
 
    test('Starting a Kanji learning session should render the correct flash card types', async  () => {
       mockLearningDataRepository.mockResolvedValueOnce([kanjiGradeOne]);
-      const { mode, kanji } = setup();
+      const { kanji } = setup();
 
-      fireEvent.click(mode); //Switch to Learn
+      store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
       fireEvent.click(kanji); //Select Kanji topic
       fireEvent.click(screen.getByText('Start'));
 

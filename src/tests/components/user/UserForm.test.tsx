@@ -14,7 +14,6 @@ beforeEach(() => {
 
     props = {
         show: true,
-        location: "",
         onClose: onCloseHandler
     };
 });
