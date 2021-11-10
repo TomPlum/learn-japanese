@@ -109,6 +109,10 @@
   border-left: 2px solid $genki-1-dark;
 }
 
+.genkiOne td:last-child {
+  border-right: 2px solid $genki-1-dark;
+}
+
 .genkiOne td:hover {
   background-color: #de985d;
 }
@@ -124,6 +128,10 @@
 
 .genkiTwo td:first-child {
   border-left: 2px solid $genki-2-dark;
+}
+
+.genkiTwo td:last-child {
+  border-right: 2px solid $genki-2-dark;
 }
 
 .genkiTwo td:hover {
