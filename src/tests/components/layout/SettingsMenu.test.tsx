@@ -8,6 +8,8 @@ import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaS
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import { getValueLastCalledWith } from "../../Queries";
 import renderReduxConsumer from "../../renderReduxConsumer";
+import { setApplicationMode } from "../../../slices/ModeSlice";
+import { store } from "../../../store";
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
 const scrollIntoView = jest.fn();
@@ -32,8 +34,7 @@ const setup = () => {
 
 beforeEach(() => {
     props = {
-        onStart: onStartHandler,
-        mode: AppMode.PLAY
+        onStart: onStartHandler
     };
 });
 
@@ -58,7 +59,7 @@ describe("Rendering Game Menus", () => {
 
 describe("Rendering Learn Menus", () => {
     beforeEach(() => {
-        props.mode = AppMode.LEARN;
+        store.dispatch(setApplicationMode(AppMode.LEARN));
     });
 
     test('Should default to \'Hiragana & Katakana\' learn type', () => {
@@ -75,6 +76,11 @@ describe("Rendering Learn Menus", () => {
 });
 
 describe("Starting Game", () => {
+
+    beforeEach(() => {
+        store.dispatch(setApplicationMode(AppMode.PLAY));
+    });
+
     test('Starting a kana game should call the onStartGame event handler with correct type and settings', () => {
         const { start } = setup();
         fireEvent.click(start);
@@ -110,7 +116,7 @@ describe("Starting Game", () => {
 
 describe("Starting Learn Session", () => {
     beforeEach(() => {
-        props.mode = AppMode.LEARN;
+        store.dispatch(setApplicationMode(AppMode.LEARN));
     });
 
     test('Starting a kana learning session should call the onStartLearn event handler with correct type and settings', () => {

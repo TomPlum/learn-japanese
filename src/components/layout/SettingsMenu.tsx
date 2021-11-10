@@ -2,13 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Topic from "../../domain/Topic";
 import TopicSelectionMenu from "./TopicSelectionMenu";
-import { AppMode } from "../../domain/AppMode";
 import ModeSelectionMenu from "../learn/ModeSelectionMenu";
 import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 import styles from "../../styles/sass/components/layout/SettingsMenu.module.scss";
 
 export interface SettingsMenuProps {
-    mode: AppMode;
     onStart: (settings: SessionSettings) => void;
 }
 
@@ -39,7 +37,6 @@ const SettingsMenu = (props: SettingsMenuProps) => {
                 <Row className={styles.row}>
                     <Col sm={12} lg={5} className={styles.topicSelectionMenuWrapper}>
                         <TopicSelectionMenu
-                            appMode={props.mode}
                             className={styles.topicMenu}
                             onSelect={onSelectTopic}
                         />
@@ -48,7 +45,6 @@ const SettingsMenu = (props: SettingsMenuProps) => {
                     <Col sm={12} lg={7} className={styles.gameMenuWrapper} ref={modeMenu}>
                         <ModeSelectionMenu
                             topic={topic}
-                            appMode={props.mode}
                             key={topic.name}
                             onStart={onSelectMode}
                         />

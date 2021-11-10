@@ -9,3 +9,6 @@ export const useFontSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export const useErrorDispatch = () => useDispatch<AppDispatch>();
 export const useErrorSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export const useModeDispatch = () => useDispatch<AppDispatch>();
+export const useModeSelector: TypedUseSelectorHook<RootState> = useSelector;

@@ -1,29 +1,27 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import { Router } from "react-router-dom";
 import ControlsMenu, { ControlsMenuProps } from "../../../components/layout/ControlsMenu";
 import { createMemoryHistory } from "history";
 import { AppMode } from "../../../domain/AppMode";
-import { Provider } from "react-redux";
 import { store } from "../../../store";
+import { setApplicationMode } from "../../../slices/ModeSlice";
+import renderReduxConsumer from "../../renderReduxConsumer";
 
 const history = createMemoryHistory();
-const onChangeAppModeHandler = jest.fn();
 const onLaunchLoginModalHandler = jest.fn();
 
 let props: ControlsMenuProps;
 
 const setup = () => {
-    const component = render(
+    const component = renderReduxConsumer(
         <Router history={history}>
-            <Provider store={store}>
-                <ControlsMenu {...props} />
-            </Provider>
+            <ControlsMenu {...props} />
         </Router>
     );
 
     return {
         home: component.getByText('Home'),
-        mode: component.getByText('Learn'),
+        mode: component.getByText('Play'),
         theme: component.getByText('Light'),
         font: component.getByText('Font'),
         login: component.getByText('Login'),
@@ -34,22 +32,15 @@ const setup = () => {
 beforeEach(() => {
     props = {
         active: true,
-        startingMode: AppMode.PLAY,
-        onChangeAppMode: onChangeAppModeHandler,
         onLaunchLoginModal: onLaunchLoginModalHandler
     };
+    store.dispatch(setApplicationMode(AppMode.LEARN));
 });
 
 test('Clicking the \'Home\' button should route the user to the landing page', () => {
     const { home } = setup();
     fireEvent.click(home);
     expect(history.location.pathname).toBe('/');
-});
-
-test('Clicking the App Mode button should call the onChangeAppMode event handler', () => {
-    const { mode } = setup();
-    fireEvent.click(mode);
-    expect(onChangeAppModeHandler).toHaveBeenCalled();
 });
 
 test('Passing active as true should enable the App Mode Button', () => {

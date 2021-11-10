@@ -1,13 +1,16 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import ModeSelectionMenu, { ModeSelectionMenuProps } from "../../../components/learn/ModeSelectionMenu";
 import { Environment } from "../../../utility/Environment";
 import Topic from "../../../domain/Topic";
-import { AppMode } from "../../../domain/AppMode";
 import { SessionSettings } from "../../../domain/session/settings/SessionSettings";
 import KanaSettings, { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import { CalendarSettingsBuilder } from "../../../domain/session/settings/data/CalendarSettings";
 import { getValueLastCalledWith } from "../../Queries";
+import { store } from "../../../store";
+import { setApplicationMode } from "../../../slices/ModeSlice";
+import renderReduxConsumer from "../../renderReduxConsumer";
+import { AppMode } from "../../../domain/AppMode";
 
 describe("Example 1 - Kana (Customisable)", () => {
     const onStartHandler = jest.fn();
@@ -18,16 +21,17 @@ describe("Example 1 - Kana (Customisable)", () => {
     beforeEach(() => {
         props = {
             topic: Topic.KANA,
-            appMode: AppMode.LEARN,
             onStart: onStartHandler
         };
+
+        store.dispatch(setApplicationMode(AppMode.LEARN));
 
         Environment.variable = environment;
     });
 
 
     const setup = () => {
-        const component = render(<ModeSelectionMenu {...props} />);
+        const component = renderReduxConsumer(<ModeSelectionMenu {...props} />);
         return {
             hiragana: component.getByText('Hiragana'),
             katakana: component.getByText('Katakana'),
@@ -133,26 +137,22 @@ describe("Example 1 - Kana (Customisable)", () => {
     });
 
     test('Setting the AppMode to Learn should render the search button', () => {
-        props.appMode = AppMode.LEARN;
         setup();
         expect(screen.getByTitle('Search')).toBeInTheDocument();
     });
 
     test('Setting the AppMode to Learn should render the data settings button', () => {
-        props.appMode = AppMode.LEARN;
         setup();
         expect(screen.getByTitle('Data Settings')).toBeInTheDocument();
     });
 
     test('Clicking the data settings button in Learn mode should render the data settings menu', () => {
-        props.appMode = AppMode.LEARN;
         const { dataSettings } = setup();
         fireEvent.click(dataSettings);
         expect(screen.getByText('Hiragana & Katakana Settings')).toBeInTheDocument();
     });
 
     test('Clicking the back button in the data settings menu should return to the preset menu', () => {
-        props.appMode = AppMode.LEARN;
         const { dataSettings } = setup();
 
         //Open Data Settings Menu
@@ -165,8 +165,7 @@ describe("Example 1 - Kana (Customisable)", () => {
     });
 
     test('Resetting in the data settings menu should default back to the preset data settings', () => {
-        props.appMode = AppMode.LEARN;
-        render(<ModeSelectionMenu {...props} />);
+        setup();
 
         //Open Data Settings
         fireEvent.click(screen.getByTitle('Data Settings'));
@@ -190,28 +189,28 @@ describe("Example 1 - Kana (Customisable)", () => {
     });
 
     test('Setting the AppMode to Play should render the game settings button', () => {
-        props.appMode = AppMode.PLAY;
-        render(<ModeSelectionMenu {...props} />);
+        store.dispatch(setApplicationMode(AppMode.PLAY));
+        renderReduxConsumer(<ModeSelectionMenu {...props} />);
         expect(screen.getByTitle('Game Settings')).toBeInTheDocument();
     });
 
     test('Setting the AppMode to Play with a topic that has no custom menu should disable the data settings', () => {
-        props.appMode = AppMode.PLAY;
+        store.dispatch(setApplicationMode(AppMode.PLAY));
         props.topic = Topic.CALENDAR;
-        render(<ModeSelectionMenu {...props} />);
+        renderReduxConsumer(<ModeSelectionMenu {...props} />);
         expect(screen.getByTitle('This topic does not have data settings')).toBeDisabled();
     });
 
     test('Clicking the game settings button in Play mode should launch the game settings menu', () => {
-        props.appMode = AppMode.PLAY;
-        render(<ModeSelectionMenu {...props} />);
+        store.dispatch(setApplicationMode(AppMode.PLAY));
+        renderReduxConsumer(<ModeSelectionMenu {...props} />);
         fireEvent.click(screen.getByTitle('Game Settings'));
         expect(screen.getAllByText('Question Settings').length).toBeGreaterThan(0);
     });
 
     test('Quitting the game settings menu should return back to the preset screen', () => {
-        props.appMode = AppMode.PLAY;
-        render(<ModeSelectionMenu {...props} />);
+        store.dispatch(setApplicationMode(AppMode.PLAY));
+        renderReduxConsumer(<ModeSelectionMenu {...props} />);
 
         //Open Game Settings
         fireEvent.click(screen.getByTitle('Game Settings'));
@@ -223,8 +222,8 @@ describe("Example 1 - Kana (Customisable)", () => {
     });
 
     test('Resetting in the game settings menu should default back to the preset game settings', () => {
-        props.appMode = AppMode.PLAY;
-        render(<ModeSelectionMenu {...props} />);
+        store.dispatch(setApplicationMode(AppMode.PLAY));
+        renderReduxConsumer(<ModeSelectionMenu {...props} />);
 
         //Open Game Settings
         fireEvent.click(screen.getByTitle('Game Settings'));
@@ -252,7 +251,7 @@ describe("Example 2 - Calendar", () => {
     const environment = jest.fn();
 
     const setup = () => {
-        const component = render(<ModeSelectionMenu topic={Topic.CALENDAR} appMode={AppMode.LEARN} onStart={onStartHandler}/>);
+        const component = renderReduxConsumer(<ModeSelectionMenu topic={Topic.CALENDAR} onStart={onStartHandler}/>);
         return {
             days: component.getByText('Days of the Week'),
             months: component.getByText('Months of the Year'),
@@ -268,6 +267,7 @@ describe("Example 2 - Calendar", () => {
 
     beforeEach(() => {
         Environment.variable = environment;
+        store.dispatch(setApplicationMode(AppMode.LEARN));
     });
 
     test('Selecting \'Days of the Week\' preset should change the description', () => {

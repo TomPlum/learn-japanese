@@ -6,19 +6,16 @@ import HashLink from "./HashLink";
 import ThemeButton from "../ui/buttons/ThemeButton";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 import AppModeButton from "../ui/buttons/AppModeButton";
-import { AppMode } from "../../domain/AppMode";
 import UserButton from "../user/UserButton";
 import HelpButton from "../ui/buttons/HelpButton";
 
 export interface ControlsMenuProps {
-    onChangeAppMode: (mode: AppMode) => void;
     onLaunchLoginModal: () => void;
-    startingMode: AppMode;
     active: boolean;
 }
 
 const ControlsMenu = (props: ControlsMenuProps) => {
-    const { onChangeAppMode, onLaunchLoginModal, startingMode, active } = props;
+    const { onLaunchLoginModal, active } = props;
 
     return (
         <Navbar variant="dark" fixed="top" className={styles.navbar}>
@@ -35,13 +32,7 @@ const ControlsMenu = (props: ControlsMenuProps) => {
                         </Col>
 
                         <Col>
-                            <AppModeButton
-                                key={startingMode}
-                                className={styles.navLink}
-                                mode={startingMode}
-                                onClick={onChangeAppMode}
-                                disabled={!active}
-                            />
+                            <AppModeButton className={styles.navLink} disabled={!active} />
                         </Col>
 
                         <Col>
