@@ -1,13 +1,35 @@
 @import "src/styles/sass/colours";
 @import "src/styles/sass/mixins";
+@import "src/styles/sass/viewports";
 
-.wrapper {
+@mixin wrapper {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   max-width: 1500px;
   display: block;
   overflow-x: hidden;
   overflow-y: hidden;
-  padding-top: 50px;
+  padding: 0;
+}
+
+@include desktop {
+  .wrapper {
+    @include wrapper;
+    padding-top: 50px;
+  }
+}
+
+@include tablet {
+ .wrapper {
+   @include wrapper;
+   padding-top: 25px;
+ }
+}
+
+@include phone {
+  .wrapper {
+    @include wrapper;
+    padding-top: 15px;
+  }
 }
 
 .table {
