@@ -2,7 +2,7 @@ import GenkiService from "../../service/GenkiService";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Button, Container } from "react-bootstrap";
 import SearchField from "../ui/fields/SearchField";
-import { faCheckCircle, faCircleNotch, faExclamationCircle, faSearchMinus, faSort, faSortDown, faSortUp, faSpinner, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faCircleNotch, faExclamationCircle, faRedo, faSearchMinus, faSort, faSortDown, faSortUp, faSpinner, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from "react-table";
 import { AnimatePresence, motion } from "framer-motion";
@@ -117,7 +117,7 @@ const GenkiIndexPage = () => {
             <SearchField
                 enableClear
                 value={search}
-                disabled={loading}
+                disabled={loading || !!error}
                 className={styles.search}
                 append={`${rows.length} Results`}
                 onChange={(value: string) => {
@@ -189,7 +189,13 @@ const GenkiIndexPage = () => {
                                 <span>Error Loading Data</span>
                             </p>
                             <Button variant="outline-warning" className={styles.retry} onClick={loadTableData} disabled={loading}>
-                                {loading && <FontAwesomeIcon icon={faSpinner} fixedWidth spin />}
+                                <FontAwesomeIcon
+                                    size="sm"
+                                    fixedWidth
+                                    spin={loading}
+                                    className={styles.icon}
+                                    icon={loading ? faSpinner : faRedo}
+                                />
                                 <span>Retry</span>
                             </Button>
                         </div>)}

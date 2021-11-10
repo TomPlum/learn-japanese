@@ -28,6 +28,8 @@ const TablePagination = (props: TablePaginationProps) => {
         onChangeQuantity(quantity);
     }
 
+    const disabled = totalPages === 0;
+
     return (
         <Container fluid className={styles.wrapper}>
             <Row>
@@ -41,9 +43,9 @@ const TablePagination = (props: TablePaginationProps) => {
                             <FontAwesomeIcon icon={faChevronLeft} size="sm" fixedWidth/>
                         </Pagination.Prev>
 
-                        <Pagination.Item className={styles.pages}>
+                        <Pagination.Item className={styles.pages} disabled={disabled}>
                             {totalPages > 0 && <span>Page{' '}<strong>{currentPage} of {totalPages}</strong></span>}
-                            {totalPages === 0 && <span className="text-muted">No Results</span>}
+                            {disabled && <span className="text-muted">No Results</span>}
                         </Pagination.Item>
 
                         <Pagination.Next onClick={onNextPage} disabled={!canNextPage} title="Next Page">
@@ -59,7 +61,7 @@ const TablePagination = (props: TablePaginationProps) => {
                 <Col lg={6} md={3} xs={0} />
 
                 <Col lg={2} md={3} xs={12}>
-                    <Form.Control as="select" custom onChange={onChangeShow} title="Rows per Page">
+                    <Form.Control as="select" custom onChange={onChangeShow} title="Rows per Page" disabled={disabled}>
                         {[10, 20, 30, 40, 50].map(pageSize => (
                             <option key={pageSize} value={pageSize}>
                                 Show {pageSize}

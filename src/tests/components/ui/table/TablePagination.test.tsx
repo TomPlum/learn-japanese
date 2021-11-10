@@ -113,3 +113,9 @@ test('Should render No Results in if the total pages are 0', () => {
     setup();
     expect(screen.getByText('No Results')).toBeInTheDocument();
 });
+
+test('Should disable page quantity selector when there are 0 results', () => {
+    props.totalPages = 0;
+    const { rows } = setup();
+    expect(rows).toBeDisabled();
+});

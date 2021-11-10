@@ -190,6 +190,13 @@ test('Should disable the last page button if the user is on the last page alread
     expect(last.parentElement).toHaveClass('disabled');
 });
 
+test('Should disable the search field when there are no results', async () => {
+    mockGetAllVocab.mockRejectedValueOnce({ error: "Broken" });
+    const { search } = setup();
+    expect(await screen.findByText('Broken')).toBeInTheDocument();
+    expect(search).toBeDisabled();
+});
+
 test('Should render the last page when clicking the last button', async () => {
     mockGetAllVocab.mockResolvedValueOnce({ definitions: elevenDefinitions.concat(elevenDefinitions).concat(elevenDefinitions) });
     setup();
