@@ -1,8 +1,8 @@
 import GenkiService from "../../service/GenkiService";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Alert, Container } from "react-bootstrap";
+import { Alert, Button, Container } from "react-bootstrap";
 import SearchField from "../ui/fields/SearchField";
-import { faCheckCircle, faCircleNotch, faExclamationCircle, faSearchMinus, faSort, faSortDown, faSortUp } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faCircleNotch, faExclamationCircle, faSearchMinus, faSort, faSortDown, faSortUp, faSpinner, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from "react-table";
 import { AnimatePresence, motion } from "framer-motion";
@@ -10,6 +10,7 @@ import TablePagination from "../ui/table/TablePagination";
 import Copyable from "../ui/Copyable";
 import RomajiGenerator from "../../utility/RomajiGenerator";
 import styles from "../../styles/sass/components/pages/GenkiIndexPage.module.scss";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 interface TableData {
     lesson: number;
@@ -28,11 +29,17 @@ const GenkiIndexPage = () => {
         { Header: 'Rōmaji', accessor: 'romaji' },
         { Header: 'Kanji', accessor: 'kanji' },
         { Header: 'Meaning', accessor: 'meaning' },
-        { Header: 'Lesson', accessor: 'lesson' }
+        { Header: 'Lesson', accessor: 'lesson', width: 20 }
     ], []);
 
-    // @ts-ignore
-    const table = useTable({ columns: columns, data: data.current }, useGlobalFilter, useSortBy, usePagination);
+    const defaultColumn = useMemo(() => ({ minWidth: 50, maxWidth: 300 }), []);
+
+    const table = useTable({
+        // @ts-ignore
+        columns: columns,
+        data: useMemo(() => data.current, [data.current]),
+        defaultColumn: defaultColumn
+    }, useGlobalFilter, useSortBy, usePagination);
 
     const spring = useMemo(() => ({ type: 'spring', damping: 50, stiffness: 100, }), []);
 
@@ -42,7 +49,7 @@ const GenkiIndexPage = () => {
         // @ts-ignore
         pageOptions, pageCount, gotoPage, nextPage, previousPage, setPageSize, state: { pageIndex, globalFilter },
         // @ts-ignore
-        setGlobalFilter, preGlobalFilteredRows
+        setGlobalFilter
     } = table;
 
     const [error, setError] = useState<string | undefined>(undefined);
@@ -52,6 +59,10 @@ const GenkiIndexPage = () => {
     const hasError = !!error;
 
     useEffect(() => {
+       loadTableData();
+    }, []);
+
+    const loadTableData = () => {
         setLoading(true);
         setError(undefined);
 
@@ -75,7 +86,7 @@ const GenkiIndexPage = () => {
         }).finally(() => {
             setLoading(false);
         });
-    }, []);
+    }
 
     const onSearch = useAsyncDebounce((value: string) => {
         setSearch(value);
@@ -126,7 +137,6 @@ const GenkiIndexPage = () => {
                                 <motion.th {...column.getHeaderProps({
                                     // @ts-ignore
                                     layoutTransition: spring,
-                                    style: { minWidth: column.minWidth },
                                     // @ts-ignore
                                     ...column.getSortByToggleProps()
                                 })}>
@@ -149,12 +159,8 @@ const GenkiIndexPage = () => {
 
                                 const colourClass = row.original.lesson < 12 ? styles.genkiOne : styles.genkiTwo;
                                 return (
-                                    <motion.tr {...row.getRowProps({
-                                            // @ts-ignore
-                                            layoutTransition: spring,
-                                            exit: { opacity: 0, maxHeight: 0 }
-                                        })} className={colourClass}
-                                    >{
+                                    // @ts-ignore
+                                    <motion.tr {...row.getRowProps({ layoutTransition: spring })} className={colourClass}>{
                                         row.cells.map(cell => {
                                             return (
                                                 // @ts-ignore
@@ -172,10 +178,30 @@ const GenkiIndexPage = () => {
                     </tbody>
                 </table>
 
-                {rows.length === 0 && <div className={styles.noResults}>
-                    <FontAwesomeIcon icon={faSearchMinus} fixedWidth size="sm" className={styles.icon} />
-                    <span>{`No results for '${search}'...`}</span>
-                </div>}
+                {rows.length === 0 && (
+                    <div className={styles.noResults}>
+                        {hasError && (<div className={styles.emptyWrapper}>
+                            <p className={styles.failureMessage}>
+                                <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faTimesCircle}/>
+                                <span>Error Loading Data</span>
+                            </p>
+                            <Button variant="outline-warning" className={styles.retry} onClick={loadTableData} disabled={loading}>
+                                {loading && <FontAwesomeIcon icon={faSpinner} fixedWidth spin />}
+                                <span>Retry</span>
+                            </Button>
+                        </div>)}
+
+                        {!hasError && !loading && (<div className={styles.emptyWrapper}>
+                            <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus}/>
+                            {<span>{`No results for '${search}'...`}</span>}
+                        </div>)}
+
+                        {loading && <div className={styles.emptyWrapper}>
+                            <LoadingSpinner variant="light" active={loading} />
+                            <span>Loading...</span>
+                        </div>}
+                    </div>
+                )}
 
                 <TablePagination
                     onNextPage={nextPage}

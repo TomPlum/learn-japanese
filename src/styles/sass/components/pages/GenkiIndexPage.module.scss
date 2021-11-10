@@ -100,6 +100,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   font-size: 2em;
   border-left: 2px solid $light-3;
   border-right: 2px solid $light-3;
@@ -109,10 +110,23 @@
   color: $light-1;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  height: 150px;
+  height: 200px;
   background-color: $dark-2;
 }
 
 .icon {
   margin-right: 5px;
+}
+
+.emptyWrapper {
+  text-align: center;
+  width: 100%;
+}
+
+.failureMessage {
+  margin-bottom: 0;
+}
+
+.retry {
+  width: 100px;
 }

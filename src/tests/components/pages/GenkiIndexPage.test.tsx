@@ -245,6 +245,26 @@ test('It should render the selected number of rows when changing the option in t
     expect(screen.getAllByRole('row')).toHaveLength(21) // Includes header row
 });
 
+test('It should render an error message in the table if no rows are returned from the server', async () => {
+    mockGetAllVocab.mockRejectedValueOnce({ error: "Oh no" });
+    setup();
+    expect(await screen.findByText('Error Loading Data')).toBeInTheDocument();
+});
+
+test('Clicking the retry button that\'s rendered in the table when no data is returned so retry loading', async () => {
+    // First API call should fail
+    mockGetAllVocab.mockRejectedValueOnce({ error: "Oh no" });
+    setup();
+
+    // Second should succeed, click the retry button
+    mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
+    fireEvent.click(await screen.findByText('Retry'));
+
+    // Should re-call the service and load the data
+    expect(mockGetAllVocab).toHaveBeenCalled();
+    expect(await screen.findByText('student'));
+});
+
 describe("Copying Values", () => {
     test('Clicking a kana value should copy it to the clipboard', async () => {
         mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
