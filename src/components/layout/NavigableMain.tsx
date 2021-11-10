@@ -9,9 +9,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 
 const NavigableMain = () => {
     return (
-        <div style={{ width: "100%" }}>
-            <NavigationWrapper />
-
+        <NavigationWrapper>
             <Switch>
                 <Route exact path="/menu/:mode" component={MainMenuPage}/>
                 <Route exact path="/search" component={SearchPage}/>
@@ -20,7 +18,7 @@ const NavigableMain = () => {
                 <Route exact path="/genki" component={GenkiIndexPage}/>
                 <Route component={NotFoundPage} />
             </Switch>
-        </div>
+        </NavigationWrapper>
     );
 }
 
