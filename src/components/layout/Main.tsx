@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MainMenuPage from "../pages/MainMenuPage";
 import SearchPage from "../pages/SearchPage";
 import LandingPage from "../pages/LandingPage";
@@ -13,7 +13,7 @@ class Main extends Component {
     render() {
         return (
             <div className={styles.wrapper}>
-                <HashRouter basename={process.env.REACT_APP_BASE_PATH}>
+                <BrowserRouter basename={process.env.REACT_APP_BASE_PATH}>
                     <Switch>
                         <Route exact path="/" component={LandingPage}/>
                         <Route exact path="/menu/:mode" component={MainMenuPage}/>
@@ -23,7 +23,7 @@ class Main extends Component {
                         <Route exact path="/genki" component={GenkiIndexPage} />
                         <Route component={NotFoundPage} />
                     </Switch>
-                </HashRouter>
+                </BrowserRouter>
             </div>
         );
     }

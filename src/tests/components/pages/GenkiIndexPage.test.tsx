@@ -9,7 +9,16 @@ jest.mock("../../../service/GenkiService", () => {
     return function() { return { getAllVocab: mockGetAllVocab } };
 });
 
-const mockClipboard = jest.fn().mockImplementation(() => Promise.resolve());
+const mockClipboard = jest.fn();
+Object.assign(navigator, { clipboard: { writeText: mockClipboard } });
+
+beforeEach(() => {
+    mockClipboard.mockResolvedValueOnce({});
+});
+
+afterEach(() => {
+    jest.clearAllMocks();
+});
 
 const setup = () => {
     const component = render(<GenkiIndexPage />);
@@ -280,7 +289,7 @@ describe("Copying Values", () => {
         expect(mockClipboard).toHaveBeenLastCalledWith('英語');
     });
 
-    test.skip('Clicking a meaning value should copy it to the clipboard', async () => {
+    test('Clicking a meaning value should copy it to the clipboard', async () => {
         mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
         setup();
 
@@ -288,12 +297,12 @@ describe("Copying Values", () => {
         expect(mockClipboard).toHaveBeenLastCalledWith('P.M.');
     });
 
-    test.skip('Clicking a lesson value should copy it to the clipboard', async () => {
+    test('Clicking a lesson value should copy it to the clipboard', async () => {
         mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
         setup();
 
         fireEvent.click(await screen.findByText('2'));
-        expect(mockClipboard).toHaveBeenLastCalledWith('2');
+        expect(mockClipboard).toHaveBeenLastCalledWith(2);
     });
 });
 
