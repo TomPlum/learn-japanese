@@ -183,32 +183,48 @@ const GenkiIndexPage = () => {
 
                 {rows.length === 0 && (
                     <div className={styles.noResults}>
-                        {hasError && (<div className={styles.emptyWrapper}>
-                            <p className={styles.failureMessage}>
-                                <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faTimesCircle}/>
-                                <span>Error Loading Data</span>
-                            </p>
-                            <Button variant="outline-warning" className={styles.retry} onClick={loadTableData} disabled={loading}>
-                                <FontAwesomeIcon
-                                    size="sm"
-                                    fixedWidth
-                                    spin={loading}
-                                    className={styles.icon}
-                                    icon={loading ? faSpinner : faRedo}
-                                />
-                                <span>Retry</span>
-                            </Button>
-                        </div>)}
+                        {hasError && (
+                            <div className={styles.emptyWrapper}>
+                                <p className={styles.failureMessage}>
+                                    <FontAwesomeIcon
+                                        fixedWidth
+                                        size="sm"
+                                        icon={faTimesCircle}
+                                        className={styles.icon}
+                                    />
+                                    <span>Error Loading Data</span>
+                                </p>
+                                <Button
+                                    disabled={loading}
+                                    onClick={loadTableData}
+                                    className={styles.retry}
+                                    variant="outline-warning"
+                                >
+                                    <FontAwesomeIcon
+                                        size="sm"
+                                        fixedWidth
+                                        spin={loading}
+                                        className={styles.icon}
+                                        icon={loading ? faSpinner : faRedo}
+                                    />
+                                    <span>Retry</span>
+                                </Button>
+                            </div>
+                        )}
 
-                        {!hasError && !loading && (<div className={styles.emptyWrapper}>
-                            <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus}/>
-                            {<span>{`No results for '${search}'...`}</span>}
-                        </div>)}
+                        {!hasError && !loading && (
+                            <div className={styles.emptyWrapper}>
+                                <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus}/>
+                                {<span>{`No results for '${search}'...`}</span>}
+                            </div>
+                        )}
 
-                        {loading && <div className={styles.emptyWrapper}>
-                            <LoadingSpinner variant="light" active={loading} />
-                            <span>Loading...</span>
-                        </div>}
+                        {loading && (
+                            <div className={styles.emptyWrapper}>
+                                <LoadingSpinner variant="light" active={loading} />
+                                <span>Loading...</span>
+                            </div>
+                        )}
                     </div>
                 )}
 
