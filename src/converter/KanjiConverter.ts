@@ -24,7 +24,7 @@ class KanjiConverter {
             const readings = on.concat(kun);
 
             const grade = KyoikuGrade.fromInteger(result.grade);
-            const tags = result.tags ?? [];
+            const tags = result.tags;
             const source = result.source ?? "";
             const examples = result.examples.map((it: KanjiExample) => new Example(it.value, it.kana, it.english));
 
