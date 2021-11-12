@@ -16,9 +16,15 @@ import { setActive, setApplicationMode } from "../../../slices/ModeSlice";
 import { AppMode } from "../../../domain/AppMode";
 
 //Mock Learning Data Repository
-const mockLearningDataRepository = jest.fn();
+const mockLearningDataRepositoryRead = jest.fn();
 jest.mock("../../../repository/LearningDataRepository", () => {
-   return function () { return { read: mockLearningDataRepository } }
+   return function () { return { read: mockLearningDataRepositoryRead } }
+});
+
+//Mock Kanji Repository
+const mockKanjiRepositoryGetByValue = jest.fn();
+jest.mock("../../../repository/KanjiRepository", () => {
+   return function () { return { getByValue: mockKanjiRepositoryGetByValue } }
 });
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
@@ -53,6 +59,8 @@ beforeEach(() => {
 
    store.dispatch(setActive(true));
    store.dispatch(setApplicationMode(AppMode.LEARN));
+
+   mockKanjiRepositoryGetByValue.mockResolvedValue(kanjiGradeOne);
 });
 
 const setup = () => {
@@ -79,7 +87,7 @@ const setup = () => {
 }
 
 test('Selecting a game mode should hide the menu and render the game', async () => {
-   mockLearningDataRepository.mockResolvedValueOnce(hiragana);
+   mockLearningDataRepositoryRead.mockResolvedValueOnce(hiragana);
    setup();
    fireEvent.click(screen.getByText('Start'));
    expect(await screen.findByTestId('memory-game')).toBeInTheDocument();
@@ -87,7 +95,7 @@ test('Selecting a game mode should hide the menu and render the game', async () 
 
 describe('Play', () => {
    test('Quitting the game should close the game window and re-render the results screen', async () => {
-      mockLearningDataRepository.mockResolvedValueOnce(hiragana);
+      mockLearningDataRepositoryRead.mockResolvedValueOnce(hiragana);
       setup();
 
       fireEvent.click(screen.getByText('Start'));
@@ -125,7 +133,7 @@ describe('Play', () => {
 
 describe('Learn', () => {
    test('Quitting a learning session without having flipped a card should re-render the menu', async () => {
-      mockLearningDataRepository.mockResolvedValueOnce(hiragana);
+      mockLearningDataRepositoryRead.mockResolvedValueOnce(hiragana);
 
       setup();
       store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
@@ -140,7 +148,7 @@ describe('Learn', () => {
    });
 
    test('Quitting a learning session mid-session (having flipped one or more cards) should show the result screen', async () => {
-      mockLearningDataRepository.mockResolvedValueOnce(hiragana);
+      mockLearningDataRepositoryRead.mockResolvedValueOnce(hiragana);
 
       setup();
       store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
@@ -157,7 +165,7 @@ describe('Learn', () => {
    });
 
    test('Clicking \'Practice Mistakes\' on the learning results screen should start a new session with the mistakes', async () => {
-      mockLearningDataRepository.mockResolvedValueOnce(hiragana);
+      mockLearningDataRepositoryRead.mockResolvedValueOnce(hiragana);
 
       setup();
       store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
@@ -182,7 +190,7 @@ describe('Learn', () => {
    });
 
    test('Dismissing the learning results screen should close it and re-render the main menu', async () => {
-      mockLearningDataRepository.mockResolvedValueOnce(hiragana);
+      mockLearningDataRepositoryRead.mockResolvedValueOnce(hiragana);
 
       setup();
       store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
@@ -202,7 +210,7 @@ describe('Learn', () => {
    });
 
    test('Starting a Calendar learning session should render the correct flash card types', async () => {
-      mockLearningDataRepository.mockResolvedValueOnce([day]);
+      mockLearningDataRepositoryRead.mockResolvedValueOnce([day]);
       const { calendar } = setup();
 
       store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn
@@ -213,7 +221,7 @@ describe('Learn', () => {
    });
 
    test('Starting a Kanji learning session should render the correct flash card types', async  () => {
-      mockLearningDataRepository.mockResolvedValueOnce([kanjiGradeOne]);
+      mockLearningDataRepositoryRead.mockResolvedValueOnce([kanjiGradeOne]);
       const { kanji } = setup();
 
       store.dispatch(setApplicationMode(AppMode.LEARN)) //Switch to Learn

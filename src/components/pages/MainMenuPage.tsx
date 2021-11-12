@@ -53,13 +53,12 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
         setDataConfig(settings.dataSettings);
         setLoading(true);
 
-        new LearningDataRepository().read(settings.dataSettings)
-            .then(data => {
-                setData(data);
-            }).finally(() => {
-                setLoading(false);
-                modeDispatcher(setActive(false));
-            });
+        new LearningDataRepository().read(settings.dataSettings).then(data => {
+            setData(data);
+        }).finally(() => {
+            setLoading(false);
+            modeDispatcher(setActive(false));
+        });
     }
 
     const onGameResultMenuClose = () => {
@@ -133,8 +132,8 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
                     <Learn
                         data={data}
                         key={sessionKey.value}
-                        card={dataConfig?.topic.cards!}
                         onFinish={onLearningFinish}
+                        card={dataConfig?.topic.cards!}
                     />
                 }
 
