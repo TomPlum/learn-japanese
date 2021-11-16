@@ -6,6 +6,7 @@ import ProfilePage from "../pages/ProfilePage";
 import GenkiIndexPage from "../pages/GenkiIndexPage";
 import NavigationWrapper from "./NavigationWrapper";
 import NotFoundPage from "../pages/NotFoundPage";
+import LearnOnline from "../learn/LearnOnline";
 
 const NavigableMain = () => {
     return (
@@ -16,6 +17,7 @@ const NavigableMain = () => {
                 <Route exact path="/help" component={HelpPage}/>
                 <Route exact path="/profile" component={ProfilePage}/>
                 <Route exact path="/genki" component={GenkiIndexPage}/>
+                <Route exact path="/learn/kanji" component={LearnOnline} />
                 <Route component={NotFoundPage} />
             </Switch>
         </NavigationWrapper>

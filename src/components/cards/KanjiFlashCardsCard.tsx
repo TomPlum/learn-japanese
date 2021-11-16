@@ -1,5 +1,4 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { User } from "../../slices/UserSlice";
 import { useEffect, useState } from "react";
 import SpacedRepetitionService, { FlashCardsResponse } from "../../service/SpacedRepetitionService";
 import { FlashCard } from "../../domain/learn/FlashCard";
@@ -8,14 +7,13 @@ import styles from "../../styles/sass/components/cards/KanjiFlashCardsCard.modul
 import ReloadButton from "../ui/buttons/ReloadButton";
 import { faRedo, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useHistory } from "react-router-dom";
 
-export interface KanjiFlashCardsCardProps {
-    user: User;
-}
-
-const KanjiFlashCardsCard = (props: KanjiFlashCardsCardProps) => {
+const KanjiFlashCardsCard = () => {
 
     const service = new SpacedRepetitionService();
+
+    const history = useHistory();
 
     const [cards, setCards] = useState<FlashCard[]>([]);
     const [loading, setLoading] = useState(false);
@@ -46,6 +44,10 @@ const KanjiFlashCardsCard = (props: KanjiFlashCardsCardProps) => {
         loadKanjiFlashCards();
     }
 
+    const onReview = () => {
+        history.push("/learn/kanji");
+    }
+
     return (
         <Card className={styles.card} border="info">
             <Card.Body>
@@ -69,7 +71,7 @@ const KanjiFlashCardsCard = (props: KanjiFlashCardsCardProps) => {
                         <p className={styles.label}>{(cards.length !== 1 ? "Cards" : "Card") + " to Review"}</p>
                     </Col>
                     <Col>
-                        <Button disabled={!!error || cards.length === 0}>Review</Button>
+                        <Button disabled={!!error || cards.length === 0} onClick={onReview}>Review</Button>
                     </Col>
                 </Row>
             </Card.Body>

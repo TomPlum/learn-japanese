@@ -1,43 +1,24 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiFlashCardsCard from "../../../components/cards/KanjiFlashCardsCard";
-import { User } from "../../../slices/UserSlice";
 import Definition from "../../../domain/sentence/Definition";
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
 import { FlashCard } from "../../../domain/learn/FlashCard";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
 
 const mockGetKanjiFlashCards = jest.fn();
 jest.mock("../../../service/SpacedRepetitionService", () => {
     return function() { return { getKanjiFlashCards: mockGetKanjiFlashCards } };
 });
 
-const user: User = {
-    username: "TomPlum42",
-    nickname: "Tom",
-    email: "tom@hotmail.com",
-    creationDate: "2021-08-09T00:00",
-    enabled: true,
-    credentialsExpired: false,
-    locked: false,
-    expired: false,
-    roles: ["user"],
-    token: "TOKEN",
-    preferences: {
-        defaultFont: "Gothic",
-        theme: "Dark Mode",
-        language: "English",
-        highScores: "Ask Each Time",
-        defaultMode: "Play",
-        cardsPerDay: 10,
-        confidenceMenuStyle: "Numbers 1 - 6"
-    }
-}
+const history = createMemoryHistory();
 
 const definition = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective");
 const spaceRepetitionDetails = new SpaceRepetitionDetails(2.5, 0, 0, "2021-12-12");
 const flashCard = new FlashCard(1, definition, spaceRepetitionDetails);
 
 const setup = async () => {
-    const component = render(<KanjiFlashCardsCard user={user} />);
+    const component = render(<Router history={history}><KanjiFlashCardsCard /></Router>);
     return {
         review: await component.findByText('Review'),
         ...component
@@ -97,4 +78,11 @@ test('Should enable the review button if there are cards to review', async () =>
     mockGetKanjiFlashCards.mockResolvedValue({ cards: [flashCard, flashCard] });
     const { review } = await setup();
     expect(review).not.toBeDisabled();
+});
+
+test('Should redirect to the learn kanji page when clicking the review button', async () => {
+    mockGetKanjiFlashCards.mockResolvedValue({ cards: [flashCard] });
+    const { review } = await setup();
+    fireEvent.click(review);
+    expect(history.entries.map(it => it.pathname)).toContain("/learn/kanji");
 });
