@@ -38,6 +38,8 @@ beforeEach(() => {
 describe("Kana Repository", () => {
     const repository = new KanaRepository();
 
+    test.todo("Test the new get kana method that hits the API");
+
     it("Should return only the quantity specified when the config parameter is passed", () => {
         const settings = new KanaSettingsBuilder().withHiragana().withQuantity(3).build();
         return repository.read(settings).then(response => {
