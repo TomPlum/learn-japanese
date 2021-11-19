@@ -6,6 +6,7 @@ import { Kanji } from "../../domain/kanji/Kanji";
 import { KanjiReading } from "../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../domain/kanji/ReadingType";
 import { Example } from "../../domain/kanji/Example";
+import { PaginationRequest } from "../../rest/request/PaginationRequest";
 
 //Mock Kanji Converter
 const mockConverter = jest.fn();
@@ -75,6 +76,15 @@ describe("Kanji Repository", () => {
             const settings = new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withQuantity(120).build();
             return repository.read(settings).then(() => {
                 expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [1], quantity: 120 });
+            });
+        });
+
+        it("Should call the API endpoint with the specified pagination if specified", () => {
+            mockPost.mockResolvedValueOnce({ data: [] });
+            const settings = new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).build();
+            const pagination: PaginationRequest = { page: 0, size: 10 };
+            return repository.read(settings, pagination).then(() => {
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [1], paging: { page: 0, size: 10 } });
             });
         });
 

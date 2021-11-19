@@ -3,6 +3,7 @@ import KanjiSettings from "../domain/session/settings/data/KanjiSettings";
 import { Kanji } from "../domain/kanji/Kanji";
 import RestClient from "../rest/RestClient";
 import KanjiConverter from "../converter/KanjiConverter";
+import { PaginationRequest } from "../rest/request/PaginationRequest";
 
 export interface KanjiResponseModel {
     character: string;
@@ -27,6 +28,12 @@ export interface ExampleResponseModel {
     english: string[];
 }
 
+interface KanjiByGradeRequest {
+    grades: number[];
+    quantity?: number;
+    paging: PaginationRequest;
+}
+
 export default class KanjiRepository implements Repository<Kanji> {
 
     private readonly converter = new KanjiConverter()
@@ -34,10 +41,16 @@ export default class KanjiRepository implements Repository<Kanji> {
     /**
      * Retrieves kanji based on the given settings.
      * @param settings Rules governing which kanji to return.
+     * @param pagination Pagination information.
      * @return kanji An array of matched kanji. Empty if none matched.
      */
-    public async read(settings: KanjiSettings): Promise<Kanji[]> {
-        const request = { grades: settings.grades.map(it => it.value), quantity: settings.quantity };
+    public async read(settings: KanjiSettings, pagination: PaginationRequest = { page: 0, size: 9999 }): Promise<Kanji[]> {
+        const request: KanjiByGradeRequest = {
+            grades: settings.grades.map(grade => grade.value),
+            quantity: settings.quantity,
+            paging: pagination
+        };
+
         return RestClient.post<KanjiResponseModel[]>("/kanji/by-grade", request).then(response => {
             if (response.data) {
                 return this.converter.convert(response.data)
