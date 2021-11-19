@@ -6,7 +6,7 @@ import styles from "../../../styles/sass/components/ui/buttons/HelpButton.module
 const HelpButton = () => {
     return (
         <NavigationButton text="Help" icon={faInfoCircle} iconClass={menuStyles.icon} textClass={menuStyles.linkText} width={250}>
-            <NavigationButton.Item icon={faPaintBrush} href="/help" iconClass={styles.kanji}>
+            <NavigationButton.Item icon={faPaintBrush} href="/kanji" iconClass={styles.kanji}>
                 Jōyō Kanji Bank
             </NavigationButton.Item>
 
