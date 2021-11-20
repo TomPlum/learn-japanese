@@ -84,7 +84,7 @@ const LoginForm = (props: LoginFormProps) => {
                 setPasswordValid(false)
                 setError("Username or password is incorrect.");
             } else {
-                setError("An unknown login error has occurred.");
+                setError("Sorry, an unknown error has occurred.");
             }
         }).finally(() => {
             setLoading(false);
