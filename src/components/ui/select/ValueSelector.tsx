@@ -18,10 +18,10 @@ const ValueSelector = (props: ValueSelectorProps) => {
 
     return (
         <Form.Control
-            custom
-            as="select"
+            custom as="select"
             onChange={handleChange}
             disabled={props.disabled}
+            data-testid="value-selector"
             className={[props.className, styles.select].join(" ")}
         >
             {props.values.map(pageSize => (
