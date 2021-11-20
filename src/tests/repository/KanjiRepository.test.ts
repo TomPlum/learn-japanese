@@ -7,6 +7,7 @@ import { KanjiReading } from "../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../domain/kanji/ReadingType";
 import { Example } from "../../domain/kanji/Example";
 import { PaginationRequest } from "../../rest/request/PaginationRequest";
+import { JLTPLevel } from "../../domain/learn/JLTPLevel";
 
 //Mock Kanji Converter
 const mockConverter = jest.fn();
@@ -20,6 +21,7 @@ const exampleKanji = new Kanji("小",
     [new KanjiReading("shō", "しょう", ReadingType.ON), new KanjiReading("chīsai", "ちいさい", ReadingType.KUN)],
     ["small", "little"],
     KyoikuGrade.ONE,
+    JLTPLevel.N5,
     "https://en.wiktionary.org/wiki/%E5%B0%8F#Kanji",
     [new Example("小説", ["しょうせつ"], ["novel", "short story"])],
     ["size"]

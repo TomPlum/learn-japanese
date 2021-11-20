@@ -1,10 +1,11 @@
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import KanjiFlashCards, { KanjiFlashCardsProps } from "../../../components/learn/KanjiFlashCards";
 import { Kanji } from "../../../domain/kanji/Kanji";
 import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 import renderReduxConsumer from "../../renderReduxConsumer";
+import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
 
 const mockGetKanjiFlashCards = jest.fn();
 const mockUpdateKanjiFlashCard = jest.fn();
@@ -14,10 +15,10 @@ jest.mock("../../../service/SpacedRepetitionService", () => {
 
 const onFinishHandler = jest.fn();
 
-const one = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]);
-const fish = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]);
-const bird = new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, "", [], ["animal"]);
-const person = new Kanji("人", [new KanjiReading("jin", "じん", ReadingType.ON)], ["person"], KyoikuGrade.ONE, "", [], ["people"]);
+const one = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5,"", [], ["number"]);
+const fish = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]);
+const bird = new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]);
+const person = new Kanji("人", [new KanjiReading("jin", "じん", ReadingType.ON)], ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], ["people"]);
 
 let props: KanjiFlashCardsProps;
 

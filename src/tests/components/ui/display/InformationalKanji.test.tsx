@@ -3,6 +3,7 @@ import InformationalKanji from "../../../../components/ui/display/InformationalK
 import KanjiRepository from "../../../../repository/KanjiRepository";
 import { Kanji } from "../../../../domain/kanji/Kanji";
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
+import { JLTPLevel } from "../../../../domain/learn/JLTPLevel";
 
 /*const { getByValue } = mock(import("../../../../repository/KanjiRepository"), () => {
     getByValue: jest.fn()
@@ -42,7 +43,7 @@ beforeEach(() => {
     //mockRepository.mockClear();
     const repository = new KanjiRepository();
     repository.getByValue = jest.fn().mockReturnValue(() => {
-        return [new Kanji("猫", [], [], KyoikuGrade.EIGHT, "", [], [])];
+        return [new Kanji("猫", [], [], KyoikuGrade.EIGHT, JLTPLevel.N5, "", [], [])];
     });
 });
 

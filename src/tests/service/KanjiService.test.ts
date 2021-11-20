@@ -5,6 +5,7 @@ import { PaginationRequest } from "../../rest/request/PaginationRequest";
 import { Kanji } from "../../domain/kanji/Kanji";
 import { KanjiReading } from "../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../domain/kanji/ReadingType";
+import { JLTPLevel } from "../../domain/learn/JLTPLevel";
 
 //Mock Kanji Repository
 const mockKanjiRepository = jest.fn();
@@ -17,7 +18,7 @@ describe("Kanji Service", () => {
 
     describe("Get Kanji Page", () => {
 
-        const kanji = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], []);
+        const kanji = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], []);
 
         it("Should call the repository with the given pagination details and grades", () => {
             mockKanjiRepository.mockResolvedValueOnce([]);

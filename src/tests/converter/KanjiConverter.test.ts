@@ -4,6 +4,7 @@ import { ReadingType } from "../../domain/kanji/ReadingType";
 import { KanjiReading } from "../../domain/kanji/KanjiReading";
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
 import { Example } from "../../domain/kanji/Example";
+import { JLTPLevel } from "../../domain/learn/JLTPLevel";
 
 describe("Kanji Converter", () => {
 
@@ -61,6 +62,44 @@ describe("Kanji Converter", () => {
         source.examples = [{ value: "some-kanji", kana: ["some-kana"], english: ["some-english"] }];
         const response = converter.convert([source]);
         expect(response[0].examples).toStrictEqual([new Example("some-kanji", ["some-kana"], ["some-english"])]);
+    });
+
+    describe("Japanese Level Proficiency Test Level", () => {
+        it("Should convert N1 level", () => {
+            source.jlpt = 1;
+            const response = converter.convert([source]);
+            expect(response[0].jlpt).toBe(JLTPLevel.N1);
+        });
+
+        it("Should convert N2 level", () => {
+            source.jlpt = 2;
+            const response = converter.convert([source]);
+            expect(response[0].jlpt).toBe(JLTPLevel.N2);
+        });
+
+        it("Should convert N3 level", () => {
+            source.jlpt = 3;
+            const response = converter.convert([source]);
+            expect(response[0].jlpt).toBe(JLTPLevel.N3);
+        });
+
+        it("Should convert N4 level", () => {
+            source.jlpt = 4;
+            const response = converter.convert([source]);
+            expect(response[0].jlpt).toBe(JLTPLevel.N4);
+        });
+
+        it("Should convert N5 level", () => {
+            source.jlpt = 5;
+            const response = converter.convert([source]);
+            expect(response[0].jlpt).toBe(JLTPLevel.N5);
+        });
+
+        it("Should convert an invalid value", () => {
+            source.jlpt = 89;
+            const response = converter.convert([source]);
+            expect(response[0].jlpt).toBe(JLTPLevel.UNKNOWN);
+        });
     });
 
 });

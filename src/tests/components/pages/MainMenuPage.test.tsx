@@ -14,6 +14,7 @@ import Definition from "../../../domain/sentence/Definition";
 import { store } from "../../../store";
 import { setActive, setApplicationMode } from "../../../slices/ModeSlice";
 import { AppMode } from "../../../domain/AppMode";
+import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
 
 //Mock Learning Data Repository
 const mockLearningDataRepositoryRead = jest.fn();
@@ -37,6 +38,7 @@ const kanjiGradeOne = new Kanji(
     [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)],
     ["person"],
     KyoikuGrade.ONE,
+    JLTPLevel.N5,
     "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
     [new Example("外国人", ["がいこくじん"], ["foreigner"])],
     []

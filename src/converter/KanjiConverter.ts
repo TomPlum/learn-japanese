@@ -6,6 +6,7 @@ import { ReadingType } from "../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../domain/kanji/KyoikuGrade";
 import { KanjiExample } from "../data/DataTypes";
 import { Example } from "../domain/kanji/Example";
+import { JLTPLevel } from "../domain/learn/JLTPLevel";
 
 class KanjiConverter {
 
@@ -24,16 +25,28 @@ class KanjiConverter {
             const readings = on.concat(kun);
 
             const grade = KyoikuGrade.fromInteger(result.grade);
+            const jlpt = KanjiConverter.convertJlptLevel(result.jlpt);
             const tags = result.tags;
             const source = result.source ?? "";
             const examples = result.examples.map((it: KanjiExample) => new Example(it.value, it.kana, it.english));
 
-            return new Kanji(result.character, readings, result.meanings, grade, source, examples, tags);
+            return new Kanji(result.character, readings, result.meanings, grade, jlpt, source, examples, tags);
         });
     }
 
     private convertReading(reading: ReadingResponseModel, type: ReadingType) {
         return new KanjiReading(this.romajiGenerator.generate(reading.value), reading.value, type);
+    }
+
+    private static convertJlptLevel(level?: number): JLTPLevel {
+        switch (level) {
+            case 1: return JLTPLevel.N1;
+            case 2: return JLTPLevel.N2;
+            case 3: return JLTPLevel.N3;
+            case 4: return JLTPLevel.N4;
+            case 5: return JLTPLevel.N5;
+            default: return JLTPLevel.UNKNOWN;
+        }
     }
 }
 

@@ -5,6 +5,7 @@ import { Kanji } from "../../../domain/kanji/Kanji";
 import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
+import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
 
 describe("Learnable Field", () => {
     describe("From Name String", () => {
@@ -52,7 +53,7 @@ describe("Learnable Field", () => {
         });
 
         it("Kanji", () => {
-            const kanji = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]);
+            const kanji = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]);
             expect(kanji.getValue()).toMatch(LearnableField.KANJI.validationRegex);
         });
 
@@ -61,6 +62,7 @@ describe("Learnable Field", () => {
                 [new KanjiReading("tori", "とり", ReadingType.ON)],
                 ["bird"],
                 KyoikuGrade.TWO,
+                JLTPLevel.N5,
                 "", [],
                 ["animal"]
             ).getOnyomiReadings().map(it => it.kana);
@@ -72,7 +74,7 @@ describe("Learnable Field", () => {
             const readings = new Kanji("魚",
                 [new KanjiReading("sakana", "さかな", ReadingType.KUN)],
                 ["fish"],
-                KyoikuGrade.TWO, "",
+                KyoikuGrade.TWO, JLTPLevel.N5, "",
                 [], ["animal"]
             ).getKunyomiReadings().map(it => it.kana);
 

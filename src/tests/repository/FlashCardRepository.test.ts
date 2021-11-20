@@ -7,6 +7,7 @@ import { ReadingType } from "../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
 import RestClient from "../../rest/RestClient";
 import { Example } from "../../domain/kanji/Example";
+import { JLTPLevel } from "../../domain/learn/JLTPLevel";
 
 const mockMessageQueue = jest.fn();
 jest.mock("../../rest/MessageQueue", () => {
@@ -64,6 +65,7 @@ describe("Flash Card Repository", () => {
                             [new KanjiReading("hitotsu", "ひとつ", ReadingType.KUN)],
                             ["one"],
                             KyoikuGrade.ONE,
+                            JLTPLevel.N5,
                             "https://en.wiktionary.org/wiki/%E4%B8%80#Kanji",
                             [new Example("一つ", ["ひとつ"], ["one"])],
                             ["number"]
@@ -90,7 +92,7 @@ describe("Flash Card Repository", () => {
     });
 
     describe("Update", () => {
-        const kanji = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]);
+        const kanji = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], ["number"]);
 
         it("Should call the message queue with the endpoint details and request", () => {
             const card = new FlashCard(10, kanji, new SpaceRepetitionDetails(2.5, 0, 0, "2020-10-21"));
