@@ -150,7 +150,7 @@ test('When the auth service returns an error, it should render a generic error m
     //Login
     fireEvent.click(login);
 
-    expect(await screen.findByText('An unknown login error has occurred.')).toBeInTheDocument();
+    expect(await screen.findByText('Sorry, an unknown error has occurred.')).toBeInTheDocument();
 });
 
 test('When the auth service returns an an authentication error then it should render an alert', async () => {
