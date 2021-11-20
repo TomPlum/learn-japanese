@@ -20,7 +20,7 @@ beforeEach(() => {
 
 it('Register a new user', () => {
     //Visits the play screen.
-    cy.visit('#/#/menu/play');
+    cy.visit('menu/play');
 
     //Gets to register screen.
     cy.contains('Login').click();

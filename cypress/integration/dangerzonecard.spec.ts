@@ -18,7 +18,7 @@ it('Can delete account', () => {
 
 
     cy.login()
-    cy.visit('#/profile')
+    cy.visit('profile')
 
     cy.contains('Danger Zone')
     cy.class('DangerZone_icon').class('DangerZone_unlock').click({force: true})

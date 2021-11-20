@@ -1,5 +1,5 @@
 it('Check profile screen', () => {
-    cy.visit('#/#/menu/play');
+    cy.visit('menu/play');
 
     //Types in the username and password and logs in.
     cy.contains('Login').click();
