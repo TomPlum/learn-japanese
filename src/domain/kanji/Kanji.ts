@@ -94,6 +94,10 @@ export class Kanji extends Learnable {
         return this._character;
     }
 
+    getJishoLink(): string {
+        return `https://jisho.org/search/${this.getKanjiVariation()}`;
+    }
+
     equals(other: Learnable): boolean {
         return this.getKanjiVariation() === other.getKanjiVariation();
     }

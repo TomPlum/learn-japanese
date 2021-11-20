@@ -105,6 +105,10 @@ describe("Kanji", () => {
         it("Should return the kanji character for the unique ID", () => {
             expect(kanji.getUniqueID()).toBe("人");
         });
+
+        it("Should return a Jisho online dictionary link when getting the jisho link", () => {
+            expect(kanji.getJishoLink()).toBe("https://jisho.org/search/人");
+        });
     });
 
     describe("Equality", () => {
