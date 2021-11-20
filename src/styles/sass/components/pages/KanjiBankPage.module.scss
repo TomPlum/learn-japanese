@@ -1,0 +1,87 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.kanji {
+  font-size: 3em;
+  width: 100px;
+  height: 100px;
+}
+
+.kanji span {
+  color: $light-1;
+  text-decoration: none;
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
+}
+
+.kanji span:hover {
+  color: $inspect;
+}
+
+.selected {
+  color: $light-1;
+  font-size: 3em;
+  text-decoration: none;
+  transition: all ease-in-out 0.2s;
+}
+
+.selected:hover {
+  text-decoration: none;
+}
+
+.highlight span {
+  color: $inspect;
+}
+
+.meanings {
+  display: block;
+  width: 100%;
+}
+
+.info {
+  border-right: 1px solid $light-2;
+}
+
+.label {
+  display: block;
+  color: $light-2;
+  margin-bottom: 0;
+}
+
+.value {
+  display: block;
+  color: $light-1;
+  font-size: 1.5em;
+  transition: color ease-in-out 0.2s;
+}
+
+.value:hover {
+  color: #FFF;
+}
+
+.section {
+  margin-bottom: 15px;
+}
+
+.pagination {
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+  color: $light-1;
+}
+
+.pagination span {
+  margin: 0 6px;
+}
+
+.pagination button {
+  border: none;
+  background-color: transparent;
+}
+
+.pagination button:hover {
+  border: none;
+  background-color: transparent;
+  color: $inspect;
+}
