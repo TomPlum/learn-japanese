@@ -1,10 +1,15 @@
 @import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
 
 .wrapper {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
 }
 
 .kanji {
+  @include noSelect;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 3em;
   width: 100px;
   height: 100px;
@@ -23,7 +28,7 @@
 
 .selected {
   color: $light-1;
-  font-size: 3em;
+  font-size: 1.5em;
   text-decoration: none;
   transition: all ease-in-out 0.2s;
 }
@@ -71,17 +76,57 @@
   color: $light-1;
 }
 
-.pagination span {
-  margin: 0 6px;
+.pagination .page {
+  margin: 0 15px;
 }
 
-.pagination button {
+.pagination button, .pagination button:active, .pagination button:focus {
+  padding: 0 6px;
+  box-shadow: none !important;
   border: none;
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .pagination button:hover {
   border: none;
+  box-shadow: none;
   background-color: transparent;
   color: $inspect;
+}
+
+.rightSideWrapper {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.kanjiWrapper {
+  flex: 1 1 auto;
+}
+
+.footer {
+  flex: 0 1 25px;
+}
+
+.pageSize {
+  float: right;
+}
+
+.search {
+  padding: 0 32px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.search input, .search input:focus {
+  height: 40px;
+  font-size: 1.2em;
+  background-color: transparent;
+  box-shadow: none;
+  border-color: #FFF;
+  color: #FFF;
+}
+
+.search div {
+  background-color: transparent;
 }

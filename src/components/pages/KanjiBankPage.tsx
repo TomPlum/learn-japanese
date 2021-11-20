@@ -1,5 +1,5 @@
-import { Alert, Button, Col, Container, Pagination, Row } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import KanjiService from "../../service/KanjiService";
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
 import { Kanji } from "../../domain/kanji/Kanji";
@@ -9,9 +9,10 @@ import StackGrid, { transitions } from "react-stack-grid";
 import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss";
 import { useFontSelector } from "../../hooks";
 import KanjiMeaningDisplay from "../learn/kanji/KanjiMeaningDisplay";
-import { ReadingType } from "../../domain/kanji/ReadingType";
 import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ValueSelector from "../ui/select/ValueSelector";
+import SearchField from "../ui/fields/SearchField";
 
 const KanjiBankPage = () => {
 
@@ -21,6 +22,7 @@ const KanjiBankPage = () => {
     const [kanji, setKanji] = useState<Kanji[]>([]);
     const [page, setPage] = useState(0);
     const [pageSize, setPageSize] = useState(30);
+    const [search, setSearch] = useState("");
     const [grades, setGrades] = useState(KyoikuGrade.ALL);
     const [selected, setSelected] = useState<Kanji | undefined>(undefined);
     const [loading, setLoading] = useState(false);
@@ -51,6 +53,7 @@ const KanjiBankPage = () => {
                 <Col lg={2} className={styles.info}>
                     {selected && (<>
                         <div className={styles.section}>
+                            <p className={styles.label}>Character</p>
                             <a className={styles.selected} href={selected.getJishoLink()}>
                                 {selected.getKanjiVariation()}
                             </a>
@@ -75,12 +78,16 @@ const KanjiBankPage = () => {
 
                         <div className={styles.section}>
                             <p className={styles.label}>On'yomi Readings</p>
-                            <p className={styles.value}>{selected.getOnyomiReadings().map(it => it.kana).join(", ")}</p>
+                            <p className={styles.value}>
+                                {selected.getOnyomiReadings().map(it => it.kana).join(", ")}
+                            </p>
                         </div>
 
                         <div className={styles.section}>
                             <p className={styles.label}>Kun'yomi Readings</p>
-                            <p className={styles.value}>{selected.getKunyomiReadings().map(it => it.kana).join(", ")}</p>
+                            <p className={styles.value}>
+                                {selected.getKunyomiReadings().map(it => it.kana).join(", ")}
+                            </p>
                         </div>
 
                         <div className={styles.section}>
@@ -91,11 +98,23 @@ const KanjiBankPage = () => {
                     </>)}
                 </Col>
 
-                <Col lg={10}>
+                <Col lg={10} className={styles.rightSideWrapper}>
                     {error && <Alert variant="danger" className={styles.error}>{error}</Alert>}
-                    <LoadingSpinner active={loading} />
+                    <LoadingSpinner active={loading} className={styles.loading} variant="warning" />
 
-                    <Row>
+                    <Row className={styles.header}>
+                        <Col>
+                            <SearchField
+                                value={search}
+                                disabled={loading}
+                                placeholder="search"
+                                className={styles.search}
+                                onChange={(value: string) => setSearch(value)}
+                            />
+                        </Col>
+                    </Row>
+
+                    <Row className={styles.kanjiWrapper}>
                         <Col>
                             {kanji && !loading && (
                                 <StackGrid
@@ -131,7 +150,8 @@ const KanjiBankPage = () => {
                             )}
                         </Col>
                     </Row>
-                    <Row>
+
+                    <Row className={styles.footer}>
                         <Col>
                             <div className={styles.pagination}>
                                 <Button onClick={() => setPage(0)} variant="dark">
@@ -142,7 +162,7 @@ const KanjiBankPage = () => {
                                     <FontAwesomeIcon icon={faChevronLeft} fixedWidth />
                                 </Button>
 
-                                <span>{page + 1}</span>
+                                <span className={styles.page}>{page + 1}</span>
 
                                 <Button onClick={() => setPage(page + 1)} variant="dark">
                                     <FontAwesomeIcon icon={faChevronRight} fixedWidth />
@@ -152,6 +172,16 @@ const KanjiBankPage = () => {
                                     <FontAwesomeIcon icon={faAngleDoubleRight} fixedWidth />
                                 </Button>
                             </div>
+                        </Col>
+
+                        <Col>
+                            <ValueSelector
+                                prefix="Show"
+                                disabled={loading}
+                                values={[20, 40, 60, 80]}
+                                className={styles.pageSize}
+                                onChange={(value: number) => setPageSize(value)}
+                            />
                         </Col>
                     </Row>
                 </Col>

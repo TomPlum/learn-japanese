@@ -1,0 +1,16 @@
+@import "src/styles/sass/colours";
+
+.select {
+  background-color: transparent;
+  color: $light-1;
+  border: none;
+  width: 100px;
+}
+
+.select:active, .select:focus {
+  box-shadow: none;
+}
+
+.select:hover {
+  cursor: pointer;
+}
