@@ -135,14 +135,14 @@ const KanjiBankPage = () => {
                                 >
                                     {kanji.map(value => {
                                         const selectedClass = value.getUniqueID() === selected?.getUniqueID()
-                                            ? styles.highlight : undefined;
+                                            ? styles.highlight : styles.kanji;
                                         return (
                                             <KanjiSearchResult
                                                 value={value}
+                                                className={selectedClass}
                                                 key={value.getUniqueID()}
                                                 style={{ fontFamily: font }}
                                                 onClick={() => setSelected(value)}
-                                                className={[styles.kanji, selectedClass].join(" ")}
                                             />
                                         )
                                     })}

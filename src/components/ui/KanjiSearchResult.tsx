@@ -10,7 +10,7 @@ export interface KanjiSearchResultProps {
 const KanjiSearchResult = (props: KanjiSearchResultProps) => {
     return (
         <div className={props.className}>
-            <span style={props.style} title="Select" onClick={props.onClick}>
+            <span style={props.style} onClick={props.onClick}>
                 {props.value.getKanjiVariation()}
             </span>
         </div>

@@ -5,7 +5,11 @@
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
 }
 
-.kanji {
+@mixin tile {
+
+}
+
+.kanji, .highlight {
   @include noSelect;
   display: flex;
   justify-content: center;
@@ -23,6 +27,10 @@
 }
 
 .kanji span:hover {
+  color: #FFF;
+}
+
+.highlight span {
   color: $inspect;
 }
 
@@ -35,10 +43,6 @@
 
 .selected:hover {
   text-decoration: none;
-}
-
-.highlight span {
-  color: $inspect;
 }
 
 .meanings {
