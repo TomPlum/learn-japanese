@@ -3,10 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 import styles from "../../styles/sass/components/user/UserForm.module.scss";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { useUserDispatch, useErrorDispatch } from "../../hooks";
+import { useUserDispatch } from "../../hooks";
 import { setUser } from "../../slices/UserSlice";
 import auth from "../../service/AuthenticationService";
-import { addError } from "../../slices/ErrorSlice";
 
 export interface LoginFormProps {
     username?: string;
@@ -20,13 +19,12 @@ const LoginForm = (props: LoginFormProps) => {
     const [usernameValid, setUsernameValid] = useState(!!props.username);
     const [passwordValid, setPasswordValid] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [badCredentials, setBadCredentials] = useState(false);
+    const [error, setError] = useState("");
 
     const usernameField = useRef<HTMLInputElement>(null);
     const passwordField = useRef<HTMLInputElement>(null);
 
     const dispatchUser = useUserDispatch();
-    const dispatchNotification = useErrorDispatch();
 
     const formValid = usernameValid && passwordValid;
 
@@ -82,12 +80,11 @@ const LoginForm = (props: LoginFormProps) => {
             props.onSuccess();
         }).catch(e => {
             if (e === "AUTHENTICATION_ERROR") {
-                setBadCredentials(true);
                 setPassword("")
                 setPasswordValid(false)
+                setError("Username or password is incorrect.");
             } else {
-                dispatchNotification(addError({ title: "Login Error", body: e }));
-                props.onSuccess();
+                setError("An unknown login error has occurred.");
             }
         }).finally(() => {
             setLoading(false);
@@ -108,7 +105,7 @@ const LoginForm = (props: LoginFormProps) => {
 
     return (
         <Modal.Body className={styles.body}>
-            {badCredentials && <Alert variant="danger">Username or password is incorrect.</Alert>}
+            {!!error && <Alert variant="danger">{error}</Alert>}
             {props.username && <Alert variant="success">Registration successful. You can log-in below.</Alert>}
 
             <Form.Group className="mb-3" controlId="formBasicEmail">

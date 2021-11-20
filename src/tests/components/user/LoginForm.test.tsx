@@ -138,7 +138,7 @@ test('Clicking the login button while the form is valid should call the authenti
     await waitFor(() => expect(loginService).toHaveBeenLastCalledWith("TomPlum42", "P4ssw0rd"));
 });
 
-test('When the auth service returns an error, it should dispatch an error and close the modal', async () => {
+test('When the auth service returns an error, it should render a generic error message', async () => {
     loginService.mockRejectedValue("It's broken");
 
     const { username, password, login } = setup();
@@ -150,7 +150,7 @@ test('When the auth service returns an error, it should dispatch an error and cl
     //Login
     fireEvent.click(login);
 
-    await waitFor(() => expect(onSuccessHandler).toHaveBeenCalled());
+    expect(await screen.findByText('An unknown login error has occurred.')).toBeInTheDocument();
 });
 
 test('When the auth service returns an an authentication error then it should render an alert', async () => {
