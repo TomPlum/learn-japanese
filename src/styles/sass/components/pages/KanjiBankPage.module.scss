@@ -134,3 +134,17 @@
 .search div {
   background-color: transparent;
 }
+
+.frosted span {
+  filter: blur(5px);
+}
+
+.loading {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}

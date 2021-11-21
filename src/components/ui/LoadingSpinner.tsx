@@ -3,24 +3,32 @@ import { Spinner } from "react-bootstrap";
 import styles from "../../styles/sass/components/layout/LoadingSpinner.module.scss";
 import { Variant } from "react-bootstrap/types";
 
-class LoadingSpinner extends Component<{ active: boolean, className?: string, variant?: Variant }> {
-    render() {
-        const { active, variant, className } = this.props;
-        if (active) {
-            return (
-                <div className={className}>
-                    <Spinner
-                        role="status"
-                        title="Loading"
-                        animation="border"
-                        className={styles.spinner}
-                        variant={variant ?? "primary"}
-                    />
-                </div>
-            );
-        }
-        return null;
+export interface LoadingSpinnerProps {
+    active: boolean;
+    className?: string;
+    variant?: Variant;
+    size?: string;
+    thickness?: string;
+}
+
+const LoadingSpinner = (props: LoadingSpinnerProps) => {
+    const { active, variant, className, size, thickness } = props;
+
+    if (active) {
+        return (
+            <div className={className}>
+                <Spinner
+                    style={{ width: size, height: size, fontSize: thickness }}
+                    role="status"
+                    title="Loading"
+                    animation="border"
+                    className={styles.spinner}
+                    variant={variant ?? "primary"}
+                />
+            </div>
+        );
     }
+    return null;
 }
 
 export default LoadingSpinner
