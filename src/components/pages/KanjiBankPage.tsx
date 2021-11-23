@@ -1,4 +1,4 @@
-import { Alert, Button, Col, Container, Fade, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import KanjiService from "../../service/KanjiService";
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
@@ -11,8 +11,8 @@ import KanjiMeaningDisplay from "../learn/kanji/KanjiMeaningDisplay";
 import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ValueSelector from "../ui/select/ValueSelector";
-import SearchField from "../ui/fields/SearchField";
 import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss";
+import KeywordSearchField from "../ui/fields/KeywordSearchField";
 
 const KanjiBankPage = () => {
 
@@ -47,6 +47,10 @@ const KanjiBankPage = () => {
         });
     }, [page, pageSize, grades]);
 
+    const onSearch = (value: string) => {
+
+    }
+
     return (
         <Container className={styles.wrapper}>
             <Row>
@@ -54,7 +58,7 @@ const KanjiBankPage = () => {
                     {selected && (<>
                         <div className={styles.section}>
                             <p className={styles.label}>Character</p>
-                            <a className={styles.selected} href={selected.getJishoLink()}>
+                            <a className={styles.selected} href={selected.getJishoLink()} target="_blank">
                                 {selected.getKanjiVariation()}
                             </a>
                         </div>
@@ -110,12 +114,14 @@ const KanjiBankPage = () => {
 
                     <Row className={styles.header}>
                         <Col>
-                            <SearchField
+                            <KeywordSearchField
                                 value={search}
                                 disabled={loading}
                                 placeholder="search"
                                 className={styles.search}
                                 onChange={(value: string) => setSearch(value)}
+                                onSubmit={() => {}}
+                                keywords={[ { key: "grade", type: "number" }, { key: "level", type: "string" } ]}
                             />
                         </Col>
                     </Row>

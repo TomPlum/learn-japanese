@@ -1,0 +1,27 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
+.paramWrapper {
+  height: 26px;
+  margin-top: 10px;
+}
+
+.parameter {
+  @include noSelect;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  color: $dark-3;
+  background-color: $light-1;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.parameter svg {
+  color: $dark-1;
+  transition: color ease-in-out 0.2s;
+  cursor: pointer;
+}
+
+.parameter svg:hover {
+  color: $bootstrap-red;
+}
