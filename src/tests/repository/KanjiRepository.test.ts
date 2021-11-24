@@ -53,7 +53,11 @@ describe("Kanji Repository", () => {
             mockPost.mockResolvedValueOnce({ data: [] });
             const settings = new KanjiSettingsBuilder().build();
             return repository.read(settings).then(() => {
-                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [], quantity: undefined });
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", {
+                    grades: [],
+                    quantity: undefined,
+                    paging: { page: 0, size: 9999 }
+                });
             });
         });
 
@@ -61,7 +65,11 @@ describe("Kanji Repository", () => {
             mockPost.mockResolvedValueOnce({ data: [] });
             const settings = new KanjiSettingsBuilder().withJoyoKanji().withQuantity(50).build();
             return repository.read(settings).then(() => {
-                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [1,2,3,4,5,6,8], quantity: 50 });
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", {
+                    grades: [1,2,3,4,5,6,8],
+                    quantity: 50 ,
+                    paging: { page: 0, size: 9999 }
+                });
             });
         });
 
@@ -69,7 +77,11 @@ describe("Kanji Repository", () => {
             mockPost.mockResolvedValueOnce({ data: [] });
             const settings = new KanjiSettingsBuilder().withGrades([KyoikuGrade.TWO, KyoikuGrade.SIX]).build();
             return repository.read(settings).then(() => {
-                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [2, 6], quantity: undefined });
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", {
+                    grades: [2, 6],
+                    quantity: undefined,
+                    paging: { page: 0, size: 9999 }
+                });
             });
         });
 
@@ -77,7 +89,11 @@ describe("Kanji Repository", () => {
             mockPost.mockResolvedValueOnce({ data: [] });
             const settings = new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).withQuantity(120).build();
             return repository.read(settings).then(() => {
-                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", { grades: [1], quantity: 120 });
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-grade", {
+                    grades: [1],
+                    quantity: 120,
+                    paging: { page: 0, size: 9999 }
+                });
             });
         });
 
@@ -111,6 +127,57 @@ describe("Kanji Repository", () => {
             const settings = new KanjiSettingsBuilder().build();
             return repository.read(settings).catch(response => {
                 expect(response).toBe("Internal Server Error");
+            });
+        });
+    });
+
+    describe("Get By Search Term", () => {
+        it("Should call the rest client with the correct endpoint", () => {
+            mockGet.mockResolvedValueOnce({ data: { results: [] } });
+            return repository.getBySearchTerm("student").then(() => {
+                expect(mockGet).toHaveBeenLastCalledWith("/kanji/by-term/student");
+            });
+        });
+
+        it("Should return the data if the API call is successful and has data", () => {
+            mockGet.mockResolvedValueOnce({ data: { results: [{ field: "meaning", value: exampleKanji }] } });
+            return repository.getBySearchTerm("student").then(response => {
+                expect(response.results).toStrictEqual([{ field: "meaning", value: exampleKanji }]);
+            });
+        });
+
+        it("Should return an undefined error if the API call was successful and has data", () => {
+            mockGet.mockResolvedValueOnce({ data: { results: [{ field: "meaning", value: exampleKanji }] } });
+            return repository.getBySearchTerm("student").then(response => {
+                expect(response.error).toBeUndefined();
+            });
+        });
+
+        it("Should return an empty results array if the API call was successful but with no data", () => {
+            mockGet.mockResolvedValueOnce({ data: undefined });
+            return repository.getBySearchTerm("student").then(response => {
+                expect(response.results).toStrictEqual([]);
+            });
+        });
+
+        it("Should return a generic error message if the the API call was successful but with no data", () => {
+            mockGet.mockResolvedValueOnce({ data: undefined });
+            return repository.getBySearchTerm("student").then(response => {
+                expect(response.error).toBe("No data in response");
+            });
+        });
+
+        it("Should return an empty results array if the API call fails", () => {
+            mockGet.mockRejectedValueOnce({ data: undefined });
+            return repository.getBySearchTerm("student").catch(response => {
+                expect(response.results).toStrictEqual([]);
+            });
+        });
+
+        it("Should return the API error message if the API call fails", () => {
+            mockGet.mockRejectedValueOnce({ error: "An internal sever error occurred." });
+            return repository.getBySearchTerm("student").catch(response => {
+                expect(response.error).toBe("An internal sever error occurred.");
             });
         });
     });

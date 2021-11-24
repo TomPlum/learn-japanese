@@ -34,6 +34,15 @@ interface KanjiByGradeRequest {
     paging: PaginationRequest;
 }
 
+interface KanjiSearchResponseModel {
+    results: { field: string, value: KanjiResponseModel }[];
+}
+
+interface KanjiSearchResults {
+    results: { field: string, value: Kanji }[];
+    error?: string;
+}
+
 export default class KanjiRepository implements Repository<Kanji> {
 
     private readonly converter = new KanjiConverter()
@@ -58,6 +67,32 @@ export default class KanjiRepository implements Repository<Kanji> {
             return Promise.resolve([]);
         }).catch(response => {
             return Promise.reject(response);
+        });
+    }
+
+    /**
+     * Retrieves all the kanji that match the given search term.
+     * @param search The term to search by.
+     * @return results A collection of matching kanji and the field that it was matched on.
+     */
+    public async getBySearchTerm(search: string): Promise<KanjiSearchResults> {
+        return RestClient.get<KanjiSearchResponseModel>("/kanji/by-term/" + search).then(response => {
+            const data = response.data;
+
+            if (data) {
+                return {
+                    results: data.results.map(result => {
+                        return {
+                            field: result.field,
+                            value: this.converter.convert([result.value])[0]
+                        }
+                    })
+                }
+            }
+
+            return Promise.resolve({ results: [], error: "No data in response"});
+        }).catch(response => {
+            return Promise.reject({ results: [], error: response.error });
         });
     }
 
