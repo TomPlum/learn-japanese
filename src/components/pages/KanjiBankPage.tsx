@@ -6,8 +6,7 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import KanjiSearchResult from "../ui/KanjiSearchResult";
 import StackGrid, { transitions } from "react-stack-grid";
 import { useDebouncedEffect, useFontSelector } from "../../hooks";
-import KanjiMeaningDisplay from "../learn/kanji/KanjiMeaningDisplay";
-import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight, faSearchMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ValueSelector from "../ui/select/ValueSelector";
 import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss";
@@ -20,7 +19,7 @@ const KanjiBankPage = () => {
 
     const [kanji, setKanji] = useState<KanjiResult[]>([]);
     const [page, setPage] = useState(0);
-    const [pageSize, setPageSize] = useState(30);
+    const [pageSize, setPageSize] = useState(40);
     const [search, setSearch] = useState("");
     const [grades, setGrades] = useState(KyoikuGrade.ALL);
     const [level, setLevel] = useState("");
@@ -29,26 +28,17 @@ const KanjiBankPage = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        setError("");
-        setLoading(true);
-
-        service.getKanjiPage(page, pageSize, grades).then(response => {
-            const data = response.kanji;
-            if (data && data.length > 0) {
-                setKanji(data);
-                setSelected(data[0]);
-            } else {
-                setError(response.error ?? "Failed to load kanji.");
-            }
-        }).catch(response => {
-            setError(response.error);
-        }).finally(() => {
-            setLoading(false);
-        });
+        getPagedKanji();
     }, [page, pageSize, grades, level]);
 
+    useEffect(() => {
+        if (search === "") {
+            getPagedKanji();
+        }
+    }, [search]);
+
     useDebouncedEffect(() => {
-        if (search) {
+        if (search !== "") {
             setError("");
             setLoading(true);
 
@@ -69,10 +59,27 @@ const KanjiBankPage = () => {
             }).finally(() => {
                 setLoading(false);
             });
-        } else {
-            setPage(0);
         }
-    }, 200, [search]);
+    }, 250, [search]);
+
+    const getPagedKanji = () => {
+        setError("");
+        setLoading(true);
+
+        service.getKanjiPage(page, pageSize, grades).then(response => {
+            const data = response.kanji;
+            if (data && data.length > 0) {
+                setKanji(data);
+                setSelected(data[0]);
+            } else {
+                setError(response.error ?? "Failed to load kanji.");
+            }
+        }).catch(response => {
+            setError(response.error);
+        }).finally(() => {
+            setLoading(false);
+        });
+    }
 
     const onSearch = (parameters: KeywordMeta[], value?: string) => {
         parameters.forEach((meta: KeywordMeta) => {
@@ -94,6 +101,23 @@ const KanjiBankPage = () => {
         }
     }
 
+    const highlightSearch = (field:string, value: string) => {
+        if (selected?.field === field) {
+            const startIndex = value.indexOf(search);
+            const endIndex = startIndex + search.length;
+
+            return (
+                <span>
+                    <span>{value.substring(0, startIndex)}</span>
+                    <strong className={styles.matching}>{value.substring(startIndex, endIndex)}</strong>
+                    <span>{value.substring(endIndex)}</span>
+                </span>
+            );
+        } else {
+            return value;
+        }
+    }
+
     return (
         <Container className={styles.wrapper}>
             <Row>
@@ -109,7 +133,7 @@ const KanjiBankPage = () => {
                         <div className={styles.section}>
                             <p className={styles.label}>Meanings</p>
                             <div className={[styles.meanings, styles.value].join(" ")}>
-                                <KanjiMeaningDisplay meanings={selected.value.getMeanings()} />
+                                {highlightSearch("meaning", selected.value.getMeanings().join(", "))}
                             </div>
                         </div>
 
@@ -126,27 +150,32 @@ const KanjiBankPage = () => {
                         <div className={styles.section}>
                             <p className={styles.label}>On'yomi Readings</p>
                             <p className={styles.value}>
-                                {selected.value.getOnyomiReadings().map(it => it.kana).join(", ")}
+                                {highlightSearch("reading", selected.value.getOnyomiReadings().map(it => it.kana).join(", "))}
                             </p>
                         </div>
 
                         <div className={styles.section}>
                             <p className={styles.label}>Kun'yomi Readings</p>
                             <p className={styles.value}>
-                                {selected.value.getKunyomiReadings().map(it => it.kana).join(", ")}
+                                {highlightSearch("reading", selected.value.getKunyomiReadings().map(it => it.kana).join(", "))}
                             </p>
                         </div>
 
                         <div className={styles.section}>
                             <p className={styles.label}>Tags</p>
-                            {selected.value.getTags() && <p className={styles.value}>{selected.value.getTags().join(", ")}</p>}
+                            {selected.value.getTags() && <p className={styles.value}>
+                                {highlightSearch("tag", selected.value.getTags().join(", "))}
+                            </p>}
                             {selected.value.getTags().length === 0 && <p className={styles.value}>-</p>}
                         </div>
                     </>)}
                 </Col>
 
                 <Col lg={10} className={styles.rightSideWrapper}>
-                    {error && <Alert variant="danger" className={styles.error}>{error}</Alert>}
+                    {error && (
+                        <Alert variant="danger" className={styles.error}>{error}</Alert>
+                    )}
+
                     <LoadingSpinner
                         size="60px"
                         active={loading}
@@ -168,10 +197,16 @@ const KanjiBankPage = () => {
                         </Col>
                     </Row>
 
-                    <Row className={styles.kanjiWrapper}>
-                        <Col>
-                            {kanji.length === 0 && <span>No Results</span>}
-                            {kanji && (
+                    <Row>
+                        <Col className={styles.kanjiWrapper}>
+                            {!error && !loading && search && kanji.length === 0 && (
+                                <div className={styles.emptyWrapper}>
+                                    <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus}/>
+                                    {<span>{`No results for '${search}'...`}</span>}
+                                </div>
+                            )}
+
+                            {kanji.length > 0 && (
                                 <StackGrid
                                     duration={0}
                                     appearDelay={0}

@@ -146,7 +146,18 @@
   height: 100%;
 }
 
-
 .grid {
   margin-bottom: 10px;
+}
+
+.matching {
+  color: $inspect;
+  opacity: 0.8;
+}
+
+.emptyWrapper {
+  color: $light-1;
+  text-align: center;
+  width: 100%;
+  font-size: 2em;
 }

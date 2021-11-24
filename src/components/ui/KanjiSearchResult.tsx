@@ -1,6 +1,5 @@
 import styles from "../../styles/sass/components/ui/KanjiSearchResult.module.scss";
 import { KanjiResult } from "../../service/KanjiService";
-import { Simulate } from "react-dom/test-utils";
 
 export interface KanjiSearchResultProps {
     result: KanjiResult;
@@ -15,20 +14,24 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
     const { result, style, search, className, onClick } = props;
 
     const getFieldValue = ()  => {
-        let matching: string;
+        let matching;
 
         switch (result.field) {
+            case "character": {
+                matching = "match: " + search;
+                break;
+            }
             case "meaning": {
-                matching = result.value.getMeanings().find(meaning => meaning.includes(search))!;
+                matching = result.value.getMeanings().find(meaning => meaning.includes(search)) ?? search;
                 break;
             }
             case "reading": {
                 const readings = result.value.readings.map(reading => reading.kana);
-                matching = readings.find(reading => reading.includes(search))!;
+                matching = readings.find(reading => reading.includes(search)) ?? search;
                 break;
             }
             case "tag": {
-                matching = result.value.getTags().find(tag => tag.includes(search))!;
+                matching = "tag: " + result.value.getTags().find(tag => tag.includes(search)) ?? search;
                 break;
             }
             default: {
