@@ -8,6 +8,11 @@ export interface KanjiPage {
     error?: string;
 }
 
+export interface KanjiSearch {
+    kanji: { value: Kanji, field: string }[];
+    error?: string;
+}
+
 class KanjiService {
 
     private readonly _repository = new KanjiRepository();
@@ -21,6 +26,7 @@ class KanjiService {
      */
     public async getKanjiPage(page: number, size: number, grades?: KyoikuGrade[]): Promise<KanjiPage> {
         const settings = new KanjiSettingsBuilder().withGrades(grades ?? KyoikuGrade.ALL).build();
+
         return this._repository.read(settings, { page, size }).then(response => {
             return { value: response };
         }).catch(response => {
@@ -28,6 +34,23 @@ class KanjiService {
                 value: [],
                 error: response.error ?? "An unknown error has occurred."
             };
+        });
+    }
+
+    /**
+     * Retrieves a collection of kanji that match the given search parameter.
+     * @param term The term to search by.
+     * @return response An array of match kanji paired with the field they matched on.
+     */
+    public async search(term: string): Promise<KanjiSearch> {
+        return this._repository.getBySearchTerm(term).then(response => {
+            if (response.results.length > 0) {
+                return { kanji: response.results };
+            } else {
+                return { kanji: [], error: response.error };
+            }
+        }).catch(response => {
+            return { kanji: [], error: response.error };
         });
     }
 }
