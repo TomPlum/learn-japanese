@@ -3,13 +3,13 @@ import KanjiRepository from "../repository/KanjiRepository";
 import { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings";
 import { KyoikuGrade } from "../domain/kanji/KyoikuGrade";
 
-export interface KanjiPage {
-    value: Kanji[];
-    error?: string;
+export interface KanjiResult {
+    value: Kanji;
+    field?: string;
 }
 
 export interface KanjiSearch {
-    kanji: { value: Kanji, field: string }[];
+    kanji: KanjiResult[];
     error?: string;
 }
 
@@ -24,14 +24,17 @@ class KanjiService {
      * @param size The size of the page.
      * @param grades The grades to include. Omitting includes all.
      */
-    public async getKanjiPage(page: number, size: number, grades?: KyoikuGrade[]): Promise<KanjiPage> {
+    public async getKanjiPage(page: number, size: number, grades?: KyoikuGrade[]): Promise<KanjiSearch> {
         const settings = new KanjiSettingsBuilder().withGrades(grades ?? KyoikuGrade.ALL).build();
 
         return this._repository.read(settings, { page, size }).then(response => {
-            return { value: response };
+            const kanji: KanjiResult[] = response.map(value => {
+                return { value: value, field: undefined };
+            });
+            return { kanji: kanji };
         }).catch(response => {
             return {
-                value: [],
+                kanji: [],
                 error: response.error ?? "An unknown error has occurred."
             };
         });

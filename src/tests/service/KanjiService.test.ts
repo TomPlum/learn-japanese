@@ -42,7 +42,14 @@ describe("Kanji Service", () => {
         it("Should return the kanji characters if the repository call is successful", () => {
             mockRepoRead.mockResolvedValueOnce([kanji]);
             return service.getKanjiPage(0, 10).then(response => {
-                expect(response.value).toStrictEqual([kanji]);
+                expect(response.kanji[0].value).toStrictEqual(kanji);
+            });
+        });
+
+        it("Should return an undefined field", () => {
+            mockRepoRead.mockResolvedValueOnce([kanji]);
+            return service.getKanjiPage(0, 10).then(response => {
+                expect(response.kanji[0].field).toBeUndefined();
             });
         });
 
@@ -56,7 +63,7 @@ describe("Kanji Service", () => {
         it("Should return the an empty kanji array if the repository call fails", () => {
             mockRepoRead.mockRejectedValueOnce({ error: "Oh No!" });
             return service.getKanjiPage(0, 10).then(response => {
-                expect(response.value).toStrictEqual([]);
+                expect(response.kanji).toStrictEqual([]);
             });
         });
 
