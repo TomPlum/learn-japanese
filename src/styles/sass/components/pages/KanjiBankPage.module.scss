@@ -5,32 +5,29 @@
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
 }
 
-@mixin tile {
-
-}
-
 .kanji, .highlight {
   @include noSelect;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   font-size: 3em;
   width: 100px;
   height: 100px;
 }
 
-.kanji span {
+.kanji p:first-child {
+  margin: 0;
+  text-align: center;
   color: $light-1;
   text-decoration: none;
   transition: all ease-in-out 0.2s;
   cursor: pointer;
 }
 
-.kanji span:hover {
+.kanji p:first-child:hover {
   color: #FFF;
 }
 
-.highlight span {
+.highlight p:first-child {
+  margin: 0;
   color: $inspect;
 }
 
@@ -44,6 +41,11 @@
 .selected:hover {
   text-decoration: none;
 }
+
+.frosted p {
+  filter: blur(5px);
+}
+
 
 .meanings {
   display: block;
@@ -134,10 +136,6 @@
   background-color: transparent;
 }
 
-.frosted span {
-  filter: blur(5px);
-}
-
 .loading {
   position: absolute;
   display: flex;
@@ -146,4 +144,9 @@
   text-align: center;
   width: 100%;
   height: 100%;
+}
+
+
+.grid {
+  margin-bottom: 10px;
 }

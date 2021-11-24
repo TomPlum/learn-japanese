@@ -9,7 +9,6 @@ export interface KeywordSearchFieldProps {
     value: string;
     keywords: KeywordMeta[];
     disabled?: boolean;
-    placeholder?: string;
     className?: string;
     onChange: (value: string) => void;
     onSubmit: (params: KeywordMeta[], search?: string) => void;
@@ -22,14 +21,14 @@ export interface KeywordMeta {
 }
 
 const KeywordSearchField = (props: KeywordSearchFieldProps) => {
-    const { value, keywords, disabled, placeholder, className, onChange, onSubmit } = props;
+    const { value, keywords, disabled, className, onChange, onSubmit } = props;
 
     const [invalid, setInvalid] = useState(false);
     const [active, setActive] = useState<KeywordMeta[]>([]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const search = e.target.value;
-        const sanitisedSearch = search.replaceAll(" = ", "=");
+        const sanitisedSearch = search.replaceAll(" = ", "=").trimLeft();
 
         if (!disabled && e.type === 'Enter') {
             handleSubmit(search);
@@ -40,6 +39,7 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
         if (search.includes("=") && !keywords.map(word => word.key).some(key => search.includes(key))) {
             setInvalid(true);
         } else {
+            onChange(search);
             setInvalid(false);
         }
 
@@ -60,12 +60,14 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
                         setActive(active.concat({ value: value, ...keyword }));
                     }
 
+                    const lastCharacter = search[search.length - 1];
+                    if (sanitisedSearch.includes(" ")) {
+
+                    }
                     //onChange(sanitisedSearch.replace(`${keyword.key}=${value}`, ""));
                 }
             }
         });
-
-        onChange(search);
     }
 
     const handleSubmit = (value: string) => {
@@ -92,9 +94,9 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
                     value={value}
                     disabled={disabled}
                     isInvalid={invalid}
+                    placeholder="search"
                     onChange={handleChange}
                     className={styles.input}
-                    placeholder={placeholder ?? "Enter search term"}
                 />
             </InputGroup>
 

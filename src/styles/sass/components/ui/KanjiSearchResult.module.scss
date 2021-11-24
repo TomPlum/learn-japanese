@@ -1,0 +1,13 @@
+@import "src/styles/sass/colours";
+
+.field {
+  color: $light-2;
+  font-size: 0.3em;
+  text-align: center;
+  margin: 0;
+}
+
+.matching {
+  color: $inspect;
+  opacity: 0.8;
+}
