@@ -7,6 +7,7 @@ import authService from "../../service/AuthenticationService";
 import UserService from "../../service/UserService";
 import InfoButton from "../ui/buttons/InfoButton";
 import PopOver from "../ui/PopOver";
+import { useDebouncedEffect } from "../../hooks";
 
 export interface RegistrationFormProps {
     onSuccess: (username: string) => void;
@@ -37,17 +38,17 @@ const RegistrationForm = (props: RegistrationFormProps) => {
     const [error, setError] = useState<string | undefined>(undefined);
     const [emailFocused, setEmailFocused] = useState(false);
 
-    useEffect(() => {
+    useDebouncedEffect(() => {
         if (validUsername) {
             checkUsernameEligibility();
         }
-    }, [username]);
+    }, 200, [username]);
 
-    useEffect(() => {
+    useDebouncedEffect(() => {
         if (validEmail) {
             checkEmailEligibility();
         }
-    }, [email]);
+    }, 200, [email]);
 
     useEffect(() => {
         setValidSecondPassword(password === secondPassword);
