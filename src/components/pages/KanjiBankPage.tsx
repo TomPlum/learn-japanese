@@ -168,6 +168,13 @@ const KanjiBankPage = () => {
                         </div>
 
                         <div className={styles.section}>
+                            <p className={styles.label}>Examples</p>
+                            <p className={styles.value}>
+                                {selected.value.examples.length} (Click to view)
+                            </p>
+                        </div>
+
+                        <div className={styles.section}>
                             <p className={styles.label}>Tags</p>
                             {selected.value.getTags().length > 0 && (
                                 <p className={styles.value}>
@@ -192,99 +199,91 @@ const KanjiBankPage = () => {
                         className={styles.loading}
                     />
 
-                    <Row className={styles.header}>
-                        <Col>
-                            <KeywordSearchField
-                                value={search}
-                                disabled={loading}
-                                onSubmit={onSearch}
-                                className={styles.search}
-                                onChange={(value: string) => setSearch(value)}
-                                keywords={[ { key: "grade", type: "number" }, { key: "level", type: "string" } ]}
-                            />
-                        </Col>
-                    </Row>
+                    <div className={styles.header}>
+                        <KeywordSearchField
+                            value={search}
+                            disabled={loading}
+                            onSubmit={onSearch}
+                            className={styles.search}
+                            onChange={(value: string) => setSearch(value)}
+                            keywords={[ { key: "grade", type: "number" }, { key: "level", type: "string" } ]}
+                        />
+                    </div>
 
-                    <Row>
-                        <Col className={styles.kanjiWrapper}>
-                            {!error && !loading && search && kanji.length === 0 && (
-                                <div className={styles.emptyWrapper}>
-                                    <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus}/>
-                                    {<span>{`No results for '${search}'...`}</span>}
-                                </div>
-                            )}
-
-                            {kanji.length > 0 && (
-                                <StackGrid
-                                    duration={0}
-                                    appearDelay={0}
-                                    component="div"
-                                    columnWidth={100}
-                                    gutterWidth={10}
-                                    easing="quartOut"
-                                    gutterHeight={10}
-                                    className={styles.grid}
-                                    monitorImagesLoaded={false}
-                                    enter={transitions.fade.enter}
-                                    leaved={transitions.fade.leaved}
-                                    appear={transitions.fade.appear}
-                                    entered={transitions.fade.entered}
-                                    appeared={transitions.fade.appeared}
-                                >
-                                    {kanji.map(result => {
-                                        const value = result.value;
-                                        const selectedClass = value.getUniqueID() === selected?.value.getUniqueID()
-                                            ? styles.highlight : styles.kanji;
-                                        const blurClass = loading ? styles.frosted : undefined;
-                                        return (
-                                            <KanjiSearchResult
-                                                result={result}
-                                                search={search}
-                                                key={value.getUniqueID()}
-                                                style={{ fontFamily: font }}
-                                                onClick={() => setSelected(result)}
-                                                className={[selectedClass, blurClass].join(" ")}
-                                            />
-                                        )
-                                    })}
-                                </StackGrid>
-                            )}
-                        </Col>
-                    </Row>
-
-                    <Row className={styles.footer}>
-                        <Col>
-                            <div className={styles.pagination}>
-                                <Button onClick={() => setPage(0)} variant="dark">
-                                    <FontAwesomeIcon icon={faAngleDoubleLeft} fixedWidth />
-                                </Button>
-
-                                <Button onClick={() => setPage(page - 1)} variant="dark">
-                                    <FontAwesomeIcon icon={faChevronLeft} fixedWidth />
-                                </Button>
-
-                                <span className={styles.page}>{page + 1}</span>
-
-                                <Button onClick={() => setPage(page + 1)} variant="dark">
-                                    <FontAwesomeIcon icon={faChevronRight} fixedWidth />
-                                </Button>
-
-                                <Button onClick={() => setPage(999)} variant="dark">
-                                    <FontAwesomeIcon icon={faAngleDoubleRight} fixedWidth />
-                                </Button>
+                    <div className={styles.kanjiWrapper}>
+                        {!error && !loading && search && kanji.length === 0 && (
+                            <div className={styles.emptyWrapper}>
+                                <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus}/>
+                                {<span>{`No results for '${search}'...`}</span>}
                             </div>
-                        </Col>
+                        )}
 
-                        <Col>
-                            <ValueSelector
-                                prefix="Show"
-                                disabled={loading}
-                                values={[20, 40, 60, 80]}
-                                className={styles.pageSize}
-                                onChange={(value: number) => setPageSize(value)}
-                            />
-                        </Col>
-                    </Row>
+                        {kanji.length > 0 && (
+                            <StackGrid
+                                duration={0}
+                                appearDelay={0}
+                                component="div"
+                                columnWidth={100}
+                                gutterWidth={10}
+                                easing="quartOut"
+                                gutterHeight={10}
+                                className={styles.grid}
+                                monitorImagesLoaded={false}
+                                enter={transitions.fade.enter}
+                                leaved={transitions.fade.leaved}
+                                appear={transitions.fade.appear}
+                                entered={transitions.fade.entered}
+                                appeared={transitions.fade.appeared}
+                            >
+                                {kanji.map(result => {
+                                    const value = result.value;
+                                    const selectedClass = value.getUniqueID() === selected?.value.getUniqueID()
+                                        ? styles.highlight : styles.kanji;
+                                    const blurClass = loading ? styles.frosted : undefined;
+                                    return (
+                                        <KanjiSearchResult
+                                            result={result}
+                                            search={search}
+                                            key={value.getUniqueID()}
+                                            style={{ fontFamily: font }}
+                                            onClick={() => setSelected(result)}
+                                            className={[selectedClass, blurClass].join(" ")}
+                                        />
+                                    )
+                                })}
+                            </StackGrid>
+                        )}
+                    </div>
+
+                    <div className={styles.footer}>
+                        <div className={styles.pagination}>
+                            <Button onClick={() => setPage(0)} variant="dark">
+                                <FontAwesomeIcon icon={faAngleDoubleLeft} fixedWidth />
+                            </Button>
+
+                            <Button onClick={() => setPage(page - 1)} variant="dark">
+                                <FontAwesomeIcon icon={faChevronLeft} fixedWidth />
+                            </Button>
+
+                            <span className={styles.page}>{page + 1}</span>
+
+                            <Button onClick={() => setPage(page + 1)} variant="dark">
+                                <FontAwesomeIcon icon={faChevronRight} fixedWidth />
+                            </Button>
+
+                            <Button onClick={() => setPage(999)} variant="dark">
+                                <FontAwesomeIcon icon={faAngleDoubleRight} fixedWidth />
+                            </Button>
+                        </div>
+
+                        <ValueSelector
+                            prefix="Show"
+                            disabled={loading}
+                            values={[20, 40, 60, 80]}
+                            className={styles.pageSize}
+                            onChange={(value: number) => setPageSize(value)}
+                        />
+                    </div>
                 </Col>
             </Row>
         </Container>

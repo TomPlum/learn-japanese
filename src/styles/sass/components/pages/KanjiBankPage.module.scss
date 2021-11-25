@@ -78,6 +78,9 @@
 }
 
 .pagination {
+  display: flex;
+  align-items: center;
+  float: left;
   font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
   color: $light-1;
 }
@@ -103,7 +106,6 @@
 .rightSideWrapper {
   display: flex;
   flex-flow: column;
-  height: 100%;
 }
 
 .kanjiWrapper {
@@ -111,7 +113,7 @@
 }
 
 .footer {
-  flex: 0 1 25px;
+
 }
 
 .pageSize {
