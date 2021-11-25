@@ -1,0 +1,31 @@
+@import "src/styles/sass/colours";
+
+.body, .title {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.content {
+  color: #FFF;
+  border: 2px solid $light-1;
+  border-radius: 15px;
+  background-color: $dark-2;
+}
+
+.table {
+  background-color: transparent;
+  margin: 0;
+}
+
+.table th {
+  border-top: none;
+  color: $inspect;
+  border-color: $inspect !important;
+}
+
+.table td {
+  border-color: $inspect;
+}
+
+.header .close {
+  color: #FFF !important;
+}

@@ -12,6 +12,7 @@ import ValueSelector from "../ui/select/ValueSelector";
 import KeywordSearchField, { KeywordMeta } from "../ui/fields/KeywordSearchField";
 import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss";
 import { KanjiReading } from "../../domain/kanji/KanjiReading";
+import ExampleDisplay from "../ui/display/ExampleDisplay";
 
 const KanjiBankPage = () => {
 
@@ -26,6 +27,7 @@ const KanjiBankPage = () => {
     const [level, setLevel] = useState("");
     const [selected, setSelected] = useState<KanjiResult | undefined>(undefined);
     const [loading, setLoading] = useState(false);
+    const [inExampleModal, setInExamplesModal] = useState(false);
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -124,6 +126,10 @@ const KanjiBankPage = () => {
         return kana.length > 0 ? kana.join(", ") : "-";
     }
 
+    const examples = selected?.value.examples;
+    const exampleQuantity = examples?.length ?? 0;
+    const hasExamples = exampleQuantity > 0;
+
     return (
         <Container className={styles.wrapper}>
             <Row>
@@ -168,9 +174,14 @@ const KanjiBankPage = () => {
                         </div>
 
                         <div className={styles.section}>
-                            <p className={styles.label}>Examples</p>
+                            <p className={styles.label}>Examples {hasExamples ? `(${exampleQuantity})` : ""}</p>
                             <p className={styles.value}>
-                                {selected.value.examples.length} (Click to view)
+                                {hasExamples ?
+                                    <span onClick={() => setInExamplesModal(true)} className={styles.example}>
+                                        {examples?.[0].kanji}
+                                    </span> :
+                                    <span>-</span>
+                                }
                             </p>
                         </div>
 
@@ -209,6 +220,13 @@ const KanjiBankPage = () => {
                             keywords={[ { key: "grade", type: "number" }, { key: "level", type: "string" } ]}
                         />
                     </div>
+
+                    {inExampleModal && selected && (
+                        <ExampleDisplay
+                            examples={selected.value.examples}
+                            onDismiss={() => setInExamplesModal(false)}
+                        />
+                    )}
 
                     <div className={styles.kanjiWrapper}>
                         {!error && !loading && search && kanji.length === 0 && (
