@@ -9,8 +9,9 @@ import { useDebouncedEffect, useFontSelector } from "../../hooks";
 import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight, faSearchMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ValueSelector from "../ui/select/ValueSelector";
-import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss";
 import KeywordSearchField, { KeywordMeta } from "../ui/fields/KeywordSearchField";
+import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss";
+import { KanjiReading } from "../../domain/kanji/KanjiReading";
 
 const KanjiBankPage = () => {
 
@@ -118,6 +119,11 @@ const KanjiBankPage = () => {
         }
     }
 
+    const getReadingKana = (readings: KanjiReading[]) => {
+        const kana = readings.map(reading => reading.kana);
+        return kana.length > 0 ? kana.join(", ") : "-";
+    }
+
     return (
         <Container className={styles.wrapper}>
             <Row>
@@ -150,22 +156,24 @@ const KanjiBankPage = () => {
                         <div className={styles.section}>
                             <p className={styles.label}>On'yomi Readings</p>
                             <p className={styles.value}>
-                                {highlightSearch("reading", selected.value.getOnyomiReadings().map(it => it.kana).join(", "))}
+                                {highlightSearch("reading", getReadingKana(selected.value.getOnyomiReadings()))}
                             </p>
                         </div>
 
                         <div className={styles.section}>
                             <p className={styles.label}>Kun'yomi Readings</p>
                             <p className={styles.value}>
-                                {highlightSearch("reading", selected.value.getKunyomiReadings().map(it => it.kana).join(", "))}
+                                {highlightSearch("reading", getReadingKana(selected.value.getKunyomiReadings()))}
                             </p>
                         </div>
 
                         <div className={styles.section}>
                             <p className={styles.label}>Tags</p>
-                            {selected.value.getTags() && <p className={styles.value}>
-                                {highlightSearch("tag", selected.value.getTags().join(", "))}
-                            </p>}
+                            {selected.value.getTags().length > 0 && (
+                                <p className={styles.value}>
+                                    {highlightSearch("tag", selected.value.getTags().join(", "))}
+                                </p>
+                            )}
                             {selected.value.getTags().length === 0 && <p className={styles.value}>-</p>}
                         </div>
                     </>)}
