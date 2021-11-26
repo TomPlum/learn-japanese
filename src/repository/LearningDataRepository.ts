@@ -26,7 +26,9 @@ export default class LearningDataRepository {
                 return new CalendarRepository().read(settings as CalendarSettings);
             }
             case Topic.KANJI: {
-                return new KanjiRepository().read(settings as KanjiSettings);
+                return new KanjiRepository().read(settings as KanjiSettings).then(response => {
+                    return response.results;
+                });
             }
             case Topic.BASICS: {
                 return new BasicsRepository().read(settings as BasicsSettings);

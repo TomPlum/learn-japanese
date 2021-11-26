@@ -21,7 +21,7 @@ describe("Kanji Service", () => {
 
     describe("Get Kanji Page", () => {
         it("Should call the repository with the given pagination details and grades", () => {
-            mockRepoRead.mockResolvedValueOnce([]);
+            mockRepoRead.mockResolvedValueOnce({ results: [kanji], pages: 1, quantity: 1 });
             const grades = [KyoikuGrade.ONE, KyoikuGrade.TWO];
             return service.getKanjiPage(0, 10, grades).then(() => {
                 const expectedSettings = new KanjiSettingsBuilder().withGrades(grades).build();
@@ -31,7 +31,7 @@ describe("Kanji Service", () => {
         });
 
         it("Should call the repository with all grades if they are omitted", () => {
-            mockRepoRead.mockResolvedValueOnce([]);
+            mockRepoRead.mockResolvedValueOnce({ results: [kanji], pages: 1, quantity: 1 });
             return service.getKanjiPage(0, 10).then(() => {
                 const expectedSettings = new KanjiSettingsBuilder().withGrades(KyoikuGrade.ALL).build();
                 const expectedPagination: PaginationRequest = { page: 0, size: 10 };
@@ -40,21 +40,21 @@ describe("Kanji Service", () => {
         });
 
         it("Should return the kanji characters if the repository call is successful", () => {
-            mockRepoRead.mockResolvedValueOnce([kanji]);
+            mockRepoRead.mockResolvedValueOnce({ results: [kanji], pages: 1, quantity: 1 });
             return service.getKanjiPage(0, 10).then(response => {
                 expect(response.kanji[0].value).toStrictEqual(kanji);
             });
         });
 
         it("Should return an undefined field", () => {
-            mockRepoRead.mockResolvedValueOnce([kanji]);
+            mockRepoRead.mockResolvedValueOnce({ results: [kanji], pages: 1, quantity: 1 });
             return service.getKanjiPage(0, 10).then(response => {
                 expect(response.kanji[0].field).toBeUndefined();
             });
         });
 
         it("Should return an undefined error if the repository call is successful", () => {
-           mockRepoRead.mockResolvedValueOnce([kanji]);
+           mockRepoRead.mockResolvedValueOnce({ results: [kanji], pages: 1, quantity: 1 });
            return service.getKanjiPage(0, 10).then(response => {
                expect(response.error).toBeUndefined();
            });
@@ -83,51 +83,51 @@ describe("Kanji Service", () => {
     });
 
     describe("Get Kanji By Search Term", () => {
-        it("Should call the repository with the search term", () => {
+        it("Should call the repository with the search term, page and page size", () => {
             mockRepoGetBySearchTerm.mockResolvedValueOnce({ results: [{ field: "meaning", value: kanji }] });
-            return service.search("student").then(() => {
-                expect(mockRepoGetBySearchTerm).toHaveBeenLastCalledWith("student");
+            return service.search(0, 10, "student").then(() => {
+                expect(mockRepoGetBySearchTerm).toHaveBeenLastCalledWith(0, 10, "student");
             });
         });
 
         it("Should return an array of results if there is data in the repository response", () => {
             mockRepoGetBySearchTerm.mockResolvedValueOnce({ results: [{ field: "meaning", value: kanji }] });
-            return service.search("student").then(response => {
+            return service.search(0, 10, "student").then(response => {
                 expect(response.kanji).toStrictEqual([{ field: "meaning", value: kanji }]);
             });
         });
 
         it("Should return an undefined error if there is data in the repository response", () => {
             mockRepoGetBySearchTerm.mockResolvedValueOnce({ results: [{ field: "meaning", value: kanji }] });
-            return service.search("student").then(response => {
+            return service.search(0, 10, "student").then(response => {
                 expect(response.error).toBeUndefined();
             });
         });
 
         it("Should return an empty array of results if there is no data in the repository response", () => {
             mockRepoGetBySearchTerm.mockResolvedValueOnce({ results: [] });
-            return service.search("student").then(response => {
+            return service.search(0, 10, "student").then(response => {
                 expect(response.kanji).toStrictEqual([]);
             });
         });
 
         it("Should return the response error if there is no data in the repository response", () => {
             mockRepoGetBySearchTerm.mockResolvedValueOnce({ results: [], error: "Something went wrong." });
-            return service.search("student").then(response => {
+            return service.search(0, 10, "student").then(response => {
                 expect(response.error).toBe("Something went wrong.");
             });
         });
 
         it("Should return an empty array of results if the repository call is rejected", () => {
             mockRepoGetBySearchTerm.mockRejectedValueOnce({ results: [], error: "Something went wrong." });
-            return service.search("student").catch(response => {
+            return service.search(0, 10, "student").catch(response => {
                 expect(response.kanji).toStrictEqual([]);
             });
         });
 
         it("Should return the error message if the repository call is rejected", () => {
             mockRepoGetBySearchTerm.mockRejectedValueOnce({ results: [], error: "Something went wrong." });
-            return service.search("student").catch(response => {
+            return service.search(0, 10, "student").catch(response => {
                 expect(response.error).toBe("Something went wrong.");
             });
         });

@@ -10,6 +10,8 @@ export interface KanjiResult {
 
 export interface KanjiSearch {
     kanji: KanjiResult[];
+    pages: number;
+    quantity: number;
     error?: string;
 }
 
@@ -28,32 +30,36 @@ class KanjiService {
         const settings = new KanjiSettingsBuilder().withGrades(grades ?? KyoikuGrade.ALL).build();
 
         return this._repository.read(settings, { page, size }).then(response => {
-            const kanji: KanjiResult[] = response.map(value => {
-                return { value: value, field: undefined };
+            const kanji: KanjiResult[] = response.results.map(value => {
+                return { value: value, field: undefined, pages: 0, quantity: 0 };
             });
-            return { kanji: kanji };
+            return { kanji: kanji, pages: response.pages, quantity: response.quantity };
         }).catch(response => {
             return {
                 kanji: [],
-                error: response.error ?? "An unknown error has occurred."
+                error: response.error ?? "An unknown error has occurred.",
+                pages: 0,
+                quantity: 0
             };
         });
     }
 
     /**
      * Retrieves a collection of kanji that match the given search parameter.
+     * @param page The page to retrieve. Starts from 0.
+     * @param size The size of the page.
      * @param term The term to search by.
      * @return response An array of match kanji paired with the field they matched on.
      */
-    public async search(term: string): Promise<KanjiSearch> {
-        return this._repository.getBySearchTerm(term).then(response => {
+    public async search(page: number, size: number, term: string): Promise<KanjiSearch> {
+        return this._repository.getBySearchTerm(page, size, term).then(response => {
             if (response.results.length > 0) {
-                return { kanji: response.results };
+                return { kanji: response.results, pages: response.pages, quantity: response.quantity };
             } else {
-                return { kanji: [], error: response.error };
+                return { kanji: [], error: response.error, pages: 0, quantity: 0 };
             }
         }).catch(response => {
-            return { kanji: [], error: response.error };
+            return { kanji: [], error: response.error, pages: 0, quantity: 0 };
         });
     }
 }
