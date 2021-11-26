@@ -146,4 +146,30 @@ describe("Arrays Utility", () => {
             expect(remaining).toStrictEqual(array.filter(it => !random.includes(it)));
         });
     });
+
+    describe("Take First", () => {
+        it("Should return the first element", () => {
+            const array = [1, 2, 3];
+            const [remaining, first] = Arrays.takeFirst(array);
+            expect(first).toBe(1);
+        });
+
+        it("Should return the remaining element", () => {
+            const array = [1, 2, 3];
+            const [remaining] = Arrays.takeFirst(array);
+            expect(remaining).toStrictEqual([2, 3]);
+        });
+
+        it("Should return empty remaining if there is one element", () => {
+            const array = [1];
+            const [remaining] = Arrays.takeFirst(array);
+            expect(remaining).toStrictEqual([]);
+        });
+
+        it("Should return an empty array if the passed array is empty", () => {
+            const array: number[] = [];
+            const [remaining] = Arrays.takeFirst(array);
+            expect(remaining).toStrictEqual([]);
+        });
+    });
 });
