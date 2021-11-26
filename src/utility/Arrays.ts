@@ -154,4 +154,13 @@ export default class Arrays {
         }
         return [randomObjects, objects];
     };
+
+    static takeFirst = <T>(array: T[]): [T[], T?] => {
+        if (array.length > 0) {
+            const first = array[0];
+            const remaining = array.splice(1);
+            return [remaining, first];
+        }
+        return [array];
+    }
 }

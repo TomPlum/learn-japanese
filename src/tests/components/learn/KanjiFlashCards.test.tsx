@@ -6,19 +6,28 @@ import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
+import { FlashCard } from "../../../domain/learn/FlashCard";
+import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
 
 const mockGetKanjiFlashCards = jest.fn();
 const mockUpdateKanjiFlashCard = jest.fn();
+const mockGetDaysTillNextReview = jest.fn();
 jest.mock("../../../service/SpacedRepetitionService", () => {
-    return function() { return { getKanjiFlashCards: mockGetKanjiFlashCards, update: mockUpdateKanjiFlashCard  } };
+    return function() { return {
+            getKanjiFlashCards: mockGetKanjiFlashCards,
+            update: mockUpdateKanjiFlashCard,
+            getDaysTillNextReview: mockGetDaysTillNextReview
+        }
+    };
 });
 
 const onFinishHandler = jest.fn();
 
-const one = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5,"", [], ["number"]);
-const fish = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]);
-const bird = new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]);
-const person = new Kanji("人", [new KanjiReading("jin", "じん", ReadingType.ON)], ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], ["people"]);
+const srd = new SpaceRepetitionDetails(2.5, 0, 0, "2021-11-26");
+const one = new FlashCard(1, new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5,"", [], ["number"]), srd);
+const fish = new FlashCard(2, new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]), srd);
+const bird = new FlashCard(3, new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]), srd);
+const person = new FlashCard(4, new Kanji("人", [new KanjiReading("jin", "じん", ReadingType.ON)], ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], ["people"]), srd);
 
 let props: KanjiFlashCardsProps;
 
@@ -28,13 +37,15 @@ beforeEach(() => {
     };
 
     mockGetKanjiFlashCards.mockResolvedValueOnce({ cards: [one, fish, bird, person] });
+
+    mockGetDaysTillNextReview.mockReturnValue(1);
 });
 
 const setup = async () => {
     const component = renderReduxConsumer(<KanjiFlashCards {...props} />);
 
-    //await waitForElementToBeRemoved(await component.findByTitle('Loading'));
-    expect(await component.findByText('一')).toBeInTheDocument();
+    const kanji = await component.findAllByText('一');
+    kanji.forEach(el => expect(el).toBeInTheDocument());
 
     return {
         perfect: component.getByTitle('Perfect'),
@@ -62,7 +73,7 @@ test('The next button should be disabled before the user has flipped once', asyn
 test('Flipping the card should enable the confidence selector', async () => {
     const { next, perfect, blackout} = await setup();
 
-    fireEvent.click(screen.getByText('一'));
+    fireEvent.click(screen.getAllByText('一')[0]);
 
     expect(perfect).not.toBeDisabled();
     expect(blackout).not.toBeDisabled();
@@ -72,7 +83,7 @@ test('Flipping the card should enable the confidence selector', async () => {
 test('Flipping the card and selecting a confidence rating should enable the Next button', async () => {
     const { next, perfect } = await setup();
 
-    fireEvent.click(screen.getByText('一'));
+    fireEvent.click(screen.getAllByText('一')[0]);
     fireEvent.click(perfect)
 
     expect(next).not.toBeDisabled();
@@ -81,11 +92,11 @@ test('Flipping the card and selecting a confidence rating should enable the Next
 test('Clicking Next should render the next flash card', async () => {
     const { next, perfect } = await setup();
 
-    fireEvent.click(screen.getByText('一'));
+    fireEvent.click(screen.getAllByText('一')[0]);
     fireEvent.click(perfect);
     fireEvent.click(next);
 
-    expect(screen.getByText('魚')).toBeInTheDocument();
+    expect(screen.getAllByText('魚')[0]).toBeInTheDocument();
 });
 
 test('Clicking Next should advance the progress bar', async () => {
@@ -93,7 +104,7 @@ test('Clicking Next should advance the progress bar', async () => {
 
     expect(screen.getByTitle('1/4')).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText('一'));
+    fireEvent.click(screen.getAllByText('一')[0]);
     fireEvent.click(perfect)
     fireEvent.click(next)
 
@@ -103,15 +114,15 @@ test('Clicking Next should advance the progress bar', async () => {
 test('Getting to the last flash card should not change the Next button to Finish if the card is un-flipped', async () => {
     const { next } = await setup();
 
-    fireEvent.click(screen.getByText('一'));
+    fireEvent.click(screen.getAllByText('一')[0]);
     fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('魚'));
+    fireEvent.click(screen.getAllByText('魚')[0]);
     fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('鳥'));
+    fireEvent.click(screen.getAllByText('鳥')[0]);
     fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
@@ -122,64 +133,64 @@ test('Getting to the last flash card should not change the Next button to Finish
 test('Getting to the last flash card and flipping the card should change the Next button to Finish', async () => {
     const { next, blackout } = await setup();
 
-    fireEvent.click(screen.getByText('一'));
+    fireEvent.click(screen.getAllByText('一')[0]);
     fireEvent.click(blackout);
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('魚'));
+    fireEvent.click(screen.getAllByText('魚')[0]);
     fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('鳥'));
+    fireEvent.click(screen.getAllByText('鳥')[0]);
     fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('人'));
+    fireEvent.click(screen.getAllByText('人')[0]);
     expect(screen.getByText('Finish')).toBeInTheDocument();
 });
 
 test('Clicking Finish should call the onFinish event handler with the results', async () => {
     const { next, perfect } = await setup();
 
-    fireEvent.click(screen.getByText('一'));
+    fireEvent.click(screen.getAllByText('一')[0]);
     fireEvent.click(perfect);
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('魚'));
+    fireEvent.click(screen.getAllByText('魚')[0]);
     fireEvent.click(screen.getByTitle('Blackout'));
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('鳥'));
+    fireEvent.click(screen.getAllByText('鳥')[0]);
     fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('人'));
+    fireEvent.click(screen.getAllByText('人')[0]);
     fireEvent.click(screen.getByTitle('Blackout')); //Forgetting the last one here should still be included upon finishing
     fireEvent.click(screen.getByText('Finish'));
 
-    expect(onFinishHandler).toHaveBeenCalledWith({ perfect: [one, bird], forgotten: [fish, person] });
+    expect(onFinishHandler).toHaveBeenCalledWith({ remembered: [one, bird], forgotten: [fish, person] });
 });
 
 test('Clicking Finish should include the last flash card value in the results', async () => {
     const { next, perfect } = await setup();
 
-    fireEvent.click(screen.getByText('一'));
+    fireEvent.click(screen.getAllByText('一')[0]);
     fireEvent.click(perfect);
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('魚'));
+    fireEvent.click(screen.getAllByText('魚')[0]);
     fireEvent.click(screen.getByTitle('Blackout'));
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('鳥'));
+    fireEvent.click(screen.getAllByText('鳥')[0]);
     fireEvent.click(screen.getByTitle('Perfect'));
     fireEvent.click(next);
 
-    fireEvent.click(screen.getByText('人'));
+    fireEvent.click(screen.getAllByText('人')[0]);
     fireEvent.click(screen.getByTitle('Perfect')); //Remembering the last one here should still be included upon finishing
     fireEvent.click(screen.getByText('Finish'));
 
-    expect(onFinishHandler).toHaveBeenCalledWith({ perfect: [one, bird, person], forgotten: [fish] });
+    expect(onFinishHandler).toHaveBeenCalledWith({ remembered: [one, bird, person], forgotten: [fish] });
 });
 
 test('Clicking the Quit button should render the confirmation modal', async () => {
@@ -224,7 +235,7 @@ test('Marking a card as \'Remembered\' should increase the counter by 1', async 
 
     expect(screen.getAllByText('0')).toHaveLength(2);
 
-    fireEvent.click(screen.getByText('一'));
+    fireEvent.click(screen.getAllByText('一')[0]);
     fireEvent.click(perfect);
     fireEvent.click(next);
 
@@ -237,9 +248,33 @@ test('Marking a card as \'Forgotten\' should increase the counter by 1', async (
 
     expect(screen.getAllByText('0')).toHaveLength(2);
 
-    fireEvent.click(screen.getByText('一'));
+    fireEvent.click(screen.getAllByText('一')[0]);
     fireEvent.click(blackout);
     fireEvent.click(next);
 
     expect(forgottenCounter).toBeDefined();
+});
+
+test('Should render the error message if the service call succeeds but returns no cards', async () => {
+    mockGetKanjiFlashCards.mockReset().mockResolvedValueOnce({ cards: undefined, error: "User has no cards." });
+    renderReduxConsumer(<KanjiFlashCards {...props} />);
+    expect(await screen.findByText('User has no cards.'));
+});
+
+test('Should render a generic error message if the service call succeeds but returns no cards or error', async () => {
+    mockGetKanjiFlashCards.mockReset().mockResolvedValueOnce({ cards: undefined });
+    renderReduxConsumer(<KanjiFlashCards {...props} />);
+    expect(await screen.findByText( "An unknown error has occurred."));
+});
+
+test('Should render the error message if the service call fails', async () => {
+    mockGetKanjiFlashCards.mockReset().mockRejectedValueOnce({ error: "An error has occurred." });
+    renderReduxConsumer(<KanjiFlashCards {...props} />);
+    expect(await screen.findByText('An error has occurred.'));
+});
+
+test('Should render a generic error message if the service call fails but returns no error', async () => {
+    mockGetKanjiFlashCards.mockReset().mockRejectedValueOnce({ });
+    renderReduxConsumer(<KanjiFlashCards {...props} />);
+    expect(await screen.findByText( "An unknown error has occurred."));
 });

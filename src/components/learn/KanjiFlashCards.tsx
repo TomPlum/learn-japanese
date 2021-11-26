@@ -63,7 +63,7 @@ const KanjiFlashCards = (props: KanjiFlashCardsProps) => {
     const onNext = () => {
         service.update(new SpaceRepetitionFeedback(current!, confidence!));
 
-        const [next, nextRemaining] = Arrays.getRandomObject(remaining);
+        const [nextRemaining, next] = Arrays.takeFirst(remaining);
 
         setCurrent(next);
         setRemaining(nextRemaining);
@@ -78,7 +78,6 @@ const KanjiFlashCards = (props: KanjiFlashCardsProps) => {
         if (hasForgotten) {
             setForgotten(forgotten.concat(current!));
         }
-
     }
 
     const onFinish = () => {
@@ -132,7 +131,7 @@ const KanjiFlashCards = (props: KanjiFlashCardsProps) => {
 
                     <Col md={2} xs={3} className={styles.col}>
                         <FontAwesomeIcon className={styles.rememberedIcon} icon={faThumbsUp} fixedWidth/>
-                        <span className={styles.perfect} title="Remembered">{remembered.length}</span>
+                        <span className={styles.remembered} title="Remembered">{remembered.length}</span>
                     </Col>
 
                     <Col xs={4} className={styles.col}>
@@ -152,7 +151,7 @@ const KanjiFlashCards = (props: KanjiFlashCardsProps) => {
                             className={styles.progress}
                             remaining={remaining.length}
                             inProgress={hasCardsRemaining && !paused}
-                            quantity={remaining.length + remembered.length + forgotten.length}
+                            quantity={remaining.length + remembered.length + forgotten.length + 1}
                         />
                     </Col>
                 </Row>
