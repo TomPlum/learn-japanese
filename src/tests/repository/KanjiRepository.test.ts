@@ -110,7 +110,7 @@ describe("Kanji Repository", () => {
             mockPost.mockResolvedValueOnce({ data: undefined });
             const settings = new KanjiSettingsBuilder().build();
             return repository.read(settings).then(response => {
-                expect(response).toStrictEqual([]);
+                expect(response.results).toStrictEqual([]);
             });
         });
 
@@ -118,7 +118,23 @@ describe("Kanji Repository", () => {
             mockPost.mockResolvedValueOnce({ data: [exampleKanjiResponseData] });
             const settings = new KanjiSettingsBuilder().build();
             return repository.read(settings).then(response => {
-                expect(response).toStrictEqual([exampleKanji]);
+                expect(response.results).toStrictEqual([exampleKanji]);
+            });
+        });
+
+        it("Should return an 0 pages if there is no data in the API response", () => {
+            mockPost.mockResolvedValueOnce({ data: undefined });
+            const settings = new KanjiSettingsBuilder().build();
+            return repository.read(settings).then(response => {
+                expect(response.pages).toBe(0);
+            });
+        });
+
+        it("Should return an 0 quantity if there is no data in the API response", () => {
+            mockPost.mockResolvedValueOnce({ data: undefined });
+            const settings = new KanjiSettingsBuilder().build();
+            return repository.read(settings).then(response => {
+                expect(response.quantity).toBe(0);
             });
         });
 
@@ -133,50 +149,50 @@ describe("Kanji Repository", () => {
 
     describe("Get By Search Term", () => {
         it("Should call the rest client with the correct endpoint", () => {
-            mockGet.mockResolvedValueOnce({ data: { results: [] } });
-            return repository.getBySearchTerm("student").then(() => {
-                expect(mockGet).toHaveBeenLastCalledWith("/kanji/by-term/student");
+            mockPost.mockResolvedValueOnce({ data: { results: [], pages: 5, total: 200 } });
+            return repository.getBySearchTerm(0, 10, "student").then(() => {
+                expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-term/student", { page: 0, size: 10 });
             });
         });
 
         it("Should return the data if the API call is successful and has data", () => {
-            mockGet.mockResolvedValueOnce({ data: { results: [{ field: "meaning", value: exampleKanji }] } });
-            return repository.getBySearchTerm("student").then(response => {
+            mockPost.mockResolvedValueOnce({ data: { results: [{ field: "meaning", value: exampleKanji }], pages: 4, total: 100 } });
+            return repository.getBySearchTerm(0, 10, "student").then(response => {
                 expect(response.results).toStrictEqual([{ field: "meaning", value: exampleKanji }]);
             });
         });
 
         it("Should return an undefined error if the API call was successful and has data", () => {
-            mockGet.mockResolvedValueOnce({ data: { results: [{ field: "meaning", value: exampleKanji }] } });
-            return repository.getBySearchTerm("student").then(response => {
+            mockPost.mockResolvedValueOnce({ data: { results: [{ field: "meaning", value: exampleKanji }] } });
+            return repository.getBySearchTerm(0, 10, "student").then(response => {
                 expect(response.error).toBeUndefined();
             });
         });
 
         it("Should return an empty results array if the API call was successful but with no data", () => {
-            mockGet.mockResolvedValueOnce({ data: undefined });
-            return repository.getBySearchTerm("student").then(response => {
+            mockPost.mockResolvedValueOnce({ data: undefined });
+            return repository.getBySearchTerm(0, 10, "student").then(response => {
                 expect(response.results).toStrictEqual([]);
             });
         });
 
         it("Should return a generic error message if the the API call was successful but with no data", () => {
-            mockGet.mockResolvedValueOnce({ data: undefined });
-            return repository.getBySearchTerm("student").then(response => {
+            mockPost.mockResolvedValueOnce({ data: undefined });
+            return repository.getBySearchTerm(0, 10, "student").then(response => {
                 expect(response.error).toBe("No data in response");
             });
         });
 
         it("Should return an empty results array if the API call fails", () => {
-            mockGet.mockRejectedValueOnce({ data: undefined });
-            return repository.getBySearchTerm("student").catch(response => {
+            mockPost.mockRejectedValueOnce({ data: undefined });
+            return repository.getBySearchTerm(0, 10, "student").catch(response => {
                 expect(response.results).toStrictEqual([]);
             });
         });
 
         it("Should return the API error message if the API call fails", () => {
-            mockGet.mockRejectedValueOnce({ error: "An internal sever error occurred." });
-            return repository.getBySearchTerm("student").catch(response => {
+            mockPost.mockRejectedValueOnce({ error: "An internal sever error occurred." });
+            return repository.getBySearchTerm(0, 10, "student").catch(response => {
                 expect(response.error).toBe("An internal sever error occurred.");
             });
         });

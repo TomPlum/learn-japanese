@@ -4,6 +4,7 @@ import { Kanji } from "../domain/kanji/Kanji";
 import RestClient from "../rest/RestClient";
 import KanjiConverter from "../converter/KanjiConverter";
 import { PaginationRequest } from "../rest/request/PaginationRequest";
+import { Learnable } from "../domain/learn/Learnable";
 
 export interface KanjiResponseModel {
     character: string;
@@ -15,6 +16,12 @@ export interface KanjiResponseModel {
     readings: ReadingResponseModel[];
     examples: ExampleResponseModel[];
     tags: string[]
+}
+
+export interface PagedKanjiResponseModel {
+    results: KanjiResponseModel[];
+    pages: number;
+    total: number;
 }
 
 export interface ReadingResponseModel {
@@ -36,11 +43,21 @@ interface KanjiByGradeRequest {
 
 interface KanjiSearchResponseModel {
     results: { field: string, value: KanjiResponseModel }[];
+    pages: number;
+    total: number;
 }
 
 interface KanjiSearchResults {
     results: { field: string, value: Kanji }[];
+    pages: number;
+    quantity: number;
     error?: string;
+}
+
+export interface Paged<T extends Learnable> {
+    results: T[];
+    pages: number;
+    quantity: number;
 }
 
 export default class KanjiRepository implements Repository<Kanji> {
@@ -53,18 +70,20 @@ export default class KanjiRepository implements Repository<Kanji> {
      * @param pagination Pagination information.
      * @return kanji An array of matched kanji. Empty if none matched.
      */
-    public async read(settings: KanjiSettings, pagination: PaginationRequest = { page: 0, size: 9999 }): Promise<Kanji[]> {
+    public async read(settings: KanjiSettings, pagination: PaginationRequest = { page: 0, size: 9999 }): Promise<Paged<Kanji>> {
         const request: KanjiByGradeRequest = {
             grades: settings.grades.map(grade => grade.value),
             quantity: settings.quantity,
             paging: pagination
         };
 
-        return RestClient.post<KanjiResponseModel[]>("/kanji/by-grade", request).then(response => {
-            if (response.data) {
-                return this.converter.convert(response.data)
+        return RestClient.post<PagedKanjiResponseModel>("/kanji/by-grade", request).then(response => {
+            const data = response.data;
+            if (data) {
+                const kanji = this.converter.convert(data.results);
+                return { results: kanji, pages: data.pages, quantity: data.total };
             }
-            return Promise.resolve([]);
+            return Promise.resolve({ results: [], pages: 0, quantity: 0 });
         }).catch(response => {
             return Promise.reject(response);
         });
@@ -72,11 +91,14 @@ export default class KanjiRepository implements Repository<Kanji> {
 
     /**
      * Retrieves all the kanji that match the given search term.
+     * @param page The page to retrieve. Starts from 0.
+     * @param pageSize The size of the page.
      * @param search The term to search by.
      * @return results A collection of matching kanji and the field that it was matched on.
      */
-    public async getBySearchTerm(search: string): Promise<KanjiSearchResults> {
-        return RestClient.get<KanjiSearchResponseModel>("/kanji/by-term/" + search).then(response => {
+    public async getBySearchTerm(page: number, pageSize: number, search: string): Promise<KanjiSearchResults> {
+        const request: PaginationRequest = { page: page, size: pageSize };
+        return RestClient.post<KanjiSearchResponseModel>("/kanji/by-term/" + search, request).then(response => {
             const data = response.data;
 
             if (data) {
@@ -84,15 +106,22 @@ export default class KanjiRepository implements Repository<Kanji> {
                     results: data.results.map(result => {
                         return {
                             field: result.field,
-                            value: this.converter.convert([result.value])[0]
+                            value: this.converter.convert([result.value])[0],
                         }
-                    })
+                    }),
+                    pages: data.pages,
+                    quantity: data.total,
                 }
             }
 
-            return Promise.resolve({ results: [], error: "No data in response"});
+            return Promise.resolve({
+                results: [],
+                pages: 0,
+                quantity: 0,
+                error: "No data in response"
+            });
         }).catch(response => {
-            return Promise.reject({ results: [], error: response.error });
+            return Promise.reject({ results: [], pages: 0, quantity: 0, error: response.error });
         });
     }
 
