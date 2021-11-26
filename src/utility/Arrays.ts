@@ -155,6 +155,11 @@ export default class Arrays {
         return [randomObjects, objects];
     };
 
+    /**
+     * Picks the first element of the given array.
+     * @param array The array to pick from.
+     * @return tuple A tuple containing the remaining elements and the first element.
+     */
     static takeFirst = <T>(array: T[]): [T[], T?] => {
         if (array.length > 0) {
             const first = array[0];
