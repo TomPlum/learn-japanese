@@ -22,6 +22,8 @@ const KanjiBankPage = () => {
     const [kanji, setKanji] = useState<KanjiResult[]>([]);
     const [page, setPage] = useState(0);
     const [pageSize, setPageSize] = useState(40);
+    const [lastPage, setLastPage] = useState(999);
+    const [results, setResults] = useState<number | undefined>(undefined);
     const [search, setSearch] = useState("");
     const [grades, setGrades] = useState(KyoikuGrade.ALL);
     const [level, setLevel] = useState("");
@@ -31,7 +33,9 @@ const KanjiBankPage = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        getPagedKanji();
+        if (search === "") {
+            getPagedKanji();
+        }
     }, [page, pageSize, grades, level]);
 
     useEffect(() => {
@@ -45,10 +49,12 @@ const KanjiBankPage = () => {
             setError("");
             setLoading(true);
 
-            service.search(search).then(response => {
+            service.search(page, pageSize, search).then(response => {
                 const data = response.kanji;
 
                 setKanji(data);
+                setLastPage(response.pages);
+                setResults(response.quantity);
 
                 if (data.length > 0) {
                     setSelected(data[0]);
@@ -63,7 +69,7 @@ const KanjiBankPage = () => {
                 setLoading(false);
             });
         }
-    }, 250, [search]);
+    }, 250, [search, page, pageSize]);
 
     const getPagedKanji = () => {
         setError("");
@@ -71,6 +77,10 @@ const KanjiBankPage = () => {
 
         service.getKanjiPage(page, pageSize, grades).then(response => {
             const data = response.kanji;
+
+            setLastPage(response.pages);
+            setResults(response.quantity);
+
             if (data && data.length > 0) {
                 setKanji(data);
                 setSelected(data[0]);
@@ -213,6 +223,7 @@ const KanjiBankPage = () => {
                     <div className={styles.header}>
                         <KeywordSearchField
                             value={search}
+                            results={results}
                             disabled={loading}
                             onSubmit={onSearch}
                             className={styles.search}
@@ -275,21 +286,23 @@ const KanjiBankPage = () => {
 
                     <div className={styles.footer}>
                         <div className={styles.pagination}>
-                            <Button onClick={() => setPage(0)} variant="dark">
+                            <Button onClick={() => setPage(0)} variant="dark" disabled={page === 0}>
                                 <FontAwesomeIcon icon={faAngleDoubleLeft} fixedWidth />
                             </Button>
 
-                            <Button onClick={() => setPage(page - 1)} variant="dark">
+                            <Button onClick={() => setPage(page - 1)} variant="dark" disabled={page === 0}>
                                 <FontAwesomeIcon icon={faChevronLeft} fixedWidth />
                             </Button>
 
-                            <span className={styles.page}>{page + 1}</span>
+                            <span className={styles.page}>
+                                {loading ? "..." : `${page + 1} of ${lastPage}`}
+                            </span>
 
-                            <Button onClick={() => setPage(page + 1)} variant="dark">
+                            <Button onClick={() => setPage(page + 1)} variant="dark" disabled={page === lastPage - 1}>
                                 <FontAwesomeIcon icon={faChevronRight} fixedWidth />
                             </Button>
 
-                            <Button onClick={() => setPage(999)} variant="dark">
+                            <Button onClick={() => setPage(999)} variant="dark" disabled={page === lastPage - 1}>
                                 <FontAwesomeIcon icon={faAngleDoubleRight} fixedWidth />
                             </Button>
                         </div>
