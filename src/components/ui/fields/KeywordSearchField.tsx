@@ -9,6 +9,7 @@ export interface KeywordSearchFieldProps {
     value: string;
     keywords: KeywordMeta[];
     disabled?: boolean;
+    results?: number;
     className?: string;
     onChange: (value: string) => void;
     onSubmit: (params: KeywordMeta[], search?: string) => void;
@@ -21,7 +22,7 @@ export interface KeywordMeta {
 }
 
 const KeywordSearchField = (props: KeywordSearchFieldProps) => {
-    const { value, keywords, disabled, className, onChange, onSubmit } = props;
+    const { value, keywords, disabled, className, results, onChange, onSubmit } = props;
 
     const [invalid, setInvalid] = useState(false);
     const [active, setActive] = useState<KeywordMeta[]>([]);
@@ -49,9 +50,7 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
                 const valueStartIndex = keyOnwards.indexOf("=");
                 const valueEndIndex = keyOnwards.indexOf(" ") === -1 ? undefined : keyOnwards.indexOf(" ");
                 const value = valueStartIndex > -1 ? keyOnwards.substring(valueStartIndex + 1, valueEndIndex) : undefined;
-                console.log("Start Index: " + valueStartIndex);
-                console.log("End Index: " + valueEndIndex);
-                console.log("Value: " + value);
+
                 if (value) {
                     if (active.map(word => word.key).includes(keyword.key)) {
                         const activeWithCurrentRemoved = active.filter(word => word.key !== keyword.key);
@@ -98,6 +97,14 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
                     onChange={handleChange}
                     className={styles.input}
                 />
+
+                {results && (
+                    <InputGroup.Append>
+                        <InputGroup.Text>
+                            {results} Results
+                        </InputGroup.Text>
+                    </InputGroup.Append>
+                )}
             </InputGroup>
 
             <div className={styles.paramWrapper}>

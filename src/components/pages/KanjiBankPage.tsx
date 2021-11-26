@@ -309,7 +309,10 @@ const KanjiBankPage = () => {
 
                         <ValueSelector
                             prefix="Show"
+                            placement="top"
                             disabled={loading}
+                            selected={pageSize}
+                            id="page-size-selector"
                             values={[20, 40, 60, 80]}
                             className={styles.pageSize}
                             onChange={(value: number) => setPageSize(value)}

@@ -1,16 +1,63 @@
 @import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
 
-.select {
-  background-color: transparent;
-  color: $light-1;
-  border: none;
-  width: 100px;
+.popover > div::after {
+  border-top-color: $dark-1 !important;
+  border-bottom-color: $dark-1 !important;
 }
 
-.select:active, .select:focus {
-  box-shadow: none;
+.popover {
+  animation: fade 0.05s ease-in forwards;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.1em;
+  background-color: $dark-2;
+  border: 2px solid $dark-1;
+  border-radius: 12px;
 }
 
-.select:hover {
+.content {
+  padding: 0;
+}
+
+.valueWrapper {
+  transition: all ease 0.25s;
   cursor: pointer;
+}
+
+.valueWrapper:hover {
+  background-color: $dark-1;
+}
+
+.valueWrapper:hover a {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.valueWrapper:nth-child(n+1) {
+  border-bottom: 2px solid $dark-1;
+}
+
+.valueWrapper:last-child {
+  border: none;
+}
+
+.value {
+  @include noSelect;
+  padding: 5px 15px;
+  display: inline-block;
+  color: $light-2;
+  transition: all ease 0.25s;
+  text-decoration: none;
+}
+
+.value:hover {
+  text-decoration: none;
+}
+
+.selected {
+  cursor: pointer;
+  color: $light-1;
+}
+
+.disabled {
+  color: $light-2;
 }
