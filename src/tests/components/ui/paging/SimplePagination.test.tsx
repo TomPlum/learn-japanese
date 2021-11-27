@@ -66,6 +66,13 @@ test('Passing disabled as true should render an ellipsis where the page numbers 
     expect(screen.getByText('...')).toBeInTheDocument();
 });
 
+test('It should render the page number as an ellipsis if not disabled but last page is 0', () => {
+    props.disabled = false;
+    props.lastPage = 0;
+    setup();
+    expect(screen.getByText('...')).toBeInTheDocument();
+});
+
 test('Passing disabled as true should disable the first button', () => {
     props.disabled = true;
     const { first } = setup();
@@ -118,6 +125,24 @@ test('Should disable the last button if the component is not disabled, but curre
     props.disabled = false;
     props.page = 9;
     props.lastPage = 10;
+
+    const { last } = setup();
+
+    expect(last).toBeDisabled();
+});
+
+test('Should disable the next button if the component is not disabled, but the last page is 0', () => {
+    props.disabled = false;
+    props.lastPage = 0;
+
+    const { next } = setup();
+
+    expect(next).toBeDisabled();
+});
+
+test('Should disable the last button if the component is not disabled, but the last page is 0', () => {
+    props.disabled = false;
+    props.lastPage = 0;
 
     const { last } = setup();
 

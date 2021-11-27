@@ -16,7 +16,7 @@ const SimplePagination = (props: SimplePaginationProps) => {
     const { page, lastPage, className, disabled, onPageChange } = props;
 
     const disableBackward = page === 0 || disabled;
-    const disableForward = page === lastPage - 1 || disabled;
+    const disableForward = page === lastPage - 1 || disabled || lastPage === 0;
     const backwardClass = disableBackward || disabled ? styles.disabled : styles.button;
     const forwardClass = disableForward || disabled ? styles.disabled : styles.button;
 
@@ -47,7 +47,7 @@ const SimplePagination = (props: SimplePaginationProps) => {
             </Button>
 
             <span className={styles.page}>
-                {disabled ? "..." : `${page + 1} of ${lastPage}`}
+                {disabled || lastPage === 0 ? "..." : `${page + 1} of ${lastPage}`}
             </span>
 
             <Button onClick={onNext} variant="dark" disabled={disableForward} className={forwardClass} title="Next">

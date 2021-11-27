@@ -22,29 +22,27 @@ const KanjiBankPage = () => {
     const font = useFontSelector(state => state.font.selected);
 
     const [kanji, setKanji] = useState<KanjiResult[]>([]);
+    const [selected, setSelected] = useState<KanjiResult | undefined>(undefined);
+
     const [page, setPage] = useState(0);
     const [pageSize, setPageSize] = useState(40);
     const [lastPage, setLastPage] = useState(999);
     const [results, setResults] = useState<number | undefined>(undefined);
+
     const [search, setSearch] = useState("");
+
     const [grades, setGrades] = useState(KyoikuGrade.ALL);
     const [level, setLevel] = useState<JLTPLevel[]>([JLTPLevel.N1, JLTPLevel.N2, JLTPLevel.N3, JLTPLevel.N4, JLTPLevel.N5]);
-    const [selected, setSelected] = useState<KanjiResult | undefined>(undefined);
+
+    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [inExampleModal, setInExamplesModal] = useState(false);
-    const [error, setError] = useState("");
 
     useEffect(() => {
         if (search === "") {
             getPagedKanji();
         }
-    }, [page, pageSize, grades, level]);
-
-    useEffect(() => {
-        if (search === "") {
-            getPagedKanji();
-        }
-    }, [search]);
+    }, [page, pageSize, grades, level, search]);
 
     useEffect(() => {
         if (search !== "") {
@@ -245,7 +243,11 @@ const KanjiBankPage = () => {
                             className={styles.search}
                             onRemoveFilter={onRemoveSearchParam}
                             onChange={(value: string) => setSearch(value)}
-                            keywords={[ { key: "grade", type: "number" }, { key: "level", type: "string" } ]}
+                            keywords={[
+                                { key: "grade", type: "number" },
+                                { key: "level", type: "string" },
+                                { key: "strokes", type: "number" }
+                            ]}
                         />
                     </div>
 

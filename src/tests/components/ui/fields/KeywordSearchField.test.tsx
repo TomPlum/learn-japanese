@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import KeywordSearchField, { KeywordSearchFieldProps } from "../../../../components/ui/fields/KeywordSearchField";
-import { getByTextWithElements, getByTextWithMarkup } from "../../../Queries";
 
 let props: KeywordSearchFieldProps;
 
