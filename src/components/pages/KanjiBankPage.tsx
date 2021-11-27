@@ -13,6 +13,7 @@ import KeywordSearchField, { KeywordMeta } from "../ui/fields/KeywordSearchField
 import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss";
 import { KanjiReading } from "../../domain/kanji/KanjiReading";
 import ExampleDisplay from "../ui/display/ExampleDisplay";
+import SimplePagination from "../ui/paging/SimplePagination";
 
 const KanjiBankPage = () => {
 
@@ -285,27 +286,13 @@ const KanjiBankPage = () => {
                     </div>
 
                     <div className={styles.footer}>
-                        <div className={styles.pagination}>
-                            <Button onClick={() => setPage(0)} variant="dark" disabled={page === 0}>
-                                <FontAwesomeIcon icon={faAngleDoubleLeft} fixedWidth />
-                            </Button>
-
-                            <Button onClick={() => setPage(page - 1)} variant="dark" disabled={page === 0}>
-                                <FontAwesomeIcon icon={faChevronLeft} fixedWidth />
-                            </Button>
-
-                            <span className={styles.page}>
-                                {loading ? "..." : `${page + 1} of ${lastPage}`}
-                            </span>
-
-                            <Button onClick={() => setPage(page + 1)} variant="dark" disabled={page === lastPage - 1}>
-                                <FontAwesomeIcon icon={faChevronRight} fixedWidth />
-                            </Button>
-
-                            <Button onClick={() => setPage(999)} variant="dark" disabled={page === lastPage - 1}>
-                                <FontAwesomeIcon icon={faAngleDoubleRight} fixedWidth />
-                            </Button>
-                        </div>
+                        <SimplePagination
+                            page={page}
+                            disabled={loading}
+                            lastPage={lastPage}
+                            className={styles.pagination}
+                            onPageChange={(page: number) => setPage(page)}
+                        />
 
                         <ValueSelector
                             prefix="Show"

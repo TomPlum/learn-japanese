@@ -42,7 +42,8 @@
 
 .value {
   @include noSelect;
-  padding: 5px 15px;
+  font-size: 0.9em;
+  padding: 2px 8px;
   display: inline-block;
   color: $light-2;
   transition: all ease 0.25s;
@@ -51,6 +52,8 @@
 
 .value:hover {
   text-decoration: none;
+  color: $inspect;
+  opacity: 0.8;
 }
 
 .selected {

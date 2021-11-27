@@ -1,0 +1,19 @@
+@import "src/styles/sass/colours";
+
+.page {
+  margin: 0 15px;
+}
+
+.button, .button:active, .button:focus, .disabled, .disabled:active, .disabled:focus {
+  border: none;
+  padding: 0 6px;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.button:hover {
+  border: none;
+  color: $inspect;
+  box-shadow: none;
+  background-color: transparent;
+}

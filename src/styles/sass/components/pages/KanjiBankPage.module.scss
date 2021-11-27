@@ -85,24 +85,6 @@
   color: $light-1;
 }
 
-.pagination .page {
-  margin: 0 15px;
-}
-
-.pagination button, .pagination button:active, .pagination button:focus {
-  padding: 0 6px;
-  box-shadow: none !important;
-  border: none;
-  background-color: transparent !important;
-}
-
-.pagination button:hover {
-  border: none;
-  box-shadow: none;
-  background-color: transparent;
-  color: $inspect;
-}
-
 .rightSideWrapper {
   display: flex;
   flex-flow: column;
