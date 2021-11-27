@@ -55,6 +55,7 @@ describe("Learn Data Repository", () => {
     });
 
     test('Should delegate to the KanjiRepository when the topic is Kanji', () => {
+        mockKanjiRepository.mockResolvedValueOnce({ results: [] });
         const config: DataSettings = new KanjiSettingsBuilder().withGrades([KyoikuGrade.ONE]).build();
         return repository.read(config).then(() => {
             expect(mockKanjiRepository).toHaveBeenCalledWith(config);
