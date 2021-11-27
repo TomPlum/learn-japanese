@@ -13,7 +13,12 @@ const Keyword = (props: KeywordProps) => {
     return (
         <span className={className}>
             <span>{meta.key.substring(0, 1).toUpperCase() + meta.key.substring(1)} {meta.value}</span>
-            <FontAwesomeIcon icon={faTimes} data-testid="dismiss-tag" fixedWidth onClick={() => onDismiss(meta.key)} />
+            <FontAwesomeIcon
+                fixedWidth
+                icon={faTimes}
+                onClick={() => onDismiss(meta.key)}
+                data-testid={`dismiss-tag-${meta.key}`}
+            />
         </span>
     );
 }

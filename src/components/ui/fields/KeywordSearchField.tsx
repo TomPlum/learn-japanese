@@ -1,17 +1,18 @@
-import React, { ChangeEvent, useState } from "react";
-import { Form, InputGroup } from "react-bootstrap";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Keyword from "./Keyword";
 import styles from "../../../styles/sass/components/ui/fields/KeywordSearchField.module.scss";
+import { useDebouncedEffect } from "../../../hooks";
 
 export interface KeywordSearchFieldProps {
-    value: string;
     keywords: KeywordMeta[];
     disabled?: boolean;
     results?: number;
     className?: string;
     onChange: (value: string) => void;
+    onRemoveFilter: (params: KeywordMeta) => void;
     onSubmit: (params: KeywordMeta[], search?: string) => void;
 }
 
@@ -22,61 +23,78 @@ export interface KeywordMeta {
 }
 
 const KeywordSearchField = (props: KeywordSearchFieldProps) => {
-    const { value, keywords, disabled, className, results, onChange, onSubmit } = props;
+    const { keywords, disabled, className, results, onChange, onRemoveFilter, onSubmit } = props;
 
+    const [search, setSearch] = useState("");
     const [invalid, setInvalid] = useState(false);
     const [active, setActive] = useState<KeywordMeta[]>([]);
+    const [inParameter, setInParameter] = useState(false);
+
+    useDebouncedEffect(() => {
+        if (!inParameter) {
+            onChange(search);
+        }
+    }, 300, [search]);
+
+    useEffect(() => {
+        if (inParameter) {
+            const sanitised = search.replaceAll(" = ", "=").trimLeft();
+
+            keywords.forEach((keyword: KeywordMeta) => {
+                if (search.includes(keyword.key)) {
+
+                    const keyOnwards = sanitised.substring(sanitised.indexOf(keyword.key));
+                    const valueStartIndex = keyOnwards.indexOf("=");
+                    const valueEndIndex = keyOnwards.indexOf(" ") === -1 ? undefined : keyOnwards.indexOf(" ");
+                    const value = valueStartIndex > -1 ? keyOnwards.substring(valueStartIndex + 1, valueEndIndex) : undefined;
+
+                    setInvalid(!value);
+
+                    if (value) {
+                        if (active.map(word => word.key).includes(keyword.key)) {
+                            const activeWithCurrentRemoved = active.filter(word => word.key !== keyword.key);
+                            setActive(activeWithCurrentRemoved.concat({
+                                key: keyword.key,
+                                type: keyword.type,
+                                value: value
+                            }));
+                        } else {
+                            setActive(active.concat({ value: value, ...keyword }));
+                        }
+
+                        if (sanitised.includes(" ")) {
+                            setSearch("");
+                            onSubmit(active, undefined);
+                        }
+                    }
+                }
+            });
+        }
+    }, [inParameter, search]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const search = e.target.value;
-        const sanitisedSearch = search.replaceAll(" = ", "=").trimLeft();
-
-        if (!disabled && e.type === 'Enter') {
-            handleSubmit(search);
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        if (search.includes("=") && !keywords.map(word => word.key).some(key => search.includes(key))) {
-            setInvalid(true);
-        } else {
-            onChange(search);
-            setInvalid(false);
-        }
-
-        keywords.forEach((keyword: KeywordMeta) => {
-            if (search.includes(keyword.key)) {
-                const keyOnwards = sanitisedSearch.substring(sanitisedSearch.indexOf(keyword.key));
-                const valueStartIndex = keyOnwards.indexOf("=");
-                const valueEndIndex = keyOnwards.indexOf(" ") === -1 ? undefined : keyOnwards.indexOf(" ");
-                const value = valueStartIndex > -1 ? keyOnwards.substring(valueStartIndex + 1, valueEndIndex) : undefined;
-
-                if (value) {
-                    if (active.map(word => word.key).includes(keyword.key)) {
-                        const activeWithCurrentRemoved = active.filter(word => word.key !== keyword.key);
-                        setActive(activeWithCurrentRemoved.concat({ key: keyword.key, type: keyword.type, value: value }));
-                    } else {
-                        setActive(active.concat({ value: value, ...keyword }));
-                    }
-
-                    const lastCharacter = search[search.length - 1];
-                    if (sanitisedSearch.includes(" ")) {
-
-                    }
-                    //onChange(sanitisedSearch.replace(`${keyword.key}=${value}`, ""));
-                }
-            }
-        });
+        setSearch(search);
+        setInParameter(search.includes(">"));
     }
 
-    const handleSubmit = (value: string) => {
-        if (!invalid) {
-            onSubmit(active, value);
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (!invalid && e.key === 'Enter') {
+            setSearch("");
+            onSubmit(active, undefined);
         }
     }
 
     const handleDismiss = (key: string) => {
-        setActive(active.filter(word => word.key !== key));
+        setActive(current => {
+            return current.filter(meta => {
+                if (meta.key === key) {
+                    onRemoveFilter(meta);
+                } else {
+                    return meta;
+                }
+            })
+        });
     }
 
     return (
@@ -88,14 +106,14 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
                     </InputGroup.Text>
                 </InputGroup.Prepend>
 
-                <Form.Control
+                <input
                     type="text"
-                    value={value}
+                    value={search}
                     disabled={disabled}
-                    isInvalid={invalid}
                     placeholder="search"
                     onChange={handleChange}
                     className={styles.input}
+                    onKeyPress={handleKeyPress}
                 />
 
                 {results && (

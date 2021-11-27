@@ -1,12 +1,12 @@
-import { Alert, Button, Col, Container, Row } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import KanjiService, { KanjiResult } from "../../service/KanjiService";
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import KanjiSearchResult from "../ui/KanjiSearchResult";
 import StackGrid, { transitions } from "react-stack-grid";
-import { useDebouncedEffect, useFontSelector } from "../../hooks";
-import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight, faSearchMinus } from "@fortawesome/free-solid-svg-icons";
+import { useFontSelector } from "../../hooks";
+import { faSearchMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ValueSelector from "../ui/select/ValueSelector";
 import KeywordSearchField, { KeywordMeta } from "../ui/fields/KeywordSearchField";
@@ -14,6 +14,7 @@ import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss
 import { KanjiReading } from "../../domain/kanji/KanjiReading";
 import ExampleDisplay from "../ui/display/ExampleDisplay";
 import SimplePagination from "../ui/paging/SimplePagination";
+import { JLTPLevel } from "../../domain/learn/JLTPLevel";
 
 const KanjiBankPage = () => {
 
@@ -27,7 +28,7 @@ const KanjiBankPage = () => {
     const [results, setResults] = useState<number | undefined>(undefined);
     const [search, setSearch] = useState("");
     const [grades, setGrades] = useState(KyoikuGrade.ALL);
-    const [level, setLevel] = useState("");
+    const [level, setLevel] = useState<JLTPLevel[]>([JLTPLevel.N1, JLTPLevel.N2, JLTPLevel.N3, JLTPLevel.N4, JLTPLevel.N5]);
     const [selected, setSelected] = useState<KanjiResult | undefined>(undefined);
     const [loading, setLoading] = useState(false);
     const [inExampleModal, setInExamplesModal] = useState(false);
@@ -45,7 +46,7 @@ const KanjiBankPage = () => {
         }
     }, [search]);
 
-    useDebouncedEffect(() => {
+    useEffect(() => {
         if (search !== "") {
             setError("");
             setLoading(true);
@@ -70,7 +71,7 @@ const KanjiBankPage = () => {
                 setLoading(false);
             });
         }
-    }, 250, [search, page, pageSize]);
+    }, [search, page, pageSize]);
 
     const getPagedKanji = () => {
         setError("");
@@ -104,14 +105,29 @@ const KanjiBankPage = () => {
                     break;
                 }
                 case "level": {
-                    const level = meta.value!.substring(1).trim();
-                    setLevel(level);
+                    const levelStrings = meta.value!.substring(1).trim().split(",");
+                    const levels: JLTPLevel[] = levelStrings.map(value => JLTPLevel[value as keyof typeof JLTPLevel]);
+                    setLevel(levels);
+                    break;
                 }
             }
         });
 
         if (value) {
             setSearch(value);
+        }
+    }
+
+    const onRemoveSearchParam = (meta: KeywordMeta) => {
+        switch (meta.key) {
+            case "grade": {
+                setGrades(KyoikuGrade.ALL);
+                break;
+            }
+            case "level": {
+                setLevel([JLTPLevel.N1, JLTPLevel.N2, JLTPLevel.N3, JLTPLevel.N4, JLTPLevel.N5]);
+                break;
+            }
         }
     }
 
@@ -185,7 +201,7 @@ const KanjiBankPage = () => {
                         </div>
 
                         <div className={styles.section}>
-                            <p className={styles.label}>Examples {hasExamples ? `(${exampleQuantity})` : ""}</p>
+                            <p className={styles.label}>Examples {hasExamples ? `(x${exampleQuantity})` : ""}</p>
                             <p className={styles.value}>
                                 {hasExamples ?
                                     <span onClick={() => setInExamplesModal(true)} className={styles.example}>
@@ -223,11 +239,11 @@ const KanjiBankPage = () => {
 
                     <div className={styles.header}>
                         <KeywordSearchField
-                            value={search}
                             results={results}
                             disabled={loading}
                             onSubmit={onSearch}
                             className={styles.search}
+                            onRemoveFilter={onRemoveSearchParam}
                             onChange={(value: string) => setSearch(value)}
                             keywords={[ { key: "grade", type: "number" }, { key: "level", type: "string" } ]}
                         />
