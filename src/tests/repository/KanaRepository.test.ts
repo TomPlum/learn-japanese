@@ -6,12 +6,25 @@ import hiragana from "../../data/Hiragana";
 import { KanaData } from "../../data/DataTypes";
 import katakana from "../../data/Katakana";
 import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
+import RestClient from "../../rest/RestClient";
 
 jest.mock("../../data/Hiragana");
 jest.mock("../../data/Katakana");
 
+const mockConverter = jest.fn();
+jest.mock("../../converter/KanaConverter", () => {
+    return function() { return { convert: mockConverter } };
+});
+
 const mockHiragana = hiragana as jest.MockedFunction<() => KanaData[]>;
 const mockKatakana = katakana as jest.MockedFunction<() => KanaData[]>;
+const mockGet = jest.fn();
+
+const hiraganaResponse = [{ character: "あ", romaji: ["a"], column: "vowel", diacritical: false }];
+const katakanaResponse = [{ character: "ア", romaji: ["a"], column: "vowel", diacritical: false }];
+
+const hiraganaDomain = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false);
+const katakanaDomain = new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false);
 
 beforeEach(() => {
     mockHiragana.mockReturnValue([
@@ -33,12 +46,47 @@ beforeEach(() => {
         { name: "ズ", code: "\u30BA", romaji: ["zu"], column: KanaColumn.S, diacritical: true },
         { name: "シャ", code: "\u30B7\u30E3", romaji: ["sha"], column: KanaColumn.S, diacritical: false }
     ]);
+
+    RestClient.get = mockGet;
 });
 
 describe("Kana Repository", () => {
     const repository = new KanaRepository();
 
-    test.todo("Test the new get kana method that hits the API");
+    beforeEach(() => {
+        mockConverter.mockReturnValueOnce(hiraganaDomain);
+        mockConverter.mockReturnValueOnce(katakanaDomain);
+    });
+
+    describe("Read All", () => {
+        it("Should call the Rest Client with the correct endpoint", () => {
+            mockGet.mockResolvedValueOnce({ data: [] });
+            return repository.readAll().then(() => {
+                expect(mockGet).toHaveBeenCalledWith("/kana/all");
+            });
+        });
+
+        it("Should return the converted hiragana and katakana", () => {
+            mockGet.mockResolvedValueOnce({ data: { hiragana: hiraganaResponse, katakana: katakanaResponse }});
+            return repository.readAll().then(response => {
+                expect(response).toStrictEqual([hiraganaDomain, katakanaDomain]);
+            });
+        });
+
+        it("Should return an empty array if the API call succeeds but no data is returned", () => {
+            mockGet.mockResolvedValueOnce({ data: undefined });
+            return repository.readAll().then(response => {
+                expect(response).toStrictEqual([]);
+            });
+        });
+
+        it("Should return an empty array if the API call fails", () => {
+            mockGet.mockRejectedValueOnce({});
+            return repository.readAll().then(response => {
+                expect(response).toStrictEqual([]);
+            });
+        });
+    });
 
     it("Should return only the quantity specified when the config parameter is passed", () => {
         const settings = new KanaSettingsBuilder().withHiragana().withQuantity(3).build();
