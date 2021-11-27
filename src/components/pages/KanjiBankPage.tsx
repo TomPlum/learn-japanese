@@ -117,7 +117,7 @@ const KanjiBankPage = () => {
 
     const highlightSearch = (field:string, value: string) => {
         if (selected?.field === field) {
-            const startIndex = value.indexOf(search);
+            const startIndex = value.toLowerCase().indexOf(search.toLowerCase());
             const endIndex = startIndex + search.length;
 
             return (

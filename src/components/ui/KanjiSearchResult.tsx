@@ -22,7 +22,9 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
                 break;
             }
             case "meaning": {
-                matching = result.value.getMeanings().find(meaning => meaning.includes(search)) ?? search;
+                matching = result.value.getMeanings().find(meaning => {
+                    return meaning.toLowerCase().includes(search.toLowerCase());
+                }) ?? search;
                 break;
             }
             case "reading": {
@@ -41,7 +43,7 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
 
         let startIndex = 0;
         let endIndex = matching.length - 1;
-        let valueStartIndex = matching!.indexOf(search);
+        let valueStartIndex = matching!.toLowerCase().indexOf(search.toLowerCase());
         let valueEndIndex = valueStartIndex + search.length;
 
         // If the matching field value is super-long, trim it centered around the matching part
@@ -59,9 +61,17 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
 
         return (
             <span>
-                <span>{startIndex !== 0 ? "..." : ""}{matching.substring(startIndex, valueStartIndex)}</span>
-                <strong className={styles.matching}>{matching.substring(valueStartIndex, valueEndIndex)}</strong>
-                <span>{matching.substring(valueEndIndex, endIndex + 1)}{endIndex !== matching.length - 1 ? "..." : ""}</span>
+                <span>
+                    {startIndex !== 0 ? "..." : ""}{matching.substring(startIndex, valueStartIndex)}
+                </span>
+
+                <strong className={styles.matching}>
+                    {matching.substring(valueStartIndex, valueEndIndex)}
+                </strong>
+
+                <span>
+                    {matching.substring(valueEndIndex, endIndex + 1)}{endIndex !== matching.length - 1 ? "..." : ""}
+                </span>
             </span>
         );
     }
@@ -71,6 +81,7 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
             <p style={style} onClick={onClick}>
                 {result.value.getKanjiVariation()}
             </p>
+
             {result.field && (
                 <p className={styles.field}>{getFieldValue()}</p>
             )}
