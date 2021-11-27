@@ -24,16 +24,16 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
             case "meaning": {
                 matching = result.value.getMeanings().find(meaning => {
                     return meaning.toLowerCase().includes(search.toLowerCase());
-                }) ?? search;
+                })!;
                 break;
             }
             case "reading": {
                 const readings = result.value.readings.map(reading => reading.kana);
-                matching = readings.find(reading => reading.includes(search)) ?? search;
+                matching = readings.find(reading => reading.includes(search))!;
                 break;
             }
             case "tag": {
-                matching = "tag: " + result.value.getTags().find(tag => tag.includes(search)) ?? search;
+                matching = "tag: " + result.value.getTags().find(tag => tag.includes(search))!;
                 break;
             }
             default: {
@@ -62,7 +62,8 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
         return (
             <span>
                 <span>
-                    {startIndex !== 0 ? "..." : ""}{matching.substring(startIndex, valueStartIndex)}
+                    {startIndex !== 0 ? "..." : ""}
+                    {matching.substring(startIndex, valueStartIndex).trimLeft()}
                 </span>
 
                 <strong className={styles.matching}>
@@ -70,7 +71,8 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
                 </strong>
 
                 <span>
-                    {matching.substring(valueEndIndex, endIndex + 1)}{endIndex !== matching.length - 1 ? "..." : ""}
+                    {matching.substring(valueEndIndex, endIndex + 1).trimRight()}
+                    {endIndex !== matching.length - 1 ? "..." : ""}
                 </span>
             </span>
         );
