@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { InputGroup } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Keyword from "./Keyword";
@@ -106,7 +106,7 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
                     </InputGroup.Text>
                 </InputGroup.Prepend>
 
-                <input
+                <Form.Control
                     type="text"
                     value={search}
                     disabled={disabled}
@@ -119,7 +119,7 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
                 {results && (
                     <InputGroup.Append>
                         <InputGroup.Text>
-                            {results} Results
+                            {results} Result{results > 1 ? "s" : ""}
                         </InputGroup.Text>
                     </InputGroup.Append>
                 )}

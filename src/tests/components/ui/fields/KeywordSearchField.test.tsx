@@ -165,8 +165,14 @@ test('It should clear the input if a space is entered after filling in a valid p
     expect(field).toHaveValue('');
 });
 
-test('It should render the results if the prop is passed', () => {
+test('It should render the results in plural if the prop is passed and there is more than 1', () => {
     props.results = 540;
     setup();
     expect(screen.getByText('540 Results')).toBeInTheDocument();
+});
+
+test('It should render the results in singular if the prop is passed and there is only 1', () => {
+    props.results = 1;
+    setup();
+    expect(screen.getByText('1 Result')).toBeInTheDocument();
 });
