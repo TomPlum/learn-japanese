@@ -1,8 +1,36 @@
-export enum JLTPLevel {
-    N1 = "N1",
-    N2 = "N2",
-    N3 = "N3",
-    N4 = "N4",
-    N5 = "N5",
-    UNKNOWN = "N/A"
+export default class JLTPLevel {
+    private readonly _value: string;
+    private readonly _level: number;
+
+    private constructor(value: string, level: number) {
+        this._value = value;
+        this._level = level;
+    }
+
+    public static N1 = new JLTPLevel("N1", 1);
+    public static N2 = new JLTPLevel("N1", 2);
+    public static N3 = new JLTPLevel("N1", 3);
+    public static N4 = new JLTPLevel("N1", 4);
+    public static N5 = new JLTPLevel("N1", 5);
+
+    public static ALL = [JLTPLevel.N1, JLTPLevel.N2, JLTPLevel.N3, JLTPLevel.N4, JLTPLevel.N5];
+
+    public static fromString(value: string): JLTPLevel | undefined {
+        switch (value) {
+            case "N1": return JLTPLevel.N1;
+            case "N2": return JLTPLevel.N2;
+            case "N3": return JLTPLevel.N3;
+            case "N4": return JLTPLevel.N4;
+            case "N5": return JLTPLevel.N5;
+            default: return undefined;
+        }
+    }
+
+    get value(): string {
+        return this._value;
+    }
+
+    get level(): number {
+        return this._level;
+    }
 }

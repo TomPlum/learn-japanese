@@ -3,7 +3,7 @@ import { Example } from "./Example";
 import { KyoikuGrade } from "./KyoikuGrade";
 import { Learnable } from "../learn/Learnable";
 import { ReadingType } from "./ReadingType";
-import { JLTPLevel } from "../learn/JLTPLevel";
+import JLTPLevel from "../learn/JLTPLevel";
 
 export class Kanji extends Learnable {
 
