@@ -3,7 +3,7 @@ import InformationalKanji from "../../../../components/ui/display/InformationalK
 import KanjiRepository from "../../../../repository/KanjiRepository";
 import { Kanji } from "../../../../domain/kanji/Kanji";
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
-import { JLTPLevel } from "../../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../../domain/learn/JLTPLevel";
 
 /*const { getByValue } = mock(import("../../../../repository/KanjiRepository"), () => {
     getByValue: jest.fn()

@@ -8,7 +8,7 @@ import each from "jest-each";
 import { Learnable } from "../../../../domain/learn/Learnable";
 import React from "react";
 import Definition from "../../../../domain/sentence/Definition";
-import { JLTPLevel } from "../../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../../domain/learn/JLTPLevel";
 
 const isValidHandler = jest.fn();
 const ref = React.createRef<LearnableMeaningQuestion>();

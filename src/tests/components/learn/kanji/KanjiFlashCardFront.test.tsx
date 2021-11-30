@@ -6,7 +6,7 @@ import { ReadingType } from "../../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
 import { Example } from "../../../../domain/kanji/Example";
 import renderReduxConsumer from "../../../renderReduxConsumer";
-import { JLTPLevel } from "../../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../../domain/learn/JLTPLevel";
 
 const onClickHandler = jest.fn();
 

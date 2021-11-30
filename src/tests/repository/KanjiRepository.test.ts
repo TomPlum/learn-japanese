@@ -7,7 +7,7 @@ import { KanjiReading } from "../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../domain/kanji/ReadingType";
 import { Example } from "../../domain/kanji/Example";
 import { PaginationRequest } from "../../rest/request/PaginationRequest";
-import { JLTPLevel } from "../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../domain/learn/JLTPLevel";
 
 //Mock Kanji Converter
 const mockConverter = jest.fn();

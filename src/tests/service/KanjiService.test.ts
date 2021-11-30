@@ -5,7 +5,7 @@ import { PaginationRequest } from "../../rest/request/PaginationRequest";
 import { Kanji } from "../../domain/kanji/Kanji";
 import { KanjiReading } from "../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../domain/kanji/ReadingType";
-import { JLTPLevel } from "../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../domain/learn/JLTPLevel";
 
 //Mock Kanji Repository
 const mockRepoRead = jest.fn();

@@ -4,7 +4,7 @@ import { ReadingType } from "../../domain/kanji/ReadingType";
 import { KanjiReading } from "../../domain/kanji/KanjiReading";
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
 import { Example } from "../../domain/kanji/Example";
-import { JLTPLevel } from "../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../domain/learn/JLTPLevel";
 
 describe("Kanji Converter", () => {
 

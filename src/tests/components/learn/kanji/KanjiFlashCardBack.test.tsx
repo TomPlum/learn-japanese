@@ -8,7 +8,7 @@ import KanjiFlashCardBack from "../../../../components/learn/kanji/KanjiFlashCar
 import { Environment } from "../../../../utility/Environment";
 import { getByTextWithMarkup } from "../../../Queries";
 import renderReduxConsumer from "../../../renderReduxConsumer";
-import { JLTPLevel } from "../../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../../domain/learn/JLTPLevel";
 
 const onClickHandler = jest.fn();
 const mockEnvironment = jest.fn();

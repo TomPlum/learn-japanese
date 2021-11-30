@@ -3,7 +3,7 @@ import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { Example } from "../../../domain/kanji/Example";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
-import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../domain/learn/JLTPLevel";
 
 describe("Kanji", () => {
     describe("Getters", () => {

@@ -14,7 +14,7 @@ import Definition from "../../../domain/sentence/Definition";
 import { store } from "../../../store";
 import { setActive, setApplicationMode } from "../../../slices/ModeSlice";
 import { AppMode } from "../../../domain/AppMode";
-import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../domain/learn/JLTPLevel";
 
 //Mock Learning Data Repository
 const mockLearningDataRepositoryRead = jest.fn();

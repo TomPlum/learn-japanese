@@ -6,7 +6,7 @@ import { Example } from "../../../../domain/kanji/Example";
 import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiExampleDisplay from "../../../../components/learn/kanji/KanjiExampleDisplay";
 import { getByTextWithMarkup } from "../../../Queries";
-import { JLTPLevel } from "../../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../../domain/learn/JLTPLevel";
 
 const readings = [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)];
 const source = "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji";

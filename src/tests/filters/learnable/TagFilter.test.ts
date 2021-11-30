@@ -4,7 +4,7 @@ import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 import TagFilter from "../../../filters/learnable/TagFilter";
 import { Learnable } from "../../../domain/learn/Learnable";
-import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../domain/learn/JLTPLevel";
 
 const data = [
     new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], ["number"]),

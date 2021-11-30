@@ -5,7 +5,7 @@ import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 import renderReduxConsumer from "../../renderReduxConsumer";
-import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../domain/learn/JLTPLevel";
 import { FlashCard } from "../../../domain/learn/FlashCard";
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
 

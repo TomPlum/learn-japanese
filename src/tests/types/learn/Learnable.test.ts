@@ -9,7 +9,7 @@ import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 import Definition from "../../../domain/sentence/Definition";
 import { Learnable } from "../../../domain/learn/Learnable";
-import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../domain/learn/JLTPLevel";
 
 describe("Learnable", () => {
     describe("Get Field Values", () => {

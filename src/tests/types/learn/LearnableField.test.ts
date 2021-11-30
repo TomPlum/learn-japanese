@@ -5,7 +5,7 @@ import { Kanji } from "../../../domain/kanji/Kanji";
 import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
-import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../domain/learn/JLTPLevel";
 
 describe("Learnable Field", () => {
     describe("From Name String", () => {

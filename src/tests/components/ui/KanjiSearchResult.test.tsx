@@ -4,7 +4,7 @@ import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { Kanji } from "../../../domain/kanji/Kanji";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
-import { JLTPLevel } from "../../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../../domain/learn/JLTPLevel";
 import { getByTextWithMarkup } from "../../Queries";
 
 const onClickHandler = jest.fn();
