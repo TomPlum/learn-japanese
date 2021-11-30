@@ -63,3 +63,13 @@ Cypress.Commands.add('login', () => {
         }));
     });
 });
+
+Cypress.Commands.add('getAuthToken', (func: (token: string) => void) => {
+    cy.request({
+        url: Cypress.env('host') + "/user/login",
+        body: {"username": "Testing", "password": "Testing123-"},
+        method: "POST",
+    }).then((res: Response<User>) => {
+        func(res.body.token);
+    });
+});
