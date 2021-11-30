@@ -14,7 +14,7 @@ import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss
 import { KanjiReading } from "../../domain/kanji/KanjiReading";
 import ExampleDisplay from "../ui/display/ExampleDisplay";
 import SimplePagination from "../ui/paging/SimplePagination";
-import { JLTPLevel } from "../../domain/learn/JLTPLevel";
+import JLTPLevel from "../../domain/learn/JLTPLevel";
 
 const KanjiBankPage = () => {
 
@@ -30,52 +30,19 @@ const KanjiBankPage = () => {
     const [results, setResults] = useState<number | undefined>(undefined);
 
     const [search, setSearch] = useState("");
-
-    const [grades, setGrades] = useState(KyoikuGrade.ALL);
-    const [level, setLevel] = useState<JLTPLevel[]>([JLTPLevel.N1, JLTPLevel.N2, JLTPLevel.N3, JLTPLevel.N4, JLTPLevel.N5]);
+    const [grades, setGrades] = useState<KyoikuGrade[]>([]);
+    const [levels, setLevels] = useState<JLTPLevel[]>([]);
+    const [strokes, setStrokes] = useState<number | undefined>(undefined);
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [inExampleModal, setInExamplesModal] = useState(false);
 
     useEffect(() => {
-        if (search === "") {
-            getPagedKanji();
-        }
-    }, [page, pageSize, grades, level, search]);
-
-    useEffect(() => {
-        if (search !== "") {
-            setError("");
-            setLoading(true);
-
-            service.search(page, pageSize, search).then(response => {
-                const data = response.kanji;
-
-                setKanji(data);
-                setLastPage(response.pages);
-                setResults(response.quantity);
-
-                if (data.length > 0) {
-                    setSelected(data[0]);
-                }
-
-                if (response.error) {
-                    setError(response.error);
-                }
-            }).catch(response => {
-                setError(response.error);
-            }).finally(() => {
-                setLoading(false);
-            });
-        }
-    }, [search, page, pageSize]);
-
-    const getPagedKanji = () => {
         setError("");
         setLoading(true);
 
-        service.getKanjiPage(page, pageSize, grades).then(response => {
+        service.filter(page, pageSize, search, grades, levels, strokes).then(response => {
             const data = response.kanji;
 
             setLastPage(response.pages);
@@ -84,15 +51,17 @@ const KanjiBankPage = () => {
             if (data && data.length > 0) {
                 setKanji(data);
                 setSelected(data[0]);
-            } else {
-                setError(response.error ?? "Failed to load kanji.");
+            }
+
+            if (response.error) {
+                setError(response.error);
             }
         }).catch(response => {
             setError(response.error);
         }).finally(() => {
             setLoading(false);
         });
-    }
+    }, [page, pageSize, search, grades, levels, strokes]);
 
     const onSearch = (parameters: KeywordMeta[], value?: string) => {
         parameters.forEach((meta: KeywordMeta) => {
@@ -104,8 +73,13 @@ const KanjiBankPage = () => {
                 }
                 case "level": {
                     const levelStrings = meta.value!.substring(1).trim().split(",");
-                    const levels: JLTPLevel[] = levelStrings.map(value => JLTPLevel[value as keyof typeof JLTPLevel]);
-                    setLevel(levels);
+                    const levels: JLTPLevel[] = levelStrings.map(value => JLTPLevel.fromString(value)!);
+                    setLevels(levels);
+                    break;
+                }
+                case "strokes": {
+                    const strokes = Number(meta.value!);
+                    setStrokes(strokes);
                     break;
                 }
             }
@@ -119,11 +93,15 @@ const KanjiBankPage = () => {
     const onRemoveSearchParam = (meta: KeywordMeta) => {
         switch (meta.key) {
             case "grade": {
-                setGrades(KyoikuGrade.ALL);
+                setGrades([]);
                 break;
             }
             case "level": {
-                setLevel([JLTPLevel.N1, JLTPLevel.N2, JLTPLevel.N3, JLTPLevel.N4, JLTPLevel.N5]);
+                setLevels([]);
+                break;
+            }
+            case "strokes": {
+                setStrokes(undefined);
                 break;
             }
         }
@@ -181,7 +159,7 @@ const KanjiBankPage = () => {
 
                         <div className={styles.section}>
                             <p className={styles.label}>JLPT Level</p>
-                            <p className={styles.value}>{selected.value.jlpt}</p>
+                            <p className={styles.value}>{selected.value.jlpt.level}</p>
                         </div>
 
                         <div className={styles.section}>
