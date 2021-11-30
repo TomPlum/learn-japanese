@@ -10,8 +10,16 @@ import JLTPLevel from "../../domain/learn/JLTPLevel";
 //Mock Kanji Repository
 const mockRepoRead = jest.fn();
 const mockRepoGetBySearchTerm = jest.fn();
+const mockRepoGetByFilter = jest.fn();
+
 jest.mock("../../repository/KanjiRepository", () => {
-    return function () { return { read: mockRepoRead, getBySearchTerm: mockRepoGetBySearchTerm } }
+    return function () {
+        return {
+            read: mockRepoRead,
+            getByFilter: mockRepoGetByFilter,
+            getBySearchTerm: mockRepoGetBySearchTerm
+        }
+    }
 });
 
 const kanji = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], []);
@@ -128,6 +136,78 @@ describe("Kanji Service", () => {
         it("Should return the error message if the repository call is rejected", () => {
             mockRepoGetBySearchTerm.mockRejectedValueOnce({ results: [], error: "Something went wrong." });
             return service.search(0, 10, "student").catch(response => {
+                expect(response.error).toBe("Something went wrong.");
+            });
+        });
+    });
+
+    describe("Filter", () => {
+        it("Should call the repository with the search term, page, page size, grades, levels and strokes", () => {
+            mockRepoGetByFilter.mockResolvedValueOnce({ results: [{ field: "meaning", value: kanji }] });
+            return service.filter(0, 10, "student", [KyoikuGrade.ONE], [JLTPLevel.N5], 6).then(() => {
+                expect(mockRepoGetByFilter).toHaveBeenLastCalledWith(0, 10, "student", [1], [5], 6);
+            });
+        });
+
+        it("Should call the repository with an empty array for grades if the arg is not passed", () => {
+            mockRepoGetByFilter.mockResolvedValueOnce({ results: [{ field: "meaning", value: kanji }] });
+            return service.filter(0, 10, "student").then(() => {
+                expect(mockRepoGetByFilter.mock.calls[0][3]).toStrictEqual([]);
+            });
+        });
+
+        it("Should call the repository with an empty array for levels if the arg is not passed", () => {
+            mockRepoGetByFilter.mockResolvedValueOnce({ results: [{ field: "meaning", value: kanji }] });
+            return service.filter(0, 10, "student").then(() => {
+                expect(mockRepoGetByFilter.mock.calls[0][4]).toStrictEqual([]);
+            });
+        });
+
+        it("Should call the repository with an undefined value for strokes if the arg is not passed", () => {
+            mockRepoGetByFilter.mockResolvedValueOnce({ results: [{ field: "meaning", value: kanji }] });
+            return service.filter(0, 10, "student").then(() => {
+                expect(mockRepoGetByFilter.mock.calls[0][5]).toBeUndefined();
+            });
+        });
+
+        it("Should return an array of results if there is data in the repository response", () => {
+            mockRepoGetByFilter.mockResolvedValueOnce({ results: [{ field: "meaning", value: kanji }] });
+            return service.filter(0, 10, "student", [KyoikuGrade.ONE], [JLTPLevel.N5], 6).then(response => {
+                expect(response.kanji).toStrictEqual([{ field: "meaning", value: kanji }]);
+            });
+        });
+
+        it("Should return an undefined error if there is data in the repository response", () => {
+            mockRepoGetByFilter.mockResolvedValueOnce({ results: [{ field: "meaning", value: kanji }] });
+            return service.filter(0, 10, "student", [KyoikuGrade.ONE], [JLTPLevel.N5], 6).then(response => {
+                expect(response.error).toBeUndefined();
+            });
+        });
+
+        it("Should return an empty array of results if there is no data in the repository response", () => {
+            mockRepoGetByFilter.mockResolvedValueOnce({ results: [] });
+            return service.filter(0, 10, "student", [KyoikuGrade.ONE], [JLTPLevel.N5], 6).then(response => {
+                expect(response.kanji).toStrictEqual([]);
+            });
+        });
+
+        it("Should return the response error if there is no data in the repository response", () => {
+            mockRepoGetByFilter.mockResolvedValueOnce({ results: [], error: "Something went wrong." });
+            return service.filter(0, 10, "student", [KyoikuGrade.ONE], [JLTPLevel.N5], 6).then(response => {
+                expect(response.error).toBe("Something went wrong.");
+            });
+        });
+
+        it("Should return an empty array of results if the repository call is rejected", () => {
+            mockRepoGetByFilter.mockRejectedValueOnce({ results: [], error: "Something went wrong." });
+            return service.filter(0, 10, "student", [KyoikuGrade.ONE], [JLTPLevel.N5], 6).catch(response => {
+                expect(response.kanji).toStrictEqual([]);
+            });
+        });
+
+        it("Should return the error message if the repository call is rejected", () => {
+            mockRepoGetByFilter.mockRejectedValueOnce({ results: [], error: "Something went wrong." });
+            return service.filter(0, 10, "student", [KyoikuGrade.ONE], [JLTPLevel.N5], 6).catch(response => {
                 expect(response.error).toBe("Something went wrong.");
             });
         });
