@@ -9,8 +9,9 @@ declare global {
             startAndQuit(presetName: string, topicName?: Topic): Chainable<any>;
             navigateToMenu(): Chainable<any>;
             selectTopic(presetName: string, topicName?: Topic): Chainable<any>;
-            getAuthToken(func: (token: string) => void): Chainable<any>;
+            getAuthToken(func: (token: string) => void);
             login(): Chainable<any>
+            authorisedRequest(options: Partial<RequestOptions>): Chainable<any> | undefined;
         }
     }
 }
