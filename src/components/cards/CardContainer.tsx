@@ -12,7 +12,8 @@ const CardContainer = () => {
     }
 
     return (
-        <KanjiFlashCardsCard />
+        <div />
+        // <KanjiFlashCardsCard />
     );
 }
 
