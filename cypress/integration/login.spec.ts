@@ -53,7 +53,7 @@ it('What happens when API is down', () => {
 
     //Checks that the user model still exists, is visible and that an error message is prompted.
     cy.class('UserForm').should('exist').should('be.visible');
-    cy.contains('Sorry, an error had occurred.');
+    cy.contains('Sorry, an unknown error has occurred.');
 });
 
 it('Too many failed attempts at login', () => {

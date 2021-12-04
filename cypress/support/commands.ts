@@ -1,6 +1,8 @@
 import {Topic} from "./Topic";
 import {User} from "../../src/slices/UserSlice";
 import Response = Cypress.Response;
+import RequestOptions = Cypress.RequestOptions;
+import Chainable = Cypress.Chainable;
 
 Cypress.Commands.add('class', (className) => {
     return cy.get('[class*=' + className + "]");
@@ -72,4 +74,12 @@ Cypress.Commands.add('getAuthToken', (func: (token: string) => void) => {
     }).then((res: Response<User>) => {
         func(res.body.token);
     });
+});
+
+Cypress.Commands.add('authorisedRequest', (options: Partial<RequestOptions>): Chainable<any> | undefined => {
+    cy.getAuthToken((token:string) => {
+        options.headers = {"Authorization": "Bearer " + token};
+        return cy.request(options);
+    });
+    return undefined;
 });
