@@ -18,8 +18,8 @@ Cypress.Commands.add('selectTopic', (presetName: string, topicName?: Topic) => {
     cy.class('ModeSelectionMenu_wrapper').contains(presetName).click();
 });
 
-Cypress.Commands.add('startGame', () => {
-    cy.selectTopic();
+Cypress.Commands.add('startGame', (presetName: string, topicName?: Topic) => {
+    cy.selectTopic(presetName, topicName);
     cy.contains('Start').click();
 });
 
