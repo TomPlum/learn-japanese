@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import TablePagination, { TablePaginationProps } from "../../../../components/ui/table/TablePagination";
+import TablePagination, { TablePaginationProps } from "../../../../components/ui/paging/TablePagination";
 import userEvent from "@testing-library/user-event";
 import { getByTextWithElements } from "../../../Queries";
 
@@ -8,6 +8,8 @@ const onNextPageHandler = jest.fn();
 const onPreviousPageHandler = jest.fn();
 const onLastPageHandler = jest.fn();
 const onChangeQuantityHandler = jest.fn();
+const onToggleFirstBookHandler = jest.fn();
+const onToggleSecondBookHandler = jest.fn();
 
 let props: TablePaginationProps;
 
@@ -21,7 +23,9 @@ beforeEach(() => {
         onNextPage: onNextPageHandler,
         onPreviousPage: onPreviousPageHandler,
         onLastPage: onLastPageHandler,
-        onChangeQuantity: onChangeQuantityHandler
+        onChangeQuantity: onChangeQuantityHandler,
+        onToggleFirstBook: onToggleFirstBookHandler,
+        onToggleSecondBook: onToggleSecondBookHandler
     };
 });
 
@@ -33,6 +37,8 @@ const setup = () => {
         next: component.getByTitle('Next Page'),
         previous: component.getByTitle('Previous Page'),
         rows: component.getByTitle('Rows per Page'),
+        genkiOne: component.getByText('Genki I'),
+        genkiTwo: component.getByText('Genki II'),
         ...component
     }
 }
@@ -118,4 +124,16 @@ test('Should disable page quantity selector when there are 0 results', () => {
     props.totalPages = 0;
     const { rows } = setup();
     expect(rows).toBeDisabled();
+});
+
+test('Clicking the Genki I button should call the onToggleFirstBook event handler', () => {
+    const { genkiOne } = setup();
+    fireEvent.click(genkiOne);
+    expect(onToggleFirstBookHandler).toHaveBeenCalled();
+});
+
+test('Clicking the Genki II button should call the onToggleSecondBook event handler', () => {
+    const { genkiTwo } = setup();
+    fireEvent.click(genkiTwo);
+    expect(onToggleSecondBookHandler).toHaveBeenCalled();
 });
