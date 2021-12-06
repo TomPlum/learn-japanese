@@ -45,11 +45,11 @@ const KanjiBankPage = () => {
         service.filter(page, pageSize, search, grades, levels, strokes).then(response => {
             const data = response.kanji;
 
+            setKanji(data);
             setLastPage(response.pages);
             setResults(response.quantity);
 
             if (data && data.length > 0) {
-                setKanji(data);
                 setSelected(data[0]);
             }
 
@@ -63,7 +63,7 @@ const KanjiBankPage = () => {
         });
     }, [page, pageSize, search, grades, levels, strokes]);
 
-    const onSearch = (parameters: KeywordMeta[], value?: string) => {
+    const onSearch = (parameters: KeywordMeta[]) => {
         parameters.forEach((meta: KeywordMeta) => {
             switch (meta.key) {
                 case "grade": {
@@ -84,10 +84,6 @@ const KanjiBankPage = () => {
                 }
             }
         });
-
-        if (value) {
-            setSearch(value);
-        }
     }
 
     const onRemoveSearchParam = (meta: KeywordMeta) => {
@@ -191,11 +187,15 @@ const KanjiBankPage = () => {
                         <div className={styles.section}>
                             <p className={styles.label}>Tags</p>
                             {selected.value.getTags().length > 0 && (
-                                <p className={styles.value}>
+                                <p className={styles.value} data-testid="tag-value">
                                     {highlightSearch("tag", selected.value.getTags().join(", "))}
                                 </p>
                             )}
-                            {selected.value.getTags().length === 0 && <p className={styles.value}>-</p>}
+                            {selected.value.getTags().length === 0 && (
+                                <p className={styles.value} data-testid="tag-value">
+                                    -
+                                </p>
+                            )}
                         </div>
                     </>)}
                 </Col>

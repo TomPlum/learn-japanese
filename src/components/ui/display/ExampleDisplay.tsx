@@ -17,15 +17,17 @@ const ExampleDisplay = (props: ExampleDisplayProps) => {
             <Modal.Body className={styles.body}>
                 <Table variant="dark" className={styles.table}>
                     <thead>
-                        <th>Kanji</th>
-                        <th>Kana</th>
-                        <th>Meaning</th>
+                        <tr>
+                            <th>Kanji</th>
+                            <th>Kana</th>
+                            <th>Meaning</th>
+                        </tr>
                     </thead>
 
                     <tbody>{
                         props.examples.map((example: Example) => {
                             return (
-                                <tr>
+                                <tr key={example.kanji}>
                                     <td>{example.kanji}</td>
                                     <td>{example.kana.join(", ")}</td>
                                     <td>{example.english.join(", ")}</td>
