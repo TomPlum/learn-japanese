@@ -19,7 +19,6 @@ import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 import GameSettings from "../../domain/session/settings/game/GameSettings";
 import DataSettings from "../../domain/session/settings/data/DataSettings";
 import LearnSettings from "../../domain/session/settings/LearnSettings";
-import ErrorContainer from "../error/ErrorContainer";
 import CardContainer from "../cards/CardContainer";
 import { useModeDispatch } from "../../hooks";
 import { setActive, setApplicationMode } from "../../slices/ModeSlice";
@@ -101,50 +100,51 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
 
     return (
         <div className={styles.wrapper}>
-            <ErrorContainer />
-            <MainErrorBoundary>
-                <LoadingSpinner active={loading} />
+            <div className={styles.innerWrapper}>
+                <MainErrorBoundary>
+                    <LoadingSpinner active={loading} />
 
-                <CardContainer />
+                    <CardContainer />
 
-                {isInMenu &&
-                    <SettingsMenu onStart={onStartModeSelection} />
-                }
+                    {isInMenu && (
+                        <SettingsMenu onStart={onStartModeSelection} />
+                    )}
 
-                {gameConfig && !inResultsScreen && data.length > 0 &&
-                    <MemoryGame
-                        data={data}
-                        settings={gameConfig}
-                        key={sessionKey.value}
-                        onFinish={onGameFinish}
-                        sessionKey={sessionKey.value}
-                    />
-                }
+                    {gameConfig && !inResultsScreen && data.length > 0 && (
+                        <MemoryGame
+                            data={data}
+                            settings={gameConfig}
+                            key={sessionKey.value}
+                            onFinish={onGameFinish}
+                            sessionKey={sessionKey.value}
+                        />
+                    )}
 
-                {inResultsScreen && gameResult &&
-                    <GameResultScreen
-                        result={gameResult}
-                        onClose={onGameResultMenuClose}
-                    />
-                }
+                    {inResultsScreen && gameResult && (
+                        <GameResultScreen
+                            result={gameResult}
+                            onClose={onGameResultMenuClose}
+                        />
+                    )}
 
-                {learnConfig && !inResultsScreen && data.length > 0 &&
-                    <Learn
-                        data={data}
-                        key={sessionKey.value}
-                        onFinish={onLearningFinish}
-                        card={dataConfig?.topic.cards!}
-                    />
-                }
+                    {learnConfig && !inResultsScreen && data.length > 0 && (
+                        <Learn
+                            data={data}
+                            key={sessionKey.value}
+                            onFinish={onLearningFinish}
+                            card={dataConfig?.topic.cards!}
+                        />
+                    )}
 
-                {learningResult && inResultsScreen &&
-                    <LearningResultScreen
-                        result={learningResult}
-                        onPractice={onPracticeStart}
-                        onDismiss={onLearningResultMenuClose}
-                    />
-                }
-            </MainErrorBoundary>
+                    {learningResult && inResultsScreen && (
+                        <LearningResultScreen
+                            result={learningResult}
+                            onPractice={onPracticeStart}
+                            onDismiss={onLearningResultMenuClose}
+                        />
+                    )}
+                </MainErrorBoundary>
+            </div>
         </div>
     );
 }

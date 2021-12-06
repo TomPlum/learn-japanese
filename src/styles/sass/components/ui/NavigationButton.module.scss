@@ -99,3 +99,13 @@
 .icon, .text {
   transition: color ease-in-out 0.2s;
 }
+
+.placementCol {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.left {
+  margin-top: 6px;
+}

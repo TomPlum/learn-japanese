@@ -1,9 +1,15 @@
+@import "src/styles/sass/colours";
+
 .kanji {
   color: #db3c3c !important;
 }
 
 .genki {
   color: #ec8235 !important;
+}
+
+.kana {
+  color: $learn-colour;
 }
 
 .faq {

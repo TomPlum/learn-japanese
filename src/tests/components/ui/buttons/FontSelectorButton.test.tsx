@@ -5,7 +5,7 @@ import renderReduxConsumer from "../../../renderReduxConsumer";
 const setup = () => {
     const component = renderReduxConsumer(<FontSelectorButton />);
     return {
-        toggle: component.getByText('Font'),
+        toggle: component.getByTestId('font-selector'),
         ...component
     }
 }

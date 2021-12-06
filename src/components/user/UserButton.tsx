@@ -1,5 +1,5 @@
 import React from "react";
-import { faChartBar, faDoorOpen, faTrophy, faUser, faUserCircle, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { faChartBar, faDoorOpen, faTrophy, faUser, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useUserDispatch, useUserSelector } from "../../hooks";
 import { clearUser } from "../../slices/UserSlice";
 import menuStyles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
@@ -34,12 +34,14 @@ const UserButton = (props: UserButtonProps) => {
     return (
         <NavigationButton
             text={getButtonText()}
+            textPlacement="left"
             onClick={props.onClick}
             disableDropdown={!user}
             disabled={props.disabled}
+            className={styles.button}
             iconClass={menuStyles.icon}
             textClass={menuStyles.linkText}
-            icon={user ? faUserTie : faUser}
+            icon={user ? faUserCircle : faUser}
         >
             <NavigationButton.Item icon={faUserCircle} iconClass={styles.profile} href="/profile">
                 Profile

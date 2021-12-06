@@ -1,52 +1,40 @@
-import { Component } from "react";
+import { useState } from "react";
 import { Theme } from "../../../domain/Theme";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb, faMoon } from "@fortawesome/free-solid-svg-icons";
-import { Nav } from "react-bootstrap";
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import NavigationButton from "../NavigationButton";
 
 export interface ThemeButtonProps {
     className?: string;
 }
 
-interface ThemeButtonState {
-    theme: Theme;
-}
+const ThemeButton = (props: ThemeButtonProps) => {
+    const [theme, setTheme] = useState(Theme.DARK);
 
-class ThemeButton extends Component<ThemeButtonProps, ThemeButtonState> {
-    constructor(props: ThemeButtonProps | Readonly<ThemeButtonProps>) {
-        super(props);
-        this.state = {
-            theme: Theme.DARK
-        }
-    }
-
-    render() {
-        const { className } = this.props;
-        const { theme } = this.state;
-
-        return (
-            <Nav.Link className={className} onClick={this.handleOnClick}>
-                <div>
-                    <FontAwesomeIcon icon={theme === Theme.DARK ? faLightbulb : faMoon} className={menuStyles.icon} />
-                </div>
-                <span className={menuStyles.linkText}>{theme === Theme.DARK ? "Light" : "Dark"}</span>
-            </Nav.Link>
-        );
-    }
-
-    private handleOnClick = () => {
-        switch(this.state.theme) {
+    const handleOnClick = () => {
+        switch(theme) {
             case Theme.DARK: {
-                this.setState({ theme: Theme.LIGHT });
+                setTheme(Theme.LIGHT);
                 break;
             }
             case Theme.LIGHT: {
-                this.setState({ theme: Theme.DARK });
+                setTheme(Theme.DARK);
                 break;
             }
         }
     }
+
+    return (
+        <NavigationButton
+            disableDropdown
+            id="theme-button"
+            onClick={handleOnClick}
+            className={props.className}
+            iconClass={menuStyles.icon}
+            textClass={menuStyles.linkText}
+            icon={theme === Theme.DARK ? faLightbulb : faMoon}
+        />
+    );
 }
 
 export default ThemeButton;

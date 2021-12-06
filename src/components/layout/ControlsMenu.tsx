@@ -7,8 +7,10 @@ import ThemeButton from "../ui/buttons/ThemeButton";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 import AppModeButton from "../ui/buttons/AppModeButton";
 import UserButton from "../user/UserButton";
-import HelpButton from "../ui/buttons/HelpButton";
+import LearnButton from "../ui/buttons/LearnButton";
 import { useModeSelector } from "../../hooks";
+import NotificationsButton from "../ui/buttons/NotificationsButton";
+import HelpButton from "../ui/buttons/HelpButton";
 
 export interface ControlsMenuProps {
     onLaunchLoginModal: () => void;
@@ -24,33 +26,27 @@ const ControlsMenu = (props: ControlsMenuProps) => {
             <Container className={styles.innerWrapper} fluid>
                 <Nav className={styles.nav}>
                     <Row className={styles.row} noGutters>
-                        <Col>
-                            <HashLink path="/" className={styles.navLink} disabled={!active}>
-                                <div>
-                                    <FontAwesomeIcon icon={faHome} className={styles.icon}/>
-                                </div>
-                                <span className={styles.linkText}>Home</span>
-                            </HashLink>
+                        <Col className={styles.leftCol}>
+                            <div className={styles.buttonWrapper}>
+                                <HashLink path="/menu/learn" className={styles.navLink} disabled={!active}>
+                                    <div>
+                                        <FontAwesomeIcon icon={faHome} className={styles.icon}/>
+                                    </div>
+                                    <span className={styles.linkText}>Home</span>
+                                </HashLink>
+                                <AppModeButton disabled={!active} className={styles.navLink} />
+                                <LearnButton />
+                                <HelpButton />
+                            </div>
                         </Col>
 
-                        <Col>
-                            <AppModeButton className={styles.navLink} disabled={!active} />
-                        </Col>
-
-                        <Col>
-                            <ThemeButton className={styles.navLink}/>
-                        </Col>
-
-                        <Col>
-                            <FontSelectorButton className={styles.navLink} />
-                        </Col>
-
-                        <Col>
-                            <HelpButton />
-                        </Col>
-
-                        <Col>
-                           <UserButton onClick={onLaunchLoginModal} disabled={!active} />
+                        <Col className={styles.rightCol}>
+                            <div className={styles.buttonWrapper}>
+                                <ThemeButton className={styles.navLink}/>
+                                <FontSelectorButton className={styles.navLink} />
+                                <NotificationsButton className={styles.navLink} />
+                                <UserButton onClick={onLaunchLoginModal} disabled={!active} />
+                            </div>
                         </Col>
                     </Row>
                 </Nav>

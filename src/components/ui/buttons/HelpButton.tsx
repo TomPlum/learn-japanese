@@ -1,19 +1,19 @@
 import NavigationButton from "../NavigationButton";
-import { faBook, faBrain, faInfoCircle, faPaintBrush, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faBrain, faInfoCircle, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
-import styles from "../../../styles/sass/components/ui/buttons/HelpButton.module.scss";
+import styles from "../../../styles/sass/components/ui/buttons/LearnButton.module.scss";
 
 const HelpButton = () => {
     return (
-        <NavigationButton text="Help" icon={faInfoCircle} iconClass={menuStyles.icon} textClass={menuStyles.linkText} width={250}>
-            <NavigationButton.Item icon={faPaintBrush} href="/kanji" iconClass={styles.kanji}>
-                Kanji Dictionary
-            </NavigationButton.Item>
-
-            <NavigationButton.Item icon={faBook} href="/genki" iconClass={styles.genki}>
-                Genki Knowledge Bank
-            </NavigationButton.Item>
-
+        <NavigationButton
+            width={250}
+            text="Help"
+            id="help-button"
+            icon={faInfoCircle}
+            textPlacement="bottom"
+            iconClass={menuStyles.icon}
+            textClass={menuStyles.linkText}
+        >
             <NavigationButton.Item icon={faBrain} href="/help" iconClass={styles.sm2}>
                 SuperMemo2 Algorithm
             </NavigationButton.Item>

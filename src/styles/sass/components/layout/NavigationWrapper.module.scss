@@ -4,10 +4,6 @@
 @mixin wrapper {
   @include fitMobileViewportHeight;
   @include borderBoxSizing;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
   min-height: 100%;
   width: 100%;
 }
@@ -15,7 +11,7 @@
 @include desktop {
   .wrapper {
     @include wrapper;
-    padding: 130px 50px 0 50px;
+    padding: $nav-desktop-height + 50px 50px 0 50px;
   }
 }
 

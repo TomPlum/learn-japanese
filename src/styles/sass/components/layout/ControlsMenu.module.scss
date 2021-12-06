@@ -31,7 +31,7 @@
   .navbar {
     @include navbar;
     padding: 5px;
-    height: 65px;
+    height: $nav-phone-height;
   }
 }
 
@@ -49,14 +49,14 @@
   .navbar {
     @include navbar;
     padding: 10px;
-    height: 100px;
+    height: $nav-tablet-height;
   }
 }
 
 @include desktop {
   .icon {
-    font-size: 2.5em;
-    margin: 5px;
+    font-size: 2em;
+    margin-top: 5px;
   }
 
   .linkText {
@@ -67,7 +67,7 @@
   .navbar {
     @include navbar;
     padding: 15px;
-    height: 130px;
+    height: $nav-desktop-height;
   }
 }
 
@@ -90,4 +90,20 @@
 
 .innerWrapper {
   max-width: 1200px;
+}
+
+.rightCol {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.leftCol {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

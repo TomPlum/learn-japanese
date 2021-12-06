@@ -22,8 +22,8 @@ const setup = () => {
     return {
         home: component.getByText('Home'),
         mode: component.getByText('Play'),
-        theme: component.getByText('Light'),
-        font: component.getByText('Font'),
+        theme: component.getByTestId('theme-button'),
+        font: component.getByTestId('font-selector'),
         login: component.getByText('Login'),
         ...component
     }
@@ -37,7 +37,7 @@ beforeEach(() => {
     store.dispatch(setApplicationMode(AppMode.LEARN));
 });
 
-test('Clicking the \'Home\' button should route the user to the landing page', () => {
+test('Clicking the \'Home\' button should route the user to the menu', () => {
     const { home } = setup();
     fireEvent.click(home);
     expect(history.location.pathname).toBe('/');
@@ -58,7 +58,7 @@ test.skip('Passing active as false should disable the App Mode Button', () => {
 test('Passing active as false should disable the Login Button', () => {
     store.dispatch(setActive(false));
     const { login } = setup();
-    expect(login.parentElement).toHaveAttribute('aria-disabled', 'true');
+    expect(login.parentElement?.parentElement?.parentElement).toHaveAttribute('aria-disabled', 'true');
 });
 
 test('Passing active as false should disable the Home Button', () => {

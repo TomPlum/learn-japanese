@@ -4,22 +4,10 @@ import HelpButton from "../../../../components/ui/buttons/HelpButton";
 const setup = () => {
     const component = render(<HelpButton/>);
     return {
-        button: component.getByText('Help'),
+        button: component.getByTestId('help-button'),
         ...component
     }
 }
-
-test('Clicking on the kanji bank link should route to the kanji page', async () => {
-    const { button } = setup();
-    fireEvent.click(button);
-    expect(await screen.findByText('Kanji Dictionary')).toHaveAttribute('href', "/example-base-path/kanji");
-});
-
-test('Clicking on the genki knowledge bank link should route to the genki page', async () => {
-    const { button } = setup();
-    fireEvent.click(button);
-    expect(await screen.findByText('Genki Knowledge Bank')).toHaveAttribute('href', "/example-base-path/genki");
-});
 
 test('Clicking on the super memo 2 algorithm link should route to the help page', async () => {
     const { button } = setup();
