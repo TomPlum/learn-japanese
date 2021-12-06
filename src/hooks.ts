@@ -8,8 +8,8 @@ export const useUserSelector: TypedUseSelectorHook<RootState> = useSelector
 export const useFontDispatch = () => useDispatch<AppDispatch>();
 export const useFontSelector: TypedUseSelectorHook<RootState> = useSelector
 
-export const useErrorDispatch = () => useDispatch<AppDispatch>();
-export const useErrorSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useNotificationDispatch = () => useDispatch<AppDispatch>();
+export const useNotificationSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const useModeDispatch = () => useDispatch<AppDispatch>();
 export const useModeSelector: TypedUseSelectorHook<RootState> = useSelector;

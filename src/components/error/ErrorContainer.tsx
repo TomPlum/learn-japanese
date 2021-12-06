@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Toast } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle, faTools, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { addControllerMessage, clearErrors, NotificationType, removeError } from "../../slices/ErrorSlice";
-import { useErrorDispatch, useErrorSelector } from "../../hooks";
+import { addControllerMessage, clearNotifications, NotificationType, removeNotification } from "../../slices/NotificationSlice";
+import { useNotificationDispatch, useNotificationSelector } from "../../hooks";
 import styles from "../../styles/sass/components/error/ErrorContainer.module.scss"
 import dayjs from "dayjs";
 import Copyable from "../ui/Copyable";
 
 const ErrorContainer = () => {
 
-    const errorDispatcher = useErrorDispatch();
-    const errors = useErrorSelector(state => state.error.errors);
+    const errorDispatcher = useNotificationDispatch();
+    const errors = useNotificationSelector(state => state.notification.notifications);
     const [trigger, setTrigger] = useState(false);
     const [hasControllerMessage, setHasControllerMessage] = useState(false);
 
@@ -31,11 +31,11 @@ const ErrorContainer = () => {
     }, [errors]);
 
     const onDismiss = (id: string) => {
-        errorDispatcher(removeError(id));
+        errorDispatcher(removeNotification(id));
     }
 
     const onClearErrors = () => {
-        errorDispatcher(clearErrors());
+        errorDispatcher(clearNotifications());
         setHasControllerMessage(false);
     }
 

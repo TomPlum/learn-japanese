@@ -1,7 +1,7 @@
 import { act, fireEvent, screen } from "@testing-library/react";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import ErrorContainer from "../../../components/error/ErrorContainer";
-import { addControllerMessage, addError, clearErrors } from "../../../slices/ErrorSlice";
+import { addControllerMessage, addNotification, clearNotifications } from "../../../slices/NotificationSlice";
 import { store } from "../../../store";
 import { Provider } from "react-redux";
 
@@ -12,7 +12,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-    store.dispatch(clearErrors());
+    store.dispatch(clearNotifications());
 });
 
 const setup = () => {
@@ -23,7 +23,7 @@ const setup = () => {
 }
 
 test('Adding an error to the store should render a toast in the error container', () => {
-    store.dispatch(addError({ title: "Example Title", body: "Example Body" }));
+    store.dispatch(addNotification({ title: "Example Title", body: "Example Body" }));
 
     const component = setup();
 
@@ -32,7 +32,7 @@ test('Adding an error to the store should render a toast in the error container'
 });
 
 test('Clicking the X on an error should remove it from the screen', () => {
-    store.dispatch(addError({ title: "Example Title", body: "Example Body" }));
+    store.dispatch(addNotification({ title: "Example Title", body: "Example Body" }));
 
     const component = setup();
 
@@ -50,8 +50,8 @@ test('Clicking the X on an error should remove it from the screen', () => {
 
 test('Clicking the clear button on the controller message should clear all notification', () => {
     store.dispatch(addControllerMessage());
-    store.dispatch(addError({ title: "Message 1", body: "Example Body 1" }));
-    store.dispatch(addError({ title: "Message 2", body: "Example Body 2" }));
+    store.dispatch(addNotification({ title: "Message 1", body: "Example Body 1" }));
+    store.dispatch(addNotification({ title: "Message 2", body: "Example Body 2" }));
 
     const component = setup();
 
@@ -70,7 +70,7 @@ test('Clicking the clear button on the controller message should clear all notif
 });
 
 test('It should display "Just now" if the notification is less than 1 minute old', () => {
-    store.dispatch(addError({ title: "Message 1", body: "Example Body 1" }));
+    store.dispatch(addNotification({ title: "Message 1", body: "Example Body 1" }));
     const component = setup();
     expect(component.getByText('Just now')).toBeInTheDocument();
 });
@@ -78,7 +78,7 @@ test('It should display "Just now" if the notification is less than 1 minute old
 test('It should display the number of minutes elapsed since dispatch if the message is less than 1 hour old', () => {
     //Dispatch an error message at 12:00
     mockDate.setSystemTime(new Date(Date.UTC(2021, 9, 25, 12, 0, 0)));
-    store.dispatch(addError({ title: "Message 1", body: "Example Body 1" }));
+    store.dispatch(addNotification({ title: "Message 1", body: "Example Body 1" }));
 
     //Set the current time as 12:24:46
     mockDate.setSystemTime(new Date(Date.UTC(2021, 9, 25, 12, 24, 46)));
@@ -91,7 +91,7 @@ test('It should display the number of minutes elapsed since dispatch if the mess
 test('It should display the number of hours and minutes elapsed since dispatch if the message is over 1 hour old', () => {
     //Dispatch an error message at 12:00
     mockDate.setSystemTime(new Date(Date.UTC(2021, 9, 25, 12, 0, 0)));
-    store.dispatch(addError({ title: "Message 1", body: "Example Body 1" }));
+    store.dispatch(addNotification({ title: "Message 1", body: "Example Body 1" }));
 
     //Set the current time as 15:46:50
     mockDate.setSystemTime(new Date(Date.UTC(2021, 9, 25, 15, 46, 50)));
@@ -104,7 +104,7 @@ test('It should display the number of hours and minutes elapsed since dispatch i
 test('It should update the notification times every minute', () => {
     //Dispatch an error message at 12:00
     mockDate.setSystemTime(new Date(Date.UTC(2021, 9, 25, 12, 0, 0)));
-    store.dispatch(addError({ title: "Message 1", body: "Example Body 1" }));
+    store.dispatch(addNotification({ title: "Message 1", body: "Example Body 1" }));
 
     //Render the container, it should default the time to "Just now"
     setup();
@@ -116,17 +116,17 @@ test('It should update the notification times every minute', () => {
 });
 
 test('It should push a controller message into the container when there are 5 notifications present', () => {
-    store.dispatch(addError({ title: "Message 1", body: "Example Body 1" }));
-    store.dispatch(addError({ title: "Message 2", body: "Example Body 2" }));
-    store.dispatch(addError({ title: "Message 3", body: "Example Body 3" }));
-    store.dispatch(addError({ title: "Message 4", body: "Example Body 4" }));
+    store.dispatch(addNotification({ title: "Message 1", body: "Example Body 1" }));
+    store.dispatch(addNotification({ title: "Message 2", body: "Example Body 2" }));
+    store.dispatch(addNotification({ title: "Message 3", body: "Example Body 3" }));
+    store.dispatch(addNotification({ title: "Message 4", body: "Example Body 4" }));
 
     //Render the container with 4 errors, shouldn't have a controller
     const { rerender } = setup();
     expect(screen.queryByText('Clear all notifications')).not.toBeInTheDocument();
 
     //Dispatch the 5th error
-    store.dispatch(addError({ title: "Message 5", body: "Example Body 5" }));
+    store.dispatch(addNotification({ title: "Message 5", body: "Example Body 5" }));
     rerender(<Provider store={store}><ErrorContainer /></Provider>)
 
     //Should render the controller

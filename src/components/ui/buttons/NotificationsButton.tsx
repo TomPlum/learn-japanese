@@ -1,9 +1,12 @@
-import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Nav, Overlay, Popover } from "react-bootstrap";
 import React, { useRef, useState } from "react";
 import styles from "../../../styles/sass/components/ui/buttons/NotificationsButton.module.scss";
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import { useNotificationDispatch, useNotificationSelector } from "../../../hooks";
+import NotificationDisplay from "../display/NotificationDisplay";
+import { removeNotification } from "../../../slices/NotificationSlice";
 
 export interface NotificationsButtonProps {
     className?: string;
@@ -12,6 +15,9 @@ export interface NotificationsButtonProps {
 const NotificationsButton = (props: NotificationsButtonProps) => {
 
     const { className } = props;
+    const notifications = useNotificationSelector(state => state.notification).notifications;
+    const notificationDispatch = useNotificationDispatch();
+    const hasNotifications = Object.keys(notifications).length > 0;
 
     const ref = useRef(null);
     const targetRef = useRef(null);
@@ -21,11 +27,19 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
         setShow(true);
     }
 
+    const handleNotificationDismiss = (id: string) => {
+        notificationDispatch(removeNotification(id))
+    }
+
     return (
         <div ref={ref} className={className}>
             <Nav.Link className={className} onClick={handleClick}>
                 <div ref={targetRef}>
-                    <FontAwesomeIcon fixedWidth icon={faBell} className={menuStyles.icon} />
+                    {hasNotifications && <span className={styles.circle} />}
+                    <FontAwesomeIcon
+                        fixedWidth icon={faBell}
+                        className={[menuStyles.icon, show ? styles.highlight : styles.icon].join(" ")}
+                    />
                 </div>
             </Nav.Link>
 
@@ -33,13 +47,34 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                 show={show}
                 rootClose={true}
                 target={targetRef}
+                placement="bottom"
                 container={ref.current}
                 onHide={() => setShow(false)}
-                placement="bottom"
             >
                 <Popover id="notifications-menu" className={styles.popover}>
                     <Popover.Content className={styles.content}>
-                        <p>Test</p>
+                        <div>
+
+                        </div>
+
+                        {!hasNotifications && (
+                            <div className={styles.emptyWrapper}>
+                                <FontAwesomeIcon icon={faCheck} className={styles.emptyIcon} />
+                                <p className={styles.emptyText}>
+                                    You're all up to date!
+                                </p>
+                            </div>
+                        )}
+
+                        {hasNotifications && Object.keys(notifications).map(id => {
+                            return (
+                                <NotificationDisplay
+                                    id={id}
+                                    notification={notifications[id]}
+                                    onDismiss={handleNotificationDismiss}
+                                />
+                            )
+                        })}
                     </Popover.Content>
                 </Popover>
             </Overlay>

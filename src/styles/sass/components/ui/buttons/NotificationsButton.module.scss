@@ -1,3 +1,45 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
 .button {
   color: #FFF;
+}
+
+.popover > div::after {
+  border-top-color: $dark-1 !important;
+  border-bottom-color: $dark-1 !important;
+}
+
+.popover {
+  animation: fade 0.05s ease-in forwards;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.1em;
+  background-color: $dark-2;
+  border: 2px solid $dark-1;
+  border-radius: 12px;
+}
+
+.emptyText {
+  margin: 0;
+  color: $light-2;
+}
+
+.emptyIcon {
+  color: $bootstrap-green;
+}
+
+.emptyWrapper {
+  text-align: center;
+}
+
+.highlight {
+  color: #d2b33b;
+}
+
+.icon {
+  transition: color ease-in-out 0.2s;
+}
+
+.icon:hover {
+  color: #d2b33b;
 }

@@ -1,0 +1,23 @@
+@import "src/styles/sass/colours";
+
+.notification {
+  width: 100%;
+}
+
+.title {
+  color: $light-2;
+}
+
+.body {
+  color: $light-1;
+}
+
+.dismiss {
+  color: $light-3;
+  transition: color ease-in-out 0.2s;
+}
+
+.dismiss:hover {
+  color: $bootstrap-red;
+  cursor: pointer;
+}
