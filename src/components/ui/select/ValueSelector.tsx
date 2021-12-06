@@ -38,7 +38,9 @@ const ValueSelector = (props: ValueSelectorProps) => {
     return (
        <div ref={ref} className={className}>
            <span className={disabled ? styles.disabled : styles.selected}>
-                <span ref={targetRef} onClick={handleInitialOpen}>{prefix}{' '}{selected}</span>
+                <span ref={targetRef} onClick={handleInitialOpen} data-testid={id}>
+                    {prefix}{' '}{selected}
+                </span>
                 <FontAwesomeIcon icon={show ? faChevronUp : faChevronDown} fixedWidth />
            </span>
 

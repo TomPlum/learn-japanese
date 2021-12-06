@@ -24,7 +24,7 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
             case "meaning": {
                 matching = result.value.getMeanings().find(meaning => {
                     return meaning.toLowerCase().includes(search.toLowerCase());
-                })!;
+                }) ?? "";
                 break;
             }
             case "reading": {
@@ -43,7 +43,7 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
 
         let startIndex = 0;
         let endIndex = matching.length - 1;
-        let valueStartIndex = matching!.toLowerCase().indexOf(search.toLowerCase());
+        let valueStartIndex = matching?.toLowerCase().indexOf(search.toLowerCase());
         let valueEndIndex = valueStartIndex + search.length;
 
         // If the matching field value is super-long, trim it centered around the matching part

@@ -100,18 +100,26 @@ test('It should filter by kana when searching by it', async () => {
     mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
     const { search } = setup();
 
+    // "student" should render by default before searching
+    const student = await screen.findByText("student");
+    expect(student).toBeInTheDocument();
+
     // Search for "ご" and it should return the two rows whose kana contains it.
     fireEvent.change(search, { target: { value: "ご" } });
     expect(await screen.findByText("English (language)")).toBeInTheDocument();
     expect(await screen.findByText("P.M.")).toBeInTheDocument();
 
     // It should not render the rows whose kana doesn't contain "ご"
-    await waitForElementToBeRemoved(await screen.findByText("student"));
+    await waitForElementToBeRemoved(student);
 });
 
 test('It should filter by romaji when searching by it', async () => {
     mockGetAllVocab.mockResolvedValueOnce({ definitions: data });
     const { search } = setup();
+
+    // "student" should render by default before searching
+    const student = await screen.findByText("student");
+    expect(student).toBeInTheDocument();
 
     // Search for "go" and it should return the two rows whose kana contains it.
     fireEvent.change(search, { target: { value: "go" } });
@@ -119,7 +127,7 @@ test('It should filter by romaji when searching by it', async () => {
     expect(await screen.findByText("P.M.")).toBeInTheDocument();
 
     // It should not render the rows whose romaji doesn't contain "go"
-    await waitForElementToBeRemoved(await screen.findByText("student"));
+    await waitForElementToBeRemoved(student);
 });
 
 test('It should filter by kanji when searching by it', async () => {

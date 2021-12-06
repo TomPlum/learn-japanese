@@ -7,7 +7,7 @@ const HelpButton = () => {
     return (
         <NavigationButton text="Help" icon={faInfoCircle} iconClass={menuStyles.icon} textClass={menuStyles.linkText} width={250}>
             <NavigationButton.Item icon={faPaintBrush} href="/kanji" iconClass={styles.kanji}>
-                Jōyō Kanji Bank
+                Kanji Dictionary
             </NavigationButton.Item>
 
             <NavigationButton.Item icon={faBook} href="/genki" iconClass={styles.genki}>

@@ -52,7 +52,7 @@ test("It should call the onSubmit event handler when hitting enter when the term
     const { field } = setup();
     fireEvent.change(field, { target: { value: '>grade=1,2,3' }});
     fireEvent.keyPress(field, { key: 'Enter', code: 13, charCode: 13 });
-    expect(onSubmitHandler).toHaveBeenLastCalledWith([{ key: "grade", type: "string", value: "1,2,3" }], undefined);
+    expect(onSubmitHandler).toHaveBeenLastCalledWith([{ key: "grade", type: "string", value: "1,2,3" }]);
 });
 
 test("It should not call the onSubmit event handler if the parameter is valid but the key press is not enter", () => {

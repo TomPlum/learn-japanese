@@ -1,6 +1,6 @@
-import React from "react";
-import { Col, Container, Pagination, Row, Form } from "react-bootstrap";
-import styles from "../../../styles/sass/components/ui/table/TablePagination.module.scss";
+import React, { useState } from "react";
+import { Col, Container, Form, Pagination, Row } from "react-bootstrap";
+import styles from "../../../styles/sass/components/ui/paging/TablePagination.module.scss";
 import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -14,9 +14,14 @@ export interface TablePaginationProps {
     onFirstPage: () => void;
     onLastPage: () => void;
     onChangeQuantity: (quantity: number) => void;
+    onToggleFirstBook: (value: boolean) => void;
+    onToggleSecondBook: (value: boolean) => void;
 }
 
 const TablePagination = (props: TablePaginationProps) => {
+
+    const [genkiOne, setGenkiOne] = useState(true);
+    const [genkiTwo, setGenkiTwo] = useState(true);
 
     const {
         currentPage, totalPages, canPreviousPage, canNextPage, onPreviousPage, onNextPage, onFirstPage,
@@ -28,12 +33,22 @@ const TablePagination = (props: TablePaginationProps) => {
         onChangeQuantity(quantity);
     }
 
+    const onChangeGenkiOne = () => {
+        setGenkiOne(!genkiOne);
+        props.onToggleFirstBook(!genkiOne);
+    }
+
+    const onChangeGenkiTwo = () => {
+        setGenkiTwo(!genkiTwo);
+        props.onToggleSecondBook(!genkiTwo);
+    }
+
     const disabled = totalPages === 0;
 
     return (
         <Container fluid className={styles.wrapper}>
             <Row>
-                <Col lg={4} md={6} xs={12}>
+                <Col lg={4} md={6} sm={10} xs={12}>
                     <Pagination className={styles.pagination}>
                         <Pagination.First onClick={onFirstPage} disabled={!canPreviousPage} title="First Page">
                             <FontAwesomeIcon icon={faAngleDoubleLeft} fixedWidth />
@@ -58,10 +73,21 @@ const TablePagination = (props: TablePaginationProps) => {
                     </Pagination>
                 </Col>
 
-                <Col lg={6} md={3} xs={0} />
+                <Col xl={4} lg={3} xs={0} />
 
-                <Col lg={2} md={3} xs={12}>
-                    <Form.Control as="select" custom onChange={onChangeShow} title="Rows per Page" disabled={disabled}>
+                <Col xl={2} md={3} xs={6} className={styles.middleCol}>
+                    <Pagination className={styles.bookSelector}>
+                        <Pagination.Item className={styles.genki1} onClick={onChangeGenkiOne}>
+                            Genki I
+                        </Pagination.Item>
+                        <Pagination.Item className={styles.genki2} onClick={onChangeGenkiTwo}>
+                            Genki II
+                        </Pagination.Item>
+                    </Pagination>
+                </Col>
+
+                <Col lg={2} md={3} xs={6}>
+                    <Form.Control as="select" custom onChange={onChangeShow} title="Rows per Page" disabled={disabled} className={styles.pageSize}>
                         {[10, 20, 30, 40, 50].map(pageSize => (
                             <option key={pageSize} value={pageSize}>
                                 Show {pageSize}
@@ -70,8 +96,6 @@ const TablePagination = (props: TablePaginationProps) => {
                     </Form.Control>
                 </Col>
             </Row>
-
-
         </Container>
     );
 }

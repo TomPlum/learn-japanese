@@ -13,7 +13,7 @@ export interface KeywordSearchFieldProps {
     className?: string;
     onChange: (value: string) => void;
     onRemoveFilter: (params: KeywordMeta) => void;
-    onSubmit: (params: KeywordMeta[], search?: string) => void;
+    onSubmit: (params: KeywordMeta[]) => void;
 }
 
 export interface KeywordMeta {
@@ -64,7 +64,7 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
 
                         if (sanitised.includes(" ")) {
                             setSearch("");
-                            onSubmit(active, undefined);
+                            onSubmit(active);
                         }
                     }
                 }
@@ -81,7 +81,7 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (!invalid && e.key === 'Enter') {
             setSearch("");
-            onSubmit(active, undefined);
+            onSubmit(active);
         }
     }
 

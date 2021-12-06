@@ -8,10 +8,10 @@ export default class JLTPLevel {
     }
 
     public static N1 = new JLTPLevel("N1", 1);
-    public static N2 = new JLTPLevel("N1", 2);
-    public static N3 = new JLTPLevel("N1", 3);
-    public static N4 = new JLTPLevel("N1", 4);
-    public static N5 = new JLTPLevel("N1", 5);
+    public static N2 = new JLTPLevel("N2", 2);
+    public static N3 = new JLTPLevel("N3", 3);
+    public static N4 = new JLTPLevel("N4", 4);
+    public static N5 = new JLTPLevel("N5", 5);
 
     public static ALL = [JLTPLevel.N1, JLTPLevel.N2, JLTPLevel.N3, JLTPLevel.N4, JLTPLevel.N5];
 
