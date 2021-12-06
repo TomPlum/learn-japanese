@@ -19,4 +19,5 @@ it('Can delete account', () => {
     cy.class('DangerZone_button').contains('Delete').click();
     cy.get('input[placeholder=Password]').type('Testing123-');
     cy.contains('Delete my account').click();
+    cy.contains('Learn Japanese Kana')
 });
