@@ -88,6 +88,7 @@
 .rightSideWrapper {
   display: flex;
   flex-flow: column;
+  min-height: 500px;
 }
 
 .kanjiWrapper {
@@ -133,7 +134,8 @@
 }
 
 .grid {
-  margin: 10px 0;
+  margin-top: 10px;
+  margin-bottom: 36px;
 }
 
 .matching {

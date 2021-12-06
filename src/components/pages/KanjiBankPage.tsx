@@ -72,7 +72,7 @@ const KanjiBankPage = () => {
                     break;
                 }
                 case "level": {
-                    const levelStrings = meta.value!.substring(1).trim().split(",");
+                    const levelStrings = meta.value!.trim().split(",");
                     const levels: JLTPLevel[] = levelStrings.map(value => JLTPLevel.fromString(value)!);
                     setLevels(levels);
                     break;
@@ -159,7 +159,7 @@ const KanjiBankPage = () => {
 
                         <div className={styles.section}>
                             <p className={styles.label}>JLPT Level</p>
-                            <p className={styles.value}>{selected.value.jlpt.level}</p>
+                            <p className={styles.value}>{selected.value.jlpt.value}</p>
                         </div>
 
                         <div className={styles.section}>
