@@ -2,11 +2,11 @@ import { faBell, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Nav, Overlay, Popover } from "react-bootstrap";
 import React, { useRef, useState } from "react";
-import styles from "../../../styles/sass/components/ui/buttons/NotificationsButton.module.scss";
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
 import { useNotificationDispatch, useNotificationSelector } from "../../../hooks";
 import NotificationDisplay from "../display/NotificationDisplay";
 import { clearNotifications, removeNotification } from "../../../slices/NotificationSlice";
+import styles from "../../../styles/sass/components/ui/buttons/NotificationsButton.module.scss";
 
 export interface NotificationsButtonProps {
     className?: string;
@@ -17,7 +17,8 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
     const { className } = props;
     const notifications = useNotificationSelector(state => state.notification).notifications;
     const notificationDispatch = useNotificationDispatch();
-    const hasNotifications = Object.keys(notifications).length > 0;
+    const quantity = Object.keys(notifications).length;
+    const hasNotifications =  quantity > 0;
 
     const ref = useRef(null);
     const targetRef = useRef(null);
@@ -58,7 +59,8 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                 <Popover id="notifications-menu" className={styles.popover}>
                     <Popover.Content className={styles.content}>
                         {hasNotifications && (
-                            <div className={styles.controlsWrapper}>
+                            <div className={styles.header}>
+                                <span className={styles.title}>{quantity} Notifications</span>
                                 <span className={styles.clear} onClick={handleClear}>
                                     Clear
                                 </span>

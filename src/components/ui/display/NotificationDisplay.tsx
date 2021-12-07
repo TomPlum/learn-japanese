@@ -1,7 +1,7 @@
-import { Notification } from "../../../slices/NotificationSlice";
+import { Notification, NotificationType } from "../../../slices/NotificationSlice";
 import React from "react";
 import styles from "../../../styles/sass/components/ui/display/NotificationDisplay.module.scss";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faExclamationCircle, faInfoCircle, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dayjs from "dayjs";
 
@@ -26,11 +26,28 @@ const NotificationDisplay = (props: NotificationDisplayProps) => {
         return mins > 0 ? hours > 0 ? `${hours}h ${remainingMins}m ago` : `${mins}m ago` : "Just now";
     }
 
+    const getIcon = (): { icon: IconDefinition, class: string } => {
+        switch (notification.type) {
+            case NotificationType.ERROR: {
+                return { icon: faExclamationCircle, class: styles.error };
+            }
+            case NotificationType.INFO: {
+                return { icon: faInfoCircle, class: styles.info };
+            }
+            case NotificationType.SPECIAL: {
+                return { icon: faBell, class: styles.special };
+            }
+        }
+    }
+
+    const iconMeta = getIcon();
+
     return (
         <div className={[className, styles.container].join(" ")}>
-            <div>
-                <p className={styles.title}>
-                    <span>{notification.title}</span>
+            <div className={styles.leftWrapper}>
+                <p className={styles.heading}>
+                    <FontAwesomeIcon icon={iconMeta.icon} className={iconMeta.class} fixedWidth size="sm" />
+                    <span className={styles.title}>{notification.title}</span>
                     <span className={styles.time}>{getElapsedTime(notification.time)}</span>
                 </p>
                 <p className={styles.body}>{notification.body ?? ""}</p>

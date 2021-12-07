@@ -3,7 +3,6 @@
 
 .notification {
   width: 100%;
-  padding: 8px;
 }
 
 .notificationWrapper .notification:not(:last-child) {
@@ -77,17 +76,20 @@ $circle-size: 12px;
   box-shadow: 1px 1px 2px #000;
 }
 
-.controlsWrapper {
+.header {
   display: flex;
   align-items: center;
   border-bottom: 2px solid $dark-1;
-  height: 30px;
+  height: 35px;
   padding: 0 10px;
 }
 
+.title {
+  color: #369cd5;
+}
+
 .clear {
-  font-size: 0.9em;
-  float: right;
+  margin-left: auto;
   color: $light-2;
   transition: color ease-in-out 0.2s;
 }

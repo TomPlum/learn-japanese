@@ -27,10 +27,10 @@ const initialState: ErrorState = {
             precedence: 1
         },
         "2":  {
-            title: "Cringe!",
+            title: "Cringe Alert!",
             body: "We've been informed that you're a cringe lord.",
             time: Date.now(),
-            type: NotificationType.INFO,
+            type: NotificationType.ERROR,
             precedence: 1
         }
     }
