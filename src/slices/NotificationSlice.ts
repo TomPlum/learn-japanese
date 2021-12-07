@@ -22,7 +22,14 @@ const initialState: ErrorState = {
         "1":  {
             title: "Welcome!",
             body: "Here you'll see a list of your notifications.",
-            time: 56234,
+            time: Date.now(),
+            type: NotificationType.INFO,
+            precedence: 1
+        },
+        "2":  {
+            title: "Cringe!",
+            body: "We've been informed that you're a cringe lord.",
+            time: Date.now(),
             type: NotificationType.INFO,
             precedence: 1
         }

@@ -6,7 +6,7 @@ import styles from "../../../styles/sass/components/ui/buttons/NotificationsButt
 import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
 import { useNotificationDispatch, useNotificationSelector } from "../../../hooks";
 import NotificationDisplay from "../display/NotificationDisplay";
-import { removeNotification } from "../../../slices/NotificationSlice";
+import { clearNotifications, removeNotification } from "../../../slices/NotificationSlice";
 
 export interface NotificationsButtonProps {
     className?: string;
@@ -27,6 +27,10 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
         setShow(true);
     }
 
+    const handleClear = () => {
+        notificationDispatch(clearNotifications());
+    }
+
     const handleNotificationDismiss = (id: string) => {
         notificationDispatch(removeNotification(id))
     }
@@ -34,8 +38,8 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
     return (
         <div ref={ref} className={className}>
             <Nav.Link className={className} onClick={handleClick}>
-                <div ref={targetRef}>
-                    {hasNotifications && <span className={styles.circle} />}
+                <div ref={targetRef} className={styles.iconWrapper}>
+                    {hasNotifications && <div className={styles.circle} />}
                     <FontAwesomeIcon
                         fixedWidth icon={faBell}
                         className={[menuStyles.icon, show ? styles.highlight : styles.icon].join(" ")}
@@ -53,9 +57,13 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
             >
                 <Popover id="notifications-menu" className={styles.popover}>
                     <Popover.Content className={styles.content}>
-                        <div>
-
-                        </div>
+                        {hasNotifications && (
+                            <div className={styles.controlsWrapper}>
+                                <span className={styles.clear} onClick={handleClear}>
+                                    Clear
+                                </span>
+                            </div>
+                        )}
 
                         {!hasNotifications && (
                             <div className={styles.emptyWrapper}>
@@ -66,15 +74,18 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                             </div>
                         )}
 
-                        {hasNotifications && Object.keys(notifications).map(id => {
-                            return (
-                                <NotificationDisplay
-                                    id={id}
-                                    notification={notifications[id]}
-                                    onDismiss={handleNotificationDismiss}
-                                />
-                            )
-                        })}
+                        <div className={styles.notificationWrapper}>
+                            {hasNotifications && Object.keys(notifications).map(id => {
+                                return (
+                                    <NotificationDisplay
+                                        id={id}
+                                        className={styles.notification}
+                                        notification={notifications[id]}
+                                        onDismiss={handleNotificationDismiss}
+                                    />
+                                )
+                            })}
+                        </div>
                     </Popover.Content>
                 </Popover>
             </Overlay>

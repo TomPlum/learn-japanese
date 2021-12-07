@@ -1,6 +1,15 @@
 @import "src/styles/sass/colours";
 @import "src/styles/sass/mixins";
 
+.notification {
+  width: 100%;
+  padding: 8px;
+}
+
+.notificationWrapper .notification:not(:last-child) {
+  border-bottom: 2px solid $dark-1;
+}
+
 .button {
   color: #FFF;
 }
@@ -19,16 +28,22 @@
   border-radius: 12px;
 }
 
+.content {
+  padding: 0;
+}
+
 .emptyText {
   margin: 0;
   color: $light-2;
 }
 
 .emptyIcon {
+  margin-bottom: -4px;
   color: $bootstrap-green;
 }
 
 .emptyWrapper {
+  margin: 15px;
   text-align: center;
 }
 
@@ -42,4 +57,42 @@
 
 .icon:hover {
   color: #d2b33b;
+}
+
+.iconWrapper {
+  position: relative;
+}
+
+$circle-size: 12px;
+
+.circle {
+  position: absolute;
+  width: $circle-size;
+  height: $circle-size;
+  border-radius: $circle-size;
+  top: 5px;
+  right: 5px;
+  background-color: #369cd5;
+  z-index: 100;
+  box-shadow: 1px 1px 2px #000;
+}
+
+.controlsWrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid $dark-1;
+  height: 30px;
+  padding: 0 10px;
+}
+
+.clear {
+  font-size: 0.9em;
+  float: right;
+  color: $light-2;
+  transition: color ease-in-out 0.2s;
+}
+
+.clear:hover {
+  cursor: pointer;
+  color: $light-1;
 }
