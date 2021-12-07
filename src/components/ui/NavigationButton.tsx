@@ -174,7 +174,6 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                 </Popover>
             </Overlay>
         </div>
-
     );
 }
 
