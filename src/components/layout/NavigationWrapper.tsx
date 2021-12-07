@@ -1,5 +1,5 @@
 import { PropsWithChildren, useState } from "react";
-import ControlsMenu from "./ControlsMenu";
+import NavigationBar from "./NavigationBar";
 import UserForm from "../user/UserForm";
 import styles from "../../styles/sass/components/layout/NavigationWrapper.module.scss";
 
@@ -9,7 +9,7 @@ const NavigationWrapper = (props: PropsWithChildren<{ }>) => {
 
     return (
         <div className={styles.wrapper}>
-            <ControlsMenu onLaunchLoginModal={() => setInLoginModal(true)} />
+            <NavigationBar onLaunchLoginModal={() => setInLoginModal(true)} />
 
             {props.children}
 

@@ -2,7 +2,7 @@ import { Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGamepad, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { AppMode } from "../../../domain/AppMode";
-import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import { useModeDispatch, useModeSelector } from "../../../hooks";
 import { switchApplicationMode } from "../../../slices/ModeSlice";
 

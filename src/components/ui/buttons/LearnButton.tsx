@@ -1,6 +1,6 @@
 import NavigationButton from "../NavigationButton";
 import { faBook, faGraduationCap, faPaintBrush } from "@fortawesome/free-solid-svg-icons";
-import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import styles from "../../../styles/sass/components/ui/buttons/LearnButton.module.scss";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
 

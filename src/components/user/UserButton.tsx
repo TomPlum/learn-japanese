@@ -2,7 +2,7 @@ import React from "react";
 import { faChartBar, faDoorOpen, faTrophy, faUser, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useUserDispatch, useUserSelector } from "../../hooks";
 import { clearUser } from "../../slices/UserSlice";
-import menuStyles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
+import menuStyles from "../../styles/sass/components/layout/NavigationBar.module.scss";
 import styles from "../../styles/sass/components/user/UserButton.module.scss";
 import NavigationButton from "../ui/NavigationButton";
 

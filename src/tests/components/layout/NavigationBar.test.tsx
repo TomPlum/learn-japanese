@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react";
 import { Router } from "react-router-dom";
-import ControlsMenu, { ControlsMenuProps } from "../../../components/layout/ControlsMenu";
+import NavigationBar, { NavigationBarProps } from "../../../components/layout/NavigationBar";
 import { createMemoryHistory } from "history";
 import { AppMode } from "../../../domain/AppMode";
 import { store } from "../../../store";
@@ -10,12 +10,12 @@ import renderReduxConsumer from "../../renderReduxConsumer";
 const history = createMemoryHistory();
 const onLaunchLoginModalHandler = jest.fn();
 
-let props: ControlsMenuProps;
+let props: NavigationBarProps;
 
 const setup = () => {
     const component = renderReduxConsumer(
         <Router history={history}>
-            <ControlsMenu {...props} />
+            <NavigationBar {...props} />
         </Router>
     );
 

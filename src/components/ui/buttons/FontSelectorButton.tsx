@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { faCheck, faFont } from "@fortawesome/free-solid-svg-icons";
-import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import NavigationButton from "../NavigationButton";
 import { useFontDispatch } from "../../../hooks";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";

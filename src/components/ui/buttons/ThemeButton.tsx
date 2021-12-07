@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Theme } from "../../../domain/Theme";
 import { faLightbulb, faMoon } from "@fortawesome/free-solid-svg-icons";
-import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import styles from "../../../styles/sass/components/ui/buttons/ThemeButton.module.scss";
 import NavigationButton from "../NavigationButton";
 

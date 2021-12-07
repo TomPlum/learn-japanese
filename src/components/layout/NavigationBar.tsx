@@ -7,13 +7,13 @@ import { useModeSelector } from "../../hooks";
 import NotificationsButton from "../ui/buttons/NotificationsButton";
 import HelpButton from "../ui/buttons/HelpButton";
 import HomeButton from "../ui/buttons/HomeButton";
-import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
+import styles from "../../styles/sass/components/layout/NavigationBar.module.scss";
 
-export interface ControlsMenuProps {
+export interface NavigationBarProps {
     onLaunchLoginModal: () => void;
 }
 
-const ControlsMenu = (props: ControlsMenuProps) => {
+const NavigationBar = (props: NavigationBarProps) => {
     const { onLaunchLoginModal } = props;
 
     const active = useModeSelector(state => state.mode.active);
@@ -25,7 +25,7 @@ const ControlsMenu = (props: ControlsMenuProps) => {
                     <Row className={styles.row}>
                         <Col className={styles.leftCol}>
                             <div className={styles.leftButtonWrapper}>
-                                <HomeButton className={styles.navLink} disabled={!active} />
+                                <HomeButton disabled={!active} />
                                 <LearnButton />
                                 <HelpButton />
                             </div>
@@ -46,4 +46,4 @@ const ControlsMenu = (props: ControlsMenuProps) => {
     );
 }
 
-export default ControlsMenu;
+export default NavigationBar;

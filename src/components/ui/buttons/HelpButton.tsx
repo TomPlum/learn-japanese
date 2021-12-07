@@ -1,6 +1,6 @@
 import NavigationButton from "../NavigationButton";
 import { faBrain, faInfoCircle, faQuestion } from "@fortawesome/free-solid-svg-icons";
-import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import styles from "../../../styles/sass/components/ui/buttons/HelpButton.module.scss";
 
 export interface HelpButtonProps {

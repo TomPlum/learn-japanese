@@ -1,7 +1,7 @@
-import styles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import styles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import NavigationButton from "../NavigationButton";
-import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 
 export interface HomeButtonProps {
     className?: string;
@@ -19,7 +19,6 @@ const HomeButton = (props: HomeButtonProps) => {
             href="/menu/learn"
             textPlacement="right"
             disabled={props.disabled}
-            className={styles.navLink}
             iconClass={menuStyles.icon}
             textClass={menuStyles.linkText}
         />
