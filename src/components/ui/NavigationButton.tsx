@@ -22,6 +22,8 @@ export interface NavigationButtonProps {
     searchable?: boolean;
     showItemQuantity?: number;
     onClick?: () => void;
+    onShow?: () => void;
+    onHide?: () => void;
 }
 
 export interface ItemProps {
@@ -65,7 +67,7 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
 const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
 
     const { text, icon, width, textPlacement, className, iconClass, textClass, disabled, disableDropdown, id,
-        searchable, showItemQuantity, onClick, children } = props;
+        searchable, showItemQuantity, onClick, onShow, onHide, children } = props;
 
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
@@ -76,12 +78,16 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
     const handleClick = () => {
         if (!disableDropdown) {
             setShow(!show);
+            if (!show) {
+                onShow?.();
+            }
         } else {
             onClick?.();
         }
     };
 
     const handleHide = () => {
+        onHide?.();
         setShow(false);
     };
 

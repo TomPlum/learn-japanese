@@ -4,6 +4,14 @@
   float: right;
 }
 
+.icon {
+  transition: color ease-in-out 0.2s;
+}
+
+.icon:hover, .highlight {
+  color: #2e6cde !important;
+}
+
 .font {
   font-size: 1.1em;
 }

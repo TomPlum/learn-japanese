@@ -26,6 +26,7 @@ export const fonts: Font[] = [
 
 const FontSelectorButton = (props: FontSelectorProps) => {
 
+    const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState("Default");
     const fontDispatcher = useFontDispatch();
 
@@ -43,8 +44,10 @@ const FontSelectorButton = (props: FontSelectorProps) => {
             showItemQuantity={4}
             menuClass={styles.menu}
             className={props.className}
-            iconClass={menuStyles.icon}
+            onShow={() => setOpen(true)}
+            onHide={() => setOpen(false)}
             textClass={menuStyles.linkText}
+            iconClass={[menuStyles.icon, open ? styles.highlight : styles.icon].join(" ")}
         >
             {fonts.map((font: Font) => {
                 const isSelected = selected === font.displayName;

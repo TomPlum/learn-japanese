@@ -3,6 +3,8 @@ import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-l
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
+const onShowHandler = jest.fn();
+const onHideHandler = jest.fn();
 const onClickButtonHandler = jest.fn();
 const onClickItemHandler = jest.fn();
 
@@ -23,7 +25,9 @@ beforeEach(() => {
         disableDropdown: false,
         searchable: true,
         showItemQuantity: 5,
-        onClick: onClickButtonHandler
+        onClick: onClickButtonHandler,
+        onShow: onShowHandler,
+        onHide: onHideHandler
     };
 
     itemProps = {
@@ -155,7 +159,7 @@ test('Clicking outside the drop-down menu should stop rendering it', async () =>
     const menuLink = await screen.findByText('My Link');
     expect(menuLink).toBeInTheDocument();
 
-    // Click outside of the menu
+    // Click outside the menu
     fireEvent.click(document.body);
     await waitForElementToBeRemoved(menuLink);
 });
@@ -169,4 +173,30 @@ test('Clicking on a link should call the onClick event handler', async () => {
 
     fireEvent.click(menuLink);
     expect(onClickItemHandler).toHaveBeenCalled();
+});
+
+test('Clicking the button to render the menu show call the onShow event handler', async () => {
+    const { button } = setup();
+
+    // Open the menu
+    fireEvent.click(button);
+    const menuLink = await screen.findByText('My Link');
+    expect(menuLink).toBeInTheDocument();
+
+    expect(onShowHandler).toHaveBeenCalled();
+});
+
+test('Dismissing the menu to stop rendering it should call the onHide event handler', async () => {
+    const { button } = setup();
+
+    // Open the menu
+    fireEvent.click(button);
+    const menuLink = await screen.findByText('My Link');
+    expect(menuLink).toBeInTheDocument();
+
+    // Click outside the menu
+    fireEvent.click(document.body);
+    await waitForElementToBeRemoved(menuLink);
+
+    expect(onHideHandler).toHaveBeenCalled();
 });
