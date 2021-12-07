@@ -1,4 +1,4 @@
-import { Col, Form, Nav, Overlay, Popover, Row } from "react-bootstrap";
+import { Col, Container, Form, Nav, Overlay, Popover, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import React, { PropsWithChildren, ReactElement, ReactNode, useRef, useState } from "react";
@@ -108,49 +108,51 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
     const linkClassName = [className, styles.link].join(" ");
     const isLeft = textPlacement && textPlacement === "left";
     const isRight = textPlacement && textPlacement === "right";
-    const iconPositionClass = isLeft || isRight ? styles.placementCol : undefined;
+    const iconPositionClass = isLeft || isRight ? styles.placementCol : styles.col;
     const textClasses = [textClass, show ? styles.active : "", styles.text];
 
     return (
         <div ref={ref} className={styles.container}>
             <Nav.Link className={linkClassName} onClick={handleClick} disabled={disabled} data-testid="nav-btn-link" href={href}>
-               <Row>
-                   {isLeft && (
-                       <Col xs={6} className={iconPositionClass}>
-                           <span className={textClasses.concat(styles.left).join(" ")}>
-                               {text}
-                           </span>
+               <Container>
+                   <Row>
+                       {isLeft && (
+                           <Col xs={6} className={iconPositionClass}>
+                               <span className={textClasses.concat(styles.left).join(" ")}>
+                                   {text}
+                               </span>
+                           </Col>
+                       )}
+
+                       <Col xs={isLeft || isRight ? 6 : 12} className={iconPositionClass}>
+                           <div ref={!text || isLeft || isRight ? targetRef : undefined}>
+                               <FontAwesomeIcon
+                                   fixedWidth
+                                   icon={icon}
+                                   data-testid={id}
+                                   className={[iconClass, show ? styles.active : "", styles.icon].join(" ")}
+                               />
+                           </div>
                        </Col>
-                   )}
-
-                   <Col xs={isLeft || isRight ? 6 : 12} className={iconPositionClass}>
-                       <div ref={!text || isLeft || isRight ? targetRef : undefined}>
-                           <FontAwesomeIcon
-                               fixedWidth
-                               icon={icon}
-                               data-testid={id}
-                               className={[iconClass, show ? styles.active : "", styles.icon].join(" ")}
-                           />
-                       </div>
-                   </Col>
 
 
-                   {isRight && (
-                       <Col xs={6} className={iconPositionClass}>
-                           <span className={textClasses.concat(styles.right).join(" ")}>
-                               {text}
-                           </span>
-                       </Col>
-                   )}
+                       {isRight && (
+                           <Col xs={6} className={iconPositionClass}>
+                               <span className={textClasses.concat(styles.right).join(" ")}>
+                                   {text}
+                               </span>
+                           </Col>
+                       )}
 
-                   {textPlacement === "bottom" && (
-                       <Col xs={12}>
-                           <span ref={targetRef} className={textClasses.join(" ")}>
-                               {text}
-                           </span>
-                       </Col>
-                   )}
-               </Row>
+                       {textPlacement === "bottom" && (
+                           <Col xs={12}>
+                               <span ref={targetRef} className={textClasses.join(" ")}>
+                                   {text}
+                               </span>
+                           </Col>
+                       )}
+                   </Row>
+               </Container>
             </Nav.Link>
 
             <Overlay

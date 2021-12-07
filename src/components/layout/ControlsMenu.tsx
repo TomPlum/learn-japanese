@@ -27,11 +27,11 @@ const ControlsMenu = (props: ControlsMenuProps) => {
         <Navbar variant="dark" fixed="top" className={styles.navbar}>
             <Container className={styles.innerWrapper} fluid>
                 <Nav className={styles.nav}>
-                    <Row className={styles.row} noGutters>
+                    <Row className={styles.row}>
                         <Col className={styles.leftCol}>
-                            <div className={styles.buttonWrapper}>
+                            <div className={styles.leftButtonWrapper}>
                                 <HomeButton className={styles.navLink} disabled={!active} />
-                                <AppModeButton disabled={!active} className={styles.navLink} />
+                                {/*<AppModeButton disabled={!active} className={styles.navLink} />*/}
                                 <LearnButton />
                                 <HelpButton />
                             </div>

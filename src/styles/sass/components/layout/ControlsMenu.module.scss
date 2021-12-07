@@ -105,5 +105,13 @@
 .buttonWrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+}
+
+.leftButtonWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.leftButtonWrapper > * {
+  margin: 0 5px;
 }

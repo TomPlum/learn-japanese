@@ -9,7 +9,7 @@ const LearnButton = () => {
         <NavigationButton
             width={250}
             text="Learn"
-            textPlacement="bottom"
+            textPlacement="right"
             icon={faGraduationCap}
             iconClass={menuStyles.icon}
             id="learning-resources-button"
