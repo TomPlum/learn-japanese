@@ -175,7 +175,7 @@ test('Clicking on a link should call the onClick event handler', async () => {
     expect(onClickItemHandler).toHaveBeenCalled();
 });
 
-test('Clicking the button to render the menu show call the onShow event handler', async () => {
+test('Clicking the button to render the menu should call the onShow event handler', async () => {
     const { button } = setup();
 
     // Open the menu
@@ -184,6 +184,21 @@ test('Clicking the button to render the menu show call the onShow event handler'
     expect(menuLink).toBeInTheDocument();
 
     expect(onShowHandler).toHaveBeenCalled();
+});
+
+test('Clicking the button twice to stop rendering the menu should not call the onShow event handler', async () => {
+    const { button } = setup();
+
+    // Open the menu
+    fireEvent.click(button);
+    const menuLink = await screen.findByText('My Link');
+    expect(menuLink).toBeInTheDocument();
+    expect(onShowHandler).toHaveBeenCalled();
+
+    // Close the menu
+    onShowHandler.mockReset();
+    fireEvent.click(button);
+    expect(onShowHandler).not.toHaveBeenCalled();
 });
 
 test('Dismissing the menu to stop rendering it should call the onHide event handler', async () => {

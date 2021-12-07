@@ -12,13 +12,14 @@ export interface NavigationButtonProps {
     text?: string;
     icon: IconDefinition;
     width?: number;
-    textPlacement?: 'bottom' | 'left';
+    textPlacement?: 'bottom' | 'left' | 'right';
     className?: string;
     menuClass?: string;
     iconClass?: string;
     textClass?: string;
     disabled?: boolean;
     disableDropdown?: boolean;
+    href?: string;
     searchable?: boolean;
     showItemQuantity?: number;
     onClick?: () => void;
@@ -66,7 +67,7 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
 
 const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
 
-    const { text, icon, width, textPlacement, className, iconClass, textClass, disabled, disableDropdown, id,
+    const { text, icon, width, textPlacement, className, iconClass, textClass, disabled, disableDropdown, id, href,
         searchable, showItemQuantity, onClick, onShow, onHide, children } = props;
 
     const [show, setShow] = useState(false);
@@ -106,22 +107,24 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
 
     const linkClassName = [className, styles.link].join(" ");
     const isLeft = textPlacement && textPlacement === "left";
-    const iconPositionClass = isLeft ? styles.placementCol : undefined;
+    const isRight = textPlacement && textPlacement === "right";
+    const iconPositionClass = isLeft || isRight ? styles.placementCol : undefined;
+    const textClasses = [textClass, show ? styles.active : "", styles.text];
 
     return (
         <div ref={ref} className={styles.container}>
-            <Nav.Link className={linkClassName} onClick={handleClick} disabled={disabled} data-testid="nav-btn-link">
+            <Nav.Link className={linkClassName} onClick={handleClick} disabled={disabled} data-testid="nav-btn-link" href={href}>
                <Row>
                    {isLeft && (
                        <Col xs={6} className={iconPositionClass}>
-                           <span className={[textClass, show ? styles.active : "", styles.text, styles.left].join(" ")}>
+                           <span className={textClasses.concat(styles.left).join(" ")}>
                                {text}
                            </span>
                        </Col>
                    )}
 
-                   <Col xs={isLeft ? 6 : 12} className={iconPositionClass}>
-                       <div ref={!text || isLeft ? targetRef : undefined}>
+                   <Col xs={isLeft || isRight ? 6 : 12} className={iconPositionClass}>
+                       <div ref={!text || isLeft || isRight ? targetRef : undefined}>
                            <FontAwesomeIcon
                                fixedWidth
                                icon={icon}
@@ -131,9 +134,18 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                        </div>
                    </Col>
 
+
+                   {isRight && (
+                       <Col xs={6} className={iconPositionClass}>
+                           <span className={textClasses.concat(styles.right).join(" ")}>
+                               {text}
+                           </span>
+                       </Col>
+                   )}
+
                    {textPlacement === "bottom" && (
                        <Col xs={12}>
-                           <span ref={targetRef} className={[textClass, show ? styles.active : "", styles.text].join(" ")}>
+                           <span ref={targetRef} className={textClasses.join(" ")}>
                                {text}
                            </span>
                        </Col>

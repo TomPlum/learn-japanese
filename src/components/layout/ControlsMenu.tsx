@@ -11,6 +11,8 @@ import LearnButton from "../ui/buttons/LearnButton";
 import { useModeSelector } from "../../hooks";
 import NotificationsButton from "../ui/buttons/NotificationsButton";
 import HelpButton from "../ui/buttons/HelpButton";
+import NavigationButton from "../ui/NavigationButton";
+import HomeButton from "../ui/buttons/HomeButton";
 
 export interface ControlsMenuProps {
     onLaunchLoginModal: () => void;
@@ -28,12 +30,7 @@ const ControlsMenu = (props: ControlsMenuProps) => {
                     <Row className={styles.row} noGutters>
                         <Col className={styles.leftCol}>
                             <div className={styles.buttonWrapper}>
-                                <HashLink path="/menu/learn" className={styles.navLink} disabled={!active}>
-                                    <div>
-                                        <FontAwesomeIcon icon={faHome} className={styles.icon}/>
-                                    </div>
-                                    <span className={styles.linkText}>Home</span>
-                                </HashLink>
+                                <HomeButton className={styles.navLink} disabled={!active} />
                                 <AppModeButton disabled={!active} className={styles.navLink} />
                                 <LearnButton />
                                 <HelpButton />
