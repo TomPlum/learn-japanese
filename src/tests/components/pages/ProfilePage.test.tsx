@@ -48,7 +48,7 @@ const user: User = {
 
 test('Given an undefined user in context, it should redirect', () => {
     setup();
-    expect(history.location.pathname).toEqual("/menu");
+    expect(history.location.pathname).toEqual("/menu/learn");
 });
 
 test('Given a valid user in context, it should render the "About" card', () => {

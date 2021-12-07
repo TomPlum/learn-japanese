@@ -14,7 +14,7 @@ const ProfilePage = () => {
     const user = useUserSelector(state => state.user).user;
 
     if (!user) {
-        return <Redirect to={"/menu"}/>;
+        return <Redirect to={"/menu/learn"}/>;
     }
 
     return (
