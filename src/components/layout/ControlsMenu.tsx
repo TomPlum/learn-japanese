@@ -1,13 +1,13 @@
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import FontSelectorButton from "../ui/buttons/FontSelectorButton";
 import ThemeButton from "../ui/buttons/ThemeButton";
-import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 import UserButton from "../user/UserButton";
 import LearnButton from "../ui/buttons/LearnButton";
 import { useModeSelector } from "../../hooks";
 import NotificationsButton from "../ui/buttons/NotificationsButton";
 import HelpButton from "../ui/buttons/HelpButton";
 import HomeButton from "../ui/buttons/HomeButton";
+import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
 
 export interface ControlsMenuProps {
     onLaunchLoginModal: () => void;
@@ -33,9 +33,9 @@ const ControlsMenu = (props: ControlsMenuProps) => {
 
                         <Col className={styles.rightCol}>
                             <div className={styles.buttonWrapper}>
-                                <ThemeButton className={styles.navLink}/>
-                                <FontSelectorButton className={styles.navLink} />
-                                <NotificationsButton className={styles.navLink} />
+                                <ThemeButton className={styles.button}/>
+                                <FontSelectorButton className={styles.button} />
+                                <NotificationsButton className={styles.button} />
                                 <UserButton onClick={onLaunchLoginModal} disabled={!active} />
                             </div>
                         </Col>

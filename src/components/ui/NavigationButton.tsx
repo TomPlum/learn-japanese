@@ -14,6 +14,7 @@ export interface NavigationButtonProps {
     width?: number;
     textPlacement?: 'bottom' | 'left' | 'right';
     className?: string;
+    containerClass?: string;
     menuClass?: string;
     iconClass?: string;
     textClass?: string;
@@ -68,7 +69,7 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
 const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
 
     const { text, icon, width, textPlacement, className, iconClass, textClass, disabled, disableDropdown, id, href,
-        searchable, showItemQuantity, onClick, onShow, onHide, children } = props;
+        searchable, showItemQuantity, containerClass, onClick, onShow, onHide, children } = props;
 
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
@@ -110,12 +111,13 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
     const isRight = textPlacement && textPlacement === "right";
     const iconPositionClass = isLeft || isRight ? styles.placementCol : styles.col;
     const textClasses = [textClass, show ? styles.active : "", styles.text];
+    const iconClasses = [iconClass, show ? styles.active : "", styles.icon].join(" ");
 
     return (
-        <div ref={ref} className={styles.container}>
+        <div ref={ref} className={[styles.container, containerClass].join(" ")}>
             <Nav.Link className={linkClassName} onClick={handleClick} disabled={disabled} data-testid={id + "-nav-link"} href={href}>
-               <Container>
-                   <Row>
+               <Container className={styles.linkContainer}>
+                   <Row noGutters>
                        {isLeft && (
                            <Col xs={6} className={iconPositionClass}>
                                <span className={textClasses.concat(styles.left).join(" ")}>
@@ -126,12 +128,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
 
                        <Col xs={isLeft || isRight ? 6 : 12} className={iconPositionClass}>
                            <div ref={!text || isLeft || isRight ? targetRef : undefined}>
-                               <FontAwesomeIcon
-                                   fixedWidth
-                                   icon={icon}
-                                   data-testid={id}
-                                   className={[iconClass, show ? styles.active : "", styles.icon].join(" ")}
-                               />
+                               <FontAwesomeIcon fixedWidth icon={icon} data-testid={id} className={iconClasses} />
                            </div>
                        </Col>
 

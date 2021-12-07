@@ -42,10 +42,10 @@ const FontSelectorButton = (props: FontSelectorProps) => {
             id="font-selector"
             showItemQuantity={4}
             menuClass={styles.menu}
-            className={props.className}
             onShow={() => setOpen(true)}
             onHide={() => setOpen(false)}
             textClass={menuStyles.linkText}
+            containerClass={props.className}
             iconClass={[menuStyles.icon, open ? styles.highlight : styles.icon].join(" ")}
         >
             {fonts.map((font: Font) => {

@@ -38,7 +38,7 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
 
     return (
         <div ref={ref} className={className}>
-            <Nav.Link className={className} onClick={handleClick}>
+            <Nav.Link className={styles.link} onClick={handleClick}>
                 <div ref={targetRef} className={styles.iconWrapper}>
                     {hasNotifications && <div className={styles.circle} />}
                     <FontAwesomeIcon

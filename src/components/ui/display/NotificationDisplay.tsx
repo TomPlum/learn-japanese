@@ -41,12 +41,13 @@ const NotificationDisplay = (props: NotificationDisplayProps) => {
     }
 
     const iconMeta = getIcon();
+    const iconClasses = [iconMeta.class, styles.icon];
 
     return (
         <div className={[className, styles.container].join(" ")}>
             <div className={styles.leftWrapper}>
                 <p className={styles.heading}>
-                    <FontAwesomeIcon icon={iconMeta.icon} className={iconMeta.class} fixedWidth size="sm" />
+                    <FontAwesomeIcon icon={iconMeta.icon} className={iconClasses.join(" ")} fixedWidth size="sm" />
                     <span className={styles.title}>{notification.title}</span>
                     <span className={styles.time}>{getElapsedTime(notification.time)}</span>
                 </p>

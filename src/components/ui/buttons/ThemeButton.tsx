@@ -32,10 +32,10 @@ const ThemeButton = (props: ThemeButtonProps) => {
             disableDropdown
             id="theme-button"
             onClick={handleOnClick}
-            className={props.className}
-            iconClass={[menuStyles.icon, iconClassName].join(" ")}
             textClass={menuStyles.linkText}
+            containerClass={props.className}
             icon={theme === Theme.DARK ? faLightbulb : faMoon}
+            iconClass={[menuStyles.icon, iconClassName].join(" ")}
         />
     );
 }

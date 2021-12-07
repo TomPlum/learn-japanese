@@ -58,6 +58,10 @@
   text-decoration: none;
 }
 
+.linkContainer {
+  padding: 0;
+}
+
 .itemIcon {
   color: #FFF;
   margin-left: 10px;
@@ -67,10 +71,7 @@
 .link {
   transition: all ease 0.25s;
   text-align: center;
-}
-
-.link:hover {
-  color: $light-1 !important;
+  padding: 0 !important;
 }
 
 .search {

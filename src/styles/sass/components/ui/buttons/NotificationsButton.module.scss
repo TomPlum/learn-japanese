@@ -85,10 +85,12 @@ $circle-size: 12px;
 }
 
 .title {
+  @include noSelect;
   color: #369cd5;
 }
 
 .clear {
+  @include noSelect;
   margin-left: auto;
   color: $light-2;
   transition: color ease-in-out 0.2s;
@@ -97,4 +99,8 @@ $circle-size: 12px;
 .clear:hover {
   cursor: pointer;
   color: $light-1;
+}
+
+.link {
+  padding: 0 !important;
 }
