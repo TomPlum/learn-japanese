@@ -43,6 +43,7 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                     {hasNotifications && <div className={styles.circle} />}
                     <FontAwesomeIcon
                         fixedWidth icon={faBell}
+                        data-testid="notifications-button"
                         className={[menuStyles.icon, show ? styles.highlight : styles.icon].join(" ")}
                     />
                 </div>
