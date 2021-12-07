@@ -111,16 +111,20 @@
   transition: color ease-in-out 0.2s;
 }
 
-.placementCol {
-  display: flex;
-  align-items: center;
-  padding: 0;
-}
-
-.col {
-  padding: 0;
-}
-
 .left, .right {
   margin-top: 6px;
+}
+
+.left {
+  margin-right: 4px;
+}
+
+.right {
+  margin-left: 4px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

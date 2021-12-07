@@ -1,4 +1,4 @@
-import { Col, Container, Form, Nav, Overlay, Popover, Row } from "react-bootstrap";
+import { Form, Nav, Overlay, Popover } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import React, { PropsWithChildren, ReactElement, ReactNode, useRef, useState } from "react";
@@ -110,47 +110,29 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
     const linkClassName = [className, styles.link].join(" ");
     const isLeft = textPlacement && textPlacement === "left";
     const isRight = textPlacement && textPlacement === "right";
-    const iconPositionClass = isLeft || isRight ? styles.placementCol : styles.col;
     const textClasses = [textClass, show ? styles.active : "", styles.text];
     const iconClasses = [iconClass, show ? styles.active : "", styles.icon].join(" ");
 
     return (
         <div ref={ref} className={[styles.container, containerClass].join(" ")}>
             <Nav.Link className={linkClassName} onClick={handleClick} disabled={disabled} data-testid={id + "-nav-link"} href={href}>
-               <Container className={styles.linkContainer}>
-                   <Row noGutters>
-                       {isLeft && (
-                           <Col xs={6} className={iconPositionClass}>
-                               <span className={textClasses.concat(styles.left).join(" ")}>
-                                   {text}
-                               </span>
-                           </Col>
-                       )}
+               <div className={styles.button}>
+                   {isLeft && (
+                       <span className={textClasses.concat(styles.left).join(" ")}>{text}</span>
+                   )}
 
-                       <Col xs={isLeft || isRight ? 6 : 12} className={iconPositionClass}>
-                           <div ref={!text || isLeft || isRight ? targetRef : undefined}>
-                               <FontAwesomeIcon fixedWidth icon={icon} data-testid={id} className={iconClasses} />
-                           </div>
-                       </Col>
+                   <div ref={!text || isLeft || isRight ? targetRef : undefined}>
+                       <FontAwesomeIcon fixedWidth icon={icon} data-testid={id} className={iconClasses} />
+                   </div>
 
+                   {isRight && (
+                       <span className={textClasses.concat(styles.right).join(" ")}>{text}</span>
+                   )}
 
-                       {isRight && (
-                           <Col xs={6} className={iconPositionClass}>
-                               <span className={textClasses.concat(styles.right).join(" ")}>
-                                   {text}
-                               </span>
-                           </Col>
-                       )}
-
-                       {textPlacement === "bottom" && (
-                           <Col xs={12}>
-                               <span ref={targetRef} className={textClasses.join(" ")}>
-                                   {text}
-                               </span>
-                           </Col>
-                       )}
-                   </Row>
-               </Container>
+                   {textPlacement === "bottom" && (
+                       <span ref={targetRef} className={textClasses.join(" ")}>{text}</span>
+                   )}
+               </div>
             </Nav.Link>
 
             <Overlay
