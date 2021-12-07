@@ -56,9 +56,10 @@ const FontSelectorButton = (props: FontSelectorProps) => {
                         onClick={handleSelect}
                         key={font.displayName}
                         className={styles.font}
-                        iconClass={isSelected ? styles.selected : styles.inactive}
                         style={{ fontFamily: font.name }}
+                        containerClass={styles.fontContainer}
                         icon={isSelected ? faCheck : faCircle}
+                        iconClass={isSelected ? styles.selected : styles.inactive}
                     >
                         {font.displayName}
                     </NavigationButton.Item>

@@ -30,6 +30,7 @@ export interface NavigationButtonProps {
 
 export interface ItemProps {
     icon?: IconDefinition;
+    containerClass?: string;
     iconClass?: string;
     className?: string;
     href?: string;
@@ -39,7 +40,7 @@ export interface ItemProps {
 
 const Item = (props: PropsWithChildren<ItemProps>) => {
 
-    const { icon, iconClass, className, href, style, onClick, children } = props;
+    const { icon, containerClass, iconClass, className, href, style, onClick, children } = props;
 
     const handleClick = () => {
         onClick?.(children as string)
@@ -49,7 +50,7 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
     const key = children?.toString();
 
     return (
-        <div className={styles.itemWrapper} key={`${key}-wrapper`}>
+        <div className={[styles.itemWrapper, containerClass].join(" ")} key={`${key}-wrapper`}>
             {icon && (
                 <FontAwesomeIcon
                     fixedWidth

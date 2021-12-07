@@ -9,6 +9,10 @@
   border-bottom: 2px solid $dark-1;
 }
 
+.notificationWrapper .notification:last-child div:last-child {
+  border-bottom-right-radius: 6px;
+}
+
 .button {
   color: #FFF;
 }

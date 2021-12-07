@@ -24,19 +24,6 @@
   border-radius: 12px;
 }
 
-.itemWrapper {
-  transition: all ease 0.25s;
-  cursor: pointer;
-}
-
-.itemWrapper:hover {
-  background-color: $dark-1;
-}
-
-.itemWrapper:hover a {
-  color: rgba(255, 255, 255, 0.75) !important;
-}
-
 .item {
   @include noSelect;
   padding: 12px 15px;
@@ -46,16 +33,39 @@
   text-decoration: none;
 }
 
+.item:hover {
+  text-decoration: none;
+}
+
+.itemWrapper {
+  transition: all ease 0.25s;
+  cursor: pointer;
+}
+
+.itemWrapper:hover {
+  background-color: $dark-1;
+}
+
+.itemWrapper:first-child:hover {
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+}
+
+.itemWrapper:last-child:hover {
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+}
+
+.itemWrapper:hover a {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
 .itemWrapper:nth-child(n+1) {
   border-bottom: 2px solid $dark-1;
 }
 
 .itemWrapper:last-child {
   border: none;
-}
-
-.item:hover {
-  text-decoration: none;
 }
 
 .linkContainer {

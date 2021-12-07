@@ -16,6 +16,10 @@
   font-size: 1.1em;
 }
 
+.fontContainer:first-child {
+  border-radius: 0 !important;
+}
+
 .selected {
   color: $bootstrap-green !important;
 }
