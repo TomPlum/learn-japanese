@@ -21,7 +21,6 @@ export const fonts: Font[] = [
     { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
     { displayName: "Gothic", name: "K Gothic" },
     { displayName: "Mincho", name: "Appli Mincho" }, //アプリ明朝 <- Name in Japanese
-    { displayName: "Test", name: "Test" }
 ];
 
 const FontSelectorButton = (props: FontSelectorProps) => {

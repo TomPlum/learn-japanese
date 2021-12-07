@@ -1,17 +1,12 @@
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FontSelectorButton from "../ui/buttons/FontSelectorButton";
-import HashLink from "./HashLink";
 import ThemeButton from "../ui/buttons/ThemeButton";
 import styles from "../../styles/sass/components/layout/ControlsMenu.module.scss";
-import AppModeButton from "../ui/buttons/AppModeButton";
 import UserButton from "../user/UserButton";
 import LearnButton from "../ui/buttons/LearnButton";
 import { useModeSelector } from "../../hooks";
 import NotificationsButton from "../ui/buttons/NotificationsButton";
 import HelpButton from "../ui/buttons/HelpButton";
-import NavigationButton from "../ui/NavigationButton";
 import HomeButton from "../ui/buttons/HomeButton";
 
 export interface ControlsMenuProps {
@@ -31,7 +26,6 @@ const ControlsMenu = (props: ControlsMenuProps) => {
                         <Col className={styles.leftCol}>
                             <div className={styles.leftButtonWrapper}>
                                 <HomeButton className={styles.navLink} disabled={!active} />
-                                {/*<AppModeButton disabled={!active} className={styles.navLink} />*/}
                                 <LearnButton />
                                 <HelpButton />
                             </div>

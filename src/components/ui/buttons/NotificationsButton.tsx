@@ -83,6 +83,7 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                                 return (
                                     <NotificationDisplay
                                         id={id}
+                                        key={id}
                                         className={styles.notification}
                                         notification={notifications[id]}
                                         onDismiss={handleNotificationDismiss}

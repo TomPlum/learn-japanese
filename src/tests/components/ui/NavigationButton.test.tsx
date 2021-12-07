@@ -13,6 +13,7 @@ let itemProps: ItemProps;
 
 beforeEach(() => {
     buttonProps = {
+        id: "test-button",
         text: "Test Button",
         textPlacement: "bottom",
         icon: faSmile,
@@ -80,7 +81,7 @@ test('Clicking the button should not call the onClick event handler if the dropd
 test('Passing the disabled prop as true should disable the button link', () => {
     buttonProps.disabled = true;
     setup();
-    expect(screen.getByTestId('nav-btn-link')).toHaveAttribute('aria-disabled', "true");
+    expect(screen.getByTestId('test-button-nav-link')).toHaveAttribute('aria-disabled', "true");
 });
 
 test('Passing the disabled prop as false should enable the button link', () => {

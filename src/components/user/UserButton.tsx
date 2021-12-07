@@ -33,6 +33,7 @@ const UserButton = (props: UserButtonProps) => {
 
     return (
         <NavigationButton
+            id="user-button"
             text={getButtonText()}
             textPlacement="left"
             onClick={props.onClick}

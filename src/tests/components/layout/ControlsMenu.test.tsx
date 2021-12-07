@@ -20,11 +20,10 @@ const setup = () => {
     );
 
     return {
-        home: component.getByText('Home'),
-        mode: component.getByText('Play'),
+        home: component.getByTestId('home-button-nav-link'),
         theme: component.getByTestId('theme-button'),
         font: component.getByTestId('font-selector'),
-        login: component.getByText('Login'),
+        login: component.getByTestId('user-button-nav-link'),
         ...component
     }
 }
@@ -43,39 +42,20 @@ test('Clicking the \'Home\' button should route the user to the menu', () => {
     expect(history.location.pathname).toBe('/');
 });
 
-test('Passing active as true should enable the App Mode Button', () => {
-    store.dispatch(setActive(true));
-    const { mode } = setup();
-    expect(mode.parentElement).not.toHaveAttribute('aria-disabled', 'true');
-});
-
-test.skip('Passing active as false should disable the App Mode Button', () => {
-    store.dispatch(setActive(false));
-    const { mode } = setup();
-    expect(mode.parentElement).toHaveAttribute('aria-disabled', 'true');
-});
-
 test('Passing active as false should disable the Login Button', () => {
     store.dispatch(setActive(false));
     const { login } = setup();
-    expect(login.parentElement?.parentElement?.parentElement).toHaveAttribute('aria-disabled', 'true');
+    expect(login).toHaveAttribute('aria-disabled', 'true');
 });
 
 test('Passing active as false should disable the Home Button', () => {
     store.dispatch(setActive(false));
     const { home } = setup();
-    expect(home.parentElement?.parentElement?.parentElement).toHaveAttribute('aria-disabled', 'true');
+    expect(home).toHaveAttribute('aria-disabled', 'true');
 });
 
 test('Clicking the login button while not logged in should call the onLaunchLogin event handler', () => {
     const { login } = setup();
     fireEvent.click(login);
     expect(onLaunchLoginModalHandler).toHaveBeenCalled();
-});
-
-//TODO: Location is not updating for some reason.
-test.skip('Clicking the \'Help\' button should route the user to the help page', () => {
-    /*const { help } = setup();
-    fireEvent.click(help);
-    expect(history.location.pathname).toBe('/help');*/
 });

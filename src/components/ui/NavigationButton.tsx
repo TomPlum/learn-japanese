@@ -113,7 +113,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
 
     return (
         <div ref={ref} className={styles.container}>
-            <Nav.Link className={linkClassName} onClick={handleClick} disabled={disabled} data-testid="nav-btn-link" href={href}>
+            <Nav.Link className={linkClassName} onClick={handleClick} disabled={disabled} data-testid={id + "-nav-link"} href={href}>
                <Container>
                    <Row>
                        {isLeft && (
