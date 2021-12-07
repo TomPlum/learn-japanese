@@ -60,7 +60,9 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                     <Popover.Content className={styles.content}>
                         {hasNotifications && (
                             <div className={styles.header}>
-                                <span className={styles.title}>{quantity} Notifications</span>
+                                <span className={styles.title}>
+                                    {quantity} Notification{quantity > 1 ? "s" : ""}
+                                </span>
                                 <span className={styles.clear} onClick={handleClear}>
                                     Clear
                                 </span>
@@ -69,7 +71,7 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
 
                         {!hasNotifications && (
                             <div className={styles.emptyWrapper}>
-                                <FontAwesomeIcon icon={faCheck} className={styles.emptyIcon} />
+                                <FontAwesomeIcon icon={faCheck} className={styles.emptyIcon} size="lg" />
                                 <p className={styles.emptyText}>
                                     You're all up to date!
                                 </p>
