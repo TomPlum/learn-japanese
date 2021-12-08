@@ -1,6 +1,6 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import type { AppDispatch, RootState } from './store'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const useUserDispatch = () => useDispatch<AppDispatch>();
 export const useUserSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -21,3 +21,19 @@ export const useDebouncedEffect = (effect: () => any, delay: number, deps: any[]
         return () => clearTimeout(handler);
     }, [...deps || [], delay]);
 }
+
+export const useMousePosition = () => {
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        const setFromEvent = (e: { clientX: any; clientY: any; }) => setPosition({ x: e.clientX, y: e.clientY });
+        window.addEventListener("mousemove", setFromEvent);
+
+        return () => {
+            window.removeEventListener("mousemove", setFromEvent);
+        };
+    }, []);
+
+    return position;
+};
+
