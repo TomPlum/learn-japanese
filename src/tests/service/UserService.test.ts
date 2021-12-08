@@ -2,11 +2,15 @@ import UserService from "../../service/UserService";
 import RestClient from "../../rest/RestClient";
 import DataResponse from "../../rest/response/DataResponse";
 import { UserPreferences } from "../../slices/UserSlice";
+import { localStorageMock } from "../../setupTests";
 
 const restPut = jest.fn();
 const restGet = jest.fn();
+const restPost = jest.fn();
+
 RestClient.put = restPut;
 RestClient.get = restGet;
+RestClient.post = restPost;
 
 describe("User Service", () => {
     const service = new UserService();
@@ -189,14 +193,14 @@ describe("User Service", () => {
         };
 
         it("Should call the rest client with the correct endpoint and request body", () => {
-            restPut.mockResolvedValueOnce({ });
+            restPut.mockResolvedValueOnce({});
             return service.updatePreferences(request).then(() => {
                 expect(restPut).toHaveBeenCalledWith("/user/update-preferences", request);
             });
         });
 
         it("Should return true if the API call was successful", () => {
-            restPut.mockResolvedValueOnce({ });
+            restPut.mockResolvedValueOnce({});
             return service.updatePreferences(request).then(response => {
                 expect(response).toStrictEqual({ success: true });
             });
@@ -206,6 +210,50 @@ describe("User Service", () => {
             restPut.mockRejectedValueOnce({ error: "Internal Server Error" });
             return service.updatePreferences(request).then(response => {
                 expect(response).toStrictEqual({ success: false, error: "Internal Server Error" });
+            });
+        });
+    });
+
+    describe("Is Authenticated", () => {
+        beforeEach(() => {
+            localStorageMock.clear();
+        });
+
+        it("Should call the is-authenticated endpoint if there is a user in local storage", () => {
+            localStorageMock.setItem("user", JSON.stringify({ token: "TOKEN" }));
+            restPost.mockResolvedValueOnce({ data: true });
+            return service.isAuthenticated().then(() => {
+                expect(restPost).toHaveBeenCalledWith("/user/is-authenticated", { token: "TOKEN" });
+            });
+        });
+
+        it("Should return the API response if there is a user in local storage", () => {
+            localStorageMock.setItem("user", JSON.stringify({ token: "TOKEN" }));
+            restPost.mockResolvedValueOnce({ data: true });
+            return service.isAuthenticated().then(response => {
+                expect(response).toBe(true);
+            });
+        });
+
+        it("Should return false if the API call is rejected", () => {
+            localStorageMock.setItem("user", JSON.stringify({ token: "TOKEN" }));
+            restPost.mockRejectedValueOnce({ error: "Yikes" });
+            return service.isAuthenticated().then(response => {
+                expect(response).toBe(false);
+            });
+        });
+
+        it("Should not call the RestClient if there is no user in local storage", () => {
+            localStorageMock.clear();
+            return service.isAuthenticated().then(() => {
+                expect(restPost).not.toHaveBeenCalled();
+            });
+        });
+
+        it("Should return false if there is no user in local storage", () => {
+            localStorageMock.clear();
+            return service.isAuthenticated().then(response => {
+                expect(response).toBe(false);
             });
         });
     });

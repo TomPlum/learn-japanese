@@ -1,7 +1,7 @@
 import RestClient, { APIResponse } from "../rest/RestClient";
 import UpdateResponse from "../rest/response/UpdateResponse";
 import DataResponse from "../rest/response/DataResponse";
-import { UserPreferences } from "../slices/UserSlice";
+import { User, UserPreferences } from "../slices/UserSlice";
 
 export interface UserPreferencesResponse {
     defaultFont: string;
@@ -90,5 +90,25 @@ export default class UserService {
         }).catch((response: APIResponse<UpdateResponse>) => {
             return { success: false, error: response.error };
         });
+    }
+
+    /**
+     * Checks if the user in local storage is still authenticated.
+     * The JWT token is passed to the API for server-side session verification.
+     * @return true if authenticated, else false.
+     */
+    public async isAuthenticated(): Promise<boolean> {
+        const userJson = localStorage.getItem("user");
+        const user: User = userJson ? JSON.parse(userJson) : undefined;
+
+        if (user) {
+            return RestClient.post<boolean>("/user/is-authenticated", { token: user.token }).then(response => {
+                return response.data ?? false;
+            }).catch(() => {
+                return false;
+            });
+        }
+
+        return Promise.resolve(false);
     }
 }
