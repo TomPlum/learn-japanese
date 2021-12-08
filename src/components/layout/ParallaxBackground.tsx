@@ -3,7 +3,7 @@ import { Kana } from "../../domain/kana/Kana";
 import styles from "../../styles/sass/components/layout/ParallaxBackground.module.scss";
 import Arrays from "../../utility/Arrays";
 import { v4 } from "uuid";
-import { useMousePosition } from "../../hooks";
+import { useMousePosition, useWindowDimensions } from "../../hooks";
 
 interface ParallaxBackgroundProps {
     kana: Kana[];
@@ -12,18 +12,12 @@ interface ParallaxBackgroundProps {
 const ParallaxBackground = (props: ParallaxBackgroundProps) => {
 
     const [kana, setKana] = useState<Kana[]>([]);
-    const [width, setWidth] = useState(window.innerWidth);
-    const [height, setHeight] = useState(window.innerHeight);
-    const position = useMousePosition();
-    const [x, setX] = useState(0);
-    const [y, setY] = useState(0);
-    const [z, setZ] = useState(0);
+    const { width, height } = useWindowDimensions();
+    const { x, y } = useMousePosition();
 
     useEffect(() => {
         setKana(Arrays.shuffle(getBackgroundKana()));
-        setWidth(window.innerWidth);
-        setHeight(window.innerHeight);
-    }, [position]);
+    }, []);
 
     const getBackgroundKana = () => {
         let kana: Kana[] = [];
@@ -60,17 +54,6 @@ const ParallaxBackground = (props: ParallaxBackgroundProps) => {
         }
 
         return kana;
-    }
-
-    const calculateParallax = () => {
-        const halfWidth = width / 2;
-        const halfHeight = height / 2;
-        const xDepth = 0
-        const yDepth = 0
-        const zDepth = 0
-        setX(xDepth);
-        setY(yDepth);
-        setZ(zDepth);
     }
 
     return (

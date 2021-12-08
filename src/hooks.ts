@@ -37,3 +37,21 @@ export const useMousePosition = () => {
     return position;
 };
 
+export const useWindowDimensions = () => {
+    const [width, setWidth] = useState(window.innerWidth);
+    const [height, setHeight] = useState(window.innerHeight);
+
+    useEffect(() => {
+        const setFromEvent = () => {
+            setWidth(window.innerWidth);
+            setHeight(window.innerHeight);
+        }
+        window.addEventListener("resize", setFromEvent);
+
+        return () => {
+            window.removeEventListener("resize", setFromEvent);
+        }
+    }, []);
+
+    return { width, height };
+}
