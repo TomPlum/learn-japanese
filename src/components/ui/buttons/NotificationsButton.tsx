@@ -57,7 +57,7 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                 container={ref.current}
                 onHide={() => setShow(false)}
             >
-                <Popover id="notifications-menu" className={styles.popover}>
+                <Popover id="notifications-menu" data-testid="notifications-menu" className={styles.popover}>
                     <Popover.Content className={styles.content}>
                         {hasNotifications && (
                             <div className={styles.header}>
