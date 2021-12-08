@@ -7,3 +7,17 @@ module.exports = function override(webpackConfig) {
 
     return webpackConfig;
 }
+
+module.exports = {
+    jest: (config) => {
+        config.collectCoverageFrom = [
+            "src/**/*.{ts,tsx}",
+            "!src/index.tsx",
+            "!src/data/**",
+            "!src/domain/game/mode/**",
+            "!src/domain/learn/mode/**",
+            "!src/tests"
+        ];
+        return config;
+    }
+}
