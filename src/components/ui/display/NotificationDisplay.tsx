@@ -26,35 +26,41 @@ const NotificationDisplay = (props: NotificationDisplayProps) => {
         return mins > 0 ? hours > 0 ? `${hours}h ${remainingMins}m ago` : `${mins}m ago` : "Just now";
     }
 
-    const getIcon = (): { icon: IconDefinition, class: string } => {
+    const getIcon = (): { icon: IconDefinition, className: string, 'data-testid': string } => {
         switch (notification.type) {
             case NotificationType.ERROR: {
-                return { icon: faExclamationCircle, class: styles.error };
+                return { icon: faExclamationCircle, className: styles.error, 'data-testid': "error" };
             }
             case NotificationType.INFO: {
-                return { icon: faInfoCircle, class: styles.info };
+                return { icon: faInfoCircle, className: styles.info, 'data-testid': "info" };
             }
             case NotificationType.SPECIAL: {
-                return { icon: faBell, class: styles.special };
+                return { icon: faBell, className: styles.special, 'data-testid': "special" };
             }
         }
     }
 
     const iconMeta = getIcon();
-    const iconClasses = [iconMeta.class, styles.icon];
+    iconMeta.className = [iconMeta.className, styles.icon].join(" ");
 
     return (
         <div className={[className, styles.container].join(" ")}>
             <div className={styles.leftWrapper}>
                 <p className={styles.heading}>
-                    <FontAwesomeIcon icon={iconMeta.icon} className={iconClasses.join(" ")} fixedWidth size="sm" />
+                    <FontAwesomeIcon {...iconMeta} fixedWidth size="sm" />
                     <span className={styles.title}>{notification.title}</span>
                     <span className={styles.time}>{getElapsedTime(notification.time)}</span>
                 </p>
-                <p className={styles.body}>{notification.body ?? ""}</p>
+                <p className={styles.body}>{notification.body}</p>
             </div>
+
             <div className={styles.rightWrapper}>
-                <FontAwesomeIcon icon={faTimes} onClick={handleDismiss} className={styles.dismiss} />
+                <FontAwesomeIcon
+                    icon={faTimes}
+                    onClick={handleDismiss}
+                    className={styles.dismiss}
+                    data-testid={`dismiss-notification-${id}`}
+                />
             </div>
         </div>
     );

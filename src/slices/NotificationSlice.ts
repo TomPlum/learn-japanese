@@ -7,7 +7,7 @@ export enum NotificationType {
 
 export interface Notification {
     title: string;
-    body?: string;
+    body: string;
     time: number;
     type: NotificationType;
     precedence: number;
@@ -40,7 +40,7 @@ export const notificationSlice = createSlice({
     name: 'notifications',
     initialState,
     reducers: {
-        addNotification: (state, action: PayloadAction<{ title: string, body?: string }>) => {
+        addNotification: (state, action: PayloadAction<{ title: string, body: string }>) => {
             state.notifications[v4().valueOf()] = {
                 ...action.payload,
                 time: Date.now(),
@@ -51,6 +51,7 @@ export const notificationSlice = createSlice({
         addControllerMessage: (state) => {
             state.notifications["CONTROLLER"] = {
                 title: "Too many notifications?",
+                body: "",
                 type: NotificationType.SPECIAL,
                 time: 0,
                 precedence: 0
