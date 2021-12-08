@@ -1,13 +1,3 @@
-module.exports = function override(webpackConfig) {
-    webpackConfig.module.rules.push({
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: "javascript/auto"
-    });
-
-    return webpackConfig;
-}
-
 module.exports = {
     jest: (config) => {
         config.collectCoverageFrom = [
@@ -18,6 +8,14 @@ module.exports = {
             "!src/domain/learn/mode/**",
             "!src/tests"
         ];
+        return config;
+    },
+    webpack: (config) => {
+        config.module.rules.push({
+            test: /\.mjs$/,
+            include: /node_modules/,
+            type: "javascript/auto"
+        });
         return config;
     }
 }
