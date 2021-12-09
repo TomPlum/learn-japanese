@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { faCheck, faFont } from "@fortawesome/free-solid-svg-icons";
 import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import NavigationButton from "../NavigationButton";
@@ -6,6 +6,7 @@ import { useFontDispatch } from "../../../hooks";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import styles from "../../../styles/sass/components/ui/buttons/FontSelectorButton.module.scss";
 import { setFont } from "../../../slices/FontSlice";
+import FontService from "../../../service/FontService";
 
 interface FontSelectorProps {
     className?: string;
@@ -25,8 +26,33 @@ export const fonts: Font[] = [
 
 const FontSelectorButton = (props: FontSelectorProps) => {
 
+    const service = new FontService();
+
+    const [fonts, setFonts] = useState<Font[]>([]);
+    const [selected, setSelected] = useState("");
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState("Default");
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        service.getSelectedFont().then(response => {
+            if (response) {
+                setSelected(response.displayName);
+            }
+        }).finally(() => {
+            setLoading(false);
+        });
+    }, []);
+
+    useEffect(() => {
+        setLoading(true);
+        service.getFonts().then(response => {
+            setFonts(response);
+        }).finally(() => {
+            setLoading(false);
+        });
+    }, []);
+
     const fontDispatcher = useFontDispatch();
 
     const handleSelect = (value: string) => {
@@ -39,6 +65,7 @@ const FontSelectorButton = (props: FontSelectorProps) => {
         <NavigationButton
             searchable
             icon={faFont}
+            loading={loading}
             id="font-selector"
             showItemQuantity={4}
             menuClass={styles.menu}
