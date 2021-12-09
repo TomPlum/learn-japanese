@@ -6,10 +6,12 @@ import HashLink from "../layout/HashLink";
 import ScrollableContainer from "./ScrollableContainer";
 import ConditionalWrapper from "./ConditionalWrapper";
 import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
+import LoadingSpinner from "./LoadingSpinner";
 
 export interface NavigationButtonProps {
     id?: string;
     text?: string;
+    loading?: boolean;
     icon: IconDefinition;
     width?: number;
     textPlacement?: 'bottom' | 'left' | 'right';
@@ -70,7 +72,7 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
 const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
 
     const { text, icon, width, textPlacement, className, iconClass, textClass, disabled, disableDropdown, id, href,
-        searchable, showItemQuantity, containerClass, onClick, onShow, onHide, children } = props;
+        searchable, showItemQuantity, containerClass, loading, onClick, onShow, onHide, children } = props;
 
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
@@ -144,10 +146,11 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                 onExited={handleExited}
                 container={ref.current}
             >
-                <Popover id={text + "-button"} className={styles.popover} style={{ width: width }}>
+                <Popover id={id ?? "nav-btn"} data-testid={`${id}-menu`} className={styles.popover} style={{ width: width }}>
                     {searchable && <Form.Control
                         type="text"
                         value={search}
+                        disabled={loading}
                         placeholder="Search"
                         onChange={handleSearch}
                         className={styles.search}
@@ -156,7 +159,9 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                     />}
 
                     <Popover.Content className={styles.content}>
-                        <ConditionalWrapper
+                        <LoadingSpinner active={loading ?? false} className={styles.loading} />
+
+                        {!loading && <ConditionalWrapper
                             condition={!!showItemQuantity}
                             wrapper={(children) => (
                                 <ScrollableContainer height={showItemQuantity! * 55} hideScrollBar>
@@ -169,7 +174,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                                     return search === "" || value.toLowerCase().includes(search.toLowerCase());
                                 })
                             }</>
-                        </ConditionalWrapper>
+                        </ConditionalWrapper>}
                     </Popover.Content>
                 </Popover>
             </Overlay>

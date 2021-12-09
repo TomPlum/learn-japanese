@@ -16,8 +16,10 @@ beforeEach(() => {
         id: "test-button",
         text: "Test Button",
         textPlacement: "bottom",
+        loading: false,
         icon: faSmile,
         width: 150,
+        containerClass: "myContainerClass",
         className: "myClassName",
         menuClass: "myMenuClassName",
         iconClass: "myIconClassName",
@@ -192,8 +194,7 @@ test('Clicking the button twice to stop rendering the menu should not call the o
 
     // Open the menu
     fireEvent.click(button);
-    const menuLink = await screen.findByText('My Link');
-    expect(menuLink).toBeInTheDocument();
+    expect(await screen.findByText('My Link')).toBeInTheDocument();
     expect(onShowHandler).toHaveBeenCalled();
 
     // Close the menu
@@ -215,4 +216,27 @@ test('Dismissing the menu to stop rendering it should call the onHide event hand
     await waitForElementToBeRemoved(menuLink);
 
     expect(onHideHandler).toHaveBeenCalled();
+});
+
+test('It should disable the search field if enabled and loading is true', async () => {
+    buttonProps.loading = true;
+    buttonProps.searchable = true;
+    const { button } = setup();
+
+    // Open the menu
+    fireEvent.click(button);
+    expect(await screen.findByTestId('test-button')).toBeInTheDocument();
+
+    expect(screen.getByPlaceholderText('Search')).toBeDisabled();
+});
+
+test("Omitted the ID property should set the popover ID to a default value", async () => {
+    buttonProps.id = undefined;
+    const { button } = setup();
+
+    // Open the menu
+    fireEvent.click(button);
+    expect(await screen.findByText('My Link')).toBeInTheDocument();
+
+    expect(screen.getByTestId("undefined-menu")).toHaveAttribute("id", "nav-btn");
 });

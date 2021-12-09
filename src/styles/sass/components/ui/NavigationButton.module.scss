@@ -84,7 +84,7 @@
   padding: 0 !important;
 }
 
-.search {
+.search, .search:disabled {
   color: #FFF;
   border-radius: 12px 12px 0 0 !important;
   background-color: $dark-2;
@@ -93,6 +93,10 @@
   border-left: none;
   border-bottom: 2px solid $dark-1 !important;
   transition: height ease-in-out 0.5s;
+}
+
+.search:disabled::placeholder {
+  opacity: 0.4;
 }
 
 .search:focus {
@@ -127,4 +131,9 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+.loading {
+  text-align: center;
+  padding: 25px 0;
 }
