@@ -27,16 +27,16 @@ test('Navigating to the root URI should route to the Landing page', async () => 
     expect(await screen.findByTestId('landing-page')).toBeInTheDocument();
 });
 
-test('Navigating to the /menu/play should route to the main menu in play mode', () => {
+test('Navigating to the /menu/play should route to the main menu in play mode', async () => {
     createBrowserHistory().push('/example-base-path/menu/play');
     setup();
-    expect(screen.getByText('Select Game Mode')).toBeInTheDocument(); //If in play, the mode button shows learn
+    expect(await screen.findByText('Select Game Mode')).toBeInTheDocument();
 });
 
-test('Navigating to the /menu/learn should route to the main menu in learn mode', () => {
+test('Navigating to the /menu/learn should route to the main menu in learn mode', async () => {
     createBrowserHistory().push('/example-base-path/menu/learn');
     setup();
-    expect(screen.getByText('Select Topic')).toBeInTheDocument(); //If in learn, the mode button shows play
+    expect(await screen.findByText('Select Topic')).toBeInTheDocument(); //If in learn, the mode button shows play
 });
 
 test('Navigating to the /search should route to the Search page', async () => {
@@ -51,8 +51,8 @@ test('Navigating to the /help should route to the Help page', async () => {
     expect(await screen.findByText('Frequently Asked Questions')).toBeInTheDocument();
 });
 
-test('Navigating to an unknown URI should route to the Not Found page', () => {
+test('Navigating to an unknown URI should route to the Not Found page', async () => {
     createBrowserHistory().push('/example-base-path/nope');
     setup();
-    expect(screen.getByText('Nani!?')).toBeInTheDocument();
+    expect(await screen.findByText('Nani!?')).toBeInTheDocument();
 });
