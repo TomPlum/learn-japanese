@@ -1,5 +1,4 @@
 import { useUserSelector } from "../../hooks";
-import { Redirect } from "react-router-dom";
 import { CardColumns, Container } from "react-bootstrap";
 import About from "../user/profile/About";
 import styles from "../../styles/sass/components/pages/ProfilePage.module.scss";
@@ -11,11 +10,7 @@ import DangerZone from "../user/profile/DangerZone";
 
 const ProfilePage = () => {
 
-    const user = useUserSelector(state => state.user).user;
-
-    if (!user) {
-        return <Redirect to={"/menu/learn"}/>;
-    }
+    const user = useUserSelector(state => state.user).user!;
 
     return (
         <Container fluid className={styles.wrapper}>

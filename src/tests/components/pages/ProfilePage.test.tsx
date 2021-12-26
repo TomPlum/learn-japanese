@@ -1,18 +1,10 @@
 import renderReduxConsumer from "../../renderReduxConsumer";
 import ProfilePage from "../../../components/pages/ProfilePage";
 import { clearUser, setUser, User } from "../../../slices/UserSlice";
-import { createMemoryHistory } from "history";
-import { Router } from "react-router-dom";
 import { store } from "../../../store";
 
-const history = createMemoryHistory();
-
 const setup = () => {
-    const component = renderReduxConsumer(
-        <Router history={history}>
-            <ProfilePage />
-        </Router>
-    );
+    const component = renderReduxConsumer(<ProfilePage />);
 
     return {
         edit: component.queryByTitle('Edit'),
@@ -46,43 +38,38 @@ const user: User = {
     }
 }
 
-test('Given an undefined user in context, it should redirect', () => {
-    setup();
-    expect(history.location.pathname).toEqual("/menu/learn");
-});
-
-test('Given a valid user in context, it should render the "About" card', () => {
+test('Given a valid user in context, it should render the "About" card', async () => {
     store.dispatch(setUser(user));
     const component = setup();
-    expect(component.getByText('About')).toBeInTheDocument();
+    expect(await component.findByText('About')).toBeInTheDocument();
 });
 
-test('Given a valid user in context, it should render the "Overview" card', () => {
+test('Given a valid user in context, it should render the "Overview" card', async () => {
     store.dispatch(setUser(user));
     const component = setup();
-    expect(component.getByText('Overview')).toBeInTheDocument();
+    expect(await component.findByText('Overview')).toBeInTheDocument();
 });
 
-test('Given a valid user in context, it should render the "Preferences" card', () => {
+test('Given a valid user in context, it should render the "Preferences" card', async () => {
     store.dispatch(setUser(user));
     const component = setup();
-    expect(component.getByText('Preferences')).toBeInTheDocument();
+    expect(await component.findByText('Preferences')).toBeInTheDocument();
 });
 
-test('Given a valid user in context, it should render the "Ranks" card', () => {
+test('Given a valid user in context, it should render the "Ranks" card', async () => {
     store.dispatch(setUser(user));
     const component = setup();
-    expect(component.getByText('Ranks')).toBeInTheDocument();
+    expect(await component.findByText('Ranks')).toBeInTheDocument();
 });
 
-test('Given a valid user in context, it should render the "Stats" card', () => {
+test('Given a valid user in context, it should render the "Stats" card', async () => {
     store.dispatch(setUser(user));
     const component = setup();
-    expect(component.getByText('Stats')).toBeInTheDocument();
+    expect(await component.findByText('Stats')).toBeInTheDocument();
 });
 
-test('Given a valid user in context, it should render the "Danger Zone" card', () => {
+test('Given a valid user in context, it should render the "Danger Zone" card', async () => {
     store.dispatch(setUser(user));
     const component = setup();
-    expect(component.getByText('Danger Zone')).toBeInTheDocument();
+    expect(await component.findByText('Danger Zone')).toBeInTheDocument();
 });
