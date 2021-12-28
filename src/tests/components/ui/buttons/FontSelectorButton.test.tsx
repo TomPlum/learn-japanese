@@ -15,7 +15,7 @@ beforeEach(() => {
         name: "SanafonMugi Handwriting"
     });
 
-    mockGetFonts.mockResolvedValueOnce( [
+    mockGetFonts.mockResolvedValueOnce([
         { displayName: "Default", name: "" },
         { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
         { displayName: "Gothic", name: "K Gothic" },

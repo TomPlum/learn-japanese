@@ -1,7 +1,7 @@
 import { Card, Col, Dropdown, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { useUserDispatch } from "../../../hooks";
-import { Font, fonts } from "../../ui/buttons/FontSelectorButton";
+import { Font } from "../../ui/buttons/FontSelectorButton";
 import { Theme } from "../../../domain/Theme";
 import { Language } from "../../../domain/Language";
 import { HighScorePreference } from "../../../domain/HighScorePreference";
@@ -13,6 +13,7 @@ import { CardsPerDay } from "../../../domain/learn/spacedrepetition/CardsPerDay"
 import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
 import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
 import UserService from "../../../service/UserService";
+import FontService from "../../../service/FontService";
 
 export interface PreferencesProps {
     user: User;
@@ -22,6 +23,7 @@ const Preferences = (props: PreferencesProps) => {
 
     const userDispatcher = useUserDispatch();
     const userService = new UserService();
+    const fontService = new FontService();
 
     useEffect(() => {
         const preferences = props.user.preferences;
@@ -32,9 +34,19 @@ const Preferences = (props: PreferencesProps) => {
         setAppMode(preferences.defaultMode);
         setCardsPerDay(preferences.cardsPerDay);
         setConfidenceMenuStyle(preferences.confidenceMenuStyle);
+
+        setLoading(true);
+        fontService.getFonts().then(fonts => {
+            setFonts(fonts);
+            setSelectedFont(fonts[0].displayName);
+        }).finally(() => {
+            setLoading(false);
+        });
     }, []);
 
-    const [font, setSelectedFont] = useState(fonts[0].displayName);
+    const [fonts, setFonts] = useState<Font[]>([]);
+
+    const [font, setSelectedFont] = useState("");
     const [theme, setTheme] = useState(Theme.DARK.toString());
     const [language, setLanguage] = useState(Language.ENGLISH.toString());
     const [highScorePreference, setHighScorePreference] = useState(HighScorePreference.ASK_EACH_TIME.toString());
@@ -43,7 +55,7 @@ const Preferences = (props: PreferencesProps) => {
     const [confidenceMenuStyle, setConfidenceMenuStyle] = useState(ConfidenceMenuStyle.NUMBERS.toString());
 
     const [changes, setChanges] = useState(false);
-    const [saving, setSaving] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | undefined>(undefined);
 
     const onSelectDefaultFont = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
@@ -84,7 +96,7 @@ const Preferences = (props: PreferencesProps) => {
     const onSaveChanges = () => {
         setError(undefined);
         setChanges(false);
-        setSaving(true);
+        setLoading(true);
 
         const updatedPreferences = {
             defaultMode: appMode,
@@ -105,7 +117,7 @@ const Preferences = (props: PreferencesProps) => {
         }).catch(response => {
             setError(response.error);
         }).finally(() => {
-            setSaving(false);
+            setLoading(false);
         });
     }
 
@@ -129,7 +141,7 @@ const Preferences = (props: PreferencesProps) => {
                                 icon={faCheckCircle}
                                 onClick={onSaveChanges}
                                 className={[styles.save, styles.icon].join(" ")}
-                            /> : saving ? <FontAwesomeIcon
+                            /> : loading ? <FontAwesomeIcon
                                 spin
                                 size="sm"
                                 title="Saving..."

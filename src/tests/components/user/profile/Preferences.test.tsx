@@ -1,4 +1,4 @@
-import { act, fireEvent, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import Preferences from "../../../../components/user/profile/Preferences";
 import renderReduxConsumer from "../../../renderReduxConsumer";
 import { User } from "../../../../slices/UserSlice";
@@ -6,7 +6,13 @@ import { User } from "../../../../slices/UserSlice";
 //Mock User Service
 const mockUserService = jest.fn();
 jest.mock("../../../../service/UserService", () => {
-    return function () { return { updatePreferences: mockUserService } }
+    return function () { return { updatePreferences: mockUserService } };
+});
+
+// Mock Font Service
+const mockFontService = jest.fn();
+jest.mock("../../../../service/FontService", () => {
+    return function () { return { getFonts: mockFontService } };
 });
 
 const user: User = {
@@ -34,7 +40,7 @@ const user: User = {
 const setup = () => {
     const component = renderReduxConsumer(<Preferences user={user} />);
     return {
-        font: component.getByText('Gothic'),
+        font: component.getByTestId('font'),
         theme: component.getByText('Dark Mode'),
         language: component.getByText('English'),
         highScores: component.getByText('Ask Each Time'),
@@ -45,91 +51,107 @@ const setup = () => {
     }
 }
 
-test('Should render the save button if the default font preference changes', () => {
+beforeEach(() => {
+    mockFontService.mockResolvedValueOnce([
+        { displayName: "Default", name: "" },
+        { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
+        { displayName: "Gothic", name: "K Gothic" },
+        { displayName: "Mincho", name: "Appli Mincho" }
+    ]);
+});
+
+test('Should render the save button if the default font preference changes', async () => {
     //Should not render the button on mount
     const { font } = setup();
     expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
 
     //Change the default font preference
     fireEvent.click(font);
+    expect(await screen.findByText('Mincho')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Mincho'));
 
     //It should render the save button
     expect(screen.getByTitle('Save')).toBeInTheDocument();
 });
 
-test('Should render the save button if the default theme changes', () => {
+test('Should render the save button if the default theme changes', async () => {
     //Should not render the button on mount
     const { theme } = setup();
     expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
 
     //Change the default theme preference
     fireEvent.click(theme);
+    expect(await screen.findByText('Light Mode')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Light Mode'));
 
     //It should render the save button
     expect(screen.getByTitle('Save')).toBeInTheDocument();
 });
 
-test('Should render the save button if the default language changes', () => {
+test('Should render the save button if the default language changes', async () => {
     //Should not render the button on mount
     const { language } = setup();
     expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
 
     //Change the default language preference
     fireEvent.click(language);
+    expect(await screen.findByText('日本語')).toBeInTheDocument();
     fireEvent.click(screen.getByText('日本語'));
 
     //It should render the save button
     expect(screen.getByTitle('Save')).toBeInTheDocument();
 });
 
-test('Should render the save button if the default app mode changes', () => {
+test('Should render the save button if the default app mode changes', async () => {
     //Should not render the button on mount
     const { appMode } = setup();
     expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
 
     //Change the default app mode preference
     fireEvent.click(appMode);
+    expect(await screen.findByText('Learn')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Learn'));
 
     //It should render the save button
     expect(screen.getByTitle('Save')).toBeInTheDocument();
 });
 
-test('Should render the save button if the default high-scores changes', () => {
+test('Should render the save button if the default high-scores changes', async () => {
     //Should not render the button on mount
     const { highScores } = setup();
     expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
 
     //Change the default high-scores preference
     fireEvent.click(highScores);
+    expect(await screen.findByText('Never Submit')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Never Submit'));
 
     //It should render the save button
     expect(screen.getByTitle('Save')).toBeInTheDocument();
 });
 
-test('Should render the save button if the default cards per-day changes', () => {
+test('Should render the save button if the default cards per-day changes', async () => {
     //Should not render the button on mount
     const { cardsPerDay } = setup();
     expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
 
     //Change the default cards per day preference
     fireEvent.click(cardsPerDay);
+    expect(await screen.findByText('5')).toBeInTheDocument();
     fireEvent.click(screen.getByText('5'));
 
     //It should render the save button
     expect(screen.getByTitle('Save')).toBeInTheDocument();
 });
 
-test('Should render the save button if the default confidence menu style changes', () => {
+test('Should render the save button if the default confidence menu style changes', async () => {
     //Should not render the button on mount
     const { confidenceMenuStyle } = setup();
     expect(screen.queryByTitle('Save')).not.toBeInTheDocument();
 
     //Change the default confidence menu style preference
     fireEvent.click(confidenceMenuStyle);
+    expect(await screen.findByText('Emoji Faces')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Emoji Faces'));
 
     //It should render the save button
@@ -144,6 +166,7 @@ test('Clicking the save button should remove it after the save is complete', asy
 
     //Change the default high-scores preference
     fireEvent.click(highScores);
+    expect(await screen.findByText('Never Submit')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Never Submit'));
 
     //Click save
@@ -159,6 +182,7 @@ test('Clicking the save button should call the user service with the updated pre
 
     //Change the font
     fireEvent.click(font);
+    expect(await screen.findByText('Mincho')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Mincho'));
 
     //Change the theme
@@ -207,6 +231,7 @@ test('Should render the error message on screen if the user service returns an e
 
     //Change the font
     fireEvent.click(font);
+    expect(await screen.findByText('Mincho')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Mincho'));
     fireEvent.click(screen.getByTitle('Save'));
 
@@ -219,6 +244,7 @@ test('Should render the error message on screen if the user service call resolve
 
     //Change the font
     fireEvent.click(font);
+    expect(await screen.findByText('Mincho')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Mincho'));
     fireEvent.click(screen.getByTitle('Save'));
 
@@ -232,6 +258,7 @@ test('Should stop rendering the error message if the update is retried and it su
 
     //Change the font
     fireEvent.click(font);
+    expect(await screen.findByText('Mincho')).toBeInTheDocument();
     fireEvent.click(screen.getByText('Mincho'));
     fireEvent.click(screen.getByTitle('Save'));
 

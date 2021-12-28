@@ -17,13 +17,6 @@ export interface Font {
     name: string;
 }
 
-export const fonts: Font[] = [
-    { displayName: "Default", name: "" },
-    { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
-    { displayName: "Gothic", name: "K Gothic" },
-    { displayName: "Mincho", name: "Appli Mincho" }, //アプリ明朝 <- Name in Japanese
-];
-
 const FontSelectorButton = (props: FontSelectorProps) => {
 
     const service = new FontService();
