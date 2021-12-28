@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { act, fireEvent, screen } from "@testing-library/react";
 import { Router } from "react-router-dom";
 import NavigationBar, { NavigationBarProps } from "../../../components/layout/NavigationBar";
 import { createMemoryHistory } from "history";
@@ -59,38 +59,43 @@ beforeEach(() => {
     store.dispatch(setApplicationMode(AppMode.LEARN));
 });
 
-test('Clicking the \'Home\' button should route the user to the menu', () => {
+test('Clicking the \'Home\' button should route the user to the menu', async () => {
     const { home } = setup();
+    expect(await screen.findByText('Home')).toBeInTheDocument();
     fireEvent.click(home);
     expect(history.location.pathname).toBe('/');
 });
 
-test('Passing active as false should disable the Login Button', () => {
+test('Passing active as false should disable the Login Button', async () => {
     store.dispatch(setActive(false));
     const { login } = setup();
+    expect(await screen.findByText('Home')).toBeInTheDocument();
     expect(login).toHaveAttribute('aria-disabled', 'true');
 });
 
-test('Passing active as false should disable the Home Button', () => {
+test('Passing active as false should disable the Home Button', async () => {
     store.dispatch(setActive(false));
     const { home } = setup();
+    expect(await screen.findByText('Home')).toBeInTheDocument();
     expect(home).toHaveAttribute('aria-disabled', 'true');
 });
 
-test('Clicking the login button while not logged in should call the onLaunchLogin event handler', () => {
+test('Clicking the login button while not logged in should call the onLaunchLogin event handler', async () => {
     const { login } = setup();
+    expect(await screen.findByText('Home')).toBeInTheDocument();
     fireEvent.click(login);
     expect(onLaunchLoginModalHandler).toHaveBeenCalled();
 });
 
-test('Should render the notifications button if the user is logged in', () => {
+test('Should render the notifications button if the user is logged in', async () => {
     store.dispatch(setUser(user));
     setup();
-    expect(screen.getByTestId('notifications-button')).toBeInTheDocument();
+    expect(await screen.findByTestId('notifications-button')).toBeInTheDocument();
 });
 
-test('Should not render the notifications button if the user is not logged in', () => {
+test('Should not render the notifications button if the user is not logged in', async () => {
     store.dispatch(clearUser());
     setup();
+    expect(await screen.findByText('Home')).toBeInTheDocument();
     expect(screen.queryByTestId('notifications-button')).not.toBeInTheDocument();
 });
