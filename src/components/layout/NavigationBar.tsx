@@ -22,6 +22,9 @@ const NavigationBar = (props: NavigationBarProps) => {
     return (
         <Navbar variant="dark" fixed="top" className={styles.navbar}>
             <Container className={styles.innerWrapper} fluid>
+{/*                <Navbar.Brand>
+                    <img src={`icons/carp.ico`} width={45} height={45} alt="Logo" />
+                </Navbar.Brand>*/}
                 <Nav className={styles.nav}>
                     <Row className={styles.row}>
                         <Col className={styles.leftCol}>
