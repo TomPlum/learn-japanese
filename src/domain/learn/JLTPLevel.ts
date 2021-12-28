@@ -12,6 +12,7 @@ export default class JLTPLevel {
     public static N3 = new JLTPLevel("N3", 3);
     public static N4 = new JLTPLevel("N4", 4);
     public static N5 = new JLTPLevel("N5", 5);
+    public static UNKNOWN = new JLTPLevel("N/A", 0)
 
     public static ALL = [JLTPLevel.N1, JLTPLevel.N2, JLTPLevel.N3, JLTPLevel.N4, JLTPLevel.N5];
 
@@ -22,7 +23,7 @@ export default class JLTPLevel {
             case "N3": return JLTPLevel.N3;
             case "N4": return JLTPLevel.N4;
             case "N5": return JLTPLevel.N5;
-            default: return undefined;
+            default: return JLTPLevel.UNKNOWN;
         }
     }
 

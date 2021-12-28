@@ -98,7 +98,7 @@ describe("Kanji Converter", () => {
         it("Should convert an invalid value", () => {
             source.jlpt = 89;
             const response = converter.convert([source]);
-            expect(response[0].jlpt).toBeUndefined();
+            expect(response[0].jlpt).toBe(JLTPLevel.UNKNOWN);
         });
     });
 
