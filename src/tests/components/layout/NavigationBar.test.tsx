@@ -1,4 +1,4 @@
-import { act, fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { Router } from "react-router-dom";
 import NavigationBar, { NavigationBarProps } from "../../../components/layout/NavigationBar";
 import { createMemoryHistory } from "history";
