@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
-                sh 'react-scripts test --coverage'
+                sh 'react-app-rewired test --coverage'
             }
         }
         stage('Acceptance Test') {
