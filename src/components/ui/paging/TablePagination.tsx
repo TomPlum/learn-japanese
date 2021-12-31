@@ -28,6 +28,9 @@ const TablePagination = (props: TablePaginationProps) => {
         onLastPage, onChangeQuantity
     } = props;
 
+    const genkiOneClasses = [styles.genki1, !genkiOne ? styles.off : "", styles.book].join(" ");
+    const genkiTwoClasses = [styles.genki2, !genkiTwo ? styles.off : "", styles.book].join(" ");
+
     const onChangeShow = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const quantity = Number(e.target.value);
         onChangeQuantity(quantity);
@@ -42,6 +45,8 @@ const TablePagination = (props: TablePaginationProps) => {
         setGenkiTwo(!genkiTwo);
         props.onToggleSecondBook(!genkiTwo);
     }
+
+    const getToggleTitle = (on: boolean) => on ? "Toggle Off" : "Toggle On";
 
     const disabled = totalPages === 0;
 
@@ -77,10 +82,10 @@ const TablePagination = (props: TablePaginationProps) => {
 
                 <Col xl={2} md={3} xs={6} className={styles.middleCol}>
                     <Pagination className={styles.bookSelector}>
-                        <Pagination.Item className={styles.genki1} onClick={onChangeGenkiOne}>
+                        <Pagination.Item className={genkiOneClasses} onClick={onChangeGenkiOne} title={getToggleTitle(genkiOne)}>
                             Genki I
                         </Pagination.Item>
-                        <Pagination.Item className={styles.genki2} onClick={onChangeGenkiTwo}>
+                        <Pagination.Item className={genkiTwoClasses} onClick={onChangeGenkiTwo} title={getToggleTitle(genkiTwo)}>
                             Genki II
                         </Pagination.Item>
                     </Pagination>

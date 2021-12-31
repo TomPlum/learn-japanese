@@ -49,3 +49,13 @@
 .pageSize {
   cursor: pointer;
 }
+
+.off a {
+  transition: all ease-in-out 0.2s;
+  opacity: 0.8;
+  background-color: $light-1;
+}
+
+.book a:active, .book a:focus, .book a:hover {
+  box-shadow: none;
+}
