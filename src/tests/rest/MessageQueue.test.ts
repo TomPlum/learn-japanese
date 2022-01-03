@@ -5,6 +5,7 @@ const mockRestClient = jest.fn();
 
 beforeEach(() => {
     localStorage.removeItem("mq");
+    jest.useFakeTimers();
     RestClient.send = mockRestClient;
 });
 
@@ -77,4 +78,18 @@ test("Resolving the queue should update the local storage afterwards", async () 
     await queue.resolve();
 
     expect(JSON.parse(localStorage.getItem("mq")!)).toStrictEqual([]);
+});
+
+test("After enqueuing a message, it should automatically resolve it after 5 seconds", () => {
+    localStorage.setItem("mq", JSON.stringify([{ method: "POST", endpoint: "/update", body: { value: 1 } }]));
+    mockRestClient.mockResolvedValue({ status: 200 });
+    MessageQueue.fromLocalStorage();
+
+    // Let's wait 4 seconds first, it shouldn't have resolved at this point
+    jest.advanceTimersByTime(4000);
+    expect(mockRestClient).not.toHaveBeenCalled();
+
+    // Advance another second to make it 5
+    jest.advanceTimersByTime(1000)
+    expect(mockRestClient).toHaveBeenCalledWith("POST", "/update", { value: 1 });
 });

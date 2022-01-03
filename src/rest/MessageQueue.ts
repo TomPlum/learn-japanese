@@ -1,6 +1,9 @@
 import RestClient, { APIResponse } from "./RestClient";
 import { Method } from "axios";
 
+/**
+ * A single message to be sent to the API.
+ */
 export interface Message<T> {
     method: Method;
     endpoint: string;
@@ -13,8 +16,10 @@ export interface Message<T> {
  */
 class MessageQueue {
 
+    /** The unique key used to store the queue in local storage. */
     private static readonly _key = "mq";
 
+    private _interval: NodeJS.Timer | undefined = undefined;
     private readonly _messages: Message<any>[] = [];
 
     /**
@@ -49,7 +54,9 @@ class MessageQueue {
      * @param request The message to enqueue.
      */
     public enqueue<T>(request: Message<T>) {
+        console.log(`Enqueueing request to [${request.method}] ${request.endpoint}`);
         this._messages.push(request);
+        this.scheduleResolve();
     }
 
     /**
@@ -87,6 +94,22 @@ class MessageQueue {
         });
     }
 
+    /**
+     * Schedules the message on the head of the queue for resolution.
+     * Waits 5 seconds before resolving.
+     */
+    private scheduleResolve() {
+        this._interval = setInterval(() => {
+            this.resolve().then(() => {
+                clearInterval(this._interval!);
+            });
+        }, 5000);
+    }
+
+    /**
+     * Retrieves the currently enqueued messages.
+     * @return messages Unresolved messages waiting in the queue.
+     */
     get messages(): Message<any>[] {
         return this._messages;
     }
