@@ -10,6 +10,7 @@ import LearnOnline from "../learn/LearnOnline";
 import KanjiBankPage from "../pages/KanjiBankPage";
 import ProtectedRoute from "./ProtectedRoute";
 import { useUserSelector } from "../../hooks";
+import GenkiGrammarPage from "../pages/GenkiGrammarPage";
 
 const NavigableMain = () => {
 
@@ -22,7 +23,8 @@ const NavigableMain = () => {
                 <Route exact path="/search" component={SearchPage}/>
                 <Route exact path="/help" component={HelpPage}/>
                 <ProtectedRoute isAuthenticated={!!user} exact path="/profile" component={ProfilePage} />
-                <Route exact path="/genki" component={GenkiIndexPage}/>
+                <Route exact path="/genki" component={GenkiIndexPage} />
+                <Route exact path="/genki/grammar" component={GenkiGrammarPage} />
                 <Route exact path="/kanji" component={KanjiBankPage}/>
                 <Route exact path="/learn/kanji" component={LearnOnline} />
                 <Route component={NotFoundPage} />
