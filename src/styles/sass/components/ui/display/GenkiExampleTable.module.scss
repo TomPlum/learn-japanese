@@ -1,0 +1,11 @@
+@import "src/styles/sass/colours";
+
+.table {
+  max-width: 500px;
+  color: $light-2;
+}
+
+.jp, .en {
+  margin-bottom: 0;
+  color: #FFF;
+}
