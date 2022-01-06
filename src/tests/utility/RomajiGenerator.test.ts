@@ -108,4 +108,17 @@ describe("Romaji Generator", () => {
        });
    });
 
+   describe("Kuten", () => {
+       it("Should remove a trailing 。from the end of a kana sentence", () => {
+           const kana = "じゅうにじはんです。";
+           const romaji = generator.generate(kana);
+           expect(romaji).toBe("jūnijihandesu");
+       });
+
+       it("Should remove all 。from a kana sentence if there are multiple", () => {
+           const kana = "がくせいです。じゅうにじはんです。";
+           const romaji = generator.generate(kana);
+           expect(romaji).toBe("gakuseidesujūnijihandesu");
+       });
+   });
 });

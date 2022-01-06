@@ -41,6 +41,9 @@ export default class RomajiGenerator {
         //Replace Long Sounds w/Macron Variants
         this.longSounds.forEach((value: string, key: string) => romaji = romaji.replaceAll(key, value));
 
+        //Remove any leading Japanese full-stops (A.K.A 句点 kuten) as we don't want them in the romaji
+        romaji = romaji.replaceAll("。", "");
+
         return romaji;
     }
 }
