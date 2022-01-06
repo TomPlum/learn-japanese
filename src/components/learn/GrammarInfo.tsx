@@ -19,6 +19,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
     const [expanded, setExpanded] = useState(false);
 
     const iconClassName = [(chapter <= 12 ? styles.genki1 : styles.genki2), styles.icon].join(" ");
+    const chapterClassName = ["fa-layers-text", "fa-inverse", styles.chapterNumber].join(" ");
     const headerStyle = !expanded ? { borderRadius: 10 } : { borderRadius: "10px 10px 0 0" };
 
     return (
@@ -28,7 +29,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
                     <Col className={styles.chapter}>
                     <span className="fa-layers fa-fw">
                         <FontAwesomeIcon icon={faBookmark} size="2x" className={iconClassName} />
-                        <span className="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3">
+                        <span className={chapterClassName}>
                             {chapter}
                         </span>
                     </span>
