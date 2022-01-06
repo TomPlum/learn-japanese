@@ -1,0 +1,66 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  color: $light-1;
+  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
+  margin: 10px;
+}
+
+.chapter {
+  max-width: 30px;
+  display: flex;
+  padding: 0;
+}
+
+.header {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  background-color: $dark-1;
+  border-radius: 10px 10px 0 0;
+}
+
+.title {
+  font-size: 1.3em;
+  padding-left: 5px;
+}
+
+.chapter span span {
+  color: $dark-1;
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+}
+
+.body {
+  width: 100%;
+  background-color: $dark-2;
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+.genki1 {
+  color: $genki-1-light;
+}
+
+.genki2 {
+  color: $genki-2-light;
+}
+
+.expander {
+  float: right;
+  transition: ease-in-out all 0.2s;
+}
+
+.expander:hover {
+  cursor: pointer;
+  color: #FFF;
+}
+
+.footer {
+  margin-top: 10px;
+}
+
+.page {
+  margin-left: 3px;
+}
