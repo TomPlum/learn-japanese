@@ -39,7 +39,7 @@ describe("Katakana", () => {
 
         describe("S Column Diacritical (Dakuten)", () => {
             it("za", () => expect(getKatakana(["za"]).code).toEqual("ザ"));
-            it("ji", () => expect(getKatakana(["zi", "ji"]).code).toEqual("ジ"));
+            it("ji", () => expect(getKatakana(["ji", "zi"]).code).toEqual("ジ"));
             it("zu", () => expect(getKatakana(["zu"]).code).toEqual("ズ"));
             it("ze", () => expect(getKatakana(["ze"]).code).toEqual("ゼ"));
             it("zo", () => expect(getKatakana(["zo"]).code).toEqual("ゾ"));
@@ -141,7 +141,7 @@ describe("Katakana", () => {
 
         const s = getMultipleKatakana([
             ["sa"], ["shi"], ["su"], ["se"], ["so"],
-            ["za"], ["zi", "ji"], ["zu"], ["ze"], ["zo"],
+            ["za"], ["ji", "zi"], ["zu"], ["ze"], ["zo"],
             ["sha"], ["shu"], ["sho"],
             ["ja", "zya"], ["ju", "zyu"], ["jo", "zyo"]
         ]);
@@ -260,7 +260,7 @@ describe("Katakana", () => {
         const diacritical = getMultipleKatakana(
             [
                 ["ga"], ["gi"], ["gu"], ["ge"], ["go"],
-                ["za"], ["zi", "ji"], ["zu"], ["ze"], ["zo"],
+                ["za"], ["ji", "zi"], ["zu"], ["ze"], ["zo"],
                 ["da"], ["di", "ji"], ["du", "zu"], ["de"], ["do"],
                 ["ba"], ["bi"], ["bu"], ["be"], ["bo"],
                 ["pa"], ["pi"], ["pu"], ["pe"], ["po"],

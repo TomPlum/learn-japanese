@@ -39,7 +39,7 @@ describe("Hiragana", () => {
 
         describe("S Column Diacritical (Dakuten)", () => {
             it("za", () => expect(getHiragana(["za"]).code).toEqual("ざ"));
-            it("ji", () => expect(getHiragana(["zi", "ji"]).code).toEqual("じ"));
+            it("ji", () => expect(getHiragana(["ji", "zi"]).code).toEqual("じ"));
             it("zu", () => expect(getHiragana(["zu"]).code).toEqual("ず"));
             it("ze", () => expect(getHiragana(["ze"]).code).toEqual("ぜ"));
             it("zo", () => expect(getHiragana(["zo"]).code).toEqual("ぞ"));
@@ -141,7 +141,7 @@ describe("Hiragana", () => {
 
         const s = getMultipleHiragana([
             ["sa"], ["shi"], ["su"], ["se"], ["so"],
-            ["za"], ["zi", "ji"], ["zu"], ["ze"], ["zo"],
+            ["za"], ["ji", "zi"], ["zu"], ["ze"], ["zo"],
             ["sha"], ["shu"], ["sho"],
             ["ja", "zya"], ["ju", "zyu"], ["jo", "zyo"]
         ]);
@@ -260,7 +260,7 @@ describe("Hiragana", () => {
         const diacritical = getMultipleHiragana(
             [
                 ["ga"], ["gi"], ["gu"], ["ge"], ["go"],
-                ["za"], ["zi", "ji"], ["zu"], ["ze"], ["zo"],
+                ["za"], ["ji", "zi"], ["zu"], ["ze"], ["zo"],
                 ["da"], ["di", "ji"], ["du", "zu"], ["de"], ["do"],
                 ["ba"], ["bi"], ["bu"], ["be"], ["bo"],
                 ["pa"], ["pi"], ["pu"], ["pe"], ["po"],
