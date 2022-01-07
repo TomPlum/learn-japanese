@@ -369,7 +369,39 @@ const GenkiGrammarPage = () => {
                 </GenkiTable>
 
                 <p>Ru-verbs are so called because you add the suffix ru to the verb base to form the dirctionary form.
-                    U-verbs can be broken down into the base and the suffix.  The long form are formed with the base plus suffixes imasu and imas</p>
+                    U-verbs can be broken down into the base and the suffix. The long form are formed with the base plus suffixes imasu and imas</p>
+            </div>
+        )
+    }
+
+    const c3p2: GrammarInfoProps = {
+        chapter: 3,
+        section: 2,
+        page: PageNumber.from(88),
+        title: "Verb Types & The 'Present Tense'",
+        body: (
+            <div>
+                <p>The present tense in Japanese is used to describe one of two things:</p>
+                <ol>
+                    <li>an activity a person habitually or regularly engages in, or;</li>
+                    <li>an activity that a person is planning on performing or doing in the future.</li>
+                </ol>
+
+                <p>Habitual actions:</p>
+                <GenkiExampleTable
+                    values={[
+                        { japanese: { value: "わたしはよくテレビをみます。" }, english: { value: "I often watch TV." } },
+                        { japanese: { value: "メアリーさんはときどきあさごはんをたべません。" }, english: { value: "Mary sometimes doesn’t eat breakfast." } }
+                    ]}
+                />
+
+                <p>Future actions:</p>
+                <GenkiExampleTable
+                    values={[
+                        { japanese: { value: "わたしはあしたきょうとにいきます" }, english: { value: "I will go to Kyoto tomorrow." } },
+                        { japanese: { value: "スーさんはきょううちにかえりません。" }, english: { value: "  Sue will not return today." } }
+                    ]}
+                />
             </div>
         )
     }
@@ -377,7 +409,7 @@ const GenkiGrammarPage = () => {
     const grammar: GrammarInfoProps[] = [
         c1p1, c1p2, c1p3,
         c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7,
-        c3p1
+        c3p1, c3p2
     ];
 
     return (
