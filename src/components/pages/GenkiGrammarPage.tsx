@@ -3,6 +3,7 @@ import GrammarInfo, { GrammarInfoProps } from "../learn/GrammarInfo";
 import PageNumber from "../../domain/learn/PageNumber";
 import GenkiExampleTable from "../ui/display/GenkiExampleTable";
 import styles from "../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
+import GenkiTable from "../ui/table/GenkiTable";
 
 const GenkiGrammarPage = () => {
 
@@ -292,9 +293,91 @@ const GenkiGrammarPage = () => {
         )
     }
 
+    const c3p1: GrammarInfoProps = {
+        chapter: 3,
+        section: 1,
+        page: PageNumber.of(86, 88),
+        title: "Verb Conjugation",
+        body: (
+            <div>
+                <p>There are three categories of verbs in Japanese:  ru-verbs, u-verbs, and irregular verbs.</p>
+                <p>Ru and u verbs follow regular conjugation:</p>
+
+                <GenkiTable chapter={3} className={styles.verbConjugationTable}>
+                    <thead>
+                        <tr>
+                            <th>{}</th>
+                            <th>る Verbs</th>
+                            <th>う Verbs</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Verb Base</td>
+                            <td>tabe</td>
+                            <td>iku</td>
+                        </tr>
+                        <tr>
+                            <td>Dictionary Form</td>
+                            <td>たべる (to eat)</td>
+                            <td>いく(to go)</td>
+                        </tr>
+                        <tr>
+                            <td>Present, Affirmative</td>
+                            <td>たべます</td>
+                            <td>いきます</td>
+                        </tr>
+                        <tr>
+                            <td>Present, Negative</td>
+                            <td>たべません</td>
+                            <td>いきません</td>
+                        </tr>
+                        <tr>
+                            <td>Stem</td>
+                            <td>たべ</td>
+                            <td>いき</td>
+                        </tr>
+                    </tbody>
+                </GenkiTable>
+
+                <p>There are only two irregular verbs in Japanese: する and くる. They are conjugated as follows:</p>
+
+                <GenkiTable chapter={3} className={styles.verbConjugationTable}>
+                    <tbody>
+                        <tr>
+                            <td>Dictionary Form</td>
+                            <td>する</td>
+                            <td>くる</td>
+                        </tr>
+                        <tr>
+                            <td>Present, Affirmative</td>
+                            <td>します</td>
+                            <td>きます</td>
+                        </tr>
+                        <tr>
+                            <td>Present, Negative</td>
+                            <td>しません</td>
+                            <td>きません</td>
+                        </tr>
+                        <tr>
+                            <td>Stem</td>
+                            <td>し</td>
+                            <td>き</td>
+                        </tr>
+                    </tbody>
+                </GenkiTable>
+
+                <p>Ru-verbs are so called because you add the suffix ru to the verb base to form the dirctionary form.
+                    U-verbs can be broken down into the base and the suffix.  The long form are formed with the base plus suffixes imasu and imas</p>
+            </div>
+        )
+    }
+
     const grammar: GrammarInfoProps[] = [
         c1p1, c1p2, c1p3,
-        c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7
+        c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7,
+        c3p1
     ];
 
     return (
