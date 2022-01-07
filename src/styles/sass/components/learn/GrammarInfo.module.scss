@@ -2,7 +2,6 @@
 
 .wrapper {
   color: $light-1;
-  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
   margin: 10px;
 }
 
@@ -17,7 +16,7 @@
 }
 
 .header {
-  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -31,15 +30,11 @@
   padding-left: 10px;
 }
 
-.chapter span span {
-  color: $dark-1;
-  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
-}
-
 .body {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   width: 100%;
   background-color: $dark-2;
-  padding: 10px;
+  padding: 20px 20px 10px 20px;
   border-radius: 0 0 10px 10px;
 }
 
@@ -62,13 +57,15 @@
 }
 
 .footer {
+  border-top: 1px solid $dark-1;
   margin-top: 10px;
+  padding-top: 10px;
 }
 
 .page {
   margin-left: 3px;
+  color: $light-2;
 }
-
 
 .icon {
   font-size: 1.1rem;
@@ -77,4 +74,5 @@
   width: 40px;
   text-align: center;
   color: $dark-1;
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
 }

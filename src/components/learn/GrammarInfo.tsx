@@ -2,7 +2,7 @@ import { Accordion, Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/learn/GrammarInfo.module.scss";
 import PageNumber from "../../domain/learn/PageNumber";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark, faChevronDown, faChevronUp, faCircle, faFileAlt } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp, faHashtag } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 export interface GrammarInfoProps {
@@ -20,7 +20,6 @@ const GrammarInfo = (props: GrammarInfoProps) => {
     const [expanded, setExpanded] = useState(false);
 
     const iconClassName = [(chapter <= 12 ? styles.genki1 : styles.genki2), styles.icon].join(" ");
-    const chapterClassName = ["fa-layers-text", "fa-inverse", styles.chapterNumber].join(" ");
     const headerStyle = !expanded ? { borderRadius: 10 } : { borderRadius: "10px 10px 0 0" };
 
     return (
@@ -28,12 +27,6 @@ const GrammarInfo = (props: GrammarInfoProps) => {
             <Container className={styles.wrapper}>
                 <Row className={styles.header} style={headerStyle}>
                     <Col className={styles.chapter}>
-               {/*         <span className="fa-layers fa-fw">
-                            <FontAwesomeIcon icon={faBookmark} size="2x" className={iconClassName} />
-                            <span className={chapterClassName}>
-                                {chapter}
-                            </span>
-                        </span>*/}
                         <div className={iconClassName}>
                             {chapter}.{section}
                         </div>
@@ -65,10 +58,12 @@ const GrammarInfo = (props: GrammarInfoProps) => {
                             </Col>
                         </Row>
 
-                        <Row className={styles.footer}>
+                        <Row className={styles.footer} noGutters>
                             <Col>
-                                <FontAwesomeIcon icon={faFileAlt} fixedWidth />
-                                <span className={styles.page}>{page?.toString()}</span>
+                                <FontAwesomeIcon icon={faHashtag} fixedWidth />
+                                <em className={styles.page}>
+                                    Page {page?.toString()} from Genki 3rd Edition - Chapter {chapter}, Section {section}.
+                                </em>
                             </Col>
                         </Row>
                     </Container>
