@@ -11,20 +11,21 @@ export interface GrammarInfoProps {
     chapter: number;
     section: number;
     page?: PageNumber;
+    preExpand?: boolean;
 }
 
 const GrammarInfo = (props: GrammarInfoProps) => {
 
-    const { title, body, chapter, page, section } = props;
+    const { title, body, chapter, page, section, preExpand } = props;
 
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(preExpand);
 
     const iconClassName = [(chapter <= 12 ? styles.genki1 : styles.genki2), styles.icon].join(" ");
     const headerStyle = !expanded ? { borderRadius: 10 } : { borderRadius: "10px 10px 0 0" };
 
     return (
-        <Accordion>
-            <Container className={styles.wrapper}>
+        <Accordion className={styles.wrapper}>
+            <Container>
                 <Row className={styles.header} style={headerStyle}>
                     <Col className={styles.chapter}>
                         <div className={iconClassName}>

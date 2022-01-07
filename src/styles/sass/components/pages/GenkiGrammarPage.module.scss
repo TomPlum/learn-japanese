@@ -3,3 +3,34 @@
 .verbConjugationTable {
   max-width: 500px;
 }
+
+.search {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  position: relative;
+  flex: 1 1 auto;
+  padding: 6px 12px;
+}
+
+.search {
+  max-width: 100%;
+  width: 100%;
+}
+
+.search input, .search input:focus {
+  height: 40px;
+  font-size: 1.2em;
+  background-color: transparent;
+  box-shadow: none;
+  border-color: #FFF !important;
+  color: #FFF;
+}
+
+.search div {
+  background-color: transparent;
+}
+
+.input::placeholder {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  color: #6c757d;
+  opacity: 1;
+}

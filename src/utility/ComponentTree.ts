@@ -36,6 +36,11 @@ export default class ComponentTree {
         this.doDepthFirstTraversal(Node.fromRoot(root));
     }
 
+    /**
+     * Finds the deepest leaf node in the tree.
+     * Returns the first one if there are multiple at the max depth.
+     * @return The deepest node.
+     */
     public getDeepestLeafNode() {
         return this.visited.length > 0 ? this.visited.reduce((a, b) => a.depth > b.depth ? a : b).value : undefined;
     }
@@ -61,6 +66,14 @@ export default class ComponentTree {
         });
 
         return response as ReactElement;
+    }
+
+    /**
+     * Creates a list off all the text content of the children from the root node.
+     * @return An array of string values.
+     */
+    public getStringChildren(): string[] {
+        return this.getAllChildren().map(child => child.props.textContent).filter(value => value);
     }
 
     private getAllChildren(): ReactElement[] {

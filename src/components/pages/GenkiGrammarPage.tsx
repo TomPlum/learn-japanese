@@ -1,9 +1,15 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import GrammarInfo, { GrammarInfoProps } from "../learn/GrammarInfo";
 import PageNumber from "../../domain/learn/PageNumber";
 import GenkiExampleTable from "../ui/display/GenkiExampleTable";
 import styles from "../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import GenkiTable from "../ui/table/GenkiTable";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import ComponentTree from "../../utility/ComponentTree";
+import ValueSelector from "../ui/select/ValueSelector";
+import Arrays from "../../utility/Arrays";
 
 const GenkiGrammarPage = () => {
 
@@ -257,9 +263,9 @@ const GenkiGrammarPage = () => {
         title: "~ね / ~よ Particles",
         body: (
             <div>
-                <p>Statements often end with the tags ne or yo, depending on the way the speaker views the in-
-                    teraction with the listener. If the speaker is seeking the listeners confirmation or agreement
-                    to what has been said, then ne (“right?”) could be added.</p>
+                <p>Statements often end with the tags ne or yo, depending on the way the speaker views the interaction
+                    with the listener. If the speaker is seeking the listeners confirmation or agreement to what has
+                    been said, then ne (“right?”) could be added.</p>
 
                 <GenkiExampleTable
                     values={[
@@ -368,7 +374,7 @@ const GenkiGrammarPage = () => {
                     </tbody>
                 </GenkiTable>
 
-                <p>Ru-verbs are so called because you add the suffix ru to the verb base to form the dirctionary form.
+                <p>Ru-verbs are so called because you add the suffix ru to the verb base to form the dictionary form.
                     U-verbs can be broken down into the base and the suffix. The long form are formed with the base plus suffixes imasu and imas</p>
             </div>
         )
@@ -399,22 +405,94 @@ const GenkiGrammarPage = () => {
                 <GenkiExampleTable
                     values={[
                         { japanese: { value: "わたしはあしたきょうとにいきます" }, english: { value: "I will go to Kyoto tomorrow." } },
-                        { japanese: { value: "スーさんはきょううちにかえりません。" }, english: { value: "  Sue will not return today." } }
+                        { japanese: { value: "スーさんはきょううちにかえりません。" }, english: { value: "Sue will not return today." } }
                     ]}
                 />
             </div>
         )
     }
 
-    const grammar: GrammarInfoProps[] = [
+    const allGrammar: GrammarInfoProps[] = [
         c1p1, c1p2, c1p3,
         c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7,
         c3p1, c3p2
     ];
+    const [grammar, setGrammar] = useState(allGrammar);
+    const [search, setSearch] = useState("");
+    const [chapter, setChapter] = useState(0);
+
+    useEffect(() => {
+        if (search != "") {
+            const matchingGrammar = grammar.filter(section => {
+                const hasBodyMatch = new ComponentTree(section.body).getStringChildren().some(value => {
+                    return value.toLowerCase().includes(search.toLowerCase());
+                });
+
+                const hasTitleMatch = section.title.toLowerCase().includes(search.toLowerCase());
+
+                return hasBodyMatch || hasTitleMatch;
+            }).map(section => {
+                section.preExpand = true;
+                return section;
+            });
+
+            setGrammar(matchingGrammar);
+        } else {
+            setGrammar(allGrammar);
+        }
+    }, [search]);
+
+    useEffect(() => {
+        if (chapter != 0) {
+            const matchingChapters = grammar.filter(section => section.chapter === chapter);
+            setGrammar(matchingChapters);
+        } else {
+            setGrammar(allGrammar);
+        }
+    }, [chapter]);
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        const search = e.target.value;
+        setSearch(search);
+    }
 
     return (
         <Container>
-            {grammar.map(props => <GrammarInfo {...props} />)}
+            <Row>
+                <Col>
+                    <InputGroup className={styles.search}>
+                        <InputGroup.Prepend>
+                            <InputGroup.Text>
+                                <FontAwesomeIcon icon={faSearch}/>
+                            </InputGroup.Text>
+                        </InputGroup.Prepend>
+
+                        <Form.Control
+                            type="text"
+                            value={search}
+                            placeholder="search"
+                            onChange={handleChange}
+                            className={styles.input}
+                        />
+                    </InputGroup>
+                </Col>
+                <Col xs={3}>
+                    <ValueSelector
+                        prefix="Chapter"
+                        selected={chapter}
+                        id="genki-chapter-selector"
+                        values={Arrays.range(1, 25)}
+                        className={styles.chapterSelector}
+                        onChange={(value: number) => setChapter(value)}
+                    />
+                </Col>
+            </Row>
+
+            <Row>
+                <Col>
+                    {grammar.map(props => <GrammarInfo {...props} />)}
+                </Col>
+            </Row>
         </Container>
     );
 }
