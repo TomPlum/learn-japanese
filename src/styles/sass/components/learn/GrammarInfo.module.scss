@@ -7,7 +7,7 @@
 }
 
 .chapter {
-  max-width: 30px;
+  max-width: 40px;
   display: flex;
   padding: 0;
 }
@@ -28,7 +28,7 @@
 
 .title {
   font-size: 1.3em;
-  padding-left: 5px;
+  padding-left: 10px;
 }
 
 .chapter span span {
@@ -44,11 +44,11 @@
 }
 
 .genki1 {
-  color: $genki-1-light;
+  background-color: $genki-1-light;
 }
 
 .genki2 {
-  color: $genki-2-light;
+  background-color: $genki-2-light;
 }
 
 .expander {
@@ -67,4 +67,14 @@
 
 .page {
   margin-left: 3px;
+}
+
+
+.icon {
+  font-size: 1.1rem;
+  padding: 3px;
+  border-radius: 5px;
+  width: 40px;
+  text-align: center;
+  color: $dark-1;
 }

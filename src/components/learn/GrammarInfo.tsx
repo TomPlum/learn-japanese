@@ -2,19 +2,20 @@ import { Accordion, Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/learn/GrammarInfo.module.scss";
 import PageNumber from "../../domain/learn/PageNumber";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookmark, faChevronDown, faChevronUp, faFileAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark, faChevronDown, faChevronUp, faCircle, faFileAlt } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 export interface GrammarInfoProps {
     title: string;
     body: Element | JSX.Element | string;
     chapter: number;
+    section: number;
     page?: PageNumber;
 }
 
 const GrammarInfo = (props: GrammarInfoProps) => {
 
-    const { title, body, chapter, page } = props;
+    const { title, body, chapter, page, section } = props;
 
     const [expanded, setExpanded] = useState(false);
 
@@ -27,12 +28,15 @@ const GrammarInfo = (props: GrammarInfoProps) => {
             <Container className={styles.wrapper}>
                 <Row className={styles.header} style={headerStyle}>
                     <Col className={styles.chapter}>
-                    <span className="fa-layers fa-fw">
-                        <FontAwesomeIcon icon={faBookmark} size="2x" className={iconClassName} />
-                        <span className={chapterClassName}>
-                            {chapter}
-                        </span>
-                    </span>
+               {/*         <span className="fa-layers fa-fw">
+                            <FontAwesomeIcon icon={faBookmark} size="2x" className={iconClassName} />
+                            <span className={chapterClassName}>
+                                {chapter}
+                            </span>
+                        </span>*/}
+                        <div className={iconClassName}>
+                            {chapter}.{section}
+                        </div>
                     </Col>
 
                     <Col className={styles.title}>
