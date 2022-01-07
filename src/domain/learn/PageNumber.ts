@@ -18,9 +18,9 @@ class PageNumber {
 
     public toString(): string {
         if (this._end) {
-            return `${this._start} - ${this._end}`;
+            return `Pages ${this._start} - ${this._end}`;
         }
-        return this._start.toString();
+        return `Page ${this._start.toString()}`;
     }
 }
 
