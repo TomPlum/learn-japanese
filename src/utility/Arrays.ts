@@ -168,4 +168,14 @@ export default class Arrays {
         }
         return [array];
     }
+
+    /**
+     * Generates an array of integers between the given start and end values.
+     * The start value is inclusive, but the end value is exclusive.
+     * @param start The first value in the array.
+     * @param end The last value in the array.
+     */
+    static range = (start: number, end: number): number[] => {
+        return Array.from({length: (end - start)}, (v, k) => k + start);
+    }
 }

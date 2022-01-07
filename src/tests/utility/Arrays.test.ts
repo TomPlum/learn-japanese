@@ -172,4 +172,11 @@ describe("Arrays Utility", () => {
             expect(remaining).toStrictEqual([]);
         });
     });
+
+    describe("Range", () => {
+        it("Should generate all the numbers in the given range, excluding the last", () => {
+            const values = Arrays.range(3, 7);
+            expect(values).toStrictEqual([3, 4, 5, 6]);
+        });
+    });
 });
