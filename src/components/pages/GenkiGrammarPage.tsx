@@ -983,11 +983,80 @@ const GenkiGrammarPage = () => {
         )
     }
 
+    const c13p1: GrammarInfoProps = {
+        chapter: 13,
+        section: 1,
+        page: PageNumber.of(26, 28),
+        title: "Potential Verbs",
+        body: (
+            <div>
+                <p>Potential verbs are used to say that someone “can” or “has the ability to” do something, or that something is possible.</p>
+
+                <p>る Verbs: Drop the final –ru and add –rareru</p>
+                <GenkiTable chapter={13} maxWidth={165}>
+                    <td>{}</td>
+                    <td>見る &#8594; 見られる</td>
+                </GenkiTable>
+
+                <p>う Verbs: Drop the final –u and add –eru</p>
+                <GenkiTable chapter={13} maxWidth={165}>
+                    <td>{}</td>
+                    <td>行く &#8594; 行ける</td>
+                </GenkiTable>
+
+                <p>Irregular Verbs</p>
+                <GenkiTable chapter={13} maxWidth={300}>
+                    <tr>
+                        <td>{}</td>
+                        <td>くる &#8594; こられる</td>
+                        <td>する &#8594; できる</td>
+                    </tr>
+                </GenkiTable>
+
+                <GenkiTable chapter={13}>
+                    <tr>
+                        <th rowSpan={2}>Verb Conjugation</th>
+                        <th colSpan={2} scope="colgroup">Short Form</th>
+                        <th colSpan={2} scope="colgroup">Long Form</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Affirmative</th>
+                        <th scope="col">Negative</th>
+                        <th scope="col">Affirmative</th>
+                        <th scope="col">Negative</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">Present Tense</th>
+                        <td>見られる</td>
+                        <td>見られない</td>
+                        <td>見られます</td>
+                        <td>見られません</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Past Tense</th>
+                        <td>見られた</td>
+                        <td>見られなかった</td>
+                        <td>見られました</td>
+                        <td>見られませんでした</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">て Form</th>
+                        <td>見られて</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </GenkiTable>
+            </div>
+        )
+    }
+
     const allGrammar: GrammarInfoProps[] = [
         c1p1, c1p2, c1p3,
         c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7,
         c3p1, c3p2, c3p3, c3p4, c3p5, c3p6, c3p7, c3p8,
-        c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8
+        c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8,
+        c13p1
     ];
 
     const [grammar, setGrammar] = useState(allGrammar);

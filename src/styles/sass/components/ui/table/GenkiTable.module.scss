@@ -18,6 +18,16 @@
   color: #FFF;
 }
 
+.table thead th:first-child {
+  color: $genki-1-light;
+  font-style: italic;
+}
+
+.table tr:first-child th:first-child {
+  color: $genki-1-light;
+  font-style: italic;
+}
+
 .genkiOne {
   border: 2px solid $genki-1-light;
 }
