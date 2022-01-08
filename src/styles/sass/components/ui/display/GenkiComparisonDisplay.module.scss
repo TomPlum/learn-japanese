@@ -1,0 +1,36 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.brace {
+  font-family: "Ciutadella Rounded Light", sans-serif;
+  font-size: 4em;
+  padding: 0 8px;
+}
+
+.pre, .post {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.comparison {
+  font-family: "Ciutadella Rounded Light", sans-serif;
+}
+
+.meaning {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  margin-left: 50px;
+}
+
+.genkiOneUnderline {
+  text-decoration: underline;
+  text-decoration-color: $genki-1-light;
+}
+
+.genkiTwoUnderline {
+  text-decoration: underline;
+  text-decoration-color: $genki-2-light;
+}
