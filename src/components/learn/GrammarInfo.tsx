@@ -63,7 +63,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
                             <Col>
                                 <FontAwesomeIcon icon={faHashtag} fixedWidth />
                                 <em className={styles.page}>
-                                    {page?.toString()} from Genki 3rd Edition - Chapter {chapter}, Section {section}.
+                                    {page?.toString()} from Genki {(chapter <= 12 ? "I" : "II")} (3rd Edition) - Chapter {chapter}, Section {section}.
                                 </em>
                             </Col>
                         </Row>

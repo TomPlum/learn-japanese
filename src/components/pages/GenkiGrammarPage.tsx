@@ -229,7 +229,7 @@ const GenkiGrammarPage = () => {
                 <GenkiExampleTable
                     values={[
                         {
-                            japanese: { value: "やまださんはがくせいじゃないです。" },
+                            japanese: { value: "やまださんはがくせいじゃないです。", underline: "じゃないです" },
                             english: { value: "Mr. Yamada is not a student." }
                         }
                     ]}
@@ -248,7 +248,7 @@ const GenkiGrammarPage = () => {
                         },
                         {
                             japanese: { value: "やまださんはがくせいではありません。", underline: "ではありません" },
-                            english: { value: "(more conservative speech style)" }
+                            english: { value: "(formal, appropriate for writing)" }
                         }
                     ]}
                 />
@@ -417,9 +417,11 @@ const GenkiGrammarPage = () => {
         c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7,
         c3p1, c3p2
     ];
+
     const [grammar, setGrammar] = useState(allGrammar);
     const [search, setSearch] = useState("");
-    const [chapter, setChapter] = useState(0);
+    const [chapter, setChapter] = useState(1);
+    const [cleared, setCleared] = useState(true);
 
     useEffect(() => {
         if (search != "") {
@@ -443,7 +445,7 @@ const GenkiGrammarPage = () => {
     }, [search]);
 
     useEffect(() => {
-        if (chapter != 0) {
+        if (!cleared) {
             const matchingChapters = grammar.filter(section => section.chapter === chapter);
             setGrammar(matchingChapters);
         } else {
@@ -475,17 +477,18 @@ const GenkiGrammarPage = () => {
                             className={styles.input}
                         />
                     </InputGroup>
-                </Col>
-                <Col xs={3}>
                     <ValueSelector
                         prefix="Chapter"
                         selected={chapter}
+                        showBeforeScrolling={150}
                         id="genki-chapter-selector"
                         values={Arrays.range(1, 25)}
                         className={styles.chapterSelector}
+                        itemClassName={styles.chapterSelectorItem}
                         onChange={(value: number) => setChapter(value)}
                     />
                 </Col>
+
             </Row>
 
             <Row>
