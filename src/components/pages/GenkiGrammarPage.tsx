@@ -11,6 +11,7 @@ import ComponentTree from "../../utility/ComponentTree";
 import ValueSelector from "../ui/select/ValueSelector";
 import Arrays from "../../utility/Arrays";
 import QuoteDisplay from "../ui/display/QuoteDisplay";
+import { useDebouncedEffect } from "../../hooks";
 
 const GenkiGrammarPage = () => {
 
@@ -428,7 +429,7 @@ const GenkiGrammarPage = () => {
     const [chapter, setChapter] = useState(1);
     const [cleared, setCleared] = useState(true);
 
-    useEffect(() => {
+    useDebouncedEffect(() => {
         if (search != "") {
             const matchingGrammar = grammar.filter(section => {
                 const hasBodyMatch = new ComponentTree(section.body).getStringChildren().some(value => {
@@ -447,7 +448,7 @@ const GenkiGrammarPage = () => {
         } else {
             setGrammar(allGrammar);
         }
-    }, [search]);
+    }, 200, [search]);
 
     useEffect(() => {
         if (!cleared) {
