@@ -10,6 +10,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import ComponentTree from "../../utility/ComponentTree";
 import ValueSelector from "../ui/select/ValueSelector";
 import Arrays from "../../utility/Arrays";
+import QuoteDisplay from "../ui/display/QuoteDisplay";
 
 const GenkiGrammarPage = () => {
 
@@ -20,8 +21,12 @@ const GenkiGrammarPage = () => {
         page: PageNumber.of(41, 42),
         body: (
             <div>
-                <p>“It is 12:30.” “I am a student.” These are sentences that can be translated into Japanese
-                    using an appropriate noun and the word <em>desu</em>.
+                <p>
+                    <QuoteDisplay chapter={1}>It is 12:30.</QuoteDisplay>
+                    <span> and </span>
+                    <QuoteDisplay chapter={1}>I am a student.</QuoteDisplay>
+                    <span>are sentences that can be translated into Japanese
+                    using an appropriate noun and the word <em>desu</em>.</span>
                 </p>
                 <GenkiExampleTable
                     className={styles.exampleTable}
