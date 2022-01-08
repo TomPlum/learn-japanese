@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Overlay, Popover } from "react-bootstrap";
-import styles from "../../../styles/sass/components/ui/select/ValueSelector.module.scss";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Placement } from "react-bootstrap/Overlay";
+import ConditionalWrapper from "../ConditionalWrapper";
+import ScrollableContainer from "../ScrollableContainer";
+import styles from "../../../styles/sass/components/ui/select/ValueSelector.module.scss";
 
 export interface ValueSelectorProps {
     id: string;
@@ -12,13 +14,15 @@ export interface ValueSelectorProps {
     selected: number;
     disabled?: boolean;
     className?: string;
+    itemClassName?: string;
     placement?: Placement;
+    showBeforeScrolling?: number;
     onChange: (value: number) => void;
 }
 
 const ValueSelector = (props: ValueSelectorProps) => {
 
-    const { id, prefix, values, selected, disabled, placement, className, onChange } = props;
+    const { id, prefix, values, selected, disabled, placement, className, itemClassName, showBeforeScrolling, onChange } = props;
 
     const ref = useRef(null);
     const targetRef = useRef(null);
@@ -36,7 +40,7 @@ const ValueSelector = (props: ValueSelectorProps) => {
     }
 
     return (
-       <div ref={ref} className={className}>
+       <div ref={ref} className={className} id={id}>
            <span className={disabled ? styles.disabled : styles.selected}>
                 <span ref={targetRef} onClick={handleInitialOpen} data-testid={id}>
                     {prefix}{' '}{selected}
@@ -54,15 +58,18 @@ const ValueSelector = (props: ValueSelectorProps) => {
            >
                <Popover id={id} className={styles.popover}>
                    <Popover.Content className={styles.content}>
-                       {values.map(value => {
-                           return (
-                               <div className={styles.valueWrapper} key={`${value}-wrapper`} onClick={() => handleChange(value)}>
-                                    <span className={styles.value}>
-                                        {prefix}{' '}{value}
-                                    </span>
-                               </div>
-                           )
-                       })}
+                       <ConditionalWrapper condition={!!showBeforeScrolling} wrapper={children => (
+                           <ScrollableContainer height={showBeforeScrolling}>
+                               {children}
+                           </ScrollableContainer>
+                       )}><>{values.map(value => (
+                           <div className={styles.valueWrapper} key={`${value}-wrapper`} onClick={() => handleChange(value)}>
+                                <span className={[styles.value, itemClassName].join(" ")}>
+                                    {prefix}{' '}{value}
+                                </span>
+                           </div>)
+                       )}</>
+                       </ConditionalWrapper>
                    </Popover.Content>
                </Popover>
            </Overlay>

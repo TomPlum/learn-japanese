@@ -26,9 +26,23 @@ export const getByTextWithElements = (text: string): HTMLElement => {
     });
 }
 
+export const getAllByTextWithElements = (text: string): HTMLElement[] => {
+    // @ts-ignore
+    return screen.getAllByText((content, element) => {
+        return content !== '' && element && element.textContent === text;
+    });
+}
+
 export const findByTextWithElements = async (text: string): Promise<HTMLElement> => {
     // @ts-ignore
     return await screen.findByText((content, element) => {
+        return content !== '' && element && element.textContent === text;
+    });
+}
+
+export const findAllByTextWithElements = async (text: string): Promise<HTMLElement[]> => {
+    // @ts-ignore
+    return await screen.findAllByText((content, element) => {
         return content !== '' && element && element.textContent === text;
     });
 }

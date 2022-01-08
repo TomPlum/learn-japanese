@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import ValueSelector, { ValueSelectorProps } from "../../../../components/ui/select/ValueSelector";
-import { getByTextWithElements } from "../../../Queries";
+import { findAllByTextWithElements, findByTextWithElements, getAllByTextWithElements, getByTextWithElements } from "../../../Queries";
 import userEvent from "@testing-library/user-event";
 
 const onChangeHandler = jest.fn();
@@ -32,6 +32,19 @@ test("Should offer all the values from the property", () => {
     props.values = [10, 20, 30];
     setup();
     expect(getByTextWithElements('Show 20')).toBeInTheDocument();
+});
+
+test("Should offer all the values even when limiting the height in a scrollable container", async () => {
+    props.values = [10, 20, 30];
+    props.showBeforeScrolling = 150;
+
+    setup();
+
+    fireEvent.click(getByTextWithElements('Show 20'));
+
+    expect(await findByTextWithElements('Show 10')).toBeInTheDocument();
+    expect(getAllByTextWithElements('Show 20')[1]).toBeInTheDocument();
+    expect(getByTextWithElements('Show 30')).toBeInTheDocument();
 });
 
 test("Should render the prefix when passed", () => {
