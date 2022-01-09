@@ -148,7 +148,7 @@ const GenkiChapter13 = () => {
     const c13p4: GrammarInfoProps = {
         chapter: 13,
         section: 4,
-        page: PageNumber.from(31),
+        page: PageNumber.from(30),
         title: "てみる",
         body: (
             <div>
@@ -165,7 +165,69 @@ const GenkiChapter13 = () => {
         )
     }
 
-    return { c13p1, c13p2, c13p3, c13p4 };
+    const c13p5: GrammarInfoProps = {
+        chapter: 13,
+        section: 5,
+        page: PageNumber.from(31),
+        title: "なら",
+        body: (
+            <div>
+                <p>A statement of the form “noun A なら predicate X” says that the predicate X applies only to A and is
+                    not more generally valid.  The main ideas of a なら sentence, in other words, are “limitation” and “contrast”.
+                </p>
+                <p>An example question and answer:</p>
+
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "Q: ブラジルに行ったことがありますか。" }}
+                    en={{ text: "Have you ever been to Brazil?" }}
+                />
+
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "A: メキシコなら行ったことがありますが、ブラジルは行ったことがありません。" }}
+                    en={{ text: "I’ve been to Mexico, but never been to Brazil." }}
+                />
+            </div>
+        )
+    }
+
+    const c13p6: GrammarInfoProps = {
+        chapter: 13,
+        section: 6,
+        page: PageNumber.of(31, 32),
+        title: "Frequency (一週間に三回)",
+        body: (
+            <div>
+                <p>You can describe the frequency of events over a period of time by using the following framework:</p>
+
+                <GenkiTable chapter={13} maxWidth={350}>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span className={styles.genkiTwo}>(period)</span>
+                                <span>{' に '}</span>
+                                <span className={styles.genkiTwo}>(frequency)</span>
+                            </td>
+                            <td>
+                                <span className={styles.genkiTwo}>(frequency)</span>
+                                <span>{' per '}</span>
+                                <span className={styles.genkiTwo}>(period)</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </GenkiTable>
+
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "私は一週間に三回かみを洗います。" }}
+                    en={{ text: "I shampoo three times a week." }}
+                />
+            </div>
+        )
+    }
+
+    return { c13p1, c13p2, c13p3, c13p4, c13p5, c13p6 };
 }
 
 export default GenkiChapter13;
