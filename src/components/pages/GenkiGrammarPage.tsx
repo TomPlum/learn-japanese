@@ -71,7 +71,7 @@ const GenkiGrammarPage = () => {
     }
 
     return (
-        <Container>
+        <Container className={styles.wrapper}>
             <Row>
                 <Col>
                     <InputGroup className={styles.search}>
@@ -102,7 +102,7 @@ const GenkiGrammarPage = () => {
                 </Col>
             </Row>
 
-            <Row>
+            <Row noGutters>
                 <Col>
                     {grammar.map(props => <GrammarInfo {...props} />)}
                 </Col>

@@ -43,7 +43,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
                         {title}
                     </Col>
 
-                    <Col>
+                    <Col className={styles.expanderWrapper}>
                         <FontAwesomeIcon
                             fixedWidth className={styles.expander}
                             icon={expanded ? faChevronUp : faChevronDown}

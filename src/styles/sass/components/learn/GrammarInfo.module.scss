@@ -1,8 +1,59 @@
 @import "src/styles/sass/colours";
+@import "src/styles/sass/viewports";
+
+@mixin expanderWrapper {
+  max-width: 50px;
+  padding-left: 0;
+}
+
+@mixin title {
+  padding-left: 10px;
+  padding-right: 0;
+}
+
+@include phone {
+  .expanderWrapper {
+    @include expanderWrapper;
+    padding-right: 5px;
+  }
+
+  .title {
+    font-size: 1em;
+  }
+}
+
+@include tablet {
+  .expanderWrapper {
+    @include expanderWrapper;
+  }
+
+  .title {
+    font-size: 1.3em;
+  }
+}
+
+@include desktop {
+  .expanderWrapper {
+    @include expanderWrapper;
+  }
+
+  .title {
+    font-size: 1.3em;
+  }
+}
+
+.expander {
+  float: right;
+  transition: ease-in-out all 0.2s;
+}
+
+.expander:hover {
+  color: #FFF;
+}
 
 .wrapper {
   color: $light-1;
-  margin: 10px;
+  margin: 10px 0;
 }
 
 .chapter {
@@ -29,14 +80,10 @@
   cursor: pointer;
 }
 
-.title {
-  font-size: 1.3em;
-  padding-left: 10px;
-}
-
 .body {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   width: 100%;
+  max-width: 1200px;
   background-color: $dark-2;
   padding: 20px 20px 10px 20px;
   border-radius: 0 0 10px 10px;
@@ -48,15 +95,6 @@
 
 .genki2 {
   background-color: $genki-2-light;
-}
-
-.expander {
-  float: right;
-  transition: ease-in-out all 0.2s;
-}
-
-.expander:hover {
-  color: #FFF;
 }
 
 .footer {
