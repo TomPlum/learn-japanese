@@ -1,10 +1,11 @@
 import { render } from "@testing-library/react";
 import GenkiUnderlineDisplay from "../../../../components/ui/display/GenkiUnderlineDisplay";
 import { getByTextWithElements } from "../../../Queries";
+import { FirstMatch } from "../../../../components/ui/Underline";
 
 test("Should render the text content of the immediate child component", () => {
     render(
-        <GenkiUnderlineDisplay underline="test" book={1}>
+        <GenkiUnderlineDisplay underline={new FirstMatch("test")} book={1}>
             <span>This is a test example.</span>
         </GenkiUnderlineDisplay>
     );
@@ -14,7 +15,7 @@ test("Should render the text content of the immediate child component", () => {
 
 test("Should render the underlined text with the genkiOneUnderline class if the book is 1", () => {
     const component = render(
-        <GenkiUnderlineDisplay underline="test" book={1}>
+        <GenkiUnderlineDisplay underline={new FirstMatch("test")} book={1}>
             <span>This is a test example.</span>
         </GenkiUnderlineDisplay>
     );
@@ -24,7 +25,7 @@ test("Should render the underlined text with the genkiOneUnderline class if the 
 
 test("Should render the underlined text with the genkiTwoUnderline class if the book is 2", () => {
     const component = render(
-        <GenkiUnderlineDisplay underline="test" book={2}>
+        <GenkiUnderlineDisplay underline={new FirstMatch("test")} book={2}>
             <span>This is a test example.</span>
         </GenkiUnderlineDisplay>
     );

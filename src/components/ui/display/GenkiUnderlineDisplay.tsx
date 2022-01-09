@@ -1,10 +1,10 @@
 import { PropsWithChildren } from "react";
 import ComponentTree from "../../../utility/ComponentTree";
-import Underline from "../Underline";
+import Underline, { UnderlineStrategy } from "../Underline";
 import styles from "../../../styles/sass/components/ui/display/GenkiUnderlineDisplay.module.scss";
 
 export interface GenkiUnderlineDisplayProps {
-    underline: string;
+    underline?: UnderlineStrategy;
     book: number;
 }
 
@@ -14,7 +14,7 @@ const GenkiUnderlineDisplay = (props: PropsWithChildren<GenkiUnderlineDisplayPro
     const underlineClass = book == 1 ? styles.genkiOneUnderline : styles.genkiTwoUnderline;
 
     return (
-        <Underline underline={underline} underlineClass={underlineClass}>
+        <Underline strategy={underline} underlineClass={underlineClass}>
             <span>{value}</span>
         </Underline>
     );
