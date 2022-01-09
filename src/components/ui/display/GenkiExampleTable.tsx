@@ -1,18 +1,23 @@
 import { Table } from "react-bootstrap";
-import styles from "../../../styles/sass/components/ui/display/GenkiExampleTable.module.scss";
 import RomajiGenerator from "../../../utility/RomajiGenerator";
+import styles from "../../../styles/sass/components/ui/display/GenkiExampleTable.module.scss";
 
 interface ExampleValue {
     value: string;
     underline?: string;
+    hideRomaji?: boolean;
 }
 
 export interface GenkiExampleTableProps {
     values: { japanese: ExampleValue, english: ExampleValue }[];
     className?: string;
+    book: number;
 }
 
 const GenkiExampleTable = (props: GenkiExampleTableProps) => {
+
+    const { values, book, className } = props;
+
     const romajiGenerator = new RomajiGenerator();
 
     const underlineValue = (example: ExampleValue) => {
@@ -23,27 +28,29 @@ const GenkiExampleTable = (props: GenkiExampleTableProps) => {
             const start = value.substring(0, underlineStartIndex);
             const underlineEndIndex = underlineStartIndex + underlineText.length;
             const underlined = value.substring(underlineStartIndex, underlineEndIndex);
-            const remaining = value.substring(underlineEndIndex)
-            return <span>{start}<span className={styles.underline}>{underlined}</span>{remaining}</span>
+            const remaining = value.substring(underlineEndIndex);
+
+            const underlineClass = book == 1 ? styles.genkiOneUnderline : styles.genkiTwoUnderline;
+            return <span>{start}<span className={underlineClass}>{underlined}</span>{remaining}</span>
         }
 
         return <span>{example.value}</span>
     }
 
     return (
-        <Table className={[styles.table, props.className].join(" ")} borderless size="sm">
-            {props.values.map(example => {
-                const japanese = example.japanese;
+        <Table className={[styles.table, className].join(" ")} borderless size="sm">
+            {values.map(example => {
+                const { english, japanese } = example;
 
                 return (
-                    <tr>
+                    <tr key={`${english}-row`}>
                         <td>
                             <p className={styles.jp}>{underlineValue(japanese)}</p>
-                            <span>{romajiGenerator.generate(japanese.value)}</span>
+                            {!japanese.hideRomaji && <span>{romajiGenerator.generate(japanese.value)}</span>}
                         </td>
 
                         <td className={styles.en}>
-                            {underlineValue(example.english)}
+                            {underlineValue(english)}
                         </td>
                     </tr>
                 )
