@@ -32,6 +32,7 @@ const GenkiGrammarPage = () => {
                     using an appropriate noun and the word <em>desu</em>.</span>
                 </p>
                 <GenkiExampleTable
+                    book={1}
                     className={styles.exampleTable}
                     values={[
                         { japanese: { value: "じゅうにじはんです。" }, english: { value: "(It) is half past twelve" } },
@@ -64,6 +65,7 @@ const GenkiGrammarPage = () => {
             <div>
                 <p>No (の) is a particle that connects two nouns.</p>
                 <GenkiExampleTable
+                    book={1}
                     className={styles.exampleTable}
                     values={[
                         { japanese: { value: "たけしさんのでんわばんごう。" }, english: { value: "Takeshi’s phone number" } },
@@ -90,6 +92,7 @@ const GenkiGrammarPage = () => {
                 </p>
 
                 <GenkiExampleTable
+                    book={1}
                     className={styles.exampleTable}
                     values={[
                         { japanese: { value: "あれはわたしのペンです。" }, english: { value: "(That is my pen over there.)" } },
@@ -106,6 +109,7 @@ const GenkiGrammarPage = () => {
 
 
                 <GenkiExampleTable
+                    book={1}
                     className={styles.exampleTable}
                     values={
                         [{ japanese: { value: "どれがあなたのペンですか？" }, english: { value: "(Which one is your pen?)" } }]
@@ -129,12 +133,14 @@ const GenkiGrammarPage = () => {
                 </p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[{ japanese: { value: "このとけいはいくらですか？" }, english: { value: "How much is this watch?" } }]}
                 />
 
                 <p>As opposed to:</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[{ japanese: { value: "これはいくらですか？" }, english: { value: "How much is this?" } }]}
                 />
             </div>
@@ -151,6 +157,7 @@ const GenkiGrammarPage = () => {
                 <p>koko, soko, asoko, and doko are all words for places.</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         { japanese: { value: "ここ" }, english: { value: "here, near me" } },
                         { japanese: { value: "そこ" }, english: { value: "there, near you" } },
@@ -162,6 +169,7 @@ const GenkiGrammarPage = () => {
                 <p>For example:</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[{
                         japanese: { value: "すみません、ゆうびんきょくはどこですか。" },
                         english: { value: "Excuse me, where is the post office?" }
@@ -181,6 +189,7 @@ const GenkiGrammarPage = () => {
                 <p>The question word for “who” is だれ, and for “whose” we simply add the particle の.</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "これはだれのかばんですか。", underline: "だれの" },
@@ -206,6 +215,7 @@ const GenkiGrammarPage = () => {
                 <p>Using this formation you can say “Item A is this, and item B is this, too.”</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "たけしさんはにほんじんです。" },
@@ -235,6 +245,7 @@ const GenkiGrammarPage = () => {
                     arimasen.</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "やまださんはがくせいじゃないです。", underline: "じゃないです" },
@@ -249,6 +260,7 @@ const GenkiGrammarPage = () => {
                     sentence, you also find:</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "やまださんはがくせいじゃありません。", underline: "じゃありません" },
@@ -276,6 +288,7 @@ const GenkiGrammarPage = () => {
                     been said, then ne (“right?”) could be added.</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "メアリーさんのせんもんはぶんがくですね。" },
@@ -292,6 +305,7 @@ const GenkiGrammarPage = () => {
                     listener of what has been said. With yo added, a statement becomes an authoritative decree.</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "とんかつはさかなじゃありませんよ。" },
@@ -403,6 +417,7 @@ const GenkiGrammarPage = () => {
 
                 <p>Habitual actions:</p>
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         { japanese: { value: "わたしはよくテレビをみます。" }, english: { value: "I often watch TV." } },
                         { japanese: { value: "メアリーさんはときどきあさごはんをたべません。" }, english: { value: "Mary sometimes doesn’t eat breakfast." } }
@@ -411,6 +426,7 @@ const GenkiGrammarPage = () => {
 
                 <p>Future actions:</p>
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         { japanese: { value: "わたしはあしたきょうとにいきます" }, english: { value: "I will go to Kyoto tomorrow." } },
                         { japanese: { value: "スーさんはきょううちにかえりません。" }, english: { value: "Sue will not return today." } }
@@ -437,6 +453,7 @@ const GenkiGrammarPage = () => {
                     description="The particle で indicates where the even described by the verb takes place."
                 />
                 <GenkiExampleTable
+                    book={1}
                     values={[{
                         japanese: { value: "うちでテレビをみます。", underline: "で" },
                         english: { value: "I will watch TV at home." }
@@ -449,6 +466,7 @@ const GenkiGrammarPage = () => {
                     description="The particle に indicates two things; the goal toward which things move; and the time at which an event takes place."
                 />
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "わたしはうちにかえります。", underline: "に" },
@@ -467,6 +485,7 @@ const GenkiGrammarPage = () => {
                     description="The particle へ also indicates the goal of a movement. It is pronounced “e.”"
                 />
                 <GenkiExampleTable
+                    book={1}
                     values={[{
                         japanese: { value: "わたしはうちへかえります。", underline: "へ" },
                         english: { value: "I will return." }
@@ -479,6 +498,7 @@ const GenkiGrammarPage = () => {
                     description="The particle を indicates direct objects. It is pronounced “o.”"
                 />
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "コーヒーをのみます。", underline: "を" },
@@ -508,6 +528,7 @@ const GenkiGrammarPage = () => {
                 </p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "にちようびにいきます。", underline: "にちようびに"　},
@@ -535,6 +556,7 @@ const GenkiGrammarPage = () => {
                 </p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "テニスをしませんか。"　},
@@ -561,6 +583,7 @@ const GenkiGrammarPage = () => {
                 <p>Examples of frequency adverbs are まいにち (everyday), よく (often), and ときどき (sometimes).</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[{
                         japanese: { value: "わたしはときどききっさてんにいきます。"　},
                         english: { value: "I sometimes go to a coffee shop." }
@@ -570,6 +593,7 @@ const GenkiGrammarPage = () => {
                 <p>It is also important to remember that adverbs of infrequency must be followed by a negative at the end of the sentence.</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[{
                         japanese: { value: "わたしはぜんぜんテレビをみません。"　},
                         english: { value: "I do not watch TV at all." }
@@ -592,6 +616,7 @@ const GenkiGrammarPage = () => {
                     <QuoteDisplay chapter={3}>{"topic -> time -> place -> object -> verb"}</QuoteDisplay>
                 </p>
                 <GenkiExampleTable
+                    book={1}
                     values={[{
                         japanese: { value: "わたしはきょうとしょかんでにほんごをべんきょうします。" },
                         english: { value: "I will study Japanese in the library today." }
@@ -602,6 +627,7 @@ const GenkiGrammarPage = () => {
                     <QuoteDisplay chapter={3}>{"topic -> frequency -> time -> goal -> verb"}</QuoteDisplay>
                 </p>
                 <GenkiExampleTable
+                    book={1}
                     values={[{
                         japanese: { value: "わたしはよくしちじごろうちへかえります。" },
                         english: { value: "I often go back at around seven." }
@@ -624,6 +650,7 @@ const GenkiGrammarPage = () => {
                 </p>
 
                <GenkiExampleTable
+                   book={1}
                    values={[{
                        japanese: { value: "アリーさん、しゅまつはたいていなにをしますか。" },
                        english: { value: "(Mary, what do you usually do on the weekends?)" }
@@ -646,6 +673,7 @@ const GenkiGrammarPage = () => {
                 </p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "あそこにマクドナルドがあります。" },
@@ -665,6 +693,7 @@ const GenkiGrammarPage = () => {
                 <p>When you want to present or some sentient being, rather than a thing, you need to use the verb います.</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "あそこにりゅうがくせいがいます" },
@@ -691,6 +720,7 @@ const GenkiGrammarPage = () => {
                 <Row>
                     <Col>
                         <GenkiExampleTable
+                            book={1}
                             values={[
                                 {
                                     japanese: { value: "みぎ" },
@@ -717,6 +747,7 @@ const GenkiGrammarPage = () => {
                     </Col>
                     <Col>
                         <GenkiExampleTable
+                            book={1}
                             values={[
                                 {
                                     japanese: { value: "うえ" },
@@ -750,6 +781,7 @@ const GenkiGrammarPage = () => {
                 <p>The particle で is used with these words.</p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "ぎんこうはとしょかんのとなりです。" },
@@ -792,6 +824,7 @@ const GenkiGrammarPage = () => {
                 </GenkiTable>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "やましたせんせいはとうざいだいがくのがくせいでした。" },
@@ -834,6 +867,7 @@ const GenkiGrammarPage = () => {
                 </GenkiTable>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "メアリさんはくじごろうちにかえりました。" },
@@ -863,6 +897,7 @@ const GenkiGrammarPage = () => {
                 </p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "わたしはきのうきょうとにいきました。" },
@@ -907,6 +942,7 @@ const GenkiGrammarPage = () => {
                 </p>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
                             japanese: { value: "メアリーさんはそこでたけしさんをいちじかんまちました。", underline: "いちじかん" },
@@ -968,13 +1004,14 @@ const GenkiGrammarPage = () => {
                 </ol>
 
                 <GenkiExampleTable
+                    book={1}
                     values={[
                         {
-                            japanese: { value: "にほんごとえいごをはなします。" },
+                            japanese: { value: "にほんごとえいごをはなします。", underline: "と" },
                             english: { value: "I speak Japanese and English." }
                         },
                         {
-                            japanese: { value: "メアリーさんはスーさんとかんこくにいきます。" },
+                            japanese: { value: "メアリーさんはスーさんとかんこくにいきます。", underline: "と" },
                             english: { value: "Mary will go to Korea with Sue." }
                         }
                     ]}
@@ -1015,7 +1052,7 @@ const GenkiGrammarPage = () => {
 
                 <GenkiTable chapter={13}>
                     <tr>
-                        <th rowSpan={2}>Verb Conjugation</th>
+                        <th rowSpan={2} className={styles.genkiTwo}>Verb Conjugation</th>
                         <th colSpan={2} scope="colgroup">Short Form</th>
                         <th colSpan={2} scope="colgroup">Long Form</th>
                     </tr>
@@ -1051,12 +1088,86 @@ const GenkiGrammarPage = () => {
         )
     }
 
+    const c13p2: GrammarInfoProps = {
+        chapter: 13,
+        section: 2,
+        page: PageNumber.of(28, 29),
+        title: "~し",
+        body: (
+            <div>
+                <p>When you want to mention not just one, but two or more reasons, you can use し in place of から.
+                    し usually follows a predicate in the short form.
+                </p>
+
+                <GenkiTable chapter={13} maxWidth={320}>
+                    <td><span className={styles.genkiTwo}>(reason<sub>1</sub>) </span> し、
+                        <span className={styles.genkiTwo}>(reason<sub>2</sub>) </span>し、
+                        <span className={styles.genkiTwo}>(situation)</span> 。
+                    </td>
+                </GenkiTable>
+
+                <p>For example:</p>
+
+                <GenkiExampleTable
+                    book={2}
+                    values={[{
+                        japanese: { value: "家族はら手紙が来たし、かれと電話で話したし、きのうはとてもいい日でした。", underline: "し", hideRomaji: true },
+                        english: { value: "Yesterday was a great day–a letter came from my family, and I talked with my boyfriend on the phone." }
+                    }]}
+                />
+
+                <p>Note that し follows the short forms. In present tense sentences, this means that だ appears with
+                    な-adjectives and nouns, but not with い-adjectives.
+                </p>
+            </div>
+        )
+    }
+
+    const c13p3: GrammarInfoProps = {
+        chapter: 13,
+        section: 3,
+        page: PageNumber.of(29, 30),
+        title: "そうです",
+        body: (
+            <div>
+                <p>When we say …そうです, we are guessing what something is like on the basis of our impressions.</p>
+
+                <GenkiExampleTable
+                    book={2}
+                    values={[{
+                        japanese: { value: "このりんごはおいしそうです。", underline: "そうです" },
+                        english: { value: "This apple looks delicious.", underline: "looks" }
+                    }]}
+                />
+
+                <p>To form …そうです sentences with い-adjectives, drop the final い (exception - いい, change to よさ before そう);
+                    with な-adjectives, you just drop な.
+                </p>
+
+                <GenkiTable chapter={13} maxWidth={400}>
+                    <tr>
+                        <td>い Adjectives</td>
+                        <td>おいしい &#8594; おいしそうです</td>
+                    </tr>
+                    <tr>
+                        <td>(exception)</td>
+                        <td>いい &#8594; よさそうです</td>
+                    </tr>
+                    <tr>
+                        <td>な Adjectives</td>
+                        <td>元気(な) &#8594; 元気そうです</td>
+                    </tr>
+                </GenkiTable>
+            </div>
+        )
+    }
+
     const allGrammar: GrammarInfoProps[] = [
         c1p1, c1p2, c1p3,
         c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7,
         c3p1, c3p2, c3p3, c3p4, c3p5, c3p6, c3p7, c3p8,
         c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8,
-        c13p1
+        c13p1, c13p2, c13p3
     ];
 
     const [grammar, setGrammar] = useState(allGrammar);
