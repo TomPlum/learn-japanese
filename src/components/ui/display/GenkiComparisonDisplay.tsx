@@ -1,5 +1,6 @@
 import styles from "../../../styles/sass/components/ui/display/GenkiComparisonDisplay.module.scss";
 import GenkiUnderlineDisplay from "./GenkiUnderlineDisplay";
+import { FirstMatch } from "../Underline";
 
 interface Comparison {
     text: string;
@@ -25,12 +26,12 @@ const GenkiComparisonDisplay = (props: GenkiComparisonDisplayProps) => {
             <span className={styles.brace}>{'{'}</span>
             <div className={styles.comparison}>
                 <div>
-                    <GenkiUnderlineDisplay underline={firstComparison.underline ?? ""} book={book}>
+                    <GenkiUnderlineDisplay underline={new FirstMatch(firstComparison.underline ?? "")} book={book}>
                         <span>{firstComparison.text}</span>
                     </GenkiUnderlineDisplay>
                 </div>
                 <div>
-                    <GenkiUnderlineDisplay underline={secondComparison.underline ?? ""} book={book}>
+                    <GenkiUnderlineDisplay underline={new FirstMatch(secondComparison.underline ?? "")} book={book}>
                         <span>{secondComparison.text}</span>
                     </GenkiUnderlineDisplay>
                 </div>

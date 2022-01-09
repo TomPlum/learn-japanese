@@ -2,6 +2,7 @@ import { Table } from "react-bootstrap";
 import RomajiGenerator from "../../../utility/RomajiGenerator";
 import styles from "../../../styles/sass/components/ui/display/GenkiExampleTable.module.scss";
 import GenkiUnderlineDisplay from "./GenkiUnderlineDisplay";
+import { FirstMatch } from "../Underline";
 
 interface ExampleValue {
     value: string;
@@ -31,7 +32,7 @@ const GenkiExampleTable = (props: GenkiExampleTableProps) => {
                         <tr>
                             <td>
                                 <p className={styles.jp}>
-                                    <GenkiUnderlineDisplay underline={japanese.underline ?? ""} book={book}>
+                                    <GenkiUnderlineDisplay underline={new FirstMatch(japanese.underline ?? "")} book={book}>
                                         <span>{japanese.value}</span>
                                     </GenkiUnderlineDisplay>
                                 </p>
@@ -39,7 +40,7 @@ const GenkiExampleTable = (props: GenkiExampleTableProps) => {
                             </td>
 
                             <td className={styles.en}>
-                                <GenkiUnderlineDisplay underline={english.underline ?? ""} book={book}>
+                                <GenkiUnderlineDisplay underline={new FirstMatch(english.underline ?? "")} book={book}>
                                     <span>{english.value}</span>
                                 </GenkiUnderlineDisplay>
                             </td>
