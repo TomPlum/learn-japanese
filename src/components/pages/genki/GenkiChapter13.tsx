@@ -5,6 +5,8 @@ import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.modul
 import React from "react";
 import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
 import { FirstMatch, Occurrences } from "../../ui/Underline";
+import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
+import { Col, Container, Row } from "react-bootstrap";
 
 const GenkiChapter13 = () => {
     const c13p1: GrammarInfoProps = {
@@ -86,12 +88,11 @@ const GenkiChapter13 = () => {
                     し usually follows a predicate in the short form.
                 </p>
 
-                <GenkiTable chapter={13} maxWidth={320}>
-                    <td><span className={styles.genkiTwo}>(reason<sub>1</sub>) </span> し、
-                        <span className={styles.genkiTwo}>(reason<sub>2</sub>) </span>し、
-                        <span className={styles.genkiTwo}>(situation)</span> 。
-                    </td>
-                </GenkiTable>
+                <GenkiStructureDisplay book={2} width="auto">
+                    <span className={styles.genkiTwo}>(reason<sub>1</sub>) </span> し、
+                    <span className={styles.genkiTwo}>(reason<sub>2</sub>) </span>し、
+                    <span className={styles.genkiTwo}>(situation)</span> 。
+                </GenkiStructureDisplay>
 
                 <p>For example:</p>
                 <GenkiExampleDisplay
@@ -201,22 +202,22 @@ const GenkiChapter13 = () => {
             <div>
                 <p>You can describe the frequency of events over a period of time by using the following framework:</p>
 
-                <GenkiTable chapter={13} maxWidth={350}>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <span className={styles.genkiTwo}>(period)</span>
-                                <span>{' に '}</span>
-                                <span className={styles.genkiTwo}>(frequency)</span>
-                            </td>
-                            <td>
-                                <span className={styles.genkiTwo}>(frequency)</span>
-                                <span>{' per '}</span>
-                                <span className={styles.genkiTwo}>(period)</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </GenkiTable>
+                <GenkiStructureDisplay book={2} width={400}>
+                    <Container>
+                       <Row>
+                           <Col>
+                               <span className={styles.genkiTwo}>(period)</span>
+                               <span>{' に '}</span>
+                               <span className={styles.genkiTwo}>(frequency)</span>
+                           </Col>
+                           <Col>
+                               <span className={styles.genkiTwo}>(frequency)</span>
+                               <span>{' per '}</span>
+                               <span className={styles.genkiTwo}>(period)</span>
+                           </Col>
+                       </Row>
+                    </Container>
+                </GenkiStructureDisplay>
 
                 <GenkiExampleDisplay
                     book={2}
