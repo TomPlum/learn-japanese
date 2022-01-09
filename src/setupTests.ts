@@ -26,7 +26,14 @@ window.matchMedia = window.matchMedia || function() {
 import sizeMe from "react-sizeme";
 sizeMe.noPlaceholders = true;
 
-//Custom Jest assertion for testing CSS styles
+declare global {
+    namespace jest {
+        interface Matchers<R> {
+            toHaveStyleProperty(style: string, value: any): R;
+        }
+    }
+}
+
 expect.extend({
     toHaveStyleProperty(received, style, value) {
         const hasStyle = received.toHaveProperty('style._values.' + style, value);
