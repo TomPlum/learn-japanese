@@ -133,6 +133,7 @@ const GenkiChapter3 = () => {
                 <p>Nouns used in sentences generally must be followed by particles, which indicate the relations that
                     the nouns bear to the verbs. This section contains four particles: で, に, へ, and を.
                 </p>
+                <hr className={styles.hr} />
 
                 <GenkiHighlightDisplay
                     text="で"
@@ -146,6 +147,7 @@ const GenkiChapter3 = () => {
                         english: { value: "I will watch TV at home." }
                     }]}
                 />
+                <hr className={styles.hr} />
 
                 <GenkiHighlightDisplay
                     text="に"
@@ -165,6 +167,7 @@ const GenkiChapter3 = () => {
                         }
                     ]}
                 />
+                <hr className={styles.hr} />
 
                 <GenkiHighlightDisplay
                     text="へ"
@@ -178,6 +181,7 @@ const GenkiChapter3 = () => {
                         english: { value: "I will return." }
                     }]}
                 />
+                <hr className={styles.hr} />
 
                 <GenkiHighlightDisplay
                     text="を"
