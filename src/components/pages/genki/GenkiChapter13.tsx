@@ -4,6 +4,7 @@ import GenkiTable from "../../ui/table/GenkiTable";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import React from "react";
 import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
+import { FirstMatch, Occurrences } from "../../ui/Underline";
 
 const GenkiChapter13 = () => {
     const c13p1: GrammarInfoProps = {
@@ -95,7 +96,7 @@ const GenkiChapter13 = () => {
                 <p>For example:</p>
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: "家族はら手紙が来たし、かれと電話で話したし、きのうはとてもいい日でした。", underline: "し" }}
+                    jp={{ text: "家族はら手紙が来たし、かれと電話で話したし、きのうはとてもいい日でした。", underline: new Occurrences("し", [1, 3]) }}
                     en={{ text: "Yesterday was a great day – a letter came from my family, and I talked with my boyfriend on the phone." }}
                 />
 
@@ -118,8 +119,8 @@ const GenkiChapter13 = () => {
 
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: "このりんごはおいしそうです。", underline: "そうです" }}
-                    en={{ text: "This apple looks delicious.", underline: "looks" }}
+                    jp={{ text: "このりんごはおいしそうです。", underline: new FirstMatch("そうです") }}
+                    en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
                 />
 
                 <p>To form …そうです sentences with い-adjectives, drop the final い (exception - いい, change to よさ before そう);
