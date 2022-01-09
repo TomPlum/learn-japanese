@@ -36,7 +36,11 @@ const GenkiExampleTable = (props: GenkiExampleTableProps) => {
                                         <span>{japanese.value}</span>
                                     </GenkiUnderlineDisplay>
                                 </p>
-                                {!japanese.hideRomaji && <span>{romajiGenerator.generate(japanese.value)}</span>}
+                                {!japanese.hideRomaji && (
+                                    <span className={styles.romaji}>
+                                        {romajiGenerator.generate(japanese.value)}
+                                    </span>
+                                )}
                             </td>
 
                             <td className={styles.en}>

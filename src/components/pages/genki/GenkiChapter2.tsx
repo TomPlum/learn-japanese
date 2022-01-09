@@ -33,8 +33,6 @@ const GenkiChapter2 = () => {
                     followed by the particle wa. Instead, they must be followed by the particle ga.
                 </p>
 
-
-
                 <GenkiExampleTable
                     book={1}
                     className={styles.exampleTable}
