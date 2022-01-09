@@ -1,3 +1,4 @@
+import GenkiUnderlineDisplay from "./GenkiUnderlineDisplay";
 import styles from "../../../styles/sass/components/ui/display/GenkiExampleDisplay.module.scss";
 
 interface Value {
@@ -14,27 +15,19 @@ export interface GenkiExampleDisplayProps {
 const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
     const { jp, en, book } = props;
 
-    const underlineValue = (example: Value) => {
-        const underlineText = example.underline;
-        if (underlineText) {
-            const value = example.text;
-            const underlineStartIndex = value.indexOf(underlineText);
-            const start = value.substring(0, underlineStartIndex);
-            const underlineEndIndex = underlineStartIndex + underlineText.length;
-            const underlined = value.substring(underlineStartIndex, underlineEndIndex);
-            const remaining = value.substring(underlineEndIndex);
-
-            const underlineClass = book == 1 ? styles.genkiOneUnderline : styles.genkiTwoUnderline;
-            return <span>{start}<span className={underlineClass}>{underlined}</span>{remaining}</span>
-        }
-
-        return <span>{example.text}</span>
-    }
-
     return (
         <div className={styles.wrapper}>
-            <p className={styles.jp}>{underlineValue(jp)}</p>
-            <p className={styles.en}>{underlineValue(en)}</p>
+            <p className={styles.jp}>
+                <GenkiUnderlineDisplay underline={jp.underline ?? ""} book={book}>
+                    <span>{jp.text}</span>
+                </GenkiUnderlineDisplay>
+            </p>
+
+            <p className={styles.en}>
+                <GenkiUnderlineDisplay underline={en.underline ?? ""} book={book}>
+                    <span>{en.text}</span>
+                </GenkiUnderlineDisplay>
+            </p>
         </div>
     );
 }
