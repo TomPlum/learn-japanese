@@ -1,9 +1,9 @@
-import { Col, Container, Form, InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import GrammarInfo, { GrammarInfoProps } from "../learn/GrammarInfo";
 import styles from "../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faSearch } from "@fortawesome/free-solid-svg-icons";
 import ComponentTree from "../../utility/ComponentTree";
 import ValueSelector from "../ui/select/ValueSelector";
 import Arrays from "../../utility/Arrays";
@@ -70,6 +70,13 @@ const GenkiGrammarPage = () => {
         setSearch(search);
     }
 
+    const handleScrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
     return (
         <Container className={styles.wrapper}>
             <Row>
@@ -105,6 +112,15 @@ const GenkiGrammarPage = () => {
             <Row noGutters>
                 <Col>
                     {grammar.map(props => <GrammarInfo {...props} />)}
+                </Col>
+            </Row>
+
+            <Row>
+                <Col>
+                    <Button variant="dark" className={styles.backToTop} onClick={handleScrollToTop}>
+                        <FontAwesomeIcon icon={faArrowUp} fixedWidth />
+                        <span>Back to Top</span>
+                    </Button>
                 </Col>
             </Row>
         </Container>
