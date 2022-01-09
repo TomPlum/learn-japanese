@@ -1,4 +1,5 @@
 import styles from "../../../styles/sass/components/ui/display/GenkiComparisonDisplay.module.scss";
+import GenkiUnderlineDisplay from "./GenkiUnderlineDisplay";
 
 interface Comparison {
     text: string;
@@ -18,33 +19,20 @@ const GenkiComparisonDisplay = (props: GenkiComparisonDisplayProps) => {
 
     const { pre, firstComparison, secondComparison, post, meaning, book } = props;
 
-    const underlineClass = book == 1 ? styles.genkiOneUnderline : styles.genkiTwoUnderline;
-
-    const underlineValue = (example: Comparison) => {
-        const underlineText = example.underline;
-        if (underlineText) {
-            const value = example.text;
-            const underlineStartIndex = value.indexOf(underlineText);
-            const start = value.substring(0, underlineStartIndex);
-            const underlineEndIndex = underlineStartIndex + underlineText.length;
-            const underlined = value.substring(underlineStartIndex, underlineEndIndex);
-            const remaining = value.substring(underlineEndIndex)
-            return <span>{start}<span className={underlineClass}>{underlined}</span>{remaining}</span>
-        }
-
-        return <span>{example.text}</span>
-    }
-
     return (
         <div className={styles.wrapper}>
             <span className={styles.pre}>{pre}</span>
             <span className={styles.brace}>{'{'}</span>
             <div className={styles.comparison}>
                 <div>
-                    {underlineValue(firstComparison)}
+                    <GenkiUnderlineDisplay underline={firstComparison.underline ?? ""} book={book}>
+                        <span>{firstComparison.text}</span>
+                    </GenkiUnderlineDisplay>
                 </div>
                 <div>
-                    {underlineValue(secondComparison)}
+                    <GenkiUnderlineDisplay underline={secondComparison.underline ?? ""} book={book}>
+                        <span>{secondComparison.text}</span>
+                    </GenkiUnderlineDisplay>
                 </div>
             </div>
             <span className={styles.brace}>{'}'}</span>
