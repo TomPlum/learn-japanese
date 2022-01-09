@@ -26,7 +26,13 @@ const GrammarInfo = (props: GrammarInfoProps) => {
     return (
         <Accordion className={styles.wrapper}>
             <Container>
-                <Row className={styles.header} style={headerStyle}>
+                <Accordion.Toggle
+                    as={Row}
+                    eventKey={title}
+                    style={headerStyle}
+                    className={styles.header}
+                    onClick={() => setExpanded(!expanded)}
+                >
                     <Col className={styles.chapter}>
                         <div className={iconClassName}>
                             {chapter}.{section}
@@ -38,16 +44,12 @@ const GrammarInfo = (props: GrammarInfoProps) => {
                     </Col>
 
                     <Col>
-                        <Accordion.Toggle
-                            fixedWidth
-                            eventKey={title}
-                            as={FontAwesomeIcon}
-                            className={styles.expander}
-                            onClick={() => setExpanded(!expanded)}
+                        <FontAwesomeIcon
+                            fixedWidth className={styles.expander}
                             icon={expanded ? faChevronUp : faChevronDown}
                         />
                     </Col>
-                </Row>
+                </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey={title}>
                     <Container className={styles.body}>
