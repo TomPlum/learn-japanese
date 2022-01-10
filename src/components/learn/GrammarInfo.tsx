@@ -25,7 +25,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
 
     return (
         <Accordion className={styles.wrapper}>
-            <Container>
+            <Container className={styles.container}>
                 <Accordion.Toggle
                     as={Row}
                     eventKey={title}
@@ -62,9 +62,9 @@ const GrammarInfo = (props: GrammarInfoProps) => {
                         </Row>
 
                         <Row className={styles.footer} noGutters>
-                            <Col>
+                            <Col className={styles.page}>
                                 <FontAwesomeIcon icon={faHashtag} fixedWidth />
-                                <em className={styles.page}>
+                                <em>
                                     {page?.toString()} from Genki {(chapter <= 12 ? "I" : "II")} (3rd Edition) - Chapter {chapter}, Section {section}.
                                 </em>
                             </Col>

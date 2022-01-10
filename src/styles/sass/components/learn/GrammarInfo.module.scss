@@ -10,6 +10,29 @@
   padding-right: 0;
 }
 
+@mixin page {
+  margin-left: 3px;
+  color: $light-2;
+}
+
+@mixin header {
+  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  background-color: $dark-1;
+  border-radius: 10px 10px 0 0;
+}
+
+@mixin body {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  width: 100%;
+  max-width: 1200px;
+  background-color: $dark-2;
+  border-radius: 0 0 10px 10px;
+}
+
 @include phone {
   .expanderWrapper {
     @include expanderWrapper;
@@ -19,6 +42,26 @@
   .title {
     font-size: 1em;
     padding-left: 7px;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .page {
+    @include page;
+    font-size: 0.75em;
+  }
+
+  .header {
+    @include header;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .body {
+    @include body;
+    padding: 8px 8px 10px 8px;
   }
 }
 
@@ -31,6 +74,24 @@
     font-size: 1.3em;
     padding-left: 10px;
   }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .page {
+    @include page;
+    font-size: 1em;
+  }
+
+  .header {
+    @include header;
+  }
+
+  .body {
+    @include body;
+    padding: 20px 20px 10px 20px;
+  }
 }
 
 @include desktop {
@@ -42,6 +103,28 @@
     font-size: 1.3em;
     padding-left: 10px;
   }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .page {
+    @include page;
+    font-size: 1em;
+  }
+
+  .header {
+    @include header;
+  }
+
+  .body {
+    @include body;
+    padding: 20px 20px 10px 20px;
+  }
+}
+
+.header:hover {
+  cursor: pointer;
 }
 
 .expander {
@@ -68,29 +151,6 @@
   margin-left: 2px;
 }
 
-.header {
-  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  height: 52px;
-  background-color: $dark-1;
-  border-radius: 10px 10px 0 0;
-}
-
-.header:hover {
-  cursor: pointer;
-}
-
-.body {
-  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
-  width: 100%;
-  max-width: 1200px;
-  background-color: $dark-2;
-  padding: 20px 20px 10px 20px;
-  border-radius: 0 0 10px 10px;
-}
-
 .genki1 {
   background-color: $genki-1-light;
 }
@@ -103,11 +163,6 @@
   border-top: 1px solid $dark-1;
   margin-top: 10px;
   padding-top: 10px;
-}
-
-.page {
-  margin-left: 3px;
-  color: $light-2;
 }
 
 .icon {

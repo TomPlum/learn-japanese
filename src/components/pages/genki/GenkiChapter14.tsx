@@ -127,7 +127,7 @@ const GenkiChapter14 = () => {
 
                 <Container style={{ padding: 0 }}>
                     <Row noGutters>
-                        <Col>
+                        <Col md={4} xs={12}>
                             <GenkiRelativePsychologyCircle
                                 verb="あげる"
                                 relationship="moving away"
@@ -135,7 +135,7 @@ const GenkiChapter14 = () => {
                             />
                         </Col>
 
-                        <Col>
+                        <Col md={4} xs={12}>
                             <GenkiRelativePsychologyCircle
                                 verb="くれる"
                                 relationship="moving closer"
@@ -143,7 +143,7 @@ const GenkiChapter14 = () => {
                             />
                         </Col>
 
-                        <Col>
+                        <Col md={4} xs={12}>
                             <GenkiRelativePsychologyCircle
                                 verb="あげる"
                                 relationship="staying away"
@@ -157,7 +157,7 @@ const GenkiChapter14 = () => {
                     particle は or が. The recipient is accompanied by the particle に.
                 </p>
 
-                <GenkiStructureDisplay book={2} width={600} noPadding>
+                <GenkiStructureDisplay book={2} width={570} noPadding>
                     <GenkiComparisonDisplay
                         book={2}
                         pre={

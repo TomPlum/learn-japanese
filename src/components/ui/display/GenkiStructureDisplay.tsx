@@ -13,7 +13,7 @@ const GenkiStructureDisplay = (props: PropsWithChildren<GenkiStructureDisplayPro
     const { book, width, children, className, noPadding } = props;
 
     const wrapperClass = [book == 1 ? styles.genkiOne : styles.genkiTwo, styles.wrapper, className].join(" ");
-    const style: React.CSSProperties = width == "auto" ? { display: "inline-block" } : { width: `${width}px`};
+    const style: React.CSSProperties = width == "auto" ? { display: "inline-block" } : { maxWidth: `${width}px`};
 
     if (noPadding) {
         style.padding = 0;
