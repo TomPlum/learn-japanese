@@ -1,0 +1,34 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  border-radius: 15px;
+  border-width: 2px;
+  height: 152px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.verb {
+  font-size: 1.2em;
+}
+
+.relationship {
+  color: $light-3;
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.col {
+  text-align: center;
+}
+
+.situation {
+  margin-bottom: 5px;
+  text-transform: lowercase;
+}

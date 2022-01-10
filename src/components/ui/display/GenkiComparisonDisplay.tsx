@@ -1,6 +1,7 @@
 import styles from "../../../styles/sass/components/ui/display/GenkiComparisonDisplay.module.scss";
 import GenkiUnderlineDisplay from "./GenkiUnderlineDisplay";
 import { FirstMatch } from "../Underline";
+import React from "react";
 
 interface Comparison {
     text: string;
@@ -8,11 +9,11 @@ interface Comparison {
 }
 
 export interface GenkiComparisonDisplayProps {
-    pre?: string;
+    pre?: string | React.ReactElement;
     firstComparison: Comparison;
     secondComparison: Comparison;
-    post?: string;
-    meaning: string;
+    post?: string | React.ReactElement;
+    meaning: string | React.ReactElement;
     book: number;
 }
 

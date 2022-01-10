@@ -4,14 +4,20 @@ import React, { PropsWithChildren } from "react";
 export interface GenkiStructureDisplayProps {
     book: number;
     width?: number | "auto";
+    className?: string;
+    noPadding?: boolean;
 }
 
 const GenkiStructureDisplay = (props: PropsWithChildren<GenkiStructureDisplayProps>) => {
 
-    const { book, width, children } = props;
+    const { book, width, children, className, noPadding } = props;
 
-    const wrapperClass = [book == 1 ? styles.genkiOne : styles.genkiTwo, styles.wrapper].join(" ");
-    const style = width == "auto" ? { display: "inline-block" } : { width: `${width}px`};
+    const wrapperClass = [book == 1 ? styles.genkiOne : styles.genkiTwo, styles.wrapper, className].join(" ");
+    const style: React.CSSProperties = width == "auto" ? { display: "inline-block" } : { width: `${width}px`};
+
+    if (noPadding) {
+        style.padding = 0;
+    }
 
     return (
         <div className={wrapperClass} style={style}>
