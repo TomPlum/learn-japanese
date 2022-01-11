@@ -86,7 +86,15 @@ export class Occurrences implements UnderlineStrategy {
         }
         return indices;
     }
+}
 
+/**
+ * Underlines the entire text with the given class name.
+ */
+export class Whole implements UnderlineStrategy {
+    underline(text: string, underlineClass?: string) {
+        return <span className={underlineClass}>{text}</span>;
+    }
 }
 
 export interface UnderlineProps {
