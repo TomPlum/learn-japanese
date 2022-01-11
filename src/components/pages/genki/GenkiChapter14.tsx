@@ -8,6 +8,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import GenkiRelativePsychologyCircle from "../../ui/display/GenkiRelativePsychologyCircle";
 import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
+import GenkiExampleTable from "../../ui/display/GenkiExampleTable";
 
 const GenkiChapter14 = () => {
     const c14p1: GrammarInfoProps = {
@@ -198,7 +199,85 @@ const GenkiChapter14 = () => {
         )
     }
 
-    return { c14p1, c14p2, c14p3 };
+    const c14p4: GrammarInfoProps = {
+        chapter: 14,
+        section: 4,
+        page: PageNumber.from(54),
+        title: "たらどうですか",
+        body: (
+            <div>
+                <p>
+                    たらどうですか after a verb conveys advice or recommendation.
+                    The initial た stands for the same ending as in the past tense short form of a verb in the affirmative.
+                    In casual speech, たらどうですか may be shortened to たらどう.
+                </p>
+
+                <GenkiStructureDisplay book={2} width={450}>
+                    <span>verb (short, past)</span>
+                    <span>{" + らどうですか "}</span>
+                    <span style={{ float: "right" }}>why dont you...</span>
+                </GenkiStructureDisplay>
+
+                <p>For example:</p>
+                <GenkiExampleTable
+                    book={2}
+                    values={[
+                        {
+                            japanese: { value: "もっとべんきょうしたらどうですか。" },
+                            english: { value: "Why don’t you study harder?" }
+                        },
+                        {
+                            japanese: { value: "くすりをのんだらどうですか。" },
+                            english: { value: "How about taking some medicine?" }
+                        }
+                    ]}
+                />
+
+                <p>This pattern should not be used for extending visitations. Rather, use …ませんか</p>
+            </div>
+        )
+    }
+
+    const c14p5: GrammarInfoProps = {
+        chapter: 14,
+        section: 5,
+        page: PageNumber.of(54, 55),
+        title: "Number + も / Number + しか + Negative",
+        body: (
+            <div>
+                <p>You can add も to the number word, when you want to say “as many as”.</p>
+
+                <GenkiStructureDisplay book={2} width={350}>
+                    <p>
+                        <span>number + も</span>
+                        <span style={{ float: "right" }}>(as many as)</span>
+                    </p>
+                    <p style={{ margin: 0 }}>
+                        <span>number + しか ない</span>
+                        <span style={{ float: "right" }}>(as few as)</span>
+                    </p>
+                </GenkiStructureDisplay>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    jp={{ text: "きのうのパーテイーには学生が二十人も来ました。" }}
+                    en={{ text: "As many as twenty students showed up at the party yesterday." }}
+                    book={2}
+                />
+
+                <p>You can add しか to the number word and turn the predicate into a negative when you want to say “as few as” or “only”.</p>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    jp={{ text: "私は日本語のじしょをいっさつしかもっていません。" }}
+                    en={{ text: "I have only one Japanese dictionary." }}
+                    book={2}
+                />
+            </div>
+        )
+    }
+
+    return { c14p1, c14p2, c14p3, c14p4, c14p5 };
 }
 
 export default GenkiChapter14;
