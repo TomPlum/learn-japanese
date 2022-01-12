@@ -15,7 +15,7 @@ const GenkiRelativePsychologyCircle = (props: GenkiRelativePsychologyCircleProps
         <GenkiStructureDisplay book={2} className={styles.wrapper}>
             <Container className={styles.container}>
                 <Row noGutters className={styles.row}>
-                    <Col className={styles.col}>
+                    <Col xs={5} className={styles.col}>
                         <strong className={styles.verb}>{verb}</strong>
                         <p className={styles.relationship}>{relationship}</p>
                     </Col>

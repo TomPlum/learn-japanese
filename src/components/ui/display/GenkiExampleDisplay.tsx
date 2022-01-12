@@ -10,11 +10,12 @@ interface Value {
 export interface GenkiExampleDisplayProps {
     jp: Value;
     en: Value;
+    compare?: Value;
     book: number;
 }
 
 const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
-    const { jp, en, book } = props;
+    const { jp, en, book, compare } = props;
 
     return (
         <div className={styles.wrapper}>
@@ -29,6 +30,14 @@ const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
                     <span>{en.text}</span>
                 </GenkiUnderlineDisplay>
             </p>
+
+            {compare && (
+                <p className={styles.compare}>
+                    <GenkiUnderlineDisplay underline={compare.underline} book={book}>
+                        <span>{`cf. ${compare.text}`}</span>
+                    </GenkiUnderlineDisplay>
+                </p>
+            )}
         </div>
     );
 }

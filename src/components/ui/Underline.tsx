@@ -34,6 +34,42 @@ export class FirstMatch implements UnderlineStrategy {
     }
 }
 
+export class MultipleFirstMatch implements UnderlineStrategy {
+    private readonly _underline: string[];
+
+    constructor(underline: string[]) {
+        this._underline = underline;
+    }
+
+    underline(text: string, underlineClass?: string) {
+        const underlineIndices = this._underline.sort((a, b) => text.indexOf(a) - text.indexOf(b)).flatMap(underline => {
+            const start = text.indexOf(underline);
+            const end = start + underline.length;
+            return [start, end];
+        }).reverse();
+
+        const elements = [];
+
+        let i = 0;
+        while (i < text.length) {
+            if (underlineIndices.includes(i)) {
+                const startIndex = underlineIndices.pop() ?? 0;
+                const endIndex = underlineIndices.pop() ?? text.length - 1;
+                const value = text.substring(startIndex, endIndex);
+                elements.push(<span className={underlineClass} key={value}>{value}</span>);
+                i = endIndex;
+            } else {
+                const nextUnderline = underlineIndices[underlineIndices.length - 1];
+                const value = text.substring(i, nextUnderline);
+                elements.push(<span key={value}>{value}</span>);
+                i = nextUnderline;
+            }
+        }
+
+        return <span>{elements}</span>;
+    }
+}
+
 /**
  * Underlines only the given occurrences of the given string value.
  */

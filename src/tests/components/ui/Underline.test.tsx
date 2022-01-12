@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import Underline, { FirstMatch, Occurrences } from "../../../components/ui/Underline";
+import Underline, { FirstMatch, MultipleFirstMatch, Occurrences } from "../../../components/ui/Underline";
 import { getByTextWithElements, getByTextWithMarkup } from "../../Queries";
 
 describe("First Match Strategy", () => {
@@ -21,6 +21,32 @@ describe("First Match Strategy", () => {
         );
         const underlined = component.getByText('test');
         expect(underlined).toHaveClass('myClass');
+    });
+});
+
+describe("Multiple First Match Strategy", () => {
+    test("Should render the whole text content from the immediate child component", () => {
+        render(
+            <Underline strategy={new MultipleFirstMatch(["This", "text"])}>
+                <span>This is test text.</span>
+            </Underline>
+        );
+        const text = getByTextWithMarkup('This is test text.');
+        expect(text).toBeInTheDocument();
+    });
+
+    test("Should apply the given class to the underlined text", () => {
+        const component = render(
+            <Underline strategy={new MultipleFirstMatch(["This", "text"])} underlineClass="myClass">
+                <span>This is test text.</span>
+            </Underline>
+        );
+
+        const first = component.getByText('This');
+        const second = component.getByText('text');
+
+        expect(first).toHaveClass('myClass');
+        expect(second).toHaveClass('myClass');
     });
 });
 
