@@ -3,8 +3,7 @@ import PageNumber from "../../../domain/learn/PageNumber";
 import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
-import Underline, { FirstMatch, Whole } from "../../ui/Underline";
-import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
+import { FirstMatch } from "../../ui/Underline";
 
 const GenkiChapter15 = () => {
     const c15p1: GrammarInfoProps = {
@@ -105,7 +104,71 @@ const GenkiChapter15 = () => {
         )
     }
 
-    return { c15p1, c15p2 };
+    const c15p3: GrammarInfoProps = {
+        chapter: 15,
+        section: 3,
+        page: PageNumber.from(76),
+        title: "~ておく",
+        body: (
+            <div>
+                <p>The te-form of a verb plus the helping verb おく describes an action performed in preparation for something.</p>
+
+                <GenkiStructureDisplay book={2} width={300}>
+                    <span>~ておく</span>
+                    <span style={{ float: "right" }}>do something in preparation</span>
+                </GenkiStructureDisplay>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "あしたしけんがあるので、こんばんべんきょうしておきます。" }}
+                    en={{ text: "Since there will be an exam tomorrow, I will study for it tonight." }}
+                />
+
+                <hr className={styles.hr} />
+
+                <p>ておく is often shortened to とく in speech.</p>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "ホテルを予約をしとくね" }}
+                    en={{ text: "I will make a hotel reservation in advance." }}
+                />
+            </div>
+        )
+    }
+
+    const c15p4: GrammarInfoProps = {
+        chapter: 15,
+        section: 4,
+        page: PageNumber.of(76, 77),
+        title: "Using Sentences to Qualify Nouns",
+        body: (
+            <div>
+                <p>You can also use sentences to qualify nouns.</p>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "きのう買った本。" }}
+                    en={{ text: "The book that I bought yesterday.", underline: new FirstMatch("that I bought yesterday") }}
+                />
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "彼がくれた本。" }}
+                    en={{ text: "The book my boyfriend gave me.", underline: new FirstMatch("my boyfriend gave me") }}
+                />
+
+
+                <p>Qualifier sentences in these examples tell us what kind of book we are talking about, just like adjectives.</p>
+                <p>When the subject of the verb appears inside a qualifier sentence, it is accompanied by the particle が, and not は.</p>
+                <p>The verbs used in such qualifier sentences are in their short forms, either in the present, and either in the affirmative or negative.</p>
+            </div>
+        )
+    }
+
+    return { c15p1, c15p2, c15p3, c15p4 };
 }
 
 export default GenkiChapter15;
