@@ -141,7 +141,7 @@ export interface UnderlineProps {
 const Underline = (props: PropsWithChildren<UnderlineProps>) => {
     const { strategy, underlineClass, children } = props;
     const value: string = new ComponentTree(children).getDeepestLeafNode();
-    return !!strategy ? strategy.underline(value, underlineClass) : value;
+    return !!strategy ? strategy.underline(value, underlineClass) : value ?? null;
 }
 
 export default Underline;

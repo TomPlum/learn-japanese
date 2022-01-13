@@ -6,41 +6,65 @@ import React from "react";
 interface Comparison {
     text: string;
     underline?: string;
+    description?: string;
 }
 
 export interface GenkiComparisonDisplayProps {
     pre?: string | React.ReactElement;
     firstComparison: Comparison;
     secondComparison: Comparison;
+    thirdComparison?: Comparison;
     post?: string | React.ReactElement;
-    meaning: string | React.ReactElement;
+    meaning?: string | React.ReactElement;
+    ignoreFirstBrace?: boolean;
+    ignoreSecondBrace?: boolean;
     book: number;
 }
 
 const GenkiComparisonDisplay = (props: GenkiComparisonDisplayProps) => {
 
-    const { pre, firstComparison, secondComparison, post, meaning, book } = props;
+    const { pre, firstComparison, secondComparison, thirdComparison, post, meaning, book, ignoreFirstBrace, ignoreSecondBrace } = props;
 
     return (
         <div className={styles.wrapper}>
             <span className={styles.pre}>{pre}</span>
-            <span className={styles.brace}>{'{'}</span>
+            {!ignoreFirstBrace && <span className={styles.brace}>{'{'}</span>}
+
             <div className={styles.comparison}>
                 <div>
                     <GenkiUnderlineDisplay underline={new FirstMatch(firstComparison.underline ?? "")} book={book}>
                         <span>{firstComparison.text}</span>
                     </GenkiUnderlineDisplay>
+                    {firstComparison.description && (
+                        <span className={styles.desc}>{firstComparison.description}</span>
+                    )}
                 </div>
+
                 <div>
                     <GenkiUnderlineDisplay underline={new FirstMatch(secondComparison.underline ?? "")} book={book}>
                         <span>{secondComparison.text}</span>
                     </GenkiUnderlineDisplay>
+                    {secondComparison.description && (
+                        <span className={styles.desc}>{secondComparison.description}</span>
+                    )}
                 </div>
+
+                {thirdComparison && (
+                    <div>
+                        <GenkiUnderlineDisplay underline={new FirstMatch(thirdComparison.underline ?? "")} book={book}>
+                            <span>{thirdComparison.text}</span>
+                        </GenkiUnderlineDisplay>
+                        {thirdComparison.description && (
+                            <span className={styles.desc}>{thirdComparison.description}</span>
+                        )}
+                    </div>
+                )}
             </div>
-            <span className={styles.brace}>{'}'}</span>
+
+            {!ignoreSecondBrace && <span className={styles.brace}>{'}'}</span>}
             <span className={styles.post}>{post}</span>
 
-            <span className={styles.meaning}>{meaning}</span>
+            {meaning && <span className={styles.meaning}>{meaning}</span>}
         </div>
     );
 }

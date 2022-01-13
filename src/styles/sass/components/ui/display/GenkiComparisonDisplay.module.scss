@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  padding: 0 20px;
 }
 
 .brace {
@@ -15,10 +15,16 @@
 }
 
 .comparison {
+  max-width: 100%;
   font-family: "Ciutadella Rounded Light", sans-serif;
 }
 
 .meaning {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
-  margin-left: 50px;
+  margin-left: 30px;
+}
+
+.desc {
+  float: right;
+  margin-left: 20px;
 }
