@@ -25,7 +25,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
 
     return (
         <Accordion className={styles.wrapper}>
-            <Container className={styles.container}>
+            <Container className={styles.container} fluid>
                 <Accordion.Toggle
                     as={Row}
                     eventKey={title}

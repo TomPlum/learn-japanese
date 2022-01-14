@@ -90,7 +90,7 @@ const GenkiGrammarPage = () => {
     }
 
     return (
-        <Container className={styles.wrapper}>
+        <Container className={styles.wrapper} fluid>
             <Row>
                 <Col>
                     <InputGroup className={styles.search}>

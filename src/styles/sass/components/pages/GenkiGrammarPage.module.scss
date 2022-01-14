@@ -1,7 +1,24 @@
 @import "src/styles/sass/colours";
+@import "src/styles/sass/viewports";
 
-.wrapper {
-  padding: 0 0 50px 0;
+@include phone {
+  .wrapper {
+    padding: 0 0 20px 0;
+    margin: 0;
+  }
+}
+
+@include tablet {
+  .wrapper {
+    padding: 0 0 20px 0;
+  }
+}
+
+@include desktop {
+  .wrapper {
+    padding: 0 0 50px 0;
+    max-width: 1000px;
+  }
 }
 
 .verbConjugationTable {
