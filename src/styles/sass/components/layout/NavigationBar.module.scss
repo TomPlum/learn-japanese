@@ -16,6 +16,13 @@
   box-shadow: 1px 2px 3px $shadow-colour;
 }
 
+@mixin toggle {
+  margin-left: 20px;
+  border: none;
+  color: $light-3;
+  transition: color ease-in-out 0.2s;
+}
+
 @include phone {
   .icon {
     font-size: 1.6em;
@@ -33,12 +40,17 @@
     padding: 5px;
     height: $nav-phone-height;
   }
+
+  .toggle {
+    @include toggle;
+    font-size: 2.4em;
+  }
 }
 
 @include tablet {
   .icon {
-    font-size: 2.5em;
-    margin: 5px;
+    font-size: 2em;
+    margin-top: 6px;
   }
 
   .linkText {
@@ -50,6 +62,11 @@
     @include navbar;
     padding: 10px;
     height: $nav-tablet-height;
+  }
+
+  .toggle {
+    @include toggle;
+    font-size: 2.7em;
   }
 }
 
@@ -77,6 +94,8 @@
 
 .row {
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .innerWrapper {
@@ -109,4 +128,9 @@
 
 .button {
   padding: 0.35rem;
+}
+
+.toggle:hover {
+  cursor: pointer;
+  color: $light-1;
 }

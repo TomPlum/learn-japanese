@@ -8,6 +8,8 @@ import NotificationsButton from "../ui/buttons/NotificationsButton";
 import HelpButton from "../ui/buttons/HelpButton";
 import HomeButton from "../ui/buttons/HomeButton";
 import styles from "../../styles/sass/components/layout/NavigationBar.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 export interface NavigationBarProps {
     onLaunchLoginModal: () => void;
@@ -20,31 +22,38 @@ const NavigationBar = (props: NavigationBarProps) => {
     const user = useUserSelector(state => state.user.user);
 
     return (
-        <Navbar variant="dark" fixed="top" className={styles.navbar}>
+        <Navbar variant="dark" fixed="top" expand="md" className={styles.navbar}>
             <Container className={styles.innerWrapper} fluid>
-{/*                <Navbar.Brand>
-                    <img src={`icons/carp.ico`} width={45} height={45} alt="Logo" />
-                </Navbar.Brand>*/}
-                <Nav className={styles.nav}>
-                    <Row className={styles.row}>
-                        <Col className={styles.leftCol}>
-                            <div className={styles.leftButtonWrapper}>
-                                <HomeButton disabled={!active} />
-                                <LearnButton />
-                                <HelpButton />
-                            </div>
-                        </Col>
+                    <Nav className={styles.nav}>
+                        <Row className={styles.row}>
+                            <Navbar.Toggle
+                                fixedWidth
+                                icon={faBars}
+                                as={FontAwesomeIcon}
+                                className={styles.toggle}
+                                aria-controls="responsive-navbar-nav"
+                            />
 
-                        <Col className={styles.rightCol}>
-                            <div className={styles.buttonWrapper}>
-                                <ThemeButton className={styles.button}/>
-                                <FontSelectorButton className={styles.button} />
-                                {user && <NotificationsButton className={styles.button} />}
-                                <UserButton onClick={onLaunchLoginModal} disabled={!active} />
-                            </div>
-                        </Col>
-                    </Row>
-                </Nav>
+                            <Navbar.Collapse id="responsive-navbar-nav">
+                                <Col className={styles.leftCol}>
+                                    <div className={styles.leftButtonWrapper}>
+                                        <HomeButton disabled={!active} />
+                                        <LearnButton />
+                                        <HelpButton />
+                                    </div>
+                                </Col>
+                            </Navbar.Collapse>
+
+                            <Col className={styles.rightCol}>
+                                <div className={styles.buttonWrapper}>
+                                    <ThemeButton className={styles.button}/>
+                                    <FontSelectorButton className={styles.button} />
+                                    {user && <NotificationsButton className={styles.button} />}
+                                    <UserButton onClick={onLaunchLoginModal} disabled={!active} />
+                                </div>
+                            </Col>
+                        </Row>
+                    </Nav>
             </Container>
         </Navbar>
     );
