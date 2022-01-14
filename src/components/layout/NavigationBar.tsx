@@ -24,36 +24,36 @@ const NavigationBar = (props: NavigationBarProps) => {
     return (
         <Navbar variant="dark" fixed="top" expand="md" className={styles.navbar}>
             <Container className={styles.innerWrapper} fluid>
-                    <Nav className={styles.nav}>
-                        <Row className={styles.row}>
-                            <Navbar.Toggle
-                                fixedWidth
-                                icon={faBars}
-                                as={FontAwesomeIcon}
-                                className={styles.toggle}
-                                aria-controls="responsive-navbar-nav"
-                            />
+                <Nav className={styles.nav}>
+                    <Row className={styles.row}>
+                        <Navbar.Toggle
+                            fixedWidth
+                            icon={faBars}
+                            as={FontAwesomeIcon}
+                            className={styles.toggle}
+                            aria-controls="responsive-navbar-nav"
+                        />
 
-                            <Navbar.Collapse id="responsive-navbar-nav">
-                                <Col className={styles.leftCol}>
-                                    <div className={styles.leftButtonWrapper}>
-                                        <HomeButton disabled={!active} />
-                                        <LearnButton />
-                                        <HelpButton />
-                                    </div>
-                                </Col>
-                            </Navbar.Collapse>
-
-                            <Col className={styles.rightCol}>
-                                <div className={styles.buttonWrapper}>
-                                    <ThemeButton className={styles.button}/>
-                                    <FontSelectorButton className={styles.button} />
-                                    {user && <NotificationsButton className={styles.button} />}
-                                    <UserButton onClick={onLaunchLoginModal} disabled={!active} />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Col className={styles.leftCol}>
+                                <div className={styles.leftButtonWrapper}>
+                                    <HomeButton disabled={!active} />
+                                    <LearnButton />
+                                    <HelpButton />
                                 </div>
                             </Col>
-                        </Row>
-                    </Nav>
+                        </Navbar.Collapse>
+
+                        <Col className={styles.rightCol}>
+                            <div className={styles.buttonWrapper}>
+                                <ThemeButton className={styles.button}/>
+                                <FontSelectorButton className={styles.button} />
+                                {user && <NotificationsButton className={styles.button} />}
+                                <UserButton onClick={onLaunchLoginModal} disabled={!active} />
+                            </div>
+                        </Col>
+                    </Row>
+                </Nav>
             </Container>
         </Navbar>
     );

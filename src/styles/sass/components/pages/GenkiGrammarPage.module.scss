@@ -25,14 +25,14 @@
   max-width: 500px;
 }
 
-.search {
-  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
-  position: relative;
-  flex: 1 1 auto;
-  padding: 6px 12px;
+.searchWrapper {
+  width: 89%;
+  padding-right: 10px;
 }
 
 .search {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  position: relative;
 }
 
 .search input, .search input:focus {
@@ -55,11 +55,12 @@
 }
 
 .chapterSelector {
+  height: 40px;
+  width: 110px;
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   padding: 8px;
   border: 1px solid $light-1;
-  border-radius: 5px;
-  margin-right: 10px;
+  border-radius: 4px;
   float: right;
 }
 
@@ -68,9 +69,7 @@
 }
 
 .chapterSelectorWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  width: 11%;
 }
 
 .genkiTwo {

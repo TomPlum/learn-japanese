@@ -91,8 +91,8 @@ const GenkiGrammarPage = () => {
 
     return (
         <Container className={styles.wrapper} fluid>
-            <Row>
-                <Col>
+            <Row noGutters>
+                <div className={styles.searchWrapper}>
                     <InputGroup className={styles.search}>
                         <InputGroup.Prepend>
                             <InputGroup.Text>
@@ -108,6 +108,8 @@ const GenkiGrammarPage = () => {
                             className={styles.input}
                         />
                     </InputGroup>
+                </div>
+                <div className={styles.chapterSelectorWrapper}>
                     <ValueSelector
                         prefix="Chapter"
                         selected={chapter}
@@ -118,7 +120,7 @@ const GenkiGrammarPage = () => {
                         itemClassName={styles.chapterSelectorItem}
                         onChange={(value: number) => setChapter(value)}
                     />
-                </Col>
+                </div>
             </Row>
 
             <Row noGutters>
