@@ -12,13 +12,16 @@ export interface GenkiExampleDisplayProps {
     en: Value;
     compare?: Value;
     book: number;
+    noIndent?: boolean;
 }
 
 const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
-    const { jp, en, book, compare } = props;
+    const { jp, en, book, compare, noIndent } = props;
+
+    const style = noIndent ? { marginLeft: 0 } : {};
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} style={style}>
             <p className={styles.jp}>
                 <GenkiUnderlineDisplay underline={jp.underline} book={book}>
                     <span>{jp.text}</span>
