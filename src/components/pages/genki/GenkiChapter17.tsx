@@ -1,7 +1,6 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo";
 import PageNumber from "../../../domain/learn/PageNumber";
 import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
-import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
 import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import GenkiTable from "../../ui/table/GenkiTable";
@@ -258,7 +257,137 @@ const GenkiChapter17 = () => {
         )
     }
 
-    return { c17p1, c17p2, c17p3 };
+    const c17p4: GrammarInfoProps = {
+        chapter: 17,
+        section: 4,
+        page: PageNumber.from(121),
+        title: "～なくてもいいです",
+        body: (
+            <div>
+                <p>To describe what you do not need to do, take a negative sentence in the short form, drop the final
+                    い of ない, and add くともいいです. なくてis the negative <em>te</em>-form.
+                </p>
+
+                <GenkiStructureDisplay book={2} width={400}>
+                    <span>{"~ない "}</span>
+                    <span className={styles.arrow}>&#8594;</span>
+                    <span>{" ～なくてもいいです "}</span>
+                    <span style={{ float: "right" }}>does not need to...</span>
+                </GenkiStructureDisplay>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={2}
+                    noIndent
+                    jp={{ text: "くつをぬがくてもいいです。" }}
+                    en={{ text: "You do not need to take off you shoes." }}
+                />
+                <GenkiExampleDisplay
+                    book={2}
+                    noIndent
+                    jp={{ text: "プレゼントはたかくなくてもいいです。" }}
+                    en={{ text: "The present does not need to be expensive." }}
+                />
+            </div>
+        )
+    }
+
+    const c17p5: GrammarInfoProps = {
+        chapter: 17,
+        section: 5,
+        page: PageNumber.from(122),
+        title: "～みたいです",
+        body: (
+            <div>
+                <p>
+                    みたいです follows a noun and expresses the idea that something or somebody resembles the thing or
+                    the person described by the noun. The resemblance noted is usually in terms of external
+                    characteristics, but not necessarily so.
+                </p>
+
+                <GenkiStructureDisplay book={2} width={300}>
+                    <span>{"noun/verb + "}</span>
+                    <span>{" みたいです "}</span>
+                    <span style={{ float: "right" }}>it looks like...</span>
+                </GenkiStructureDisplay>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={2}
+                    noIndent
+                    jp={{ text: "あめがふったみたいです。" }}
+                    en={{ text: "I looks like it has rained." }}
+                />
+                <GenkiExampleDisplay
+                    book={2}
+                    noIndent
+                    jp={{ text: "あのひとはおなかがすいているみたいです。" }}
+                    en={{ text: "It looks like that person is hungry." }}
+                />
+            </div>
+        )
+    }
+
+    const c17p6: GrammarInfoProps = {
+        chapter: 17,
+        section: 6,
+        page: PageNumber.of(122, 123),
+        title: "～前に / ～てから",
+        body: (
+            <div>
+                <p>You can use the present tense short form and 前に to describe the event <em>before</em> which something happens.</p>
+
+                <GenkiStructureDisplay book={2} width={400}>
+                    <span>{"verb A (short present) + 前に "}</span>
+                    <span className={styles.arrow}>{" verb B "}</span>
+                    <em style={{ float: "right" }}>B before A</em>
+                </GenkiStructureDisplay>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={2}
+                    noIndent
+                    jp={{ text: "くににかえるまえに、もいちどとうきょうにいきます。" }}
+                    en={{ text: "I will go to Tokyo one more time before I go back." }}
+                />
+                <GenkiExampleDisplay
+                    book={2}
+                    noIndent
+                    jp={{ text: "にほんにくるまえに、いちがっきにほんごをべんきょうしました。" }}
+                    en={{ text: "I studied Japanese for one semester before I came to Japan." }}
+                />
+
+                <hr className={styles.hr} />
+
+                <p>
+                    To describe an event after which another thing happens, you can use the <em>te</em>-form of a
+                    verb + から.
+                </p>
+
+                <GenkiStructureDisplay book={2} width={400}>
+                    <span>{"verb A + てから "}</span>
+                    <span className={styles.arrow}>{" verb B "}</span>
+                    <em style={{ float: "right" }}>A, and then B / B after A</em>
+                </GenkiStructureDisplay>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={2}
+                    noIndent
+                    jp={{ text: "べんきょうしてから、ともだちにてがみをかきました。" }}
+                    en={{ text: "I studied and then wrote letters to my friends." }}
+                />
+                <GenkiExampleDisplay
+                    book={2}
+                    noIndent
+                    jp={{ text: "けんさんがきてから、たべましょう。" }}
+                    en={{ text: "Why don’t we start eating after Ken has arrived." }}
+                />
+            </div>
+        )
+    }
+
+    return { c17p1, c17p2, c17p3, c17p4, c17p5, c17p6 };
 }
 
 export default GenkiChapter17;
