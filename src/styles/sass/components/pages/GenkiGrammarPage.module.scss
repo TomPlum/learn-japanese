@@ -62,6 +62,7 @@
   border: 1px solid $light-1;
   border-radius: 4px;
   float: right;
+  text-align: center;
 }
 
 .chapterSelectorItem {
@@ -70,6 +71,10 @@
 
 .chapterSelectorWrapper {
   width: 11%;
+}
+
+.genkiOne {
+  color: $genki-1-light !important;
 }
 
 .genkiTwo {
@@ -100,4 +105,8 @@
 
 .rowSection {
   border-bottom: 1px solid $dark-1;
+}
+
+.indent {
+  padding-left: 10px;
 }
