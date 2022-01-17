@@ -2,9 +2,12 @@
 
 .wrapper {
   border-radius: 4px;
-  padding: 5px 8px;
+  padding: 3px 8px 3px 8px;
   font-style: italic;
   margin: 0 6px;
+  vertical-align: center;
+  line-height: 24px;
+  height: 24px;
 }
 
 .genkiOne {
@@ -20,5 +23,13 @@
 }
 
 .value {
+  line-height: 24px;
+}
 
+.wrong {
+  color: $bootstrap-red;
+}
+
+.incorrect {
+  border: 1px solid $bootstrap-red;
 }

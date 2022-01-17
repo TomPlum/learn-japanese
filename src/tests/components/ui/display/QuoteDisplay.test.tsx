@@ -17,3 +17,14 @@ test('It should render the wrapper with genkiTwo class if the chapter is greater
     const { container } = render(<QuoteDisplay chapter={15}>Tom is awesome.</QuoteDisplay>);
     expect(container.firstChild).toHaveClass('genkiTwo');
 });
+
+test('It should render the wrapper with an X icon if the quote is incorrect', () => {
+    const component = render(<QuoteDisplay chapter={15} incorrect>Tom is un-cool.</QuoteDisplay>);
+    const xIcon = component.getByTitle('Incorrect');
+    expect(xIcon).toBeInTheDocument();
+});
+
+test('It should render the wrapper with the incorrect class if the property is passed as true', () => {
+    const { container } = render(<QuoteDisplay chapter={15} incorrect>Tom is un-cool.</QuoteDisplay>);
+    expect(container.firstChild).toHaveClass('incorrect');
+});
