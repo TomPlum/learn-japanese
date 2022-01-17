@@ -11,7 +11,7 @@ const GenkiChapter4 = () => {
         chapter: 4,
         section: 1,
         page: PageNumber.of(107, 108),
-        title: "Xがあります / います",
+        title: "X があります / います",
         body: (
             <div>
                 <p>Xがあります means “there is/there are X (non-living things).”</p>

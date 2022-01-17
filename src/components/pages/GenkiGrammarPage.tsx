@@ -25,7 +25,7 @@ const GenkiGrammarPage = () => {
     const { c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7 } = GenkiChapter2();
     const { c3p1, c3p2, c3p3, c3p4, c3p5, c3p6, c3p7, c3p8 } = GenkiChapter3();
     const { c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8 } = GenkiChapter4();
-    const { c5p1, c5p2 } = GenkiChapter5();
+    const { c5p1, c5p2, c5p3 } = GenkiChapter5();
     const { c13p1, c13p2, c13p3, c13p4, c13p5, c13p6 } = GenkiChapter13();
     const { c14p1, c14p2, c14p3, c14p4, c14p5 } = GenkiChapter14();
     const { c15p1, c15p2, c15p3, c15p4 } = GenkiChapter15();
@@ -37,7 +37,7 @@ const GenkiGrammarPage = () => {
         c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7,
         c3p1, c3p2, c3p3, c3p4, c3p5, c3p6, c3p7, c3p8,
         c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8,
-        c5p1, c5p2,
+        c5p1, c5p2, c5p3,
         c13p1, c13p2, c13p3, c13p4, c13p5, c13p6,
         c14p1, c14p2, c14p3, c14p4, c14p5,
         c15p1, c15p2, c15p3, c15p4,

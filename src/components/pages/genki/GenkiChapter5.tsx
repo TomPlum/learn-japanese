@@ -9,6 +9,8 @@ import { FirstMatch } from "../../ui/Underline";
 import QuoteDisplay from "../../ui/display/QuoteDisplay";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
+import { Col, Container, Row } from "react-bootstrap";
 
 const GenkiChapter5 = () => {
     const c5p1: GrammarInfoProps = {
@@ -165,6 +167,7 @@ const GenkiChapter5 = () => {
             </div>
         )
     }
+
     const c5p2: GrammarInfoProps = {
         chapter: 5,
         section: 2,
@@ -326,7 +329,62 @@ const GenkiChapter5 = () => {
         )
     }
 
-    return { c5p1, c5p2 };
+    const c5p3: GrammarInfoProps = {
+        chapter: 5,
+        section: 3,
+        page: PageNumber.from(134),
+        title: "Adjectives (Noun Modification)",
+        body: (
+            <div>
+                <p>
+                    You can use い-adjectives and な-adjectives to modify nouns. Place the dictionary form of an
+                    い-adjective before the noun you want to modify. With な-adjectives, you see な, which was missing
+                    before です, return.
+                </p>
+
+                <GenkiStructureDisplay book={1}>
+                    <Container>
+                        <Row>
+                            <Col>い-adjectives:</Col>
+                            <Col>おもしろい映画</Col>
+                            <Col>an interesting movie</Col>
+                        </Row>
+                        <Row>
+                            <Col>な-adjectives:</Col>
+                            <Col>きれいな写真</Col>
+                            <Col>a beautiful picture</Col>
+                        </Row>
+                    </Container>
+                </GenkiStructureDisplay>
+
+                <p>For example:</p>
+
+                <GenkiExampleTable
+                    book={1}
+                    values={[
+                        {
+                            japanese: { value: "きのう, おもしろい映画を見ました。", hideRomaji: true },
+                            english: { value: "I saw an interesting move yesterday." }
+                        },
+                        {
+                            japanese: { value: "山下先生はこわい先生です。", hideRomaji: true },
+                            english: { value: "Professor Yamashita is a scary teacher." }
+                        },
+                        {
+                            japanese: { value: "京都できれいな写真を撮りました。", hideRomaji: true },
+                            english: { value: "I took a beautiful picture in Kyoto." }
+                        },
+                        {
+                            japanese: { value: "ここはとてもにぎやかな町です。", hideRomaji: true },
+                            english: { value: "This is a very vibrant city." }
+                        }
+                    ]}
+                />
+            </div>
+        )
+    }
+
+    return { c5p1, c5p2, c5p3 };
 }
 
 export default GenkiChapter5;
