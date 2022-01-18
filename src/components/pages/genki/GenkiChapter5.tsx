@@ -7,10 +7,10 @@ import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.modul
 import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
 import { FirstMatch } from "../../ui/Underline";
 import QuoteDisplay from "../../ui/display/QuoteDisplay";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
 import { Col, Container, Row } from "react-bootstrap";
+import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
+import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
 
 const GenkiChapter5 = () => {
     const c5p1: GrammarInfoProps = {
@@ -384,7 +384,67 @@ const GenkiChapter5 = () => {
         )
     }
 
-    return { c5p1, c5p2, c5p3 };
+    const c5p4: GrammarInfoProps = {
+        chapter: 5,
+        section: 4,
+        page: PageNumber.from(135),
+        title: "好き(な）/ きらい(な）",
+        body: (
+            <div>
+                <p>The pattern for sentences with すき（な）and きらい（な）is as follows:</p>
+                <GenkiStructureDisplay book={1} noPadding width={600}>
+                    <Container>
+                        <Row noGutters>
+                            <Col>
+                                <GenkiComparisonDisplay
+                                    book={1}
+                                    centerComparisons
+                                    pre="X は Y が"
+                                    firstComparison={{ text: "好き" }}
+                                    secondComparison={{ text: "きらい" }}
+                                    post="です。"
+                                />
+                            </Col>
+                            <Col>
+                                <GenkiComparisonDisplay
+                                    book={1}
+                                    centerComparisons
+                                    pre="X"
+                                    firstComparison={{ text: "likes" }}
+                                    secondComparison={{ text: "dislikes" }}
+                                    post="Y."
+                                />
+                            </Col>
+                        </Row>
+                    </Container>
+                </GenkiStructureDisplay>
+
+                <p>It is important to note three things:</p>
+                <ol>
+                    <li>If you like or dislike something very much, the intensifier, だい may be used.</li>
+                    <li>If you want to say you neither like nor dislike something.</li>
+                </ol>
+                <p>For example, you could say:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "すきでもきらいでもありません。" }}
+                    en={{ text: "I neither like nor dislike (it)." }}
+                />
+
+                <ol>
+                    <li>すきな and きらいな may be used as noun modifiers.</li>
+                </ol>
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "これはわたしのすきなテレビです。", underline: new FirstMatch("わたしのすきな") }}
+                    en={{ text: "This is my favorite TV program.", underline: new FirstMatch("my favorite") }}
+                />
+            </div>
+        )
+    }
+
+    return { c5p1, c5p2, c5p3, c5p4 };
 }
 
 export default GenkiChapter5;

@@ -18,19 +18,23 @@ export interface GenkiComparisonDisplayProps {
     meaning?: string | React.ReactElement;
     ignoreFirstBrace?: boolean;
     ignoreSecondBrace?: boolean;
+    centerComparisons?: boolean;
     book: number;
 }
 
 const GenkiComparisonDisplay = (props: GenkiComparisonDisplayProps) => {
 
-    const { pre, firstComparison, secondComparison, thirdComparison, post, meaning, book, ignoreFirstBrace, ignoreSecondBrace } = props;
+    const {
+        pre, firstComparison, secondComparison, thirdComparison, post, meaning, book, ignoreFirstBrace,
+        ignoreSecondBrace, centerComparisons
+    } = props;
 
     return (
         <div className={styles.wrapper}>
             <span className={styles.pre}>{pre}</span>
             {!ignoreFirstBrace && <span className={styles.brace}>{'{'}</span>}
 
-            <div className={styles.comparison}>
+            <div className={styles.comparison} style={{ textAlign: centerComparisons ? "center" : "start" }}>
                 <div>
                     <GenkiUnderlineDisplay underline={new FirstMatch(firstComparison.underline ?? "")} book={book}>
                         <span>{firstComparison.text}</span>
