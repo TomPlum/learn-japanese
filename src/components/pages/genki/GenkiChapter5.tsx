@@ -5,7 +5,7 @@ import React from "react";
 import GenkiTable from "../../ui/table/GenkiTable";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
-import { FirstMatch } from "../../ui/Underline";
+import { FirstMatch, MultipleFirstMatch } from "../../ui/Underline";
 import QuoteDisplay from "../../ui/display/QuoteDisplay";
 import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
 import { Col, Container, Row } from "react-bootstrap";
@@ -419,22 +419,44 @@ const GenkiChapter5 = () => {
                     </Container>
                 </GenkiStructureDisplay>
 
-                <p>It is important to note three things:</p>
-                <ol>
-                    <li>If you like or dislike something very much, the intensifier, だい may be used.</li>
-                    <li>If you want to say you neither like nor dislike something.</li>
-                </ol>
-                <p>For example, you could say:</p>
+                <p>For example</p>
                 <GenkiExampleDisplay
                     book={1}
-                    jp={{ text: "すきでもきらいでもありません。" }}
+                    jp={{ text: "ロバートさんは日本語のクラスが好きです。", underline: new FirstMatch("好きです") }}
+                    en={{ text: "Robert likes Japanese classes.", underline: new FirstMatch("likes") }}
+                />
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "山下先生は魚がきらいです。", underline: new FirstMatch("きらいです") }}
+                    en={{ text: "Professor Yamashita dislikes fish.", underline: new FirstMatch("dislikes") }}
+                />
+
+                <p>
+                    If you like or dislike something (or somebody) very much, you can use the intensified form of
+                    好きです and きらいです, namely 大好きです (like very much) and 大きらいです (hate), which are more often
+                    used than the degree modifier とても in combination with 好きです and きらいです.
+                </p>
+
+                <p>For example</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "たけしさんはコーヒーが大好きです。", underline: new FirstMatch("大好きです") }}
+                    en={{ text: "Takeshi likes coffee a lot.", underline: new MultipleFirstMatch(["likes", "a lot"]) }}
+                />
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "ソラさんはなっとうが大きらいです。", underline: new FirstMatch("大きらいです") }}
+                    en={{ text: "Sora hates natto (Japanese fermented soybeans).", underline: new FirstMatch("hates") }}
+                />
+
+                <p>If you wanted to be neutral and say that you neither like nor dislike something, you could say:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "好きでもきらいでもありません。" }}
                     en={{ text: "I neither like nor dislike (it)." }}
                 />
 
-                <ol>
-                    <li>すきな and きらいな may be used as noun modifiers.</li>
-                </ol>
-                <p>For example:</p>
+                <p>You can use 好きな and きらいな may be used as noun modifiers. For example, you can say things like:</p>
                 <GenkiExampleDisplay
                     book={1}
                     jp={{ text: "これはわたしのすきなテレビです。", underline: new FirstMatch("わたしのすきな") }}
