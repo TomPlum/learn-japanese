@@ -466,6 +466,18 @@ const GenkiChapter5 = () => {
         )
     }
 
+    const c5p5: GrammarInfoProps = {
+        chapter: 5,
+        section: 5,
+        page: PageNumber.from(136),
+        title: "好き(な）/ きらい(な）",
+        body: (
+            <div>
+
+            </div>
+        )
+    }
+
     return { c5p1, c5p2, c5p3, c5p4 };
 }
 
