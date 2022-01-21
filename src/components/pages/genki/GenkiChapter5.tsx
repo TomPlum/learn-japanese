@@ -470,15 +470,27 @@ const GenkiChapter5 = () => {
         chapter: 5,
         section: 5,
         page: PageNumber.from(136),
-        title: "好き(な）/ きらい(な）",
+        title: "～ましょう/ ～ましょうか",
         body: (
             <div>
+                <p>The ending of the long form of a verb can be replaced with ～ましょう or ～ましょうか to suggest a plan of action.</p>
 
+                <p>For example</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "一緒に図書館で勉強しましょう。", underline: new FirstMatch("ましょう") }}
+                    en={{ text: "Let’s study in the library together." }}
+                />
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "喫茶店でコーヒーを飲みましょうか。", underline: new FirstMatch("ましょうか") }}
+                    en={{ text: "Shall we drink coffee at a coffee shop together?" }}
+                />
             </div>
         )
     }
 
-    return { c5p1, c5p2, c5p3, c5p4 };
+    return { c5p1, c5p2, c5p3, c5p4, c5p5};
 }
 
 export default GenkiChapter5;
