@@ -470,10 +470,12 @@ const GenkiChapter5 = () => {
         chapter: 5,
         section: 5,
         page: PageNumber.from(136),
-        title: "～ましょう/ ～ましょうか",
+        title: "～ましょう / ～ましょうか",
         body: (
             <div>
-                <p>The ending of the long form of a verb can be replaced with ～ましょう or ～ましょうか to suggest a plan of action.</p>
+                <p>
+                    The ending of the long form of a verb can be replaced with ～ましょう or ～ましょうか to suggest a plan of action.
+                </p>
 
                 <p>For example</p>
                 <GenkiExampleDisplay
@@ -490,7 +492,30 @@ const GenkiChapter5 = () => {
         )
     }
 
-    return { c5p1, c5p2, c5p3, c5p4, c5p5};
+    const c5p6: GrammarInfoProps = {
+        chapter: 5,
+        section: 6,
+        page: PageNumber.from(136),
+        title: "Counting",
+        body: (
+            <div>
+                <p>
+                    Japanese used different number words for different kinds of items.
+                    For example, the words used for counting people are different from the words used for counting books.
+                    It is important to keep in mind that the number words come after the item they are counting.
+                </p>
+
+                <p>For example</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "リーさんは Tシャツを三枚買いました。", underline: new MultipleFirstMatch(["Tシャツ", "三枚"]) }}
+                    en={{ text: "Lee bought three stamps." }}
+                />
+            </div>
+        )
+    }
+
+    return { c5p1, c5p2, c5p3, c5p4, c5p5, c5p6 };
 }
 
 export default GenkiChapter5;
