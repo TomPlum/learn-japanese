@@ -30,8 +30,8 @@ const GenkiChapter6 = () => {
                             <td>{"る "}<span className={styles.arrow}>&#8594;</span>{" て"}</td>
                             <td>{"食べる "}<span className={styles.arrow}>&#8594;</span>{" 食べて"}</td>
                         </tr>
-                        <tr>
-                            <td rowSpan={10}>U-verbs with final</td>
+                        <tr className={styles.rowSection}>
+                            <td rowSpan={15}>U-verbs with final</td>
                             <td rowSpan={4}>
                                 <GenkiComparisonDisplay
                                     ignoreFirstBrace
@@ -48,10 +48,11 @@ const GenkiChapter6 = () => {
                         <tr>
                             <td>{"待つ "}<span className={styles.arrow}>&#8594;</span>{" 待って"}</td>
                         </tr>
-                        <tr>
+                        <tr className={styles.rowSection}>
                             <td>{"とる "}<span className={styles.arrow}>&#8594;</span>{" とって"}</td>
                         </tr>
                         <tr>
+                            <td>{}</td>
                             <td rowSpan={4}>{"む"}</td>
                         </tr>
                         <tr>
@@ -60,8 +61,39 @@ const GenkiChapter6 = () => {
                         <tr>
                             <td>{"遊ぶ　"}<span className={styles.arrow}>&#8594;</span>{" 遊んで"}</td>
                         </tr>
-                        <tr>
+                        <tr className={styles.rowSection}>
                             <td>{"死ぬ　"}<span className={styles.arrow}>&#8594;</span>{" 死んで"}</td>
+                        </tr>
+                        <tr>
+                            <td rowSpan={2}>{"く "}<span className={styles.arrow}>&#8594;</span>{" いて"}</td>
+                        </tr>
+                        <tr>
+                            <td>{"書く "}<span className={styles.arrow}>&#8594;</span>{" 書いて"}</td>
+                        </tr>
+                        <tr className={styles.rowSection}>
+                            <td>{"行く "}<span className={styles.arrow}>&#8594;</span>{" 行って"}</td>
+                        </tr>
+                        <tr>
+                            <td>{"ぐ "}<span className={styles.arrow}>&#8594;</span>{" いで"}</td>
+                        </tr>
+                        <tr className={styles.rowSection}>
+                            <td>{"泳ぐ "}<span className={styles.arrow}>&#8594;</span>{" 泳いで"}</td>
+                        </tr>
+                        <tr>
+                            <td>{"す "}<span className={styles.arrow}>&#8594;</span>{" して"}</td>
+                        </tr>
+                        <tr>
+                            <td>{"話す "}<span className={styles.arrow}>&#8594;</span>{" 話して"}</td>
+                        </tr>
+                        <tr>
+                            <td>Irregular Verbs</td>
+                            <td>{"する"}</td>
+                            <td>{"する "}<span className={styles.arrow}>&#8594;</span>{" して"}</td>
+                        </tr>
+                        <tr>
+                            <td>{}</td>
+                            <td>{"くる"}</td>
+                            <td>{"くる "}<span className={styles.arrow}>&#8594;</span>{" きて"}</td>
                         </tr>
                     </tbody>
                 </GenkiTable>
