@@ -4,6 +4,8 @@ import React from "react";
 import GenkiTable from "../../ui/table/GenkiTable";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
+import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
+import { FirstMatch } from "../../ui/Underline";
 
 const GenkiChapter6 = () => {
     const c6p1: GrammarInfoProps = {
@@ -28,41 +30,85 @@ const GenkiChapter6 = () => {
                         <tr className={styles.rowSection}>
                             <td>Ru-verbs</td>
                             <td>{"る "}<span className={styles.arrow}>&#8594;</span>{" て"}</td>
-                            <td>{"食べる "}<span className={styles.arrow}>&#8594;</span>{" 食べて"}</td>
+                            <td>
+                                <span>{"食べる "}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("て")}>
+                                    <span>{" 食べて"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
+
                         <tr className={styles.rowSection}>
-                            <td rowSpan={15}>U-verbs with final</td>
+                            <td rowSpan={13}>U-verbs with final</td>
                             <td rowSpan={4}>
                                 <GenkiComparisonDisplay
                                     ignoreFirstBrace
-                                    firstComparison={{ text: "うつる" }}
-                                    secondComparison={{ text: " " }}
+                                    firstComparison={{ text: "う" }}
+                                    secondComparison={{ text: "つ" }}
+                                    thirdComparison={{ text: "る" }}
                                     post="って"
                                     book={1}
                                 />
                             </td>
                         </tr>
                         <tr>
-                            <td>{"合う "}<span className={styles.arrow}>&#8594;</span>{" 合って"}</td>
+                            <td>
+                                <span>{"合う "}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("って")}>
+                                    <span>{" 合って"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                         <tr>
-                            <td>{"待つ "}<span className={styles.arrow}>&#8594;</span>{" 待って"}</td>
+                            <td>
+                                <span>{"待つ "}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("って")}>
+                                    <span>{" 待って"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                         <tr className={styles.rowSection}>
-                            <td>{"とる "}<span className={styles.arrow}>&#8594;</span>{" とって"}</td>
+                            <td>
+                                <span>{"とる "}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("って")}>
+                                    <span>{" とって"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
+
                         <tr>
-                            <td>{}</td>
                             <td rowSpan={4}>{"む"}</td>
                         </tr>
                         <tr>
-                            <td>{"読む　"}<span className={styles.arrow}>&#8594;</span>{" 読んで"}</td>
+                            <td>
+                                <span>{"読む　"}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("んで")}>
+                                    <span>{" 読んで"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                         <tr>
-                            <td>{"遊ぶ　"}<span className={styles.arrow}>&#8594;</span>{" 遊んで"}</td>
+                            <td>
+                                <span>{"遊ぶ　"}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("んで")}>
+                                    <span>{" 遊んで"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                         <tr className={styles.rowSection}>
-                            <td>{"死ぬ　"}<span className={styles.arrow}>&#8594;</span>{" 死んで"}</td>
+                            <td>
+                                <span>{"死ぬ　"}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("んで")}>
+                                    <span>{" 死んで"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                         <tr>
                             <td rowSpan={2}>{"く "}<span className={styles.arrow}>&#8594;</span>{" いて"}</td>
@@ -71,18 +117,15 @@ const GenkiChapter6 = () => {
                             <td>{"書く "}<span className={styles.arrow}>&#8594;</span>{" 書いて"}</td>
                         </tr>
                         <tr className={styles.rowSection}>
+                            <td>(Exception)</td>
                             <td>{"行く "}<span className={styles.arrow}>&#8594;</span>{" 行って"}</td>
                         </tr>
-                        <tr>
-                            <td>{"ぐ "}<span className={styles.arrow}>&#8594;</span>{" いで"}</td>
-                        </tr>
                         <tr className={styles.rowSection}>
+                            <td>{"ぐ "}<span className={styles.arrow}>&#8594;</span>{" いで"}</td>
                             <td>{"泳ぐ "}<span className={styles.arrow}>&#8594;</span>{" 泳いで"}</td>
                         </tr>
                         <tr>
                             <td>{"す "}<span className={styles.arrow}>&#8594;</span>{" して"}</td>
-                        </tr>
-                        <tr>
                             <td>{"話す "}<span className={styles.arrow}>&#8594;</span>{" 話して"}</td>
                         </tr>
                         <tr>
