@@ -1,6 +1,5 @@
 import ComponentTree from "../../utility/ComponentTree";
 import Copyable from "../../components/ui/Copyable";
-import DynamicDisplay from "../../components/ui/display/DynamicDisplay";
 import { ReactElement } from "react";
 
 describe("Component Tree", () => {
@@ -93,6 +92,18 @@ describe("Component Tree", () => {
 
             expect(updatedTree.props.children.props.className).toBe("myClass");
             expect(updatedTree.props.children.props.title).toBe("myTitle");
+        });
+    });
+
+    describe("Get String Children", () => {
+        it("Should return the text content of an immediate child", () => {
+            const tree = new ComponentTree(
+                <p>I'm some text content</p>
+            );
+
+            const stringChildren = tree.getStringChildren();
+
+            expect(stringChildren).toStrictEqual(["I'm some text content"]);
         });
     });
 });
