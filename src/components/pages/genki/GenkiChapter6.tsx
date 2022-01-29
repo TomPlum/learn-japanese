@@ -81,7 +81,16 @@ const GenkiChapter6 = () => {
                         </tr>
 
                         <tr>
-                            <td rowSpan={4}>{"む"}</td>
+                            <td rowSpan={4}>
+                                <GenkiComparisonDisplay
+                                    ignoreFirstBrace
+                                    firstComparison={{ text: "む" }}
+                                    secondComparison={{ text: "ぶ" }}
+                                    thirdComparison={{ text: "ぬ" }}
+                                    post="んで"
+                                    book={1}
+                                />
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -114,29 +123,65 @@ const GenkiChapter6 = () => {
                             <td rowSpan={2}>{"く "}<span className={styles.arrow}>&#8594;</span>{" いて"}</td>
                         </tr>
                         <tr>
-                            <td>{"書く "}<span className={styles.arrow}>&#8594;</span>{" 書いて"}</td>
+                            <td>
+                                <span>{"書く "}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("いて")}>
+                                    <span>{" 書いて"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                         <tr className={styles.rowSection}>
                             <td>(Exception)</td>
-                            <td>{"行く "}<span className={styles.arrow}>&#8594;</span>{" 行って"}</td>
+                            <td>
+                                <span>{"行く "}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("って")}>
+                                    <span>{" 行って"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                         <tr className={styles.rowSection}>
                             <td>{"ぐ "}<span className={styles.arrow}>&#8594;</span>{" いで"}</td>
-                            <td>{"泳ぐ "}<span className={styles.arrow}>&#8594;</span>{" 泳いで"}</td>
+                            <td>
+                                <span>{"泳ぐ "}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("いで")}>
+                                    <span>{" 泳いで"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                         <tr>
                             <td>{"す "}<span className={styles.arrow}>&#8594;</span>{" して"}</td>
-                            <td>{"話す "}<span className={styles.arrow}>&#8594;</span>{" 話して"}</td>
+                            <td>
+                                <span>{"話す "}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("して")}>
+                                    <span>{" 話して"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                         <tr>
                             <td>Irregular Verbs</td>
                             <td>{"する"}</td>
-                            <td>{"する "}<span className={styles.arrow}>&#8594;</span>{" して"}</td>
+                            <td>
+                                <span>{"する "}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("して")}>
+                                    <span>{" して"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                         <tr>
                             <td>{}</td>
                             <td>{"くる"}</td>
-                            <td>{"くる "}<span className={styles.arrow}>&#8594;</span>{" きて"}</td>
+                            <td>
+                                <span>{"くる "}</span>
+                                <span className={styles.arrow}>&#8594;</span>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("きて")}>
+                                    <span>{" きて"}</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
                         </tr>
                     </tbody>
                 </GenkiTable>
