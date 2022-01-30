@@ -99,6 +99,10 @@
   color: $light-2;
 }
 
+.full > * {
+  color: #FFF !important;
+}
+
 .arrow {
   margin: 0 7px;
 }
