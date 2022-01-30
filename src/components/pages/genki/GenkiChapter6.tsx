@@ -8,6 +8,8 @@ import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
 import { FirstMatch } from "../../ui/Underline";
 import QuoteDisplay from "../../ui/display/QuoteDisplay";
 import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
+import GenkiExampleTable from "../../ui/display/GenkiExampleTable";
+import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
 
 const GenkiChapter6 = () => {
     const c6p1: GrammarInfoProps = {
@@ -219,7 +221,157 @@ const GenkiChapter6 = () => {
         )
     }
 
-    return { c6p1, c6p2 };
+    const c6p3: GrammarInfoProps = {
+        chapter: 6,
+        section: 3,
+        page: PageNumber.of(151, 152),
+        title: "Describing Two Activities",
+        body: (
+            <div>
+                <p>
+                    You can use a te-form if you want to combine two or more verbs, as in describing a sequence of
+                    events or actions <QuoteDisplay chapter={6}>I did this then that</QuoteDisplay>. In other words,
+                    the te-form does the work of “and” with verbs. (Note と can only connect nouns not verbs.)
+                </p>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "図書館に行って, 本を借ります。"}}
+                    en={{ text: "I will go to the library and check out some books." }}
+                />
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "今日は、六時に起きて、勉強しました。"}}
+                    en={{ text: "Today I got up at six and studied." }}
+                />
+
+                <hr className={styles.hr} />
+
+                <p>The te-form of a verb can also be used to connect a verb more “loosely” with the rest of a sentence.</p>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "バスに乗って、会社に行きます。"}}
+                    en={{ text: "I go to work by bus." }}
+                />
+            </div>
+        )
+    }
+
+    const c6p4: GrammarInfoProps = {
+        chapter: 6,
+        section: 4,
+        page: PageNumber.from(152),
+        title: "～てもいいです",
+        body: (
+            <div>
+                <p>
+                    A verbal te-form plus もいいです means <QuoteDisplay chapter={6}>you may do...,</QuoteDisplay> which
+                    describes an activity that is permitted. To ask for permission, you can turn it into a
+                    question sentence, ～てもいいですか。
+                </p>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "A: 教科書を見てもいいですか。", underline: new FirstMatch("てもいいですか") }}
+                    en={{ text: "May I see the text book?", underline: new FirstMatch("May I") }}
+                />
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "B: はい, 見てもいいですよ。", underline: new FirstMatch("てもいいです") }}
+                    en={{ text: "Yes, you may.", underline: new FirstMatch("you may") }}
+                />
+            </div>
+        )
+    }
+
+    const c6p5: GrammarInfoProps = {
+        chapter: 6,
+        section: 5,
+        page: PageNumber.from(152),
+        title: "～てはいけません",
+        body: (
+            <div>
+                <p>
+                    To deny somebody permission to do something, you can use the te-form plus はいけません。This means
+                    <QuoteDisplay chapter={6}>you must not do...,</QuoteDisplay> a strong prohibition statement, as
+                    in rules and regulations.
+                </p>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "ここで写真を撮ってはいけません。", underline: new FirstMatch("てはいけません") }}
+                    en={{ text: "You must not take pictures here.", underline: new FirstMatch("You must not") }}
+                />
+            </div>
+        )
+    }
+
+    const c6p6: GrammarInfoProps = {
+        chapter: 6,
+        section: 6,
+        page: PageNumber.from(153),
+        title: "～から",
+        body: (
+            <div>
+                <p>
+                    A sentence that ends with から(because) explains the reason the reason or the cause of a situation,
+                    a proposal, and so forth.
+                </p>
+
+                <GenkiStructureDisplay book={1} width={255}>
+                    <span>(situation)。(explanation) から。</span>
+                </GenkiStructureDisplay>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "私は今晩勉強します。あしたテストがありますから。", underline: new FirstMatch("から") }}
+                    en={{ text: "I will study this evening. Because we will have an exam tomorrow.", underline: new FirstMatch("Because") }}
+                />
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "バスに乗りましょう。タクシーは高いですから。", underline: new FirstMatch("から") }}
+                    en={{ text: "Let’s take the bus. Because taxis are expensive.", underline: new FirstMatch("Because") }}
+                />
+            </div>
+        )
+    }
+
+    const c6p7: GrammarInfoProps = {
+        chapter: 6,
+        section: 7,
+        page: PageNumber.from(153),
+        title: "～てましょうか",
+        body: (
+            <div>
+                <p>
+                    ましょうか can mean <QuoteDisplay chapter={6}>lets...</QuoteDisplay>, but ましょうか can also be used
+                    in offering assistance like <QuoteDisplay chapter={6}>let me do...,</QuoteDisplay>.
+                </p>
+
+                <p>For example, you can offer help by saying:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "(私が) やりましょうか。", underline: new FirstMatch("ましょうか") }}
+                    en={{ text: "I’ll do it." }}
+                />
+
+                <p>Or to a person who is carrying a heavy bag:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "荷物を持ちましょうか。", underline: new FirstMatch("ましょうか") }}
+                    en={{ text: "Shall I carry your bag?" }}
+                />
+            </div>
+        )
+    }
+
+    return { c6p1, c6p2, c6p3, c6p4, c6p5, c6p6, c6p7 };
 }
 
 export default GenkiChapter6;
