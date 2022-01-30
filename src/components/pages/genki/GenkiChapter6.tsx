@@ -6,6 +6,8 @@ import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.modul
 import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
 import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
 import { FirstMatch } from "../../ui/Underline";
+import QuoteDisplay from "../../ui/display/QuoteDisplay";
+import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
 
 const GenkiChapter6 = () => {
     const c6p1: GrammarInfoProps = {
@@ -189,7 +191,35 @@ const GenkiChapter6 = () => {
         )
     }
 
-    return { c6p1 };
+    const c6p2: GrammarInfoProps = {
+        chapter: 6,
+        section: 2,
+        page: PageNumber.from(151),
+        title: "～てください",
+        body: (
+            <div>
+                <p>
+                    Use a verbal te-form together with ください to make a polite request to another person
+                    <QuoteDisplay chapter={6}>please do … for me.</QuoteDisplay>.
+                </p>
+
+                <p>For example:</p>
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "教科書のテープを聞いてください。"}}
+                    en={{ text: "Please listen to the tape that goes with the textbook." }}
+                />
+
+                <GenkiExampleDisplay
+                    book={1}
+                    jp={{ text: "すみません。ちょっと教えてください。"}}
+                    en={{ text: "Excuse me. Please teach me a little. (= Tell me, I need your advice.)" }}
+                />
+            </div>
+        )
+    }
+
+    return { c6p1, c6p2 };
 }
 
 export default GenkiChapter6;
