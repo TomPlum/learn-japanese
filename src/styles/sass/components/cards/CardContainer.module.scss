@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+  max-width: 1250px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+  max-width: 1200px;
+}
