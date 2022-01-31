@@ -1,5 +1,7 @@
 import KanjiFlashCardsCard from "./KanjiFlashCardsCard";
 import { useUserSelector } from "../../hooks";
+import PlayCard from "./PlayCard";
+import styles from "../../styles/sass/components/cards/CardContainer.module.scss";
 
 const CardContainer = () => {
 
@@ -12,7 +14,12 @@ const CardContainer = () => {
     }
 
     return (
-        <KanjiFlashCardsCard />
+        <div className={styles.container}>
+            <div className={styles.wrapper}>
+                <KanjiFlashCardsCard />
+                <PlayCard />
+            </div>
+        </div>
     );
 }
 
