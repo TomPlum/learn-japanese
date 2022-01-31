@@ -1,0 +1,49 @@
+@import "src/styles/sass/colours";
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  max-width: 600px;
+  width: 100%;
+}
+
+@mixin button {
+  width: 100%;
+  text-align: center;
+  background-color: $light-3;
+  height: 170px;
+  border-radius: 10px;
+  padding: 15px;
+  border: none;
+}
+
+.button {
+  @include button;
+  opacity: 0.6;
+  transition: all ease-in-out 0.2s;
+}
+
+.button:hover {
+  @include button;
+  opacity: 0.8;
+}
+
+.selected, .selected:focus, .selected:active, .selected:hover, .button:active, .selected:active {
+  @include button;
+  background-color: $light-1;
+  color: $dark-2;
+  box-shadow: none;
+}
+
+.icon {
+  font-size: 2.5em;
+}
+
+.text {
+  margin: 0;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
