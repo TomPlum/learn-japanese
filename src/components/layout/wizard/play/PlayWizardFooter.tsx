@@ -14,14 +14,18 @@ const PlayWizardFooter = (props: PlayWizardFooterProps) => {
 
     return (
         <div className={styles.wrapper}>
-            {(intermediate || terminal) && (
-                <Button onClick={onBack} className={styles.back} variant="primary">
-                    Back
+            <div>
+                {(intermediate || terminal) && (
+                    <Button onClick={onBack} className={styles.back} variant="primary">
+                        Back
+                    </Button>
+                )}
+            </div>
+            <div>
+                <Button onClick={onNext} className={styles.next} variant="success">
+                    {terminal ? "Play" : "Next"}
                 </Button>
-            )}
-            <Button onClick={onNext} className={styles.next} variant="success">
-                {terminal ? "Play" : "Next"}
-            </Button>
+            </div>
         </div>
     );
 }
