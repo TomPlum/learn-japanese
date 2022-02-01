@@ -1,0 +1,17 @@
+@import "src/styles/sass/colours";
+
+.grid, .list {
+  color: $light-2;
+  transition: color ease-in-out 0.2s;
+}
+
+.grid:hover, .list:hover {
+  cursor: pointer;
+  color: $light-1;
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
