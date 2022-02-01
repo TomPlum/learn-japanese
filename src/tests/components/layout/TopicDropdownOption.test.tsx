@@ -19,14 +19,3 @@ test('The option should not be active if the selected prop doesn\'t match the op
     const { container } = render(<TopicDropdownOption type={Topic.KANA} selected={Topic.NUMBERS} onClick={onClickHandler} />);
     expect(container.firstChild).not.toHaveClass('active');
 });
-
-test('Wrapping a child component should append the \'icon\' class to it', () => {
-    const component  = render(
-        <TopicDropdownOption type={Topic.KANA} selected={Topic.NUMBERS} onClick={onClickHandler}>
-            <p>Example</p>
-        </TopicDropdownOption>
-    );
-    const child = component.getByText('Example');
-    expect(child).toBeInTheDocument();
-    expect(child).toHaveClass('icon');
-});
