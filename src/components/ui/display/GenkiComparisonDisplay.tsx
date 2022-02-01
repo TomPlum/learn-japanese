@@ -19,6 +19,7 @@ export interface GenkiComparisonDisplayProps {
     ignoreFirstBrace?: boolean;
     ignoreSecondBrace?: boolean;
     centerComparisons?: boolean;
+    noPadding?: boolean;
     book: number;
 }
 
@@ -26,11 +27,11 @@ const GenkiComparisonDisplay = (props: GenkiComparisonDisplayProps) => {
 
     const {
         pre, firstComparison, secondComparison, thirdComparison, post, meaning, book, ignoreFirstBrace,
-        ignoreSecondBrace, centerComparisons
+        ignoreSecondBrace, centerComparisons, noPadding
     } = props;
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} style={{ padding: noPadding ? 0 : undefined }}>
             <span className={styles.pre}>{pre}</span>
             {!ignoreFirstBrace && <span className={styles.brace}>{'{'}</span>}
 
