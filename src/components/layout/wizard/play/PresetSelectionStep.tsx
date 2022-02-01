@@ -1,20 +1,13 @@
 import { Col, Container, Row } from "react-bootstrap";
 import TopicSelector from "./TopicSelector";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useImperativeHandle, useState } from "react";
 import Topic from "../../../../domain/Topic";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PresetSelectionStep.module.scss";
 import PlayMode from "../../../../domain/session/PlayMode";
 import GridItem from "../GridItem";
 import GridDisplay from "../GridDisplay";
 
-export interface PresetSelectionStepProps {
-    onNext: () => void;
-    onBack: () => void;
-}
-
-const PresetSelectionStep = (props: PresetSelectionStepProps) => {
-
-    const { onNext, onBack } = props;
+const PresetSelectionStep = React.forwardRef((props, ref) => {
 
     const [topic, setTopic] = useState(Topic.KANA);
     const [selectedPreset, setSelectedPreset] = useState(topic.playModes.getModes()[0]);
@@ -27,13 +20,11 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
         setSelectedPreset(mode);
     }
 
-    const getValue = () => {
-        return selectedPreset;
-    }
-
-    const isTerminalStep = () => {
-        return true;
-    }
+    useImperativeHandle(ref, () => ({
+        getValue: () => {
+            return selectedPreset;
+        }
+    }));
 
     return (
         <Container fluid>
@@ -61,6 +52,6 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
             </Row>
         </Container>
     )
-}
+});
 
 export default PresetSelectionStep;

@@ -1,7 +1,7 @@
 @import "src/styles/sass/colours";
 
 .close {
-  float: right;
+  margin-left: auto;
   color: $light-2;
   transition: color ease-in-out 0.2s;
 }
@@ -12,12 +12,14 @@
 }
 
 .header {
+  display: flex;
+  align-items: center;
   padding-bottom: 10px;
 }
 
 .stage {
   margin-left: 5px;
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 
 .content {
@@ -30,4 +32,30 @@
 
 .body {
   padding: 15px 0;
+}
+
+@mixin icon {
+  font-size: 1.8em;
+}
+
+.questionIcon {
+  @include icon;
+  color: #FFF;
+}
+
+.livesIcon {
+  @include icon;
+  color: $lives;
+}
+
+.hintsIcon {
+  @include icon;
+  margin-bottom: 2px;
+  color: $hints;
+}
+
+.timeIcon {
+  @include icon;
+  margin-bottom: 3px;
+  color: $time;
 }

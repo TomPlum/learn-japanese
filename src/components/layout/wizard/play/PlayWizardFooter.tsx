@@ -5,12 +5,13 @@ export interface PlayWizardFooterProps {
     intermediate?: boolean;
     terminal?: boolean;
     onNext: () => void;
-    onBack?: () => void;
+    onBack: () => void;
+    onPlay: () => void;
 }
 
 const PlayWizardFooter = (props: PlayWizardFooterProps) => {
 
-    const { intermediate, terminal, onNext, onBack } = props;
+    const { intermediate, terminal, onNext, onBack, onPlay } = props;
 
     return (
         <div className={styles.wrapper}>
@@ -22,7 +23,7 @@ const PlayWizardFooter = (props: PlayWizardFooterProps) => {
                 )}
             </div>
             <div>
-                <Button onClick={onNext} className={styles.next} variant="success">
+                <Button onClick={terminal ? onPlay : onNext} className={styles.next} variant="success">
                     {terminal ? "Play" : "Next"}
                 </Button>
             </div>

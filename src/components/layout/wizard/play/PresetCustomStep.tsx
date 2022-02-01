@@ -1,29 +1,20 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { useState } from "react";
-import PlayWizardFooter from "./PlayWizardFooter";
+import React, { useImperativeHandle, useState } from "react";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PresetCustomStep.module.scss";
 import { faHammer, faProjectDiagram } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Environment } from "../../../../utility/Environment";
 
-export interface PresetCustomStepProps {
-    onNext: (isCustom: boolean) => void;
-}
-
-const PresetCustomStep = (props: PresetCustomStepProps) => {
+const PresetCustomStep = React.forwardRef((props, ref) => {
 
     const [isCustom, setIsCustom] = useState(false);
 
     const presetButtonClass = isCustom ? styles.button : styles.selected;
     const customButtonClass = isCustom ? styles.selected : styles.button;
 
-    const getValue = () => {
-        return isCustom;
-    }
-
-    const isIntermediateStep = () => {
-        return true;
-    }
+    useImperativeHandle(ref, () => ({
+        getValue: () => isCustom
+    }));
 
     return (
         <div>
@@ -50,6 +41,6 @@ const PresetCustomStep = (props: PresetCustomStepProps) => {
             </Container>
         </div>
     )
-}
+});
 
 export default PresetCustomStep;
