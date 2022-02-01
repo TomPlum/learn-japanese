@@ -27,8 +27,11 @@ const GridDisplayOptions = (props: GridDisplayOptionsProps) => {
         setSize(value);
     }
 
+    const gridButtonClass = type === GridDisplayType.GRID ? styles.selected : styles.button;
+    const listButtonClass = type === GridDisplayType.LIST ? styles.selected : styles.button;
+
     return (
-        <div className={className}>
+        <div className={className} data-testid="grid-display-options">
             <Row>
                 <Col>
                     <RangeSlider
@@ -47,7 +50,7 @@ const GridDisplayOptions = (props: GridDisplayOptionsProps) => {
                         fixedWidth
                         icon={faThLarge}
                         title="Grid Layout"
-                        className={styles.grid}
+                        className={gridButtonClass}
                         onClick={() => setType(GridDisplayType.GRID)}
                     />
 
@@ -55,7 +58,7 @@ const GridDisplayOptions = (props: GridDisplayOptionsProps) => {
                         fixedWidth
                         icon={faThList}
                         title="List Layout"
-                        className={styles.list}
+                        className={listButtonClass}
                         onClick={() => setType(GridDisplayType.LIST)}
                     />
                 </Col>

@@ -1,12 +1,16 @@
 @import "src/styles/sass/colours";
 
-.grid, .list {
+.button {
   color: $light-2;
   transition: color ease-in-out 0.2s;
 }
 
-.grid:hover, .list:hover {
+.button:hover {
   cursor: pointer;
+  color: $light-1;
+}
+
+.selected {
   color: $light-1;
 }
 

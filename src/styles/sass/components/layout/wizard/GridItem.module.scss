@@ -1,0 +1,39 @@
+@import "src/styles/sass/colours";
+
+.button {
+  padding: 5px;
+}
+
+.notSelected {
+  background-color: rgba(215, 215, 215, 0.6);
+  border-color: rgba(148, 148, 148, 0.8);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.notSelected:active, .notSelected:focus, {
+  box-shadow: none;
+  background-color: $light-1;
+}
+
+.notSelected:hover {
+  color: black;
+  background-color: #b3b3b3;
+  border: none;
+}
+
+.selected:hover {
+  color: #000;
+  background-color: $light-1;
+}
+
+.selected, .selected:focus, .selected:active {
+  background-color: $light-1;
+  border-color: rgba(148, 148, 148, 0.8);
+  color: black;
+  box-shadow: none;
+}
+
+.name {
+  font-size: 1em;
+  margin-bottom: 0;
+}
