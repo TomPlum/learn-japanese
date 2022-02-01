@@ -42,9 +42,7 @@ const TopicSelectionMenu = (props: TopicSelectionMenuProps) => {
 
                 <Dropdown.Menu className={styles.dropdownMenu}>
                     {Topic.ALL.map((topic: Topic) =>
-                        <TopicDropdownOption type={topic} onClick={handleChange} selected={selected} key={topic.name}>
-                            <FontAwesomeIcon fixedWidth icon={topic.icon} />
-                        </TopicDropdownOption>
+                        <TopicDropdownOption type={topic} onClick={handleChange} selected={selected} key={topic.name} />
                     )}
                 </Dropdown.Menu>
             </Dropdown>

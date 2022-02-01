@@ -17,6 +17,14 @@ const PresetCustomStep = (props: PresetCustomStepProps) => {
     const presetButtonClass = isCustom ? styles.button : styles.selected;
     const customButtonClass = isCustom ? styles.selected : styles.button;
 
+    const getValue = () => {
+        return isCustom;
+    }
+
+    const isIntermediateStep = () => {
+        return true;
+    }
+
     return (
         <div>
             <Container fluid className={styles.container}>
@@ -40,8 +48,6 @@ const PresetCustomStep = (props: PresetCustomStepProps) => {
                     </Col>
                 </Row>
             </Container>
-
-            <PlayWizardFooter onNext={() => props.onNext(isCustom)} />
         </div>
     )
 }

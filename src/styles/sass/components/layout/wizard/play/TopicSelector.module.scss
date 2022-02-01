@@ -1,0 +1,17 @@
+@import "src/styles/sass/colours";
+
+.option {
+  background-color: $light-1;
+  border-radius: 5px;
+  margin-bottom: 4px;
+  padding: 5px;
+}
+
+.option > svg {
+  font-size: 1em;
+}
+
+.option > span {
+  font-size: 1em;
+  margin-left: 2px;
+}

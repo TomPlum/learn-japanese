@@ -10,21 +10,20 @@ export interface LearnTopicButtonProps {
     iconColour?: string;
     type: SessionMode;
     selected: SessionMode;
+    className?: string;
     onClick: (mode: SessionMode) => void;
 }
 
 class LearnTopicButton extends Component<LearnTopicButtonProps> {
 
     render() {
-        const { icon, type, selected, iconColour } = this.props;
+        const { icon, type, selected, iconColour, className } = this.props;
         const isSelected = selected.displayName === type.displayName;
         const colour = isSelected ? iconColour : "#000"
+        const buttonClass = [className, (isSelected ? styles.selected : styles.notSelected), styles.button].join(" ");
 
         return (
-            <Button
-                onClick={this.handleOnClick}
-                className={(isSelected ? styles.selected : styles.notSelected) + " " + styles.button}
-            >
+            <Button onClick={this.handleOnClick} className={buttonClass}>
                 {this.isFontAwesomeIcon() &&
                     <FontAwesomeIcon
                         icon={icon as IconDefinition}
