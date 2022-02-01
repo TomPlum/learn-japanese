@@ -1,7 +1,13 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import PresetCustomStep from "../../../../../components/layout/wizard/play/PresetCustomStep";
+import { Environment } from "../../../../../utility/Environment";
 
 const onNextHandler = jest.fn();
+const mockEnvironment = jest.fn();
+
+beforeEach(() => {
+    Environment.variable = mockEnvironment;
+});
 
 const setup = () => {
     const component = render(<PresetCustomStep onNext={onNextHandler} />);
@@ -47,4 +53,18 @@ test('Clicking the next button in the footer should call the onNext handler with
     fireEvent.click(preset);
     fireEvent.click(next);
     expect(onNextHandler).toHaveBeenLastCalledWith(false);
+});
+
+test('Should render the preset description when preset is selected', () => {
+    mockEnvironment.mockReturnValue("Preset description.");
+    const { preset } = setup();
+    fireEvent.click(preset);
+    expect(screen.getByText("Preset description.")).toBeInTheDocument();
+});
+
+test('Should render the custom description when custom is selected', () => {
+    mockEnvironment.mockReturnValue("Custom description.");
+    const { custom } = setup();
+    fireEvent.click(custom);
+    expect(screen.getByText("Custom description.")).toBeInTheDocument();
 });

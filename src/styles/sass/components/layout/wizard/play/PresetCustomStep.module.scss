@@ -3,6 +3,7 @@
 .container {
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
 .wrapper {
@@ -46,4 +47,8 @@
   margin: 0;
   font-size: 1.5em;
   text-transform: uppercase;
+}
+
+.desc {
+  margin-top: 25px;
 }

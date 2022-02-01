@@ -4,6 +4,7 @@ import PlayWizardFooter from "./PlayWizardFooter";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PresetCustomStep.module.scss";
 import { faHammer, faProjectDiagram } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Environment } from "../../../../utility/Environment";
 
 export interface PresetCustomStepProps {
     onNext: (isCustom: boolean) => void;
@@ -31,6 +32,11 @@ const PresetCustomStep = (props: PresetCustomStepProps) => {
                             <FontAwesomeIcon icon={faHammer} fixedWidth className={styles.icon} />
                             <p className={styles.text}>Custom</p>
                         </Button>
+                    </Col>
+                    <Col xs={12}>
+                        <p className={styles.desc}>
+                            {Environment.variable(`${isCustom ? "CUSTOM" : "PRESET"}_DESC`)}
+                        </p>
                     </Col>
                 </Row>
             </Container>
