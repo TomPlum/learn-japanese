@@ -1,5 +1,14 @@
 @import "src/styles/sass/colours";
 
+.step {
+  transition: all ease-in-out 0.3s;
+}
+
+.step:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 .complete {
   color: $bootstrap-green;
 }

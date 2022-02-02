@@ -36,7 +36,7 @@ const WizardProgressStep = (props: WizardProgressStepProps) => {
             title={title}
             onClick={handleOnClick}
             data-testid={`wizard-progress-step-${stage}`}
-            className={[getIconClassName(), className].join(" ")}
+            className={[getIconClassName(), className, styles.step].join(" ")}
         />
     )
 }
