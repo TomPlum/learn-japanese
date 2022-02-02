@@ -10,8 +10,8 @@ import { GameSettingsBuilder } from "../../../../domain/session/settings/game/Ga
 const onClickItemHandler = jest.fn();
 
 let gridProps: GridDisplayProps;
-let itemProps: GridItemProps;
-let itemProps2: GridItemProps;
+let itemProps: GridItemProps<PlayMode>;
+let itemProps2: GridItemProps<PlayMode>;
 
 const setup = () => {
     const component = render(
@@ -34,15 +34,17 @@ beforeEach(() => {
     itemProps = {
         icon: faApple,
         onClick: onClickItemHandler,
-        type: new PlayMode("Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build()),
-        selected: new PlayMode("Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
+        name: "Test Mode",
+        selected: "Test Mode",
+        value: new PlayMode("Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
     };
 
     itemProps2 = {
         icon: faPencilAlt,
         onClick: onClickItemHandler,
-        type: new PlayMode("Test Mode 2", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build()),
-        selected: new PlayMode("Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
+        name: "Test Mode 2",
+        selected: "Test Mode 2",
+        value: new PlayMode("Test Mode 2", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
     };
 });
 

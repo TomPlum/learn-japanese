@@ -2,25 +2,25 @@ import styles from "../../../styles/sass/components/layout/wizard/GridItem.modul
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import SessionMode from "../../../domain/session/SessionMode";
 
-export interface GridItemProps {
+export interface GridItemProps<T> {
     icon: IconDefinition | string;
     iconColour?: string;
-    type: SessionMode;
-    selected: SessionMode;
+    name: string;
+    selected: string;
     className?: string;
+    value: T,
     style?: {},
-    onClick: (mode: SessionMode) => void;
+    onClick: (mode: T) => void;
 }
 
-const GridItem = (props: GridItemProps) => {
-    const { icon, type, selected, iconColour, className, style, onClick } = props;
-    const isSelected = selected.displayName === type.displayName;
+const GridItem = <T,>(props: GridItemProps<T>) => {
+    const { icon, name, value, selected, iconColour, className, style, onClick } = props;
+    const isSelected = selected === name;
     const colour = isSelected ? iconColour : "#000"
     const buttonClass = [className, (isSelected ? styles.selected : styles.notSelected), styles.button].join(" ");
 
-    const handleOnClick = () => onClick(type);
+    const handleOnClick = () => onClick(value);
 
     const isFontAwesomeIcon = () => {
         return !(typeof icon === 'string');
@@ -43,7 +43,7 @@ const GridItem = (props: GridItemProps) => {
                 </span>
             }
 
-            <p className={styles.name}>{type.displayName}</p>
+            <p className={styles.name}>{name}</p>
         </Button>
     );
 }
