@@ -38,13 +38,14 @@ const PresetSelectionStep = React.forwardRef((props, ref) => {
                         {topic.playModes.getModes().map(preset => {
                             return (
                                 <GridItem
-                                    type={preset}
+                                    value={preset}
                                     icon={preset.icon}
                                     onClick={onSelectPreset}
-                                    selected={selectedPreset}
                                     className={styles.preset}
+                                    name={preset.displayName}
                                     iconColour={preset.colour}
                                     key={preset.displayName + "-button"}
+                                    selected={selectedPreset.displayName}
                                 />
                             )
                         })}

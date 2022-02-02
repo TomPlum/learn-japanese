@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Topic from "../../../../domain/Topic";
-import { Dropdown } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TopicDropdownOption from "../../TopicDropdownOption";
-import styles from "../../../../styles/sass/components/layout/wizard/play/TopicSelectionStep.module.scss";
+import GridDisplay from "../GridDisplay";
+import GridItem from "../GridItem";
+import { GridDisplayType } from "../../../../domain/grid/GridDisplayType";
 
 export interface TopicSelectionStepProps {
     onSelect: (topic: Topic) => void;
@@ -13,31 +12,31 @@ const TopicSelectionStep = (props: TopicSelectionStepProps) => {
 
     const { onSelect } = props;
 
-    const [topic, setTopic] = useState(Topic.KANA);
+    const [selected, setSelected] = useState(Topic.KANA);
 
     const handleChange = (topic: Topic) => {
-        setTopic(topic);
+        setSelected(topic);
         onSelect(topic);
     }
 
     return (
         <div>
-            <Dropdown className={styles.dropdown} data-testid="dropdown">
-                <Dropdown.Toggle variant="primary" className={styles.dropdownToggle} id="select-game-type">
-                    <FontAwesomeIcon fixedWidth icon={topic.icon} /> {topic.name}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu className={styles.dropdownMenu}>
-                    {Topic.ALL.map((topic: Topic) =>
-                        <TopicDropdownOption
-                            type={topic}
-                            key={topic.name}
-                            selected={topic}
-                            onClick={handleChange}
-                        />
-                    )}
-                </Dropdown.Menu>
-            </Dropdown>
+            <GridDisplay controls defaultDisplayType={GridDisplayType.LIST}>
+                {
+                    Topic.ALL.map(topic => {
+                        return (
+                            <GridItem
+                                value={topic}
+                                key={topic.name}
+                                icon={topic.icon}
+                                name={topic.name}
+                                onClick={handleChange}
+                                selected={selected.name}
+                            />
+                        )
+                    })
+                }
+            </GridDisplay>
         </div>
     )
 }
