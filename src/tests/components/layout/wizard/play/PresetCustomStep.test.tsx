@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import PresetCustomStep from "../../../../../components/layout/wizard/play/PresetCustomStep";
 import { Environment } from "../../../../../utility/Environment";
 
-const onNextHandler = jest.fn();
+const onSelectHandler = jest.fn();
 const mockEnvironment = jest.fn();
 
 beforeEach(() => {
@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<PresetCustomStep onNext={onNextHandler} />);
+    const component = render(<PresetCustomStep onSelect={onSelectHandler} />);
     return {
         preset: component.getByText('Preset'),
         custom: component.getByText('Custom'),
@@ -41,18 +41,18 @@ test('Clicking the custom button should change the class to selected', () => {
     expect(button).toHaveClass('selected');
 });
 
-test('Clicking the next button in the footer should call the onNext handler with true if custom is selected', () => {
+test('Clicking the next button in the footer should call the onSelect handler with true if custom is selected', () => {
     const { custom, next } = setup();
     fireEvent.click(custom);
     fireEvent.click(next);
-    expect(onNextHandler).toHaveBeenLastCalledWith(true);
+    expect(onSelectHandler).toHaveBeenLastCalledWith(true);
 });
 
-test('Clicking the next button in the footer should call the onNext handler with false if preset is selected', () => {
+test('Clicking the next button in the footer should call the onSelect handler with false if preset is selected', () => {
     const { preset, next } = setup();
     fireEvent.click(preset);
     fireEvent.click(next);
-    expect(onNextHandler).toHaveBeenLastCalledWith(false);
+    expect(onSelectHandler).toHaveBeenLastCalledWith(false);
 });
 
 test('Should render the preset description when preset is selected', () => {

@@ -1,20 +1,20 @@
-import React, { useImperativeHandle, useState } from "react";
+import React from "react";
 import TimeSettingsForm from "../../../settings/game/TimeSettingsForm";
 import TimeSettings from "../../../../domain/session/settings/game/TimeSettings";
 
-const TimeSettingsStep = React.forwardRef((props, ref) => {
+export interface TimeSettingsStepProps {
+    onSelect: (settings: TimeSettings) => void;
+}
 
-    const [settings, setSettings] = useState<TimeSettings>();
+const TimeSettingsStep = (props: TimeSettingsStepProps) => {
 
-    useImperativeHandle(ref, () => ({
-        getValue: () => settings
-    }));
+    const { onSelect } = props;
 
     return (
         <div>
-            <TimeSettingsForm onChange={(settings) => setSettings(settings)} />
+            <TimeSettingsForm onChange={onSelect} />
         </div>
     );
-});
+}
 
 export default TimeSettingsStep;

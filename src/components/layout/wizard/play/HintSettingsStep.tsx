@@ -1,20 +1,20 @@
 import HintSettingsForm from "../../../settings/game/HintSettingsForm";
-import React, { useImperativeHandle, useState } from "react";
+import React from "react";
 import HintSettings from "../../../../domain/session/settings/game/HintSettings";
 
-const HintSettingsStep = React.forwardRef((props, ref) => {
+export interface HintSettingsStepProps {
+    onSelect: (settings: HintSettings) => void;
+}
 
-    const [settings, setSettings] = useState<HintSettings>();
+const HintSettingsStep = (props: HintSettingsStepProps) => {
 
-    useImperativeHandle(ref, () => ({
-        getValue: () => settings
-    }));
+    const { onSelect } = props;
 
     return (
         <div>
-            <HintSettingsForm onChange={(settings) => setSettings(settings)} />
+            <HintSettingsForm onChange={onSelect} />
         </div>
     );
-});
+}
 
 export default HintSettingsStep;

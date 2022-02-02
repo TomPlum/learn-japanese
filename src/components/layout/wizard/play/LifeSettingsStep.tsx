@@ -1,20 +1,20 @@
-import React, { useImperativeHandle, useState } from "react";
+import React from "react";
 import LifeSettingsForm from "../../../settings/game/LifeSettingsForm";
 import LifeSettings from "../../../../domain/session/settings/game/LifeSettings";
 
-const LifeSettingsStep = React.forwardRef((props, ref) => {
+export interface LifeSettingsStepProps {
+    onSelect: (settings: LifeSettings) => void;
+}
 
-    const [settings, setSettings] = useState<LifeSettings>();
+const LifeSettingsStep = (props: LifeSettingsStepProps) => {
 
-    useImperativeHandle(ref, () => ({
-        getValue: () => settings
-    }));
+    const { onSelect } = props;
 
     return (
         <div>
-            <LifeSettingsForm onChange={(settings) => setSettings(settings)} />
+            <LifeSettingsForm onChange={onSelect} />
         </div>
     );
-});
+}
 
 export default LifeSettingsStep;

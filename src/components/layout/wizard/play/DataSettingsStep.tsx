@@ -1,14 +1,16 @@
 import React from "react";
 import { DataSettingsMenuProps } from "../../../settings/data/DataSettingsMenu";
 import Topic from "../../../../domain/Topic";
+import DataSettings from "../../../../domain/session/settings/data/DataSettings";
 
 export interface DataSettingsStepProps {
     topic: Topic;
+    onSelect: (settings: DataSettings) => void;
 }
 
 const DataSettingsStep = (props: DataSettingsStepProps) => {
 
-    const { topic } = props;
+    const { topic, onSelect } = props;
 
     const DataSettingsMenu = topic.menu as React.FunctionComponent<DataSettingsMenuProps<any>>;
 
@@ -19,7 +21,7 @@ const DataSettingsStep = (props: DataSettingsStepProps) => {
                 icon={topic.icon}
                 onQuit={() => {}}
                 onReset={() => {}}
-                onConfirm={() => {}}
+                onConfirm={onSelect}
             />
         </div>
     )
