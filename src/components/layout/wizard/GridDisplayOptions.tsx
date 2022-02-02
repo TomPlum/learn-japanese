@@ -9,14 +9,15 @@ import { Col, Row } from "react-bootstrap";
 
 export interface GridDisplayOptionsProps {
     onSelect: (options: GridOptions) => void;
+    defaultType?: GridDisplayType;
     className?: string;
 }
 
 const GridDisplayOptions = (props: GridDisplayOptionsProps) => {
 
-    const { className, onSelect } = props;
+    const { className, defaultType, onSelect } = props;
 
-    const [type, setType] = useState(GridDisplayType.GRID);
+    const [type, setType] = useState(defaultType ?? GridDisplayType.GRID);
     const [size, setSize] = useState(80);
 
     useEffect(() => {
@@ -31,9 +32,9 @@ const GridDisplayOptions = (props: GridDisplayOptionsProps) => {
     const listButtonClass = type === GridDisplayType.LIST ? styles.selected : styles.button;
 
     return (
-        <div className={className} data-testid="grid-display-options">
-            <Row>
-                <Col>
+        <div className={[className, styles.wrapper].join(" ")} data-testid="grid-display-options">
+            {type === GridDisplayType.GRID && (
+                <div className={styles.sliderWrapper}>
                     <RangeSlider
                         min={70}
                         max={150}
@@ -44,25 +45,24 @@ const GridDisplayOptions = (props: GridDisplayOptionsProps) => {
                         className={styles.size}
                         onChange={onGridItemSizeChange}
                     />
-                </Col>
-                <Col className={styles.buttonWrapper}>
-                    <FontAwesomeIcon
-                        fixedWidth
-                        icon={faThLarge}
-                        title="Grid Layout"
-                        className={gridButtonClass}
-                        onClick={() => setType(GridDisplayType.GRID)}
-                    />
+                </div>
+            )}
 
-                    <FontAwesomeIcon
-                        fixedWidth
-                        icon={faThList}
-                        title="List Layout"
-                        className={listButtonClass}
-                        onClick={() => setType(GridDisplayType.LIST)}
-                    />
-                </Col>
-            </Row>
+            <FontAwesomeIcon
+                fixedWidth
+                icon={faThLarge}
+                title="Grid Layout"
+                className={gridButtonClass}
+                onClick={() => setType(GridDisplayType.GRID)}
+            />
+
+            <FontAwesomeIcon
+                fixedWidth
+                icon={faThList}
+                title="List Layout"
+                className={listButtonClass}
+                onClick={() => setType(GridDisplayType.LIST)}
+            />
         </div>
     );
 }

@@ -1,5 +1,17 @@
 @import "src/styles/sass/colours";
 
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+.sliderWrapper {
+  margin-right: 10px;
+}
+
 .button {
   color: $light-2;
   transition: color ease-in-out 0.2s;
@@ -14,8 +26,6 @@
   color: $light-1;
 }
 
-.buttonWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+.size {
+  width: 100px;
 }
