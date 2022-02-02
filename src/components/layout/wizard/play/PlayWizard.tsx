@@ -85,6 +85,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                 return {
                     icon: faSwatchbook,
                     name: "Select Topic",
+                    iconClass: styles.topicIcon,
                     body: <TopicSelectionStep onSelect={topic => setTopic(topic)} />
                 }
             }
@@ -92,6 +93,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                 return {
                     icon: faTools,
                     name: "Select Type",
+                    iconClass: styles.typeIcon,
                     body: <PresetCustomStep onSelect={custom => setIsCustom(custom)} />,
                     intermediate: true
                 }
@@ -100,6 +102,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                 return {
                     icon: faProjectDiagram,
                     name: "Choose Preset",
+                    iconClass: styles.presetIcon,
                     body: <PresetSelectionStep ref={stageRef} />,
                     terminal: true
                 }
