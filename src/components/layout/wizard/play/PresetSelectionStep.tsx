@@ -6,6 +6,7 @@ import styles from "../../../../styles/sass/components/layout/wizard/play/Preset
 import PlayMode from "../../../../domain/session/PlayMode";
 import GridItem from "../GridItem";
 import GridDisplay from "../GridDisplay";
+import { Environment } from "../../../../utility/Environment";
 
 const PresetSelectionStep = React.forwardRef((props, ref) => {
 
@@ -48,6 +49,9 @@ const PresetSelectionStep = React.forwardRef((props, ref) => {
                             )
                         })}
                     </GridDisplay>
+                    <p className={styles.desc}>
+                        {Environment.variable(`PLAY_${topic.playModes.getTopic()}_${selectedPreset.displayName}_DESC`)}
+                    </p>
                 </Col>
             </Row>
         </Container>
