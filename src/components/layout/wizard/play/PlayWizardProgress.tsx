@@ -1,5 +1,6 @@
 import { faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTools } from "@fortawesome/free-solid-svg-icons";
 import WizardProgressStep from "./WizardProgressStep";
+import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizardProgress.module.scss";
 
 export interface PlayWizardProgressProps {
     stage: number;
@@ -22,6 +23,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                 title="Topic"
                 icon={faSwatchbook}
                 currentStage={stage}
+                className={styles.step}
                 onClick={handleSelectStage}
             />
 
@@ -29,6 +31,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                 stage={1}
                 icon={faTools}
                 currentStage={stage}
+                className={styles.step}
                 title="Preset or Custom"
                 onClick={handleSelectStage}
             />
@@ -38,6 +41,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                     stage={2}
                     title="Preset"
                     currentStage={stage}
+                    className={styles.step}
                     icon={faProjectDiagram}
                     onClick={handleSelectStage}
                 />
@@ -48,6 +52,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                     <WizardProgressStep
                         stage={3}
                         currentStage={stage}
+                        className={styles.step}
                         icon={faQuestionCircle}
                         title="Question Settings"
                         onClick={handleSelectStage}
@@ -58,6 +63,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                         icon={faLightbulb}
                         currentStage={stage}
                         title="Hint Settings"
+                        className={styles.step}
                         onClick={handleSelectStage}
                     />
 
@@ -66,6 +72,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                         icon={faHeartbeat}
                         currentStage={stage}
                         title="Life Settings"
+                        className={styles.step}
                         onClick={handleSelectStage}
                     />
 
@@ -74,6 +81,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                         icon={faStopwatch}
                         currentStage={stage}
                         title="Time Settings"
+                        className={styles.step}
                         onClick={handleSelectStage}
                     />
 
@@ -82,6 +90,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                         icon={faDatabase}
                         currentStage={stage}
                         title="Data Settings"
+                        className={styles.step}
                         onClick={handleSelectStage}
                     />
 
@@ -90,6 +99,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                         title="Confirmation"
                         icon={faCheckCircle}
                         currentStage={stage}
+                        className={styles.step}
                         onClick={handleSelectStage}
                     />
                 </>

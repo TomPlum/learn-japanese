@@ -1,11 +1,13 @@
+@import "src/styles/sass/colours";
+
 .complete {
-  color: green;
+  color: $bootstrap-green;
 }
 
 .inProgress {
-  color: white;
+  color: $light-1;
 }
 
 .incomplete {
-  color: red;
+  color: $bootstrap-red;
 }
