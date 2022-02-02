@@ -4,14 +4,16 @@ import styles from "../../../../styles/sass/components/layout/wizard/play/Wizard
 
 export interface WizardProgressStepProps {
     icon: IconDefinition;
+    title: string;
     stage: number;
+    className?: string;
     currentStage: number;
     onClick: (stage: number) => void;
 }
 
 const WizardProgressStep = (props: WizardProgressStepProps) => {
 
-    const { icon, stage, currentStage, onClick } = props;
+    const { icon, title, className, stage, currentStage, onClick } = props;
 
     const handleOnClick = () => {
         onClick(stage);
@@ -31,9 +33,10 @@ const WizardProgressStep = (props: WizardProgressStepProps) => {
         <FontAwesomeIcon
             fixedWidth
             icon={icon}
+            title={title}
             onClick={handleOnClick}
-            className={getIconClassName()}
             data-testid={`wizard-progress-step-${stage}`}
+            className={[getIconClassName(), className].join(" ")}
         />
     )
 }

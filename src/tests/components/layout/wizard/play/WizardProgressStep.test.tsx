@@ -18,6 +18,7 @@ beforeEach(() => {
         stage: 0,
         icon: faApple,
         currentStage: 1,
+        title: "Test Step",
         onClick: onClickHandler
     }
 });
