@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import React, { useRef, useState } from "react";
+import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import PresetCustomStep from "./PresetCustomStep";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizard.module.scss";
 import { faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTimes, faTools, IconDefinition } from "@fortawesome/free-solid-svg-icons";
@@ -19,10 +19,14 @@ import ConfirmationStep from "./ConfirmationStep";
 import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
 import DataSettings from "../../../../domain/session/settings/data/DataSettings";
+import { CSSTransition } from "react-transition-group";
+import slideRight from "../../../../styles/sass/transitions/slide-right.module.scss";
+import slideLeft from "../../../../styles/sass/transitions/slide-left.module.scss";
+import { usePrevious } from "../../../../hooks";
 
 interface PlayWizardProps {
     onClose: () => void;
-    onStart: () => void;
+    onStart: (settings: SessionSettings) => void;
 }
 
 interface StageDetails {
@@ -40,14 +44,22 @@ const PlayWizard = (props: PlayWizardProps) => {
 
     const stageRef = useRef<any>();
 
+    const [animate, setAnimate] = useState(false);
     const [isCustom, setIsCustom] = useState(false);
     const [topic, setTopic] = useState(Topic.KANA);
     const [confirmClose, setConfirmClose] = useState(false);
     const [stage, setStage] = useState(0);
     const [settings, setSettings] = useState(new GameSettingsBuilder());
     const [dataSettings, setDataSettings] = useState<DataSettings | undefined>(undefined);
+    const [goingForwards, setGoingForwards] = useState(true);
+
+   // const prevStage = usePrevious<number>(stage);
+
+    useEffect(() => setAnimate(true), [stage]);
 
     const handleBack = () => {
+        setGoingForwards(false);
+
         if (stage === 3 && isCustom) {
             setStage(1);
         } else {
@@ -56,15 +68,7 @@ const PlayWizard = (props: PlayWizardProps) => {
     }
 
     const handleNext = () => {
-        const value = stageRef.current?.getValue();
-
-/*
-        if (stage === 0) {
-            // If we've just advanced from the initial stage, then the value is
-            // set the true for custom, else false for preset.
-            setIsCustom(value === true);
-        }
-*/
+        setGoingForwards(true);
 
         if (stage === 1 && isCustom) {
             // If the value is true, then it must be isCustom from the initial step.
@@ -76,7 +80,7 @@ const PlayWizard = (props: PlayWizardProps) => {
     }
 
     const handlePlay = () => {
-        const value = stageRef.current?.getValue();
+        onStart(SessionSettings.forGame(dataSettings!, settings.build()));
     }
 
     const getStageDetails = (): StageDetails => {
@@ -174,10 +178,10 @@ const PlayWizard = (props: PlayWizardProps) => {
     const { icon, iconClass, name, body, intermediate, terminal } = getStageDetails();
 
     return (
-        <Modal show backdrop="static" centered contentClassName={styles.content} size="lg">
-            <Modal.Body className={styles.content}>
+        <Modal show backdrop="static" centered contentClassName={styles.content} size="lg" dialogClassName={styles.dialog}>
+            <Modal.Body className={styles.body}>
                 <div className={styles.header}>
-                    <FontAwesomeIcon icon={icon} fixedWidth className={iconClass} />
+                    <FontAwesomeIcon icon={icon} className={iconClass} />
                     <span className={styles.stage}>{name}</span>
                     <FontAwesomeIcon
                         fixedWidth
@@ -189,7 +193,9 @@ const PlayWizard = (props: PlayWizardProps) => {
                 </div>
 
                 <div className={styles.body}>
-                    {body}
+                    <CSSTransition classNames={goingForwards ? slideLeft : slideRight} timeout={{ enter: 200, exit: 200 }} in={goingForwards} onExited={() => setAnimate(false)}>
+                        {body}
+                    </CSSTransition>
                 </div>
 
                 <div className={styles.footer}>

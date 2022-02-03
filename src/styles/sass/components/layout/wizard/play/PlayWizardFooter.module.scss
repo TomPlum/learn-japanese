@@ -6,6 +6,13 @@
 }
 
 .next {
-  padding: 3px 10px;
   align-self: flex-end;
+}
+
+.back, .next {
+  width: 60px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

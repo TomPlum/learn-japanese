@@ -3,6 +3,7 @@
 .close {
   margin-left: auto;
   color: $light-2;
+  font-size: 1.2em;
   transition: color ease-in-out 0.2s;
 }
 
@@ -18,20 +19,24 @@
 }
 
 .stage {
-  margin-left: 5px;
+  margin-left: 8px;
   font-size: 1.5em;
 }
 
 .content {
-  padding: 10px 15px 10px 15px;
   color: $light-1;
   background-color: $dark-2;
   border-radius: 10px;
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  padding: 10px 15px 10px 15px;
+}
+
+.dialog {
+  max-width: 650px;
 }
 
 .body {
-  padding: 15px 0;
+
 }
 
 @mixin icon {

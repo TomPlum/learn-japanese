@@ -1,6 +1,6 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import type { AppDispatch, RootState } from './store'
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const useUserDispatch = () => useDispatch<AppDispatch>();
 export const useUserSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -54,4 +54,14 @@ export const useWindowDimensions = () => {
     }, []);
 
     return { width, height };
+}
+
+export const usePrevious = <T>(value: T): T => {
+    const ref = useRef<T>();
+
+    useEffect(() => {
+        ref.current = value;
+    });
+
+    return ref.current ?? value;
 }

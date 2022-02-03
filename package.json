@@ -29,6 +29,7 @@
     "react-sizeme": "^3.0.1",
     "react-stack-grid": "^0.7.1",
     "react-table": "^7.7.0",
+    "react-transition-group": "^4.4.2",
     "recharts": "^2.0.9",
     "redux": "^4.1.1",
     "supermemo": "^2.0.17",
