@@ -1,6 +1,6 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import TopicSelector from "./TopicSelector";
-import React, { useEffect, useImperativeHandle, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Topic from "../../../../domain/Topic";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PresetSelectionStep.module.scss";
 import PlayMode from "../../../../domain/session/PlayMode";
@@ -8,7 +8,13 @@ import GridItem from "../GridItem";
 import GridDisplay from "../GridDisplay";
 import { Environment } from "../../../../utility/Environment";
 
-const PresetSelectionStep = React.forwardRef((props, ref) => {
+export interface PresetSelectionStepProps {
+    onSelect: (preset: PlayMode) => void;
+}
+
+const PresetSelectionStep = (props: PresetSelectionStepProps) => {
+
+    const { onSelect } = props;
 
     const [topic, setTopic] = useState(Topic.KANA);
     const [selectedPreset, setSelectedPreset] = useState(topic.playModes.getModes()[0]);
@@ -18,45 +24,35 @@ const PresetSelectionStep = React.forwardRef((props, ref) => {
     }, [topic]);
 
     const onSelectPreset = (mode: PlayMode) => {
+        onSelect(mode);
         setSelectedPreset(mode);
     }
 
-    useImperativeHandle(ref, () => ({
-        getValue: () => {
-            return selectedPreset;
-        }
-    }));
+    const TopicSelectionDropdown = () => <TopicSelector onSelect={topic => setTopic(topic)} className={styles.topic} />;
 
     return (
         <Container fluid>
             <Row>
-                <Col xs={3} className={styles.topicWrapper}>
-                    <TopicSelector onSelect={topic => setTopic(topic)} />
-                </Col>
-                <Col>
-                    <GridDisplay controls>
-                        {topic.playModes.getModes().map(preset => {
-                            return (
-                                <GridItem
-                                    value={preset}
-                                    icon={preset.icon}
-                                    onClick={onSelectPreset}
-                                    className={styles.preset}
-                                    name={preset.displayName}
-                                    iconColour={preset.colour}
-                                    key={preset.displayName + "-button"}
-                                    selected={selectedPreset.displayName}
-                                />
-                            )
-                        })}
-                    </GridDisplay>
-                    <p className={styles.desc}>
-                        {Environment.variable(`PLAY_${topic.playModes.getTopic()}_${selectedPreset.displayName}_DESC`)}
-                    </p>
-                </Col>
+                <GridDisplay controls customOptions={<TopicSelectionDropdown />}>
+                    {topic.playModes.getModes().map(preset =>
+                        <GridItem
+                            value={preset}
+                            icon={preset.icon}
+                            onClick={onSelectPreset}
+                            className={styles.preset}
+                            name={preset.displayName}
+                            iconColour={preset.colour}
+                            key={preset.displayName + "-button"}
+                            selected={selectedPreset.displayName}
+                        />
+                    )}
+                </GridDisplay>
+                <p className={styles.desc}>
+                    {Environment.variable(`PLAY_${topic.playModes.getTopic()}_${selectedPreset.displayName}_DESC`)}
+                </p>
             </Row>
         </Container>
     )
-});
+}
 
 export default PresetSelectionStep;

@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import React, { LegacyRef, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PresetCustomStep from "./PresetCustomStep";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizard.module.scss";
 import { faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTimes, faTools, IconDefinition } from "@fortawesome/free-solid-svg-icons";
@@ -16,13 +16,14 @@ import DataSettingsStep from "./DataSettingsStep";
 import TopicSelectionStep from "./TopicSelectionStep";
 import Topic from "../../../../domain/Topic";
 import ConfirmationStep from "./ConfirmationStep";
-import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
+import GameSettings, { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
 import DataSettings from "../../../../domain/session/settings/data/DataSettings";
 import { CSSTransition } from "react-transition-group";
 import slideRight from "../../../../styles/sass/transitions/slide-right.module.scss";
 import slideLeft from "../../../../styles/sass/transitions/slide-left.module.scss";
-import { usePrevious } from "../../../../hooks";
+import PlayKanaModes from "../../../../domain/game/mode/PlayKanaModes";
+import PlayMode from "../../../../domain/session/PlayMode";
 
 interface PlayWizardProps {
     onClose: () => void;
@@ -42,8 +43,6 @@ const PlayWizard = (props: PlayWizardProps) => {
 
     const { onStart, onClose } = props;
 
-    const stageRef = useRef<any>();
-
     const [animate, setAnimate] = useState(false);
     const [isCustom, setIsCustom] = useState(false);
     const [topic, setTopic] = useState(Topic.KANA);
@@ -52,6 +51,7 @@ const PlayWizard = (props: PlayWizardProps) => {
     const [settings, setSettings] = useState(new GameSettingsBuilder());
     const [dataSettings, setDataSettings] = useState<DataSettings | undefined>(undefined);
     const [goingForwards, setGoingForwards] = useState(true);
+    const [preset, setPreset] = useState<PlayMode>(new PlayKanaModes().getModes()[0]);
 
    // const prevStage = usePrevious<number>(stage);
 
@@ -80,7 +80,9 @@ const PlayWizard = (props: PlayWizardProps) => {
     }
 
     const handlePlay = () => {
-        onStart(SessionSettings.forGame(dataSettings!, settings.build()));
+        const data = isCustom ? dataSettings! : preset.dataSettings;
+        const game = isCustom ? settings.build() : preset.modeSettings as GameSettings;
+        onStart(SessionSettings.forGame(data, game));
     }
 
     const getStageDetails = (): StageDetails => {
@@ -107,7 +109,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     icon: faProjectDiagram,
                     name: "Choose Preset",
                     iconClass: styles.presetIcon,
-                    body: <PresetSelectionStep ref={stageRef} />,
+                    body: <PresetSelectionStep onSelect={preset => setPreset(preset)} />,
                     terminal: true
                 }
             }

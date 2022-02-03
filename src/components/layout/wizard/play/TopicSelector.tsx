@@ -7,19 +7,22 @@ import { Dropdown } from "react-bootstrap";
 
 export interface TopicSelectorProps {
     onSelect: (topic: Topic) => void;
+    className?: string;
 }
 
 const TopicSelector = (props: TopicSelectorProps) => {
+
+    const { onSelect, className } = props;
 
     const [selected, setSelected] = useState(Topic.KANA);
 
     const handleChange = (topic: Topic) => {
         setSelected(topic);
-        props.onSelect(topic);
+        onSelect(topic);
     }
 
     return (
-        <div>
+        <div className={className}>
             {/*{Topic.ALL.map((topic: Topic) =>
                 <TopicDropdownOption
                     type={topic}

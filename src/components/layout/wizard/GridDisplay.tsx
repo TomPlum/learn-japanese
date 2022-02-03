@@ -9,22 +9,29 @@ export interface GridDisplayProps {
     controls?: boolean;
     className?: string;
     defaultDisplayType?: GridDisplayType;
+    customOptions?: React.ReactElement;
 }
 
 const GridDisplay = (props: PropsWithChildren<GridDisplayProps>) => {
-    const { children, controls, className, defaultDisplayType } = props;
+    const { children, controls, className, customOptions, defaultDisplayType } = props;
 
     const [options, setOptions] = useState<GridOptions>({ type: GridDisplayType.GRID, size: 80 });
 
     return (
         <div className={[className, styles.wrapper].join(" ")}>
-            {controls && (
-                <GridDisplayOptions
-                    className={styles.options}
-                    defaultType={defaultDisplayType}
-                    onSelect={options => setOptions(options)}
-                />
-            )}
+            <div className={styles.header}>
+                <div>
+                    {customOptions}
+                </div>
+
+                {controls && (
+                    <GridDisplayOptions
+                        className={styles.options}
+                        defaultType={defaultDisplayType}
+                        onSelect={options => setOptions(options)}
+                    />
+                )}
+            </div>
 
             <ScrollableContainer maxHeight={500}>
                 {

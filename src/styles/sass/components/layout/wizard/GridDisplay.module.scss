@@ -1,5 +1,5 @@
 .options {
-  margin: 0 5px;
+
 }
 
 .list > p {
@@ -16,4 +16,10 @@
 
 .item {
   margin: 5px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
