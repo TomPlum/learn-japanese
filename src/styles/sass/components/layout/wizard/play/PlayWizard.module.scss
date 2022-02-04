@@ -45,6 +45,7 @@
 
 .topicIcon {
   @include icon;
+  color: $topic;
 }
 
 .typeIcon {
@@ -54,7 +55,7 @@
 
 .presetIcon {
   @include icon;
-  color: #399eea;
+  color: $bootstrap-yellow;
 }
 
 .questionIcon {

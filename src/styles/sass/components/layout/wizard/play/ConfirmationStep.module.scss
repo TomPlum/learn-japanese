@@ -1,5 +1,37 @@
 @import "src/styles/sass/colours";
 
-.heart {
+.lives {
   color: $lives;
+}
+
+.time {
+  color: $time;
+}
+
+.hint {
+  color: $hints;
+}
+
+.score {
+  color: #debc52;
+}
+
+.field {
+  color: $kyoiku-grade-5;
+}
+
+.question {
+  font-size: 1.2em;
+}
+
+.quantity {
+  color: $bootstrap-yellow;
+}
+
+.type {
+  color: $bootstrap-green;
+}
+
+.topic {
+  color: $topic;
 }
