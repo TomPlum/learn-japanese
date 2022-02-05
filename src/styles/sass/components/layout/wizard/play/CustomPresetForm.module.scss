@@ -1,0 +1,19 @@
+.buttonContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.button {
+  padding: 6px 6px;
+  width: 100%;
+  transition: all ease-in-out 0.2s;
+}
+
+.icon {
+  margin-right: 3px;
+}
+
+.input::placeholder {
+  text-align: left;
+}
