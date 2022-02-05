@@ -1,9 +1,11 @@
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
 import styles from "../../../../styles/sass/components/layout/wizard/play/ConfirmationStep.module.scss";
-import { Col, Container, Row } from "react-bootstrap";
-import { faHeart, faInfinity, faLightbulb, faStopwatch, faTrophy } from "@fortawesome/free-solid-svg-icons";
-import SettingSummary from "./SettingSummary";
+import { Accordion, Button } from "react-bootstrap";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { QuestionType } from "../../../../domain/game/QuestionType";
+import CustomPresetForm from "./CustomPresetForm";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface ConfirmationStepProps {
     settings: SessionSettings;
@@ -12,87 +14,71 @@ export interface ConfirmationStepProps {
 const ConfirmationStep = (props: ConfirmationStepProps) => {
     const { settings } = props;
 
+    const [inSavePresetForm, setInSavePresetForm] = useState(false);
+    const [showSave, setShowSave] = useState(true);
+
     const gameSettings = settings.gameSettings;
     const dataSettings = settings.dataSettings;
 
-    const time = gameSettings?.time;
-    const hints = gameSettings?.hints;
+    if (!gameSettings) {
+        return <span>Your game settings could not be found. Please reload and try again.</span>
+    }
 
-    const timeQuantity = time?.timed ? "Timed" : time?.countdown ? gameSettings?.time.secondsPerQuestion : 0;
-    const hintQuantity = hints?.enabled ? hints?.unlimited ? faInfinity : hints?.quantity : 0;
-    const score = gameSettings?.question.score ? "Enabled" : 0;
+    const time = gameSettings.time;
+    const hints = gameSettings.hints.quantity;
+    const hasUnlimitedHints = gameSettings.hints.unlimited
+
     const questionType = gameSettings?.question.type;
-    const cards = gameSettings?.question.cards ?? 0;
-    const lives = gameSettings?.lives.quantity ?? 0;
+    const cards = gameSettings.question.cards;
+    const lives = gameSettings.lives.quantity;
 
     const getQuestionTypeWord = (): string => {
         switch (questionType) {
             case QuestionType.TEXT: return "type";
             case QuestionType.MATCH: return "match";
-            case QuestionType.CHOICE: return `pick${cards > 0 ? ` from ${cards} cards` : ""}`;
+            case QuestionType.CHOICE: return `pick from ${cards} cards`;
             case QuestionType.AUDIO: return "listen to";
             case QuestionType.RANDOM: return "answer";
             default: return "answer";
         }
     }
 
-    const getTimeWords = (): string => {
+    const getTimeWords = () => {
         if (time?.timed) {
-            return "your session will be timed";
+            return <span className={styles.time}>{"your session will be timed"}</span>;
         }
 
         if (time?.countdown) {
-            return `you will have ${time?.secondsPerQuestion} seconds per question`;
+            return (
+                <span>{"you'll have "}
+                    <span className={styles.time}>{time?.secondsPerQuestion}{" seconds per question"}</span>
+                </span>
+            );
         }
 
-        return "you'll have no time restrictions";
+        return <span>{"you'll have "}<span className={styles.time}>no time restrictions</span></span>;
     }
 
     const getScoreWords = (): string => {
         if (gameSettings?.question.score) {
             return "your score will be tracked";
         } else {
-            return "scoring will be disabled.";
+            return "scoring will be disabled";
         }
     }
 
-    return (
-        <Container fluid>
-            <Row>
-                <Col>
-                    <SettingSummary
-                        name="Lives"
-                        icon={faHeart}
-                        iconClass={styles.lives}
-                        quantity={gameSettings?.lives.quantity ?? 0}
-                    />
-                </Col>
-                <Col>
-                    <SettingSummary
-                        name="Time"
-                        icon={faStopwatch}
-                        iconClass={styles.time}
-                        quantity={timeQuantity ?? 0}
-                    />
-                </Col>
-                <Col>
-                    <SettingSummary
-                        name="Hints"
-                        icon={faLightbulb}
-                        iconClass={styles.hint}
-                        quantity={hintQuantity ?? 0}
-                    />
-                </Col>
-                <Col>
-                    <SettingSummary
-                        name="Scoring"
-                        icon={faTrophy}
-                        iconClass={styles.score}
-                        quantity={score}
-                    />
-                </Col>
-            </Row>
+    const handleClickSave = () => {
+        setShowSave(false);
+        setInSavePresetForm(true);
+    }
 
+    const handleCancelSave = () => {
+        setShowSave(true);
+        setInSavePresetForm(false);
+    }
+
+    return (
+        <div>
             <p className={styles.question}>
                 <span>{"You'll be given the "}</span>
                 <span className={styles.field}>{gameSettings?.question.questionField.name}</span>
@@ -105,16 +91,32 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
                 <span>{" questions about "}</span>
                 <span className={styles.topic}>{dataSettings?.topic.name}</span>
                 <span>{". "}</span>
-                <span>{"You have "}</span>
-                <span className={styles.lives}>{lives > 0 ? lives : "no"}{" lives"}</span>
+                <span>{"You'll have "}</span>
+                <span className={styles.lives}>{lives > 0 ? lives : "unlimited"}{" lives"}</span>
                 <span>{", "}</span>
-                <span className={styles.hint}>{hints?.quantity}{" hints"}</span>
+                <span className={styles.hint}>{hasUnlimitedHints ? "unlimited" : hints > 0 ? hints : "no"}{" hints"}</span>
                 <span>{", "}</span>
-                <span className={styles.time}>{getTimeWords()}</span>
+                <span>{getTimeWords()}</span>
                 <span>{" and "}</span>
                 <span className={styles.score}>{getScoreWords()}{"."}</span>
             </p>
-        </Container>
+
+            <Accordion>
+                {showSave && (
+                    <Accordion.Toggle eventKey="save" as={Button} onClick={handleClickSave} variant="info">
+                        <FontAwesomeIcon icon={faDownload} fixedWidth />
+                        <span>Save Preset</span>
+                    </Accordion.Toggle>
+                )}
+                <Accordion.Collapse eventKey="save" in={inSavePresetForm} data-testid="confirmation-step-accordion">
+                    <CustomPresetForm
+                        settings={settings}
+                        onCancel={handleCancelSave}
+                        onSuccess={() => setInSavePresetForm(false)}
+                    />
+                </Accordion.Collapse>
+            </Accordion>
+        </div>
     );
 }
 

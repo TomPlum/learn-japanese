@@ -52,7 +52,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     const saveIcon = loading ? faSpinner : faCheck;
 
     return (
-        <div>
+        <div data-testid="save-custom-preset-form">
             {error && <Alert variant="danger">{error}</Alert>}
             {success && (
                 <Alert variant="success">
