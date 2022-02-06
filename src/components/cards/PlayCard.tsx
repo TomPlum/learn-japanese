@@ -3,7 +3,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import ReloadButton from "../ui/buttons/ReloadButton";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faRedo, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faRedo, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import PlayWizard from "../layout/wizard/play/PlayWizard";
 
 const PlayCard = () => {
@@ -40,9 +40,9 @@ const PlayCard = () => {
 
                 <Row className={error ? styles.blur : undefined}>
                     <Col>
-                        <Button variant="secondary" onClick={() => setCustomising(true)}>
-                            <FontAwesomeIcon icon={faCog} fixedWidth />
-                            <span>{" Start Custom"}</span>
+                        <Button variant="success" onClick={() => setCustomising(true)}>
+                            <FontAwesomeIcon icon={faPlay} fixedWidth />
+                            <span>{" Start Game"}</span>
                         </Button>
                     </Col>
                 </Row>
