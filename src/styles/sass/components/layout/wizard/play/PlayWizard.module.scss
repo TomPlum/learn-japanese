@@ -1,5 +1,13 @@
 @import "src/styles/sass/colours";
 
+.header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  align-self: flex-start;
+  width: 100%;
+}
+
 .close {
   margin-left: auto;
   color: $light-2;
@@ -10,12 +18,6 @@
 .close:hover {
   cursor: pointer;
   color: $light-1;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  padding-bottom: 10px;
 }
 
 .stage {
@@ -29,14 +31,26 @@
   border-radius: 10px;
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   padding: 10px 15px 10px 15px;
+  height: 500px;
+}
+
+.body {
+  height: 344px;
+}
+
+.footer {
+  align-items: flex-end;
+  align-self: flex-end;
+  width: 100%;
 }
 
 .dialog {
   max-width: 650px;
 }
 
-.body {
-
+.modal {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 @mixin icon {

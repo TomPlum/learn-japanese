@@ -181,7 +181,7 @@ const PlayWizard = (props: PlayWizardProps) => {
 
     return (
         <Modal show backdrop="static" centered contentClassName={styles.content} size="lg" dialogClassName={styles.dialog}>
-            <Modal.Body className={styles.body}>
+            <Modal.Body className={styles.modal}>
                 <div className={styles.header}>
                     <FontAwesomeIcon icon={icon} className={iconClass} />
                     <span className={styles.stage}>{name}</span>
