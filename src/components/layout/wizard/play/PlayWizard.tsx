@@ -163,7 +163,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     icon: faCheckCircle,
                     iconClass: styles.confirmIcon,
                     name: "Confirmation",
-                    body: <ConfirmationStep settings={SessionSettings.forGame(dataSettings!, settings.build())} />,
+                    body: <ConfirmationStep settings={SessionSettings.forGame(dataSettings!, settings.build())} onSelectStage={stage => setStage(stage)} />,
                     terminal: true
                 }
             }

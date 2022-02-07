@@ -1,5 +1,14 @@
 @import "src/styles/sass/colours";
 
+.highlight {
+  transition: all ease-in-out 0.2s;
+}
+
+.highlight:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 .lives {
   color: $lives;
 }

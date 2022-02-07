@@ -9,10 +9,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface ConfirmationStepProps {
     settings: SessionSettings;
+    onSelectStage: (stage: number) => void;
 }
 
 const ConfirmationStep = (props: ConfirmationStepProps) => {
-    const { settings } = props;
+    const { settings, onSelectStage } = props;
 
     const [inSavePresetForm, setInSavePresetForm] = useState(false);
     const [showSave, setShowSave] = useState(true);
@@ -45,7 +46,11 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
 
     const getTimeWords = () => {
         if (time?.timed) {
-            return <span className={styles.time}>{"your session will be timed"}</span>;
+            return (
+                <span>{"your session will be "}
+                    <span className={[styles.time, styles.highlight].join(" ")}>{"timed"}</span>
+                </span>
+            );
         }
 
         if (time?.countdown) {
@@ -77,28 +82,50 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
         setInSavePresetForm(false);
     }
 
+    const answerField = gameSettings?.question.answerField.name;
+    const questionField = gameSettings?.question.questionField.name;
+    const livesDisplay = lives > 0 ? lives : "unlimited";
+    const hintsDisplay = hasUnlimitedHints ? "unlimited" : hints > 0 ? hints : "no";
+
     return (
         <div>
             <p className={styles.question}>
                 <span>{"You'll be given the "}</span>
-                <span className={styles.field}>{gameSettings?.question.questionField.name}</span>
+                <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage(3)}>
+                    {questionField}
+                </span>
                 <span>{" and must "}</span>
-                <span className={styles.type}>{getQuestionTypeWord()}</span>
+                <span className={[styles.type, styles.highlight].join(" ")} onClick={() => onSelectStage(3)}>
+                    {getQuestionTypeWord()}
+                </span>
                 <span>{" the "}</span>
-                <span className={styles.field}>{gameSettings?.question.answerField.name}</span>
+                <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage(3)}>
+                    {answerField}
+                </span>
                 <span>{" for "}</span>
-                <span className={styles.quantity}>{dataSettings?.quantity}</span>
+                <span className={[styles.quantity, styles.highlight].join(" ")} onClick={() => onSelectStage(7)}>
+                    {dataSettings?.quantity}
+                </span>
                 <span>{" questions about "}</span>
-                <span className={styles.topic}>{dataSettings?.topic.name}</span>
+                <span className={[styles.topic, styles.highlight].join(" ")} onClick={() => onSelectStage(0)}>
+                    {dataSettings?.topic.name}
+                </span>
                 <span>{". "}</span>
                 <span>{"You'll have "}</span>
-                <span className={styles.lives}>{lives > 0 ? lives : "unlimited"}{" lives"}</span>
+                <span className={[styles.lives, styles.highlight].join(" ")} onClick={() => onSelectStage(5)}>
+                    {livesDisplay}{" lives"}
+                </span>
                 <span>{", "}</span>
-                <span className={styles.hint}>{hasUnlimitedHints ? "unlimited" : hints > 0 ? hints : "no"}{" hints"}</span>
+                <span className={[styles.hint, styles.highlight].join(" ")} onClick={() => onSelectStage(4)}>
+                    {hintsDisplay}{" hints"}
+                </span>
                 <span>{", "}</span>
-                <span>{getTimeWords()}</span>
+                <span onClick={() => onSelectStage(6)}>{getTimeWords()}</span>
                 <span>{" and "}</span>
-                <span className={styles.score}>{getScoreWords()}{"."}</span>
+                <span className={[styles.score, styles.highlight].join(" ")} onClick={() => onSelectStage(3)}>
+                    {getScoreWords()}
+                </span>
+                <span>{"."}</span>
             </p>
 
             <Accordion>
