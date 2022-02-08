@@ -1,0 +1,35 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  margin-top: -45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  min-height: 100%;
+  width: 100%;
+  background-color: $dark-3;
+}
+
+.message {
+  color: $light-1;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  font-size: 1.4em;
+  position: absolute;
+  transform: translateY(220px);
+  text-shadow: 2px 2px 2px 2px $dark-3;
+  max-width: 500px;
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: $inspect;
+  transition: all ease-in-out 0.2s;
+}
+
+.link:hover {
+  color: $inspect;
+  text-decoration: none;
+  opacity: 0.8;
+}
