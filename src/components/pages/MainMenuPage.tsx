@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import MemoryGame from "../game/MemoryGame";
 import GameResult from "../../domain/game/GameResult";
 import GameResultScreen from "../results/GameResultScreen";
-import LoadingSpinner from "../ui/LoadingSpinner";
 import SettingsMenu from "../layout/SettingsMenu";
 import { fromString } from "../../domain/AppMode";
 import SessionID from "../../domain/session/SessionID";
@@ -21,6 +20,7 @@ import LearnSettings from "../../domain/session/settings/LearnSettings";
 import CardContainer from "../cards/CardContainer";
 import { useModeDispatch } from "../../hooks";
 import { setActive, setApplicationMode } from "../../slices/ModeSlice";
+import LoadingScreen from "../layout/LoadingScreen";
 
 interface PageParameters {
     mode: string;
@@ -99,49 +99,47 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.innerWrapper}>
-                <LoadingSpinner active={loading} />
+            <LoadingScreen active={loading} />
 
-                <CardContainer />
+            {isInMenu && <CardContainer />}
 
-                {isInMenu && (
-                    <SettingsMenu onStart={onStartModeSelection} />
-                )}
+            {isInMenu && (
+                <SettingsMenu onStart={onStartModeSelection} />
+            )}
 
-                {gameConfig && !inResultsScreen && data.length > 0 && (
-                    <MemoryGame
-                        data={data}
-                        settings={gameConfig}
-                        key={sessionKey.value}
-                        onFinish={onGameFinish}
-                        sessionKey={sessionKey.value}
-                    />
-                )}
+            {gameConfig && !inResultsScreen && data.length > 0 && (
+                <MemoryGame
+                    data={data}
+                    settings={gameConfig}
+                    key={sessionKey.value}
+                    onFinish={onGameFinish}
+                    sessionKey={sessionKey.value}
+                />
+            )}
 
-                {inResultsScreen && gameResult && (
-                    <GameResultScreen
-                        result={gameResult}
-                        onClose={onGameResultMenuClose}
-                    />
-                )}
+            {inResultsScreen && gameResult && (
+                <GameResultScreen
+                    result={gameResult}
+                    onClose={onGameResultMenuClose}
+                />
+            )}
 
-                {learnConfig && !inResultsScreen && data.length > 0 && (
-                    <Learn
-                        data={data}
-                        key={sessionKey.value}
-                        onFinish={onLearningFinish}
-                        card={dataConfig?.topic.cards!}
-                    />
-                )}
+            {learnConfig && !inResultsScreen && data.length > 0 && (
+                <Learn
+                    data={data}
+                    key={sessionKey.value}
+                    onFinish={onLearningFinish}
+                    card={dataConfig?.topic.cards!}
+                />
+            )}
 
-                {learningResult && inResultsScreen && (
-                    <LearningResultScreen
-                        result={learningResult}
-                        onPractice={onPracticeStart}
-                        onDismiss={onLearningResultMenuClose}
-                    />
-                )}
-            </div>
+            {learningResult && inResultsScreen && (
+                <LearningResultScreen
+                    result={learningResult}
+                    onPractice={onPracticeStart}
+                    onDismiss={onLearningResultMenuClose}
+                />
+            )}
         </div>
     );
 }
