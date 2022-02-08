@@ -1,17 +1,39 @@
 @import "src/styles/sass/colours";
 
+.toggle {
+  background-color: $dark-1;
+  border-color: $light-3;
+  transition: all ease-in-out 0.2s;
+  min-width: 222px;
+}
+
+.toggle:hover, .toggle:active, .toggle:focus, .toggle:visited {
+  background-color: $dark-2 !important;
+  border-color: $light-2 !important;
+  box-shadow: none !important;
+}
+
+.menu {
+  padding: 0;
+  background-color: $dark-2;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-collapse: separate;
+}
+
 .option {
-  background-color: $light-1;
-  border-radius: 5px;
-  margin-bottom: 4px;
-  padding: 5px;
+  background-color: $dark-1 !important;
+  padding: 6px 12px;
+  font-size: 0.8em;
+  transition: all ease-in-out 0.2s;
+  color: $light-1 !important;
 }
 
-.option > svg {
-  font-size: 1em;
+.option:hover {
+  background-color: $dark-2 !important;
+  color: #FFF !important;
 }
 
-.option > span {
-  font-size: 1em;
-  margin-left: 2px;
+.option.active {
+  color: $inspect !important;
 }

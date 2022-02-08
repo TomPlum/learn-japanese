@@ -28,7 +28,11 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
         setSelectedPreset(mode);
     }
 
-    const TopicSelectionDropdown = () => <TopicSelector onSelect={topic => setTopic(topic)} className={styles.topic} />;
+    const onSelectTopic = (topic: Topic) => {
+        setTopic(topic);
+    }
+
+    const TopicSelectionDropdown = () => <TopicSelector topic={topic} onSelect={onSelectTopic} className={styles.topic} />;
 
     return (
         <Container fluid>
