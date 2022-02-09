@@ -50,4 +50,5 @@ abstract class SessionMode implements GridItem {
     }
 }
 
+
 export default SessionMode;
