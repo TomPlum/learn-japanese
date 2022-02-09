@@ -5,8 +5,15 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faRedo, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import PlayWizard from "../layout/wizard/play/PlayWizard";
+import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 
-const PlayCard = () => {
+export interface PlayCardProps {
+    onStartGame: (settings: SessionSettings) => void;
+}
+
+const PlayCard = (props: PlayCardProps) => {
+
+    const { onStartGame } = props;
 
     const [customising, setCustomising] = useState(false);
     const [error, setError] = useState("");
@@ -47,7 +54,7 @@ const PlayCard = () => {
                     </Col>
                 </Row>
 
-                {customising && <PlayWizard onClose={() => setCustomising(false)} onStart={() => {}} />}
+                {customising && <PlayWizard onClose={() => setCustomising(false)} onStart={onStartGame} />}
             </Card.Body>
         </Card>
     )
