@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, ReactElement, useState } from "react";
 import GridDisplayOptions from "./GridDisplayOptions";
 import { GridOptions } from "../../../domain/grid/GridOptions";
-import { GridDisplayType } from "../../../domain/grid/GridDisplayType";
+import GridDisplayType from "../../../domain/grid/GridDisplayType";
 import styles from "../../../styles/sass/components/layout/wizard/GridDisplay.module.scss";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 
@@ -39,6 +39,7 @@ const GridDisplay = (props: PropsWithChildren<GridDisplayProps>) => {
                         React.Children.map(children, (child => {
                             return React.cloneElement(child as ReactElement, {
                                 style: { width: "100%", height: 40 },
+                                small: options.type.showShort,
                                 className: styles.list
                             });
                         }))
@@ -50,6 +51,7 @@ const GridDisplay = (props: PropsWithChildren<GridDisplayProps>) => {
                         React.Children.map(children, (child => {
                             return React.cloneElement(child as ReactElement, {
                                 style: { width: options.size, height: options.size },
+                                small: options.type.showShort,
                                 className: styles.item
                             });
                         }))

@@ -11,11 +11,12 @@ export interface GridItemProps<T> {
     className?: string;
     value: T,
     style?: {},
+    small?: boolean;
     onClick: (mode: T) => void;
 }
 
 const GridItem = <T,>(props: GridItemProps<T>) => {
-    const { icon, name, value, selected, iconColour, className, style, onClick } = props;
+    const { icon, name, value, selected, iconColour, small, className, style, onClick } = props;
     const isSelected = selected === name;
     const colour = isSelected ? iconColour : "#000"
     const buttonClass = [className, (isSelected ? styles.selected : styles.notSelected), styles.button].join(" ");

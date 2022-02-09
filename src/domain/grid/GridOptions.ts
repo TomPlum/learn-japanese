@@ -1,4 +1,4 @@
-import { GridDisplayType } from "./GridDisplayType";
+import GridDisplayType from "./GridDisplayType";
 
 export interface GridOptions {
     type: GridDisplayType;

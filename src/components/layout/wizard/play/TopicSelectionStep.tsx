@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Topic from "../../../../domain/Topic";
 import GridDisplay from "../GridDisplay";
 import GridItem from "../GridItem";
-import { GridDisplayType } from "../../../../domain/grid/GridDisplayType";
+import GridDisplayType from "../../../../domain/grid/GridDisplayType";
 
 export interface TopicSelectionStepProps {
     onSelect: (topic: Topic) => void;
