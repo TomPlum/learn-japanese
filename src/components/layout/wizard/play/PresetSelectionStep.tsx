@@ -7,6 +7,7 @@ import PlayMode from "../../../../domain/session/PlayMode";
 import GridItem from "../GridItem";
 import GridDisplay from "../GridDisplay";
 import { Environment } from "../../../../utility/Environment";
+import ScrollableContainer from "../../../ui/ScrollableContainer";
 
 export interface PresetSelectionStepProps {
     onSelect: (preset: PlayMode) => void;
@@ -37,23 +38,25 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
     return (
         <Container fluid>
             <Row>
-                <GridDisplay controls customOptions={<TopicSelectionDropdown />}>
-                    {topic.playModes.getModes().map(preset =>
-                        <GridItem
-                            value={preset}
-                            icon={preset.icon}
-                            onClick={onSelectPreset}
-                            className={styles.preset}
-                            name={preset.displayName}
-                            iconColour={preset.colour}
-                            key={preset.displayName + "-button"}
-                            selected={selectedPreset.displayName}
-                        />
-                    )}
-                </GridDisplay>
-                <p className={styles.desc}>
-                    {Environment.variable(`PLAY_${topic.playModes.getTopic()}_${selectedPreset.displayName}_DESC`)}
-                </p>
+                <ScrollableContainer maxHeight={344}>
+                    <GridDisplay controls customOptions={<TopicSelectionDropdown />}>
+                        {topic.playModes.getModes().map(preset =>
+                            <GridItem
+                                value={preset}
+                                icon={preset.icon}
+                                onClick={onSelectPreset}
+                                className={styles.preset}
+                                name={preset.displayName}
+                                iconColour={preset.colour}
+                                key={preset.displayName + "-button"}
+                                selected={selectedPreset.displayName}
+                            />
+                        )}
+                    </GridDisplay>
+                    <p className={styles.desc}>
+                        {Environment.variable(`PLAY_${topic.playModes.getTopic()}_${selectedPreset.displayName}_DESC`)}
+                    </p>
+                </ScrollableContainer>
             </Row>
         </Container>
     )
