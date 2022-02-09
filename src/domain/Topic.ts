@@ -27,58 +27,69 @@ import SentenceStructureForm from "../components/settings/data/SentenceStructure
 import PlayBasicsModes from "./game/mode/PlayBasicsModes";
 import PlayCalendarModes from "./game/mode/PlayCalendarModes";
 import PlayNumbersModes from "./game/mode/PlayNumbersModes";
+import { DataSettingsMenuProps } from "../components/settings/data/DataSettingsMenu";
+import { DataSettingsStepFormProps } from "../components/layout/wizard/play/DataSettingsStep";
+import KanjiDataForm from "../components/layout/wizard/play/data/KanjiDataForm";
+import { GridItem } from "../components/layout/wizard/GridItem";
 
-export default class Topic {
+type ReactComponent = React.FunctionComponent | React.ComponentClass<any> | ((props: DataSettingsMenuProps<any>) => JSX.Element)| ((props: DataSettingsStepFormProps<any>) => JSX.Element) | undefined;
+
+export default class Topic implements GridItem {
     private readonly _name: string;
+    private readonly _shortName: string;
     private readonly _icon: IconDefinition;
     private readonly _modes: LearnMenuModes;
     private readonly _playModes: PlayMenuModes;
     private readonly _cards: CardProps;
-    private readonly _menu: React.FunctionComponent | React.ComponentClass<any> | undefined;
+    private readonly _menu: ReactComponent;
+    private readonly _wizardDataMenu: ReactComponent;
 
     public static KANA = new Topic(
-        "Hiragana & Katakana", faFont, new LearnKanaModes(), new PlayKanaModes(),
+        "Hiragana & Katakana", "Kana", faFont, new LearnKanaModes(), new PlayKanaModes(),
         { front: KanaFlashCardFront, back: KanaFlashCardBack },
         KanaSettingsForm
     );
 
     public static NUMBERS = new Topic(
-        "Numbers & Counting", faYenSign, new LearnNumbersModes(), new PlayNumbersModes(),
+        "Numbers & Counting", "Numbers", faYenSign, new LearnNumbersModes(), new PlayNumbersModes(),
         { front: NumbersFlashCardFront, back: NumbersFlashCardBack }
     );
 
     public static KANJI = new Topic(
-        "Jōyō Kanji", faPaintBrush, new LearnKanjiModes(), new PlayKanjiModes(),
+        "Jōyō Kanji", "Kanji", faPaintBrush, new LearnKanjiModes(), new PlayKanjiModes(),
         { front: KanjiFlashCardFront, back: KanjiFlashCardBack },
-        KanjiSettingsForm
+        KanjiSettingsForm, KanjiDataForm
     );
 
     public static BASICS = new Topic(
-        "Basics", faAppleAlt, new LearnBasicsModes(), new PlayBasicsModes(),
+        "Basics", "Basics", faAppleAlt, new LearnBasicsModes(), new PlayBasicsModes(),
         { front: BasicsFlashCardFront, back: BasicsFlashCardBack }
     );
 
     public static CALENDAR = new Topic(
-        "Days & Months", faCalendarAlt, new LearnCalendarModes(), new PlayCalendarModes(),
+        "Days & Months", "Calendar", faCalendarAlt, new LearnCalendarModes(), new PlayCalendarModes(),
         { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack }
     );
 
     public static GRAMMAR = new Topic(
-        "Sentence Structure", faSpellCheck, new LearnSentenceStructureModes(), new PlaySentenceStructureModes(),
+        "Sentence Structure", "Grammar", faSpellCheck, new LearnSentenceStructureModes(), new PlaySentenceStructureModes(),
         { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack },
         SentenceStructureForm
     );
 
     public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR, Topic.GRAMMAR];
 
-    private constructor(name: string, icon: IconDefinition, modes: LearnMenuModes, playModes: PlayMenuModes,
-                        cards: CardProps, menu: React.FunctionComponent | React.ComponentClass<any> | undefined = undefined) {
+    private constructor(name: string, shortName: string, icon: IconDefinition, modes: LearnMenuModes, playModes: PlayMenuModes,
+                        cards: CardProps, menu: ReactComponent = undefined, wizardDataMenu: ReactComponent = undefined
+    ) {
         this._name = name;
+        this._shortName = shortName;
         this._icon = icon;
         this._modes = modes;
         this._playModes = playModes;
         this._cards = cards;
         this._menu = menu;
+        this._wizardDataMenu = wizardDataMenu;
     }
 
     get name(): string {
@@ -101,7 +112,19 @@ export default class Topic {
         return this._playModes;
     }
 
-    get menu(): React.FunctionComponent | React.ComponentClass<any> | undefined {
+    get menu(): ReactComponent {
         return this._menu;
+    }
+
+    get wizardDataMenu(): ReactComponent {
+        return this._wizardDataMenu;
+    }
+
+    getLongName(): string {
+        return this._name;
+    }
+
+    getShortName(): string {
+        return this._shortName;
     }
 }

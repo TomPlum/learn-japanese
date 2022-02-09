@@ -1,39 +1,52 @@
 @import "src/styles/sass/colours";
 
 .button {
+  color: $dark-1;
   padding: 5px;
+  transition: all ease-in-out 0.2s;
 }
 
 .notSelected {
   background-color: rgba(215, 215, 215, 0.6);
   border-color: rgba(148, 148, 148, 0.8);
-  color: rgba(0, 0, 0, 0.8);
+  color: $dark-2;
 }
 
 .notSelected:active, .notSelected:focus, {
   box-shadow: none;
   background-color: $light-1;
+  color: $dark-3 !important;
 }
 
+
 .notSelected:hover {
-  color: black;
+  color: $dark-2;
   background-color: #b3b3b3;
   border: none;
 }
 
 .selected:hover {
-  color: #000;
+  color: $dark-2;
   background-color: $light-1;
 }
 
-.selected, .selected:focus, .selected:active {
-  background-color: $light-1;
-  border-color: rgba(148, 148, 148, 0.8);
-  color: black;
-  box-shadow: none;
+.selected, .selected:focus, .selected:active, .button:active, button:focus {
+  background-color: $light-1 !important;
+  border-color: rgba(148, 148, 148, 0.8) !important;
+  color: $dark-3;
+  box-shadow: none !important;
+}
+
+.selected > svg {
+  color: $topic !important;
 }
 
 .name {
-  font-size: 1em;
+  font-size: 1.1em;
   margin-bottom: 0;
+}
+
+.icon {
+  color: $dark-3 !important;
+  font-size: 1.5em;
 }

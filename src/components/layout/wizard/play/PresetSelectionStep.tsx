@@ -46,7 +46,6 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
                                 icon={preset.icon}
                                 onClick={onSelectPreset}
                                 className={styles.preset}
-                                name={preset.displayName}
                                 iconColour={preset.colour}
                                 key={preset.displayName + "-button"}
                                 selected={selectedPreset.displayName}

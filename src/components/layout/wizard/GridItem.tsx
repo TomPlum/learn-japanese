@@ -3,10 +3,14 @@ import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
-export interface GridItemProps<T> {
+export interface GridItem {
+    getShortName: () => string;
+    getLongName: () => string;
+}
+
+export interface GridItemProps<T extends GridItem> {
     icon: IconDefinition | string;
     iconColour?: string;
-    name: string;
     selected: string;
     className?: string;
     value: T,
@@ -15,9 +19,9 @@ export interface GridItemProps<T> {
     onClick: (mode: T) => void;
 }
 
-const GridItem = <T,>(props: GridItemProps<T>) => {
-    const { icon, name, value, selected, iconColour, small, className, style, onClick } = props;
-    const isSelected = selected === name;
+const GridItem = <T extends GridItem>(props: GridItemProps<T>) => {
+    const { icon, value, selected, small, iconColour, className, style, onClick } = props;
+    const isSelected = selected === value.getShortName() || selected === value.getLongName();
     const colour = isSelected ? iconColour : "#000"
     const buttonClass = [className, (isSelected ? styles.selected : styles.notSelected), styles.button].join(" ");
 
@@ -31,10 +35,10 @@ const GridItem = <T,>(props: GridItemProps<T>) => {
         <Button onClick={handleOnClick} className={buttonClass} style={style}>
             {isFontAwesomeIcon() &&
                 <FontAwesomeIcon
-                    icon={icon as IconDefinition}
                     fixedWidth
                     className={styles.icon}
                     style={{ color: colour }}
+                    icon={icon as IconDefinition}
                 />
             }
 
@@ -44,7 +48,7 @@ const GridItem = <T,>(props: GridItemProps<T>) => {
                 </span>
             }
 
-            <p className={styles.name}>{name}</p>
+            <p className={styles.name}>{small ? value.getShortName() : value.getLongName()}</p>
         </Button>
     );
 }

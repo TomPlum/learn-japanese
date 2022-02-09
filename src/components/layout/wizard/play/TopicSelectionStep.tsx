@@ -29,7 +29,6 @@ const TopicSelectionStep = (props: TopicSelectionStepProps) => {
                                 value={topic}
                                 key={topic.name}
                                 icon={topic.icon}
-                                name={topic.name}
                                 onClick={handleChange}
                                 selected={selected.name}
                             />
