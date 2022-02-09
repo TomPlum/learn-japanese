@@ -1,14 +1,15 @@
 @import "src/styles/sass/colours";
 
 .container {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+  padding: 0;
 }
 
 .wrapper {
-  max-width: 600px;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 344px;
 }
 
 @mixin button {
