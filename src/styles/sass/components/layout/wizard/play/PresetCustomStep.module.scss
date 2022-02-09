@@ -35,9 +35,9 @@
 
 .selected, .selected:focus, .selected:active, .selected:hover, .button:active, .selected:active {
   @include button;
-  background-color: $light-1;
-  color: $dark-2;
-  box-shadow: none;
+  background-color: $light-1 !important;
+  color: $dark-2 !important;
+  box-shadow: none !important;
 }
 
 .icon {
