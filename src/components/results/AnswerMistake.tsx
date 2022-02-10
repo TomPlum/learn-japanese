@@ -13,10 +13,14 @@ class AnswerMistake extends Component<AnswerMistakeProps> {
     render() {
         const { value, times } = this.props;
 
+        const kanji = value.getKanjiVariation()
+        const kana = value.getKana()[0];
+        const romaji = new RomajiGenerator().generate(kana)
+
         return (
             <Container className={styles.wrapper}>
                 <Row className={styles.kanaWrapper}>
-                    <p className={styles.kana}>{value.getKana()[0]}</p>
+                    <p className={styles.kana}>{kanji ? kanji : kana}</p>
                 </Row>
 
                 <Row className={styles.infoWrapper}>
@@ -25,11 +29,10 @@ class AnswerMistake extends Component<AnswerMistakeProps> {
                     </Col>
                     <Col xs={6} className={styles.col}>
                         <span className={styles.romaji}>
-                            {new RomajiGenerator().generate(value.getKana()[0])}
+                            {romaji}
                         </span>
                     </Col>
                 </Row>
-
             </Container>
         );
     }
