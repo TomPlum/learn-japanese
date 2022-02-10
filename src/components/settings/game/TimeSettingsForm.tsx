@@ -1,5 +1,5 @@
 import React, { ChangeEvent, Component } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Fade, Row } from "react-bootstrap";
 import TimeSettings, { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings";
 import styles from "../../../styles/sass/components/settings/game/TimeSettingsForm.module.scss";
 import RangeSlider from "react-bootstrap-range-slider";
@@ -92,18 +92,24 @@ class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsForm
                         <p className={[styles.description, countdown ? styles.active : styles.inactive].join(" ")}>
                             You'll have a set number of seconds to answer each question. Failing to answer correctly in
                             the given time will lose you a life. Answering correctly will reset the timer.
-                            {countdown && <span> Select the number of seconds per question below:</span>}
+                            {countdown && (
+                                <Fade in={countdown} appear={countdown}>
+                                    <span> Select the number of seconds per question below:</span>
+                                </Fade>
+                            )}
                         </p>
 
                         {countdown && (
-                            <RangeSlider
-                                min={0} max={60}
-                                value={seconds}
-                                variant="primary"
-                                disabled={timed}
-                                data-testid="seconds-slider"
-                                onChange={this.onChangeCountDownSeconds}
-                             />
+                            <Fade in={countdown} appear={countdown}>
+                                <RangeSlider
+                                    min={0} max={60}
+                                    value={seconds}
+                                    variant="primary"
+                                    disabled={timed}
+                                    data-testid="seconds-slider"
+                                    onChange={this.onChangeCountDownSeconds}
+                                />
+                            </Fade>
                         )}
                     </Col>
                 </Row>
