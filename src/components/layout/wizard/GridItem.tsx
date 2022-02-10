@@ -27,6 +27,7 @@ const GridItem = <T extends GridItem>(props: GridItemProps<T>) => {
     const isSelected = selected === value.getShortName() || selected === value.getLongName();
     const colour = isSelected ? iconColour : "#000"
     const buttonClass = [className, (isSelected ? styles.selected : styles.notSelected), styles.button].join(" ");
+    const popover = { title: value.getLongName(), text: desc! };
 
     const handleOnClick = () => onClick(value);
 
@@ -36,7 +37,7 @@ const GridItem = <T extends GridItem>(props: GridItemProps<T>) => {
 
     return (
         <ConditionalWrapper condition={isSelected && !!desc} wrapper={button =>
-            <Inspectable popover={{ title: value.getLongName(), text: desc! }} placement="bottom">
+            <Inspectable popover={popover} placement="bottom" className={styles.inspectable} disableUnderline>
                 {button}
             </Inspectable>
         }>

@@ -6,29 +6,34 @@ import { Placement } from "react-bootstrap/Overlay";
 import ComponentTree from "../../utility/ComponentTree";
 
 export type InspectableProps = {
-    popover: PopOverProps;
-    placement?: Placement;
     className?: string;
+    placement?: Placement;
+    popover: PopOverProps;
     color?: 'white' | 'black';
+    disableUnderline?: boolean;
 }
 
 class Inspectable extends Component<InspectableProps> {
     render() {
-        const { popover, className, placement, color, children } = this.props;
+        const { popover, className, disableUnderline, placement, children } = this.props;
 
-        const classes = color === 'white' ? [styles.white] : [styles.black, className ?? ""]
+        const classNames = [styles.inspectable, className];
+
+        if (!disableUnderline) {
+            classNames.push(styles.underline);
+        }
 
         return (
             <OverlayTrigger
-                trigger={["hover", "focus", "click"]}
-                rootClose={true}
+                rootClose
+                defaultShow={false}
                 placement={placement ?? "left"}
                 overlay={<PopOver {...popover} />}
-                defaultShow={false}
+                trigger={["hover", "focus", "click"]}
             >
                 {
                     new ComponentTree(children).addPropsToLeafNode((leaf: ReactElement) => {
-                        return { className: classes.concat(leaf.props.className).join(" ") }
+                        return { className: classNames.concat(leaf.props.className).join(" ") }
                     })
                 }
             </OverlayTrigger>

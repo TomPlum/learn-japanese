@@ -40,9 +40,9 @@
   box-shadow: none !important;
 }
 
-/*.selected > svg {
-  color: $topic !important;
-}*/
+.inspectable {
+  color: $dark-3;
+}
 
 .name {
   font-size: 1.1em;
