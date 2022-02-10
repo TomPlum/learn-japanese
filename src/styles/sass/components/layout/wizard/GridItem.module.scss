@@ -24,9 +24,13 @@
   border: none;
 }
 
+.notSelected > svg {
+  color: $dark-2 !important;
+}
+
 .selected:hover {
   color: $dark-2;
-  background-color: $light-1;
+  background-color: $light-2;
 }
 
 .selected, .selected:focus, .selected:active, .button:active, .button:focus {
@@ -36,16 +40,18 @@
   box-shadow: none !important;
 }
 
-.selected > svg {
+/*.selected > svg {
   color: $topic !important;
-}
+}*/
 
 .name {
   font-size: 1.1em;
   margin-bottom: 0;
+  text-decoration: none;
+  line-height: 18px;
 }
 
 .icon {
-  color: $dark-3 !important;
+  transition: color ease-in-out 0.2s;
   font-size: 1.5em;
 }
