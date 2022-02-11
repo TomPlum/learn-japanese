@@ -83,12 +83,6 @@ test('Should render the action word "answer" if the question type is random', ()
     expect(screen.getByText("answer")).toBeInTheDocument();
 });
 
-test('Should render the action word "answer" if the question type is unknown', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType("UNKNOWN" as QuestionType).build()));
-    render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
-    expect(screen.getByText("answer")).toBeInTheDocument();
-});
-
 test('Should render the intermediary text between the question type and answer field', () => {
     withGameSettings(new GameSettingsBuilder());
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
