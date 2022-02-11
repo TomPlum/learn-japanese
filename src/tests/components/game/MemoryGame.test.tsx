@@ -1,6 +1,6 @@
 import MemoryGame, { MemoryGameProps } from "../../../components/game/MemoryGame";
 import { cleanup, fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
-import { QuestionType } from "../../../domain/game/QuestionType";
+import QuestionType from "../../../domain/game/QuestionType";
 import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
 import { KanaColumn } from "../../../domain/kana/KanaColumn";

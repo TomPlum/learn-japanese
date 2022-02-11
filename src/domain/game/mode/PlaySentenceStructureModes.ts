@@ -4,7 +4,7 @@ import { faCircle, faGrinBeam, faToriiGate } from "@fortawesome/free-solid-svg-i
 import { SentenceStructureSettingsBuilder } from "../../session/settings/data/SentenceStructureSettings";
 import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";
-import { QuestionType } from "../QuestionType";
+import QuestionType from "../QuestionType";
 import LearnableField from "../../learn/LearnableField";
 import { HintSettingsBuilder } from "../../session/settings/game/HintSettings";
 import { TimeSettingsBuilder } from "../../session/settings/game/TimeSettings";

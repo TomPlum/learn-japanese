@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { QuestionType } from "../../../domain/game/QuestionType";
+import QuestionType from "../../../domain/game/QuestionType";
 import DisplayTypeButton from "../../ui/buttons/DisplayTypeButton";
 import { faChevronRight, faFont, faGripVertical, faHandPointer, faSquare, faThLarge } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row } from "react-bootstrap";

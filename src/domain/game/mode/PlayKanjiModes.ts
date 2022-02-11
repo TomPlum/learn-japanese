@@ -1,7 +1,7 @@
 import { faBezierCurve, faCircle, faPaintBrush, faRandom, faSchool, faStar } from "@fortawesome/free-solid-svg-icons";
 import { PlayMenuModes } from "../../MenuModes";
 import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
-import { QuestionType } from "../QuestionType";
+import QuestionType from "../QuestionType";
 import PlayMode from "../../session/PlayMode";
 import { KanjiSettingsBuilder } from "../../session/settings/data/KanjiSettings";
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";

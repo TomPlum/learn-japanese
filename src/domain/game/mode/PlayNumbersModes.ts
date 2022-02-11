@@ -3,7 +3,7 @@ import PlayMode from "../../session/PlayMode";
 import { faBaby, faCalculator, faRuler, faSort, faSortNumericDown, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";
-import { QuestionType } from "../QuestionType";
+import QuestionType from "../QuestionType";
 import LearnableField from "../../learn/LearnableField";
 import { LifeSettingsBuilder } from "../../session/settings/game/LifeSettings";
 import { NumbersSettingsBuilder } from "../../session/settings/data/NumbersSettings";

@@ -1,4 +1,4 @@
-import { QuestionType } from "../../../game/QuestionType";
+import QuestionType from "../../../game/QuestionType";
 import LearnableField from "../../../learn/LearnableField";
 import FilterChain from "../../../../filters/FilterChain";
 import { Learnable } from "../../../learn/Learnable";

@@ -2,7 +2,7 @@ import { SessionSettings } from "../../../../domain/session/settings/SessionSett
 import styles from "../../../../styles/sass/components/layout/wizard/play/ConfirmationStep.module.scss";
 import { Accordion, Button } from "react-bootstrap";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import { QuestionType } from "../../../../domain/game/QuestionType";
+import QuestionType from "../../../../domain/game/QuestionType";
 import CustomPresetForm from "./CustomPresetForm";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

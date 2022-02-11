@@ -2,7 +2,7 @@ import { PlayMenuModes } from "../../MenuModes";
 import PlayMode from "../../session/PlayMode";
 import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";
-import { QuestionType } from "../QuestionType";
+import QuestionType from "../QuestionType";
 import LearnableField from "../../learn/LearnableField";
 import { TimeSettingsBuilder } from "../../session/settings/game/TimeSettings";
 import { HintSettingsBuilder } from "../../session/settings/game/HintSettings";

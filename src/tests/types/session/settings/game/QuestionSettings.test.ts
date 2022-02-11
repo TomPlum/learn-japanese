@@ -1,5 +1,5 @@
 import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../domain/session/settings/game/QuestionSettings";
-import { QuestionType } from "../../../../../domain/game/QuestionType";
+import QuestionType from "../../../../../domain/game/QuestionType";
 import LearnableField from "../../../../../domain/learn/LearnableField";
 import FilterChain from "../../../../../filters/FilterChain";
 import { Learnable } from "../../../../../domain/learn/Learnable";

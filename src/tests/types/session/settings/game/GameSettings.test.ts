@@ -1,5 +1,5 @@
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
-import { QuestionType } from "../../../../../domain/game/QuestionType";
+import QuestionType from "../../../../../domain/game/QuestionType";
 import LifeSettings, { LifeSettingsBuilder } from "../../../../../domain/session/settings/game/LifeSettings";
 import HintSettings, { HintSettingsBuilder } from "../../../../../domain/session/settings/game/HintSettings";
 import TimeSettings, { TimeSettingsBuilder } from "../../../../../domain/session/settings/game/TimeSettings";

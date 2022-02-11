@@ -5,7 +5,7 @@ import PlayMode from "../../session/PlayMode";
 import { KanaSettingsBuilder } from "../../session/settings/data/KanaSettings";
 import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 import { QuestionSettingsBuilder } from "../../session/settings/game/QuestionSettings";
-import { QuestionType } from "../QuestionType";
+import QuestionType from "../QuestionType";
 import { HintSettingsBuilder } from "../../session/settings/game/HintSettings";
 import { LifeSettingsBuilder } from "../../session/settings/game/LifeSettings";
 import { TimeSettingsBuilder } from "../../session/settings/game/TimeSettings";
@@ -61,7 +61,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                     .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
                     .build()
             ),
-            new PlayMode("Kana", "#a01219", faKickstarterK,
+            new PlayMode("Kana", "#7e2bd7", faKickstarterK,
                 new KanaSettingsBuilder().withEverything().build(),
                 new GameSettingsBuilder()
                     .withQuestionSettings(
@@ -80,7 +80,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                     .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(3).build())
                     .build()
             ),
-            new PlayMode("Match", "#56d94d", faBezierCurve,
+            new PlayMode("Match", "#38c742", faBezierCurve,
                 new KanaSettingsBuilder().withEverything().withQuantity(45).build(),
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()

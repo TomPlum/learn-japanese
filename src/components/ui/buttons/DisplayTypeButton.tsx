@@ -2,7 +2,7 @@ import { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "react-bootstrap";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { QuestionType } from "../../../domain/game/QuestionType";
+import QuestionType from "../../../domain/game/QuestionType";
 import styles from "../../../styles/sass/components/ui/buttons/DisplayTypeButton.module.scss";
 
 export interface DisplayTypeButtonProps {

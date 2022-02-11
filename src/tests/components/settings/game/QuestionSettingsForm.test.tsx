@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import QuestionSettingsForm from "../../../../components/settings/game/QuestionSettingsForm";
-import { QuestionType } from "../../../../domain/game/QuestionType";
+import QuestionType from "../../../../domain/game/QuestionType";
 import { Environment } from "../../../../utility/Environment";
 import QuestionSettings from "../../../../domain/session/settings/game/QuestionSettings";
 import { getValueLastCalledWith } from "../../../Queries";
