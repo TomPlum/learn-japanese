@@ -79,6 +79,18 @@ export default class Topic implements GridItem {
 
     public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR, Topic.GRAMMAR];
 
+    public static fromName(name: string): Topic {
+        switch (name) {
+            case "Hiragana & Katakana": return Topic.KANA;
+            case "Numbers & Counting": return Topic.NUMBERS;
+            case "Jōyō Kanji": return Topic.KANJI;
+            case "Basics": return Topic.BASICS;
+            case "Days & Months": return Topic.CALENDAR;
+            case "Sentence Structure": return Topic.GRAMMAR;
+            default: throw new Error(`Invalid Topic [${name}]`);
+        }
+    }
+
     private constructor(name: string, shortName: string, icon: IconDefinition, modes: LearnMenuModes, playModes: PlayMenuModes,
                         cards: CardProps, menu: ReactComponent = undefined, wizardDataMenu: ReactComponent = undefined
     ) {
