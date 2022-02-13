@@ -23,7 +23,7 @@ const LoadingScreen = (props: { active: boolean }) => {
     if (props.active) {
         return (
             <Fade appear in timeout={500}>
-                <div className={styles.wrapper}>
+                <div className={styles.wrapper} data-testid="loading-screen">
                     <SwayingLanternAnimation />
 
                     <span className={styles.message}>

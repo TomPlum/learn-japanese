@@ -7,13 +7,12 @@ import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../
 import CalendarSettings, { CalendarSettingsBuilder } from "../domain/session/settings/data/CalendarSettings";
 import BasicsSettings, { BasicsSettingsBuilder } from "../domain/session/settings/data/BasicsSettings";
 import { KyoikuGrade } from "../domain/kanji/KyoikuGrade";
-import Topic from "../domain/Topic";
 
 class DataSettingsConverter {
     public serialise(settings: DataSettings): DataSettingsState {
         if (settings instanceof KanaSettings) {
             return {
-                topic: Topic.KANA.name,
+                topic: settings.topic.name,
                 quantity: settings.quantity,
                 hiragana: settings.hiragana,
                 katakana: settings.katakana,
@@ -24,14 +23,14 @@ class DataSettingsConverter {
             } as KanaDataSettingsState;
         } else if (settings instanceof KanjiSettings) {
             return {
-                topic: Topic.KANJI.name,
+                topic: settings.topic.name,
                 quantity: settings.quantity,
                 tags: settings.tags,
                 grades: settings.grades.map(it => it.value)
             } as KanjiDataSettingsState;
         } else if (settings instanceof NumbersSettings) {
             return {
-                topic: Topic.NUMBERS.name,
+                topic: settings.topic.name,
                 quantity: settings.quantity,
                 age: settings.age,
                 exceptions: settings.exceptions,
@@ -42,7 +41,7 @@ class DataSettingsConverter {
             } as NumbersDataSettingsState;
         } else if (settings instanceof SentenceStructureSettings) {
             return {
-                topic: Topic.GRAMMAR.name,
+                topic: settings.topic.name,
                 quantity: settings.quantity,
                 expressions: settings.expressions,
                 nouns: settings.nouns,
@@ -53,7 +52,7 @@ class DataSettingsConverter {
             } as SentenceStructureDataSettingsState;
         } else if (settings instanceof CalendarSettings) {
             return {
-                topic: Topic.CALENDAR.name,
+                topic: settings.topic.name,
                 quantity: settings.quantity,
                 nouns: settings.nouns,
                 days: settings.days,
@@ -63,7 +62,7 @@ class DataSettingsConverter {
             } as CalenderDataSettingsState;
         } else if (settings instanceof BasicsSettings) {
             return {
-                topic: Topic.BASICS.name,
+                topic: settings.topic.name,
                 quantity: settings.quantity,
                 body: settings.body,
                 animals: settings.animals,
