@@ -1,5 +1,5 @@
 import GameSettings, { GameSettingsBuilder } from "../domain/session/settings/game/GameSettings";
-import { GameSettingState } from "../slices/GameConfigSlice";
+import { GameSettingState } from "../slices/GameSettingsSlice";
 import { LifeSettingsBuilder } from "../domain/session/settings/game/LifeSettings";
 import { HintSettingsBuilder } from "../domain/session/settings/game/HintSettings";
 import { TimeSettingsBuilder } from "../domain/session/settings/game/TimeSettings";
