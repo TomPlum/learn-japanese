@@ -110,7 +110,8 @@ const PlayWizard = (props: PlayWizardProps) => {
                     icon: faSwatchbook,
                     name: "Select Topic",
                     iconClass: styles.topicIcon,
-                    body: <TopicSelectionStep onSelect={topic => setTopic(topic)} />
+                    body: <TopicSelectionStep onSelect={topic => setTopic(topic)} />,
+                    intermediate: true
                 }
             }
             case 2: {

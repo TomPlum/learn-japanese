@@ -17,7 +17,7 @@ const setup = () => {
 beforeEach(() => {
     props = {
         custom: false,
-        stage: 0,
+        stage: 1,
         onSelectStage: onSelectStageHandler
     }
 });
@@ -25,7 +25,7 @@ beforeEach(() => {
 test('Clicking a step should call on the onSelectStage handler with that stages numerical value', () => {
     const { topic } = setup();
     fireEvent.click(topic);
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(0);
+    expect(onSelectStageHandler).toHaveBeenLastCalledWith(1);
 });
 
 test('Passing custom as false should render only the topic, type and preset steps', () => {

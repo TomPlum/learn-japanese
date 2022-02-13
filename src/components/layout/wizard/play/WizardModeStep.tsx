@@ -50,7 +50,7 @@ const WizardModeStep = (props: WizardModeStepStepProps) => {
                 </Row>
             </Container>
         </div>
-    )
+    );
 }
 
 export default WizardModeStep;
