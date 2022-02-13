@@ -101,7 +101,9 @@ const MainMenuPage = (props: RouteComponentProps<PageParameters>) => {
         <div className={styles.wrapper}>
             <LoadingScreen key={`${loading}`} active={loading} />
 
-            {isInMenu && <CardContainer onStartGame={onStartModeSelection} />}
+            {isInMenu && (
+                <CardContainer />
+            )}
 
             {isInMenu && (
                 <SettingsMenu onStart={onStartModeSelection} />

@@ -11,6 +11,7 @@ import KanjiBankPage from "../pages/KanjiBankPage";
 import ProtectedRoute from "./ProtectedRoute";
 import { useUserSelector } from "../../hooks";
 import GenkiGrammarPage from "../pages/GenkiGrammarPage";
+import PlayPage from "../pages/PlayPage";
 
 const NavigableMain = () => {
 
@@ -20,6 +21,7 @@ const NavigableMain = () => {
         <NavigationWrapper>
             <Switch>
                 <Route exact path="/menu/:mode" component={MainMenuPage}/>
+                <Route exact path="/play" component={PlayPage} />
                 <Route exact path="/search" component={SearchPage}/>
                 <Route exact path="/help" component={HelpPage}/>
                 <ProtectedRoute isAuthenticated={!!user} exact path="/profile" component={ProfilePage} />

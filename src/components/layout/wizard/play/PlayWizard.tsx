@@ -24,10 +24,13 @@ import slideRight from "../../../../styles/sass/transitions/slide-right.module.s
 import slideLeft from "../../../../styles/sass/transitions/slide-left.module.scss";
 import PlayKanaModes from "../../../../domain/game/mode/PlayKanaModes";
 import PlayMode from "../../../../domain/session/PlayMode";
+import { useDataSettingsDispatch, useGameSettingsDispatch } from "../../../../hooks";
+import { setGameSettings } from "../../../../slices/GameSettingsSlice";
+import { setDataSettings as setGlobalDataSettings } from "../../../../slices/DataSettingsSlice";
+import { useHistory } from "react-router-dom";
 
 interface PlayWizardProps {
     onClose: () => void;
-    onStart: (settings: SessionSettings) => void;
 }
 
 interface StageDetails {
@@ -41,7 +44,7 @@ interface StageDetails {
 
 const PlayWizard = (props: PlayWizardProps) => {
 
-    const { onStart, onClose } = props;
+    const { onClose } = props;
 
     const [animate, setAnimate] = useState(false);
     const [isCustom, setIsCustom] = useState(false);
@@ -52,8 +55,10 @@ const PlayWizard = (props: PlayWizardProps) => {
     const [dataSettings, setDataSettings] = useState<DataSettings | undefined>(undefined);
     const [goingForwards, setGoingForwards] = useState(true);
     const [preset, setPreset] = useState<PlayMode>(new PlayKanaModes().getModes()[0]);
+    const history = useHistory();
 
-   // const prevStage = usePrevious<number>(stage);
+    const gameSettingsDispatcher = useGameSettingsDispatch();
+    const dataSettingsDispatcher = useDataSettingsDispatch();
 
     useEffect(() => setAnimate(true), [stage]);
 
@@ -82,7 +87,9 @@ const PlayWizard = (props: PlayWizardProps) => {
     const handlePlay = () => {
         const data = isCustom ? dataSettings! : preset.dataSettings;
         const game = isCustom ? settings.build() : preset.modeSettings as GameSettings;
-        onStart(SessionSettings.forGame(data, game));
+        gameSettingsDispatcher(setGameSettings(game));
+        dataSettingsDispatcher(setGlobalDataSettings(data));
+        history.push('/play');
     }
 
     const getStageDetails = (): StageDetails => {

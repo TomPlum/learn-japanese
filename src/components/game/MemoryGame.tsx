@@ -270,8 +270,8 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
                 //What wrong options will be presented? Takes the answer filter from the settings and excludes the question.
                 //We then filter our Learnable data and retrieve n options. Then we map chosen answer fields for them.
-                const chain = settings.question.answerFilter(currentQuestion).withFilter(new ExclusionFilter(currentQuestion[0]));
-                const wrong = Arrays.getRandomElements(chain.execute(data), settings.question.cards - 1);
+                //const chain = settings.question.answerFilter(currentQuestion).withFilter(new ExclusionFilter(currentQuestion[0]));
+                const wrong = Arrays.getRandomElements(data, settings.question.cards - 1);
                 const wrongAnswerOptions = wrong.map((answer: Learnable) => answer.getFieldValues(answerField)[0]);
 
                 return (
