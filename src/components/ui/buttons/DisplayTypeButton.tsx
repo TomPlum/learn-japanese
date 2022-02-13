@@ -28,7 +28,7 @@ class DisplayTypeButton extends Component<DisplayTypeButtonProps> {
         return (
             <Button block className={className} onClick={() => onClick(type)}>
                 <FontAwesomeIcon className={styles.icon} icon={icon} />
-                <p className={styles.name}>{type}</p>
+                <p className={styles.name}>{type.name}</p>
             </Button>
         );
     }
