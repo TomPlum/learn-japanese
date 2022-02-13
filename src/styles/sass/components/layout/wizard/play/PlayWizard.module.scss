@@ -58,6 +58,11 @@
   font-size: 1.8em;
 }
 
+.modeIcon {
+  @include icon;
+  color: $bootstrap-info;
+}
+
 .topicIcon {
   @include icon;
   color: $topic;

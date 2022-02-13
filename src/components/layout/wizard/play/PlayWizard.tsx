@@ -2,7 +2,7 @@ import { Modal } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import PresetCustomStep from "./PresetCustomStep";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizard.module.scss";
-import { faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTimes, faTools, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDoubleRight, faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faPlay, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTimes, faTools, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBomb } from "@fortawesome/free-solid-svg-icons/faBomb";
 import PresetSelectionStep from "./PresetSelectionStep";
@@ -28,6 +28,8 @@ import { useDataSettingsDispatch, useGameSettingsDispatch } from "../../../../ho
 import { setGameSettings } from "../../../../slices/GameSettingsSlice";
 import { setDataSettings as setGlobalDataSettings } from "../../../../slices/DataSettingsSlice";
 import { useHistory } from "react-router-dom";
+import WizardModeStep from "./WizardModeStep";
+import { AppMode } from "../../../../domain/AppMode";
 
 interface PlayWizardProps {
     onClose: () => void;
@@ -47,6 +49,7 @@ const PlayWizard = (props: PlayWizardProps) => {
     const { onClose } = props;
 
     const [animate, setAnimate] = useState(false);
+    const [mode, setMode] = useState(AppMode.PLAY);
     const [isCustom, setIsCustom] = useState(false);
     const [topic, setTopic] = useState(Topic.KANA);
     const [confirmClose, setConfirmClose] = useState(false);
@@ -96,13 +99,21 @@ const PlayWizard = (props: PlayWizardProps) => {
         switch (stage) {
             case 0: {
                 return {
+                    icon: faAngleDoubleRight,
+                    name: "Select Mode",
+                    iconClass: styles.modeIcon,
+                    body: <WizardModeStep onSelect={mode => setMode(mode)} />
+                }
+            }
+            case 1: {
+                return {
                     icon: faSwatchbook,
                     name: "Select Topic",
                     iconClass: styles.topicIcon,
                     body: <TopicSelectionStep onSelect={topic => setTopic(topic)} />
                 }
             }
-            case 1: {
+            case 2: {
                 return {
                     icon: faTools,
                     name: "Select Type",
@@ -111,16 +122,16 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 2: {
+            case 3: {
                 return {
                     icon: faProjectDiagram,
                     name: "Choose Preset",
                     iconClass: styles.presetIcon,
-                    body: <PresetSelectionStep onSelect={preset => setPreset(preset)} />,
+                    body: <PresetSelectionStep selected={topic} onSelect={preset => setPreset(preset)} />,
                     terminal: true
                 }
             }
-            case 3: {
+            case 4: {
                 return {
                     icon: faQuestionCircle,
                     iconClass: styles.questionIcon,
@@ -129,7 +140,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 4: {
+            case 5: {
                 return {
                     icon: faLightbulb,
                     iconClass: styles.hintsIcon,
@@ -138,7 +149,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 5: {
+            case 6: {
                 return {
                     icon: faHeartbeat,
                     iconClass: styles.livesIcon,
@@ -147,7 +158,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 6: {
+            case 7: {
                 return {
                     icon: faStopwatch,
                     iconClass: styles.timeIcon,
@@ -156,7 +167,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 7: {
+            case 8: {
                 return {
                     icon: faDatabase,
                     iconClass: styles.dataIcon,
@@ -165,7 +176,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 8: {
+            case 9: {
                 return {
                     icon: faCheckCircle,
                     iconClass: styles.confirmIcon,
