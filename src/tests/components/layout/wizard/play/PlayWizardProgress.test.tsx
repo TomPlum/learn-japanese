@@ -16,6 +16,7 @@ const setup = () => {
 
 beforeEach(() => {
     props = {
+        valid: true,
         custom: false,
         stage: 1,
         onSelectStage: onSelectStageHandler
@@ -34,6 +35,7 @@ test('Passing custom as false should render only the topic, type and preset step
     setup();
 
     // These steps should be rendered
+    expect(screen.getByTitle('Play or Learn')).toBeInTheDocument();
     expect(screen.getByTitle('Topic')).toBeInTheDocument();
     expect(screen.getByTitle('Preset or Custom')).toBeInTheDocument();
     expect(screen.getByTitle('Preset')).toBeInTheDocument();
@@ -53,6 +55,7 @@ test('Passing custom as true should render all steps except the preset one', () 
     setup();
 
     // These steps should be rendered
+    expect(screen.getByTitle('Play or Learn')).toBeInTheDocument();
     expect(screen.getByTitle('Topic')).toBeInTheDocument();
     expect(screen.getByTitle('Preset or Custom')).toBeInTheDocument();
     expect(screen.getByTitle('Question Settings')).toBeInTheDocument();
@@ -64,4 +67,14 @@ test('Passing custom as true should render all steps except the preset one', () 
 
     // This one should not
     expect(screen.queryByTitle('Preset')).not.toBeInTheDocument();
+});
+
+test('Passing valid as false should disable the final confirmation step', () => {
+    props.valid = false;
+    props.custom = true;
+    setup();
+
+    fireEvent.click(screen.getByTitle('Confirmation'));
+
+    expect(onSelectStageHandler).not.toHaveBeenCalled();
 });

@@ -50,6 +50,7 @@ const PlayWizard = (props: PlayWizardProps) => {
 
     const [animate, setAnimate] = useState(false);
     const [mode, setMode] = useState(AppMode.PLAY);
+    const [valid, setValid] = useState(true);
     const [isCustom, setIsCustom] = useState(false);
     const [topic, setTopic] = useState(Topic.KANA);
     const [confirmClose, setConfirmClose] = useState(false);
@@ -58,6 +59,7 @@ const PlayWizard = (props: PlayWizardProps) => {
     const [dataSettings, setDataSettings] = useState<DataSettings | undefined>(undefined);
     const [goingForwards, setGoingForwards] = useState(true);
     const [preset, setPreset] = useState<PlayMode>(new PlayKanaModes().getModes()[0]);
+
     const history = useHistory();
 
     const gameSettingsDispatcher = useGameSettingsDispatch();
@@ -68,8 +70,10 @@ const PlayWizard = (props: PlayWizardProps) => {
     const handleBack = () => {
         setGoingForwards(false);
 
-        if (stage === 3 && isCustom) {
-            setStage(1);
+        if (stage === 4 && isCustom) {
+            setStage(2);
+        } else if (stage === 9 && !topic.wizardDataMenu) {
+            setStage(7);
         } else {
             setStage(stage - 1);
         }
@@ -78,10 +82,12 @@ const PlayWizard = (props: PlayWizardProps) => {
     const handleNext = () => {
         setGoingForwards(true);
 
-        if (stage === 1 && isCustom) {
+        if (stage === 2 && isCustom) {
             // If the value is true, then it must be isCustom from the initial step.
             // If so, then we advance 2 steps to skip the preset and go to custom.
             setStage(stage + 2);
+        } else if (stage === 6  && !topic.wizardDataMenu) {
+            setStage(8);
         } else {
             setStage(stage + 1);
         }
@@ -173,7 +179,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     icon: faDatabase,
                     iconClass: styles.dataIcon,
                     name: "Data Settings",
-                    body: <DataSettingsStep topic={topic} onSelect={settings => setDataSettings(settings)} />,
+                    body: <DataSettingsStep topic={topic} onSelect={settings => setDataSettings(settings)} isValid={valid => setValid(valid)} />,
                     intermediate: true
                 }
             }
@@ -214,13 +220,14 @@ const PlayWizard = (props: PlayWizardProps) => {
                 </div>
 
                 <div className={styles.body}>
-                    <CSSTransition classNames={goingForwards ? slideLeft : slideRight} timeout={{ enter: 200, exit: 200 }} in={goingForwards} onExited={() => setAnimate(false)}>
+                    <CSSTransition classNames={goingForwards ? slideLeft : slideRight} timeout={{ enter: 200, exit: 200 }} in={animate} onExited={() => setAnimate(false)}>
                         {body}
                     </CSSTransition>
                 </div>
 
                 <div className={styles.footer}>
                     <PlayWizardFooter
+                        valid={valid}
                         custom={isCustom}
                         onBack={handleBack}
                         onNext={handleNext}

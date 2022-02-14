@@ -56,3 +56,12 @@
 .incomplete {
   color: $bootstrap-red;
 }
+
+.disabled {
+  color: $bootstrap-red;
+  opacity: 0.8;
+}
+
+.disabled:hover {
+  cursor: auto;
+}

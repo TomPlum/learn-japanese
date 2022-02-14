@@ -10,6 +10,7 @@ let props: PlayWizardFooterProps;
 
 beforeEach(() => {
     props = {
+        valid: true,
         custom: false,
         currentStage: 0,
         onPlay: onPlayHandler,
@@ -55,5 +56,11 @@ test('Passing terminal as true should render the next button text as "Play"', ()
 test('Selecting a stage from the progress component should call the onChangeStage handler', () => {
     const component = render(<PlayWizardFooter {...props} />);
     fireEvent.click(component.getByTitle('Topic'));
-    expect(onChangeStageHandler).toHaveBeenLastCalledWith(0);
+    expect(onChangeStageHandler).toHaveBeenLastCalledWith(1);
+});
+
+test('Passing valid as false should disable the next button', () => {
+    props.valid = false;
+    const component = render(<PlayWizardFooter {...props} />);
+    expect(component.getByText('Next')).toBeDisabled();
 });

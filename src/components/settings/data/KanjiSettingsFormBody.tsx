@@ -8,14 +8,12 @@ import Arrays from "../../../utility/Arrays";
 import TemplateString from "../../../domain/TemplateString";
 import React, { useEffect, useState } from "react";
 import KanjiSettings, { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings";
+import { DataSettingsStepFormProps } from "../../layout/wizard/play/DataSettingsStep";
 
-export interface KanjiSettingsFormBodyProps {
-    onChange: (settings: KanjiSettings) => void;
-}
 
-const KanjiSettingsFormBody = (props: KanjiSettingsFormBodyProps) => {
+const KanjiSettingsFormBody = (props: DataSettingsStepFormProps<KanjiSettings>) => {
 
-    const { onChange } = props;
+    const { className, isValid, onChange } = props;
 
     const [grades, setGrades] = useState<KyoikuGrade[]>([]);
     const [quantity, setQuantity] = useState<number | undefined>(undefined);
@@ -23,6 +21,7 @@ const KanjiSettingsFormBody = (props: KanjiSettingsFormBodyProps) => {
     useEffect(() => {
         const dataSettings = new KanjiSettingsBuilder().withGrades(grades).withQuantity(quantity).build();
         onChange(dataSettings);
+        isValid?.(grades.length > 0 || !!quantity);
     }, [grades, quantity]);
 
     const onSelectGrade = (grade: KyoikuGrade) => {
@@ -60,7 +59,7 @@ const KanjiSettingsFormBody = (props: KanjiSettingsFormBodyProps) => {
     }
 
     return (
-        <Container fluid className={styles.wrapper}>
+        <Container fluid className={[styles.wrapper, className].join(" ")}>
             <Row>
                 <Col>
                     <p className={styles.desc}>

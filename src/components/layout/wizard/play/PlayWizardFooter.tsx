@@ -3,6 +3,7 @@ import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWi
 import PlayWizardProgress from "./PlayWizardProgress";
 
 export interface PlayWizardFooterProps {
+    valid: boolean;
     custom: boolean;
     currentStage: number;
     intermediate?: boolean;
@@ -15,7 +16,7 @@ export interface PlayWizardFooterProps {
 
 const PlayWizardFooter = (props: PlayWizardFooterProps) => {
 
-    const { custom, intermediate, terminal, currentStage, onNext, onBack, onPlay, onChangeStage } = props;
+    const { valid, custom, intermediate, terminal, currentStage, onNext, onBack, onPlay, onChangeStage } = props;
 
     return (
         <div className={styles.wrapper}>
@@ -28,13 +29,14 @@ const PlayWizardFooter = (props: PlayWizardFooterProps) => {
             </div>
             <div>
                 <PlayWizardProgress
+                    valid={valid}
                     custom={custom}
                     stage={currentStage}
                     onSelectStage={onChangeStage}
                 />
             </div>
             <div>
-                <Button onClick={terminal ? onPlay : onNext} className={styles.next} variant="success">
+                <Button onClick={terminal ? onPlay : onNext} className={styles.next} variant="success" disabled={!valid}>
                     {terminal ? "Play" : "Next"}
                 </Button>
             </div>

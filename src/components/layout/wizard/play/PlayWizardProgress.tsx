@@ -1,16 +1,17 @@
-import { faAngleDoubleRight, faCheckCircle, faChevronCircleRight, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTools } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faChevronCircleRight, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTools } from "@fortawesome/free-solid-svg-icons";
 import WizardProgressStep from "./WizardProgressStep";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizardProgress.module.scss";
 
 export interface PlayWizardProgressProps {
     stage: number;
+    valid: boolean;
     custom: boolean;
     onSelectStage: (stage: number) => void;
 }
 
 const PlayWizardProgress = (props: PlayWizardProgressProps) => {
 
-    const { stage, custom, onSelectStage } = props;
+    const { stage, custom, valid, onSelectStage } = props;
 
     const handleSelectStage = (stage: number) => {
         onSelectStage(stage);
@@ -105,6 +106,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
 
                     <WizardProgressStep
                         stage={9}
+                        disabled={!valid}
                         title="Confirmation"
                         icon={faCheckCircle}
                         currentStage={stage}

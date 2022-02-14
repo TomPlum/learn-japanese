@@ -6,6 +6,7 @@ export interface WizardProgressStepProps {
     icon: IconDefinition;
     title: string;
     stage: number;
+    disabled?: boolean;
     className?: string;
     currentStage: number;
     onClick: (stage: number) => void;
@@ -13,13 +14,17 @@ export interface WizardProgressStepProps {
 
 const WizardProgressStep = (props: WizardProgressStepProps) => {
 
-    const { icon, title, className, stage, currentStage, onClick } = props;
+    const { icon, title, disabled, className, stage, currentStage, onClick } = props;
 
     const handleOnClick = () => {
         onClick(stage);
     }
 
     const getIconClassName = (): string => {
+        if (disabled) {
+            return styles.disabled;
+        }
+
         if (currentStage > stage) {
             //return styles[`complete-${stage}`];
             return styles.complete;
@@ -35,7 +40,7 @@ const WizardProgressStep = (props: WizardProgressStepProps) => {
             fixedWidth
             icon={icon}
             title={title}
-            onClick={handleOnClick}
+            onClick={!disabled ? handleOnClick : () => {}}
             data-testid={`wizard-progress-step-${stage}`}
             className={[getIconClassName(), className, styles.step].join(" ")}
         />
