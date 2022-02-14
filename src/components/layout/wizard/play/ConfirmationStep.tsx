@@ -39,7 +39,6 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
             case QuestionType.MATCH: return "match";
             case QuestionType.CHOICE: return `pick from ${cards} cards`;
             case QuestionType.AUDIO: return "listen to";
-            case QuestionType.RANDOM: return "answer";
             default: return "answer";
         }
     }

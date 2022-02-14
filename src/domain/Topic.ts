@@ -29,8 +29,8 @@ import PlayCalendarModes from "./game/mode/PlayCalendarModes";
 import PlayNumbersModes from "./game/mode/PlayNumbersModes";
 import { DataSettingsMenuProps } from "../components/settings/data/DataSettingsMenu";
 import { DataSettingsStepFormProps } from "../components/layout/wizard/play/DataSettingsStep";
-import KanjiDataForm from "../components/layout/wizard/play/data/KanjiDataForm";
 import { GridItem } from "../components/layout/wizard/GridItem";
+import KanjiSettingsFormBody from "../components/settings/data/KanjiSettingsFormBody";
 
 type ReactComponent = React.FunctionComponent | React.ComponentClass<any> | ((props: DataSettingsMenuProps<any>) => JSX.Element)| ((props: DataSettingsStepFormProps<any>) => JSX.Element) | undefined;
 
@@ -58,7 +58,7 @@ export default class Topic implements GridItem {
     public static KANJI = new Topic(
         "Jōyō Kanji", "Kanji", faPaintBrush, new LearnKanjiModes(), new PlayKanjiModes(),
         { front: KanjiFlashCardFront, back: KanjiFlashCardBack },
-        KanjiSettingsForm, KanjiDataForm
+        KanjiSettingsForm, KanjiSettingsFormBody
     );
 
     public static BASICS = new Topic(
