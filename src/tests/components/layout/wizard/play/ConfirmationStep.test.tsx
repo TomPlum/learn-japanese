@@ -247,54 +247,54 @@ test('Clicking the question field text should call the onSelectStage event handl
     withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(LearnableField.KANA, LearnableField.ROMAJI).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('Kana'));
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(3);
+    expect(onSelectStageHandler).toHaveBeenLastCalledWith(4);
 });
 
 test('Clicking the question type text should call the onSelectStage event handler with the correct stage', () => {
     withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.TEXT).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('type'));
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(3);
+    expect(onSelectStageHandler).toHaveBeenLastCalledWith(4);
 });
 
 test('Clicking the answer field text should call the onSelectStage event handler with the correct stage', () => {
     withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(LearnableField.KANA, LearnableField.ROMAJI).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('Rōmaji'));
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(3);
+    expect(onSelectStageHandler).toHaveBeenLastCalledWith(4);
 });
 
 test('Clicking the topic name text should call the onSelectStage event handler with the correct stage', () => {
     withDataSettings(new KanjiSettingsBuilder());
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('Jōyō Kanji'));
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(0);
+    expect(onSelectStageHandler).toHaveBeenLastCalledWith(1);
 });
 
 test('Clicking the lives text should call the onSelectStage event handler with the correct stage', () => {
     withGameSettings(gameSettings.withLifeSettings(new LifeSettingsBuilder().withQuantity(12).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('12 lives'));
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(5);
+    expect(onSelectStageHandler).toHaveBeenLastCalledWith(6);
 });
 
 test('Clicking the hints text should call the onSelectStage event handler with the correct stage', () => {
     withGameSettings(new GameSettingsBuilder().withHintSettings(new HintSettingsBuilder().withQuantity(3).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('3 hints'));
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(4);
+    expect(onSelectStageHandler).toHaveBeenLastCalledWith(5);
 });
 
 test('Clicking the time text should call the onSelectStage event handler with the correct stage', () => {
     withGameSettings(new GameSettingsBuilder().withTimeSettings(new TimeSettingsBuilder().isTimed().build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('timed'));
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(6);
+    expect(onSelectStageHandler).toHaveBeenLastCalledWith(7);
 });
 
 test('Clicking the time text should call the onSelectStage event handler with the correct stage', () => {
     withGameSettings(new GameSettingsBuilder().withQuestionSettings(new QuestionSettingsBuilder().withScoreTracking().build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('your score will be tracked'));
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(3);
+    expect(onSelectStageHandler).toHaveBeenLastCalledWith(4);
 });

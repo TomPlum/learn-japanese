@@ -90,38 +90,38 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
         <div>
             <p className={styles.question}>
                 <span>{"You'll be given the "}</span>
-                <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage(3)}>
+                <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage(4)}>
                     {questionField}
                 </span>
                 <span>{" and must "}</span>
-                <span className={[styles.type, styles.highlight].join(" ")} onClick={() => onSelectStage(3)}>
+                <span className={[styles.type, styles.highlight].join(" ")} onClick={() => onSelectStage(4)}>
                     {getQuestionTypeWord()}
                 </span>
                 <span>{" the "}</span>
-                <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage(3)}>
+                <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage(4)}>
                     {answerField}
                 </span>
                 <span>{" for "}</span>
-                <span className={[styles.quantity, styles.highlight].join(" ")} onClick={() => onSelectStage(7)}>
+                <span className={[styles.quantity, styles.highlight].join(" ")} onClick={() => onSelectStage(8)}>
                     {dataSettings?.quantity}
                 </span>
                 <span>{" questions about "}</span>
-                <span className={[styles.topic, styles.highlight].join(" ")} onClick={() => onSelectStage(0)}>
+                <span className={[styles.topic, styles.highlight].join(" ")} onClick={() => onSelectStage(1)}>
                     {dataSettings?.topic.name}
                 </span>
                 <span>{". "}</span>
                 <span>{"You'll have "}</span>
-                <span className={[styles.lives, styles.highlight].join(" ")} onClick={() => onSelectStage(5)}>
+                <span className={[styles.lives, styles.highlight].join(" ")} onClick={() => onSelectStage(6)}>
                     {livesDisplay}{" lives"}
                 </span>
                 <span>{", "}</span>
-                <span className={[styles.hint, styles.highlight].join(" ")} onClick={() => onSelectStage(4)}>
+                <span className={[styles.hint, styles.highlight].join(" ")} onClick={() => onSelectStage(5)}>
                     {hintsDisplay}{" hints"}
                 </span>
                 <span>{", "}</span>
-                <span onClick={() => onSelectStage(6)}>{getTimeWords()}</span>
+                <span onClick={() => onSelectStage(7)}>{getTimeWords()}</span>
                 <span>{" and "}</span>
-                <span className={[styles.score, styles.highlight].join(" ")} onClick={() => onSelectStage(3)}>
+                <span className={[styles.score, styles.highlight].join(" ")} onClick={() => onSelectStage(4)}>
                     {getScoreWords()}
                 </span>
                 <span>{"."}</span>
