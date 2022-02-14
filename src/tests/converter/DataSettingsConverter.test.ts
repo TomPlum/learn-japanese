@@ -8,7 +8,7 @@ import { CalendarSettingsBuilder } from "../../domain/session/settings/data/Cale
 import { BasicsSettingsBuilder } from "../../domain/session/settings/data/BasicsSettings";
 import DataSettings from "../../domain/session/settings/data/DataSettings";
 import Topic from "../../domain/Topic";
-import { KanaDataSettingsState, KanjiDataSettingsState, NumbersDataSettingsState, SentenceStructureDataSettingsState, CalenderDataSettingsState, BasicsDataSettingsState, DataSettingsState } from "../../slices/DataConfigSlice";
+import { KanaDataSettingsState, KanjiDataSettingsState, NumbersDataSettingsState, SentenceStructureDataSettingsState, CalenderDataSettingsState, BasicsDataSettingsState, DataSettingsState } from "../../slices/DataSettingsSlice";
 
 describe("Data Settings Converter", () => {
 

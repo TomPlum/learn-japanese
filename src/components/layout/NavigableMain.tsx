@@ -12,6 +12,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { useUserSelector } from "../../hooks";
 import GenkiGrammarPage from "../pages/GenkiGrammarPage";
 import PlayPage from "../pages/PlayPage";
+import LearnPage from "../pages/LearnPage";
 
 const NavigableMain = () => {
 
@@ -22,12 +23,13 @@ const NavigableMain = () => {
             <Switch>
                 <Route exact path="/menu/:mode" component={MainMenuPage}/>
                 <Route exact path="/play" component={PlayPage} />
-                <Route exact path="/search" component={SearchPage}/>
-                <Route exact path="/help" component={HelpPage}/>
+                <Route exact path="/learn" component={LearnPage} />
+                <Route exact path="/search" component={SearchPage} />
+                <Route exact path="/help" component={HelpPage} />
                 <ProtectedRoute isAuthenticated={!!user} exact path="/profile" component={ProfilePage} />
                 <Route exact path="/genki" component={GenkiIndexPage} />
                 <Route exact path="/genki/grammar" component={GenkiGrammarPage} />
-                <Route exact path="/kanji" component={KanjiBankPage}/>
+                <Route exact path="/kanji" component={KanjiBankPage} />
                 <Route exact path="/learn/kanji" component={LearnOnline} />
                 <Route component={NotFoundPage} />
             </Switch>
