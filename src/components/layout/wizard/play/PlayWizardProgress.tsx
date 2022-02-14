@@ -46,7 +46,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                 onClick={handleSelectStage}
             />
 
-            {!custom && (
+            {stage === 2 && !custom && (
                 <WizardProgressStep
                     stage={3}
                     title="Preset"

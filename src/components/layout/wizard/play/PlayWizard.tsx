@@ -70,6 +70,10 @@ const PlayWizard = (props: PlayWizardProps) => {
     const handleBack = () => {
         setGoingForwards(false);
 
+        if (stage === 8) {
+            setValid(true);
+        }
+
         if (stage === 4 && isCustom) {
             setStage(2);
         } else if (stage === 9 && !topic.wizardDataMenu) {

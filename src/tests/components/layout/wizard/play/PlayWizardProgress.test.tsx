@@ -30,8 +30,9 @@ test('Clicking a step should call on the onSelectStage handler with that stages 
 });
 
 test('Passing custom as false should render only the topic, type and preset steps', () => {
-    // Set custom to false for preset selection
+    // Set custom to false for preset selection and current stage for 2 so we're selecting type
     props.custom = false;
+    props.stage = 2;
     setup();
 
     // These steps should be rendered
