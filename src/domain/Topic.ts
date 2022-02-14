@@ -31,6 +31,7 @@ import { DataSettingsMenuProps } from "../components/settings/data/DataSettingsM
 import { DataSettingsStepFormProps } from "../components/layout/wizard/play/DataSettingsStep";
 import { GridItem } from "../components/layout/wizard/GridItem";
 import KanjiSettingsFormBody from "../components/settings/data/KanjiSettingsFormBody";
+import KanaSettingsFormBody from "../components/settings/data/KanaSettingsFormBody";
 
 type ReactComponent = React.FunctionComponent | React.ComponentClass<any> | ((props: DataSettingsMenuProps<any>) => JSX.Element)| ((props: DataSettingsStepFormProps<any>) => JSX.Element) | undefined;
 
@@ -47,7 +48,7 @@ export default class Topic implements GridItem {
     public static KANA = new Topic(
         "Hiragana & Katakana", "Kana", faFont, new LearnKanaModes(), new PlayKanaModes(),
         { front: KanaFlashCardFront, back: KanaFlashCardBack },
-        KanaSettingsForm
+        KanaSettingsForm, KanaSettingsFormBody
     );
 
     public static NUMBERS = new Topic(
