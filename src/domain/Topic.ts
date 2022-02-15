@@ -32,6 +32,7 @@ import { DataSettingsStepFormProps } from "../components/layout/wizard/play/Data
 import { GridItem } from "../components/layout/wizard/GridItem";
 import KanjiSettingsFormBody from "../components/settings/data/KanjiSettingsFormBody";
 import KanaSettingsFormBody from "../components/settings/data/KanaSettingsFormBody";
+import SentenceStructureFormBody from "../components/settings/data/SentenceStructureFormBody";
 
 type ReactComponent = React.FunctionComponent | React.ComponentClass<any> | ((props: DataSettingsMenuProps<any>) => JSX.Element)| ((props: DataSettingsStepFormProps<any>) => JSX.Element) | undefined;
 
@@ -75,7 +76,7 @@ export default class Topic implements GridItem {
     public static GRAMMAR = new Topic(
         "Sentence Structure", "Grammar", faSpellCheck, new LearnSentenceStructureModes(), new PlaySentenceStructureModes(),
         { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack },
-        SentenceStructureForm
+        SentenceStructureForm, SentenceStructureFormBody
     );
 
     public static ALL: Topic[] = [Topic.KANA, Topic.NUMBERS, Topic.KANJI, Topic.BASICS, Topic.CALENDAR, Topic.GRAMMAR];
