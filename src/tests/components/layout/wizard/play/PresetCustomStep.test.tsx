@@ -14,7 +14,6 @@ const setup = () => {
     return {
         preset: component.getByText('Preset'),
         custom: component.getByText('Custom'),
-        next: component.getByText('Next'),
         ...component
     }
 }
@@ -41,17 +40,15 @@ test('Clicking the custom button should change the class to selected', () => {
     expect(button).toHaveClass('selected');
 });
 
-test('Clicking the next button in the footer should call the onSelect handler with true if custom is selected', () => {
-    const { custom, next } = setup();
+test('Clicking the custom button should call the onSelect handler with true', () => {
+    const { custom } = setup();
     fireEvent.click(custom);
-    fireEvent.click(next);
     expect(onSelectHandler).toHaveBeenLastCalledWith(true);
 });
 
-test('Clicking the next button in the footer should call the onSelect handler with false if preset is selected', () => {
-    const { preset, next } = setup();
+test('Clicking the preset button should call the onSelect handler with false', () => {
+    const { preset } = setup();
     fireEvent.click(preset);
-    fireEvent.click(next);
     expect(onSelectHandler).toHaveBeenLastCalledWith(false);
 });
 

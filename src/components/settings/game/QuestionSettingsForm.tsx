@@ -227,7 +227,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
         this.setState({ cards: quantity });
     }
 
-    private getDescription = () => Environment.variable(this.state.type + "_MODE_DESC");
+    private getDescription = () => Environment.variable(this.state.type.name + "_MODE_DESC");
 }
 
 export default QuestionSettingsForm;

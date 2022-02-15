@@ -48,5 +48,5 @@ test("Should render the wrapper with the given width if the width is an integer"
         </GenkiStructureDisplay>
     );
     const wrapper = container.firstChild;
-    expect(wrapper).toHaveProperty('style._values.width', "450px");
+    expect(wrapper).toHaveProperty('style._values.max-width', "450px");
 });
