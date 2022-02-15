@@ -16,7 +16,7 @@ const HomeButton = (props: HomeButtonProps) => {
             icon={faHome}
             disableDropdown
             id="home-button"
-            href="/menu/learn"
+            href="/home"
             textPlacement="right"
             disabled={props.disabled}
             iconClass={menuStyles.icon}

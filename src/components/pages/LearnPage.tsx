@@ -40,7 +40,7 @@ const LearnPage = () => {
 
     const handleDismissResultsScreen = () => {
         dataSettingsDispatch(clearDataSettings());
-        history.push("/menu/play");
+        history.push("/home");
     }
 
     const handleSessionCompletion = (result: LearningSessionResult) => {
@@ -70,7 +70,7 @@ const LearnPage = () => {
                     <p className={styles.error}>Your session settings have gone walk-abouts!</p>
                     <p className={styles.message}>
                         <span>{"Click"}</span>
-                        <a href="/menu/play" className={styles.link}>{" here "}</a>
+                        <a href="/home" className={styles.link}>{" here "}</a>
                         <span>{"to go back home."}</span>
                     </p>
                 </span>

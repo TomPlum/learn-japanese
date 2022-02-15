@@ -78,7 +78,7 @@ test('Should skip the results screen and redirect home if the user flips no card
     fireEvent.click(screen.getByText('Yes'));
 
     // Should redirect home
-    expect(history.location.pathname).toBe("/menu/play");
+    expect(history.location.pathname).toBe("/home");
 });
 
 test('Should render the results screen if the user flips at least one card', async () => {
@@ -111,7 +111,7 @@ test('Should render the results screen if the user flips at least one card', asy
     expect(store.getState().dataSettings.settings).toBeUndefined();
 
     // Should re-direct to the home page
-    expect(history.location.pathname).toBe('/menu/play');
+    expect(history.location.pathname).toBe('/home');
 });
 
 test('Clicking \'Practice Mistakes\' on the learning results screen should start a new session with the mistakes', async () => {

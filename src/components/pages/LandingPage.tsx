@@ -84,7 +84,7 @@ const LandingPage = () => {
 
                 <Row noGutters={true} className={styles.buttonContainer}>
                     <Col xs={6} md={3} className={styles.buttonWrapper}>
-                        <Link to="/menu/learn">
+                        <Link to="/home">
                             <Button className={styles.button} variant="outline-danger">
                                 <FontAwesomeIcon icon={faGraduationCap} className={styles.buttonIcon}/>
                                 <span className={styles.buttonText}> Learn</span>
@@ -93,7 +93,7 @@ const LandingPage = () => {
                     </Col>
 
                     <Col xs={6} md={3} className={styles.buttonWrapper}>
-                        <Link to="/menu/play">
+                        <Link to="/home">
                             <Button className={styles.button} variant="outline-success">
                                 <FontAwesomeIcon icon={faPlay} className={styles.buttonIcon}/>
                                 <span className={styles.buttonText}> Play</span>

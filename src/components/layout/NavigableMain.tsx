@@ -21,7 +21,7 @@ const NavigableMain = () => {
     return (
         <NavigationWrapper>
             <Switch>
-                <Route exact path="/menu/:mode" component={MainMenuPage}/>
+                <Route exact path="/home" component={MainMenuPage}/>
                 <Route exact path="/play" component={PlayPage} />
                 <Route exact path="/learn" component={LearnPage} />
                 <Route exact path="/search" component={SearchPage} />

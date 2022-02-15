@@ -27,16 +27,10 @@ test('Navigating to the root URI should route to the Landing page', async () => 
     expect(await screen.findByTestId('landing-page')).toBeInTheDocument();
 });
 
-test('Navigating to the /menu/play should route to the main menu in play mode', async () => {
-    createBrowserHistory().push('/example-base-path/menu/play');
+test('Navigating to the /home should route to the home page', async () => {
+    createBrowserHistory().push('/example-base-path/home');
     setup();
-    expect(await screen.findByText('Select Game Mode')).toBeInTheDocument();
-});
-
-test('Navigating to the /menu/learn should route to the main menu in learn mode', async () => {
-    createBrowserHistory().push('/example-base-path/menu/learn');
-    setup();
-    expect(await screen.findByText('Select Topic')).toBeInTheDocument(); //If in learn, the mode button shows play
+    expect(await screen.findByTestId('home-page')).toBeInTheDocument();
 });
 
 test('Navigating to the /search should route to the Search page', async () => {

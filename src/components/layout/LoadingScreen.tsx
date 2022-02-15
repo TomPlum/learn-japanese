@@ -31,7 +31,7 @@ const LoadingScreen = (props: { active: boolean }) => {
                             <Fade appear in timeout={500}>
                                 <span>
                                 {"Something is taking a long time to load. You may keep waiting or "}
-                                    <a href="/menu/play" className={styles.link}>click here</a>
+                                    <a href="/home" className={styles.link}>click here</a>
                                     {" to go back."}
                                 </span>
                             </Fade>

@@ -128,5 +128,5 @@ test('Should render the results screen when exiting the game', async () => {
     expect(store.getState().dataSettings.settings).toBeUndefined();
 
     // Should re-direct to the home page
-    expect(history.location.pathname).toBe('/menu/play');
+    expect(history.location.pathname).toBe('/home');
 });

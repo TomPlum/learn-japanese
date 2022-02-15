@@ -55,7 +55,7 @@ const PlayPage = () => {
         setGameResult(undefined);
         gameSettingsDispatcher(clearGameSettings());
         dataSettingsDispatcher(clearDataSettings());
-        history.push("/menu/play");
+        history.push("/home");
     }
 
     return (
@@ -67,7 +67,7 @@ const PlayPage = () => {
                     <p className={styles.error}>It looks like your game settings are missing!</p>
                     <p className={styles.message}>
                         <span>{"Click"}</span>
-                        <a href="/menu/play" className={styles.link}>{" here "}</a>
+                        <a href="/home" className={styles.link}>{" here "}</a>
                         <span>{"to go back home."}</span>
                     </p>
                 </span>

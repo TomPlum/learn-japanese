@@ -131,18 +131,18 @@ test('Should render the kana carousel', async () => {
     expect(await screen.findByText('あ')).toBeInTheDocument();
 });
 
-test('Clicking the play button should route the user to /menu/play', async () => {
+test('Clicking the play button should route the user to /home', async () => {
     const { play } = setup();
     expect(await screen.findByText('あ')).toBeInTheDocument();
     fireEvent.click(play);
-    expect(history.location.pathname).toBe('/menu/play');
+    expect(history.location.pathname).toBe('/home');
 });
 
-test('Clicking the learn button should route the user to /menu/learn', async () => {
+test('Clicking the learn button should route the user to /home', async () => {
     const { learn } = setup();
     expect(await screen.findByText('あ')).toBeInTheDocument();
     fireEvent.click(learn);
-    expect(history.location.pathname).toBe('/menu/learn');
+    expect(history.location.pathname).toBe('/home');
 });
 
 test('Clicking the search button should route the user to /search', async () => {

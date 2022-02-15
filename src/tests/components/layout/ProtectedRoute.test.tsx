@@ -27,7 +27,7 @@ test('Should redirect to the main page if the user is not authenticated', () => 
     } catch (e) {
         // TODO: Why does it infinitely loop? Causes React render stack overflow.
     }
-    expect(history.location.pathname).toBe("/menu/learn")
+    expect(history.location.pathname).toBe("/home")
 });
 
 test('Should render the given component if the user is authenticated', () => {
