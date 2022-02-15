@@ -2,7 +2,7 @@ import { Modal } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import PresetCustomStep from "./PresetCustomStep";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizard.module.scss";
-import { faAngleDoubleRight, faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faPlay, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTimes, faTools, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDoubleRight, faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTimes, faTools, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBomb } from "@fortawesome/free-solid-svg-icons/faBomb";
 import PresetSelectionStep from "./PresetSelectionStep";
@@ -44,6 +44,19 @@ interface StageDetails {
     terminal?: boolean;
 }
 
+enum WizardStep {
+    MODE = 0,
+    TOPIC = 1,
+    TYPE = 2,
+    PRESET = 3,
+    QUESTION = 4,
+    HINT = 5,
+    LIVES = 6,
+    TIME = 7,
+    DATA = 8,
+    CONFIRM = 9
+}
+
 const PlayWizard = (props: PlayWizardProps) => {
 
     const { onClose } = props;
@@ -51,10 +64,10 @@ const PlayWizard = (props: PlayWizardProps) => {
     const [animate, setAnimate] = useState(false);
     const [mode, setMode] = useState(AppMode.PLAY);
     const [valid, setValid] = useState(true);
-    const [isCustom, setIsCustom] = useState(false);
+    const [custom, setCustom] = useState(false);
     const [topic, setTopic] = useState(Topic.KANA);
     const [confirmClose, setConfirmClose] = useState(false);
-    const [stage, setStage] = useState(0);
+    const [stage, setStage] = useState(WizardStep.MODE);
     const [settings, setSettings] = useState(new GameSettingsBuilder());
     const [dataSettings, setDataSettings] = useState<DataSettings | undefined>(undefined);
     const [goingForwards, setGoingForwards] = useState(true);
@@ -70,14 +83,14 @@ const PlayWizard = (props: PlayWizardProps) => {
     const handleBack = () => {
         setGoingForwards(false);
 
-        if (stage === 8) {
+        if (stage === WizardStep.DATA) {
             setValid(true);
         }
 
-        if (stage === 4 && isCustom) {
-            setStage(2);
-        } else if (stage === 9 && !topic.wizardDataMenu) {
-            setStage(7);
+        if (stage === WizardStep.QUESTION && custom) {
+            setStage(WizardStep.TYPE);
+        } else if (stage === WizardStep.CONFIRM && !topic.wizardDataMenu) {
+            setStage(WizardStep.HINT);
         } else {
             setStage(stage - 1);
         }
@@ -86,20 +99,20 @@ const PlayWizard = (props: PlayWizardProps) => {
     const handleNext = () => {
         setGoingForwards(true);
 
-        if (stage === 2 && isCustom) {
-            // If the value is true, then it must be isCustom from the initial step.
+        if (stage === WizardStep.TYPE && custom) {
+            // If the value is true, then it must be custom from the initial step.
             // If so, then we advance 2 steps to skip the preset and go to custom.
-            setStage(stage + 2);
-        } else if (stage === 6  && !topic.wizardDataMenu) {
-            setStage(8);
+            setStage(mode === AppMode.PLAY ? WizardStep.QUESTION : WizardStep.DATA);
+        } else if (stage === 7 && !topic.wizardDataMenu) {
+            setStage(WizardStep.CONFIRM);
         } else {
             setStage(stage + 1);
         }
     }
 
     const handlePlay = () => {
-        const data = isCustom ? dataSettings! : preset.dataSettings;
-        const game = isCustom ? settings.build() : preset.modeSettings as GameSettings;
+        const data = custom ? dataSettings! : preset.dataSettings;
+        const game = custom ? settings.build() : preset.modeSettings as GameSettings;
         gameSettingsDispatcher(setGameSettings(game));
         dataSettingsDispatcher(setGlobalDataSettings(data));
         history.push('/play');
@@ -107,7 +120,7 @@ const PlayWizard = (props: PlayWizardProps) => {
 
     const getStageDetails = (): StageDetails => {
         switch (stage) {
-            case 0: {
+            case WizardStep.MODE: {
                 return {
                     icon: faAngleDoubleRight,
                     name: "Select Mode",
@@ -115,7 +128,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     body: <WizardModeStep onSelect={mode => setMode(mode)} />
                 }
             }
-            case 1: {
+            case WizardStep.TOPIC: {
                 return {
                     icon: faSwatchbook,
                     name: "Select Topic",
@@ -124,16 +137,16 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 2: {
+            case WizardStep.TYPE: {
                 return {
                     icon: faTools,
                     name: "Select Type",
                     iconClass: styles.typeIcon,
-                    body: <PresetCustomStep onSelect={custom => setIsCustom(custom)} />,
+                    body: <PresetCustomStep onSelect={custom => setCustom(custom)} />,
                     intermediate: true
                 }
             }
-            case 3: {
+            case WizardStep.PRESET: {
                 return {
                     icon: faProjectDiagram,
                     name: "Choose Preset",
@@ -142,7 +155,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     terminal: true
                 }
             }
-            case 4: {
+            case WizardStep.QUESTION: {
                 return {
                     icon: faQuestionCircle,
                     iconClass: styles.questionIcon,
@@ -151,7 +164,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 5: {
+            case WizardStep.HINT: {
                 return {
                     icon: faLightbulb,
                     iconClass: styles.hintsIcon,
@@ -160,7 +173,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 6: {
+            case WizardStep.LIVES: {
                 return {
                     icon: faHeartbeat,
                     iconClass: styles.livesIcon,
@@ -169,7 +182,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 7: {
+            case WizardStep.TIME: {
                 return {
                     icon: faStopwatch,
                     iconClass: styles.timeIcon,
@@ -178,7 +191,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 8: {
+            case WizardStep.DATA: {
                 return {
                     icon: faDatabase,
                     iconClass: styles.dataIcon,
@@ -187,7 +200,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case 9: {
+            case WizardStep.CONFIRM: {
                 return {
                     icon: faCheckCircle,
                     iconClass: styles.confirmIcon,
@@ -231,8 +244,9 @@ const PlayWizard = (props: PlayWizardProps) => {
 
                 <div className={styles.footer}>
                     <PlayWizardFooter
+                        mode={mode}
                         valid={valid}
-                        custom={isCustom}
+                        custom={custom}
                         onBack={handleBack}
                         onNext={handleNext}
                         onPlay={handlePlay}

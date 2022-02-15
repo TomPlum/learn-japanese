@@ -1,8 +1,10 @@
 import { Button } from "react-bootstrap";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizardFooter.module.scss";
 import PlayWizardProgress from "./PlayWizardProgress";
+import { AppMode } from "../../../../domain/AppMode";
 
 export interface PlayWizardFooterProps {
+    mode: AppMode;
     valid: boolean;
     custom: boolean;
     currentStage: number;
@@ -16,7 +18,7 @@ export interface PlayWizardFooterProps {
 
 const PlayWizardFooter = (props: PlayWizardFooterProps) => {
 
-    const { valid, custom, intermediate, terminal, currentStage, onNext, onBack, onPlay, onChangeStage } = props;
+    const { mode, valid, custom, intermediate, terminal, currentStage, onNext, onBack, onPlay, onChangeStage } = props;
 
     return (
         <div className={styles.wrapper}>
@@ -29,6 +31,7 @@ const PlayWizardFooter = (props: PlayWizardFooterProps) => {
             </div>
             <div>
                 <PlayWizardProgress
+                    mode={mode}
                     valid={valid}
                     custom={custom}
                     stage={currentStage}

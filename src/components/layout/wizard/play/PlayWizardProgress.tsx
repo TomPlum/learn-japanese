@@ -1,9 +1,11 @@
 import { faCheckCircle, faChevronCircleRight, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTools } from "@fortawesome/free-solid-svg-icons";
 import WizardProgressStep from "./WizardProgressStep";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizardProgress.module.scss";
+import { AppMode } from "../../../../domain/AppMode";
 
 export interface PlayWizardProgressProps {
     stage: number;
+    mode: AppMode;
     valid: boolean;
     custom: boolean;
     onSelectStage: (stage: number) => void;
@@ -11,7 +13,7 @@ export interface PlayWizardProgressProps {
 
 const PlayWizardProgress = (props: PlayWizardProgressProps) => {
 
-    const { stage, custom, valid, onSelectStage } = props;
+    const { stage, mode, custom, valid, onSelectStage } = props;
 
     const handleSelectStage = (stage: number) => {
         onSelectStage(stage);
@@ -59,41 +61,45 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
 
             {custom && (
                 <>
-                    <WizardProgressStep
-                        stage={4}
-                        currentStage={stage}
-                        className={styles.step}
-                        icon={faQuestionCircle}
-                        title="Question Settings"
-                        onClick={handleSelectStage}
-                    />
+                    {mode === AppMode.PLAY && (
+                        <>
+                            <WizardProgressStep
+                                stage={4}
+                                currentStage={stage}
+                                className={styles.step}
+                                icon={faQuestionCircle}
+                                title="Question Settings"
+                                onClick={handleSelectStage}
+                            />
 
-                    <WizardProgressStep
-                        stage={5}
-                        icon={faLightbulb}
-                        currentStage={stage}
-                        title="Hint Settings"
-                        className={styles.step}
-                        onClick={handleSelectStage}
-                    />
+                            <WizardProgressStep
+                                stage={5}
+                                icon={faLightbulb}
+                                currentStage={stage}
+                                title="Hint Settings"
+                                className={styles.step}
+                                onClick={handleSelectStage}
+                            />
 
-                    <WizardProgressStep
-                        stage={6}
-                        icon={faHeartbeat}
-                        currentStage={stage}
-                        title="Life Settings"
-                        className={styles.step}
-                        onClick={handleSelectStage}
-                    />
+                            <WizardProgressStep
+                                stage={6}
+                                icon={faHeartbeat}
+                                currentStage={stage}
+                                title="Life Settings"
+                                className={styles.step}
+                                onClick={handleSelectStage}
+                            />
 
-                    <WizardProgressStep
-                        stage={7}
-                        icon={faStopwatch}
-                        currentStage={stage}
-                        title="Time Settings"
-                        className={styles.step}
-                        onClick={handleSelectStage}
-                    />
+                            <WizardProgressStep
+                                stage={7}
+                                icon={faStopwatch}
+                                currentStage={stage}
+                                title="Time Settings"
+                                className={styles.step}
+                                onClick={handleSelectStage}
+                            />
+                        </>
+                    )}
 
                     <WizardProgressStep
                         stage={8}

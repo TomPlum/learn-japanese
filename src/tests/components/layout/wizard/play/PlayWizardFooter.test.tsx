@@ -1,5 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import PlayWizardFooter, { PlayWizardFooterProps } from "../../../../../components/layout/wizard/play/PlayWizardFooter";
+import { AppMode } from "../../../../../domain/AppMode";
 
 const onNextHandler = jest.fn();
 const onBackHandler = jest.fn();
@@ -13,6 +14,7 @@ beforeEach(() => {
         valid: true,
         custom: false,
         currentStage: 0,
+        mode: AppMode.PLAY,
         onPlay: onPlayHandler,
         onNext: onNextHandler,
         onBack: onBackHandler,

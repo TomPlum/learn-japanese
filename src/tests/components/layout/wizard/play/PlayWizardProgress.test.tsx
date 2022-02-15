@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import PlayWizardProgress, { PlayWizardProgressProps } from "../../../../../components/layout/wizard/play/PlayWizardProgress";
+import { AppMode } from "../../../../../domain/AppMode";
 
 const onSelectStageHandler = jest.fn();
 
@@ -16,9 +17,10 @@ const setup = () => {
 
 beforeEach(() => {
     props = {
+        stage: 1,
         valid: true,
         custom: false,
-        stage: 1,
+        mode: AppMode.PLAY,
         onSelectStage: onSelectStageHandler
     }
 });
@@ -78,4 +80,24 @@ test('Passing valid as false should disable the final confirmation step', () => 
     fireEvent.click(screen.getByTitle('Confirmation'));
 
     expect(onSelectStageHandler).not.toHaveBeenCalled();
+});
+
+test('Passing app mode at learn should not render game steps', () => {
+    props.custom = true;
+    props.mode = AppMode.LEARN;
+    setup();
+
+    // These steps should be rendered
+    expect(screen.getByTitle('Play or Learn')).toBeInTheDocument();
+    expect(screen.getByTitle('Topic')).toBeInTheDocument();
+    expect(screen.getByTitle('Preset or Custom')).toBeInTheDocument();
+    expect(screen.getByTitle('Data Settings')).toBeInTheDocument();
+    expect(screen.getByTitle('Confirmation')).toBeInTheDocument();
+
+    // This one should not
+    expect(screen.queryByTitle('Preset')).not.toBeInTheDocument();
+    expect(screen.queryByTitle('Question Settings')).not.toBeInTheDocument();
+    expect(screen.queryByTitle('Hint Settings')).not.toBeInTheDocument();
+    expect(screen.queryByTitle('Life Settings')).not.toBeInTheDocument();
+    expect(screen.queryByTitle('Time Settings')).not.toBeInTheDocument();
 });
