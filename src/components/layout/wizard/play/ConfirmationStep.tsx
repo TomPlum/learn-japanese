@@ -6,10 +6,11 @@ import QuestionType from "../../../../domain/game/QuestionType";
 import CustomPresetForm from "./CustomPresetForm";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { WizardStep } from "./PlayWizard";
 
 export interface ConfirmationStepProps {
     settings: SessionSettings;
-    onSelectStage: (stage: number) => void;
+    onSelectStage: (stage: WizardStep) => void;
 }
 
 const ConfirmationStep = (props: ConfirmationStepProps) => {
@@ -86,42 +87,44 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
     const livesDisplay = lives > 0 ? lives : "unlimited";
     const hintsDisplay = hasUnlimitedHints ? "unlimited" : hints > 0 ? hints : "no";
 
+    const { TOPIC, QUESTION, LIVES, HINT, TIME, DATA } = WizardStep;
+
     return (
         <div>
             <p className={styles.question}>
                 <span>{"You'll be given the "}</span>
-                <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage(4)}>
+                <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage(QUESTION)}>
                     {questionField}
                 </span>
                 <span>{" and must "}</span>
-                <span className={[styles.type, styles.highlight].join(" ")} onClick={() => onSelectStage(4)}>
+                <span className={[styles.type, styles.highlight].join(" ")} onClick={() => onSelectStage(QUESTION)}>
                     {getQuestionTypeWord()}
                 </span>
                 <span>{" the "}</span>
-                <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage(4)}>
+                <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage(QUESTION)}>
                     {answerField}
                 </span>
                 <span>{" for "}</span>
-                <span className={[styles.quantity, styles.highlight].join(" ")} onClick={() => onSelectStage(8)}>
+                <span className={[styles.quantity, styles.highlight].join(" ")} onClick={() => onSelectStage(DATA)}>
                     {dataSettings?.quantity}
                 </span>
                 <span>{" questions about "}</span>
-                <span className={[styles.topic, styles.highlight].join(" ")} onClick={() => onSelectStage(1)}>
+                <span className={[styles.topic, styles.highlight].join(" ")} onClick={() => onSelectStage(TOPIC)}>
                     {dataSettings?.topic.name}
                 </span>
                 <span>{". "}</span>
                 <span>{"You'll have "}</span>
-                <span className={[styles.lives, styles.highlight].join(" ")} onClick={() => onSelectStage(6)}>
+                <span className={[styles.lives, styles.highlight].join(" ")} onClick={() => onSelectStage(LIVES)}>
                     {livesDisplay}{" lives"}
                 </span>
                 <span>{", "}</span>
-                <span className={[styles.hint, styles.highlight].join(" ")} onClick={() => onSelectStage(5)}>
+                <span className={[styles.hint, styles.highlight].join(" ")} onClick={() => onSelectStage(HINT)}>
                     {hintsDisplay}{" hints"}
                 </span>
                 <span>{", "}</span>
-                <span onClick={() => onSelectStage(7)}>{getTimeWords()}</span>
+                <span onClick={() => onSelectStage(TIME)}>{getTimeWords()}</span>
                 <span>{" and "}</span>
-                <span className={[styles.score, styles.highlight].join(" ")} onClick={() => onSelectStage(4)}>
+                <span className={[styles.score, styles.highlight].join(" ")} onClick={() => onSelectStage(QUESTION)}>
                     {getScoreWords()}
                 </span>
                 <span>{"."}</span>

@@ -15,9 +15,7 @@ import TimeSettingsStep from "./TimeSettingsStep";
 import DataSettingsStep from "./DataSettingsStep";
 import TopicSelectionStep from "./TopicSelectionStep";
 import Topic from "../../../../domain/Topic";
-import ConfirmationStep from "./ConfirmationStep";
 import GameSettings, { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
-import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
 import DataSettings from "../../../../domain/session/settings/data/DataSettings";
 import { CSSTransition } from "react-transition-group";
 import slideRight from "../../../../styles/sass/transitions/slide-right.module.scss";
@@ -30,6 +28,10 @@ import { setDataSettings as setGlobalDataSettings } from "../../../../slices/Dat
 import { useHistory } from "react-router-dom";
 import WizardModeStep from "./WizardModeStep";
 import { AppMode } from "../../../../domain/AppMode";
+import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
+import ConfirmationStep from "./ConfirmationStep";
+import LearnConfirmationStep from "./LearnConfirmationStep";
+import LearnSettings from "../../../../domain/session/settings/LearnSettings";
 
 interface PlayWizardProps {
     onClose: () => void;
@@ -44,7 +46,7 @@ interface StageDetails {
     terminal?: boolean;
 }
 
-enum WizardStep {
+export enum WizardStep {
     MODE = 0,
     TOPIC = 1,
     TYPE = 2,
@@ -73,6 +75,8 @@ const PlayWizard = (props: PlayWizardProps) => {
     const [goingForwards, setGoingForwards] = useState(true);
     const [preset, setPreset] = useState<PlayMode>(new PlayKanaModes().getModes()[0]);
 
+    const { MODE, TOPIC, TYPE, PRESET, QUESTION, LIVES, HINT, TIME, DATA, CONFIRM } = WizardStep;
+
     const history = useHistory();
 
     const gameSettingsDispatcher = useGameSettingsDispatch();
@@ -83,14 +87,14 @@ const PlayWizard = (props: PlayWizardProps) => {
     const handleBack = () => {
         setGoingForwards(false);
 
-        if (stage === WizardStep.DATA) {
+        if (stage === DATA) {
             setValid(true);
         }
 
-        if (stage === WizardStep.QUESTION && custom) {
-            setStage(WizardStep.TYPE);
-        } else if (stage === WizardStep.CONFIRM && !topic.wizardDataMenu) {
-            setStage(WizardStep.HINT);
+        if (custom && (stage === QUESTION || (stage === DATA && mode === AppMode.LEARN))) {
+            setStage(TYPE);
+        } else if (stage === CONFIRM && !topic.wizardDataMenu) {
+            setStage(HINT);
         } else {
             setStage(stage - 1);
         }
@@ -99,28 +103,34 @@ const PlayWizard = (props: PlayWizardProps) => {
     const handleNext = () => {
         setGoingForwards(true);
 
-        if (stage === WizardStep.TYPE && custom) {
+        if (stage === TYPE && custom) {
             // If the value is true, then it must be custom from the initial step.
             // If so, then we advance 2 steps to skip the preset and go to custom.
-            setStage(mode === AppMode.PLAY ? WizardStep.QUESTION : WizardStep.DATA);
+            setStage(mode === AppMode.PLAY ? QUESTION : DATA);
         } else if (stage === 7 && !topic.wizardDataMenu) {
-            setStage(WizardStep.CONFIRM);
+            setStage(CONFIRM);
         } else {
             setStage(stage + 1);
         }
     }
 
-    const handlePlay = () => {
+    const handleStartSession = () => {
         const data = custom ? dataSettings! : preset.dataSettings;
-        const game = custom ? settings.build() : preset.modeSettings as GameSettings;
-        gameSettingsDispatcher(setGameSettings(game));
         dataSettingsDispatcher(setGlobalDataSettings(data));
-        history.push('/play');
+
+        if (mode === AppMode.PLAY) {
+            const game = custom ? settings.build() : preset.modeSettings as GameSettings;
+            gameSettingsDispatcher(setGameSettings(game));
+            history.push('/play');
+        } else {
+            history.push('/learn');
+        }
+
     }
 
     const getStageDetails = (): StageDetails => {
         switch (stage) {
-            case WizardStep.MODE: {
+            case MODE: {
                 return {
                     icon: faAngleDoubleRight,
                     name: "Select Mode",
@@ -128,7 +138,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     body: <WizardModeStep onSelect={mode => setMode(mode)} />
                 }
             }
-            case WizardStep.TOPIC: {
+            case TOPIC: {
                 return {
                     icon: faSwatchbook,
                     name: "Select Topic",
@@ -137,7 +147,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case WizardStep.TYPE: {
+            case TYPE: {
                 return {
                     icon: faTools,
                     name: "Select Type",
@@ -146,7 +156,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case WizardStep.PRESET: {
+            case PRESET: {
                 return {
                     icon: faProjectDiagram,
                     name: "Choose Preset",
@@ -155,7 +165,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     terminal: true
                 }
             }
-            case WizardStep.QUESTION: {
+            case QUESTION: {
                 return {
                     icon: faQuestionCircle,
                     iconClass: styles.questionIcon,
@@ -164,7 +174,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case WizardStep.HINT: {
+            case HINT: {
                 return {
                     icon: faLightbulb,
                     iconClass: styles.hintsIcon,
@@ -173,7 +183,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case WizardStep.LIVES: {
+            case LIVES: {
                 return {
                     icon: faHeartbeat,
                     iconClass: styles.livesIcon,
@@ -182,7 +192,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case WizardStep.TIME: {
+            case TIME: {
                 return {
                     icon: faStopwatch,
                     iconClass: styles.timeIcon,
@@ -191,7 +201,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case WizardStep.DATA: {
+            case DATA: {
                 return {
                     icon: faDatabase,
                     iconClass: styles.dataIcon,
@@ -200,12 +210,24 @@ const PlayWizard = (props: PlayWizardProps) => {
                     intermediate: true
                 }
             }
-            case WizardStep.CONFIRM: {
+            case CONFIRM: {
                 return {
                     icon: faCheckCircle,
                     iconClass: styles.confirmIcon,
                     name: "Confirmation",
-                    body: <ConfirmationStep settings={SessionSettings.forGame(dataSettings!, settings.build())} onSelectStage={stage => setStage(stage)} />,
+                    body: (
+                        mode === AppMode.PLAY ? (
+                            <ConfirmationStep
+                                onSelectStage={stage => setStage(stage)}
+                                settings={SessionSettings.forGame(dataSettings!, settings.build())}
+                            />
+                        ) : (
+                            <LearnConfirmationStep
+                                onSelectStage={stage => setStage(stage)}
+                                settings={SessionSettings.forLearning(dataSettings!, new LearnSettings())}
+                            />
+                        )
+                    ),
                     terminal: true
                 }
             }
@@ -249,7 +271,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                         custom={custom}
                         onBack={handleBack}
                         onNext={handleNext}
-                        onPlay={handlePlay}
+                        onPlay={handleStartSession}
                         terminal={terminal}
                         currentStage={stage}
                         intermediate={intermediate}

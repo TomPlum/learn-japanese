@@ -1,0 +1,23 @@
+@import "src/styles/sass/colours";
+
+.question {
+  font-size: 1.2em;
+}
+
+.highlight {
+  transition: all ease-in-out 0.2s;
+}
+
+.highlight:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.mode {
+  color: $bootstrap-info;
+}
+
+.topic {
+  color: $topic;
+}
+

@@ -9,6 +9,10 @@
   opacity: 0.8;
 }
 
+.question {
+  font-size: 1.2em;
+}
+
 .lives {
   color: $lives;
 }
@@ -27,10 +31,6 @@
 
 .field {
   color: $kyoiku-grade-5;
-}
-
-.question {
-  font-size: 1.2em;
 }
 
 .quantity {
