@@ -28,7 +28,7 @@ const GenkiExampleTable = (props: GenkiExampleTableProps) => {
                 const { english, japanese } = example;
 
                 return (
-                    <tbody key={`${english}-tbody`}>
+                    <tbody key={`${english.value}-tbody`}>
                         <tr>
                             <td>
                                 <p className={styles.jp}>

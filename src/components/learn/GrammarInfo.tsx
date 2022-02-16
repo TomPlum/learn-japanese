@@ -6,6 +6,7 @@ import { faChevronDown, faChevronUp, faHashtag } from "@fortawesome/free-solid-s
 import { useState } from "react";
 
 export interface GrammarInfoProps {
+    id?: string;
     title: string;
     body: Element | JSX.Element | string;
     chapter: number;
@@ -16,7 +17,7 @@ export interface GrammarInfoProps {
 
 const GrammarInfo = (props: GrammarInfoProps) => {
 
-    const { title, body, chapter, page, section, preExpand } = props;
+    const { id, title, body, chapter, page, section, preExpand } = props;
 
     const [expanded, setExpanded] = useState(preExpand);
 
@@ -24,7 +25,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
     const headerStyle = !expanded ? { borderRadius: 10 } : { borderRadius: "10px 10px 0 0" };
 
     return (
-        <Accordion className={styles.wrapper}>
+        <Accordion className={styles.wrapper} data-testid={id}>
             <Container className={styles.container} fluid>
                 <Accordion.Toggle
                     as={Row}

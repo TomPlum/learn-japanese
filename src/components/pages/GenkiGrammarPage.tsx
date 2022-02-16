@@ -131,7 +131,13 @@ const GenkiGrammarPage = () => {
 
             <Row noGutters>
                 <Col>
-                    {grammar.map(props => <GrammarInfo {...props} />)}
+                    {grammar.map(props => (
+                        <GrammarInfo
+                            {...props}
+                            key={`${props.chapter}-${props.section}`}
+                            id={`genki-chapter-${props.chapter}-${props.section}`}
+                        />
+                    ))}
                 </Col>
             </Row>
 

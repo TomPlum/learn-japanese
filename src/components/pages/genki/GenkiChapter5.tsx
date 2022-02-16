@@ -291,11 +291,11 @@ const GenkiChapter5 = () => {
 
                 <GenkiTable chapter={5}>
                     <thead>
-                    <tr>
-                        <th>Past Tense (Irregular)</th>
-                        <th>Affirmative</th>
-                        <th>Negative</th>
-                    </tr>
+                        <tr>
+                            <th>Past Tense (Irregular)</th>
+                            <th>Affirmative</th>
+                            <th>Negative</th>
+                        </tr>
                     </thead>
                     <tbody>
                     <tr>

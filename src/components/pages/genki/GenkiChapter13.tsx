@@ -20,58 +20,70 @@ const GenkiChapter13 = () => {
 
                 <p>る Verbs: Drop the final –ru and add –rareru</p>
                 <GenkiTable chapter={13} maxWidth={165}>
-                    <td>{}</td>
-                    <td>見る &#8594; 見られる</td>
+                    <tbody>
+                        <tr>
+                            <td>{}</td>
+                            <td>見る &#8594; 見られる</td>
+                        </tr>
+                    </tbody>
                 </GenkiTable>
 
                 <p>う Verbs: Drop the final –u and add –eru</p>
                 <GenkiTable chapter={13} maxWidth={165}>
-                    <td>{}</td>
-                    <td>行く &#8594; 行ける</td>
+                    <tbody>
+                        <tr>
+                            <td>{}</td>
+                            <td>行く &#8594; 行ける</td>
+                        </tr>
+                    </tbody>
                 </GenkiTable>
 
                 <p>Irregular Verbs</p>
                 <GenkiTable chapter={13} maxWidth={300}>
-                    <tr>
-                        <td>{}</td>
-                        <td>くる &#8594; こられる</td>
-                        <td>する &#8594; できる</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>{}</td>
+                            <td>くる &#8594; こられる</td>
+                            <td>する &#8594; できる</td>
+                        </tr>
+                    </tbody>
                 </GenkiTable>
 
                 <GenkiTable chapter={13}>
-                    <tr>
-                        <th rowSpan={2} className={styles.genkiTwo}>Verb Conjugation</th>
-                        <th colSpan={2} scope="colgroup">Short Form</th>
-                        <th colSpan={2} scope="colgroup">Long Form</th>
-                    </tr>
-                    <tr>
-                        <th scope="col">Affirmative</th>
-                        <th scope="col">Negative</th>
-                        <th scope="col">Affirmative</th>
-                        <th scope="col">Negative</th>
-                    </tr>
-                    <tr>
-                        <th scope="row">Present Tense</th>
-                        <td>見られる</td>
-                        <td>見られない</td>
-                        <td>見られます</td>
-                        <td>見られません</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Past Tense</th>
-                        <td>見られた</td>
-                        <td>見られなかった</td>
-                        <td>見られました</td>
-                        <td>見られませんでした</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">て Form</th>
-                        <td>見られて</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th rowSpan={2} className={styles.genkiTwo}>Verb Conjugation</th>
+                            <th colSpan={2} scope="colgroup">Short Form</th>
+                            <th colSpan={2} scope="colgroup">Long Form</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Affirmative</th>
+                            <th scope="col">Negative</th>
+                            <th scope="col">Affirmative</th>
+                            <th scope="col">Negative</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Present Tense</th>
+                            <td>見られる</td>
+                            <td>見られない</td>
+                            <td>見られます</td>
+                            <td>見られません</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Past Tense</th>
+                            <td>見られた</td>
+                            <td>見られなかった</td>
+                            <td>見られました</td>
+                            <td>見られませんでした</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">て Form</th>
+                            <td>見られて</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
                 </GenkiTable>
             </div>
         )
@@ -129,18 +141,20 @@ const GenkiChapter13 = () => {
                 </p>
 
                 <GenkiTable chapter={13} maxWidth={400}>
-                    <tr>
-                        <td>い Adjectives</td>
-                        <td>おいしい &#8594; おいしそうです</td>
-                    </tr>
-                    <tr>
-                        <td>(exception)</td>
-                        <td>いい &#8594; よさそうです</td>
-                    </tr>
-                    <tr>
-                        <td>な Adjectives</td>
-                        <td>元気(な) &#8594; 元気そうです</td>
-                    </tr>
+                   <tbody>
+                       <tr>
+                           <td>い Adjectives</td>
+                           <td>おいしい &#8594; おいしそうです</td>
+                       </tr>
+                       <tr>
+                           <td>(exception)</td>
+                           <td>いい &#8594; よさそうです</td>
+                       </tr>
+                       <tr>
+                           <td>な Adjectives</td>
+                           <td>元気(な) &#8594; 元気そうです</td>
+                       </tr>
+                   </tbody>
                 </GenkiTable>
             </div>
         )

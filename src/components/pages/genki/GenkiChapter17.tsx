@@ -21,11 +21,13 @@ const GenkiChapter17 = () => {
 
                 <GenkiTable chapter={17}>
                     <thead>
-                        <th className={styles.genkiTwo}>～そうです</th>
-                        <th>{}</th>
-                        <th>{}</th>
-                        <th>I hear that...</th>
-                        <th>It looks like...</th>
+                        <tr>
+                            <th className={styles.genkiTwo}>～そうです</th>
+                            <th>{}</th>
+                            <th>{}</th>
+                            <th>I hear that...</th>
+                            <th>It looks like...</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>

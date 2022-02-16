@@ -82,8 +82,10 @@ const GenkiChapter14 = () => {
 
                 <GenkiTable chapter={14} maxWidth={400}>
                     <thead>
-                        <th className={styles.genkiTwo}>Conjugation Examples</th>
-                        <th>Present Tense, Affirmative</th>
+                        <tr>
+                            <th className={styles.genkiTwo}>Conjugation Examples</th>
+                            <th>Present Tense, Affirmative</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>

@@ -20,39 +20,39 @@ const GenkiChapter3 = () => {
 
                 <GenkiTable chapter={3} className={styles.verbConjugationTable}>
                     <thead>
-                    <tr>
-                        <th>{}</th>
-                        <th>る Verbs</th>
-                        <th>う Verbs</th>
-                    </tr>
+                        <tr>
+                            <th>{}</th>
+                            <th>る Verbs</th>
+                            <th>う Verbs</th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td>Verb Base</td>
-                        <td>tabe</td>
-                        <td>iku</td>
-                    </tr>
-                    <tr>
-                        <td>Dictionary Form</td>
-                        <td>たべる (to eat)</td>
-                        <td>いく(to go)</td>
-                    </tr>
-                    <tr>
-                        <td>Present, Affirmative</td>
-                        <td>たべます</td>
-                        <td>いきます</td>
-                    </tr>
-                    <tr>
-                        <td>Present, Negative</td>
-                        <td>たべません</td>
-                        <td>いきません</td>
-                    </tr>
-                    <tr>
-                        <td>Stem</td>
-                        <td>たべ</td>
-                        <td>いき</td>
-                    </tr>
+                        <tr>
+                            <td>Verb Base</td>
+                            <td>tabe</td>
+                            <td>iku</td>
+                        </tr>
+                        <tr>
+                            <td>Dictionary Form</td>
+                            <td>たべる (to eat)</td>
+                            <td>いく(to go)</td>
+                        </tr>
+                        <tr>
+                            <td>Present, Affirmative</td>
+                            <td>たべます</td>
+                            <td>いきます</td>
+                        </tr>
+                        <tr>
+                            <td>Present, Negative</td>
+                            <td>たべません</td>
+                            <td>いきません</td>
+                        </tr>
+                        <tr>
+                            <td>Stem</td>
+                            <td>たべ</td>
+                            <td>いき</td>
+                        </tr>
                     </tbody>
                 </GenkiTable>
 
@@ -60,26 +60,26 @@ const GenkiChapter3 = () => {
 
                 <GenkiTable chapter={3} className={styles.verbConjugationTable}>
                     <tbody>
-                    <tr>
-                        <td>Dictionary Form</td>
-                        <td>する</td>
-                        <td>くる</td>
-                    </tr>
-                    <tr>
-                        <td>Present, Affirmative</td>
-                        <td>します</td>
-                        <td>きます</td>
-                    </tr>
-                    <tr>
-                        <td>Present, Negative</td>
-                        <td>しません</td>
-                        <td>きません</td>
-                    </tr>
-                    <tr>
-                        <td>Stem</td>
-                        <td>し</td>
-                        <td>き</td>
-                    </tr>
+                        <tr>
+                            <td>Dictionary Form</td>
+                            <td>する</td>
+                            <td>くる</td>
+                        </tr>
+                        <tr>
+                            <td>Present, Affirmative</td>
+                            <td>します</td>
+                            <td>きます</td>
+                        </tr>
+                        <tr>
+                            <td>Present, Negative</td>
+                            <td>しません</td>
+                            <td>きません</td>
+                        </tr>
+                        <tr>
+                            <td>Stem</td>
+                            <td>し</td>
+                            <td>き</td>
+                        </tr>
                     </tbody>
                 </GenkiTable>
 

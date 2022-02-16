@@ -22,7 +22,7 @@ const GenkiRelativePsychologyCircle = (props: GenkiRelativePsychologyCircleProps
                     <Col>
                         {situations.map(situation => {
                             return (
-                                <p className={styles.situation}>
+                                <p className={styles.situation} key={situation}>
                                     {situation}
                                 </p>
                             )

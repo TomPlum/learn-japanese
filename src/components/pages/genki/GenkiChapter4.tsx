@@ -120,9 +120,11 @@ const GenkiChapter4 = () => {
                 <p>The format is as follows:</p>
 
                 <GenkiTable chapter={4} maxWidth={232}>
-                    <tr>
-                        <td>X は Y の location word です。</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>X は Y の location word です。</td>
+                        </tr>
+                    </tbody>
                 </GenkiTable>
 
                 <p>The particle で is used with these words.</p>
@@ -154,20 +156,24 @@ const GenkiChapter4 = () => {
                 <p>The past tense versions of “X は Y です” sentences look like the following:</p>
                 <GenkiTable chapter={4}>
                     <thead>
-                    <th>です</th>
-                    <th>Affirmative</th>
-                    <th>Negative</th>
+                        <tr>
+                            <th>です</th>
+                            <th>Affirmative</th>
+                            <th>Negative</th>
+                        </tr>
                     </thead>
-                    <tr>
-                        <td>Present Tense</td>
-                        <td>～です</td>
-                        <td>～じゃありません</td>
-                    </tr>
-                    <tr>
-                        <td>Past Tense</td>
-                        <td>～でした</td>
-                        <td>～じゃありませんでした</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>Present Tense</td>
+                            <td>～です</td>
+                            <td>～じゃありません</td>
+                        </tr>
+                        <tr>
+                            <td>Past Tense</td>
+                            <td>～でした</td>
+                            <td>～じゃありませんでした</td>
+                        </tr>
+                    </tbody>
                 </GenkiTable>
 
                 <GenkiExampleTable
@@ -197,20 +203,24 @@ const GenkiChapter4 = () => {
                 <p>The past tense of verbs looks like the following, where ～ stands for the stem of a verb.</p>
                 <GenkiTable chapter={4}>
                     <thead>
-                    <th>Verbs</th>
-                    <th>Affirmative</th>
-                    <th>Negative</th>
+                        <tr>
+                            <th>Verbs</th>
+                            <th>Affirmative</th>
+                            <th>Negative</th>
+                        </tr>
                     </thead>
-                    <tr>
-                        <td>Present Tense</td>
-                        <td>～ます</td>
-                        <td>～ません</td>
-                    </tr>
-                    <tr>
-                        <td>Past Tense</td>
-                        <td>～ました</td>
-                        <td>～ませんでした</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>Present Tense</td>
+                            <td>～ます</td>
+                            <td>～ません</td>
+                        </tr>
+                        <tr>
+                            <td>Past Tense</td>
+                            <td>～ました</td>
+                            <td>～ませんでした</td>
+                        </tr>
+                    </tbody>
                 </GenkiTable>
 
                 <GenkiExampleTable
