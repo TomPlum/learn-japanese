@@ -33,6 +33,8 @@ import { GridItem } from "../components/layout/wizard/GridItem";
 import KanjiSettingsFormBody from "../components/settings/data/KanjiSettingsFormBody";
 import KanaSettingsFormBody from "../components/settings/data/KanaSettingsFormBody";
 import SentenceStructureFormBody from "../components/settings/data/SentenceStructureFormBody";
+import NumbersSettingsForm from "../components/settings/data/NumbersSettingsForm";
+import NumbersSettingsFormBody from "../components/settings/data/NumbersSettingsFormBody";
 
 type ReactComponent = React.FunctionComponent | React.ComponentClass<any> | ((props: DataSettingsMenuProps<any>) => JSX.Element)| ((props: DataSettingsStepFormProps<any>) => JSX.Element) | undefined;
 
@@ -54,7 +56,8 @@ export default class Topic implements GridItem {
 
     public static NUMBERS = new Topic(
         "Numbers & Counting", "Numbers", faYenSign, new LearnNumbersModes(), new PlayNumbersModes(),
-        { front: NumbersFlashCardFront, back: NumbersFlashCardBack }
+        { front: NumbersFlashCardFront, back: NumbersFlashCardBack },
+        NumbersSettingsForm, NumbersSettingsFormBody
     );
 
     public static KANJI = new Topic(
