@@ -44,7 +44,6 @@ const MainMenuPage = () => {
                     </DashboardCard>
                 </Col>
             </Row>
-            {/*<CardContainer />*/}
         </Container>
     );
 }

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 
 export interface DashboardCardProps {
+    id?: string;
     size?: "sm" | "md" | "lg";
     title?: string;
     loading?: boolean;
@@ -15,7 +16,7 @@ export interface DashboardCardProps {
 
 const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
 
-    const { title, error, size, loading, onReload, children, className } = props;
+    const { id, title, error, size, loading, onReload, children, className } = props;
 
     const getSize = (): string | undefined => {
         switch (size) {
@@ -30,7 +31,7 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
     if (error) containerClasses.push(styles.containerError)
 
     return (
-        <div className={containerClasses.join(" ")} style={{ height: getSize() }}>
+        <div className={containerClasses.join(" ")} style={{ height: getSize() }} id={id} data-testid={id}>
             {title && (
                 <div className={styles.header}>
                     <span className={styles.title}>{title}</span>
@@ -45,7 +46,7 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
                 </div>
             )}
             {loading && (
-                <Fade in={loading} appear>
+                <Fade in={loading} appear data-testid="dashboard-card-loader">
                     <div className={styles.loading}>
                         <div className={styles.shimmer}>
                             <div className={styles["_2iwr"]}/>
