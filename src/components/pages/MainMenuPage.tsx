@@ -1,6 +1,7 @@
 import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss";
 import { Col, Container, Row } from "react-bootstrap";
 import DashboardCard from "../layout/DashboardCard";
+import PlayCard from "../cards/PlayCard";
 
 const MainMenuPage = () => {
     return (
@@ -21,9 +22,7 @@ const MainMenuPage = () => {
                 </Col>
 
                 <Col>
-                    <DashboardCard size="md" title="Play" loading>
-
-                    </DashboardCard>
+                    <PlayCard />
 
                     <DashboardCard size="md" title="Activity" error="Something went wrong.">
 

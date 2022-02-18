@@ -1,5 +1,6 @@
 @import "src/styles/sass/colours";
 @import "src/styles/sass/animations";
+@import "src/styles/sass/mixins";
 
 .container {
   background-color: $dark-2;
@@ -22,6 +23,7 @@
 }
 
 .title {
+  @include noSelect;
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   color: $light-1;
   margin-bottom: 3px;
@@ -31,6 +33,11 @@
   display: flex;
   align-items: flex-start;
   border-bottom: 1px solid $dark-1;
+}
+
+.content {
+  padding-top: 15px;
+  color: $light-1;
 }
 
 .error {

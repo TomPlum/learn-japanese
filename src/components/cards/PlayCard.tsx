@@ -1,10 +1,10 @@
 import styles from "../../styles/sass/components/cards/PlayCard.module.scss";
-import { Button, Card, Col, Row } from "react-bootstrap";
-import ReloadButton from "../ui/buttons/ReloadButton";
+import { Button, Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faRedo, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import PlayWizard from "../layout/wizard/play/PlayWizard";
+import DashboardCard, { DashboardCardProps } from "../layout/DashboardCard";
 
 const PlayCard = () => {
 
@@ -16,43 +16,29 @@ const PlayCard = () => {
 
     }
 
+    const props: DashboardCardProps = {
+        size: "md",
+        error: error,
+        title: "Play",
+        id: "play-card",
+        loading: loading,
+        className: styles.card,
+        onReload: onRefreshMeta
+    }
+
     return (
-        <Card className={styles.card} border="dark">
-            <Card.Body>
-                <h2 className={styles.heading}>
-                    <span>Play</span>
-                    {!error && (
-                        <ReloadButton
-                            loading={loading}
-                            onClick={onRefreshMeta}
-                            className={styles.icon}
-                        />
-                    )}
-                </h2>
-
-                {error && <div className={styles.error}>
-                    <p>{error}</p>
-                    <Button variant="warning" onClick={onRefreshMeta}>
-                        <FontAwesomeIcon icon={loading ? faSpinner : faRedo} spin={loading} fixedWidth size="sm" />
-                        <span> Try again</span>
+        <DashboardCard {...props}>
+            <Row className={error ? styles.blur : undefined}>
+                <Col>
+                    <Button variant="outline-light" onClick={() => setCustomising(true)} className={styles.start}>
+                        <FontAwesomeIcon icon={faPlay} fixedWidth />
                     </Button>
-                </div>}
+                    <p>New Session</p>
+                </Col>
+            </Row>
 
-                <Row className={error ? styles.blur : undefined}>
-                    <Col>
-                        <Button variant="success" onClick={() => setCustomising(true)}>
-                            <FontAwesomeIcon icon={faPlay} fixedWidth />
-                            <span>{" Start Game"}</span>
-                        </Button>
-                    </Col>
-                    <Col xs={12}>
-                        <p>Start last </p>
-                    </Col>
-                </Row>
-
-                {customising && <PlayWizard onClose={() => setCustomising(false)} />}
-            </Card.Body>
-        </Card>
+            {customising && <PlayWizard onClose={() => setCustomising(false)} />}
+        </DashboardCard>
     )
 }
 

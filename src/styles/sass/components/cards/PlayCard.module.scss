@@ -1,2 +1,11 @@
-@import "src/styles/sass/components/cards";
 @import "src/styles/sass/colours";
+
+.card {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.start {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+}
