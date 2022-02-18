@@ -5,7 +5,6 @@
   @include fitMobileViewportHeight;
   @include borderBoxSizing;
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -13,6 +12,7 @@
   flex-grow: 1;
   flex-wrap: wrap;
   flex-direction: column;
+  padding: 0;
 }
 
 @include desktop {
@@ -35,3 +35,10 @@
   }
 }
 
+.row {
+  width: 100%;
+}
+
+.toolbar {
+  height: 35px;
+}
