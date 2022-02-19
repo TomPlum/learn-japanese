@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import PlayWizard from "../layout/wizard/play/PlayWizard";
 import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
+import DashboardCardHeader from "../layout/card/DashboardCardHeader";
 
 const PlayCard = () => {
 
@@ -25,7 +26,10 @@ const PlayCard = () => {
 
     return (
         <DashboardCard {...props}>
-            <DashboardCard.Header title="Play" error={error} onReload={onRefreshMeta} />
+            <DashboardCard.Header error={error} onReload={onRefreshMeta}>
+                <DashboardCardHeader.Title>Play</DashboardCardHeader.Title>
+            </DashboardCard.Header>
+
             <DashboardCard.Body>
                 <Row className={error ? styles.blur : undefined}>
                     <Col>

@@ -1,13 +1,5 @@
 @import "src/styles/sass/colours";
-@import "src/styles/sass/mixins";
 @import "src/styles/sass/animations";
-
-.title {
-  @include noSelect;
-  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
-  color: $light-1;
-  margin-bottom: 3px;
-}
 
 .header {
   display: flex;

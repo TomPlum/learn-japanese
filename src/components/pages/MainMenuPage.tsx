@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import DashboardCard from "../layout/card/DashboardCard";
 import PlayCard from "../cards/PlayCard";
 import HighScoresCard from "../cards/HighScoresCard";
+import DashboardCardHeader from "../layout/card/DashboardCardHeader";
 
 const MainMenuPage = () => {
     return (
@@ -15,11 +16,19 @@ const MainMenuPage = () => {
             <Row className={styles.row}>
                 <Col md={3}>
                     <DashboardCard size="sm">
-                        <DashboardCard.Header title="Profile" />
+                        <DashboardCard.Header>
+                            <DashboardCardHeader.Title>
+                                Profile
+                            </DashboardCardHeader.Title>
+                        </DashboardCard.Header>
                     </DashboardCard>
 
                     <DashboardCard size="sm">
-                        <DashboardCard.Header title="Settings" />
+                        <DashboardCard.Header>
+                            <DashboardCardHeader.Title>
+                                Settings
+                            </DashboardCardHeader.Title>
+                        </DashboardCard.Header>
                     </DashboardCard>
                 </Col>
 
@@ -27,7 +36,11 @@ const MainMenuPage = () => {
                     <PlayCard />
 
                     <DashboardCard size="md" error="Something went wrong.">
-                        <DashboardCard.Header title="Activity" />
+                        <DashboardCard.Header>
+                            <DashboardCardHeader.Title>
+                                Activity
+                            </DashboardCardHeader.Title>
+                        </DashboardCard.Header>
                     </DashboardCard>
                 </Col>
 
@@ -35,11 +48,19 @@ const MainMenuPage = () => {
                     <HighScoresCard />
 
                     <DashboardCard size="sm" updating>
-                        <DashboardCard.Header title="Mistakes" />
+                        <DashboardCard.Header>
+                            <DashboardCardHeader.Title>
+                                Mistakes
+                            </DashboardCardHeader.Title>
+                        </DashboardCard.Header>
                     </DashboardCard>
 
                     <DashboardCard size="sm" loading>
-                        <DashboardCard.Header title="Stats" />
+                        <DashboardCard.Header>
+                            <DashboardCardHeader.Title>
+                                Stats
+                            </DashboardCardHeader.Title>
+                        </DashboardCard.Header>
                     </DashboardCard>
                 </Col>
             </Row>

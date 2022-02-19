@@ -1,20 +1,22 @@
 import styles from "../../../styles/sass/components/layout/card/DashboardCardHeader.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
+import DashboardCardTitle from "./DashboardCardTitle";
+import { PropsWithChildren } from "react";
 
 export interface DashboardCardHeaderProps {
-    title: string;
     error?: string;
     onReload?: () => void;
 }
 
-const DashboardCardHeader = (props: DashboardCardHeaderProps) => {
+const DashboardCardHeader = (props: PropsWithChildren<DashboardCardHeaderProps>) => {
 
-    const { title, error, onReload } = props;
+    const { children, error, onReload } = props;
 
     return (
         <div className={styles.header}>
-            <span className={styles.title}>{title}</span>
+            {children}
+
             {error && error != "" && (
                 <FontAwesomeIcon
                     title="Retry"
@@ -27,4 +29,6 @@ const DashboardCardHeader = (props: DashboardCardHeaderProps) => {
     );
 }
 
-export default DashboardCardHeader;
+export default Object.assign(DashboardCardHeader, {
+    Title: DashboardCardTitle
+});
