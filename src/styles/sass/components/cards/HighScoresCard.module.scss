@@ -1,0 +1,26 @@
+@import "src/styles/sass/colours";
+
+.table {
+  color: $light-2;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.table td, .table th {
+  padding: 5px 1px;
+}
+
+.table thead th {
+  border-top: none;
+  color: $light-1;
+  border-color: $light-2;
+}
+
+.table tr td {
+  border-color: $light-3;
+  transition: all ease-in-out 0.2s;
+}
+
+.table tr:hover {
+  color: $light-1 !important;
+  cursor: pointer;
+}

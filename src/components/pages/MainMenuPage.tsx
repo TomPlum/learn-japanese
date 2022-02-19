@@ -2,6 +2,7 @@ import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss"
 import { Col, Container, Row } from "react-bootstrap";
 import DashboardCard from "../layout/DashboardCard";
 import PlayCard from "../cards/PlayCard";
+import HighScoresCard from "../cards/HighScoresCard";
 
 const MainMenuPage = () => {
     return (
@@ -30,9 +31,7 @@ const MainMenuPage = () => {
                 </Col>
 
                 <Col md={3}>
-                    <DashboardCard size="sm" title="Highscores">
-
-                    </DashboardCard>
+                    <HighScoresCard />
 
                     <DashboardCard size="sm" title="Mistakes">
 
