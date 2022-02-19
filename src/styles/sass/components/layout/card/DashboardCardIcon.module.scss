@@ -1,0 +1,12 @@
+@import "src/styles/sass/colours";
+
+.icon {
+  color: $light-2;
+  margin-left: auto;
+  transition: all ease-in-out 0.2s;
+}
+
+.icon:hover {
+  color: $light-1;
+  cursor: pointer;
+}

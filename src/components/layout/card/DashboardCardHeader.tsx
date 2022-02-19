@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import DashboardCardTitle from "./DashboardCardTitle";
 import { PropsWithChildren } from "react";
+import DashboardCardIcon from "./DashboardCardIcon";
 
 export interface DashboardCardHeaderProps {
     error?: string;
@@ -30,5 +31,6 @@ const DashboardCardHeader = (props: PropsWithChildren<DashboardCardHeaderProps>)
 }
 
 export default Object.assign(DashboardCardHeader, {
-    Title: DashboardCardTitle
+    Title: DashboardCardTitle,
+    Icon: DashboardCardIcon
 });

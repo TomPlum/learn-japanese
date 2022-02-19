@@ -2,6 +2,7 @@ import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard"
 import { Button, Table } from "react-bootstrap";
 import styles from "../../styles/sass/components/cards/HighScoresCard.module.scss";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
 
 const HighScoresCard = () => {
 
@@ -13,10 +14,11 @@ const HighScoresCard = () => {
 
     return (
         <DashboardCard {...props}>
-            <DashboardCard.Header />
-                <DashboardCardHeader.Title>
-                    Highscores
-                </DashboardCardHeader.Title>
+            <DashboardCard.Header>
+                <DashboardCardHeader.Title>Highscores</DashboardCardHeader.Title>
+                <DashboardCardHeader.Icon icon={faCog} />
+            </DashboardCard.Header>
+
             <DashboardCard.Body>
                 <Table responsive hover className={styles.table}>
                     <thead>
