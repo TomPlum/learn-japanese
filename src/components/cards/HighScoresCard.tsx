@@ -1,5 +1,5 @@
 import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import styles from "../../styles/sass/components/cards/HighScoresCard.module.scss";
 
 const HighScoresCard = () => {
@@ -13,6 +13,7 @@ const HighScoresCard = () => {
     return (
         <DashboardCard {...props}>
             <DashboardCard.Header title="Highscores" />
+
             <DashboardCard.Body>
                 <Table responsive hover className={styles.table}>
                     <thead>
@@ -51,6 +52,10 @@ const HighScoresCard = () => {
                     </tbody>
                 </Table>
             </DashboardCard.Body>
+
+            <DashboardCard.Footer className={styles.footer}>
+                <a className={styles.more} href="/high-scores">Show More</a>
+            </DashboardCard.Footer>
         </DashboardCard>
     );
 }

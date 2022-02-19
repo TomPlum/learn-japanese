@@ -24,3 +24,21 @@
   color: $light-1 !important;
   cursor: pointer;
 }
+
+.footer {
+  text-align: center;
+}
+
+.more {
+  color: $learn-colour;
+  opacity: 0.8;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  transition: all ease-in-out 0.15s;
+}
+
+.more:hover {
+  color: $learn-colour;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+}
