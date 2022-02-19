@@ -28,8 +28,19 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
         }
     }
 
+    const getContentPadding = (): number | undefined => {
+        switch (size) {
+            case "sm": return 5;
+            case "md": return 15;
+            default: return undefined;
+        }
+    }
+
     const containerClasses = [styles.container, className];
     if (error) containerClasses.push(styles.containerError);
+
+    const contentClasses = [styles.content];
+    if (updating) contentClasses.push(styles.blur);
 
     return (
         <div className={containerClasses.join(" ")} style={{ height: getSize() }} id={id} data-testid={id}>
@@ -74,7 +85,7 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
 
             {!loading && !error && (
                 <Fade in appear>
-                    <div className={[styles.content, updating ? styles.blur : ""].join(" ")}>
+                    <div className={contentClasses.join(" ")} style={{ paddingTop: getContentPadding()}}>
                         {children}
                     </div>
                 </Fade>
