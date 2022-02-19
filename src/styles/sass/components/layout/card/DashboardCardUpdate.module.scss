@@ -1,0 +1,21 @@
+@import "src/styles/sass/colours";
+
+.updating {
+  padding-top: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.updateIcon {
+  font-size: 2em;
+  margin-left: -10px;
+  color: $learn-colour;
+  position: absolute;
+  left: 50%;
+}

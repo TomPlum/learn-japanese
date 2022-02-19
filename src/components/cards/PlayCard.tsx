@@ -18,24 +18,24 @@ const PlayCard = () => {
 
     const props: DashboardCardProps = {
         size: "md",
-        error: error,
-        title: "Play",
         id: "play-card",
         loading: loading,
         className: styles.card,
-        onReload: onRefreshMeta
     }
 
     return (
         <DashboardCard {...props}>
-            <Row className={error ? styles.blur : undefined}>
-                <Col>
-                    <Button variant="outline-light" onClick={() => setCustomising(true)} className={styles.start}>
-                        <FontAwesomeIcon icon={faPlay} fixedWidth />
-                    </Button>
-                    <p>New Session</p>
-                </Col>
-            </Row>
+            <DashboardCard.Header title="Play" error={error} onReload={onRefreshMeta} />
+            <DashboardCard.Body>
+                <Row className={error ? styles.blur : undefined}>
+                    <Col>
+                        <Button variant="outline-light" onClick={() => setCustomising(true)} className={styles.start}>
+                            <FontAwesomeIcon icon={faPlay} fixedWidth />
+                        </Button>
+                        <p>New Session</p>
+                    </Col>
+                </Row>
+            </DashboardCard.Body>
 
             {customising && <PlayWizard onClose={() => setCustomising(false)} />}
         </DashboardCard>

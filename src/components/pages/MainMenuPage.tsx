@@ -14,31 +14,32 @@ const MainMenuPage = () => {
             </Row>
             <Row className={styles.row}>
                 <Col md={3}>
-                    <DashboardCard size="sm" title="Profile">
-
+                    <DashboardCard size="sm">
+                        <DashboardCard.Header title="Profile" />
                     </DashboardCard>
-                    <DashboardCard size="sm" title="Settings">
 
+                    <DashboardCard size="sm">
+                        <DashboardCard.Header title="Settings" />
                     </DashboardCard>
                 </Col>
 
                 <Col>
                     <PlayCard />
 
-                    <DashboardCard size="md" title="Activity" error="Something went wrong.">
-
+                    <DashboardCard size="md" error="Something went wrong.">
+                        <DashboardCard.Header title="Activity" />
                     </DashboardCard>
                 </Col>
 
                 <Col md={3}>
                     <HighScoresCard />
 
-                    <DashboardCard size="sm" title="Mistakes">
-
+                    <DashboardCard size="sm" updating>
+                        <DashboardCard.Header title="Mistakes" />
                     </DashboardCard>
 
-                    <DashboardCard size="sm" title="Stats">
-
+                    <DashboardCard size="sm" loading>
+                        <DashboardCard.Header title="Stats" />
                     </DashboardCard>
                 </Col>
             </Row>
