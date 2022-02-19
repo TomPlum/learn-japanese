@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren } from "react";
 import styles from "../../styles/sass/components/layout/DashboardCard.module.scss";
 import { Fade } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +9,7 @@ export interface DashboardCardProps {
     size?: "sm" | "md" | "lg";
     title?: string;
     loading?: boolean;
+    updating?: boolean;
     error?: string;
     className?: string;
     onReload?: () => void;
@@ -16,7 +17,7 @@ export interface DashboardCardProps {
 
 const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
 
-    const { id, title, error, size, loading, onReload, children, className } = props;
+    const { id, title, error, size, updating, loading, onReload, children, className } = props;
 
     const getSize = (): string | undefined => {
         switch (size) {
@@ -28,7 +29,7 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
     }
 
     const containerClasses = [styles.container, className];
-    if (error) containerClasses.push(styles.containerError)
+    if (error) containerClasses.push(styles.containerError);
 
     return (
         <div className={containerClasses.join(" ")} style={{ height: getSize() }} id={id} data-testid={id}>
@@ -45,6 +46,7 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
                     )}
                 </div>
             )}
+
             {loading && (
                 <Fade in={loading} appear data-testid="dashboard-card-loader">
                     <div className={styles.loading}>
@@ -66,10 +68,16 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
                 </Fade>
             )}
 
+            {updating && <div className={styles.updating}>
+                <FontAwesomeIcon icon={faSyncAlt} className={styles.updateIcon} spin />
+            </div>}
+
             {!loading && !error && (
-                <div className={styles.content}>
-                    {children}
-                </div>
+                <Fade in appear>
+                    <div className={[styles.content, updating ? styles.blur : ""].join(" ")}>
+                        {children}
+                    </div>
+                </Fade>
             )}
 
             {!loading && error && (

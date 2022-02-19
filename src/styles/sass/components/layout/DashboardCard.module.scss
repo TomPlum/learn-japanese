@@ -8,7 +8,8 @@
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.15) 0 15px 25px, rgba(0, 0, 0, 0.05) 0 5px 10px;
   margin-bottom: 25px;
-  padding: 10px;
+  padding: 10px 15px;
+  position: relative;
 }
 
 .containerError {
@@ -20,6 +21,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding-bottom: 20px;
 }
 
 .title {
@@ -59,6 +61,36 @@
   color: $light-1;
   animation-name: spin-clockwise;
   animation-timing-function: ease-in-out;
+}
+
+.updating {
+  padding-top: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.blur {
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 2000px rgba($dark-2, .5);
+  filter: blur(5px);
+}
+
+.updateIcon {
+  font-size: 2em;
+  margin-left: -10px;
+  color: $learn-colour;
+  position: absolute;
+  left: 50%;
 }
 
 .loading {
