@@ -4,13 +4,14 @@ import DashboardCard from "../layout/card/DashboardCard";
 import PlayCard from "../cards/PlayCard";
 import HighScoresCard from "../cards/HighScoresCard";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
+import DashboardToolbar from "../layout/DashboardToolbar";
 
 const MainMenuPage = () => {
     return (
         <Container className={styles.wrapper}>
             <Row className={styles.row}>
                 <Col>
-                    <DashboardCard className={styles.toolbar} />
+                    <DashboardToolbar />
                 </Col>
             </Row>
             <Row className={styles.row}>
