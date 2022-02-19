@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import DashboardCard, { DashboardCardProps } from "../../../components/layout/DashboardCard";
+import DashboardCard, { DashboardCardProps } from "../../../../components/layout/card/DashboardCard";
 
 const onReloadHandler = jest.fn();
 

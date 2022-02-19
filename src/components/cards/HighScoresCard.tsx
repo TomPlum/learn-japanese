@@ -1,4 +1,4 @@
-import DashboardCard, { DashboardCardProps } from "../layout/DashboardCard";
+import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
 import { Table } from "react-bootstrap";
 import styles from "../../styles/sass/components/cards/HighScoresCard.module.scss";
 

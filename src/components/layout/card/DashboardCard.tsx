@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import styles from "../../styles/sass/components/layout/DashboardCard.module.scss";
+import styles from "../../../styles/sass/components/layout/card/DashboardCard.module.scss";
 import { Fade } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";

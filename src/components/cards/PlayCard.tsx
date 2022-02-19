@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import PlayWizard from "../layout/wizard/play/PlayWizard";
-import DashboardCard, { DashboardCardProps } from "../layout/DashboardCard";
+import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
 
 const PlayCard = () => {
 

@@ -1,6 +1,6 @@
 import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss";
 import { Col, Container, Row } from "react-bootstrap";
-import DashboardCard from "../layout/DashboardCard";
+import DashboardCard from "../layout/card/DashboardCard";
 import PlayCard from "../cards/PlayCard";
 import HighScoresCard from "../cards/HighScoresCard";
 
