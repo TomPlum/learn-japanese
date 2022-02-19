@@ -48,7 +48,7 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
                             return React.cloneElement(child, { error: error, onReload: onReload })
                         }
                         case DashboardCardBody: {
-                            return React.cloneElement(child, { size: size });
+                            return React.cloneElement(child, { size: size, updating: updating });
                         }
                         default: {
                             return child;
