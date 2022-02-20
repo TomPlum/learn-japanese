@@ -1,0 +1,23 @@
+@import "src/styles/sass/colours";
+
+.card {
+  height: 40px;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.15em;
+}
+
+.icon {
+  margin: 0 5px;
+  color: $light-2;
+  transition: all ease-in-out 0.2s;
+}
+
+.icon:hover {
+  color: $light-1;
+  cursor: pointer;
+}

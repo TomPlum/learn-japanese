@@ -5,6 +5,7 @@ import PlayCard from "../cards/PlayCard";
 import HighScoresCard from "../cards/HighScoresCard";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
 import DashboardToolbar from "../layout/DashboardToolbar";
+import FeedbackCard from "../cards/FeedbackCard";
 
 const MainMenuPage = () => {
     return (
@@ -15,7 +16,7 @@ const MainMenuPage = () => {
                 </Col>
             </Row>
             <Row className={styles.row}>
-                <Col md={3}>
+                <Col md={3} className={styles.col}>
                     <DashboardCard size="sm">
                         <DashboardCard.Header>
                             <DashboardCardHeader.Title>
@@ -31,6 +32,8 @@ const MainMenuPage = () => {
                             </DashboardCardHeader.Title>
                         </DashboardCard.Header>
                     </DashboardCard>
+
+                    <FeedbackCard className={styles.feedback} />
                 </Col>
 
                 <Col>
