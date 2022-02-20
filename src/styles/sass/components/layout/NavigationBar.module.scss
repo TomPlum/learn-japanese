@@ -7,13 +7,9 @@
 }
 
 @mixin navbar {
-  border-bottom: 2px rgba(146, 146, 146, 0.2) solid;
+  border-bottom: 2px solid $dark-1;
   background-color: $dark-3;
-
-  $shadow-colour: rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: 1px 2px 3px $shadow-colour;
-  -webkit-box-shadow: 1px 2px 3px $shadow-colour;
-  box-shadow: 1px 2px 3px $shadow-colour;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 15px 25px, rgba(0, 0, 0, 0.05) 0 5px 10px;
 }
 
 @mixin toggle {
