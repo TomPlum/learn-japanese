@@ -24,7 +24,7 @@ const TopicSelector = (props: TopicSelectorProps) => {
 
     return (
         <div className={className}>
-            <Dropdown className={styles.dropdown} data-testid="dropdown">
+            <Dropdown className={styles.dropdown} data-testid="wizard-topic-selector">
                 <Dropdown.Toggle className={styles.toggle} id="select-game-type">
                     <FontAwesomeIcon fixedWidth icon={selected.icon} /> {selected.name}
                 </Dropdown.Toggle>
