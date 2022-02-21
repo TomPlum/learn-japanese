@@ -72,7 +72,7 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
         const { type, cards, score, questionField, answerField } = this.state;
 
         return (
-            <ScrollableContainer className={styles.formWrapper}>
+            <ScrollableContainer className={styles.formWrapper} id="question-settings-form">
                 <Row className={styles.section}>
                     <Col xs={12}>
                         <p className={styles.leadingDescription}>
@@ -92,26 +92,26 @@ class QuestionSettingsForm extends Component<QuestionSettingsFormProps, Question
                     <Col className={styles.noGuttersRight}>
                         <DisplayTypeButton
                             icon={faFont}
-                            type={QuestionType.TEXT}
                             selected={type}
+                            type={QuestionType.TEXT}
                             onClick={(type) => this.setState({ type, cards: 1 })}
                         />
                     </Col>
 
                     <Col className={[styles.noGuttersLeft, styles.noGuttersRight].join(" ")}>
                         <DisplayTypeButton
+                            selected={type}
                             icon={faThLarge}
                             type={QuestionType.CHOICE}
-                            selected={type}
                             onClick={(type) => this.setState({ type, cards: 4 })}
                         />
                     </Col>
 
                     <Col className={styles.noGuttersLeft}>
                         <DisplayTypeButton
+                            selected={type}
                             icon={faHandPointer}
                             type={QuestionType.MATCH}
-                            selected={type}
                             onClick={(type) => this.setState({ type, questions: 3 })}
                         />
                     </Col>
