@@ -26,7 +26,6 @@ const WizardProgressStep = (props: WizardProgressStepProps) => {
         }
 
         if (currentStage > stage) {
-            //return styles[`complete-${stage}`];
             return styles.complete;
         } else if (currentStage === stage) {
             return styles.inProgress;
