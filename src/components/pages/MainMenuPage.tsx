@@ -6,6 +6,7 @@ import HighScoresCard from "../cards/HighScoresCard";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
 import DashboardToolbar from "../layout/DashboardToolbar";
 import FeedbackCard from "../cards/FeedbackCard";
+import ScrollableContainer from "../ui/ScrollableContainer";
 
 const MainMenuPage = () => {
     return (
@@ -15,6 +16,7 @@ const MainMenuPage = () => {
                     <DashboardToolbar />
                 </Col>
             </Row>
+
             <Row className={styles.row}>
                 <Col md={3} className={styles.col}>
                     <DashboardCard size="sm">
@@ -37,15 +39,25 @@ const MainMenuPage = () => {
                 </Col>
 
                 <Col>
-                    <PlayCard />
+                    <ScrollableContainer className={styles.main} hideScrollBar>
+                        <PlayCard />
 
-                    <DashboardCard size="md" error="Something went wrong.">
-                        <DashboardCard.Header>
-                            <DashboardCardHeader.Title>
-                                Activity
-                            </DashboardCardHeader.Title>
-                        </DashboardCard.Header>
-                    </DashboardCard>
+                        <DashboardCard size="md" error="Something went wrong.">
+                            <DashboardCard.Header>
+                                <DashboardCardHeader.Title>
+                                    Activity
+                                </DashboardCardHeader.Title>
+                            </DashboardCard.Header>
+                        </DashboardCard>
+
+                        {/*<DashboardCard size="md">
+                            <DashboardCard.Header>
+                                <DashboardCardHeader.Title>
+                                    Overview
+                                </DashboardCardHeader.Title>
+                            </DashboardCard.Header>
+                        </DashboardCard>*/}
+                    </ScrollableContainer>
                 </Col>
 
                 <Col md={3}>
