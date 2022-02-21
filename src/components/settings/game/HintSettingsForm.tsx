@@ -51,7 +51,7 @@ class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsForm
         const { enabled, quantity, infinite } = this.state;
 
         return (
-            <ScrollableContainer className={styles.formWrapper}>
+            <ScrollableContainer className={styles.formWrapper} id="hint-settings-form">
                 <Row>
                     <Col xs={12}>
                         <ToggleSwitch
