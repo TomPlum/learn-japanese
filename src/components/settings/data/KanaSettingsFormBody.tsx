@@ -34,7 +34,7 @@ const KanaSettingsFormBody = (props: DataSettingsStepFormProps<KanaSettings>) =>
     }
 
     return (
-        <div className={className}>
+        <div className={className} data-testid="kana-settings-form-body">
             <Row>
                 <Col>
                     <ToggleSwitch
