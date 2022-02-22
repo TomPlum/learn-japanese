@@ -1,6 +1,6 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import styles from "../../../../styles/sass/components/layout/wizard/play/PresetCustomStep.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/steps/PresetCustomStep.module.scss";
 import { faHammer, faProjectDiagram } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Environment } from "../../../../utility/Environment";

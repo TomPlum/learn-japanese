@@ -3,7 +3,7 @@ import styles from "../../../styles/sass/components/settings/data/SentenceStruct
 import QuantityField from "../../ui/fields/QuantityField";
 import ToggleSwitch from "../../ui/ToggleSwitch";
 import { useEffect, useState } from "react";
-import { DataSettingsStepFormProps } from "../../layout/wizard/play/DataSettingsStep";
+import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep";
 import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../../../domain/session/settings/data/SentenceStructureSettings";
 
 const SentenceStructureFormBody = (props: DataSettingsStepFormProps<SentenceStructureSettings>) => {

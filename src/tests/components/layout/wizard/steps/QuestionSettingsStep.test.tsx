@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import QuestionSettingsStep from "../../../../../components/layout/wizard/play/QuestionSettingsStep";
+import QuestionSettingsStep from "../../../../../components/layout/wizard/steps/QuestionSettingsStep";
 import QuestionSettings from "../../../../../domain/session/settings/game/QuestionSettings";
 import QuestionType from "../../../../../domain/game/QuestionType";
 import { getValueLastCalledWith } from "../../../../Queries";

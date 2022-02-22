@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import ConfirmationStep from "../../../../../components/layout/wizard/play/ConfirmationStep";
+import ConfirmationStep from "../../../../../components/layout/wizard/steps/ConfirmationStep";
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings";
 import { KanjiSettingsBuilder } from "../../../../../domain/session/settings/data/KanjiSettings";
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";

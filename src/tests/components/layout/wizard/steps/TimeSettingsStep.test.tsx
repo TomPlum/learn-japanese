@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import TimeSettingsStep from "../../../../../components/layout/wizard/play/TimeSettingsStep";
+import TimeSettingsStep from "../../../../../components/layout/wizard/steps/TimeSettingsStep";
 import { TimeSettingsBuilder } from "../../../../../domain/session/settings/game/TimeSettings";
 
 const onSelectHandler = jest.fn();

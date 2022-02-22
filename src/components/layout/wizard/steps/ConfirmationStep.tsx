@@ -1,12 +1,12 @@
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
-import styles from "../../../../styles/sass/components/layout/wizard/play/ConfirmationStep.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/steps/ConfirmationStep.module.scss";
 import { Accordion, Button } from "react-bootstrap";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import QuestionType from "../../../../domain/game/QuestionType";
-import CustomPresetForm from "./CustomPresetForm";
+import CustomPresetForm from "../play/CustomPresetForm";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { WizardStep } from "./PlayWizard";
+import { WizardStep } from "../play/PlayWizard";
 
 export interface ConfirmationStepProps {
     settings: SessionSettings;

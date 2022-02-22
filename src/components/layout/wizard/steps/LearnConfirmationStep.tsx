@@ -1,6 +1,6 @@
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
-import { WizardStep } from "./PlayWizard";
-import styles from "../../../../styles/sass/components/layout/wizard/play/LearnConfirmationStep.module.scss";
+import { WizardStep } from "../play/PlayWizard";
+import styles from "../../../../styles/sass/components/layout/wizard/steps/LearnConfirmationStep.module.scss";
 
 export interface LearnConfirmationStepProps {
     settings: SessionSettings;

@@ -1,4 +1,4 @@
-import { DataSettingsStepFormProps } from "../../layout/wizard/play/DataSettingsStep";
+import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep";
 import KanaSettings, { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import { Col, Row } from "react-bootstrap";
 import ToggleSwitch from "../../ui/ToggleSwitch";

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import PresetCustomStep from "../../../../../components/layout/wizard/play/PresetCustomStep";
+import PresetCustomStep from "../../../../../components/layout/wizard/steps/PresetCustomStep";
 import { Environment } from "../../../../../utility/Environment";
 
 const onSelectHandler = jest.fn();

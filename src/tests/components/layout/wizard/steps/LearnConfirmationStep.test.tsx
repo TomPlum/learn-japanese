@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import LearnConfirmationStep, { LearnConfirmationStepProps } from "../../../../../components/layout/wizard/play/LearnConfirmationStep";
+import LearnConfirmationStep, { LearnConfirmationStepProps } from "../../../../../components/layout/wizard/steps/LearnConfirmationStep";
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings";
 import LearnSettings from "../../../../../domain/session/settings/LearnSettings";

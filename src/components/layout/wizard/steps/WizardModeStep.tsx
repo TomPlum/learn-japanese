@@ -1,4 +1,4 @@
-import styles from "../../../../styles/sass/components/layout/wizard/play/WizardModeStep.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/steps/WizardModeStep.module.scss";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

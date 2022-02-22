@@ -1,5 +1,5 @@
 import styles from "../../../styles/sass/components/settings/data/NumbersSettingsForm.module.scss";
-import { DataSettingsStepFormProps } from "../../layout/wizard/play/DataSettingsStep";
+import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep";
 import NumbersSettings, { NumbersSettingsBuilder } from "../../../domain/session/settings/data/NumbersSettings";
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";

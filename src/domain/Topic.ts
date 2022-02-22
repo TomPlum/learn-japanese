@@ -28,7 +28,7 @@ import PlayBasicsModes from "./game/mode/PlayBasicsModes";
 import PlayCalendarModes from "./game/mode/PlayCalendarModes";
 import PlayNumbersModes from "./game/mode/PlayNumbersModes";
 import { DataSettingsMenuProps } from "../components/settings/data/DataSettingsMenu";
-import { DataSettingsStepFormProps } from "../components/layout/wizard/play/DataSettingsStep";
+import { DataSettingsStepFormProps } from "../components/layout/wizard/steps/DataSettingsStep";
 import { GridItem } from "../components/layout/wizard/grid/GridItem";
 import KanjiSettingsFormBody from "../components/settings/data/KanjiSettingsFormBody";
 import KanaSettingsFormBody from "../components/settings/data/KanaSettingsFormBody";

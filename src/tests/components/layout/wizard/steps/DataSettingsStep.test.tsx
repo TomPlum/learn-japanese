@@ -1,4 +1,4 @@
-import DataSettingsStep, { DataSettingsStepProps } from "../../../../../components/layout/wizard/play/DataSettingsStep";
+import DataSettingsStep, { DataSettingsStepProps } from "../../../../../components/layout/wizard/steps/DataSettingsStep";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Topic from "../../../../../domain/Topic";
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";

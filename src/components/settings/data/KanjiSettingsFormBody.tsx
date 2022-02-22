@@ -8,7 +8,7 @@ import Arrays from "../../../utility/Arrays";
 import TemplateString from "../../../domain/TemplateString";
 import React, { useEffect, useState } from "react";
 import KanjiSettings, { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings";
-import { DataSettingsStepFormProps } from "../../layout/wizard/play/DataSettingsStep";
+import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep";
 
 
 const KanjiSettingsFormBody = (props: DataSettingsStepFormProps<KanjiSettings>) => {

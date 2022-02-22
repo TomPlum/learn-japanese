@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import WizardProgressStep, { WizardProgressStepProps } from "../../../../../components/layout/wizard/play/WizardProgressStep";
+import WizardProgressStep, { WizardProgressStepProps } from "../../../../../components/layout/wizard/steps/WizardProgressStep";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 
 const onClickHandler = jest.fn();

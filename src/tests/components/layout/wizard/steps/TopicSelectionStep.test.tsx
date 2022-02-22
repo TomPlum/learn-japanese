@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import TopicSelectionStep from "../../../../../components/layout/wizard/play/TopicSelectionStep";
+import TopicSelectionStep from "../../../../../components/layout/wizard/steps/TopicSelectionStep";
 import Topic from "../../../../../domain/Topic";
 
 const onSelectHandler = jest.fn();

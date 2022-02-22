@@ -1,5 +1,5 @@
 import { faCheckCircle, faChevronCircleRight, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTools } from "@fortawesome/free-solid-svg-icons";
-import WizardProgressStep from "./WizardProgressStep";
+import WizardProgressStep from "../steps/WizardProgressStep";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizardProgress.module.scss";
 import { AppMode } from "../../../../domain/AppMode";
 

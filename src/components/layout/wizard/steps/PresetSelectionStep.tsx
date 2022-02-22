@@ -1,7 +1,7 @@
-import TopicSelector from "./TopicSelector";
+import TopicSelector from "../play/TopicSelector";
 import React, { useEffect, useState } from "react";
 import Topic from "../../../../domain/Topic";
-import styles from "../../../../styles/sass/components/layout/wizard/play/PresetSelectionStep.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/steps/PresetSelectionStep.module.scss";
 import PlayMode from "../../../../domain/session/PlayMode";
 import GridItem from "../grid/GridItem";
 import GridDisplay from "../grid/GridDisplay";

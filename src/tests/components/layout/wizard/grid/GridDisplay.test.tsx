@@ -34,7 +34,6 @@ beforeEach(() => {
     itemProps = {
         icon: faApple,
         onClick: onClickItemHandler,
-        name: "Test Mode",
         selected: "Test Mode",
         value: new PlayMode("Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
     };
@@ -42,7 +41,6 @@ beforeEach(() => {
     itemProps2 = {
         icon: faPencilAlt,
         onClick: onClickItemHandler,
-        name: "Test Mode 2",
         selected: "Test Mode 2",
         value: new PlayMode("Test Mode 2", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
     };

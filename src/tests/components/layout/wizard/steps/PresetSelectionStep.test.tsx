@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
-import PresetSelectionStep, { PresetSelectionStepProps } from "../../../../../components/layout/wizard/play/PresetSelectionStep";
+import PresetSelectionStep, { PresetSelectionStepProps } from "../../../../../components/layout/wizard/steps/PresetSelectionStep";
 import Topic from "../../../../../domain/Topic";
 import { AppMode } from "../../../../../domain/AppMode";
 import { getValueLastCalledWith } from "../../../../Queries";

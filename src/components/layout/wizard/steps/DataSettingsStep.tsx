@@ -1,7 +1,7 @@
 import React from "react";
 import Topic from "../../../../domain/Topic";
 import DataSettings from "../../../../domain/session/settings/data/DataSettings";
-import styles from "../../../../styles/sass/components/layout/wizard/play/DataSettingsStep.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/steps/DataSettingsStep.module.scss";
 import ScrollableContainer from "../../../ui/ScrollableContainer";
 
 export interface DataSettingsStepFormProps<T extends DataSettings> {

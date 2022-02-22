@@ -1,4 +1,4 @@
-import LifeSettingsStep from "../../../../../components/layout/wizard/play/LifeSettingsStep";
+import LifeSettingsStep from "../../../../../components/layout/wizard/steps/LifeSettingsStep";
 import { fireEvent, render } from "@testing-library/react";
 import { LifeSettingsBuilder } from "../../../../../domain/session/settings/game/LifeSettings";
 

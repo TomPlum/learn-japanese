@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import WizardModeStep from "../../../../../components/layout/wizard/play/WizardModeStep";
+import WizardModeStep from "../../../../../components/layout/wizard/steps/WizardModeStep";
 import { Environment } from "../../../../../utility/Environment";
 import { AppMode } from "../../../../../domain/AppMode";
 

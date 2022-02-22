@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import HintSettingsStep from "../../../../../components/layout/wizard/play/HintSettingsStep";
+import HintSettingsStep from "../../../../../components/layout/wizard/steps/HintSettingsStep";
 import { HintSettingsBuilder } from "../../../../../domain/session/settings/game/HintSettings";
 
 const onSelectHandler = jest.fn();
