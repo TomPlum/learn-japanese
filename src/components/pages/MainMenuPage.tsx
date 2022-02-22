@@ -10,7 +10,7 @@ import ScrollableContainer from "../ui/ScrollableContainer";
 
 const MainMenuPage = () => {
     return (
-        <Container className={styles.wrapper}>
+        <Container className={styles.wrapper} data-testid="home-page">
             <Row className={styles.row}>
                 <Col>
                     <DashboardToolbar />

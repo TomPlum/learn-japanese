@@ -1,12 +1,22 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import DashboardCard, { DashboardCardProps } from "../../../../components/layout/card/DashboardCard";
+import DashboardCardHeader from "../../../../components/layout/card/DashboardCardHeader";
 
 const onReloadHandler = jest.fn();
 
 let props: DashboardCardProps;
 
 const setup = () => {
-    const component = render(<DashboardCard {...props}><span>Example Content</span></DashboardCard>);
+    const component = render(
+        <DashboardCard {...props}>
+            <DashboardCard.Header>
+                <DashboardCardHeader.Title>Example Title</DashboardCardHeader.Title>
+            </DashboardCard.Header>
+            <DashboardCard.Body>
+                <span>Example Content</span>
+            </DashboardCard.Body>
+        </DashboardCard>
+    );
     return {
         ...component
     }
@@ -14,11 +24,12 @@ const setup = () => {
 
 beforeEach(() => {
     props = {
-        id: "test-card",
-        title: "Test Card",
+        error: "",
         size: "sm",
-        className: "myTestClass",
+        updating: false,
         loading: false,
+        id: "test-card",
+        className: "myTestClass",
         onReload: onReloadHandler
     };
 });

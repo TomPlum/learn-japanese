@@ -370,7 +370,7 @@ test('Clicking a stage link in the footer should render that stage', () => {
     // Skip straight to the type step
     fireEvent.click(screen.getByTitle('Preset or Custom'));
 
-    expect(screen.getByTestId('wizard-type-step')).toBeInTheDocument();
+    expect(screen.getByTestId('wizard-type-settings-step')).toBeInTheDocument();
 });
 
 test('Closing the wizard should call the onClose event handler', async () => {
