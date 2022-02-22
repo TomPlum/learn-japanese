@@ -1,9 +1,9 @@
-import styles from "../../../styles/sass/components/layout/wizard/GridItem.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/grid/GridItem.module.scss";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import Inspectable from "../../ui/Inspectable";
-import ConditionalWrapper from "../../ui/ConditionalWrapper";
+import Inspectable from "../../../ui/Inspectable";
+import ConditionalWrapper from "../../../ui/ConditionalWrapper";
 
 export interface GridItem {
     getShortName: () => string;

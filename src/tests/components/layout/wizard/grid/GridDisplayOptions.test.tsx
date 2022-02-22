@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import GridDisplayOptions, { GridDisplayOptionsProps } from "../../../../components/layout/wizard/GridDisplayOptions";
-import { getValueLastCalledWith } from "../../../Queries";
-import { GridOptions } from "../../../../domain/grid/GridOptions";
-import GridDisplayType from "../../../../domain/grid/GridDisplayType";
+import GridDisplayOptions, { GridDisplayOptionsProps } from "../../../../../components/layout/wizard/grid/GridDisplayOptions";
+import { getValueLastCalledWith } from "../../../../Queries";
+import { GridOptions } from "../../../../../domain/grid/GridOptions";
+import GridDisplayType from "../../../../../domain/grid/GridDisplayType";
 
 const onSelectHandler = jest.fn();
 

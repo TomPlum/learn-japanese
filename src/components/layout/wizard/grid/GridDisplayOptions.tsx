@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThLarge, faThList } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
-import GridDisplayType from "../../../domain/grid/GridDisplayType";
-import { GridOptions } from "../../../domain/grid/GridOptions";
+import GridDisplayType from "../../../../domain/grid/GridDisplayType";
+import { GridOptions } from "../../../../domain/grid/GridOptions";
 import RangeSlider from "react-bootstrap-range-slider";
-import styles from "../../../styles/sass/components/layout/wizard/GridDisplayOptions.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/grid/GridDisplayOptions.module.scss";
 
 export interface GridDisplayOptionsProps {
     onSelect: (options: GridOptions) => void;

@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import GridDisplay, { GridDisplayProps } from "../../../../components/layout/wizard/GridDisplay";
-import GridItem, { GridItemProps } from "../../../../components/layout/wizard/GridItem";
+import GridDisplay, { GridDisplayProps } from "../../../../../components/layout/wizard/grid/GridDisplay";
+import GridItem, { GridItemProps } from "../../../../../components/layout/wizard/grid/GridItem";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
-import PlayMode from "../../../../domain/session/PlayMode";
+import PlayMode from "../../../../../domain/session/PlayMode";
 import { faGraduationCap, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import { KanaSettingsBuilder } from "../../../../domain/session/settings/data/KanaSettings";
-import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
+import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";
+import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
 
 const onClickItemHandler = jest.fn();
 

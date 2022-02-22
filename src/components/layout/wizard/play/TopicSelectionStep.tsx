@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Topic from "../../../../domain/Topic";
-import GridDisplay from "../GridDisplay";
-import GridItem from "../GridItem";
+import GridDisplay from "../grid/GridDisplay";
+import GridItem from "../grid/GridItem";
 import GridDisplayType from "../../../../domain/grid/GridDisplayType";
 
 export interface TopicSelectionStepProps {

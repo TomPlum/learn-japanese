@@ -1,7 +1,7 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import DataSettings from "./settings/data/DataSettings";
 import ModeSettings from "./settings/ModeSettings";
-import { GridItem } from "../../components/layout/wizard/GridItem";
+import { GridItem } from "../../components/layout/wizard/grid/GridItem";
 
 abstract class SessionMode implements GridItem {
     private readonly _displayName: string;

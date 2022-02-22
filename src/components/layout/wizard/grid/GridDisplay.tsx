@@ -1,9 +1,9 @@
 import React, { PropsWithChildren, ReactElement, useState } from "react";
 import GridDisplayOptions from "./GridDisplayOptions";
-import { GridOptions } from "../../../domain/grid/GridOptions";
-import GridDisplayType from "../../../domain/grid/GridDisplayType";
-import styles from "../../../styles/sass/components/layout/wizard/GridDisplay.module.scss";
-import ScrollableContainer from "../../ui/ScrollableContainer";
+import { GridOptions } from "../../../../domain/grid/GridOptions";
+import GridDisplayType from "../../../../domain/grid/GridDisplayType";
+import styles from "../../../../styles/sass/components/layout/wizard/grid/GridDisplay.module.scss";
+import ScrollableContainer from "../../../ui/ScrollableContainer";
 
 export interface GridDisplayProps {
     controls?: boolean;
