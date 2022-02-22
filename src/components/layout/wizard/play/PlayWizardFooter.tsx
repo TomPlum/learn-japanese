@@ -40,7 +40,7 @@ const PlayWizardFooter = (props: PlayWizardFooterProps) => {
             </div>
             <div>
                 <Button onClick={terminal ? onPlay : onNext} className={styles.next} variant="success" disabled={!valid}>
-                    {terminal ? "Play" : "Next"}
+                    {terminal ? "Start" : "Next"}
                 </Button>
             </div>
         </div>

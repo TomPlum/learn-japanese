@@ -49,10 +49,10 @@ test('Passing intermediate as true should render a back button', () => {
    expect(component.getByText('Back')).toBeInTheDocument();
 });
 
-test('Passing terminal as true should render the next button text as "Play"', () => {
+test('Passing terminal as true should render the next button text as "Start"', () => {
    props.terminal = true;
    const component = render(<PlayWizardFooter {...props} />);
-   expect(component.getByText('Play')).toBeInTheDocument();
+   expect(component.getByText('Start')).toBeInTheDocument();
 });
 
 test('Selecting a stage from the progress component should call the onChangeStage handler', () => {

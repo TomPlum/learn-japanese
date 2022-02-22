@@ -27,7 +27,7 @@ const WizardModeStep = (props: WizardModeStepStepProps) => {
     }, [mode]);
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} data-testid="wizard-mode-step">
             <Container fluid className={styles.container}>
                 <Row>
                     <Col>

@@ -23,6 +23,10 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
     const [selectedPreset, setSelectedPreset] = useState(topic.playModes.getModes()[0]);
 
     useEffect(() => {
+        onSelect(mode === AppMode.PLAY ? selected.playModes.getModes()[0] : selected.modes.getModes()[0]);
+    }, []);
+
+    useEffect(() => {
         setSelectedPreset(topic.playModes.getModes()[0]);
     }, [topic]);
 

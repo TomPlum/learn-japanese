@@ -1,10 +1,9 @@
-import { Modal } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import { Fade, Modal } from "react-bootstrap";
+import React, { useState } from "react";
 import PresetCustomStep from "./PresetCustomStep";
 import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizard.module.scss";
 import { faAngleDoubleRight, faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTimes, faTools, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBomb } from "@fortawesome/free-solid-svg-icons/faBomb";
 import PresetSelectionStep from "./PresetSelectionStep";
 import PlayWizardFooter from "./PlayWizardFooter";
 import ConfirmModal from "../../../ui/ConfirmModal";
@@ -17,9 +16,6 @@ import TopicSelectionStep from "./TopicSelectionStep";
 import Topic from "../../../../domain/Topic";
 import GameSettings, { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
 import DataSettings from "../../../../domain/session/settings/data/DataSettings";
-import { CSSTransition } from "react-transition-group";
-import slideRight from "../../../../styles/sass/transitions/slide-right.module.scss";
-import slideLeft from "../../../../styles/sass/transitions/slide-left.module.scss";
 import PlayKanaModes from "../../../../domain/game/mode/PlayKanaModes";
 import PlayMode from "../../../../domain/session/PlayMode";
 import { useDataSettingsDispatch, useGameSettingsDispatch } from "../../../../hooks";
@@ -33,7 +29,7 @@ import ConfirmationStep from "./ConfirmationStep";
 import LearnConfirmationStep from "./LearnConfirmationStep";
 import LearnSettings from "../../../../domain/session/settings/LearnSettings";
 
-interface PlayWizardProps {
+export interface PlayWizardProps {
     onClose: () => void;
 }
 
@@ -63,7 +59,6 @@ const PlayWizard = (props: PlayWizardProps) => {
 
     const { onClose } = props;
 
-    const [animate, setAnimate] = useState(false);
     const [mode, setMode] = useState(AppMode.PLAY);
     const [valid, setValid] = useState(true);
     const [custom, setCustom] = useState(false);
@@ -72,7 +67,6 @@ const PlayWizard = (props: PlayWizardProps) => {
     const [stage, setStage] = useState(WizardStep.MODE);
     const [settings, setSettings] = useState(new GameSettingsBuilder());
     const [dataSettings, setDataSettings] = useState<DataSettings | undefined>(undefined);
-    const [goingForwards, setGoingForwards] = useState(true);
     const [preset, setPreset] = useState<PlayMode>(new PlayKanaModes().getModes()[0]);
 
     const { MODE, TOPIC, TYPE, PRESET, QUESTION, LIVES, HINT, TIME, DATA, CONFIRM } = WizardStep;
@@ -82,33 +76,22 @@ const PlayWizard = (props: PlayWizardProps) => {
     const gameSettingsDispatcher = useGameSettingsDispatch();
     const dataSettingsDispatcher = useDataSettingsDispatch();
 
-    useEffect(() => setAnimate(true), [stage]);
-
     const handleBack = () => {
-        setGoingForwards(false);
-
         if (stage === DATA) {
             setValid(true);
         }
 
         if (custom && (stage === QUESTION || (stage === DATA && mode === AppMode.LEARN))) {
             setStage(TYPE);
-        } else if (stage === CONFIRM && !topic.wizardDataMenu) {
-            setStage(HINT);
         } else {
             setStage(stage - 1);
         }
     }
 
     const handleNext = () => {
-        setGoingForwards(true);
-
         if (stage === TYPE && custom) {
-            // If the value is true, then it must be custom from the initial step.
-            // If so, then we advance 2 steps to skip the preset and go to custom.
+            // Play mode has extra game configuration steps. Learn skips to the data step.
             setStage(mode === AppMode.PLAY ? QUESTION : DATA);
-        } else if (stage === 7 && !topic.wizardDataMenu) {
-            setStage(CONFIRM);
         } else {
             setStage(stage + 1);
         }
@@ -231,13 +214,6 @@ const PlayWizard = (props: PlayWizardProps) => {
                     terminal: true
                 }
             }
-            default: {
-                return {
-                    icon: faBomb,
-                    name: "Something went wrong",
-                    body: <span>Invalid Stage {stage}</span>
-                }
-            }
         }
     }
 
@@ -259,9 +235,9 @@ const PlayWizard = (props: PlayWizardProps) => {
                 </div>
 
                 <div className={styles.body}>
-                    <CSSTransition classNames={goingForwards ? slideLeft : slideRight} timeout={{ enter: 200, exit: 200 }} in={animate} onExited={() => setAnimate(false)}>
+                    <Fade in appear>
                         {body}
-                    </CSSTransition>
+                    </Fade>
                 </div>
 
                 <div className={styles.footer}>

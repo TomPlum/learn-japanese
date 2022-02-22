@@ -26,7 +26,7 @@ const PresetCustomStep = (props: PresetCustomStepProps) => {
     }, [isCustom]);
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} data-testid="wizard-type-settings-step">
             <Container fluid className={styles.container}>
                 <Row>
                     <Col>

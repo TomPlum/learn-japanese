@@ -25,7 +25,7 @@ class ConfirmModal extends Component<ConfirmModalProps, ConfirmModalState> {
         const { title, body, onDismiss } = this.props;
         const { show } = this.state;
         return (
-            <Modal contentClassName={styles.modal} show={show} centered onHide={onDismiss} size="sm" backdrop="static">
+            <Modal contentClassName={styles.modal} show={show} centered onHide={onDismiss} size="sm" backdrop="static" data-testid="confirm-modal">
                 <Modal.Header closeButton className={styles.header}>
                     <span className={styles.title}>{title}</span>
                 </Modal.Header>

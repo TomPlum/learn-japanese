@@ -20,7 +20,7 @@ const TopicSelectionStep = (props: TopicSelectionStepProps) => {
     }
 
     return (
-        <div>
+        <div data-testid="wizard-topic-settings-step">
             <GridDisplay controls defaultDisplayType={GridDisplayType.LIST}>
                 {
                     Topic.ALL.map(topic => {

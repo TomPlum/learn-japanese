@@ -23,7 +23,7 @@ const DataSettingsStep = (props: DataSettingsStepProps) => {
     const DataSettingsMenu = topic.wizardDataMenu as React.FunctionComponent<DataSettingsStepFormProps<any>>;
 
     return (
-        <ScrollableContainer maxHeight={344}>
+        <ScrollableContainer maxHeight={344} id="wizard-data-settings-step">
             <DataSettingsMenu
                 isValid={isValid}
                 className={styles.menu}
