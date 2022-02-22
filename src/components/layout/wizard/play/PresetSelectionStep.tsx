@@ -1,4 +1,3 @@
-import { Alert, Container, Row } from "react-bootstrap";
 import TopicSelector from "./TopicSelector";
 import React, { useEffect, useState } from "react";
 import Topic from "../../../../domain/Topic";
@@ -8,15 +7,17 @@ import GridItem from "../GridItem";
 import GridDisplay from "../GridDisplay";
 import { Environment } from "../../../../utility/Environment";
 import ScrollableContainer from "../../../ui/ScrollableContainer";
+import { AppMode } from "../../../../domain/AppMode";
 
 export interface PresetSelectionStepProps {
+    mode: AppMode;
     selected: Topic;
     onSelect: (preset: PlayMode) => void;
 }
 
 const PresetSelectionStep = (props: PresetSelectionStepProps) => {
 
-    const { selected, onSelect } = props;
+    const { mode, selected, onSelect } = props;
 
     const [topic, setTopic] = useState(selected);
     const [selectedPreset, setSelectedPreset] = useState(topic.playModes.getModes()[0]);
@@ -37,11 +38,13 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
     const TopicSelectionDropdown = () => <TopicSelector topic={topic} onSelect={onSelectTopic} className={styles.topic} />;
     const description = Environment.variable(`PLAY_${topic.playModes.getTopic()}_${selectedPreset.displayName}_DESC`);
 
+    const presets = mode === AppMode.PLAY ? topic.playModes.getModes() : topic.modes.getModes();
+
     return (
         <div className={styles.container}>
             <ScrollableContainer height={344}>
                 <GridDisplay controls customOptions={<TopicSelectionDropdown />}>
-                    {topic.playModes.getModes().map(preset =>
+                    {presets.map(preset =>
                          <GridItem
                             value={preset}
                             desc={description}

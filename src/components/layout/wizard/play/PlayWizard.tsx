@@ -161,7 +161,7 @@ const PlayWizard = (props: PlayWizardProps) => {
                     icon: faProjectDiagram,
                     name: "Choose Preset",
                     iconClass: styles.presetIcon,
-                    body: <PresetSelectionStep selected={topic} onSelect={preset => setPreset(preset)} />,
+                    body: <PresetSelectionStep mode={mode} selected={topic} onSelect={preset => setPreset(preset)} />,
                     terminal: true
                 }
             }
