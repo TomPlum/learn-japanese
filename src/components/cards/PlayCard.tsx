@@ -17,8 +17,13 @@ const PlayCard = () => {
 
     }
 
+    const handleStart = () => {
+        setCustomising(true);
+    }
+
     const props: DashboardCardProps = {
         size: "md",
+        error: error,
         id: "play-card",
         loading: loading,
         className: styles.card,
@@ -31,9 +36,9 @@ const PlayCard = () => {
             </DashboardCard.Header>
 
             <DashboardCard.Body>
-                <Row className={error ? styles.blur : undefined}>
+                <Row>
                     <Col>
-                        <Button variant="outline-light" onClick={() => setCustomising(true)} className={styles.start}>
+                        <Button variant="outline-light" onClick={handleStart} className={styles.start} data-testid="launch-wizard">
                             <FontAwesomeIcon icon={faPlay} fixedWidth />
                         </Button>
                         <p>New Session</p>

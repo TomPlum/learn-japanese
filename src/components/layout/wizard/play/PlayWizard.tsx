@@ -28,6 +28,7 @@ import { SessionSettings } from "../../../../domain/session/settings/SessionSett
 import ConfirmationStep from "./ConfirmationStep";
 import LearnConfirmationStep from "./LearnConfirmationStep";
 import LearnSettings from "../../../../domain/session/settings/LearnSettings";
+import { ModalProps } from "react-bootstrap/Modal";
 
 export interface PlayWizardProps {
     onClose: () => void;
@@ -217,10 +218,20 @@ const PlayWizard = (props: PlayWizardProps) => {
         }
     }
 
+    const modalProps: ModalProps = {
+        show: true,
+        size: "lg",
+        centered: true,
+        backdrop: "static",
+        dialogClassName: styles.dialog,
+        contentClassName: styles.content,
+        "data-testid": "start-session-wizard"
+    }
+
     const { icon, iconClass, name, body, intermediate, terminal } = getStageDetails();
 
     return (
-        <Modal show backdrop="static" centered contentClassName={styles.content} size="lg" dialogClassName={styles.dialog}>
+        <Modal {...modalProps}>
             <Modal.Body className={styles.modal}>
                 <div className={styles.header}>
                     <FontAwesomeIcon icon={icon} className={iconClass} />
