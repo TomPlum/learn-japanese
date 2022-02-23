@@ -14,7 +14,7 @@ const DashboardCardUpdate = (props: DashboardCardUpdateProps) => {
     }
 
     return (
-        <div className={styles.updating}>
+        <div className={styles.updating} data-testid="dashboard-card-update">
             <FontAwesomeIcon icon={faSyncAlt} className={styles.updateIcon} spin />
         </div>
     )
