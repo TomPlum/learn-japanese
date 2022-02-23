@@ -13,7 +13,7 @@ const DashboardCardError = (props: PropsWithChildren<DashboardCardHeaderProps>) 
     }
 
     return (
-        <div className={styles.errorContainer}>
+        <div className={styles.errorContainer} data-testid="dashboard-card-error">
             <span className={styles.error}>
                 {children}
             </span>
