@@ -60,7 +60,7 @@
       "!src/data/**",
       "!src/types/game/mode/**",
       "!src/types/learn/mode/**",
-      "!src/tests"
+      "!src/tests/**"
     ]
   },
   "browserslist": {

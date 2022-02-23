@@ -6,7 +6,7 @@ module.exports = {
             "!src/data/**",
             "!src/domain/game/mode/**",
             "!src/domain/learn/mode/**",
-            "!src/tests"
+            "!src/tests/**"
         ];
         return config;
     },
