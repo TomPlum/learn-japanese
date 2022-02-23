@@ -1,7 +1,7 @@
 import { Fade, Modal } from "react-bootstrap";
 import React, { useState } from "react";
-import PresetCustomStep from "./steps/PresetCustomStep";
-import styles from "../../../styles/sass/components/layout/wizard/PlayWizard.module.scss";
+import ConfigTypeStep from "./steps/ConfigTypeStep";
+import styles from "../../../styles/sass/components/layout/wizard/SessionWizard.module.scss";
 import { faAngleDoubleRight, faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTimes, faTools, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PresetSelectionStep from "./steps/PresetSelectionStep";
@@ -136,7 +136,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                     icon: faTools,
                     name: "Select Type",
                     iconClass: styles.typeIcon,
-                    body: <PresetCustomStep onSelect={custom => setCustom(custom)} />,
+                    body: <ConfigTypeStep onSelect={custom => setCustom(custom)} />,
                     intermediate: true
                 }
             }

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import PresetCustomStep from "../../../../../components/layout/wizard/steps/PresetCustomStep";
+import ConfigTypeStep from "../../../../../components/layout/wizard/steps/PresetCustomStep";
 import { Environment } from "../../../../../utility/Environment";
 
 const onSelectHandler = jest.fn();
@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<PresetCustomStep onSelect={onSelectHandler} />);
+    const component = render(<ConfigTypeStep onSelect={onSelectHandler} />);
     return {
         preset: component.getByText('Preset'),
         custom: component.getByText('Custom'),

@@ -1,6 +1,6 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import styles from "../../../../styles/sass/components/layout/wizard/steps/PresetCustomStep.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/steps/ConfigTypeStep.module.scss";
 import { faHammer, faProjectDiagram } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Environment } from "../../../../utility/Environment";
@@ -9,7 +9,7 @@ export interface PresetCustomStepProps {
     onSelect: (isCustom: boolean) => void;
 }
 
-const PresetCustomStep = (props: PresetCustomStepProps) => {
+const ConfigTypeStep = (props: PresetCustomStepProps) => {
 
     const { onSelect } = props;
 
@@ -52,4 +52,4 @@ const PresetCustomStep = (props: PresetCustomStepProps) => {
     )
 }
 
-export default PresetCustomStep;
+export default ConfigTypeStep;
