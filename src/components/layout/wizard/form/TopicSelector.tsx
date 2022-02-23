@@ -2,7 +2,7 @@ import TopicDropdownOption from "../../TopicDropdownOption";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Topic from "../../../../domain/Topic";
-import styles from "../../../../styles/sass/components/layout/wizard/play/TopicSelector.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/form/TopicSelector.module.scss";
 import { Dropdown } from "react-bootstrap";
 
 export interface TopicSelectorProps {

@@ -3,7 +3,7 @@ import styles from "../../../../styles/sass/components/layout/wizard/steps/Confi
 import { Accordion, Button } from "react-bootstrap";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import QuestionType from "../../../../domain/game/QuestionType";
-import CustomPresetForm from "../play/CustomPresetForm";
+import CustomPresetForm from "../form/CustomPresetForm";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { WizardStep } from "../SessionWizard";

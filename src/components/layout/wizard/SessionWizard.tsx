@@ -5,7 +5,7 @@ import styles from "../../../styles/sass/components/layout/wizard/PlayWizard.mod
 import { faAngleDoubleRight, faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTimes, faTools, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PresetSelectionStep from "./steps/PresetSelectionStep";
-import PlayWizardFooter from "./play/PlayWizardFooter";
+import PlayWizardFooter from "./footer/PlayWizardFooter";
 import ConfirmModal from "../../ui/ConfirmModal";
 import QuestionSettingsStep from "./steps/QuestionSettingsStep";
 import HintSettingsStep from "./steps/HintSettingsStep";

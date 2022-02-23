@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import PlayWizardProgress, { PlayWizardProgressProps } from "../../../../../components/layout/wizard/play/PlayWizardProgress";
+import PlayWizardProgress, { PlayWizardProgressProps } from "../../../../../components/layout/wizard/footer/PlayWizardProgress";
 import { AppMode } from "../../../../../domain/AppMode";
 
 const onSelectStageHandler = jest.fn();

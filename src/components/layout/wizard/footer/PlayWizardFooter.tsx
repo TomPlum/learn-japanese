@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizardFooter.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/footer/PlayWizardFooter.module.scss";
 import PlayWizardProgress from "./PlayWizardProgress";
 import { AppMode } from "../../../../domain/AppMode";
 

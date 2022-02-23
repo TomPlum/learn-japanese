@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import PlayWizardFooter, { PlayWizardFooterProps } from "../../../../../components/layout/wizard/play/PlayWizardFooter";
+import PlayWizardFooter, { PlayWizardFooterProps } from "../../../../../components/layout/wizard/footer/PlayWizardFooter";
 import { AppMode } from "../../../../../domain/AppMode";
 
 const onNextHandler = jest.fn();

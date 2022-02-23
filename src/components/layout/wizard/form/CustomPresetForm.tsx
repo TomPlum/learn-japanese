@@ -2,7 +2,7 @@ import { Alert, Button, Col, Form } from "react-bootstrap";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCheckCircle, faPencilAlt, faSpinner, faTimes } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../../../styles/sass/components/layout/wizard/play/CustomPresetForm.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/form/CustomPresetForm.module.scss";
 import PlayService from "../../../../service/PlayService";
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
 

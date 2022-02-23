@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import CustomPresetForm, { CustomPresetFormProps } from "../../../../../components/layout/wizard/play/CustomPresetForm";
+import CustomPresetForm, { CustomPresetFormProps } from "../../../../../components/layout/wizard/form/CustomPresetForm";
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings";
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
 import KanjiSettings from "../../../../../domain/session/settings/data/KanjiSettings";

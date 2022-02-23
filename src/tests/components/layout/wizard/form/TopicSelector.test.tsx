@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import TopicSelector from "../../../../../components/layout/wizard/play/TopicSelector";
+import TopicSelector from "../../../../../components/layout/wizard/form/TopicSelector";
 import Topic from "../../../../../domain/Topic";
 
 const onSelectHandler = jest.fn();

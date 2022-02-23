@@ -1,4 +1,4 @@
-import TopicSelector from "../play/TopicSelector";
+import TopicSelector from "../form/TopicSelector";
 import React, { useEffect, useState } from "react";
 import Topic from "../../../../domain/Topic";
 import styles from "../../../../styles/sass/components/layout/wizard/steps/PresetSelectionStep.module.scss";
