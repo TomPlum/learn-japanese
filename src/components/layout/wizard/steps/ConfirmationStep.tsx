@@ -6,7 +6,7 @@ import QuestionType from "../../../../domain/game/QuestionType";
 import CustomPresetForm from "../play/CustomPresetForm";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { WizardStep } from "../play/PlayWizard";
+import { WizardStep } from "../SessionWizard";
 
 export interface ConfirmationStepProps {
     settings: SessionSettings;

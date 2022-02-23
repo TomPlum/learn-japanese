@@ -1,18 +1,18 @@
 import { fireEvent, screen } from "@testing-library/react";
-import PlayWizard from "../../../../../components/layout/wizard/play/PlayWizard";
-import renderReduxConsumer from "../../../../renderReduxConsumer";
+import SessionWizard from "../../../../components/layout/wizard/SessionWizard";
+import renderReduxConsumer from "../../../renderReduxConsumer";
 import userEvent from "@testing-library/user-event";
-import { store } from "../../../../../store";
+import { store } from "../../../../store";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
-import { clearGameSettings } from "../../../../../slices/GameSettingsSlice";
-import { clearDataSettings } from "../../../../../slices/DataSettingsSlice";
+import { clearGameSettings } from "../../../../slices/GameSettingsSlice";
+import { clearDataSettings } from "../../../../slices/DataSettingsSlice";
 
 const onCloseHandler = jest.fn();
 const history = createMemoryHistory();
 
 const setup = () => {
-    const component = renderReduxConsumer(<Router history={history}><PlayWizard onClose={onCloseHandler} /></Router>);
+    const component = renderReduxConsumer(<Router history={history}><SessionWizard onClose={onCloseHandler} /></Router>);
     return {
         next: component.getByText('Next'),
         close: component.getByTitle('Close'),

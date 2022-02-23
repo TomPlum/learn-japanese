@@ -3,7 +3,7 @@ import LearnConfirmationStep, { LearnConfirmationStepProps } from "../../../../.
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings";
 import LearnSettings from "../../../../../domain/session/settings/LearnSettings";
-import { WizardStep } from "../../../../../components/layout/wizard/play/PlayWizard";
+import { WizardStep } from "../../../../../components/layout/wizard/SessionWizard";
 
 const onSelectStageHandler = jest.fn();
 let props: LearnConfirmationStepProps;

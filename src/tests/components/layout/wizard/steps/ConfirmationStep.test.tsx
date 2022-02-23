@@ -11,7 +11,7 @@ import { HintSettingsBuilder } from "../../../../../domain/session/settings/game
 import { TimeSettingsBuilder } from "../../../../../domain/session/settings/game/TimeSettings";
 import { getByTextWithElements } from "../../../../Queries";
 import LearnSettings from "../../../../../domain/session/settings/LearnSettings";
-import { WizardStep } from "../../../../../components/layout/wizard/play/PlayWizard";
+import { WizardStep } from "../../../../../components/layout/wizard/SessionWizard";
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";
 
 const onSelectStageHandler = jest.fn();

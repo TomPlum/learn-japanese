@@ -1,36 +1,36 @@
 import { Fade, Modal } from "react-bootstrap";
 import React, { useState } from "react";
-import PresetCustomStep from "../steps/PresetCustomStep";
-import styles from "../../../../styles/sass/components/layout/wizard/play/PlayWizard.module.scss";
+import PresetCustomStep from "./steps/PresetCustomStep";
+import styles from "../../../styles/sass/components/layout/wizard/PlayWizard.module.scss";
 import { faAngleDoubleRight, faCheckCircle, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTimes, faTools, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import PresetSelectionStep from "../steps/PresetSelectionStep";
-import PlayWizardFooter from "./PlayWizardFooter";
-import ConfirmModal from "../../../ui/ConfirmModal";
-import QuestionSettingsStep from "../steps/QuestionSettingsStep";
-import HintSettingsStep from "../steps/HintSettingsStep";
-import LifeSettingsStep from "../steps/LifeSettingsStep";
-import TimeSettingsStep from "../steps/TimeSettingsStep";
-import DataSettingsStep from "../steps/DataSettingsStep";
-import TopicSelectionStep from "../steps/TopicSelectionStep";
-import Topic from "../../../../domain/Topic";
-import GameSettings, { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
-import DataSettings from "../../../../domain/session/settings/data/DataSettings";
-import PlayKanaModes from "../../../../domain/game/mode/PlayKanaModes";
-import PlayMode from "../../../../domain/session/PlayMode";
-import { useDataSettingsDispatch, useGameSettingsDispatch } from "../../../../hooks";
-import { setGameSettings } from "../../../../slices/GameSettingsSlice";
-import { setDataSettings as setGlobalDataSettings } from "../../../../slices/DataSettingsSlice";
+import PresetSelectionStep from "./steps/PresetSelectionStep";
+import PlayWizardFooter from "./play/PlayWizardFooter";
+import ConfirmModal from "../../ui/ConfirmModal";
+import QuestionSettingsStep from "./steps/QuestionSettingsStep";
+import HintSettingsStep from "./steps/HintSettingsStep";
+import LifeSettingsStep from "./steps/LifeSettingsStep";
+import TimeSettingsStep from "./steps/TimeSettingsStep";
+import DataSettingsStep from "./steps/DataSettingsStep";
+import TopicSelectionStep from "./steps/TopicSelectionStep";
+import Topic from "../../../domain/Topic";
+import GameSettings, { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
+import DataSettings from "../../../domain/session/settings/data/DataSettings";
+import PlayKanaModes from "../../../domain/game/mode/PlayKanaModes";
+import PlayMode from "../../../domain/session/PlayMode";
+import { useDataSettingsDispatch, useGameSettingsDispatch } from "../../../hooks";
+import { setGameSettings } from "../../../slices/GameSettingsSlice";
+import { setDataSettings as setGlobalDataSettings } from "../../../slices/DataSettingsSlice";
 import { useHistory } from "react-router-dom";
-import WizardModeStep from "../steps/WizardModeStep";
-import { AppMode } from "../../../../domain/AppMode";
-import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
-import ConfirmationStep from "../steps/ConfirmationStep";
-import LearnConfirmationStep from "../steps/LearnConfirmationStep";
-import LearnSettings from "../../../../domain/session/settings/LearnSettings";
+import WizardModeStep from "./steps/WizardModeStep";
+import { AppMode } from "../../../domain/AppMode";
+import { SessionSettings } from "../../../domain/session/settings/SessionSettings";
+import ConfirmationStep from "./steps/ConfirmationStep";
+import LearnConfirmationStep from "./steps/LearnConfirmationStep";
+import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import { ModalProps } from "react-bootstrap/Modal";
 
-export interface PlayWizardProps {
+export interface SessionWizardProps {
     onClose: () => void;
 }
 
@@ -56,7 +56,7 @@ export enum WizardStep {
     CONFIRM = 9
 }
 
-const PlayWizard = (props: PlayWizardProps) => {
+const SessionWizard = (props: SessionWizardProps) => {
 
     const { onClose } = props;
 
@@ -279,4 +279,4 @@ const PlayWizard = (props: PlayWizardProps) => {
     )
 }
 
-export default PlayWizard;
+export default SessionWizard;

@@ -3,7 +3,7 @@ import { Button, Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import PlayWizard from "../layout/wizard/play/PlayWizard";
+import SessionWizard from "../layout/wizard/SessionWizard";
 import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
 
@@ -46,7 +46,7 @@ const PlayCard = () => {
                 </Row>
             </DashboardCard.Body>
 
-            {customising && <PlayWizard onClose={() => setCustomising(false)} />}
+            {customising && <SessionWizard onClose={() => setCustomising(false)} />}
         </DashboardCard>
     )
 }
