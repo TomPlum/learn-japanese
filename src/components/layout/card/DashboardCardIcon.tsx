@@ -14,8 +14,10 @@ const DashboardCardIcon = (props: DashboardCardIconProps) => {
     return (
         <FontAwesomeIcon
             {...props}
+            href={href}
             title={title}
             onClick={onClick}
+            data-testid="dashboard-card-icon"
             className={[styles.icon, className].join(" ")}
         />
     );
