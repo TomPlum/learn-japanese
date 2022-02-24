@@ -1,4 +1,4 @@
-import styles from "../../../../styles/sass/components/layout/wizard/steps/WizardModeStep.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/steps/ModeSelectionStep.module.scss";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,7 @@ export interface WizardModeStepStepProps {
     onSelect: (mode: AppMode) => void;
 }
 
-const WizardModeStep = (props: WizardModeStepStepProps) => {
+const ModeSelectionStep = (props: WizardModeStepStepProps) => {
 
     const { onSelect } = props;
 
@@ -53,4 +53,4 @@ const WizardModeStep = (props: WizardModeStepStepProps) => {
     );
 }
 
-export default WizardModeStep;
+export default ModeSelectionStep;

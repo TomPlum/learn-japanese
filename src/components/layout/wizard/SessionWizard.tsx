@@ -22,7 +22,7 @@ import { useDataSettingsDispatch, useGameSettingsDispatch } from "../../../hooks
 import { setGameSettings } from "../../../slices/GameSettingsSlice";
 import { setDataSettings as setGlobalDataSettings } from "../../../slices/DataSettingsSlice";
 import { useHistory } from "react-router-dom";
-import WizardModeStep from "./steps/WizardModeStep";
+import ModeSelectionStep from "./steps/ModeSelectionStep";
 import { AppMode } from "../../../domain/AppMode";
 import { SessionSettings } from "../../../domain/session/settings/SessionSettings";
 import ConfirmationStep from "./steps/ConfirmationStep";
@@ -119,7 +119,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                     icon: faAngleDoubleRight,
                     name: "Select Mode",
                     iconClass: styles.modeIcon,
-                    body: <WizardModeStep onSelect={mode => setMode(mode)} />
+                    body: <ModeSelectionStep onSelect={mode => setMode(mode)} />
                 }
             }
             case TOPIC: {

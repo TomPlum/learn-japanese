@@ -1,6 +1,6 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../../../styles/sass/components/layout/wizard/steps/WizardProgressStep.module.scss";
+import styles from "../../../../styles/sass/components/layout/wizard/footer/WizardProgressStep.module.scss";
 
 export interface WizardProgressStepProps {
     icon: IconDefinition;

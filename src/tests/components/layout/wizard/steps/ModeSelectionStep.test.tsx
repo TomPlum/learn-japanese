@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import WizardModeStep from "../../../../../components/layout/wizard/steps/WizardModeStep";
+import ModeSelectionStep from "../../../../../components/layout/wizard/steps/WizardModeStep";
 import { Environment } from "../../../../../utility/Environment";
 import { AppMode } from "../../../../../domain/AppMode";
 
@@ -7,7 +7,7 @@ const onSelectHandler = jest.fn();
 const mockEnvironment = jest.fn();
 
 const setup = () => {
-    const component = render(<WizardModeStep onSelect={onSelectHandler} />);
+    const component = render(<ModeSelectionStep onSelect={onSelectHandler} />);
     return {
         play: component.getByText('Play').parentElement,
         learn: component.getByText('Learn').parentElement,
