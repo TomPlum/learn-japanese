@@ -127,7 +127,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                     icon: faSwatchbook,
                     name: "Select Topic",
                     iconClass: styles.topicIcon,
-                    body: <TopicSelectionStep onSelect={topic => setTopic(topic)} />,
+                    body: <TopicSelectionStep topic={topic} onSelect={topic => setTopic(topic)} />,
                     intermediate: true
                 }
             }

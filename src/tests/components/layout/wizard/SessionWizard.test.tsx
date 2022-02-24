@@ -417,3 +417,22 @@ test('Switching from the mode step and back again should maintain its selection 
     // Learn should still be selected
     expect(screen.getByText('Learn').parentElement).toHaveClass('selected');
 });
+
+test('Switching from the topic step and back again should maintain its selection state', () => {
+    const { next } = setup();
+
+    // Advance to the 'Topic' step
+    fireEvent.click(next);
+
+    // Change the topic selection to 'Basics'
+    fireEvent.click(screen.getByText('Basics'));
+
+    // Advance to the 'Type' step
+    fireEvent.click(next);
+
+    // Go back to the 'Topic' step
+    fireEvent.click(screen.getByText('Back'));
+
+    // Basics should still be selected
+    expect(screen.getByText('Basics').parentElement).toHaveClass('selected');
+});

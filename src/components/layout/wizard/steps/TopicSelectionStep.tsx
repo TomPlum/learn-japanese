@@ -5,17 +5,15 @@ import GridItem from "../grid/GridItem";
 import GridDisplayType from "../../../../domain/grid/GridDisplayType";
 
 export interface TopicSelectionStepProps {
+    topic: Topic;
     onSelect: (topic: Topic) => void;
 }
 
 const TopicSelectionStep = (props: TopicSelectionStepProps) => {
 
-    const { onSelect } = props;
-
-    const [selected, setSelected] = useState(Topic.KANA);
+    const { topic, onSelect } = props;
 
     const handleChange = (topic: Topic) => {
-        setSelected(topic);
         onSelect(topic);
     }
 
@@ -23,14 +21,14 @@ const TopicSelectionStep = (props: TopicSelectionStepProps) => {
         <div data-testid="wizard-topic-settings-step">
             <GridDisplay controls defaultDisplayType={GridDisplayType.LIST}>
                 {
-                    Topic.ALL.map(topic => {
+                    Topic.ALL.map(selection => {
                         return (
                             <GridItem
-                                value={topic}
-                                key={topic.name}
-                                icon={topic.icon}
+                                value={selection}
+                                key={selection.name}
+                                icon={selection.icon}
+                                selected={topic.name}
                                 onClick={handleChange}
-                                selected={selected.name}
                             />
                         )
                     })
