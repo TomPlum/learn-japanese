@@ -1,19 +1,18 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "../../../../styles/sass/components/layout/wizard/steps/ConfigTypeStep.module.scss";
 import { faHammer, faProjectDiagram } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Environment } from "../../../../utility/Environment";
 
-export interface PresetCustomStepProps {
+export interface ConfigTypeStepProps {
+    isCustom: boolean;
     onSelect: (isCustom: boolean) => void;
 }
 
-const ConfigTypeStep = (props: PresetCustomStepProps) => {
+const ConfigTypeStep = (props: ConfigTypeStepProps) => {
 
-    const { onSelect } = props;
-
-    const [isCustom, setIsCustom] = useState(false);
+    const { isCustom, onSelect } = props;
 
     const presetButtonClass = isCustom ? styles.button : styles.selected;
     const customButtonClass = isCustom ? styles.selected : styles.button;
@@ -30,13 +29,13 @@ const ConfigTypeStep = (props: PresetCustomStepProps) => {
             <Container fluid className={styles.container}>
                 <Row>
                     <Col>
-                        <Button onClick={() => setIsCustom(false)} className={presetButtonClass}>
+                        <Button onClick={() => onSelect(false)} className={presetButtonClass}>
                             <FontAwesomeIcon icon={faProjectDiagram} fixedWidth className={presetIconClass} />
                             <p className={styles.text}>Preset</p>
                         </Button>
                     </Col>
                     <Col>
-                        <Button onClick={() => setIsCustom(true)} className={customButtonClass}>
+                        <Button onClick={() => onSelect(true)} className={customButtonClass}>
                             <FontAwesomeIcon icon={faHammer} fixedWidth className={hammerIconClass} />
                             <p className={styles.text}>Custom</p>
                         </Button>

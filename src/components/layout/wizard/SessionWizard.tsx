@@ -136,7 +136,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                     icon: faTools,
                     name: "Select Type",
                     iconClass: styles.typeIcon,
-                    body: <ConfigTypeStep onSelect={custom => setCustom(custom)} />,
+                    body: <ConfigTypeStep isCustom={custom} onSelect={custom => setCustom(custom)} />,
                     intermediate: true
                 }
             }

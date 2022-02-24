@@ -436,3 +436,22 @@ test('Switching from the topic step and back again should maintain its selection
     // Basics should still be selected
     expect(screen.getByText('Basics').parentElement).toHaveClass('selected');
 });
+
+test('Switching from the type step and back again should maintain its selection state', () => {
+    const { next } = setup();
+
+    // Advance to the 'Type' step
+    fireEvent.click(screen.getByTitle('Preset or Custom'));
+
+    // Change the type selection to 'Custom'
+    fireEvent.click(screen.getByText('Custom'));
+
+    // Advance to the 'Question Settings' step
+    fireEvent.click(next);
+
+    // Go back to the 'Type' step
+    fireEvent.click(screen.getByText('Back'));
+
+    // Custom should still be selected
+    expect(screen.getByText('Custom').parentElement).toHaveClass('selected');
+});

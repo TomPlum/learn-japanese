@@ -1,16 +1,22 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import ConfigTypeStep from "../../../../../components/layout/wizard/steps/PresetCustomStep";
+import ConfigTypeStep, { ConfigTypeStepProps } from "../../../../../components/layout/wizard/steps/ConfigTypeStep";
 import { Environment } from "../../../../../utility/Environment";
 
 const onSelectHandler = jest.fn();
 const mockEnvironment = jest.fn();
 
+let props: ConfigTypeStepProps;
+
 beforeEach(() => {
+    props = {
+        isCustom: false,
+        onSelect: onSelectHandler
+    };
     Environment.variable = mockEnvironment;
 });
 
 const setup = () => {
-    const component = render(<ConfigTypeStep onSelect={onSelectHandler} />);
+    const component = render(<ConfigTypeStep {...props} />);
     return {
         preset: component.getByText('Preset'),
         custom: component.getByText('Custom'),
@@ -18,25 +24,17 @@ const setup = () => {
     }
 }
 
-test('Preset button should start selected', () => {
+test('Passing the custom prop as false should set the preset button as selected', () => {
+    props.isCustom = false;
     const { preset } = setup();
     const button = preset.parentElement;
     expect(button).toHaveClass('selected');
 });
 
-test('Custom button should start un-selected', () => {
+test('Passing the custom prop as true should set the custom button as selected', () => {
+    props.isCustom = true;
     const { custom } = setup();
     const button = custom.parentElement;
-    expect(button).toHaveClass('button');
-});
-
-test('Clicking the custom button should change the class to selected', () => {
-    const { custom } = setup();
-
-    const button = custom.parentElement;
-    expect(button).toHaveClass('button');
-
-    fireEvent.click(custom);
     expect(button).toHaveClass('selected');
 });
 
