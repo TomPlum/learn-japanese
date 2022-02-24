@@ -145,7 +145,15 @@ const SessionWizard = (props: SessionWizardProps) => {
                     icon: faProjectDiagram,
                     name: "Choose Preset",
                     iconClass: styles.presetIcon,
-                    body: <PresetSelectionStep mode={mode} selected={topic} onSelect={preset => setPreset(preset)} />,
+                    body: (
+                        <PresetSelectionStep
+                            mode={mode}
+                            topic={topic}
+                            preset={preset}
+                            onSelect={preset => setPreset(preset)}
+                            onChangeTopic={topic => setTopic(topic)}
+                        />
+                    ),
                     terminal: true
                 }
             }

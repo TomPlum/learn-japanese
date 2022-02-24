@@ -455,3 +455,30 @@ test('Switching from the type step and back again should maintain its selection 
     // Custom should still be selected
     expect(screen.getByText('Custom').parentElement).toHaveClass('selected');
 });
+
+test('Switching from the preset step and back again should maintain its selection state', () => {
+    const { next } = setup();
+
+    // Advance to the 'Preset' step
+    fireEvent.click(screen.getByTitle('Preset or Custom'));
+    fireEvent.click(next);
+
+    // Change the topic to 'Basics'
+    fireEvent.click(screen.getByText('Hiragana & Katakana'));
+    fireEvent.click(screen.getByText('Basics'));
+
+    // Change the preset selection to 'Animals'
+    fireEvent.click(screen.getByText('Animals'));
+
+    // Go back to the 'Type' step
+    fireEvent.click(screen.getByText('Back'));
+
+    // Return to the 'Preset' step
+    fireEvent.click(next);
+
+    // The 'Basics' topic should still be selected
+    expect(screen.getByText('Colours')).toBeInTheDocument();
+
+    // The 'Animals' topic should still be selected
+    expect(screen.getByText('Animals').parentElement).toHaveClass('selected');
+});

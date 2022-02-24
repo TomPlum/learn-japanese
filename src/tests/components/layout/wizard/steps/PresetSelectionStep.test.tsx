@@ -5,8 +5,10 @@ import Topic from "../../../../../domain/Topic";
 import { AppMode } from "../../../../../domain/AppMode";
 import { getValueLastCalledWith } from "../../../../Queries";
 import PlayMode from "../../../../../domain/session/PlayMode";
+import PlayKanaModes from "../../../../../domain/game/mode/PlayKanaModes";
 
 const onSelectHandler = jest.fn();
+const onChangeTopicHandler = jest.fn();
 
 let props: PresetSelectionStepProps;
 
@@ -21,31 +23,48 @@ const setup = () => {
 beforeEach(() => {
     props = {
         mode: AppMode.PLAY,
-        selected: Topic.KANA,
-        onSelect: onSelectHandler
+        preset: new PlayKanaModes().getModes()[0],
+        topic: Topic.KANA,
+        onSelect: onSelectHandler,
+        onChangeTopic: onChangeTopicHandler
     };
 });
 
-test('Changing the topic should render the preset options from that topic', () => {
+test('Should render the play preset options from the given presets when the mode is play', () => {
+    // Set the mode to 'Play' and preset
+    props.mode = AppMode.PLAY;
+    props.preset = new PlayKanaModes().getModes()[0];
     setup();
 
-    // Change topic from default to "Basics"
-    fireEvent.click(screen.getByText('Hiragana & Katakana'));
-    fireEvent.click(screen.getByText('Basics'));
-
-    // Should render new presets
-    expect(screen.queryByText('Relaxed')).not.toBeInTheDocument();
-    expect(screen.getByText('Colours')).toBeInTheDocument();
+    // Should render play presets
+    expect(screen.getByText('Relaxed')).toBeInTheDocument();
+    expect(screen.queryByText('Hiragana')).not.toBeInTheDocument();
 });
 
-test('Passing the mode as Learn should render the learn presets', () => {
+test('Should render the learn preset options from the given presets when the mode is learn', () => {
+    // Set the mode to 'Learn' and preset
     props.mode = AppMode.LEARN;
+    props.preset = new PlayKanaModes().getModes()[0];
     setup();
+
+    // Should render learn presets
     expect(screen.getByText('Hiragana')).toBeInTheDocument();
+    expect(screen.queryByText('Relaxed')).not.toBeInTheDocument();
 });
 
 test('Selecting a preset should call the onSelect event handler with that preset', () => {
     setup();
     fireEvent.click(screen.getByText('Hardcore'));
     expect(getValueLastCalledWith<PlayMode>(onSelectHandler).displayName).toBe("Hardcore");
+});
+
+test('Selecting a preset should call the onChangeTopic event handler with that topic', () => {
+    setup();
+
+    // Change the topic to 'Basics'
+    fireEvent.click(screen.getByText('Hiragana & Katakana'));
+    fireEvent.click(screen.getByText('Basics'));
+
+    // Should call the event handler
+    expect(onChangeTopicHandler).toHaveBeenLastCalledWith(Topic.BASICS);
 });
