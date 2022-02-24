@@ -7,6 +7,7 @@ import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { clearGameSettings } from "../../../../slices/GameSettingsSlice";
 import { clearDataSettings } from "../../../../slices/DataSettingsSlice";
+import { createNextState } from "@reduxjs/toolkit";
 
 const onCloseHandler = jest.fn();
 const history = createMemoryHistory();
@@ -399,4 +400,20 @@ test('Dismissing the confirmation modal should not call the onClose event handle
     // Clicking yes should call the event handler
     fireEvent.click(screen.getByText('No'));
     expect(onCloseHandler).not.toHaveBeenCalled();
+});
+
+test('Switching from the mode step and back again should maintain its selection state', () => {
+    const { next } = setup();
+
+    // Change the mode selection to 'Learn'
+    fireEvent.click(screen.getByText('Learn'));
+
+    // Advance to the 'Topic' step
+    fireEvent.click(next);
+
+    // Go back to the 'Mode' step
+    fireEvent.click(screen.getByText('Back'));
+
+    // Learn should still be selected
+    expect(screen.getByText('Learn').parentElement).toHaveClass('selected');
 });

@@ -1,13 +1,15 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import ModeSelectionStep from "../../../../../components/layout/wizard/steps/WizardModeStep";
+import ModeSelectionStep, { ModeSelectionStepProps } from "../../../../../components/layout/wizard/steps/ModeSelectionStep";
 import { Environment } from "../../../../../utility/Environment";
 import { AppMode } from "../../../../../domain/AppMode";
 
 const onSelectHandler = jest.fn();
 const mockEnvironment = jest.fn();
 
+let props: ModeSelectionStepProps;
+
 const setup = () => {
-    const component = render(<ModeSelectionStep onSelect={onSelectHandler} />);
+    const component = render(<ModeSelectionStep {...props} />);
     return {
         play: component.getByText('Play').parentElement,
         learn: component.getByText('Learn').parentElement,
@@ -16,17 +18,17 @@ const setup = () => {
 }
 
 beforeEach(() => {
+    props = {
+        mode: AppMode.PLAY,
+        onSelect: onSelectHandler
+    };
     Environment.variable = mockEnvironment;
 });
 
-test('Play mode should be selected by default', () => {
+test('Passing mode as play should set the class name to selected', () => {
+    props.mode = AppMode.PLAY;
     const { play } = setup();
     expect(play).toHaveClass('selected');
-});
-
-test('Learn mode should not be selected by default', () => {
-    const { learn } = setup();
-    expect(learn).toHaveClass('button');
 });
 
 test('Clicking the learn mode button should call the onSelect event handler with Learn mode', () => {
@@ -35,9 +37,9 @@ test('Clicking the learn mode button should call the onSelect event handler with
     expect(onSelectHandler).toHaveBeenCalled();
 });
 
-test('Clicking the learn mode button should set the class name to selected', () => {
+test('Passing mode as learn should set the class name to selected', () => {
+    props.mode = AppMode.LEARN;
     const { learn } = setup();
-    fireEvent.click(learn!);
     expect(learn).toHaveClass('selected');
 });
 
@@ -54,6 +56,7 @@ test('Clicking the play mode button should call the onSelect event handler with 
 });
 
 test('Clicking the learn mode button should display the Learn mode description', () => {
+    props.mode = AppMode.LEARN;
     mockEnvironment.mockReturnValue("LEARN MODE DESCRIPTION");
     const { learn } = setup();
 

@@ -119,7 +119,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                     icon: faAngleDoubleRight,
                     name: "Select Mode",
                     iconClass: styles.modeIcon,
-                    body: <ModeSelectionStep onSelect={mode => setMode(mode)} />
+                    body: <ModeSelectionStep mode={mode} onSelect={mode => setMode(mode)} />
                 }
             }
             case TOPIC: {

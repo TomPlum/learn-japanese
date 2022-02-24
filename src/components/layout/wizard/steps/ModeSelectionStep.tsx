@@ -6,15 +6,14 @@ import { faGraduationCap, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { Environment } from "../../../../utility/Environment";
 import { AppMode } from "../../../../domain/AppMode";
 
-export interface WizardModeStepStepProps {
+export interface ModeSelectionStepProps {
+    mode: AppMode;
     onSelect: (mode: AppMode) => void;
 }
 
-const ModeSelectionStep = (props: WizardModeStepStepProps) => {
+const ModeSelectionStep = (props: ModeSelectionStepProps) => {
 
-    const { onSelect } = props;
-
-    const [mode, setMode] = useState(AppMode.PLAY);
+    const { mode, onSelect } = props;
 
     const playButtonClass = mode === AppMode.PLAY ? styles.selected : styles.button;
     const learnButtonClass = mode === AppMode.LEARN ? styles.selected : styles.button;
@@ -31,13 +30,13 @@ const ModeSelectionStep = (props: WizardModeStepStepProps) => {
             <Container fluid className={styles.container}>
                 <Row>
                     <Col>
-                        <Button onClick={() => setMode(AppMode.PLAY)} className={playButtonClass}>
+                        <Button onClick={() => onSelect(AppMode.PLAY)} className={playButtonClass}>
                             <FontAwesomeIcon icon={faPlay} fixedWidth className={playIconClass} />
                             <p className={styles.text}>Play</p>
                         </Button>
                     </Col>
                     <Col>
-                        <Button onClick={() => setMode(AppMode.LEARN)} className={learnButtonClass}>
+                        <Button onClick={() => onSelect(AppMode.LEARN)} className={learnButtonClass}>
                             <FontAwesomeIcon icon={faGraduationCap} fixedWidth className={learnIconClass} />
                             <p className={styles.text}>Learn</p>
                         </Button>
