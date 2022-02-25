@@ -227,7 +227,7 @@ test('Clicking Start in the confirmation step for preset play should set the sel
     fireEvent.click(screen.getByText('Jōyō Kanji'));
     fireEvent.click(next);
 
-    // Select the 'Custom' type
+    // Select the 'Preset' type
     fireEvent.click(screen.getAllByText('Preset')[0]);
     fireEvent.click(next);
 
@@ -479,6 +479,6 @@ test('Switching from the preset step and back again should maintain its selectio
     // The 'Basics' topic should still be selected
     expect(screen.getByText('Colours')).toBeInTheDocument();
 
-    // The 'Animals' topic should still be selected
+    // The 'Animals' preset should still be selected
     expect(screen.getByText('Animals').parentElement).toHaveClass('selected');
 });

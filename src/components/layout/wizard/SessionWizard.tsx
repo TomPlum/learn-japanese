@@ -112,6 +112,11 @@ const SessionWizard = (props: SessionWizardProps) => {
 
     }
 
+    const handleChangeTopic = (topic: Topic) => {
+        setTopic(topic);
+        setPreset(mode === AppMode.PLAY ? topic.playModes.getModes()[0] : topic.modes.getModes()[0]);
+    }
+
     const getStageDetails = (): StageDetails => {
         switch (stage) {
             case MODE: {
@@ -127,7 +132,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                     icon: faSwatchbook,
                     name: "Select Topic",
                     iconClass: styles.topicIcon,
-                    body: <TopicSelectionStep topic={topic} onSelect={topic => setTopic(topic)} />,
+                    body: <TopicSelectionStep topic={topic} onSelect={handleChangeTopic} />,
                     intermediate: true
                 }
             }
@@ -197,7 +202,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                 return {
                     icon: faDatabase,
                     iconClass: styles.dataIcon,
-                    name: "Data Settings",
+                    name: `${topic.name} Settings`,
                     body: <DataSettingsStep topic={topic} onSelect={settings => setDataSettings(settings)} isValid={valid => setValid(valid)} />,
                     intermediate: true
                 }

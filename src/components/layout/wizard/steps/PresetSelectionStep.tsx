@@ -21,21 +21,18 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
 
     const { preset, mode, topic, onSelect, onChangeTopic } = props;
 
-    useEffect(() => {
-        const defaultPreset = mode === AppMode.PLAY ? topic.playModes.getModes()[0] : topic.modes.getModes()[0];
-        onSelect(defaultPreset);
-    }, [topic]);
-
     const onSelectPreset = (mode: SessionMode) => {
         onSelect(mode);
     }
 
     const onSelectTopic = (topic: Topic) => {
+        const defaultPreset = mode === AppMode.PLAY ? topic.playModes.getModes()[0] : topic.modes.getModes()[0];
+        onSelect(defaultPreset);
         onChangeTopic(topic);
     }
 
     const TopicSelectionDropdown = () => <TopicSelector topic={topic} onSelect={onSelectTopic} className={styles.topic} />;
-    const description = Environment.variable(`PLAY_${topic.playModes.getTopic()}_${preset.displayName}_DESC`);
+    const description = Environment.variable(`${mode.toUpperCase()}_${topic.playModes.getTopic()}_${preset.displayName}_DESC`);
 
     const presets = mode === AppMode.PLAY ? topic.playModes.getModes() : topic.modes.getModes();
 
