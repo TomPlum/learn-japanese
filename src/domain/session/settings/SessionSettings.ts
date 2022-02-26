@@ -25,10 +25,6 @@ export class SessionSettings {
         return this._gameSettings;
     }
 
-    get learnSettings(): LearnSettings | undefined {
-        return this._learnSettings;
-    }
-
     get dataSettings(): DataSettings {
         return this._dataSettings;
     }
