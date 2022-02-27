@@ -9,7 +9,7 @@ import Arrays from "../../utility/Arrays";
 import DataSettingsConverter from "../../converter/DataSettingsConverter";
 import { useDataSettingsDispatch, useDataSettingsSelector } from "../../hooks";
 import LearningDataRepository from "../../repository/LearningDataRepository";
-import styles from "../../styles/sass/components/pages/PlayPage.module.scss";
+import styles from "../../styles/sass/components/pages/LearnPage.module.scss";
 import { useHistory } from "react-router-dom";
 import { clearDataSettings } from "../../slices/DataSettingsSlice";
 
@@ -62,7 +62,7 @@ const LearnPage = () => {
     }
 
     return (
-        <div>
+        <div className={styles.wrapper}>
             <LoadingScreen key={`${loading}`} active={!!dataSettings && loading} />
 
             {!dataSettings && (
