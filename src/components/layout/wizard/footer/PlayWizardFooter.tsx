@@ -22,7 +22,7 @@ const PlayWizardFooter = (props: PlayWizardFooterProps) => {
 
     return (
         <div className={styles.wrapper}>
-            <div>
+            <div className={styles.buttonWrapper}>
                 {(intermediate || terminal) && (
                     <Button onClick={onBack} className={styles.back} variant="primary">
                         Back
