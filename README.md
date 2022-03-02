@@ -14,10 +14,16 @@ However, I couldn't quite find *exactly* what I wanted, an app for learning kana
 
 ## Contents
 * [Kana](#kana)
+  * [Regular](#regular-kana) 
+  * [Diacriticals](#diacriticals)
+  * [Diagraphs](#diagraphs)
 * [Learning Topics](#learning-topics)
 * [Game Modes](#game-modes)
 * [References](#references)
+
 ## Kana
+
+### Regular Kana
 
 Hiragana
 
@@ -39,7 +45,7 @@ Katakana
 |   |    | レ |    | メ | ヘ | ネ | テ | セ | ケ | エ | **e** |
 |   | ヲ | ロ | ヨ  | モ | ホ | ノ | ト | ソ | コ | オ | **o** |
 
-#### Diacriticals
+### Diacriticals
 Syllables beginning with the voiced consonants `g`, `z`, `d` and `b` are spelled with kana from the corresponding
 unvoiced columns (`k`, `s`, `t` and `h`) and the voicing mark, dakuten. [[1]](#1)
 
@@ -65,7 +71,7 @@ Katakana
 |**e**|  ペ |  ベ  | デ  | ゼ  |  ゲ  |
 |**o**|  ポ |  ボ  | ド  | ゾ  |  ゴ  |
 
-#### Diagraphs
+### Diagraphs
 
 Syllables beginning with palatalized consonants are spelled with one of the seven consonantal kana from the i row
 followed by small ya, yu or yo. These digraphs are called yōon. [[1]](#1)
