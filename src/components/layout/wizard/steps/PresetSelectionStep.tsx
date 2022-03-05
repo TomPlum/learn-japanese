@@ -1,5 +1,5 @@
 import TopicSelector from "../form/TopicSelector";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Topic from "../../../../domain/Topic";
 import styles from "../../../../styles/sass/components/layout/wizard/steps/PresetSelectionStep.module.scss";
 import GridItem from "../grid/GridItem";
@@ -8,6 +8,7 @@ import { Environment } from "../../../../utility/Environment";
 import ScrollableContainer from "../../../ui/ScrollableContainer";
 import { AppMode } from "../../../../domain/AppMode";
 import SessionMode from "../../../../domain/session/SessionMode";
+import EditCustomPresetForm from "../form/EditCustomPresetForm";
 
 export interface PresetSelectionStepProps {
     mode: AppMode;
@@ -20,6 +21,8 @@ export interface PresetSelectionStepProps {
 const PresetSelectionStep = (props: PresetSelectionStepProps) => {
 
     const { preset, mode, topic, onSelect, onChangeTopic } = props;
+
+    const [editing, setEditing] = useState(false);
 
     const onSelectPreset = (mode: SessionMode) => {
         onSelect(mode);
@@ -34,25 +37,37 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
     const TopicSelectionDropdown = () => <TopicSelector topic={topic} onSelect={onSelectTopic} className={styles.topic} />;
     const description = Environment.variable(`${mode.toUpperCase()}_${topic.playModes.getTopic()}_${preset.displayName}_DESC`);
 
-    const presets = mode === AppMode.PLAY ? topic.playModes.getModes() : topic.modes.getModes();
+    const presets: SessionMode[] = mode === AppMode.PLAY ? topic.playModes.getModes() : topic.modes.getModes();
+
+    const onEditCustomPreset = () => {
+        setEditing(true);
+    }
 
     return (
         <div className={styles.container}>
             <ScrollableContainer height={344}>
-                <GridDisplay controls customOptions={<TopicSelectionDropdown />}>
-                    {presets.map(option =>
-                         <GridItem
-                            value={option}
-                            desc={description}
-                            icon={option.icon}
-                            onClick={onSelectPreset}
-                            className={styles.preset}
-                            iconColour={option.colour}
-                            selected={preset.displayName}
-                            key={option.displayName + "-button"}
-                        />
-                    )}
-                </GridDisplay>
+                {editing && (
+                    <EditCustomPresetForm onClose={() => setEditing(false)} />
+                )}
+
+                {!editing && (
+                    <GridDisplay controls customOptions={<TopicSelectionDropdown />}>
+                        {presets.map((option: SessionMode) =>
+                            <GridItem
+                                value={option}
+                                desc={description}
+                                icon={option.icon}
+                                onClick={onSelectPreset}
+                                editable={option.custom}
+                                className={styles.preset}
+                                iconColour={option.colour}
+                                onEdit={onEditCustomPreset}
+                                selected={preset.displayName}
+                                key={option.displayName + "-button"}
+                            />
+                        )}
+                    </GridDisplay>
+                )}
             </ScrollableContainer>
         </div>
     )

@@ -4,6 +4,7 @@
   color: $dark-1;
   padding: 5px;
   transition: all ease-in-out 0.2s;
+  position: relative;
 }
 
 .notSelected {
@@ -54,4 +55,20 @@
 .icon {
   transition: color ease-in-out 0.2s;
   font-size: 1.5em;
+}
+
+.edit {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 3px;
+  font-size: 1.5rem;
+  color: $dark-1;
+  transition: all ease-in-out 0.2s;
+}
+
+.edit:hover {
+  cursor: pointer;
+  z-index: 1000;
+  color: $dark-2;
 }

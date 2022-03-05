@@ -14,7 +14,7 @@ class Node {
     }
 
     public hasChildren(): boolean {
-        return this._value.props?.children;
+        return this._value?.props?.children;
     }
 
     get value(): any {
@@ -48,7 +48,7 @@ export default class ComponentTree {
     /**
      * Adds the given properties to the leaf nodes of the {@link root} element.
      * @param props A function taking the leaf node and returning the new properties.
-     * @return tree A copy of the whole element tree with the updated leaf node.
+     * @return A copy of the whole element tree with the updated leaf node.
      */
     public addPropsToLeafNode(props?: (el: React.ReactElement) => {}): ReactElement {
         let response: ReactNode;
@@ -69,7 +69,7 @@ export default class ComponentTree {
     }
 
     /**
-     * Creates a list off all the text content of the children from the root node.
+     * Creates a list of all the text content of the children from the root node.
      * @return An array of string values.
      */
     public getStringChildren(): string[] {

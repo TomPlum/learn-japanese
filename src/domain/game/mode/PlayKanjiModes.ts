@@ -1,4 +1,4 @@
-import { faBezierCurve, faCircle, faPaintBrush, faRandom, faSchool, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faBezierCurve, faCircle, faFlask, faPaintBrush, faRandom, faSchool, faStar } from "@fortawesome/free-solid-svg-icons";
 import { PlayMenuModes } from "../../MenuModes";
 import { GameSettingsBuilder } from "../../session/settings/game/GameSettings";
 import QuestionType from "../QuestionType";
@@ -83,7 +83,20 @@ export default class PlayKanjiModes implements PlayMenuModes {
                         .build()
                     )
                     .build()
-            )
+            ),
+            new PlayMode("Grade 1 Practice", "#23d5ea", faFlask, defaultKanjiSettings,
+                new GameSettingsBuilder()
+                    .withQuestionSettings(new QuestionSettingsBuilder()
+                        .withFields(LearnableField.RANDOM, LearnableField.RANDOM)
+                        .withType(QuestionType.RANDOM)
+                        .withCardQuantity(4)
+                        .withScoreTracking(true)
+                        .build()
+                    )
+                    .build(),
+                "Grade 1",
+                true
+            ) //TODO: Remove this dummy example once serialised in DB
         ];
     }
 
