@@ -27,6 +27,7 @@ class Inspectable extends Component<InspectableProps> {
             <OverlayTrigger
                 rootClose
                 defaultShow={false}
+                data-testid="inspectable"
                 placement={placement ?? "left"}
                 overlay={<PopOver {...popover} />}
                 trigger={["hover", "focus", "click"]}
