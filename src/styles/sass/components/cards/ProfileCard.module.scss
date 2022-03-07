@@ -1,0 +1,85 @@
+@import "src/styles/sass/colours";
+
+$card-color: #4d9eec;
+
+.card {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  padding: 0 0 10px 0;
+}
+
+.body {
+  text-align: center;
+  padding: 0 !important;
+}
+
+.avatar {
+  width: 90px !important;
+  height: 90px;
+  stroke: $dark-1;
+  stroke-width: 20px;
+}
+
+.circle {
+  color: $dark-2;
+  width: 90px !important;
+  height: 90px;
+}
+
+.user {
+  width: 50px !important;
+  height: 50px;
+  color: $light-1;
+}
+
+.detailsWrapper {
+  background-color: $card-color;
+  padding: 20px 10px 20px 10px;
+  height: 60px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.profile {
+  color: $dark-1;
+  background-color: $light-2;
+  padding: 5px 8px;
+  border-radius: 10px;
+  transition: all ease-in-out 0.2s;
+}
+
+.profile:hover {
+  text-decoration: none;
+  cursor: pointer;
+  color: $dark-2;
+  background-color: $light-1;
+}
+
+.name {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  color: $light-1;
+}
+
+.linkWrapper {
+  padding-top: 130px;
+  text-align: left;
+}
+
+.link {
+  color: $light-1;
+  transition: all ease-in-out 0.2s;
+  display: flex;
+  align-items: center;
+  padding: 6px 20px;
+}
+
+.linkIcon {
+  margin-right: 5px;
+  font-size: 1.2em;
+}
+
+.link:hover {
+  color: $card-color;
+  text-decoration: none;
+  background-color: rgba($dark-1, 0.8);
+}
