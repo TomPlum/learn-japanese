@@ -3,6 +3,7 @@ import { useUserSelector } from "../../hooks";
 import styles from "../../styles/sass/components/cards/ProfileCard.module.scss";
 import { faBell, faCircle, faCog, faCompass, faUserGraduate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DashboardCardLink from "../layout/card/DashboardCardLink";
 
 const ProfileCard = () => {
 
@@ -21,18 +22,9 @@ const ProfileCard = () => {
                 </div>
 
                 <div className={styles.linkWrapper}>
-                    <a className={styles.link} href="/">
-                        <FontAwesomeIcon icon={faBell} className={styles.linkIcon} fixedWidth />
-                        <span className={styles.linkText}>Notification Centre</span>
-                    </a>
-                    <a className={styles.link} href="/">
-                        <FontAwesomeIcon icon={faCog} className={styles.linkIcon} fixedWidth />
-                        <span className={styles.linkText}>User Settings</span>
-                    </a>
-                    <a className={styles.link} href="/">
-                        <FontAwesomeIcon icon={faCompass} className={styles.linkIcon} fixedWidth />
-                        <span className={styles.linkText}>Show Me Around</span>
-                    </a>
+                    <DashboardCardLink text="Notification Centre" icon={faBell} />
+                    <DashboardCardLink text="User Settings" icon={faCog} />
+                    <DashboardCardLink text="Show Me Around" icon={faCompass} />
                 </div>
             </DashboardCard.Body>
         </DashboardCard>
