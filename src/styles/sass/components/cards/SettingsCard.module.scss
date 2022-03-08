@@ -1,0 +1,41 @@
+@import "src/styles/sass/colours";
+
+.card {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  text-align: left;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.header {
+  padding: 0 15px;
+}
+
+.dropdown button {
+  font-size: 1.2em;
+  background-color: transparent;
+  border: none;
+  float: right;
+}
+
+.dropdown button:hover {
+  background-color: transparent;
+}
+
+.row:first-child {
+  margin-top: 10px;
+}
+
+.row {
+  margin-bottom: 2px;
+}
+
+.col {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  margin-bottom: 5px;
+  padding-left: 14px;
+}

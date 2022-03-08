@@ -7,15 +7,16 @@ import DashboardCardIcon from "./DashboardCardIcon";
 
 export interface DashboardCardHeaderProps {
     error?: string;
+    className?: string;
     onReload?: () => void;
 }
 
 const DashboardCardHeader = (props: PropsWithChildren<DashboardCardHeaderProps>) => {
 
-    const { children, error, onReload } = props;
+    const { children, className, error, onReload } = props;
 
     return (
-        <div className={styles.header}>
+        <div className={[styles.header, className].join(" ")}>
             {children}
 
             {error && error != "" && (

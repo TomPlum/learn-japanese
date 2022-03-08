@@ -7,6 +7,8 @@ import DashboardCardHeader from "../layout/card/DashboardCardHeader";
 import DashboardToolbar from "../layout/DashboardToolbar";
 import FeedbackCard from "../cards/FeedbackCard";
 import ScrollableContainer from "../ui/ScrollableContainer";
+import ProfileCard from "../cards/ProfileCard";
+import SettingsCard from "../cards/SettingsCard";
 
 const MainMenuPage = () => {
     return (
@@ -19,21 +21,9 @@ const MainMenuPage = () => {
 
             <Row className={styles.row}>
                 <Col md={3} className={styles.col}>
-                    <DashboardCard size="sm">
-                        <DashboardCard.Header>
-                            <DashboardCardHeader.Title>
-                                Profile
-                            </DashboardCardHeader.Title>
-                        </DashboardCard.Header>
-                    </DashboardCard>
+                    <ProfileCard />
 
-                    <DashboardCard size="sm">
-                        <DashboardCard.Header>
-                            <DashboardCardHeader.Title>
-                                Settings
-                            </DashboardCardHeader.Title>
-                        </DashboardCard.Header>
-                    </DashboardCard>
+                    <SettingsCard />
 
                     <FeedbackCard className={styles.feedback} />
                 </Col>
