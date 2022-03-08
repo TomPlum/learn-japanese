@@ -7,6 +7,11 @@ import DashboardCardLink from "../layout/card/DashboardCardLink";
 
 const SettingsCard = () => {
 
+    const link = {
+        chevron: true,
+        className: styles.link
+    }
+
     return (
         <DashboardCard size="sm" className={styles.card}>
             <DashboardCard.Header className={styles.header}>
@@ -16,12 +21,12 @@ const SettingsCard = () => {
             </DashboardCard.Header>
 
             <DashboardCard.Body className={styles.body}>
-                <DashboardCardLink chevron icon={faCog} text="General Settings" className={styles.link} />
-                <DashboardCardLink chevron icon={faGraduationCap} text="Learn Settings" className={styles.link} />
-                <DashboardCardLink chevron icon={faChess} text="Play Settings" className={styles.link} />
-                <DashboardCardLink chevron icon={faDesktop} text="Interface Settings" className={styles.link} />
-                <DashboardCardLink chevron icon={faBell} text="Notification Settings" className={styles.link} />
-                <DashboardCardLink chevron icon={faUser} text="User Settings" className={styles.link} />
+                <DashboardCardLink icon={faCog} text="General Settings" {...link} />
+                <DashboardCardLink icon={faGraduationCap} text="Learn Settings" {...link} />
+                <DashboardCardLink icon={faChess} text="Play Settings" {...link} />
+                <DashboardCardLink icon={faDesktop} text="Interface Settings" {...link} />
+                <DashboardCardLink icon={faBell} text="Notification Settings" {...link} />
+                <DashboardCardLink icon={faUser} text="User Settings" {...link} />
             </DashboardCard.Body>
         </DashboardCard>
     );
