@@ -1,0 +1,32 @@
+@import "src/styles/sass/colours";
+
+$card-color: #4d9eec;
+
+.linkWrapper {
+  padding-top: 125px;
+  text-align: left;
+}
+
+.link {
+  color: $light-1;
+  transition: all ease-in-out 0.2s;
+  display: flex;
+  align-items: center;
+  padding: 6px 20px;
+}
+
+.linkIcon {
+  margin-right: 5px;
+  font-size: 1.2em;
+}
+
+.link:hover {
+  color: $card-color;
+  text-decoration: none;
+  background-color: rgba($dark-1, 0.8);
+  cursor: pointer;
+}
+
+.chevron {
+  margin-left: auto;
+}
