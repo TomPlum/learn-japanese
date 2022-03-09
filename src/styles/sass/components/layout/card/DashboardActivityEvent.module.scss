@@ -1,0 +1,31 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  background-color: rgba($dark-1, 0.8);
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: all ease-in-out 0.2s;
+  margin-bottom: 10px;
+}
+
+.wrapper:hover {
+  background-color: $dark-1;
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.time {
+  margin-left: auto;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.icon {
+  margin-right: 8px;
+  margin-bottom: 2px;
+}

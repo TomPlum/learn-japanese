@@ -9,6 +9,7 @@ import FeedbackCard from "../cards/FeedbackCard";
 import ScrollableContainer from "../ui/ScrollableContainer";
 import ProfileCard from "../cards/ProfileCard";
 import SettingsCard from "../cards/SettingsCard";
+import ActivityCard from "../cards/ActivityCard";
 
 const MainMenuPage = () => {
     return (
@@ -32,13 +33,7 @@ const MainMenuPage = () => {
                     <ScrollableContainer className={styles.main} hideScrollBar>
                         <PlayCard />
 
-                        <DashboardCard size="md" error="Something went wrong.">
-                            <DashboardCard.Header>
-                                <DashboardCardHeader.Title>
-                                    Activity
-                                </DashboardCardHeader.Title>
-                            </DashboardCard.Header>
-                        </DashboardCard>
+                        <ActivityCard />
 
                         {/*<DashboardCard size="md">
                             <DashboardCard.Header>
