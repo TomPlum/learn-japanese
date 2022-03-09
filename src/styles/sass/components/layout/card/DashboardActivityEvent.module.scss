@@ -29,3 +29,14 @@
   margin-right: 8px;
   margin-bottom: 2px;
 }
+
+.dismiss {
+  color: $light-2;
+  margin-left: 10px;
+  transition: all ease-in-out 0.2s;
+}
+
+.dismiss:hover {
+  color: $bootstrap-red;
+  cursor: pointer;
+}
