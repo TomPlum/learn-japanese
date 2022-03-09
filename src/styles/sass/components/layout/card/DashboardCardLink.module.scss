@@ -1,6 +1,5 @@
 @import "src/styles/sass/colours";
-
-$card-color: #4d9eec;
+@import "src/styles/sass/mixins";
 
 .linkWrapper {
   padding-top: 125px;
@@ -13,15 +12,17 @@ $card-color: #4d9eec;
   display: flex;
   align-items: center;
   padding: 6px 20px;
+  @include noSelect;
 }
 
 .linkIcon {
-  margin-right: 5px;
+  margin-right: 8px;
+  margin-bottom: 2px;
   font-size: 1.2em;
 }
 
 .link:hover {
-  color: $card-color;
+  color: #4d9eec;
   text-decoration: none;
   background-color: rgba($dark-1, 0.8);
   cursor: pointer;
