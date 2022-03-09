@@ -1,11 +1,11 @@
 import styles from "../../styles/sass/components/cards/PlayCard.module.scss";
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faGamepad, faPlay, faUserGraduate } from "@fortawesome/free-solid-svg-icons";
 import SessionWizard from "../layout/wizard/SessionWizard";
 import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
-import DashboardCardHeader from "../layout/card/DashboardCardHeader";
+import DashboardCardLink from "../layout/card/DashboardCardLink";
 
 const PlayCard = () => {
 
@@ -31,17 +31,25 @@ const PlayCard = () => {
 
     return (
         <DashboardCard {...props}>
-            <DashboardCard.Header error={error} onReload={onRefreshMeta}>
+            {/*<DashboardCard.Header onReload={onRefreshMeta}>
                 <DashboardCardHeader.Title>Play</DashboardCardHeader.Title>
-            </DashboardCard.Header>
+            </DashboardCard.Header>*/}
 
             <DashboardCard.Body>
                 <Row>
                     <Col>
-                        <Button variant="outline-light" onClick={handleStart} className={styles.start} data-testid="launch-wizard">
-                            <FontAwesomeIcon icon={faPlay} fixedWidth />
-                        </Button>
-                        <p>New Session</p>
+                        <p onClick={handleStart} className={styles.start} data-testid="launch-wizard">
+                            <FontAwesomeIcon icon={faPlay} fixedWidth size="sm" />
+                            <span>Start Session</span>
+                        </p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <DashboardCardLink text="Last Play Session" icon={faGamepad} />
+                    </Col>
+                    <Col>
+                        <DashboardCardLink text="Last Learn Session" icon={faUserGraduate} />
                     </Col>
                 </Row>
             </DashboardCard.Body>

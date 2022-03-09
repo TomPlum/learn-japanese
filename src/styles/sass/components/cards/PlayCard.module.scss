@@ -5,7 +5,22 @@
 }
 
 .start {
-  border-radius: 50%;
-  width: 75px;
-  height: 75px;
+  background-color: $bootstrap-green;
+  color: $light-1 !important;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 8px 10px 8px;
+  transition: all ease-in-out 0.2s;
+  text-transform: uppercase;
+}
+
+.start svg {
+  margin-right: 5px;
+}
+
+.start:hover {
+  background-color: $light-1;
+  color: $dark-2 !important;
+  cursor: pointer;
 }
