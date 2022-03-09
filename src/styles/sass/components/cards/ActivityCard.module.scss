@@ -11,12 +11,15 @@
   display: flex;
   justify-content: center;
   position: absolute;
+  padding-bottom: 30px;
 }
 
 .more {
   background-color: rgba($dark-1, 0.8);
   padding: 1px 10px;
   border-radius: 10px;
+  width: 50px;
+  text-align: center;
   transition: all ease-in-out 0.2s;
 }
 
@@ -24,6 +27,7 @@
   cursor: pointer;
   background-color: $dark-1;
   color: #FFF;
+  width: 65px;
 }
 
 .footer svg {
