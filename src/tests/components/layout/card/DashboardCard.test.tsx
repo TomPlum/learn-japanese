@@ -12,9 +12,14 @@ const setup = () => {
             <DashboardCard.Header>
                 <DashboardCardHeader.Title>Example Title</DashboardCardHeader.Title>
             </DashboardCard.Header>
+
             <DashboardCard.Body>
                 <span>Example Content</span>
             </DashboardCard.Body>
+
+            <DashboardCard.Footer>
+                Example Footer
+            </DashboardCard.Footer>
         </DashboardCard>
     );
     return {
@@ -101,4 +106,9 @@ test('Clicking the retry spinner should call the onRetry event handler', () => {
     setup();
     fireEvent.click(screen.getByTitle('Retry'));
     expect(onReloadHandler).toHaveBeenCalled();
+});
+
+test('Given the card has a footer, it should render its content', () => {
+    setup();
+    expect(screen.getByText('Example Footer')).toBeInTheDocument();
 });

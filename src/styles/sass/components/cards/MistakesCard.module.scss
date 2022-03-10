@@ -1,0 +1,69 @@
+@import "src/styles/sass/colours";
+
+.card {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.footer {
+  padding-bottom: 0;
+}
+
+.practice {
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+
+.practice:hover {
+  color: pink;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px !important;
+}
+
+.quantity {
+  text-align: center;
+  margin: 0;
+  font-size: 4em;
+  border: 3px solid $bootstrap-red;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  color: $light-1;
+  background-color: $dark-1;
+  transition: all ease-in-out 0.3s;
+}
+
+.quantity:hover {
+  background-color: rgba($dark-1, 0.5);
+  cursor: pointer;
+  color: #FFF;
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+}
+
+.desc {
+  text-transform: uppercase;
+  margin: 10px;
+}
+
+.details {
+  color: $dark-1;
+  background-color: $light-2;
+  padding: 5px 8px;
+  border-radius: 10px;
+  transition: all ease-in-out 0.2s;
+}
+
+.details:hover {
+  text-decoration: none;
+  cursor: pointer;
+  color: $dark-2;
+  background-color: $light-1;
+}
