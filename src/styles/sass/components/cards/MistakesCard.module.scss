@@ -1,4 +1,5 @@
 @import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
 
 .card {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
@@ -14,6 +15,8 @@
   font-size: 1.2rem;
   padding-bottom: 12px;
   padding-top: 12px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
 .practice:hover {
@@ -28,17 +31,17 @@
 }
 
 .quantity {
+  @include noSelect;
   text-align: center;
   margin: 0;
   font-size: 4em;
-  border: 3px solid $bootstrap-red;
   border-radius: 50%;
   width: 100px;
   height: 100px;
   line-height: 100px;
   color: $light-1;
   background-color: $dark-1;
-  transition: all ease-in-out 0.3s;
+  transition: box-shadow ease-in-out 0.3s, background-color ease-in-out 0.2s, color ease-in-out 0.2s;
 }
 
 .quantity:hover {
@@ -46,6 +49,10 @@
   cursor: pointer;
   color: #FFF;
   box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+}
+
+.quantity:active {
+  background-color: $dark-3;
 }
 
 .desc {
@@ -66,4 +73,37 @@
   cursor: pointer;
   color: $dark-2;
   background-color: $light-1;
+}
+
+.red {
+  border: 3px solid $bootstrap-red;
+}
+
+.orange {
+  border: 3px solid $bootstrap-yellow;
+}
+
+.green {
+  border: 3px solid $bootstrap-green;
+}
+
+.types {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 140px;
+}
+
+.type {
+  background-color: rgba($dark-1, 0.6);
+  width: 40px;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all ease-in-out 0.2s;
+}
+
+.type:hover {
+  background-color: rgba($dark-1, 0.9);
+  cursor: pointer;
 }
