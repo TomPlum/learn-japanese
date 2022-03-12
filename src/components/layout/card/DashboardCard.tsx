@@ -12,6 +12,7 @@ export type DashboardCardSize = "sm" | "md" | "lg";
 export interface DashboardCardProps {
     id?: string;
     size?: DashboardCardSize;
+    height?: number;
     loading?: boolean;
     updating?: boolean;
     error?: string;
@@ -21,9 +22,13 @@ export interface DashboardCardProps {
 
 const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
 
-    const { id, error, size, updating, loading, onReload, children, className } = props;
+    const { id, error, height, size, updating, loading, onReload, children, className } = props;
 
     const getSize = (): string | undefined => {
+        if (height) {
+            return `${height}px`;
+        }
+
         switch (size) {
             case "sm": return "300px";
             case "md": return "400px";
@@ -49,6 +54,9 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
                         }
                         case DashboardCardBody: {
                             return React.cloneElement(child, { size: size, updating: updating });
+                        }
+                        case DashboardCardFooter: {
+                            return React.cloneElement(child, { className: [styles.footer, child.props.className].join(" ") });
                         }
                         default: {
                             return child;

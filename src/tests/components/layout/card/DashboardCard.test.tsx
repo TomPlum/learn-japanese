@@ -112,3 +112,10 @@ test('Given the card has a footer, it should render its content', () => {
     setup();
     expect(screen.getByText('Example Footer')).toBeInTheDocument();
 });
+
+test('Given the card has a height, it should ignore the size and set the height explicitly', () => {
+    props.size = "md";
+    props.height = 159;
+    setup();
+    expect(screen.getByTestId('test-card')).toHaveStyle({"height": "159px"});
+});
