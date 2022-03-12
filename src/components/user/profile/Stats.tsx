@@ -22,7 +22,7 @@ const dummyOtherData = [
     { type: "Adverbs", value: 22, fill: "#f59037" },
     { type: "Nouns", value: 67, fill: "#8f46ea" },
     { type: "Counters", value: 12, fill: "#d952d9" },
-]
+];
 
 const Stats = () => {
     return (
