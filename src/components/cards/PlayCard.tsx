@@ -2,7 +2,7 @@ import styles from "../../styles/sass/components/cards/PlayCard.module.scss";
 import { Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChalkboardTeacher, faGamepad, faPlay, faUserGraduate } from "@fortawesome/free-solid-svg-icons";
+import { faGamepad, faPlay, faUserGraduate } from "@fortawesome/free-solid-svg-icons";
 import SessionWizard from "../layout/wizard/SessionWizard";
 import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
 import DashboardCardLink from "../layout/card/DashboardCardLink";

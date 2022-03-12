@@ -1,4 +1,4 @@
-import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import FontSelectorButton from "../ui/buttons/FontSelectorButton";
 import ThemeButton from "../ui/buttons/ThemeButton";
 import UserButton from "../user/UserButton";

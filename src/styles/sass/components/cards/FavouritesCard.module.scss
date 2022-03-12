@@ -1,0 +1,70 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+@import "src/styles/sass/animations";
+
+.body {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.favourites {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 15px 0;
+}
+
+.favourite {
+  @include noSelect;
+  background-color: rgba($dark-1, 0.9);
+  color: $light-1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  margin: 0 10px;
+  width: 120px;
+  border-radius: 10px;
+  text-align: center;
+  transition: all ease-in-out 0.2s;
+}
+
+.favourite:hover {
+  cursor: pointer;
+  color: #FFF;
+  background-color: $dark-1;
+}
+
+.favourite:active {
+  background-color: rgba($dark-3, 0.8);
+}
+
+.icon {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: $light-2;
+}
+
+.name {
+  line-height: 15px;
+}
+
+.shake {
+  animation: shake 3s ease-in-out infinite;
+}
+
+.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 8px;
+  margin-top: 5px;
+  font-size: 1rem !important;
+  color: $bootstrap-red;
+  transition: all ease-in-out 0.2s;
+}
+
+.delete:hover {
+  color: rgba($bootstrap-red, 0.8);
+  cursor: pointer;
+}

@@ -10,6 +10,8 @@ import ScrollableContainer from "../ui/ScrollableContainer";
 import ProfileCard from "../cards/ProfileCard";
 import SettingsCard from "../cards/SettingsCard";
 import ActivityCard from "../cards/ActivityCard";
+import MistakesCard from "../cards/MistakesCard";
+import FavouritesCard from "../cards/FavouritesCard";
 
 const MainMenuPage = () => {
     return (
@@ -29,32 +31,18 @@ const MainMenuPage = () => {
                     <FeedbackCard className={styles.feedback} />
                 </Col>
 
-                <Col>
+                <Col md={6}>
                     <ScrollableContainer className={styles.main} hideScrollBar>
                         <PlayCard />
-
+                        <FavouritesCard />
                         <ActivityCard />
-
-                        {/*<DashboardCard size="md">
-                            <DashboardCard.Header>
-                                <DashboardCardHeader.Title>
-                                    Overview
-                                </DashboardCardHeader.Title>
-                            </DashboardCard.Header>
-                        </DashboardCard>*/}
                     </ScrollableContainer>
                 </Col>
 
                 <Col md={3}>
                     <HighScoresCard />
 
-                    <DashboardCard size="sm" updating>
-                        <DashboardCard.Header>
-                            <DashboardCardHeader.Title>
-                                Mistakes
-                            </DashboardCardHeader.Title>
-                        </DashboardCard.Header>
-                    </DashboardCard>
+                    <MistakesCard />
 
                     <DashboardCard size="sm" loading>
                         <DashboardCard.Header>
