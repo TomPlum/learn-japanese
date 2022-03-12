@@ -5,13 +5,16 @@
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
 }
 
+.body {
+  padding: 6px 0;
+}
+
 .start {
   background-color: $bootstrap-green;
   color: $light-1 !important;
   text-align: center;
   padding: 10px;
   border-radius: 5px;
-  margin: 0 5px 10px 5px;
   transition: all ease-in-out 0.2s;
   text-transform: uppercase;
 }
@@ -27,13 +30,11 @@
 }
 
 .left {
-  padding-left: 20px;
-  padding-right: 5px;
+  padding-right: 8px;
 }
 
 .right {
-  padding-right: 20px;
-  padding-left: 5px;
+  padding-left: 8px;
 }
 
 .last {

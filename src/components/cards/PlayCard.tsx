@@ -18,7 +18,6 @@ const PlayCard = () => {
     }
 
     const props: DashboardCardProps = {
-        size: "md",
         error: error,
         id: "play-card",
         loading: loading,
@@ -27,7 +26,7 @@ const PlayCard = () => {
 
     return (
         <DashboardCard {...props}>
-            <DashboardCard.Body>
+            <DashboardCard.Body className={styles.body}>
                 <Row>
                     <Col xs={12}>
                         <p onClick={handleStart} className={styles.start} data-testid="launch-wizard">
@@ -43,20 +42,6 @@ const PlayCard = () => {
                     </Col>
                     <Col className={styles.right}>
                         <DashboardCardLink text="Last Learn Session" icon={faUserGraduate} className={styles.last} />
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col>
-                        <div className={styles.favourites}>
-                            <div className={styles.favourite}>
-                                <FontAwesomeIcon icon={faChalkboardTeacher} fixedWidth />
-                                <span>Kyoiku Kanji</span>
-                            </div>
-                        </div>
-                    </Col>
-                    <Col>
-
                     </Col>
                 </Row>
             </DashboardCard.Body>
