@@ -11,18 +11,20 @@ import JLTPLevel from "../../domain/learn/JLTPLevel";
 const mockRepoRead = jest.fn();
 const mockRepoGetBySearchTerm = jest.fn();
 const mockRepoGetByFilter = jest.fn();
+const mockGetRandom = jest.fn();
 
 jest.mock("../../repository/KanjiRepository", () => {
     return function () {
         return {
             read: mockRepoRead,
             getByFilter: mockRepoGetByFilter,
-            getBySearchTerm: mockRepoGetBySearchTerm
+            getBySearchTerm: mockRepoGetBySearchTerm,
+            getRandomKanji: mockGetRandom
         }
     }
 });
 
-const kanji = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], []);
+const kanji = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 10, []);
 
 describe("Kanji Service", () => {
     const service = new KanjiService();
@@ -209,6 +211,36 @@ describe("Kanji Service", () => {
             mockRepoGetByFilter.mockRejectedValueOnce({ results: [], error: "Something went wrong." });
             return service.filter(0, 10, "student", [KyoikuGrade.ONE], [JLTPLevel.N5], 6).catch(response => {
                 expect(response.error).toBe("Something went wrong.");
+            });
+        });
+    });
+
+    describe("Random Kanji", () => {
+        it("Should call the repository", () => {
+            mockGetRandom.mockResolvedValueOnce({});
+            return service.randomKanji().then(() => {
+                expect(mockGetRandom).toHaveBeenCalled();
+            });
+        });
+
+        it("Should return the kanji from the repository", () => {
+            mockGetRandom.mockResolvedValueOnce(kanji);
+            return service.randomKanji().then(response => {
+                expect(response.value).toBe(kanji);
+            });
+        });
+
+        it("Should return an error message if the response is undefined", () => {
+            mockGetRandom.mockResolvedValueOnce(undefined);
+            return service.randomKanji().then(response => {
+                expect(response.error).toBe("Failed to retrieve random kanji");
+            });
+        });
+
+        it("Should return an error message if the repository call is rejected", () => {
+            mockGetRandom.mockRejectedValueOnce(undefined);
+            return service.randomKanji().then(response => {
+                expect(response.error).toBe("Failed to retrieve random kanji");
             });
         });
     });

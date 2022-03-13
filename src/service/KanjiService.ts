@@ -94,6 +94,10 @@ class KanjiService {
         });
     }
 
+    /**
+     * Retrieves a random kanji of any grade.
+     * @return A random kanji character.
+     */
     public async randomKanji(): Promise<RandomKanji> {
         return this._repository.getRandomKanji().then(response => {
             if (response) {
