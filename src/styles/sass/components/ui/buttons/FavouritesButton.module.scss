@@ -1,0 +1,76 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+@import "src/styles/sass/animations";
+
+.favourite {
+  @include noSelect;
+  width: 120px;
+  display: flex;
+  padding: 12px;
+  color: $light-1;
+  margin: 0 10px;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  transition: all ease-in-out 0.2s;
+  background-color: rgba($dark-1, 0.9);
+}
+
+.favourite:hover {
+  cursor: pointer;
+  color: #FFF;
+  background-color: $dark-1;
+}
+
+.favourite:active {
+  background-color: rgba($dark-3, 0.8);
+}
+
+.icon {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: $light-2;
+}
+
+.star {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: $inspect;
+}
+
+.name {
+  line-height: 15px;
+}
+
+.shake {
+  animation: shake 2.5s ease-in-out infinite;
+}
+
+.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 8px;
+  margin-top: 5px;
+  font-size: 1rem !important;
+  color: $bootstrap-red;
+  transition: all ease-in-out 0.2s;
+}
+
+.delete:hover {
+  color: rgba($bootstrap-red, 0.8);
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pause {
+  // Runs it one more time to make sure they square themselves off again.
+  animation: shake 1s ease-in-out;
+}

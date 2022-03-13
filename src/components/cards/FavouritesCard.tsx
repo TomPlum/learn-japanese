@@ -1,20 +1,18 @@
 import DashboardCard from "../layout/card/DashboardCard";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
-import { faAtom, faChalkboardTeacher, faCheckCircle, faLanguage, faPencilAlt, faSpinner, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faAtom, faChalkboardTeacher, faCheckCircle, faLanguage, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/cards/FavouritesCard.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
+import FavouriteButton from "../ui/buttons/FavouriteButton";
 
 const FavouritesCard = () => {
 
     const [editing, setEditing] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const classes = [styles.favourite];
+    const handleDelete = () => {
 
-    if (editing) {
-        classes.push(styles.shake);
     }
 
     return (
@@ -27,26 +25,30 @@ const FavouritesCard = () => {
 
             <DashboardCard.Body className={styles.body}>
                 <div className={styles.favourites}>
-                    <div className={classes.join(" ")}>
-                        {editing && <FontAwesomeIcon icon={faTimes} className={styles.delete} title="Delete" />}
-                        <FontAwesomeIcon icon={faChalkboardTeacher} fixedWidth className={styles.icon} />
-                        <span className={styles.name}>Kyoiku Kanji</span>
-                    </div>
-                    <div className={classes.join(" ")}>
-                        {editing && <FontAwesomeIcon icon={faTimes} className={styles.delete} title="Delete" />}
-                        <FontAwesomeIcon icon={faKickstarterK} fixedWidth className={styles.icon} />
-                        <span className={styles.name}>Hardcode Kana</span>
-                    </div>
-                    <div className={classes.join(" ")}>
-                        {editing && <FontAwesomeIcon icon={faTimes} className={styles.delete} title="Delete" />}
-                        <FontAwesomeIcon icon={faLanguage} fixedWidth className={styles.icon} />
-                        <span className={styles.name}>Kanji Speedrun</span>
-                    </div>
-                    <div className={classes.join(" ")}>
-                        {editing && <FontAwesomeIcon icon={faTimes} className={styles.delete} title="Delete" />}
-                        <FontAwesomeIcon icon={faAtom} fixedWidth className={styles.icon} />
-                        <span className={styles.name}>Learn Particles</span>
-                    </div>
+                    <FavouriteButton
+                        editing={editing}
+                        name="Kyoiku Kanji"
+                        onDelete={handleDelete}
+                        icon={faChalkboardTeacher}
+                    />
+                    <FavouriteButton
+                        editing={editing}
+                        name="Hardcode Kana"
+                        icon={faKickstarterK}
+                        onDelete={handleDelete}
+                    />
+                    <FavouriteButton
+                        editing={editing}
+                        icon={faLanguage}
+                        name="Kanji Speedrun"
+                        onDelete={handleDelete}
+                    />
+                    <FavouriteButton
+                        editing={editing}
+                        icon={faAtom}
+                        name="Learn Particles"
+                        onDelete={handleDelete}
+                    />
                 </div>
             </DashboardCard.Body>
         </DashboardCard>
