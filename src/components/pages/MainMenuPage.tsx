@@ -1,9 +1,7 @@
 import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss";
 import { Col, Container, Row } from "react-bootstrap";
-import DashboardCard from "../layout/card/DashboardCard";
 import PlayCard from "../cards/PlayCard";
 import HighScoresCard from "../cards/HighScoresCard";
-import DashboardCardHeader from "../layout/card/DashboardCardHeader";
 import DashboardToolbar from "../layout/DashboardToolbar";
 import FeedbackCard from "../cards/FeedbackCard";
 import ScrollableContainer from "../ui/ScrollableContainer";
@@ -12,6 +10,7 @@ import SettingsCard from "../cards/SettingsCard";
 import ActivityCard from "../cards/ActivityCard";
 import MistakesCard from "../cards/MistakesCard";
 import FavouritesCard from "../cards/FavouritesCard";
+import StatisticsCard from "../cards/StatisticsCard";
 
 const MainMenuPage = () => {
     return (
@@ -44,13 +43,7 @@ const MainMenuPage = () => {
 
                     <MistakesCard />
 
-                    <DashboardCard size="sm" loading>
-                        <DashboardCard.Header>
-                            <DashboardCardHeader.Title>
-                                Stats
-                            </DashboardCardHeader.Title>
-                        </DashboardCard.Header>
-                    </DashboardCard>
+                    <StatisticsCard />
                 </Col>
             </Row>
         </Container>

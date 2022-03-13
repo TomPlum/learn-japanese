@@ -4,6 +4,7 @@ import styles from "../../styles/sass/components/cards/StatisticsCard.module.scs
 import { faChevronLeft, faChevronRight, faGamepad, faSadCry, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { Cell, Pie, PieChart } from "recharts";
 
 const dummyKanjiData = [
     { grade: 1, value: 80, fill: "#4189ff" },
@@ -15,8 +16,8 @@ const dummyKanjiData = [
 ];
 
 const dummyKanaData = [
-    { type: "Hiragana", value: 120, fill: "#4189ff" },
-    { type: "Katakana", value: 78, fill: "#5dca41" },
+    { type: "Hiragana", value: 120, fill: "#3167c6" },
+    { type: "Katakana", value: 78, fill: "#5cce3d" },
 ];
 
 const dummyOtherData = [
@@ -40,17 +41,19 @@ const StatisticsCard = () => {
             case StatView.PLAY: {
                 return (
                     <>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faGamepad} fixedWidth />
-                            <span>112</span>
-                        </div>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faTrophy} fixedWidth />
-                            <span>64</span>
-                        </div>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faSadCry} fixedWidth />
-                            <span>48</span>
+                        <div className={styles.stats}>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faGamepad} fixedWidth />
+                                <span>112</span>
+                            </div>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faTrophy} fixedWidth />
+                                <span>64</span>
+                            </div>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faSadCry} fixedWidth />
+                                <span>48</span>
+                            </div>
                         </div>
                     </>
                 );
@@ -58,17 +61,19 @@ const StatisticsCard = () => {
             case StatView.LEARN: {
                 return (
                     <>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faGamepad} fixedWidth />
-                            <span>112</span>
-                        </div>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faTrophy} fixedWidth />
-                            <span>64</span>
-                        </div>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faSadCry} fixedWidth />
-                            <span>48</span>
+                        <div className={styles.stats}>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faGamepad} fixedWidth />
+                                <span>112</span>
+                            </div>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faTrophy} fixedWidth />
+                                <span>64</span>
+                            </div>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faSadCry} fixedWidth />
+                                <span>48</span>
+                            </div>
                         </div>
                     </>
                 );
@@ -76,17 +81,19 @@ const StatisticsCard = () => {
             case StatView.KANJI: {
                 return (
                     <>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faGamepad} fixedWidth />
-                            <span>112</span>
-                        </div>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faTrophy} fixedWidth />
-                            <span>64</span>
-                        </div>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faSadCry} fixedWidth />
-                            <span>48</span>
+                        <div className={styles.stats}>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faGamepad} fixedWidth />
+                                <span>112</span>
+                            </div>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faTrophy} fixedWidth />
+                                <span>64</span>
+                            </div>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faSadCry} fixedWidth />
+                                <span>48</span>
+                            </div>
                         </div>
                     </>
                 );
@@ -94,17 +101,38 @@ const StatisticsCard = () => {
             case StatView.KANA: {
                 return (
                     <>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faGamepad} fixedWidth />
-                            <span>112</span>
+                        <div className={styles.visual}>
+                            <p className={styles.label}>Kana</p>
+                            <PieChart width={125} height={125}>
+                                <Pie
+                                    nameKey="type"
+                                    dataKey="value"
+                                    paddingAngle={4}
+                                    innerRadius={30}
+                                    outerRadius={50}
+                                    animationBegin={0}
+                                    data={dummyKanaData}
+                                >
+                                    {dummyKanaData.map(datum => {
+                                        return <Cell key={`cell-${datum.type}`} fill={datum.fill} stroke="none" />
+                                    })}
+                                </Pie>
+                            </PieChart>
                         </div>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faTrophy} fixedWidth />
-                            <span>64</span>
-                        </div>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faSadCry} fixedWidth />
-                            <span>48</span>
+
+                        <div className={styles.stats}>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faGamepad} fixedWidth />
+                                <span>112</span>
+                            </div>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faTrophy} fixedWidth />
+                                <span>64</span>
+                            </div>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faSadCry} fixedWidth />
+                                <span>48</span>
+                            </div>
                         </div>
                     </>
                 );
@@ -112,17 +140,19 @@ const StatisticsCard = () => {
             case StatView.OTHER: {
                 return (
                     <>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faGamepad} fixedWidth />
-                            <span>112</span>
-                        </div>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faTrophy} fixedWidth />
-                            <span>64</span>
-                        </div>
-                        <div className={styles.stat}>
-                            <FontAwesomeIcon icon={faSadCry} fixedWidth />
-                            <span>48</span>
+                        <div className={styles.stats}>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faGamepad} fixedWidth />
+                                <span>112</span>
+                            </div>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faTrophy} fixedWidth />
+                                <span>64</span>
+                            </div>
+                            <div className={styles.stat}>
+                                <FontAwesomeIcon icon={faSadCry} fixedWidth />
+                                <span>48</span>
+                            </div>
                         </div>
                     </>
                 );
