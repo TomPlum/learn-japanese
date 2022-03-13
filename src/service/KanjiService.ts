@@ -16,6 +16,11 @@ export interface KanjiSearch {
     error?: string;
 }
 
+export interface RandomKanji {
+    value?: Kanji;
+    error?: string;
+}
+
 class KanjiService {
 
     private readonly _repository = new KanjiRepository();
@@ -86,6 +91,17 @@ class KanjiService {
             }
         }).catch(response => {
             return { kanji: [], error: response.error, pages: 0, quantity: 0 };
+        });
+    }
+
+    public async randomKanji(): Promise<RandomKanji> {
+        return this._repository.getRandomKanji().then(response => {
+            if (response) {
+                return { value: response };
+            }
+            return { error: "Failed to retrieve random kanji" };
+        }).catch(() => {
+            return { error: "Failed to retrieve random kanji" };
         });
     }
 }

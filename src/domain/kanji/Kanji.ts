@@ -13,11 +13,12 @@ export class Kanji extends Learnable {
     private readonly _grade: KyoikuGrade;
     private readonly _jlpt: JLTPLevel;
     private readonly _source: string;
+    private readonly _strokes: number | undefined;
     private readonly _examples: Example[];
     private readonly _tags: string[];
 
     constructor(character: string, readings: KanjiReading[], meanings: string[], grade: KyoikuGrade, jltp: JLTPLevel,
-                source: string, examples: Example[], tags: string[]) {
+                source: string, examples: Example[], strokes: number | undefined, tags: string[]) {
         super();
         this._character = character;
         this._readings = readings;
@@ -26,6 +27,7 @@ export class Kanji extends Learnable {
         this._jlpt = jltp;
         this._source = source;
         this._examples = examples;
+        this._strokes = strokes;
         this._tags = tags;
     }
 
@@ -51,6 +53,10 @@ export class Kanji extends Learnable {
 
     get examples(): Example[] {
         return this._examples;
+    }
+
+    get strokes(): number | undefined {
+        return this._strokes;
     }
 
     getTitle(): string {

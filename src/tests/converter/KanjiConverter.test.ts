@@ -52,6 +52,12 @@ describe("Kanji Converter", () => {
         expect(response[0].source).toBe('some-link');
     });
 
+    it("Should convert the strokes", () => {
+        source.strokes = 15;
+        const response = converter.convert([source]);
+        expect(response[0].strokes).toBe(15);
+    });
+
     it("Should convert the source as an empty string if undefined", () => {
         source.source = undefined;
         const response = converter.convert([source]);

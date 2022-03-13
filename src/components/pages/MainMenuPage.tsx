@@ -11,6 +11,7 @@ import ActivityCard from "../cards/ActivityCard";
 import MistakesCard from "../cards/MistakesCard";
 import FavouritesCard from "../cards/FavouritesCard";
 import StatisticsCard from "../cards/StatisticsCard";
+import KanjiShowcaseCard from "../cards/KanjiShowcaseCard";
 
 const MainMenuPage = () => {
     return (
@@ -24,10 +25,9 @@ const MainMenuPage = () => {
             <Row className={styles.row}>
                 <Col md={3} className={styles.col}>
                     <ProfileCard />
-
                     <SettingsCard />
-
-                    <FeedbackCard className={styles.feedback} />
+                    <KanjiShowcaseCard />
+                    <FeedbackCard />
                 </Col>
 
                 <Col md={6}>
@@ -40,9 +40,7 @@ const MainMenuPage = () => {
 
                 <Col md={3}>
                     <HighScoresCard />
-
                     <MistakesCard />
-
                     <StatisticsCard />
                 </Col>
             </Row>

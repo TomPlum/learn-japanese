@@ -28,9 +28,10 @@ class KanjiConverter {
             const jlpt = JLTPLevel.fromString(`N${result.jlpt}`)!
             const tags = result.tags;
             const source = result.source ?? "";
+            const strokes = result.strokes;
             const examples = result.examples.map((it: KanjiExample) => new Example(it.value, it.kana, it.english));
 
-            return new Kanji(result.character, readings, result.meanings, grade, jlpt, source, examples, tags);
+            return new Kanji(result.character, readings, result.meanings, grade, jlpt, source, examples, strokes, tags);
         });
     }
 

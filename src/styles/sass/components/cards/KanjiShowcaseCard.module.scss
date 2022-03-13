@@ -1,0 +1,99 @@
+@import "src/styles/sass/colours";
+
+$highlight-colour: rgba($dark-1, 0.7);
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px !important;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.kanji {
+  font-size: 3em;
+  text-align: center;
+  background-color: $highlight-colour;
+  width: 80px;
+  line-height: 80px;
+  border-radius: 10px;
+  color: $light-1;
+  transition: all ease-in-out 0.2s;
+  margin-bottom: 10px;
+}
+
+.kanji:hover {
+  background-color: rgba($dark-1, 0.9);
+  color: #fff;
+}
+
+.meaning {
+  margin: 0;
+  background-color: $highlight-colour;
+  padding: 5px 10px;
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+  color: #FFF;
+}
+
+.readings {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.on, .kun {
+  background-color: $highlight-colour;
+  padding: 6px 10px;
+  width: 50%;
+  text-align: center;
+  margin: 10px 0;
+  border-radius: 10px;
+  color: #FFF;
+}
+
+.on {
+  margin-right: 5px;
+}
+
+.kun {
+  margin-left: 5px;
+}
+
+.label {
+  font-family: "Ciutadella Rounded Semi Bold", sans-serif;
+  color: $light-2;
+}
+
+.attributes {
+  display: flex;
+  flex-direction: column;
+}
+
+.attributes:first-child {
+  margin-right: 10px;
+}
+
+.attributes:last-child {
+  margin-left: 10px;
+}
+
+.attribute {
+  background-color: $highlight-colour;
+  padding: 5px 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.attribute > svg {
+  margin-right: 5px;
+  color: $light-2;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+}
