@@ -31,8 +31,8 @@ const MainMenuPage = () => {
                 </Col>
 
                 <Col md={6}>
+                    <PlayCard />
                     <ScrollableContainer className={styles.main} hideScrollBar>
-                        <PlayCard />
                         <FavouritesCard />
                         <ActivityCard />
                     </ScrollableContainer>
