@@ -35,9 +35,9 @@ const KanjiShowcaseCard = () => {
     }, []);
 
     return (
-        <DashboardCard loading={loading} error={error}>
+        <DashboardCard loading={loading} error={error} height={267}>
             <DashboardCard.Header>
-                <DashboardCardHeader.Title>Kanji of the Day</DashboardCardHeader.Title>
+                <DashboardCardHeader.Title>Kanji Showcase</DashboardCardHeader.Title>
             </DashboardCard.Header>
 
             <DashboardCard.Body className={styles.body}>

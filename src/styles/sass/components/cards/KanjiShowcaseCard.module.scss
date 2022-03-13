@@ -16,10 +16,14 @@ $highlight-colour: rgba($dark-1, 0.7);
   background-color: $highlight-colour;
   width: 80px;
   line-height: 80px;
+  height: 80px;
   border-radius: 10px;
   color: $inspect;
   transition: all ease-in-out 0.2s;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .kanji:hover {
@@ -101,7 +105,7 @@ $highlight-colour: rgba($dark-1, 0.7);
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
-  width: 57.5px;
+  width: 62px;
 }
 
 .attribute > svg {
