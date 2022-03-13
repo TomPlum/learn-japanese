@@ -184,8 +184,8 @@ export default class KanjiRepository implements Repository<Kanji> {
     public async getRandomKanji(): Promise<Kanji | undefined> {
         return RestClient.get<KanjiResponseModel>('/kanji/random').then(response => {
             return response.data ? this.converter.convert([response.data])[0] : undefined;
-        }).catch(response => {
-            return Promise.reject(response);
+        }).catch(() => {
+            return undefined;
         });
     }
 
