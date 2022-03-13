@@ -28,7 +28,7 @@ const KanjiShowcaseCard = () => {
                 setKanji(response.value);
             }
         }).catch(response => {
-            setError(response);
+            setError(response.error);
         }).finally(() => {
             setLoading(false);
         });
