@@ -6,7 +6,7 @@ import { Kanji } from "../../domain/kanji/Kanji";
 import styles from "../../styles/sass/components/cards/KanjiShowcaseCard.module.scss";
 import { useFontSelector } from "../../hooks";
 import Copyable from "../ui/Copyable";
-import { faChalkboardTeacher, faList, faPaintBrush, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faChalkboardTeacher, faList, faListAlt, faPaintBrush, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const KanjiShowcaseCard = () => {
@@ -67,7 +67,7 @@ const KanjiShowcaseCard = () => {
                             <span>{kanji?.strokes ?? "N/A"}</span>
                         </div>
                         <div className={styles.attribute} title="Examples">
-                            <FontAwesomeIcon icon={faList} fixedWidth />
+                            <FontAwesomeIcon icon={faListAlt} fixedWidth />
                             <span>{kanji?.examples.length}</span>
                         </div>
                     </div>

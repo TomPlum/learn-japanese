@@ -17,14 +17,14 @@ $highlight-colour: rgba($dark-1, 0.7);
   width: 80px;
   line-height: 80px;
   border-radius: 10px;
-  color: $light-1;
+  color: $inspect;
   transition: all ease-in-out 0.2s;
   margin-bottom: 10px;
 }
 
 .kanji:hover {
   background-color: rgba($dark-1, 0.9);
-  color: #fff;
+  color: rgba($inspect, 0.9);
 }
 
 .meaning {
@@ -79,13 +79,19 @@ $highlight-colour: rgba($dark-1, 0.7);
   margin-left: 10px;
 }
 
+.attributes:last-child > .attribute:last-child > svg {
+  margin-bottom: 2px;
+}
+
 .attribute {
   background-color: $highlight-colour;
   padding: 5px 10px;
   border-radius: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-bottom: 10px;
+  width: 57.5px;
 }
 
 .attribute > svg {
