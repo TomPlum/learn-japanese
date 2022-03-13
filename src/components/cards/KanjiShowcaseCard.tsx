@@ -77,10 +77,12 @@ const KanjiShowcaseCard = () => {
 
                 <div className={styles.readings}>
                     <span className={styles.on}>
-                        <span className={styles.label}>on: </span>{kanji?.getOnyomiReadings()[0]?.kana ?? "N/A"}
+                        <span className={styles.label}>on</span>
+                        <span>{kanji?.getOnyomiReadings()[0]?.kana ?? "N/A"}</span>
                     </span>
                     <span className={styles.kun}>
-                        <span  className={styles.label}>kun: </span>{kanji?.getKunyomiReadings()[0]?.kana ?? "N/A"}
+                        <span className={styles.label}>kun</span>
+                        <span>{kanji?.getKunyomiReadings()[0]?.kana ?? "N/A"}</span>
                     </span>
                 </div>
             </DashboardCard.Body>
