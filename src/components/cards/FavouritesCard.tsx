@@ -15,6 +15,10 @@ const FavouritesCard = () => {
 
     }
 
+    const handleStart = () => {
+
+    }
+
     return (
         <DashboardCard className={styles.card} loading={loading}>
             <DashboardCard.Header>
@@ -28,6 +32,7 @@ const FavouritesCard = () => {
                     <FavouriteButton
                         editing={editing}
                         name="Kyoiku Kanji"
+                        onStart={handleStart}
                         onDelete={handleDelete}
                         icon={faChalkboardTeacher}
                     />
@@ -35,17 +40,20 @@ const FavouritesCard = () => {
                         editing={editing}
                         name="Hardcode Kana"
                         icon={faKickstarterK}
+                        onStart={handleStart}
                         onDelete={handleDelete}
                     />
                     <FavouriteButton
                         editing={editing}
                         icon={faLanguage}
                         name="Kanji Speedrun"
+                        onStart={handleStart}
                         onDelete={handleDelete}
                     />
                     <FavouriteButton
-                        editing={editing}
                         icon={faAtom}
+                        editing={editing}
+                        onStart={handleStart}
                         name="Learn Particles"
                         onDelete={handleDelete}
                     />

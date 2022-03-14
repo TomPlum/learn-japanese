@@ -53,7 +53,14 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
     }
 
     return (
-        <div className={classes.join(" ")} onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut} onClick={handleStart}>
+        <div className={classes.join(" ")}>
+            <div
+                onClick={handleStart}
+                className={styles.surface}
+                onMouseOut={handleMouseOut}
+                onMouseEnter={handleMouseEnter}
+            />
+
             {editing && (
                 <FontAwesomeIcon
                     title="Delete"
@@ -64,7 +71,7 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
             )}
 
             {!editing && inside && (
-                <Fade in={inside} timeout={1000} appear>
+                <Fade in={inside} timeout={2000} appear>
                     <div className={styles.container}>
                         <FontAwesomeIcon icon={faStar} fixedWidth className={styles.star} />
                         <span className={styles.name}>Start</span>
@@ -73,7 +80,7 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
             )}
 
             {!inside && (
-                <Fade in={!inside} timeout={1000} appear>
+                <Fade in={!inside} timeout={2000} appear>
                     <div className={styles.container}>
                         <FontAwesomeIcon icon={icon} fixedWidth className={styles.icon} />
                         <span className={styles.name}>{name}</span>
