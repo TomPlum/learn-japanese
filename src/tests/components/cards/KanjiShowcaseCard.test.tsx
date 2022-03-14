@@ -8,6 +8,7 @@ import KanjiShowcaseCard from "../../../components/cards/KanjiShowcaseCard";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
 import { setFont } from "../../../slices/FontSlice";
+import { fireEvent } from "@testing-library/react";
 
 const mockKanjiService = jest.fn();
 
@@ -17,6 +18,17 @@ jest.mock("../../../service/KanjiService", () => {
 
 const kanji = new Kanji(
     "魚",
+    [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("go", "ご", ReadingType.ON)],
+    ["fish"],
+    KyoikuGrade.TWO,
+    JLTPLevel.N5, "https://jisho.org/魚",
+    [new Example("金魚", ["きんぎょ"], ["goldfish"])],
+    10,
+    ["animal"]
+);
+
+const kanji2 = new Kanji(
+    "子",
     [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("go", "ご", ReadingType.ON)],
     ["fish"],
     KyoikuGrade.TWO,
@@ -75,4 +87,16 @@ test('Should render the error if the service call is rejected', async () => {
     mockKanjiService.mockRejectedValueOnce({ error: "Failed to retrieve kanji." });
     const component = renderReduxConsumer(<KanjiShowcaseCard />);
     expect(await component.findByText('Failed to retrieve kanji.')).toBeInTheDocument();
+});
+
+test('Clicking the shuffle button should render a new kanji', async () => {
+    // Should render the first kanji initially
+    mockKanjiService.mockResolvedValueOnce({ value: kanji });
+    const component = renderReduxConsumer(<KanjiShowcaseCard />);
+    expect(await component.findByText('魚')).toBeInTheDocument();
+
+    // Clicking the shuffle button should render the next
+    mockKanjiService.mockResolvedValueOnce({ value: kanji2 });
+    fireEvent.click(component.getByTitle('Shuffle'));
+    expect(await component.findByText('子')).toBeInTheDocument();
 });

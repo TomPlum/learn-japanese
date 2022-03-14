@@ -6,22 +6,21 @@ import { Kanji } from "../../domain/kanji/Kanji";
 import styles from "../../styles/sass/components/cards/KanjiShowcaseCard.module.scss";
 import { useFontSelector } from "../../hooks";
 import Copyable from "../ui/Copyable";
-import { faChalkboardTeacher, faList, faListAlt, faPaintBrush, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faChalkboardTeacher, faListAlt, faPaintBrush, faPencilAlt, faRandom } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const KanjiShowcaseCard = () => {
 
     const [loading, setLoading] = useState(false);
+    const [updating, setUpdating] = useState(false);
     const [error, setError] = useState("");
     const [kanji, setKanji] = useState<Kanji | undefined>(undefined);
 
     const service = new KanjiService();
     const font = useFontSelector(state => state.font.selected);
 
-    useEffect(() => {
-        setLoading(true);
-
-        service.randomKanji().then(response => {
+    const shuffleKanji = () => {
+        return service.randomKanji().then(response => {
             if (response.error) {
                 setError(response.error);
             } else {
@@ -29,15 +28,24 @@ const KanjiShowcaseCard = () => {
             }
         }).catch(response => {
             setError(response.error);
-        }).finally(() => {
-            setLoading(false);
         });
+    }
+
+    useEffect(() => {
+        setLoading(true);
+        shuffleKanji().finally(() => setLoading(false));
     }, []);
 
+    const handleShuffle = () => {
+        setUpdating(true);
+        shuffleKanji().finally(() => setUpdating(false));
+    }
+
     return (
-        <DashboardCard loading={loading} error={error} height={267}>
+        <DashboardCard loading={loading} updating={updating} error={error} height={267}>
             <DashboardCard.Header>
                 <DashboardCardHeader.Title>Kanji Showcase</DashboardCardHeader.Title>
+                <DashboardCardHeader.Icon icon={faRandom} onClick={handleShuffle} disabled={updating} title="Shuffle" />
             </DashboardCard.Header>
 
             <DashboardCard.Body className={styles.body}>
