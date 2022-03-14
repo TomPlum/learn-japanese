@@ -5,20 +5,33 @@ export interface DashboardCardIconProps extends FontAwesomeIconProps {
     href?: string;
     title?: string;
     className?: string;
+    disabled?: boolean;
     onClick?: () => void;
 }
 
 const DashboardCardIcon = (props: DashboardCardIconProps) => {
-    const { title, href, className, onClick } = props;
+    const { title, href, disabled, className, onClick } = props;
+
+    const classes = [styles.icon, className];
+
+    if (disabled) {
+        classes.push(styles.disabled);
+    }
+
+    const handleClick = () => {
+        if (!disabled) {
+            onClick?.();
+        }
+    }
 
     return (
         <FontAwesomeIcon
             {...props}
             href={href}
             title={title}
-            onClick={onClick}
+            onClick={handleClick}
+            className={classes.join(" ")}
             data-testid="dashboard-card-icon"
-            className={[styles.icon, className].join(" ")}
         />
     );
 }

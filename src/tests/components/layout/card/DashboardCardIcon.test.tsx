@@ -29,3 +29,14 @@ test('Should pass the href prop to the icon', () => {
     const component = render(<DashboardCardIcon icon={faApple} href="https://test.com" />);
     expect(component.getByTestId('dashboard-card-icon')).toHaveAttribute('href', 'https://test.com');
 });
+
+test('Should not call the onClick event handler when clicking it in a disabled state', () => {
+    const component = render(<DashboardCardIcon icon={faApple} disabled />);
+    fireEvent.click(component.getByTestId('dashboard-card-icon'));
+    expect(onClickHandler).not.toHaveBeenCalled();
+});
+
+test('Should set the disabled class name when disabled', () => {
+    const component = render(<DashboardCardIcon icon={faApple} disabled />);
+    expect(component.getByTestId('dashboard-card-icon')).toHaveClass('disabled');
+});

@@ -10,3 +10,10 @@
   color: $light-1;
   cursor: pointer;
 }
+
+.disabled {
+  color: rgba($light-2, 0.6);
+}
+.disabled:hover {
+  cursor: auto;
+}
