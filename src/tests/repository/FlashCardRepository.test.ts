@@ -68,6 +68,7 @@ describe("Flash Card Repository", () => {
                             JLTPLevel.N4,
                             "https://en.wiktionary.org/wiki/%E4%B8%80#Kanji",
                             [new Example("一つ", ["ひとつ"], ["one"])],
+                            1,
                             ["number"]
                         ),
                         new SpaceRepetitionDetails(3.0, 2, 4, "2021-10-02")
@@ -92,7 +93,7 @@ describe("Flash Card Repository", () => {
     });
 
     describe("Update", () => {
-        const kanji = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], ["number"]);
+        const kanji = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], 1, ["number"]);
 
         it("Should call the message queue with the endpoint details and request", () => {
             const card = new FlashCard(10, kanji, new SpaceRepetitionDetails(2.5, 0, 0, "2020-10-21"));

@@ -15,6 +15,7 @@ describe("Kanji", () => {
             JLTPLevel.N5,
             "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
             [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+            1,
             []
         );
 
@@ -52,6 +53,7 @@ describe("Kanji", () => {
                 JLTPLevel.N5,
                 "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
                 [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+                1,
                 []
             );
             expect(kanji.getKana()).toStrictEqual(["ひと"]);
@@ -65,6 +67,7 @@ describe("Kanji", () => {
                 JLTPLevel.N5,
                 "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
                 [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+                1,
                 []
             );
             expect(kanji.getKana()).toStrictEqual(["じん"]);
@@ -78,6 +81,7 @@ describe("Kanji", () => {
                 JLTPLevel.N5,
                 "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
                 [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+                1,
                 []
             );
             expect(kanji.getKana()).toStrictEqual([]);
@@ -118,14 +122,14 @@ describe("Kanji", () => {
 
     describe("Equality", () => {
         it("Should return true when two Kanji have the same character", () => {
-            const first = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], ["number"]);
-            const second = new Kanji("一", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5,"", [], ["animal"]);
+            const first = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], 1, ["number"]);
+            const second = new Kanji("一", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5,"", [], 1, ["animal"]);
             expect(first.equals(second)).toBe(true);
         });
 
         it("Should return false when two Kanji have different characters", () => {
-            const first = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5,"", [], ["number"]);
-            const second = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]);
+            const first = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5,"", [], 1, ["number"]);
+            const second = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 9, ["animal"]);
             expect(first.equals(second)).toBe(false);
         });
     });

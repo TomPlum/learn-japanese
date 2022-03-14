@@ -7,10 +7,10 @@ import { Learnable } from "../../../domain/learn/Learnable";
 import JLTPLevel from "../../../domain/learn/JLTPLevel";
 
 const data = [
-    new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], ["number"]),
-    new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]),
-    new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]),
-    new Kanji("人", [new KanjiReading("hito", "ひと", ReadingType.KUN)], ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], [])
+    new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], 1, ["number"]),
+    new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 9, ["animal"]),
+    new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 10, ["animal"]),
+    new Kanji("人", [new KanjiReading("hito", "ひと", ReadingType.KUN)], ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], 1, [])
 ];
 
 describe("Tag Filter", () => {

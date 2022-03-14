@@ -53,7 +53,7 @@ describe("Learnable Field", () => {
         });
 
         it("Kanji", () => {
-            const kanji = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]);
+            const kanji = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 9, ["animal"]);
             expect(kanji.getValue()).toMatch(LearnableField.KANJI.validationRegex);
         });
 
@@ -63,7 +63,7 @@ describe("Learnable Field", () => {
                 ["bird"],
                 KyoikuGrade.TWO,
                 JLTPLevel.N5,
-                "", [],
+                "", [], 10,
                 ["animal"]
             ).getOnyomiReadings().map(it => it.kana);
 
@@ -75,7 +75,7 @@ describe("Learnable Field", () => {
                 [new KanjiReading("sakana", "さかな", ReadingType.KUN)],
                 ["fish"],
                 KyoikuGrade.TWO, JLTPLevel.N5, "",
-                [], ["animal"]
+                [], 10, ["animal"]
             ).getKunyomiReadings().map(it => it.kana);
 
             readings.forEach(kana => expect(kana).toMatch(LearnableField.KUNYOMI_READING.validationRegex));
