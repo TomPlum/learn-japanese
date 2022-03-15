@@ -43,7 +43,7 @@ beforeEach(() => {
     //mockRepository.mockClear();
     const repository = new KanjiRepository();
     repository.getByValue = jest.fn().mockReturnValue(() => {
-        return [new Kanji("猫", [], [], KyoikuGrade.EIGHT, JLTPLevel.N5, "", [], [])];
+        return [new Kanji("猫", [], [], KyoikuGrade.EIGHT, JLTPLevel.N5, "", [], 12, [])];
     });
 });
 

@@ -14,7 +14,7 @@ const meanings = ["person"];
 const grade = KyoikuGrade.ONE;
 const jlpt = JLTPLevel.N5;
 
-const kanji = new Kanji("人", readings, meanings, grade, jlpt, source, [new Example("外国人", ["がいこくじん"], ["foreigner"])], []);
+const kanji = new Kanji("人", readings, meanings, grade, jlpt, source, [new Example("外国人", ["がいこくじん"], ["foreigner"])], 1, []);
 
 test('Should display the kanji', () => {
     render(<KanjiExampleDisplay kanji={kanji} />);
@@ -32,7 +32,7 @@ test('Should display the kana surrounded with parentheses', () => {
 });
 
 test('Should display the kana surrounded with parentheses and separated with \'or\' if there are multiple', () => {
-    const kanji = new Kanji("人", readings, meanings, grade, jlpt, source, [new Example("外国人", ["がいこくじん", "がいこくじん"], ["foreigner"])], []);
+    const kanji = new Kanji("人", readings, meanings, grade, jlpt, source, [new Example("外国人", ["がいこくじん", "がいこくじん"], ["foreigner"])], 1, []);
     render(<KanjiExampleDisplay kanji={kanji} />);
     expect(getByTextWithMarkup('( がいこくじん or がいこくじん )')).toBeInTheDocument();
 });
@@ -43,7 +43,7 @@ test('Should display the english meaning', () => {
 });
 
 test('Should display the english meanings separated by commas if there are multiple', () => {
-    const kanji = new Kanji("人", readings, meanings, grade, jlpt, source, [new Example("外国人", ["がいこくじん"], ["foreigner", "outside person"])], []);
+    const kanji = new Kanji("人", readings, meanings, grade, jlpt, source, [new Example("外国人", ["がいこくじん"], ["foreigner", "outside person"])], 1, []);
     render(<KanjiExampleDisplay kanji={kanji} />);
     expect(screen.getByText('foreigner, outside person')).toBeInTheDocument();
 });
@@ -52,7 +52,7 @@ test('Should change to the next example when clicking the next button on via the
     const kanji = new Kanji("人", readings, meanings, grade, jlpt, source, [
         new Example("外国人", ["がいこくじん"], ["foreigner"]),
         new Example("三人", ["さんにん", "みたり"], ["three people"]),
-    ], []);
+    ], 1, []);
     const component = render(<KanjiExampleDisplay kanji={kanji} />);
     fireEvent.click(component.getByTitle('Next'));
     expect(component.getByText('三人')).toBeInTheDocument();

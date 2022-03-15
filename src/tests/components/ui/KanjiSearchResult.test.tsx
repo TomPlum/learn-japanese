@@ -19,6 +19,7 @@ const kanji = new Kanji(
     JLTPLevel.N5,
     "",
     [],
+    9,
     ["animal"]
 );
 

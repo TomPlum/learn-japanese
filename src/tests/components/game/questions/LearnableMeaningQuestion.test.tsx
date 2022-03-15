@@ -13,7 +13,7 @@ import JLTPLevel from "../../../../domain/learn/JLTPLevel";
 const isValidHandler = jest.fn();
 const ref = React.createRef<LearnableMeaningQuestion>();
 
-const fish = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish", "sea creature"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]);
+const fish = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish", "sea creature"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 9, ["animal"]);
 
 let props: LearnableMeaningQuestionProps;
 

@@ -13,17 +13,18 @@ jest.mock("../../../service/KanjiService", () => {
     return function () { return { filter: mockGetKanji } };
 });
 
-const one = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5,"", [], ["number"]);
+const one = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5,"", [], 1, ["number"]);
 const fish = new Kanji("魚",
     [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("gyo", "ぎょ", ReadingType.ON)],
     ["fish", "fish2", "fish3"],
     KyoikuGrade.TWO, JLTPLevel.N5,
     "",
     [new Example("金魚", ["きんぎょ"], ["goldfish"]), new Example("稚魚", ["ちぎょ"], ["fry (young fish)"])],
+    9,
     ["animal"]
 );
-const bird = new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], []);
-const person = new Kanji("人", [new KanjiReading("jin", "じん", ReadingType.ON)], ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], ["people"]);
+const bird = new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 8, []);
+const person = new Kanji("人", [new KanjiReading("jin", "じん", ReadingType.ON)], ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], 1, ["people"]);
 
 
 const setup = () => {

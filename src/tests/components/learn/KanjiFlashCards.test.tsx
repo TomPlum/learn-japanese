@@ -24,10 +24,10 @@ jest.mock("../../../service/SpacedRepetitionService", () => {
 const onFinishHandler = jest.fn();
 
 const srd = new SpaceRepetitionDetails(2.5, 0, 0, "2021-11-26");
-const one = new FlashCard(1, new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5,"", [], ["number"]), srd);
-const fish = new FlashCard(2, new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]), srd);
-const bird = new FlashCard(3, new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], ["animal"]), srd);
-const person = new FlashCard(4, new Kanji("人", [new KanjiReading("jin", "じん", ReadingType.ON)], ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], ["people"]), srd);
+const one = new FlashCard(1, new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5,"", [], 1, ["number"]), srd);
+const fish = new FlashCard(2, new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 9, ["animal"]), srd);
+const bird = new FlashCard(3, new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 10, ["animal"]), srd);
+const person = new FlashCard(4, new Kanji("人", [new KanjiReading("jin", "じん", ReadingType.ON)], ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], 1, ["people"]), srd);
 
 let props: KanjiFlashCardsProps;
 

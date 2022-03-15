@@ -21,6 +21,7 @@ const kanji = new Kanji(
     JLTPLevel.N5,
     "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
     [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+    1,
     []
 );
 
