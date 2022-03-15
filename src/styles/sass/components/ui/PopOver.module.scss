@@ -1,13 +1,36 @@
 @import "src/styles/sass/mixins";
+@import "src/styles/sass/colours";
 
 .title {
   @include noSelect;
   font-family: "Ciutadella Rounded Medium", sans-serif;
   font-size: 1.2em;
+  background-color: $dark-2;
+  color: $light-1;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  border-bottom: 3px solid $dark-1;
+}
+
+.title::before {
+  border-bottom: 3px solid transparent !important;
 }
 
 .text {
   @include noSelect;
   font-family: "Ciutadella Rounded", sans-serif;
   font-size: 1.2em;
+  color: $light-1;
+  border-radius: 12px;
+}
+
+.popover {
+  background-color: $dark-2;
+  border: 3px solid $dark-1;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px;
+}
+
+.popover > div::after, .popover > div::before {
+  border-bottom-color: $dark-1 !important;
 }
