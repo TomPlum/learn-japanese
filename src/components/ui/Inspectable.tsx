@@ -9,18 +9,23 @@ export type InspectableProps = {
     className?: string;
     placement?: Placement;
     popover: PopOverProps;
+    disabled?: boolean;
     color?: 'white' | 'black';
     disableUnderline?: boolean;
 }
 
 class Inspectable extends Component<InspectableProps> {
     render() {
-        const { popover, className, disableUnderline, placement, children } = this.props;
+        const { popover, disabled, className, disableUnderline, placement, children } = this.props;
 
         const classNames = [styles.inspectable, className];
 
         if (!disableUnderline) {
             classNames.push(styles.underline);
+        }
+
+        if (disabled) {
+            return children;
         }
 
         return (

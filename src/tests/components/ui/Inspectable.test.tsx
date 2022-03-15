@@ -16,8 +16,10 @@ beforeEach(() => {
     props = {
         popover: {
             title: "example title",
-            text: "example text"
+            text: "example text",
         },
+        disabled: false,
+        disableUnderline: false,
         className: "exampleClass"
     }
 });
@@ -87,4 +89,11 @@ test('Should render the text in the body of the overlay', async () => {
     const { child } = setup();
     fireEvent.click(child);
     expect(await screen.findByText('example text')).toBeInTheDocument();
+});
+
+test('Should render only the children if the disabled prop is passed as true', async () => {
+    props.disabled = true;
+    const { child } = setup();
+    fireEvent.click(child);
+    expect(await screen.findByText('Button')).toBeInTheDocument();
 });
