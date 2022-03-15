@@ -9,6 +9,7 @@ import Copyable from "../ui/Copyable";
 import { faChalkboardTeacher, faListAlt, faPaintBrush, faPencilAlt, faRandom } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Inspectable from "../ui/Inspectable";
+import ExampleDisplay from "../ui/display/ExampleDisplay";
 
 const KanjiShowcaseCard = () => {
 
@@ -18,6 +19,7 @@ const KanjiShowcaseCard = () => {
     const [updating, setUpdating] = useState(false);
     const [error, setError] = useState("");
     const [kanji, setKanji] = useState<Kanji | undefined>(undefined);
+    const [inExamples, setInExamples] = useState(false);
 
     const service = new KanjiService();
     const font = useFontSelector(state => state.font.selected);
@@ -57,12 +59,26 @@ const KanjiShowcaseCard = () => {
         return meanings;
     }
 
+    const hasExamples = (kanji?.examples ?? []).length > 0;
+    const handleViewExamples = () => {
+        if (hasExamples) {
+           setInExamples(true);
+        }
+    }
+
     const meanings = kanji?.getMeanings()?.join(", ") ?? "";
     const areTooLong = meanings.length <= MAX_MEANINGS_LENGTH;
     const fullMeanings = { title: "Meanings", text: meanings };
 
+    const examplesClasses = [styles.attribute];
+    if (hasExamples) {
+        examplesClasses.push(styles.clickable);
+    }
+
     return (
         <DashboardCard loading={loading} updating={updating} error={error} height={267}>
+            {inExamples && <ExampleDisplay examples={kanji?.examples ?? []} onDismiss={() => setInExamples(false)} />}
+
             <DashboardCard.Header>
                 <DashboardCardHeader.Title>Kanji Showcase</DashboardCardHeader.Title>
                 <DashboardCardHeader.Icon icon={faRandom} onClick={handleShuffle} disabled={updating} title="Shuffle" />
@@ -94,8 +110,8 @@ const KanjiShowcaseCard = () => {
                             <FontAwesomeIcon icon={faPaintBrush} fixedWidth />
                             <span>{kanji?.strokes ?? "N/A"}</span>
                         </div>
-                        <div className={styles.attribute} title="Examples">
-                            <FontAwesomeIcon icon={faListAlt} fixedWidth />
+                        <div className={examplesClasses.join(" ")} title="Examples" onClick={handleViewExamples}>
+                            <FontAwesomeIcon icon={faListAlt} fixedWidth className={styles.icon} />
                             <span>{kanji?.examples.length}</span>
                         </div>
                     </div>

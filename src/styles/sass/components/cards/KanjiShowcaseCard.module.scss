@@ -117,3 +117,20 @@ $highlight-colour: rgba($dark-1, 0.7);
   display: flex;
   justify-content: space-between;
 }
+
+.clickable {
+  transition: all ease-in-out 0.2s;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  background-color: rgba($dark-1, 0.9);
+}
+
+.clickable:hover > * {
+  color: #FFF;
+}
+
+.icon {
+  transition: color ease-in-out 0.2s;
+}
