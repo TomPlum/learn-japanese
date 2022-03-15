@@ -8,7 +8,7 @@ import KanjiShowcaseCard from "../../../components/cards/KanjiShowcaseCard";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
 import { setFont } from "../../../slices/FontSlice";
-import { fireEvent } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 
 const mockKanjiService = jest.fn();
 
@@ -31,6 +31,17 @@ const kanji2 = new Kanji(
     "子",
     [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("go", "ご", ReadingType.ON)],
     ["fish"],
+    KyoikuGrade.TWO,
+    JLTPLevel.N5, "https://jisho.org/魚",
+    [new Example("金魚", ["きんぎょ"], ["goldfish"])],
+    10,
+    ["animal"]
+);
+
+const kanji3 = new Kanji(
+    "子",
+    [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("go", "ご", ReadingType.ON)],
+    ["child", "boy", "young person", "infant"],
     KyoikuGrade.TWO,
     JLTPLevel.N5, "https://jisho.org/魚",
     [new Example("金魚", ["きんぎょ"], ["goldfish"])],
@@ -99,4 +110,16 @@ test('Clicking the shuffle button should render a new kanji', async () => {
     mockKanjiService.mockResolvedValueOnce({ value: kanji2 });
     fireEvent.click(component.getByTitle('Shuffle'));
     expect(await component.findByText('子')).toBeInTheDocument();
+});
+
+test('Should render a pop-over with the full meanings if they exceed 23 characters in length', async() => {
+    // Render the kanji character with many meaning values
+    mockKanjiService.mockResolvedValueOnce({ value: kanji3 });
+    const component = renderReduxConsumer(<KanjiShowcaseCard />);
+    expect(await component.findByText('子')).toBeInTheDocument();
+
+    // Hover over the trimmed meanings text
+    fireEvent.mouseOver(component.getByText('child, boy, young perso...'));
+    expect(await screen.findByText('Meanings')).toBeInTheDocument();
+    expect(await screen.findByText('child, boy, young person, infant')).toBeInTheDocument();
 });

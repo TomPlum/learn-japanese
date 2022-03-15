@@ -8,8 +8,11 @@ import { useFontSelector } from "../../hooks";
 import Copyable from "../ui/Copyable";
 import { faChalkboardTeacher, faListAlt, faPaintBrush, faPencilAlt, faRandom } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Inspectable from "../ui/Inspectable";
 
 const KanjiShowcaseCard = () => {
+
+    const MAX_MEANINGS_LENGTH = 23;
 
     const [loading, setLoading] = useState(false);
     const [updating, setUpdating] = useState(false);
@@ -40,6 +43,23 @@ const KanjiShowcaseCard = () => {
         setUpdating(true);
         shuffleKanji().finally(() => setUpdating(false));
     }
+
+    const getTrimmedMeanings = () => {
+        const meanings = kanji?.getMeanings().join(", ");
+        if (!meanings) {
+            return "N/A";
+        }
+
+        if (meanings.length > MAX_MEANINGS_LENGTH) {
+            return `${meanings.substring(0, MAX_MEANINGS_LENGTH)}...`;
+        }
+
+        return meanings;
+    }
+
+    const meanings = kanji?.getMeanings()?.join(", ") ?? "";
+    const areTooLong = meanings.length <= MAX_MEANINGS_LENGTH;
+    const fullMeanings = { title: "Meanings", text: meanings };
 
     return (
         <DashboardCard loading={loading} updating={updating} error={error} height={267}>
@@ -81,7 +101,11 @@ const KanjiShowcaseCard = () => {
                     </div>
                 </div>
 
-                <p className={styles.meaning}>{kanji?.getMeanings().slice(0, 3).join(", ")}</p>
+                <p className={styles.meaning}>
+                    <Inspectable popover={fullMeanings} placement="bottom" disableUnderline disabled={areTooLong}>
+                        <span>{getTrimmedMeanings()}</span>
+                    </Inspectable>
+                </p>
 
                 <div className={styles.readings}>
                     <span className={styles.on}>
