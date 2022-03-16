@@ -6,7 +6,7 @@ import { Kanji } from "../../domain/kanji/Kanji";
 import styles from "../../styles/sass/components/cards/KanjiShowcaseCard.module.scss";
 import { useFontSelector } from "../../hooks";
 import Copyable from "../ui/Copyable";
-import { faChalkboardTeacher, faListAlt, faPaintBrush, faPencilAlt, faRandom } from "@fortawesome/free-solid-svg-icons";
+import { faChalkboardTeacher, faListAlt, faPaintBrush, faPencilAlt, faRandom, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Inspectable from "../ui/Inspectable";
 import ExampleDisplay from "../ui/display/ExampleDisplay";
@@ -76,7 +76,7 @@ const KanjiShowcaseCard = () => {
     }
 
     return (
-        <DashboardCard loading={loading} updating={updating} error={error} height={267}>
+        <DashboardCard loading={loading} updating={updating} error={error} height={300}>
             {inExamples && <ExampleDisplay examples={kanji?.examples ?? []} onDismiss={() => setInExamples(false)} />}
 
             <DashboardCard.Header>
@@ -132,6 +132,11 @@ const KanjiShowcaseCard = () => {
                         <span className={styles.label}>kun</span>
                         <span>{kanji?.getKunyomiReadings()[0]?.kana ?? "N/A"}</span>
                     </span>
+                </div>
+
+                <div className={styles.search}>
+                    <FontAwesomeIcon icon={faSearch} fixedWidth />
+                    <a href="/kanji">search all kanji</a>
                 </div>
             </DashboardCard.Body>
         </DashboardCard>

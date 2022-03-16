@@ -134,3 +134,36 @@ $highlight-colour: rgba($dark-1, 0.7);
 .icon {
   transition: color ease-in-out 0.2s;
 }
+
+.search {
+  background-color: $highlight-colour;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all ease-in-out 0.2s;
+}
+
+.search > a {
+  color: $light-1;
+  transition: all ease-in-out 0.2s;
+}
+
+.search > a:hover {
+  text-decoration: none;
+  color: $inspect;
+}
+
+.search > svg {
+  margin-right: 5px;
+}
+
+.search:hover {
+  cursor: pointer;
+  background-color: rgba($dark-1, 0.9);
+}
+
+.search:hover > a {
+  color: $inspect;
+}

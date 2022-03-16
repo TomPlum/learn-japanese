@@ -9,6 +9,8 @@ import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
 import { setFont } from "../../../slices/FontSlice";
 import { fireEvent, screen } from "@testing-library/react";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
 
 const mockKanjiService = jest.fn();
 
@@ -122,4 +124,14 @@ test('Should render a pop-over with the full meanings if they exceed 23 characte
     fireEvent.mouseOver(component.getByText('child, boy, young perso...'));
     expect(await screen.findByText('Meanings')).toBeInTheDocument();
     expect(await screen.findByText('child, boy, young person, infant')).toBeInTheDocument();
+});
+
+test('Should route to the kanji search page when clicking the link', async () => {
+    // Render a kanji character
+    mockKanjiService.mockResolvedValueOnce({ value: kanji });
+    const component = renderReduxConsumer(<KanjiShowcaseCard />);
+    expect(await component.findByText('魚')).toBeInTheDocument();
+
+    // Clicking the link should route to the kanji search page
+    expect(component.getByText('search all kanji')).toHaveAttribute('href', '/kanji');
 });
