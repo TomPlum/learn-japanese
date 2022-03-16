@@ -59,6 +59,7 @@ const KanjiShowcaseCard = () => {
         return meanings;
     }
 
+    const examples = kanji?.examples ?? [];
     const hasExamples = (kanji?.examples ?? []).length > 0;
     const handleViewExamples = () => {
         if (hasExamples) {
@@ -70,6 +71,14 @@ const KanjiShowcaseCard = () => {
     const areTooLong = meanings.length <= MAX_MEANINGS_LENGTH;
     const fullMeanings = { title: "Meanings", text: meanings };
 
+    const allOnReadings = kanji?.getOnyomiReadings().map(reading => reading.kana) ?? [];
+    const onReadingPopOver = { title: "On'Yomi Readings", text: allOnReadings?.join(", ") };
+    const hasSingularOnReading = allOnReadings.length === 1;
+
+    const allKunReadings = kanji?.getKunyomiReadings().map(reading => reading.kana) ?? [];
+    const kunReadingPopOver = { title: "Kun'Yomi Readings", text: allKunReadings?.join(", ") };
+    const hasSingularKunReading = allKunReadings.length === 1;
+
     const examplesClasses = [styles.attribute];
     if (hasExamples) {
         examplesClasses.push(styles.clickable);
@@ -77,7 +86,7 @@ const KanjiShowcaseCard = () => {
 
     return (
         <DashboardCard loading={loading} updating={updating} error={error} height={300}>
-            {inExamples && <ExampleDisplay examples={kanji?.examples ?? []} onDismiss={() => setInExamples(false)} />}
+            {inExamples && <ExampleDisplay examples={examples} onDismiss={() => setInExamples(false)} />}
 
             <DashboardCard.Header>
                 <DashboardCardHeader.Title>Kanji Showcase</DashboardCardHeader.Title>
@@ -124,14 +133,21 @@ const KanjiShowcaseCard = () => {
                 </p>
 
                 <div className={styles.readings}>
-                    <span className={styles.on}>
-                        <span className={styles.label}>on</span>
-                        <span>{kanji?.getOnyomiReadings()[0]?.kana ?? "N/A"}</span>
-                    </span>
-                    <span className={styles.kun}>
-                        <span className={styles.label}>kun</span>
-                        <span>{kanji?.getKunyomiReadings()[0]?.kana ?? "N/A"}</span>
-                    </span>
+                    <Inspectable popover={onReadingPopOver} placement="bottom" disableUnderline disabled={hasSingularOnReading}>
+                        <span className={styles.on}>
+                            <span className={styles.label}>on</span>
+                            {!hasSingularOnReading && <span className={styles.count}>x{allOnReadings.length}</span>}
+                            <span>{kanji?.getOnyomiReadings()[0]?.kana ?? "N/A"}</span>
+                        </span>
+                    </Inspectable>
+
+                    <Inspectable popover={kunReadingPopOver} placement="bottom" disableUnderline disabled={hasSingularKunReading}>
+                        <span className={styles.kun}>
+                            <span className={styles.label}>kun</span>
+                            {!hasSingularKunReading && <span className={styles.count}>x{allKunReadings.length}</span>}
+                            <span>{kanji?.getKunyomiReadings()[0]?.kana ?? "N/A"}</span>
+                        </span>
+                    </Inspectable>
                 </div>
 
                 <div className={styles.search}>

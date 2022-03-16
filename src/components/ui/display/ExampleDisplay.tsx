@@ -9,7 +9,7 @@ export interface ExampleDisplayProps {
 
 const ExampleDisplay = (props: ExampleDisplayProps) => {
     return (
-        <Modal centered show size="lg" onHide={props.onDismiss} containerClassName={styles.container} contentClassName={styles.content}>
+        <Modal centered show size="lg" onHide={props.onDismiss} contentClassName={styles.content} data-testid="kanji-example-display">
             <Modal.Header closeButton className={styles.header}>
                 <span className={styles.title}>Examples</span>
             </Modal.Header>

@@ -80,6 +80,17 @@ $highlight-colour: rgba($dark-1, 0.7);
   font-size: 0.8rem;
 }
 
+.count {
+  font-family: "Ciutadella Rounded Semi Bold", sans-serif;
+  color: $light-2;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 10px;
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+
 .attributes {
   display: flex;
   flex-direction: column;

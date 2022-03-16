@@ -9,8 +9,6 @@ import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
 import { setFont } from "../../../slices/FontSlice";
 import { fireEvent, screen } from "@testing-library/react";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
 
 const mockKanjiService = jest.fn();
 
@@ -31,22 +29,22 @@ const kanji = new Kanji(
 
 const kanji2 = new Kanji(
     "子",
-    [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("go", "ご", ReadingType.ON)],
-    ["fish"],
+    [new KanjiReading("su", "す", ReadingType.ON), new KanjiReading("shi", "し", ReadingType.ON), new KanjiReading("ko", "こ", ReadingType.KUN)],
+    ["sign of the rat", "child"],
     KyoikuGrade.TWO,
-    JLTPLevel.N5, "https://jisho.org/魚",
-    [new Example("金魚", ["きんぎょ"], ["goldfish"])],
-    10,
-    ["animal"]
+    JLTPLevel.N5, "https://jisho.org/子",
+    [new Example("女子", ["おなご", "じょし"], ["women", "girl"])],
+    3,
+    ["family"]
 );
 
 const kanji3 = new Kanji(
     "子",
-    [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("go", "ご", ReadingType.ON)],
+    [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("uo", "うお", ReadingType.KUN), new KanjiReading("go", "ご", ReadingType.ON)],
     ["child", "boy", "young person", "infant"],
     KyoikuGrade.TWO,
     JLTPLevel.N5, "https://jisho.org/魚",
-    [new Example("金魚", ["きんぎょ"], ["goldfish"])],
+    [],
     10,
     ["animal"]
 );
@@ -134,4 +132,62 @@ test('Should route to the kanji search page when clicking the link', async () =>
 
     // Clicking the link should route to the kanji search page
     expect(component.getByText('search all kanji')).toHaveAttribute('href', '/kanji');
+});
+
+test('Should render the examples display modal when clicking the examples button', async () => {
+    // Render a kanji that has at least 1 example
+    mockKanjiService.mockResolvedValueOnce({ value: kanji });
+    const component = renderReduxConsumer(<KanjiShowcaseCard />);
+    expect(await component.findByText('魚')).toBeInTheDocument();
+
+    // Click the example icon button
+    fireEvent.click(component.getByTitle('Examples'));
+
+    // Should render the examples display modal
+    expect(await screen.findByTestId('kanji-example-display')).toBeInTheDocument();
+
+    // Closing it should stop rendering it
+    fireEvent.click(screen.getByText('Close'));
+    expect(await screen.queryByTestId('kanji-example-display')).not.toBeInTheDocument();
+});
+
+test('Clicking the examples button should not render the examples display if the kanji has none', async () => {
+    // Render a kanji that has no examples
+    mockKanjiService.mockResolvedValueOnce({ value: kanji3 });
+    const component = renderReduxConsumer(<KanjiShowcaseCard />);
+    expect(await component.findByText('子')).toBeInTheDocument();
+
+    // Click the example icon button
+    fireEvent.click(component.getByTitle('Examples'));
+
+    // Should NOT render the examples display modal
+    expect(await screen.queryByTestId('kanji-example-display')).not.toBeInTheDocument();
+});
+
+test('If a kanji has multiple on readings, when hovering over it, it should render a pop-over with them all', async () => {
+    // Render a kanji that has multiple on'yomi readings
+    mockKanjiService.mockResolvedValueOnce({ value: kanji2 });
+    const component = renderReduxConsumer(<KanjiShowcaseCard />);
+    expect(await component.findByText('子')).toBeInTheDocument();
+
+    // Mouse over the displayed reading
+    fireEvent.mouseOver(component.getByText('す'));
+
+    // Should render a pop-over modal with all the on readings
+    expect(await screen.findByText('On\'Yomi Readings')).toBeInTheDocument();
+    expect(await screen.findByText('す, し')).toBeInTheDocument();
+});
+
+test('If a kanji has multiple kun readings, when hovering over it, it should render a pop-over with them all', async () => {
+    // Render a kanji that has multiple kun'yomi readings
+    mockKanjiService.mockResolvedValueOnce({ value: kanji3 });
+    const component = renderReduxConsumer(<KanjiShowcaseCard />);
+    expect(await component.findByText('子')).toBeInTheDocument();
+
+    // Mouse over the displayed reading
+    fireEvent.mouseOver(component.getByText('さかな'));
+
+    // Should render a pop-over modal with all the kun readings
+    expect(await screen.findByText('Kun\'Yomi Readings')).toBeInTheDocument();
+    expect(await screen.findByText('さかな, うお')).toBeInTheDocument();
 });
