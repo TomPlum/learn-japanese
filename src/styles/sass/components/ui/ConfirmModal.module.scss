@@ -1,10 +1,15 @@
 @import "src/styles/sass/mixins";
+@import "src/styles/sass/colours";
 
 $border-radius: 12px;
 
 .modal {
   @include noSelect;
+  color: $light-1;
   border-radius: $border-radius;
+  background-color: $dark-2;
+  border: 4px solid $dark-1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 }
 
 .title {
@@ -17,12 +22,22 @@ $border-radius: 12px;
 
 .header {
   font-family: "Ciutadella Rounded Medium", sans-serif;
-  border-top-left-radius: $border-radius;
-  border-top-right-radius: $border-radius;
-  background-color: #f1f1f1;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: $dark-2;
+  border-bottom: 3px solid $dark-1;
   padding: 10px 15px;
   display: flex;
   align-items: center;
+}
+
+.header > button {
+  color: $light-1;
+  opacity: 0.9;
+  transition: color ease-in-out 0.2s;
+}
+.header > button:hover {
+  color: $light-2;
 }
 
 .body {
@@ -34,6 +49,7 @@ $border-radius: 12px;
 
 .footer {
   padding: 5px;
+  border-top: 3px solid $dark-1;
 }
 
 .yes, .no {
