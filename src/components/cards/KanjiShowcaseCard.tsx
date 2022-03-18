@@ -73,11 +73,11 @@ const KanjiShowcaseCard = () => {
 
     const allOnReadings = kanji?.getOnyomiReadings().map(reading => reading.kana) ?? [];
     const onReadingPopOver = { title: "On'Yomi Readings", text: allOnReadings?.join(", ") };
-    const hasSingularOnReading = allOnReadings.length === 1;
+    const hasMultipleOnReadings = allOnReadings.length > 1;
 
     const allKunReadings = kanji?.getKunyomiReadings().map(reading => reading.kana) ?? [];
     const kunReadingPopOver = { title: "Kun'Yomi Readings", text: allKunReadings?.join(", ") };
-    const hasSingularKunReading = allKunReadings.length === 1;
+    const hasMultipleKunReadings = allKunReadings.length > 1;
 
     const examplesClasses = [styles.attribute];
     if (hasExamples) {
@@ -133,18 +133,18 @@ const KanjiShowcaseCard = () => {
                 </p>
 
                 <div className={styles.readings}>
-                    <Inspectable popover={onReadingPopOver} placement="bottom" disableUnderline disabled={hasSingularOnReading}>
+                    <Inspectable popover={onReadingPopOver} placement="bottom" disableUnderline disabled={!hasMultipleOnReadings}>
                         <span className={styles.on}>
                             <span className={styles.label}>on</span>
-                            {!hasSingularOnReading && <span className={styles.count}>x{allOnReadings.length}</span>}
+                            {hasMultipleOnReadings && <span className={styles.count}>x{allOnReadings.length}</span>}
                             <span>{kanji?.getOnyomiReadings()[0]?.kana ?? "N/A"}</span>
                         </span>
                     </Inspectable>
 
-                    <Inspectable popover={kunReadingPopOver} placement="bottom" disableUnderline disabled={hasSingularKunReading}>
+                    <Inspectable popover={kunReadingPopOver} placement="bottom" disableUnderline disabled={!hasMultipleKunReadings}>
                         <span className={styles.kun}>
                             <span className={styles.label}>kun</span>
-                            {!hasSingularKunReading && <span className={styles.count}>x{allKunReadings.length}</span>}
+                            {hasMultipleKunReadings && <span className={styles.count}>x{allKunReadings.length}</span>}
                             <span>{kanji?.getKunyomiReadings()[0]?.kana ?? "N/A"}</span>
                         </span>
                     </Inspectable>
