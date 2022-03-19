@@ -64,8 +64,8 @@ const initialState: DataConfigState<any> = {
     settings: undefined
 }
 
-export const gameConfigSlice = createSlice({
-    name: 'game-config',
+export const dataConfigState = createSlice({
+    name: 'data-config',
     initialState,
     reducers: {
         setDataSettings: (state, action: PayloadAction<DataSettings>) => {
@@ -77,5 +77,5 @@ export const gameConfigSlice = createSlice({
     }
 });
 
-export const { setDataSettings, clearDataSettings } = gameConfigSlice.actions
-export default gameConfigSlice.reducer;
+export const { setDataSettings, clearDataSettings } = dataConfigState.actions
+export default dataConfigState.reducer;
