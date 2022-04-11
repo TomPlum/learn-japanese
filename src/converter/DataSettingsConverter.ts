@@ -7,8 +7,87 @@ import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../
 import CalendarSettings, { CalendarSettingsBuilder } from "../domain/session/settings/data/CalendarSettings";
 import BasicsSettings, { BasicsSettingsBuilder } from "../domain/session/settings/data/BasicsSettings";
 import { KyoikuGrade } from "../domain/kanji/KyoikuGrade";
+import { BasicsDataSettingsResponse, CalenderDataSettingsResponse, DataSettingsResponse, KanaDataSettingsResponse, KanjiDataSettingsResponse, NumbersDataSettingsResponse, SentenceStructureDataSettingsResponse } from "../repository/PresetRepository";
+import Topic from "../domain/Topic";
 
 class DataSettingsConverter {
+
+    public convert(topic: Topic, settings: DataSettingsResponse): DataSettings {
+        const quantity = settings.quantity;
+        switch (topic) {
+            case Topic.KANA: {
+                const kana = settings.config as KanaDataSettingsResponse;
+                return new KanaSettingsBuilder()
+                    .withOnlyDiagraphs(kana.onlyDiagraphs)
+                    .withDiacriticals(kana.diacriticals)
+                    .withRegularKana(kana.regular)
+                    .withDiagraphs(kana.diagraphs)
+                    .withHiragana(kana.hiragana)
+                    .withKatakana(kana.katakana)
+                    .withQuantity(quantity)
+                    .build();
+            }
+            case Topic.KANJI: {
+                const kanji = settings.config as KanjiDataSettingsResponse;
+                return new KanjiSettingsBuilder()
+                    .withGrades(kanji.grades.map(grade => KyoikuGrade.fromInteger(grade)))
+                    .withQuantity(quantity)
+                    .withTags(kanji.tags)
+                    .build();
+            }
+            case Topic.NUMBERS: {
+                const numbers = settings.config as NumbersDataSettingsResponse;
+                return new NumbersSettingsBuilder()
+                    .withExceptions(numbers.exceptions)
+                    .withCounters(numbers.counters)
+                    .withSequence(numbers.sequence)
+                    .withNumbers(numbers.numbers)
+                    .withUnits(numbers.units)
+                    .withQuantity(quantity)
+                    .withAge(numbers.age)
+                    .build();
+            }
+            case Topic.GRAMMAR: {
+                const grammar = settings.config as SentenceStructureDataSettingsResponse;
+                return new SentenceStructureSettingsBuilder()
+                    .withExpressions(grammar.expressions)
+                    .withAdjectives(grammar.adjectives)
+                    .withParticles(grammar.particles)
+                    .withAdverbs(grammar.adverbs)
+                    .withQuantity(quantity)
+                    .withNouns(grammar.nouns)
+                    .withVerbs(grammar.verbs)
+                    .build();
+            }
+            case Topic.CALENDAR: {
+                const calendar = settings.config as CalenderDataSettingsResponse;
+                return new CalendarSettingsBuilder()
+                    .withTemporalNouns(calendar.nouns)
+                    .withSeasons(calendar.seasons)
+                    .withPhrases(calendar.phrases)
+                    .withMonths(calendar.months)
+                    .withDays(calendar.days)
+                    .withQuantity(quantity)
+                    .build();
+            }
+            case Topic.BASICS: {
+                const basics = settings.config as BasicsDataSettingsResponse;
+                return new BasicsSettingsBuilder()
+                    .withDirections(basics.directions)
+                    .withAnimals(basics.animals)
+                    .withColours(basics.colours)
+                    .withWeather(basics.weather)
+                    .withFamily(basics.family)
+                    .withQuantity(quantity)
+                    .withBody(basics.body)
+                    .build();
+            }
+            default: {
+                throw new Error(`DataSettingsConverter: Unknown Topic: ${topic.name}`);
+            }
+        }
+    }
+
     public serialise(settings: DataSettings): DataSettingsState {
         if (settings instanceof KanaSettings) {
             return {

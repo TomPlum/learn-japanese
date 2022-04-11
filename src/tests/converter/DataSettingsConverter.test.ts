@@ -9,10 +9,158 @@ import { BasicsSettingsBuilder } from "../../domain/session/settings/data/Basics
 import DataSettings from "../../domain/session/settings/data/DataSettings";
 import Topic from "../../domain/Topic";
 import { KanaDataSettingsState, KanjiDataSettingsState, NumbersDataSettingsState, SentenceStructureDataSettingsState, CalenderDataSettingsState, BasicsDataSettingsState, DataSettingsState } from "../../slices/DataSettingsSlice";
+import { BasicsDataSettingsResponse, CalenderDataSettingsResponse, KanaDataSettingsResponse, KanjiDataSettingsResponse, NumbersDataSettingsResponse, SentenceStructureDataSettingsResponse } from "../../repository/PresetRepository";
 
 describe("Data Settings Converter", () => {
 
     const converter = new DataSettingsConverter();
+
+    describe("Convert API Response", () => {
+        it("Should convert valid kana response", () => {
+            const response: KanaDataSettingsResponse = {
+                regular: true,
+                hiragana: true,
+                katakana: false,
+                diagraphs: false,
+                diacriticals: true,
+                onlyDiagraphs: false
+            };
+
+            const deserialised = converter.convert(Topic.KANA, { quantity: 50, config: response });
+
+            expect(deserialised).toStrictEqual(
+                new KanaSettingsBuilder()
+                    .withHiragana(true)
+                    .withKatakana(false)
+                    .withDiagraphs(false)
+                    .withDiacriticals(true)
+                    .withOnlyDiagraphs(false)
+                    .withQuantity(50)
+                    .build()
+            );
+        });
+
+        it("Should convert valid kanji response", () => {
+            const response: KanjiDataSettingsResponse = { tags: ["number", "animal"], grades: [1, 3] };
+
+            const deserialised = converter.convert(Topic.KANJI, { quantity: 75, config: response });
+
+            expect(deserialised).toStrictEqual(
+                new KanjiSettingsBuilder()
+                    .withTags(["number", "animal"])
+                    .withQuantity(75)
+                    .withJoyoKanji(false)
+                    .withGrades([KyoikuGrade.ONE, KyoikuGrade.THREE])
+                    .build()
+            );
+        });
+
+        it("Should convert valid numbers response", () => {
+            const state: NumbersDataSettingsResponse = {
+                numbers: true,
+                counters: true,
+                age: false,
+                exceptions: false,
+                units: true,
+                sequence: false
+            };
+
+            const deserialised = converter.convert(Topic.NUMBERS, { quantity: 60, config: state });
+
+            expect(deserialised).toStrictEqual(
+                new NumbersSettingsBuilder()
+                    .withQuantity(60)
+                    .withNumbers(true)
+                    .withAge(false)
+                    .withUnits(true)
+                    .withSequence(false)
+                    .withCounters(true)
+                    .withExceptions(false)
+                    .build()
+            );
+        });
+
+        it("Should convert valid sentence structure response", () => {
+            const response: SentenceStructureDataSettingsResponse = {
+                adverbs: true,
+                particles: false,
+                expressions: true,
+                verbs: false,
+                nouns: true,
+                adjectives: false
+            };
+
+            const deserialised = converter.convert(Topic.GRAMMAR, { quantity: 25, config: response });
+
+            expect(deserialised).toStrictEqual(
+                new SentenceStructureSettingsBuilder()
+                    .withQuantity(25)
+                    .withVerbs(false)
+                    .withNouns(true)
+                    .withParticles(false)
+                    .withAdverbs(true)
+                    .withAdjectives(false)
+                    .withExpressions(true)
+                    .build()
+            );
+        });
+
+        it("Should convert valid calendar response", () => {
+            const response: CalenderDataSettingsResponse = {
+                days: false,
+                months: true,
+                seasons: true,
+                nouns: true,
+                phrases: false
+            };
+
+            const deserialised = converter.convert(Topic.CALENDAR, { quantity: 75, config: response });
+
+            expect(deserialised).toStrictEqual(
+                new CalendarSettingsBuilder()
+                    .withQuantity(75)
+                    .withTemporalNouns(false)
+                    .withSeasons(true)
+                    .withDays(false)
+                    .withMonths(true)
+                    .withPhrases(false)
+                    .withTemporalNouns(true)
+                    .build()
+            );
+        });
+
+        it("Should convert valid basics response", () => {
+            const response: BasicsDataSettingsResponse = {
+                colours: false,
+                animals: true,
+                directions: false,
+                weather: false,
+                family: true,
+                body: true
+            };
+
+            const deserialised = converter.convert(Topic.BASICS, { quantity: 10, config: response });
+
+            expect(deserialised).toStrictEqual(
+                new BasicsSettingsBuilder()
+                    .withQuantity(10)
+                    .withWeather(false)
+                    .withBody(true)
+                    .withDirections(false)
+                    .withFamily(true)
+                    .withColours(false)
+                    .withAnimals(true)
+                    .build()
+            );
+        });
+
+        it.skip("Should throw an exception if an invalid topic is passed", () => {
+            // TODO: Figure out a way to pass in a fake enum entry to hit the default switch branch
+            expect(() => converter.convert(Topic.GRAMMAR, { quantity: 10, config: { }})).toThrow(
+                "Invalid DataSettingsState Object [{\"topic\":\"Topic\",\"quantity\":10,\"invalid\":\"broken\"}]"
+            );
+        });
+    });
 
     describe("Serialise", () => {
         it("Should convert valid kana settings", () => {
