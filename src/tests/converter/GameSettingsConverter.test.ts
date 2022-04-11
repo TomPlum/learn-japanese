@@ -7,10 +7,77 @@ import LearnableField from "../../domain/learn/LearnableField";
 import QuestionType from "../../domain/game/QuestionType";
 import { Kana } from "../../domain/kana/Kana";
 import GameSettingsConverter from "../../converter/GameSettingsConverter";
+import { GameConfigResponse } from "../../repository/PresetRepository";
 
 describe("Game Settings Converter", () => {
 
     const converter = new GameSettingsConverter();
+
+    describe("API Response Conversion", () => {
+        it("Should de-serialise a valid API response", () => {
+            const response: GameConfigResponse = {
+                hints: {
+                    quantity: 8,
+                    enabled: true,
+                    unlimited: false
+                },
+                lives: {
+                    quantity: 12,
+                    enabled: true
+                },
+                time: {
+                    timed: true,
+                    countdown: false,
+                    secondsPerQuestion: 0
+                },
+                question: {
+                    cards: 4,
+                    score: true,
+                    type: "Multiple Choice",
+                    quantity: 150,
+                    answerField: "Rōmaji",
+                    questionField: "Kana",
+                    answerFilter: undefined
+                }
+            }
+
+            const deserialised = converter.convert(response);
+
+            expect(JSON.stringify(deserialised)).toStrictEqual(
+                JSON.stringify(new GameSettingsBuilder()
+                    .withLifeSettings(
+                        new LifeSettingsBuilder()
+                            .withQuantity(12)
+                            .isEnabled(true)
+                            .build()
+                    )
+                    .withHintSettings(
+                        new HintSettingsBuilder()
+                            .withQuantity(8)
+                            .isEnabled(true)
+                            .areUnlimited(false)
+                            .build()
+                    )
+                    .withTimeSettings(
+                        new TimeSettingsBuilder()
+                            .isTimed(true)
+                            .isCountDown(false)
+                            .withSecondsPerQuestion(0)
+                            .build()
+                    )
+                    .withQuestionSettings(
+                        new QuestionSettingsBuilder()
+                            .withFields(LearnableField.KANA, LearnableField.ROMAJI)
+                            .withQuantity(150)
+                            .withType(QuestionType.CHOICE)
+                            .withCardQuantity(4)
+                            .withScoreTracking(true)
+                            .build()
+                    )
+                    .build())
+            );
+        });
+    });
 
     describe("Serialise", () => {
         it("Should convert valid game settings", () => {

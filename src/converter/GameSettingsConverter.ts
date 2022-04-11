@@ -6,8 +6,47 @@ import { TimeSettingsBuilder } from "../domain/session/settings/game/TimeSetting
 import { QuestionSettingsBuilder } from "../domain/session/settings/game/QuestionSettings";
 import LearnableField from "../domain/learn/LearnableField";
 import QuestionType from "../domain/game/QuestionType";
+import { GameConfigResponse } from "../repository/PresetRepository";
 
 class GameSettingsConverter {
+
+    public convert(settings: GameConfigResponse): GameSettings {
+        return new GameSettingsBuilder()
+            .withLifeSettings(
+                new LifeSettingsBuilder()
+                    .withQuantity(settings.lives.quantity)
+                    .isEnabled(settings.lives.enabled)
+                    .build()
+            )
+            .withHintSettings(
+                new HintSettingsBuilder()
+                    .withQuantity(settings.hints.quantity)
+                    .isEnabled(settings.hints.enabled)
+                    .areUnlimited(settings.hints.unlimited)
+                    .build()
+            )
+            .withTimeSettings(
+                new TimeSettingsBuilder()
+                    .isTimed(settings.time.timed)
+                    .isCountDown(settings.time.countdown)
+                    .withSecondsPerQuestion(settings.time.secondsPerQuestion ?? 0)
+                    .build()
+            )
+            .withQuestionSettings(
+                new QuestionSettingsBuilder()
+                    .withFields(
+                        LearnableField.fromNameString(settings.question.questionField),
+                        LearnableField.fromNameString(settings.question.answerField)
+                    )
+                    .withQuantity(settings.question.quantity)
+                    .withType(QuestionType.fromName(settings.question.type))
+                    .withCardQuantity(settings.question.cards)
+                    .withScoreTracking(settings.question.score)
+                    .build()
+            )
+            .build();
+    }
+
     public serialise(settings: GameSettings): GameSettingState {
         return {
             hints: {
