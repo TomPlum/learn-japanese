@@ -33,7 +33,6 @@ export default class PlayKanjiModes implements PlayMenuModes {
                     .withQuestionSettings(new QuestionSettingsBuilder()
                         .withFields(LearnableField.KANJI, LearnableField.MEANING)
                         .withType(QuestionType.TEXT)
-                        .withCardQuantity(4)
                         .withScoreTracking(true)
                         .build()
                     ).build()

@@ -88,7 +88,7 @@ export class SentenceStructureSettingsBuilder {
         return this;
     }
 
-    withQuantity(quantity: number): SentenceStructureSettingsBuilder {
+    withQuantity(quantity?: number): SentenceStructureSettingsBuilder {
         this._quantity = quantity;
         return this;
     }

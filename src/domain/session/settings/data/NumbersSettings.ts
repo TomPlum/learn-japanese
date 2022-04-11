@@ -88,7 +88,7 @@ export class NumbersSettingsBuilder {
         return this;
     }
 
-    withQuantity(quantity: number): NumbersSettingsBuilder {
+    withQuantity(quantity?: number): NumbersSettingsBuilder {
         this._quantity = quantity;
         return this;
     }

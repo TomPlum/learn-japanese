@@ -76,7 +76,7 @@ export class CalendarSettingsBuilder {
         return this;
     }
 
-    withQuantity(quantity: number): CalendarSettingsBuilder {
+    withQuantity(quantity?: number): CalendarSettingsBuilder {
         this._quantity = quantity;
         return this;
     }
