@@ -16,11 +16,11 @@ interface PresetResponse {
     data: DataSettingsResponse;
 }
 
-interface LearnPresetResponse extends PresetResponse {
+export interface LearnPresetResponse extends PresetResponse {
 
 }
 
-interface PlayPresetResponse extends PresetResponse {
+export interface PlayPresetResponse extends PresetResponse {
     game: GameConfigResponse;
 }
 
@@ -144,7 +144,7 @@ class PresetRepository {
             } else {
                 return [];
             }
-        })
+        });
     }
 }
 
