@@ -81,6 +81,23 @@ const StatisticsCard = () => {
             case StatView.KANJI: {
                 return (
                     <>
+                        <div className={styles.visual}>
+                            <p className={styles.label}>Kanji</p>
+                            <PieChart width={125} height={125}>
+                                <Pie
+                                    dataKey="value"
+                                    nameKey="grade"
+                                    animationBegin={0}
+                                    innerRadius={15}
+                                    data={dummyKanjiData}
+                                >
+                                    {dummyKanjiData.map(datum => {
+                                        return <Cell key={`cell-${datum.grade}`} fill={datum.fill}/>
+                                    })}
+                                </Pie>
+                            </PieChart>
+                        </div>
+
                         <div className={styles.stats}>
                             <div className={styles.stat}>
                                 <FontAwesomeIcon icon={faGamepad} fixedWidth />
