@@ -23,7 +23,7 @@
 
 .icon:hover {
   cursor: pointer;
-  color: #FFF;
+  color: $learn-colour;
 }
 
 .selected {
@@ -62,4 +62,11 @@
   border-color: $light-3;
   color: $light-1;
   box-shadow: none;
+}
+
+.notFound {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  color: $light-2;
+  font-size: 1.2em;
+  margin-bottom: 0;
 }

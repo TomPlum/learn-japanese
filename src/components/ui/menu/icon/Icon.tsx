@@ -15,8 +15,9 @@ const Icon = (props: IconProps) => {
     if (!!value) {
         return React.createElement(CustomFontAwesomeIcon[value], {
             key: value,
-            className: className,
-            onClick: () => onClick?.(value)
+            title: value.replace("Fa", ""),
+            onClick: () => onClick?.(value),
+            className: [className, styles.icon].join(" ")
         });
     }
 

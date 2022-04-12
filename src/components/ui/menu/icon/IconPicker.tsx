@@ -23,6 +23,10 @@ const IconPicker = (props: IconPickerProps) => {
         setSelected(icon);
     }
 
+    const icons = iconList
+        .filter(name => name.toLowerCase().includes(search.toLowerCase()))
+        .slice(0, 25);
+
     const popover = (
         <Popover id="icon-picker" className={styles.popover}>
             <Popover.Content>
@@ -33,17 +37,20 @@ const IconPicker = (props: IconPickerProps) => {
                     onChange={e => setSearch(e.target.value)}
                 />
                 <div className={styles.iconContainer}>
-                    {iconList
-                        .filter(name => name.toLowerCase().includes(search.toLowerCase()))
-                        .slice(0, 25)
-                        .map((icon: IconType) => (
-                            <Icon
-                                value={icon}
-                                onClick={handleSelect}
-                                className={styles.icon}
-                            />
-                        ))
-                    }
+                    {icons.map((icon: IconType) => (
+                        <Icon
+                            value={icon}
+                            onClick={handleSelect}
+                            className={styles.icon}
+                        />
+                    ))}
+                </div>
+                <div>
+                    {icons.length === 0 && (
+                        <p className={styles.notFound}>
+                            {`No icons found for "${search}".`}
+                        </p>
+                    )}
                 </div>
             </Popover.Content>
         </Popover>
@@ -51,7 +58,7 @@ const IconPicker = (props: IconPickerProps) => {
 
     return (
         <div className={[className, styles.wrapper].join(" ")}>
-            <OverlayTrigger trigger="click" placement="top" overlay={popover}>
+            <OverlayTrigger trigger="click" placement="top" overlay={popover} rootClose>
                 <div>
                     <Icon value={selected} className={styles.selected} />
                 </div>
