@@ -10,10 +10,11 @@ export interface IconProps {
 }
 
 const Icon = (props: IconProps) => {
-    const { value, className, onClick } = props;
+    const { value, className, onClick, ...rest } = props;
 
     if (!!value) {
         return React.createElement(CustomFontAwesomeIcon[value], {
+            ...rest,
             key: value,
             title: value.replace("Fa", ""),
             onClick: () => onClick?.(value),
@@ -21,7 +22,7 @@ const Icon = (props: IconProps) => {
         });
     }
 
-    return <div />;
+    return null;
 }
 
 export default Icon;

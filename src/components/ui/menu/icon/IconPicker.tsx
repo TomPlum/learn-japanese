@@ -18,7 +18,7 @@ const IconPicker = (props: IconPickerProps) => {
     const [selected, setSelected] = useState<IconType>("FaRocket");
 
     const handleSelect = (icon: IconType) => {
-        setSearch("")
+        setSearch("");
         onSelect(icon);
         setSelected(icon);
     }
@@ -28,18 +28,19 @@ const IconPicker = (props: IconPickerProps) => {
         .slice(0, 25);
 
     const popover = (
-        <Popover id="icon-picker" className={styles.popover}>
+        <Popover id="icon-picker" data-testid="icon-picker" className={styles.popover}>
             <Popover.Content>
                 <Form.Control
                     value={search}
-                    placeholder="Search for an icon"
                     className={styles.search}
+                    placeholder="Search for an icon"
                     onChange={e => setSearch(e.target.value)}
                 />
                 <div className={styles.iconContainer}>
                     {icons.map((icon: IconType) => (
                         <Icon
                             value={icon}
+                            key={icon.toString()}
                             onClick={handleSelect}
                             className={styles.icon}
                         />
@@ -60,7 +61,11 @@ const IconPicker = (props: IconPickerProps) => {
         <div className={[className, styles.wrapper].join(" ")}>
             <OverlayTrigger trigger="click" placement="top" overlay={popover} rootClose>
                 <div>
-                    <Icon value={selected} className={styles.selected} />
+                    <Icon
+                        value={selected}
+                        className={styles.selected}
+                        data-testid="icon-picker-selected"
+                    />
                 </div>
             </OverlayTrigger>
         </div>
