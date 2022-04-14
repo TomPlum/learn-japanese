@@ -1,24 +1,27 @@
 import styles from "../../../../styles/sass/components/ui/menu/icon/IconPicker.module.scss";
 import React, { useState } from "react";
-import { Form, OverlayTrigger, Popover } from "react-bootstrap";
+import { Button, Form, OverlayTrigger, Popover } from "react-bootstrap";
 import { iconList } from "../../../../icons";
 import { Icon as IconType } from "../../../../domain/Icon";
 import Icon from "./Icon";
 
 export interface IconPickerProps {
+    size?: string;
     className?: string;
     onSelect: (icon: IconType) => void;
 }
 
 const IconPicker = (props: IconPickerProps) => {
 
-    const { className, onSelect } = props;
+    const { size, className, onSelect } = props;
 
+    const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
     const [selected, setSelected] = useState<IconType>("FaRocket");
 
     const handleSelect = (icon: IconType) => {
         setSearch("");
+        setShow(false);
         onSelect(icon);
         setSelected(icon);
     }
@@ -31,8 +34,12 @@ const IconPicker = (props: IconPickerProps) => {
         <Popover id="icon-picker" data-testid="icon-picker" className={styles.popover}>
             <Popover.Content>
                 <Form.Control
+                    type="text"
                     value={search}
+                    id="icon-picker-search"
                     className={styles.search}
+                    isInvalid={icons.length === 0}
+                    data-testid="icon-picker-search"
                     placeholder="Search for an icon"
                     onChange={e => setSearch(e.target.value)}
                 />
@@ -59,14 +66,15 @@ const IconPicker = (props: IconPickerProps) => {
 
     return (
         <div className={[className, styles.wrapper].join(" ")}>
-            <OverlayTrigger trigger="click" placement="top" overlay={popover} rootClose>
-                <div>
+            <OverlayTrigger trigger="click" placement="top" overlay={popover} show={show} onToggle={() => setShow(!show)} rootClose>
+                <Button variant="info" title="Select Icon" className={styles.button}>
                     <Icon
+                        size={size}
                         value={selected}
                         className={styles.selected}
                         data-testid="icon-picker-selected"
                     />
-                </div>
+                </Button>
             </OverlayTrigger>
         </div>
     );
