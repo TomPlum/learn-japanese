@@ -18,8 +18,9 @@ let props: CustomPresetFormProps;
 const setup = () => {
     const component = render(<CustomPresetForm {...props} />);
     return {
+        icon: component.getByTestId('icon-picker-selected'),
         name: component.getByPlaceholderText('Enter a name for your preset'),
-        save: component.getByText('Save'),
+        save: component.getByText('Save').parentElement!,
         cancel: component.getByText('Cancel')
     }
 }
@@ -49,14 +50,21 @@ test('Save button should be enabled when the preset name field is not empty', ()
 test('Clicking save when the form is valid should save the preset', async () => {
     // Assume the service call will be successful
     mockPlayService.mockResolvedValueOnce({ success: true })
-    const { name, save } = setup();
+    const { name, icon, save } = setup();
 
-    // Enter a preset name and click save
+    // Open the icon picker and select an icon
+    fireEvent.click(icon);
+    fireEvent.change(await screen.findByTestId('icon-picker-search'), { target: { value: 'atom' }});
+    fireEvent.click(screen.getByTitle('Atom'));
+
+    // Type in the preset name
     fireEvent.change(name, { target: { value: "My Preset" }});
+
+    // Click save
     fireEvent.click(save);
 
     // Should call the service with correct args and then display success message
-    expect(mockPlayService).toHaveBeenLastCalledWith("My Preset", settings);
+    expect(mockPlayService).toHaveBeenLastCalledWith("My Preset", "FaAtom", settings);
     expect(await screen.findByText('Saved "My Preset" successfully.')).toBeInTheDocument();
 
     // 2 seconds after success, the onSuccess event handler should be called

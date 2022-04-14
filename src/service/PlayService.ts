@@ -6,7 +6,7 @@ class PlayService {
         return [];
     }
 
-    public saveCustomPreset(name: string, settings: SessionSettings): Promise<UpdateResponse> {
+    public saveCustomPreset(name: string, icon: string, settings: SessionSettings): Promise<UpdateResponse> {
         return Promise.resolve({ success: true });
     }
 }

@@ -5,6 +5,8 @@ import { faCheck, faCheckCircle, faPencilAlt, faSpinner, faTimes } from "@fortaw
 import styles from "../../../../styles/sass/components/layout/wizard/form/CustomPresetForm.module.scss";
 import PlayService from "../../../../service/PlayService";
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
+import IconPicker from "../../../ui/menu/icon/IconPicker";
+import { Icon } from "../../../../domain/Icon";
 
 export interface CustomPresetFormProps {
     settings: SessionSettings;
@@ -22,6 +24,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
     const [name, setName] = useState("");
+    const [icon, setIcon] = useState<Icon>("FaRocket")
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
@@ -30,7 +33,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     const handleSave = () => {
         setLoading(true);
 
-        service.saveCustomPreset(name, settings).then(response => {
+        service.saveCustomPreset(name, icon, settings).then(response => {
             if (response.success) {
                 setSuccess(true);
                 setTimeout(() => onSuccess(), 2000);
@@ -53,7 +56,10 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
 
     return (
         <div data-testid="save-custom-preset-form">
-            {error && <Alert variant="danger">{error}</Alert>}
+            {error && (
+                <Alert variant="danger">{error}</Alert>
+            )}
+
             {success && (
                 <Alert variant="success">
                     <FontAwesomeIcon icon={faCheckCircle} fixedWidth />
@@ -61,33 +67,46 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
                 </Alert>
             )}
 
-            {!success && <Form.Row>
-                <Form.Group as={Col}>
-                    <Form.Label>
-                        <FontAwesomeIcon icon={faPencilAlt} fixedWidth/>
-                        <span>{" Preset Name"}</span>
-                    </Form.Label>
-                    <Form.Control
-                        onChange={handleChange}
-                        className={styles.input}
-                        placeholder="Enter a name for your preset"
-                    />
-                </Form.Group>
+            {!success && (
+                <Form.Group>
+                    <Form.Row>
+                        <Form.Group as={Col} style={{ margin: 0 }}>
+                            <Form.Label>
+                                <FontAwesomeIcon icon={faPencilAlt} fixedWidth/>
+                                <span>{" Save Custom Preset"}</span>
+                            </Form.Label>
+                        </Form.Group>
+                    </Form.Row>
 
-                <Form.Group as={Col} className={styles.buttonContainer} xs={2}>
-                    <Button variant="primary" className={styles.button} disabled={disableSave} onClick={handleSave}>
-                        <FontAwesomeIcon icon={saveIcon} spin={loading} fixedWidth className={styles.icon}/>
-                        Save
-                    </Button>
-                </Form.Group>
+                    <Form.Row>
+                        <Form.Group as={Col} xs={2} className={styles.iconPickerContainer}>
+                            <IconPicker size="1.4em" className={styles.iconPicker} onSelect={icon => setIcon(icon)} />
+                        </Form.Group>
 
-                <Form.Group as={Col} className={styles.buttonContainer} xs={2}>
-                    <Button variant="danger" onClick={onCancel} className={styles.button} disabled={loading}>
-                        <FontAwesomeIcon icon={faTimes} fixedWidth className={styles.icon}/>
-                        Cancel
-                    </Button>
+                        <Form.Group as={Col}>
+                            <Form.Control
+                                onChange={handleChange}
+                                className={styles.input}
+                                placeholder="Enter a name for your preset"
+                            />
+                        </Form.Group>
+
+                        <Form.Group as={Col} className={styles.buttonContainer} xs={2}>
+                            <Button variant="primary" className={styles.button} disabled={disableSave} onClick={handleSave}>
+                                <FontAwesomeIcon icon={saveIcon} spin={loading} fixedWidth className={styles.icon}/>
+                                <span>Save</span>
+                            </Button>
+                        </Form.Group>
+
+                        <Form.Group as={Col} className={styles.buttonContainer} xs={2}>
+                            <Button variant="danger" onClick={onCancel} className={styles.button} disabled={loading}>
+                                <FontAwesomeIcon icon={faTimes} fixedWidth className={styles.icon}/>
+                                <span>Cancel</span>
+                            </Button>
+                        </Form.Group>
+                    </Form.Row>
                 </Form.Group>
-            </Form.Row>}
+            )}
         </div>
     );
 }

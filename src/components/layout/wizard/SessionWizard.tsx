@@ -236,6 +236,7 @@ const SessionWizard = (props: SessionWizardProps) => {
         size: "lg",
         centered: true,
         backdrop: "static",
+        enforceFocus: false,
         dialogClassName: styles.dialog,
         contentClassName: styles.content,
         "data-testid": "start-session-wizard"
