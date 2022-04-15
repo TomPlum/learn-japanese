@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import IconPicker from "../../../../../components/ui/menu/icon/IconPicker";
+import { Numbers } from "../../../../../utility/Numbers";
 
 const onSelectHandler = jest.fn();
 
@@ -56,4 +57,18 @@ test('Search for an icon that does not exist should render a message', async () 
     // Searching for something unknown should render a message
     fireEvent.change(screen.getByPlaceholderText('Search for an icon'), { target: { value: 'nvidia123' }});
     expect(screen.getByText('No icons found for "nvidia123".')).toBeInTheDocument();
+});
+
+test('Clicking the random button should select a random icon', async () => {
+    // Set the random
+    Numbers.randomInt = jest.fn().mockReturnValueOnce(5); // Index 5 is FaAdversal
+
+    // Should start as the default icon
+    const { button } = setup();
+    expect(button.firstChild).toHaveTextContent('Rocket');
+
+    // Clicking random should select a random one
+    fireEvent.click(button);
+    fireEvent.click(await screen.findByTitle('Randomise'));
+    expect(onSelectHandler).toHaveBeenLastCalledWith('FaAdversal');
 });

@@ -4,6 +4,11 @@ import { Button, Form, OverlayTrigger, Popover } from "react-bootstrap";
 import { iconList } from "../../../../icons";
 import { Icon as IconType } from "../../../../domain/Icon";
 import Icon from "./Icon";
+import LocalStorageService from "../../../../service/LocalStorageService";
+import ScrollableContainer from "../../ScrollableContainer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRandom } from "@fortawesome/free-solid-svg-icons";
+import { Numbers } from "../../../../utility/Numbers";
 
 export interface IconPickerProps {
     size?: string;
@@ -15,6 +20,9 @@ const IconPicker = (props: IconPickerProps) => {
 
     const { size, className, onSelect } = props;
 
+    const localStorageService = new LocalStorageService();
+    const recentlyUsed = localStorageService.getRecentlyUsedIcons();
+
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
     const [selected, setSelected] = useState<IconType>("FaRocket");
@@ -24,26 +32,45 @@ const IconPicker = (props: IconPickerProps) => {
         setShow(false);
         onSelect(icon);
         setSelected(icon);
+        localStorageService.addRecentlyUsedIcon(icon);
     }
 
-    const icons = iconList
+    const handleRandomise = () => {
+        const index = Numbers.randomInt(0, iconList.length - 1);
+        const icon = iconList[index];
+        handleSelect(icon);
+    }
+
+    let icons = iconList.filter(name => !recentlyUsed.includes(name));
+    icons.unshift(...recentlyUsed);
+    icons = icons
+        .filter(it => !!it)
         .filter(name => name.toLowerCase().includes(search.toLowerCase()))
-        .slice(0, 25);
+        .slice(0, 25 - recentlyUsed.length);
 
     const popover = (
         <Popover id="icon-picker" data-testid="icon-picker" className={styles.popover}>
             <Popover.Content>
-                <Form.Control
-                    type="text"
-                    value={search}
-                    id="icon-picker-search"
-                    className={styles.search}
-                    isInvalid={icons.length === 0}
-                    data-testid="icon-picker-search"
-                    placeholder="Search for an icon"
-                    onChange={e => setSearch(e.target.value)}
-                />
-                <div className={styles.iconContainer}>
+                <div className={styles.inputWrapper}>
+                    <Form.Control
+                        type="text"
+                        value={search}
+                        id="icon-picker-search"
+                        className={styles.search}
+                        isInvalid={icons.length === 0}
+                        data-testid="icon-picker-search"
+                        placeholder="Search for an icon"
+                        onChange={e => setSearch(e.target.value)}
+                    />
+                    <FontAwesomeIcon
+                        fixedWidth
+                        icon={faRandom}
+                        title="Randomise"
+                        onClick={handleRandomise}
+                        className={styles.random}
+                    />
+                </div>
+                <ScrollableContainer className={styles.iconContainer} maxHeight={180}>
                     {icons.map((icon: IconType) => (
                         <Icon
                             value={icon}
@@ -52,7 +79,7 @@ const IconPicker = (props: IconPickerProps) => {
                             className={styles.icon}
                         />
                     ))}
-                </div>
+                </ScrollableContainer>
                 <div>
                     {icons.length === 0 && (
                         <p className={styles.notFound}>

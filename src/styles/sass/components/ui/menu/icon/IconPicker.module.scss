@@ -69,9 +69,30 @@
   box-shadow: none;
 }
 
+.search::placeholder {
+  text-align: left;
+}
+
 .notFound {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   color: $light-2;
   font-size: 1.2em;
   margin-bottom: 0;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.random {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  color: $light-2;
+  transition: all ease-in-out 0.2s;
+}
+
+.random:hover {
+  cursor: pointer;
+  color: $light-1;
 }
