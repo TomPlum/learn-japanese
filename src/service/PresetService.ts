@@ -23,6 +23,18 @@ class PresetService {
             return { learn: [], play: [], error: response.error };
         });
     }
+
+    /**
+     * Retrieves a list of all favourite presets.
+     * @return Favourite learn and play presets.
+     */
+    public getFavouritePresets(): Promise<LearnPlayPresets> {
+        return this.repository.getFavouritePresets().then((response: Presets) => {
+            return { learn: response.learn, play: response.play };
+        }).catch(response => {
+            return { learn: [], play: [], error: response.error };
+        });
+    }
 }
 
 export default PresetService;
