@@ -153,10 +153,10 @@ describe("Preset Repository", () => {
                 expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, learnPresetResponse.data);
                 expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playPresetResponse.data);
                 expect(mockGameSettingsConverter).toHaveBeenCalledWith(playPresetResponse.game);
-                expect(response).toStrictEqual([
-                    new LearnMode("Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false),
-                    new PlayMode("Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false)
-                ]);
+                expect(response).toStrictEqual({
+                    learn: [new LearnMode("Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false)],
+                    play: [new PlayMode("Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false)]
+                });
             });
         });
     });

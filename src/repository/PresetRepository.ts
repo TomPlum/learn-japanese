@@ -1,4 +1,3 @@
-import SessionMode from "../domain/session/SessionMode";
 import RestClient from "../rest/RestClient";
 import LearnMode from "../domain/session/LearnMode";
 import DataSettingsConverter from "../converter/DataSettingsConverter";
@@ -119,12 +118,17 @@ interface PresetsResponse {
     play: PlayPresetResponse[];
 }
 
+export interface Presets {
+    learn: LearnMode[];
+    play: PlayMode[];
+}
+
 class PresetRepository {
 
     private readonly dataSettingsConverter = new DataSettingsConverter();
     private readonly gameSettingsConverter = new GameSettingsConverter();
 
-    public getAllPresets(): Promise<SessionMode[]> {
+    public getAllPresets(): Promise<Presets> {
         return RestClient.get<PresetsResponse>("/presets/all").then(response => {
             const data = response.data;
             if (data) {
@@ -140,9 +144,9 @@ class PresetRepository {
                     return new PlayMode(preset.name, preset.colour, preset.icon, dataSettings, gameSettings, undefined, false);
                 });
 
-                return learn.concat(play);
+                return { learn: learn, play: play };
             } else {
-                return [];
+                return { learn: [], play: [] };
             }
         });
     }

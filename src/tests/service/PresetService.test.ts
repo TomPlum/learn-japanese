@@ -1,0 +1,35 @@
+import PresetService, { LearnPlayPresets } from "../../service/PresetService";
+import LearnMode from "../../domain/session/LearnMode";
+import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
+import LearnSettings from "../../domain/session/settings/LearnSettings";
+import PlayMode from "../../domain/session/PlayMode";
+import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
+import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSettings";
+
+const mockRepository = jest.fn();
+jest.mock("../../repository/PresetRepository", () => {
+    return function() {
+        return { getAllPresets: mockRepository };
+    };
+});
+
+const learnMode = new LearnMode("Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings());
+const playMode = new PlayMode("Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
+
+describe("Preset Service", () => {
+    const service = new PresetService();
+
+    it("Should return the presets from the repository when the call succeeds", () => {
+        mockRepository.mockResolvedValueOnce({ learn: [learnMode], play: [playMode] });
+        return service.getAllPresets().then((response: LearnPlayPresets) => {
+            expect(response).toStrictEqual({ learn: [learnMode], play: [playMode] });
+        });
+    });
+
+    it("Should return empty preset array if the repository call fails with an error message", () => {
+        mockRepository.mockRejectedValueOnce({ error: "Failed to retrieve presets." });
+        return service.getAllPresets().then((response: LearnPlayPresets) => {
+            expect(response).toStrictEqual({ learn: [], play: [], error: "Failed to retrieve presets." });
+        });
+    });
+});
