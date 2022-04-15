@@ -128,26 +128,60 @@ class PresetRepository {
     private readonly dataSettingsConverter = new DataSettingsConverter();
     private readonly gameSettingsConverter = new GameSettingsConverter();
 
+    /**
+     * Retrieves a list of all presets from the API.
+     * Includes play, learn, and custom.
+     * @return A list of learn and play presets.
+     */
     public getAllPresets(): Promise<Presets> {
         return RestClient.get<PresetsResponse>("/presets/all").then(response => {
             const data = response.data;
             if (data) {
-                const learn = data.learn.map((preset: LearnPresetResponse) => {
-                    const topic = Topic.fromName(preset.topic);
-                    const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
-                    return new LearnMode(preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), undefined, false);
-                });
-                const play = data.play.map((preset: PlayPresetResponse) => {
-                    const topic = Topic.fromName(preset.topic);
-                    const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
-                    const gameSettings = this.gameSettingsConverter.convert(preset.game);
-                    return new PlayMode(preset.name, preset.colour, preset.icon, dataSettings, gameSettings, undefined, false);
-                });
-
+                const learn = this.convertLearnPresets(data.learn);
+                const play = this.convertPlayPresets(data.play);
                 return { learn: learn, play: play };
             } else {
                 return { learn: [], play: [] };
             }
+        }).catch(response => {
+            return { learn: [], play: [], error: response.error };
+        });
+    }
+
+    /**
+     * Retrieves a list of learn and play presets
+     * that have been favourite by the current user.
+     * @return an array of favourite presets.
+     */
+    public getFavouritePresets(): Promise<Presets> {
+        return RestClient.get<PresetsResponse>("/presets/favourites").then(response => {
+            const data = response.data;
+            if (data) {
+                const learn = this.convertLearnPresets(data.learn);
+                const play = this.convertPlayPresets(data.play);
+                return { learn: learn, play: play };
+            } else {
+                return { learn: [], play: [] };
+            }
+        }).catch(response => {
+            return { learn: [], play: [], error: response.error };
+        });
+    }
+
+    private convertLearnPresets(data: LearnPresetResponse[]): LearnMode[] {
+        return data.map((preset: LearnPresetResponse) => {
+            const topic = Topic.fromName(preset.topic);
+            const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
+            return new LearnMode(preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), undefined, false);
+        });
+    }
+
+    private convertPlayPresets(data: PlayPresetResponse[]): PlayMode[] {
+        return data.map((preset: PlayPresetResponse) => {
+            const topic = Topic.fromName(preset.topic);
+            const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
+            const gameSettings = this.gameSettingsConverter.convert(preset.game);
+            return new PlayMode(preset.name, preset.colour, preset.icon, dataSettings, gameSettings, undefined, false);
         });
     }
 }

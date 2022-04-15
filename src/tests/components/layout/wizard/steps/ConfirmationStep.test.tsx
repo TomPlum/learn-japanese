@@ -12,7 +12,6 @@ import { TimeSettingsBuilder } from "../../../../../domain/session/settings/game
 import { getByTextWithElements } from "../../../../Queries";
 import LearnSettings from "../../../../../domain/session/settings/LearnSettings";
 import { WizardStep } from "../../../../../components/layout/wizard/SessionWizard";
-import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";
 
 const onSelectStageHandler = jest.fn();
 
@@ -29,6 +28,9 @@ beforeEach(() => {
     jest.useFakeTimers();
 });
 
+const { KANA, ROMAJI } = LearnableField;
+const { MATCH, RANDOM, TEXT, CHOICE, AUDIO } = QuestionType;
+
 function withGameSettings(gameSettings: GameSettingsBuilder) {
     settings = SessionSettings.forGame(dataSettings.build(), gameSettings.build());
 }
@@ -44,43 +46,43 @@ test('Should render the initial text', () => {
 });
 
 test('Should render the question field name', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(LearnableField.KANA, LearnableField.ROMAJI).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(KANA, ROMAJI).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     expect(screen.getByText("You'll be given the")).toBeInTheDocument();
 });
 
 test('Should render the intermediary text between the question field and type', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(LearnableField.KANA, LearnableField.ROMAJI).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(KANA, ROMAJI).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     expect(screen.getByText("and must")).toBeInTheDocument();
 });
 
 test('Should render the action word "type" if the question type is text', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.TEXT).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(TEXT).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     expect(screen.getByText("type")).toBeInTheDocument();
 });
 
 test('Should render the action word "match" if the question type is match', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.MATCH).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(MATCH).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     expect(screen.getByText("match")).toBeInTheDocument();
 });
 
 test('Should render the action word "pick" and the card quantity if the question type is choice', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.CHOICE).withCardQuantity(4).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(CHOICE).withCardQuantity(4).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     expect(screen.getByText("pick from 4 cards")).toBeInTheDocument();
 });
 
 test('Should render the action word "listen to" if the question type is audio', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.AUDIO).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(AUDIO).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     expect(screen.getByText("listen to")).toBeInTheDocument();
 });
 
 test('Should render the action word "answer" if the question type is random', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.RANDOM).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(RANDOM).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     expect(screen.getByText("answer")).toBeInTheDocument();
 });
@@ -92,7 +94,7 @@ test('Should render the intermediary text between the question type and answer f
 });
 
 test('Should render the answer field name', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(LearnableField.KANA, LearnableField.ROMAJI).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(KANA, ROMAJI).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     expect(screen.getByText("Rōmaji")).toBeInTheDocument();
 });
@@ -246,21 +248,21 @@ test('Should render an error message if the game settings are undefined', () => 
 });
 
 test('Clicking the question field text should call the onSelectStage event handler with the correct stage', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(LearnableField.KANA, LearnableField.ROMAJI).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(KANA, ROMAJI).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('Kana'));
     expect(onSelectStageHandler).toHaveBeenLastCalledWith(WizardStep.QUESTION);
 });
 
 test('Clicking the question type text should call the onSelectStage event handler with the correct stage', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(QuestionType.TEXT).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withType(TEXT).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('type'));
     expect(onSelectStageHandler).toHaveBeenLastCalledWith(WizardStep.QUESTION);
 });
 
 test('Clicking the answer field text should call the onSelectStage event handler with the correct stage', () => {
-    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(LearnableField.KANA, LearnableField.ROMAJI).build()));
+    withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(KANA, ROMAJI).build()));
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.click(screen.getByText('Rōmaji'));
     expect(onSelectStageHandler).toHaveBeenLastCalledWith(WizardStep.QUESTION);

@@ -144,7 +144,7 @@ describe("Preset Repository", () => {
             });
         });
 
-        it("Should return a concatenated arrays of learn and play presets", () => {
+        it("Should return the learn and play presets", () => {
             mockGet.mockResolvedValueOnce({ data: { learn: [learnPresetResponse], play: [playPresetResponse ]} });
             mockDataSettingsConverter.mockReturnValue(dataSettings);
             mockGameSettingsConverter.mockReturnValueOnce(gameSettings);
@@ -157,6 +157,45 @@ describe("Preset Repository", () => {
                     learn: [new LearnMode("Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false)],
                     play: [new PlayMode("Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false)]
                 });
+            });
+        });
+
+        it("Should return the API error if the call fails", () => {
+            mockGet.mockRejectedValueOnce({ error: "Failed to retrieve presets." });
+            return repository.getAllPresets().then(response => {
+                expect(response).toEqual({ learn: [], play: [], error: "Failed to retrieve presets." });
+            });
+        });
+    });
+
+    describe("Get Favourite Presets", () => {
+        it("Should call the rest client with the correct endpoint", () => {
+            mockGet.mockResolvedValueOnce({ });
+            return repository.getFavouritePresets().then(() => {
+                expect(mockGet).toHaveBeenLastCalledWith("/presets/favourites");
+            });
+        });
+
+        it("Should return the learn and play presets", () => {
+            mockGet.mockResolvedValueOnce({ data: { learn: [learnPresetResponse], play: [playPresetResponse ]} });
+            mockDataSettingsConverter.mockReturnValue(dataSettings);
+            mockGameSettingsConverter.mockReturnValueOnce(gameSettings);
+
+            return repository.getFavouritePresets().then(response => {
+                expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, learnPresetResponse.data);
+                expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playPresetResponse.data);
+                expect(mockGameSettingsConverter).toHaveBeenCalledWith(playPresetResponse.game);
+                expect(response).toStrictEqual({
+                    learn: [new LearnMode("Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false)],
+                    play: [new PlayMode("Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false)]
+                });
+            });
+        });
+
+        it("Should return the API error if the call fails", () => {
+            mockGet.mockRejectedValueOnce({ error: "Failed to retrieve favourite presets." });
+            return repository.getFavouritePresets().then(response => {
+                expect(response).toEqual({ learn: [], play: [], error: "Failed to retrieve favourite presets." });
             });
         });
     });
