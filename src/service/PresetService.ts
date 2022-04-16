@@ -16,7 +16,7 @@ class PresetService {
      * Retrieves a list of all available presets.
      * @return Learn and play presets.
      */
-    public getAllPresets(): Promise<LearnPlayPresets> {
+    public async getAllPresets(): Promise<LearnPlayPresets> {
         return this.repository.getAllPresets().then((response: Presets) => {
             return { learn: response.learn, play: response.play };
         }).catch(response => {
@@ -28,7 +28,7 @@ class PresetService {
      * Retrieves a list of all favourite presets.
      * @return Favourite learn and play presets.
      */
-    public getFavouritePresets(): Promise<LearnPlayPresets> {
+    public async getFavouritePresets(): Promise<LearnPlayPresets> {
         return this.repository.getFavouritePresets().then((response: Presets) => {
             return { learn: response.learn, play: response.play };
         }).catch(response => {

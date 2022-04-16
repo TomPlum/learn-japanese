@@ -7,13 +7,13 @@ import Icon from "./Icon";
 import LocalStorageService from "../../../../service/LocalStorageService";
 import ScrollableContainer from "../../ScrollableContainer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRandom } from "@fortawesome/free-solid-svg-icons";
+import { faRandom, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Numbers } from "../../../../utility/Numbers";
 
 export interface IconPickerProps {
     size?: string;
     className?: string;
-    onSelect: (icon: IconType) => void;
+    onSelect: (icon: IconDefinition | IconType | string) => void;
 }
 
 const IconPicker = (props: IconPickerProps) => {
@@ -25,9 +25,9 @@ const IconPicker = (props: IconPickerProps) => {
 
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
-    const [selected, setSelected] = useState<IconType>("FaRocket");
+    const [selected, setSelected] = useState<IconDefinition | IconType | string>("FaRocket");
 
-    const handleSelect = (icon: IconType) => {
+    const handleSelect = (icon: IconDefinition | IconType | string) => {
         setSearch("");
         setShow(false);
         onSelect(icon);
@@ -41,11 +41,11 @@ const IconPicker = (props: IconPickerProps) => {
         handleSelect(icon);
     }
 
-    let icons = iconList.filter(name => !recentlyUsed.includes(name));
+    let icons: (IconDefinition | IconType | string)[] = iconList.filter(name => !recentlyUsed.includes(name));
     icons.unshift(...recentlyUsed);
     icons = icons
         .filter(it => !!it)
-        .filter(name => name.toLowerCase().includes(search.toLowerCase()))
+        .filter(name => name.toString().toLowerCase().includes(search.toLowerCase()))
         .slice(0, 25 - recentlyUsed.length);
 
     const popover = (
@@ -71,7 +71,7 @@ const IconPicker = (props: IconPickerProps) => {
                     />
                 </div>
                 <ScrollableContainer className={styles.iconContainer} maxHeight={180}>
-                    {icons.map((icon: IconType) => (
+                    {icons.map((icon: IconDefinition | IconType | string) => (
                         <Icon
                             value={icon}
                             key={icon.toString()}

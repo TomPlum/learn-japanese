@@ -1,4 +1,5 @@
 import { Icon } from "../domain/Icon";
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
 class LocalStorageService {
 
@@ -7,10 +8,10 @@ class LocalStorageService {
     /**
      * Caches the given icon in local storage.
      * Considers only the last 5 icons as recently used.
-     * Duplicate icons are disgregarded.
+     * Duplicate icons are disregarded.
      * @param icon The name of the icon to store.
      */
-    public addRecentlyUsedIcon(icon: Icon) {
+    public addRecentlyUsedIcon(icon: IconDefinition | Icon | string) {
         const icons = this.getRecentlyUsedIcons();
         if (!icons.includes(icon)) {
             if (icons.length === 5) {
@@ -22,7 +23,7 @@ class LocalStorageService {
         }
     }
 
-    public getRecentlyUsedIcons(): Icon[] {
+    public getRecentlyUsedIcons(): (IconDefinition | Icon | string)[] {
         const value = localStorage.getItem(this.RECENT_ICONS_KEY);
         return JSON.parse(value ?? "[]") as Icon[];
     }

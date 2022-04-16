@@ -133,7 +133,7 @@ class PresetRepository {
      * Includes play, learn, and custom.
      * @return A list of learn and play presets.
      */
-    public getAllPresets(): Promise<Presets> {
+    public async getAllPresets(): Promise<Presets> {
         return RestClient.get<PresetsResponse>("/presets/all").then(response => {
             const data = response.data;
             if (data) {
@@ -153,7 +153,7 @@ class PresetRepository {
      * that have been favourite by the current user.
      * @return an array of favourite presets.
      */
-    public getFavouritePresets(): Promise<Presets> {
+    public async getFavouritePresets(): Promise<Presets> {
         return RestClient.get<PresetsResponse>("/presets/favourites").then(response => {
             const data = response.data;
             if (data) {
@@ -164,7 +164,7 @@ class PresetRepository {
                 return { learn: [], play: [] };
             }
         }).catch(response => {
-            return { learn: [], play: [], error: response.error };
+            return { learn: [], play: [], error: response.error ?? response };
         });
     }
 

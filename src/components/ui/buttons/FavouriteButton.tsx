@@ -1,23 +1,24 @@
-import { faStar, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../../styles/sass/components/ui/buttons/FavouritesButton.module.scss";
 import { useEffect, useState } from "react";
 import { Fade } from "react-bootstrap";
 import { Numbers } from "../../../utility/Numbers";
 import Arrays from "../../../utility/Arrays";
+import SessionMode from "../../../domain/session/SessionMode";
+import Icon from "../menu/icon/Icon";
 
 export interface FavouriteButtonProps {
-    name: string;
+    preset: SessionMode;
     editing: boolean;
     className?: string;
-    icon: IconDefinition;
     onDelete?: () => void;
     onStart?: () => void;
 }
 
 const FavouriteButton = (props: FavouriteButtonProps) => {
 
-    const { name, editing, className, icon, onDelete, onStart } = props;
+    const { preset, editing, className, onDelete, onStart } = props;
 
     const [inside, setInside] = useState(false);
     const [classes, setClasses] = useState([styles.favourite, className ?? ""]);
@@ -82,8 +83,8 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
             {!inside && (
                 <Fade in={!inside} timeout={2000} appear>
                     <div className={styles.container}>
-                        <FontAwesomeIcon icon={icon} fixedWidth className={styles.icon} />
-                        <span className={styles.name}>{name}</span>
+                        <Icon value={preset.icon} className={styles.icon} />
+                        <span className={styles.name}>{preset.displayName}</span>
                     </div>
                 </Fade>
             )}

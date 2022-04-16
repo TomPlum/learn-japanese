@@ -25,3 +25,8 @@ test('Should render nothing if the icon value is passed falsy', () => {
     const icon = container.firstChild!;
     expect(icon).toBeNull();
 });
+
+test('Should render a string literal icon if it is not a recognised font awesome icon', () => {
+    const component = render(<Icon value="を" />);
+    expect(component.getByText('を')).toBeInTheDocument();
+});

@@ -2,6 +2,9 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import FavouriteButton, { FavouriteButtonProps } from "../../../../components/ui/buttons/FavouriteButton";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { Numbers } from "../../../../utility/Numbers";
+import PlayMode from "../../../../domain/session/PlayMode";
+import { KanaSettingsBuilder } from "../../../../domain/session/settings/data/KanaSettings";
+import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
 
 const onStartHandler = jest.fn();
 const onDeleteHandler = jest.fn();
@@ -17,10 +20,9 @@ const setup = () => {
 
 beforeEach(() => {
     props = {
-        name: "Test Button",
+        preset: new PlayMode("Test Button", "ffffff", faApple, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build()),
         editing: false,
         className: "myClass",
-        icon: faApple,
         onStart: onStartHandler,
         onDelete: onDeleteHandler
     };
