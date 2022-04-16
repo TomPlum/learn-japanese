@@ -172,7 +172,7 @@ class PresetRepository {
         return data.map((preset: LearnPresetResponse) => {
             const topic = Topic.fromName(preset.topic);
             const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
-            return new LearnMode(preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), undefined, false);
+            return new LearnMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), undefined, false);
         });
     }
 
@@ -181,7 +181,7 @@ class PresetRepository {
             const topic = Topic.fromName(preset.topic);
             const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
             const gameSettings = this.gameSettingsConverter.convert(preset.game);
-            return new PlayMode(preset.name, preset.colour, preset.icon, dataSettings, gameSettings, undefined, false);
+            return new PlayMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, gameSettings, undefined, false);
         });
     }
 }

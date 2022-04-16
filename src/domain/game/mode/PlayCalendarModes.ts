@@ -26,27 +26,27 @@ export default class PlayCalendarModes implements PlayMenuModes {
             .build();
 
         return [
-            new PlayMode("Days of the Week", "#3fb4de", faCalendarDay,
+            new PlayMode(1, "Days of the Week", "#3fb4de", faCalendarDay,
                 new CalendarSettingsBuilder().withDays().build(),
                 gameSettings
             ),
-            new PlayMode("Months of the Year", "#ff7730", faCalendarAlt,
+            new PlayMode(1, "Months of the Year", "#ff7730", faCalendarAlt,
                 new CalendarSettingsBuilder().withMonths().build(),
                 gameSettings
             ),
-            new PlayMode("Temporal Nouns", "#e32f2f", faClock,
+            new PlayMode(1, "Temporal Nouns", "#e32f2f", faClock,
                 new CalendarSettingsBuilder().withTemporalNouns().build(),
                 gameSettings
             ),
-            new PlayMode("Seasonal", "#e7cb38", faCloudSunRain,
+            new PlayMode(1, "Seasonal", "#e7cb38", faCloudSunRain,
                 new CalendarSettingsBuilder().withSeasons().build(),
                 gameSettings
             ),
-            new PlayMode("Common Phrases", "#ff6038", faAlignLeft,
+            new PlayMode(1, "Common Phrases", "#ff6038", faAlignLeft,
                 new CalendarSettingsBuilder().withPhrases().build(),
                 gameSettings
             ),
-            new PlayMode("Everything", "#39c461", faGlobeAmericas,
+            new PlayMode(1, "Everything", "#39c461", faGlobeAmericas,
                 new CalendarSettingsBuilder().withDays().withMonths().withTemporalNouns().withSeasons().withPhrases().build(),
                 gameSettings
             )

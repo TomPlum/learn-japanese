@@ -20,7 +20,7 @@ const setup = () => {
 
 beforeEach(() => {
     props = {
-        preset: new PlayMode("Test Button", "ffffff", faApple, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build()),
+        preset: new PlayMode(1, "Test Button", "ffffff", faApple, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build()),
         editing: false,
         className: "myClass",
         onStart: onStartHandler,

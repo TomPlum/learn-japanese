@@ -1,3 +1,5 @@
+@import "src/styles/sass/colours";
+
 .body {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
 }
@@ -7,4 +9,24 @@
   justify-content: center;
   width: 100%;
   padding: 15px 0;
+}
+
+.emptyMessage {
+  font-size: 1.1em;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.emptyAddButton {
+  color: $learn-colour;
+  margin-right: 5px;
+  margin-bottom: 2px;
+  font-size: 1.3em;
+  transition: all ease-in-out 0.2s;
+}
+
+.emptyAddButton:hover {
+  color: rgba($learn-colour, 0.8);
+  cursor: pointer;
 }

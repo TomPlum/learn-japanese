@@ -35,14 +35,14 @@ beforeEach(() => {
         icon: faApple,
         onClick: onClickItemHandler,
         selected: "Test Mode",
-        value: new PlayMode("Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
+        value: new PlayMode(1, "Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
     };
 
     itemProps2 = {
         icon: faPencilAlt,
         onClick: onClickItemHandler,
         selected: "Test Mode 2",
-        value: new PlayMode("Test Mode 2", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
+        value: new PlayMode(1, "Test Mode 2", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
     };
 });
 

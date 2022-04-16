@@ -19,7 +19,7 @@ import KanaTypeFilter from "../../../filters/kana/KanaTypeFilter";
 export default class PlayKanaModes implements PlayMenuModes {
     getModes(): PlayMode[] {
         return [
-            new PlayMode("Relaxed", "#fdb40e", faGraduationCap,
+            new PlayMode(1, "Relaxed", "#fdb40e", faGraduationCap,
                 new KanaSettingsBuilder().withEverything().build(),
                 new GameSettingsBuilder()
                     .withQuestionSettings(
@@ -32,7 +32,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                     .withLifeSettings(new LifeSettingsBuilder().isEnabled(false).build())
                     .build()
             ),
-            new PlayMode("Time Attack", "#ff7730", faHourglassStart,
+            new PlayMode(1, "Time Attack", "#ff7730", faHourglassStart,
                 new KanaSettingsBuilder().withEverything().build(),
                 new GameSettingsBuilder()
                     .withQuestionSettings(
@@ -47,7 +47,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                     .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(10).build())
                     .build()
             ),
-            new PlayMode("Rōmaji", "#1785e2", faFont,
+            new PlayMode(1, "Rōmaji", "#1785e2", faFont,
                 new KanaSettingsBuilder().withEverything().build(),
                 new GameSettingsBuilder()
                     .withQuestionSettings(
@@ -61,7 +61,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                     .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
                     .build()
             ),
-            new PlayMode("Kana", "#7e2bd7", faKickstarterK,
+            new PlayMode(1, "Kana", "#7e2bd7", faKickstarterK,
                 new KanaSettingsBuilder().withEverything().build(),
                 new GameSettingsBuilder()
                     .withQuestionSettings(
@@ -80,7 +80,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                     .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(3).build())
                     .build()
             ),
-            new PlayMode("Match", "#38c742", faBezierCurve,
+            new PlayMode(1, "Match", "#38c742", faBezierCurve,
                 new KanaSettingsBuilder().withEverything().withQuantity(45).build(),
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()
@@ -95,7 +95,7 @@ export default class PlayKanaModes implements PlayMenuModes {
                     .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
                     .build()
             ),
-            new PlayMode("Hardcore", "#fc3131", faFire,
+            new PlayMode(1, "Hardcore", "#fc3131", faFire,
                 new KanaSettingsBuilder().withEverything().withMaxQuantity().build(),
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()

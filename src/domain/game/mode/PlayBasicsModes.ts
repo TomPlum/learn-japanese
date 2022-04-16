@@ -26,27 +26,27 @@ export default class PlayBasicsModes implements PlayMenuModes {
             .build();
 
         return [
-            new PlayMode("Colours", "#db6b25", faFillDrip,
+            new PlayMode(1, "Colours", "#db6b25", faFillDrip,
                 new BasicsSettingsBuilder().withColours().withQuantity(25).build(),
                 gameSettings
             ),
-            new PlayMode("Animals", "#439bdc", faDog,
+            new PlayMode(1, "Animals", "#439bdc", faDog,
                 new BasicsSettingsBuilder().withAnimals().withQuantity(25).build(),
                 gameSettings
             ),
-            new PlayMode("Directions", "#d01b4c", faCompass,
+            new PlayMode(1, "Directions", "#d01b4c", faCompass,
                 new BasicsSettingsBuilder().withDirections().withQuantity(25).build(),
                 gameSettings
             ),
-            new PlayMode("Weather", "#e3c93a", faCloudSunRain,
+            new PlayMode(1, "Weather", "#e3c93a", faCloudSunRain,
                 new BasicsSettingsBuilder().withWeather().withQuantity(25).build(),
                 gameSettings
             ),
-            new PlayMode("Family", "#23b820", faChild,
+            new PlayMode(1, "Family", "#23b820", faChild,
                 new BasicsSettingsBuilder().withFamily().withQuantity(25).build(),
                 gameSettings
             ),
-            new PlayMode("Body", "#5641d0", faHandPaper,
+            new PlayMode(1, "Body", "#5641d0", faHandPaper,
                 new BasicsSettingsBuilder().withBody().withQuantity(25).build(),
                 gameSettings
             )

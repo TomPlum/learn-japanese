@@ -9,27 +9,27 @@ export default class LearnNumbersModes implements LearnMenuModes {
         const defaultLearnSettings = new LearnSettings();
 
         return [
-            new LearnMode("Numbers", "#fdb40e", faSortNumericDown,
+            new LearnMode(1, "Numbers", "#fdb40e", faSortNumericDown,
                 new NumbersSettingsBuilder().withNumbers().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Counters", "#ff7730", faStopwatch,
+            new LearnMode(1, "Counters", "#ff7730", faStopwatch,
                 new NumbersSettingsBuilder().withCounters().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Age", "#1785e2", faBaby,
+            new LearnMode(1, "Age", "#1785e2", faBaby,
                 new NumbersSettingsBuilder().withAge().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Exceptions", "#a01219", faTimes,
+            new LearnMode(1, "Exceptions", "#a01219", faTimes,
                 new NumbersSettingsBuilder().withExceptions().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Units", "#fc3131", faRuler,
+            new LearnMode(1, "Units", "#fc3131", faRuler,
                 new NumbersSettingsBuilder().withUnits().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Sequence", "#fc3131", faSort,
+            new LearnMode(1, "Sequence", "#fc3131", faSort,
                 new NumbersSettingsBuilder().withSequence().build(),
                 defaultLearnSettings
             )

@@ -154,8 +154,8 @@ describe("Preset Repository", () => {
                 expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playPresetResponse.data);
                 expect(mockGameSettingsConverter).toHaveBeenCalledWith(playPresetResponse.game);
                 expect(response).toStrictEqual({
-                    learn: [new LearnMode("Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false)],
-                    play: [new PlayMode("Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false)]
+                    learn: [new LearnMode(1, "Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false)],
+                    play: [new PlayMode(1, "Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false)]
                 });
             });
         });
@@ -186,8 +186,8 @@ describe("Preset Repository", () => {
                 expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playPresetResponse.data);
                 expect(mockGameSettingsConverter).toHaveBeenCalledWith(playPresetResponse.game);
                 expect(response).toStrictEqual({
-                    learn: [new LearnMode("Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false)],
-                    play: [new PlayMode("Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false)]
+                    learn: [new LearnMode(1, "Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false)],
+                    play: [new PlayMode(1, "Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false)]
                 });
             });
         });

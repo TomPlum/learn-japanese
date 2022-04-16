@@ -9,15 +9,15 @@ class LearnKanaModes implements LearnMenuModes {
         const defaultLearnSettings = new LearnSettings();
 
         return [
-            new LearnMode("Hiragana", "#fdb40e", "あ",
+            new LearnMode(1, "Hiragana", "#fdb40e", "あ",
                 new KanaSettingsBuilder().withHiragana().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Katakana", "#ff7730", "ア",
+            new LearnMode(1, "Katakana", "#ff7730", "ア",
                 new KanaSettingsBuilder().withKatakana().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Diacriticals", "#1785e2", "ざ",
+            new LearnMode(1, "Diacriticals", "#1785e2", "ざ",
                 new KanaSettingsBuilder()
                     .withHiragana()
                     .withKatakana()
@@ -28,7 +28,7 @@ class LearnKanaModes implements LearnMenuModes {
                     .build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Diagraphs", "#a01219", "きゃ",
+            new LearnMode(1, "Diagraphs", "#a01219", "きゃ",
                 new KanaSettingsBuilder()
                     .withHiragana()
                     .withKatakana()
@@ -37,11 +37,11 @@ class LearnKanaModes implements LearnMenuModes {
                     .build(),
                 defaultLearnSettings
             ),
-            new LearnMode("All", "#fc3131", "あア",
+            new LearnMode(1, "All", "#fc3131", "あア",
                 new KanaSettingsBuilder().withEverything().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Custom", "#41d085", faVial,
+            new LearnMode(1, "Custom", "#41d085", faVial,
                 new KanaSettingsBuilder().build(),
                 defaultLearnSettings
             )

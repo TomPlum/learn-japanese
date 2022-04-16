@@ -14,8 +14,8 @@ jest.mock("../../repository/PresetRepository", () => {
     };
 });
 
-const learnMode = new LearnMode("Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings());
-const playMode = new PlayMode("Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
+const learnMode = new LearnMode(1, "Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings());
+const playMode = new PlayMode(1, "Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
 
 describe("Preset Service", () => {
     const service = new PresetService();

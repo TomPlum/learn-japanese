@@ -9,27 +9,27 @@ export default class LearnSentenceStructureModes implements LearnMenuModes {
         const defaultLearnSettings = new LearnSettings();
 
         return [
-            new LearnMode("Adverbs", "#5641d0", faExclamation,
+            new LearnMode(1, "Adverbs", "#5641d0", faExclamation,
                 new SentenceStructureSettingsBuilder().withAdverbs().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Particles", "#ff7730", "を",
+            new LearnMode(1, "Particles", "#ff7730", "を",
                 new SentenceStructureSettingsBuilder().withParticles().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Expressions", "#1785e2", faComment,
+            new LearnMode(1, "Expressions", "#1785e2", faComment,
                 new SentenceStructureSettingsBuilder().withExpressions().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Verbs", "#e3c93a", faRunning,
+            new LearnMode(1, "Verbs", "#e3c93a", faRunning,
                 new SentenceStructureSettingsBuilder().withVerbs().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Nouns", "#4fdb4b", faCube,
+            new LearnMode(1, "Nouns", "#4fdb4b", faCube,
                 new SentenceStructureSettingsBuilder().withNouns().build(),
                 defaultLearnSettings
             ),
-            new LearnMode("Adjectives", "#fd0e3e", faFire,
+            new LearnMode(1, "Adjectives", "#fd0e3e", faFire,
                 new SentenceStructureSettingsBuilder().withAdjectives().build(),
                 defaultLearnSettings
             )

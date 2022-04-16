@@ -26,27 +26,27 @@ export default class PlayNumbersModes implements PlayMenuModes {
             .build();
 
         return [
-            new PlayMode("Numbers", "#fdb40e", faSortNumericDown,
+            new PlayMode(1, "Numbers", "#fdb40e", faSortNumericDown,
                 new NumbersSettingsBuilder().withNumbers().build(),
                 gameSettings
             ),
-            new PlayMode("Counters", "#ff7730", faCalculator,
+            new PlayMode(1, "Counters", "#ff7730", faCalculator,
                 new NumbersSettingsBuilder().withCounters().build(),
                 gameSettings
             ),
-            new PlayMode("Age", "#1785e2", faBaby,
+            new PlayMode(1, "Age", "#1785e2", faBaby,
                 new NumbersSettingsBuilder().withAge().build(),
                 gameSettings
             ),
-            new PlayMode("Exceptions", "#a01219", faTimes,
+            new PlayMode(1, "Exceptions", "#a01219", faTimes,
                 new NumbersSettingsBuilder().withExceptions().build(),
                 gameSettings
             ),
-            new PlayMode("Units", "#4ed440", faRuler,
+            new PlayMode(1, "Units", "#4ed440", faRuler,
                 new NumbersSettingsBuilder().withUnits().build(),
                 gameSettings
             ),
-            new PlayMode("Sequence", "#fc3131", faSort,
+            new PlayMode(1, "Sequence", "#fc3131", faSort,
                 new NumbersSettingsBuilder().withSequence().build(),
                 gameSettings
             )

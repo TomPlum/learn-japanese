@@ -5,6 +5,7 @@ import { GridItem } from "../../components/layout/wizard/grid/GridItem";
 import { Icon } from "../Icon";
 
 abstract class SessionMode implements GridItem {
+    protected readonly _id: number;
     private readonly _displayName: string;
     private readonly _colour: string;
     private readonly _icon: IconDefinition | string;
@@ -13,8 +14,9 @@ abstract class SessionMode implements GridItem {
     private readonly _shortName?: string;
     private readonly _custom?: boolean;
 
-    protected constructor(displayName: string, colour: string, icon: IconDefinition | string,
+    protected constructor(id: number, displayName: string, colour: string, icon: IconDefinition | string,
                           dataSettings: DataSettings, modeSettings: ModeSettings, shortName?: string, custom?: boolean) {
+        this._id = id;
         this._displayName = displayName;
         this._colour = colour;
         this._icon = icon;
@@ -23,6 +25,8 @@ abstract class SessionMode implements GridItem {
         this._shortName = shortName;
         this._custom = custom;
     }
+
+    abstract getUniqueID(): string;
 
     get displayName(): string {
         return this._displayName;

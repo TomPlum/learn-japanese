@@ -14,7 +14,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
         const defaultKanjiSettings = new KanjiSettingsBuilder().withJoyoKanji().withQuantity(25).build();
 
         return [
-            new PlayMode("Kanji", "#6857ee", faPaintBrush,
+            new PlayMode(1, "Kanji", "#6857ee", faPaintBrush,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
                     .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
@@ -27,7 +27,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                         .build()
                     ).build()
             ),
-            new PlayMode("Meaning", "#65cd3a", faSchool,
+            new PlayMode(1, "Meaning", "#65cd3a", faSchool,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()
@@ -37,7 +37,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                         .build()
                     ).build()
             ),
-            new PlayMode("On'yomi", "#eacd35", faStar,
+            new PlayMode(1, "On'yomi", "#eacd35", faStar,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()
@@ -48,7 +48,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                         .build()
                     ).build()
             ),
-            new PlayMode("Kun'yomi", "#e21717", faCircle,
+            new PlayMode(1, "Kun'yomi", "#e21717", faCircle,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()
@@ -59,7 +59,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                         .build()
                     ).build()
             ),
-            new PlayMode("Match", "#e79711", faBezierCurve,
+            new PlayMode(1, "Match", "#e79711", faBezierCurve,
                 new KanjiSettingsBuilder().withJoyoKanji().withQuantity(80).build(),
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()
@@ -71,7 +71,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                     )
                     .build()
             ),
-            new PlayMode("Random", "#3cabca", faRandom,
+            new PlayMode(1, "Random", "#3cabca", faRandom,
                 defaultKanjiSettings,
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()
@@ -83,7 +83,7 @@ export default class PlayKanjiModes implements PlayMenuModes {
                     )
                     .build()
             ),
-            new PlayMode("Grade 1 Practice", "#23d5ea", faFlask, defaultKanjiSettings,
+            new PlayMode(1, "Grade 1 Practice", "#23d5ea", faFlask, defaultKanjiSettings,
                 new GameSettingsBuilder()
                     .withQuestionSettings(new QuestionSettingsBuilder()
                         .withFields(LearnableField.RANDOM, LearnableField.RANDOM)

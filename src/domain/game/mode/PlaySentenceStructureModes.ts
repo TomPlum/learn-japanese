@@ -15,7 +15,7 @@ class PlaySentenceStructureModes implements PlayMenuModes {
         const defaultDataSettings = new SentenceStructureSettingsBuilder().build();
 
         return [
-            new PlayMode("Japanese", "#a92739", faToriiGate,
+            new PlayMode(1, "Japanese", "#a92739", faToriiGate,
                 new SentenceStructureSettingsBuilder()
                     .withQuantity(25)
                     .withAdjectives()
@@ -35,7 +35,7 @@ class PlaySentenceStructureModes implements PlayMenuModes {
                     .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(5).build()
                 ).build()
             ),
-            new PlayMode("Meaning", "#57afd9", faGrinBeam,   new SentenceStructureSettingsBuilder()
+            new PlayMode(1, "Meaning", "#57afd9", faGrinBeam,   new SentenceStructureSettingsBuilder()
                     .withQuantity(25)
                     .withAdjectives()
                     .withNouns()
@@ -53,16 +53,16 @@ class PlaySentenceStructureModes implements PlayMenuModes {
                     .withLifeSettings(new LifeSettingsBuilder().isEnabled().withQuantity(5).build()
                 ).build()
             ),
-            new PlayMode("Placeholder 3", "#000", faCircle, defaultDataSettings,
+            new PlayMode(1, "Placeholder 3", "#000", faCircle, defaultDataSettings,
                 new GameSettingsBuilder().build()
             ),
-            new PlayMode("Placeholder 4", "#000", faCircle, defaultDataSettings,
+            new PlayMode(1, "Placeholder 4", "#000", faCircle, defaultDataSettings,
                 new GameSettingsBuilder().build()
             ),
-            new PlayMode("Placeholder 5", "#000", faCircle, defaultDataSettings,
+            new PlayMode(1, "Placeholder 5", "#000", faCircle, defaultDataSettings,
                 new GameSettingsBuilder().build()
             ),
-            new PlayMode("Placeholder 6", "#000", faCircle, defaultDataSettings,
+            new PlayMode(1, "Placeholder 6", "#000", faCircle, defaultDataSettings,
                 new GameSettingsBuilder().build()
             ),
         ];
