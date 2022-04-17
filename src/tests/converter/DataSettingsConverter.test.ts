@@ -15,6 +15,160 @@ describe("Data Settings Converter", () => {
 
     const converter = new DataSettingsConverter();
 
+    describe("Convert API Request", () => {
+        it("Should convert valid kana settings", () => {
+            const settings = new KanaSettingsBuilder()
+                .withHiragana(true)
+                .withKatakana(false)
+                .withDiagraphs(false)
+                .withDiacriticals(true)
+                .withOnlyDiagraphs(false)
+                .withQuantity(50)
+                .build();
+
+            const serialised = converter.serialise(settings);
+
+            expect(serialised).toStrictEqual({
+                quantity: 50,
+                regular: true,
+                hiragana: true,
+                katakana: false,
+                diagraphs: false,
+                diacriticals: true,
+                onlyDiagraphs: false,
+                topic: "Hiragana & Katakana"
+            });
+        });
+
+        it("Should convert valid kanji settings", () => {
+            const settings = new KanjiSettingsBuilder()
+                .withTags(["number", "animal"])
+                .withQuantity(75)
+                .withJoyoKanji(false)
+                .withGrades([KyoikuGrade.ONE, KyoikuGrade.THREE])
+                .build();
+
+            const serialised = converter.serialise(settings);
+
+            expect(serialised).toStrictEqual({
+                tags: ["number", "animal"],
+                topic: "Jōyō Kanji",
+                grades: [1, 3],
+                quantity: 75
+            });
+        });
+
+        it("Should convert valid numbers settings", () => {
+            const settings = new NumbersSettingsBuilder()
+                .withQuantity(60)
+                .withNumbers(true)
+                .withAge(false)
+                .withUnits(true)
+                .withSequence(false)
+                .withCounters(true)
+                .withExceptions(false)
+                .build();
+
+            const serialised = converter.serialise(settings);
+
+            expect(serialised).toStrictEqual({
+                topic: "Numbers & Counting",
+                quantity: 60,
+                numbers: true,
+                counters: true,
+                age: false,
+                exceptions: false,
+                units: true,
+                sequence: false
+            });
+        });
+
+        it("Should convert valid sentence structure settings", () => {
+            const settings = new SentenceStructureSettingsBuilder()
+                .withQuantity(25)
+                .withVerbs(false)
+                .withNouns(true)
+                .withParticles(false)
+                .withAdverbs(true)
+                .withAdjectives(false)
+                .withExpressions(true)
+                .build();
+
+            const serialised = converter.serialise(settings);
+
+            expect(serialised).toStrictEqual({
+                topic: "Sentence Structure",
+                quantity: 25,
+                adverbs: true,
+                particles: false,
+                expressions: true,
+                verbs: false,
+                nouns: true,
+                adjectives: false
+            });
+        });
+
+        it("Should convert valid calendar settings", () => {
+            const settings = new CalendarSettingsBuilder()
+                .withQuantity(75)
+                .withTemporalNouns(false)
+                .withSeasons(true)
+                .withDays(false)
+                .withMonths(true)
+                .withPhrases(false)
+                .withTemporalNouns(true)
+                .build();
+
+            const serialised = converter.serialise(settings);
+
+            expect(serialised).toStrictEqual({
+                topic: "Days & Months",
+                quantity: 75,
+                days: false,
+                months: true,
+                seasons: true,
+                nouns: true,
+                phrases: false
+            });
+        });
+
+        it("Should convert valid basics settings", () => {
+            const settings = new BasicsSettingsBuilder()
+                .withQuantity(10)
+                .withWeather(false)
+                .withBody(true)
+                .withDirections(false)
+                .withFamily(true)
+                .withColours(false)
+                .withAnimals(true)
+                .build();
+
+            const serialised = converter.serialise(settings);
+
+            expect(serialised).toStrictEqual({
+                topic: "Basics",
+                quantity: 10,
+                colours: false,
+                animals: true,
+                directions: false,
+                weather: false,
+                family: true,
+                body: true
+            });
+        });
+
+        it("Should throw an exception if an invalid instance is encountered", () => {
+            const settings = new UnknownSettings(50);
+            expect(() => converter.serialise(settings)).toThrow("Unknown DataSettings Type [UnknownSettings]");
+        });
+
+        class UnknownSettings extends DataSettings {
+            constructor(quantity: number) {
+                super(Topic.KANJI, quantity);
+            }
+        }
+    });
+
     describe("Convert API Response", () => {
         it("Should convert valid kana response", () => {
             const response: KanaDataSettingsResponse = {

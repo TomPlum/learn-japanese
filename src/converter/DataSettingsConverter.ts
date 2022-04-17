@@ -7,7 +7,7 @@ import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../
 import CalendarSettings, { CalendarSettingsBuilder } from "../domain/session/settings/data/CalendarSettings";
 import BasicsSettings, { BasicsSettingsBuilder } from "../domain/session/settings/data/BasicsSettings";
 import { KyoikuGrade } from "../domain/kanji/KyoikuGrade";
-import { BasicsDataSettingsResponse, CalenderDataSettingsResponse, DataSettingsResponse, KanaDataSettingsResponse, KanjiDataSettingsResponse, NumbersDataSettingsResponse, SentenceStructureDataSettingsResponse } from "../repository/PresetRepository";
+import { BasicsDataSettingsRequest, BasicsDataSettingsResponse, CalenderDataSettingsRequest, CalenderDataSettingsResponse, DataSettingsRequest, DataSettingsResponse, KanaDataSettingsRequest, KanaDataSettingsResponse, KanjiDataSettingsRequest, KanjiDataSettingsResponse, NumbersDataSettingsRequest, NumbersDataSettingsResponse, SentenceStructureDataSettingsRequest, SentenceStructureDataSettingsResponse } from "../repository/PresetRepository";
 import Topic from "../domain/Topic";
 
 class DataSettingsConverter {
@@ -85,6 +85,91 @@ class DataSettingsConverter {
             default: {
                 throw new Error(`DataSettingsConverter: Unknown Topic: ${topic.name}`);
             }
+        }
+    }
+
+    public convertRequest(settings: DataSettings): DataSettingsRequest {
+        if (settings instanceof KanaSettings) {
+            return {
+                quantity: settings.quantity,
+                config: {
+                    topic: settings.topic.name,
+                    quantity: settings.quantity,
+                    hiragana: settings.hiragana,
+                    katakana: settings.katakana,
+                    diagraphs: settings.diagraphs,
+                    diacriticals: settings.diacriticals,
+                    regular: settings.regular,
+                    onlyDiagraphs: settings.onlyDiagraphs
+                } as KanaDataSettingsRequest
+            }
+        } else if (settings instanceof KanjiSettings) {
+            return {
+                quantity: settings.quantity,
+                config: {
+                    topic: settings.topic.name,
+                    quantity: settings.quantity,
+                    tags: settings.tags,
+                    grades: settings.grades.map(it => it.value)
+                } as KanjiDataSettingsRequest
+            }
+        } else if (settings instanceof NumbersSettings) {
+            return {
+                quantity: settings.quantity,
+                config: {
+                    topic: settings.topic.name,
+                    quantity: settings.quantity,
+                    age: settings.age,
+                    exceptions: settings.exceptions,
+                    counters: settings.counters,
+                    sequence: settings.sequence,
+                    units: settings.units,
+                    numbers: settings.numbers
+                } as NumbersDataSettingsRequest
+            }
+        } else if (settings instanceof SentenceStructureSettings) {
+            return {
+                quantity: settings.quantity,
+                config: {
+                    topic: settings.topic.name,
+                    quantity: settings.quantity,
+                    expressions: settings.expressions,
+                    nouns: settings.nouns,
+                    verbs: settings.verbs,
+                    particles: settings.particles,
+                    adverbs: settings.adverbs,
+                    adjectives: settings.adjectives
+                } as SentenceStructureDataSettingsRequest
+            }
+        } else if (settings instanceof CalendarSettings) {
+            return {
+                quantity: settings.quantity,
+                config: {
+                    topic: settings.topic.name,
+                    quantity: settings.quantity,
+                    nouns: settings.nouns,
+                    days: settings.days,
+                    months: settings.months,
+                    phrases: settings.phrases,
+                    seasons: settings.seasons
+                } as CalenderDataSettingsRequest
+            }
+        } else if (settings instanceof BasicsSettings) {
+            return {
+                quantity: settings.quantity,
+                config: {
+                    topic: settings.topic.name,
+                    quantity: settings.quantity,
+                    body: settings.body,
+                    animals: settings.animals,
+                    directions: settings.directions,
+                    family: settings.family,
+                    weather: settings.weather,
+                    colours: settings.colours
+                } as BasicsDataSettingsRequest
+            }
+        } else {
+            throw new Error(`Unknown DataSettings Type [${settings.constructor.name}]`);
         }
     }
 
