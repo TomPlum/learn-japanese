@@ -297,7 +297,7 @@ class PresetRepository {
                 const play = this.convertPlayPresets(data.play);
                 return { learn: learn, play: play };
             } else {
-                return { learn: [], play: [] };
+                return { learn: [], play: [], error: "Failed to retrieve favourites." };
             }
         }).catch(response => {
             return { learn: [], play: [], error: response.error ?? response };
@@ -328,6 +328,7 @@ class PresetRepository {
         });
     }
 
+    //TODO: Move these to the PresetConverter class
     private convertLearnPresets(data: LearnPresetResponse[]): LearnMode[] {
         return data.map((preset: LearnPresetResponse) => {
             const topic = Topic.fromName(preset.topic);

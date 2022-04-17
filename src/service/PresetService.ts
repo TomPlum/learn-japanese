@@ -32,7 +32,7 @@ class PresetService {
      */
     public async getFavouritePresets(): Promise<LearnPlayPresets> {
         return this.repository.getFavouritePresets().then((response: Presets) => {
-            return { learn: response.learn, play: response.play };
+            return { learn: response.learn, play: response.play, error: response.error };
         }).catch(response => {
             return { learn: [], play: [], error: response.error };
         });
