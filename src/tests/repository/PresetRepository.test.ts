@@ -23,10 +23,12 @@ jest.mock("../../converter/GameSettingsConverter", () => function() { return { c
 //Mock RestClient Methods
 const mockPost = jest.fn();
 const mockGet = jest.fn();
+const mockDelete = jest.fn();
 
 beforeEach(() => {
     RestClient.post = mockPost;
     RestClient.get = mockGet;
+    RestClient.delete = mockDelete;
 });
 
 const learnPresetResponse: LearnPresetResponse = {
@@ -196,6 +198,66 @@ describe("Preset Repository", () => {
             mockGet.mockRejectedValueOnce({ error: "Failed to retrieve favourite presets." });
             return repository.getFavouritePresets().then(response => {
                 expect(response).toEqual({ learn: [], play: [], error: "Failed to retrieve favourite presets." });
+            });
+        });
+    });
+
+    describe("Delete Favourite Play Preset", () => {
+        it("Should call the rest client with the correct endpoint", () => {
+            mockDelete.mockResolvedValueOnce({ });
+            return repository.deleteFavouritePlayPreset(12).then(() => {
+                expect(mockDelete).toHaveBeenLastCalledWith("/presets/favourites/play/delete?=12");
+            });
+        });
+
+        it("Should return true if the API call succeeds", () => {
+            mockDelete.mockResolvedValueOnce({ });
+            return repository.deleteFavouritePlayPreset(12).then(response => {
+                expect(response.success).toBe(true);
+            });
+        });
+
+        it("Should return false if the API call fails", () => {
+            mockDelete.mockRejectedValueOnce({ });
+            return repository.deleteFavouritePlayPreset(12).then(response => {
+                expect(response.success).toBe(false);
+            });
+        });
+
+        it("Should return the error message if the API calls fails and has one in the response", () => {
+            mockDelete.mockRejectedValueOnce({ error: "Failed to delete favourite." });
+            return repository.deleteFavouritePlayPreset(12).then(response => {
+                expect(response.error).toStrictEqual({ error: "Failed to delete favourite." });
+            });
+        });
+    });
+
+    describe("Delete Favourite Learn Preset", () => {
+        it("Should call the rest client with the correct endpoint", () => {
+            mockDelete.mockResolvedValueOnce({ });
+            return repository.deleteFavouriteLearnPreset(12).then(() => {
+                expect(mockDelete).toHaveBeenLastCalledWith("/presets/favourites/learn/delete?=12");
+            });
+        });
+
+        it("Should return true if the API call succeeds", () => {
+            mockDelete.mockResolvedValueOnce({ });
+            return repository.deleteFavouriteLearnPreset(12).then(response => {
+                expect(response.success).toBe(true);
+            });
+        });
+
+        it("Should return false if the API call fails", () => {
+            mockDelete.mockRejectedValueOnce({ });
+            return repository.deleteFavouriteLearnPreset(12).then(response => {
+                expect(response.success).toBe(false);
+            });
+        });
+
+        it("Should return the error message if the API calls fails and has one in the response", () => {
+            mockDelete.mockRejectedValueOnce({ error: "Failed to delete favourite." });
+            return repository.deleteFavouriteLearnPreset(12).then(response => {
+                expect(response.error).toStrictEqual({ error: "Failed to delete favourite." });
             });
         });
     });

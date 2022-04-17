@@ -5,6 +5,7 @@ import Topic from "../domain/Topic";
 import LearnSettings from "../domain/session/settings/LearnSettings";
 import GameSettingsConverter from "../converter/GameSettingsConverter";
 import PlayMode from "../domain/session/PlayMode";
+import UpdateResponse from "../rest/response/UpdateResponse";
 
 interface PresetResponse {
     id: number;
@@ -165,6 +166,30 @@ class PresetRepository {
             }
         }).catch(response => {
             return { learn: [], play: [], error: response.error ?? response };
+        });
+    }
+
+    /**
+     * Removes the play preset with the given ID from the users' favourites.
+     * @param id The ID of the preset to remove.
+     */
+    public async deleteFavouritePlayPreset(id: number): Promise<UpdateResponse> {
+        return RestClient.delete(`/presets/favourites/play/delete?=${id}`).then(() => {
+            return { success: true };
+        }).catch(error => {
+            return { success: false, error: error };
+        });
+    }
+
+    /**
+     * Removes the learn preset with the given ID from the users' favourites.
+     * @param id The ID of the preset to remove.
+     */
+    public async deleteFavouriteLearnPreset(id: number): Promise<UpdateResponse> {
+        return RestClient.delete(`/presets/favourites/learn/delete?=${id}`).then(() => {
+            return { success: true };
+        }).catch(error => {
+            return { success: false, error: error };
         });
     }
 
