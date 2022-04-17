@@ -7,7 +7,6 @@ import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { clearGameSettings } from "../../../../slices/GameSettingsSlice";
 import { clearDataSettings } from "../../../../slices/DataSettingsSlice";
-import { createNextState } from "@reduxjs/toolkit";
 
 const onCloseHandler = jest.fn();
 const history = createMemoryHistory();

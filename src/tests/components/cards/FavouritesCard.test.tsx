@@ -1,8 +1,6 @@
-import PresetService from "../../../service/PresetService";
 import { render } from "@testing-library/react";
 import FavouritesCard from "../../../components/cards/FavouritesCard";
 import PlayMode from "../../../domain/session/PlayMode";
-import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
 import LearnMode from "../../../domain/session/LearnMode";
