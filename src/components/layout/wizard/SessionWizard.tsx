@@ -109,7 +109,6 @@ const SessionWizard = (props: SessionWizardProps) => {
         } else {
             history.push('/learn');
         }
-
     }
 
     const handleChangeTopic = (topic: Topic) => {

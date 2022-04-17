@@ -1,9 +1,8 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import LearnConfirmationStep, { LearnConfirmationStepProps } from "../../../../../components/layout/wizard/steps/LearnConfirmationStep";
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings";
 import LearnSettings from "../../../../../domain/session/settings/LearnSettings";
-import { WizardStep } from "../../../../../components/layout/wizard/SessionWizard";
 
 const onSelectStageHandler = jest.fn();
 let props: LearnConfirmationStepProps;
@@ -22,39 +21,7 @@ beforeEach(() => {
     };
 });
 
-test('It should render the text before the mode', () => {
+test('It should render the learn session settings confirmation step', () => {
     setup();
-    expect(screen.getByText("You'll be")).toBeInTheDocument();
-});
-
-test('It should render the mode text', () => {
-    setup();
-    expect(screen.getByText("learning")).toBeInTheDocument();
-});
-
-test('It should render the text in-between the mode and the topic', () => {
-    setup();
-    expect(screen.getByText("about")).toBeInTheDocument();
-});
-
-test('It should render the topic name', () => {
-    setup();
-    expect(screen.getByText("Hiragana & Katakana")).toBeInTheDocument();
-});
-
-test('It should render the text after the topic name', () => {
-    setup();
-    expect(screen.getByText("via flash cards.")).toBeInTheDocument();
-});
-
-test('Clicking the mode should call the onSelectStage event handler with the mode stage', () => {
-    setup();
-    fireEvent.click(screen.getByText('learning'));
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(WizardStep.MODE);
-});
-
-test('Clicking the topic should call the onSelectStage event handler with the topic stage', () => {
-    setup();
-    fireEvent.click(screen.getByText('Hiragana & Katakana'));
-    expect(onSelectStageHandler).toHaveBeenLastCalledWith(WizardStep.TOPIC);
+    expect(screen.getByTestId("learn-session-settings-summary")).toBeInTheDocument();
 });
