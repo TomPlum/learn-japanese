@@ -6,6 +6,113 @@ import LearnSettings from "../domain/session/settings/LearnSettings";
 import GameSettingsConverter from "../converter/GameSettingsConverter";
 import PlayMode from "../domain/session/PlayMode";
 import UpdateResponse from "../rest/response/UpdateResponse";
+import PresetConverter from "../converter/PresetConverter";
+
+export interface PresetRequest {
+    name: string;
+    icon: string;
+    colour: string;
+    topic: string;
+    data: DataSettingsRequest;
+}
+
+export interface LearnPresetRequest extends PresetRequest {
+    // Doesn't current expose anything else
+}
+
+export interface PlayPresetRequest extends PresetRequest {
+    game: GameConfigRequest;
+}
+
+export interface DataSettingsRequest {
+    quantity: number | undefined;
+    config: DataConfigRequest;
+}
+
+export interface DataConfigRequest {}
+
+export interface GameConfigRequest {
+    hints: HintConfigRequest;
+    lives: LivesConfigRequest;
+    time: TimeConfigRequest;
+    question: QuestionConfigRequest;
+}
+
+export interface HintConfigRequest {
+    enabled: boolean;
+    quantity: number;
+    unlimited: boolean;
+}
+
+export interface LivesConfigRequest {
+    enabled: boolean;
+    quantity: number;
+}
+
+export interface TimeConfigRequest {
+    timed: boolean;
+    countdown: boolean;
+    secondsPerQuestion: number | undefined;
+}
+
+interface QuestionConfigRequest {
+    questionField: string;
+    answerField: string;
+    type: string;
+    cards: number,
+    quantity: number,
+    score: boolean,
+    answerFilter: number | undefined
+}
+
+export interface KanaDataSettingsRequest extends DataConfigRequest {
+    hiragana: boolean;
+    katakana: boolean;
+    diagraphs: boolean;
+    diacriticals: boolean;
+    regular: boolean;
+    onlyDiagraphs: boolean;
+}
+
+export interface KanjiDataSettingsRequest extends DataConfigRequest {
+    grades: number[];
+    tags: string[];
+}
+
+export interface NumbersDataSettingsRequest extends DataConfigRequest {
+    numbers: boolean;
+    counters: boolean;
+    age: boolean;
+    exceptions: boolean;
+    units: boolean;
+    sequence: boolean;
+}
+
+export interface SentenceStructureDataSettingsRequest extends DataConfigRequest {
+    adverbs: boolean;
+    particles: boolean;
+    expressions: boolean;
+    verbs: boolean;
+    nouns: boolean;
+    adjectives: boolean;
+}
+
+export interface CalenderDataSettingsRequest extends DataConfigRequest {
+    days: boolean;
+    months: boolean;
+    seasons: boolean;
+    nouns: boolean;
+    phrases: boolean;
+}
+
+export interface BasicsDataSettingsRequest extends DataConfigRequest {
+    colours: boolean;
+    animals: boolean;
+    directions: boolean;
+    weather: boolean;
+    family: boolean;
+    body: boolean;
+}
 
 interface PresetResponse {
     id: number;
@@ -17,7 +124,7 @@ interface PresetResponse {
 }
 
 export interface LearnPresetResponse extends PresetResponse {
-
+    // Doesn't current expose anything else
 }
 
 export interface PlayPresetResponse extends PresetResponse {
@@ -122,12 +229,40 @@ interface PresetsResponse {
 export interface Presets {
     learn: LearnMode[];
     play: PlayMode[];
+    error?: string;
 }
 
 class PresetRepository {
 
+    private readonly presetConverter = new PresetConverter();
     private readonly dataSettingsConverter = new DataSettingsConverter();
     private readonly gameSettingsConverter = new GameSettingsConverter();
+
+    /**
+     * Saves a custom play preset for the current user.
+     * @param preset The custom preset.
+     */
+    public async savePlayPreset(preset: PlayMode): Promise<UpdateResponse> {
+        const request = this.presetConverter.convertRequest(preset);
+        return RestClient.post("/presets/custom/play/save", request).then(() => {
+            return { success: true };
+        }).catch(response => {
+            return { success: false, error: response.error };
+        });
+    }
+
+    /**
+     * Saves a custom learn preset for the current user.
+     * @param preset The custom preset.
+     */
+    public async saveLearnPreset(preset: LearnMode): Promise<UpdateResponse> {
+        const request = this.presetConverter.convertRequest(preset);
+        return RestClient.post("/presets/custom/learn/save", request).then(() => {
+            return { success: true };
+        }).catch(response => {
+            return { success: false, error: response.error };
+        });
+    }
 
     /**
      * Retrieves a list of all presets from the API.
