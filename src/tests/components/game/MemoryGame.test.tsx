@@ -64,15 +64,14 @@ beforeEach(() => {
     Arrays.getRandomElements = getRandomElements;
     Environment.variable = environment;
 
-    //Always returns the first n elements in order so it is deterministic
-    getRandomObjects.mockImplementation((array: any[]) => {
-        const quantity = props.settings.question.quantity;
+    //Always returns the first n elements in order, so it is deterministic
+    getRandomObjects.mockImplementation((array: any[], quantity: number) => {
         const questions = Arrays.copy(array).splice(0, quantity);
         const remaining = Arrays.copy(array).splice(quantity, array.length);
         return [questions, remaining];
     });
 
-    //Always returns the array in the same order so it doesn't shuffle
+    //Always returns the array in the same order, so it doesn't shuffle
     shuffle.mockImplementation((array: any[]) => {
         return array;
     });
@@ -170,6 +169,24 @@ test('Answering correctly without using a hint that question should not reduce t
     //We should still see the full 5 hints remaining having not used one.
     fireEvent.click(screen.getByText('HINT'));
     expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
+});
+
+test('Passing data settings with an undefined question quantity should set 1 current question value', async () => {
+    // Omit question settings quantity so it is defaulted to undefined
+    props.settings = new GameSettingsBuilder().withQuestionSettings(new QuestionSettingsBuilder().build()).build();
+    setup();
+
+    // Should simply render the first question with no issues
+    expect(screen.getByText('あ')).toBeInTheDocument();
+});
+
+test('Passing data settings with 0 question quantity should set 1 current question value', async () => {
+    // Explicitly set the question settings quantity to 0
+    props.settings = new GameSettingsBuilder().withQuestionSettings(new QuestionSettingsBuilder().withQuantity(0).build()).build();
+    setup();
+
+    // Should simply render the first question with no issues
+    expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
 test('Answering correctly should advance the progress bar', () => {

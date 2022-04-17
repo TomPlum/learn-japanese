@@ -279,11 +279,11 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                         hidden={paused}
                         ref={this.question}
                         question={questions}
-                        answerField={answerField}
-                        questionField={questionField}
                         key={currentQuestionID}
-                        isValid={this.handleAnswerValidity}
+                        answerField={answerField}
                         wrong={wrongAnswerOptions}
+                        questionField={questionField}
+                        isValid={this.handleAnswerValidity}
                     />
                 );
             }
@@ -451,8 +451,25 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
 
     private onPaused = () => this.setState({ paused: !this.state.paused });
 
+    /**
+     * Retrieves the next question.
+     *
+     * The first element in the tuple is the next question. This is an array
+     * type as there can be multiple data objects for a choice or match question.
+     *
+     * The second element in the tuple is an array of all the remaining
+     * data objects for future questions.
+     *
+     * If the current type of question requires multiple correct question options
+     * (I.e. a match question) - then multiple questions are returned as part of the
+     * "current question" array. If no quantity is provided, then only 1 is returned.
+     *
+     * @param data The pool of questions.
+     * @return tuple The first question(s) and then the remaining.
+     */
     private getNextQuestion = (data: Learnable[]): [Learnable[], Learnable[]] => {
-        const quantity = this.props.settings.question.quantity;
+        const correctAnswerQuantity = this.props.settings.question.quantity;
+        const quantity = (!correctAnswerQuantity || correctAnswerQuantity === 0) ? 1 : correctAnswerQuantity;
         return Arrays.getRandomObjects(data, quantity);
     }
 
