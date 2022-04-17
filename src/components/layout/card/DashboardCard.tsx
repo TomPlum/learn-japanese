@@ -53,7 +53,11 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
                             return React.cloneElement(child, { error: error, onReload: onReload })
                         }
                         case DashboardCardBody: {
-                            return React.cloneElement(child, { size: size, updating: updating });
+                            if (!error) {
+                                return React.cloneElement(child, { size: size, updating: updating });
+                            } else {
+                                return null;
+                            }
                         }
                         case DashboardCardFooter: {
                             return React.cloneElement(child, { className: [styles.footer, child.props.className].join(" ") });

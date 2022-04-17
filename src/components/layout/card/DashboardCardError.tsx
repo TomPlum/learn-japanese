@@ -1,11 +1,11 @@
 import styles from "../../../styles/sass/components/layout/card/DashboardCardError.module.scss";
 import React, { PropsWithChildren } from "react";
 
-export interface DashboardCardHeaderProps {
+export interface DashboardCardErrorProps {
     active?: boolean;
 }
 
-const DashboardCardError = (props: PropsWithChildren<DashboardCardHeaderProps>) => {
+const DashboardCardError = (props: PropsWithChildren<DashboardCardErrorProps>) => {
     const { active, children } = props;
 
     if (!active) {
