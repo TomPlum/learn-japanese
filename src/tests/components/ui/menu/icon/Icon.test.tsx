@@ -30,3 +30,8 @@ test('Should render a string literal icon if it is not a recognised font awesome
     const component = render(<Icon value="を" />);
     expect(component.getByText('を')).toBeInTheDocument();
 });
+
+test('Should spread the given style object properties to the underlying icon element', () => {
+    const { container } = render(<Icon value="FaAtom" style={{ color: "#F3F3F3" }} />);
+    expect(container.firstChild).toHaveStyle({ color: "#F3F3F3" });
+});

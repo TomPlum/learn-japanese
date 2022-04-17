@@ -9,11 +9,12 @@ export interface IconProps {
     size?: string;
     value: IconDefinition | IconType | string;
     className?: string;
+    style?: {};
     onClick?: (icon: IconDefinition | IconType | string) => void;
 }
 
 const Icon = (props: IconProps) => {
-    const { size, value, className, onClick, ...rest } = props;
+    const { size, value, style, className, onClick, ...rest } = props;
 
     const isReactIconsType = (value: IconDefinition | IconType | string): value is IconType => {
         return value.toString().startsWith("Fa");
@@ -26,8 +27,8 @@ const Icon = (props: IconProps) => {
     const iconProps = {
         ...rest,
         key: value.toString(),
-        style: { 'fontSize': size },
         onClick: () => onClick?.(value),
+        style: { 'fontSize': size, ...style },
         title: value.toString().replace("Fa", ""),
         className: [className, styles.icon].join(" ")
     };
