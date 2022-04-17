@@ -6,7 +6,7 @@ import { TimeSettingsBuilder } from "../domain/session/settings/game/TimeSetting
 import { QuestionSettingsBuilder } from "../domain/session/settings/game/QuestionSettings";
 import LearnableField from "../domain/learn/LearnableField";
 import QuestionType from "../domain/game/QuestionType";
-import { GameConfigResponse } from "../repository/PresetRepository";
+import { GameConfigRequest, GameConfigResponse } from "../repository/PresetRepository";
 
 class GameSettingsConverter {
 
@@ -45,6 +45,34 @@ class GameSettingsConverter {
                     .build()
             )
             .build();
+    }
+
+    public convertRequest(settings: GameSettings): GameConfigRequest {
+        return {
+            hints: {
+                enabled: settings.hints.enabled,
+                quantity: settings.hints.quantity,
+                unlimited: settings.hints.unlimited
+            },
+            lives: {
+                enabled: settings.lives.enabled,
+                quantity: settings.lives.quantity
+            },
+            time: {
+                timed: settings.time.timed,
+                countdown: settings.time.countdown,
+                secondsPerQuestion: settings.time.secondsPerQuestion
+            },
+            question: {
+                cards: settings.question.cards,
+                score: settings.question.score,
+                type: settings.question.type.name,
+                quantity: settings.question.quantity,
+                answerField: settings.question.answerField.name,
+                questionField: settings.question.questionField.name,
+                answerFilter: 0
+            }
+        }
     }
 
     public serialise(settings: GameSettings): GameSettingState {

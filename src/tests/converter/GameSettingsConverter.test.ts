@@ -13,6 +13,70 @@ describe("Game Settings Converter", () => {
 
     const converter = new GameSettingsConverter();
 
+    describe("Game Settings API Request", () => {
+        it("Should convert the given settings into the API request format", () => {
+            const settings = new GameSettingsBuilder()
+                .withLifeSettings(
+                    new LifeSettingsBuilder()
+                        .withQuantity(12)
+                        .isEnabled(true)
+                        .build()
+                )
+                .withHintSettings(
+                    new HintSettingsBuilder()
+                        .withQuantity(8)
+                        .isEnabled(true)
+                        .areUnlimited(false)
+                        .build()
+                )
+                .withTimeSettings(
+                    new TimeSettingsBuilder()
+                        .isTimed(true)
+                        .isCountDown(false)
+                        .withSecondsPerQuestion(0)
+                        .build()
+                )
+                .withQuestionSettings(
+                    new QuestionSettingsBuilder()
+                        .withFields(LearnableField.KANA, LearnableField.ROMAJI)
+                        .withQuantity(150)
+                        .withType(QuestionType.CHOICE)
+                        .withCardQuantity(4)
+                        .withScoreTracking(true)
+                        .build()
+                )
+                .build();
+
+            const target = converter.convertRequest(settings);
+
+            expect(target).toStrictEqual({
+                hints: {
+                    quantity: 8,
+                    enabled: true,
+                    unlimited: false
+                },
+                lives: {
+                    quantity: 12,
+                    enabled: true
+                },
+                time: {
+                    timed: true,
+                    countdown: false,
+                    secondsPerQuestion: 0
+                },
+                question: {
+                    cards: 4,
+                    score: true,
+                    type: "Multiple Choice",
+                    quantity: 150,
+                    answerField: "Rōmaji",
+                    questionField: "Kana",
+                    answerFilter: 0
+                }
+            });
+        });
+    });
+
     describe("API Response Conversion", () => {
         it("Should de-serialise a valid API response", () => {
             const response: GameConfigResponse = {
