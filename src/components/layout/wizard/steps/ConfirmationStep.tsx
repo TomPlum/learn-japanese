@@ -56,7 +56,9 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
         if (time?.countdown) {
             return (
                 <span>{"you'll have "}
-                    <span className={styles.time}>{time?.secondsPerQuestion}{" seconds per question"}</span>
+                    <span className={[styles.time, styles.highlight].join(" ")}>
+                        {time?.secondsPerQuestion}{" seconds per question"}
+                    </span>
                 </span>
             );
         }
