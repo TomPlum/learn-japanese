@@ -28,6 +28,10 @@ abstract class SessionMode implements GridItem {
 
     abstract getUniqueID(): string;
 
+    get id(): number {
+        return this._id;
+    }
+
     get displayName(): string {
         return this._displayName;
     }
