@@ -17,10 +17,11 @@ const setup = () => {
         ...component
     }
 }
+const preset = new PlayMode(1, "Test Button", "ffffff", faApple, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
 
 beforeEach(() => {
     props = {
-        preset: new PlayMode(1, "Test Button", "ffffff", faApple, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build()),
+        preset: preset,
         editing: false,
         className: "myClass",
         onStart: onStartHandler,
@@ -91,7 +92,7 @@ test('Clicking the button when not in edit mode should call the onStart event ha
 
     // Clicking the button should call the event handler
     fireEvent.click(surface);
-    expect(onStartHandler).toHaveBeenCalled();
+    expect(onStartHandler).toHaveBeenCalledWith(preset);
 });
 
 test('Clicking the button when not in edit mode should NOT call the onStart event handler', () => {
@@ -112,5 +113,5 @@ test('Clicking the delete button while in edit mode should call the onDelete eve
     setup();
 
     fireEvent.click(screen.getByTitle('Delete'));
-    expect(onDeleteHandler).toHaveBeenCalled();
+    expect(onDeleteHandler).toHaveBeenCalledWith(preset);
 });

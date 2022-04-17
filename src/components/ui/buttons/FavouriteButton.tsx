@@ -12,8 +12,8 @@ export interface FavouriteButtonProps {
     preset: SessionMode;
     editing: boolean;
     className?: string;
-    onDelete?: () => void;
-    onStart?: () => void;
+    onDelete?: (preset: SessionMode) => void;
+    onStart?: (preset: SessionMode) => void;
 }
 
 const FavouriteButton = (props: FavouriteButtonProps) => {
@@ -49,24 +49,26 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
 
     const handleStart = () => {
         if (inside && !editing) {
-            onStart?.();
+            onStart?.(preset);
         }
     }
 
     return (
         <div className={classes.join(" ")}>
-            <div
-                onClick={handleStart}
-                className={styles.surface}
-                onMouseOut={handleMouseOut}
-                onMouseEnter={handleMouseEnter}
-            />
+            {!editing && (
+                <div
+                    onClick={handleStart}
+                    className={styles.surface}
+                    onMouseOut={handleMouseOut}
+                    onMouseEnter={handleMouseEnter}
+                />
+            )}
 
             {editing && (
                 <FontAwesomeIcon
                     title="Delete"
                     icon={faTimes}
-                    onClick={onDelete}
+                    onClick={() => onDelete?.(preset)}
                     className={styles.delete}
                 />
             )}
