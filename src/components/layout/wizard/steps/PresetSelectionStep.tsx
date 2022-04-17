@@ -47,7 +47,7 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
         <div className={styles.container}>
             <ScrollableContainer height={344}>
                 {editing && (
-                    <EditCustomPresetForm onClose={() => setEditing(false)} />
+                    <EditCustomPresetForm preset={preset} onClose={() => setEditing(false)} />
                 )}
 
                 {!editing && (
