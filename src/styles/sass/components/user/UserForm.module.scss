@@ -1,9 +1,13 @@
 @import "src/styles/sass/mixins";
+@import "src/styles/sass/colours";
 
 $border-radius: 12px;
 
 .modal {
   @include noSelect;
+  color: $light-1;
+  background-color: $dark-2;
+  border: 4px solid $dark-1;
   border-radius: $border-radius;
 }
 
@@ -13,14 +17,24 @@ $border-radius: 12px;
 
 .header button {
   font-size: 2em;
+  color: $light-2 !important;
+  opacity: 1;
+  text-shadow: none;
   transition: all ease 0.2s;
+}
+
+.header button:hover {
+  color: $light-1 !important;
+  opacity: 1;
 }
 
 .header {
   font-family: "Ciutadella Rounded Medium", sans-serif;
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
-  background-color: #f1f1f1;
+  border-bottom: 2px solid $dark-1;
+  background-color: $dark-2;
+  color: $light-1;
   padding: 15px;
   display: flex;
   align-items: center;
@@ -42,7 +56,12 @@ $border-radius: 12px;
   text-align: left;
 }
 
+.icon {
+  margin-right: 8px;
+}
+
 .footer {
+  border-top: 2px solid $dark-1;
   padding: 8px 10px;
   font-family: "Ciutadella Rounded Medium", sans-serif;
 }
@@ -64,7 +83,7 @@ $border-radius: 12px;
 }
 
 .footerText {
-  color: #1d1d1d;
+  color: $light-2;
   transition: all ease 0.2s;
 }
 
@@ -75,4 +94,14 @@ $border-radius: 12px;
 
 .list {
   padding-left: 15px;
+}
+
+.input {
+  background-color: $dark-1;
+  color: $light-1;
+}
+
+.input:focus {
+  background-color: rgba($dark-1, 0.8);
+  color: $light-1;
 }

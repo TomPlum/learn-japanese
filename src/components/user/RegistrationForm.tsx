@@ -195,6 +195,7 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     value={email}
                     isValid={validEmail}
                     isInvalid={!validEmail}
+                    className={styles.input}
                     placeholder="Enter email"
                     onChange={handleEmailChange}
                     onFocus={() => setEmailFocused(true)}
@@ -232,6 +233,7 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     value={username}
                     placeholder="Username"
                     isValid={validUsername}
+                    className={styles.input}
                     isInvalid={!validUsername}
                     onChange={handleUsernameChange}
                 />
@@ -258,6 +260,7 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     value={nickname}
                     placeholder="Nickname"
                     isValid={validNickName}
+                    className={styles.input}
                     isInvalid={!validNickName}
                     onChange={handleNicknameChange}
                 />
@@ -271,6 +274,7 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     value={password}
                     placeholder="Password"
                     isValid={validPassword}
+                    className={styles.input}
                     isInvalid={!validPassword}
                     onChange={handlePasswordChange}
                 />
@@ -289,8 +293,9 @@ const RegistrationForm = (props: RegistrationFormProps) => {
                     required
                     type="password"
                     value={secondPassword}
-                    placeholder="Confirm Password"
+                    className={styles.input}
                     isValid={validSecondPassword}
+                    placeholder="Confirm Password"
                     isInvalid={!validSecondPassword}
                     onChange={handleSecondPasswordChange}
                 />

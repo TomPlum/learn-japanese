@@ -116,6 +116,7 @@ const LoginForm = (props: LoginFormProps) => {
                     ref={usernameField}
                     placeholder="Username"
                     isValid={usernameValid}
+                    className={styles.input}
                     isInvalid={!usernameValid}
                     onChange={handleUsernameChange}
                 />
@@ -130,6 +131,7 @@ const LoginForm = (props: LoginFormProps) => {
                     ref={passwordField}
                     placeholder="Password"
                     isValid={passwordValid}
+                    className={styles.input}
                     isInvalid={!passwordValid}
                     onChange={handlePasswordChange}
                 />

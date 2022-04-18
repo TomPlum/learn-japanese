@@ -26,7 +26,7 @@ const UserForm = (props: UserFormProps) => {
         <Modal contentClassName={styles.modal} centered backdrop="static" onHide={onClose} show={show} data-testid="user-modal">
             <Modal.Header className={styles.header} closeButton onHide={onClose}>
                 <Modal.Title>
-                    <FontAwesomeIcon icon={login ? faUser : faUserPlus} fixedWidth />
+                    <FontAwesomeIcon icon={login ? faUser : faUserPlus} fixedWidth className={styles.icon} />
                     {login ? "Login" : " Register"}
                 </Modal.Title>
             </Modal.Header>
