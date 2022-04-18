@@ -60,14 +60,14 @@ test('Should render the start text when hovering over the button if not in edit 
 
     // Should stop rendering the preset name and show the start text
     expect(screen.queryByText('Test Button')).not.toBeInTheDocument();
-    expect(screen.getByText('Start')).toBeInTheDocument();
+    expect(screen.getByText('Start Play')).toBeInTheDocument();
 
     // Mouse out of the listening surface div
     fireEvent.mouseOut(container.firstChild?.firstChild!);
 
     // Should stop rendering the start text and re-render the preset name
     expect(screen.getByText('Test Button')).toBeInTheDocument();
-    expect(screen.queryByText('Start')).not.toBeInTheDocument();
+    expect(screen.queryByText('Start Play')).not.toBeInTheDocument();
 });
 
 test('Should NOT render the start text when hovering over the button if in edit mode', () => {
@@ -78,7 +78,7 @@ test('Should NOT render the start text when hovering over the button if in edit 
     fireEvent.mouseEnter(container.firstChild?.firstChild!);
 
     // Should not render the start text, and keep the name
-    expect(screen.queryByText('Start')).not.toBeInTheDocument();
+    expect(screen.queryByText('Start Play')).not.toBeInTheDocument();
     expect(screen.getByText('Test Button')).toBeInTheDocument();
 });
 

@@ -7,6 +7,7 @@ import { Numbers } from "../../../utility/Numbers";
 import Arrays from "../../../utility/Arrays";
 import SessionMode from "../../../domain/session/SessionMode";
 import Icon from "../menu/icon/Icon";
+import PlayMode from "../../../domain/session/PlayMode";
 
 export interface FavouriteButtonProps {
     preset: SessionMode;
@@ -20,8 +21,11 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
 
     const { preset, editing, className, onDelete, onStart } = props;
 
+    const isPlay = preset instanceof PlayMode;
+    const backgroundColourClass = isPlay ? styles.play : styles.learn;
+
     const [inside, setInside] = useState(false);
-    const [classes, setClasses] = useState([styles.favourite, className ?? ""]);
+    const [classes, setClasses] = useState([styles.favourite, backgroundColourClass, className ?? ""]);
 
     useEffect(() => {
         if (editing) {
@@ -70,8 +74,8 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
                 <FontAwesomeIcon
                     title="Delete"
                     icon={faTimes}
-                    onClick={() => onDelete?.(preset)}
                     className={styles.delete}
+                    onClick={() => onDelete?.(preset)}
                 />
             )}
 
@@ -79,7 +83,7 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
                 <Fade in={inside} timeout={2000} appear>
                     <div className={styles.container}>
                         <FontAwesomeIcon icon={faStar} fixedWidth className={styles.star} />
-                        <span className={styles.name}>Start</span>
+                        <span className={styles.name}>Start {isPlay ? "Play" : "Learn"}</span>
                     </div>
                 </Fade>
             )}

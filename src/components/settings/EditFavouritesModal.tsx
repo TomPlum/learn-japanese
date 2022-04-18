@@ -77,7 +77,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
         enforceFocus: false,
         dialogClassName: styles.dialog,
         contentClassName: styles.content,
-        "data-testid": "add-favourites"
+        "data-testid": "edit-favourites"
     }
 
     const handleSave = () => {

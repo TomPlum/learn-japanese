@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import FavouritesCard from "../../../components/cards/FavouritesCard";
 import PlayMode from "../../../domain/session/PlayMode";
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
