@@ -1,0 +1,105 @@
+@import "src/styles/sass/colours";
+
+.header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.close {
+  margin-left: auto;
+  color: $light-2;
+  font-size: 1.2em;
+  transition: color ease-in-out 0.2s;
+}
+
+.close:hover {
+  cursor: pointer;
+  color: $light-1;
+}
+
+.name {
+  margin-left: 8px;
+  font-size: 1.5em;
+}
+
+.content {
+  color: $light-1;
+  background-color: $dark-2;
+  border-radius: 10px;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  padding: 10px 15px 10px 15px;
+  border: 1px solid $dark-1;
+}
+
+.body {
+  width: 100%;
+  height: 450px;
+}
+
+.dialog {
+  max-width: 650px;
+}
+
+.modal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.icon {
+  font-size: 1.5em;
+  color: $inspect;
+  margin-bottom: 3px;
+}
+
+.favourites {
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
+}
+
+.favourite {
+  margin-left: 0;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.save {
+  margin-left: auto;
+  width: 75px;
+}
+
+.footer {
+  display: flex;
+  bottom: 0;
+  width: 100%;
+}
+
+.learn, .play {
+  margin-right: 10px;
+  border-radius: 12px;
+  border: none;
+  transition: all ease-in-out 0.2s;
+}
+
+.learn:active, .play:active, .learn:focus, .play:focus {
+  box-shadow: none !important;
+}
+
+.disabled {
+  opacity: 0.6;
+}
+
+.learn {
+  background-color: $learn-colour;
+}
+
+.play {
+  background-color: $play-colour;
+}
+
+.play:focus, .play:hover {
+  background-color: #aa2727 !important;
+}
