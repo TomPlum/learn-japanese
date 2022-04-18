@@ -1,7 +1,7 @@
 @import "../../colours";
+@import "src/styles/sass/components/forms";
 
 .wrapper {
-  max-width: 375px;
   font-family: "Ciutadella Rounded Medium", sans-serif;
 }
 
@@ -33,9 +33,7 @@
 }
 
 .desc {
-  color: #FFF;
-  opacity: 0.8;
-  text-align: center;
+  color: $light-1;
   font-size: 1.2em;
 }
 

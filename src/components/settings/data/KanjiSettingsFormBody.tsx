@@ -1,15 +1,13 @@
 import styles from "../../../styles/sass/components/layout/KanjiSettingsMenu.module.scss";
-import { Col, Container, Row } from "react-bootstrap";
-import KyoikuGradeButton from "../../ui/buttons/KyoikuGradeButton";
+import { Col, Row } from "react-bootstrap";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
-import { faGraduationCap, faLeaf, faMountain, faPaintBrush, faSchool, faSun } from "@fortawesome/free-solid-svg-icons";
 import QuantityField from "../../ui/fields/QuantityField";
 import Arrays from "../../../utility/Arrays";
 import TemplateString from "../../../domain/TemplateString";
 import React, { useEffect, useState } from "react";
 import KanjiSettings, { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings";
 import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep";
-
+import KyoikuGradeRadioButton from "../../ui/buttons/KyoikuGradeRadioButton";
 
 const KanjiSettingsFormBody = (props: DataSettingsStepFormProps<KanjiSettings>) => {
 
@@ -59,67 +57,49 @@ const KanjiSettingsFormBody = (props: DataSettingsStepFormProps<KanjiSettings>) 
     }
 
     return (
-        <Container fluid className={[styles.wrapper, className].join(" ")}>
+        <div className={[styles.wrapper, className].join(" ")}>
             <Row>
-                <Col>
-                    <p className={styles.desc}>
-                        {getDescription()}
-                    </p>
+                <Col xs={12}>
+                    {getDescription()}
+                </Col>
+                <Col xs={12}>
+                    <KyoikuGradeRadioButton
+                        grade={KyoikuGrade.ONE}
+                        onClick={onSelectGrade}
+                        selected={grades.includes(KyoikuGrade.ONE)}
+                    />
+                    <KyoikuGradeRadioButton
+                        grade={KyoikuGrade.TWO}
+                        onClick={onSelectGrade}
+                        selected={grades.includes(KyoikuGrade.TWO)}
+                    />
+                    <KyoikuGradeRadioButton
+                        grade={KyoikuGrade.THREE}
+                        onClick={onSelectGrade}
+                        selected={grades.includes(KyoikuGrade.THREE)}
+                    />
+                    <KyoikuGradeRadioButton
+                        grade={KyoikuGrade.FOUR}
+                        onClick={onSelectGrade}
+                        selected={grades.includes(KyoikuGrade.FOUR)}
+                    />
+                    <KyoikuGradeRadioButton
+                        grade={KyoikuGrade.FIVE}
+                        onClick={onSelectGrade}
+                        selected={grades.includes(KyoikuGrade.FIVE)}
+                    />
+                    <KyoikuGradeRadioButton
+                        grade={KyoikuGrade.SIX}
+                        onClick={onSelectGrade}
+                        selected={grades.includes(KyoikuGrade.SIX)}
+                    />
                 </Col>
             </Row>
 
+
             <Row>
-                <Col xs={6}>
-                    <KyoikuGradeButton
-                        icon={faPaintBrush}
-                        grade={KyoikuGrade.ONE}
-                        onClick={onSelectGrade}
-                        isSelected={grades.includes(KyoikuGrade.ONE)}
-                    />
-                </Col>
-                <Col>
-                    <KyoikuGradeButton
-                        icon={faSchool}
-                        grade={KyoikuGrade.TWO}
-                        onClick={onSelectGrade}
-                        isSelected={grades.includes(KyoikuGrade.TWO)}
-                    />
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={6}>
-                    <KyoikuGradeButton
-                        icon={faLeaf}
-                        onClick={onSelectGrade}
-                        grade={KyoikuGrade.THREE}
-                        isSelected={grades.includes(KyoikuGrade.THREE)}
-                    />
-                </Col>
-                <Col>
-                    <KyoikuGradeButton
-                        icon={faSun}
-                        onClick={onSelectGrade}
-                        grade={KyoikuGrade.FOUR}
-                        isSelected={grades.includes(KyoikuGrade.FOUR)}
-                    />
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={6}>
-                    <KyoikuGradeButton
-                        icon={faMountain}
-                        onClick={onSelectGrade}
-                        grade={KyoikuGrade.FIVE}
-                        isSelected={grades.includes(KyoikuGrade.FIVE)}
-                    />
-                </Col>
-                <Col>
-                    <KyoikuGradeButton
-                        icon={faGraduationCap}
-                        grade={KyoikuGrade.SIX}
-                        onClick={onSelectGrade}
-                        isSelected={grades.includes(KyoikuGrade.SIX)}
-                    />
+                <Col xs={12}>
+
                 </Col>
             </Row>
 
@@ -132,7 +112,7 @@ const KanjiSettingsFormBody = (props: DataSettingsStepFormProps<KanjiSettings>) 
                     />
                 </Col>
             </Row>
-        </Container>
+        </div>
     )
 }
 
