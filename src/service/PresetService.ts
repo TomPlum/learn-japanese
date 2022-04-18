@@ -34,7 +34,7 @@ class PresetService {
         return this.repository.getFavouritePresets().then((response: Presets) => {
             return { learn: response.learn, play: response.play, error: response.error };
         }).catch(response => {
-            return { learn: [], play: [], error: response.error };
+            return { learn: [], play: [], error: response.error ?? response };
         });
     }
 
