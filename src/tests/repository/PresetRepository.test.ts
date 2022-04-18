@@ -1,4 +1,3 @@
-//Mock Kanji Converter
 import RestClient from "../../rest/RestClient";
 import PresetRepository, { DataSettingsRequest, GameConfigRequest, LearnPresetRequest, LearnPresetResponse, PlayPresetRequest, PlayPresetResponse } from "../../repository/PresetRepository";
 import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSettings";

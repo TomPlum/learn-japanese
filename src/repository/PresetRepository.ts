@@ -277,10 +277,10 @@ class PresetRepository {
                 const play = this.convertPlayPresets(data.play);
                 return { learn: learn, play: play };
             } else {
-                return { learn: [], play: [] };
+                return Promise.reject("Failed to retrieve presets.");
             }
         }).catch(response => {
-            return { learn: [], play: [], error: response.error };
+            return { learn: [], play: [], error: response.error ?? response };
         });
     }
 
@@ -297,7 +297,7 @@ class PresetRepository {
                 const play = this.convertPlayPresets(data.play);
                 return { learn: learn, play: play };
             } else {
-                return { learn: [], play: [], error: "Failed to retrieve favourites." };
+                return Promise.reject("Failed to retrieve favourites.");
             }
         }).catch(response => {
             return { learn: [], play: [], error: response.error ?? response };
