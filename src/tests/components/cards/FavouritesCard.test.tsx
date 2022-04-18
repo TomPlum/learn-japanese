@@ -8,8 +8,9 @@ import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import renderReduxConsumer from "../../renderReduxConsumer";
 
 const mockPresetService = jest.fn();
+const mockGetAllPresets = jest.fn();
 jest.mock("../../../service/PresetService", () => {
-    return function() { return { getFavouritePresets: mockPresetService }};
+    return function() { return { getFavouritePresets: mockPresetService, getAllPresets: mockGetAllPresets }};
 });
 
 const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
@@ -60,4 +61,18 @@ test('Clicking the close button in the confirm modal should stop rendering it', 
 
     fireEvent.click(screen.getByTitle('Close'));
     expect(screen.queryByTestId('launch-preset-confirmation')).not.toBeInTheDocument();
+});
+
+test('When there are no favourites it should render the add button', async () => {
+    mockPresetService.mockResolvedValueOnce({ learn: [], play: [] });
+    const component = renderReduxConsumer(<FavouritesCard />);
+    expect(await component.findByText('You can track your favourite presets here')).toBeInTheDocument();
+});
+
+test('Clicking the empty state add button should render the add favourites modal', async () => {
+    mockPresetService.mockResolvedValueOnce({ learn: [], play: [] });
+    mockGetAllPresets.mockResolvedValueOnce({});
+    const component = renderReduxConsumer(<FavouritesCard />);
+    fireEvent.click(await component.findByText('You can track your favourite presets here'));
+    expect(await screen.findByTestId('edit-favourites'));
 });
