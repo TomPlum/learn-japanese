@@ -53,8 +53,10 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
         }
     }
 
+    const testId = `favourite-button-${preset.displayName.toLowerCase().replace(" ", "-")}`;
+
     return (
-        <div className={classes.join(" ")}>
+        <div className={classes.join(" ")} data-testid={testId}>
             {!editing && (
                 <div
                     onClick={handleStart}

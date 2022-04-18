@@ -7,6 +7,8 @@ import FavouriteButton from "../ui/buttons/FavouriteButton";
 import PresetService from "../../service/PresetService";
 import SessionMode from "../../domain/session/SessionMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import UpdateResponse from "../../rest/response/UpdateResponse";
+import LaunchPresetConfirmationModal from "../settings/LaunchPresetConfirmationModal";
 
 const FavouritesCard = () => {
 
@@ -14,6 +16,8 @@ const FavouritesCard = () => {
     const [editing, setEditing] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | undefined>(undefined);
+    const [confirm, setConfirm] = useState(false);
+    const [selected, setSelected] = useState<SessionMode | undefined>(undefined);
 
     const service = new PresetService();
 
@@ -33,12 +37,21 @@ const FavouritesCard = () => {
         });
     }, []);
 
-    const handleDelete = () => {
-
+    const handleDelete = (preset: SessionMode) => {
+        service.removeFavouritePreset(preset).then((response: UpdateResponse) => {
+            if (response.success) {
+                setPresets(existing => existing.filter(it => it.getUniqueID() !== preset.getUniqueID()));
+            } else {
+                setError(response.error);
+            }
+        }).catch((response: UpdateResponse) => {
+            setError(response.error);
+        });
     }
 
-    const handleStart = () => {
-
+    const handleStart = (preset: SessionMode) => {
+        setConfirm(true);
+        setSelected(preset);
     }
 
     return (
@@ -72,6 +85,13 @@ const FavouritesCard = () => {
                             key={preset.getUniqueID()}
                         />
                     ))}
+
+                    {confirm && selected && (
+                        <LaunchPresetConfirmationModal
+                            preset={selected}
+                            onDismiss={() => setConfirm(false)}
+                        />
+                    )}
                 </div>
             </DashboardCard.Body>
         </DashboardCard>
