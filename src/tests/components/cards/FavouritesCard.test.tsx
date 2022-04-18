@@ -40,7 +40,7 @@ test('Clicking a favourite button should render the confirmation modal', async (
     expect(await component.findByText('Test Play')).toBeInTheDocument();
 
     fireEvent.mouseEnter(component.getByTestId('favourite-button-test-play').firstChild!);
-    expect(await component.findByText('Start')).toBeInTheDocument();
+    expect(await component.findByText('Start Play')).toBeInTheDocument();
     fireEvent.click(component.getByTestId('favourite-button-test-play').firstChild!);
 
     expect(await screen.findByTestId('launch-preset-confirmation')).toBeInTheDocument();
@@ -52,7 +52,7 @@ test('Clicking the close button in the confirm modal should stop rendering it', 
     expect(await component.findByText('Test Learn')).toBeInTheDocument();
 
     fireEvent.mouseEnter(component.getByTestId('favourite-button-test-learn').firstChild!);
-    expect(await component.findByText('Start')).toBeInTheDocument();
+    expect(await component.findByText('Start Learn')).toBeInTheDocument();
     fireEvent.click(component.getByTestId('favourite-button-test-learn').firstChild!);
 
     const confirmationModal = await screen.findByTestId('launch-preset-confirmation');
