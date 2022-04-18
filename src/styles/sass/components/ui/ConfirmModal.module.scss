@@ -3,13 +3,18 @@
 
 $border-radius: 12px;
 
-.modal {
+.dialog {
+  max-width: 350px;
+}
+
+.content {
   @include noSelect;
   color: $light-1;
   border-radius: $border-radius;
   background-color: $dark-2;
   border: 4px solid $dark-1;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  max-width: 500px;
 }
 
 .title {
@@ -35,6 +40,7 @@ $border-radius: 12px;
   color: $light-1;
   opacity: 0.9;
   transition: color ease-in-out 0.2s;
+  text-shadow: none;
 }
 .header > button:hover {
   color: $light-2;

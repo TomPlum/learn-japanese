@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import styles from "../../styles/sass/components/ui/ConfirmModal.module.scss";
 
@@ -9,52 +9,51 @@ export interface ConfirmModalProps {
     onDismiss?: () => void;
 }
 
-interface ConfirmModalState {
-    show: boolean;
-}
+const ConfirmModal  = (props: ConfirmModalProps) => {
+    const { title, body, onConfirm, onDismiss } = props;
 
-class ConfirmModal extends Component<ConfirmModalProps, ConfirmModalState> {
-    constructor(props: Readonly<ConfirmModalProps> | ConfirmModalProps) {
-        super(props);
-        this.state = {
-            show: true
-        }
+    const [show, setShow] = useState(true);
+
+    const handleYes = () => {
+        setShow(false);
+        onConfirm();
     }
 
-    render() {
-        const { title, body, onDismiss } = this.props;
-        const { show } = this.state;
-        return (
-            <Modal contentClassName={styles.modal} show={show} centered onHide={onDismiss} size="sm" backdrop="static" data-testid="confirm-modal">
-                <Modal.Header closeButton className={styles.header}>
-                    <span className={styles.title}>{title}</span>
-                </Modal.Header>
-
-                <Modal.Body className={styles.body}>
-                    {body}
-                </Modal.Body>
-
-                <Modal.Footer className={styles.footer}>
-                    <Button variant="success" onClick={this.handleYes} className={styles.yes}>
-                        Yes
-                    </Button>
-                    <Button variant="danger" onClick={this.handleNo} className={styles.no}>
-                        No
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        )
+    const handleNo = () => {
+        setShow(false);
+        onDismiss?.();
     }
 
-    private handleYes = () => {
-        this.setState({ show: false });
-        this.props.onConfirm();
+    const modalProps = {
+        contentClassName: styles.content,
+        dialogClassName: styles.dialog,
+        show: show,
+        centered: true,
+        onHide: onDismiss,
+        backdrop: "static",
+        "data-testid": "confirm-modal"
     }
 
-    private handleNo = () => {
-        this.setState({ show: false });
-        this.props?.onDismiss?.();
-    }
+    return (
+        <Modal {...modalProps}>
+            <Modal.Header closeButton className={styles.header}>
+                <span className={styles.title}>{title}</span>
+            </Modal.Header>
+
+            <Modal.Body className={styles.body}>
+                {body}
+            </Modal.Body>
+
+            <Modal.Footer className={styles.footer}>
+                <Button variant="success" onClick={handleYes} className={styles.yes}>
+                    Yes
+                </Button>
+                <Button variant="danger" onClick={handleNo} className={styles.no}>
+                    No
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    )
 }
 
 export default ConfirmModal;
