@@ -1,4 +1,4 @@
-import { faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../../styles/sass/components/ui/buttons/FavouritesButton.module.scss";
 import { useEffect, useState } from "react";
@@ -82,7 +82,7 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
             {!editing && inside && (
                 <Fade in={inside} timeout={2000} appear>
                     <div className={styles.container}>
-                        <FontAwesomeIcon icon={faStar} fixedWidth className={styles.star} />
+                        <FontAwesomeIcon icon={faPlay} fixedWidth className={styles.playIcon} />
                         <span className={styles.name}>Start {isPlay ? "Play" : "Learn"}</span>
                     </div>
                 </Fade>
