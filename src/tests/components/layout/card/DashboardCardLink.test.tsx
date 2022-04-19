@@ -3,6 +3,7 @@ import DashboardCardLink from "../../../../components/layout/card/DashboardCardL
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 
 const onClickHandler = jest.fn();
+const onMouseDownHandler = jest.fn();
 
 test('Should render the given text', () => {
     const component = render(<DashboardCardLink text="Example Text" />);
@@ -38,6 +39,12 @@ test('Should call the onClick event handler when clicking on the link', () => {
     const component = render(<DashboardCardLink text="Example Text" onClick={onClickHandler} />);
     fireEvent.click(component.getByText('Example Text'));
     expect(onClickHandler).toHaveBeenCalled();
+});
+
+test('Should call the onMouseDown event handler when mousing down on the link', () => {
+    const component = render(<DashboardCardLink text="Example Text" onMouseDown={onMouseDownHandler} />);
+    fireEvent.mouseDown(component.getByText('Example Text'));
+    expect(onMouseDownHandler).toHaveBeenCalled();
 });
 
 test('Should render the main icon if the property is passed', () => {

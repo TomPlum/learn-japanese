@@ -9,15 +9,16 @@ export interface DashboardCardLinkProps {
     chevron?: boolean;
     className?: string;
     onClick?: () => void;
+    onMouseDown?: () => void;
     icon?: IconDefinition;
 }
 
 const DashboardCardLink = (props: DashboardCardLinkProps) => {
 
-    const { text, href, icon, chevron, className, onClick } = props;
+    const { text, href, icon, chevron, className, onClick, onMouseDown } = props;
 
     return (
-        <a className={[styles.link, className].join(" ")} href={href} onClick={onClick}>
+        <a className={[styles.link, className].join(" ")} href={href} onClick={onClick} onMouseDown={onMouseDown}>
             {icon && (
                 <FontAwesomeIcon
                     fixedWidth
