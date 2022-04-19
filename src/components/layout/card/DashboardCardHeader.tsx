@@ -2,8 +2,9 @@ import styles from "../../../styles/sass/components/layout/card/DashboardCardHea
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import DashboardCardTitle from "./DashboardCardTitle";
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import DashboardCardIcon from "./DashboardCardIcon";
+import DashboardCardSettingsMenu from "./DashboardCardSettingsMenu";
 
 export interface DashboardCardHeaderProps {
     error?: string;
@@ -17,7 +18,24 @@ const DashboardCardHeader = (props: PropsWithChildren<DashboardCardHeaderProps>)
 
     return (
         <div className={[styles.header, className].join(" ")}>
-            {children}
+            {React.Children.map(children, child => {
+                if (React.isValidElement(child)) {
+                    switch ((child as React.ReactElement).type) {
+                        case DashboardCardTitle: {
+                            return React.cloneElement(child);
+                        }
+                        case DashboardCardIcon: {
+                            return React.cloneElement(child);
+                        }
+                        case DashboardCardSettingsMenu: {
+                            return React.cloneElement(child, { className: styles.settings });
+                        }
+                        default: {
+                            return child;
+                        }
+                    }
+                }
+            })}
 
             {error && error != "" && (
                 <FontAwesomeIcon
@@ -33,5 +51,6 @@ const DashboardCardHeader = (props: PropsWithChildren<DashboardCardHeaderProps>)
 
 export default Object.assign(DashboardCardHeader, {
     Title: DashboardCardTitle,
-    Icon: DashboardCardIcon
+    Icon: DashboardCardIcon,
+    SettingsMenu: DashboardCardSettingsMenu
 });

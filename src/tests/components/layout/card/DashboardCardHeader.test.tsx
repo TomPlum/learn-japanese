@@ -1,5 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import DashboardCardHeader from "../../../../components/layout/card/DashboardCardHeader";
+import { faApple } from "@fortawesome/free-brands-svg-icons";
+import DashboardCardLink from "../../../../components/layout/card/DashboardCardLink";
 
 const onReloadHandler = jest.fn();
 
@@ -10,6 +12,46 @@ test('Should render the children', () => {
         </DashboardCardHeader>
     );
     expect(component.getByText('Example Content')).toBeInTheDocument();
+});
+
+test('Should render a title sub-component', () => {
+    const component = render(
+        <DashboardCardHeader>
+            <DashboardCardHeader.Title>Example Title</DashboardCardHeader.Title>
+        </DashboardCardHeader>
+    );
+    expect(component.getByText('Example Title')).toBeInTheDocument();
+});
+
+test('Should render an icon sub-component', () => {
+    const component = render(
+        <DashboardCardHeader>
+            <DashboardCardHeader.Icon icon={faApple} title="Apple" />
+        </DashboardCardHeader>
+    );
+    expect(component.getByTitle('Apple')).toBeInTheDocument();
+});
+
+test('Should render a menu sub-component with the settings class', () => {
+    const component = render(
+        <DashboardCardHeader>
+            <DashboardCardHeader.SettingsMenu>
+                <DashboardCardLink text="Entry" icon={faApple} />
+            </DashboardCardHeader.SettingsMenu>
+        </DashboardCardHeader>
+    );
+    const menuButton = component.getByTestId('dashboard-settings-menu');
+    expect(menuButton).toBeInTheDocument();
+    expect(menuButton).toHaveClass('settings');
+});
+
+test('Should render nothing if an invalid react element is passed as a child', () => {
+    const component = render(
+        <DashboardCardHeader>
+            {"Test"}
+        </DashboardCardHeader>
+    );
+    expect(component.queryByText('Test')).not.toBeInTheDocument();
 });
 
 test('Should render the reload icon if a truthy error is passed', () => {
