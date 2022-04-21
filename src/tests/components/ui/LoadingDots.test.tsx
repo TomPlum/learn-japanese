@@ -11,7 +11,6 @@ test('It should apply the given class name', () => {
     expect(component.getByTestId('loading-dots')).toHaveClass('testClassName');
 });
 
-
 test('It should apply the given animation duration in seconds', () => {
     const component = render(<LoadingDots type="flashing" duration={3} />);
     expect(component.getByTestId('loading-dots')).toHaveStyle({ 'animation-duration': '3s' });

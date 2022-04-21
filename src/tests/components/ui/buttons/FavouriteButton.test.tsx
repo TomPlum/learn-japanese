@@ -7,7 +7,6 @@ import { KanaSettingsBuilder } from "../../../../domain/session/settings/data/Ka
 import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
 
 const onStartHandler = jest.fn();
-const onDeleteHandler = jest.fn();
 
 let props: FavouriteButtonProps;
 
@@ -22,10 +21,9 @@ const preset = new PlayMode(1, "Test Button", "ffffff", faApple, new KanaSetting
 beforeEach(() => {
     props = {
         preset: preset,
-        editing: false,
+        selected: false,
         className: "myClass",
         onStart: onStartHandler,
-        onDelete: onDeleteHandler
     };
 
     jest.useFakeTimers();
@@ -38,21 +36,20 @@ test('Should render the name of the button', () => {
     expect(screen.getByText('Test Button')).toBeInTheDocument();
 });
 
-test('Should add the shake class after a random time', () => {
-    // Set editing mode
-    props.editing = true;
+test('Clicking the button should call the onStart event handler', () => {
     const { container } = setup();
 
-    // Shouldn't start with the class
-    expect(container.firstChild).not.toHaveClass('shake');
+    // Mouse enter the listening surface div
+    const surface = container.firstChild?.firstChild!;
+    fireEvent.mouseEnter(surface);
 
-    // Advancing the timer to fire the timeout should cause it set the class
-    jest.advanceTimersByTime(150);
-    expect(container.firstChild).toHaveClass('shake');
+    // Clicking the button should call the event handler
+    fireEvent.click(surface);
+    expect(onStartHandler).toHaveBeenCalledWith(preset);
 });
 
-test('Should render the start text when hovering over the button if not in edit mode', () => {
-    props.editing = false;
+test('Should render the start text when hovering over the button if not selected', () => {
+    props.selected = false;
     const { container } = setup();
 
     // Mouse enter the listening surface div
@@ -70,48 +67,14 @@ test('Should render the start text when hovering over the button if not in edit 
     expect(screen.queryByText('Start Play')).not.toBeInTheDocument();
 });
 
-test('Should NOT render the start text when hovering over the button if in edit mode', () => {
-    props.editing = true;
-    const { container } = setup();
-
-    // Mouse enter the listening surface div
-    fireEvent.mouseEnter(container.firstChild?.firstChild!);
-
-    // Should not render the start text, and keep the name
-    expect(screen.queryByText('Start Play')).not.toBeInTheDocument();
-    expect(screen.getByText('Test Button')).toBeInTheDocument();
-});
-
-test('Clicking the button when not in edit mode should call the onStart event handler', () => {
-    props.editing = false;
+test('Should render the loading dots animation when selected is true', () => {
+    props.selected = true
     const { container } = setup();
 
     // Mouse enter the listening surface div
     const surface = container.firstChild?.firstChild!;
     fireEvent.mouseEnter(surface);
 
-    // Clicking the button should call the event handler
-    fireEvent.click(surface);
-    expect(onStartHandler).toHaveBeenCalledWith(preset);
-});
-
-test('Clicking the button when not in edit mode should NOT call the onStart event handler', () => {
-    props.editing = true;
-    const { container } = setup();
-
-    // Mouse enter the listening surface div
-    const surface = container.firstChild?.firstChild!;
-    fireEvent.mouseEnter(surface);
-
-    // Clicking the button should NOT call the event handler
-    fireEvent.click(surface);
-    expect(onStartHandler).not.toHaveBeenCalled();
-});
-
-test('Clicking the delete button while in edit mode should call the onDelete event handler', () => {
-    props.editing = true;
-    setup();
-
-    fireEvent.click(screen.getByTitle('Delete'));
-    expect(onDeleteHandler).toHaveBeenCalledWith(preset);
+    // Should render the loading dots
+    expect(screen.getByTestId('loading-dots')).toBeInTheDocument();
 });

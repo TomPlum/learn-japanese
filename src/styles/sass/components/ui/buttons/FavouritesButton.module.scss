@@ -84,26 +84,41 @@
   z-index: 1000;
 }
 
+$play: #f45353;
+$learn: #4aaef4;
+
 .play {
-  background-color: rgba($play-colour, 0.05);
+  background-color: rgba($play, 0.15);
 }
 
 .play:hover {
-  background-color: rgba($play-colour, 0.15);
+  background-color: rgba($play, 0.25);
 }
 
 .play:active {
-  background-color: rgba($play-colour, 0.10);
+  background-color: rgba($play, 0.10);
 }
 
 .learn {
-  background-color: rgba($learn-colour, 0.05);
+  background-color: rgba($learn, 0.15);
 }
 
 .learn:hover {
-  background-color: rgba($learn-colour, 0.15);
+  background-color: rgba($learn, 0.25);
 }
 
 .learn:active {
-  background-color: rgba($learn-colour, 0.10);
+  background-color: rgba($learn, 0.10);
 }
+
+.loading {
+  font-size: 1.1em;
+  animation-duration: 3s;
+}
+/*
+
+.loading::after, .loading::before, .loading {
+  color: $play !important;
+  background-color: $play !important;
+}
+*/
