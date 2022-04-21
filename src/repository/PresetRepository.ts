@@ -123,8 +123,21 @@ interface PresetResponse {
     data: DataSettingsResponse;
 }
 
+interface FavouritePresetResponse<T extends PresetResponse> {
+    id: number;
+    preset: T;
+}
+
+export interface FavouriteLearnPresetResponse extends FavouritePresetResponse<LearnPresetResponse> {
+    // Doesn't currently expose anything else
+}
+
+export interface FavouritePlayPresetResponse extends FavouritePresetResponse<PlayPresetResponse> {
+
+}
+
 export interface LearnPresetResponse extends PresetResponse {
-    // Doesn't current expose anything else
+    // Doesn't currently expose anything else
 }
 
 export interface PlayPresetResponse extends PresetResponse {
@@ -226,6 +239,11 @@ interface PresetsResponse {
     play: PlayPresetResponse[];
 }
 
+interface FavouritePresetsResponse {
+    learn: FavouriteLearnPresetResponse[];
+    play: FavouritePlayPresetResponse[];
+}
+
 export interface Presets {
     learn: LearnMode[];
     play: PlayMode[];
@@ -290,11 +308,11 @@ class PresetRepository {
      * @return an array of favourite presets.
      */
     public async getFavouritePresets(): Promise<Presets> {
-        return RestClient.get<PresetsResponse>("/presets/favourites").then(response => {
+        return RestClient.get<FavouritePresetsResponse>("/presets/favourites").then(response => {
             const data = response.data;
             if (data) {
-                const learn = this.convertLearnPresets(data.learn);
-                const play = this.convertPlayPresets(data.play);
+                const learn = this.convertFavouriteLearnPresets(data.learn);
+                const play = this.convertFavouritePlayPresets(data.play);
                 return { learn: learn, play: play };
             } else {
                 return Promise.reject("Failed to retrieve favourites.");
@@ -325,6 +343,25 @@ class PresetRepository {
             return { success: true };
         }).catch(error => {
             return { success: false, error: error };
+        });
+    }
+
+    private convertFavouriteLearnPresets(data: FavouriteLearnPresetResponse[]): LearnMode[] {
+        return data.map((favourite: FavouriteLearnPresetResponse) => {
+            const preset = favourite.preset;
+            const topic = Topic.fromName(preset.topic);
+            const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
+            return new LearnMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), undefined, false, favourite.id);
+        });
+    }
+
+    private convertFavouritePlayPresets(data: FavouritePlayPresetResponse[]): LearnMode[] {
+        return data.map((favourite: FavouritePlayPresetResponse) => {
+            const preset = favourite.preset;
+            const topic = Topic.fromName(preset.topic);
+            const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
+            const gameSettings = this.gameSettingsConverter.convert(preset.game);
+            return new PlayMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, gameSettings, undefined, false, favourite.id);
         });
     }
 

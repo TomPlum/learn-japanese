@@ -6,8 +6,8 @@ import GameSettings from "./settings/game/GameSettings";
 export default class PlayMode extends SessionMode {
     //TODO: add builder
     constructor(id: number, displayName: string, colour: string, icon: IconDefinition | string, dataSettings: DataSettings,
-                gameSettings: GameSettings, shortName?: string, custom?: boolean) {
-        super(id, displayName, colour, icon, dataSettings, gameSettings, shortName, custom);
+                gameSettings: GameSettings, shortName?: string, custom?: boolean, favouriteId?: number) {
+        super(id, displayName, colour, icon, dataSettings, gameSettings, shortName, custom, favouriteId);
     }
 
     getUniqueID(): string {

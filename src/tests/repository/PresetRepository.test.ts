@@ -1,5 +1,5 @@
 import RestClient from "../../rest/RestClient";
-import PresetRepository, { DataSettingsRequest, GameConfigRequest, LearnPresetRequest, LearnPresetResponse, PlayPresetRequest, PlayPresetResponse } from "../../repository/PresetRepository";
+import PresetRepository, { DataSettingsRequest, FavouriteLearnPresetResponse, FavouritePlayPresetResponse, GameConfigRequest, LearnPresetRequest, LearnPresetResponse, PlayPresetRequest, PlayPresetResponse } from "../../repository/PresetRepository";
 import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSettings";
 import { LifeSettingsBuilder } from "../../domain/session/settings/game/LifeSettings";
 import { HintSettingsBuilder } from "../../domain/session/settings/game/HintSettings";
@@ -176,6 +176,17 @@ describe("Preset Repository", () => {
     });
 
     describe("Get Favourite Presets", () => {
+
+        const learnResponse: FavouriteLearnPresetResponse = {
+            id: 1,
+            preset: learnPresetResponse
+        }
+
+        const playResponse: FavouritePlayPresetResponse = {
+            id: 2,
+            preset: playPresetResponse
+        }
+
         it("Should call the rest client with the correct endpoint", () => {
             mockGet.mockResolvedValueOnce({ });
             return repository.getFavouritePresets().then(() => {
@@ -184,17 +195,17 @@ describe("Preset Repository", () => {
         });
 
         it("Should return the learn and play presets", () => {
-            mockGet.mockResolvedValueOnce({ data: { learn: [learnPresetResponse], play: [playPresetResponse ]} });
+            mockGet.mockResolvedValueOnce({ data: { learn: [learnResponse], play: [playResponse]} });
             mockDataSettingsConverter.mockReturnValue(dataSettings);
             mockGameSettingsConverter.mockReturnValueOnce(gameSettings);
 
             return repository.getFavouritePresets().then(response => {
-                expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, learnPresetResponse.data);
-                expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playPresetResponse.data);
-                expect(mockGameSettingsConverter).toHaveBeenCalledWith(playPresetResponse.game);
+                expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, learnResponse.preset.data);
+                expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playResponse.preset.data);
+                expect(mockGameSettingsConverter).toHaveBeenCalledWith(playResponse.preset.game);
                 expect(response).toStrictEqual({
-                    learn: [new LearnMode(1, "Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false)],
-                    play: [new PlayMode(1, "Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false)]
+                    learn: [new LearnMode(1, "Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false, 1)],
+                    play: [new PlayMode(1, "Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false, 2)]
                 });
             });
         });
