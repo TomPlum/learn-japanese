@@ -1,4 +1,4 @@
-import { faPlay, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../../styles/sass/components/ui/buttons/FavouritesButton.module.scss";
 import { useState } from "react";
@@ -36,7 +36,7 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
         onStart?.(preset);
     }
 
-    const testId = `favourite-button-${preset.displayName.toLowerCase().replace(" ", "-")}`;
+    const testId = `favourite-button-${preset.favourite_id}`;
 
     return (
         <div className={[styles.favourite, backgroundColourClass, className ?? ""].join(" ")} data-testid={testId}>

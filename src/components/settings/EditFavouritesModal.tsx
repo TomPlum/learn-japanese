@@ -89,7 +89,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
     const handleSave = () => {
         setSaving(true);
         // Handle updates, then finally onSuccess();
-        //onSuccess();
+        onSuccess();
     }
 
     const handleDismiss = () => {
