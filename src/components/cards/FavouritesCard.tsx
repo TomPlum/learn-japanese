@@ -108,10 +108,9 @@ const FavouritesCard = () => {
 
                     {adding && (
                         <EditFavouritesModal
+                            favourites={presets}
                             onSuccess={handleFinishEditing}
-                            onDismiss={() => setAdding(false)}
-                            favouritePlay={presets.filter(it => it instanceof PlayMode).map(it => it.id)}
-                            favouriteLearn={presets.filter(it => it instanceof LearnMode).map(it => it.id)}
+                            onDismiss={() => setEditing(false)}
                         />
                     )}
                 </div>

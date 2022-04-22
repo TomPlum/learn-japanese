@@ -1,0 +1,58 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+@import "src/styles/sass/animations";
+@import "src/styles/sass/buttons";
+
+.button {
+  @include favourite-button;
+}
+
+.favourite {
+  background-color: rgba($inspect, 0.3);
+}
+
+.icon {
+  @include favourite-button-icon;
+}
+
+.star {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: $inspect;
+}
+
+.delete {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: $bootstrap-red;
+}
+
+.selected {
+  background-color: rgba($bootstrap-green, 0.7);
+}
+
+.name {
+  line-height: 15px;
+}
+
+.shake {
+  animation: shake 2.5s ease-in-out infinite;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pause {
+  // Runs it one more time to make sure they square themselves off again.
+  animation: shake 1s ease-in-out;
+}
+
+.surface {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1000;
+}

@@ -1,0 +1,35 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
+@mixin favourite-button {
+  @include noSelect;
+  width: 120px;
+  display: flex;
+  padding: 12px;
+  color: $light-1;
+  position: relative;
+  text-align: center;
+  align-items: center;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  transition: all ease-in-out 0.3s;
+  background-color: rgba($dark-1, 0.9);
+
+  &:hover {
+    cursor: pointer;
+    color: #FFF;
+    background-color: $dark-1;
+  }
+
+  &:active {
+    background-color: rgba($dark-3, 0.8);
+  }
+}
+
+@mixin favourite-button-icon {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: $light-1;
+  line-height: 24px;
+}
