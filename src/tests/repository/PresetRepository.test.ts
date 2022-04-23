@@ -29,11 +29,13 @@ jest.mock("../../converter/PresetConverter", () => {
 const mockPost = jest.fn();
 const mockGet = jest.fn();
 const mockDelete = jest.fn();
+const mockPatch = jest.fn();
 
 beforeEach(() => {
     RestClient.post = mockPost;
     RestClient.get = mockGet;
     RestClient.delete = mockDelete;
+    RestClient.patch = mockPatch;
 });
 
 const learnPresetResponse: LearnPresetResponse = {
@@ -251,6 +253,46 @@ describe("Preset Repository", () => {
             mockDelete.mockRejectedValueOnce({ error: "Failed to delete favourite." });
             return repository.deleteFavouritePreset(12).then(response => {
                 expect(response.error).toStrictEqual({ error: "Failed to delete favourite." });
+            });
+        });
+    });
+
+    describe("Update Favourite Presets", () => {
+        it("Should call the rest client with the correct endpoint and payload", () => {
+            mockPatch.mockResolvedValueOnce({ });
+            return repository.updateFavouritePresets([1, 2], [3]).then(() => {
+                expect(mockPatch).toHaveBeenLastCalledWith("/presets/favourites/update", {
+                    add: [1, 2],
+                    remove: [3]
+                });
+            });
+        });
+
+        it("Should return true if the API call succeeds", () => {
+            mockPatch.mockResolvedValueOnce({ });
+            return repository.updateFavouritePresets([1], []).then(response => {
+                expect(response.success).toBe(true);
+            });
+        });
+
+        it("Should return false if the API call fails", () => {
+            mockPatch.mockRejectedValueOnce({ });
+            return repository.updateFavouritePresets([1, 2, 3], [7]).then(response => {
+                expect(response.success).toBe(false);
+            });
+        });
+
+        it("Should return the error message if the API calls fails and has one in the response", () => {
+            mockPatch.mockRejectedValueOnce({ error: "Failed to update favourites." });
+            return repository.updateFavouritePresets([5, 7], [1]).then(response => {
+                expect(response.error).toStrictEqual("Failed to update favourites.");
+            });
+        });
+
+        it("Should return the whole response if the API calls fails but has no error field in the response", () => {
+            mockPatch.mockRejectedValueOnce({ code: 500, reason: "A network error has occurred."});
+            return repository.updateFavouritePresets([2, 4], [8]).then(response => {
+                expect(response.error).toStrictEqual({ code: 500, reason: "A network error has occurred."});
             });
         });
     });

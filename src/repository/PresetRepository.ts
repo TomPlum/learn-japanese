@@ -334,6 +334,19 @@ class PresetRepository {
         });
     }
 
+    /**
+     * Updates the users' favourites with the given additions and removals.
+     * @param add Preset IDs to add to favourites.
+     * @param remove Favourite IDs to remove.
+     */
+    public async updateFavouritePresets(add: number[], remove: number[]): Promise<UpdateResponse> {
+        return RestClient.patch("/presets/favourites/update", { add: add, remove: remove }).then(() => {
+            return { success: true };
+        }).catch(response => {
+            return { success: false, error: response.error ?? response };
+        })
+    }
+
     private convertFavouriteLearnPresets(data: FavouriteLearnPresetResponse[]): LearnMode[] {
         return data.map((favourite: FavouriteLearnPresetResponse) => {
             const preset = favourite.preset;
