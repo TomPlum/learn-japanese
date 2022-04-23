@@ -1,12 +1,12 @@
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../../styles/sass/components/ui/buttons/FavouritesButton.module.scss";
+import styles from "../../../../styles/sass/components/ui/buttons/favourite/FavouritesButton.module.scss";
 import { useState } from "react";
 import { Fade } from "react-bootstrap";
-import SessionMode from "../../../domain/session/SessionMode";
-import Icon from "../menu/icon/Icon";
-import PlayMode from "../../../domain/session/PlayMode";
-import LoadingDots from "../LoadingDots";
+import SessionMode from "../../../../domain/session/SessionMode";
+import Icon from "../../menu/icon/Icon";
+import PlayMode from "../../../../domain/session/PlayMode";
+import LoadingDots from "../../LoadingDots";
 
 export interface FavouriteButtonProps {
     preset: SessionMode;

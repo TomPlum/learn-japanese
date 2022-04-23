@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import FavouriteButton, { FavouriteButtonProps } from "../../../../components/ui/buttons/FavouriteButton";
+import FavouriteButton, { FavouriteButtonProps } from "../../../../../components/ui/buttons/favourite/FavouriteButton";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
-import { Numbers } from "../../../../utility/Numbers";
-import PlayMode from "../../../../domain/session/PlayMode";
-import { KanaSettingsBuilder } from "../../../../domain/session/settings/data/KanaSettings";
-import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
+import { Numbers } from "../../../../../utility/Numbers";
+import PlayMode from "../../../../../domain/session/PlayMode";
+import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";
+import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
 
 const onStartHandler = jest.fn();
 

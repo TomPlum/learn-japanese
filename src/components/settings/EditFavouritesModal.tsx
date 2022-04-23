@@ -10,11 +10,10 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import ScrollableContainer from "../ui/ScrollableContainer";
 import PlayMode from "../../domain/session/PlayMode";
 import LearnMode from "../../domain/session/LearnMode";
-import EditFavouriteButton from "../ui/buttons/EditFavouriteButton";
-import Arrays from "../../utility/Arrays";
+import EditFavouriteButton from "../ui/buttons/favourite/EditFavouriteButton";
 import ConfirmModal from "../ui/ConfirmModal";
 import UpdateResponse from "../../rest/response/UpdateResponse";
-import ExistingFavouriteButton from "../ui/buttons/ExistingFavouriteButton";
+import ExistingFavouriteButton from "../ui/buttons/favourite/ExistingFavouriteButton";
 
 export interface EditFavouritesModalProps {
     favourites: SessionMode[];
@@ -93,7 +92,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
     }
 
     const handleDismiss = () => {
-        if (add.length > 0) {
+        if (add.length > 0 || remove.length > 0) {
             setConfirm(true);
         } else {
             onDismiss();

@@ -3,7 +3,7 @@ import DashboardCardHeader from "../layout/card/DashboardCardHeader";
 import { faPencilAlt, faPlusCircle, faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/cards/FavouritesCard.module.scss";
 import { useEffect, useState } from "react";
-import FavouriteButton from "../ui/buttons/FavouriteButton";
+import FavouriteButton from "../ui/buttons/favourite/FavouriteButton";
 import PresetService from "../../service/PresetService";
 import SessionMode from "../../domain/session/SessionMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -52,6 +52,7 @@ const FavouritesCard = () => {
 
     const reload = () => {
         setUpdating(true);
+        setError(undefined);
         loadPresets().finally(() => setUpdating(false));
     }
 
@@ -62,7 +63,7 @@ const FavouritesCard = () => {
 
     return (
         <DashboardCard className={styles.card} loading={loading} updating={updating} error={error}>
-            <DashboardCard.Header>
+            <DashboardCard.Header onReload={reload}>
                 <DashboardCardHeader.Title>Favourites</DashboardCardHeader.Title>
 
                 <DashboardCardHeader.SettingsMenu>

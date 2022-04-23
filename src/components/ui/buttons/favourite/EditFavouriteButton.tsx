@@ -1,36 +1,32 @@
-import styles from "../../../styles/sass/components/ui/buttons/ExistingFavouriteButton.module.scss";
-import { Fade } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBan, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import Icon from "../menu/icon/Icon";
+import styles from "../../../../styles/sass/components/ui/buttons/favourite/EditFavouriteButton.module.scss";
 import { useState } from "react";
-import { Icon as IconType } from "../../../domain/Icon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { Fade } from "react-bootstrap";
+import Icon from "../../menu/icon/Icon";
+import { Icon as IconType } from "../../../../domain/Icon";
 
-export interface ExistingFavouriteButtonProps {
+export interface EditFavouriteButtonProps {
     id: number;
     name: string;
     selected: boolean;
     className?: string;
-    onRemove: (id: number) => void;
+    onAdd: (id: number) => void;
     onCancel: (id: number) => void;
     icon: IconDefinition | IconType | string;
 }
 
-const ExistingFavouriteButton = (props: ExistingFavouriteButtonProps) => {
-    const { id, name, icon, selected, className, onRemove, onCancel } = props;
+const EditFavouriteButton = (props: EditFavouriteButtonProps) => {
+    const { id, name, icon, selected, className, onAdd, onCancel } = props;
 
     const [inside, setInside] = useState(false);
 
-    let classes = [styles.button, className, selected ? styles.delete : ""];
-    const testId = `existing-favourite-button-${id}`;
+    const classes = [styles.button, selected ? styles.selected : ""];
+    if (className) classes.push(className);
 
-    const handleClick = () => {
-        if (selected) {
-            onCancel(id);
-        } else {
-            onRemove(id);
-        }
-    }
+    const handleClick = () => selected ? onCancel(id) : onAdd(id);
+
+    const testId = `edit-favourite-button-${id}`;
 
     return (
         <div className={classes.join(" ")} data-testid={testId}>
@@ -46,10 +42,10 @@ const ExistingFavouriteButton = (props: ExistingFavouriteButtonProps) => {
                     <div className={styles.container}>
                         <FontAwesomeIcon
                             fixedWidth
-                            icon={selected ? faTimes : faBan}
-                            className={selected ? styles.times : styles.ban}
+                            icon={selected ? faTimes : faStar}
+                            className={selected ? styles.delete : styles.star}
                         />
-                        <span className={styles.name}>{selected ? "Cancel" : "Remove"}</span>
+                        <span className={styles.name}>{selected ? "Cancel" : "Favourite"}</span>
                     </div>
                 </Fade>
             )}
@@ -66,4 +62,4 @@ const ExistingFavouriteButton = (props: ExistingFavouriteButtonProps) => {
     );
 }
 
-export default ExistingFavouriteButton;
+export default EditFavouriteButton;
