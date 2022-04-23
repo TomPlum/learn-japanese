@@ -24,17 +24,15 @@ const EditFavouriteButton = (props: EditFavouriteButtonProps) => {
     const classes = [styles.button, selected ? styles.selected : ""];
     if (className) classes.push(className);
 
-    const handleClick = () => selected ? onCancel(id) : onAdd(id);
-
     const testId = `edit-favourite-button-${id}`;
 
     return (
         <div className={classes.join(" ")} data-testid={testId}>
             <div
-                onClick={handleClick}
                 className={styles.surface}
                 onMouseOut={() => setInside(false)}
                 onMouseEnter={() => setInside(true)}
+                onClick={() => selected ? onCancel(id) : onAdd(id)}
             />
 
             {inside && (
@@ -45,7 +43,9 @@ const EditFavouriteButton = (props: EditFavouriteButtonProps) => {
                             icon={selected ? faTimes : faStar}
                             className={selected ? styles.delete : styles.star}
                         />
-                        <span className={styles.name}>{selected ? "Cancel" : "Favourite"}</span>
+                        <span className={styles.name}>
+                            {selected ? "Cancel" : "Favourite"}
+                        </span>
                     </div>
                 </Fade>
             )}
