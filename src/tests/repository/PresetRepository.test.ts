@@ -225,61 +225,31 @@ describe("Preset Repository", () => {
         });
     });
 
-    describe("Delete Favourite Play Preset", () => {
+    describe("Delete Favourite Preset", () => {
         it("Should call the rest client with the correct endpoint", () => {
             mockDelete.mockResolvedValueOnce({ });
-            return repository.deleteFavouritePlayPreset(12).then(() => {
-                expect(mockDelete).toHaveBeenLastCalledWith("/presets/favourites/play/delete?=12");
+            return repository.deleteFavouritePreset(12).then(() => {
+                expect(mockDelete).toHaveBeenLastCalledWith("/presets/favourites/delete?=12");
             });
         });
 
         it("Should return true if the API call succeeds", () => {
             mockDelete.mockResolvedValueOnce({ });
-            return repository.deleteFavouritePlayPreset(12).then(response => {
+            return repository.deleteFavouritePreset(12).then(response => {
                 expect(response.success).toBe(true);
             });
         });
 
         it("Should return false if the API call fails", () => {
             mockDelete.mockRejectedValueOnce({ });
-            return repository.deleteFavouritePlayPreset(12).then(response => {
+            return repository.deleteFavouritePreset(12).then(response => {
                 expect(response.success).toBe(false);
             });
         });
 
         it("Should return the error message if the API calls fails and has one in the response", () => {
             mockDelete.mockRejectedValueOnce({ error: "Failed to delete favourite." });
-            return repository.deleteFavouritePlayPreset(12).then(response => {
-                expect(response.error).toStrictEqual({ error: "Failed to delete favourite." });
-            });
-        });
-    });
-
-    describe("Delete Favourite Learn Preset", () => {
-        it("Should call the rest client with the correct endpoint", () => {
-            mockDelete.mockResolvedValueOnce({ });
-            return repository.deleteFavouriteLearnPreset(12).then(() => {
-                expect(mockDelete).toHaveBeenLastCalledWith("/presets/favourites/learn/delete?=12");
-            });
-        });
-
-        it("Should return true if the API call succeeds", () => {
-            mockDelete.mockResolvedValueOnce({ });
-            return repository.deleteFavouriteLearnPreset(12).then(response => {
-                expect(response.success).toBe(true);
-            });
-        });
-
-        it("Should return false if the API call fails", () => {
-            mockDelete.mockRejectedValueOnce({ });
-            return repository.deleteFavouriteLearnPreset(12).then(response => {
-                expect(response.success).toBe(false);
-            });
-        });
-
-        it("Should return the error message if the API calls fails and has one in the response", () => {
-            mockDelete.mockRejectedValueOnce({ error: "Failed to delete favourite." });
-            return repository.deleteFavouriteLearnPreset(12).then(response => {
+            return repository.deleteFavouritePreset(12).then(response => {
                 expect(response.error).toStrictEqual({ error: "Failed to delete favourite." });
             });
         });

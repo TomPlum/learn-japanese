@@ -43,17 +43,9 @@ class PresetService {
      * @param preset The preset to remove.
      */
     public async removeFavouritePreset(preset: SessionMode): Promise<UpdateResponse> {
-        if (preset instanceof PlayMode) {
-            return this.repository.deleteFavouritePlayPreset(preset.id).then(response => {
-                return { success: response.success, error: response.error };
-            });
-        } else if (preset instanceof LearnMode) {
-            return this.repository.deleteFavouriteLearnPreset(preset.id).then(response => {
-                return { success: response.success, error: response.error };
-            });
-        } else {
-            return { success: false, error: "Failed to remove favourite preset." };
-        }
+        return this.repository.deleteFavouritePreset(preset.id).then(response => {
+            return { success: response.success, error: response.error };
+        });
     }
 }
 

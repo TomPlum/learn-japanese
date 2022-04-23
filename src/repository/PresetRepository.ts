@@ -323,23 +323,11 @@ class PresetRepository {
     }
 
     /**
-     * Removes the play preset with the given ID from the users' favourites.
+     * Removes the favourite with the given ID from the users' favourites.
      * @param id The ID of the preset to remove.
      */
-    public async deleteFavouritePlayPreset(id: number): Promise<UpdateResponse> {
-        return RestClient.delete(`/presets/favourites/play/delete?=${id}`).then(() => {
-            return { success: true };
-        }).catch(error => {
-            return { success: false, error: error };
-        });
-    }
-
-    /**
-     * Removes the learn preset with the given ID from the users' favourites.
-     * @param id The ID of the preset to remove.
-     */
-    public async deleteFavouriteLearnPreset(id: number): Promise<UpdateResponse> {
-        return RestClient.delete(`/presets/favourites/learn/delete?=${id}`).then(() => {
+    public async deleteFavouritePreset(id: number): Promise<UpdateResponse> {
+        return RestClient.delete(`/presets/favourites/delete?=${id}`).then(() => {
             return { success: true };
         }).catch(error => {
             return { success: false, error: error };
