@@ -59,6 +59,17 @@ test('Should render the reload icon if a truthy error is passed', () => {
     expect(component.getByTitle('Retry')).toBeInTheDocument();
 });
 
+test('Should NOT render the settings menu if a truthy error is passed', () => {
+    const component = render(
+        <DashboardCardHeader error="Something went wrong.">
+            <DashboardCardHeader.SettingsMenu>
+                <DashboardCardLink text="Entry" icon={faApple} />
+            </DashboardCardHeader.SettingsMenu>
+        </DashboardCardHeader>
+    );
+    expect(component.queryByTestId('dashboard-settings-menu-button')).not.toBeInTheDocument();
+});
+
 test('Should not render the reload icon if a falsy error is passed', () => {
     const component = render(<DashboardCardHeader error="" />);
     expect(component.queryByTitle('Retry')).not.toBeInTheDocument();
