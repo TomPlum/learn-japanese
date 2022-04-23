@@ -12,6 +12,7 @@ import MistakesCard from "../cards/MistakesCard";
 import FavouritesCard from "../cards/FavouritesCard";
 import StatisticsCard from "../cards/StatisticsCard";
 import KanjiShowcaseCard from "../cards/KanjiShowcaseCard";
+import KanjiFlashCardsCard from "../cards/KanjiFlashCardsCard";
 
 const MainMenuPage = () => {
     return (
@@ -34,6 +35,7 @@ const MainMenuPage = () => {
                     <PlayCard />
                     <ScrollableContainer className={styles.main} hideScrollBar>
                         <FavouritesCard />
+                        <KanjiFlashCardsCard />
                         <ActivityCard />
                     </ScrollableContainer>
                 </Col>

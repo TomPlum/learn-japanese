@@ -1,13 +1,13 @@
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import SpacedRepetitionService, { FlashCardsResponse } from "../../service/SpacedRepetitionService";
 import { FlashCard } from "../../domain/learn/FlashCard";
-import LoadingSpinner from "../ui/LoadingSpinner";
 import styles from "../../styles/sass/components/cards/KanjiFlashCardsCard.module.scss";
-import ReloadButton from "../ui/buttons/ReloadButton";
-import { faRedo, faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
+import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
+import DashboardCardHeader from "../layout/card/DashboardCardHeader";
+import DashboardCardLink from "../layout/card/DashboardCardLink";
 
 const KanjiFlashCardsCard = () => {
 
@@ -17,17 +17,17 @@ const KanjiFlashCardsCard = () => {
 
     const [cards, setCards] = useState<FlashCard[]>([]);
     const [loading, setLoading] = useState(false);
+    const [updating, setUpdating] = useState(false);
     const [error, setError] = useState<string | undefined>(undefined);
 
     useEffect(() => {
-        loadKanjiFlashCards();
+        setLoading(true);
+        setError(undefined);
+        loadKanjiFlashCards().finally(() => setLoading(false));
     }, []);
 
     const loadKanjiFlashCards = () => {
-        setLoading(true);
-        setError(undefined);
-
-        service.getKanjiFlashCards().then((response: FlashCardsResponse) => {
+        return service.getKanjiFlashCards().then((response: FlashCardsResponse) => {
             if (response.cards) {
                 setCards(response.cards);
             } else {
@@ -35,47 +35,44 @@ const KanjiFlashCardsCard = () => {
             }
         }).catch(response => {
             setError(response.error ?? "Error loading cards.");
-        }).finally(() => {
-            setLoading(false);
         });
     }
 
     const onRefreshCards = async () => {
-        loadKanjiFlashCards();
+        setUpdating(true);
+        loadKanjiFlashCards().finally(() => setUpdating(false));
     }
 
     const onReview = () => {
         history.push("/learn/kanji");
     }
 
+    const props: DashboardCardProps = {
+        id: "flash-cards-card",
+        className: styles.card
+    }
+
     return (
-        <Card className={styles.card} border="info">
-            <Card.Body>
-                <h2 className={styles.heading}>
-                    Kanji Flash Cards
-                    {!error && <ReloadButton loading={loading} onClick={onRefreshCards} className={styles.icon} />}
-                </h2>
+        <DashboardCard {...props} error={error} updating={updating} loading={loading}>
+            <DashboardCard.Header>
+                <DashboardCardHeader.Title>Flash Cards</DashboardCardHeader.Title>
+                <DashboardCardHeader.SettingsMenu>
+                    <DashboardCardLink text="Sync" icon={faSyncAlt} onClick={onRefreshCards} />
+                </DashboardCardHeader.SettingsMenu>
+            </DashboardCard.Header>
 
-                {error && <div className={styles.error}>
-                    <p>{error}</p>
-                    <Button variant="warning" onClick={onRefreshCards}>
-                        <FontAwesomeIcon icon={loading ? faSpinner : faRedo} spin={loading} fixedWidth size="sm" />
-                        <span> Try again</span>
-                    </Button>
-                </div>}
-
+            <DashboardCard.Body>
                 <Row className={error ? styles.blur : undefined}>
                     <Col>
-                        {!loading && <span className={styles.value}>{cards.length}</span>}
-                        <LoadingSpinner active={loading} className={styles.loading} />
+                        <span className={styles.value}>{cards.length}</span>
                         <p className={styles.label}>{(cards.length !== 1 ? "Cards" : "Card") + " to Review"}</p>
                     </Col>
                     <Col>
-                        <Button disabled={!!error || cards.length === 0} onClick={onReview}>Review</Button>
+                        <Button disabled={cards.length === 0} onClick={onReview}>Review</Button>
                     </Col>
                 </Row>
-            </Card.Body>
-        </Card>
+            </DashboardCard.Body>
+        </DashboardCard>
     );
 }
 

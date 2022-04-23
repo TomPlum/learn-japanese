@@ -30,5 +30,6 @@
   overflow-y: scroll;
   padding-right: 0;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
-  scrollbar-width: thin; /* for Firefox */
+  scrollbar-width: none; /* for Firefox */
+  box-sizing: content-box;
 }
