@@ -24,21 +24,13 @@ const ExistingFavouriteButton = (props: ExistingFavouriteButtonProps) => {
     let classes = [styles.button, className, selected ? styles.delete : ""];
     const testId = `existing-favourite-button-${id}`;
 
-    const handleClick = () => {
-        if (selected) {
-            onCancel(id);
-        } else {
-            onRemove(id);
-        }
-    }
-
     return (
         <div className={classes.join(" ")} data-testid={testId}>
             <div
-                onClick={handleClick}
                 className={styles.surface}
                 onMouseOut={() => setInside(false)}
                 onMouseEnter={() => setInside(true)}
+                onClick={() => selected ? onCancel(id) : onRemove(id)}
             />
 
             {inside && (
@@ -49,7 +41,9 @@ const ExistingFavouriteButton = (props: ExistingFavouriteButtonProps) => {
                             icon={selected ? faTimes : faBan}
                             className={selected ? styles.times : styles.ban}
                         />
-                        <span className={styles.name}>{selected ? "Cancel" : "Remove"}</span>
+                        <span className={styles.name}>
+                            {selected ? "Cancel" : "Remove"}
+                        </span>
                     </div>
                 </Fade>
             )}
