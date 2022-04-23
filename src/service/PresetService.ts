@@ -47,6 +47,19 @@ class PresetService {
             return { success: response.success, error: response.error };
         });
     }
+
+    /**
+     * Updates the users favourites with the given additions and removals.
+     * @param add An array of preset to add to the favourites.
+     * @param remove An array of favourite presets to remove.
+     */
+    public async updateFavourites(add: number[], remove: number[]): Promise<UpdateResponse> {
+        return this.repository.updateFavouritePresets(add, remove).then(() => {
+            return { success: true };
+        }).catch(response => {
+            return { success: false, error: response.error };
+        });
+    }
 }
 
 export default PresetService;

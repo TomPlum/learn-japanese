@@ -9,12 +9,14 @@ import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSett
 const mockGetAllPresets = jest.fn();
 const mockFavouritePresets = jest.fn();
 const mockDeleteFavouritePreset = jest.fn();
+const mockUpdateFavouritePresets = jest.fn();
 jest.mock("../../repository/PresetRepository", () => {
     return function() {
         return {
             getAllPresets: mockGetAllPresets,
             getFavouritePresets: mockFavouritePresets,
             deleteFavouritePreset: mockDeleteFavouritePreset,
+            updateFavouritePresets: mockUpdateFavouritePresets
         };
     };
 });
@@ -83,6 +85,43 @@ describe("Preset Service", () => {
             mockDeleteFavouritePreset.mockResolvedValueOnce({ success: false, error: "Failed to delete." });
             return service.removeFavouritePreset(playPreset).then(response => {
                 expect(response.error).toBe("Failed to delete.");
+            });
+        });
+    });
+
+    describe("Update Favourite presets", () => {
+        it("Should call the update repository function with the given add and remove IDs", () => {
+            mockUpdateFavouritePresets.mockResolvedValueOnce({ });
+            return service.updateFavourites([1, 4, 6], [9]).then(() => {
+                expect(mockUpdateFavouritePresets).toHaveBeenCalledWith([1, 4, 6], [9]);
+            });
+        });
+
+        it("Should return a truthy success status if the repository call succeeds", () => {
+            mockUpdateFavouritePresets.mockResolvedValueOnce({ });
+            return service.updateFavourites([1, 4, 6], [9]).then(response => {
+                expect(response.success).toBe(true);
+            });
+        });
+
+        it("Should return an undefined error if the repository call succeeds", () => {
+            mockUpdateFavouritePresets.mockResolvedValueOnce({ });
+            return service.updateFavourites([1, 4, 6], [9]).then(response => {
+                expect(response.error).toBeUndefined();
+            });
+        });
+
+        it("Should return a falsy success status if the repository call fails", () => {
+            mockUpdateFavouritePresets.mockRejectedValueOnce({ });
+            return service.updateFavourites([1, 4, 6], [9]).then(response => {
+                expect(response.success).toBe(false);
+            });
+        });
+
+        it("Should return a the error if the repository call fails", () => {
+            mockUpdateFavouritePresets.mockRejectedValueOnce({ error: "Failed to update favourites." });
+            return service.updateFavourites([1, 4, 6], [9]).then(response => {
+                expect(response.error).toBe("Failed to update favourites.");
             });
         });
     });
