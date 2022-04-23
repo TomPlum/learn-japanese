@@ -25,6 +25,10 @@ class RestClient {
         return await RestClient.makeRestRequest<T>("DELETE", endpoint, body);
     }
 
+    static async patch<T>(endpoint: string, body?: {}): Promise<APIResponse<T>> {
+        return await RestClient.makeRestRequest<T>("PATCH", endpoint, body);
+    }
+
     static async send<T>(method: Method, endpoint: string, body?: {}): Promise<APIResponse<T>> {
         return await RestClient.makeRestRequest<T>(method, endpoint, body);
     }

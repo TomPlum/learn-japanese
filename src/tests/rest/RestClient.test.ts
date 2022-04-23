@@ -197,6 +197,46 @@ describe("Rest Client", () => {
         });
     });
 
+    describe("PATCH", () => {
+        it("Should call axios with the correct URI and configuration", () => {
+            mockedAxios.mockResolvedValue({ status: 201 });
+
+            return RestClient.patch<undefined>("/user/set-nickname/tom").then(() => {
+                expect(mockedAxios).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
+                    {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" }
+                    }
+                );
+            });
+        });
+
+        it("Should call axios with the correct the given request body if one is passed", () => {
+            mockedAxios.mockResolvedValue({ status: 201 });
+
+            return RestClient.patch<undefined>("/user/set-nickname/tom", { key: "value" }).then(() => {
+                expect(mockedAxios).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
+                    {
+                        method: "PATCH",
+                        data: "{\"key\":\"value\"}",
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" }
+                    }
+                );
+            });
+        });
+
+        it("Should throw an error if the endpoint is undefined", async () => {
+            await expect(() => RestClient.patch("", {})).rejects.toThrow("Endpoint is not defined!");
+        });
+
+        it("Should throw an error if the host is undefined", async () => {
+            environment.mockReturnValueOnce(undefined);
+            await expect(() => RestClient.patch("", {})).rejects.toThrow("Host URI is not defined!");
+        });
+    });
+
     describe("DELETE", () => {
         it("Should call axios with the correct URI and configuration", () => {
             mockedAxios.mockResolvedValue({ status: 204 });
