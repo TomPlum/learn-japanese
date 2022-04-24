@@ -15,7 +15,7 @@ const setup = () => {
         ...component
     }
 }
-const preset = new PlayMode(1, "Test Button", "ffffff", faApple, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
+const preset = new PlayMode(1, "Test Button", "ffffff", faApple, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic");
 
 beforeEach(() => {
     props = {

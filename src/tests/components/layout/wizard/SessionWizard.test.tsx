@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import SessionWizard from "../../../../components/layout/wizard/SessionWizard";
 import renderReduxConsumer from "../../../renderReduxConsumer";
 import userEvent from "@testing-library/user-event";
@@ -7,12 +7,52 @@ import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { clearGameSettings } from "../../../../slices/GameSettingsSlice";
 import { clearDataSettings } from "../../../../slices/DataSettingsSlice";
+import PlayMode from "../../../../domain/session/PlayMode";
+import { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings";
+import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
+import LearnMode from "../../../../domain/session/LearnMode";
+import LearnSettings from "../../../../domain/session/settings/LearnSettings";
+import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
+import { QuestionSettingsBuilder } from "../../../../domain/session/settings/game/QuestionSettings";
+import LearnableField from "../../../../domain/learn/LearnableField";
+import QuestionType from "../../../../domain/game/QuestionType";
+import { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings";
+import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings";
+
+const mockGetAllPresets = jest.fn();
+jest.mock("../../../../service/PresetService", () => {
+    return function() { return {
+        getAllPresets: mockGetAllPresets,
+    }};
+});
 
 const onCloseHandler = jest.fn();
 const history = createMemoryHistory();
 
+const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new GameSettingsBuilder().build(), "Basics");
+const playBasics = new PlayMode(2, "Basics2", "#ffffff", "FaAtom", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new GameSettingsBuilder().build(), "Basics");
+const learnPreset = new LearnMode(1, "Test Learn", "#fdb40e", "あ", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new LearnSettings(), "Topic");
+const playKanjiPreset = new PlayMode(1, "Kanji", "#6857ee", faPaintBrush,
+    new KanjiSettingsBuilder().withJoyoKanji().withQuantity(25).build(),
+    new GameSettingsBuilder()
+        .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
+        .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
+        .withQuestionSettings(new QuestionSettingsBuilder()
+            .withFields(LearnableField.MEANING, LearnableField.KANJI)
+            .withType(QuestionType.CHOICE)
+            .withCardQuantity(4)
+            .withScoreTracking(true)
+            .build()
+        ).build(), "Jōyō Kanji"
+);
+
 const setup = () => {
-    const component = renderReduxConsumer(<Router history={history}><SessionWizard onClose={onCloseHandler} /></Router>);
+    const component = renderReduxConsumer(
+        <Router history={history}>
+            <SessionWizard onClose={onCloseHandler} />
+        </Router>
+    );
+
     return {
         next: component.getByText('Next'),
         close: component.getByTitle('Close'),
@@ -211,10 +251,11 @@ test('Clicking Start in the confirmation step for custom play should set the sel
     expect(history.location.pathname).toBe('/play');
 });
 
-test('Clicking Start in the confirmation step for preset play should set the selected settings in the store', () => {
+test('Clicking Start in the confirmation step for preset play should set the selected settings in the store', async () => {
     // The Redux store should start empty
     expect(store.getState().gameSettings.settings).toBeUndefined();
     expect(store.getState().dataSettings.settings).toBeUndefined();
+    mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playKanjiPreset] });
 
     const { next } = setup();
 
@@ -229,6 +270,9 @@ test('Clicking Start in the confirmation step for preset play should set the sel
     // Select the 'Preset' type
     fireEvent.click(screen.getAllByText('Preset')[0]);
     fireEvent.click(next);
+
+    // Wait for presets to load
+    expect(await screen.findByText('Kanji')).toBeInTheDocument();
 
     // Starting the game should set the game and data settings in the Redux store
     fireEvent.click(screen.getByText('Start'));
@@ -455,7 +499,8 @@ test('Switching from the type step and back again should maintain its selection 
     expect(screen.getByText('Custom').parentElement).toHaveClass('selected');
 });
 
-test('Switching from the preset step and back again should maintain its selection state', () => {
+test('Switching from the preset step and back again should maintain its selection state', async () => {
+    mockGetAllPresets.mockResolvedValue({ learn: [learnPreset], play: [playPreset, playBasics] });
     const { next } = setup();
 
     // Advance to the 'Preset' step
@@ -463,11 +508,12 @@ test('Switching from the preset step and back again should maintain its selectio
     fireEvent.click(next);
 
     // Change the topic to 'Basics'
+    await waitFor(() =>  expect(screen.getByTestId('wizard-topic-selector')).not.toBeDisabled());
     fireEvent.click(screen.getByText('Hiragana & Katakana'));
     fireEvent.click(screen.getByText('Basics'));
 
-    // Change the preset selection to 'Animals'
-    fireEvent.click(screen.getByText('Animals'));
+    // Change the preset selection to 'Test Play'
+    fireEvent.click(screen.getByText('Test Play'));
 
     // Go back to the 'Type' step
     fireEvent.click(screen.getByText('Back'));
@@ -476,8 +522,8 @@ test('Switching from the preset step and back again should maintain its selectio
     fireEvent.click(next);
 
     // The 'Basics' topic should still be selected
-    expect(screen.getByText('Colours')).toBeInTheDocument();
+    expect(screen.getByText('Basics')).toBeInTheDocument();
 
-    // The 'Animals' preset should still be selected
-    expect(screen.getByText('Animals').parentElement).toHaveClass('selected');
+    // The 'Test Play' preset should still be selected
+    expect((await screen.findByText('Test Play')).parentElement).toHaveClass('selected');
 });

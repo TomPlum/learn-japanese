@@ -16,8 +16,6 @@ import TopicSelectionStep from "./steps/TopicSelectionStep";
 import Topic from "../../../domain/Topic";
 import GameSettings, { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
 import DataSettings from "../../../domain/session/settings/data/DataSettings";
-import PlayKanaModes from "../../../domain/game/mode/PlayKanaModes";
-import PlayMode from "../../../domain/session/PlayMode";
 import { useDataSettingsDispatch, useGameSettingsDispatch } from "../../../hooks";
 import { setGameSettings } from "../../../slices/GameSettingsSlice";
 import { setDataSettings as setGlobalDataSettings } from "../../../slices/DataSettingsSlice";
@@ -29,6 +27,7 @@ import ConfirmationStep from "./steps/ConfirmationStep";
 import LearnConfirmationStep from "./steps/LearnConfirmationStep";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import { ModalProps } from "react-bootstrap/Modal";
+import SessionMode from "../../../domain/session/SessionMode";
 
 export interface SessionWizardProps {
     onClose: () => void;
@@ -68,7 +67,7 @@ const SessionWizard = (props: SessionWizardProps) => {
     const [stage, setStage] = useState(WizardStep.MODE);
     const [settings, setSettings] = useState(new GameSettingsBuilder());
     const [dataSettings, setDataSettings] = useState<DataSettings | undefined>(undefined);
-    const [preset, setPreset] = useState<PlayMode>(new PlayKanaModes().getModes()[0]);
+    const [preset, setPreset] = useState<SessionMode | undefined>(undefined);
 
     const { MODE, TOPIC, TYPE, PRESET, QUESTION, LIVES, HINT, TIME, DATA, CONFIRM } = WizardStep;
 
@@ -99,11 +98,11 @@ const SessionWizard = (props: SessionWizardProps) => {
     }
 
     const handleStartSession = () => {
-        const data = custom ? dataSettings! : preset.dataSettings;
+        const data = custom ? dataSettings! : preset!.dataSettings;
         dataSettingsDispatcher(setGlobalDataSettings(data));
 
         if (mode === AppMode.PLAY) {
-            const game = custom ? settings.build() : preset.modeSettings as GameSettings;
+            const game = custom ? settings.build() : preset!.modeSettings as GameSettings;
             gameSettingsDispatcher(setGameSettings(game));
             history.push('/play');
         } else {
@@ -113,7 +112,7 @@ const SessionWizard = (props: SessionWizardProps) => {
 
     const handleChangeTopic = (topic: Topic) => {
         setTopic(topic);
-        setPreset(mode === AppMode.PLAY ? topic.playModes.getModes()[0] : topic.modes.getModes()[0]);
+        //setPreset(mode === AppMode.PLAY ? topic.playModes.getModes()[0] : topic.modes.getModes()[0]);
     }
 
     const getStageDetails = (): StageDetails => {

@@ -9,12 +9,17 @@ import renderReduxConsumer from "../../renderReduxConsumer";
 
 const mockGetFavourites = jest.fn();
 const mockGetAllPresets = jest.fn();
+const mockUpdateFavourites = jest.fn();
 jest.mock("../../../service/PresetService", () => {
-    return function() { return { getFavouritePresets: mockGetFavourites, getAllPresets: mockGetAllPresets }};
+    return function() { return {
+        getFavouritePresets: mockGetFavourites,
+        getAllPresets: mockGetAllPresets,
+        updateFavourites: mockUpdateFavourites
+    }};
 });
 
-const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "", false, 1);
-const learnPreset = new LearnMode(2, "Test Learn", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "", false, 2);
+const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic", "", false, 1);
+const learnPreset = new LearnMode(2, "Test Learn", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "Topic", "", false, 2);
 
 test('It should render preset favourite buttons for each of the presets from the service', async () => {
     mockGetFavourites.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
@@ -108,6 +113,7 @@ test('Saving after updating favourites should reload the data', async () => {
     // Return a singular learn and a play preset
     mockGetFavourites.mockResolvedValue({ learn: [learnPreset], play: [playPreset] });
     mockGetAllPresets.mockResolvedValueOnce({});
+    mockUpdateFavourites.mockResolvedValueOnce({ success: true });
     const component = renderReduxConsumer(<FavouritesCard />);
 
     // Should render both favourites

@@ -15,8 +15,8 @@ import { clearDataSettings } from "../../../slices/DataSettingsSlice";
 const history = createMemoryHistory();
 const onDismissHandler = jest.fn();
 
-const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new GameSettingsBuilder().build());
-const learnPreset = new LearnMode(1, "Test Learn", "#fdb40e", "あ", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new LearnSettings());
+const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new GameSettingsBuilder().build(), "Topic");
+const learnPreset = new LearnMode(1, "Test Learn", "#fdb40e", "あ", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new LearnSettings(), "Topic");
 
 let props: LaunchPresetConfirmationModalProps;
 

@@ -15,3 +15,8 @@ test('Changing the selected topic should call the onSelect event handler with th
     fireEvent.click(screen.getByText('Numbers & Counting'));
     expect(onSelectHandler).toHaveBeenLastCalledWith(Topic.NUMBERS);
 });
+
+test('Should disabled the toggle when passing the prop as true', () => {
+    const component = render(<TopicSelector topic={Topic.BASICS} onSelect={onSelectHandler} disabled={true} />);
+    expect(component.getByTestId('topic-selector-toggle')).toBeDisabled();
+});

@@ -7,7 +7,7 @@
   min-width: 222px;
 }
 
-.toggle:hover, .toggle:active, .toggle:focus, .toggle:visited {
+.toggle:hover, .toggle:active, .toggle:focus, .toggle:visited, .toggle:disabled {
   background-color: $dark-2 !important;
   border-color: $light-2 !important;
   box-shadow: none !important;

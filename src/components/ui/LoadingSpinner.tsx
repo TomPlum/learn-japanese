@@ -18,12 +18,12 @@ const LoadingSpinner = (props: LoadingSpinnerProps) => {
         return (
             <div className={className}>
                 <Spinner
-                    style={{ width: size, height: size, fontSize: thickness }}
                     role="status"
                     title="Loading"
                     animation="border"
                     className={styles.spinner}
                     variant={variant ?? "primary"}
+                    style={{ width: size, height: size, fontSize: thickness }}
                 />
             </div>
         );

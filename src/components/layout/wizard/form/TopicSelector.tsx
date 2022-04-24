@@ -8,12 +8,13 @@ import { Dropdown } from "react-bootstrap";
 export interface TopicSelectorProps {
     topic: Topic;
     className?: string;
+    disabled?: boolean;
     onSelect: (topic: Topic) => void;
 }
 
 const TopicSelector = (props: TopicSelectorProps) => {
 
-    const { topic, onSelect, className } = props;
+    const { topic, disabled, onSelect, className } = props;
 
     const [selected, setSelected] = useState(topic);
 
@@ -25,7 +26,7 @@ const TopicSelector = (props: TopicSelectorProps) => {
     return (
         <div className={className}>
             <Dropdown className={styles.dropdown} data-testid="wizard-topic-selector">
-                <Dropdown.Toggle className={styles.toggle} id="select-game-type">
+                <Dropdown.Toggle className={styles.toggle} id="topic-selector" data-testid="topic-selector-toggle" disabled={disabled}>
                     <FontAwesomeIcon fixedWidth icon={selected.icon} /> {selected.name}
                 </Dropdown.Toggle>
 

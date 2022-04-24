@@ -352,7 +352,7 @@ class PresetRepository {
             const preset = favourite.preset;
             const topic = Topic.fromName(preset.topic);
             const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
-            return new LearnMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), undefined, false, favourite.id);
+            return new LearnMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), preset.topic, undefined, false, favourite.id);
         });
     }
 
@@ -362,7 +362,7 @@ class PresetRepository {
             const topic = Topic.fromName(preset.topic);
             const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
             const gameSettings = this.gameSettingsConverter.convert(preset.game);
-            return new PlayMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, gameSettings, undefined, false, favourite.id);
+            return new PlayMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, gameSettings, preset.topic, undefined, false, favourite.id);
         });
     }
 
@@ -371,7 +371,7 @@ class PresetRepository {
         return data.map((preset: LearnPresetResponse) => {
             const topic = Topic.fromName(preset.topic);
             const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
-            return new LearnMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), undefined, false);
+            return new LearnMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), preset.topic, undefined, false);
         });
     }
 
@@ -380,7 +380,7 @@ class PresetRepository {
             const topic = Topic.fromName(preset.topic);
             const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
             const gameSettings = this.gameSettingsConverter.convert(preset.game);
-            return new PlayMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, gameSettings, undefined, false);
+            return new PlayMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, gameSettings, preset.topic, undefined, false);
         });
     }
 }

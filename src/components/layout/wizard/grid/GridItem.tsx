@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import Inspectable from "../../../ui/Inspectable";
 import ConditionalWrapper from "../../../ui/ConditionalWrapper";
+import { Icon as IconType } from "../../../../domain/Icon";
+import Icon from "../../../ui/menu/icon/Icon";
 
 export interface GridItem {
     getShortName: () => string;
@@ -21,7 +23,7 @@ export interface GridItemProps<T extends GridItem> {
     iconColour?: string;
     onEdit?: () => void;
     onClick: (mode: T) => void;
-    icon: IconDefinition | string;
+    icon: IconDefinition | IconType | string;
 }
 
 const GridItem = <T extends GridItem>(props: GridItemProps<T>) => {
@@ -34,10 +36,6 @@ const GridItem = <T extends GridItem>(props: GridItemProps<T>) => {
 
     const handleOnClick = () => onClick(value);
 
-    const isFontAwesomeIcon = () => {
-        return !(typeof icon === 'string');
-    }
-
     return (
         <ConditionalWrapper condition={isSelected && !!desc} wrapper={button =>
             <Inspectable popover={popover} placement="bottom" className={styles.inspectable} disableUnderline>
@@ -49,20 +47,7 @@ const GridItem = <T extends GridItem>(props: GridItemProps<T>) => {
                     <FontAwesomeIcon icon={faCog} className={styles.edit} onClick={onEdit} title="Edit" />
                 }
 
-                {isFontAwesomeIcon() &&
-                    <FontAwesomeIcon
-                        fixedWidth
-                        className={styles.icon}
-                        style={{ color: colour }}
-                        icon={icon as IconDefinition}
-                    />
-                }
-
-                {!isFontAwesomeIcon() &&
-                    <span className={styles.textIcon} style={{ color: colour }}>
-                        {icon}
-                    </span>
-                }
+                <Icon value={icon} style={{ color: colour }} className={styles.icon} />
 
                 <p className={styles.name}>{small ? value.getShortName() : value.getLongName()}</p>
             </Button>

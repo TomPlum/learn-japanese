@@ -5,8 +5,8 @@ import LearnSettings from "./settings/LearnSettings";
 
 export default class LearnMode extends SessionMode {
     constructor(id: number, displayName: string, colour: string, icon: IconDefinition | string, dataSettings: DataSettings,
-                settings: LearnSettings, shortName?: string, custom?: boolean, favouriteId?: number) {
-        super(id, displayName, colour, icon, dataSettings, settings, shortName, custom, favouriteId);
+                settings: LearnSettings,  topicName: string, shortName?: string, custom?: boolean, favouriteId?: number) {
+        super(id, displayName, colour, icon, dataSettings, settings, topicName, shortName, custom, favouriteId);
     }
 
     getUniqueID(): string {

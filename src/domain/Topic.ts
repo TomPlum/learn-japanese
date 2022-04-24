@@ -1,8 +1,4 @@
 import { faAppleAlt, faCalendarAlt, faFont, faPaintBrush, faSpellCheck, faYenSign, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import LearnNumbersModes from "./learn/mode/LearnNumbersModes";
-import LearnKanjiModes from "./learn/mode/LearnKanjiModes";
-import LearnBasicsModes from "./learn/mode/LearnBasicsModes";
-import LearnCalendarModes from "./learn/mode/LearnCalendarModes";
 import { CardProps } from "../components/learn/FlashCard";
 import KanaFlashCardFront from "../components/learn/kana/KanaFlashCardFront";
 import KanaFlashCardBack from "../components/learn/kana/KanaFlashCardBack";
@@ -10,23 +6,14 @@ import KanjiFlashCardFront from "../components/learn/kanji/KanjiFlashCardFront";
 import KanjiFlashCardBack from "../components/learn/kanji/KanjiFlashCardBack";
 import BasicsFlashCardFront from "../components/learn/basics/BasicsFlashCardFront";
 import BasicsFlashCardBack from "../components/learn/basics/BasicsFlashCardBack";
-import LearnSentenceStructureModes from "./learn/mode/LearnSentenceStructureModes";
 import NumbersFlashCardFront from "../components/learn/numbers/NumbersFlashCardFront";
 import NumbersFlashCardBack from "../components/learn/numbers/NumbersFlashCardBack";
 import SentenceStructureFlashCardFront from "../components/learn/sentence/SentenceStructureFlashCardFront";
 import SentenceStructureFlashCardBack from "../components/learn/sentence/SentenceStructureFlashCardBack";
-import PlayKanjiModes from "./game/mode/PlayKanjiModes";
-import PlayKanaModes from "./game/mode/PlayKanaModes";
-import { LearnMenuModes, PlayMenuModes } from "./MenuModes";
-import LearnKanaModes from "./learn/mode/LearnKanaModes";
-import PlaySentenceStructureModes from "./game/mode/PlaySentenceStructureModes";
 import React from "react";
 import KanaSettingsForm from "../components/settings/data/KanaSettingsForm";
 import KanjiSettingsForm from "../components/settings/data/KanjiSettingsForm";
 import SentenceStructureForm from "../components/settings/data/SentenceStructureForm";
-import PlayBasicsModes from "./game/mode/PlayBasicsModes";
-import PlayCalendarModes from "./game/mode/PlayCalendarModes";
-import PlayNumbersModes from "./game/mode/PlayNumbersModes";
 import { DataSettingsMenuProps } from "../components/settings/data/DataSettingsMenu";
 import { DataSettingsStepFormProps } from "../components/layout/wizard/steps/DataSettingsStep";
 import { GridItem } from "../components/layout/wizard/grid/GridItem";
@@ -42,42 +29,40 @@ export default class Topic implements GridItem {
     private readonly _name: string;
     private readonly _shortName: string;
     private readonly _icon: IconDefinition;
-    private readonly _modes: LearnMenuModes;
-    private readonly _playModes: PlayMenuModes;
     private readonly _cards: CardProps;
     private readonly _menu: ReactComponent;
     private readonly _wizardDataMenu: ReactComponent;
 
     public static KANA = new Topic(
-        "Hiragana & Katakana", "Kana", faFont, new LearnKanaModes(), new PlayKanaModes(),
+        "Hiragana & Katakana", "Kana", faFont,
         { front: KanaFlashCardFront, back: KanaFlashCardBack },
         KanaSettingsForm, KanaSettingsFormBody
     );
 
     public static NUMBERS = new Topic(
-        "Numbers & Counting", "Numbers", faYenSign, new LearnNumbersModes(), new PlayNumbersModes(),
+        "Numbers & Counting", "Numbers", faYenSign,
         { front: NumbersFlashCardFront, back: NumbersFlashCardBack },
         NumbersSettingsForm, NumbersSettingsFormBody
     );
 
     public static KANJI = new Topic(
-        "Jōyō Kanji", "Kanji", faPaintBrush, new LearnKanjiModes(), new PlayKanjiModes(),
+        "Jōyō Kanji", "Kanji", faPaintBrush,
         { front: KanjiFlashCardFront, back: KanjiFlashCardBack },
         KanjiSettingsForm, KanjiSettingsFormBody
     );
 
     public static BASICS = new Topic(
-        "Basics", "Basics", faAppleAlt, new LearnBasicsModes(), new PlayBasicsModes(),
+        "Basics", "Basics", faAppleAlt,
         { front: BasicsFlashCardFront, back: BasicsFlashCardBack }
     );
 
     public static CALENDAR = new Topic(
-        "Days & Months", "Calendar", faCalendarAlt, new LearnCalendarModes(), new PlayCalendarModes(),
+        "Days & Months", "Calendar", faCalendarAlt,
         { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack }
     );
 
     public static GRAMMAR = new Topic(
-        "Sentence Structure", "Grammar", faSpellCheck, new LearnSentenceStructureModes(), new PlaySentenceStructureModes(),
+        "Sentence Structure", "Grammar", faSpellCheck,
         { front: SentenceStructureFlashCardFront, back: SentenceStructureFlashCardBack },
         SentenceStructureForm, SentenceStructureFormBody
     );
@@ -96,14 +81,12 @@ export default class Topic implements GridItem {
         }
     }
 
-    private constructor(name: string, shortName: string, icon: IconDefinition, modes: LearnMenuModes, playModes: PlayMenuModes,
-                        cards: CardProps, menu: ReactComponent = undefined, wizardDataMenu: ReactComponent = undefined
+    private constructor(name: string, shortName: string, icon: IconDefinition, cards: CardProps,
+                        menu: ReactComponent = undefined, wizardDataMenu: ReactComponent = undefined
     ) {
         this._name = name;
         this._shortName = shortName;
         this._icon = icon;
-        this._modes = modes;
-        this._playModes = playModes;
         this._cards = cards;
         this._menu = menu;
         this._wizardDataMenu = wizardDataMenu;
@@ -117,16 +100,8 @@ export default class Topic implements GridItem {
         return this._icon;
     }
 
-    get modes(): LearnMenuModes {
-        return this._modes;
-    }
-
     get cards(): CardProps {
         return this._cards;
-    }
-
-    get playModes(): PlayMenuModes {
-        return this._playModes;
     }
 
     get menu(): ReactComponent {

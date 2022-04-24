@@ -163,8 +163,8 @@ describe("Preset Repository", () => {
                 expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playPresetResponse.data);
                 expect(mockGameSettingsConverter).toHaveBeenCalledWith(playPresetResponse.game);
                 expect(response).toStrictEqual({
-                    learn: [new LearnMode(1, "Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false)],
-                    play: [new PlayMode(1, "Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false)]
+                    learn: [new LearnMode(1, "Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), "Hiragana & Katakana", undefined, false)],
+                    play: [new PlayMode(1, "Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, "Hiragana & Katakana", undefined, false)]
                 });
             });
         });
@@ -206,8 +206,8 @@ describe("Preset Repository", () => {
                 expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playResponse.preset.data);
                 expect(mockGameSettingsConverter).toHaveBeenCalledWith(playResponse.preset.game);
                 expect(response).toStrictEqual({
-                    learn: [new LearnMode(1, "Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), undefined, false, 1)],
-                    play: [new PlayMode(1, "Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, undefined, false, 2)]
+                    learn: [new LearnMode(1, "Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), "Hiragana & Katakana", undefined, false, 1)],
+                    play: [new PlayMode(1, "Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, "Hiragana & Katakana", undefined, false, 2)]
                 });
             });
         });
@@ -299,7 +299,7 @@ describe("Preset Repository", () => {
 
     describe("Save Custom Play Preset", () => {
 
-        const preset = new PlayMode(1, "Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
+        const preset = new PlayMode(1, "Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Hiragana & Katakana");
 
         const gameSettingsRequest: GameConfigRequest = {
             hints: { quantity: 8, enabled: true, unlimited: false },
@@ -357,7 +357,7 @@ describe("Preset Repository", () => {
 
     describe("Save Custom Learn Preset", () => {
 
-        const preset = new LearnMode(1, "Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings());
+        const preset = new LearnMode(1, "Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "Hiragana & Katakana");
 
         const dataSettingsRequest: DataSettingsRequest = {
             quantity: 50,

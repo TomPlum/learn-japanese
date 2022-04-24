@@ -24,8 +24,8 @@ jest.mock("../../../service/PresetService", () => {
     }};
 });
 
-const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "", false, 3);
-const learnPreset = new LearnMode(2, "Test Learn", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "", false, 4);
+const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic", "", false, 3);
+const learnPreset = new LearnMode(2, "Test Learn", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "Topic", "", false, 4);
 
 test('Should render existing favourites if the service responds successfully', async () => {
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });

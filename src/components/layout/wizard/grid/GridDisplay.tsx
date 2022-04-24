@@ -4,8 +4,10 @@ import { GridOptions } from "../../../../domain/grid/GridOptions";
 import GridDisplayType from "../../../../domain/grid/GridDisplayType";
 import styles from "../../../../styles/sass/components/layout/wizard/grid/GridDisplay.module.scss";
 import ScrollableContainer from "../../../ui/ScrollableContainer";
+import LoadingSpinner from "../../../ui/LoadingSpinner";
 
 export interface GridDisplayProps {
+    loading?: boolean;
     controls?: boolean;
     className?: string;
     defaultDisplayType?: GridDisplayType;
@@ -13,7 +15,7 @@ export interface GridDisplayProps {
 }
 
 const GridDisplay = (props: PropsWithChildren<GridDisplayProps>) => {
-    const { children, controls, className, customOptions, defaultDisplayType } = props;
+    const { loading, children, controls, className, customOptions, defaultDisplayType } = props;
 
     const [options, setOptions] = useState<GridOptions>({ type: GridDisplayType.GRID, size: 80 });
 
@@ -34,29 +36,35 @@ const GridDisplay = (props: PropsWithChildren<GridDisplayProps>) => {
             </div>
 
             <ScrollableContainer maxHeight={500}>
-                {
-                    options.type == GridDisplayType.LIST && (
-                        React.Children.map(children, (child => {
-                            return React.cloneElement(child as ReactElement, {
-                                style: { width: "100%", height: 40 },
-                                small: options.type.showShort,
-                                className: styles.list
-                            });
-                        }))
-                    )
-                }
+                <LoadingSpinner variant="warning" active={loading ?? false} />
 
-                {
-                    options.type == GridDisplayType.GRID && (
-                        React.Children.map(children, (child => {
-                            return React.cloneElement(child as ReactElement, {
-                                style: { width: options.size, height: options.size },
-                                small: options.type.showShort,
-                                className: styles.item
-                            });
-                        }))
-                    )
-                }
+                {!loading && (
+                    <>
+                        {
+                            options.type == GridDisplayType.LIST && (
+                                React.Children.map(children, (child => {
+                                    return React.cloneElement(child as ReactElement, {
+                                        style: { width: "100%", height: 40 },
+                                        small: options.type.showShort,
+                                        className: styles.list
+                                    });
+                                }))
+                            )
+                        }
+
+                        {
+                            options.type == GridDisplayType.GRID && (
+                                React.Children.map(children, (child => {
+                                    return React.cloneElement(child as ReactElement, {
+                                        style: { width: options.size, height: options.size },
+                                        small: options.type.showShort,
+                                        className: styles.item
+                                    });
+                                }))
+                            )
+                        }
+                    </>
+                )}
             </ScrollableContainer>
         </div>
     )
