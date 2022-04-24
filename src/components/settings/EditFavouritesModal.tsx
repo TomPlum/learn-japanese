@@ -12,7 +12,6 @@ import PlayMode from "../../domain/session/PlayMode";
 import LearnMode from "../../domain/session/LearnMode";
 import EditFavouriteButton from "../ui/buttons/favourite/EditFavouriteButton";
 import ConfirmModal from "../ui/ConfirmModal";
-import UpdateResponse from "../../rest/response/UpdateResponse";
 import ExistingFavouriteButton from "../ui/buttons/favourite/ExistingFavouriteButton";
 
 export interface EditFavouritesModalProps {
@@ -87,8 +86,14 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
 
     const handleSave = () => {
         setSaving(true);
-        // Handle updates, then finally onSuccess();
-        onSuccess();
+        service.updateFavourites(add, remove).then(response => {
+            if (response.success) {
+                onSuccess();
+            } else {
+                setSaving(false);
+                setError(response.error);
+            }
+        });
     }
 
     const handleDismiss = () => {
@@ -97,21 +102,6 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
         } else {
             onDismiss();
         }
-    }
-
-    const handleDelete = (preset: SessionMode) => {
-        setSaving(true);
-        service.removeFavouritePreset(preset).then((response: UpdateResponse) => {
-            if (response.success) {
-                onSuccess();
-            } else {
-                setSaving(false);
-                setError(response.error);
-            }
-        }).catch((response: UpdateResponse) => {
-            setSaving(false);
-            setError(response.error);
-        });
     }
 
     return (
@@ -141,7 +131,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                     <div className={styles.body}>
                         {error && <Alert variant="danger">{error}</Alert>}
 
-                        {!loading && <ScrollableContainer maxHeight={500} className={styles.scrollable}>
+                        {!loading && !error && <ScrollableContainer maxHeight={500} className={styles.scrollable}>
                             <p className={styles.heading}>Existing Favourites</p>
                             <div className={styles.favourites}>
                                 {favourites.map((preset: SessionMode) => (
