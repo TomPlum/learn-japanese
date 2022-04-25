@@ -112,6 +112,47 @@ test('It should route to the play page and set the game and data settings in the
         topic: "Jōyō Kanji"
     });
 
+    // It should also set the session settings with the preset
+    expect(store.getState().sessionSettings.lastPlaySession).toStrictEqual({
+        "colour": "#ffffff",
+        "data": {
+            "grades": [1, 2, 3, 4, 5, 6, 8],
+            "quantity": 25,
+            "tags": [],
+            "topic": "Jōyō Kanji"
+        },
+        "game": {
+            "hints": {
+                "enabled": true,
+                "quantity": 0,
+                "unlimited": false
+            },
+            "lives": {
+                "enabled": true,
+                "quantity": 5
+            },
+            "question": {
+                "answerField": "Rōmaji",
+                "answerFilter": "",
+                "cards": 1,
+                "quantity": 1,
+                "questionField": "Kana",
+                "score": false,
+                "type": "Text"
+            },
+            "time": {
+                "countdown": false,
+                "secondsPerQuestion": 0,
+                "timed": false
+            }
+        },
+        "icon": "FaAtom",
+        "id": 1,
+        "isPreset": true,
+        "name": "Test Play",
+        "topic": "Topic"
+    });
+
     // Should re-direct to the /play page
     expect(history.location.pathname).toBe('/play');
 });
@@ -135,6 +176,22 @@ test('It should route to the learn page and set data settings in the redux store
         quantity: 25,
         tags: [],
         topic: "Jōyō Kanji"
+    });
+
+    // It should also set the session settings for the learn preset
+    expect(store.getState().sessionSettings.lastLearnSession).toStrictEqual({
+        "colour": "#fdb40e",
+        "data": {
+            "grades": [1, 2, 3, 4, 5, 6, 8],
+            "quantity": 25,
+            "tags": [],
+            "topic": "Jōyō Kanji"
+        },
+        "icon": "あ",
+        "id": 1,
+        "isPreset": true,
+        "name": "Test Learn",
+        "topic": "Topic"
     });
 
     // Should re-direct to the /play page

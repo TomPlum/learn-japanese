@@ -12,9 +12,10 @@ import { setDataSettings as setGlobalDataSettings } from "../../slices/DataSetti
 import GameSettings from "../../domain/session/settings/game/GameSettings";
 import { setGameSettings } from "../../slices/GameSettingsSlice";
 import { useHistory } from "react-router-dom";
-import { useDataSettingsDispatch, useGameSettingsDispatch } from "../../hooks";
+import { useDataSettingsDispatch, useGameSettingsDispatch, useSessionSettingsDispatch } from "../../hooks";
 import PlayMode from "../../domain/session/PlayMode";
 import LearnSessionSettingsSummary from "./LearnSessionSettingsSummary";
+import { setLastLearnPreset, setLastPlayPreset } from "../../slices/SessionSettingsSlice";
 
 export interface LaunchPresetConfirmationModalProps {
     preset: SessionMode;
@@ -28,6 +29,7 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
     const history = useHistory();
     const gameSettingsDispatcher = useGameSettingsDispatch();
     const dataSettingsDispatcher = useDataSettingsDispatch();
+    const sessionSettingsDispatcher = useSessionSettingsDispatch();
 
     const handleStartSession = () => {
         const data = preset.dataSettings;
@@ -36,8 +38,10 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
         if (preset instanceof PlayMode) {
             const game = preset.modeSettings as GameSettings;
             gameSettingsDispatcher(setGameSettings(game));
+            sessionSettingsDispatcher(setLastPlayPreset(preset));
             history.push('/play');
         } else {
+            sessionSettingsDispatcher(setLastLearnPreset(preset));
             history.push('/learn');
         }
     }
