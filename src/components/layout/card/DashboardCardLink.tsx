@@ -6,7 +6,9 @@ import React from "react";
 export interface DashboardCardLinkProps {
     text: string;
     href?: string;
+    title?: string;
     chevron?: boolean;
+    disabled?: boolean;
     className?: string;
     onClick?: () => void;
     onMouseDown?: () => void;
@@ -15,10 +17,18 @@ export interface DashboardCardLinkProps {
 
 const DashboardCardLink = (props: DashboardCardLinkProps) => {
 
-    const { text, href, icon, chevron, className, onClick, onMouseDown } = props;
+    const { text, href, icon, title, disabled, chevron, className, onClick, onMouseDown } = props;
+
+    const classes = [disabled ? styles.disabled : styles.link, className];
+
+    const handleClick = () => {
+        if (!disabled) {
+            onClick?.();
+        }
+    }
 
     return (
-        <a className={[styles.link, className].join(" ")} href={href} onClick={onClick} onMouseDown={onMouseDown}>
+        <a className={classes.join(" ")} href={href} onClick={handleClick} onMouseDown={onMouseDown} title={title}>
             {icon && (
                 <FontAwesomeIcon
                     fixedWidth

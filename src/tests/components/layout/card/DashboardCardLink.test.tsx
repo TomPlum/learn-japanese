@@ -49,12 +49,24 @@ test('Should call the onMouseDown event handler when mousing down on the link', 
 
 test('Should render the main icon if the property is passed', () => {
     const component = render(<DashboardCardLink text="Example Text" icon={faApple} />);
-    const chevron = component.getByTestId('dashboard-card-link-icon');
-    expect(chevron).toBeInTheDocument();
+    const anchor = component.getByTestId('dashboard-card-link-icon');
+    expect(anchor).toBeInTheDocument();
 });
 
 test('Should NOT render the main icon if the property is omitted', () => {
     const component = render(<DashboardCardLink text="Example Text" />);
-    const chevron = component.queryByTestId('dashboard-card-link-icon');
-    expect(chevron).not.toBeInTheDocument();
+    const anchor = component.queryByTestId('dashboard-card-link-icon');
+    expect(anchor).not.toBeInTheDocument();
+});
+
+test('Should render the anchor with the given title', () => {
+    const component = render(<DashboardCardLink text="Example Text" title="MyLink" />);
+    const anchor = component.getByTitle('MyLink');
+    expect(anchor).toBeInTheDocument();
+});
+
+test('Should render the anchor with the disabled class if the prop is passed as true', () => {
+    const { container } = render(<DashboardCardLink text="Example Text" disabled />);
+    const anchor = container.firstChild;
+    expect(anchor).toHaveClass('disabled');
 });

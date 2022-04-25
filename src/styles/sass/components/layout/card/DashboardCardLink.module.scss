@@ -6,7 +6,7 @@
   text-align: left;
 }
 
-.link {
+.link, .disabled {
   color: $light-1;
   transition: all ease-in-out 0.2s;
   display: flex;
@@ -15,17 +15,27 @@
   @include noSelect;
 }
 
-.linkIcon {
-  margin-right: 8px;
-  margin-bottom: 2px;
-  font-size: 1.2em;
-}
-
 .link:hover {
   color: #4d9eec;
   text-decoration: none;
   background-color: rgba($dark-1, 0.8);
   cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.6;
+}
+
+.disabled:hover {
+  cursor: auto;
+  text-decoration: none;
+  color: $light-1;
+}
+
+.linkIcon {
+  margin-right: 8px;
+  margin-bottom: 2px;
+  font-size: 1.2em;
 }
 
 .chevron {
