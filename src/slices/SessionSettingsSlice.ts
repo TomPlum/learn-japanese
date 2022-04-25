@@ -79,9 +79,15 @@ export const sessionSettingsSlice = createSlice({
             } else {
                 localStorage.setItem(LAST_LEARN_SESSION_KEY, JSON.stringify(value));
             }
+        },
+        clearLastPlayPreset: (state) => {
+            state.lastPlaySession = undefined;
+        },
+        clearLastLearnPreset: (state) => {
+            state.lastLearnSession = undefined;
         }
     }
 });
 
-export const { setLastPlayPreset, setLastLearnPreset, setLastCustomSession } = sessionSettingsSlice.actions
+export const { setLastPlayPreset, setLastLearnPreset, clearLastPlayPreset, clearLastLearnPreset, setLastCustomSession } = sessionSettingsSlice.actions
 export default sessionSettingsSlice.reducer;

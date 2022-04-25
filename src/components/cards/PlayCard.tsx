@@ -6,12 +6,24 @@ import { faGamepad, faPlay, faUserGraduate } from "@fortawesome/free-solid-svg-i
 import SessionWizard from "../layout/wizard/SessionWizard";
 import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
 import DashboardCardLink from "../layout/card/DashboardCardLink";
+import { useSessionSettingsSelector } from "../../hooks";
+import LaunchPresetConfirmationModal from "../settings/LaunchPresetConfirmationModal";
+import PresetConverter from "../../converter/PresetConverter";
+import SessionMode from "../../domain/session/SessionMode";
+import { SessionSettingsState } from "../../slices/SessionSettingsSlice";
 
 const PlayCard = () => {
 
+    const sessions = useSessionSettingsSelector(state => state.sessionSettings);
+    const presetConverter = new PresetConverter();
+    const lastPlaySession = sessions.lastPlaySession;
+    const lastLearnSession = sessions.lastLearnSession;
+
+    const [preset, setPreset] = useState<SessionMode | undefined>(undefined);
     const [customising, setCustomising] = useState(false);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [confirming, setConfirming] = useState(false);
 
     const handleStart = () => {
         setCustomising(true);
@@ -23,6 +35,15 @@ const PlayCard = () => {
         loading: loading,
         className: styles.card,
     }
+
+    const handleStartLastSession = (session?: SessionSettingsState) => {
+        const preset = presetConverter.convertSessionSettings(session!);
+        setPreset(preset);
+        setConfirming(true);
+    }
+
+    const playTitle = !!lastPlaySession ? lastPlaySession.name ?? "Custom Session" : "You've not played anything recently.";
+    const learnTitle = !!lastLearnSession ? lastLearnSession.name ?? "Custom Session" : "You've not practiced anything recently.";
 
     return (
         <DashboardCard {...props}>
@@ -38,15 +59,36 @@ const PlayCard = () => {
 
                 <Row>
                     <Col className={styles.left}>
-                        <DashboardCardLink text="Last Play Session" icon={faGamepad} className={styles.last} />
+                        <DashboardCardLink
+                            icon={faGamepad}
+                            title={playTitle}
+                            text="Last Play Session"
+                            className={styles.last}
+                            disabled={!lastPlaySession}
+                            onClick={() => handleStartLastSession(lastPlaySession)}
+                        />
                     </Col>
                     <Col className={styles.right}>
-                        <DashboardCardLink text="Last Learn Session" icon={faUserGraduate} className={styles.last} />
+                        <DashboardCardLink
+                            title={learnTitle}
+                            icon={faUserGraduate}
+                            className={styles.last}
+                            text="Last Learn Session"
+                            disabled={!lastLearnSession}
+                            onClick={() => handleStartLastSession(lastLearnSession)}
+                        />
                     </Col>
                 </Row>
             </DashboardCard.Body>
 
             {customising && <SessionWizard onClose={() => setCustomising(false)} />}
+
+            {confirming && preset && (
+                <LaunchPresetConfirmationModal
+                    preset={preset}
+                    onDismiss={() => setConfirming(false)}
+                />
+            )}
         </DashboardCard>
     )
 }
