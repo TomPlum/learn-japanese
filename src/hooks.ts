@@ -20,6 +20,9 @@ export const useGameSettingsSelector: TypedUseSelectorHook<RootState> = useSelec
 export const useDataSettingsDispatch = () => useDispatch<AppDispatch>();
 export const useDataSettingsSelector: TypedUseSelectorHook<RootState> = useSelector;
 
+export const useSessionSettingsDispatch = () => useDispatch<AppDispatch>();
+export const useSessionSettingsSelector: TypedUseSelectorHook<RootState> = useSelector;
+
 export const useDebouncedEffect = (effect: () => any, delay: number, deps: any[] = []) => {
     useEffect(() => {
         const handler = setTimeout(() => effect(), delay);
