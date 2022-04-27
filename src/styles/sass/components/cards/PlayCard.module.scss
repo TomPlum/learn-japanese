@@ -1,5 +1,6 @@
 @import "src/styles/sass/colours";
 @import "src/styles/sass/mixins";
+@import "src/styles/sass/animations";
 
 .card {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
@@ -12,21 +13,87 @@
 .start {
   background-color: $bootstrap-green;
   color: $light-1 !important;
-  text-align: center;
-  padding: 10px;
+  padding: 6px;
   border-radius: 5px;
-  transition: all ease-in-out 0.2s;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 15px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0s;
+}
+.start:link, .start:visited {
+  position: relative;
+  display: block;
+  margin: 30px auto 0;
+  padding: 14px 15px;
+  color: #fff;
+  font-size:14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
   text-transform: uppercase;
+  overflow: hidden;
+  letter-spacing: .08em;
+  border-radius: 0;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.start:link:after, .start:visited:after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  height: 0;
+  left: 50%;
+  top: 50%;
+  width: 150%;
+  z-index: -1;
+  -webkit-transition: all 0.75s ease 0s;
+  -moz-transition: all 0.75s ease 0s;
+  -o-transition: all 0.75s ease 0s;
+  transition: all 0.75s ease 0s;
+}
+.start:link:hover, .start:visited:hover {
+  color: #FFF;
+  text-shadow: none;
+}
+.start:link:hover:after, .start:visited:hover:after {
+  height: 450%;
+}
+.start:hover {
+  color: #000 !important;
+  background-color: transparent;
+}
+.start:hover:before {
+  left: 0;
+  right: auto;
+  width: 100%;
+}
+.start:before {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 0;
+  z-index: 0;
+  content: '';
+  border-radius: 3px;
+  color: $dark-2 !important;
+  background: $light-1 !important;
+  transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0s;
 }
 
 .start svg {
   margin-right: 5px;
 }
 
-.start:hover {
-  background-color: $light-1;
-  color: $dark-2 !important;
-  cursor: pointer;
+.start svg, .start span {
+  z-index: 1;
+  position: relative;
 }
 
 .left {

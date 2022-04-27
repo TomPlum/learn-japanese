@@ -50,10 +50,10 @@ const PlayCard = () => {
             <DashboardCard.Body className={styles.body}>
                 <Row>
                     <Col xs={12}>
-                        <p onClick={handleStart} className={styles.start} data-testid="launch-wizard">
+                        <div onClick={handleStart} className={styles.start} data-testid="launch-wizard">
                             <FontAwesomeIcon icon={faPlay} fixedWidth size="sm" />
                             <span>Start Session</span>
-                        </p>
+                        </div>
                     </Col>
                 </Row>
 
