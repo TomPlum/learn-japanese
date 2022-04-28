@@ -7,6 +7,9 @@ import renderReduxConsumer from "../../renderReduxConsumer";
 import EditFavouritesModal from "../../../components/settings/EditFavouritesModal";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
+const scrollIntoViewMock = jest.fn();
+window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+
 const onSuccessHandler = jest.fn();
 const onDismissHandler = jest.fn();
 
@@ -219,4 +222,15 @@ test('Should render the error if the update favourites service function fails wh
     expect(await mockUpdateFavourites).toHaveBeenCalledWith([], [3]);
     expect(await component.findByText('Save')).toBeInTheDocument();
     expect(onSuccessHandler).not.toHaveBeenCalled();
+});
+
+test('Should render a help button in the existing favourites section when there are none', async () => {
+    mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
+    const component = renderReduxConsumer(<EditFavouritesModal favourites={[]} {...eventHandlers} />);
+
+    const button = await component.findByText('You can select favourites below');
+    expect(button).toBeInTheDocument();
+
+    fireEvent.click(button);
+    expect(scrollIntoViewMock).toHaveBeenCalled();
 });

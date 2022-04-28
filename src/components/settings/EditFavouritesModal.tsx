@@ -2,8 +2,8 @@ import { ModalProps } from "react-bootstrap/Modal";
 import styles from "../../styles/sass/components/settings/EditFavouritesModal.module.scss";
 import { Alert, Button, Fade, Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleNotch, faGraduationCap, faPlay, faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
-import React, { useEffect, useState } from "react";
+import { faArrowAltCircleDown, faCircleNotch, faGraduationCap, faPlay, faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useRef, useState } from "react";
 import PresetService from "../../service/PresetService";
 import SessionMode from "../../domain/session/SessionMode";
 import LoadingSpinner from "../ui/LoadingSpinner";
@@ -35,6 +35,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
     const [confirm, setConfirm] = useState(false);
 
     const service = new PresetService();
+    const presetsRef = useRef<HTMLParagraphElement>(null);
 
     useEffect(() => {
         setLoading(true);
@@ -104,6 +105,10 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
         }
     }
 
+    const handleAddPresets = () => {
+        presetsRef?.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+
     return (
         <Modal {...modalProps}>
             <Modal.Body className={[styles.modal, confirm ? styles.blur : ""].join(" ")}>
@@ -146,9 +151,15 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                                         onCancel={(id: number) => setRemove(existing => existing.filter(it => it !== id))}
                                     />
                                 ))}
+                                {favourites.length === 0 && (
+                                    <p className={styles.empty} onClick={handleAddPresets}>
+                                        <FontAwesomeIcon icon={faArrowAltCircleDown} fixedWidth />
+                                        You can select favourites below
+                                    </p>
+                                )}
                             </div>
 
-                            <p className={styles.heading}>Available Presets</p>
+                            <p className={styles.heading} ref={presetsRef}>Available Presets</p>
                             <div className={styles.favourites}>
                                 {filtered.map((preset: SessionMode) => (
                                     <EditFavouriteButton
