@@ -1,6 +1,7 @@
 import styles from "../../styles/sass/components/settings/LearnSessionSettingsSummary.module.scss";
 import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 import { WizardStep } from "../layout/wizard/SessionWizard";
+import DataSettingsSummary from "./DataSettingsSummary";
 
 export interface LearnSessionSettingsSummaryProps {
     settings: SessionSettings;
@@ -20,8 +21,10 @@ const LearnSessionSettingsSummary = (props: LearnSessionSettingsSummaryProps) =>
                 <span className={[styles.mode, styles.highlight].join(" ")} onClick={() => onSelectStage?.(MODE)}>
                     {"learning"}
                 </span>
-                <span>{" about"}</span>
+                <span>{" about "}</span>
             </span>
+            <DataSettingsSummary settings={settings.dataSettings} />
+            <span>{" from "}</span>
             <span className={[styles.topic, styles.highlight].join(" ")} onClick={() => onSelectStage?.(TOPIC)}>
                 {" "}{settings.dataSettings.topic.name}{" "}
             </span>

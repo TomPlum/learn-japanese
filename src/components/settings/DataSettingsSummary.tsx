@@ -6,6 +6,7 @@ import SentenceStructureSettings from "../../domain/session/settings/data/Senten
 import CalendarSettings from "../../domain/session/settings/data/CalendarSettings";
 import BasicsSettings from "../../domain/session/settings/data/BasicsSettings";
 import styles from "../../styles/sass/components/settings/DataSettingsSummary.module.scss";
+import hiragana from "../../data/Hiragana";
 
 export interface DataSettingsSummaryProps {
     settings: DataSettings;
@@ -59,14 +60,39 @@ const DataSettingsSummary = (props: DataSettingsSummaryProps) => {
     }
 
     if (isKanaSettings(settings)) {
-        const words = [];
-        if (settings.diacriticals) words.push("diacriticals");
-        if (settings.hiragana) words.push("hiragana");
-        if (settings.katakana) words.push("katakana");
-        if (settings.diagraphs) words.push("diagraphs");
-        if (settings.regular) words.push("regular");
-        if (settings.onlyDiagraphs) words.push("only diagraphs");
-        return parseWords(words);
+        const hasHiragana = settings.hiragana;
+        const hasKatakana = settings.katakana;
+        const hasDiagraphs = settings.diagraphs;
+        const hasDiacriticals = settings.diacriticals;
+        const hasBothSyllabaries = hasHiragana && hasKatakana;
+        const hasAnyExtra = hasDiagraphs || hasDiacriticals;
+
+        if (settings.onlyDiagraphs) {
+            return (
+                <span>
+                    <span className={className}>{"diagraphs"}</span>
+                    <span>{" from the "}</span>
+                    {hasHiragana && <span className={className}>{"hiragana"}</span>}
+                    <span>{hasHiragana && hasKatakana ? " and " : ", "}</span>
+                    {hasKatakana && <span className={className}>{"katakana"}</span>}
+                    <span>{hasHiragana && hasKatakana ? " syllabaries " : "syllabary"}</span>
+                </span>
+            )
+        }
+
+        return (
+            <span>
+                {hasHiragana && <span className={className}>{"hiragana"}</span>}
+                {hasBothSyllabaries && <span>{" and "}</span>}
+                {hasKatakana && <span className={className}>{" katakana"}</span>}
+
+                {hasAnyExtra && <span>{" with "}</span>}
+                {hasDiagraphs && <span className={className}>{"diagraphs"}</span>}
+                {hasDiagraphs && hasDiacriticals && <span>{" and "}</span>}
+                {hasDiacriticals && <span className={className}>{"diacriticals "}</span>}
+                {hasAnyExtra && <span>{"included "}</span>}
+            </span>
+        );
     } else if (isSentenceStructureSettings(settings)) {
         const words = [];
         if (settings.particles) words.push("particles");
