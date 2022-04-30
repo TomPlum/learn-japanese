@@ -18,14 +18,14 @@ const KanaDataSettingsSummary = (props: KanaDataSettingsSummaryProps) => {
 
     if (settings.onlyDiagraphs) {
         return (
-            <span>
+            <>
                 <span className={className}>{"diagraphs"}</span>
                 <span>{" from the "}</span>
                 {hasHiragana && <span className={className}>{"hiragana"}</span>}
-                <span>{hasHiragana && hasKatakana ? " and " : ", "}</span>
+                {hasHiragana && hasKatakana && <span>{" and "}</span>}
                 {hasKatakana && <span className={className}>{"katakana"}</span>}
-                <span>{hasHiragana && hasKatakana ? " syllabaries " : "syllabary"}</span>
-            </span>
+                <span>{hasHiragana && hasKatakana ? " syllabaries " : " syllabary"}</span>
+            </>
         )
     }
 
@@ -34,12 +34,11 @@ const KanaDataSettingsSummary = (props: KanaDataSettingsSummaryProps) => {
             {hasHiragana && <span className={className}>{"hiragana"}</span>}
             {hasBothSyllabaries && <span>{" and "}</span>}
             {hasKatakana && <span className={className}>{" katakana"}</span>}
-
             {hasAnyExtra && <span>{" with "}</span>}
             {hasDiagraphs && <span className={className}>{"diagraphs"}</span>}
             {hasDiagraphs && hasDiacriticals && <span>{" and "}</span>}
-            {hasDiacriticals && <span className={className}>{"diacriticals "}</span>}
-            {hasAnyExtra && <span>{"included "}</span>}
+            {hasDiacriticals && <span className={className}>{"diacriticals"}</span>}
+            {hasAnyExtra && <span>{" included "}</span>}
         </span>
     );
 }
