@@ -17,7 +17,7 @@ const KanjiDataSettingsSummary = (props: KanjiDataSettingsSummaryProps) => {
             {hasGrades && (
                 <>
                     <span>{"from grades "}</span>
-                    <span className={className}>{settings.grades.join(", ")}</span>
+                    <span className={className}>{settings.grades.map(it => it.value).join(", ")}</span>
                 </>
             )}
 
