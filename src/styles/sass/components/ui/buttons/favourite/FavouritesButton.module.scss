@@ -4,10 +4,9 @@
 
 .favourite {
   @include noSelect;
-  width: 120px;
+  width: 115px;
   display: flex;
   padding: 12px;
-  margin: 0 10px;
   color: $light-1;
   position: relative;
   text-align: center;

@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LaunchPresetConfirmationModal from "../settings/LaunchPresetConfirmationModal";
 import EditFavouritesModal from "../settings/EditFavouritesModal";
 import DashboardCardLink from "../layout/card/DashboardCardLink";
+import ScrollableContainer from "../ui/ScrollableContainer";
 
 const FavouritesCard = () => {
 
@@ -81,14 +82,17 @@ const FavouritesCard = () => {
                         </p>
                     )}
 
-                    {presets.map((preset: SessionMode) => (
-                        <FavouriteButton
-                            preset={preset}
-                            onStart={handleStart}
-                            key={preset.getUniqueID()}
-                            selected={selected?.getUniqueID() === preset.getUniqueID()}
-                        />
-                    ))}
+                    <ScrollableContainer maxHeight={300} className={styles.favourites}>
+                        {presets.map((preset: SessionMode) => (
+                            <FavouriteButton
+                                preset={preset}
+                                onStart={handleStart}
+                                key={preset.getUniqueID()}
+                                className={styles.favourite}
+                                selected={selected?.getUniqueID() === preset.getUniqueID()}
+                            />
+                        ))}
+                    </ScrollableContainer>
 
                     {confirm && selected && (
                         <LaunchPresetConfirmationModal
