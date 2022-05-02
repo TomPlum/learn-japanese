@@ -6,11 +6,12 @@ import { faCheckCircle, faCircleNotch, faExclamationCircle, faRedo, faSearchMinu
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from "react-table";
 import { AnimatePresence, motion } from "framer-motion";
-import TablePagination from "../ui/table/TablePagination";
+import TablePagination from "../ui/paging/TablePagination";
 import Copyable from "../ui/Copyable";
 import RomajiGenerator from "../../utility/RomajiGenerator";
 import styles from "../../styles/sass/components/pages/GenkiIndexPage.module.scss";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import Arrays from "../../utility/Arrays";
 
 interface TableData {
     lesson: number;
@@ -22,6 +23,7 @@ interface TableData {
 const GenkiIndexPage = () => {
 
     const service = new GenkiService();
+    const originalData = useRef<TableData[]>([]);
     const data = useRef<TableData[]>([]);
 
     const columns = useMemo(() => [
@@ -69,7 +71,7 @@ const GenkiIndexPage = () => {
         service.getAllVocab().then(response => {
             if (response.definitions) {
                 const romajiGenerator = new RomajiGenerator();
-                data.current = response.definitions.map(it => {
+                const convertedData = response.definitions.map(it => {
                     return {
                         lesson: it.getLesson(),
                         kana: it.getKana()[0],
@@ -78,6 +80,8 @@ const GenkiIndexPage = () => {
                         kanji: it.getKanjiVariation() ?? "-"
                     };
                 });
+                data.current = convertedData;
+                originalData.current = Arrays.copy(convertedData);
             } else {
                 setError(response.error!);
             }
@@ -88,7 +92,23 @@ const GenkiIndexPage = () => {
         });
     }
 
-    const onFilter = useAsyncDebounce((value: string) => setGlobalFilter(value), 200);
+    const onGlobalFilter = useAsyncDebounce((value: string) => setGlobalFilter(value), 200);
+
+    const onToggleFirstBook = (enabled: boolean) => {
+        if (enabled) {
+            data.current = originalData.current;
+        } else {
+            data.current = originalData.current.filter(it => it.lesson <= 12);
+        }
+    }
+
+    const onToggleSecondBook = (enabled: boolean) => {
+        if (enabled) {
+            data.current = originalData.current;
+        } else {
+            data.current = originalData.current.filter(it => it.lesson >= 13);
+        }
+    }
 
     return (
         <Container fluid className={styles.wrapper}>
@@ -122,11 +142,11 @@ const GenkiIndexPage = () => {
                 append={`${rows.length} Results`}
                 onChange={(value: string) => {
                     setSearch(value);
-                    onFilter(value);
+                    onGlobalFilter(value);
                 }}
                 onClear={() => {
                     setSearch("");
-                    onFilter("");
+                    onGlobalFilter("");
                 }}
                 placeholder="Search for a meaning, kana, kanji or lesson"
             />
@@ -236,6 +256,8 @@ const GenkiIndexPage = () => {
                     onFirstPage={() => gotoPage(0)}
                     totalPages={pageOptions.length}
                     canPreviousPage={canPreviousPage}
+                    onToggleFirstBook={onToggleFirstBook}
+                    onToggleSecondBook={onToggleSecondBook}
                     onLastPage={() => gotoPage(pageCount - 1)}
                     onChangeQuantity={(value: number) => setPageSize(value)}
                 />

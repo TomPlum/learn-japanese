@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCheckCircle, faPencilAlt, faSpinner, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../../styles/sass/components/layout/wizard/form/CustomPresetForm.module.scss";
-import PlayService from "../../../../service/PlayService";
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
 import IconPicker from "../../../ui/menu/icon/IconPicker";
 import { Icon } from "../../../../domain/Icon";
+import PresetService from "../../../../service/PresetService";
 
 export interface CustomPresetFormProps {
     settings: SessionSettings;
@@ -18,7 +18,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
 
     const { settings, onSuccess, onCancel } = props;
 
-    const service = new PlayService();
+    const service = new PresetService();
 
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);

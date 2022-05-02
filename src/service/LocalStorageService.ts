@@ -1,9 +1,29 @@
 import { Icon } from "../domain/Icon";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { SessionSettings } from "../domain/session/settings/SessionSettings";
+import GameSettingsConverter from "../converter/GameSettingsConverter";
+import DataSettingsConverter from "../converter/DataSettingsConverter";
+import { DataSettingsState } from "../slices/DataSettingsSlice";
+import { GameSettingState } from "../slices/GameSettingsSlice";
+import LearnSettings from "../domain/session/settings/LearnSettings";
+
+interface PlaySession {
+    data: DataSettingsState;
+    game: GameSettingState;
+}
+
+interface LearnSession {
+    data: DataSettingsState;
+}
 
 class LocalStorageService {
 
+    private readonly gameSettingsConverter = new GameSettingsConverter();
+    private readonly dataSettingsConverter = new DataSettingsConverter();
+
     private readonly RECENT_ICONS_KEY = "recent-icons";
+    private readonly LAST_PLAY_SESSION_KEY = "last-play-session";
+    private readonly LAST_LEARN_SESSION_KEY = "last-learn-session";
 
     /**
      * Caches the given icon in local storage.
@@ -23,9 +43,42 @@ class LocalStorageService {
         }
     }
 
+    /**
+     * Retrieves a list of all the recently used icons from the
+     * IconPicker component.
+     * @return icons An array of the most recently used icons.
+     */
     public getRecentlyUsedIcons(): (IconDefinition | Icon | string)[] {
         const value = localStorage.getItem(this.RECENT_ICONS_KEY);
         return JSON.parse(value ?? "[]") as Icon[];
+    }
+
+    public addLastPlaySession(settings: SessionSettings) {
+        const gameSettings = this.gameSettingsConverter.serialise(settings.gameSettings!);
+        const dataSettings = this.dataSettingsConverter.serialise(settings.dataSettings);
+        localStorage.setItem(this.LAST_PLAY_SESSION_KEY, JSON.stringify({ game: gameSettings, data: dataSettings }));
+    }
+
+    public getLastPlaySession(): SessionSettings | undefined {
+        const value = localStorage.getItem(this.LAST_PLAY_SESSION_KEY);
+        if (!value) return undefined;
+        const session = JSON.parse(value) as PlaySession;
+        const dataSettings = this.dataSettingsConverter.deserialise(session.data);
+        const gameSettings = this.gameSettingsConverter.deserialise(session.game);
+        return SessionSettings.forGame(dataSettings, gameSettings);
+    }
+
+    public addLastLearnSession(settings: SessionSettings) {
+        const dataSettings = this.dataSettingsConverter.serialise(settings.dataSettings);
+        localStorage.setItem(this.LAST_LEARN_SESSION_KEY, JSON.stringify({ data: dataSettings }));
+    }
+
+    public getLastLearnSession(): SessionSettings | undefined {
+        const value = localStorage.getItem(this.LAST_LEARN_SESSION_KEY);
+        if (!value) return undefined;
+        const session = JSON.parse(value) as PlaySession;
+        const dataSettings = this.dataSettingsConverter.deserialise(session.data);
+        return SessionSettings.forLearning(dataSettings, new LearnSettings());
     }
 }
 
