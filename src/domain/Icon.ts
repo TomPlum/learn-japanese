@@ -1,3 +1,13 @@
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+
+/**
+ * A custom icon of type:
+ * - Font Awesome
+ * - React Icons
+ * - String literal
+ */
+export type CustomIcon = IconDefinition | Icon | string;
+
 export type Icon =
     | ''
     | "Fa500Px"

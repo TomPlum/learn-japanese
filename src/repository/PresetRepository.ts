@@ -8,8 +8,7 @@ import PlayMode from "../domain/session/PlayMode";
 import UpdateResponse from "../rest/response/UpdateResponse";
 import PresetConverter from "../converter/PresetConverter";
 import { SessionSettings } from "../domain/session/settings/SessionSettings";
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { Icon } from "../domain/Icon";
+import { CustomIcon } from "../domain/Icon";
 
 export interface PresetRequest {
     name: string;
@@ -255,7 +254,7 @@ export interface Presets {
 
 export interface CustomPresetDetails {
     name: string;
-    icon: IconDefinition | Icon | string;
+    icon: CustomIcon;
     colour: string;
     settings: SessionSettings;
 }

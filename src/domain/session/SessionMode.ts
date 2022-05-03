@@ -2,7 +2,7 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import DataSettings from "./settings/data/DataSettings";
 import ModeSettings from "./settings/ModeSettings";
 import { GridItem } from "../../components/layout/wizard/grid/GridItem";
-import { Icon } from "../Icon";
+import { CustomIcon } from "../Icon";
 
 abstract class SessionMode implements GridItem {
     protected readonly _id: number;
@@ -49,7 +49,7 @@ abstract class SessionMode implements GridItem {
         return this._colour;
     }
 
-    get icon(): IconDefinition | Icon | string {
+    get icon(): CustomIcon {
         return this._icon;
     }
 

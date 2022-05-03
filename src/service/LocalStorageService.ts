@@ -1,5 +1,19 @@
-import { Icon } from "../domain/Icon";
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { CustomIcon, Icon } from "../domain/Icon";
+import { SessionSettings } from "../domain/session/settings/SessionSettings";
+import GameSettingsConverter from "../converter/GameSettingsConverter";
+import DataSettingsConverter from "../converter/DataSettingsConverter";
+import { DataSettingsState } from "../slices/DataSettingsSlice";
+import { GameSettingState } from "../slices/GameSettingsSlice";
+import LearnSettings from "../domain/session/settings/LearnSettings";
+
+interface PlaySession {
+    data: DataSettingsState;
+    game: GameSettingState;
+}
+
+interface LearnSession {
+    data: DataSettingsState;
+}
 
 class LocalStorageService {
 

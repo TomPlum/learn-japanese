@@ -1,11 +1,11 @@
 import { Alert, Button, Col, Form } from "react-bootstrap";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faCheckCircle, faPencilAlt, faSpinner, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCheckCircle, faPencilAlt, faSpinner, faTimes } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../../styles/sass/components/layout/wizard/form/CustomPresetForm.module.scss";
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings";
 import IconPicker from "../../../ui/menu/icon/IconPicker";
-import { Icon } from "../../../../domain/Icon";
+import { CustomIcon } from "../../../../domain/Icon";
 import PresetService from "../../../../service/PresetService";
 
 export interface CustomPresetFormProps {
@@ -24,7 +24,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
     const [name, setName] = useState("");
-    const [icon, setIcon] = useState<IconDefinition | Icon | string>("FaRocket")
+    const [icon, setIcon] = useState<CustomIcon>("FaRocket")
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
