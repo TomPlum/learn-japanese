@@ -26,17 +26,18 @@ describe("Data Settings Converter", () => {
                 .withQuantity(50)
                 .build();
 
-            const serialised = converter.serialise(settings);
+            const serialised = converter.convertRequest(settings);
 
             expect(serialised).toStrictEqual({
                 quantity: 50,
-                regular: true,
-                hiragana: true,
-                katakana: false,
-                diagraphs: false,
-                diacriticals: true,
-                onlyDiagraphs: false,
-                topic: "Hiragana & Katakana"
+                config: {
+                    regular: true,
+                    hiragana: true,
+                    katakana: false,
+                    diagraphs: false,
+                    diacriticals: true,
+                    onlyDiagraphs: false,
+                }
             });
         });
 
@@ -48,13 +49,14 @@ describe("Data Settings Converter", () => {
                 .withGrades([KyoikuGrade.ONE, KyoikuGrade.THREE])
                 .build();
 
-            const serialised = converter.serialise(settings);
+            const serialised = converter.convertRequest(settings);
 
             expect(serialised).toStrictEqual({
-                tags: ["number", "animal"],
-                topic: "Jōyō Kanji",
-                grades: [1, 3],
-                quantity: 75
+                quantity: 75,
+                config: {
+                    tags: ["number", "animal"],
+                    grades: [1, 3],
+                }
             });
         });
 
@@ -69,17 +71,18 @@ describe("Data Settings Converter", () => {
                 .withExceptions(false)
                 .build();
 
-            const serialised = converter.serialise(settings);
+            const serialised = converter.convertRequest(settings);
 
             expect(serialised).toStrictEqual({
-                topic: "Numbers & Counting",
                 quantity: 60,
-                numbers: true,
-                counters: true,
-                age: false,
-                exceptions: false,
-                units: true,
-                sequence: false
+                config: {
+                    numbers: true,
+                    counters: true,
+                    age: false,
+                    exceptions: false,
+                    units: true,
+                    sequence: false
+                }
             });
         });
 
@@ -94,17 +97,18 @@ describe("Data Settings Converter", () => {
                 .withExpressions(true)
                 .build();
 
-            const serialised = converter.serialise(settings);
+            const serialised = converter.convertRequest(settings);
 
             expect(serialised).toStrictEqual({
-                topic: "Sentence Structure",
                 quantity: 25,
-                adverbs: true,
-                particles: false,
-                expressions: true,
-                verbs: false,
-                nouns: true,
-                adjectives: false
+                config: {
+                    adverbs: true,
+                    particles: false,
+                    expressions: true,
+                    verbs: false,
+                    nouns: true,
+                    adjectives: false
+                }
             });
         });
 
@@ -119,16 +123,17 @@ describe("Data Settings Converter", () => {
                 .withTemporalNouns(true)
                 .build();
 
-            const serialised = converter.serialise(settings);
+            const serialised = converter.convertRequest(settings);
 
             expect(serialised).toStrictEqual({
-                topic: "Days & Months",
                 quantity: 75,
-                days: false,
-                months: true,
-                seasons: true,
-                nouns: true,
-                phrases: false
+                config: {
+                    days: false,
+                    months: true,
+                    seasons: true,
+                    nouns: true,
+                    phrases: false
+                }
             });
         });
 
@@ -143,23 +148,24 @@ describe("Data Settings Converter", () => {
                 .withAnimals(true)
                 .build();
 
-            const serialised = converter.serialise(settings);
+            const serialised = converter.convertRequest(settings);
 
             expect(serialised).toStrictEqual({
-                topic: "Basics",
                 quantity: 10,
-                colours: false,
-                animals: true,
-                directions: false,
-                weather: false,
-                family: true,
-                body: true
+                config: {
+                    colours: false,
+                    animals: true,
+                    directions: false,
+                    weather: false,
+                    family: true,
+                    body: true
+                }
             });
         });
 
         it("Should throw an exception if an invalid instance is encountered", () => {
             const settings = new UnknownSettings(50);
-            expect(() => converter.serialise(settings)).toThrow("Unknown DataSettings Type [UnknownSettings]");
+            expect(() => converter.convertRequest(settings)).toThrow("Unknown DataSettings Type [UnknownSettings]");
         });
 
         class UnknownSettings extends DataSettings {

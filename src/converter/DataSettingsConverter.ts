@@ -93,8 +93,6 @@ class DataSettingsConverter {
             return {
                 quantity: settings.quantity,
                 config: {
-                    topic: settings.topic.name,
-                    quantity: settings.quantity,
                     hiragana: settings.hiragana,
                     katakana: settings.katakana,
                     diagraphs: settings.diagraphs,
@@ -107,8 +105,6 @@ class DataSettingsConverter {
             return {
                 quantity: settings.quantity,
                 config: {
-                    topic: settings.topic.name,
-                    quantity: settings.quantity,
                     tags: settings.tags,
                     grades: settings.grades.map(it => it.value)
                 } as KanjiDataSettingsRequest
@@ -117,8 +113,6 @@ class DataSettingsConverter {
             return {
                 quantity: settings.quantity,
                 config: {
-                    topic: settings.topic.name,
-                    quantity: settings.quantity,
                     age: settings.age,
                     exceptions: settings.exceptions,
                     counters: settings.counters,
@@ -131,8 +125,6 @@ class DataSettingsConverter {
             return {
                 quantity: settings.quantity,
                 config: {
-                    topic: settings.topic.name,
-                    quantity: settings.quantity,
                     expressions: settings.expressions,
                     nouns: settings.nouns,
                     verbs: settings.verbs,
@@ -145,8 +137,6 @@ class DataSettingsConverter {
             return {
                 quantity: settings.quantity,
                 config: {
-                    topic: settings.topic.name,
-                    quantity: settings.quantity,
                     nouns: settings.nouns,
                     days: settings.days,
                     months: settings.months,
@@ -158,8 +148,6 @@ class DataSettingsConverter {
             return {
                 quantity: settings.quantity,
                 config: {
-                    topic: settings.topic.name,
-                    quantity: settings.quantity,
                     body: settings.body,
                     animals: settings.animals,
                     directions: settings.directions,
