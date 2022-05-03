@@ -13,6 +13,7 @@ import LearnSettings from "../../domain/session/settings/LearnSettings";
 import PlayMode from "../../domain/session/PlayMode";
 import Topic from "../../domain/Topic";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
+import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 
 const mockDataSettingsConverter = jest.fn();
 jest.mock("../../converter/DataSettingsConverter", () => function() { return { convert: mockDataSettingsConverter } });
@@ -299,7 +300,12 @@ describe("Preset Repository", () => {
 
     describe("Save Custom Play Preset", () => {
 
-        const preset = new PlayMode(1, "Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Hiragana & Katakana");
+        const request = {
+            name: "Test Mode",
+            icon: faGraduationCap,
+            colour: "#fdb40e",
+            settings: SessionSettings.forGame(new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
+        };
 
         const gameSettingsRequest: GameConfigRequest = {
             hints: { quantity: 8, enabled: true, unlimited: false },
@@ -328,28 +334,28 @@ describe("Preset Repository", () => {
 
         it("Should call the rest client with the correct endpoint and request payload", () => {
             mockPost.mockResolvedValueOnce({ });
-            return repository.savePlayPreset(preset).then(() => {
+            return repository.savePlayPreset(request).then(() => {
                 expect(mockPost).toHaveBeenLastCalledWith("/presets/custom/play/save", presetRequest);
             });
         });
 
         it("Should return true if the API call succeeds", () => {
             mockPost.mockResolvedValueOnce({ });
-            return repository.savePlayPreset(preset).then(response => {
+            return repository.savePlayPreset(request).then(response => {
                 expect(response.success).toBe(true);
             });
         });
 
         it("Should return false if the API call fails", () => {
             mockPost.mockRejectedValueOnce({ });
-            return repository.savePlayPreset(preset).then(response => {
+            return repository.savePlayPreset(request).then(response => {
                 expect(response.success).toBe(false);
             });
         });
 
         it("Should return the error message if the API calls fails and has one in the response", () => {
             mockPost.mockRejectedValueOnce({ error: "Failed to save preset." });
-            return repository.savePlayPreset(preset).then(response => {
+            return repository.savePlayPreset(request).then(response => {
                 expect(response.error).toStrictEqual("Failed to save preset.");
             });
         });
@@ -357,7 +363,12 @@ describe("Preset Repository", () => {
 
     describe("Save Custom Learn Preset", () => {
 
-        const preset = new LearnMode(1, "Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "Hiragana & Katakana");
+        const request = {
+            name: "Hiragana",
+            icon: "あ",
+            colour: "#fdb40e",
+            settings: SessionSettings.forLearning(new KanaSettingsBuilder().withHiragana().build(), new LearnSettings())
+        };
 
         const dataSettingsRequest: DataSettingsRequest = {
             quantity: 50,
@@ -378,28 +389,28 @@ describe("Preset Repository", () => {
 
         it("Should call the rest client with the correct endpoint and request payload", () => {
             mockPost.mockResolvedValueOnce({ });
-            return repository.saveLearnPreset(preset).then(() => {
+            return repository.saveLearnPreset(request).then(() => {
                 expect(mockPost).toHaveBeenLastCalledWith("/presets/custom/learn/save", presetRequest);
             });
         });
 
         it("Should return true if the API call succeeds", () => {
             mockPost.mockResolvedValueOnce({ });
-            return repository.saveLearnPreset(preset).then(response => {
+            return repository.saveLearnPreset(request).then(response => {
                 expect(response.success).toBe(true);
             });
         });
 
         it("Should return false if the API call fails", () => {
             mockPost.mockRejectedValueOnce({ });
-            return repository.saveLearnPreset(preset).then(response => {
+            return repository.saveLearnPreset(request).then(response => {
                 expect(response.success).toBe(false);
             });
         });
 
         it("Should return the error message if the API calls fails and has one in the response", () => {
             mockPost.mockRejectedValueOnce({ error: "Failed to save preset." });
-            return repository.saveLearnPreset(preset).then(response => {
+            return repository.saveLearnPreset(request).then(response => {
                 expect(response.error).toStrictEqual("Failed to save preset.");
             });
         });

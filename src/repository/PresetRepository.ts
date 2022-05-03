@@ -7,6 +7,9 @@ import GameSettingsConverter from "../converter/GameSettingsConverter";
 import PlayMode from "../domain/session/PlayMode";
 import UpdateResponse from "../rest/response/UpdateResponse";
 import PresetConverter from "../converter/PresetConverter";
+import { SessionSettings } from "../domain/session/settings/SessionSettings";
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { Icon } from "../domain/Icon";
 
 export interface PresetRequest {
     name: string;
@@ -250,6 +253,13 @@ export interface Presets {
     error?: string;
 }
 
+export interface CustomPresetDetails {
+    name: string;
+    icon: IconDefinition | Icon | string;
+    colour: string;
+    settings: SessionSettings;
+}
+
 class PresetRepository {
 
     private readonly presetConverter = new PresetConverter();
@@ -258,11 +268,11 @@ class PresetRepository {
 
     /**
      * Saves a custom play preset for the current user.
-     * @param preset The custom preset.
+     * @param details The custom preset settings.
      */
-    public async savePlayPreset(preset: PlayMode): Promise<UpdateResponse> {
-        const request = this.presetConverter.convertRequest(preset);
-        return RestClient.post("/presets/custom/play/save", request).then(() => {
+    public async savePlayPreset(details: CustomPresetDetails): Promise<UpdateResponse> {
+        const request = this.presetConverter.convertRequest(details);
+        return RestClient.post<PresetRequest>("/presets/custom/play/save", request).then(() => {
             return { success: true };
         }).catch(response => {
             return { success: false, error: response.error };
@@ -271,10 +281,10 @@ class PresetRepository {
 
     /**
      * Saves a custom learn preset for the current user.
-     * @param preset The custom preset.
+     * @param details The custom preset.
      */
-    public async saveLearnPreset(preset: LearnMode): Promise<UpdateResponse> {
-        const request = this.presetConverter.convertRequest(preset);
+    public async saveLearnPreset(details: CustomPresetDetails): Promise<UpdateResponse> {
+        const request = this.presetConverter.convertRequest(details);
         return RestClient.post("/presets/custom/learn/save", request).then(() => {
             return { success: true };
         }).catch(response => {
