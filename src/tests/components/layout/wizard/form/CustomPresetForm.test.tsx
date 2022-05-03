@@ -4,9 +4,9 @@ import { SessionSettings } from "../../../../../domain/session/settings/SessionS
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
 import KanjiSettings from "../../../../../domain/session/settings/data/KanjiSettings";
 
-const mockPlayService = jest.fn();
-jest.mock("../../../../../service/PlayService", () => {
-    return function() { return { saveCustomPreset: mockPlayService }};
+const mockPresetService = jest.fn();
+jest.mock("../../../../../service/PresetService", () => {
+    return function() { return { saveCustomPreset: mockPresetService }};
 });
 
 const settings = SessionSettings.forGame(new KanjiSettings([],[]), new GameSettingsBuilder().build());
@@ -49,7 +49,7 @@ test('Save button should be enabled when the preset name field is not empty', ()
 
 test('Clicking save when the form is valid should save the preset', async () => {
     // Assume the service call will be successful
-    mockPlayService.mockResolvedValueOnce({ success: true })
+    mockPresetService.mockResolvedValueOnce({ success: true })
     const { name, icon, save } = setup();
 
     // Open the icon picker and select an icon
@@ -64,7 +64,7 @@ test('Clicking save when the form is valid should save the preset', async () => 
     fireEvent.click(save);
 
     // Should call the service with correct args and then display success message
-    expect(mockPlayService).toHaveBeenLastCalledWith("My Preset", "FaAtom", settings);
+    expect(mockPresetService).toHaveBeenLastCalledWith("My Preset", "FaAtom", settings);
     expect(await screen.findByText('Saved "My Preset" successfully.')).toBeInTheDocument();
 
     // 2 seconds after success, the onSuccess event handler should be called
@@ -75,7 +75,7 @@ test('Clicking save when the form is valid should save the preset', async () => 
 
 test('Should display the error message if the service call fails and returns one', async () => {
     // Assume the service call will be un-successful
-    mockPlayService.mockResolvedValueOnce({ success: false, error: "Something went wrong." });
+    mockPresetService.mockResolvedValueOnce({ success: false, error: "Something went wrong." });
     const { name, save } = setup();
 
     // Enter a preset name and click save
@@ -88,7 +88,7 @@ test('Should display the error message if the service call fails and returns one
 
 test('Should display the a default error message if the service call fails, but doesnt return one', async () => {
     // Assume the service call will be un-successful
-    mockPlayService.mockResolvedValueOnce({ success: false, error: undefined });
+    mockPresetService.mockResolvedValueOnce({ success: false, error: undefined });
     const { name, save } = setup();
 
     // Enter a preset name and click save
@@ -101,7 +101,7 @@ test('Should display the a default error message if the service call fails, but 
 
 test('Should display the a default error message if the service promise is rejected', async () => {
     // Assume the service call will be un-successful
-    mockPlayService.mockRejectedValueOnce({});
+    mockPresetService.mockRejectedValueOnce({});
     const { name, save } = setup();
 
     // Enter a preset name and click save
