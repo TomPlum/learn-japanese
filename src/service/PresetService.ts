@@ -3,6 +3,9 @@ import LearnMode from "../domain/session/LearnMode";
 import PlayMode from "../domain/session/PlayMode";
 import SessionMode from "../domain/session/SessionMode";
 import UpdateResponse from "../rest/response/UpdateResponse";
+import { SessionSettings } from "../domain/session/settings/SessionSettings";
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { Icon } from "../domain/Icon";
 
 export interface LearnPlayPresets {
     learn: LearnMode[];
@@ -59,6 +62,29 @@ class PresetService {
         }).catch(response => {
             return { success: false, error: response.error };
         });
+    }
+
+    /**
+     * Saves a new preset against the current user with the given details.
+     * @param name The name of the preset.
+     * @param icon An icon to identify the preset.
+     * @param settings The session settings for the preset configuration.
+     */
+    public async saveCustomPreset(name: string, icon: IconDefinition | Icon | string, settings: SessionSettings): Promise<UpdateResponse> {
+        const details = { name: name, icon: icon, colour: "#FFFFFF", settings: settings};
+        if (settings.gameSettings) {
+            return this.repository.savePlayPreset(details).then(() => {
+                return { success: true };
+            }).catch(response => {
+                return { success: false, error: response.error };
+            });
+        } else {
+            return this.repository.saveLearnPreset(details).then(() => {
+                return { success: true };
+            }).catch(response => {
+                return { success: false, error: response.error };
+            });
+        }
     }
 }
 

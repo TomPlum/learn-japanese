@@ -5,15 +5,20 @@ import LearnSettings from "../../domain/session/settings/LearnSettings";
 import PlayMode from "../../domain/session/PlayMode";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSettings";
+import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 
 const mockGetAllPresets = jest.fn();
 const mockFavouritePresets = jest.fn();
 const mockDeleteFavouritePreset = jest.fn();
 const mockUpdateFavouritePresets = jest.fn();
+const mockSavePlayPreset = jest.fn();
+const mockSaveLearnPreset = jest.fn();
 jest.mock("../../repository/PresetRepository", () => {
     return function() {
         return {
             getAllPresets: mockGetAllPresets,
+            savePlayPreset: mockSavePlayPreset,
+            saveLearnPreset: mockSaveLearnPreset,
             getFavouritePresets: mockFavouritePresets,
             deleteFavouritePreset: mockDeleteFavouritePreset,
             updateFavouritePresets: mockUpdateFavouritePresets
@@ -21,8 +26,8 @@ jest.mock("../../repository/PresetRepository", () => {
     };
 });
 
-const learnPreset = new LearnMode(1, "Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings());
-const playPreset = new PlayMode(2, "Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
+const learnPreset = new LearnMode(1, "Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "Topic");
+const playPreset = new PlayMode(2, "Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic");
 
 describe("Preset Service", () => {
     const service = new PresetService();
@@ -122,6 +127,96 @@ describe("Preset Service", () => {
             mockUpdateFavouritePresets.mockRejectedValueOnce({ error: "Failed to update favourites." });
             return service.updateFavourites([1, 4, 6], [9]).then(response => {
                 expect(response.error).toBe("Failed to update favourites.");
+            });
+        });
+    });
+
+    describe("Save Custom Preset", () => {
+        describe("Play", () => {
+            const settings = SessionSettings.forGame(new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
+
+            it("Should call the repository with the details", () => {
+                mockSavePlayPreset.mockResolvedValueOnce({});
+                service.saveCustomPreset("Test Play", "FaAtom", settings).then(() => {
+                    expect(mockSavePlayPreset).toHaveBeenLastCalledWith({
+                        name: "Test Play",
+                        icon: "FaAtom",
+                        colour: "#FFFFFF",
+                        settings: settings
+                    });
+                });
+            });
+
+            it("Should return true if the repository promise resolves successfully", () => {
+                mockSavePlayPreset.mockResolvedValueOnce({});
+                service.saveCustomPreset("Test Play", "FaAtom", settings).then(response => {
+                    expect(response.success).toBe(true);
+                });
+            });
+
+            it("Should return an undefined error if the repository promise resolves successfully", () => {
+                mockSavePlayPreset.mockResolvedValueOnce({});
+                service.saveCustomPreset("Test Play", "FaAtom", settings).then(response => {
+                    expect(response.error).toBeUndefined();
+                });
+            });
+
+            it("Should return false if the repository promise is rejected", () => {
+                mockSavePlayPreset.mockRejectedValueOnce({ });
+                service.saveCustomPreset("Test Play", "FaAtom", settings).then(response => {
+                    expect(response.success).toBe(false);
+                });
+            });
+
+            it("Should return an undefined error if the repository promise resolves successfully", () => {
+                mockSavePlayPreset.mockRejectedValueOnce({ error: "Failed to save custom preset" });
+                service.saveCustomPreset("Test Play", "FaAtom", settings).then(response => {
+                    expect(response.error).toBe("Failed to save custom preset");
+                });
+            });
+        });
+
+        describe("Learn", () => {
+            const settings = SessionSettings.forLearning(new KanaSettingsBuilder().build(), new LearnSettings());
+
+            it("Should call the repository with the details", () => {
+                mockSaveLearnPreset.mockResolvedValueOnce({});
+                service.saveCustomPreset("Test Learn", "FaAtom", settings).then(() => {
+                    expect(mockSaveLearnPreset).toHaveBeenLastCalledWith({
+                        name: "Test Learn",
+                        icon: "FaAtom",
+                        colour: "#FFFFFF",
+                        settings: settings
+                    });
+                });
+            });
+
+            it("Should return true if the repository promise resolves successfully", () => {
+                mockSaveLearnPreset.mockResolvedValueOnce({});
+                service.saveCustomPreset("Test Learn", "FaAtom", settings).then(response => {
+                    expect(response.success).toBe(true);
+                });
+            });
+
+            it("Should return an undefined error if the repository promise resolves successfully", () => {
+                mockSaveLearnPreset.mockResolvedValueOnce({});
+                service.saveCustomPreset("Test Learn", "FaAtom", settings).then(response => {
+                    expect(response.error).toBeUndefined();
+                });
+            });
+
+            it("Should return false if the repository promise is rejected", () => {
+                mockSaveLearnPreset.mockRejectedValueOnce({ });
+                service.saveCustomPreset("Test Learn", "FaAtom", settings).then(response => {
+                    expect(response.success).toBe(false);
+                });
+            });
+
+            it("Should return an undefined error if the repository promise resolves successfully", () => {
+                mockSaveLearnPreset.mockRejectedValueOnce({ error: "Failed to save custom preset" });
+                service.saveCustomPreset("Test Learn", "FaAtom", settings).then(response => {
+                    expect(response.error).toBe("Failed to save custom preset");
+                });
             });
         });
     });
