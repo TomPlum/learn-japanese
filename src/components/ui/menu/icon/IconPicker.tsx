@@ -2,18 +2,18 @@ import styles from "../../../../styles/sass/components/ui/menu/icon/IconPicker.m
 import React, { useState } from "react";
 import { Button, Form, OverlayTrigger, Popover } from "react-bootstrap";
 import { iconList } from "../../../../icons";
-import { Icon as IconType } from "../../../../domain/Icon";
+import { CustomIcon } from "../../../../domain/Icon";
 import Icon from "./Icon";
 import LocalStorageService from "../../../../service/LocalStorageService";
 import ScrollableContainer from "../../ScrollableContainer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRandom, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faRandom } from "@fortawesome/free-solid-svg-icons";
 import { Numbers } from "../../../../utility/Numbers";
 
 export interface IconPickerProps {
     size?: string;
     className?: string;
-    onSelect: (icon: IconDefinition | IconType | string) => void;
+    onSelect: (icon: CustomIcon) => void;
 }
 
 const IconPicker = (props: IconPickerProps) => {
@@ -25,9 +25,9 @@ const IconPicker = (props: IconPickerProps) => {
 
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
-    const [selected, setSelected] = useState<IconDefinition | IconType | string>("FaRocket");
+    const [selected, setSelected] = useState<CustomIcon>("FaRocket");
 
-    const handleSelect = (icon: IconDefinition | IconType | string) => {
+    const handleSelect = (icon: CustomIcon) => {
         setSearch("");
         setShow(false);
         onSelect(icon);
@@ -41,7 +41,7 @@ const IconPicker = (props: IconPickerProps) => {
         handleSelect(icon);
     }
 
-    let icons: (IconDefinition | IconType | string)[] = iconList.filter(name => !recentlyUsed.includes(name));
+    let icons: (CustomIcon)[] = iconList.filter(name => !recentlyUsed.includes(name));
     icons.unshift(...recentlyUsed);
     icons = icons
         .filter(it => !!it)
@@ -71,7 +71,7 @@ const IconPicker = (props: IconPickerProps) => {
                     />
                 </div>
                 <ScrollableContainer className={styles.iconContainer} maxHeight={180}>
-                    {icons.map((icon: IconDefinition | IconType | string) => (
+                    {icons.map((icon: CustomIcon) => (
                         <Icon
                             value={icon}
                             key={icon.toString()}

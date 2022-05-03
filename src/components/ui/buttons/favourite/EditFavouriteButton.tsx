@@ -1,10 +1,10 @@
 import styles from "../../../../styles/sass/components/ui/buttons/favourite/EditFavouriteButton.module.scss";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Fade } from "react-bootstrap";
 import Icon from "../../menu/icon/Icon";
-import { Icon as IconType } from "../../../../domain/Icon";
+import { CustomIcon } from "../../../../domain/Icon";
 
 export interface EditFavouriteButtonProps {
     id: number;
@@ -13,7 +13,7 @@ export interface EditFavouriteButtonProps {
     className?: string;
     onAdd: (id: number) => void;
     onCancel: (id: number) => void;
-    icon: IconDefinition | IconType | string;
+    icon: CustomIcon;
 }
 
 const EditFavouriteButton = (props: EditFavouriteButtonProps) => {

@@ -25,7 +25,7 @@ class LocalStorageService {
      * Duplicate icons are disregarded.
      * @param icon The name of the icon to store.
      */
-    public addRecentlyUsedIcon(icon: IconDefinition | Icon | string) {
+    public addRecentlyUsedIcon(icon: CustomIcon) {
         const icons = this.getRecentlyUsedIcons();
         if (!icons.includes(icon)) {
             if (icons.length === 5) {

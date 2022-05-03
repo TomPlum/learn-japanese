@@ -1,26 +1,26 @@
-import { Icon as IconType } from "../../../../domain/Icon"
+import { CustomIcon, Icon as IconType } from "../../../../domain/Icon"
 import React from "react";
 import * as CustomFontAwesomeIcon from "react-icons/fa";
 import styles from "../../../../styles/sass/components/ui/menu/icon/Icon.module.scss";
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faQuestion, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface IconProps {
-    size?: string;
-    value: IconDefinition | IconType | string;
-    className?: string;
     style?: {};
-    onClick?: (icon: IconDefinition | IconType | string) => void;
+    size?: string;
+    value: CustomIcon;
+    className?: string;
+    onClick?: (icon: CustomIcon) => void;
 }
 
 const Icon = (props: IconProps) => {
     const { size, value, style, className, onClick, ...rest } = props;
 
-    const isReactIconsType = (value: IconDefinition | IconType | string): value is IconType => {
+    const isReactIconsType = (value: CustomIcon): value is IconType => {
         return value.toString().startsWith("Fa");
     }
 
-    const isFontAwesomeIconDefinition = (value: IconDefinition | IconType | string): value is IconDefinition => {
+    const isFontAwesomeIconDefinition = (value: CustomIcon): value is IconDefinition => {
         return !isReactIconsType(value) && (typeof value !== 'string');
     }
 
@@ -32,6 +32,10 @@ const Icon = (props: IconProps) => {
         title: value.toString().replace("Fa", ""),
         className: [className, styles.icon].join(" ")
     };
+
+    if (!value) {
+        return <FontAwesomeIcon icon={faQuestion} />
+    }
 
     if (isFontAwesomeIconDefinition(value)) {
         return <FontAwesomeIcon icon={value} />

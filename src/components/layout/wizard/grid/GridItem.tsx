@@ -1,10 +1,10 @@
 import styles from "../../../../styles/sass/components/layout/wizard/grid/GridItem.module.scss";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
 import Inspectable from "../../../ui/Inspectable";
 import ConditionalWrapper from "../../../ui/ConditionalWrapper";
-import { Icon as IconType } from "../../../../domain/Icon";
+import { CustomIcon } from "../../../../domain/Icon";
 import Icon from "../../../ui/menu/icon/Icon";
 
 export interface GridItem {
@@ -17,13 +17,13 @@ export interface GridItemProps<T extends GridItem> {
     style?: {},
     desc?: string,
     small?: boolean;
+    icon: CustomIcon;
     selected: string;
     editable?: boolean;
     className?: string;
     iconColour?: string;
     onEdit?: () => void;
     onClick: (mode: T) => void;
-    icon: IconDefinition | IconType | string;
 }
 
 const GridItem = <T extends GridItem>(props: GridItemProps<T>) => {
