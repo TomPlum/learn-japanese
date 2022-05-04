@@ -6,9 +6,9 @@ import { GameSettingsBuilder } from "../../../../../domain/session/settings/game
 
 const onSelectStageHandler = jest.fn();
 
-const mockPlayService = jest.fn();
-jest.mock("../../../../../service/PlayService", () => {
-    return function() { return { saveCustomPreset: mockPlayService }};
+const mockPresetService = jest.fn();
+jest.mock("../../../../../service/PresetService", () => {
+    return function() { return { saveCustomPreset: mockPresetService }};
 });
 
 const dataSettings = new KanjiSettingsBuilder();
@@ -57,7 +57,7 @@ test('Clicking the cancel button in the save preset form should stop rendering t
 
 //TODO: Fix the act() warning here. The setInSavePresetForm() call triggers it. Can't assert much else other than accordion visibility
 test('Clicking the save button in the save preset form should hide the form and button after 2 seconds', async () => {
-    mockPlayService.mockResolvedValueOnce({ success: true });
+    mockPresetService.mockResolvedValueOnce({ success: true });
     withGameSettings(new GameSettingsBuilder());
     render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
 

@@ -3,7 +3,7 @@ import MemoryGame from "../game/MemoryGame";
 import GameResultScreen from "../results/GameResultScreen";
 import GameResult from "../../domain/game/GameResult";
 import SessionID from "../../domain/session/SessionID";
-import LearningDataRepository from "../../repository/LearningDataRepository";
+import LearningDataService from "../../service/LearningDataService";
 import { useEffect, useState } from "react";
 import { Learnable } from "../../domain/learn/Learnable";
 import { useDataSettingsDispatch, useDataSettingsSelector, useGameSettingsDispatch, useGameSettingsSelector } from "../../hooks";
@@ -36,7 +36,7 @@ const PlayPage = () => {
     useEffect(() => {
         if (!!dataSettings && !!gameSettings) {
             setLoading(true);
-            new LearningDataRepository().read(dataSettings).then(data => {
+            new LearningDataService().read(dataSettings).then(data => {
                 setData(data);
             }).finally(() => {
                 setLoading(false);

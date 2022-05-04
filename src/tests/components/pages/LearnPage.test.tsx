@@ -14,9 +14,9 @@ import Arrays from "../../../utility/Arrays";
 import { setApplicationMode } from "../../../slices/ModeSlice";
 import { AppMode } from "../../../domain/AppMode";
 
-const mockLearningDataRepository = jest.fn();
-jest.mock("../../../repository/LearningDataRepository", () => function() {
-    return { read: mockLearningDataRepository }
+const mockLearningDataService = jest.fn();
+jest.mock("../../../service/LearningDataService", () => function() {
+    return { read: mockLearningDataService }
 });
 
 const dataSettings = new KanaSettingsBuilder()
@@ -45,7 +45,7 @@ afterEach(() => {
 });
 
 test('Should render the learning session if the data settings are present', async () => {
-    mockLearningDataRepository.mockResolvedValueOnce([new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]);
+    mockLearningDataService.mockResolvedValueOnce([new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]);
     store.dispatch(setDataSettings(dataSettings));
 
     renderReduxConsumer(<LearnPage />);
@@ -58,7 +58,7 @@ test('Should render an error message if the data settings are undefined', () => 
 
     renderReduxConsumer(<LearnPage />);
 
-    expect(mockLearningDataRepository).not.toHaveBeenCalled();
+    expect(mockLearningDataService).not.toHaveBeenCalled();
     expect(screen.queryByTestId('memory-game')).not.toBeInTheDocument();
     expect(screen.getByText('Your session settings have gone walk-abouts!')).toBeInTheDocument();
     expect(getByTextWithMarkup('Click here to go back home.')).toBeInTheDocument();
@@ -66,7 +66,7 @@ test('Should render an error message if the data settings are undefined', () => 
 
 test('Should skip the results screen and redirect home if the user flips no cards over', async () => {
     // Set data settings
-    mockLearningDataRepository.mockResolvedValueOnce([new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]);
+    mockLearningDataService.mockResolvedValueOnce([new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]);
     store.dispatch(setDataSettings(dataSettings));
 
     // Render the page and wait for the game to load
@@ -83,7 +83,7 @@ test('Should skip the results screen and redirect home if the user flips no card
 
 test('Should render the results screen if the user flips at least one card', async () => {
     // Set data settings
-    mockLearningDataRepository.mockResolvedValueOnce([
+    mockLearningDataService.mockResolvedValueOnce([
         new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
         new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false)
     ]);
@@ -116,7 +116,7 @@ test('Should render the results screen if the user flips at least one card', asy
 
 test('Clicking \'Practice Mistakes\' on the learning results screen should start a new session with the mistakes', async () => {
     // Set data settings
-    mockLearningDataRepository.mockResolvedValueOnce([
+    mockLearningDataService.mockResolvedValueOnce([
         new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
         new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false)
     ]);

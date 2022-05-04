@@ -17,9 +17,9 @@ import { getByTextWithMarkup } from "../../Queries";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 
-const mockLearningDataRepository = jest.fn();
-jest.mock("../../../repository/LearningDataRepository", () => function() {
-    return { read: mockLearningDataRepository }
+const mockLearningDataService = jest.fn();
+jest.mock("../../../service/LearningDataService", () => function() {
+    return { read: mockLearningDataService }
 });
 
 const gameSettings = new GameSettingsBuilder()
@@ -70,7 +70,7 @@ afterEach(() => {
 });
 // TODO: Why is the setDataSettings() dispatch saying its un-serialisable? Seems the whole Topic is the payload...
 test('Should render the game if game and data settings are present', async () => {
-    mockLearningDataRepository.mockResolvedValueOnce([new Definition(["not much"], undefined, "あまり", "Adverb")]);
+    mockLearningDataService.mockResolvedValueOnce([new Definition(["not much"], undefined, "あまり", "Adverb")]);
     store.dispatch(setGameSettings(gameSettings));
     store.dispatch(setDataSettings(dataSettings));
 
@@ -85,7 +85,7 @@ test('Should render an error message if the game settings are undefined', () => 
 
     renderReduxConsumer(<PlayPage />);
 
-    expect(mockLearningDataRepository).not.toHaveBeenCalled();
+    expect(mockLearningDataService).not.toHaveBeenCalled();
     expect(screen.queryByTestId('memory-game')).not.toBeInTheDocument();
     expect(screen.getByText('It looks like your game settings are missing!')).toBeInTheDocument();
     expect(getByTextWithMarkup('Click here to go back home.')).toBeInTheDocument();
@@ -97,7 +97,7 @@ test('Should render an error message if the data settings are undefined', () => 
 
     renderReduxConsumer(<PlayPage />);
 
-    expect(mockLearningDataRepository).not.toHaveBeenCalled();
+    expect(mockLearningDataService).not.toHaveBeenCalled();
     expect(screen.queryByTestId('memory-game')).not.toBeInTheDocument();
     expect(screen.getByText('It looks like your game settings are missing!')).toBeInTheDocument();
     expect(getByTextWithMarkup('Click here to go back home.')).toBeInTheDocument();
@@ -105,7 +105,7 @@ test('Should render an error message if the data settings are undefined', () => 
 
 test('Should render the results screen when exiting the game', async () => {
     // Set game and data settings
-    mockLearningDataRepository.mockResolvedValueOnce([new Definition(["not much"], undefined, "あまり", "Adverb")]);
+    mockLearningDataService.mockResolvedValueOnce([new Definition(["not much"], undefined, "あまり", "Adverb")]);
     store.dispatch(setGameSettings(gameSettings));
     store.dispatch(setDataSettings(dataSettings));
 

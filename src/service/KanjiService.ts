@@ -33,9 +33,15 @@ class KanjiService {
      * @param grades The grades to include. Omitting includes all.
      */
     public async getKanjiPage(page: number, size: number, grades?: KyoikuGrade[]): Promise<KanjiSearch> {
-        const settings = new KanjiSettingsBuilder().withGrades(grades ?? KyoikuGrade.ALL).build();
+        const settings = new KanjiSettingsBuilder();
 
-        return this._repository.read(settings, { page, size }).then(response => {
+        if (!grades || grades.length === 0) {
+            settings.withGrades(KyoikuGrade.ALL);
+        } else {
+            settings.withGrades(grades);
+        }
+
+        return this._repository.read(settings.build(), { page, size }).then(response => {
             const kanji: KanjiResult[] = response.results.map(value => {
                 return { value: value, field: undefined, pages: 0, quantity: 0 };
             });
@@ -43,9 +49,9 @@ class KanjiService {
         }).catch(response => {
             return {
                 kanji: [],
-                error: response.error ?? "An unknown error has occurred.",
                 pages: 0,
-                quantity: 0
+                quantity: 0,
+                error: response.error ?? "An unknown error has occurred.",
             };
         });
     }

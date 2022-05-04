@@ -8,7 +8,7 @@ import { Learnable } from "../../domain/learn/Learnable";
 import Arrays from "../../utility/Arrays";
 import DataSettingsConverter from "../../converter/DataSettingsConverter";
 import { useDataSettingsDispatch, useDataSettingsSelector } from "../../hooks";
-import LearningDataRepository from "../../repository/LearningDataRepository";
+import LearningDataService from "../../service/LearningDataService";
 import styles from "../../styles/sass/components/pages/LearnPage.module.scss";
 import { useHistory } from "react-router-dom";
 import { clearDataSettings } from "../../slices/DataSettingsSlice";
@@ -30,7 +30,7 @@ const LearnPage = () => {
     useEffect(() => {
         if (!!dataSettings) {
             setLoading(true);
-            new LearningDataRepository().read(dataSettings).then(data => {
+            new LearningDataService().read(dataSettings).then(data => {
                 setData(data);
             }).finally(() => {
                 setLoading(false);
