@@ -1,0 +1,18 @@
+@import "src/styles/sass/colours";
+
+.picker div:nth-child(2) {
+  background-color: $dark-1;
+}
+
+.colour {
+  position: absolute;
+  top: 7px;
+  right: 32px;
+  color: $light-2;
+  transition: all ease-in-out 0.2s;
+}
+
+.colour:hover {
+  cursor: pointer;
+  color: $light-1;
+}
