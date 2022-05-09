@@ -19,7 +19,7 @@ const setup = () => {
     const component = render(<CustomPresetForm {...props} />);
     return {
         icon: component.getByTestId('icon-picker-selected'),
-        name: component.getByPlaceholderText('Enter a name for your preset'),
+        name: component.getByText('My Preset'),
         save: component.getByText('Save').parentElement!,
         cancel: component.getByText('Cancel')
     }
@@ -36,14 +36,27 @@ beforeEach(() => {
 });
 
 test('Save button should be disabled when the preset name field is empty', () => {
-    const { name, save } = setup();
-    fireEvent.change(name, { target: { value: "" }});
+    const { save } = setup();
     expect(save).toBeDisabled();
+});
+
+test('Blurring the input when editing the name should finish editing', () => {
+    const { name, save } = setup();
+
+    // Edit
+    fireEvent.click(name);
+    const input = screen.getByPlaceholderText('My Preset');
+    fireEvent.change(input, { target: { value: "My Custom Preset" }});
+
+    // Blur
+    fireEvent.blur(input);
+    expect(screen.getByText('My Custom Preset')).toBeInTheDocument();
 });
 
 test('Save button should be enabled when the preset name field is not empty', () => {
     const { name, save } = setup();
-    fireEvent.change(name, { target: { value: "My Custom Preset" }});
+    fireEvent.click(name);
+    fireEvent.change(screen.getByPlaceholderText('My Preset'), { target: { value: "My Custom Preset" }});
     expect(save).not.toBeDisabled();
 });
 
@@ -58,7 +71,8 @@ test('Clicking save when the form is valid should save the preset', async () => 
     fireEvent.click(screen.getByTitle('Atom'));
 
     // Type in the preset name
-    fireEvent.change(name, { target: { value: "My Preset" }});
+    fireEvent.click(name);
+    fireEvent.change(screen.getByPlaceholderText('My Preset'), { target: { value: "My Preset" }});
 
     // Click save
     fireEvent.click(save);
@@ -79,7 +93,8 @@ test('Should display the error message if the service call fails and returns one
     const { name, save } = setup();
 
     // Enter a preset name and click save
-    fireEvent.change(name, { target: { value: "My Preset" }});
+    fireEvent.click(name);
+    fireEvent.change(screen.getByPlaceholderText('My Preset'), { target: { value: "My Preset" }});
     fireEvent.click(save);
 
     // Should render error message alert
@@ -92,7 +107,8 @@ test('Should display the a default error message if the service call fails, but 
     const { name, save } = setup();
 
     // Enter a preset name and click save
-    fireEvent.change(name, { target: { value: "My Preset" }});
+    fireEvent.click(name);
+    fireEvent.change(screen.getByPlaceholderText('My Preset'), { target: { value: "My Preset" }});
     fireEvent.click(save);
 
     // Should render error message alert
@@ -105,7 +121,8 @@ test('Should display the a default error message if the service promise is rejec
     const { name, save } = setup();
 
     // Enter a preset name and click save
-    fireEvent.change(name, { target: { value: "My Preset" }});
+    fireEvent.click(name);
+    fireEvent.change(screen.getByPlaceholderText('My Preset'), { target: { value: "My Preset" }});
     fireEvent.click(save);
 
     // Should render error message alert

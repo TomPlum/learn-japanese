@@ -70,5 +70,13 @@ test('Clicking the random button should select a random icon', async () => {
     // Clicking random should select a random one
     fireEvent.click(button);
     fireEvent.click(await screen.findByTitle('Randomise'));
-    expect(onSelectHandler).toHaveBeenLastCalledWith('FaAdversal');
+    expect(onSelectHandler).toHaveBeenLastCalledWith('FaAdversal', '#FFFFFF');
+});
+
+
+test('Clicking the colour icon should render the colour picker', async () => {
+    const { button } = setup();
+    fireEvent.click(button);
+    fireEvent.click(await screen.findByTitle('Pick Colour'));
+    fireEvent.click(await screen.findByTestId('colour-picker'));
 });

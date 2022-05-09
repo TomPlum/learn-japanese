@@ -1,19 +1,20 @@
 import styles from "../../../../styles/sass/components/ui/menu/icon/IconPicker.module.scss";
 import React, { useState } from "react";
-import { Button, Form, OverlayTrigger, Popover } from "react-bootstrap";
+import { Form, OverlayTrigger, Popover } from "react-bootstrap";
 import { iconList } from "../../../../icons";
 import { CustomIcon } from "../../../../domain/Icon";
 import Icon from "./Icon";
 import LocalStorageService from "../../../../service/LocalStorageService";
 import ScrollableContainer from "../../ScrollableContainer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRandom } from "@fortawesome/free-solid-svg-icons";
+import { faPaintBrush, faRandom } from "@fortawesome/free-solid-svg-icons";
 import { Numbers } from "../../../../utility/Numbers";
+import ColourPicker from "../colour/ColourPicker";
 
 export interface IconPickerProps {
     size?: string;
     className?: string;
-    onSelect: (icon: CustomIcon) => void;
+    onSelect: (icon: CustomIcon, colour: string) => void;
 }
 
 const IconPicker = (props: IconPickerProps) => {
@@ -26,11 +27,13 @@ const IconPicker = (props: IconPickerProps) => {
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
     const [selected, setSelected] = useState<CustomIcon>("FaRocket");
+    const [colour, setColour] = useState("#FFFFFF");
+    const [showPicker, setShowPicker] = useState(false);
 
     const handleSelect = (icon: CustomIcon) => {
         setSearch("");
         setShow(false);
-        onSelect(icon);
+        onSelect(icon, colour);
         setSelected(icon);
         localStorageService.addRecentlyUsedIcon(icon);
     }
@@ -39,6 +42,10 @@ const IconPicker = (props: IconPickerProps) => {
         const index = Numbers.randomInt(0, iconList.length - 1);
         const icon = iconList[index];
         handleSelect(icon);
+    }
+
+    const handleChangeColour = (colour: string) => {
+        setColour(colour);
     }
 
     let icons: (CustomIcon)[] = iconList.filter(name => !recentlyUsed.includes(name));
@@ -51,35 +58,55 @@ const IconPicker = (props: IconPickerProps) => {
     const popover = (
         <Popover id="icon-picker" data-testid="icon-picker" className={styles.popover}>
             <Popover.Content>
-                <div className={styles.inputWrapper}>
-                    <Form.Control
-                        type="text"
-                        value={search}
-                        id="icon-picker-search"
-                        className={styles.search}
-                        isInvalid={icons.length === 0}
-                        data-testid="icon-picker-search"
-                        placeholder="Search for an icon"
-                        onChange={e => setSearch(e.target.value)}
+                {showPicker && (
+                    <ColourPicker
+                        className={styles.picker}
+                        onChange={handleChangeColour}
+                        onClose={() => setShowPicker(false)}
                     />
-                    <FontAwesomeIcon
-                        fixedWidth
-                        icon={faRandom}
-                        title="Randomise"
-                        onClick={handleRandomise}
-                        className={styles.random}
-                    />
-                </div>
-                <ScrollableContainer className={styles.iconContainer} maxHeight={180}>
-                    {icons.map((icon: CustomIcon) => (
-                        <Icon
-                            value={icon}
-                            key={icon.toString()}
-                            onClick={handleSelect}
-                            className={styles.icon}
+                )}
+
+                {!showPicker && (
+                    <div className={styles.inputWrapper}>
+                        <Form.Control
+                            type="text"
+                            value={search}
+                            id="icon-picker-search"
+                            className={styles.search}
+                            isInvalid={icons.length === 0}
+                            data-testid="icon-picker-search"
+                            placeholder="Search for an icon"
+                            onChange={e => setSearch(e.target.value)}
                         />
-                    ))}
-                </ScrollableContainer>
+                        <FontAwesomeIcon
+                            fixedWidth
+                            icon={faRandom}
+                            title="Randomise"
+                            onClick={handleRandomise}
+                            className={styles.random}
+                        />
+                        <FontAwesomeIcon
+                            fixedWidth
+                            icon={faPaintBrush}
+                            title="Pick Colour"
+                            className={styles.colour}
+                            onClick={() => setShowPicker(true)}
+                        />
+                    </div>
+                )}
+
+                {!showPicker && (
+                    <ScrollableContainer className={styles.iconContainer} maxHeight={180}>
+                        {icons.map((icon: CustomIcon) => (
+                            <Icon
+                                value={icon}
+                                key={icon.toString()}
+                                onClick={handleSelect}
+                                className={styles.icon}
+                            />
+                        ))}
+                    </ScrollableContainer>
+                )}
                 <div>
                     {icons.length === 0 && (
                         <p className={styles.notFound}>
@@ -93,15 +120,16 @@ const IconPicker = (props: IconPickerProps) => {
 
     return (
         <div className={[className, styles.wrapper].join(" ")}>
-            <OverlayTrigger trigger="click" placement="top" overlay={popover} show={show} onToggle={() => setShow(!show)} rootClose>
-                <Button variant="info" title="Select Icon" className={styles.button}>
+            <OverlayTrigger trigger="click" placement="top" overlay={popover} show={show} onToggle={() => setShow(!show)} rootClose={true}>
+                <div>
                     <Icon
                         size={size}
                         value={selected}
+                        style={{ color: colour }}
                         className={styles.selected}
                         data-testid="icon-picker-selected"
                     />
-                </Button>
+                </div>
             </OverlayTrigger>
         </div>
     );

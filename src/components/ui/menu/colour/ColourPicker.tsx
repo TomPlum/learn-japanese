@@ -1,54 +1,50 @@
-import { ChromePicker, ColorResult } from 'react-color'
+import { ColorResult, SliderPicker } from 'react-color'
 import React, { useState } from "react";
-import Popover from 'react-bootstrap/esm/Popover';
 import styles from "../../../../styles/sass/components/ui/menu/colour/ColourPicker.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
-import { OverlayTrigger } from "react-bootstrap";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Form } from 'react-bootstrap';
 
 export interface ColourPickerProps {
     className?: string;
-    onShow?: () => void;
-    onHide?: () => void;
-    onSelect?: (colour: string) => void;
+    onClose?: () => void;
+    onChange?: (colour: string) => void;
 }
 
 const ColourPicker = (props: ColourPickerProps) => {
 
-    const { className, onShow, onHide, onSelect } = props;
+    const { className, onChange, onClose } = props;
 
-    const [show, setShow] = useState(false);
-    const [colour, setColour] = useState("#FFFFFF");
+    const [colour, setColour] = useState("#df3d3d");
 
-    const handleColourSelection = (result: ColorResult) => {
+    const handleChange = (result: ColorResult) => {
         setColour(result.hex);
-        onSelect?.(result.hex);
+        onChange?.(result.hex);
     }
 
-    const overlay = (
-        <Popover id="colour-picker" data-testid="colour-picker">
-            <ChromePicker
-                color={colour}
-                className={styles.picker}
-                onChange={handleColourSelection}
-            />
-        </Popover>
-    );
-
-    const handleToggle = () => {
-        show ? onHide?.() : onShow?.();
-        setShow(!show);
+    const handleHexChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setColour(e.target.value);
     }
 
     return (
-        <OverlayTrigger trigger="click" placement="right" overlay={overlay} show={show} onToggle={handleToggle} rootClose>
-            <FontAwesomeIcon
-                fixedWidth
-                icon={faPaintBrush}
-                title="Choose Colour"
-                className={[className, styles.colour].join(" ")}
+        <div className={[className, styles.wrapper].join(" ")} data-testid="colour-picker">
+            <div onClick={onClose} className={styles.back}>
+                <FontAwesomeIcon icon={faArrowLeft} fixedWidth />
+                <span>Back</span>
+            </div>
+            <SliderPicker
+                color={colour}
+                onChange={handleChange}
+                className={styles.picker}
+                onChangeComplete={handleChange}
             />
-        </OverlayTrigger>
+            <Form.Control
+                value={colour}
+                placeholder="Colour"
+                className={styles.input}
+                onChange={handleHexChange}
+            />
+        </div>
     );
 }
 

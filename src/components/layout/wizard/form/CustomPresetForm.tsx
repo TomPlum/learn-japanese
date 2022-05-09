@@ -24,7 +24,9 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
     const [name, setName] = useState("");
-    const [icon, setIcon] = useState<CustomIcon>("FaRocket")
+    const [icon, setIcon] = useState<CustomIcon>("FaRocket");
+    const [colour, setColour] = useState("#FFFFFF");
+    const [editingName, setEditingName] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
@@ -51,6 +53,11 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
         });
     }
 
+    const handleIconChange = (icon: CustomIcon, colour: string) => {
+        setIcon(icon);
+        setColour(colour);
+    }
+
     const disableSave = name === "" || loading;
     const saveIcon = loading ? faSpinner : faCheck;
 
@@ -73,34 +80,49 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
                         <Form.Group as={Col} style={{ margin: 0 }}>
                             <Form.Label>
                                 <FontAwesomeIcon icon={faPencilAlt} fixedWidth/>
-                                <span>{" Save Custom Preset"}</span>
+                                <span>{" Preset Details"}</span>
                             </Form.Label>
                         </Form.Group>
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group as={Col} xs={2} className={styles.iconPickerContainer}>
-                            <IconPicker size="1.4em" className={styles.iconPicker} onSelect={icon => setIcon(icon)} />
-                        </Form.Group>
-
                         <Form.Group as={Col}>
-                            <Form.Control
-                                onChange={handleChange}
-                                className={styles.input}
-                                placeholder="Enter a name for your preset"
-                            />
+                            <div className={styles.preview}>
+                                <div className={styles.iconSurface} title="Change Icon">
+                                    <IconPicker
+                                        onSelect={handleIconChange}
+                                        className={styles.iconPicker}
+                                    />
+                                </div>
+                                <div className={!editingName ? styles.inputWrapper : ""} onClick={() => setEditingName(true)}>
+                                    {!editingName && (
+                                        <span className={styles.name}>
+                                            {name === "" ? "My Preset" : name}
+                                        </span>
+                                    )}
+
+                                    {editingName && (
+                                        <Form.Control
+                                            autoFocus
+                                            value={name}
+                                            onChange={handleChange}
+                                            placeholder="My Preset"
+                                            className={styles.input}
+                                            onBlur={() => setEditingName(false)}
+                                        />
+                                    )}
+                                </div>
+                            </div>
                         </Form.Group>
 
-                        <Form.Group as={Col} className={styles.buttonContainer} xs={2}>
+                        <Form.Group as={Col} className={styles.buttonContainer}>
                             <Button variant="primary" className={styles.button} disabled={disableSave} onClick={handleSave}>
                                 <FontAwesomeIcon icon={saveIcon} spin={loading} fixedWidth className={styles.icon}/>
                                 <span>Save</span>
                             </Button>
-                        </Form.Group>
 
-                        <Form.Group as={Col} className={styles.buttonContainer} xs={2}>
                             <Button variant="danger" onClick={onCancel} className={styles.button} disabled={loading}>
-                                <FontAwesomeIcon icon={faTimes} fixedWidth className={styles.icon}/>
+                                <FontAwesomeIcon fixedWidth icon={faTimes} className={styles.icon}/>
                                 <span>Cancel</span>
                             </Button>
                         </Form.Group>
