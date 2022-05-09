@@ -78,7 +78,7 @@ test('Clicking save when the form is valid should save the preset', async () => 
     fireEvent.click(save);
 
     // Should call the service with correct args and then display success message
-    expect(mockPresetService).toHaveBeenLastCalledWith("My Preset", "FaAtom", settings);
+    expect(mockPresetService).toHaveBeenLastCalledWith({ name: "My Preset", icon: "FaAtom", colour: "#FFFFFF" }, settings);
     expect(await screen.findByText('Saved "My Preset" successfully.')).toBeInTheDocument();
 
     // 2 seconds after success, the onSuccess event handler should be called

@@ -137,7 +137,7 @@ describe("Preset Service", () => {
 
             it("Should call the repository with the details", () => {
                 mockSavePlayPreset.mockResolvedValueOnce({});
-                service.saveCustomPreset("Test Play", "FaAtom", settings).then(() => {
+                service.saveCustomPreset({ name: "Test Play", icon: "FaAtom", colour: "#FFFFFF" }, settings).then(() => {
                     expect(mockSavePlayPreset).toHaveBeenLastCalledWith({
                         name: "Test Play",
                         icon: "FaAtom",
@@ -149,28 +149,28 @@ describe("Preset Service", () => {
 
             it("Should return true if the repository promise resolves successfully", () => {
                 mockSavePlayPreset.mockResolvedValueOnce({});
-                service.saveCustomPreset("Test Play", "FaAtom", settings).then(response => {
+                service.saveCustomPreset({ name: "Test Play", icon: "FaAtom", colour: "#FFFFFF" }, settings).then(response => {
                     expect(response.success).toBe(true);
                 });
             });
 
             it("Should return an undefined error if the repository promise resolves successfully", () => {
                 mockSavePlayPreset.mockResolvedValueOnce({});
-                service.saveCustomPreset("Test Play", "FaAtom", settings).then(response => {
+                service.saveCustomPreset({ name: "Test Play", icon: "FaAtom", colour: "#FFFFFF" }, settings).then(response => {
                     expect(response.error).toBeUndefined();
                 });
             });
 
             it("Should return false if the repository promise is rejected", () => {
                 mockSavePlayPreset.mockRejectedValueOnce({ });
-                service.saveCustomPreset("Test Play", "FaAtom", settings).then(response => {
+                service.saveCustomPreset({ name: "Test Play", icon: "FaAtom", colour: "#FFFFFF" }, settings).then(response => {
                     expect(response.success).toBe(false);
                 });
             });
 
             it("Should return an undefined error if the repository promise resolves successfully", () => {
                 mockSavePlayPreset.mockRejectedValueOnce({ error: "Failed to save custom preset" });
-                service.saveCustomPreset("Test Play", "FaAtom", settings).then(response => {
+                service.saveCustomPreset({ name: "Test Play", icon: "FaAtom", colour: "#FFFFFF" }, settings).then(response => {
                     expect(response.error).toBe("Failed to save custom preset");
                 });
             });
@@ -181,7 +181,7 @@ describe("Preset Service", () => {
 
             it("Should call the repository with the details", () => {
                 mockSaveLearnPreset.mockResolvedValueOnce({});
-                service.saveCustomPreset("Test Learn", "FaAtom", settings).then(() => {
+                service.saveCustomPreset({ name: "Test Learn", icon: "FaAtom", colour: "#FFFFFF" }, settings).then(() => {
                     expect(mockSaveLearnPreset).toHaveBeenLastCalledWith({
                         name: "Test Learn",
                         icon: "FaAtom",
@@ -193,28 +193,28 @@ describe("Preset Service", () => {
 
             it("Should return true if the repository promise resolves successfully", () => {
                 mockSaveLearnPreset.mockResolvedValueOnce({});
-                service.saveCustomPreset("Test Learn", "FaAtom", settings).then(response => {
+                service.saveCustomPreset({ name: "Test Learn", icon: "FaAtom", colour: "#FFFFFF" }, settings).then(response => {
                     expect(response.success).toBe(true);
                 });
             });
 
             it("Should return an undefined error if the repository promise resolves successfully", () => {
                 mockSaveLearnPreset.mockResolvedValueOnce({});
-                service.saveCustomPreset("Test Learn", "FaAtom", settings).then(response => {
+                service.saveCustomPreset({ name: "Test Learn", icon: "FaAtom", colour: "#FFFFFF" }, settings).then(response => {
                     expect(response.error).toBeUndefined();
                 });
             });
 
             it("Should return false if the repository promise is rejected", () => {
                 mockSaveLearnPreset.mockRejectedValueOnce({ });
-                service.saveCustomPreset("Test Learn", "FaAtom", settings).then(response => {
+                service.saveCustomPreset({ name: "Test Learn", icon: "FaAtom", colour: "#FFFFFF" }, settings).then(response => {
                     expect(response.success).toBe(false);
                 });
             });
 
             it("Should return an undefined error if the repository promise resolves successfully", () => {
                 mockSaveLearnPreset.mockRejectedValueOnce({ error: "Failed to save custom preset" });
-                service.saveCustomPreset("Test Learn", "FaAtom", settings).then(response => {
+                service.saveCustomPreset({ name: "Test Learn", icon: "FaAtom", colour: "#FFFFFF" }, settings).then(response => {
                     expect(response.error).toBe("Failed to save custom preset");
                 });
             });

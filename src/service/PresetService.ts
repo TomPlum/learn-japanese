@@ -12,6 +12,12 @@ export interface LearnPlayPresets {
     error?: string;
 }
 
+export interface CustomPresetMeta {
+    name: string;
+    icon: CustomIcon;
+    colour: string;
+}
+
 class PresetService {
 
     private readonly repository = new PresetRepository();
@@ -65,12 +71,11 @@ class PresetService {
 
     /**
      * Saves a new preset against the current user with the given details.
-     * @param name The name of the preset.
-     * @param icon An icon to identify the preset.
+     * @param meta Metadata for the custom preset.
      * @param settings The session settings for the preset configuration.
      */
-    public async saveCustomPreset(name: string, icon: CustomIcon, settings: SessionSettings): Promise<UpdateResponse> {
-        const details = { name: name, icon: icon, colour: "#FFFFFF", settings: settings};
+    public async saveCustomPreset(meta: CustomPresetMeta, settings: SessionSettings): Promise<UpdateResponse> {
+        const details = { name: meta.name, icon: meta.icon, colour: meta.colour, settings: settings};
         if (settings.gameSettings) {
             return this.repository.savePlayPreset(details).then(() => {
                 return { success: true };

@@ -35,7 +35,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     const handleSave = () => {
         setLoading(true);
 
-        service.saveCustomPreset(name, icon, settings).then(response => {
+        service.saveCustomPreset({ name, icon, colour }, settings).then(response => {
             if (response.success) {
                 setSuccess(true);
                 setTimeout(() => onSuccess(), 2000);
