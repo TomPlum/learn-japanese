@@ -64,7 +64,8 @@ test('Clicking the save button in the save preset form should hide the form and 
     // Render the form and fill in the name
     fireEvent.click(screen.getByText('Save Preset'));
     expect(screen.getByTestId('save-custom-preset-form')).toBeVisible();
-    fireEvent.change(screen.getByPlaceholderText('Enter a name for your preset'), { target: { value: "My Preset"} });
+    fireEvent.click(screen.getByText('My Preset'));
+    fireEvent.change(screen.getByPlaceholderText('My Preset'), { target: { value: "My Preset"} });
 
     // The save preset button should have stopped rendering
     const savePresetButton = screen.queryByText('Save Preset');
