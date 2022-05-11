@@ -11,6 +11,7 @@ import EditCustomPresetForm from "../form/EditCustomPresetForm";
 import PresetService from "../../../../service/PresetService";
 import PlayMode from "../../../../domain/session/PlayMode";
 import LearnMode from "../../../../domain/session/LearnMode";
+import { Alert } from "react-bootstrap";
 
 export interface PresetSelectionStepProps {
     mode: AppMode;
@@ -78,6 +79,10 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
 
     return (
         <div className={styles.container}>
+            {error && (
+                <Alert variant="error">{error}</Alert>
+            )}
+
             <ScrollableContainer height={344}>
                 {editing && (
                     <EditCustomPresetForm preset={preset!} onClose={() => setEditing(false)} />
@@ -100,6 +105,10 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
                             />
                         )}
                     </GridDisplay>
+                )}
+
+                {!loading && getTopicPresets().length === 0 && (
+                    <p>No presets available for this topic.</p>
                 )}
             </ScrollableContainer>
         </div>

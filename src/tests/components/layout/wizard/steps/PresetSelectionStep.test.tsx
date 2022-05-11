@@ -67,6 +67,18 @@ test('Should render the learn preset options from the given presets when the mod
     expect(screen.queryByText('Short Play')).not.toBeInTheDocument();
 });
 
+test('Should render an empty state message if no presets are returned', async () => {
+    mockGetAllPresets.mockResolvedValueOnce({ learn: [], play: [] });
+    setup();
+    expect(await screen.findByText('No presets available for this topic.')).toBeInTheDocument();
+});
+
+test('Should render an error message if the service call fails and returns one', async () => {
+    mockGetAllPresets.mockResolvedValueOnce({ learn: [], play: [], error: "Failed to retrieve presets." });
+    setup();
+    expect(await screen.findByText('Failed to retrieve presets.')).toBeInTheDocument();
+});
+
 test('Selecting a preset should call the onSelect event handler with that preset', async () => {
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
     setup();
