@@ -112,7 +112,6 @@ const SessionWizard = (props: SessionWizardProps) => {
 
     const handleChangeTopic = (topic: Topic) => {
         setTopic(topic);
-        //setPreset(mode === AppMode.PLAY ? topic.playModes.getModes()[0] : topic.modes.getModes()[0]);
     }
 
     const getStageDetails = (): StageDetails => {
@@ -270,10 +269,10 @@ const SessionWizard = (props: SessionWizardProps) => {
                         custom={custom}
                         onBack={handleBack}
                         onNext={handleNext}
-                        onPlay={handleStartSession}
                         terminal={terminal}
                         currentStage={stage}
                         intermediate={intermediate}
+                        onPlay={handleStartSession}
                         onChangeStage={(stage: number) => setStage(stage)}
                     />
                 </div>
