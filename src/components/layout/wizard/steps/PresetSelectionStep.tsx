@@ -79,16 +79,16 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
 
     return (
         <div className={styles.container}>
-            {error && (
-                <Alert variant="error">{error}</Alert>
-            )}
-
             <ScrollableContainer height={344}>
                 {editing && (
                     <EditCustomPresetForm preset={preset!} onClose={() => setEditing(false)} />
                 )}
 
-                {!editing &&  (
+                {error && (
+                    <Alert variant="danger">{error}</Alert>
+                )}
+
+                {!editing && !error && (
                     <GridDisplay loading={loading} controls customOptions={<TopicSelectionDropdown />}>
                         {getTopicPresets().map((option: SessionMode) =>
                             <GridItem
@@ -107,7 +107,7 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
                     </GridDisplay>
                 )}
 
-                {!loading && getTopicPresets().length === 0 && (
+                {!loading && !error && getTopicPresets().length === 0 && (
                     <p>No presets available for this topic.</p>
                 )}
             </ScrollableContainer>
