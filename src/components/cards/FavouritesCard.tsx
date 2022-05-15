@@ -85,11 +85,11 @@ const FavouritesCard = () => {
                     <ScrollableContainer maxHeight={300} className={styles.favourites}>
                         {presets.map((preset: SessionMode) => (
                             <FavouriteButton
+                                key={preset.id}
                                 preset={preset}
                                 onStart={handleStart}
-                                key={preset.getUniqueID()}
                                 className={styles.favourite}
-                                selected={selected?.getUniqueID() === preset.getUniqueID()}
+                                selected={selected?.id === preset.id}
                             />
                         ))}
                     </ScrollableContainer>

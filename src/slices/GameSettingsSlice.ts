@@ -24,7 +24,7 @@ export interface GameSettingState {
         cards: number;
         quantity: number;
         score: boolean;
-        answerFilter: string;
+        answerFilter: number;
     }
 }
 

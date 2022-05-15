@@ -141,10 +141,10 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                             <div className={styles.favourites}>
                                 {favourites.map((preset: SessionMode) => (
                                     <ExistingFavouriteButton
-                                        id={preset.favourite_id!}
+                                        key={preset.id}
                                         icon={preset.icon}
                                         name={preset.displayName}
-                                        key={preset.getUniqueID()}
+                                        id={preset.favourite_id!}
                                         className={styles.favourite}
                                         selected={remove.includes(preset.favourite_id!)}
                                         onRemove={(id: number) => setRemove(existing => existing.concat(id))}
@@ -164,9 +164,9 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                                 {filtered.map((preset: SessionMode) => (
                                     <EditFavouriteButton
                                         id={preset.id}
+                                        key={preset.id}
                                         icon={preset.icon}
                                         name={preset.displayName}
-                                        key={preset.getUniqueID()}
                                         className={styles.favourite}
                                         selected={add.includes(preset.id)}
                                         onAdd={(id: number) => setAdd(existing => existing.concat(id))}

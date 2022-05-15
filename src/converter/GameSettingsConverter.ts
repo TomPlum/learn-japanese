@@ -42,6 +42,7 @@ class GameSettingsConverter {
                     .withType(QuestionType.fromName(settings.question.type))
                     .withCardQuantity(settings.question.cards)
                     .withScoreTracking(settings.question.score)
+                    .withAnswerFilterChainID(settings.question.answerFilter ?? -1)
                     .build()
             )
             .build();
@@ -98,7 +99,7 @@ class GameSettingsConverter {
                 quantity: settings.question.quantity,
                 answerField: settings.question.answerField.name,
                 questionField: settings.question.questionField.name,
-                answerFilter: ""
+                answerFilter: settings.question.answerFilterId
             }
         }
     }
@@ -135,6 +136,7 @@ class GameSettingsConverter {
                     .withType(QuestionType.fromName(state.question.type))
                     .withCardQuantity(state.question.cards)
                     .withScoreTracking(state.question.score)
+                    .withAnswerFilterChainID(state.question.answerFilter)
                     .build()
             )
             .build();

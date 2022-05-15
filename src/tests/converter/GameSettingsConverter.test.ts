@@ -173,6 +173,7 @@ describe("Game Settings Converter", () => {
                         .withType(QuestionType.CHOICE)
                         .withCardQuantity(4)
                         .withScoreTracking(true)
+                        .withAnswerFilterChainID(1)
                         .build()
                 )
                 .build();
@@ -201,7 +202,7 @@ describe("Game Settings Converter", () => {
                     quantity: 150,
                     answerField: "Rōmaji",
                     questionField: "Kana",
-                    answerFilter: ""
+                    answerFilter: 1
                 }
             });
         });
@@ -231,7 +232,7 @@ describe("Game Settings Converter", () => {
                     quantity: 150,
                     answerField: "Rōmaji",
                     questionField: "Kana",
-                    answerFilter: ""
+                    answerFilter: 1
                 }
             }
 
@@ -266,6 +267,7 @@ describe("Game Settings Converter", () => {
                             .withType(QuestionType.CHOICE)
                             .withCardQuantity(4)
                             .withScoreTracking(true)
+                            .withAnswerFilterChainID(1)
                             .build()
                     )
                     .build())

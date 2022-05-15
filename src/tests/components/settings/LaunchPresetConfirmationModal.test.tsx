@@ -108,7 +108,7 @@ test('It should route to the play page and set the game and data settings in the
         },
         question: {
             answerField: "Rōmaji",
-            answerFilter: "",
+            answerFilter: -1,
             cards: 1,
             quantity: 1,
             questionField: "Kana",
@@ -149,7 +149,7 @@ test('It should route to the play page and set the game and data settings in the
             },
             "question": {
                 "answerField": "Rōmaji",
-                "answerFilter": "",
+                "answerFilter": -1,
                 "cards": 1,
                 "quantity": 1,
                 "questionField": "Kana",

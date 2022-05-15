@@ -9,8 +9,4 @@ export default class PlayMode extends SessionMode {
                 gameSettings: GameSettings, topicName: string, shortName?: string, custom?: boolean, favouriteId?: number) {
         super(id, displayName, description, colour, icon, dataSettings, gameSettings, topicName, shortName, custom, favouriteId);
     }
-
-    getUniqueID(): string {
-        return `play-${this._id}`;
-    }
 }

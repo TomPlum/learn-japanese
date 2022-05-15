@@ -257,7 +257,7 @@ test('Clicking Start in the confirmation step for custom play should set the sel
         },
         question: {
             answerField: "English Meaning",
-            answerFilter: "",
+            answerFilter: -1,
             cards: 6,
             quantity: 1,
             questionField: "Kanji",
@@ -318,7 +318,7 @@ test('Clicking Start in the confirmation step for preset play should set the sel
         },
         question: {
             answerField: "Kanji",
-            answerFilter: "",
+            answerFilter: -1,
             cards: 4,
             quantity: 1,
             questionField: "English Meaning",

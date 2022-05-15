@@ -1,7 +1,5 @@
 import QuestionType from "../../../game/QuestionType";
 import LearnableField from "../../../learn/LearnableField";
-import FilterChain from "../../../../filters/FilterChain";
-import { Learnable } from "../../../learn/Learnable";
 
 export default class QuestionSettings {
     /**
@@ -37,13 +35,16 @@ export default class QuestionSettings {
     private readonly _quantity: number;
 
     /**
-     * A function that produces a {@link FilterChain} that is used to remove unwanted answers
+     * An ID referencing a function that produces a {@link FilterChain} that is used to remove unwanted answers
      * from the pool of wrong answers that is display on a {@link QuestionType.CHOICE} question.
+     *
      * E.g: You have a multiple chose {@link Kana} question and the question value is a diagraph like "gyo".
      * You wouldn't want to show non-diagraph kana as it's obvious that they are wrong answers. So you might
      * add a filter chain with a {@link DiagraphFilter} so the user is present only diagraph options.
+     *
+     * @see AnswerFilterRegistry
      */
-    private readonly _answerFilter: (data: any) => FilterChain<any>;
+    private readonly _answerFilterId: number;
 
     /**
      * Whether or not the current game session will track the players score.
@@ -51,12 +52,12 @@ export default class QuestionSettings {
     private readonly _score: boolean;
 
     constructor(questionField: LearnableField, answerField: LearnableField, type: QuestionType, cards: number,
-                quantity: number, answerFilter: (data: any) => FilterChain<any>, score: boolean) {
+                quantity: number, answerFilterId: number, score: boolean) {
         this._questionField = questionField;
         this._answerField = answerField;
         this._type = type;
         this._cards = cards;
-        this._answerFilter = answerFilter;
+        this._answerFilterId = answerFilterId;
         this._score = score;
         this._quantity = quantity;
     }
@@ -77,8 +78,8 @@ export default class QuestionSettings {
         return this._cards;
     }
 
-    get answerFilter(): (data: any) => FilterChain<any> {
-        return this._answerFilter;
+    get answerFilterId(): number {
+        return this._answerFilterId;
     }
 
     get score(): boolean {
@@ -96,7 +97,7 @@ export class QuestionSettingsBuilder {
     private _type: QuestionType = QuestionType.TEXT;
     private _cards: number = 1;
     private _quantity: number = 1;
-    private _wrongOptionsFilterChain: (data: any) => FilterChain<any> = () => new FilterChain(); //TODO: Can't satisfy TS compiler with explicit type here
+    private _wrongOptionsFilterID = -1;
     private _score: boolean = false;
 
     withFields(question: LearnableField, answer: LearnableField): QuestionSettingsBuilder {
@@ -115,8 +116,8 @@ export class QuestionSettingsBuilder {
         return this;
     }
 
-    withWrongOptionsFilterChain<T extends Learnable>(filter: (data: T) => FilterChain<T>): QuestionSettingsBuilder {
-        this._wrongOptionsFilterChain = filter;
+    withAnswerFilterChainID(id: number): QuestionSettingsBuilder {
+        this._wrongOptionsFilterID = id;
         return this;
     }
 
@@ -132,7 +133,7 @@ export class QuestionSettingsBuilder {
 
     build(): QuestionSettings {
         return new QuestionSettings(this._questionField, this._answerField, this._type, this._cards,
-            this._quantity, this._wrongOptionsFilterChain, this._score
+            this._quantity, this._wrongOptionsFilterID, this._score
         );
     }
 }

@@ -33,8 +33,6 @@ abstract class SessionMode implements GridItem {
         this._custom = custom;
     }
 
-    abstract getUniqueID(): string;
-
     get id(): number {
         return this._id;
     }
