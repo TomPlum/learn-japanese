@@ -66,7 +66,6 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
     const TopicSelectionDropdown = () => (
         <TopicSelector topic={topic} onSelect={onSelectTopic} className={styles.topic} disabled={loading} />
     );
-    const description = "Placeholder until migrate to API"
 
     const onEditCustomPreset = () => {
         setEditing(true);
@@ -93,10 +92,10 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
                         {getTopicPresets().map((option: SessionMode) =>
                             <GridItem
                                 value={option}
-                                desc={description}
                                 icon={option.icon}
                                 onClick={onSelectPreset}
                                 editable={option.custom}
+                                desc={option.description}
                                 className={styles.preset}
                                 iconColour={option.colour}
                                 onEdit={onEditCustomPreset}

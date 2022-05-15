@@ -23,6 +23,7 @@ const onChangeTopicHandler = jest.fn();
 const playPreset = new PresetBuilder()
     .withID(1)
     .withDisplayName("Test Play")
+    .withDescription("This is an example play description")
     .withColour("#ffffff")
     .withIcon("FaAtom")
     .withDataSettings(new KanaSettingsBuilder().build())
@@ -104,7 +105,7 @@ test('Selecting a preset should call the onSelect event handler with that preset
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
     setup();
     fireEvent.click(await screen.findByText('Short Play'));
-    expect(await screen.findByText('Placeholder until migrate to API')).toBeInTheDocument();
+    expect(await screen.findByText('This is an example play description')).toBeInTheDocument();
     expect(getValueLastCalledWith<PlayMode>(onSelectHandler).displayName).toBe("Test Play");
 });
 
