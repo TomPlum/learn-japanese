@@ -228,15 +228,18 @@ const SessionWizard = (props: SessionWizardProps) => {
         }
     }
 
+    const dialogClasses = [styles.dialog];
+    if (confirmClose) dialogClasses.push(styles.blur);
+
     const modalProps: ModalProps = {
         show: true,
         size: "lg",
         centered: true,
         backdrop: "static",
         enforceFocus: false,
-        dialogClassName: styles.dialog,
         contentClassName: styles.content,
-        "data-testid": "start-session-wizard"
+        "data-testid": "start-session-wizard",
+        dialogClassName: dialogClasses.join(" ")
     }
 
     const { icon, iconClass, name, body, intermediate, terminal } = getStageDetails();
