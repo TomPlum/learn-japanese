@@ -7,7 +7,7 @@ import { getValueLastCalledWith } from "../../../../Queries";
 import PlayMode from "../../../../../domain/session/PlayMode";
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
-import LearnMode from "../../../../../domain/session/LearnMode";
+import PresetBuilder from "../../../../../domain/session/PresetBuilder";
 import LearnSettings from "../../../../../domain/session/settings/LearnSettings";
 
 const mockGetAllPresets = jest.fn();
@@ -20,8 +20,29 @@ jest.mock("../../../../../service/PresetService", () => {
 const onSelectHandler = jest.fn();
 const onChangeTopicHandler = jest.fn();
 
-const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Hiragana & Katakana", "Short Play", false, 1);
-const learnPreset = new LearnMode(2, "Test Learn", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(),  "Hiragana & Katakana", " Short Learn", false, 2);
+const playPreset = new PresetBuilder()
+    .withID(1)
+    .withDisplayName("Test Play")
+    .withColour("#ffffff")
+    .withIcon("FaAtom")
+    .withDataSettings(new KanaSettingsBuilder().build())
+    .withGameSettings(new GameSettingsBuilder().build())
+    .withTopicName("Hiragana & Katakana")
+    .withShortName("Short Play")
+    .withFavouriteID(1)
+    .build();
+
+const learnPreset = new PresetBuilder()
+    .withID(2)
+    .withDisplayName("Test Learn")
+    .withColour("#fdb40e")
+    .withIcon("あ")
+    .withDataSettings(new KanaSettingsBuilder().build())
+    .withLearnSettings(new LearnSettings())
+    .withTopicName("Hiragana & Katakana")
+    .withShortName("Short Learn")
+    .withFavouriteID(2)
+    .build();
 
 let props: PresetSelectionStepProps;
 

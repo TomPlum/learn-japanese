@@ -28,7 +28,7 @@ class PresetService {
      */
     public async getAllPresets(): Promise<LearnPlayPresets> {
         return this.repository.getAllPresets().then((response: Presets) => {
-            return { learn: response.learn, play: response.play };
+            return { learn: response.learn, play: response.play, error: response.error };
         }).catch(response => {
             return { learn: [], play: [], error: response.error };
         });

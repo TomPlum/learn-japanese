@@ -1,11 +1,10 @@
-import PlayMode from "../../../domain/session/PlayMode";
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
-import LearnMode from "../../../domain/session/LearnMode";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import EditFavouritesModal from "../../../components/settings/EditFavouritesModal";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
+import PresetBuilder from "../../../domain/session/PresetBuilder";
 
 const scrollIntoViewMock = jest.fn();
 window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
@@ -27,8 +26,27 @@ jest.mock("../../../service/PresetService", () => {
     }};
 });
 
-const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic", "", false, 3);
-const learnPreset = new LearnMode(2, "Test Learn", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "Topic", "", false, 4);
+const playPreset = new PresetBuilder()
+    .withID(1)
+    .withDisplayName("Test Play")
+    .withColour("#ffffff")
+    .withIcon("FaAtom")
+    .withDataSettings(new KanaSettingsBuilder().build())
+    .withGameSettings(new GameSettingsBuilder().build())
+    .withTopicName("Topic")
+    .withFavouriteID(3)
+    .build();
+
+const learnPreset = new PresetBuilder()
+    .withID(2)
+    .withDisplayName("Test Learn")
+    .withColour("#fdb40e")
+    .withIcon("あ")
+    .withDataSettings(new KanaSettingsBuilder().build())
+    .withLearnSettings(new LearnSettings())
+    .withTopicName("Topic")
+    .withFavouriteID(4)
+    .build();
 
 test('Should render existing favourites if the service responds successfully', async () => {
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });

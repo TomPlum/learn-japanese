@@ -7,17 +7,15 @@ import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { clearGameSettings } from "../../../../slices/GameSettingsSlice";
 import { clearDataSettings } from "../../../../slices/DataSettingsSlice";
-import PlayMode from "../../../../domain/session/PlayMode";
 import { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings";
 import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings";
-import LearnMode from "../../../../domain/session/LearnMode";
-import LearnSettings from "../../../../domain/session/settings/LearnSettings";
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 import { QuestionSettingsBuilder } from "../../../../domain/session/settings/game/QuestionSettings";
 import LearnableField from "../../../../domain/learn/LearnableField";
 import QuestionType from "../../../../domain/game/QuestionType";
 import { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings";
 import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings";
+import PresetBuilder from "../../../../domain/session/PresetBuilder";
 
 const mockGetAllPresets = jest.fn();
 jest.mock("../../../../service/PresetService", () => {
@@ -29,12 +27,43 @@ jest.mock("../../../../service/PresetService", () => {
 const onCloseHandler = jest.fn();
 const history = createMemoryHistory();
 
-const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new GameSettingsBuilder().build(), "Basics");
-const playBasics = new PlayMode(2, "Basics2", "#ffffff", "FaAtom", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new GameSettingsBuilder().build(), "Basics");
-const learnPreset = new LearnMode(1, "Test Learn", "#fdb40e", "あ", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new LearnSettings(), "Topic");
-const playKanjiPreset = new PlayMode(1, "Kanji", "#6857ee", faPaintBrush,
-    new KanjiSettingsBuilder().withJoyoKanji().withQuantity(25).build(),
-    new GameSettingsBuilder()
+const playPreset = new PresetBuilder()
+    .withID(1)
+    .withDisplayName("Test Play")
+    .withColour("#ffffff")
+    .withIcon("FaAtom")
+    .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
+    .withGameSettings(new GameSettingsBuilder().build())
+    .withTopicName("Basics")
+    .build();
+
+const playBasics = new PresetBuilder()
+    .withID(2)
+    .withDisplayName("Basics2")
+    .withColour("#ffffff")
+    .withIcon("FaAtom")
+    .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
+    .withGameSettings(new GameSettingsBuilder().build())
+    .withTopicName("Basics")
+    .build();
+
+const learnPreset = new PresetBuilder()
+    .withID(1)
+    .withDisplayName("Test Learn")
+    .withColour("#fdb40e")
+    .withIcon("あ")
+    .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
+    .withGameSettings(new GameSettingsBuilder().build())
+    .withTopicName("Topic")
+    .build();
+
+const playKanjiPreset = new PresetBuilder()
+    .withID(1)
+    .withDisplayName("Kanji")
+    .withColour("#6857ee")
+    .withIcon(faPaintBrush)
+    .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
+    .withGameSettings( new GameSettingsBuilder()
         .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
         .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
         .withQuestionSettings(new QuestionSettingsBuilder()
@@ -43,8 +72,9 @@ const playKanjiPreset = new PlayMode(1, "Kanji", "#6857ee", faPaintBrush,
             .withCardQuantity(4)
             .withScoreTracking(true)
             .build()
-        ).build(), "Jōyō Kanji"
-);
+        ).build())
+    .withTopicName("Jōyō Kanji")
+    .build();
 
 const setup = () => {
     const component = renderReduxConsumer(
@@ -526,4 +556,10 @@ test('Switching from the preset step and back again should maintain its selectio
 
     // The 'Test Play' preset should still be selected
     expect((await screen.findByText('Test Play')).parentElement).toHaveClass('selected');
+});
+
+test('The start button should be disabled if the preset is undefined', async () => {
+    mockGetAllPresets.mockResolvedValue({ learn: [learnPreset], play: [playPreset, playBasics] });
+    const { next } = setup();
+    expect(next).toBeDisabled();
 });

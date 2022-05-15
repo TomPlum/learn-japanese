@@ -1,11 +1,10 @@
 import PresetService, { LearnPlayPresets } from "../../service/PresetService";
-import LearnMode from "../../domain/session/LearnMode";
 import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
 import LearnSettings from "../../domain/session/settings/LearnSettings";
-import PlayMode from "../../domain/session/PlayMode";
-import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSettings";
 import { SessionSettings } from "../../domain/session/settings/SessionSettings";
+import PresetBuilder from "../../domain/session/PresetBuilder";
+import { KanjiSettingsBuilder } from "../../domain/session/settings/data/KanjiSettings";
 
 const mockGetAllPresets = jest.fn();
 const mockFavouritePresets = jest.fn();
@@ -26,8 +25,25 @@ jest.mock("../../repository/PresetRepository", () => {
     };
 });
 
-const learnPreset = new LearnMode(1, "Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "Topic");
-const playPreset = new PlayMode(2, "Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic");
+const playPreset = new PresetBuilder()
+    .withID(2)
+    .withDisplayName("Test Play")
+    .withColour("#ffffff")
+    .withIcon("FaAtom")
+    .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
+    .withGameSettings(new GameSettingsBuilder().build())
+    .withTopicName("Topic")
+    .build();
+
+const learnPreset = new PresetBuilder()
+    .withID(2)
+    .withDisplayName("Test Learn")
+    .withColour("#fdb40e")
+    .withIcon("あ")
+    .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
+    .withLearnSettings(new LearnSettings())
+    .withTopicName("Topic")
+    .build();
 
 describe("Preset Service", () => {
     const service = new PresetService();
@@ -36,7 +52,7 @@ describe("Preset Service", () => {
         it("Should return the presets from the repository when the call succeeds", () => {
             mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
             return service.getAllPresets().then((response: LearnPlayPresets) => {
-                expect(response).toStrictEqual({ learn: [learnPreset], play: [playPreset] });
+                expect(response).toStrictEqual({ learn: [learnPreset], play: [playPreset], error: undefined });
             });
         });
 

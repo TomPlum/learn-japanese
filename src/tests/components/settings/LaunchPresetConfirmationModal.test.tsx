@@ -1,22 +1,38 @@
 import { fireEvent, screen } from "@testing-library/react";
 import LaunchPresetConfirmationModal, { LaunchPresetConfirmationModalProps } from "../../../components/settings/LaunchPresetConfirmationModal";
-import PlayMode from "../../../domain/session/PlayMode";
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
-import LearnMode from "../../../domain/session/LearnMode";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { store } from "../../../store";
-import { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings";
 import { clearGameSettings } from "../../../slices/GameSettingsSlice";
 import { clearDataSettings } from "../../../slices/DataSettingsSlice";
+import PresetBuilder from "../../../domain/session/PresetBuilder";
+import { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings";
 
 const history = createMemoryHistory();
 const onDismissHandler = jest.fn();
 
-const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new GameSettingsBuilder().build(), "Topic");
-const learnPreset = new LearnMode(1, "Test Learn", "#fdb40e", "あ", new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build(), new LearnSettings(), "Topic");
+const playPreset = new PresetBuilder()
+    .withID(1)
+    .withDisplayName("Test Play")
+    .withColour("#ffffff")
+    .withIcon("FaAtom")
+    .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
+    .withGameSettings(new GameSettingsBuilder().build())
+    .withTopicName("Topic")
+    .build();
+
+const learnPreset = new PresetBuilder()
+    .withID(2)
+    .withDisplayName("Test Learn")
+    .withColour("#fdb40e")
+    .withIcon("あ")
+    .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
+    .withLearnSettings(new LearnSettings())
+    .withTopicName("Topic")
+    .build();
 
 let props: LaunchPresetConfirmationModalProps;
 
@@ -188,7 +204,7 @@ test('It should route to the learn page and set data settings in the redux store
             "topic": "Jōyō Kanji"
         },
         "icon": "あ",
-        "id": 1,
+        "id": 2,
         "isPreset": true,
         "name": "Test Learn",
         "topic": "Topic"

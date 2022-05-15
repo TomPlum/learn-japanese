@@ -6,6 +6,7 @@ import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameS
 import LearnMode from "../../../domain/session/LearnMode";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import renderReduxConsumer from "../../renderReduxConsumer";
+import PresetBuilder from "../../../domain/session/PresetBuilder";
 
 const mockGetFavourites = jest.fn();
 const mockGetAllPresets = jest.fn();
@@ -18,8 +19,27 @@ jest.mock("../../../service/PresetService", () => {
     }};
 });
 
-const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic", "", false, 1);
-const learnPreset = new LearnMode(2, "Test Learn", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "Topic", "", false, 2);
+const playPreset = new PresetBuilder()
+    .withID(1)
+    .withDisplayName("Test Play")
+    .withColour("#ffffff")
+    .withIcon("FaAtom")
+    .withDataSettings(new KanaSettingsBuilder().build())
+    .withGameSettings(new GameSettingsBuilder().build())
+    .withTopicName("Topic")
+    .withFavouriteID(1)
+    .build();
+
+const learnPreset = new PresetBuilder()
+    .withID(2)
+    .withDisplayName("Test Learn")
+    .withColour("#fdb40e")
+    .withIcon("あ")
+    .withDataSettings(new KanaSettingsBuilder().build())
+    .withLearnSettings(new LearnSettings())
+    .withTopicName("Topic")
+    .withFavouriteID(2)
+    .build();
 
 test('It should render preset favourite buttons for each of the presets from the service', async () => {
     mockGetFavourites.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
