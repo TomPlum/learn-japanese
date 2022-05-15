@@ -42,6 +42,7 @@ beforeEach(() => {
 const learnPresetResponse: LearnPresetResponse = {
     id: 1,
     name: "Example Learn Preset",
+    description: "An example learn preset desc",
     topic: "Hiragana & Katakana",
     icon: "faApple",
     colour: "ffffff",
@@ -61,6 +62,7 @@ const learnPresetResponse: LearnPresetResponse = {
 const playPresetResponse: PlayPresetResponse = {
     id: 1,
     name: "Example Play Preset",
+    description: "An example play preset desc",
     topic: "Hiragana & Katakana",
     icon: "faApple",
     colour: "ffffff",
@@ -164,8 +166,8 @@ describe("Preset Repository", () => {
                 expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playPresetResponse.data);
                 expect(mockGameSettingsConverter).toHaveBeenCalledWith(playPresetResponse.game);
                 expect(response).toStrictEqual({
-                    learn: [new LearnMode(1, "Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), "Hiragana & Katakana", undefined, false)],
-                    play: [new PlayMode(1, "Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, "Hiragana & Katakana", undefined, false)]
+                    learn: [new LearnMode(1, "Example Learn Preset", "An example learn preset desc", "ffffff", "faApple", dataSettings, new LearnSettings(), "Hiragana & Katakana", undefined, false)],
+                    play: [new PlayMode(1, "Example Play Preset", "An example play preset desc", "ffffff", "faApple", dataSettings, gameSettings, "Hiragana & Katakana", undefined, false)]
                 });
             });
         });
@@ -207,8 +209,8 @@ describe("Preset Repository", () => {
                 expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playResponse.preset.data);
                 expect(mockGameSettingsConverter).toHaveBeenCalledWith(playResponse.preset.game);
                 expect(response).toStrictEqual({
-                    learn: [new LearnMode(1, "Example Learn Preset", "ffffff", "faApple", dataSettings, new LearnSettings(), "Hiragana & Katakana", undefined, false, 1)],
-                    play: [new PlayMode(1, "Example Play Preset", "ffffff", "faApple", dataSettings, gameSettings, "Hiragana & Katakana", undefined, false, 2)]
+                    learn: [new LearnMode(1, "Example Learn Preset", "An example learn preset desc", "ffffff", "faApple", dataSettings, new LearnSettings(), "Hiragana & Katakana", undefined, false, 1)],
+                    play: [new PlayMode(1, "Example Play Preset", "An example play preset desc", "ffffff", "faApple", dataSettings, gameSettings, "Hiragana & Katakana", undefined, false, 2)]
                 });
             });
         });

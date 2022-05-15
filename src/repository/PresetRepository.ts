@@ -9,6 +9,7 @@ import UpdateResponse from "../rest/response/UpdateResponse";
 import PresetConverter from "../converter/PresetConverter";
 import { SessionSettings } from "../domain/session/settings/SessionSettings";
 import { CustomIcon } from "../domain/Icon";
+import PresetBuilder from "../domain/session/PresetBuilder";
 
 export interface PresetRequest {
     name: string;
@@ -119,6 +120,7 @@ export interface BasicsDataSettingsRequest extends DataConfigRequest {
 interface PresetResponse {
     id: number;
     name: string;
+    description: string;
     icon: string;
     colour: string;
     topic: string;
@@ -304,10 +306,10 @@ class PresetRepository {
                 const play = this.convertPlayPresets(data.play);
                 return { learn: learn, play: play };
             } else {
-                return Promise.reject("Failed to retrieve presets.");
+                return Promise.reject({ error: "Failed to retrieve presets." });
             }
         }).catch(response => {
-            return { learn: [], play: [], error: response.error ?? response };
+            return { learn: [], play: [], error: response.error ?? "Failed to retrieve presets." };
         });
     }
 
@@ -361,7 +363,17 @@ class PresetRepository {
             const preset = favourite.preset;
             const topic = Topic.fromName(preset.topic);
             const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
-            return new LearnMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), preset.topic, undefined, false, favourite.id);
+            return new PresetBuilder()
+                .withID(preset.id)
+                .withDisplayName(preset.name)
+                .withDescription(preset.description)
+                .withColour(preset.colour)
+                .withIcon(preset.icon)
+                .withDataSettings(dataSettings)
+                .withLearnSettings(new LearnSettings())
+                .withTopicName(preset.topic)
+                .withFavouriteID(favourite.id)
+                .build();
         });
     }
 
@@ -371,7 +383,17 @@ class PresetRepository {
             const topic = Topic.fromName(preset.topic);
             const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
             const gameSettings = this.gameSettingsConverter.convert(preset.game);
-            return new PlayMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, gameSettings, preset.topic, undefined, false, favourite.id);
+            return new PresetBuilder()
+                .withID(preset.id)
+                .withDisplayName(preset.name)
+                .withDescription(preset.description)
+                .withColour(preset.colour)
+                .withIcon(preset.icon)
+                .withDataSettings(dataSettings)
+                .withGameSettings(gameSettings)
+                .withTopicName(preset.topic)
+                .withFavouriteID(favourite.id)
+                .build();
         });
     }
 
@@ -380,7 +402,17 @@ class PresetRepository {
         return data.map((preset: LearnPresetResponse) => {
             const topic = Topic.fromName(preset.topic);
             const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
-            return new LearnMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, new LearnSettings(), preset.topic, undefined, false);
+
+            return new PresetBuilder()
+                .withID(preset.id)
+                .withDisplayName(preset.name)
+                .withDescription(preset.description)
+                .withColour(preset.colour)
+                .withIcon(preset.icon)
+                .withDataSettings(dataSettings)
+                .withLearnSettings(new LearnSettings())
+                .withTopicName(preset.topic)
+                .build();
         });
     }
 
@@ -389,7 +421,17 @@ class PresetRepository {
             const topic = Topic.fromName(preset.topic);
             const dataSettings = this.dataSettingsConverter.convert(topic, preset.data);
             const gameSettings = this.gameSettingsConverter.convert(preset.game);
-            return new PlayMode(preset.id, preset.name, preset.colour, preset.icon, dataSettings, gameSettings, preset.topic, undefined, false);
+
+            return new PresetBuilder()
+                .withID(preset.id)
+                .withDisplayName(preset.name)
+                .withDescription(preset.description)
+                .withColour(preset.colour)
+                .withIcon(preset.icon)
+                .withDataSettings(dataSettings)
+                .withGameSettings(gameSettings)
+                .withTopicName(preset.topic)
+                .build();
         });
     }
 }

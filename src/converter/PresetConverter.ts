@@ -1,11 +1,10 @@
 import SessionMode from "../domain/session/SessionMode";
 import { CustomPresetDetails, LearnPresetRequest, PlayPresetRequest, PresetRequest } from "../repository/PresetRepository";
-import PlayMode from "../domain/session/PlayMode";
-import LearnMode from "../domain/session/LearnMode";
 import GameSettingsConverter from "./GameSettingsConverter";
 import DataSettingsConverter from "./DataSettingsConverter";
 import { SessionSettingsState } from "../slices/SessionSettingsSlice";
 import LearnSettings from "../domain/session/settings/LearnSettings";
+import PresetBuilder from "../domain/session/PresetBuilder";
 
 class PresetConverter {
 
@@ -39,11 +38,19 @@ class PresetConverter {
         const topic = settings.topic!;
         const dataSettings = this.dataSettingsConverter.deserialise(settings.data);
 
+        const commonProperties = new PresetBuilder()
+            .withID(id)
+            .withDisplayName(name)
+            .withColour(colour)
+            .withIcon(icon)
+            .withDataSettings(dataSettings)
+            .withTopicName(topic);
+
         if (settings.game) {
             const gameSettings = this.gameSettingsConverter.deserialise(settings.game);
-            return new PlayMode(id, name, colour, icon, dataSettings, gameSettings, topic);
+            return commonProperties.withGameSettings(gameSettings).build();
         } else {
-            return new LearnMode(id, name, colour, icon, dataSettings, new LearnSettings(), topic)
+            return commonProperties.withLearnSettings(new LearnSettings()).build();
         }
     }
 }

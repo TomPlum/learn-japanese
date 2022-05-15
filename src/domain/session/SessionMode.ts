@@ -8,6 +8,7 @@ abstract class SessionMode implements GridItem {
     protected readonly _id: number;
     private readonly _favourite_id: number | undefined;
     private readonly _displayName: string;
+    private readonly _description: string;
     private readonly _colour: string;
     private readonly _icon: IconDefinition | string;
     private readonly _dataSettings: DataSettings;
@@ -16,11 +17,12 @@ abstract class SessionMode implements GridItem {
     private readonly _shortName?: string;
     private readonly _custom?: boolean;
 
-    protected constructor(id: number, displayName: string, colour: string, icon: IconDefinition | string,
+    protected constructor(id: number, displayName: string, description: string, colour: string, icon: CustomIcon,
                           dataSettings: DataSettings, modeSettings: ModeSettings, topicName: string, shortName?: string,
                           custom?: boolean, favouriteId?: number) {
         this._id = id;
         this._displayName = displayName;
+        this._description = description;
         this._colour = colour;
         this._icon = icon;
         this._favourite_id = favouriteId;
@@ -43,6 +45,10 @@ abstract class SessionMode implements GridItem {
 
     get displayName(): string {
         return this._displayName;
+    }
+
+    get description(): string {
+        return this._description;
     }
 
     get colour(): string {
