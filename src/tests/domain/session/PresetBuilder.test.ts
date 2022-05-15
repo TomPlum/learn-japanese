@@ -1,58 +1,66 @@
 import PresetBuilder from "../../../domain/session/PresetBuilder";
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
-import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings";
-import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings";
-import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings";
-import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings";
-import LearnableField from "../../../domain/learn/LearnableField";
-import QuestionType from "../../../domain/game/QuestionType";
 
 describe("Preset Builder", () => {
-    it("Should build a valid play preset object", () => {
-        const preset = new PresetBuilder()
-            .withID(1)
-            .withFavouriteID(12)
-            .withDescription("An example test preset")
-            .withColour("#FFFFFF")
-            .withIcon("FaGraduationCap")
-            .withDisplayName("Test Preset")
-            .withShortName("Test")
-            .withTopicName("Hiragana & Katakana")
-            .withDataSettings(new KanaSettingsBuilder().build())
-            .withGameSettings(
-                new GameSettingsBuilder()
-                    .withLifeSettings(
-                        new LifeSettingsBuilder()
-                            .withQuantity(12)
-                            .isEnabled(true)
-                            .build()
-                    )
-                    .withHintSettings(
-                        new HintSettingsBuilder()
-                            .withQuantity(8)
-                            .isEnabled(true)
-                            .areUnlimited(false)
-                            .build()
-                    )
-                    .withTimeSettings(
-                        new TimeSettingsBuilder()
-                            .isTimed(true)
-                            .isCountDown(false)
-                            .withSecondsPerQuestion(0)
-                            .build()
-                    )
-                    .withQuestionSettings(
-                        new QuestionSettingsBuilder()
-                            .withFields(LearnableField.KANA, LearnableField.ROMAJI)
-                            .withQuantity(150)
-                            .withType(QuestionType.CHOICE)
-                            .withCardQuantity(4)
-                            .withScoreTracking(true)
-                            .build()
-                    )
-                    .build()
-            )
-            .build();
+
+    it("Should default the ID to -1", () => {
+        const preset = new PresetBuilder().build();
+        const id = preset.id;
+        expect(id).toBe(-1);
+    });
+
+    it("Should default the favourite ID to undefined", () => {
+        const preset = new PresetBuilder().build();
+        const favouriteId = preset.favourite_id;
+        expect(favouriteId).toBeUndefined();
+    });
+
+    it("Should default the description to an empty string", () => {
+        const preset = new PresetBuilder().build();
+        const description = preset.description;
+        expect(description).toBe("");
+    });
+
+    it("Should default the display name to an empty string", () => {
+        const preset = new PresetBuilder().build();
+        const displayName = preset.displayName;
+        expect(displayName).toBe("");
+    });
+
+    it("Should default the short name to undefined", () => {
+        const preset = new PresetBuilder().withDisplayName("Display Name").build();
+        const shortName = preset.getShortName();
+        expect(shortName).toBe("Display Name"); // If undefined, it returns the display name
+    });
+
+    it("Should default the colour to an empty string", () => {
+        const preset = new PresetBuilder().build();
+        const colour = preset.colour;
+        expect(colour).toBe("");
+    });
+
+    it("Should default the topic name to an empty string", () => {
+        const preset = new PresetBuilder().build();
+        const topicName = preset.topicName;
+        expect(topicName).toBe("");
+    });
+
+    it("Should default the data settings to default kana", () => {
+        const preset = new PresetBuilder().build();
+        const dataSettings = preset.dataSettings;
+        expect(dataSettings).toStrictEqual(new KanaSettingsBuilder().build());
+    });
+
+    it("Should default the mode settings to default game", () => {
+        const preset = new PresetBuilder().build();
+        const modeSettings = preset.modeSettings;
+        expect(modeSettings).toStrictEqual(new GameSettingsBuilder().build());
+    });
+
+    it("Should default custom to false", () => {
+        const preset = new PresetBuilder().build();
+        const custom = preset.custom;
+        expect(custom).toBe(false);
     });
 });
