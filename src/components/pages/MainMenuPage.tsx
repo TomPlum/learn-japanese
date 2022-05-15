@@ -13,15 +13,20 @@ import FavouritesCard from "../cards/FavouritesCard";
 import StatisticsCard from "../cards/StatisticsCard";
 import KanjiShowcaseCard from "../cards/KanjiShowcaseCard";
 import KanjiFlashCardsCard from "../cards/KanjiFlashCardsCard";
+import { useUserSelector } from "../../hooks";
+import StreakCard from "../cards/StreakCard";
 
 const MainMenuPage = () => {
+
+    const user = useUserSelector(state => state.user.user);
+
     return (
         <Container className={styles.wrapper} data-testid="home-page">
-            <Row className={styles.row}>
+         {/*   <Row className={styles.row}>
                 <Col>
                     <DashboardToolbar />
                 </Col>
-            </Row>
+            </Row>*/}
 
             <Row className={styles.row}>
                 <Col md={3} className={styles.col}>
@@ -41,6 +46,7 @@ const MainMenuPage = () => {
                 </Col>
 
                 <Col md={3}>
+                    <StreakCard />
                     <HighScoresCard />
                     <MistakesCard />
                     <StatisticsCard />
