@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import SpacedRepetitionService, { FlashCardsResponse } from "../../service/SpacedRepetitionService";
 import { FlashCard } from "../../domain/learn/FlashCard";
 import styles from "../../styles/sass/components/cards/KanjiFlashCardsCard.module.scss";
-import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
+import { faGraduationCap, faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
 import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
@@ -64,11 +64,20 @@ const KanjiFlashCardsCard = () => {
             <DashboardCard.Body>
                 <Row className={error ? styles.blur : undefined}>
                     <Col>
-                        <span className={styles.value}>{cards.length}</span>
+                        <span className={styles.value}>
+                            {cards.length}
+                        </span>
                         <p className={styles.label}>{(cards.length !== 1 ? "Cards" : "Card") + " to Review"}</p>
+                        <DashboardCardLink
+                            text="Review"
+                            onClick={onReview}
+                            icon={faGraduationCap}
+                            className={styles.review}
+                            disabled={cards.length === 0}
+                        />
                     </Col>
                     <Col>
-                        <Button disabled={cards.length === 0} onClick={onReview}>Review</Button>
+
                     </Col>
                 </Row>
             </DashboardCard.Body>

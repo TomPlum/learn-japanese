@@ -1,5 +1,19 @@
 @import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
 
 .card {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.review {
+  @include noSelect;
+  background-color: rgba($dark-1, 0.7);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.value {
+  color: $bootstrap-info;
+  font-size: 1.2em;
 }
