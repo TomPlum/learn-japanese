@@ -5,7 +5,7 @@
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
 }
 
-.review {
+.button {
   @include noSelect;
   background-color: rgba($dark-1, 0.7);
   border-radius: 5px;
@@ -13,7 +13,34 @@
   justify-content: center;
 }
 
-.value {
+.numbers {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.quantity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 10px;
+}
+
+.review {
   color: $bootstrap-info;
-  font-size: 1.2em;
+}
+
+.new {
+  color: $bootstrap-green;
+}
+
+.review, .new {
+  font-size: 1.4em;
+  line-height: 20px;
+  margin: 0;
+}
+
+.label {
+  margin: 0;
 }

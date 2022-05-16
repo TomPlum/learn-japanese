@@ -64,15 +64,21 @@ const KanjiFlashCardsCard = () => {
             <DashboardCard.Body>
                 <Row className={error ? styles.blur : undefined}>
                     <Col>
-                        <span className={styles.value}>
-                            {cards.length}
-                        </span>
-                        <p className={styles.label}>{(cards.length !== 1 ? "Cards" : "Card") + " to Review"}</p>
+                        <div className={styles.numbers}>
+                            <div className={styles.quantity}>
+                                <p className={styles.review}>{cards.length}</p>
+                                <p className={styles.label}>Review</p>
+                            </div>
+                            <div className={styles.quantity}>
+                                <p className={styles.new}>10</p>
+                                <p className={styles.label}>New</p>
+                            </div>
+                        </div>
                         <DashboardCardLink
                             text="Review"
                             onClick={onReview}
                             icon={faGraduationCap}
-                            className={styles.review}
+                            className={styles.button}
                             disabled={cards.length === 0}
                         />
                     </Col>
