@@ -66,6 +66,7 @@ const LoginForm = (props: LoginFormProps) => {
                 enabled: res.enabled,
                 creationDate: res.creationDate,
                 token: res.token,
+                refreshToken: res.refreshToken,
                 preferences: {
                     defaultFont: res.preferences.defaultFont,
                     language: res.preferences.language,

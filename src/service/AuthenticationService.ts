@@ -14,6 +14,7 @@ export interface LoginResponse {
     creationDate:string;
     enabled: boolean;
     token: string;
+    refreshToken: string;
     preferences: UserPreferencesResponse;
 }
 

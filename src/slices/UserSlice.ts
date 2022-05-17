@@ -11,6 +11,7 @@ export interface User {
     enabled: boolean;
     creationDate: string;
     token: string;
+    refreshToken: string;
     preferences: UserPreferences;
 }
 
@@ -54,6 +55,16 @@ export const userSlice = createSlice({
                 localStorage.setItem("user", JSON.stringify(state.user));
             }
         },
+        setAccessToken: (state, action: PayloadAction<string>) => {
+            if (state.user) {
+                state.user.token = action.payload;
+            }
+        },
+        setRefreshToken: (state, action: PayloadAction<string>) => {
+            if (state.user) {
+                state.user.refreshToken = action.payload;
+            }
+        },
         clearUser: (state) => {
             state.user = undefined;
             localStorage.removeItem("user");
@@ -61,5 +72,5 @@ export const userSlice = createSlice({
     }
 });
 
-export const { setUser, setPreferences, updateNickname, clearUser } = userSlice.actions
+export const { setUser, setAccessToken, setRefreshToken, setPreferences, updateNickname, clearUser } = userSlice.actions
 export default userSlice.reducer;
