@@ -35,7 +35,11 @@
   color: $bootstrap-green;
 }
 
-.review, .new {
+.learning {
+  color: $kyoiku-grade-3;
+}
+
+.review, .new, .learning {
   font-size: 1.4em;
   line-height: 20px;
   margin: 0;

@@ -70,6 +70,10 @@ const KanjiFlashCardsCard = () => {
                                 <p className={styles.label}>Review</p>
                             </div>
                             <div className={styles.quantity}>
+                                <p className={styles.learning}>0</p>
+                                <p className={styles.label}>Learning</p>
+                            </div>
+                            <div className={styles.quantity}>
                                 <p className={styles.new}>10</p>
                                 <p className={styles.label}>New</p>
                             </div>
