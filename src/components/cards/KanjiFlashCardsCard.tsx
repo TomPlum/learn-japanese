@@ -75,7 +75,7 @@ const KanjiFlashCardsCard = () => {
                             </div>
                         </div>
                         <DashboardCardLink
-                            text="Review"
+                            text="Start Study Session"
                             onClick={onReview}
                             icon={faGraduationCap}
                             className={styles.button}
