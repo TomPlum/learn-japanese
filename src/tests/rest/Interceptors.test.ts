@@ -58,7 +58,7 @@ describe("Axios Interceptors", () => {
             });
         });
 
-        it("Should return undefined and not fire any requests if the URI is login", () => {
+        it("Should not fire any requests and reject the promise if the URI is login", () => {
             const error: AxiosError = {
                 config: {
                     url: "/user/login",
@@ -75,13 +75,13 @@ describe("Axios Interceptors", () => {
                 name: "",
                 message: "Something went wrong"
             };
-            return refreshTokenInterceptor(error).then(response => {
-                expect(response).toBeUndefined();
+            return refreshTokenInterceptor(error).catch(response => {
                 expect(mockPost).not.toHaveBeenCalled();
+                expect(response).toBe("Failed to refresh session. Please sign-in again.");
             });
         });
 
-        it("Should return undefined and not fire any requests if the URI is NOT login, but is NOT HTTP 401", () => {
+        it("Should return not fire any requests and reject the promise if the URI is NOT login, but is NOT HTTP 401", () => {
             const error: AxiosError = {
                 config: {
                     url: "/user/login",
@@ -98,9 +98,9 @@ describe("Axios Interceptors", () => {
                 name: "",
                 message: "Something went wrong"
             };
-            return refreshTokenInterceptor(error).then(response => {
-                expect(response).toBeUndefined();
+            return refreshTokenInterceptor(error).catch(response => {
                 expect(mockPost).not.toHaveBeenCalled();
+                expect(response).toBe("Failed to refresh session. Please sign-in again.");
             });
         });
 
@@ -123,7 +123,7 @@ describe("Axios Interceptors", () => {
                 name: "",
                 message: "Something went wrong"
             };
-            return refreshTokenInterceptor(error).then(response => {
+            return refreshTokenInterceptor(error).then(() => {
                 expect(mockPost).toHaveBeenCalledWith("/user/refresh-token", {
                     token: "ca6b68d4-85cb-45f5-b1fa-2ead8faa77ec"
                 });
@@ -151,8 +151,8 @@ describe("Axios Interceptors", () => {
                 name: "",
                 message: "Something went wrong"
             };
-            return refreshTokenInterceptor(error).then(response => {
-                expect(response?.error).toBe("Failed to refresh session. Please sign-in again.");
+            return refreshTokenInterceptor(error).catch(response => {
+                expect(response).toBe("Failed to refresh session. Please sign-in again.");
             });
         });
 
@@ -175,8 +175,8 @@ describe("Axios Interceptors", () => {
                 name: "",
                 message: "Something went wrong"
             };
-            return refreshTokenInterceptor(error).then(response => {
-                expect(response?.error).toBe("Failed to refresh session. Please sign-in again.");
+            return refreshTokenInterceptor(error).catch(response => {
+                expect(response).toBe("Failed to refresh session. Please sign-in again.");
             });
         });
     });
