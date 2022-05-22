@@ -29,6 +29,7 @@ beforeEach(() => {
         enabled: true,
         roles: ["user"],
         token: "TOKEN",
+        refreshToken: "REFRESH_TOKEN",
         preferences: {
             defaultFont: "Gothic",
             theme: "Dark Mode",
