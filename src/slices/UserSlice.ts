@@ -58,11 +58,13 @@ export const userSlice = createSlice({
         setAccessToken: (state, action: PayloadAction<string>) => {
             if (state.user) {
                 state.user.token = action.payload;
+                localStorage.setItem("user", JSON.stringify(state.user));
             }
         },
         setRefreshToken: (state, action: PayloadAction<string>) => {
             if (state.user) {
                 state.user.refreshToken = action.payload;
+                localStorage.setItem("user", JSON.stringify(state.user));
             }
         },
         clearUser: (state) => {

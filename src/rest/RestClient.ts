@@ -3,32 +3,11 @@ import { Environment } from "../utility/Environment";
 import { store } from "../store";
 import { useUserDispatch } from "../hooks";
 import { setAccessToken, setRefreshToken } from "../slices/UserSlice";
+import { refreshTokenInterceptor } from "./Interceptors";
 
 axios.interceptors.response.use((res: AxiosResponse) => {
     return res;
-}, (err: AxiosError) => {
-    const config: AxiosRequestConfig = err.config;
-    if (config.url === "/user/refresh-token" && err.response && err.response.status !== 200) {
-        return { error: "Failed to refresh session. Please sign-in again." };
-    }
-
-    if (config.url !== "/user/login" && err.response) {
-        if (err.response.status === 401) {
-            const refreshToken = store.getState().user.user?.refreshToken;
-            RestClient.post<RefreshTokenResponse>("/user/refresh-token", { token: refreshToken }).then(response => {
-                if (response.data) {
-                    const userDispatch = useUserDispatch();
-                    userDispatch(setAccessToken(response.data.accessToken));
-                    userDispatch(setRefreshToken(response.data.refreshToken));
-                }
-                return { error: "Error logging in. Please log-in again." };
-            }).catch(err => {
-                return { error: "Error logging in. Please log-in again." };
-            });
-        }
-        return { error: "Error logging in. Please log-in again." };
-    }
-});
+}, refreshTokenInterceptor);
 
 export interface RefreshTokenResponse {
     accessToken: string;
