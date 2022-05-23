@@ -1,13 +1,19 @@
 import { refreshTokenInterceptor } from "../../rest/Interceptors";
-import { AxiosError } from "axios";
+import axios, { AxiosError, AxiosStatic } from "axios";
 import RestClient from "../../rest/RestClient";
 import { store } from "../../store";
 import { setAccessToken, setRefreshToken, setUser } from "../../slices/UserSlice";
+import { Environment } from "../../utility/Environment";
+import api from "../../rest/API";
 
+jest.mock("../../rest/API");
+const mockApi = api as jest.MockedFunction<typeof api>;
 const mockPost = jest.fn();
+const mockEnvironment = jest.fn();
 
 beforeEach(() => {
     RestClient.post = mockPost;
+    Environment.variable = mockEnvironment;
     store.dispatch(setUser({
         username: "TomPlum42",
         nickname: "Tom",
@@ -37,9 +43,11 @@ beforeEach(() => {
 describe("Axios Interceptors", () => {
     describe("Refresh Token Interceptor", () => {
         it("Should return an error if the failed request is the refresh-token endpoint", () => {
+            mockEnvironment.mockReturnValueOnce("https://japanese.tomplumpton.me"); // Mock Host URI
+            mockEnvironment.mockReturnValueOnce("/learn-japanese"); // Mock Context Root
             const error: AxiosError = {
                 config: {
-                    url: "/user/refresh-token",
+                    url: "https://japanese.tomplumpton.me/learn-japanese/user/refresh-token",
                 },
                 response: {
                     data: {},
@@ -53,8 +61,8 @@ describe("Axios Interceptors", () => {
                 name: "",
                 message: "Something went wrong"
             };
-            return refreshTokenInterceptor(error).then(response => {
-                expect(response).toStrictEqual({ error: "Failed to refresh session. Please sign-in again." });
+            return refreshTokenInterceptor(error).catch(response => {
+                expect(response).toBe("Failed to refresh session. Please sign-in again.");
             });
         });
 
@@ -107,9 +115,10 @@ describe("Axios Interceptors", () => {
         it("Should call the refresh-token endpoint with the refresh token from the Redux store", () => {
             mockPost.mockResolvedValueOnce({ data: { accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN" }});
             store.dispatch(setRefreshToken("ca6b68d4-85cb-45f5-b1fa-2ead8faa77ec"));
+
             const error: AxiosError = {
                 config: {
-                    url: "/user/set-nickname",
+                    url: "/user/set-nickname"
                 },
                 response: {
                     data: {},
@@ -123,12 +132,14 @@ describe("Axios Interceptors", () => {
                 name: "",
                 message: "Something went wrong"
             };
+
             return refreshTokenInterceptor(error).then(() => {
                 expect(mockPost).toHaveBeenCalledWith("/user/refresh-token", {
                     token: "ca6b68d4-85cb-45f5-b1fa-2ead8faa77ec"
                 });
                 expect(store.getState().user.user?.token).toBe("ACCESS_TOKEN");
                 expect(store.getState().user.user?.refreshToken).toBe("REFRESH_TOKEN");
+                expect(mockApi).toHaveBeenCalledWith({ retry: true, url: "/user/set-nickname" });
             });
         });
 
