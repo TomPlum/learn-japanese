@@ -6,20 +6,23 @@ export interface KanjiWordDisplayProps {
 }
 
 const KanjiWordDisplay = (props: KanjiWordDisplayProps) => {
+
+    const { value, className } = props;
+
     return (
         <div>{
-            [...props.value].map((char: string) => {
+            [...value].map((char: string) => {
                 if (/[一-龯]/.test(char)) {
                     return (
                         <InformationalKanji
                             value={char}
                             key={"display-" + char}
-                            className={props.className}
+                            className={className}
                         />
                     );
                 } else {
                     return (
-                        <span key={char} className={props.className}>
+                        <span key={char} className={className}>
                             {char}
                         </span>
                     )

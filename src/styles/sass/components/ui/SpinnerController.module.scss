@@ -46,7 +46,7 @@
 
 .selected {
   @include selected;
-  color: #403f3f;
+  color: $light-1;
 }
 
 .selectedDisabled {
