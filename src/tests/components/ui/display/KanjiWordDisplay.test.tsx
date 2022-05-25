@@ -1,12 +1,10 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import KanjiWordDisplay from "../../../../components/ui/display/KanjiWordDisplay";
-import { FlashCard } from "../../../../domain/learn/FlashCard";
 import { Kanji } from "../../../../domain/kanji/Kanji";
 import { KanjiReading } from "../../../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
 import JLTPLevel from "../../../../domain/learn/JLTPLevel";
-import SpaceRepetitionDetails from "../../../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
 
 const mockKanjiRepository = jest.fn();
 jest.mock("../../../../repository/KanjiRepository", () => {
@@ -15,11 +13,8 @@ jest.mock("../../../../repository/KanjiRepository", () => {
     }
 });
 
-beforeEach(() => {
-    const kanji = new FlashCard(3, new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"],
-        KyoikuGrade.TWO, JLTPLevel.N5, "", [], 10, ["animal"]), new SpaceRepetitionDetails(2.5, 0, 0, "2021-11-26"));
-    mockKanjiRepository.mockResolvedValueOnce(kanji);
-});
+const kanji = new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.KUN), new KanjiReading("chou", "ちょう", ReadingType.ON)], ["bird"],
+    KyoikuGrade.TWO, JLTPLevel.N5, "", [], 10, ["animal"]);
 
 test('Should render the character if it does not match a known Kanji character', () => {
     const component = render(<KanjiWordDisplay value="き" />);
@@ -27,8 +22,12 @@ test('Should render the character if it does not match a known Kanji character',
 });
 
 test('Should render the character as Inspectable if it is a known Kanji character', async () => {
+    mockKanjiRepository.mockResolvedValue(kanji);
     const component = render(<KanjiWordDisplay value="鳥" />);
+
     fireEvent.mouseOver(component.getByText('鳥'));
-    expect(await screen.findByText('Loading...')).toBeInTheDocument();
-    expect(await screen.findByText('bird')).toBeInTheDocument();
+
+    expect(await screen.findByTestId('鳥-information')).toBeInTheDocument();
+    expect(mockKanjiRepository).toHaveBeenCalledWith('鳥');
+    expect(screen.getByText('bird')).toBeInTheDocument();
 });

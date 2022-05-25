@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState } from "react";
 import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import Inspectable from "../../ui/Inspectable";
 import { Environment } from "../../../utility/Environment";
@@ -10,81 +10,67 @@ import Copyable from "../../ui/Copyable";
 
 export interface KanjiReadingDisplayProps {
     type: ReadingType;
-    readings: KanjiReading[];
     showRomaji: boolean;
+    readings: KanjiReading[];
 }
 
-interface KanjiReadingDisplayState {
-    selected: KanjiReading;
-}
+const KanjiReadingDisplay = (props: KanjiReadingDisplayProps) => {
 
-class KanjiReadingDisplay extends Component<KanjiReadingDisplayProps, KanjiReadingDisplayState> {
+    const { type, readings, showRomaji } = props;
 
-    constructor(props: Readonly<KanjiReadingDisplayProps> | KanjiReadingDisplayProps) {
-        super(props);
-        this.state = {
-            selected: props.readings[0]
-        }
-    }
+    const [selected, setSelected] = useState(readings[0]);
 
-    render() {
-        const { type, readings } = this.props;
-
-        return (
-            <div className={styles.wrapper}>
-                <SpinnerController
-                    values={readings}
-                    disabledTitle={"This kanji has only one Jōyō " + type.toLowerCase() + " reading"}
-                    onChange={(value: KanjiReading) => this.setState({ selected: value })}
-                />
-
-                <span className={[commonStyles.text, styles.reading].join(" ")}>
-                    <Inspectable popover={{ title: this.getTitle(), text: this.getText() }}>
-                        <span className={commonStyles.label}>{type}</span>
-                    </Inspectable>
-
-                    {readings.length > 0
-                        ? (
-                            <>
-                                <span>: </span>
-                                <Copyable inline>
-                                    <span>{this.getReadingFormatted()}</span>
-                                </Copyable>
-                            </>
-                        )
-                        : <span title={"This kanji has no " + type.toLowerCase() + " reading"}>: N/A</span>
-                    }
-                </span>
-            </div>
-        );
-    }
-
-    private getReadingFormatted = (): string => {
-        const { showRomaji } = this.props;
-        const { selected } = this.state;
-
-        let formatted = selected.kana;
+    const getReadingFormatted = (): string => {
+        let formatted = selected?.kana ?? "N/A";
 
         if (showRomaji) {
-            formatted += " (" + selected.romaji + ")"
+            formatted += ` (${selected.romaji})`;
         }
 
         return formatted;
     }
 
-    private getTitle = () => {
-        switch (this.props.type) {
+    const getTitle = () => {
+        switch (type) {
             case ReadingType.ON: return "On-yomi Reading";
             case ReadingType.KUN: return "Kun-yomi Reading"
         }
     }
 
-    private getText = () => {
-        switch (this.props.type) {
+    const getText = () => {
+        switch (type) {
             case ReadingType.ON: return Environment.variable("ONYOMI_DESC");
             case ReadingType.KUN: return Environment.variable("KUNYOMI_DESC");
         }
     }
+
+    return (
+        <div className={styles.wrapper}>
+            <SpinnerController
+                values={readings}
+                onChange={(value: KanjiReading) => setSelected(value)}
+                disabledTitle={`This kanji has only one Jōyō ${type.toLowerCase()} reading`}
+            />
+
+            <span className={[commonStyles.text, styles.reading].join(" ")}>
+                <Inspectable popover={{ title: getTitle(), text: getText() }}>
+                    <span className={commonStyles.label}>{type}</span>
+                </Inspectable>
+
+                {readings.length > 0
+                    ? (
+                        <>
+                            <span>: </span>
+                            <Copyable inline>
+                                <span>{getReadingFormatted()}</span>
+                            </Copyable>
+                        </>
+                    )
+                    : <span title={`This kanji has no ${type.toLowerCase()} reading`}>: N/A</span>
+                }
+            </span>
+        </div>
+    );
 }
 
 export default KanjiReadingDisplay;
