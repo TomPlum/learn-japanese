@@ -1,16 +1,11 @@
 import RestClient from "../../rest/RestClient";
-import axios, { AxiosStatic } from "axios";
 import { Environment } from "../../utility/Environment";
 import { store } from "../../store";
 import { setUser } from "../../slices/UserSlice";
+import api from "../../rest/API";
 
-interface AxiosMock extends AxiosStatic {
-    mockResolvedValue: Function
-    mockRejectedValue: Function
-}
-
-jest.mock('axios');
-const mockedAxios = axios as AxiosMock;
+jest.mock("../../rest/API");
+const mockApi = api as jest.MockedFunction<typeof api>;
 
 interface ExampleResponse {
     value: string;
@@ -48,7 +43,13 @@ describe("Rest Client", () => {
 
     describe("GET", () => {
         it("Should map the response JSON to the specified type when the API call is successful", async () => {
-            mockedAxios.mockResolvedValue({ data: { value: "test-value" }, status: 200 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 200,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").then(response => {
                 expect(response).toStrictEqual({
@@ -60,10 +61,16 @@ describe("Rest Client", () => {
         });
 
         it("Should call axios with the correct URI and configuration", () => {
-            mockedAxios.mockResolvedValue({ data: { value: "test-value" } });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 200,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/kanji/by-character/人",
                     {
                         method: "GET",
@@ -75,7 +82,7 @@ describe("Rest Client", () => {
         });
 
         it("Should return an error response when the promise is rejected and the error has a response", () => {
-            mockedAxios.mockRejectedValue({ response: { data: "He's dead Jim.", status: 500 }});
+            mockApi.mockRejectedValue({ response: { data: "He's dead Jim.", status: 500 }});
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
@@ -87,7 +94,7 @@ describe("Rest Client", () => {
         });
 
         it("Should return an authentication error if the promise is rejected with a response and 401 status", () => {
-            mockedAxios.mockRejectedValue({ response: { error: "Unauthorised.", status: 401 }});
+            mockApi.mockRejectedValue({ response: { error: "Unauthorised.", status: 401 }});
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
@@ -99,7 +106,7 @@ describe("Rest Client", () => {
         });
 
         it("Should return an error response when the promise is rejected and the error has a request", () => {
-            mockedAxios.mockRejectedValue({ request: { status: 500 }});
+            mockApi.mockRejectedValue({ request: { status: 500 }});
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
@@ -111,7 +118,7 @@ describe("Rest Client", () => {
         });
 
         it("Should return an error response when the promise is rejected and the error has not request or response", () => {
-            mockedAxios.mockRejectedValue({});
+            mockApi.mockRejectedValue({});
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
@@ -134,10 +141,16 @@ describe("Rest Client", () => {
 
     describe("POST", () => {
         it("Should call axios with the correct URI and configuration", () => {
-            mockedAxios.mockResolvedValue({ data: { value: "test-value" } });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 200,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.post<ExampleResponse>("/kanji/by-character/人", { request: "Hello" }).then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/kanji/by-character/人",
                     {
                         method: "POST",
@@ -160,10 +173,16 @@ describe("Rest Client", () => {
 
     describe("PUT", () => {
         it("Should call axios with the correct URI and configuration", () => {
-            mockedAxios.mockResolvedValue({ status: 201 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 201,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.put<undefined>("/user/set-nickname/tom").then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
                     {
                         method: "PUT",
@@ -174,10 +193,16 @@ describe("Rest Client", () => {
         });
 
         it("Should call axios with the correct the given request body if one is passed", () => {
-            mockedAxios.mockResolvedValue({ status: 201 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 201,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.put<undefined>("/user/set-nickname/tom", { key: "value" }).then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
                     {
                         method: "PUT",
@@ -200,10 +225,16 @@ describe("Rest Client", () => {
 
     describe("PATCH", () => {
         it("Should call axios with the correct URI and configuration", () => {
-            mockedAxios.mockResolvedValue({ status: 201 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 201,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.patch<undefined>("/user/set-nickname/tom").then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
                     {
                         method: "PATCH",
@@ -214,10 +245,16 @@ describe("Rest Client", () => {
         });
 
         it("Should call axios with the correct the given request body if one is passed", () => {
-            mockedAxios.mockResolvedValue({ status: 201 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 201,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.patch<undefined>("/user/set-nickname/tom", { key: "value" }).then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
                     {
                         method: "PATCH",
@@ -240,10 +277,16 @@ describe("Rest Client", () => {
 
     describe("DELETE", () => {
         it("Should call axios with the correct URI and configuration", () => {
-            mockedAxios.mockResolvedValue({ status: 204 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 204,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.delete<undefined>("/user/delete").then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/user/delete",
                     {
                         method: "DELETE",
@@ -265,10 +308,16 @@ describe("Rest Client", () => {
 
     describe("Send", () => {
         it("Should call axios with the correct method, URI and configuration", () => {
-            mockedAxios.mockResolvedValue({ status: 204 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 204,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.send<undefined>("GET", "/test/endpoint", { value: "test" }).then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/test/endpoint",
                     {
                         method: "GET",

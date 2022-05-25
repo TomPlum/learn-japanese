@@ -1,18 +1,12 @@
-import axios, { AxiosError, Method, AxiosResponse, AxiosRequestConfig } from "axios"
+import { AxiosError, AxiosResponse, Method } from "axios"
 import { Environment } from "../utility/Environment";
+import api from "./API";
 import { store } from "../store";
-import { useUserDispatch } from "../hooks";
-import { setAccessToken, setRefreshToken } from "../slices/UserSlice";
 import { refreshTokenInterceptor } from "./Interceptors";
 
-axios.interceptors.response.use((res: AxiosResponse) => {
-    return res;
+api.interceptors.response.use((response: AxiosResponse) => {
+    return response;
 }, refreshTokenInterceptor);
-
-export interface RefreshTokenResponse {
-    accessToken: string;
-    refreshToken: string;
-}
 
 export interface APIResponse<T> {
     data: T | undefined;
@@ -59,7 +53,7 @@ class RestClient {
         const URI = host + endpoint;
         //console.log("Sending " + method + " request to " + URI);
 
-        return await axios(URI, {
+        return await api(URI, {
             method: method,
             headers: {
                 "Content-Type": "application/json",

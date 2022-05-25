@@ -1,5 +1,5 @@
 import { refreshTokenInterceptor } from "../../rest/Interceptors";
-import axios, { AxiosError, AxiosStatic } from "axios";
+import { AxiosError } from "axios";
 import RestClient from "../../rest/RestClient";
 import { store } from "../../store";
 import { setAccessToken, setRefreshToken, setUser } from "../../slices/UserSlice";
