@@ -12,6 +12,12 @@ RestClient.put = restPut;
 RestClient.get = restGet;
 RestClient.post = restPost;
 
+let mockDate: typeof jest;
+
+beforeEach(() => {
+    mockDate = jest.useFakeTimers('modern');
+});
+
 describe("User Service", () => {
     const service = new UserService();
 
@@ -254,6 +260,15 @@ describe("User Service", () => {
             localStorageMock.clear();
             return service.isAuthenticated().then(response => {
                 expect(response).toBe(false);
+            });
+        });
+    });
+
+    describe("Get User Activity Streak", () => {
+        it("Should return the days since the defined date", () => {
+            mockDate.setSystemTime(new Date(Date.UTC(2021, 1, 30, 12, 24, 59)));
+            return service.getActivityStreak().then(response => {
+                expect(response).toBe(32);
             });
         });
     });

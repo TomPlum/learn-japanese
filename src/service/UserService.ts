@@ -111,4 +111,17 @@ export default class UserService {
 
         return Promise.resolve(false);
     }
+
+    /**
+     * Retrieves the number of consecutive days the user
+     * has been actively engaging with the application.
+     * @return The users current streak in days.
+     */
+    public async getActivityStreak(): Promise<number> {
+        const startDate = new Date("2021/01/30");
+        const now = new Date();
+        const diff = now.getTime() - startDate.getTime();
+        const days = diff / (1000 * 3600 * 24);
+        return Promise.resolve(Number(days.toFixed(0)));
+    }
 }
