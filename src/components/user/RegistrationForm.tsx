@@ -184,7 +184,7 @@ const RegistrationForm = (props: RegistrationFormProps) => {
     }
 
     return (
-        <Modal.Body className={styles.body}>
+        <Modal.Body className={styles.body} data-testid="registration-form">
             {error && <Alert variant="danger">{error}</Alert> }
 
             <Form.Group className="mb-3" controlId="formBasicEmail">

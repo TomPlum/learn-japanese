@@ -20,6 +20,7 @@ const user: User = {
     expired: false,
     roles: ["user"],
     token: "TOKEN",
+    refreshToken: "REFRSEH_TOKEN",
     preferences: {
         defaultFont: "Gothic",
         theme: "Dark Mode",

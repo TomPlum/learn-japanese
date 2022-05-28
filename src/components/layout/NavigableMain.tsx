@@ -13,6 +13,7 @@ import { useUserSelector } from "../../hooks";
 import GenkiGrammarPage from "../pages/GenkiGrammarPage";
 import PlayPage from "../pages/PlayPage";
 import LearnPage from "../pages/LearnPage";
+import RegisterPage from "../pages/RegisterPage";
 
 const NavigableMain = () => {
 
@@ -31,6 +32,7 @@ const NavigableMain = () => {
                 <Route exact path="/genki/grammar" component={GenkiGrammarPage} />
                 <Route exact path="/kanji" component={KanjiBankPage} />
                 <Route exact path="/learn/kanji" component={LearnOnline} />
+                <Route exact path="/register" component={RegisterPage} />
                 <Route component={NotFoundPage} />
             </Switch>
         </NavigationWrapper>
