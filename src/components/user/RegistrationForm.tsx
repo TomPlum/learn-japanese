@@ -47,6 +47,8 @@ const RegistrationForm = (props: RegistrationFormProps) => {
     useDebouncedEffect(() => {
         if (validEmail) {
             checkEmailEligibility();
+        } else {
+            setEmailExists(false);
         }
     }, 200, [email]);
 

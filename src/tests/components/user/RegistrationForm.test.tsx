@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import RegistrationForm from "../../../components/user/RegistrationForm";
 import authService from "../../../service/AuthenticationService";
 import each from "jest-each";
@@ -231,15 +231,33 @@ test('Should not render the passwords do not match error if the first password i
     expect(screen.queryByText('Passwords do not match.')).not.toBeInTheDocument();
 });
 
+test('Should stop rendering the email is already registered message after clearing the field', async () => {
+    // Type in a valid email address
+    mockEmailEligible.mockReset().mockResolvedValue({ exists: true });
+    const { email } = setup();
+    fireEvent.change(email, { target: { value: 'test@domain.com' }});
+
+    // Should display the error message about already being registered
+    const errorMessage = await screen.findByText('This email address is already registered.');
+    expect(errorMessage).toBeInTheDocument();
+
+    // Clearing the field should stop rendering the message
+    fireEvent.change(email, { target: { value: '' }});
+    await waitForElementToBeRemoved(errorMessage);
+});
+
 async function setValidFields() {
     const { email, username, nickname, secondPassword, password, register  } = setup();
     fireEvent.change(email, { target: { value: 'thomas.plumpton@domain.com' }});
     expect(await screen.findByText('Email address is available.'));
+
     fireEvent.change(username, { target: { value: 'TomPlum42' }});
     expect(await screen.findByText('Username is available.'));
+
     fireEvent.change(nickname, { target: { value: 'Tom' }});
     fireEvent.change(password, { target: { value: 'P4ssw0rd-' }});
     fireEvent.change(secondPassword, { target: { value: 'P4ssw0rd-' }});
+
     expect(register).not.toBeDisabled();
 }
 
