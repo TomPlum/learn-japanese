@@ -26,6 +26,7 @@ const user: User = {
     credentialsExpired: false,
     enabled: true,
     token: "TOKEN",
+    refreshToken: "REFRESH_TOKEN",
     preferences: {
         defaultFont: "Gothic",
         theme: "Dark Mode",

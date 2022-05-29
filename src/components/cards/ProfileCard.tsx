@@ -16,7 +16,7 @@ const ProfileCard = (props: ProfileCardProps) => {
     const user = useUserSelector(state => state.user.user);
 
     return (
-        <DashboardCard size="sm" className={styles.card}>
+        <DashboardCard size="sm" className={styles.card} id="profile-card">
             <DashboardCard.Body className={styles.body}>
                 <div className={styles.detailsWrapper}>
                     {!user && (
@@ -25,6 +25,7 @@ const ProfileCard = (props: ProfileCardProps) => {
                             title="Dismiss"
                             onClick={onDismiss}
                             className={styles.dismiss}
+                            data-testid="dismiss-profile-card"
                         />
                     )}
                     <span className={["fa-layers", "fa-fw", styles.avatar].join(" ")}>

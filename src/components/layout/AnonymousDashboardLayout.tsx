@@ -8,12 +8,25 @@ import ScrollableContainer from "../ui/ScrollableContainer";
 import ActivityCard from "../cards/ActivityCard";
 import HighScoresCard from "../cards/HighScoresCard";
 import SettingsCard from "../cards/SettingsCard";
+import LocalStorageService from "../../service/LocalStorageService";
+import { useState } from "react";
 
 const AnonymousDashboardLayout = () => {
+
+    const localStorageService = new LocalStorageService();
+    const [hideProfile, setHideProfile] = useState(localStorageService.getHideUserProfileHint());
+
+    const handleProfileCardDismiss = () => {
+        setHideProfile(true);
+        localStorageService.setHideUserProfileHint();
+    }
+
     return (
         <Row className={styles.row} data-testid="anonymous-dashboard">
             <Col md={3} className={styles.col}>
-                <ProfileCard />
+                {!hideProfile && (
+                    <ProfileCard onDismiss={handleProfileCardDismiss} />
+                )}
                 <KanjiShowcaseCard />
                 <FeedbackCard />
             </Col>

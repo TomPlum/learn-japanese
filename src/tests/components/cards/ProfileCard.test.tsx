@@ -14,7 +14,7 @@ beforeEach(() => {
 test('It should render the dismiss button if there no user logged in', () => {
     store.dispatch(clearUser());
     const component = renderReduxConsumer(<ProfileCard onDismiss={onDismissHandler} />);
-    fireEvent.click(component.getByTitle('Dismiss'));
+    fireEvent.click(component.getByTestId('dismiss-profile-card'));
     expect(onDismissHandler).toHaveBeenCalled();
 });
 
