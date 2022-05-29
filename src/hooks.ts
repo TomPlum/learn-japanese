@@ -1,6 +1,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import type { AppDispatch, RootState } from './store'
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const useUserDispatch = () => useDispatch<AppDispatch>();
 export const useUserSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -73,4 +74,9 @@ export const usePrevious = <T>(value: T): T => {
     });
 
     return ref.current ?? value;
+}
+
+export const useQueryParams = () => {
+    const { search } = useLocation();
+    return useMemo(() => new URLSearchParams(search), [search]);
 }

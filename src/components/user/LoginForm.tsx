@@ -140,7 +140,7 @@ const LoginForm = (props: LoginFormProps) => {
 
             <Form.Group>
                 <Button className={styles.login} variant="success" onClick={login} disabled={!formValid || loading}>
-                    {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth/>}
+                    {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="login-loading" />}
                     {' Login'}
                 </Button>
             </Form.Group>

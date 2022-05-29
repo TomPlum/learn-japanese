@@ -309,7 +309,7 @@ const RegistrationForm = (props: RegistrationFormProps) => {
 
             <Form.Group>
                 <Button className={styles.button} variant="info" disabled={!isFormValid()} onClick={registerUser}>
-                    {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth />}
+                    {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="register-loading" />}
                     {' Register'}
                 </Button>
             </Form.Group>

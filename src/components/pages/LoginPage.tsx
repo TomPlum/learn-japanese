@@ -1,12 +1,12 @@
-import { useUserSelector } from "../../hooks";
-import { Redirect } from "react-router-dom";
+import { useQueryParams, useUserSelector } from "../../hooks";
+import { Redirect, useHistory } from "react-router-dom";
 import LoginForm from "../user/LoginForm";
-import { useHistory } from "react-router-dom";
 import styles from "../../styles/sass/components/pages/LoginPage.module.scss";
 
 const LoginPage = () => {
     const user = useUserSelector(state => state.user).user;
     const history = useHistory();
+    const params = useQueryParams();
 
     if (user) {
         return <Redirect to="/home" />;
@@ -15,7 +15,10 @@ const LoginPage = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.form}>
-                <LoginForm onSuccess={() => history.push("/home")} />
+                <LoginForm
+                    username={params.get("username") ?? ""}
+                    onSuccess={() => history.push("/home")}
+                />
             </div>
         </div>
     );

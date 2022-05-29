@@ -4,7 +4,7 @@ import { createMemoryHistory } from "history";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import LoginPage from "../../../components/pages/LoginPage";
 import { Router } from "react-router-dom";
-import { fireEvent } from "@testing-library/react";
+import { fireEvent, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import auth from "../../../service/AuthenticationService";
 
 const user: User = {
@@ -28,7 +28,30 @@ const user: User = {
         cardsPerDay: 10,
         confidenceMenuStyle: "Numbers 1 - 6"
     }
-}
+};
+
+const validLoginResponse = {
+    username: "TomPlum42",
+    email: "tom@hotmail.com",
+    nickname: "Tom",
+    roles: ["admin"],
+    creationDate: "2021-10-15",
+    locked: false,
+    expired: false,
+    credentialsExpired: false,
+    enabled: true,
+    token: "TOKEN",
+    refreshToken: "REFRESH_TOKEN",
+    preferences: {
+        defaultFont: "Gothic",
+        theme: "Dark Mode",
+        language: "English",
+        highScores: "Ask Each Time",
+        defaultMode: "Play",
+        cardsPerDay: 10,
+        confidenceMenuStyle: "Numbers 1 - 6"
+    }
+};
 
 const mockLogin = jest.fn();
 const history = createMemoryHistory();
@@ -50,16 +73,25 @@ test('Should render the login form when there is no user logged in', () => {
     expect(component.getByTestId('login-form')).toBeInTheDocument();
 });
 
-test('Should redirect to the home page after successfully logging in', () => {
+test('Should redirect to the home page after successfully logging in', async () => {
     // Start with no user
     store.dispatch(clearUser());
     const component = renderReduxConsumer(<Router history={history}><LoginPage /></Router>);
 
     // Log in
-    mockLogin.mockResolvedValueOnce({ success: true });
+    mockLogin.mockResolvedValueOnce(validLoginResponse);
     fireEvent.change(component.getByPlaceholderText('Username'), { target: { value: "TomPlum" } });
     fireEvent.change(component.getByPlaceholderText('Password'), { target: { value: "MyPassword123-" } });
 
-    // Should redirect to the home page
-    expect(history.location.pathname).toBe('/home');
+    // Should redirect to the home page on submit
+    fireEvent.click(component.getByText('Login'));
+    await waitForElementToBeRemoved(await component.findByTestId('login-loading'));
+    await waitFor(() => expect(history.location.pathname).toBe('/home'));
+});
+
+test('Should pass the username from the location query parameter into the login form', () => {
+    store.dispatch(clearUser());
+    history.push("/home?username=TestingUser");
+    const component = renderReduxConsumer(<Router history={history}><LoginPage /></Router>);
+    expect(component.getByPlaceholderText('Username')).toHaveValue("TestingUser");
 });
