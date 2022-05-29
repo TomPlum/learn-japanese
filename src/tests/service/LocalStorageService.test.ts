@@ -1,5 +1,6 @@
 import LocalStorageService from "../../service/LocalStorageService";
 import { localStorageMock } from "../../setupTests";
+import each from "jest-each";
 
 describe("Local Storage Service", () => {
     const service = new LocalStorageService();
@@ -53,6 +54,26 @@ describe("Local Storage Service", () => {
             localStorageMock.clear();
             let icons = service.getRecentlyUsedIcons();
             expect(icons).toStrictEqual([]);
+        });
+    });
+
+    describe("User Profile Registration Hint", () => {
+        it("Should return true if the value is stringified true", () => {
+            localStorageMock.setItem("hide-user-profile-hint", "true");
+            const hide = service.getHideUserProfileHint();
+            expect(hide).toBe(true);
+        });
+
+        each([undefined, null, "", "false"]).it("Should return false if the value is falsy", (value: string) => {
+            localStorageMock.setItem("hide-user-profile-hint", value);
+            const hide = service.getHideUserProfileHint();
+            expect(hide).toBe(false);
+        });
+
+        it("Should set the a true string in the correct key", () => {
+            localStorageMock.clear();
+            service.setHideUserProfileHint();
+            expect(localStorageMock.getItem("hide-user-profile-hint")).toBe("true");
         });
     });
 })
