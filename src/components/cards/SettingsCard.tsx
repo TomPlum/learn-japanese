@@ -1,11 +1,14 @@
+import React from "react";
 import DashboardCard from "../layout/card/DashboardCard";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
-import styles from "../../styles/sass/components/cards/SettingsCard.module.scss";
-import React from "react";
 import { faBell, faChess, faCog, faDesktop, faGraduationCap, faUser } from "@fortawesome/free-solid-svg-icons";
 import DashboardCardLink from "../layout/card/DashboardCardLink";
+import { useUserSelector } from "../../hooks";
+import styles from "../../styles/sass/components/cards/SettingsCard.module.scss";
 
 const SettingsCard = () => {
+
+    const user = useUserSelector(state => state.user.user);
 
     const link = {
         chevron: true,
@@ -13,7 +16,7 @@ const SettingsCard = () => {
     }
 
     return (
-        <DashboardCard size="sm" className={styles.card}>
+        <DashboardCard className={styles.card} id="settings-card">
             <DashboardCard.Header className={styles.header}>
                 <DashboardCardHeader.Title>
                     Settings
@@ -25,8 +28,10 @@ const SettingsCard = () => {
                 <DashboardCardLink icon={faGraduationCap} text="Learn Settings" {...link} />
                 <DashboardCardLink icon={faChess} text="Play Settings" {...link} />
                 <DashboardCardLink icon={faDesktop} text="Interface Settings" {...link} />
-                <DashboardCardLink icon={faBell} text="Notification Settings" {...link} />
-                <DashboardCardLink icon={faUser} text="User Settings" {...link} />
+                {user && (<>
+                    <DashboardCardLink icon={faBell} text="Notification Settings" {...link} />
+                    <DashboardCardLink icon={faUser} text="User Settings" {...link} />
+                </>)}
             </DashboardCard.Body>
         </DashboardCard>
     );
