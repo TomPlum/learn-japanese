@@ -1,4 +1,4 @@
-import styles from "../../styles/sass/components/ui/LoadingDots.module.scss";
+import styles from "../../../styles/sass/components/ui/loading/LoadingDots.module.scss";
 
 export type DotsAnimation =
     "elastic" | "pulse" | "flashing" | "collision" | "revolution" |

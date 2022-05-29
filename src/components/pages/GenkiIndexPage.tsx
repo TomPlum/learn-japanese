@@ -10,7 +10,8 @@ import TablePagination from "../ui/table/TablePagination";
 import Copyable from "../ui/Copyable";
 import RomajiGenerator from "../../utility/RomajiGenerator";
 import styles from "../../styles/sass/components/pages/GenkiIndexPage.module.scss";
-import LoadingSpinner from "../ui/LoadingSpinner";
+import LoadingSpinner from "../ui/loading/LoadingSpinner";
+import Arrays from "../../utility/Arrays";
 
 interface TableData {
     lesson: number;

@@ -1,4 +1,4 @@
-import LoadingSpinner from "../../../components/ui/LoadingSpinner";
+import LoadingSpinner from "../../../../components/ui/loading/LoadingSpinner";
 import { render, screen } from "@testing-library/react";
 
 test('When active the loading spinner should render', () => {

@@ -1,4 +1,4 @@
-import styles from "../../styles/sass/components/layout/SwayingLanternAnimation.module.scss";
+import styles from "../../../styles/sass/components/ui/loading/SwayingLanternAnimation.module.scss";
 
 export interface LanternLogoProps {
     className?: string;

@@ -1,10 +1,10 @@
 import { Component } from "react";
-import { Kana } from "../../domain/kana/Kana";
+import { Kana } from "../../../domain/kana/Kana";
 import { Col, Container, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/layout/KanaTile.module.scss";
-import KanaType from "../../domain/kana/KanaType";
+import styles from "../../../styles/sass/components/ui/kana/KanaTile.module.scss";
+import KanaType from "../../../domain/kana/KanaType";
 import KanaTypeIndicator from "./KanaTypeIndicator";
-import KanaDisplay from "../ui/display/KanaDisplay";
+import KanaDisplay from "../display/KanaDisplay";
 
 export interface KanaTileProps {
     kana: Kana;

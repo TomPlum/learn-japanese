@@ -16,7 +16,7 @@ import { OnlineLearningSessionResult } from "../../domain/learn/LearningSessionR
 import SpacedRepetitionService from "../../service/SpacedRepetitionService";
 import KanjiFlashCardFront from "./kanji/KanjiFlashCardFront";
 import KanjiFlashCardBack from "./kanji/KanjiFlashCardBack";
-import LoadingSpinner from "../ui/LoadingSpinner";
+import LoadingSpinner from "../ui/loading/LoadingSpinner";
 
 export interface KanjiFlashCardsProps {
     onFinish: (result: OnlineLearningSessionResult) => void;

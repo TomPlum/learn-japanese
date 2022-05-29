@@ -1,7 +1,7 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/LandingPage.module.scss";
 import Inspectable from "../ui/Inspectable";
-import KanaCarousel from "../ui/KanaCarousel";
+import KanaCarousel from "../ui/kana/KanaCarousel";
 import { faGraduationCap, faPlay, faQuestion, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Environment } from "../../utility/Environment";
@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import KanaRepository from "../../repository/KanaRepository";
 import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
 import { Kana } from "../../domain/kana/Kana";
-import LoadingSpinner from "../ui/LoadingSpinner";
+import LoadingSpinner from "../ui/loading/LoadingSpinner";
 
 const LandingPage = () => {
     const [kana, setKana] = useState<Kana[]>([]);

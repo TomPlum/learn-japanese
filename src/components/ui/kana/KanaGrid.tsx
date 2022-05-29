@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Kana } from "../../domain/kana/Kana";
+import { Kana } from "../../../domain/kana/Kana";
 import KanaTile from "./KanaTile";
 import StackGrid, { transitions } from "react-stack-grid";
-import styles from "../../styles/sass/components/layout/KanaGrid.module.scss";
+import styles from "../../../styles/sass/components/ui/kana/KanaGrid.module.scss";
 
 export interface KanaGridProps {
     kana: Kana[];

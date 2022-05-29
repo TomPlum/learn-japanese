@@ -2,7 +2,7 @@ import { Alert, Col, Container, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import KanjiService, { KanjiResult } from "../../service/KanjiService";
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
-import LoadingSpinner from "../ui/LoadingSpinner";
+import LoadingSpinner from "../ui/loading/LoadingSpinner";
 import KanjiSearchResult from "../ui/KanjiSearchResult";
 import StackGrid, { transitions } from "react-stack-grid";
 import { useFontSelector } from "../../hooks";

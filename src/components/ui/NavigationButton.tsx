@@ -6,7 +6,7 @@ import HashLink from "../layout/HashLink";
 import ScrollableContainer from "./ScrollableContainer";
 import ConditionalWrapper from "./ConditionalWrapper";
 import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "./loading/LoadingSpinner";
 
 export interface NavigationButtonProps {
     id?: string;

@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import KanaGrid from "../../../components/layout/KanaGrid";
-import { Kana } from "../../../domain/kana/Kana";
-import KanaType from "../../../domain/kana/KanaType";
-import { KanaColumn } from "../../../domain/kana/KanaColumn";
+import KanaGrid from "../../../../components/ui/kana/KanaGrid";
+import { Kana } from "../../../../domain/kana/Kana";
+import KanaType from "../../../../domain/kana/KanaType";
+import { KanaColumn } from "../../../../domain/kana/KanaColumn";
 
 const kana = [
     new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),

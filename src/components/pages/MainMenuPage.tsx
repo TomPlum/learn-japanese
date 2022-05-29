@@ -2,7 +2,7 @@ import styles from "../../styles/sass/components/pages/MainMenuPage.module.scss"
 import { Col, Container, Row } from "react-bootstrap";
 import PlayCard from "../cards/PlayCard";
 import HighScoresCard from "../cards/HighScoresCard";
-import DashboardToolbar from "../layout/DashboardToolbar";
+import DashboardToolbar from "../layout/card/DashboardToolbar";
 import FeedbackCard from "../cards/FeedbackCard";
 import ScrollableContainer from "../ui/ScrollableContainer";
 import ProfileCard from "../cards/ProfileCard";

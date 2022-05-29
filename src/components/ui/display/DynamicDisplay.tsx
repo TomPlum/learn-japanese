@@ -1,4 +1,4 @@
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSpinner from "../loading/LoadingSpinner";
 import React, { useImperativeHandle, useState } from "react";
 import { KanaDisplayStyle } from "./KanaDisplay";
 import { Textfit } from "@tomplum/react-textfit";

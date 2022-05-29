@@ -1,7 +1,7 @@
 import React, { Component, ReactElement } from "react";
-import Topic from "../../domain/Topic";
+import Topic from "../../../domain/Topic";
 import { ListGroupItem } from "react-bootstrap";
-import styles from "../../styles/sass/components/layout/TopicListOption.module.scss";
+import styles from "../../../styles/sass/components/ui/select/TopicListOption.module.scss";
 
 interface TopicListOptionProps {
     type?: Topic;

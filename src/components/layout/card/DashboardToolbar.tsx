@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/sass/components/layout/DashboardToolbar.module.scss";
-import DashboardCard from "./card/DashboardCard";
+import styles from "../../../styles/sass/components/layout/card/DashboardToolbar.module.scss";
+import DashboardCard from "./DashboardCard";
 import { faCogs, faFireAlt, faPencilRuler, faSearch, faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 
 const DashboardToolbar = () => {

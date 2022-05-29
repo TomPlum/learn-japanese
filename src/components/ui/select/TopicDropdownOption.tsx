@@ -1,7 +1,7 @@
 import React, { Component, ReactElement } from "react";
-import Topic from "../../domain/Topic";
+import Topic from "../../../domain/Topic";
 import { Dropdown } from "react-bootstrap";
-import styles from "../../styles/sass/components/layout/GameTypeMenuDropdownOption.module.scss";
+import styles from "../../../styles/sass/components/layout/GameTypeMenuDropdownOption.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface TopicDropdownOptionProps {

@@ -1,9 +1,9 @@
 import { Component } from "react";
-import { Kana } from "../../domain/kana/Kana";
+import { Kana } from "../../../domain/kana/Kana";
 import { Container } from "react-bootstrap";
-import KanaDisplay, { KanaDisplayStyle } from "./display/KanaDisplay";
-import Arrays from "../../utility/Arrays";
-import styles from "../../styles/sass/components/ui/KanaCarousel.module.scss";
+import KanaDisplay, { KanaDisplayStyle } from "../display/KanaDisplay";
+import Arrays from "../../../utility/Arrays";
+import styles from "../../../styles/sass/components/ui/kana/KanaCarousel.module.scss";
 
 export interface KanaCarouselProps {
     kana: Kana[];

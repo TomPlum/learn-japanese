@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Dropdown, ListGroup } from "react-bootstrap";
-import Topic from "../../domain/Topic";
-import TopicListOption from "./TopicListOption";
+import Topic from "../../../domain/Topic";
+import TopicListOption from "../select/TopicListOption";
 import { faGamepad, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TopicDropdownOption from "./TopicDropdownOption";
-import { AppMode } from "../../domain/AppMode";
-import styles from "../../styles/sass/components/layout/TopicSelectionMenu.module.scss";
-import { useModeSelector } from "../../hooks";
+import TopicDropdownOption from "../select/TopicDropdownOption";
+import { AppMode } from "../../../domain/AppMode";
+import styles from "../../../styles/sass/components/ui/menu/TopicSelectionMenu.module.scss";
+import { useModeSelector } from "../../../hooks";
 
 interface TopicSelectionMenuProps {
     onSelect: (type: Topic) => void;

@@ -6,7 +6,7 @@ import { Fade } from "react-bootstrap";
 import SessionMode from "../../../../domain/session/SessionMode";
 import Icon from "../../menu/icon/Icon";
 import PlayMode from "../../../../domain/session/PlayMode";
-import LoadingDots from "../../LoadingDots";
+import LoadingDots from "../../loading/LoadingDots";
 
 export interface FavouriteButtonProps {
     preset: SessionMode;

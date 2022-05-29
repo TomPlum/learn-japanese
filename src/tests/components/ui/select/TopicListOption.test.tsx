@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
-import TopicListOption from "../../../components/layout/TopicListOption";
-import Topic from "../../../domain/Topic";
+import TopicListOption from "../../../../components/ui/select/TopicListOption";
+import Topic from "../../../../domain/Topic";
 
 const onClickHandler = jest.fn();
 

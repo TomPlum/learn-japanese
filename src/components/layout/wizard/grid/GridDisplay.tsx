@@ -4,7 +4,7 @@ import { GridOptions } from "../../../../domain/grid/GridOptions";
 import GridDisplayType from "../../../../domain/grid/GridDisplayType";
 import styles from "../../../../styles/sass/components/layout/wizard/grid/GridDisplay.module.scss";
 import ScrollableContainer from "../../../ui/ScrollableContainer";
-import LoadingSpinner from "../../../ui/LoadingSpinner";
+import LoadingSpinner from "../../../ui/loading/LoadingSpinner";
 
 export interface GridDisplayProps {
     loading?: boolean;

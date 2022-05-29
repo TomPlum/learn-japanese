@@ -1,4 +1,4 @@
-import SwayingLanternAnimation from "./SwayingLanternAnimation";
+import SwayingLanternAnimation from "../ui/loading/SwayingLanternAnimation";
 import styles from "../../styles/sass/components/layout/LoadingScreen.module.scss";
 import { useEffect, useState } from "react";
 import { Fade } from "react-bootstrap";

@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import KanaCarousel from "../../../components/ui/KanaCarousel";
-import { Kana } from "../../../domain/kana/Kana";
-import KanaType from "../../../domain/kana/KanaType";
-import { KanaColumn } from "../../../domain/kana/KanaColumn";
-import Arrays from "../../../utility/Arrays";
+import KanaCarousel from "../../../../components/ui/kana/KanaCarousel";
+import { Kana } from "../../../../domain/kana/Kana";
+import KanaType from "../../../../domain/kana/KanaType";
+import { KanaColumn } from "../../../../domain/kana/KanaColumn";
+import Arrays from "../../../../utility/Arrays";
 
 beforeEach(() => {
     Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {

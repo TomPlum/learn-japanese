@@ -6,7 +6,7 @@ import { faArrowAltCircleDown, faCircleNotch, faGraduationCap, faPlay, faStar, f
 import React, { useEffect, useRef, useState } from "react";
 import PresetService from "../../service/PresetService";
 import SessionMode from "../../domain/session/SessionMode";
-import LoadingSpinner from "../ui/LoadingSpinner";
+import LoadingSpinner from "../ui/loading/LoadingSpinner";
 import ScrollableContainer from "../ui/ScrollableContainer";
 import PlayMode from "../../domain/session/PlayMode";
 import LearnMode from "../../domain/session/LearnMode";

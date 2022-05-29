@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import LoadingDots from "../../../components/ui/LoadingDots";
+import LoadingDots from "../../../../components/ui/loading/LoadingDots";
 
 test('It should apply the correct class name based on the given animation', () => {
     const component = render(<LoadingDots type="flashing" />);

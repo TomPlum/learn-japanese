@@ -57,7 +57,7 @@ test('Should render the registration form if there is no user logged in', () => 
 
 test('Should redirect to the home page if the user is already logged in', () => {
     store.dispatch(setUser(user));
-    const component = renderReduxConsumer(<Router history={history}><RegisterPage /></Router>);
+    renderReduxConsumer(<Router history={history}><RegisterPage /></Router>);
     expect(history.location.pathname).toBe("/home");
 });
 

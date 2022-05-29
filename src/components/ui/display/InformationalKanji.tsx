@@ -5,7 +5,7 @@ import Copyable from "../Copyable";
 import Inspectable from "../Inspectable";
 import KanjiReadingDisplay from "../../learn/kanji/KanjiReadingDisplay";
 import { ReadingType } from "../../../domain/kanji/ReadingType";
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSpinner from "../loading/LoadingSpinner";
 import styles from "../../../styles/sass/components/ui/display/InformationalKanji.module.scss";
 
 export interface InformationalKanjiProps {

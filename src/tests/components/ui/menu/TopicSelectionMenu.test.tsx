@@ -1,10 +1,10 @@
 import { fireEvent, screen } from "@testing-library/react";
-import TopicSelectionMenu from "../../../components/layout/TopicSelectionMenu";
-import Topic from "../../../domain/Topic";
-import { store } from "../../../store";
-import { setApplicationMode } from "../../../slices/ModeSlice";
-import { AppMode } from "../../../domain/AppMode";
-import renderReduxConsumer from "../../renderReduxConsumer";
+import TopicSelectionMenu from "../../../../components/ui/menu/TopicSelectionMenu";
+import Topic from "../../../../domain/Topic";
+import { store } from "../../../../store";
+import { setApplicationMode } from "../../../../slices/ModeSlice";
+import { AppMode } from "../../../../domain/AppMode";
+import renderReduxConsumer from "../../../renderReduxConsumer";
 
 const onSelectHandler = jest.fn();
 
