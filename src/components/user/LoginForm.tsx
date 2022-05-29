@@ -105,7 +105,7 @@ const LoginForm = (props: LoginFormProps) => {
     }
 
     return (
-        <Modal.Body className={styles.body}>
+        <Modal.Body className={styles.body} data-testid="login-form">
             {!!error && <Alert variant="danger">{error}</Alert>}
             {props.username && <Alert variant="success">Registration successful. You can log-in below.</Alert>}
 

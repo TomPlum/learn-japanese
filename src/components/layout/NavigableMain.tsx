@@ -14,6 +14,7 @@ import GenkiGrammarPage from "../pages/GenkiGrammarPage";
 import PlayPage from "../pages/PlayPage";
 import LearnPage from "../pages/LearnPage";
 import RegisterPage from "../pages/RegisterPage";
+import LoginPage from "../pages/LoginPage";
 
 const NavigableMain = () => {
 
@@ -33,6 +34,7 @@ const NavigableMain = () => {
                 <Route exact path="/kanji" component={KanjiBankPage} />
                 <Route exact path="/learn/kanji" component={LearnOnline} />
                 <Route exact path="/register" component={RegisterPage} />
+                <Route exact path="/login" component={LoginPage} />
                 <Route component={NotFoundPage} />
             </Switch>
         </NavigationWrapper>
