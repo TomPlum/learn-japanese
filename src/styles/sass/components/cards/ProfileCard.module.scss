@@ -64,3 +64,20 @@ $card-color: #4d9eec;
   padding-top: 125px;
   text-align: left;
 }
+
+.explanation {
+  padding: 0 20px;
+}
+
+.dismiss {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  color: $dark-2;
+  transition: all ease-in-out 0.2s;
+}
+
+.dismiss:hover {
+  cursor: pointer;
+  color: $bootstrap-red;
+}

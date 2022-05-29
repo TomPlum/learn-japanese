@@ -24,6 +24,7 @@ window.matchMedia = window.matchMedia || function() {
 
 //Allows testing of components that are wrapped in the sizeMe HOC
 import sizeMe from "react-sizeme";
+import { ConfidenceMenuStyle } from "./domain/learn/spacedrepetition/ConfidenceMenuStyle";
 sizeMe.noPlaceholders = true;
 
 declare global {
@@ -74,3 +75,26 @@ export const localStorageMock = (function() {
 })();
 
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+
+export const testUser = {
+    username: "TomPlum42",
+    nickname: "Tom",
+    email: "tom@hotmail.com",
+    creationDate: "2021-08-09T00:00",
+    expired: false,
+    locked: false,
+    credentialsExpired: false,
+    enabled: true,
+    roles: ["user"],
+    token: "TOKEN",
+    refreshToken: "REFRESH_TOKEN",
+    preferences: {
+        defaultFont: "Mincho",
+        theme: "Dark",
+        language: "English",
+        highScores: "Auto-Submit",
+        cardsPerDay: 10,
+        defaultMode: "Play",
+        confidenceMenuStyle: ConfidenceMenuStyle.NUMBERS
+    }
+};

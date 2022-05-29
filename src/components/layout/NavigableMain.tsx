@@ -1,5 +1,5 @@
 import { Route, Switch } from "react-router-dom";
-import MainMenuPage from "../pages/MainMenuPage";
+import HomePage from "../pages/HomePage";
 import SearchPage from "../pages/SearchPage";
 import HelpPage from "../pages/HelpPage";
 import ProfilePage from "../pages/ProfilePage";
@@ -23,7 +23,7 @@ const NavigableMain = () => {
     return (
         <NavigationWrapper>
             <Switch>
-                <Route exact path="/home" component={MainMenuPage}/>
+                <Route exact path="/home" component={HomePage}/>
                 <Route exact path="/play" component={PlayPage} />
                 <Route exact path="/learn" component={LearnPage} />
                 <Route exact path="/search" component={SearchPage} />
