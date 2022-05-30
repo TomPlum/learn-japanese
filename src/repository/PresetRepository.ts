@@ -314,6 +314,27 @@ class PresetRepository {
     }
 
     /**
+     * Retrieves a list of all default presets from the API.
+     * Default presets are ones defined by the application and so
+     * are not custom created by a user.
+     * @return A list of all default learn and play presets.
+     */
+    public async getDefaultPresets(): Promise<Presets> {
+        return RestClient.get<PresetsResponse>("/presets/default").then(response => {
+            const data = response.data;
+            if (data) {
+                const learn = this.convertLearnPresets(data.learn);
+                const play = this.convertPlayPresets(data.play);
+                return { learn: learn, play: play };
+            } else {
+                return Promise.reject({ error: "Failed to retrieve presets." });
+            }
+        }).catch(response => {
+            return { learn: [], play: [], error: response.error ?? "Failed to retrieve presets." };
+        });
+    }
+
+    /**
      * Retrieves a list of learn and play presets
      * that have been favourite by the current user.
      * @return an array of favourite presets.

@@ -180,6 +180,38 @@ describe("Preset Repository", () => {
         });
     });
 
+    describe("Get Default Presets", () => {
+        it("Should call the rest client with the correct endpoint", () => {
+            mockGet.mockResolvedValueOnce({ });
+            return repository.getDefaultPresets().then(() => {
+                expect(mockGet).toHaveBeenLastCalledWith("/presets/default");
+            });
+        });
+
+        it("Should return the default learn and play presets", () => {
+            mockGet.mockResolvedValueOnce({ data: { learn: [learnPresetResponse], play: [playPresetResponse ]} });
+            mockDataSettingsConverter.mockReturnValue(dataSettings);
+            mockGameSettingsConverter.mockReturnValueOnce(gameSettings);
+
+            return repository.getDefaultPresets().then(response => {
+                expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, learnPresetResponse.data);
+                expect(mockDataSettingsConverter).toHaveBeenCalledWith(Topic.KANA, playPresetResponse.data);
+                expect(mockGameSettingsConverter).toHaveBeenCalledWith(playPresetResponse.game);
+                expect(response).toStrictEqual({
+                    learn: [new LearnMode(1, "Example Learn Preset", "An example learn preset desc", "ffffff", "faApple", dataSettings, new LearnSettings(), "Hiragana & Katakana", undefined, false)],
+                    play: [new PlayMode(1, "Example Play Preset", "An example play preset desc", "ffffff", "faApple", dataSettings, gameSettings, "Hiragana & Katakana", undefined, false)]
+                });
+            });
+        });
+
+        it("Should return the API error if the call fails", () => {
+            mockGet.mockRejectedValueOnce({ error: "Failed to retrieve presets." });
+            return repository.getDefaultPresets().then(response => {
+                expect(response).toEqual({ learn: [], play: [], error: "Failed to retrieve presets." });
+            });
+        });
+    });
+
     describe("Get Favourite Presets", () => {
 
         const learnResponse: FavouriteLearnPresetResponse = {
