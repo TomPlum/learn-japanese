@@ -7,6 +7,7 @@ import PresetBuilder from "../../domain/session/PresetBuilder";
 import { KanjiSettingsBuilder } from "../../domain/session/settings/data/KanjiSettings";
 
 const mockGetAllPresets = jest.fn();
+const mockGetDefaultPresets = jest.fn();
 const mockFavouritePresets = jest.fn();
 const mockDeleteFavouritePreset = jest.fn();
 const mockUpdateFavouritePresets = jest.fn();
@@ -16,6 +17,7 @@ jest.mock("../../repository/PresetRepository", () => {
     return function() {
         return {
             getAllPresets: mockGetAllPresets,
+            getDefaultPresets: mockGetDefaultPresets,
             savePlayPreset: mockSavePlayPreset,
             saveLearnPreset: mockSaveLearnPreset,
             getFavouritePresets: mockFavouritePresets,
@@ -60,6 +62,22 @@ describe("Preset Service", () => {
             mockGetAllPresets.mockRejectedValueOnce({ error: "Failed to retrieve presets." });
             return service.getAllPresets().then((response: LearnPlayPresets) => {
                 expect(response).toStrictEqual({ learn: [], play: [], error: "Failed to retrieve presets." });
+            });
+        });
+    });
+
+    describe("Get Default Presets", () => {
+        it("Should return the default presets from the repository when the call succeeds", () => {
+            mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
+            return service.getDefaultPresets().then((response: LearnPlayPresets) => {
+                expect(response).toStrictEqual({ learn: [learnPreset], play: [playPreset], error: undefined });
+            });
+        });
+
+        it("Should return empty preset array if the repository call fails with an error message", () => {
+            mockGetDefaultPresets.mockRejectedValueOnce({ error: "Failed to retrieve default presets." });
+            return service.getDefaultPresets().then((response: LearnPlayPresets) => {
+                expect(response).toStrictEqual({ learn: [], play: [], error: "Failed to retrieve default presets." });
             });
         });
     });

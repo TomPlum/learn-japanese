@@ -35,6 +35,18 @@ class PresetService {
     }
 
     /**
+     * Retrieves a list of all default (non-custom) presets.
+     * @return Default learn and play presets.
+     */
+    public async getDefaultPresets(): Promise<LearnPlayPresets> {
+        return this.repository.getDefaultPresets().then((response: Presets) => {
+            return { learn: response.learn, play: response.play, error: response.error };
+        }).catch(response => {
+            return { learn: [], play: [], error: response.error };
+        });
+    }
+
+    /**
      * Retrieves a list of all favourite presets.
      * @return Favourite learn and play presets.
      */
