@@ -27,7 +27,7 @@ const AnonymousDashboardLayout = () => {
                 {!hideProfile && (
                     <ProfileCard onDismiss={handleProfileCardDismiss} />
                 )}
-                <KanjiShowcaseCard />
+                <SettingsCard />
                 <FeedbackCard />
             </Col>
 
@@ -40,7 +40,7 @@ const AnonymousDashboardLayout = () => {
 
             <Col md={3}>
                 <HighScoresCard />
-                <SettingsCard />
+                <KanjiShowcaseCard />
             </Col>
         </Row>
     );
