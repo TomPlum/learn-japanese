@@ -1,0 +1,16 @@
+@import "src/styles/sass/colours";
+
+.surface {
+  pointer-events: all;
+  z-index: 1000;
+}
+
+.message {
+  position: absolute;
+  color: $light-2;
+  background-color: $dark-3;
+  border: 2px solid $dark-1;
+  border-radius: 10px;
+  padding: 10px;
+  width: auto;
+}
