@@ -29,10 +29,22 @@ const HoverMessage = (props: PropsWithChildren<HoverMessageProps>) => {
         });
     }
 
+    const surfaceProperties = {
+        className: styles.surface,
+        onMouseEnter: handleEnter,
+        onMouseOut: handleExit,
+        onMouseMove: handleMove,
+        "data-testid": "hover-message"
+    }
+
     return (
         <Fragment>
-            {show && inside && <div className={styles.message} style={{ top: internal.y, left: internal.x }}>{message}</div>}
-            <span className={styles.surface} onMouseEnter={handleEnter} onMouseOut={handleExit} onMouseMove={handleMove}>
+            {show && inside && (
+                <div className={styles.message} style={{ top: internal.y, left: internal.x }}>
+                    {message}
+                </div>
+            )}
+            <span {...surfaceProperties}>
                 {children}
             </span>
         </Fragment>
