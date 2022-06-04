@@ -23,9 +23,10 @@ const HoverMessage = (props: PropsWithChildren<HoverMessageProps>) => {
     }
 
     const handleMove = (e: React.MouseEvent<HTMLSpanElement>) => {
+        console.log(`x: ${e.clientX}, y: ${e.clientY}`);
         setInternal({
-            x: e.clientX - (e.target as HTMLSpanElement).offsetLeft,
-            y: e.clientY - (e.target as HTMLSpanElement).offsetTop
+            x: e.pageX,// - (e.target as HTMLSpanElement).offsetLeft,
+            y: e.pageY// - (e.target as HTMLSpanElement).offsetTop
         });
     }
 
@@ -40,7 +41,7 @@ const HoverMessage = (props: PropsWithChildren<HoverMessageProps>) => {
     return (
         <Fragment>
             {show && inside && (
-                <div className={styles.message} style={{ top: internal.y, left: internal.x }}>
+                <div className={styles.message} style={{ top: external.y, left: external.x }}>
                     {message}
                 </div>
             )}
