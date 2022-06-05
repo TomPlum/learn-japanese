@@ -1,6 +1,5 @@
 import React, { Fragment, PropsWithChildren, ReactElement, useEffect, useRef, useState } from "react";
 import styles from "../../styles/sass/components/ui/HoverMessage.module.scss";
-import { useMousePosition } from "../../hooks";
 
 export interface HoverMessageProps {
     message: string;
@@ -10,8 +9,9 @@ export interface HoverMessageProps {
 const HoverMessage = (props: PropsWithChildren<HoverMessageProps>) => {
     const { show, message, children } = props;
 
-    const external = useMousePosition();
-    const [internal, setInternal] = useState({ x: 0, y: 0 });
+    const element = useRef<HTMLSpanElement>(null);
+   // const external = useMousePosition();
+    const [internal, setInternal] = useState({ x: element.current?.offsetLeft, y: element.current?.offsetTop });
     const [inside, setInside] = useState(false);
 
     const handleEnter = () => {
@@ -23,10 +23,9 @@ const HoverMessage = (props: PropsWithChildren<HoverMessageProps>) => {
     }
 
     const handleMove = (e: React.MouseEvent<HTMLSpanElement>) => {
-        console.log(`x: ${e.clientX}, y: ${e.clientY}`);
         setInternal({
-            x: e.pageX,// - (e.target as HTMLSpanElement).offsetLeft,
-            y: e.pageY// - (e.target as HTMLSpanElement).offsetTop
+            x: e.clientX,// - (e.target as HTMLSpanElement).offsetLeft,
+            y: e.clientY// - (e.target as HTMLSpanElement).offsetTop
         });
     }
 
@@ -39,16 +38,16 @@ const HoverMessage = (props: PropsWithChildren<HoverMessageProps>) => {
     }
 
     return (
-        <Fragment>
+        <div className={styles.wrapper}>
             {show && inside && (
-                <div className={styles.message} style={{ top: external.y, left: external.x }}>
+                <div className={styles.message} style={{ top: internal.y, left: internal.x }}>
                     {message}
                 </div>
             )}
-            <span {...surfaceProperties}>
-                {children}
+            <span {...surfaceProperties} ref={element}>
+                {React.cloneElement(children as ReactElement, { className: styles.child })}
             </span>
-        </Fragment>
+        </div>
     );
 }
 

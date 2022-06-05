@@ -1,8 +1,19 @@
 @import "src/styles/sass/colours";
 
+.wrapper {
+  position: relative;
+}
+
 .surface {
   pointer-events: all;
   z-index: 1000;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.child {
+  pointer-events: none;
 }
 
 .message {
@@ -16,4 +27,5 @@
   left: 50%;
   backface-visibility: hidden;
   width: 200px;
+  transition: all ease-in-out 0.3s;
 }
