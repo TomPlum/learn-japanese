@@ -15,7 +15,9 @@ const FeedbackCard = (props: FeedbackCardProps) => {
     return (
         <DashboardCard className={[styles.card, className].join(" ")}>
             <DashboardCard.Body className={styles.body}>
-                <FontAwesomeIcon icon={faGithub} fixedWidth className={styles.icon} title="Source Repo" />
+                <a href="https://github.com/TomPlum/learn-japanese" target="_blank" rel="noreferrer" className={styles.link}>
+                    <FontAwesomeIcon icon={faGithub} fixedWidth className={styles.icon} title="Source Repo" />
+                </a>
                 <FontAwesomeIcon icon={faCommentDots} fixedWidth className={styles.icon} title="Feedback" />
                 <FontAwesomeIcon icon={faCoffee} fixedWidth className={styles.icon} title="Buy me a coffee" />
             </DashboardCard.Body>
