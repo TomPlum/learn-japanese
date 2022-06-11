@@ -2,8 +2,9 @@ import { Fade, Modal } from "react-bootstrap";
 import { ModalProps } from "react-bootstrap/Modal";
 import styles from "../../../styles/sass/components/settings/modal/SettingsModal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faTimes } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import { faBell, faChessKing, faCog, faDesktop, faGraduationCap, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import SettingsTab from "./SettingsTab";
 
 export interface SettingsModalProps {
     show: boolean;
@@ -13,6 +14,8 @@ export interface SettingsModalProps {
 const SettingsModal = (props: SettingsModalProps) => {
 
     const { show, onClose } = props;
+
+    const [selected, setSelected] = useState(0);
 
     const modalProps: ModalProps = {
         show: show,
@@ -28,6 +31,15 @@ const SettingsModal = (props: SettingsModalProps) => {
     return (
         <Modal {...modalProps}>
             <Modal.Body className={styles.modal}>
+                <div className={styles.nav}>
+                    <SettingsTab icon={faCog} title="General" />
+                    <SettingsTab icon={faGraduationCap} title="Learn" />
+                    <SettingsTab icon={faChessKing} title="Play" />
+                    <SettingsTab icon={faDesktop} title="Interface" />
+                    <SettingsTab icon={faBell} title="Notification"/>
+                    <SettingsTab icon={faUser} title="User" />
+                </div>
+
                 <div className={styles.header}>
                     <p className={styles.name}>
                         <FontAwesomeIcon icon={faCog} fixedWidth />

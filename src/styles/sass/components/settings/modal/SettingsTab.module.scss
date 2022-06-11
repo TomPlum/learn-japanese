@@ -1,0 +1,31 @@
+@import "src/styles/sass/colours";
+
+.container {
+  background-color: $dark-1;
+  padding: 15px 20px;
+  border-radius: 10px;
+  transition: all ease-in-out 0.3s;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+}
+
+.container:hover {
+  cursor: pointer;
+  background-color: rgba($dark-1, 0.5);
+}
+
+.container:hover .icon  {
+  color: $light-1;
+}
+
+.icon {
+  color: $light-2;
+  transition: color ease-in-out 0.3s;
+}
+
+.selected .icon {
+  color: $light-1;
+}
