@@ -85,14 +85,13 @@ const SettingsModal = (props: SettingsModalProps) => {
                         onClick={handleSelectTab}
                         selected={selected === USER}
                     />
-                </div>
-
-                <div className={styles.header}>
-                    <p className={styles.name}>
-                        <FontAwesomeIcon icon={faCog} fixedWidth />
-                        <span>General Settings</span>
-                    </p>
-                    <FontAwesomeIcon icon={faTimes} fixedWidth onClick={onClose} title="Close" className={styles.close} />
+                    <FontAwesomeIcon
+                        fixedWidth
+                        title="Close"
+                        icon={faTimes}
+                        onClick={onClose}
+                        className={styles.close}
+                    />
                 </div>
 
                 <Fade in appear>

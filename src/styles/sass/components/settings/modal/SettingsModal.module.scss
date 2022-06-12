@@ -10,7 +10,7 @@
 }
 
 .close {
-  margin-left: auto;
+  margin-left: 15px;
   color: $light-2;
   font-size: 1.2em;
   transition: color ease-in-out 0.2s;
@@ -53,4 +53,5 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 }

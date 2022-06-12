@@ -27,5 +27,9 @@
 }
 
 .selected .icon {
-  color: $light-1;
+  color: #FFF;
+}
+
+.selected {
+  background-color: rgba($dark-1, 0.5);
 }
