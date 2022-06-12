@@ -1,0 +1,23 @@
+@import "src/styles/sass/components/settings";
+
+.edit {
+  background-color: $dark-1;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease-in-out 0.2s;
+  margin: 0;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba($dark-1, 0.8);
+  }
+}
+
+.edit .icon {
+  margin-right: 10px;
+  margin-bottom: 3px;
+  font-size: 1.2em;
+}

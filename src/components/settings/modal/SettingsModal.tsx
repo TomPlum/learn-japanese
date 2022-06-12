@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faChessKing, faCog, faDesktop, faGraduationCap, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import SettingsTab from "./SettingsTab";
+import InterfaceSettingsTab from "./InterfaceSettingsTab";
 
 export enum SettingsType {
     GENERAL, LEARN, PLAY, INTERFACE, NOTIFICATION, USER
@@ -26,6 +27,14 @@ const SettingsModal = (props: SettingsModalProps) => {
 
     const handleSelectTab = (type: SettingsType) => {
         setSelected(type);
+    }
+
+    const getTabContents = () => {
+        switch (selected) {
+            case SettingsType.INTERFACE: {
+                return <InterfaceSettingsTab />;
+            }
+        }
     }
 
     const modalProps: ModalProps = {
@@ -96,7 +105,7 @@ const SettingsModal = (props: SettingsModalProps) => {
 
                 <Fade in appear>
                     <div className={styles.body}>
-
+                        {getTabContents()}
                     </div>
                 </Fade>
             </Modal.Body>

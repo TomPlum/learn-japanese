@@ -54,4 +54,9 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 15px;
+}
+
+.nav div:first-child {
+  margin-left: 0;
 }
