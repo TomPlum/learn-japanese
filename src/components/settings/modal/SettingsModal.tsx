@@ -6,16 +6,27 @@ import { faBell, faChessKing, faCog, faDesktop, faGraduationCap, faTimes, faUser
 import React, { useState } from "react";
 import SettingsTab from "./SettingsTab";
 
+export enum SettingsType {
+    GENERAL, LEARN, PLAY, INTERFACE, NOTIFICATION, USER
+}
+
 export interface SettingsModalProps {
     show: boolean;
+    type: SettingsType;
     onClose: () => void;
 }
 
 const SettingsModal = (props: SettingsModalProps) => {
 
-    const { show, onClose } = props;
+    const { show, type, onClose } = props;
 
-    const [selected, setSelected] = useState(0);
+    const [selected, setSelected] = useState(type);
+
+    const { GENERAL, LEARN, PLAY, INTERFACE, NOTIFICATION, USER } = SettingsType;
+
+    const handleSelectTab = (type: SettingsType) => {
+        setSelected(type);
+    }
 
     const modalProps: ModalProps = {
         show: show,
@@ -32,12 +43,48 @@ const SettingsModal = (props: SettingsModalProps) => {
         <Modal {...modalProps}>
             <Modal.Body className={styles.modal}>
                 <div className={styles.nav}>
-                    <SettingsTab icon={faCog} title="General" />
-                    <SettingsTab icon={faGraduationCap} title="Learn" />
-                    <SettingsTab icon={faChessKing} title="Play" />
-                    <SettingsTab icon={faDesktop} title="Interface" />
-                    <SettingsTab icon={faBell} title="Notification"/>
-                    <SettingsTab icon={faUser} title="User" />
+                    <SettingsTab
+                        icon={faCog}
+                        type={GENERAL}
+                        title="General"
+                        selected={selected === GENERAL}
+                        onClick={handleSelectTab}
+                    />
+                    <SettingsTab
+                        type={LEARN}
+                        title="Learn"
+                        icon={faGraduationCap}
+                        onClick={handleSelectTab}
+                        selected={selected === LEARN}
+                    />
+                    <SettingsTab
+                        type={PLAY}
+                        title="Play"
+                        icon={faChessKing}
+                        onClick={handleSelectTab}
+                        selected={selected === PLAY}
+                    />
+                    <SettingsTab
+                        icon={faDesktop}
+                        type={INTERFACE}
+                        title="Interface"
+                        onClick={handleSelectTab}
+                        selected={selected === INTERFACE}
+                    />
+                    <SettingsTab
+                        icon={faBell}
+                        type={NOTIFICATION}
+                        title="Notification"
+                        onClick={handleSelectTab}
+                        selected={selected === NOTIFICATION}
+                    />
+                    <SettingsTab
+                        type={USER}
+                        icon={faUser}
+                        title="User"
+                        onClick={handleSelectTab}
+                        selected={selected === USER}
+                    />
                 </div>
 
                 <div className={styles.header}>
