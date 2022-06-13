@@ -2,10 +2,11 @@ import { Fade, Modal } from "react-bootstrap";
 import { ModalProps } from "react-bootstrap/Modal";
 import styles from "../../../styles/sass/components/settings/modal/SettingsModal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faChessKing, faCog, faDesktop, faGraduationCap, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faChess, faCog, faDesktop, faGraduationCap, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import SettingsTab from "./SettingsTab";
 import InterfaceSettingsTab from "./InterfaceSettingsTab";
+import ScrollableContainer from "../../ui/ScrollableContainer";
 
 export enum SettingsType {
     GENERAL, LEARN, PLAY, INTERFACE, NOTIFICATION, USER
@@ -69,7 +70,7 @@ const SettingsModal = (props: SettingsModalProps) => {
                     <SettingsTab
                         type={PLAY}
                         title="Play"
-                        icon={faChessKing}
+                        icon={faChess}
                         onClick={handleSelectTab}
                         selected={selected === PLAY}
                     />
@@ -104,9 +105,9 @@ const SettingsModal = (props: SettingsModalProps) => {
                 </div>
 
                 <Fade in appear>
-                    <div className={styles.body}>
+                    <ScrollableContainer className={styles.body}>
                         {getTabContents()}
-                    </div>
+                    </ScrollableContainer>
                 </Fade>
             </Modal.Body>
         </Modal>

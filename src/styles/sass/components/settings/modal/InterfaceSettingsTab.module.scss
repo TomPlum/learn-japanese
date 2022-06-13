@@ -1,8 +1,8 @@
 @import "src/styles/sass/components/settings";
 
-.edit {
+.button {
   background-color: $dark-1;
-  padding: 15px;
+  padding: 10px;
   border-radius: 10px;
   max-width: 200px;
   display: flex;
@@ -16,7 +16,7 @@
   }
 }
 
-.edit .icon {
+.button .icon {
   margin-right: 10px;
   margin-bottom: 3px;
   font-size: 1.2em;
