@@ -13,7 +13,7 @@ const InterfaceSettingsTab = () => {
     }
 
     return (
-        <div>
+        <div data-testid="interface-settings-tab">
             <p className={styles.title}>Interface Settings</p>
             <p className={styles.description}>
                 Configure the user interface to customise the layout and look-and-feel to your liking.

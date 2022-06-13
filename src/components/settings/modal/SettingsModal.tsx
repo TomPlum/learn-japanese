@@ -46,7 +46,7 @@ const SettingsModal = (props: SettingsModalProps) => {
         enforceFocus: false,
         dialogClassName: styles.dialog,
         contentClassName: styles.content,
-        "data-testid": "settings"
+        "data-testid": "settings-modal"
     }
 
     return (
