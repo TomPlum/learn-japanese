@@ -28,3 +28,11 @@
 .section:not(:last-child) {
   margin-bottom: 20px;
 }
+
+.buttonGroup {
+  display: flex;
+  width: 100%;
+  div:not(:last-child) {
+    margin-right: 10px;
+  }
+}
