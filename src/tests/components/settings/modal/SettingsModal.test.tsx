@@ -39,3 +39,10 @@ test('It should render the general settings tab when clicking the tab', () => {
     fireEvent.click(general);
     expect(screen.getByTestId('general-settings-tab')).toBeInTheDocument();
 });
+
+test('It should render the learn settings tab when clicking the tab', () => {
+    props.type = SettingsType.PLAY; // Load with a different default tab
+    const { learn } = setup();
+    fireEvent.click(learn);
+    expect(screen.getByTestId('learn-settings-tab')).toBeInTheDocument();
+});

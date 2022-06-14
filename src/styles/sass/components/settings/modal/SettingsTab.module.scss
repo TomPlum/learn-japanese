@@ -33,3 +33,7 @@
 .selected {
   background-color: rgba($dark-1, 0.5);
 }
+
+.selected:hover .icon {
+  color: rgba($inspect, 0.8);
+}
