@@ -7,7 +7,6 @@ let props: SettingsModalProps;
 
 beforeEach(() => {
     props = {
-        show: true,
         type: SettingsType.GENERAL,
         onClose: onCloseHandler
     }
@@ -26,17 +25,6 @@ const setup = () => {
         ...component
     }
 }
-
-test('It should render the modal if the show boolean is passed as true', () => {
-    props.show = true;
-    setup();
-    expect(screen.getByTestId('settings-modal')).toBeInTheDocument();
-});
-
-test('It should not render the modal if the show boolean is passed as false', () => {
-    render(<SettingsModal show={false} type={SettingsType.GENERAL} onClose={onCloseHandler} />);
-    expect(screen.queryByTestId('settings-modal')).not.toBeInTheDocument();
-});
 
 test('It should render the interface settings tab when clicking the tab', () => {
     props.type = SettingsType.PLAY; // Load with a different default tab

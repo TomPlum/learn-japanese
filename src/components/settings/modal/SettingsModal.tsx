@@ -13,14 +13,13 @@ export enum SettingsType {
 }
 
 export interface SettingsModalProps {
-    show: boolean;
     type: SettingsType;
     onClose: () => void;
 }
 
 const SettingsModal = (props: SettingsModalProps) => {
 
-    const { show, type, onClose } = props;
+    const { type, onClose } = props;
 
     const [selected, setSelected] = useState(type);
 
@@ -39,7 +38,7 @@ const SettingsModal = (props: SettingsModalProps) => {
     }
 
     const modalProps: ModalProps = {
-        show: show,
+        show: true,
         size: "lg",
         centered: true,
         backdrop: "static",

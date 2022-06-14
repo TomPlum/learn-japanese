@@ -1,9 +1,9 @@
-import { render } from "@testing-library/react";
 import SettingsCard from "../../../components/cards/SettingsCard";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
 import { clearUser, setUser } from "../../../slices/UserSlice";
 import { testUser } from "../../../setupTests";
+import { fireEvent, screen } from "@testing-library/react";
 
 const setup = () => {
     const component = renderReduxConsumer(<SettingsCard />);
@@ -44,4 +44,19 @@ test('Should render the correct settings sub-menu links when a user is not logge
     expect(ui).toBeInTheDocument();
     expect(notification).not.toBeInTheDocument();
     expect(user).not.toBeInTheDocument();
+});
+
+test('Should render the settings modal with the interface tab when clicking the respective link', async () => {
+   const { ui } = setup();
+   fireEvent.click(ui);
+   expect(await screen.findByTestId('interface-settings-tab')).toBeInTheDocument();
+});
+
+test('Dismissing the settings modal should stop rendering it', async () => {
+    const { general } = setup();
+    fireEvent.click(general);
+    expect(await screen.findByTestId('settings-modal')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTitle('Close'));
+    expect(await screen.queryByTestId('settings-modal')).not.toBeInTheDocument();
 });
