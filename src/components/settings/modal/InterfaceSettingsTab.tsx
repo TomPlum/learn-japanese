@@ -3,6 +3,7 @@ import { faFont, faGripVertical, faLanguage, faLightbulb, faSmile, faSortNumeric
 import { useState } from "react";
 import DashboardLayoutEditor from "./DashboardLayoutEditor";
 import SettingsButton from "./SettingsButton";
+import SettingsTabTitle from "./SettingsTabTitle";
 
 const InterfaceSettingsTab = () => {
 
@@ -14,11 +15,10 @@ const InterfaceSettingsTab = () => {
 
     return (
         <div data-testid="interface-settings-tab">
-            <p className={styles.title}>Interface Settings</p>
-            <p className={styles.description}>
-                Configure the user interface to customise the layout and look-and-feel to your liking.
-            </p>
-            <hr className={styles.rule} />
+            <SettingsTabTitle
+                title="Interface Settings"
+                description="Configure the user interface to customise the layout and look-and-feel to your liking."
+            />
 
            <div className={styles.section}>
                <p className={styles.heading}>Customise Dashboard Layout</p>
