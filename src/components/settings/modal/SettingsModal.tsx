@@ -10,6 +10,7 @@ import ScrollableContainer from "../../ui/ScrollableContainer";
 import GeneralSettingsTab from "./GeneralSettingsTab";
 import LearnSettingsTab from "./LearnSettingsTab";
 import PlaySettingsTab from "./PlaySettingsTab";
+import NotificationsSettingsTab from "./NotificationsSettingsTab";
 
 export enum SettingsType {
     GENERAL, LEARN, PLAY, INTERFACE, NOTIFICATION, USER
@@ -45,6 +46,9 @@ const SettingsModal = (props: SettingsModalProps) => {
             }
             case SettingsType.INTERFACE: {
                 return <InterfaceSettingsTab />;
+            }
+            case SettingsType.NOTIFICATION: {
+                return <NotificationsSettingsTab />;
             }
         }
     }
