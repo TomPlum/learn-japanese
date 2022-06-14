@@ -46,3 +46,11 @@ test('It should render the learn settings tab when clicking the tab', () => {
     fireEvent.click(learn);
     expect(screen.getByTestId('learn-settings-tab')).toBeInTheDocument();
 });
+
+
+test('It should render the learn settings tab when clicking the tab', () => {
+    props.type = SettingsType.LEARN; // Load with a different default tab
+    const { play } = setup();
+    fireEvent.click(play);
+    expect(screen.getByTestId('play-settings-tab')).toBeInTheDocument();
+});

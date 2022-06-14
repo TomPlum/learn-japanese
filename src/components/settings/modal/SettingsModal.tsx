@@ -9,6 +9,7 @@ import InterfaceSettingsTab from "./InterfaceSettingsTab";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 import GeneralSettingsTab from "./GeneralSettingsTab";
 import LearnSettingsTab from "./LearnSettingsTab";
+import PlaySettingsTab from "./PlaySettingsTab";
 
 export enum SettingsType {
     GENERAL, LEARN, PLAY, INTERFACE, NOTIFICATION, USER
@@ -38,6 +39,9 @@ const SettingsModal = (props: SettingsModalProps) => {
             }
             case SettingsType.LEARN: {
                 return <LearnSettingsTab />;
+            }
+            case SettingsType.PLAY: {
+                return <PlaySettingsTab />;
             }
             case SettingsType.INTERFACE: {
                 return <InterfaceSettingsTab />;
