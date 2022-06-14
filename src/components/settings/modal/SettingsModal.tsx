@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import SettingsTab from "./SettingsTab";
 import InterfaceSettingsTab from "./InterfaceSettingsTab";
 import ScrollableContainer from "../../ui/ScrollableContainer";
+import GeneralSettingsTab from "./GeneralSettingsTab";
 
 export enum SettingsType {
     GENERAL, LEARN, PLAY, INTERFACE, NOTIFICATION, USER
@@ -31,6 +32,9 @@ const SettingsModal = (props: SettingsModalProps) => {
 
     const getTabContents = () => {
         switch (selected) {
+            case SettingsType.GENERAL: {
+                return <GeneralSettingsTab />;
+            }
             case SettingsType.INTERFACE: {
                 return <InterfaceSettingsTab />;
             }

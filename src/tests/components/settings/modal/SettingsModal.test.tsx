@@ -32,3 +32,10 @@ test('It should render the interface settings tab when clicking the tab', () => 
     fireEvent.click(ui);
     expect(screen.getByTestId('interface-settings-tab')).toBeInTheDocument();
 });
+
+test('It should render the general settings tab when clicking the tab', () => {
+    props.type = SettingsType.PLAY; // Load with a different default tab
+    const { general } = setup();
+    fireEvent.click(general);
+    expect(screen.getByTestId('general-settings-tab')).toBeInTheDocument();
+});
