@@ -12,7 +12,7 @@ const DashboardLayoutEditor = (props: DashboardLayoutEditorProps) => {
     const { onClose } = props;
 
     return (
-        <div>
+        <div data-testid="dashboard-layout-editor">
             <p>Dashboard Layout Editor</p>
             <FontAwesomeIcon
                 fixedWidth

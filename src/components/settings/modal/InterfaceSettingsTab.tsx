@@ -37,7 +37,7 @@ const InterfaceSettingsTab = () => {
                 <p className={styles.text}>
                     Switch between the dark and light variations of the user-interface theming.
                 </p>
-                <div className={styles.button} onClick={() => setEditing(true)}>
+                <div className={styles.button}>
                     <FontAwesomeIcon icon={faLightbulb} className={styles.icon} />
                     <span className={styles.name}>Toggle Light Mode</span>
                 </div>
