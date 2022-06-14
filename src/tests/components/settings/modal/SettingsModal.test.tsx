@@ -60,3 +60,10 @@ test('It should render the notification settings tab when clicking the tab', () 
     fireEvent.click(notification);
     expect(screen.getByTestId('notification-settings-tab')).toBeInTheDocument();
 });
+
+test('It should render the user settings tab when clicking the tab', () => {
+    props.type = SettingsType.LEARN; // Load with a different default tab
+    const { user } = setup();
+    fireEvent.click(user);
+    expect(screen.getByTestId('user-settings-tab')).toBeInTheDocument();
+});
