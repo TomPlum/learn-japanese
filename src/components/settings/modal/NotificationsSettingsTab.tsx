@@ -1,5 +1,5 @@
 import SettingsTabTitle from "./SettingsTabTitle";
-import styles from "../../../styles/sass/components/settings/modal/LearnSettingsTab.module.scss";
+import styles from "../../../styles/sass/components/settings/modal/NotificationsSettingsTab.module.scss";
 import SettingsButton from "./SettingsButton";
 import { faCopy, faEraser, faFireAlt } from "@fortawesome/free-solid-svg-icons";
 
