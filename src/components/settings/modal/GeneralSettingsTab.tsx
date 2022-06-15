@@ -1,4 +1,3 @@
-import styles from "../../../styles/sass/components/settings/modal/GeneralSettingsTab.module.scss";
 import SettingsTabTitle from "./SettingsTabTitle";
 
 const GeneralSettingsTab = () => {
