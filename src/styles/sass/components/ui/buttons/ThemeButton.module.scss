@@ -1,7 +1,9 @@
+@import "src/styles/sass/colours";
+
 .theme-light-mode:hover {
-  color: #505cdb;
+  color: $dark-mode;
 }
 
 .theme-dark-mode:hover {
-  color: #e7d246;
+  color: $light-mode;
 }

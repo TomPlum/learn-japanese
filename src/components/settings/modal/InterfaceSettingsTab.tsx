@@ -7,6 +7,7 @@ import SettingsTabTitle from "./SettingsTabTitle";
 import SettingsDropdown from "./SettingsDropdown";
 import FontService from "../../../service/FontService";
 import { Font } from "../../ui/buttons/FontSelectorButton";
+import SettingsBooleanButton from "./SettingsBooleanButton";
 
 const InterfaceSettingsTab = () => {
 
@@ -46,10 +47,11 @@ const InterfaceSettingsTab = () => {
                 <p className={styles.text}>
                     Switch between the dark and light variations of the user-interface theming.
                 </p>
-                <SettingsButton
-                    onClick={() => setDarkMode(!darkMode)}
-                    icon={darkMode ? faLightbulb : faMoon}
-                    name={`Toggle ${darkMode ? "Light" : "Dark"} Mode`}
+                <SettingsBooleanButton
+                    state={darkMode}
+                    onClick={(state: boolean) => setDarkMode(state)}
+                    truthy={{ name: "Toggle Light Mode", icon: faLightbulb, className: styles.light }}
+                    falsy={{ name: "Toggle Dark Mode", icon: faMoon, className: styles.dark }}
                 />
             </div>
 

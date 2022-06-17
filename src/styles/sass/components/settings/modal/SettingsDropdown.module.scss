@@ -1,24 +1,8 @@
 @import "src/styles/sass/colours";
-@import "src/styles/sass/mixins";
+@import "src/styles/sass/components/settings";
 
 .button {
-  @include noSelect;
-  background-color: $dark-1;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all ease-in-out 0.2s;
-  margin: 0;
-  font-size: 1.1em;
   position: relative;
-
-  &:hover {
-    cursor: pointer;
-    background-color: rgba($dark-1, 0.8);
-  }
 
   &:hover .chevron {
     color: $inspect;
@@ -30,12 +14,6 @@
 
   .name {
     margin-right: 12px;
-  }
-
-  .icon {
-    margin-right: 10px;
-    margin-bottom: 3px;
-    font-size: 1.2em;
   }
 
   .chevron {
