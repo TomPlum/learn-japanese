@@ -1,7 +1,7 @@
 import SettingsTabTitle from "./SettingsTabTitle";
 import styles from "../../../styles/sass/components/settings/modal/UserSettingsTab.module.scss";
 import SettingsButton from "./SettingsButton";
-import { faBookOpen, faCalendarCheck, faChartPie, faClock, faFireAlt, faMedal, faSkull, faUserFriends } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen, faCalendarCheck, faChartPie, faClock, faFireAlt, faGlobeAmericas, faMedal, faSkull, faUserFriends, faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { faFirefoxBrowser } from "@fortawesome/free-brands-svg-icons";
 import SettingsDropdown from "./SettingsDropdown";
 
@@ -37,7 +37,15 @@ const UserSettingsTab = () => {
                     to others on the high-scores (should you submit them). You can keep your info private or show it
                     to friends only.
                 </p>
-                <SettingsButton name="Friends Only" icon={faUserFriends} />
+                <SettingsDropdown
+                    id="profile-visibility-selector"
+                    options={[
+                        { name: "Friends Only", icon: faUserFriends },
+                        { name: "Private", icon: faUserSecret },
+                        { name: "Public", icon: faGlobeAmericas }
+                    ]}
+                    onChange={() => {}}
+                />
             </div>
 
             <div className={styles.dangerZone}>
