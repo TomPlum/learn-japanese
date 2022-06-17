@@ -1,22 +1,25 @@
 import styles from "../../../styles/sass/components/settings/modal/SettingsDropdown.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp, faSpinner, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { useRef, useState } from "react";
 import { Overlay } from "react-bootstrap";
 
 export interface SettingsDropdownOption {
+    style?: {};
     name: string;
-    icon: IconDefinition;
+    icon?: IconDefinition;
 }
 
 export interface SettingsDropdownProps {
     id: string;
+    loading?: boolean;
+    buttonIcon?: IconDefinition;
     options: SettingsDropdownOption[];
     onChange: (value: string) => void;
 }
 
 const SettingsDropdown = (props: SettingsDropdownProps) => {
-    const { id, options, onChange } = props;
+    const { id, loading, buttonIcon, options, onChange } = props;
 
     const target = useRef(null);
     const [show, setShow] = useState(false);
@@ -34,11 +37,18 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
     return (
         <>
             <div ref={target} className={styles.button} onClick={() => setShow(true)} title="Click to see options">
-                <FontAwesomeIcon icon={selected.icon} className={styles.icon} />
-                <span className={styles.name}>{selected.name}</span>
-                <span className={chevronClasses.join(" ")}>
-                    <FontAwesomeIcon icon={show ? faChevronUp : faChevronDown} />
-                </span>
+                {loading && <FontAwesomeIcon icon={faSpinner} spin={true} />}
+                {!loading && selected && (
+                    <>
+                        {!!buttonIcon || selected.icon && (
+                            <FontAwesomeIcon icon={buttonIcon ?? selected.icon} className={styles.icon} />
+                        )}
+                        <span className={styles.name}>{selected.name}</span>
+                        <span className={chevronClasses.join(" ")}>
+                            <FontAwesomeIcon icon={show ? faChevronUp : faChevronDown} />
+                        </span>
+                    </>
+                )}
             </div>
 
             <Overlay
@@ -48,14 +58,15 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
                 target={target.current}
                 onHide={() => setShow(false)}
             >
-                <div className={styles.menu}>
+                {!loading && selected ? <div className={styles.menu}>
                     {options.filter(it => it.name != selected.name).map((option: SettingsDropdownOption) => (
-                        <div key={option.name} className={styles.option} onClick={() => handleChange(option)}>
-                            <FontAwesomeIcon icon={option.icon} className={styles.icon} />
+                        <div key={option.name} className={styles.option} onClick={() => handleChange(option)} style={option.style}>
+                            {option.icon && <FontAwesomeIcon icon={option.icon} className={styles.icon} />}
                             <span>{option.name}</span>
                         </div>
                     ))}
                 </div>
+                : <FontAwesomeIcon icon={faSpinner} spin={true} />}
             </Overlay>
         </>
     );

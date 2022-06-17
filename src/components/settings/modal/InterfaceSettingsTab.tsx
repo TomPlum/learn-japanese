@@ -1,13 +1,24 @@
 import styles from "../../../styles/sass/components/settings/modal/InterfaceSettingsTab.module.scss";
 import { faFont, faGripVertical, faLanguage, faLightbulb, faSmile, faSortNumericUp } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardLayoutEditor from "./DashboardLayoutEditor";
 import SettingsButton from "./SettingsButton";
 import SettingsTabTitle from "./SettingsTabTitle";
+import SettingsDropdown from "./SettingsDropdown";
+import FontService from "../../../service/FontService";
+import { Font } from "../../ui/buttons/FontSelectorButton";
 
 const InterfaceSettingsTab = () => {
 
+    const fontService = new FontService();
     const [editing, setEditing] = useState(false);
+    const [fonts, setFonts] = useState<Font[]>([]);
+
+    useEffect(() => {
+        fontService.getFonts().then(response => {
+            setFonts(response);
+        })
+    }, []);
 
     if (editing) {
         return <DashboardLayoutEditor onClose={() => setEditing(false)} />;
@@ -42,7 +53,19 @@ const InterfaceSettingsTab = () => {
                 <p className={styles.text}>
                     Set your preferred default font-face used for all kanji characters in the app.
                 </p>
-                <SettingsButton name="Default" icon={faFont} />
+                <SettingsDropdown
+                    onChange={() => {}}
+                    buttonIcon={faFont}
+                    loading={fonts.length === 0}
+                    id="interface-settings-font-selector"
+                    key={fonts.map(font => font.name).join("-")}
+                    options={fonts.map(font => {
+                        return {
+                            name: font.displayName,
+                            style: { "font-family": font.name }
+                        }
+                    })}
+                />
             </div>
 
             <div className={styles.section}>
