@@ -38,11 +38,10 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
         <>
             <div ref={target} className={styles.button} onClick={() => setShow(true)} title="Click to see options">
                 {loading && <FontAwesomeIcon icon={faSpinner} spin={true} />}
-                {!loading && selected && (
+                {!loading && !!selected && (
                     <>
-                        {!!buttonIcon || selected.icon && (
-                            <FontAwesomeIcon icon={buttonIcon ?? selected.icon} className={styles.icon} />
-                        )}
+                        {buttonIcon && <FontAwesomeIcon icon={buttonIcon} className={styles.icon} />}
+                        {!buttonIcon && selected.icon && <FontAwesomeIcon icon={selected.icon} className={styles.icon} />}
                         <span className={styles.name}>{selected.name}</span>
                         <span className={chevronClasses.join(" ")}>
                             <FontAwesomeIcon icon={show ? faChevronUp : faChevronDown} />

@@ -12,6 +12,7 @@ import SettingsBooleanButton from "./SettingsBooleanButton";
 const InterfaceSettingsTab = () => {
 
     const fontService = new FontService();
+
     const [editing, setEditing] = useState(false);
     const [fonts, setFonts] = useState<Font[]>([]);
     const [darkMode, setDarkMode] = useState(true);
@@ -21,6 +22,18 @@ const InterfaceSettingsTab = () => {
             setFonts(response);
         })
     }, []);
+
+    const handleFontChange = (font: string) => {
+
+    }
+
+    const handleLanguageChange = (language: string) => {
+
+    }
+
+    const handleConfidenceMenuStyleChange = (style: string) => {
+
+    }
 
     if (editing) {
         return <DashboardLayoutEditor onClose={() => setEditing(false)} />;
@@ -39,7 +52,11 @@ const InterfaceSettingsTab = () => {
                    Edit the home page dashboard layout. Cards can be toggled on or off, resized or moved
                    to different columns.
                </p>
-               <SettingsButton name="Open Layout Editor" icon={faGripVertical} onClick={() => setEditing(true)} />
+               <SettingsButton
+                   name="Open Layout Editor"
+                   icon={faGripVertical}
+                   onClick={() => setEditing(true)}
+               />
            </div>
 
             <div className={styles.section}>
@@ -61,8 +78,8 @@ const InterfaceSettingsTab = () => {
                     Set your preferred default font-face used for all kanji characters in the app.
                 </p>
                 <SettingsDropdown
-                    onChange={() => {}}
                     buttonIcon={faFont}
+                    onChange={handleFontChange}
                     loading={fonts.length === 0}
                     id="interface-settings-font-selector"
                     key={fonts.map(font => font.name).join("-")}
@@ -80,7 +97,12 @@ const InterfaceSettingsTab = () => {
                 <p className={styles.text}>
                     Set the language that all major buttons, menus and links use.
                 </p>
-                <SettingsButton name="English" icon={faLanguage} />
+                <SettingsDropdown
+                    buttonIcon={faLanguage}
+                    onChange={handleLanguageChange}
+                    id="interface-settings-language-selector"
+                    options={[{ name: "English" }, { name: "日本語" }]}
+                />
             </div>
 
             <div className={styles.section}>
@@ -88,10 +110,14 @@ const InterfaceSettingsTab = () => {
                 <p className={styles.text}>
                     Change the format of the confidence rating widget used during flash card learning sessions.
                 </p>
-                <div className={styles.buttonGroup}>
-                    <SettingsButton name="Emoji Style" icon={faSmile} />
-                    <SettingsButton name="Numerical" icon={faSortNumericUp} />
-                </div>
+                <SettingsDropdown
+                    onChange={handleConfidenceMenuStyleChange}
+                    id="interface-settings-confidence-menu-selector"
+                    options={[
+                        { name: "Emoji Style", icon: faSmile },
+                        { name: "Numerical", icon: faSortNumericUp }
+                    ]}
+                />
             </div>
         </div>
     );
