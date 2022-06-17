@@ -2,6 +2,7 @@
 @import "src/styles/sass/mixins";
 
 .button {
+  @include noSelect;
   background-color: $dark-1;
   padding: 10px;
   border-radius: 10px;
@@ -21,6 +22,10 @@
 
   &:hover .chevron {
     color: $inspect;
+  }
+
+  &:active {
+    background-color: rgba($dark-1, 0.5);
   }
 
   .name {
@@ -49,7 +54,7 @@
   border: 3px solid $dark-1;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-  transform: translateX(-20);
+  z-index: 10000;
 }
 
 .option {
@@ -90,4 +95,8 @@
 .selected {
   cursor: pointer;
   color: $light-1;
+}
+
+.inspect {
+  color: $inspect;
 }
