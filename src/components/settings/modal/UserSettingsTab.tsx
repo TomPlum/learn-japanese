@@ -1,8 +1,9 @@
 import SettingsTabTitle from "./SettingsTabTitle";
 import styles from "../../../styles/sass/components/settings/modal/UserSettingsTab.module.scss";
 import SettingsButton from "./SettingsButton";
-import { faBookOpen, faChartPie, faFireAlt, faMedal, faSkull, faUserFriends } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen, faCalendarCheck, faChartPie, faClock, faFireAlt, faMedal, faSkull, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import { faFirefoxBrowser } from "@fortawesome/free-brands-svg-icons";
+import SettingsDropdown from "./SettingsDropdown";
 
 const UserSettingsTab = () => {
     return (
@@ -18,7 +19,15 @@ const UserSettingsTab = () => {
                     Choose which statistic is displayed on the dashboards streak card. Defaults to the date you
                     created your account. You can change it to your current streak or choose a custom date.
                 </p>
-                <SettingsButton name="Start Date" icon={faFireAlt} />
+                <SettingsDropdown
+                    id="streak-card-preference-selector"
+                    options={[
+                        { name: "Start Date", icon: faCalendarCheck },
+                        { name: "Streak", icon: faFireAlt },
+                        { name: "Custom Date", icon: faClock }
+                    ]}
+                    onChange={() => {}}
+                />
             </div>
 
             <div className={styles.section}>

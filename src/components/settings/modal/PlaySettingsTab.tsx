@@ -12,7 +12,7 @@ const PlaySettingsTab = () => {
             />
 
             <div className={styles.section}>
-                <p className={styles.heading}>High-score Preference</p>
+                <p className={styles.heading}>High-Score Preference</p>
                 <p className={styles.text}>
                     Set the default behaviour for submitting your play sessions to the high-scores.
                 </p>

@@ -1,0 +1,93 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
+.button {
+  background-color: $dark-1;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease-in-out 0.2s;
+  margin: 0;
+  font-size: 1.1em;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba($dark-1, 0.8);
+  }
+
+  &:hover .chevron {
+    color: $inspect;
+  }
+
+  .name {
+    margin-right: 12px;
+  }
+
+  .icon {
+    margin-right: 10px;
+    margin-bottom: 3px;
+    font-size: 1.2em;
+  }
+
+  .chevron {
+    position: absolute;
+    right: 0;
+    margin: 12px;
+    transition: color ease-in-out 0.2s;
+  }
+}
+
+.menu {
+  animation: fade 0.05s ease-in forwards;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.1em;
+  background-color: $dark-2;
+  border: 3px solid $dark-1;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  transform: translateX(-20);
+}
+
+.option {
+  @include noSelect;
+  transition: all ease 0.25s;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 8px 12px;
+  color: $light-1;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+
+  &:hover {
+    background-color: $dark-1;
+    text-decoration: none;
+    color: $inspect;
+    opacity: 0.8;
+  }
+
+  &:nth-child(n+1) {
+    border-bottom: 3px solid $dark-1;
+  }
+
+  &:last-child {
+    border: none;
+  }
+
+  .icon {
+    font-size: 1em;
+    margin-right: 6px;
+    margin-bottom: 2px;
+  }
+}
+
+.selected {
+  cursor: pointer;
+  color: $light-1;
+}
