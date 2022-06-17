@@ -1,6 +1,8 @@
 @import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
 
 .button {
+  @include noSelect;
   background-color: $dark-1;
   padding: 10px;
   border-radius: 10px;

@@ -1,5 +1,5 @@
 import styles from "../../../styles/sass/components/settings/modal/InterfaceSettingsTab.module.scss";
-import { faFont, faGripVertical, faLanguage, faLightbulb, faSmile, faSortNumericUp } from "@fortawesome/free-solid-svg-icons";
+import { faFont, faGripVertical, faLanguage, faLightbulb, faMoon, faSmile, faSortNumericUp } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import DashboardLayoutEditor from "./DashboardLayoutEditor";
 import SettingsButton from "./SettingsButton";
@@ -13,6 +13,7 @@ const InterfaceSettingsTab = () => {
     const fontService = new FontService();
     const [editing, setEditing] = useState(false);
     const [fonts, setFonts] = useState<Font[]>([]);
+    const [darkMode, setDarkMode] = useState(true);
 
     useEffect(() => {
         fontService.getFonts().then(response => {
@@ -45,7 +46,11 @@ const InterfaceSettingsTab = () => {
                 <p className={styles.text}>
                     Switch between the dark and light variations of the user-interface theming.
                 </p>
-                <SettingsButton name="Toggle Light Mode" icon={faLightbulb} />
+                <SettingsButton
+                    onClick={() => setDarkMode(!darkMode)}
+                    icon={darkMode ? faLightbulb : faMoon}
+                    name={`Toggle ${darkMode ? "Light" : "Dark"} Mode`}
+                />
             </div>
 
             <div className={styles.section}>
