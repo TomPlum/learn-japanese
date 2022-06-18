@@ -12,6 +12,7 @@ import LearnSettingsTab from "./LearnSettingsTab";
 import PlaySettingsTab from "./PlaySettingsTab";
 import NotificationsSettingsTab from "./NotificationsSettingsTab";
 import UserSettingsTab from "./UserSettingsTab";
+import DashboardLayoutEditor from "./DashboardLayoutEditor";
 
 export enum SettingsType {
     GENERAL, LEARN, PLAY, INTERFACE, NOTIFICATION, USER
@@ -27,6 +28,7 @@ const SettingsModal = (props: SettingsModalProps) => {
     const { type, onClose } = props;
 
     const [selected, setSelected] = useState(type);
+    const [editingLayout, setEditingLayout] = useState(false);
 
     const { GENERAL, LEARN, PLAY, INTERFACE, NOTIFICATION, USER } = SettingsType;
 
@@ -35,6 +37,10 @@ const SettingsModal = (props: SettingsModalProps) => {
     }
 
     const getTabContents = () => {
+        if (editingLayout) {
+            return <DashboardLayoutEditor onClose={() => setEditingLayout(false)} />;
+        }
+
         switch (selected) {
             case SettingsType.GENERAL: {
                 return <GeneralSettingsTab />;
@@ -46,7 +52,7 @@ const SettingsModal = (props: SettingsModalProps) => {
                 return <PlaySettingsTab />;
             }
             case SettingsType.INTERFACE: {
-                return <InterfaceSettingsTab />;
+                return <InterfaceSettingsTab onEditDashboardLayout={() => setEditingLayout(true)} />;
             }
             case SettingsType.NOTIFICATION: {
                 return <NotificationsSettingsTab />;
@@ -71,7 +77,7 @@ const SettingsModal = (props: SettingsModalProps) => {
     return (
         <Modal {...modalProps}>
             <Modal.Body className={styles.modal}>
-                <div className={styles.nav}>
+                {!editingLayout && <div className={styles.nav}>
                     <SettingsTab
                         icon={faCog}
                         type={GENERAL}
@@ -121,7 +127,7 @@ const SettingsModal = (props: SettingsModalProps) => {
                         onClick={onClose}
                         className={styles.close}
                     />
-                </div>
+                </div>}
 
                 <Fade in appear>
                     <ScrollableContainer className={styles.body}>

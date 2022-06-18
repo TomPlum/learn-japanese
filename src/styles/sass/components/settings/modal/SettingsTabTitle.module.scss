@@ -1,6 +1,10 @@
 @import "src/styles/sass/colours";
 @import "src/styles/sass/components/settings";
 
+.container {
+  position: relative;
+}
+
 .title {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   font-size: 1.4em;
@@ -16,4 +20,20 @@
 
 .rule {
   margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 5px;
+  transition: all ease-in-out 0.2s;
+  color: $light-2;
+  font-size: 1.1em;
+
+  &:hover {
+    cursor: pointer;
+    color: $light-1;
+  }
 }

@@ -1,7 +1,6 @@
 import styles from "../../../styles/sass/components/settings/modal/InterfaceSettingsTab.module.scss";
 import { faFont, faGripVertical, faLanguage, faLightbulb, faMoon, faSmile, faSortNumericUp } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import DashboardLayoutEditor from "./DashboardLayoutEditor";
 import SettingsButton from "./SettingsButton";
 import SettingsTabTitle from "./SettingsTabTitle";
 import SettingsDropdown from "./SettingsDropdown";
@@ -9,11 +8,16 @@ import FontService from "../../../service/FontService";
 import { Font } from "../../ui/buttons/FontSelectorButton";
 import SettingsBooleanButton from "./SettingsBooleanButton";
 
-const InterfaceSettingsTab = () => {
+export interface InterfaceSettingsTabProps {
+    onEditDashboardLayout: () => void;
+}
+
+const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
+
+    const { onEditDashboardLayout } = props;
 
     const fontService = new FontService();
 
-    const [editing, setEditing] = useState(false);
     const [fonts, setFonts] = useState<Font[]>([]);
     const [darkMode, setDarkMode] = useState(true);
 
@@ -35,10 +39,6 @@ const InterfaceSettingsTab = () => {
 
     }
 
-    if (editing) {
-        return <DashboardLayoutEditor onClose={() => setEditing(false)} />;
-    }
-
     return (
         <div data-testid="interface-settings-tab">
             <SettingsTabTitle
@@ -53,9 +53,9 @@ const InterfaceSettingsTab = () => {
                    to different columns.
                </p>
                <SettingsButton
-                   name="Open Layout Editor"
                    icon={faGripVertical}
-                   onClick={() => setEditing(true)}
+                   name="Open Layout Editor"
+                   onClick={onEditDashboardLayout}
                />
            </div>
 

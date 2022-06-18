@@ -1,7 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../styles/sass/components/settings/modal/DashboardLayoutEditor.module.scss";
 import React from "react";
+import SettingsTabTitle from "./SettingsTabTitle";
 
 export interface DashboardLayoutEditorProps {
     onClose: () => void;
@@ -13,13 +12,10 @@ const DashboardLayoutEditor = (props: DashboardLayoutEditorProps) => {
 
     return (
         <div data-testid="dashboard-layout-editor">
-            <p>Dashboard Layout Editor</p>
-            <FontAwesomeIcon
-                fixedWidth
-                title="Close"
-                icon={faTimes}
-                onClick={onClose}
-                className={styles.close}
+            <SettingsTabTitle
+                title="Dashboard Layout Editor"
+                close={{ onClick: onClose, className: styles.close }}
+                description="Customise the layout of your home-page dashboard."
             />
         </div>
     );
