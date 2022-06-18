@@ -1,11 +1,15 @@
 import SettingsTabTitle from "./SettingsTabTitle";
 import styles from "../../../styles/sass/components/settings/modal/LearnSettingsTab.module.scss";
-import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faFont } from "@fortawesome/free-solid-svg-icons";
 import SettingsDropdown from "./SettingsDropdown";
 
 const LearnSettingsTab = () => {
 
     const handleCardQuantityChange = (cards: string) => {
+
+    }
+
+    const handleRomajiPreferenceChange = (preference: string) => {
 
     }
 
@@ -32,6 +36,24 @@ const LearnSettingsTab = () => {
                         { name: '30' },
                         { name: '40' },
                         { name: '50' }
+                    ]}
+                />
+            </div>
+
+            <div className={styles.section}>
+                <p className={styles.heading}>Rōmaji Settings</p>
+                <p className={styles.text}>
+                    Set the default behaviour for showing rōmaji variants of kana.  Rōmaji or ローマ字 (rōmaji) is the
+                    romanisation of the Japanese written language.
+                </p>
+                <SettingsDropdown
+                    buttonIcon={faFont}
+                    id="learn-settings-romaji-selector"
+                    onChange={handleRomajiPreferenceChange}
+                    options={[
+                        { name: 'Always Show' },
+                        { name: 'Ask Each Time' },
+                        { name: 'Always Hide' }
                     ]}
                 />
             </div>
