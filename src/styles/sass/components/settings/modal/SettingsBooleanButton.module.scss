@@ -1,3 +1,10 @@
 @import "src/styles/sass/components/settings";
+@import "src/styles/sass/colours";
 
+.truthy:hover {
+  color: #7fe14c;
+}
 
+.falsy:hover {
+  color: #fb3a3a;
+}

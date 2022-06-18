@@ -18,12 +18,18 @@ export interface SettingsBooleanButtonProps {
 const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
     const { state, truthy, falsy, onClick } = props;
 
+    const handleClick = () => {
+        onClick?.(!state)
+    }
+
     const name = state ? truthy.name : falsy.name;
     const icon = state ? truthy.icon : falsy.icon;
     const className = state ? truthy.className : falsy.className;
+    const colourClass = state ? styles.truthy : styles.falsy;
+    const classes = [styles.button, className, colourClass].join(" ");
 
     return (
-        <div className={[styles.button, className].join(" ")} onClick={() => onClick?.(!state)}>
+        <div className={classes} onClick={handleClick}>
             <FontAwesomeIcon icon={icon} className={styles.icon} />
             <span className={styles.name}>{name}</span>
         </div>

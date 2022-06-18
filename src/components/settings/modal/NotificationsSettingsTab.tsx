@@ -1,9 +1,14 @@
 import SettingsTabTitle from "./SettingsTabTitle";
 import styles from "../../../styles/sass/components/settings/modal/NotificationsSettingsTab.module.scss";
 import SettingsButton from "./SettingsButton";
-import { faCopy, faEraser, faFireAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faEraser, faFireAlt, faSnowflake } from "@fortawesome/free-solid-svg-icons";
+import SettingsBooleanButton from "./SettingsBooleanButton";
+import { useState } from "react";
 
 const NotificationsSettingsTab = () => {
+
+    const [streakNotifications, setStreakNotifications] = useState(false);
+
     return (
         <div data-testid="notification-settings-tab">
             <SettingsTabTitle
@@ -16,7 +21,12 @@ const NotificationsSettingsTab = () => {
                 <p className={styles.text}>
                     Toggle notifications for significant streak milestones.
                 </p>
-                <SettingsButton name="Enable" icon={faFireAlt} />
+                <SettingsBooleanButton
+                    state={streakNotifications}
+                    truthy={{ name: "Enable", icon: faFireAlt }}
+                    falsy={{ name: "Disable", icon: faSnowflake }}
+                    onClick={(state: boolean) => setStreakNotifications(state)}
+                />
             </div>
 
             <div className={styles.section}>
