@@ -1,11 +1,50 @@
 import SettingsTabTitle from "./SettingsTabTitle";
 import styles from "../../../styles/sass/components/settings/modal/UserSettingsTab.module.scss";
 import SettingsButton from "./SettingsButton";
-import { faBookOpen, faCalendarCheck, faChartPie, faClock, faFireAlt, faGlobeAmericas, faMedal, faSkull, faUserFriends, faUserSecret } from "@fortawesome/free-solid-svg-icons";
-import { faFirefoxBrowser } from "@fortawesome/free-brands-svg-icons";
+import { faBookOpen, faCalendarCheck, faChartPie, faClock, faFireAlt, faGlobe, faGlobeAmericas, faMedal, faSkull, faUserFriends, faUserSecret, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faChrome, faFirefoxBrowser, faSafari } from "@fortawesome/free-brands-svg-icons";
 import SettingsDropdown from "./SettingsDropdown";
+import { useState } from "react";
+import PasswordConfirmation from "../../user/profile/PasswordConfirmation";
+import PopOver from "../../ui/PopOver";
+import { isChrome, isFirefox, isSafari } from 'react-device-detect'
 
 const UserSettingsTab = () => {
+
+    const [confirmingPassword, setConfirmingPassword] = useState(false);
+
+    if (confirmingPassword) {
+
+        const deleteAccountPopover = <PopOver
+            title="Delete Account"
+            text="Delete your user account and all of your personal data. This is an irreversible operation.
+                  You'll need to provide your password for confirmation."
+        />
+
+        return (
+            <PasswordConfirmation
+                alertInfo={deleteAccountPopover}
+                onDismiss={() => setConfirmingPassword(false)}
+            />
+        );
+    }
+
+    const getBrowserIcon = (): IconDefinition => {
+        if (isFirefox) {
+            return faFirefoxBrowser;
+        }
+
+        if (isSafari) {
+            return faSafari;
+        }
+
+        if (isChrome) {
+            return faChrome;
+        }
+
+        return faGlobe;
+    }
+
     return (
         <div data-testid="user-settings-tab">
             <SettingsTabTitle
@@ -63,7 +102,7 @@ const UserSettingsTab = () => {
                         Deletes all locally stored data from your browser except for your user session.
                         Does not permanently delete any saved data, but may increase loading times temporarily.
                     </p>
-                    <SettingsButton name="Clear Storage" icon={faFirefoxBrowser} confirm="warn" />
+                    <SettingsButton name="Clear Storage" icon={getBrowserIcon()} confirm="warn" />
                 </div>
 
                 <div className={styles.section}>
@@ -96,7 +135,11 @@ const UserSettingsTab = () => {
                         Delete your user account and all of your personal data. This is an irreversible operation.
                         You'll need to provide your password for confirmation.
                     </p>
-                    <SettingsButton name="Delete Account" icon={faSkull} confirm="danger" />
+                    <SettingsButton
+                        name="Delete Account"
+                        icon={faSkull} confirm="danger"
+                        onClick={() => setConfirmingPassword(true)}
+                    />
                 </div>
             </div>
         </div>
