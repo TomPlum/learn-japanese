@@ -1,9 +1,14 @@
 import SettingsTabTitle from "./SettingsTabTitle";
-import SettingsButton from "./SettingsButton";
-import { faTrophy } from "@fortawesome/free-solid-svg-icons";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../styles/sass/components/settings/modal/PlaySettingsTab.module.scss";
+import SettingsDropdown from "./SettingsDropdown";
 
 const PlaySettingsTab = () => {
+
+    const handleHighScorePreferenceChange = (preference: string) => {
+
+    }
+
     return (
         <div data-testid="play-settings-tab">
             <SettingsTabTitle
@@ -16,7 +21,16 @@ const PlaySettingsTab = () => {
                 <p className={styles.text}>
                     Set the default behaviour for submitting your play sessions to the high-scores.
                 </p>
-                <SettingsButton name="Ask Each Time" icon={faTrophy} />
+                <SettingsDropdown
+                    buttonIcon={faCrown}
+                    id="play-settings-high-score-selector"
+                    onChange={handleHighScorePreferenceChange}
+                    options={[
+                        { name: "Ask Each Time" },
+                        { name: "Always Submit" },
+                        { name: "Never Submit"}
+                    ]}
+                />
             </div>
         </div>
     );
