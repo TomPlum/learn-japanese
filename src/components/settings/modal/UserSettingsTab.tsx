@@ -53,23 +53,6 @@ const UserSettingsTab = () => {
             />
 
             <div className={styles.section}>
-                <p className={styles.heading}>Streak Card Preference</p>
-                <p className={styles.text}>
-                    Choose which statistic is displayed on the dashboards streak card. Defaults to the date you
-                    created your account. You can change it to your current streak or choose a custom date.
-                </p>
-                <SettingsDropdown
-                    id="streak-card-preference-selector"
-                    options={[
-                        { name: "Start Date", icon: faCalendarCheck },
-                        { name: "Streak", icon: faFireAlt },
-                        { name: "Custom Date", icon: faClock }
-                    ]}
-                    onChange={() => {}}
-                />
-            </div>
-
-            <div className={styles.section}>
                 <p className={styles.heading}>Profile Visibility</p>
                 <p className={styles.text}>
                     Change the visibility of your profile to other users. By default your username will be visible
@@ -82,6 +65,23 @@ const UserSettingsTab = () => {
                         { name: "Friends Only", icon: faUserFriends },
                         { name: "Private", icon: faUserSecret },
                         { name: "Public", icon: faGlobeAmericas }
+                    ]}
+                    onChange={() => {}}
+                />
+            </div>
+
+            <div className={styles.section}>
+                <p className={styles.heading}>Streak Card Preference</p>
+                <p className={styles.text}>
+                    Choose which statistic is displayed on the dashboards streak card. Defaults to the date you
+                    created your account. You can change it to your current streak or choose a custom date.
+                </p>
+                <SettingsDropdown
+                    id="streak-card-preference-selector"
+                    options={[
+                        { name: "Start Date", icon: faCalendarCheck },
+                        { name: "Streak", icon: faFireAlt },
+                        { name: "Custom Date", icon: faClock }
                     ]}
                     onChange={() => {}}
                 />
