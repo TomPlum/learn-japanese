@@ -12,11 +12,12 @@ export interface SettingsBooleanButtonProps {
     state: boolean;
     truthy: BooleanStateProps;
     falsy: BooleanStateProps;
+    enableHoverColours?: boolean;
     onClick?: (state: boolean) => void;
 }
 
 const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
-    const { state, truthy, falsy, onClick } = props;
+    const { state, truthy, falsy, enableHoverColours, onClick } = props;
 
     const handleClick = () => {
         onClick?.(!state)
@@ -25,11 +26,12 @@ const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
     const name = state ? truthy.name : falsy.name;
     const icon = state ? truthy.icon : falsy.icon;
     const className = state ? truthy.className : falsy.className;
-    const colourClass = state ? styles.truthy : styles.falsy;
-    const classes = [styles.button, className, colourClass].join(" ");
+    const colourClass = state ? styles.falsy : styles.truthy;
+    const classes = [styles.button, className];
+    if (enableHoverColours) classes.push(colourClass)
 
     return (
-        <div className={classes} onClick={handleClick}>
+        <div className={classes.join(" ")} onClick={handleClick}>
             <FontAwesomeIcon icon={icon} className={styles.icon} />
             <span className={styles.name}>{name}</span>
         </div>

@@ -8,6 +8,7 @@ import { useState } from "react";
 const NotificationsSettingsTab = () => {
 
     const [streakNotifications, setStreakNotifications] = useState(false);
+    const [mistakesNotifications, setMistakesNotifications] = useState(false);
 
     return (
         <div data-testid="notification-settings-tab">
@@ -22,9 +23,10 @@ const NotificationsSettingsTab = () => {
                     Toggle notifications for significant streak milestones.
                 </p>
                 <SettingsBooleanButton
+                    enableHoverColours
                     state={streakNotifications}
-                    truthy={{ name: "Enable", icon: faFireAlt }}
-                    falsy={{ name: "Disable", icon: faSnowflake }}
+                    falsy={{ name: "Enable", icon: faFireAlt }}
+                    truthy={{ name: "Disable", icon: faSnowflake }}
                     onClick={(state: boolean) => setStreakNotifications(state)}
                 />
             </div>
@@ -34,7 +36,13 @@ const NotificationsSettingsTab = () => {
                 <p className={styles.text}>
                     Toggle reminders for outstanding mistakes that need reviewing.
                 </p>
-                <SettingsButton name="Enable" icon={faEraser} />
+                <SettingsBooleanButton
+                    enableHoverColours
+                    state={mistakesNotifications}
+                    falsy={{ name: "Enable", icon: faEraser }}
+                    truthy={{ name: "Disable", icon: faEraser }}
+                    onClick={(state: boolean) => setMistakesNotifications(state)}
+                />
             </div>
         </div>
     );
