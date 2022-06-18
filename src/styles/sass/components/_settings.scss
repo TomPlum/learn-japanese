@@ -30,13 +30,15 @@
   @include noSelect;
   background-color: $dark-1;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 12px;
   max-width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all ease-in-out 0.2s;
   margin: 0;
+  font-size: 1.1em;
+  border: 3px solid $dark-1;
 
   &:hover {
     cursor: pointer;
@@ -46,6 +48,6 @@
   .icon {
     margin-right: 10px;
     margin-bottom: 3px;
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
 }

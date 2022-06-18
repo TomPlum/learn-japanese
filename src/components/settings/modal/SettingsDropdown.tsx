@@ -31,12 +31,19 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
         setShow(false);
     }
 
+    const handleClick = () => {
+        setShow(true);
+    }
+
     const chevronClasses = [styles.chevron];
     if (show) chevronClasses.push(styles.inspect);
 
+    const buttonClasses = [styles.button];
+    if (show) buttonClasses.push(styles.active);
+
     return (
         <>
-            <div ref={target} className={styles.button} onClick={() => setShow(true)} title="Click to see options">
+            <div ref={target} className={buttonClasses.join(" ")} onClick={handleClick} title="Click to see options">
                 {loading && <FontAwesomeIcon icon={faSpinner} spin={true} />}
                 {!loading && !!selected && (
                     <>

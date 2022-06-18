@@ -24,15 +24,22 @@
   }
 }
 
+.active {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 .menu {
   animation: fade 0.05s ease-in forwards;
   font-family: "Ciutadella Rounded Medium", sans-serif;
   font-size: 1.1em;
   background-color: $dark-2;
   border: 3px solid $dark-1;
-  border-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
   z-index: 10000;
+  width: 200px;
 }
 
 .option {
