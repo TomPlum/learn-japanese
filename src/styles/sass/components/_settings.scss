@@ -10,6 +10,10 @@
   font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
 }
 
+.section {
+  @include noSelect;
+}
+
 .section:not(:last-child) {
   margin-bottom: 20px;
 }

@@ -63,7 +63,7 @@ const UserSettingsTab = () => {
                         Deletes all locally stored data from your browser except for your user session.
                         Does not permanently delete any saved data, but may increase loading times temporarily.
                     </p>
-                    <SettingsButton name="Clear Storage" icon={faFirefoxBrowser} />
+                    <SettingsButton name="Clear Storage" icon={faFirefoxBrowser} confirm="warn" />
                 </div>
 
                 <div className={styles.section}>
@@ -71,7 +71,7 @@ const UserSettingsTab = () => {
                     <p className={styles.text}>
                         Resets all your saved scores across the app. Any ranks you currently hold on the high-scores will be lost.
                     </p>
-                    <SettingsButton name="Reset Scores" icon={faMedal} />
+                    <SettingsButton name="Reset Scores" icon={faMedal} confirm="warn" />
                 </div>
 
                 <div className={styles.section}>
@@ -79,7 +79,7 @@ const UserSettingsTab = () => {
                     <p className={styles.text}>
                         Resets all your tracked statistics such as games played or won. This does not include flash card data.
                     </p>
-                    <SettingsButton name="Reset Stats" icon={faChartPie} />
+                    <SettingsButton name="Reset Stats" icon={faChartPie} confirm="warn" />
                 </div>
 
                 <div className={styles.section}>
@@ -87,7 +87,7 @@ const UserSettingsTab = () => {
                     <p className={styles.text}>
                         Resets all your flash card data. Does not affect stats.
                     </p>
-                    <SettingsButton name="Reset Cards" icon={faBookOpen} />
+                    <SettingsButton name="Reset Cards" icon={faBookOpen} confirm="warn" />
                 </div>
 
                 <div className={styles.section}>
@@ -96,7 +96,7 @@ const UserSettingsTab = () => {
                         Delete your user account and all of your personal data. This is an irreversible operation.
                         You'll need to provide your password for confirmation.
                     </p>
-                    <SettingsButton name="Delete Account" icon={faSkull} />
+                    <SettingsButton name="Delete Account" icon={faSkull} confirm="danger" />
                 </div>
             </div>
         </div>

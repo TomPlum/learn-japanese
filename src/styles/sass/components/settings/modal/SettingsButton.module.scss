@@ -1,1 +1,10 @@
 @import "src/styles/sass/components/settings";
+@import "src/styles/sass/colours";
+
+.warn {
+  color: $bootstrap-yellow;
+}
+
+.danger {
+  color: $bootstrap-red;
+}
