@@ -3,7 +3,7 @@
 
 .title {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
-  font-size: 1.3em;
+  font-size: 1.4em;
   color: $inspect;
   margin-bottom: 0;
 }
@@ -11,4 +11,9 @@
 .description {
   font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
   color: $light-1;
+  margin-bottom: 5px
+}
+
+.rule {
+  margin-top: 5px;
 }

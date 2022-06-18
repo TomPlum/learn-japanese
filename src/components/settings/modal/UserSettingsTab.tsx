@@ -88,13 +88,11 @@ const UserSettingsTab = () => {
             </div>
 
             <div className={styles.dangerZone}>
-                <div className={styles.section}>
-                    <p className={styles.title}>Danger Zone</p>
-                    <p className={styles.text}>
-                        Destructive settings that you might want to think twice about!
-                    </p>
-                    <hr className={styles.rule} />
-                </div>
+                <SettingsTabTitle
+                    title="Danger Zone"
+                    className={styles.danger}
+                    description="Destructive settings that you might want to think twice about!"
+                />
 
                 <div className={styles.section}>
                     <p className={styles.heading}>Clear Local Storage</p>

@@ -1,8 +1,8 @@
 @import "src/styles/sass/components/settings";
 @import "src/styles/sass/colours";
 
-.dangerZone .title {
-  color: $bootstrap-red;
-  font-size: 1.3em;
-  margin-bottom: 0;
+.danger {
+    p:nth-child(1) {
+        color: $bootstrap-red;
+    }
 }
