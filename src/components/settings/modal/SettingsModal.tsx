@@ -12,7 +12,7 @@ import LearnSettingsTab from "./LearnSettingsTab";
 import PlaySettingsTab from "./PlaySettingsTab";
 import NotificationsSettingsTab from "./NotificationsSettingsTab";
 import UserSettingsTab from "./UserSettingsTab";
-import DashboardLayoutEditor from "./DashboardLayoutEditor";
+import DashboardLayoutEditor from "../../layout/editor/DashboardLayoutEditor";
 
 export enum SettingsType {
     GENERAL, LEARN, PLAY, INTERFACE, NOTIFICATION, USER

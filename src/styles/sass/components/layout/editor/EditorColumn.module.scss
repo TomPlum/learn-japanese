@@ -1,0 +1,18 @@
+@import "src/styles/sass/colours";
+
+.container {
+  width: 33%;
+  height: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: $dark-1;
+  transition: all ease-in-out 0.2s;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.dropping {
+  background-color: rgba($dark-1, 0.8);
+}
