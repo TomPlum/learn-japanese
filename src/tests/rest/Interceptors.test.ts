@@ -1,10 +1,11 @@
-import { refreshTokenInterceptor } from "../../rest/Interceptors";
+import { injectStore, refreshTokenInterceptor } from "../../rest/Interceptors";
 import { AxiosError } from "axios";
 import RestClient from "../../rest/RestClient";
 import { store } from "../../store";
 import { setAccessToken, setRefreshToken, setUser } from "../../slices/UserSlice";
 import { Environment } from "../../utility/Environment";
 import api from "../../rest/API";
+import { testUser } from "../../setupTests";
 
 jest.mock("../../rest/API");
 const mockApi = api as jest.MockedFunction<typeof api>;
@@ -14,6 +15,7 @@ const mockEnvironment = jest.fn();
 beforeEach(() => {
     RestClient.post = mockPost;
     Environment.variable = mockEnvironment;
+    injectStore(store);
     store.dispatch(setUser({
         username: "TomPlum42",
         nickname: "Tom",
@@ -42,9 +44,9 @@ beforeEach(() => {
 
 describe("Axios Interceptors", () => {
     describe("Refresh Token Interceptor", () => {
-        it("Should return an error if the failed request is the refresh-token endpoint", () => {
-            mockEnvironment.mockReturnValueOnce("https://japanese.tomplumpton.me"); // Mock Host URI
-            mockEnvironment.mockReturnValueOnce("/learn-japanese"); // Mock Context Root
+        it("Should clear the store if the failed request is the refresh-token endpoint", () => {
+            mockEnvironment.mockReturnValueOnce("https://japanese.tomplumpton.me/learn-japanese"); // Mock Host URI
+            store.dispatch(setUser(testUser)); // Assume session was active
             const error: AxiosError = {
                 config: {
                     url: "https://japanese.tomplumpton.me/learn-japanese/user/refresh-token",
@@ -62,7 +64,7 @@ describe("Axios Interceptors", () => {
                 message: "Something went wrong"
             };
             return refreshTokenInterceptor(error).catch(response => {
-                expect(response).toBe("Failed to refresh session. Please sign-in again.");
+                expect(store.getState().user.user).toBeUndefined();
             });
         });
 
