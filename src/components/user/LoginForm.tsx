@@ -8,6 +8,7 @@ import { setUser } from "../../slices/UserSlice";
 import auth from "../../service/AuthenticationService";
 
 export interface LoginFormProps {
+    info?: string;
     username?: string;
     onSuccess: () => void;
 }
@@ -106,8 +107,19 @@ const LoginForm = (props: LoginFormProps) => {
 
     return (
         <Modal.Body className={styles.body} data-testid="login-form">
-            {!!error && <Alert variant="danger">{error}</Alert>}
-            {props.username && <Alert variant="success">Registration successful. You can log-in below.</Alert>}
+            {!!error && (
+                <Alert variant="danger">{error}</Alert>
+            )}
+
+            {props.username && !props.info && (
+                <Alert variant="success">
+                    Registration successful. You can log-in below.
+                </Alert>
+            )}
+
+            {props.info && (
+                <Alert variant="warning">{props.info}</Alert>
+            )}
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Username</Form.Label>

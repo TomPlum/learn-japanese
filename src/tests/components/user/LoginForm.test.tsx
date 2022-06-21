@@ -8,6 +8,7 @@ jest.mock("../../../service/AuthenticationService");
 const onSuccessHandler = jest.fn();
 const loginService = auth.login as jest.MockedFunction<() => Promise<LoginResponse>>;
 let registeredUsername: string | undefined = undefined;
+let infoMessage: string | undefined = undefined;
 
 const validLoginResponse = {
     username: "TomPlum42",
@@ -33,7 +34,7 @@ const validLoginResponse = {
 };
 
 const setup = () => {
-    const component = renderReduxConsumer(<LoginForm onSuccess={onSuccessHandler} username={registeredUsername} />);
+    const component = renderReduxConsumer(<LoginForm onSuccess={onSuccessHandler} username={registeredUsername} info={infoMessage} />);
 
     return {
         username: component.getByPlaceholderText('Username'),
@@ -220,4 +221,17 @@ test('When the username prop is passed then it should focus the password field',
     registeredUsername = "TomPlum42";
     const { password } = setup();
     expect(password).toHaveFocus();
+});
+
+test('When the info prop is passed then it should render the info alert', () => {
+    infoMessage = "Your session has expired. Please log-in again.";
+    setup();
+    expect(screen.getByText("Your session has expired. Please log-in again.")).toBeInTheDocument();
+});
+
+test('When the info prop is passed then it should not render the success alert', () => {
+    registeredUsername = "TomPlum42";
+    infoMessage = "Your session has expired. Please log-in again.";
+    setup();
+    expect(screen.queryByText("Registration successful. You can log-in below.")).not.toBeInTheDocument();
 });

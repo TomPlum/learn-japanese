@@ -18,6 +18,7 @@ const LoginPage = () => {
                 <LoginForm
                     username={params.get("username") ?? ""}
                     onSuccess={() => history.push("/home")}
+                    info={params.get("session-expired") ? "Your session has expired. Please log-in again." : undefined}
                 />
             </div>
         </div>

@@ -41,8 +41,9 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
 
     const refreshEndpoint = `${Environment.variable("API_HOST_URI")}/user/refresh-token`;
     if (config.url === refreshEndpoint && error.response && error.response.status !== 200) {
+        const username = store.getState().user.username;
         store.dispatch(clearUser());
-        window.location.href = "/login?session-expired=true";
+        window.location.href = `/login?session-expired=true&username=${username}`;
     }
 
     if (config.url !== "/user/login" && error.response) {

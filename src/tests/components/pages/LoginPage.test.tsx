@@ -6,29 +6,7 @@ import LoginPage from "../../../components/pages/LoginPage";
 import { Router } from "react-router-dom";
 import { fireEvent, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import auth from "../../../service/AuthenticationService";
-
-const user: User = {
-    username: "TomPlum42",
-    nickname: "Tom",
-    email: "tom@hotmail.com",
-    creationDate: "2021-08-09T00:00",
-    enabled: true,
-    credentialsExpired: false,
-    locked: false,
-    expired: false,
-    roles: ["user"],
-    token: "TOKEN",
-    refreshToken: "REFRSEH_TOKEN",
-    preferences: {
-        defaultFont: "Gothic",
-        theme: "Dark Mode",
-        language: "English",
-        highScores: "Ask Each Time",
-        defaultMode: "Play",
-        cardsPerDay: 10,
-        confidenceMenuStyle: "Numbers 1 - 6"
-    }
-};
+import { testUser } from "../../../setupTests";
 
 const validLoginResponse = {
     username: "TomPlum42",
@@ -62,7 +40,7 @@ beforeEach(() => {
 });
 
 test('Should redirect to the home page if the user is already logged in', () => {
-    store.dispatch(setUser(user));
+    store.dispatch(setUser(testUser));
     renderReduxConsumer(<Router history={history}><LoginPage /></Router>);
     expect(history.location.pathname).toBe('/home');
 });
@@ -85,13 +63,20 @@ test('Should redirect to the home page after successfully logging in', async () 
 
     // Should redirect to the home page on submit
     fireEvent.click(component.getByText('Login'));
-    await waitForElementToBeRemoved(await component.findByTestId('login-loading'));
+    //await waitForElementToBeRemoved(await component.findByTestId('login-loading'));
     await waitFor(() => expect(history.location.pathname).toBe('/home'));
 });
 
 test('Should pass the username from the location query parameter into the login form', () => {
     store.dispatch(clearUser());
-    history.push("/home?username=TestingUser");
+    history.push("/login?username=TestingUser");
     const component = renderReduxConsumer(<Router history={history}><LoginPage /></Router>);
     expect(component.getByPlaceholderText('Username')).toHaveValue("TestingUser");
+});
+
+test('Should render the info message about session expiry when the query param is passed as true', () => {
+    store.dispatch(clearUser());
+    history.push("/login?session-expired=true");
+    const component = renderReduxConsumer(<Router history={history}><LoginPage /></Router>);
+    expect(component.getByText('Your session has expired. Please log-in again.')).toBeInTheDocument();
 });
