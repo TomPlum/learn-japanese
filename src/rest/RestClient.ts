@@ -3,6 +3,7 @@ import { Environment } from "../utility/Environment";
 import api from "./API";
 import { store } from "../store";
 import { refreshTokenInterceptor } from "./Interceptors";
+import PatchRequest from "./request/patch/PatchRequest";
 
 api.interceptors.response.use((response: AxiosResponse) => {
     return response;
@@ -35,11 +36,15 @@ class RestClient {
         return await RestClient.makeRestRequest<T>("PATCH", endpoint, body);
     }
 
+    static async patchJSON<T>(endpoint: string, request: PatchRequest): Promise<APIResponse<T>> {
+        return await RestClient.makeRestRequest<T>("PATCH", endpoint, request.toJSON(), "application/json-patch+json");
+    }
+
     static async send<T>(method: Method, endpoint: string, body?: {}): Promise<APIResponse<T>> {
         return await RestClient.makeRestRequest<T>(method, endpoint, body);
     }
 
-    private static async makeRestRequest<T>(method: Method, endpoint: string, body?: object): Promise<APIResponse<T>> {
+    private static async makeRestRequest<T>(method: Method, endpoint: string, body?: object, contentType?: string): Promise<APIResponse<T>> {
         const host = Environment.variable("API_HOST_URI");
 
         if (!host) {
@@ -56,7 +61,7 @@ class RestClient {
         return await api(URI, {
             method: method,
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": contentType ?? "application/json",
                 "Authorization": `Bearer ${store.getState().user.user?.token}`
             },
             data: body ? JSON.stringify(body) : undefined

@@ -3,6 +3,8 @@ import { Environment } from "../../utility/Environment";
 import { store } from "../../store";
 import { setUser } from "../../slices/UserSlice";
 import api from "../../rest/API";
+import PatchRequest from "../../rest/request/patch/PatchRequest";
+import PatchReplaceOperation from "../../rest/request/patch/PatchReplaceOperation";
 
 jest.mock("../../rest/API");
 const mockApi = api as jest.MockedFunction<typeof api>;
@@ -272,6 +274,41 @@ describe("Rest Client", () => {
         it("Should throw an error if the host is undefined", async () => {
             environment.mockReturnValueOnce(undefined);
             await expect(() => RestClient.patch("", {})).rejects.toThrow("Host URI is not defined!");
+        });
+    });
+
+    describe("PATCH JSON", () => {
+        it("Should call axios with the correct URI and configuration", () => {
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 201,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
+
+            const request = new PatchRequest([new PatchReplaceOperation("/theme", "Dark")]);
+            return RestClient.patchJSON<undefined>("/user/update-preferences", request).then(() => {
+                expect(mockApi).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/user/update-preferences",
+                    {
+                        method: "PATCH",
+                        data: "[{\"op\":\"replace\",\"path\":\"/theme\",\"value\":\"Dark\"}]",
+                        headers: { "Content-Type": "application/json-patch+json", "Authorization": "Bearer TOKEN" }
+                    }
+                );
+            });
+        });
+
+        it("Should throw an error if the endpoint is undefined", async () => {
+            const request = new PatchRequest([new PatchReplaceOperation("/theme", "Dark")]);
+            await expect(() => RestClient.patchJSON("", request)).rejects.toThrow("Endpoint is not defined!");
+        });
+
+        it("Should throw an error if the host is undefined", async () => {
+            environment.mockReturnValueOnce(undefined);
+            const request = new PatchRequest([new PatchReplaceOperation("/theme", "Dark")]);
+            await expect(() => RestClient.patchJSON("", request)).rejects.toThrow("Host URI is not defined!");
         });
     });
 
