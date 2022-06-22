@@ -108,7 +108,8 @@ const Preferences = (props: PreferencesProps) => {
             defaultFont: font
         };
 
-        userService.updatePreferences(updatedPreferences).then(response => {
+        // TODO: This whole component just needs removing
+        userService.updatePreferences([]).then(response => {
             if (response.success) {
                 userDispatcher(setPreferences(updatedPreferences));
             } else {

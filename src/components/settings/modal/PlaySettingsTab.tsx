@@ -2,13 +2,9 @@ import SettingsTabTitle from "./SettingsTabTitle";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../styles/sass/components/settings/modal/PlaySettingsTab.module.scss";
 import SettingsDropdown from "./SettingsDropdown";
+import { Preference } from "../../../domain/user/Preference";
 
 const PlaySettingsTab = () => {
-
-    const handleHighScorePreferenceChange = (preference: string) => {
-
-    }
-
     return (
         <div data-testid="play-settings-tab">
             <SettingsTabTitle
@@ -24,7 +20,7 @@ const PlaySettingsTab = () => {
                 <SettingsDropdown
                     buttonIcon={faCrown}
                     id="play-settings-high-score-selector"
-                    onChange={handleHighScorePreferenceChange}
+                    preference={Preference.HIGH_SCORES_BEHAVIOUR}
                     options={[
                         { name: "Ask Each Time" },
                         { name: "Always Submit" },

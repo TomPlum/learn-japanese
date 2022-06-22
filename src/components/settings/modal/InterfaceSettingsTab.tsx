@@ -7,6 +7,7 @@ import SettingsDropdown from "./SettingsDropdown";
 import FontService from "../../../service/FontService";
 import { Font } from "../../ui/buttons/FontSelectorButton";
 import SettingsBooleanButton from "./SettingsBooleanButton";
+import { Preference } from "../../../domain/user/Preference";
 
 export interface InterfaceSettingsTabProps {
     onEditDashboardLayout: () => void;
@@ -28,15 +29,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
     }, []);
 
     const handleFontChange = (font: string) => {
-
-    }
-
-    const handleLanguageChange = (language: string) => {
-
-    }
-
-    const handleConfidenceMenuStyleChange = (style: string) => {
-
+        // TODO: Set in Redux state here
     }
 
     return (
@@ -80,6 +73,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                 <SettingsDropdown
                     buttonIcon={faFont}
                     onChange={handleFontChange}
+                    preference={Preference.DEFAULT_KANJI_FONT}
                     loading={fonts.length === 0}
                     id="interface-settings-font-selector"
                     key={fonts.map(font => font.name).join("-")}
@@ -99,7 +93,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                 </p>
                 <SettingsDropdown
                     buttonIcon={faLanguage}
-                    onChange={handleLanguageChange}
+                    preference={Preference.LANGUAGE}
                     id="interface-settings-language-selector"
                     options={[{ name: "English" }, { name: "日本語" }]}
                 />
@@ -111,7 +105,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                     Change the format of the confidence rating widget used during flash card learning sessions.
                 </p>
                 <SettingsDropdown
-                    onChange={handleConfidenceMenuStyleChange}
+                    preference={Preference.CONFIDENCE_MENU_STYLE}
                     id="interface-settings-confidence-menu-selector"
                     options={[
                         { name: "Emoji Style", icon: faSmile },

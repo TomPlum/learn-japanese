@@ -1,7 +1,6 @@
 import SettingsTabTitle from "./SettingsTabTitle";
 import styles from "../../../styles/sass/components/settings/modal/NotificationsSettingsTab.module.scss";
-import SettingsButton from "./SettingsButton";
-import { faCopy, faEraser, faFireAlt, faSnowflake } from "@fortawesome/free-solid-svg-icons";
+import { faEraser, faFireAlt, faSnowflake } from "@fortawesome/free-solid-svg-icons";
 import SettingsBooleanButton from "./SettingsBooleanButton";
 import { useState } from "react";
 

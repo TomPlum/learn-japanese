@@ -16,7 +16,7 @@
     margin-right: 12px;
   }
 
-  .chevron {
+  .chevron, .updating {
     position: absolute;
     right: 0;
     margin: 12px;
@@ -27,6 +27,15 @@
 .active {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: default !important;
+
+  &:hover {
+    background-color: $dark-1;
+  }
 }
 
 .menu {

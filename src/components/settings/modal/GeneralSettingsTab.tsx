@@ -2,12 +2,9 @@ import SettingsTabTitle from "./SettingsTabTitle";
 import styles from "../../../styles/sass/components/settings/modal/InterfaceSettingsTab.module.scss";
 import SettingsDropdown from "./SettingsDropdown";
 import { faRss } from "@fortawesome/free-solid-svg-icons";
+import { Preference } from "../../../domain/user/Preference";
 
 const GeneralSettingsTab = () => {
-    const handleActivityFeedChange = (quantity: string) => {
-
-    }
-
     return (
         <div data-testid="general-settings-tab">
             <SettingsTabTitle
@@ -22,8 +19,8 @@ const GeneralSettingsTab = () => {
                 </p>
                 <SettingsDropdown
                     buttonIcon={faRss}
-                    onChange={handleActivityFeedChange}
                     id="general-settings-activity-selector"
+                    preference={Preference.ACTIVITY_FEED_QUANTITY}
                     options={[
                         { name: '3' },
                         { name: '5' },

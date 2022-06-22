@@ -2,6 +2,9 @@ import RestClient, { APIResponse } from "../rest/RestClient";
 import UpdateResponse from "../rest/response/UpdateResponse";
 import DataResponse from "../rest/response/DataResponse";
 import { User, UserPreferences } from "../slices/UserSlice";
+import PatchRequest from "../rest/request/patch/PatchRequest";
+import PatchReplaceOperation from "../rest/request/patch/PatchReplaceOperation";
+import { Preference } from "../domain/user/Preference";
 
 export interface UserPreferencesResponse {
     defaultFont: string;
@@ -16,6 +19,11 @@ export interface UserPreferencesResponse {
 export interface UserExistsResponse {
     exists: boolean;
     error?: string;
+}
+
+export interface UserPreferenceUpdate {
+    preference: Preference;
+    value: string;
 }
 
 export default class UserService {
@@ -81,11 +89,15 @@ export default class UserService {
 
     /**
      * Updates the application preferences of the current user in context.
-     * @param preferences The updated preferences selection.
+     * @param updates The updated preferences' selection.
      * @return response true if successful, else false with the reason.
      */
-    public async updatePreferences(preferences: UserPreferences): Promise<UpdateResponse> {
-        return RestClient.put("/user/update-preferences", preferences).then(() => {
+    public async updatePreferences(updates: UserPreferenceUpdate[]): Promise<UpdateResponse> {
+        const request = new PatchRequest(updates.map((update: UserPreferenceUpdate) => {
+            return new PatchReplaceOperation(update.preference, update.value)
+        }));
+
+        return RestClient.patchJSON("/user/update-preferences", request).then(() => {
             return { success: true };
         }).catch((response: APIResponse<UpdateResponse>) => {
             return { success: false, error: response.error };

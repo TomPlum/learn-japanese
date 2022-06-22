@@ -11,7 +11,7 @@ export default class PatchRequest {
         return this._operations.map((operation: PatchOperation) => {
             return {
                 "op": operation.type,
-                "path": operation.path,
+                "path": `/${operation.path}`,
                 "value": operation.value
             }
         });

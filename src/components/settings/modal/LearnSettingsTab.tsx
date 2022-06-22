@@ -2,16 +2,9 @@ import SettingsTabTitle from "./SettingsTabTitle";
 import styles from "../../../styles/sass/components/settings/modal/LearnSettingsTab.module.scss";
 import { faCopy, faFont } from "@fortawesome/free-solid-svg-icons";
 import SettingsDropdown from "./SettingsDropdown";
+import { Preference } from "../../../domain/user/Preference";
 
 const LearnSettingsTab = () => {
-
-    const handleCardQuantityChange = (cards: string) => {
-
-    }
-
-    const handleRomajiPreferenceChange = (preference: string) => {
-
-    }
 
     return (
         <div data-testid="learn-settings-tab">
@@ -29,7 +22,7 @@ const LearnSettingsTab = () => {
                 <SettingsDropdown
                     buttonIcon={faCopy}
                     id="learn-settings-cards-selector"
-                    onChange={handleCardQuantityChange}
+                    preference={Preference.FLASH_CARDS_QUANTITY}
                     options={[
                         { name: '10' },
                         { name: '20' },
@@ -49,7 +42,7 @@ const LearnSettingsTab = () => {
                 <SettingsDropdown
                     buttonIcon={faFont}
                     id="learn-settings-romaji-selector"
-                    onChange={handleRomajiPreferenceChange}
+                    preference={Preference.ROMAJI_VISIBILITY}
                     options={[
                         { name: 'Always Show' },
                         { name: 'Ask Each Time' },

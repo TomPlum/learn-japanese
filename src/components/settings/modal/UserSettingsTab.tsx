@@ -8,8 +8,12 @@ import { useState } from "react";
 import PasswordConfirmation from "../../user/profile/PasswordConfirmation";
 import PopOver from "../../ui/PopOver";
 import { isChrome, isFirefox, isSafari } from 'react-device-detect'
+import UserService from "../../../service/UserService";
+import { Preference } from "../../../domain/user/Preference";
 
 const UserSettingsTab = () => {
+
+    const userService = new UserService();
 
     const [confirmingPassword, setConfirmingPassword] = useState(false);
 
@@ -61,12 +65,12 @@ const UserSettingsTab = () => {
                 </p>
                 <SettingsDropdown
                     id="profile-visibility-selector"
+                    preference={Preference.PROFILE_VISIBILITY}
                     options={[
                         { name: "Friends Only", icon: faUserFriends },
                         { name: "Private", icon: faUserSecret },
                         { name: "Public", icon: faGlobeAmericas }
                     ]}
-                    onChange={() => {}}
                 />
             </div>
 
@@ -78,12 +82,12 @@ const UserSettingsTab = () => {
                 </p>
                 <SettingsDropdown
                     id="streak-card-preference-selector"
+                    preference={Preference.STREAK_CARD_VIEW}
                     options={[
                         { name: "Start Date", icon: faCalendarCheck },
                         { name: "Streak", icon: faFireAlt },
                         { name: "Custom Date", icon: faClock }
                     ]}
-                    onChange={() => {}}
                 />
             </div>
 
