@@ -18,9 +18,11 @@ import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/Ti
 import PresetBuilder from "../../../../domain/session/PresetBuilder";
 
 const mockGetAllPresets = jest.fn();
+const mockGetDefaultPresets = jest.fn();
 jest.mock("../../../../service/PresetService", () => {
     return function() { return {
         getAllPresets: mockGetAllPresets,
+        getDefaultPresets: mockGetDefaultPresets
     }};
 });
 
@@ -285,7 +287,7 @@ test('Clicking Start in the confirmation step for preset play should set the sel
     // The Redux store should start empty
     expect(store.getState().gameSettings.settings).toBeUndefined();
     expect(store.getState().dataSettings.settings).toBeUndefined();
-    mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playKanjiPreset] });
+    mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playKanjiPreset] });
 
     const { next } = setup();
 
@@ -530,7 +532,7 @@ test('Switching from the type step and back again should maintain its selection 
 });
 
 test('Switching from the preset step and back again should maintain its selection state', async () => {
-    mockGetAllPresets.mockResolvedValue({ learn: [learnPreset], play: [playPreset, playBasics] });
+    mockGetDefaultPresets.mockResolvedValue({ learn: [learnPreset], play: [playPreset, playBasics] });
     const { next } = setup();
 
     // Advance to the 'Preset' step
