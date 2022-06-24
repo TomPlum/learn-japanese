@@ -117,7 +117,7 @@ const LoginForm = (props: LoginFormProps) => {
                 </Alert>
             )}
 
-            {props.info && (
+            {props.info && !error && (
                 <Alert variant="warning">{props.info}</Alert>
             )}
 
