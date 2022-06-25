@@ -30,7 +30,6 @@ const ConfirmModal  = (props: ConfirmModalProps) => {
         show: show,
         centered: true,
         onHide: onDismiss,
-        backdrop: "static",
         "data-testid": "confirm-modal"
     }
 

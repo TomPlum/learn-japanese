@@ -18,7 +18,7 @@
     "node-sass": "^5.0.0",
     "peer": "^0.6.1",
     "react": "^17.0.0",
-    "react-bootstrap": "^1.6.1",
+    "react-bootstrap": "^1.6.4",
     "react-card-flip": "^1.1.1",
     "react-color": "^2.19.3",
     "react-device-detect": "^2.2.2",
