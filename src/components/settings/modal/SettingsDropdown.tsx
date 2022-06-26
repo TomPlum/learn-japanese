@@ -19,15 +19,15 @@ export interface SettingsDropdownProps {
     buttonIcon?: IconDefinition;
     options: SettingsDropdownOption[];
     onChange?: (value: string) => void;
+    onError?: (error: string) => void;
 }
 
 const SettingsDropdown = (props: SettingsDropdownProps) => {
-    const { id, preference, loading, buttonIcon, options, onChange } = props;
+    const { id, preference, loading, buttonIcon, options, onChange, onError } = props;
 
     const service = new UserService();
 
     const target = useRef(null);
-    const [error, setError] = useState("");
     const [show, setShow] = useState(false);
     const [updating, setUpdating] = useState(false);
     const [selected, setSelected] = useState(options[0]);
@@ -36,15 +36,12 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
         setShow(false);
         setUpdating(true);
         setSelected(option);
-        onChange?.(option.name);
 
-        service.updatePreferences([{ preference, value: selected.name }]).then(response => {
-            if (!response.success) {
-                if (response.error) {
-                    setError(error);
-                } else {
-                    setError("Failed to update preference.");
-                }
+        service.updatePreferences([{ preference, value: option.name }]).then(response => {
+            if (response.success) {
+                onChange?.(option.name);
+            } else {
+                onError?.(response.error ?? "Failed to update preference.");
             }
         }).finally(() => {
             setUpdating(false);
@@ -73,7 +70,10 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
     return (
         <>
             <div ref={target} className={buttonClasses.join(" ")} onClick={handleClick} title={title}>
-                {loading && <FontAwesomeIcon icon={faSpinner} spin={true} />}
+                {loading && (
+                    <FontAwesomeIcon icon={faSpinner} spin={true} />
+                )}
+
                 {!loading && !!selected && (
                     <>
                         {buttonIcon && (
@@ -84,16 +84,23 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
                             <FontAwesomeIcon icon={selected.icon} className={styles.icon} />
                         )}
 
-                        <span className={styles.name}>{selected.name}</span>
+                        <span className={styles.name} data-testid="settings-dropdown-selected">
+                            {selected.name}
+                        </span>
 
                         {!updating && (
-                            <span className={chevronClasses.join(" ")}>
+                            <span className={chevronClasses.join(" ")} data-testid="settings-dropdown-chevron">
                                 <FontAwesomeIcon icon={show ? faChevronUp : faChevronDown} />
                             </span>
                         )}
 
                         {updating && (
-                            <FontAwesomeIcon icon={faCircleNotch} className={styles.updating} spin />
+                            <FontAwesomeIcon
+                                spin
+                                icon={faCircleNotch}
+                                className={styles.updating}
+                                data-testid="settings-dropdown-spinner"
+                            />
                         )}
                     </>
                 )}
