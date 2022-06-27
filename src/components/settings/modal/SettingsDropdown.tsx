@@ -42,7 +42,11 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
                 onChange?.(option.name);
             } else {
                 onError?.(response.error ?? "Failed to update preference.");
+                setSelected(selected);
             }
+        }).catch(response => {
+            setSelected(selected);
+            onError?.(response.error ?? "Failed to update preference.");
         }).finally(() => {
             setUpdating(false);
         });

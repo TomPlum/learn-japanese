@@ -133,6 +133,30 @@ it("Should call the onError event handler with a default error message if the up
     expect(onErrorHandler).toHaveBeenCalledWith("Failed to update preference.");
 });
 
+it("Should call the onError event handler with the returned error message if the update call is rejected", async () => {
+    mockUpdatePreferences.mockRejectedValueOnce({ error: "Something went wrong." });
+    const component = render(<SettingsDropdown {...props} />);
+
+    fireEvent.click(component.getByText('Public'));
+    fireEvent.click(await screen.findByText('Friends Only'));
+
+    await waitForElementToBeRemoved(screen.getByTestId('settings-dropdown-spinner'));
+
+    expect(onErrorHandler).toHaveBeenCalledWith("Something went wrong.");
+});
+
+it("Should call the onError event handler with a default error message if the update call is rejected and doesn't return one", async () => {
+    mockUpdatePreferences.mockRejectedValueOnce({ error: undefined });
+    const component = render(<SettingsDropdown {...props} />);
+
+    fireEvent.click(component.getByText('Public'));
+    fireEvent.click(await screen.findByText('Friends Only'));
+
+    await waitForElementToBeRemoved(screen.getByTestId('settings-dropdown-spinner'));
+
+    expect(onErrorHandler).toHaveBeenCalledWith("Failed to update preference.");
+});
+
 it("Should render the button with the default 'Click to see options' title", () => {
     const component = render(<SettingsDropdown {...props} />);
     expect(component.getByTitle('Click to see options')).toBeInTheDocument();
@@ -168,7 +192,6 @@ it("Clicking the button while a previous selection is updating should not call t
 
     // Should prevent any intermittent clicks from showing the menu
     fireEvent.click(screen.getByText('Friends Only'));
-    expect(screen.queryByText('Public')).not.toBeInTheDocument();
 
     // Should now render the selection option
     await waitForElementToBeRemoved(spinner);
