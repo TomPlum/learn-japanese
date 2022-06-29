@@ -7,13 +7,15 @@ import PatchReplaceOperation from "../rest/request/patch/PatchReplaceOperation";
 import { Preference } from "../domain/user/Preference";
 
 export interface UserPreferencesResponse {
-    defaultFont: string;
+    kanjiFont: string;
     theme: string;
     language: string;
-    highScores: string;
+    highScoresBehaviour: string;
     defaultMode: string;
-    cardsPerDay: number;
+    flashCardsQuantity: number;
     confidenceMenuStyle: string;
+    profileVisibility: string;
+    streakCardView: string;
 }
 
 export interface UserExistsResponse {

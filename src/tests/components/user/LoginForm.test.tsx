@@ -10,7 +10,7 @@ const loginService = auth.login as jest.MockedFunction<() => Promise<LoginRespon
 let registeredUsername: string | undefined = undefined;
 let infoMessage: string | undefined = undefined;
 
-const validLoginResponse = {
+const validLoginResponse: LoginResponse = {
     username: "TomPlum42",
     email: "tom@hotmail.com",
     nickname: "Tom",
@@ -23,18 +23,24 @@ const validLoginResponse = {
     token: "TOKEN",
     refreshToken: "REFRESH_TOKEN",
     preferences: {
-        defaultFont: "Gothic",
+        kanjiFont: "Gothic",
         theme: "Dark Mode",
         language: "English",
-        highScores: "Ask Each Time",
+        highScoresBehaviour: "Ask Each Time",
         defaultMode: "Play",
-        cardsPerDay: 10,
-        confidenceMenuStyle: "Numbers 1 - 6"
+        flashCardsQuantity: 10,
+        confidenceMenuStyle: "Numbers 1 - 6",
+        profileVisibility: "Friends Only",
+        streakCardView: "Start Date"
     }
 };
 
 const setup = () => {
-    const component = renderReduxConsumer(<LoginForm onSuccess={onSuccessHandler} username={registeredUsername} info={infoMessage} />);
+    const component = renderReduxConsumer(<LoginForm
+        onSuccess={onSuccessHandler}
+        username={registeredUsername}
+        info={infoMessage}
+    />);
 
     return {
         username: component.getByPlaceholderText('Username'),

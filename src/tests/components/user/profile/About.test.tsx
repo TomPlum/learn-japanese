@@ -1,7 +1,7 @@
-import { User } from "../../../../slices/UserSlice";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import About from "../../../../components/user/profile/About";
 import renderReduxConsumer from "../../../renderReduxConsumer";
+import { testUser } from "../../../../setupTests";
 
 //Mock User Service
 const mockUserService = jest.fn();
@@ -9,28 +9,7 @@ jest.mock("../../../../service/UserService", () => {
     return function () { return { setNickname: mockUserService } }
 });
 
-const user: User = {
-    username: "TomPlum42",
-    nickname: "Tom",
-    email: "tom@hotmail.com",
-    creationDate: "2021-08-09T00:00",
-    enabled: true,
-    credentialsExpired: false,
-    locked: false,
-    expired: false,
-    roles: ["user"],
-    token: "TOKEN",
-    refreshToken: "REFRSEH_TOKEN",
-    preferences: {
-        defaultFont: "Gothic",
-        theme: "Dark Mode",
-        language: "English",
-        highScores: "Ask Each Time",
-        defaultMode: "Play",
-        cardsPerDay: 10,
-        confidenceMenuStyle: "Numbers 1 - 6"
-    }
-}
+const user = testUser;
 
 const setup = () => {
     const component = renderReduxConsumer(<About user={user} />);

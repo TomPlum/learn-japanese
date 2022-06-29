@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import Preferences from "../../../../components/user/profile/Preferences";
 import renderReduxConsumer from "../../../renderReduxConsumer";
-import { User } from "../../../../slices/UserSlice";
+import { testUser } from "../../../../setupTests";
 
 //Mock User Service
 const mockUserService = jest.fn();
@@ -15,36 +15,13 @@ jest.mock("../../../../service/FontService", () => {
     return function () { return { getFonts: mockFontService } };
 });
 
-const user: User = {
-    username: "TomPlum42",
-    email: "tom@hotmail.com",
-    nickname: "Tom",
-    roles: ["admin"],
-    creationDate: "2021-10-15",
-    locked: false,
-    expired: false,
-    credentialsExpired: false,
-    enabled: true,
-    token: "TOKEN",
-    refreshToken: "REFRESH_TOKEN",
-    preferences: {
-        defaultFont: "Gothic",
-        theme: "Dark Mode",
-        language: "English",
-        highScores: "Ask Each Time",
-        defaultMode: "Play",
-        cardsPerDay: 10,
-        confidenceMenuStyle: "Numbers 1 - 6"
-    }
-}
-
 const setup = () => {
-    const component = renderReduxConsumer(<Preferences user={user} />);
+    const component = renderReduxConsumer(<Preferences user={testUser} />);
     return {
         font: component.getByTestId('font'),
-        theme: component.getByText('Dark Mode'),
+        theme: component.getByText('Dark'),
         language: component.getByText('English'),
-        highScores: component.getByText('Ask Each Time'),
+        highScores: component.getByText('Auto-Submit'),
         appMode: component.getByText('Play'),
         cardsPerDay: component.getByText('10'),
         confidenceMenuStyle: component.getByText('Numbers 1 - 6'),
@@ -214,15 +191,7 @@ test('Clicking the save button should call the user service with the updated pre
     fireEvent.click(screen.getByTitle('Save'));
 
     await waitFor(() => {
-        expect(mockUserService).toHaveBeenCalledWith({
-            defaultFont: "Mincho",
-            theme: "Light Mode",
-            language: "日本語",
-            highScores: "Never Submit",
-            defaultMode: "Learn",
-            cardsPerDay: 20,
-            confidenceMenuStyle: "Emoji Faces",
-        });
+        expect(mockUserService).toHaveBeenCalledWith([]);
     });
 });
 

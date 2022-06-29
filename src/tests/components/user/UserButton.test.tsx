@@ -2,43 +2,21 @@ import { fireEvent, screen } from "@testing-library/react";
 import UserButton, { UserButtonProps } from "../../../components/user/UserButton";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
-import { clearUser, setUser, User } from "../../../slices/UserSlice";
+import { clearUser, setUser } from "../../../slices/UserSlice";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
+import { testUser } from "../../../setupTests";
 
 let props: UserButtonProps;
 const history = createMemoryHistory();
 const onClickHandler = jest.fn();
 
-let user: User;
+const user = { ...testUser };
 
 beforeEach(() => {
     props = {
         disabled: false,
         onClick: onClickHandler
-    };
-
-    user = {
-        username: "TomPlum42",
-        nickname: "Tom",
-        email: "tom@hotmail.com",
-        creationDate: "2021-08-09T00:00",
-        expired: false,
-        locked: false,
-        credentialsExpired: false,
-        enabled: true,
-        roles: ["user"],
-        token: "TOKEN",
-        refreshToken: "REFRESH_TOKEN",
-        preferences: {
-            defaultFont: "Gothic",
-            theme: "Dark Mode",
-            language: "English",
-            highScores: "Ask Each Time",
-            defaultMode: "Play",
-            cardsPerDay: 10,
-            confidenceMenuStyle: "Numbers 1 - 6"
-        }
     };
 });
 

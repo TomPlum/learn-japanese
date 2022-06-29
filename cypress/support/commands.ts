@@ -54,12 +54,12 @@ Cypress.Commands.add('login', () => {
             creationDate: res.body.creationDate,
             token: res.body.token,
             preferences: {
-                defaultFont: res.body.preferences.defaultFont,
+                defaultFont: res.body.preferences.kanjiFont,
                 language: res.body.preferences.language,
                 theme: res.body.preferences.theme,
                 confidenceMenuStyle: res.body.preferences.confidenceMenuStyle,
-                highScores: res.body.preferences.highScores,
-                cardsPerDay: res.body.preferences.cardsPerDay,
+                highScores: res.body.preferences.highScoresBehaviour,
+                cardsPerDay: res.body.preferences.flashCardsQuantity,
                 defaultMode: res.body.preferences.defaultMode
             }
         }));

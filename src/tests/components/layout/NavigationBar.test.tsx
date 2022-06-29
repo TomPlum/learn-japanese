@@ -6,35 +6,13 @@ import { AppMode } from "../../../domain/AppMode";
 import { store } from "../../../store";
 import { setActive, setApplicationMode } from "../../../slices/ModeSlice";
 import renderReduxConsumer from "../../renderReduxConsumer";
-import { clearUser, setUser, User } from "../../../slices/UserSlice";
+import { clearUser, setUser } from "../../../slices/UserSlice";
+import { testUser } from "../../../setupTests";
 
 const history = createMemoryHistory();
 const onLaunchLoginModalHandler = jest.fn();
 
 let props: NavigationBarProps;
-
-const user: User = {
-    username: "TomPlum42",
-    nickname: "Tom",
-    email: "tom@hotmail.com",
-    creationDate: "2021-08-09T00:00",
-    expired: false,
-    locked: false,
-    credentialsExpired: false,
-    enabled: true,
-    roles: ["user"],
-    token: "TOKEN",
-    refreshToken: "REFRESH_TOKEN",
-    preferences: {
-        defaultFont: "Gothic",
-        theme: "Dark Mode",
-        language: "English",
-        highScores: "Ask Each Time",
-        defaultMode: "Play",
-        cardsPerDay: 10,
-        confidenceMenuStyle: "Numbers 1 - 6"
-    }
-};
 
 const setup = () => {
     const component = renderReduxConsumer(
@@ -89,7 +67,7 @@ test('Clicking the login button while not logged in should call the onLaunchLogi
 });
 
 test('Should render the notifications button if the user is logged in', async () => {
-    store.dispatch(setUser(user));
+    store.dispatch(setUser(testUser));
     setup();
     expect(await screen.findByTestId('notifications-button')).toBeInTheDocument();
 });

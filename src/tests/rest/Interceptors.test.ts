@@ -16,28 +16,7 @@ beforeEach(() => {
     RestClient.post = mockPost;
     Environment.variable = mockEnvironment;
     injectStore(store);
-    store.dispatch(setUser({
-        username: "TomPlum42",
-        nickname: "Tom",
-        email: "tom@hotmail.com",
-        creationDate: "2021-08-09T00:00",
-        expired: false,
-        locked: false,
-        credentialsExpired: false,
-        enabled: true,
-        roles: ["user"],
-        token: "TOKEN",
-        refreshToken: "REFRESH_TOKEN",
-        preferences: {
-            defaultFont: "Gothic",
-            theme: "Dark Mode",
-            language: "English",
-            highScores: "Ask Each Time",
-            defaultMode: "Play",
-            cardsPerDay: 10,
-            confidenceMenuStyle: "Numbers 1 - 6"
-        }
-    }));
+    store.dispatch(setUser(testUser));
     store.dispatch(setAccessToken(""));
     store.dispatch(setRefreshToken(""));
 });

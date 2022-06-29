@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 import { Overlay } from "react-bootstrap";
 import UserService from "../../../service/UserService";
 import { Preference } from "../../../domain/user/Preference";
+import { useUserDispatch, useUserSelector } from "../../../hooks";
+import { setPreference } from "../../../slices/UserSlice";
 
 export interface SettingsDropdownOption {
     style?: {};
@@ -26,30 +28,52 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
     const { id, preference, loading, buttonIcon, options, onChange, onError } = props;
 
     const service = new UserService();
+    const userDispatch = useUserDispatch();
+    const preferences = useUserSelector(state => state.user?.user?.preferences);
+
+    const getSelectedPreference = (preference: Preference) => {
+        switch (preference) {
+            case Preference.DEFAULT_KANJI_FONT: return preferences!.kanjiFont;
+            case Preference.CONFIDENCE_MENU_STYLE: return preferences!.confidenceMenuStyle;
+            case Preference.PROFILE_VISIBILITY: return preferences!.profileVisibility;
+            case Preference.LANGUAGE: return preferences!.language;
+            case Preference.ROMAJI_VISIBILITY: return preferences!.romajiVisibility;
+            case Preference.HIGH_SCORES_BEHAVIOUR: return preferences!.highScoresBehaviour;
+            case Preference.FLASH_CARDS_QUANTITY: return preferences!.flashCardsQuantity;
+            case Preference.STREAK_CARD_VIEW: return preferences!.streakCardView;
+            case Preference.ACTIVITY_FEED_QUANTITY: return preferences!.activityFeedQuantity;
+            default: return "";
+        }
+    }
+
+    const selected = options.find(it => it.name === getSelectedPreference(preference));
 
     const target = useRef(null);
     const [show, setShow] = useState(false);
     const [updating, setUpdating] = useState(false);
-    const [selected, setSelected] = useState(options[0]);
 
     const handleChange = (option: SettingsDropdownOption) => {
         setShow(false);
         setUpdating(true);
-        setSelected(option);
+        //setSelected(option);
 
         service.updatePreferences([{ preference, value: option.name }]).then(response => {
             if (response.success) {
                 onChange?.(option.name);
+                userDispatch(setPreference({ preference, value: option.name }));
             } else {
-                onError?.(response.error ?? "Failed to update preference.");
-                setSelected(selected);
+                handleUpdateError(response);
             }
         }).catch(response => {
-            setSelected(selected);
-            onError?.(response.error ?? "Failed to update preference.");
+            handleUpdateError(response);
         }).finally(() => {
             setUpdating(false);
         });
+    }
+
+    const handleUpdateError = (response: any) => {
+        //setSelected(selected);
+        onError?.(response.error ?? "Failed to update preference.");
     }
 
     const handleClick = () => {
@@ -73,7 +97,7 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
 
     return (
         <>
-            <div ref={target} className={buttonClasses.join(" ")} onClick={handleClick} title={title}>
+            <div ref={target} className={buttonClasses.join(" ")} onClick={handleClick} title={title} data-testid={id}>
                 {loading && (
                     <FontAwesomeIcon icon={faSpinner} spin={true} />
                 )}

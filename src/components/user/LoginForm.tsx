@@ -69,13 +69,17 @@ const LoginForm = (props: LoginFormProps) => {
                 token: res.token,
                 refreshToken: res.refreshToken,
                 preferences: {
-                    defaultFont: res.preferences.defaultFont,
+                    kanjiFont: res.preferences.kanjiFont,
                     language: res.preferences.language,
                     theme: res.preferences.theme,
                     confidenceMenuStyle: res.preferences.confidenceMenuStyle,
-                    highScores: res.preferences.highScores,
-                    cardsPerDay: res.preferences.cardsPerDay,
-                    defaultMode: res.preferences.defaultMode
+                    highScoresBehaviour: res.preferences.highScoresBehaviour,
+                    flashCardsQuantity: res.preferences.flashCardsQuantity,
+                    defaultMode: res.preferences.defaultMode,
+                    streakCardView: res.preferences.streakCardView,
+                    profileVisibility: res.preferences.profileVisibility,
+                    activityFeedQuantity: 3, // TODO: Replace activityFeed and romaji once API updated
+                    romajiVisibility: "blah"
                 }
             }));
 

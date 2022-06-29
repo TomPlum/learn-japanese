@@ -4,7 +4,7 @@ import Confidence from "../../../domain/learn/spacedrepetition/Confidence";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
 import { setUser } from "../../../slices/UserSlice";
-import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
+import { testUser } from "../../../setupTests";
 
 let props: ConfidenceButtonProps;
 const onClickHandler = jest.fn();
@@ -26,28 +26,7 @@ beforeEach(() => {
         onClick: onClickHandler
     }
 
-    store.dispatch(setUser({
-        username: "TomPlum42",
-        nickname: "Tom",
-        email: "tom@hotmail.com",
-        creationDate: "2021-08-09T00:00",
-        expired: false,
-        locked: false,
-        credentialsExpired: false,
-        enabled: true,
-        roles: ["user"],
-        token: "TOKEN",
-        refreshToken: "REFRESH_TOKEN",
-        preferences: {
-            defaultFont: "Mincho",
-            theme: "Dark",
-            language: "English",
-            highScores: "Auto-Submit",
-            cardsPerDay: 10,
-            defaultMode: "Play",
-            confidenceMenuStyle: ConfidenceMenuStyle.NUMBERS
-        }
-    }));
+    store.dispatch(setUser(testUser));
 });
 
 it("Should call the onClick event handler with the Confidence value upon clicking the button", () => {

@@ -5,6 +5,7 @@ import { setUser } from "../../slices/UserSlice";
 import api from "../../rest/API";
 import PatchRequest from "../../rest/request/patch/PatchRequest";
 import PatchReplaceOperation from "../../rest/request/patch/PatchReplaceOperation";
+import { testUser } from "../../setupTests";
 
 jest.mock("../../rest/API");
 const mockApi = api as jest.MockedFunction<typeof api>;
@@ -19,28 +20,7 @@ describe("Rest Client", () => {
     beforeEach(() => {
         Environment.variable = environment;
         environment.mockReturnValue("https://japanese.tomplumpton.me/learn-japanese");
-        store.dispatch(setUser({
-            username: "TomPlum42",
-            nickname: "Tom",
-            email: "tom@hotmail.com",
-            creationDate: "2021-08-09T00:00",
-            expired: false,
-            locked: false,
-            credentialsExpired: false,
-            enabled: true,
-            roles: ["user"],
-            token: "TOKEN",
-            refreshToken: "REFRESH_TOKEN",
-            preferences: {
-                defaultFont: "Gothic",
-                theme: "Dark Mode",
-                language: "English",
-                highScores: "Ask Each Time",
-                defaultMode: "Play",
-                cardsPerDay: 10,
-                confidenceMenuStyle: "Numbers 1 - 6"
-            }
-        }));
+        store.dispatch(setUser(testUser));
     });
 
     describe("GET", () => {
@@ -287,7 +267,7 @@ describe("Rest Client", () => {
                 data: { value: "test-value" }
             });
 
-            const request = new PatchRequest([new PatchReplaceOperation("/theme", "Dark")]);
+            const request = new PatchRequest([new PatchReplaceOperation("theme", "Dark")]);
             return RestClient.patchJSON<undefined>("/user/update-preferences", request).then(() => {
                 expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/user/update-preferences",

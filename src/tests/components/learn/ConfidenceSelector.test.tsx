@@ -3,12 +3,12 @@ import ConfidenceSelector, { ConfidenceSelectorProps } from "../../../components
 import Confidence from "../../../domain/learn/spacedrepetition/Confidence";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { setUser } from "../../../slices/UserSlice";
-import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
 import { store } from "../../../store";
 import SpaceRepetitionFeedback from "../../../domain/learn/spacedrepetition/SpaceRepetitionFeedback";
 import Definition from "../../../domain/sentence/Definition";
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
 import { FlashCard } from "../../../domain/learn/FlashCard";
+import { testUser } from "../../../setupTests";
 
 const mockGetDaysTillNextReview = jest.fn();
 jest.mock("../../../service/SpacedRepetitionService", () => {
@@ -33,28 +33,7 @@ const setup = () => {
 }
 
 beforeEach(() => {
-    store.dispatch(setUser({
-        username: "TomPlum42",
-        nickname: "Tom",
-        email: "tom@hotmail.com",
-        creationDate: "2021-08-09T00:00",
-        expired: false,
-        locked: false,
-        credentialsExpired: false,
-        enabled: true,
-        roles: ["user"],
-        token: "TOKEN",
-        refreshToken: "REFRESH_TOKEN",
-        preferences: {
-            defaultFont: "Mincho",
-            theme: "Dark",
-            language: "English",
-            highScores: "Auto-Submit",
-            cardsPerDay: 10,
-            defaultMode: "Play",
-            confidenceMenuStyle: ConfidenceMenuStyle.NUMBERS
-        }
-    }));
+    store.dispatch(setUser(testUser));
 
     mockGetDaysTillNextReview.mockReturnValue(5);
 

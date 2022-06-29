@@ -8,7 +8,7 @@ import { HighScorePreference } from "../../../domain/HighScorePreference";
 import { faCheckCircle, faCircleNotch, faRedo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AppMode } from "../../../domain/AppMode";
-import { setPreferences, User } from "../../../slices/UserSlice";
+import { setPreferences, User, UserPreferences } from "../../../slices/UserSlice";
 import { CardsPerDay } from "../../../domain/learn/spacedrepetition/CardsPerDay";
 import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
 import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
@@ -27,12 +27,12 @@ const Preferences = (props: PreferencesProps) => {
 
     useEffect(() => {
         const preferences = props.user.preferences;
-        setSelectedFont(preferences.defaultFont);
+        setSelectedFont(preferences.kanjiFont);
         setTheme(preferences.theme);
         setLanguage(preferences.language);
-        setHighScorePreference(preferences.highScores);
+        setHighScorePreference(preferences.highScoresBehaviour);
         setAppMode(preferences.defaultMode);
-        setCardsPerDay(preferences.cardsPerDay);
+        setCardsPerDay(preferences.flashCardsQuantity);
         setConfidenceMenuStyle(preferences.confidenceMenuStyle);
 
         setLoading(true);
@@ -98,14 +98,18 @@ const Preferences = (props: PreferencesProps) => {
         setChanges(false);
         setLoading(true);
 
-        const updatedPreferences = {
+        const updatedPreferences: UserPreferences = {
             defaultMode: appMode,
-            cardsPerDay: cardsPerDay,
-            highScores: highScorePreference,
+            flashCardsQuantity: cardsPerDay,
+            highScoresBehaviour: highScorePreference,
             confidenceMenuStyle: confidenceMenuStyle,
             language: language,
             theme: theme,
-            defaultFont: font
+            kanjiFont: font,
+            activityFeedQuantity: 3,
+            streakCardView: "Start Date",
+            romajiVisibility: "Always Show",
+            profileVisibility: "Friends Only"
         };
 
         // TODO: This whole component just needs removing

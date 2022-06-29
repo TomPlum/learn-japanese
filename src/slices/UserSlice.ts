@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Preference } from "../domain/user/Preference";
 
 export interface User {
     username: string;
@@ -16,13 +17,17 @@ export interface User {
 }
 
 export interface UserPreferences {
-    defaultFont: string;
+    kanjiFont: string;
     theme: string;
     language: string;
-    highScores: string;
+    highScoresBehaviour: string;
     defaultMode: string;
-    cardsPerDay: number;
+    flashCardsQuantity: number;
     confidenceMenuStyle: string;
+    profileVisibility: string;
+    streakCardView: string;
+    activityFeedQuantity: number;
+    romajiVisibility: string;
 }
 
 export interface UserState {
@@ -46,6 +51,48 @@ export const userSlice = createSlice({
         setPreferences: (state, action: PayloadAction<UserPreferences>) => {
             if (state.user) {
                 state.user.preferences = action.payload;
+                localStorage.setItem("user", JSON.stringify(state.user));
+            }
+        },
+        setPreference: (state, action: PayloadAction<{ preference: Preference, value: any }>) => {
+            if (state.user) {
+                const value = action.payload.value;
+
+                switch (action.payload.preference) {
+                    case Preference.PROFILE_VISIBILITY: {
+                        state.user.preferences.profileVisibility = value;
+                        break;
+                    }
+                    case Preference.LANGUAGE: {
+                        state.user.preferences.language = value;
+                        break;
+                    }
+                    case Preference.ROMAJI_VISIBILITY: {
+                        state.user.preferences.romajiVisibility = value;
+                        break;
+                    }
+                    case Preference.HIGH_SCORES_BEHAVIOUR: {
+                        state.user.preferences.highScoresBehaviour = value;
+                        break;
+                    }
+                    case Preference.STREAK_CARD_VIEW: {
+                        state.user.preferences.streakCardView = value;
+                        break;
+                    }
+                    case Preference.CONFIDENCE_MENU_STYLE: {
+                        state.user.preferences.confidenceMenuStyle = value;
+                        break;
+                    }
+                    case Preference.DEFAULT_KANJI_FONT: {
+                        state.user.preferences.kanjiFont = value;
+                        break;
+                    }
+                    case Preference.ACTIVITY_FEED_QUANTITY: {
+                        state.user.preferences.activityFeedQuantity = value;
+                        break;
+                    }
+                }
+
                 localStorage.setItem("user", JSON.stringify(state.user));
             }
         },
@@ -74,5 +121,5 @@ export const userSlice = createSlice({
     }
 });
 
-export const { setUser, setAccessToken, setRefreshToken, setPreferences, updateNickname, clearUser } = userSlice.actions
+export const { setUser, setAccessToken, setRefreshToken, setPreferences, setPreference, updateNickname, clearUser } = userSlice.actions
 export default userSlice.reducer;
