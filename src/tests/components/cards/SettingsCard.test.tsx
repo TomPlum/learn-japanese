@@ -47,13 +47,16 @@ test('Should render the correct settings sub-menu links when a user is not logge
 });
 
 test('Should render the settings modal with the interface tab when clicking the respective link', async () => {
+    store.dispatch(setUser(testUser));
    const { ui } = setup();
    fireEvent.click(ui);
    expect(await screen.findByTestId('interface-settings-tab')).toBeInTheDocument();
 });
 
 test('Dismissing the settings modal should stop rendering it', async () => {
+    store.dispatch(setUser(testUser));
     const { general } = setup();
+
     fireEvent.click(general);
     expect(await screen.findByTestId('settings-modal')).toBeInTheDocument();
 

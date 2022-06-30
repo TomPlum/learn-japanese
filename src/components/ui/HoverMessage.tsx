@@ -1,13 +1,15 @@
-import React, { Fragment, PropsWithChildren, ReactElement, useEffect, useRef, useState } from "react";
+import React, { PropsWithChildren, ReactElement, useRef, useState } from "react";
 import styles from "../../styles/sass/components/ui/HoverMessage.module.scss";
+import ConditionalWrapper from "./ConditionalWrapper";
 
 export interface HoverMessageProps {
-    message: string;
+    id?: string;
     show?: boolean;
+    message: string;
 }
 
 const HoverMessage = (props: PropsWithChildren<HoverMessageProps>) => {
-    const { show, message, children } = props;
+    const { id, show, message, children } = props;
 
     const element = useRef<HTMLSpanElement>(null);
    // const external = useMousePosition();
@@ -38,15 +40,22 @@ const HoverMessage = (props: PropsWithChildren<HoverMessageProps>) => {
     }
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} id={id} data-testid={id}>
             {show && inside && (
                 <div className={styles.message} style={{ top: internal.y, left: internal.x }}>
                     {message}
                 </div>
             )}
-            <span {...surfaceProperties} ref={element}>
-                {React.cloneElement(children as ReactElement, { className: styles.child })}
-            </span>
+
+            <ConditionalWrapper condition={show ?? false} wrapper={child => (
+                <span {...surfaceProperties} ref={element}>
+                    {child}
+                </span>
+            )}>
+                {React.cloneElement(children as ReactElement, {
+                    className: [(children as ReactElement).props.className, show ? styles.child : ""].join(" ")
+                })}
+            </ConditionalWrapper>
         </div>
     );
 }

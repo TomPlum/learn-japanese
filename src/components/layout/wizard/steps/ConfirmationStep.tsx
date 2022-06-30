@@ -6,6 +6,8 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { WizardStep } from "../SessionWizard";
 import SessionSettingsSummary from "../../../settings/SessionSettingsSummary";
+import { useUserSelector } from "../../../../hooks";
+import HoverMessage from "../../../ui/HoverMessage";
 
 export interface ConfirmationStepProps {
     settings: SessionSettings;
@@ -14,6 +16,8 @@ export interface ConfirmationStepProps {
 
 const ConfirmationStep = (props: ConfirmationStepProps) => {
     const { settings, onSelectStage } = props;
+
+    const user = useUserSelector(state => state.user.user);
 
     const [inSavePresetForm, setInSavePresetForm] = useState(false);
     const [showSave, setShowSave] = useState(true);
@@ -34,11 +38,14 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
 
             <Accordion>
                 {showSave && (
-                    <Accordion.Toggle eventKey="save" as={Button} onClick={handleClickSave} variant="info">
-                        <FontAwesomeIcon icon={faDownload} fixedWidth />
-                        <span>Save Preset</span>
-                    </Accordion.Toggle>
+                    <HoverMessage message="You must be logged in to save." show={!user} id="save-preset-hover">
+                        <Accordion.Toggle eventKey="save" as={Button} onClick={handleClickSave} variant="info" disabled={!user}>
+                            <FontAwesomeIcon icon={faDownload} fixedWidth />
+                            <span>Save Preset</span>
+                        </Accordion.Toggle>
+                    </HoverMessage>
                 )}
+
                 <Accordion.Collapse eventKey="save" in={inSavePresetForm} data-testid="confirmation-step-accordion">
                     <CustomPresetForm
                         settings={settings}
