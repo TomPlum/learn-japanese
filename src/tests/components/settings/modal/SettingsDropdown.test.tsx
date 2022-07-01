@@ -26,7 +26,10 @@ beforeEach(() => {
         onChange: onChangeHandler,
         id: "example-settings-dropdown",
         preference: Preference.PROFILE_VISIBILITY,
-        options: [{ name: "Public", icon: faGlobe }, { name: "Friends Only", icon: faUserFriends }]
+        options: [
+            { name: "Public", icon: faGlobe },
+            { name: "Friends Only", icon: faUserFriends }
+        ]
     }
     store.dispatch(setUser(testUser));
 });
@@ -233,4 +236,116 @@ it("Should stop rendering the dropdown menu when blurring the button", async () 
     // Blurring the menu / button should stop rendering the menu
     fireEvent.click(document.body);
     await waitForElementToBeRemoved(dropdownOption)
+});
+
+describe("Default selected values from local storage", () => {
+    it("Should set the default selected value for profile visibility from the local user", () => {
+        props.options = [{ name: "Public" }, { name: "Friends Only" }, { name: "Example Visibility" }];
+        props.preference = Preference.PROFILE_VISIBILITY;
+
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.PROFILE_VISIBILITY, value: "Example Visibility" }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Example Visibility')).toBeInTheDocument();
+    });
+
+    it("Should set the default selected value for kanji font from the local user", () => {
+        props.options = [{ name: "Montserrat" }, { name: "Roboto" }, { name: "Example Font" }];
+        props.preference = Preference.DEFAULT_KANJI_FONT;
+
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.DEFAULT_KANJI_FONT, value: "Example Font" }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Example Font')).toBeInTheDocument();
+    });
+
+    it("Should set the default selected value for confidence menu style from the local user", () => {
+        props.options = [{ name: "Emoji" }, { name: "Numbers 1-6" }, { name: "Example Style" }];
+        props.preference = Preference.CONFIDENCE_MENU_STYLE;
+
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.CONFIDENCE_MENU_STYLE, value: "Example Style" }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Example Style')).toBeInTheDocument();
+    });
+
+    it("Should set the default selected value for language from the local user", () => {
+        props.options = [{ name: "English" }, { name: "Japanese" }, { name: "Example Language" }];
+        props.preference = Preference.LANGUAGE;
+
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.LANGUAGE, value: "Example Language" }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Example Language')).toBeInTheDocument();
+    });
+
+    it("Should set the default selected value for romaji visibility from the local user", () => {
+        props.options = [{ name: "Always Show" }, { name: "Never Show" }, { name: "Example Visibility" }];
+        props.preference = Preference.ROMAJI_VISIBILITY;
+
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.ROMAJI_VISIBILITY, value: "Example Visibility" }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Example Visibility')).toBeInTheDocument();
+    });
+
+    it("Should set the default selected value for high scores behaviour from the local user", () => {
+        props.options = [{ name: "Auto Submit" }, { name: "Never Submit" }, { name: "Example Behaviour" }];
+        props.preference = Preference.HIGH_SCORES_BEHAVIOUR;
+
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.HIGH_SCORES_BEHAVIOUR, value: "Example Behaviour" }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Example Behaviour')).toBeInTheDocument();
+    });
+
+    it("Should set the default selected value for flash cards quantity from the local user", () => {
+        props.options = [{ name: "5" }, { name: "10" }, { name: "15" }];
+        props.preference = Preference.FLASH_CARDS_QUANTITY;
+
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.FLASH_CARDS_QUANTITY, value: "15" }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('15')).toBeInTheDocument();
+    });
+
+    it("Should set the default selected value for streak card view from the local user", () => {
+        props.options = [{ name: "Start Date" }, { name: "Streak" }, { name: "Example View" }];
+        props.preference = Preference.STREAK_CARD_VIEW;
+
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.STREAK_CARD_VIEW, value: "Example View" }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Example View')).toBeInTheDocument();
+    });
+
+    it("Should set the default selected value for activity feed quantity from the local user", () => {
+        props.options = [{ name: "3" }, { name: "4" }, { name: "5" }];
+        props.preference = Preference.ACTIVITY_FEED_QUANTITY;
+
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.ACTIVITY_FEED_QUANTITY, value: "5" }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('5')).toBeInTheDocument();
+    });
+
+    it("Should set the default selected value to unknown if the value in the local user is undefiend", () => {
+        props.options = [{ name: "Start Date" }, { name: "Streak" }, { name: "Custom Date" }];
+        props.preference = Preference.STREAK_CARD_VIEW;
+
+        store.dispatch(clearUser());
+       // store.dispatch(setPreference({ preference: Preference.STREAK_CARD_VIEW, value: undefined }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Unknown')).toBeInTheDocument();
+    });
 });

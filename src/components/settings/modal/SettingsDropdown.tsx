@@ -31,22 +31,23 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
     const userDispatch = useUserDispatch();
     const preferences = useUserSelector(state => state.user?.user?.preferences);
 
-    const getSelectedPreference = (preference: Preference) => {
+    const getUserPreferenceValue = () => {
         switch (preference) {
-            case Preference.DEFAULT_KANJI_FONT: return preferences!.kanjiFont;
-            case Preference.CONFIDENCE_MENU_STYLE: return preferences!.confidenceMenuStyle;
-            case Preference.PROFILE_VISIBILITY: return preferences!.profileVisibility;
-            case Preference.LANGUAGE: return preferences!.language;
-            case Preference.ROMAJI_VISIBILITY: return preferences!.romajiVisibility;
-            case Preference.HIGH_SCORES_BEHAVIOUR: return preferences!.highScoresBehaviour;
-            case Preference.FLASH_CARDS_QUANTITY: return preferences!.flashCardsQuantity;
-            case Preference.STREAK_CARD_VIEW: return preferences!.streakCardView;
-            case Preference.ACTIVITY_FEED_QUANTITY: return preferences!.activityFeedQuantity;
-            default: return "";
+            case Preference.DEFAULT_KANJI_FONT: return preferences?.kanjiFont;
+            case Preference.CONFIDENCE_MENU_STYLE: return preferences?.confidenceMenuStyle;
+            case Preference.PROFILE_VISIBILITY: return preferences?.profileVisibility;
+            case Preference.LANGUAGE: return preferences?.language;
+            case Preference.ROMAJI_VISIBILITY: return preferences?.romajiVisibility;
+            case Preference.HIGH_SCORES_BEHAVIOUR: return preferences?.highScoresBehaviour;
+            case Preference.FLASH_CARDS_QUANTITY: return preferences?.flashCardsQuantity;
+            case Preference.STREAK_CARD_VIEW: return preferences?.streakCardView;
+            case Preference.ACTIVITY_FEED_QUANTITY: return preferences?.activityFeedQuantity;
         }
     }
 
-    const selected = options.find(it => it.name === getSelectedPreference(preference));
+    const getSelectedPreferenceValue = () => options.find(it => it.name === getUserPreferenceValue()?.toString()) ?? { name: "Unknown" };
+
+    const selected = getSelectedPreferenceValue();
 
     const target = useRef(null);
     const [show, setShow] = useState(false);
@@ -55,7 +56,6 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
     const handleChange = (option: SettingsDropdownOption) => {
         setShow(false);
         setUpdating(true);
-        //setSelected(option);
 
         service.updatePreferences([{ preference, value: option.name }]).then(response => {
             if (response.success) {
@@ -72,7 +72,6 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
     }
 
     const handleUpdateError = (response: any) => {
-        //setSelected(selected);
         onError?.(response.error ?? "Failed to update preference.");
     }
 

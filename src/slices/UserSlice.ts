@@ -54,7 +54,7 @@ export const userSlice = createSlice({
                 localStorage.setItem("user", JSON.stringify(state.user));
             }
         },
-        setPreference: (state, action: PayloadAction<{ preference: Preference, value: any }>) => {
+        setPreference: (state, action: PayloadAction<{ preference: Preference, value: string }>) => {
             if (state.user) {
                 const value = action.payload.value;
 
@@ -88,8 +88,11 @@ export const userSlice = createSlice({
                         break;
                     }
                     case Preference.ACTIVITY_FEED_QUANTITY: {
-                        state.user.preferences.activityFeedQuantity = value;
+                        state.user.preferences.activityFeedQuantity = Number(value);
                         break;
+                    }
+                    case Preference.FLASH_CARDS_QUANTITY: {
+                        state.user.preferences.flashCardsQuantity = Number(value);
                     }
                 }
 
