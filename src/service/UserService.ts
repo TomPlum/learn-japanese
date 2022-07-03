@@ -16,6 +16,10 @@ export interface UserPreferencesResponse {
     confidenceMenuStyle: string;
     profileVisibility: string;
     streakCardView: string;
+    romajiVisibility: string;
+    activityFeedQuantity: number;
+    streakNotifications: boolean;
+    mistakesReminders: boolean;
 }
 
 export interface UserExistsResponse {

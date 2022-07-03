@@ -1,7 +1,9 @@
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import LoginForm from "../../../components/user/LoginForm";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import auth, { LoginResponse } from "../../../service/AuthenticationService";
+import { store } from "../../../store";
+import { clearUser } from "../../../slices/UserSlice";
 
 jest.mock("../../../service/AuthenticationService");
 
@@ -31,7 +33,11 @@ const validLoginResponse: LoginResponse = {
         flashCardsQuantity: 10,
         confidenceMenuStyle: "Numbers 1 - 6",
         profileVisibility: "Friends Only",
-        streakCardView: "Start Date"
+        streakCardView: "Start Date",
+        romajiVisibility: "Ask Each Time",
+        streakNotifications: true,
+        mistakesReminders: true,
+        activityFeedQuantity: 3
     }
 };
 
@@ -49,6 +55,10 @@ const setup = () => {
         ...component
     }
 }
+
+afterEach(() => {
+    store.dispatch(clearUser());
+});
 
 test('Should focus the username field on mount', () => {
     const { username } = setup();
@@ -240,4 +250,48 @@ test('When the info prop is passed then it should not render the success alert',
     infoMessage = "Your session has expired. Please log-in again.";
     setup();
     expect(screen.queryByText("Registration successful. You can log-in below.")).not.toBeInTheDocument();
+});
+
+test('When successfully logging in, it should set the user object in the Redux store', async () => {
+    loginService.mockResolvedValueOnce(validLoginResponse);
+
+    const { username, password, login } = setup();
+
+    // Enter Credentials
+    fireEvent.change(username, { target: { value: 'Tom' }});
+    fireEvent.change(password, { target: { value: 'P4ssw0rd' }});
+
+    // Login
+    fireEvent.click(login);
+    await waitFor(() => expect(onSuccessHandler).toHaveBeenCalled());
+    expect(store.getState().user.user).toStrictEqual({
+        "creationDate": "2021-10-15",
+        "credentialsExpired": false,
+        "email": "tom@hotmail.com",
+        "enabled": true,
+        "expired": false,
+        "locked": false,
+        "nickname": "Tom",
+        "preferences": {
+            "activityFeedQuantity": 3,
+            "confidenceMenuStyle": "Numbers 1 - 6",
+            "defaultMode": "Play",
+            "flashCardsQuantity": 10,
+            "highScoresBehaviour": "Ask Each Time",
+            "kanjiFont": "Gothic",
+            "language": "English",
+            "mistakesReminders": true,
+            "profileVisibility": "Friends Only",
+            "romajiVisibility": "Ask Each Time",
+            "streakCardView": "Start Date",
+            "streakNotifications": true,
+            "theme": "Dark Mode"
+        },
+        "refreshToken": "REFRESH_TOKEN",
+        "roles": [
+            "admin"
+        ],
+        "token": "TOKEN",
+        "username": "TomPlum42"
+    });
 });

@@ -78,16 +78,18 @@ const LoginForm = (props: LoginFormProps) => {
                     defaultMode: res.preferences.defaultMode,
                     streakCardView: res.preferences.streakCardView,
                     profileVisibility: res.preferences.profileVisibility,
-                    activityFeedQuantity: 3, // TODO: Replace activityFeed and romaji once API updated
-                    romajiVisibility: "blah"
+                    activityFeedQuantity: res.preferences.activityFeedQuantity,
+                    romajiVisibility: res.preferences.romajiVisibility,
+                    mistakesReminders: res.preferences.mistakesReminders,
+                    streakNotifications: res.preferences.streakNotifications
                 }
             }));
 
             props.onSuccess();
         }).catch(e => {
             if (e === "AUTHENTICATION_ERROR") {
-                setPassword("")
-                setPasswordValid(false)
+                setPassword("");
+                setPasswordValid(false);
                 setError("Username or password is incorrect.");
             } else {
                 setError("Sorry, an unknown error has occurred.");

@@ -109,7 +109,9 @@ const Preferences = (props: PreferencesProps) => {
             activityFeedQuantity: 3,
             streakCardView: "Start Date",
             romajiVisibility: "Always Show",
-            profileVisibility: "Friends Only"
+            profileVisibility: "Friends Only",
+            streakNotifications: false,
+            mistakesReminders: false
         };
 
         // TODO: This whole component just needs removing

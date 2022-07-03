@@ -28,6 +28,8 @@ export interface UserPreferences {
     streakCardView: string;
     activityFeedQuantity: number;
     romajiVisibility: string;
+    streakNotifications: boolean;
+    mistakesReminders: boolean;
 }
 
 export interface UserState {

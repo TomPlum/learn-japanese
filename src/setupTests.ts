@@ -100,6 +100,8 @@ export const testUser: User = {
         profileVisibility: "Friends Only",
         activityFeedQuantity: 3,
         romajiVisibility: "Always Show",
-        streakCardView: "Start Date"
+        streakCardView: "Start Date",
+        mistakesReminders: true,
+        streakNotifications: true
     }
 };
