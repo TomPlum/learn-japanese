@@ -7,5 +7,8 @@ export enum Preference {
     CONFIDENCE_MENU_STYLE = "confidenceMenuStyle",
     FLASH_CARDS_QUANTITY = "flashCardsQuantity",
     ROMAJI_VISIBILITY = "romajiVisibility",
-    HIGH_SCORES_BEHAVIOUR = "highScoresBehaviour"
+    HIGH_SCORES_BEHAVIOUR = "highScoresBehaviour",
+    STREAK_NOTIFICATIONS = "streakNotifications",
+    MISTAKES_REMINDERS = "mistakesReminders",
+    THEME = "theme"
 }

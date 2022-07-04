@@ -11,6 +11,7 @@ import { setPreference } from "../../../slices/UserSlice";
 export interface SettingsDropdownOption {
     style?: {};
     name: string;
+    className?: string;
     icon?: IconDefinition;
 }
 
@@ -42,6 +43,7 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
             case Preference.FLASH_CARDS_QUANTITY: return preferences?.flashCardsQuantity;
             case Preference.STREAK_CARD_VIEW: return preferences?.streakCardView;
             case Preference.ACTIVITY_FEED_QUANTITY: return preferences?.activityFeedQuantity;
+            case Preference.THEME: return preferences?.theme;
         }
     }
 
@@ -136,7 +138,12 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
             <Overlay show={show} rootClose={true} placement="bottom" target={target.current} onHide={handleHide}>
                 {!loading && selected ? <div className={styles.menu}>
                     {options.filter(it => it.name != selected.name).map((option: SettingsDropdownOption) => (
-                        <div key={option.name} className={styles.option} onClick={() => handleChange(option)} style={option.style}>
+                        <div
+                            key={option.name}
+                            style={option.style}
+                            onClick={() => handleChange(option)}
+                            className={[styles.option, option.className].join(" ")}
+                        >
                             {option.icon && <FontAwesomeIcon icon={option.icon} className={styles.icon} />}
                             <span>{option.name}</span>
                         </div>

@@ -338,6 +338,17 @@ describe("Default selected values from local storage", () => {
         expect(within(component.getByTestId('settings-dropdown-selected')).getByText('5')).toBeInTheDocument();
     });
 
+    it("Should set the default selected value for the theme from the local user", () => {
+        props.options = [{ name: "Dark Mode" }, { name: "Light Mode" }, { name: "Test Theme" }];
+        props.preference = Preference.THEME;
+
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.THEME, value: "Test Theme" }));
+
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+        expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Test Theme')).toBeInTheDocument();
+    });
+
     it("Should set the default selected value to unknown if the value in the local user is undefiend", () => {
         props.options = [{ name: "Start Date" }, { name: "Streak" }, { name: "Custom Date" }];
         props.preference = Preference.STREAK_CARD_VIEW;

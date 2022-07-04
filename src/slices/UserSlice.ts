@@ -97,6 +97,10 @@ export const userSlice = createSlice({
                         state.user.preferences.flashCardsQuantity = Number(value);
                         break;
                     }
+                    case Preference.THEME: {
+                        state.user.preferences.theme = value;
+                        break;
+                    }
                 }
 
                 localStorage.setItem("user", JSON.stringify(state.user));
