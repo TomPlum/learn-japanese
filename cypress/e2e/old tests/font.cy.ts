@@ -1,4 +1,4 @@
-import {Topic} from "../support/Topic";
+import {Topic} from "../../support/Topic";
 
 describe('Test Font Change', () => {
     it('Should change font of the kanji', () => {

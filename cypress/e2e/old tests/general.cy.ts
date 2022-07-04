@@ -1,6 +1,6 @@
-import {Topic} from "../support/Topic";
-import hiragana from "../../src/data/Hiragana";
-import katakana from "../../src/data/Katakana";
+import {Topic} from "../../support/Topic";
+import hiragana from "../../../src/data/Hiragana";
+import katakana from "../../../src/data/Katakana";
 
 it.skip('Completes a full game of the Rōmaji preset', () => {
 

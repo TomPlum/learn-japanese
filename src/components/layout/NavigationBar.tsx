@@ -22,7 +22,7 @@ const NavigationBar = (props: NavigationBarProps) => {
     const user = useUserSelector(state => state.user.user);
 
     return (
-        <Navbar variant="dark" fixed="top" expand="md" className={styles.navbar}>
+        <Navbar variant="dark" fixed="top" expand="md" className={styles.navbar} data-testid="navigation-bar">
             <Nav className={styles.nav}>
                 <Navbar.Toggle
                     fixedWidth

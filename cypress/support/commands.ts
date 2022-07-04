@@ -4,6 +4,46 @@ import Response = Cypress.Response;
 import RequestOptions = Cypress.RequestOptions;
 import Chainable = Cypress.Chainable;
 
+Cypress.Commands.add('getByTestId', (id: string) => {
+    return cy.get(`[data-testid=${id}]`);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Cypress.Commands.add('class', (className) => {
     return cy.get('[class*=' + className + "]");
 });

@@ -4,6 +4,8 @@ declare global {
     declare namespace Cypress {
         interface Chainable {
             class(className: string): Chainable<any>;
+            getByTestId(id: string): Chainable<any>;
+
             getByTitle(titleName: string): Chainable<any>;
             startGame(presetName: string, topicName?: Topic);
             startAndQuit(presetName: string, topicName?: Topic);
