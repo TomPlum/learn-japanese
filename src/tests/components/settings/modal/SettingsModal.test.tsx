@@ -1,5 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import SettingsModal, { SettingsModalProps, SettingsType } from "../../../../components/settings/modal/SettingsModal";
+import renderReduxConsumer from "../../../renderReduxConsumer";
 
 const onCloseHandler = jest.fn();
 
@@ -13,7 +14,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-    const component = render(<SettingsModal {...props} />);
+    const component = renderReduxConsumer(<SettingsModal {...props} />);
     return {
         general: component.getByTitle('General'),
         learn: component.getByTitle('Learn'),
@@ -26,11 +27,11 @@ const setup = () => {
     }
 }
 
-test('It should render the interface settings tab when clicking the tab', () => {
+test('It should render the interface settings tab when clicking the tab', async () => {
     props.type = SettingsType.PLAY; // Load with a different default tab
     const { ui } = setup();
     fireEvent.click(ui);
-    expect(screen.getByTestId('interface-settings-tab')).toBeInTheDocument();
+    expect(await screen.findByTestId('interface-settings-tab')).toBeInTheDocument();
 });
 
 test('It should render the general settings tab when clicking the tab', () => {

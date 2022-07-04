@@ -95,6 +95,7 @@ export const userSlice = createSlice({
                     }
                     case Preference.FLASH_CARDS_QUANTITY: {
                         state.user.preferences.flashCardsQuantity = Number(value);
+                        break;
                     }
                 }
 

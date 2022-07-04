@@ -38,8 +38,7 @@ test('Should display the users nickname if they have one and they are logged in'
 });
 
 test('Should display the users username if they don\'t have a nickname are logged in', () => {
-    user.nickname = undefined;
-    store.dispatch(setUser(user));
+    store.dispatch(setUser({ ...testUser, nickname: undefined }));
     setup();
     expect(screen.getByText('TomPlum42')).toBeInTheDocument();
 });

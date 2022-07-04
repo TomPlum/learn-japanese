@@ -109,7 +109,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                     id="interface-settings-confidence-menu-selector"
                     options={[
                         { name: "Emoji Style", icon: faSmile },
-                        { name: "Numerical", icon: faSortNumericUp }
+                        { name: "Numbers 1 - 6", icon: faSortNumericUp }
                     ]}
                 />
             </div>

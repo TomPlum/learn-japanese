@@ -40,7 +40,7 @@ export default class UserService {
      * @return boolean true if exists, else false.
      */
     public async usernameExists(username: string): Promise<UserExistsResponse> {
-        return RestClient.get<UserExistsResponse>("/user/exists?username=" + username.trim()).then(response => {
+        return RestClient.get<UserExistsResponse>(`/user/exists?username=${username.trim()}`).then(response => {
             if (response.data?.exists) {
                 return { exists: response.data?.exists };
             } else {
@@ -57,7 +57,7 @@ export default class UserService {
      * @return boolean true if exists, else false.
      */
     public async emailAlreadyRegistered(email: string): Promise<UserExistsResponse> {
-        return RestClient.get<UserExistsResponse>("/user/exists?email=" + email.trim()).then(response => {
+        return RestClient.get<UserExistsResponse>(`/user/exists?email=${email.trim()}`).then(response => {
             if (response.data?.exists) {
                 return { exists: true };
             } else {
@@ -74,7 +74,7 @@ export default class UserService {
      * @return response true if successful, else false with the reason.
      */
     public async setNickname(nickname: string): Promise<UpdateResponse> {
-        return RestClient.put("/user/set-nickname/" + nickname.trim()).then(() => {
+        return RestClient.put(`/user/set-nickname/${nickname.trim()}`).then(() => {
             return { success: true };
         }).catch((response: APIResponse<UpdateResponse>) => {
             return { success: false, error: response.error };
