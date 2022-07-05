@@ -2,12 +2,9 @@ import SettingsTabTitle from "./SettingsTabTitle";
 import styles from "../../../styles/sass/components/settings/modal/NotificationsSettingsTab.module.scss";
 import { faEraser, faFireAlt, faSnowflake } from "@fortawesome/free-solid-svg-icons";
 import SettingsBooleanButton from "./SettingsBooleanButton";
-import { useState } from "react";
+import { Preference } from "../../../domain/user/Preference";
 
 const NotificationsSettingsTab = () => {
-
-    const [streakNotifications, setStreakNotifications] = useState(false);
-    const [mistakesNotifications, setMistakesNotifications] = useState(false);
 
     return (
         <div data-testid="notification-settings-tab">
@@ -23,10 +20,9 @@ const NotificationsSettingsTab = () => {
                 </p>
                 <SettingsBooleanButton
                     enableHoverColours
-                    state={streakNotifications}
                     falsy={{ name: "Enable", icon: faFireAlt }}
+                    preference={Preference.STREAK_NOTIFICATIONS}
                     truthy={{ name: "Disable", icon: faSnowflake }}
-                    onClick={(state: boolean) => setStreakNotifications(state)}
                 />
             </div>
 
@@ -37,10 +33,9 @@ const NotificationsSettingsTab = () => {
                 </p>
                 <SettingsBooleanButton
                     enableHoverColours
-                    state={mistakesNotifications}
+                    preference={Preference.MISTAKES_REMINDERS}
                     falsy={{ name: "Enable", icon: faEraser }}
                     truthy={{ name: "Disable", icon: faEraser }}
-                    onClick={(state: boolean) => setMistakesNotifications(state)}
                 />
             </div>
         </div>

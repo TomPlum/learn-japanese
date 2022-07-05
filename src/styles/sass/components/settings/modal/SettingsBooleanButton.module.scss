@@ -1,6 +1,17 @@
 @import "src/styles/sass/components/settings";
 @import "src/styles/sass/colours";
 
+.button {
+  position: relative;
+
+  .updating {
+    position: absolute;
+    right: 0;
+    margin: 12px;
+    transition: color ease-in-out 0.2s;
+  }
+}
+
 .truthy:hover {
   color: #7fe14c;
 }

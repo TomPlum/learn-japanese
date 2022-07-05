@@ -6,7 +6,6 @@ import SettingsTabTitle from "./SettingsTabTitle";
 import SettingsDropdown from "./SettingsDropdown";
 import FontService from "../../../service/FontService";
 import { Font } from "../../ui/buttons/FontSelectorButton";
-import SettingsBooleanButton from "./SettingsBooleanButton";
 import { Preference } from "../../../domain/user/Preference";
 
 export interface InterfaceSettingsTabProps {
@@ -57,11 +56,13 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                 <p className={styles.text}>
                     Switch between the dark and light variations of the user-interface theming.
                 </p>
-                <SettingsBooleanButton
-                    state={darkMode}
-                    onClick={(state: boolean) => setDarkMode(state)}
-                    truthy={{ name: "Toggle Light Mode", icon: faLightbulb, className: styles.light }}
-                    falsy={{ name: "Toggle Dark Mode", icon: faMoon, className: styles.dark }}
+                <SettingsDropdown
+                    id="interface-settings-theme-selector"
+                    preference={Preference.THEME}
+                    options={[
+                        { name: "Dark Mode", icon: faMoon, className: styles.dark },
+                        { name: "Light Mode", icon: faLightbulb, className: styles.light }
+                    ]}
                 />
             </div>
 

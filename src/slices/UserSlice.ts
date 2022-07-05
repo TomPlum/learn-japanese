@@ -101,6 +101,14 @@ export const userSlice = createSlice({
                         state.user.preferences.theme = value;
                         break;
                     }
+                    case Preference.STREAK_NOTIFICATIONS: {
+                        state.user.preferences.streakNotifications = Boolean(value);
+                        break;
+                    }
+                    case Preference.MISTAKES_REMINDERS: {
+                        state.user.preferences.mistakesReminders = Boolean(value);
+                        break;
+                    }
                 }
 
                 localStorage.setItem("user", JSON.stringify(state.user));

@@ -1,6 +1,11 @@
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../styles/sass/components/settings/modal/SettingsBooleanButton.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import UserService from "../../../service/UserService";
+import { useUserDispatch, useUserSelector } from "../../../hooks";
+import { Preference } from "../../../domain/user/Preference";
+import { setPreference } from "../../../slices/UserSlice";
+import { useState } from "react";
 
 export interface BooleanStateProps {
     name: string;
@@ -9,31 +14,69 @@ export interface BooleanStateProps {
 }
 
 export interface SettingsBooleanButtonProps {
-    state: boolean;
     truthy: BooleanStateProps;
     falsy: BooleanStateProps;
+    preference: Preference;
     enableHoverColours?: boolean;
-    onClick?: (state: boolean) => void;
+    onError?: (error: string) => void;
 }
 
 const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
-    const { state, truthy, falsy, enableHoverColours, onClick } = props;
+    const { truthy, falsy, preference, enableHoverColours, onError } = props;
+    const [updating, setUpdating] = useState(false);
 
-    const handleClick = () => {
-        onClick?.(!state)
+    const service = new UserService();
+    const userDispatch = useUserDispatch();
+    const preferences = useUserSelector(state => state.user?.user?.preferences);
+
+    const getUserPreferenceValue = (): boolean | undefined => {
+        switch (preference) {
+            case Preference.MISTAKES_REMINDERS: return preferences?.mistakesReminders;
+            case Preference.STREAK_NOTIFICATIONS: return preferences?.streakNotifications;
+        }
     }
 
-    const name = state ? truthy.name : falsy.name;
-    const icon = state ? truthy.icon : falsy.icon;
-    const className = state ? truthy.className : falsy.className;
-    const colourClass = state ? styles.falsy : styles.truthy;
+    const selected = getUserPreferenceValue() ? truthy : falsy ?? { name: "Unknown" };
+
+    const handleChange = () => {
+        setUpdating(true);
+
+        const newValue = selected === truthy ? falsy : truthy;
+        service.updatePreferences([{ preference, value: newValue === truthy ? "true" : "false" }]).then(response => {
+            if (response.success) {
+                userDispatch(setPreference({ preference, value: newValue.name }));
+            } else {
+                handleUpdateError(response);
+            }
+        }).catch(response => {
+            handleUpdateError(response);
+        }).finally(() => {
+            setUpdating(false);
+        });
+    }
+
+    const handleUpdateError = (response: any) => {
+        onError?.(response.error ?? "Failed to update preference.");
+    }
+
+    const className = selected === truthy ? truthy.className : falsy.className;
+    const colourClass = selected === falsy ? styles.falsy : styles.truthy;
     const classes = [styles.button, className];
     if (enableHoverColours) classes.push(colourClass)
 
     return (
-        <div className={classes.join(" ")} onClick={handleClick}>
-            <FontAwesomeIcon icon={icon} className={styles.icon} />
-            <span className={styles.name}>{name}</span>
+        <div className={classes.join(" ")} onClick={handleChange}>
+            <FontAwesomeIcon icon={selected.icon} className={styles.icon} />
+            <span className={styles.name}>{selected.name}</span>
+
+            {updating && (
+                <FontAwesomeIcon
+                    spin
+                    icon={faCircleNotch}
+                    className={styles.updating}
+                    data-testid="settings-boolean-button-spinner"
+                />
+            )}
         </div>
     );
 }
