@@ -49,6 +49,8 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
   z-index: 10000;
   width: 200px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .option {
