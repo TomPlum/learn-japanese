@@ -20,9 +20,10 @@ const NotificationsSettingsTab = () => {
                 </p>
                 <SettingsBooleanButton
                     enableHoverColours
-                    falsy={{ name: "Enable", icon: faFireAlt }}
+                    id="streak-notifications-toggle"
                     preference={Preference.STREAK_NOTIFICATIONS}
-                    truthy={{ name: "Disable", icon: faSnowflake }}
+                    truthy={{ name: "Enabled", hover: "Disable", icon: faFireAlt }}
+                    falsy={{ name: "Disabled", hover: "Enable", icon: faSnowflake }}
                 />
             </div>
 
@@ -33,9 +34,10 @@ const NotificationsSettingsTab = () => {
                 </p>
                 <SettingsBooleanButton
                     enableHoverColours
+                    id="mistakes-reminders-toggle"
                     preference={Preference.MISTAKES_REMINDERS}
-                    falsy={{ name: "Enable", icon: faEraser }}
-                    truthy={{ name: "Disable", icon: faEraser }}
+                    falsy={{ name: "Disabled", hover: "Enable", icon: faEraser }}
+                    truthy={{ name: "Enabled", hover: "Disable", icon: faEraser }}
                 />
             </div>
         </div>

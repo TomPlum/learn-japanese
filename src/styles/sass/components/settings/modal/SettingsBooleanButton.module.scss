@@ -12,10 +12,18 @@
   }
 }
 
+.name, .icon {
+  transition: color ease-in-out 0.2s;
+}
+
 .truthy:hover {
-  color: #7fe14c;
+  .name, .icon {
+    color: #45d540;
+  }
 }
 
 .falsy:hover {
-  color: #fb3a3a;
+  .name, .icon {
+    color: #fb3a3a;
+  }
 }

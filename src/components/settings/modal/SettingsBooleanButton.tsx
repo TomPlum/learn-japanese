@@ -9,11 +9,13 @@ import { useState } from "react";
 
 export interface BooleanStateProps {
     name: string;
+    hover?: string;
     className?: string;
     icon: IconDefinition;
 }
 
 export interface SettingsBooleanButtonProps {
+    id: string;
     truthy: BooleanStateProps;
     falsy: BooleanStateProps;
     preference: Preference;
@@ -22,8 +24,7 @@ export interface SettingsBooleanButtonProps {
 }
 
 const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
-    const { truthy, falsy, preference, enableHoverColours, onError } = props;
-    const [updating, setUpdating] = useState(false);
+    const { id, truthy, falsy, preference, enableHoverColours, onError } = props;
 
     const service = new UserService();
     const userDispatch = useUserDispatch();
@@ -38,13 +39,21 @@ const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
 
     const selected = getUserPreferenceValue() ? truthy : falsy ?? { name: "Unknown" };
 
+    const [text, setText] = useState(selected.name);
+    const [icon, setIcon] = useState(selected.icon);
+    const [updating, setUpdating] = useState(false);
+
     const handleChange = () => {
         setUpdating(true);
 
-        const newValue = selected === truthy ? falsy : truthy;
-        service.updatePreferences([{ preference, value: newValue === truthy ? "true" : "false" }]).then(response => {
+        const request = {
+            preference: preference,
+            value: selected === truthy ? "false" : "true"
+        };
+
+        service.updatePreferences([request]).then(response => {
             if (response.success) {
-                userDispatch(setPreference({ preference, value: newValue.name }));
+                userDispatch(setPreference(request));
             } else {
                 handleUpdateError(response);
             }
@@ -59,15 +68,36 @@ const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
         onError?.(response.error ?? "Failed to update preference.");
     }
 
+    const handleMouseOver = () => {
+        if (selected.hover) {
+            setText(selected.hover);
+            setIcon(selected === truthy ? falsy.icon : truthy.icon);
+        }
+    }
+
+    const handleMouseOut = () => {
+        setText(selected.name);
+        setIcon(selected.icon);
+    }
+
     const className = selected === truthy ? truthy.className : falsy.className;
-    const colourClass = selected === falsy ? styles.falsy : styles.truthy;
+    const colourClass = selected === falsy ? styles.truthy : styles.falsy;
     const classes = [styles.button, className];
-    if (enableHoverColours) classes.push(colourClass)
+    if (enableHoverColours) classes.push(colourClass);
+
+    const buttonProps = {
+        "data-testid": id,
+        onClick: handleChange,
+        onMouseOut: handleMouseOut,
+        onMouseOver: handleMouseOver,
+        className: classes.join(" ")
+    }
 
     return (
-        <div className={classes.join(" ")} onClick={handleChange}>
-            <FontAwesomeIcon icon={selected.icon} className={styles.icon} />
-            <span className={styles.name}>{selected.name}</span>
+        <div {...buttonProps}>
+            <FontAwesomeIcon icon={icon} className={styles.icon} />
+
+            <span className={styles.name}>{text}</span>
 
             {updating && (
                 <FontAwesomeIcon
