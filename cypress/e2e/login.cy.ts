@@ -1,8 +1,22 @@
-it('User can login', () => {
-    cy.visit('http://localhost:3001/learn-japanese/home')
-    cy.getByTestId('navigation-bar').contains('Login').click()
-    cy.getByTestId('login-form').click()
-    cy.contains('div', 'Username').find('input').first().type('MorbinTime')
-    cy.contains('div', 'Password').find('input').first().type('Testing123-')
-    cy.contains('div', 'form-group').find('button').click()
+describe('Successful Login', () => {
+    it('Login using "login" button ', () => {
+        cy.visit('/home');
+        cy.getByTestId('navigation-bar').contains('Login').click();
+        cy.getByTestId('username-input').type('MorbinTime');
+        cy.getByTestId('password-input').type('Testing123-');
+        cy.getByTestId('login-button').click();
+        cy.getByTestId('navigation-bar').contains('Morbius');
+    });
+});
+
+describe('Unsuccessful Login', () => {
+   it('Incorrect password', () => {
+       cy.visit('/home');
+       cy.getByTestId('navigation-bar').contains('Login').click();
+       cy.getByTestId('username-input').type('MorbinTime');
+       cy.getByTestId('password-input').type('Testing123-');
+       cy.getByTestId('login-button').click();
+       cy.getByTestId('login-form').contains('Username or password is incorrect.')
+   });
+
 });

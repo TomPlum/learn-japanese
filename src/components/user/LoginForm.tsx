@@ -111,6 +111,8 @@ const LoginForm = (props: LoginFormProps) => {
         setPasswordValid(password.length > 0);
     }
 
+    const disabled = !formValid || loading;
+
     return (
         <Modal.Body className={styles.body} data-testid="login-form">
             {!!error && (
@@ -137,6 +139,7 @@ const LoginForm = (props: LoginFormProps) => {
                     isValid={usernameValid}
                     className={styles.input}
                     isInvalid={!usernameValid}
+                    data-testid="username-input"
                     onChange={handleUsernameChange}
                 />
             </Form.Group>
@@ -152,12 +155,13 @@ const LoginForm = (props: LoginFormProps) => {
                     isValid={passwordValid}
                     className={styles.input}
                     isInvalid={!passwordValid}
+                    data-testid="password-input"
                     onChange={handlePasswordChange}
                 />
             </Form.Group>
 
             <Form.Group>
-                <Button className={styles.login} variant="success" onClick={login} disabled={!formValid || loading}>
+                <Button className={styles.login} variant="success" onClick={login} disabled={disabled} data-testid="login-button">
                     {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="login-loading" />}
                     {' Login'}
                 </Button>
