@@ -47,27 +47,59 @@ afterEach(() => {
 });
 
 test('Should render the truthy text if the value from the Redux store is true', () => {
-    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: "true" }));
+    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }));
     const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
     expect(component.getByText('Enabled')).toBeInTheDocument();
 });
 
 test('Should render the falsy text if the value from the Redux store is false', () => {
-    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: "false" }));
+    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: false }));
     const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
     expect(component.getByText('Disabled')).toBeInTheDocument();
 });
 
+test('Should render an unknown text if the value from the Redux store is undefined', () => {
+    store.dispatch(clearUser());
+    const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
+    expect(component.getByText('Unknown')).toBeInTheDocument();
+});
+
+test('Should render an unknown text if the passed preference is not known as a boolean property', () => {
+    props.preference = Preference.THEME;
+    const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
+    expect(component.getByText('Unknown')).toBeInTheDocument();
+});
+
 test('Should render the truthy hover text if the value from the Redux store is true and the mouse is over', () => {
-    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: "true" }));
+    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }));
     const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
     fireEvent.mouseOver(component.getByTestId('test-toggle'));
     expect(component.getByText('Disable Thing')).toBeInTheDocument();
 });
 
 test('Should render the falsy hover text if the value from the Redux store is false and the mouse is over', () => {
-    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: "false" }));
+    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: false }));
     const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
     fireEvent.mouseOver(component.getByTestId('test-toggle'));
     expect(component.getByText('Enable Thing')).toBeInTheDocument();
+});
+
+test('Should call the service with the correct parameters when clicking the button in its truthy state', () => {
+    mockUpdatePreferences.mockResolvedValueOnce({ success: true });
+    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }));
+
+    const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
+    fireEvent.click(component.getByTestId('test-toggle'));
+
+    expect(mockUpdatePreferences).toHaveBeenCalledWith([{ preference: Preference.MISTAKES_REMINDERS, value: "false" }]);
+});
+
+test('Should call the service with the correct parameters when clicking the button in its falsy state', async () => {
+    mockUpdatePreferences.mockResolvedValueOnce({ success: true });
+    await store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: false }));
+
+    const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
+    fireEvent.click(component.getByTestId('test-toggle'));
+
+    expect(mockUpdatePreferences).toHaveBeenCalledWith([{ preference: Preference.MISTAKES_REMINDERS, value: "true" }]);
 });

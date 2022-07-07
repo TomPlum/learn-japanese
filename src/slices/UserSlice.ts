@@ -56,7 +56,7 @@ export const userSlice = createSlice({
                 localStorage.setItem("user", JSON.stringify(state.user));
             }
         },
-        setPreference: (state, action: PayloadAction<{ preference: Preference, value: string }>) => {
+        setPreference: (state, action: PayloadAction<{ preference: Preference, value: any }>) => {
             if (state.user) {
                 const value = action.payload.value;
 
@@ -102,11 +102,11 @@ export const userSlice = createSlice({
                         break;
                     }
                     case Preference.STREAK_NOTIFICATIONS: {
-                        state.user.preferences.streakNotifications = Boolean(value);
+                        state.user.preferences.streakNotifications = value;
                         break;
                     }
                     case Preference.MISTAKES_REMINDERS: {
-                        state.user.preferences.mistakesReminders = Boolean(value);
+                        state.user.preferences.mistakesReminders = value;
                         break;
                     }
                 }

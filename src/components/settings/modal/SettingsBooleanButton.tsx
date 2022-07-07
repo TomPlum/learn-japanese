@@ -1,4 +1,4 @@
-import { faCircleNotch, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch, faQuestionCircle, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../styles/sass/components/settings/modal/SettingsBooleanButton.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserService from "../../../service/UserService";
@@ -34,10 +34,12 @@ const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
         switch (preference) {
             case Preference.MISTAKES_REMINDERS: return preferences?.mistakesReminders;
             case Preference.STREAK_NOTIFICATIONS: return preferences?.streakNotifications;
+            default: return undefined;
         }
     }
 
-    const selected = getUserPreferenceValue() ? truthy : falsy ?? { name: "Unknown" };
+    const userPreferenceValue = getUserPreferenceValue();
+    const selected = userPreferenceValue === undefined ? { name: "Unknown", icon: faQuestionCircle } : userPreferenceValue ? truthy : falsy;
 
     const [text, setText] = useState(selected.name);
     const [icon, setIcon] = useState(selected.icon);
@@ -48,11 +50,12 @@ const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
 
         const request = {
             preference: preference,
-            value: selected === truthy ? "false" : "true"
+            value: selected !== truthy
         };
 
-        service.updatePreferences([request]).then(response => {
+        service.updatePreferences([{ preference, value: selected === truthy ? "false" : "true" }]).then(response => {
             if (response.success) {
+                setText((selected === truthy ? falsy : truthy).name);
                 userDispatch(setPreference(request));
             } else {
                 handleUpdateError(response);
