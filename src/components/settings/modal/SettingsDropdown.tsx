@@ -100,7 +100,7 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
         <>
             <div ref={target} className={buttonClasses.join(" ")} onClick={handleClick} title={title} data-testid={id}>
                 {loading && (
-                    <FontAwesomeIcon icon={faSpinner} spin={true} />
+                    <FontAwesomeIcon icon={faSpinner} spin={true} data-testid="settings-dropdown-loading" />
                 )}
 
                 {!loading && !!selected && (

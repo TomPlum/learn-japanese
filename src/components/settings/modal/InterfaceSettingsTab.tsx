@@ -7,6 +7,8 @@ import SettingsDropdown from "./SettingsDropdown";
 import FontService from "../../../service/FontService";
 import { Font } from "../../ui/buttons/FontSelectorButton";
 import { Preference } from "../../../domain/user/Preference";
+import { useFontDispatch } from "../../../hooks";
+import { setFont } from "../../../slices/FontSlice";
 
 export interface InterfaceSettingsTabProps {
     onEditDashboardLayout: () => void;
@@ -16,10 +18,10 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
 
     const { onEditDashboardLayout } = props;
 
+    const fontDispatcher = useFontDispatch();
     const fontService = new FontService();
 
     const [fonts, setFonts] = useState<Font[]>([]);
-    const [darkMode, setDarkMode] = useState(true);
 
     useEffect(() => {
         fontService.getFonts().then(response => {
@@ -28,7 +30,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
     }, []);
 
     const handleFontChange = (font: string) => {
-        // TODO: Set in Redux state here
+        fontDispatcher(setFont(font));
     }
 
     return (
@@ -81,7 +83,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                     options={fonts.map(font => {
                         return {
                             name: font.displayName,
-                            style: { "font-family": font.name }
+                            style: { fontFamily: font.name }
                         }
                     })}
                 />
