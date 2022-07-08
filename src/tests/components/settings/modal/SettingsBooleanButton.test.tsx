@@ -71,10 +71,17 @@ test('Should render an unknown text if the passed preference is not known as a b
 });
 
 test('Should render the truthy hover text if the value from the Redux store is true and the mouse is over', () => {
+    // Default the state to truthy so its enabled
     store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }));
     const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
+
+    // Mousing over should render the falsy hover text
     fireEvent.mouseOver(component.getByTestId('test-toggle'));
     expect(component.getByText('Disable Thing')).toBeInTheDocument();
+
+    // Mousing out should re-render the truthy state text
+    fireEvent.mouseOut(component.getByTestId('test-toggle'));
+    expect(component.getByText('Enabled')).toBeInTheDocument();
 });
 
 test('Should render the falsy hover text if the value from the Redux store is false and the mouse is over', () => {
@@ -84,12 +91,26 @@ test('Should render the falsy hover text if the value from the Redux store is fa
     expect(component.getByText('Enable Thing')).toBeInTheDocument();
 });
 
-test('Should call the service with the correct parameters when clicking the button in its truthy state', () => {
+test('Should continue rendering the default text value when hovering if no hover text is passed', () => {
+    props.truthy.hover = undefined;
+    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }));
+    const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
+
+    // Should default to the enabled text
+    expect(component.getByText('Enabled')).toBeInTheDocument();
+
+    // Mousing over shouldn't change it
+    fireEvent.mouseOver(component.getByTestId('test-toggle'));
+    expect(component.getByText('Enabled')).toBeInTheDocument();
+});
+
+test('Should call the service with the correct parameters when clicking the button in its truthy state', async () => {
     mockUpdatePreferences.mockResolvedValueOnce({ success: true });
     store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }));
 
     const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
     fireEvent.click(component.getByTestId('test-toggle'));
+    expect(await component.findByTestId('settings-boolean-button-spinner')).not.toBeInTheDocument();
 
     expect(mockUpdatePreferences).toHaveBeenCalledWith([{ preference: Preference.MISTAKES_REMINDERS, value: "false" }]);
 });
@@ -100,6 +121,47 @@ test('Should call the service with the correct parameters when clicking the butt
 
     const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
     fireEvent.click(component.getByTestId('test-toggle'));
+    expect(await component.findByTestId('settings-boolean-button-spinner')).not.toBeInTheDocument();
 
     expect(mockUpdatePreferences).toHaveBeenCalledWith([{ preference: Preference.MISTAKES_REMINDERS, value: "true" }]);
+});
+
+test('Should call the onError event handler with the response error if not successful', async () => {
+    mockUpdatePreferences.mockResolvedValueOnce({ success: false, error: "Something went wrong." });
+
+    const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
+    fireEvent.click(component.getByTestId('test-toggle'));
+    expect(await component.findByTestId('settings-boolean-button-spinner')).not.toBeInTheDocument();
+
+    expect(await onErrorHandler).toHaveBeenCalledWith("Something went wrong.");
+});
+
+test('Should call the onError event handler with the response error if rejected', async () => {
+    mockUpdatePreferences.mockRejectedValueOnce({ error: "Something went wrong." });
+
+    const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
+    fireEvent.click(component.getByTestId('test-toggle'));
+    expect(await component.findByTestId('settings-boolean-button-spinner')).not.toBeInTheDocument();
+
+    expect(await onErrorHandler).toHaveBeenCalledWith("Something went wrong.");
+});
+
+test('Should call the onError event handler with a default error message if failed and not provided', async () => {
+    mockUpdatePreferences.mockResolvedValueOnce({ success: false, error: undefined });
+
+    const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
+    fireEvent.click(component.getByTestId('test-toggle'));
+    expect(await component.findByTestId('settings-boolean-button-spinner')).not.toBeInTheDocument();
+
+    expect(await onErrorHandler).toHaveBeenCalledWith("Failed to update preference.");
+});
+
+test('Should call the onError event handler with a default error message if rejected and not provided', async () => {
+    mockUpdatePreferences.mockRejectedValueOnce({ error: undefined });
+
+    const component = renderReduxConsumer(<SettingsBooleanButton {...props} />);
+    fireEvent.click(component.getByTestId('test-toggle'));
+    expect(await component.findByTestId('settings-boolean-button-spinner')).not.toBeInTheDocument();
+
+    expect(await onErrorHandler).toHaveBeenCalledWith("Failed to update preference.");
 });
