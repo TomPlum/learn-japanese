@@ -1,11 +1,10 @@
 import SettingsTabTitle from "./SettingsTabTitle";
-import styles from "../../../styles/sass/components/settings/modal/NotificationsSettingsTab.module.scss";
+import styles from "../../../styles/sass/components/settings/modal/NotificationSettingsTab.module.scss";
 import { faEraser, faFireAlt, faSnowflake } from "@fortawesome/free-solid-svg-icons";
 import SettingsBooleanButton from "./SettingsBooleanButton";
 import { Preference } from "../../../domain/user/Preference";
 
 const NotificationsSettingsTab = () => {
-
     return (
         <div data-testid="notification-settings-tab">
             <SettingsTabTitle
