@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { useOnComponentBlur } from "../../../hooks";
 
 export interface SettingsButtonProps {
+    id?: string;
     name: string;
     className?: string;
     icon: IconDefinition;
@@ -14,7 +15,7 @@ export interface SettingsButtonProps {
 
 const SettingsButton = (props: SettingsButtonProps) => {
 
-    const { name, icon, confirm, className, onClick } = props;
+    const { id, name, icon, confirm, className, onClick } = props;
 
     const ref = useRef(null);
 
@@ -48,7 +49,7 @@ const SettingsButton = (props: SettingsButtonProps) => {
     const buttonIcon = isConfirming ? confirm === 'warn' ? faExclamationCircle : faExclamationTriangle : icon;
 
     return (
-        <div ref={ref} className={classes} onClick={handleClick} title={title}>
+        <div ref={ref} className={classes} onClick={handleClick} title={title} data-testid={id}>
             <FontAwesomeIcon icon={buttonIcon} className={styles.icon} />
             <span className={styles.name}>{buttonText}</span>
         </div>

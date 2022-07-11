@@ -76,4 +76,36 @@ describe("Local Storage Service", () => {
             expect(localStorageMock.getItem("hide-user-profile-hint")).toBe("true");
         });
     });
+
+    describe("Clear", () => {
+        it("Should clear recent icons", () => {
+            localStorageMock.setItem("recent-icons", "[\"FaBed\",\"FaAngleDoubleLeft\"]");
+            service.clear();
+            expect(localStorageMock.getItem("recent-icon")).toBeUndefined();
+        });
+
+        it("Should clear user profile registration hint", () => {
+            localStorageMock.setItem("hide-user-profile-hint", "true");
+            service.clear();
+            expect(localStorageMock.getItem("hide-user-profile-hint")).toBeUndefined();
+        });
+
+        it("Should clear the last play session", () => {
+            localStorageMock.setItem("last-play-session", "{\"key\": \"value\"}");
+            service.clear();
+            expect(localStorageMock.getItem("last-play-session")).toBeUndefined();
+        });
+
+        it("Should clear the last learn session", () => {
+            localStorageMock.setItem("last-learn-session", "{\"key\": \"value\"}");
+            service.clear();
+            expect(localStorageMock.getItem("last-learn-session")).toBeUndefined();
+        });
+
+        it("Should clear the kanji font selection", () => {
+            localStorageMock.setItem("font", "SanafonMugi Handwriting");
+            service.clear();
+            expect(localStorageMock.getItem("font")).toBeUndefined();
+        });
+    });
 })

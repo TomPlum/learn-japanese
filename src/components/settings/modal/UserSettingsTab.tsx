@@ -10,10 +10,12 @@ import PopOver from "../../ui/PopOver";
 import { isChrome, isFirefox, isSafari } from 'react-device-detect'
 import UserService from "../../../service/UserService";
 import { Preference } from "../../../domain/user/Preference";
+import LocalStorageService from "../../../service/LocalStorageService";
 
 const UserSettingsTab = () => {
 
     const userService = new UserService();
+    const localStorageService = new LocalStorageService();
 
     const [confirmingPassword, setConfirmingPassword] = useState(false);
 
@@ -104,7 +106,13 @@ const UserSettingsTab = () => {
                         Deletes all locally stored data from your browser except for your user session.
                         Does not permanently delete any saved data, but may increase loading times temporarily.
                     </p>
-                    <SettingsButton name="Clear Storage" icon={getBrowserIcon()} confirm="warn" />
+                    <SettingsButton
+                        confirm="warn"
+                        name="Clear Storage"
+                        icon={getBrowserIcon()}
+                        id="clear-local-storage-button"
+                        onClick={localStorageService.clear}
+                    />
                 </div>
 
                 <div className={styles.section}>

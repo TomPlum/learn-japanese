@@ -22,6 +22,7 @@ class LocalStorageService {
 
     private readonly RECENT_ICONS_KEY = "recent-icons";
     private readonly HIDE_USER_PROFILE_HINT = "hide-user-profile-hint";
+    private readonly KANJI_FONT_KEY = "font";
 
     private readonly LAST_PLAY_SESSION_KEY = "last-play-session";
     private readonly LAST_LEARN_SESSION_KEY = "last-learn-session";
@@ -98,6 +99,18 @@ class LocalStorageService {
         const session = JSON.parse(value) as PlaySession;
         const dataSettings = this.dataSettingsConverter.deserialise(session.data);
         return SessionSettings.forLearning(dataSettings, new LearnSettings());
+    }
+
+    /**
+     * Clears all locally stored data expect for the user
+     * session information.
+     */
+    public clear() {
+        localStorage.removeItem(this.RECENT_ICONS_KEY);
+        localStorage.removeItem(this.HIDE_USER_PROFILE_HINT);
+        localStorage.removeItem(this.LAST_PLAY_SESSION_KEY);
+        localStorage.removeItem(this.LAST_LEARN_SESSION_KEY);
+        localStorage.removeItem(this.KANJI_FONT_KEY);
     }
 }
 
