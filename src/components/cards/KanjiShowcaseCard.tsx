@@ -85,7 +85,7 @@ const KanjiShowcaseCard = () => {
     }
 
     return (
-        <DashboardCard loading={loading} updating={updating} error={error} height={300}>
+        <DashboardCard loading={loading} updating={updating} error={error} height={300} id="kanji-showcase-card">
             {inExamples && <ExampleDisplay examples={examples} onDismiss={() => setInExamples(false)} />}
 
             <DashboardCard.Header>
@@ -108,7 +108,7 @@ const KanjiShowcaseCard = () => {
 
                     <div className={styles.kanji}>
                         <Copyable>
-                            <span style={{ fontFamily: font }}>
+                            <span style={{ fontFamily: font }} data-testid="kanji-showcase-card-character">
                                 {kanji?.getKanjiVariation()}
                             </span>
                         </Copyable>
