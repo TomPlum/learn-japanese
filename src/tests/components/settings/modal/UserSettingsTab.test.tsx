@@ -9,6 +9,13 @@ jest.mock("../../../../service/LocalStorageService", () => {
     }
 });
 
+const mockDeleteHighScoresData = jest.fn();
+jest.mock("../../../../service/HighScoresService", () => {
+    return function() {
+        return { delete: mockDeleteHighScoresData };
+    }
+});
+
 test('Should render the profile visibility selector', async () => {
     const component = renderReduxConsumer(<UserSettingsTab />);
 
@@ -37,4 +44,12 @@ test('Should clear the local storage when clicking the clear local storage butto
     fireEvent.click(component.getByTestId('clear-local-storage-button'));
     fireEvent.click(component.getByTestId('clear-local-storage-button'));
     expect(mockClearLocalStorage).toHaveBeenCalled();
+});
+
+test('Should call the delete high-scores function when clicking the clear high-scores button', async () => {
+    mockDeleteHighScoresData.mockResolvedValueOnce({ success: true });
+    const component = renderReduxConsumer(<UserSettingsTab />);
+    fireEvent.click(component.getByTestId('reset-high-scores-button'));
+    fireEvent.click(component.getByTestId('reset-high-scores-button'));
+    expect(await mockDeleteHighScoresData).toHaveBeenCalled();
 });

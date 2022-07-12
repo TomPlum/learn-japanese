@@ -11,10 +11,12 @@ import { isChrome, isFirefox, isSafari } from 'react-device-detect'
 import UserService from "../../../service/UserService";
 import { Preference } from "../../../domain/user/Preference";
 import LocalStorageService from "../../../service/LocalStorageService";
+import HighScoresService from "../../../service/HighScoresService";
 
 const UserSettingsTab = () => {
 
     const userService = new UserService();
+    const highScoresService = new HighScoresService();
     const localStorageService = new LocalStorageService();
 
     const [confirmingPassword, setConfirmingPassword] = useState(false);
@@ -120,7 +122,13 @@ const UserSettingsTab = () => {
                     <p className={styles.text}>
                         Resets all your saved scores across the app. Any ranks you currently hold on the high-scores will be lost.
                     </p>
-                    <SettingsButton name="Reset Scores" icon={faMedal} confirm="warn" />
+                    <SettingsButton
+                        confirm="warn"
+                        icon={faMedal}
+                        name="Reset Scores"
+                        id="reset-high-scores-button"
+                        onClick={highScoresService.delete}
+                    />
                 </div>
 
                 <div className={styles.section}>
