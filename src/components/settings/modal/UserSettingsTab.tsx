@@ -8,21 +8,20 @@ import { useState } from "react";
 import PasswordConfirmation from "../../user/profile/PasswordConfirmation";
 import PopOver from "../../ui/PopOver";
 import { isChrome, isFirefox, isSafari } from 'react-device-detect'
-import UserService from "../../../service/UserService";
 import { Preference } from "../../../domain/user/Preference";
 import LocalStorageService from "../../../service/LocalStorageService";
 import HighScoresService from "../../../service/HighScoresService";
+import { Alert } from "react-bootstrap";
 
 const UserSettingsTab = () => {
 
-    const userService = new UserService();
     const highScoresService = new HighScoresService();
     const localStorageService = new LocalStorageService();
 
+    const [error, setError] = useState("");
     const [confirmingPassword, setConfirmingPassword] = useState(false);
 
     if (confirmingPassword) {
-
         const deleteAccountPopover = <PopOver
             title="Delete Account"
             text="Delete your user account and all of your personal data. This is an irreversible operation.
@@ -53,12 +52,25 @@ const UserSettingsTab = () => {
         return faGlobe;
     }
 
+    const handleResetHighScores = () => {
+        setError("");
+        highScoresService.delete().then(response => {
+            if (!response.success) {
+                setError(response.error);
+            }
+        }).catch(response => {
+            setError(response.error);
+        });
+    }
+
     return (
         <div data-testid="user-settings-tab">
             <SettingsTabTitle
                 title="User Settings"
                 description="Configure settings related to your user profile."
             />
+
+            {error && <Alert variant="danger">{error}</Alert>}
 
             <div className={styles.section}>
                 <p className={styles.heading}>Profile Visibility</p>
@@ -127,7 +139,7 @@ const UserSettingsTab = () => {
                         icon={faMedal}
                         name="Reset Scores"
                         id="reset-high-scores-button"
-                        onClick={highScoresService.delete}
+                        onClick={handleResetHighScores}
                     />
                 </div>
 
