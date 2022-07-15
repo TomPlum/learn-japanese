@@ -12,6 +12,7 @@ import { Preference } from "../../../domain/user/Preference";
 import LocalStorageService from "../../../service/LocalStorageService";
 import HighScoresService from "../../../service/HighScoresService";
 import { Alert } from "react-bootstrap";
+import { scrollToTop } from "../../../utility/Window";
 
 const UserSettingsTab = () => {
 
@@ -56,11 +57,16 @@ const UserSettingsTab = () => {
         setError("");
         highScoresService.delete().then(response => {
             if (!response.success) {
-                setError(response.error);
+                handleError(response.error);
             }
         }).catch(response => {
-            setError(response.error);
+            handleError(response.error);
         });
+    }
+
+    const handleError = (message: string) => {
+        setError(message);
+        scrollToTop();
     }
 
     return (

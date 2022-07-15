@@ -19,6 +19,7 @@ import GenkiChapter16 from "./genki/GenkiChapter16";
 import GenkiChapter17 from "./genki/GenkiChapter17";
 import GenkiChapter5 from "./genki/GenkiChapter5";
 import GenkiChapter6 from "./genki/GenkiChapter6";
+import { scrollToTop } from "../../utility/Window";
 
 const GenkiGrammarPage = () => {
 
@@ -88,13 +89,6 @@ const GenkiGrammarPage = () => {
         setSearch(search);
     }
 
-    const handleScrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
-
     return (
         <Container className={styles.wrapper} fluid>
             <Row noGutters>
@@ -143,7 +137,7 @@ const GenkiGrammarPage = () => {
 
             <Row>
                 <Col>
-                    <Button variant="dark" className={styles.backToTop} onClick={handleScrollToTop}>
+                    <Button variant="dark" className={styles.backToTop} onClick={scrollToTop}>
                         <FontAwesomeIcon icon={faArrowUp} fixedWidth />
                         <span>Back to Top</span>
                     </Button>
