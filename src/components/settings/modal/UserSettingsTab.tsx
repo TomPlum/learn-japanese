@@ -13,6 +13,7 @@ import LocalStorageService from "../../../service/LocalStorageService";
 import HighScoresService from "../../../service/HighScoresService";
 import { Alert } from "react-bootstrap";
 import { scrollToTop } from "../../../utility/Window";
+import DismissibleAlert from "../../ui/DismissibleAlert";
 
 const UserSettingsTab = () => {
 
@@ -76,7 +77,7 @@ const UserSettingsTab = () => {
                 description="Configure settings related to your user profile."
             />
 
-            {error && <Alert variant="danger">{error}</Alert>}
+            {error && <DismissibleAlert variant="danger">{error}</DismissibleAlert>}
 
             <div className={styles.section}>
                 <p className={styles.heading}>Profile Visibility</p>
