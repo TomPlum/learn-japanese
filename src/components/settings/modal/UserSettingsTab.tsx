@@ -11,7 +11,6 @@ import { isChrome, isFirefox, isSafari } from 'react-device-detect'
 import { Preference } from "../../../domain/user/Preference";
 import LocalStorageService from "../../../service/LocalStorageService";
 import HighScoresService from "../../../service/HighScoresService";
-import { Alert } from "react-bootstrap";
 import { scrollToTop } from "../../../utility/Window";
 import DismissibleAlert from "../../ui/DismissibleAlert";
 
@@ -38,21 +37,22 @@ const UserSettingsTab = () => {
         );
     }
 
-    const getBrowserIcon = (): IconDefinition => {
+    const getBrowserIcon = (): { icon: IconDefinition, id: string } => {
         if (isFirefox) {
-            return faFirefoxBrowser;
+            return { icon: faFirefoxBrowser, id: "firefox-icon" };
         }
 
         if (isSafari) {
-            return faSafari;
+            return { icon: faSafari, id: "safari-icon" };
         }
 
         if (isChrome) {
-            return faChrome;
+            return { icon: faChrome, id: "chrome-icon" };
         }
 
-        return faGlobe;
+        return { icon: faGlobe, id: "default-icon" };
     }
+    const browserIcon = getBrowserIcon();
 
     const handleResetHighScores = () => {
         setError("");
@@ -129,8 +129,8 @@ const UserSettingsTab = () => {
                     </p>
                     <SettingsButton
                         confirm="warn"
+                        icon={browserIcon}
                         name="Clear Storage"
-                        icon={getBrowserIcon()}
                         id="clear-local-storage-button"
                         onClick={localStorageService.clear}
                     />
@@ -143,8 +143,8 @@ const UserSettingsTab = () => {
                     </p>
                     <SettingsButton
                         confirm="warn"
-                        icon={faMedal}
                         name="Reset Scores"
+                        icon={{ icon: faMedal }}
                         id="reset-high-scores-button"
                         onClick={handleResetHighScores}
                     />
@@ -155,7 +155,7 @@ const UserSettingsTab = () => {
                     <p className={styles.text}>
                         Resets all your tracked statistics such as games played or won. This does not include flash card data.
                     </p>
-                    <SettingsButton name="Reset Stats" icon={faChartPie} confirm="warn" />
+                    <SettingsButton name="Reset Stats" icon={{ icon: faChartPie }} confirm="warn" />
                 </div>
 
                 <div className={styles.section}>
@@ -163,7 +163,7 @@ const UserSettingsTab = () => {
                     <p className={styles.text}>
                         Resets all your flash card data. Does not affect stats.
                     </p>
-                    <SettingsButton name="Reset Cards" icon={faBookOpen} confirm="warn" />
+                    <SettingsButton name="Reset Cards" icon={{ icon: faBookOpen }} confirm="warn" />
                 </div>
 
                 <div className={styles.section}>
@@ -173,8 +173,10 @@ const UserSettingsTab = () => {
                         You'll need to provide your password for confirmation.
                     </p>
                     <SettingsButton
+                        confirm="danger"
                         name="Delete Account"
-                        icon={faSkull} confirm="danger"
+                        icon={{ icon: faSkull}}
+                        id="delete-account-button"
                         onClick={() => setConfirmingPassword(true)}
                     />
                 </div>

@@ -4,11 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
 import { useOnComponentBlur } from "../../../hooks";
 
+export type ButtonIcon = {
+    id?: string;
+    icon: IconDefinition;
+}
+
 export interface SettingsButtonProps {
     id?: string;
     name: string;
     className?: string;
-    icon: IconDefinition;
+    icon: ButtonIcon;
     onClick?: () => void;
     confirm?: 'warn' | 'danger';
 }
@@ -46,11 +51,11 @@ const SettingsButton = (props: SettingsButtonProps) => {
     const title = isConfirming ? "Are you sure?" : "";
     const buttonText = isConfirming ? "Click to confirm" : name;
     const classes = [styles.button, className, extraClass].join(" ");
-    const buttonIcon = isConfirming ? confirm === 'warn' ? faExclamationCircle : faExclamationTriangle : icon;
+    const buttonIcon = isConfirming ? confirm === 'warn' ? faExclamationCircle : faExclamationTriangle : icon.icon;
 
     return (
         <div ref={ref} className={classes} onClick={handleClick} title={title} data-testid={id}>
-            <FontAwesomeIcon icon={buttonIcon} className={styles.icon} />
+            <FontAwesomeIcon icon={buttonIcon} data-testid={icon.id} className={styles.icon} />
             <span className={styles.name}>{buttonText}</span>
         </div>
     );

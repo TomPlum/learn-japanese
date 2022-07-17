@@ -47,7 +47,7 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
     const disabled = password.length === 0;
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} data-testid="password-confirmation">
             <Alert variant="warning" className={styles.alert}>
                 Please confirm your password.
             </Alert>

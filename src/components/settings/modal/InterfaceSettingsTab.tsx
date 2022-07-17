@@ -47,8 +47,8 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                    to different columns.
                </p>
                <SettingsButton
-                   icon={faGripVertical}
                    name="Open Layout Editor"
+                   icon={{ icon: faGripVertical }}
                    onClick={onEditDashboardLayout}
                />
            </div>
