@@ -118,3 +118,5 @@ test('Should render the chrome icon in the clear browser settings button when th
     const component = renderReduxConsumer(<UserSettingsTab />);
     expect(within(component.getByTestId('clear-local-storage-button')).getByTestId('chrome-icon')).toBeInTheDocument();
 });
+
+test.todo('Error dismiss');

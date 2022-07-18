@@ -77,7 +77,11 @@ const UserSettingsTab = () => {
                 description="Configure settings related to your user profile."
             />
 
-            {error && <DismissibleAlert variant="danger">{error}</DismissibleAlert>}
+            {error && (
+                <DismissibleAlert variant="danger" onDismiss={() => setError("")}>
+                    {error}
+                </DismissibleAlert>
+            )}
 
             <div className={styles.section}>
                 <p className={styles.heading}>Profile Visibility</p>
