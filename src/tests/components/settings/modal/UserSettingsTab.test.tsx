@@ -3,15 +3,6 @@ import { fireEvent, screen, within } from "@testing-library/react";
 import UserSettingsTab from "../../../../components/settings/modal/UserSettingsTab";
 import * as deviceDetect from 'react-device-detect';
 
-const isFirefox = jest.fn();
-Object.defineProperty(deviceDetect, 'isFirefox', { get: () => isFirefox });
-
-const isSafari = jest.fn();
-Object.defineProperty(deviceDetect, 'isSafari', { get: () => isSafari });
-
-const isChrome = jest.fn();
-Object.defineProperty(deviceDetect, 'isChrome', { get: () => isChrome });
-
 const mockClearLocalStorage = jest.fn();
 jest.mock("../../../../service/LocalStorageService", () => {
     return function() {
@@ -27,9 +18,12 @@ jest.mock("../../../../service/HighScoresService", () => {
 });
 
 beforeEach(() => {
-    isSafari.mockReset();
-    isChrome.mockReset();
-    isFirefox.mockReset();
+    // @ts-ignore
+    deviceDetect.isFirefox = false;
+    // @ts-ignore
+    deviceDetect.isChrome = false;
+    // @ts-ignore
+    deviceDetect.isSafari = false;
 });
 
 test('Should render the profile visibility selector', async () => {
@@ -99,22 +93,22 @@ test('Should render the password confirmation modal when confirming to delete ac
 });
 
 test('Should render the firefox icon in the clear browser settings button when the browser is firefox', () => {
-    isFirefox.mockReturnValueOnce(true);
+    // @ts-ignore
+    deviceDetect.isFirefox = true;
     const component = renderReduxConsumer(<UserSettingsTab />);
     expect(within(component.getByTestId('clear-local-storage-button')).getByTestId('firefox-icon')).toBeInTheDocument();
 });
 
 test('Should render the safari icon in the clear browser settings button when the browser is firefox', () => {
-   // isFirefox.mockReturnValueOnce(false);
-    isSafari.mockReturnValueOnce(true);
+    // @ts-ignore
+    deviceDetect.isSafari = true;
     const component = renderReduxConsumer(<UserSettingsTab />);
     expect(within(component.getByTestId('clear-local-storage-button')).getByTestId('safari-icon')).toBeInTheDocument();
 });
 
 test('Should render the chrome icon in the clear browser settings button when the browser is firefox', () => {
-   // isFirefox.mockReturnValueOnce(false);
-   // isSafari.mockReturnValueOnce(false);
-    isChrome.mockReturnValueOnce(true);
+    // @ts-ignore
+    deviceDetect.isChrome = true;
     const component = renderReduxConsumer(<UserSettingsTab />);
     expect(within(component.getByTestId('clear-local-storage-button')).getByTestId('chrome-icon')).toBeInTheDocument();
 });
