@@ -48,6 +48,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                </p>
                <SettingsButton
                    name="Open Layout Editor"
+                   id="open-layout-editor-button"
                    icon={{ icon: faGripVertical }}
                    onClick={onEditDashboardLayout}
                />
@@ -76,16 +77,11 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                 <SettingsDropdown
                     buttonIcon={faFont}
                     onChange={handleFontChange}
-                    preference={Preference.DEFAULT_KANJI_FONT}
                     loading={fonts.length === 0}
                     id="interface-settings-font-selector"
+                    preference={Preference.DEFAULT_KANJI_FONT}
                     key={fonts.map(font => font.name).join("-")}
-                    options={fonts.map(font => {
-                        return {
-                            name: font.displayName,
-                            style: { fontFamily: font.name }
-                        }
-                    })}
+                    options={fonts.map(font => ({ name: font.displayName, style: { fontFamily: font.name } }))}
                 />
             </div>
 

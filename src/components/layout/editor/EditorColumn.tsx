@@ -54,6 +54,7 @@ const EditorColumn = (props: EditorColumnProps) => {
         <div className={classes.join(" ")} onDrop={handleDrop} onDragOver={handleDragOver} onDragExit={handleDragExit}>
             {cards.map((card: CardLayoutDetails) =>
                 <EditorCard
+                    key={card.name}
                     name={card.name}
                     size={card.size}
                     className={card.className}

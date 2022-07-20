@@ -27,6 +27,7 @@ const SettingsTabTitle = (props: SettingsTabTitleProps) => {
                     title="Close"
                     icon={faTimes}
                     onClick={close.onClick}
+                    data-testid="close-settings-tab"
                     className={[close.className, styles.close].join(" ")}
                 />
             )}

@@ -24,6 +24,7 @@ const DismissibleAlert = (props: PropsWithChildren<DismissibleAlertProps>) => {
                 icon={faTimes}
                 onClick={onDismiss}
                 className={styles.dismiss}
+                data-testid="dismiss-error-alert"
             />
         </div>
     )

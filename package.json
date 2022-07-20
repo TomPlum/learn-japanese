@@ -85,7 +85,7 @@
     "@types/axios": "^0.14.0",
     "@types/jest": "^26.0.24",
     "@types/jest-when": "^2.7.3",
-    "@types/node": "^18.0.3",
+    "@types/node": "^18.0.6",
     "@types/react": "^17.0.2",
     "@types/react-bootstrap-range-slider": "^1.2.1",
     "@types/react-color": "^3.0.6",

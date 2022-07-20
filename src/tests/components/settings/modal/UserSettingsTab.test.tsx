@@ -70,6 +70,9 @@ test('Should render an error alert if the reset high-scores call fails', async (
     fireEvent.click(component.getByTestId('reset-high-scores-button'));
     fireEvent.click(component.getByTestId('reset-high-scores-button'));
     expect(await screen.findByText("Failed to update high-scores.")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId('dismiss-error-alert'));
+    expect(screen.queryByText("Failed to update high-scores.")).not.toBeInTheDocument();
 });
 
 test('Should render an error alert if the reset high-scores call is rejected', async () => {
@@ -112,5 +115,3 @@ test('Should render the chrome icon in the clear browser settings button when th
     const component = renderReduxConsumer(<UserSettingsTab />);
     expect(within(component.getByTestId('clear-local-storage-button')).getByTestId('chrome-icon')).toBeInTheDocument();
 });
-
-test.todo('Error dismiss');
