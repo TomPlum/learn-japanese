@@ -1,13 +1,21 @@
-import { fireEvent, render } from "@testing-library/react";
+import { createEvent, fireEvent, render } from "@testing-library/react";
 import EditorCard from "../../../../components/layout/editor/EditorCard";
 
 const onDragStartHandler = jest.fn();
-const dataTransfer = jest.fn();
+const mockSetData = jest.fn();
 
-test.skip('Should call the onDragStart event handler when dragging the card', () => {
+test('Should call the onDragStart event handler when dragging the card', () => {
     const { container } = render(<EditorCard name="test-card" size="sm" onDragStart={onDragStartHandler} />);
-    fireEvent.dragStart(container.firstChild!);
-    expect(onDragStartHandler).toHaveBeenCalled();
+    const dragEvent = createEvent.dragStart(container.firstChild!, { dataTransfer: { setData: mockSetData }});
+    fireEvent(container.firstChild!, dragEvent);
+    expect(onDragStartHandler).toHaveBeenLastCalledWith({ name: "test-card", size: "sm" });
+});
+
+test('Should set the stringified details json in the data transfer event', () => {
+    const { container } = render(<EditorCard name="test-card" size="sm" onDragStart={onDragStartHandler} />);
+    const dragEvent = createEvent.dragStart(container.firstChild!, { dataTransfer: { setData: mockSetData }});
+    fireEvent(container.firstChild!, dragEvent);
+    expect(mockSetData).toHaveBeenLastCalledWith("card", "{\"name\":\"test-card\",\"size\":\"sm\"}");
 });
 
 test('Should render the wrapper with the small class if the size is passed as small', () => {
