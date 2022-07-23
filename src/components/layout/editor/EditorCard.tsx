@@ -29,7 +29,7 @@ const EditorCard = (props: EditorCardProps) => {
     const classNames = [styles.card, className, getSizeClass()];
 
     return (
-        <div draggable className={classNames.join(" ")} onDragStart={handleDragStart}>
+        <div draggable className={classNames.join(" ")} onDragStart={handleDragStart} data-testid={`editor-card-${name}`}>
             {name}
         </div>
     );

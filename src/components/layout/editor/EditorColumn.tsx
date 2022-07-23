@@ -50,8 +50,16 @@ const EditorColumn = (props: EditorColumnProps) => {
     const classes = [className, styles.container];
     if (dropping) classes.push(styles.dropping);
 
+    const containerProps = {
+        className: classes.join(" "),
+        onDrop: handleDrop,
+        onDragOver: handleDragOver,
+        onDragExit: handleDragExit,
+        "data-testid": "editor-column"
+    }
+
     return (
-        <div className={classes.join(" ")} onDrop={handleDrop} onDragOver={handleDragOver} onDragExit={handleDragExit}>
+        <div {...props}>
             {cards.map((card: CardLayoutDetails) =>
                 <EditorCard
                     key={card.name}
