@@ -59,7 +59,7 @@ const EditorColumn = (props: EditorColumnProps) => {
     }
 
     return (
-        <div {...props}>
+        <div {...containerProps}>
             {cards.map((card: CardLayoutDetails) =>
                 <EditorCard
                     key={card.name}
