@@ -21,10 +21,32 @@ const DashboardToolbar = () => {
                     <span>{getDaysSinceStartDate()}</span>
                 </div>
                 <div className={styles.buttons}>
-                    <FontAwesomeIcon icon={faPencilRuler} fixedWidth className={styles.icon} title="Edit Layout" />
-                    <FontAwesomeIcon icon={faCogs} fixedWidth className={styles.icon} title="Dashboard Settings" />
-                    <FontAwesomeIcon icon={faSearch} fixedWidth className={styles.icon} title="Search" />
-                    <FontAwesomeIcon icon={faSyncAlt} fixedWidth className={styles.icon} title="Sync All" />
+                    <FontAwesomeIcon
+                        title="Edit Layout"
+                        icon={faPencilRuler}
+                        fixedWidth className={styles.icon}
+                        data-testid="edit-dashboard-layout"
+                    />
+                    <FontAwesomeIcon icon={faCogs}
+                         fixedWidth
+                         className={styles.icon}
+                         title="Dashboard Settings"
+                         data-testid="edit-dashboard-settings"
+                    />
+                    <FontAwesomeIcon
+                        fixedWidth
+                        title="Search"
+                        icon={faSearch}
+                        className={styles.icon}
+                        data-testid="search-dashboard"
+                    />
+                    <FontAwesomeIcon
+                        fixedWidth
+                        icon={faSyncAlt}
+                        title="Sync All"
+                        className={styles.icon}
+                        data-testid="dashboard-sync-all"
+                    />
                 </div>
             </DashboardCard.Body>
         </DashboardCard>
