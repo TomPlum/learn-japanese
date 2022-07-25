@@ -18,13 +18,14 @@ export interface PresetSelectionStepProps {
     mode: AppMode;
     topic: Topic;
     preset?: SessionMode;
+    isValid: (valid: boolean) => void;
     onSelect: (preset: SessionMode) => void;
     onChangeTopic: (topic: Topic) => void;
 }
 
 const PresetSelectionStep = (props: PresetSelectionStepProps) => {
 
-    const { preset, mode, topic, onSelect, onChangeTopic } = props;
+    const { preset, mode, topic, onSelect, onChangeTopic, isValid } = props;
 
     const [editing, setEditing] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -36,10 +37,13 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
     const user = useUserSelector(state => state.user.user);
 
     useEffect(() => {
+        isValid(true);
         setLoading(true);
         setError(undefined);
+
         (user ? service.getAllPresets() : service.getDefaultPresets()).then(response => {
             if (response.error) {
+                isValid(false);
                 setError(response.error);
             } else {
                 setPlayPresets(response.play);

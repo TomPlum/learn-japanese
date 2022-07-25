@@ -16,7 +16,6 @@ test('Should render the search button', () => {
     expect(component.getByTestId('search-dashboard')).toBeInTheDocument();
 });
 
-
 test('Should render the sync button', () => {
     const component = render(<DashboardToolbar />);
     expect(component.getByTestId('dashboard-sync-all')).toBeInTheDocument();

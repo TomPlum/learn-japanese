@@ -77,9 +77,7 @@ const SessionWizard = (props: SessionWizardProps) => {
     const dataSettingsDispatcher = useDataSettingsDispatch();
 
     const handleBack = () => {
-        if (stage === DATA) {
-            setValid(true);
-        }
+        setValid(true);
 
         if (custom && (stage === QUESTION || (stage === DATA && mode === AppMode.LEARN))) {
             setStage(TYPE);
@@ -154,6 +152,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                             preset={preset}
                             onSelect={preset => setPreset(preset)}
                             onChangeTopic={topic => setTopic(topic)}
+                            isValid={(valid: boolean) => setValid(valid)}
                         />
                     ),
                     terminal: true
@@ -274,9 +273,9 @@ const SessionWizard = (props: SessionWizardProps) => {
                         onNext={handleNext}
                         terminal={terminal}
                         currentStage={stage}
+                        onChangeStage={setStage}
                         intermediate={intermediate}
                         onPlay={handleStartSession}
-                        onChangeStage={(stage: number) => setStage(stage)}
                     />
                 </div>
             </Modal.Body>

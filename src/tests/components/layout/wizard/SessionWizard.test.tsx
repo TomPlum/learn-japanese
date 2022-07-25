@@ -561,7 +561,12 @@ test('Switching from the preset step and back again should maintain its selectio
 });
 
 test('The start button should be disabled if the preset is undefined', async () => {
-    mockGetAllPresets.mockResolvedValue({ learn: [learnPreset], play: [playPreset, playBasics] });
+    mockGetDefaultPresets.mockResolvedValueOnce({ error: "Something went wrong." });
     const { next } = setup();
-    expect(next).toBeDisabled();
+
+    fireEvent.click(next); // Go to topic selection
+    fireEvent.click(screen.getByText('Next')); // Go to type selection
+    fireEvent.click(screen.getByText('Next')); // Go to preset selection
+
+    await waitFor(() => expect(screen.getByText('Start')).toBeDisabled());
 });

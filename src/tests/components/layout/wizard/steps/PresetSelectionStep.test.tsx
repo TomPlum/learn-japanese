@@ -25,6 +25,7 @@ jest.mock("../../../../../service/PresetService", () => {
 
 const onSelectHandler = jest.fn();
 const onChangeTopicHandler = jest.fn();
+const isValidHandler = jest.fn();
 
 const playPreset = new PresetBuilder()
     .withID(1)
@@ -81,6 +82,7 @@ beforeEach(() => {
         preset: playPreset,
         topic: Topic.KANA,
         onSelect: onSelectHandler,
+        isValid: isValidHandler,
         onChangeTopic: onChangeTopicHandler
     };
 });
@@ -171,11 +173,18 @@ test('Selecting a preset should call the onChangeTopic event handler with that t
 
 test('It should select the first preset if one is not passed as selected', async () => {
     props.preset = undefined;
-    props.mode = AppMode.LEARN;
+    props.mode = AppMode.PLAY;
     mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
     setup();
 
     fireEvent.click(await screen.findByText('Short Play'));
 
-    expect(await screen.findByText('TestLearnDescription')).toBeInTheDocument();
+    expect(await screen.findByText('This is an example play description')).toBeInTheDocument();
+});
+
+test('It should call the isValid event handler with false if the get all presets call fails', async () => {
+    store.dispatch(setUser(testUser));
+    mockGetAllPresets.mockResolvedValueOnce({ error: "Whoops." });
+    setup();
+    expect(await isValidHandler).toHaveBeenLastCalledWith(false);
 });
