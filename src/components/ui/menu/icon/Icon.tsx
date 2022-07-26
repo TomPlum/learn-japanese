@@ -34,7 +34,7 @@ const Icon = (props: IconProps) => {
     };
 
     if (!value) {
-        return <FontAwesomeIcon icon={faQuestion} />
+        return <FontAwesomeIcon icon={faQuestion} data-testid="unknown-icon" />
     }
 
     if (isFontAwesomeIconDefinition(value)) {

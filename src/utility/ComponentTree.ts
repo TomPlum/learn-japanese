@@ -73,7 +73,7 @@ export default class ComponentTree {
      * @return An array of string values.
      */
     public getStringChildren(): string[] {
-        return this.getAllChildren().map(child => child.props.textContent).filter(value => value);
+        return this.getAllChildren().map(child => child.props.textContent ?? child.props.children).filter(value => value);
     }
 
     private getAllChildren(): ReactElement[] {

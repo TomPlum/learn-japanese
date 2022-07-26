@@ -177,7 +177,8 @@ test('It should select the first preset if one is not passed as selected', async
     mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
     setup();
 
-    fireEvent.click(await screen.findByText('Short Play'));
+    // Mouse over to show the description, this only happens when selected
+    fireEvent.mouseOver(await screen.findByText('Short Play'));
 
     expect(await screen.findByText('This is an example play description')).toBeInTheDocument();
 });
