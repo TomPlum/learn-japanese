@@ -16,8 +16,11 @@ jest.mock("../../rest/MessageQueue", () => {
     })}
 });
 
-const mockRestClient = jest.fn();
-RestClient.get = mockRestClient;
+const mockGet = jest.fn();
+RestClient.get = mockGet;
+
+const mockPost = jest.fn();
+RestClient.post = mockPost;
 
 beforeEach(() => {
     jest.resetAllMocks();
@@ -29,13 +32,13 @@ describe("Flash Card Repository", () => {
 
     describe("Get Kanji Flash Cards", () => {
         it("Should call the rest client with the correct endpoint", () => {
-            mockRestClient.mockResolvedValue({ data: [] });
+            mockGet.mockResolvedValue({ data: [] });
             repository.getKanjiFlashCards();
-            expect(mockRestClient).toHaveBeenCalledWith("/learn/flash-cards/kanji");
+            expect(mockGet).toHaveBeenCalledWith("/learn/flash-cards/kanji");
         });
 
         it("Should return an array of flash cards if the user has any outstanding", () => {
-            mockRestClient.mockResolvedValue({
+            mockGet.mockResolvedValue({
                 data: [{
                     id: 10,
                     kanji: {
@@ -78,14 +81,14 @@ describe("Flash Card Repository", () => {
         });
 
         it("Should return an empty array if the response has no data", () => {
-            mockRestClient.mockResolvedValue({ data: undefined });
+            mockGet.mockResolvedValue({ data: undefined });
             return repository.getKanjiFlashCards().then(response => {
                 expect(response).toStrictEqual([]);
             });
         });
 
         it("Should reject the promise with the response if the API call fails", () => {
-            mockRestClient.mockRejectedValue({ error: "Internal Server Error (500)"});
+            mockGet.mockRejectedValue({ error: "Internal Server Error (500)"});
             return repository.getKanjiFlashCards().catch(response => {
                 expect(response).toStrictEqual({ error: "Internal Server Error (500)"});
             });
@@ -96,21 +99,15 @@ describe("Flash Card Repository", () => {
         const kanji = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], 1, ["number"]);
 
         it("Should call the message queue with the endpoint details and request", () => {
+            mockPost.mockResolvedValueOnce({});
             const card = new FlashCard(10, kanji, new SpaceRepetitionDetails(2.5, 0, 0, "2020-10-21"));
 
             repository.update(card);
 
-            expect(mockMessageQueue).toHaveBeenCalledWith({
-                method: "POST",
-                endpoint: "/flash-cards/kanji/update",
-                body: {
-                    id: 10,
-                    easiness: 2.5,
-                    interval: 0,
-                    repetition: 0,
-                    dueDate: "2020-10-21"
-                }
-            });
+            expect(mockPost).toHaveBeenCalledWith(
+                "/flash-cards/kanji/update",
+                {"dueDate": "2020-10-21", "easiness": 2.5, "id": 10, "interval": 0, "repetition": 0}
+            );
         });
     });
 });

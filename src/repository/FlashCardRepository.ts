@@ -41,16 +41,14 @@ class FlashCardRepository {
     }
 
     public update(card: FlashCard) {
-        this.queue.enqueue({
-            method: "POST",
-            endpoint: "/flash-cards/kanji/update",
-            body: {
-                id: card.id,
-                easiness: card.details.efactor,
-                interval: card.details.interval,
-                repetition: card.details.repetition,
-                dueDate: card.details.dueDate
-            }
+        RestClient.post("/flash-cards/kanji/update", {
+            id: card.id,
+            easiness: card.details.efactor,
+            interval: card.details.interval,
+            repetition: card.details.repetition,
+            dueDate: card.details.dueDate
+        }).catch(e => {
+            console.log(e);
         });
     }
 }
