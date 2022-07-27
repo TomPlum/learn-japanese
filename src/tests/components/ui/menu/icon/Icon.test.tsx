@@ -20,12 +20,6 @@ test('Should pass the given class name to the icon', () => {
     expect(icon).toHaveClass('myTestClass');
 });
 
-test('Should render nothing if the icon value is passed falsy', () => {
-    const { container } = render(<Icon value="" />);
-    const icon = container.firstChild!;
-    expect(icon).toBeNull();
-});
-
 test('Should render a question icon if the icon value is passed falsy', () => {
     const component = render(<Icon value="" />);
     expect(component.getByTestId('unknown-icon')).toBeInTheDocument();

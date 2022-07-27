@@ -33,15 +33,11 @@ const Icon = (props: IconProps) => {
         className: [className, styles.icon].join(" ")
     };
 
-    if (!value) {
-        return <FontAwesomeIcon icon={faQuestion} data-testid="unknown-icon" />
-    }
-
     if (isFontAwesomeIconDefinition(value)) {
         return <FontAwesomeIcon icon={value} />
     }
 
-    if (!isReactIconsType(value)) {
+    if (value != "" && !isReactIconsType(value)) {
         return <span {...iconProps}>{value}</span>
     }
 
@@ -49,7 +45,7 @@ const Icon = (props: IconProps) => {
         return React.createElement(CustomFontAwesomeIcon[value], iconProps);
     }
 
-    return null;
+    return <FontAwesomeIcon icon={faQuestion} data-testid="unknown-icon" />
 }
 
 export default Icon;
