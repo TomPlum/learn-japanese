@@ -6,13 +6,17 @@ import { initReactI18next } from "react-i18next";
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
 const resources = {
     en: {
-        translation: {
-            "Welcome to React": "Welcome to React and react-i18next"
+        landing: {
+            button: {
+                learn: "Learn"
+            }
         }
     },
-    fr: {
-        translation: {
-            "Welcome to React": "Bienvenue à React et react-i18next"
+    jp: {
+        landing: {
+            button: {
+                learn: "習う"
+            }
         }
     }
 };

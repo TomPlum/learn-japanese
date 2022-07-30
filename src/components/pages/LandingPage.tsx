@@ -12,8 +12,10 @@ import KanaRepository from "../../repository/KanaRepository";
 import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
 import { Kana } from "../../domain/kana/Kana";
 import LoadingSpinner from "../ui/loading/LoadingSpinner";
+import { useTranslation } from "react-i18next";
 
 const LandingPage = () => {
+    const { t } = useTranslation();
     const [kana, setKana] = useState<Kana[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -87,7 +89,7 @@ const LandingPage = () => {
                         <Link to="/home">
                             <Button className={styles.button} variant="outline-danger">
                                 <FontAwesomeIcon icon={faGraduationCap} className={styles.buttonIcon}/>
-                                <span className={styles.buttonText}> Learn</span>
+                                <span className={styles.buttonText}>{' '}{t('landing.button.learn')}</span>
                             </Button>
                         </Link>
                     </Col>

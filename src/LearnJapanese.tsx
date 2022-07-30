@@ -5,6 +5,7 @@ import Main from "./components/layout/Main";
 import { Location } from "history";
 import { Provider } from "react-redux";
 import { EnhancedStore } from "@reduxjs/toolkit";
+import './i18n';
 
 interface LearnJapaneseProps {
     store: EnhancedStore;
