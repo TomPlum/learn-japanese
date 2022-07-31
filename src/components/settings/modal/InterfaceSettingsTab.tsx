@@ -9,6 +9,7 @@ import { Font } from "../../ui/buttons/FontSelectorButton";
 import { Preference } from "../../../domain/user/Preference";
 import { useFontDispatch } from "../../../hooks";
 import { setFont } from "../../../slices/FontSlice";
+import { useTranslation } from "react-i18next";
 
 export interface InterfaceSettingsTabProps {
     onEditDashboardLayout: () => void;
@@ -22,6 +23,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
     const fontService = new FontService();
 
     const [fonts, setFonts] = useState<Font[]>([]);
+    const { i18n } = useTranslation();
 
     useEffect(() => {
         fontService.getFonts().then(response => {
@@ -31,6 +33,10 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
 
     const handleFontChange = (font: string) => {
         fontDispatcher(setFont(font));
+    }
+
+    const handleLanguageChange = async (language: string) => {
+        await i18n.changeLanguage(language === "English" ? "en" : "jp");
     }
 
     return (
@@ -95,6 +101,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                     preference={Preference.LANGUAGE}
                     id="interface-settings-language-selector"
                     options={[{ name: "English" }, { name: "日本語" }]}
+                    onChange={(language: string) => handleLanguageChange(language)}
                 />
             </div>
 

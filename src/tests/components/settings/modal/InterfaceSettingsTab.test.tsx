@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import InterfaceSettingsTab from "../../../../components/settings/modal/InterfaceSettingsTab";
 import renderReduxConsumer from "../../../renderReduxConsumer";
 import { store } from "../../../../store";
@@ -21,6 +21,11 @@ jest.mock("../../../../service/UserService", () => {
         return { updatePreferences: mockUpdatePreferences };
     }
 });
+
+const mockChangeLanguage = jest.fn();
+jest.mock('react-i18next', () => ({
+    useTranslation: () => { return { i18n: { changeLanguage: mockChangeLanguage }}}
+}));
 
 beforeEach(() => {
     store.dispatch(setUser(testUser));
@@ -82,6 +87,32 @@ test('Should render the language selector dropdown', async () => {
     // Should render the correct options
     expect(await screen.findByText('日本語')).toBeInTheDocument();
     expect(await screen.findByText('English')).toBeInTheDocument();
+});
+
+test('Should call the i18n change language function with the correct english code', async () => {
+    store.dispatch(setUser({ ...testUser, preferences: { ...testUser.preferences, language: "日本語" }}));
+    mockUpdatePreferences.mockResolvedValueOnce({ success: true });
+    mockFontService.mockResolvedValueOnce([]);
+    mockChangeLanguage.mockResolvedValueOnce({});
+    const component = renderReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+
+    fireEvent.click(component.getByTestId('interface-settings-language-selector'));
+    fireEvent.click(component.getByText('English'));
+
+    await waitFor(() => expect(mockChangeLanguage).toHaveBeenLastCalledWith('en'));
+});
+
+test('Should call the i18n change language function with the correct japanese code', async () => {
+    store.dispatch(setUser({ ...testUser, preferences: { ...testUser.preferences, language: "English" }}));
+    mockFontService.mockResolvedValueOnce([]);
+    mockChangeLanguage.mockResolvedValueOnce({});
+    mockUpdatePreferences.mockResolvedValueOnce({ success: true });
+    const component = renderReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+
+    fireEvent.click(component.getByTestId('interface-settings-language-selector'));
+    fireEvent.click(component.getByText('日本語'));
+
+    await waitFor(() => expect(mockChangeLanguage).toHaveBeenLastCalledWith('jp'));
 });
 
 test('Should render the confidence menu style selector dropdown', async () => {
