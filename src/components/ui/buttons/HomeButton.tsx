@@ -1,7 +1,7 @@
-import styles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import NavigationButton from "../NavigationButton";
-import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
+import { useTranslation } from "react-i18next";
 
 export interface HomeButtonProps {
     className?: string;
@@ -10,9 +10,10 @@ export interface HomeButtonProps {
 
 const HomeButton = (props: HomeButtonProps) => {
 
+    const { t } = useTranslation();
+
     return (
         <NavigationButton
-            text="Home"
             icon={faHome}
             disableDropdown
             id="home-button"
@@ -21,6 +22,7 @@ const HomeButton = (props: HomeButtonProps) => {
             disabled={props.disabled}
             iconClass={menuStyles.icon}
             textClass={menuStyles.linkText}
+            text={t("navigation.button.home")}
         />
     );
 }

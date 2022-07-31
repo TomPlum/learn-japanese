@@ -8,9 +8,15 @@ import { setActive, setApplicationMode } from "../../../slices/ModeSlice";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { clearUser, setUser } from "../../../slices/UserSlice";
 import { testUser } from "../../../setupTests";
+import { when } from "jest-when";
 
 const history = createMemoryHistory();
 const onLaunchLoginModalHandler = jest.fn();
+
+const mockTranslation = jest.fn();
+jest.mock('react-i18next', () => ({
+    useTranslation: () => { return { t: mockTranslation, } }
+}));
 
 let props: NavigationBarProps;
 
@@ -36,6 +42,7 @@ beforeEach(() => {
     };
     store.dispatch(setActive(true));
     store.dispatch(setApplicationMode(AppMode.LEARN));
+    when(mockTranslation).calledWith("navigation.button.home").mockReturnValue("Home");
 });
 
 test('Clicking the \'Home\' button should route the user to the menu', async () => {

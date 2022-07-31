@@ -11,6 +11,11 @@ const resources = {
                 button: {
                     "learn": "Learn"
                 }
+            },
+            navigation: {
+                button: {
+                    home: "Home"
+                }
             }
         }
     },
@@ -19,6 +24,11 @@ const resources = {
             landing: {
                 button: {
                     "learn": "習う"
+                }
+            },
+            navigation: {
+                button: {
+                    home: "ホームページ"
                 }
             }
         }
