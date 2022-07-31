@@ -3,28 +3,32 @@ import { faBook, faGraduationCap, faPaintBrush } from "@fortawesome/free-solid-s
 import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import styles from "../../../styles/sass/components/ui/buttons/LearnButton.module.scss";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const LearnButton = () => {
+
+    const { t } = useTranslation();
+
     return (
         <NavigationButton
             width={250}
-            text="Learn"
             textPlacement="right"
             icon={faGraduationCap}
             iconClass={menuStyles.icon}
             id="learning-resources-button"
             textClass={menuStyles.linkText}
+            text={t("navigation.button.learn")}
         >
             <NavigationButton.Item icon={faPaintBrush} href="/kanji" iconClass={styles.kanji}>
-                Kanji Dictionary
+                {t("navigation.button.kanji-dict")}
             </NavigationButton.Item>
 
             <NavigationButton.Item icon={faKickstarterK} href="/kana" iconClass={styles.kana}>
-                Kana Dictionary
+                {t("navigation.button.kana-dict")}
             </NavigationButton.Item>
 
             <NavigationButton.Item icon={faBook} href="/genki" iconClass={styles.genki}>
-                Genki Knowledge Bank
+                {t("navigation.button.genki-dict")}
             </NavigationButton.Item>
         </NavigationButton>
     );

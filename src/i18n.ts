@@ -12,7 +12,12 @@ const resources = {
             },
             navigation: {
                 button: {
-                    home: "Home"
+                    "home": "Home",
+                    "learn": "Learn",
+                    "help": "Help",
+                    "kanji-dict": "Kanji Dictionary",
+                    "kana-dict": "Kana Dictionary",
+                    "genki-dict": "Genki Knowledge Bank"
                 }
             }
         }
@@ -26,7 +31,12 @@ const resources = {
             },
             navigation: {
                 button: {
-                    home: "ホームページ"
+                    "home": "ホームページ",
+                    "learn": "習う",
+                    "help": "ヘルプ",
+                    "kanji-dict": "漢字辞書",
+                    "kana-dict": "仮名辞書",
+                    "genki-dict": "げんきの要約"
                 }
             }
         }

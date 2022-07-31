@@ -42,7 +42,13 @@ beforeEach(() => {
     };
     store.dispatch(setActive(true));
     store.dispatch(setApplicationMode(AppMode.LEARN));
+
+    // Translations
     when(mockTranslation).calledWith("navigation.button.home").mockReturnValue("Home");
+    when(mockTranslation).calledWith("navigation.button.learn").mockReturnValue("Learn");
+    when(mockTranslation).calledWith("navigation.button.kanji-dict").mockReturnValue("Kanji Dictionary");
+    when(mockTranslation).calledWith("navigation.button.kana-dict").mockReturnValue("Kana Dictionary");
+    when(mockTranslation).calledWith("navigation.button.genki-dict").mockReturnValue("Genki Knowledge Bank");
 });
 
 test('Clicking the \'Home\' button should route the user to the menu', async () => {
