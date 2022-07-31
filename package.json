@@ -16,6 +16,7 @@
     "deps": "^1.0.0",
     "framer-motion": "^5.2.1",
     "i18next": "^21.8.14",
+    "i18next-browser-languagedetector": "^6.1.4",
     "node-sass": "^5.0.0",
     "peer": "^0.6.1",
     "react": "^17.0.0",

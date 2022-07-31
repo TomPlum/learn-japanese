@@ -1,11 +1,11 @@
 import SettingsDropdown, { SettingsDropdownProps } from "../../../../components/settings/modal/SettingsDropdown";
 import { Preference } from "../../../../domain/user/Preference";
 import { faGlobe, faUserFriends } from "@fortawesome/free-solid-svg-icons";
-import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
+import { fireEvent, screen, waitFor, waitForElementToBeRemoved, within } from "@testing-library/react";
 import renderReduxConsumer from "../../../renderReduxConsumer";
 import { store } from "../../../../store";
 import { clearUser, setPreference, setUser } from "../../../../slices/UserSlice";
-import { testUser } from "../../../../setupTests";
+import { localStorageMock, testUser } from "../../../../setupTests";
 
 const mockUpdatePreferences = jest.fn();
 jest.mock("../../../../service/UserService", () => {
@@ -236,6 +236,40 @@ it("Should stop rendering the dropdown menu when blurring the button", async () 
     // Blurring the menu / button should stop rendering the menu
     fireEvent.click(document.body);
     await waitForElementToBeRemoved(dropdownOption)
+});
+
+describe("Language Preference", () => {
+    it("Should set the english language code in local storage when updating the language preference", async () => {
+        props.id = "language-button";
+        props.options = [{ name: "English" }, { name: "日本語" }];
+        props.preference = Preference.LANGUAGE;
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.LANGUAGE, value: "日本語" }));
+        mockUpdatePreferences.mockResolvedValueOnce({ success: true });
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+
+        // Switch from Japanese to English
+        fireEvent.click(component.getByTestId('language-button'));
+        fireEvent.click(component.getByText('English'));
+
+        await waitFor(() => expect(localStorageMock.getItem('i18nextLng')).toBe('en'));
+    });
+
+    it("Should set the japanese language code in local storage when updating the language preference", async () => {
+        props.id = "language-button";
+        props.options = [{ name: "English" }, { name: "日本語" }];
+        props.preference = Preference.LANGUAGE;
+        store.dispatch(setUser(testUser));
+        store.dispatch(setPreference({ preference: Preference.LANGUAGE, value: "English" }));
+        mockUpdatePreferences.mockResolvedValueOnce({ success: true });
+        const component = renderReduxConsumer(<SettingsDropdown {...props} />);
+
+        // Switch from English to Japanese
+        fireEvent.click(component.getByTestId('language-button'));
+        fireEvent.click(component.getByText('日本語'));
+
+        await waitFor(() => expect(localStorageMock.getItem('i18nextLng')).toBe('jp'));
+    });
 });
 
 describe("Default selected values from local storage", () => {

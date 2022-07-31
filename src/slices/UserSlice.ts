@@ -67,6 +67,7 @@ export const userSlice = createSlice({
                     }
                     case Preference.LANGUAGE: {
                         state.user.preferences.language = value;
+                        localStorage.setItem("i18nextLng", value === "English" ? "en" : "jp");
                         break;
                     }
                     case Preference.ROMAJI_VISIBILITY: {
