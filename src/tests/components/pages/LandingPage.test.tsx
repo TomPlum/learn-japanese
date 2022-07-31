@@ -19,6 +19,11 @@ jest.mock("../../../repository/KanaRepository", () => {
     return function() { return { read: mockKanaRepository } };
 });
 
+const mockTranslation = jest.fn();
+jest.mock('react-i18next', () => ({
+    useTranslation: () => { return { t: mockTranslation, } }
+}));
+
 const history = createMemoryHistory();
 
 const setup = () => {
@@ -41,10 +46,13 @@ const setup = () => {
 }
 
 beforeEach(() => {
+    // Mock environment variables
     Environment.variable = environment;
 
+    // Mock timers
     jest.useFakeTimers();
 
+    // Mock window size
     matchMediaPolyfill(window);
     window.resizeTo = function resizeTo(width, height) {
         Object.assign(this, {
@@ -55,12 +63,13 @@ beforeEach(() => {
         }).dispatchEvent(new this.Event('resize'))
     }
 
+    // Mock carousel shuffle
     Arrays.shuffle = shuffle;
     shuffle.mockImplementation((array: any[]) => {
         return array;
     });
 
-    //Always returns the first element so it is deterministic
+    // Always returns the first element so it is deterministic
     Arrays.getRandomObject = getRandomObject;
     getRandomObject.mockImplementation((array: any[]) => {
         const objects = [...array];
@@ -69,10 +78,13 @@ beforeEach(() => {
         return [first, objects];
     });
 
-    //Mock Kana Repository Response
+    // Mock Kana Repository Response
     mockKanaRepository.mockResolvedValueOnce([
         new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
     ]);
+
+    // Mock translations
+    when(mockTranslation).calledWith("landing.button.learn").mockReturnValue("Learn");
 });
 
 afterEach(() => {
