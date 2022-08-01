@@ -1,5 +1,5 @@
 import Arrays from "../../../utility/Arrays";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import LandingPage from "../../../components/pages/LandingPage";
 import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
@@ -10,6 +10,7 @@ import { getByTextWithMarkup } from "../../Queries";
 import { when } from 'jest-when';
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from 'history'
+import renderWithTranslation from "../../renderWithTranslation";
 
 const environment = jest.fn();
 const shuffle = jest.fn();
@@ -19,15 +20,10 @@ jest.mock("../../../repository/KanaRepository", () => {
     return function() { return { read: mockKanaRepository } };
 });
 
-const mockTranslation = jest.fn();
-jest.mock('react-i18next', () => ({
-    useTranslation: () => { return { t: mockTranslation, } }
-}));
-
 const history = createMemoryHistory();
 
 const setup = () => {
-    const component = render(
+    const component = renderWithTranslation(
         <Router history={history}>
             <LandingPage/>
         </Router>
@@ -82,9 +78,6 @@ beforeEach(() => {
     mockKanaRepository.mockResolvedValueOnce([
         new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
     ]);
-
-    // Mock translations
-    when(mockTranslation).calledWith("landing.button.learn").mockReturnValue("Learn");
 });
 
 afterEach(() => {

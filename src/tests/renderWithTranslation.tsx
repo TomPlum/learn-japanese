@@ -5,7 +5,7 @@ import i18n from "./i18n-testing";
 
 const renderWithTranslation = (component: ReactElement) => {
     const Wrapper = (props: { children?: ReactNode }) => (
-        <I18nextProvider i18n={i18n}>
+        <I18nextProvider i18n={i18n} defaultNS="translation">
             {props.children}
         </I18nextProvider>
     );

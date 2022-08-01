@@ -1,7 +1,10 @@
 {
   "landing": {
     "button": {
-      "learn": "習う"
+      "learn": "習う",
+      "play": "遊ぶ",
+      "search": "検索",
+      "help": "ヘルプ"
     }
   },
   "navigation": {

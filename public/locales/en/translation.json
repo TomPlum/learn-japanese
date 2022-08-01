@@ -1,7 +1,10 @@
 {
   "landing": {
     "button": {
-      "learn": "Learn"
+      "learn": "Learn",
+      "play": "Play",
+      "search": "Search",
+      "help": "Help"
     }
   },
   "navigation": {
