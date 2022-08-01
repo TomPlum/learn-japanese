@@ -17,7 +17,9 @@ const resources = {
                     "help": "Help",
                     "kanji-dict": "Kanji Dictionary",
                     "kana-dict": "Kana Dictionary",
-                    "genki-dict": "Genki Knowledge Bank"
+                    "genki-dict": "Genki Knowledge Bank",
+                    "faq": "Frequently Asked Questions",
+                    "sm2": "SuperMemo2 Algorithm"
                 }
             }
         }
@@ -36,7 +38,9 @@ const resources = {
                     "help": "ヘルプ",
                     "kanji-dict": "漢字辞書",
                     "kana-dict": "仮名辞書",
-                    "genki-dict": "げんきの要約"
+                    "genki-dict": "げんきの要約",
+                    "faq": "よくある質問",
+                    "sm2": "「スーパーメモ」 アルゴリズム"
                 }
             }
         }

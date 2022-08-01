@@ -49,6 +49,9 @@ beforeEach(() => {
     when(mockTranslation).calledWith("navigation.button.kanji-dict").mockReturnValue("Kanji Dictionary");
     when(mockTranslation).calledWith("navigation.button.kana-dict").mockReturnValue("Kana Dictionary");
     when(mockTranslation).calledWith("navigation.button.genki-dict").mockReturnValue("Genki Knowledge Bank");
+    when(mockTranslation).calledWith("navigation.button.help").mockReturnValue("Help");
+    when(mockTranslation).calledWith("navigation.button.sm2").mockReturnValue("SuperMemo2 Algorithm");
+    when(mockTranslation).calledWith("navigation.button.faq").mockReturnValue("Frequently Asked Questions");
 });
 
 test('Clicking the \'Home\' button should route the user to the menu', async () => {
