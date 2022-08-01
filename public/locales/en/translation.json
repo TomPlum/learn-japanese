@@ -1,0 +1,65 @@
+{
+  "landing": {
+    "button": {
+      "learn": "Learn"
+    }
+  },
+  "navigation": {
+    "button": {
+      "home": "Home",
+      "learn": "Learn",
+      "help": "Help",
+      "kanji-dict": "Kanji Dictionary",
+      "kana-dict": "Kana Dictionary",
+      "genki-dict": "Genki Knowledge Bank",
+      "faq": "Frequently Asked Questions",
+      "sm2": "SuperMemo2 Algorithm"
+    }
+  },
+  "dashboard": {
+    "card": {
+      "play": {
+        "start": "Start Session",
+        "last-play": "Last Play Session",
+        "last-learn": "Last Learn Session",
+        "default-title": "Custom Session",
+        "play-title": "You've not played anything recently.",
+        "learn-title": "You've not practiced anything recently."
+      },
+      "profile": {
+        "go": "Go to profile",
+        "register": "Register",
+        "notifications": "Notification Centre",
+        "user-settings": "Account Settings",
+        "tour": "Show Me Around"
+      },
+      "settings": {
+        "title": "Settings",
+        "general": "General Settings",
+        "learn": "Learn Settings",
+        "play": "Play Settings",
+        "interface": "Interface Settings",
+        "notification": "Notification Settings",
+        "user": "User Settings"
+      },
+      "kanji-showcase": {
+        "title": "Kanji Showcase",
+        "search": "search all kanji",
+        "on": {
+          "short": "on",
+          "long": "On'Yomi Readings"
+        },
+        "kun": {
+          "short": "kun",
+          "long": "Kun'Yomi Readings"
+        },
+        "grade": "Kyōiku Grade",
+        "jlpt": "JLPT Level",
+        "strokes": "Brush Strokes",
+        "examples": "Examples",
+        "shuffle": "Shuffle",
+        "meaning": "Meanings"
+      }
+    }
+  }
+}

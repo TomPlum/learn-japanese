@@ -1,0 +1,65 @@
+{
+  "landing": {
+    "button": {
+      "learn": "習う"
+    }
+  },
+  "navigation": {
+    "button": {
+      "home": "ホーム",
+      "learn": "習う",
+      "help": "ヘルプ",
+      "kanji-dict": "漢字辞書",
+      "kana-dict": "仮名辞書",
+      "genki-dict": "げんきの要約",
+      "faq": "よくある質問",
+      "sm2": "「スーパーメモ」 アルゴリズム"
+    }
+  },
+  "dashboard": {
+    "card": {
+      "play": {
+        "start": "スタートセッション",
+        "last-play": "前のゲームセッション",
+        "last-learn": "前の学習セッション",
+        "default-title": "カスタムセッション",
+        "play-title": "最近ゲームをしていません",
+        "learn-title": "最近何も練習していません"
+      },
+      "profile": {
+        "go": "プロフィールを入る",
+        "register": "登録する",
+        "notifications": "通知",
+        "user-settings": "アカウント設定",
+        "tour": "見せて"
+      },
+      "settings": {
+        "title": "設定",
+        "general": "一般設定",
+        "learn": "学習設定",
+        "play": "ゲーム設定",
+        "interface": "設計設定",
+        "notification": "通知設定",
+        "user": "ユーザー設定"
+      },
+      "kanji-showcase": {
+        "title": "漢字ショーケース",
+        "search": "すべての漢字を検索",
+        "on": {
+          "short": "音",
+          "long": "音読み"
+        },
+        "kun": {
+          "short": "訓",
+          "long": "訓読み"
+        },
+        "grade": "教育の学年",
+        "jlpt": "JLPTレベル",
+        "strokes": "刷毛の量",
+        "examples": "例",
+        "shuffle": "シャッフル",
+        "meaning": "意味"
+      }
+    }
+  }
+}
