@@ -15,8 +15,7 @@ const ProfileCard = (props: ProfileCardProps) => {
     const { onDismiss } = props;
 
     const user = useUserSelector(state => state.user.user);
-    const { t } = useTranslation();
-    const prefix = "dashboard.card.profile";
+    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.profile" });
 
     return (
         <DashboardCard size="sm" className={styles.card} id="profile-card">
@@ -37,15 +36,15 @@ const ProfileCard = (props: ProfileCardProps) => {
                     </span>
                     <p className={styles.name}>{user?.username ?? "User Profile"}</p>
                     <a className={styles.profile} href={user ? "/profile" : "/register"}>
-                        {user ? t(`${prefix}.go`) : t(`${prefix}.register`)}
+                        {user ? t("go") : t("register")}
                     </a>
                 </div>
 
                 <div className={styles.linkWrapper}>
                     {user && (<>
-                        <DashboardCardLink text={t(`${prefix}.notifications`)} icon={faBell} href="/notifications" />
-                        <DashboardCardLink text={t(`${prefix}.user-settings`)} icon={faCog} href="/settings?type=user" />
-                        <DashboardCardLink text={t(`${prefix}.tour`)} icon={faCompass} href="/home/tour" />
+                        <DashboardCardLink text={t("notifications")} icon={faBell} href="/notifications" />
+                        <DashboardCardLink text={t("user-settings")} icon={faCog} href="/settings?type=user" />
+                        <DashboardCardLink text={t("tour")} icon={faCompass} href="/home/tour" />
                     </>)}
 
                     {!user && (

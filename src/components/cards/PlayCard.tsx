@@ -20,8 +20,7 @@ const PlayCard = () => {
     const lastPlaySession = sessions.lastPlaySession;
     const lastLearnSession = sessions.lastLearnSession;
 
-    const { t } = useTranslation();
-    const prefix = "dashboard.card.play";
+    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.play" });
     const [preset, setPreset] = useState<SessionMode | undefined>(undefined);
     const [customising, setCustomising] = useState(false);
     const [error, setError] = useState("");
@@ -45,8 +44,8 @@ const PlayCard = () => {
         setConfirming(true);
     }
 
-    const playTitle = !!lastPlaySession ? lastPlaySession.name ?? t(`${prefix}.default-title`) : t(`${prefix}.play-title`);
-    const learnTitle = !!lastLearnSession ? lastLearnSession.name ?? t(`${prefix}.default-title`) : t(`${prefix}.learn-title`);
+    const playTitle = !!lastPlaySession ? lastPlaySession.name ?? t("default-title") : t("play-title");
+    const learnTitle = !!lastLearnSession ? lastLearnSession.name ?? t("default-title") : t("learn-title");
 
     return (
         <DashboardCard {...props}>
@@ -55,7 +54,7 @@ const PlayCard = () => {
                     <Col xs={12}>
                         <div onClick={handleStart} className={styles.start} data-testid="launch-wizard">
                             <FontAwesomeIcon icon={faPlay} fixedWidth size="sm" />
-                            <span>{t(`${prefix}.start`)}</span>
+                            <span>{t("start")}</span>
                         </div>
                     </Col>
                 </Row>
@@ -67,7 +66,7 @@ const PlayCard = () => {
                             title={playTitle}
                             className={styles.last}
                             disabled={!lastPlaySession}
-                            text={t(`${prefix}.last-play`)}
+                            text={t("last-play")}
                             onClick={() => handleStartLastSession(lastPlaySession)}
                         />
                     </Col>
@@ -77,7 +76,7 @@ const PlayCard = () => {
                             icon={faUserGraduate}
                             className={styles.last}
                             disabled={!lastLearnSession}
-                            text={t(`${prefix}.last-learn`)}
+                            text={t("last-learn")}
                             onClick={() => handleStartLastSession(lastLearnSession)}
                         />
                     </Col>

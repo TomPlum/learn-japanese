@@ -24,7 +24,7 @@ const KanjiShowcaseCard = () => {
 
     const service = new KanjiService();
     const font = useFontSelector(state => state.font.selected);
-    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.kanji-showcase"});
+    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.kanji-showcase" });
 
     const shuffleKanji = () => {
         return service.randomKanji().then(response => {

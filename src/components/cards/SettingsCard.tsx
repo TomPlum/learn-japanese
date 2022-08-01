@@ -14,8 +14,7 @@ const SettingsCard = () => {
     const [settingsType, setSettingsType] = useState(SettingsType.GENERAL);
 
     const user = useUserSelector(state => state.user.user);
-    const { t } = useTranslation();
-    const prefix = "dashboard.card.settings"
+    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.settings" });
 
     const link = {
         chevron: true,
@@ -31,7 +30,7 @@ const SettingsCard = () => {
         <DashboardCard className={styles.card} id="settings-card">
             <DashboardCard.Header className={styles.header}>
                 <DashboardCardHeader.Title>
-                    {t(`${prefix}.title`)}
+                    {t("title")}
                 </DashboardCardHeader.Title>
             </DashboardCard.Header>
 
@@ -39,38 +38,38 @@ const SettingsCard = () => {
                 <DashboardCardLink
                     {...link}
                     icon={faCog}
-                    text={t(`${prefix}.general`)}
+                    text={t("general")}
                     onClick={() => handleClick(SettingsType.GENERAL)}
                 />
                 <DashboardCardLink
                     {...link}
+                    text={t("learn")}
                     icon={faGraduationCap}
-                    text={t(`${prefix}.learn`)}
                     onClick={() => handleClick(SettingsType.LEARN)}
                 />
                 <DashboardCardLink
                     {...link}
                     icon={faChess}
-                    text={t(`${prefix}.play`)}
+                    text={t("play")}
                     onClick={() => handleClick(SettingsType.PLAY)}
                 />
                 <DashboardCardLink
                     {...link}
                     icon={faDesktop}
-                    text={t(`${prefix}.interface`)}
+                    text={t("interface")}
                     onClick={() => handleClick(SettingsType.INTERFACE)}
                 />
                 {user && (<>
                     <DashboardCardLink
                         {...link}
                         icon={faBell}
-                        text={t(`${prefix}.notification`)}
+                        text={t("notification")}
                         onClick={() => handleClick(SettingsType.NOTIFICATION)}
                     />
                     <DashboardCardLink
                         {...link}
                         icon={faUser}
-                        text={t(`${prefix}.user`)}
+                        text={t("user")}
                         onClick={() => handleClick(SettingsType.USER)}
                     />
                 </>)}
