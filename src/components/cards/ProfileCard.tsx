@@ -4,6 +4,7 @@ import styles from "../../styles/sass/components/cards/ProfileCard.module.scss";
 import { faBell, faCircle, faCog, faCompass, faTimes, faUserGraduate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DashboardCardLink from "../layout/card/DashboardCardLink";
+import { useTranslation } from "react-i18next";
 
 export interface ProfileCardProps {
     onDismiss?: () => void;
@@ -14,6 +15,8 @@ const ProfileCard = (props: ProfileCardProps) => {
     const { onDismiss } = props;
 
     const user = useUserSelector(state => state.user.user);
+    const { t } = useTranslation();
+    const prefix = "dashboard.card.profile";
 
     return (
         <DashboardCard size="sm" className={styles.card} id="profile-card">
@@ -34,15 +37,15 @@ const ProfileCard = (props: ProfileCardProps) => {
                     </span>
                     <p className={styles.name}>{user?.username ?? "User Profile"}</p>
                     <a className={styles.profile} href={user ? "/profile" : "/register"}>
-                        {user ? "Go to profile" : "Register"}
+                        {user ? t(`${prefix}.go`) : t(`${prefix}.register`)}
                     </a>
                 </div>
 
                 <div className={styles.linkWrapper}>
                     {user && (<>
-                        <DashboardCardLink text="Notification Centre" icon={faBell} href="/notifications" />
-                        <DashboardCardLink text="User Settings" icon={faCog} href="/settings?type=user" />
-                        <DashboardCardLink text="Show Me Around" icon={faCompass} href="/home/tour" />
+                        <DashboardCardLink text={t(`${prefix}.notifications`)} icon={faBell} href="/notifications" />
+                        <DashboardCardLink text={t(`${prefix}.user-settings`)} icon={faCog} href="/settings?type=user" />
+                        <DashboardCardLink text={t(`${prefix}.tour`)} icon={faCompass} href="/home/tour" />
                     </>)}
 
                     {!user && (

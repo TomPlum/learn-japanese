@@ -31,6 +31,13 @@ const resources = {
                         "default-title": "Custom Session",
                         "play-title": "You've not played anything recently.",
                         "learn-title": "You've not practiced anything recently."
+                    },
+                    profile: {
+                        "go": "Go to profile",
+                        "register": "Register",
+                        "notifications": "Notification Centre",
+                        "user-settings": "Account Settings",
+                        "tour": "Show Me Around"
                     }
                 }
             }
@@ -45,7 +52,7 @@ const resources = {
             },
             navigation: {
                 button: {
-                    "home": "ホームページ",
+                    "home": "ホーム",
                     "learn": "習う",
                     "help": "ヘルプ",
                     "kanji-dict": "漢字辞書",
@@ -64,6 +71,13 @@ const resources = {
                         "default-title": "カスタムセッション",
                         "play-title": "最近ゲームをしていません",
                         "learn-title": "最近何も練習していません"
+                    },
+                    profile: {
+                        "go": "プロフィールを入る",
+                        "register": "登録する",
+                        "notifications": "通知",
+                        "user-settings": "アカウント設定",
+                        "tour": "見せて"
                     }
                 }
             }
