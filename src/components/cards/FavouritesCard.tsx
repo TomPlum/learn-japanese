@@ -11,9 +11,12 @@ import LaunchPresetConfirmationModal from "../settings/LaunchPresetConfirmationM
 import EditFavouritesModal from "../settings/EditFavouritesModal";
 import DashboardCardLink from "../layout/card/DashboardCardLink";
 import ScrollableContainer from "../ui/ScrollableContainer";
+import { useTranslation } from "react-i18next";
 
 const FavouritesCard = () => {
 
+    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.favourites" });
+    const actions = useTranslation("translation", { keyPrefix: "action" }).t;
     const [presets, setPresets] = useState<SessionMode[]>([]);
     const [editing, setEditing] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -65,11 +68,11 @@ const FavouritesCard = () => {
     return (
         <DashboardCard className={styles.card} loading={loading} updating={updating} error={error}>
             <DashboardCard.Header onReload={reload}>
-                <DashboardCardHeader.Title>Favourites</DashboardCardHeader.Title>
+                <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
 
                 <DashboardCardHeader.SettingsMenu>
-                    <DashboardCardLink text="Edit" icon={faPencilAlt} onClick={() => setEditing(true)}  />
-                    <DashboardCardLink text="Refresh" icon={faSyncAlt} onClick={reload} />
+                    <DashboardCardLink text={actions("edit")} icon={faPencilAlt} onClick={() => setEditing(true)}  />
+                    <DashboardCardLink text={actions("refresh")} icon={faSyncAlt} onClick={reload} />
                 </DashboardCardHeader.SettingsMenu>
             </DashboardCard.Header>
 

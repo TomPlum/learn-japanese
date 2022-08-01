@@ -1,12 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import FavouritesCard from "../../../components/cards/FavouritesCard";
-import PlayMode from "../../../domain/session/PlayMode";
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
-import LearnMode from "../../../domain/session/LearnMode";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import PresetBuilder from "../../../domain/session/PresetBuilder";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const mockGetFavourites = jest.fn();
 const mockGetAllPresets = jest.fn();
@@ -106,7 +105,7 @@ test('Clicking the empty state add button should render the edit favourites moda
 test('Clicking the edit button from the settings menu should render the edit favourites modal', async () => {
     mockGetFavourites.mockResolvedValueOnce({ learn: [], play: [playPreset] });
     mockGetAllPresets.mockResolvedValueOnce({});
-    const component = renderReduxConsumer(<FavouritesCard />);
+    const component = renderTranslatedReduxConsumer(<FavouritesCard />);
 
     fireEvent.click(await component.findByTestId('dashboard-settings-menu-button'));
     fireEvent.click(await component.findByText('Edit'));
@@ -117,7 +116,7 @@ test('Clicking the edit button from the settings menu should render the edit fav
 test('Dismissing the edit favourites modal should stop rendering it and NOT call reload the favourites', async () => {
     mockGetFavourites.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
     mockGetAllPresets.mockResolvedValueOnce({});
-    const component = renderReduxConsumer(<FavouritesCard />);
+    const component = renderTranslatedReduxConsumer(<FavouritesCard />);
 
     fireEvent.click(await component.findByTestId('dashboard-settings-menu-button'));
     fireEvent.click(await component.findByText('Edit'));
@@ -134,7 +133,7 @@ test('Saving after updating favourites should reload the data', async () => {
     mockGetFavourites.mockResolvedValue({ learn: [learnPreset], play: [playPreset] });
     mockGetAllPresets.mockResolvedValueOnce({});
     mockUpdateFavourites.mockResolvedValueOnce({ success: true });
-    const component = renderReduxConsumer(<FavouritesCard />);
+    const component = renderTranslatedReduxConsumer(<FavouritesCard />);
 
     // Should render both favourites
     expect(await component.findByTestId('favourite-button-1')).toBeInTheDocument();

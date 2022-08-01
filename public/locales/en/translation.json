@@ -62,7 +62,14 @@
         "examples": "Examples",
         "shuffle": "Shuffle",
         "meaning": "Meanings"
+      },
+      "favourites": {
+        "title": "Favourites"
       }
     }
+  },
+  "action": {
+    "edit": "Edit",
+    "refresh": "Refresh"
   }
 }
