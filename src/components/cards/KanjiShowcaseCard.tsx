@@ -10,6 +10,7 @@ import { faChalkboardTeacher, faListAlt, faPaintBrush, faPencilAlt, faRandom, fa
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Inspectable from "../ui/Inspectable";
 import ExampleDisplay from "../ui/display/ExampleDisplay";
+import { useTranslation } from "react-i18next";
 
 const KanjiShowcaseCard = () => {
 
@@ -23,6 +24,7 @@ const KanjiShowcaseCard = () => {
 
     const service = new KanjiService();
     const font = useFontSelector(state => state.font.selected);
+    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.kanji-showcase"});
 
     const shuffleKanji = () => {
         return service.randomKanji().then(response => {
@@ -69,14 +71,14 @@ const KanjiShowcaseCard = () => {
 
     const meanings = kanji?.getMeanings()?.join(", ") ?? "";
     const areTooLong = meanings.length <= MAX_MEANINGS_LENGTH;
-    const fullMeanings = { title: "Meanings", text: meanings };
+    const fullMeanings = { title: t("meaning"), text: meanings };
 
     const allOnReadings = kanji?.getOnyomiReadings().map(reading => reading.kana) ?? [];
-    const onReadingPopOver = { title: "On'Yomi Readings", text: allOnReadings?.join(", ") };
+    const onReadingPopOver = { title: t("on.long"), text: allOnReadings?.join(", ") };
     const hasMultipleOnReadings = allOnReadings.length > 1;
 
     const allKunReadings = kanji?.getKunyomiReadings().map(reading => reading.kana) ?? [];
-    const kunReadingPopOver = { title: "Kun'Yomi Readings", text: allKunReadings?.join(", ") };
+    const kunReadingPopOver = { title: t("kun.long"), text: allKunReadings?.join(", ") };
     const hasMultipleKunReadings = allKunReadings.length > 1;
 
     const examplesClasses = [styles.attribute];
@@ -89,18 +91,18 @@ const KanjiShowcaseCard = () => {
             {inExamples && <ExampleDisplay examples={examples} onDismiss={() => setInExamples(false)} />}
 
             <DashboardCard.Header>
-                <DashboardCardHeader.Title>Kanji Showcase</DashboardCardHeader.Title>
-                <DashboardCardHeader.Icon icon={faRandom} onClick={handleShuffle} disabled={updating} title="Shuffle" />
+                <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
+                <DashboardCardHeader.Icon icon={faRandom} onClick={handleShuffle} disabled={updating} title={t("shuffle")} />
             </DashboardCard.Header>
 
             <DashboardCard.Body className={styles.body}>
                 <div className={styles.main}>
                     <div className={styles.attributes}>
-                        <div className={styles.attribute} title="Kyōiku Grade">
+                        <div className={styles.attribute} title={t("grade")}>
                             <FontAwesomeIcon icon={faChalkboardTeacher} fixedWidth />
                             <span>{kanji?.grade.value ?? "N/A"}</span>
                         </div>
-                        <div className={styles.attribute} title="JLPT Level">
+                        <div className={styles.attribute} title={t("jlpt")}>
                             <FontAwesomeIcon icon={faPencilAlt} fixedWidth />
                             <span>{kanji?.jlpt.value ?? "?"}</span>
                         </div>
@@ -115,11 +117,11 @@ const KanjiShowcaseCard = () => {
                     </div>
 
                     <div className={styles.attributes}>
-                        <div className={styles.attribute} title="Brush Strokes">
+                        <div className={styles.attribute} title={t("strokes")}>
                             <FontAwesomeIcon icon={faPaintBrush} fixedWidth />
                             <span>{kanji?.strokes ?? "N/A"}</span>
                         </div>
-                        <div className={examplesClasses.join(" ")} title="Examples" onClick={handleViewExamples}>
+                        <div className={examplesClasses.join(" ")} title={t("examples")} onClick={handleViewExamples}>
                             <FontAwesomeIcon icon={faListAlt} fixedWidth className={styles.icon} />
                             <span>{kanji?.examples.length}</span>
                         </div>
@@ -135,7 +137,7 @@ const KanjiShowcaseCard = () => {
                 <div className={styles.readings}>
                     <Inspectable popover={onReadingPopOver} placement="bottom" disableUnderline disabled={!hasMultipleOnReadings}>
                         <span className={styles.on}>
-                            <span className={styles.label}>on</span>
+                            <span className={styles.label}>{t("on.short")}</span>
                             {hasMultipleOnReadings && <span className={styles.count}>x{allOnReadings.length}</span>}
                             <span>{kanji?.getOnyomiReadings()[0]?.kana ?? "N/A"}</span>
                         </span>
@@ -143,7 +145,7 @@ const KanjiShowcaseCard = () => {
 
                     <Inspectable popover={kunReadingPopOver} placement="bottom" disableUnderline disabled={!hasMultipleKunReadings}>
                         <span className={styles.kun}>
-                            <span className={styles.label}>kun</span>
+                            <span className={styles.label}>{t("kun.short")}</span>
                             {hasMultipleKunReadings && <span className={styles.count}>x{allKunReadings.length}</span>}
                             <span>{kanji?.getKunyomiReadings()[0]?.kana ?? "N/A"}</span>
                         </span>
@@ -152,7 +154,7 @@ const KanjiShowcaseCard = () => {
 
                 <div className={styles.search}>
                     <FontAwesomeIcon icon={faSearch} fixedWidth />
-                    <a href="/kanji">search all kanji</a>
+                    <a href="/kanji">{t("search")}</a>
                 </div>
             </DashboardCard.Body>
         </DashboardCard>

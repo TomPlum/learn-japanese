@@ -47,6 +47,24 @@ const resources = {
                         "interface": "Interface Settings",
                         "notification": "Notification Settings",
                         "user": "User Settings"
+                    },
+                    "kanji-showcase": {
+                        "title": "Kanji Showcase",
+                        "search": "search all kanji",
+                        "on": {
+                            "short": "on",
+                            "long": "On'Yomi Readings"
+                        },
+                        "kun": {
+                            "short": "kun",
+                            "long": "Kun'Yomi Readings"
+                        },
+                        "grade": "Kyōiku Grade",
+                        "jlpt": "JLPT Level",
+                        "strokes": "Brush Strokes",
+                        "examples": "Examples",
+                        "shuffle": "Shuffle",
+                        "meaning": "Meanings"
                     }
                 }
             }
@@ -96,6 +114,24 @@ const resources = {
                         "interface": "設計設定",
                         "notification": "通知設定",
                         "user": "ユーザー設定"
+                    },
+                    "kanji-showcase": {
+                        "title": "漢字ショーケース",
+                        "search": "すべての漢字を検索",
+                        "on": {
+                            "short": "音",
+                            "long": "音読み"
+                        },
+                        "kun": {
+                            "short": "訓",
+                            "long": "訓読み"
+                        },
+                        "grade": "教育の学年",
+                        "jlpt": "JLPTレベル",
+                        "strokes": "刷毛の量",
+                        "examples": "例",
+                        "shuffle": "シャッフル",
+                        "meaning": "意味"
                     }
                 }
             }
