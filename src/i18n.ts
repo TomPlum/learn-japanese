@@ -38,6 +38,15 @@ const resources = {
                         "notifications": "Notification Centre",
                         "user-settings": "Account Settings",
                         "tour": "Show Me Around"
+                    },
+                    settings: {
+                        "title": "Settings",
+                        "general": "General Settings",
+                        "learn": "Learn Settings",
+                        "play": "Play Settings",
+                        "interface": "Interface Settings",
+                        "notification": "Notification Settings",
+                        "user": "User Settings"
                     }
                 }
             }
@@ -78,6 +87,15 @@ const resources = {
                         "notifications": "通知",
                         "user-settings": "アカウント設定",
                         "tour": "見せて"
+                    },
+                    settings: {
+                        "title": "設定",
+                        "general": "一般設定",
+                        "learn": "学習設定",
+                        "play": "ゲーム設定",
+                        "interface": "設計設定",
+                        "notification": "通知設定",
+                        "user": "ユーザー設定"
                     }
                 }
             }

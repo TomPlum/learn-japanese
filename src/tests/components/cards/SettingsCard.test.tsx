@@ -1,12 +1,12 @@
 import SettingsCard from "../../../components/cards/SettingsCard";
-import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
 import { clearUser, setUser } from "../../../slices/UserSlice";
 import { testUser } from "../../../setupTests";
 import { fireEvent, screen } from "@testing-library/react";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const setup = () => {
-    const component = renderReduxConsumer(<SettingsCard />);
+    const component = renderTranslatedReduxConsumer(<SettingsCard />);
     return {
         general: component.getByText('General Settings'),
         learn: component.getByText('Learn Settings'),
