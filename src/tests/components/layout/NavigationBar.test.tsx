@@ -5,23 +5,17 @@ import { createMemoryHistory } from "history";
 import { AppMode } from "../../../domain/AppMode";
 import { store } from "../../../store";
 import { setActive, setApplicationMode } from "../../../slices/ModeSlice";
-import renderReduxConsumer from "../../renderReduxConsumer";
 import { clearUser, setUser } from "../../../slices/UserSlice";
 import { testUser } from "../../../setupTests";
-import { when } from "jest-when";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const history = createMemoryHistory();
 const onLaunchLoginModalHandler = jest.fn();
 
-const mockTranslation = jest.fn();
-jest.mock('react-i18next', () => ({
-    useTranslation: () => { return { t: mockTranslation, } }
-}));
-
 let props: NavigationBarProps;
 
 const setup = () => {
-    const component = renderReduxConsumer(
+    const component = renderTranslatedReduxConsumer(
         <Router history={history}>
             <NavigationBar {...props} />
         </Router>
@@ -42,16 +36,6 @@ beforeEach(() => {
     };
     store.dispatch(setActive(true));
     store.dispatch(setApplicationMode(AppMode.LEARN));
-
-    // Translations
-    when(mockTranslation).calledWith("navigation.button.home").mockReturnValue("Home");
-    when(mockTranslation).calledWith("navigation.button.learn").mockReturnValue("Learn");
-    when(mockTranslation).calledWith("navigation.button.kanji-dict").mockReturnValue("Kanji Dictionary");
-    when(mockTranslation).calledWith("navigation.button.kana-dict").mockReturnValue("Kana Dictionary");
-    when(mockTranslation).calledWith("navigation.button.genki-dict").mockReturnValue("Genki Knowledge Bank");
-    when(mockTranslation).calledWith("navigation.button.help").mockReturnValue("Help");
-    when(mockTranslation).calledWith("navigation.button.sm2").mockReturnValue("SuperMemo2 Algorithm");
-    when(mockTranslation).calledWith("navigation.button.faq").mockReturnValue("Frequently Asked Questions");
 });
 
 test('Clicking the \'Home\' button should route the user to the menu', async () => {

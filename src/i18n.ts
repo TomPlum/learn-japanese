@@ -21,6 +21,18 @@ const resources = {
                     "faq": "Frequently Asked Questions",
                     "sm2": "SuperMemo2 Algorithm"
                 }
+            },
+            dashboard: {
+                card: {
+                    play: {
+                        "start": "Start Session",
+                        "last-play": "Last Play Session",
+                        "last-learn": "Last Learn Session",
+                        "default-title": "Custom Session",
+                        "play-title": "You've not played anything recently.",
+                        "learn-title": "You've not practiced anything recently."
+                    }
+                }
             }
         }
     },
@@ -41,6 +53,18 @@ const resources = {
                     "genki-dict": "げんきの要約",
                     "faq": "よくある質問",
                     "sm2": "「スーパーメモ」 アルゴリズム"
+                }
+            },
+            dashboard: {
+                card: {
+                    play: {
+                        "start": "スタートセッション",
+                        "last-play": "前のゲームセッション",
+                        "last-learn": "前の学習セッション",
+                        "default-title": "カスタムセッション",
+                        "play-title": "最近ゲームをしていません",
+                        "learn-title": "最近何も練習していません"
+                    }
                 }
             }
         }
