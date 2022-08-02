@@ -20,11 +20,9 @@ const PlayCard = () => {
     const lastPlaySession = sessions.lastPlaySession;
     const lastLearnSession = sessions.lastLearnSession;
 
-    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.play" });
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.play" });
     const [preset, setPreset] = useState<SessionMode | undefined>(undefined);
     const [customising, setCustomising] = useState(false);
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
     const [confirming, setConfirming] = useState(false);
 
     const handleStart = () => {
@@ -32,10 +30,9 @@ const PlayCard = () => {
     }
 
     const props: DashboardCardProps = {
-        error: error,
         id: "play-card",
-        loading: loading,
         className: styles.card,
+        loading: !ready
     }
 
     const handleStartLastSession = (session?: SessionSettingsState) => {

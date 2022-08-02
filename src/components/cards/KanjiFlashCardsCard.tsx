@@ -15,7 +15,7 @@ const KanjiFlashCardsCard = () => {
     const service = new SpacedRepetitionService();
 
     const history = useHistory();
-    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.flash-cards" });
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.flash-cards" });
     const actions = useTranslation("translation", { keyPrefix: "action" }).t;
 
     const [cards, setCards] = useState<FlashCard[]>([]);
@@ -51,8 +51,9 @@ const KanjiFlashCardsCard = () => {
     }
 
     const props: DashboardCardProps = {
+        loading: !ready,
         id: "flash-cards-card",
-        className: styles.card
+        className: styles.card,
     }
 
     return (

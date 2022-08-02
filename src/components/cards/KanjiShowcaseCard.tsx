@@ -24,7 +24,7 @@ const KanjiShowcaseCard = () => {
 
     const service = new KanjiService();
     const font = useFontSelector(state => state.font.selected);
-    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.kanji-showcase" });
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.kanji-showcase" });
 
     const shuffleKanji = () => {
         return service.randomKanji().then(response => {
@@ -87,7 +87,7 @@ const KanjiShowcaseCard = () => {
     }
 
     return (
-        <DashboardCard loading={loading} updating={updating} error={error} height={300} id="kanji-showcase-card">
+        <DashboardCard loading={loading && !ready} updating={updating} error={error} height={300} id="kanji-showcase-card">
             {inExamples && <ExampleDisplay examples={examples} onDismiss={() => setInExamples(false)} />}
 
             <DashboardCard.Header>

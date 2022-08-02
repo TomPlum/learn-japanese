@@ -1,6 +1,7 @@
 import AnonymousDashboardLayout from "../../../components/layout/AnonymousDashboardLayout";
 import renderReduxConsumer from "../../renderReduxConsumer";
 import { fireEvent } from "@testing-library/react";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const mockGetHideUserProfileHint = jest.fn();
 const mockSetHideUserProfileHint = jest.fn();
@@ -29,7 +30,7 @@ test('Clicking the dismiss button on the profile card should stop rendering the 
     mockGetHideUserProfileHint.mockReturnValueOnce(false);
 
     // Should start by rendering it
-    const component = renderReduxConsumer(<AnonymousDashboardLayout />);
+    const component = renderTranslatedReduxConsumer(<AnonymousDashboardLayout />);
     expect(component.getByTestId('profile-card')).toBeInTheDocument();
 
     // Should stop rendering it after dismissing

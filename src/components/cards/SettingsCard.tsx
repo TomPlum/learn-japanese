@@ -14,7 +14,7 @@ const SettingsCard = () => {
     const [settingsType, setSettingsType] = useState(SettingsType.GENERAL);
 
     const user = useUserSelector(state => state.user.user);
-    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.settings" });
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.settings" });
 
     const link = {
         chevron: true,
@@ -27,7 +27,7 @@ const SettingsCard = () => {
     }
 
     return (
-        <DashboardCard className={styles.card} id="settings-card">
+        <DashboardCard className={styles.card} id="settings-card" loading={!ready}>
             <DashboardCard.Header className={styles.header}>
                 <DashboardCardHeader.Title>
                     {t("title")}

@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 
 const FavouritesCard = () => {
 
-    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.favourites" });
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.favourites" });
     const actions = useTranslation("translation", { keyPrefix: "action" }).t;
     const [presets, setPresets] = useState<SessionMode[]>([]);
     const [editing, setEditing] = useState(false);
@@ -66,7 +66,7 @@ const FavouritesCard = () => {
     }
 
     return (
-        <DashboardCard className={styles.card} loading={loading} updating={updating} error={error}>
+        <DashboardCard className={styles.card} loading={loading && !ready} updating={updating} error={error}>
             <DashboardCard.Header onReload={reload}>
                 <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
 

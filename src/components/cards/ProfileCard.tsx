@@ -15,10 +15,10 @@ const ProfileCard = (props: ProfileCardProps) => {
     const { onDismiss } = props;
 
     const user = useUserSelector(state => state.user.user);
-    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.profile" });
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.profile" });
 
     return (
-        <DashboardCard size="sm" className={styles.card} id="profile-card">
+        <DashboardCard size="sm" className={styles.card} id="profile-card" loading={!ready}>
             <DashboardCard.Body className={styles.body}>
                 <div className={styles.detailsWrapper}>
                     {!user && (
