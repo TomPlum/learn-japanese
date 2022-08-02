@@ -109,6 +109,15 @@
         "title": "統計",
         "kana": "仮名",
         "kanji": "漢字"
+      },
+      "mistakes": {
+        "title": "間違い",
+        "review": "復習える",
+        "view": "間違いを見る",
+        "practice": "練習",
+        "kanji": "漢字",
+        "kana": "仮名",
+        "definitions": "定義"
       }
     }
   },

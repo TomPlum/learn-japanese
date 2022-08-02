@@ -109,6 +109,15 @@
         "title": "Statistics",
         "kana": "Kana",
         "kanji": "Kanji"
+      },
+      "mistakes": {
+        "title": "Mistakes",
+        "review": "to review",
+        "view": "View Mistakes",
+        "practice": "Practice",
+        "kanji": "Kanji",
+        "kana": "Kana",
+        "definitions": "Definitions"
       }
     }
   },
