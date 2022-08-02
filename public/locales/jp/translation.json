@@ -16,7 +16,14 @@
       "kana-dict": "仮名辞書",
       "genki-dict": "げんきの要約",
       "faq": "よくある質問",
-      "sm2": "「スーパーメモ」 アルゴリズム"
+      "sm2": "「スーパーメモ」 アルゴリズム",
+      "user": {
+        "login": "ログインする",
+        "profile": "プロフィール",
+        "stats": "統計",
+        "high-scores": "高得点",
+        "logout": "ログアウト"
+      }
     }
   },
   "dashboard": {
@@ -30,7 +37,7 @@
         "learn-title": "最近何も練習していません"
       },
       "profile": {
-        "go": "プロフィールを入る",
+        "go": "プロフィール",
         "register": "登録する",
         "notifications": "通知",
         "user-settings": "アカウント設定",

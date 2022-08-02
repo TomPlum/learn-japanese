@@ -16,7 +16,14 @@
       "kana-dict": "Kana Dictionary",
       "genki-dict": "Genki Knowledge Bank",
       "faq": "Frequently Asked Questions",
-      "sm2": "SuperMemo2 Algorithm"
+      "sm2": "SuperMemo2 Algorithm",
+      "user": {
+        "login": "Login",
+        "profile": "Profile",
+        "stats": "Stats",
+        "high-scores": "Highscores",
+        "logout": "Logout"
+      }
     }
   },
   "dashboard": {

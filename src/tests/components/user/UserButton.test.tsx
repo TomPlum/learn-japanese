@@ -1,11 +1,11 @@
 import { fireEvent, screen } from "@testing-library/react";
 import UserButton, { UserButtonProps } from "../../../components/user/UserButton";
-import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
 import { clearUser, setUser } from "../../../slices/UserSlice";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { testUser } from "../../../setupTests";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 let props: UserButtonProps;
 const history = createMemoryHistory();
@@ -25,7 +25,7 @@ afterEach(() => {
 });
 
 const setup = () => {
-    const component = renderReduxConsumer(<Router history={history}><UserButton {...props} /></Router>);
+    const component = renderTranslatedReduxConsumer(<Router history={history}><UserButton {...props} /></Router>);
     return {
         ...component
     }

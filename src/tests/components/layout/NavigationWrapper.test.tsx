@@ -1,9 +1,9 @@
 import { fireEvent, screen } from "@testing-library/react";
 import NavigationWrapper from "../../../components/layout/NavigationWrapper";
-import renderReduxConsumer from "../../renderReduxConsumer";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const setup = () => {
-    const component = renderReduxConsumer(<NavigationWrapper />);
+    const component = renderTranslatedReduxConsumer(<NavigationWrapper />);
     return {
         login: component.getByText('Login'),
         ...component

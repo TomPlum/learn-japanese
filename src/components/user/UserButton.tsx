@@ -5,6 +5,7 @@ import { clearUser } from "../../slices/UserSlice";
 import menuStyles from "../../styles/sass/components/layout/NavigationBar.module.scss";
 import styles from "../../styles/sass/components/user/UserButton.module.scss";
 import NavigationButton from "../ui/NavigationButton";
+import { useTranslation } from "react-i18next";
 
 export interface UserButtonProps {
     onClick: () => void;
@@ -14,6 +15,7 @@ export interface UserButtonProps {
 const UserButton = (props: UserButtonProps) => {
     const userDispatch = useUserDispatch();
     const user = useUserSelector(state => state.user.user);
+    const { t } = useTranslation("translation", { keyPrefix: "navigation.button.user" });
 
     const getButtonText = (): string => {
         if (user) {
@@ -23,7 +25,7 @@ const UserButton = (props: UserButtonProps) => {
                 return user.username;
             }
         } else {
-            return "Login";
+            return t("login");
         }
     }
 
@@ -45,19 +47,19 @@ const UserButton = (props: UserButtonProps) => {
             icon={user ? faUserCircle : faUser}
         >
             <NavigationButton.Item icon={faUserCircle} iconClass={styles.profile} href="/profile">
-                Profile
+                {t("profile")}
             </NavigationButton.Item>
 
             <NavigationButton.Item icon={faChartBar} iconClass={styles.stats} href="/profile#stats">
-                Stats
+                {t("stats")}
             </NavigationButton.Item>
 
             <NavigationButton.Item icon={faTrophy} iconClass={styles.highscores} href="/high-scores">
-                Highscores
+                {t("high-scores")}
             </NavigationButton.Item>
 
             <NavigationButton.Item icon={faDoorOpen} onClick={handleLogout} iconClass={styles.logout}>
-                Logout
+                {t("logout")}
             </NavigationButton.Item>
         </NavigationButton>
     );
