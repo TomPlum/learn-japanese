@@ -72,12 +72,17 @@
         "learning": "Learning",
         "new": "New",
         "start": "Start Study Session"
+      },
+      "activity": {
+        "title": "Activity",
+        "more": "See More"
       }
     }
   },
   "action": {
     "edit": "Edit",
     "refresh": "Refresh",
-    "sync": "Sync"
+    "sync": "Sync",
+    "clear": "Clear"
   }
 }

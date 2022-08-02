@@ -72,12 +72,17 @@
         "learning": "学習",
         "new": "新しい",
         "start": "勉強会開始"
+      },
+      "activity": {
+        "title": "アクティビティフィード",
+        "more": "もっと見る"
       }
     }
   },
   "action": {
     "edit": "編集",
     "refresh": "リロード",
-    "sync": "最新に保つ"
+    "sync": "最新に保つ",
+    "clear": "クリア"
   }
 }

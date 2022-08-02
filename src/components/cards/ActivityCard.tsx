@@ -6,15 +6,20 @@ import styles from "../../styles/sass/components/cards/ActivityCard.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ActivityEventType from "../../domain/ActivityEventType";
 import ActivityEvent from "../../domain/ActivityEvent";
+import { useTranslation } from "react-i18next";
 
 const ActivityCard = () => {
+
+    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.activity" });
+    const actions = useTranslation("translation", { keyPrefix: "action" }).t;
+
     return (
         <DashboardCard size="md">
             <DashboardCard.Header>
                 <DashboardCardHeader.Title>
-                    Activity
+                    {t("title")}
                 </DashboardCardHeader.Title>
-                <DashboardCardHeader.Icon icon={faTimesCircle} title="Clear" />
+                <DashboardCardHeader.Icon icon={faTimesCircle} title={actions("clear")} />
             </DashboardCard.Header>
 
             <DashboardCard.Body className={styles.body}>
@@ -26,7 +31,7 @@ const ActivityCard = () => {
                     <DashboardActivityEvent event={ActivityEvent.of(ActivityEventType.POST_REGISTRATION, Date.UTC(2021, 1, 22).valueOf())} />
                 </div>
                 <div className={styles.footer}>
-                    <div className={styles.more} title="See More">
+                    <div className={styles.more} title={t("more")}>
                         <FontAwesomeIcon icon={faEllipsisH} />
                     </div>
                 </div>
