@@ -14,8 +14,7 @@ i18n.use(detector)
         },
         react: {
             useSuspense: false
-        },
-        debug: true
+        }
     }).then(() => console.log("Initialised React i18n"));
 
 export default i18n;

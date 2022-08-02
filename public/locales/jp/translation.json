@@ -96,7 +96,7 @@
           "minutes-past": "%d分前",
           "hours-past": "%d時間前",
           "days-past": "%d日前",
-          "months-ago": "%dヶ月前",
+          "months-past": "%dヶ月前",
           "years-past": "%d年前",
           "one-minute-ago": "1分前",
           "one-hour-ago": "一時間前",
@@ -137,6 +137,109 @@
     "refresh": "リロード",
     "sync": "最新に保つ",
     "clear": "クリア",
-    "dismiss": "閉じる"
+    "cancel": "戻る",
+    "dismiss": "閉じる",
+    "close": "閉じる",
+    "remove": "取り除く",
+    "favourite": "お気に入り",
+    "save": "保存"
+  },
+  "presets": {
+    "edit": {
+      "title": "お気に入りを編集する"
+    },
+    "learn": {
+      "start": "スタート",
+      "hiragana": {
+        "name": "平仮名"
+      },
+      "katakana": {
+        "name": "片仮名"
+      },
+      "kyōiku": {
+        "name": "教育"
+      },
+      "diacriticals": {
+        "name": "濁点と半濁点"
+      },
+      "diagraphs": {
+        "name": "ダイグラフ"
+      },
+      "everything": {
+        "name": "すべて仮名"
+      },
+      "high-school": {
+        "name": "教育"
+      },
+      "jōyō": {
+        "name": "常用漢字"
+      },
+      "numbers": {
+        "name": "数字"
+      },
+      "colours": {
+        "name": "色"
+      },
+      "time": {
+        "name": "時間"
+      },
+      "animals": {
+        "name": "動物"
+      },
+      "directions": {
+        "name": "行き方"
+      },
+      "weather": {
+        "name": "天気"
+      },
+      "family": {
+        "name": "家族"
+      },
+      "body": {
+        "name": "解剖学"
+      },
+      "days-of-the-week": {
+        "name": "曜日"
+      },
+      "months-of-the-year": {
+        "name": "年の月"
+      },
+      "temporal-nouns": {
+        "name": "一時名詞"
+      },
+      "seasonal": {
+        "name": "季節の"
+      },
+      "common-phrases": {
+        "name": "一般的な語句"
+      },
+      "adverbs": {
+        "name": "副詞"
+      },
+      "particles": {
+        "name": "助詞"
+      },
+      "expressions": {
+        "name": "言葉遣い"
+      },
+      "verbs": {
+        "name": "動詞"
+      },
+      "nouns": {
+        "name": "名詞"
+      },
+      "adjectives": {
+        "name": "形容詞"
+      }
+    },
+    "play": {
+      "start": "スタート",
+      "rōmaji": {
+        "name": "ローマ字"
+      },
+      "hardcore": {
+        "name": "ハードコア"
+      }
+    }
   }
 }

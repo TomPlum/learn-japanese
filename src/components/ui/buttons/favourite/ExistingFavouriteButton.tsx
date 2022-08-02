@@ -5,6 +5,7 @@ import { faBan, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../../menu/icon/Icon";
 import { useState } from "react";
 import { CustomIcon } from "../../../../domain/Icon";
+import { useTranslation } from "react-i18next";
 
 export interface ExistingFavouriteButtonProps {
     id: number;
@@ -20,6 +21,8 @@ const ExistingFavouriteButton = (props: ExistingFavouriteButtonProps) => {
     const { id, name, icon, selected, className, onRemove, onCancel } = props;
 
     const [inside, setInside] = useState(false);
+    const { t, ready } = useTranslation();
+    const actions = useTranslation("translation", { keyPrefix: "action" }).t;
 
     let classes = [styles.button, className, selected ? styles.delete : ""];
     const testId = `existing-favourite-button-${id}`;
@@ -42,7 +45,7 @@ const ExistingFavouriteButton = (props: ExistingFavouriteButtonProps) => {
                             className={selected ? styles.times : styles.ban}
                         />
                         <span className={styles.name}>
-                            {selected ? "Cancel" : "Remove"}
+                            {selected ? actions("cancel") : actions("remove")}
                         </span>
                     </div>
                 </Fade>
@@ -52,7 +55,7 @@ const ExistingFavouriteButton = (props: ExistingFavouriteButtonProps) => {
                 <Fade in={!inside} timeout={2000} appear>
                     <div className={styles.container}>
                         <Icon value={icon} className={styles.icon} />
-                        <span className={styles.name}>{name}</span>
+                        <span className={styles.name}>{ready ? t(name) : ""}</span>
                     </div>
                 </Fade>
             )}

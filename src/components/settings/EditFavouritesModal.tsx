@@ -13,6 +13,7 @@ import LearnMode from "../../domain/session/LearnMode";
 import EditFavouriteButton from "../ui/buttons/favourite/EditFavouriteButton";
 import ConfirmModal from "../ui/ConfirmModal";
 import ExistingFavouriteButton from "../ui/buttons/favourite/ExistingFavouriteButton";
+import { useTranslation } from "react-i18next";
 
 export interface EditFavouritesModalProps {
     favourites: SessionMode[];
@@ -36,6 +37,8 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
 
     const service = new PresetService();
     const presetsRef = useRef<HTMLParagraphElement>(null);
+    const { t, ready } = useTranslation("translation", { keyPrefix: "presets.edit" });
+    const actions = useTranslation("translation", { keyPrefix: "action" }).t;
 
     useEffect(() => {
         setLoading(true);
@@ -120,14 +123,14 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                 />}
 
                 <div className={styles.header}>
-                    {!loading && <FontAwesomeIcon icon={faStar} fixedWidth className={styles.icon} />}
-                    <LoadingSpinner active={loading} variant="warning" className={styles.loading} />
-                    <span className={styles.name}>Edit Favourites</span>
+                    {!loading && ready && <FontAwesomeIcon icon={faStar} fixedWidth className={styles.icon} />}
+                    <LoadingSpinner active={loading || !ready} variant="warning" className={styles.loading} />
+                    <span className={styles.name}>{t("title")}</span>
                     <FontAwesomeIcon
                         fixedWidth
-                        title="Close"
                         icon={faTimes}
                         onClick={handleDismiss}
+                        title={actions("close")}
                         className={styles.close}
                     />
                 </div>
@@ -136,7 +139,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                     <div className={styles.body}>
                         {error && <Alert variant="danger">{error}</Alert>}
 
-                        {!loading && !error && <ScrollableContainer maxHeight={500} className={styles.scrollable}>
+                        {!loading && !error && ready && <ScrollableContainer maxHeight={500} className={styles.scrollable}>
                             <p className={styles.heading}>Existing Favourites</p>
                             <div className={styles.favourites}>
                                 {favourites.map((preset: SessionMode) => (
@@ -175,7 +178,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                                 ))}
                             </div>
 
-                            {!loading && filtered.length === 0 && (
+                            {!loading && ready && filtered.length === 0 && (
                                 <span className={styles.empty}>There's nothing that matches your filters.</span>
                             )}
                         </ScrollableContainer>}
@@ -199,8 +202,8 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                         <FontAwesomeIcon icon={faGraduationCap} fixedWidth />
                     </Button>
 
-                    <Button variant="success" onClick={handleSave} disabled={loading || saving} className={styles.save}>
-                        {saving ? <FontAwesomeIcon icon={faCircleNotch} fixedWidth spin /> : "Save"}
+                    <Button variant="success" onClick={handleSave} disabled={loading || saving || !ready} className={styles.save}>
+                        {saving ? <FontAwesomeIcon icon={faCircleNotch} fixedWidth spin /> : actions("save")}
                     </Button>
                 </div>
             </Modal.Body>

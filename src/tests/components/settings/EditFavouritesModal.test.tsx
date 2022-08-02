@@ -5,6 +5,7 @@ import renderReduxConsumer from "../../renderReduxConsumer";
 import EditFavouritesModal from "../../../components/settings/EditFavouritesModal";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import PresetBuilder from "../../../domain/session/PresetBuilder";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const scrollIntoViewMock = jest.fn();
 window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
@@ -50,7 +51,7 @@ const learnPreset = new PresetBuilder()
 
 test('Should render existing favourites if the service responds successfully', async () => {
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
 
     // Should render this as an existing favourite as it's passed in as one
     expect(await component.findByTestId('existing-favourite-button-4')).toBeInTheDocument();
@@ -61,19 +62,19 @@ test('Should render existing favourites if the service responds successfully', a
 
 test('Should render an error alert if the service returns an error', async () => {
     mockGetAllPresets.mockResolvedValueOnce({ error: "Failed to retrieve presets" });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
     expect(await component.findByText('Failed to retrieve presets'));
 });
 
 test('Should render an error alert if the service promise is rejected', async () => {
     mockGetAllPresets.mockRejectedValueOnce({ error: "A network error occurred." });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
     expect(await component.findByText('A network error occurred.'));
 });
 
 test('Should call the onDismiss event handler when clicking close after making no changes', async () => {
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [] });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
     expect(await component.findByTestId('existing-favourite-button-4')).toBeInTheDocument();
 
     fireEvent.click(component.getByTitle('Close'));
@@ -83,7 +84,7 @@ test('Should call the onDismiss event handler when clicking close after making n
 
 test('Should render a confirmation modal if the user has marked an existing favourite for deletion', async () => {
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [] });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
 
     // Mark the existing learn favourite for deletion
     const learnFavouriteButton = await component.findByTestId('existing-favourite-button-4');
@@ -102,7 +103,7 @@ test('Should render a confirmation modal if the user has marked an existing favo
 
 test('Should stop rendering the confirmation modal and not update favourites when clicking \'No\'', async () => {
     mockGetAllPresets.mockResolvedValueOnce({ learn: [], play: [playPreset] });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />);
 
     // Mark the existing play favourite for deletion
     const playFavouriteButton = await component.findByTestId('existing-favourite-button-3');
@@ -121,7 +122,7 @@ test('Should stop rendering the confirmation modal and not update favourites whe
 test('Should call the update favourites service function and onSuccess callback when saving changes', async () => {
     // Return both the play and learn preset. The play is already a favourite.
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />);
 
     // Mark the existing play favourite for deletion
     const playFavouriteButton = await component.findByTestId('existing-favourite-button-3');
@@ -144,7 +145,7 @@ test('Should call the update favourites service function and onSuccess callback 
 test('Should deselect existing and new favourites when clicking them once selected', async () => {
     // Return both the play and learn preset. The play is already a favourite.
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />);
 
     // Mark the existing play favourite for deletion
     const playFavouriteButton = await component.findByTestId('existing-favourite-button-3');
@@ -175,7 +176,7 @@ test('Should deselect existing and new favourites when clicking them once select
 test('Should toggle available play presets when clicking the filter play presets button', async () => {
     // Return both the play and learn preset. The learn is already a favourite.
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />);
 
     // It should start by rendering the available play preset and the existing learn
     expect(await component.findByTestId('edit-favourite-button-1')).toBeInTheDocument();
@@ -199,7 +200,7 @@ test('Should toggle available play presets when clicking the filter play presets
 test('Should toggle available learn presets when clicking the filter learn presets button', async () => {
     // Return both the play and learn preset. The play is already a favourite.
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />);
 
     // It should start by rendering the available learn preset and the existing play
     expect(await component.findByTestId('edit-favourite-button-2')).toBeInTheDocument();
@@ -223,7 +224,7 @@ test('Should toggle available learn presets when clicking the filter learn prese
 test('Should render the error if the update favourites service function fails when saving changes', async () => {
     // Return both the play and learn preset. The play is already a favourite.
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />);
     await waitFor(() => expect(component.getByText('Save')).not.toBeDisabled());
 
     // Mark the existing play favourite for deletion
@@ -244,7 +245,7 @@ test('Should render the error if the update favourites service function fails wh
 
 test('Should render a help button in the existing favourites section when there are none', async () => {
     mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
-    const component = renderReduxConsumer(<EditFavouritesModal favourites={[]} {...eventHandlers} />);
+    const component = renderTranslatedReduxConsumer(<EditFavouritesModal favourites={[]} {...eventHandlers} />);
 
     const button = await component.findByText('You can select favourites below');
     expect(button).toBeInTheDocument();

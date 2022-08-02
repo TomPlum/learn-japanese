@@ -35,7 +35,7 @@ const DashboardActivityEvent = (props: PropsWithChildren<DashboardActivityEventP
                 m: t("one-minute-ago"), mm: t("minutes-past"),
                 h: t("one-hour-ago"), hh: t("hours-past"),
                 d: t("one-day-ago"), dd: t("days-past"),
-                M: t("one-month-ago"), MM: t("months-ago"),
+                M: t("one-month-ago"), MM: t("months-past"),
                 y: t("one-year-ago"), yy: t("years-past")
             }
         });

@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import ExistingFavouriteButton, { ExistingFavouriteButtonProps } from "../../../../../components/ui/buttons/favourite/ExistingFavouriteButton";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
+import renderWithTranslation from "../../../../renderWithTranslation";
 
 const onRemoveHandler = jest.fn();
 const onCancelHandler = jest.fn();
@@ -8,7 +9,7 @@ const onCancelHandler = jest.fn();
 let props: ExistingFavouriteButtonProps;
 
 const setup = () => {
-    const component = render(<ExistingFavouriteButton {...props} />);
+    const component = renderWithTranslation(<ExistingFavouriteButton {...props} />);
     return {
         ...component
     }

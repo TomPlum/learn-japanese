@@ -15,6 +15,7 @@
   justify-content: center;
   transition: all ease-in-out 0.3s;
   background-color: rgba($dark-1, 0.9);
+  min-height: 71px;
 
   &:hover {
     cursor: pointer;

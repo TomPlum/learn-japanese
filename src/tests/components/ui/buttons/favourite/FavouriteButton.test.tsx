@@ -1,21 +1,22 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import FavouriteButton, { FavouriteButtonProps } from "../../../../../components/ui/buttons/favourite/FavouriteButton";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import PlayMode from "../../../../../domain/session/PlayMode";
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings";
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
+import renderWithTranslation from "../../../../renderWithTranslation";
 
 const onStartHandler = jest.fn();
 
 let props: FavouriteButtonProps;
 
 const setup = () => {
-    const component = render(<FavouriteButton {...props} />);
+    const component = renderWithTranslation(<FavouriteButton {...props} />);
     return {
         ...component
     }
 }
-const preset = new PlayMode(1, "Test Button", "ffffff", faApple, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic");
+const preset = new PlayMode(1, "Test Button", "desc", "ffffff", faApple, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic");
 
 beforeEach(() => {
     props = {

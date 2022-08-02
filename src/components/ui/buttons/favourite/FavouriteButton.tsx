@@ -7,6 +7,7 @@ import SessionMode from "../../../../domain/session/SessionMode";
 import Icon from "../../menu/icon/Icon";
 import PlayMode from "../../../../domain/session/PlayMode";
 import LoadingDots from "../../loading/LoadingDots";
+import { useTranslation } from "react-i18next";
 
 export interface FavouriteButtonProps {
     preset: SessionMode;
@@ -23,6 +24,7 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
     const backgroundColourClass = isPlay ? styles.play : styles.learn;
 
     const [inside, setInside] = useState(false);
+    const { t, ready } = useTranslation();
 
     const handleMouseEnter = () => {
         setInside(true);
@@ -47,7 +49,7 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
                 onMouseEnter={handleMouseEnter}
             />
 
-            {selected && (
+            {(selected || !ready) && (
                 <div className={styles.container}>
                     <LoadingDots type="flashing" className={styles.loading} colour="#FFF" />
                 </div>
@@ -57,16 +59,16 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
                 <Fade in={inside} timeout={2000} appear>
                     <div className={styles.container}>
                         <FontAwesomeIcon icon={faPlay} fixedWidth className={styles.playIcon} />
-                        <span className={styles.name}>Start {isPlay ? "Play" : "Learn"}</span>
+                        <span className={styles.name}>{t(`presets.${isPlay ? "play" : "learn"}.start`)}</span>
                     </div>
                 </Fade>
             )}
 
-            {!inside && !selected && (
+            {!inside && !selected && ready && (
                 <Fade in={!inside} timeout={2000} appear>
                     <div className={styles.container}>
                         <Icon value={preset.icon} className={styles.icon} />
-                        <span className={styles.name}>{preset.displayName}</span>
+                        <span className={styles.name}>{ready ? t(preset.displayName) : ""}</span>
                     </div>
                 </Fade>
             )}

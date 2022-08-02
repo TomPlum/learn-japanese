@@ -137,6 +137,109 @@
     "refresh": "Refresh",
     "sync": "Sync",
     "clear": "Clear",
-    "dismiss": "Dismiss"
+    "cancel": "Cancel",
+    "close": "Close",
+    "dismiss": "Dismiss",
+    "remove": "Remove",
+    "favourite": "Favourite",
+    "save": "Save"
+  },
+  "presets": {
+    "edit": {
+      "title": "Edit Favourites"
+    },
+    "learn": {
+      "start": "Start Learn",
+      "hiragana": {
+        "name": "Hiragana"
+      },
+      "katakana": {
+        "name": "Katakana"
+      },
+      "kyōiku": {
+        "name": "Kyōiku"
+      },
+      "diacriticals": {
+        "name": "Diacriticals"
+      },
+      "diagraphs": {
+        "name": "Diagraphs"
+      },
+      "everything": {
+        "name": "All Kana"
+      },
+      "high-school": {
+        "name": "High School"
+      },
+      "jōyō": {
+        "name": "Jōyō Kanji"
+      },
+      "numbers": {
+        "name": "Numbers"
+      },
+      "colours": {
+        "name": "Colours"
+      },
+      "time": {
+        "name": "Time"
+      },
+      "animals": {
+        "name": "Animals"
+      },
+      "directions": {
+        "name": "Directions"
+      },
+      "weather": {
+        "name": "Weather"
+      },
+      "family": {
+        "name": "Family"
+      },
+      "body": {
+        "name": "Body"
+      },
+      "days-of-the-week": {
+        "name": "Days of the Week"
+      },
+      "months-of-the-year": {
+        "name": "Months of the Year"
+      },
+      "temporal-nouns": {
+        "name": "Temporal Nouns"
+      },
+      "seasonal": {
+        "name": "Seasonal"
+      },
+      "common-phrases": {
+        "name": "Common Phrases"
+      },
+      "adverbs": {
+        "name": "Adverbs"
+      },
+      "particles": {
+        "name": "Particles"
+      },
+      "expressions": {
+        "name": "Expressions"
+      },
+      "verbs": {
+        "name": "Verbs"
+      },
+      "nouns": {
+        "name": "Nouns"
+      },
+      "adjectives": {
+        "name": "Adjectives"
+      }
+    },
+    "play": {
+      "start": "Start Play",
+      "rōmaji": {
+        "name": "Rōmaji"
+      },
+      "hardcore": {
+        "name": "Hardcore"
+      }
+    }
   }
 }

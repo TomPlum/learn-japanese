@@ -61,11 +61,11 @@ test('It should render an error if the service is call is rejected', async () =>
 
 test('Clicking a favourite button should render the confirmation modal', async () => {
     mockGetFavourites.mockResolvedValueOnce({ learn: [], play: [playPreset] });
-    const component = renderReduxConsumer(<FavouritesCard />);
+    const component = renderTranslatedReduxConsumer(<FavouritesCard />);
     expect(await component.findByText('Test Play')).toBeInTheDocument();
 
     fireEvent.mouseEnter(component.getByTestId('favourite-button-1').firstChild!);
-    expect(await component.findByText('Start Play')).toBeInTheDocument();
+    expect(await component. findByText('Start Play')).toBeInTheDocument();
     fireEvent.click(component.getByTestId('favourite-button-1').firstChild!);
 
     expect(await screen.findByTestId('launch-preset-confirmation')).toBeInTheDocument();
