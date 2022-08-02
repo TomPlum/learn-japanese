@@ -65,11 +65,19 @@
       },
       "favourites": {
         "title": "Favourites"
+      },
+      "flash-cards": {
+        "title": "Flash Cards",
+        "review": "Review",
+        "learning": "Learning",
+        "new": "New",
+        "start": "Start Study Session"
       }
     }
   },
   "action": {
     "edit": "Edit",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "sync": "Sync"
   }
 }

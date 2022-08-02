@@ -1,4 +1,4 @@
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import SpacedRepetitionService, { FlashCardsResponse } from "../../service/SpacedRepetitionService";
 import { FlashCard } from "../../domain/learn/FlashCard";
@@ -8,12 +8,15 @@ import { useHistory } from "react-router-dom";
 import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
 import DashboardCardLink from "../layout/card/DashboardCardLink";
+import { useTranslation } from "react-i18next";
 
 const KanjiFlashCardsCard = () => {
 
     const service = new SpacedRepetitionService();
 
     const history = useHistory();
+    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.flash-cards" });
+    const actions = useTranslation("translation", { keyPrefix: "action" }).t;
 
     const [cards, setCards] = useState<FlashCard[]>([]);
     const [loading, setLoading] = useState(false);
@@ -55,9 +58,9 @@ const KanjiFlashCardsCard = () => {
     return (
         <DashboardCard {...props} error={error} updating={updating} loading={loading}>
             <DashboardCard.Header>
-                <DashboardCardHeader.Title>Flash Cards</DashboardCardHeader.Title>
+                <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
                 <DashboardCardHeader.SettingsMenu>
-                    <DashboardCardLink text="Sync" icon={faSyncAlt} onClick={onRefreshCards} />
+                    <DashboardCardLink text={actions("sync")} icon={faSyncAlt} onClick={onRefreshCards} />
                 </DashboardCardHeader.SettingsMenu>
             </DashboardCard.Header>
 
@@ -67,19 +70,19 @@ const KanjiFlashCardsCard = () => {
                         <div className={styles.numbers}>
                             <div className={styles.quantity}>
                                 <p className={styles.review}>{cards.length}</p>
-                                <p className={styles.label}>Review</p>
+                                <p className={styles.label}>{t("review")}</p>
                             </div>
                             <div className={styles.quantity}>
                                 <p className={styles.learning}>0</p>
-                                <p className={styles.label}>Learning</p>
+                                <p className={styles.label}>{t("learning")}</p>
                             </div>
                             <div className={styles.quantity}>
                                 <p className={styles.new}>10</p>
-                                <p className={styles.label}>New</p>
+                                <p className={styles.label}>{t("new")}</p>
                             </div>
                         </div>
                         <DashboardCardLink
-                            text="Start Study Session"
+                            text={t("start")}
                             onClick={onReview}
                             icon={faGraduationCap}
                             className={styles.button}

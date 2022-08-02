@@ -1,10 +1,11 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import KanjiFlashCardsCard from "../../../components/cards/KanjiFlashCardsCard";
 import Definition from "../../../domain/sentence/Definition";
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
 import { FlashCard } from "../../../domain/learn/FlashCard";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
+import renderWithTranslation from "../../renderWithTranslation";
 
 const mockGetKanjiFlashCards = jest.fn();
 jest.mock("../../../service/SpacedRepetitionService", () => {
@@ -18,7 +19,7 @@ const spaceRepetitionDetails = new SpaceRepetitionDetails(2.5, 0, 0, "2021-12-12
 const flashCard = new FlashCard(1, definition, spaceRepetitionDetails);
 
 const setup = () => {
-    const component = render(<Router history={history}><KanjiFlashCardsCard /></Router>);
+    const component = renderWithTranslation(<Router history={history}><KanjiFlashCardsCard /></Router>);
     return {
         ...component
     }

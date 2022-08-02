@@ -65,11 +65,19 @@
       },
       "favourites": {
         "title": "お気に入り"
+      },
+      "flash-cards": {
+        "title": "フラッシュカード",
+        "review": "復習",
+        "learning": "学習",
+        "new": "新しい",
+        "start": "勉強会開始"
       }
     }
   },
   "action": {
     "edit": "編集",
-    "refresh": "リロード"
+    "refresh": "リロード",
+    "sync": "最新に保つ"
   }
 }
