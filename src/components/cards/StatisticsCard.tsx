@@ -5,6 +5,7 @@ import { faChevronLeft, faChevronRight, faGamepad, faSadCry, faTrophy } from "@f
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Cell, Pie, PieChart } from "recharts";
+import { useTranslation } from "react-i18next";
 
 const dummyKanjiData = [
     { grade: 1, value: 80, fill: "#4189ff" },
@@ -34,7 +35,8 @@ enum StatView {
 
 const StatisticsCard = () => {
 
-    const [view, setView] = useState(StatView.PLAY);
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.stats" });
+    const [view, setView] = useState(StatView.KANA);
 
     const getMainContent = () => {
         switch (view) {
@@ -82,7 +84,7 @@ const StatisticsCard = () => {
                 return (
                     <>
                         <div className={styles.visual}>
-                            <p className={styles.label}>Kanji</p>
+                            <p className={styles.label}>{t("kanji")}</p>
                             <PieChart width={125} height={125}>
                                 <Pie
                                     dataKey="value"
@@ -119,7 +121,7 @@ const StatisticsCard = () => {
                 return (
                     <>
                         <div className={styles.visual}>
-                            <p className={styles.label}>Kana</p>
+                            <p className={styles.label}>{t("kana")}</p>
                             <PieChart width={125} height={125}>
                                 <Pie
                                     nameKey="type"
@@ -178,10 +180,10 @@ const StatisticsCard = () => {
     }
 
     return (
-        <DashboardCard size="sm" className={styles.card}>
+        <DashboardCard size="sm" className={styles.card} loading={!ready}>
             <DashboardCard.Header>
                 <DashboardCardHeader.Title>
-                    Stats
+                    {t("title")}
                 </DashboardCardHeader.Title>
             </DashboardCard.Header>
 

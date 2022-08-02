@@ -104,6 +104,11 @@
           "one-month-ago": "A month ago",
           "one-year-ago": "A year ago"
         }
+      },
+      "stats": {
+        "title": "Statistics",
+        "kana": "Kana",
+        "kanji": "Kanji"
       }
     }
   },

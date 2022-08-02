@@ -104,6 +104,11 @@
           "one-month-ago": "1ヶ月前",
           "one-year-ago": "一年前"
         }
+      },
+      "stats": {
+        "title": "統計",
+        "kana": "仮名",
+        "kanji": "漢字"
       }
     }
   },
