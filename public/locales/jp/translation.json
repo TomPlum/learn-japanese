@@ -34,7 +34,8 @@
         "register": "登録する",
         "notifications": "通知",
         "user-settings": "アカウント設定",
-        "tour": "見せて"
+        "tour": "見せて",
+        "description": "アカウントを作成すると、カスタムプリセットを保存したり、ハイスコアを競ったり、進捗状況や統計情報を確認することができます。"
       },
       "settings": {
         "title": "設定",
@@ -75,7 +76,27 @@
       },
       "activity": {
         "title": "アクティビティフィード",
-        "more": "もっと見る"
+        "more": "もっと見る",
+        "event": {
+          "learn": "学習セッション",
+          "play": "ゲームセッション",
+          "mistakes": "間違復習",
+          "welcome": "ようこそ!",
+          "streak": "{{streak}}日達成!"
+        },
+        "time": {
+          "now": "今",
+          "minutes-past": "%d分前",
+          "hours-past": "%d時間前",
+          "days-past": "%d日前",
+          "months-ago": "%dヶ月前",
+          "years-past": "%d年前",
+          "one-minute-ago": "1分前",
+          "one-hour-ago": "一時間前",
+          "one-day-ago": "1日前",
+          "one-month-ago": "1ヶ月前",
+          "one-year-ago": "一年前"
+        }
       }
     }
   },
@@ -83,6 +104,7 @@
     "edit": "編集",
     "refresh": "リロード",
     "sync": "最新に保つ",
-    "clear": "クリア"
+    "clear": "クリア",
+    "dismiss": "閉じる"
   }
 }

@@ -1,14 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PropsWithChildren } from "react";
 import styles from "../../../styles/sass/components/layout/card/DashboardActivityEvent.module.scss";
-import ActivityEvent from "../../../domain/ActivityEvent";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
+
+export type ActivityEventDetails = { name: string, icon: IconDefinition, colour: string, time: number };
 
 export interface DashboardActivityEventProps {
-    event: ActivityEvent;
+    event: ActivityEventDetails;
     className?: string
     onClick?: () => void;
     onDismiss?: () => void;
@@ -18,7 +20,10 @@ const DashboardActivityEvent = (props: PropsWithChildren<DashboardActivityEventP
 
     const { event, className, onClick, onDismiss, children } = props;
 
-    const { name, icon, colour } = event.type;
+    const { name, icon, colour, time } = event;
+
+    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.activity.time" });
+    const actions = useTranslation("translation", { keyPrefix: "action" }).t;
 
     const getElapsedTime = (ms: number) => {
         dayjs.extend(relativeTime);
@@ -26,12 +31,12 @@ const DashboardActivityEvent = (props: PropsWithChildren<DashboardActivityEventP
         dayjs.updateLocale('en', {
             relativeTime: {
                 future: "in %s", past: "%s",
-                s: 'Just now',
-                m: "A minute ago", mm: "%dm ago",
-                h: "An hour ago", hh: "%dh ago",
-                d: "A day ago", dd: "%ddago",
-                M: "A month ago", MM: "%dmo ago",
-                y: "A year ago", yy: "%dy ago"
+                s: t("now"),
+                m: t("one-minute-ago"), mm: t("minutes-past"),
+                h: t("one-hour-ago"), hh: t("hours-past"),
+                d: t("one-day-ago"), dd: t("days-past"),
+                M: t("one-month-ago"), MM: t("months-ago"),
+                y: t("one-year-ago"), yy: t("years-past")
             }
         });
         return dayjs(ms).fromNow()
@@ -43,7 +48,7 @@ const DashboardActivityEvent = (props: PropsWithChildren<DashboardActivityEventP
                 <FontAwesomeIcon icon={icon} fixedWidth className={styles.icon} style={{ color: colour }} />
                 <span>{name}</span>
                 <span className={styles.time}>{getElapsedTime(event.time)}</span>
-                <FontAwesomeIcon icon={faTimes} className={styles.dismiss} onClick={onDismiss} title="Dismiss" />
+                <FontAwesomeIcon icon={faTimes} className={styles.dismiss} onClick={onDismiss} title={actions("dismiss")} />
             </div>
             <div>
                 {children}

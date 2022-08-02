@@ -3,6 +3,7 @@ import HomePage from "../../../components/pages/HomePage";
 import { store } from "../../../store";
 import { clearUser, setUser } from "../../../slices/UserSlice";
 import { testUser } from "../../../setupTests";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const mockGetActivityStreak = jest.fn();
 jest.mock("../../../service/UserService", () => {
@@ -19,7 +20,7 @@ test('Should render the user dashboard if there is a user logged in', async () =
     mockGetActivityStreak.mockResolvedValueOnce(10);
     store.dispatch(setUser(testUser));
 
-    const component = renderReduxConsumer(<HomePage />);
+    const component = renderTranslatedReduxConsumer(<HomePage />);
 
     // Wait for the streak card to load since its async
     expect(await component.findByText('Day 10')).toBeInTheDocument();
@@ -32,7 +33,7 @@ test('Should render the anonymous dashboard if there is no user logged in', () =
     mockGetActivityStreak.mockResolvedValueOnce(10);
     store.dispatch(clearUser());
 
-    const component = renderReduxConsumer(<HomePage />);
+    const component = renderTranslatedReduxConsumer(<HomePage />);
 
     expect(component.getByTestId('anonymous-dashboard')).toBeInTheDocument();
     expect(component.queryByTestId('user-dashboard')).not.toBeInTheDocument();

@@ -1,20 +1,44 @@
 import DashboardCard from "../layout/card/DashboardCard";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
-import DashboardActivityEvent from "../layout/card/DashboardActivityEvent";
-import { faEllipsisH, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import DashboardActivityEvent, { ActivityEventDetails } from "../layout/card/DashboardActivityEvent";
+import { faBirthdayCake, faEllipsisH, faEraser, faFireAlt, faGraduationCap, faPlay, faQuestionCircle, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/sass/components/cards/ActivityCard.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ActivityEventType from "../../domain/ActivityEventType";
-import ActivityEvent from "../../domain/ActivityEvent";
 import { useTranslation } from "react-i18next";
+import { ActivityEventType } from "../../domain/ActivityEventType";
 
 const ActivityCard = () => {
 
-    const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.activity" });
-    const actions = useTranslation("translation", { keyPrefix: "action" }).t;
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.activity" });
+    const actionsTranslation = useTranslation("translation", { keyPrefix: "action" });
+    const actions = actionsTranslation.t;
+    const actionsReady = actionsTranslation.ready;
+
+    const getEvent = (type: ActivityEventType): ActivityEventDetails => {
+        switch (type) {
+            case ActivityEventType.LEARN: {
+                return { name: t("event.learn"), icon: faGraduationCap, colour: "#ffe53c", time: Date.now() };
+            }
+            case ActivityEventType.PLAY: {
+                return { name: t("event.play"), icon: faPlay, colour: "#2ec947", time: Date.now() - 1500000 };
+            }
+            case ActivityEventType.MISTAKES: {
+                return { name: t("event.mistakes"), icon: faEraser, colour: "#dc7bde", time: Date.now() - 10000000 };
+            }
+            case ActivityEventType.POST_REGISTRATION: {
+                return { name: t("event.welcome"), icon: faBirthdayCake, colour: "#4d9af8", time: Date.UTC(2021, 1, 22).valueOf() };
+            }
+            case ActivityEventType.STREAK: {
+                return { name: t("event.streak", { streak: 549 }), icon: faFireAlt, colour: "#f3881b", time: Date.now() - 10000000000 };
+            }
+            default: {
+                return { name: "Unknown", icon: faQuestionCircle, colour: "#edd63b", time: Date.now() }
+            }
+        }
+    }
 
     return (
-        <DashboardCard size="md">
+        <DashboardCard size="md" loading={!ready && !actionsReady}>
             <DashboardCard.Header>
                 <DashboardCardHeader.Title>
                     {t("title")}
@@ -24,11 +48,11 @@ const ActivityCard = () => {
 
             <DashboardCard.Body className={styles.body}>
                 <div className={styles.activity}>
-                    <DashboardActivityEvent event={ActivityEvent.of(ActivityEventType.LEARN, Date.now())} />
-                    <DashboardActivityEvent event={ActivityEvent.of(ActivityEventType.PLAY, Date.now() - 1500000)} />
-                    <DashboardActivityEvent event={ActivityEvent.of(ActivityEventType.MISTAKES, Date.now() - 10000000)} />
-                    <DashboardActivityEvent event={ActivityEvent.of(ActivityEventType.fromStreak(400), Date.now() - 10000000000)} />
-                    <DashboardActivityEvent event={ActivityEvent.of(ActivityEventType.POST_REGISTRATION, Date.UTC(2021, 1, 22).valueOf())} />
+                    <DashboardActivityEvent event={getEvent(ActivityEventType.LEARN)} />
+                    <DashboardActivityEvent event={getEvent(ActivityEventType.PLAY)} />
+                    <DashboardActivityEvent event={getEvent(ActivityEventType.MISTAKES)} />
+                    <DashboardActivityEvent event={getEvent(ActivityEventType.STREAK)} />
+                    <DashboardActivityEvent event={getEvent(ActivityEventType.POST_REGISTRATION)} />
                 </div>
                 <div className={styles.footer}>
                     <div className={styles.more} title={t("more")}>

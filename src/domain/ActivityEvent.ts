@@ -1,4 +1,4 @@
-import ActivityEventType from "./ActivityEventType";
+import { ActivityEventType } from "./ActivityEventType";
 
 class ActivityEvent {
     private readonly _type: ActivityEventType;

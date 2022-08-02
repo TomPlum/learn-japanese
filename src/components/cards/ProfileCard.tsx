@@ -49,8 +49,7 @@ const ProfileCard = (props: ProfileCardProps) => {
 
                     {!user && (
                         <div className={styles.explanation}>
-                            Create an account to save custom presets, compete in the high-scores,
-                            and track your progress and statistics.
+                            {t("description")}
                         </div>
                     )}
                 </div>

@@ -1,6 +1,5 @@
 import { store } from "../../../store";
 import { clearUser, setUser } from "../../../slices/UserSlice";
-import renderReduxConsumer from "../../renderReduxConsumer";
 import ProfileCard from "../../../components/cards/ProfileCard";
 import { fireEvent } from "@testing-library/react";
 import { testUser } from "../../../setupTests";
@@ -70,6 +69,6 @@ test('It should render a show me around tour link if the user is logged in', () 
 test('It should render an registration reason when the user is not logged in', () => {
     store.dispatch(clearUser());
     const component = renderTranslatedReduxConsumer(<ProfileCard onDismiss={onDismissHandler} />);
-    const reason = 'Create an account to save custom presets, compete in the high-scores, and track your progress and statistics.';
+    const reason = 'Create an account to save custom presets, compete in the high-scores, and track your progress.';
     expect(component.getByText(reason)).toBeInTheDocument();
 });

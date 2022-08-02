@@ -34,7 +34,8 @@
         "register": "Register",
         "notifications": "Notification Centre",
         "user-settings": "Account Settings",
-        "tour": "Show Me Around"
+        "tour": "Show Me Around",
+        "description": "Create an account to save custom presets, compete in the high-scores, and track your progress."
       },
       "settings": {
         "title": "Settings",
@@ -75,7 +76,27 @@
       },
       "activity": {
         "title": "Activity",
-        "more": "See More"
+        "more": "See More",
+        "event": {
+          "learn": "Learning Session",
+          "play": "Play Session",
+          "mistakes": "Mistakes Review",
+          "welcome": "Welcome!",
+          "streak": "You a reached a {{streak}} day streak!"
+        },
+        "time": {
+          "now": "Just now",
+          "minutes-past": "%dm ago",
+          "hours-past": "%dh ago",
+          "days-past": "%dd ago",
+          "months-past": "%dmo ago",
+          "years-past": "%dy ago",
+          "one-minute-ago": "A minute ago",
+          "one-hour-ago": "An hour ago",
+          "one-day-ago": "A day ago",
+          "one-month-ago": "A month ago",
+          "one-year-ago": "A year ago"
+        }
       }
     }
   },
@@ -83,6 +104,7 @@
     "edit": "Edit",
     "refresh": "Refresh",
     "sync": "Sync",
-    "clear": "Clear"
+    "clear": "Clear",
+    "dismiss": "Dismiss"
   }
 }
