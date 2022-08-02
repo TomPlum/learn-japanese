@@ -4,6 +4,7 @@ import { faBan, faBirthdayCake, faChevronLeft, faChevronRight, faClock, faFireAl
 import styles from "../../styles/sass/components/cards/StreakCard.module.scss";
 import { useEffect, useState } from "react";
 import UserService from "../../service/UserService";
+import { useTranslation } from "react-i18next";
 
 enum StreakView {
     CUSTOM_DATE, ACCOUNT_CREATION, STREAK
@@ -11,6 +12,7 @@ enum StreakView {
 
 const StreakCard = () => {
 
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.streak" });
     const [view, setView] = useState(StreakView.CUSTOM_DATE);
     const [streak, setStreak] = useState(0);
 
@@ -23,6 +25,7 @@ const StreakCard = () => {
     const viewQuantity = Object.keys(StreakView).length / 2;
 
     const cardProps: DashboardCardProps = {
+        loading: !ready,
         className: styles.card
     }
 
@@ -67,9 +70,9 @@ const StreakCard = () => {
 
     const getViewTitle = (next: number): string => {
         switch (next) {
-            case StreakView.STREAK: return "Streak";
-            case StreakView.ACCOUNT_CREATION: return "Account Creation";
-            case StreakView.CUSTOM_DATE: return "Custom Date";
+            case StreakView.STREAK: return t("streak");
+            case StreakView.ACCOUNT_CREATION: return t("account-creation");
+            case StreakView.CUSTOM_DATE: return t("custom-date");
             default: return "";
         }
     }

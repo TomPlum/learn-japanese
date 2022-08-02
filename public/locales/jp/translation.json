@@ -124,6 +124,11 @@
         "more": "もっと見る",
         "leaderboard": "リーダーボード",
         "score": "点数"
+      },
+      "streak": {
+        "streak": "日の連続",
+        "account-creation": "アカウント作成",
+        "custom-date": "カスタム日付"
       }
     }
   },

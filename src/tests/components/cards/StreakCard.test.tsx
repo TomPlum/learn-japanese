@@ -1,5 +1,6 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import StreakCard from "../../../components/cards/StreakCard";
+import renderWithTranslation from "../../renderWithTranslation";
 
 const mockGetActivityStreak = jest.fn();
 jest.mock("../../../service/UserService", () => {
@@ -12,7 +13,7 @@ test('Should render the cards in the correct order when clicking right', async (
     mockGetActivityStreak.mockResolvedValueOnce(481);
 
     // Default Custom Date
-    const component = render(<StreakCard />);
+    const component = renderWithTranslation(<StreakCard />);
     expect(await component.findByText('Day 481')).toBeInTheDocument();
 
     // Streak
@@ -32,7 +33,7 @@ test('Should render the cards in the correct order when clicking left', async ()
     mockGetActivityStreak.mockResolvedValueOnce(235);
 
     // Default Custom Date
-    const component = render(<StreakCard />);
+    const component = renderWithTranslation(<StreakCard />);
     expect(await component.findByText('Day 235')).toBeInTheDocument();
 
     // Account Creation
