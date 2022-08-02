@@ -3,11 +3,15 @@ import { Button, Table } from "react-bootstrap";
 import styles from "../../styles/sass/components/cards/HighScoresCard.module.scss";
 import DashboardCardHeader from "../layout/card/DashboardCardHeader";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const HighScoresCard = () => {
 
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.high-scores" });
+
     const props: DashboardCardProps = {
         size: "sm",
+        loading: !ready,
         id: "highscores-card",
         className: styles.card
     }
@@ -15,7 +19,7 @@ const HighScoresCard = () => {
     return (
         <DashboardCard {...props}>
             <DashboardCard.Header>
-                <DashboardCardHeader.Title>Highscores</DashboardCardHeader.Title>
+                <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
                 <DashboardCardHeader.Icon icon={faCog} />
             </DashboardCard.Header>
 
@@ -24,8 +28,8 @@ const HighScoresCard = () => {
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Leaderboard</th>
-                        <th>Score</th>
+                        <th>{t("leaderboard")}</th>
+                        <th>{t("score")}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,7 +63,7 @@ const HighScoresCard = () => {
             </DashboardCard.Body>
 
             <DashboardCard.Footer className={styles.footer}>
-                <a className={styles.more} href="/high-scores">Show More</a>
+                <a className={styles.more} href="/high-scores">{t("more")}</a>
             </DashboardCard.Footer>
         </DashboardCard>
     );

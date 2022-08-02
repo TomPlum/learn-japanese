@@ -118,6 +118,12 @@
         "kanji": "漢字",
         "kana": "仮名",
         "definitions": "定義"
+      },
+      "high-scores": {
+        "title": "高得点",
+        "more": "もっと見る",
+        "leaderboard": "リーダーボード",
+        "score": "点数"
       }
     }
   },

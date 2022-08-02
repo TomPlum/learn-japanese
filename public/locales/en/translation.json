@@ -118,6 +118,12 @@
         "kanji": "Kanji",
         "kana": "Kana",
         "definitions": "Definitions"
+      },
+      "high-scores": {
+        "title": "Highscores",
+        "more": "See More",
+        "leaderboard": "Leaderboard",
+        "score": "Score"
       }
     }
   },
