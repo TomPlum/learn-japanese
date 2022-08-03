@@ -7,6 +7,37 @@
       "help": "Help"
     }
   },
+  "forms": {
+    "common": {
+      "username": "Username",
+      "password": "Password",
+      "confirm-password": "Confirm Password",
+      "email": "Email address",
+      "nickname": "Nickname"
+    },
+    "login": {
+      "no-account": "I don't have an account"
+    },
+    "register": {
+      "already-registered": "I already have an account",
+      "passwords-dont-match": "Passwords do not match.",
+      "checking-username-eligibility": "Checking username eligibility...",
+      "checking-email-eligibility": "Checking email eligibility...",
+      "username-available": "Username is available.",
+      "email-available": "Email address is available.",
+      "email-not-shared": "Your email address will not be shared with anyone else.",
+      "username-taken": "This username is already taken.",
+      "email-taken": "This email address is already registered.",
+      "password-policy": {
+        "title": "Password Policy",
+        "lowercase": "Password must contain at least one lowercase character.",
+        "uppercase": "Password must contain at least one uppercase character.",
+        "number": "Password must contain at least one number.",
+        "special-char": "Password must contain at least one special character.",
+        "length": "Password must be between 8 and 36 characters (inclusive)."
+      }
+    }
+  },
   "navigation": {
     "button": {
       "home": "Home",

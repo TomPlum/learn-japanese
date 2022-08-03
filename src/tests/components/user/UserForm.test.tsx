@@ -1,8 +1,9 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import UserForm, { UserFormProps } from "../../../components/user/UserForm";
 import { Provider } from "react-redux";
 import { store } from "../../../store";
 import authService from "../../../service/AuthenticationService";
+import renderWithTranslation from "../../renderWithTranslation";
 
 let props: UserFormProps;
 
@@ -19,7 +20,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<Provider store={store}><UserForm {...props} /></Provider>);
+    const component = renderWithTranslation(<Provider store={store}><UserForm {...props} /></Provider>);
     return {
         switchForm: component.getByText("I don't have an account"),
         close: component.getByText('Close'),

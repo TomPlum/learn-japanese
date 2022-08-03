@@ -5,6 +5,7 @@ import styles from "../../styles/sass/components/user/UserForm.module.scss";
 import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
+import { useTranslation } from "react-i18next";
 
 export interface UserFormProps {
     show: boolean;
@@ -14,6 +15,8 @@ export interface UserFormProps {
 const UserForm = (props: UserFormProps) => {
 
     const { show, onClose } = props;
+
+    const { t } = useTranslation();
     const [login, setLogin] = useState(true);
     const [registeredUsername, setRegisteredUsername] = useState("");
 
@@ -27,7 +30,7 @@ const UserForm = (props: UserFormProps) => {
             <Modal.Header className={styles.header} closeButton onHide={onClose}>
                 <Modal.Title>
                     <FontAwesomeIcon icon={login ? faUser : faUserPlus} fixedWidth className={styles.icon} />
-                    {login ? "Login" : " Register"}
+                    {login ? t("action.login") : t("action.register")}
                 </Modal.Title>
             </Modal.Header>
 
@@ -38,7 +41,7 @@ const UserForm = (props: UserFormProps) => {
 
             <Modal.Footer className={styles.footer}>
                 <p className={styles.footerText} onClick={() => setLogin(!login)}>
-                    {login ? "I don't have an account" : "I already have an account"}
+                    {login ? t("forms.login.no-account") : t("forms.register.already-registered")}
                 </p>
             </Modal.Footer>
         </Modal>

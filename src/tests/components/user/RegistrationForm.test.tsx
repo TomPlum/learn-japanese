@@ -1,7 +1,8 @@
-import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import RegistrationForm from "../../../components/user/RegistrationForm";
 import authService from "../../../service/AuthenticationService";
 import each from "jest-each";
+import renderWithTranslation from "../../renderWithTranslation";
 
 const onSuccessHandler = jest.fn();
 const mockRegister = jest.fn();
@@ -24,7 +25,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<RegistrationForm onSuccess={onSuccessHandler} />);
+    const component = renderWithTranslation(<RegistrationForm onSuccess={onSuccessHandler} />);
     return {
         email: component.getByPlaceholderText('Enter email'),
         username: component.getByPlaceholderText('Username'),

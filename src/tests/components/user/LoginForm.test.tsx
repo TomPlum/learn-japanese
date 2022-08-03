@@ -1,9 +1,9 @@
-import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import LoginForm from "../../../components/user/LoginForm";
-import renderReduxConsumer from "../../renderReduxConsumer";
 import auth, { LoginResponse } from "../../../service/AuthenticationService";
 import { store } from "../../../store";
 import { clearUser } from "../../../slices/UserSlice";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 jest.mock("../../../service/AuthenticationService");
 
@@ -42,7 +42,7 @@ const validLoginResponse: LoginResponse = {
 };
 
 const setup = () => {
-    const component = renderReduxConsumer(<LoginForm
+    const component = renderTranslatedReduxConsumer(<LoginForm
         onSuccess={onSuccessHandler}
         username={registeredUsername}
         info={infoMessage}

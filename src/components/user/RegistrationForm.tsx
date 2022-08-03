@@ -8,6 +8,7 @@ import UserService from "../../service/UserService";
 import InfoButton from "../ui/buttons/InfoButton";
 import PopOver from "../ui/PopOver";
 import { useDebouncedEffect } from "../../hooks";
+import { useTranslation } from "react-i18next";
 
 export interface RegistrationFormProps {
     onSuccess: (username: string) => void;
@@ -16,6 +17,8 @@ export interface RegistrationFormProps {
 const RegistrationForm = (props: RegistrationFormProps) => {
 
     const userService = new UserService();
+
+    const { t } = useTranslation();
 
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -101,29 +104,31 @@ const RegistrationForm = (props: RegistrationFormProps) => {
     }
 
     const getPasswordPolicyFailureReason = () => {
+        const prefix = "forms.register.password-policy";
+
         if (!/(?=.*[a-z])/.test(password)) {
-            return "Password must contain at least one lowercase character.";
+            return t(`${prefix}.lowercase`);
         }
 
         if (!/(?=.*[A-Z])/.test(password)) {
-            return "Password must contain at least one uppercase character.";
+            return t(`${prefix}.uppercase`);
         }
 
         if (!/(?=.*[0-9])/.test(password)) {
-            return "Password must contain at least one number.";
+            return t(`${prefix}.number`);
         }
 
         if (!/(?=.*[^A-Za-z0-9])/.test(password)) {
-            return "Password must contain at least one special character.";
+            return t(`${prefix}.special-char`);
         }
 
         if (!/(?=.{8,36}$)/.test(password)) {
-            return "Password must be between 8 and 36 characters (inclusive).";
+            return t(`${prefix}.length`);
         }
     }
 
     const passwordPolicyInfo = <PopOver
-        title="Password Policy"
+        title={t("forms.register.password-policy.title")}
         text={<div>
             <ul className={styles.list}>
                 <li>At least 1 lowercase letter</li>
@@ -190,7 +195,7 @@ const RegistrationForm = (props: RegistrationFormProps) => {
             {error && <Alert variant="danger">{error}</Alert> }
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address*</Form.Label>
+                <Form.Label>{t("forms.common.email")}*</Form.Label>
                 <Form.Control
                     required
                     type="email"
@@ -206,79 +211,79 @@ const RegistrationForm = (props: RegistrationFormProps) => {
 
                 {emailFocused && email.length === 0 && (
                     <Form.Text className="text-muted">
-                        Your email address will not be shared with anyone else.
+                        {t("forms.register.email-not-shared")}
                     </Form.Text>
                 )}
 
                 {emailExists && !emailEligibilityLoading && (
                     <Form.Text className="text-muted">
-                        This email address is already registered.
+                        {t("forms.register.email-taken")}
                     </Form.Text>
                 )}
 
                 {!emailExists && !emailEligibilityLoading && validEmail && (
-                    <Form.Text className="text-muted">Email address is available.</Form.Text>
+                    <Form.Text className="text-muted">{t("forms.register.email-available")}</Form.Text>
                 )}
 
                 {emailEligibilityLoading && (
                     <Form.Text className="text-muted">
                         <FontAwesomeIcon icon={faSpinner} spin fixedWidth />
-                        Checking email address eligibility...
+                        {t("forms.register.checking-email-eligibility")}
                     </Form.Text>
                 )}
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>Username*</Form.Label>
+                <Form.Label>{t("forms.common.username")}*</Form.Label>
                 <Form.Control
                     required
                     value={username}
-                    placeholder="Username"
                     isValid={validUsername}
                     className={styles.input}
                     isInvalid={!validUsername}
                     onChange={handleUsernameChange}
+                    placeholder={t("forms.common.username")}
                 />
 
                 {userExists && !userEligibilityLoading && (
-                    <Form.Text className="text-muted">This username is already taken.</Form.Text>
+                    <Form.Text className="text-muted">{t("forms.register.username-taken")}</Form.Text>
                 )}
 
                 {!userExists && !userEligibilityLoading && validUsername && (
-                    <Form.Text className="text-muted">Username is available.</Form.Text>
+                    <Form.Text className="text-muted">{t("forms.register.username-available")}</Form.Text>
                 )}
 
                 {userEligibilityLoading && (
                     <Form.Text className="text-muted">
                         <FontAwesomeIcon icon={faSpinner} spin fixedWidth />
-                        Checking username eligibility...
+                        {t("forms.register.checking-username-eligibility")}
                     </Form.Text>
                 )}
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>Nickname</Form.Label>
+                <Form.Label>{t("forms.common.nickname")}</Form.Label>
                 <Form.Control
                     value={nickname}
-                    placeholder="Nickname"
                     isValid={validNickName}
                     className={styles.input}
                     isInvalid={!validNickName}
                     onChange={handleNicknameChange}
+                    placeholder={t("forms.common.nickname")}
                 />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password*</Form.Label>
+                <Form.Label>{t("forms.common.password")}*</Form.Label>
                 <Form.Control
                     required
                     type="password"
                     value={password}
-                    placeholder="Password"
                     isValid={validPassword}
                     className={styles.input}
                     isInvalid={!validPassword}
                     onChange={handlePasswordChange}
+                    placeholder={t("forms.common.password")}
                 />
 
                 {!validPassword && password.length > 0 && (
@@ -290,27 +295,27 @@ const RegistrationForm = (props: RegistrationFormProps) => {
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>Confirm Password*</Form.Label>
+                <Form.Label>{t("forms.common.confirm-password")}*</Form.Label>
                 <Form.Control
                     required
                     type="password"
                     value={secondPassword}
                     className={styles.input}
                     isValid={validSecondPassword}
-                    placeholder="Confirm Password"
                     isInvalid={!validSecondPassword}
                     onChange={handleSecondPasswordChange}
+                    placeholder={t("forms.common.confirm-password")}
                 />
 
                 {password !== secondPassword && validPassword && (
-                    <Form.Text className="text-muted">Passwords do not match.</Form.Text>
+                    <Form.Text className="text-muted">{t("forms.register.passwords-dont-match")}</Form.Text>
                 )}
             </Form.Group>
 
             <Form.Group>
                 <Button className={styles.button} variant="info" disabled={!isFormValid()} onClick={registerUser}>
                     {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="register-loading" />}
-                    {' Register'}
+                    {' '}{t("action.register")}
                 </Button>
             </Form.Group>
         </Modal.Body>

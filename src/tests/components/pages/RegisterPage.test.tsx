@@ -2,11 +2,11 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 import RegisterPage from "../../../components/pages/RegisterPage";
 import { clearUser, setUser } from "../../../slices/UserSlice";
 import { store } from "../../../store";
-import renderReduxConsumer from "../../renderReduxConsumer";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import auth from "../../../service/AuthenticationService";
 import { testUser } from "../../../setupTests";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const mockUsernameEligible = jest.fn();
 const mockEmailEligible = jest.fn();
@@ -29,19 +29,19 @@ beforeEach(() => {
 
 test('Should render the registration form if there is no user logged in', () => {
     store.dispatch(clearUser());
-    const component = renderReduxConsumer(<Router history={history}><RegisterPage /></Router>);
+    const component = renderTranslatedReduxConsumer(<Router history={history}><RegisterPage /></Router>);
     expect(component.getByTestId('registration-form')).toBeInTheDocument();
 });
 
 test('Should redirect to the home page if the user is already logged in', () => {
     store.dispatch(setUser(testUser));
-    renderReduxConsumer(<Router history={history}><RegisterPage /></Router>);
+    renderTranslatedReduxConsumer(<Router history={history}><RegisterPage /></Router>);
     expect(history.location.pathname).toBe("/home");
 });
 
 test('Should redirect to the sign-in page if the registration is successful', async () => {
     store.dispatch(clearUser());
-    const component = renderReduxConsumer(<Router history={history}><RegisterPage /></Router>);
+    const component = renderTranslatedReduxConsumer(<Router history={history}><RegisterPage /></Router>);
 
     // Fill in the form
     mockRegister.mockResolvedValueOnce({ success: true, data: { } });

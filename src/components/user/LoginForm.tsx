@@ -6,6 +6,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useUserDispatch } from "../../hooks";
 import { setUser } from "../../slices/UserSlice";
 import auth from "../../service/AuthenticationService";
+import { useTranslation } from "react-i18next";
 
 export interface LoginFormProps {
     info?: string;
@@ -15,6 +16,7 @@ export interface LoginFormProps {
 
 const LoginForm = (props: LoginFormProps) => {
 
+    const { t, ready } = useTranslation();
     const [username, setUsername] = useState(props.username ?? "");
     const [password, setPassword] = useState("")
     const [usernameValid, setUsernameValid] = useState(!!props.username);
@@ -111,7 +113,7 @@ const LoginForm = (props: LoginFormProps) => {
         setPasswordValid(password.length > 0);
     }
 
-    const disabled = !formValid || loading;
+    const disabled = !formValid || loading || !ready;
 
     return (
         <Modal.Body className={styles.body} data-testid="login-form">
@@ -130,40 +132,40 @@ const LoginForm = (props: LoginFormProps) => {
             )}
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Username</Form.Label>
+                <Form.Label>{t("forms.common.username")}</Form.Label>
                 <Form.Control
                     required
                     value={username}
                     ref={usernameField}
-                    placeholder="Username"
                     isValid={usernameValid}
                     className={styles.input}
                     isInvalid={!usernameValid}
                     data-testid="username-input"
                     onChange={handleUsernameChange}
+                    placeholder={t("forms.common.username")}
                 />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>{t("forms.common.password")}</Form.Label>
                 <Form.Control
                     required
                     type="password"
                     value={password}
                     ref={passwordField}
-                    placeholder="Password"
                     isValid={passwordValid}
                     className={styles.input}
                     isInvalid={!passwordValid}
                     data-testid="password-input"
                     onChange={handlePasswordChange}
+                    placeholder={t("forms.common.password")}
                 />
             </Form.Group>
 
             <Form.Group>
                 <Button className={styles.login} variant="success" onClick={login} disabled={disabled} data-testid="login-button">
-                    {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="login-loading" />}
-                    {' Login'}
+                    {(loading || !ready) && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="login-loading" />}
+                    {' '}{t("action.login")}
                 </Button>
             </Form.Group>
         </Modal.Body>
