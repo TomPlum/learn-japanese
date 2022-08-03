@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ButtonGroup, Col, Container, Row } from "react-bootstrap";
 import Timer from "./Timer";
 import LifeDisplay from "./LifeDisplay";
@@ -25,8 +25,8 @@ import finish from "../../sound/finish.wav";
 import success from "../../sound/correct.wav";
 import wrong from "../../sound/wrong.wav";
 import VolumeController from "../ui/VolumeController";
-import styles from "../../styles/sass/components/game/MemoryGame.module.scss";
 import AnswerFilterRegistry from "../../domain/session/AnswerFilterRegistry";
+import styles from "../../styles/sass/components/game/MemoryGame.module.scss";
 
 export interface GameQuestionProps {
     hidden: boolean;
@@ -40,207 +40,73 @@ export interface MemoryGameProps {
     sessionKey?: string;
 }
 
-interface MemoryGameState {
-    currentQuestion: Learnable[];
-    remainingQuestions: Learnable[];
-    correctAnswers: Set<Learnable>;
-    wrongAnswers: Learnable[];
-    hasExhaustedQuestions: boolean;
-    paused: boolean;
-    lives: number;
-    failedToAnswer: number;
-    hasValidAnswer: boolean;
-    hints: number;
-    hasUsedHintThisQuestion: boolean;
-    isQuitting: boolean;
-    score: number;
-    streak: number;
-}
-
 /**
  * The core component for driving game logic.
  * Encapsulates logic for game answers, timers, lives, hints and score.
  * The questions are orchestrated in here, but their logic is encapsulated
  */
-class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
-    private readonly timer: React.RefObject<Timer>;
-    private readonly countdown: React.RefObject<CountDown>;
-    private readonly question: React.RefObject<any>; // TODO: Can we type as GameQuestion here?
+const MemoryGame = (props: MemoryGameProps) => {
 
-    private volume: number = 0.7;
+    const { data, settings, onFinish} = props;
 
-    constructor(props: MemoryGameProps | Readonly<MemoryGameProps>) {
-        super(props);
+    const timerRef = useRef<Timer>(null);
+    const countdownRef = useRef<CountDown>(null);
+    const questionRef = useRef<any>(null); // TODO: Can we type as GameQuestion here?
 
-        this.timer = React.createRef();
-        this.countdown = React.createRef();
-        this.question = React.createRef();
-
-        const { settings, data } = this.props;
-
-        const [firstQuestion, remainingQuestions] = this.getNextQuestion(data);
-
-        this.state = {
-            currentQuestion: firstQuestion,
-            remainingQuestions: remainingQuestions,
-            correctAnswers: new Set<Learnable>(),
-            wrongAnswers: [],
-            hasExhaustedQuestions: false,
-            paused: false,
-            lives: settings.lives.quantity,
-            failedToAnswer: 0,
-            hasValidAnswer: false,
-            hints: settings.hints.quantity,
-            hasUsedHintThisQuestion: false,
-            isQuitting: false,
-            score: 0,
-            streak: 0,
-        }
+    /**
+     * Retrieves the next question.
+     *
+     * The first element in the tuple is the next question. This is an array
+     * type as there can be multiple data objects for a choice or match question.
+     *
+     * The second element in the tuple is an array of all the remaining
+     * data objects for future questions.
+     *
+     * If the current type of question requires multiple correct question options
+     * (I.e. a match question) - then multiple questions are returned as part of the
+     * "current question" array. If no quantity is provided, then only 1 is returned.
+     *
+     * @param data The pool of questions.
+     * @return tuple The first question(s) and then the remaining.
+     */
+    const getNextQuestion = (data: Learnable[]): [Learnable[], Learnable[]] => {
+        const correctAnswerQuantity = settings.question.quantity;
+        const quantity = (!correctAnswerQuantity || correctAnswerQuantity === 0) ? 1 : correctAnswerQuantity;
+        return Arrays.getRandomObjects(data, quantity);
     }
 
-    componentDidUpdate() {
-        const { lives } = this.state
-        const { settings, onFinish } = this.props;
+    let volume: number = 0.7;
+    const [firstQuestion, firstRemainingQuestions] = getNextQuestion(data);
 
+    const [currentQuestion, setCurrentQuestion] = useState<Learnable[]>(firstQuestion);
+    const [remainingQuestions, setRemainingQuestions] = useState<Learnable[]>(firstRemainingQuestions);
+    const [correctAnswers, setCorrectAnswers] = useState(new Set<Learnable>());
+    const [wrongAnswers, setWrongAnswers] = useState<Learnable[]>([]);
+    const [hasExhaustedQuestions, setHasExhaustedQuestions] = useState(false);
+    const [paused, setPaused] = useState(false);
+    const [lives, setLives] = useState(settings.lives.quantity);
+    const [hints, setHints] = useState(settings.hints.quantity);
+    const [failedToAnswer, setFailedToAnswer] = useState(0);
+    const [hasValidAnswer, setHasValidAnswer] = useState(false);
+    const [hasUsedHintThisQuestion, setHasUsedHintThisQuestion] = useState(false);
+    const [isQuitting, setIsQuitting] = useState(false);
+    const [score, setScore] = useState(0);
+    const [streak, setStreak] = useState(0);
+
+    useEffect(() => {
+        return () => {
+            reset();
+        }
+    }, []);
+
+    useEffect(() => {
         // Listens for a game failure. If we're out of lives, call onFinish().
         if (settings.lives.enabled && lives === 0) {
-            onFinish(this.getGameResult(false, GameFinishReason.NO_LIVES_REMAINING));
+            onFinish(getGameResult(false, GameFinishReason.NO_LIVES_REMAINING));
         }
-    }
+    }, [lives]);
 
-    componentDidMount() {
-        // console.log("Starting new game with ID: " + this.props.sessionKey);
-    }
-
-    componentWillUnmount() {
-        this.reset();
-    }
-
-    render() {
-        const {
-            hasExhaustedQuestions, lives, remainingQuestions, hasValidAnswer, paused, currentQuestion,
-            isQuitting, score, streak, hints
-        } = this.state;
-
-        const { data, settings } = this.props;
-
-        return (
-            <Container className={styles.wrapper} data-testid="memory-game">
-                {isQuitting && (
-                    <ConfirmModal
-                        onConfirm={this.onQuit}
-                        onDismiss={this.onDismissQuitModal}
-                        body={Environment.variable("QUIT_BODY")}
-                        title={Environment.variable("QUIT_TITLE")}
-                    />
-                )}
-
-                <Row noGutters className={styles.header}>
-                    <Col xs={12}>
-                        <Row>
-                            <Col className={styles.quitWrapper}>
-                                <QuitButton onClick={this.onClickQuit} className={styles.quit} />
-                            </Col>
-
-                            <Col className={styles.progressWrapper}>
-                                <SessionProgressBar
-                                    streak={streak}
-                                    quantity={data.length}
-                                    className={styles.progress}
-                                    remaining={remainingQuestions.length}
-                                    inProgress={!hasExhaustedQuestions && !paused}
-                                />
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    <Col xs={4}>
-                        {settings.question.score &&
-                            <ScoreDisplay
-                                value={score}
-                                streak={streak}
-                                className={styles.score}
-                            />
-                        }
-                    </Col>
-
-                    <Col xs={4} className={styles.lifeDisplayContainer}>
-                        <LifeDisplay
-                            hearts={lives}
-                            className={styles.lives}
-                            enabled={settings.lives.enabled}
-                        />
-                    </Col>
-
-                    <Col xs={4}>
-                        {settings.time.timed &&
-                            <Timer
-                                pausable
-                                ref={this.timer}
-                                onPaused={this.onPaused}
-                                className={styles.timer}
-                            />
-                        }
-                        {settings.time.countdown &&
-                            <CountDown
-                                ref={this.countdown}
-                                className={styles.timer}
-                                onFinish={this.countDownTimeElapsed}
-                                value={settings.time?.secondsPerQuestion}
-                            />
-                        }
-                    </Col>
-                </Row>
-
-                <Row noGutters className={styles.questionWrapper}>
-                    <Col xs={12} className={styles.questionWrapperColumn}>
-                        {this.getQuestion()}
-                    </Col>
-                </Row>
-
-                <Row noGutters className={styles.footer}>
-                    <Col md={4} xs={5} className={styles.footerLeftCol}>
-                        <SkipButton
-                            disabled={paused}
-                            className={styles.skip}
-                            onClick={this.handleSkip}
-                        />
-
-                        <VolumeController
-                            className={styles.volume}
-                            onVolumeChange={(value: number) => this.volume = value}
-                        />
-                    </Col>
-
-                   <Col md={8} xs={7} className={styles.footerRightCol}>
-                       <ButtonGroup className={styles.buttonGroup}>
-                           <HintButton
-                               remaining={hints}
-                               className={styles.hint}
-                               data={currentQuestion[0]}
-                               infinite={settings.hints.unlimited}
-                               quantity={settings.hints.quantity}
-                               disabled={paused || !settings.hints.enabled}
-                               key={currentQuestion.map(q => q.getUniqueID()).join("-")}
-                               onUse={() => this.setState({ hasUsedHintThisQuestion: true })}
-                           />
-
-                           <SubmitButton
-                               className={styles.submit}
-                               onClick={this.answerQuestion}
-                               disabled={!hasValidAnswer || paused}
-                           />
-                       </ButtonGroup>
-                   </Col>
-                </Row>
-            </Container>
-        );
-    }
-
-    private getQuestion = () => {
-        const { settings, data } = this.props;
-        const { currentQuestion, paused } = this.state;
-
+    const getQuestion = () => {
         const questionField = settings.question.questionField;
         const answerField = settings.question.answerField;
 
@@ -255,12 +121,12 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                 return (
                     <TextQuestion
                         hidden={paused}
+                        ref={questionRef}
                         answers={answers}
-                        ref={this.question}
                         question={question}
-                        answerField={answerField}
                         key={currentQuestionID}
-                        isValid={this.handleAnswerValidity}
+                        answerField={answerField}
+                        isValid={handleAnswerValidity}
                     />
                 );
             }
@@ -279,13 +145,13 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                 return (
                     <ChoiceQuestion
                         hidden={paused}
-                        ref={this.question}
+                        ref={questionRef}
                         question={question}
                         key={currentQuestionID}
                         answerField={answerField}
                         wrong={wrongAnswerOptions}
                         questionField={questionField}
-                        isValid={this.handleAnswerValidity}
+                        isValid={handleAnswerValidity}
                     />
                 );
             }
@@ -299,185 +165,140 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
                 return (
                     <MatchQuestion
                         hidden={paused}
+                        ref={questionRef}
                         data={questionData}
-                        ref={this.question}
                         key={currentQuestionID}
-                        isValid={this.handleAnswerValidity}
-                   />
+                        isValid={handleAnswerValidity}
+                    />
                 )
             }
         }
     }
 
-    answerQuestion = () => {
-        const { currentQuestion, correctAnswers, wrongAnswers, remainingQuestions, lives } = this.state;
-        const { settings } = this.props;
-
-        if (this.question.current?.isCorrect()) {
+    const answerQuestion = () => {
+        if (questionRef.current?.isCorrect()) {
             //Play the success sound effect
-            this.getAudio(success).play().catch(() => {});
+            getAudio(success).play().catch(() => {});
 
             //Add the current question to the correct answers set.
             currentQuestion.forEach(question => correctAnswers.add(question));
-            this.setState({ correctAnswers: correctAnswers });
+            setCorrectAnswers(correctAnswers);
 
             //If we're out of questions...
             if (remainingQuestions.length === 0) {
                 //Play the finish sound
-                this.getAudio(finish).play().catch(() => {});
+                getAudio(finish).play().catch(() => {});
 
                 //Stop the timer / countdown.
-                this.timer.current?.stop();
+                timerRef.current?.stop();
 
                 //Set the questions as exhausted and ensure paused is false.
-                this.setState({ hasExhaustedQuestions: true, paused: false });
+                setPaused(false);
+                setHasExhaustedQuestions(true);
 
                 //Notify the consuming parent of the game ending and pass data for results screen.
-                this.props.onFinish(this.getGameResult(true, GameFinishReason.EXHAUSTED_QUESTIONS));
+                onFinish(getGameResult(true, GameFinishReason.EXHAUSTED_QUESTIONS));
             } else {
-                this.advanceNextQuestion();
+                advanceNextQuestion();
             }
         } else {
             //Play the wrong sound effect
-            this.getAudio(wrong).play().catch(() => {});
+            getAudio(wrong).play().catch(() => {});
 
             //If the question was answered incorrectly, update the lives and wrong answer pool.
-            this.setState({
-                streak: 0,
-                wrongAnswers: wrongAnswers.concat(currentQuestion),
-                lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives
-            });
+            setStreak(0);
+            setWrongAnswers(wrongAnswers.concat(currentQuestion));
+            setLives(settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives);
         }
 
-        this.setState({ hasValidAnswer: false });
+        setHasValidAnswer(false);
     }
 
-    reset = () => {
-        const [nextQuestion, remainingQuestions] = this.getNextQuestion(this.props.data);
+    const reset = () => {
+        const [nextQuestion, remainingQuestions] = getNextQuestion(data);
 
-        this.setState({
-            paused: false,
-            wrongAnswers: [],
-            isQuitting: false,
-            hasValidAnswer: false,
-            hasExhaustedQuestions: false,
-            currentQuestion: nextQuestion,
-            hasUsedHintThisQuestion: false,
-            correctAnswers: new Set<Learnable>(),
-            remainingQuestions: remainingQuestions,
-            hints: this.props.settings.hints.quantity,
-        });
-
-        this.timer.current?.restart();
-        this.countdown.current?.reset();
+        setPaused(false);
+        setWrongAnswers([]);
+        setIsQuitting(false);
+        setHasValidAnswer(false);
+        setHasExhaustedQuestions(false);
+        setCurrentQuestion(nextQuestion);
+        setHasUsedHintThisQuestion(false);
+        setHints(settings.hints.quantity);
+        setCorrectAnswers(new Set<Learnable>());
+        setRemainingQuestions(remainingQuestions);
+        timerRef.current?.restart();
+        countdownRef.current?.reset();
     }
 
-    private advanceNextQuestion(skip: boolean = false) {
-        const { remainingQuestions, hasUsedHintThisQuestion, hints, streak } = this.state;
-
+    const advanceNextQuestion = (skip: boolean = false) => {
         // If we're being timed per question, reset the timer.
-        this.countdown.current?.reset();
+        countdownRef.current?.reset();
 
         // Pick a random remaining question and remove it from the pool.
-        const [nextQuestions, nextRemainingQuestions] = this.getNextQuestion(remainingQuestions)
+        const [nextQuestions, nextRemainingQuestions] = getNextQuestion(remainingQuestions)
 
         // Update the next question to be displayed and the remaining questions with one less.
-        this.setState({
-            streak: skip ? 0 : streak + 1,
-            score: this.getScore(skip),
-            currentQuestion: nextQuestions,
-            hasUsedHintThisQuestion: false,
-            remainingQuestions: nextRemainingQuestions,
-            hints: hasUsedHintThisQuestion ? hints - 1 : hints
-        });
+        setScore(getScore(skip));
+        setStreak(skip ? 0 : streak + 1);
+        setCurrentQuestion(nextQuestions);
+        setHasUsedHintThisQuestion(false);
+        setRemainingQuestions(nextRemainingQuestions);
+        setHints(hasUsedHintThisQuestion ? hints - 1 : hints);
     }
 
-    private handleAnswerValidity = (valid: boolean) => {
-        this.setState({ hasValidAnswer: valid });
+    const handleAnswerValidity = (valid: boolean) => {
+        setHasValidAnswer(valid);
     }
 
-    private handleSkip = () => {
-        const { settings } = this.props;
-        const { wrongAnswers, lives, currentQuestion, failedToAnswer } = this.state;
-
-        this.setState({
-            failedToAnswer: failedToAnswer + 1,
-            wrongAnswers: wrongAnswers.concat(currentQuestion),
-            lives: settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives
-        });
-
-        this.advanceNextQuestion(true);
+    const handleSkip = () => {
+        setFailedToAnswer(failedToAnswer + 1);
+        setWrongAnswers(wrongAnswers.concat(currentQuestion));
+        setLives(settings.lives.enabled && !settings.time.countdown ? lives - 1 : lives);
+        advanceNextQuestion(true);
     }
 
-    private countDownTimeElapsed = () => {
-        const { lives, wrongAnswers, currentQuestion, remainingQuestions, failedToAnswer, hasUsedHintThisQuestion, hints } = this.state;
+    const countDownTimeElapsed = () => {
         // this.kanaDisplay.current?.notifyIncorrect(); TODO: Can we notify the question components of incorrectness when timer runs out?
-        this.countdown.current?.reset();
+        countdownRef.current?.reset();
 
         // Pick a random remaining question and remove it from the pool.
-        const [nextQuestions, nextRemainingQuestions] = this.getNextQuestion(remainingQuestions);
+        const [nextQuestions, nextRemainingQuestions] = getNextQuestion(remainingQuestions);
 
-        this.setState({
-            currentQuestion: nextQuestions,
-            hasUsedHintThisQuestion: false,
-            failedToAnswer: failedToAnswer + 1,
-            remainingQuestions: nextRemainingQuestions,
-            wrongAnswers: wrongAnswers.concat(currentQuestion),
-            hints: hasUsedHintThisQuestion ? hints - 1 : hints,
-            lives: this.props.settings.lives.enabled ? lives - 1 : lives
-        });
+        setCurrentQuestion(nextQuestions);
+        setHasUsedHintThisQuestion(false);
+        setFailedToAnswer(failedToAnswer + 1);
+        setRemainingQuestions(nextRemainingQuestions);
+        setLives(settings.lives.enabled ? lives - 1 : lives);
+        setHints(hasUsedHintThisQuestion ? hints - 1 : hints);
+        setWrongAnswers(wrongAnswers.concat(currentQuestion));
     }
 
-    private onQuit = () => {
-        const { wrongAnswers, currentQuestion } = this.state
-        const { onFinish } = this.props;
-
+    const onQuit = () => {
         // End the game, make sure to add the current question to the wrong answers.
-        const gameResult = this.getGameResult(false, GameFinishReason.QUIT);
+        const gameResult = getGameResult(false, GameFinishReason.QUIT);
         gameResult.wrongAnswers = wrongAnswers.concat(currentQuestion);
         onFinish(gameResult);
 
         // Reset before un-mounting
-        this.reset();
+        reset();
     }
 
-    private onClickQuit = () => {
-        this.timer?.current?.pause();
-        this.setState({ isQuitting: true, paused: true });
+    const onClickQuit = () => {
+        timerRef?.current?.pause();
+        setIsQuitting(true);
+        setPaused(true);
     }
 
-    private onDismissQuitModal = () => {
-        this.timer?.current?.start();
-        this.setState({ isQuitting: false, paused: false });
+    const onDismissQuitModal = () => {
+        timerRef?.current?.start();
+        setIsQuitting(false);
+        setPaused(false);
     }
 
-    private onPaused = () => this.setState({ paused: !this.state.paused });
+    const onPaused = () => setPaused(!paused);
 
-    /**
-     * Retrieves the next question.
-     *
-     * The first element in the tuple is the next question. This is an array
-     * type as there can be multiple data objects for a choice or match question.
-     *
-     * The second element in the tuple is an array of all the remaining
-     * data objects for future questions.
-     *
-     * If the current type of question requires multiple correct question options
-     * (I.e. a match question) - then multiple questions are returned as part of the
-     * "current question" array. If no quantity is provided, then only 1 is returned.
-     *
-     * @param data The pool of questions.
-     * @return tuple The first question(s) and then the remaining.
-     */
-    private getNextQuestion = (data: Learnable[]): [Learnable[], Learnable[]] => {
-        const correctAnswerQuantity = this.props.settings.question.quantity;
-        const quantity = (!correctAnswerQuantity || correctAnswerQuantity === 0) ? 1 : correctAnswerQuantity;
-        return Arrays.getRandomObjects(data, quantity);
-    }
-
-    private getScore = (hasSkipped: boolean): number => {
-        const { score, streak, currentQuestion } = this.state;
-
+    const getScore = (hasSkipped: boolean): number => {
         const baseScore = currentQuestion[0].getBaseScore();
 
         if (hasSkipped) {
@@ -488,18 +309,15 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
         return score + baseScore * multiplier;
     }
 
-    private getAudio = (source: string): HTMLAudioElement => {
+    const getAudio = (source: string): HTMLAudioElement => {
         const audio = new Audio(source);
         audio.autoplay = false;
         audio.style.display = "none";
-        audio.volume = this.volume;
+        audio.volume = volume;
         return audio;
     }
 
-    private getGameResult = (success: boolean, reason: GameFinishReason): GameResult => {
-        const { settings } = this.props;
-        const { lives, hints, correctAnswers, wrongAnswers, score } = this.state;
-
+    const getGameResult = (success: boolean, reason: GameFinishReason): GameResult => {
         return {
             settings: settings,
             reason: reason,
@@ -509,9 +327,121 @@ class MemoryGame extends Component<MemoryGameProps, MemoryGameState> {
             hintsRemaining: hints,
             correctAnswers: correctAnswers,
             wrongAnswers: wrongAnswers,
-            duration: this.timer.current?.getCurrentTime()
+            duration: timerRef.current?.getCurrentTime()
         }
     }
+
+    return (
+        <Container className={styles.wrapper} data-testid="memory-game">
+            {isQuitting && (
+                <ConfirmModal
+                    onConfirm={onQuit}
+                    onDismiss={onDismissQuitModal}
+                    body={Environment.variable("QUIT_BODY")}
+                    title={Environment.variable("QUIT_TITLE")}
+                />
+            )}
+
+            <Row noGutters className={styles.header}>
+                <Col xs={12}>
+                    <Row>
+                        <Col className={styles.quitWrapper}>
+                            <QuitButton onClick={onClickQuit} className={styles.quit} />
+                        </Col>
+
+                        <Col className={styles.progressWrapper}>
+                            <SessionProgressBar
+                                streak={streak}
+                                quantity={data.length}
+                                className={styles.progress}
+                                remaining={remainingQuestions.length}
+                                inProgress={!hasExhaustedQuestions && !paused}
+                            />
+                        </Col>
+                    </Row>
+                </Col>
+
+                <Col xs={4}>
+                    {settings.question.score &&
+                        <ScoreDisplay
+                            value={score}
+                            streak={streak}
+                            className={styles.score}
+                        />
+                    }
+                </Col>
+
+                <Col xs={4} className={styles.lifeDisplayContainer}>
+                    <LifeDisplay
+                        hearts={lives}
+                        className={styles.lives}
+                        enabled={settings.lives.enabled}
+                    />
+                </Col>
+
+                <Col xs={4}>
+                    {settings.time.timed &&
+                        <Timer
+                            pausable
+                            ref={timerRef}
+                            onPaused={onPaused}
+                            className={styles.timer}
+                        />
+                    }
+                    {settings.time.countdown &&
+                        <CountDown
+                            ref={countdownRef}
+                            className={styles.timer}
+                            onFinish={countDownTimeElapsed}
+                            value={settings.time?.secondsPerQuestion}
+                        />
+                    }
+                </Col>
+            </Row>
+
+            <Row noGutters className={styles.questionWrapper}>
+                <Col xs={12} className={styles.questionWrapperColumn}>
+                    {getQuestion()}
+                </Col>
+            </Row>
+
+            <Row noGutters className={styles.footer}>
+                <Col md={4} xs={5} className={styles.footerLeftCol}>
+                    <SkipButton
+                        disabled={paused}
+                        onClick={handleSkip}
+                        className={styles.skip}
+                    />
+
+                    <VolumeController
+                        className={styles.volume}
+                        onVolumeChange={(value: number) => volume = value}
+                    />
+                </Col>
+
+               <Col md={8} xs={7} className={styles.footerRightCol}>
+                   <ButtonGroup className={styles.buttonGroup}>
+                       <HintButton
+                           remaining={hints}
+                           className={styles.hint}
+                           data={currentQuestion[0]}
+                           infinite={settings.hints.unlimited}
+                           quantity={settings.hints.quantity}
+                           disabled={paused || !settings.hints.enabled}
+                           onUse={() => setHasUsedHintThisQuestion(true)}
+                           key={currentQuestion.map(q => q.getUniqueID()).join("-")}
+                       />
+
+                       <SubmitButton
+                           onClick={answerQuestion}
+                           className={styles.submit}
+                           disabled={!hasValidAnswer || paused}
+                       />
+                   </ButtonGroup>
+               </Col>
+            </Row>
+        </Container>
+    );
 }
 
 
