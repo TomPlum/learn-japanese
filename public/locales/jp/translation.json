@@ -166,7 +166,7 @@
         "name": "ダイグラフ"
       },
       "everything": {
-        "name": "すべて仮名"
+        "name": "何事も"
       },
       "high-school": {
         "name": "教育"
@@ -239,6 +239,90 @@
       },
       "hardcore": {
         "name": "ハードコア"
+      },
+      "relaxed": {
+        "name": "リラックス"
+      },
+      "time-attack": {
+        "name": "タイムアタック"
+      },
+      "kana": {
+        "name": "仮名"
+      },
+      "match": {
+        "name": "一致"
+      },
+      "kanji": {
+        "name": "漢字"
+      },
+      "meaning": {
+        "name": "意味"
+      },
+      "on'yomi": {
+        "name": "音読み"
+      },
+      "kun'yomi": {
+        "name": "訓読み"
+      },
+      "random": {
+        "name": "ランダム"
+      },
+      "numbers": {
+        "name": "数字"
+      },
+      "counters": {
+        "name": "助数詞"
+      },
+      "age": {
+        "name": "生年"
+      },
+      "exceptions": {
+        "name": "特例"
+      },
+      "units": {
+        "name": "単位"
+      },
+      "sequence": {
+        "name": "次"
+      },
+      "colours": {
+        "name": "色"
+      },
+      "animals": {
+        "name": "動物"
+      },
+      "directions": {
+        "name": "行き方"
+      },
+      "weather": {
+        "name": "天気"
+      },
+      "family": {
+        "name": "家族"
+      },
+      "body": {
+        "name": "解剖学"
+      },
+      "days-of-the-week": {
+        "name": "曜日"
+      },
+      "months-of-the-year": {
+        "name": "年の月"
+      },
+      "temporal-nouns": {
+        "name": "一時名詞"
+      },
+      "seasonal": {
+        "name": "季節の"
+      },
+      "common-phrases": {
+        "name": "一般的な語句"
+      },
+      "everything": {
+        "name": "何事も"
+      },
+      "japanese": {
+        "name": "日本"
       }
     }
   }

@@ -166,7 +166,7 @@
         "name": "Diagraphs"
       },
       "everything": {
-        "name": "All Kana"
+        "name": "Everything"
       },
       "high-school": {
         "name": "High School"
@@ -239,6 +239,90 @@
       },
       "hardcore": {
         "name": "Hardcore"
+      },
+      "relaxed": {
+        "name": "Relaxed"
+      },
+      "time-attack": {
+        "name": "Time Attack"
+      },
+      "kana": {
+        "name": "Kana"
+      },
+      "match": {
+        "name": "Match"
+      },
+      "kanji": {
+        "name": "Kanji"
+      },
+      "meaning": {
+        "name": "Meanings"
+      },
+      "on'yomi": {
+        "name": "On'Yomi Readings"
+      },
+      "kun'yomi": {
+        "name": "Kun'Yomi Readings"
+      },
+      "random": {
+        "name": "Random"
+      },
+      "numbers": {
+        "name": "Numbers"
+      },
+      "counters": {
+        "name": "Counters"
+      },
+      "age": {
+        "name": "Age"
+      },
+      "exceptions": {
+        "name": "Exceptions"
+      },
+      "units": {
+        "name": "Units"
+      },
+      "sequence": {
+        "name": "Sequence"
+      },
+      "colours": {
+        "name": "Colours"
+      },
+      "animals": {
+        "name": "Animals"
+      },
+      "directions": {
+        "name": "Directions"
+      },
+      "weather": {
+        "name": "Weather"
+      },
+      "family": {
+        "name": "Family"
+      },
+      "body": {
+        "name": "Body"
+      },
+      "days-of-the-week": {
+        "name": "Days of the Week"
+      },
+      "months-of-the-year": {
+        "name": "Months of the Year"
+      },
+      "temporal-nouns": {
+        "name": "Temporal Nouns"
+      },
+      "seasonal": {
+        "name": "Seasonal"
+      },
+      "common-phrases": {
+        "name": "Common Phrases"
+      },
+      "everything": {
+        "name": "Everything"
+      },
+      "japanese": {
+        "name": "Japanese"
       }
     }
   }
