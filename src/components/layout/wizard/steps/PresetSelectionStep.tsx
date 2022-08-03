@@ -102,6 +102,7 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
                                 onClick={onSelectPreset}
                                 editable={option.custom}
                                 desc={option.description}
+                                id={option.id.toString()}
                                 className={styles.preset}
                                 iconColour={option.colour}
                                 onEdit={onEditCustomPreset}

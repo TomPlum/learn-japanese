@@ -1,7 +1,8 @@
 import GridItem, { GridItemProps } from "../../../../../components/layout/wizard/grid/GridItem";
 import Topic from "../../../../../domain/Topic";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
+import renderWithTranslation from "../../../../renderWithTranslation";
 
 const onEditHandler = jest.fn();
 const onClickHandler = jest.fn();
@@ -9,7 +10,7 @@ const onClickHandler = jest.fn();
 let props: GridItemProps<Topic>;
 
 const setup = () => {
-    const component = render(<GridItem {...props} />);
+    const component = renderWithTranslation(<GridItem {...props} />);
     return {
         ...component
     }

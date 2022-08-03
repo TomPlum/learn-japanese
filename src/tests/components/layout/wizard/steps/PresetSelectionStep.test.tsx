@@ -9,10 +9,10 @@ import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
 import PresetBuilder from "../../../../../domain/session/PresetBuilder";
 import LearnSettings from "../../../../../domain/session/settings/LearnSettings";
-import renderReduxConsumer from "../../../../renderReduxConsumer";
 import { store } from "../../../../../store";
 import { clearUser, setUser } from "../../../../../slices/UserSlice";
 import { testUser } from "../../../../../setupTests";
+import renderTranslatedReduxConsumer from "../../../../renderTranslatedReduxConsumer";
 
 const mockGetAllPresets = jest.fn();
 const mockGetDefaultPresets = jest.fn();
@@ -69,7 +69,7 @@ const customPreset = new PresetBuilder()
 let props: PresetSelectionStepProps;
 
 const setup = () => {
-    const component = renderReduxConsumer(<PresetSelectionStep {...props}  />);
+    const component = renderTranslatedReduxConsumer(<PresetSelectionStep {...props}  />);
     return {
         topic: component.getByTestId('wizard-topic-selector'),
         ...component
@@ -178,7 +178,7 @@ test('It should select the first preset if one is not passed as selected', async
     setup();
 
     // Mouse over to show the description, this only happens when selected
-    fireEvent.mouseOver(await screen.findByText('Short Play'));
+    fireEvent.mouseOver(await screen.findByTestId('grid-item-1'));
 
     expect(await screen.findByText('This is an example play description')).toBeInTheDocument();
 });

@@ -2,7 +2,6 @@ import { fireEvent, screen } from "@testing-library/react";
 import LaunchPresetConfirmationModal, { LaunchPresetConfirmationModalProps } from "../../../components/settings/LaunchPresetConfirmationModal";
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
-import renderReduxConsumer from "../../renderReduxConsumer";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { store } from "../../../store";
@@ -10,6 +9,7 @@ import { clearGameSettings } from "../../../slices/GameSettingsSlice";
 import { clearDataSettings } from "../../../slices/DataSettingsSlice";
 import PresetBuilder from "../../../domain/session/PresetBuilder";
 import { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const history = createMemoryHistory();
 const onDismissHandler = jest.fn();
@@ -37,7 +37,7 @@ const learnPreset = new PresetBuilder()
 let props: LaunchPresetConfirmationModalProps;
 
 const setup = () => {
-    const component = renderReduxConsumer(
+    const component = renderTranslatedReduxConsumer(
         <Router history={history}>
             <LaunchPresetConfirmationModal {...props} />
         </Router>

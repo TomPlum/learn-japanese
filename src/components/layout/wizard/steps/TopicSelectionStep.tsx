@@ -25,6 +25,7 @@ const TopicSelectionStep = (props: TopicSelectionStepProps) => {
                         return (
                             <GridItem
                                 value={selection}
+                                id={selection.name}
                                 key={selection.name}
                                 icon={selection.icon}
                                 selected={topic.name}

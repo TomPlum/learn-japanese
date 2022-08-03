@@ -6,6 +6,7 @@ import Inspectable from "../../../ui/Inspectable";
 import ConditionalWrapper from "../../../ui/ConditionalWrapper";
 import { CustomIcon } from "../../../../domain/Icon";
 import Icon from "../../../ui/menu/icon/Icon";
+import { useTranslation } from "react-i18next";
 
 export interface GridItem {
     getShortName: () => string;
@@ -14,8 +15,9 @@ export interface GridItem {
 
 export interface GridItemProps<T extends GridItem> {
     value: T,
-    style?: {},
-    desc?: string,
+    style?: {};
+    id: string;
+    desc?: string;
     small?: boolean;
     icon: CustomIcon;
     selected: string;
@@ -27,11 +29,14 @@ export interface GridItemProps<T extends GridItem> {
 }
 
 const GridItem = <T extends GridItem>(props: GridItemProps<T>) => {
-    const { icon, value, selected, desc, small, iconColour, className, style, editable, onEdit, onClick } = props;
+    const { id, icon, value, selected, desc, small, iconColour, className, style, editable, onEdit, onClick } = props;
 
-    const isSelected = selected === value.getShortName() || selected === value.getLongName();
+    const { t } = useTranslation();
+    const shortName = t(value.getShortName());
+    const longName = t(value.getLongName());
+    const isSelected = t(selected) === shortName || t(selected) === longName;
     const colour = isSelected ? iconColour : "#000"
-    const popover = { title: value.getLongName(), text: desc! };
+    const popover = { title: longName, text: desc! };
     const buttonClass = [className, (isSelected ? styles.selected : styles.notSelected), styles.button].join(" ");
 
     const handleOnClick = () => onClick(value);
@@ -42,14 +47,14 @@ const GridItem = <T extends GridItem>(props: GridItemProps<T>) => {
                 {button}
             </Inspectable>
         }>
-            <Button onClick={handleOnClick} className={buttonClass} style={style}>
+            <Button onClick={handleOnClick} className={buttonClass} style={style} data-testid={`grid-item-${id}`}>
                 {editable &&
                     <FontAwesomeIcon icon={faCog} className={styles.edit} onClick={onEdit} title="Edit" />
                 }
 
                 <Icon value={icon} style={{ color: colour }} className={styles.icon} />
 
-                <p className={styles.name}>{small ? value.getShortName() : value.getLongName()}</p>
+                <p className={styles.name}>{small ? shortName : longName}</p>
             </Button>
         </ConditionalWrapper>
     );
