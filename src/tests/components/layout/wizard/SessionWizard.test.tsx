@@ -1,6 +1,5 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import SessionWizard from "../../../../components/layout/wizard/SessionWizard";
-import renderReduxConsumer from "../../../renderReduxConsumer";
 import userEvent from "@testing-library/user-event";
 import { store } from "../../../../store";
 import { createMemoryHistory } from "history";
@@ -16,6 +15,7 @@ import QuestionType from "../../../../domain/game/QuestionType";
 import { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings";
 import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings";
 import PresetBuilder from "../../../../domain/session/PresetBuilder";
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 const mockGetAllPresets = jest.fn();
 const mockGetDefaultPresets = jest.fn();
@@ -79,7 +79,7 @@ const playKanjiPreset = new PresetBuilder()
     .build();
 
 const setup = () => {
-    const component = renderReduxConsumer(
+    const component = renderTranslatedReduxConsumer(
         <Router history={history}>
             <SessionWizard onClose={onCloseHandler} />
         </Router>

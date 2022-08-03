@@ -150,7 +150,11 @@
     "check": "確認",
     "restart": "リスタート",
     "hint": "ヒント",
-    "skip": "スキップ"
+    "skip": "スキップ",
+    "yes": "確認",
+    "no": "キャンセル",
+    "login": "ログイン",
+    "register": "登録"
   },
   "presets": {
     "edit": {

@@ -8,6 +8,7 @@ import renderReduxConsumer from "../../renderReduxConsumer";
 import JLTPLevel from "../../../domain/learn/JLTPLevel";
 import { FlashCard } from "../../../domain/learn/FlashCard";
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const mockGetKanjiFlashCards = jest.fn();
 const mockUpdateKanjiFlashCard = jest.fn();
@@ -42,7 +43,7 @@ beforeEach(() => {
 });
 
 const setup = async () => {
-    const component = renderReduxConsumer(<KanjiFlashCards {...props} />);
+    const component = renderTranslatedReduxConsumer(<KanjiFlashCards {...props} />);
 
     const kanji = await component.findAllByText('一');
     kanji.forEach(el => expect(el).toBeInTheDocument());

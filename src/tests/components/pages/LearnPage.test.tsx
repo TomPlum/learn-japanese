@@ -13,6 +13,7 @@ import { KanaColumn } from "../../../domain/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
 import { setApplicationMode } from "../../../slices/ModeSlice";
 import { AppMode } from "../../../domain/AppMode";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const mockLearningDataService = jest.fn();
 jest.mock("../../../service/LearningDataService", () => function() {
@@ -48,7 +49,7 @@ test('Should render the learning session if the data settings are present', asyn
     mockLearningDataService.mockResolvedValueOnce([new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]);
     store.dispatch(setDataSettings(dataSettings));
 
-    renderReduxConsumer(<LearnPage />);
+    renderTranslatedReduxConsumer(<LearnPage />);
 
     expect(await screen.findByTestId('learn')).toBeInTheDocument();
 });
@@ -56,7 +57,7 @@ test('Should render the learning session if the data settings are present', asyn
 test('Should render an error message if the data settings are undefined', () => {
     store.dispatch(clearDataSettings());
 
-    renderReduxConsumer(<LearnPage />);
+    renderTranslatedReduxConsumer(<LearnPage />);
 
     expect(mockLearningDataService).not.toHaveBeenCalled();
     expect(screen.queryByTestId('memory-game')).not.toBeInTheDocument();
@@ -70,7 +71,7 @@ test('Should skip the results screen and redirect home if the user flips no card
     store.dispatch(setDataSettings(dataSettings));
 
     // Render the page and wait for the game to load
-    renderReduxConsumer(<Router history={history}><LearnPage /></Router>);
+    renderTranslatedReduxConsumer(<Router history={history}><LearnPage /></Router>);
     expect(await screen.findByTestId('learn')).toBeInTheDocument();
 
     // Close the session without having flipped any cards
@@ -90,7 +91,7 @@ test('Should render the results screen if the user flips at least one card', asy
     store.dispatch(setDataSettings(dataSettings));
 
     // Render the page and wait for the game to load
-    renderReduxConsumer(<Router history={history}><LearnPage /></Router>);
+    renderTranslatedReduxConsumer(<Router history={history}><LearnPage /></Router>);
     expect(await screen.findByTestId('learn')).toBeInTheDocument();
 
     // Flip at least one card
@@ -123,7 +124,7 @@ test('Clicking \'Practice Mistakes\' on the learning results screen should start
     store.dispatch(setDataSettings(dataSettings));
 
     // Render the page and wait for the game to load
-    renderReduxConsumer(<Router history={history}><LearnPage /></Router>);
+    renderTranslatedReduxConsumer(<Router history={history}><LearnPage /></Router>);
     expect(await screen.findByTestId('learn')).toBeInTheDocument();
 
     // Complete the session

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import styles from "../../styles/sass/components/ui/ConfirmModal.module.scss";
+import { useTranslation } from "react-i18next";
 
 export interface ConfirmModalProps {
     title: string;
@@ -13,6 +14,7 @@ const ConfirmModal  = (props: ConfirmModalProps) => {
     const { title, body, onConfirm, onDismiss } = props;
 
     const [show, setShow] = useState(true);
+    const { t } = useTranslation();
 
     const handleYes = () => {
         setShow(false);
@@ -45,10 +47,10 @@ const ConfirmModal  = (props: ConfirmModalProps) => {
 
             <Modal.Footer className={styles.footer}>
                 <Button variant="success" onClick={handleYes} className={styles.yes}>
-                    Yes
+                    {t("action.yes")}
                 </Button>
                 <Button variant="danger" onClick={handleNo} className={styles.no}>
-                    No
+                    {t("action.no")}
                 </Button>
             </Modal.Footer>
         </Modal>

@@ -150,7 +150,11 @@
     "check": "Check",
     "restart": "Restart",
     "hint": "Hint",
-    "skip": "Skip"
+    "skip": "Skip",
+    "yes": "Yes",
+    "no": "No",
+    "login": "Login",
+    "register": "Register"
   },
   "presets": {
     "edit": {

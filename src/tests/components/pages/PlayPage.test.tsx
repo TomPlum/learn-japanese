@@ -16,6 +16,7 @@ import { fireEvent, screen } from "@testing-library/react";
 import { getByTextWithMarkup } from "../../Queries";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const mockLearningDataService = jest.fn();
 jest.mock("../../../service/LearningDataService", () => function() {
@@ -110,7 +111,7 @@ test('Should render the results screen when exiting the game', async () => {
     store.dispatch(setDataSettings(dataSettings));
 
     // Render the page and wait for the game to load
-    renderReduxConsumer(<Router history={history}><PlayPage /></Router>);
+    renderTranslatedReduxConsumer(<Router history={history}><PlayPage /></Router>);
     expect(await screen.findByTestId('memory-game')).toBeInTheDocument();
 
     // Close the game
