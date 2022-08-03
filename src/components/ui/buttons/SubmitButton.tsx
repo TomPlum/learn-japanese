@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../styles/sass/components/ui/buttons/SubmitButton.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface SubmitButtonProps {
     disabled?: boolean;
@@ -11,38 +12,38 @@ interface SubmitButtonProps {
     className?: string;
 }
 
-class SubmitButton extends Component<SubmitButtonProps> {
-    componentDidMount() {
-        document.addEventListener('keydown', this.handleKeySelection);
-    }
+const SubmitButton = (props: SubmitButtonProps) => {
 
-    componentWillUnmount() {
-        document.removeEventListener('keydown', this.handleKeySelection);
-    }
+    const { disabled, className, isRestart, onClick } = props;
 
-    render() {
-        const { disabled, isRestart, onClick, className } = this.props;
-        return (
-            <Button
-                onClick={onClick}
-                disabled={disabled}
-                type="button"
-                variant={!isRestart ? "success" : "info"}
-                className={[styles.button, className].join(" ")}
-            >
-                {!isRestart ? "Check" : <><FontAwesomeIcon icon={faRedoAlt}/> Restart</>}
-            </Button>
-        );
-    }
+    const { t } = useTranslation("translation", { keyPrefix: "action" });
 
-    private handleKeySelection = (e: KeyboardEvent) => {
-        const { disabled, onClick } = this.props;
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeySelection);
+        return () => {
+            document.removeEventListener('keydown', handleKeySelection);
+        }
+    }, []);
+
+    const handleKeySelection = (e: KeyboardEvent) => {
         if (!disabled && e.key === 'Enter') {
             onClick();
             e.preventDefault();
             e.stopPropagation();
         }
     }
+
+    return (
+        <Button
+            onClick={onClick}
+            disabled={disabled}
+            type="button"
+            variant={!isRestart ? "success" : "info"}
+            className={[styles.button, className].join(" ")}
+        >
+            {!isRestart ? t("check") : <><FontAwesomeIcon icon={faRedoAlt}/> {t("restart")}</>}
+        </Button>
+    );
 }
 
 export default SubmitButton;

@@ -2,7 +2,7 @@
 
 @mixin default {
   width: 100%;
-  max-width: 155px;
+  max-width: 190px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,6 +24,8 @@
   margin-top: 4px;
   margin-left: 8px;
   vertical-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .remaining {
@@ -34,5 +36,5 @@
 }
 
 .hint {
-  color: #000;
+  color: $light-1;
 }

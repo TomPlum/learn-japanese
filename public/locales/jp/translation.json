@@ -146,7 +146,11 @@
     "remove": "取り除く",
     "favourite": "お気に入り",
     "save": "保存",
-    "start": "スタート"
+    "start": "スタート",
+    "check": "確認",
+    "restart": "リスタート",
+    "hint": "ヒント",
+    "skip": "スキップ"
   },
   "presets": {
     "edit": {

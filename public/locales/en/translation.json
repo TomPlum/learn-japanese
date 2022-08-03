@@ -146,7 +146,11 @@
     "remove": "Remove",
     "favourite": "Favourite",
     "save": "Save",
-    "start": "Start"
+    "start": "Start",
+    "check": "Check",
+    "restart": "Restart",
+    "hint": "Hint",
+    "skip": "Skip"
   },
   "presets": {
     "edit": {

@@ -3,6 +3,7 @@ import HintButton, { HintButtonProps } from "../../../components/game/HintButton
 import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
 import { KanaColumn } from "../../../domain/kana/KanaColumn";
+import renderWithTranslation from "../../renderWithTranslation";
 
 const onUseHandler = jest.fn();
 
@@ -20,7 +21,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<HintButton {...props} />);
+    const component = renderWithTranslation(<HintButton {...props} />);
     return {
         button: component.getByTitle('Get a Hint'),
         ...component

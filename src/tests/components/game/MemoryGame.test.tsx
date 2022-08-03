@@ -15,6 +15,7 @@ import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeS
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings";
 import LearnableField from "../../../domain/learn/LearnableField";
 import renderReduxConsumer from "../../renderReduxConsumer";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -95,7 +96,7 @@ afterEach(() => {
 });
 
 const setup = () => {
-    const component = renderReduxConsumer(<MemoryGame {...props} />);
+    const component = renderTranslatedReduxConsumer(<MemoryGame {...props} />);
     return {
         submit: component.getByText('Check'),
         skip: component.getByText('Skip'),
@@ -146,7 +147,7 @@ test('Answering correctly after having used a hint that question should reduce t
     fireEvent.click(submit);
 
     //We should now see the hint quantity reduced by 1
-    fireEvent.click(screen.getByText('HINT'));
+    fireEvent.click(screen.getByTestId('hint-button'));
     expect(await screen.findByText('Click to Reveal')).toBeInTheDocument();
     expect(await screen.findByText('Need a hint? (4/5 remaining)')).toBeInTheDocument();
 });
@@ -167,7 +168,7 @@ test('Answering correctly without using a hint that question should not reduce t
     fireEvent.click(submit);
 
     //We should still see the full 5 hints remaining having not used one.
-    fireEvent.click(screen.getByText('HINT'));
+    fireEvent.click(screen.getByTestId('hint-button'));
     expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
 });
 
@@ -834,7 +835,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     jest.advanceTimersByTime(6000);
 
     //The hint quantity should be reduced by 1
-    fireEvent.click(screen.getByText('HINT'));
+    fireEvent.click(screen.getByTestId('hint-button'));
     expect(await screen.findByText('Need a hint? (4/5 remaining)')).toBeInTheDocument();
 });
 
@@ -855,7 +856,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     jest.advanceTimersByTime(6000);
 
     //We should have 5 on the next question
-    fireEvent.click(screen.getByText('HINT'));
+    fireEvent.click(screen.getByTestId('hint-button'));
     expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
 });
 
