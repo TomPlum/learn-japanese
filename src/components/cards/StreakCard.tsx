@@ -32,13 +32,13 @@ const StreakCard = () => {
     const getMainContent = () => {
         switch (view) {
             case StreakView.STREAK: {
-                return <span className={styles.streak}>{streak} Day Streak</span>
+                return <span className={styles.streak}>{t("streak-template", { streak })}</span>
             }
             case StreakView.ACCOUNT_CREATION: {
-                return <span className={styles.streak}>{streak} Days Old</span>
+                return <span className={styles.streak}>{t("account-template", { days: streak})}</span>
             }
             case StreakView.CUSTOM_DATE: {
-                return <span className={styles.streak}>Day {streak}</span>
+                return <span className={styles.streak}>{t("custom-template", { day: streak })}</span>
             }
             default: {
                 return <span className={styles.streak}>N/A</span>

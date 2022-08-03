@@ -128,7 +128,10 @@
       "streak": {
         "streak": "日の連続",
         "account-creation": "アカウント作成",
-        "custom-date": "カスタム日付"
+        "custom-date": "カスタム日付",
+        "streak-template": "{{streak}}日の連続",
+        "account-template": "生後{{days}}日",
+        "custom-template": "{{day}}日目"
       }
     }
   },

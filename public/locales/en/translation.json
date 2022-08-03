@@ -128,7 +128,10 @@
       "streak": {
         "streak": "Streak",
         "account-creation": "Account Creation",
-        "custom-date": "Custom Date"
+        "custom-date": "Custom Date",
+        "streak-template": "{{streak}} Day Streak",
+        "account-template": "{{days}} Days Old",
+        "custom-template": "Day {{day}}"
       }
     }
   },
