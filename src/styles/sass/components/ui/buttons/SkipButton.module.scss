@@ -4,8 +4,9 @@
   background-color: #ab4040;
   border-color: transparent;
   width: 100%;
-  min-width: 70px;
+  min-width: 80px;
   transition: ease-in-out 0.2s;
+  white-space: nowrap;
 }
 
 .button, .disabled {
