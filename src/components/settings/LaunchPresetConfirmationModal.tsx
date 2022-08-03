@@ -16,6 +16,7 @@ import { useDataSettingsDispatch, useGameSettingsDispatch, useSessionSettingsDis
 import PlayMode from "../../domain/session/PlayMode";
 import LearnSessionSettingsSummary from "./LearnSessionSettingsSummary";
 import { setLastLearnPreset, setLastPlayPreset } from "../../slices/SessionSettingsSlice";
+import { useTranslation } from "react-i18next";
 
 export interface LaunchPresetConfirmationModalProps {
     preset: SessionMode;
@@ -26,6 +27,7 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
 
     const { preset, onDismiss } = props;
 
+    const { t } = useTranslation();
     const history = useHistory();
     const gameSettingsDispatcher = useGameSettingsDispatch();
     const dataSettingsDispatcher = useDataSettingsDispatch();
@@ -71,13 +73,13 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
             <Modal.Body className={styles.modal}>
                 <div className={styles.header}>
                     <Icon value={preset.icon} style={{ fill: preset.colour }} className={styles.icon} />
-                    <span className={styles.name}>{preset.displayName}</span>
+                    <span className={styles.name}>{t(preset.displayName)}</span>
                     <FontAwesomeIcon
                         fixedWidth
-                        title="Close"
                         icon={faTimes}
                         onClick={onDismiss}
                         className={styles.close}
+                        title={t("action.close")}
                     />
                 </div>
 
@@ -85,7 +87,7 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
                     <div className={styles.body}>
                         {renderSettingsSummary()}
                         <Button variant="success" onClick={handleStartSession}>
-                            <FontAwesomeIcon icon={faPlay} fixedWidth /> Start
+                            <FontAwesomeIcon icon={faPlay} fixedWidth /> {t("action.start")}
                         </Button>
                     </div>
                 </Fade>

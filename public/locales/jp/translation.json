@@ -142,7 +142,8 @@
     "close": "閉じる",
     "remove": "取り除く",
     "favourite": "お気に入り",
-    "save": "保存"
+    "save": "保存",
+    "start": "スタート"
   },
   "presets": {
     "edit": {

@@ -142,7 +142,8 @@
     "dismiss": "Dismiss",
     "remove": "Remove",
     "favourite": "Favourite",
-    "save": "Save"
+    "save": "Save",
+    "start": "Start"
   },
   "presets": {
     "edit": {
