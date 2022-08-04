@@ -119,16 +119,16 @@ const SessionWizard = (props: SessionWizardProps) => {
             case MODE: {
                 return {
                     icon: faAngleDoubleRight,
-                    name: t("wizard.steps.mode.title"),
                     iconClass: styles.modeIcon,
+                    name: t("wizard.steps.mode.title"),
                     body: <ModeSelectionStep mode={mode} onSelect={mode => setMode(mode)} />
                 }
             }
             case TOPIC: {
                 return {
                     icon: faSwatchbook,
-                    name: "Select Topic",
                     iconClass: styles.topicIcon,
+                    name: t("wizard.steps.topic.title"),
                     body: <TopicSelectionStep topic={topic} onSelect={handleChangeTopic} />,
                     intermediate: true
                 }
@@ -136,7 +136,7 @@ const SessionWizard = (props: SessionWizardProps) => {
             case TYPE: {
                 return {
                     icon: faTools,
-                    name: "Select Type",
+                    name: t("wizard.steps.type.title"),
                     iconClass: styles.typeIcon,
                     body: <ConfigTypeStep isCustom={custom} onSelect={custom => setCustom(custom)} />,
                     intermediate: true

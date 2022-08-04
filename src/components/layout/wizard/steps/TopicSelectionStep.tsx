@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Topic from "../../../../domain/Topic";
 import GridDisplay from "../grid/GridDisplay";
 import GridItem from "../grid/GridItem";

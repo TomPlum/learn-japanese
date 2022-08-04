@@ -65,6 +65,16 @@
         "learn": "Learn",
         "play-desc": "Test your knowledge on a given topic. Choose from a preset game mode or customise your own settings.",
         "learn-desc": "Study a topic of your choice via flash cards and spaced repetition learning."
+      },
+      "topic": {
+        "title": "Select Topic"
+      },
+      "type": {
+        "title": "Select Type",
+        "preset": "Preset",
+        "custom": "Custom",
+        "preset-desc": "Choose from one of the preset game configurations for your chosen topic.",
+        "custom-desc": "Configure any of the available settings to create a customised game mode."
       }
     }
   },

@@ -1,9 +1,8 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import ConfigTypeStep, { ConfigTypeStepProps } from "../../../../../components/layout/wizard/steps/ConfigTypeStep";
-import { Environment } from "../../../../../utility/Environment";
+import renderWithTranslation from "../../../../renderWithTranslation";
 
 const onSelectHandler = jest.fn();
-const mockEnvironment = jest.fn();
 
 let props: ConfigTypeStepProps;
 
@@ -12,11 +11,10 @@ beforeEach(() => {
         isCustom: false,
         onSelect: onSelectHandler
     };
-    Environment.variable = mockEnvironment;
 });
 
 const setup = () => {
-    const component = render(<ConfigTypeStep {...props} />);
+    const component = renderWithTranslation(<ConfigTypeStep {...props} />);
     return {
         preset: component.getByText('Preset'),
         custom: component.getByText('Custom'),
@@ -51,15 +49,14 @@ test('Clicking the preset button should call the onSelect handler with false', (
 });
 
 test('Should render the preset description when preset is selected', () => {
-    mockEnvironment.mockReturnValue("Preset description.");
     const { preset } = setup();
     fireEvent.click(preset);
-    expect(screen.getByText("Preset description.")).toBeInTheDocument();
+    expect(screen.getByText("Choose from one of the preset game configurations for your chosen topic.")).toBeInTheDocument();
 });
 
 test('Should render the custom description when custom is selected', () => {
-    mockEnvironment.mockReturnValue("Custom description.");
+    props.isCustom = true;
     const { custom } = setup();
     fireEvent.click(custom);
-    expect(screen.getByText("Custom description.")).toBeInTheDocument();
+    expect(screen.getByText("Configure any of the available settings to create a customised game mode.")).toBeInTheDocument();
 });
