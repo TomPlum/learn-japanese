@@ -1,15 +1,14 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import ModeSelectionStep, { ModeSelectionStepProps } from "../../../../../components/layout/wizard/steps/ModeSelectionStep";
-import { Environment } from "../../../../../utility/Environment";
 import { AppMode } from "../../../../../domain/AppMode";
+import renderWithTranslation from "../../../../renderWithTranslation";
 
 const onSelectHandler = jest.fn();
-const mockEnvironment = jest.fn();
 
 let props: ModeSelectionStepProps;
 
 const setup = () => {
-    const component = render(<ModeSelectionStep {...props} />);
+    const component = renderWithTranslation(<ModeSelectionStep {...props} />);
     return {
         play: component.getByText('Play').parentElement,
         learn: component.getByText('Learn').parentElement,
@@ -22,7 +21,6 @@ beforeEach(() => {
         mode: AppMode.PLAY,
         onSelect: onSelectHandler
     };
-    Environment.variable = mockEnvironment;
 });
 
 test('Passing mode as play should set the class name to selected', () => {
@@ -57,21 +55,15 @@ test('Clicking the play mode button should call the onSelect event handler with 
 
 test('Clicking the learn mode button should display the Learn mode description', () => {
     props.mode = AppMode.LEARN;
-    mockEnvironment.mockReturnValue("LEARN MODE DESCRIPTION");
     const { learn } = setup();
 
     fireEvent.click(learn!);
 
-    expect(mockEnvironment).toHaveBeenLastCalledWith('Learn_DESC');
-    expect(screen.getByText('LEARN MODE DESCRIPTION')).toBeInTheDocument();
+    expect(screen.getByText('Study a topic of your choice via flash cards and spaced repetition learning.')).toBeInTheDocument();
 });
 
 test('Clicking the play mode button should display the Play mode description', () => {
-    mockEnvironment.mockReturnValue("PLAY MODE DESCRIPTION");
     const { play } = setup();
-
     fireEvent.click(play!);
-
-    expect(mockEnvironment).toHaveBeenLastCalledWith('Play_DESC');
-    expect(screen.getByText('PLAY MODE DESCRIPTION')).toBeInTheDocument();
+    expect(screen.getByText('Test your knowledge on a given topic. Choose from a preset game mode or customise your own settings.')).toBeInTheDocument();
 });

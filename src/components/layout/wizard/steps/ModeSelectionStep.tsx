@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { Environment } from "../../../../utility/Environment";
 import { AppMode } from "../../../../domain/AppMode";
+import { useTranslation } from "react-i18next";
 
 export interface ModeSelectionStepProps {
     mode: AppMode;
@@ -14,6 +15,8 @@ export interface ModeSelectionStepProps {
 const ModeSelectionStep = (props: ModeSelectionStepProps) => {
 
     const { mode, onSelect } = props;
+
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.mode" });
 
     const playButtonClass = mode === AppMode.PLAY ? styles.selected : styles.button;
     const learnButtonClass = mode === AppMode.LEARN ? styles.selected : styles.button;
@@ -32,18 +35,18 @@ const ModeSelectionStep = (props: ModeSelectionStepProps) => {
                     <Col>
                         <Button onClick={() => onSelect(AppMode.PLAY)} className={playButtonClass}>
                             <FontAwesomeIcon icon={faPlay} fixedWidth className={playIconClass} />
-                            <p className={styles.text}>Play</p>
+                            <p className={styles.text}>{t("play")}</p>
                         </Button>
                     </Col>
                     <Col>
                         <Button onClick={() => onSelect(AppMode.LEARN)} className={learnButtonClass}>
                             <FontAwesomeIcon icon={faGraduationCap} fixedWidth className={learnIconClass} />
-                            <p className={styles.text}>Learn</p>
+                            <p className={styles.text}>{t("learn")}</p>
                         </Button>
                     </Col>
                     <Col xs={12}>
                         <p className={styles.desc}>
-                            {Environment.variable(`${mode}_DESC`)}
+                            {t(`${mode.toLowerCase()}-desc`)}
                         </p>
                     </Col>
                 </Row>

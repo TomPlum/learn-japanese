@@ -28,6 +28,7 @@ import LearnConfirmationStep from "./steps/LearnConfirmationStep";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
 import { ModalProps } from "react-bootstrap/Modal";
 import SessionMode from "../../../domain/session/SessionMode";
+import { useTranslation } from "react-i18next";
 
 export interface SessionWizardProps {
     onClose: () => void;
@@ -59,6 +60,7 @@ const SessionWizard = (props: SessionWizardProps) => {
 
     const { onClose } = props;
 
+    const { t } = useTranslation();
     const [mode, setMode] = useState(AppMode.PLAY);
     const [valid, setValid] = useState(true);
     const [custom, setCustom] = useState(false);
@@ -117,7 +119,7 @@ const SessionWizard = (props: SessionWizardProps) => {
             case MODE: {
                 return {
                     icon: faAngleDoubleRight,
-                    name: "Select Mode",
+                    name: t("wizard.steps.mode.title"),
                     iconClass: styles.modeIcon,
                     body: <ModeSelectionStep mode={mode} onSelect={mode => setMode(mode)} />
                 }

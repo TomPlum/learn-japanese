@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import styles from "../../../../styles/sass/components/layout/wizard/footer/PlayWizardFooter.module.scss";
 import PlayWizardProgress from "./PlayWizardProgress";
 import { AppMode } from "../../../../domain/AppMode";
+import { useTranslation } from "react-i18next";
 
 export interface PlayWizardFooterProps {
     mode: AppMode;
@@ -20,12 +21,14 @@ const PlayWizardFooter = (props: PlayWizardFooterProps) => {
 
     const { mode, valid, custom, intermediate, terminal, currentStage, onNext, onBack, onPlay, onChangeStage } = props;
 
+    const { t } = useTranslation();
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.buttonWrapper}>
                 {(intermediate || terminal) && (
                     <Button onClick={onBack} className={styles.back} variant="primary">
-                        Back
+                        {t("action.back")}
                     </Button>
                 )}
             </div>
@@ -40,7 +43,7 @@ const PlayWizardFooter = (props: PlayWizardFooterProps) => {
             </div>
             <div>
                 <Button onClick={terminal ? onPlay : onNext} className={styles.next} variant="success" disabled={!valid}>
-                    {terminal ? "Start" : "Next"}
+                    {terminal ? t("action.start") : t("action.next")}
                 </Button>
             </div>
         </div>

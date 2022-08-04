@@ -57,6 +57,17 @@
       }
     }
   },
+  "wizard": {
+    "steps": {
+      "mode": {
+        "title": "Select Mode",
+        "play": " Play",
+        "learn": "Learn",
+        "play-desc": "Test your knowledge on a given topic. Choose from a preset game mode or customise your own settings.",
+        "learn-desc": "Study a topic of your choice via flash cards and spaced repetition learning."
+      }
+    }
+  },
   "dashboard": {
     "card": {
       "play": {
@@ -186,7 +197,9 @@
     "no": "No",
     "login": "Login",
     "register": "Register",
-    "search": "Search"
+    "search": "Search",
+    "next": "Next",
+    "back": "Back"
   },
   "presets": {
     "edit": {
