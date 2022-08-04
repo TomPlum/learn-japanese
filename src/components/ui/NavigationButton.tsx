@@ -7,6 +7,7 @@ import ScrollableContainer from "./ScrollableContainer";
 import ConditionalWrapper from "./ConditionalWrapper";
 import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
 import LoadingSpinner from "./loading/LoadingSpinner";
+import { useTranslation } from "react-i18next";
 
 export interface NavigationButtonProps {
     id?: string;
@@ -74,6 +75,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
     const { text, icon, width, textPlacement, className, iconClass, textClass, disabled, disableDropdown, id, href,
         searchable, showItemQuantity, containerClass, loading, onClick, onShow, onHide, children } = props;
 
+    const { t } = useTranslation();
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
     const [expandSearch, setExpandSearch] = useState(false);
@@ -151,9 +153,9 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                         type="text"
                         value={search}
                         disabled={loading}
-                        placeholder="Search"
                         onChange={handleSearch}
                         className={styles.search}
+                        placeholder={t("action.search")}
                         onFocus={() => setExpandSearch(true)}
                         style={{ height: expandSearch ? 45 : 30 }}
                     />}

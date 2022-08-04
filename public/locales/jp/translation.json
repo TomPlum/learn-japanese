@@ -49,7 +49,7 @@
       "faq": "よくある質問",
       "sm2": "「スーパーメモ」 アルゴリズム",
       "user": {
-        "login": "ログインする",
+        "login": "ログイン",
         "profile": "プロフィール",
         "stats": "統計",
         "high-scores": "高得点",
@@ -185,7 +185,8 @@
     "yes": "確認",
     "no": "キャンセル",
     "login": "ログイン",
-    "register": "登録"
+    "register": "登録",
+    "search":  "検索"
   },
   "presets": {
     "edit": {

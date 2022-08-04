@@ -1,7 +1,8 @@
 import NavigationButton, { ItemProps, NavigationButtonProps } from "../../../components/ui/NavigationButton";
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
+import renderWithTranslation from "../../renderWithTranslation";
 
 const onShowHandler = jest.fn();
 const onHideHandler = jest.fn();
@@ -44,7 +45,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(
+    const component = renderWithTranslation(
         <NavigationButton {...buttonProps}>
             <NavigationButton.Item {...itemProps}>
                 My Link

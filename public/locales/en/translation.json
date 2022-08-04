@@ -185,7 +185,8 @@
     "yes": "Yes",
     "no": "No",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "search": "Search"
   },
   "presets": {
     "edit": {
