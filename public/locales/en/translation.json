@@ -75,6 +75,9 @@
         "custom": "Custom",
         "preset-desc": "Choose from one of the preset game configurations for your chosen topic.",
         "custom-desc": "Configure any of the available settings to create a customised game mode."
+      },
+      "preset": {
+        "title": "Choose Preset"
       }
     }
   },

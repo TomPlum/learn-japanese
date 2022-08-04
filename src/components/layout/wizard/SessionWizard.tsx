@@ -145,7 +145,7 @@ const SessionWizard = (props: SessionWizardProps) => {
             case PRESET: {
                 return {
                     icon: faProjectDiagram,
-                    name: "Choose Preset",
+                    name: t("wizard.steps.preset.title"),
                     iconClass: styles.presetIcon,
                     body: (
                         <PresetSelectionStep
@@ -253,9 +253,9 @@ const SessionWizard = (props: SessionWizardProps) => {
                     <span className={styles.stage}>{name}</span>
                     <FontAwesomeIcon
                         fixedWidth
-                        title="Close"
                         icon={faTimes}
                         className={styles.close}
+                        title={t("action.close")}
                         onClick={() => setConfirmClose(true)}
                     />
                 </div>
