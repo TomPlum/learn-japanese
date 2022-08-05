@@ -1,14 +1,16 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import HintSettingsForm from "../../../../components/settings/game/HintSettingsForm";
 import HintSettings, { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings";
 import { getValueLastCalledWith } from "../../../Queries";
 import React from "react";
+import renderWithTranslation from "../../../renderWithTranslation";
+import { SettingsFormHandle } from "../../../../components/settings/game/GameSettingsMenu";
 
 const onChangeHandler = jest.fn();
-const ref = React.createRef<HintSettingsForm>();
+const ref = React.createRef<SettingsFormHandle>();
 
 const setup = () => {
-    const component = render(<HintSettingsForm onChange={onChangeHandler} ref={ref} />);
+    const component = renderWithTranslation(<HintSettingsForm onChange={onChangeHandler} ref={ref} />);
     return {
         enable: component.getByTestId('enable-hints'),
         quantity: component.getByTestId('hint-quantity-slider'),

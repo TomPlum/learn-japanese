@@ -12,16 +12,13 @@ import LearnableFieldSelector from "../../ui/select/LearnableFieldSelector";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 import ToggleSwitch from "../../ui/ToggleSwitch";
 import { useTranslation } from "react-i18next";
+import { SettingsFormHandle } from "./GameSettingsMenu";
 
 export interface QuestionSettingsFormProps {
     onChange: (settings: QuestionSettings) => void;
 }
 
-export type QuestionSettingsFormHandle = {
-    reset: () => void;
-}
-
-const QuestionSettingsForm = forwardRef((props: QuestionSettingsFormProps, ref: Ref<QuestionSettingsFormHandle>) => {
+const QuestionSettingsForm = forwardRef((props: QuestionSettingsFormProps, ref: Ref<SettingsFormHandle>) => {
 
     const { onChange } = props;
 

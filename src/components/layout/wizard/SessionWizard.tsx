@@ -173,7 +173,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                 return {
                     icon: faLightbulb,
                     iconClass: styles.hintsIcon,
-                    name: "Hint Settings",
+                    name: t("wizard.steps.hint.title"),
                     body: <HintSettingsStep onSelect={hints => setSettings(settings.withHintSettings(hints))} />,
                     intermediate: true
                 }

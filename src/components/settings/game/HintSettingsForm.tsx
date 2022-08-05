@@ -1,118 +1,109 @@
-import React, { Component } from "react";
+import React, { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import HintSettings, { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings";
 import RangeSlider from "react-bootstrap-range-slider";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 import styles from "../../../styles/sass/components/settings/game/HintSettingsForm.module.scss";
 import ToggleSwitch from "../../ui/ToggleSwitch";
+import { SettingsFormHandle } from "./GameSettingsMenu";
+import { useTranslation } from "react-i18next";
 
 export interface HintSettingsFormProps {
     onChange: (settings: HintSettings) => void;
 }
 
-interface HintSettingsFormState {
-    enabled: boolean;
-    quantity: number;
-    infinite: boolean;
-}
+const HintSettingsForm = forwardRef((props: HintSettingsFormProps, ref: Ref<SettingsFormHandle>) => {
 
-class HintSettingsForm extends Component<HintSettingsFormProps, HintSettingsFormState> {
+   const { onChange } = props;
 
-    private readonly defaultState = new HintSettingsBuilder().isEnabled().withQuantity(3).areUnlimited(false).build();
+   const defaultState = new HintSettingsBuilder().isEnabled().withQuantity(3).areUnlimited(false).build();
 
-    constructor(props: HintSettingsFormProps | Readonly<HintSettingsFormProps>) {
-        super(props);
-        this.state = {
-            enabled: this.defaultState.enabled,
-            quantity: this.defaultState.quantity,
-            infinite: this.defaultState.unlimited
-        }
+   const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.hint" });
+   const [enabled, setEnabled] = useState(defaultState.enabled);
+   const [quantity, setQuantity] = useState(defaultState.quantity);
+   const [unlimited, setUnlimited] = useState(defaultState.unlimited);
+
+   useEffect(() => {
+       onChange(defaultState);
+   }, []);
+
+   useEffect(() => {
+       const settings = new HintSettingsBuilder()
+           .isEnabled(enabled)
+           .withQuantity(quantity)
+           .areUnlimited(unlimited)
+           .build();
+
+       onChange(settings);
+   }, [enabled, quantity, unlimited]);
+
+   useImperativeHandle(ref, () => ({
+       reset() {
+           setEnabled(defaultState.enabled);
+           setQuantity(defaultState.quantity);
+           setUnlimited(defaultState.unlimited);
+       }
+   }))
+
+    const onChangeHintQuantity = (e: React.ChangeEvent, value: number) => {
+        setQuantity(value);
     }
 
-    componentDidMount() {
-        this.props.onChange(this.defaultState);
+    const handleHintToggle = () => {
+       setEnabled(!enabled);
+       setUnlimited(false);
     }
 
-    componentDidUpdate(prevProps: Readonly<HintSettingsFormProps>, prevState: Readonly<HintSettingsFormState>) {
-        if (prevState !== this.state) {
-            const { enabled, quantity, infinite } = this.state;
+    return (
+        <ScrollableContainer className={styles.formWrapper} id="hint-settings-form">
+            <Row>
+                <Col xs={12}>
+                    <ToggleSwitch
+                        enabled={enabled}
+                        label={t("enable")}
+                        className={styles.check}
+                        data-testid="enable-hints"
+                        onChange={handleHintToggle}
+                    />
 
-            const settings = new HintSettingsBuilder()
-                .isEnabled(enabled)
-                .withQuantity(quantity)
-                .areUnlimited(infinite)
-                .build();
+                    <p className={styles.leadingDescription}>
+                        {t("enable-desc")}
+                    </p>
+                </Col>
 
-            this.props.onChange(settings);
-        }
-    }
+                <Col xs={12}>
+                    <RangeSlider
+                        min={1} max={10}
+                        value={quantity}
+                        variant="primary"
+                        disabled={!enabled || unlimited}
+                        onChange={onChangeHintQuantity}
+                        data-testid="hint-quantity-slider"
+                        tooltip={enabled && !unlimited ? "auto" : "off"}
+                    />
 
-    render() {
-        const { enabled, quantity, infinite } = this.state;
+                    <p className={styles.leadingDescription}>
+                        {t("quantity-desc")}
+                    </p>
+                </Col>
 
-        return (
-            <ScrollableContainer className={styles.formWrapper} id="hint-settings-form">
-                <Row>
-                    <Col xs={12}>
-                        <ToggleSwitch
-                            enabled={enabled}
-                            label="Enable"
-                            className={styles.check}
-                            data-testid="enable-hints"
-                            onChange={() => this.setState({ enabled: !enabled, infinite: false })}
-                        />
+                <Col xs={12}>
+                    <ToggleSwitch
+                        enabled={unlimited}
+                        disabled={!enabled}
+                        label={t("infinite")}
+                        className={styles.check}
+                        data-testid="enable-infinite-hints"
+                        onChange={() => setUnlimited(!unlimited)}
+                    />
 
-                        <p className={styles.leadingDescription}>
-                            Hints allow you to reveal a small piece of information about the current question if you're
-                            struggling.
-                        </p>
-                    </Col>
-
-                    <Col xs={12}>
-                        <RangeSlider
-                            min={1} max={10}
-                            value={quantity}
-                            variant="primary"
-                            disabled={!enabled || infinite}
-                            tooltip={enabled && !infinite ? "auto" : "off"}
-                            data-testid="hint-quantity-slider"
-                            onChange={this.onChangeHintQuantity}
-                        />
-
-                        <p className={styles.leadingDescription}>
-                            Select the number of hints you want for the entire game. You only get to use one per
-                            question.
-                        </p>
-                    </Col>
-
-                    <Col xs={12}>
-                        <ToggleSwitch
-                            enabled={infinite}
-                            disabled={!enabled}
-                            label="Infinite Hints"
-                            className={styles.check}
-                            data-testid="enable-infinite-hints"
-                            onChange={() => this.setState({ infinite: !infinite })}
-                        />
-
-                        <p className={styles.leadingDescription}>
-                            Remove the quantity cap and use as many hints as you'd like.
-                        </p>
-                    </Col>
-                </Row>
-            </ScrollableContainer>
-        );
-    }
-
-    reset = () => this.setState({
-        enabled: this.defaultState.enabled,
-        quantity: this.defaultState.quantity,
-        infinite: this.defaultState.unlimited
-    });
-
-    private onChangeHintQuantity = (e: React.ChangeEvent, value: number) => {
-        this.setState({ quantity: value });
-    }
-}
+                    <p className={styles.leadingDescription}>
+                        {t("infinite-desc")}
+                    </p>
+                </Col>
+            </Row>
+        </ScrollableContainer>
+    );
+});
 
 export default HintSettingsForm;

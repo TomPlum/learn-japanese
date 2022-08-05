@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import QuestionSettingsForm, { QuestionSettingsFormHandle } from "./QuestionSettingsForm";
+import QuestionSettingsForm from "./QuestionSettingsForm";
 import HintSettingsForm from "./HintSettingsForm";
 import LifeSettingsForm from "./LifeSettingsForm";
 import TimeSettingsForm from "./TimeSettingsForm";
@@ -26,9 +26,13 @@ interface GameSettingsMenuState {
     timeSettings: TimeSettings;
 }
 
+export type SettingsFormHandle = {
+    reset: () => void;
+}
+
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
-    private readonly question: React.RefObject<QuestionSettingsFormHandle>;
-    private readonly hints: React.RefObject<HintSettingsForm>;
+    private readonly question: React.RefObject<SettingsFormHandle>;
+    private readonly hints: React.RefObject<SettingsFormHandle>;
     private readonly lives: React.RefObject<LifeSettingsForm>;
     private readonly time: React.RefObject<TimeSettingsForm>;
 

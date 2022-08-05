@@ -118,6 +118,14 @@
             "desc": "You'll be given all question types shuffled randomly."
           }
         }
+      },
+      "hint": {
+        "title": "Hint Settings",
+        "enable": "Enable",
+        "infinite": "Infinite Hints",
+        "enable-desc": "Hints allow you to reveal a small piece of information about the current question if you're struggling.",
+        "quantity-desc": "Select the number of hints you want for the entire game. You only get to use one per question.",
+        "infinite-desc": "Remove the quantity cap and use as many hints as you'd like."
       }
     }
   },
