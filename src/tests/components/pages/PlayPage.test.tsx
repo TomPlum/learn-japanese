@@ -1,26 +1,35 @@
-import PlayPage from "../../../components/pages/PlayPage";
-import Definition from "../../../domain/sentence/Definition";
+import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import { store } from "../../../store";
+import { clearDataSettings, setDataSettings } from "../../../slices/DataSettingsSlice";
+import { fireEvent, screen } from "@testing-library/react";
+import { createMemoryHistory } from "history";
+import { getByTextWithMarkup } from "../../Queries";
+import { Router } from "react-router-dom";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
+import Definition from "../../../domain/sentence/Definition";
 import { clearGameSettings, setGameSettings } from "../../../slices/GameSettingsSlice";
-import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
+import PlayPage from "../../../components/pages/PlayPage";
 import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings";
+import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
 import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings";
 import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings";
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings";
 import LearnableField from "../../../domain/learn/LearnableField";
 import QuestionType from "../../../domain/game/QuestionType";
-import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
-import { clearDataSettings, setDataSettings } from "../../../slices/DataSettingsSlice";
-import { fireEvent, screen } from "@testing-library/react";
-import { getByTextWithMarkup } from "../../Queries";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
-import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const mockLearningDataService = jest.fn();
 jest.mock("../../../service/LearningDataService", () => function() {
     return { read: mockLearningDataService }
 });
+
+const dataSettings = new KanaSettingsBuilder()
+    .withHiragana(true)
+    .withKatakana(false)
+    .withDiagraphs(false)
+    .withDiacriticals(true)
+    .withOnlyDiagraphs(false)
+    .withQuantity(50)
+    .build();
 
 const gameSettings = new GameSettingsBuilder()
     .withLifeSettings(
@@ -53,18 +62,9 @@ const gameSettings = new GameSettingsBuilder()
     )
     .build();
 
-const dataSettings = new KanaSettingsBuilder()
-    .withHiragana(true)
-    .withKatakana(false)
-    .withDiagraphs(false)
-    .withDiacriticals(true)
-    .withOnlyDiagraphs(false)
-    .withQuantity(50)
-    .build();
-
 const history = createMemoryHistory();
 
-beforeEach(() => {
+afterEach(() => {
     store.dispatch(clearDataSettings());
     store.dispatch(clearGameSettings());
 });
@@ -77,7 +77,6 @@ test('Should render the game if game and data settings are present', async () =>
 
     renderTranslatedReduxConsumer(<PlayPage />);
 
-    expect(await mockLearningDataService).toHaveBeenCalled();
     expect(await screen.findByTestId('memory-game')).toBeInTheDocument();
 });
 

@@ -1,7 +1,6 @@
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
 import { store } from "../../../store";
 import { clearDataSettings, setDataSettings } from "../../../slices/DataSettingsSlice";
-import renderReduxConsumer from "../../renderReduxConsumer";
 import { fireEvent, screen } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { getByTextWithMarkup } from "../../Queries";
@@ -11,8 +10,6 @@ import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
 import { KanaColumn } from "../../../domain/kana/KanaColumn";
 import Arrays from "../../../utility/Arrays";
-import { setApplicationMode } from "../../../slices/ModeSlice";
-import { AppMode } from "../../../domain/AppMode";
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const mockLearningDataService = jest.fn();
