@@ -1,21 +1,21 @@
 export default class LearnableField {
 
-    private readonly _name: string;
-    private readonly _description: string;
+    private readonly _translationPrefix = "learnable.field"
+
+    private readonly _translationSuffix: string;
     private readonly _validationRegex: RegExp;
 
-    public static MEANING = new LearnableField("English Meaning", "The meaning of the word or character in English. Usually a single word.", /^[A-Za-z\s]*$/);
-    public static KANJI = new LearnableField("Kanji", "Some words can be expressed as a single Kanji.", /^[一-龯]*$/);
-    public static KANA = new LearnableField("Kana", "The Japanese syllabaries are kana. All words can expressed in Hiragana or Katakana.", /^[ぁ-んァ-ン]+$/);
-    public static JAPANESE = new LearnableField("Japanese", "Some words can be expressed in all kanji or a mixture of kanji and kana.", /^[A-Za-z]*$/)
-    public static ROMAJI = new LearnableField("Rōmaji", "The romanisation of Japanese kana. I.e. 'a', 'ke' or 'zu'.", /^[A-Za-z]*$/);
-    public static ONYOMI_READING = new LearnableField("On'Yomi Reading", "The original Chinese readings of a kanji character in Hiragana.", /^[ぁ-ゔゞァ-・ヽヾ゛゜ー]+$/);
-    public static KUNYOMI_READING = new LearnableField("Kun'Yomi Reading", "The Japanese readings of a kanji character in Hiragana.", /^[ぁ-ゔゞァ-・ヽヾ゛゜ー]+$/);
-    public static RANDOM = new LearnableField("Random", "A random selection of any of the available data fields.", /.*/);
+    public static MEANING = new LearnableField("meaning" ,/^[A-Za-z\s]*$/);
+    public static KANJI = new LearnableField("kanji", /^[一-龯]*$/);
+    public static KANA = new LearnableField("kana", /^[ぁ-んァ-ン]+$/);
+    public static JAPANESE = new LearnableField("japanese", /^[A-Za-z]*$/)
+    public static ROMAJI = new LearnableField("romaji", /^[A-Za-z]*$/);
+    public static ONYOMI_READING = new LearnableField("on", /^[ぁ-ゔゞァ-・ヽヾ゛゜ー]+$/);
+    public static KUNYOMI_READING = new LearnableField("kun", /^[ぁ-ゔゞァ-・ヽヾ゛゜ー]+$/);
+    public static RANDOM = new LearnableField("random", /.*/);
 
-    private constructor(name: string, description: string, validationRegex: RegExp) {
-        this._name = name;
-        this._description = description;
+    private constructor(translationSuffix: string, validationRegex: RegExp) {
+        this._translationSuffix = translationSuffix;
         this._validationRegex = validationRegex;
     }
 
@@ -27,26 +27,26 @@ export default class LearnableField {
         ];
     }
 
-    public static fromNameString(value: String): LearnableField {
+    public static fromTranslationPath(value: String): LearnableField {
         switch (value) {
-            case "English Meaning": return LearnableField.MEANING;
-            case "Kanji": return LearnableField.KANJI;
-            case "Kana": return LearnableField.KANA;
-            case "Japanese": return LearnableField.JAPANESE;
-            case "Rōmaji": return LearnableField.ROMAJI;
-            case "On'Yomi Reading": return LearnableField.ONYOMI_READING;
-            case "Kun'Yomi Reading": return LearnableField.KUNYOMI_READING;
-            case "Random": return LearnableField.RANDOM;
-            default: throw new Error("Invalid Learnable Field Name: " + value);
+            case "learnable.field.meaning.name": return LearnableField.MEANING;
+            case "learnable.field.kanji.name": return LearnableField.KANJI;
+            case "learnable.field.kana.name": return LearnableField.KANA;
+            case "learnable.field.japanese.name": return LearnableField.JAPANESE;
+            case "learnable.field.romaji.name": return LearnableField.ROMAJI;
+            case "learnable.field.on.name": return LearnableField.ONYOMI_READING;
+            case "learnable.field.kun.name": return LearnableField.KUNYOMI_READING;
+            case "learnable.field.random.name": return LearnableField.RANDOM;
+            default: throw new Error("Invalid Learnable Field Translation Path: " + value);
         }
     }
 
     get name(): string {
-        return this._name;
+        return `${this._translationPrefix}.${this._translationSuffix}.name`;
     }
 
     get description(): string {
-        return this._description;
+        return `${this._translationPrefix}.${this._translationSuffix}.desc`;
     }
 
     get validationRegex(): RegExp {

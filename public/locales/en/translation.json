@@ -78,6 +78,21 @@
       },
       "preset": {
         "title": "Choose Preset"
+      },
+      "question": {
+        "title": "Question Settings",
+        "desc": "Configure settings regarding the types of question you'll be asked.",
+        "type-heading": "Question Type",
+        "text-type-desc": "You're given a single piece of info (symbol, reading, meaning etc.) per question and must enter the request other piece of information.",
+        "multiple-choice-type-desc": "You're given something for the given data and are presented with multiple answer options of which one is correct.",
+        "match-type-desc": "You're given several pieces of info with their answers and you must match them up correctly.",
+        "fields-heading": "Question & Answer Fields",
+        "fields-desc": "Select which piece of information you are given in the question and what you must give as the answer. You cannot select the same field for both.",
+        "give-me": "Give me the...",
+        "ask-me": "Ask me the...",
+        "score-heading": "Score",
+        "track-score": "Track Score",
+        "score-desc": "You gain a base score per question answered correctly. Streaking will increase your multiplier exponentially, but breaking it will reset to the base. Skipping a question will lose you the 1 x the base score."
       }
     }
   },
@@ -393,6 +408,42 @@
       },
       "japanese": {
         "name": "Japanese"
+      }
+    }
+  },
+  "learnable": {
+    "field": {
+      "meaning": {
+        "name": "English Meaning",
+        "desc": "The meaning of the word or character in English. Usually a single word."
+      },
+      "kanji": {
+        "name": "Kanji",
+        "desc": "Some words can be expressed as a single Kanji."
+      },
+      "kana": {
+        "name": "Kana",
+        "desc": "The Japanese syllabaries are kana. All words can expressed in Hiragana or Katakana."
+      },
+      "japanese": {
+        "name": "Japanese",
+        "desc": "Some words can be expressed in all kanji or a mixture of kanji and kana."
+      },
+      "romaji": {
+        "name": "Rōmaji",
+        "desc": "The romanisation of Japanese kana. I.e. 'a', 'ke' or 'zu'."
+      },
+      "on": {
+        "name": "On'Yomi Reading",
+        "desc": "The original Chinese readings of a kanji character in Hiragana."
+      },
+      "kun": {
+        "name": "Kun'Yomi Reading",
+        "desc": "The Japanese readings of a kanji character in Katakana."
+      },
+      "random": {
+        "name": "Random",
+        "desc": "A random selection of any of the available data fields."
       }
     }
   }

@@ -164,7 +164,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                 return {
                     icon: faQuestionCircle,
                     iconClass: styles.questionIcon,
-                    name: "Question Settings",
+                    name: t("wizard.steps.question.title"),
                     body: <QuestionSettingsStep onSelect={question => setSettings(settings.withQuestionSettings(question))} />,
                     intermediate: true
                 }

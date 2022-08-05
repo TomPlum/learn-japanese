@@ -1,7 +1,8 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import LearnableFieldSelector, { LearnableFieldSelectorProps } from "../../../../components/ui/select/LearnableFieldSelector";
 import LearnableField from "../../../../domain/learn/LearnableField";
 import userEvent from "@testing-library/user-event";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 const onSelectHandler = jest.fn();
 
@@ -14,7 +15,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-    const component = render(<LearnableFieldSelector {...props} />);
+    const component = renderWithTranslation(<LearnableFieldSelector {...props} />);
     return {
         field: component.getByTestId('learnable-field-selector'),
         help: component.getByTestId('field-help'),
@@ -23,15 +24,15 @@ const setup = () => {
 }
 
 test('It should set the default value if the property is passed', () => {
-    props.default = LearnableField.KANJI;
+    props.defaultField = LearnableField.KANJI;
     const { field } = setup();
-    expect(field).toHaveValue("Kanji");
+    expect(field).toHaveDisplayValue("Kanji")
 });
 
 test('Omitting the default property should cause the value to default to kana', () => {
-    props.default = undefined;
+    props.defaultField = undefined;
     const { field } = setup();
-    expect(field).toHaveValue("Kana");
+    expect(field).toHaveDisplayValue("Kana");
 });
 
 test('Passing a field to exclude should prevent it from appearing in the select list', () => {
@@ -41,7 +42,7 @@ test('Passing a field to exclude should prevent it from appearing in the select 
 });
 
 test('It should call the onSelect event handler when changing the option', () => {
-    props.default = LearnableField.KANA;
+    props.defaultField = LearnableField.KANA;
     const { field } = setup();
     userEvent.selectOptions(field, "Kanji")
     expect(onSelectHandler).toHaveBeenLastCalledWith(LearnableField.KANJI);
@@ -54,5 +55,5 @@ test('It should render an inline help icon that shows the name and description o
     fireEvent.mouseOver(help);
 
     expect(await screen.findAllByText("Japanese")).toHaveLength(2);
-    expect(await screen.findByText(LearnableField.JAPANESE.description)).toBeInTheDocument();
+    expect(await screen.findByText("Some words can be expressed in all kanji or a mixture of kanji and kana.")).toBeInTheDocument();
 });

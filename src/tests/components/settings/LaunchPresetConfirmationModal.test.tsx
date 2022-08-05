@@ -107,11 +107,11 @@ test('It should route to the play page and set the game and data settings in the
             quantity: 5
         },
         question: {
-            answerField: "Rōmaji",
+            answerField: "learnable.field.romaji.name",
             answerFilter: -1,
             cards: 1,
             quantity: 1,
-            questionField: "Kana",
+            questionField: "learnable.field.kana.name",
             score: false,
             type: "Text"
         },
@@ -148,11 +148,11 @@ test('It should route to the play page and set the game and data settings in the
                 "quantity": 5
             },
             "question": {
-                "answerField": "Rōmaji",
+                "answerField": "learnable.field.romaji.name",
                 "answerFilter": -1,
                 "cards": 1,
                 "quantity": 1,
-                "questionField": "Kana",
+                "questionField": "learnable.field.kana.name",
                 "score": false,
                 "type": "Text"
             },

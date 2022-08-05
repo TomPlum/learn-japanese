@@ -3,14 +3,14 @@ import Main from "../../../components/layout/Main";
 import { Environment } from "../../../utility/Environment";
 import { createBrowserHistory } from "history";
 import { BrowserRouter } from "react-router-dom";
-import renderReduxConsumer from "../../renderReduxConsumer";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
 const scrollIntoView = jest.fn();
 window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
 
 const setup = () => {
-    renderReduxConsumer(
+    renderTranslatedReduxConsumer(
         <BrowserRouter>
             <Main/>
         </BrowserRouter>

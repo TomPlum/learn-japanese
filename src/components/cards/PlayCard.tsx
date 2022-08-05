@@ -21,6 +21,7 @@ const PlayCard = () => {
     const lastLearnSession = sessions.lastLearnSession;
 
     const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.play" });
+    const presetName = useTranslation().t;
     const [preset, setPreset] = useState<SessionMode | undefined>(undefined);
     const [customising, setCustomising] = useState(false);
     const [confirming, setConfirming] = useState(false);
@@ -41,8 +42,8 @@ const PlayCard = () => {
         setConfirming(true);
     }
 
-    const playTitle = !!lastPlaySession ? lastPlaySession.name ?? t("default-title") : t("play-title");
-    const learnTitle = !!lastLearnSession ? lastLearnSession.name ?? t("default-title") : t("learn-title");
+    const playTitle = !!lastPlaySession ? presetName(lastPlaySession.name!) ?? t("default-title") : t("play-title");
+    const learnTitle = !!lastLearnSession ? presetName(lastLearnSession.name!) ?? t("default-title") : t("learn-title");
 
     return (
         <DashboardCard {...props}>

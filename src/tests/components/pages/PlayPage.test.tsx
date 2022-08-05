@@ -1,4 +1,3 @@
-import renderReduxConsumer from "../../renderReduxConsumer";
 import PlayPage from "../../../components/pages/PlayPage";
 import Definition from "../../../domain/sentence/Definition";
 import { store } from "../../../store";
@@ -65,18 +64,20 @@ const dataSettings = new KanaSettingsBuilder()
 
 const history = createMemoryHistory();
 
-afterEach(() => {
+beforeEach(() => {
     store.dispatch(clearDataSettings());
     store.dispatch(clearGameSettings());
 });
+
 // TODO: Why is the setDataSettings() dispatch saying its un-serialisable? Seems the whole Topic is the payload...
 test('Should render the game if game and data settings are present', async () => {
     mockLearningDataService.mockResolvedValueOnce([new Definition(["not much"], undefined, "あまり", "Adverb")]);
     store.dispatch(setGameSettings(gameSettings));
     store.dispatch(setDataSettings(dataSettings));
 
-    renderReduxConsumer(<PlayPage />);
+    renderTranslatedReduxConsumer(<PlayPage />);
 
+    expect(await mockLearningDataService).toHaveBeenCalled();
     expect(await screen.findByTestId('memory-game')).toBeInTheDocument();
 });
 
@@ -84,7 +85,7 @@ test('Should render an error message if the game settings are undefined', () => 
     store.dispatch(clearGameSettings());
     store.dispatch(setDataSettings(dataSettings));
 
-    renderReduxConsumer(<PlayPage />);
+    renderTranslatedReduxConsumer(<PlayPage />);
 
     expect(mockLearningDataService).not.toHaveBeenCalled();
     expect(screen.queryByTestId('memory-game')).not.toBeInTheDocument();
@@ -96,7 +97,7 @@ test('Should render an error message if the data settings are undefined', () => 
     store.dispatch(setGameSettings(gameSettings));
     store.dispatch(clearDataSettings());
 
-    renderReduxConsumer(<PlayPage />);
+    renderTranslatedReduxConsumer(<PlayPage />);
 
     expect(mockLearningDataService).not.toHaveBeenCalled();
     expect(screen.queryByTestId('memory-game')).not.toBeInTheDocument();

@@ -2,6 +2,7 @@ import styles from "../../styles/sass/components/settings/SessionSettingsSummary
 import { WizardStep } from "../layout/wizard/SessionWizard";
 import QuestionType from "../../domain/game/QuestionType";
 import { SessionSettings } from "../../domain/session/settings/SessionSettings";
+import { useTranslation } from "react-i18next";
 
 export interface SessionSettingsSummaryProps {
     settings: SessionSettings;
@@ -11,6 +12,8 @@ export interface SessionSettingsSummaryProps {
 const SessionSettingsSummary = (props: SessionSettingsSummaryProps) => {
 
     const { settings, onSelectStage } = props;
+
+    const { t } = useTranslation();
 
     const gameSettings = settings.gameSettings;
     const dataSettings = settings.dataSettings;
@@ -78,7 +81,7 @@ const SessionSettingsSummary = (props: SessionSettingsSummaryProps) => {
         <p className={styles.question} data-testid="session-settings-summary">
             <span>{"You'll be given the "}</span>
             <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage?.(QUESTION)}>
-                    {questionField}
+                    {t(questionField)}
                 </span>
             <span>{" and must "}</span>
             <span className={[styles.type, styles.highlight].join(" ")} onClick={() => onSelectStage?.(QUESTION)}>
@@ -86,7 +89,7 @@ const SessionSettingsSummary = (props: SessionSettingsSummaryProps) => {
                 </span>
             <span>{" the "}</span>
             <span className={[styles.field, styles.highlight].join(" ")} onClick={() => onSelectStage?.(QUESTION)}>
-                    {answerField}
+                    {t(answerField)}
                 </span>
             <span>{" for "}</span>
             <span className={[styles.quantity, styles.highlight].join(" ")} onClick={() => onSelectStage?.(DATA)}>

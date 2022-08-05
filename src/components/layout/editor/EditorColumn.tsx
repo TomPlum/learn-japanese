@@ -1,6 +1,7 @@
 import styles from "../../../styles/sass/components/layout/editor/EditorColumn.module.scss";
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import EditorCard from "./EditorCard";
+import { useTranslation } from "react-i18next";
 
 export type CardSize = 'sm' | 'md' | 'lg';
 
@@ -21,11 +22,12 @@ const EditorColumn = (props: EditorColumnProps) => {
 
     const [dropping, setDropping] = useState(false);
     const [cards, setCards] = useState<CardLayoutDetails[]>(defaultCards ?? []);
+    const { t } = useTranslation();
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
         setDropping(false);
         const details = JSON.parse(event.dataTransfer.getData("card"));
-        setCards(existing => existing.concat({ name: details.name, size: details.size }))
+        setCards(existing => existing.concat({ name: t(details.name), size: details.size }))
     }
 
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {

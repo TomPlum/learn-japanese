@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import QuestionSettingsForm from "./QuestionSettingsForm";
+import QuestionSettingsForm, { QuestionSettingsFormHandle } from "./QuestionSettingsForm";
 import HintSettingsForm from "./HintSettingsForm";
 import LifeSettingsForm from "./LifeSettingsForm";
 import TimeSettingsForm from "./TimeSettingsForm";
@@ -27,7 +27,7 @@ interface GameSettingsMenuState {
 }
 
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
-    private readonly display: React.RefObject<QuestionSettingsForm>;
+    private readonly question: React.RefObject<QuestionSettingsFormHandle>;
     private readonly hints: React.RefObject<HintSettingsForm>;
     private readonly lives: React.RefObject<LifeSettingsForm>;
     private readonly time: React.RefObject<TimeSettingsForm>;
@@ -35,7 +35,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     constructor(props: GameSettingsMenuProps | Readonly<GameSettingsMenuProps>) {
         super(props);
 
-        this.display = React.createRef();
+        this.question = React.createRef();
         this.hints = React.createRef();
         this.lives = React.createRef();
         this.time = React.createRef();
@@ -116,7 +116,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                                     </Card.Title>
 
                                     <QuestionSettingsForm
-                                        ref={this.display}
+                                        ref={this.question}
                                         onChange={(settings) => this.setState({ questionSettings: settings })}
                                     />
                                 </Tab.Pane>
@@ -221,7 +221,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onReset = () => {
-        this.display.current?.reset();
+        this.question.current?.reset();
         this.hints.current?.reset();
         this.lives.current?.reset();
         this.time.current?.reset();

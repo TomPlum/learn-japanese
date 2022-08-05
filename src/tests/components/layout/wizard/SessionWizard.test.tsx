@@ -258,11 +258,11 @@ test('Clicking Start in the confirmation step for custom play should set the sel
             quantity: 0
         },
         question: {
-            answerField: "English Meaning",
+            answerField: "learnable.field.meaning.name",
             answerFilter: -1,
             cards: 6,
             quantity: 1,
-            questionField: "Kanji",
+            questionField: "learnable.field.kanji.name",
             score: true,
             type: "Multiple Choice"
         },
@@ -319,11 +319,11 @@ test('Clicking Start in the confirmation step for preset play should set the sel
             quantity: 5
         },
         question: {
-            answerField: "Kanji",
+            answerField: "learnable.field.kanji.name",
             answerFilter: -1,
             cards: 4,
             quantity: 1,
-            questionField: "English Meaning",
+            questionField: "learnable.field.meaning.name",
             score: true,
             type: "Multiple Choice"
         },

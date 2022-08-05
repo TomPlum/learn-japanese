@@ -8,41 +8,41 @@ import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 import JLTPLevel from "../../../domain/learn/JLTPLevel";
 
 describe("Learnable Field", () => {
-    describe("From Name String", () => {
+    describe("From Translation Path", () => {
         it("English Meaning", () => {
-            expect(LearnableField.fromNameString("English Meaning")).toBe(LearnableField.MEANING);
+            expect(LearnableField.fromTranslationPath("learnable.field.meaning.name")).toBe(LearnableField.MEANING);
         });
 
         it("Kanji", () => {
-            expect(LearnableField.fromNameString("Kanji")).toBe(LearnableField.KANJI);
+            expect(LearnableField.fromTranslationPath("learnable.field.kanji.name")).toBe(LearnableField.KANJI);
         });
 
         it("Kana", () => {
-            expect(LearnableField.fromNameString("Kana")).toBe(LearnableField.KANA);
+            expect(LearnableField.fromTranslationPath("learnable.field.kana.name")).toBe(LearnableField.KANA);
         });
 
         it("Japanese", () => {
-            expect(LearnableField.fromNameString("Japanese")).toBe(LearnableField.JAPANESE);
+            expect(LearnableField.fromTranslationPath("learnable.field.japanese.name")).toBe(LearnableField.JAPANESE);
         });
 
         it("Rōmaji", () => {
-            expect(LearnableField.fromNameString("Rōmaji")).toBe(LearnableField.ROMAJI);
+            expect(LearnableField.fromTranslationPath("learnable.field.romaji.name")).toBe(LearnableField.ROMAJI);
         });
 
         it("On'Yomi Reading", () => {
-            expect(LearnableField.fromNameString("On'Yomi Reading")).toBe(LearnableField.ONYOMI_READING);
+            expect(LearnableField.fromTranslationPath("learnable.field.on.name")).toBe(LearnableField.ONYOMI_READING);
         });
 
         it("Kun'Yomi Reading", () => {
-            expect(LearnableField.fromNameString("Kun'Yomi Reading")).toBe(LearnableField.KUNYOMI_READING);
+            expect(LearnableField.fromTranslationPath("learnable.field.kun.name")).toBe(LearnableField.KUNYOMI_READING);
         });
 
         it("Random", () => {
-            expect(LearnableField.fromNameString("Random")).toBe(LearnableField.RANDOM);
+            expect(LearnableField.fromTranslationPath("learnable.field.random.name")).toBe(LearnableField.RANDOM);
         });
 
         it("Should throw an exception if an unknown name is passed", () => {
-            expect(() => LearnableField.fromNameString("Blah")).toThrow("Invalid Learnable Field Name: Blah");
+            expect(() => LearnableField.fromTranslationPath("Blah")).toThrow("Invalid Learnable Field Translation Path: Blah");
         });
     });
 

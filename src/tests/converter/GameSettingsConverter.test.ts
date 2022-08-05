@@ -69,8 +69,8 @@ describe("Game Settings Converter", () => {
                     score: true,
                     type: "Multiple Choice",
                     quantity: 150,
-                    answerField: "Rōmaji",
-                    questionField: "Kana",
+                    answerField: "learnable.field.romaji.name",
+                    questionField: "learnable.field.kana.name",
                     answerFilter: 0
                 }
             });
@@ -99,8 +99,8 @@ describe("Game Settings Converter", () => {
                     score: true,
                     type: "Multiple Choice",
                     quantity: 150,
-                    answerField: "Rōmaji",
-                    questionField: "Kana",
+                    answerField: "learnable.field.romaji.name",
+                    questionField: "learnable.field.kana.name",
                     answerFilter: undefined
                 }
             }
@@ -200,8 +200,8 @@ describe("Game Settings Converter", () => {
                     score: true,
                     type: "Multiple Choice",
                     quantity: 150,
-                    answerField: "Rōmaji",
-                    questionField: "Kana",
+                    answerField: "learnable.field.romaji.name",
+                    questionField: "learnable.field.kana.name",
                     answerFilter: 1
                 }
             });
@@ -230,8 +230,8 @@ describe("Game Settings Converter", () => {
                     score: true,
                     type: "Multiple Choice",
                     quantity: 150,
-                    answerField: "Rōmaji",
-                    questionField: "Kana",
+                    answerField: "learnable.field.romaji.name",
+                    questionField: "learnable.field.kana.name",
                     answerFilter: 1
                 }
             }

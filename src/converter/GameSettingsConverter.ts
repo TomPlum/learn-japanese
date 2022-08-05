@@ -35,8 +35,8 @@ class GameSettingsConverter {
             .withQuestionSettings(
                 new QuestionSettingsBuilder()
                     .withFields(
-                        LearnableField.fromNameString(settings.question.questionField),
-                        LearnableField.fromNameString(settings.question.answerField)
+                        LearnableField.fromTranslationPath(settings.question.questionField),
+                        LearnableField.fromTranslationPath(settings.question.answerField)
                     )
                     .withQuantity(settings.question.quantity)
                     .withType(QuestionType.fromName(settings.question.type))
@@ -129,8 +129,8 @@ class GameSettingsConverter {
             .withQuestionSettings(
                 new QuestionSettingsBuilder()
                     .withFields(
-                        LearnableField.fromNameString(state.question.questionField),
-                        LearnableField.fromNameString(state.question.answerField)
+                        LearnableField.fromTranslationPath(state.question.questionField),
+                        LearnableField.fromTranslationPath(state.question.answerField)
                     )
                     .withQuantity(state.question.quantity)
                     .withType(QuestionType.fromName(state.question.type))

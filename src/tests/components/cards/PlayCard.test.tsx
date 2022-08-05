@@ -1,6 +1,5 @@
 import { fireEvent, screen } from "@testing-library/react";
 import PlayCard from "../../../components/cards/PlayCard";
-import renderReduxConsumer from "../../renderReduxConsumer";
 import { store } from "../../../store";
 import { clearLastLearnPreset, clearLastPlayPreset, setLastLearnPreset, setLastPlayPreset } from "../../../slices/SessionSettingsSlice";
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";

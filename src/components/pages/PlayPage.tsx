@@ -27,8 +27,8 @@ const PlayPage = () => {
     const gameSettingsDispatcher = useGameSettingsDispatch();
     const dataSettingsDispatcher = useDataSettingsDispatch();
 
-    const gameSettingsData = useGameSettingsSelector(state => state.gameSettings.settings);
-    const dataSettingsData = useDataSettingsSelector(state => state.dataSettings.settings);
+    const gameSettingsData = useGameSettingsSelector(state => state.gameSettings?.settings);
+    const dataSettingsData = useDataSettingsSelector(state => state.dataSettings?.settings);
 
     const gameSettings = gameSettingsData ? new GameSettingsConverter().deserialise(gameSettingsData) : undefined;
     const dataSettings = dataSettingsData ? new DataSettingsConverter().deserialise(dataSettingsData) : undefined;

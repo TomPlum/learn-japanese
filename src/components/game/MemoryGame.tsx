@@ -40,6 +40,10 @@ export interface MemoryGameProps {
     sessionKey?: string;
 }
 
+export type MemoryGameQuestion = {
+    isCorrect: () => boolean;
+}
+
 /**
  * The core component for driving game logic.
  * Encapsulates logic for game answers, timers, lives, hints and score.
