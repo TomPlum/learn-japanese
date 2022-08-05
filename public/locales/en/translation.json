@@ -83,16 +83,41 @@
         "title": "Question Settings",
         "desc": "Configure settings regarding the types of question you'll be asked.",
         "type-heading": "Question Type",
-        "text-type-desc": "You're given a single piece of info (symbol, reading, meaning etc.) per question and must enter the request other piece of information.",
-        "multiple-choice-type-desc": "You're given something for the given data and are presented with multiple answer options of which one is correct.",
-        "match-type-desc": "You're given several pieces of info with their answers and you must match them up correctly.",
         "fields-heading": "Question & Answer Fields",
         "fields-desc": "Select which piece of information you are given in the question and what you must give as the answer. You cannot select the same field for both.",
         "give-me": "Give me the...",
         "ask-me": "Ask me the...",
         "score-heading": "Score",
         "track-score": "Track Score",
-        "score-desc": "You gain a base score per question answered correctly. Streaking will increase your multiplier exponentially, but breaking it will reset to the base. Skipping a question will lose you the 1 x the base score."
+        "score-desc": "You gain a base score per question answered correctly. Streaking will increase your multiplier exponentially, but breaking it will reset to the base. Skipping a question will lose you the 1 x the base score.",
+        "cards-quantity": {
+          "desc": "You'll be shown {{quantity}} answers to choose from.",
+          "2": "2",
+          "4": "4",
+          "6": "6"
+        },
+        "type": {
+          "text": {
+            "name": "Text",
+            "desc": "You're given a single piece of info (symbol, reading, meaning etc.) per question and must enter the request other piece of information."
+          },
+          "choice": {
+            "name": "Multiple Choice",
+            "desc": "You're given something for the given data and are presented with multiple answer options of which one is correct."
+          },
+          "match": {
+            "name": "Match",
+            "desc": "You're given several pieces of info with their answers and you must match them up correctly."
+          },
+          "audio": {
+            "name": "Audio",
+            "desc": "You're played an audio clip and must type or select the meaning of it."
+          },
+          "random": {
+            "name": "Random",
+            "desc": "You'll be given all question types shuffled randomly."
+          }
+        }
       }
     }
   },

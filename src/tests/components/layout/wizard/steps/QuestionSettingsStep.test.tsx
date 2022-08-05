@@ -3,6 +3,7 @@ import QuestionSettingsStep from "../../../../../components/layout/wizard/steps/
 import QuestionSettings from "../../../../../domain/session/settings/game/QuestionSettings";
 import QuestionType from "../../../../../domain/game/QuestionType";
 import { getValueLastCalledWith } from "../../../../Queries";
+import renderWithTranslation from "../../../../renderWithTranslation";
 
 const onSelectHandler = jest.fn();
 
@@ -12,7 +13,7 @@ test('Should render the question settings form', () => {
 });
 
 test('Changing a value in the form should call the onSelect event handler with the settings', () => {
-    const component = render(<QuestionSettingsStep onSelect={onSelectHandler} />);
+    const component = renderWithTranslation(<QuestionSettingsStep onSelect={onSelectHandler} />);
 
     fireEvent.click(component.getByText('Multiple Choice'));
 

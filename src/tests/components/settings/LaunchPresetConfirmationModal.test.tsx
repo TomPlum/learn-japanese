@@ -113,7 +113,7 @@ test('It should route to the play page and set the game and data settings in the
             quantity: 1,
             questionField: "learnable.field.kana.name",
             score: false,
-            type: "Text"
+            type: "text"
         },
         time: {
             countdown: false,
@@ -154,7 +154,7 @@ test('It should route to the play page and set the game and data settings in the
                 "quantity": 1,
                 "questionField": "learnable.field.kana.name",
                 "score": false,
-                "type": "Text"
+                "type": "text"
             },
             "time": {
                 "countdown": false,

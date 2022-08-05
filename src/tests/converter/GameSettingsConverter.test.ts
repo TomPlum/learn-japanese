@@ -5,7 +5,6 @@ import { TimeSettingsBuilder } from "../../domain/session/settings/game/TimeSett
 import { QuestionSettingsBuilder } from "../../domain/session/settings/game/QuestionSettings";
 import LearnableField from "../../domain/learn/LearnableField";
 import QuestionType from "../../domain/game/QuestionType";
-import { Kana } from "../../domain/kana/Kana";
 import GameSettingsConverter from "../../converter/GameSettingsConverter";
 import { GameConfigResponse } from "../../repository/PresetRepository";
 
@@ -67,7 +66,7 @@ describe("Game Settings Converter", () => {
                 question: {
                     cards: 4,
                     score: true,
-                    type: "Multiple Choice",
+                    type: "choice",
                     quantity: 150,
                     answerField: "learnable.field.romaji.name",
                     questionField: "learnable.field.kana.name",
@@ -97,7 +96,7 @@ describe("Game Settings Converter", () => {
                 question: {
                     cards: 4,
                     score: true,
-                    type: "Multiple Choice",
+                    type: "choice",
                     quantity: 150,
                     answerField: "learnable.field.romaji.name",
                     questionField: "learnable.field.kana.name",
@@ -198,7 +197,7 @@ describe("Game Settings Converter", () => {
                 question: {
                     cards: 4,
                     score: true,
-                    type: "Multiple Choice",
+                    type: "choice",
                     quantity: 150,
                     answerField: "learnable.field.romaji.name",
                     questionField: "learnable.field.kana.name",
@@ -228,7 +227,7 @@ describe("Game Settings Converter", () => {
                 question: {
                     cards: 4,
                     score: true,
-                    type: "Multiple Choice",
+                    type: "choice",
                     quantity: 150,
                     answerField: "learnable.field.romaji.name",
                     questionField: "learnable.field.kana.name",

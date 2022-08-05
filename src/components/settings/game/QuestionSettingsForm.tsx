@@ -102,7 +102,7 @@ const QuestionSettingsForm = forwardRef((props: QuestionSettingsFormProps, ref: 
                 </Col>
 
                 <Col xs={12} className={styles.descriptionWrapper}>
-                    <span className={styles.description}>{t(`${type.name.toLowerCase().replace(" ", "-")}-type-desc`)}</span>
+                    <span className={styles.description}>{t(`type.${type.name}.desc`)}</span>
                 </Col>
 
                 <Col className={styles.noGuttersRight}>
@@ -137,7 +137,7 @@ const QuestionSettingsForm = forwardRef((props: QuestionSettingsFormProps, ref: 
             {type === QuestionType.CHOICE &&
                 <Row className={styles.section}>
                     <Col xs={12}>
-                        <p className={styles.description}>You'll be shown {cards} answers to choose from.</p>
+                        <p className={styles.description}>{t("cards-quantity.desc", { quantity: cards })}</p>
                     </Col>
 
                     <Col className={styles.noGuttersRight}>

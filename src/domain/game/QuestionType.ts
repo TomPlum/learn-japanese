@@ -8,20 +8,20 @@ class QuestionType {
 
     public static fromName(name: string): QuestionType {
         switch (name) {
-            case "Text": return QuestionType.TEXT;
-            case "Multiple Choice": return QuestionType.CHOICE;
-            case "Audio": return QuestionType.AUDIO;
-            case "Match": return QuestionType.MATCH;
-            case "Random": return QuestionType.RANDOM;
+            case "text": return QuestionType.TEXT;
+            case "choice": return QuestionType.CHOICE;
+            case "audio": return QuestionType.AUDIO;
+            case "match": return QuestionType.MATCH;
+            case "random": return QuestionType.RANDOM;
             default: throw new Error(`Invalid QuestionType [${name}]`)
         }
     }
 
-    public static TEXT = new QuestionType("Text");
-    public static CHOICE = new QuestionType("Multiple Choice");
-    public static AUDIO = new QuestionType("Audio");
-    public static MATCH = new QuestionType("Match");
-    public static RANDOM = new QuestionType("Random");
+    public static TEXT = new QuestionType("text");
+    public static CHOICE = new QuestionType("choice");
+    public static AUDIO = new QuestionType("audio");
+    public static MATCH = new QuestionType("match");
+    public static RANDOM = new QuestionType("random");
 
     get name(): string {
         return this._name;

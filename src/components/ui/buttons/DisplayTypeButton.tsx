@@ -1,9 +1,9 @@
-import { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "react-bootstrap";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import QuestionType from "../../../domain/game/QuestionType";
 import styles from "../../../styles/sass/components/ui/buttons/DisplayTypeButton.module.scss";
+import { useTranslation } from "react-i18next";
 
 export interface DisplayTypeButtonProps {
     type: QuestionType;
@@ -12,26 +12,20 @@ export interface DisplayTypeButtonProps {
     onClick: (type: QuestionType) => void;
 }
 
-class DisplayTypeButton extends Component<DisplayTypeButtonProps> {
+const DisplayTypeButton = (props: DisplayTypeButtonProps) => {
 
-    constructor(props: Readonly<DisplayTypeButtonProps> | DisplayTypeButtonProps) {
-        super(props);
-        this.state = {
-            selected: false
-        }
-    }
+    const { type, selected, icon, onClick } = props;
 
-    render() {
-        const { type, selected, icon, onClick } = this.props;
-        const className = selected === type ? styles.selected : styles.notSelected;
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.question.type" });
 
-        return (
-            <Button block className={className} onClick={() => onClick(type)}>
-                <FontAwesomeIcon className={styles.icon} icon={icon} />
-                <p className={styles.name}>{type.name}</p>
-            </Button>
-        );
-    }
+    const className = selected === type ? styles.selected : styles.notSelected;
+
+    return (
+        <Button block className={className} onClick={() => onClick(type)}>
+            <FontAwesomeIcon className={styles.icon} icon={icon} />
+            <p className={styles.name}>{t(`${type.name}.name`)}</p>
+        </Button>
+    );
 }
 
 export default DisplayTypeButton;

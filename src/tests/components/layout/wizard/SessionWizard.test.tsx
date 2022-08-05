@@ -264,7 +264,7 @@ test('Clicking Start in the confirmation step for custom play should set the sel
             quantity: 1,
             questionField: "learnable.field.kanji.name",
             score: true,
-            type: "Multiple Choice"
+            type: "choice"
         },
         time: {
             countdown: true,
@@ -325,7 +325,7 @@ test('Clicking Start in the confirmation step for preset play should set the sel
             quantity: 1,
             questionField: "learnable.field.meaning.name",
             score: true,
-            type: "Multiple Choice"
+            type: "choice"
         },
         time: {
             countdown: false,

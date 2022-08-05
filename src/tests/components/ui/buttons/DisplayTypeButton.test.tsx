@@ -1,7 +1,8 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import DisplayTypeButton, { DisplayTypeButtonProps } from "../../../../components/ui/buttons/DisplayTypeButton";
 import QuestionType from "../../../../domain/game/QuestionType";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 const onClickHandler = jest.fn();
 
@@ -17,7 +18,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component  = render(<DisplayTypeButton {...props} />);
+    const component  = renderWithTranslation(<DisplayTypeButton {...props} />);
     return {
         button: component.getByText('Multiple Choice'),
         ...component
