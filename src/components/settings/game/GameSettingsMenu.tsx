@@ -33,7 +33,7 @@ export type SettingsFormHandle = {
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
     private readonly question: React.RefObject<SettingsFormHandle>;
     private readonly hints: React.RefObject<SettingsFormHandle>;
-    private readonly lives: React.RefObject<LifeSettingsForm>;
+    private readonly lives: React.RefObject<SettingsFormHandle>;
     private readonly time: React.RefObject<TimeSettingsForm>;
 
     constructor(props: GameSettingsMenuProps | Readonly<GameSettingsMenuProps>) {

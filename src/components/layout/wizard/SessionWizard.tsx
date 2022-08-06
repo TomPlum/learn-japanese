@@ -182,7 +182,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                 return {
                     icon: faHeartbeat,
                     iconClass: styles.livesIcon,
-                    name: "Life Settings",
+                    name: t("wizard.steps.life.title"),
                     body: <LifeSettingsStep onSelect={life => setSettings(settings.withLifeSettings(life))} />,
                     intermediate: true
                 }
