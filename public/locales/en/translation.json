@@ -129,8 +129,18 @@
       },
       "life": {
         "title": "Life Settings",
+        "enable": "Enable",
         "desc": "Configure the number of lives you start with. For an added challenge you can give yourself only a few, or unlimited if you're playing more casually.",
         "lives-desc": "Select the number of lives you want to start the game with. You can choose between 1 and 10. Disabling will give you infinite."
+      },
+      "time": {
+        "title": "Time Settings",
+        "desc": "Configure the style of timer you want for the game or disable it entirely.",
+        "timed": "Timed",
+        "countdown": "Countdown",
+        "timed-desc": "You'll simply be timed starting from 00:00 and the timer will stop when you finish the game or lose. Useful for speed-running certain topics to test your mastery.",
+        "countdown-desc": "You'll have a set number of seconds to answer each question. Failing to answer correctly in the given time will lose you a life. Answering correctly will reset the timer.",
+        "seconds-quantity": "Select the number of seconds per question below"
       }
     }
   },

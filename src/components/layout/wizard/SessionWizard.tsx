@@ -191,7 +191,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                 return {
                     icon: faStopwatch,
                     iconClass: styles.timeIcon,
-                    name: "Time Settings",
+                    name: t("wizard.steps.time.title"),
                     body: <TimeSettingsStep onSelect={time => setSettings(settings.withTimeSettings(time))} />,
                     intermediate: true
                 }

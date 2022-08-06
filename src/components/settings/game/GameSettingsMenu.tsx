@@ -34,7 +34,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     private readonly question: React.RefObject<SettingsFormHandle>;
     private readonly hints: React.RefObject<SettingsFormHandle>;
     private readonly lives: React.RefObject<SettingsFormHandle>;
-    private readonly time: React.RefObject<TimeSettingsForm>;
+    private readonly time: React.RefObject<SettingsFormHandle>;
 
     constructor(props: GameSettingsMenuProps | Readonly<GameSettingsMenuProps>) {
         super(props);

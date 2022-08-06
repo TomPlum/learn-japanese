@@ -47,8 +47,8 @@ const LifeSettingsForm = forwardRef((props: LifeSettingsFormProps, ref: Ref<Sett
                     </p>
 
                     <ToggleSwitch
-                        label="Enable"
                         enabled={enabled}
+                        label={t("enable")}
                         className={styles.check}
                         data-testid="enable-lives"
                         onChange={() => setEnabled(!enabled)}
