@@ -240,8 +240,16 @@
       "high-scores": {
         "title": "高得点",
         "more": "もっと見る",
+        "rank": "位",
         "leaderboard": "リーダーボード",
-        "score": "点数"
+        "score": "点数",
+        "names": {
+          "romaji-time-attack": "ローマ字時限",
+          "kanji-hardcore": "漢字ハードコア",
+          "verb-match": "動詞一致",
+          "adverbs": "副詞",
+          "hiragana-speed-run": "平仮名スピードラン"
+        }
       },
       "streak": {
         "streak": "日の連続",

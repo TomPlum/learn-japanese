@@ -23,11 +23,11 @@ const HighScoresCard = () => {
                 <DashboardCardHeader.Icon icon={faCog} />
             </DashboardCard.Header>
 
-            <DashboardCard.Body>
+            <DashboardCard.Body className={styles.body}>
                 <Table responsive hover className={styles.table}>
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th>{t("rank")}</th>
                         <th>{t("leaderboard")}</th>
                         <th>{t("score")}</th>
                     </tr>
@@ -35,27 +35,27 @@ const HighScoresCard = () => {
                     <tbody>
                     <tr>
                         <td>2</td>
-                        <td>Romaji Time Attack</td>
+                        <td>{t("names.romaji-time-attack")}</td>
                         <td>04:35</td>
                     </tr>
                     <tr>
                         <td>16</td>
-                        <td>Kanji Hardcore</td>
+                        <td>{t("names.kanji-hardcore")}</td>
                         <td>6420</td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>Verb Match</td>
+                        <td>{t("names.verb-match")}</td>
                         <td>3500</td>
                     </tr>
                     <tr>
                         <td>126</td>
-                        <td>Adverbs</td>
+                        <td>{t("names.adverbs")}</td>
                         <td>5000</td>
                     </tr>
                     <tr>
                         <td>5600</td>
-                        <td>Hiragana Speed Run</td>
+                        <td>{t("names.hiragana-speed-run")}</td>
                         <td>00:47</td>
                     </tr>
                     </tbody>

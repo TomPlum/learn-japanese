@@ -240,8 +240,16 @@
       "high-scores": {
         "title": "Highscores",
         "more": "See More",
+        "rank": "#",
         "leaderboard": "Leaderboard",
-        "score": "Score"
+        "score": "Score",
+        "names": {
+          "romaji-time-attack": "Rōmaji Time Attack",
+          "kanji-hardcore": "Kanji Hardcore",
+          "verb-match": "Verb Match",
+          "adverbs": "Adverbs",
+          "hiragana-speed-run": "Hiragana Speed Run"
+        }
       },
       "streak": {
         "streak": "Streak",
