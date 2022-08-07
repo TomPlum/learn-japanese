@@ -1,8 +1,9 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import KanaSettingsForm from "../../../../components/settings/data/KanaSettingsForm";
 import KanaSettings, { KanaSettingsBuilder } from "../../../../domain/session/settings/data/KanaSettings";
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 const onConfirmHandler = jest.fn();
 const onResetHandler = jest.fn();
@@ -21,7 +22,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<KanaSettingsForm {...props} />);
+    const component = renderWithTranslation(<KanaSettingsForm {...props} />);
     return {
         hiragana: component.getByTestId('hiragana'),
         katakana: component.getByTestId('katakana'),

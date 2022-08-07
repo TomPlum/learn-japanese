@@ -5,6 +5,7 @@ import ToggleSwitch from "../../ui/ToggleSwitch";
 import styles from "../../../styles/sass/components/settings/data/KanaSettingsForm.module.scss";
 import QuantityField from "../../ui/fields/QuantityField";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const KanaSettingsFormBody = (props: DataSettingsStepFormProps<KanaSettings>) => {
 
@@ -16,6 +17,7 @@ const KanaSettingsFormBody = (props: DataSettingsStepFormProps<KanaSettings>) =>
     const [katakana, setKatakana] = useState(defaultState.katakana);
     const [diagraphs, setDiagraphs] = useState(defaultState.diagraphs);
     const [quantity, setQuantity] = useState<number | undefined>(defaultState.quantity);
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.data.kana" });
 
     useEffect(() => {
         const settings = new KanaSettingsBuilder()
@@ -38,47 +40,41 @@ const KanaSettingsFormBody = (props: DataSettingsStepFormProps<KanaSettings>) =>
             <Row>
                 <Col>
                     <ToggleSwitch
-                        label="Hiragana"
                         enabled={hiragana}
                         data-testid="hiragana"
                         className={styles.switch}
+                        label={t("hiragana-label")}
                         disabled={hiragana && !katakana}
                         onChange={() => setHiragana(!hiragana)}
                     />
 
                     <p className={hiragana ? styles.description : styles.disabled}>
-                        Hiragana is the main syllabary that defines all the sounds that make up the spoken Japanese
-                        language. It is also used in the written language for Japanese words and furigana. These
-                        characters are quite cursive in nature.
+                        {t("hiragana-desc")}
                     </p>
 
                     <ToggleSwitch
-                        label="Katakana"
                         enabled={katakana}
-                        className={styles.switch}
-                        disabled={katakana && !hiragana}
                         data-testid="katakana"
+                        className={styles.switch}
+                        label={t("katakana-label")}
+                        disabled={katakana && !hiragana}
                         onChange={() => setKatakana(!katakana)}
                     />
 
                     <p className={katakana ? styles.description : styles.disabled}>
-                        Katakana is a mirror of the aforementioned Hiragana syllabary. There is a 1 to 1 mapping
-                        of each kana that is pronounced in the same way. They are written differently and are
-                        generally only used for loan words and onomatopoeia. These characters are much more angular
-                        and linear than Hiragana.
+                        {t("katakana-desc")}
                     </p>
 
                     <ToggleSwitch
-                        label="Diagraphs"
                         enabled={diagraphs}
                         className={styles.switch}
                         data-testid="diagraphs"
+                        label={t("diagraphs-label")}
                         onChange={() => setDiagraphs(!diagraphs)}
                     />
 
                     <p className={diagraphs ? styles.description : styles.disabled}>
-                        Diagraphs are combinations of two kana. Both syllabaries have the same diagraphs in their
-                        respective kana.
+                        {t("diagraphs-desc")}
                     </p>
 
                     <QuantityField

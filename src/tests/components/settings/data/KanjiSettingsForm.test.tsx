@@ -1,9 +1,10 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import KanjiSettingsForm from "../../../../components/settings/data/KanjiSettingsForm";
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade";
 import KanjiSettings, { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings";
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 const onConfirmHandler = jest.fn();
 const onResetHandler = jest.fn();
@@ -22,7 +23,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<KanjiSettingsForm {...props} />);
+    const component = renderWithTranslation(<KanjiSettingsForm {...props} />);
     return {
         grade1: component.getByText('Grade 1'),
         grade2: component.getByText('Grade 2'),

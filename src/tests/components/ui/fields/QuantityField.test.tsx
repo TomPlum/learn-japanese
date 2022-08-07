@@ -1,5 +1,6 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import QuantityField, { QuantityFieldProps } from "../../../../components/ui/fields/QuantityField";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 let props: QuantityFieldProps;
 
@@ -16,7 +17,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<QuantityField {...props} />);
+    const component = renderWithTranslation(<QuantityField {...props} />);
     return {
         field: component.getByPlaceholderText('Quantity'),
         ...component

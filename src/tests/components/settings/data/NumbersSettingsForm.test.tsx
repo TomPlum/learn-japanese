@@ -1,9 +1,10 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import NumbersSettingsForm from "../../../../components/settings/data/NumbersSettingsForm";
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu";
 import NumbersSettings, { NumbersSettingsBuilder } from "../../../../domain/session/settings/data/NumbersSettings";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { getValueLastCalledWith } from "../../../Queries";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 const onConfirmHandler = jest.fn();
 const onResetHandler = jest.fn();
@@ -13,7 +14,7 @@ const isValidHandler = jest.fn();
 let props: DataSettingsMenuProps<NumbersSettings>;
 
 const setup = () => {
-    const component = render(<NumbersSettingsForm {...props} />);
+    const component = renderWithTranslation(<NumbersSettingsForm {...props} />);
     return {
         numbers: component.getByTestId('numbers'),
         counters: component.getByTestId('counters'),

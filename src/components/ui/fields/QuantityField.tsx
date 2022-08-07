@@ -1,8 +1,8 @@
-import { Component } from "react";
 import { Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBalanceScale } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../styles/sass/components/ui/fields/QuantityField.module.scss";
+import { useTranslation } from "react-i18next";
 
 export interface QuantityFieldProps {
     value?: number;
@@ -11,39 +11,38 @@ export interface QuantityFieldProps {
     onChange?: (value: number) => void;
 }
 
-class QuantityField extends Component<QuantityFieldProps> {
-    render() {
-        const { value, className, onChange } = this.props;
+const QuantityField = (props: QuantityFieldProps) => {
+    const { value, isValid, className, onChange } = props;
 
-        return (
-            <InputGroup hasValidation>
-                <InputGroup.Prepend>
-                    <InputGroup.Text>
-                        <FontAwesomeIcon icon={faBalanceScale} className={styles.icon} fixedWidth />
-                        <span className={styles.description}>Quantity</span>
-                    </InputGroup.Text>
-                </InputGroup.Prepend>
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.data.fields.quantity" });
 
-                <Form.Control
-                    required
-                    type="number"
-                    value={value}
-                    placeholder="Quantity"
-                    isValid={this.isValid()}
-                    isInvalid={!this.isValid()}
-                    className={[className, styles.input].join(" ")}
-                    onChange={(e) => onChange?.(Number(e.target.value))}
-                />
-            </InputGroup>
-        );
-    }
-
-    private isValid = (): boolean => {
-        const { value, isValid } = this.props;
+    const isValidNumber = (): boolean => {
         const isCustomValid = isValid?.() ?? true;
         const isValidNumber = !!value && /^[0-9]+$/.test(value.toString());
         return isCustomValid && isValidNumber;
     }
+
+    return (
+        <InputGroup hasValidation>
+            <InputGroup.Prepend>
+                <InputGroup.Text>
+                    <FontAwesomeIcon icon={faBalanceScale} className={styles.icon} fixedWidth />
+                    <span className={styles.description}>{t("label")}</span>
+                </InputGroup.Text>
+            </InputGroup.Prepend>
+
+            <Form.Control
+                required
+                type="number"
+                value={value}
+                isValid={isValidNumber()}
+                isInvalid={!isValidNumber()}
+                placeholder={t("placeholder")}
+                className={[className, styles.input].join(" ")}
+                onChange={(e) => onChange?.(Number(e.target.value))}
+            />
+        </InputGroup>
+    );
 }
 
 export default QuantityField;
