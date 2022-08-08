@@ -27,6 +27,7 @@ import wrong from "../../sound/wrong.wav";
 import VolumeController from "../ui/VolumeController";
 import AnswerFilterRegistry from "../../domain/session/AnswerFilterRegistry";
 import styles from "../../styles/sass/components/game/MemoryGame.module.scss";
+import { useTranslation } from "react-i18next";
 
 export interface GameQuestionProps {
     hidden: boolean;
@@ -80,22 +81,23 @@ const MemoryGame = (props: MemoryGameProps) => {
     }
 
     let volume: number = 0.7;
-    const [firstQuestion, firstRemainingQuestions] = getNextQuestion(data);
+    const { t } = useTranslation("translation", { keyPrefix: "memory-game" });
 
-    const [currentQuestion, setCurrentQuestion] = useState<Learnable[]>(firstQuestion);
-    const [remainingQuestions, setRemainingQuestions] = useState<Learnable[]>(firstRemainingQuestions);
-    const [correctAnswers, setCorrectAnswers] = useState(new Set<Learnable>());
-    const [wrongAnswers, setWrongAnswers] = useState<Learnable[]>([]);
-    const [hasExhaustedQuestions, setHasExhaustedQuestions] = useState(false);
-    const [paused, setPaused] = useState(false);
-    const [lives, setLives] = useState(settings.lives.quantity);
-    const [hints, setHints] = useState(settings.hints.quantity);
-    const [failedToAnswer, setFailedToAnswer] = useState(0);
-    const [hasValidAnswer, setHasValidAnswer] = useState(false);
-    const [hasUsedHintThisQuestion, setHasUsedHintThisQuestion] = useState(false);
-    const [isQuitting, setIsQuitting] = useState(false);
     const [score, setScore] = useState(0);
     const [streak, setStreak] = useState(0);
+    const [paused, setPaused] = useState(false);
+    const [isQuitting, setIsQuitting] = useState(false);
+    const [failedToAnswer, setFailedToAnswer] = useState(0);
+    const [lives, setLives] = useState(settings.lives.quantity);
+    const [hints, setHints] = useState(settings.hints.quantity);
+    const [hasValidAnswer, setHasValidAnswer] = useState(false);
+    const [wrongAnswers, setWrongAnswers] = useState<Learnable[]>([]);
+    const [firstQuestion, firstRemainingQuestions] = getNextQuestion(data);
+    const [hasExhaustedQuestions, setHasExhaustedQuestions] = useState(false);
+    const [correctAnswers, setCorrectAnswers] = useState(new Set<Learnable>());
+    const [hasUsedHintThisQuestion, setHasUsedHintThisQuestion] = useState(false);
+    const [currentQuestion, setCurrentQuestion] = useState<Learnable[]>(firstQuestion);
+    const [remainingQuestions, setRemainingQuestions] = useState<Learnable[]>(firstRemainingQuestions);
 
     useEffect(() => {
         return () => {
@@ -104,7 +106,6 @@ const MemoryGame = (props: MemoryGameProps) => {
     }, []);
 
     useEffect(() => {
-        // Listens for a game failure. If we're out of lives, call onFinish().
         if (settings.lives.enabled && lives === 0) {
             onFinish(getGameResult(false, GameFinishReason.NO_LIVES_REMAINING));
         }
@@ -340,9 +341,9 @@ const MemoryGame = (props: MemoryGameProps) => {
             {isQuitting && (
                 <ConfirmModal
                     onConfirm={onQuit}
+                    body={t("quit-body")}
+                    title={t("quit-title")}
                     onDismiss={onDismissQuitModal}
-                    body={Environment.variable("QUIT_BODY")}
-                    title={Environment.variable("QUIT_TITLE")}
                 />
             )}
 

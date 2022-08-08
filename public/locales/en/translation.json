@@ -519,5 +519,9 @@
         "desc": "A random selection of any of the available data fields."
       }
     }
+  },
+  "memory-game": {
+    "quit-title": "Are you sure you want to quit?",
+    "quit-body": "You'll lose your current progress, but you'll see the results of your game thus far."
   }
 }

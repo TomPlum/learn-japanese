@@ -933,12 +933,10 @@ test('Setting the game settings score property to false should not render the sc
 });
 
 test('Clicking the quit button should render the confirmation modal', () => {
-    environment.mockReturnValueOnce("Are you sure you want to quit?");
-    environment.mockReturnValueOnce("This is the modal body.");
     const { quit } = setup();
     fireEvent.click(quit);
     expect(screen.getByText('Are you sure you want to quit?')).toBeInTheDocument();
-    expect(screen.getByText('This is the modal body.')).toBeInTheDocument();
+    expect(screen.getByText('You\'ll lose your current progress, but you\'ll see the results of your game thus far.')).toBeInTheDocument();
 });
 
 
