@@ -16,7 +16,8 @@
       "nickname": "ニックネーム"
     },
     "login": {
-      "no-account": "私はアカウントを持っていません"
+      "no-account": "私はアカウントを持っていません",
+      "session-expired": "セッションの有効期限が切れました。もう一度ログインしてください。"
     },
     "register": {
       "already-registered": "すでにアカウントを持っています",

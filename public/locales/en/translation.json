@@ -16,7 +16,8 @@
       "nickname": "Nickname"
     },
     "login": {
-      "no-account": "I don't have an account"
+      "no-account": "I don't have an account",
+      "session-expired": "Your session has expired. Please log-in again."
     },
     "register": {
       "already-registered": "I already have an account",
