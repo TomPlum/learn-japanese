@@ -1,8 +1,9 @@
 import NavigationButton, { ItemProps, NavigationButtonProps } from "../../../components/ui/NavigationButton";
-import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import renderWithTranslation from "../../renderWithTranslation";
+import textLoading from "../../../components/ui/loading/TextLoading";
 
 const onShowHandler = jest.fn();
 const onHideHandler = jest.fn();
@@ -20,6 +21,7 @@ beforeEach(() => {
         loading: false,
         icon: faSmile,
         width: 150,
+        textLoading: false,
         containerClass: "myContainerClass",
         className: "myClassName",
         menuClass: "myMenuClassName",
@@ -58,7 +60,7 @@ const setup = () => {
     );
 
     return {
-        button: component.getByText('Test Button').parentElement!,
+        button: component.getByTestId(`${buttonProps.id}-nav-link`),
         ...component
     }
 }
@@ -231,7 +233,7 @@ test('It should disable the search field if enabled and loading is true', async 
     expect(screen.getByPlaceholderText('Search')).toBeDisabled();
 });
 
-test("Omitted the ID property should set the popover ID to a default value", async () => {
+test("Omitting the ID property should set the popover ID to a default value", async () => {
     buttonProps.id = undefined;
     const { button } = setup();
 
@@ -240,4 +242,48 @@ test("Omitted the ID property should set the popover ID to a default value", asy
     expect(await screen.findByText('My Link')).toBeInTheDocument();
 
     expect(screen.getByTestId("undefined-menu")).toHaveAttribute("id", "nav-btn");
+});
+
+test('Should render the text loading component in place of the right button text if textLoading is passed as true', () => {
+   buttonProps.textLoading = true;
+   buttonProps.textPlacement = "right";
+   buttonProps.text = "Test Button";
+
+   const { button } = setup();
+
+   expect(within(button).getByTestId('text-loading')).toBeInTheDocument();
+   expect(within(button).queryByText('Test Button')).not.toBeInTheDocument();
+});
+
+test('Should render the text loading component in place of the bottom button text if textLoading is passed as true', () => {
+   buttonProps.textLoading = true;
+   buttonProps.textPlacement = "bottom";
+   buttonProps.text = "Test Button";
+
+   const { button } = setup();
+
+   expect(within(button).getByTestId('text-loading')).toBeInTheDocument();
+   expect(within(button).queryByText('Test Button')).not.toBeInTheDocument();
+});
+
+test('Should render the right button text if textLoading is not passed', () => {
+    buttonProps.textLoading = undefined;
+    buttonProps.textPlacement = "right";
+    buttonProps.text = "Test Button";
+
+    const { button } = setup();
+
+    expect(within(button).getByText('Test Button')).toBeInTheDocument();
+    expect(within(button).queryByTestId('text-loading')).not.toBeInTheDocument();
+});
+
+test('Should render the bottom button text if textLoading is not passed', () => {
+    buttonProps.textLoading = undefined;
+    buttonProps.textPlacement = "bottom";
+    buttonProps.text = "Test Button";
+
+    const { button } = setup();
+
+    expect(within(button).getByText('Test Button')).toBeInTheDocument();
+    expect(within(button).queryByTestId('text-loading')).not.toBeInTheDocument();
 });

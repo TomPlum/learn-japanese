@@ -1,26 +1,14 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import HelpButton from "../../../../components/ui/buttons/HelpButton";
-import { when } from "jest-when";
-
-const mockTranslation = jest.fn();
-jest.mock('react-i18next', () => ({
-    useTranslation: () => { return { t: mockTranslation, } }
-}));
-
+import renderWithTranslation from "../../../renderWithTranslation";
 
 const setup = () => {
-    const component = render(<HelpButton />);
+    const component = renderWithTranslation(<HelpButton />);
     return {
         button: component.getByTestId('help-button'),
         ...component
     }
 }
-
-beforeEach(() => {
-    when(mockTranslation).calledWith("navigation.button.help").mockReturnValue("Help");
-    when(mockTranslation).calledWith("navigation.button.sm2").mockReturnValue("SuperMemo2 Algorithm");
-    when(mockTranslation).calledWith("navigation.button.faq").mockReturnValue("Frequently Asked Questions");
-});
 
 test('Should render the help text', async () => {
     setup();

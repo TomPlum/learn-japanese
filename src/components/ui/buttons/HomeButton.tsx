@@ -10,14 +10,15 @@ export interface HomeButtonProps {
 
 const HomeButton = (props: HomeButtonProps) => {
 
-    const { t } = useTranslation();
+    const { t, ready } = useTranslation();
 
     return (
         <NavigationButton
+            href="/home"
             icon={faHome}
             disableDropdown
             id="home-button"
-            href="/home"
+            textLoading={!ready}
             textPlacement="right"
             disabled={props.disabled}
             iconClass={menuStyles.icon}

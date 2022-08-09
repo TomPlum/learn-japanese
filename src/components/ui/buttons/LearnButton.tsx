@@ -7,11 +7,12 @@ import { useTranslation } from "react-i18next";
 
 const LearnButton = () => {
 
-    const { t } = useTranslation();
+    const { t, ready } = useTranslation();
 
     return (
         <NavigationButton
             width={250}
+            textLoading={!ready}
             textPlacement="right"
             icon={faGraduationCap}
             iconClass={menuStyles.icon}

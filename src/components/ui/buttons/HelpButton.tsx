@@ -10,13 +10,14 @@ export interface HelpButtonProps {
 
 const HelpButton = (props: HelpButtonProps) => {
 
-    const { t } = useTranslation();
+    const { t, ready } = useTranslation();
 
     return (
         <NavigationButton
             width={250}
             id="help-button"
             icon={faInfoCircle}
+            textLoading={!ready}
             textPlacement="right"
             iconClass={menuStyles.icon}
             className={props.className}

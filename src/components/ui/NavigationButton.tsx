@@ -8,11 +8,13 @@ import ConditionalWrapper from "./ConditionalWrapper";
 import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
 import LoadingSpinner from "./loading/LoadingSpinner";
 import { useTranslation } from "react-i18next";
+import TextLoading from "./loading/TextLoading";
 
 export interface NavigationButtonProps {
     id?: string;
     text?: string;
     loading?: boolean;
+    textLoading?: boolean;
     icon: IconDefinition;
     width?: number;
     textPlacement?: 'bottom' | 'left' | 'right';
@@ -73,7 +75,7 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
 const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
 
     const { text, icon, width, textPlacement, className, iconClass, textClass, disabled, disableDropdown, id, href,
-        searchable, showItemQuantity, containerClass, loading, onClick, onShow, onHide, children } = props;
+        searchable, showItemQuantity, containerClass, loading, textLoading, onClick, onShow, onHide, children } = props;
 
     const { t } = useTranslation();
     const [show, setShow] = useState(false);
@@ -122,7 +124,9 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
             <Nav.Link className={linkClassName} onClick={handleClick} disabled={disabled} data-testid={id + "-nav-link"} href={href}>
                <div className={styles.button}>
                    {isLeft && (
-                       <span className={textClasses.concat(styles.left).join(" ")}>{text}</span>
+                       <TextLoading active={textLoading ?? false}>
+                           <span className={textClasses.concat(styles.left).join(" ")}>{text}</span>
+                       </TextLoading>
                    )}
 
                    <div ref={!text || isLeft || isRight ? targetRef : undefined}>
@@ -130,11 +134,15 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                    </div>
 
                    {isRight && (
-                       <span className={textClasses.concat(styles.right).join(" ")}>{text}</span>
+                       <TextLoading active={textLoading ?? false}>
+                           <span className={textClasses.concat(styles.right).join(" ")}>{text}</span>
+                       </TextLoading>
                    )}
 
                    {textPlacement === "bottom" && (
-                       <span ref={targetRef} className={textClasses.join(" ")}>{text}</span>
+                       <TextLoading active={textLoading ?? false}>
+                           <span ref={targetRef} className={textClasses.join(" ")}>{text}</span>
+                       </TextLoading>
                    )}
                </div>
             </Nav.Link>
