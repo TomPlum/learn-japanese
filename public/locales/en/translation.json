@@ -158,6 +158,11 @@
           "diagraphs-label": "Diagraphs",
           "diagraphs-desc": "Diagraphs are combinations of two kana. Both syllabaries have the same diagraphs in their respective kana."
         }
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "login-message": "You must be logged in to save.",
+        "save-preset": "Save Preset"
       }
     }
   },

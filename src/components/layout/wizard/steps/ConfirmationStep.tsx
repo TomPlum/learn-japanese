@@ -8,6 +8,7 @@ import { WizardStep } from "../SessionWizard";
 import SessionSettingsSummary from "../../../settings/SessionSettingsSummary";
 import { useUserSelector } from "../../../../hooks";
 import HoverMessage from "../../../ui/HoverMessage";
+import { useTranslation } from "react-i18next";
 
 export interface ConfirmationStepProps {
     settings: SessionSettings;
@@ -19,6 +20,7 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
 
     const user = useUserSelector(state => state.user.user);
 
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.confirmation" });
     const [inSavePresetForm, setInSavePresetForm] = useState(false);
     const [showSave, setShowSave] = useState(true);
 
@@ -38,10 +40,10 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
 
             <Accordion>
                 {showSave && (
-                    <HoverMessage message="You must be logged in to save." show={!user} id="save-preset-hover">
+                    <HoverMessage message={t("login-message")} show={!user} id="save-preset-hover">
                         <Accordion.Toggle eventKey="save" as={Button} onClick={handleClickSave} variant="info" disabled={!user}>
                             <FontAwesomeIcon icon={faDownload} fixedWidth />
-                            <span>Save Preset</span>
+                            <span>{t("save-preset")}</span>
                         </Accordion.Toggle>
                     </HoverMessage>
                 )}

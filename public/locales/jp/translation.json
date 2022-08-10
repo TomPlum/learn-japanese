@@ -158,6 +158,11 @@
           "diagraphs-label": "ダイグラフ",
           "diagraphs-desc": "ダイアグラフは 2 つの仮名の組み合わせです。両方の音節は、それぞれの仮名に同じダイアグラフを持っています。"
         }
+      },
+      "confirmation": {
+        "title": "確認",
+        "login-message": "保存するにはログインする必要があります。",
+        "save-preset": "プリセットを保存"
       }
     }
   },

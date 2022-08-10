@@ -7,6 +7,7 @@ import renderReduxConsumer from "../../../../renderReduxConsumer";
 import { clearUser, setUser } from "../../../../../slices/UserSlice";
 import { store } from "../../../../../store";
 import { testUser } from "../../../../../setupTests";
+import renderTranslatedReduxConsumer from "../../../../renderTranslatedReduxConsumer";
 
 const onSelectStageHandler = jest.fn();
 
@@ -92,8 +93,7 @@ test('Clicking the save button in the save preset form should hide the form and 
 
 test('Hovering over the save button when there is no user in context should render a message', async () => {
     store.dispatch(clearUser());
-    renderReduxConsumer(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
-
+    renderTranslatedReduxConsumer(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />);
     fireEvent.mouseOver(screen.getByText('Save Preset'));
     expect(await screen.findByText('You must be logged in to save.')).toBeInTheDocument();
 });

@@ -209,7 +209,7 @@ const SessionWizard = (props: SessionWizardProps) => {
                 return {
                     icon: faCheckCircle,
                     iconClass: styles.confirmIcon,
-                    name: "Confirmation",
+                    name: t("wizard.steps.confirmation.title"),
                     body: (
                         mode === AppMode.PLAY ? (
                             <ConfirmationStep
