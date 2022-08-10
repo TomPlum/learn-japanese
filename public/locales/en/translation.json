@@ -291,6 +291,32 @@
       }
     }
   },
+  "settings": {
+    "modal": {
+      "general": {
+        "heading": "General Settings",
+        "desc": "General settings for common elements and actions around the app.",
+        "activity-feed": {
+          "heading": "Activity Feed",
+          "desc": "Set the number of events to display in the activity feed card by default.",
+          "options": {
+            "three": {
+              "name": "3",
+              "value": 3
+            },
+            "five": {
+              "name": "5",
+              "value": 5
+            },
+            "eight": {
+              "name": "8",
+              "value": 8
+            }
+          }
+        }
+      }
+    }
+  },
   "action": {
     "edit": "Edit",
     "refresh": "Refresh",

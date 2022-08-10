@@ -291,6 +291,32 @@
       }
     }
   },
+  "settings": {
+    "modal": {
+      "general": {
+        "heading": "一般設定",
+        "desc": "アプリに関する一般的な要素とアクションの一般設定。",
+        "activity-feed": {
+          "heading": "アクティビティフィード",
+          "desc": "デフォルトでアクティビティ フィード カードに表示するイベントの数を設定します。",
+          "options": {
+            "three": {
+              "name": "三",
+              "value": 3
+            },
+            "five": {
+              "name": "五",
+              "value": 5
+            },
+            "eight": {
+              "name": "八",
+              "value": 8
+            }
+          }
+        }
+      }
+    }
+  },
   "action": {
     "edit": "編集",
     "refresh": "リロード",

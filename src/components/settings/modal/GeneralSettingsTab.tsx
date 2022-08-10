@@ -3,28 +3,38 @@ import styles from "../../../styles/sass/components/settings/modal/InterfaceSett
 import SettingsDropdown from "./SettingsDropdown";
 import { faRss } from "@fortawesome/free-solid-svg-icons";
 import { Preference } from "../../../domain/user/Preference";
+import { useTranslation } from "react-i18next";
 
 const GeneralSettingsTab = () => {
+
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.general" });
+
     return (
         <div data-testid="general-settings-tab">
-            <SettingsTabTitle
-                title="General Settings"
-                description="General settings for common elements and actions around the app."
-            />
+            <SettingsTabTitle title={t("heading")} description={t("desc")} />
 
             <div className={styles.section}>
-                <p className={styles.heading}>Activity Feed</p>
+                <p className={styles.heading}>{t("activity-feed.heading")}</p>
                 <p className={styles.text}>
-                    Set the number of events to display in the activity feed card by default.
+                    {t("activity-feed.desc")}
                 </p>
                 <SettingsDropdown
                     buttonIcon={faRss}
                     id="general-settings-activity-selector"
                     preference={Preference.ACTIVITY_FEED_QUANTITY}
                     options={[
-                        { name: '3' },
-                        { name: '5' },
-                        { name: '8' }
+                        {
+                            name: t("activity-feed.options.three.name"),
+                            value: t("activity-feed.options.three.value")
+                        },
+                        {
+                            name: t("activity-feed.options.five.name"),
+                            value: t("activity-feed.options.five.value")
+                        },
+                        {
+                            name: t("activity-feed.options.eight.name"),
+                            value: t("activity-feed.options.five.value")
+                        }
                     ]}
                 />
             </div>

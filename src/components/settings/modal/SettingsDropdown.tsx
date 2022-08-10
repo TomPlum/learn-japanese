@@ -11,6 +11,7 @@ import { setPreference } from "../../../slices/UserSlice";
 export interface SettingsDropdownOption {
     style?: {};
     name: string;
+    value?: string;
     className?: string;
     icon?: IconDefinition;
 }
@@ -47,7 +48,7 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
         }
     }
 
-    const getSelectedPreferenceValue = () => options.find(it => it.name === getUserPreferenceValue()?.toString()) ?? { name: "Unknown" };
+    const getSelectedPreferenceValue = () => options.find(it => it.value ?? it.name === getUserPreferenceValue()?.toString()) ?? { name: "Unknown" };
 
     const selected = getSelectedPreferenceValue();
 
@@ -59,10 +60,12 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
         setShow(false);
         setUpdating(true);
 
-        service.updatePreferences([{ preference, value: option.name }]).then(response => {
+        const value = option.value ?? option.name;
+
+        service.updatePreferences([{ preference, value: value }]).then(response => {
             if (response.success) {
-                onChange?.(option.name);
-                userDispatch(setPreference({ preference, value: option.name }));
+                onChange?.(value);
+                userDispatch(setPreference({ preference, value: value }));
             } else {
                 handleUpdateError(response);
             }

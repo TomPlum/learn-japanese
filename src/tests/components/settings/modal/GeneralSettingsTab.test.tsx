@@ -1,9 +1,9 @@
-import renderReduxConsumer from "../../../renderReduxConsumer";
 import GeneralSettingsTab from "../../../../components/settings/modal/GeneralSettingsTab";
 import { fireEvent, screen } from "@testing-library/react";
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 test('Should render the activity feed quantity settings dropdown', async () => {
-    const component = renderReduxConsumer(<GeneralSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<GeneralSettingsTab />);
 
     fireEvent.click(component.getByTestId('general-settings-activity-selector'));
 
