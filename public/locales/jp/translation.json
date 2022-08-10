@@ -37,6 +37,14 @@
         "special-char": "パスワードには少なくとも 1 つの特殊文字が含まれている必要があります。",
         "length": "パスワードは 8 ～ 36 文字 (両端を含む) にする必要があります。"
       }
+    },
+    "custom-preset": {
+      "title": "プリセットの詳細",
+      "failed-to-save": "プリセットの保存に失敗しました。",
+      "generic-error": "プリセットの保存中にエラーが発生しました。",
+      "success-message": "「{{name}}」を保存しました",
+      "change-icon": "アイコンの変更",
+      "default-preset-name": "私のプリセット"
     }
   },
   "navigation": {

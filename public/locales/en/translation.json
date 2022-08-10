@@ -37,6 +37,14 @@
         "special-char": "Password must contain at least one special character.",
         "length": "Password must be between 8 and 36 characters (inclusive)."
       }
+    },
+    "custom-preset": {
+      "title": "Preset Details",
+      "failed-to-save": "Failed to save preset.",
+      "generic-error": "An error occurred while saving your preset.",
+      "success-message": "Saved \"{{name}}\" successfully.",
+      "change-icon": "Change Icon",
+      "default-preset-name": "My Preset"
     }
   },
   "navigation": {

@@ -1,8 +1,9 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import CustomPresetForm, { CustomPresetFormProps } from "../../../../../components/layout/wizard/form/CustomPresetForm";
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings";
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
 import KanjiSettings from "../../../../../domain/session/settings/data/KanjiSettings";
+import renderWithTranslation from "../../../../renderWithTranslation";
 
 const mockPresetService = jest.fn();
 jest.mock("../../../../../service/PresetService", () => {
@@ -16,7 +17,7 @@ const onCancelHandler = jest.fn();
 let props: CustomPresetFormProps;
 
 const setup = () => {
-    const component = render(<CustomPresetForm {...props} />);
+    const component = renderWithTranslation(<CustomPresetForm {...props} />);
     return {
         icon: component.getByTestId('icon-picker-selected'),
         name: component.getByText('My Preset'),

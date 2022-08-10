@@ -7,6 +7,7 @@ import { SessionSettings } from "../../../../domain/session/settings/SessionSett
 import IconPicker from "../../../ui/menu/icon/IconPicker";
 import { CustomIcon } from "../../../../domain/Icon";
 import PresetService from "../../../../service/PresetService";
+import { useTranslation } from "react-i18next";
 
 export interface CustomPresetFormProps {
     settings: SessionSettings;
@@ -27,6 +28,8 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     const [icon, setIcon] = useState<CustomIcon>("FaRocket");
     const [colour, setColour] = useState("#FFFFFF");
     const [editingName, setEditingName] = useState(false);
+    const { t } = useTranslation("translation", { keyPrefix: "forms.custom-preset" });
+    const actions = useTranslation("translation", { keyPrefix: "action" }).t;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value);
@@ -43,11 +46,11 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
                 if (response.error) {
                     setError(response.error);
                 } else {
-                    setError("Failed to save preset.");
+                    setError(t("failed-to-save"));
                 }
             }
         }).catch(() => {
-            setError("An error occurred while saving your preset.");
+            setError(t("generic-error"));
         }).finally(() => {
             setLoading(false);
         });
@@ -70,7 +73,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
             {success && (
                 <Alert variant="success">
                     <FontAwesomeIcon icon={faCheckCircle} fixedWidth />
-                    <span>{` Saved "${name}" successfully.`}</span>
+                    <span>{" "}{t("success-message", { name: name })}</span>
                 </Alert>
             )}
 
@@ -80,7 +83,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
                         <Form.Group as={Col} style={{ margin: 0 }}>
                             <Form.Label>
                                 <FontAwesomeIcon icon={faPencilAlt} fixedWidth/>
-                                <span>{" Preset Details"}</span>
+                                <span>{" "}{t("title")}</span>
                             </Form.Label>
                         </Form.Group>
                     </Form.Row>
@@ -88,7 +91,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <div className={styles.preview}>
-                                <div className={styles.iconSurface} title="Change Icon">
+                                <div className={styles.iconSurface} title={t("change-icon")}>
                                     <IconPicker
                                         onSelect={handleIconChange}
                                         className={styles.iconPicker}
@@ -97,7 +100,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
                                 <div className={!editingName ? styles.inputWrapper : ""} onClick={() => setEditingName(true)}>
                                     {!editingName && (
                                         <span className={styles.name}>
-                                            {name === "" ? "My Preset" : name}
+                                            {name === "" ? t("default-preset-name") : name}
                                         </span>
                                     )}
 
@@ -106,9 +109,9 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
                                             autoFocus
                                             value={name}
                                             onChange={handleChange}
-                                            placeholder="My Preset"
                                             className={styles.input}
                                             onBlur={() => setEditingName(false)}
+                                            placeholder={t("default-preset-name")}
                                         />
                                     )}
                                 </div>
@@ -118,12 +121,12 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
                         <Form.Group as={Col} className={styles.buttonContainer}>
                             <Button variant="primary" className={styles.button} disabled={disableSave} onClick={handleSave}>
                                 <FontAwesomeIcon icon={saveIcon} spin={loading} fixedWidth className={styles.icon}/>
-                                <span>Save</span>
+                                <span>{actions("save")}</span>
                             </Button>
 
                             <Button variant="danger" onClick={onCancel} className={styles.button} disabled={loading}>
                                 <FontAwesomeIcon fixedWidth icon={faTimes} className={styles.icon}/>
-                                <span>Cancel</span>
+                                <span>{actions("cancel")}</span>
                             </Button>
                         </Form.Group>
                     </Form.Row>
