@@ -3,51 +3,42 @@ import styles from "../../../styles/sass/components/settings/modal/LearnSettings
 import { faCopy, faFont } from "@fortawesome/free-solid-svg-icons";
 import SettingsDropdown from "./SettingsDropdown";
 import { Preference } from "../../../domain/user/Preference";
+import { useTranslation } from "react-i18next";
 
 const LearnSettingsTab = () => {
+
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.learn" });
 
     return (
         <div data-testid="learn-settings-tab">
             <SettingsTabTitle
-                title="Learn Settings"
-                description="Configure settings related to learning Japanese."
+                title={t("heading")}
+                description={t("desc")}
             />
 
             <div className={styles.section}>
-                <p className={styles.heading}>Flash Cards Per Day</p>
+                <p className={styles.heading}>{t("flash-cards.heading")}</p>
                 <p className={styles.text}>
-                    Set the number of new flash cards you wish to see per day. New cards will only be issued if your
-                    deck is active and you have no outstanding cards to be reviewed.
+                    {t("flash-cards.desc")}
                 </p>
                 <SettingsDropdown
                     buttonIcon={faCopy}
+                    optionsKey="learn.flash-cards"
                     id="learn-settings-cards-selector"
                     preference={Preference.FLASH_CARDS_QUANTITY}
-                    options={[
-                        { name: '10' },
-                        { name: '20' },
-                        { name: '30' },
-                        { name: '40' },
-                        { name: '50' }
-                    ]}
                 />
             </div>
 
             <div className={styles.section}>
-                <p className={styles.heading}>Rōmaji Settings</p>
+                <p className={styles.heading}>{t("romaji.heading")}</p>
                 <p className={styles.text}>
-                    Set the default behaviour for showing rōmaji variants of kana.  Rōmaji or ローマ字 (rōmaji) is the
-                    romanisation of the Japanese written language.
+                    {t("romaji.desc")}
                 </p>
                 <SettingsDropdown
                     buttonIcon={faFont}
+                    optionsKey="learn.romaji"
                     id="learn-settings-romaji-selector"
                     preference={Preference.ROMAJI_VISIBILITY}
-                    options={[
-                        { name: 'Always Show' },
-                        { name: 'Ask Each Time' },
-                        { name: 'Always Hide' }
-                    ]}
                 />
             </div>
         </div>

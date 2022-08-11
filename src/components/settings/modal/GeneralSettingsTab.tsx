@@ -20,22 +20,9 @@ const GeneralSettingsTab = () => {
                 </p>
                 <SettingsDropdown
                     buttonIcon={faRss}
+                    optionsKey="general.activity-feed"
                     id="general-settings-activity-selector"
                     preference={Preference.ACTIVITY_FEED_QUANTITY}
-                    options={[
-                        {
-                            name: t("activity-feed.options.three.name"),
-                            value: t("activity-feed.options.three.value")
-                        },
-                        {
-                            name: t("activity-feed.options.five.name"),
-                            value: t("activity-feed.options.five.value")
-                        },
-                        {
-                            name: t("activity-feed.options.eight.name"),
-                            value: t("activity-feed.options.five.value")
-                        }
-                    ]}
                 />
             </div>
         </div>

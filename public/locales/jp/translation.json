@@ -299,20 +299,35 @@
         "activity-feed": {
           "heading": "アクティビティフィード",
           "desc": "デフォルトでアクティビティ フィード カードに表示するイベントの数を設定します。",
-          "options": {
-            "three": {
-              "name": "三",
-              "value": 3
-            },
-            "five": {
-              "name": "五",
-              "value": 5
-            },
-            "eight": {
-              "name": "八",
-              "value": 8
-            }
-          }
+          "options": [
+              { "name": "三", "value": 3 },
+              { "name": "五", "value": 5 },
+              { "name": "八", "value": 8 }
+          ]
+        }
+      },
+      "learn": {
+        "heading": "学習設定",
+        "desc": "日本語学習に関する設定を行います。",
+        "flash-cards": {
+          "heading": "1 日あたりのフラッシュ カード",
+          "desc": "1 日に表示する新しいフラッシュ カードの数を設定します。新しいカードは、あなたのデッキがアクティブであり、レビューする未処理のカードがない場合にのみ発行されます。",
+          "options": [
+            { "name": "十", "value":  10 },
+            { "name": "二十", "value":  20 },
+            { "name": "三十", "value":  30 },
+            { "name": "四十", "value":  40 },
+            { "name": "五十", "value":  50 }
+          ]
+        },
+        "romaji": {
+          "heading": "ローマ字設定",
+          "desc": "仮名のローマ字異体字を表示するためのデフォルトの動作を設定します。ローマ字またはローマ字は、日本語の書き言葉のローマ字化です。",
+          "options": [
+            { "name": "いつも見せる", "value": "Always Show" },
+            { "name": "毎回尋ねる", "value": "Ask Each Time" },
+            { "name": "常に非表示", "value": "Always Hide" }
+          ]
         }
       }
     }

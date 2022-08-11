@@ -1,10 +1,10 @@
 import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import InterfaceSettingsTab from "../../../../components/settings/modal/InterfaceSettingsTab";
-import renderReduxConsumer from "../../../renderReduxConsumer";
 import { store } from "../../../../store";
 import { clearUser, setUser } from "../../../../slices/UserSlice";
-import { testUser } from "../../../../setupTests";
+import { localStorageMock, testUser } from "../../../../setupTests";
 import { setFont } from "../../../../slices/FontSlice";
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 const onEditDashboardLayoutHandler = jest.fn();
 
@@ -22,11 +22,6 @@ jest.mock("../../../../service/UserService", () => {
     }
 });
 
-const mockChangeLanguage = jest.fn();
-jest.mock('react-i18next', () => ({
-    useTranslation: () => { return { i18n: { changeLanguage: mockChangeLanguage }}}
-}));
-
 beforeEach(() => {
     store.dispatch(setUser(testUser));
 });
@@ -37,20 +32,20 @@ afterEach(() => {
 
 test('Should render the main tab contents on initial render', async () => {
     mockFontService.mockResolvedValueOnce([{ name: "Test Font", displayName: "Test Font" }]);
-    const component = renderReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+    const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
     expect(await component.findByTestId('interface-settings-tab')).toBeInTheDocument();
 });
 
 test('Should call the onEditDashboard event handler after clicking the button', async () => {
     mockFontService.mockResolvedValueOnce([{ name: "Test Font", displayName: "Test Font" }]);
-    const component = renderReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+    const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
     fireEvent.click(await component.findByText('Open Layout Editor'));
     expect(onEditDashboardLayoutHandler).toHaveBeenCalled();
 });
 
 test('Should render the theme selector dropdown', async () => {
     mockFontService.mockResolvedValueOnce([]);
-    const component = renderReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+    const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
 
     fireEvent.click(component.getByTestId('interface-settings-theme-selector'));
 
@@ -62,7 +57,7 @@ test('Should render the theme selector dropdown', async () => {
 test('Should render the font selector dropdown', async () => {
     store.dispatch(setFont("Test Font"));
     mockFontService.mockResolvedValueOnce([{ name: "Test Font", displayName: "Test Font" }, { name: "Test Font2", displayName: "Test Font2" }]);
-    const component = renderReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+    const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
 
     await waitForElementToBeRemoved(component.getByTestId('settings-dropdown-loading'));
     fireEvent.click(component.getByTestId('interface-settings-font-selector'));
@@ -80,7 +75,7 @@ test('Should render the font selector dropdown', async () => {
 
 test('Should render the language selector dropdown', async () => {
     mockFontService.mockResolvedValueOnce([]);
-    const component = renderReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+    const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
 
     fireEvent.click(component.getByTestId('interface-settings-language-selector'));
 
@@ -93,31 +88,29 @@ test('Should call the i18n change language function with the correct english cod
     store.dispatch(setUser({ ...testUser, preferences: { ...testUser.preferences, language: "日本語" }}));
     mockUpdatePreferences.mockResolvedValueOnce({ success: true });
     mockFontService.mockResolvedValueOnce([]);
-    mockChangeLanguage.mockResolvedValueOnce({});
-    const component = renderReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+    const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
 
     fireEvent.click(component.getByTestId('interface-settings-language-selector'));
     fireEvent.click(component.getByText('English'));
 
-    await waitFor(() => expect(mockChangeLanguage).toHaveBeenLastCalledWith('en'));
+    await waitFor(() => expect(localStorageMock.getItem("i18nextLng")).toBe("en"));
 });
 
 test('Should call the i18n change language function with the correct japanese code', async () => {
     store.dispatch(setUser({ ...testUser, preferences: { ...testUser.preferences, language: "English" }}));
     mockFontService.mockResolvedValueOnce([]);
-    mockChangeLanguage.mockResolvedValueOnce({});
     mockUpdatePreferences.mockResolvedValueOnce({ success: true });
-    const component = renderReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+    const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
 
     fireEvent.click(component.getByTestId('interface-settings-language-selector'));
     fireEvent.click(component.getByText('日本語'));
 
-    await waitFor(() => expect(mockChangeLanguage).toHaveBeenLastCalledWith('jp'));
+    await waitFor(() => expect(localStorageMock.getItem("i18nextLng")).toBe("jp"));
 });
 
 test('Should render the confidence menu style selector dropdown', async () => {
     mockFontService.mockResolvedValueOnce([]);
-    const component = renderReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+    const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
 
     fireEvent.click(component.getByTestId('interface-settings-confidence-menu-selector'));
 

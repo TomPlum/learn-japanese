@@ -1,11 +1,10 @@
-import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import SettingsModal, { SettingsModalProps, SettingsType } from "../../../../components/settings/modal/SettingsModal";
-import renderReduxConsumer from "../../../renderReduxConsumer";
 import { store } from "../../../../store";
-import { setFont } from "../../../../slices/FontSlice";
 import { setPreference, setUser } from "../../../../slices/UserSlice";
 import { Preference } from "../../../../domain/user/Preference";
 import { testUser } from "../../../../setupTests";
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 const mockFontService = jest.fn();
 jest.mock("../../../../service/FontService", () => {
@@ -26,7 +25,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-    const component = renderReduxConsumer(<SettingsModal {...props} />);
+    const component = renderTranslatedReduxConsumer(<SettingsModal {...props} />);
     return {
         general: component.getByTitle('General'),
         learn: component.getByTitle('Learn'),

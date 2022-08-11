@@ -7,28 +7,33 @@ import UserService from "../../../service/UserService";
 import { Preference } from "../../../domain/user/Preference";
 import { useUserDispatch, useUserSelector } from "../../../hooks";
 import { setPreference } from "../../../slices/UserSlice";
+import { useTranslation } from "react-i18next";
+import Icon from "../../ui/menu/icon/Icon";
+import { CustomIcon } from "../../../domain/Icon";
 
 export interface SettingsDropdownOption {
     style?: {};
     name: string;
     value?: string;
+    icon?: CustomIcon;
     className?: string;
-    icon?: IconDefinition;
 }
 
 export interface SettingsDropdownProps {
     id: string;
     loading?: boolean;
+    optionsKey?: string;
     preference: Preference
     buttonIcon?: IconDefinition;
-    options: SettingsDropdownOption[];
+    options?: SettingsDropdownOption[]
     onChange?: (value: string) => void;
     onError?: (error: string) => void;
 }
 
 const SettingsDropdown = (props: SettingsDropdownProps) => {
-    const { id, preference, loading, buttonIcon, options, onChange, onError } = props;
+    const { id, preference, loading, buttonIcon, options, optionsKey, onChange, onError } = props;
 
+    const { t } = useTranslation();
     const service = new UserService();
     const userDispatch = useUserDispatch();
     const preferences = useUserSelector(state => state.user?.user?.preferences);
@@ -48,9 +53,14 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
         }
     }
 
-    const getSelectedPreferenceValue = () => options.find(it => it.value ?? it.name === getUserPreferenceValue()?.toString()) ?? { name: "Unknown" };
+    const opts = options ?? t<string, SettingsDropdownOption[]>(`settings.modal.${optionsKey}.options`, { returnObjects: true }).map(option => {
+        return { name: option.name, value: option.value ?? option.name } as SettingsDropdownOption;
+    });
 
-    const selected = getSelectedPreferenceValue();
+    const getSelectedPreferenceValue = () => opts.find(it => it.value ?? it.name === getUserPreferenceValue()?.toString())
+        ?? { name: "Unknown", value: "Unknown" };
+
+    const selected: SettingsDropdownOption = getSelectedPreferenceValue();
 
     const target = useRef(null);
     const [show, setShow] = useState(false);
@@ -113,7 +123,7 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
                         )}
 
                         {!buttonIcon && selected.icon && (
-                            <FontAwesomeIcon icon={selected.icon} className={styles.icon} />
+                            <Icon value={selected.icon} className={styles.icon} />
                         )}
 
                         <span className={styles.name} data-testid="settings-dropdown-selected">
@@ -140,14 +150,14 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
 
             <Overlay show={show} rootClose={true} placement="bottom" target={target.current} onHide={handleHide}>
                 {!loading && selected ? <div className={styles.menu}>
-                    {options.filter(it => it.name != selected.name).map((option: SettingsDropdownOption) => (
+                    {opts.filter(it => it.name != selected.name).map((option: SettingsDropdownOption) => (
                         <div
                             key={option.name}
                             style={option.style}
                             onClick={() => handleChange(option)}
-                            className={[styles.option, option.className].join(" ")}
+                            className={[styles.option, option.className ? styles[option.className] : ""].join(" ")}
                         >
-                            {option.icon && <FontAwesomeIcon icon={option.icon} className={styles.icon} />}
+                            {option.icon && <Icon value={option.icon} className={styles.icon} />}
                             <span>{option.name}</span>
                         </div>
                     ))}

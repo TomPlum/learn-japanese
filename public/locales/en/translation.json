@@ -299,20 +299,45 @@
         "activity-feed": {
           "heading": "Activity Feed",
           "desc": "Set the number of events to display in the activity feed card by default.",
-          "options": {
-            "three": {
-              "name": "3",
-              "value": 3
-            },
-            "five": {
-              "name": "5",
-              "value": 5
-            },
-            "eight": {
-              "name": "8",
-              "value": 8
-            }
-          }
+          "options": [
+            { "name": "3", "value": 3 },
+            { "name": "5", "value": 5 },
+            { "name": "8", "value": 8 }
+          ]
+        }
+      },
+      "learn": {
+        "heading": "Learn Settings",
+        "desc": "Configure settings related to learning Japanese.",
+        "flash-cards": {
+          "heading": "Flash Cards Per Day",
+          "desc": "Set the number of new flash cards you wish to see per day. New cards will only be issued if your deck is active and you have no outstanding cards to be reviewed.",
+          "options": [
+            { "name": "10", "value":  10 },
+            { "name": "20", "value":  20 },
+            { "name": "30", "value":  30 },
+            { "name": "40", "value":  40 },
+            { "name": "50", "value":  50 }
+          ]
+        },
+        "romaji": {
+          "heading": "Rōmaji Settings",
+          "desc": "Set the default behaviour for showing rōmaji variants of kana. Rōmaji or ローマ字 (rōmaji) is the romanisation of the Japanese written language.",
+          "options": [
+            { "name": "Always Show", "value": "Always Show" },
+            { "name": "Ask Each Time", "value": "Ask Each Time" },
+            { "name": "Always Hide", "value": "Always Hide" }
+          ]
+        }
+      },
+      "interface": {
+        "theme": {
+          "heading": "Theme",
+          "desc": "Switch between the dark and light variations of the user-interface theming.",
+          "options": [
+            { "name": "Dark Mode", "value": "Dark Mode", "icon": "faMoon", "className": "dark" },
+            { "name": "Light Mode", "value": "Light Mode", "icon": "faLightbulb", "className": "light" }
+          ]
         }
       }
     }

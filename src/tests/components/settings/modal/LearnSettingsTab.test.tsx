@@ -1,9 +1,9 @@
-import renderReduxConsumer from "../../../renderReduxConsumer";
 import LearnSettingsTab from "../../../../components/settings/modal/LearnSettingsTab";
 import { fireEvent, screen } from "@testing-library/react";
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 test('Should render the flash cards quantity dropdown', async () => {
-    const component = renderReduxConsumer(<LearnSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<LearnSettingsTab />);
 
     fireEvent.click(component.getByTestId('learn-settings-cards-selector'));
 
@@ -16,7 +16,7 @@ test('Should render the flash cards quantity dropdown', async () => {
 });
 
 test('Should render the romaji settings dropdown', async () => {
-    const component = renderReduxConsumer(<LearnSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<LearnSettingsTab />);
 
     fireEvent.click(component.getByTestId('learn-settings-romaji-selector'));
 

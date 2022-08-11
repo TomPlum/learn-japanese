@@ -1,5 +1,5 @@
 import styles from "../../../styles/sass/components/settings/modal/InterfaceSettingsTab.module.scss";
-import { faFont, faGripVertical, faLanguage, faLightbulb, faMoon, faSmile, faSortNumericUp } from "@fortawesome/free-solid-svg-icons";
+import { faFont, faGripVertical, faLanguage, faSmile, faSortNumericUp } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import SettingsButton from "./SettingsButton";
 import SettingsTabTitle from "./SettingsTabTitle";
@@ -23,7 +23,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
     const fontService = new FontService();
 
     const [fonts, setFonts] = useState<Font[]>([]);
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         fontService.getFonts().then(response => {
@@ -66,12 +66,9 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                     Switch between the dark and light variations of the user-interface theming.
                 </p>
                 <SettingsDropdown
-                    id="interface-settings-theme-selector"
+                    optionsKey="interface.theme"
                     preference={Preference.THEME}
-                    options={[
-                        { name: "Dark Mode", icon: faMoon, className: styles.dark },
-                        { name: "Light Mode", icon: faLightbulb, className: styles.light }
-                    ]}
+                    id="interface-settings-theme-selector"
                 />
             </div>
 
