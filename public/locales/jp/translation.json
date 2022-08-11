@@ -329,6 +329,19 @@
             { "name": "常に非表示", "value": "Always Hide" }
           ]
         }
+      },
+      "play": {
+        "heading": "ゲームの設定",
+        "desc": "ゲームやその他のプレイ指向モードに関連する設定を構成します。",
+        "high-scores": {
+          "label": "高得点の好み",
+          "desc": "ゲームセッションを高得点に送信するためのデフォルトの動作を設定します。",
+          "options": [
+            { "name": "毎回尋ねる", "value": "Ask Each Time" },
+            { "name": "常に送信", "value": "Always Submit" },
+            { "name": "Never Submit", "value":  "提出しない" }
+          ]
+        }
       }
     }
   },

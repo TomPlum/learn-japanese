@@ -330,6 +330,19 @@
           ]
         }
       },
+      "play": {
+        "heading": "Play Settings",
+        "desc": "Configure settings related to games and other play-orientated modes.",
+        "high-scores": {
+          "label": "High-Score Preference",
+          "desc": "Set the default behaviour for submitting your play sessions to the high-scores.",
+          "options": [
+            { "name": "Ask Each Time", "value": "Ask Each Time" },
+            { "name": "Always Submit", "value": "Always Submit" },
+            { "name": "Never Submit", "value":  "Never Submit" }
+          ]
+        }
+      },
       "interface": {
         "theme": {
           "heading": "Theme",
