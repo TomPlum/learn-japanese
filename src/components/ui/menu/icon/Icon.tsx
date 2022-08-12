@@ -45,6 +45,7 @@ const Icon = (props: IconProps) => {
         return React.createElement(CustomFontAwesomeIcon[value], iconProps);
     }
 
+    console.warn(`Couldn't find an icon with the name [${value}]`);
     return <FontAwesomeIcon icon={faQuestion} data-testid="unknown-icon" />
 }
 
