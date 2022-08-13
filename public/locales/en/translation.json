@@ -344,12 +344,61 @@
         }
       },
       "interface": {
+        "heading": "Interface Settings",
+        "desc": "Configure the user interface to customise the layout and look-and-feel to your liking.",
+        "customise-dashboard-layout": {
+          "heading": "Customise Dashboard Layout",
+          "desc": "Edit the home page dashboard layout. Cards can be toggled on or off, resized or moved to different columns.",
+          "button": "Open Layout Editor"
+        },
         "theme": {
           "heading": "Theme",
           "desc": "Switch between the dark and light variations of the user-interface theming.",
           "options": [
-            { "name": "Dark Mode", "value": "Dark Mode", "icon": "faMoon", "className": "dark" },
-            { "name": "Light Mode", "value": "Light Mode", "icon": "faLightbulb", "className": "light" }
+            { "name": "Dark Mode", "value": "Dark Mode", "icon": "FaMoon", "className": "dark" },
+            { "name": "Light Mode", "value": "Light Mode", "icon": "FaLightbulb", "className": "light" }
+          ]
+        },
+        "kanji-font": {
+          "heading": "Kanji Font",
+          "desc": "Set your preferred default font-face used for all kanji characters in the app.",
+          "options": {
+            "default": "Default",
+            "mincho": "Mincho",
+            "handwriting": "Handwriting",
+            "gothic": "Gothic"
+          }
+        },
+        "language": {
+          "heading": "Language & Internationalisation",
+          "desc": "Set the language that all major buttons, menus and links use.",
+          "options": [
+            { "name":  "English", "value":  "English" },
+            { "name":  "Japanese", "value":  "日本語" }
+          ]
+        },
+        "confidence-menu-style": {
+          "heading": "Confidence Menu Style",
+          "desc": "Change the format of the confidence rating widget used during flash card learning sessions.",
+          "options": [
+            { "name": "Emoji Style", "value": "Emoji Style", "icon": "FaSmile" },
+            { "name": "Numbers 1 - 6", "value": "Numbers 1 - 6", "icon": "FaSortNumericUp" }
+          ]
+        }
+      },
+      "user": {
+        "profile-visibility": {
+          "options": [
+            { "name": "Friends Only", "value": "Friends Only", "icon": "FaUserFriends" },
+            { "name": "Private", "value": "Private", "icon": "FaUserSecret" },
+            { "name": "Public", "value": "Public", "icon": "FaGlobeAmericas" }
+          ]
+        },
+        "streak-card-preference": {
+          "options": [
+            { "name": "Start Date", "value": "Start Date", "icon": "FaCalendarCheck" },
+            { "name": "Streak", "value": "Streak", "icon": "FaFireAlt" },
+            { "name": "Custom Date", "value": "Custom Date", "icon": "FaClock" }
           ]
         }
       }

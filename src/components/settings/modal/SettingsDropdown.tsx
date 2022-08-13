@@ -53,11 +53,18 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
         }
     }
 
-    const opts = options ?? t<string, SettingsDropdownOption[]>(`settings.modal.${optionsKey}.options`, { returnObjects: true }).map(option => {
-        return { name: option.name, value: option.value ?? option.name } as SettingsDropdownOption;
+    const translationKey = `settings.modal.${optionsKey}.options`;
+    const opts = options ?? t<string, SettingsDropdownOption[]>(translationKey, { returnObjects: true }).map(option => {
+        return {
+            name: option.name,
+            value: option.value ?? option.name,
+            icon: option.icon,
+            className: option.className,
+            style: option.style
+        } as SettingsDropdownOption;
     });
 
-    const getSelectedPreferenceValue = () => opts.find(it => it.value ?? it.name === getUserPreferenceValue()?.toString())
+    const getSelectedPreferenceValue = () => opts.find(it => it.value === getUserPreferenceValue()?.toString())
         ?? { name: "Unknown", value: "Unknown" };
 
     const selected: SettingsDropdownOption = getSelectedPreferenceValue();

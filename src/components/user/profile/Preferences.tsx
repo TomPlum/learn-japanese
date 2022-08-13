@@ -14,6 +14,7 @@ import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/Conf
 import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
 import UserService from "../../../service/UserService";
 import FontService from "../../../service/FontService";
+import { useTranslation } from "react-i18next";
 
 export interface PreferencesProps {
     user: User;
@@ -24,6 +25,7 @@ const Preferences = (props: PreferencesProps) => {
     const userDispatcher = useUserDispatch();
     const userService = new UserService();
     const fontService = new FontService();
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.interface.kanji-font.options" });
 
     useEffect(() => {
         const preferences = props.user.preferences;
@@ -38,7 +40,7 @@ const Preferences = (props: PreferencesProps) => {
         setLoading(true);
         fontService.getFonts().then(fonts => {
             setFonts(fonts);
-            setSelectedFont(fonts[0].displayName);
+            setSelectedFont(fonts[0].name);
         }).finally(() => {
             setLoading(false);
         });
@@ -174,7 +176,7 @@ const Preferences = (props: PreferencesProps) => {
                             <Dropdown.Toggle variant="light" data-testid="font">{font}</Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {fonts.map((font: Font) => {
-                                    return <Dropdown.Item key={font.displayName}>{font.displayName}</Dropdown.Item>
+                                    return <Dropdown.Item key={font.slug}>{t(font.slug)}</Dropdown.Item>
                                 })}
                             </Dropdown.Menu>
                         </Dropdown>

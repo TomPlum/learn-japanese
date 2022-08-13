@@ -342,6 +342,49 @@
             { "name": "Never Submit", "value":  "提出しない" }
           ]
         }
+      },
+      "interface": {
+        "heading": "設計設定",
+        "desc": "設計を構成して、レイアウトとルック アンド フィールを好みに合わせてカスタマイズします。",
+        "customise-dashboard-layout": {
+          "heading": "ダッシュボード レイアウトのカスタマイズ",
+          "desc": "ホームページのダッシュボードのレイアウトを編集します。カードのオンとオフを切り替えたり、サイズを変更したり、別の列に移動したりできます。",
+          "button": "設計エディターを開く"
+        },
+        "theme": {
+          "heading": "テーマ",
+          "desc": "ユーザー インターフェイス テーマのダーク バリエーションとライト バリエーションを切り替えます。",
+          "options": [
+            { "name": "ダークモード", "value": "Dark Mode", "icon": "FaMoon", "className": "dark" },
+            { "name": "ライトモード", "value": "Light Mode", "icon": "FaLightbulb", "className": "light" }
+          ]
+        },
+        "kanji-font": {
+          "heading": "漢字フォント",
+          "desc": "アプリ内のすべての漢字に使用するデフォルトのフォントを設定します。",
+          "options": {
+            "default": "デフォルト",
+            "mincho": "アプリ明朝",
+            "handwriting": "手書き",
+            "gothic": "ゴシック"
+          }
+        },
+        "language": {
+          "heading": "言語と国際化",
+          "desc": "すべての主要なボタン、メニュー、およびリンクで使用される言語を設定します。",
+          "options": [
+            { "name":  "英語", "value":  "English" },
+            { "name":  "日本語", "value":  "日本語" }
+          ]
+        },
+        "confidence-menu-style": {
+          "heading": "コンフィデンス メニュースタイル",
+          "desc": "フラッシュ カード学習セッション中に使用される信頼度評価ウィジェットの形式を変更します。",
+          "options": [
+            { "name": "絵文字スタイル", "value": "Emoji Style", "icon": "FaSmile" },
+            { "name": "数字 1 ～ 6", "value": "Numbers 1 - 6", "icon": "FaSortNumericUp" }
+          ]
+        }
       }
     }
   },

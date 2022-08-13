@@ -13,6 +13,7 @@ import LocalStorageService from "../../../service/LocalStorageService";
 import HighScoresService from "../../../service/HighScoresService";
 import { scrollToTop } from "../../../utility/Window";
 import DismissibleAlert from "../../ui/DismissibleAlert";
+import { useTranslation } from "react-i18next";
 
 const UserSettingsTab = () => {
 
@@ -21,6 +22,7 @@ const UserSettingsTab = () => {
 
     const [error, setError] = useState("");
     const [confirmingPassword, setConfirmingPassword] = useState(false);
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.user" });
 
     if (confirmingPassword) {
         const deleteAccountPopover = <PopOver
@@ -92,12 +94,8 @@ const UserSettingsTab = () => {
                 </p>
                 <SettingsDropdown
                     id="profile-visibility-selector"
+                    optionsKey="user.profile-visibility"
                     preference={Preference.PROFILE_VISIBILITY}
-                    options={[
-                        { name: "Friends Only", icon: faUserFriends },
-                        { name: "Private", icon: faUserSecret },
-                        { name: "Public", icon: faGlobeAmericas }
-                    ]}
                 />
             </div>
 
@@ -109,12 +107,8 @@ const UserSettingsTab = () => {
                 </p>
                 <SettingsDropdown
                     id="streak-card-preference-selector"
+                    optionsKey="user.streak-card-preference"
                     preference={Preference.STREAK_CARD_VIEW}
-                    options={[
-                        { name: "Start Date", icon: faCalendarCheck },
-                        { name: "Streak", icon: faFireAlt },
-                        { name: "Custom Date", icon: faClock }
-                    ]}
                 />
             </div>
 

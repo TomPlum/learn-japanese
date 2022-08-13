@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import Preferences from "../../../../components/user/profile/Preferences";
-import renderReduxConsumer from "../../../renderReduxConsumer";
 import { testUser } from "../../../../setupTests";
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 //Mock User Service
 const mockUserService = jest.fn();
@@ -16,7 +16,7 @@ jest.mock("../../../../service/FontService", () => {
 });
 
 const setup = () => {
-    const component = renderReduxConsumer(<Preferences user={testUser} />);
+    const component = renderTranslatedReduxConsumer(<Preferences user={testUser} />);
     return {
         font: component.getByTestId('font'),
         theme: component.getByText('Dark'),
@@ -31,10 +31,10 @@ const setup = () => {
 
 beforeEach(() => {
     mockFontService.mockResolvedValueOnce([
-        { displayName: "Default", name: "" },
-        { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
-        { displayName: "Gothic", name: "K Gothic" },
-        { displayName: "Mincho", name: "Appli Mincho" }
+        { slug: "default", name: "" },
+        { slug: "handwriting", name: "SanafonMugi Handwriting" },
+        { slug: "gothic", name: "K Gothic" },
+        { slug: "mincho", name: "Appli Mincho" }
     ]);
 });
 

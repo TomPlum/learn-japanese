@@ -100,11 +100,11 @@ test('It should render the user settings tab when clicking the tab', () => {
 
 it("Should render the dashboard layout editor when launching it from the interface settings tab", async () => {
     store.dispatch(setUser(testUser));
-    store.dispatch(setPreference({ preference: Preference.DEFAULT_KANJI_FONT, value: "Test Font" }));
-    mockFontService.mockResolvedValue([{ name: "Test Font", displayName: "Test Font" }]);
+    store.dispatch(setPreference({ preference: Preference.DEFAULT_KANJI_FONT, value: "default" }));
+    mockFontService.mockResolvedValue([{ name: "Test Font", slug: "default" }]);
     props.type = SettingsType.INTERFACE;
     setup();
-    expect(await screen.findByText('Test Font')).toBeInTheDocument();
+    expect(await screen.findByText('Default')).toBeInTheDocument();
 
     // Clicking the button should render the editor
     fireEvent.click(screen.getByTestId("open-layout-editor-button"));

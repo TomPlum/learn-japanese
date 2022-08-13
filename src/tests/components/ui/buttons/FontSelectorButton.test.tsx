@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import FontSelectorButton from "../../../../components/ui/buttons/FontSelectorButton";
-import renderReduxConsumer from "../../../renderReduxConsumer";
 import { store } from "../../../../store";
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 const mockGetSelectedFont = jest.fn();
 const mockGetFonts = jest.fn();
@@ -11,20 +11,20 @@ jest.mock("../../../../service/FontService", () => {
 
 beforeEach(() => {
     mockGetSelectedFont.mockResolvedValueOnce({
-        displayName: "Handwriting",
-        name: "SanafonMugi Handwriting"
+        name: "SanafonMugi Handwriting",
+        slug: "handwriting"
     });
 
     mockGetFonts.mockResolvedValueOnce([
-        { displayName: "Default", name: "" },
-        { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
-        { displayName: "Gothic", name: "K Gothic" },
-        { displayName: "Mincho", name: "Appli Mincho" }
+        { slug: "default", name: "" },
+        { slug: "handwriting", name: "SanafonMugi Handwriting" },
+        { slug: "gothic", name: "K Gothic" },
+        { slug: "mincho", name: "Appli Mincho" },
     ]);
 });
 
 const setup = () => {
-    const component = renderReduxConsumer(<FontSelectorButton />);
+    const component = renderTranslatedReduxConsumer(<FontSelectorButton />);
     return {
         toggle: component.getByTestId('font-selector'),
         ...component

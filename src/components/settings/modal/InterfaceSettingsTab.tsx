@@ -1,5 +1,5 @@
 import styles from "../../../styles/sass/components/settings/modal/InterfaceSettingsTab.module.scss";
-import { faFont, faGripVertical, faLanguage, faSmile, faSortNumericUp } from "@fortawesome/free-solid-svg-icons";
+import { faFont, faGripVertical, faLanguage } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import SettingsButton from "./SettingsButton";
 import SettingsTabTitle from "./SettingsTabTitle";
@@ -23,7 +23,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
     const fontService = new FontService();
 
     const [fonts, setFonts] = useState<Font[]>([]);
-    const { t, i18n } = useTranslation();
+    const { t, i18n } = useTranslation("translation", { keyPrefix: "settings.modal.interface" });
 
     useEffect(() => {
         fontService.getFonts().then(response => {
@@ -41,29 +41,26 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
 
     return (
         <div data-testid="interface-settings-tab">
-            <SettingsTabTitle
-                title="Interface Settings"
-                description="Configure the user interface to customise the layout and look-and-feel to your liking."
-            />
+            <SettingsTabTitle title={t("heading")} description={t("desc")} />
 
            <div className={styles.section}>
-               <p className={styles.heading}>Customise Dashboard Layout</p>
+               <p className={styles.heading}>{t("customise-dashboard-layout.heading")}</p>
                <p className={styles.text}>
-                   Edit the home page dashboard layout. Cards can be toggled on or off, resized or moved
-                   to different columns.
+                   {t("customise-dashboard-layout.desc")}
                </p>
                <SettingsButton
-                   name="Open Layout Editor"
                    id="open-layout-editor-button"
                    icon={{ icon: faGripVertical }}
                    onClick={onEditDashboardLayout}
+                   className={styles["open-layout-editor"]}
+                   name={t("customise-dashboard-layout.button")}
                />
            </div>
 
             <div className={styles.section}>
-                <p className={styles.heading}>Theme</p>
+                <p className={styles.heading}>{t("theme.heading")}</p>
                 <p className={styles.text}>
-                    Switch between the dark and light variations of the user-interface theming.
+                    {t("theme.desc")}
                 </p>
                 <SettingsDropdown
                     optionsKey="interface.theme"
@@ -73,9 +70,9 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
             </div>
 
             <div className={styles.section}>
-                <p className={styles.heading}>Kanji Font</p>
+                <p className={styles.heading}>{t("kanji-font.heading")}</p>
                 <p className={styles.text}>
-                    Set your preferred default font-face used for all kanji characters in the app.
+                    {t("kanji-font.desc")}
                 </p>
                 <SettingsDropdown
                     buttonIcon={faFont}
@@ -84,36 +81,37 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
                     id="interface-settings-font-selector"
                     preference={Preference.DEFAULT_KANJI_FONT}
                     key={fonts.map(font => font.name).join("-")}
-                    options={fonts.map(font => ({ name: font.displayName, style: { fontFamily: font.name } }))}
+                    options={fonts.map(font => ({
+                        value: font.slug,
+                        style: { fontFamily: font.name },
+                        name: t(`kanji-font.options.${font.slug}`)
+                    }))}
                 />
             </div>
 
             <div className={styles.section}>
-                <p className={styles.heading}>Language & Internationalisation</p>
+                <p className={styles.heading}>{t("language.heading")}</p>
                 <p className={styles.text}>
-                    Set the language that all major buttons, menus and links use.
+                    {t("language.desc")}
                 </p>
                 <SettingsDropdown
                     buttonIcon={faLanguage}
+                    optionsKey="interface.language"
                     preference={Preference.LANGUAGE}
                     id="interface-settings-language-selector"
-                    options={[{ name: "English" }, { name: "日本語" }]}
                     onChange={(language: string) => handleLanguageChange(language)}
                 />
             </div>
 
             <div className={styles.section}>
-                <p className={styles.heading}>Confidence Menu Style</p>
+                <p className={styles.heading}>{t("confidence-menu-style.heading")}</p>
                 <p className={styles.text}>
-                    Change the format of the confidence rating widget used during flash card learning sessions.
+                    {t("confidence-menu-style.desc")}
                 </p>
                 <SettingsDropdown
+                    optionsKey="interface.confidence-menu-style"
                     preference={Preference.CONFIDENCE_MENU_STYLE}
                     id="interface-settings-confidence-menu-selector"
-                    options={[
-                        { name: "Emoji Style", icon: faSmile },
-                        { name: "Numbers 1 - 6", icon: faSortNumericUp }
-                    ]}
                 />
             </div>
         </div>

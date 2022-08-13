@@ -24,6 +24,7 @@ jest.mock("../../../../service/UserService", () => {
 
 beforeEach(() => {
     store.dispatch(setUser(testUser));
+    localStorageMock.clear();
 });
 
 afterEach(() => {
@@ -55,22 +56,22 @@ test('Should render the theme selector dropdown', async () => {
 });
 
 test('Should render the font selector dropdown', async () => {
-    store.dispatch(setFont("Test Font"));
-    mockFontService.mockResolvedValueOnce([{ name: "Test Font", displayName: "Test Font" }, { name: "Test Font2", displayName: "Test Font2" }]);
+    store.dispatch(setFont("test-font-slug"));
+    mockFontService.mockResolvedValueOnce([{ name: "Test Font", slug: "mincho" }, { name: "Test Font2", slug: "gothic" }]);
     const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
 
     await waitForElementToBeRemoved(component.getByTestId('settings-dropdown-loading'));
     fireEvent.click(component.getByTestId('interface-settings-font-selector'));
 
     // Should render the correct options
-    expect(await screen.findByText('Test Font')).toBeInTheDocument();
-    expect(await screen.findByText('Test Font2')).toBeInTheDocument();
+    expect(await screen.findByText('Mincho')).toBeInTheDocument();
+    expect(await screen.findByText('Gothic')).toBeInTheDocument();
 
-    // Selecting a font should store it in the Redux store
+    // Selecting a font should store its slug in the Redux store
     mockUpdatePreferences.mockResolvedValueOnce({ success: true });
-    fireEvent.click(await screen.findByText('Test Font2'));
+    fireEvent.click(await screen.findByText('Gothic'));
     await waitForElementToBeRemoved(component.getByTestId('settings-dropdown-spinner'));
-    expect(await store.getState().font.selected).toBe('Test Font2');
+    expect(await store.getState().font.selected).toBe('gothic');
 });
 
 test('Should render the language selector dropdown', async () => {
@@ -80,8 +81,19 @@ test('Should render the language selector dropdown', async () => {
     fireEvent.click(component.getByTestId('interface-settings-language-selector'));
 
     // Should render the correct options
-    expect(await screen.findByText('日本語')).toBeInTheDocument();
+    expect(await screen.findByText('Japanese')).toBeInTheDocument();
     expect(await screen.findByText('English')).toBeInTheDocument();
+});
+
+test('Should render the confidence menu style selector dropdown', async () => {
+    mockFontService.mockResolvedValueOnce([]);
+    const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
+
+    fireEvent.click(component.getByTestId('interface-settings-confidence-menu-selector'));
+
+    // Should render the correct options
+    expect(await screen.findByText('Numbers 1 - 6')).toBeInTheDocument();
+    expect(await screen.findByText('Emoji Style')).toBeInTheDocument();
 });
 
 test('Should call the i18n change language function with the correct english code', async () => {
@@ -103,18 +115,7 @@ test('Should call the i18n change language function with the correct japanese co
     const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
 
     fireEvent.click(component.getByTestId('interface-settings-language-selector'));
-    fireEvent.click(component.getByText('日本語'));
+    fireEvent.click(component.getByText('Japanese'));
 
     await waitFor(() => expect(localStorageMock.getItem("i18nextLng")).toBe("jp"));
-});
-
-test('Should render the confidence menu style selector dropdown', async () => {
-    mockFontService.mockResolvedValueOnce([]);
-    const component = renderTranslatedReduxConsumer(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />);
-
-    fireEvent.click(component.getByTestId('interface-settings-confidence-menu-selector'));
-
-    // Should render the correct options
-    expect(await screen.findByText('Numbers 1 - 6')).toBeInTheDocument();
-    expect(await screen.findByText('Emoji Style')).toBeInTheDocument();
 });

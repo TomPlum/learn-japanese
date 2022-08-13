@@ -33,6 +33,15 @@ class FontService {
             return undefined;
         });
     }
+
+    /**
+     * Retrieves the font details based on the font-name.
+     *
+     * @param name The name of the font as it appears in the CSS.
+     */
+    public findByFontName(name: string): Font {
+        return this._repository.findByName(name);
+    }
 }
 
 export default FontService;
