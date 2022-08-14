@@ -386,6 +386,26 @@
           ]
         }
       },
+      "notification": {
+        "heading": "Notification Settings",
+        "desc": "Configure settings related to your notification centre and app-wide communication.",
+        "streak-notifications": {
+          "heading": "Streak Notifications",
+          "desc": "Toggle notifications for significant streak milestones.",
+          "enable": "Enable",
+          "disable": "Disable",
+          "enabled": "Enabled",
+          "disabled": "Disabled"
+        },
+        "outstanding-mistakes-reminder": {
+          "heading": "Outstanding Mistakes Reminder",
+          "desc": "Toggle reminders for outstanding mistakes that need reviewing.",
+          "enable": "Enable",
+          "disable": "Disable",
+          "enabled": "Enabled",
+          "disabled": "Disabled"
+        }
+      },
       "user": {
         "profile-visibility": {
           "options": [

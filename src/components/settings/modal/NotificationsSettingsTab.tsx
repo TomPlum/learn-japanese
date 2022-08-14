@@ -3,40 +3,57 @@ import styles from "../../../styles/sass/components/settings/modal/NotificationS
 import { faEraser, faFireAlt, faSnowflake } from "@fortawesome/free-solid-svg-icons";
 import SettingsBooleanButton from "./SettingsBooleanButton";
 import { Preference } from "../../../domain/user/Preference";
+import { useTranslation } from "react-i18next";
 
 const NotificationsSettingsTab = () => {
+
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.notification" });
+
     return (
         <div data-testid="notification-settings-tab">
-            <SettingsTabTitle
-                title="Notification Settings"
-                description="Configure settings related to your notification centre and app-wide communication."
-            />
+            <SettingsTabTitle title={t("heading")} description={t("desc")} />
 
             <div className={styles.section}>
-                <p className={styles.heading}>Streak Notifications</p>
+                <p className={styles.heading}>{t("streak-notifications.heading")}</p>
                 <p className={styles.text}>
-                    Toggle notifications for significant streak milestones.
+                    {t("streak-notifications.desc")}
                 </p>
                 <SettingsBooleanButton
                     enableHoverColours
                     id="streak-notifications-toggle"
                     preference={Preference.STREAK_NOTIFICATIONS}
-                    truthy={{ name: "Enabled", hover: "Disable", icon: faFireAlt }}
-                    falsy={{ name: "Disabled", hover: "Enable", icon: faSnowflake }}
+                    truthy={{
+                        name: t("streak-notifications.enabled"),
+                        hover: t("streak-notifications.disable"),
+                        icon: faFireAlt
+                    }}
+                    falsy={{
+                        name: t("streak-notifications.disabled"),
+                        hover: t("streak-notifications.enable"),
+                        icon: faSnowflake
+                    }}
                 />
             </div>
 
             <div className={styles.section}>
-                <p className={styles.heading}>Outstanding Mistakes Reminder</p>
+                <p className={styles.heading}>{t("outstanding-mistakes-reminder.heading")}</p>
                 <p className={styles.text}>
-                    Toggle reminders for outstanding mistakes that need reviewing.
+                    {t("outstanding-mistakes-reminder.desc")}
                 </p>
                 <SettingsBooleanButton
                     enableHoverColours
                     id="mistakes-reminders-toggle"
                     preference={Preference.MISTAKES_REMINDERS}
-                    falsy={{ name: "Disabled", hover: "Enable", icon: faEraser }}
-                    truthy={{ name: "Enabled", hover: "Disable", icon: faEraser }}
+                    falsy={{
+                        name: t("outstanding-mistakes-reminder.disabled"),
+                        hover: t("outstanding-mistakes-reminder.enable"),
+                        icon: faEraser
+                    }}
+                    truthy={{
+                        name: t("outstanding-mistakes-reminder.enabled"),
+                        hover: t("outstanding-mistakes-reminder.disable"),
+                        icon: faEraser
+                    }}
                 />
             </div>
         </div>

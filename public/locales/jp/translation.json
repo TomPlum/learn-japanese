@@ -385,6 +385,26 @@
             { "name": "数字 1 ～ 6", "value": "Numbers 1 - 6", "icon": "FaSortNumericUp" }
           ]
         }
+      },
+      "notification": {
+        "heading": "通知設定",
+        "desc": "通知センターとアプリ全体の通信に関連する設定を構成します。",
+        "streak-notifications": {
+          "heading": "ストリーク通知",
+          "desc": "重要な連続マイルストーンの通知を切り替えます。",
+          "enable": "エネーブル",
+          "disable": "ディセーブル",
+          "enabled": "オン",
+          "disabled": "オフ"
+        },
+        "outstanding-mistakes-reminder": {
+          "heading": "未解決の間違いのリマインダー",
+          "desc": "見直しが必要な未解決のミスのリマインダーを切り替えます。",
+          "enable": "エネーブル",
+          "disable": "ディセーブル",
+          "enabled": "オン",
+          "disabled": "オフ"
+        }
       }
     }
   },

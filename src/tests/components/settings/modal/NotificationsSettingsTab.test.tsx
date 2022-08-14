@@ -5,6 +5,7 @@ import { store } from "../../../../store";
 import { clearUser, setPreference, setUser } from "../../../../slices/UserSlice";
 import { testUser } from "../../../../setupTests";
 import { Preference } from "../../../../domain/user/Preference";
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 const mockUpdatePreferences = jest.fn();
 jest.mock("../../../../service/UserService", () => {
@@ -22,7 +23,7 @@ test('Should render the streak notifications toggle', async () => {
     mockUpdatePreferences.mockResolvedValueOnce({ success: true });
     store.dispatch(setUser(testUser));
     store.dispatch(setPreference({ preference: Preference.STREAK_NOTIFICATIONS, value: true }));
-    const component = renderReduxConsumer(<NotificationSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<NotificationSettingsTab />);
 
     // It should default to the truthy text
     const notificationsToggle = component.getByTestId('streak-notifications-toggle');
@@ -46,7 +47,7 @@ test('Should render the mistakes reminder toggle', async () => {
     mockUpdatePreferences.mockResolvedValueOnce({ success: true });
     store.dispatch(setUser(testUser));
     store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }));
-    const component = renderReduxConsumer(<NotificationSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<NotificationSettingsTab />);
 
     // It should default to the truthy text
     const mistakesToggle = component.getByTestId('mistakes-reminders-toggle');
