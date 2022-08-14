@@ -6,10 +6,10 @@ describe("Font Repository", () => {
     it("Should return a list of hardcoded fonts", () => {
         return repository.read().then(response => {
             expect(response).toStrictEqual([
-                { displayName: "Default", name: "" },
-                { displayName: "Handwriting", name: "SanafonMugi Handwriting" },
-                { displayName: "Gothic", name: "K Gothic" },
-                { displayName: "Mincho", name: "Appli Mincho" }
+                { slug: "default", name: "Arial" },
+                { slug: "handwriting", name: "SanafonMugi Handwriting" },
+                { slug: "gothic", name: "K Gothic" },
+                { slug: "mincho", name: "Appli Mincho" }
             ]);
         });
     });

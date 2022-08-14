@@ -1,7 +1,7 @@
-import renderReduxConsumer from "../../../renderReduxConsumer";
 import { fireEvent, screen, within } from "@testing-library/react";
 import UserSettingsTab from "../../../../components/settings/modal/UserSettingsTab";
 import * as deviceDetect from 'react-device-detect';
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 const mockClearLocalStorage = jest.fn();
 jest.mock("../../../../service/LocalStorageService", () => {
@@ -27,7 +27,7 @@ beforeEach(() => {
 });
 
 test('Should render the profile visibility selector', async () => {
-    const component = renderReduxConsumer(<UserSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<UserSettingsTab />);
 
     fireEvent.click(component.getByTestId('profile-visibility-selector'));
 
@@ -39,7 +39,7 @@ test('Should render the profile visibility selector', async () => {
 
 
 test('Should render the streak card preference selector', async () => {
-    const component = renderReduxConsumer(<UserSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<UserSettingsTab />);
 
     fireEvent.click(component.getByTestId('streak-card-preference-selector'));
 
@@ -50,7 +50,7 @@ test('Should render the streak card preference selector', async () => {
 });
 
 test('Should clear the local storage when clicking the clear local storage button', () => {
-    const component = renderReduxConsumer(<UserSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<UserSettingsTab />);
     fireEvent.click(component.getByTestId('clear-local-storage-button'));
     fireEvent.click(component.getByTestId('clear-local-storage-button'));
     expect(mockClearLocalStorage).toHaveBeenCalled();
@@ -58,7 +58,7 @@ test('Should clear the local storage when clicking the clear local storage butto
 
 test('Should call the delete high-scores function when clicking the clear high-scores button', async () => {
     mockDeleteHighScoresData.mockResolvedValueOnce({ success: true });
-    const component = renderReduxConsumer(<UserSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<UserSettingsTab />);
     fireEvent.click(component.getByTestId('reset-high-scores-button'));
     fireEvent.click(component.getByTestId('reset-high-scores-button'));
     expect(await mockDeleteHighScoresData).toHaveBeenCalled();
@@ -66,7 +66,7 @@ test('Should call the delete high-scores function when clicking the clear high-s
 
 test('Should render an error alert if the reset high-scores call fails', async () => {
     mockDeleteHighScoresData.mockResolvedValueOnce({ success: false, error: "Failed to update high-scores." });
-    const component = renderReduxConsumer(<UserSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<UserSettingsTab />);
     fireEvent.click(component.getByTestId('reset-high-scores-button'));
     fireEvent.click(component.getByTestId('reset-high-scores-button'));
     expect(await screen.findByText("Failed to update high-scores.")).toBeInTheDocument();
@@ -77,14 +77,14 @@ test('Should render an error alert if the reset high-scores call fails', async (
 
 test('Should render an error alert if the reset high-scores call is rejected', async () => {
     mockDeleteHighScoresData.mockRejectedValueOnce({ success: false, error: "Failed to update high-scores." });
-    const component = renderReduxConsumer(<UserSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<UserSettingsTab />);
     fireEvent.click(component.getByTestId('reset-high-scores-button'));
     fireEvent.click(component.getByTestId('reset-high-scores-button'));
     expect(await screen.findByText("Failed to update high-scores.")).toBeInTheDocument();
 });
 
 test('Should render the password confirmation modal when confirming to delete account', async () => {
-    const component = renderReduxConsumer(<UserSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<UserSettingsTab />);
     fireEvent.click(component.getByTestId('delete-account-button'));
     fireEvent.click(component.getByTestId('delete-account-button'));
 
@@ -98,20 +98,20 @@ test('Should render the password confirmation modal when confirming to delete ac
 test('Should render the firefox icon in the clear browser settings button when the browser is firefox', () => {
     // @ts-ignore
     deviceDetect.isFirefox = true;
-    const component = renderReduxConsumer(<UserSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<UserSettingsTab />);
     expect(within(component.getByTestId('clear-local-storage-button')).getByTestId('firefox-icon')).toBeInTheDocument();
 });
 
 test('Should render the safari icon in the clear browser settings button when the browser is firefox', () => {
     // @ts-ignore
     deviceDetect.isSafari = true;
-    const component = renderReduxConsumer(<UserSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<UserSettingsTab />);
     expect(within(component.getByTestId('clear-local-storage-button')).getByTestId('safari-icon')).toBeInTheDocument();
 });
 
 test('Should render the chrome icon in the clear browser settings button when the browser is firefox', () => {
     // @ts-ignore
     deviceDetect.isChrome = true;
-    const component = renderReduxConsumer(<UserSettingsTab />);
+    const component = renderTranslatedReduxConsumer(<UserSettingsTab />);
     expect(within(component.getByTestId('clear-local-storage-button')).getByTestId('chrome-icon')).toBeInTheDocument();
 });
