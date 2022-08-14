@@ -285,7 +285,7 @@ describe("Default selected values from local storage", () => {
     });
 
     it("Should set the default selected value for kanji font from the local user", () => {
-        props.options = [{ name: "Montserrat" }, { name: "Roboto" }, { name: "Example Font" }];
+        props.options = [{ name: "Montserrat", value: "Montserrat" }, { name: "Example Font", value: "Example Font" }];
         props.preference = Preference.DEFAULT_KANJI_FONT;
 
         store.dispatch(setUser(testUser));
@@ -296,7 +296,7 @@ describe("Default selected values from local storage", () => {
     });
 
     it("Should set the default selected value for confidence menu style from the local user", () => {
-        props.options = [{ name: "Emoji" }, { name: "Numbers 1-6" }, { name: "Example Style" }];
+        props.options = [{ name: "Emoji", value: "Emoji" }, { name: "Example Style", value: "Example Style" }];
         props.preference = Preference.CONFIDENCE_MENU_STYLE;
 
         store.dispatch(setUser(testUser));
@@ -307,7 +307,7 @@ describe("Default selected values from local storage", () => {
     });
 
     it("Should set the default selected value for language from the local user", () => {
-        props.options = [{ name: "English" }, { name: "Japanese" }, { name: "Example Language" }];
+        props.options = [{ name: "English", value: "English" }, { name: "Example Language", value: "Example Language" }];
         props.preference = Preference.LANGUAGE;
 
         store.dispatch(setUser(testUser));
@@ -318,7 +318,7 @@ describe("Default selected values from local storage", () => {
     });
 
     it("Should set the default selected value for romaji visibility from the local user", () => {
-        props.options = [{ name: "Always Show" }, { name: "Never Show" }, { name: "Example Visibility" }];
+        props.options = [{ name: "Always Show", value: "Always Show" }, { name: "Example Visibility", value: "Example Visibility" }];
         props.preference = Preference.ROMAJI_VISIBILITY;
 
         store.dispatch(setUser(testUser));
@@ -329,7 +329,7 @@ describe("Default selected values from local storage", () => {
     });
 
     it("Should set the default selected value for high scores behaviour from the local user", () => {
-        props.options = [{ name: "Auto Submit" }, { name: "Never Submit" }, { name: "Example Behaviour" }];
+        props.options = [{ name: "Auto Submit", value: "Auto Submit" }, { name: "Example Behaviour", value: "Example Behaviour" }];
         props.preference = Preference.HIGH_SCORES_BEHAVIOUR;
 
         store.dispatch(setUser(testUser));
@@ -340,7 +340,7 @@ describe("Default selected values from local storage", () => {
     });
 
     it("Should set the default selected value for flash cards quantity from the local user", () => {
-        props.options = [{ name: "5" }, { name: "10" }, { name: "15" }];
+        props.options = [{ name: "5", value: "5" }, { name: "10", value: "10" }, { name: "15", value: "15" }];
         props.preference = Preference.FLASH_CARDS_QUANTITY;
 
         store.dispatch(setUser(testUser));
@@ -351,7 +351,7 @@ describe("Default selected values from local storage", () => {
     });
 
     it("Should set the default selected value for streak card view from the local user", () => {
-        props.options = [{ name: "Start Date" }, { name: "Streak" }, { name: "Example View" }];
+        props.options = [{ name: "Start Date", value: "Start Date" }, { name: "Example View", value: "Example View" }];
         props.preference = Preference.STREAK_CARD_VIEW;
 
         store.dispatch(setUser(testUser));
@@ -362,7 +362,7 @@ describe("Default selected values from local storage", () => {
     });
 
     it("Should set the default selected value for activity feed quantity from the local user", () => {
-        props.options = [{ name: "3" }, { name: "4" }, { name: "5" }];
+        props.options = [{ name: "3", value: "3" }, { name: "4", value: "4" }, { name: "5", value: "5" }];
         props.preference = Preference.ACTIVITY_FEED_QUANTITY;
 
         store.dispatch(setUser(testUser));
@@ -373,7 +373,7 @@ describe("Default selected values from local storage", () => {
     });
 
     it("Should set the default selected value for the theme from the local user", () => {
-        props.options = [{ name: "Dark Mode" }, { name: "Light Mode" }, { name: "Test Theme" }];
+        props.options = [{ name: "Dark Mode", value: "Dark Mode" }, { name: "Test Theme", value: "Test Theme" }];
         props.preference = Preference.THEME;
 
         store.dispatch(setUser(testUser));
@@ -384,7 +384,7 @@ describe("Default selected values from local storage", () => {
     });
 
     it("Should set the default selected value to unknown if the value in the local user is undefiend", () => {
-        props.options = [{ name: "Start Date" }, { name: "Streak" }, { name: "Custom Date" }];
+        props.options = [{ name: "Start Date", value: "Start Date" }, { name: "Custom Date", value: "Custom Date" }];
         props.preference = Preference.STREAK_CARD_VIEW;
 
         store.dispatch(clearUser());
