@@ -405,6 +405,61 @@
           "enabled": "オン",
           "disabled": "オフ"
         }
+      },
+      "user": {
+        "heading": "ユーザー設定",
+        "desc": "ユーザー プロファイルに関連する設定を構成します。",
+        "profile-visibility": {
+          "heading": "プロフィールの可視性",
+          "desc": "プロフィールの可視性を他のユーザーに変更します。デフォルトでは、あなたのユーザー名はハイスコアの他のユーザーに表示されます (提出する必要があります)。情報を非公開にすることも、友達にのみ表示することもできます。",
+          "options": [
+            { "name": "友達限定", "value": "Friends Only", "icon": "FaUserFriends" },
+            { "name": "プライベート", "value": "Private", "icon": "FaUserSecret" },
+            { "name": "パブリック", "value": "Public", "icon": "FaGlobeAmericas" }
+          ]
+        },
+        "streak-card-preference": {
+          "heading": "ストリーク カードの設定",
+          "desc": "ダッシュボードのストリーク カードに表示する統計を選択します。デフォルトは、アカウントを作成した日付です。現在の連続記録に変更するか、カスタムの日付を選択できます。",
+          "options": [
+            { "name": "開始日", "value": "Start Date", "icon": "FaCalendarCheck" },
+            { "name": "ストリーク", "value": "Streak", "icon": "FaFireAlt" },
+            { "name": "カスタム日", "value": "Custom Date", "icon": "FaClock" }
+          ]
+        },
+        "danger-zone": {
+          "heading": "危険区域",
+          "desc": "考え直したくなる破壊的な設定！",
+          "clear-local-storage": {
+            "heading": "ローカルストレージをクリア",
+            "desc": "ユーザー セッションを除いて、ブラウザからローカルに保存されたすべてのデータを削除します。保存されたデータを完全に削除するわけではありませんが、読み込み時間が一時的に長くなる場合があります。",
+            "button": "クリア"
+          },
+          "reset-high-scores": {
+            "heading": "リセット高得点",
+            "desc": "アプリ全体で保存したすべてのスコアをリセットします。ハイスコアで現在保持しているランクはすべて失われます。",
+            "button": "点をリセット"
+          },
+          "reset-statistics": {
+            "heading": "統計のリセット",
+            "desc": "プレイしたゲームや勝ったゲームなど、追跡されたすべての統計をリセットします。",
+            "button": "統計をリセット"
+          },
+          "reset-flash-cards": {
+            "heading": "フラッシュ カードのリセット",
+            "desc": "すべてのフラッシュ カード データをリセットします。統計には影響しません。",
+            "button": "カードのリセット"
+          },
+          "delete-account": {
+            "heading": "アカウントを削除する",
+            "desc": "ユーザー アカウントとすべての個人データを削除します。これは元に戻せない操作です。確認のためにパスワードを入力する必要があります。",
+            "button": "消去",
+            "popover": {
+              "title": "アカウントを削除する",
+              "text": "ユーザー アカウントとすべての個人データを削除します。これは元に戻せない操作です。確認のためにパスワードを入力する必要があります。"
+            }
+          }
+        }
       }
     }
   },

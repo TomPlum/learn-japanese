@@ -407,7 +407,11 @@
         }
       },
       "user": {
+        "heading": "User Settings",
+        "desc": "Configure settings related to your user profile.",
         "profile-visibility": {
+          "heading": "Profile Visibility",
+          "desc": "Change the visibility of your profile to other users. By default your username will be visible to others on the high-scores (should you submit them). You can keep your info private or show it to friends only.",
           "options": [
             { "name": "Friends Only", "value": "Friends Only", "icon": "FaUserFriends" },
             { "name": "Private", "value": "Private", "icon": "FaUserSecret" },
@@ -415,11 +419,46 @@
           ]
         },
         "streak-card-preference": {
+          "heading": "Streak Card Preference",
+          "desc": "Choose which statistic is displayed on the dashboards streak card. Defaults to the date you created your account. You can change it to your current streak or choose a custom date.",
           "options": [
             { "name": "Start Date", "value": "Start Date", "icon": "FaCalendarCheck" },
             { "name": "Streak", "value": "Streak", "icon": "FaFireAlt" },
             { "name": "Custom Date", "value": "Custom Date", "icon": "FaClock" }
           ]
+        },
+        "danger-zone": {
+          "heading": "Danger Zone",
+          "desc": "Destructive settings that you might want to think twice about!",
+          "clear-local-storage": {
+            "heading": "Clear Local Storage",
+            "desc": "Deletes all locally stored data from your browser except for your user session. Does not permanently delete any saved data, but may increase loading times temporarily.",
+            "button": "Clear Storage"
+          },
+          "reset-high-scores": {
+            "heading": "Reset High-Scores",
+            "desc": "Resets all your saved scores across the app. Any ranks you currently hold on the high-scores will be lost.",
+            "button": "Reset Scores"
+          },
+          "reset-statistics": {
+            "heading": "Reset Statistics",
+            "desc": "Resets all your tracked statistics such as games played or won. This does not include flash card data.",
+            "button": "Reset Stats"
+          },
+          "reset-flash-cards": {
+            "heading": "Reset Flash Cards",
+            "desc": "Resets all your flash card data. Does not affect stats.",
+            "button": "Reset Cards"
+          },
+          "delete-account": {
+            "heading": "Delete Account",
+            "desc": "Delete your user account and all of your personal data. This is an irreversible operation. You'll need to provide your password for confirmation.",
+            "button": "Delete Account",
+            "popover": {
+              "title": "Delete Account",
+              "text": "Delete your user account and all of your personal data. This is an irreversible operation. You'll need to provide your password for confirmation."
+            }
+          }
         }
       }
     }

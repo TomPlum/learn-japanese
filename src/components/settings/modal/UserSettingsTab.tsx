@@ -26,9 +26,8 @@ const UserSettingsTab = () => {
 
     if (confirmingPassword) {
         const deleteAccountPopover = <PopOver
-            title="Delete Account"
-            text="Delete your user account and all of your personal data. This is an irreversible operation.
-                  You'll need to provide your password for confirmation."
+            title={t("danger-zone.delete-account.popover.title")}
+            text={t("danger-zone.delete-account.popover.text")}
         />
 
         return (
@@ -74,10 +73,7 @@ const UserSettingsTab = () => {
 
     return (
         <div data-testid="user-settings-tab">
-            <SettingsTabTitle
-                title="User Settings"
-                description="Configure settings related to your user profile."
-            />
+            <SettingsTabTitle title={t("heading")} description={t("desc")} />
 
             {error && (
                 <DismissibleAlert variant="danger" onDismiss={() => setError("")}>
@@ -86,11 +82,9 @@ const UserSettingsTab = () => {
             )}
 
             <div className={styles.section}>
-                <p className={styles.heading}>Profile Visibility</p>
+                <p className={styles.heading}>{t("profile-visibility.heading")}</p>
                 <p className={styles.text}>
-                    Change the visibility of your profile to other users. By default your username will be visible
-                    to others on the high-scores (should you submit them). You can keep your info private or show it
-                    to friends only.
+                    {t("profile-visibility.desc")}
                 </p>
                 <SettingsDropdown
                     id="profile-visibility-selector"
@@ -100,10 +94,9 @@ const UserSettingsTab = () => {
             </div>
 
             <div className={styles.section}>
-                <p className={styles.heading}>Streak Card Preference</p>
+                <p className={styles.heading}>{t("streak-card-preference.heading")}</p>
                 <p className={styles.text}>
-                    Choose which statistic is displayed on the dashboards streak card. Defaults to the date you
-                    created your account. You can change it to your current streak or choose a custom date.
+                    {t("streak-card-preference.desc")}
                 </p>
                 <SettingsDropdown
                     id="streak-card-preference-selector"
@@ -114,68 +107,74 @@ const UserSettingsTab = () => {
 
             <div className={styles.dangerZone}>
                 <SettingsTabTitle
-                    title="Danger Zone"
                     className={styles.danger}
-                    description="Destructive settings that you might want to think twice about!"
+                    title={t("danger-zone.heading")}
+                    description={t("danger-zone.desc")}
                 />
 
                 <div className={styles.section}>
-                    <p className={styles.heading}>Clear Local Storage</p>
+                    <p className={styles.heading}>{t("danger-zone.clear-local-storage.heading")}</p>
                     <p className={styles.text}>
-                        Deletes all locally stored data from your browser except for your user session.
-                        Does not permanently delete any saved data, but may increase loading times temporarily.
+                        {t("danger-zone.clear-local-storage.desc")}
                     </p>
                     <SettingsButton
                         confirm="warn"
                         icon={browserIcon}
-                        name="Clear Storage"
                         id="clear-local-storage-button"
                         onClick={localStorageService.clear}
+                        name={t("danger-zone.clear-local-storage.button")}
                     />
                 </div>
 
                 <div className={styles.section}>
-                    <p className={styles.heading}>Reset High-Scores</p>
+                    <p className={styles.heading}>{t("danger-zone.reset-high-scores.heading")}</p>
                     <p className={styles.text}>
-                        Resets all your saved scores across the app. Any ranks you currently hold on the high-scores will be lost.
+                        {t("danger-zone.reset-high-scores.desc")}
                     </p>
                     <SettingsButton
                         confirm="warn"
-                        name="Reset Scores"
                         icon={{ icon: faMedal }}
                         id="reset-high-scores-button"
                         onClick={handleResetHighScores}
+                        name={t("danger-zone.reset-high-scores.button")}
                     />
                 </div>
 
                 <div className={styles.section}>
-                    <p className={styles.heading}>Reset Statistics</p>
+                    <p className={styles.heading}>{t("danger-zone.reset-statistics.heading")}</p>
                     <p className={styles.text}>
-                        Resets all your tracked statistics such as games played or won. This does not include flash card data.
+                        {t("danger-zone.reset-statistics.desc")}
                     </p>
-                    <SettingsButton name="Reset Stats" icon={{ icon: faChartPie }} confirm="warn" />
+                    <SettingsButton
+                        confirm="warn"
+                        icon={{ icon: faChartPie }}
+                        name={t("danger-zone.reset-statistics.button")}
+                    />
                 </div>
 
                 <div className={styles.section}>
-                    <p className={styles.heading}>Reset Flash Cards</p>
+                    <p className={styles.heading}>{t("danger-zone.reset-flash-cards.heading")}</p>
                     <p className={styles.text}>
-                        Resets all your flash card data. Does not affect stats.
+                        {t("danger-zone.reset-flash-cards.desc")}
                     </p>
-                    <SettingsButton name="Reset Cards" icon={{ icon: faBookOpen }} confirm="warn" />
+                    <SettingsButton
+                        confirm="warn"
+                        icon={{ icon: faBookOpen }}
+                        name={t("danger-zone.reset-flash-cards.button")}
+                    />
                 </div>
 
                 <div className={styles.section}>
-                    <p className={styles.heading}>Delete Account</p>
+                    <p className={styles.heading}>{t("danger-zone.delete-account.heading")}</p>
                     <p className={styles.text}>
-                        Delete your user account and all of your personal data. This is an irreversible operation.
-                        You'll need to provide your password for confirmation.
+                        {t("danger-zone.delete-account.desc")}
                     </p>
                     <SettingsButton
                         confirm="danger"
-                        name="Delete Account"
                         icon={{ icon: faSkull}}
                         id="delete-account-button"
                         onClick={() => setConfirmingPassword(true)}
+                        name={t("danger-zone.delete-account.button")}
                     />
                 </div>
             </div>
