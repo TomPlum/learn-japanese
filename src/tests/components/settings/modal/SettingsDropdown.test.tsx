@@ -383,12 +383,11 @@ describe("Default selected values from local storage", () => {
         expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Test Theme')).toBeInTheDocument();
     });
 
-    it("Should set the default selected value to unknown if the value in the local user is undefiend", () => {
+    it("Should set the default selected value to unknown if the value in the local user is undefined", () => {
         props.options = [{ name: "Start Date", value: "Start Date" }, { name: "Custom Date", value: "Custom Date" }];
         props.preference = Preference.STREAK_CARD_VIEW;
 
         store.dispatch(clearUser());
-       // store.dispatch(setPreference({ preference: Preference.STREAK_CARD_VIEW, value: undefined }));
 
         const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />);
         expect(within(component.getByTestId('settings-dropdown-selected')).getByText('Unknown')).toBeInTheDocument();
