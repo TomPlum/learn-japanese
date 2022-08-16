@@ -3,6 +3,7 @@ import styles from "../../../styles/sass/components/settings/modal/SettingsButto
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
 import { useOnComponentBlur } from "../../../hooks";
+import { useTranslation } from "react-i18next";
 
 export type ButtonIcon = {
     id?: string;
@@ -33,6 +34,7 @@ const SettingsButton = (props: SettingsButtonProps) => {
 
     const [extraClass, setExtraClass] = useState("");
     const [isConfirming, setIsConfirming] = useState(false);
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.user" });
 
     const handleClick = () => {
         if (confirm) {
@@ -48,8 +50,8 @@ const SettingsButton = (props: SettingsButtonProps) => {
         }
     }
 
-    const title = isConfirming ? "Are you sure?" : "";
-    const buttonText = isConfirming ? "Click to confirm" : name;
+    const title = isConfirming ? t("are-you-sure") : "";
+    const buttonText = isConfirming ? t("click-to-confirm") : name;
     const classes = [styles.button, className, extraClass].join(" ");
     const buttonIcon = isConfirming ? confirm === 'warn' ? faExclamationCircle : faExclamationTriangle : icon.icon;
 
