@@ -67,6 +67,10 @@
     }
   },
   "wizard": {
+    "confirmation": {
+      "title": "本気ですか？",
+      "body": "現在の構成が失われます。"
+    },
     "steps": {
       "mode": {
         "title": "モードを選択",

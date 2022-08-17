@@ -285,9 +285,9 @@ const SessionWizard = (props: SessionWizardProps) => {
             {confirmClose && (
                 <ConfirmModal
                     onConfirm={onClose}
-                    title="Are you sure?"
+                    body={t("wizard.confirmation.body")}
+                    title={t("wizard.confirmation.title")}
                     onDismiss={() => setConfirmClose(false)}
-                    body="You'll lose your current configuration."
                 />
             )}
         </Modal>

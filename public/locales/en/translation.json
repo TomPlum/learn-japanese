@@ -67,6 +67,10 @@
     }
   },
   "wizard": {
+    "confirmation": {
+      "title": "Are you sure?",
+      "body": "You'll lose your current configuration."
+    },
     "steps": {
       "mode": {
         "title": "Select Mode",
