@@ -411,6 +411,13 @@
         "desc": "ユーザー プロファイルに関連する設定を構成します。",
         "are-you-sure": "本気ですか？",
         "click-to-confirm": "押して確定",
+        "confirmation-modal": {
+          "confirm-password": "パスワードを確認してください。",
+          "irreversible-operation": "覚えておいてください - この操作は元に戻せません。",
+          "changed-mind": "気が変わった",
+          "delete-account": "アカウントを削除します",
+          "password-placeholder": "パスワード"
+        },
         "profile-visibility": {
           "heading": "プロフィールの可視性",
           "desc": "プロフィールの可視性を他のユーザーに変更します。デフォルトでは、あなたのユーザー名はハイスコアの他のユーザーに表示されます (提出する必要があります)。情報を非公開にすることも、友達にのみ表示することもできます。",

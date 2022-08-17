@@ -411,6 +411,13 @@
         "desc": "Configure settings related to your user profile.",
         "are-you-sure": "Are you sure?",
         "click-to-confirm": "Click to confirm",
+        "confirmation-modal": {
+          "confirm-password": "Please confirm your password.",
+          "irreversible-operation": "Remember - this operation is irreversible.",
+          "changed-mind": "I've changed my mind",
+          "delete-account": "Delete my account",
+          "password-placeholder": "Password"
+        },
         "profile-visibility": {
           "heading": "Profile Visibility",
           "desc": "Change the visibility of your profile to other users. By default your username will be visible to others on the high-scores (should you submit them). You can keep your info private or show it to friends only.",

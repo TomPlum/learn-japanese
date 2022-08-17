@@ -1,8 +1,8 @@
 import { fireEvent, screen } from "@testing-library/react";
 import PasswordConfirmation from "../../../../components/user/profile/PasswordConfirmation";
 import PopOver from "../../../../components/ui/PopOver";
-import renderReduxConsumer from "../../../renderReduxConsumer";
 import authService from "../../../../service/AuthenticationService";
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 const onDismissHandler = jest.fn();
 const deleteAccountService = jest.fn();
@@ -14,7 +14,7 @@ const deleteAccountPopover = <PopOver
 />
 
 const setup = () => {
-    const component = renderReduxConsumer(<PasswordConfirmation
+    const component = renderTranslatedReduxConsumer(<PasswordConfirmation
         onDismiss={onDismissHandler}
         alertInfo={deleteAccountPopover}
     />);
