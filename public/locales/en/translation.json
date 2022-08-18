@@ -224,7 +224,13 @@
         "meaning": "Meanings"
       },
       "favourites": {
-        "title": "Favourites"
+        "title": "Favourites",
+        "modal": {
+          "quit-confirmation": {
+            "title": "Are you sure you want to quit?",
+            "body": "You have unsaved changes to your favourites."
+          }
+        }
       },
       "flash-cards": {
         "title": "Flash Cards",

@@ -36,8 +36,8 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
     const [confirm, setConfirm] = useState(false);
 
     const service = new PresetService();
+    const { t, ready } = useTranslation();
     const presetsRef = useRef<HTMLParagraphElement>(null);
-    const { t, ready } = useTranslation("translation", { keyPrefix: "presets.edit" });
     const actions = useTranslation("translation", { keyPrefix: "action" }).t;
 
     useEffect(() => {
@@ -118,14 +118,14 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                 {confirm && <ConfirmModal
                     onConfirm={onDismiss}
                     onDismiss={() => setConfirm(false)}
-                    title="Are you sure you want to quit?"
-                    body="You have unsaved changes to your favourites."
+                    body={t("dashboard.card.favourites.modal.quit-confirmation.body")}
+                    title={t("dashboard.card.favourites.modal.quit-confirmation.title")}
                 />}
 
                 <div className={styles.header}>
                     {!loading && ready && <FontAwesomeIcon icon={faStar} fixedWidth className={styles.icon} />}
                     <LoadingSpinner active={loading || !ready} variant="warning" className={styles.loading} />
-                    <span className={styles.name}>{t("title")}</span>
+                    <span className={styles.name}>{t("presets.edit.title")}</span>
                     <FontAwesomeIcon
                         fixedWidth
                         icon={faTimes}

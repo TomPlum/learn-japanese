@@ -224,7 +224,13 @@
         "meaning": "意味"
       },
       "favourites": {
-        "title": "お気に入り"
+        "title": "お気に入り",
+        "modal": {
+          "quit-confirmation": {
+            "title": "本当にやめる気？",
+            "body": "お気に入りへの変更が保存されていません。"
+          }
+        }
       },
       "flash-cards": {
         "title": "フラッシュカード",
