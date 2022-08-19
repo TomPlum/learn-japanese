@@ -168,7 +168,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                         style={{ height: expandSearch ? 45 : 30 }}
                     />}
 
-                    <Popover.Content className={styles.content}>
+                    <Popover.Body className={styles.content}>
                         <LoadingSpinner active={loading ?? false} className={styles.loading} />
 
                         {!loading && <ConditionalWrapper
@@ -185,7 +185,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                                 })
                             }</>
                         </ConditionalWrapper>}
-                    </Popover.Content>
+                    </Popover.Body>
                 </Popover>
             </Overlay>
         </div>

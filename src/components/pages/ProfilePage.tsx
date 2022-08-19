@@ -1,9 +1,5 @@
 import { useUserSelector } from "../../hooks";
-import { Redirect } from "react-router-dom";
-import { Button, Card, Col, Container, Row, Table } from "react-bootstrap";
-import { faRedo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CardColumns, Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import About from "../user/profile/About";
 import styles from "../../styles/sass/components/pages/ProfilePage.module.scss";
 import Ranks from "../user/profile/Ranks";
