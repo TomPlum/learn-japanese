@@ -87,7 +87,7 @@ const KanjiShowcaseCard = () => {
     }
 
     return (
-        <DashboardCard loading={loading && !ready} updating={updating} error={error} height={300} id="kanji-showcase-card">
+        <DashboardCard loading={loading || !ready} updating={updating} error={error} height={300} id="kanji-showcase-card">
             {inExamples && <ExampleDisplay examples={examples} onDismiss={() => setInExamples(false)} />}
 
             <DashboardCard.Header>
