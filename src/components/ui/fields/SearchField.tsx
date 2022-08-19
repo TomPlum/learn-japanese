@@ -21,11 +21,9 @@ const SearchField = (props: SearchFieldProps) => {
 
     return (
         <InputGroup className={[styles.inputGroup, className].join(" ")}>
-            <InputGroup.Prepend>
-                <InputGroup.Text>
-                    <FontAwesomeIcon icon={faSearch}/>
-                </InputGroup.Text>
-            </InputGroup.Prepend>
+            <InputGroup.Text>
+                <FontAwesomeIcon icon={faSearch}/>
+            </InputGroup.Text>
 
             <Form.Control
                 type="text"
@@ -45,11 +43,9 @@ const SearchField = (props: SearchFieldProps) => {
             />}
 
             {append && (
-                <InputGroup.Append>
-                    <InputGroup.Text>
-                        {append}
-                    </InputGroup.Text>
-                </InputGroup.Append>
+                <InputGroup.Text>
+                    {append}
+                </InputGroup.Text>
             )}
         </InputGroup>
     );

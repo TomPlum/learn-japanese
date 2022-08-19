@@ -27,7 +27,6 @@ const ConfidenceButton = (props: ConfidenceButtonProps) => {
 
     return (
         <Button
-            block
             title={value.name}
             disabled={disabled}
             onClick={handleClick}

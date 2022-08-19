@@ -58,7 +58,7 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                 onHide={() => setShow(false)}
             >
                 <Popover id="notifications-menu" data-testid="notifications-menu" className={styles.popover}>
-                    <Popover.Content className={styles.content}>
+                    <Popover.Body className={styles.content}>
                         {hasNotifications && (
                             <div className={styles.header}>
                                 <span className={styles.title}>
@@ -92,7 +92,7 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                                 )
                             })}
                         </div>
-                    </Popover.Content>
+                    </Popover.Body>
                 </Popover>
             </Overlay>
         </div>

@@ -1,4 +1,4 @@
-import { Alert, Button, Col, Form } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCheckCircle, faPencilAlt, faSpinner, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -79,16 +79,16 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
 
             {!success && (
                 <Form.Group>
-                    <Form.Row>
+                    <Row>
                         <Form.Group as={Col} style={{ margin: 0 }}>
                             <Form.Label>
                                 <FontAwesomeIcon icon={faPencilAlt} fixedWidth/>
                                 <span>{" "}{t("title")}</span>
                             </Form.Label>
                         </Form.Group>
-                    </Form.Row>
+                    </Row>
 
-                    <Form.Row>
+                    <Row>
                         <Form.Group as={Col}>
                             <div className={styles.preview}>
                                 <div className={styles.iconSurface} title={t("change-icon")}>
@@ -129,7 +129,7 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
                                 <span>{actions("cancel")}</span>
                             </Button>
                         </Form.Group>
-                    </Form.Row>
+                    </Row>
                 </Form.Group>
             )}
         </div>

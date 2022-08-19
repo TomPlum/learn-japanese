@@ -57,7 +57,7 @@ const IconPicker = (props: IconPickerProps) => {
 
     const popover = (
         <Popover id="icon-picker" data-testid="icon-picker" className={styles.popover}>
-            <Popover.Content>
+            <Popover.Body>
                 {showPicker && (
                     <ColourPicker
                         className={styles.picker}
@@ -114,7 +114,7 @@ const IconPicker = (props: IconPickerProps) => {
                         </p>
                     )}
                 </div>
-            </Popover.Content>
+            </Popover.Body>
         </Popover>
     );
 

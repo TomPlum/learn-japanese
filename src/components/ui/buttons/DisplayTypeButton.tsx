@@ -21,7 +21,7 @@ const DisplayTypeButton = (props: DisplayTypeButtonProps) => {
     const className = selected === type ? styles.selected : styles.notSelected;
 
     return (
-        <Button block className={className} onClick={() => onClick(type)}>
+        <Button className={[className, styles.button].join(" ")} onClick={() => onClick(type)}>
             <FontAwesomeIcon className={styles.icon} icon={icon} />
             <p className={styles.name}>{t(`${type.name}.name`)}</p>
         </Button>

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Overlay, Popover } from "react-bootstrap";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Placement } from "react-bootstrap/Overlay";
+import { Placement } from "react-bootstrap/types";
 import ConditionalWrapper from "../ConditionalWrapper";
 import ScrollableContainer from "../ScrollableContainer";
 import styles from "../../../styles/sass/components/ui/select/ValueSelector.module.scss";
@@ -57,7 +57,7 @@ const ValueSelector = (props: ValueSelectorProps) => {
                placement={placement ?? "bottom"}
            >
                <Popover id={id} className={styles.popover}>
-                   <Popover.Content className={styles.content}>
+                   <Popover.Body className={styles.content}>
                        <ConditionalWrapper condition={!!showBeforeScrolling} wrapper={children => (
                            <ScrollableContainer height={showBeforeScrolling}>
                                {children}
@@ -70,7 +70,7 @@ const ValueSelector = (props: ValueSelectorProps) => {
                            </div>)
                        )}</>
                        </ConditionalWrapper>
-                   </Popover.Content>
+                   </Popover.Body>
                </Popover>
            </Overlay>
        </div>
