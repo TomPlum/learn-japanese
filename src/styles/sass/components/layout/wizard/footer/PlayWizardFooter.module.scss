@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.next {
+  align-self: flex-end;
+}
+
+.back, .next {
+  width: 90px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonWrapper {
+  width: 60px;
+}

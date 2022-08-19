@@ -1,11 +1,12 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import LifeSettingsForm from "../../../../components/settings/game/LifeSettingsForm";
 import { LifeSettingsBuilder } from "../../../../domain/session/settings/game/LifeSettings";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 const onChangeHandler = jest.fn();
 
 const setup = () => {
-    const component = render(<LifeSettingsForm onChange={onChangeHandler} />);
+    const component = renderWithTranslation(<LifeSettingsForm onChange={onChangeHandler} />);
     return {
         enable: component.getByTestId('enable-lives'),
         lives: component.getByTestId('life-quantity-slider'),

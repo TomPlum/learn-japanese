@@ -9,5 +9,5 @@ export enum KanaColumn {
     Y = "y",
     R = "r",
     W = "w",
-    OTHER = "?"
+    OTHER = "other"
 }

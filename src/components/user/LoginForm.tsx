@@ -3,30 +3,31 @@ import React, { useEffect, useRef, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 import styles from "../../styles/sass/components/user/UserForm.module.scss";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { useUserDispatch, useErrorDispatch } from "../../hooks";
+import { useUserDispatch } from "../../hooks";
 import { setUser } from "../../slices/UserSlice";
 import auth from "../../service/AuthenticationService";
-import { addError } from "../../slices/ErrorSlice";
+import { useTranslation } from "react-i18next";
 
 export interface LoginFormProps {
+    info?: string;
     username?: string;
     onSuccess: () => void;
 }
 
 const LoginForm = (props: LoginFormProps) => {
 
+    const { t, ready } = useTranslation();
     const [username, setUsername] = useState(props.username ?? "");
     const [password, setPassword] = useState("")
     const [usernameValid, setUsernameValid] = useState(!!props.username);
     const [passwordValid, setPasswordValid] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [badCredentials, setBadCredentials] = useState(false);
+    const [error, setError] = useState("");
 
     const usernameField = useRef<HTMLInputElement>(null);
     const passwordField = useRef<HTMLInputElement>(null);
 
     const dispatchUser = useUserDispatch();
-    const dispatchNotification = useErrorDispatch();
 
     const formValid = usernameValid && passwordValid;
 
@@ -68,26 +69,32 @@ const LoginForm = (props: LoginFormProps) => {
                 enabled: res.enabled,
                 creationDate: res.creationDate,
                 token: res.token,
+                refreshToken: res.refreshToken,
                 preferences: {
-                    defaultFont: res.preferences.defaultFont,
+                    kanjiFont: res.preferences.kanjiFont,
                     language: res.preferences.language,
                     theme: res.preferences.theme,
                     confidenceMenuStyle: res.preferences.confidenceMenuStyle,
-                    highScores: res.preferences.highScores,
-                    cardsPerDay: res.preferences.cardsPerDay,
-                    defaultMode: res.preferences.defaultMode
+                    highScoresBehaviour: res.preferences.highScoresBehaviour,
+                    flashCardsQuantity: res.preferences.flashCardsQuantity,
+                    defaultMode: res.preferences.defaultMode,
+                    streakCardView: res.preferences.streakCardView,
+                    profileVisibility: res.preferences.profileVisibility,
+                    activityFeedQuantity: res.preferences.activityFeedQuantity,
+                    romajiVisibility: res.preferences.romajiVisibility,
+                    mistakesReminders: res.preferences.mistakesReminders,
+                    streakNotifications: res.preferences.streakNotifications
                 }
             }));
 
             props.onSuccess();
         }).catch(e => {
             if (e === "AUTHENTICATION_ERROR") {
-                setBadCredentials(true);
-                setPassword("")
-                setPasswordValid(false)
+                setPassword("");
+                setPasswordValid(false);
+                setError("Username or password is incorrect.");
             } else {
-                dispatchNotification(addError({ title: "Login Error", body: e }));
-                props.onSuccess();
+                setError("Sorry, an unknown error has occurred.");
             }
         }).finally(() => {
             setLoading(false);
@@ -106,42 +113,59 @@ const LoginForm = (props: LoginFormProps) => {
         setPasswordValid(password.length > 0);
     }
 
+    const disabled = !formValid || loading || !ready;
+
     return (
-        <Modal.Body className={styles.body}>
-            {badCredentials && <Alert variant="danger">Username or password is incorrect.</Alert>}
-            {props.username && <Alert variant="success">Registration successful. You can log-in below.</Alert>}
+        <Modal.Body className={styles.body} data-testid="login-form">
+            {!!error && (
+                <Alert variant="danger">{error}</Alert>
+            )}
+
+            {props.username && !props.info && (
+                <Alert variant="success">
+                    Registration successful. You can log-in below.
+                </Alert>
+            )}
+
+            {props.info && !error && (
+                <Alert variant="warning">{props.info}</Alert>
+            )}
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Username</Form.Label>
+                <Form.Label>{t("forms.common.username")}</Form.Label>
                 <Form.Control
                     required
                     value={username}
                     ref={usernameField}
-                    placeholder="Username"
                     isValid={usernameValid}
+                    className={styles.input}
                     isInvalid={!usernameValid}
+                    data-testid="username-input"
                     onChange={handleUsernameChange}
+                    placeholder={t("forms.common.username")}
                 />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>{t("forms.common.password")}</Form.Label>
                 <Form.Control
                     required
                     type="password"
                     value={password}
                     ref={passwordField}
-                    placeholder="Password"
                     isValid={passwordValid}
+                    className={styles.input}
                     isInvalid={!passwordValid}
+                    data-testid="password-input"
                     onChange={handlePasswordChange}
+                    placeholder={t("forms.common.password")}
                 />
             </Form.Group>
 
             <Form.Group>
-                <Button className={styles.login} variant="success" onClick={login} disabled={!formValid || loading}>
-                    {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth/>}
-                    {' Login'}
+                <Button className={styles.login} variant="success" onClick={login} disabled={disabled} data-testid="login-button">
+                    {(loading || !ready) && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="login-loading" />}
+                    {' '}{t("action.login")}
                 </Button>
             </Form.Group>
         </Modal.Body>

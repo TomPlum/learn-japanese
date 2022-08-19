@@ -1,0 +1,62 @@
+@import "src/styles/sass/colours";
+
+.container {
+  display: flex;
+}
+
+.title {
+  color: $light-2;
+  margin-left: 3px;
+}
+
+.heading {
+  margin: 0;
+}
+
+.body {
+  color: $light-1;
+  margin: 0;
+}
+
+.dismiss {
+  color: $light-3;
+  font-size: 0.8em;
+  margin-left: 1px;
+  transition: color ease-in-out 0.2s;
+}
+
+.dismiss:hover {
+  color: $bootstrap-red;
+  cursor: pointer;
+}
+
+.time {
+  float: right;
+  font-size: 0.7em;
+}
+
+.rightWrapper {
+  text-align: center;
+  background-color: $dark-1;
+  width: 16px;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  padding: 0 3px;
+}
+
+.leftWrapper {
+  padding: 8px;
+}
+
+.icon {
+  margin-left: -2px;
+}
+
+.error {
+  color: $bootstrap-red;
+}
+
+.info {
+  color: $bootstrap-yellow;
+}

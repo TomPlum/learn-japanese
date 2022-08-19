@@ -1,6 +1,6 @@
 @import "src/styles/sass/colours";
 
-.button, .button:active {
+@mixin button {
   color: $light-1 !important;
   width: 100%;
   height: 50px;
@@ -12,10 +12,18 @@
   transition: all ease-in-out 0.2s;
 }
 
+.button, .button:active {
+  @include button;
+}
+
 .button:hover {
   opacity: 0.9;
   border-color: #1d1d1d;
   color: #000;
+}
+
+.disabled {
+  @include button;
 }
 
 .selected {

@@ -1,0 +1,31 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+.sliderWrapper {
+  margin-right: 10px;
+}
+
+.button {
+  color: $light-2;
+  transition: color ease-in-out 0.2s;
+}
+
+.button:hover {
+  cursor: pointer;
+  color: $light-1;
+}
+
+.selected {
+  color: $light-1;
+}
+
+.size {
+  width: 100px;
+}

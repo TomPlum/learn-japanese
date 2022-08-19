@@ -1,7 +1,7 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/LandingPage.module.scss";
 import Inspectable from "../ui/Inspectable";
-import KanaCarousel from "../ui/KanaCarousel";
+import KanaCarousel from "../ui/kana/KanaCarousel";
 import { faGraduationCap, faPlay, faQuestion, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Environment } from "../../utility/Environment";
@@ -11,9 +11,11 @@ import { useEffect, useState } from "react";
 import KanaRepository from "../../repository/KanaRepository";
 import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
 import { Kana } from "../../domain/kana/Kana";
-import LoadingSpinner from "../ui/LoadingSpinner";
+import LoadingSpinner from "../ui/loading/LoadingSpinner";
+import { useTranslation } from "react-i18next";
 
 const LandingPage = () => {
+    const { t } = useTranslation("translation", { keyPrefix: "landing" });
     const [kana, setKana] = useState<Kana[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -84,19 +86,19 @@ const LandingPage = () => {
 
                 <Row className={[styles.buttonContainer, "g-0"].join(" ")}>
                     <Col xs={6} md={3} className={styles.buttonWrapper}>
-                        <Link to="/menu/learn">
+                        <Link to="/home">
                             <Button className={styles.button} variant="outline-danger">
                                 <FontAwesomeIcon icon={faGraduationCap} className={styles.buttonIcon}/>
-                                <span className={styles.buttonText}> Learn</span>
+                                <span className={styles.buttonText}>{' '}{t('button.learn')}</span>
                             </Button>
                         </Link>
                     </Col>
 
                     <Col xs={6} md={3} className={styles.buttonWrapper}>
-                        <Link to="/menu/play">
+                        <Link to="/home">
                             <Button className={styles.button} variant="outline-success">
                                 <FontAwesomeIcon icon={faPlay} className={styles.buttonIcon}/>
-                                <span className={styles.buttonText}> Play</span>
+                                <span className={styles.buttonText}>{' '}{t('button.play')}</span>
                             </Button>
                         </Link>
                     </Col>
@@ -105,7 +107,7 @@ const LandingPage = () => {
                         <Link to="/search">
                             <Button className={styles.button} variant="outline-info">
                                 <FontAwesomeIcon icon={faSearch} className={styles.buttonIcon}/>
-                                <span className={styles.buttonText}> Search</span>
+                                <span className={styles.buttonText}>{' '}{t('button.search')}</span>
                             </Button>
                         </Link>
                     </Col>
@@ -114,7 +116,7 @@ const LandingPage = () => {
                         <Link to="/help">
                             <Button variant="outline-warning" className={styles.button} title="Help">
                                 <FontAwesomeIcon icon={faQuestion} className={styles.buttonIcon}/>
-                                <span className={styles.buttonText}> Help</span>
+                                <span className={styles.buttonText}>{' '}{t('button.help')}</span>
                             </Button>
                         </Link>
                     </Col>

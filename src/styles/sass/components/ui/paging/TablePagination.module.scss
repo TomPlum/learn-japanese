@@ -1,0 +1,61 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  margin-top: 15px;
+  padding: 0;
+}
+
+.pagination {
+  width: 100%;
+}
+
+.pages {
+  text-align: center;
+  width: 100%;
+}
+
+.genki1, .genki2 {
+  width: 100%;
+  text-align: center;
+}
+
+.genki1 a {
+  transition: color ease-in-out 0.2s;
+  color: $genki-1-dark;
+}
+
+.genki1 a:hover {
+  color: $genki-1-light;
+}
+
+.genki2 a {
+  transition: color ease-in-out 0.2s;
+  color: $genki-2-dark;
+}
+
+.genki2 a:hover {
+  color: $genki-2-light;
+}
+
+.middleCol {
+  display: flex;
+  justify-content: end;
+}
+
+.bookSelector {
+  width: 100%;
+}
+
+.pageSize {
+  cursor: pointer;
+}
+
+.off a {
+  transition: all ease-in-out 0.2s;
+  opacity: 0.8;
+  background-color: $light-1;
+}
+
+.book a:active, .book a:focus, .book a:hover {
+  box-shadow: none;
+}

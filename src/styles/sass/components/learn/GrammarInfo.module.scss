@@ -1,0 +1,176 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/viewports";
+
+@mixin expanderWrapper {
+  max-width: 50px;
+  padding-left: 0;
+}
+
+@mixin title {
+  padding-right: 0;
+}
+
+@mixin page {
+  margin-left: 3px;
+  color: $light-2;
+}
+
+@mixin header {
+  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  background-color: $dark-1;
+  border-radius: 10px 10px 0 0;
+}
+
+@mixin body {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  width: 100%;
+  max-width: 1200px;
+  background-color: $dark-2;
+  border-radius: 0 0 10px 10px;
+}
+
+@include phone {
+  .expanderWrapper {
+    @include expanderWrapper;
+    padding-right: 5px;
+  }
+
+  .title {
+    font-size: 1em;
+    padding-left: 7px;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .page {
+    @include page;
+    font-size: 0.75em;
+  }
+
+  .header {
+    @include header;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .body {
+    @include body;
+    padding: 8px 8px 10px 8px;
+  }
+}
+
+@include tablet {
+  .expanderWrapper {
+    @include expanderWrapper;
+  }
+
+  .title {
+    font-size: 1.3em;
+    padding-left: 10px;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .page {
+    @include page;
+    font-size: 1em;
+  }
+
+  .header {
+    @include header;
+  }
+
+  .body {
+    @include body;
+    padding: 20px 20px 10px 20px;
+  }
+}
+
+@include desktop {
+  .expanderWrapper {
+    @include expanderWrapper;
+  }
+
+  .title {
+    font-size: 1.3em;
+    padding-left: 10px;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .page {
+    @include page;
+    font-size: 1em;
+  }
+
+  .header {
+    @include header;
+  }
+
+  .body {
+    @include body;
+    padding: 20px 20px 10px 20px;
+  }
+}
+
+.header:hover {
+  cursor: pointer;
+}
+
+.expander {
+  float: right;
+  transition: ease-in-out all 0.2s;
+}
+
+.expander:hover {
+  color: #FFF;
+}
+
+.wrapper {
+  color: $light-1;
+  margin: 10px 0;
+}
+
+.chapter {
+  max-width: 40px;
+  display: flex;
+  padding: 0;
+}
+
+.chapterNumber {
+  margin-left: 2px;
+}
+
+.genki1 {
+  background-color: $genki-1-light;
+}
+
+.genki2 {
+  background-color: $genki-2-light;
+}
+
+.footer {
+  border-top: 1px solid $dark-1;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.icon {
+  font-size: 1.1rem;
+  padding: 3px;
+  border-radius: 5px;
+  width: 40px;
+  text-align: center;
+  color: $dark-1;
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+}

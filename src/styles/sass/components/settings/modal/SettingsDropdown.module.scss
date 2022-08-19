@@ -1,0 +1,98 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/components/settings";
+
+.button {
+  position: relative;
+
+  &:hover .chevron {
+    color: $inspect;
+  }
+
+  &:active {
+    background-color: rgba($dark-1, 0.5);
+  }
+
+  .name {
+    margin-right: 12px;
+  }
+
+  .chevron, .updating {
+    position: absolute;
+    right: 0;
+    margin: 12px;
+    transition: color ease-in-out 0.2s;
+  }
+}
+
+.active {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: default !important;
+
+  &:hover {
+    background-color: $dark-1;
+  }
+}
+
+.menu {
+  animation: fade 0.05s ease-in forwards;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.1em;
+  background-color: $dark-2;
+  border: 3px solid $dark-1;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  z-index: 10000;
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.option {
+  @include noSelect;
+  transition: all ease 0.25s;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 8px 12px;
+  color: $light-1;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+
+  &:hover {
+    background-color: $dark-1;
+    text-decoration: none;
+    color: $inspect;
+    opacity: 0.8;
+  }
+
+  &:nth-child(n+1) {
+    border-bottom: 3px solid $dark-1;
+  }
+
+  &:last-child {
+    border: none;
+  }
+
+  .icon {
+    font-size: 1em;
+    margin-right: 6px;
+    margin-bottom: 2px;
+  }
+}
+
+.selected {
+  cursor: pointer;
+  color: $light-1;
+}
+
+.inspect {
+  color: $inspect;
+}

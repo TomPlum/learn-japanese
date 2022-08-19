@@ -1,17 +1,16 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import QuestionSettingsForm from "../../../../components/settings/game/QuestionSettingsForm";
-import { QuestionType } from "../../../../domain/game/QuestionType";
-import { Environment } from "../../../../utility/Environment";
+import QuestionType from "../../../../domain/game/QuestionType";
 import QuestionSettings from "../../../../domain/session/settings/game/QuestionSettings";
 import { getValueLastCalledWith } from "../../../Queries";
 import userEvent from "@testing-library/user-event";
 import LearnableField from "../../../../domain/learn/LearnableField";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 const onSelectHandler = jest.fn();
-const environment = jest.fn();
 
 const setup = () => {
-    const component = render(<QuestionSettingsForm onChange={onSelectHandler}/>);
+    const component = renderWithTranslation(<QuestionSettingsForm onChange={onSelectHandler}/>);
     return {
         multipleChoiceButton: component.getByText('Multiple Choice'),
         textModeButton: component.getByText('Text'),
@@ -22,14 +21,6 @@ const setup = () => {
         ...component
     }
 }
-
-beforeEach(() => {
-    Environment.variable = environment;
-});
-
-afterEach(() => {
-    jest.restoreAllMocks();
-});
 
 test('On mount it should call the onSelect event handler with the default settings', () => {
     setup();
@@ -56,23 +47,15 @@ test('Selecting text mode should call the onSelect eventHandler with the updated
 });
 
 test('Selecting multiple choice mode should change the description accordingly', () => {
-    environment.mockReturnValue('Multiple choice mode description');
     const { multipleChoiceButton } = setup();
-
     fireEvent.click(multipleChoiceButton);
-
-    expect(environment).toHaveBeenCalledWith('Multiple Choice_MODE_DESC');
-    expect(screen.getByText('Multiple choice mode description'))
+    expect(screen.getByText('You\'re given something for the given data and are presented with multiple answer options of which one is correct.'))
 });
 
 test('Selecting text mode should change the description accordingly', () => {
-    environment.mockReturnValue('Text mode description');
     const { textModeButton } = setup();
-
     fireEvent.click(textModeButton);
-
-    expect(environment).toHaveBeenCalledWith('Text_MODE_DESC');
-    expect(screen.getByText('Text mode description'))
+    expect(screen.getByText('You\'re given a single piece of info (symbol, reading, meaning etc.) per question and must enter the request other piece of information.'))
 });
 
 test('Selecting multiple choice mode should render the 3 quantity buttons', () => {
@@ -112,12 +95,12 @@ test('Turning off the score tracking system should set the boolean to false', ()
 
 test('The question field should default to romaji', () => {
     const { questionFieldSelector } = setup();
-    expect(questionFieldSelector).toHaveValue('Rōmaji');
+    expect(questionFieldSelector).toHaveDisplayValue('Rōmaji');
 });
 
 test('The answer field should default to kana', () => {
     const { answerFieldSelector } = setup();
-    expect(answerFieldSelector).toHaveValue('Kana');
+    expect(answerFieldSelector).toHaveDisplayValue('Kana');
 });
 
 test('Selecting a question field value should remove it from the answer field selector', () => {
@@ -145,13 +128,9 @@ test('Changing the answer field should call the onSelect event handler with the 
 });
 
 test('Selecting the match question type should change the description accordingly', () => {
-    environment.mockReturnValue('Match question type description');
     const { matchModeButton } = setup();
-
     fireEvent.click(matchModeButton);
-
-    expect(environment).toHaveBeenCalledWith('Match_MODE_DESC');
-    expect(screen.getByText('Match question type description'))
+    expect(screen.getByText('You\'re given several pieces of info with their answers and you must match them up correctly.'))
 });
 
 test('Selecting match should call the onSelect event handler with the Match question type and 3 quantity', () => {

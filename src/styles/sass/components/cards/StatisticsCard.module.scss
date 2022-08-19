@@ -1,0 +1,72 @@
+@import "src/styles/sass/colours";
+
+.card {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.body {
+  display: flex;
+  justify-content: space-between;
+  min-height: 100%;
+  padding: 0 !important;
+  box-sizing: border-box;
+  max-height: 100%;
+}
+
+.middle {
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left, .right {
+  width: 30px;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  transition: all ease-in-out 0.2s;
+  padding: 10px;
+  margin-bottom: 37px;
+}
+
+.left:hover, .right:hover {
+  background-color: rgba($dark-1, 0.8);
+  cursor: pointer;
+}
+
+.stats {
+  display: flex;
+}
+
+.visual {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.label {
+  margin: 0;
+  text-align: center;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($dark-1, 0.6);
+  width: 50px;
+  text-align: center;
+  padding: 8px 10px 5px 10px;
+  border-radius: 5px;
+  transition: all ease-in-out 0.2s;
+  max-height: 60px;
+  margin: 5px;
+}
+
+.stat span {
+  margin-top: 3px;
+}

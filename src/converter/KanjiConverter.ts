@@ -6,6 +6,7 @@ import { ReadingType } from "../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../domain/kanji/KyoikuGrade";
 import { KanjiExample } from "../data/DataTypes";
 import { Example } from "../domain/kanji/Example";
+import JLTPLevel from "../domain/learn/JLTPLevel";
 
 class KanjiConverter {
 
@@ -24,11 +25,13 @@ class KanjiConverter {
             const readings = on.concat(kun);
 
             const grade = KyoikuGrade.fromInteger(result.grade);
-            const tags = result.tags ?? [];
+            const jlpt = JLTPLevel.fromString(`N${result.jlpt}`)!
+            const tags = result.tags;
             const source = result.source ?? "";
+            const strokes = result.strokes;
             const examples = result.examples.map((it: KanjiExample) => new Example(it.value, it.kana, it.english));
 
-            return new Kanji(result.character, readings, result.meanings, grade, source, examples, tags);
+            return new Kanji(result.character, readings, result.meanings, grade, jlpt, source, examples, strokes, tags);
         });
     }
 

@@ -1,0 +1,50 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
+.card {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.button {
+  @include noSelect;
+  background-color: rgba($dark-1, 0.7);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.numbers {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.quantity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 10px;
+}
+
+.review {
+  color: $bootstrap-info;
+}
+
+.new {
+  color: $bootstrap-green;
+}
+
+.learning {
+  color: $kyoiku-grade-3;
+}
+
+.review, .new, .learning {
+  font-size: 1.4em;
+  line-height: 20px;
+  margin: 0;
+}
+
+.label {
+  margin: 0;
+}

@@ -2,6 +2,7 @@ import styles from "../../styles/sass/components/ui/ScrollableContainer.module.s
 import { PropsWithChildren } from "react";
 
 export interface ScrollableContainerProps {
+    id?: string;
     className?: string;
     maxHeight?: number;
     height?: number;
@@ -9,7 +10,7 @@ export interface ScrollableContainerProps {
 }
 
 const ScrollableContainer = (props: PropsWithChildren<ScrollableContainerProps>) => {
-    const { className, maxHeight, height, hideScrollBar, children } = props;
+    const { id, className, maxHeight, height, hideScrollBar, children } = props;
 
     const classes = [styles.container, className];
 
@@ -18,7 +19,7 @@ const ScrollableContainer = (props: PropsWithChildren<ScrollableContainerProps>)
     }
 
     return (
-        <div className={classes.join(" ")} style={{ maxHeight: maxHeight, height: height }}>
+        <div className={classes.join(" ")} style={{ maxHeight: maxHeight, height: height }} id={id} data-testid={id}>
             {children}
         </div>
     );

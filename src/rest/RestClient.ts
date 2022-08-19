@@ -1,9 +1,13 @@
-import axios, { AxiosError, Method } from "axios"
+import { AxiosError, AxiosResponse, Method } from "axios"
 import { Environment } from "../utility/Environment";
+import api from "./API";
 import { store } from "../store";
+import { refreshTokenInterceptor } from "./Interceptors";
+import PatchRequest from "./request/patch/PatchRequest";
 
-//Set the Authorization header
-axios.defaults.headers.common['Authorization'] = `Bearer ${store.getState().user.user?.token}`;
+api.interceptors.response.use((response: AxiosResponse) => {
+    return response;
+}, refreshTokenInterceptor);
 
 export interface APIResponse<T> {
     data: T | undefined;
@@ -28,7 +32,19 @@ class RestClient {
         return await RestClient.makeRestRequest<T>("DELETE", endpoint, body);
     }
 
-    private static async makeRestRequest<T>(method: Method, endpoint: string, body?: object): Promise<APIResponse<T>> {
+    static async patch<T>(endpoint: string, body?: {}): Promise<APIResponse<T>> {
+        return await RestClient.makeRestRequest<T>("PATCH", endpoint, body);
+    }
+
+    static async patchJSON<T>(endpoint: string, request: PatchRequest): Promise<APIResponse<T>> {
+        return await RestClient.makeRestRequest<T>("PATCH", endpoint, request.toJSON(), "application/json-patch+json");
+    }
+
+    static async send<T>(method: Method, endpoint: string, body?: {}): Promise<APIResponse<T>> {
+        return await RestClient.makeRestRequest<T>(method, endpoint, body);
+    }
+
+    private static async makeRestRequest<T>(method: Method, endpoint: string, body?: object, contentType?: string): Promise<APIResponse<T>> {
         const host = Environment.variable("API_HOST_URI");
 
         if (!host) {
@@ -42,10 +58,11 @@ class RestClient {
         const URI = host + endpoint;
         //console.log("Sending " + method + " request to " + URI);
 
-        return await axios(URI, {
+        return await api(URI, {
             method: method,
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": contentType ?? "application/json",
+                "Authorization": `Bearer ${store.getState().user.user?.token}`
             },
             data: body ? JSON.stringify(body) : undefined
         }).then(async response => {

@@ -1,0 +1,130 @@
+@import "src/styles/sass/viewports";
+@import "src/styles/sass/colours";
+
+@mixin linkText {
+  text-transform: uppercase;
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+}
+
+@mixin navbar {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid $dark-1;
+  background-color: $dark-3;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 15px 25px, rgba(0, 0, 0, 0.05) 0 5px 10px;
+}
+
+@mixin nav {
+  width: 100%;
+  padding: 0 15px;
+}
+
+@mixin toggle {
+  margin-left: 20px;
+  border: none;
+  color: $light-3;
+  transition: color ease-in-out 0.2s;
+}
+
+@include phone {
+  .icon {
+    font-size: 1.6em;
+    margin-top: 5px;
+    margin-bottom: -5px;
+  }
+
+  .linkText {
+    @include linkText;
+    font-size: 0.9em;
+  }
+
+  .navbar {
+    @include navbar;
+    padding: 5px;
+    height: $nav-phone-height;
+  }
+
+  .nav {
+    @include nav;
+    max-width: 768px;
+  }
+
+  .toggle {
+    @include toggle;
+    font-size: 2.4em;
+  }
+}
+
+@include tablet {
+  .icon {
+    font-size: 2em;
+    margin-top: 6px;
+  }
+
+  .linkText {
+    @include linkText;
+    font-size: 1em;
+  }
+
+  .navbar {
+    @include navbar;
+    padding: 10px;
+    height: $nav-tablet-height;
+  }
+
+  .nav {
+    @include nav;
+    max-width: 960px;
+  }
+
+  .toggle {
+    @include toggle;
+    font-size: 2.7em;
+  }
+}
+
+@include desktop {
+  .icon {
+    font-size: 2em;
+    margin-top: 5px;
+  }
+
+  .linkText {
+    @include linkText;
+    font-size: 1.2em;
+  }
+
+  .navbar {
+    @include navbar;
+    padding: 15px;
+    height: $nav-desktop-height;
+  }
+
+  .nav {
+    @include nav;
+    max-width: 1140px;
+  }
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.leftButtonWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.leftButtonWrapper > * {
+  margin-right: 2rem;
+}
+
+.button {
+  padding: 0.35rem 0 0.35rem 0.35rem;
+}
+
+.toggle:hover {
+  cursor: pointer;
+  color: $light-1;
+}

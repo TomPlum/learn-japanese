@@ -1,0 +1,58 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
+.heading {
+  margin-bottom: 0;
+  font-size: 1.1em;
+}
+
+.text {
+  color: $light-2;
+  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
+}
+
+.section {
+  @include noSelect;
+}
+
+.section:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.buttonGroup {
+  display: flex;
+  width: 100%;
+  div:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.rule {
+  border-color: $dark-1;
+}
+
+.button {
+  @include noSelect;
+  background-color: $dark-1;
+  padding: 10px;
+  border-radius: 12px;
+  max-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease-in-out 0.2s;
+  margin: 0;
+  font-size: 1.1em;
+  border: 3px solid $dark-1;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba($dark-1, 0.8);
+  }
+
+  .icon {
+    margin-right: 10px;
+    margin-bottom: 3px;
+    font-size: 1.1em;
+  }
+}

@@ -3,9 +3,11 @@ import TextQuestion, { TextQuestionProps } from "../../../../components/game/que
 import React from "react";
 import LearnableField from "../../../../domain/learn/LearnableField";
 import renderReduxConsumer from "../../../renderReduxConsumer";
+import { MemoryGameQuestion } from "../../../../components/game/MemoryGame";
+import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer";
 
 const isValidHandler = jest.fn();
-const ref = React.createRef<TextQuestion>()
+const ref = React.createRef<MemoryGameQuestion>()
 
 let props: TextQuestionProps;
 
@@ -20,7 +22,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = renderReduxConsumer(<TextQuestion {...props} ref={ref} />);
+    const component = renderTranslatedReduxConsumer(<TextQuestion {...props} ref={ref} />);
     return {
         input: component.getByPlaceholderText('Rōmaji'),
         ...component

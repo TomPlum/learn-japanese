@@ -1,19 +1,19 @@
 import { screen } from "@testing-library/react";
 import Main from "../../../components/layout/Main";
 import { Environment } from "../../../utility/Environment";
-import { createHashHistory } from "history";
-import { HashRouter } from "react-router-dom";
-import renderReduxConsumer from "../../renderReduxConsumer";
+import { createBrowserHistory } from "history";
+import { BrowserRouter } from "react-router-dom";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
 const scrollIntoView = jest.fn();
 window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
 
 const setup = () => {
-    renderReduxConsumer(
-        <HashRouter>
+    renderTranslatedReduxConsumer(
+        <BrowserRouter>
             <Main/>
-        </HashRouter>
+        </BrowserRouter>
     );
 }
 
@@ -21,37 +21,32 @@ beforeEach(() => {
     Environment.variable = jest.fn().mockReturnValue("landing page description");
 });
 
-test('Navigating to the root URI should route to the Landing page', () => {
+test('Navigating to the root URI should route to the Landing page', async () => {
+    createBrowserHistory().push('/example-base-path/');
     setup();
-    expect(screen.getByTestId('landing-page')).toBeInTheDocument();
+    expect(await screen.findByTestId('landing-page')).toBeInTheDocument();
 });
 
-test('Navigating to the /menu/play should route to the main menu in play mode', () => {
-    createHashHistory().push('/menu/play');
+test('Navigating to the /home should route to the home page', async () => {
+    createBrowserHistory().push('/example-base-path/home');
     setup();
-    expect(screen.getByText('Learn')).toBeInTheDocument(); //If in play, the mode button shows learn
+    expect(await screen.findByTestId('home-page')).toBeInTheDocument();
 });
 
-test('Navigating to the /menu/learn should route to the main menu in learn mode', () => {
-    createHashHistory().push('/menu/learn');
+test('Navigating to the /search should route to the Search page', async () => {
+    createBrowserHistory().push('/example-base-path/search');
     setup();
-    expect(screen.getByText('Play')).toBeInTheDocument(); //If in learn, the mode button shows play
+    expect(await screen.findByTestId('search-page')).toBeInTheDocument();
 });
 
-test('Navigating to the /search should route to the Search page', () => {
-    createHashHistory().push('/search');
+test('Navigating to the /help should route to the Help page', async () => {
+    createBrowserHistory().push('/example-base-path/help');
     setup();
-    expect(screen.getByTestId('search-page')).toBeInTheDocument();
+    expect(await screen.findByText('Frequently Asked Questions')).toBeInTheDocument();
 });
 
-test('Navigating to the /help should route to the Help page', () => {
-    createHashHistory().push('/help');
+test('Navigating to an unknown URI should route to the Not Found page', async () => {
+    createBrowserHistory().push('/example-base-path/nope');
     setup();
-    expect(screen.getByText('Frequently Asked Questions')).toBeInTheDocument();
-});
-
-test('Navigating to an unknown URI should route to the Not Found page', () => {
-    createHashHistory().push('/nope');
-    setup();
-    expect(screen.getByText('Nani!?')).toBeInTheDocument();
+    expect(await screen.findByText('Nani!?')).toBeInTheDocument();
 });

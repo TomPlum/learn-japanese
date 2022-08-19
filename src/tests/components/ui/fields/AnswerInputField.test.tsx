@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import AnswerInputField, { AnswerInputFieldProps } from "../../../../components/ui/fields/AnswerInputField";
 import LearnableField from "../../../../domain/learn/LearnableField";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 let props: AnswerInputFieldProps;
 
@@ -18,7 +19,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<AnswerInputField {...props} />);
+    const component = renderWithTranslation(<AnswerInputField {...props} />);
     return {
         input: component.getByPlaceholderText("Enter English Meaning"),
         help: component.getByTestId("game-input-help"),

@@ -1,15 +1,18 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import LoginForm from "../../../components/user/LoginForm";
-import renderReduxConsumer from "../../renderReduxConsumer";
 import auth, { LoginResponse } from "../../../service/AuthenticationService";
+import { store } from "../../../store";
+import { clearUser } from "../../../slices/UserSlice";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 jest.mock("../../../service/AuthenticationService");
 
 const onSuccessHandler = jest.fn();
 const loginService = auth.login as jest.MockedFunction<() => Promise<LoginResponse>>;
 let registeredUsername: string | undefined = undefined;
+let infoMessage: string | undefined = undefined;
 
-const validLoginResponse = {
+const validLoginResponse: LoginResponse = {
     username: "TomPlum42",
     email: "tom@hotmail.com",
     nickname: "Tom",
@@ -20,19 +23,30 @@ const validLoginResponse = {
     credentialsExpired: false,
     enabled: true,
     token: "TOKEN",
+    refreshToken: "REFRESH_TOKEN",
     preferences: {
-        defaultFont: "Gothic",
+        kanjiFont: "Gothic",
         theme: "Dark Mode",
         language: "English",
-        highScores: "Ask Each Time",
+        highScoresBehaviour: "Ask Each Time",
         defaultMode: "Play",
-        cardsPerDay: 10,
-        confidenceMenuStyle: "Numbers 1 - 6"
+        flashCardsQuantity: 10,
+        confidenceMenuStyle: "Numbers 1 - 6",
+        profileVisibility: "Friends Only",
+        streakCardView: "Start Date",
+        romajiVisibility: "Ask Each Time",
+        streakNotifications: true,
+        mistakesReminders: true,
+        activityFeedQuantity: 3
     }
 };
 
 const setup = () => {
-    const component = renderReduxConsumer(<LoginForm onSuccess={onSuccessHandler} username={registeredUsername} />);
+    const component = renderTranslatedReduxConsumer(<LoginForm
+        onSuccess={onSuccessHandler}
+        username={registeredUsername}
+        info={infoMessage}
+    />);
 
     return {
         username: component.getByPlaceholderText('Username'),
@@ -41,6 +55,10 @@ const setup = () => {
         ...component
     }
 }
+
+afterEach(() => {
+    store.dispatch(clearUser());
+});
 
 test('Should focus the username field on mount', () => {
     const { username } = setup();
@@ -138,7 +156,7 @@ test('Clicking the login button while the form is valid should call the authenti
     await waitFor(() => expect(loginService).toHaveBeenLastCalledWith("TomPlum42", "P4ssw0rd"));
 });
 
-test('When the auth service returns an error, it should dispatch an error and close the modal', async () => {
+test('When the auth service returns an error, it should render a generic error message', async () => {
     loginService.mockRejectedValue("It's broken");
 
     const { username, password, login } = setup();
@@ -150,7 +168,7 @@ test('When the auth service returns an error, it should dispatch an error and cl
     //Login
     fireEvent.click(login);
 
-    await waitFor(() => expect(onSuccessHandler).toHaveBeenCalled());
+    expect(await screen.findByText('Sorry, an unknown error has occurred.')).toBeInTheDocument();
 });
 
 test('When the auth service returns an an authentication error then it should render an alert', async () => {
@@ -219,4 +237,61 @@ test('When the username prop is passed then it should focus the password field',
     registeredUsername = "TomPlum42";
     const { password } = setup();
     expect(password).toHaveFocus();
+});
+
+test('When the info prop is passed then it should render the info alert', () => {
+    infoMessage = "Your session has expired. Please log-in again.";
+    setup();
+    expect(screen.getByText("Your session has expired. Please log-in again.")).toBeInTheDocument();
+});
+
+test('When the info prop is passed then it should not render the success alert', () => {
+    registeredUsername = "TomPlum42";
+    infoMessage = "Your session has expired. Please log-in again.";
+    setup();
+    expect(screen.queryByText("Registration successful. You can log-in below.")).not.toBeInTheDocument();
+});
+
+test('When successfully logging in, it should set the user object in the Redux store', async () => {
+    loginService.mockResolvedValueOnce(validLoginResponse);
+
+    const { username, password, login } = setup();
+
+    // Enter Credentials
+    fireEvent.change(username, { target: { value: 'Tom' }});
+    fireEvent.change(password, { target: { value: 'P4ssw0rd' }});
+
+    // Login
+    fireEvent.click(login);
+    await waitFor(() => expect(onSuccessHandler).toHaveBeenCalled());
+    expect(store.getState().user.user).toStrictEqual({
+        "creationDate": "2021-10-15",
+        "credentialsExpired": false,
+        "email": "tom@hotmail.com",
+        "enabled": true,
+        "expired": false,
+        "locked": false,
+        "nickname": "Tom",
+        "preferences": {
+            "activityFeedQuantity": 3,
+            "confidenceMenuStyle": "Numbers 1 - 6",
+            "defaultMode": "Play",
+            "flashCardsQuantity": 10,
+            "highScoresBehaviour": "Ask Each Time",
+            "kanjiFont": "Gothic",
+            "language": "English",
+            "mistakesReminders": true,
+            "profileVisibility": "Friends Only",
+            "romajiVisibility": "Ask Each Time",
+            "streakCardView": "Start Date",
+            "streakNotifications": true,
+            "theme": "Dark Mode"
+        },
+        "refreshToken": "REFRESH_TOKEN",
+        "roles": [
+            "admin"
+        ],
+        "token": "TOKEN",
+        "username": "TomPlum42"
+    });
 });

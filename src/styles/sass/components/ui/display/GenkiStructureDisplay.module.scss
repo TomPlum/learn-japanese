@@ -1,0 +1,17 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  border-radius: 5px;
+  border: 1px solid;
+  padding: 15px;
+  margin-left: 10px;
+  margin-bottom: 25px;
+}
+
+.genkiOne {
+  border-color: $genki-1-light;
+}
+
+.genkiTwo {
+  border-color: $genki-2-light;
+}

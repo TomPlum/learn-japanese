@@ -154,4 +154,28 @@ export default class Arrays {
         }
         return [randomObjects, objects];
     };
+
+    /**
+     * Picks the first element of the given array.
+     * @param array The array to pick from.
+     * @return tuple A tuple containing the remaining elements and the first element.
+     */
+    static takeFirst = <T>(array: T[]): [T[], T?] => {
+        if (array.length > 0) {
+            const first = array[0];
+            const remaining = array.splice(1);
+            return [remaining, first];
+        }
+        return [array];
+    }
+
+    /**
+     * Generates an array of integers between the given start and end values.
+     * The start value is inclusive, but the end value is exclusive.
+     * @param start The first value in the array.
+     * @param end The last value in the array.
+     */
+    static range = (start: number, end: number): number[] => {
+        return Array.from({length: (end - start)}, (v, k) => k + start);
+    }
 }

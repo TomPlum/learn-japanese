@@ -1,18 +1,20 @@
 import { Card, Col, Dropdown, Row } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { useUserDispatch } from "../../../hooks";
-import { Font, fonts } from "../../ui/buttons/FontSelectorButton";
+import { Font } from "../../ui/buttons/FontSelectorButton";
 import { Theme } from "../../../domain/Theme";
 import { Language } from "../../../domain/Language";
 import { HighScorePreference } from "../../../domain/HighScorePreference";
 import { faCheckCircle, faCircleNotch, faRedo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AppMode } from "../../../domain/AppMode";
-import { setPreferences, User } from "../../../slices/UserSlice";
+import { setPreferences, User, UserPreferences } from "../../../slices/UserSlice";
 import { CardsPerDay } from "../../../domain/learn/spacedrepetition/CardsPerDay";
 import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
 import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
 import UserService from "../../../service/UserService";
+import FontService from "../../../service/FontService";
+import { useTranslation } from "react-i18next";
 
 export interface PreferencesProps {
     user: User;
@@ -22,19 +24,31 @@ const Preferences = (props: PreferencesProps) => {
 
     const userDispatcher = useUserDispatch();
     const userService = new UserService();
+    const fontService = new FontService();
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.interface.kanji-font.options" });
 
     useEffect(() => {
         const preferences = props.user.preferences;
-        setSelectedFont(preferences.defaultFont);
+        setSelectedFont(preferences.kanjiFont);
         setTheme(preferences.theme);
         setLanguage(preferences.language);
-        setHighScorePreference(preferences.highScores);
+        setHighScorePreference(preferences.highScoresBehaviour);
         setAppMode(preferences.defaultMode);
-        setCardsPerDay(preferences.cardsPerDay);
+        setCardsPerDay(preferences.flashCardsQuantity);
         setConfidenceMenuStyle(preferences.confidenceMenuStyle);
+
+        setLoading(true);
+        fontService.getFonts().then(fonts => {
+            setFonts(fonts);
+            setSelectedFont(fonts[0].name);
+        }).finally(() => {
+            setLoading(false);
+        });
     }, []);
 
-    const [font, setSelectedFont] = useState(fonts[0].displayName);
+    const [fonts, setFonts] = useState<Font[]>([]);
+
+    const [font, setSelectedFont] = useState("");
     const [theme, setTheme] = useState(Theme.DARK.toString());
     const [language, setLanguage] = useState(Language.ENGLISH.toString());
     const [highScorePreference, setHighScorePreference] = useState(HighScorePreference.ASK_EACH_TIME.toString());
@@ -43,7 +57,7 @@ const Preferences = (props: PreferencesProps) => {
     const [confidenceMenuStyle, setConfidenceMenuStyle] = useState(ConfidenceMenuStyle.NUMBERS.toString());
 
     const [changes, setChanges] = useState(false);
-    const [saving, setSaving] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | undefined>(undefined);
 
     const onSelectDefaultFont = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
@@ -84,19 +98,26 @@ const Preferences = (props: PreferencesProps) => {
     const onSaveChanges = () => {
         setError(undefined);
         setChanges(false);
-        setSaving(true);
+        setLoading(true);
 
-        const updatedPreferences = {
+        const updatedPreferences: UserPreferences = {
             defaultMode: appMode,
-            cardsPerDay: cardsPerDay,
-            highScores: highScorePreference,
+            flashCardsQuantity: cardsPerDay,
+            highScoresBehaviour: highScorePreference,
             confidenceMenuStyle: confidenceMenuStyle,
             language: language,
             theme: theme,
-            defaultFont: font
+            kanjiFont: font,
+            activityFeedQuantity: 3,
+            streakCardView: "Start Date",
+            romajiVisibility: "Always Show",
+            profileVisibility: "Friends Only",
+            streakNotifications: false,
+            mistakesReminders: false
         };
 
-        userService.updatePreferences(updatedPreferences).then(response => {
+        // TODO: This whole component just needs removing
+        userService.updatePreferences([]).then(response => {
             if (response.success) {
                 userDispatcher(setPreferences(updatedPreferences));
             } else {
@@ -105,7 +126,7 @@ const Preferences = (props: PreferencesProps) => {
         }).catch(response => {
             setError(response.error);
         }).finally(() => {
-            setSaving(false);
+            setLoading(false);
         });
     }
 
@@ -129,7 +150,7 @@ const Preferences = (props: PreferencesProps) => {
                                 icon={faCheckCircle}
                                 onClick={onSaveChanges}
                                 className={[styles.save, styles.icon].join(" ")}
-                            /> : saving ? <FontAwesomeIcon
+                            /> : loading ? <FontAwesomeIcon
                                 spin
                                 size="sm"
                                 title="Saving..."
@@ -155,7 +176,7 @@ const Preferences = (props: PreferencesProps) => {
                             <Dropdown.Toggle variant="light" data-testid="font">{font}</Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {fonts.map((font: Font) => {
-                                    return <Dropdown.Item key={font.displayName}>{font.displayName}</Dropdown.Item>
+                                    return <Dropdown.Item key={font.slug}>{t(font.slug)}</Dropdown.Item>
                                 })}
                             </Dropdown.Menu>
                         </Dropdown>

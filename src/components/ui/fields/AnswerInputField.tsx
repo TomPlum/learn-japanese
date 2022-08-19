@@ -1,7 +1,8 @@
-import React, { ChangeEvent, Component } from "react";
+import React, { ChangeEvent } from "react";
 import GameInputField from "./GameInputField";
 import LearnableField from "../../../domain/learn/LearnableField";
 import PopOver from "../PopOver";
+import { useTranslation } from "react-i18next";
 
 export interface AnswerInputFieldProps {
     value: string;
@@ -12,31 +13,30 @@ export interface AnswerInputFieldProps {
     onChange?: (value: string) => void;
 }
 
-class AnswerInputField extends Component<AnswerInputFieldProps> {
+const AnswerInputField = (props: AnswerInputFieldProps) => {
 
-    render() {
-        const { value, disabled, placeholder, className, field } = this.props;
+    const { value, disabled, placeholder, className, field, onChange } = props;
 
-        return (
-            <GameInputField
-                value={value}
-                disabled={disabled}
-                className={className}
-                placeholder={placeholder}
-                onChange={this.handleOnChange}
-                helpPopover={<PopOver title={field.name} text={field.description}/>}
-            />
-        );
-    }
+    const { t } = useTranslation();
 
-    private handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        const { onChange, field } = this.props;
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const value = e.target.value;
         if (field.validationRegex.test(value) || !value) {
             onChange?.(value);
         }
         return false;
     }
+
+    return (
+        <GameInputField
+            value={value}
+            disabled={disabled}
+            className={className}
+            placeholder={placeholder}
+            onChange={handleOnChange}
+            helpPopover={<PopOver title={t(field.name)} text={t(field.description)}/>}
+        />
+    );
 }
 
 export default AnswerInputField;

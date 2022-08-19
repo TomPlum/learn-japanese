@@ -1,0 +1,23 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/animations";
+@import "src/styles/sass/mixins";
+
+.container {
+  background-color: $dark-2;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 15px 25px, rgba(0, 0, 0, 0.05) 0 5px 10px;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.containerError {
+  border: 1px solid $bootstrap-red;
+}
+
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding-bottom: 8px;
+}

@@ -9,9 +9,13 @@
 }
 
 .highscores {
-  color: #eed242;
+  color: #eed242 !important;
 }
 
 .logout {
   color: $bootstrap-red !important;
+}
+
+.button {
+  margin-left: 10px;
 }

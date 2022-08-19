@@ -1,11 +1,21 @@
-import LoadingSpinner from "../LoadingSpinner";
-import React, { useImperativeHandle, useState } from "react";
+import LoadingSpinner from "../loading/LoadingSpinner";
+import React, { Ref, useImperativeHandle, useState } from "react";
 import { KanaDisplayStyle } from "./KanaDisplay";
 import { Textfit } from "@tomplum/react-textfit";
 import styles from "../../../styles/sass/components/ui/display/DynamicDisplay.module.scss";
 import { useFontSelector } from "../../../hooks";
 
-const DynamicDisplay = React.forwardRef((props: { value: string, className?: string, style?: KanaDisplayStyle }, ref) => {
+export interface DynamicDisplayProps {
+    value: string;
+    className?: string;
+    style?: KanaDisplayStyle ;
+}
+
+export type DynamicDisplayHandle = {
+    notify: () => void;
+}
+
+const DynamicDisplay = React.forwardRef((props: DynamicDisplayProps, ref: Ref<DynamicDisplayHandle>) => {
     const [loading, setLoading] = useState(true);
     const [active, setActive] = useState(false);
     const selectedFont = useFontSelector(state => state.font.selected);

@@ -1,0 +1,41 @@
+@import "src/styles/sass/buttons";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.name {
+  line-height: 15px;
+}
+
+.button {
+  @include favourite-button;
+}
+
+.icon {
+  @include favourite-button-icon;
+}
+
+.delete {
+  background-color: rgba($bootstrap-red, 0.7);
+}
+
+.surface {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1000;
+}
+
+.ban {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: $bootstrap-red;
+}
+
+.times {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: $bootstrap-red;
+}

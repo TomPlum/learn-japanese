@@ -1,0 +1,9 @@
+@import "src/styles/sass/colours";
+
+.theme-light-mode:hover {
+  color: $dark-mode;
+}
+
+.theme-dark-mode:hover {
+  color: $light-mode;
+}

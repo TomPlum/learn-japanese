@@ -1,0 +1,151 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
+.header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.close {
+  margin-left: auto;
+  color: $light-2;
+  font-size: 1.2em;
+  transition: color ease-in-out 0.2s;
+}
+
+.close:hover {
+  cursor: pointer;
+  color: $bootstrap-red;
+}
+
+.name {
+  margin-left: 8px;
+  font-size: 1.5em;
+}
+
+.content {
+  color: $light-1;
+  background-color: $dark-2;
+  border-radius: 10px;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  padding: 10px 15px 10px 15px;
+  border: 1px solid $dark-1;
+}
+
+.body {
+  width: 100%;
+  height: 450px;
+}
+
+.dialog {
+  max-width: 650px;
+}
+
+.modal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.icon {
+  font-size: 1.5em;
+  color: $inspect;
+  margin-bottom: 3px;
+}
+
+.scrollable {
+  height: 400px;
+}
+
+.favourites {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.favourite {
+  margin-left: 0;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.heading {
+  align-self: stretch
+}
+
+.save {
+  margin-left: auto;
+  width: 75px;
+}
+
+.footer {
+  display: flex;
+  bottom: 0;
+  width: 100%;
+}
+
+.learn, .play {
+  margin-right: 10px;
+  border-radius: 12px;
+  border: none;
+  transition: all ease-in-out 0.2s;
+}
+
+.learn:active, .play:active, .learn:focus, .play:focus {
+  box-shadow: none !important;
+}
+
+.disabled {
+  opacity: 0.6;
+}
+
+.learn {
+  background-color: $learn-colour;
+}
+
+.play {
+  background-color: $play-colour;
+}
+
+.play:focus, .play:hover {
+  background-color: #aa2727 !important;
+}
+
+.blur {
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 2000px rgba($dark-2, .5);
+  filter: blur(5px);
+}
+
+.empty {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  display: flex;
+  background-color: $dark-1;
+  border-radius: 10px;
+  padding: 10px;
+  align-items: center;
+  margin-bottom: 15px;
+  color: $light-1;
+  transition: all ease-in-out 0.2s;
+}
+
+.empty:hover {
+  cursor: pointer;
+  color: $light-2;
+}
+
+.empty:hover > svg {
+  color: $learn-colour;
+}
+
+.empty svg {
+  transition: all ease-in-out 0.2s;
+  margin-bottom: 2px;
+  margin-right: 5px;
+}

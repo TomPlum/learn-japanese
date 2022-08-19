@@ -3,6 +3,7 @@ import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { Example } from "../../../domain/kanji/Example";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
+import JLTPLevel from "../../../domain/learn/JLTPLevel";
 
 describe("Kanji", () => {
     describe("Getters", () => {
@@ -11,8 +12,10 @@ describe("Kanji", () => {
             [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)],
             ["person"],
             KyoikuGrade.ONE,
+            JLTPLevel.N5,
             "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
             [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+            1,
             []
         );
 
@@ -47,8 +50,10 @@ describe("Kanji", () => {
                 [new KanjiReading("hito", "ひと", ReadingType.KUN)],
                 ["person"],
                 KyoikuGrade.ONE,
+                JLTPLevel.N5,
                 "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
                 [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+                1,
                 []
             );
             expect(kanji.getKana()).toStrictEqual(["ひと"]);
@@ -59,8 +64,10 @@ describe("Kanji", () => {
                 [new KanjiReading("jin", "じん", ReadingType.ON)],
                 ["person"],
                 KyoikuGrade.ONE,
+                JLTPLevel.N5,
                 "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
                 [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+                1,
                 []
             );
             expect(kanji.getKana()).toStrictEqual(["じん"]);
@@ -71,8 +78,10 @@ describe("Kanji", () => {
                 [],
                 ["person"],
                 KyoikuGrade.ONE,
+                JLTPLevel.N5,
                 "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
                 [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+                1,
                 []
             );
             expect(kanji.getKana()).toStrictEqual([]);
@@ -105,18 +114,22 @@ describe("Kanji", () => {
         it("Should return the kanji character for the unique ID", () => {
             expect(kanji.getUniqueID()).toBe("人");
         });
+
+        it("Should return a Jisho online dictionary link when getting the jisho link", () => {
+            expect(kanji.getJishoLink()).toBe("https://jisho.org/search/人");
+        });
     });
 
     describe("Equality", () => {
         it("Should return true when two Kanji have the same character", () => {
-            const first = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]);
-            const second = new Kanji("一", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]);
+            const first = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], 1, ["number"]);
+            const second = new Kanji("一", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5,"", [], 1, ["animal"]);
             expect(first.equals(second)).toBe(true);
         });
 
         it("Should return false when two Kanji have different characters", () => {
-            const first = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]);
-            const second = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]);
+            const first = new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5,"", [], 1, ["number"]);
+            const second = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 9, ["animal"]);
             expect(first.equals(second)).toBe(false);
         });
     });

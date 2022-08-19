@@ -1,0 +1,180 @@
+@import "src/styles/sass/colours";
+
+$highlight-colour: rgba($dark-1, 0.7);
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px !important;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.kanji {
+  font-size: 3em;
+  text-align: center;
+  background-color: $highlight-colour;
+  width: 80px;
+  line-height: 80px;
+  height: 80px;
+  border-radius: 10px;
+  color: $inspect;
+  transition: all ease-in-out 0.2s;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kanji:hover {
+  background-color: rgba($dark-1, 0.9);
+  color: rgba($inspect, 0.9);
+}
+
+.meaning {
+  margin: 0;
+  background-color: $highlight-colour;
+  padding: 5px 10px;
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+  color: #FFF;
+}
+
+.readings {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.on, .kun {
+  background-color: $highlight-colour;
+  padding: 6px 10px;
+  width: 50%;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 10px 0;
+  border-radius: 10px;
+  color: #FFF;
+  position: relative;
+}
+
+.on {
+  margin-right: 5px;
+}
+
+.kun {
+  margin-left: 5px;
+}
+
+.label {
+  font-family: "Ciutadella Rounded Semi Bold", sans-serif;
+  color: $light-2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 10px;
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+
+.count {
+  font-family: "Ciutadella Rounded Semi Bold", sans-serif;
+  color: $light-2;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 10px;
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+
+.attributes {
+  display: flex;
+  flex-direction: column;
+}
+
+.attributes:first-child {
+  margin-right: 10px;
+}
+
+.attributes:last-child {
+  margin-left: 10px;
+}
+
+.attributes:last-child > .attribute:last-child > svg {
+  margin-bottom: 2px;
+}
+
+.attribute {
+  background-color: $highlight-colour;
+  padding: 5px 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  width: 62px;
+}
+
+.attribute > svg {
+  margin-right: 5px;
+  color: $light-2;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.clickable {
+  transition: all ease-in-out 0.2s;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  background-color: rgba($dark-1, 0.9);
+}
+
+.clickable:hover > * {
+  color: #FFF;
+}
+
+.icon {
+  transition: color ease-in-out 0.2s;
+}
+
+.search {
+  background-color: $highlight-colour;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all ease-in-out 0.2s;
+}
+
+.search > a {
+  color: $light-1;
+  transition: all ease-in-out 0.2s;
+}
+
+.search > a:hover {
+  text-decoration: none;
+  color: $inspect;
+}
+
+.search > svg {
+  margin-right: 5px;
+}
+
+.search:hover {
+  cursor: pointer;
+  background-color: rgba($dark-1, 0.9);
+}
+
+.search:hover > a {
+  color: $inspect;
+}

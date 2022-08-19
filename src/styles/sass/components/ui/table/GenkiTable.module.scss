@@ -1,0 +1,37 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px 10px 20px 10px;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table th, .table td:first-child {
+  color: $light-2;
+}
+
+.table td:not(:first-child) {
+  color: #FFF;
+}
+
+.table thead th:first-child {
+  color: $genki-1-light;
+  font-style: italic;
+}
+
+.table tr:first-child th:first-child {
+  color: $genki-1-light;
+  font-style: italic;
+}
+
+.genkiOne {
+  border: 2px solid $genki-1-light;
+}
+
+.genkiTwo {
+  border: 2px solid $genki-2-light;
+}

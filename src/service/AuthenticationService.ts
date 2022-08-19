@@ -1,7 +1,7 @@
 import RestClient, { APIResponse } from "../rest/RestClient";
 import { UserPreferencesResponse } from "./UserService";
-import DataResponse from "../rest/DataResponse";
-import UpdateResponse from "../rest/UpdateResponse";
+import DataResponse from "../rest/response/DataResponse";
+import UpdateResponse from "../rest/response/UpdateResponse";
 
 export interface LoginResponse {
     username: string;
@@ -14,6 +14,7 @@ export interface LoginResponse {
     creationDate:string;
     enabled: boolean;
     token: string;
+    refreshToken: string;
     preferences: UserPreferencesResponse;
 }
 

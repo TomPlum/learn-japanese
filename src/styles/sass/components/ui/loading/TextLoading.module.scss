@@ -1,0 +1,72 @@
+@import "src/styles/sass/colours";
+
+.container {
+  padding: 5px;
+  width: 100px;
+}
+
+.shimmer {
+  -webkit-animation-duration: 1.1s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: shimmer;
+  -webkit-animation-timing-function: linear;
+  background: #46484e linear-gradient(to right, #46484e 0%, #55585f 20%, #46484e 40%, #46484e 100%) no-repeat;
+  background-size: 800px 104px;
+  height: 25px;
+  position: relative;
+}
+
+.shimmer div {
+  background: $dark-3;
+  height: 6px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.first {
+  height: 10px;
+}
+
+.second {
+  top: 10px;
+  height: 10px;
+}
+
+.mask-one {
+  background: $dark-3;
+  height: 6px;
+  top: 5px;
+  left: 50px !important;
+  position: absolute;
+  width: 10px;
+}
+
+.mask-two {
+  background: $dark-3;
+  height: 10px !important;
+  top: 15px;
+  left: 20px !important;
+  position: absolute;
+  width: 10px;
+}
+
+.mask-three {
+  background: $dark-3;
+  height: 10px !important;
+  top: 15px;
+  left: 80px !important;
+  position: absolute;
+  width: 10px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0
+  }
+  100% {
+    background-position: 468px 0
+  }
+}
+

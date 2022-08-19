@@ -1,0 +1,115 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  height: 38px;
+  padding: 0 12px;
+  width: 100%;
+}
+
+.iconContainer {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.icon {
+  display: inline;
+  color: $light-1;
+  transition: all ease-in-out 0.2s;
+  font-size: 1.8em;
+  margin: 8px;
+}
+
+.icon:hover {
+  cursor: pointer;
+  color: $learn-colour;
+}
+
+.selected {
+  transition: all ease-in-out 0.2s;
+  color: #FFF;
+}
+
+.selected:hover {
+  cursor: pointer;
+  color: $light-1;
+}
+
+.popover {
+  padding: 5px;
+  background-color: $dark-2;
+  border: 3px solid $dark-1;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px;
+}
+
+.popover > div::after, .popover > div::before {
+  border-top-color: $dark-1 !important;
+}
+
+.search {
+  height: 30px;
+  background-color: $dark-1;
+  border-color: $light-3;
+  color: $light-1;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+}
+
+.search:focus, .search:active {
+  background-color: $dark-1;
+  border-color: $light-3;
+  color: $light-1;
+  box-shadow: none;
+}
+
+.search::placeholder {
+  text-align: left;
+}
+
+.notFound {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  color: $light-2;
+  font-size: 1.2em;
+  margin-bottom: 0;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.random {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  color: $light-2;
+  transition: all ease-in-out 0.2s;
+}
+
+.random:hover {
+  cursor: pointer;
+  color: $light-1;
+}
+
+.colour {
+  position: absolute;
+  top: 7px;
+  right: 32px;
+  color: $light-2;
+  transition: all ease-in-out 0.2s;
+}
+
+.colour:hover {
+  cursor: pointer;
+  color: $light-1;
+}
+
+.picker {
+  width: 100%;
+}

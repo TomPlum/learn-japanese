@@ -1,0 +1,11 @@
+@import "src/styles/sass/colours";
+
+.popover > div::after {
+  border-top-color: $dark-1 !important;
+  border-bottom-color: $dark-1 !important;
+}
+
+.popover {
+  border-radius: 8px;
+  border: 3px solid $dark-1 !important;
+}

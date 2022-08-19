@@ -1,13 +1,14 @@
 import React, { Component, ReactElement } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
+import { Placement } from "react-bootstrap/Overlay";
 import ComponentTree from "../../utility/ComponentTree";
 import styles from "../../styles/sass/components/ui/Copyable.module.scss";
-import { Placement } from "react-bootstrap/types";
 
 export interface CopyableProps {
     className?: string;
     inline?: boolean;
     placement?: Placement;
+    valueProvider?: (source?: any) => string;
 }
 
 interface CopyableState {
@@ -62,7 +63,14 @@ class Copyable extends Component<CopyableProps, CopyableState> {
     }
 
     private copyToClipBoard = async () => {
-        const value = new ComponentTree(this.props.children).getDeepestLeafNode();
+        const { children, valueProvider } = this.props;
+
+        let value = new ComponentTree(children).getDeepestLeafNode();
+
+        if (valueProvider) {
+            value = valueProvider(value);
+        }
+
         await navigator.clipboard.writeText(value)
             .then(this.restartCopyTimer)
             .catch(() => this.setState({ hasWritten: false, hasFailed: true }));

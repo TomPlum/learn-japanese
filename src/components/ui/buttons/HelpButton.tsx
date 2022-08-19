@@ -1,25 +1,35 @@
 import NavigationButton from "../NavigationButton";
-import { faBook, faBrain, faInfoCircle, faPaintBrush, faQuestion } from "@fortawesome/free-solid-svg-icons";
-import menuStyles from "../../../styles/sass/components/layout/ControlsMenu.module.scss";
+import { faBrain, faInfoCircle, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import styles from "../../../styles/sass/components/ui/buttons/HelpButton.module.scss";
+import { useTranslation } from "react-i18next";
 
-const HelpButton = () => {
+export interface HelpButtonProps {
+    className?: string;
+}
+
+const HelpButton = (props: HelpButtonProps) => {
+
+    const { t, ready } = useTranslation();
+
     return (
-        <NavigationButton text="Help" icon={faInfoCircle} iconClass={menuStyles.icon} textClass={menuStyles.linkText} width={250}>
-            <NavigationButton.Item icon={faPaintBrush} href="/help" iconClass={styles.kanji}>
-                Jōyō Kanji Bank
-            </NavigationButton.Item>
-
-            <NavigationButton.Item icon={faBook} href="/help" iconClass={styles.genki}>
-                Genki Knowledge Bank
-            </NavigationButton.Item>
-
+        <NavigationButton
+            width={250}
+            id="help-button"
+            icon={faInfoCircle}
+            textLoading={!ready}
+            textPlacement="right"
+            iconClass={menuStyles.icon}
+            className={props.className}
+            textClass={menuStyles.linkText}
+            text={t("navigation.button.help")}
+        >
             <NavigationButton.Item icon={faBrain} href="/help" iconClass={styles.sm2}>
-                SuperMemo2 Algorithm
+                {t("navigation.button.sm2")}
             </NavigationButton.Item>
 
             <NavigationButton.Item icon={faQuestion} href="/help" iconClass={styles.faq}>
-                Frequently Asked Questions
+                {t("navigation.button.faq")}
             </NavigationButton.Item>
         </NavigationButton>
     );

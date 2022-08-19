@@ -1,0 +1,190 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+@import "src/styles/sass/viewports";
+
+@mixin wrapper {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  max-width: 1500px;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 0;
+}
+
+@include desktop {
+  .wrapper {
+    @include wrapper;
+    padding-top: 50px;
+  }
+}
+
+@include tablet {
+ .wrapper {
+   @include wrapper;
+   padding-top: 25px;
+ }
+}
+
+@include phone {
+  .wrapper {
+    @include wrapper;
+    padding-top: 15px;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 7px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.table th {
+  background-color: $dark-1;
+  border-right: 2px solid $light-3;
+  border-bottom: 2px solid $light-3;
+  border-top: 2px solid $light-3;
+  color: $light-1;
+  transition: color ease-in-out 0.2s;
+}
+
+.table th:first-child {
+  border-left: 2px solid $light-3;
+}
+
+.table th:hover {
+  color: #FFF;
+}
+
+.table th:first-of-type {
+  border-top-left-radius: 10px;
+}
+
+.table th:last-of-type {
+  border-top-right-radius: 10px;
+}
+
+.table tbody tr:first-child td:first-child {
+  border-top-left-radius: 0;
+}
+
+.table tbody tr:first-child td:last-child {
+  border-top-right-radius: 0;
+}
+
+.table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 0;
+}
+
+.table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 0;
+}
+
+.table tbody tr td:first-of-type {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.table tbody tr td:last-of-type {
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.table tbody tr td, .table thead tr th {
+  padding: 12px;
+}
+
+.genkiOne td {
+  color: $dark-2;
+  background-color: $genki-1-light;
+  border-right: 2px solid #de985d;
+  border-bottom: 2px solid $genki-1-dark;
+  border-top: 2px solid $genki-1-dark;
+  transition: all ease-in-out 0.2s;
+}
+
+.genkiOne td:first-child {
+  border-left: 2px solid $genki-1-dark;
+}
+
+.genkiOne td:last-child {
+  border-right: 2px solid $genki-1-dark;
+}
+
+.genkiOne td:hover {
+  background-color: #de985d;
+}
+
+.genkiTwo td {
+  color: $dark-2;
+  background-color: $genki-2-light;
+  border-right: 2px solid #77b676;
+  border-bottom: 2px solid $genki-2-dark;
+  border-top: 2px solid $genki-2-dark;
+  transition: all ease-in-out 0.2s;
+}
+
+.genkiTwo td:first-child {
+  border-left: 2px solid $genki-2-dark;
+}
+
+.genkiTwo td:last-child {
+  border-right: 2px solid $genki-2-dark;
+}
+
+.genkiTwo td:hover {
+  background-color: #77b676;
+}
+
+.search {
+  min-width: 100%;
+  padding-bottom: 20px;
+}
+
+.spinner {
+  margin-right: 10px;
+}
+
+.banner {
+  transition: all ease-in-out 0.2s;
+}
+
+.sort {
+  float: right;
+}
+
+.noResults {
+  @include noSelect;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 2em;
+  border: 2px solid $light-3;
+  padding: 15px;
+  min-width: 100%;
+  color: $light-1;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 200px;
+  background-color: $dark-2;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.emptyWrapper {
+  text-align: center;
+  width: 100%;
+}
+
+.failureMessage {
+  margin-bottom: 0;
+}
+
+.retry {
+  width: 100px;
+}

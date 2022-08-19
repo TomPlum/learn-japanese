@@ -1,0 +1,116 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/viewports";
+
+@include phone {
+  .wrapper {
+    padding: 0 0 20px 0;
+    margin: 0;
+  }
+}
+
+@include tablet {
+  .wrapper {
+    padding: 0 0 20px 0;
+  }
+}
+
+@include desktop {
+  .wrapper {
+    padding: 0 0 50px 0;
+    max-width: 1000px;
+  }
+}
+
+.verbConjugationTable {
+  max-width: 500px;
+}
+
+.searchWrapper {
+  width: 89%;
+  padding-right: 10px;
+}
+
+.search {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  position: relative;
+}
+
+.search input, .search input:focus {
+  height: 40px;
+  font-size: 1.2em;
+  background-color: transparent;
+  box-shadow: none;
+  border-color: #FFF !important;
+  color: #FFF;
+}
+
+.search div {
+  background-color: transparent;
+}
+
+.input::placeholder {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  color: #6c757d;
+  opacity: 1;
+}
+
+.chapterSelector {
+  height: 40px;
+  width: 110px;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  padding: 8px;
+  border: 1px solid $light-1;
+  border-radius: 4px;
+  float: right;
+  text-align: center;
+}
+
+.chapterSelectorItem {
+  width: 90px;
+}
+
+.chapterSelectorWrapper {
+  width: 11%;
+}
+
+.genkiOne {
+  color: $genki-1-light !important;
+}
+
+.genkiTwo {
+  color: $genki-2-light !important;
+}
+
+.hr {
+  border-color: $dark-1;
+}
+
+.backToTop {
+  background-color: $dark-2;
+  border-radius: 10px;
+  width: 100%;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  padding: 10px 0;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+.muted {
+  color: $light-2;
+}
+
+.full > * {
+  color: #FFF !important;
+}
+
+.arrow {
+  margin: 0 7px;
+}
+
+.rowSection {
+  border-bottom: 1px solid $dark-1;
+}
+
+.indent {
+  padding-left: 10px;
+}

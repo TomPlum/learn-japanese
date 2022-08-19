@@ -1,16 +1,14 @@
 import RestClient from "../../rest/RestClient";
-import axios, { AxiosStatic } from "axios";
 import { Environment } from "../../utility/Environment";
 import { store } from "../../store";
 import { setUser } from "../../slices/UserSlice";
+import api from "../../rest/API";
+import PatchRequest from "../../rest/request/patch/PatchRequest";
+import PatchReplaceOperation from "../../rest/request/patch/PatchReplaceOperation";
+import { testUser } from "../../setupTests";
 
-interface AxiosMock extends AxiosStatic {
-    mockResolvedValue: Function
-    mockRejectedValue: Function
-}
-
-jest.mock('axios');
-const mockedAxios = axios as AxiosMock;
+jest.mock("../../rest/API");
+const mockApi = api as jest.MockedFunction<typeof api>;
 
 interface ExampleResponse {
     value: string;
@@ -22,32 +20,18 @@ describe("Rest Client", () => {
     beforeEach(() => {
         Environment.variable = environment;
         environment.mockReturnValue("https://japanese.tomplumpton.me/learn-japanese");
-        store.dispatch(setUser({
-            username: "TomPlum42",
-            nickname: "Tom",
-            email: "tom@hotmail.com",
-            creationDate: "2021-08-09T00:00",
-            expired: false,
-            locked: false,
-            credentialsExpired: false,
-            enabled: true,
-            roles: ["user"],
-            token: "TOKEN",
-            preferences: {
-                defaultFont: "Gothic",
-                theme: "Dark Mode",
-                language: "English",
-                highScores: "Ask Each Time",
-                defaultMode: "Play",
-                cardsPerDay: 10,
-                confidenceMenuStyle: "Numbers 1 - 6"
-            }
-        }));
+        store.dispatch(setUser(testUser));
     });
 
     describe("GET", () => {
         it("Should map the response JSON to the specified type when the API call is successful", async () => {
-            mockedAxios.mockResolvedValue({ data: { value: "test-value" }, status: 200 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 200,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").then(response => {
                 expect(response).toStrictEqual({
@@ -59,14 +43,20 @@ describe("Rest Client", () => {
         });
 
         it("Should call axios with the correct URI and configuration", () => {
-            mockedAxios.mockResolvedValue({ data: { value: "test-value" } });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 200,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/kanji/by-character/人",
                     {
                         method: "GET",
-                        headers: { "Content-Type": "application/json", },
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" },
                         data: undefined
                     }
                 )
@@ -74,7 +64,7 @@ describe("Rest Client", () => {
         });
 
         it("Should return an error response when the promise is rejected and the error has a response", () => {
-            mockedAxios.mockRejectedValue({ response: { data: "He's dead Jim.", status: 500 }});
+            mockApi.mockRejectedValue({ response: { data: "He's dead Jim.", status: 500 }});
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
@@ -86,7 +76,7 @@ describe("Rest Client", () => {
         });
 
         it("Should return an authentication error if the promise is rejected with a response and 401 status", () => {
-            mockedAxios.mockRejectedValue({ response: { error: "Unauthorised.", status: 401 }});
+            mockApi.mockRejectedValue({ response: { error: "Unauthorised.", status: 401 }});
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
@@ -98,7 +88,7 @@ describe("Rest Client", () => {
         });
 
         it("Should return an error response when the promise is rejected and the error has a request", () => {
-            mockedAxios.mockRejectedValue({ request: { status: 500 }});
+            mockApi.mockRejectedValue({ request: { status: 500 }});
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
@@ -110,7 +100,7 @@ describe("Rest Client", () => {
         });
 
         it("Should return an error response when the promise is rejected and the error has not request or response", () => {
-            mockedAxios.mockRejectedValue({});
+            mockApi.mockRejectedValue({});
 
             return RestClient.get<ExampleResponse>("/kanji/by-character/人").catch(response => {
                 expect(response).toStrictEqual({
@@ -133,14 +123,20 @@ describe("Rest Client", () => {
 
     describe("POST", () => {
         it("Should call axios with the correct URI and configuration", () => {
-            mockedAxios.mockResolvedValue({ data: { value: "test-value" } });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 200,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.post<ExampleResponse>("/kanji/by-character/人", { request: "Hello" }).then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/kanji/by-character/人",
                     {
                         method: "POST",
-                        headers: { "Content-Type": "application/json", },
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" },
                         data: "{\"request\":\"Hello\"}"
                     }
                 );
@@ -159,29 +155,41 @@ describe("Rest Client", () => {
 
     describe("PUT", () => {
         it("Should call axios with the correct URI and configuration", () => {
-            mockedAxios.mockResolvedValue({ status: 201 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 201,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.put<undefined>("/user/set-nickname/tom").then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
                     {
                         method: "PUT",
-                        headers: { "Content-Type": "application/json", }
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" }
                     }
                 );
             });
         });
 
         it("Should call axios with the correct the given request body if one is passed", () => {
-            mockedAxios.mockResolvedValue({ status: 201 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 201,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.put<undefined>("/user/set-nickname/tom", { key: "value" }).then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
                     {
                         method: "PUT",
                         data: "{\"key\":\"value\"}",
-                        headers: { "Content-Type": "application/json", }
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" }
                     }
                 );
             });
@@ -197,16 +205,109 @@ describe("Rest Client", () => {
         });
     });
 
+    describe("PATCH", () => {
+        it("Should call axios with the correct URI and configuration", () => {
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 201,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
+
+            return RestClient.patch<undefined>("/user/set-nickname/tom").then(() => {
+                expect(mockApi).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
+                    {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" }
+                    }
+                );
+            });
+        });
+
+        it("Should call axios with the correct the given request body if one is passed", () => {
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 201,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
+
+            return RestClient.patch<undefined>("/user/set-nickname/tom", { key: "value" }).then(() => {
+                expect(mockApi).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/user/set-nickname/tom",
+                    {
+                        method: "PATCH",
+                        data: "{\"key\":\"value\"}",
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" }
+                    }
+                );
+            });
+        });
+
+        it("Should throw an error if the endpoint is undefined", async () => {
+            await expect(() => RestClient.patch("", {})).rejects.toThrow("Endpoint is not defined!");
+        });
+
+        it("Should throw an error if the host is undefined", async () => {
+            environment.mockReturnValueOnce(undefined);
+            await expect(() => RestClient.patch("", {})).rejects.toThrow("Host URI is not defined!");
+        });
+    });
+
+    describe("PATCH JSON", () => {
+        it("Should call axios with the correct URI and configuration", () => {
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 201,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
+
+            const request = new PatchRequest([new PatchReplaceOperation("theme", "Dark")]);
+            return RestClient.patchJSON<undefined>("/user/update-preferences", request).then(() => {
+                expect(mockApi).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/user/update-preferences",
+                    {
+                        method: "PATCH",
+                        data: "[{\"op\":\"replace\",\"path\":\"/theme\",\"value\":\"Dark\"}]",
+                        headers: { "Content-Type": "application/json-patch+json", "Authorization": "Bearer TOKEN" }
+                    }
+                );
+            });
+        });
+
+        it("Should throw an error if the endpoint is undefined", async () => {
+            const request = new PatchRequest([new PatchReplaceOperation("/theme", "Dark")]);
+            await expect(() => RestClient.patchJSON("", request)).rejects.toThrow("Endpoint is not defined!");
+        });
+
+        it("Should throw an error if the host is undefined", async () => {
+            environment.mockReturnValueOnce(undefined);
+            const request = new PatchRequest([new PatchReplaceOperation("/theme", "Dark")]);
+            await expect(() => RestClient.patchJSON("", request)).rejects.toThrow("Host URI is not defined!");
+        });
+    });
+
     describe("DELETE", () => {
         it("Should call axios with the correct URI and configuration", () => {
-            mockedAxios.mockResolvedValue({ status: 204 });
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 204,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
 
             return RestClient.delete<undefined>("/user/delete").then(() => {
-                expect(mockedAxios).toHaveBeenLastCalledWith(
+                expect(mockApi).toHaveBeenLastCalledWith(
                     "https://japanese.tomplumpton.me/learn-japanese/user/delete",
                     {
                         method: "DELETE",
-                        headers: { "Content-Type": "application/json", }
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" }
                     }
                 );
             });
@@ -219,6 +320,29 @@ describe("Rest Client", () => {
         it("Should throw an error if the host is undefined", async () => {
             environment.mockReturnValueOnce(undefined);
             await expect(() => RestClient.delete("", {})).rejects.toThrow("Host URI is not defined!");
+        });
+    });
+
+    describe("Send", () => {
+        it("Should call axios with the correct method, URI and configuration", () => {
+            mockApi.mockResolvedValue({
+                config: {},
+                status: 204,
+                headers: {},
+                statusText: "Success",
+                data: { value: "test-value" }
+            });
+
+            return RestClient.send<undefined>("GET", "/test/endpoint", { value: "test" }).then(() => {
+                expect(mockApi).toHaveBeenLastCalledWith(
+                    "https://japanese.tomplumpton.me/learn-japanese/test/endpoint",
+                    {
+                        method: "GET",
+                        headers: { "Content-Type": "application/json", "Authorization": "Bearer TOKEN" },
+                        data: "{\"value\":\"test\"}"
+                    }
+                );
+            });
         });
     });
 });

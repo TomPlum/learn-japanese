@@ -177,6 +177,12 @@ describe("Kana", () => {
               const text = kana.getHint();
               expect(text).toBe('Diagraphs usually drop the 1st kana\'s 2nd letter when transcribed. Also, notice the diacritical mark.');
           });
+
+          it('Should return an exceptional message for other kana', () => {
+              const kana = new Kana("ん", ["n"], KanaType.HIRAGANA, KanaColumn.OTHER, false);
+              const text = kana.getHint();
+              expect(text).toBe('This kana is exceptional. It is not a consonant nor a vowel.');
+          });
       });
 
       describe("Base Score", () => {

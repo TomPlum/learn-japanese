@@ -1,0 +1,8 @@
+@import "src/styles/sass/components/settings";
+@import "src/styles/sass/colours";
+
+.danger {
+    p:nth-child(1) {
+        color: $bootstrap-red;
+    }
+}

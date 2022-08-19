@@ -16,7 +16,7 @@ test('Should render the home button', () => {
     expect(component.getByText('Home')).toBeInTheDocument();
 });
 
-test('Clicking the home button should direct the user to the root URI', () => {
+test('Clicking the home button should direct the user to the home page', () => {
     const component = render(<NotFoundPage />);
-    expect(component.getByRole('link')).toHaveAttribute('href', '/');
+    expect(component.getByRole('link')).toHaveAttribute('href', '/home');
 });

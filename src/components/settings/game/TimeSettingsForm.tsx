@@ -1,143 +1,135 @@
-import React, { ChangeEvent, Component } from "react";
-import { Col, Row } from "react-bootstrap";
+import React, { ChangeEvent, forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react";
+import { Col, Fade, Row } from "react-bootstrap";
 import TimeSettings, { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings";
 import styles from "../../../styles/sass/components/settings/game/TimeSettingsForm.module.scss";
 import RangeSlider from "react-bootstrap-range-slider";
 import ScrollableContainer from "../../ui/ScrollableContainer";
 import ToggleSwitch from "../../ui/ToggleSwitch";
+import { SettingsFormHandle } from "./GameSettingsMenu";
+import { useTranslation } from "react-i18next";
 
 export interface TimeSettingsFormProps {
     onChange: (settings: TimeSettings) => void;
 }
 
-interface TimeSettingsFormState {
-    timed: boolean;
-    countdown: boolean;
-    seconds: number;
-}
+const TimeSettingsForm = forwardRef((props: TimeSettingsFormProps, ref: Ref<SettingsFormHandle>) => {
 
-class TimeSettingsForm extends Component<TimeSettingsFormProps, TimeSettingsFormState> {
+    const { onChange } = props;
 
-    private readonly defaultState = new TimeSettingsBuilder()
+    const defaultState = new TimeSettingsBuilder()
         .isTimed()
         .isCountDown(false)
         .withSecondsPerQuestion(10)
         .build();
 
-    constructor(props: TimeSettingsFormProps | Readonly<TimeSettingsFormProps>) {
-        super(props);
-        this.state = {
-            timed: this.defaultState.timed,
-            countdown: this.defaultState.countdown,
-            seconds: this.defaultState.secondsPerQuestion
-        };
-    }
+    const [timed, setTimed] = useState(defaultState.timed);
+    const [countdown, setCountdown] = useState(defaultState.countdown);
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.time" });
+    const [secondsPerQuestion, setSecondsPerQuestion] = useState(defaultState.secondsPerQuestion);
 
-    componentDidMount() {
-        this.props.onChange(this.defaultState);
-    }
+    useEffect(() => {
+        onChange(defaultState);
+    }, []);
 
-    componentDidUpdate(prevProps: Readonly<TimeSettingsFormProps>, prevState: Readonly<TimeSettingsFormState>) {
-        if (prevState !== this.state) {
-            const { timed, countdown, seconds } = this.state;
+    useEffect(() => {
+        const settings = new TimeSettingsBuilder()
+            .isTimed(timed)
+            .isCountDown(countdown)
+            .withSecondsPerQuestion(secondsPerQuestion)
+            .build();
 
-            const settings = new TimeSettingsBuilder()
-                .isTimed(timed)
-                .isCountDown(countdown)
-                .withSecondsPerQuestion(seconds)
-                .build();
+        onChange(settings);
+    }, [timed, countdown, secondsPerQuestion]);
 
-            this.props.onChange(settings);
+    useImperativeHandle(ref, () => ({
+        reset() {
+            setTimed(defaultState.timed);
+            setCountdown(defaultState.countdown);
+            setSecondsPerQuestion(defaultState.secondsPerQuestion);
+        }
+    }));
+
+    const onChangeTimed = () => {
+        if (timed) {
+            setTimed(false);
+        } else {
+            setTimed(true);
+            setCountdown(false);
         }
     }
 
-    render() {
-        const { timed, countdown, seconds } = this.state;
+    const onChangeCountDown = () => {
+        if (countdown) {
+            setCountdown(false);
+        } else {
+            setCountdown(true);
+            setTimed(false);
+        }
+    }
 
-        return (
-            <ScrollableContainer className={styles.formWrapper}>
-                <Row>
-                    <Col>
-                        <div className={styles.descriptionWrapper}>
-                            <p className={styles.leadingDescription}>
-                                Configure the style of timer you want for the game or disable it entirely.
-                            </p>
-                        </div>
+    const onChangeCountDownSeconds = (e: ChangeEvent, value: number) => {
+        setSecondsPerQuestion(value)
+    }
 
-                        <h5 className={styles.heading}>
-                            <ToggleSwitch
-                                label="Timed"
-                                enabled={timed}
-                                data-testid="Timed"
-                                className={styles.check}
-                                onChange={this.onChangeTimed}
-                            />
-                        </h5>
-
-                        <p className={[styles.description, timed ? styles.active : styles.inactive].join(" ")}>
-                            You'll simply be timed starting from 00:00 and the timer will stop when you finish the game
-                            or lose. Useful for speed-running certain topics to test your mastery.
+    return (
+        <ScrollableContainer className={styles.formWrapper} id="time-settings-form">
+            <Row>
+                <Col>
+                    <div className={styles.descriptionWrapper}>
+                        <p className={styles.leadingDescription}>
+                            {t("desc")}
                         </p>
+                    </div>
 
-                        <h5 className={styles.heading}>
-                            <ToggleSwitch
-                                label="Count Down"
-                                enabled={countdown}
-                                data-testid="Countdown"
-                                className={styles.check}
-                                onChange={this.onChangeCountDown}
-                            />
-                        </h5>
+                    <h5 className={styles.heading}>
+                        <ToggleSwitch
+                            label={t("timed")}
+                            enabled={timed}
+                            data-testid="Timed"
+                            className={styles.check}
+                            onChange={onChangeTimed}
+                        />
+                    </h5>
 
-                        <p className={[styles.description, countdown ? styles.active : styles.inactive].join(" ")}>
-                            You'll have a set number of seconds to answer each question. Failing to answer correctly in
-                            the given time will lose you a life. Answering correctly will reset the timer.
-                            {countdown && <span> Select the number of seconds per question below:</span>}
-                        </p>
+                    <p className={[styles.description, timed ? styles.active : styles.inactive].join(" ")}>
+                        {t("timed-desc")}
+                    </p>
 
+                    <h5 className={styles.heading}>
+                        <ToggleSwitch
+                            enabled={countdown}
+                            label={t("countdown")}
+                            data-testid="Countdown"
+                            className={styles.check}
+                            onChange={onChangeCountDown}
+                        />
+                    </h5>
+
+                    <p className={[styles.description, countdown ? styles.active : styles.inactive].join(" ")}>
+                        {t("countdown-desc")}
                         {countdown && (
+                            <Fade in={countdown} appear={countdown}>
+                                <span>{' '}{t("seconds-quantity")}:</span>
+                            </Fade>
+                        )}
+                    </p>
+
+                    {countdown && (
+                        <Fade in={countdown} appear={countdown}>
                             <RangeSlider
                                 min={0} max={60}
-                                value={seconds}
                                 variant="primary"
                                 disabled={timed}
+                                value={secondsPerQuestion}
                                 data-testid="seconds-slider"
-                                onChange={this.onChangeCountDownSeconds}
-                             />
-                        )}
-                    </Col>
-                </Row>
-            </ScrollableContainer>
-        );
-    }
-
-    reset = () => this.setState({
-        timed: this.defaultState.timed,
-        countdown: this.defaultState.countdown,
-        seconds: this.defaultState.secondsPerQuestion
-    });
-
-    private onChangeTimed = () => {
-        const { timed } = this.state;
-        if (timed) {
-            this.setState({ timed: false });
-        } else {
-            this.setState({ timed: true, countdown: false });
-        }
-    }
-
-    private onChangeCountDown = () => {
-        const { countdown } = this.state;
-        if (countdown) {
-            this.setState({ countdown: false });
-        } else {
-            this.setState({ countdown: true, timed: false });
-        }
-    }
-
-    private onChangeCountDownSeconds = (e: ChangeEvent, value: number) => {
-        this.setState({ seconds: value })
-    }
-}
+                                onChange={onChangeCountDownSeconds}
+                            />
+                        </Fade>
+                    )}
+                </Col>
+            </Row>
+        </ScrollableContainer>
+    );
+});
 
 export default TimeSettingsForm;

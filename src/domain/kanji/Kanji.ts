@@ -3,6 +3,7 @@ import { Example } from "./Example";
 import { KyoikuGrade } from "./KyoikuGrade";
 import { Learnable } from "../learn/Learnable";
 import { ReadingType } from "./ReadingType";
+import JLTPLevel from "../learn/JLTPLevel";
 
 export class Kanji extends Learnable {
 
@@ -10,18 +11,23 @@ export class Kanji extends Learnable {
     private readonly _readings: KanjiReading[];
     private readonly _meanings: string[];
     private readonly _grade: KyoikuGrade;
+    private readonly _jlpt: JLTPLevel;
     private readonly _source: string;
+    private readonly _strokes: number | undefined;
     private readonly _examples: Example[];
     private readonly _tags: string[];
 
-    constructor(character: string, readings: KanjiReading[], meanings: string[], grade: KyoikuGrade, source: string, examples: Example[], tags: string[]) {
+    constructor(character: string, readings: KanjiReading[], meanings: string[], grade: KyoikuGrade, jltp: JLTPLevel,
+                source: string, examples: Example[], strokes: number | undefined, tags: string[]) {
         super();
         this._character = character;
         this._readings = readings;
         this._meanings = meanings;
         this._grade = grade;
+        this._jlpt = jltp;
         this._source = source;
         this._examples = examples;
+        this._strokes = strokes;
         this._tags = tags;
     }
 
@@ -31,6 +37,10 @@ export class Kanji extends Learnable {
 
     get grade(): KyoikuGrade {
         return this._grade;
+    }
+
+    get jlpt(): JLTPLevel {
+        return this._jlpt;
     }
 
     get source(): string {
@@ -43,6 +53,10 @@ export class Kanji extends Learnable {
 
     get examples(): Example[] {
         return this._examples;
+    }
+
+    get strokes(): number | undefined {
+        return this._strokes;
     }
 
     getTitle(): string {
@@ -92,6 +106,10 @@ export class Kanji extends Learnable {
 
     getUniqueID(): string {
         return this._character;
+    }
+
+    getJishoLink(): string {
+        return `https://jisho.org/search/${this.getKanjiVariation()}`;
     }
 
     equals(other: Learnable): boolean {

@@ -1,0 +1,24 @@
+import styles from "../../../styles/sass/components/layout/card/DashboardCardError.module.scss";
+import React, { PropsWithChildren } from "react";
+
+export interface DashboardCardErrorProps {
+    active?: boolean;
+}
+
+const DashboardCardError = (props: PropsWithChildren<DashboardCardErrorProps>) => {
+    const { active, children } = props;
+
+    if (!active) {
+        return null;
+    }
+
+    return (
+        <div className={styles.errorContainer} data-testid="dashboard-card-error">
+            <span className={styles.error}>
+                {children}
+            </span>
+        </div>
+    );
+}
+
+export default DashboardCardError;

@@ -21,7 +21,8 @@ export class KyoikuGrade {
     public static readonly TWELVE = new KyoikuGrade(12, 0);
     public static readonly UNKNOWN = new KyoikuGrade(0, 0)
 
-    public static readonly ALL = [KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR, KyoikuGrade.FIVE, KyoikuGrade.SIX]
+    public static readonly ALL = [KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR,
+        KyoikuGrade.FIVE, KyoikuGrade.SIX, KyoikuGrade.SEVEN, KyoikuGrade.EIGHT];
 
     public static fromInteger = (value?: number): KyoikuGrade => {
         switch(value) {

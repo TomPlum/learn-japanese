@@ -9,7 +9,7 @@ import { Learnable } from "../../domain/learn/Learnable";
  * - Search Term: "Monday" -> ["Monday"]
  * - Search Term: "day" -> ["Monday", "Tuesday", "Wednesday"]
  */
-class MeaningFilter implements Filter<Learnable> {
+class MeaningFilter<T extends Learnable> implements Filter<T> {
 
     private readonly meaning: string;
 
@@ -17,12 +17,12 @@ class MeaningFilter implements Filter<Learnable> {
         this.meaning = meaning;
     }
 
-    apply(values: Learnable[]): Learnable[] {
+    apply(values: T[]): T[] {
         if (!this.meaning) {
             return [];
         }
 
-        return values.filter((datum: Learnable) => {
+        return values.filter((datum: T) => {
             return datum.getMeanings().some((meaning: string) => {
                 return meaning.includes(this.meaning)
             });

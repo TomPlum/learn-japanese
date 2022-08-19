@@ -1,0 +1,33 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  position: relative;
+}
+
+.surface {
+  pointer-events: all;
+  z-index: 1000;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.child {
+  pointer-events: none;
+  z-index: 900;
+}
+
+.message {
+  position: absolute;
+  color: $light-2;
+  background-color: $dark-3;
+  border: 2px solid $dark-1;
+  border-radius: 10px;
+  padding: 10px;
+  top: 50%;
+  left: 50%;
+  backface-visibility: hidden;
+  width: 200px;
+  transition: all ease-in-out 0.3s;
+  z-index: 1000;
+}

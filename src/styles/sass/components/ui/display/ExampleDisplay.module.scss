@@ -1,0 +1,40 @@
+@import "src/styles/sass/colours";
+
+.body, .title {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.content {
+  color: $light-1;
+  border: 3px solid $dark-1;
+  border-radius: 12px;
+  background-color: $dark-2;
+}
+
+.table {
+  background-color: transparent;
+  margin: 0;
+}
+
+.table th {
+  border-top: none;
+  color: $inspect;
+  border-color: $inspect !important;
+}
+
+.table td {
+  border-color: $inspect;
+}
+
+.header > button {
+  color: $light-1 !important;
+  transition: all ease-in-out 0.2s;
+}
+
+.header {
+  border-bottom: 3px solid $dark-1;
+  padding: 15px 18px;
+  background-color: rgba($dark-2, 0.5) !important;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}

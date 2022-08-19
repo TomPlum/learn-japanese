@@ -1,0 +1,23 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.left {
+  margin-right: 3px;
+}
+
+.middle {
+  margin: 0 3px;
+}
+
+.right {
+  margin-left: 3px;
+}

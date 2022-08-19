@@ -1,0 +1,45 @@
+@import "src/styles/sass/colours";
+
+.body {
+  width: 100%;
+  height: 24px;
+  padding: 10px 15px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  height: 44px;
+}
+
+.buttons {
+  height: 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.icon {
+  color: $light-2;
+  transition: all ease-in-out 0.2s;
+  margin-left: 10px;
+}
+
+.icon:hover {
+  cursor: pointer;
+  color: $light-1;
+}
+
+.streak {
+  height: 24px;
+  float: left;
+}
+
+.streak span {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.streak svg {
+  color: #f17d25;
+  margin-right: 5px;
+}

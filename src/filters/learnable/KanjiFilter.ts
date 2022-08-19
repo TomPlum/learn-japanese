@@ -1,7 +1,7 @@
 import { Filter } from "../Filter";
 import { Learnable } from "../../domain/learn/Learnable";
 
-class KanjiFilter implements Filter<Learnable> {
+class KanjiFilter<T extends Learnable> implements Filter<T> {
 
     private readonly kanji: string;
 
@@ -9,12 +9,12 @@ class KanjiFilter implements Filter<Learnable> {
         this.kanji = kanji;
     }
 
-    apply(values: Learnable[]): Learnable[] {
+    apply(values: T[]): T[] {
         if (!this.kanji) {
             return [];
         }
 
-        return values.filter((value: Learnable) => {
+        return values.filter((value: T) => {
             return value.getKanjiVariation()?.includes(this.kanji);
         });
     }

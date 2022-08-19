@@ -1,0 +1,29 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/animations";
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  margin: 0 15px;
+  padding-top: 10px;
+  border-bottom: 1px solid $dark-1;
+}
+
+.reload {
+  margin-left: auto;
+  color: $light-2;
+  transition: all ease-in-out 0.2s;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.reload:hover {
+  cursor: pointer;
+  color: $light-1;
+  animation-name: spin-clockwise;
+  animation-timing-function: ease-in-out;
+}
+
+.settings {
+  margin-left: auto;
+}

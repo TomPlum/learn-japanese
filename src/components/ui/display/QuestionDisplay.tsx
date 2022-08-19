@@ -1,5 +1,5 @@
-import React, { useImperativeHandle, useRef } from "react";
-import DynamicDisplay from "./DynamicDisplay";
+import React, { Ref, useImperativeHandle, useRef } from "react";
+import DynamicDisplay, { DynamicDisplayHandle } from "./DynamicDisplay";
 import styles from "../../../styles/sass/components/ui/display/QuestionDisplay.module.scss";
 
 export interface QuestionDisplayProps {
@@ -7,13 +7,18 @@ export interface QuestionDisplayProps {
     blur?: boolean;
 }
 
-const QuestionDisplay = React.forwardRef((props: { question: string, blur?: boolean }, ref) => {
+export type QuestionDisplayHandler = {
+    notifyIncorrect: () => void;
+}
 
-    //TODO: typeof DynamicDisplay doesn't work for some reason
-    const display = useRef<any>();
+const QuestionDisplay = React.forwardRef((props: QuestionDisplayProps, ref: Ref<QuestionDisplayHandler>) => {
+
+    const display = useRef<DynamicDisplayHandle>(null);
 
     useImperativeHandle(ref, () => ({
-        notifyIncorrect: () => display.current?.notify()
+        notifyIncorrect() {
+            display.current?.notify()
+        }
     }));
 
     return (

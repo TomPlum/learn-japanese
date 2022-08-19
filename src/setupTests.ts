@@ -4,6 +4,10 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
+// Fixes an issue with useAsyncDebounce from the react-table library.
+// It fixes the 'regeneratorRuntime is not defined` error when running a test that consumes the function.
+import 'regenerator-runtime/runtime';
+
 //Test Environment
 import dotenv from 'dotenv';
 dotenv.config({path: './.env.test'});
@@ -20,9 +24,18 @@ window.matchMedia = window.matchMedia || function() {
 
 //Allows testing of components that are wrapped in the sizeMe HOC
 import sizeMe from "react-sizeme";
+import { ConfidenceMenuStyle } from "./domain/learn/spacedrepetition/ConfidenceMenuStyle";
+import { User } from "./slices/UserSlice";
 sizeMe.noPlaceholders = true;
 
-//Custom Jest assertion for testing CSS styles
+declare global {
+    namespace jest {
+        interface Matchers<R> {
+            toHaveStyleProperty(style: string, value: any): R;
+        }
+    }
+}
+
 expect.extend({
     toHaveStyleProperty(received, style, value) {
         const hasStyle = received.toHaveProperty('style._values.' + style, value);
@@ -63,3 +76,32 @@ export const localStorageMock = (function() {
 })();
 
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+
+export const testUser: User = {
+    username: "TomPlum42",
+    nickname: "Tom",
+    email: "tom@hotmail.com",
+    creationDate: "2021-08-09T00:00",
+    expired: false,
+    locked: false,
+    credentialsExpired: false,
+    enabled: true,
+    roles: ["user"],
+    token: "TOKEN",
+    refreshToken: "REFRESH_TOKEN",
+    preferences: {
+        kanjiFont: "Mincho",
+        theme: "Dark",
+        language: "English",
+        highScoresBehaviour: "Auto-Submit",
+        flashCardsQuantity: 10,
+        defaultMode: "Play",
+        confidenceMenuStyle: ConfidenceMenuStyle.NUMBERS,
+        profileVisibility: "Friends Only",
+        activityFeedQuantity: 3,
+        romajiVisibility: "Always Show",
+        streakCardView: "Start Date",
+        mistakesReminders: true,
+        streakNotifications: true
+    }
+};

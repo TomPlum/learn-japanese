@@ -1,23 +1,18 @@
 @import "src/styles/sass/colours";
 
-@mixin inspectable {
-  text-decoration: underline;
-  text-decoration-color: #585858;;
-  text-decoration-style: dotted;
+.inspectable {
   transition: ease 0.5s;
   cursor: pointer;
 }
 
-.white:hover, .black:hover {
+.underline {
+  text-decoration: underline;
+  text-decoration-color: #585858;;
+  text-decoration-style: dotted;
+}
+
+.inspectable:hover {
   color: $inspect;
   text-decoration: none;
   transition: ease 0.5s;
-}
-
-.white {
-  @include inspectable;
-}
-
-.black {
-  @include inspectable;
 }

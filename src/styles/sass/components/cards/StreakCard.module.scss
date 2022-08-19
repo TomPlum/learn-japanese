@@ -1,0 +1,85 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
+.body {
+  display: flex;
+  justify-content: space-between;
+  min-height: 100%;
+  padding: 0 !important;
+  box-sizing: border-box;
+  max-height: 100%;
+}
+
+.streak {
+  @include noSelect;
+  font-size: 1.1em;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  margin-top: 2px;
+}
+
+.fire {
+  font-size: 1.2em;
+  color: #f17d25;
+  margin-right: 5px;
+  margin-bottom: 2px;
+}
+
+.clock {
+  font-size: 1.2em;
+  color: #3397df;
+  margin-right: 5px;
+  margin-bottom: 2px;
+}
+
+.cake {
+  font-size: 1.2em;
+  color: #d8bf3c;
+  margin-right: 5px;
+  margin-bottom: 3px;
+}
+
+.body {
+  display: flex;
+  justify-content: space-between;
+  min-height: 100%;
+  padding: 0 !important;
+  box-sizing: border-box;
+  max-height: 100%;
+}
+
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.left, .right {
+  width: 30px;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  transition: all ease-in-out 0.2s;
+  padding: 10px;
+  color: $light-3;
+  opacity: 0.3;
+}
+
+.left:hover, .right:hover {
+  background-color: rgba($dark-1, 0.8);
+  cursor: pointer;
+  color: $light-1;
+  opacity: 1;
+}
+
+.left:hover {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.right:hover {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}

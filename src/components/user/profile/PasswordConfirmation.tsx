@@ -8,6 +8,7 @@ import { faExclamationTriangle, faSpinner } from "@fortawesome/free-solid-svg-ic
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUserDispatch } from "../../../hooks";
 import { clearUser } from "../../../slices/UserSlice";
+import { useTranslation } from "react-i18next";
 
 export interface PasswordConfirmationProps {
     alertInfo: OverlayChildren;
@@ -21,6 +22,7 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | undefined>(undefined);
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.user.confirmation-modal" });
 
     const field = useRef<HTMLInputElement>(null);
 
@@ -31,6 +33,7 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
     const deleteAccount = () => {
         setLoading(true);
         setError(undefined);
+
         authService.deleteAccount(password).then(response => {
             if (response.success) {
                 userDispatch(clearUser());
@@ -47,9 +50,9 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
     const disabled = password.length === 0;
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} data-testid="password-confirmation">
             <Alert variant="warning" className={styles.alert}>
-                Please confirm your password.
+                {t("confirm-password")}
             </Alert>
 
             <Alert variant="danger" className={styles.alert}>
@@ -59,7 +62,7 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
                         <span> {error}</span>
                     </> :
                     <>
-                        <span>Remember - this operation is irreversible.</span>
+                        <span>{t("irreversible-operation")}</span>
                         <InfoButton popover={props.alertInfo} className={styles.info} />
                     </>
                 }
@@ -70,18 +73,18 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
                 ref={field}
                 type="password"
                 value={password}
-                placeholder="Password"
                 className={styles.password}
+                placeholder={t("password-placeholder")}
                 onChange={e => setPassword(e.target.value)}
             />
 
-            <Button variant="success" onClick={props.onDismiss} className={styles.dismiss}>
-                I've changed my mind
+            <Button variant="success" onClick={props.onDismiss} block>
+                {t("changed-mind")}
             </Button>
 
-            <Button variant="danger" onClick={deleteAccount} disabled={disabled} className={styles.confirm}>
+            <Button variant="danger" onClick={deleteAccount} disabled={disabled} className={styles.confirm} block>
                 {loading && <FontAwesomeIcon icon={faSpinner} fixedWidth spin />}
-                Delete my account
+                {t("delete-account")}
             </Button>
 
         </div>

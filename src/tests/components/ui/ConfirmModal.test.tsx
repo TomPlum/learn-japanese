@@ -1,11 +1,12 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import ConfirmModal from "../../../components/ui/ConfirmModal";
+import renderWithTranslation from "../../renderWithTranslation";
 
 const onConfirmHandler = jest.fn();
 const onDismissHandler = jest.fn();
 
 const setup = () => {
-    const component = render(
+    const component = renderWithTranslation(
         <ConfirmModal title={"Title"} body={"Body"} onConfirm={onConfirmHandler} onDismiss={onDismissHandler} />
     );
     return {

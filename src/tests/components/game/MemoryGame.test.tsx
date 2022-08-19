@@ -1,6 +1,6 @@
 import MemoryGame, { MemoryGameProps } from "../../../components/game/MemoryGame";
 import { cleanup, fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
-import { QuestionType } from "../../../domain/game/QuestionType";
+import QuestionType from "../../../domain/game/QuestionType";
 import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
 import { KanaColumn } from "../../../domain/kana/KanaColumn";
@@ -15,6 +15,7 @@ import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeS
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings";
 import LearnableField from "../../../domain/learn/LearnableField";
 import renderReduxConsumer from "../../renderReduxConsumer";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 //Mock Event Handlers
 const onFinishHandler = jest.fn();
@@ -64,15 +65,14 @@ beforeEach(() => {
     Arrays.getRandomElements = getRandomElements;
     Environment.variable = environment;
 
-    //Always returns the first n elements in order so it is deterministic
-    getRandomObjects.mockImplementation((array: any[]) => {
-        const quantity = props.settings.question.quantity;
+    //Always returns the first n elements in order, so it is deterministic
+    getRandomObjects.mockImplementation((array: any[], quantity: number) => {
         const questions = Arrays.copy(array).splice(0, quantity);
         const remaining = Arrays.copy(array).splice(quantity, array.length);
         return [questions, remaining];
     });
 
-    //Always returns the array in the same order so it doesn't shuffle
+    //Always returns the array in the same order, so it doesn't shuffle
     shuffle.mockImplementation((array: any[]) => {
         return array;
     });
@@ -96,7 +96,7 @@ afterEach(() => {
 });
 
 const setup = () => {
-    const component = renderReduxConsumer(<MemoryGame {...props} />);
+    const component = renderTranslatedReduxConsumer(<MemoryGame {...props} />);
     return {
         submit: component.getByText('Check'),
         skip: component.getByText('Skip'),
@@ -147,7 +147,7 @@ test('Answering correctly after having used a hint that question should reduce t
     fireEvent.click(submit);
 
     //We should now see the hint quantity reduced by 1
-    fireEvent.click(screen.getByText('HINT'));
+    fireEvent.click(screen.getByTestId('hint-button'));
     expect(await screen.findByText('Click to Reveal')).toBeInTheDocument();
     expect(await screen.findByText('Need a hint? (4/5 remaining)')).toBeInTheDocument();
 });
@@ -168,8 +168,26 @@ test('Answering correctly without using a hint that question should not reduce t
     fireEvent.click(submit);
 
     //We should still see the full 5 hints remaining having not used one.
-    fireEvent.click(screen.getByText('HINT'));
+    fireEvent.click(screen.getByTestId('hint-button'));
     expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
+});
+
+test('Passing data settings with an undefined question quantity should set 1 current question value', async () => {
+    // Omit question settings quantity so it is defaulted to undefined
+    props.settings = new GameSettingsBuilder().withQuestionSettings(new QuestionSettingsBuilder().build()).build();
+    setup();
+
+    // Should simply render the first question with no issues
+    expect(screen.getByText('あ')).toBeInTheDocument();
+});
+
+test('Passing data settings with 0 question quantity should set 1 current question value', async () => {
+    // Explicitly set the question settings quantity to 0
+    props.settings = new GameSettingsBuilder().withQuestionSettings(new QuestionSettingsBuilder().withQuantity(0).build()).build();
+    setup();
+
+    // Should simply render the first question with no issues
+    expect(screen.getByText('あ')).toBeInTheDocument();
 });
 
 test('Answering correctly should advance the progress bar', () => {
@@ -817,7 +835,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     jest.advanceTimersByTime(6000);
 
     //The hint quantity should be reduced by 1
-    fireEvent.click(screen.getByText('HINT'));
+    fireEvent.click(screen.getByTestId('hint-button'));
     expect(await screen.findByText('Need a hint? (4/5 remaining)')).toBeInTheDocument();
 });
 
@@ -838,7 +856,7 @@ test('Failing to correctly answer the question before the countdown finishes sho
     jest.advanceTimersByTime(6000);
 
     //We should have 5 on the next question
-    fireEvent.click(screen.getByText('HINT'));
+    fireEvent.click(screen.getByTestId('hint-button'));
     expect(await screen.findByText('Need a hint? (5/5 remaining)')).toBeInTheDocument();
 });
 
@@ -915,12 +933,10 @@ test('Setting the game settings score property to false should not render the sc
 });
 
 test('Clicking the quit button should render the confirmation modal', () => {
-    environment.mockReturnValueOnce("Are you sure you want to quit?");
-    environment.mockReturnValueOnce("This is the modal body.");
     const { quit } = setup();
     fireEvent.click(quit);
     expect(screen.getByText('Are you sure you want to quit?')).toBeInTheDocument();
-    expect(screen.getByText('This is the modal body.')).toBeInTheDocument();
+    expect(screen.getByText('You\'ll lose your current progress, but you\'ll see the results of your game thus far.')).toBeInTheDocument();
 });
 
 

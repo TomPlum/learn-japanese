@@ -14,7 +14,7 @@ class Node {
     }
 
     public hasChildren(): boolean {
-        return this._value.props?.children;
+        return this._value?.props?.children;
     }
 
     get value(): any {
@@ -36,6 +36,11 @@ export default class ComponentTree {
         this.doDepthFirstTraversal(Node.fromRoot(root));
     }
 
+    /**
+     * Finds the deepest leaf node in the tree.
+     * Returns the first one if there are multiple at the max depth.
+     * @return The deepest node.
+     */
     public getDeepestLeafNode() {
         return this.visited.length > 0 ? this.visited.reduce((a, b) => a.depth > b.depth ? a : b).value : undefined;
     }
@@ -43,7 +48,7 @@ export default class ComponentTree {
     /**
      * Adds the given properties to the leaf nodes of the {@link root} element.
      * @param props A function taking the leaf node and returning the new properties.
-     * @return tree A copy of the whole element tree with the updated leaf node.
+     * @return A copy of the whole element tree with the updated leaf node.
      */
     public addPropsToLeafNode(props?: (el: React.ReactElement) => {}): ReactElement {
         let response: ReactNode;
@@ -61,6 +66,14 @@ export default class ComponentTree {
         });
 
         return response as ReactElement;
+    }
+
+    /**
+     * Creates a list of all the text content of the children from the root node.
+     * @return An array of string values.
+     */
+    public getStringChildren(): string[] {
+        return this.getAllChildren().map(child => child.props.textContent ?? child.props.children).filter(value => value);
     }
 
     private getAllChildren(): ReactElement[] {

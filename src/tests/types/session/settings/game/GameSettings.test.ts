@@ -1,13 +1,10 @@
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
-import { QuestionType } from "../../../../../domain/game/QuestionType";
+import QuestionType from "../../../../../domain/game/QuestionType";
 import LifeSettings, { LifeSettingsBuilder } from "../../../../../domain/session/settings/game/LifeSettings";
 import HintSettings, { HintSettingsBuilder } from "../../../../../domain/session/settings/game/HintSettings";
 import TimeSettings, { TimeSettingsBuilder } from "../../../../../domain/session/settings/game/TimeSettings";
 import QuestionSettings, { QuestionSettingsBuilder } from "../../../../../domain/session/settings/game/QuestionSettings";
 import LearnableField from "../../../../../domain/learn/LearnableField";
-import FilterChain from "../../../../../filters/FilterChain";
-import MeaningFilter from "../../../../../filters/learnable/MeaningFilter";
-import { Learnable } from "../../../../../domain/learn/Learnable";
 
 describe("Game Settings", () => {
     describe("Builder", () => {
@@ -24,7 +21,7 @@ describe("Game Settings", () => {
         it("Should set default Display settings if not specified", () => {
             const settings = new GameSettingsBuilder().build();
             expect(settings.question).toStrictEqual(
-                new QuestionSettingsBuilder().withWrongOptionsFilterChain(settings.question.answerFilter).build()
+                new QuestionSettingsBuilder().withAnswerFilterChainID(settings.question.answerFilterId).build()
             );
         });
 
@@ -34,11 +31,10 @@ describe("Game Settings", () => {
         });
 
         it("Should override settings when specified", () => {
-            const answerFilter = () => new FilterChain<Learnable>().withFilter(new MeaningFilter("hello"))
             const settings = new GameSettingsBuilder()
                 .withQuestionSettings(new QuestionSettingsBuilder()
                     .withFields(LearnableField.KANJI, LearnableField.MEANING)
-                    .withWrongOptionsFilterChain(answerFilter)
+                    .withAnswerFilterChainID(1)
                     .withType(QuestionType.CHOICE)
                     .withCardQuantity(6)
                     .withScoreTracking(true)
@@ -49,7 +45,7 @@ describe("Game Settings", () => {
                 .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
                 .build();
 
-            expect(settings.question).toStrictEqual(new QuestionSettings(LearnableField.KANJI, LearnableField.MEANING, QuestionType.CHOICE, 6, 1, answerFilter, true));
+            expect(settings.question).toStrictEqual(new QuestionSettings(LearnableField.KANJI, LearnableField.MEANING, QuestionType.CHOICE, 6, 1, 1, true));
             expect(settings.hints).toStrictEqual(new HintSettings(false, 0, false));
             expect(settings.lives).toStrictEqual(new LifeSettings(true, 1));
             expect(settings.time).toStrictEqual(new TimeSettings(false, true, 5));

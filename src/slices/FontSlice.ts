@@ -13,8 +13,10 @@ export const fontSlice = createSlice({
     initialState,
     reducers: {
         setFont: (state, action: PayloadAction<string>) => {
-            state.selected = action.payload;
-        },
+            const selectedFontName = action.payload;
+            state.selected = selectedFontName;
+            localStorage.setItem("font", selectedFontName);
+        }
     }
 });
 

@@ -8,6 +8,7 @@ import KanjiFlashCardBack from "../../../../components/learn/kanji/KanjiFlashCar
 import { Environment } from "../../../../utility/Environment";
 import { getByTextWithMarkup } from "../../../Queries";
 import renderReduxConsumer from "../../../renderReduxConsumer";
+import JLTPLevel from "../../../../domain/learn/JLTPLevel";
 
 const onClickHandler = jest.fn();
 const mockEnvironment = jest.fn();
@@ -17,8 +18,10 @@ const kanji = new Kanji(
     [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)],
     ["person", "fake-example"],
     KyoikuGrade.ONE,
+    JLTPLevel.N5,
     "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
     [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+    1,
     []
 );
 

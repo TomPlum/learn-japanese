@@ -1,5 +1,5 @@
 import Arrays from "../../../utility/Arrays";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import LandingPage from "../../../components/pages/LandingPage";
 import { Kana } from "../../../domain/kana/Kana";
 import KanaType from "../../../domain/kana/KanaType";
@@ -10,6 +10,7 @@ import { getByTextWithMarkup } from "../../Queries";
 import { when } from 'jest-when';
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from 'history'
+import renderWithTranslation from "../../renderWithTranslation";
 
 const environment = jest.fn();
 const shuffle = jest.fn();
@@ -22,7 +23,7 @@ jest.mock("../../../repository/KanaRepository", () => {
 const history = createMemoryHistory();
 
 const setup = () => {
-    const component = render(
+    const component = renderWithTranslation(
         <Router history={history}>
             <LandingPage/>
         </Router>
@@ -41,10 +42,13 @@ const setup = () => {
 }
 
 beforeEach(() => {
+    // Mock environment variables
     Environment.variable = environment;
 
+    // Mock timers
     jest.useFakeTimers();
 
+    // Mock window size
     matchMediaPolyfill(window);
     window.resizeTo = function resizeTo(width, height) {
         Object.assign(this, {
@@ -55,12 +59,13 @@ beforeEach(() => {
         }).dispatchEvent(new this.Event('resize'))
     }
 
+    // Mock carousel shuffle
     Arrays.shuffle = shuffle;
     shuffle.mockImplementation((array: any[]) => {
         return array;
     });
 
-    //Always returns the first element so it is deterministic
+    // Always returns the first element so it is deterministic
     Arrays.getRandomObject = getRandomObject;
     getRandomObject.mockImplementation((array: any[]) => {
         const objects = [...array];
@@ -69,7 +74,7 @@ beforeEach(() => {
         return [first, objects];
     });
 
-    //Mock Kana Repository Response
+    // Mock Kana Repository Response
     mockKanaRepository.mockResolvedValueOnce([
         new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
     ]);
@@ -131,18 +136,18 @@ test('Should render the kana carousel', async () => {
     expect(await screen.findByText('あ')).toBeInTheDocument();
 });
 
-test('Clicking the play button should route the user to /menu/play', async () => {
+test('Clicking the play button should route the user to /home', async () => {
     const { play } = setup();
     expect(await screen.findByText('あ')).toBeInTheDocument();
     fireEvent.click(play);
-    expect(history.location.pathname).toBe('/menu/play');
+    expect(history.location.pathname).toBe('/home');
 });
 
-test('Clicking the learn button should route the user to /menu/learn', async () => {
+test('Clicking the learn button should route the user to /home', async () => {
     const { learn } = setup();
     expect(await screen.findByText('あ')).toBeInTheDocument();
     fireEvent.click(learn);
-    expect(history.location.pathname).toBe('/menu/learn');
+    expect(history.location.pathname).toBe('/home');
 });
 
 test('Clicking the search button should route the user to /search', async () => {

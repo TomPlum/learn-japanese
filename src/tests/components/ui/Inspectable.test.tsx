@@ -16,8 +16,10 @@ beforeEach(() => {
     props = {
         popover: {
             title: "example title",
-            text: "example text"
+            text: "example text",
         },
+        disabled: false,
+        disableUnderline: false,
         className: "exampleClass"
     }
 });
@@ -52,21 +54,22 @@ test('Should render popover when hovering child element', async () => {
     await waitForElementToBeRemoved(() => screen.getByText('example title'));
 });
 
-test('Should apply to the \'black\' class to the child by default', () => {
-    const { child } = setup();
-    expect(child).toHaveClass('black');
-});
-
 test('Passing a className should apply it to the child', () => {
     const { child } = setup();
-    expect(child).toHaveClass('black');
     expect(child).toHaveClass('exampleClass');
 });
 
-test('Passing the colour property as \'white\' should apply the white class', () => {
-   props.color = 'white';
-   const { child } = setup();
-   expect(child).toHaveClass('white');
+test('Passing disableUnderline as true should not add the underline class', () => {
+    props.disableUnderline = true;
+    const { child } = setup();
+    expect(child).not.toHaveClass('underline');
+});
+
+
+test('Passing disableUnderline as false should add the underline class', () => {
+    props.disableUnderline = false;
+    const { child } = setup();
+    expect(child).toHaveClass('underline');
 });
 
 test('Overlay should default to left placement', async () => {
@@ -86,4 +89,11 @@ test('Should render the text in the body of the overlay', async () => {
     const { child } = setup();
     fireEvent.click(child);
     expect(await screen.findByText('example text')).toBeInTheDocument();
+});
+
+test('Should render only the children if the disabled prop is passed as true', async () => {
+    props.disabled = true;
+    const { child } = setup();
+    fireEvent.click(child);
+    expect(await screen.findByText('Button')).toBeInTheDocument();
 });

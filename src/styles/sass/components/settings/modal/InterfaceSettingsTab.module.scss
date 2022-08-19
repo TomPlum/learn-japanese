@@ -1,0 +1,22 @@
+@import "src/styles/sass/components/settings";
+@import "src/styles/sass/colours";
+
+.light {
+  transition: color ease-in-out 0.2s;
+
+  &:hover {
+    color: $light-mode;
+  }
+}
+
+.dark {
+  transition: color ease-in-out 0.2s;
+
+  &:hover {
+    color: $dark-mode;
+  }
+}
+
+.open-layout-editor {
+  max-width: 230px !important;
+}

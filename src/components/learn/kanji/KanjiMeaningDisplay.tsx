@@ -7,6 +7,7 @@ import styles from "../../../styles/sass/components/learn/kanji/KanjiMeaningDisp
 
 export interface KanjiMeaningDisplayProps {
     meanings: string[];
+    className?: string;
 }
 
 interface KanjiMeaningDisplayState {
@@ -28,14 +29,14 @@ class KanjiMeaningDisplay extends Component<KanjiMeaningDisplayProps, KanjiMeani
         const popover = <PopOver title="Additional Meanings" text={extra.join(", ")} />
 
         return (
-            <>
+            <span className={this.props.className}>
                 <span className={styles.meanings}>{meanings.join(", ")}</span>
                 {extra.length > 0 && (
                     <OverlayTrigger trigger={["click", "hover", "click"]} overlay={popover} placement="top" defaultShow={false}>
                         <FontAwesomeIcon icon={faEllipsisH} className={styles.icon} title="Show more meanings" />
                     </OverlayTrigger>
                 )}
-            </>
+            </span>
         );
     }
 

@@ -1,21 +1,35 @@
 import RestClient, { APIResponse } from "../rest/RestClient";
-import UpdateResponse from "../rest/UpdateResponse";
-import DataResponse from "../rest/DataResponse";
-import { UserPreferences } from "../slices/UserSlice";
+import UpdateResponse from "../rest/response/UpdateResponse";
+import DataResponse from "../rest/response/DataResponse";
+import { User, UserPreferences } from "../slices/UserSlice";
+import PatchRequest from "../rest/request/patch/PatchRequest";
+import PatchReplaceOperation from "../rest/request/patch/PatchReplaceOperation";
+import { Preference } from "../domain/user/Preference";
 
 export interface UserPreferencesResponse {
-    defaultFont: string;
+    kanjiFont: string;
     theme: string;
     language: string;
-    highScores: string;
+    highScoresBehaviour: string;
     defaultMode: string;
-    cardsPerDay: number;
+    flashCardsQuantity: number;
     confidenceMenuStyle: string;
+    profileVisibility: string;
+    streakCardView: string;
+    romajiVisibility: string;
+    activityFeedQuantity: number;
+    streakNotifications: boolean;
+    mistakesReminders: boolean;
 }
 
 export interface UserExistsResponse {
     exists: boolean;
     error?: string;
+}
+
+export interface UserPreferenceUpdate {
+    preference: Preference;
+    value: string;
 }
 
 export default class UserService {
@@ -26,7 +40,7 @@ export default class UserService {
      * @return boolean true if exists, else false.
      */
     public async usernameExists(username: string): Promise<UserExistsResponse> {
-        return RestClient.get<UserExistsResponse>("/user/exists?username=" + username.trim()).then(response => {
+        return RestClient.get<UserExistsResponse>(`/user/exists?username=${username.trim()}`).then(response => {
             if (response.data?.exists) {
                 return { exists: response.data?.exists };
             } else {
@@ -43,7 +57,7 @@ export default class UserService {
      * @return boolean true if exists, else false.
      */
     public async emailAlreadyRegistered(email: string): Promise<UserExistsResponse> {
-        return RestClient.get<UserExistsResponse>("/user/exists?email=" + email.trim()).then(response => {
+        return RestClient.get<UserExistsResponse>(`/user/exists?email=${email.trim()}`).then(response => {
             if (response.data?.exists) {
                 return { exists: true };
             } else {
@@ -60,7 +74,7 @@ export default class UserService {
      * @return response true if successful, else false with the reason.
      */
     public async setNickname(nickname: string): Promise<UpdateResponse> {
-        return RestClient.put("/user/set-nickname/" + nickname.trim()).then(() => {
+        return RestClient.put(`/user/set-nickname/${nickname.trim()}`).then(() => {
             return { success: true };
         }).catch((response: APIResponse<UpdateResponse>) => {
             return { success: false, error: response.error };
@@ -81,14 +95,51 @@ export default class UserService {
 
     /**
      * Updates the application preferences of the current user in context.
-     * @param preferences The updated preferences selection.
+     * @param updates The updated preferences' selection.
      * @return response true if successful, else false with the reason.
      */
-    public async updatePreferences(preferences: UserPreferences): Promise<UpdateResponse> {
-        return RestClient.put("/user/update-preferences", preferences).then(() => {
+    public async updatePreferences(updates: UserPreferenceUpdate[]): Promise<UpdateResponse> {
+        const request = new PatchRequest(updates.map((update: UserPreferenceUpdate) => {
+            return new PatchReplaceOperation(update.preference, update.value)
+        }));
+
+        return RestClient.patchJSON("/user/update-preferences", request).then(() => {
             return { success: true };
         }).catch((response: APIResponse<UpdateResponse>) => {
             return { success: false, error: response.error };
         });
+    }
+
+    /**
+     * Checks if the user in local storage is still authenticated.
+     * The JWT token is passed to the API for server-side session verification.
+     * @return true if authenticated, else false.
+     */
+    public async isAuthenticated(): Promise<boolean> {
+        const userJson = localStorage.getItem("user");
+        const user: User = userJson ? JSON.parse(userJson) : undefined;
+
+        if (user) {
+            return RestClient.post<boolean>("/user/is-authenticated", { token: user.token }).then(response => {
+                return response.data ?? false;
+            }).catch(() => {
+                return false;
+            });
+        }
+
+        return Promise.resolve(false);
+    }
+
+    /**
+     * Retrieves the number of consecutive days the user
+     * has been actively engaging with the application.
+     * @return The users current streak in days.
+     */
+    public async getActivityStreak(): Promise<number> {
+        const startDate = new Date("2021/01/30");
+        const now = new Date();
+        const diff = now.getTime() - startDate.getTime();
+        const days = diff / (1000 * 3600 * 24);
+        return Promise.resolve(Number(days.toFixed(0)));
     }
 }

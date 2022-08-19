@@ -9,6 +9,7 @@ import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
 import Definition from "../../../domain/sentence/Definition";
 import { Learnable } from "../../../domain/learn/Learnable";
+import JLTPLevel from "../../../domain/learn/JLTPLevel";
 
 describe("Learnable", () => {
     describe("Get Field Values", () => {
@@ -31,7 +32,7 @@ describe("Learnable", () => {
         });
 
         it("Should return the kanji variation when specifying the kanji field", () => {
-            const data = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]);
+            const data = new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 9, ["animal"]);
             const fieldValues = data.getFieldValues(LearnableField.KANJI);
             expect(fieldValues).toStrictEqual(["魚"]);
         });
@@ -44,14 +45,14 @@ describe("Learnable", () => {
 
         it("Should return the on'yomi readings when specifying the on'yomi field", () => {
             const readings = [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)];
-            const data = new Kanji("人", readings, ["person"], KyoikuGrade.ONE, "source", [], []);
+            const data = new Kanji("人", readings, ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "source", [], 1, []);
             const fieldValues = data.getFieldValues(LearnableField.ONYOMI_READING);
             expect(fieldValues).toStrictEqual(["じん"]);
         });
 
         it("Should return the kun'yomi readings when specifying the kun'yomi field", () => {
             const readings = [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)];
-            const data = new Kanji("人", readings, ["person"], KyoikuGrade.ONE, "source", [], []);
+            const data = new Kanji("人", readings, ["person"], KyoikuGrade.ONE, JLTPLevel.N5, "source", [], 1, []);
             const fieldValues = data.getFieldValues(LearnableField.KUNYOMI_READING);
             expect(fieldValues).toStrictEqual(["ひと"]);
         });
@@ -70,7 +71,7 @@ describe("Learnable", () => {
 
         it.skip("Should throw an exception when passing in an unknown field type", () => {
             const data = new Definition(["not much"], undefined, "あまり", "Adverb");
-            //How can we test this without adding in an unused LearnableField export?
+            //TODO: How can we test this without adding in an unused LearnableField export?
         });
     });
 

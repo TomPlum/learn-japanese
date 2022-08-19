@@ -1,0 +1,159 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
+.wrapper {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.kanji, .highlight {
+  @include noSelect;
+  text-align: center;
+  font-size: 3em;
+  width: 100px;
+  height: 100px;
+}
+
+.kanji p:first-child {
+  margin: 0;
+  text-align: center;
+  color: $light-1;
+  text-decoration: none;
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
+}
+
+.kanji p:first-child:hover {
+  color: #FFF;
+}
+
+.highlight p:first-child {
+  margin: 0;
+  color: $inspect;
+}
+
+.selected {
+  color: $light-1;
+  font-size: 1.5em;
+  text-decoration: none;
+  transition: all ease-in-out 0.2s;
+}
+
+.selected:hover {
+  text-decoration: none;
+}
+
+.frosted p {
+  filter: blur(5px);
+}
+
+
+.meanings {
+  display: block;
+  width: 100%;
+}
+
+.info {
+  border-right: 1px solid $light-2;
+}
+
+.label {
+  display: block;
+  color: $light-2;
+  margin-bottom: 0;
+}
+
+.value {
+  display: block;
+  color: $light-1;
+  font-size: 1.5em;
+  transition: color ease-in-out 0.2s;
+}
+
+.value:hover {
+  color: #FFF;
+}
+
+.section {
+  margin-bottom: 15px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  float: left;
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+  color: $light-1;
+}
+
+.rightSideWrapper {
+  display: flex;
+  flex-flow: column;
+  min-height: 500px;
+}
+
+.kanjiWrapper {
+  flex: 1 1 auto;
+}
+
+.footer {
+  border-top: 1px solid $light-2;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.pageSize {
+  float: right;
+}
+
+.search {
+  max-width: 100%;
+  width: 100%;
+}
+
+.search input, .search input:focus {
+  height: 40px;
+  font-size: 1.2em;
+  background-color: transparent;
+  box-shadow: none;
+  border-color: #FFF !important;
+  color: #FFF;
+}
+
+.search div {
+  background-color: transparent;
+}
+
+.loading {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.grid {
+  margin-top: 10px;
+  margin-bottom: 36px;
+}
+
+.matching {
+  color: $inspect;
+  opacity: 0.8;
+}
+
+.emptyWrapper {
+  color: $light-1;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+}
+
+.example {
+  cursor: pointer;
+}

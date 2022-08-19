@@ -1,0 +1,46 @@
+@import "src/styles/sass/colours";
+
+.body {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.favourites {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.favourite {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.emptyMessage {
+  font-size: 1.1em;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  margin: 0;
+  transition: all ease-in-out 0.2s;
+}
+
+.emptyMessage:hover {
+  background-color: $dark-1;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.emptyMessage:hover > svg {
+  color: $learn-colour;
+}
+
+.emptyAddButton {
+  color: rgba($learn-colour, 0.8);
+  margin-right: 5px;
+  margin-bottom: 2px;
+  font-size: 1.3em;
+  transition: all ease-in-out 0.2s;
+}

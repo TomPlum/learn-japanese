@@ -1,8 +1,9 @@
 import QuestionBanner, { QuestionBannerProps } from "../../../components/game/QuestionBanner";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import Definition from "../../../domain/sentence/Definition";
 import LearnableField from "../../../domain/learn/LearnableField";
 import { findByTextWithElements } from "../../Queries";
+import renderWithTranslation from "../../renderWithTranslation";
 
 let props: QuestionBannerProps;
 
@@ -12,7 +13,7 @@ const twoFields = new Definition(["meaning1", "meaning2"], undefined, "", "");
 const severalFields = new Definition(["meaning1", "meaning2", "meaning3", "meaning4"], undefined, "", "");
 
 const setup = () => {
-    const component = render(<QuestionBanner {...props} />);
+    const component = renderWithTranslation(<QuestionBanner {...props} />);
     return { ...component };
 }
 

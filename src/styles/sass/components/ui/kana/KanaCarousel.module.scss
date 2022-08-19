@@ -1,0 +1,43 @@
+@import "src/styles/sass/mixins";
+
+.kana {
+  @include noSelect;
+  font-size: 10em;
+  height: 1.3em;
+  margin: 0;
+}
+
+.romaji {
+  @include noSelect;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
+  font-size: 1.8em;
+  margin: 0;
+}
+
+.animate {
+  animation: fade 4s ease-in-out infinite;
+}
+
+.wrapper {
+  margin-top: 25px;
+  margin-bottom: 50px;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: translateY(-120px) rotateX(90deg);
+  }
+  25% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(120px) rotateX(-75deg);
+  }
+}

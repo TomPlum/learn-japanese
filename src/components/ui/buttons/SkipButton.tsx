@@ -1,9 +1,9 @@
-import { Component } from "react";
 import { Button } from "react-bootstrap";
 import { faForward } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SizeMeProps, withSize } from "react-sizeme";
 import styles from "../../../styles/sass/components/ui/buttons/SkipButton.module.scss";
+import { useTranslation } from "react-i18next";
 
 export interface SkipButtonProps extends SizeMeProps {
     disabled?: boolean;
@@ -11,17 +11,19 @@ export interface SkipButtonProps extends SizeMeProps {
     onClick: () => void;
 }
 
-class SkipButton extends Component<SkipButtonProps> {
-    render() {
-        const { disabled, className, onClick, size } = this.props;
-        const defaultClass = disabled ? styles.disabled : styles.button;
-        return (
-            <Button className={[defaultClass, className].join(" ")} onClick={onClick} disabled={disabled} variant="danger">
-                {(size?.width ?? -1) > 105 && <FontAwesomeIcon icon={faForward} data-testid="icon"/>}
-                {' Skip'}
-            </Button>
-        );
-    }
+const SkipButton  = (props: SkipButtonProps) => {
+    const { disabled, className, onClick, size } = props;
+
+    const { t } = useTranslation("translation", { keyPrefix: "action" });
+
+    const defaultClass = disabled ? styles.disabled : styles.button;
+
+    return (
+        <Button className={[defaultClass, className].join(" ")} onClick={onClick} disabled={disabled} variant="danger">
+            {(size?.width ?? -1) > 105 && <FontAwesomeIcon icon={faForward} data-testid="icon"/>}
+            {' '}{t("skip")}
+        </Button>
+    );
 }
 
 export default withSize()(SkipButton);

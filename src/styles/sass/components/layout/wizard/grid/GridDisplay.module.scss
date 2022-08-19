@@ -1,0 +1,26 @@
+.wrapper {
+  width: 100%;
+}
+
+.list > p {
+  display: inline-block;
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+
+.list {
+  margin-bottom: 5px;
+  text-align: left;
+  padding: 5px 10px;
+}
+
+.item {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

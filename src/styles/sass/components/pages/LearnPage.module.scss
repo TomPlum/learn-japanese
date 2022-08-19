@@ -1,0 +1,39 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.message {
+  color: $light-1;
+}
+
+.error {
+  color: $light-1;
+}
+
+.error, .message {
+  margin: 0;
+  font-size: 1.3em;
+  text-align: center;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.link {
+  color: $inspect;
+  transition: all ease-in-out 0.2s;
+}
+
+.link:hover {
+  opacity: 0.8;
+  text-decoration: none;
+  color: $inspect;
+}

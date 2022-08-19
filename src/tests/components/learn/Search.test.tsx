@@ -5,15 +5,16 @@ import { Kanji } from "../../../domain/kanji/Kanji";
 import { KanjiReading } from "../../../domain/kanji/KanjiReading";
 import { ReadingType } from "../../../domain/kanji/ReadingType";
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
+import JLTPLevel from "../../../domain/learn/JLTPLevel";
 
 const setup = () => {
     const data = [
         new Definition(["to like"], "好き","すきな", "な Adjective"),
         new Definition(["beautiful or clean"], undefined, "きれいな", "な Adjective"),
         new Definition(["quiet"], "静か", "しずかな", "な Adjective"),
-        new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, "", [], ["number"]),
-        new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, "", [], ["animal"]),
-        new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, "", [], ["animal"]),
+        new Kanji("一", [new KanjiReading("ichi", "いち", ReadingType.ON)], ["one"], KyoikuGrade.ONE, JLTPLevel.N5, "", [], 1, ["number"]),
+        new Kanji("魚", [new KanjiReading("sakana", "さかな", ReadingType.KUN)], ["fish"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 9, ["animal"]),
+        new Kanji("鳥", [new KanjiReading("tori", "とり", ReadingType.ON)], ["bird"], KyoikuGrade.TWO, JLTPLevel.N5, "", [], 10, ["animal"]),
     ];
 
     const component = render(<Search data={data} tags={["number", "animal"]} />);

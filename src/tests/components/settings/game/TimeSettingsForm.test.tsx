@@ -1,11 +1,12 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import TimeSettingsForm from "../../../../components/settings/game/TimeSettingsForm";
 import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 const onChangeHandler = jest.fn();
 
 const setup = () => {
-    const component = render(<TimeSettingsForm onChange={onChangeHandler} />);
+    const component = renderWithTranslation(<TimeSettingsForm onChange={onChangeHandler} />);
     return {
         timed: component.getByTestId('Timed'),
         countdown: component.getByTestId('Countdown'),

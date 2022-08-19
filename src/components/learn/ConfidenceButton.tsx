@@ -1,24 +1,42 @@
 import { Button } from "react-bootstrap";
-import { Confidence } from "../../domain/learn/spacedrepetition/Confidence";
+import Confidence from "../../domain/learn/spacedrepetition/Confidence";
 import styles from "../../styles/sass/components/learn/ConfidenceButton.module.scss";
+import { useUserSelector } from "../../hooks";
+import { ConfidenceMenuStyle } from "../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface ConfidenceButtonProps {
-    className: string;
     value: Confidence;
+    className: string;
+    disabled: boolean;
     selected: Confidence | undefined;
     onClick: (value: Confidence) => void;
 }
 
 const ConfidenceButton = (props: ConfidenceButtonProps) => {
+
+    const { value, className, disabled, selected, onClick } = props;
+    const preferences = useUserSelector(state => state.user.user?.preferences);
+
     const handleClick = () => {
-        props.onClick(props.value);
+        onClick(props.value);
     }
 
-    const selectedClass = props.selected === props.value ? styles.selected : undefined;
+    const buttonClass = disabled ? styles.disabled : styles.button;
+    const selectedClass = selected === value ? styles.selected : undefined;
 
     return (
-        <Button onClick={handleClick} className={[props.className, styles.button, selectedClass].join(" ")}>
-            {props.value.valueOf()}
+        <Button
+            block
+            title={value.name}
+            disabled={disabled}
+            onClick={handleClick}
+            className={[className, buttonClass, selectedClass].join(" ")}
+        >
+            {preferences?.confidenceMenuStyle === ConfidenceMenuStyle.NUMBERS ?
+                value.value + 1 :
+                <FontAwesomeIcon icon={value.icon} />
+            }
         </Button>
     );
 }

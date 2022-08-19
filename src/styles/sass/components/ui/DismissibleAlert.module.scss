@@ -1,0 +1,18 @@
+@import "src/styles/sass/colours";
+
+.container {
+  position: relative;
+}
+
+.dismiss {
+  color: $dark-1;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  transition: all ease-in-out 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    color: $dark-3;
+  }
+}

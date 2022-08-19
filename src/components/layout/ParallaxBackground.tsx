@@ -1,86 +1,39 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import { Kana } from "../../domain/kana/Kana";
 import styles from "../../styles/sass/components/layout/ParallaxBackground.module.scss";
 import Arrays from "../../utility/Arrays";
+import { v4 } from "uuid";
+import { useMousePosition, useWindowDimensions } from "../../hooks";
 
 interface ParallaxBackgroundProps {
     kana: Kana[];
 }
 
-interface ParallaxBackgroundState {
-    kana: Kana[];
-    height: number;
-    width: number;
-    xMouse: number;
-    yMouse: number;
-    position: [x: number, y: number, z: number];
-}
+const ParallaxBackground = (props: ParallaxBackgroundProps) => {
 
-class ParallaxBackground extends Component<ParallaxBackgroundProps, ParallaxBackgroundState> {
+    const [kana, setKana] = useState<Kana[]>([]);
+    const { width, height } = useWindowDimensions();
+    const { x, y } = useMousePosition();
 
-    constructor(props: ParallaxBackgroundProps | Readonly<ParallaxBackgroundProps>) {
-        super(props);
+    useEffect(() => {
+        setKana(Arrays.shuffle(getBackgroundKana()));
+    }, []);
 
-        this.state = {
-            kana: [],
-            width: window.innerWidth,
-            height: window.innerHeight,
-            xMouse: window.innerWidth / 2,
-            yMouse: window.innerHeight / 2,
-            position: [0, 0, 0]
-        }
-    }
-
-    componentDidMount() {
-        this.getBackgroundKana();
-        window.addEventListener('resize', this.updateWindowDimensions);
-        //window.addEventListener('mousemove', this.updateMousePosition);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateWindowDimensions);
-        //window.removeEventListener('mousemove', this.updateMousePosition);
-    }
-
-    render() {
-        const { kana } = this.state;
-        return (
-            <ul className={styles.background}>
-                {kana.map(kana => {
-                    return (
-                        <li key={Math.random().toString()} data-testid="background-kana">
-                            {kana.code}
-                        </li>
-                    )
-                })}
-            </ul>
-        );
-    }
-
-    private updateWindowDimensions = () => {
-        this.getBackgroundKana();
-        this.setState({ width: window.innerWidth, height: window.innerHeight });
-    }
-
-    private updateMousePosition = (e: MouseEvent) => {
-        this.setState({ xMouse: e.pageX, yMouse: e.pageY }, this.calculateParallax);
-    }
-
-    private getBackgroundKana = () => {
+    const getBackgroundKana = () => {
         let kana: Kana[] = [];
 
         const html = document.querySelector('html');
-        const pool = [...this.props.kana];
+        const pool = [...props.kana];
 
         if (pool.length > 0 && html) {
             //Calculate the width & height of the viewport in em.
             const fontSize = getComputedStyle(html).fontSize;
-            const width = window.innerWidth / parseFloat(fontSize);
-            const height = window.innerHeight / parseFloat(fontSize);
+            const widthEm = width / parseFloat(fontSize);
+            const heightEm = height / parseFloat(fontSize);
 
             //Calculate how many kana fit on a single row, the number of rows and the total required.
-            const kanaPerRow = Math.ceil(width / 5);
-            const rows = Math.ceil(height / 5) + 1;
+            const kanaPerRow = Math.ceil(widthEm / 5);
+            const rows = Math.ceil(heightEm / 5) + 1;
             const totalKanaRequired = kanaPerRow * rows;
 
             if (totalKanaRequired > pool.length) {
@@ -100,18 +53,20 @@ class ParallaxBackground extends Component<ParallaxBackgroundProps, ParallaxBack
             }
         }
 
-        this.setState({ kana: Arrays.shuffle(kana) });
+        return kana;
     }
 
-    private calculateParallax() {
-        /*const { xMouse, yMouse, width, height } = this.state;
-        const halfWidth = width / 2;
-        const halfHeight = height / 2;
-        const xDepth = 0
-        const yDepth = 0
-        const zDepth = 0
-        this.setState({ position: [xDepth, yDepth, zDepth] });*/
-    }
+    return (
+        <ul className={styles.background}>
+            {kana.map(kana => {
+                return (
+                    <li key={v4().valueOf()}>
+                        <span data-testid="background-kana">{kana.code}</span>
+                    </li>
+                )
+            })}
+        </ul>
+    );
 }
 
 export default ParallaxBackground;

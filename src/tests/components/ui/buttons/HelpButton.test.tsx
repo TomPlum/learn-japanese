@@ -1,24 +1,18 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import HelpButton from "../../../../components/ui/buttons/HelpButton";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 const setup = () => {
-    const component = render(<HelpButton/>);
+    const component = renderWithTranslation(<HelpButton />);
     return {
-        button: component.getByText('Help'),
+        button: component.getByTestId('help-button'),
         ...component
     }
 }
 
-test('Clicking on the kanji bank link should route to the help page', async () => {
-    const { button } = setup();
-    fireEvent.click(button);
-    expect(await screen.findByText('Jōyō Kanji Bank')).toHaveAttribute('href', "/example-base-path/help");
-});
-
-test('Clicking on the genki knowledge bank link should route to the help page', async () => {
-    const { button } = setup();
-    fireEvent.click(button);
-    expect(await screen.findByText('Genki Knowledge Bank')).toHaveAttribute('href', "/example-base-path/help");
+test('Should render the help text', async () => {
+    setup();
+    expect(screen.getByText('Help')).toBeInTheDocument();
 });
 
 test('Clicking on the super memo 2 algorithm link should route to the help page', async () => {

@@ -26,16 +26,20 @@ interface GameSettingsMenuState {
     timeSettings: TimeSettings;
 }
 
+export type SettingsFormHandle = {
+    reset: () => void;
+}
+
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
-    private readonly display: React.RefObject<QuestionSettingsForm>;
-    private readonly hints: React.RefObject<HintSettingsForm>;
-    private readonly lives: React.RefObject<LifeSettingsForm>;
-    private readonly time: React.RefObject<TimeSettingsForm>;
+    private readonly question: React.RefObject<SettingsFormHandle>;
+    private readonly hints: React.RefObject<SettingsFormHandle>;
+    private readonly lives: React.RefObject<SettingsFormHandle>;
+    private readonly time: React.RefObject<SettingsFormHandle>;
 
     constructor(props: GameSettingsMenuProps | Readonly<GameSettingsMenuProps>) {
         super(props);
 
-        this.display = React.createRef();
+        this.question = React.createRef();
         this.hints = React.createRef();
         this.lives = React.createRef();
         this.time = React.createRef();
@@ -116,7 +120,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                                     </Card.Title>
 
                                     <QuestionSettingsForm
-                                        ref={this.display}
+                                        ref={this.question}
                                         onChange={(settings) => this.setState({ questionSettings: settings })}
                                     />
                                 </Tab.Pane>
@@ -221,7 +225,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
     }
 
     onReset = () => {
-        this.display.current?.reset();
+        this.question.current?.reset();
         this.hints.current?.reset();
         this.lives.current?.reset();
         this.time.current?.reset();

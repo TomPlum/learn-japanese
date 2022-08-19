@@ -1,9 +1,10 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import SentenceStructureForm from "../../../../components/settings/data/SentenceStructureForm";
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu";
 import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../../../../domain/session/settings/data/SentenceStructureSettings";
 import { faSpellCheck } from "@fortawesome/free-solid-svg-icons";
 import { getValueLastCalledWith } from "../../../Queries";
+import renderWithTranslation from "../../../renderWithTranslation";
 
 let props: DataSettingsMenuProps<SentenceStructureSettings>;
 
@@ -23,7 +24,7 @@ beforeEach(() => {
 });
 
 const setup = () => {
-    const component = render(<SentenceStructureForm {...props} />);
+    const component = renderWithTranslation(<SentenceStructureForm {...props} />);
     return {
         quantity: component.getByPlaceholderText('Quantity'),
         adverbs: component.getByTestId('adverb-switch'),

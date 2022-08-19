@@ -1,3 +1,6 @@
+@import "src/styles/sass/colours";
+@import "src/styles/sass/mixins";
+
 .row > div[class^="col-"] {
   padding: 0 6px;
 }
@@ -40,4 +43,71 @@
   background-color: #41db4e !important;
   box-shadow: none !important;
   border: none;
+}
+
+.confidence {
+  max-width: 600px;
+}
+
+.confidence ul {
+  list-style: none;
+  padding-left: 0;
+  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
+  margin-bottom: 0;
+}
+
+.info {
+  color: $light-1;
+  transition: 0.3s ease-in-out all;
+}
+
+.info:hover {
+  cursor: pointer;
+  color: $hints;
+}
+
+.titleWrapper {
+  color: #FFF;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  margin-bottom: 5px;
+}
+
+.confidence ul span {
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+  margin-right: 8px;
+  @include evenNumericalSpacing;
+}
+
+span.one, svg.one {
+  background-color: transparent !important;
+  color: #db3a3a;
+}
+
+span.two, svg.two {
+  background-color: transparent !important;
+  color: #ee7d41;
+}
+
+span.three, svg.three {
+  background-color: transparent !important;
+  color: #e7ca41;
+}
+
+span.four, svg.four {
+  background-color: transparent !important;
+  color: #4e7bec;
+}
+
+span.five, svg.five {
+  background-color: transparent !important;
+  color: #42cbc6;
+}
+
+span.six, svg.six {
+  background-color: transparent !important;
+  color: #41db4e;
+}
+
+.days {
+  float: right;
 }

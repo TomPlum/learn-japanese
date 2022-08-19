@@ -75,7 +75,7 @@
   }
 
   .buttonWrapper {
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
   .buttonColumnRight {
@@ -104,7 +104,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  flex-direction:row;
+  height: 100%;
+  flex-grow: 1;
 }
 
 .cardWrapper, .header {

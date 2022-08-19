@@ -6,24 +6,36 @@ import HashLink from "../layout/HashLink";
 import ScrollableContainer from "./ScrollableContainer";
 import ConditionalWrapper from "./ConditionalWrapper";
 import styles from "../../styles/sass/components/ui/NavigationButton.module.scss";
+import LoadingSpinner from "./loading/LoadingSpinner";
+import { useTranslation } from "react-i18next";
+import TextLoading from "./loading/TextLoading";
 
 export interface NavigationButtonProps {
-    text: string;
+    id?: string;
+    text?: string;
+    loading?: boolean;
+    textLoading?: boolean;
     icon: IconDefinition;
     width?: number;
+    textPlacement?: 'bottom' | 'left' | 'right';
     className?: string;
+    containerClass?: string;
     menuClass?: string;
     iconClass?: string;
     textClass?: string;
     disabled?: boolean;
     disableDropdown?: boolean;
+    href?: string;
     searchable?: boolean;
-    show?: number;
+    showItemQuantity?: number;
     onClick?: () => void;
+    onShow?: () => void;
+    onHide?: () => void;
 }
 
 export interface ItemProps {
     icon?: IconDefinition;
+    containerClass?: string;
     iconClass?: string;
     className?: string;
     href?: string;
@@ -33,47 +45,58 @@ export interface ItemProps {
 
 const Item = (props: PropsWithChildren<ItemProps>) => {
 
+    const { icon, containerClass, iconClass, className, href, style, onClick, children } = props;
+
     const handleClick = () => {
-        props.onClick?.(props.children as string)
+        onClick?.(children as string)
     }
 
-    const className = [props.className, styles.item].join(" ");
-    const key = props.children?.toString();
+    const linkClassName = [className, styles.item].join(" ");
+    const key = children?.toString();
 
     return (
-        <div className={styles.itemWrapper} key={`${key}-wrapper`}>
-            {props.icon && (
+        <div className={[styles.itemWrapper, containerClass].join(" ")} key={`${key}-wrapper`}>
+            {icon && (
                 <FontAwesomeIcon
                     fixedWidth
-                    icon={props.icon}
+                    icon={icon}
                     key={`${key}-icon`}
-                    className={[styles.itemIcon, props.iconClass].join(" ")}
+                    className={[styles.itemIcon, iconClass].join(" ")}
                 />
             )}
 
-            <HashLink path={props.href} onClick={handleClick} className={className} style={props.style} key={key}>
-                {props.children}
+            <HashLink path={href} onClick={handleClick} className={linkClassName} style={style} key={key}>
+                {children}
             </HashLink>
         </div>
     );
 };
 
 const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
+
+    const { text, icon, width, textPlacement, className, iconClass, textClass, disabled, disableDropdown, id, href,
+        searchable, showItemQuantity, containerClass, loading, textLoading, onClick, onShow, onHide, children } = props;
+
+    const { t } = useTranslation();
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
     const [expandSearch, setExpandSearch] = useState(false);
     const ref = useRef(null);
-    const targetRef = useRef<HTMLDivElement>(null);
+    const targetRef = useRef(null);
 
     const handleClick = () => {
-        if (!props.disableDropdown) {
+        if (!disableDropdown) {
             setShow(!show);
+            if (!show) {
+                onShow?.();
+            }
         } else {
-            props.onClick?.();
+            onClick?.();
         }
     };
 
     const handleHide = () => {
+        onHide?.();
         setShow(false);
     };
 
@@ -90,22 +113,38 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
         }
     }
 
-    const className = [props.className, styles.link].join(" ");
+    const linkClassName = [className, styles.link].join(" ");
+    const isLeft = textPlacement && textPlacement === "left";
+    const isRight = textPlacement && textPlacement === "right";
+    const textClasses = [textClass, show ? styles.active : "", styles.text];
+    const iconClasses = [iconClass, show ? styles.active : "", styles.icon].join(" ");
 
     return (
-        <div ref={ref} className={styles.container}>
-            <Nav.Link className={className} onClick={handleClick} disabled={props.disabled}>
-                <div>
-                    <FontAwesomeIcon
-                        fixedWidth
-                        icon={props.icon}
-                        className={[props.iconClass, show ? styles.active : "", styles.icon].join(" ")}
-                    />
-                </div>
+        <div ref={ref} className={[styles.container, containerClass].join(" ")}>
+            <Nav.Link className={linkClassName} onClick={handleClick} disabled={disabled} data-testid={id + "-nav-link"} href={href}>
+               <div className={styles.button}>
+                   {isLeft && (
+                       <TextLoading active={textLoading ?? false}>
+                           <span className={textClasses.concat(styles.left).join(" ")}>{text}</span>
+                       </TextLoading>
+                   )}
 
-                <span ref={targetRef} className={[props.textClass, show ? styles.active : "", styles.text].join(" ")}>
-                    {props.text}
-                </span>
+                   <div ref={!text || isLeft || isRight ? targetRef : undefined}>
+                       <FontAwesomeIcon fixedWidth icon={icon} data-testid={id} className={iconClasses} />
+                   </div>
+
+                   {isRight && (
+                       <TextLoading active={textLoading ?? false}>
+                           <span className={textClasses.concat(styles.right).join(" ")}>{text}</span>
+                       </TextLoading>
+                   )}
+
+                   {textPlacement === "bottom" && (
+                       <TextLoading active={textLoading ?? false}>
+                           <span ref={targetRef} className={textClasses.join(" ")}>{text}</span>
+                       </TextLoading>
+                   )}
+               </div>
             </Nav.Link>
 
             <Overlay
@@ -117,37 +156,39 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                 onExited={handleExited}
                 container={ref.current}
             >
-                <Popover id={props.text + "-button"} className={styles.popover} style={{ width: props.width }}>
-                    {props.searchable && <Form.Control
+                <Popover id={id ?? "nav-btn"} data-testid={`${id}-menu`} className={styles.popover} style={{ width: width }}>
+                    {searchable && <Form.Control
                         type="text"
                         value={search}
-                        placeholder="Search"
+                        disabled={loading}
                         onChange={handleSearch}
                         className={styles.search}
+                        placeholder={t("action.search")}
                         onFocus={() => setExpandSearch(true)}
                         style={{ height: expandSearch ? 45 : 30 }}
                     />}
 
-                    <Popover.Body className={styles.content}>
-                        <ConditionalWrapper
-                            condition={!!props.show}
+                    <Popover.Content className={styles.content}>
+                        <LoadingSpinner active={loading ?? false} className={styles.loading} />
+
+                        {!loading && <ConditionalWrapper
+                            condition={!!showItemQuantity}
                             wrapper={(children) => (
-                                <ScrollableContainer height={props.show! * 55} hideScrollBar>
+                                <ScrollableContainer height={showItemQuantity! * 55} hideScrollBar>
                                     {children}
                                 </ScrollableContainer>
                             )}>
                             <>{
-                                React.Children.map(props.children, (child) => child)?.filter((child: ReactNode) => {
+                                React.Children.map(children, (child) => child)?.filter((child: ReactNode) => {
                                     const value = (child as ReactElement).props.children.toString();
                                     return search === "" || value.toLowerCase().includes(search.toLowerCase());
                                 })
                             }</>
-                        </ConditionalWrapper>
-                    </Popover.Body>
+                        </ConditionalWrapper>}
+                    </Popover.Content>
                 </Popover>
             </Overlay>
         </div>
-
     );
 }
 

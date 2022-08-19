@@ -1,0 +1,123 @@
+@import "src/styles/sass/colours";
+
+.header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.close {
+  margin-left: auto;
+  color: $light-2;
+  font-size: 1.2em;
+  transition: color ease-in-out 0.2s;
+}
+
+.close:hover {
+  cursor: pointer;
+  color: $light-1;
+}
+
+.stage {
+  margin-left: 8px;
+  font-size: 1.5em;
+}
+
+.content {
+  color: $light-1;
+  background-color: $dark-2;
+  border-radius: 10px;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  padding: 10px 15px 10px 15px;
+  height: 500px;
+  border: 1px solid $dark-1;
+}
+
+.body {
+  width: 100%;
+  height: 344px;
+}
+
+.footer {
+  align-items: flex-end;
+  align-self: flex-end;
+  width: 100%;
+}
+
+.dialog {
+  max-width: 650px;
+}
+
+.modal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin icon {
+  font-size: 1.8em;
+}
+
+.modeIcon {
+  @include icon;
+  color: $bootstrap-info;
+}
+
+.topicIcon {
+  @include icon;
+  color: $topic;
+}
+
+.typeIcon {
+  @include icon;
+  color: $light-2;
+}
+
+.presetIcon {
+  @include icon;
+  color: $bootstrap-yellow;
+}
+
+.questionIcon {
+  @include icon;
+  color: #FFF;
+}
+
+.livesIcon {
+  @include icon;
+  color: $lives;
+}
+
+.hintsIcon {
+  @include icon;
+  margin-bottom: 2px;
+  color: $hints;
+}
+
+.timeIcon {
+  @include icon;
+  margin-bottom: 3px;
+  color: $time;
+}
+
+.dataIcon {
+  @include icon;
+  color: #ac4ad0;
+}
+
+.confirmIcon {
+  @include icon;
+  color: $bootstrap-green;
+  margin-bottom: 2px;
+}
+
+.blur {
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 2000px rgba($dark-2, .5);
+  filter: blur(5px);
+}

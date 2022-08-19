@@ -1,0 +1,35 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  border-radius: 4px;
+  padding: 3px 8px 3px 8px;
+  font-style: italic;
+  margin: 0 6px;
+  vertical-align: center;
+  line-height: 24px;
+  height: 24px;
+}
+
+.genkiOne {
+  border: 1px solid $genki-1-light;
+}
+
+.genkiTwo {
+  border: 1px solid $genki-2-light;
+}
+
+.quote {
+
+}
+
+.value {
+  line-height: 24px;
+}
+
+.wrong {
+  color: $bootstrap-red;
+}
+
+.incorrect {
+  border: 1px solid #de4f5d;
+}

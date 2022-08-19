@@ -24,6 +24,19 @@
   border-radius: 12px;
 }
 
+.item {
+  @include noSelect;
+  padding: 12px 15px;
+  display: inline-block;
+  color: $light-2;
+  transition: all ease 0.25s;
+  text-decoration: none;
+}
+
+.item:hover {
+  text-decoration: none;
+}
+
 .itemWrapper {
   transition: all ease 0.25s;
   cursor: pointer;
@@ -33,17 +46,18 @@
   background-color: $dark-1;
 }
 
-.itemWrapper:hover a {
-  color: rgba(255, 255, 255, 0.75) !important;
+.itemWrapper:first-child:hover {
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
 }
 
-.item {
-  @include noSelect;
-  padding: 12px 15px;
-  display: inline-block;
-  color: $light-2;
-  transition: all ease 0.25s;
-  text-decoration: none;
+.itemWrapper:last-child:hover {
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+}
+
+.itemWrapper:hover a {
+  color: rgba(255, 255, 255, 0.75) !important;
 }
 
 .itemWrapper:nth-child(n+1) {
@@ -54,8 +68,8 @@
   border: none;
 }
 
-.item:hover {
-  text-decoration: none;
+.linkContainer {
+  padding: 0;
 }
 
 .itemIcon {
@@ -67,13 +81,10 @@
 .link {
   transition: all ease 0.25s;
   text-align: center;
+  padding: 0 !important;
 }
 
-.link:hover {
-  color: $light-1 !important;
-}
-
-.search {
+.search, .search:disabled {
   color: #FFF;
   border-radius: 12px 12px 0 0 !important;
   background-color: $dark-2;
@@ -82,6 +93,10 @@
   border-left: none;
   border-bottom: 2px solid $dark-1 !important;
   transition: height ease-in-out 0.5s;
+}
+
+.search:disabled::placeholder {
+  opacity: 0.4;
 }
 
 .search:focus {
@@ -98,4 +113,27 @@
 
 .icon, .text {
   transition: color ease-in-out 0.2s;
+}
+
+.left, .right {
+  margin-top: 6px;
+}
+
+.left {
+  margin-right: 4px;
+}
+
+.right {
+  margin-left: 4px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.loading {
+  text-align: center;
+  padding: 25px 0;
 }

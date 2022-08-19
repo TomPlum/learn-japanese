@@ -1,0 +1,47 @@
+@import "src/styles/sass/viewports";
+@import "src/styles/sass/mixins";
+
+@mixin wrapper {
+  @include fitMobileViewportHeight;
+  @include borderBoxSizing;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 0;
+}
+
+@include desktop {
+  .wrapper {
+    @include wrapper;
+  }
+}
+
+@include tablet {
+  .wrapper {
+    @include wrapper;
+    padding: $nav-tablet-height 30px 0 30px;
+  }
+}
+
+@include phone {
+  .wrapper {
+    @include wrapper;
+    padding: $nav-phone-height 5px 0 5px;
+  }
+}
+
+.row {
+  width: 100%;
+}
+
+.col {
+  min-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
