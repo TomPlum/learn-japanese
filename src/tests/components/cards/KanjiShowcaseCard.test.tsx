@@ -148,7 +148,7 @@ test('Should render the examples display modal when clicking the examples button
     expect(await screen.findByTestId('kanji-example-display')).toBeInTheDocument();
 
     // Closing it should stop rendering it
-    fireEvent.click(screen.getByText('Close'));
+    fireEvent.click(screen.getByLabelText('Close'));
     expect(await screen.queryByTestId('kanji-example-display')).not.toBeInTheDocument();
 });
 

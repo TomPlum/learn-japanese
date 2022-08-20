@@ -25,6 +25,6 @@ test('Clicking "x" close button in the user modal should close it', async () => 
     expect(userModal).toBeInTheDocument();
 
     //Clicking the 'x' button should close it
-    fireEvent.click(screen.getByText('Close'));
+    fireEvent.click(screen.getByLabelText('Close'));
     expect(userModal).not.toBeInTheDocument();
 });
