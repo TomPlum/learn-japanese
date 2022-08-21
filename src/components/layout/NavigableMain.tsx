@@ -15,6 +15,7 @@ import PlayPage from "../pages/PlayPage";
 import LearnPage from "../pages/LearnPage";
 import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
+import HighScoresPage from "../pages/HighScoresPage";
 
 const NavigableMain = () => {
 
@@ -28,6 +29,7 @@ const NavigableMain = () => {
                 <Route exact path="/learn" component={LearnPage} />
                 <Route exact path="/search" component={SearchPage} />
                 <Route exact path="/help" component={HelpPage} />
+                <Route exact path="/high-scores" component={HighScoresPage} />
                 <ProtectedRoute isAuthenticated={!!user} exact path="/profile" component={ProfilePage} />
                 <Route exact path="/genki" component={GenkiIndexPage} />
                 <Route exact path="/genki/grammar" component={GenkiGrammarPage} />
