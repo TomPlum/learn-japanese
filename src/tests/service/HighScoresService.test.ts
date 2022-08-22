@@ -1,6 +1,13 @@
 import RestClient from "../../rest/RestClient";
 import HighScoresService from "../../service/HighScoresService";
 
+const mockFindAll = jest.fn();
+jest.mock("../../repository/HighScoresRepository", () => {
+    return function () {
+        return { findAll: mockFindAll }
+    }
+});
+
 const mockDelete = jest.fn();
 beforeEach(() => {
     RestClient.delete = mockDelete;
@@ -9,6 +16,58 @@ beforeEach(() => {
 describe("High-scores Service", () => {
 
     const service = new HighScoresService();
+
+    describe("Get All Entries Page", () => {
+        it("Should call the repository with the pagination details", () => {
+            mockFindAll.mockResolvedValueOnce({});
+            return service.getAllEntriesPage(1, 10).then(() => {
+                expect(mockFindAll).toHaveBeenCalledWith({ page: 1, size: 10 });
+            });
+        });
+
+        it("Should return the correct response when the repository call resolves", () => {
+            mockFindAll.mockResolvedValueOnce({
+                entries: [{
+                    user: { id: 1, name: "Tom" },
+                    presetId: 1,
+                    score: 9235,
+                    time: "04:50"
+                }],
+                total: 120,
+                pages: 5
+            });
+
+            return service.getAllEntriesPage(0, 10).then(response => {
+                expect(response).toStrictEqual({
+                    entries: [{
+                        user: { id: 1, name: "Tom" },
+                        presetId: 1,
+                        score: 9235,
+                        time: "04:50"
+                    }],
+                    pages: {
+                        quantity: 5,
+                        total: 120
+                    },
+                    error: undefined
+                })
+            });
+        });
+
+        it("Should return the correct response if the repository call is rejected", () => {
+            mockFindAll.mockRejectedValueOnce({ error: "Failed to retrieve high-score entries" });
+            return service.getAllEntriesPage(5, 15).then(response => {
+                expect(response).toStrictEqual({
+                    entries: [],
+                    pages: {
+                        quantity: 0,
+                        total: 0
+                    },
+                    error: "Failed to retrieve high-score entries"
+                });
+            })
+        });
+    });
 
     describe("Delete", () => {
         it("Should call the rest client with the correct endpoint", () => {

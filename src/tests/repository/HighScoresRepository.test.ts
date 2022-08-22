@@ -1,4 +1,4 @@
-import { FindAllHighScoreEntries, HighScoresRepository, HighScoresResponse } from "../../repository/HighScoresRepository";
+import HighScoresRepository, { FindAllHighScoreEntries, HighScoresResponse } from "../../repository/HighScoresRepository";
 import RestClient from "../../rest/RestClient";
 
 const mockGet = jest.fn();

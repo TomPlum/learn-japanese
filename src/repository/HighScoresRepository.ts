@@ -21,7 +21,7 @@ export interface FindAllHighScoreEntries {
     error?: string;
 }
 
-export class HighScoresRepository {
+class HighScoresRepository {
     /**
      * Retrieves all the high-score entries.
      * @param paging - Pagination details.
@@ -41,3 +41,5 @@ export class HighScoresRepository {
         });
     }
 }
+
+export default HighScoresRepository;
