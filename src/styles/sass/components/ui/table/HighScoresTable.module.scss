@@ -1,0 +1,20 @@
+@import "src/styles/sass/colours";
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.table {
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+  max-width: 1200px;
+
+  th {
+    color: $light-2;
+  }
+
+  td {
+    color: $light-1;
+  }
+}
