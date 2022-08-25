@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import HighScoresService, { HighScoreEntry } from "../../service/HighScoresService";
 import LoadingSpinner from "../ui/loading/LoadingSpinner";
 import HighScoresTable from "../ui/table/HighScoresTable";
-import { Fade } from "react-bootstrap";
+import { Alert, Fade } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/HighScoresPage.module.scss"
 
 const HighScoresPage = () => {
@@ -24,7 +24,7 @@ const HighScoresPage = () => {
 
         service.getAllEntriesPage(pageNumber, pageSize).then(response => {
             if (response.error) {
-                setError(error);
+                setError(response.error);
             } else {
                 setEntries(response.entries);
                 setTotalEntries(response.pages.total);
@@ -39,6 +39,8 @@ const HighScoresPage = () => {
 
     return (
         <div className={styles.wrapper}>
+            {error && <Alert variant="error">{error}</Alert> }
+
             <div className={styles.header}>
                 <p className={styles.title}>Highscores</p>
             </div>
