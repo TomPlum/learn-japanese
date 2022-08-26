@@ -27,8 +27,8 @@ const HighScoresPage = () => {
                 setError(response.error);
             } else {
                 setEntries(response.entries);
-                setTotalEntries(response.pages.total);
-                setTotalPages(response.pages.quantity);
+                setTotalEntries(response.pages.quantity);
+                setTotalPages(response.pages.total);
             }
         }).catch(response => {
             setError(response.error);
@@ -52,6 +52,12 @@ const HighScoresPage = () => {
                     <HighScoresTable preset={selectedPreset} entries={entries} />
                 </Fade>
             )}
+
+            <div className={styles.footer}>
+                <p>Page {pageNumber + 1} of {totalPages}</p>
+                <p>Page Size: {pageSize}</p>
+                <p>Showing {totalEntries < pageSize ? totalEntries : pageSize} of {totalEntries} entries</p>
+            </div>
         </div>
     );
 }

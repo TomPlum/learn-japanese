@@ -1,3 +1,5 @@
+@import "src/styles/sass/colours";
+
 .wrapper {
   display: flex;
   justify-content: center;
@@ -12,4 +14,9 @@
   .title {
 
   }
+}
+
+.footer * {
+  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+  color: $light-1;
 }
