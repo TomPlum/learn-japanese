@@ -4,19 +4,30 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 
-.heading {
+.header {
   display: block;
   width: 100%;
   text-align: left;
 
   .title {
+    color: $light-1;
+    font-size: 2em;
+    font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+    display: inline-block;
+  }
 
+  .icon {
+    font-size: 1.6em;
+    margin-right: 10px;
+    margin-bottom: 1px;
+    color: $streak-gold;
   }
 }
 
 .footer * {
-  font-family: "Ciutadella Rounded Bold", "Segoe UI", sans-serif;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   color: $light-1;
 }

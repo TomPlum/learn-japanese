@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import HighScoresService, { HighScoreEntry } from "../../service/HighScoresService";
 import LoadingSpinner from "../ui/loading/LoadingSpinner";
 import HighScoresTable from "../ui/table/HighScoresTable";
-import { Alert, Fade } from "react-bootstrap";
+import { Alert, Container, Fade } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/HighScoresPage.module.scss"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 
 const HighScoresPage = () => {
 
@@ -38,10 +40,11 @@ const HighScoresPage = () => {
     }, []);
 
     return (
-        <div className={styles.wrapper}>
+        <Container className={styles.wrapper}>
             {error && <Alert variant="error">{error}</Alert> }
 
             <div className={styles.header}>
+                <FontAwesomeIcon icon={faTrophy} className={styles.icon} />
                 <p className={styles.title}>Highscores</p>
             </div>
 
@@ -58,7 +61,7 @@ const HighScoresPage = () => {
                 <p>Page Size: {pageSize}</p>
                 <p>Showing {totalEntries < pageSize ? totalEntries : pageSize} of {totalEntries} entries</p>
             </div>
-        </div>
+        </Container>
     );
 }
 
