@@ -1,6 +1,7 @@
 import RestClient from "../rest/RestClient";
 import PaginatedResponse from "../rest/response/PaginatedResponse";
 import { PaginationRequest } from "../rest/request/PaginationRequest";
+import UpdateResponse from "../rest/response/UpdateResponse";
 
 export interface HighScoresEntryResponse {
     user: {
@@ -21,6 +22,12 @@ export interface FindAllHighScoreEntries {
     error?: string;
 }
 
+export interface HighScoreEntryRequest {
+    preset: number;
+    score?: number;
+    time?: string;
+}
+
 class HighScoresRepository {
     /**
      * Retrieves all the high-score entries.
@@ -38,6 +45,22 @@ class HighScoresRepository {
             throw new Error(response.error);
         }).catch(response => {
             return { error: response.message, entries: [], total: 0, pages: 0 };
+        });
+    }
+
+    /**
+     * Saves a new high-score entry.
+     * @param request Details of the high-score.
+     */
+    public async save(request: HighScoreEntryRequest): Promise<UpdateResponse> {
+        return RestClient.post<UpdateResponse>("/high-scores/entry", request).then(response => {
+            if (response.error) {
+                return { success: false, error: response.error };
+            }
+
+            return { success: true };
+        }).catch(response => {
+            return { success: false, error: response.error };
         });
     }
 }
