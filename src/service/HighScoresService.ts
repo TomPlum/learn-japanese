@@ -2,11 +2,14 @@ import RestClient from "../rest/RestClient";
 import UpdateResponse from "../rest/response/UpdateResponse";
 import HighScoresRepository, { FindAllHighScoreEntries } from "../repository/HighScoresRepository";
 
-export interface HighScoreEntry {
+export interface HighScoreEntry extends HighScoreEntryDetails {
     user: {
         id: number;
         name: string;
-    },
+    }
+}
+
+interface HighScoreEntryDetails {
     presetId: number;
     score?: number;
     time?: string;
@@ -40,6 +43,17 @@ class HighScoresService {
             };
         }).catch(response => {
             return { entries: [], pages: { quantity: 0, total: 0 }, error: response.error };
+        });
+    }
+
+    /**
+     * Saves a new high-score entry for the active user.
+     * @param details - Details of the high-score.
+     */
+    public addNewEntry(details: HighScoreEntryDetails): Promise<UpdateResponse> {
+        const request = { preset: details.presetId, score: details.score, time: details.time };
+        return this._repository.save(request).then(response => {
+            return response;
         });
     }
 

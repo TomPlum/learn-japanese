@@ -2,9 +2,10 @@ import RestClient from "../../rest/RestClient";
 import HighScoresService from "../../service/HighScoresService";
 
 const mockFindAll = jest.fn();
+const mockSave = jest.fn();
 jest.mock("../../repository/HighScoresRepository", () => {
     return function () {
-        return { findAll: mockFindAll }
+        return { findAll: mockFindAll, save: mockSave }
     }
 });
 
@@ -16,6 +17,27 @@ beforeEach(() => {
 describe("High-scores Service", () => {
 
     const service = new HighScoresService();
+
+    describe("Add Entry", () => {
+        it("Should call the repository with the correct request details", () => {
+            mockSave.mockResolvedValueOnce({ success: true });
+            return service.addNewEntry({ presetId: 45, score: 951, time: "03:21" }).then(() => {
+                expect(mockSave).toHaveBeenLastCalledWith({
+                    preset: 45,
+                    score: 951,
+                    time: "03:21"
+                });
+            });
+        });
+
+        it("Should return the update response from the repository", () => {
+            const updateResponse = { success: true };
+            mockSave.mockResolvedValueOnce(updateResponse);
+            return service.addNewEntry({ presetId: 45, score: 951, time: "03:21" }).then(response => {
+                expect(response).toStrictEqual(updateResponse);
+            });
+        });
+    });
 
     describe("Get All Entries Page", () => {
         it("Should call the repository with the pagination details", () => {
