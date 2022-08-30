@@ -24,13 +24,16 @@ export interface SessionSettingsSlice {
     lastLearnSession?: SessionSettingsState;
 }
 
-const initialState: SessionSettingsSlice = {
-    lastLearnSession: undefined,
-    lastPlaySession: undefined
-}
-
 const LAST_PLAY_SESSION_KEY = "last-play-session";
 const LAST_LEARN_SESSION_KEY = "last-learn-session";
+
+const localLastPlaySession = localStorage.getItem(LAST_PLAY_SESSION_KEY);
+const localLastLearnSession = localStorage.getItem(LAST_LEARN_SESSION_KEY);
+
+const initialState: SessionSettingsSlice = {
+    lastLearnSession: localLastLearnSession ? JSON.parse(localLastLearnSession) as SessionSettingsState : undefined,
+    lastPlaySession: localLastPlaySession ? JSON.parse(localLastPlaySession) as SessionSettingsState : undefined
+}
 
 export const sessionSettingsSlice = createSlice({
     name: 'session-settings',
