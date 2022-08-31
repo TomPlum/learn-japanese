@@ -10,6 +10,7 @@ import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeS
 import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings";
 import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings";
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings";
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 let result: GameResult;
 
@@ -30,7 +31,7 @@ beforeEach(() => {
 const onCloseHandler = jest.fn();
 
 const setup = () => {
-    const component = render(<GameResultScreen onClose={onCloseHandler} result={result} />);
+    const component = renderTranslatedReduxConsumer(<GameResultScreen onClose={onCloseHandler} result={result} />);
     return {
         quit: component.getByText('Finish'),
         mistakes: component.getByText('View Mistakes'),

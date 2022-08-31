@@ -10,6 +10,7 @@ import { clearDataSettings } from "../../../slices/DataSettingsSlice";
 import PresetBuilder from "../../../domain/session/PresetBuilder";
 import { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings";
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
+import { localStorageMock } from "../../../setupTests";
 
 const history = createMemoryHistory();
 const onDismissHandler = jest.fn();
@@ -212,4 +213,14 @@ test('It should route to the learn page and set data settings in the redux store
 
     // Should re-direct to the /play page
     expect(history.location.pathname).toBe('/learn');
+});
+
+test('It should set the selected preset id in the local storage', () => {
+    props.preset = playPreset;
+    const { start } = setup();
+
+    // Start the session with the preset config
+    fireEvent.click(start);
+
+    expect(localStorageMock.getItem("selected-preset-id")).toBe("1");
 });

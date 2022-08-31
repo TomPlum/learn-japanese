@@ -12,7 +12,6 @@ import SubmitButton from "../ui/buttons/SubmitButton";
 import HintButton from "./HintButton";
 import SkipButton from "../ui/buttons/SkipButton";
 import ConfirmModal from "../ui/ConfirmModal";
-import { Environment } from "../../utility/Environment";
 import ScoreDisplay from "../ui/display/ScoreDisplay";
 import { Learnable } from "../../domain/learn/Learnable";
 import GameSettings from "../../domain/session/settings/game/GameSettings";

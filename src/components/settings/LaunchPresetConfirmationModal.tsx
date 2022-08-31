@@ -10,7 +10,7 @@ import Icon from "../ui/menu/icon/Icon";
 import SessionSettingsSummary from "./SessionSettingsSummary";
 import { setDataSettings as setGlobalDataSettings } from "../../slices/DataSettingsSlice";
 import GameSettings from "../../domain/session/settings/game/GameSettings";
-import { setGameSettings } from "../../slices/GameSettingsSlice";
+import { setGameSettings, setSelectedPresetID } from "../../slices/GameSettingsSlice";
 import { useHistory } from "react-router-dom";
 import { useDataSettingsDispatch, useGameSettingsDispatch, useSessionSettingsDispatch } from "../../hooks";
 import PlayMode from "../../domain/session/PlayMode";
@@ -41,6 +41,7 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
             const game = preset.modeSettings as GameSettings;
             gameSettingsDispatcher(setGameSettings(game));
             sessionSettingsDispatcher(setLastPlayPreset(preset));
+            gameSettingsDispatcher(setSelectedPresetID(preset.id));
             history.push('/play');
         } else {
             sessionSettingsDispatcher(setLastLearnPreset(preset));

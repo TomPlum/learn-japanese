@@ -29,6 +29,7 @@ const PlayPage = () => {
 
     const gameSettingsData = useGameSettingsSelector(state => state.gameSettings?.settings);
     const dataSettingsData = useDataSettingsSelector(state => state.dataSettings?.settings);
+    const selectedPresetId = useGameSettingsSelector(state => state.gameSettings.presetId);
 
     const gameSettings = gameSettingsData ? new GameSettingsConverter().deserialise(gameSettingsData) : undefined;
     const dataSettings = dataSettingsData ? new DataSettingsConverter().deserialise(dataSettingsData) : undefined;
@@ -86,6 +87,7 @@ const PlayPage = () => {
             {inResultsScreen && gameResult && (
                 <GameResultScreen
                     result={gameResult}
+                    presetId={selectedPresetId}
                     onClose={onGameResultMenuClose}
                 />
             )}

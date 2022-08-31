@@ -726,6 +726,9 @@
   },
   "memory-game": {
     "quit-title": "Are you sure you want to quit?",
-    "quit-body": "You'll lose your current progress, but you'll see the results of your game thus far."
+    "quit-body": "You'll lose your current progress, but you'll see the results of your game thus far.",
+    "results-screen": {
+      "not-submitted": "Your score was not submitted to the high-scores. You can change your preferences here."
+    }
   }
 }

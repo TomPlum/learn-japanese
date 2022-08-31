@@ -30,10 +30,15 @@ export interface GameSettingState {
 
 export interface GameConfigState {
     settings?: GameSettingState;
+    presetId?: number;
 }
 
+const localConfig = localStorage.getItem("game-config");
+const localPresetId = localStorage.getItem("selected-preset-id");
+
 const initialState: GameConfigState = {
-    settings: undefined
+    settings: localConfig ? JSON.parse(localConfig) as GameSettingState : undefined,
+    presetId: localPresetId ? Number(localPresetId) : undefined
 }
 
 export const gameSettingsSlice = createSlice({
@@ -41,7 +46,14 @@ export const gameSettingsSlice = createSlice({
     initialState,
     reducers: {
         setGameSettings: (state, action: PayloadAction<GameSettings>) => {
-            state.settings = new GameSettingsConverter().serialise(action.payload);
+            const serialised = new GameSettingsConverter().serialise(action.payload);
+            localStorage.setItem("game-config", JSON.stringify(serialised));
+            state.settings = serialised;
+        },
+        setSelectedPresetID: (state, action: PayloadAction<number>) => {
+            const presetId = action.payload;
+            localStorage.setItem("selected-preset-id", presetId.toString());
+            state.presetId = presetId;
         },
         clearGameSettings: (state) => {
             state.settings = undefined;
@@ -49,5 +61,5 @@ export const gameSettingsSlice = createSlice({
     }
 });
 
-export const { setGameSettings, clearGameSettings } = gameSettingsSlice.actions
+export const { setGameSettings, clearGameSettings, setSelectedPresetID } = gameSettingsSlice.actions
 export default gameSettingsSlice.reducer;
