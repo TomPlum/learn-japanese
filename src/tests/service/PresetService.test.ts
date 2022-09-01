@@ -5,6 +5,8 @@ import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSett
 import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 import PresetBuilder from "../../domain/session/PresetBuilder";
 import { KanjiSettingsBuilder } from "../../domain/session/settings/data/KanjiSettings";
+import { Presets } from "../../repository/PresetRepository";
+import PlayMode from "../../domain/session/PlayMode";
 
 const mockGetAllPresets = jest.fn();
 const mockGetDefaultPresets = jest.fn();
@@ -101,6 +103,15 @@ describe("Preset Service", () => {
             mockFavouritePresets.mockRejectedValueOnce("Failed to retrieve favourite presets.");
             return service.getFavouritePresets().then((response: LearnPlayPresets) => {
                 expect(response.error).toStrictEqual("Failed to retrieve favourite presets.");
+            });
+        });
+    });
+
+    describe("Get Play Presets", () => {
+        it("Should return only the play presets", () => {
+            mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] });
+            return service.getPlayPresets().then((response: PlayMode[]) => {
+                expect(response).toStrictEqual([playPreset]);
             });
         });
     });
