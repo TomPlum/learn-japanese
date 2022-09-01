@@ -47,6 +47,16 @@ class PresetService {
     }
 
     /**
+     * Retrieves a list of default play presets.
+     * @return presets - a list of play presets.
+     */
+    public async getPlayPresets(): Promise<PlayMode[]> {
+        return this.repository.getDefaultPresets().then((response: Presets) => {
+            return response.play;
+        });
+    }
+
+    /**
      * Retrieves a list of all favourite presets.
      * @return Favourite learn and play presets.
      */

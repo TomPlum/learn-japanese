@@ -1,11 +1,11 @@
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import ValueSelector, { ValueSelectorProps } from "../../../../components/ui/select/ValueSelector";
-import { findAllByTextWithElements, findByTextWithElements, getAllByTextWithElements, getByTextWithElements } from "../../../Queries";
+import { findByTextWithElements, getAllByTextWithElements, getByTextWithElements } from "../../../Queries";
 import userEvent from "@testing-library/user-event";
 
 const onChangeHandler = jest.fn();
 
-let props: ValueSelectorProps;
+let props: ValueSelectorProps<number, number>;
 
 beforeEach(() => {
     props = {
@@ -15,8 +15,8 @@ beforeEach(() => {
         prefix: "Show",
         className: "myClass",
         disabled: false,
-        values: [10, 20, 30, 40],
-        onChange: onChangeHandler
+        onChange: onChangeHandler,
+        values: [10, 20, 30, 40].map(value => ({ display: value, value: value }))
     };
 });
 
@@ -29,13 +29,13 @@ const setup = () => {
 }
 
 test("Should offer all the values from the property", () => {
-    props.values = [10, 20, 30];
+    props.values = [10, 20, 30].map(value => ({ display: value, value: value }));
     setup();
     expect(getByTextWithElements('Show 20')).toBeInTheDocument();
 });
 
 test("Should offer all the values even when limiting the height in a scrollable container", async () => {
-    props.values = [10, 20, 30];
+    props.values = [10, 20, 30].map(value => ({ display: value, value: value }));
     props.showBeforeScrolling = 150;
 
     setup();

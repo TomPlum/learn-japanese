@@ -22,8 +22,8 @@ const SearchField = (props: SearchFieldProps) => {
     return (
         <InputGroup className={[styles.inputGroup, className].join(" ")}>
             <InputGroup.Prepend>
-                <InputGroup.Text>
-                    <FontAwesomeIcon icon={faSearch}/>
+                <InputGroup.Text className={styles.prepend}>
+                    <FontAwesomeIcon icon={faSearch} className={styles.icon}/>
                 </InputGroup.Text>
             </InputGroup.Prepend>
 

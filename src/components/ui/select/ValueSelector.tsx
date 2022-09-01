@@ -7,20 +7,25 @@ import ConditionalWrapper from "../ConditionalWrapper";
 import ScrollableContainer from "../ScrollableContainer";
 import styles from "../../../styles/sass/components/ui/select/ValueSelector.module.scss";
 
-export interface ValueSelectorProps {
+export interface ValueSelectorOption<D, V> {
+    value: V;
+    display: D;
+}
+
+export interface ValueSelectorProps<D, V> {
     id: string;
     prefix?: string;
-    values: number[];
-    selected: number;
+    values: ValueSelectorOption<D, V>[];
+    selected: V;
     disabled?: boolean;
     className?: string;
     itemClassName?: string;
     placement?: Placement;
     showBeforeScrolling?: number;
-    onChange: (value: number) => void;
+    onChange: (value: V) => void;
 }
 
-const ValueSelector = (props: ValueSelectorProps) => {
+const ValueSelector = <D, V>(props: ValueSelectorProps<D, V>) => {
 
     const { id, prefix, values, selected, disabled, placement, className, itemClassName, showBeforeScrolling, onChange } = props;
 
@@ -28,9 +33,9 @@ const ValueSelector = (props: ValueSelectorProps) => {
     const targetRef = useRef(null);
     const [show, setShow] = useState(false);
 
-    const handleChange = (value: number) => {
-        onChange(value);
+    const handleChange = (option: ValueSelectorOption<D, V>) => {
         setShow(false);
+        onChange(option.value);
     }
 
     const handleInitialOpen = () => {
@@ -43,7 +48,7 @@ const ValueSelector = (props: ValueSelectorProps) => {
        <div ref={ref} className={className} id={id}>
            <span className={disabled ? styles.disabled : styles.selected}>
                 <span ref={targetRef} onClick={handleInitialOpen} data-testid={id}>
-                    {prefix}{' '}{selected}
+                    {prefix}{' '}{values.find(it => it.value === selected)?.display ?? "?"}
                 </span>
                 <FontAwesomeIcon icon={show ? faChevronUp : faChevronDown} fixedWidth />
            </span>
@@ -62,10 +67,10 @@ const ValueSelector = (props: ValueSelectorProps) => {
                            <ScrollableContainer height={showBeforeScrolling}>
                                {children}
                            </ScrollableContainer>
-                       )}><>{values.map(value => (
-                           <div className={styles.valueWrapper} key={`${value}-wrapper`} onClick={() => handleChange(value)}>
+                       )}><>{values.map(option => (
+                           <div className={styles.valueWrapper} key={`${option.display}-wrapper`} onClick={() => handleChange(option)}>
                                 <span className={[styles.value, itemClassName].join(" ")}>
-                                    {prefix}{' '}{value}
+                                    {prefix}{' '}{option.display}
                                 </span>
                            </div>)
                        )}</>

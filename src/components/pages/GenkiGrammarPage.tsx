@@ -115,10 +115,10 @@ const GenkiGrammarPage = () => {
                         selected={chapter}
                         showBeforeScrolling={150}
                         id="genki-chapter-selector"
-                        values={Arrays.range(1, 25)}
                         className={styles.chapterSelector}
                         itemClassName={styles.chapterSelectorItem}
                         onChange={(value: number) => setChapter(value)}
+                        values={Arrays.range(1, 25).map(value => ({ display: value, value: value }))}
                     />
                 </div>
             </Row>

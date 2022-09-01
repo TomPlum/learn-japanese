@@ -6,25 +6,35 @@ import { Alert, Container, Fade } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/HighScoresPage.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
+import ValueSelector from "../ui/select/ValueSelector";
+import PresetService from "../../service/PresetService";
+import PlayMode from "../../domain/session/PlayMode";
+import { useTranslation } from "react-i18next";
+import SearchField from "../ui/fields/SearchField";
 
 const HighScoresPage = () => {
+
+    const { t } = useTranslation();
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [pageSize, setPageSize] = useState(30);
     const [pageNumber, setPageNumber] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
+    const [userSearch, setUserSearch] = useState("");
     const [totalEntries, setTotalEntries] = useState(0);
+    const [presets, setPresets] = useState<PlayMode[]>([]);
     const [selectedPreset, setSelectedPreset] = useState(1);
     const [entries, setEntries] = useState<HighScoreEntry[]>([]);
 
-    const service = new HighScoresService();
+    const highScoresService = new HighScoresService();
+    const presetService = new PresetService();
 
     useEffect(() => {
         setError("");
         setLoading(true);
 
-        service.getAllEntriesPage(pageNumber, pageSize).then(response => {
+        highScoresService.getAllEntriesPage(pageNumber, pageSize).then(response => {
             if (response.error) {
                 setError(response.error);
             } else {
@@ -37,6 +47,10 @@ const HighScoresPage = () => {
         }).finally(() => {
             setLoading(false);
         });
+
+        presetService.getPlayPresets().then(response => {
+            setPresets(response);
+        });
     }, []);
 
     return (
@@ -46,6 +60,23 @@ const HighScoresPage = () => {
             <div className={styles.header}>
                 <FontAwesomeIcon icon={faTrophy} className={styles.icon} />
                 <p className={styles.title}>Highscores</p>
+            </div>
+
+            <div className={styles.controls}>
+                <SearchField
+                    value={userSearch}
+                    disabled={loading}
+                    className={styles.search}
+                    placeholder="Search for a user..."
+                    onChange={value => setUserSearch(value)}
+                />
+                <ValueSelector
+                    showBeforeScrolling={200}
+                    selected={selectedPreset}
+                    id="high-scores-preset-selector"
+                    onChange={(id: number) => setSelectedPreset(id)}
+                    values={presets.map(preset => ({ display: t(preset.displayName), value: preset.id }))}
+                />
             </div>
 
             <LoadingSpinner active={loading} />

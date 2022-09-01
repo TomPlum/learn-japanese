@@ -12,12 +12,11 @@ const HighScoresTable = (props: HighScoresTableProps) => {
 
     return (
         <div className={styles.wrapper} data-testid="high-scores-table">
-            <Table className={styles.table} striped bordered hover>
+            <Table className={styles.table}>
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>User</th>
-                        <th>Preset</th>
                         <th>Score</th>
                     </tr>
                 </thead>
@@ -28,7 +27,6 @@ const HighScoresTable = (props: HighScoresTableProps) => {
                             <tr key={entry.user.id}>
                                 <td>{i + 1}</td>
                                 <td>{entry.user.name}</td>
-                                <td>{entry.presetId}</td>
                                 <td>{entry.score ?? entry.time}</td>
                             </tr>
                         ))}

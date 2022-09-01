@@ -296,9 +296,9 @@ const KanjiBankPage = () => {
                             disabled={loading}
                             selected={pageSize}
                             id="page-size-selector"
-                            values={[20, 40, 60, 80]}
                             className={styles.pageSize}
                             onChange={(value: number) => setPageSize(value)}
+                            values={[20, 40, 60, 80].map(value => ({ display: value, value: value }))}
                         />
                     </div>
                 </Col>
