@@ -55,42 +55,49 @@ const HighScoresPage = () => {
 
     return (
         <Container className={styles.wrapper}>
-            {error && <Alert variant="error">{error}</Alert> }
+            <div className={styles.content}>
+                {error && <Alert variant="error">{error}</Alert> }
 
-            <div className={styles.header}>
-                <FontAwesomeIcon icon={faTrophy} className={styles.icon} />
-                <p className={styles.title}>Highscores</p>
-            </div>
+                <div className={styles.header}>
+                    <FontAwesomeIcon icon={faTrophy} className={styles.icon} />
+                    <p className={styles.title}>Highscores</p>
+                </div>
 
-            <div className={styles.controls}>
-                <SearchField
-                    value={userSearch}
-                    disabled={loading}
-                    className={styles.search}
-                    placeholder="Search for a user..."
-                    onChange={value => setUserSearch(value)}
-                />
-                <ValueSelector
-                    showBeforeScrolling={200}
-                    selected={selectedPreset}
-                    id="high-scores-preset-selector"
-                    onChange={(id: number) => setSelectedPreset(id)}
-                    values={presets.map(preset => ({ display: t(preset.displayName), value: preset.id }))}
-                />
-            </div>
+                <div className={styles.controls}>
+                    <div>
+                        <ValueSelector
+                            showBeforeScrolling={200}
+                            selected={selectedPreset}
+                            id="high-scores-preset-selector"
+                            className={styles.presetSelector}
+                            onChange={(id: number) => setSelectedPreset(id)}
+                            values={presets.map(preset => ({ display: t(preset.displayName), value: preset.id }))}
+                        />
+                    </div>
+                    <div>
+                        <SearchField
+                            value={userSearch}
+                            disabled={loading}
+                            className={styles.search}
+                            placeholder="Search for a user..."
+                            onChange={value => setUserSearch(value)}
+                        />
+                    </div>
+                </div>
 
-            <LoadingSpinner active={loading} />
+                <LoadingSpinner active={loading} />
 
-            {!loading && (
-                <Fade in={true} appear={true}>
-                    <HighScoresTable preset={selectedPreset} entries={entries} />
-                </Fade>
-            )}
+                {!loading && (
+                    <Fade in={true} appear={true}>
+                        <HighScoresTable preset={selectedPreset} entries={entries} />
+                    </Fade>
+                )}
 
-            <div className={styles.footer}>
-                <p>Page {pageNumber + 1} of {totalPages}</p>
-                <p>Page Size: {pageSize}</p>
-                <p>Showing {totalEntries < pageSize ? totalEntries : pageSize} of {totalEntries} entries</p>
+                <div className={styles.footer}>
+                    <p>Page {pageNumber + 1} of {totalPages}</p>
+                    <p>Page Size: {pageSize}</p>
+                    <p>Showing {totalEntries < pageSize ? totalEntries : pageSize} of {totalEntries} entries</p>
+                </div>
             </div>
         </Container>
     );

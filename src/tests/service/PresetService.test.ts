@@ -5,7 +5,6 @@ import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSett
 import { SessionSettings } from "../../domain/session/settings/SessionSettings";
 import PresetBuilder from "../../domain/session/PresetBuilder";
 import { KanjiSettingsBuilder } from "../../domain/session/settings/data/KanjiSettings";
-import { Presets } from "../../repository/PresetRepository";
 import PlayMode from "../../domain/session/PlayMode";
 
 const mockGetAllPresets = jest.fn();

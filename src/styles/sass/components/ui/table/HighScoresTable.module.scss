@@ -7,24 +7,72 @@
 }
 
 .table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 7px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.table th {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
-  max-width: 1200px;
-  border: 3px solid $dark-1;
-  border-collapse: collapse;
+  font-size: 1.1em;
+  background-color: $dark-1;
+  border-right: 2px solid $light-3;
+  border-bottom: 2px solid $light-3 !important;
+  border-top: 2px solid $light-3;
+  color: $light-1;
+  transition: color ease-in-out 0.2s;
+}
 
-  tr:last-child td:first-child {
-    border-bottom-left-radius: 12px;
-  }
+.table th:first-child {
+  border-left: 2px solid $light-3;
+}
 
-  tr:last-child td:last-child {
-    border-bottom-right-radius: 12px;
-  }
+.table th:hover {
+  color: #FFF;
+}
 
-  th {
-    color: $light-2;
-  }
+.table th:first-of-type {
+  border-top-left-radius: 10px;
+}
 
-  td {
-    color: $light-1;
-  }
+.table th:last-of-type {
+  border-top-right-radius: 10px;
+}
+
+.table tbody tr:first-child td:first-child {
+  border-top-left-radius: 0;
+}
+
+.table tbody tr:first-child td:last-child {
+  border-top-right-radius: 0;
+}
+
+.table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 0;
+}
+
+.table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 0;
+}
+
+.table tbody tr td:first-of-type {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.table tbody tr td:last-of-type {
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.table tbody tr td, .table thead tr th {
+  padding: 12px;
+}
+
+.table tbody tr {
+  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
+  background-color: $light-2;
 }
