@@ -23,13 +23,20 @@ const HighScoresTable = (props: HighScoresTableProps) => {
                 <tbody>
                     {entries.filter(entry => entry.presetId === preset)
                         .sort((a, b) => (a.score ?? 0) < (b.score ?? 0) ? 1 : -1)
-                        .map((entry: HighScoreEntry, i: number) => (
-                            <tr key={entry.user.id}>
-                                <td>{i + 1}</td>
-                                <td>{entry.user.name}</td>
-                                <td>{entry.score ?? entry.time}</td>
-                            </tr>
-                        ))}
+                        .map((entry: HighScoreEntry, i: number) => {
+                            const profileUri = `/profile?user=${entry.user.name}`;
+                            return (
+                                <tr key={entry.user.id}>
+                                    <td>{i + 1}</td>
+                                    <td>
+                                        <a href={profileUri} title="View Profile" className={styles.user}>
+                                            {entry.user.name}
+                                        </a>
+                                    </td>
+                                    <td>{entry.score ?? entry.time}</td>
+                                </tr>
+                            );
+                        })}
                 </tbody>
             </Table>
         </div>
