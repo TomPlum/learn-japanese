@@ -11,6 +11,7 @@ import PresetService from "../../service/PresetService";
 import PlayMode from "../../domain/session/PlayMode";
 import { useTranslation } from "react-i18next";
 import SearchField from "../ui/fields/SearchField";
+import TablePagination from "../ui/paging/TablePagination";
 
 const HighScoresPage = () => {
 
@@ -94,9 +95,19 @@ const HighScoresPage = () => {
                 )}
 
                 <div className={styles.footer}>
-                    <p>Page {pageNumber + 1} of {totalPages}</p>
-                    <p>Page Size: {pageSize}</p>
-                    <p>Showing {totalEntries < pageSize ? totalEntries : pageSize} of {totalEntries} entries</p>
+                    <TablePagination
+                        currentPage={pageNumber + 1}
+                        totalPages={totalPages}
+                        canPreviousPage={pageNumber > 0}
+                        canNextPage={pageNumber < totalPages}
+                        onPreviousPage={() => setPageNumber(page => page - 1)}
+                        onNextPage={() => setPageNumber(page => page + 1)}
+                        onFirstPage={() => setPageNumber(0)}
+                        onLastPage={() => setPageNumber(totalPages - 1)}
+                        onChangeQuantity={(size) => setPageSize(size)}
+                        onToggleFirstBook={() => {}}
+                        onToggleSecondBook={() => {}}
+                    />
                 </div>
             </div>
         </Container>
