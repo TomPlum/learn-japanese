@@ -96,17 +96,17 @@ const HighScoresPage = () => {
 
                 <div className={styles.footer}>
                     <TablePagination
-                        currentPage={pageNumber + 1}
                         totalPages={totalPages}
-                        canPreviousPage={pageNumber > 0}
-                        canNextPage={pageNumber < totalPages}
-                        onPreviousPage={() => setPageNumber(page => page - 1)}
-                        onNextPage={() => setPageNumber(page => page + 1)}
-                        onFirstPage={() => setPageNumber(0)}
-                        onLastPage={() => setPageNumber(totalPages - 1)}
-                        onChangeQuantity={(size) => setPageSize(size)}
                         onToggleFirstBook={() => {}}
+                        currentPage={pageNumber + 1}
                         onToggleSecondBook={() => {}}
+                        canPreviousPage={pageNumber > 0}
+                        onFirstPage={() => setPageNumber(0)}
+                        canNextPage={pageNumber + 1 < totalPages}
+                        onChangeQuantity={(size) => setPageSize(size)}
+                        onLastPage={() => setPageNumber(totalPages - 1)}
+                        onNextPage={() => setPageNumber(page => page + 1)}
+                        onPreviousPage={() => setPageNumber(page => page - 1)}
                     />
                 </div>
             </div>

@@ -68,8 +68,8 @@ describe("High-scores Service", () => {
                         time: "04:50"
                     }],
                     pages: {
-                        quantity: 5,
-                        total: 120
+                        quantity: 120,
+                        total: 5
                     },
                     error: undefined
                 })

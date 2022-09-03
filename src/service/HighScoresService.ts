@@ -37,8 +37,8 @@ class HighScoresService {
                 entries: response.entries,
                 error: response.error,
                 pages: {
-                    quantity: response.pages,
-                    total: response.total
+                    quantity: response.total,
+                    total: response.pages
                 }
             };
         }).catch(response => {
