@@ -1,0 +1,37 @@
+@import "src/styles/sass/mixins";
+@import "src/styles/sass/colours";
+
+.noResults {
+  @include noSelect;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 2em;
+  border: 2px solid $light-3;
+  padding: 15px;
+  min-width: 100%;
+  color: $light-1;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 200px;
+  background-color: $dark-2;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.emptyWrapper {
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  text-align: center;
+  width: 100%;
+}
+
+.failureMessage {
+  margin-bottom: 0;
+}
+
+.retry {
+  width: 100px;
+}

@@ -12,6 +12,7 @@ import PlayMode from "../../domain/session/PlayMode";
 import { useTranslation } from "react-i18next";
 import SearchField from "../ui/fields/SearchField";
 import TablePagination from "../ui/paging/TablePagination";
+import EmptyTableBody from "../ui/table/EmptyTableBody";
 
 const HighScoresPage = () => {
 
@@ -30,8 +31,9 @@ const HighScoresPage = () => {
 
     const highScoresService = new HighScoresService();
     const presetService = new PresetService();
+    const selectedPresetName = t(presets.find(preset => preset.id === selectedPreset)?.displayName ?? "");
 
-    useEffect(() => {
+    const getHighScoreEntries =() => {
         setError("");
         setLoading(true);
 
@@ -48,6 +50,10 @@ const HighScoresPage = () => {
         }).finally(() => {
             setLoading(false);
         });
+    }
+
+    useEffect(() => {
+        getHighScoreEntries();
 
         presetService.getPlayPresets().then(response => {
             setPresets(response);
@@ -88,11 +94,17 @@ const HighScoresPage = () => {
 
                 <LoadingSpinner active={loading} />
 
-                {!loading && (
-                    <Fade in={true} appear={true}>
+                <Fade in={true} appear={true}>
+                    <div>
                         <HighScoresTable preset={selectedPreset} entries={entries} />
-                    </Fade>
-                )}
+                        <EmptyTableBody
+                            error={error}
+                            emptyMessage={`No scores for ${selectedPresetName}.`}
+                            loading={loading}
+                            onRetry={getHighScoreEntries}
+                        />
+                    </div>
+                </Fade>
 
                 <div className={styles.footer}>
                     <TablePagination
