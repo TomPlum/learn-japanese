@@ -5,6 +5,7 @@ import LoadingSpinner from "../loading/LoadingSpinner";
 import styles from "../../../styles/sass/components/ui/table/EmptyTableBody.module.scss";
 
 export interface EmptyTableBodyProps {
+    empty: boolean;
     error?: string;
     loading: boolean;
     className?: string;
@@ -13,11 +14,17 @@ export interface EmptyTableBodyProps {
 }
 
 const EmptyTableBody = (props: EmptyTableBodyProps) => {
-    const { error, loading, emptyMessage, className, onRetry } = props;
+    const { empty, error, loading, emptyMessage, className, onRetry } = props;
+
+    const showEmpty = !error && !loading && empty;
+    const showLoading = loading;
+    const showError = error;
+
+    const wrapperClassName = (showEmpty || showLoading || showError) ? styles.noResults : "";
 
     return (
-        <div className={[styles.noResults, className].join(" ")} data-testid="empty-table-body">
-            {error && (
+        <div className={[wrapperClassName, className].join(" ")} data-testid="empty-table-body">
+            {showError && (
                 <div className={styles.emptyWrapper}>
                     <p className={styles.failureMessage}>
                         <FontAwesomeIcon
@@ -46,14 +53,14 @@ const EmptyTableBody = (props: EmptyTableBodyProps) => {
                 </div>
             )}
 
-            {!error && !loading && (
+            {showEmpty && (
                 <div className={styles.emptyWrapper}>
                     <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus}/>
                     {<span>{emptyMessage}</span>}
                 </div>
             )}
 
-            {loading && (
+            {showLoading && (
                 <div className={styles.emptyWrapper}>
                     <LoadingSpinner variant="light" active={loading} />
                     <span>Loading...</span>

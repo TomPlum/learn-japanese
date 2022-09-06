@@ -99,9 +99,10 @@ const HighScoresPage = () => {
                         <HighScoresTable preset={selectedPreset} entries={entries} />
                         <EmptyTableBody
                             error={error}
-                            emptyMessage={`No scores for ${selectedPresetName}.`}
                             loading={loading}
+                            empty={entries.length === 0}
                             onRetry={getHighScoreEntries}
+                            emptyMessage={`No scores for ${selectedPresetName}.`}
                         />
                     </div>
                 </Fade>

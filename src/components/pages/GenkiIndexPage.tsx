@@ -1,17 +1,17 @@
 import GenkiService from "../../service/GenkiService";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Alert, Button, Container } from "react-bootstrap";
+import { Alert, Container } from "react-bootstrap";
 import SearchField from "../ui/fields/SearchField";
-import { faCheckCircle, faCircleNotch, faExclamationCircle, faRedo, faSearchMinus, faSort, faSortDown, faSortUp, faSpinner, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faCircleNotch, faExclamationCircle, faSort, faSortDown, faSortUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from "react-table";
 import { AnimatePresence, motion } from "framer-motion";
-import TablePagination from "../ui/table/TablePagination";
+import TablePagination from "../ui/paging/TablePagination";
 import Copyable from "../ui/Copyable";
 import RomajiGenerator from "../../utility/RomajiGenerator";
 import styles from "../../styles/sass/components/pages/GenkiIndexPage.module.scss";
-import LoadingSpinner from "../ui/loading/LoadingSpinner";
 import Arrays from "../../utility/Arrays";
+import EmptyTableBody from "../ui/table/EmptyTableBody";
 
 interface TableData {
     lesson: number;
@@ -93,7 +93,6 @@ const GenkiIndexPage = () => {
 
     return (
         <Container fluid className={styles.wrapper}>
-
             {hasError && (
                 <Alert variant="danger" className={styles.banner}>
                     <FontAwesomeIcon icon={faExclamationCircle} className={styles.spinner} />
@@ -182,52 +181,13 @@ const GenkiIndexPage = () => {
                     </tbody>
                 </table>
 
-                {rows.length === 0 && (
-                    <div className={styles.noResults}>
-                        {hasError && (
-                            <div className={styles.emptyWrapper}>
-                                <p className={styles.failureMessage}>
-                                    <FontAwesomeIcon
-                                        fixedWidth
-                                        size="sm"
-                                        icon={faTimesCircle}
-                                        className={styles.icon}
-                                    />
-                                    <span>Error Loading Data</span>
-                                </p>
-                                <Button
-                                    disabled={loading}
-                                    onClick={loadTableData}
-                                    className={styles.retry}
-                                    variant="outline-warning"
-                                >
-                                    <FontAwesomeIcon
-                                        size="sm"
-                                        fixedWidth
-                                        spin={loading}
-                                        className={styles.icon}
-                                        icon={loading ? faSpinner : faRedo}
-                                    />
-                                    <span>Retry</span>
-                                </Button>
-                            </div>
-                        )}
-
-                        {!hasError && !loading && (
-                            <div className={styles.emptyWrapper}>
-                                <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus}/>
-                                {<span>{`No results for '${search}'...`}</span>}
-                            </div>
-                        )}
-
-                        {loading && (
-                            <div className={styles.emptyWrapper}>
-                                <LoadingSpinner variant="light" active={loading} />
-                                <span>Loading...</span>
-                            </div>
-                        )}
-                    </div>
-                )}
+                <EmptyTableBody
+                    error={error}
+                    loading={loading}
+                    onRetry={loadTableData}
+                    empty={rows.length === 0}
+                    emptyMessage={`No results for '${search}'...`}
+                />
 
                 <TablePagination
                     onNextPage={nextPage}
