@@ -1,5 +1,7 @@
 import RestClient from "../../rest/RestClient";
 import HighScoresService from "../../service/HighScoresService";
+import { getValueLastCalledWith } from "../Queries";
+import { FindHighScoresRequest } from "../../repository/HighScoresRepository";
 
 const mockFindAll = jest.fn();
 const mockSave = jest.fn();
@@ -44,6 +46,13 @@ describe("High-scores Service", () => {
             mockFindAll.mockResolvedValueOnce({});
             return service.getAllEntriesPage(1, 10).then(() => {
                 expect(mockFindAll).toHaveBeenCalledWith({ page: 1, size: 10 });
+            });
+        });
+
+        it("Should call the repository with the user when passed", () => {
+            mockFindAll.mockResolvedValueOnce({});
+            return service.getAllEntriesPage(1, 10, "TomPlum").then(() => {
+                expect(getValueLastCalledWith<FindHighScoresRequest>(mockFindAll).username).toBe("TomPlum");
             });
         });
 
