@@ -20,6 +20,13 @@ describe("High-Scores Repository", () => {
             });
         });
 
+        it("Should call the rest client with the correct endpoint and query parameters with the user passed", () => {
+            mockGet.mockResolvedValueOnce({});
+            return repository.findAll({ page: 1, size: 10, username: "TomPlum" }).then(() => {
+                expect(mockGet).toHaveBeenLastCalledWith("/high-scores/entries?page=1&size=10?user=TomPlum");
+            });
+        });
+
         it("Should return the page response if there is truthy data", () => {
             mockGet.mockResolvedValueOnce({
                 data: {

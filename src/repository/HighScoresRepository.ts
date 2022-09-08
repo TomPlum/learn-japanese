@@ -28,14 +28,22 @@ export interface HighScoreEntryRequest {
     time?: string;
 }
 
+export interface FindHighScoresRequest extends PaginationRequest {
+    username?: string;
+}
+
 class HighScoresRepository {
     /**
      * Retrieves all the high-score entries.
-     * @param paging - Pagination details.
+     * @param request - Pagination details.
      * @return entries - A page of high-score entries.
      */
-    public async findAll(paging: PaginationRequest): Promise<FindAllHighScoreEntries> {
-        const endpoint = `/high-scores/entries?page=${paging.page}&size=${paging.size}`;
+    public async findAll(request: FindHighScoresRequest): Promise<FindAllHighScoreEntries> {
+        let endpoint = `/high-scores/entries?page=${request.page}&size=${request.size}`;
+
+        if (request.username) {
+            endpoint += "?user" + request.username;
+        }
 
         return RestClient.get<HighScoresResponse>(endpoint).then(response => {
             const data = response.data;
