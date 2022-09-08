@@ -42,7 +42,7 @@ class HighScoresRepository {
         let endpoint = `/high-scores/entries?page=${request.page}&size=${request.size}`;
 
         if (request.username) {
-            endpoint += "?user" + request.username;
+            endpoint += `&user=${request.username}`;
         }
 
         return RestClient.get<HighScoresResponse>(endpoint).then(response => {
