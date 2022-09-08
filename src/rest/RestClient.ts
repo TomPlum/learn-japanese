@@ -86,7 +86,7 @@ class RestClient {
                 return Promise.reject({
                     data: e.response.data,
                     status: e.response.status,
-                    error: undefined
+                    error: e.response.data.error
                 });
             } else if (e.request) {
                 return Promise.reject({

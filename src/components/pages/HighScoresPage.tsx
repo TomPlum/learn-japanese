@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import SearchField from "../ui/fields/SearchField";
 import TablePagination from "../ui/paging/TablePagination";
 import EmptyTableBody from "../ui/table/EmptyTableBody";
+import { useDebouncedEffect } from "../../hooks";
 
 const HighScoresPage = () => {
 
@@ -33,11 +34,11 @@ const HighScoresPage = () => {
     const presetService = new PresetService();
     const selectedPresetName = t(presets.find(preset => preset.id === selectedPreset)?.displayName ?? "");
 
-    const getHighScoreEntries =() => {
+    const getHighScoreEntries = (username?: string) => {
         setError("");
         setLoading(true);
 
-        highScoresService.getAllEntriesPage(pageNumber, pageSize).then(response => {
+        highScoresService.getAllEntriesPage(pageNumber, pageSize, username).then(response => {
             if (response.error) {
                 setError(response.error);
             } else {
@@ -60,11 +61,23 @@ const HighScoresPage = () => {
         });
     }, []);
 
+    useDebouncedEffect(() => {
+        if (userSearch !== "") {
+            getHighScoreEntries(userSearch);
+        }
+    }, 300, [userSearch]);
+
+    const getEmptyMessage = () => {
+        let message = `No scores for ${selectedPresetName}`;
+        if (userSearch) {
+            message += ` for user ${userSearch}`
+        }
+        return `${message}.`;
+    }
+
     return (
         <Container className={styles.wrapper}>
             <div className={styles.content}>
-                {error && <Alert variant="error">{error}</Alert> }
-
                 <div className={styles.header}>
                     <FontAwesomeIcon icon={faTrophy} className={styles.icon} />
                     <p className={styles.title}>Highscores</p>
@@ -92,7 +105,7 @@ const HighScoresPage = () => {
                     </div>
                 </div>
 
-                <LoadingSpinner active={loading} />
+                {error && <Alert variant="danger" className={styles.error}>{error}</Alert> }
 
                 <Fade in={true} appear={true}>
                     <div>
@@ -102,7 +115,7 @@ const HighScoresPage = () => {
                             loading={loading}
                             empty={entries.length === 0}
                             onRetry={getHighScoreEntries}
-                            emptyMessage={`No scores for ${selectedPresetName}.`}
+                            emptyMessage={getEmptyMessage()}
                         />
                     </div>
                 </Fade>

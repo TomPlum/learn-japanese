@@ -1,4 +1,4 @@
-import { injectStore, refreshTokenInterceptor } from "../../rest/Interceptors";
+import { injectStore, refreshTokenInterceptor, RetryableAxiosRequestConfig } from "../../rest/Interceptors";
 import { AxiosError } from "axios";
 import RestClient from "../../rest/RestClient";
 import { store } from "../../store";
@@ -42,7 +42,7 @@ describe("Axios Interceptors", () => {
                 name: "",
                 message: "Something went wrong"
             };
-            return refreshTokenInterceptor(error).catch(response => {
+            return refreshTokenInterceptor(error).catch(() => {
                 expect(store.getState().user.user).toBeUndefined();
             });
         });
@@ -64,17 +64,21 @@ describe("Axios Interceptors", () => {
                 name: "",
                 message: "Something went wrong"
             };
+
             return refreshTokenInterceptor(error).catch(response => {
                 expect(mockPost).not.toHaveBeenCalled();
-                expect(response).toBe("Failed to refresh session. Please sign-in again.");
+                expect(response).toStrictEqual(error);
             });
         });
 
         it("Should return not fire any requests and reject the promise if the URI is NOT login, but is NOT HTTP 401", () => {
+            const config: RetryableAxiosRequestConfig = {
+                url: "/user/login",
+                retry: true
+            };
+
             const error: AxiosError = {
-                config: {
-                    url: "/user/login",
-                },
+                config: config,
                 response: {
                     data: {},
                     status: 503,
@@ -89,7 +93,7 @@ describe("Axios Interceptors", () => {
             };
             return refreshTokenInterceptor(error).catch(response => {
                 expect(mockPost).not.toHaveBeenCalled();
-                expect(response).toBe("Failed to refresh session. Please sign-in again.");
+                expect(response).toStrictEqual(error);
             });
         });
 

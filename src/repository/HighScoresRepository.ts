@@ -50,9 +50,9 @@ class HighScoresRepository {
             if (data) {
                 return { entries: data.value, total: data.total, pages: data.pages };
             }
-            throw new Error(response.error);
+            return Promise.reject({ error: response.error });
         }).catch(response => {
-            return { error: response.message, entries: [], total: 0, pages: 0 };
+            return { error: response.error, entries: [], total: 0, pages: 0 };
         });
     }
 

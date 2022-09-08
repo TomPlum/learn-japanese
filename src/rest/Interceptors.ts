@@ -40,7 +40,7 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
     const failureErrorMessage = "Failed to refresh session. Please sign-in again.";
 
     const refreshEndpoint = `${Environment.variable("API_HOST_URI")}/user/refresh-token`;
-    if (config.url === refreshEndpoint && error.response && error.response.status !== 200) {
+    if (config && config.url === refreshEndpoint && error.response && error.response.status !== 200) {
         const username = store.getState().user.user.username;
         store.dispatch(clearUser());
         window.location.href = `/login?session-expired=true&username=${username}`;
@@ -62,5 +62,5 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
         }
     }
 
-    return Promise.reject(failureErrorMessage);
+    return Promise.reject(error);
 }
