@@ -24,17 +24,17 @@ const HighScoresPage = () => {
     const [pageSize, setPageSize] = useState(30);
     const [pageNumber, setPageNumber] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    const [userSearch, setUserSearch] = useState("");
     const [totalEntries, setTotalEntries] = useState(0);
     const [presets, setPresets] = useState<PlayMode[]>([]);
     const [selectedPreset, setSelectedPreset] = useState(1);
     const [entries, setEntries] = useState<HighScoreEntry[]>([]);
+    const [username, setUsername] = useState<string | undefined>(undefined);
 
     const highScoresService = new HighScoresService();
     const presetService = new PresetService();
     const selectedPresetName = t(presets.find(preset => preset.id === selectedPreset)?.displayName ?? "");
 
-    const getHighScoreEntries = (username?: string) => {
+    const getHighScoreEntries = () => {
         setError("");
         setLoading(true);
 
@@ -62,15 +62,15 @@ const HighScoresPage = () => {
     }, []);
 
     useDebouncedEffect(() => {
-        if (userSearch !== "") {
-            getHighScoreEntries(userSearch);
+        if (username !== "") {
+            getHighScoreEntries();
         }
-    }, 300, [userSearch]);
+    }, 300, [username]);
 
     const getEmptyMessage = () => {
         let message = `No scores for ${selectedPresetName}`;
-        if (userSearch) {
-            message += ` for user ${userSearch}`
+        if (username) {
+            message += ` for user ${username}`
         }
         return `${message}.`;
     }
@@ -96,11 +96,11 @@ const HighScoresPage = () => {
                     </div>
                     <div>
                         <SearchField
-                            value={userSearch}
+                            value={username}
                             disabled={loading}
                             className={styles.search}
                             placeholder="Search for a user..."
-                            onChange={value => setUserSearch(value)}
+                            onChange={value => setUsername(value)}
                         />
                     </div>
                 </div>
@@ -114,8 +114,8 @@ const HighScoresPage = () => {
                             error={error}
                             loading={loading}
                             empty={entries.length === 0}
-                            onRetry={getHighScoreEntries}
                             emptyMessage={getEmptyMessage()}
+                            onRetry={() => getHighScoreEntries()}
                         />
                     </div>
                 </Fade>
