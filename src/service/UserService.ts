@@ -32,6 +32,10 @@ export interface UserPreferenceUpdate {
     value: string;
 }
 
+export interface PublicUsernamesResponse {
+    users: string[];
+}
+
 export default class UserService {
 
     /**
@@ -141,5 +145,22 @@ export default class UserService {
         const diff = now.getTime() - startDate.getTime();
         const days = diff / (1000 * 3600 * 24);
         return Promise.resolve(Number(days.toFixed(0)));
+    }
+
+    /**
+     * Retrieves a list of all public usernames that
+     * are like the given search term.
+     * @param username - The user search term.
+     * @return a list of usernames.
+     */
+    public async getPublicUsers(username: string): Promise<string[]> {
+        return RestClient.get<PublicUsernamesResponse>(`/user/usernames?search=${username}`).then(response => {
+            if (response.data) {
+                return response.data.users;
+            }
+            return [];
+        }).catch(response => {
+            return [];
+        })
     }
 }

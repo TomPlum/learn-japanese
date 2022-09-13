@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import HighScoresService, { HighScoreEntry } from "../../service/HighScoresService";
-import LoadingSpinner from "../ui/loading/LoadingSpinner";
 import HighScoresTable from "../ui/table/HighScoresTable";
 import { Alert, Container, Fade } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/HighScoresPage.module.scss"
@@ -10,10 +9,9 @@ import ValueSelector from "../ui/select/ValueSelector";
 import PresetService from "../../service/PresetService";
 import PlayMode from "../../domain/session/PlayMode";
 import { useTranslation } from "react-i18next";
-import SearchField from "../ui/fields/SearchField";
 import TablePagination from "../ui/paging/TablePagination";
 import EmptyTableBody from "../ui/table/EmptyTableBody";
-import { useDebouncedEffect } from "../../hooks";
+import UserSearchField from "../ui/fields/UserSearchField";
 
 const HighScoresPage = () => {
 
@@ -61,11 +59,7 @@ const HighScoresPage = () => {
         });
     }, []);
 
-    useDebouncedEffect(() => {
-        if (username !== "") {
-            getHighScoreEntries();
-        }
-    }, 300, [username]);
+    useEffect(getHighScoreEntries, [username]);
 
     const getEmptyMessage = () => {
         let message = `No scores for ${selectedPresetName}`;
@@ -95,12 +89,10 @@ const HighScoresPage = () => {
                         />
                     </div>
                     <div>
-                        <SearchField
-                            value={username}
+                        <UserSearchField
                             disabled={loading}
+                            onSelect={setUsername}
                             className={styles.search}
-                            placeholder="Search for a user..."
-                            onChange={value => setUsername(value)}
                         />
                     </div>
                 </div>
