@@ -44,14 +44,14 @@ describe("High-scores Service", () => {
     describe("Get All Entries Page", () => {
         it("Should call the repository with the pagination details", () => {
             mockFindAll.mockResolvedValueOnce({});
-            return service.getAllEntriesPage(1, 10).then(() => {
-                expect(mockFindAll).toHaveBeenCalledWith({ page: 1, size: 10 });
+            return service.getAllEntriesPage(12, 1, 10).then(() => {
+                expect(mockFindAll).toHaveBeenCalledWith({ id: 12, page: 1, size: 10 });
             });
         });
 
         it("Should call the repository with the user when passed", () => {
             mockFindAll.mockResolvedValueOnce({});
-            return service.getAllEntriesPage(1, 10, "TomPlum").then(() => {
+            return service.getAllEntriesPage(12, 1, 10, "TomPlum").then(() => {
                 expect(getValueLastCalledWith<FindHighScoresRequest>(mockFindAll).username).toBe("TomPlum");
             });
         });
@@ -68,7 +68,7 @@ describe("High-scores Service", () => {
                 pages: 5
             });
 
-            return service.getAllEntriesPage(0, 10).then(response => {
+            return service.getAllEntriesPage(12, 0, 10).then(response => {
                 expect(response).toStrictEqual({
                     entries: [{
                         user: { id: 1, name: "Tom" },
@@ -87,7 +87,7 @@ describe("High-scores Service", () => {
 
         it("Should return the correct response if the repository call is rejected", () => {
             mockFindAll.mockRejectedValueOnce({ error: "Failed to retrieve high-score entries" });
-            return service.getAllEntriesPage(5, 15).then(response => {
+            return service.getAllEntriesPage(12, 5, 15).then(response => {
                 expect(response).toStrictEqual({
                     entries: [],
                     pages: {

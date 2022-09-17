@@ -27,13 +27,14 @@ class HighScoresService {
 
     /**
      * Retrieves a page of high-score entries.
+     * @param id - The ID of the preset.
      * @param page - The page number.
      * @param size - The size of the page.
      * @param username - An optional user. If passed, returns only high-scores for this user.
      * @return entries - The page of entries.
      */
-    public getAllEntriesPage(page: number, size: number, username?: string): Promise<HighScorePage> {
-        return this._repository.findAll({ page, size, username }).then((response: FindAllHighScoreEntries) => {
+    public getAllEntriesPage(id: number, page: number, size: number, username?: string): Promise<HighScorePage> {
+        return this._repository.findAll({ id, page, size, username }).then((response: FindAllHighScoreEntries) => {
             return {
                 entries: response.entries,
                 error: response.error,

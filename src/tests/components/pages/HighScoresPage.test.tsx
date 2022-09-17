@@ -10,7 +10,7 @@ jest.mock("../../../service/HighScoresService", () => {
 });
 
 test('Should load the high-scores and data and render the table on-load', async () => {
-    mockGetHighScoreEntriesPage.mockResolvedValueOnce({ entries: [], pages: { total: 120, quantity: 10 } });
+    mockGetHighScoreEntriesPage.mockResolvedValue({ entries: [], pages: { total: 120, quantity: 10 } });
     const component = renderWithTranslation(<HighScoresPage />);
     expect(await component.findByTestId('high-scores-table')).toBeInTheDocument();
 });

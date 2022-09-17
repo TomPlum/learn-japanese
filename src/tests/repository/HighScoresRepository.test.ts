@@ -15,15 +15,15 @@ describe("High-Scores Repository", () => {
     describe("Find All Entries Page", () => {
         it("Should call the rest client with the correct endpoint and query parameters", () => {
             mockGet.mockResolvedValueOnce({});
-            return repository.findAll({ page: 1, size: 10 }).then(() => {
-                expect(mockGet).toHaveBeenLastCalledWith("/high-scores/entries?page=1&size=10");
+            return repository.findAll({ id: 12, page: 1, size: 10 }).then(() => {
+                expect(mockGet).toHaveBeenLastCalledWith("/high-scores/entries/12?page=1&size=10");
             });
         });
 
         it("Should call the rest client with the correct endpoint and query parameters with the user passed", () => {
             mockGet.mockResolvedValueOnce({});
-            return repository.findAll({ page: 1, size: 10, username: "TomPlum" }).then(() => {
-                expect(mockGet).toHaveBeenLastCalledWith("/high-scores/entries?page=1&size=10&user=TomPlum");
+            return repository.findAll({ id: 12, page: 1, size: 10, username: "TomPlum" }).then(() => {
+                expect(mockGet).toHaveBeenLastCalledWith("/high-scores/entries/12?page=1&size=10&user=TomPlum");
             });
         });
 
@@ -41,7 +41,7 @@ describe("High-Scores Repository", () => {
                 }
             });
 
-            return repository.findAll({ page: 3, size: 10 }).then((response: FindAllHighScoreEntries) => {
+            return repository.findAll({ id: 12, page: 3, size: 10 }).then((response: FindAllHighScoreEntries) => {
                 expect(response).toStrictEqual({
                     entries: [{
                         user: { id: 1, name: "Tom" },
@@ -57,7 +57,7 @@ describe("High-Scores Repository", () => {
 
         it("Should return an error if the promise resolves with falsy data", () => {
             mockGet.mockResolvedValueOnce({ data: undefined, error: "Something went wrong." });
-            return repository.findAll({ page: 3, size: 10 }).then((response: FindAllHighScoreEntries) => {
+            return repository.findAll({ id: 12, page: 3, size: 10 }).then((response: FindAllHighScoreEntries) => {
                 expect(response).toStrictEqual({
                     entries: [],
                     total: 0,
@@ -69,7 +69,7 @@ describe("High-Scores Repository", () => {
 
         it("Should return an error if the promise is rejected", () => {
             mockGet.mockResolvedValueOnce({ error: "Something went wrong." });
-            return repository.findAll({ page: 3, size: 10 }).then((response: FindAllHighScoreEntries) => {
+            return repository.findAll({ id: 12, page: 3, size: 10 }).then((response: FindAllHighScoreEntries) => {
                 expect(response).toStrictEqual({
                     entries: [],
                     total: 0,

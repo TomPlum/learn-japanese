@@ -19,7 +19,7 @@ const HighScoresPage = () => {
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const [pageSize, setPageSize] = useState(30);
+    const [pageSize, setPageSize] = useState(10);
     const [pageNumber, setPageNumber] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [totalEntries, setTotalEntries] = useState(0);
@@ -36,7 +36,7 @@ const HighScoresPage = () => {
         setError("");
         setLoading(true);
 
-        highScoresService.getAllEntriesPage(pageNumber, pageSize, username).then(response => {
+        highScoresService.getAllEntriesPage(selectedPreset, pageNumber, pageSize, username).then(response => {
             if (response.error) {
                 setError(response.error);
             } else {
@@ -59,7 +59,7 @@ const HighScoresPage = () => {
         });
     }, []);
 
-    useEffect(getHighScoreEntries, [username]);
+    useEffect(getHighScoreEntries, [username, pageSize, pageNumber]);
 
     const getEmptyMessage = () => {
         let message = `No scores for ${selectedPresetName}`;

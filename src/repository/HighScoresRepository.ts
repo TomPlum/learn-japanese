@@ -29,6 +29,7 @@ export interface HighScoreEntryRequest {
 }
 
 export interface FindHighScoresRequest extends PaginationRequest {
+    id: number;
     username?: string;
 }
 
@@ -39,7 +40,7 @@ class HighScoresRepository {
      * @return entries - A page of high-score entries.
      */
     public async findAll(request: FindHighScoresRequest): Promise<FindAllHighScoreEntries> {
-        let endpoint = `/high-scores/entries?page=${request.page}&size=${request.size}`;
+        let endpoint = `/high-scores/entries/${request.id}?page=${request.page}&size=${request.size}`;
 
         if (request.username) {
             endpoint += `&user=${request.username}`;
