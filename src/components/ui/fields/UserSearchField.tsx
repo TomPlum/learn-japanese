@@ -4,7 +4,7 @@ import { useDebouncedEffect } from "../../../hooks";
 import UserService from "../../../service/UserService";
 import { Fade, Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export interface UserSearchFieldProps {
     disabled: boolean;
@@ -19,13 +19,17 @@ const UserSearchField = (props: UserSearchFieldProps) => {
     const [search, setSearch] = useState<string | undefined>(undefined);
     const [results, setResults] = useState<string[]>([]);
     const [focused, setFocused] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const service = new UserService();
 
     useDebouncedEffect(() => {
         if (search) {
+            setLoading(true);
             service.getPublicUsers(search).then(response => {
                 setResults(response);
+            }).finally(() => {
+                setLoading(false);
             });
         }
     }, 300, [search]);
@@ -40,15 +44,19 @@ const UserSearchField = (props: UserSearchFieldProps) => {
             <InputGroup className={[styles.container, className].join(" ")}>
                 <InputGroup.Prepend>
                     <InputGroup.Text className={styles.prepend}>
-                        <FontAwesomeIcon icon={faSearch} className={styles.icon}/>
+                        <FontAwesomeIcon
+                            spin={loading}
+                            className={styles.icon}
+                            icon={loading ? faCircleNotch : faSearch}
+                        />
                     </InputGroup.Text>
                 </InputGroup.Prepend>
 
                 <Form.Control
                     type="text"
                     value={search}
-                    disabled={disabled}
                     className={styles.input}
+                    disabled={disabled || loading}
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
                     data-testid="user-search-field"
@@ -57,17 +65,17 @@ const UserSearchField = (props: UserSearchFieldProps) => {
                 />
             </InputGroup>
 
-            {focused && (
+            {focused && search && (
                 <Fade in={focused}>
                     <div className={styles.resultsWrapper}>
                         {results.map(username => (
-                            <span key={username} onClick={() => handleSelect(username)} className={styles.result}>
+                            <p key={username} onClick={() => handleSelect(username)} className={styles.result}>
                                 {username}
-                            </span>)
+                            </p>)
                         )}
 
                         {search && results.length === 0 && (
-                            <span>No results.</span>
+                            <span className={styles.empty}>No results.</span>
                         )}
                     </div>
                 </Fade>

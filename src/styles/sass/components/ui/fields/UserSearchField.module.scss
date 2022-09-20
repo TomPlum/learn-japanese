@@ -7,27 +7,32 @@
 
 .prepend {
   background-color: $dark-1;
-  border-top: 1px solid $light-3;
-  border-left: 1px solid $light-3;
-  border-bottom: 1px solid $light-3;
+  border-top: 2px solid $light-3;
+  border-left: 2px solid $light-3;
+  border-bottom: 2px solid $light-3;
   border-right: none;
 }
 
 .input, .input:active, .input:focus {
   background-color: $dark-1;
-  border: 1px solid $light-3;
+  border: 2px solid $light-3;
   box-shadow: none;
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   color: $light-1;
 }
 
-.input:focus {
-  border-color: $light-3;
-}
+.input {
+  transition: all ease-in-out 0.2s;
 
-.input::placeholder {
-  text-align: left;
-  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  &:focus {
+    border-color: $light-3;
+    background-color: rgba($dark-1, 0.7);
+  }
+
+  &::placeholder {
+    text-align: left;
+    font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  }
 }
 
 .icon {
@@ -36,21 +41,45 @@
 
 .resultsWrapper {
   position: absolute;
-  background-color: $dark-1;
+  background-color: $dark-2;
   border: 2px solid $light-3;
-  border-radius: 10px;
+  border-top: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   min-height: 50px;
-  width: 260px;
-  padding: 10px;
+  width: 264px;
+
+  .empty {
+    font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+    color: $light-1;
+  }
 }
 
 .result {
   color: $light-1;
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   transition: all ease-in-out 0.2s;
+  padding: 2px 12px;
+  margin: 0;
 
   &:hover {
     cursor: pointer;
     color: $inspect;
+    background-color: $dark-1;
   }
+
+  &:first-child:hover {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  &:last-child:hover {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+.loading {
+  position: absolute;
+  right: 10px;
 }
