@@ -51,14 +51,18 @@ const HighScoresPage = () => {
         });
     }
 
-    useEffect(() => {
-        getHighScoreEntries();
-
+    const getPresets = () => {
         presetService.getPlayPresets().then(response => {
             setPresets(response);
         });
-    }, []);
+    }
 
+    const preload = () => {
+        getHighScoreEntries();
+        getPresets();
+    }
+
+    useEffect(preload, []);
     useEffect(getHighScoreEntries, [username, pageSize, pageNumber]);
 
     const getEmptyMessage = () => {
@@ -105,9 +109,9 @@ const HighScoresPage = () => {
                         <EmptyTableBody
                             error={error}
                             loading={loading}
+                            onRetry={preload}
                             empty={entries.length === 0}
                             emptyMessage={getEmptyMessage()}
-                            onRetry={() => getHighScoreEntries()}
                         />
                     </div>
                 </Fade>
