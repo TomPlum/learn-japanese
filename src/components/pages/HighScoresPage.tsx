@@ -95,8 +95,8 @@ const HighScoresPage = () => {
                     <div>
                         <UserSearchField
                             disabled={loading}
-                            onSelect={setUsername}
                             className={styles.search}
+                            onSelect={(username: string) => setUsername(username)}
                         />
                     </div>
                 </div>

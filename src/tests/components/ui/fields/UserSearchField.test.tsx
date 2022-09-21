@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import UserSearchField from "../../../../components/ui/fields/UserSearchField";
 import userEvent from "@testing-library/user-event";
 
@@ -26,6 +26,26 @@ test('Should render the public users when returned', async () => {
 
     expect(await component.findByText('TomPlum')).toBeInTheDocument();
     expect(component.getByText('WillPlum')).toBeInTheDocument();
+});
+
+test('Selecting a user should call the onSelect handler with the full username', async () => {
+    mockGetPublicUsers.mockResolvedValueOnce(["TomPlum", "WillPlum"]);
+    const component = render(<UserSearchField disabled={false} onSelect={onSelectHandler} />);
+
+    userEvent.type(component.getByTestId('user-search-field'), 'Plum');
+
+    fireEvent.click(await component.findByText('TomPlum'));
+    expect(onSelectHandler).toHaveBeenCalledWith('TomPlum');
+});
+
+test('Selecting a user should set the value of the search field to undefined', async () => {
+    mockGetPublicUsers.mockResolvedValueOnce(["TomPlum", "WillPlum"]);
+    const component = render(<UserSearchField disabled={false} onSelect={onSelectHandler} />);
+
+    userEvent.type(component.getByTestId('user-search-field'), 'Plum');
+
+    fireEvent.click(await component.findByText('TomPlum'));
+    await waitFor(() => expect(component.getByTestId('user-search-field')).toHaveValue(''));
 });
 
 test.todo("Finish coverage for existing behaviour and fix username select");
