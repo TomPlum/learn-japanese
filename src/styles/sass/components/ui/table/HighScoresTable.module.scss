@@ -1,4 +1,5 @@
 @import "src/styles/sass/colours";
+@import "src/styles/sass/animations/reflection";
 
 .wrapper {
   width: 100%;
@@ -77,6 +78,31 @@
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   background-color: $dark-1;
   color: $light-1;
+}
+
+.table tbody tr:first-of-type td {
+  @include reflection(#f6d71e, $dark-3);
+}
+
+.table tbody tr:nth-of-type(2) td {
+  @include reflection(#aba8a8, $dark-3);
+}
+
+.table tbody tr:nth-of-type(3) td {
+  @include reflection(#f3ac42, $dark-3);
+}
+
+.table tbody tr .user:nth-child(-n+3) {
+  color: $dark-3 !important;
+
+  &:hover {
+    color: $light-3;
+  }
+}
+
+.table tbody tr td {
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .table tbody tr td {
