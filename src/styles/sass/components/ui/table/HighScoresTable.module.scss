@@ -92,7 +92,7 @@
   @include reflection(#f3ac42, $dark-3);
 }
 
-.table tbody tr .user:nth-child(-n+3) {
+.table tbody tr:nth-child(-n+3) .user {
   color: $dark-3 !important;
 
   &:hover {
