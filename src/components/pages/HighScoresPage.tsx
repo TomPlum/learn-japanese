@@ -4,7 +4,7 @@ import HighScoresTable from "../ui/table/HighScoresTable";
 import { Alert, Container, Fade } from "react-bootstrap";
 import styles from "../../styles/sass/components/pages/HighScoresPage.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrophy } from "@fortawesome/free-solid-svg-icons";
+import { faFilter, faTimes, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import ValueSelector from "../ui/select/ValueSelector";
 import PresetService from "../../service/PresetService";
 import PlayMode from "../../domain/session/PlayMode";
@@ -73,6 +73,10 @@ const HighScoresPage = () => {
         return `${message}.`;
     }
 
+    const handleSelectUser = (username: string) => {
+        setUsername(username);
+    }
+
     return (
         <Container className={styles.wrapper}>
             <div className={styles.content}>
@@ -96,9 +100,19 @@ const HighScoresPage = () => {
                         <UserSearchField
                             disabled={loading}
                             className={styles.search}
-                            onSelect={(username: string) => setUsername(username)}
+                            onSelect={handleSelectUser}
                         />
                     </div>
+                    {username && <div className={styles.userFilterToggle}>
+                        <FontAwesomeIcon icon={faFilter} className={styles.filter} />
+                        <span className={styles.username}>{username}</span>
+                        <FontAwesomeIcon
+                            icon={faTimes}
+                            className={styles.remove}
+                            title="Remove Filter"
+                            onClick={() => setUsername(undefined)}
+                        />
+                    </div>}
                 </div>
 
                 {error && <Alert variant="danger" className={styles.error}>{error}</Alert> }

@@ -54,3 +54,37 @@
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   color: $light-1;
 }
+
+.userFilterToggle {
+  background-color: $dark-2;
+  border: 2px solid $light-3;
+  border-radius: 6px;
+  padding: 6px;
+  position: relative;
+  margin-left: 15px;
+  min-width: 100px;
+
+  .filter {
+    color: $light-3;
+  }
+
+  .username {
+    font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+    color: $light-1;
+    font-size: 1.1em;
+    padding: 0 10px;
+  }
+
+  .remove {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    transition: all ease-in-out 0.2s;
+    color: $light-2;
+
+    &:hover {
+      cursor: pointer;
+      color: $bootstrap-red;
+    }
+  }
+}

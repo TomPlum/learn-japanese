@@ -35,8 +35,9 @@ const UserSearchField = (props: UserSearchFieldProps) => {
     }, 300, [search]);
 
     const handleSelect = (username: string) => {
-        onSelect(username);
         setSearch(undefined);
+        setFocused(false);
+        onSelect(username);
     }
 
     return (
@@ -58,7 +59,7 @@ const UserSearchField = (props: UserSearchFieldProps) => {
                     className={styles.input}
                     disabled={disabled || loading}
                     onFocus={() => setFocused(true)}
-                    onBlur={() => setFocused(false)}
+                    // onBlur={() => setFocused(false)}
                     data-testid="user-search-field"
                     placeholder="Search for a user..."
                     onChange={(e) => setSearch(e.target.value)}

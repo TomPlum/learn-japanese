@@ -6,10 +6,10 @@
   &::after {
     content: "";
     position: absolute;
-    top: -30%;
+    top: -20%;
     right: -200%;
-    width: 50%;
-    height: 200%;
+    width: 75%;
+    height: 250%;
     opacity: 0;
     transform: rotate(30deg);
     background: rgba(255, 255, 255, 0.13);
