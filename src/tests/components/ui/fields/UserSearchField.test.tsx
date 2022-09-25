@@ -48,6 +48,15 @@ test('Selecting a user should set the value of the search field to undefined', a
     await waitFor(() => expect(component.getByTestId('user-search-field')).toHaveValue(''));
 });
 
+test('Should show no results when none are returned', async () => {
+    mockGetPublicUsers.mockResolvedValueOnce([]);
+    const component = render(<UserSearchField disabled={false} onSelect={onSelectHandler} />);
+
+    userEvent.type(component.getByTestId('user-search-field'), 'Tom');
+
+    await waitFor(() => expect(component.getByText('No results.')).toBeInTheDocument());
+});
+
 test.todo("Finish coverage for existing behaviour and fix username select");
 
 // TODO: Add coverage for new UserService function and HighScoresPage
