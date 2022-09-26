@@ -68,7 +68,7 @@ const UserSearchField = (props: UserSearchFieldProps) => {
 
             {focused && search && (
                 <Fade in={focused}>
-                    <div className={styles.resultsWrapper}>
+                    <div className={styles.resultsWrapper} data-testid="user-search-field-results">
                         {results.map(username => (
                             <p key={username} onClick={() => handleSelect(username)} className={styles.result}>
                                 {username}

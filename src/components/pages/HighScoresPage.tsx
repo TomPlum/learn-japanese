@@ -103,7 +103,7 @@ const HighScoresPage = () => {
                             onSelect={handleSelectUser}
                         />
                     </div>
-                    {username && <div className={styles.userFilterToggle}>
+                    {username && <div className={styles.userFilterToggle} data-testid="user-search-filter">
                         <FontAwesomeIcon icon={faFilter} className={styles.filter} />
                         <span className={styles.username}>{username}</span>
                         <FontAwesomeIcon
