@@ -122,10 +122,10 @@ const HighScoresPage = () => {
                         <HighScoresTable preset={selectedPreset} entries={entries} />
                         <EmptyTableBody
                             error={error}
-                            loading={loading}
                             onRetry={preload}
                             empty={entries.length === 0}
                             emptyMessage={getEmptyMessage()}
+                            loading={loading && entries.length === 0}
                         />
                     </div>
                 </Fade>
