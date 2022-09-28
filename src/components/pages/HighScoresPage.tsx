@@ -12,6 +12,9 @@ import { useTranslation } from "react-i18next";
 import TablePagination from "../ui/paging/TablePagination";
 import EmptyTableBody from "../ui/table/EmptyTableBody";
 import UserSearchField from "../ui/fields/UserSearchField";
+import { useQueryParams } from "../../hooks";
+import SingleUserHighScoresTable from "../ui/table/SingleUserHighScoresTable";
+import { useHistory, useLocation } from "react-router-dom";
 
 const HighScoresPage = () => {
 
@@ -31,6 +34,12 @@ const HighScoresPage = () => {
     const highScoresService = new HighScoresService();
     const presetService = new PresetService();
     const selectedPresetName = t(presets.find(preset => preset.id === selectedPreset)?.displayName ?? "");
+
+    const history = useHistory();
+    const location = useLocation();
+    const queryParams = useQueryParams();
+    const userQueryParamName = "user";
+    const hasUserQueryParam = queryParams.has(userQueryParamName);
 
     const getHighScoreEntries = () => {
         setError("");
@@ -77,6 +86,13 @@ const HighScoresPage = () => {
         setUsername(username);
     }
 
+    const setUserQueryParameter = (username: string) => {
+        history.replace({
+            pathname: location.pathname,
+            search: new URLSearchParams({[userQueryParamName]: username}).toString()
+        });
+    }
+
     return (
         <Container className={styles.wrapper}>
             <div className={styles.content}>
@@ -119,7 +135,16 @@ const HighScoresPage = () => {
 
                 <Fade in={true} appear={true}>
                     <div>
-                        <HighScoresTable preset={selectedPreset} entries={entries} />
+                        {hasUserQueryParam && <SingleUserHighScoresTable />}
+
+                        {!hasUserQueryParam && (
+                            <HighScoresTable
+                                entries={entries}
+                                preset={selectedPreset}
+                                onClickUser={setUserQueryParameter}
+                            />
+                        )}
+
                         <EmptyTableBody
                             error={error}
                             onRetry={preload}
