@@ -5,6 +5,8 @@ import { when } from "jest-when";
 import userEvent from "@testing-library/user-event";
 import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
 import exp from "constants";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
 
 const mockGetHighScoreEntriesPage = jest.fn();
 jest.mock("../../../service/HighScoresService", () => {
@@ -20,21 +22,39 @@ jest.mock("../../../service/UserService", () => {
     };
 });
 
+let history = createMemoryHistory();
+
+const setup = () => {
+    return renderWithTranslation(<Router history={history}><HighScoresPage /></Router>);
+}
+
+beforeEach(() => {
+   history = createMemoryHistory();
+});
+
 test('Should load the high-scores and data and render the table on-load', async () => {
     mockGetHighScoreEntriesPage.mockResolvedValue({ entries: [], pages: { total: 120, quantity: 10 } });
-    const component = renderWithTranslation(<HighScoresPage />);
+    const component = setup();
     expect(await component.findByTestId('high-scores-table')).toBeInTheDocument();
+});
+
+test('Should render the single user high-scores table when the user query pram is present', async () => {
+    mockGetHighScoreEntriesPage.mockResolvedValue({ entries: [], pages: { total: 120, quantity: 10 } });
+    history = createMemoryHistory({ initialEntries: ['?user=TomPlum'] });
+    const component = setup();
+    expect(await component.findByTestId('single-user-high-scores-table')).toBeInTheDocument();
+    expect(await component.queryByTestId('high-scores-table')).not.toBeInTheDocument();
 });
 
 test('Should render an error alert when the high-scores data response returns an error', async () => {
     mockGetHighScoreEntriesPage.mockResolvedValue({ entries: [], pages: { total: 0, quantity: 0 }, error: "It broke." });
-    const component = renderWithTranslation(<HighScoresPage />);
+    const component = setup();
     expect(await component.findByText('It broke.')).toBeInTheDocument();
 });
 
 test('Should render an error alert when the high-scores data is rejected and returns an error', async () => {
     mockGetHighScoreEntriesPage.mockRejectedValue({ error: "Something went really wrong." });
-    const component = renderWithTranslation(<HighScoresPage />);
+    const component = setup();
     expect(await component.findByText('Something went really wrong.')).toBeInTheDocument();
 });
 
@@ -55,7 +75,7 @@ test('Selecting a user should render only their high-scores', async () => {
     when(mockGetPublicUsers).calledWith("TomPlum").mockResolvedValue(["TomPlum"]);
 
     // Should initially load all the details
-    const component = renderWithTranslation(<HighScoresPage />);
+    const component = setup();
     await waitForElementToBeRemoved(within(component.getByTestId('empty-table-body')).getByText('Loading...'));
     expect(await within(screen.getByTestId('high-scores-table')).getAllByRole('row')[1]).toHaveTextContent('1Test User235');
 
@@ -67,7 +87,7 @@ test('Selecting a user should render only their high-scores', async () => {
     // Select the user
     const results = await component.findByTestId('user-search-field-results');
     fireEvent.click(await within(results).findByText('TomPlum'));
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(await screen.findByText('Loading...')).toBeInTheDocument();
     expect(within(screen.getByTestId('user-search-filter')).getByText('TomPlum')).toBeInTheDocument();
 
     // Should render details
@@ -77,6 +97,6 @@ test('Selecting a user should render only their high-scores', async () => {
 
 test('Should render the page number', async () => {
     mockGetHighScoreEntriesPage.mockResolvedValue({ entries: [], pages: { total: 10, quantity: 100 } });
-    renderWithTranslation(<HighScoresPage />);
+    setup();
     expect(await findByTextWithElements('Page 1 of 10')).toBeInTheDocument();
 });

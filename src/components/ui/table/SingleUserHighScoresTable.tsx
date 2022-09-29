@@ -1,6 +1,6 @@
 const SingleUserHighScoresTable = () => {
     return (
-        <div>
+        <div data-testid="single-user-high-scores-table">
             Single user high-scores
         </div>
     );
