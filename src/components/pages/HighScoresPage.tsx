@@ -135,7 +135,9 @@ const HighScoresPage = () => {
 
                 <Fade in={true} appear={true}>
                     <div>
-                        {hasUserQueryParam && <SingleUserHighScoresTable />}
+                        {hasUserQueryParam && (
+                            <SingleUserHighScoresTable user={queryParams.get(userQueryParamName)!} />)
+                        }
 
                         {!hasUserQueryParam && (
                             <HighScoresTable
