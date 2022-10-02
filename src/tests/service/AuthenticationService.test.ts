@@ -41,13 +41,19 @@ describe("Authentication Service", () => {
                 token: "TOKEN",
                 refreshToken: "REFRESH_TOKEN",
                 preferences: {
-                    defaultFont: "Gothic",
+                    kanjiFont: "Gothic",
                     theme: "Dark Mode",
                     language: "English",
-                    highScores: "Ask Each Time",
+                    highScoresBehaviour: "Ask Each Time",
                     defaultMode: "Play",
-                    cardsPerDay: 10,
-                    confidenceMenuStyle: "Numbers 1 - 6"
+                    flashCardsQuantity: 10,
+                    confidenceMenuStyle: "Numbers 1 - 6",
+                    activityFeedQuantity: 3,
+                    mistakesReminders: true,
+                    profileVisibility: "Public",
+                    romajiVisibility: "Always Show",
+                    streakCardView: "Streak",
+                    streakNotifications: false
                 }
             };
 
