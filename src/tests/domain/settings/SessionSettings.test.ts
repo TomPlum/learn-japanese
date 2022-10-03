@@ -1,10 +1,10 @@
-import { SessionSettings } from "../../../domain/session/settings/SessionSettings";
-import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
-import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
+import {SessionSettings} from "../../../domain/session/settings/SessionSettings";
+import {KanaSettingsBuilder} from "../../../domain/session/settings/data/KanaSettings";
+import {GameSettingsBuilder} from "../../../domain/session/settings/game/GameSettings";
 import LearnSettings from "../../../domain/session/settings/LearnSettings";
-import PlayMode from "../../../domain/session/PlayMode";
-import LearnMode from "../../../domain/session/LearnMode";
 import SessionMode from "../../../domain/session/SessionMode";
+import PresetBuilder from "../../../domain/session/PresetBuilder";
+import {KanjiSettingsBuilder} from "../../../domain/session/settings/data/KanjiSettings";
 
 describe("Session Settings", () => {
 
@@ -53,8 +53,27 @@ describe("Session Settings", () => {
 
         const gameSessionSettings = SessionSettings.forGame(dataSettings, gameSettings);
         const learnSessionSettings = SessionSettings.forLearning(dataSettings, learnSettings);
-        const playPreset = new PlayMode(1, "Test Play", "#ffffff", "FaAtom", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
-        const learnPreset = new LearnMode(1, "Test Learn", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings());
+
+        const playPreset = new PresetBuilder()
+            .withID(2)
+            .withDisplayName("Test Play")
+            .withColour("#ffffff")
+            .withIcon("FaAtom")
+            .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
+            .withGameSettings(new GameSettingsBuilder().build())
+            .withTopicName("Topic")
+            .build();
+
+        const learnPreset = new PresetBuilder()
+            .withID(2)
+            .withDisplayName("Test Learn")
+            .withColour("#fdb40e")
+            .withIcon("あ")
+            .withDataSettings(new KanaSettingsBuilder().build())
+            .withLearnSettings(new LearnSettings())
+            .withTopicName("Topic")
+            .withFavouriteID(4)
+            .build();
 
         beforeEach(() => {
             SessionSettings.forGame = mockForGameConstructor;
@@ -81,7 +100,7 @@ describe("Session Settings", () => {
 
         class UnknownPresetType extends SessionMode {
             constructor() {
-                super(1, "Test", "fff", "faApple", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build());
+                super(1, "Test", "desc", "fff", "faApple", new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic");
             }
 
             getUniqueID(): string {

@@ -140,7 +140,7 @@ describe("Preset Converter", () => {
                 quantity: 150,
                 answerField: "Rōmaji",
                 questionField: "Kana",
-                answerFilter: "0"
+                answerFilter: 0
             }
         };
 

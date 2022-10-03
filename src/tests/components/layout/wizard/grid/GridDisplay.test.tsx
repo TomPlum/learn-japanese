@@ -8,6 +8,7 @@ import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings";
 
 const onClickItemHandler = jest.fn();
+const onEditHandler = jest.fn();
 
 let gridProps: GridDisplayProps;
 let itemProps: GridItemProps<PlayMode>;
@@ -35,14 +36,30 @@ beforeEach(() => {
         icon: faApple,
         onClick: onClickItemHandler,
         selected: "Test Mode",
-        value: new PlayMode(1, "Test Mode", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic")
+        style: {},
+        id: "test-mode-1",
+        className: "testModeOne",
+        desc: "test mode desc one",
+        editable: false,
+        small: false,
+        iconColour: "#fff",
+        onEdit: onEditHandler,
+        value: new PlayMode(1, "Test Mode", "desc", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic")
     };
 
     itemProps2 = {
         icon: faPencilAlt,
         onClick: onClickItemHandler,
         selected: "Test Mode 2",
-        value: new PlayMode(1, "Test Mode 2", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic")
+        style: {},
+        id: "test-mode-2",
+        className: "testModeTwo",
+        desc: "test mode desc two",
+        editable: false,
+        small: false,
+        iconColour: "#fff",
+        onEdit: onEditHandler,
+        value: new PlayMode(1, "Test Mode 2", "desc", "#fdb40e", faGraduationCap, new KanaSettingsBuilder().build(), new GameSettingsBuilder().build(), "Topic")
     };
 });
 

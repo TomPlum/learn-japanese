@@ -18,7 +18,7 @@
     "i18next": "^21.8.14",
     "i18next-browser-languagedetector": "^6.1.4",
     "i18next-http-backend": "^1.4.1",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.3",
     "peer": "^0.6.1",
     "react": "^17.0.0",
     "react-bootstrap": "^1.6.4",

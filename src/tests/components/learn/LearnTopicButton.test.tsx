@@ -7,7 +7,7 @@ import LearnSettings from "../../../domain/session/settings/LearnSettings";
 
 const onClickHandler = jest.fn();
 
-const mode = new LearnMode(1, "Hiragana", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "Topic");
+const mode = new LearnMode(1, "Hiragana", "desc", "#fdb40e", "あ", new KanaSettingsBuilder().withHiragana().build(), new LearnSettings(), "Topic");
 
 let props: LearnTopicButtonProps;
 
@@ -48,7 +48,7 @@ test('Should have the class \'selected\' when the passed type matches the select
 });
 
 test('Should have the class \'notSelected\' when the passed type does not match the selected prop', () => {
-    props.selected = new LearnMode(1, "Katakana", "#fdb40e", "あ", new KanaSettingsBuilder().build(), new LearnSettings(), "Topic");
+    props.selected = new LearnMode(1, "Katakana", "desc", "#fdb40e", "あ", new KanaSettingsBuilder().build(), new LearnSettings(), "Topic");
     const { container } = setup();
     expect(container.firstChild).toHaveClass('notSelected');
 });

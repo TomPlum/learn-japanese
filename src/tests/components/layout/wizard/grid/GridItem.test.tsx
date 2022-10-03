@@ -27,7 +27,9 @@ beforeEach(() => {
         selected: "Kana",
         icon: faApple,
         onEdit: onEditHandler,
-        onClick: onClickHandler
+        onClick: onClickHandler,
+        style: {},
+        id: "grid-item"
     };
 });
 
