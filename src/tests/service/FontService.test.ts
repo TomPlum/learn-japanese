@@ -45,7 +45,7 @@ describe("Font Service", () => {
         it("Should return the font whose name matches the one in local storage", () => {
            localStorageMock.setItem("font", "Appli Mincho");
            return service.getSelectedFont().then(font => {
-              expect(font?.name).toBe("Mincho");
+              expect(font?.name).toBe(" AppliMincho");
            });
         });
 
