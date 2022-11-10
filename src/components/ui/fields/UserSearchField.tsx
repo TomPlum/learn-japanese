@@ -16,10 +16,10 @@ const UserSearchField = (props: UserSearchFieldProps) => {
 
     const { disabled, className, onSelect } = props;
 
-    const [search, setSearch] = useState<string | undefined>(undefined);
-    const [results, setResults] = useState<string[]>([]);
     const [focused, setFocused] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [results, setResults] = useState<string[]>([]);
+    const [search, setSearch] = useState<string | undefined>(undefined);
 
     const service = new UserService();
 
@@ -35,7 +35,7 @@ const UserSearchField = (props: UserSearchFieldProps) => {
     }, 300, [search]);
 
     const handleSelect = (username: string) => {
-        setSearch(undefined);
+        setSearch("");
         setFocused(false);
         onSelect(username);
     }
