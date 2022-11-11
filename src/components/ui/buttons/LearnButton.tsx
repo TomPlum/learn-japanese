@@ -1,5 +1,5 @@
 import NavigationButton from "../NavigationButton";
-import { faBook, faGraduationCap, faPaintBrush } from "@fortawesome/free-solid-svg-icons";
+import {faBook, faBookOpen, faGraduationCap, faPaintBrush} from "@fortawesome/free-solid-svg-icons";
 import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
 import styles from "../../../styles/sass/components/ui/buttons/LearnButton.module.scss";
 import { faKickstarterK } from "@fortawesome/free-brands-svg-icons";
@@ -30,6 +30,10 @@ const LearnButton = () => {
 
             <NavigationButton.Item icon={faBook} href="/genki" iconClass={styles.genki}>
                 {t("navigation.button.genki-dict")}
+            </NavigationButton.Item>
+
+            <NavigationButton.Item icon={faBookOpen} href="/genki/grammar" iconClass={styles.grammar}>
+                {t("navigation.button.genki-grammar")}
             </NavigationButton.Item>
         </NavigationButton>
     );
