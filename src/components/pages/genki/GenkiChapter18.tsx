@@ -35,6 +35,15 @@ const GenkiChapter18 = () => {
                             <td>閉まる</td>
                             <td>something closes</td>
                         </tr>
+                        <tr>
+                            <td>入れる</td>
+                            <td>put something in</td>
+                            <td>入る</td>
+                            <td>something goes inside</td>
+                        </tr>
+                        <tr>
+
+                        </tr>
                     </tbody>
                 </GenkiTable>
             </div>
