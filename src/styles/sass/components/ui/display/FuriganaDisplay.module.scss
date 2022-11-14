@@ -1,0 +1,23 @@
+.container {
+  position: relative;
+}
+
+.infoWrapper {
+  position: relative;
+}
+
+.charWrapper {
+  position: relative;
+  display: inline;
+}
+
+.furiganaBottom {
+  position: absolute;
+  left: 50%;
+  width: 100%;
+  text-align: center;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  bottom: -10px;
+  font-size: 0.5em;
+}

@@ -2,6 +2,7 @@ import {GrammarInfoProps} from "../../learn/GrammarInfo";
 import PageNumber from "../../../domain/learn/PageNumber";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import GenkiTable from "../../ui/table/GenkiTable";
+import FuriganaDisplay from "../../ui/display/FuriganaDisplay";
 
 const GenkiChapter18 = () => {
 
@@ -16,79 +17,85 @@ const GenkiChapter18 = () => {
                     describe changes that happen to things or people (intransitive verbs).
                 </p>
                 <GenkiTable chapter={18}>
-                  {/* <thead>
-                        <th colSpan={2}>1</th>
-                        <th className={styles.genkiTwo}>Transitive</th>
-                        <th colSpan={2} className={styles.genkiTwo}>Intransitive</th>
-                        <th>2</th>
-                   </thead>*/}
                     <tbody>
                        <tr>
+                           <td>&nbsp;</td>
                            <td colSpan={2} className={styles.genkiTwo}>Transitive</td>
                            <td colSpan={2} className={styles.genkiTwo}>Intransitive</td>
                        </tr>
                        <tr>
-                           <td>開ける</td>
+                           <td>&nbsp;</td>
+                           <td><FuriganaDisplay chars={[{ kanji: '開', kana: 'あ', okurigana: 'ける' }]} position='bottom'/></td>
                            <td>open something</td>
-                           <td>開く</td>
+                           <td><FuriganaDisplay chars={[{ kanji: '開', kana: 'あ', okurigana: 'く' }]} position='bottom'/></td>
                            <td>something opens</td>
                        </tr>
                         <tr>
-                            <td>閉める</td>
+                            <td>&nbsp;</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '閉', kana: 'し', okurigana: 'める' }]} position='bottom'/></td>
                             <td>close something</td>
-                            <td>閉まる</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '閉', kana: 'し', okurigana: 'まる' }]} position='bottom'/></td>
                             <td>something closes</td>
                         </tr>
                         <tr>
-                            <td>入れる</td>
+                            <td>&nbsp;</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '入', kana: 'い', okurigana: 'れる' }]} position='bottom'/></td>
                             <td>put something in</td>
-                            <td>入る</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '入', kana: 'はい', okurigana: 'る' }]} position='bottom'/></td>
                             <td>something goes inside</td>
                         </tr>
                         <tr>
-                            <td>出す</td>
+                            <td>&nbsp;</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '出', kana: 'だ', okurigana: 'す' }]} position='bottom'/></td>
                             <td>take something out</td>
-                            <td>出る</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '出', kana: 'で', okurigana: 'る' }]} position='bottom'/></td>
                             <td>something goes out</td>
                         </tr>
                         <tr>
+                            <td>&nbsp;</td>
                             <td>つける</td>
                             <td>turn something on</td>
                             <td>つく</td>
                             <td>something goes on</td>
                         </tr>
                         <tr>
-                            <td>消す</td>
+                            <td>&nbsp;</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '消', kana: 'け', okurigana: 'す' }]} position='bottom'/></td>
                             <td>turn something off;</td>
-                            <td>消える</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '消', kana: 'き', okurigana: 'える' }]} position='bottom'/></td>
                             <td>something goes off</td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
+                            <td>&nbsp;</td>
                             <td colSpan={3}>extinguish something</td>
                         </tr>
                         <tr>
-                            <td>壊す</td>
+                            <td>&nbsp;</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '壊', kana: 'こわ', okurigana: 'す' }]} position='bottom'/></td>
                             <td>breaking something</td>
-                            <td>壊れる</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '壊', kana: 'こわ', okurigana: 'れる' }]} position='bottom'/></td>
                             <td>something breaks</td>
                         </tr>
                         <tr>
-                            <td>汚す</td>
+                            <td>&nbsp;</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '汚', kana: 'よご', okurigana: 'す' }]} position='bottom'/></td>
                             <td>make something dirty</td>
-                            <td>汚れる</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '汚', kana: 'よご', okurigana: 'れる' }]} position='bottom'/></td>
                             <td>something becomes dirty</td>
                         </tr>
                         <tr>
-                            <td>落とす</td>
+                            <td>&nbsp;</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '落', kana: 'お', okurigana: 'とす' }]} position='bottom'/></td>
                             <td>drop something</td>
-                            <td>落ちる</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '落', kana: 'お', okurigana: 'ちる' }]} position='bottom'/></td>
                             <td>something drops</td>
                         </tr>
                         <tr>
-                            <td>沸かす</td>
+                            <td>&nbsp;</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '沸', kana: 'わ', okurigana: 'かす' }]} position='bottom'/></td>
                             <td>boil water</td>
-                            <td>沸く</td>
+                            <td><FuriganaDisplay chars={[{ kanji: '沸', kana: 'わ', okurigana: 'く' }]} position='bottom'/></td>
                             <td>water boils</td>
                         </tr>
                     </tbody>
