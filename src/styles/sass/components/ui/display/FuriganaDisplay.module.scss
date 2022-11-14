@@ -11,13 +11,23 @@
   display: inline;
 }
 
-.furiganaBottom {
+@mixin furigana {
   position: absolute;
   left: 50%;
   width: 100%;
   text-align: center;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
-  bottom: -10px;
-  font-size: 0.5em;
+  color: #ededed;
+  font-size: 0.6em;
+}
+
+.furiganaBottom {
+  @include furigana;
+  bottom: -12px;
+}
+
+.furiganaTop {
+  @include furigana;
+  top: -14px;
 }

@@ -79,7 +79,7 @@ const GenkiChapter16 = () => {
                 <p>For example:</p>
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: "私は友だちに宿題を手伝ってもらいました。", underline: new MultipleFirstMatch(["に", "もらいました"]) }}
+                    jp={{ text: "私は友だちに宿題を手伝ってもらいました。", underline: new MultipleFirstMatch("に", "もらいました") }}
                     en={{ text: "I got a friend of mine to help me with my homework." }}
                 />
             </div>

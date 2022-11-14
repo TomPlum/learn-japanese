@@ -441,7 +441,7 @@ const GenkiChapter5 = () => {
                 <GenkiExampleDisplay
                     book={1}
                     jp={{ text: "たけしさんはコーヒーが大好きです。", underline: new FirstMatch("大好きです") }}
-                    en={{ text: "Takeshi likes coffee a lot.", underline: new MultipleFirstMatch(["likes", "a lot"]) }}
+                    en={{ text: "Takeshi likes coffee a lot.", underline: new MultipleFirstMatch("likes", "a lot") }}
                 />
                 <GenkiExampleDisplay
                     book={1}
@@ -508,7 +508,7 @@ const GenkiChapter5 = () => {
                 <p>For example</p>
                 <GenkiExampleDisplay
                     book={1}
-                    jp={{ text: "リーさんは Tシャツを三枚買いました。", underline: new MultipleFirstMatch(["Tシャツ", "三枚"]) }}
+                    jp={{ text: "リーさんは Tシャツを三枚買いました。", underline: new MultipleFirstMatch("Tシャツ", "三枚") }}
                     en={{ text: "Lee bought three stamps." }}
                 />
             </div>

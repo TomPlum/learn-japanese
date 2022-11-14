@@ -27,7 +27,7 @@ describe("First Match Strategy", () => {
 describe("Multiple First Match Strategy", () => {
     test("Should render the whole text content from the immediate child component", () => {
         render(
-            <Underline strategy={new MultipleFirstMatch(["This", "text"])}>
+            <Underline strategy={new MultipleFirstMatch("This", "text")}>
                 <span>This is test text.</span>
             </Underline>
         );
@@ -37,7 +37,7 @@ describe("Multiple First Match Strategy", () => {
 
     test("Should apply the given class to the underlined text", () => {
         const component = render(
-            <Underline strategy={new MultipleFirstMatch(["This", "text"])} underlineClass="myClass">
+            <Underline strategy={new MultipleFirstMatch("This", "text")} underlineClass="myClass">
                 <span>This is test text.</span>
             </Underline>
         );

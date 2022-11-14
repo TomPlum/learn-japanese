@@ -37,7 +37,7 @@ export class FirstMatch implements UnderlineStrategy {
 export class MultipleFirstMatch implements UnderlineStrategy {
     private readonly _underline: string[];
 
-    constructor(underline: string[]) {
+    constructor(...underline: string[]) {
         this._underline = underline;
     }
 
