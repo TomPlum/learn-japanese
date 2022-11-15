@@ -118,7 +118,47 @@ const GenkiChapter18 = () => {
         )
     }
 
-    return { c18p1 };
+    const c18p2: GrammarInfoProps = {
+        chapter: 18,
+        section: 2,
+        page: PageNumber.from(141),
+        title: "Paired Intransitive Verbs + ている",
+        body: (
+            <div>
+                <p>Transitive and intransitive verbs behave differently when followed by the ている helper verb.</p>
+                <p>Transitive verbs + ている denote an action that is currently in-progress, just like normal.</p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{
+                        chars: [
+                            { pre: 'ドマさんは', kanji: '窓', kana: 'まど' },
+                            { pre: 'を', kanji: '開', kana: 'あ', okurigana: 'け', post: 'ています。' }
+                        ],
+                        position: 'bottom'
+                    }}
+                    en={{ text: 'Tom is opening the windows.' }}
+                />
+
+                <p>
+                    However, intransitive verbs + ている refer to states that hold true after the change takes place.
+                    That is to say, the result of the change.
+                </p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{
+                        chars: [
+                            { kanji: '窓', kana: 'まど' },
+                            { pre: 'が', kanji: '開', kana: 'あ', okurigana: 'い', post: 'ています。' }
+                        ],
+                        position: 'bottom'
+                    }}
+                    en={{ text: 'The windows are open.' }}
+                />
+            </div>
+        )
+    }
+
+    return { c18p1, c18p2 };
 }
 
 export default GenkiChapter18

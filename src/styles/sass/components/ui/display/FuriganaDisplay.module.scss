@@ -19,7 +19,6 @@
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   color: #ededed;
-  font-size: 0.6em;
 }
 
 .furiganaBottom {
@@ -31,3 +30,12 @@
   @include furigana;
   top: -14px;
 }
+
+.sizeBig {
+  font-size: 0.6em;
+}
+
+.sizeSmall {
+  font-size: 0.5em;
+}
+
