@@ -25,7 +25,7 @@ export class FirstMatch implements UnderlineStrategy {
         const remaining = text.substring(underlineEndIndex);
 
         return (
-            <span>
+            <span data-testid="underline-first-match">
                 {start}
                 <span className={underlineClass}>{underlined}</span>
                 {remaining}
@@ -66,7 +66,7 @@ export class MultipleFirstMatch implements UnderlineStrategy {
             }
         }
 
-        return <span>{elements}</span>;
+        return <span data-testid="underline-multiple-first-match">{elements}</span>;
     }
 }
 
@@ -129,7 +129,11 @@ export class Occurrences implements UnderlineStrategy {
  */
 export class Whole implements UnderlineStrategy {
     underline(text: string, underlineClass?: string) {
-        return <span className={underlineClass}>{text}</span>;
+        return (
+            <span className={underlineClass} data-testid="underline-whole">
+                {text}
+            </span>
+        );
     }
 }
 

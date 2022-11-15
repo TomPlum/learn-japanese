@@ -87,10 +87,37 @@ test("Should render the underlined compare text with the genkiTwo class if the b
 test("Should render the underlined compare text with the genkiTwo class if the book is 2", () => {
     const component = render(<GenkiExampleDisplay
         book={2}
-        jp={{ text: "このりんごはおいしそうです。",}}
+        jp={{ text: "このりんごはおいしそうです。" }}
         en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
         compare={{ text: "comparison text.", underline: new FirstMatch("text") }}
     />);
     const underlined = component.getByText('text');
     expect(underlined).toHaveClass('genkiTwoUnderline');
+});
+
+test("Should render furigana display for the japanese text if passed the correct props", () => {
+    const component = render(<GenkiExampleDisplay
+        book={2}
+        jp={{  chars: [
+                { pre: 'ドマさんは', kanji: '窓', kana: 'まど' },
+                { pre: 'を', kanji: '開', kana: 'あ', okurigana: 'け', post: 'ています。' }
+            ],
+            position: 'bottom'
+        }}
+        en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
+        compare={{ text: "comparison text.", underline: new FirstMatch("text") }}
+    />);
+
+    expect(component.getByTestId('furigana-display')).toBeInTheDocument();
+});
+
+test("Should render with marginLeft 0px if the noIndent prop is passed as true", () => {
+    const { container } = render(<GenkiExampleDisplay
+        book={2}
+        noIndent
+        jp={{ text: "このりんごはおいしそうです。" }}
+        en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
+        compare={{ text: "comparison text.", underline: new FirstMatch("text") }}
+    />);
+    expect(container.children[0]).toHaveStyle({ 'marginLeft': 0 });
 });

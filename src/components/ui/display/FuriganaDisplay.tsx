@@ -23,14 +23,14 @@ const FuriganaDisplay = (props: FuriganaDisplayProps) => {
     const wrapperClassNames = [styles.container, className];
 
     return (
-        <div className={wrapperClassNames.join(" ")} style={style} data-testid="furigana-display">
+        <span className={wrapperClassNames.join(" ")} style={style} data-testid="furigana-display">
             {chars.map(info => {
                 const directionalFuriganaClass = position === 'top' ? styles.furiganaTop : styles.furiganaBottom;
                 const sizeFuriganaClass = info.kana.length === 1 ? styles.sizeBig : styles.sizeSmall;
                 const furiganaClasses = [directionalFuriganaClass, sizeFuriganaClass];
 
                 return (
-                    <span className={styles.infoWrapper}>
+                    <span className={styles.infoWrapper} key={info.kanji}>
                         <span>{info.pre}</span>
                         <span className={styles.charWrapper}>
                             <span className={styles.kanji}>{info.kanji}</span>
@@ -41,7 +41,7 @@ const FuriganaDisplay = (props: FuriganaDisplayProps) => {
                     </span>
                 );
             })}
-        </div>
+        </span>
     );
 }
 

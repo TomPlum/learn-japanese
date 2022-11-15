@@ -14,7 +14,7 @@ type Value = PlainTextValueWithUnderline | ValueWithFuriganaSupport;
 
 export interface GenkiExampleDisplayProps {
     jp: Value;
-    en: Value;
+    en: PlainTextValueWithUnderline;
     compare?: PlainTextValueWithUnderline;
     book: number;
     noIndent?: boolean;
@@ -36,7 +36,7 @@ const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
 
     return (
         <div className={styles.wrapper} style={style}>
-            <p className={styles.jp}>
+            <div className={styles.jp}>
                 {isPlainText(jp) && (
                     <GenkiUnderlineDisplay underline={jp.underline} book={book}>
                         <span>{jp.text}</span>
@@ -44,28 +44,24 @@ const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
                 )}
 
                 {isFurigana(jp) && (
-                   <FuriganaDisplay {...jp} className={styles.furiganaDisplay} />
+                   <div className={styles.furiganaDisplay}>
+                       <FuriganaDisplay {...jp} />
+                   </div>
                 )}
-            </p>
+            </div>
 
-            <p className={styles.en}>
-                {isPlainText(en) && (
-                    <GenkiUnderlineDisplay underline={en.underline} book={book}>
-                        <span>{en.text}</span>
-                    </GenkiUnderlineDisplay>
-                )}
-
-                {isFurigana(en) && (
-                    <FuriganaDisplay {...en} className={styles.furiganaDisplay} />
-                )}
-            </p>
+            <div className={styles.en}>
+                <GenkiUnderlineDisplay underline={en.underline} book={book}>
+                    <span>{en.text}</span>
+                </GenkiUnderlineDisplay>
+            </div>
 
             {compare && (
-                <p className={styles.compare}>
+                <div className={styles.compare}>
                     <GenkiUnderlineDisplay underline={compare.underline} book={book}>
                         <span>{`cf. ${compare.text}`}</span>
                     </GenkiUnderlineDisplay>
-                </p>
+                </div>
             )}
         </div>
     );
