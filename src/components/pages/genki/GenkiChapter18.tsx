@@ -5,6 +5,9 @@ import GenkiTable from "../../ui/table/GenkiTable";
 import FuriganaDisplay from "../../ui/display/FuriganaDisplay";
 import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
 import {FirstMatch, MultipleFirstMatch} from "../../ui/Underline";
+import GenkiFootnoteDisplay from "../../ui/display/GenkiFootnoteDisplay";
+import GenkiFootnoteRef from "../../ui/display/GenkiFootnoteRef";
+import GenkiFootNoteContainer from "../../ui/display/GenkiFootNoteContainer";
 
 const GenkiChapter18 = () => {
 
@@ -158,7 +161,42 @@ const GenkiChapter18 = () => {
         )
     }
 
-    return { c18p1, c18p2 };
+    const c18p3: GrammarInfoProps = {
+        chapter: 18,
+        section: 3,
+        page: PageNumber.of(141, 142),
+        title: "~てしまう",
+        body: (
+            <div>
+                <p>The <i>te</i>-form of a verb + しまう has two meanings.</p>
+                <p>
+                    Firstly, it indicates that one "carries out with determination" a plan described by the verb.
+                    This typically involves finishing something.
+                </p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: '映画を見ってしまいました。', underline: new FirstMatch("しまいました") }}
+                    en={{ text: 'I watched the film completely / I finished watching the film.', underline: new MultipleFirstMatch("completely", "finished") }}
+                />
+
+                <p>
+                    Secondly, it can also indicate a "lack of premeditation or control over how things turn out". This
+                    is generally something that one regrets or you do something you do not intend.
+                    <GenkiFootnoteRef value={1} book={2} />
+                </p>
+
+                <GenkiFootNoteContainer>
+                    <GenkiFootnoteDisplay reference={1} book={2}>
+                        Since しまう is chained after the te-form, which is implicitly affirmative, it can only produce
+                        sentences meaning that something regrettable did happen. Therefore, negative sentences cannot
+                        be formed with it.
+                    </GenkiFootnoteDisplay>
+                </GenkiFootNoteContainer>
+            </div>
+        )
+    }
+
+    return { c18p1, c18p2, c18p3 };
 }
 
 export default GenkiChapter18
