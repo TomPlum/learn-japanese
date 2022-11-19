@@ -5,7 +5,7 @@ import GenkiTable from "../../ui/table/GenkiTable";
 import FuriganaDisplay from "../../ui/display/FuriganaDisplay";
 import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
 import {FirstMatch, MultipleFirstMatch} from "../../ui/Underline";
-import GenkiFootnoteDisplay from "../../ui/display/GenkiFootnoteDisplay";
+import GenkiFootNoteDisplay from "../../ui/display/GenkiFootNoteDisplay";
 import GenkiFootnoteRef from "../../ui/display/GenkiFootnoteRef";
 import GenkiFootNoteContainer from "../../ui/display/GenkiFootNoteContainer";
 
@@ -186,11 +186,11 @@ const GenkiChapter18 = () => {
                 </p>
 
                 <GenkiFootNoteContainer>
-                    <GenkiFootnoteDisplay reference={1} book={2}>
+                    <GenkiFootNoteDisplay reference={1} book={2}>
                         Since しまう is chained after the te-form, which is implicitly affirmative, it can only produce
                         sentences meaning that something regrettable did happen. Therefore, negative sentences cannot
                         be formed with it.
-                    </GenkiFootnoteDisplay>
+                    </GenkiFootNoteDisplay>
                 </GenkiFootNoteContainer>
             </div>
         )
