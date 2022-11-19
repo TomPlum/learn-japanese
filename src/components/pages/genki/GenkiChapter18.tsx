@@ -135,7 +135,7 @@ const GenkiChapter18 = () => {
                     book={2}
                     jp={{
                         chars: [
-                            { pre: 'ドマさんは', kanji: '窓', kana: 'まど' },
+                            { pre: 'トマさんは', kanji: '窓', kana: 'まど' },
                             { pre: 'を', kanji: '開', kana: 'あ', okurigana: 'け', post: 'ています。' }
                         ],
                         position: 'bottom'
