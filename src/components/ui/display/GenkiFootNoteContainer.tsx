@@ -8,7 +8,7 @@ export interface GenkiFootNoteContainerProps {
 
 const GenkiFootNoteContainer = (props: GenkiFootNoteContainerProps) => {
     return (
-        <div>
+        <div data-testid="genki-foot-note-container">
             <hr className={styles.hr} />
             {React.Children.map(props.children, (note: ReactNode) => (
                 React.cloneElement(note as ReactElement, { className: styles.note })
