@@ -35,7 +35,7 @@ const GenkiGrammarPage = () => {
     const { c15p1, c15p2, c15p3, c15p4 } = GenkiChapter15();
     const { c16p1, c16p2, c16p3, c16p4, c16p5 } = GenkiChapter16();
     const { c17p1, c17p2, c17p3, c17p4, c17p5, c17p6 } = GenkiChapter17();
-    const { c18p1, c18p2, c18p3 } = GenkiChapter18();
+    const { c18p1, c18p2, c18p3, c18p4 } = GenkiChapter18();
 
     const allGrammar: GrammarInfoProps[] = [
         c1p1, c1p2, c1p3,
@@ -49,7 +49,7 @@ const GenkiGrammarPage = () => {
         c15p1, c15p2, c15p3, c15p4,
         c16p1, c16p2, c16p3, c16p4, c16p5,
         c17p1, c17p2, c17p3, c17p4, c17p5, c17p6,
-        c18p1, c18p2, c18p3
+        c18p1, c18p2, c18p3, c18p4
     ];
 
     const [grammar, setGrammar] = useState(allGrammar);

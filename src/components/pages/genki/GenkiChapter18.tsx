@@ -9,6 +9,7 @@ import GenkiFootNoteDisplay from "../../ui/display/GenkiFootNoteDisplay";
 import GenkiFootnoteRef from "../../ui/display/GenkiFootnoteRef";
 import GenkiFootNoteContainer from "../../ui/display/GenkiFootNoteContainer";
 import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
+import {Col, Container, Row} from "react-bootstrap";
 
 const GenkiChapter18 = () => {
 
@@ -166,7 +167,7 @@ const GenkiChapter18 = () => {
         chapter: 18,
         section: 3,
         page: PageNumber.of(141, 142),
-        title: "~てしまう",
+        title: "~てしまう / ちゃう",
         body: (
             <div>
                 <p>The <i>te</i>-form of a verb + しまう has two meanings.</p>
@@ -196,9 +197,7 @@ const GenkiChapter18 = () => {
                     en={{ text: 'To my horror, my professor got angry because I had forgotten my homework.', underline: new FirstMatch("To my horror") }}
                 />
 
-                <p>In summary;</p>
-
-                <GenkiStructureDisplay book={2} width={300} style={{ height: '75px', marginTop: '20px' }}>
+                <GenkiStructureDisplay book={2} width={300} style={{ height: '75px', marginTop: '30px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                         <span>~てしまう</span>
                         <span>=</span>
@@ -207,6 +206,112 @@ const GenkiChapter18 = () => {
                             <div>2. <i>regrettably</i></div>
                         </div>
                     </div>
+                </GenkiStructureDisplay>
+
+                <p>
+                    Both nuanced meanings focus on the discrepancy between our intentions and the state of the world
+                    when left on its own. The particular nuance used in a given sentence may be ambiguous. How the
+                    sentence is interpreted depends on the assumptions the speaker has. For example, the first
+                    sentence above about "finishing a film" could be interpreted as "I regrettably finished the film".
+                </p>
+
+                <hr className={styles.hr} />
+
+                <p>In speech, ~てしまう and ~でしまう are often contracted to ~ちゃう and ~じゃう, respectively.</p>
+
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: '眼鏡をなくしちゃった。'}}
+                    en={{ text: 'I lost my glasses!' }}
+                />
+
+                <GenkiStructureDisplay book={2} width={500}>
+                    <Container>
+                        <Row>
+                            <Col><p className={styles.genkiTwo}><em>Written language:</em></p></Col>
+                            <Col xs={1}>{}</Col>
+                            <Col><p className={styles.genkiTwo}><em>Spoken variant:</em></p></Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <GenkiExampleDisplay
+                                    book={2}
+                                    noIndent
+                                    jp={{ text: "食べてしまいました。", underline: new FirstMatch("てしま") }}
+                                    en={{ text: "I finished eating." }}
+                                />
+                            </Col>
+                            <Col xs={1}>&#8594;</Col>
+                            <Col>
+                                <GenkiExampleDisplay
+                                    book={2}
+                                    noIndent
+                                    jp={{ text: "食べちゃいました。", underline: new FirstMatch("ちゃ") }}
+                                    en={{ text: "I finished eating." }}
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <GenkiExampleDisplay
+                                    book={2}
+                                    noIndent
+                                    jp={{ text: "食べてしまった。", underline: new FirstMatch("てしま") }}
+                                    en={{ text: "I finished eating." }}
+                                />
+                            </Col>
+                            <Col xs={1}>&#8594;</Col>
+                            <Col>
+                                <GenkiExampleDisplay
+                                    book={2}
+                                    noIndent
+                                    jp={{ text: "食べちゃった。", underline: new FirstMatch("ちゃ") }}
+                                    en={{ text: "I finished eating." }}
+                                />
+                            </Col>
+                        </Row>
+
+                        <hr className={styles.hr} style={{ marginTop: '-1px' }} />
+
+                        <Row>
+                            <Col>
+                                <GenkiExampleDisplay
+                                    book={2}
+                                    noIndent
+                                    jp={{ text: "飲んでしまいました。", underline: new FirstMatch("でしま") }}
+                                    en={{ text: "I finished drinking." }}
+                                />
+                            </Col>
+                            <Col xs={1}>&#8594;</Col>
+                            <Col>
+                                <GenkiExampleDisplay
+                                    book={2}
+                                    noIndent
+                                    jp={{ text: "飲んじゃいました。", underline: new FirstMatch("じゃ") }}
+                                    en={{ text: "I finished drinking." }}
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <GenkiExampleDisplay
+                                    book={2}
+                                    noIndent
+                                    jp={{ text: "飲んでしまった。", underline: new FirstMatch("でしま") }}
+                                    en={{ text: "I finished drinking." }}
+                                />
+                            </Col>
+                            <Col xs={1}>&#8594;</Col>
+                            <Col>
+                                <GenkiExampleDisplay
+                                    book={2}
+                                    noIndent
+                                    jp={{ text: "飲んじゃった。", underline: new FirstMatch("じゃ") }}
+                                    en={{ text: "I finished drinking." }}
+                                />
+                            </Col>
+                        </Row>
+                    </Container>
                 </GenkiStructureDisplay>
 
                 <GenkiFootNoteContainer>
@@ -220,7 +325,19 @@ const GenkiChapter18 = () => {
         )
     }
 
-    return { c18p1, c18p2, c18p3 };
+    const c18p4: GrammarInfoProps = {
+        chapter: 18,
+        section: 4,
+        page: PageNumber.of(142, 143),
+        title: "~と",
+        body: (
+            <div>
+
+            </div>
+        )
+    }
+
+    return { c18p1, c18p2, c18p3, c18p4 };
 }
 
 export default GenkiChapter18
