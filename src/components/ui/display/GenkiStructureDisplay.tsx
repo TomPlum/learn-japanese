@@ -6,21 +6,22 @@ export interface GenkiStructureDisplayProps {
     width?: number | "auto";
     className?: string;
     noPadding?: boolean;
+    style?: React.CSSProperties;
 }
 
 const GenkiStructureDisplay = (props: PropsWithChildren<GenkiStructureDisplayProps>) => {
 
-    const { book, width, children, className, noPadding } = props;
+    const { book, width, children, className, style, noPadding } = props;
 
     const wrapperClass = [book == 1 ? styles.genkiOne : styles.genkiTwo, styles.wrapper, className].join(" ");
-    const style: React.CSSProperties = width == "auto" ? { display: "inline-block" } : { maxWidth: `${width}px`};
+    const wrapperStyle: React.CSSProperties = width == "auto" ? { display: "inline-block" } : { maxWidth: `${width}px`};
 
     if (noPadding) {
-        style.padding = 0;
+        wrapperStyle.padding = 0;
     }
 
     return (
-        <div className={wrapperClass} style={style}>
+        <div className={wrapperClass} style={{ ...wrapperStyle, ...style }}>
             {children}
         </div>
     );

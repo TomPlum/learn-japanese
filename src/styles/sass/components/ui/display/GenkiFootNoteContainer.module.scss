@@ -1,3 +1,9 @@
+@import "src/styles/sass/colours";
+
 .note:not(:last-child) {
   margin-bottom: 5px;
+}
+
+.hr {
+  border-color: $dark-1;
 }

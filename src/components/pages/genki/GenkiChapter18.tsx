@@ -8,6 +8,7 @@ import {FirstMatch, MultipleFirstMatch} from "../../ui/Underline";
 import GenkiFootNoteDisplay from "../../ui/display/GenkiFootNoteDisplay";
 import GenkiFootnoteRef from "../../ui/display/GenkiFootnoteRef";
 import GenkiFootNoteContainer from "../../ui/display/GenkiFootNoteContainer";
+import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
 
 const GenkiChapter18 = () => {
 
@@ -175,7 +176,7 @@ const GenkiChapter18 = () => {
                 </p>
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: '映画を見ってしまいました。', underline: new FirstMatch("しまいました") }}
+                    jp={{ text: '映画を見ってしまいました。', underline: new FirstMatch("てしまいました") }}
                     en={{ text: 'I watched the film completely / I finished watching the film.', underline: new MultipleFirstMatch("completely", "finished") }}
                 />
 
@@ -184,6 +185,29 @@ const GenkiChapter18 = () => {
                     is generally something that one regrets or you do something you do not intend.
                     <GenkiFootnoteRef value={1} book={2} />
                 </p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: '車の中に傘を忘れてしまいました。', underline: new FirstMatch("てしまいました") }}
+                    en={{ text: 'I inadvertently left my umbrella in the car', underline: new FirstMatch("inadvertently") }}
+                />
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: '宿題を忘れたので, 先生は怒ってしまいました。', underline: new FirstMatch("てしまいました") }}
+                    en={{ text: 'To my horror, my professor got angry because I had forgotten my homework.', underline: new FirstMatch("To my horror") }}
+                />
+
+                <p>In summary;</p>
+
+                <GenkiStructureDisplay book={2} width={300} style={{ height: '75px', marginTop: '20px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                        <span>~てしまう</span>
+                        <span>=</span>
+                        <div style={{ float: 'right' }}>
+                            <div>1. <i>finish doing</i></div>
+                            <div>2. <i>regrettably</i></div>
+                        </div>
+                    </div>
+                </GenkiStructureDisplay>
 
                 <GenkiFootNoteContainer>
                     <GenkiFootNoteDisplay reference={1} book={2}>
