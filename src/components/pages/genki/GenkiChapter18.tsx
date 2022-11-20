@@ -332,7 +332,11 @@ const GenkiChapter18 = () => {
         title: "~と",
         body: (
             <div>
-
+                <p>
+                    The present tense short-form of a predicate + と means whenever the situation described holds true,
+                    another thing happens. In most of these sentences, the first caluse describes the cause, and the second
+                    the effect.
+                </p>
             </div>
         )
     }
