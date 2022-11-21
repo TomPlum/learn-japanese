@@ -4,7 +4,7 @@ import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.modul
 import GenkiTable from "../../ui/table/GenkiTable";
 import FuriganaDisplay from "../../ui/display/FuriganaDisplay";
 import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
-import {FirstMatch, MultipleFirstMatch} from "../../ui/Underline";
+import {FirstMatch, MultipleFirstMatch, Occurrences} from "../../ui/Underline";
 import GenkiFootNoteDisplay from "../../ui/display/GenkiFootNoteDisplay";
 import GenkiFootnoteRef from "../../ui/display/GenkiFootnoteRef";
 import GenkiFootNoteContainer from "../../ui/display/GenkiFootNoteContainer";
@@ -334,9 +334,14 @@ const GenkiChapter18 = () => {
             <div>
                 <p>
                     The present tense short-form of a predicate + と means whenever the situation described holds true,
-                    another thing happens. In most of these sentences, the first caluse describes the cause, and the second
+                    another thing happens. In most of these sentences, the first clause describes the cause, and the second
                     the effect.
                 </p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "私はその人と話すと元気になる。", underline: new Occurrences("と", [2]) }}
+                    en={{ text: "Whenever I talk with that person, I feel uplifted.", underline: new FirstMatch("Whenever") }}
+                />
             </div>
         )
     }
