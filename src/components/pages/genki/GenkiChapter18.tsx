@@ -4,12 +4,13 @@ import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.modul
 import GenkiTable from "../../ui/table/GenkiTable";
 import FuriganaDisplay from "../../ui/display/FuriganaDisplay";
 import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
-import {FirstMatch, MultipleFirstMatch, Occurrences} from "../../ui/Underline";
+import {FirstMatch, MultipleFirstMatch, Occurrences, Whole} from "../../ui/Underline";
 import GenkiFootNoteDisplay from "../../ui/display/GenkiFootNoteDisplay";
 import GenkiFootnoteRef from "../../ui/display/GenkiFootnoteRef";
 import GenkiFootNoteContainer from "../../ui/display/GenkiFootNoteContainer";
 import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
 import {Col, Container, Row} from "react-bootstrap";
+import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
 
 const GenkiChapter18 = () => {
 
@@ -342,6 +343,19 @@ const GenkiChapter18 = () => {
                     jp={{ text: "私はその人と話すと元気になる。", underline: new Occurrences("と", [2]) }}
                     en={{ text: "Whenever I talk with that person, I feel uplifted.", underline: new FirstMatch("Whenever") }}
                 />
+
+                <GenkiStructureDisplay book={2}>
+                    <div>
+                        <GenkiUnderlineDisplay book={2} underline={new Whole()}>
+                            <span>clause A</span>
+                        </GenkiUnderlineDisplay>
+                        <span>(short, present)</span>
+                    </div>
+                    <span>と</span>
+                    <GenkiUnderlineDisplay book={2} underline={new Whole()}>
+                        <span>clause B。</span>
+                    </GenkiUnderlineDisplay>
+                </GenkiStructureDisplay>
             </div>
         )
     }
