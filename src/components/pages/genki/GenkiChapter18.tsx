@@ -353,8 +353,11 @@ const GenkiChapter18 = () => {
                     </div>
                     <span>と</span>
                     <GenkiUnderlineDisplay book={2} underline={new Whole()}>
-                        <span>clause B。</span>
+                        <span>clause B</span><span>。</span>
                     </GenkiUnderlineDisplay>
+                    <div>
+                        <i>Whenever A happens, B happens, too.</i>
+                    </div>
                 </GenkiStructureDisplay>
             </div>
         )
