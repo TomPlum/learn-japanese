@@ -1,4 +1,4 @@
-import styles from "../../../styles/sass/components/ui/display/GenkiFootNoteDisplay.module.scss";
+import styles from "../../../styles/sass/components/ui/genki/GenkiFootNoteDisplay.module.scss";
 import {PropsWithChildren} from "react";
 
 export interface GenkiFootNoteDisplayProps {

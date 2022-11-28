@@ -3,14 +3,14 @@ import PageNumber from "../../../domain/learn/PageNumber";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import GenkiTable from "../../ui/table/GenkiTable";
 import FuriganaDisplay from "../../ui/display/FuriganaDisplay";
-import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
 import {FirstMatch, MultipleFirstMatch, Occurrences, Whole} from "../../ui/Underline";
-import GenkiFootNoteDisplay from "../../ui/display/GenkiFootNoteDisplay";
-import GenkiFootnoteRef from "../../ui/display/GenkiFootnoteRef";
-import GenkiFootNoteContainer from "../../ui/display/GenkiFootNoteContainer";
-import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
+import GenkiFootNoteDisplay from "../../ui/genki/GenkiFootNoteDisplay";
+import GenkiFootnoteRef from "../../ui/genki/GenkiFootnoteRef";
+import GenkiFootNoteContainer from "../../ui/genki/GenkiFootNoteContainer";
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
 import {Col, Container, Row} from "react-bootstrap";
-import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
+import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay";
 
 const GenkiChapter18 = () => {
 

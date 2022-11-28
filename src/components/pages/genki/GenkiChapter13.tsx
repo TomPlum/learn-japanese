@@ -3,9 +3,9 @@ import PageNumber from "../../../domain/learn/PageNumber";
 import GenkiTable from "../../ui/table/GenkiTable";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import React from "react";
-import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
 import { FirstMatch, Occurrences } from "../../ui/Underline";
-import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
 import { Col, Container, Row } from "react-bootstrap";
 
 const GenkiChapter13 = () => {

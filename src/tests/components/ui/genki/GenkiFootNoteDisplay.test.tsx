@@ -1,5 +1,5 @@
 import {render} from "@testing-library/react";
-import GenkiFootNoteDisplay from "../../../../components/ui/display/GenkiFootNoteDisplay";
+import GenkiFootNoteDisplay from "../../../../components/ui/genki/GenkiFootNoteDisplay";
 
 test("Should render the children", () => {
     const component = render(

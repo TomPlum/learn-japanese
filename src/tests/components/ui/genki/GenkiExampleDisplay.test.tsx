@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import GenkiExampleDisplay from "../../../../components/ui/display/GenkiExampleDisplay";
+import GenkiExampleDisplay from "../../../../components/ui/genki/GenkiExampleDisplay";
 import { FirstMatch } from "../../../../components/ui/Underline";
 
 test("Should render the Japanese text", () => {

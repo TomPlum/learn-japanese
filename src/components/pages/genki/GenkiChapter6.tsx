@@ -3,13 +3,13 @@ import PageNumber from "../../../domain/learn/PageNumber";
 import React from "react";
 import GenkiTable from "../../ui/table/GenkiTable";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
-import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
+import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay";
+import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay";
 import { FirstMatch } from "../../ui/Underline";
 import QuoteDisplay from "../../ui/display/QuoteDisplay";
-import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
-import GenkiExampleTable from "../../ui/display/GenkiExampleTable";
-import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
+import GenkiExampleTable from "../../ui/genki/GenkiExampleTable";
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
 
 const GenkiChapter6 = () => {
     const c6p1: GrammarInfoProps = {

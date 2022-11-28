@@ -1,6 +1,6 @@
 import React, {ReactElement, ReactNode} from "react";
 
-import styles from "../../../styles/sass/components/ui/display/GenkiFootNoteContainer.module.scss";
+import styles from "../../../styles/sass/components/ui/genki/GenkiFootNoteContainer.module.scss";
 
 export interface GenkiFootNoteContainerProps {
     children: ReactNode;

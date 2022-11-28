@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import GenkiExampleTable from "../../../../components/ui/display/GenkiExampleTable";
+import GenkiExampleTable from "../../../../components/ui/genki/GenkiExampleTable";
 
 test('Should render the given example Japanese', () => {
     const component = render(<GenkiExampleTable

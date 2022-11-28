@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import ComponentTree from "../../../utility/ComponentTree";
 import Underline, { UnderlineStrategy } from "../Underline";
-import styles from "../../../styles/sass/components/ui/display/GenkiUnderlineDisplay.module.scss";
+import styles from "../../../styles/sass/components/ui/genki/GenkiUnderlineDisplay.module.scss";
 
 export interface GenkiUnderlineDisplayProps {
     underline?: UnderlineStrategy;

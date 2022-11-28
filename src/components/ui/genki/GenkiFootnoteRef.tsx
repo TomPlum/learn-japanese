@@ -1,4 +1,4 @@
-import styles from "../../../styles/sass/components/ui/display/GenkiFootnoteRef.module.scss";
+import styles from "../../../styles/sass/components/ui/genki/GenkiFootnoteRef.module.scss";
 
 export interface GenkiFootnoteRefProps {
     value: number;

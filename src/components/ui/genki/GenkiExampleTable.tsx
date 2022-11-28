@@ -1,6 +1,6 @@
 import { Table } from "react-bootstrap";
 import RomajiGenerator from "../../../utility/RomajiGenerator";
-import styles from "../../../styles/sass/components/ui/display/GenkiExampleTable.module.scss";
+import styles from "../../../styles/sass/components/ui/genki/GenkiExampleTable.module.scss";
 import GenkiUnderlineDisplay from "./GenkiUnderlineDisplay";
 import { FirstMatch } from "../Underline";
 

@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import GenkiHighlightDisplay from "../../../../components/ui/display/GenkiHighlightDisplay";
+import GenkiHighlightDisplay from "../../../../components/ui/genki/GenkiHighlightDisplay";
 
 test('Should render the given text', () => {
     const component = render(<GenkiHighlightDisplay text="Test" description="This is a test display" chapter={1} />);

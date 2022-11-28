@@ -1,4 +1,4 @@
-import styles from "../../../styles/sass/components/ui/display/GenkiRelativePsychologyCircle.module.scss";
+import styles from "../../../styles/sass/components/ui/genki/GenkiRelativePsychologyCircle.module.scss";
 import { Col, Container, Row } from "react-bootstrap";
 import GenkiStructureDisplay from "./GenkiStructureDisplay";
 

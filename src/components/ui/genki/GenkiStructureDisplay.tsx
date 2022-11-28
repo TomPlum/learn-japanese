@@ -1,4 +1,4 @@
-import styles from "../../../styles/sass/components/ui/display/GenkiStructureDisplay.module.scss";
+import styles from "../../../styles/sass/components/ui/genki/GenkiStructureDisplay.module.scss";
 import React, { PropsWithChildren } from "react";
 
 export interface GenkiStructureDisplayProps {

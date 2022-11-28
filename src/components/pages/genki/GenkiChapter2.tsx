@@ -1,6 +1,6 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo";
 import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiExampleTable from "../../ui/display/GenkiExampleTable";
+import GenkiExampleTable from "../../ui/genki/GenkiExampleTable";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import React from "react";
 

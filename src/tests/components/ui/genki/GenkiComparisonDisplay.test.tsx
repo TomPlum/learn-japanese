@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import GenkiComparisonDisplay from "../../../../components/ui/display/GenkiComparisonDisplay";
+import GenkiComparisonDisplay from "../../../../components/ui/genki/GenkiComparisonDisplay";
 
 test('Should render the pre text if passed', () => {
     const component = render(<GenkiComparisonDisplay

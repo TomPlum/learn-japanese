@@ -1,4 +1,4 @@
-import styles from "../../../styles/sass/components/ui/display/GenkiComparisonDisplay.module.scss";
+import styles from "../../../styles/sass/components/ui/genki/GenkiComparisonDisplay.module.scss";
 import GenkiUnderlineDisplay from "./GenkiUnderlineDisplay";
 import { FirstMatch } from "../Underline";
 import React from "react";

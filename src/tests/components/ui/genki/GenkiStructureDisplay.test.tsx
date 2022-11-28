@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import GenkiStructureDisplay from "../../../../components/ui/display/GenkiStructureDisplay";
+import GenkiStructureDisplay from "../../../../components/ui/genki/GenkiStructureDisplay";
 
 test("Should render the given children", () => {
     const component = render(

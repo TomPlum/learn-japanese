@@ -1,6 +1,6 @@
 import {render} from "@testing-library/react";
-import GenkiFootNoteContainer from "../../../../components/ui/display/GenkiFootNoteContainer";
-import GenkiFootNoteDisplay from "../../../../components/ui/display/GenkiFootNoteDisplay";
+import GenkiFootNoteContainer from "../../../../components/ui/genki/GenkiFootNoteContainer";
+import GenkiFootNoteDisplay from "../../../../components/ui/genki/GenkiFootNoteDisplay";
 
 test("It should render all the given footnote children", () => {
     const component = render(

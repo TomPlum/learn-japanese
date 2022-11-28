@@ -1,7 +1,7 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo";
 import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
-import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
 import GenkiTable from "../../ui/table/GenkiTable";
 import { Col, Container, Row } from "react-bootstrap";

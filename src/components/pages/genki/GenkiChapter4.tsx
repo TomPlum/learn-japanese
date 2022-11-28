@@ -1,9 +1,9 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo";
 import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiExampleTable from "../../ui/display/GenkiExampleTable";
+import GenkiExampleTable from "../../ui/genki/GenkiExampleTable";
 import { Col, Row } from "react-bootstrap";
 import GenkiTable from "../../ui/table/GenkiTable";
-import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
+import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay";
 import React from "react";
 
 const GenkiChapter4 = () => {

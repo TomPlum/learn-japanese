@@ -1,7 +1,7 @@
 import GenkiUnderlineDisplay from "./GenkiUnderlineDisplay";
-import styles from "../../../styles/sass/components/ui/display/GenkiExampleDisplay.module.scss";
+import styles from "../../../styles/sass/components/ui/genki/GenkiExampleDisplay.module.scss";
 import {UnderlineStrategy} from "../Underline";
-import FuriganaDisplay, {FuriganaDisplayProps} from "./FuriganaDisplay";
+import FuriganaDisplay, {FuriganaDisplayProps} from "../display/FuriganaDisplay";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 

@@ -1,13 +1,13 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo";
 import PageNumber from "../../../domain/learn/PageNumber";
 import { Col, Container, Row } from "react-bootstrap";
-import GenkiRelativePsychologyCircle from "../../ui/display/GenkiRelativePsychologyCircle";
-import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
+import GenkiRelativePsychologyCircle from "../../ui/genki/GenkiRelativePsychologyCircle";
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
 import { FirstMatch, MultipleFirstMatch } from "../../ui/Underline";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
-import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
-import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
+import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay";
+import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay";
 
 const GenkiChapter16 = () => {
     const c16p1: GrammarInfoProps = {

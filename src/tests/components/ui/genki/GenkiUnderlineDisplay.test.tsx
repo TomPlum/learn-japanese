@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import GenkiUnderlineDisplay from "../../../../components/ui/display/GenkiUnderlineDisplay";
+import GenkiUnderlineDisplay from "../../../../components/ui/genki/GenkiUnderlineDisplay";
 import { getByTextWithElements } from "../../../Queries";
 import { FirstMatch } from "../../../../components/ui/Underline";
 

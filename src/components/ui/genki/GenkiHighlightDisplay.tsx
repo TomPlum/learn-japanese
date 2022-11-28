@@ -1,4 +1,4 @@
-import styles from "../../../styles/sass/components/ui/display/GenkiHighlightDisplay.module.scss";
+import styles from "../../../styles/sass/components/ui/genki/GenkiHighlightDisplay.module.scss";
 
 export interface GenkiHighlightDisplayProps {
     text: string;

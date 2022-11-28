@@ -1,16 +1,16 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo";
 import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiExampleTable from "../../ui/display/GenkiExampleTable";
+import GenkiExampleTable from "../../ui/genki/GenkiExampleTable";
 import React from "react";
 import GenkiTable from "../../ui/table/GenkiTable";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
+import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay";
 import { FirstMatch, MultipleFirstMatch } from "../../ui/Underline";
 import QuoteDisplay from "../../ui/display/QuoteDisplay";
-import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
 import { Col, Container, Row } from "react-bootstrap";
-import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
-import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
+import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay";
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
 
 const GenkiChapter5 = () => {
     const c5p1: GrammarInfoProps = {

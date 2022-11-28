@@ -1,8 +1,8 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo";
 import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
 import { FirstMatch } from "../../ui/Underline";
 
 const GenkiChapter15 = () => {
