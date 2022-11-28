@@ -402,7 +402,27 @@ const GenkiChapter18 = () => {
         )
     }
 
-    return { c18p1, c18p2, c18p3, c18p4 };
+    const c18p5: GrammarInfoProps = {
+        chapter: 18,
+        section: 5,
+        page: PageNumber.of(143, 144),
+        title: "~ながら",
+        body: (
+            <div>
+                <p>
+                    You can connect two verbs with ながら to say that two actions are performed at the same time.
+                    You add ながら after the stem of a verb, and then add another verb in any form.
+                </p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "私はいつも音楽を聞きながら日本語を勉強します。", underline: new FirstMatch("ながら") }}
+                    en={{ text: "I always study Japanese while listening to music.", underline: new FirstMatch("while") }}
+                />
+            </div>
+        )
+    }
+
+    return { c18p1, c18p2, c18p3, c18p4, c18p5 };
 }
 
 export default GenkiChapter18
