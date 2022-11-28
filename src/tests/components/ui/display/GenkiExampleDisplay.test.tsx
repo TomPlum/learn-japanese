@@ -121,3 +121,27 @@ test("Should render with marginLeft 0px if the noIndent prop is passed as true",
     />);
     expect(container.children[0]).toHaveStyle({ 'marginLeft': 0 });
 });
+
+test("Should render the incorrect x-symbol when the incorrect property is passed as true", () => {
+    const component = render(<GenkiExampleDisplay
+        book={2}
+        incorrect
+        jp={{ text: "このりんごはおいしそうです。" }}
+        en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
+        compare={{ text: "comparison text.", underline: new FirstMatch("text") }}
+    />);
+
+    expect(component.getByTestId('incorrect-example')).toBeInTheDocument();
+});
+
+test("Should NOT render the incorrect x-symbol when the incorrect property is passed as false", () => {
+    const component = render(<GenkiExampleDisplay
+        book={2}
+        incorrect={false}
+        jp={{ text: "このりんごはおいしそうです。" }}
+        en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
+        compare={{ text: "comparison text.", underline: new FirstMatch("text") }}
+    />);
+
+    expect(component.queryByTestId('incorrect-example')).not.toBeInTheDocument();
+});

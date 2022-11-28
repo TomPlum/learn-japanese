@@ -40,7 +40,14 @@ const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
     return (
         <div className={styles.wrapper} style={style}>
             <div className={styles.jp}>
-                {incorrect && <FontAwesomeIcon icon={faTimes} fixedWidth className={styles.incorrect} />}
+                {incorrect && (
+                    <FontAwesomeIcon
+                        fixedWidth
+                        icon={faTimes}
+                        className={styles.incorrect}
+                        data-testid="incorrect-example"
+                    />
+                )}
 
                 {isPlainText(jp) && (
                     <GenkiUnderlineDisplay underline={jp.underline} book={book}>
