@@ -344,21 +344,60 @@ const GenkiChapter18 = () => {
                     en={{ text: "Whenever I talk with that person, I feel uplifted.", underline: new FirstMatch("Whenever") }}
                 />
 
-                <GenkiStructureDisplay book={2}>
-                    <div>
+                <GenkiStructureDisplay book={2} style={{ display: 'inline-flex', justifyContent: 'flex-start' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
                         <GenkiUnderlineDisplay book={2} underline={new Whole()}>
                             <span>clause A</span>
                         </GenkiUnderlineDisplay>
                         <span>(short, present)</span>
                     </div>
-                    <span>と</span>
-                    <GenkiUnderlineDisplay book={2} underline={new Whole()}>
-                        <span>clause B</span><span>。</span>
+                    <span style={{ marginRight: '10px' }}>と</span>
+                    <GenkiUnderlineDisplay book={2} underline={new FirstMatch("clause B")}>
+                        <span>clause B。</span>
                     </GenkiUnderlineDisplay>
-                    <div>
+                    <div style={{ marginLeft: '10px' }}>
                         <i>Whenever A happens, B happens, too.</i>
                     </div>
                 </GenkiStructureDisplay>
+
+                <p>Sometimes, a と sentence describes a cause and effect relationship between specific events.</p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "トマさんが国に帰ると寂しくなります。", underline: new FirstMatch("と") }}
+                    en={{ text: "If Tom goes back home, I will be lonely.", underline: new FirstMatch("If") }}
+                />
+
+                <p>
+                    While the clause that comes before と is always in the present tense, the second clause can be in
+                    the present or in the past tense.
+                </p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "私は子共の時,冬になるとかぜをひきました。", underline: new MultipleFirstMatch("と", "ました") }}
+                    en={{ text: "When I was young, whenever it was winter, I caught a cold.", underline: new MultipleFirstMatch("If, caught") }}
+                />
+
+                <p>
+                    The event described by the second clause must follow the event described in the first half of the
+                    sentence. Therefore, it would be wrong to say:
+                </p>
+                <GenkiExampleDisplay
+                    book={2}
+                    incorrect
+                    jp={{ text: "私はその人と話すと映画を見に行きます。" }}
+                    en={{ text: "Whenever I talk with that person, we go and see a movie." }}
+                />
+
+                <p>
+                    If you want an adjective idea in the second clause, it is usually expressed as a change. Therefore,
+                    the second clause usually has an い-adjective base + くなる, and a な-adjective base + になる. See
+                    Lesson 10 for more information on this.
+                </p>
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "夜になると町が静かになります。", underline: new FirstMatch("と") }}
+                    en={{ text: "Whenever its night-time, the town becomes quiet.", underline: new FirstMatch("Whenever") }}
+                />
             </div>
         )
     }
