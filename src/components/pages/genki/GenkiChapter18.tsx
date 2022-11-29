@@ -137,7 +137,7 @@ const GenkiChapter18 = () => {
                     book={2}
                     jp={{
                         chars: [
-                            { pre: 'トマさんは', kanji: '窓', kana: 'まど' },
+                            { pre: 'トムさんは', kanji: '窓', kana: 'まど' },
                             { pre: 'を', kanji: '開', kana: 'あ', okurigana: 'け', post: 'ています。' }
                         ],
                         position: 'bottom'
@@ -363,7 +363,7 @@ const GenkiChapter18 = () => {
                 <p>Sometimes, a と sentence describes a cause and effect relationship between specific events.</p>
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: "トマさんが国に帰ると寂しくなります。", underline: new FirstMatch("と") }}
+                    jp={{ text: "トムさんが国に帰ると寂しくなります。", underline: new FirstMatch("と") }}
                     en={{ text: "If Tom goes back home, I will be lonely.", underline: new FirstMatch("If") }}
                 />
 
@@ -417,6 +417,11 @@ const GenkiChapter18 = () => {
                     book={2}
                     jp={{ text: "私はいつも音楽を聞きながら日本語を勉強します。", underline: new FirstMatch("ながら") }}
                     en={{ text: "I always study Japanese while listening to music.", underline: new FirstMatch("while") }}
+                />
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "トムさんはポッドキャストを歌いながら運転しています。", underline: new FirstMatch("ながら") }}
+                    en={{ text: "Tom is driving while listening to a podcast.", underline: new FirstMatch("while") }}
                 />
             </div>
         )
