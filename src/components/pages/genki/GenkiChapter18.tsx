@@ -423,6 +423,37 @@ const GenkiChapter18 = () => {
                     jp={{ text: "トムさんはポッドキャストを歌いながら運転しています。", underline: new FirstMatch("ながら") }}
                     en={{ text: "Tom is driving while listening to a podcast.", underline: new FirstMatch("while") }}
                 />
+                <GenkiExampleDisplay
+                    book={2}
+                    jp={{ text: "アルバイトをしながら大学に行くうのは大変です。", underline: new FirstMatch("ながら") }}
+                    en={{ text: "It is not easy to go to university while working a part-time job.", underline: new FirstMatch("while") }}
+                />
+
+                <p>The form's structure can be summarised as;</p>
+
+                <GenkiStructureDisplay book={2} style={{ display: 'flex', justifyContent: 'space-evenly' }} width={350}>
+                    <div>
+                        <span>V<sub>1</sub>(stem) + ながら, V<sub>2</sub></span>
+                    </div>
+                    <div>
+                        <i>while{" "}</i>
+                        <span>V</span><sub>1</sub><i>-ing</i>
+                        <span>,{" "}</span>
+                        <span>V</span><sub>2</sub>
+                    </div>
+                </GenkiStructureDisplay>
+
+                <p>
+                    Note that the two verbs in context must be actions performed by the same person. It would therefore
+                    be incorrect to say something like;
+                </p>
+                <GenkiExampleDisplay
+                    book={2}
+                    incorrect
+                    compare={{ text: 'トムさんが買い物する時, ワィルさんは部屋を掃除します。', underline: new FirstMatch("時") }}
+                    jp={{ text: "トムさんが買い物しながら,　ワィルさんは部屋を掃除します。", underline: new FirstMatch("ながら") }}
+                    en={{ text: "While Tom does the shopping, Will cleans the room.", underline: new FirstMatch("while") }}
+                />
             </div>
         )
     }

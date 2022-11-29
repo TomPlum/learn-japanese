@@ -27,6 +27,7 @@ const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
     const { jp, en, book, compare, noIndent, incorrect } = props;
 
     const style = noIndent ? { marginLeft: 0 } : {};
+    const underlineClass = incorrect ? styles.incorrectUnderline : "";
 
     const isPlainText = (value: Value): value is PlainTextValueWithUnderline => {
         return (value as PlainTextValueWithUnderline).text !== undefined;
@@ -36,6 +37,7 @@ const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
         const casted = value as ValueWithFuriganaSupport;
         return casted.chars !== undefined && casted.position !== undefined;
     }
+
 
     return (
         <div className={styles.wrapper} style={style}>
@@ -50,7 +52,7 @@ const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
                 )}
 
                 {isPlainText(jp) && (
-                    <GenkiUnderlineDisplay underline={jp.underline} book={book}>
+                    <GenkiUnderlineDisplay underline={jp.underline} book={book} className={underlineClass}>
                         <span>{jp.text}</span>
                     </GenkiUnderlineDisplay>
                 )}
@@ -62,14 +64,14 @@ const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
                 )}
             </div>
 
-            <div className={styles.en} style={{ marginLeft: incorrect ? '20px' : 0 }}>
-                <GenkiUnderlineDisplay underline={en.underline} book={book}>
+            <div className={styles.en} style={{ marginLeft: incorrect ? '25px' : 0 }}>
+                <GenkiUnderlineDisplay underline={en.underline} book={book} className={underlineClass}>
                     <span>{en.text}</span>
                 </GenkiUnderlineDisplay>
             </div>
 
             {compare && (
-                <div className={styles.compare}>
+                <div className={styles.compare} style={{ marginLeft: incorrect ? '25px' : 0 }}>
                     <GenkiUnderlineDisplay underline={compare.underline} book={book}>
                         <span>{`cf. ${compare.text}`}</span>
                     </GenkiUnderlineDisplay>
