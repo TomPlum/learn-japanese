@@ -40,8 +40,8 @@ const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
 
 
     return (
-        <div className={styles.wrapper} style={style}>
-            <div className={styles.jp}>
+        <div className={styles.wrapper} style={style} data-testid="genki-example-display">
+            <div className={styles.jp} data-testid="genki-example-jp">
                 {incorrect && (
                     <FontAwesomeIcon
                         fixedWidth
@@ -64,14 +64,14 @@ const GenkiExampleDisplay = (props: GenkiExampleDisplayProps) => {
                 )}
             </div>
 
-            <div className={styles.en} style={{ marginLeft: incorrect ? '25px' : 0 }}>
+            <div className={styles.en} style={{ marginLeft: incorrect ? '25px' : 0 }} data-testid="genki-example-en">
                 <GenkiUnderlineDisplay underline={en.underline} book={book} className={underlineClass}>
                     <span>{en.text}</span>
                 </GenkiUnderlineDisplay>
             </div>
 
             {compare && (
-                <div className={styles.compare} style={{ marginLeft: incorrect ? '25px' : 0 }}>
+                <div className={styles.compare} style={{ marginLeft: incorrect ? '25px' : 0 }} data-testid="genki-example-compare">
                     <GenkiUnderlineDisplay underline={compare.underline} book={book}>
                         <span>{`cf. ${compare.text}`}</span>
                     </GenkiUnderlineDisplay>

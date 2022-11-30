@@ -112,23 +112,22 @@ test("Should render furigana display for the japanese text if passed the correct
 });
 
 test("Should render with marginLeft 0px if the noIndent prop is passed as true", () => {
-    const { container } = render(<GenkiExampleDisplay
+    const component = render(<GenkiExampleDisplay
         book={2}
         noIndent
         jp={{ text: "このりんごはおいしそうです。" }}
         en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
-        compare={{ text: "comparison text.", underline: new FirstMatch("text") }}
     />);
-    expect(container.children[0]).toHaveStyle({ 'marginLeft': 0 });
+
+    expect(component.getByTestId('genki-example-display')).toHaveStyle({ 'marginLeft': 0 });
 });
 
 test("Should render the incorrect x-symbol when the incorrect property is passed as true", () => {
     const component = render(<GenkiExampleDisplay
         book={2}
-        incorrect
+        incorrect={true}
         jp={{ text: "このりんごはおいしそうです。" }}
         en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
-        compare={{ text: "comparison text.", underline: new FirstMatch("text") }}
     />);
 
     expect(component.getByTestId('incorrect-example')).toBeInTheDocument();
@@ -140,8 +139,30 @@ test("Should NOT render the incorrect x-symbol when the incorrect property is pa
         incorrect={false}
         jp={{ text: "このりんごはおいしそうです。" }}
         en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
-        compare={{ text: "comparison text.", underline: new FirstMatch("text") }}
     />);
 
     expect(component.queryByTestId('incorrect-example')).not.toBeInTheDocument();
+});
+
+test("Should render the english text with marginLeft 20px if the incorrect prop is passed as true", () => {
+    const component = render(<GenkiExampleDisplay
+        book={2}
+        incorrect={true}
+        jp={{ text: "このりんごはおいしそうです。" }}
+        en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
+    />);
+
+    expect(component.getByTestId('genki-example-en')).toHaveStyle({ 'marginLeft': '20px' });
+});
+
+test("Should render the comparison text with marginLeft 20px if the incorrect prop is passed as true", () => {
+    const component = render(<GenkiExampleDisplay
+        book={2}
+        incorrect={true}
+        jp={{ text: "このりんごはおいしそうです。" }}
+        en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
+        compare={{ text: "comparison text.", underline: new FirstMatch("text") }}
+    />);
+
+    expect(component.getByTestId('genki-example-compare')).toHaveStyle({ marginLeft: '20px' });
 });
