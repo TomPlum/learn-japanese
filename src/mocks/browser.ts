@@ -6,6 +6,7 @@ import { handlers as presets } from './handlers/presets.handlers'
 import { handlers as learn } from './handlers/learn.handlers'
 import { handlers as highScores } from './handlers/high-scores.handlers'
 import { handlers as kana } from './handlers/kana.handlers'
+import { handlers as vocabulary } from './handlers/vocabulary.handlers'
 
 export const worker = setupWorker(
     ...user,
@@ -13,5 +14,6 @@ export const worker = setupWorker(
     ...presets,
     ...learn,
     ...highScores,
-    ...kana
+    ...kana,
+    ...vocabulary
 )
