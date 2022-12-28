@@ -50,7 +50,7 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
                 if (React.isValidElement(child)) {
                     switch ((child as React.ReactElement).type) {
                         case DashboardCardHeader: {
-                            // @ts-ignore
+                            // @ts-ignore TODO: Fix these ignores in here + header component
                             return React.cloneElement(child, { error: error, onReload: onReload })
                         }
                         case DashboardCardBody: {

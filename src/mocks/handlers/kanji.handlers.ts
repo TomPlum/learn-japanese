@@ -1,43 +1,7 @@
 import { rest } from 'msw'
-
-const api = `${process.env.REACT_APP_API_HOST_URI}`
+import {api} from "../util";
 
 export const handlers = [
-    rest.post('/user/login', (req, res, ctx) => {
-        return res(
-            ctx.status(200),
-            ctx.json({
-                "username": "Tester",
-                "email": "tester.testing@hotmail.co.uk",
-                "nickname": "Demo",
-                "roles": [
-                    "admin"
-                ],
-                "locked": false,
-                "expired": false,
-                "credentialsExpired": false,
-                "enabled": true,
-                "creationDate": "2022-10-05",
-                "token": "{STUBBED_JWT}",
-                "refreshToken": "{STUBBED_REFRESH_TOKEN}",
-                "preferences": {
-                    "kanjiFont": "Gothic",
-                    "theme": "Dark",
-                    "language": "English",
-                    "highScoresBehaviour": "Never Submit",
-                    "defaultMode": "Play",
-                    "flashCardsQuantity": 5,
-                    "confidenceMenuStyle": "Numbers",
-                    "profileVisibility": "Public",
-                    "streakCardView": "Start Date",
-                    "romajiVisibility": "Ask Each Time",
-                    "activityFeedQuantity": 3,
-                    "streakNotifications": false,
-                    "mistakesReminders": false
-                }
-            })
-        )
-    }),
     rest.get(`${api}/kanji/random`, (req, res, ctx) => {
         return res(
             ctx.status(200),
