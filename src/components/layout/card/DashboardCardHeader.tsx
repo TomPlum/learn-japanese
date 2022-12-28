@@ -28,6 +28,7 @@ const DashboardCardHeader = (props: PropsWithChildren<DashboardCardHeaderProps>)
                             return React.cloneElement(child);
                         }
                         case DashboardCardSettingsMenu: {
+                            // @ts-ignore
                             return !error ? React.cloneElement(child, { className: styles.settings }) : null;
                         }
                         default: {

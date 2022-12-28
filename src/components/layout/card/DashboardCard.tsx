@@ -50,16 +50,19 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
                 if (React.isValidElement(child)) {
                     switch ((child as React.ReactElement).type) {
                         case DashboardCardHeader: {
+                            // @ts-ignore
                             return React.cloneElement(child, { error: error, onReload: onReload })
                         }
                         case DashboardCardBody: {
                             if (!error) {
+                                // @ts-ignore
                                 return React.cloneElement(child, { size: size, updating: updating });
                             } else {
                                 return null;
                             }
                         }
                         case DashboardCardFooter: {
+                            // @ts-ignore
                             return React.cloneElement(child, { className: [styles.footer, child.props.className].join(" ") });
                         }
                         default: {
