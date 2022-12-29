@@ -6,7 +6,10 @@ import { createBrowserHistory } from "history";
 import { store } from "../store";
 
 beforeEach(() => {
-    Environment.variable = jest.fn().mockReturnValue("landing page description");
+    const mockEnvironment = jest.fn();
+    mockEnvironment.mockReturnValueOnce("/example-base-path/");
+    mockEnvironment.mockReturnValueOnce("landing page description");
+    Environment.variable = mockEnvironment;
 });
 
 test('Should render the landing page layout', async () => {

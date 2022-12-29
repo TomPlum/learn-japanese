@@ -155,7 +155,7 @@ test("Should render the english text with marginLeft 20px if the incorrect prop 
     expect(component.getByTestId('genki-example-en')).toHaveStyle({ 'marginLeft': '20px' });
 });
 
-test("Should render the comparison text with marginLeft 20px if the incorrect prop is passed as true", () => {
+test("Should render the comparison text with marginLeft 25px if the incorrect prop is passed as true", () => {
     const component = render(<GenkiExampleDisplay
         book={2}
         incorrect={true}
@@ -164,5 +164,5 @@ test("Should render the comparison text with marginLeft 20px if the incorrect pr
         compare={{ text: "comparison text.", underline: new FirstMatch("text") }}
     />);
 
-    expect(component.getByTestId('genki-example-compare')).toHaveStyle({ marginLeft: '20px' });
+    expect(component.getByTestId('genki-example-compare')).toHaveStyle({ marginLeft: '25px' });
 });

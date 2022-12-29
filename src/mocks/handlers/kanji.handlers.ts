@@ -1,5 +1,8 @@
 import { rest } from 'msw'
 import {api} from "../util";
+import {KanjiData} from "../../data/DataTypes";
+
+const kanji: KanjiData[] = []
 
 export const handlers = [
     rest.get(`${api}/kanji/random`, (req, res, ctx) => {
@@ -96,6 +99,18 @@ export const handlers = [
                     "verb"
                 ]
             })
+        )
+    }),
+    rest.get(`${api}/kanji/random`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({})
+        )
+    }),
+    rest.get(`${api}/kanji/all`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(kanji)
         )
     })
 ]

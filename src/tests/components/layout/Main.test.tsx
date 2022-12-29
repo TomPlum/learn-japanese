@@ -18,7 +18,10 @@ const setup = () => {
 }
 
 beforeEach(() => {
-    Environment.variable = jest.fn().mockReturnValue("landing page description");
+    const mockEnvironment = jest.fn();
+    mockEnvironment.mockReturnValueOnce("/example-base-path/");
+    mockEnvironment.mockReturnValueOnce("landing page description");
+    Environment.variable = mockEnvironment;
 });
 
 test('Navigating to the root URI should route to the Landing page', async () => {
