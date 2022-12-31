@@ -25,7 +25,11 @@ jest.mock("../../../service/UserService", () => {
 let history = createMemoryHistory();
 
 const setup = () => {
-    return renderWithTranslation(<Router history={history}><HighScoresPage /></Router>);
+    return renderWithTranslation(
+        <Router history={history}>
+            <HighScoresPage />
+        </Router>
+    );
 }
 
 beforeEach(() => {
