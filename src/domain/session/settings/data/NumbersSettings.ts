@@ -50,40 +50,40 @@ export default class NumbersSettings extends DataSettings {
 }
 
 export class NumbersSettingsBuilder {
-    private _numbers: boolean = false;
-    private _counters: boolean = false;
-    private _age: boolean = false;
-    private _exceptions: boolean = false;
-    private _units: boolean = false;
-    private _sequence: boolean = false;
+    private _numbers = false;
+    private _counters = false;
+    private _age = false;
+    private _exceptions = false;
+    private _units = false;
+    private _sequence = false;
     private _quantity: number | undefined;
 
-    withNumbers(include: boolean = true): NumbersSettingsBuilder {
+    withNumbers(include = true): NumbersSettingsBuilder {
         this._numbers = include;
         return this;
     }
 
-    withCounters(include: boolean = true): NumbersSettingsBuilder {
+    withCounters(include = true): NumbersSettingsBuilder {
         this._counters = include;
         return this;
     }
 
-    withAge(include: boolean = true): NumbersSettingsBuilder {
+    withAge(include = true): NumbersSettingsBuilder {
         this._age = include;
         return this;
     }
 
-    withExceptions(include: boolean = true): NumbersSettingsBuilder {
+    withExceptions(include = true): NumbersSettingsBuilder {
         this._exceptions = include;
         return this;
     }
 
-    withUnits(include: boolean = true): NumbersSettingsBuilder {
+    withUnits(include = true): NumbersSettingsBuilder {
         this._units = include;
         return this;
     }
 
-    withSequence(include: boolean = true): NumbersSettingsBuilder {
+    withSequence(include = true): NumbersSettingsBuilder {
         this._sequence = include;
         return this;
     }

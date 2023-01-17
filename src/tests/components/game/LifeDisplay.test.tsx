@@ -1,7 +1,7 @@
 import LifeDisplay, { LifeDisplayProps } from "../../../components/game/LifeDisplay";
 import { render, screen } from "@testing-library/react";
 
-let props: LifeDisplayProps = {
+const props: LifeDisplayProps = {
     enabled: true,
     hearts: 5
 };

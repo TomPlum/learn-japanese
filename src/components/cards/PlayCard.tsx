@@ -42,8 +42,8 @@ const PlayCard = () => {
         setConfirming(true);
     }
 
-    const playTitle = !!lastPlaySession ? presetName(lastPlaySession.name!) ?? t("default-title") : t("play-title");
-    const learnTitle = !!lastLearnSession ? presetName(lastLearnSession.name!) ?? t("default-title") : t("learn-title");
+    const playTitle = lastPlaySession ? presetName(lastPlaySession.name!) ?? t("default-title") : t("play-title");
+    const learnTitle = lastLearnSession ? presetName(lastLearnSession.name!) ?? t("default-title") : t("learn-title");
 
     return (
         <DashboardCard {...props}>

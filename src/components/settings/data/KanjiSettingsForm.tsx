@@ -21,7 +21,7 @@ const KanjiSettingsForm = (props: DataSettingsMenuProps<KanjiSettings>) => {
     }
 
     const confirm = () => {
-        if (!!settings) {
+        if (settings) {
             onConfirm(settings);
         }
     }

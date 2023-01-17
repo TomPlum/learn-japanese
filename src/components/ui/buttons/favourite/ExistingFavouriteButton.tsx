@@ -24,7 +24,7 @@ const ExistingFavouriteButton = (props: ExistingFavouriteButtonProps) => {
     const { t, ready } = useTranslation();
     const actions = useTranslation("translation", { keyPrefix: "action" }).t;
 
-    let classes = [styles.button, className, selected ? styles.delete : ""];
+    const classes = [styles.button, className, selected ? styles.delete : ""];
     const testId = `existing-favourite-button-${id}`;
 
     return (

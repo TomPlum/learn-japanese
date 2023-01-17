@@ -67,7 +67,7 @@ export class Kanji extends Learnable {
         const on = this.getOnyomiReadings();
         const kun = this.getKunyomiReadings();
 
-        let response = [];
+        const response = [];
 
         if (on.length > 0) {
             response.push(on[0].kana);

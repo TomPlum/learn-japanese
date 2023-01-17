@@ -7,7 +7,7 @@ import CalendarSettings from "../domain/session/settings/data/CalendarSettings";
 
 export default class CalendarRepository implements Repository<Learnable> {
     public read(config: CalendarSettings): Promise<Learnable[]> {
-        let data = [];
+        const data = [];
 
         if (config.months) {
             data.push(...this.convert(months(), "Month of the Year"));

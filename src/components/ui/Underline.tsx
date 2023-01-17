@@ -115,7 +115,7 @@ export class Occurrences implements UnderlineStrategy {
 
     private getOccurrenceIndices(text: string): number[] {
         let index = text.indexOf(this._underline);
-        let indices = [];
+        const indices = [];
         while (index >= 0) {
             indices.push(index);
             index = text.indexOf(this._underline, index + 1);
@@ -145,7 +145,7 @@ export interface UnderlineProps {
 const Underline = (props: PropsWithChildren<UnderlineProps>) => {
     const { strategy, underlineClass, children } = props;
     const value: string = new ComponentTree(children).getDeepestLeafNode();
-    return !!strategy ? strategy.underline(value, underlineClass) : value ?? null;
+    return strategy ? strategy.underline(value, underlineClass) : value ?? null;
 }
 
 export default Underline;

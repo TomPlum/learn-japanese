@@ -51,40 +51,40 @@ export default class KanaSettings extends DataSettings {
 }
 
 export class KanaSettingsBuilder {
-    private _hiragana: boolean = false;
-    private _katakana: boolean = false;
-    private _regular: boolean = true;
-    private _diagraphs: boolean = false;
-    private _onlyDiagraphs: boolean = false;
-    private _diacriticals: boolean = false;
+    private _hiragana = false;
+    private _katakana = false;
+    private _regular = true;
+    private _diagraphs = false;
+    private _onlyDiagraphs = false;
+    private _diacriticals = false;
     private _quantity: number | undefined;
 
-    withHiragana(include: boolean = true): KanaSettingsBuilder {
+    withHiragana(include = true): KanaSettingsBuilder {
         this._hiragana = include;
         return this;
     }
 
-    withKatakana(include: boolean = true): KanaSettingsBuilder {
+    withKatakana(include = true): KanaSettingsBuilder {
         this._katakana = include;
         return this;
     }
 
-    withRegularKana(include: boolean = true): KanaSettingsBuilder {
+    withRegularKana(include = true): KanaSettingsBuilder {
         this._regular = include;
         return this;
     }
 
-    withDiagraphs(include: boolean = true): KanaSettingsBuilder {
+    withDiagraphs(include = true): KanaSettingsBuilder {
         this._diagraphs = include;
         return this;
     }
 
-    withOnlyDiagraphs(include: boolean = true): KanaSettingsBuilder {
+    withOnlyDiagraphs(include = true): KanaSettingsBuilder {
         this._onlyDiagraphs = include;
         return this;
     }
 
-    withDiacriticals(include: boolean = true): KanaSettingsBuilder {
+    withDiacriticals(include = true): KanaSettingsBuilder {
         this._diacriticals = include;
         return this;
     }

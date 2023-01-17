@@ -95,10 +95,10 @@ export class QuestionSettingsBuilder {
     private _questionField: LearnableField = LearnableField.KANA;
     private _answerField: LearnableField = LearnableField.ROMAJI;
     private _type: QuestionType = QuestionType.TEXT;
-    private _cards: number = 1;
-    private _quantity: number = 1;
+    private _cards = 1;
+    private _quantity = 1;
     private _wrongOptionsFilterID = -1;
-    private _score: boolean = false;
+    private _score = false;
 
     withFields(question: LearnableField, answer: LearnableField): QuestionSettingsBuilder {
         this._questionField = question;
@@ -121,7 +121,7 @@ export class QuestionSettingsBuilder {
         return this;
     }
 
-    withScoreTracking(enable: boolean = true): QuestionSettingsBuilder {
+    withScoreTracking(enable = true): QuestionSettingsBuilder {
         this._score = enable;
         return this;
     }

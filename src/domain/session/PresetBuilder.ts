@@ -9,17 +9,17 @@ import PlayMode from "./PlayMode";
 import LearnMode from "./LearnMode";
 
 class PresetBuilder {
-    private _id: number = -1;
+    private _id = -1;
     private _favourite_id: number | undefined;
-    private _description: string = "";
-    private _displayName: string = "";
+    private _description = "";
+    private _displayName = "";
     private _shortName?: string = undefined;
-    private _colour: string = "";
+    private _colour = "";
     private _icon: CustomIcon = "";
-    private _topicName: string = "";
+    private _topicName = "";
     private _dataSettings: DataSettings = new KanaSettingsBuilder().build();
     private _modeSettings: ModeSettings = new GameSettingsBuilder().build();
-    private _custom: boolean = false;
+    private _custom = false;
 
     public withID(id: number): PresetBuilder {
         this._id = id;

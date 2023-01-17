@@ -18,10 +18,10 @@ export default class LifeSettings {
 }
 
 export class LifeSettingsBuilder {
-    private _enabled: boolean = true;
-    private _quantity: number = 5;
+    private _enabled = true;
+    private _quantity = 5;
 
-    isEnabled(enabled: boolean = true): LifeSettingsBuilder {
+    isEnabled(enabled = true): LifeSettingsBuilder {
         this._enabled = enabled;
         if (!enabled) {
             this._quantity = 0;

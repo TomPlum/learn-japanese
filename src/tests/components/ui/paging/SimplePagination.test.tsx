@@ -57,7 +57,7 @@ test('Should render the current page and show how many there are in total', () =
     props.page = 2;
     props.lastPage = 14;
     setup();
-    expect(screen.getByText('3 of 14')).toBeInTheDocument();;
+    expect(screen.getByText('3 of 14')).toBeInTheDocument();
 });
 
 test('Passing disabled as true should render an ellipsis where the page numbers would be', () => {

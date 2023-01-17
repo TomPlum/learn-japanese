@@ -43,8 +43,8 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
 
         let startIndex = 0;
         let endIndex = matching.length - 1;
-        let valueStartIndex = matching?.toLowerCase().indexOf(search.toLowerCase());
-        let valueEndIndex = valueStartIndex + search.length;
+        const valueStartIndex = matching?.toLowerCase().indexOf(search.toLowerCase());
+        const valueEndIndex = valueStartIndex + search.length;
 
         // If the matching field value is super-long, trim it centered around the matching part
         if (matching.length - search.length >= 10) {

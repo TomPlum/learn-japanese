@@ -13,7 +13,7 @@ afterEach(() => {
 
 const onFinishHandler = jest.fn();
 
-let props: CountDownProps = {
+const props: CountDownProps = {
     value: 10,
     className: 'testClass',
     onFinish: onFinishHandler

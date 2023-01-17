@@ -20,7 +20,7 @@ const ParallaxBackground = (props: ParallaxBackgroundProps) => {
     }, []);
 
     const getBackgroundKana = () => {
-        let kana: Kana[] = [];
+        const kana: Kana[] = [];
 
         const html = document.querySelector('html');
         const pool = [...props.kana];

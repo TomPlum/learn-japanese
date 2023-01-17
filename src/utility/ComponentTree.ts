@@ -79,7 +79,7 @@ export default class ComponentTree {
     private getAllChildren(): ReactElement[] {
         let child = this.root as ReactElement;
 
-        let children = [];
+        const children = [];
 
         while (child.props && child.props.children) {
             children.push(child);
@@ -90,7 +90,7 @@ export default class ComponentTree {
     }
 
     private doDepthFirstTraversal(node: Node) {
-        let next: Node[] = [];
+        const next: Node[] = [];
 
         if (node?.hasChildren()) {
             const nestedChild: any | any[] = node.value.props.children;

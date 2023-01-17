@@ -62,7 +62,7 @@ const NumbersSettingsFormBody = (props: DataSettingsStepFormProps<NumbersSetting
 
                     <p className={counters ? styles.description : styles.disabled}>
                         The Japanese language has lots of counters. Includes the 350 most commonly used counters, sourced
-                        from <a target="_blank" href="https://www.tofugu.com/japanese/japanese-counters-list/">tofugu.com</a>.
+                        from <a target="_blank" href="https://www.tofugu.com/japanese/japanese-counters-list/" rel="noreferrer">tofugu.com</a>.
                     </p>
 
                     <ToggleSwitch

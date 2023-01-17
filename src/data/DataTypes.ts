@@ -73,10 +73,6 @@ export interface VerbData extends SentenceStructureData {
     type: VerbType;
 }
 
-export interface AdverbData extends SentenceStructureData {
+export type AdverbData = SentenceStructureData
 
-}
-
-export interface ExpressionData extends SentenceStructureData {
-
-}
+export type ExpressionData = SentenceStructureData

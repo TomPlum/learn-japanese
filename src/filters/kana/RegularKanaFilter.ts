@@ -5,7 +5,7 @@ export default class RegularKanaFilter implements Filter<Kana> {
 
     private readonly include: boolean;
 
-    constructor(include: boolean = false) {
+    constructor(include = false) {
         this.include = include;
     }
 

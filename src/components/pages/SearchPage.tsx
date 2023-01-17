@@ -16,7 +16,7 @@ import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSett
 import ToggleSwitch from "../ui/ToggleSwitch";
 
 const SearchPage = () => {
-    let data = useRef<Kana[]>([]);
+    const data = useRef<Kana[]>([]);
     const [loading, setLoading] = useState(false);
     const [kana, setKana] = useState<Kana[]>([]);
     const [search, setSearch] = useState("");

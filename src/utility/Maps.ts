@@ -15,7 +15,7 @@ export default class Maps {
             return false;
         }
 
-        for(let [key, value] of first) {
+        for(const [key, value] of first) {
             if (value !== second.get(key)) {
                 return false;
             }

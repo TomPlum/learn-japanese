@@ -50,40 +50,40 @@ export default class BasicsSettings extends DataSettings {
 }
 
 export class BasicsSettingsBuilder {
-    private _colours: boolean = false;
-    private _animals: boolean = false;
-    private _directions: boolean = false;
-    private _weather: boolean = false;
-    private _family: boolean = false;
-    private _body: boolean = false;
+    private _colours = false;
+    private _animals = false;
+    private _directions = false;
+    private _weather = false;
+    private _family = false;
+    private _body = false;
     private _quantity: number | undefined;
 
-    withColours(include: boolean = true): BasicsSettingsBuilder {
+    withColours(include = true): BasicsSettingsBuilder {
         this._colours = include;
         return this;
     }
 
-    withAnimals(include: boolean = true): BasicsSettingsBuilder {
+    withAnimals(include = true): BasicsSettingsBuilder {
         this._animals = include;
         return this;
     }
 
-    withDirections(include: boolean = true): BasicsSettingsBuilder {
+    withDirections(include = true): BasicsSettingsBuilder {
         this._directions = include;
         return this;
     }
 
-    withWeather(include: boolean = true): BasicsSettingsBuilder {
+    withWeather(include = true): BasicsSettingsBuilder {
         this._weather = include;
         return this;
     }
 
-    withFamily(include: boolean = true): BasicsSettingsBuilder {
+    withFamily(include = true): BasicsSettingsBuilder {
         this._family = include;
         return this;
     }
 
-    withBody(include: boolean = true): BasicsSettingsBuilder {
+    withBody(include = true): BasicsSettingsBuilder {
         this._body = include;
         return this;
     }

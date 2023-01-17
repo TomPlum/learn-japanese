@@ -6,6 +6,6 @@ export interface MenuModes<T> {
     getModes(): T[];
 }
 
-export interface LearnMenuModes extends MenuModes<LearnMode> { }
+export type LearnMenuModes = MenuModes<LearnMode>
 
-export interface PlayMenuModes extends MenuModes<PlayMode> { }
+export type PlayMenuModes = MenuModes<PlayMode>

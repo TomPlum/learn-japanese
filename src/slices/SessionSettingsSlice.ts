@@ -76,7 +76,7 @@ export const sessionSettingsSlice = createSlice({
                 data: new DataSettingsConverter().serialise(payload.dataSettings)
             }
 
-            if (!!payload.gameSettings) {
+            if (payload.gameSettings) {
                 value.game = new GameSettingsConverter().serialise(payload.gameSettings);
                 localStorage.setItem(LAST_PLAY_SESSION_KEY, JSON.stringify(value));
             } else {

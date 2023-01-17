@@ -46,13 +46,13 @@ describe("Local Storage Service", () => {
 
         it("Should return an array of icon names from local storage", () => {
             localStorageMock.setItem("recent-icons", "[\"FaBed\",\"FaAngleDoubleLeft\"]");
-            let icons = service.getRecentlyUsedIcons();
+            const icons = service.getRecentlyUsedIcons();
             expect(icons).toStrictEqual(["FaBed", "FaAngleDoubleLeft"]);
         });
 
         it("Should return an empty array if there are no values in local storage", () => {
             localStorageMock.clear();
-            let icons = service.getRecentlyUsedIcons();
+            const icons = service.getRecentlyUsedIcons();
             expect(icons).toStrictEqual([]);
         });
     });

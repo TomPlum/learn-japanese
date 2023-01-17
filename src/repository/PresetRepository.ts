@@ -19,9 +19,7 @@ export interface PresetRequest {
     data: DataSettingsRequest;
 }
 
-export interface LearnPresetRequest extends PresetRequest {
-    // Doesn't current expose anything else
-}
+export type LearnPresetRequest = PresetRequest
 
 export interface PlayPresetRequest extends PresetRequest {
     game: GameConfigRequest;
@@ -132,17 +130,11 @@ interface FavouritePresetResponse<T extends PresetResponse> {
     preset: T;
 }
 
-export interface FavouriteLearnPresetResponse extends FavouritePresetResponse<LearnPresetResponse> {
-    // Doesn't currently expose anything else
-}
+export type FavouriteLearnPresetResponse = FavouritePresetResponse<LearnPresetResponse>
 
-export interface FavouritePlayPresetResponse extends FavouritePresetResponse<PlayPresetResponse> {
+export type FavouritePlayPresetResponse = FavouritePresetResponse<PlayPresetResponse>
 
-}
-
-export interface LearnPresetResponse extends PresetResponse {
-    // Doesn't currently expose anything else
-}
+export type LearnPresetResponse = PresetResponse
 
 export interface PlayPresetResponse extends PresetResponse {
     game: GameConfigResponse;

@@ -23,16 +23,16 @@ export default class TimeSettings {
 }
 
 export class TimeSettingsBuilder {
-    private _timed: boolean = false;
-    private _countdown: boolean = false;
-    private _secondsPerQuestion: number = 0;
+    private _timed = false;
+    private _countdown = false;
+    private _secondsPerQuestion = 0;
 
-    isTimed(enabled: boolean = true): TimeSettingsBuilder {
+    isTimed(enabled = true): TimeSettingsBuilder {
         this._timed = enabled;
         return this;
     }
 
-    isCountDown(enabled: boolean = true): TimeSettingsBuilder {
+    isCountDown(enabled = true): TimeSettingsBuilder {
         this._countdown = enabled;
         return this;
     }

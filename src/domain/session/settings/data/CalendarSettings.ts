@@ -44,11 +44,11 @@ export default class CalendarSettings extends DataSettings {
 }
 
 export class CalendarSettingsBuilder {
-    private _days: boolean = false;
-    private _months: boolean = false;
-    private _season: boolean = false;
-    private _nouns: boolean = false;
-    private _phrases: boolean = false;
+    private _days = false;
+    private _months = false;
+    private _season = false;
+    private _nouns = false;
+    private _phrases = false;
     private _quantity: number | undefined;
 
     withDays(include = true): CalendarSettingsBuilder {

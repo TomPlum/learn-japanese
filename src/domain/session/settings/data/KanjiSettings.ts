@@ -36,7 +36,7 @@ export class KanjiSettingsBuilder {
         return this;
     }
 
-    withJoyoKanji(include: boolean = true): KanjiSettingsBuilder {
+    withJoyoKanji(include = true): KanjiSettingsBuilder {
         if (include) {
             this._grades = [
                 KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR,

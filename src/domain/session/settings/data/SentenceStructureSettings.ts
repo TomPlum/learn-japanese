@@ -50,40 +50,40 @@ export default class SentenceStructureSettings extends DataSettings {
 }
 
 export class SentenceStructureSettingsBuilder {
-    private _adverbs: boolean = false;
-    private _particles: boolean = false;
-    private _expressions: boolean = false;
-    private _verbs: boolean = false;
-    private _nouns: boolean = false;
-    private _adjectives: boolean = false;
+    private _adverbs = false;
+    private _particles = false;
+    private _expressions = false;
+    private _verbs = false;
+    private _nouns = false;
+    private _adjectives = false;
     private _quantity: number | undefined;
 
-    withAdverbs(include: boolean = true): SentenceStructureSettingsBuilder {
+    withAdverbs(include = true): SentenceStructureSettingsBuilder {
         this._adverbs = include;
         return this;
     }
 
-    withParticles(include: boolean = true): SentenceStructureSettingsBuilder {
+    withParticles(include = true): SentenceStructureSettingsBuilder {
         this._particles = include;
         return this;
     }
 
-    withExpressions(include: boolean = true): SentenceStructureSettingsBuilder {
+    withExpressions(include = true): SentenceStructureSettingsBuilder {
         this._expressions = include;
         return this;
     }
 
-    withVerbs(include: boolean = true): SentenceStructureSettingsBuilder {
+    withVerbs(include = true): SentenceStructureSettingsBuilder {
         this._verbs = include;
         return this;
     }
 
-    withNouns(include: boolean = true): SentenceStructureSettingsBuilder {
+    withNouns(include = true): SentenceStructureSettingsBuilder {
         this._nouns = include;
         return this;
     }
 
-    withAdjectives(include: boolean = true): SentenceStructureSettingsBuilder {
+    withAdjectives(include = true): SentenceStructureSettingsBuilder {
         this._adjectives = include;
         return this;
     }

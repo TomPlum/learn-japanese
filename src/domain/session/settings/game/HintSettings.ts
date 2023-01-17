@@ -23,11 +23,11 @@ export default class HintSettings {
 }
 
 export class HintSettingsBuilder {
-    private _enabled: boolean = true;
-    private _quantity: number = 0;
-    private _unlimited: boolean = false;
+    private _enabled = true;
+    private _quantity = 0;
+    private _unlimited = false;
 
-    isEnabled(enabled: boolean = true): HintSettingsBuilder {
+    isEnabled(enabled = true): HintSettingsBuilder {
         this._enabled = enabled;
         return this;
     }
@@ -37,7 +37,7 @@ export class HintSettingsBuilder {
         return this;
     }
 
-    areUnlimited(enabled: boolean = true): HintSettingsBuilder {
+    areUnlimited(enabled = true): HintSettingsBuilder {
         this._unlimited = enabled;
         return this;
     }

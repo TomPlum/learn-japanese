@@ -6,7 +6,7 @@ export default class DiacriticalFilter implements Filter<Kana> {
     private readonly include: boolean;
     private readonly includeDiagraphs: boolean;
 
-    constructor(include: boolean = false, includeDiagraphs: boolean = true) {
+    constructor(include = false, includeDiagraphs = true) {
         this.include = include;
         this.includeDiagraphs = includeDiagraphs;
     }

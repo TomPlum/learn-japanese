@@ -7,7 +7,7 @@ export default class QuantityFilter implements Filter<Kana> {
     private readonly quantity: number;
     private readonly random: boolean;
 
-    constructor(quantity: number, random: boolean = false) {
+    constructor(quantity: number, random = false) {
         this.quantity = quantity;
         this.random = random;
     }

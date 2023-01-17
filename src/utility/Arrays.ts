@@ -75,8 +75,8 @@ export default class Arrays {
      * @param quantity The number of elements to return.
      * @return An array of all randomly selected elements.
      */
-    static getRandomElements<T>(array: T[], quantity: number = 1): T[] {
-        let elements = [];
+    static getRandomElements<T>(array: T[], quantity = 1): T[] {
+        const elements = [];
         let copy = this.copy(array);
         for (let i = 0; i < quantity; i++) {
             const index = Arrays.getRandomArrayIndex(copy);
@@ -145,7 +145,7 @@ export default class Arrays {
      */
     static getRandomObjects = <T>(pool: T[], quantity: number): [T[], T[]] => {
         const objects = [...pool];
-        let randomObjects = [];
+        const randomObjects = [];
         for (let i = 0; i < quantity; i++) {
             const randomIndex = Arrays.getRandomArrayIndex(objects);
             const randomObject = objects[randomIndex];

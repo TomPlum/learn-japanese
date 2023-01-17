@@ -4,7 +4,7 @@ import { Kana } from "../../../../domain/kana/Kana";
 import KanaType from "../../../../domain/kana/KanaType";
 import { KanaColumn } from "../../../../domain/kana/KanaColumn";
 
-let props: KanaTileProps = { kana: new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false) };
+const props: KanaTileProps = { kana: new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false) };
 
 const setup = () => {
     const component = render(<KanaTile {...props} />);

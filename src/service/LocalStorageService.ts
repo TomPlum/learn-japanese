@@ -40,7 +40,7 @@ class LocalStorageService {
                 icons.pop();
             }
             icons.unshift(icon);
-            let value = JSON.stringify(icons);
+            const value = JSON.stringify(icons);
             localStorage.setItem(this.RECENT_ICONS_KEY, value);
         }
     }

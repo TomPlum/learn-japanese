@@ -28,7 +28,7 @@ const LearnPage = () => {
     const dataSettings = dataSettingsData ? new DataSettingsConverter().deserialise(dataSettingsData) : undefined;
 
     useEffect(() => {
-        if (!!dataSettings) {
+        if (dataSettings) {
             setLoading(true);
             new LearningDataService().read(dataSettings).then(data => {
                 setData(data);

@@ -136,7 +136,7 @@ const KanjiBankPage = () => {
                     {selected && (<>
                         <div className={styles.section}>
                             <p className={styles.label}>Character</p>
-                            <a className={styles.selected} href={selected.value.getJishoLink()} target="_blank">
+                            <a className={styles.selected} href={selected.value.getJishoLink()} target="_blank" rel="noreferrer">
                                 {selected.value.getKanjiVariation()}
                             </a>
                         </div>

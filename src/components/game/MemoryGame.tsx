@@ -79,7 +79,7 @@ const MemoryGame = (props: MemoryGameProps) => {
         return Arrays.getRandomObjects(data, quantity);
     }
 
-    let volume: number = 0.7;
+    let volume = 0.7;
     const { t } = useTranslation("translation", { keyPrefix: "memory-game" });
 
     const [score, setScore] = useState(0);
@@ -235,7 +235,7 @@ const MemoryGame = (props: MemoryGameProps) => {
         countdownRef.current?.reset();
     }
 
-    const advanceNextQuestion = (skip: boolean = false) => {
+    const advanceNextQuestion = (skip = false) => {
         // If we're being timed per question, reset the timer.
         countdownRef.current?.reset();
 

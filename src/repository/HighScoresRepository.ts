@@ -13,7 +13,7 @@ export interface HighScoresEntryResponse {
     time?: string;
 }
 
-export interface HighScoresResponse extends PaginatedResponse<HighScoresEntryResponse[]>{}
+export type HighScoresResponse = PaginatedResponse<HighScoresEntryResponse[]>
 
 export interface FindAllHighScoreEntries {
     entries: HighScoresEntryResponse[];

@@ -27,7 +27,7 @@ export default class LearnableField {
         ];
     }
 
-    public static fromTranslationPath(value: String): LearnableField {
+    public static fromTranslationPath(value: string): LearnableField {
         switch (value) {
             case "learnable.field.meaning.name": return LearnableField.MEANING;
             case "learnable.field.kanji.name": return LearnableField.KANJI;
