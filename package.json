@@ -46,7 +46,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "start:msw": "REACT_APP_ENVIRONMENT=msw react-app-rewired start",
-    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint",
+    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint --debug",
     "lint:fix": "npm run lint -- --fix",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --reporters jest-silent-reporter",

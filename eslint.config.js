@@ -5,10 +5,10 @@ const reactRecommended = require('eslint-plugin-react/configs/recommended');
 module.exports = [
     reactRecommended,
     {
-        files: ['./src/**/*.{ts,tsx}'],
-        ignores: [],
+        files: ["src/**/*.{ts,tsx}"],
+        ignores: ["**/*.config.js"],
         languageOptions: {
-            ecmaVersion: "latest",
+            ecmaVersion: "2021",
             sourceType: "module",
             parser: "@typescript-eslint/parser",
             parserOptions: {
@@ -24,6 +24,7 @@ module.exports = [
             react
         ],
         rules: {
+            semi: "error"
         }
     }
 ]
