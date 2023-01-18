@@ -12,7 +12,10 @@
 After starting the long and arduous journey of learning Japanese, I found lots of online learning materials to get me started. 
 However, I couldn't quite find *exactly* what I wanted, an app for learning kana. So I made one. Partly inspired by Duolingo.
 
+Over time, in-between work, this project has become a place where I just dump Japanese related learning things.
+
 ## Contents
+* [Local Setup](#local-setup)
 * [Kana](#kana)
   * [Regular](#regular-kana) 
   * [Diacriticals](#diacriticals)
@@ -20,6 +23,12 @@ However, I couldn't quite find *exactly* what I wanted, an app for learning kana
 * [Learning Topics](#learning-topics)
 * [Game Modes](#game-modes)
 * [References](#references)
+
+## Local Setup
+
+`npm install`
+
+`npm run start:msw`
 
 ## Kana
 
