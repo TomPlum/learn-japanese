@@ -1,27 +1,35 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
+    env: {
+        browser: true,
+        es2021: true
     },
-    "extends": [
+    extends: [
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:react/jsx-runtime"
     ],
-    "overrides": [
+    overrides: [
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+    parser: "@typescript-eslint/parser",
+    parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+            jsx: true
+        }
     },
-    "plugins": [
+    plugins: [
         "react",
         "@typescript-eslint"
     ],
-    "rules": {
+    rules: {
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    },
+    settings: {
+        react: {
+            version: "detect"
+        }
     }
 }
