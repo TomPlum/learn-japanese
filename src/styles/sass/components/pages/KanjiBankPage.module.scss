@@ -5,7 +5,8 @@
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
 }
 
-.kanji, .highlight {
+.kanji,
+.highlight {
   @include noSelect;
   text-align: center;
   font-size: 3em;
@@ -23,7 +24,7 @@
 }
 
 .kanji p:first-child:hover {
-  color: #FFF;
+  color: #fff;
 }
 
 .highlight p:first-child {
@@ -45,7 +46,6 @@
 .frosted p {
   filter: blur(5px);
 }
-
 
 .meanings {
   display: block;
@@ -70,7 +70,7 @@
 }
 
 .value:hover {
-  color: #FFF;
+  color: #fff;
 }
 
 .section {
@@ -110,13 +110,14 @@
   width: 100%;
 }
 
-.search input, .search input:focus {
+.search input,
+.search input:focus {
   height: 40px;
   font-size: 1.2em;
   background-color: transparent;
   box-shadow: none;
-  border-color: #FFF !important;
-  color: #FFF;
+  border-color: #fff !important;
+  color: #fff;
 }
 
 .search div {

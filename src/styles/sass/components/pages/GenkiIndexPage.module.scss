@@ -19,10 +19,10 @@
 }
 
 @include tablet {
- .wrapper {
-   @include wrapper;
-   padding-top: 25px;
- }
+  .wrapper {
+    @include wrapper;
+    padding-top: 25px;
+  }
 }
 
 @include phone {
@@ -55,7 +55,7 @@
 }
 
 .table th:hover {
-  color: #FFF;
+  color: #fff;
 }
 
 .table th:first-of-type {
@@ -92,7 +92,8 @@
   border-top-right-radius: 10px;
 }
 
-.table tbody tr td, .table thead tr th {
+.table tbody tr td,
+.table thead tr th {
   padding: 12px;
 }
 

@@ -1,8 +1,8 @@
-import { Component } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/pages/HelpPage.module.scss";
-import { faLink, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Component } from "react"
+import { Col, Container, Row } from "react-bootstrap"
+import styles from "../../styles/sass/components/pages/HelpPage.module.scss"
+import { faLink, faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 class HelpPage extends Component {
     render() {
@@ -15,11 +15,18 @@ class HelpPage extends Component {
                                 <FontAwesomeIcon icon={faQuestionCircle} /> Frequently Asked Questions
                             </h1>
 
-                            <h3 className={styles.question}>What is <strong>'romaji'</strong> ?</h3>
+                            <h3 className={styles.question}>
+                                What is <strong>'romaji'</strong> ?
+                            </h3>
                             <p className={styles.answer}>
                                 Rōmaji or ローマ字 (rōmaji) is the romanisation of the Japanese written language.
                             </p>
-                            <a href="https://www.japanesepod101.com/japanese-romaji/" target="_blank" rel="noreferrer" className={styles.link}>
+                            <a
+                                href="https://www.japanesepod101.com/japanese-romaji/"
+                                target="_blank"
+                                rel="noreferrer"
+                                className={styles.link}
+                            >
                                 <FontAwesomeIcon icon={faLink} fixedWidth className={styles.sourceIcon} />
                                 <span className={styles.source}>Source</span>
                             </a>
@@ -27,8 +34,8 @@ class HelpPage extends Component {
                     </Row>
                 </Container>
             </Container>
-        );
+        )
     }
 }
 
-export default HelpPage;
+export default HelpPage

@@ -5,7 +5,7 @@ export class Numbers {
      * @param max The maximum value to generate.
      * @return value The randomly generated integer.
      */
-    static randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
+    static randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min)
 
     /**
      * Gets the ordinal suffix for the given number.
@@ -13,6 +13,5 @@ export class Numbers {
      * @param value The integer value.
      * @return suffix The ordinal suffix for the integer.
      */
-    static getOrdinalSuffix = (value: number) => ["st", "nd", "rd"][((value + 90) % 100 - 10) % 10 - 1] || "th";
-
+    static getOrdinalSuffix = (value: number) => ["st", "nd", "rd"][((((value + 90) % 100) - 10) % 10) - 1] || "th"
 }

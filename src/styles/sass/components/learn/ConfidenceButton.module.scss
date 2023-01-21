@@ -11,7 +11,8 @@
   transition: all ease-in-out 0.2s;
 }
 
-.button, .button:active {
+.button,
+.button:active {
   @include button;
 }
 
@@ -27,5 +28,5 @@
 
 .selected {
   color: $dark-2 !important;
-  opacity: 1.0;
+  opacity: 1;
 }

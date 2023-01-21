@@ -1,39 +1,23 @@
-import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSettings";
-import { LifeSettingsBuilder } from "../../domain/session/settings/game/LifeSettings";
-import { HintSettingsBuilder } from "../../domain/session/settings/game/HintSettings";
-import { TimeSettingsBuilder } from "../../domain/session/settings/game/TimeSettings";
-import { QuestionSettingsBuilder } from "../../domain/session/settings/game/QuestionSettings";
-import LearnableField from "../../domain/learn/LearnableField";
-import QuestionType from "../../domain/game/QuestionType";
-import GameSettingsConverter from "../../converter/GameSettingsConverter";
-import { GameConfigResponse } from "../../repository/PresetRepository";
+import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSettings"
+import { LifeSettingsBuilder } from "../../domain/session/settings/game/LifeSettings"
+import { HintSettingsBuilder } from "../../domain/session/settings/game/HintSettings"
+import { TimeSettingsBuilder } from "../../domain/session/settings/game/TimeSettings"
+import { QuestionSettingsBuilder } from "../../domain/session/settings/game/QuestionSettings"
+import LearnableField from "../../domain/learn/LearnableField"
+import QuestionType from "../../domain/game/QuestionType"
+import GameSettingsConverter from "../../converter/GameSettingsConverter"
+import { GameConfigResponse } from "../../repository/PresetRepository"
 
 describe("Game Settings Converter", () => {
-
-    const converter = new GameSettingsConverter();
+    const converter = new GameSettingsConverter()
 
     describe("Game Settings API Request", () => {
         it("Should convert the given settings into the API request format", () => {
             const settings = new GameSettingsBuilder()
-                .withLifeSettings(
-                    new LifeSettingsBuilder()
-                        .withQuantity(12)
-                        .isEnabled(true)
-                        .build()
-                )
-                .withHintSettings(
-                    new HintSettingsBuilder()
-                        .withQuantity(8)
-                        .isEnabled(true)
-                        .areUnlimited(false)
-                        .build()
-                )
+                .withLifeSettings(new LifeSettingsBuilder().withQuantity(12).isEnabled(true).build())
+                .withHintSettings(new HintSettingsBuilder().withQuantity(8).isEnabled(true).areUnlimited(false).build())
                 .withTimeSettings(
-                    new TimeSettingsBuilder()
-                        .isTimed(true)
-                        .isCountDown(false)
-                        .withSecondsPerQuestion(0)
-                        .build()
+                    new TimeSettingsBuilder().isTimed(true).isCountDown(false).withSecondsPerQuestion(0).build()
                 )
                 .withQuestionSettings(
                     new QuestionSettingsBuilder()
@@ -44,9 +28,9 @@ describe("Game Settings Converter", () => {
                         .withScoreTracking(true)
                         .build()
                 )
-                .build();
+                .build()
 
-            const target = converter.convertRequest(settings);
+            const target = converter.convertRequest(settings)
 
             expect(target).toStrictEqual({
                 hints: {
@@ -72,9 +56,9 @@ describe("Game Settings Converter", () => {
                     questionField: "learnable.field.kana.name",
                     answerFilter: 0
                 }
-            });
-        });
-    });
+            })
+        })
+    })
 
     describe("API Response Conversion", () => {
         it("Should de-serialise a valid API response", () => {
@@ -104,66 +88,40 @@ describe("Game Settings Converter", () => {
                 }
             }
 
-            const deserialised = converter.convert(response);
+            const deserialised = converter.convert(response)
 
             expect(JSON.stringify(deserialised)).toStrictEqual(
-                JSON.stringify(new GameSettingsBuilder()
-                    .withLifeSettings(
-                        new LifeSettingsBuilder()
-                            .withQuantity(12)
-                            .isEnabled(true)
-                            .build()
-                    )
-                    .withHintSettings(
-                        new HintSettingsBuilder()
-                            .withQuantity(8)
-                            .isEnabled(true)
-                            .areUnlimited(false)
-                            .build()
-                    )
-                    .withTimeSettings(
-                        new TimeSettingsBuilder()
-                            .isTimed(true)
-                            .isCountDown(false)
-                            .withSecondsPerQuestion(0)
-                            .build()
-                    )
-                    .withQuestionSettings(
-                        new QuestionSettingsBuilder()
-                            .withFields(LearnableField.KANA, LearnableField.ROMAJI)
-                            .withQuantity(150)
-                            .withType(QuestionType.CHOICE)
-                            .withCardQuantity(4)
-                            .withScoreTracking(true)
-                            .build()
-                    )
-                    .build())
-            );
-        });
-    });
+                JSON.stringify(
+                    new GameSettingsBuilder()
+                        .withLifeSettings(new LifeSettingsBuilder().withQuantity(12).isEnabled(true).build())
+                        .withHintSettings(
+                            new HintSettingsBuilder().withQuantity(8).isEnabled(true).areUnlimited(false).build()
+                        )
+                        .withTimeSettings(
+                            new TimeSettingsBuilder().isTimed(true).isCountDown(false).withSecondsPerQuestion(0).build()
+                        )
+                        .withQuestionSettings(
+                            new QuestionSettingsBuilder()
+                                .withFields(LearnableField.KANA, LearnableField.ROMAJI)
+                                .withQuantity(150)
+                                .withType(QuestionType.CHOICE)
+                                .withCardQuantity(4)
+                                .withScoreTracking(true)
+                                .build()
+                        )
+                        .build()
+                )
+            )
+        })
+    })
 
     describe("Serialise", () => {
         it("Should convert valid game settings", () => {
             const settings = new GameSettingsBuilder()
-                .withLifeSettings(
-                    new LifeSettingsBuilder()
-                        .withQuantity(12)
-                        .isEnabled(true)
-                        .build()
-                )
-                .withHintSettings(
-                    new HintSettingsBuilder()
-                        .withQuantity(8)
-                        .isEnabled(true)
-                        .areUnlimited(false)
-                        .build()
-                )
+                .withLifeSettings(new LifeSettingsBuilder().withQuantity(12).isEnabled(true).build())
+                .withHintSettings(new HintSettingsBuilder().withQuantity(8).isEnabled(true).areUnlimited(false).build())
                 .withTimeSettings(
-                    new TimeSettingsBuilder()
-                        .isTimed(true)
-                        .isCountDown(false)
-                        .withSecondsPerQuestion(0)
-                        .build()
+                    new TimeSettingsBuilder().isTimed(true).isCountDown(false).withSecondsPerQuestion(0).build()
                 )
                 .withQuestionSettings(
                     new QuestionSettingsBuilder()
@@ -175,9 +133,9 @@ describe("Game Settings Converter", () => {
                         .withAnswerFilterChainID(1)
                         .build()
                 )
-                .build();
+                .build()
 
-            const serialised = converter.serialise(settings);
+            const serialised = converter.serialise(settings)
 
             expect(serialised).toStrictEqual({
                 hints: {
@@ -203,9 +161,9 @@ describe("Game Settings Converter", () => {
                     questionField: "learnable.field.kana.name",
                     answerFilter: 1
                 }
-            });
-        });
-    });
+            })
+        })
+    })
 
     describe("De-Serialise", () => {
         it("Should de-serialise a valid JSON object", () => {
@@ -235,42 +193,31 @@ describe("Game Settings Converter", () => {
                 }
             }
 
-            const deserialised = converter.deserialise(state);
+            const deserialised = converter.deserialise(state)
 
             expect(JSON.stringify(deserialised)).toStrictEqual(
-                JSON.stringify(new GameSettingsBuilder()
-                    .withLifeSettings(
-                        new LifeSettingsBuilder()
-                            .withQuantity(12)
-                            .isEnabled(true)
-                            .build()
-                    )
-                    .withHintSettings(
-                        new HintSettingsBuilder()
-                            .withQuantity(8)
-                            .isEnabled(true)
-                            .areUnlimited(false)
-                            .build()
-                    )
-                    .withTimeSettings(
-                        new TimeSettingsBuilder()
-                            .isTimed(true)
-                            .isCountDown(false)
-                            .withSecondsPerQuestion(0)
-                            .build()
-                    )
-                    .withQuestionSettings(
-                        new QuestionSettingsBuilder()
-                            .withFields(LearnableField.KANA, LearnableField.ROMAJI)
-                            .withQuantity(150)
-                            .withType(QuestionType.CHOICE)
-                            .withCardQuantity(4)
-                            .withScoreTracking(true)
-                            .withAnswerFilterChainID(1)
-                            .build()
-                    )
-                    .build())
-            );
-        });
-    });
-});
+                JSON.stringify(
+                    new GameSettingsBuilder()
+                        .withLifeSettings(new LifeSettingsBuilder().withQuantity(12).isEnabled(true).build())
+                        .withHintSettings(
+                            new HintSettingsBuilder().withQuantity(8).isEnabled(true).areUnlimited(false).build()
+                        )
+                        .withTimeSettings(
+                            new TimeSettingsBuilder().isTimed(true).isCountDown(false).withSecondsPerQuestion(0).build()
+                        )
+                        .withQuestionSettings(
+                            new QuestionSettingsBuilder()
+                                .withFields(LearnableField.KANA, LearnableField.ROMAJI)
+                                .withQuantity(150)
+                                .withType(QuestionType.CHOICE)
+                                .withCardQuantity(4)
+                                .withScoreTracking(true)
+                                .withAnswerFilterChainID(1)
+                                .build()
+                        )
+                        .build()
+                )
+            )
+        })
+    })
+})

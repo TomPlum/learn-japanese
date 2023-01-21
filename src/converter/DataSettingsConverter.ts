@@ -1,22 +1,46 @@
-import DataSettings from "../domain/session/settings/data/DataSettings";
-import { BasicsDataSettingsState, CalenderDataSettingsState, DataSettingsState, KanaDataSettingsState, KanjiDataSettingsState, NumbersDataSettingsState, SentenceStructureDataSettingsState } from "../slices/DataSettingsSlice";
-import KanaSettings, { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSettings";
-import KanjiSettings, { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings";
-import NumbersSettings, { NumbersSettingsBuilder } from "../domain/session/settings/data/NumbersSettings";
-import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../domain/session/settings/data/SentenceStructureSettings";
-import CalendarSettings, { CalendarSettingsBuilder } from "../domain/session/settings/data/CalendarSettings";
-import BasicsSettings, { BasicsSettingsBuilder } from "../domain/session/settings/data/BasicsSettings";
-import { KyoikuGrade } from "../domain/kanji/KyoikuGrade";
-import { BasicsDataSettingsRequest, BasicsDataSettingsResponse, CalenderDataSettingsRequest, CalenderDataSettingsResponse, DataSettingsRequest, DataSettingsResponse, KanaDataSettingsRequest, KanaDataSettingsResponse, KanjiDataSettingsRequest, KanjiDataSettingsResponse, NumbersDataSettingsRequest, NumbersDataSettingsResponse, SentenceStructureDataSettingsRequest, SentenceStructureDataSettingsResponse } from "../repository/PresetRepository";
-import Topic from "../domain/Topic";
+import DataSettings from "../domain/session/settings/data/DataSettings"
+import {
+    BasicsDataSettingsState,
+    CalenderDataSettingsState,
+    DataSettingsState,
+    KanaDataSettingsState,
+    KanjiDataSettingsState,
+    NumbersDataSettingsState,
+    SentenceStructureDataSettingsState
+} from "../slices/DataSettingsSlice"
+import KanaSettings, { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSettings"
+import KanjiSettings, { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings"
+import NumbersSettings, { NumbersSettingsBuilder } from "../domain/session/settings/data/NumbersSettings"
+import SentenceStructureSettings, {
+    SentenceStructureSettingsBuilder
+} from "../domain/session/settings/data/SentenceStructureSettings"
+import CalendarSettings, { CalendarSettingsBuilder } from "../domain/session/settings/data/CalendarSettings"
+import BasicsSettings, { BasicsSettingsBuilder } from "../domain/session/settings/data/BasicsSettings"
+import { KyoikuGrade } from "../domain/kanji/KyoikuGrade"
+import {
+    BasicsDataSettingsRequest,
+    BasicsDataSettingsResponse,
+    CalenderDataSettingsRequest,
+    CalenderDataSettingsResponse,
+    DataSettingsRequest,
+    DataSettingsResponse,
+    KanaDataSettingsRequest,
+    KanaDataSettingsResponse,
+    KanjiDataSettingsRequest,
+    KanjiDataSettingsResponse,
+    NumbersDataSettingsRequest,
+    NumbersDataSettingsResponse,
+    SentenceStructureDataSettingsRequest,
+    SentenceStructureDataSettingsResponse
+} from "../repository/PresetRepository"
+import Topic from "../domain/Topic"
 
 class DataSettingsConverter {
-
     public convert(topic: Topic, settings: DataSettingsResponse): DataSettings {
-        const quantity = settings.quantity;
+        const quantity = settings.quantity
         switch (topic) {
             case Topic.KANA: {
-                const kana = settings.config as KanaDataSettingsResponse;
+                const kana = settings.config as KanaDataSettingsResponse
                 return new KanaSettingsBuilder()
                     .withOnlyDiagraphs(kana.onlyDiagraphs)
                     .withDiacriticals(kana.diacriticals)
@@ -25,18 +49,18 @@ class DataSettingsConverter {
                     .withHiragana(kana.hiragana)
                     .withKatakana(kana.katakana)
                     .withQuantity(quantity)
-                    .build();
+                    .build()
             }
             case Topic.KANJI: {
-                const kanji = settings.config as KanjiDataSettingsResponse;
+                const kanji = settings.config as KanjiDataSettingsResponse
                 return new KanjiSettingsBuilder()
-                    .withGrades(kanji.grades.map(grade => KyoikuGrade.fromInteger(grade)))
+                    .withGrades(kanji.grades.map((grade) => KyoikuGrade.fromInteger(grade)))
                     .withQuantity(quantity)
                     .withTags(kanji.tags)
-                    .build();
+                    .build()
             }
             case Topic.NUMBERS: {
-                const numbers = settings.config as NumbersDataSettingsResponse;
+                const numbers = settings.config as NumbersDataSettingsResponse
                 return new NumbersSettingsBuilder()
                     .withExceptions(numbers.exceptions)
                     .withCounters(numbers.counters)
@@ -45,10 +69,10 @@ class DataSettingsConverter {
                     .withUnits(numbers.units)
                     .withQuantity(quantity)
                     .withAge(numbers.age)
-                    .build();
+                    .build()
             }
             case Topic.GRAMMAR: {
-                const grammar = settings.config as SentenceStructureDataSettingsResponse;
+                const grammar = settings.config as SentenceStructureDataSettingsResponse
                 return new SentenceStructureSettingsBuilder()
                     .withExpressions(grammar.expressions)
                     .withAdjectives(grammar.adjectives)
@@ -57,10 +81,10 @@ class DataSettingsConverter {
                     .withQuantity(quantity)
                     .withNouns(grammar.nouns)
                     .withVerbs(grammar.verbs)
-                    .build();
+                    .build()
             }
             case Topic.CALENDAR: {
-                const calendar = settings.config as CalenderDataSettingsResponse;
+                const calendar = settings.config as CalenderDataSettingsResponse
                 return new CalendarSettingsBuilder()
                     .withTemporalNouns(calendar.nouns)
                     .withSeasons(calendar.seasons)
@@ -68,10 +92,10 @@ class DataSettingsConverter {
                     .withMonths(calendar.months)
                     .withDays(calendar.days)
                     .withQuantity(quantity)
-                    .build();
+                    .build()
             }
             case Topic.BASICS: {
-                const basics = settings.config as BasicsDataSettingsResponse;
+                const basics = settings.config as BasicsDataSettingsResponse
                 return new BasicsSettingsBuilder()
                     .withDirections(basics.directions)
                     .withAnimals(basics.animals)
@@ -80,10 +104,10 @@ class DataSettingsConverter {
                     .withFamily(basics.family)
                     .withQuantity(quantity)
                     .withBody(basics.body)
-                    .build();
+                    .build()
             }
             default: {
-                throw new Error(`DataSettingsConverter: Unknown Topic: ${topic.name}`);
+                throw new Error(`DataSettingsConverter: Unknown Topic: ${topic.name}`)
             }
         }
     }
@@ -106,7 +130,7 @@ class DataSettingsConverter {
                 quantity: settings.quantity,
                 config: {
                     tags: settings.tags,
-                    grades: settings.grades.map(it => it.value)
+                    grades: settings.grades.map((it) => it.value)
                 } as KanjiDataSettingsRequest
             }
         } else if (settings instanceof NumbersSettings) {
@@ -157,7 +181,7 @@ class DataSettingsConverter {
                 } as BasicsDataSettingsRequest
             }
         } else {
-            throw new Error(`Unknown DataSettings Type [${settings.constructor.name}]`);
+            throw new Error(`Unknown DataSettings Type [${settings.constructor.name}]`)
         }
     }
 
@@ -172,14 +196,14 @@ class DataSettingsConverter {
                 diacriticals: settings.diacriticals,
                 regular: settings.regular,
                 onlyDiagraphs: settings.onlyDiagraphs
-            } as KanaDataSettingsState;
+            } as KanaDataSettingsState
         } else if (settings instanceof KanjiSettings) {
             return {
                 topic: settings.topic.name,
                 quantity: settings.quantity,
                 tags: settings.tags,
-                grades: settings.grades.map(it => it.value)
-            } as KanjiDataSettingsState;
+                grades: settings.grades.map((it) => it.value)
+            } as KanjiDataSettingsState
         } else if (settings instanceof NumbersSettings) {
             return {
                 topic: settings.topic.name,
@@ -190,7 +214,7 @@ class DataSettingsConverter {
                 sequence: settings.sequence,
                 units: settings.units,
                 numbers: settings.numbers
-            } as NumbersDataSettingsState;
+            } as NumbersDataSettingsState
         } else if (settings instanceof SentenceStructureSettings) {
             return {
                 topic: settings.topic.name,
@@ -201,7 +225,7 @@ class DataSettingsConverter {
                 particles: settings.particles,
                 adverbs: settings.adverbs,
                 adjectives: settings.adjectives
-            } as SentenceStructureDataSettingsState;
+            } as SentenceStructureDataSettingsState
         } else if (settings instanceof CalendarSettings) {
             return {
                 topic: settings.topic.name,
@@ -211,7 +235,7 @@ class DataSettingsConverter {
                 months: settings.months,
                 phrases: settings.phrases,
                 seasons: settings.seasons
-            } as CalenderDataSettingsState;
+            } as CalenderDataSettingsState
         } else if (settings instanceof BasicsSettings) {
             return {
                 topic: settings.topic.name,
@@ -222,9 +246,9 @@ class DataSettingsConverter {
                 family: settings.family,
                 weather: settings.weather,
                 colours: settings.colours
-            } as BasicsDataSettingsState;
+            } as BasicsDataSettingsState
         } else {
-            throw new Error(`Unknown DataSettings Type [${settings.constructor.name}]`);
+            throw new Error(`Unknown DataSettings Type [${settings.constructor.name}]`)
         }
     }
 
@@ -238,13 +262,13 @@ class DataSettingsConverter {
                 .withQuantity(state.quantity)
                 .withHiragana(state.hiragana)
                 .withKatakana(state.katakana)
-                .build();
+                .build()
         } else if (DataSettingsConverter.isKanjiSettings(state)) {
             return new KanjiSettingsBuilder()
-                .withGrades(state.grades.map(grade => KyoikuGrade.fromInteger(grade)))
+                .withGrades(state.grades.map((grade) => KyoikuGrade.fromInteger(grade)))
                 .withQuantity(state.quantity)
                 .withTags(state.tags)
-                .build();
+                .build()
         } else if (DataSettingsConverter.isNumbersSettings(state)) {
             return new NumbersSettingsBuilder()
                 .withQuantity(state.quantity ?? 0)
@@ -254,7 +278,7 @@ class DataSettingsConverter {
                 .withNumbers(state.numbers)
                 .withUnits(state.units)
                 .withAge(state.age)
-                .build();
+                .build()
         } else if (DataSettingsConverter.isSentenceStructureSettings(state)) {
             return new SentenceStructureSettingsBuilder()
                 .withExpressions(state.expressions)
@@ -264,7 +288,7 @@ class DataSettingsConverter {
                 .withAdverbs(state.adverbs)
                 .withNouns(state.nouns)
                 .withVerbs(state.verbs)
-                .build();
+                .build()
         } else if (DataSettingsConverter.isCalendarSettings(state)) {
             return new CalendarSettingsBuilder()
                 .withQuantity(state.quantity ?? 0)
@@ -273,7 +297,7 @@ class DataSettingsConverter {
                 .withPhrases(state.phrases)
                 .withSeasons(state.seasons)
                 .withTemporalNouns(state.nouns)
-                .build();
+                .build()
         } else if (DataSettingsConverter.isBasicsSettings(state)) {
             return new BasicsSettingsBuilder()
                 .withQuantity(state.quantity ?? 0)
@@ -283,35 +307,35 @@ class DataSettingsConverter {
                 .withWeather(state.weather)
                 .withFamily(state.family)
                 .withBody(state.body)
-                .build();
+                .build()
         } else {
-            throw new Error(`Invalid DataSettingsState Object [${JSON.stringify(state)}]`);
+            throw new Error(`Invalid DataSettingsState Object [${JSON.stringify(state)}]`)
         }
     }
 
     private static isKanaSettings(state: DataSettingsState): state is KanaDataSettingsState {
-        return state && (<KanaDataSettingsState> state).onlyDiagraphs !== undefined;
+        return state && (<KanaDataSettingsState>state).onlyDiagraphs !== undefined
     }
 
     private static isKanjiSettings(state: DataSettingsState): state is KanjiDataSettingsState {
-        return (<KanjiDataSettingsState> state).grades !== undefined;
+        return (<KanjiDataSettingsState>state).grades !== undefined
     }
 
     private static isNumbersSettings(state: DataSettingsState): state is NumbersDataSettingsState {
-        return (<NumbersDataSettingsState> state).sequence !== undefined;
+        return (<NumbersDataSettingsState>state).sequence !== undefined
     }
 
     private static isSentenceStructureSettings(state: DataSettingsState): state is SentenceStructureDataSettingsState {
-        return (<SentenceStructureDataSettingsState> state).particles !== undefined;
+        return (<SentenceStructureDataSettingsState>state).particles !== undefined
     }
 
     private static isCalendarSettings(state: DataSettingsState): state is CalenderDataSettingsState {
-        return (<CalenderDataSettingsState> state).phrases !== undefined;
+        return (<CalenderDataSettingsState>state).phrases !== undefined
     }
 
     private static isBasicsSettings(state: DataSettingsState): state is BasicsDataSettingsState {
-        return (<BasicsDataSettingsState> state).weather !== undefined;
+        return (<BasicsDataSettingsState>state).weather !== undefined
     }
 }
 
-export default DataSettingsConverter;
+export default DataSettingsConverter

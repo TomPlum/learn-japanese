@@ -1,26 +1,25 @@
-import './styles/sass/LearnJapanese.module.scss';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
-import Main from "./components/layout/Main";
-import { Location } from "history";
-import { Provider } from "react-redux";
-import { EnhancedStore } from "@reduxjs/toolkit";
-import './i18n';
+import "./styles/sass/LearnJapanese.module.scss"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css"
+import Main from "./components/layout/Main"
+import { Location } from "history"
+import { Provider } from "react-redux"
+import { EnhancedStore } from "@reduxjs/toolkit"
+import "./i18n"
 
 interface LearnJapaneseProps {
-    store: EnhancedStore;
-    location?: Location;
+    store: EnhancedStore
+    location?: Location
 }
 
 const LearnJapanese = (props: LearnJapaneseProps) => {
-
-    const { store } = props;
+    const { store } = props
 
     return (
         <Provider store={store}>
-            <Main/>
+            <Main />
         </Provider>
-    );
+    )
 }
 
-export default LearnJapanese;
+export default LearnJapanese

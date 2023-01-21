@@ -1,43 +1,46 @@
-import { useUserSelector } from "../../../hooks";
-import HighScoresService from "../../../service/HighScoresService";
-import { HighScorePreference } from "../../../domain/HighScorePreference";
-import { useTranslation } from "react-i18next";
-import { Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useUserSelector } from "../../../hooks"
+import HighScoresService from "../../../service/HighScoresService"
+import { HighScorePreference } from "../../../domain/HighScorePreference"
+import { useTranslation } from "react-i18next"
+import { Button } from "react-bootstrap"
+import { useEffect, useState } from "react"
 
 export interface HighScoreSubmitButtonProps {
-    presetId: number;
-    time?: string;
-    score?: number;
+    presetId: number
+    time?: string
+    score?: number
 }
 
 const HighScoreSubmitButton = (props: HighScoreSubmitButtonProps) => {
+    const { presetId, time, score } = props
 
-    const { presetId, time, score } = props;
+    const [loading, setLoading] = useState(false)
+    const [success, setSuccess] = useState(false)
 
-    const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
-
-    const service = new HighScoresService();
-    const { t } = useTranslation("translation", { keyPrefix: "memory-game.results-screen" });
-    const preference = useUserSelector(state => state.user?.user?.preferences.highScoresBehaviour);
+    const service = new HighScoresService()
+    const { t } = useTranslation("translation", { keyPrefix: "memory-game.results-screen" })
+    const preference = useUserSelector((state) => state.user?.user?.preferences.highScoresBehaviour)
 
     useEffect(() => {
         if (preference === HighScorePreference.AUTO_SUBMIT) {
-            submit();
+            submit()
         }
-    }, []);
+    }, [])
 
     const submit = () => {
-        setLoading(true);
+        setLoading(true)
 
-        service.addNewEntry({ presetId: presetId, score: score, time: time }).then(response => {
-            setSuccess(response.success);
-        }).catch(() => {
-            setSuccess(false);
-        }).finally(() => {
-            setLoading(false);
-        });
+        service
+            .addNewEntry({ presetId: presetId, score: score, time: time })
+            .then((response) => {
+                setSuccess(response.success)
+            })
+            .catch(() => {
+                setSuccess(false)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
     const renderButtonContent = () => {
@@ -46,23 +49,14 @@ const HighScoreSubmitButton = (props: HighScoreSubmitButtonProps) => {
                 return <span>{t("not-submitted")}</span>
             }
             case HighScorePreference.ASK_EACH_TIME: {
-                return (
-                    <Button onClick={submit}>
-                        {success ? "Submitted" : "Submit Score"}
-                    </Button>
-                )
+                return <Button onClick={submit}>{success ? "Submitted" : "Submit Score"}</Button>
             }
             case HighScorePreference.AUTO_SUBMIT: {
-
             }
         }
     }
 
-    return (
-        <div>
-            {renderButtonContent()}
-        </div>
-    );
+    return <div>{renderButtonContent()}</div>
 }
 
-export default HighScoreSubmitButton;
+export default HighScoreSubmitButton

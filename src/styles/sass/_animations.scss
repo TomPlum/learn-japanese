@@ -19,13 +19,13 @@
 
 @keyframes flashRed {
   0% {
-    color: #FFF;
+    color: #fff;
   }
   50% {
     color: red;
   }
   100% {
-    color: #FFF;
+    color: #fff;
   }
 }
 
@@ -60,19 +60,24 @@
 }
 
 @keyframes shake {
-  10%, 90% {
+  10%,
+  90% {
     transform: rotateZ(-1deg);
   }
 
-  20%, 80% {
+  20%,
+  80% {
     transform: rotateZ(1deg);
   }
 
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: rotateZ(-1deg);
   }
 
-  40%, 60% {
+  40%,
+  60% {
     transform: rotateZ(1deg);
   }
 }

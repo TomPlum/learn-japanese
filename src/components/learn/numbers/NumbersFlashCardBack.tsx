@@ -1,8 +1,8 @@
-import { CardFaceProps } from "../FlashCard";
-import CommonFlashCardBack from "../CommonFlashCardBack";
+import { CardFaceProps } from "../FlashCard"
+import CommonFlashCardBack from "../CommonFlashCardBack"
 
 const NumbersFlashCardBack = (props: CardFaceProps) => {
-    const { data, onClick } = props;
+    const { data, onClick } = props
 
     return (
         <CommonFlashCardBack
@@ -12,7 +12,7 @@ const NumbersFlashCardBack = (props: CardFaceProps) => {
             example={data.getExample()}
             onClick={onClick}
         />
-    );
-};
+    )
+}
 
-export default NumbersFlashCardBack;
+export default NumbersFlashCardBack

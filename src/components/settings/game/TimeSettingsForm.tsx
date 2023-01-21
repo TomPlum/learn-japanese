@@ -1,69 +1,64 @@
-import React, { ChangeEvent, forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react";
-import { Col, Fade, Row } from "react-bootstrap";
-import TimeSettings, { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings";
-import styles from "../../../styles/sass/components/settings/game/TimeSettingsForm.module.scss";
-import RangeSlider from "react-bootstrap-range-slider";
-import ScrollableContainer from "../../ui/ScrollableContainer";
-import ToggleSwitch from "../../ui/ToggleSwitch";
-import { SettingsFormHandle } from "./GameSettingsMenu";
-import { useTranslation } from "react-i18next";
+import React, { ChangeEvent, forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
+import { Col, Fade, Row } from "react-bootstrap"
+import TimeSettings, { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings"
+import styles from "../../../styles/sass/components/settings/game/TimeSettingsForm.module.scss"
+import RangeSlider from "react-bootstrap-range-slider"
+import ScrollableContainer from "../../ui/ScrollableContainer"
+import ToggleSwitch from "../../ui/ToggleSwitch"
+import { SettingsFormHandle } from "./GameSettingsMenu"
+import { useTranslation } from "react-i18next"
 
 export interface TimeSettingsFormProps {
-    onChange: (settings: TimeSettings) => void;
+    onChange: (settings: TimeSettings) => void
 }
 
 const TimeSettingsForm = forwardRef((props: TimeSettingsFormProps, ref: Ref<SettingsFormHandle>) => {
+    const { onChange } = props
 
-    const { onChange } = props;
+    const defaultState = new TimeSettingsBuilder().isTimed().isCountDown(false).withSecondsPerQuestion(10).build()
 
-    const defaultState = new TimeSettingsBuilder()
-        .isTimed()
-        .isCountDown(false)
-        .withSecondsPerQuestion(10)
-        .build();
-
-    const [timed, setTimed] = useState(defaultState.timed);
-    const [countdown, setCountdown] = useState(defaultState.countdown);
-    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.time" });
-    const [secondsPerQuestion, setSecondsPerQuestion] = useState(defaultState.secondsPerQuestion);
+    const [timed, setTimed] = useState(defaultState.timed)
+    const [countdown, setCountdown] = useState(defaultState.countdown)
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.time" })
+    const [secondsPerQuestion, setSecondsPerQuestion] = useState(defaultState.secondsPerQuestion)
 
     useEffect(() => {
-        onChange(defaultState);
-    }, []);
+        onChange(defaultState)
+    }, [])
 
     useEffect(() => {
         const settings = new TimeSettingsBuilder()
             .isTimed(timed)
             .isCountDown(countdown)
             .withSecondsPerQuestion(secondsPerQuestion)
-            .build();
+            .build()
 
-        onChange(settings);
-    }, [timed, countdown, secondsPerQuestion]);
+        onChange(settings)
+    }, [timed, countdown, secondsPerQuestion])
 
     useImperativeHandle(ref, () => ({
         reset() {
-            setTimed(defaultState.timed);
-            setCountdown(defaultState.countdown);
-            setSecondsPerQuestion(defaultState.secondsPerQuestion);
+            setTimed(defaultState.timed)
+            setCountdown(defaultState.countdown)
+            setSecondsPerQuestion(defaultState.secondsPerQuestion)
         }
-    }));
+    }))
 
     const onChangeTimed = () => {
         if (timed) {
-            setTimed(false);
+            setTimed(false)
         } else {
-            setTimed(true);
-            setCountdown(false);
+            setTimed(true)
+            setCountdown(false)
         }
     }
 
     const onChangeCountDown = () => {
         if (countdown) {
-            setCountdown(false);
+            setCountdown(false)
         } else {
-            setCountdown(true);
-            setTimed(false);
+            setCountdown(true)
+            setTimed(false)
         }
     }
 
@@ -76,9 +71,7 @@ const TimeSettingsForm = forwardRef((props: TimeSettingsFormProps, ref: Ref<Sett
             <Row>
                 <Col>
                     <div className={styles.descriptionWrapper}>
-                        <p className={styles.leadingDescription}>
-                            {t("desc")}
-                        </p>
+                        <p className={styles.leadingDescription}>{t("desc")}</p>
                     </div>
 
                     <h5 className={styles.heading}>
@@ -109,7 +102,7 @@ const TimeSettingsForm = forwardRef((props: TimeSettingsFormProps, ref: Ref<Sett
                         {t("countdown-desc")}
                         {countdown && (
                             <Fade in={countdown} appear={countdown}>
-                                <span>{' '}{t("seconds-quantity")}:</span>
+                                <span> {t("seconds-quantity")}:</span>
                             </Fade>
                         )}
                     </p>
@@ -117,7 +110,8 @@ const TimeSettingsForm = forwardRef((props: TimeSettingsFormProps, ref: Ref<Sett
                     {countdown && (
                         <Fade in={countdown} appear={countdown}>
                             <RangeSlider
-                                min={0} max={60}
+                                min={0}
+                                max={60}
                                 variant="primary"
                                 disabled={timed}
                                 value={secondsPerQuestion}
@@ -129,7 +123,7 @@ const TimeSettingsForm = forwardRef((props: TimeSettingsFormProps, ref: Ref<Sett
                 </Col>
             </Row>
         </ScrollableContainer>
-    );
-});
+    )
+})
 
-export default TimeSettingsForm;
+export default TimeSettingsForm

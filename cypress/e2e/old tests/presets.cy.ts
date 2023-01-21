@@ -1,13 +1,5 @@
-import {Numbers} from "../../../src/utility/Numbers";
-import {Topic} from "../../support/Topic";
-
-
-
-
-
-
-
-
+import { Numbers } from "../../../src/utility/Numbers"
+import { Topic } from "../../support/Topic"
 
 /*describe('Hiragana & Katakana', () => {
         it('Relaxed', () => cy.startAndQuit('Relaxed'));

@@ -1,4 +1,4 @@
-import Arrays from "./Arrays";
+import Arrays from "./Arrays"
 
 export default class Maps {
     /**
@@ -12,16 +12,16 @@ export default class Maps {
      */
     public static areEqual(first: Map<string, string>, second: Map<string, string>): boolean {
         if (first.size !== second.size) {
-            return false;
+            return false
         }
 
-        for(const [key, value] of first) {
+        for (const [key, value] of first) {
             if (value !== second.get(key)) {
-                return false;
+                return false
             }
         }
 
-        return true;
+        return true
     }
 
     /**
@@ -30,14 +30,14 @@ export default class Maps {
      * @return map A copy of the map with the shuffled keys and values.
      */
     public static shuffle<K, V>(map: Map<K, V>): Map<K, V> {
-        const keys = Arrays.shuffle([...map.keys()]);
-        const values = Arrays.shuffle([...map.values()]);
+        const keys = Arrays.shuffle([...map.keys()])
+        const values = Arrays.shuffle([...map.values()])
 
-        const shuffled = new Map<K, V>();
+        const shuffled = new Map<K, V>()
         for (let i = 0; i < map.size; i++) {
-            shuffled.set(keys[i], values[i]);
+            shuffled.set(keys[i], values[i])
         }
 
-        return shuffled;
+        return shuffled
     }
 }

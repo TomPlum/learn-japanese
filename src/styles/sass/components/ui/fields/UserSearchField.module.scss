@@ -13,7 +13,9 @@
   border-right: none;
 }
 
-.input, .input:active, .input:focus {
+.input,
+.input:active,
+.input:focus {
   background-color: $dark-1;
   border: 2px solid $light-3;
   box-shadow: none;

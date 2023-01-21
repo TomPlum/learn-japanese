@@ -1,16 +1,16 @@
-import { Component } from "react";
-import { Learnable } from "../../domain/learn/Learnable";
-import { Col, Container, Row } from "react-bootstrap";
-import Copyable from "../ui/Copyable";
-import styles from "../../styles/sass/components/learn/LearnableInfo.module.scss";
+import { Component } from "react"
+import { Learnable } from "../../domain/learn/Learnable"
+import { Col, Container, Row } from "react-bootstrap"
+import Copyable from "../ui/Copyable"
+import styles from "../../styles/sass/components/learn/LearnableInfo.module.scss"
 
 export interface LearnableInfoProps {
-    value: Learnable;
+    value: Learnable
 }
 
 class LearnableInfo extends Component<LearnableInfoProps> {
     render() {
-        const { value } = this.props;
+        const { value } = this.props
 
         return (
             <Container fluid className={styles.wrapper}>
@@ -22,13 +22,13 @@ class LearnableInfo extends Component<LearnableInfoProps> {
                     </Col>
 
                     <Col>
-                        {
-                            value.getKanjiVariation() ? (
-                                <Copyable>
-                                    <span>{value.getKanjiVariation()}</span>
-                                </Copyable>
-                            ) : <span>-</span>
-                        }
+                        {value.getKanjiVariation() ? (
+                            <Copyable>
+                                <span>{value.getKanjiVariation()}</span>
+                            </Copyable>
+                        ) : (
+                            <span>-</span>
+                        )}
                     </Col>
 
                     <Col>
@@ -38,8 +38,8 @@ class LearnableInfo extends Component<LearnableInfoProps> {
                     </Col>
                 </Row>
             </Container>
-        );
+        )
     }
 }
 
-export default LearnableInfo;
+export default LearnableInfo

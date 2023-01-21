@@ -1,24 +1,24 @@
-import { Component } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import KanjiDisplay from "./KanjiDisplay";
-import { ReadingType } from "../../../domain/kanji/ReadingType";
-import Inspectable from "../../ui/Inspectable";
-import { Environment } from "../../../utility/Environment";
-import { faReply } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CardBackFaceProps } from "../FlashCard";
-import { Kanji } from "../../../domain/kanji/Kanji";
-import KanjiReadingDisplay from "./KanjiReadingDisplay";
-import { KanjiReading } from "../../../domain/kanji/KanjiReading";
-import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss";
-import KanjiExampleDisplay from "./KanjiExampleDisplay";
-import KanjiMeaningDisplay from "./KanjiMeaningDisplay";
+import { Component } from "react"
+import { Button, Col, Container, Row } from "react-bootstrap"
+import KanjiDisplay from "./KanjiDisplay"
+import { ReadingType } from "../../../domain/kanji/ReadingType"
+import Inspectable from "../../ui/Inspectable"
+import { Environment } from "../../../utility/Environment"
+import { faReply } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { CardBackFaceProps } from "../FlashCard"
+import { Kanji } from "../../../domain/kanji/Kanji"
+import KanjiReadingDisplay from "./KanjiReadingDisplay"
+import { KanjiReading } from "../../../domain/kanji/KanjiReading"
+import styles from "../../../styles/sass/components/learn/kanji/KanjiFlashCardBack.module.scss"
+import KanjiExampleDisplay from "./KanjiExampleDisplay"
+import KanjiMeaningDisplay from "./KanjiMeaningDisplay"
 
 //TODO: Replace redundant bits with FlashCardBack component
 class KanjiFlashCardBack extends Component<CardBackFaceProps> {
     render() {
-        const { data, showRomaji, onClick } = this.props;
-        const kanji = data as Kanji;
+        const { data, showRomaji, onClick } = this.props
+        const kanji = data as Kanji
 
         return (
             <Container className={styles["wrapper-grade-" + kanji.grade.value] + " " + styles.wrapper}>
@@ -49,10 +49,16 @@ class KanjiFlashCardBack extends Component<CardBackFaceProps> {
 
                         <div className={styles.meaningWrapper}>
                             <p className={styles.text}>
-                                <Inspectable popover={{ title: "English Meaning", text: Environment.variable("ENGLISH_MEANING_DESC") }}>
+                                <Inspectable
+                                    popover={{
+                                        title: "English Meaning",
+                                        text: Environment.variable("ENGLISH_MEANING_DESC")
+                                    }}
+                                >
                                     <span className={styles.label}>Meaning</span>
                                 </Inspectable>
-                                {': '}<KanjiMeaningDisplay meanings={kanji.getMeanings()} />
+                                {": "}
+                                <KanjiMeaningDisplay meanings={kanji.getMeanings()} />
                             </p>
                         </div>
                     </Col>
@@ -64,13 +70,12 @@ class KanjiFlashCardBack extends Component<CardBackFaceProps> {
                     </Col>
                 </Row>
             </Container>
-        );
+        )
     }
 
     private getReadings = (type: ReadingType): KanjiReading[] => {
-        return (this.props.data as Kanji).readings.filter(it => it.type === type);
+        return (this.props.data as Kanji).readings.filter((it) => it.type === type)
     }
-
 }
 
-export default KanjiFlashCardBack;
+export default KanjiFlashCardBack

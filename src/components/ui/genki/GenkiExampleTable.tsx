@@ -1,45 +1,45 @@
-import { Table } from "react-bootstrap";
-import RomajiGenerator from "../../../utility/RomajiGenerator";
-import styles from "../../../styles/sass/components/ui/genki/GenkiExampleTable.module.scss";
-import GenkiUnderlineDisplay from "./GenkiUnderlineDisplay";
-import { FirstMatch } from "../Underline";
+import { Table } from "react-bootstrap"
+import RomajiGenerator from "../../../utility/RomajiGenerator"
+import styles from "../../../styles/sass/components/ui/genki/GenkiExampleTable.module.scss"
+import GenkiUnderlineDisplay from "./GenkiUnderlineDisplay"
+import { FirstMatch } from "../Underline"
 
 interface ExampleValue {
-    value: string;
-    underline?: string;
-    hideRomaji?: boolean;
+    value: string
+    underline?: string
+    hideRomaji?: boolean
 }
 
 export interface GenkiExampleTableProps {
-    values: { japanese: ExampleValue, english: ExampleValue }[];
-    className?: string;
-    book: number;
+    values: { japanese: ExampleValue; english: ExampleValue }[]
+    className?: string
+    book: number
 }
 
 const GenkiExampleTable = (props: GenkiExampleTableProps) => {
+    const { values, book, className } = props
 
-    const { values, book, className } = props;
-
-    const romajiGenerator = new RomajiGenerator();
+    const romajiGenerator = new RomajiGenerator()
 
     return (
         <Table className={[styles.table, className].join(" ")} borderless size="sm">
-            {values.map(example => {
-                const { english, japanese } = example;
+            {values.map((example) => {
+                const { english, japanese } = example
 
                 return (
                     <tbody key={`${english.value}-tbody`}>
                         <tr>
                             <td>
                                 <p className={styles.jp}>
-                                    <GenkiUnderlineDisplay underline={new FirstMatch(japanese.underline ?? "")} book={book}>
+                                    <GenkiUnderlineDisplay
+                                        underline={new FirstMatch(japanese.underline ?? "")}
+                                        book={book}
+                                    >
                                         <span>{japanese.value}</span>
                                     </GenkiUnderlineDisplay>
                                 </p>
                                 {!japanese.hideRomaji && (
-                                    <span className={styles.romaji}>
-                                        {romajiGenerator.generate(japanese.value)}
-                                    </span>
+                                    <span className={styles.romaji}>{romajiGenerator.generate(japanese.value)}</span>
                                 )}
                             </td>
 
@@ -56,4 +56,4 @@ const GenkiExampleTable = (props: GenkiExampleTableProps) => {
     )
 }
 
-export default GenkiExampleTable;
+export default GenkiExampleTable

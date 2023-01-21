@@ -23,14 +23,16 @@
 
 .back:hover {
   cursor: pointer;
-  color: #FFF;
+  color: #fff;
 }
 
 .back span {
   font-size: 1.1em;
 }
 
-.input, .input:active, .input:focus {
+.input,
+.input:active,
+.input:focus {
   background-color: $dark-1;
   color: $light-2;
   height: 30px;

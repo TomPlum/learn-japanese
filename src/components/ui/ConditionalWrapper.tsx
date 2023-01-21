@@ -1,12 +1,12 @@
 export interface ConditionalWrapperProps {
-    condition: boolean;
-    wrapper: (child: JSX.Element) => JSX.Element;
-    children: JSX.Element;
+    condition: boolean
+    wrapper: (child: JSX.Element) => JSX.Element
+    children: JSX.Element
 }
 
 const ConditionalWrapper = (props: ConditionalWrapperProps) => {
-    const { condition, wrapper, children } = props;
-    return condition ? wrapper(children) : children;
+    const { condition, wrapper, children } = props
+    return condition ? wrapper(children) : children
 }
 
-export default ConditionalWrapper;
+export default ConditionalWrapper

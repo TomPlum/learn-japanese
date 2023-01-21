@@ -12,7 +12,10 @@
   @include noSelect;
 }
 
-.source, .source:active, .source:hover, .source:link {
+.source,
+.source:active,
+.source:hover,
+.source:link {
   text-decoration: none !important;
   transition: ease 0.5s;
 }

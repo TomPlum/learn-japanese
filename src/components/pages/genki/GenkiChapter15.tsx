@@ -1,9 +1,9 @@
-import { GrammarInfoProps } from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
-import { FirstMatch } from "../../ui/Underline";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
+import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
+import { FirstMatch } from "../../ui/Underline"
 
 const GenkiChapter15 = () => {
     const c15p1: GrammarInfoProps = {
@@ -19,20 +19,28 @@ const GenkiChapter15 = () => {
                 <GenkiStructureDisplay book={2} width={330}>
                     <p>る Verbs: Drop the final –ru and add –yoo</p>
                     <p style={{ marginLeft: "10px" }} className={styles.muted}>
-                        {"食べる(tabe - ru) "}<span className={styles.arrow}>&#8594;</span>{" 食べよう(tabe - yoo)"}
+                        {"食べる(tabe - ru) "}
+                        <span className={styles.arrow}>&#8594;</span>
+                        {" 食べよう(tabe - yoo)"}
                     </p>
 
                     <p>う Verbs: Drop the final –u and add –oo</p>
                     <p style={{ marginLeft: "10px" }} className={styles.muted}>
-                        {"行く(ik - u) "}<span className={styles.arrow}>&#8594;</span>{" 行こう(ik - oo)"}
+                        {"行く(ik - u) "}
+                        <span className={styles.arrow}>&#8594;</span>
+                        {" 行こう(ik - oo)"}
                     </p>
 
                     <p>Irregular Verbs: Drop the final –u and add –oo</p>
                     <span style={{ marginLeft: "10px" }} className={styles.muted}>
-                        {"くる "}<span className={styles.arrow}>&#8594;</span>{" こよう"}
+                        {"くる "}
+                        <span className={styles.arrow}>&#8594;</span>
+                        {" こよう"}
                     </span>
                     <span style={{ margin: "0 10px 0 10px", float: "right" }} className={styles.muted}>
-                        {"する "}<span className={styles.arrow}>&#8594;</span>{" しよう"}
+                        {"する "}
+                        <span className={styles.arrow}>&#8594;</span>
+                        {" しよう"}
                     </span>
                 </GenkiStructureDisplay>
 
@@ -43,9 +51,12 @@ const GenkiChapter15 = () => {
                     en={{ text: "We don’t have any classes tomorrow. Let’s go some place for dinner tonight." }}
                 />
 
-                <hr className={styles.hr}/>
+                <hr className={styles.hr} />
 
-                <p>You can use the volitional plus the question particle か to ask for an opinion in your offer or suggestion.</p>
+                <p>
+                    You can use the volitional plus the question particle か to ask for an opinion in your offer or
+                    suggestion.
+                </p>
                 <p>For example:</p>
                 <GenkiExampleDisplay
                     book={2}
@@ -75,7 +86,10 @@ const GenkiChapter15 = () => {
                     You can also use the Volitional Form + と思っています, which suggests that the decision to perform
                     the activity is being made on the <em>spot</em> at the time of speaking.
                 </p>
-                <p>と思っています, in contrast, tends to suggest that you have <em>already decided</em> to do something.</p>
+                <p>
+                    と思っています, in contrast, tends to suggest that you have <em>already decided</em> to do
+                    something.
+                </p>
 
                 <p>Situation 1</p>
                 <GenkiExampleDisplay
@@ -111,7 +125,10 @@ const GenkiChapter15 = () => {
         title: "~ておく",
         body: (
             <div>
-                <p>The te-form of a verb plus the helping verb おく describes an action performed in preparation for something.</p>
+                <p>
+                    The te-form of a verb plus the helping verb おく describes an action performed in preparation for
+                    something.
+                </p>
 
                 <GenkiStructureDisplay book={2} width={300}>
                     <span>~ておく</span>
@@ -152,7 +169,10 @@ const GenkiChapter15 = () => {
                 <GenkiExampleDisplay
                     book={2}
                     jp={{ text: "きのう買った本。" }}
-                    en={{ text: "The book that I bought yesterday.", underline: new FirstMatch("that I bought yesterday") }}
+                    en={{
+                        text: "The book that I bought yesterday.",
+                        underline: new FirstMatch("that I bought yesterday")
+                    }}
                 />
                 <GenkiExampleDisplay
                     book={2}
@@ -160,15 +180,23 @@ const GenkiChapter15 = () => {
                     en={{ text: "The book my boyfriend gave me.", underline: new FirstMatch("my boyfriend gave me") }}
                 />
 
-
-                <p>Qualifier sentences in these examples tell us what kind of book we are talking about, just like adjectives.</p>
-                <p>When the subject of the verb appears inside a qualifier sentence, it is accompanied by the particle が, and not は.</p>
-                <p>The verbs used in such qualifier sentences are in their short forms, either in the present, and either in the affirmative or negative.</p>
+                <p>
+                    Qualifier sentences in these examples tell us what kind of book we are talking about, just like
+                    adjectives.
+                </p>
+                <p>
+                    When the subject of the verb appears inside a qualifier sentence, it is accompanied by the particle
+                    が, and not は.
+                </p>
+                <p>
+                    The verbs used in such qualifier sentences are in their short forms, either in the present, and
+                    either in the affirmative or negative.
+                </p>
             </div>
         )
     }
 
-    return { c15p1, c15p2, c15p3, c15p4 };
+    return { c15p1, c15p2, c15p3, c15p4 }
 }
 
-export default GenkiChapter15;
+export default GenkiChapter15

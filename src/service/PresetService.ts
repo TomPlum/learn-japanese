@@ -1,37 +1,39 @@
-import PresetRepository, { Presets } from "../repository/PresetRepository";
-import LearnMode from "../domain/session/LearnMode";
-import PlayMode from "../domain/session/PlayMode";
-import SessionMode from "../domain/session/SessionMode";
-import UpdateResponse from "../rest/response/UpdateResponse";
-import { SessionSettings } from "../domain/session/settings/SessionSettings";
-import { CustomIcon } from "../domain/Icon";
+import PresetRepository, { Presets } from "../repository/PresetRepository"
+import LearnMode from "../domain/session/LearnMode"
+import PlayMode from "../domain/session/PlayMode"
+import SessionMode from "../domain/session/SessionMode"
+import UpdateResponse from "../rest/response/UpdateResponse"
+import { SessionSettings } from "../domain/session/settings/SessionSettings"
+import { CustomIcon } from "../domain/Icon"
 
 export interface LearnPlayPresets {
-    learn: LearnMode[];
-    play: PlayMode[];
-    error?: string;
+    learn: LearnMode[]
+    play: PlayMode[]
+    error?: string
 }
 
 export interface CustomPresetMeta {
-    name: string;
-    icon: CustomIcon;
-    colour: string;
+    name: string
+    icon: CustomIcon
+    colour: string
 }
 
 class PresetService {
-
-    private readonly repository = new PresetRepository();
+    private readonly repository = new PresetRepository()
 
     /**
      * Retrieves a list of all available presets.
      * @return Learn and play presets.
      */
     public async getAllPresets(): Promise<LearnPlayPresets> {
-        return this.repository.getAllPresets().then((response: Presets) => {
-            return { learn: response.learn, play: response.play, error: response.error };
-        }).catch(response => {
-            return { learn: [], play: [], error: response.error };
-        });
+        return this.repository
+            .getAllPresets()
+            .then((response: Presets) => {
+                return { learn: response.learn, play: response.play, error: response.error }
+            })
+            .catch((response) => {
+                return { learn: [], play: [], error: response.error }
+            })
     }
 
     /**
@@ -39,11 +41,14 @@ class PresetService {
      * @return Default learn and play presets.
      */
     public async getDefaultPresets(): Promise<LearnPlayPresets> {
-        return this.repository.getDefaultPresets().then((response: Presets) => {
-            return { learn: response.learn, play: response.play, error: response.error };
-        }).catch(response => {
-            return { learn: [], play: [], error: response.error };
-        });
+        return this.repository
+            .getDefaultPresets()
+            .then((response: Presets) => {
+                return { learn: response.learn, play: response.play, error: response.error }
+            })
+            .catch((response) => {
+                return { learn: [], play: [], error: response.error }
+            })
     }
 
     /**
@@ -52,8 +57,8 @@ class PresetService {
      */
     public async getPlayPresets(): Promise<PlayMode[]> {
         return this.repository.getDefaultPresets().then((response: Presets) => {
-            return response.play;
-        });
+            return response.play
+        })
     }
 
     /**
@@ -61,11 +66,14 @@ class PresetService {
      * @return Favourite learn and play presets.
      */
     public async getFavouritePresets(): Promise<LearnPlayPresets> {
-        return this.repository.getFavouritePresets().then((response: Presets) => {
-            return { learn: response.learn, play: response.play, error: response.error };
-        }).catch(response => {
-            return { learn: [], play: [], error: response.error ?? response };
-        });
+        return this.repository
+            .getFavouritePresets()
+            .then((response: Presets) => {
+                return { learn: response.learn, play: response.play, error: response.error }
+            })
+            .catch((response) => {
+                return { learn: [], play: [], error: response.error ?? response }
+            })
     }
 
     /**
@@ -73,9 +81,9 @@ class PresetService {
      * @param preset The preset to remove.
      */
     public async removeFavouritePreset(preset: SessionMode): Promise<UpdateResponse> {
-        return this.repository.deleteFavouritePreset(preset.id).then(response => {
-            return { success: response.success, error: response.error };
-        });
+        return this.repository.deleteFavouritePreset(preset.id).then((response) => {
+            return { success: response.success, error: response.error }
+        })
     }
 
     /**
@@ -84,11 +92,14 @@ class PresetService {
      * @param remove An array of favourite presets to remove.
      */
     public async updateFavourites(add: number[], remove: number[]): Promise<UpdateResponse> {
-        return this.repository.updateFavouritePresets(add, remove).then(() => {
-            return { success: true };
-        }).catch(response => {
-            return { success: false, error: response.error };
-        });
+        return this.repository
+            .updateFavouritePresets(add, remove)
+            .then(() => {
+                return { success: true }
+            })
+            .catch((response) => {
+                return { success: false, error: response.error }
+            })
     }
 
     /**
@@ -97,21 +108,27 @@ class PresetService {
      * @param settings The session settings for the preset configuration.
      */
     public async saveCustomPreset(meta: CustomPresetMeta, settings: SessionSettings): Promise<UpdateResponse> {
-        const details = { name: meta.name, icon: meta.icon, colour: meta.colour, settings: settings};
+        const details = { name: meta.name, icon: meta.icon, colour: meta.colour, settings: settings }
         if (settings.gameSettings) {
-            return this.repository.savePlayPreset(details).then(() => {
-                return { success: true };
-            }).catch(response => {
-                return { success: false, error: response.error };
-            });
+            return this.repository
+                .savePlayPreset(details)
+                .then(() => {
+                    return { success: true }
+                })
+                .catch((response) => {
+                    return { success: false, error: response.error }
+                })
         } else {
-            return this.repository.saveLearnPreset(details).then(() => {
-                return { success: true };
-            }).catch(response => {
-                return { success: false, error: response.error };
-            });
+            return this.repository
+                .saveLearnPreset(details)
+                .then(() => {
+                    return { success: true }
+                })
+                .catch((response) => {
+                    return { success: false, error: response.error }
+                })
         }
     }
 }
 
-export default PresetService;
+export default PresetService

@@ -1,16 +1,15 @@
-import NavigationButton from "../NavigationButton";
-import { faBrain, faInfoCircle, faQuestion } from "@fortawesome/free-solid-svg-icons";
-import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
-import styles from "../../../styles/sass/components/ui/buttons/HelpButton.module.scss";
-import { useTranslation } from "react-i18next";
+import NavigationButton from "../NavigationButton"
+import { faBrain, faInfoCircle, faQuestion } from "@fortawesome/free-solid-svg-icons"
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss"
+import styles from "../../../styles/sass/components/ui/buttons/HelpButton.module.scss"
+import { useTranslation } from "react-i18next"
 
 export interface HelpButtonProps {
-    className?: string;
+    className?: string
 }
 
 const HelpButton = (props: HelpButtonProps) => {
-
-    const { t, ready } = useTranslation();
+    const { t, ready } = useTranslation()
 
     return (
         <NavigationButton
@@ -32,7 +31,7 @@ const HelpButton = (props: HelpButtonProps) => {
                 {t("navigation.button.faq")}
             </NavigationButton.Item>
         </NavigationButton>
-    );
+    )
 }
 
-export default HelpButton;
+export default HelpButton

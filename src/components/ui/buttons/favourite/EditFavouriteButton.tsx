@@ -1,33 +1,33 @@
-import styles from "../../../../styles/sass/components/ui/buttons/favourite/EditFavouriteButton.module.scss";
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { Fade } from "react-bootstrap";
-import Icon from "../../menu/icon/Icon";
-import { CustomIcon } from "../../../../domain/Icon";
-import { useTranslation } from "react-i18next";
+import styles from "../../../../styles/sass/components/ui/buttons/favourite/EditFavouriteButton.module.scss"
+import { useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faStar, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { Fade } from "react-bootstrap"
+import Icon from "../../menu/icon/Icon"
+import { CustomIcon } from "../../../../domain/Icon"
+import { useTranslation } from "react-i18next"
 
 export interface EditFavouriteButtonProps {
-    id: number;
-    name: string;
-    selected: boolean;
-    className?: string;
-    onAdd: (id: number) => void;
-    onCancel: (id: number) => void;
-    icon: CustomIcon;
+    id: number
+    name: string
+    selected: boolean
+    className?: string
+    onAdd: (id: number) => void
+    onCancel: (id: number) => void
+    icon: CustomIcon
 }
 
 const EditFavouriteButton = (props: EditFavouriteButtonProps) => {
-    const { id, name, icon, selected, className, onAdd, onCancel } = props;
+    const { id, name, icon, selected, className, onAdd, onCancel } = props
 
-    const [inside, setInside] = useState(false);
-    const { t, ready } = useTranslation();
-    const actions = useTranslation("translation", { keyPrefix: "action" }).t;
+    const [inside, setInside] = useState(false)
+    const { t, ready } = useTranslation()
+    const actions = useTranslation("translation", { keyPrefix: "action" }).t
 
-    const classes = [styles.button, selected ? styles.selected : ""];
-    if (className) classes.push(className);
+    const classes = [styles.button, selected ? styles.selected : ""]
+    if (className) classes.push(className)
 
-    const testId = `edit-favourite-button-${id}`;
+    const testId = `edit-favourite-button-${id}`
 
     return (
         <div className={classes.join(" ")} data-testid={testId}>
@@ -35,7 +35,7 @@ const EditFavouriteButton = (props: EditFavouriteButtonProps) => {
                 className={styles.surface}
                 onMouseOut={() => setInside(false)}
                 onMouseEnter={() => setInside(true)}
-                onClick={() => selected ? onCancel(id) : onAdd(id)}
+                onClick={() => (selected ? onCancel(id) : onAdd(id))}
             />
 
             {inside && (
@@ -46,9 +46,7 @@ const EditFavouriteButton = (props: EditFavouriteButtonProps) => {
                             icon={selected ? faTimes : faStar}
                             className={selected ? styles.delete : styles.star}
                         />
-                        <span className={styles.name}>
-                            {selected ? actions("cancel") : actions("favourite")}
-                        </span>
+                        <span className={styles.name}>{selected ? actions("cancel") : actions("favourite")}</span>
                     </div>
                 </Fade>
             )}
@@ -62,7 +60,7 @@ const EditFavouriteButton = (props: EditFavouriteButtonProps) => {
                 </Fade>
             )}
         </div>
-    );
+    )
 }
 
-export default EditFavouriteButton;
+export default EditFavouriteButton

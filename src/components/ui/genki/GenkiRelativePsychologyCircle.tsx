@@ -1,15 +1,15 @@
-import styles from "../../../styles/sass/components/ui/genki/GenkiRelativePsychologyCircle.module.scss";
-import { Col, Container, Row } from "react-bootstrap";
-import GenkiStructureDisplay from "./GenkiStructureDisplay";
+import styles from "../../../styles/sass/components/ui/genki/GenkiRelativePsychologyCircle.module.scss"
+import { Col, Container, Row } from "react-bootstrap"
+import GenkiStructureDisplay from "./GenkiStructureDisplay"
 
 export interface GenkiRelativePsychologyCircleProps {
-    verb: string;
-    relationship: string;
-    situations: string[];
+    verb: string
+    relationship: string
+    situations: string[]
 }
 
 const GenkiRelativePsychologyCircle = (props: GenkiRelativePsychologyCircleProps) => {
-    const { verb, relationship, situations } = props;
+    const { verb, relationship, situations } = props
 
     return (
         <GenkiStructureDisplay book={2} className={styles.wrapper}>
@@ -20,7 +20,7 @@ const GenkiRelativePsychologyCircle = (props: GenkiRelativePsychologyCircleProps
                         <p className={styles.relationship}>{relationship}</p>
                     </Col>
                     <Col>
-                        {situations.map(situation => {
+                        {situations.map((situation) => {
                             return (
                                 <p className={styles.situation} key={situation}>
                                     {situation}
@@ -31,7 +31,7 @@ const GenkiRelativePsychologyCircle = (props: GenkiRelativePsychologyCircleProps
                 </Row>
             </Container>
         </GenkiStructureDisplay>
-    );
+    )
 }
 
-export default GenkiRelativePsychologyCircle;
+export default GenkiRelativePsychologyCircle

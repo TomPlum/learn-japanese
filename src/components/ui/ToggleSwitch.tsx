@@ -1,17 +1,17 @@
-import { Form } from "react-bootstrap";
-import React from "react";
-import styles from "../../styles/sass/components/ui/ToggleSwitch.module.scss";
+import { Form } from "react-bootstrap"
+import React from "react"
+import styles from "../../styles/sass/components/ui/ToggleSwitch.module.scss"
 
 export interface ToggleSwitchProps {
-    label?: string;
-    enabled: boolean;
-    className?: string;
-    disabled?: boolean;
-    onChange?: () => void;
+    label?: string
+    enabled: boolean
+    className?: string
+    disabled?: boolean
+    onChange?: () => void
 }
 
 const ToggleSwitch = (props: ToggleSwitchProps) => {
-    const { label, enabled, disabled, className, onChange, ...rest} = props;
+    const { label, enabled, disabled, className, onChange, ...rest } = props
     return (
         <Form.Check
             inline
@@ -27,4 +27,4 @@ const ToggleSwitch = (props: ToggleSwitchProps) => {
     )
 }
 
-export default ToggleSwitch;
+export default ToggleSwitch

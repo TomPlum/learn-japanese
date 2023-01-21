@@ -9,8 +9,7 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "plugin:react/jsx-runtime"
     ],
-    overrides: [
-    ],
+    overrides: [],
     parser: "@typescript-eslint/parser",
     parserOptions: {
         ecmaVersion: "latest",
@@ -19,13 +18,10 @@ module.exports = {
             jsx: true
         }
     },
-    plugins: [
-        "react",
-        "@typescript-eslint"
-    ],
+    plugins: ["react", "@typescript-eslint"],
     rules: {
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+        "@typescript-eslint/no-non-null-asserted-optional-chain": "off"
     },
     settings: {
         react: {

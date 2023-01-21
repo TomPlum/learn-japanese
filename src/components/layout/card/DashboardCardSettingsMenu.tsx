@@ -1,22 +1,22 @@
-import React, { PropsWithChildren, ReactElement, useRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
-import { Overlay, Popover } from "react-bootstrap";
-import styles from "../../../styles/sass/components/layout/card/DashboardCardSettingsMenu.module.scss";
+import React, { PropsWithChildren, ReactElement, useRef, useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCog } from "@fortawesome/free-solid-svg-icons"
+import { Overlay, Popover } from "react-bootstrap"
+import styles from "../../../styles/sass/components/layout/card/DashboardCardSettingsMenu.module.scss"
 
 export interface DashboardCardSettingsMenuProps {
-    className?: string;
+    className?: string
 }
 
 const DashboardCardSettingsMenu = (props: PropsWithChildren<DashboardCardSettingsMenuProps>) => {
-    const { children, className } = props;
+    const { children, className } = props
 
-    const ref = useRef(null);
-    const targetRef = useRef(null);
-    const [show, setShow] = useState(false);
+    const ref = useRef(null)
+    const targetRef = useRef(null)
+    const [show, setShow] = useState(false)
 
     const handleClick = () => {
-        setShow(true);
+        setShow(true)
     }
 
     return (
@@ -24,7 +24,8 @@ const DashboardCardSettingsMenu = (props: PropsWithChildren<DashboardCardSetting
             <div ref={targetRef}>
                 <FontAwesomeIcon
                     onClick={handleClick}
-                    fixedWidth icon={faCog}
+                    fixedWidth
+                    icon={faCog}
                     className={styles.icon}
                     data-testid="dashboard-settings-menu-button"
                 />
@@ -40,7 +41,7 @@ const DashboardCardSettingsMenu = (props: PropsWithChildren<DashboardCardSetting
             >
                 <Popover id="card-settings-menu" data-testid="card-settings-menu" className={styles.popover}>
                     <Popover.Content className={styles.content}>
-                        {React.Children.map(children, link => {
+                        {React.Children.map(children, (link) => {
                             return React.cloneElement(link as ReactElement, {
                                 className: styles.link,
                                 onMouseDown: () => setShow(false)
@@ -50,7 +51,7 @@ const DashboardCardSettingsMenu = (props: PropsWithChildren<DashboardCardSetting
                 </Popover>
             </Overlay>
         </span>
-    );
+    )
 }
 
-export default DashboardCardSettingsMenu;
+export default DashboardCardSettingsMenu

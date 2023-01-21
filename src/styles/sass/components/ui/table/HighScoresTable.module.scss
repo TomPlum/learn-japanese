@@ -32,7 +32,7 @@
 }
 
 .table th:hover {
-  color: #FFF;
+  color: #fff;
 }
 
 .table th:first-of-type {
@@ -70,7 +70,8 @@
   border-top-right-radius: 10px;
 }
 
-.table tbody tr td, .table thead tr th {
+.table tbody tr td,
+.table thead tr th {
   padding: 12px;
 }
 
@@ -92,7 +93,7 @@
   @include reflection(#f3ac42, $dark-3);
 }
 
-.table tbody tr:nth-child(-n+3) .user {
+.table tbody tr:nth-child(-n + 3) .user {
   color: $dark-3 !important;
 
   &:hover {

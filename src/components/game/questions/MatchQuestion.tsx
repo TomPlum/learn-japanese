@@ -1,39 +1,38 @@
-import React from "react";
-import { GameQuestionProps } from "../MemoryGame";
-import { Col, Container, Row } from "react-bootstrap";
-import AnswerChoiceDisplay from "../../ui/display/AnswerChoiceDisplay";
-import GameQuestion from "../../../domain/game/GameQuestion";
-import LineTo from "react-lineto";
-import Maps from "../../../utility/Maps";
-import styles from "../../../styles/sass/components/game/questions/MatchQuestion.module.scss";
+import React from "react"
+import { GameQuestionProps } from "../MemoryGame"
+import { Col, Container, Row } from "react-bootstrap"
+import AnswerChoiceDisplay from "../../ui/display/AnswerChoiceDisplay"
+import GameQuestion from "../../../domain/game/GameQuestion"
+import LineTo from "react-lineto"
+import Maps from "../../../utility/Maps"
+import styles from "../../../styles/sass/components/game/questions/MatchQuestion.module.scss"
 
 export interface MatchQuestionProps extends GameQuestionProps {
-    data: Map<string, string>;
+    data: Map<string, string>
 }
 
 interface MatchQuestionState {
-    answer: Map<string, string>;
-    selected?: string;
-    hoveredAnswer?: string;
-    xCursor: number;
-    yCursor: number;
+    answer: Map<string, string>
+    selected?: string
+    hoveredAnswer?: string
+    xCursor: number
+    yCursor: number
 }
 
 class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState> {
-
-    private readonly container = React.createRef<HTMLDivElement>();
-    private readonly displays: Map<string, React.RefObject<AnswerChoiceDisplay>> = new Map();
-    private readonly values = new Map<string, string>();
+    private readonly container = React.createRef<HTMLDivElement>()
+    private readonly displays: Map<string, React.RefObject<AnswerChoiceDisplay>> = new Map()
+    private readonly values = new Map<string, string>()
 
     constructor(props: Readonly<MatchQuestionProps> | MatchQuestionProps) {
-        super(props);
+        super(props)
 
-        const keyValues = [...props.data.keys()].concat([...props.data.values()]);
+        const keyValues = [...props.data.keys()].concat([...props.data.values()])
         keyValues.forEach((value: string) => {
-            this.displays.set(value, React.createRef<AnswerChoiceDisplay>());
-        });
+            this.displays.set(value, React.createRef<AnswerChoiceDisplay>())
+        })
 
-        this.values = Maps.shuffle(props.data);
+        this.values = Maps.shuffle(props.data)
 
         this.state = {
             answer: new Map(),
@@ -55,14 +54,14 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
     }
 
     render() {
-        const { xCursor, yCursor } = this.state;
+        const { xCursor, yCursor } = this.state
 
         return (
             <Container className={styles.wrapper} ref={this.container} onMouseUp={this.resetSelected}>
                 <div style={{ left: xCursor, top: yCursor }} className={styles.cursor} />
 
                 {[...this.values.keys()].map((question: string, i: number) => {
-                    const answer = this.values.get(question)!;
+                    const answer = this.values.get(question)!
 
                     return (
                         <Row className={[styles.row, "justify-content-around"].join(" ")} key={`row-${i}`}>
@@ -81,9 +80,7 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
                                 />
                             </Col>
 
-                            <Col xs={2} md={4}>
-
-                            </Col>
+                            <Col xs={2} md={4}></Col>
 
                             <Col xs={5} md={4}>
                                 <AnswerChoiceDisplay
@@ -107,7 +104,8 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
                                     delay={0}
                                     from={question}
                                     className={styles.connector}
-                                    toAnchor="left" fromAnchor="right"
+                                    toAnchor="left"
+                                    fromAnchor="right"
                                     borderWidth={5}
                                     borderStyle={this.getConnectorStyle(question)}
                                     borderColor={this.getConnectorColour(question)}
@@ -119,116 +117,116 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
                     )
                 })}
             </Container>
-        );
+        )
     }
 
     isCorrect = (): boolean => {
-        const { data } = this.props;
-        const { answer } = this.state;
-        const isCorrect = Maps.areEqual(data, answer);
+        const { data } = this.props
+        const { answer } = this.state
+        const isCorrect = Maps.areEqual(data, answer)
 
         if (!isCorrect) {
-            this.displays.forEach((ref: React.RefObject<AnswerChoiceDisplay>) => ref.current?.notifyIncorrect());
-            this.setState({ selected: undefined, hoveredAnswer: undefined, answer: new Map() });
+            this.displays.forEach((ref: React.RefObject<AnswerChoiceDisplay>) => ref.current?.notifyIncorrect())
+            this.setState({ selected: undefined, hoveredAnswer: undefined, answer: new Map() })
         }
 
-        return isCorrect;
+        return isCorrect
     }
 
     private handleAnswerAttempt = (selectedAnswer: string) => {
-        const { data, isValid } = this.props;
-        const { answer, selected } = this.state;
-        const selectedAnswers = [...answer.values()];
+        const { data, isValid } = this.props
+        const { answer, selected } = this.state
+        const selectedAnswers = [...answer.values()]
 
         if (selected && !selectedAnswers.includes(selectedAnswer)) {
-            answer.set(selected, selectedAnswer);
-            this.setState({ answer: answer, selected: undefined });
+            answer.set(selected, selectedAnswer)
+            this.setState({ answer: answer, selected: undefined })
         }
 
         isValid(data.size === answer.size)
     }
 
     private getQuestionValueClassName = (value: string): string => {
-        const { selected, answer } = this.state;
+        const { selected, answer } = this.state
         if (answer.has(value)) {
-            return styles.matched;
+            return styles.matched
         } else if (selected === value) {
-            return styles.selected;
+            return styles.selected
         } else {
-            return styles.question;
+            return styles.question
         }
     }
 
     private getAnswerValueClassName = (value: string): string => {
-        const { selected, answer, hoveredAnswer } = this.state;
+        const { selected, answer, hoveredAnswer } = this.state
         if ([...answer.values()].includes(value)) {
-            return styles.matched;
+            return styles.matched
         } else if (selected && hoveredAnswer === value) {
-            return styles.selected;
+            return styles.selected
         } else {
-            return styles.answer;
+            return styles.answer
         }
     }
 
     private handleQuestionSelection = (value: string) => {
-        const { answer } = this.state;
+        const { answer } = this.state
         if (!answer.has(value)) {
-            this.setState({ selected: value });
+            this.setState({ selected: value })
         }
     }
 
     private resetSelected = () => {
-        this.setState({ selected: undefined });
+        this.setState({ selected: undefined })
     }
 
     private resetHoveredAnswer = () => {
-        this.setState({ hoveredAnswer: undefined });
+        this.setState({ hoveredAnswer: undefined })
     }
 
     private handleCursorMove = (e: MouseEvent) => {
-        this.setState({ xCursor: e.pageX, yCursor: e.pageY });
+        this.setState({ xCursor: e.pageX, yCursor: e.pageY })
     }
 
     private handleTouchMove = (e: TouchEvent) => {
-        const touch = e.touches[0];
-        this.setState({ xCursor: touch.pageX, yCursor: touch.pageY });
+        const touch = e.touches[0]
+        this.setState({ xCursor: touch.pageX, yCursor: touch.pageY })
     }
 
     private handleAnswerChange = (selectedAnswer: string) => {
-        const { answer } = this.state;
-        const answers = [...answer.values()];
+        const { answer } = this.state
+        const answers = [...answer.values()]
         if (answers.includes(selectedAnswer)) {
             //Reverse mapping - gets the question for the selected answer
-            const question = [...answer.entries()].filter(entry => entry[1] === selectedAnswer)[0][0];
-            answer.delete(question);
-            this.setState({ selected: question, answer: answer });
+            const question = [...answer.entries()].filter((entry) => entry[1] === selectedAnswer)[0][0]
+            answer.delete(question)
+            this.setState({ selected: question, answer: answer })
         }
     }
 
     private getConnectorTarget = (question: string): string => {
-        const { answer } = this.state;
+        const { answer } = this.state
         if (answer.has(question)) {
-            return answer.get(question)!;
+            return answer.get(question)!
         }
-        return styles.cursor;
+        return styles.cursor
     }
 
     private getConnectorRenderCondition = (question: string): boolean => {
-        const { selected, answer } = this.state;
-        const questionIsSelected = question === selected;
-        const questionHasMatchedAnswer = answer.has(question);
-        return questionIsSelected || questionHasMatchedAnswer;
+        const { selected, answer } = this.state
+        const questionIsSelected = question === selected
+        const questionHasMatchedAnswer = answer.has(question)
+        return questionIsSelected || questionHasMatchedAnswer
     }
 
     private getConnectorStyle = (question: string): string => {
-        const { answer } = this.state;
-        return answer.has(question) ? "solid" : "dashed";
+        const { answer } = this.state
+        return answer.has(question) ? "solid" : "dashed"
     }
 
     private getConnectorColour = (question: string) => {
-        const { answer } = this.state;
-        return answer.has(question) ? "#7a7a7a" : "#4594e9";
+        const { answer } = this.state
+        return answer.has(question) ? "#7a7a7a" : "#4594e9"
     }
 }
 
-export default MatchQuestion;
+export default MatchQuestion

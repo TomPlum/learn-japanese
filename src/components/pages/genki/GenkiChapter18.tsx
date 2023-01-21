@@ -1,19 +1,18 @@
-import {GrammarInfoProps} from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiTable from "../../ui/table/GenkiTable";
-import FuriganaDisplay from "../../ui/display/FuriganaDisplay";
-import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
-import {FirstMatch, MultipleFirstMatch, Occurrences, Whole} from "../../ui/Underline";
-import GenkiFootNoteDisplay from "../../ui/genki/GenkiFootNoteDisplay";
-import GenkiFootnoteRef from "../../ui/genki/GenkiFootnoteRef";
-import GenkiFootNoteContainer from "../../ui/genki/GenkiFootNoteContainer";
-import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
-import {Col, Container, Row} from "react-bootstrap";
-import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import GenkiTable from "../../ui/table/GenkiTable"
+import FuriganaDisplay from "../../ui/display/FuriganaDisplay"
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
+import { FirstMatch, MultipleFirstMatch, Occurrences, Whole } from "../../ui/Underline"
+import GenkiFootNoteDisplay from "../../ui/genki/GenkiFootNoteDisplay"
+import GenkiFootnoteRef from "../../ui/genki/GenkiFootnoteRef"
+import GenkiFootNoteContainer from "../../ui/genki/GenkiFootNoteContainer"
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
+import { Col, Container, Row } from "react-bootstrap"
+import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay"
 
 const GenkiChapter18 = () => {
-
     const c18p1: GrammarInfoProps = {
         chapter: 18,
         section: 1,
@@ -21,90 +20,227 @@ const GenkiChapter18 = () => {
         title: "Transitivity Pairs",
         body: (
             <div>
-                <p>Some verbs describe situations in which humans act on something (transitive verbs), other verbs
+                <p>
+                    Some verbs describe situations in which humans act on something (transitive verbs), other verbs
                     describe changes that happen to things or people (intransitive verbs).
                 </p>
                 <GenkiTable chapter={18}>
                     <tbody>
-                       <tr>
-                           <td>&nbsp;</td>
-                           <td colSpan={2} className={styles.genkiTwo}>Transitive</td>
-                           <td colSpan={2} className={styles.genkiTwo}>Intransitive</td>
-                       </tr>
-                       <tr>
-                           <td>&nbsp;</td>
-                           <td><FuriganaDisplay chars={[{ kanji: '開', kana: 'あ', okurigana: 'ける' }]} position='bottom'/></td>
-                           <td><i className={styles.muted}>open something</i></td>
-                           <td><FuriganaDisplay chars={[{ kanji: '開', kana: 'あ', okurigana: 'く' }]} position='bottom'/></td>
-                           <td><i className={styles.muted}>something opens</i></td>
-                       </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td><FuriganaDisplay chars={[{ kanji: '閉', kana: 'し', okurigana: 'める' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>close something</i></td>
-                            <td><FuriganaDisplay chars={[{ kanji: '閉', kana: 'し', okurigana: 'まる' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>something closes</i></td>
+                            <td colSpan={2} className={styles.genkiTwo}>
+                                Transitive
+                            </td>
+                            <td colSpan={2} className={styles.genkiTwo}>
+                                Intransitive
+                            </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td><FuriganaDisplay chars={[{ kanji: '入', kana: 'い', okurigana: 'れる' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>put something in</i></td>
-                            <td><FuriganaDisplay chars={[{ kanji: '入', kana: 'はい', okurigana: 'る' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>something goes inside</i></td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "開", kana: "あ", okurigana: "ける" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>open something</i>
+                            </td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "開", kana: "あ", okurigana: "く" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>something opens</i>
+                            </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td><FuriganaDisplay chars={[{ kanji: '出', kana: 'だ', okurigana: 'す' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>take something out</i></td>
-                            <td><FuriganaDisplay chars={[{ kanji: '出', kana: 'で', okurigana: 'る' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>something goes out</i></td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "閉", kana: "し", okurigana: "める" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>close something</i>
+                            </td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "閉", kana: "し", okurigana: "まる" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>something closes</i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "入", kana: "い", okurigana: "れる" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>put something in</i>
+                            </td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "入", kana: "はい", okurigana: "る" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>something goes inside</i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "出", kana: "だ", okurigana: "す" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>take something out</i>
+                            </td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "出", kana: "で", okurigana: "る" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>something goes out</i>
+                            </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
                             <td>つける</td>
-                            <td><i className={styles.muted}>turn something on</i></td>
+                            <td>
+                                <i className={styles.muted}>turn something on</i>
+                            </td>
                             <td>つく</td>
-                            <td><i className={styles.muted}>something goes on</i></td>
+                            <td>
+                                <i className={styles.muted}>something goes on</i>
+                            </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td><FuriganaDisplay chars={[{ kanji: '消', kana: 'け', okurigana: 'す' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>turn something off;</i></td>
-                            <td><FuriganaDisplay chars={[{ kanji: '消', kana: 'き', okurigana: 'える' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>something goes off</i></td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "消", kana: "け", okurigana: "す" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>turn something off;</i>
+                            </td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "消", kana: "き", okurigana: "える" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>something goes off</i>
+                            </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td colSpan={3}><i className={styles.muted}>extinguish something</i></td>
+                            <td colSpan={3}>
+                                <i className={styles.muted}>extinguish something</i>
+                            </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td><FuriganaDisplay chars={[{ kanji: '壊', kana: 'こわ', okurigana: 'す' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>breaking something</i></td>
-                            <td><FuriganaDisplay chars={[{ kanji: '壊', kana: 'こわ', okurigana: 'れる' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>something breaks</i></td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "壊", kana: "こわ", okurigana: "す" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>breaking something</i>
+                            </td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "壊", kana: "こわ", okurigana: "れる" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>something breaks</i>
+                            </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td><FuriganaDisplay chars={[{ kanji: '汚', kana: 'よご', okurigana: 'す' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>make something dirty</i></td>
-                            <td><FuriganaDisplay chars={[{ kanji: '汚', kana: 'よご', okurigana: 'れる' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>something becomes dirty</i></td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "汚", kana: "よご", okurigana: "す" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>make something dirty</i>
+                            </td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "汚", kana: "よご", okurigana: "れる" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>something becomes dirty</i>
+                            </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td><FuriganaDisplay chars={[{ kanji: '落', kana: 'お', okurigana: 'とす' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>drop something</i></td>
-                            <td><FuriganaDisplay chars={[{ kanji: '落', kana: 'お', okurigana: 'ちる' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>something drops</i></td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "落", kana: "お", okurigana: "とす" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>drop something</i>
+                            </td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "落", kana: "お", okurigana: "ちる" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>something drops</i>
+                            </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td><FuriganaDisplay chars={[{ kanji: '沸', kana: 'わ', okurigana: 'かす' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>boil water</i></td>
-                            <td><FuriganaDisplay chars={[{ kanji: '沸', kana: 'わ', okurigana: 'く' }]} position='bottom'/></td>
-                            <td><i className={styles.muted}>water boils</i></td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "沸", kana: "わ", okurigana: "かす" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>boil water</i>
+                            </td>
+                            <td>
+                                <FuriganaDisplay
+                                    chars={[{ kanji: "沸", kana: "わ", okurigana: "く" }]}
+                                    position="bottom"
+                                />
+                            </td>
+                            <td>
+                                <i className={styles.muted}>water boils</i>
+                            </td>
                         </tr>
                     </tbody>
                 </GenkiTable>
@@ -137,12 +273,12 @@ const GenkiChapter18 = () => {
                     book={2}
                     jp={{
                         chars: [
-                            { pre: 'トムさんは', kanji: '窓', kana: 'まど' },
-                            { pre: 'を', kanji: '開', kana: 'あ', okurigana: 'け', post: 'ています。' }
+                            { pre: "トムさんは", kanji: "窓", kana: "まど" },
+                            { pre: "を", kanji: "開", kana: "あ", okurigana: "け", post: "ています。" }
                         ],
-                        position: 'bottom'
+                        position: "bottom"
                     }}
-                    en={{ text: 'Tom is opening the windows.' }}
+                    en={{ text: "Tom is opening the windows." }}
                 />
 
                 <p>
@@ -153,12 +289,12 @@ const GenkiChapter18 = () => {
                     book={2}
                     jp={{
                         chars: [
-                            { kanji: '窓', kana: 'まど' },
-                            { pre: 'が', kanji: '開', kana: 'あ', okurigana: 'い', post: 'ています。' }
+                            { kanji: "窓", kana: "まど" },
+                            { pre: "が", kanji: "開", kana: "あ", okurigana: "い", post: "ています。" }
                         ],
-                        position: 'bottom'
+                        position: "bottom"
                     }}
-                    en={{ text: 'The windows are open.' }}
+                    en={{ text: "The windows are open." }}
                 />
             </div>
         )
@@ -171,15 +307,20 @@ const GenkiChapter18 = () => {
         title: "~てしまう / ちゃう",
         body: (
             <div>
-                <p>The <i>te</i>-form of a verb + しまう has two meanings.</p>
                 <p>
-                    Firstly, it indicates that one "carries out with determination" a plan described by the verb.
-                    This typically involves finishing something.
+                    The <i>te</i>-form of a verb + しまう has two meanings.
+                </p>
+                <p>
+                    Firstly, it indicates that one "carries out with determination" a plan described by the verb. This
+                    typically involves finishing something.
                 </p>
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: '映画を見ってしまいました。', underline: new FirstMatch("てしまいました") }}
-                    en={{ text: 'I watched the film completely / I finished watching the film.', underline: new MultipleFirstMatch("completely", "finished") }}
+                    jp={{ text: "映画を見ってしまいました。", underline: new FirstMatch("てしまいました") }}
+                    en={{
+                        text: "I watched the film completely / I finished watching the film.",
+                        underline: new MultipleFirstMatch("completely", "finished")
+                    }}
                 />
 
                 <p>
@@ -189,22 +330,35 @@ const GenkiChapter18 = () => {
                 </p>
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: '車の中に傘を忘れてしまいました。', underline: new FirstMatch("てしまいました") }}
-                    en={{ text: 'I inadvertently left my umbrella in the car', underline: new FirstMatch("inadvertently") }}
+                    jp={{ text: "車の中に傘を忘れてしまいました。", underline: new FirstMatch("てしまいました") }}
+                    en={{
+                        text: "I inadvertently left my umbrella in the car",
+                        underline: new FirstMatch("inadvertently")
+                    }}
                 />
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: '宿題を忘れたので, 先生は怒ってしまいました。', underline: new FirstMatch("てしまいました") }}
-                    en={{ text: 'To my horror, my professor got angry because I had forgotten my homework.', underline: new FirstMatch("To my horror") }}
+                    jp={{
+                        text: "宿題を忘れたので, 先生は怒ってしまいました。",
+                        underline: new FirstMatch("てしまいました")
+                    }}
+                    en={{
+                        text: "To my horror, my professor got angry because I had forgotten my homework.",
+                        underline: new FirstMatch("To my horror")
+                    }}
                 />
 
-                <GenkiStructureDisplay book={2} width={300} style={{ height: '75px', marginTop: '30px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                <GenkiStructureDisplay book={2} width={300} style={{ height: "75px", marginTop: "30px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-around" }}>
                         <span>~てしまう</span>
                         <span>=</span>
-                        <div style={{ float: 'right' }}>
-                            <div>1. <i>finish doing</i></div>
-                            <div>2. <i>regrettably</i></div>
+                        <div style={{ float: "right" }}>
+                            <div>
+                                1. <i>finish doing</i>
+                            </div>
+                            <div>
+                                2. <i>regrettably</i>
+                            </div>
                         </div>
                     </div>
                 </GenkiStructureDisplay>
@@ -212,8 +366,8 @@ const GenkiChapter18 = () => {
                 <p>
                     Both nuanced meanings focus on the discrepancy between our intentions and the state of the world
                     when left on its own. The particular nuance used in a given sentence may be ambiguous. How the
-                    sentence is interpreted depends on the assumptions the speaker has. For example, the first
-                    sentence above about "finishing a film" could be interpreted as "I regrettably finished the film".
+                    sentence is interpreted depends on the assumptions the speaker has. For example, the first sentence
+                    above about "finishing a film" could be interpreted as "I regrettably finished the film".
                 </p>
 
                 <hr className={styles.hr} />
@@ -222,16 +376,24 @@ const GenkiChapter18 = () => {
 
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: '眼鏡をなくしちゃった。'}}
-                    en={{ text: 'I lost my glasses!' }}
+                    jp={{ text: "眼鏡をなくしちゃった。" }}
+                    en={{ text: "I lost my glasses!" }}
                 />
 
                 <GenkiStructureDisplay book={2} width={500}>
                     <Container>
                         <Row>
-                            <Col><p className={styles.genkiTwo}><em>Written language:</em></p></Col>
+                            <Col>
+                                <p className={styles.genkiTwo}>
+                                    <em>Written language:</em>
+                                </p>
+                            </Col>
                             <Col xs={1}>{}</Col>
-                            <Col><p className={styles.genkiTwo}><em>Spoken variant:</em></p></Col>
+                            <Col>
+                                <p className={styles.genkiTwo}>
+                                    <em>Spoken variant:</em>
+                                </p>
+                            </Col>
                         </Row>
                         <Row>
                             <Col>
@@ -272,7 +434,7 @@ const GenkiChapter18 = () => {
                             </Col>
                         </Row>
 
-                        <hr className={styles.hr} style={{ marginTop: '-1px' }} />
+                        <hr className={styles.hr} style={{ marginTop: "-1px" }} />
 
                         <Row>
                             <Col>
@@ -318,8 +480,8 @@ const GenkiChapter18 = () => {
                 <GenkiFootNoteContainer>
                     <GenkiFootNoteDisplay reference={1} book={2}>
                         Since しまう is chained after the te-form, which is implicitly affirmative, it can only produce
-                        sentences meaning that something regrettable did happen. Therefore, negative sentences cannot
-                        be formed with it.
+                        sentences meaning that something regrettable did happen. Therefore, negative sentences cannot be
+                        formed with it.
                     </GenkiFootNoteDisplay>
                 </GenkiFootNoteContainer>
             </div>
@@ -335,27 +497,30 @@ const GenkiChapter18 = () => {
             <div>
                 <p>
                     The present tense short-form of a predicate + と means whenever the situation described holds true,
-                    another thing happens. In most of these sentences, the first clause describes the cause, and the second
-                    the effect.
+                    another thing happens. In most of these sentences, the first clause describes the cause, and the
+                    second the effect.
                 </p>
                 <GenkiExampleDisplay
                     book={2}
                     jp={{ text: "私はその人と話すと元気になる。", underline: new Occurrences("と", [2]) }}
-                    en={{ text: "Whenever I talk with that person, I feel uplifted.", underline: new FirstMatch("Whenever") }}
+                    en={{
+                        text: "Whenever I talk with that person, I feel uplifted.",
+                        underline: new FirstMatch("Whenever")
+                    }}
                 />
 
-                <GenkiStructureDisplay book={2} style={{ display: 'inline-flex', justifyContent: 'flex-start' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
+                <GenkiStructureDisplay book={2} style={{ display: "inline-flex", justifyContent: "flex-start" }}>
+                    <div style={{ display: "flex", flexDirection: "column", textAlign: "center" }}>
                         <GenkiUnderlineDisplay book={2} underline={new Whole()}>
                             <span>clause A</span>
                         </GenkiUnderlineDisplay>
                         <span>(short, present)</span>
                     </div>
-                    <span style={{ marginRight: '10px' }}>と</span>
+                    <span style={{ marginRight: "10px" }}>と</span>
                     <GenkiUnderlineDisplay book={2} underline={new FirstMatch("clause B")}>
                         <span>clause B。</span>
                     </GenkiUnderlineDisplay>
-                    <div style={{ marginLeft: '10px' }}>
+                    <div style={{ marginLeft: "10px" }}>
                         <i>Whenever A happens, B happens, too.</i>
                     </div>
                 </GenkiStructureDisplay>
@@ -373,8 +538,14 @@ const GenkiChapter18 = () => {
                 </p>
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: "私は子共の時,冬になるとかぜをひきました。", underline: new MultipleFirstMatch("と", "ました") }}
-                    en={{ text: "When I was young, whenever it was winter, I caught a cold.", underline: new MultipleFirstMatch("If, caught") }}
+                    jp={{
+                        text: "私は子共の時,冬になるとかぜをひきました。",
+                        underline: new MultipleFirstMatch("と", "ました")
+                    }}
+                    en={{
+                        text: "When I was young, whenever it was winter, I caught a cold.",
+                        underline: new MultipleFirstMatch("If, caught")
+                    }}
                 />
 
                 <p>
@@ -396,7 +567,10 @@ const GenkiChapter18 = () => {
                 <GenkiExampleDisplay
                     book={2}
                     jp={{ text: "夜になると町が静かになります。", underline: new FirstMatch("と") }}
-                    en={{ text: "Whenever its night-time, the town becomes quiet.", underline: new FirstMatch("Whenever") }}
+                    en={{
+                        text: "Whenever its night-time, the town becomes quiet.",
+                        underline: new FirstMatch("Whenever")
+                    }}
                 />
             </div>
         )
@@ -410,36 +584,50 @@ const GenkiChapter18 = () => {
         body: (
             <div>
                 <p>
-                    You can connect two verbs with ながら to say that two actions are performed at the same time.
-                    You add ながら after the stem of a verb, and then add another verb in any form.
+                    You can connect two verbs with ながら to say that two actions are performed at the same time. You
+                    add ながら after the stem of a verb, and then add another verb in any form.
                 </p>
                 <GenkiExampleDisplay
                     book={2}
                     jp={{ text: "私はいつも音楽を聞きながら日本語を勉強します。", underline: new FirstMatch("ながら") }}
-                    en={{ text: "I always study Japanese while listening to music.", underline: new FirstMatch("while") }}
+                    en={{
+                        text: "I always study Japanese while listening to music.",
+                        underline: new FirstMatch("while")
+                    }}
                 />
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: "トムさんはポッドキャストを歌いながら運転しています。", underline: new FirstMatch("ながら") }}
+                    jp={{
+                        text: "トムさんはポッドキャストを歌いながら運転しています。",
+                        underline: new FirstMatch("ながら")
+                    }}
                     en={{ text: "Tom is driving while listening to a podcast.", underline: new FirstMatch("while") }}
                 />
                 <GenkiExampleDisplay
                     book={2}
                     jp={{ text: "アルバイトをしながら大学に行くうのは大変です。", underline: new FirstMatch("ながら") }}
-                    en={{ text: "It is not easy to go to university while working a part-time job.", underline: new FirstMatch("while") }}
+                    en={{
+                        text: "It is not easy to go to university while working a part-time job.",
+                        underline: new FirstMatch("while")
+                    }}
                 />
 
                 <p>The form's structure can be summarised as;</p>
 
-                <GenkiStructureDisplay book={2} style={{ display: 'flex', justifyContent: 'space-evenly' }} width={350}>
+                <GenkiStructureDisplay book={2} style={{ display: "flex", justifyContent: "space-evenly" }} width={350}>
                     <div>
-                        <span>V<sub>1</sub>(stem) + ながら, V<sub>2</sub></span>
+                        <span>
+                            V<sub>1</sub>(stem) + ながら, V<sub>2</sub>
+                        </span>
                     </div>
                     <div>
-                        <i>while{" "}</i>
-                        <span>V</span><sub>1</sub><i>-ing</i>
-                        <span>,{" "}</span>
-                        <span>V</span><sub>2</sub>
+                        <i>while </i>
+                        <span>V</span>
+                        <sub>1</sub>
+                        <i>-ing</i>
+                        <span>, </span>
+                        <span>V</span>
+                        <sub>2</sub>
                     </div>
                 </GenkiStructureDisplay>
 
@@ -450,15 +638,24 @@ const GenkiChapter18 = () => {
                 <GenkiExampleDisplay
                     book={2}
                     incorrect
-                    compare={{ text: 'トムさんが買い物する時, ワィルさんは部屋を掃除します。', underline: new FirstMatch("時") }}
-                    jp={{ text: "トムさんが買い物しながら,　ワィルさんは部屋を掃除します。", underline: new FirstMatch("ながら") }}
-                    en={{ text: "While Tom does the shopping, Will cleans the room.", underline: new FirstMatch("while") }}
+                    compare={{
+                        text: "トムさんが買い物する時, ワィルさんは部屋を掃除します。",
+                        underline: new FirstMatch("時")
+                    }}
+                    jp={{
+                        text: "トムさんが買い物しながら,　ワィルさんは部屋を掃除します。",
+                        underline: new FirstMatch("ながら")
+                    }}
+                    en={{
+                        text: "While Tom does the shopping, Will cleans the room.",
+                        underline: new FirstMatch("while")
+                    }}
                 />
             </div>
         )
     }
 
-    return { c18p1, c18p2, c18p3, c18p4, c18p5 };
+    return { c18p1, c18p2, c18p3, c18p4, c18p5 }
 }
 
 export default GenkiChapter18

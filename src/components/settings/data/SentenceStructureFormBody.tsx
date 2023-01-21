@@ -1,22 +1,23 @@
-import { Col, Row } from "react-bootstrap";
-import styles from "../../../styles/sass/components/settings/data/SentenceStructureForm.module.scss";
-import QuantityField from "../../ui/fields/QuantityField";
-import ToggleSwitch from "../../ui/ToggleSwitch";
-import { useEffect, useState } from "react";
-import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep";
-import SentenceStructureSettings, { SentenceStructureSettingsBuilder } from "../../../domain/session/settings/data/SentenceStructureSettings";
+import { Col, Row } from "react-bootstrap"
+import styles from "../../../styles/sass/components/settings/data/SentenceStructureForm.module.scss"
+import QuantityField from "../../ui/fields/QuantityField"
+import ToggleSwitch from "../../ui/ToggleSwitch"
+import { useEffect, useState } from "react"
+import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep"
+import SentenceStructureSettings, {
+    SentenceStructureSettingsBuilder
+} from "../../../domain/session/settings/data/SentenceStructureSettings"
 
 const SentenceStructureFormBody = (props: DataSettingsStepFormProps<SentenceStructureSettings>) => {
+    const { className, isValid, onChange } = props
 
-    const { className, isValid, onChange } = props;
-
-    const [adverbs, setAdverbs] = useState(true);
-    const [particles, setParticles] = useState(true);
-    const [expressions, setExpressions] = useState(true);
-    const [verbs, setVerbs] = useState(true);
-    const [nouns, setNouns] = useState(true);
-    const [adjectives, setAdjectives] = useState(true);
-    const [quantity, setQuantity] = useState(25);
+    const [adverbs, setAdverbs] = useState(true)
+    const [particles, setParticles] = useState(true)
+    const [expressions, setExpressions] = useState(true)
+    const [verbs, setVerbs] = useState(true)
+    const [nouns, setNouns] = useState(true)
+    const [adjectives, setAdjectives] = useState(true)
+    const [quantity, setQuantity] = useState(25)
 
     useEffect(() => {
         const settings = new SentenceStructureSettingsBuilder()
@@ -27,16 +28,16 @@ const SentenceStructureFormBody = (props: DataSettingsStepFormProps<SentenceStru
             .withNouns(nouns)
             .withAdjectives(adjectives)
             .withQuantity(quantity)
-            .build();
+            .build()
 
-        onChange(settings);
-        isValid?.(validate());
-    }, [adverbs, particles, expressions, verbs, nouns, adjectives, quantity]);
+        onChange(settings)
+        isValid?.(validate())
+    }, [adverbs, particles, expressions, verbs, nouns, adjectives, quantity])
 
     const validate = () => {
-        const isQuantityValid = quantity > 0;
-        const areTopicsValid = adverbs || particles || expressions || verbs || nouns || adjectives;
-        return isQuantityValid && areTopicsValid;
+        const isQuantityValid = quantity > 0
+        const areTopicsValid = adverbs || particles || expressions || verbs || nouns || adjectives
+        return isQuantityValid && areTopicsValid
     }
 
     return (
@@ -62,8 +63,8 @@ const SentenceStructureFormBody = (props: DataSettingsStepFormProps<SentenceStru
                     />
 
                     <p className={adverbs ? styles.description : styles.disabled}>
-                        Adverbs are words or phrases that modify or qualify an adjective, verb, or other adverb or
-                        a word group, expressing a relation of place, time, circumstance, manner, cause, degree, etc.
+                        Adverbs are words or phrases that modify or qualify an adjective, verb, or other adverb or a
+                        word group, expressing a relation of place, time, circumstance, manner, cause, degree, etc.
                     </p>
 
                     <ToggleSwitch
@@ -87,8 +88,8 @@ const SentenceStructureFormBody = (props: DataSettingsStepFormProps<SentenceStru
                     />
 
                     <p className={expressions ? styles.description : styles.disabled}>
-                        Common expressions used in every-day conversation. Most of these are taken from the
-                        "Expressions & Adverbs" section of the vocabulary page in the Genki textbook.
+                        Common expressions used in every-day conversation. Most of these are taken from the "Expressions
+                        & Adverbs" section of the vocabulary page in the Genki textbook.
                     </p>
 
                     <ToggleSwitch
@@ -100,8 +101,8 @@ const SentenceStructureFormBody = (props: DataSettingsStepFormProps<SentenceStru
                     />
 
                     <p className={verbs ? styles.description : styles.disabled}>
-                        Verbs are words used to describe an action, state, or occurrence, and forming the main
-                        part of the predicate of a sentence, such as hear, become, happen.
+                        Verbs are words used to describe an action, state, or occurrence, and forming the main part of
+                        the predicate of a sentence, such as hear, become, happen.
                     </p>
 
                     <ToggleSwitch
@@ -113,8 +114,8 @@ const SentenceStructureFormBody = (props: DataSettingsStepFormProps<SentenceStru
                     />
 
                     <p className={nouns ? styles.description : styles.disabled}>
-                        Nouns are words (other than a pronouns) used to identify any of a class of people, places,
-                        or things (common noun), or to name a particular one of these (proper noun).
+                        Nouns are words (other than a pronouns) used to identify any of a class of people, places, or
+                        things (common noun), or to name a particular one of these (proper noun).
                     </p>
 
                     <ToggleSwitch

@@ -39,7 +39,7 @@
 @mixin timer {
   float: right;
   font-family: "Ciutadella Rounded Medium", sans-serif;
-  color: #FFF;
+  color: #fff;
 }
 
 .question {
@@ -81,7 +81,9 @@
   max-width: 555px;
 }
 
-.header, .question, .footer {
+.header,
+.question,
+.footer {
   width: 100%;
 }
 
@@ -140,7 +142,8 @@
     font-size: 1.1em;
   }
 
-  .score section > span, .score {
+  .score section > span,
+  .score {
     font-size: 1.3em !important;
   }
 
@@ -206,7 +209,8 @@
     font-size: 1.7em;
   }
 
-  .score section > span, .score {
+  .score section > span,
+  .score {
     font-size: 1.8em !important;
   }
 
@@ -270,7 +274,8 @@
     font-size: 2.2em;
   }
 
-  .score section > span, .score {
+  .score section > span,
+  .score {
     font-size: 2.4em;
   }
 

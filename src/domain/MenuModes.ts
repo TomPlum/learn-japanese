@@ -1,9 +1,9 @@
-import LearnMode from "./session/LearnMode";
-import PlayMode from "./session/PlayMode";
+import LearnMode from "./session/LearnMode"
+import PlayMode from "./session/PlayMode"
 
 export interface MenuModes<T> {
-    getTopic(): string;
-    getModes(): T[];
+    getTopic(): string
+    getModes(): T[]
 }
 
 export type LearnMenuModes = MenuModes<LearnMode>

@@ -1,57 +1,56 @@
-import React, { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import HintSettings, { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings";
-import RangeSlider from "react-bootstrap-range-slider";
-import ScrollableContainer from "../../ui/ScrollableContainer";
-import styles from "../../../styles/sass/components/settings/game/HintSettingsForm.module.scss";
-import ToggleSwitch from "../../ui/ToggleSwitch";
-import { SettingsFormHandle } from "./GameSettingsMenu";
-import { useTranslation } from "react-i18next";
+import React, { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
+import { Col, Row } from "react-bootstrap"
+import HintSettings, { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings"
+import RangeSlider from "react-bootstrap-range-slider"
+import ScrollableContainer from "../../ui/ScrollableContainer"
+import styles from "../../../styles/sass/components/settings/game/HintSettingsForm.module.scss"
+import ToggleSwitch from "../../ui/ToggleSwitch"
+import { SettingsFormHandle } from "./GameSettingsMenu"
+import { useTranslation } from "react-i18next"
 
 export interface HintSettingsFormProps {
-    onChange: (settings: HintSettings) => void;
+    onChange: (settings: HintSettings) => void
 }
 
 const HintSettingsForm = forwardRef((props: HintSettingsFormProps, ref: Ref<SettingsFormHandle>) => {
+    const { onChange } = props
 
-   const { onChange } = props;
+    const defaultState = new HintSettingsBuilder().isEnabled().withQuantity(3).areUnlimited(false).build()
 
-   const defaultState = new HintSettingsBuilder().isEnabled().withQuantity(3).areUnlimited(false).build();
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.hint" })
+    const [enabled, setEnabled] = useState(defaultState.enabled)
+    const [quantity, setQuantity] = useState(defaultState.quantity)
+    const [unlimited, setUnlimited] = useState(defaultState.unlimited)
 
-   const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.hint" });
-   const [enabled, setEnabled] = useState(defaultState.enabled);
-   const [quantity, setQuantity] = useState(defaultState.quantity);
-   const [unlimited, setUnlimited] = useState(defaultState.unlimited);
+    useEffect(() => {
+        onChange(defaultState)
+    }, [])
 
-   useEffect(() => {
-       onChange(defaultState);
-   }, []);
+    useEffect(() => {
+        const settings = new HintSettingsBuilder()
+            .isEnabled(enabled)
+            .withQuantity(quantity)
+            .areUnlimited(unlimited)
+            .build()
 
-   useEffect(() => {
-       const settings = new HintSettingsBuilder()
-           .isEnabled(enabled)
-           .withQuantity(quantity)
-           .areUnlimited(unlimited)
-           .build();
+        onChange(settings)
+    }, [enabled, quantity, unlimited])
 
-       onChange(settings);
-   }, [enabled, quantity, unlimited]);
-
-   useImperativeHandle(ref, () => ({
-       reset() {
-           setEnabled(defaultState.enabled);
-           setQuantity(defaultState.quantity);
-           setUnlimited(defaultState.unlimited);
-       }
-   }))
+    useImperativeHandle(ref, () => ({
+        reset() {
+            setEnabled(defaultState.enabled)
+            setQuantity(defaultState.quantity)
+            setUnlimited(defaultState.unlimited)
+        }
+    }))
 
     const onChangeHintQuantity = (e: React.ChangeEvent, value: number) => {
-        setQuantity(value);
+        setQuantity(value)
     }
 
     const handleHintToggle = () => {
-       setEnabled(!enabled);
-       setUnlimited(false);
+        setEnabled(!enabled)
+        setUnlimited(false)
     }
 
     return (
@@ -66,14 +65,13 @@ const HintSettingsForm = forwardRef((props: HintSettingsFormProps, ref: Ref<Sett
                         onChange={handleHintToggle}
                     />
 
-                    <p className={styles.leadingDescription}>
-                        {t("enable-desc")}
-                    </p>
+                    <p className={styles.leadingDescription}>{t("enable-desc")}</p>
                 </Col>
 
                 <Col xs={12}>
                     <RangeSlider
-                        min={1} max={10}
+                        min={1}
+                        max={10}
                         value={quantity}
                         variant="primary"
                         disabled={!enabled || unlimited}
@@ -82,9 +80,7 @@ const HintSettingsForm = forwardRef((props: HintSettingsFormProps, ref: Ref<Sett
                         tooltip={enabled && !unlimited ? "auto" : "off"}
                     />
 
-                    <p className={styles.leadingDescription}>
-                        {t("quantity-desc")}
-                    </p>
+                    <p className={styles.leadingDescription}>{t("quantity-desc")}</p>
                 </Col>
 
                 <Col xs={12}>
@@ -97,13 +93,11 @@ const HintSettingsForm = forwardRef((props: HintSettingsFormProps, ref: Ref<Sett
                         onChange={() => setUnlimited(!unlimited)}
                     />
 
-                    <p className={styles.leadingDescription}>
-                        {t("infinite-desc")}
-                    </p>
+                    <p className={styles.leadingDescription}>{t("infinite-desc")}</p>
                 </Col>
             </Row>
         </ScrollableContainer>
-    );
-});
+    )
+})
 
-export default HintSettingsForm;
+export default HintSettingsForm

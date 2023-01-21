@@ -18,7 +18,7 @@
 }
 
 @mixin selected {
-  color: #FFF;
+  color: #fff;
   box-shadow: none;
   transition: 0.3s ease;
   @include common;
@@ -39,7 +39,10 @@
   @include button;
 }
 
-.kyoiku-grade-1:hover, .kyoiku-grade-1:focus, .kyoiku-grade-1:active, .kyoiku-grade-1-selected {
+.kyoiku-grade-1:hover,
+.kyoiku-grade-1:focus,
+.kyoiku-grade-1:active,
+.kyoiku-grade-1-selected {
   border-color: $kyoiku-grade-1;
   background-color: $kyoiku-grade-1;
   @include selected;
@@ -51,7 +54,8 @@
   @include button;
 }
 
-.kyoiku-grade-2:hover, .kyoiku-grade-2-selected {
+.kyoiku-grade-2:hover,
+.kyoiku-grade-2-selected {
   border-color: $kyoiku-grade-2;
   background-color: $kyoiku-grade-2;
   @include selected;
@@ -63,7 +67,8 @@
   @include button;
 }
 
-.kyoiku-grade-3:hover, .kyoiku-grade-3-selected {
+.kyoiku-grade-3:hover,
+.kyoiku-grade-3-selected {
   border-color: $kyoiku-grade-3;
   background-color: $kyoiku-grade-3;
   @include selected;
@@ -75,7 +80,8 @@
   @include button;
 }
 
-.kyoiku-grade-4:hover, .kyoiku-grade-4-selected {
+.kyoiku-grade-4:hover,
+.kyoiku-grade-4-selected {
   border-color: $kyoiku-grade-4;
   background-color: $kyoiku-grade-4;
   @include selected;
@@ -87,7 +93,8 @@
   @include button;
 }
 
-.kyoiku-grade-5:hover, .kyoiku-grade-5-selected {
+.kyoiku-grade-5:hover,
+.kyoiku-grade-5-selected {
   border-color: $kyoiku-grade-5;
   background-color: $kyoiku-grade-5;
   @include selected;
@@ -99,7 +106,8 @@
   @include button;
 }
 
-.kyoiku-grade-6:hover, .kyoiku-grade-6-selected {
+.kyoiku-grade-6:hover,
+.kyoiku-grade-6-selected {
   border-color: $kyoiku-grade-6;
   background-color: $kyoiku-grade-6;
   @include selected;

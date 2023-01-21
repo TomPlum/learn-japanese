@@ -1,9 +1,9 @@
-import { GrammarInfoProps } from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import QuoteDisplay from "../../ui/display/QuoteDisplay";
-import GenkiExampleTable from "../../ui/genki/GenkiExampleTable";
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import React from "react";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import QuoteDisplay from "../../ui/display/QuoteDisplay"
+import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
+import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import React from "react"
 
 const GenkiChapter1 = () => {
     const c1p1: GrammarInfoProps = {
@@ -17,8 +17,10 @@ const GenkiChapter1 = () => {
                     <QuoteDisplay chapter={1}>It is 12:30.</QuoteDisplay>
                     <span> and </span>
                     <QuoteDisplay chapter={1}>I am a student.</QuoteDisplay>
-                    <span>are sentences that can be translated into Japanese
-                    using an appropriate noun and the word <em>desu</em>.</span>
+                    <span>
+                        are sentences that can be translated into Japanese using an appropriate noun and the word{" "}
+                        <em>desu</em>.
+                    </span>
                 </p>
                 <GenkiExampleTable
                     book={1}
@@ -57,9 +59,15 @@ const GenkiChapter1 = () => {
                     book={1}
                     className={styles.exampleTable}
                     values={[
-                        { japanese: { value: "たけしさんのでんわばんごう。" }, english: { value: "Takeshi’s phone number" } },
+                        {
+                            japanese: { value: "たけしさんのでんわばんごう。" },
+                            english: { value: "Takeshi’s phone number" }
+                        },
                         { japanese: { value: "だいがくのせんせい。" }, english: { value: "a college professor" } },
-                        { japanese: { value: "にほんごのがくせい。" }, english: { value: "a student of the Japanese language" } },
+                        {
+                            japanese: { value: "にほんごのがくせい。" },
+                            english: { value: "a student of the Japanese language" }
+                        },
                         { japanese: { value: "にほんのだいがく。" }, english: { value: "a college in Japan" } }
                     ]}
                 />
@@ -67,7 +75,7 @@ const GenkiChapter1 = () => {
         )
     }
 
-    return { c1p1, c1p2, c1p3 };
+    return { c1p1, c1p2, c1p3 }
 }
 
-export default GenkiChapter1;
+export default GenkiChapter1

@@ -1,15 +1,15 @@
-import { GrammarInfoProps } from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import React from "react";
-import GenkiTable from "../../ui/table/GenkiTable";
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay";
-import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay";
-import { FirstMatch } from "../../ui/Underline";
-import QuoteDisplay from "../../ui/display/QuoteDisplay";
-import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
-import GenkiExampleTable from "../../ui/genki/GenkiExampleTable";
-import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import React from "react"
+import GenkiTable from "../../ui/table/GenkiTable"
+import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay"
+import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay"
+import { FirstMatch } from "../../ui/Underline"
+import QuoteDisplay from "../../ui/display/QuoteDisplay"
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
+import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
 
 const GenkiChapter6 = () => {
     const c6p1: GrammarInfoProps = {
@@ -27,13 +27,20 @@ const GenkiChapter6 = () => {
                     <li>forming a sentence that describes two events or activities (“I did this and did that.”)</li>
                 </ul>
 
-                <p>Conjugating for the て form is fairly complex. There are separate rules for る, irregular, and the various う verbs. A summary follows.</p>
+                <p>
+                    Conjugating for the て form is fairly complex. There are separate rules for る, irregular, and the
+                    various う verbs. A summary follows.
+                </p>
 
                 <GenkiTable chapter={6}>
                     <tbody>
                         <tr className={styles.rowSection}>
                             <td>Ru-verbs</td>
-                            <td>{"る "}<span className={styles.arrow}>&#8594;</span>{" て"}</td>
+                            <td>
+                                {"る "}
+                                <span className={styles.arrow}>&#8594;</span>
+                                {" て"}
+                            </td>
                             <td>
                                 <span>{"食べる "}</span>
                                 <span className={styles.arrow}>&#8594;</span>
@@ -126,7 +133,11 @@ const GenkiChapter6 = () => {
                             </td>
                         </tr>
                         <tr className={styles.full}>
-                            <td>{"く "}<span className={styles.arrow}>&#8594;</span>{" いて"}</td>
+                            <td>
+                                {"く "}
+                                <span className={styles.arrow}>&#8594;</span>
+                                {" いて"}
+                            </td>
                             <td>
                                 <span>{"書く "}</span>
                                 <span className={styles.arrow}>&#8594;</span>
@@ -146,7 +157,11 @@ const GenkiChapter6 = () => {
                             </td>
                         </tr>
                         <tr className={[styles.rowSection, styles.full].join(" ")}>
-                            <td>{"ぐ "}<span className={styles.arrow}>&#8594;</span>{" いで"}</td>
+                            <td>
+                                {"ぐ "}
+                                <span className={styles.arrow}>&#8594;</span>
+                                {" いで"}
+                            </td>
                             <td>
                                 <span>{"泳ぐ "}</span>
                                 <span className={styles.arrow}>&#8594;</span>
@@ -156,7 +171,11 @@ const GenkiChapter6 = () => {
                             </td>
                         </tr>
                         <tr className={[styles.rowSection, styles.full].join(" ")}>
-                            <td>{"す "}<span className={styles.arrow}>&#8594;</span>{" して"}</td>
+                            <td>
+                                {"す "}
+                                <span className={styles.arrow}>&#8594;</span>
+                                {" して"}
+                            </td>
                             <td>
                                 <span>{"話す "}</span>
                                 <span className={styles.arrow}>&#8594;</span>
@@ -208,13 +227,13 @@ const GenkiChapter6 = () => {
                 <p>For example:</p>
                 <GenkiExampleDisplay
                     book={1}
-                    jp={{ text: "教科書のテープを聞いてください。"}}
+                    jp={{ text: "教科書のテープを聞いてください。" }}
                     en={{ text: "Please listen to the tape that goes with the textbook." }}
                 />
 
                 <GenkiExampleDisplay
                     book={1}
-                    jp={{ text: "すみません。ちょっと教えてください。"}}
+                    jp={{ text: "すみません。ちょっと教えてください。" }}
                     en={{ text: "Excuse me. Please teach me a little. (= Tell me, I need your advice.)" }}
                 />
             </div>
@@ -230,30 +249,32 @@ const GenkiChapter6 = () => {
             <div>
                 <p>
                     You can use a te-form if you want to combine two or more verbs, as in describing a sequence of
-                    events or actions <QuoteDisplay chapter={6}>I did this then that</QuoteDisplay>. In other words,
-                    the te-form does the work of “and” with verbs. (Note と can only connect nouns not verbs.)
+                    events or actions <QuoteDisplay chapter={6}>I did this then that</QuoteDisplay>. In other words, the
+                    te-form does the work of “and” with verbs. (Note と can only connect nouns not verbs.)
                 </p>
 
                 <p>For example:</p>
                 <GenkiExampleDisplay
                     book={1}
-                    jp={{ text: "図書館に行って, 本を借ります。"}}
+                    jp={{ text: "図書館に行って, 本を借ります。" }}
                     en={{ text: "I will go to the library and check out some books." }}
                 />
                 <GenkiExampleDisplay
                     book={1}
-                    jp={{ text: "今日は、六時に起きて、勉強しました。"}}
+                    jp={{ text: "今日は、六時に起きて、勉強しました。" }}
                     en={{ text: "Today I got up at six and studied." }}
                 />
 
                 <hr className={styles.hr} />
 
-                <p>The te-form of a verb can also be used to connect a verb more “loosely” with the rest of a sentence.</p>
+                <p>
+                    The te-form of a verb can also be used to connect a verb more “loosely” with the rest of a sentence.
+                </p>
 
                 <p>For example:</p>
                 <GenkiExampleDisplay
                     book={1}
-                    jp={{ text: "バスに乗って、会社に行きます。"}}
+                    jp={{ text: "バスに乗って、会社に行きます。" }}
                     en={{ text: "I go to work by bus." }}
                 />
             </div>
@@ -269,8 +290,8 @@ const GenkiChapter6 = () => {
             <div>
                 <p>
                     A verbal te-form plus もいいです means <QuoteDisplay chapter={6}>you may do...,</QuoteDisplay> which
-                    describes an activity that is permitted. To ask for permission, you can turn it into a
-                    question sentence, ～てもいいですか。
+                    describes an activity that is permitted. To ask for permission, you can turn it into a question
+                    sentence, ～てもいいですか。
                 </p>
 
                 <p>For example:</p>
@@ -297,8 +318,8 @@ const GenkiChapter6 = () => {
             <div>
                 <p>
                     To deny somebody permission to do something, you can use the te-form plus はいけません。This means
-                    <QuoteDisplay chapter={6}>you must not do...,</QuoteDisplay> a strong prohibition statement, as
-                    in rules and regulations.
+                    <QuoteDisplay chapter={6}>you must not do...,</QuoteDisplay> a strong prohibition statement, as in
+                    rules and regulations.
                 </p>
 
                 <p>For example:</p>
@@ -331,12 +352,18 @@ const GenkiChapter6 = () => {
                 <GenkiExampleDisplay
                     book={1}
                     jp={{ text: "私は今晩勉強します。あしたテストがありますから。", underline: new FirstMatch("から") }}
-                    en={{ text: "I will study this evening. Because we will have an exam tomorrow.", underline: new FirstMatch("Because") }}
+                    en={{
+                        text: "I will study this evening. Because we will have an exam tomorrow.",
+                        underline: new FirstMatch("Because")
+                    }}
                 />
                 <GenkiExampleDisplay
                     book={1}
                     jp={{ text: "バスに乗りましょう。タクシーは高いですから。", underline: new FirstMatch("から") }}
-                    en={{ text: "Let’s take the bus. Because taxis are expensive.", underline: new FirstMatch("Because") }}
+                    en={{
+                        text: "Let’s take the bus. Because taxis are expensive.",
+                        underline: new FirstMatch("Because")
+                    }}
                 />
             </div>
         )
@@ -350,8 +377,8 @@ const GenkiChapter6 = () => {
         body: (
             <div>
                 <p>
-                    ましょうか can mean <QuoteDisplay chapter={6}>lets...</QuoteDisplay>, but ましょうか can also be used
-                    in offering assistance like <QuoteDisplay chapter={6}>let me do...,</QuoteDisplay>.
+                    ましょうか can mean <QuoteDisplay chapter={6}>lets...</QuoteDisplay>, but ましょうか can also be
+                    used in offering assistance like <QuoteDisplay chapter={6}>let me do...,</QuoteDisplay>.
                 </p>
 
                 <p>For example, you can offer help by saying:</p>
@@ -371,7 +398,7 @@ const GenkiChapter6 = () => {
         )
     }
 
-    return { c6p1, c6p2, c6p3, c6p4, c6p5, c6p6, c6p7 };
+    return { c6p1, c6p2, c6p3, c6p4, c6p5, c6p6, c6p7 }
 }
 
-export default GenkiChapter6;
+export default GenkiChapter6

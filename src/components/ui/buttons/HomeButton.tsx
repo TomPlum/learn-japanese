@@ -1,16 +1,15 @@
-import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import NavigationButton from "../NavigationButton";
-import { useTranslation } from "react-i18next";
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss"
+import { faHome } from "@fortawesome/free-solid-svg-icons"
+import NavigationButton from "../NavigationButton"
+import { useTranslation } from "react-i18next"
 
 export interface HomeButtonProps {
-    className?: string;
-    disabled?: boolean;
+    className?: string
+    disabled?: boolean
 }
 
 const HomeButton = (props: HomeButtonProps) => {
-
-    const { t, ready } = useTranslation();
+    const { t, ready } = useTranslation()
 
     return (
         <NavigationButton
@@ -25,7 +24,7 @@ const HomeButton = (props: HomeButtonProps) => {
             textClass={menuStyles.linkText}
             text={t("navigation.button.home")}
         />
-    );
+    )
 }
 
-export default HomeButton;
+export default HomeButton

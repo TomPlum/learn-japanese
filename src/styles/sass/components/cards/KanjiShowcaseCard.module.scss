@@ -38,7 +38,7 @@ $highlight-colour: rgba($dark-1, 0.7);
   border-radius: 10px;
   width: 100%;
   text-align: center;
-  color: #FFF;
+  color: #fff;
 }
 
 .readings {
@@ -47,7 +47,8 @@ $highlight-colour: rgba($dark-1, 0.7);
   justify-content: space-between;
 }
 
-.on, .kun {
+.on,
+.kun {
   background-color: $highlight-colour;
   padding: 6px 10px;
   width: 50%;
@@ -57,7 +58,7 @@ $highlight-colour: rgba($dark-1, 0.7);
   align-items: flex-end;
   margin: 10px 0;
   border-radius: 10px;
-  color: #FFF;
+  color: #fff;
   position: relative;
 }
 
@@ -139,7 +140,7 @@ $highlight-colour: rgba($dark-1, 0.7);
 }
 
 .clickable:hover > * {
-  color: #FFF;
+  color: #fff;
 }
 
 .icon {

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../../styles/sass/components/ui/buttons/QuitButton.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from "react"
+import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import styles from "../../../styles/sass/components/ui/buttons/QuitButton.module.scss"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 interface QuitButtonProps {
-    onClick: () => void;
-    className?: string;
+    onClick: () => void
+    className?: string
 }
 
 class QuitButton extends Component<QuitButtonProps> {
@@ -17,8 +17,8 @@ class QuitButton extends Component<QuitButtonProps> {
                 onClick={this.props.onClick}
                 title="Quit"
             />
-        );
+        )
     }
 }
 
-export default QuitButton;
+export default QuitButton

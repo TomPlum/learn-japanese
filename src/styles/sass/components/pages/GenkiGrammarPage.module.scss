@@ -35,13 +35,14 @@
   position: relative;
 }
 
-.search input, .search input:focus {
+.search input,
+.search input:focus {
   height: 40px;
   font-size: 1.2em;
   background-color: transparent;
   box-shadow: none;
-  border-color: #FFF !important;
-  color: #FFF;
+  border-color: #fff !important;
+  color: #fff;
 }
 
 .search div {
@@ -100,7 +101,7 @@
 }
 
 .full > * {
-  color: #FFF !important;
+  color: #fff !important;
 }
 
 .arrow {

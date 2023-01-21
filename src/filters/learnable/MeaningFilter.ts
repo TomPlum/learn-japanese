@@ -1,5 +1,5 @@
-import { Filter } from "../Filter";
-import { Learnable } from "../../domain/learn/Learnable";
+import { Filter } from "../Filter"
+import { Learnable } from "../../domain/learn/Learnable"
 
 /**
  * Filters out Learnable data objects whose meanings don't contain part or all of
@@ -10,25 +10,23 @@ import { Learnable } from "../../domain/learn/Learnable";
  * - Search Term: "day" -> ["Monday", "Tuesday", "Wednesday"]
  */
 class MeaningFilter<T extends Learnable> implements Filter<T> {
-
-    private readonly meaning: string;
+    private readonly meaning: string
 
     constructor(meaning: string) {
-        this.meaning = meaning;
+        this.meaning = meaning
     }
 
     apply(values: T[]): T[] {
         if (!this.meaning) {
-            return [];
+            return []
         }
 
         return values.filter((datum: T) => {
             return datum.getMeanings().some((meaning: string) => {
                 return meaning.includes(this.meaning)
-            });
-        });
+            })
+        })
     }
-
 }
 
-export default MeaningFilter;
+export default MeaningFilter

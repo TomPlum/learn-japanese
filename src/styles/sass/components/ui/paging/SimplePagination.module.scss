@@ -4,7 +4,12 @@
   margin: 0 15px;
 }
 
-.button, .button:active, .button:focus, .disabled, .disabled:active, .disabled:focus {
+.button,
+.button:active,
+.button:focus,
+.disabled,
+.disabled:active,
+.disabled:focus {
   border: none;
   padding: 0 6px;
   box-shadow: none !important;

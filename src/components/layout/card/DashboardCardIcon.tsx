@@ -1,26 +1,26 @@
-import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
-import styles from "../../../styles/sass/components/layout/card/DashboardCardIcon.module.scss";
+import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome"
+import styles from "../../../styles/sass/components/layout/card/DashboardCardIcon.module.scss"
 
 export interface DashboardCardIconProps extends FontAwesomeIconProps {
-    href?: string;
-    title?: string;
-    className?: string;
-    disabled?: boolean;
-    onClick?: () => void;
+    href?: string
+    title?: string
+    className?: string
+    disabled?: boolean
+    onClick?: () => void
 }
 
 const DashboardCardIcon = (props: DashboardCardIconProps) => {
-    const { title, href, disabled, className, onClick } = props;
+    const { title, href, disabled, className, onClick } = props
 
-    const classes = [styles.icon, className];
+    const classes = [styles.icon, className]
 
     if (disabled) {
-        classes.push(styles.disabled);
+        classes.push(styles.disabled)
     }
 
     const handleClick = () => {
         if (!disabled) {
-            onClick?.();
+            onClick?.()
         }
     }
 
@@ -33,6 +33,6 @@ const DashboardCardIcon = (props: DashboardCardIconProps) => {
             className={classes.join(" ")}
             data-testid="dashboard-card-icon"
         />
-    );
+    )
 }
-export default DashboardCardIcon;
+export default DashboardCardIcon

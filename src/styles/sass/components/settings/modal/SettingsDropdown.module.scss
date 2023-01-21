@@ -16,7 +16,8 @@
     margin-right: 12px;
   }
 
-  .chevron, .updating {
+  .chevron,
+  .updating {
     position: absolute;
     right: 0;
     margin: 12px;
@@ -73,7 +74,7 @@
     opacity: 0.8;
   }
 
-  &:nth-child(n+1) {
+  &:nth-child(n + 1) {
     border-bottom: 3px solid $dark-1;
   }
 

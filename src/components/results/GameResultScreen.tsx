@@ -1,56 +1,63 @@
-import { useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import GameResult from "../../domain/game/GameResult";
-import Feedback from "./Feedback";
-import { faAward, faEraser, faGlassCheers, faHeartbeat, faHeartBroken, faHourglassEnd, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faLightbulb } from "@fortawesome/free-regular-svg-icons";
-import styles from "../../styles/sass/components/results/GameResultScreen.module.scss";
-import { GameFinishReason } from "../../domain/game/GameFinishReason";
-import HighScoreSubmitButton from "../ui/buttons/HighScoreSubmitButton";
+import { useState } from "react"
+import { Button, Col, Container, Row } from "react-bootstrap"
+import GameResult from "../../domain/game/GameResult"
+import Feedback from "./Feedback"
+import {
+    faAward,
+    faEraser,
+    faGlassCheers,
+    faHeartbeat,
+    faHeartBroken,
+    faHourglassEnd,
+    faTimes,
+    IconDefinition
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faClock, faLightbulb } from "@fortawesome/free-regular-svg-icons"
+import styles from "../../styles/sass/components/results/GameResultScreen.module.scss"
+import { GameFinishReason } from "../../domain/game/GameFinishReason"
+import HighScoreSubmitButton from "../ui/buttons/HighScoreSubmitButton"
 
 export interface GameResultScreenProps {
-    onClose: () => void;
-    result: GameResult;
-    presetId?: number;
+    onClose: () => void
+    result: GameResult
+    presetId?: number
 }
 
 const GameResultScreen = (props: GameResultScreenProps) => {
+    const { result, presetId, onClose } = props
 
-    const { result, presetId, onClose } = props;
-
-    const [showMistakesModal, setShowMistakesModal] = useState(false);
+    const [showMistakesModal, setShowMistakesModal] = useState(false)
 
     const getScore = (result: GameResult): string => {
-        const correct = result.correctAnswers.size;
+        const correct = result.correctAnswers.size
         const wrong = new Set(result.wrongAnswers).size
-        return "You answered " + correct + "/" + (correct + wrong) + " correctly.";
+        return "You answered " + correct + "/" + (correct + wrong) + " correctly."
     }
 
-    const getTitleIcon = (): { icon: IconDefinition, colour: string } => {
+    const getTitleIcon = (): { icon: IconDefinition; colour: string } => {
         switch (result.reason) {
             case GameFinishReason.EXHAUSTED_QUESTIONS: {
-                return { icon: faGlassCheers, colour: "#2e6cde" };
+                return { icon: faGlassCheers, colour: "#2e6cde" }
             }
             case GameFinishReason.QUIT: {
-                return { icon: faTimes, colour: "#d43232" };
+                return { icon: faTimes, colour: "#d43232" }
             }
             case GameFinishReason.NO_LIVES_REMAINING: {
-                return { icon: faHeartBroken, colour: "#d43232" };
+                return { icon: faHeartBroken, colour: "#d43232" }
             }
             case GameFinishReason.NO_TIME_REMAINING: {
-                return { icon: faHourglassEnd, colour: "#db8632" };
+                return { icon: faHourglassEnd, colour: "#db8632" }
             }
         }
     }
 
     const hide = () => {
-        setShowMistakesModal(false);
+        setShowMistakesModal(false)
     }
 
     return (
         <Container className={styles.wrapper} data-testid="game-results-screen">
-
             <Feedback onClose={hide} show={showMistakesModal} data={result.wrongAnswers} />
 
             <Row className={styles.header}>
@@ -147,17 +154,9 @@ const GameResultScreen = (props: GameResultScreenProps) => {
                     </Col>
                 )}
 
-                {presetId && (
-                    <HighScoreSubmitButton
-                        presetId={presetId}
-                        score={result.score}
-                        time={result.duration}
-                    />
-                )}
+                {presetId && <HighScoreSubmitButton presetId={presetId} score={result.score} time={result.duration} />}
 
-                {!presetId && (
-                    <span>Your score will not be submitted as you played a custom game.</span>
-                )}
+                {!presetId && <span>Your score will not be submitted as you played a custom game.</span>}
 
                 <Col>
                     <Button variant="success" onClick={onClose} className={styles.finish}>
@@ -166,7 +165,7 @@ const GameResultScreen = (props: GameResultScreenProps) => {
                 </Col>
             </Row>
         </Container>
-    );
+    )
 }
 
-export default GameResultScreen;
+export default GameResultScreen

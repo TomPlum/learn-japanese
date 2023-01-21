@@ -1,4 +1,4 @@
-import { Icon } from "./domain/Icon";
+import { Icon } from "./domain/Icon"
 
 export const iconList: Icon[] = [
     "Fa500Px",
@@ -1612,4 +1612,4 @@ export const iconList: Icon[] = [
     "FaRegWindowMaximize",
     "FaRegWindowMinimize",
     "FaRegWindowRestore"
-];
+]

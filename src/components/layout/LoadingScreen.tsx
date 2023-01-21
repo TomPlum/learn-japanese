@@ -1,24 +1,23 @@
-import SwayingLanternAnimation from "../ui/loading/SwayingLanternAnimation";
-import styles from "../../styles/sass/components/layout/LoadingScreen.module.scss";
-import { useEffect, useState } from "react";
-import { Fade } from "react-bootstrap";
-import Arrays from "../../utility/Arrays";
+import SwayingLanternAnimation from "../ui/loading/SwayingLanternAnimation"
+import styles from "../../styles/sass/components/layout/LoadingScreen.module.scss"
+import { useEffect, useState } from "react"
+import { Fade } from "react-bootstrap"
+import Arrays from "../../utility/Arrays"
 
 const LoadingScreen = (props: { active: boolean }) => {
-
-    const [takingTooLong, setTakingTooLong] = useState(false);
+    const [takingTooLong, setTakingTooLong] = useState(false)
 
     useEffect(() => {
         setTimeout(() => {
-            setTakingTooLong(true);
-        }, 15000);
-    }, []);
+            setTakingTooLong(true)
+        }, 15000)
+    }, [])
 
     const messages = [
         "Fending off the Duolingo owls...",
         "Loading the most difficult kanji we can find...",
         "Confirming if you are 日本語上手..."
-    ];
+    ]
 
     if (props.active) {
         return (
@@ -30,23 +29,23 @@ const LoadingScreen = (props: { active: boolean }) => {
                         {takingTooLong && (
                             <Fade appear in timeout={500}>
                                 <span>
-                                {"Something is taking a long time to load. You may keep waiting or "}
-                                    <a href="/home" className={styles.link}>click here</a>
+                                    {"Something is taking a long time to load. You may keep waiting or "}
+                                    <a href="/home" className={styles.link}>
+                                        click here
+                                    </a>
                                     {" to go back."}
                                 </span>
                             </Fade>
                         )}
 
-                        {!takingTooLong && (
-                            <span>{Arrays.getRandomObject(messages)[0]}</span>
-                        )}
+                        {!takingTooLong && <span>{Arrays.getRandomObject(messages)[0]}</span>}
                     </span>
                 </div>
             </Fade>
-        );
+        )
     }
 
-    return null;
+    return null
 }
 
-export default LoadingScreen;
+export default LoadingScreen

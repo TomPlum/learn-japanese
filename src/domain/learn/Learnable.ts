@@ -1,7 +1,7 @@
-import LearnableField from "./LearnableField";
-import RomajiGenerator from "../../utility/RomajiGenerator";
-import { KanjiReading } from "../kanji/KanjiReading";
-import { v4 as uuid } from "uuid";
+import LearnableField from "./LearnableField"
+import RomajiGenerator from "../../utility/RomajiGenerator"
+import { KanjiReading } from "../kanji/KanjiReading"
+import { v4 as uuid } from "uuid"
 
 /**
  * The base class for all data objects in the application.
@@ -24,7 +24,7 @@ export abstract class Learnable {
      *
      * @return title A single string representing concisely what the data object is.
      */
-    abstract getTitle(): string;
+    abstract getTitle(): string
 
     /**
      * The Japanese kana representation of the data object.
@@ -32,14 +32,14 @@ export abstract class Learnable {
      * Uses an array as some data objects have multiple pronunciations (and therefore kana).
      * @return kana An array of strings of Japanese kana.
      */
-    abstract getKana(): string[];
+    abstract getKana(): string[]
 
     /**
      * The English meanings of the data object.
      * Uses an array as some data objects have multiple meanings (I.e. Kanji).
      * @return meanings An array of words describing what the object means in English.
      */
-    abstract getMeanings(): string[];
+    abstract getMeanings(): string[]
 
     /**
      * Used by the {@link HintButton} to give the user a hint during
@@ -52,7 +52,7 @@ export abstract class Learnable {
      *
      * @return hint A small but significant piece of info about the data object.
      */
-    abstract getHint(): string;
+    abstract getHint(): string
 
     /**
      * Used by instances of {@link GameQuestion} to retrieve the value of a specific field.
@@ -67,30 +67,30 @@ export abstract class Learnable {
     public getFieldValues(field: LearnableField): string[] {
         switch (field) {
             case LearnableField.ROMAJI: {
-                return this.getRomaji();
+                return this.getRomaji()
             }
             case LearnableField.KANA: {
-                return this.getKana();
+                return this.getKana()
             }
             case LearnableField.MEANING: {
-                return this.getMeanings();
+                return this.getMeanings()
             }
             case LearnableField.KANJI: {
-                const kanji = this.getKanjiVariation();
-                return kanji !== null && kanji !== undefined ? [kanji] : [];
+                const kanji = this.getKanjiVariation()
+                return kanji !== null && kanji !== undefined ? [kanji] : []
             }
             case LearnableField.JAPANESE: {
-                const kanji = this.getKanjiVariation();
-                return kanji ? [kanji] : this.getKana();
+                const kanji = this.getKanjiVariation()
+                return kanji ? [kanji] : this.getKana()
             }
             case LearnableField.ONYOMI_READING: {
-                return this.getOnyomiReadings().map((reading: KanjiReading) => reading.kana);
+                return this.getOnyomiReadings().map((reading: KanjiReading) => reading.kana)
             }
             case LearnableField.KUNYOMI_READING: {
-                return this.getKunyomiReadings().map((reading: KanjiReading) => reading.kana);
+                return this.getKunyomiReadings().map((reading: KanjiReading) => reading.kana)
             }
             default: {
-                throw new ReferenceError("Invalid Learnable Field: " + field);
+                throw new ReferenceError("Invalid Learnable Field: " + field)
             }
         }
     }
@@ -101,7 +101,7 @@ export abstract class Learnable {
      * @return reading The Chinese on'yomi readings.
      */
     public getOnyomiReadings(): KanjiReading[] {
-        return [];
+        return []
     }
 
     /**
@@ -110,7 +110,7 @@ export abstract class Learnable {
      * @return reading The Japanese kun'yomi readings.
      */
     public getKunyomiReadings(): KanjiReading[] {
-        return [];
+        return []
     }
 
     /**
@@ -119,14 +119,14 @@ export abstract class Learnable {
      * @return score The base score value by which a multiplier will be applied.
      */
     public getBaseScore(): number {
-        return 100;
+        return 100
     }
 
     /**
      * TODO: Is this needed now? it's only used by the numbers flash card atm. Maybe bring Kanji examples in here?
      */
     public getExample(): LearningExample | undefined {
-        return undefined;
+        return undefined
     }
 
     /**
@@ -144,7 +144,7 @@ export abstract class Learnable {
      * @return kanji The kanji representation of the objects' kana or undefined if it has none.
      */
     public getKanjiVariation(): string | undefined {
-        return undefined;
+        return undefined
     }
 
     /**
@@ -160,7 +160,7 @@ export abstract class Learnable {
      * @return rōmaji The Romanised variations of the objects' kana.
      */
     public getRomaji(): string[] {
-        return this.getKana().map((kana: string) => new RomajiGenerator().generate(kana));
+        return this.getKana().map((kana: string) => new RomajiGenerator().generate(kana))
     }
 
     /**
@@ -170,7 +170,7 @@ export abstract class Learnable {
      * @return tags A list of words that categorise the object.
      */
     public getTags(): string[] {
-        return [];
+        return []
     }
 
     /**
@@ -179,7 +179,7 @@ export abstract class Learnable {
      * @return id a unique ID.
      */
     public getUniqueID(): string {
-        return uuid();
+        return uuid()
     }
 
     /**
@@ -190,11 +190,11 @@ export abstract class Learnable {
      * @return true if they are equal, false if not.
      */
     public equals(other: Learnable): boolean {
-        return this === other;
+        return this === other
     }
 }
 
 export interface LearningExample {
-    english: string;
-    kana: string;
+    english: string
+    kana: string
 }

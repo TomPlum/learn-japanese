@@ -1,11 +1,11 @@
-import { GrammarInfoProps } from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiTable from "../../ui/table/GenkiTable";
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiExampleTable from "../../ui/genki/GenkiExampleTable";
-import GenkiHighlightDisplay from "../../ui/genki/GenkiHighlightDisplay";
-import QuoteDisplay from "../../ui/display/QuoteDisplay";
-import React from "react";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import GenkiTable from "../../ui/table/GenkiTable"
+import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
+import GenkiHighlightDisplay from "../../ui/genki/GenkiHighlightDisplay"
+import QuoteDisplay from "../../ui/display/QuoteDisplay"
+import React from "react"
 
 const GenkiChapter3 = () => {
     const c3p1: GrammarInfoProps = {
@@ -15,7 +15,7 @@ const GenkiChapter3 = () => {
         title: "Verb Conjugation",
         body: (
             <div>
-                <p>There are three categories of verbs in Japanese:  ru-verbs, u-verbs, and irregular verbs.</p>
+                <p>There are three categories of verbs in Japanese: ru-verbs, u-verbs, and irregular verbs.</p>
                 <p>Ru and u verbs follow regular conjugation:</p>
 
                 <GenkiTable chapter={3} className={styles.verbConjugationTable}>
@@ -83,8 +83,11 @@ const GenkiChapter3 = () => {
                     </tbody>
                 </GenkiTable>
 
-                <p>Ru-verbs are so called because you add the suffix ru to the verb base to form the dictionary form.
-                    U-verbs can be broken down into the base and the suffix. The long form are formed with the base plus suffixes imasu and imas</p>
+                <p>
+                    Ru-verbs are so called because you add the suffix ru to the verb base to form the dictionary form.
+                    U-verbs can be broken down into the base and the suffix. The long form are formed with the base plus
+                    suffixes imasu and imas
+                </p>
             </div>
         )
     }
@@ -106,8 +109,14 @@ const GenkiChapter3 = () => {
                 <GenkiExampleTable
                     book={1}
                     values={[
-                        { japanese: { value: "わたしはよくテレビをみます。" }, english: { value: "I often watch TV." } },
-                        { japanese: { value: "メアリーさんはときどきあさごはんをたべません。" }, english: { value: "Mary sometimes doesn’t eat breakfast." } }
+                        {
+                            japanese: { value: "わたしはよくテレビをみます。" },
+                            english: { value: "I often watch TV." }
+                        },
+                        {
+                            japanese: { value: "メアリーさんはときどきあさごはんをたべません。" },
+                            english: { value: "Mary sometimes doesn’t eat breakfast." }
+                        }
                     ]}
                 />
 
@@ -115,8 +124,14 @@ const GenkiChapter3 = () => {
                 <GenkiExampleTable
                     book={1}
                     values={[
-                        { japanese: { value: "わたしはあしたきょうとにいきます" }, english: { value: "I will go to Kyoto tomorrow." } },
-                        { japanese: { value: "スーさんはきょううちにかえりません。" }, english: { value: "Sue will not return today." } }
+                        {
+                            japanese: { value: "わたしはあしたきょうとにいきます" },
+                            english: { value: "I will go to Kyoto tomorrow." }
+                        },
+                        {
+                            japanese: { value: "スーさんはきょううちにかえりません。" },
+                            english: { value: "Sue will not return today." }
+                        }
                     ]}
                 />
             </div>
@@ -130,7 +145,8 @@ const GenkiChapter3 = () => {
         title: "Particles",
         body: (
             <div>
-                <p>Nouns used in sentences generally must be followed by particles, which indicate the relations that
+                <p>
+                    Nouns used in sentences generally must be followed by particles, which indicate the relations that
                     the nouns bear to the verbs. This section contains four particles: で, に, へ, and を.
                 </p>
                 <hr className={styles.hr} />
@@ -142,10 +158,12 @@ const GenkiChapter3 = () => {
                 />
                 <GenkiExampleTable
                     book={1}
-                    values={[{
-                        japanese: { value: "うちでテレビをみます。", underline: "で" },
-                        english: { value: "I will watch TV at home." }
-                    }]}
+                    values={[
+                        {
+                            japanese: { value: "うちでテレビをみます。", underline: "で" },
+                            english: { value: "I will watch TV at home." }
+                        }
+                    ]}
                 />
                 <hr className={styles.hr} />
 
@@ -176,10 +194,12 @@ const GenkiChapter3 = () => {
                 />
                 <GenkiExampleTable
                     book={1}
-                    values={[{
-                        japanese: { value: "わたしはうちへかえります。", underline: "へ" },
-                        english: { value: "I will return." }
-                    }]}
+                    values={[
+                        {
+                            japanese: { value: "わたしはうちへかえります。", underline: "へ" },
+                            english: { value: "I will return." }
+                        }
+                    ]}
                 />
                 <hr className={styles.hr} />
 
@@ -212,17 +232,18 @@ const GenkiChapter3 = () => {
         title: "Time References",
         body: (
             <div>
-                <p>You need the particle に with the days of the week, numerical time expressions, and months.
-                    You do not need to use the time particle に with time expressions defined relative to the present
-                    moment, such as “today” and “tomorrow”, expressions describing regular intervals such as “every day”,
-                    or the word for “when.”
+                <p>
+                    You need the particle に with the days of the week, numerical time expressions, and months. You do
+                    not need to use the time particle に with time expressions defined relative to the present moment,
+                    such as “today” and “tomorrow”, expressions describing regular intervals such as “every day”, or the
+                    word for “when.”
                 </p>
 
                 <GenkiExampleTable
                     book={1}
                     values={[
                         {
-                            japanese: { value: "にちようびにいきます。", underline: "にちようびに"　},
+                            japanese: { value: "にちようびにいきます。", underline: "にちようびに" },
                             english: { value: "I will go on Sunday." }
                         },
                         {
@@ -242,7 +263,8 @@ const GenkiChapter3 = () => {
         title: "～ませんか",
         body: (
             <div>
-                <p>～ませんか can be used to extend an invitation. It should be noted that the affirmative counterpart
+                <p>
+                    ～ませんか can be used to extend an invitation. It should be noted that the affirmative counterpart
                     of this (ますか) cannot be so used.
                 </p>
 
@@ -250,7 +272,7 @@ const GenkiChapter3 = () => {
                     book={1}
                     values={[
                         {
-                            japanese: { value: "テニスをしませんか。"　},
+                            japanese: { value: "テニスをしませんか。" },
                             english: { value: "Will you play tennis with me?" }
                         },
                         {
@@ -275,20 +297,27 @@ const GenkiChapter3 = () => {
 
                 <GenkiExampleTable
                     book={1}
-                    values={[{
-                        japanese: { value: "わたしはときどききっさてんにいきます。"　},
-                        english: { value: "I sometimes go to a coffee shop." }
-                    }]}
+                    values={[
+                        {
+                            japanese: { value: "わたしはときどききっさてんにいきます。" },
+                            english: { value: "I sometimes go to a coffee shop." }
+                        }
+                    ]}
                 />
 
-                <p>It is also important to remember that adverbs of infrequency must be followed by a negative at the end of the sentence.</p>
+                <p>
+                    It is also important to remember that adverbs of infrequency must be followed by a negative at the
+                    end of the sentence.
+                </p>
 
                 <GenkiExampleTable
                     book={1}
-                    values={[{
-                        japanese: { value: "わたしはぜんぜんテレビをみません。"　},
-                        english: { value: "I do not watch TV at all." }
-                    }]}
+                    values={[
+                        {
+                            japanese: { value: "わたしはぜんぜんテレビをみません。" },
+                            english: { value: "I do not watch TV at all." }
+                        }
+                    ]}
                 />
             </div>
         )
@@ -303,26 +332,32 @@ const GenkiChapter3 = () => {
             <div>
                 <p>Japanese sentences are structured as Subject-Object-Verb.</p>
 
-                <p>The following example has the structure
+                <p>
+                    The following example has the structure
                     <QuoteDisplay chapter={3}>{"topic -> time -> place -> object -> verb"}</QuoteDisplay>
                 </p>
                 <GenkiExampleTable
                     book={1}
-                    values={[{
-                        japanese: { value: "わたしはきょうとしょかんでにほんごをべんきょうします。" },
-                        english: { value: "I will study Japanese in the library today." }
-                    }]}
+                    values={[
+                        {
+                            japanese: { value: "わたしはきょうとしょかんでにほんごをべんきょうします。" },
+                            english: { value: "I will study Japanese in the library today." }
+                        }
+                    ]}
                 />
 
-                <p>This example has the structure
+                <p>
+                    This example has the structure
                     <QuoteDisplay chapter={3}>{"topic -> frequency -> time -> goal -> verb"}</QuoteDisplay>
                 </p>
                 <GenkiExampleTable
                     book={1}
-                    values={[{
-                        japanese: { value: "わたしはよくしちじごろうちへかえります。" },
-                        english: { value: "I often go back at around seven." }
-                    }]}
+                    values={[
+                        {
+                            japanese: { value: "わたしはよくしちじごろうちへかえります。" },
+                            english: { value: "I often go back at around seven." }
+                        }
+                    ]}
                 />
             </div>
         )
@@ -335,23 +370,26 @@ const GenkiChapter3 = () => {
         title: "The Topic Particle は",
         body: (
             <div>
-                <p>The particle は presents the topic of one’s utterance (“As for item X, it is such that…”).
-                    It puts forward the item that you want to talk about and comment on.
-                    A topic phrase, however, need not be the subject of a sentence.
+                <p>
+                    The particle は presents the topic of one’s utterance (“As for item X, it is such that…”). It puts
+                    forward the item that you want to talk about and comment on. A topic phrase, however, need not be
+                    the subject of a sentence.
                 </p>
 
                 <GenkiExampleTable
                     book={1}
-                    values={[{
-                        japanese: { value: "アリーさん、しゅまつはたいていなにをしますか。" },
-                        english: { value: "(Mary, what do you usually do on the weekends?)" }
-                    }]}
+                    values={[
+                        {
+                            japanese: { value: "アリーさん、しゅまつはたいていなにをしますか。" },
+                            english: { value: "(Mary, what do you usually do on the weekends?)" }
+                        }
+                    ]}
                 />
             </div>
         )
     }
 
-    return { c3p1, c3p2, c3p3, c3p4, c3p5, c3p6, c3p7, c3p8 };
+    return { c3p1, c3p2, c3p3, c3p4, c3p5, c3p6, c3p7, c3p8 }
 }
 
-export default GenkiChapter3;
+export default GenkiChapter3

@@ -1,9 +1,9 @@
-import { Kana } from "../domain/kana/Kana";
-import KanaRepository from "../repository/KanaRepository";
-import KanaSettings from "../domain/session/settings/data/KanaSettings";
+import { Kana } from "../domain/kana/Kana"
+import KanaRepository from "../repository/KanaRepository"
+import KanaSettings from "../domain/session/settings/data/KanaSettings"
 
 class KanaService {
-    private readonly repository = new KanaRepository();
+    private readonly repository = new KanaRepository()
 
     /**
      * Retrieves an array of kana based on the given config.
@@ -11,12 +11,15 @@ class KanaService {
      * @return kana An array of kana.
      */
     public async getKana(config: KanaSettings): Promise<Kana[]> {
-        return this.repository.read(config).then(response => {
-            return response;
-        }).catch(() => {
-            return [];
-        });
+        return this.repository
+            .read(config)
+            .then((response) => {
+                return response
+            })
+            .catch(() => {
+                return []
+            })
     }
 }
 
-export default KanaService;
+export default KanaService

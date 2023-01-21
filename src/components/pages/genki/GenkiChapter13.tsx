@@ -1,12 +1,12 @@
-import { GrammarInfoProps } from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiTable from "../../ui/table/GenkiTable";
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import React from "react";
-import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
-import { FirstMatch, Occurrences } from "../../ui/Underline";
-import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
-import { Col, Container, Row } from "react-bootstrap";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import GenkiTable from "../../ui/table/GenkiTable"
+import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import React from "react"
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
+import { FirstMatch, Occurrences } from "../../ui/Underline"
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
+import { Col, Container, Row } from "react-bootstrap"
 
 const GenkiChapter13 = () => {
     const c13p1: GrammarInfoProps = {
@@ -16,7 +16,10 @@ const GenkiChapter13 = () => {
         title: "Potential Verbs",
         body: (
             <div>
-                <p>Potential verbs are used to say that someone “can” or “has the ability to” do something, or that something is possible.</p>
+                <p>
+                    Potential verbs are used to say that someone “can” or “has the ability to” do something, or that
+                    something is possible.
+                </p>
 
                 <p>る Verbs: Drop the final –ru and add –rareru</p>
                 <GenkiTable chapter={13} maxWidth={165}>
@@ -52,9 +55,15 @@ const GenkiChapter13 = () => {
                 <GenkiTable chapter={13}>
                     <tbody>
                         <tr>
-                            <th rowSpan={2} className={styles.genkiTwo}>Verb Conjugation</th>
-                            <th colSpan={2} scope="colgroup">Short Form</th>
-                            <th colSpan={2} scope="colgroup">Long Form</th>
+                            <th rowSpan={2} className={styles.genkiTwo}>
+                                Verb Conjugation
+                            </th>
+                            <th colSpan={2} scope="colgroup">
+                                Short Form
+                            </th>
+                            <th colSpan={2} scope="colgroup">
+                                Long Form
+                            </th>
                         </tr>
                         <tr>
                             <th scope="col">Affirmative</th>
@@ -96,24 +105,37 @@ const GenkiChapter13 = () => {
         title: "~し",
         body: (
             <div>
-                <p>When you want to mention not just one, but two or more reasons, you can use し in place of から.
-                    し usually follows a predicate in the short form.
+                <p>
+                    When you want to mention not just one, but two or more reasons, you can use し in place of から. し
+                    usually follows a predicate in the short form.
                 </p>
 
                 <GenkiStructureDisplay book={2} width="auto">
-                    <span className={styles.genkiTwo}>(reason<sub>1</sub>) </span> し、
-                    <span className={styles.genkiTwo}>(reason<sub>2</sub>) </span>し、
+                    <span className={styles.genkiTwo}>
+                        (reason<sub>1</sub>){" "}
+                    </span>{" "}
+                    し、
+                    <span className={styles.genkiTwo}>
+                        (reason<sub>2</sub>){" "}
+                    </span>
+                    し、
                     <span className={styles.genkiTwo}>(situation)</span> 。
                 </GenkiStructureDisplay>
 
                 <p>For example:</p>
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: "家族はら手紙が来たし、かれと電話で話したし、きのうはとてもいい日でした。", underline: new Occurrences("し", [1, 3]) }}
-                    en={{ text: "Yesterday was a great day – a letter came from my family, and I talked with my boyfriend on the phone." }}
+                    jp={{
+                        text: "家族はら手紙が来たし、かれと電話で話したし、きのうはとてもいい日でした。",
+                        underline: new Occurrences("し", [1, 3])
+                    }}
+                    en={{
+                        text: "Yesterday was a great day – a letter came from my family, and I talked with my boyfriend on the phone."
+                    }}
                 />
 
-                <p>Note that し follows the short forms. In present tense sentences, this means that だ appears with
+                <p>
+                    Note that し follows the short forms. In present tense sentences, this means that だ appears with
                     な-adjectives and nouns, but not with い-adjectives.
                 </p>
             </div>
@@ -136,25 +158,26 @@ const GenkiChapter13 = () => {
                     en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
                 />
 
-                <p>To form …そうです sentences with い-adjectives, drop the final い (exception - いい, change to よさ before そう);
-                    with な-adjectives, you just drop な.
+                <p>
+                    To form …そうです sentences with い-adjectives, drop the final い (exception - いい, change to よさ
+                    before そう); with な-adjectives, you just drop な.
                 </p>
 
                 <GenkiTable chapter={13} maxWidth={400}>
-                   <tbody>
-                       <tr>
-                           <td>い Adjectives</td>
-                           <td>おいしい &#8594; おいしそうです</td>
-                       </tr>
-                       <tr>
-                           <td>(exception)</td>
-                           <td>いい &#8594; よさそうです</td>
-                       </tr>
-                       <tr>
-                           <td>な Adjectives</td>
-                           <td>元気(な) &#8594; 元気そうです</td>
-                       </tr>
-                   </tbody>
+                    <tbody>
+                        <tr>
+                            <td>い Adjectives</td>
+                            <td>おいしい &#8594; おいしそうです</td>
+                        </tr>
+                        <tr>
+                            <td>(exception)</td>
+                            <td>いい &#8594; よさそうです</td>
+                        </tr>
+                        <tr>
+                            <td>な Adjectives</td>
+                            <td>元気(な) &#8594; 元気そうです</td>
+                        </tr>
+                    </tbody>
                 </GenkiTable>
             </div>
         )
@@ -167,14 +190,17 @@ const GenkiChapter13 = () => {
         title: "てみる",
         body: (
             <div>
-                <p>You can use the te-form of a verb plus the helping verb みる to express the idea of
-                    “doing something tentatively” or “trying something”.
+                <p>
+                    You can use the te-form of a verb plus the helping verb みる to express the idea of “doing something
+                    tentatively” or “trying something”.
                 </p>
 
                 <GenkiExampleDisplay
                     book={2}
                     jp={{ text: "友だちがあのみせのケーキはおいしと言っていましたから、今度たべてみます。" }}
-                    en={{ text: "My friends say that the cake at the shop is good. I will have a piece one of these days." }}
+                    en={{
+                        text: "My friends say that the cake at the shop is good. I will have a piece one of these days."
+                    }}
                 />
             </div>
         )
@@ -187,8 +213,10 @@ const GenkiChapter13 = () => {
         title: "なら",
         body: (
             <div>
-                <p>A statement of the form “noun A なら predicate X” says that the predicate X applies only to A and is
-                    not more generally valid.  The main ideas of a なら sentence, in other words, are “limitation” and “contrast”.
+                <p>
+                    A statement of the form “noun A なら predicate X” says that the predicate X applies only to A and is
+                    not more generally valid. The main ideas of a なら sentence, in other words, are “limitation” and
+                    “contrast”.
                 </p>
                 <p>An example question and answer:</p>
 
@@ -218,18 +246,18 @@ const GenkiChapter13 = () => {
 
                 <GenkiStructureDisplay book={2} width={400}>
                     <Container>
-                       <Row>
-                           <Col>
-                               <span className={styles.genkiTwo}>(period)</span>
-                               <span>{' に '}</span>
-                               <span className={styles.genkiTwo}>(frequency)</span>
-                           </Col>
-                           <Col>
-                               <span className={styles.genkiTwo}>(frequency)</span>
-                               <span>{' per '}</span>
-                               <span className={styles.genkiTwo}>(period)</span>
-                           </Col>
-                       </Row>
+                        <Row>
+                            <Col>
+                                <span className={styles.genkiTwo}>(period)</span>
+                                <span>{" に "}</span>
+                                <span className={styles.genkiTwo}>(frequency)</span>
+                            </Col>
+                            <Col>
+                                <span className={styles.genkiTwo}>(frequency)</span>
+                                <span>{" per "}</span>
+                                <span className={styles.genkiTwo}>(period)</span>
+                            </Col>
+                        </Row>
                     </Container>
                 </GenkiStructureDisplay>
 
@@ -242,7 +270,7 @@ const GenkiChapter13 = () => {
         )
     }
 
-    return { c13p1, c13p2, c13p3, c13p4, c13p5, c13p6 };
+    return { c13p1, c13p2, c13p3, c13p4, c13p5, c13p6 }
 }
 
-export default GenkiChapter13;
+export default GenkiChapter13

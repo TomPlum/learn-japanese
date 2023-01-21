@@ -1,10 +1,10 @@
-import { GrammarInfoProps } from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiExampleTable from "../../ui/genki/GenkiExampleTable";
-import { Col, Row } from "react-bootstrap";
-import GenkiTable from "../../ui/table/GenkiTable";
-import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay";
-import React from "react";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
+import { Col, Row } from "react-bootstrap"
+import GenkiTable from "../../ui/table/GenkiTable"
+import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay"
+import React from "react"
 
 const GenkiChapter4 = () => {
     const c4p1: GrammarInfoProps = {
@@ -15,8 +15,9 @@ const GenkiChapter4 = () => {
         body: (
             <div>
                 <p>Xがあります means “there is/there are X (non-living things).”</p>
-                <p>The particle が introduces item X. You can also use あります to say that you have or own something or
-                    that and event will take place.
+                <p>
+                    The particle が introduces item X. You can also use あります to say that you have or own something
+                    or that and event will take place.
                 </p>
 
                 <GenkiExampleTable
@@ -37,7 +38,10 @@ const GenkiChapter4 = () => {
                     ]}
                 />
 
-                <p>When you want to present or some sentient being, rather than a thing, you need to use the verb います.</p>
+                <p>
+                    When you want to present or some sentient being, rather than a thing, you need to use the verb
+                    います.
+                </p>
 
                 <GenkiExampleTable
                     book={1}
@@ -60,8 +64,9 @@ const GenkiChapter4 = () => {
         body: (
             <div>
                 <p>You can describe where things are by using some of the location words below:</p>
-                <p>The particle が introduces item X. You can also use あります to say that you have or own something or
-                    that and event will take place.
+                <p>
+                    The particle が introduces item X. You can also use あります to say that you have or own something
+                    or that and event will take place.
                 </p>
 
                 <Row>
@@ -139,7 +144,7 @@ const GenkiChapter4 = () => {
                         {
                             japanese: { value: "わたしはハーゲンダッツのまえでメアリーさんをまちました。" },
                             english: { value: "I waited for Mary in front of the Haagen-Dazs place." }
-                        },
+                        }
                     ]}
                 />
             </div>
@@ -186,7 +191,7 @@ const GenkiChapter4 = () => {
                         {
                             japanese: { value: "あれはにほんのえいがじゃありませんでした。" },
                             english: { value: "That was not a Japanese film." }
-                        },
+                        }
                     ]}
                 />
             </div>
@@ -233,7 +238,7 @@ const GenkiChapter4 = () => {
                         {
                             japanese: { value: "わたしはきのうにほんごをべんきょしませんでした。" },
                             english: { value: "I did not study Japanese yesterday." }
-                        },
+                        }
                     ]}
                 />
             </div>
@@ -247,10 +252,11 @@ const GenkiChapter4 = () => {
         title: "も Particle",
         body: (
             <div>
-                <p>も is not only used to refer to the second item which shares a common attribute with the first,
-                    but it can also be used when two or more people perform the same activity. Or when someone buys,
-                    sees, or eats two or more things or when you go to two places, do something on two different
-                    occasions, and so forth. It is important to note that も replaces the particles は、が、or を.
+                <p>
+                    も is not only used to refer to the second item which shares a common attribute with the first, but
+                    it can also be used when two or more people perform the same activity. Or when someone buys, sees,
+                    or eats two or more things or when you go to two places, do something on two different occasions,
+                    and so forth. It is important to note that も replaces the particles は、が、or を.
                 </p>
 
                 <GenkiExampleTable
@@ -293,20 +299,27 @@ const GenkiChapter4 = () => {
         title: "Duration (一時間)",
         body: (
             <div>
-                <p>The duration of an activity is expressed with a bare noun, like いちじかん.
-                    Such nouns are not followed by particles and usually appear immediately before the verb.
-                    Approximate measurements can be expressed using ぐらい after ～じかん.
+                <p>
+                    The duration of an activity is expressed with a bare noun, like いちじかん. Such nouns are not
+                    followed by particles and usually appear immediately before the verb. Approximate measurements can
+                    be expressed using ぐらい after ～じかん.
                 </p>
 
                 <GenkiExampleTable
                     book={1}
                     values={[
                         {
-                            japanese: { value: "メアリーさんはそこでたけしさんをいちじかんまちました。", underline: "いちじかん" },
+                            japanese: {
+                                value: "メアリーさんはそこでたけしさんをいちじかんまちました。",
+                                underline: "いちじかん"
+                            },
                             english: { value: "Mary waited for Takeshi there for an hour." }
                         },
                         {
-                            japanese: { value: "わたしはきのうにほんごをさんじかんぐらいべんきょうしました。", underline: "さんじかんぐらい" },
+                            japanese: {
+                                value: "わたしはきのうにほんごをさんじかんぐらいべんきょうしました。",
+                                underline: "さんじかんぐらい"
+                            },
                             english: { value: "I studied Japanese for about three hours yesterday." }
                         }
                     ]}
@@ -323,8 +336,8 @@ const GenkiChapter4 = () => {
         body: (
             <div>
                 <p>
-                    If you want to use an expression of quantity in Japanese, the quantity word (like たくさん) can either
-                    go before the noun or after the particle を.
+                    If you want to use an expression of quantity in Japanese, the quantity word (like たくさん) can
+                    either go before the noun or after the particle を.
                 </p>
 
                 <GenkiComparisonDisplay
@@ -377,7 +390,7 @@ const GenkiChapter4 = () => {
         )
     }
 
-    return { c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8 };
+    return { c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8 }
 }
 
-export default GenkiChapter4;
+export default GenkiChapter4

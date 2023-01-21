@@ -20,7 +20,8 @@
   align-items: center;
 }
 
-.left, .right {
+.left,
+.right {
   width: 30px;
   min-height: 100%;
   display: flex;
@@ -30,7 +31,8 @@
   margin-bottom: 37px;
 }
 
-.left:hover, .right:hover {
+.left:hover,
+.right:hover {
   background-color: rgba($dark-1, 0.8);
   cursor: pointer;
 }

@@ -1,15 +1,18 @@
-import FlashCardFront from "../FlashCardFront";
-import { CardFaceProps } from "../FlashCard";
-import { Container } from "react-bootstrap";
-import { faFillDrip } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Colour from "../../../domain/colour/Colour";
-import styles from "../../../styles/sass/components/learn/basics/BasicsFlashCardFront.module.scss";
-import DefinitionList from "../DefinitionList";
+import FlashCardFront from "../FlashCardFront"
+import { CardFaceProps } from "../FlashCard"
+import { Container } from "react-bootstrap"
+import { faFillDrip } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Colour from "../../../domain/colour/Colour"
+import styles from "../../../styles/sass/components/learn/basics/BasicsFlashCardFront.module.scss"
+import DefinitionList from "../DefinitionList"
 
 function BasicsFlashCardFront(props: CardFaceProps) {
     return (
-        <FlashCardFront onClick={props.onClick} borderColour={props.data instanceof Colour ? props.data.colour : undefined}>
+        <FlashCardFront
+            onClick={props.onClick}
+            borderColour={props.data instanceof Colour ? props.data.colour : undefined}
+        >
             <Container className={styles.wrapper}>
                 {props.data instanceof Colour && (
                     <div className={styles.iconWrapper}>
@@ -25,7 +28,7 @@ function BasicsFlashCardFront(props: CardFaceProps) {
                 <DefinitionList words={props.data.getMeanings()} mode="stacked" />
             </Container>
         </FlashCardFront>
-    );
+    )
 }
 
-export default BasicsFlashCardFront;
+export default BasicsFlashCardFront

@@ -1,7 +1,7 @@
-import { KanaResponse } from "../repository/KanaRepository";
-import { Kana } from "../domain/kana/Kana";
-import KanaType from "../domain/kana/KanaType";
-import { KanaColumn } from "../domain/kana/KanaColumn";
+import { KanaResponse } from "../repository/KanaRepository"
+import { Kana } from "../domain/kana/Kana"
+import KanaType from "../domain/kana/KanaType"
+import { KanaColumn } from "../domain/kana/KanaColumn"
 
 class KanaConverter {
     public convert(response: KanaResponse, type: KanaType): Kana {
@@ -17,43 +17,43 @@ class KanaConverter {
     private static parseColumn(value: string): KanaColumn {
         switch (value) {
             case "vowel": {
-                return KanaColumn.VOWEL;
+                return KanaColumn.VOWEL
             }
             case "k": {
-                return KanaColumn.K;
+                return KanaColumn.K
             }
             case "s": {
-                return KanaColumn.S;
+                return KanaColumn.S
             }
             case "t": {
-                return KanaColumn.T;
+                return KanaColumn.T
             }
             case "n": {
-                return KanaColumn.N;
+                return KanaColumn.N
             }
             case "h": {
-                return KanaColumn.H;
+                return KanaColumn.H
             }
             case "m": {
-                return KanaColumn.M;
+                return KanaColumn.M
             }
             case "y": {
-                return KanaColumn.Y;
+                return KanaColumn.Y
             }
             case "r": {
-                return KanaColumn.R;
+                return KanaColumn.R
             }
             case "w": {
-                return KanaColumn.W;
+                return KanaColumn.W
             }
             case "other": {
-                return KanaColumn.OTHER;
+                return KanaColumn.OTHER
             }
             default: {
-                throw Error(`Invalid Kana Column [${value}]`);
+                throw Error(`Invalid Kana Column [${value}]`)
             }
         }
     }
 }
 
-export default KanaConverter;
+export default KanaConverter

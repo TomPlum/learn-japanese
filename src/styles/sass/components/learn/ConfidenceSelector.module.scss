@@ -9,37 +9,55 @@
   padding: 0 10px;
 }
 
-.one, .one:active, .one:hover, .one:focus {
+.one,
+.one:active,
+.one:hover,
+.one:focus {
   background-color: #db3a3a !important;
   box-shadow: none !important;
   border: none;
 }
 
-.two, .two:active, .two:hover, .two:focus {
+.two,
+.two:active,
+.two:hover,
+.two:focus {
   background-color: #ee7d41 !important;
   box-shadow: none !important;
   border: none;
 }
 
-.three, .three:active, .three:hover, .three:focus {
+.three,
+.three:active,
+.three:hover,
+.three:focus {
   background-color: #e7ca41 !important;
   box-shadow: none !important;
   border: none;
 }
 
-.four, .four:active, .four:hover, .four:focus {
+.four,
+.four:active,
+.four:hover,
+.four:focus {
   background-color: #4e7bec !important;
   box-shadow: none !important;
   border: none;
 }
 
-.five, .five:active, .five:hover, .five:focus {
+.five,
+.five:active,
+.five:hover,
+.five:focus {
   background-color: #42cbc6 !important;
   box-shadow: none !important;
   border: none;
 }
 
-.six, .six:active, .six:hover, .six:focus {
+.six,
+.six:active,
+.six:hover,
+.six:focus {
   background-color: #41db4e !important;
   box-shadow: none !important;
   border: none;
@@ -67,7 +85,7 @@
 }
 
 .titleWrapper {
-  color: #FFF;
+  color: #fff;
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
   margin-bottom: 5px;
 }
@@ -78,32 +96,38 @@
   @include evenNumericalSpacing;
 }
 
-span.one, svg.one {
+span.one,
+svg.one {
   background-color: transparent !important;
   color: #db3a3a;
 }
 
-span.two, svg.two {
+span.two,
+svg.two {
   background-color: transparent !important;
   color: #ee7d41;
 }
 
-span.three, svg.three {
+span.three,
+svg.three {
   background-color: transparent !important;
   color: #e7ca41;
 }
 
-span.four, svg.four {
+span.four,
+svg.four {
   background-color: transparent !important;
   color: #4e7bec;
 }
 
-span.five, svg.five {
+span.five,
+svg.five {
   background-color: transparent !important;
   color: #42cbc6;
 }
 
-span.six, svg.six {
+span.six,
+svg.six {
   background-color: transparent !important;
   color: #41db4e;
 }

@@ -1,56 +1,64 @@
-import React, { Component } from "react";
-import QuestionSettingsForm from "./QuestionSettingsForm";
-import HintSettingsForm from "./HintSettingsForm";
-import LifeSettingsForm from "./LifeSettingsForm";
-import TimeSettingsForm from "./TimeSettingsForm";
-import GameSettings, { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings";
-import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faCheck, faHeartbeat, faLightbulb, faQuestionCircle, faStopwatch, faUndo } from "@fortawesome/free-solid-svg-icons";
-import QuestionSettings from "../../../domain/session/settings/game/QuestionSettings";
-import HintSettings from "../../../domain/session/settings/game/HintSettings";
-import LifeSettings from "../../../domain/session/settings/game/LifeSettings";
-import TimeSettings from "../../../domain/session/settings/game/TimeSettings";
-import styles from "../../../styles/sass/components/settings/game/GameSettingsMenu.module.scss";
+import React, { Component } from "react"
+import QuestionSettingsForm from "./QuestionSettingsForm"
+import HintSettingsForm from "./HintSettingsForm"
+import LifeSettingsForm from "./LifeSettingsForm"
+import TimeSettingsForm from "./TimeSettingsForm"
+import GameSettings, { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
+import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+    faArrowLeft,
+    faCheck,
+    faHeartbeat,
+    faLightbulb,
+    faQuestionCircle,
+    faStopwatch,
+    faUndo
+} from "@fortawesome/free-solid-svg-icons"
+import QuestionSettings from "../../../domain/session/settings/game/QuestionSettings"
+import HintSettings from "../../../domain/session/settings/game/HintSettings"
+import LifeSettings from "../../../domain/session/settings/game/LifeSettings"
+import TimeSettings from "../../../domain/session/settings/game/TimeSettings"
+import styles from "../../../styles/sass/components/settings/game/GameSettingsMenu.module.scss"
 
 export interface GameSettingsMenuProps {
-    onQuit: () => void;
-    onReset: () => void;
-    onSelect: (settings: GameSettings) => void;
+    onQuit: () => void
+    onReset: () => void
+    onSelect: (settings: GameSettings) => void
 }
 
 interface GameSettingsMenuState {
-    questionSettings: QuestionSettings;
-    hintSettings: HintSettings;
-    lifeSettings: LifeSettings;
-    timeSettings: TimeSettings;
+    questionSettings: QuestionSettings
+    hintSettings: HintSettings
+    lifeSettings: LifeSettings
+    timeSettings: TimeSettings
 }
 
 export type SettingsFormHandle = {
-    reset: () => void;
+    reset: () => void
 }
 
 class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenuState> {
-    private readonly question: React.RefObject<SettingsFormHandle>;
-    private readonly hints: React.RefObject<SettingsFormHandle>;
-    private readonly lives: React.RefObject<SettingsFormHandle>;
-    private readonly time: React.RefObject<SettingsFormHandle>;
+    private readonly question: React.RefObject<SettingsFormHandle>
+    private readonly hints: React.RefObject<SettingsFormHandle>
+    private readonly lives: React.RefObject<SettingsFormHandle>
+    private readonly time: React.RefObject<SettingsFormHandle>
 
     constructor(props: GameSettingsMenuProps | Readonly<GameSettingsMenuProps>) {
-        super(props);
+        super(props)
 
-        this.question = React.createRef();
-        this.hints = React.createRef();
-        this.lives = React.createRef();
-        this.time = React.createRef();
+        this.question = React.createRef()
+        this.hints = React.createRef()
+        this.lives = React.createRef()
+        this.time = React.createRef()
 
-        const defaults = new GameSettingsBuilder().build();
+        const defaults = new GameSettingsBuilder().build()
 
         this.state = {
             questionSettings: defaults.question,
             hintSettings: defaults.hints,
             lifeSettings: defaults.lives,
-            timeSettings: defaults.time,
+            timeSettings: defaults.time
         }
     }
 
@@ -129,11 +137,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             <Tab.Content>
                                 <Tab.Pane eventKey="hints" className={styles.pane}>
                                     <Card.Title className={styles.title}>
-                                        <FontAwesomeIcon
-                                            fixedWidth
-                                            icon={faLightbulb}
-                                            className={styles.hintsIcon}
-                                        />
+                                        <FontAwesomeIcon fixedWidth icon={faLightbulb} className={styles.hintsIcon} />
                                         <span className={styles.titleText}>Hint Settings</span>
                                     </Card.Title>
 
@@ -147,11 +151,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             <Tab.Content>
                                 <Tab.Pane eventKey="lives" className={styles.pane}>
                                     <Card.Title className={styles.title}>
-                                        <FontAwesomeIcon
-                                            fixedWidth
-                                            icon={faHeartbeat}
-                                            className={styles.livesIcon}
-                                        />
+                                        <FontAwesomeIcon fixedWidth icon={faHeartbeat} className={styles.livesIcon} />
                                         <span className={styles.titleText}>Life Settings</span>
                                     </Card.Title>
 
@@ -165,11 +165,7 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                             <Tab.Content>
                                 <Tab.Pane eventKey="time" className={styles.pane}>
                                     <Card.Title className={styles.title}>
-                                        <FontAwesomeIcon
-                                            fixedWidth
-                                            icon={faStopwatch}
-                                            className={styles.timeIcon}
-                                        />
+                                        <FontAwesomeIcon fixedWidth icon={faStopwatch} className={styles.timeIcon} />
                                         <span className={styles.titleText}>Time Settings</span>
                                     </Card.Title>
 
@@ -184,7 +180,12 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                         <Card.Footer className={styles.footer}>
                             <Form.Row>
                                 <Col className={styles.noGuttersLeft}>
-                                    <Button variant="danger" block onClick={() => this.props.onQuit()} className={styles.button}>
+                                    <Button
+                                        variant="danger"
+                                        block
+                                        onClick={() => this.props.onQuit()}
+                                        className={styles.button}
+                                    >
                                         <FontAwesomeIcon icon={faArrowLeft} />
                                         <span className={styles.buttonText}> Back</span>
                                     </Button>
@@ -192,14 +193,19 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
 
                                 <Col className={[styles.noGuttersLeft, styles.noGuttersRight].join(" ")}>
                                     <Button variant="warning" block onClick={this.onReset} className={styles.button}>
-                                        <FontAwesomeIcon icon={faUndo}/>
+                                        <FontAwesomeIcon icon={faUndo} />
                                         <span className={styles.buttonText}> Reset</span>
                                     </Button>
                                 </Col>
 
                                 <Col className={styles.noGuttersRight}>
-                                    <Button variant="success" block onClick={this.onConfirmation} className={styles.button}>
-                                        <FontAwesomeIcon icon={faCheck}/>
+                                    <Button
+                                        variant="success"
+                                        block
+                                        onClick={this.onConfirmation}
+                                        className={styles.button}
+                                    >
+                                        <FontAwesomeIcon icon={faCheck} />
                                         <span className={styles.buttonText}> Confirm</span>
                                     </Button>
                                 </Col>
@@ -208,29 +214,29 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
                     </Tab.Container>
                 </Card>
             </div>
-        );
+        )
     }
 
     onConfirmation = () => {
-        const { questionSettings, hintSettings, lifeSettings, timeSettings } = this.state;
+        const { questionSettings, hintSettings, lifeSettings, timeSettings } = this.state
 
         const settings = new GameSettingsBuilder()
             .withQuestionSettings(questionSettings)
             .withHintSettings(hintSettings)
             .withLifeSettings(lifeSettings)
             .withTimeSettings(timeSettings)
-            .build();
+            .build()
 
-        this.props.onSelect(settings);
+        this.props.onSelect(settings)
     }
 
     onReset = () => {
-        this.question.current?.reset();
-        this.hints.current?.reset();
-        this.lives.current?.reset();
-        this.time.current?.reset();
-        this.props.onReset();
+        this.question.current?.reset()
+        this.hints.current?.reset()
+        this.lives.current?.reset()
+        this.time.current?.reset()
+        this.props.onReset()
     }
 }
 
-export default GameSettingsMenu;
+export default GameSettingsMenu

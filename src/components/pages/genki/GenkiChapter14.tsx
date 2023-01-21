@@ -1,14 +1,14 @@
-import { GrammarInfoProps } from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import QuoteDisplay from "../../ui/display/QuoteDisplay";
-import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay";
-import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay";
-import GenkiTable from "../../ui/table/GenkiTable";
-import { Col, Container, Row } from "react-bootstrap";
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiRelativePsychologyCircle from "../../ui/genki/GenkiRelativePsychologyCircle";
-import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay";
-import GenkiExampleTable from "../../ui/genki/GenkiExampleTable";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import QuoteDisplay from "../../ui/display/QuoteDisplay"
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
+import GenkiTable from "../../ui/table/GenkiTable"
+import { Col, Container, Row } from "react-bootstrap"
+import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import GenkiRelativePsychologyCircle from "../../ui/genki/GenkiRelativePsychologyCircle"
+import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay"
+import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
 
 const GenkiChapter14 = () => {
     const c14p1: GrammarInfoProps = {
@@ -19,8 +19,9 @@ const GenkiChapter14 = () => {
         body: (
             <div>
                 <p>
-                    ほしい means <QuoteDisplay chapter={14}>(I) want (something)</QuoteDisplay>. It is an adjective and conjugates as such.
-                    The object of desire is usually followed by the particle が. In negative sentences, the particle は is also used.
+                    ほしい means <QuoteDisplay chapter={14}>(I) want (something)</QuoteDisplay>. It is an adjective and
+                    conjugates as such. The object of desire is usually followed by the particle が. In negative
+                    sentences, the particle は is also used.
                 </p>
 
                 <GenkiExampleDisplay
@@ -32,8 +33,8 @@ const GenkiChapter14 = () => {
                 <p>
                     ほしい is similar to たい, in that its use is primarily limited to the first person, the speaker.
                     These words are called “private predicates”, and they refer to the inner sensations which are known
-                    only to the person feeling them.
-                    Therefore, one must use extra devices for sentences with private predicates as applied to the second or third person.
+                    only to the person feeling them. Therefore, one must use extra devices for sentences with private
+                    predicates as applied to the second or third person.
                 </p>
 
                 <GenkiExampleDisplay
@@ -53,9 +54,9 @@ const GenkiChapter14 = () => {
         body: (
             <div>
                 <p>
-                    With the expression でしょう, we can say a given state of affairs is probable or likely.
-                    The new sentence-final expression かもしれません, and its short form counterpart かもしれない,
-                    are much like でしょう, and mean that something is a “possibility”.
+                    With the expression でしょう, we can say a given state of affairs is probable or likely. The new
+                    sentence-final expression かもしれません, and its short form counterpart かもしれない, are much like
+                    でしょう, and mean that something is a “possibility”.
                 </p>
 
                 <p>The structure is as follows:</p>
@@ -118,14 +119,15 @@ const GenkiChapter14 = () => {
         body: (
             <div>
                 <p>
-                    Japanese has two verbs for giving. The choice between the pair depends on the direction of the transaction.
+                    Japanese has two verbs for giving. The choice between the pair depends on the direction of the
+                    transaction.
                 </p>
 
                 <p>
-                    Imagine a set of concentric spheres of relative psychological distances, with me at the center,
-                    you next to me, and all the others on the edge. When a thing moves away from the center,
-                    the transaction is described in terms of the verb あげる.
-                    When a thing moves toward the center, the verb we use is くれる.
+                    Imagine a set of concentric spheres of relative psychological distances, with me at the center, you
+                    next to me, and all the others on the edge. When a thing moves away from the center, the transaction
+                    is described in terms of the verb あげる. When a thing moves toward the center, the verb we use is
+                    くれる.
                 </p>
 
                 <Container style={{ padding: 0 }}>
@@ -156,7 +158,8 @@ const GenkiChapter14 = () => {
                     </Row>
                 </Container>
 
-                <p>With both あげる and くれる, the giver is the subject of the sentence, and is accompanied by the
+                <p>
+                    With both あげる and くれる, the giver is the subject of the sentence, and is accompanied by the
                     particle は or が. The recipient is accompanied by the particle に.
                 </p>
 
@@ -209,9 +212,9 @@ const GenkiChapter14 = () => {
         body: (
             <div>
                 <p>
-                    たらどうですか after a verb conveys advice or recommendation.
-                    The initial た stands for the same ending as in the past tense short form of a verb in the affirmative.
-                    In casual speech, たらどうですか may be shortened to たらどう.
+                    たらどうですか after a verb conveys advice or recommendation. The initial た stands for the same
+                    ending as in the past tense short form of a verb in the affirmative. In casual speech,
+                    たらどうですか may be shortened to たらどう.
                 </p>
 
                 <GenkiStructureDisplay book={2} width={450}>
@@ -267,7 +270,10 @@ const GenkiChapter14 = () => {
                     book={2}
                 />
 
-                <p>You can add しか to the number word and turn the predicate into a negative when you want to say “as few as” or “only”.</p>
+                <p>
+                    You can add しか to the number word and turn the predicate into a negative when you want to say “as
+                    few as” or “only”.
+                </p>
 
                 <p>For example:</p>
                 <GenkiExampleDisplay
@@ -279,7 +285,7 @@ const GenkiChapter14 = () => {
         )
     }
 
-    return { c14p1, c14p2, c14p3, c14p4, c14p5 };
+    return { c14p1, c14p2, c14p3, c14p4, c14p5 }
 }
 
-export default GenkiChapter14;
+export default GenkiChapter14

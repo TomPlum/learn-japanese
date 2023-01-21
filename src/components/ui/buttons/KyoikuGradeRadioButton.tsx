@@ -1,14 +1,14 @@
-import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade";
-import { Form } from "react-bootstrap";
+import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
+import { Form } from "react-bootstrap"
 
 interface KyoikuGradeRadioButtonProps {
-    grade: KyoikuGrade;
-    selected: boolean;
-    onClick: (grade: KyoikuGrade) => void;
+    grade: KyoikuGrade
+    selected: boolean
+    onClick: (grade: KyoikuGrade) => void
 }
 
 const KyoikuGradeRadioButton = (props: KyoikuGradeRadioButtonProps) => {
-    const { grade, selected, onClick } = props;
+    const { grade, selected, onClick } = props
 
     return (
         <Form.Check
@@ -19,7 +19,7 @@ const KyoikuGradeRadioButton = (props: KyoikuGradeRadioButtonProps) => {
             label={`Grade ${grade.value}`}
             onChange={() => onClick(grade)}
         />
-    );
+    )
 }
 
-export default KyoikuGradeRadioButton;
+export default KyoikuGradeRadioButton

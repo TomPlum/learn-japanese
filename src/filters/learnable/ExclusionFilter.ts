@@ -1,15 +1,14 @@
-import { Filter } from "../Filter";
-import { Learnable } from "../../domain/learn/Learnable";
+import { Filter } from "../Filter"
+import { Learnable } from "../../domain/learn/Learnable"
 
 export default class ExclusionFilter implements Filter<Learnable> {
-
-    private readonly exclusion: Learnable;
+    private readonly exclusion: Learnable
 
     constructor(exclusion: Learnable) {
-        this.exclusion = exclusion;
+        this.exclusion = exclusion
     }
 
     apply(data: Learnable[]): Learnable[] {
-        return data.filter(item => !item.equals(this.exclusion));
+        return data.filter((item) => !item.equals(this.exclusion))
     }
 }

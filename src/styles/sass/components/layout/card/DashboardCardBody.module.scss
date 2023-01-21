@@ -1,12 +1,12 @@
 @import "src/styles/sass/colours";
 
 .blur {
-  content: '';
+  content: "";
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  box-shadow: inset 0 0 2000px rgba($dark-2, .5);
+  box-shadow: inset 0 0 2000px rgba($dark-2, 0.5);
   filter: blur(5px);
 }
 

@@ -3,6 +3,4 @@
  * @see GameSettings
  * @see LearnSettings
  */
-export default interface ModeSettings {
-
-}
+export default interface ModeSettings {}

@@ -1,67 +1,76 @@
-import Confidence from "../../domain/learn/spacedrepetition/Confidence";
-import { Col, Container, Row } from "react-bootstrap";
-import ConfidenceButton from "./ConfidenceButton";
-import { useState } from "react";
-import InfoButton from "../ui/buttons/InfoButton";
-import PopOver from "../ui/PopOver";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
-import ConfidenceInfoItem from "./ConfidenceInfoItem";
-import styles from "../../styles/sass/components/learn/ConfidenceSelector.module.scss";
-import SpacedRepetitionService from "../../service/SpacedRepetitionService";
-import SpaceRepetitionFeedback from "../../domain/learn/spacedrepetition/SpaceRepetitionFeedback";
-import TemplateString from "../../domain/TemplateString";
+import Confidence from "../../domain/learn/spacedrepetition/Confidence"
+import { Col, Container, Row } from "react-bootstrap"
+import ConfidenceButton from "./ConfidenceButton"
+import { useState } from "react"
+import InfoButton from "../ui/buttons/InfoButton"
+import PopOver from "../ui/PopOver"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faStar } from "@fortawesome/free-regular-svg-icons"
+import ConfidenceInfoItem from "./ConfidenceInfoItem"
+import styles from "../../styles/sass/components/learn/ConfidenceSelector.module.scss"
+import SpacedRepetitionService from "../../service/SpacedRepetitionService"
+import SpaceRepetitionFeedback from "../../domain/learn/spacedrepetition/SpaceRepetitionFeedback"
+import TemplateString from "../../domain/TemplateString"
 
 export interface ConfidenceSelectorProps {
-    disabled: boolean;
-    feedback: SpaceRepetitionFeedback;
-    onSelect: (confidence: Confidence) => void;
+    disabled: boolean
+    feedback: SpaceRepetitionFeedback
+    onSelect: (confidence: Confidence) => void
 }
 
 const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
+    const { disabled, feedback, onSelect } = props
 
-    const { disabled, feedback, onSelect } = props;
-
-    const [selected, setSelected] = useState<Confidence>();
-    const service = new SpacedRepetitionService();
+    const [selected, setSelected] = useState<Confidence>()
+    const service = new SpacedRepetitionService()
 
     const handleSelect = (value: Confidence) => {
-        onSelect(value);
-        setSelected(value);
+        onSelect(value)
+        setSelected(value)
     }
 
     const getDaysMessage = () => {
-        const days = service.getDaysTillNextReview(feedback);
+        const days = service.getDaysTillNextReview(feedback)
         if (days === 1) {
-            return "You'll see this card again tomorrow";
+            return "You'll see this card again tomorrow"
         } else {
-            return new TemplateString("You'll see this card again in {0} days").format(days);
+            return new TemplateString("You'll see this card again in {0} days").format(days)
         }
     }
 
-    const info = <PopOver
-        className={styles.confidence}
-        title={<>
-            <FontAwesomeIcon icon={faStar} fixedWidth />
-            <span> Confidence Rating</span>
-        </>}
-        text={<div>
-            <ul>
-                <ConfidenceInfoItem className={styles.one} confidence={Confidence.BLACKOUT} />
-                <ConfidenceInfoItem className={styles.two} confidence={Confidence.INCORRECT_BUT_REMEMBERED} />
-                <ConfidenceInfoItem className={styles.three} confidence={Confidence.INCORRECT_OBVIOUS_AFTERWARDS} />
-                <ConfidenceInfoItem className={styles.four} confidence={Confidence.CORRECT_DIFFICULT_MEMORY} />
-                <ConfidenceInfoItem className={styles.five} confidence={Confidence.CORRECT_SMALL_HESITATION} />
-                <ConfidenceInfoItem className={styles.six} confidence={Confidence.PERFECT} />
-            </ul>
-        </div>}
-    />
+    const info = (
+        <PopOver
+            className={styles.confidence}
+            title={
+                <>
+                    <FontAwesomeIcon icon={faStar} fixedWidth />
+                    <span> Confidence Rating</span>
+                </>
+            }
+            text={
+                <div>
+                    <ul>
+                        <ConfidenceInfoItem className={styles.one} confidence={Confidence.BLACKOUT} />
+                        <ConfidenceInfoItem className={styles.two} confidence={Confidence.INCORRECT_BUT_REMEMBERED} />
+                        <ConfidenceInfoItem
+                            className={styles.three}
+                            confidence={Confidence.INCORRECT_OBVIOUS_AFTERWARDS}
+                        />
+                        <ConfidenceInfoItem className={styles.four} confidence={Confidence.CORRECT_DIFFICULT_MEMORY} />
+                        <ConfidenceInfoItem className={styles.five} confidence={Confidence.CORRECT_SMALL_HESITATION} />
+                        <ConfidenceInfoItem className={styles.six} confidence={Confidence.PERFECT} />
+                    </ul>
+                </div>
+            }
+        />
+    )
 
     return (
         <Container>
             <Row>
                 <Col className={styles.titleWrapper}>
-                    <InfoButton popover={info} className={styles.info} data-testid="info" /> {/* TODO: Replace w/side panel once on Bootstrap 5 */}
+                    <InfoButton popover={info} className={styles.info} data-testid="info" />{" "}
+                    {/* TODO: Replace w/side panel once on Bootstrap 5 */}
                     <span>Confidence Rating</span>
                 </Col>
                 <Col className={styles.titleWrapper}>
@@ -131,7 +140,7 @@ const ConfidenceSelector = (props: ConfidenceSelectorProps) => {
                 </Col>
             </Row>
         </Container>
-    );
+    )
 }
 
 export default ConfidenceSelector

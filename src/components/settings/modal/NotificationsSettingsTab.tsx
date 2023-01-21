@@ -1,13 +1,12 @@
-import SettingsTabTitle from "./SettingsTabTitle";
-import styles from "../../../styles/sass/components/settings/modal/NotificationSettingsTab.module.scss";
-import { faEraser, faFireAlt, faSnowflake } from "@fortawesome/free-solid-svg-icons";
-import SettingsBooleanButton from "./SettingsBooleanButton";
-import { Preference } from "../../../domain/user/Preference";
-import { useTranslation } from "react-i18next";
+import SettingsTabTitle from "./SettingsTabTitle"
+import styles from "../../../styles/sass/components/settings/modal/NotificationSettingsTab.module.scss"
+import { faEraser, faFireAlt, faSnowflake } from "@fortawesome/free-solid-svg-icons"
+import SettingsBooleanButton from "./SettingsBooleanButton"
+import { Preference } from "../../../domain/user/Preference"
+import { useTranslation } from "react-i18next"
 
 const NotificationsSettingsTab = () => {
-
-    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.notification" });
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.notification" })
 
     return (
         <div data-testid="notification-settings-tab">
@@ -15,9 +14,7 @@ const NotificationsSettingsTab = () => {
 
             <div className={styles.section}>
                 <p className={styles.heading}>{t("streak-notifications.heading")}</p>
-                <p className={styles.text}>
-                    {t("streak-notifications.desc")}
-                </p>
+                <p className={styles.text}>{t("streak-notifications.desc")}</p>
                 <SettingsBooleanButton
                     enableHoverColours
                     id="streak-notifications-toggle"
@@ -37,9 +34,7 @@ const NotificationsSettingsTab = () => {
 
             <div className={styles.section}>
                 <p className={styles.heading}>{t("outstanding-mistakes-reminder.heading")}</p>
-                <p className={styles.text}>
-                    {t("outstanding-mistakes-reminder.desc")}
-                </p>
+                <p className={styles.text}>{t("outstanding-mistakes-reminder.desc")}</p>
                 <SettingsBooleanButton
                     enableHoverColours
                     id="mistakes-reminders-toggle"
@@ -57,7 +52,7 @@ const NotificationsSettingsTab = () => {
                 />
             </div>
         </div>
-    );
+    )
 }
 
-export default NotificationsSettingsTab;
+export default NotificationsSettingsTab

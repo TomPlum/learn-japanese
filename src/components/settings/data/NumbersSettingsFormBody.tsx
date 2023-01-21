@@ -1,21 +1,21 @@
-import styles from "../../../styles/sass/components/settings/data/NumbersSettingsForm.module.scss";
-import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep";
-import NumbersSettings, { NumbersSettingsBuilder } from "../../../domain/session/settings/data/NumbersSettings";
-import { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import ToggleSwitch from "../../ui/ToggleSwitch";
-import QuantityField from "../../ui/fields/QuantityField";
+import styles from "../../../styles/sass/components/settings/data/NumbersSettingsForm.module.scss"
+import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep"
+import NumbersSettings, { NumbersSettingsBuilder } from "../../../domain/session/settings/data/NumbersSettings"
+import { useEffect, useState } from "react"
+import { Col, Row } from "react-bootstrap"
+import ToggleSwitch from "../../ui/ToggleSwitch"
+import QuantityField from "../../ui/fields/QuantityField"
 
 const NumbersSettingsFormBody = (props: DataSettingsStepFormProps<NumbersSettings>) => {
-    const { className, isValid, onChange } = props;
+    const { className, isValid, onChange } = props
 
-    const [numbers, setNumbers] = useState(true);
-    const [counters, setCounters] = useState(true);
-    const [age, setAge] = useState(true);
-    const [exceptions, setExceptions] = useState(true);
-    const [units, setUnits] = useState(true);
-    const [sequence, setSequence] = useState(true);
-    const [quantity, setQuantity] = useState(25);
+    const [numbers, setNumbers] = useState(true)
+    const [counters, setCounters] = useState(true)
+    const [age, setAge] = useState(true)
+    const [exceptions, setExceptions] = useState(true)
+    const [units, setUnits] = useState(true)
+    const [sequence, setSequence] = useState(true)
+    const [quantity, setQuantity] = useState(25)
 
     useEffect(() => {
         const settings = new NumbersSettingsBuilder()
@@ -26,14 +26,14 @@ const NumbersSettingsFormBody = (props: DataSettingsStepFormProps<NumbersSetting
             .withNumbers(numbers)
             .withUnits(units)
             .withAge(age)
-            .build();
+            .build()
 
-        onChange(settings);
-        isValid?.(validate());
-    }, [numbers, counters, age, exceptions, units, sequence, quantity]);
+        onChange(settings)
+        isValid?.(validate())
+    }, [numbers, counters, age, exceptions, units, sequence, quantity])
 
     const validate = () => {
-        return !!quantity && quantity > 0;
+        return !!quantity && quantity > 0
     }
 
     return (
@@ -61,8 +61,16 @@ const NumbersSettingsFormBody = (props: DataSettingsStepFormProps<NumbersSetting
                     />
 
                     <p className={counters ? styles.description : styles.disabled}>
-                        The Japanese language has lots of counters. Includes the 350 most commonly used counters, sourced
-                        from <a target="_blank" href="https://www.tofugu.com/japanese/japanese-counters-list/" rel="noreferrer">tofugu.com</a>.
+                        The Japanese language has lots of counters. Includes the 350 most commonly used counters,
+                        sourced from{" "}
+                        <a
+                            target="_blank"
+                            href="https://www.tofugu.com/japanese/japanese-counters-list/"
+                            rel="noreferrer"
+                        >
+                            tofugu.com
+                        </a>
+                        .
                     </p>
 
                     <ToggleSwitch
@@ -122,7 +130,7 @@ const NumbersSettingsFormBody = (props: DataSettingsStepFormProps<NumbersSetting
                 </Col>
             </Row>
         </div>
-    );
+    )
 }
 
-export default NumbersSettingsFormBody;
+export default NumbersSettingsFormBody

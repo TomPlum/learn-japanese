@@ -38,10 +38,12 @@
 
   .selected:hover {
     color: #000;
-    background-color: #FFF;
+    background-color: #fff;
   }
 
-  .selected, .selected:focus, .selected:active {
+  .selected,
+  .selected:focus,
+  .selected:active {
     background-color: rgba(255, 255, 255, 1);
     border-color: rgba(148, 148, 148, 0.8);
     color: black;

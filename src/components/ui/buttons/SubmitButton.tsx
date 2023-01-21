@@ -1,35 +1,34 @@
-import React, { useEffect } from "react";
-import { Button } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../../styles/sass/components/ui/buttons/SubmitButton.module.scss";
-import { useTranslation } from "react-i18next";
+import React, { useEffect } from "react"
+import { Button } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faRedoAlt } from "@fortawesome/free-solid-svg-icons"
+import styles from "../../../styles/sass/components/ui/buttons/SubmitButton.module.scss"
+import { useTranslation } from "react-i18next"
 
 interface SubmitButtonProps {
-    disabled?: boolean;
-    onClick: () => void;
-    isRestart?: boolean;
-    className?: string;
+    disabled?: boolean
+    onClick: () => void
+    isRestart?: boolean
+    className?: string
 }
 
 const SubmitButton = (props: SubmitButtonProps) => {
+    const { disabled, className, isRestart, onClick } = props
 
-    const { disabled, className, isRestart, onClick } = props;
-
-    const { t } = useTranslation("translation", { keyPrefix: "action" });
+    const { t } = useTranslation("translation", { keyPrefix: "action" })
 
     useEffect(() => {
-        document.addEventListener('keydown', handleKeySelection);
+        document.addEventListener("keydown", handleKeySelection)
         return () => {
-            document.removeEventListener('keydown', handleKeySelection);
+            document.removeEventListener("keydown", handleKeySelection)
         }
-    }, []);
+    }, [])
 
     const handleKeySelection = (e: KeyboardEvent) => {
-        if (!disabled && e.key === 'Enter') {
-            onClick();
-            e.preventDefault();
-            e.stopPropagation();
+        if (!disabled && e.key === "Enter") {
+            onClick()
+            e.preventDefault()
+            e.stopPropagation()
         }
     }
 
@@ -41,9 +40,15 @@ const SubmitButton = (props: SubmitButtonProps) => {
             variant={!isRestart ? "success" : "info"}
             className={[styles.button, className].join(" ")}
         >
-            {!isRestart ? t("check") : <><FontAwesomeIcon icon={faRedoAlt}/> {t("restart")}</>}
+            {!isRestart ? (
+                t("check")
+            ) : (
+                <>
+                    <FontAwesomeIcon icon={faRedoAlt} /> {t("restart")}
+                </>
+            )}
         </Button>
-    );
+    )
 }
 
-export default SubmitButton;
+export default SubmitButton

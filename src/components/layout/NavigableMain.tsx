@@ -1,30 +1,29 @@
-import { Route, Switch } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import SearchPage from "../pages/SearchPage";
-import HelpPage from "../pages/HelpPage";
-import ProfilePage from "../pages/ProfilePage";
-import GenkiIndexPage from "../pages/GenkiIndexPage";
-import NavigationWrapper from "./NavigationWrapper";
-import NotFoundPage from "../pages/NotFoundPage";
-import LearnOnline from "../learn/LearnOnline";
-import KanjiBankPage from "../pages/KanjiBankPage";
-import ProtectedRoute from "./ProtectedRoute";
-import { useUserSelector } from "../../hooks";
-import GenkiGrammarPage from "../pages/GenkiGrammarPage";
-import PlayPage from "../pages/PlayPage";
-import LearnPage from "../pages/LearnPage";
-import RegisterPage from "../pages/RegisterPage";
-import LoginPage from "../pages/LoginPage";
-import HighScoresPage from "../pages/HighScoresPage";
+import { Route, Switch } from "react-router-dom"
+import HomePage from "../pages/HomePage"
+import SearchPage from "../pages/SearchPage"
+import HelpPage from "../pages/HelpPage"
+import ProfilePage from "../pages/ProfilePage"
+import GenkiIndexPage from "../pages/GenkiIndexPage"
+import NavigationWrapper from "./NavigationWrapper"
+import NotFoundPage from "../pages/NotFoundPage"
+import LearnOnline from "../learn/LearnOnline"
+import KanjiBankPage from "../pages/KanjiBankPage"
+import ProtectedRoute from "./ProtectedRoute"
+import { useUserSelector } from "../../hooks"
+import GenkiGrammarPage from "../pages/GenkiGrammarPage"
+import PlayPage from "../pages/PlayPage"
+import LearnPage from "../pages/LearnPage"
+import RegisterPage from "../pages/RegisterPage"
+import LoginPage from "../pages/LoginPage"
+import HighScoresPage from "../pages/HighScoresPage"
 
 const NavigableMain = () => {
-
-    const user = useUserSelector(state => state.user.user);
+    const user = useUserSelector((state) => state.user.user)
 
     return (
         <NavigationWrapper>
             <Switch>
-                <Route exact path="/home" component={HomePage}/>
+                <Route exact path="/home" component={HomePage} />
                 <Route exact path="/play" component={PlayPage} />
                 <Route exact path="/learn" component={LearnPage} />
                 <Route exact path="/search" component={SearchPage} />
@@ -40,7 +39,7 @@ const NavigableMain = () => {
                 <Route component={NotFoundPage} />
             </Switch>
         </NavigationWrapper>
-    );
+    )
 }
 
-export default NavigableMain;
+export default NavigableMain

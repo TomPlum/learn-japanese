@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { Kana } from "../../../domain/kana/Kana";
-import KanaTile from "./KanaTile";
-import StackGrid, { transitions } from "react-stack-grid";
-import styles from "../../../styles/sass/components/ui/kana/KanaGrid.module.scss";
+import React, { Component } from "react"
+import { Kana } from "../../../domain/kana/Kana"
+import KanaTile from "./KanaTile"
+import StackGrid, { transitions } from "react-stack-grid"
+import styles from "../../../styles/sass/components/ui/kana/KanaGrid.module.scss"
 
 export interface KanaGridProps {
-    kana: Kana[];
+    kana: Kana[]
 }
 
 class KanaGrid extends Component<KanaGridProps> {
     render() {
         return (
             <>
-                {this.props.kana.length > 0 ?
+                {this.props.kana.length > 0 ? (
                     <StackGrid
                         columnWidth={90}
                         component="div"
@@ -29,15 +29,16 @@ class KanaGrid extends Component<KanaGridProps> {
                         easing="quartOut"
                         className={styles.grid}
                     >
-                        {this.props.kana.map(kana => (
-                            <KanaTile key={kana.code} kana={kana}/>
+                        {this.props.kana.map((kana) => (
+                            <KanaTile key={kana.code} kana={kana} />
                         ))}
-                    </StackGrid> :
+                    </StackGrid>
+                ) : (
                     <p className={styles.noResults}>No results.</p>
-                }
+                )}
             </>
-        );
+        )
     }
 }
 
-export default KanaGrid;
+export default KanaGrid

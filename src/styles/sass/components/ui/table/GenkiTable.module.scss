@@ -10,12 +10,13 @@
   margin-bottom: 0;
 }
 
-.table th, .table td:first-child {
+.table th,
+.table td:first-child {
   color: $light-2;
 }
 
 .table td:not(:first-child) {
-  color: #FFF;
+  color: #fff;
 }
 
 .table thead th:first-child {

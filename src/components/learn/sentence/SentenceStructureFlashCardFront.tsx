@@ -1,10 +1,10 @@
-import { CardFaceProps } from "../FlashCard";
-import FlashCardFront from "../FlashCardFront";
-import styles from "../../../styles/sass/components/learn/sentence/SentenceStructureFlashCardFront.module.scss";
-import DefinitionList from "../DefinitionList";
+import { CardFaceProps } from "../FlashCard"
+import FlashCardFront from "../FlashCardFront"
+import styles from "../../../styles/sass/components/learn/sentence/SentenceStructureFlashCardFront.module.scss"
+import DefinitionList from "../DefinitionList"
 
 const SentenceStructureFlashCardFront = (props: CardFaceProps) => {
-    const { data, onClick } = props;
+    const { data, onClick } = props
 
     return (
         <FlashCardFront onClick={onClick} className={styles.wrapper}>
@@ -13,6 +13,6 @@ const SentenceStructureFlashCardFront = (props: CardFaceProps) => {
             </div>
         </FlashCardFront>
     )
-};
+}
 
-export default SentenceStructureFlashCardFront;
+export default SentenceStructureFlashCardFront

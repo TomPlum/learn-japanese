@@ -1,18 +1,18 @@
-import { Component } from "react";
-import { Kana } from "../../../domain/kana/Kana";
-import { Col, Container, Row } from "react-bootstrap";
-import styles from "../../../styles/sass/components/ui/kana/KanaTile.module.scss";
-import KanaType from "../../../domain/kana/KanaType";
-import KanaTypeIndicator from "./KanaTypeIndicator";
-import KanaDisplay from "../display/KanaDisplay";
+import { Component } from "react"
+import { Kana } from "../../../domain/kana/Kana"
+import { Col, Container, Row } from "react-bootstrap"
+import styles from "../../../styles/sass/components/ui/kana/KanaTile.module.scss"
+import KanaType from "../../../domain/kana/KanaType"
+import KanaTypeIndicator from "./KanaTypeIndicator"
+import KanaDisplay from "../display/KanaDisplay"
 
 export interface KanaTileProps {
-    kana: Kana;
+    kana: Kana
 }
 
 class KanaTile extends Component<KanaTileProps> {
     render() {
-        const { kana } = this.props;
+        const { kana } = this.props
 
         return (
             <Container className={styles.wrapper}>
@@ -37,8 +37,8 @@ class KanaTile extends Component<KanaTileProps> {
 
                 <p className={styles.romaji}>{kana.getFullRomajiString()}</p>
             </Container>
-        );
+        )
     }
 }
 
-export default KanaTile;
+export default KanaTile

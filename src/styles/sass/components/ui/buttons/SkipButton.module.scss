@@ -9,7 +9,8 @@
   white-space: nowrap;
 }
 
-.button, .disabled {
+.button,
+.disabled {
   @include button;
 }
 

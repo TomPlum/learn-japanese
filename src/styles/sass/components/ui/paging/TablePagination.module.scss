@@ -14,7 +14,8 @@
   width: 100%;
 }
 
-.genki1, .genki2 {
+.genki1,
+.genki2 {
   width: 100%;
   text-align: center;
 }
@@ -56,6 +57,8 @@
   background-color: $light-1;
 }
 
-.book a:active, .book a:focus, .book a:hover {
+.book a:active,
+.book a:focus,
+.book a:hover {
   box-shadow: none;
 }

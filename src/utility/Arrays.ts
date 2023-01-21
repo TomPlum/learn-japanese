@@ -1,4 +1,4 @@
-import { Numbers } from "./Numbers";
+import { Numbers } from "./Numbers"
 
 export default class Arrays {
     /**
@@ -7,21 +7,21 @@ export default class Arrays {
      */
     static subtracting<T>(arr1: T[], arr2: T[]): T[] {
         if (arr1.length > arr2.length) {
-            return arr1.filter(element => arr2.indexOf(element) < 0);
+            return arr1.filter((element) => arr2.indexOf(element) < 0)
         } else {
-            return arr2.filter(element => arr1.indexOf(element) < 0);
+            return arr2.filter((element) => arr1.indexOf(element) < 0)
         }
     }
 
     static sum(array: number[]): number {
-        return array.reduce((a, b) => a + b, 0);
+        return array.reduce((a, b) => a + b, 0)
     }
     /**
      * Creates a new array by spreading all the elements into another.
      * @return a copy of the given array.
      */
     public static copy<T>(array: T[]): T[] {
-        return [...array];
+        return [...array]
     }
 
     /**
@@ -30,7 +30,7 @@ export default class Arrays {
      * @return true if both arrays contain the same elements, else false.
      */
     public static areEqual(a: any[], b: any[]): boolean {
-        return JSON.stringify(a.sort()) === JSON.stringify(b.sort());
+        return JSON.stringify(a.sort()) === JSON.stringify(b.sort())
     }
 
     /**
@@ -38,12 +38,12 @@ export default class Arrays {
      * @return A copy of the array with shuffled elements.
      */
     public static shuffle<T>(array: T[]): T[] {
-        const shuffled = [...array];
+        const shuffled = [...array]
         for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            const j = Math.floor(Math.random() * (i + 1))
+            ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
         }
-        return shuffled;
+        return shuffled
     }
 
     /**
@@ -52,7 +52,7 @@ export default class Arrays {
      * @return The largest value.
      */
     public static max<T extends number>(array: T[]): T {
-        return array.reduce((a: T, b: T) => a > b ? a : b);
+        return array.reduce((a: T, b: T) => (a > b ? a : b))
     }
 
     /**
@@ -62,11 +62,11 @@ export default class Arrays {
      * @return The mutated array.
      */
     static remove<T>(array: T[], value: T): T[] {
-        const index = array.indexOf(value);
+        const index = array.indexOf(value)
         if (index !== -1) {
-            array.splice(index, 1);
+            array.splice(index, 1)
         }
-        return array;
+        return array
     }
 
     /**
@@ -76,15 +76,15 @@ export default class Arrays {
      * @return An array of all randomly selected elements.
      */
     static getRandomElements<T>(array: T[], quantity = 1): T[] {
-        const elements = [];
-        let copy = this.copy(array);
+        const elements = []
+        let copy = this.copy(array)
         for (let i = 0; i < quantity; i++) {
-            const index = Arrays.getRandomArrayIndex(copy);
-            const element = copy[index];
+            const index = Arrays.getRandomArrayIndex(copy)
+            const element = copy[index]
             copy = this.remove(copy, element)
-            elements.push(element);
+            elements.push(element)
         }
-        return elements.filter(it => !!it);
+        return elements.filter((it) => !!it)
     }
 
     /**
@@ -94,16 +94,16 @@ export default class Arrays {
      */
     static chunked<T>(array: T[], quantity: number): T[][] {
         return array.reduce((resultArray: T[][], item: T, index: number) => {
-            const chunkIndex = Math.floor(index/quantity)
+            const chunkIndex = Math.floor(index / quantity)
 
-            if(!resultArray[chunkIndex]) {
+            if (!resultArray[chunkIndex]) {
                 resultArray[chunkIndex] = [] // start a new chunk
             }
 
             resultArray[chunkIndex].push(item)
 
             return resultArray
-        }, []);
+        }, [])
     }
 
     /**
@@ -112,7 +112,7 @@ export default class Arrays {
      * @return array The filtered array containing only unique elements.
      */
     static distinct<T>(array: T[]): T[] {
-        return array.filter((value, index, self) => self.indexOf(value) === index);
+        return array.filter((value, index, self) => self.indexOf(value) === index)
     }
 
     /**
@@ -121,7 +121,7 @@ export default class Arrays {
      * @return index The integer value of the chosen index.
      */
     static getRandomArrayIndex<T>(array: T[]): number {
-        return Numbers.randomInt(0, array.length - 1);
+        return Numbers.randomInt(0, array.length - 1)
     }
 
     /**
@@ -130,12 +130,12 @@ export default class Arrays {
      * @returns tuple A tuple containing the randomly chosen object and the trimmed pool.
      */
     static getRandomObject = <T>(pool: T[]): [T, T[]] => {
-        const objects = [...pool];
-        const randomIndex = Arrays.getRandomArrayIndex(objects);
-        const randomObject = objects[randomIndex];
-        objects.splice(randomIndex, 1);
-        return [randomObject, objects];
-    };
+        const objects = [...pool]
+        const randomIndex = Arrays.getRandomArrayIndex(objects)
+        const randomObject = objects[randomIndex]
+        objects.splice(randomIndex, 1)
+        return [randomObject, objects]
+    }
 
     /**
      * Picks n random object from the given array.
@@ -144,16 +144,16 @@ export default class Arrays {
      * @returns tuple A tuple containing the randomly chosen objects and the remaining pool.
      */
     static getRandomObjects = <T>(pool: T[], quantity: number): [T[], T[]] => {
-        const objects = [...pool];
-        const randomObjects = [];
+        const objects = [...pool]
+        const randomObjects = []
         for (let i = 0; i < quantity; i++) {
-            const randomIndex = Arrays.getRandomArrayIndex(objects);
-            const randomObject = objects[randomIndex];
-            objects.splice(randomIndex, 1);
-            randomObjects.push(randomObject);
+            const randomIndex = Arrays.getRandomArrayIndex(objects)
+            const randomObject = objects[randomIndex]
+            objects.splice(randomIndex, 1)
+            randomObjects.push(randomObject)
         }
-        return [randomObjects, objects];
-    };
+        return [randomObjects, objects]
+    }
 
     /**
      * Picks the first element of the given array.
@@ -162,11 +162,11 @@ export default class Arrays {
      */
     static takeFirst = <T>(array: T[]): [T[], T?] => {
         if (array.length > 0) {
-            const first = array[0];
-            const remaining = array.splice(1);
-            return [remaining, first];
+            const first = array[0]
+            const remaining = array.splice(1)
+            return [remaining, first]
         }
-        return [array];
+        return [array]
     }
 
     /**
@@ -176,6 +176,6 @@ export default class Arrays {
      * @param end The last value in the array.
      */
     static range = (start: number, end: number): number[] => {
-        return Array.from({length: (end - start)}, (v, k) => k + start);
+        return Array.from({ length: end - start }, (v, k) => k + start)
     }
 }

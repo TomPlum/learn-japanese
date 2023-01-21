@@ -7,15 +7,15 @@ module.exports = {
             "!src/domain/game/mode/**",
             "!src/domain/learn/mode/**",
             "!src/tests/**"
-        ];
-        return config;
+        ]
+        return config
     },
     webpack: (config) => {
         config.module.rules.push({
             test: /\.mjs$/,
             include: /node_modules/,
             type: "javascript/auto"
-        });
-        return config;
+        })
+        return config
     }
 }

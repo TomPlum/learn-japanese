@@ -1,104 +1,106 @@
-import { Card, Col, Dropdown, Row } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
-import { useUserDispatch } from "../../../hooks";
-import { Font } from "../../ui/buttons/FontSelectorButton";
-import { Theme } from "../../../domain/Theme";
-import { Language } from "../../../domain/Language";
-import { HighScorePreference } from "../../../domain/HighScorePreference";
-import { faCheckCircle, faCircleNotch, faRedo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AppMode } from "../../../domain/AppMode";
-import { setPreferences, User, UserPreferences } from "../../../slices/UserSlice";
-import { CardsPerDay } from "../../../domain/learn/spacedrepetition/CardsPerDay";
-import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle";
-import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss";
-import UserService from "../../../service/UserService";
-import FontService from "../../../service/FontService";
-import { useTranslation } from "react-i18next";
+import { Card, Col, Dropdown, Row } from "react-bootstrap"
+import React, { useEffect, useState } from "react"
+import { useUserDispatch } from "../../../hooks"
+import { Font } from "../../ui/buttons/FontSelectorButton"
+import { Theme } from "../../../domain/Theme"
+import { Language } from "../../../domain/Language"
+import { HighScorePreference } from "../../../domain/HighScorePreference"
+import { faCheckCircle, faCircleNotch, faRedo } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { AppMode } from "../../../domain/AppMode"
+import { setPreferences, User, UserPreferences } from "../../../slices/UserSlice"
+import { CardsPerDay } from "../../../domain/learn/spacedrepetition/CardsPerDay"
+import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle"
+import styles from "../../../styles/sass/components/user/profile/Preferences.module.scss"
+import UserService from "../../../service/UserService"
+import FontService from "../../../service/FontService"
+import { useTranslation } from "react-i18next"
 
 export interface PreferencesProps {
-    user: User;
+    user: User
 }
 
 const Preferences = (props: PreferencesProps) => {
-
-    const userDispatcher = useUserDispatch();
-    const userService = new UserService();
-    const fontService = new FontService();
-    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.interface.kanji-font.options" });
+    const userDispatcher = useUserDispatch()
+    const userService = new UserService()
+    const fontService = new FontService()
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.interface.kanji-font.options" })
 
     useEffect(() => {
-        const preferences = props.user.preferences;
-        setSelectedFont(preferences.kanjiFont);
-        setTheme(preferences.theme);
-        setLanguage(preferences.language);
-        setHighScorePreference(preferences.highScoresBehaviour);
-        setAppMode(preferences.defaultMode);
-        setCardsPerDay(preferences.flashCardsQuantity);
-        setConfidenceMenuStyle(preferences.confidenceMenuStyle);
+        const preferences = props.user.preferences
+        setSelectedFont(preferences.kanjiFont)
+        setTheme(preferences.theme)
+        setLanguage(preferences.language)
+        setHighScorePreference(preferences.highScoresBehaviour)
+        setAppMode(preferences.defaultMode)
+        setCardsPerDay(preferences.flashCardsQuantity)
+        setConfidenceMenuStyle(preferences.confidenceMenuStyle)
 
-        setLoading(true);
-        fontService.getFonts().then(fonts => {
-            setFonts(fonts);
-            setSelectedFont(fonts[0].name);
-        }).finally(() => {
-            setLoading(false);
-        });
-    }, []);
+        setLoading(true)
+        fontService
+            .getFonts()
+            .then((fonts) => {
+                setFonts(fonts)
+                setSelectedFont(fonts[0].name)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }, [])
 
-    const [fonts, setFonts] = useState<Font[]>([]);
+    const [fonts, setFonts] = useState<Font[]>([])
 
-    const [font, setSelectedFont] = useState("");
-    const [theme, setTheme] = useState(Theme.DARK.toString());
-    const [language, setLanguage] = useState(Language.ENGLISH.toString());
-    const [highScorePreference, setHighScorePreference] = useState(HighScorePreference.ASK_EACH_TIME.toString());
-    const [appMode, setAppMode] = useState(AppMode.PLAY.toString());
-    const [cardsPerDay, setCardsPerDay] = useState(CardsPerDay.TEN.valueOf());
-    const [confidenceMenuStyle, setConfidenceMenuStyle] = useState(ConfidenceMenuStyle.NUMBERS.toString());
+    const [font, setSelectedFont] = useState("")
+    const [theme, setTheme] = useState(Theme.DARK.toString())
+    const [language, setLanguage] = useState(Language.ENGLISH.toString())
+    const [highScorePreference, setHighScorePreference] = useState(HighScorePreference.ASK_EACH_TIME.toString())
+    const [appMode, setAppMode] = useState(AppMode.PLAY.toString())
+    const [cardsPerDay, setCardsPerDay] = useState(CardsPerDay.TEN.valueOf())
+    const [confidenceMenuStyle, setConfidenceMenuStyle] = useState(ConfidenceMenuStyle.NUMBERS.toString())
 
-    const [changes, setChanges] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | undefined>(undefined);
+    const [changes, setChanges] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState<string | undefined>(undefined)
 
     const onSelectDefaultFont = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
-        setSelectedFont((event.target as HTMLSelectElement).textContent!);
-        setChanges(true);
+        setSelectedFont((event.target as HTMLSelectElement).textContent!)
+        setChanges(true)
     }
 
     const onSelectTheme = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
-        setTheme((event.target as HTMLSelectElement).textContent!);
-        setChanges(true);
+        setTheme((event.target as HTMLSelectElement).textContent!)
+        setChanges(true)
     }
 
     const onSelectLanguage = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
-        setLanguage((event.target as HTMLSelectElement).textContent!);
-        setChanges(true);
+        setLanguage((event.target as HTMLSelectElement).textContent!)
+        setChanges(true)
     }
 
     const onSelectHighScorePreference = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
-        setHighScorePreference((event.target as HTMLSelectElement).textContent!);
-        setChanges(true);
+        setHighScorePreference((event.target as HTMLSelectElement).textContent!)
+        setChanges(true)
     }
 
     const onSetAppMode = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
-        setAppMode((event.target as HTMLSelectElement).textContent!);
-        setChanges(true);
+        setAppMode((event.target as HTMLSelectElement).textContent!)
+        setChanges(true)
     }
 
     const onSetCardsPerDay = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
-        setCardsPerDay(Number((event.target as HTMLSelectElement).textContent!));
-        setChanges(true);
+        setCardsPerDay(Number((event.target as HTMLSelectElement).textContent!))
+        setChanges(true)
     }
 
     const onSetConfidenceMenuStyle = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
-        setConfidenceMenuStyle((event.target as HTMLSelectElement).textContent!);
-        setChanges(true);
+        setConfidenceMenuStyle((event.target as HTMLSelectElement).textContent!)
+        setChanges(true)
     }
 
     const onSaveChanges = () => {
-        setError(undefined);
-        setChanges(false);
-        setLoading(true);
+        setError(undefined)
+        setChanges(false)
+        setLoading(true)
 
         const updatedPreferences: UserPreferences = {
             defaultMode: appMode,
@@ -114,20 +116,24 @@ const Preferences = (props: PreferencesProps) => {
             profileVisibility: "Friends Only",
             streakNotifications: false,
             mistakesReminders: false
-        };
+        }
 
         // TODO: This whole component just needs removing
-        userService.updatePreferences([]).then(response => {
-            if (response.success) {
-                userDispatcher(setPreferences(updatedPreferences));
-            } else {
+        userService
+            .updatePreferences([])
+            .then((response) => {
+                if (response.success) {
+                    userDispatcher(setPreferences(updatedPreferences))
+                } else {
+                    setError(response.error)
+                }
+            })
+            .catch((response) => {
                 setError(response.error)
-            }
-        }).catch(response => {
-            setError(response.error);
-        }).finally(() => {
-            setLoading(false);
-        });
+            })
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
     return (
@@ -144,25 +150,31 @@ const Preferences = (props: PreferencesProps) => {
 
                     <Col xs={2}>
                         <h2 className={styles.heading}>
-                            {changes ? <FontAwesomeIcon
-                                size="sm"
-                                title="Save"
-                                icon={faCheckCircle}
-                                onClick={onSaveChanges}
-                                className={[styles.save, styles.icon].join(" ")}
-                            /> : loading ? <FontAwesomeIcon
-                                spin
-                                size="sm"
-                                title="Saving..."
-                                icon={faCircleNotch}
-                                className={[styles.spinner, styles.icon].join(" ")}
-                            /> : error ? <FontAwesomeIcon
-                                size="sm"
-                                title="Retry"
-                                icon={faRedo}
-                                onClick={onSaveChanges}
-                                className={[styles.retry, styles.icon].join(" ")}
-                            /> : undefined}
+                            {changes ? (
+                                <FontAwesomeIcon
+                                    size="sm"
+                                    title="Save"
+                                    icon={faCheckCircle}
+                                    onClick={onSaveChanges}
+                                    className={[styles.save, styles.icon].join(" ")}
+                                />
+                            ) : loading ? (
+                                <FontAwesomeIcon
+                                    spin
+                                    size="sm"
+                                    title="Saving..."
+                                    icon={faCircleNotch}
+                                    className={[styles.spinner, styles.icon].join(" ")}
+                                />
+                            ) : error ? (
+                                <FontAwesomeIcon
+                                    size="sm"
+                                    title="Retry"
+                                    icon={faRedo}
+                                    onClick={onSaveChanges}
+                                    className={[styles.retry, styles.icon].join(" ")}
+                                />
+                            ) : undefined}
                         </h2>
                     </Col>
                 </Row>
@@ -173,7 +185,9 @@ const Preferences = (props: PreferencesProps) => {
                     </Col>
                     <Col xs={6}>
                         <Dropdown className={styles.dropdown} onSelect={onSelectDefaultFont}>
-                            <Dropdown.Toggle variant="light" data-testid="font">{font}</Dropdown.Toggle>
+                            <Dropdown.Toggle variant="light" data-testid="font">
+                                {font}
+                            </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {fonts.map((font: Font) => {
                                     return <Dropdown.Item key={font.slug}>{t(font.slug)}</Dropdown.Item>
@@ -189,7 +203,9 @@ const Preferences = (props: PreferencesProps) => {
                     </Col>
                     <Col xs={6}>
                         <Dropdown className={styles.dropdown} onSelect={onSelectTheme}>
-                            <Dropdown.Toggle variant="light" data-testid="theme">{theme}</Dropdown.Toggle>
+                            <Dropdown.Toggle variant="light" data-testid="theme">
+                                {theme}
+                            </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {Object.values(Theme).map((theme: string) => {
                                     return <Dropdown.Item key={theme}>{theme}</Dropdown.Item>
@@ -255,9 +271,11 @@ const Preferences = (props: PreferencesProps) => {
                         <Dropdown className={styles.dropdown} onSelect={onSetCardsPerDay}>
                             <Dropdown.Toggle variant="light">{cardsPerDay}</Dropdown.Toggle>
                             <Dropdown.Menu>
-                                {Object.values(CardsPerDay).filter(it => !isNaN(+it)).map(cards => {
-                                    return <Dropdown.Item key={cards}>{cards}</Dropdown.Item>
-                                })}
+                                {Object.values(CardsPerDay)
+                                    .filter((it) => !isNaN(+it))
+                                    .map((cards) => {
+                                        return <Dropdown.Item key={cards}>{cards}</Dropdown.Item>
+                                    })}
                             </Dropdown.Menu>
                         </Dropdown>
                     </Col>
@@ -271,7 +289,7 @@ const Preferences = (props: PreferencesProps) => {
                         <Dropdown className={styles.dropdown} onSelect={onSetConfidenceMenuStyle}>
                             <Dropdown.Toggle variant="light">{confidenceMenuStyle}</Dropdown.Toggle>
                             <Dropdown.Menu>
-                                {Object.values(ConfidenceMenuStyle).map(style => {
+                                {Object.values(ConfidenceMenuStyle).map((style) => {
                                     return <Dropdown.Item key={style}>{style}</Dropdown.Item>
                                 })}
                             </Dropdown.Menu>
@@ -280,7 +298,7 @@ const Preferences = (props: PreferencesProps) => {
                 </Row>
             </Card.Body>
         </Card>
-    );
+    )
 }
 
-export default Preferences;
+export default Preferences

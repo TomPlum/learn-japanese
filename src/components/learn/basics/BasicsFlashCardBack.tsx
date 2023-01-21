@@ -1,9 +1,9 @@
-import { CardFaceProps } from "../FlashCard";
-import Colour from "../../../domain/colour/Colour";
-import CommonFlashCardBack from "../CommonFlashCardBack";
+import { CardFaceProps } from "../FlashCard"
+import Colour from "../../../domain/colour/Colour"
+import CommonFlashCardBack from "../CommonFlashCardBack"
 
 function BasicsFlashCardBack(props: CardFaceProps) {
-    const value = props.data as Colour;
+    const value = props.data as Colour
 
     return (
         <CommonFlashCardBack
@@ -13,7 +13,7 @@ function BasicsFlashCardBack(props: CardFaceProps) {
             onClick={props.onClick}
             borderColour={props.data instanceof Colour ? props.data.colour : undefined}
         />
-    );
+    )
 }
 
-export default BasicsFlashCardBack;
+export default BasicsFlashCardBack

@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export interface FontState {
-    selected: string;
+    selected: string
 }
 
 const initialState: FontState = {
@@ -9,16 +9,16 @@ const initialState: FontState = {
 }
 
 export const fontSlice = createSlice({
-    name: 'font',
+    name: "font",
     initialState,
     reducers: {
         setFont: (state, action: PayloadAction<string>) => {
-            const selectedFontName = action.payload;
-            state.selected = selectedFontName;
-            localStorage.setItem("font", selectedFontName);
+            const selectedFontName = action.payload
+            state.selected = selectedFontName
+            localStorage.setItem("font", selectedFontName)
         }
     }
-});
+})
 
 export const { setFont } = fontSlice.actions
-export default fontSlice.reducer;
+export default fontSlice.reducer

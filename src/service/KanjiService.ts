@@ -1,29 +1,28 @@
-import { Kanji } from "../domain/kanji/Kanji";
-import KanjiRepository from "../repository/KanjiRepository";
-import { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings";
-import { KyoikuGrade } from "../domain/kanji/KyoikuGrade";
-import JLTPLevel from "../domain/learn/JLTPLevel";
+import { Kanji } from "../domain/kanji/Kanji"
+import KanjiRepository from "../repository/KanjiRepository"
+import { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings"
+import { KyoikuGrade } from "../domain/kanji/KyoikuGrade"
+import JLTPLevel from "../domain/learn/JLTPLevel"
 
 export interface KanjiResult {
-    value: Kanji;
-    field?: string;
+    value: Kanji
+    field?: string
 }
 
 export interface KanjiSearch {
-    kanji: KanjiResult[];
-    pages: number;
-    quantity: number;
-    error?: string;
+    kanji: KanjiResult[]
+    pages: number
+    quantity: number
+    error?: string
 }
 
 export interface RandomKanji {
-    value?: Kanji;
-    error?: string;
+    value?: Kanji
+    error?: string
 }
 
 class KanjiService {
-
-    private readonly _repository = new KanjiRepository();
+    private readonly _repository = new KanjiRepository()
 
     /**
      * Retrieves a single page of kanji characters with the given size.
@@ -33,27 +32,30 @@ class KanjiService {
      * @param grades The grades to include. Omitting includes all.
      */
     public async getKanjiPage(page: number, size: number, grades?: KyoikuGrade[]): Promise<KanjiSearch> {
-        const settings = new KanjiSettingsBuilder();
+        const settings = new KanjiSettingsBuilder()
 
         if (!grades || grades.length === 0) {
-            settings.withGrades(KyoikuGrade.ALL);
+            settings.withGrades(KyoikuGrade.ALL)
         } else {
-            settings.withGrades(grades);
+            settings.withGrades(grades)
         }
 
-        return this._repository.read(settings.build(), { page, size }).then(response => {
-            const kanji: KanjiResult[] = response.results.map(value => {
-                return { value: value, field: undefined, pages: 0, quantity: 0 };
-            });
-            return { kanji: kanji, pages: response.pages, quantity: response.quantity };
-        }).catch(response => {
-            return {
-                kanji: [],
-                pages: 0,
-                quantity: 0,
-                error: response.error ?? "An unknown error has occurred.",
-            };
-        });
+        return this._repository
+            .read(settings.build(), { page, size })
+            .then((response) => {
+                const kanji: KanjiResult[] = response.results.map((value) => {
+                    return { value: value, field: undefined, pages: 0, quantity: 0 }
+                })
+                return { kanji: kanji, pages: response.pages, quantity: response.quantity }
+            })
+            .catch((response) => {
+                return {
+                    kanji: [],
+                    pages: 0,
+                    quantity: 0,
+                    error: response.error ?? "An unknown error has occurred."
+                }
+            })
     }
 
     /**
@@ -64,15 +66,18 @@ class KanjiService {
      * @return response An array of match kanji paired with the field they matched on.
      */
     public async search(page: number, size: number, term: string): Promise<KanjiSearch> {
-        return this._repository.getBySearchTerm(page, size, term).then(response => {
-            if (response.results.length > 0) {
-                return { kanji: response.results, pages: response.pages, quantity: response.quantity };
-            } else {
-                return { kanji: [], error: response.error, pages: 0, quantity: 0 };
-            }
-        }).catch(response => {
-            return { kanji: [], error: response.error, pages: 0, quantity: 0 };
-        });
+        return this._repository
+            .getBySearchTerm(page, size, term)
+            .then((response) => {
+                if (response.results.length > 0) {
+                    return { kanji: response.results, pages: response.pages, quantity: response.quantity }
+                } else {
+                    return { kanji: [], error: response.error, pages: 0, quantity: 0 }
+                }
+            })
+            .catch((response) => {
+                return { kanji: [], error: response.error, pages: 0, quantity: 0 }
+            })
     }
 
     /**
@@ -85,19 +90,29 @@ class KanjiService {
      * @param strokes A quantity of brush strokes to filter by.
      * @return response An array of match kanji paired with the field they matched on.
      */
-    public async filter(page: number, size: number, term: string, grades?: KyoikuGrade[], levels?: JLTPLevel[], strokes?: number): Promise<KanjiSearch> {
-        const levelValues = levels?.map(level => level.level) ?? [];
-        const gradeValues = grades?.map(grade => grade.value) ?? [];
+    public async filter(
+        page: number,
+        size: number,
+        term: string,
+        grades?: KyoikuGrade[],
+        levels?: JLTPLevel[],
+        strokes?: number
+    ): Promise<KanjiSearch> {
+        const levelValues = levels?.map((level) => level.level) ?? []
+        const gradeValues = grades?.map((grade) => grade.value) ?? []
 
-        return this._repository.getByFilter(page, size, term, gradeValues, levelValues, strokes).then(response => {
-            if (response.results.length > 0) {
-                return { kanji: response.results, pages: response.pages, quantity: response.quantity };
-            } else {
-                return { kanji: [], error: response.error, pages: 0, quantity: 0 };
-            }
-        }).catch(response => {
-            return { kanji: [], error: response.error, pages: 0, quantity: 0 };
-        });
+        return this._repository
+            .getByFilter(page, size, term, gradeValues, levelValues, strokes)
+            .then((response) => {
+                if (response.results.length > 0) {
+                    return { kanji: response.results, pages: response.pages, quantity: response.quantity }
+                } else {
+                    return { kanji: [], error: response.error, pages: 0, quantity: 0 }
+                }
+            })
+            .catch((response) => {
+                return { kanji: [], error: response.error, pages: 0, quantity: 0 }
+            })
     }
 
     /**
@@ -105,15 +120,18 @@ class KanjiService {
      * @return A random kanji character.
      */
     public async randomKanji(): Promise<RandomKanji> {
-        return this._repository.getRandomKanji().then(response => {
-            if (response) {
-                return { value: response };
-            }
-            return { error: "Failed to retrieve random kanji" };
-        }).catch(() => {
-            return { error: "Failed to retrieve random kanji" };
-        });
+        return this._repository
+            .getRandomKanji()
+            .then((response) => {
+                if (response) {
+                    return { value: response }
+                }
+                return { error: "Failed to retrieve random kanji" }
+            })
+            .catch(() => {
+                return { error: "Failed to retrieve random kanji" }
+            })
     }
 }
 
-export default KanjiService;
+export default KanjiService

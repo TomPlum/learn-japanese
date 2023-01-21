@@ -1,44 +1,43 @@
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../../../styles/sass/components/ui/buttons/favourite/FavouritesButton.module.scss";
-import { useState } from "react";
-import { Fade } from "react-bootstrap";
-import SessionMode from "../../../../domain/session/SessionMode";
-import Icon from "../../menu/icon/Icon";
-import PlayMode from "../../../../domain/session/PlayMode";
-import LoadingDots from "../../loading/LoadingDots";
-import { useTranslation } from "react-i18next";
+import { faPlay } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import styles from "../../../../styles/sass/components/ui/buttons/favourite/FavouritesButton.module.scss"
+import { useState } from "react"
+import { Fade } from "react-bootstrap"
+import SessionMode from "../../../../domain/session/SessionMode"
+import Icon from "../../menu/icon/Icon"
+import PlayMode from "../../../../domain/session/PlayMode"
+import LoadingDots from "../../loading/LoadingDots"
+import { useTranslation } from "react-i18next"
 
 export interface FavouriteButtonProps {
-    preset: SessionMode;
-    className?: string;
-    selected: boolean;
-    onStart?: (preset: SessionMode) => void;
+    preset: SessionMode
+    className?: string
+    selected: boolean
+    onStart?: (preset: SessionMode) => void
 }
 
 const FavouriteButton = (props: FavouriteButtonProps) => {
+    const { preset, selected, className, onStart } = props
 
-    const { preset, selected, className, onStart } = props;
+    const isPlay = preset instanceof PlayMode
+    const backgroundColourClass = isPlay ? styles.play : styles.learn
 
-    const isPlay = preset instanceof PlayMode;
-    const backgroundColourClass = isPlay ? styles.play : styles.learn;
-
-    const [inside, setInside] = useState(false);
-    const { t, ready } = useTranslation();
+    const [inside, setInside] = useState(false)
+    const { t, ready } = useTranslation()
 
     const handleMouseEnter = () => {
-        setInside(true);
+        setInside(true)
     }
 
     const handleMouseOut = () => {
-        setInside(false);
+        setInside(false)
     }
 
     const handleStart = () => {
-        onStart?.(preset);
+        onStart?.(preset)
     }
 
-    const testId = `favourite-button-${preset.favourite_id}`;
+    const testId = `favourite-button-${preset.favourite_id}`
 
     return (
         <div className={[styles.favourite, backgroundColourClass, className ?? ""].join(" ")} data-testid={testId}>
@@ -73,7 +72,7 @@ const FavouriteButton = (props: FavouriteButtonProps) => {
                 </Fade>
             )}
         </div>
-    );
+    )
 }
 
-export default FavouriteButton;
+export default FavouriteButton

@@ -1,46 +1,46 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { GameSettingState } from "./GameSettingsSlice";
-import { DataSettingsState } from "./DataSettingsSlice";
-import PlayMode from "../domain/session/PlayMode";
-import GameSettingsConverter from "../converter/GameSettingsConverter";
-import GameSettings from "../domain/session/settings/game/GameSettings";
-import DataSettingsConverter from "../converter/DataSettingsConverter";
-import LearnMode from "../domain/session/LearnMode";
-import { SessionSettings } from "../domain/session/settings/SessionSettings";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { GameSettingState } from "./GameSettingsSlice"
+import { DataSettingsState } from "./DataSettingsSlice"
+import PlayMode from "../domain/session/PlayMode"
+import GameSettingsConverter from "../converter/GameSettingsConverter"
+import GameSettings from "../domain/session/settings/game/GameSettings"
+import DataSettingsConverter from "../converter/DataSettingsConverter"
+import LearnMode from "../domain/session/LearnMode"
+import { SessionSettings } from "../domain/session/settings/SessionSettings"
 
 export interface SessionSettingsState {
-    isPreset: boolean;
-    topic?: string;
-    id?: number;
-    name?: string;
-    icon?: string;
-    colour?: string;
-    game?: GameSettingState;
-    data: DataSettingsState;
+    isPreset: boolean
+    topic?: string
+    id?: number
+    name?: string
+    icon?: string
+    colour?: string
+    game?: GameSettingState
+    data: DataSettingsState
 }
 
 export interface SessionSettingsSlice {
-    lastPlaySession?: SessionSettingsState;
-    lastLearnSession?: SessionSettingsState;
+    lastPlaySession?: SessionSettingsState
+    lastLearnSession?: SessionSettingsState
 }
 
-const LAST_PLAY_SESSION_KEY = "last-play-session";
-const LAST_LEARN_SESSION_KEY = "last-learn-session";
+const LAST_PLAY_SESSION_KEY = "last-play-session"
+const LAST_LEARN_SESSION_KEY = "last-learn-session"
 
-const localLastPlaySession = localStorage.getItem(LAST_PLAY_SESSION_KEY);
-const localLastLearnSession = localStorage.getItem(LAST_LEARN_SESSION_KEY);
+const localLastPlaySession = localStorage.getItem(LAST_PLAY_SESSION_KEY)
+const localLastLearnSession = localStorage.getItem(LAST_LEARN_SESSION_KEY)
 
 const initialState: SessionSettingsSlice = {
-    lastLearnSession: localLastLearnSession ? JSON.parse(localLastLearnSession) as SessionSettingsState : undefined,
-    lastPlaySession: localLastPlaySession ? JSON.parse(localLastPlaySession) as SessionSettingsState : undefined
+    lastLearnSession: localLastLearnSession ? (JSON.parse(localLastLearnSession) as SessionSettingsState) : undefined,
+    lastPlaySession: localLastPlaySession ? (JSON.parse(localLastPlaySession) as SessionSettingsState) : undefined
 }
 
 export const sessionSettingsSlice = createSlice({
-    name: 'session-settings',
+    name: "session-settings",
     initialState,
     reducers: {
         setLastPlayPreset: (state, action: PayloadAction<PlayMode>) => {
-            const payload = action.payload;
+            const payload = action.payload
             const value: SessionSettingsState = {
                 isPreset: true,
                 topic: payload.topicName,
@@ -51,11 +51,11 @@ export const sessionSettingsSlice = createSlice({
                 game: new GameSettingsConverter().serialise(payload.modeSettings as GameSettings),
                 data: new DataSettingsConverter().serialise(payload.dataSettings)
             }
-            state.lastPlaySession = value;
-            localStorage.setItem(LAST_PLAY_SESSION_KEY, JSON.stringify(value));
+            state.lastPlaySession = value
+            localStorage.setItem(LAST_PLAY_SESSION_KEY, JSON.stringify(value))
         },
         setLastLearnPreset: (state, action: PayloadAction<LearnMode>) => {
-            const payload = action.payload;
+            const payload = action.payload
             const value: SessionSettingsState = {
                 isPreset: true,
                 topic: payload.topicName,
@@ -65,11 +65,11 @@ export const sessionSettingsSlice = createSlice({
                 colour: payload.colour,
                 data: new DataSettingsConverter().serialise(payload.dataSettings)
             }
-            state.lastLearnSession = value;
-            localStorage.setItem(LAST_LEARN_SESSION_KEY, JSON.stringify(value));
+            state.lastLearnSession = value
+            localStorage.setItem(LAST_LEARN_SESSION_KEY, JSON.stringify(value))
         },
         setLastCustomSession: (state, action: PayloadAction<SessionSettings>) => {
-            const payload = action.payload;
+            const payload = action.payload
 
             const value: SessionSettingsState = {
                 isPreset: false,
@@ -77,20 +77,26 @@ export const sessionSettingsSlice = createSlice({
             }
 
             if (payload.gameSettings) {
-                value.game = new GameSettingsConverter().serialise(payload.gameSettings);
-                localStorage.setItem(LAST_PLAY_SESSION_KEY, JSON.stringify(value));
+                value.game = new GameSettingsConverter().serialise(payload.gameSettings)
+                localStorage.setItem(LAST_PLAY_SESSION_KEY, JSON.stringify(value))
             } else {
-                localStorage.setItem(LAST_LEARN_SESSION_KEY, JSON.stringify(value));
+                localStorage.setItem(LAST_LEARN_SESSION_KEY, JSON.stringify(value))
             }
         },
         clearLastPlayPreset: (state) => {
-            state.lastPlaySession = undefined;
+            state.lastPlaySession = undefined
         },
         clearLastLearnPreset: (state) => {
-            state.lastLearnSession = undefined;
+            state.lastLearnSession = undefined
         }
     }
-});
+})
 
-export const { setLastPlayPreset, setLastLearnPreset, clearLastPlayPreset, clearLastLearnPreset, setLastCustomSession } = sessionSettingsSlice.actions
-export default sessionSettingsSlice.reducer;
+export const {
+    setLastPlayPreset,
+    setLastLearnPreset,
+    clearLastPlayPreset,
+    clearLastLearnPreset,
+    setLastCustomSession
+} = sessionSettingsSlice.actions
+export default sessionSettingsSlice.reducer
