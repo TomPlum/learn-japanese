@@ -3,18 +3,18 @@ import { WizardStep } from "../SessionWizard"
 import LearnSessionSettingsSummary from "../../../settings/LearnSessionSettingsSummary"
 
 export interface LearnConfirmationStepProps {
-    settings: SessionSettings
-    onSelectStage: (stage: WizardStep) => void
+  settings: SessionSettings
+  onSelectStage: (stage: WizardStep) => void
 }
 
 const LearnConfirmationStep = (props: LearnConfirmationStepProps) => {
-    const { settings, onSelectStage } = props
+  const { settings, onSelectStage } = props
 
-    return (
-        <div>
-            <LearnSessionSettingsSummary settings={settings} onSelectStage={onSelectStage} />
-        </div>
-    )
+  return (
+    <div>
+      <LearnSessionSettingsSummary settings={settings} onSelectStage={onSelectStage} />
+    </div>
+  )
 }
 
 export default LearnConfirmationStep

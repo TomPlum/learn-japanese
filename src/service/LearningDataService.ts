@@ -15,40 +15,40 @@ import KanaService from "./KanaService"
 import KanjiService from "./KanjiService"
 
 export default class LearningDataService {
-    private readonly _kanaService = new KanaService()
-    private readonly _kanjiService = new KanjiService()
-    private readonly _basicsRepository = new BasicsRepository()
-    private readonly _numbersRepository = new NumbersRepository()
-    private readonly _sentenceStructureRepository = new SentenceStructureRepository()
-    private readonly _calendarRepository = new CalendarRepository()
+  private readonly _kanaService = new KanaService()
+  private readonly _kanjiService = new KanjiService()
+  private readonly _basicsRepository = new BasicsRepository()
+  private readonly _numbersRepository = new NumbersRepository()
+  private readonly _sentenceStructureRepository = new SentenceStructureRepository()
+  private readonly _calendarRepository = new CalendarRepository()
 
-    public async read(settings?: DataSettings): Promise<Learnable[]> {
-        if (!settings) return []
+  public async read(settings?: DataSettings): Promise<Learnable[]> {
+    if (!settings) return []
 
-        switch (settings.topic) {
-            case Topic.KANA: {
-                return this._kanaService.getKana(settings as KanaSettings)
-            }
-            case Topic.CALENDAR: {
-                return this._calendarRepository.read(settings as CalendarSettings)
-            }
-            case Topic.KANJI: {
-                return this._kanjiService.getKanjiPage(0, 9999, (settings as KanjiSettings).grades).then((response) => {
-                    return response.kanji.map((result) => result.value)
-                })
-            }
-            case Topic.BASICS: {
-                return this._basicsRepository.read(settings as BasicsSettings)
-            }
-            case Topic.NUMBERS: {
-                return this._numbersRepository.read(settings as NumbersSettings)
-            }
-            case Topic.GRAMMAR: {
-                return this._sentenceStructureRepository.read(settings as SentenceStructureSettings)
-            }
-            default: {
-                return []
-            }
-        }
+    switch (settings.topic) {
+      case Topic.KANA: {
+        return this._kanaService.getKana(settings as KanaSettings)
+      }
+      case Topic.CALENDAR: {
+        return this._calendarRepository.read(settings as CalendarSettings)
+      }
+      case Topic.KANJI: {
+        return this._kanjiService.getKanjiPage(0, 9999, (settings as KanjiSettings).grades).then((response) => {
+          return response.kanji.map((result) => result.value)
+        })
+      }
+      case Topic.BASICS: {
+        return this._basicsRepository.read(settings as BasicsSettings)
+      }
+      case Topic.NUMBERS: {
+        return this._numbersRepository.read(settings as NumbersSettings)
+      }
+      case Topic.GRAMMAR: {
+        return this._sentenceStructureRepository.read(settings as SentenceStructureSettings)
+      }
+      default: {
+        return []
+      }
     }
+  }
 }

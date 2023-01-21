@@ -9,59 +9,59 @@ import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsume
 
 const mockUpdatePreferences = jest.fn()
 jest.mock("../../../../service/UserService", () => {
-    return function () {
-        return { updatePreferences: mockUpdatePreferences }
-    }
+  return function () {
+    return { updatePreferences: mockUpdatePreferences }
+  }
 })
 
 beforeEach(() => {
-    store.dispatch(clearUser())
+  store.dispatch(clearUser())
 })
 
 test("Should render the streak notifications toggle", async () => {
-    // Start with the preference enabled
-    mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-    store.dispatch(setUser(testUser))
-    store.dispatch(setPreference({ preference: Preference.STREAK_NOTIFICATIONS, value: true }))
-    const component = renderTranslatedReduxConsumer(<NotificationSettingsTab />)
+  // Start with the preference enabled
+  mockUpdatePreferences.mockResolvedValueOnce({ success: true })
+  store.dispatch(setUser(testUser))
+  store.dispatch(setPreference({ preference: Preference.STREAK_NOTIFICATIONS, value: true }))
+  const component = renderTranslatedReduxConsumer(<NotificationSettingsTab />)
 
-    // It should default to the truthy text
-    const notificationsToggle = component.getByTestId("streak-notifications-toggle")
-    expect(within(notificationsToggle).getByText("Enabled")).toBeInTheDocument()
+  // It should default to the truthy text
+  const notificationsToggle = component.getByTestId("streak-notifications-toggle")
+  expect(within(notificationsToggle).getByText("Enabled")).toBeInTheDocument()
 
-    // Mousing over should render the correct falsy hover text
-    fireEvent.mouseOver(notificationsToggle)
-    expect(within(notificationsToggle).getByText("Disable")).toBeInTheDocument()
+  // Mousing over should render the correct falsy hover text
+  fireEvent.mouseOver(notificationsToggle)
+  expect(within(notificationsToggle).getByText("Disable")).toBeInTheDocument()
 
-    // Toggling the option should render the falsy text
-    fireEvent.click(notificationsToggle)
-    expect(await within(notificationsToggle).findByText("Disabled")).toBeInTheDocument()
+  // Toggling the option should render the falsy text
+  fireEvent.click(notificationsToggle)
+  expect(await within(notificationsToggle).findByText("Disabled")).toBeInTheDocument()
 
-    // Mousing over its falsy state should render the truthy hover text
-    fireEvent.mouseOver(notificationsToggle)
-    expect(within(notificationsToggle).getByText("Enable")).toBeInTheDocument()
+  // Mousing over its falsy state should render the truthy hover text
+  fireEvent.mouseOver(notificationsToggle)
+  expect(within(notificationsToggle).getByText("Enable")).toBeInTheDocument()
 })
 
 test("Should render the mistakes reminder toggle", async () => {
-    // Start with the preference enabled
-    mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-    store.dispatch(setUser(testUser))
-    store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }))
-    const component = renderTranslatedReduxConsumer(<NotificationSettingsTab />)
+  // Start with the preference enabled
+  mockUpdatePreferences.mockResolvedValueOnce({ success: true })
+  store.dispatch(setUser(testUser))
+  store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }))
+  const component = renderTranslatedReduxConsumer(<NotificationSettingsTab />)
 
-    // It should default to the truthy text
-    const mistakesToggle = component.getByTestId("mistakes-reminders-toggle")
-    expect(within(mistakesToggle).getByText("Enabled")).toBeInTheDocument()
+  // It should default to the truthy text
+  const mistakesToggle = component.getByTestId("mistakes-reminders-toggle")
+  expect(within(mistakesToggle).getByText("Enabled")).toBeInTheDocument()
 
-    // Mousing over should render the correct falsy hover text
-    fireEvent.mouseOver(mistakesToggle)
-    expect(within(mistakesToggle).getByText("Disable")).toBeInTheDocument()
+  // Mousing over should render the correct falsy hover text
+  fireEvent.mouseOver(mistakesToggle)
+  expect(within(mistakesToggle).getByText("Disable")).toBeInTheDocument()
 
-    // Toggling the option should render the falsy text
-    fireEvent.click(mistakesToggle)
-    expect(await within(mistakesToggle).findByText("Disabled")).toBeInTheDocument()
+  // Toggling the option should render the falsy text
+  fireEvent.click(mistakesToggle)
+  expect(await within(mistakesToggle).findByText("Disabled")).toBeInTheDocument()
 
-    // Mousing over its falsy state should render the truthy hover text
-    fireEvent.mouseOver(mistakesToggle)
-    expect(within(mistakesToggle).getByText("Enable")).toBeInTheDocument()
+  // Mousing over its falsy state should render the truthy hover text
+  fireEvent.mouseOver(mistakesToggle)
+  expect(within(mistakesToggle).getByText("Enable")).toBeInTheDocument()
 })

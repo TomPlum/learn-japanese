@@ -5,21 +5,21 @@ import KanaType from "../../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../../domain/kana/KanaColumn"
 
 const kana = [
-    new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
-    new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
-    new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
-    new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
+  new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
+  new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
+  new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
+  new Kana("お", ["o"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
 ]
 
 test("Should render a tile for each of the kana", async () => {
-    render(<KanaGrid kana={kana} />)
-    await waitFor(() => expect(screen.getByText("あ")).toBeInTheDocument())
-    await waitFor(() => expect(screen.getByText("い")).toBeInTheDocument())
-    await waitFor(() => expect(screen.getByText("え")).toBeInTheDocument())
-    await waitFor(() => expect(screen.getByText("お")).toBeInTheDocument())
+  render(<KanaGrid kana={kana} />)
+  await waitFor(() => expect(screen.getByText("あ")).toBeInTheDocument())
+  await waitFor(() => expect(screen.getByText("い")).toBeInTheDocument())
+  await waitFor(() => expect(screen.getByText("え")).toBeInTheDocument())
+  await waitFor(() => expect(screen.getByText("お")).toBeInTheDocument())
 })
 
 test("Should not render the grid if there are no kana passed in", () => {
-    render(<KanaGrid kana={[]} />)
-    expect(screen.getByText("No results.")).toBeInTheDocument()
+  render(<KanaGrid kana={[]} />)
+  expect(screen.getByText("No results.")).toBeInTheDocument()
 })

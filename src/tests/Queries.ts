@@ -1,35 +1,35 @@
 import { Matcher, screen } from "@testing-library/react"
 
 export const getByTextWithMarkup = (text: string) => {
-    const hasText = (node: Element) => node.textContent === text
-    return screen.getByText((_: any, node: any) => {
-        const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as Element))
-        return hasText(node) && childrenDontHaveText
-    })
+  const hasText = (node: Element) => node.textContent === text
+  return screen.getByText((_: any, node: any) => {
+    const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as Element))
+    return hasText(node) && childrenDontHaveText
+  })
 }
 
 export const getByTextWithElements = (text: string): HTMLElement => {
-    return screen.getByText((content: Matcher, element: any) => {
-        return content !== "" && element && element.textContent === text
-    })
+  return screen.getByText((content: Matcher, element: any) => {
+    return content !== "" && element && element.textContent === text
+  })
 }
 
 export const getAllByTextWithElements = (text: string): HTMLElement[] => {
-    return screen.getAllByText((content: Matcher, element: any) => {
-        return content !== "" && element && element.textContent === text
-    })
+  return screen.getAllByText((content: Matcher, element: any) => {
+    return content !== "" && element && element.textContent === text
+  })
 }
 
 export const findByTextWithElements = async (text: string): Promise<HTMLElement> => {
-    return await screen.findByText((content: Matcher, element: any) => {
-        return content !== "" && element && element.textContent === text
-    })
+  return await screen.findByText((content: Matcher, element: any) => {
+    return content !== "" && element && element.textContent === text
+  })
 }
 
 export const findAllByTextWithElements = async (text: string): Promise<HTMLElement[]> => {
-    return await screen.findAllByText((content: Matcher, element: any) => {
-        return content !== "" && element && element.textContent === text
-    })
+  return await screen.findAllByText((content: Matcher, element: any) => {
+    return content !== "" && element && element.textContent === text
+  })
 }
 
 /**
@@ -39,7 +39,7 @@ export const findAllByTextWithElements = async (text: string): Promise<HTMLEleme
  * @return value of the first parameter
  */
 export const getValueLastCalledWith = <T>(fn: jest.Mock): T => {
-    const calls = fn.mock.calls
-    const lastCall = calls[calls.length - 1]
-    return lastCall[0] //First arg
+  const calls = fn.mock.calls
+  const lastCall = calls[calls.length - 1]
+  return lastCall[0] //First arg
 }

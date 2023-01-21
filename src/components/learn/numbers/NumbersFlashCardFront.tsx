@@ -4,13 +4,13 @@ import styles from "../../../styles/sass/components/learn/numbers/NumbersFlashCa
 import DefinitionList from "../DefinitionList"
 
 const NumbersFlashCardFront = (props: CardFaceProps) => {
-    const { data, onClick } = props
+  const { data, onClick } = props
 
-    return (
-        <FlashCardFront onClick={onClick} className={styles.wrapper}>
-            <DefinitionList words={data.getMeanings()} mode={"stacked"} />
-        </FlashCardFront>
-    )
+  return (
+    <FlashCardFront onClick={onClick} className={styles.wrapper}>
+      <DefinitionList words={data.getMeanings()} mode={"stacked"} />
+    </FlashCardFront>
+  )
 }
 
 export default NumbersFlashCardFront

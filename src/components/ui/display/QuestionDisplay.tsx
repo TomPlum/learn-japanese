@@ -3,31 +3,31 @@ import DynamicDisplay, { DynamicDisplayHandle } from "./DynamicDisplay"
 import styles from "../../../styles/sass/components/ui/display/QuestionDisplay.module.scss"
 
 export interface QuestionDisplayProps {
-    question: string
-    blur?: boolean
+  question: string
+  blur?: boolean
 }
 
 export type QuestionDisplayHandler = {
-    notifyIncorrect: () => void
+  notifyIncorrect: () => void
 }
 
 const QuestionDisplay = React.forwardRef((props: QuestionDisplayProps, ref: Ref<QuestionDisplayHandler>) => {
-    const display = useRef<DynamicDisplayHandle>(null)
+  const display = useRef<DynamicDisplayHandle>(null)
 
-    useImperativeHandle(ref, () => ({
-        notifyIncorrect() {
-            display.current?.notify()
-        }
-    }))
+  useImperativeHandle(ref, () => ({
+    notifyIncorrect() {
+      display.current?.notify()
+    }
+  }))
 
-    return (
-        <DynamicDisplay
-            ref={display}
-            value={props.question}
-            style={{ container: [styles.display], character: { className: props.blur ? styles.blur : styles.value } }}
-            className={styles.question}
-        />
-    )
+  return (
+    <DynamicDisplay
+      ref={display}
+      value={props.question}
+      style={{ container: [styles.display], character: { className: props.blur ? styles.blur : styles.value } }}
+      className={styles.question}
+    />
+  )
 })
 
 export default QuestionDisplay

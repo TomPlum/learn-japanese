@@ -6,25 +6,25 @@ import styles from "../../styles/sass/components/ui/DismissibleAlert.module.scss
 import { PropsWithChildren } from "react"
 
 export interface DismissibleAlertProps extends AlertProps {
-    onDismiss?: () => void
+  onDismiss?: () => void
 }
 
 const DismissibleAlert = (props: PropsWithChildren<DismissibleAlertProps>) => {
-    const { onDismiss, children, ...rest } = props
+  const { onDismiss, children, ...rest } = props
 
-    return (
-        <div className={styles.container}>
-            <Alert {...rest}>{children}</Alert>
+  return (
+    <div className={styles.container}>
+      <Alert {...rest}>{children}</Alert>
 
-            <FontAwesomeIcon
-                fixedWidth
-                icon={faTimes}
-                onClick={onDismiss}
-                className={styles.dismiss}
-                data-testid="dismiss-error-alert"
-            />
-        </div>
-    )
+      <FontAwesomeIcon
+        fixedWidth
+        icon={faTimes}
+        onClick={onDismiss}
+        className={styles.dismiss}
+        data-testid="dismiss-error-alert"
+      />
+    </div>
+  )
 }
 
 export default DismissibleAlert

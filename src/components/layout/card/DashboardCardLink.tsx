@@ -5,60 +5,55 @@ import React from "react"
 import { SafeAnchorProps } from "react-bootstrap"
 
 export interface DashboardCardLinkProps {
-    text: string
-    href?: string
-    title?: string
-    chevron?: boolean
-    disabled?: boolean
-    className?: string
-    onClick?: () => void
-    onMouseDown?: () => void
-    icon?: IconDefinition
+  text: string
+  href?: string
+  title?: string
+  chevron?: boolean
+  disabled?: boolean
+  className?: string
+  onClick?: () => void
+  onMouseDown?: () => void
+  icon?: IconDefinition
 }
 
 const DashboardCardLink = (props: DashboardCardLinkProps) => {
-    const { text, href, icon, title, disabled, chevron, className, onClick, onMouseDown } = props
+  const { text, href, icon, title, disabled, chevron, className, onClick, onMouseDown } = props
 
-    const classes = [disabled ? styles.disabled : styles.link, className]
+  const classes = [disabled ? styles.disabled : styles.link, className]
 
-    const handleClick = () => {
-        if (!disabled) {
-            onClick?.()
-        }
+  const handleClick = () => {
+    if (!disabled) {
+      onClick?.()
     }
+  }
 
-    const anchorProps: SafeAnchorProps = {
-        className: classes.join(" "),
-        href: href,
-        onClick: handleClick,
-        onMouseDown: onMouseDown,
-        title: title,
-        "aria-disabled": disabled
-    }
+  const anchorProps: SafeAnchorProps = {
+    className: classes.join(" "),
+    href: href,
+    onClick: handleClick,
+    onMouseDown: onMouseDown,
+    title: title,
+    "aria-disabled": disabled
+  }
 
-    return (
-        <a {...anchorProps}>
-            {icon && (
-                <FontAwesomeIcon
-                    fixedWidth
-                    icon={icon}
-                    className={styles.linkIcon}
-                    data-testid="dashboard-card-link-icon"
-                />
-            )}
+  return (
+    <a {...anchorProps}>
+      {icon && (
+        <FontAwesomeIcon fixedWidth icon={icon} className={styles.linkIcon} data-testid="dashboard-card-link-icon" />
+      )}
 
-            <span className={styles.linkText}>{text}</span>
+      <span className={styles.linkText}>{text}</span>
 
-            {chevron && (
-                <FontAwesomeIcon
-                    fixedWidth
-                    icon={faChevronRight}
-                    className={styles.chevron}
-                    data-testid="dashboard-card-link-chevron"
-                />
-            )}
-        </a>
-    )
+      {chevron && (
+        <FontAwesomeIcon
+          fixedWidth
+          icon={faChevronRight}
+          className={styles.chevron}
+          data-testid="dashboard-card-link-chevron"
+        />
+      )}
+    </a>
+  )
 }
 
 export default DashboardCardLink

@@ -1,735 +1,735 @@
 {
-    "landing": {
-        "button": {
-            "learn": "Learn",
-            "play": "Play",
-            "search": "Search",
-            "help": "Help"
-        }
-    },
-    "forms": {
-        "common": {
-            "username": "Username",
-            "password": "Password",
-            "confirm-password": "Confirm Password",
-            "email": "Email address",
-            "nickname": "Nickname"
-        },
-        "login": {
-            "no-account": "I don't have an account",
-            "session-expired": "Your session has expired. Please log-in again."
-        },
-        "register": {
-            "already-registered": "I already have an account",
-            "passwords-dont-match": "Passwords do not match.",
-            "checking-username-eligibility": "Checking username eligibility...",
-            "checking-email-eligibility": "Checking email eligibility...",
-            "username-available": "Username is available.",
-            "email-available": "Email address is available.",
-            "email-not-shared": "Your email address will not be shared with anyone else.",
-            "username-taken": "This username is already taken.",
-            "email-taken": "This email address is already registered.",
-            "password-policy": {
-                "title": "Password Policy",
-                "lowercase": "Password must contain at least one lowercase character.",
-                "uppercase": "Password must contain at least one uppercase character.",
-                "number": "Password must contain at least one number.",
-                "special-char": "Password must contain at least one special character.",
-                "length": "Password must be between 8 and 36 characters (inclusive)."
-            }
-        },
-        "custom-preset": {
-            "title": "Preset Details",
-            "failed-to-save": "Failed to save preset.",
-            "generic-error": "An error occurred while saving your preset.",
-            "success-message": "Saved \"{{name}}\" successfully.",
-            "change-icon": "Change Icon",
-            "default-preset-name": "My Preset"
-        }
-    },
-    "navigation": {
-        "button": {
-            "home": "Home",
-            "learn": "Learn",
-            "help": "Help",
-            "kanji-dict": "Kanji Dictionary",
-            "kana-dict": "Kana Dictionary",
-            "genki-dict": "Genki Knowledge Bank",
-            "genki-grammar": "Genki Grammar Bank",
-            "faq": "Frequently Asked Questions",
-            "sm2": "SuperMemo2 Algorithm",
-            "user": {
-                "login": "Login",
-                "profile": "Profile",
-                "stats": "Stats",
-                "high-scores": "Highscores",
-                "logout": "Logout"
-            }
-        }
-    },
-    "wizard": {
-        "confirmation": {
-            "title": "Are you sure?",
-            "body": "You'll lose your current configuration."
-        },
-        "steps": {
-            "mode": {
-                "title": "Select Mode",
-                "play": " Play",
-                "learn": "Learn",
-                "play-desc": "Test your knowledge on a given topic. Choose from a preset game mode or customise your own settings.",
-                "learn-desc": "Study a topic of your choice via flash cards and spaced repetition learning."
-            },
-            "topic": {
-                "title": "Select Topic"
-            },
-            "type": {
-                "title": "Select Type",
-                "preset": "Preset",
-                "custom": "Custom",
-                "preset-desc": "Choose from one of the preset game configurations for your chosen topic.",
-                "custom-desc": "Configure any of the available settings to create a customised game mode."
-            },
-            "preset": {
-                "title": "Choose Preset"
-            },
-            "question": {
-                "title": "Question Settings",
-                "desc": "Configure settings regarding the types of question you'll be asked.",
-                "type-heading": "Question Type",
-                "fields-heading": "Question & Answer Fields",
-                "fields-desc": "Select which piece of information you are given in the question and what you must give as the answer. You cannot select the same field for both.",
-                "give-me": "Give me the...",
-                "ask-me": "Ask me the...",
-                "score-heading": "Score",
-                "track-score": "Track Score",
-                "score-desc": "You gain a base score per question answered correctly. Streaking will increase your multiplier exponentially, but breaking it will reset to the base. Skipping a question will lose you the 1 x the base score.",
-                "cards-quantity": {
-                    "desc": "You'll be shown {{quantity}} answers to choose from.",
-                    "2": "2",
-                    "4": "4",
-                    "6": "6"
-                },
-                "type": {
-                    "text": {
-                        "name": "Text",
-                        "desc": "You're given a single piece of info (symbol, reading, meaning etc.) per question and must enter the request other piece of information."
-                    },
-                    "choice": {
-                        "name": "Multiple Choice",
-                        "desc": "You're given something for the given data and are presented with multiple answer options of which one is correct."
-                    },
-                    "match": {
-                        "name": "Match",
-                        "desc": "You're given several pieces of info with their answers and you must match them up correctly."
-                    },
-                    "audio": {
-                        "name": "Audio",
-                        "desc": "You're played an audio clip and must type or select the meaning of it."
-                    },
-                    "random": {
-                        "name": "Random",
-                        "desc": "You'll be given all question types shuffled randomly."
-                    }
-                }
-            },
-            "hint": {
-                "title": "Hint Settings",
-                "enable": "Enable",
-                "infinite": "Infinite Hints",
-                "enable-desc": "Hints allow you to reveal a small piece of information about the current question if you're struggling.",
-                "quantity-desc": "Select the number of hints you want for the entire game. You only get to use one per question.",
-                "infinite-desc": "Remove the quantity cap and use as many hints as you'd like."
-            },
-            "life": {
-                "title": "Life Settings",
-                "enable": "Enable",
-                "desc": "Configure the number of lives you start with. For an added challenge you can give yourself only a few, or unlimited if you're playing more casually.",
-                "lives-desc": "Select the number of lives you want to start the game with. You can choose between 1 and 10. Disabling will give you infinite."
-            },
-            "time": {
-                "title": "Time Settings",
-                "desc": "Configure the style of timer you want for the game or disable it entirely.",
-                "timed": "Timed",
-                "countdown": "Countdown",
-                "timed-desc": "You'll simply be timed starting from 00:00 and the timer will stop when you finish the game or lose. Useful for speed-running certain topics to test your mastery.",
-                "countdown-desc": "You'll have a set number of seconds to answer each question. Failing to answer correctly in the given time will lose you a life. Answering correctly will reset the timer.",
-                "seconds-quantity": "Select the number of seconds per question below"
-            },
-            "data": {
-                "fields": {
-                    "quantity": {
-                        "label": "Quantity",
-                        "placeholder": "Quantity"
-                    }
-                },
-                "kana": {
-                    "hiragana-label": "Hiragana",
-                    "hiragana-desc": "Hiragana is the main syllabary that defines all the sounds that make up the spoken Japanese language. It is also used in the written language for Japanese words and furigana. These characters are quite cursive in nature.",
-                    "katakana-label": "Katakana",
-                    "katakana-desc": "Katakana is a mirror of the aforementioned Hiragana syllabary. There is a 1 to 1 mapping of each kana that is pronounced in the same way. They are written differently and are generally only used for loan words and onomatopoeia. These characters are much more angular and linear than Hiragana.",
-                    "diagraphs-label": "Diagraphs",
-                    "diagraphs-desc": "Diagraphs are combinations of two kana. Both syllabaries have the same diagraphs in their respective kana."
-                }
-            },
-            "confirmation": {
-                "title": "Confirmation",
-                "login-message": "You must be logged in to save.",
-                "save-preset": "Save Preset"
-            }
-        }
-    },
-    "dashboard": {
-        "card": {
-            "play": {
-                "start": "Start Session",
-                "last-play": "Last Play Session",
-                "last-learn": "Last Learn Session",
-                "default-title": "Custom Session",
-                "play-title": "You've not played anything recently.",
-                "learn-title": "You've not practiced anything recently."
-            },
-            "profile": {
-                "go": "Go to profile",
-                "register": "Register",
-                "notifications": "Notification Centre",
-                "user-settings": "Account Settings",
-                "tour": "Show Me Around",
-                "description": "Create an account to save custom presets, compete in the high-scores, and track your progress."
-            },
-            "settings": {
-                "title": "Settings",
-                "general": "General Settings",
-                "learn": "Learn Settings",
-                "play": "Play Settings",
-                "interface": "Interface Settings",
-                "notification": "Notification Settings",
-                "user": "User Settings"
-            },
-            "kanji-showcase": {
-                "title": "Kanji Showcase",
-                "search": "search all kanji",
-                "on": {
-                    "short": "on",
-                    "long": "On'Yomi Readings"
-                },
-                "kun": {
-                    "short": "kun",
-                    "long": "Kun'Yomi Readings"
-                },
-                "grade": "Kyōiku Grade",
-                "jlpt": "JLPT Level",
-                "strokes": "Brush Strokes",
-                "examples": "Examples",
-                "shuffle": "Shuffle",
-                "meaning": "Meanings"
-            },
-            "favourites": {
-                "title": "Favourites",
-                "modal": {
-                    "quit-confirmation": {
-                        "title": "Are you sure you want to quit?",
-                        "body": "You have unsaved changes to your favourites."
-                    }
-                }
-            },
-            "flash-cards": {
-                "title": "Flash Cards",
-                "review": "Review",
-                "learning": "Learning",
-                "new": "New",
-                "start": "Start Study Session"
-            },
-            "activity": {
-                "title": "Activity",
-                "more": "See More",
-                "event": {
-                    "learn": "Learning Session",
-                    "play": "Play Session",
-                    "mistakes": "Mistakes Review",
-                    "welcome": "Welcome!",
-                    "streak": "You a reached a {{streak}} day streak!"
-                },
-                "time": {
-                    "now": "Just now",
-                    "minutes-past": "%dm ago",
-                    "hours-past": "%dh ago",
-                    "days-past": "%dd ago",
-                    "months-past": "%dmo ago",
-                    "years-past": "%dy ago",
-                    "one-minute-ago": "A minute ago",
-                    "one-hour-ago": "An hour ago",
-                    "one-day-ago": "A day ago",
-                    "one-month-ago": "A month ago",
-                    "one-year-ago": "A year ago"
-                }
-            },
-            "stats": {
-                "title": "Statistics",
-                "kana": "Kana",
-                "kanji": "Kanji"
-            },
-            "mistakes": {
-                "title": "Mistakes",
-                "review": "to review",
-                "view": "View Mistakes",
-                "practice": "Practice",
-                "kanji": "Kanji",
-                "kana": "Kana",
-                "definitions": "Definitions"
-            },
-            "high-scores": {
-                "title": "Highscores",
-                "more": "See More",
-                "rank": "#",
-                "leaderboard": "Leaderboard",
-                "score": "Score",
-                "names": {
-                    "romaji-time-attack": "Rōmaji Time Attack",
-                    "kanji-hardcore": "Kanji Hardcore",
-                    "verb-match": "Verb Match",
-                    "adverbs": "Adverbs",
-                    "hiragana-speed-run": "Hiragana Speed Run"
-                }
-            },
-            "streak": {
-                "streak": "Streak",
-                "account-creation": "Account Creation",
-                "custom-date": "Custom Date",
-                "streak-template": "{{streak}} Day Streak",
-                "account-template": "{{days}} Days Old",
-                "custom-template": "Day {{day}}"
-            }
-        }
-    },
-    "settings": {
-        "modal": {
-            "general": {
-                "heading": "General Settings",
-                "desc": "General settings for common elements and actions around the app.",
-                "activity-feed": {
-                    "heading": "Activity Feed",
-                    "desc": "Set the number of events to display in the activity feed card by default.",
-                    "options": [
-                        { "name": "3", "value": "3" },
-                        { "name": "5", "value": "5" },
-                        { "name": "8", "value": "8" }
-                    ]
-                }
-            },
-            "learn": {
-                "heading": "Learn Settings",
-                "desc": "Configure settings related to learning Japanese.",
-                "flash-cards": {
-                    "heading": "Flash Cards Per Day",
-                    "desc": "Set the number of new flash cards you wish to see per day. New cards will only be issued if your deck is active and you have no outstanding cards to be reviewed.",
-                    "options": [
-                        { "name": "10", "value": "10" },
-                        { "name": "20", "value": "20" },
-                        { "name": "30", "value": "30" },
-                        { "name": "40", "value": "40" },
-                        { "name": "50", "value": "50" }
-                    ]
-                },
-                "romaji": {
-                    "heading": "Rōmaji Settings",
-                    "desc": "Set the default behaviour for showing rōmaji variants of kana. Rōmaji or ローマ字 (rōmaji) is the romanisation of the Japanese written language.",
-                    "options": [
-                        { "name": "Always Show", "value": "Always Show" },
-                        { "name": "Ask Each Time", "value": "Ask Each Time" },
-                        { "name": "Always Hide", "value": "Always Hide" }
-                    ]
-                }
-            },
-            "play": {
-                "heading": "Play Settings",
-                "desc": "Configure settings related to games and other play-orientated modes.",
-                "high-scores": {
-                    "label": "High-Score Preference",
-                    "desc": "Set the default behaviour for submitting your play sessions to the high-scores.",
-                    "options": [
-                        { "name": "Ask Each Time", "value": "Ask Each Time" },
-                        { "name": "Always Submit", "value": "Always Submit" },
-                        { "name": "Never Submit", "value": "Never Submit" }
-                    ]
-                }
-            },
-            "interface": {
-                "heading": "Interface Settings",
-                "desc": "Configure the user interface to customise the layout and look-and-feel to your liking.",
-                "customise-dashboard-layout": {
-                    "heading": "Customise Dashboard Layout",
-                    "desc": "Edit the home page dashboard layout. Cards can be toggled on or off, resized or moved to different columns.",
-                    "button": "Open Layout Editor"
-                },
-                "theme": {
-                    "heading": "Theme",
-                    "desc": "Switch between the dark and light variations of the user-interface theming.",
-                    "options": [
-                        { "name": "Dark Mode", "value": "Dark Mode", "icon": "FaMoon", "className": "dark" },
-                        { "name": "Light Mode", "value": "Light Mode", "icon": "FaLightbulb", "className": "light" }
-                    ]
-                },
-                "kanji-font": {
-                    "heading": "Kanji Font",
-                    "desc": "Set your preferred default font-face used for all kanji characters in the app.",
-                    "options": {
-                        "default": "Default",
-                        "mincho": "Mincho",
-                        "handwriting": "Handwriting",
-                        "gothic": "Gothic"
-                    }
-                },
-                "language": {
-                    "heading": "Language & Internationalisation",
-                    "desc": "Set the language that all major buttons, menus and links use.",
-                    "options": [
-                        { "name": "English", "value": "English" },
-                        { "name": "Japanese", "value": "日本語" }
-                    ]
-                },
-                "confidence-menu-style": {
-                    "heading": "Confidence Menu Style",
-                    "desc": "Change the format of the confidence rating widget used during flash card learning sessions.",
-                    "options": [
-                        { "name": "Emoji Style", "value": "Emoji Style", "icon": "FaSmile" },
-                        { "name": "Numbers 1 - 6", "value": "Numbers 1 - 6", "icon": "FaSortNumericUp" }
-                    ]
-                }
-            },
-            "notification": {
-                "heading": "Notification Settings",
-                "desc": "Configure settings related to your notification centre and app-wide communication.",
-                "streak-notifications": {
-                    "heading": "Streak Notifications",
-                    "desc": "Toggle notifications for significant streak milestones.",
-                    "enable": "Enable",
-                    "disable": "Disable",
-                    "enabled": "Enabled",
-                    "disabled": "Disabled"
-                },
-                "outstanding-mistakes-reminder": {
-                    "heading": "Outstanding Mistakes Reminder",
-                    "desc": "Toggle reminders for outstanding mistakes that need reviewing.",
-                    "enable": "Enable",
-                    "disable": "Disable",
-                    "enabled": "Enabled",
-                    "disabled": "Disabled"
-                }
-            },
-            "user": {
-                "heading": "User Settings",
-                "desc": "Configure settings related to your user profile.",
-                "are-you-sure": "Are you sure?",
-                "click-to-confirm": "Click to confirm",
-                "confirmation-modal": {
-                    "confirm-password": "Please confirm your password.",
-                    "irreversible-operation": "Remember - this operation is irreversible.",
-                    "changed-mind": "I've changed my mind",
-                    "delete-account": "Delete my account",
-                    "password-placeholder": "Password"
-                },
-                "profile-visibility": {
-                    "heading": "Profile Visibility",
-                    "desc": "Change the visibility of your profile to other users. By default your username will be visible to others on the high-scores (should you submit them). You can keep your info private or show it to friends only.",
-                    "options": [
-                        { "name": "Friends Only", "value": "Friends Only", "icon": "FaUserFriends" },
-                        { "name": "Private", "value": "Private", "icon": "FaUserSecret" },
-                        { "name": "Public", "value": "Public", "icon": "FaGlobeAmericas" }
-                    ]
-                },
-                "streak-card-preference": {
-                    "heading": "Streak Card Preference",
-                    "desc": "Choose which statistic is displayed on the dashboards streak card. Defaults to the date you created your account. You can change it to your current streak or choose a custom date.",
-                    "options": [
-                        { "name": "Start Date", "value": "Start Date", "icon": "FaCalendarCheck" },
-                        { "name": "Streak", "value": "Streak", "icon": "FaFireAlt" },
-                        { "name": "Custom Date", "value": "Custom Date", "icon": "FaClock" }
-                    ]
-                },
-                "danger-zone": {
-                    "heading": "Danger Zone",
-                    "desc": "Destructive settings that you might want to think twice about!",
-                    "clear-local-storage": {
-                        "heading": "Clear Local Storage",
-                        "desc": "Deletes all locally stored data from your browser except for your user session. Does not permanently delete any saved data, but may increase loading times temporarily.",
-                        "button": "Clear Storage"
-                    },
-                    "reset-high-scores": {
-                        "heading": "Reset High-Scores",
-                        "desc": "Resets all your saved scores across the app. Any ranks you currently hold on the high-scores will be lost.",
-                        "button": "Reset Scores"
-                    },
-                    "reset-statistics": {
-                        "heading": "Reset Statistics",
-                        "desc": "Resets all your tracked statistics such as games played or won. This does not include flash card data.",
-                        "button": "Reset Stats"
-                    },
-                    "reset-flash-cards": {
-                        "heading": "Reset Flash Cards",
-                        "desc": "Resets all your flash card data. Does not affect stats.",
-                        "button": "Reset Cards"
-                    },
-                    "delete-account": {
-                        "heading": "Delete Account",
-                        "desc": "Delete your user account and all of your personal data. This is an irreversible operation. You'll need to provide your password for confirmation.",
-                        "button": "Delete Account",
-                        "popover": {
-                            "title": "Delete Account",
-                            "text": "Delete your user account and all of your personal data. This is an irreversible operation. You'll need to provide your password for confirmation."
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "action": {
-        "edit": "Edit",
-        "refresh": "Refresh",
-        "sync": "Sync",
-        "clear": "Clear",
-        "cancel": "Cancel",
-        "close": "Close",
-        "dismiss": "Dismiss",
-        "remove": "Remove",
-        "favourite": "Favourite",
-        "save": "Save",
-        "start": "Start",
-        "check": "Check",
-        "restart": "Restart",
-        "hint": "Hint",
-        "skip": "Skip",
-        "yes": "Yes",
-        "no": "No",
-        "login": "Login",
-        "register": "Register",
-        "search": "Search",
-        "next": "Next",
-        "back": "Back"
-    },
-    "presets": {
-        "edit": {
-            "title": "Edit Favourites"
-        },
-        "learn": {
-            "start": "Start Learn",
-            "hiragana": {
-                "name": "Hiragana"
-            },
-            "katakana": {
-                "name": "Katakana"
-            },
-            "kyōiku": {
-                "name": "Kyōiku"
-            },
-            "diacriticals": {
-                "name": "Diacriticals"
-            },
-            "diagraphs": {
-                "name": "Diagraphs"
-            },
-            "everything": {
-                "name": "Everything"
-            },
-            "high-school": {
-                "name": "High School"
-            },
-            "jōyō": {
-                "name": "Jōyō Kanji"
-            },
-            "numbers": {
-                "name": "Numbers"
-            },
-            "colours": {
-                "name": "Colours"
-            },
-            "time": {
-                "name": "Time"
-            },
-            "animals": {
-                "name": "Animals"
-            },
-            "directions": {
-                "name": "Directions"
-            },
-            "weather": {
-                "name": "Weather"
-            },
-            "family": {
-                "name": "Family"
-            },
-            "body": {
-                "name": "Body"
-            },
-            "days-of-the-week": {
-                "name": "Days of the Week"
-            },
-            "months-of-the-year": {
-                "name": "Months of the Year"
-            },
-            "temporal-nouns": {
-                "name": "Temporal Nouns"
-            },
-            "seasonal": {
-                "name": "Seasonal"
-            },
-            "common-phrases": {
-                "name": "Common Phrases"
-            },
-            "adverbs": {
-                "name": "Adverbs"
-            },
-            "particles": {
-                "name": "Particles"
-            },
-            "expressions": {
-                "name": "Expressions"
-            },
-            "verbs": {
-                "name": "Verbs"
-            },
-            "nouns": {
-                "name": "Nouns"
-            },
-            "adjectives": {
-                "name": "Adjectives"
-            }
-        },
-        "play": {
-            "start": "Start Play",
-            "rōmaji": {
-                "name": "Rōmaji"
-            },
-            "hardcore": {
-                "name": "Hardcore"
-            },
-            "relaxed": {
-                "name": "Relaxed"
-            },
-            "time-attack": {
-                "name": "Time Attack"
-            },
-            "kana": {
-                "name": "Kana"
-            },
-            "match": {
-                "name": "Match"
-            },
-            "kanji": {
-                "name": "Kanji"
-            },
-            "meaning": {
-                "name": "Meanings"
-            },
-            "on'yomi": {
-                "name": "On'Yomi Readings"
-            },
-            "kun'yomi": {
-                "name": "Kun'Yomi Readings"
-            },
-            "random": {
-                "name": "Random"
-            },
-            "numbers": {
-                "name": "Numbers"
-            },
-            "counters": {
-                "name": "Counters"
-            },
-            "age": {
-                "name": "Age"
-            },
-            "exceptions": {
-                "name": "Exceptions"
-            },
-            "units": {
-                "name": "Units"
-            },
-            "sequence": {
-                "name": "Sequence"
-            },
-            "colours": {
-                "name": "Colours"
-            },
-            "animals": {
-                "name": "Animals"
-            },
-            "directions": {
-                "name": "Directions"
-            },
-            "weather": {
-                "name": "Weather"
-            },
-            "family": {
-                "name": "Family"
-            },
-            "body": {
-                "name": "Body"
-            },
-            "days-of-the-week": {
-                "name": "Days of the Week"
-            },
-            "months-of-the-year": {
-                "name": "Months of the Year"
-            },
-            "temporal-nouns": {
-                "name": "Temporal Nouns"
-            },
-            "seasonal": {
-                "name": "Seasonal"
-            },
-            "common-phrases": {
-                "name": "Common Phrases"
-            },
-            "everything": {
-                "name": "Everything"
-            },
-            "japanese": {
-                "name": "Japanese"
-            }
-        }
-    },
-    "learnable": {
-        "field": {
-            "meaning": {
-                "name": "English Meaning",
-                "desc": "The meaning of the word or character in English. Usually a single word."
-            },
-            "kanji": {
-                "name": "Kanji",
-                "desc": "Some words can be expressed as a single Kanji."
-            },
-            "kana": {
-                "name": "Kana",
-                "desc": "The Japanese syllabaries are kana. All words can expressed in Hiragana or Katakana."
-            },
-            "japanese": {
-                "name": "Japanese",
-                "desc": "Some words can be expressed in all kanji or a mixture of kanji and kana."
-            },
-            "romaji": {
-                "name": "Rōmaji",
-                "desc": "The romanisation of Japanese kana. I.e. 'a', 'ke' or 'zu'."
-            },
-            "on": {
-                "name": "On'Yomi Reading",
-                "desc": "The original Chinese readings of a kanji character in Hiragana."
-            },
-            "kun": {
-                "name": "Kun'Yomi Reading",
-                "desc": "The Japanese readings of a kanji character in Katakana."
-            },
-            "random": {
-                "name": "Random",
-                "desc": "A random selection of any of the available data fields."
-            }
-        }
-    },
-    "memory-game": {
-        "quit-title": "Are you sure you want to quit?",
-        "quit-body": "You'll lose your current progress, but you'll see the results of your game thus far.",
-        "results-screen": {
-            "not-submitted": "Your score was not submitted to the high-scores. You can change your preferences here."
-        }
+  "landing": {
+    "button": {
+      "learn": "Learn",
+      "play": "Play",
+      "search": "Search",
+      "help": "Help"
     }
+  },
+  "forms": {
+    "common": {
+      "username": "Username",
+      "password": "Password",
+      "confirm-password": "Confirm Password",
+      "email": "Email address",
+      "nickname": "Nickname"
+    },
+    "login": {
+      "no-account": "I don't have an account",
+      "session-expired": "Your session has expired. Please log-in again."
+    },
+    "register": {
+      "already-registered": "I already have an account",
+      "passwords-dont-match": "Passwords do not match.",
+      "checking-username-eligibility": "Checking username eligibility...",
+      "checking-email-eligibility": "Checking email eligibility...",
+      "username-available": "Username is available.",
+      "email-available": "Email address is available.",
+      "email-not-shared": "Your email address will not be shared with anyone else.",
+      "username-taken": "This username is already taken.",
+      "email-taken": "This email address is already registered.",
+      "password-policy": {
+        "title": "Password Policy",
+        "lowercase": "Password must contain at least one lowercase character.",
+        "uppercase": "Password must contain at least one uppercase character.",
+        "number": "Password must contain at least one number.",
+        "special-char": "Password must contain at least one special character.",
+        "length": "Password must be between 8 and 36 characters (inclusive)."
+      }
+    },
+    "custom-preset": {
+      "title": "Preset Details",
+      "failed-to-save": "Failed to save preset.",
+      "generic-error": "An error occurred while saving your preset.",
+      "success-message": "Saved \"{{name}}\" successfully.",
+      "change-icon": "Change Icon",
+      "default-preset-name": "My Preset"
+    }
+  },
+  "navigation": {
+    "button": {
+      "home": "Home",
+      "learn": "Learn",
+      "help": "Help",
+      "kanji-dict": "Kanji Dictionary",
+      "kana-dict": "Kana Dictionary",
+      "genki-dict": "Genki Knowledge Bank",
+      "genki-grammar": "Genki Grammar Bank",
+      "faq": "Frequently Asked Questions",
+      "sm2": "SuperMemo2 Algorithm",
+      "user": {
+        "login": "Login",
+        "profile": "Profile",
+        "stats": "Stats",
+        "high-scores": "Highscores",
+        "logout": "Logout"
+      }
+    }
+  },
+  "wizard": {
+    "confirmation": {
+      "title": "Are you sure?",
+      "body": "You'll lose your current configuration."
+    },
+    "steps": {
+      "mode": {
+        "title": "Select Mode",
+        "play": " Play",
+        "learn": "Learn",
+        "play-desc": "Test your knowledge on a given topic. Choose from a preset game mode or customise your own settings.",
+        "learn-desc": "Study a topic of your choice via flash cards and spaced repetition learning."
+      },
+      "topic": {
+        "title": "Select Topic"
+      },
+      "type": {
+        "title": "Select Type",
+        "preset": "Preset",
+        "custom": "Custom",
+        "preset-desc": "Choose from one of the preset game configurations for your chosen topic.",
+        "custom-desc": "Configure any of the available settings to create a customised game mode."
+      },
+      "preset": {
+        "title": "Choose Preset"
+      },
+      "question": {
+        "title": "Question Settings",
+        "desc": "Configure settings regarding the types of question you'll be asked.",
+        "type-heading": "Question Type",
+        "fields-heading": "Question & Answer Fields",
+        "fields-desc": "Select which piece of information you are given in the question and what you must give as the answer. You cannot select the same field for both.",
+        "give-me": "Give me the...",
+        "ask-me": "Ask me the...",
+        "score-heading": "Score",
+        "track-score": "Track Score",
+        "score-desc": "You gain a base score per question answered correctly. Streaking will increase your multiplier exponentially, but breaking it will reset to the base. Skipping a question will lose you the 1 x the base score.",
+        "cards-quantity": {
+          "desc": "You'll be shown {{quantity}} answers to choose from.",
+          "2": "2",
+          "4": "4",
+          "6": "6"
+        },
+        "type": {
+          "text": {
+            "name": "Text",
+            "desc": "You're given a single piece of info (symbol, reading, meaning etc.) per question and must enter the request other piece of information."
+          },
+          "choice": {
+            "name": "Multiple Choice",
+            "desc": "You're given something for the given data and are presented with multiple answer options of which one is correct."
+          },
+          "match": {
+            "name": "Match",
+            "desc": "You're given several pieces of info with their answers and you must match them up correctly."
+          },
+          "audio": {
+            "name": "Audio",
+            "desc": "You're played an audio clip and must type or select the meaning of it."
+          },
+          "random": {
+            "name": "Random",
+            "desc": "You'll be given all question types shuffled randomly."
+          }
+        }
+      },
+      "hint": {
+        "title": "Hint Settings",
+        "enable": "Enable",
+        "infinite": "Infinite Hints",
+        "enable-desc": "Hints allow you to reveal a small piece of information about the current question if you're struggling.",
+        "quantity-desc": "Select the number of hints you want for the entire game. You only get to use one per question.",
+        "infinite-desc": "Remove the quantity cap and use as many hints as you'd like."
+      },
+      "life": {
+        "title": "Life Settings",
+        "enable": "Enable",
+        "desc": "Configure the number of lives you start with. For an added challenge you can give yourself only a few, or unlimited if you're playing more casually.",
+        "lives-desc": "Select the number of lives you want to start the game with. You can choose between 1 and 10. Disabling will give you infinite."
+      },
+      "time": {
+        "title": "Time Settings",
+        "desc": "Configure the style of timer you want for the game or disable it entirely.",
+        "timed": "Timed",
+        "countdown": "Countdown",
+        "timed-desc": "You'll simply be timed starting from 00:00 and the timer will stop when you finish the game or lose. Useful for speed-running certain topics to test your mastery.",
+        "countdown-desc": "You'll have a set number of seconds to answer each question. Failing to answer correctly in the given time will lose you a life. Answering correctly will reset the timer.",
+        "seconds-quantity": "Select the number of seconds per question below"
+      },
+      "data": {
+        "fields": {
+          "quantity": {
+            "label": "Quantity",
+            "placeholder": "Quantity"
+          }
+        },
+        "kana": {
+          "hiragana-label": "Hiragana",
+          "hiragana-desc": "Hiragana is the main syllabary that defines all the sounds that make up the spoken Japanese language. It is also used in the written language for Japanese words and furigana. These characters are quite cursive in nature.",
+          "katakana-label": "Katakana",
+          "katakana-desc": "Katakana is a mirror of the aforementioned Hiragana syllabary. There is a 1 to 1 mapping of each kana that is pronounced in the same way. They are written differently and are generally only used for loan words and onomatopoeia. These characters are much more angular and linear than Hiragana.",
+          "diagraphs-label": "Diagraphs",
+          "diagraphs-desc": "Diagraphs are combinations of two kana. Both syllabaries have the same diagraphs in their respective kana."
+        }
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "login-message": "You must be logged in to save.",
+        "save-preset": "Save Preset"
+      }
+    }
+  },
+  "dashboard": {
+    "card": {
+      "play": {
+        "start": "Start Session",
+        "last-play": "Last Play Session",
+        "last-learn": "Last Learn Session",
+        "default-title": "Custom Session",
+        "play-title": "You've not played anything recently.",
+        "learn-title": "You've not practiced anything recently."
+      },
+      "profile": {
+        "go": "Go to profile",
+        "register": "Register",
+        "notifications": "Notification Centre",
+        "user-settings": "Account Settings",
+        "tour": "Show Me Around",
+        "description": "Create an account to save custom presets, compete in the high-scores, and track your progress."
+      },
+      "settings": {
+        "title": "Settings",
+        "general": "General Settings",
+        "learn": "Learn Settings",
+        "play": "Play Settings",
+        "interface": "Interface Settings",
+        "notification": "Notification Settings",
+        "user": "User Settings"
+      },
+      "kanji-showcase": {
+        "title": "Kanji Showcase",
+        "search": "search all kanji",
+        "on": {
+          "short": "on",
+          "long": "On'Yomi Readings"
+        },
+        "kun": {
+          "short": "kun",
+          "long": "Kun'Yomi Readings"
+        },
+        "grade": "Kyōiku Grade",
+        "jlpt": "JLPT Level",
+        "strokes": "Brush Strokes",
+        "examples": "Examples",
+        "shuffle": "Shuffle",
+        "meaning": "Meanings"
+      },
+      "favourites": {
+        "title": "Favourites",
+        "modal": {
+          "quit-confirmation": {
+            "title": "Are you sure you want to quit?",
+            "body": "You have unsaved changes to your favourites."
+          }
+        }
+      },
+      "flash-cards": {
+        "title": "Flash Cards",
+        "review": "Review",
+        "learning": "Learning",
+        "new": "New",
+        "start": "Start Study Session"
+      },
+      "activity": {
+        "title": "Activity",
+        "more": "See More",
+        "event": {
+          "learn": "Learning Session",
+          "play": "Play Session",
+          "mistakes": "Mistakes Review",
+          "welcome": "Welcome!",
+          "streak": "You a reached a {{streak}} day streak!"
+        },
+        "time": {
+          "now": "Just now",
+          "minutes-past": "%dm ago",
+          "hours-past": "%dh ago",
+          "days-past": "%dd ago",
+          "months-past": "%dmo ago",
+          "years-past": "%dy ago",
+          "one-minute-ago": "A minute ago",
+          "one-hour-ago": "An hour ago",
+          "one-day-ago": "A day ago",
+          "one-month-ago": "A month ago",
+          "one-year-ago": "A year ago"
+        }
+      },
+      "stats": {
+        "title": "Statistics",
+        "kana": "Kana",
+        "kanji": "Kanji"
+      },
+      "mistakes": {
+        "title": "Mistakes",
+        "review": "to review",
+        "view": "View Mistakes",
+        "practice": "Practice",
+        "kanji": "Kanji",
+        "kana": "Kana",
+        "definitions": "Definitions"
+      },
+      "high-scores": {
+        "title": "Highscores",
+        "more": "See More",
+        "rank": "#",
+        "leaderboard": "Leaderboard",
+        "score": "Score",
+        "names": {
+          "romaji-time-attack": "Rōmaji Time Attack",
+          "kanji-hardcore": "Kanji Hardcore",
+          "verb-match": "Verb Match",
+          "adverbs": "Adverbs",
+          "hiragana-speed-run": "Hiragana Speed Run"
+        }
+      },
+      "streak": {
+        "streak": "Streak",
+        "account-creation": "Account Creation",
+        "custom-date": "Custom Date",
+        "streak-template": "{{streak}} Day Streak",
+        "account-template": "{{days}} Days Old",
+        "custom-template": "Day {{day}}"
+      }
+    }
+  },
+  "settings": {
+    "modal": {
+      "general": {
+        "heading": "General Settings",
+        "desc": "General settings for common elements and actions around the app.",
+        "activity-feed": {
+          "heading": "Activity Feed",
+          "desc": "Set the number of events to display in the activity feed card by default.",
+          "options": [
+            { "name": "3", "value": "3" },
+            { "name": "5", "value": "5" },
+            { "name": "8", "value": "8" }
+          ]
+        }
+      },
+      "learn": {
+        "heading": "Learn Settings",
+        "desc": "Configure settings related to learning Japanese.",
+        "flash-cards": {
+          "heading": "Flash Cards Per Day",
+          "desc": "Set the number of new flash cards you wish to see per day. New cards will only be issued if your deck is active and you have no outstanding cards to be reviewed.",
+          "options": [
+            { "name": "10", "value": "10" },
+            { "name": "20", "value": "20" },
+            { "name": "30", "value": "30" },
+            { "name": "40", "value": "40" },
+            { "name": "50", "value": "50" }
+          ]
+        },
+        "romaji": {
+          "heading": "Rōmaji Settings",
+          "desc": "Set the default behaviour for showing rōmaji variants of kana. Rōmaji or ローマ字 (rōmaji) is the romanisation of the Japanese written language.",
+          "options": [
+            { "name": "Always Show", "value": "Always Show" },
+            { "name": "Ask Each Time", "value": "Ask Each Time" },
+            { "name": "Always Hide", "value": "Always Hide" }
+          ]
+        }
+      },
+      "play": {
+        "heading": "Play Settings",
+        "desc": "Configure settings related to games and other play-orientated modes.",
+        "high-scores": {
+          "label": "High-Score Preference",
+          "desc": "Set the default behaviour for submitting your play sessions to the high-scores.",
+          "options": [
+            { "name": "Ask Each Time", "value": "Ask Each Time" },
+            { "name": "Always Submit", "value": "Always Submit" },
+            { "name": "Never Submit", "value": "Never Submit" }
+          ]
+        }
+      },
+      "interface": {
+        "heading": "Interface Settings",
+        "desc": "Configure the user interface to customise the layout and look-and-feel to your liking.",
+        "customise-dashboard-layout": {
+          "heading": "Customise Dashboard Layout",
+          "desc": "Edit the home page dashboard layout. Cards can be toggled on or off, resized or moved to different columns.",
+          "button": "Open Layout Editor"
+        },
+        "theme": {
+          "heading": "Theme",
+          "desc": "Switch between the dark and light variations of the user-interface theming.",
+          "options": [
+            { "name": "Dark Mode", "value": "Dark Mode", "icon": "FaMoon", "className": "dark" },
+            { "name": "Light Mode", "value": "Light Mode", "icon": "FaLightbulb", "className": "light" }
+          ]
+        },
+        "kanji-font": {
+          "heading": "Kanji Font",
+          "desc": "Set your preferred default font-face used for all kanji characters in the app.",
+          "options": {
+            "default": "Default",
+            "mincho": "Mincho",
+            "handwriting": "Handwriting",
+            "gothic": "Gothic"
+          }
+        },
+        "language": {
+          "heading": "Language & Internationalisation",
+          "desc": "Set the language that all major buttons, menus and links use.",
+          "options": [
+            { "name": "English", "value": "English" },
+            { "name": "Japanese", "value": "日本語" }
+          ]
+        },
+        "confidence-menu-style": {
+          "heading": "Confidence Menu Style",
+          "desc": "Change the format of the confidence rating widget used during flash card learning sessions.",
+          "options": [
+            { "name": "Emoji Style", "value": "Emoji Style", "icon": "FaSmile" },
+            { "name": "Numbers 1 - 6", "value": "Numbers 1 - 6", "icon": "FaSortNumericUp" }
+          ]
+        }
+      },
+      "notification": {
+        "heading": "Notification Settings",
+        "desc": "Configure settings related to your notification centre and app-wide communication.",
+        "streak-notifications": {
+          "heading": "Streak Notifications",
+          "desc": "Toggle notifications for significant streak milestones.",
+          "enable": "Enable",
+          "disable": "Disable",
+          "enabled": "Enabled",
+          "disabled": "Disabled"
+        },
+        "outstanding-mistakes-reminder": {
+          "heading": "Outstanding Mistakes Reminder",
+          "desc": "Toggle reminders for outstanding mistakes that need reviewing.",
+          "enable": "Enable",
+          "disable": "Disable",
+          "enabled": "Enabled",
+          "disabled": "Disabled"
+        }
+      },
+      "user": {
+        "heading": "User Settings",
+        "desc": "Configure settings related to your user profile.",
+        "are-you-sure": "Are you sure?",
+        "click-to-confirm": "Click to confirm",
+        "confirmation-modal": {
+          "confirm-password": "Please confirm your password.",
+          "irreversible-operation": "Remember - this operation is irreversible.",
+          "changed-mind": "I've changed my mind",
+          "delete-account": "Delete my account",
+          "password-placeholder": "Password"
+        },
+        "profile-visibility": {
+          "heading": "Profile Visibility",
+          "desc": "Change the visibility of your profile to other users. By default your username will be visible to others on the high-scores (should you submit them). You can keep your info private or show it to friends only.",
+          "options": [
+            { "name": "Friends Only", "value": "Friends Only", "icon": "FaUserFriends" },
+            { "name": "Private", "value": "Private", "icon": "FaUserSecret" },
+            { "name": "Public", "value": "Public", "icon": "FaGlobeAmericas" }
+          ]
+        },
+        "streak-card-preference": {
+          "heading": "Streak Card Preference",
+          "desc": "Choose which statistic is displayed on the dashboards streak card. Defaults to the date you created your account. You can change it to your current streak or choose a custom date.",
+          "options": [
+            { "name": "Start Date", "value": "Start Date", "icon": "FaCalendarCheck" },
+            { "name": "Streak", "value": "Streak", "icon": "FaFireAlt" },
+            { "name": "Custom Date", "value": "Custom Date", "icon": "FaClock" }
+          ]
+        },
+        "danger-zone": {
+          "heading": "Danger Zone",
+          "desc": "Destructive settings that you might want to think twice about!",
+          "clear-local-storage": {
+            "heading": "Clear Local Storage",
+            "desc": "Deletes all locally stored data from your browser except for your user session. Does not permanently delete any saved data, but may increase loading times temporarily.",
+            "button": "Clear Storage"
+          },
+          "reset-high-scores": {
+            "heading": "Reset High-Scores",
+            "desc": "Resets all your saved scores across the app. Any ranks you currently hold on the high-scores will be lost.",
+            "button": "Reset Scores"
+          },
+          "reset-statistics": {
+            "heading": "Reset Statistics",
+            "desc": "Resets all your tracked statistics such as games played or won. This does not include flash card data.",
+            "button": "Reset Stats"
+          },
+          "reset-flash-cards": {
+            "heading": "Reset Flash Cards",
+            "desc": "Resets all your flash card data. Does not affect stats.",
+            "button": "Reset Cards"
+          },
+          "delete-account": {
+            "heading": "Delete Account",
+            "desc": "Delete your user account and all of your personal data. This is an irreversible operation. You'll need to provide your password for confirmation.",
+            "button": "Delete Account",
+            "popover": {
+              "title": "Delete Account",
+              "text": "Delete your user account and all of your personal data. This is an irreversible operation. You'll need to provide your password for confirmation."
+            }
+          }
+        }
+      }
+    }
+  },
+  "action": {
+    "edit": "Edit",
+    "refresh": "Refresh",
+    "sync": "Sync",
+    "clear": "Clear",
+    "cancel": "Cancel",
+    "close": "Close",
+    "dismiss": "Dismiss",
+    "remove": "Remove",
+    "favourite": "Favourite",
+    "save": "Save",
+    "start": "Start",
+    "check": "Check",
+    "restart": "Restart",
+    "hint": "Hint",
+    "skip": "Skip",
+    "yes": "Yes",
+    "no": "No",
+    "login": "Login",
+    "register": "Register",
+    "search": "Search",
+    "next": "Next",
+    "back": "Back"
+  },
+  "presets": {
+    "edit": {
+      "title": "Edit Favourites"
+    },
+    "learn": {
+      "start": "Start Learn",
+      "hiragana": {
+        "name": "Hiragana"
+      },
+      "katakana": {
+        "name": "Katakana"
+      },
+      "kyōiku": {
+        "name": "Kyōiku"
+      },
+      "diacriticals": {
+        "name": "Diacriticals"
+      },
+      "diagraphs": {
+        "name": "Diagraphs"
+      },
+      "everything": {
+        "name": "Everything"
+      },
+      "high-school": {
+        "name": "High School"
+      },
+      "jōyō": {
+        "name": "Jōyō Kanji"
+      },
+      "numbers": {
+        "name": "Numbers"
+      },
+      "colours": {
+        "name": "Colours"
+      },
+      "time": {
+        "name": "Time"
+      },
+      "animals": {
+        "name": "Animals"
+      },
+      "directions": {
+        "name": "Directions"
+      },
+      "weather": {
+        "name": "Weather"
+      },
+      "family": {
+        "name": "Family"
+      },
+      "body": {
+        "name": "Body"
+      },
+      "days-of-the-week": {
+        "name": "Days of the Week"
+      },
+      "months-of-the-year": {
+        "name": "Months of the Year"
+      },
+      "temporal-nouns": {
+        "name": "Temporal Nouns"
+      },
+      "seasonal": {
+        "name": "Seasonal"
+      },
+      "common-phrases": {
+        "name": "Common Phrases"
+      },
+      "adverbs": {
+        "name": "Adverbs"
+      },
+      "particles": {
+        "name": "Particles"
+      },
+      "expressions": {
+        "name": "Expressions"
+      },
+      "verbs": {
+        "name": "Verbs"
+      },
+      "nouns": {
+        "name": "Nouns"
+      },
+      "adjectives": {
+        "name": "Adjectives"
+      }
+    },
+    "play": {
+      "start": "Start Play",
+      "rōmaji": {
+        "name": "Rōmaji"
+      },
+      "hardcore": {
+        "name": "Hardcore"
+      },
+      "relaxed": {
+        "name": "Relaxed"
+      },
+      "time-attack": {
+        "name": "Time Attack"
+      },
+      "kana": {
+        "name": "Kana"
+      },
+      "match": {
+        "name": "Match"
+      },
+      "kanji": {
+        "name": "Kanji"
+      },
+      "meaning": {
+        "name": "Meanings"
+      },
+      "on'yomi": {
+        "name": "On'Yomi Readings"
+      },
+      "kun'yomi": {
+        "name": "Kun'Yomi Readings"
+      },
+      "random": {
+        "name": "Random"
+      },
+      "numbers": {
+        "name": "Numbers"
+      },
+      "counters": {
+        "name": "Counters"
+      },
+      "age": {
+        "name": "Age"
+      },
+      "exceptions": {
+        "name": "Exceptions"
+      },
+      "units": {
+        "name": "Units"
+      },
+      "sequence": {
+        "name": "Sequence"
+      },
+      "colours": {
+        "name": "Colours"
+      },
+      "animals": {
+        "name": "Animals"
+      },
+      "directions": {
+        "name": "Directions"
+      },
+      "weather": {
+        "name": "Weather"
+      },
+      "family": {
+        "name": "Family"
+      },
+      "body": {
+        "name": "Body"
+      },
+      "days-of-the-week": {
+        "name": "Days of the Week"
+      },
+      "months-of-the-year": {
+        "name": "Months of the Year"
+      },
+      "temporal-nouns": {
+        "name": "Temporal Nouns"
+      },
+      "seasonal": {
+        "name": "Seasonal"
+      },
+      "common-phrases": {
+        "name": "Common Phrases"
+      },
+      "everything": {
+        "name": "Everything"
+      },
+      "japanese": {
+        "name": "Japanese"
+      }
+    }
+  },
+  "learnable": {
+    "field": {
+      "meaning": {
+        "name": "English Meaning",
+        "desc": "The meaning of the word or character in English. Usually a single word."
+      },
+      "kanji": {
+        "name": "Kanji",
+        "desc": "Some words can be expressed as a single Kanji."
+      },
+      "kana": {
+        "name": "Kana",
+        "desc": "The Japanese syllabaries are kana. All words can expressed in Hiragana or Katakana."
+      },
+      "japanese": {
+        "name": "Japanese",
+        "desc": "Some words can be expressed in all kanji or a mixture of kanji and kana."
+      },
+      "romaji": {
+        "name": "Rōmaji",
+        "desc": "The romanisation of Japanese kana. I.e. 'a', 'ke' or 'zu'."
+      },
+      "on": {
+        "name": "On'Yomi Reading",
+        "desc": "The original Chinese readings of a kanji character in Hiragana."
+      },
+      "kun": {
+        "name": "Kun'Yomi Reading",
+        "desc": "The Japanese readings of a kanji character in Katakana."
+      },
+      "random": {
+        "name": "Random",
+        "desc": "A random selection of any of the available data fields."
+      }
+    }
+  },
+  "memory-game": {
+    "quit-title": "Are you sure you want to quit?",
+    "quit-body": "You'll lose your current progress, but you'll see the results of your game thus far.",
+    "results-screen": {
+      "not-submitted": "Your score was not submitted to the high-scores. You can change your preferences here."
+    }
+  }
 }

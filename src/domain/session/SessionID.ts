@@ -1,13 +1,13 @@
 import { v4 as UUID } from "uuid"
 
 export default class SessionID {
-    private readonly _value: string
+  private readonly _value: string
 
-    constructor() {
-        this._value = UUID()
-    }
+  constructor() {
+    this._value = UUID()
+  }
 
-    get value(): string {
-        return this._value
-    }
+  get value(): string {
+    return this._value
+  }
 }

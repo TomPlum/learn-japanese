@@ -14,91 +14,91 @@ const onClickHandler = jest.fn()
 const user = { ...testUser }
 
 beforeEach(() => {
-    props = {
-        disabled: false,
-        onClick: onClickHandler
-    }
+  props = {
+    disabled: false,
+    onClick: onClickHandler
+  }
 })
 
 afterEach(() => {
-    store.dispatch(clearUser())
+  store.dispatch(clearUser())
 })
 
 const setup = () => {
-    const component = renderTranslatedReduxConsumer(
-        <Router history={history}>
-            <UserButton {...props} />
-        </Router>
-    )
-    return {
-        ...component
-    }
+  const component = renderTranslatedReduxConsumer(
+    <Router history={history}>
+      <UserButton {...props} />
+    </Router>
+  )
+  return {
+    ...component
+  }
 }
 
 test("Should display the users nickname if they have one and they are logged in", () => {
-    store.dispatch(setUser(user))
-    setup()
-    expect(screen.getByText("Tom")).toBeInTheDocument()
+  store.dispatch(setUser(user))
+  setup()
+  expect(screen.getByText("Tom")).toBeInTheDocument()
 })
 
 test("Should display the users username if they don't have a nickname are logged in", () => {
-    store.dispatch(setUser({ ...testUser, nickname: undefined }))
-    setup()
-    expect(screen.getByText("TomPlum42")).toBeInTheDocument()
+  store.dispatch(setUser({ ...testUser, nickname: undefined }))
+  setup()
+  expect(screen.getByText("TomPlum42")).toBeInTheDocument()
 })
 
 test("Should display 'Login' when the user is not logged in", () => {
-    setup()
-    expect(screen.getByText("Login")).toBeInTheDocument()
+  setup()
+  expect(screen.getByText("Login")).toBeInTheDocument()
 })
 
 test("Clicking the button should show the dropdown menu if they are logged in", async () => {
-    store.dispatch(setUser(user))
-    setup()
+  store.dispatch(setUser(user))
+  setup()
 
-    fireEvent.click(screen.getByText("Tom"))
+  fireEvent.click(screen.getByText("Tom"))
 
-    expect(await screen.findByText("Profile")).toBeInTheDocument()
-    expect(await screen.findByText("Stats")).toBeInTheDocument()
-    expect(await screen.findByText("Logout")).toBeInTheDocument()
+  expect(await screen.findByText("Profile")).toBeInTheDocument()
+  expect(await screen.findByText("Stats")).toBeInTheDocument()
+  expect(await screen.findByText("Logout")).toBeInTheDocument()
 
-    expect(onClickHandler).not.toHaveBeenCalled()
+  expect(onClickHandler).not.toHaveBeenCalled()
 })
 
 test("Clicking the button should call the onClick event handler", () => {
-    setup()
+  setup()
 
-    fireEvent.click(screen.getByText("Login"))
+  fireEvent.click(screen.getByText("Login"))
 
-    expect(screen.queryByText("Profile")).not.toBeInTheDocument()
-    expect(screen.queryByText("Stats")).not.toBeInTheDocument()
-    expect(screen.queryByText("Logout")).not.toBeInTheDocument()
-    expect(onClickHandler).toHaveBeenCalled()
+  expect(screen.queryByText("Profile")).not.toBeInTheDocument()
+  expect(screen.queryByText("Stats")).not.toBeInTheDocument()
+  expect(screen.queryByText("Logout")).not.toBeInTheDocument()
+  expect(onClickHandler).toHaveBeenCalled()
 })
 
 test("Clicking the logout button should clear the user from the redux store", async () => {
-    store.dispatch(setUser(user))
-    setup()
+  store.dispatch(setUser(user))
+  setup()
 
-    //Click the button to show the dropdown menu
-    fireEvent.click(screen.getByText("Tom"))
+  //Click the button to show the dropdown menu
+  fireEvent.click(screen.getByText("Tom"))
 
-    //Click logout
-    fireEvent.click(await screen.findByText("Logout"))
+  //Click logout
+  fireEvent.click(await screen.findByText("Logout"))
 
-    expect(store.getState().user).toStrictEqual({ user: undefined })
+  expect(store.getState().user).toStrictEqual({ user: undefined })
 })
 
 //TODO: Not working for some reason.
 test.skip("Clicking the high-scores option should route to the high-scores page", async () => {
-    store.dispatch(setUser(user))
-    setup()
+  store.dispatch(setUser(user))
+  setup()
 
-    //Click the button to show the dropdown menu
-    fireEvent.click(screen.getByText("Tom"))
+  //Click the button to show the dropdown menu
+  fireEvent.click(screen.getByText("Tom"))
 
-    //Click high-scores
-    fireEvent.click(await screen.findByText("Highscores"))
+  //Click high-scores
+  fireEvent.click(await screen.findByText("Highscores"))
 
-    expect(history.location.pathname).toBe("/high-scores")
+  expect(history.location.pathname).toBe("/high-scores")
 })

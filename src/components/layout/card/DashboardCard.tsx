@@ -10,81 +10,81 @@ import DashboardCardFooter from "./DashboardCardFooter"
 export type DashboardCardSize = "sm" | "md" | "lg"
 
 export interface DashboardCardProps {
-    id?: string
-    size?: DashboardCardSize
-    height?: number
-    loading?: boolean
-    updating?: boolean
-    error?: string
-    className?: string
-    onReload?: () => void
+  id?: string
+  size?: DashboardCardSize
+  height?: number
+  loading?: boolean
+  updating?: boolean
+  error?: string
+  className?: string
+  onReload?: () => void
 }
 
 const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
-    const { id, error, height, size, updating, loading, onReload, children, className } = props
+  const { id, error, height, size, updating, loading, onReload, children, className } = props
 
-    const getSize = (): string | undefined => {
-        if (height) {
-            return `${height}px`
-        }
-
-        switch (size) {
-            case "sm":
-                return "300px"
-            case "md":
-                return "400px"
-            case "lg":
-                return "550px"
-            default:
-                return undefined
-        }
+  const getSize = (): string | undefined => {
+    if (height) {
+      return `${height}px`
     }
 
-    const containerClasses = [styles.container, className]
-    if (error) containerClasses.push(styles.containerError)
+    switch (size) {
+      case "sm":
+        return "300px"
+      case "md":
+        return "400px"
+      case "lg":
+        return "550px"
+      default:
+        return undefined
+    }
+  }
 
-    return (
-        <div className={containerClasses.join(" ")} style={{ height: getSize() }} id={id} data-testid={id}>
-            <DashboardCardPreload active={loading} />
+  const containerClasses = [styles.container, className]
+  if (error) containerClasses.push(styles.containerError)
 
-            <DashboardCardUpdate active={updating} />
+  return (
+    <div className={containerClasses.join(" ")} style={{ height: getSize() }} id={id} data-testid={id}>
+      <DashboardCardPreload active={loading} />
 
-            {!loading &&
-                React.Children.map(children, (child) => {
-                    if (React.isValidElement(child)) {
-                        switch ((child as React.ReactElement).type) {
-                            case DashboardCardHeader: {
-                                // @ts-ignore TODO: Fix these ignores in here + header component
-                                return React.cloneElement(child, { error: error, onReload: onReload })
-                            }
-                            case DashboardCardBody: {
-                                if (!error) {
-                                    // @ts-ignore
-                                    return React.cloneElement(child, { size: size, updating: updating })
-                                } else {
-                                    return null
-                                }
-                            }
-                            case DashboardCardFooter: {
-                                return React.cloneElement(child, {
-                                // @ts-ignore
-                                    className: [styles.footer, child.props.className].join(" ")
-                                })
-                            }
-                            default: {
-                                return child
-                            }
-                        }
-                    }
-                })}
+      <DashboardCardUpdate active={updating} />
 
-            <DashboardCardError active={!loading && !!error}>{error}</DashboardCardError>
-        </div>
-    )
+      {!loading &&
+        React.Children.map(children, (child) => {
+          if (React.isValidElement(child)) {
+            switch ((child as React.ReactElement).type) {
+              case DashboardCardHeader: {
+                // @ts-ignore TODO: Fix these ignores in here + header component
+                return React.cloneElement(child, { error: error, onReload: onReload })
+              }
+              case DashboardCardBody: {
+                if (!error) {
+                  // @ts-ignore
+                  return React.cloneElement(child, { size: size, updating: updating })
+                } else {
+                  return null
+                }
+              }
+              case DashboardCardFooter: {
+                return React.cloneElement(child, {
+                  // @ts-ignore
+                  className: [styles.footer, child.props.className].join(" ")
+                })
+              }
+              default: {
+                return child
+              }
+            }
+          }
+        })}
+
+      <DashboardCardError active={!loading && !!error}>{error}</DashboardCardError>
+    </div>
+  )
 }
 
 export default Object.assign(DashboardCard, {
-    Header: DashboardCardHeader,
-    Body: DashboardCardBody,
-    Footer: DashboardCardFooter
+  Header: DashboardCardHeader,
+  Body: DashboardCardBody,
+  Footer: DashboardCardFooter
 })

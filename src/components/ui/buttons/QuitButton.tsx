@@ -4,21 +4,21 @@ import styles from "../../../styles/sass/components/ui/buttons/QuitButton.module
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 interface QuitButtonProps {
-    onClick: () => void
-    className?: string
+  onClick: () => void
+  className?: string
 }
 
 class QuitButton extends Component<QuitButtonProps> {
-    render() {
-        return (
-            <FontAwesomeIcon
-                icon={faTimes}
-                className={[styles.icon, this.props.className].join(" ")}
-                onClick={this.props.onClick}
-                title="Quit"
-            />
-        )
-    }
+  render() {
+    return (
+      <FontAwesomeIcon
+        icon={faTimes}
+        className={[styles.icon, this.props.className].join(" ")}
+        onClick={this.props.onClick}
+        title="Quit"
+      />
+    )
+  }
 }
 
 export default QuitButton

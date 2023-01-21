@@ -12,43 +12,43 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 
 export interface NavigationBarProps {
-    onLaunchLoginModal: () => void
+  onLaunchLoginModal: () => void
 }
 
 const NavigationBar = (props: NavigationBarProps) => {
-    const { onLaunchLoginModal } = props
+  const { onLaunchLoginModal } = props
 
-    const active = useModeSelector((state) => state.mode.active)
-    const user = useUserSelector((state) => state.user.user)
+  const active = useModeSelector((state) => state.mode.active)
+  const user = useUserSelector((state) => state.user.user)
 
-    return (
-        <Navbar variant="dark" fixed="top" expand="md" className={styles.navbar} data-testid="navigation-bar">
-            <Nav className={styles.nav}>
-                <Navbar.Toggle
-                    fixedWidth
-                    icon={faBars}
-                    as={FontAwesomeIcon}
-                    className={styles.toggle}
-                    aria-controls="navigation-bar"
-                />
+  return (
+    <Navbar variant="dark" fixed="top" expand="md" className={styles.navbar} data-testid="navigation-bar">
+      <Nav className={styles.nav}>
+        <Navbar.Toggle
+          fixedWidth
+          icon={faBars}
+          as={FontAwesomeIcon}
+          className={styles.toggle}
+          aria-controls="navigation-bar"
+        />
 
-                <Navbar.Collapse id="navigation-bar">
-                    <div className={styles.leftButtonWrapper}>
-                        <HomeButton disabled={!active} />
-                        <LearnButton />
-                        <HelpButton />
-                    </div>
-                </Navbar.Collapse>
+        <Navbar.Collapse id="navigation-bar">
+          <div className={styles.leftButtonWrapper}>
+            <HomeButton disabled={!active} />
+            <LearnButton />
+            <HelpButton />
+          </div>
+        </Navbar.Collapse>
 
-                <div className={styles.buttonWrapper}>
-                    <ThemeButton className={styles.button} />
-                    <FontSelectorButton className={styles.button} />
-                    {user && <NotificationsButton className={styles.button} />}
-                    <UserButton onClick={onLaunchLoginModal} disabled={!active} />
-                </div>
-            </Nav>
-        </Navbar>
-    )
+        <div className={styles.buttonWrapper}>
+          <ThemeButton className={styles.button} />
+          <FontSelectorButton className={styles.button} />
+          {user && <NotificationsButton className={styles.button} />}
+          <UserButton onClick={onLaunchLoginModal} disabled={!active} />
+        </div>
+      </Nav>
+    </Navbar>
+  )
 }
 
 export default NavigationBar

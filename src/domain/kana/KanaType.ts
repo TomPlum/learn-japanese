@@ -1,6 +1,6 @@
 enum KanaType {
-    HIRAGANA = "Hiragana",
-    KATAKANA = "Katakana"
+  HIRAGANA = "Hiragana",
+  KATAKANA = "Katakana"
 }
 
 export default KanaType

@@ -5,16 +5,16 @@ import React from "react"
 import { OverlayChildren } from "react-bootstrap/Overlay"
 
 export interface InfoButtonProps {
-    popover: OverlayChildren
-    className?: string
+  popover: OverlayChildren
+  className?: string
 }
 
 const InfoButton = (props: InfoButtonProps) => {
-    return (
-        <OverlayTrigger trigger={["hover", "click"]} overlay={props.popover} placement="top">
-            <FontAwesomeIcon icon={faInfoCircle} fixedWidth className={props.className} {...props} />
-        </OverlayTrigger>
-    )
+  return (
+    <OverlayTrigger trigger={["hover", "click"]} overlay={props.popover} placement="top">
+      <FontAwesomeIcon icon={faInfoCircle} fixedWidth className={props.className} {...props} />
+    </OverlayTrigger>
+  )
 }
 
 export default InfoButton

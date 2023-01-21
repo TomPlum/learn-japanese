@@ -14,95 +14,77 @@ const onClickHandler = jest.fn()
 const mockEnvironment = jest.fn()
 
 const kanji = new Kanji(
-    "人",
-    [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)],
-    ["person", "fake-example"],
-    KyoikuGrade.ONE,
-    JLTPLevel.N5,
-    "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
-    [new Example("外国人", ["がいこくじん"], ["foreigner"])],
-    1,
-    []
+  "人",
+  [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)],
+  ["person", "fake-example"],
+  KyoikuGrade.ONE,
+  JLTPLevel.N5,
+  "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji",
+  [new Example("外国人", ["がいこくじん"], ["foreigner"])],
+  1,
+  []
 )
 
 beforeEach(() => {
-    Environment.variable = mockEnvironment
+  Environment.variable = mockEnvironment
 })
 
 test("Should call the onClick event handler when clicking the reset button", () => {
-    const component = renderReduxConsumer(
-        <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
-    )
-    fireEvent.click(component.getByTitle("Reset"))
-    expect(onClickHandler).toHaveBeenCalled()
+  const component = renderReduxConsumer(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  fireEvent.click(component.getByTitle("Reset"))
+  expect(onClickHandler).toHaveBeenCalled()
 })
 
 test("Should render the kanji", () => {
-    const component = renderReduxConsumer(
-        <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
-    )
-    expect(component.getAllByText("人").length).toBeGreaterThan(0)
+  const component = renderReduxConsumer(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  expect(component.getAllByText("人").length).toBeGreaterThan(0)
 })
 
 test("Should render the on reading", () => {
-    const component = renderReduxConsumer(
-        <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
-    )
-    expect(component.getByText("じん")).toBeInTheDocument()
+  const component = renderReduxConsumer(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  expect(component.getByText("じん")).toBeInTheDocument()
 })
 
 test("Should render the kun reading", () => {
-    const component = renderReduxConsumer(
-        <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
-    )
-    expect(component.getByText("ひと")).toBeInTheDocument()
+  const component = renderReduxConsumer(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  expect(component.getByText("ひと")).toBeInTheDocument()
 })
 
 test("Should render the meanings comma delimited", () => {
-    const component = renderReduxConsumer(
-        <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
-    )
-    expect(component.getByText("person, fake-example")).toBeInTheDocument()
+  const component = renderReduxConsumer(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  expect(component.getByText("person, fake-example")).toBeInTheDocument()
 })
 
 test("Should render the grade", () => {
-    const component = renderReduxConsumer(
-        <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
-    )
-    expect(component.getByText("Grade 1 Kyōiku")).toBeInTheDocument()
+  const component = renderReduxConsumer(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  expect(component.getByText("Grade 1 Kyōiku")).toBeInTheDocument()
 })
 
 test("Should render the kanji as a link to the source", () => {
-    const component = renderReduxConsumer(
-        <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
-    )
-    expect(component.getByTitle("Click for Wiki source")).toHaveAttribute("href", kanji.source)
+  const component = renderReduxConsumer(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  expect(component.getByTitle("Click for Wiki source")).toHaveAttribute("href", kanji.source)
 })
 
 test("Should render the examples display", () => {
-    const component = renderReduxConsumer(
-        <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
-    )
-    expect(component.getByText("外国人")).toBeInTheDocument()
-    expect(getByTextWithMarkup("( がいこくじん )")).toBeInTheDocument()
-    expect(component.getByText("foreigner")).toBeInTheDocument()
+  const component = renderReduxConsumer(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  expect(component.getByText("外国人")).toBeInTheDocument()
+  expect(getByTextWithMarkup("( がいこくじん )")).toBeInTheDocument()
+  expect(component.getByText("foreigner")).toBeInTheDocument()
 })
 
 test("Should display the meaning reading description when hovering over the 'Meaning' text", async () => {
-    mockEnvironment.mockReturnValue("Example meaning desc")
-    const component = renderReduxConsumer(
-        <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
-    )
+  mockEnvironment.mockReturnValue("Example meaning desc")
+  const component = renderReduxConsumer(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
 
-    fireEvent.mouseOver(component.getByText("Meaning"))
+  fireEvent.mouseOver(component.getByText("Meaning"))
 
-    expect(await screen.findByText("English Meaning")).toBeInTheDocument()
-    expect(await screen.findByText("Example meaning desc")).toBeInTheDocument()
+  expect(await screen.findByText("English Meaning")).toBeInTheDocument()
+  expect(await screen.findByText("Example meaning desc")).toBeInTheDocument()
 })
 
 test("Should assign a dynamic class to the container based on the grade", () => {
-    const { container } = renderReduxConsumer(
-        <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
-    )
-    expect(container.firstChild).toHaveClass("wrapper-grade-1")
+  const { container } = renderReduxConsumer(
+    <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
+  )
+  expect(container.firstChild).toHaveClass("wrapper-grade-1")
 })

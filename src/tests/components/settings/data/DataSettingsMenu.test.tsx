@@ -11,66 +11,66 @@ const onConfirmHandler = jest.fn()
 const isValidHandler = jest.fn()
 
 beforeEach(() => {
-    props = {
-        title: "Kana",
-        icon: faAddressCard,
-        isValid: isValidHandler,
-        onQuit: onQuitHandler,
-        onReset: onResetHandler,
-        onConfirm: onConfirmHandler
-    }
+  props = {
+    title: "Kana",
+    icon: faAddressCard,
+    isValid: isValidHandler,
+    onQuit: onQuitHandler,
+    onReset: onResetHandler,
+    onConfirm: onConfirmHandler
+  }
 })
 
 const setup = () => {
-    const component = render(
-        <DataSettingsMenu {...props}>
-            <p>The Children</p>
-        </DataSettingsMenu>
-    )
-    return {
-        back: component.getByText("Back"),
-        reset: component.getByText("Reset"),
-        confirm: component.getByText("Confirm")
-    }
+  const component = render(
+    <DataSettingsMenu {...props}>
+      <p>The Children</p>
+    </DataSettingsMenu>
+  )
+  return {
+    back: component.getByText("Back"),
+    reset: component.getByText("Reset"),
+    confirm: component.getByText("Confirm")
+  }
 }
 
 test("Should render title", () => {
-    setup()
-    expect(screen.getByText("Kana Settings")).toBeInTheDocument()
+  setup()
+  expect(screen.getByText("Kana Settings")).toBeInTheDocument()
 })
 
 test("Should render children", () => {
-    setup()
-    expect(screen.getByText("The Children")).toBeInTheDocument()
+  setup()
+  expect(screen.getByText("The Children")).toBeInTheDocument()
 })
 
 test("Should call the onQuit event handler when clicking the back button", () => {
-    const { back } = setup()
-    fireEvent.click(back)
-    expect(onQuitHandler).toHaveBeenCalled()
+  const { back } = setup()
+  fireEvent.click(back)
+  expect(onQuitHandler).toHaveBeenCalled()
 })
 
 test("Should call the onReset event handler when clicking the reset button", () => {
-    const { reset } = setup()
-    fireEvent.click(reset)
-    expect(onResetHandler).toHaveBeenCalled()
+  const { reset } = setup()
+  fireEvent.click(reset)
+  expect(onResetHandler).toHaveBeenCalled()
 })
 
 test("Should call the onConfirm event handler when clicking the confirm button", () => {
-    isValidHandler.mockReturnValueOnce(true)
-    const { confirm } = setup()
-    fireEvent.click(confirm)
-    expect(onConfirmHandler).toHaveBeenCalled()
+  isValidHandler.mockReturnValueOnce(true)
+  const { confirm } = setup()
+  fireEvent.click(confirm)
+  expect(onConfirmHandler).toHaveBeenCalled()
 })
 
 test("Should disable the confirm button when the isValid function returns false", () => {
-    isValidHandler.mockReturnValueOnce(false)
-    const { confirm } = setup()
-    expect(confirm.parentElement).toBeDisabled()
+  isValidHandler.mockReturnValueOnce(false)
+  const { confirm } = setup()
+  expect(confirm.parentElement).toBeDisabled()
 })
 
 test("Should enable the confirm button when the isValid function is not bound", () => {
-    props.isValid = undefined
-    const { confirm } = setup()
-    expect(confirm.parentElement).not.toBeDisabled()
+  props.isValid = undefined
+  const { confirm } = setup()
+  expect(confirm.parentElement).not.toBeDisabled()
 })

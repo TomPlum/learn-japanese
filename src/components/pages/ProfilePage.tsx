@@ -9,20 +9,20 @@ import Stats from "../user/profile/Stats"
 import DangerZone from "../user/profile/DangerZone"
 
 const ProfilePage = () => {
-    const user = useUserSelector((state) => state.user).user!
+  const user = useUserSelector((state) => state.user).user!
 
-    return (
-        <Container fluid className={styles.wrapper}>
-            <CardColumns>
-                <About user={user} />
-                <Ranks />
-                <Overview />
-                <Stats />
-                <Preferences user={user} />
-                <DangerZone />
-            </CardColumns>
-        </Container>
-    )
+  return (
+    <Container fluid className={styles.wrapper}>
+      <CardColumns>
+        <About user={user} />
+        <Ranks />
+        <Overview />
+        <Stats />
+        <Preferences user={user} />
+        <DangerZone />
+      </CardColumns>
+    </Container>
+  )
 }
 
 export default ProfilePage

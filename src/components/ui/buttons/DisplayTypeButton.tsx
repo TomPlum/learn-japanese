@@ -6,25 +6,25 @@ import styles from "../../../styles/sass/components/ui/buttons/DisplayTypeButton
 import { useTranslation } from "react-i18next"
 
 export interface DisplayTypeButtonProps {
-    type: QuestionType
-    selected: QuestionType
-    icon: IconDefinition
-    onClick: (type: QuestionType) => void
+  type: QuestionType
+  selected: QuestionType
+  icon: IconDefinition
+  onClick: (type: QuestionType) => void
 }
 
 const DisplayTypeButton = (props: DisplayTypeButtonProps) => {
-    const { type, selected, icon, onClick } = props
+  const { type, selected, icon, onClick } = props
 
-    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.question.type" })
+  const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.question.type" })
 
-    const className = selected === type ? styles.selected : styles.notSelected
+  const className = selected === type ? styles.selected : styles.notSelected
 
-    return (
-        <Button block className={className} onClick={() => onClick(type)}>
-            <FontAwesomeIcon className={styles.icon} icon={icon} />
-            <p className={styles.name}>{t(`${type.name}.name`)}</p>
-        </Button>
-    )
+  return (
+    <Button block className={className} onClick={() => onClick(type)}>
+      <FontAwesomeIcon className={styles.icon} icon={icon} />
+      <p className={styles.name}>{t(`${type.name}.name`)}</p>
+    </Button>
+  )
 }
 
 export default DisplayTypeButton

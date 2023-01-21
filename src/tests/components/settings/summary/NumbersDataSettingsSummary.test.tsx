@@ -5,47 +5,47 @@ import NumbersDataSettingsSummary from "../../../../components/settings/summary/
 let settings = new NumbersSettingsBuilder()
 
 beforeEach(() => {
-    settings = new NumbersSettingsBuilder()
+  settings = new NumbersSettingsBuilder()
 })
 
 test("Should render the sequence text if passed", () => {
-    settings.withSequence()
-    const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
-    expect(container).toHaveTextContent("sequence")
+  settings.withSequence()
+  const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
+  expect(container).toHaveTextContent("sequence")
 })
 
 test("Should render the age text if passed", () => {
-    settings.withAge()
-    const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
-    expect(container).toHaveTextContent("age")
+  settings.withAge()
+  const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
+  expect(container).toHaveTextContent("age")
 })
 
 test("Should render the counters text if passed", () => {
-    settings.withCounters()
-    const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
-    expect(container).toHaveTextContent("counters")
+  settings.withCounters()
+  const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
+  expect(container).toHaveTextContent("counters")
 })
 
 test("Should render the units text if passed", () => {
-    settings.withUnits()
-    const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
-    expect(container).toHaveTextContent("units")
+  settings.withUnits()
+  const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
+  expect(container).toHaveTextContent("units")
 })
 
 test("Should render the exceptions text if passed", () => {
-    settings.withExceptions()
-    const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
-    expect(container).toHaveTextContent("exceptions")
+  settings.withExceptions()
+  const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
+  expect(container).toHaveTextContent("exceptions")
 })
 
 test("Should render the numbers text if passed", () => {
-    settings.withNumbers()
-    const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
-    expect(container).toHaveTextContent("numbers")
+  settings.withNumbers()
+  const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
+  expect(container).toHaveTextContent("numbers")
 })
 
 test("Should render the correct text if multiple are passed", () => {
-    settings.withSequence().withAge().withCounters().withUnits().withExceptions().withNumbers()
-    const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
-    expect(container).toHaveTextContent("sequence, age, counters, units, exceptions and numbers")
+  settings.withSequence().withAge().withCounters().withUnits().withExceptions().withNumbers()
+  const { container } = render(<NumbersDataSettingsSummary settings={settings.build()} />)
+  expect(container).toHaveTextContent("sequence, age, counters, units, exceptions and numbers")
 })

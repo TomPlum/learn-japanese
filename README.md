@@ -17,14 +17,14 @@ Over time, in-between work, this project has become a place where I just dump Ja
 
 ## Contents
 
--   [Local Setup](#local-setup)
--   [Kana](#kana)
-    -   [Regular](#regular-kana)
-    -   [Diacriticals](#diacriticals)
-    -   [Diagraphs](#diagraphs)
--   [Learning Topics](#learning-topics)
--   [Game Modes](#game-modes)
--   [References](#references)
+- [Local Setup](#local-setup)
+- [Kana](#kana)
+  - [Regular](#regular-kana)
+  - [Diacriticals](#diacriticals)
+  - [Diagraphs](#diagraphs)
+- [Learning Topics](#learning-topics)
+- [Game Modes](#game-modes)
+- [References](#references)
 
 ## Local Setup
 
@@ -106,12 +106,12 @@ Katakana
 
 ## Learning Topics
 
--   Hiragana & Katakana
--   Numbers & Counting
--   Jōyō Kanji
--   Basics (Colours, Animals, Directions, Weather, Family, Body)
--   Days & Months
--   Sentence Structure
+- Hiragana & Katakana
+- Numbers & Counting
+- Jōyō Kanji
+- Basics (Colours, Animals, Directions, Weather, Family, Body)
+- Days & Months
+- Sentence Structure
 
 ## Game Modes
 
@@ -147,18 +147,18 @@ each question correctly and have only 1 life. Can you beat it?
 Should none of the aforementioned presets work for you, this mode allows to configure any of the available game
 parameters.
 
--   Display (Kana or Rōmaji Question Types)
--   Kana (Syllabary / Diagraphs)
--   Hints (Enabled / Quantity)
--   Lives (Enabled / Quantity)
--   Time (Timer / Count Down)
+- Display (Kana or Rōmaji Question Types)
+- Kana (Syllabary / Diagraphs)
+- Hints (Enabled / Quantity)
+- Lives (Enabled / Quantity)
+- Time (Timer / Count Down)
 
 ## References
 
--   [<a id="1">1</a>] https://en.wikipedia.org/wiki/Kana
--   [<a id="2">2</a>] https://en.wikipedia.org/wiki/Ky%C5%8Diku_kanji
--   [<a id="3">3</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_1_of_4
--   [<a id="4">4</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_2_of_4
--   [<a id="5">5</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_3_of_4
--   [<a id="6">6</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_4_of_4
--   [<a id="7">7</a>] https://en.wikipedia.org/wiki/List_of_j%C5%8Dy%C5%8D_kanji
+- [<a id="1">1</a>] https://en.wikipedia.org/wiki/Kana
+- [<a id="2">2</a>] https://en.wikipedia.org/wiki/Ky%C5%8Diku_kanji
+- [<a id="3">3</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_1_of_4
+- [<a id="4">4</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_2_of_4
+- [<a id="5">5</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_3_of_4
+- [<a id="6">6</a>] https://en.wikipedia.org/wiki/List_of_CJK_Unified_Ideographs,_part_4_of_4
+- [<a id="7">7</a>] https://en.wikipedia.org/wiki/List_of_j%C5%8Dy%C5%8D_kanji
