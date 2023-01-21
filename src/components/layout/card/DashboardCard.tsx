@@ -66,8 +66,8 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
                                 }
                             }
                             case DashboardCardFooter: {
-                                // @ts-ignore
                                 return React.cloneElement(child, {
+                                // @ts-ignore
                                     className: [styles.footer, child.props.className].join(" ")
                                 })
                             }
