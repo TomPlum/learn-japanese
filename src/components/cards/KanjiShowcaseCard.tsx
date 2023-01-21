@@ -1,98 +1,118 @@
-import DashboardCard from "../layout/card/DashboardCard";
-import DashboardCardHeader from "../layout/card/DashboardCardHeader";
-import KanjiService from "../../service/KanjiService";
-import { useEffect, useState } from "react";
-import { Kanji } from "../../domain/kanji/Kanji";
-import styles from "../../styles/sass/components/cards/KanjiShowcaseCard.module.scss";
-import { useFontSelector } from "../../hooks";
-import Copyable from "../ui/Copyable";
-import { faChalkboardTeacher, faListAlt, faPaintBrush, faPencilAlt, faRandom, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Inspectable from "../ui/Inspectable";
-import ExampleDisplay from "../ui/display/ExampleDisplay";
-import { useTranslation } from "react-i18next";
+import DashboardCard from "../layout/card/DashboardCard"
+import DashboardCardHeader from "../layout/card/DashboardCardHeader"
+import KanjiService from "../../service/KanjiService"
+import { useEffect, useState } from "react"
+import { Kanji } from "../../domain/kanji/Kanji"
+import styles from "../../styles/sass/components/cards/KanjiShowcaseCard.module.scss"
+import { useFontSelector } from "../../hooks"
+import Copyable from "../ui/Copyable"
+import {
+    faChalkboardTeacher,
+    faListAlt,
+    faPaintBrush,
+    faPencilAlt,
+    faRandom,
+    faSearch
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Inspectable from "../ui/Inspectable"
+import ExampleDisplay from "../ui/display/ExampleDisplay"
+import { useTranslation } from "react-i18next"
 
 const KanjiShowcaseCard = () => {
+    const MAX_MEANINGS_LENGTH = 23
 
-    const MAX_MEANINGS_LENGTH = 23;
+    const [loading, setLoading] = useState(false)
+    const [updating, setUpdating] = useState(false)
+    const [error, setError] = useState("")
+    const [kanji, setKanji] = useState<Kanji | undefined>(undefined)
+    const [inExamples, setInExamples] = useState(false)
 
-    const [loading, setLoading] = useState(false);
-    const [updating, setUpdating] = useState(false);
-    const [error, setError] = useState("");
-    const [kanji, setKanji] = useState<Kanji | undefined>(undefined);
-    const [inExamples, setInExamples] = useState(false);
-
-    const service = new KanjiService();
-    const font = useFontSelector(state => state.font.selected);
-    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.kanji-showcase" });
+    const service = new KanjiService()
+    const font = useFontSelector((state) => state.font.selected)
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.kanji-showcase" })
 
     const shuffleKanji = () => {
-        return service.randomKanji().then(response => {
-            if (response.error) {
-                setError(response.error);
-            } else {
-                setKanji(response.value);
-            }
-        }).catch(response => {
-            setError(response.error);
-        });
+        return service
+            .randomKanji()
+            .then((response) => {
+                if (response.error) {
+                    setError(response.error)
+                } else {
+                    setKanji(response.value)
+                }
+            })
+            .catch((response) => {
+                setError(response.error)
+            })
     }
 
     useEffect(() => {
-        setLoading(true);
-        shuffleKanji().finally(() => setLoading(false));
-    }, []);
+        setLoading(true)
+        shuffleKanji().finally(() => setLoading(false))
+    }, [])
 
     const handleShuffle = () => {
-        setUpdating(true);
-        shuffleKanji().finally(() => setUpdating(false));
+        setUpdating(true)
+        shuffleKanji().finally(() => setUpdating(false))
     }
 
     const getTrimmedMeanings = () => {
-        const meanings = kanji?.getMeanings().join(", ");
+        const meanings = kanji?.getMeanings().join(", ")
         if (!meanings) {
-            return "N/A";
+            return "N/A"
         }
 
         if (meanings.length > MAX_MEANINGS_LENGTH) {
-            return `${meanings.substring(0, MAX_MEANINGS_LENGTH)}...`;
+            return `${meanings.substring(0, MAX_MEANINGS_LENGTH)}...`
         }
 
-        return meanings;
+        return meanings
     }
 
-    const examples = kanji?.examples ?? [];
-    const hasExamples = (kanji?.examples ?? []).length > 0;
+    const examples = kanji?.examples ?? []
+    const hasExamples = (kanji?.examples ?? []).length > 0
     const handleViewExamples = () => {
         if (hasExamples) {
-           setInExamples(true);
+            setInExamples(true)
         }
     }
 
-    const meanings = kanji?.getMeanings()?.join(", ") ?? "";
-    const areTooLong = meanings.length <= MAX_MEANINGS_LENGTH;
-    const fullMeanings = { title: t("meaning"), text: meanings };
+    const meanings = kanji?.getMeanings()?.join(", ") ?? ""
+    const areTooLong = meanings.length <= MAX_MEANINGS_LENGTH
+    const fullMeanings = { title: t("meaning"), text: meanings }
 
-    const allOnReadings = kanji?.getOnyomiReadings().map(reading => reading.kana) ?? [];
-    const onReadingPopOver = { title: t("on.long"), text: allOnReadings?.join(", ") };
-    const hasMultipleOnReadings = allOnReadings.length > 1;
+    const allOnReadings = kanji?.getOnyomiReadings().map((reading) => reading.kana) ?? []
+    const onReadingPopOver = { title: t("on.long"), text: allOnReadings?.join(", ") }
+    const hasMultipleOnReadings = allOnReadings.length > 1
 
-    const allKunReadings = kanji?.getKunyomiReadings().map(reading => reading.kana) ?? [];
-    const kunReadingPopOver = { title: t("kun.long"), text: allKunReadings?.join(", ") };
-    const hasMultipleKunReadings = allKunReadings.length > 1;
+    const allKunReadings = kanji?.getKunyomiReadings().map((reading) => reading.kana) ?? []
+    const kunReadingPopOver = { title: t("kun.long"), text: allKunReadings?.join(", ") }
+    const hasMultipleKunReadings = allKunReadings.length > 1
 
-    const examplesClasses = [styles.attribute];
+    const examplesClasses = [styles.attribute]
     if (hasExamples) {
-        examplesClasses.push(styles.clickable);
+        examplesClasses.push(styles.clickable)
     }
 
     return (
-        <DashboardCard loading={loading || !ready} updating={updating} error={error} height={300} id="kanji-showcase-card">
+        <DashboardCard
+            loading={loading || !ready}
+            updating={updating}
+            error={error}
+            height={300}
+            id="kanji-showcase-card"
+        >
             {inExamples && <ExampleDisplay examples={examples} onDismiss={() => setInExamples(false)} />}
 
             <DashboardCard.Header>
                 <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
-                <DashboardCardHeader.Icon icon={faRandom} onClick={handleShuffle} disabled={updating} title={t("shuffle")} />
+                <DashboardCardHeader.Icon
+                    icon={faRandom}
+                    onClick={handleShuffle}
+                    disabled={updating}
+                    title={t("shuffle")}
+                />
             </DashboardCard.Header>
 
             <DashboardCard.Body className={styles.body}>
@@ -135,7 +155,12 @@ const KanjiShowcaseCard = () => {
                 </p>
 
                 <div className={styles.readings}>
-                    <Inspectable popover={onReadingPopOver} placement="bottom" disableUnderline disabled={!hasMultipleOnReadings}>
+                    <Inspectable
+                        popover={onReadingPopOver}
+                        placement="bottom"
+                        disableUnderline
+                        disabled={!hasMultipleOnReadings}
+                    >
                         <span className={styles.on}>
                             <span className={styles.label}>{t("on.short")}</span>
                             {hasMultipleOnReadings && <span className={styles.count}>x{allOnReadings.length}</span>}
@@ -143,7 +168,12 @@ const KanjiShowcaseCard = () => {
                         </span>
                     </Inspectable>
 
-                    <Inspectable popover={kunReadingPopOver} placement="bottom" disableUnderline disabled={!hasMultipleKunReadings}>
+                    <Inspectable
+                        popover={kunReadingPopOver}
+                        placement="bottom"
+                        disableUnderline
+                        disabled={!hasMultipleKunReadings}
+                    >
                         <span className={styles.kun}>
                             <span className={styles.label}>{t("kun.short")}</span>
                             {hasMultipleKunReadings && <span className={styles.count}>x{allKunReadings.length}</span>}
@@ -158,7 +188,7 @@ const KanjiShowcaseCard = () => {
                 </div>
             </DashboardCard.Body>
         </DashboardCard>
-    );
+    )
 }
 
-export default KanjiShowcaseCard;
+export default KanjiShowcaseCard

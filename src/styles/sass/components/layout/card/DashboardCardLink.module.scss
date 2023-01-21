@@ -6,7 +6,8 @@
   text-align: left;
 }
 
-.link, .disabled {
+.link,
+.disabled {
   color: $light-1;
   transition: all ease-in-out 0.2s;
   display: flex;

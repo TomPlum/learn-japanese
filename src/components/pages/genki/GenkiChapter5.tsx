@@ -1,16 +1,16 @@
-import { GrammarInfoProps } from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiExampleTable from "../../ui/display/GenkiExampleTable";
-import React from "react";
-import GenkiTable from "../../ui/table/GenkiTable";
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
-import { FirstMatch, MultipleFirstMatch } from "../../ui/Underline";
-import QuoteDisplay from "../../ui/display/QuoteDisplay";
-import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
-import { Col, Container, Row } from "react-bootstrap";
-import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
-import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
+import React from "react"
+import GenkiTable from "../../ui/table/GenkiTable"
+import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay"
+import { FirstMatch, MultipleFirstMatch } from "../../ui/Underline"
+import QuoteDisplay from "../../ui/display/QuoteDisplay"
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
+import { Col, Container, Row } from "react-bootstrap"
+import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay"
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
 
 const GenkiChapter5 = () => {
     const c5p1: GrammarInfoProps = {
@@ -20,7 +20,10 @@ const GenkiChapter5 = () => {
         title: "Adjectives (Present Tense)",
         body: (
             <div>
-                <p>There are two types of adjectives in Japanese: い-adjectives and な-adjectives. い and な are their last syllables when they modify nouns.</p>
+                <p>
+                    There are two types of adjectives in Japanese: い-adjectives and な-adjectives. い and な are their
+                    last syllables when they modify nouns.
+                </p>
 
                 <GenkiTable chapter={5}>
                     <thead>
@@ -35,7 +38,9 @@ const GenkiChapter5 = () => {
                             <td>い Adjectives</td>
                         </tr>
                         <tr>
-                            <td><span className={[styles.genkiOne, styles.indent].join(" ")}>e.g.</span> おもしろい</td>
+                            <td>
+                                <span className={[styles.genkiOne, styles.indent].join(" ")}>e.g.</span> おもしろい
+                            </td>
                             <td>
                                 <GenkiUnderlineDisplay book={1} underline={new FirstMatch("です")}>
                                     <span>おもしろいです</span>
@@ -52,7 +57,7 @@ const GenkiChapter5 = () => {
                             <td>{}</td>
                             <td className={styles.indent}>
                                 <div className={styles.indent}>
-                                    <GenkiUnderlineDisplay book={1} underline={new FirstMatch("くありません")} >
+                                    <GenkiUnderlineDisplay book={1} underline={new FirstMatch("くありません")}>
                                         <span>(or おもしろくありません)</span>
                                     </GenkiUnderlineDisplay>
                                 </div>
@@ -60,14 +65,20 @@ const GenkiChapter5 = () => {
                         </tr>
                         <tr>
                             <td>{}</td>
-                            <td><em>It is interesting.</em></td>
-                            <td><em>It is not interesting.</em></td>
+                            <td>
+                                <em>It is interesting.</em>
+                            </td>
+                            <td>
+                                <em>It is not interesting.</em>
+                            </td>
                         </tr>
                         <tr>
                             <td>な Adjectives</td>
                         </tr>
                         <tr>
-                            <td><span className={[styles.genkiOne, styles.indent].join(" ")}>e.g.</span> 元気(な)</td>
+                            <td>
+                                <span className={[styles.genkiOne, styles.indent].join(" ")}>e.g.</span> 元気(な)
+                            </td>
                             <td>
                                 <GenkiUnderlineDisplay book={1} underline={new FirstMatch("です")}>
                                     <span>元気です</span>
@@ -92,8 +103,12 @@ const GenkiChapter5 = () => {
                         </tr>
                         <tr>
                             <td>{}</td>
-                            <td><em>She is healthy.</em></td>
-                            <td><em>She is not healthy.</em></td>
+                            <td>
+                                <em>She is healthy.</em>
+                            </td>
+                            <td>
+                                <em>She is not healthy.</em>
+                            </td>
                         </tr>
                     </tbody>
                 </GenkiTable>
@@ -128,9 +143,9 @@ const GenkiChapter5 = () => {
 
                 <p>
                     Unlike verb, adjectives conjugate fairly uniformly. The only irregularity worth noting is the
-                    adjective いい (good). The first syllable of いい is changed to よ in all forms except the dictionary
-                    form. Compound adjectives like かっこいい that are built with いい follow this syllable change and we
-                    say かっこよくないです.
+                    adjective いい (good). The first syllable of いい is changed to よ in all forms except the
+                    dictionary form. Compound adjectives like かっこいい that are built with いい follow this syllable
+                    change and we say かっこよくないです.
                 </p>
 
                 <GenkiTable chapter={5}>
@@ -146,7 +161,7 @@ const GenkiChapter5 = () => {
                             <td>いい</td>
                             <td>いいです</td>
                             <td>
-                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("よ")} >
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("よ")}>
                                     <span>よくないです</span>
                                 </GenkiUnderlineDisplay>
                             </td>
@@ -156,7 +171,7 @@ const GenkiChapter5 = () => {
                             <td>{}</td>
                             <td className={styles.indent}>
                                 <div className={styles.indent}>
-                                    <GenkiUnderlineDisplay book={1} underline={new FirstMatch("よ")} >
+                                    <GenkiUnderlineDisplay book={1} underline={new FirstMatch("よ")}>
                                         <span>(or よくありません)</span>
                                     </GenkiUnderlineDisplay>
                                 </div>
@@ -178,7 +193,11 @@ const GenkiChapter5 = () => {
                 <p>
                     With い-adjectives, you change the last い to かったです in the affirmative. In the negative, you
                     only need to change the present tense to くない to くなかったです. な-adjectives are again just like
-                    nouns. Don't confuse the two patterns, it is wrong to say <QuoteDisplay chapter={5} incorrect>さむいでした</QuoteDisplay>.
+                    nouns. Don't confuse the two patterns, it is wrong to say{" "}
+                    <QuoteDisplay chapter={5} incorrect>
+                        さむいでした
+                    </QuoteDisplay>
+                    .
                 </p>
 
                 <GenkiTable chapter={5}>
@@ -188,13 +207,15 @@ const GenkiChapter5 = () => {
                             <th>Affirmative</th>
                             <th>Negative</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         <tr>
                             <td>い Adjectives</td>
                         </tr>
                         <tr>
-                            <td><span className={[styles.genkiOne, styles.indent].join(" ")}>e.g.</span> おもしろい</td>
+                            <td>
+                                <span className={[styles.genkiOne, styles.indent].join(" ")}>e.g.</span> おもしろい
+                            </td>
                             <td>
                                 <GenkiUnderlineDisplay book={1} underline={new FirstMatch("かったです")}>
                                     <span>おもしろかったです</span>
@@ -211,7 +232,7 @@ const GenkiChapter5 = () => {
                             <td>{}</td>
                             <td className={styles.indent}>
                                 <div className={styles.indent}>
-                                    <GenkiUnderlineDisplay book={1} underline={new FirstMatch("くありませんでした")} >
+                                    <GenkiUnderlineDisplay book={1} underline={new FirstMatch("くありませんでした")}>
                                         <span>(or おもしろくありませんでした)</span>
                                     </GenkiUnderlineDisplay>
                                 </div>
@@ -219,14 +240,20 @@ const GenkiChapter5 = () => {
                         </tr>
                         <tr>
                             <td>{}</td>
-                            <td><em>It was interesting.</em></td>
-                            <td><em>It was not interesting.</em></td>
+                            <td>
+                                <em>It was interesting.</em>
+                            </td>
+                            <td>
+                                <em>It was not interesting.</em>
+                            </td>
                         </tr>
                         <tr>
                             <td>な Adjectives</td>
                         </tr>
                         <tr>
-                            <td><span className={[styles.genkiOne, styles.indent].join(" ")}>e.g.</span> 元気(な)</td>
+                            <td>
+                                <span className={[styles.genkiOne, styles.indent].join(" ")}>e.g.</span> 元気(な)
+                            </td>
                             <td>
                                 <GenkiUnderlineDisplay book={1} underline={new FirstMatch("でした")}>
                                     <span>元気でした</span>
@@ -251,8 +278,12 @@ const GenkiChapter5 = () => {
                         </tr>
                         <tr>
                             <td>{}</td>
-                            <td><em>She was healthy.</em></td>
-                            <td><em>She was not healthy.</em></td>
+                            <td>
+                                <em>She was healthy.</em>
+                            </td>
+                            <td>
+                                <em>She was not healthy.</em>
+                            </td>
                         </tr>
                     </tbody>
                 </GenkiTable>
@@ -298,34 +329,33 @@ const GenkiChapter5 = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>いい</td>
-                        <td>
-                            <GenkiUnderlineDisplay book={1} underline={new FirstMatch("よ")} >
-                                <span>よかったです</span>
-                            </GenkiUnderlineDisplay>
-                        </td>
-                        <td>
-                            <GenkiUnderlineDisplay book={1} underline={new FirstMatch("よ")} >
-                                <span>よくなかったです</span>
-                            </GenkiUnderlineDisplay>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>{}</td>
-                        <td>{}</td>
-                        <td className={styles.indent}>
-                            <div className={styles.indent}>
-                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("よ")} >
-                                    <span>(or よくありませんでした)</span>
+                        <tr>
+                            <td>いい</td>
+                            <td>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("よ")}>
+                                    <span>よかったです</span>
                                 </GenkiUnderlineDisplay>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                <GenkiUnderlineDisplay book={1} underline={new FirstMatch("よ")}>
+                                    <span>よくなかったです</span>
+                                </GenkiUnderlineDisplay>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{}</td>
+                            <td>{}</td>
+                            <td className={styles.indent}>
+                                <div className={styles.indent}>
+                                    <GenkiUnderlineDisplay book={1} underline={new FirstMatch("よ")}>
+                                        <span>(or よくありませんでした)</span>
+                                    </GenkiUnderlineDisplay>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </GenkiTable>
             </div>
-
         )
     }
 
@@ -433,15 +463,15 @@ const GenkiChapter5 = () => {
 
                 <p>
                     If you like or dislike something (or somebody) very much, you can use the intensified form of
-                    好きです and きらいです, namely 大好きです (like very much) and 大きらいです (hate), which are more often
-                    used than the degree modifier とても in combination with 好きです and きらいです.
+                    好きです and きらいです, namely 大好きです (like very much) and 大きらいです (hate), which are more
+                    often used than the degree modifier とても in combination with 好きです and きらいです.
                 </p>
 
                 <p>For example</p>
                 <GenkiExampleDisplay
                     book={1}
                     jp={{ text: "たけしさんはコーヒーが大好きです。", underline: new FirstMatch("大好きです") }}
-                    en={{ text: "Takeshi likes coffee a lot.", underline: new MultipleFirstMatch(["likes", "a lot"]) }}
+                    en={{ text: "Takeshi likes coffee a lot.", underline: new MultipleFirstMatch("likes", "a lot") }}
                 />
                 <GenkiExampleDisplay
                     book={1}
@@ -456,7 +486,9 @@ const GenkiChapter5 = () => {
                     en={{ text: "I neither like nor dislike (it)." }}
                 />
 
-                <p>You can use 好きな and きらいな may be used as noun modifiers. For example, you can say things like:</p>
+                <p>
+                    You can use 好きな and きらいな may be used as noun modifiers. For example, you can say things like:
+                </p>
                 <GenkiExampleDisplay
                     book={1}
                     jp={{ text: "これはわたしのすきなテレビです。", underline: new FirstMatch("わたしのすきな") }}
@@ -474,7 +506,8 @@ const GenkiChapter5 = () => {
         body: (
             <div>
                 <p>
-                    The ending of the long form of a verb can be replaced with ～ましょう or ～ましょうか to suggest a plan of action.
+                    The ending of the long form of a verb can be replaced with ～ましょう or ～ましょうか to suggest a
+                    plan of action.
                 </p>
 
                 <p>For example</p>
@@ -500,22 +533,25 @@ const GenkiChapter5 = () => {
         body: (
             <div>
                 <p>
-                    Japanese used different number words for different kinds of items.
-                    For example, the words used for counting people are different from the words used for counting books.
-                    It is important to keep in mind that the number words come after the item they are counting.
+                    Japanese used different number words for different kinds of items. For example, the words used for
+                    counting people are different from the words used for counting books. It is important to keep in
+                    mind that the number words come after the item they are counting.
                 </p>
 
                 <p>For example</p>
                 <GenkiExampleDisplay
                     book={1}
-                    jp={{ text: "リーさんは Tシャツを三枚買いました。", underline: new MultipleFirstMatch(["Tシャツ", "三枚"]) }}
+                    jp={{
+                        text: "リーさんは Tシャツを三枚買いました。",
+                        underline: new MultipleFirstMatch("Tシャツ", "三枚")
+                    }}
                     en={{ text: "Lee bought three stamps." }}
                 />
             </div>
         )
     }
 
-    return { c5p1, c5p2, c5p3, c5p4, c5p5, c5p6 };
+    return { c5p1, c5p2, c5p3, c5p4, c5p5, c5p6 }
 }
 
-export default GenkiChapter5;
+export default GenkiChapter5

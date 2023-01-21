@@ -1,50 +1,50 @@
-import SessionMode from "../../domain/session/SessionMode";
-import { ModalProps } from "react-bootstrap/Modal";
-import styles from "../../styles/sass/components/settings/LaunchPresetConfirmationModal.module.scss";
-import { Button, Fade, Modal } from "react-bootstrap";
-import { SessionSettings } from "../../domain/session/settings/SessionSettings";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faTimes } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
-import Icon from "../ui/menu/icon/Icon";
-import SessionSettingsSummary from "./SessionSettingsSummary";
-import { setDataSettings as setGlobalDataSettings } from "../../slices/DataSettingsSlice";
-import GameSettings from "../../domain/session/settings/game/GameSettings";
-import { setGameSettings } from "../../slices/GameSettingsSlice";
-import { useHistory } from "react-router-dom";
-import { useDataSettingsDispatch, useGameSettingsDispatch, useSessionSettingsDispatch } from "../../hooks";
-import PlayMode from "../../domain/session/PlayMode";
-import LearnSessionSettingsSummary from "./LearnSessionSettingsSummary";
-import { setLastLearnPreset, setLastPlayPreset } from "../../slices/SessionSettingsSlice";
-import { useTranslation } from "react-i18next";
+import SessionMode from "../../domain/session/SessionMode"
+import { ModalProps } from "react-bootstrap/Modal"
+import styles from "../../styles/sass/components/settings/LaunchPresetConfirmationModal.module.scss"
+import { Button, Fade, Modal } from "react-bootstrap"
+import { SessionSettings } from "../../domain/session/settings/SessionSettings"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlay, faTimes } from "@fortawesome/free-solid-svg-icons"
+import React from "react"
+import Icon from "../ui/menu/icon/Icon"
+import SessionSettingsSummary from "./SessionSettingsSummary"
+import { setDataSettings as setGlobalDataSettings } from "../../slices/DataSettingsSlice"
+import GameSettings from "../../domain/session/settings/game/GameSettings"
+import { setGameSettings, setSelectedPresetID } from "../../slices/GameSettingsSlice"
+import { useHistory } from "react-router-dom"
+import { useDataSettingsDispatch, useGameSettingsDispatch, useSessionSettingsDispatch } from "../../hooks"
+import PlayMode from "../../domain/session/PlayMode"
+import LearnSessionSettingsSummary from "./LearnSessionSettingsSummary"
+import { setLastLearnPreset, setLastPlayPreset } from "../../slices/SessionSettingsSlice"
+import { useTranslation } from "react-i18next"
 
 export interface LaunchPresetConfirmationModalProps {
-    preset: SessionMode;
-    onDismiss: () => void;
+    preset: SessionMode
+    onDismiss: () => void
 }
 
 const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps) => {
+    const { preset, onDismiss } = props
 
-    const { preset, onDismiss } = props;
-
-    const { t } = useTranslation();
-    const history = useHistory();
-    const gameSettingsDispatcher = useGameSettingsDispatch();
-    const dataSettingsDispatcher = useDataSettingsDispatch();
-    const sessionSettingsDispatcher = useSessionSettingsDispatch();
+    const { t } = useTranslation()
+    const history = useHistory()
+    const gameSettingsDispatcher = useGameSettingsDispatch()
+    const dataSettingsDispatcher = useDataSettingsDispatch()
+    const sessionSettingsDispatcher = useSessionSettingsDispatch()
 
     const handleStartSession = () => {
-        const data = preset.dataSettings;
-        dataSettingsDispatcher(setGlobalDataSettings(data));
+        const data = preset.dataSettings
+        dataSettingsDispatcher(setGlobalDataSettings(data))
 
         if (preset instanceof PlayMode) {
-            const game = preset.modeSettings as GameSettings;
-            gameSettingsDispatcher(setGameSettings(game));
-            sessionSettingsDispatcher(setLastPlayPreset(preset));
-            history.push('/play');
+            const game = preset.modeSettings as GameSettings
+            gameSettingsDispatcher(setGameSettings(game))
+            sessionSettingsDispatcher(setLastPlayPreset(preset))
+            gameSettingsDispatcher(setSelectedPresetID(preset.id))
+            history.push("/play")
         } else {
-            sessionSettingsDispatcher(setLastLearnPreset(preset));
-            history.push('/learn');
+            sessionSettingsDispatcher(setLastLearnPreset(preset))
+            history.push("/learn")
         }
     }
 
@@ -60,11 +60,11 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
     }
 
     const renderSettingsSummary = () => {
-        const settings = SessionSettings.fromPreset(preset);
+        const settings = SessionSettings.fromPreset(preset)
         if (preset instanceof PlayMode) {
-            return <SessionSettingsSummary settings={settings} />;
+            return <SessionSettingsSummary settings={settings} />
         } else {
-            return <LearnSessionSettingsSummary settings={settings} />;
+            return <LearnSessionSettingsSummary settings={settings} />
         }
     }
 
@@ -96,4 +96,4 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
     )
 }
 
-export default LaunchPresetConfirmationModal;
+export default LaunchPresetConfirmationModal

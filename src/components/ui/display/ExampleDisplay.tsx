@@ -1,15 +1,22 @@
-import { Example } from "../../../domain/kanji/Example";
-import { Modal, Table } from "react-bootstrap";
-import styles from "../../../styles/sass/components/ui/display/ExampleDisplay.module.scss";
+import { Example } from "../../../domain/kanji/Example"
+import { Modal, Table } from "react-bootstrap"
+import styles from "../../../styles/sass/components/ui/display/ExampleDisplay.module.scss"
 
 export interface ExampleDisplayProps {
-    examples: Example[];
-    onDismiss: () => void;
+    examples: Example[]
+    onDismiss: () => void
 }
 
 const ExampleDisplay = (props: ExampleDisplayProps) => {
     return (
-        <Modal centered show size="lg" onHide={props.onDismiss} contentClassName={styles.content} data-testid="kanji-example-display">
+        <Modal
+            centered
+            show
+            size="lg"
+            onHide={props.onDismiss}
+            contentClassName={styles.content}
+            data-testid="kanji-example-display"
+        >
             <Modal.Header closeButton className={styles.header}>
                 <span className={styles.title}>Examples</span>
             </Modal.Header>
@@ -24,8 +31,8 @@ const ExampleDisplay = (props: ExampleDisplayProps) => {
                         </tr>
                     </thead>
 
-                    <tbody>{
-                        props.examples.map((example: Example) => {
+                    <tbody>
+                        {props.examples.map((example: Example) => {
                             return (
                                 <tr key={example.kanji}>
                                     <td>{example.kanji}</td>
@@ -33,12 +40,12 @@ const ExampleDisplay = (props: ExampleDisplayProps) => {
                                     <td>{example.english.join(", ")}</td>
                                 </tr>
                             )
-                        })
-                    }</tbody>
+                        })}
+                    </tbody>
                 </Table>
             </Modal.Body>
         </Modal>
-    );
+    )
 }
 
-export default ExampleDisplay;
+export default ExampleDisplay

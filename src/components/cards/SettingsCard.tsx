@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import DashboardCard from "../layout/card/DashboardCard";
-import DashboardCardHeader from "../layout/card/DashboardCardHeader";
-import { faBell, faChess, faCog, faDesktop, faGraduationCap, faUser } from "@fortawesome/free-solid-svg-icons";
-import DashboardCardLink from "../layout/card/DashboardCardLink";
-import { useUserSelector } from "../../hooks";
-import styles from "../../styles/sass/components/cards/SettingsCard.module.scss";
-import SettingsModal, { SettingsType } from "../settings/modal/SettingsModal";
-import { useTranslation } from "react-i18next";
+import React, { useState } from "react"
+import DashboardCard from "../layout/card/DashboardCard"
+import DashboardCardHeader from "../layout/card/DashboardCardHeader"
+import { faBell, faChess, faCog, faDesktop, faGraduationCap, faUser } from "@fortawesome/free-solid-svg-icons"
+import DashboardCardLink from "../layout/card/DashboardCardLink"
+import { useUserSelector } from "../../hooks"
+import styles from "../../styles/sass/components/cards/SettingsCard.module.scss"
+import SettingsModal, { SettingsType } from "../settings/modal/SettingsModal"
+import { useTranslation } from "react-i18next"
 
 const SettingsCard = () => {
+    const [showModal, setShowModal] = useState(false)
+    const [settingsType, setSettingsType] = useState(SettingsType.GENERAL)
 
-    const [showModal, setShowModal] = useState(false);
-    const [settingsType, setSettingsType] = useState(SettingsType.GENERAL);
-
-    const user = useUserSelector(state => state.user.user);
-    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.settings" });
+    const user = useUserSelector((state) => state.user.user)
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.settings" })
 
     const link = {
         chevron: true,
@@ -22,16 +21,14 @@ const SettingsCard = () => {
     }
 
     const handleClick = (type: SettingsType) => {
-        setShowModal(true);
-        setSettingsType(type);
+        setShowModal(true)
+        setSettingsType(type)
     }
 
     return (
         <DashboardCard className={styles.card} id="settings-card" loading={!ready}>
             <DashboardCard.Header className={styles.header}>
-                <DashboardCardHeader.Title>
-                    {t("title")}
-                </DashboardCardHeader.Title>
+                <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
             </DashboardCard.Header>
 
             <DashboardCard.Body className={styles.body}>
@@ -59,25 +56,27 @@ const SettingsCard = () => {
                     text={t("interface")}
                     onClick={() => handleClick(SettingsType.INTERFACE)}
                 />
-                {user && (<>
-                    <DashboardCardLink
-                        {...link}
-                        icon={faBell}
-                        text={t("notification")}
-                        onClick={() => handleClick(SettingsType.NOTIFICATION)}
-                    />
-                    <DashboardCardLink
-                        {...link}
-                        icon={faUser}
-                        text={t("user")}
-                        onClick={() => handleClick(SettingsType.USER)}
-                    />
-                </>)}
+                {user && (
+                    <>
+                        <DashboardCardLink
+                            {...link}
+                            icon={faBell}
+                            text={t("notification")}
+                            onClick={() => handleClick(SettingsType.NOTIFICATION)}
+                        />
+                        <DashboardCardLink
+                            {...link}
+                            icon={faUser}
+                            text={t("user")}
+                            onClick={() => handleClick(SettingsType.USER)}
+                        />
+                    </>
+                )}
             </DashboardCard.Body>
 
             {showModal && <SettingsModal type={settingsType} onClose={() => setShowModal(false)} />}
         </DashboardCard>
-    );
+    )
 }
 
-export default SettingsCard;
+export default SettingsCard

@@ -1,31 +1,31 @@
-import { useState } from "react";
-import { Theme } from "../../../domain/Theme";
-import { faLightbulb, faMoon } from "@fortawesome/free-solid-svg-icons";
-import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss";
-import styles from "../../../styles/sass/components/ui/buttons/ThemeButton.module.scss";
-import NavigationButton from "../NavigationButton";
+import { useState } from "react"
+import { Theme } from "../../../domain/Theme"
+import { faLightbulb, faMoon } from "@fortawesome/free-solid-svg-icons"
+import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss"
+import styles from "../../../styles/sass/components/ui/buttons/ThemeButton.module.scss"
+import NavigationButton from "../NavigationButton"
 
 export interface ThemeButtonProps {
-    className?: string;
+    className?: string
 }
 
 const ThemeButton = (props: ThemeButtonProps) => {
-    const [theme, setTheme] = useState(Theme.DARK);
+    const [theme, setTheme] = useState(Theme.DARK)
 
     const handleOnClick = () => {
-        switch(theme) {
+        switch (theme) {
             case Theme.DARK: {
-                setTheme(Theme.LIGHT);
-                break;
+                setTheme(Theme.LIGHT)
+                break
             }
             case Theme.LIGHT: {
-                setTheme(Theme.DARK);
-                break;
+                setTheme(Theme.DARK)
+                break
             }
         }
     }
 
-    const iconClassName = styles[`theme-${theme.toLowerCase().replaceAll(" ", "-")}`];
+    const iconClassName = styles[`theme-${theme.toLowerCase().replaceAll(" ", "-")}`]
 
     return (
         <NavigationButton
@@ -37,7 +37,7 @@ const ThemeButton = (props: ThemeButtonProps) => {
             icon={theme === Theme.DARK ? faLightbulb : faMoon}
             iconClass={[menuStyles.icon, iconClassName].join(" ")}
         />
-    );
+    )
 }
 
-export default ThemeButton;
+export default ThemeButton

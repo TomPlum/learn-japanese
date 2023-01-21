@@ -39,7 +39,12 @@
   opacity: 0.6;
 }
 
-.selected, .selected:focus, .selected:active, .selected:hover, .button:active, .selected:active {
+.selected,
+.selected:focus,
+.selected:active,
+.selected:hover,
+.button:active,
+.selected:active {
   @include button;
   background-color: $light-1 !important;
   color: $dark-2 !important;

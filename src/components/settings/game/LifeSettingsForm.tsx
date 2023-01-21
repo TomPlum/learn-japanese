@@ -1,40 +1,39 @@
-import React, { ChangeEvent, forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import LifeSettings, { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings";
-import RangeSlider from "react-bootstrap-range-slider";
-import ScrollableContainer from "../../ui/ScrollableContainer";
-import styles from "../../../styles/sass/components/settings/game/LifeSettingsForm.module.scss";
-import ToggleSwitch from "../../ui/ToggleSwitch";
-import { SettingsFormHandle } from "./GameSettingsMenu";
-import { useTranslation } from "react-i18next";
+import React, { ChangeEvent, forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
+import { Col, Row } from "react-bootstrap"
+import LifeSettings, { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings"
+import RangeSlider from "react-bootstrap-range-slider"
+import ScrollableContainer from "../../ui/ScrollableContainer"
+import styles from "../../../styles/sass/components/settings/game/LifeSettingsForm.module.scss"
+import ToggleSwitch from "../../ui/ToggleSwitch"
+import { SettingsFormHandle } from "./GameSettingsMenu"
+import { useTranslation } from "react-i18next"
 
 interface LifeSettingsFormProps {
-    onChange: (settings: LifeSettings) => void;
+    onChange: (settings: LifeSettings) => void
 }
 
 const LifeSettingsForm = forwardRef((props: LifeSettingsFormProps, ref: Ref<SettingsFormHandle>) => {
+    const { onChange } = props
 
-    const { onChange } = props;
+    const defaultState = new LifeSettingsBuilder().isEnabled(false).withQuantity(0).build()
 
-    const defaultState = new LifeSettingsBuilder().isEnabled(false).withQuantity(0).build();
-
-    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.life" });
-    const [enabled, setEnabled] = useState(defaultState.enabled);
-    const [quantity, setQuantity] = useState(defaultState.quantity);
-
-    useEffect(() => {
-        onChange(defaultState);
-    }, []);
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.life" })
+    const [enabled, setEnabled] = useState(defaultState.enabled)
+    const [quantity, setQuantity] = useState(defaultState.quantity)
 
     useEffect(() => {
-        const settings = new LifeSettingsBuilder().isEnabled(enabled).withQuantity(quantity).build();
-        onChange(settings);
-    }, [enabled, quantity]);
+        onChange(defaultState)
+    }, [])
+
+    useEffect(() => {
+        const settings = new LifeSettingsBuilder().isEnabled(enabled).withQuantity(quantity).build()
+        onChange(settings)
+    }, [enabled, quantity])
 
     useImperativeHandle(ref, () => ({
         reset() {
-            setEnabled(defaultState.enabled);
-            setQuantity(defaultState.quantity);
+            setEnabled(defaultState.enabled)
+            setQuantity(defaultState.quantity)
         }
     }))
 
@@ -42,9 +41,7 @@ const LifeSettingsForm = forwardRef((props: LifeSettingsFormProps, ref: Ref<Sett
         <ScrollableContainer className={styles.formWrapper} id="life-settings-form">
             <Row>
                 <Col xs={12}>
-                    <p className={styles.leadingDescription}>
-                        {t("desc")}
-                    </p>
+                    <p className={styles.leadingDescription}>{t("desc")}</p>
 
                     <ToggleSwitch
                         enabled={enabled}
@@ -56,23 +53,22 @@ const LifeSettingsForm = forwardRef((props: LifeSettingsFormProps, ref: Ref<Sett
                 </Col>
 
                 <Col xs={12}>
-                    <p className={styles.leadingDescription}>
-                        {t("lives-desc")}
-                    </p>
+                    <p className={styles.leadingDescription}>{t("lives-desc")}</p>
 
                     <RangeSlider
-                        min={1} max={10}
+                        min={1}
+                        max={10}
                         variant="primary"
                         disabled={!enabled}
                         value={quantity.valueOf()}
-                        tooltip={enabled ? "auto": "off"}
+                        tooltip={enabled ? "auto" : "off"}
                         data-testid="life-quantity-slider"
                         onChange={(_: ChangeEvent, value: number) => setQuantity(value)}
                     />
                 </Col>
             </Row>
         </ScrollableContainer>
-    );
-});
+    )
+})
 
-export default LifeSettingsForm;
+export default LifeSettingsForm

@@ -1,21 +1,21 @@
-import styles from "../../../styles/sass/components/settings/modal/SettingsTabTitle.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import styles from "../../../styles/sass/components/settings/modal/SettingsTabTitle.module.scss"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTimes } from "@fortawesome/free-solid-svg-icons"
 
 export interface SettingsTabCloseProps {
-    className?: string;
-    onClick: () => void;
+    className?: string
+    onClick: () => void
 }
 
 export interface SettingsTabTitleProps {
-    title: string;
-    className?: string;
-    description: string;
-    close?: SettingsTabCloseProps;
+    title: string
+    className?: string
+    description: string
+    close?: SettingsTabCloseProps
 }
 
 const SettingsTabTitle = (props: SettingsTabTitleProps) => {
-    const { title, description, className, close } = props;
+    const { title, description, className, close } = props
 
     return (
         <div className={[className, styles.container].join(" ")}>
@@ -32,7 +32,7 @@ const SettingsTabTitle = (props: SettingsTabTitleProps) => {
                 />
             )}
         </div>
-    );
+    )
 }
 
-export default SettingsTabTitle;
+export default SettingsTabTitle

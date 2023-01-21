@@ -1,31 +1,30 @@
-import { Component } from "react";
-import { Example } from "../../../domain/kanji/Example";
-import { Kanji } from "../../../domain/kanji/Kanji";
-import SpinnerController from "../../ui/SpinnerController";
-import { Col, Container, Row } from "react-bootstrap";
-import styles from "../../../styles/sass/components/learn/kanji/KanjiExampleDisplay.module.scss";
-import Copyable from "../../ui/Copyable";
+import { Component } from "react"
+import { Example } from "../../../domain/kanji/Example"
+import { Kanji } from "../../../domain/kanji/Kanji"
+import SpinnerController from "../../ui/SpinnerController"
+import { Col, Container, Row } from "react-bootstrap"
+import styles from "../../../styles/sass/components/learn/kanji/KanjiExampleDisplay.module.scss"
+import Copyable from "../../ui/Copyable"
 
 export interface KanjiExampleDisplayProps {
-    kanji: Kanji;
+    kanji: Kanji
 }
 
 interface KanjiExampleDisplayState {
-    selected?: Example;
+    selected?: Example
 }
 
 class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExampleDisplayState> {
-
     constructor(props: Readonly<KanjiExampleDisplayProps> | KanjiExampleDisplayProps) {
-        super(props);
+        super(props)
         this.state = {
             selected: props.kanji.examples.length > 0 ? props.kanji.examples[0] : undefined
         }
     }
 
     render() {
-        const { kanji } = this.props;
-        const { selected } = this.state;
+        const { kanji } = this.props
+        const { selected } = this.state
 
         return (
             <Container className={styles.wrapper} fluid>
@@ -44,45 +43,40 @@ class KanjiExampleDisplay extends Component<KanjiExampleDisplayProps, KanjiExamp
                         />
                     </Col>
 
-                    {selected && <Col className={styles.textWrapper}>
-                        <Copyable className={styles.kanji}>
-                            <span className={styles.example}>
-                                {selected.kanji}
-                            </span>
-                        </Copyable>
+                    {selected && (
+                        <Col className={styles.textWrapper}>
+                            <Copyable className={styles.kanji}>
+                                <span className={styles.example}>{selected.kanji}</span>
+                            </Copyable>
 
-
-                        <span>
-                            <span className={styles.kana}>( </span>
-                            {
-                                selected.kana.map((value: string, i: number) => {
+                            <span>
+                                <span className={styles.kana}>( </span>
+                                {selected.kana.map((value: string, i: number) => {
                                     if (i < selected.kana.length - 1) {
                                         return [
                                             <Copyable className={styles.kana} key={`copyable-${i}`} inline>
                                                 <span key={value}>{value}</span>
                                             </Copyable>,
                                             <span key={`or-${i}`}> or </span>
-                                        ];
+                                        ]
                                     } else {
                                         return (
                                             <Copyable className={styles.kana} key={`copyable-${i}`} inline>
                                                 <span key={value}>{value}</span>
                                             </Copyable>
-                                        );
+                                        )
                                     }
-                                })
-                            }
-                            <span className={styles.kana}> )</span>
-                        </span>
+                                })}
+                                <span className={styles.kana}> )</span>
+                            </span>
 
-                        <p className={styles.meaning}>
-                            {selected.english.join(", ")}
-                        </p>
-                    </Col>}
+                            <p className={styles.meaning}>{selected.english.join(", ")}</p>
+                        </Col>
+                    )}
                 </Row>
             </Container>
-        );
+        )
     }
 }
 
-export default KanjiExampleDisplay;
+export default KanjiExampleDisplay

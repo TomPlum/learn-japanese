@@ -1,53 +1,53 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import KanaRepository from "../../repository/KanaRepository";
-import { Kana } from "../../domain/kana/Kana";
-import LoadingSpinner from "../ui/loading/LoadingSpinner";
-import styles from "../../styles/sass/components/pages/SearchPage.module.scss";
-import KanaType from "../../domain/kana/KanaType";
-import KanaGrid from "../ui/kana/KanaGrid";
-import SearchField from "../ui/fields/SearchField";
-import FilterChain from "../../filters/FilterChain";
-import KanaTypeFilter from "../../filters/kana/KanaTypeFilter";
-import DiagraphFilter from "../../filters/kana/DiagraphFilter";
-import DiacriticalFilter from "../../filters/kana/DiacriticalFilter";
-import RomajiFilter from "../../filters/kana/RomajiFilter";
-import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
-import ToggleSwitch from "../ui/ToggleSwitch";
+import React, { useEffect, useRef, useState } from "react"
+import { Col, Container, Row } from "react-bootstrap"
+import KanaRepository from "../../repository/KanaRepository"
+import { Kana } from "../../domain/kana/Kana"
+import LoadingSpinner from "../ui/loading/LoadingSpinner"
+import styles from "../../styles/sass/components/pages/SearchPage.module.scss"
+import KanaType from "../../domain/kana/KanaType"
+import KanaGrid from "../ui/kana/KanaGrid"
+import SearchField from "../ui/fields/SearchField"
+import FilterChain from "../../filters/FilterChain"
+import KanaTypeFilter from "../../filters/kana/KanaTypeFilter"
+import DiagraphFilter from "../../filters/kana/DiagraphFilter"
+import DiacriticalFilter from "../../filters/kana/DiacriticalFilter"
+import RomajiFilter from "../../filters/kana/RomajiFilter"
+import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings"
+import ToggleSwitch from "../ui/ToggleSwitch"
 
 const SearchPage = () => {
-    let data = useRef<Kana[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [kana, setKana] = useState<Kana[]>([]);
-    const [search, setSearch] = useState("");
-    const [showHiragana, setShowHiragana] = useState(true);
-    const [showKatakana, setShowKatakana] = useState(true);
-    const [showDiagraphs, setShowDiagraphs] = useState(true);
-    const [showDiacriticals, setShowDiacriticals] = useState(true);
+    const data = useRef<Kana[]>([])
+    const [loading, setLoading] = useState(false)
+    const [kana, setKana] = useState<Kana[]>([])
+    const [search, setSearch] = useState("")
+    const [showHiragana, setShowHiragana] = useState(true)
+    const [showKatakana, setShowKatakana] = useState(true)
+    const [showDiagraphs, setShowDiagraphs] = useState(true)
+    const [showDiacriticals, setShowDiacriticals] = useState(true)
 
     useEffect(() => {
-        setLoading(true);
+        setLoading(true)
 
-        const config = new KanaSettingsBuilder().withEverything().withMaxQuantity().build();
+        const config = new KanaSettingsBuilder().withEverything().withMaxQuantity().build()
 
-        new KanaRepository().read(config).then(response => {
-            setKana(response);
-            setLoading(false);
+        new KanaRepository().read(config).then((response) => {
+            setKana(response)
+            setLoading(false)
             data.current = response
-        });
-    }, []);
+        })
+    }, [])
 
     useEffect(() => {
-        const chain = new FilterChain<Kana>();
+        const chain = new FilterChain<Kana>()
 
         chain.addFilter(new RomajiFilter(search))
-        if (!showHiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA));
-        if (!showKatakana) chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA));
-        if (!showDiagraphs) chain.addFilter(new DiagraphFilter());
-        if (!showDiacriticals) chain.addFilter(new DiacriticalFilter());
+        if (!showHiragana) chain.addFilter(new KanaTypeFilter(KanaType.HIRAGANA))
+        if (!showKatakana) chain.addFilter(new KanaTypeFilter(KanaType.KATAKANA))
+        if (!showDiagraphs) chain.addFilter(new DiagraphFilter())
+        if (!showDiacriticals) chain.addFilter(new DiacriticalFilter())
 
-        setKana(chain.execute(data.current));
-    }, [search, showHiragana, showKatakana, showDiagraphs, showDiacriticals]);
+        setKana(chain.execute(data.current))
+    }, [search, showHiragana, showKatakana, showDiagraphs, showDiacriticals])
 
     return (
         <div className={styles.wrapper} data-testid="search-page">
@@ -108,9 +108,9 @@ const SearchPage = () => {
                 </Container>
             </Container>
 
-            <KanaGrid kana={kana}/>
+            <KanaGrid kana={kana} />
         </div>
     )
 }
 
-export default SearchPage;
+export default SearchPage

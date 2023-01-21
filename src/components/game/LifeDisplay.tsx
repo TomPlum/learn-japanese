@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { faHeart, faHeartBroken, faInfinity } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/sass/components/game/LifeDisplay.module.scss";
+import React, { Component } from "react"
+import { faHeart, faHeartBroken, faInfinity } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import styles from "../../styles/sass/components/game/LifeDisplay.module.scss"
 
 export interface LifeDisplayProps {
-    enabled: boolean;
-    hearts: number;
-    className?: string;
+    enabled: boolean
+    hearts: number
+    className?: string
 }
 
 class LifeDisplay extends Component<LifeDisplayProps> {
     render() {
-        const { hearts, enabled, className } = this.props;
+        const { hearts, enabled, className } = this.props
         return (
             <div className={[className, styles.wrapper].join(" ")}>
                 <FontAwesomeIcon
@@ -21,14 +21,15 @@ class LifeDisplay extends Component<LifeDisplayProps> {
                 />
 
                 <span className={styles.quantity}>
-                    {!enabled ?
-                        <FontAwesomeIcon className={styles.infinite} icon={faInfinity} title="Infinite"/>
-                        : hearts
-                    }
+                    {!enabled ? (
+                        <FontAwesomeIcon className={styles.infinite} icon={faInfinity} title="Infinite" />
+                    ) : (
+                        hearts
+                    )}
                 </span>
             </div>
-        );
+        )
     }
 }
 
-export default LifeDisplay;
+export default LifeDisplay

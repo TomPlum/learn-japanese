@@ -20,7 +20,7 @@
 
 .favourite:hover {
   cursor: pointer;
-  color: #FFF;
+  color: #fff;
   background-color: $dark-1;
 }
 
@@ -95,7 +95,7 @@ $learn: #4aaef4;
 }
 
 .play:active {
-  background-color: rgba($play, 0.10);
+  background-color: rgba($play, 0.1);
 }
 
 .learn {
@@ -107,7 +107,7 @@ $learn: #4aaef4;
 }
 
 .learn:active {
-  background-color: rgba($learn, 0.10);
+  background-color: rgba($learn, 0.1);
 }
 
 .loading {

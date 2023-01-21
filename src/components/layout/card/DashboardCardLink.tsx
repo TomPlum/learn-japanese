@@ -1,30 +1,29 @@
-import styles from "../../../styles/sass/components/layout/card/DashboardCardLink.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
-import { AnchorProps } from "react-bootstrap";
+import styles from "../../../styles/sass/components/layout/card/DashboardCardLink.module.scss"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faChevronRight, IconDefinition } from "@fortawesome/free-solid-svg-icons"
+import React from "react"
+import { AnchorProps } from "react-bootstrap"
 
 export interface DashboardCardLinkProps {
-    text: string;
-    href?: string;
-    title?: string;
-    chevron?: boolean;
-    disabled?: boolean;
-    className?: string;
-    onClick?: () => void;
-    onMouseDown?: () => void;
-    icon?: IconDefinition;
+    text: string
+    href?: string
+    title?: string
+    chevron?: boolean
+    disabled?: boolean
+    className?: string
+    onClick?: () => void
+    onMouseDown?: () => void
+    icon?: IconDefinition
 }
 
 const DashboardCardLink = (props: DashboardCardLinkProps) => {
+    const { text, href, icon, title, disabled, chevron, className, onClick, onMouseDown } = props
 
-    const { text, href, icon, title, disabled, chevron, className, onClick, onMouseDown } = props;
-
-    const classes = [disabled ? styles.disabled : styles.link, className];
+    const classes = [disabled ? styles.disabled : styles.link, className]
 
     const handleClick = () => {
         if (!disabled) {
-            onClick?.();
+            onClick?.()
         }
     }
 
@@ -34,7 +33,7 @@ const DashboardCardLink = (props: DashboardCardLinkProps) => {
         onClick: handleClick,
         onMouseDown: onMouseDown,
         title: title,
-        "aria-disabled" :disabled
+        "aria-disabled": disabled
     }
 
     return (
@@ -48,9 +47,7 @@ const DashboardCardLink = (props: DashboardCardLinkProps) => {
                 />
             )}
 
-            <span className={styles.linkText}>
-                {text}
-            </span>
+            <span className={styles.linkText}>{text}</span>
 
             {chevron && (
                 <FontAwesomeIcon
@@ -58,10 +55,10 @@ const DashboardCardLink = (props: DashboardCardLinkProps) => {
                     icon={faChevronRight}
                     className={styles.chevron}
                     data-testid="dashboard-card-link-chevron"
-                />)
-            }
+                />
+            )}
         </a>
-    );
+    )
 }
 
-export default DashboardCardLink;
+export default DashboardCardLink

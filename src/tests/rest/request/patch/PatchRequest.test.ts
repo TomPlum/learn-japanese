@@ -1,5 +1,5 @@
-import PatchRequest from "../../../../rest/request/patch/PatchRequest";
-import PatchReplaceOperation from "../../../../rest/request/patch/PatchReplaceOperation";
+import PatchRequest from "../../../../rest/request/patch/PatchRequest"
+import PatchReplaceOperation from "../../../../rest/request/patch/PatchReplaceOperation"
 
 describe("Patch Request", () => {
     describe("JSON Conversion", () => {
@@ -7,14 +7,14 @@ describe("Patch Request", () => {
             const request = new PatchRequest([
                 new PatchReplaceOperation("examplePath1", "exampleValue1"),
                 new PatchReplaceOperation("examplePath2", "exampleValue2")
-            ]);
+            ])
 
-            const json = request.toJSON();
+            const json = request.toJSON()
 
             expect(json).toStrictEqual([
-                {"op": "replace", "path": "/examplePath1", "value": "exampleValue1"},
-                {"op": "replace", "path": "/examplePath2", "value": "exampleValue2"}
-            ]);
-        });
-    });
-});
+                { op: "replace", path: "/examplePath1", value: "exampleValue1" },
+                { op: "replace", path: "/examplePath2", value: "exampleValue2" }
+            ])
+        })
+    })
+})

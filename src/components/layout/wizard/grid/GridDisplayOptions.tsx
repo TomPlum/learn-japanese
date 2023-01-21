@@ -1,34 +1,33 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThLarge, faThList } from "@fortawesome/free-solid-svg-icons";
-import React, { useEffect, useState } from "react";
-import GridDisplayType from "../../../../domain/grid/GridDisplayType";
-import { GridOptions } from "../../../../domain/grid/GridOptions";
-import RangeSlider from "react-bootstrap-range-slider";
-import styles from "../../../../styles/sass/components/layout/wizard/grid/GridDisplayOptions.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faThLarge, faThList } from "@fortawesome/free-solid-svg-icons"
+import React, { useEffect, useState } from "react"
+import GridDisplayType from "../../../../domain/grid/GridDisplayType"
+import { GridOptions } from "../../../../domain/grid/GridOptions"
+import RangeSlider from "react-bootstrap-range-slider"
+import styles from "../../../../styles/sass/components/layout/wizard/grid/GridDisplayOptions.module.scss"
 
 export interface GridDisplayOptionsProps {
-    onSelect: (options: GridOptions) => void;
-    defaultType?: GridDisplayType;
-    className?: string;
+    onSelect: (options: GridOptions) => void
+    defaultType?: GridDisplayType
+    className?: string
 }
 
 const GridDisplayOptions = (props: GridDisplayOptionsProps) => {
+    const { className, defaultType, onSelect } = props
 
-    const { className, defaultType, onSelect } = props;
-
-    const [type, setType] = useState(defaultType ?? GridDisplayType.GRID);
-    const [size, setSize] = useState(80);
+    const [type, setType] = useState(defaultType ?? GridDisplayType.GRID)
+    const [size, setSize] = useState(80)
 
     useEffect(() => {
-        onSelect({ type: type, size: size });
-    }, [type, size]);
+        onSelect({ type: type, size: size })
+    }, [type, size])
 
     const onGridItemSizeChange = (e: React.ChangeEvent, value: number) => {
-        setSize(value);
+        setSize(value)
     }
 
-    const gridButtonClass = type === GridDisplayType.GRID ? styles.selected : styles.button;
-    const listButtonClass = type === GridDisplayType.LIST ? styles.selected : styles.button;
+    const gridButtonClass = type === GridDisplayType.GRID ? styles.selected : styles.button
+    const listButtonClass = type === GridDisplayType.LIST ? styles.selected : styles.button
 
     return (
         <div className={[className, styles.wrapper].join(" ")} data-testid="grid-display-options">
@@ -63,7 +62,7 @@ const GridDisplayOptions = (props: GridDisplayOptionsProps) => {
                 onClick={() => setType(GridDisplayType.LIST)}
             />
         </div>
-    );
+    )
 }
 
-export default GridDisplayOptions;
+export default GridDisplayOptions

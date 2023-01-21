@@ -1,0 +1,30 @@
+@import "src/styles/sass/colours";
+
+.container {
+  position: relative;
+  margin-left: 8px;
+  padding-left: 8px;
+}
+
+.text {
+  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
+  font-size: 0.9em;
+}
+
+@mixin ref {
+  font-size: 0.7em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.refBookOne {
+  @include ref;
+  color: $genki-1-dark;
+}
+
+.refBookTwo {
+  @include ref;
+  color: $genki-2-dark;
+}

@@ -1,30 +1,34 @@
-import PresetConverter from "../../converter/PresetConverter";
-import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings";
-import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSettings";
-import { CustomPresetDetails, DataSettingsRequest, GameConfigRequest } from "../../repository/PresetRepository";
-import LearnSettings from "../../domain/session/settings/LearnSettings";
-import { SessionSettingsState } from "../../slices/SessionSettingsSlice";
-import { GameSettingState } from "../../slices/GameSettingsSlice";
-import { KanaDataSettingsState } from "../../slices/DataSettingsSlice";
-import { SessionSettings } from "../../domain/session/settings/SessionSettings";
+import PresetConverter from "../../converter/PresetConverter"
+import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings"
+import { GameSettingsBuilder } from "../../domain/session/settings/game/GameSettings"
+import { CustomPresetDetails, DataSettingsRequest, GameConfigRequest } from "../../repository/PresetRepository"
+import LearnSettings from "../../domain/session/settings/LearnSettings"
+import { SessionSettingsState } from "../../slices/SessionSettingsSlice"
+import { GameSettingState } from "../../slices/GameSettingsSlice"
+import { KanaDataSettingsState } from "../../slices/DataSettingsSlice"
+import { SessionSettings } from "../../domain/session/settings/SessionSettings"
 
-const mockDataSettingsConverter = jest.fn();
-const mockDeserialiseDataSettings = jest.fn();
+const mockDataSettingsConverter = jest.fn()
+const mockDeserialiseDataSettings = jest.fn()
 jest.mock("../../converter/DataSettingsConverter", () => {
-    return function() { return {
-        convertRequest: mockDataSettingsConverter,
-        deserialise: mockDeserialiseDataSettings
-    }};
-});
+    return function () {
+        return {
+            convertRequest: mockDataSettingsConverter,
+            deserialise: mockDeserialiseDataSettings
+        }
+    }
+})
 
-const mockGameSettingsConverter = jest.fn();
-const mockDeserialiseGameSettings = jest.fn();
+const mockGameSettingsConverter = jest.fn()
+const mockDeserialiseGameSettings = jest.fn()
 jest.mock("../../converter/GameSettingsConverter", () => {
-   return function() { return {
-       convertRequest: mockGameSettingsConverter,
-       deserialise: mockDeserialiseGameSettings
-   }};
-});
+    return function () {
+        return {
+            convertRequest: mockGameSettingsConverter,
+            deserialise: mockDeserialiseGameSettings
+        }
+    }
+})
 
 const playPreset: CustomPresetDetails = {
     name: "Test Mode",
@@ -64,7 +68,7 @@ const gameSettingsRequest: GameConfigRequest = {
         questionField: "Kana",
         answerFilter: 0
     }
-};
+}
 
 const dataSettingsRequest: DataSettingsRequest = {
     quantity: 50,
@@ -74,22 +78,22 @@ const dataSettingsRequest: DataSettingsRequest = {
         katakana: false,
         diagraphs: false,
         diacriticals: true,
-        onlyDiagraphs: false,
+        onlyDiagraphs: false
     }
-};
+}
 
 describe("Preset Converter", () => {
-    const converter = new PresetConverter();
+    const converter = new PresetConverter()
 
     describe("Convert API Request", () => {
         it("Should convert the preset when it is of play type", () => {
-            mockGameSettingsConverter.mockReturnValueOnce(gameSettingsRequest);
-            mockDataSettingsConverter.mockReturnValueOnce(dataSettingsRequest);
+            mockGameSettingsConverter.mockReturnValueOnce(gameSettingsRequest)
+            mockDataSettingsConverter.mockReturnValueOnce(dataSettingsRequest)
 
-            const target = converter.convertRequest(playPreset);
+            const target = converter.convertRequest(playPreset)
 
-            expect(mockDataSettingsConverter).toHaveBeenLastCalledWith(playPreset.settings.dataSettings);
-            expect(mockGameSettingsConverter).toHaveBeenLastCalledWith(playPreset.settings.gameSettings);
+            expect(mockDataSettingsConverter).toHaveBeenLastCalledWith(playPreset.settings.dataSettings)
+            expect(mockGameSettingsConverter).toHaveBeenLastCalledWith(playPreset.settings.gameSettings)
             expect(target).toStrictEqual({
                 name: "Test Mode",
                 icon: "FaGraduationCap",
@@ -97,25 +101,25 @@ describe("Preset Converter", () => {
                 topic: "Hiragana & Katakana",
                 data: dataSettingsRequest,
                 game: gameSettingsRequest
-            });
-        });
+            })
+        })
 
         it("Should convert the preset when it is of learn type", () => {
-            mockDataSettingsConverter.mockReturnValueOnce(dataSettingsRequest);
+            mockDataSettingsConverter.mockReturnValueOnce(dataSettingsRequest)
 
-            const target = converter.convertRequest(learnPreset);
+            const target = converter.convertRequest(learnPreset)
 
-            expect(mockDataSettingsConverter).toHaveBeenLastCalledWith(learnPreset.settings.dataSettings);
-            expect(mockGameSettingsConverter).not.toHaveBeenCalled();
+            expect(mockDataSettingsConverter).toHaveBeenLastCalledWith(learnPreset.settings.dataSettings)
+            expect(mockGameSettingsConverter).not.toHaveBeenCalled()
             expect(target).toStrictEqual({
                 name: "Test Learn",
                 icon: "あ",
                 colour: "fdb40e",
                 topic: "Hiragana & Katakana",
                 data: dataSettingsRequest
-            });
-        });
-    });
+            })
+        })
+    })
 
     describe("Convert Session Settings", () => {
         const gameSettingsState: GameSettingState = {
@@ -140,9 +144,9 @@ describe("Preset Converter", () => {
                 quantity: 150,
                 answerField: "Rōmaji",
                 questionField: "Kana",
-                answerFilter: "0"
+                answerFilter: 0
             }
-        };
+        }
 
         const dataSettingsState: KanaDataSettingsState = {
             quantity: 50,
@@ -153,7 +157,7 @@ describe("Preset Converter", () => {
             diacriticals: true,
             onlyDiagraphs: false,
             topic: "Hiragana & Katakana"
-        };
+        }
 
         const playSessionSettings: SessionSettingsState = {
             isPreset: true,
@@ -176,93 +180,92 @@ describe("Preset Converter", () => {
             data: dataSettingsState
         }
 
-        const gameSettings = new GameSettingsBuilder().build();
-        const dataSettings = new KanaSettingsBuilder().build();
+        const gameSettings = new GameSettingsBuilder().build()
+        const dataSettings = new KanaSettingsBuilder().build()
 
         beforeEach(() => {
-            mockDeserialiseDataSettings.mockReturnValueOnce(dataSettings);
-        });
+            mockDeserialiseDataSettings.mockReturnValueOnce(dataSettings)
+        })
 
         describe("Play Preset", () => {
-
             beforeEach(() => {
-                mockDeserialiseGameSettings.mockReturnValueOnce(gameSettings);
-            });
+                mockDeserialiseGameSettings.mockReturnValueOnce(gameSettings)
+            })
 
             it("Should convert the ID", () => {
-                const target = converter.convertSessionSettings(playSessionSettings);
-                expect(target.id).toStrictEqual(1);
-            });
+                const target = converter.convertSessionSettings(playSessionSettings)
+                expect(target.id).toStrictEqual(1)
+            })
 
             it("Should convert the name", () => {
-                const target = converter.convertSessionSettings(playSessionSettings);
-                expect(target.displayName).toStrictEqual("Test Play Settings");
-            });
+                const target = converter.convertSessionSettings(playSessionSettings)
+                expect(target.displayName).toStrictEqual("Test Play Settings")
+            })
 
             it("Should convert the colour", () => {
-                const target = converter.convertSessionSettings(playSessionSettings);
-                expect(target.colour).toStrictEqual("#ffffff");
-            });
+                const target = converter.convertSessionSettings(playSessionSettings)
+                expect(target.colour).toStrictEqual("#ffffff")
+            })
 
             it("Should convert the icon", () => {
-                const target = converter.convertSessionSettings(playSessionSettings);
-                expect(target.icon).toStrictEqual("FaApple");
-            });
+                const target = converter.convertSessionSettings(playSessionSettings)
+                expect(target.icon).toStrictEqual("FaApple")
+            })
 
             it("Should convert the topic", () => {
-                const target = converter.convertSessionSettings(playSessionSettings);
-                expect(target.topicName).toStrictEqual("Hiragana & Katakana");
-            });
+                const target = converter.convertSessionSettings(playSessionSettings)
+                expect(target.topicName).toStrictEqual("Hiragana & Katakana")
+            })
 
             it("Should convert the game settings using the dedicated converter class", () => {
-                const target = converter.convertSessionSettings(playSessionSettings);
-                expect(mockDeserialiseGameSettings).toHaveBeenCalledWith(gameSettingsState);
-                expect(target.modeSettings).toStrictEqual(gameSettings);
-            });
+                const target = converter.convertSessionSettings(playSessionSettings)
+                expect(mockDeserialiseGameSettings).toHaveBeenCalledWith(gameSettingsState)
+                expect(target.modeSettings).toStrictEqual(gameSettings)
+            })
 
             it("Should convert the data settings using the dedicated converter class", () => {
-                const target = converter.convertSessionSettings(playSessionSettings);
-                expect(mockDeserialiseDataSettings).toHaveBeenCalledWith(dataSettingsState);
-                expect(target.dataSettings).toStrictEqual(dataSettings);
-            });
-        });
+                const target = converter.convertSessionSettings(playSessionSettings)
+                expect(mockDeserialiseDataSettings).toHaveBeenCalledWith(dataSettingsState)
+                expect(target.dataSettings).toStrictEqual(dataSettings)
+            })
+        })
 
         describe("Learn Preset", () => {
             it("Should convert the ID", () => {
-                const target = converter.convertSessionSettings(learnSessionSettings);
-                expect(target.id).toStrictEqual(2);
-            });
+                const target = converter.convertSessionSettings(learnSessionSettings)
+                expect(target.id).toStrictEqual(2)
+            })
 
             it("Should convert the name", () => {
-                const target = converter.convertSessionSettings(learnSessionSettings);
-                expect(target.displayName).toStrictEqual("Test Learn Settings");
-            });
+                const target = converter.convertSessionSettings(learnSessionSettings)
+                expect(target.displayName).toStrictEqual("Test Learn Settings")
+            })
 
             it("Should convert the colour", () => {
-                const target = converter.convertSessionSettings(learnSessionSettings);
-                expect(target.colour).toStrictEqual("#ffffff");
-            });
+                const target = converter.convertSessionSettings(learnSessionSettings)
+                expect(target.colour).toStrictEqual("#ffffff")
+            })
 
             it("Should convert the icon", () => {
-                const target = converter.convertSessionSettings(learnSessionSettings);
-                expect(target.icon).toStrictEqual("FaApple");
-            });
+                const target = converter.convertSessionSettings(learnSessionSettings)
+                expect(target.icon).toStrictEqual("FaApple")
+            })
 
             it("Should convert the topic", () => {
-                const target = converter.convertSessionSettings(learnSessionSettings);
-                expect(target.topicName).toStrictEqual("Hiragana & Katakana");
-            });
+                const target = converter.convertSessionSettings(learnSessionSettings)
+                expect(target.topicName).toStrictEqual("Hiragana & Katakana")
+            })
 
             it("Should set the learn settings to a new instance", () => {
-                const target = converter.convertSessionSettings(learnSessionSettings);
-                expect(target.modeSettings).toStrictEqual(new LearnSettings());
-            });
+                const target = converter.convertSessionSettings(learnSessionSettings)
+                expect(target.modeSettings).toStrictEqual(new LearnSettings())
+            })
 
             it("Should convert the data settings using the dedicated converter class", () => {
-                const target = converter.convertSessionSettings(learnSessionSettings);
-                expect(mockDeserialiseDataSettings).toHaveBeenCalledWith(dataSettingsState);
-                expect(target.dataSettings).toStrictEqual(dataSettings);
-            });
-        });
-    });
-});
+                const target = converter.convertSessionSettings(learnSessionSettings)
+                expect(mockDeserialiseDataSettings).toHaveBeenCalledWith(dataSettingsState)
+                expect(target.dataSettings).toStrictEqual(dataSettings)
+            })
+        })
+    })
+})

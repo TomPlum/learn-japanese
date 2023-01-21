@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { Spinner } from "react-bootstrap";
-import styles from "../../../styles/sass/components/ui/loading/LoadingSpinner.module.scss";
-import { Variant } from "react-bootstrap/types";
+import React, { Component } from "react"
+import { Spinner } from "react-bootstrap"
+import styles from "../../../styles/sass/components/ui/loading/LoadingSpinner.module.scss"
+import { Variant } from "react-bootstrap/types"
 
 export interface LoadingSpinnerProps {
-    active: boolean;
-    className?: string;
-    variant?: Variant;
-    size?: string;
-    thickness?: string;
+    active: boolean
+    className?: string
+    variant?: Variant
+    size?: string
+    thickness?: string
 }
 
 const LoadingSpinner = (props: LoadingSpinnerProps) => {
-    const { active, variant, className, size, thickness } = props;
+    const { active, variant, className, size, thickness } = props
 
     if (active) {
         return (
@@ -26,9 +26,9 @@ const LoadingSpinner = (props: LoadingSpinnerProps) => {
                     style={{ width: size, height: size, fontSize: thickness }}
                 />
             </div>
-        );
+        )
     }
-    return null;
+    return null
 }
 
 export default LoadingSpinner

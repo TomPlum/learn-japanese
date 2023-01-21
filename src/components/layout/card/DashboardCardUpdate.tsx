@@ -1,16 +1,16 @@
-import styles from "../../../styles/sass/components/layout/card/DashboardCardUpdate.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
+import styles from "../../../styles/sass/components/layout/card/DashboardCardUpdate.module.scss"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSyncAlt } from "@fortawesome/free-solid-svg-icons"
 
 export interface DashboardCardUpdateProps {
-    active?: boolean;
+    active?: boolean
 }
 
 const DashboardCardUpdate = (props: DashboardCardUpdateProps) => {
-    const { active } = props;
+    const { active } = props
 
     if (!active) {
-        return null;
+        return null
     }
 
     return (
@@ -20,4 +20,4 @@ const DashboardCardUpdate = (props: DashboardCardUpdateProps) => {
     )
 }
 
-export default DashboardCardUpdate;
+export default DashboardCardUpdate

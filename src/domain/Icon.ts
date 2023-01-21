@@ -1,4 +1,4 @@
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons"
 
 /**
  * A custom icon of type:
@@ -6,10 +6,10 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
  * - React Icons
  * - String literal
  */
-export type CustomIcon = IconDefinition | Icon | string;
+export type CustomIcon = IconDefinition | Icon | string
 
 export type Icon =
-    | ''
+    | ""
     | "Fa500Px"
     | "FaAccessibleIcon"
     | "FaAccusoft"

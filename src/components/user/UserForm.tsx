@@ -1,32 +1,38 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
-import styles from "../../styles/sass/components/user/UserForm.module.scss";
-import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import LoginForm from "./LoginForm";
-import RegistrationForm from "./RegistrationForm";
-import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React, { useState } from "react"
+import { Modal } from "react-bootstrap"
+import styles from "../../styles/sass/components/user/UserForm.module.scss"
+import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons"
+import LoginForm from "./LoginForm"
+import RegistrationForm from "./RegistrationForm"
+import { useTranslation } from "react-i18next"
 
 export interface UserFormProps {
-    show: boolean;
-    onClose: () => void;
+    show: boolean
+    onClose: () => void
 }
 
 const UserForm = (props: UserFormProps) => {
+    const { show, onClose } = props
 
-    const { show, onClose } = props;
-
-    const { t } = useTranslation();
-    const [login, setLogin] = useState(true);
-    const [registeredUsername, setRegisteredUsername] = useState("");
+    const { t } = useTranslation()
+    const [login, setLogin] = useState(true)
+    const [registeredUsername, setRegisteredUsername] = useState("")
 
     const onSuccessfulRegistration = (username: string) => {
-        setRegisteredUsername(username);
-        setLogin(true);
+        setRegisteredUsername(username)
+        setLogin(true)
     }
 
     return (
-        <Modal contentClassName={styles.modal} centered backdrop="static" onHide={onClose} show={show} data-testid="user-modal">
+        <Modal
+            contentClassName={styles.modal}
+            centered
+            backdrop="static"
+            onHide={onClose}
+            show={show}
+            data-testid="user-modal"
+        >
             <Modal.Header className={styles.header} closeButton closeLabel="Close" onHide={onClose}>
                 <Modal.Title>
                     <FontAwesomeIcon icon={login ? faUser : faUserPlus} fixedWidth className={styles.icon} />
@@ -34,10 +40,11 @@ const UserForm = (props: UserFormProps) => {
                 </Modal.Title>
             </Modal.Header>
 
-            {login ?
+            {login ? (
                 <LoginForm onSuccess={onClose} username={registeredUsername} />
-                : <RegistrationForm onSuccess={onSuccessfulRegistration} />
-            }
+            ) : (
+                <RegistrationForm onSuccess={onSuccessfulRegistration} />
+            )}
 
             <Modal.Footer className={styles.footer}>
                 <p className={styles.footerText} onClick={() => setLogin(!login)}>
@@ -48,4 +55,4 @@ const UserForm = (props: UserFormProps) => {
     )
 }
 
-export default UserForm;
+export default UserForm

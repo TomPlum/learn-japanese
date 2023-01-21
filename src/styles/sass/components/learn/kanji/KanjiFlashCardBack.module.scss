@@ -55,7 +55,7 @@
 
 @include desktop {
   .wrapper {
-    @include wrapperDesktop
+    @include wrapperDesktop;
   }
 
   .grade {
@@ -101,7 +101,9 @@
   font-family: "Ciutadella Rounded Medium", sans-serif;
 }
 
-.header, .body, .footer {
+.header,
+.body,
+.footer {
   flex: 1 0 100%;
 }
 

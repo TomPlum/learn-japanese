@@ -1,31 +1,30 @@
-import { Component } from "react";
-import styles from "../../styles/sass/components/ui/RevealableText.module.scss";
+import { Component } from "react"
+import styles from "../../styles/sass/components/ui/RevealableText.module.scss"
 
 export interface RevealableTextProps {
-    value: string;
-    disabled: boolean;
-    className?: string;
-    onReveal?: () => void;
+    value: string
+    disabled: boolean
+    className?: string
+    onReveal?: () => void
 }
 
 interface RevealableTextState {
-    revealed: boolean;
+    revealed: boolean
 }
 
 class RevealableText extends Component<RevealableTextProps, RevealableTextState> {
-
     constructor(props: Readonly<RevealableTextProps> | RevealableTextProps) {
-        super(props);
+        super(props)
         this.state = {
             revealed: false
         }
     }
 
     render() {
-        const { value, disabled, className } = this.props;
-        const { revealed } = this.state;
+        const { value, disabled, className } = this.props
+        const { revealed } = this.state
 
-        const defaultClass = disabled ? styles.plain : revealed ? styles.unblur : styles.blur;
+        const defaultClass = disabled ? styles.plain : revealed ? styles.unblur : styles.blur
 
         return (
             <div className={styles.wrapper}>
@@ -35,17 +34,15 @@ class RevealableText extends Component<RevealableTextProps, RevealableTextState>
                     </p>
                 )}
 
-                <p className={[defaultClass, className].join(" ")}>
-                    {value}
-                </p>
+                <p className={[defaultClass, className].join(" ")}>{value}</p>
             </div>
-        );
+        )
     }
 
     private handleClick = () => {
-        this.setState(({ revealed: true }));
-        this.props.onReveal?.();
+        this.setState({ revealed: true })
+        this.props.onReveal?.()
     }
 }
 
-export default RevealableText;
+export default RevealableText

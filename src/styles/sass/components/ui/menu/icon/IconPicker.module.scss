@@ -34,7 +34,7 @@
 
 .selected {
   transition: all ease-in-out 0.2s;
-  color: #FFF;
+  color: #fff;
 }
 
 .selected:hover {
@@ -50,7 +50,8 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px;
 }
 
-.popover > div::after, .popover > div::before {
+.popover > div::after,
+.popover > div::before {
   border-top-color: $dark-1 !important;
 }
 
@@ -62,7 +63,8 @@
   font-family: "Ciutadella Rounded Medium", sans-serif;
 }
 
-.search:focus, .search:active {
+.search:focus,
+.search:active {
   background-color: $dark-1;
   border-color: $light-3;
   color: $light-1;

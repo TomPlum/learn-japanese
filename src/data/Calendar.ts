@@ -1,4 +1,4 @@
-import { DayData } from "./DataTypes";
+import { DayData } from "./DataTypes"
 
 export function days(): DayData[] {
     return [
@@ -51,7 +51,7 @@ export function days(): DayData[] {
             kana: "にちようび",
             meaning: "Sun day"
         }
-    ];
+    ]
 }
 
 export function months(): DayData[] {
@@ -140,7 +140,7 @@ export function months(): DayData[] {
             kana: "じゅうにがつ",
             meaning: "Twelve Month"
         }
-    ];
+    ]
 }
 
 export function nouns(): DayData[] {
@@ -168,8 +168,8 @@ export function nouns(): DayData[] {
             kanji: "一昨日",
             romaji: "ototoi",
             kana: "おととい"
-        },
-    ];
+        }
+    ]
 }
 
 export function phrases(): DayData[] {
@@ -180,5 +180,5 @@ export function phrases(): DayData[] {
             romaji: "Kyou wa nan youbi desu ka",
             meaning: "What day is it today?"
         }
-    ];
+    ]
 }

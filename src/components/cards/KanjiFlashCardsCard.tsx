@@ -1,59 +1,61 @@
-import { Col, Row } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import SpacedRepetitionService, { FlashCardsResponse } from "../../service/SpacedRepetitionService";
-import { FlashCard } from "../../domain/learn/FlashCard";
-import styles from "../../styles/sass/components/cards/KanjiFlashCardsCard.module.scss";
-import { faGraduationCap, faSyncAlt } from "@fortawesome/free-solid-svg-icons";
-import { useHistory } from "react-router-dom";
-import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard";
-import DashboardCardHeader from "../layout/card/DashboardCardHeader";
-import DashboardCardLink from "../layout/card/DashboardCardLink";
-import { useTranslation } from "react-i18next";
+import { Col, Row } from "react-bootstrap"
+import { useEffect, useState } from "react"
+import SpacedRepetitionService, { FlashCardsResponse } from "../../service/SpacedRepetitionService"
+import { FlashCard } from "../../domain/learn/FlashCard"
+import styles from "../../styles/sass/components/cards/KanjiFlashCardsCard.module.scss"
+import { faGraduationCap, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
+import { useHistory } from "react-router-dom"
+import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard"
+import DashboardCardHeader from "../layout/card/DashboardCardHeader"
+import DashboardCardLink from "../layout/card/DashboardCardLink"
+import { useTranslation } from "react-i18next"
 
 const KanjiFlashCardsCard = () => {
+    const service = new SpacedRepetitionService()
 
-    const service = new SpacedRepetitionService();
+    const history = useHistory()
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.flash-cards" })
+    const actions = useTranslation("translation", { keyPrefix: "action" }).t
 
-    const history = useHistory();
-    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.flash-cards" });
-    const actions = useTranslation("translation", { keyPrefix: "action" }).t;
-
-    const [cards, setCards] = useState<FlashCard[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [updating, setUpdating] = useState(false);
-    const [error, setError] = useState<string | undefined>(undefined);
+    const [cards, setCards] = useState<FlashCard[]>([])
+    const [loading, setLoading] = useState(false)
+    const [updating, setUpdating] = useState(false)
+    const [error, setError] = useState<string | undefined>(undefined)
 
     useEffect(() => {
-        setLoading(true);
-        setError(undefined);
-        loadKanjiFlashCards().finally(() => setLoading(false));
-    }, []);
+        setLoading(true)
+        setError(undefined)
+        loadKanjiFlashCards().finally(() => setLoading(false))
+    }, [])
 
     const loadKanjiFlashCards = () => {
-        return service.getKanjiFlashCards().then((response: FlashCardsResponse) => {
-            if (response.cards) {
-                setCards(response.cards);
-            } else {
-                setError(response.error ?? "Error loading cards.");
-            }
-        }).catch(response => {
-            setError(response.error ?? "Error loading cards.");
-        });
+        return service
+            .getKanjiFlashCards()
+            .then((response: FlashCardsResponse) => {
+                if (response.cards) {
+                    setCards(response.cards)
+                } else {
+                    setError(response.error ?? "Error loading cards.")
+                }
+            })
+            .catch((response) => {
+                setError(response.error ?? "Error loading cards.")
+            })
     }
 
     const onRefreshCards = async () => {
-        setUpdating(true);
-        loadKanjiFlashCards().finally(() => setUpdating(false));
+        setUpdating(true)
+        loadKanjiFlashCards().finally(() => setUpdating(false))
     }
 
     const onReview = () => {
-        history.push("/learn/kanji");
+        history.push("/learn/kanji")
     }
 
     const props: DashboardCardProps = {
         loading: !ready,
         id: "flash-cards-card",
-        className: styles.card,
+        className: styles.card
     }
 
     return (
@@ -90,13 +92,11 @@ const KanjiFlashCardsCard = () => {
                             disabled={cards.length === 0}
                         />
                     </Col>
-                    <Col>
-
-                    </Col>
+                    <Col></Col>
                 </Row>
             </DashboardCard.Body>
         </DashboardCard>
-    );
+    )
 }
 
-export default KanjiFlashCardsCard;
+export default KanjiFlashCardsCard

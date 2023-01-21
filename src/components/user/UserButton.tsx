@@ -1,36 +1,36 @@
-import React from "react";
-import { faChartBar, faDoorOpen, faTrophy, faUser, faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import { useUserDispatch, useUserSelector } from "../../hooks";
-import { clearUser } from "../../slices/UserSlice";
-import menuStyles from "../../styles/sass/components/layout/NavigationBar.module.scss";
-import styles from "../../styles/sass/components/user/UserButton.module.scss";
-import NavigationButton from "../ui/NavigationButton";
-import { useTranslation } from "react-i18next";
+import React from "react"
+import { faChartBar, faDoorOpen, faTrophy, faUser, faUserCircle } from "@fortawesome/free-solid-svg-icons"
+import { useUserDispatch, useUserSelector } from "../../hooks"
+import { clearUser } from "../../slices/UserSlice"
+import menuStyles from "../../styles/sass/components/layout/NavigationBar.module.scss"
+import styles from "../../styles/sass/components/user/UserButton.module.scss"
+import NavigationButton from "../ui/NavigationButton"
+import { useTranslation } from "react-i18next"
 
 export interface UserButtonProps {
-    onClick: () => void;
-    disabled: boolean;
+    onClick: () => void
+    disabled: boolean
 }
 
 const UserButton = (props: UserButtonProps) => {
-    const userDispatch = useUserDispatch();
-    const user = useUserSelector(state => state.user.user);
-    const { t } = useTranslation("translation", { keyPrefix: "navigation.button.user" });
+    const userDispatch = useUserDispatch()
+    const user = useUserSelector((state) => state.user.user)
+    const { t } = useTranslation("translation", { keyPrefix: "navigation.button.user" })
 
     const getButtonText = (): string => {
         if (user) {
             if (user.nickname) {
-                return user.nickname;
+                return user.nickname
             } else {
-                return user.username;
+                return user.username
             }
         } else {
-            return t("login");
+            return t("login")
         }
     }
 
     const handleLogout = () => {
-        userDispatch(clearUser());
+        userDispatch(clearUser())
     }
 
     return (
@@ -62,7 +62,7 @@ const UserButton = (props: UserButtonProps) => {
                 {t("logout")}
             </NavigationButton.Item>
         </NavigationButton>
-    );
+    )
 }
 
-export default UserButton;
+export default UserButton

@@ -5,8 +5,35 @@
   max-width: 700px;
 }
 
+.prepend {
+  background-color: $dark-1;
+  border-top: 1px solid $light-3;
+  border-left: 1px solid $light-3;
+  border-bottom: 1px solid $light-3;
+  border-right: none;
+}
+
+.input,
+.input:active,
+.input:focus {
+  background-color: $dark-1;
+  border: 1px solid $light-3;
+  box-shadow: none;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  color: $light-1;
+}
+
+.input:focus {
+  border-color: $light-3;
+}
+
 .input::placeholder {
   text-align: left;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+}
+
+.icon {
+  color: $light-1;
 }
 
 .clear {

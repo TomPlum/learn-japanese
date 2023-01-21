@@ -1,28 +1,27 @@
-import { Accordion, Col, Container, Row } from "react-bootstrap";
-import styles from "../../styles/sass/components/learn/GrammarInfo.module.scss";
-import PageNumber from "../../domain/learn/PageNumber";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp, faHashtag } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { Accordion, Col, Container, Row } from "react-bootstrap"
+import styles from "../../styles/sass/components/learn/GrammarInfo.module.scss"
+import PageNumber from "../../domain/learn/PageNumber"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faChevronDown, faChevronUp, faHashtag } from "@fortawesome/free-solid-svg-icons"
+import { useState } from "react"
 
 export interface GrammarInfoProps {
-    id?: string;
-    title: string;
-    body: Element | JSX.Element | string;
-    chapter: number;
-    section: number;
-    page?: PageNumber;
-    preExpand?: boolean;
+    id?: string
+    title: string
+    body: Element | JSX.Element | string
+    chapter: number
+    section: number
+    page?: PageNumber
+    preExpand?: boolean
 }
 
 const GrammarInfo = (props: GrammarInfoProps) => {
+    const { id, title, body, chapter, page, section, preExpand } = props
 
-    const { id, title, body, chapter, page, section, preExpand } = props;
+    const [expanded, setExpanded] = useState(preExpand)
 
-    const [expanded, setExpanded] = useState(preExpand);
-
-    const iconClassName = [(chapter <= 12 ? styles.genki1 : styles.genki2), styles.icon].join(" ");
-    const headerStyle = !expanded ? { borderRadius: 10 } : { borderRadius: "10px 10px 0 0" };
+    const iconClassName = [chapter <= 12 ? styles.genki1 : styles.genki2, styles.icon].join(" ")
+    const headerStyle = !expanded ? { borderRadius: 10 } : { borderRadius: "10px 10px 0 0" }
 
     return (
         <Accordion className={styles.wrapper} data-testid={id}>
@@ -40,13 +39,12 @@ const GrammarInfo = (props: GrammarInfoProps) => {
                         </div>
                     </Col>
 
-                    <Col className={styles.title}>
-                        {title}
-                    </Col>
+                    <Col className={styles.title}>{title}</Col>
 
                     <Col className={styles.expanderWrapper}>
                         <FontAwesomeIcon
-                            fixedWidth className={styles.expander}
+                            fixedWidth
+                            className={styles.expander}
                             icon={expanded ? faChevronUp : faChevronDown}
                         />
                     </Col>
@@ -56,9 +54,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
                     <Container className={styles.body}>
                         <Row>
                             <Col>
-                                <span>
-                                    {body}
-                                </span>
+                                <span>{body}</span>
                             </Col>
                         </Row>
 
@@ -66,7 +62,8 @@ const GrammarInfo = (props: GrammarInfoProps) => {
                             <Col className={styles.page}>
                                 <FontAwesomeIcon icon={faHashtag} fixedWidth />
                                 <em>
-                                    {page?.toString()} from Genki {(chapter <= 12 ? "I" : "II")} (3rd Edition) - Chapter {chapter}, Section {section}.
+                                    {page?.toString()} from Genki {chapter <= 12 ? "I" : "II"} (3rd Edition) - Chapter{" "}
+                                    {chapter}, Section {section}.
                                 </em>
                             </Col>
                         </Row>
@@ -74,7 +71,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
                 </Accordion.Collapse>
             </Container>
         </Accordion>
-    );
+    )
 }
 
-export default GrammarInfo;
+export default GrammarInfo

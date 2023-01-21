@@ -1,35 +1,36 @@
-import React, { useState } from "react";
-import { Dropdown, ListGroup } from "react-bootstrap";
-import Topic from "../../../domain/Topic";
-import TopicListOption from "../select/TopicListOption";
-import { faGamepad, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TopicDropdownOption from "../select/TopicDropdownOption";
-import { AppMode } from "../../../domain/AppMode";
-import styles from "../../../styles/sass/components/ui/menu/TopicSelectionMenu.module.scss";
-import { useModeSelector } from "../../../hooks";
+import React, { useState } from "react"
+import { Dropdown, ListGroup } from "react-bootstrap"
+import Topic from "../../../domain/Topic"
+import TopicListOption from "../select/TopicListOption"
+import { faGamepad, faGraduationCap } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import TopicDropdownOption from "../select/TopicDropdownOption"
+import { AppMode } from "../../../domain/AppMode"
+import styles from "../../../styles/sass/components/ui/menu/TopicSelectionMenu.module.scss"
+import { useModeSelector } from "../../../hooks"
 
 interface TopicSelectionMenuProps {
-    onSelect: (type: Topic) => void;
-    className?: string;
+    onSelect: (type: Topic) => void
+    className?: string
 }
 
 const TopicSelectionMenu = (props: TopicSelectionMenuProps) => {
-
-    const [selected, setSelected] = useState(Topic.KANA);
-    const appMode = useModeSelector(state => state.mode.mode);
+    const [selected, setSelected] = useState(Topic.KANA)
+    const appMode = useModeSelector((state) => state.mode.mode)
 
     const getMenuHeading = () => {
         switch (appMode) {
-            case AppMode.PLAY: return "Select Game Mode";
-            case AppMode.LEARN: return "Select Topic"
+            case AppMode.PLAY:
+                return "Select Game Mode"
+            case AppMode.LEARN:
+                return "Select Topic"
         }
     }
 
     const handleChange = (type?: Topic) => {
         if (type) {
-            setSelected(type);
-            props.onSelect(type);
+            setSelected(type)
+            props.onSelect(type)
         }
     }
 
@@ -41,9 +42,9 @@ const TopicSelectionMenu = (props: TopicSelectionMenuProps) => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className={styles.dropdownMenu}>
-                    {Topic.ALL.map((topic: Topic) =>
+                    {Topic.ALL.map((topic: Topic) => (
                         <TopicDropdownOption type={topic} onClick={handleChange} selected={selected} key={topic.name} />
-                    )}
+                    ))}
                 </Dropdown.Menu>
             </Dropdown>
 
@@ -58,14 +59,14 @@ const TopicSelectionMenu = (props: TopicSelectionMenuProps) => {
             </ListGroup>
 
             <ListGroup className={"d-lg-block d-none " + styles.menu} data-testid="list-group">
-                {Topic.ALL.map((topic: Topic) =>
+                {Topic.ALL.map((topic: Topic) => (
                     <TopicListOption type={topic} onClick={handleChange} selected={selected} key={topic.name}>
                         <FontAwesomeIcon fixedWidth icon={topic.icon} className={styles.icon} />
                     </TopicListOption>
-                )}
+                ))}
             </ListGroup>
         </div>
-    );
+    )
 }
 
-export default TopicSelectionMenu;
+export default TopicSelectionMenu

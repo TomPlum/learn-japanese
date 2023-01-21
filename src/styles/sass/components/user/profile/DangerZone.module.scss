@@ -10,17 +10,18 @@
   color: $dark-1;
 }
 
-.unlocked, .locked {
+.unlocked,
+.locked {
   transition: all ease-in-out 0.3s;
 }
 
 .locked {
-  content: '';
+  content: "";
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
   filter: blur(2px);
 }
 

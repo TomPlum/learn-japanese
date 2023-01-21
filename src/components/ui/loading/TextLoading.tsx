@@ -1,14 +1,13 @@
-import styles from "../../../styles/sass/components/ui/loading/TextLoading.module.scss";
-import { PropsWithChildren } from "react";
-import { Fade } from "react-bootstrap";
+import styles from "../../../styles/sass/components/ui/loading/TextLoading.module.scss"
+import { PropsWithChildren } from "react"
+import { Fade } from "react-bootstrap"
 
 export interface TextLoadingProps {
-    active: boolean;
+    active: boolean
 }
 
 const TextLoading = (props: PropsWithChildren<TextLoadingProps>) => {
-
-    const { children, active } = props;
+    const { children, active } = props
 
     if (active) {
         return (
@@ -23,10 +22,10 @@ const TextLoading = (props: PropsWithChildren<TextLoadingProps>) => {
                     </div>
                 </div>
             </Fade>
-        );
+        )
     }
 
-    return <>{children}</>;
+    return <>{children}</>
 }
 
-export default TextLoading;
+export default TextLoading

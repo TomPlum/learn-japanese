@@ -1,13 +1,13 @@
-import { GrammarInfoProps } from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import { Col, Container, Row } from "react-bootstrap";
-import GenkiRelativePsychologyCircle from "../../ui/display/GenkiRelativePsychologyCircle";
-import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
-import { FirstMatch, MultipleFirstMatch } from "../../ui/Underline";
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
-import GenkiComparisonDisplay from "../../ui/display/GenkiComparisonDisplay";
-import GenkiUnderlineDisplay from "../../ui/display/GenkiUnderlineDisplay";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import { Col, Container, Row } from "react-bootstrap"
+import GenkiRelativePsychologyCircle from "../../ui/genki/GenkiRelativePsychologyCircle"
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
+import { FirstMatch, MultipleFirstMatch } from "../../ui/Underline"
+import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
+import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay"
+import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay"
 
 const GenkiChapter16 = () => {
     const c16p1: GrammarInfoProps = {
@@ -17,8 +17,9 @@ const GenkiChapter16 = () => {
         title: "てくれ / てあげる/ てまらう",
         body: (
             <div>
-                <p>The verbs くれる、あげる、and もらう describe transactions of things.
-                    When these verbs follow the te-form fo a verb, they describe the giving and receiving of services.
+                <p>
+                    The verbs くれる、あげる、and もらう describe transactions of things. When these verbs follow the
+                    te-form fo a verb, they describe the giving and receiving of services.
                 </p>
 
                 <Container style={{ padding: 0 }}>
@@ -27,7 +28,11 @@ const GenkiChapter16 = () => {
                             <GenkiRelativePsychologyCircle
                                 verb="te-form + あげる"
                                 relationship="for somebody other than me"
-                                situations={["I do something for you.", "You do something for others.", "I do something for others."]}
+                                situations={[
+                                    "I do something for you.",
+                                    "You do something for others.",
+                                    "I do something for others."
+                                ]}
                             />
                         </Col>
 
@@ -35,7 +40,11 @@ const GenkiChapter16 = () => {
                             <GenkiRelativePsychologyCircle
                                 verb="te-form + くれる"
                                 relationship="for me or somebody close to me"
-                                situations={["Somebody does something for me.", "You do something for me", "Somebody does something for you."]}
+                                situations={[
+                                    "Somebody does something for me.",
+                                    "You do something for me",
+                                    "Somebody does something for you."
+                                ]}
                             />
                         </Col>
 
@@ -49,9 +58,10 @@ const GenkiChapter16 = () => {
                     </Row>
                 </Container>
 
-                <p>We use the te-form + あげる when we do something for the sake of others, or somebody does something for somebody else.
-                    The addition of the helping verb あげる does not change the basic meaning of the sentences,
-                    but puts focus on the fact that the actions were performed “on demand” or “as a favor”
+                <p>
+                    We use the te-form + あげる when we do something for the sake of others, or somebody does something
+                    for somebody else. The addition of the helping verb あげる does not change the basic meaning of the
+                    sentences, but puts focus on the fact that the actions were performed “on demand” or “as a favor”
                 </p>
                 <p>For example:</p>
                 <GenkiExampleDisplay
@@ -73,13 +83,18 @@ const GenkiChapter16 = () => {
 
                 <hr className={styles.hr} />
 
-                <p>We use the te-form + もらう to say that we get, persuade or arrange for somebody to do something for us.
-                In other words, we "receive" somebody's favour. The person performing the action for us accompanied by the particle に.
+                <p>
+                    We use the te-form + もらう to say that we get, persuade or arrange for somebody to do something for
+                    us. In other words, we "receive" somebody's favour. The person performing the action for us
+                    accompanied by the particle に.
                 </p>
                 <p>For example:</p>
                 <GenkiExampleDisplay
                     book={2}
-                    jp={{ text: "私は友だちに宿題を手伝ってもらいました。", underline: new MultipleFirstMatch(["に", "もらいました"]) }}
+                    jp={{
+                        text: "私は友だちに宿題を手伝ってもらいました。",
+                        underline: new MultipleFirstMatch("に", "もらいました")
+                    }}
                     en={{ text: "I got a friend of mine to help me with my homework." }}
                 />
             </div>
@@ -93,8 +108,9 @@ const GenkiChapter16 = () => {
         title: "~ていただけませんか",
         body: (
             <div>
-                <p>There are three versions of this te-form helper verb that can be used to make a request. They
-                differ in the degrees of politeness shown to the person you are asking.
+                <p>
+                    There are three versions of this te-form helper verb that can be used to make a request. They differ
+                    in the degrees of politeness shown to the person you are asking.
                 </p>
 
                 <GenkiStructureDisplay book={2} width={300} noPadding>
@@ -110,7 +126,8 @@ const GenkiChapter16 = () => {
 
                 <hr className={styles.hr} />
 
-                <p>We use the <em>te</em>-form of a verb + いただけませんか to make a polite request. This is more
+                <p>
+                    We use the <em>te</em>-form of a verb + いただけませんか to make a polite request. This is more
                     appropriate that ください when you request a favour from a non-peer such as your professor or your
                     boss or from a stranger.
                 </p>
@@ -161,13 +178,18 @@ const GenkiChapter16 = () => {
         title: "~といい",
         body: (
             <div>
-                <p>You can use the present tense short form + といいですね to say that you hope something nice happens.</p>
+                <p>
+                    You can use the present tense short form + といいですね to say that you hope something nice happens.
+                </p>
 
                 <GenkiStructureDisplay book={2} width={600} noPadding>
                     <GenkiComparisonDisplay
                         pre="(short, present) と"
                         firstComparison={{ text: "いいですね / いいね", description: "I hope... (for you / them)" }}
-                        secondComparison={{ text: "いいんですが / いいんだけど", description: "I hope... (for myself)" }}
+                        secondComparison={{
+                            text: "いいんですが / いいんだけど",
+                            description: "I hope... (for myself)"
+                        }}
                         ignoreSecondBrace
                         book={2}
                     />
@@ -180,8 +202,9 @@ const GenkiChapter16 = () => {
                     en={{ text: "I hope that you find a good part time job." }}
                 />
 
-                <p>To say what you hope for your own good, you can use といいんですが.
-                   This shows the speaker’s attitude is more tentative and makes the sentence sound more modest.
+                <p>
+                    To say what you hope for your own good, you can use といいんですが. This shows the speaker’s
+                    attitude is more tentative and makes the sentence sound more modest.
                 </p>
 
                 <p>For example:</p>
@@ -217,7 +240,10 @@ const GenkiChapter16 = () => {
 
                 <p>Sentence A always ends in short form, either in the past or present tense.</p>
 
-                <p>If (at the time the main event B takes place) A is current or is still in “in the future”, use the present tense in A.</p>
+                <p>
+                    If (at the time the main event B takes place) A is current or is still in “in the future”, use the
+                    present tense in A.
+                </p>
 
                 <p>If (at the time of main event B) A is already “in the past” use the past tense in A.</p>
             </div>
@@ -231,7 +257,10 @@ const GenkiChapter16 = () => {
         title: "~てすみませんでした",
         body: (
             <div>
-                <p>You use the <em>te</em>-form of a verb to describe the things you have done that you want to apologize for.</p>
+                <p>
+                    You use the <em>te</em>-form of a verb to describe the things you have done that you want to
+                    apologize for.
+                </p>
 
                 <GenkiStructureDisplay book={2} width="auto" noPadding>
                     <GenkiComparisonDisplay
@@ -264,7 +293,7 @@ const GenkiChapter16 = () => {
         )
     }
 
-    return { c16p1, c16p2, c16p3, c16p4, c16p5 };
+    return { c16p1, c16p2, c16p3, c16p4, c16p5 }
 }
 
-export default GenkiChapter16;
+export default GenkiChapter16

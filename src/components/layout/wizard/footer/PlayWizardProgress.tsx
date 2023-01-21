@@ -1,22 +1,32 @@
-import { faCheckCircle, faChevronCircleRight, faDatabase, faHeartbeat, faLightbulb, faProjectDiagram, faQuestionCircle, faStopwatch, faSwatchbook, faTools } from "@fortawesome/free-solid-svg-icons";
-import WizardProgressStep from "./WizardProgressStep";
-import styles from "../../../../styles/sass/components/layout/wizard/footer/PlayWizardProgress.module.scss";
-import { AppMode } from "../../../../domain/AppMode";
+import {
+    faCheckCircle,
+    faChevronCircleRight,
+    faDatabase,
+    faHeartbeat,
+    faLightbulb,
+    faProjectDiagram,
+    faQuestionCircle,
+    faStopwatch,
+    faSwatchbook,
+    faTools
+} from "@fortawesome/free-solid-svg-icons"
+import WizardProgressStep from "./WizardProgressStep"
+import styles from "../../../../styles/sass/components/layout/wizard/footer/PlayWizardProgress.module.scss"
+import { AppMode } from "../../../../domain/AppMode"
 
 export interface PlayWizardProgressProps {
-    stage: number;
-    mode: AppMode;
-    valid: boolean;
-    custom: boolean;
-    onSelectStage: (stage: number) => void;
+    stage: number
+    mode: AppMode
+    valid: boolean
+    custom: boolean
+    onSelectStage: (stage: number) => void
 }
 
 const PlayWizardProgress = (props: PlayWizardProgressProps) => {
-
-    const { stage, mode, custom, valid, onSelectStage } = props;
+    const { stage, mode, custom, valid, onSelectStage } = props
 
     const handleSelectStage = (stage: number) => {
-        onSelectStage(stage);
+        onSelectStage(stage)
     }
 
     return (
@@ -122,7 +132,7 @@ const PlayWizardProgress = (props: PlayWizardProgressProps) => {
                 </>
             )}
         </div>
-    );
+    )
 }
 
-export default PlayWizardProgress;
+export default PlayWizardProgress

@@ -1,6 +1,6 @@
-import { AdjectiveData, AdverbData, ExpressionData, VerbData } from "./DataTypes";
-import { AdjectiveType } from "../domain/sentence/AdjectiveType";
-import { VerbType } from "../domain/sentence/VerbType";
+import { AdjectiveData, AdverbData, ExpressionData, VerbData } from "./DataTypes"
+import { AdjectiveType } from "../domain/sentence/AdjectiveType"
+import { VerbType } from "../domain/sentence/VerbType"
 
 export function adjectives(): AdjectiveData[] {
     return [
@@ -313,7 +313,7 @@ export function adjectives(): AdjectiveData[] {
             type: AdjectiveType.NA,
             genkiLesson: 9
         }
-    ];
+    ]
 }
 
 export function verbs(): VerbData[] {
@@ -744,8 +744,8 @@ export function verbs(): VerbData[] {
             kanjiForm: "散歩する",
             type: VerbType.IRREGULAR,
             genkiLesson: 9
-        },
-    ];
+        }
+    ]
 }
 
 export function adverbs(): AdverbData[] {
@@ -789,27 +789,27 @@ export function adverbs(): AdverbData[] {
         },
         {
             meanings: ["so", "therefore"],
-            kana:　"だから",
+            kana: "だから",
             genkiLesson: 4
         },
         {
             meanings: ["many", "a lot"],
-            kana:　"たくさん",
+            kana: "たくさん",
             genkiLesson: 4
         },
         {
             meanings: ["and", "together (with a person)"],
-            kana:　"~と",
+            kana: "~と",
             genkiLesson: 4
         },
         {
             meanings: ["why"],
-            kana:　"どうして",
+            kana: "どうして",
             genkiLesson: 4
         },
         {
             meanings: ["alone"],
-            kana:　"ひとりで",
+            kana: "ひとりで",
             kanjiForm: "一人で",
             genkiLesson: 4
         },
@@ -874,7 +874,7 @@ export function adverbs(): AdverbData[] {
             kana: "もう",
             genkiLesson: 9
         }
-    ];
+    ]
 }
 
 export function expressions(): ExpressionData[] {
@@ -1004,5 +1004,5 @@ export function expressions(): ExpressionData[] {
             kanjiForm: "皆",
             genkiLesson: 9
         }
-    ];
+    ]
 }

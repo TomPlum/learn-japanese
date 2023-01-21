@@ -1,0 +1,40 @@
+.container {
+  position: relative;
+}
+
+.infoWrapper {
+  position: relative;
+}
+
+.charWrapper {
+  position: relative;
+  display: inline;
+}
+
+@mixin furigana {
+  position: absolute;
+  left: 50%;
+  width: 100%;
+  text-align: center;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  color: #ededed;
+}
+
+.furiganaBottom {
+  @include furigana;
+  bottom: -12px;
+}
+
+.furiganaTop {
+  @include furigana;
+  top: -14px;
+}
+
+.sizeBig {
+  font-size: 0.6em;
+}
+
+.sizeSmall {
+  font-size: 0.5em;
+}

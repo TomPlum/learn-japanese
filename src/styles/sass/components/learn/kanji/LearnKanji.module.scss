@@ -1,7 +1,9 @@
 @import "src/styles/sass/mixins";
 @import "src/styles/sass/colours";
 
-.cardWrapper, .buttonWrapper, .header {
+.cardWrapper,
+.buttonWrapper,
+.header {
   padding: 0 10px;
   display: flex;
   justify-content: center;
@@ -11,7 +13,7 @@
 
 .remaining {
   display: block;
-  color: #FFF;
+  color: #fff;
   @include noSelect;
 }
 

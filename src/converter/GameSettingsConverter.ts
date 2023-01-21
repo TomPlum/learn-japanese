@@ -1,15 +1,14 @@
-import GameSettings, { GameSettingsBuilder } from "../domain/session/settings/game/GameSettings";
-import { GameSettingState } from "../slices/GameSettingsSlice";
-import { LifeSettingsBuilder } from "../domain/session/settings/game/LifeSettings";
-import { HintSettingsBuilder } from "../domain/session/settings/game/HintSettings";
-import { TimeSettingsBuilder } from "../domain/session/settings/game/TimeSettings";
-import { QuestionSettingsBuilder } from "../domain/session/settings/game/QuestionSettings";
-import LearnableField from "../domain/learn/LearnableField";
-import QuestionType from "../domain/game/QuestionType";
-import { GameConfigRequest, GameConfigResponse } from "../repository/PresetRepository";
+import GameSettings, { GameSettingsBuilder } from "../domain/session/settings/game/GameSettings"
+import { GameSettingState } from "../slices/GameSettingsSlice"
+import { LifeSettingsBuilder } from "../domain/session/settings/game/LifeSettings"
+import { HintSettingsBuilder } from "../domain/session/settings/game/HintSettings"
+import { TimeSettingsBuilder } from "../domain/session/settings/game/TimeSettings"
+import { QuestionSettingsBuilder } from "../domain/session/settings/game/QuestionSettings"
+import LearnableField from "../domain/learn/LearnableField"
+import QuestionType from "../domain/game/QuestionType"
+import { GameConfigRequest, GameConfigResponse } from "../repository/PresetRepository"
 
 class GameSettingsConverter {
-
     public convert(settings: GameConfigResponse): GameSettings {
         return new GameSettingsBuilder()
             .withLifeSettings(
@@ -45,7 +44,7 @@ class GameSettingsConverter {
                     .withAnswerFilterChainID(settings.question.answerFilter ?? -1)
                     .build()
             )
-            .build();
+            .build()
     }
 
     public convertRequest(settings: GameSettings): GameConfigRequest {
@@ -107,10 +106,7 @@ class GameSettingsConverter {
     public deserialise(state: GameSettingState): GameSettings {
         return new GameSettingsBuilder()
             .withLifeSettings(
-                new LifeSettingsBuilder()
-                    .withQuantity(state.lives.quantity)
-                    .isEnabled(state.lives.enabled)
-                    .build()
+                new LifeSettingsBuilder().withQuantity(state.lives.quantity).isEnabled(state.lives.enabled).build()
             )
             .withHintSettings(
                 new HintSettingsBuilder()
@@ -139,8 +135,8 @@ class GameSettingsConverter {
                     .withAnswerFilterChainID(state.question.answerFilter)
                     .build()
             )
-            .build();
+            .build()
     }
 }
 
-export default GameSettingsConverter;
+export default GameSettingsConverter

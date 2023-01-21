@@ -60,7 +60,7 @@
   color: rgba(255, 255, 255, 0.75) !important;
 }
 
-.itemWrapper:nth-child(n+1) {
+.itemWrapper:nth-child(n + 1) {
   border-bottom: 2px solid $dark-1;
 }
 
@@ -73,7 +73,7 @@
 }
 
 .itemIcon {
-  color: #FFF;
+  color: #fff;
   margin-left: 10px;
   margin-right: -4px;
 }
@@ -84,8 +84,9 @@
   padding: 0 !important;
 }
 
-.search, .search:disabled {
-  color: #FFF;
+.search,
+.search:disabled {
+  color: #fff;
   border-radius: 12px 12px 0 0 !important;
   background-color: $dark-2;
   border-top: none;
@@ -100,7 +101,7 @@
 }
 
 .search:focus {
-  color: #FFF;
+  color: #fff;
   background-color: $dark-2;
   border-color: transparent;
   box-shadow: none;
@@ -108,14 +109,16 @@
 }
 
 .active {
-  color: #FFF;
+  color: #fff;
 }
 
-.icon, .text {
+.icon,
+.text {
   transition: color ease-in-out 0.2s;
 }
 
-.left, .right {
+.left,
+.right {
   margin-top: 6px;
 }
 

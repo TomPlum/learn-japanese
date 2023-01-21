@@ -14,11 +14,11 @@
 }
 
 .title {
-  color: #FFF;
-  font-family: 'Ciutadella Rounded Medium', sans-serif;
+  color: #fff;
+  font-family: "Ciutadella Rounded Medium", sans-serif;
   padding-bottom: 10px;
   margin-bottom: 5px;
-  border-bottom: 1px solid #007bff;;
+  border-bottom: 1px solid #007bff;
 }
 
 .titleText {
@@ -60,7 +60,7 @@
 
 .questionIcon {
   @include icon;
-  color: #FFF;
+  color: #fff;
 }
 
 .livesIcon {

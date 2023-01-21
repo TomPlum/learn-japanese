@@ -1,22 +1,22 @@
-import { Component } from "react";
+import { Component } from "react"
 
 export interface DynamicCharacterProps {
-    value: string;
-    classes?: string[] | string;
-    style?: CharacterStyleProps;
-    isDiagraphLeft?: boolean;
-    isDiagraphRight?: boolean;
+    value: string
+    classes?: string[] | string
+    style?: CharacterStyleProps
+    isDiagraphLeft?: boolean
+    isDiagraphRight?: boolean
 }
 
 export interface CharacterStyleProps {
-    size?: "xs" | "sm" | "md" | "lg" | "xl";
-    color?: string;
-    className?: string;
+    size?: "xs" | "sm" | "md" | "lg" | "xl"
+    color?: string
+    className?: string
 }
 
 export class DynamicCharacter extends Component<DynamicCharacterProps> {
     render() {
-        const { value, style, isDiagraphLeft, isDiagraphRight } = this.props;
+        const { value, style, isDiagraphLeft, isDiagraphRight } = this.props
 
         return (
             <p
@@ -30,47 +30,47 @@ export class DynamicCharacter extends Component<DynamicCharacterProps> {
             >
                 {value}
             </p>
-        );
+        )
     }
 
     private getClasses = (): string | undefined => {
-        const { classes } = this.props;
-        return typeof classes === "string" ? classes : classes?.join(" ") ?? undefined;
+        const { classes } = this.props
+        return typeof classes === "string" ? classes : classes?.join(" ") ?? undefined
     }
 
     private getSize = (): string | undefined => {
         switch (this.props.style?.size) {
             case "xs":
-                return "2.5em";
+                return "2.5em"
             case "sm":
-                return "3em";
+                return "3em"
             case "md":
-                return "5em";
+                return "5em"
             case "lg":
-                return "8em";
+                return "8em"
             case "xl":
-                return "10em";
+                return "10em"
             default:
-                return undefined;
+                return undefined
         }
     }
 
     private getMargin = (): number => {
         switch (this.props.style?.size) {
             case "xs":
-                return 3;
+                return 3
             case "sm":
-                return 4;
+                return 4
             case "md":
-                return 5;
+                return 5
             case "lg":
-                return 8;
+                return 8
             case "xl":
-                return 10;
+                return 10
             default:
-                return 10;
+                return 10
         }
     }
 }
 
-export default DynamicCharacter;
+export default DynamicCharacter

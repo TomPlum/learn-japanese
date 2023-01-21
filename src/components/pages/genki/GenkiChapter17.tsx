@@ -1,12 +1,12 @@
-import { GrammarInfoProps } from "../../learn/GrammarInfo";
-import PageNumber from "../../../domain/learn/PageNumber";
-import GenkiStructureDisplay from "../../ui/display/GenkiStructureDisplay";
-import GenkiExampleDisplay from "../../ui/display/GenkiExampleDisplay";
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss";
-import GenkiTable from "../../ui/table/GenkiTable";
-import { Col, Container, Row } from "react-bootstrap";
-import { FirstMatch, Occurrences } from "../../ui/Underline";
-import QuoteDisplay from "../../ui/display/QuoteDisplay";
+import { GrammarInfoProps } from "../../learn/GrammarInfo"
+import PageNumber from "../../../domain/learn/PageNumber"
+import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
+import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
+import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import GenkiTable from "../../ui/table/GenkiTable"
+import { Col, Container, Row } from "react-bootstrap"
+import { FirstMatch, Occurrences } from "../../ui/Underline"
+import QuoteDisplay from "../../ui/display/QuoteDisplay"
 
 const GenkiChapter17 = () => {
     const c17p1: GrammarInfoProps = {
@@ -17,7 +17,10 @@ const GenkiChapter17 = () => {
         body: (
             <div>
                 <p>To report hearsay use the following predicates with そうです。</p>
-                <p>When we use そうです, the reported speech retains the tense and the polarity of the original utterance.</p>
+                <p>
+                    When we use そうです, the reported speech retains the tense and the polarity of the original
+                    utterance.
+                </p>
 
                 <GenkiTable chapter={17}>
                     <thead>
@@ -65,9 +68,17 @@ const GenkiChapter17 = () => {
                 <GenkiStructureDisplay book={2} width={820}>
                     <Container>
                         <Row>
-                            <Col><p className={styles.genkiTwo}><em>If you heard someone say:</em></p></Col>
+                            <Col>
+                                <p className={styles.genkiTwo}>
+                                    <em>If you heard someone say:</em>
+                                </p>
+                            </Col>
                             <Col xs={1}>{}</Col>
-                            <Col><p className={styles.genkiTwo}><em>You can report it as:</em></p></Col>
+                            <Col>
+                                <p className={styles.genkiTwo}>
+                                    <em>You can report it as:</em>
+                                </p>
+                            </Col>
                         </Row>
                         <Row>
                             <Col>
@@ -75,7 +86,7 @@ const GenkiChapter17 = () => {
                                     book={2}
                                     noIndent
                                     jp={{ text: "「日本語の授業は楽しいです。」" }}
-                                    en={{ text: "\"Our Japanese class is fun.\"" }}
+                                    en={{ text: '"Our Japanese class is fun."' }}
                                 />
                             </Col>
                             <Col xs={1}>&#8594;</Col>
@@ -83,8 +94,11 @@ const GenkiChapter17 = () => {
                                 <GenkiExampleDisplay
                                     book={2}
                                     noIndent
-                                    jp={{ text: "「日本語の授業は楽しいそうです。」", underline: new FirstMatch("そうです") }}
-                                    en={{ text: "\"I've heard that their Japanese class is fun.\"" }}
+                                    jp={{
+                                        text: "「日本語の授業は楽しいそうです。」",
+                                        underline: new FirstMatch("そうです")
+                                    }}
+                                    en={{ text: '"I\'ve heard that their Japanese class is fun."' }}
                                 />
                             </Col>
                         </Row>
@@ -94,7 +108,7 @@ const GenkiChapter17 = () => {
                                     book={2}
                                     noIndent
                                     jp={{ text: "「先生はとても親切です。」" }}
-                                    en={{ text: "\"Our professor is very kind.\"" }}
+                                    en={{ text: '"Our professor is very kind."' }}
                                 />
                             </Col>
                             <Col xs={1}>&#8594;</Col>
@@ -102,8 +116,11 @@ const GenkiChapter17 = () => {
                                 <GenkiExampleDisplay
                                     book={2}
                                     noIndent
-                                    jp={{ text: "「先生はとても親切だそうです。」", underline: new FirstMatch("そうです") }}
-                                    en={{ text: "\"Our professor is very kind.\"" }}
+                                    jp={{
+                                        text: "「先生はとても親切だそうです。」",
+                                        underline: new FirstMatch("そうです")
+                                    }}
+                                    en={{ text: '"Our professor is very kind."' }}
                                 />
                             </Col>
                         </Row>
@@ -113,7 +130,7 @@ const GenkiChapter17 = () => {
                                     book={2}
                                     noIndent
                                     jp={{ text: "「今日は授業がありませんでした。」" }}
-                                    en={{ text: "\"We did not have a class today.\"" }}
+                                    en={{ text: '"We did not have a class today."' }}
                                 />
                             </Col>
                             <Col xs={1}>&#8594;</Col>
@@ -121,7 +138,10 @@ const GenkiChapter17 = () => {
                                 <GenkiExampleDisplay
                                     book={2}
                                     noIndent
-                                    jp={{ text: "「今日は授業がなったそうです。」", underline: new FirstMatch("そうです") }}
+                                    jp={{
+                                        text: "「今日は授業がなったそうです。」",
+                                        underline: new FirstMatch("そうです")
+                                    }}
                                     en={{ text: "\"I've heard that they didn't have a class that day.\"" }}
                                 />
                             </Col>
@@ -139,21 +159,27 @@ const GenkiChapter17 = () => {
         title: "～って",
         body: (
             <div>
-                <p>In informal speech, you can add って at the end of a sentence, instead of そうです、to quote what you heard.</p>
+                <p>
+                    In informal speech, you can add って at the end of a sentence, instead of そうです、to quote what
+                    you heard.
+                </p>
 
                 <p>Thus, when your friend Mary says:</p>
                 <GenkiExampleDisplay
                     book={2}
                     noIndent
-                    jp={{ text: "「今日は忙しいです。あした、試験があるんです」"}}
-                    en={{ text: "\"I'm busy today. I have an exam tomorrow.\"" }}
+                    jp={{ text: "「今日は忙しいです。あした、試験があるんです」" }}
+                    en={{ text: '"I\'m busy today. I have an exam tomorrow."' }}
                 />
 
                 <p>You can report it as:</p>
                 <GenkiExampleDisplay
                     book={2}
                     noIndent
-                    jp={{ text: "メアリーさん、今日は忙しいって。あした、試験があるんだって", underline: new Occurrences("って", [1, 2]) }}
+                    jp={{
+                        text: "メアリーさん、今日は忙しいって。あした、試験があるんだって",
+                        underline: new Occurrences("って", [1, 2])
+                    }}
                     en={{ text: "Mary says she’s busy today. She says she has a exam tomorrow." }}
                 />
 
@@ -177,8 +203,13 @@ const GenkiChapter17 = () => {
         title: "～たら",
         body: (
             <div>
-                <p>たら is one of several words in Japanese that refer to conditional <em>(if)</em> dependence.</p>
-                <p>When we say <QuoteDisplay chapter={17}>A　たら　B</QuoteDisplay> we must mean that B is valid, contingent on the fulfillment of A.</p>
+                <p>
+                    たら is one of several words in Japanese that refer to conditional <em>(if)</em> dependence.
+                </p>
+                <p>
+                    When we say <QuoteDisplay chapter={17}>A　たら　B</QuoteDisplay> we must mean that B is valid,
+                    contingent on the fulfillment of A.
+                </p>
 
                 <p>For example:</p>
                 <GenkiExampleDisplay
@@ -266,7 +297,8 @@ const GenkiChapter17 = () => {
         title: "～なくてもいいです",
         body: (
             <div>
-                <p>To describe what you do not need to do, take a negative sentence in the short form, drop the final
+                <p>
+                    To describe what you do not need to do, take a negative sentence in the short form, drop the final
                     い of ない, and add くともいいです. なくてis the negative <em>te</em>-form.
                 </p>
 
@@ -337,7 +369,10 @@ const GenkiChapter17 = () => {
         title: "～前に / ～てから",
         body: (
             <div>
-                <p>You can use the present tense short form and 前に to describe the event <em>before</em> which something happens.</p>
+                <p>
+                    You can use the present tense short form and 前に to describe the event <em>before</em> which
+                    something happens.
+                </p>
 
                 <GenkiStructureDisplay book={2} width={400}>
                     <span>{"verb A (short present) + 前に "}</span>
@@ -362,8 +397,8 @@ const GenkiChapter17 = () => {
                 <hr className={styles.hr} />
 
                 <p>
-                    To describe an event after which another thing happens, you can use the <em>te</em>-form of a
-                    verb + から.
+                    To describe an event after which another thing happens, you can use the <em>te</em>-form of a verb +
+                    から.
                 </p>
 
                 <GenkiStructureDisplay book={2} width={400}>
@@ -389,7 +424,7 @@ const GenkiChapter17 = () => {
         )
     }
 
-    return { c17p1, c17p2, c17p3, c17p4, c17p5, c17p6 };
+    return { c17p1, c17p2, c17p3, c17p4, c17p5, c17p6 }
 }
 
-export default GenkiChapter17;
+export default GenkiChapter17

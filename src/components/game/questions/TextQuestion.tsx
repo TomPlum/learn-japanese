@@ -1,54 +1,48 @@
-import React, { forwardRef, Ref, useImperativeHandle, useRef, useState } from "react";
-import { Col, Form, Row } from "react-bootstrap";
-import { GameQuestionProps, MemoryGameQuestion } from "../MemoryGame";
-import QuestionDisplay, { QuestionDisplayHandler } from "../../ui/display/QuestionDisplay";
-import AnswerInputField from "../../ui/fields/AnswerInputField";
-import LearnableField from "../../../domain/learn/LearnableField";
-import styles from "../../../styles/sass/components/game/questions/TextQuestion.module.scss";
-import { useTranslation } from "react-i18next";
+import React, { forwardRef, Ref, useImperativeHandle, useRef, useState } from "react"
+import { Col, Form, Row } from "react-bootstrap"
+import { GameQuestionProps, MemoryGameQuestion } from "../MemoryGame"
+import QuestionDisplay, { QuestionDisplayHandler } from "../../ui/display/QuestionDisplay"
+import AnswerInputField from "../../ui/fields/AnswerInputField"
+import LearnableField from "../../../domain/learn/LearnableField"
+import styles from "../../../styles/sass/components/game/questions/TextQuestion.module.scss"
+import { useTranslation } from "react-i18next"
 
 export interface TextQuestionProps extends GameQuestionProps {
-    question: string;
-    answerField: LearnableField;
-    answers: string[];
-    className?: string;
+    question: string
+    answerField: LearnableField
+    answers: string[]
+    className?: string
 }
 
 const TextQuestion = forwardRef((props: TextQuestionProps, ref: Ref<MemoryGameQuestion>) => {
+    const { answers, question, hidden, className, answerField, isValid } = props
 
-    const { answers, question, hidden, className, answerField, isValid } = props;
+    const display = useRef<QuestionDisplayHandler>(null)
 
-    const display = useRef<QuestionDisplayHandler>(null);
-
-    const [answer, setAnswer] = useState("");
-    const { t } = useTranslation();
+    const [answer, setAnswer] = useState("")
+    const { t } = useTranslation()
 
     useImperativeHandle(ref, () => ({
         isCorrect: () => {
-            setAnswer("");
+            setAnswer("")
 
             if (answers.includes(answer.toLowerCase())) {
-                return true;
+                return true
             } else {
-                display.current?.notifyIncorrect();
-                return false;
+                display.current?.notifyIncorrect()
+                return false
             }
         }
-    }));
+    }))
 
     const handleInputChange = (value: string) => {
-        isValid(!!value);
-        setAnswer(value);
+        isValid(!!value)
+        setAnswer(value)
     }
 
     return (
         <div className={[className, styles.wrapper].join(" ")}>
-            <QuestionDisplay
-                blur={hidden}
-                key={question}
-                ref={display}
-                question={question}
-            />
+            <QuestionDisplay blur={hidden} key={question} ref={display} question={question} />
 
             <Form>
                 <Form.Group controlId="answer">
@@ -67,7 +61,7 @@ const TextQuestion = forwardRef((props: TextQuestionProps, ref: Ref<MemoryGameQu
                 </Form.Group>
             </Form>
         </div>
-    );
-});
+    )
+})
 
-export default TextQuestion;
+export default TextQuestion

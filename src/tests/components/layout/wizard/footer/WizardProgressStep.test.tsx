@@ -1,13 +1,15 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import WizardProgressStep, { WizardProgressStepProps } from "../../../../../components/layout/wizard/footer/WizardProgressStep";
-import { faApple } from "@fortawesome/free-brands-svg-icons";
+import { fireEvent, render, screen } from "@testing-library/react"
+import WizardProgressStep, {
+    WizardProgressStepProps
+} from "../../../../../components/layout/wizard/footer/WizardProgressStep"
+import { faApple } from "@fortawesome/free-brands-svg-icons"
 
-const onClickHandler = jest.fn();
+const onClickHandler = jest.fn()
 
-let props: WizardProgressStepProps;
+let props: WizardProgressStepProps
 
 const setup = () => {
-    const component = render(<WizardProgressStep {...props} />);
+    const component = render(<WizardProgressStep {...props} />)
     return {
         ...component
     }
@@ -22,50 +24,50 @@ beforeEach(() => {
         title: "Test Step",
         onClick: onClickHandler
     }
-});
+})
 
-test('Clicking the step should call the onClick event handler with its stage', () => {
-    setup();
-    fireEvent.click(screen.getByTestId('wizard-progress-step-0'));
-    expect(onClickHandler).toHaveBeenCalled();
-});
+test("Clicking the step should call the onClick event handler with its stage", () => {
+    setup()
+    fireEvent.click(screen.getByTestId("wizard-progress-step-0"))
+    expect(onClickHandler).toHaveBeenCalled()
+})
 
-test('Clicking the step should NOT call the onClick event handler if disabled', () => {
-    props.disabled = true;
+test("Clicking the step should NOT call the onClick event handler if disabled", () => {
+    props.disabled = true
 
-    setup();
-    fireEvent.click(screen.getByTestId('wizard-progress-step-0'));
+    setup()
+    fireEvent.click(screen.getByTestId("wizard-progress-step-0"))
 
-    expect(onClickHandler).not.toHaveBeenCalled();
-});
+    expect(onClickHandler).not.toHaveBeenCalled()
+})
 
 test('Should set the className as "complete" if the current stage is greater than the step stage', () => {
-    props.stage = 2;
-    props.currentStage = 4;
-    setup();
-    expect(screen.getByTestId('wizard-progress-step-2')).toHaveClass('complete');
-});
+    props.stage = 2
+    props.currentStage = 4
+    setup()
+    expect(screen.getByTestId("wizard-progress-step-2")).toHaveClass("complete")
+})
 
 test('Should set the className as "inProgress" if the current stage is equal to the step stage', () => {
-    props.stage = 4;
-    props.currentStage = 4;
-    setup();
-    expect(screen.getByTestId('wizard-progress-step-4')).toHaveClass('inProgress');
-});
+    props.stage = 4
+    props.currentStage = 4
+    setup()
+    expect(screen.getByTestId("wizard-progress-step-4")).toHaveClass("inProgress")
+})
 
 test('Should set the className as "incomplete" if the current stage is less than the step stage', () => {
-    props.stage = 5;
-    props.currentStage = 2;
-    setup();
-    expect(screen.getByTestId('wizard-progress-step-5')).toHaveClass('incomplete');
-});
+    props.stage = 5
+    props.currentStage = 2
+    setup()
+    expect(screen.getByTestId("wizard-progress-step-5")).toHaveClass("incomplete")
+})
 
 test('Should set the className as "disabled" if the disabled prop is passed as true', () => {
-    props.stage = 5;
-    props.currentStage = 2;
-    props.disabled = true;
+    props.stage = 5
+    props.currentStage = 2
+    props.disabled = true
 
-    setup();
+    setup()
 
-    expect(screen.getByTestId('wizard-progress-step-5')).toHaveClass('disabled');
-});
+    expect(screen.getByTestId("wizard-progress-step-5")).toHaveClass("disabled")
+})

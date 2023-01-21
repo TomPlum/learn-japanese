@@ -1,12 +1,12 @@
-import { OverlayTrigger } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
-import { OverlayChildren } from "react-bootstrap/Overlay";
+import { OverlayTrigger } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons"
+import React from "react"
+import { OverlayChildren } from "react-bootstrap/Overlay"
 
 export interface InfoButtonProps {
-    popover: OverlayChildren;
-    className?: string;
+    popover: OverlayChildren
+    className?: string
 }
 
 const InfoButton = (props: InfoButtonProps) => {
@@ -17,4 +17,4 @@ const InfoButton = (props: InfoButtonProps) => {
     )
 }
 
-export default InfoButton;
+export default InfoButton

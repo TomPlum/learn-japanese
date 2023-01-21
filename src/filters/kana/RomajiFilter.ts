@@ -1,18 +1,17 @@
-import { Filter } from "../Filter";
-import { Kana } from "../../domain/kana/Kana";
+import { Filter } from "../Filter"
+import { Kana } from "../../domain/kana/Kana"
 
 export default class RomajiFilter implements Filter<Kana> {
-
-    private readonly search: string;
+    private readonly search: string
 
     constructor(search: string) {
-        this.search = search;
+        this.search = search
     }
 
     apply(values: Kana[]): Kana[] {
         if (this.search) {
-            return values.filter(kana => kana.getRomaji().some(romaji => romaji.includes(this.search)));
+            return values.filter((kana) => kana.getRomaji().some((romaji) => romaji.includes(this.search)))
         }
-        return values;
+        return values
     }
 }

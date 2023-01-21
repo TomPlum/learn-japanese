@@ -1,12 +1,12 @@
-import { Learnable } from "./Learnable";
-import { FlashCard } from "./FlashCard";
+import { Learnable } from "./Learnable"
+import { FlashCard } from "./FlashCard"
 
 export default interface LearningSessionResult {
-    remembered: Learnable[];
-    forgotten: Learnable[];
+    remembered: Learnable[]
+    forgotten: Learnable[]
 }
 
 export interface OnlineLearningSessionResult {
-    remembered: FlashCard[];
-    forgotten: FlashCard[];
+    remembered: FlashCard[]
+    forgotten: FlashCard[]
 }

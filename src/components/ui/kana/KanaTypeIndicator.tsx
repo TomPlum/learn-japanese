@@ -1,10 +1,10 @@
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../../styles/sass/components/ui/kana/KanaTypeIndicator.module.scss";
+import { faCircle } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import styles from "../../../styles/sass/components/ui/kana/KanaTypeIndicator.module.scss"
 
 export interface KanaTypeIndicatorProps {
-    title: string;
-    className?: string;
+    title: string
+    className?: string
 }
 
 const KanaTypeIndicator = (props: KanaTypeIndicatorProps) => {
@@ -15,7 +15,7 @@ const KanaTypeIndicator = (props: KanaTypeIndicatorProps) => {
             className={props.className + " " + styles.icon}
             title={props.title}
         />
-    );
+    )
 }
 
-export default KanaTypeIndicator;
+export default KanaTypeIndicator

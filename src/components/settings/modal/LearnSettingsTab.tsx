@@ -1,26 +1,20 @@
-import SettingsTabTitle from "./SettingsTabTitle";
-import styles from "../../../styles/sass/components/settings/modal/LearnSettingsTab.module.scss";
-import { faCopy, faFont } from "@fortawesome/free-solid-svg-icons";
-import SettingsDropdown from "./SettingsDropdown";
-import { Preference } from "../../../domain/user/Preference";
-import { useTranslation } from "react-i18next";
+import SettingsTabTitle from "./SettingsTabTitle"
+import styles from "../../../styles/sass/components/settings/modal/LearnSettingsTab.module.scss"
+import { faCopy, faFont } from "@fortawesome/free-solid-svg-icons"
+import SettingsDropdown from "./SettingsDropdown"
+import { Preference } from "../../../domain/user/Preference"
+import { useTranslation } from "react-i18next"
 
 const LearnSettingsTab = () => {
-
-    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.learn" });
+    const { t } = useTranslation("translation", { keyPrefix: "settings.modal.learn" })
 
     return (
         <div data-testid="learn-settings-tab">
-            <SettingsTabTitle
-                title={t("heading")}
-                description={t("desc")}
-            />
+            <SettingsTabTitle title={t("heading")} description={t("desc")} />
 
             <div className={styles.section}>
                 <p className={styles.heading}>{t("flash-cards.heading")}</p>
-                <p className={styles.text}>
-                    {t("flash-cards.desc")}
-                </p>
+                <p className={styles.text}>{t("flash-cards.desc")}</p>
                 <SettingsDropdown
                     buttonIcon={faCopy}
                     optionsKey="learn.flash-cards"
@@ -31,9 +25,7 @@ const LearnSettingsTab = () => {
 
             <div className={styles.section}>
                 <p className={styles.heading}>{t("romaji.heading")}</p>
-                <p className={styles.text}>
-                    {t("romaji.desc")}
-                </p>
+                <p className={styles.text}>{t("romaji.desc")}</p>
                 <SettingsDropdown
                     buttonIcon={faFont}
                     optionsKey="learn.romaji"
@@ -42,7 +34,7 @@ const LearnSettingsTab = () => {
                 />
             </div>
         </div>
-    );
+    )
 }
 
-export default LearnSettingsTab;
+export default LearnSettingsTab

@@ -1,0 +1,88 @@
+@import "src/styles/sass/colours";
+
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.prepend {
+  background-color: $dark-1;
+  border-top: 2px solid $light-3;
+  border-left: 2px solid $light-3;
+  border-bottom: 2px solid $light-3;
+  border-right: none;
+}
+
+.input,
+.input:active,
+.input:focus {
+  background-color: $dark-1;
+  border: 2px solid $light-3;
+  box-shadow: none;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  color: $light-1;
+}
+
+.input {
+  transition: all ease-in-out 0.2s;
+
+  &:focus {
+    border-color: $light-3;
+    background-color: rgba($dark-1, 0.7);
+  }
+
+  &::placeholder {
+    text-align: left;
+    font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  }
+}
+
+.icon {
+  color: $light-1;
+}
+
+.resultsWrapper {
+  position: absolute;
+  background-color: $dark-2;
+  border: 2px solid $light-3;
+  border-top: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  min-height: 50px;
+  width: 264px;
+  z-index: 10;
+
+  .empty {
+    font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+    color: $light-1;
+  }
+}
+
+.result {
+  color: $light-1;
+  font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
+  transition: all ease-in-out 0.2s;
+  padding: 2px 12px;
+  margin: 0;
+
+  &:hover {
+    cursor: pointer;
+    color: $inspect;
+    background-color: $dark-1;
+  }
+
+  &:first-child:hover {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  &:last-child:hover {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+.loading {
+  position: absolute;
+  right: 10px;
+}

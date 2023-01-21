@@ -1,23 +1,22 @@
-import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep";
-import KanaSettings, { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings";
-import { Col, Row } from "react-bootstrap";
-import ToggleSwitch from "../../ui/ToggleSwitch";
-import styles from "../../../styles/sass/components/settings/data/KanaSettingsForm.module.scss";
-import QuantityField from "../../ui/fields/QuantityField";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep"
+import KanaSettings, { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
+import { Col, Row } from "react-bootstrap"
+import ToggleSwitch from "../../ui/ToggleSwitch"
+import styles from "../../../styles/sass/components/settings/data/KanaSettingsForm.module.scss"
+import QuantityField from "../../ui/fields/QuantityField"
+import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 
 const KanaSettingsFormBody = (props: DataSettingsStepFormProps<KanaSettings>) => {
+    const { className, isValid, onChange } = props
 
-    const { className, isValid, onChange } = props;
+    const defaultState = new KanaSettingsBuilder().withHiragana().build()
 
-    const defaultState = new KanaSettingsBuilder().withHiragana().build();
-
-    const [hiragana, setHiragana] = useState(defaultState.hiragana);
-    const [katakana, setKatakana] = useState(defaultState.katakana);
-    const [diagraphs, setDiagraphs] = useState(defaultState.diagraphs);
-    const [quantity, setQuantity] = useState<number | undefined>(defaultState.quantity);
-    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.data.kana" });
+    const [hiragana, setHiragana] = useState(defaultState.hiragana)
+    const [katakana, setKatakana] = useState(defaultState.katakana)
+    const [diagraphs, setDiagraphs] = useState(defaultState.diagraphs)
+    const [quantity, setQuantity] = useState<number | undefined>(defaultState.quantity)
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.data.kana" })
 
     useEffect(() => {
         const settings = new KanaSettingsBuilder()
@@ -25,14 +24,14 @@ const KanaSettingsFormBody = (props: DataSettingsStepFormProps<KanaSettings>) =>
             .withKatakana(katakana)
             .withDiagraphs(diagraphs)
             .withQuantity(quantity)
-            .build();
+            .build()
 
-        onChange(settings);
-        isValid?.(validate());
-    }, [hiragana, katakana, diagraphs, quantity]);
+        onChange(settings)
+        isValid?.(validate())
+    }, [hiragana, katakana, diagraphs, quantity])
 
     const validate = () => {
-        return !!quantity && quantity > 0 && quantity <= 214;
+        return !!quantity && quantity > 0 && quantity <= 214
     }
 
     return (
@@ -48,9 +47,7 @@ const KanaSettingsFormBody = (props: DataSettingsStepFormProps<KanaSettings>) =>
                         onChange={() => setHiragana(!hiragana)}
                     />
 
-                    <p className={hiragana ? styles.description : styles.disabled}>
-                        {t("hiragana-desc")}
-                    </p>
+                    <p className={hiragana ? styles.description : styles.disabled}>{t("hiragana-desc")}</p>
 
                     <ToggleSwitch
                         enabled={katakana}
@@ -61,9 +58,7 @@ const KanaSettingsFormBody = (props: DataSettingsStepFormProps<KanaSettings>) =>
                         onChange={() => setKatakana(!katakana)}
                     />
 
-                    <p className={katakana ? styles.description : styles.disabled}>
-                        {t("katakana-desc")}
-                    </p>
+                    <p className={katakana ? styles.description : styles.disabled}>{t("katakana-desc")}</p>
 
                     <ToggleSwitch
                         enabled={diagraphs}
@@ -73,9 +68,7 @@ const KanaSettingsFormBody = (props: DataSettingsStepFormProps<KanaSettings>) =>
                         onChange={() => setDiagraphs(!diagraphs)}
                     />
 
-                    <p className={diagraphs ? styles.description : styles.disabled}>
-                        {t("diagraphs-desc")}
-                    </p>
+                    <p className={diagraphs ? styles.description : styles.disabled}>{t("diagraphs-desc")}</p>
 
                     <QuantityField
                         value={quantity}
@@ -86,7 +79,7 @@ const KanaSettingsFormBody = (props: DataSettingsStepFormProps<KanaSettings>) =>
                 </Col>
             </Row>
         </div>
-    );
+    )
 }
 
-export default KanaSettingsFormBody;
+export default KanaSettingsFormBody

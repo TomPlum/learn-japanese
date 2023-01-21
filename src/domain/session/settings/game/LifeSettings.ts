@@ -1,40 +1,39 @@
-
 export default class LifeSettings {
-    private readonly _enabled: boolean;
-    private readonly _quantity: number;
+    private readonly _enabled: boolean
+    private readonly _quantity: number
 
     constructor(enabled: boolean, quantity: number) {
-        this._enabled = enabled;
-        this._quantity = quantity;
+        this._enabled = enabled
+        this._quantity = quantity
     }
 
     get enabled(): boolean {
-        return this._enabled;
+        return this._enabled
     }
 
     get quantity(): number {
-        return this._quantity;
+        return this._quantity
     }
 }
 
 export class LifeSettingsBuilder {
-    private _enabled: boolean = true;
-    private _quantity: number = 5;
+    private _enabled = true
+    private _quantity = 5
 
-    isEnabled(enabled: boolean = true): LifeSettingsBuilder {
-        this._enabled = enabled;
+    isEnabled(enabled = true): LifeSettingsBuilder {
+        this._enabled = enabled
         if (!enabled) {
-            this._quantity = 0;
+            this._quantity = 0
         }
-        return this;
+        return this
     }
 
     withQuantity(quantity: number): LifeSettingsBuilder {
-        this._quantity = quantity;
-        return this;
+        this._quantity = quantity
+        return this
     }
 
     build(): LifeSettings {
-        return new LifeSettings(this._enabled, this._quantity);
+        return new LifeSettings(this._enabled, this._quantity)
     }
 }

@@ -1,23 +1,20 @@
-import { Alert } from "react-bootstrap";
-import { AlertProps } from "react-bootstrap/Alert";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../styles/sass/components/ui/DismissibleAlert.module.scss";
-import { PropsWithChildren } from "react";
+import { Alert } from "react-bootstrap"
+import { AlertProps } from "react-bootstrap/Alert"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import styles from "../../styles/sass/components/ui/DismissibleAlert.module.scss"
+import { PropsWithChildren } from "react"
 
 export interface DismissibleAlertProps extends AlertProps {
-    onDismiss?: () => void;
+    onDismiss?: () => void
 }
 
 const DismissibleAlert = (props: PropsWithChildren<DismissibleAlertProps>) => {
-
-    const { onDismiss, children, ...rest } = props;
+    const { onDismiss, children, ...rest } = props
 
     return (
         <div className={styles.container}>
-            <Alert {...rest}>
-                {children}
-            </Alert>
+            <Alert {...rest}>{children}</Alert>
 
             <FontAwesomeIcon
                 fixedWidth
@@ -30,4 +27,4 @@ const DismissibleAlert = (props: PropsWithChildren<DismissibleAlertProps>) => {
     )
 }
 
-export default DismissibleAlert;
+export default DismissibleAlert

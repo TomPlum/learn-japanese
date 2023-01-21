@@ -1,4 +1,4 @@
-import { ColourData } from "./DataTypes";
+import { ColourData } from "./DataTypes"
 
 export function colours(): ColourData[] {
     return [
@@ -181,5 +181,5 @@ export function colours(): ColourData[] {
             romaji: "koi",
             colour: "#323232"
         }
-    ];
+    ]
 }

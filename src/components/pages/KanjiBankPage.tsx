@@ -1,112 +1,115 @@
-import { Alert, Col, Container, Row } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
-import KanjiService, { KanjiResult } from "../../service/KanjiService";
-import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade";
-import LoadingSpinner from "../ui/loading/LoadingSpinner";
-import KanjiSearchResult from "../ui/KanjiSearchResult";
-import StackGrid, { transitions } from "react-stack-grid";
-import { useFontSelector } from "../../hooks";
-import { faSearchMinus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ValueSelector from "../ui/select/ValueSelector";
-import KeywordSearchField, { KeywordMeta } from "../ui/fields/KeywordSearchField";
-import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss";
-import { KanjiReading } from "../../domain/kanji/KanjiReading";
-import ExampleDisplay from "../ui/display/ExampleDisplay";
-import SimplePagination from "../ui/paging/SimplePagination";
-import JLTPLevel from "../../domain/learn/JLTPLevel";
+import { Alert, Col, Container, Row } from "react-bootstrap"
+import React, { useEffect, useState } from "react"
+import KanjiService, { KanjiResult } from "../../service/KanjiService"
+import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade"
+import LoadingSpinner from "../ui/loading/LoadingSpinner"
+import KanjiSearchResult from "../ui/KanjiSearchResult"
+import StackGrid, { transitions } from "react-stack-grid"
+import { useFontSelector } from "../../hooks"
+import { faSearchMinus } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import ValueSelector from "../ui/select/ValueSelector"
+import KeywordSearchField, { KeywordMeta } from "../ui/fields/KeywordSearchField"
+import styles from "../../styles/sass/components/pages/KanjiBankPage.module.scss"
+import { KanjiReading } from "../../domain/kanji/KanjiReading"
+import ExampleDisplay from "../ui/display/ExampleDisplay"
+import SimplePagination from "../ui/paging/SimplePagination"
+import JLTPLevel from "../../domain/learn/JLTPLevel"
 
 const KanjiBankPage = () => {
+    const service = new KanjiService()
+    const font = useFontSelector((state) => state.font.selected)
 
-    const service = new KanjiService();
-    const font = useFontSelector(state => state.font.selected);
+    const [kanji, setKanji] = useState<KanjiResult[]>([])
+    const [selected, setSelected] = useState<KanjiResult | undefined>(undefined)
 
-    const [kanji, setKanji] = useState<KanjiResult[]>([]);
-    const [selected, setSelected] = useState<KanjiResult | undefined>(undefined);
+    const [page, setPage] = useState(0)
+    const [pageSize, setPageSize] = useState(40)
+    const [lastPage, setLastPage] = useState(999)
+    const [results, setResults] = useState<number | undefined>(undefined)
 
-    const [page, setPage] = useState(0);
-    const [pageSize, setPageSize] = useState(40);
-    const [lastPage, setLastPage] = useState(999);
-    const [results, setResults] = useState<number | undefined>(undefined);
+    const [search, setSearch] = useState("")
+    const [grades, setGrades] = useState<KyoikuGrade[]>([])
+    const [levels, setLevels] = useState<JLTPLevel[]>([])
+    const [strokes, setStrokes] = useState<number | undefined>(undefined)
 
-    const [search, setSearch] = useState("");
-    const [grades, setGrades] = useState<KyoikuGrade[]>([]);
-    const [levels, setLevels] = useState<JLTPLevel[]>([]);
-    const [strokes, setStrokes] = useState<number | undefined>(undefined);
-
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [inExampleModal, setInExamplesModal] = useState(false);
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [inExampleModal, setInExamplesModal] = useState(false)
 
     useEffect(() => {
-        setError("");
-        setLoading(true);
+        setError("")
+        setLoading(true)
 
-        service.filter(page, pageSize, search, grades, levels, strokes).then(response => {
-            const data = response.kanji;
+        service
+            .filter(page, pageSize, search, grades, levels, strokes)
+            .then((response) => {
+                const data = response.kanji
 
-            setKanji(data);
-            setLastPage(response.pages);
-            setResults(response.quantity);
+                setKanji(data)
+                setLastPage(response.pages)
+                setResults(response.quantity)
 
-            if (data && data.length > 0) {
-                setSelected(data[0]);
-            }
+                if (data && data.length > 0) {
+                    setSelected(data[0])
+                }
 
-            if (response.error) {
-                setError(response.error);
-            }
-        }).catch(response => {
-            setError(response.error);
-        }).finally(() => {
-            setLoading(false);
-        });
-    }, [page, pageSize, search, grades, levels, strokes]);
+                if (response.error) {
+                    setError(response.error)
+                }
+            })
+            .catch((response) => {
+                setError(response.error)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }, [page, pageSize, search, grades, levels, strokes])
 
     const onSearch = (parameters: KeywordMeta[]) => {
         parameters.forEach((meta: KeywordMeta) => {
             switch (meta.key) {
                 case "grade": {
-                    const grades = meta.value!.replaceAll(" ", "").split(",");
-                    setGrades(grades.map(val => KyoikuGrade.fromInteger(Number(val))))
-                    break;
+                    const grades = meta.value!.replaceAll(" ", "").split(",")
+                    setGrades(grades.map((val) => KyoikuGrade.fromInteger(Number(val))))
+                    break
                 }
                 case "level": {
-                    const levelStrings = meta.value!.trim().split(",");
-                    const levels: JLTPLevel[] = levelStrings.map(value => JLTPLevel.fromString(value)!);
-                    setLevels(levels);
-                    break;
+                    const levelStrings = meta.value!.trim().split(",")
+                    const levels: JLTPLevel[] = levelStrings.map((value) => JLTPLevel.fromString(value)!)
+                    setLevels(levels)
+                    break
                 }
                 case "strokes": {
-                    const strokes = Number(meta.value!);
-                    setStrokes(strokes);
-                    break;
+                    const strokes = Number(meta.value!)
+                    setStrokes(strokes)
+                    break
                 }
             }
-        });
+        })
     }
 
     const onRemoveSearchParam = (meta: KeywordMeta) => {
         switch (meta.key) {
             case "grade": {
-                setGrades([]);
-                break;
+                setGrades([])
+                break
             }
             case "level": {
-                setLevels([]);
-                break;
+                setLevels([])
+                break
             }
             case "strokes": {
-                setStrokes(undefined);
-                break;
+                setStrokes(undefined)
+                break
             }
         }
     }
 
-    const highlightSearch = (field:string, value: string) => {
+    const highlightSearch = (field: string, value: string) => {
         if (selected?.field === field) {
-            const startIndex = value.toLowerCase().indexOf(search.toLowerCase());
-            const endIndex = startIndex + search.length;
+            const startIndex = value.toLowerCase().indexOf(search.toLowerCase())
+            const endIndex = startIndex + search.length
 
             return (
                 <span>
@@ -114,95 +117,105 @@ const KanjiBankPage = () => {
                     <strong className={styles.matching}>{value.substring(startIndex, endIndex)}</strong>
                     <span>{value.substring(endIndex)}</span>
                 </span>
-            );
+            )
         } else {
-            return value;
+            return value
         }
     }
 
     const getReadingKana = (readings: KanjiReading[]) => {
-        const kana = readings.map(reading => reading.kana);
-        return kana.length > 0 ? kana.join(", ") : "-";
+        const kana = readings.map((reading) => reading.kana)
+        return kana.length > 0 ? kana.join(", ") : "-"
     }
 
-    const examples = selected?.value.examples;
-    const exampleQuantity = examples?.length ?? 0;
-    const hasExamples = exampleQuantity > 0;
+    const examples = selected?.value.examples
+    const exampleQuantity = examples?.length ?? 0
+    const hasExamples = exampleQuantity > 0
 
     return (
         <Container className={styles.wrapper}>
             <Row>
                 <Col lg={2} className={styles.info}>
-                    {selected && (<>
-                        <div className={styles.section}>
-                            <p className={styles.label}>Character</p>
-                            <a className={styles.selected} href={selected.value.getJishoLink()} target="_blank">
-                                {selected.value.getKanjiVariation()}
-                            </a>
-                        </div>
-
-                        <div className={styles.section}>
-                            <p className={styles.label}>Meanings</p>
-                            <div className={[styles.meanings, styles.value].join(" ")}>
-                                {highlightSearch("meaning", selected.value.getMeanings().join(", "))}
+                    {selected && (
+                        <>
+                            <div className={styles.section}>
+                                <p className={styles.label}>Character</p>
+                                <a
+                                    className={styles.selected}
+                                    href={selected.value.getJishoLink()}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    {selected.value.getKanjiVariation()}
+                                </a>
                             </div>
-                        </div>
 
-                        <div className={styles.section}>
-                            <p className={styles.label}>Grade</p>
-                            <p className={styles.value}>{selected.value.grade.value}</p>
-                        </div>
+                            <div className={styles.section}>
+                                <p className={styles.label}>Meanings</p>
+                                <div className={[styles.meanings, styles.value].join(" ")}>
+                                    {highlightSearch("meaning", selected.value.getMeanings().join(", "))}
+                                </div>
+                            </div>
 
-                        <div className={styles.section}>
-                            <p className={styles.label}>JLPT Level</p>
-                            <p className={styles.value}>{selected.value.jlpt.value}</p>
-                        </div>
+                            <div className={styles.section}>
+                                <p className={styles.label}>Grade</p>
+                                <p className={styles.value}>{selected.value.grade.value}</p>
+                            </div>
 
-                        <div className={styles.section}>
-                            <p className={styles.label}>On'yomi Readings</p>
-                            <p className={styles.value}>
-                                {highlightSearch("reading", getReadingKana(selected.value.getOnyomiReadings()))}
-                            </p>
-                        </div>
+                            <div className={styles.section}>
+                                <p className={styles.label}>JLPT Level</p>
+                                <p className={styles.value}>{selected.value.jlpt.value}</p>
+                            </div>
 
-                        <div className={styles.section}>
-                            <p className={styles.label}>Kun'yomi Readings</p>
-                            <p className={styles.value}>
-                                {highlightSearch("reading", getReadingKana(selected.value.getKunyomiReadings()))}
-                            </p>
-                        </div>
-
-                        <div className={styles.section}>
-                            <p className={styles.label}>Examples {hasExamples ? `(x${exampleQuantity})` : ""}</p>
-                            <p className={styles.value}>
-                                {hasExamples ?
-                                    <span onClick={() => setInExamplesModal(true)} className={styles.example}>
-                                        {examples?.[0].kanji}
-                                    </span> :
-                                    <span>-</span>
-                                }
-                            </p>
-                        </div>
-
-                        <div className={styles.section}>
-                            <p className={styles.label}>Tags</p>
-                            {selected.value.getTags().length > 0 && (
-                                <p className={styles.value} data-testid="tag-value">
-                                    {highlightSearch("tag", selected.value.getTags().join(", "))}
+                            <div className={styles.section}>
+                                <p className={styles.label}>On'yomi Readings</p>
+                                <p className={styles.value}>
+                                    {highlightSearch("reading", getReadingKana(selected.value.getOnyomiReadings()))}
                                 </p>
-                            )}
-                            {selected.value.getTags().length === 0 && (
-                                <p className={styles.value} data-testid="tag-value">
-                                    -
+                            </div>
+
+                            <div className={styles.section}>
+                                <p className={styles.label}>Kun'yomi Readings</p>
+                                <p className={styles.value}>
+                                    {highlightSearch("reading", getReadingKana(selected.value.getKunyomiReadings()))}
                                 </p>
-                            )}
-                        </div>
-                    </>)}
+                            </div>
+
+                            <div className={styles.section}>
+                                <p className={styles.label}>Examples {hasExamples ? `(x${exampleQuantity})` : ""}</p>
+                                <p className={styles.value}>
+                                    {hasExamples ? (
+                                        <span onClick={() => setInExamplesModal(true)} className={styles.example}>
+                                            {examples?.[0].kanji}
+                                        </span>
+                                    ) : (
+                                        <span>-</span>
+                                    )}
+                                </p>
+                            </div>
+
+                            <div className={styles.section}>
+                                <p className={styles.label}>Tags</p>
+                                {selected.value.getTags().length > 0 && (
+                                    <p className={styles.value} data-testid="tag-value">
+                                        {highlightSearch("tag", selected.value.getTags().join(", "))}
+                                    </p>
+                                )}
+                                {selected.value.getTags().length === 0 && (
+                                    <p className={styles.value} data-testid="tag-value">
+                                        -
+                                    </p>
+                                )}
+                            </div>
+                        </>
+                    )}
                 </Col>
 
                 <Col lg={10} className={styles.rightSideWrapper}>
                     {error && (
-                        <Alert variant="danger" className={styles.error}>{error}</Alert>
+                        <Alert variant="danger" className={styles.error}>
+                            {error}
+                        </Alert>
                     )}
 
                     <LoadingSpinner
@@ -239,7 +252,7 @@ const KanjiBankPage = () => {
                     <div className={styles.kanjiWrapper}>
                         {!error && !loading && search && kanji.length === 0 && (
                             <div className={styles.emptyWrapper}>
-                                <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus}/>
+                                <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus} />
                                 {<span>{`No results for '${search}'...`}</span>}
                             </div>
                         )}
@@ -261,11 +274,13 @@ const KanjiBankPage = () => {
                                 entered={transitions.fade.entered}
                                 appeared={transitions.fade.appeared}
                             >
-                                {kanji.map(result => {
-                                    const value = result.value;
-                                    const selectedClass = value.getUniqueID() === selected?.value.getUniqueID()
-                                        ? styles.highlight : styles.kanji;
-                                    const blurClass = loading ? styles.frosted : undefined;
+                                {kanji.map((result) => {
+                                    const value = result.value
+                                    const selectedClass =
+                                        value.getUniqueID() === selected?.value.getUniqueID()
+                                            ? styles.highlight
+                                            : styles.kanji
+                                    const blurClass = loading ? styles.frosted : undefined
                                     return (
                                         <KanjiSearchResult
                                             result={result}
@@ -296,15 +311,15 @@ const KanjiBankPage = () => {
                             disabled={loading}
                             selected={pageSize}
                             id="page-size-selector"
-                            values={[20, 40, 60, 80]}
                             className={styles.pageSize}
                             onChange={(value: number) => setPageSize(value)}
+                            values={[20, 40, 60, 80].map((value) => ({ display: value, value: value }))}
                         />
                     </div>
                 </Col>
             </Row>
         </Container>
-    );
+    )
 }
 
-export default KanjiBankPage;
+export default KanjiBankPage

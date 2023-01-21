@@ -1,25 +1,25 @@
-import { Form, InputGroup } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBalanceScale } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../../styles/sass/components/ui/fields/QuantityField.module.scss";
-import { useTranslation } from "react-i18next";
+import { Form, InputGroup } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faBalanceScale } from "@fortawesome/free-solid-svg-icons"
+import styles from "../../../styles/sass/components/ui/fields/QuantityField.module.scss"
+import { useTranslation } from "react-i18next"
 
 export interface QuantityFieldProps {
-    value?: number;
-    className?: string;
-    isValid?: () => boolean;
-    onChange?: (value: number) => void;
+    value?: number
+    className?: string
+    isValid?: () => boolean
+    onChange?: (value: number) => void
 }
 
 const QuantityField = (props: QuantityFieldProps) => {
-    const { value, isValid, className, onChange } = props;
+    const { value, isValid, className, onChange } = props
 
-    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.data.fields.quantity" });
+    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.data.fields.quantity" })
 
     const isValidNumber = (): boolean => {
-        const isCustomValid = isValid?.() ?? true;
-        const isValidNumber = !!value && /^[0-9]+$/.test(value.toString());
-        return isCustomValid && isValidNumber;
+        const isCustomValid = isValid?.() ?? true
+        const isValidNumber = !!value && /^[0-9]+$/.test(value.toString())
+        return isCustomValid && isValidNumber
     }
 
     return (
@@ -40,7 +40,7 @@ const QuantityField = (props: QuantityFieldProps) => {
                 onChange={(e) => onChange?.(Number(e.target.value))}
             />
         </InputGroup>
-    );
+    )
 }
 
-export default QuantityField;
+export default QuantityField

@@ -10,13 +10,13 @@
   --c-glow: #1c1c1c;
   --size: 600px;
 
-  animation: scene-anim .6s infinite steps(6);
+  animation: scene-anim 0.6s infinite steps(6);
   background: var(--c-bg);
   border-radius: var(--size);
   box-shadow: inset 0 0 0 3px var(--c-glow);
-  content: '';
+  content: "";
   height: var(--size);
-  left: calc(50% - (var(--size) /2));
+  left: calc(50% - (var(--size) / 2));
   position: absolute;
   top: -50px;
   width: var(--size);
@@ -43,7 +43,6 @@
   }
 }
 
-
 .halo {
   --c-1: #343434;
   --c-2: hsl(0, 56%, 63%);
@@ -59,7 +58,7 @@
   --c: var(--c-1);
   --s: var(--s-1);
 
-  animation: halo-anim 4s ease-in-out infinite .4s;
+  animation: halo-anim 4s ease-in-out infinite 0.4s;
   background-color: var(--c);
   box-shadow: 0 0 0 var(--s) var(--c);
   border-radius: 50%;
@@ -72,17 +71,17 @@
   width: var(--s-core);
 }
 .halo i:nth-of-type(2) {
-  animation-delay: .3s;
+  animation-delay: 0.3s;
   --c: var(--c-2);
   --s: var(--s-2);
 }
 .halo i:nth-of-type(3) {
-  animation-delay: .2s;
+  animation-delay: 0.2s;
   --c: var(--c-3);
   --s: var(--s-3);
 }
 .halo i:nth-of-type(4) {
-  animation-delay: .1s;
+  animation-delay: 0.1s;
   --c: var(--c-4);
   --s: var(--s-4);
 }
@@ -91,9 +90,15 @@
   --size: calc(var(--s-core) + (var(--s-1) * 2) - 15px);
 
   animation: halo-star-anim linear 5s forwards infinite;
-  background:
-          radial-gradient(circle at center, var(--c-1) 69.5%, transparent 69.5%),
-          linear-gradient(to right, transparent 50%, var(--c-3) 50%, var(--c-3) 52%, rgba(255, 255, 255, .1) 52%, transparent 70%);
+  background: radial-gradient(circle at center, var(--c-1) 69.5%, transparent 69.5%),
+    linear-gradient(
+      to right,
+      transparent 50%,
+      var(--c-3) 50%,
+      var(--c-3) 52%,
+      rgba(255, 255, 255, 0.1) 52%,
+      transparent 70%
+    );
   border-radius: 50%;
   clip: rect(0px var(--size) calc(var(--size) / 2) 0px);
   display: block;
@@ -152,13 +157,9 @@
   --c: hsl(0, 0%, 53%);
 
   background-color: var(--c);
-  box-shadow:
-          0 0 0 5px var(--c),
-          0 20px 0 var(--c),
-          0 35px 0 var(--c),
-          0 50px 0 var(--c);
+  box-shadow: 0 0 0 5px var(--c), 0 20px 0 var(--c), 0 35px 0 var(--c), 0 50px 0 var(--c);
   border-radius: 50%;
-  content: '';
+  content: "";
   display: block;
   height: 10px;
   margin: 0 auto;
@@ -169,7 +170,7 @@
 .lantern-head::after {
   background: var(--c-lantern-body);
   border-radius: 5px;
-  content: '';
+  content: "";
   display: block;
   height: 15px;
 }
@@ -192,10 +193,8 @@
   background-color: var(--c-lantern-light);
   border: 8px solid var(--c-lantern-body);
   border-radius: 50px;
-  box-shadow:
-          inset 0 0 0 5px var(--c-lantern-light),
-          inset 0 0 0 20px var(--c-lantern-glow);
-  content: '';
+  box-shadow: inset 0 0 0 5px var(--c-lantern-light), inset 0 0 0 20px var(--c-lantern-glow);
+  content: "";
   display: block;
   height: 195px;
   margin: 0 auto;
@@ -209,7 +208,7 @@
   background-color: var(--c);
   border-radius: 4px;
   box-shadow: -5px 161px 0 1px var(--c), 5px 161px 0 1px var(--c);
-  content: '';
+  content: "";
   display: block;
   height: 7px;
   margin: -7px auto 0;
@@ -219,9 +218,8 @@
 
 .lantern-spark {
   animation: lantern-spark-anim linear 3s forwards infinite;
-  background:
-          radial-gradient(circle at center, var(--c-lantern-light) 60%, transparent 60%),
-          linear-gradient(to right, transparent 10%, #ffb4b4 50%, transparent 50%);
+  background: radial-gradient(circle at center, var(--c-lantern-light) 60%, transparent 60%),
+    linear-gradient(to right, transparent 10%, #ffb4b4 50%, transparent 50%);
   border-radius: 50%;
   clip: rect(0px 30px 30px 0px);
   height: 60px;
@@ -280,7 +278,7 @@
   background: var(--bg);
   border: 2px solid var(--bg);
   border-radius: 50%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .25);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
   height: 30px;
   left: calc(50% - 15px);
   overflow: hidden;
@@ -293,7 +291,7 @@
   animation: planet-light-anim 2.5s forwards linear infinite;
   background-color: var(--light);
   border-radius: 50%;
-  content: '';
+  content: "";
   position: absolute;
 
   top: -20px;
@@ -304,46 +302,46 @@
 
 .planet:nth-child(1) {
   --orbit: 70px;
-  animation-delay: -.3s;
-  transform: scale(.9) translateY(-80px);
+  animation-delay: -0.3s;
+  transform: scale(0.9) translateY(-80px);
 }
 .planet:nth-child(2) {
-  --bg: hsl(344,83%,63%);
-  --light: hsl(19,98%,75%);
+  --bg: hsl(344, 83%, 63%);
+  --light: hsl(19, 98%, 75%);
   --orbit: 100px;
   animation-delay: -2s;
   animation-duration: 5.5s;
-  transform: scale(.8) translateY(-20px);
+  transform: scale(0.8) translateY(-20px);
 }
 .planet:nth-child(3) {
-  --bg: hsl(344,83%,63%);
-  --light: hsl(19,98%,75%);
+  --bg: hsl(344, 83%, 63%);
+  --light: hsl(19, 98%, 75%);
   --orbit: 100px;
   animation-delay: -4s;
   animation-duration: 4.5s;
-  transform: scale(.4) translateY(100px);
+  transform: scale(0.4) translateY(100px);
 }
 .planet:nth-child(4) {
-  --bg: hsl(322,41%,43%);
-  --light: hsl(348,88%,65%);
+  --bg: hsl(322, 41%, 43%);
+  --light: hsl(348, 88%, 65%);
   --orbit: 120px;
   animation-delay: -3.7s;
   animation-duration: 4.2s;
-  transform: scale(.8) translateY(75px);
+  transform: scale(0.8) translateY(75px);
 }
 .planet:nth-child(5) {
-  --bg: hsl(322,41%,43%);
-  --light: hsl(348,88%,65%);
+  --bg: hsl(322, 41%, 43%);
+  --light: hsl(348, 88%, 65%);
   --orbit: 100px;
   animation-delay: -1.3s;
   animation-duration: 5.8s;
-  transform: scale(.4) translateY(40px);
+  transform: scale(0.4) translateY(40px);
 }
 .planet:nth-child(6) {
   --orbit: 90px;
-  animation-delay: .5s;
+  animation-delay: 0.5s;
   animation-duration: 4.2s;
-  transform: scale(.9) translateY(150px);
+  transform: scale(0.9) translateY(150px);
 }
 
 @keyframes planet-anim {

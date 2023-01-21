@@ -1,36 +1,34 @@
-import React, { PropsWithChildren, ReactElement, useState } from "react";
-import GridDisplayOptions from "./GridDisplayOptions";
-import { GridOptions } from "../../../../domain/grid/GridOptions";
-import GridDisplayType from "../../../../domain/grid/GridDisplayType";
-import styles from "../../../../styles/sass/components/layout/wizard/grid/GridDisplay.module.scss";
-import ScrollableContainer from "../../../ui/ScrollableContainer";
-import LoadingSpinner from "../../../ui/loading/LoadingSpinner";
+import React, { PropsWithChildren, ReactElement, useState } from "react"
+import GridDisplayOptions from "./GridDisplayOptions"
+import { GridOptions } from "../../../../domain/grid/GridOptions"
+import GridDisplayType from "../../../../domain/grid/GridDisplayType"
+import styles from "../../../../styles/sass/components/layout/wizard/grid/GridDisplay.module.scss"
+import ScrollableContainer from "../../../ui/ScrollableContainer"
+import LoadingSpinner from "../../../ui/loading/LoadingSpinner"
 
 export interface GridDisplayProps {
-    loading?: boolean;
-    controls?: boolean;
-    className?: string;
-    defaultDisplayType?: GridDisplayType;
-    customOptions?: React.ReactElement;
+    loading?: boolean
+    controls?: boolean
+    className?: string
+    defaultDisplayType?: GridDisplayType
+    customOptions?: React.ReactElement
 }
 
 const GridDisplay = (props: PropsWithChildren<GridDisplayProps>) => {
-    const { loading, children, controls, className, customOptions, defaultDisplayType } = props;
+    const { loading, children, controls, className, customOptions, defaultDisplayType } = props
 
-    const [options, setOptions] = useState<GridOptions>({ type: GridDisplayType.GRID, size: 80 });
+    const [options, setOptions] = useState<GridOptions>({ type: GridDisplayType.GRID, size: 80 })
 
     return (
         <div className={[className, styles.wrapper].join(" ")}>
             <div className={styles.header}>
-                <div>
-                    {customOptions}
-                </div>
+                <div>{customOptions}</div>
 
                 {controls && (
                     <GridDisplayOptions
                         className={styles.options}
                         defaultType={defaultDisplayType}
-                        onSelect={options => setOptions(options)}
+                        onSelect={(options) => setOptions(options)}
                     />
                 )}
             </div>
@@ -40,29 +38,23 @@ const GridDisplay = (props: PropsWithChildren<GridDisplayProps>) => {
 
                 {!loading && (
                     <>
-                        {
-                            options.type == GridDisplayType.LIST && (
-                                React.Children.map(children, (child => {
-                                    return React.cloneElement(child as ReactElement, {
-                                        style: { width: "100%", height: 40 },
-                                        small: options.type.showShort,
-                                        className: styles.list
-                                    });
-                                }))
-                            )
-                        }
+                        {options.type == GridDisplayType.LIST &&
+                            React.Children.map(children, (child) => {
+                                return React.cloneElement(child as ReactElement, {
+                                    style: { width: "100%", height: 40 },
+                                    small: options.type.showShort,
+                                    className: styles.list
+                                })
+                            })}
 
-                        {
-                            options.type == GridDisplayType.GRID && (
-                                React.Children.map(children, (child => {
-                                    return React.cloneElement(child as ReactElement, {
-                                        style: { width: options.size, height: options.size },
-                                        small: options.type.showShort,
-                                        className: styles.item
-                                    });
-                                }))
-                            )
-                        }
+                        {options.type == GridDisplayType.GRID &&
+                            React.Children.map(children, (child) => {
+                                return React.cloneElement(child as ReactElement, {
+                                    style: { width: options.size, height: options.size },
+                                    small: options.type.showShort,
+                                    className: styles.item
+                                })
+                            })}
                     </>
                 )}
             </ScrollableContainer>
@@ -70,4 +62,4 @@ const GridDisplay = (props: PropsWithChildren<GridDisplayProps>) => {
     )
 }
 
-export default GridDisplay;
+export default GridDisplay

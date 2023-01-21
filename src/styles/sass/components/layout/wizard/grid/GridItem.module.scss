@@ -13,7 +13,8 @@
   color: $dark-2;
 }
 
-.notSelected:active, .notSelected:focus, {
+.notSelected:active,
+.notSelected:focus {
   box-shadow: none;
   background-color: $light-1;
   color: $dark-3 !important;
@@ -34,7 +35,11 @@
   background-color: $light-2;
 }
 
-.selected, .selected:focus, .selected:active, .button:active, .button:focus {
+.selected,
+.selected:focus,
+.selected:active,
+.button:active,
+.button:focus {
   background-color: $light-1 !important;
   border-color: rgba(148, 148, 148, 0.8) !important;
   color: $dark-3;

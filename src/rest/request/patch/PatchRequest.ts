@@ -1,10 +1,10 @@
-import PatchOperation from "./PatchOperation";
+import PatchOperation from "./PatchOperation"
 
 export default class PatchRequest {
-    private readonly _operations: PatchOperation[];
+    private readonly _operations: PatchOperation[]
 
     constructor(operations: PatchOperation[]) {
-        this._operations = operations;
+        this._operations = operations
     }
 
     public toJSON() {
@@ -14,6 +14,6 @@ export default class PatchRequest {
                 path: `/${operation.path}`,
                 value: operation.value
             }
-        });
+        })
     }
 }

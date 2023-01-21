@@ -1,20 +1,19 @@
-import KanaSettings from "../../../domain/session/settings/data/KanaSettings";
+import KanaSettings from "../../../domain/session/settings/data/KanaSettings"
 
 export interface KanaDataSettingsSummaryProps {
-    settings: KanaSettings;
-    className?: string;
+    settings: KanaSettings
+    className?: string
 }
 
 const KanaDataSettingsSummary = (props: KanaDataSettingsSummaryProps) => {
+    const { settings, className } = props
 
-    const { settings, className } = props;
-
-    const hasHiragana = settings.hiragana;
-    const hasKatakana = settings.katakana;
-    const hasDiagraphs = settings.diagraphs;
-    const hasDiacriticals = settings.diacriticals;
-    const hasBothSyllabaries = hasHiragana && hasKatakana;
-    const hasAnyExtra = hasDiagraphs || hasDiacriticals;
+    const hasHiragana = settings.hiragana
+    const hasKatakana = settings.katakana
+    const hasDiagraphs = settings.diagraphs
+    const hasDiacriticals = settings.diacriticals
+    const hasBothSyllabaries = hasHiragana && hasKatakana
+    const hasAnyExtra = hasDiagraphs || hasDiacriticals
 
     if (settings.onlyDiagraphs) {
         return (
@@ -40,7 +39,7 @@ const KanaDataSettingsSummary = (props: KanaDataSettingsSummaryProps) => {
             {hasDiacriticals && <span className={className}>{"diacriticals"}</span>}
             {hasAnyExtra && <span>{" included "}</span>}
         </span>
-    );
+    )
 }
 
-export default KanaDataSettingsSummary;
+export default KanaDataSettingsSummary

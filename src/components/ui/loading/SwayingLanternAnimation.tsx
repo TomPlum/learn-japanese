@@ -1,19 +1,18 @@
-import styles from "../../../styles/sass/components/ui/loading/SwayingLanternAnimation.module.scss";
+import styles from "../../../styles/sass/components/ui/loading/SwayingLanternAnimation.module.scss"
 
 export interface LanternLogoProps {
-    className?: string;
+    className?: string
 }
 
 const SwayingLanternAnimation = (props: LanternLogoProps) => {
-
-    const { className } = props;
+    const { className } = props
 
     return (
         <div className={[styles["stage"], className].join(" ")} data-testid="lantern-animation">
             <div className={styles["scene"]}>
                 <div className={styles["halo"]}>
                     <i />
-{/*                    <span className={styles["halo-star"]} />
+                    {/*                    <span className={styles["halo-star"]} />
                     <span className={styles["halo-star"]} />
                     <span className={styles["halo-star"]} />*/}
                     <i />
@@ -34,7 +33,7 @@ const SwayingLanternAnimation = (props: LanternLogoProps) => {
                         <div className={styles["lantern-base"]} />
                     </div>
                 </div>
-              {/*  <div className={styles["planets"]}>
+                {/*  <div className={styles["planets"]}>
                     <div className={styles["planet"]} />
                     <div className={styles["planet"]} />
                     <div className={styles["planet"]} />
@@ -44,7 +43,7 @@ const SwayingLanternAnimation = (props: LanternLogoProps) => {
                 </div>*/}
             </div>
         </div>
-  /*  <div className={styles["stage"]}>
+        /*  <div className={styles["stage"]}>
         <div className={styles["scene"]}>
             <div className={styles["halo"]}>
                 <i />
@@ -79,7 +78,7 @@ const SwayingLanternAnimation = (props: LanternLogoProps) => {
             </div>
         </div>
     </div>*/
-    );
+    )
 }
 
-export default SwayingLanternAnimation;
+export default SwayingLanternAnimation

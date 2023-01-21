@@ -1,0 +1,16 @@
+@import "src/styles/sass/colours";
+
+.value {
+  font-family: "Ciutadella Rounded", "Segoe UI", sans-serif;
+  font-size: 0.7em;
+  vertical-align: top;
+  margin-left: 2px;
+}
+
+.bookOne {
+  color: $genki-1-dark;
+}
+
+.bookTwo {
+  color: $genki-2-dark;
+}

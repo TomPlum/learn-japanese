@@ -119,14 +119,14 @@
 
 .japanese {
   font-weight: 550;
-  background: rgb(254,19,81);
-  background: radial-gradient(circle, rgba(254,19,81,1) 0%, rgba(223,30,30,1) 100%);
+  background: rgb(254, 19, 81);
+  background: radial-gradient(circle, rgba(254, 19, 81, 1) 0%, rgba(223, 30, 30, 1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .inspectable {
-  color: #FFF;
+  color: #fff;
 }
 
 .wrapper {
@@ -157,7 +157,7 @@
   background-color: transparent;
   color: white;
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   z-index: 100;
 }
 

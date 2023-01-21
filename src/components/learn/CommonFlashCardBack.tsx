@@ -1,24 +1,24 @@
-import { Col, Container, Row } from "react-bootstrap";
-import FlashCardBack from "./FlashCardBack";
-import { Component } from "react";
-import { LearningExample } from "../../domain/learn/Learnable";
+import { Col, Container, Row } from "react-bootstrap"
+import FlashCardBack from "./FlashCardBack"
+import { Component } from "react"
+import { LearningExample } from "../../domain/learn/Learnable"
 import styles from "../../styles/sass/components/learn/CommonFlashCardBack.module.scss"
-import RomajiGenerator from "../../utility/RomajiGenerator";
+import RomajiGenerator from "../../utility/RomajiGenerator"
 
 export interface CommonFlashCardBackProps {
-    answer: string;
-    kana: string[];
-    title: string;
-    borderColour?: string;
-    example?: LearningExample;
-    onClick: () => void;
+    answer: string
+    kana: string[]
+    title: string
+    borderColour?: string
+    example?: LearningExample
+    onClick: () => void
 }
 
 class CommonFlashCardBack extends Component<CommonFlashCardBackProps> {
     render() {
-        const { answer, kana, title, example, borderColour, onClick } = this.props;
+        const { answer, kana, title, example, borderColour, onClick } = this.props
 
-        const romaji = new RomajiGenerator();
+        const romaji = new RomajiGenerator()
 
         return (
             <FlashCardBack title={title} onReset={onClick} className={styles.wrapper} borderColour={borderColour}>
@@ -31,7 +31,7 @@ class CommonFlashCardBack extends Component<CommonFlashCardBackProps> {
                         <Col sm={6} xs={12} className={styles.rightCol}>
                             <div className={styles.rightDataWrapper}>
                                 <p className={styles.kana}>{kana.join(" or ")}</p>
-                                <p className={styles.romaji}>({kana.map(it => romaji.generate(it)).join(" or ")})</p>
+                                <p className={styles.romaji}>({kana.map((it) => romaji.generate(it)).join(" or ")})</p>
                             </div>
                         </Col>
                     </Row>
@@ -48,8 +48,8 @@ class CommonFlashCardBack extends Component<CommonFlashCardBackProps> {
                     </Row>
                 </Container>
             </FlashCardBack>
-        );
+        )
     }
 }
 
-export default CommonFlashCardBack;
+export default CommonFlashCardBack

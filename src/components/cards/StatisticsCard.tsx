@@ -1,11 +1,11 @@
-import DashboardCard from "../layout/card/DashboardCard";
-import DashboardCardHeader from "../layout/card/DashboardCardHeader";
-import styles from "../../styles/sass/components/cards/StatisticsCard.module.scss";
-import { faChevronLeft, faChevronRight, faGamepad, faSadCry, faTrophy } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import { Cell, Pie, PieChart } from "recharts";
-import { useTranslation } from "react-i18next";
+import DashboardCard from "../layout/card/DashboardCard"
+import DashboardCardHeader from "../layout/card/DashboardCardHeader"
+import styles from "../../styles/sass/components/cards/StatisticsCard.module.scss"
+import { faChevronLeft, faChevronRight, faGamepad, faSadCry, faTrophy } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState } from "react"
+import { Cell, Pie, PieChart } from "recharts"
+import { useTranslation } from "react-i18next"
 
 const dummyKanjiData = [
     { grade: 1, value: 80, fill: "#4189ff" },
@@ -13,30 +13,33 @@ const dummyKanjiData = [
     { grade: 3, value: 200, fill: "#f59037" },
     { grade: 4, value: 150, fill: "#8f46ea" },
     { grade: 5, value: 78, fill: "#d952d9" },
-    { grade: 6, value: 12, fill: "#d73939" },
-];
+    { grade: 6, value: 12, fill: "#d73939" }
+]
 
 const dummyKanaData = [
     { type: "Hiragana", value: 120, fill: "#3167c6" },
-    { type: "Katakana", value: 78, fill: "#5cce3d" },
-];
+    { type: "Katakana", value: 78, fill: "#5cce3d" }
+]
 
 const dummyOtherData = [
     { type: "Verbs", value: 10, fill: "#4189ff" },
     { type: "Adjectives", value: 50, fill: "#5dca41" },
     { type: "Adverbs", value: 22, fill: "#f59037" },
     { type: "Nouns", value: 67, fill: "#8f46ea" },
-    { type: "Counters", value: 12, fill: "#d952d9" },
-];
+    { type: "Counters", value: 12, fill: "#d952d9" }
+]
 
 enum StatView {
-    PLAY, LEARN, KANJI, KANA, OTHER
+    PLAY,
+    LEARN,
+    KANJI,
+    KANA,
+    OTHER
 }
 
 const StatisticsCard = () => {
-
-    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.stats" });
-    const [view, setView] = useState(StatView.KANA);
+    const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.stats" })
+    const [view, setView] = useState(StatView.KANA)
 
     const getMainContent = () => {
         switch (view) {
@@ -58,7 +61,7 @@ const StatisticsCard = () => {
                             </div>
                         </div>
                     </>
-                );
+                )
             }
             case StatView.LEARN: {
                 return (
@@ -78,7 +81,7 @@ const StatisticsCard = () => {
                             </div>
                         </div>
                     </>
-                );
+                )
             }
             case StatView.KANJI: {
                 return (
@@ -93,8 +96,8 @@ const StatisticsCard = () => {
                                     innerRadius={15}
                                     data={dummyKanjiData}
                                 >
-                                    {dummyKanjiData.map(datum => {
-                                        return <Cell key={`cell-${datum.grade}`} fill={datum.fill}/>
+                                    {dummyKanjiData.map((datum) => {
+                                        return <Cell key={`cell-${datum.grade}`} fill={datum.fill} />
                                     })}
                                 </Pie>
                             </PieChart>
@@ -115,7 +118,7 @@ const StatisticsCard = () => {
                             </div>
                         </div>
                     </>
-                );
+                )
             }
             case StatView.KANA: {
                 return (
@@ -132,7 +135,7 @@ const StatisticsCard = () => {
                                     animationBegin={0}
                                     data={dummyKanaData}
                                 >
-                                    {dummyKanaData.map(datum => {
+                                    {dummyKanaData.map((datum) => {
                                         return <Cell key={`cell-${datum.type}`} fill={datum.fill} stroke="none" />
                                     })}
                                 </Pie>
@@ -154,7 +157,7 @@ const StatisticsCard = () => {
                             </div>
                         </div>
                     </>
-                );
+                )
             }
             case StatView.OTHER: {
                 return (
@@ -174,7 +177,7 @@ const StatisticsCard = () => {
                             </div>
                         </div>
                     </>
-                );
+                )
             }
         }
     }
@@ -182,9 +185,7 @@ const StatisticsCard = () => {
     return (
         <DashboardCard size="sm" className={styles.card} loading={!ready}>
             <DashboardCard.Header>
-                <DashboardCardHeader.Title>
-                    {t("title")}
-                </DashboardCardHeader.Title>
+                <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
             </DashboardCard.Header>
 
             <DashboardCard.Body className={styles.body}>
@@ -192,16 +193,14 @@ const StatisticsCard = () => {
                     <FontAwesomeIcon icon={faChevronLeft} fixedWidth />
                 </div>
 
-                <div className={styles.middle}>
-                    {getMainContent()}
-                </div>
+                <div className={styles.middle}>{getMainContent()}</div>
 
                 <div className={styles.right} onClick={() => setView(view > 0 ? view - 1 : 4)}>
                     <FontAwesomeIcon icon={faChevronRight} fixedWidth />
                 </div>
             </DashboardCard.Body>
         </DashboardCard>
-    );
+    )
 }
 
-export default StatisticsCard;
+export default StatisticsCard

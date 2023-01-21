@@ -1,5 +1,5 @@
-import { KanaColumn } from "../domain/kana/KanaColumn";
-import { KanaData } from "./DataTypes";
+import { KanaColumn } from "../domain/kana/KanaColumn"
+import { KanaData } from "./DataTypes"
 
 function hiragana(): KanaData[] {
     return [
@@ -460,7 +460,6 @@ function hiragana(): KanaData[] {
             diacritical: false
         },
 
-
         //H Column (Big)
         {
             name: "は",
@@ -808,7 +807,7 @@ function hiragana(): KanaData[] {
             column: KanaColumn.OTHER,
             diacritical: false
         }
-    ];
+    ]
 }
 
-export default hiragana;
+export default hiragana

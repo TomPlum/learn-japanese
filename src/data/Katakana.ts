@@ -1,5 +1,5 @@
-import {KanaColumn} from "../domain/kana/KanaColumn";
-import { KanaData } from "./DataTypes";
+import { KanaColumn } from "../domain/kana/KanaColumn"
+import { KanaData } from "./DataTypes"
 
 function katakana(): KanaData[] {
     return [
@@ -249,7 +249,6 @@ function katakana(): KanaData[] {
             romaji: ["shu"],
             column: KanaColumn.S,
             diacritical: false
-
         },
         {
             name: "ショ",
@@ -809,7 +808,7 @@ function katakana(): KanaData[] {
             column: KanaColumn.OTHER,
             diacritical: false
         }
-    ];
+    ]
 }
 
-export default katakana;
+export default katakana

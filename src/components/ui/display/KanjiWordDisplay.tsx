@@ -1,25 +1,18 @@
-import InformationalKanji from "./InformationalKanji";
+import InformationalKanji from "./InformationalKanji"
 
 export interface KanjiWordDisplayProps {
-    value: string;
-    className?: string;
+    value: string
+    className?: string
 }
 
 const KanjiWordDisplay = (props: KanjiWordDisplayProps) => {
-
-    const { value, className } = props;
+    const { value, className } = props
 
     return (
-        <div>{
-            [...value].map((char: string) => {
+        <div>
+            {[...value].map((char: string) => {
                 if (/[一-龯]/.test(char)) {
-                    return (
-                        <InformationalKanji
-                            value={char}
-                            key={"display-" + char}
-                            className={className}
-                        />
-                    );
+                    return <InformationalKanji value={char} key={"display-" + char} className={className} />
                 } else {
                     return (
                         <span key={char} className={className}>
@@ -27,9 +20,9 @@ const KanjiWordDisplay = (props: KanjiWordDisplayProps) => {
                         </span>
                     )
                 }
-            })
-        }</div>
-    );
+            })}
+        </div>
+    )
 }
 
-export default KanjiWordDisplay;
+export default KanjiWordDisplay

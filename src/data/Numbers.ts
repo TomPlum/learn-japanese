@@ -1,5 +1,5 @@
-import { CounterData, NumbersData } from "./DataTypes";
-import { CounterGroup } from "../domain/numbers/CounterGroup";
+import { CounterData, NumbersData } from "./DataTypes"
+import { CounterGroup } from "../domain/numbers/CounterGroup"
 
 export default function numbers(): NumbersData[] {
     return [
@@ -98,8 +98,8 @@ export default function numbers(): NumbersData[] {
             kanji: "兆",
             kana: ["ちょう"],
             romaji: ["chō"]
-        },
-    ];
+        }
+    ]
 }
 
 //https://www.tofugu.com/japanese/japanese-counters-list/
@@ -182,7 +182,10 @@ export function counters(): CounterData[] {
             kana: ["か", "にち"],
             romaji: ["ka", "nichi"],
             group: CounterGroup.MUST_KNOW,
-            example: { kana: "来月の３日って何してる？", english: "What are you up to on the third day of next month?" }
+            example: {
+                kana: "来月の３日って何してる？",
+                english: "What are you up to on the third day of next month?"
+            }
         },
         {
             name: "Years",
@@ -198,7 +201,10 @@ export function counters(): CounterData[] {
             kana: ["かい"],
             romaji: ["kai"],
             group: CounterGroup.MUST_KNOW,
-            example: { kana: "日本には何回行ったことがありますか？", english: "How many times have you been to Japan?" }
+            example: {
+                kana: "日本には何回行ったことがありますか？",
+                english: "How many times have you been to Japan?"
+            }
         },
         {
             name: "People",
@@ -247,6 +253,6 @@ export function counters(): CounterData[] {
             romaji: ["sai"],
             group: CounterGroup.MUST_KNOW,
             example: { kana: "コウイチのお婆ちゃんって今何歳？", english: "How old is Koichi's grandma now?" }
-        },
-    ];
+        }
+    ]
 }

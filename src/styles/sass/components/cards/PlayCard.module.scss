@@ -19,19 +19,20 @@
   position: relative;
   transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1) 0s;
 }
-.start:link, .start:visited {
+.start:link,
+.start:visited {
   position: relative;
   display: block;
   margin: 30px auto 0;
   padding: 14px 15px;
   color: #fff;
-  font-size:14px;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   border-radius: 0;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
   -webkit-transition: all 1s ease;
@@ -39,8 +40,9 @@
   -o-transition: all 1s ease;
   transition: all 1s ease;
 }
-.start:link:after, .start:visited:after {
-  content: '';
+.start:link:after,
+.start:visited:after {
+  content: "";
   position: absolute;
   display: inline-block;
   height: 0;
@@ -53,11 +55,13 @@
   -o-transition: all 0.75s ease 0s;
   transition: all 0.75s ease 0s;
 }
-.start:link:hover, .start:visited:hover {
-  color: #FFF;
+.start:link:hover,
+.start:visited:hover {
+  color: #fff;
   text-shadow: none;
 }
-.start:link:hover:after, .start:visited:hover:after {
+.start:link:hover:after,
+.start:visited:hover:after {
   height: 450%;
 }
 .start:hover {
@@ -77,7 +81,7 @@
   height: 100%;
   width: 0;
   z-index: 0;
-  content: '';
+  content: "";
   border-radius: 3px;
   color: $dark-2 !important;
   background: $light-1 !important;
@@ -88,7 +92,8 @@
   margin-right: 5px;
 }
 
-.start svg, .start span {
+.start svg,
+.start span {
   z-index: 1;
   position: relative;
 }

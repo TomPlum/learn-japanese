@@ -1,731 +1,732 @@
 {
-  "landing": {
-    "button": {
-      "learn": "習う",
-      "play": "遊ぶ",
-      "search": "検索",
-      "help": "ヘルプ"
-    }
-  },
-  "forms": {
-    "common": {
-      "username": "ユーザー名",
-      "password": "パスワード",
-      "confirm-password": "パスワード確認",
-      "email": "メールアドレス",
-      "nickname": "ニックネーム"
+    "landing": {
+        "button": {
+            "learn": "習う",
+            "play": "遊ぶ",
+            "search": "検索",
+            "help": "ヘルプ"
+        }
     },
-    "login": {
-      "no-account": "私はアカウントを持っていません",
-      "session-expired": "セッションの有効期限が切れました。もう一度ログインしてください。"
-    },
-    "register": {
-      "already-registered": "すでにアカウントを持っています",
-      "passwords-dont-match": "パスワードが一致していません",
-      "checking-username-eligibility": "ユーザー名の適格性の確認...",
-      "checking-email-eligibility": "メールアドレスの適格性の確認...",
-      "username-available": "ユーザー名が利用可能です。",
-      "email-available": "メールアドレスが利用可能",
-      "email-not-shared": "あなたのメールアドレスが他の誰とも共有されることはありません。",
-      "email-taken": "このメールアドレスはすでに登録されています",
-      "username-taken": "このユーザー名は既に使われています。",
-      "password-policy": {
-        "title": "パスワード ポリシー",
-        "lowercase": "パスワードには、少なくとも 1 つの小文字が含まれている必要があります。",
-        "uppercase": "パスワードには、少なくとも 1 つの大文字が含まれている必要があります。",
-        "number": "パスワードは、少なくとも1つの番号が含まれている必要があります。",
-        "special-char": "パスワードには少なくとも 1 つの特殊文字が含まれている必要があります。",
-        "length": "パスワードは 8 ～ 36 文字 (両端を含む) にする必要があります。"
-      }
-    },
-    "custom-preset": {
-      "title": "プリセットの詳細",
-      "failed-to-save": "プリセットの保存に失敗しました。",
-      "generic-error": "プリセットの保存中にエラーが発生しました。",
-      "success-message": "「{{name}}」を保存しました",
-      "change-icon": "アイコンの変更",
-      "default-preset-name": "私のプリセット"
-    }
-  },
-  "navigation": {
-    "button": {
-      "home": "ホーム",
-      "learn": "習う",
-      "help": "ヘルプ",
-      "kanji-dict": "漢字辞書",
-      "kana-dict": "仮名辞書",
-      "genki-dict": "げんきの要約",
-      "faq": "よくある質問",
-      "sm2": "「スーパーメモ」 アルゴリズム",
-      "user": {
-        "login": "ログイン",
-        "profile": "プロフィール",
-        "stats": "統計",
-        "high-scores": "高得点",
-        "logout": "ログアウト"
-      }
-    }
-  },
-  "wizard": {
-    "confirmation": {
-      "title": "本気ですか？",
-      "body": "現在の構成が失われます。"
-    },
-    "steps": {
-      "mode": {
-        "title": "モードを選択",
-        "play": " 遊ぶ",
-        "learn": "学ぶ",
-        "play-desc": "特定のトピックに関する知識をテストします。プリセットのゲーム モードから選択するか、独自の設定をカスタマイズします。",
-        "learn-desc": "フラッシュ カードと間隔をあけた反復学習を使用して、選択したトピックを学習します"
-      },
-      "topic": {
-        "title": "トピックを選択"
-      },
-      "type": {
-        "title": "タイプを選択",
-        "preset": "プリセット",
-        "custom": "カスタム",
-        "preset-desc": "選択したトピックのプリセット ゲーム構成の 1 つから選択します。",
-        "custom-desc": "利用可能な設定を構成して、カスタマイズされたゲーム モードを作成します。"
-      },
-      "preset": {
-        "title": "プリセットを選択"
-      },
-      "question": {
-        "title": "質問の設定",
-        "desc": "尋ねられる質問の種類に関する設定を構成します。",
-        "type-heading": "質問の種類",
-        "fields-heading": "質問と回答変数名",
-        "fields-desc": "質問で提供される情報と、回答として提供する必要があるものを選択します。両方に同じフィールドを選択することはできません。",
-        "give-me": "ちょうだい...",
-        "ask-me": "私に聞いてください...",
-        "score-heading": "点数",
-        "track-score": "追跡点数",
-        "score-desc": "正解した質問ごとに基本スコアを獲得します。ストリーキングすると乗数が指数関数的に増加しますが、それを破るとベースにリセットされます。質問をスキップすると、基本スコアの 1 倍が失われます。",
-        "cards-quantity": {
-          "desc": "{{quantity}}つの回答が表示されます。",
-          "2": "二",
-          "4": "四",
-          "6": "六"
+    "forms": {
+        "common": {
+            "username": "ユーザー名",
+            "password": "パスワード",
+            "confirm-password": "パスワード確認",
+            "email": "メールアドレス",
+            "nickname": "ニックネーム"
         },
-        "type": {
-          "text": {
-            "name": "文章",
-            "desc": "質問ごとに 1 つの情報 (記号、読み方、意味など) が与えられ、リクエストにその他の情報を入力する必要があります"
-          },
-          "choice": {
-            "name": "複数の選択肢",
-            "desc": "与えられたデータに対して何かが与えられ、複数の回答オプションが提示され、どれが正しいかが示されます。"
-          },
-          "match": {
-            "name": "一致",
-            "desc": "答えとともにいくつかの情報が与えられ、それらを正しく一致させる必要があります。"
-          },
-          "audio": {
-            "name": "音",
-            "desc": "オーディオ クリップが再生され、その意味を入力または選択する必要があります。"
-          },
-          "random": {
-            "name": "ランダム",
-            "desc": "すべての質問タイプがランダムにシャッフルされます。"
-          }
-        }
-      },
-      "hint": {
-        "title": "ヒント設定",
-        "enable": "有効",
-        "infinite": "無限ヒント",
-        "enable-desc": "ヒントを使用すると、苦労している場合に、現在の質問に関する小さな情報を明らかにすることができます。",
-        "quantity-desc": "ゲーム全体で必要なヒントの数を選択します。質問ごとに 1 つだけ使用できます。",
-        "infinite-desc": "制限を解除して、必要な数のヒントを使用してください。"
-      },
-      "life": {
-        "title": "ライフ設定",
-        "enable": "有効",
-        "desc": "開始するライフの数を設定します。追加の課題として、よりカジュアルにプレイしている場合は、数個だけ、または無制限に与えることができます。",
-        "lives-desc": "ゲームを開始するライフの数を選択します。 1 から 10 の間で選択できます。無効にすると無限になります。"
-      },
-      "time": {
-        "title": "時間設定",
-        "desc": "ゲームに必要なタイマーのスタイルを構成するか、完全に無効にします。",
-        "timed": "時限",
-        "countdown": "秒読み",
-        "timed-desc": "00:00 から開始するだけの時間が計測され、ゲームを終了するか負けるとタイマーは停止します。特定のトピックをスピード実行して習熟度をテストするのに役立ちます。",
-        "countdown-desc": "各質問に答えるために設定された秒数が与えられます。与えられた時間内に正しく答えることができないと、ライフが失われます。正解するとタイマーがリセットされます。",
-        "seconds-quantity": "以下の質問ごとの秒数を選択してください"
-      },
-      "data": {
-        "fields": {
-          "quantity": {
-            "label": "量",
-            "placeholder": "数量を入力する"
-          }
+        "login": {
+            "no-account": "私はアカウントを持っていません",
+            "session-expired": "セッションの有効期限が切れました。もう一度ログインしてください。"
         },
-        "kana": {
-          "hiragana-label": "平仮名",
-          "hiragana-desc": "ひらがなは、話されている日本語を構成するすべての音を定義する主な音節です。",
-          "katakana-label": "片仮名",
-          "katakana-desc": "カタカナは、前述のひらがなの鏡文字です。同じように発音される各かなの 1 対 1 のマッピングがあります。書き方が異なり、一般的には外来語やオノマトペにのみ使用されます。これらの文字は、ひらがなよりもはるかに角度があり直線的です。",
-          "diagraphs-label": "ダイグラフ",
-          "diagraphs-desc": "ダイアグラフは 2 つの仮名の組み合わせです。両方の音節は、それぞれの仮名に同じダイアグラフを持っています。"
-        }
-      },
-      "confirmation": {
-        "title": "確認",
-        "login-message": "保存するにはログインする必要があります。",
-        "save-preset": "プリセットを保存"
-      }
-    }
-  },
-  "dashboard": {
-    "card": {
-      "play": {
-        "start": "スタートセッション",
-        "last-play": "前のゲームセッション",
-        "last-learn": "前の学習セッション",
-        "default-title": "カスタムセッション",
-        "play-title": "最近ゲームをしていません",
-        "learn-title": "最近何も練習していません"
-      },
-      "profile": {
-        "go": "プロフィール",
-        "register": "登録する",
-        "notifications": "通知",
-        "user-settings": "アカウント設定",
-        "tour": "見せて",
-        "description": "アカウントを作成すると、カスタムプリセットを保存したり、ハイスコアを競ったり、進捗状況や統計情報を確認することができます。"
-      },
-      "settings": {
-        "title": "設定",
-        "general": "一般設定",
-        "learn": "学習設定",
-        "play": "ゲーム設定",
-        "interface": "設計設定",
-        "notification": "通知設定",
-        "user": "ユーザー設定"
-      },
-      "kanji-showcase": {
-        "title": "漢字ショーケース",
-        "search": "すべての漢字を検索",
-        "on": {
-          "short": "音",
-          "long": "音読み"
-        },
-        "kun": {
-          "short": "訓",
-          "long": "訓読み"
-        },
-        "grade": "教育の学年",
-        "jlpt": "JLPTレベル",
-        "strokes": "刷毛の量",
-        "examples": "例",
-        "shuffle": "シャッフル",
-        "meaning": "意味"
-      },
-      "favourites": {
-        "title": "お気に入り",
-        "modal": {
-          "quit-confirmation": {
-            "title": "本当にやめる気？",
-            "body": "お気に入りへの変更が保存されていません。"
-          }
-        }
-      },
-      "flash-cards": {
-        "title": "フラッシュカード",
-        "review": "復習",
-        "learning": "学習",
-        "new": "新しい",
-        "start": "勉強会開始"
-      },
-      "activity": {
-        "title": "アクティビティフィード",
-        "more": "もっと見る",
-        "event": {
-          "learn": "学習セッション",
-          "play": "ゲームセッション",
-          "mistakes": "間違復習",
-          "welcome": "ようこそ!",
-          "streak": "{{streak}}日達成!"
-        },
-        "time": {
-          "now": "今",
-          "minutes-past": "%d分前",
-          "hours-past": "%d時間前",
-          "days-past": "%d日前",
-          "months-past": "%dヶ月前",
-          "years-past": "%d年前",
-          "one-minute-ago": "1分前",
-          "one-hour-ago": "一時間前",
-          "one-day-ago": "1日前",
-          "one-month-ago": "1ヶ月前",
-          "one-year-ago": "一年前"
-        }
-      },
-      "stats": {
-        "title": "統計",
-        "kana": "仮名",
-        "kanji": "漢字"
-      },
-      "mistakes": {
-        "title": "間違い",
-        "review": "復習える",
-        "view": "間違いを見る",
-        "practice": "練習",
-        "kanji": "漢字",
-        "kana": "仮名",
-        "definitions": "定義"
-      },
-      "high-scores": {
-        "title": "高得点",
-        "more": "もっと見る",
-        "rank": "位",
-        "leaderboard": "リーダーボード",
-        "score": "点数",
-        "names": {
-          "romaji-time-attack": "ローマ字時限",
-          "kanji-hardcore": "漢字ハードコア",
-          "verb-match": "動詞一致",
-          "adverbs": "副詞",
-          "hiragana-speed-run": "平仮名スピードラン"
-        }
-      },
-      "streak": {
-        "streak": "日の連続",
-        "account-creation": "アカウント作成",
-        "custom-date": "カスタム日付",
-        "streak-template": "{{streak}}日の連続",
-        "account-template": "生後{{days}}日",
-        "custom-template": "{{day}}日目"
-      }
-    }
-  },
-  "settings": {
-    "modal": {
-      "general": {
-        "heading": "一般設定",
-        "desc": "アプリに関する一般的な要素とアクションの一般設定。",
-        "activity-feed": {
-          "heading": "アクティビティフィード",
-          "desc": "デフォルトでアクティビティ フィード カードに表示するイベントの数を設定します。",
-          "options": [
-              { "name": "三", "value": "3" },
-              { "name": "五", "value": "5" },
-              { "name": "八", "value": "8" }
-          ]
-        }
-      },
-      "learn": {
-        "heading": "学習設定",
-        "desc": "日本語学習に関する設定を行います。",
-        "flash-cards": {
-          "heading": "1 日あたりのフラッシュ カード",
-          "desc": "1 日に表示する新しいフラッシュ カードの数を設定します。新しいカードは、あなたのデッキがアクティブであり、レビューする未処理のカードがない場合にのみ発行されます。",
-          "options": [
-            { "name": "十", "value": "10" },
-            { "name": "二十", "value": "20" },
-            { "name": "三十", "value": "30" },
-            { "name": "四十", "value": "40" },
-            { "name": "五十", "value": "50" }
-          ]
-        },
-        "romaji": {
-          "heading": "ローマ字設定",
-          "desc": "仮名のローマ字異体字を表示するためのデフォルトの動作を設定します。ローマ字またはローマ字は、日本語の書き言葉のローマ字化です。",
-          "options": [
-            { "name": "いつも見せる", "value": "Always Show" },
-            { "name": "毎回尋ねる", "value": "Ask Each Time" },
-            { "name": "常に非表示", "value": "Always Hide" }
-          ]
-        }
-      },
-      "play": {
-        "heading": "ゲームの設定",
-        "desc": "ゲームやその他のプレイ指向モードに関連する設定を構成します。",
-        "high-scores": {
-          "label": "高得点の好み",
-          "desc": "ゲームセッションを高得点に送信するためのデフォルトの動作を設定します。",
-          "options": [
-            { "name": "毎回尋ねる", "value": "Ask Each Time" },
-            { "name": "常に送信", "value": "Always Submit" },
-            { "name": "Never Submit", "value":  "提出しない" }
-          ]
-        }
-      },
-      "interface": {
-        "heading": "設計設定",
-        "desc": "設計を構成して、レイアウトとルック アンド フィールを好みに合わせてカスタマイズします。",
-        "customise-dashboard-layout": {
-          "heading": "ダッシュボード レイアウトのカスタマイズ",
-          "desc": "ホームページのダッシュボードのレイアウトを編集します。カードのオンとオフを切り替えたり、サイズを変更したり、別の列に移動したりできます。",
-          "button": "設計エディターを開く"
-        },
-        "theme": {
-          "heading": "テーマ",
-          "desc": "ユーザー インターフェイス テーマのダーク バリエーションとライト バリエーションを切り替えます。",
-          "options": [
-            { "name": "ダークモード", "value": "Dark Mode", "icon": "FaMoon", "className": "dark" },
-            { "name": "ライトモード", "value": "Light Mode", "icon": "FaLightbulb", "className": "light" }
-          ]
-        },
-        "kanji-font": {
-          "heading": "漢字フォント",
-          "desc": "アプリ内のすべての漢字に使用するデフォルトのフォントを設定します。",
-          "options": {
-            "default": "デフォルト",
-            "mincho": "アプリ明朝",
-            "handwriting": "手書き",
-            "gothic": "ゴシック"
-          }
-        },
-        "language": {
-          "heading": "言語と国際化",
-          "desc": "すべての主要なボタン、メニュー、およびリンクで使用される言語を設定します。",
-          "options": [
-            { "name":  "英語", "value":  "English" },
-            { "name":  "日本語", "value":  "日本語" }
-          ]
-        },
-        "confidence-menu-style": {
-          "heading": "コンフィデンス メニュースタイル",
-          "desc": "フラッシュ カード学習セッション中に使用される信頼度評価ウィジェットの形式を変更します。",
-          "options": [
-            { "name": "絵文字スタイル", "value": "Emoji Style", "icon": "FaSmile" },
-            { "name": "数字 1 ～ 6", "value": "Numbers 1 - 6", "icon": "FaSortNumericUp" }
-          ]
-        }
-      },
-      "notification": {
-        "heading": "通知設定",
-        "desc": "通知センターとアプリ全体の通信に関連する設定を構成します。",
-        "streak-notifications": {
-          "heading": "ストリーク通知",
-          "desc": "重要な連続マイルストーンの通知を切り替えます。",
-          "enable": "エネーブル",
-          "disable": "ディセーブル",
-          "enabled": "オン",
-          "disabled": "オフ"
-        },
-        "outstanding-mistakes-reminder": {
-          "heading": "未解決の間違いのリマインダー",
-          "desc": "見直しが必要な未解決のミスのリマインダーを切り替えます。",
-          "enable": "エネーブル",
-          "disable": "ディセーブル",
-          "enabled": "オン",
-          "disabled": "オフ"
-        }
-      },
-      "user": {
-        "heading": "ユーザー設定",
-        "desc": "ユーザー プロファイルに関連する設定を構成します。",
-        "are-you-sure": "本気ですか？",
-        "click-to-confirm": "押して確定",
-        "confirmation-modal": {
-          "confirm-password": "パスワードを確認してください。",
-          "irreversible-operation": "覚えておいてください - この操作は元に戻せません。",
-          "changed-mind": "気が変わった",
-          "delete-account": "アカウントを削除します",
-          "password-placeholder": "パスワード"
-        },
-        "profile-visibility": {
-          "heading": "プロフィールの可視性",
-          "desc": "プロフィールの可視性を他のユーザーに変更します。デフォルトでは、あなたのユーザー名はハイスコアの他のユーザーに表示されます (提出する必要があります)。情報を非公開にすることも、友達にのみ表示することもできます。",
-          "options": [
-            { "name": "友達限定", "value": "Friends Only", "icon": "FaUserFriends" },
-            { "name": "プライベート", "value": "Private", "icon": "FaUserSecret" },
-            { "name": "パブリック", "value": "Public", "icon": "FaGlobeAmericas" }
-          ]
-        },
-        "streak-card-preference": {
-          "heading": "ストリーク カードの設定",
-          "desc": "ダッシュボードのストリーク カードに表示する統計を選択します。デフォルトは、アカウントを作成した日付です。現在の連続記録に変更するか、カスタムの日付を選択できます。",
-          "options": [
-            { "name": "開始日", "value": "Start Date", "icon": "FaCalendarCheck" },
-            { "name": "ストリーク", "value": "Streak", "icon": "FaFireAlt" },
-            { "name": "カスタム日", "value": "Custom Date", "icon": "FaClock" }
-          ]
-        },
-        "danger-zone": {
-          "heading": "危険区域",
-          "desc": "考え直したくなる破壊的な設定！",
-          "clear-local-storage": {
-            "heading": "ローカルストレージをクリア",
-            "desc": "ユーザー セッションを除いて、ブラウザからローカルに保存されたすべてのデータを削除します。保存されたデータを完全に削除するわけではありませんが、読み込み時間が一時的に長くなる場合があります。",
-            "button": "クリア"
-          },
-          "reset-high-scores": {
-            "heading": "リセット高得点",
-            "desc": "アプリ全体で保存したすべてのスコアをリセットします。ハイスコアで現在保持しているランクはすべて失われます。",
-            "button": "点をリセット"
-          },
-          "reset-statistics": {
-            "heading": "統計のリセット",
-            "desc": "プレイしたゲームや勝ったゲームなど、追跡されたすべての統計をリセットします。",
-            "button": "統計をリセット"
-          },
-          "reset-flash-cards": {
-            "heading": "フラッシュ カードのリセット",
-            "desc": "すべてのフラッシュ カード データをリセットします。統計には影響しません。",
-            "button": "カードのリセット"
-          },
-          "delete-account": {
-            "heading": "アカウントを削除する",
-            "desc": "ユーザー アカウントとすべての個人データを削除します。これは元に戻せない操作です。確認のためにパスワードを入力する必要があります。",
-            "button": "消去",
-            "popover": {
-              "title": "アカウントを削除する",
-              "text": "ユーザー アカウントとすべての個人データを削除します。これは元に戻せない操作です。確認のためにパスワードを入力する必要があります。"
+        "register": {
+            "already-registered": "すでにアカウントを持っています",
+            "passwords-dont-match": "パスワードが一致していません",
+            "checking-username-eligibility": "ユーザー名の適格性の確認...",
+            "checking-email-eligibility": "メールアドレスの適格性の確認...",
+            "username-available": "ユーザー名が利用可能です。",
+            "email-available": "メールアドレスが利用可能",
+            "email-not-shared": "あなたのメールアドレスが他の誰とも共有されることはありません。",
+            "email-taken": "このメールアドレスはすでに登録されています",
+            "username-taken": "このユーザー名は既に使われています。",
+            "password-policy": {
+                "title": "パスワード ポリシー",
+                "lowercase": "パスワードには、少なくとも 1 つの小文字が含まれている必要があります。",
+                "uppercase": "パスワードには、少なくとも 1 つの大文字が含まれている必要があります。",
+                "number": "パスワードは、少なくとも1つの番号が含まれている必要があります。",
+                "special-char": "パスワードには少なくとも 1 つの特殊文字が含まれている必要があります。",
+                "length": "パスワードは 8 ～ 36 文字 (両端を含む) にする必要があります。"
             }
-          }
+        },
+        "custom-preset": {
+            "title": "プリセットの詳細",
+            "failed-to-save": "プリセットの保存に失敗しました。",
+            "generic-error": "プリセットの保存中にエラーが発生しました。",
+            "success-message": "「{{name}}」を保存しました",
+            "change-icon": "アイコンの変更",
+            "default-preset-name": "私のプリセット"
         }
-      }
-    }
-  },
-  "action": {
-    "edit": "編集",
-    "refresh": "リロード",
-    "sync": "最新に保つ",
-    "clear": "クリア",
-    "cancel": "戻る",
-    "dismiss": "閉じる",
-    "close": "閉じる",
-    "remove": "取り除く",
-    "favourite": "お気に入り",
-    "save": "保存",
-    "start": "スタート",
-    "check": "確認",
-    "restart": "リスタート",
-    "hint": "ヒント",
-    "skip": "スキップ",
-    "yes": "確認",
-    "no": "キャンセル",
-    "login": "ログイン",
-    "register": "登録",
-    "search": "検索",
-    "next": "次",
-    "back": "戻る"
-  },
-  "presets": {
-    "edit": {
-      "title": "お気に入りを編集する"
     },
-    "learn": {
-      "start": "スタート",
-      "hiragana": {
-        "name": "平仮名"
-      },
-      "katakana": {
-        "name": "片仮名"
-      },
-      "kyōiku": {
-        "name": "教育"
-      },
-      "diacriticals": {
-        "name": "濁点と半濁点"
-      },
-      "diagraphs": {
-        "name": "ダイグラフ"
-      },
-      "everything": {
-        "name": "何事も"
-      },
-      "high-school": {
-        "name": "教育"
-      },
-      "jōyō": {
-        "name": "常用漢字"
-      },
-      "numbers": {
-        "name": "数字"
-      },
-      "colours": {
-        "name": "色"
-      },
-      "time": {
-        "name": "時間"
-      },
-      "animals": {
-        "name": "動物"
-      },
-      "directions": {
-        "name": "行き方"
-      },
-      "weather": {
-        "name": "天気"
-      },
-      "family": {
-        "name": "家族"
-      },
-      "body": {
-        "name": "解剖学"
-      },
-      "days-of-the-week": {
-        "name": "曜日"
-      },
-      "months-of-the-year": {
-        "name": "年の月"
-      },
-      "temporal-nouns": {
-        "name": "一時名詞"
-      },
-      "seasonal": {
-        "name": "季節の"
-      },
-      "common-phrases": {
-        "name": "一般的な語句"
-      },
-      "adverbs": {
-        "name": "副詞"
-      },
-      "particles": {
-        "name": "助詞"
-      },
-      "expressions": {
-        "name": "言葉遣い"
-      },
-      "verbs": {
-        "name": "動詞"
-      },
-      "nouns": {
-        "name": "名詞"
-      },
-      "adjectives": {
-        "name": "形容詞"
-      }
+    "navigation": {
+        "button": {
+            "home": "ホーム",
+            "learn": "習う",
+            "help": "ヘルプ",
+            "kanji-dict": "漢字辞書",
+            "kana-dict": "仮名辞書",
+            "genki-dict": "げんきの要約",
+            "genki-grammar": "げんきの文法",
+            "faq": "よくある質問",
+            "sm2": "「スーパーメモ」 アルゴリズム",
+            "user": {
+                "login": "ログイン",
+                "profile": "プロフィール",
+                "stats": "統計",
+                "high-scores": "高得点",
+                "logout": "ログアウト"
+            }
+        }
     },
-    "play": {
-      "start": "スタート",
-      "rōmaji": {
-        "name": "ローマ字"
-      },
-      "hardcore": {
-        "name": "ハードコア"
-      },
-      "relaxed": {
-        "name": "リラックス"
-      },
-      "time-attack": {
-        "name": "タイムアタック"
-      },
-      "kana": {
-        "name": "仮名"
-      },
-      "match": {
-        "name": "一致"
-      },
-      "kanji": {
-        "name": "漢字"
-      },
-      "meaning": {
-        "name": "意味"
-      },
-      "on'yomi": {
-        "name": "音読み"
-      },
-      "kun'yomi": {
-        "name": "訓読み"
-      },
-      "random": {
-        "name": "ランダム"
-      },
-      "numbers": {
-        "name": "数字"
-      },
-      "counters": {
-        "name": "助数詞"
-      },
-      "age": {
-        "name": "生年"
-      },
-      "exceptions": {
-        "name": "特例"
-      },
-      "units": {
-        "name": "単位"
-      },
-      "sequence": {
-        "name": "次"
-      },
-      "colours": {
-        "name": "色"
-      },
-      "animals": {
-        "name": "動物"
-      },
-      "directions": {
-        "name": "行き方"
-      },
-      "weather": {
-        "name": "天気"
-      },
-      "family": {
-        "name": "家族"
-      },
-      "body": {
-        "name": "解剖学"
-      },
-      "days-of-the-week": {
-        "name": "曜日"
-      },
-      "months-of-the-year": {
-        "name": "年の月"
-      },
-      "temporal-nouns": {
-        "name": "一時名詞"
-      },
-      "seasonal": {
-        "name": "季節の"
-      },
-      "common-phrases": {
-        "name": "一般的な語句"
-      },
-      "everything": {
-        "name": "何事も"
-      },
-      "japanese": {
-        "name": "日本"
-      }
+    "wizard": {
+        "confirmation": {
+            "title": "本気ですか？",
+            "body": "現在の構成が失われます。"
+        },
+        "steps": {
+            "mode": {
+                "title": "モードを選択",
+                "play": " 遊ぶ",
+                "learn": "学ぶ",
+                "play-desc": "特定のトピックに関する知識をテストします。プリセットのゲーム モードから選択するか、独自の設定をカスタマイズします。",
+                "learn-desc": "フラッシュ カードと間隔をあけた反復学習を使用して、選択したトピックを学習します"
+            },
+            "topic": {
+                "title": "トピックを選択"
+            },
+            "type": {
+                "title": "タイプを選択",
+                "preset": "プリセット",
+                "custom": "カスタム",
+                "preset-desc": "選択したトピックのプリセット ゲーム構成の 1 つから選択します。",
+                "custom-desc": "利用可能な設定を構成して、カスタマイズされたゲーム モードを作成します。"
+            },
+            "preset": {
+                "title": "プリセットを選択"
+            },
+            "question": {
+                "title": "質問の設定",
+                "desc": "尋ねられる質問の種類に関する設定を構成します。",
+                "type-heading": "質問の種類",
+                "fields-heading": "質問と回答変数名",
+                "fields-desc": "質問で提供される情報と、回答として提供する必要があるものを選択します。両方に同じフィールドを選択することはできません。",
+                "give-me": "ちょうだい...",
+                "ask-me": "私に聞いてください...",
+                "score-heading": "点数",
+                "track-score": "追跡点数",
+                "score-desc": "正解した質問ごとに基本スコアを獲得します。ストリーキングすると乗数が指数関数的に増加しますが、それを破るとベースにリセットされます。質問をスキップすると、基本スコアの 1 倍が失われます。",
+                "cards-quantity": {
+                    "desc": "{{quantity}}つの回答が表示されます。",
+                    "2": "二",
+                    "4": "四",
+                    "6": "六"
+                },
+                "type": {
+                    "text": {
+                        "name": "文章",
+                        "desc": "質問ごとに 1 つの情報 (記号、読み方、意味など) が与えられ、リクエストにその他の情報を入力する必要があります"
+                    },
+                    "choice": {
+                        "name": "複数の選択肢",
+                        "desc": "与えられたデータに対して何かが与えられ、複数の回答オプションが提示され、どれが正しいかが示されます。"
+                    },
+                    "match": {
+                        "name": "一致",
+                        "desc": "答えとともにいくつかの情報が与えられ、それらを正しく一致させる必要があります。"
+                    },
+                    "audio": {
+                        "name": "音",
+                        "desc": "オーディオ クリップが再生され、その意味を入力または選択する必要があります。"
+                    },
+                    "random": {
+                        "name": "ランダム",
+                        "desc": "すべての質問タイプがランダムにシャッフルされます。"
+                    }
+                }
+            },
+            "hint": {
+                "title": "ヒント設定",
+                "enable": "有効",
+                "infinite": "無限ヒント",
+                "enable-desc": "ヒントを使用すると、苦労している場合に、現在の質問に関する小さな情報を明らかにすることができます。",
+                "quantity-desc": "ゲーム全体で必要なヒントの数を選択します。質問ごとに 1 つだけ使用できます。",
+                "infinite-desc": "制限を解除して、必要な数のヒントを使用してください。"
+            },
+            "life": {
+                "title": "ライフ設定",
+                "enable": "有効",
+                "desc": "開始するライフの数を設定します。追加の課題として、よりカジュアルにプレイしている場合は、数個だけ、または無制限に与えることができます。",
+                "lives-desc": "ゲームを開始するライフの数を選択します。 1 から 10 の間で選択できます。無効にすると無限になります。"
+            },
+            "time": {
+                "title": "時間設定",
+                "desc": "ゲームに必要なタイマーのスタイルを構成するか、完全に無効にします。",
+                "timed": "時限",
+                "countdown": "秒読み",
+                "timed-desc": "00:00 から開始するだけの時間が計測され、ゲームを終了するか負けるとタイマーは停止します。特定のトピックをスピード実行して習熟度をテストするのに役立ちます。",
+                "countdown-desc": "各質問に答えるために設定された秒数が与えられます。与えられた時間内に正しく答えることができないと、ライフが失われます。正解するとタイマーがリセットされます。",
+                "seconds-quantity": "以下の質問ごとの秒数を選択してください"
+            },
+            "data": {
+                "fields": {
+                    "quantity": {
+                        "label": "量",
+                        "placeholder": "数量を入力する"
+                    }
+                },
+                "kana": {
+                    "hiragana-label": "平仮名",
+                    "hiragana-desc": "ひらがなは、話されている日本語を構成するすべての音を定義する主な音節です。",
+                    "katakana-label": "片仮名",
+                    "katakana-desc": "カタカナは、前述のひらがなの鏡文字です。同じように発音される各かなの 1 対 1 のマッピングがあります。書き方が異なり、一般的には外来語やオノマトペにのみ使用されます。これらの文字は、ひらがなよりもはるかに角度があり直線的です。",
+                    "diagraphs-label": "ダイグラフ",
+                    "diagraphs-desc": "ダイアグラフは 2 つの仮名の組み合わせです。両方の音節は、それぞれの仮名に同じダイアグラフを持っています。"
+                }
+            },
+            "confirmation": {
+                "title": "確認",
+                "login-message": "保存するにはログインする必要があります。",
+                "save-preset": "プリセットを保存"
+            }
+        }
+    },
+    "dashboard": {
+        "card": {
+            "play": {
+                "start": "スタートセッション",
+                "last-play": "前のゲームセッション",
+                "last-learn": "前の学習セッション",
+                "default-title": "カスタムセッション",
+                "play-title": "最近ゲームをしていません",
+                "learn-title": "最近何も練習していません"
+            },
+            "profile": {
+                "go": "プロフィール",
+                "register": "登録する",
+                "notifications": "通知",
+                "user-settings": "アカウント設定",
+                "tour": "見せて",
+                "description": "アカウントを作成すると、カスタムプリセットを保存したり、ハイスコアを競ったり、進捗状況や統計情報を確認することができます。"
+            },
+            "settings": {
+                "title": "設定",
+                "general": "一般設定",
+                "learn": "学習設定",
+                "play": "ゲーム設定",
+                "interface": "設計設定",
+                "notification": "通知設定",
+                "user": "ユーザー設定"
+            },
+            "kanji-showcase": {
+                "title": "漢字ショーケース",
+                "search": "すべての漢字を検索",
+                "on": {
+                    "short": "音",
+                    "long": "音読み"
+                },
+                "kun": {
+                    "short": "訓",
+                    "long": "訓読み"
+                },
+                "grade": "教育の学年",
+                "jlpt": "JLPTレベル",
+                "strokes": "刷毛の量",
+                "examples": "例",
+                "shuffle": "シャッフル",
+                "meaning": "意味"
+            },
+            "favourites": {
+                "title": "お気に入り",
+                "modal": {
+                    "quit-confirmation": {
+                        "title": "本当にやめる気？",
+                        "body": "お気に入りへの変更が保存されていません。"
+                    }
+                }
+            },
+            "flash-cards": {
+                "title": "フラッシュカード",
+                "review": "復習",
+                "learning": "学習",
+                "new": "新しい",
+                "start": "勉強会開始"
+            },
+            "activity": {
+                "title": "アクティビティフィード",
+                "more": "もっと見る",
+                "event": {
+                    "learn": "学習セッション",
+                    "play": "ゲームセッション",
+                    "mistakes": "間違復習",
+                    "welcome": "ようこそ!",
+                    "streak": "{{streak}}日達成!"
+                },
+                "time": {
+                    "now": "今",
+                    "minutes-past": "%d分前",
+                    "hours-past": "%d時間前",
+                    "days-past": "%d日前",
+                    "months-past": "%dヶ月前",
+                    "years-past": "%d年前",
+                    "one-minute-ago": "1分前",
+                    "one-hour-ago": "一時間前",
+                    "one-day-ago": "1日前",
+                    "one-month-ago": "1ヶ月前",
+                    "one-year-ago": "一年前"
+                }
+            },
+            "stats": {
+                "title": "統計",
+                "kana": "仮名",
+                "kanji": "漢字"
+            },
+            "mistakes": {
+                "title": "間違い",
+                "review": "復習える",
+                "view": "間違いを見る",
+                "practice": "練習",
+                "kanji": "漢字",
+                "kana": "仮名",
+                "definitions": "定義"
+            },
+            "high-scores": {
+                "title": "高得点",
+                "more": "もっと見る",
+                "rank": "位",
+                "leaderboard": "リーダーボード",
+                "score": "点数",
+                "names": {
+                    "romaji-time-attack": "ローマ字時限",
+                    "kanji-hardcore": "漢字ハードコア",
+                    "verb-match": "動詞一致",
+                    "adverbs": "副詞",
+                    "hiragana-speed-run": "平仮名スピードラン"
+                }
+            },
+            "streak": {
+                "streak": "日の連続",
+                "account-creation": "アカウント作成",
+                "custom-date": "カスタム日付",
+                "streak-template": "{{streak}}日の連続",
+                "account-template": "生後{{days}}日",
+                "custom-template": "{{day}}日目"
+            }
+        }
+    },
+    "settings": {
+        "modal": {
+            "general": {
+                "heading": "一般設定",
+                "desc": "アプリに関する一般的な要素とアクションの一般設定。",
+                "activity-feed": {
+                    "heading": "アクティビティフィード",
+                    "desc": "デフォルトでアクティビティ フィード カードに表示するイベントの数を設定します。",
+                    "options": [
+                        { "name": "三", "value": "3" },
+                        { "name": "五", "value": "5" },
+                        { "name": "八", "value": "8" }
+                    ]
+                }
+            },
+            "learn": {
+                "heading": "学習設定",
+                "desc": "日本語学習に関する設定を行います。",
+                "flash-cards": {
+                    "heading": "1 日あたりのフラッシュ カード",
+                    "desc": "1 日に表示する新しいフラッシュ カードの数を設定します。新しいカードは、あなたのデッキがアクティブであり、レビューする未処理のカードがない場合にのみ発行されます。",
+                    "options": [
+                        { "name": "十", "value": "10" },
+                        { "name": "二十", "value": "20" },
+                        { "name": "三十", "value": "30" },
+                        { "name": "四十", "value": "40" },
+                        { "name": "五十", "value": "50" }
+                    ]
+                },
+                "romaji": {
+                    "heading": "ローマ字設定",
+                    "desc": "仮名のローマ字異体字を表示するためのデフォルトの動作を設定します。ローマ字またはローマ字は、日本語の書き言葉のローマ字化です。",
+                    "options": [
+                        { "name": "いつも見せる", "value": "Always Show" },
+                        { "name": "毎回尋ねる", "value": "Ask Each Time" },
+                        { "name": "常に非表示", "value": "Always Hide" }
+                    ]
+                }
+            },
+            "play": {
+                "heading": "ゲームの設定",
+                "desc": "ゲームやその他のプレイ指向モードに関連する設定を構成します。",
+                "high-scores": {
+                    "label": "高得点の好み",
+                    "desc": "ゲームセッションを高得点に送信するためのデフォルトの動作を設定します。",
+                    "options": [
+                        { "name": "毎回尋ねる", "value": "Ask Each Time" },
+                        { "name": "常に送信", "value": "Always Submit" },
+                        { "name": "Never Submit", "value": "提出しない" }
+                    ]
+                }
+            },
+            "interface": {
+                "heading": "設計設定",
+                "desc": "設計を構成して、レイアウトとルック アンド フィールを好みに合わせてカスタマイズします。",
+                "customise-dashboard-layout": {
+                    "heading": "ダッシュボード レイアウトのカスタマイズ",
+                    "desc": "ホームページのダッシュボードのレイアウトを編集します。カードのオンとオフを切り替えたり、サイズを変更したり、別の列に移動したりできます。",
+                    "button": "設計エディターを開く"
+                },
+                "theme": {
+                    "heading": "テーマ",
+                    "desc": "ユーザー インターフェイス テーマのダーク バリエーションとライト バリエーションを切り替えます。",
+                    "options": [
+                        { "name": "ダークモード", "value": "Dark Mode", "icon": "FaMoon", "className": "dark" },
+                        { "name": "ライトモード", "value": "Light Mode", "icon": "FaLightbulb", "className": "light" }
+                    ]
+                },
+                "kanji-font": {
+                    "heading": "漢字フォント",
+                    "desc": "アプリ内のすべての漢字に使用するデフォルトのフォントを設定します。",
+                    "options": {
+                        "default": "デフォルト",
+                        "mincho": "アプリ明朝",
+                        "handwriting": "手書き",
+                        "gothic": "ゴシック"
+                    }
+                },
+                "language": {
+                    "heading": "言語と国際化",
+                    "desc": "すべての主要なボタン、メニュー、およびリンクで使用される言語を設定します。",
+                    "options": [
+                        { "name": "英語", "value": "English" },
+                        { "name": "日本語", "value": "日本語" }
+                    ]
+                },
+                "confidence-menu-style": {
+                    "heading": "コンフィデンス メニュースタイル",
+                    "desc": "フラッシュ カード学習セッション中に使用される信頼度評価ウィジェットの形式を変更します。",
+                    "options": [
+                        { "name": "絵文字スタイル", "value": "Emoji Style", "icon": "FaSmile" },
+                        { "name": "数字 1 ～ 6", "value": "Numbers 1 - 6", "icon": "FaSortNumericUp" }
+                    ]
+                }
+            },
+            "notification": {
+                "heading": "通知設定",
+                "desc": "通知センターとアプリ全体の通信に関連する設定を構成します。",
+                "streak-notifications": {
+                    "heading": "ストリーク通知",
+                    "desc": "重要な連続マイルストーンの通知を切り替えます。",
+                    "enable": "エネーブル",
+                    "disable": "ディセーブル",
+                    "enabled": "オン",
+                    "disabled": "オフ"
+                },
+                "outstanding-mistakes-reminder": {
+                    "heading": "未解決の間違いのリマインダー",
+                    "desc": "見直しが必要な未解決のミスのリマインダーを切り替えます。",
+                    "enable": "エネーブル",
+                    "disable": "ディセーブル",
+                    "enabled": "オン",
+                    "disabled": "オフ"
+                }
+            },
+            "user": {
+                "heading": "ユーザー設定",
+                "desc": "ユーザー プロファイルに関連する設定を構成します。",
+                "are-you-sure": "本気ですか？",
+                "click-to-confirm": "押して確定",
+                "confirmation-modal": {
+                    "confirm-password": "パスワードを確認してください。",
+                    "irreversible-operation": "覚えておいてください - この操作は元に戻せません。",
+                    "changed-mind": "気が変わった",
+                    "delete-account": "アカウントを削除します",
+                    "password-placeholder": "パスワード"
+                },
+                "profile-visibility": {
+                    "heading": "プロフィールの可視性",
+                    "desc": "プロフィールの可視性を他のユーザーに変更します。デフォルトでは、あなたのユーザー名はハイスコアの他のユーザーに表示されます (提出する必要があります)。情報を非公開にすることも、友達にのみ表示することもできます。",
+                    "options": [
+                        { "name": "友達限定", "value": "Friends Only", "icon": "FaUserFriends" },
+                        { "name": "プライベート", "value": "Private", "icon": "FaUserSecret" },
+                        { "name": "パブリック", "value": "Public", "icon": "FaGlobeAmericas" }
+                    ]
+                },
+                "streak-card-preference": {
+                    "heading": "ストリーク カードの設定",
+                    "desc": "ダッシュボードのストリーク カードに表示する統計を選択します。デフォルトは、アカウントを作成した日付です。現在の連続記録に変更するか、カスタムの日付を選択できます。",
+                    "options": [
+                        { "name": "開始日", "value": "Start Date", "icon": "FaCalendarCheck" },
+                        { "name": "ストリーク", "value": "Streak", "icon": "FaFireAlt" },
+                        { "name": "カスタム日", "value": "Custom Date", "icon": "FaClock" }
+                    ]
+                },
+                "danger-zone": {
+                    "heading": "危険区域",
+                    "desc": "考え直したくなる破壊的な設定！",
+                    "clear-local-storage": {
+                        "heading": "ローカルストレージをクリア",
+                        "desc": "ユーザー セッションを除いて、ブラウザからローカルに保存されたすべてのデータを削除します。保存されたデータを完全に削除するわけではありませんが、読み込み時間が一時的に長くなる場合があります。",
+                        "button": "クリア"
+                    },
+                    "reset-high-scores": {
+                        "heading": "リセット高得点",
+                        "desc": "アプリ全体で保存したすべてのスコアをリセットします。ハイスコアで現在保持しているランクはすべて失われます。",
+                        "button": "点をリセット"
+                    },
+                    "reset-statistics": {
+                        "heading": "統計のリセット",
+                        "desc": "プレイしたゲームや勝ったゲームなど、追跡されたすべての統計をリセットします。",
+                        "button": "統計をリセット"
+                    },
+                    "reset-flash-cards": {
+                        "heading": "フラッシュ カードのリセット",
+                        "desc": "すべてのフラッシュ カード データをリセットします。統計には影響しません。",
+                        "button": "カードのリセット"
+                    },
+                    "delete-account": {
+                        "heading": "アカウントを削除する",
+                        "desc": "ユーザー アカウントとすべての個人データを削除します。これは元に戻せない操作です。確認のためにパスワードを入力する必要があります。",
+                        "button": "消去",
+                        "popover": {
+                            "title": "アカウントを削除する",
+                            "text": "ユーザー アカウントとすべての個人データを削除します。これは元に戻せない操作です。確認のためにパスワードを入力する必要があります。"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "action": {
+        "edit": "編集",
+        "refresh": "リロード",
+        "sync": "最新に保つ",
+        "clear": "クリア",
+        "cancel": "戻る",
+        "dismiss": "閉じる",
+        "close": "閉じる",
+        "remove": "取り除く",
+        "favourite": "お気に入り",
+        "save": "保存",
+        "start": "スタート",
+        "check": "確認",
+        "restart": "リスタート",
+        "hint": "ヒント",
+        "skip": "スキップ",
+        "yes": "確認",
+        "no": "キャンセル",
+        "login": "ログイン",
+        "register": "登録",
+        "search": "検索",
+        "next": "次",
+        "back": "戻る"
+    },
+    "presets": {
+        "edit": {
+            "title": "お気に入りを編集する"
+        },
+        "learn": {
+            "start": "スタート",
+            "hiragana": {
+                "name": "平仮名"
+            },
+            "katakana": {
+                "name": "片仮名"
+            },
+            "kyōiku": {
+                "name": "教育"
+            },
+            "diacriticals": {
+                "name": "濁点と半濁点"
+            },
+            "diagraphs": {
+                "name": "ダイグラフ"
+            },
+            "everything": {
+                "name": "何事も"
+            },
+            "high-school": {
+                "name": "教育"
+            },
+            "jōyō": {
+                "name": "常用漢字"
+            },
+            "numbers": {
+                "name": "数字"
+            },
+            "colours": {
+                "name": "色"
+            },
+            "time": {
+                "name": "時間"
+            },
+            "animals": {
+                "name": "動物"
+            },
+            "directions": {
+                "name": "行き方"
+            },
+            "weather": {
+                "name": "天気"
+            },
+            "family": {
+                "name": "家族"
+            },
+            "body": {
+                "name": "解剖学"
+            },
+            "days-of-the-week": {
+                "name": "曜日"
+            },
+            "months-of-the-year": {
+                "name": "年の月"
+            },
+            "temporal-nouns": {
+                "name": "一時名詞"
+            },
+            "seasonal": {
+                "name": "季節の"
+            },
+            "common-phrases": {
+                "name": "一般的な語句"
+            },
+            "adverbs": {
+                "name": "副詞"
+            },
+            "particles": {
+                "name": "助詞"
+            },
+            "expressions": {
+                "name": "言葉遣い"
+            },
+            "verbs": {
+                "name": "動詞"
+            },
+            "nouns": {
+                "name": "名詞"
+            },
+            "adjectives": {
+                "name": "形容詞"
+            }
+        },
+        "play": {
+            "start": "スタート",
+            "rōmaji": {
+                "name": "ローマ字"
+            },
+            "hardcore": {
+                "name": "ハードコア"
+            },
+            "relaxed": {
+                "name": "リラックス"
+            },
+            "time-attack": {
+                "name": "タイムアタック"
+            },
+            "kana": {
+                "name": "仮名"
+            },
+            "match": {
+                "name": "一致"
+            },
+            "kanji": {
+                "name": "漢字"
+            },
+            "meaning": {
+                "name": "意味"
+            },
+            "on'yomi": {
+                "name": "音読み"
+            },
+            "kun'yomi": {
+                "name": "訓読み"
+            },
+            "random": {
+                "name": "ランダム"
+            },
+            "numbers": {
+                "name": "数字"
+            },
+            "counters": {
+                "name": "助数詞"
+            },
+            "age": {
+                "name": "生年"
+            },
+            "exceptions": {
+                "name": "特例"
+            },
+            "units": {
+                "name": "単位"
+            },
+            "sequence": {
+                "name": "次"
+            },
+            "colours": {
+                "name": "色"
+            },
+            "animals": {
+                "name": "動物"
+            },
+            "directions": {
+                "name": "行き方"
+            },
+            "weather": {
+                "name": "天気"
+            },
+            "family": {
+                "name": "家族"
+            },
+            "body": {
+                "name": "解剖学"
+            },
+            "days-of-the-week": {
+                "name": "曜日"
+            },
+            "months-of-the-year": {
+                "name": "年の月"
+            },
+            "temporal-nouns": {
+                "name": "一時名詞"
+            },
+            "seasonal": {
+                "name": "季節の"
+            },
+            "common-phrases": {
+                "name": "一般的な語句"
+            },
+            "everything": {
+                "name": "何事も"
+            },
+            "japanese": {
+                "name": "日本"
+            }
+        }
+    },
+    "learnable": {
+        "field": {
+            "meaning": {
+                "name": "意味",
+                "desc": "英語での単語または文字の意味。通常は一言。"
+            },
+            "kanji": {
+                "name": "漢字",
+                "desc": "漢字一文字で表現できる言葉もあります。"
+            },
+            "kana": {
+                "name": "仮名",
+                "desc": "五十音はかなです。すべての単語をひらがなまたはカタカナで表現できます。"
+            },
+            "japanese": {
+                "name": "日本語",
+                "desc": "一部の単語は、すべて漢字または漢字と仮名の混合で表現できます。"
+            },
+            "romaji": {
+                "name": "ローマ字",
+                "desc": "日本語の仮名のローマ字化。つまり「a」か「ke」か「zu」です。」"
+            },
+            "on": {
+                "name": "音読み",
+                "desc": "ひらがなで漢字が原文の中国の読み方。"
+            },
+            "kun": {
+                "name": "訓読み",
+                "desc": "片仮名で漢字が新しい日本語の読み。"
+            },
+            "random": {
+                "name": "ランダム",
+                "desc": "使用可能なフィールドのランダムな選択。"
+            }
+        }
+    },
+    "memory-game": {
+        "quit-title": "本当にやめる気？",
+        "quit-body": "現在の進行状況は失われますが、これまでのゲームの結果が表示されます。"
     }
-  },
-  "learnable": {
-    "field": {
-      "meaning": {
-        "name": "意味",
-        "desc": "英語での単語または文字の意味。通常は一言。"
-      },
-      "kanji": {
-        "name": "漢字",
-        "desc": "漢字一文字で表現できる言葉もあります。"
-      },
-      "kana": {
-        "name": "仮名",
-        "desc": "五十音はかなです。すべての単語をひらがなまたはカタカナで表現できます。"
-      },
-      "japanese": {
-        "name": "日本語",
-        "desc": "一部の単語は、すべて漢字または漢字と仮名の混合で表現できます。"
-      },
-      "romaji": {
-        "name": "ローマ字",
-        "desc": "日本語の仮名のローマ字化。つまり「a」か「ke」か「zu」です。」"
-      },
-      "on": {
-        "name": "音読み",
-        "desc": "ひらがなで漢字が原文の中国の読み方。"
-      },
-      "kun": {
-        "name": "訓読み",
-        "desc": "片仮名で漢字が新しい日本語の読み。"
-      },
-      "random": {
-        "name": "ランダム",
-        "desc": "使用可能なフィールドのランダムな選択。"
-      }
-    }
-  },
-  "memory-game": {
-    "quit-title": "本当にやめる気？",
-    "quit-body": "現在の進行状況は失われますが、これまでのゲームの結果が表示されます。"
-  }
 }

@@ -1,9 +1,9 @@
-import { Component } from "react";
-import { Nav, Navbar } from "react-bootstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faHome, faPlay, faSearch } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../styles/sass/components/layout/Header.module.scss";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { Component } from "react"
+import { Nav, Navbar } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCircle, faHome, faPlay, faSearch } from "@fortawesome/free-solid-svg-icons"
+import styles from "../../styles/sass/components/layout/Header.module.scss"
+import { faGithub } from "@fortawesome/free-brands-svg-icons"
 
 class Header extends Component {
     render() {
@@ -11,11 +11,11 @@ class Header extends Component {
             <Navbar bg="dark" variant="dark" expand="sm" sticky="top">
                 <Navbar.Brand className={styles.brand}>
                     <a href="/">
-                        <img src="logo.png" className={styles.logo} alt="logo"/>
+                        <img src="logo.png" className={styles.logo} alt="logo" />
                     </a>
                 </Navbar.Brand>
 
-                <Navbar.Toggle/>
+                <Navbar.Toggle />
 
                 <Navbar.Collapse>
                     <Nav className={styles.nav}>
@@ -39,11 +39,10 @@ class Header extends Component {
                             <FontAwesomeIcon icon={faGithub} size="lg" fixedWidth />
                         </Nav.Link>
                     </Nav>
-
                 </Navbar.Collapse>
             </Navbar>
-        );
+        )
     }
 }
 
-export default Header;
+export default Header

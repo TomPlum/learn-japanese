@@ -1,6 +1,6 @@
-import { Card, Col, Row } from "react-bootstrap";
-import { Cell, Pie, PieChart } from "recharts";
-import styles from "../../../styles/sass/components/user/profile/Stats.module.scss";
+import { Card, Col, Row } from "react-bootstrap"
+import { Cell, Pie, PieChart } from "recharts"
+import styles from "../../../styles/sass/components/user/profile/Stats.module.scss"
 
 const dummyKanjiData = [
     { grade: 1, value: 80, fill: "#4189ff" },
@@ -8,21 +8,21 @@ const dummyKanjiData = [
     { grade: 3, value: 200, fill: "#f59037" },
     { grade: 4, value: 150, fill: "#8f46ea" },
     { grade: 5, value: 78, fill: "#d952d9" },
-    { grade: 6, value: 12, fill: "#d73939" },
-];
+    { grade: 6, value: 12, fill: "#d73939" }
+]
 
 const dummyKanaData = [
     { type: "Hiragana", value: 120, fill: "#4189ff" },
-    { type: "Katakana", value: 78, fill: "#5dca41" },
-];
+    { type: "Katakana", value: 78, fill: "#5dca41" }
+]
 
 const dummyOtherData = [
     { type: "Verbs", value: 10, fill: "#4189ff" },
     { type: "Adjectives", value: 50, fill: "#5dca41" },
     { type: "Adverbs", value: 22, fill: "#f59037" },
     { type: "Nouns", value: 67, fill: "#8f46ea" },
-    { type: "Counters", value: 12, fill: "#d952d9" },
-];
+    { type: "Counters", value: 12, fill: "#d952d9" }
+]
 
 const Stats = () => {
     return (
@@ -56,8 +56,8 @@ const Stats = () => {
                                 innerRadius={15}
                                 data={dummyKanjiData}
                             >
-                                {dummyKanjiData.map(datum => {
-                                    return <Cell key={`cell-${datum.grade}`} fill={datum.fill}/>
+                                {dummyKanjiData.map((datum) => {
+                                    return <Cell key={`cell-${datum.grade}`} fill={datum.fill} />
                                 })}
                             </Pie>
                         </PieChart>
@@ -74,8 +74,8 @@ const Stats = () => {
                                 outerRadius={50}
                                 data={dummyKanaData}
                             >
-                                {dummyKanaData.map(datum => {
-                                    return <Cell key={`cell-${datum.type}`} fill={datum.fill}/>
+                                {dummyKanaData.map((datum) => {
+                                    return <Cell key={`cell-${datum.type}`} fill={datum.fill} />
                                 })}
                             </Pie>
                         </PieChart>
@@ -92,8 +92,8 @@ const Stats = () => {
                                 outerRadius={50}
                                 data={dummyOtherData}
                             >
-                                {dummyOtherData.map(datum => {
-                                    return <Cell key={`cell-${datum.type}`} fill={datum.fill}/>
+                                {dummyOtherData.map((datum) => {
+                                    return <Cell key={`cell-${datum.type}`} fill={datum.fill} />
                                 })}
                             </Pie>
                         </PieChart>
@@ -116,7 +116,7 @@ const Stats = () => {
                 </Row>
             </Card.Body>
         </Card>
-    );
+    )
 }
 
-export default Stats;
+export default Stats
