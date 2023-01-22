@@ -1,6 +1,6 @@
 import GridDisplayType from "./GridDisplayType"
 
 export interface GridOptions {
-    type: GridDisplayType
-    size: number
+  type: GridDisplayType
+  size: number
 }

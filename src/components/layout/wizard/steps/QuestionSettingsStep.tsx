@@ -2,14 +2,14 @@ import QuestionSettingsForm from "../../../settings/game/QuestionSettingsForm"
 import QuestionSettings from "../../../../domain/session/settings/game/QuestionSettings"
 
 export interface QuestionSettingsStepProps {
-    settings?: QuestionSettings
-    onSelect: (settings: QuestionSettings) => void
+  settings?: QuestionSettings
+  onSelect: (settings: QuestionSettings) => void
 }
 
 const QuestionSettingsStep = (props: QuestionSettingsStepProps) => {
-    const { settings, onSelect } = props
+  const { settings, onSelect } = props
 
-    return <QuestionSettingsForm onChange={onSelect} />
+  return <QuestionSettingsForm onChange={onSelect} />
 }
 
 export default QuestionSettingsStep

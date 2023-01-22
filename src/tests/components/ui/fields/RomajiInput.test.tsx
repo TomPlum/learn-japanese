@@ -7,117 +7,117 @@ const onChangeHandler = jest.fn()
 let props: RomajiInputProps
 
 const setup = () => {
-    const component = render(<RomajiInput {...props} />)
-    return {
-        input: component.getByPlaceholderText("Enter Rōmaji"),
-        help: component.getByTestId("game-input-help"),
-        ...component
-    }
+  const component = render(<RomajiInput {...props} />)
+  return {
+    input: component.getByPlaceholderText("Enter Rōmaji"),
+    help: component.getByTestId("game-input-help"),
+    ...component
+  }
 }
 
 beforeEach(() => {
-    props = {
-        disabled: false,
-        placeholder: "Enter Rōmaji",
-        value: "",
-        onChange: onChangeHandler
-    }
+  props = {
+    disabled: false,
+    placeholder: "Enter Rōmaji",
+    value: "",
+    onChange: onChangeHandler
+  }
 })
 
 test("When the passed disabled property is true it should disable the input field", () => {
-    props.disabled = true
-    const { input } = setup()
-    expect(input).toBeDisabled()
+  props.disabled = true
+  const { input } = setup()
+  expect(input).toBeDisabled()
 })
 
 test("The passed value property should populate the input field value", () => {
-    props.value = "ka"
-    const { input } = setup()
-    expect(input).toHaveValue("ka")
+  props.value = "ka"
+  const { input } = setup()
+  expect(input).toHaveValue("ka")
 })
 
 test("Changing the input value should call the onChange event handler with the inputs current value", () => {
-    const { input } = setup()
-    fireEvent.change(input, { target: { value: "ba" } })
-    expect(onChangeHandler).toHaveBeenCalledWith("ba")
+  const { input } = setup()
+  fireEvent.change(input, { target: { value: "ba" } })
+  expect(onChangeHandler).toHaveBeenCalledWith("ba")
 })
 
 test("Hovering over help should render the popover", async () => {
-    const { help } = setup()
-    fireEvent.mouseOver(help)
-    expect(await screen.findByText("What is Rōmaji?")).toBeInTheDocument()
+  const { help } = setup()
+  fireEvent.mouseOver(help)
+  expect(await screen.findByText("What is Rōmaji?")).toBeInTheDocument()
 })
 
 test("Clicking the help icon should render the popover", async () => {
-    const { help } = setup()
-    fireEvent.click(help)
-    expect(await screen.findByText("What is Rōmaji?")).toBeInTheDocument()
+  const { help } = setup()
+  fireEvent.click(help)
+  expect(await screen.findByText("What is Rōmaji?")).toBeInTheDocument()
 })
 
 each([
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z"
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z"
 ]).test("The input should accept the letter %s", (letter: string) => {
-    const { input } = setup()
-    fireEvent.change(input, { target: { value: letter } })
-    expect(onChangeHandler).toHaveBeenCalledWith(letter)
+  const { input } = setup()
+  fireEvent.change(input, { target: { value: letter } })
+  expect(onChangeHandler).toHaveBeenCalledWith(letter)
 })
 
 each(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "@", "#", "/", " "]).test(
-    "The input should not accept numbers or special characters",
-    (character: string) => {
-        const { input } = setup()
-        fireEvent.change(input, { target: { value: character } })
-        expect(onChangeHandler).not.toHaveBeenCalled()
-    }
+  "The input should not accept numbers or special characters",
+  (character: string) => {
+    const { input } = setup()
+    fireEvent.change(input, { target: { value: character } })
+    expect(onChangeHandler).not.toHaveBeenCalled()
+  }
 )

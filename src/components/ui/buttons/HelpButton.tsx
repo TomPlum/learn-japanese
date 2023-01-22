@@ -5,33 +5,33 @@ import styles from "../../../styles/sass/components/ui/buttons/HelpButton.module
 import { useTranslation } from "react-i18next"
 
 export interface HelpButtonProps {
-    className?: string
+  className?: string
 }
 
 const HelpButton = (props: HelpButtonProps) => {
-    const { t, ready } = useTranslation()
+  const { t, ready } = useTranslation()
 
-    return (
-        <NavigationButton
-            width={250}
-            id="help-button"
-            icon={faInfoCircle}
-            textLoading={!ready}
-            textPlacement="right"
-            iconClass={menuStyles.icon}
-            className={props.className}
-            textClass={menuStyles.linkText}
-            text={t("navigation.button.help")}
-        >
-            <NavigationButton.Item icon={faBrain} href="/help" iconClass={styles.sm2}>
-                {t("navigation.button.sm2")}
-            </NavigationButton.Item>
+  return (
+    <NavigationButton
+      width={250}
+      id="help-button"
+      icon={faInfoCircle}
+      textLoading={!ready}
+      textPlacement="right"
+      iconClass={menuStyles.icon}
+      className={props.className}
+      textClass={menuStyles.linkText}
+      text={t("navigation.button.help")}
+    >
+      <NavigationButton.Item icon={faBrain} href="/help" iconClass={styles.sm2}>
+        {t("navigation.button.sm2")}
+      </NavigationButton.Item>
 
-            <NavigationButton.Item icon={faQuestion} href="/help" iconClass={styles.faq}>
-                {t("navigation.button.faq")}
-            </NavigationButton.Item>
-        </NavigationButton>
-    )
+      <NavigationButton.Item icon={faQuestion} href="/help" iconClass={styles.faq}>
+        {t("navigation.button.faq")}
+      </NavigationButton.Item>
+    </NavigationButton>
+  )
 }
 
 export default HelpButton

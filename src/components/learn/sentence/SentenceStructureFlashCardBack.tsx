@@ -6,23 +6,23 @@ import KanjiWordDisplay from "../../ui/display/KanjiWordDisplay"
 import styles from "../../../styles/sass/components/learn/sentence/SentenceStructureFlashCardBack.module.scss"
 
 const SentenceStructureFlashCardBack = (props: CardBackFaceProps) => {
-    const { data, onClick } = props
+  const { data, onClick } = props
 
-    const kanjiVariation = data.getKanjiVariation()
+  const kanjiVariation = data.getKanjiVariation()
 
-    return (
-        <FlashCardBack title={data.getTitle()} onReset={onClick} className={styles.wrapper}>
-            <div className={styles.innerWrapper}>
-                {kanjiVariation && <KanjiWordDisplay className={styles.kanjiVariation} value={kanjiVariation} />}
+  return (
+    <FlashCardBack title={data.getTitle()} onReset={onClick} className={styles.wrapper}>
+      <div className={styles.innerWrapper}>
+        {kanjiVariation && <KanjiWordDisplay className={styles.kanjiVariation} value={kanjiVariation} />}
 
-                <Copyable className={styles.kana}>
-                    <span>{data.getKana()}</span>
-                </Copyable>
+        <Copyable className={styles.kana}>
+          <span>{data.getKana()}</span>
+        </Copyable>
 
-                {props.showRomaji && <RomajiDisplay kana={data.getKana()[0]} className={styles.romaji} />}
-            </div>
-        </FlashCardBack>
-    )
+        {props.showRomaji && <RomajiDisplay kana={data.getKana()[0]} className={styles.romaji} />}
+      </div>
+    </FlashCardBack>
+  )
 }
 
 export default SentenceStructureFlashCardBack

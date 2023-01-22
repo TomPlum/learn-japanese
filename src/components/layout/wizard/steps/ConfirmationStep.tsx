@@ -11,59 +11,53 @@ import HoverMessage from "../../../ui/HoverMessage"
 import { useTranslation } from "react-i18next"
 
 export interface ConfirmationStepProps {
-    settings: SessionSettings
-    onSelectStage?: (stage: WizardStep) => void
+  settings: SessionSettings
+  onSelectStage?: (stage: WizardStep) => void
 }
 
 const ConfirmationStep = (props: ConfirmationStepProps) => {
-    const { settings, onSelectStage } = props
+  const { settings, onSelectStage } = props
 
-    const user = useUserSelector((state) => state.user.user)
+  const user = useUserSelector((state) => state.user.user)
 
-    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.confirmation" })
-    const [inSavePresetForm, setInSavePresetForm] = useState(false)
-    const [showSave, setShowSave] = useState(true)
+  const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.confirmation" })
+  const [inSavePresetForm, setInSavePresetForm] = useState(false)
+  const [showSave, setShowSave] = useState(true)
 
-    const handleClickSave = () => {
-        setShowSave(false)
-        setInSavePresetForm(true)
-    }
+  const handleClickSave = () => {
+    setShowSave(false)
+    setInSavePresetForm(true)
+  }
 
-    const handleCancelSave = () => {
-        setShowSave(true)
-        setInSavePresetForm(false)
-    }
+  const handleCancelSave = () => {
+    setShowSave(true)
+    setInSavePresetForm(false)
+  }
 
-    return (
-        <div>
-            <SessionSettingsSummary settings={settings} onSelectStage={onSelectStage} />
+  return (
+    <div>
+      <SessionSettingsSummary settings={settings} onSelectStage={onSelectStage} />
 
-            <Accordion>
-                {showSave && (
-                    <HoverMessage message={t("login-message")} show={!user} id="save-preset-hover">
-                        <Accordion.Button
-                            eventKey="save"
-                            as={Button}
-                            onClick={handleClickSave}
-                            variant="info"
-                            disabled={!user}
-                        >
-                            <FontAwesomeIcon icon={faDownload} fixedWidth />
-                            <span>{t("save-preset")}</span>
-                        </Accordion.Button>
-                    </HoverMessage>
-                )}
+      <Accordion>
+        {showSave && (
+          <HoverMessage message={t("login-message")} show={!user} id="save-preset-hover">
+            <Accordion.Toggle eventKey="save" as={Button} onClick={handleClickSave} variant="info" disabled={!user}>
+              <FontAwesomeIcon icon={faDownload} fixedWidth />
+              <span>{t("save-preset")}</span>
+            </Accordion.Toggle>
+          </HoverMessage>
+        )}
 
-                <Accordion.Collapse eventKey="save" in={inSavePresetForm} data-testid="confirmation-step-accordion">
-                    <CustomPresetForm
-                        settings={settings}
-                        onCancel={handleCancelSave}
-                        onSuccess={() => setInSavePresetForm(false)}
-                    />
-                </Accordion.Collapse>
-            </Accordion>
-        </div>
-    )
+        <Accordion.Collapse eventKey="save" in={inSavePresetForm} data-testid="confirmation-step-accordion">
+          <CustomPresetForm
+            settings={settings}
+            onCancel={handleCancelSave}
+            onSuccess={() => setInSavePresetForm(false)}
+          />
+        </Accordion.Collapse>
+      </Accordion>
+    </div>
+  )
 }
 
 export default ConfirmationStep

@@ -9,18 +9,18 @@ import { worker } from "./mocks/browser"
 injectStore(store)
 
 const prepareMockServiceWorker = async () => {
-    if (process.env.REACT_APP_ENVIRONMENT === "msw") {
-        const { worker } = require("./mocks/browser")
-        return worker.start()
-    }
-    return Promise.resolve()
+  if (process.env.REACT_APP_ENVIRONMENT === "msw") {
+    const { worker } = require("./mocks/browser")
+    return worker.start()
+  }
+  return Promise.resolve()
 }
 
 prepareMockServiceWorker().then(() => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <LearnJapanese store={store} />
-        </React.StrictMode>,
-        document.getElementById("root")
-    )
+  ReactDOM.render(
+    <React.StrictMode>
+      <LearnJapanese store={store} />
+    </React.StrictMode>,
+    document.getElementById("root")
+  )
 })

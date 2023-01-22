@@ -4,22 +4,22 @@ import styles from "../../../styles/sass/components/ui/buttons/KanaQuantityButto
 import { useTranslation } from "react-i18next"
 
 interface KanaQuantityButtonProps {
-    cards: number
-    selected: number
-    onClick: (quantity: number) => void
+  cards: number
+  selected: number
+  onClick: (quantity: number) => void
 }
 
 const KanaQuantityButton = (props: PropsWithChildren<KanaQuantityButtonProps>) => {
-    const { cards, selected, children, onClick } = props
+  const { cards, selected, children, onClick } = props
 
-    const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.question.cards-quantity" })
+  const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.question.cards-quantity" })
 
-    return (
-        <Button onClick={() => onClick(cards)} className={selected === cards ? styles.selected : styles.notSelected}>
-            {children}
-            <p className={styles.name}>{t(cards.toString())}</p>
-        </Button>
-    )
+  return (
+    <Button onClick={() => onClick(cards)} className={selected === cards ? styles.selected : styles.notSelected}>
+      {children}
+      <p className={styles.name}>{t(cards.toString())}</p>
+    </Button>
+  )
 }
 
 export default KanaQuantityButton

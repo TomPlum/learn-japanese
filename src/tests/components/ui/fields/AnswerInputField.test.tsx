@@ -8,64 +8,64 @@ let props: AnswerInputFieldProps
 const onChangeHandler = jest.fn()
 
 beforeEach(() => {
-    props = {
-        value: "Fish",
-        field: LearnableField.MEANING,
-        className: "inputFieldClassName",
-        disabled: false,
-        placeholder: "Enter English Meaning",
-        onChange: onChangeHandler
-    }
+  props = {
+    value: "Fish",
+    field: LearnableField.MEANING,
+    className: "inputFieldClassName",
+    disabled: false,
+    placeholder: "Enter English Meaning",
+    onChange: onChangeHandler
+  }
 })
 
 const setup = () => {
-    const component = renderWithTranslation(<AnswerInputField {...props} />)
-    return {
-        input: component.getByPlaceholderText("Enter English Meaning"),
-        help: component.getByTestId("game-input-help"),
-        ...component
-    }
+  const component = renderWithTranslation(<AnswerInputField {...props} />)
+  return {
+    input: component.getByPlaceholderText("Enter English Meaning"),
+    help: component.getByTestId("game-input-help"),
+    ...component
+  }
 }
 
 test("It should set the passed value in the input field", () => {
-    const { input } = setup()
-    expect(input).toHaveValue("Fish")
+  const { input } = setup()
+  expect(input).toHaveValue("Fish")
 })
 
 test("It should disable the input field when disabled is passed as true", () => {
-    props.disabled = true
-    const { input } = setup()
-    expect(input).toBeDisabled()
+  props.disabled = true
+  const { input } = setup()
+  expect(input).toBeDisabled()
 })
 
 test("It should enable the input field when disabled is passed as false", () => {
-    props.disabled = false
-    const { input } = setup()
-    expect(input).not.toBeDisabled()
+  props.disabled = false
+  const { input } = setup()
+  expect(input).not.toBeDisabled()
 })
 
 test("It should pass the passed className to the input", () => {
-    const { input } = setup()
-    expect(input).toHaveClass("inputFieldClassName")
+  const { input } = setup()
+  expect(input).toHaveClass("inputFieldClassName")
 })
 
 test("It should call the onChange handler with the value if it matches the passed fields' validation regex", () => {
-    const { input } = setup()
-    fireEvent.change(input, { target: { value: "value with spaces" } })
-    expect(onChangeHandler).toHaveBeenLastCalledWith("value with spaces")
+  const { input } = setup()
+  fireEvent.change(input, { target: { value: "value with spaces" } })
+  expect(onChangeHandler).toHaveBeenLastCalledWith("value with spaces")
 })
 
 test("It should not call the onChange handler if the value does not match the passed fields' validation regex", () => {
-    const { input } = setup()
-    fireEvent.change(input, { target: { value: "value with 123 numbers" } })
-    expect(onChangeHandler).not.toHaveBeenCalled()
+  const { input } = setup()
+  fireEvent.change(input, { target: { value: "value with 123 numbers" } })
+  expect(onChangeHandler).not.toHaveBeenCalled()
 })
 
 test("It should set the help pop-over title and text to the data in the passed field", async () => {
-    const { help } = setup()
+  const { help } = setup()
 
-    fireEvent.mouseOver(help)
+  fireEvent.mouseOver(help)
 
-    expect(await screen.findByText("English Meaning"))
-    expect(await screen.findByText("The meaning of the word or character in English. Usually a single word."))
+  expect(await screen.findByText("English Meaning"))
+  expect(await screen.findByText("The meaning of the word or character in English. Usually a single word."))
 })

@@ -11,333 +11,333 @@ import { useDebouncedEffect } from "../../hooks"
 import { useTranslation } from "react-i18next"
 
 export interface RegistrationFormProps {
-    onSuccess: (username: string) => void
+  onSuccess: (username: string) => void
 }
 
 const RegistrationForm = (props: RegistrationFormProps) => {
-    const userService = new UserService()
+  const userService = new UserService()
 
-    const { t } = useTranslation()
+  const { t } = useTranslation()
 
-    const [email, setEmail] = useState("")
-    const [username, setUsername] = useState("")
-    const [nickname, setNickname] = useState("")
-    const [password, setPassword] = useState("")
-    const [secondPassword, setSecondPassword] = useState("")
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
+  const [nickname, setNickname] = useState("")
+  const [password, setPassword] = useState("")
+  const [secondPassword, setSecondPassword] = useState("")
 
-    const [validEmail, setValidEmail] = useState(false)
-    const [validUsername, setValidUsername] = useState(false)
-    const [validNickName, setValidNickName] = useState(true)
-    const [validPassword, setValidPassword] = useState(false)
-    const [validSecondPassword, setValidSecondPassword] = useState(false)
+  const [validEmail, setValidEmail] = useState(false)
+  const [validUsername, setValidUsername] = useState(false)
+  const [validNickName, setValidNickName] = useState(true)
+  const [validPassword, setValidPassword] = useState(false)
+  const [validSecondPassword, setValidSecondPassword] = useState(false)
 
-    const [userExists, setUserExists] = useState(false)
-    const [emailExists, setEmailExists] = useState(false)
+  const [userExists, setUserExists] = useState(false)
+  const [emailExists, setEmailExists] = useState(false)
 
-    const [loading, setLoading] = useState(false)
-    const [userEligibilityLoading, setUserEligibilityLoading] = useState(false)
-    const [emailEligibilityLoading, setEmailEligibilityLoading] = useState(false)
-    const [error, setError] = useState<string | undefined>(undefined)
-    const [emailFocused, setEmailFocused] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [userEligibilityLoading, setUserEligibilityLoading] = useState(false)
+  const [emailEligibilityLoading, setEmailEligibilityLoading] = useState(false)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [emailFocused, setEmailFocused] = useState(false)
 
-    useDebouncedEffect(
-        () => {
-            if (validUsername) {
-                checkUsernameEligibility()
-            }
-        },
-        200,
-        [username]
-    )
+  useDebouncedEffect(
+    () => {
+      if (validUsername) {
+        checkUsernameEligibility()
+      }
+    },
+    200,
+    [username]
+  )
 
-    useDebouncedEffect(
-        () => {
-            if (validEmail) {
-                checkEmailEligibility()
-            } else {
-                setEmailExists(false)
-            }
-        },
-        200,
-        [email]
-    )
+  useDebouncedEffect(
+    () => {
+      if (validEmail) {
+        checkEmailEligibility()
+      } else {
+        setEmailExists(false)
+      }
+    },
+    200,
+    [email]
+  )
 
-    useEffect(() => {
-        setValidSecondPassword(password === secondPassword)
-    }, [password, secondPassword])
+  useEffect(() => {
+    setValidSecondPassword(password === secondPassword)
+  }, [password, secondPassword])
 
-    const isFormValid = (): boolean => {
-        return validEmail && validUsername && validNickName && validPassword && validSecondPassword
+  const isFormValid = (): boolean => {
+    return validEmail && validUsername && validNickName && validPassword && validSecondPassword
+  }
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value
+    const isValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
+    setEmail(email)
+    setValidEmail(isValid)
+  }
+
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const username = e.target.value
+    const isValid = username.length >= 3 && username.length <= 15
+    setUsername(username)
+    setValidUsername(isValid)
+  }
+
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nickname = e.target.value
+    const isValid = nickname.length >= 3 && nickname.length <= 12
+    setNickname(nickname)
+    setValidNickName(isValid)
+  }
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const password = e.target.value
+    const isValid = isPasswordValid(password)
+    setPassword(password)
+    setValidPassword(isValid)
+  }
+
+  const handleSecondPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const secondPassword = e.target.value
+    const isValid = isPasswordValid(secondPassword)
+    setSecondPassword(secondPassword)
+    setValidSecondPassword(isValid)
+  }
+
+  const isPasswordValid = (value: string): boolean => {
+    // 1 x Lowercase Letter, 1 x Uppercase Letter, 1 x Digit, 1 x Special Character, Length >= 8 and <= 36
+    return /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,36}$)/.test(value)
+  }
+
+  const getPasswordPolicyFailureReason = () => {
+    const prefix = "forms.register.password-policy"
+
+    if (!/(?=.*[a-z])/.test(password)) {
+      return t(`${prefix}.lowercase`)
     }
 
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const email = e.target.value
-        const isValid = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
-        setEmail(email)
-        setValidEmail(isValid)
+    if (!/(?=.*[A-Z])/.test(password)) {
+      return t(`${prefix}.uppercase`)
     }
 
-    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const username = e.target.value
-        const isValid = username.length >= 3 && username.length <= 15
-        setUsername(username)
-        setValidUsername(isValid)
+    if (!/(?=.*[0-9])/.test(password)) {
+      return t(`${prefix}.number`)
     }
 
-    const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const nickname = e.target.value
-        const isValid = nickname.length >= 3 && nickname.length <= 12
-        setNickname(nickname)
-        setValidNickName(isValid)
+    if (!/(?=.*[^A-Za-z0-9])/.test(password)) {
+      return t(`${prefix}.special-char`)
     }
 
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const password = e.target.value
-        const isValid = isPasswordValid(password)
-        setPassword(password)
-        setValidPassword(isValid)
+    if (!/(?=.{8,36}$)/.test(password)) {
+      return t(`${prefix}.length`)
     }
+  }
 
-    const handleSecondPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const secondPassword = e.target.value
-        const isValid = isPasswordValid(secondPassword)
-        setSecondPassword(secondPassword)
-        setValidSecondPassword(isValid)
-    }
+  const passwordPolicyInfo = (
+    <PopOver
+      title={t("forms.register.password-policy.title")}
+      text={
+        <div>
+          <ul className={styles.list}>
+            <li>At least 1 lowercase letter</li>
+            <li>At least 1 uppercase letter</li>
+            <li>At least 1 number</li>
+            <li>At least 1 special character</li>
+            <li>Be between 3 and 36 characters</li>
+          </ul>
+        </div>
+      }
+    />
+  )
 
-    const isPasswordValid = (value: string): boolean => {
-        // 1 x Lowercase Letter, 1 x Uppercase Letter, 1 x Digit, 1 x Special Character, Length >= 8 and <= 36
-        return /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,36}$)/.test(value)
-    }
+  const registerUser = () => {
+    setLoading(true)
+    setError(undefined)
 
-    const getPasswordPolicyFailureReason = () => {
-        const prefix = "forms.register.password-policy"
-
-        if (!/(?=.*[a-z])/.test(password)) {
-            return t(`${prefix}.lowercase`)
+    authService
+      .register(username, email, password, nickname)
+      .then((response) => {
+        if (response.data) {
+          props.onSuccess(username)
+        } else {
+          setError(response.error)
         }
+      })
+      .catch((response) => {
+        setError(response.error)
+        setLoading(false)
+      })
+  }
 
-        if (!/(?=.*[A-Z])/.test(password)) {
-            return t(`${prefix}.uppercase`)
+  const checkUsernameEligibility = () => {
+    setUserEligibilityLoading(true)
+    userService
+      .usernameExists(username)
+      .then((response) => {
+        setUserExists(response.exists)
+        setValidUsername(!response.exists)
+
+        if (response.error) {
+          setError(response.error)
         }
+      })
+      .catch((response) => {
+        setError(response.error)
+        setUserExists(false)
+      })
+      .finally(() => {
+        setUserEligibilityLoading(false)
+      })
+  }
 
-        if (!/(?=.*[0-9])/.test(password)) {
-            return t(`${prefix}.number`)
+  const checkEmailEligibility = () => {
+    setEmailEligibilityLoading(true)
+    userService
+      .emailAlreadyRegistered(email)
+      .then((response) => {
+        setEmailExists(response.exists)
+        setValidEmail(!response.exists)
+
+        if (response.error) {
+          setError(response.error)
         }
+      })
+      .catch((response) => {
+        setError(response.error)
+        setEmailExists(false)
+      })
+      .finally(() => {
+        setEmailEligibilityLoading(false)
+      })
+  }
 
-        if (!/(?=.*[^A-Za-z0-9])/.test(password)) {
-            return t(`${prefix}.special-char`)
-        }
+  return (
+    <Modal.Body className={styles.body} data-testid="registration-form">
+      {error && <Alert variant="danger">{error}</Alert>}
 
-        if (!/(?=.{8,36}$)/.test(password)) {
-            return t(`${prefix}.length`)
-        }
-    }
-
-    const passwordPolicyInfo = (
-        <PopOver
-            title={t("forms.register.password-policy.title")}
-            text={
-                <div>
-                    <ul className={styles.list}>
-                        <li>At least 1 lowercase letter</li>
-                        <li>At least 1 uppercase letter</li>
-                        <li>At least 1 number</li>
-                        <li>At least 1 special character</li>
-                        <li>Be between 3 and 36 characters</li>
-                    </ul>
-                </div>
-            }
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>{t("forms.common.email")}*</Form.Label>
+        <Form.Control
+          required
+          type="email"
+          value={email}
+          isValid={validEmail}
+          isInvalid={!validEmail}
+          className={styles.input}
+          placeholder="Enter email"
+          onChange={handleEmailChange}
+          onFocus={() => setEmailFocused(true)}
+          onBlur={() => setEmailFocused(false)}
         />
-    )
 
-    const registerUser = () => {
-        setLoading(true)
-        setError(undefined)
+        {emailFocused && email.length === 0 && (
+          <Form.Text className="text-muted">{t("forms.register.email-not-shared")}</Form.Text>
+        )}
 
-        authService
-            .register(username, email, password, nickname)
-            .then((response) => {
-                if (response.data) {
-                    props.onSuccess(username)
-                } else {
-                    setError(response.error)
-                }
-            })
-            .catch((response) => {
-                setError(response.error)
-                setLoading(false)
-            })
-    }
+        {emailExists && !emailEligibilityLoading && (
+          <Form.Text className="text-muted">{t("forms.register.email-taken")}</Form.Text>
+        )}
 
-    const checkUsernameEligibility = () => {
-        setUserEligibilityLoading(true)
-        userService
-            .usernameExists(username)
-            .then((response) => {
-                setUserExists(response.exists)
-                setValidUsername(!response.exists)
+        {!emailExists && !emailEligibilityLoading && validEmail && (
+          <Form.Text className="text-muted">{t("forms.register.email-available")}</Form.Text>
+        )}
 
-                if (response.error) {
-                    setError(response.error)
-                }
-            })
-            .catch((response) => {
-                setError(response.error)
-                setUserExists(false)
-            })
-            .finally(() => {
-                setUserEligibilityLoading(false)
-            })
-    }
+        {emailEligibilityLoading && (
+          <Form.Text className="text-muted">
+            <FontAwesomeIcon icon={faSpinner} spin fixedWidth />
+            {t("forms.register.checking-email-eligibility")}
+          </Form.Text>
+        )}
+      </Form.Group>
 
-    const checkEmailEligibility = () => {
-        setEmailEligibilityLoading(true)
-        userService
-            .emailAlreadyRegistered(email)
-            .then((response) => {
-                setEmailExists(response.exists)
-                setValidEmail(!response.exists)
+      <Form.Group>
+        <Form.Label>{t("forms.common.username")}*</Form.Label>
+        <Form.Control
+          required
+          value={username}
+          isValid={validUsername}
+          className={styles.input}
+          isInvalid={!validUsername}
+          onChange={handleUsernameChange}
+          placeholder={t("forms.common.username")}
+        />
 
-                if (response.error) {
-                    setError(response.error)
-                }
-            })
-            .catch((response) => {
-                setError(response.error)
-                setEmailExists(false)
-            })
-            .finally(() => {
-                setEmailEligibilityLoading(false)
-            })
-    }
+        {userExists && !userEligibilityLoading && (
+          <Form.Text className="text-muted">{t("forms.register.username-taken")}</Form.Text>
+        )}
 
-    return (
-        <Modal.Body className={styles.body} data-testid="registration-form">
-            {error && <Alert variant="danger">{error}</Alert>}
+        {!userExists && !userEligibilityLoading && validUsername && (
+          <Form.Text className="text-muted">{t("forms.register.username-available")}</Form.Text>
+        )}
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>{t("forms.common.email")}*</Form.Label>
-                <Form.Control
-                    required
-                    type="email"
-                    value={email}
-                    isValid={validEmail}
-                    isInvalid={!validEmail}
-                    className={styles.input}
-                    placeholder="Enter email"
-                    onChange={handleEmailChange}
-                    onFocus={() => setEmailFocused(true)}
-                    onBlur={() => setEmailFocused(false)}
-                />
+        {userEligibilityLoading && (
+          <Form.Text className="text-muted">
+            <FontAwesomeIcon icon={faSpinner} spin fixedWidth />
+            {t("forms.register.checking-username-eligibility")}
+          </Form.Text>
+        )}
+      </Form.Group>
 
-                {emailFocused && email.length === 0 && (
-                    <Form.Text className="text-muted">{t("forms.register.email-not-shared")}</Form.Text>
-                )}
+      <Form.Group>
+        <Form.Label>{t("forms.common.nickname")}</Form.Label>
+        <Form.Control
+          value={nickname}
+          isValid={validNickName}
+          className={styles.input}
+          isInvalid={!validNickName}
+          onChange={handleNicknameChange}
+          placeholder={t("forms.common.nickname")}
+        />
+      </Form.Group>
 
-                {emailExists && !emailEligibilityLoading && (
-                    <Form.Text className="text-muted">{t("forms.register.email-taken")}</Form.Text>
-                )}
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>{t("forms.common.password")}*</Form.Label>
+        <Form.Control
+          required
+          type="password"
+          value={password}
+          isValid={validPassword}
+          className={styles.input}
+          isInvalid={!validPassword}
+          onChange={handlePasswordChange}
+          placeholder={t("forms.common.password")}
+        />
 
-                {!emailExists && !emailEligibilityLoading && validEmail && (
-                    <Form.Text className="text-muted">{t("forms.register.email-available")}</Form.Text>
-                )}
+        {!validPassword && password.length > 0 && (
+          <Form.Text className="text-muted">
+            <InfoButton popover={passwordPolicyInfo} />
+            {getPasswordPolicyFailureReason()}
+          </Form.Text>
+        )}
+      </Form.Group>
 
-                {emailEligibilityLoading && (
-                    <Form.Text className="text-muted">
-                        <FontAwesomeIcon icon={faSpinner} spin fixedWidth />
-                        {t("forms.register.checking-email-eligibility")}
-                    </Form.Text>
-                )}
-            </Form.Group>
+      <Form.Group>
+        <Form.Label>{t("forms.common.confirm-password")}*</Form.Label>
+        <Form.Control
+          required
+          type="password"
+          value={secondPassword}
+          className={styles.input}
+          isValid={validSecondPassword}
+          isInvalid={!validSecondPassword}
+          onChange={handleSecondPasswordChange}
+          placeholder={t("forms.common.confirm-password")}
+        />
 
-            <Form.Group>
-                <Form.Label>{t("forms.common.username")}*</Form.Label>
-                <Form.Control
-                    required
-                    value={username}
-                    isValid={validUsername}
-                    className={styles.input}
-                    isInvalid={!validUsername}
-                    onChange={handleUsernameChange}
-                    placeholder={t("forms.common.username")}
-                />
+        {password !== secondPassword && validPassword && (
+          <Form.Text className="text-muted">{t("forms.register.passwords-dont-match")}</Form.Text>
+        )}
+      </Form.Group>
 
-                {userExists && !userEligibilityLoading && (
-                    <Form.Text className="text-muted">{t("forms.register.username-taken")}</Form.Text>
-                )}
-
-                {!userExists && !userEligibilityLoading && validUsername && (
-                    <Form.Text className="text-muted">{t("forms.register.username-available")}</Form.Text>
-                )}
-
-                {userEligibilityLoading && (
-                    <Form.Text className="text-muted">
-                        <FontAwesomeIcon icon={faSpinner} spin fixedWidth />
-                        {t("forms.register.checking-username-eligibility")}
-                    </Form.Text>
-                )}
-            </Form.Group>
-
-            <Form.Group>
-                <Form.Label>{t("forms.common.nickname")}</Form.Label>
-                <Form.Control
-                    value={nickname}
-                    isValid={validNickName}
-                    className={styles.input}
-                    isInvalid={!validNickName}
-                    onChange={handleNicknameChange}
-                    placeholder={t("forms.common.nickname")}
-                />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>{t("forms.common.password")}*</Form.Label>
-                <Form.Control
-                    required
-                    type="password"
-                    value={password}
-                    isValid={validPassword}
-                    className={styles.input}
-                    isInvalid={!validPassword}
-                    onChange={handlePasswordChange}
-                    placeholder={t("forms.common.password")}
-                />
-
-                {!validPassword && password.length > 0 && (
-                    <Form.Text className="text-muted">
-                        <InfoButton popover={passwordPolicyInfo} />
-                        {getPasswordPolicyFailureReason()}
-                    </Form.Text>
-                )}
-            </Form.Group>
-
-            <Form.Group>
-                <Form.Label>{t("forms.common.confirm-password")}*</Form.Label>
-                <Form.Control
-                    required
-                    type="password"
-                    value={secondPassword}
-                    className={styles.input}
-                    isValid={validSecondPassword}
-                    isInvalid={!validSecondPassword}
-                    onChange={handleSecondPasswordChange}
-                    placeholder={t("forms.common.confirm-password")}
-                />
-
-                {password !== secondPassword && validPassword && (
-                    <Form.Text className="text-muted">{t("forms.register.passwords-dont-match")}</Form.Text>
-                )}
-            </Form.Group>
-
-            <Form.Group>
-                <Button className={styles.button} variant="info" disabled={!isFormValid()} onClick={registerUser}>
-                    {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="register-loading" />}{" "}
-                    {t("action.register")}
-                </Button>
-            </Form.Group>
-        </Modal.Body>
-    )
+      <Form.Group>
+        <Button className={styles.button} variant="info" disabled={!isFormValid()} onClick={registerUser}>
+          {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="register-loading" />}{" "}
+          {t("action.register")}
+        </Button>
+      </Form.Group>
+    </Modal.Body>
+  )
 }
 
 export default RegistrationForm

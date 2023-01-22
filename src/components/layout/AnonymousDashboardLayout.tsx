@@ -12,35 +12,35 @@ import LocalStorageService from "../../service/LocalStorageService"
 import { useState } from "react"
 
 const AnonymousDashboardLayout = () => {
-    const localStorageService = new LocalStorageService()
-    const [hideProfile, setHideProfile] = useState(localStorageService.getHideUserProfileHint())
+  const localStorageService = new LocalStorageService()
+  const [hideProfile, setHideProfile] = useState(localStorageService.getHideUserProfileHint())
 
-    const handleProfileCardDismiss = () => {
-        setHideProfile(true)
-        localStorageService.setHideUserProfileHint()
-    }
+  const handleProfileCardDismiss = () => {
+    setHideProfile(true)
+    localStorageService.setHideUserProfileHint()
+  }
 
-    return (
-        <Row className={styles.row} data-testid="anonymous-dashboard">
-            <Col md={3} className={styles.col}>
-                {!hideProfile && <ProfileCard onDismiss={handleProfileCardDismiss} />}
-                <SettingsCard />
-                <FeedbackCard />
-            </Col>
+  return (
+    <Row className={styles.row} data-testid="anonymous-dashboard">
+      <Col md={3} className={styles.col}>
+        {!hideProfile && <ProfileCard onDismiss={handleProfileCardDismiss} />}
+        <SettingsCard />
+        <FeedbackCard />
+      </Col>
 
-            <Col md={6}>
-                <PlayCard />
-                <ScrollableContainer className={styles.main} hideScrollBar>
-                    <ActivityCard />
-                </ScrollableContainer>
-            </Col>
+      <Col md={6}>
+        <PlayCard />
+        <ScrollableContainer className={styles.main} hideScrollBar>
+          <ActivityCard />
+        </ScrollableContainer>
+      </Col>
 
-            <Col md={3}>
-                <HighScoresCard />
-                <KanjiShowcaseCard />
-            </Col>
-        </Row>
-    )
+      <Col md={3}>
+        <HighScoresCard />
+        <KanjiShowcaseCard />
+      </Col>
+    </Row>
+  )
 }
 
 export default AnonymousDashboardLayout

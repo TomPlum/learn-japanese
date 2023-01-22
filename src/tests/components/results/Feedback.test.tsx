@@ -9,46 +9,46 @@ const onCloseHandler = jest.fn()
 let props: FeedbackProps
 
 beforeEach(() => {
-    props = {
-        data: [],
-        show: true,
-        onClose: onCloseHandler
-    }
+  props = {
+    data: [],
+    show: true,
+    onClose: onCloseHandler
+  }
 })
 
 test("A single kana with one failure instance should render 1 tile", () => {
-    props.data = [new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]
-    render(<Feedback {...props} />)
+  props.data = [new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)]
+  render(<Feedback {...props} />)
 
-    expect(screen.getByText("x1")).toBeInTheDocument()
-    expect(screen.getByText("a")).toBeInTheDocument()
-    expect(screen.getByText("あ")).toBeInTheDocument()
+  expect(screen.getByText("x1")).toBeInTheDocument()
+  expect(screen.getByText("a")).toBeInTheDocument()
+  expect(screen.getByText("あ")).toBeInTheDocument()
 })
 
 test("Multiple kana should render multiple tiles with their respective mistakes", () => {
-    const bya = new Kana("びゃ", ["bya"], KanaType.HIRAGANA, KanaColumn.H, true)
-    const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
-    props.data = [a, bya, bya]
+  const bya = new Kana("びゃ", ["bya"], KanaType.HIRAGANA, KanaColumn.H, true)
+  const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
+  props.data = [a, bya, bya]
 
-    render(<Feedback {...props} />)
+  render(<Feedback {...props} />)
 
-    expect(screen.getByText("x2")).toBeInTheDocument()
-    expect(screen.getByText("bya")).toBeInTheDocument()
-    expect(screen.getByText("びゃ")).toBeInTheDocument()
+  expect(screen.getByText("x2")).toBeInTheDocument()
+  expect(screen.getByText("bya")).toBeInTheDocument()
+  expect(screen.getByText("びゃ")).toBeInTheDocument()
 
-    expect(screen.getByText("x1")).toBeInTheDocument()
-    expect(screen.getByText("a")).toBeInTheDocument()
-    expect(screen.getByText("あ")).toBeInTheDocument()
+  expect(screen.getByText("x1")).toBeInTheDocument()
+  expect(screen.getByText("a")).toBeInTheDocument()
+  expect(screen.getByText("あ")).toBeInTheDocument()
 })
 
 test("Should not render the modal if the show property is passed as false", () => {
-    props.show = false
-    render(<Feedback {...props} />)
-    expect(screen.queryByText("Mistakes")).not.toBeInTheDocument()
+  props.show = false
+  render(<Feedback {...props} />)
+  expect(screen.queryByText("Mistakes")).not.toBeInTheDocument()
 })
 
 test("Clicking the close button should call the onClose event handler", () => {
-    render(<Feedback {...props} />)
-    fireEvent.click(screen.getByLabelText("Close"))
-    expect(onCloseHandler).toHaveBeenCalled()
+  render(<Feedback {...props} />)
+  fireEvent.click(screen.getByLabelText("Close"))
+  expect(onCloseHandler).toHaveBeenCalled()
 })

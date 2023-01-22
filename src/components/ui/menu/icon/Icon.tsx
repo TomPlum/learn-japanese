@@ -6,47 +6,47 @@ import { faQuestion, IconDefinition } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export interface IconProps {
-    style?: {}
-    size?: string
-    value: CustomIcon
-    className?: string
-    onClick?: (icon: CustomIcon) => void
+  style?: {}
+  size?: string
+  value: CustomIcon
+  className?: string
+  onClick?: (icon: CustomIcon) => void
 }
 
 const Icon = (props: IconProps) => {
-    const { size, value, style, className, onClick, ...rest } = props
+  const { size, value, style, className, onClick, ...rest } = props
 
-    const isReactIconsType = (value: CustomIcon): value is IconType => {
-        return value.toString().startsWith("Fa")
-    }
+  const isReactIconsType = (value: CustomIcon): value is IconType => {
+    return value.toString().startsWith("Fa")
+  }
 
-    const isFontAwesomeIconDefinition = (value: CustomIcon): value is IconDefinition => {
-        return !isReactIconsType(value) && typeof value !== "string"
-    }
+  const isFontAwesomeIconDefinition = (value: CustomIcon): value is IconDefinition => {
+    return !isReactIconsType(value) && typeof value !== "string"
+  }
 
-    const iconProps = {
-        ...rest,
-        key: value.toString(),
-        onClick: () => onClick?.(value),
-        style: { fontSize: size, ...style },
-        title: value.toString().replace("Fa", ""),
-        className: [className, styles.icon].join(" ")
-    }
+  const iconProps = {
+    ...rest,
+    key: value.toString(),
+    onClick: () => onClick?.(value),
+    style: { fontSize: size, ...style },
+    title: value.toString().replace("Fa", ""),
+    className: [className, styles.icon].join(" ")
+  }
 
-    if (isFontAwesomeIconDefinition(value)) {
-        return <FontAwesomeIcon icon={value} />
-    }
+  if (isFontAwesomeIconDefinition(value)) {
+    return <FontAwesomeIcon icon={value} />
+  }
 
-    if (value != "" && !isReactIconsType(value)) {
-        return <span {...iconProps}>{value}</span>
-    }
+  if (value != "" && !isReactIconsType(value)) {
+    return <span {...iconProps}>{value}</span>
+  }
 
-    if (!!value && isReactIconsType(value)) {
-        return React.createElement(CustomFontAwesomeIcon[value], iconProps)
-    }
+  if (!!value && isReactIconsType(value)) {
+    return React.createElement(CustomFontAwesomeIcon[value], iconProps)
+  }
 
-    console.warn(`Couldn't find an icon with the name [${value}]`)
-    return <FontAwesomeIcon icon={faQuestion} data-testid="unknown-icon" />
+  console.warn(`Couldn't find an icon with the name [${value}]`)
+  return <FontAwesomeIcon icon={faQuestion} data-testid="unknown-icon" />
 }
 
 export default Icon

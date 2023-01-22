@@ -14,53 +14,53 @@ import KanjiDataSettingsSummary from "./summary/KanjiDataSettingsSummary"
 import NumbersDataSettingsSummary from "./summary/NumbersDataSettingsSummary"
 
 export interface DataSettingsSummaryProps {
-    settings: DataSettings
+  settings: DataSettings
 }
 
 const DataSettingsSummary = (props: DataSettingsSummaryProps) => {
-    const { settings } = props
+  const { settings } = props
 
-    const className = styles.word
+  const className = styles.word
 
-    const isKanaSettings = (settings: DataSettings): settings is KanaSettings => {
-        return (settings as KanaSettings).onlyDiagraphs !== undefined
-    }
+  const isKanaSettings = (settings: DataSettings): settings is KanaSettings => {
+    return (settings as KanaSettings).onlyDiagraphs !== undefined
+  }
 
-    const isKanjiSettings = (settings: DataSettings): settings is KanjiSettings => {
-        return (settings as KanjiSettings).grades !== undefined
-    }
+  const isKanjiSettings = (settings: DataSettings): settings is KanjiSettings => {
+    return (settings as KanjiSettings).grades !== undefined
+  }
 
-    const isNumbersSettings = (settings: DataSettings): settings is NumbersSettings => {
-        return (settings as NumbersSettings).sequence !== undefined
-    }
+  const isNumbersSettings = (settings: DataSettings): settings is NumbersSettings => {
+    return (settings as NumbersSettings).sequence !== undefined
+  }
 
-    const isSentenceStructureSettings = (settings: DataSettings): settings is SentenceStructureSettings => {
-        return (settings as SentenceStructureSettings).particles !== undefined
-    }
+  const isSentenceStructureSettings = (settings: DataSettings): settings is SentenceStructureSettings => {
+    return (settings as SentenceStructureSettings).particles !== undefined
+  }
 
-    const isCalendarSettings = (settings: DataSettings): settings is CalendarSettings => {
-        return (settings as CalendarSettings).phrases !== undefined
-    }
+  const isCalendarSettings = (settings: DataSettings): settings is CalendarSettings => {
+    return (settings as CalendarSettings).phrases !== undefined
+  }
 
-    const isBasicsSettings = (settings: DataSettings): settings is BasicsSettings => {
-        return (settings as BasicsSettings).weather !== undefined
-    }
+  const isBasicsSettings = (settings: DataSettings): settings is BasicsSettings => {
+    return (settings as BasicsSettings).weather !== undefined
+  }
 
-    if (isKanaSettings(settings)) {
-        return <KanaDataSettingsSummary settings={settings} className={className} />
-    } else if (isSentenceStructureSettings(settings)) {
-        return <SentenceStructureDataSettingsSummary settings={settings} className={className} />
-    } else if (isCalendarSettings(settings)) {
-        return <CalendarDataSettingsSummary settings={settings} className={className} />
-    } else if (isBasicsSettings(settings)) {
-        return <BasicsDataSettingsSummary settings={settings} className={className} />
-    } else if (isKanjiSettings(settings)) {
-        return <KanjiDataSettingsSummary settings={settings} className={className} />
-    } else if (isNumbersSettings(settings)) {
-        return <NumbersDataSettingsSummary settings={settings} className={className} />
-    }
+  if (isKanaSettings(settings)) {
+    return <KanaDataSettingsSummary settings={settings} className={className} />
+  } else if (isSentenceStructureSettings(settings)) {
+    return <SentenceStructureDataSettingsSummary settings={settings} className={className} />
+  } else if (isCalendarSettings(settings)) {
+    return <CalendarDataSettingsSummary settings={settings} className={className} />
+  } else if (isBasicsSettings(settings)) {
+    return <BasicsDataSettingsSummary settings={settings} className={className} />
+  } else if (isKanjiSettings(settings)) {
+    return <KanjiDataSettingsSummary settings={settings} className={className} />
+  } else if (isNumbersSettings(settings)) {
+    return <NumbersDataSettingsSummary settings={settings} className={className} />
+  }
 
-    return null
+  return null
 }
 
 export default DataSettingsSummary

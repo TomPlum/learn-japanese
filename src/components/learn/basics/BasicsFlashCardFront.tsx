@@ -8,27 +8,24 @@ import styles from "../../../styles/sass/components/learn/basics/BasicsFlashCard
 import DefinitionList from "../DefinitionList"
 
 function BasicsFlashCardFront(props: CardFaceProps) {
-    return (
-        <FlashCardFront
-            onClick={props.onClick}
-            borderColour={props.data instanceof Colour ? props.data.colour : undefined}
-        >
-            <Container className={styles.wrapper}>
-                {props.data instanceof Colour && (
-                    <div className={styles.iconWrapper}>
-                        <FontAwesomeIcon
-                            icon={faFillDrip}
-                            fixedWidth
-                            color={props.data.colour}
-                            className={styles.icon}
-                            data-testid="colour-icon"
-                        />
-                    </div>
-                )}
-                <DefinitionList words={props.data.getMeanings()} mode="stacked" />
-            </Container>
-        </FlashCardFront>
-    )
+  return (
+    <FlashCardFront onClick={props.onClick} borderColour={props.data instanceof Colour ? props.data.colour : undefined}>
+      <Container className={styles.wrapper}>
+        {props.data instanceof Colour && (
+          <div className={styles.iconWrapper}>
+            <FontAwesomeIcon
+              icon={faFillDrip}
+              fixedWidth
+              color={props.data.colour}
+              className={styles.icon}
+              data-testid="colour-icon"
+            />
+          </div>
+        )}
+        <DefinitionList words={props.data.getMeanings()} mode="stacked" />
+      </Container>
+    </FlashCardFront>
+  )
 }
 
 export default BasicsFlashCardFront

@@ -2,37 +2,37 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontaw
 import styles from "../../../styles/sass/components/layout/card/DashboardCardIcon.module.scss"
 
 export interface DashboardCardIconProps extends FontAwesomeIconProps {
-    href?: string
-    title?: string
-    className?: string
-    disabled?: boolean
-    onClick?: () => void
+  href?: string
+  title?: string
+  className?: string
+  disabled?: boolean
+  onClick?: () => void
 }
 
 const DashboardCardIcon = (props: DashboardCardIconProps) => {
-    const { title, href, disabled, className, onClick } = props
+  const { title, href, disabled, className, onClick } = props
 
-    const classes = [styles.icon, className]
+  const classes = [styles.icon, className]
 
-    if (disabled) {
-        classes.push(styles.disabled)
+  if (disabled) {
+    classes.push(styles.disabled)
+  }
+
+  const handleClick = () => {
+    if (!disabled) {
+      onClick?.()
     }
+  }
 
-    const handleClick = () => {
-        if (!disabled) {
-            onClick?.()
-        }
-    }
-
-    return (
-        <FontAwesomeIcon
-            {...props}
-            href={href}
-            title={title}
-            onClick={handleClick}
-            className={classes.join(" ")}
-            data-testid="dashboard-card-icon"
-        />
-    )
+  return (
+    <FontAwesomeIcon
+      {...props}
+      href={href}
+      title={title}
+      onClick={handleClick}
+      className={classes.join(" ")}
+      data-testid="dashboard-card-icon"
+    />
+  )
 }
 export default DashboardCardIcon

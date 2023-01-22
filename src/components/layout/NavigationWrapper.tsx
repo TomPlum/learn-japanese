@@ -4,17 +4,17 @@ import UserForm from "../user/UserForm"
 import styles from "../../styles/sass/components/layout/NavigationWrapper.module.scss"
 
 const NavigationWrapper = (props: PropsWithChildren<{}>) => {
-    const [inLoginModal, setInLoginModal] = useState(false)
+  const [inLoginModal, setInLoginModal] = useState(false)
 
-    return (
-        <div className={styles.wrapper}>
-            <NavigationBar onLaunchLoginModal={() => setInLoginModal(true)} />
+  return (
+    <div className={styles.wrapper}>
+      <NavigationBar onLaunchLoginModal={() => setInLoginModal(true)} />
 
-            {props.children}
+      {props.children}
 
-            {inLoginModal && <UserForm show={inLoginModal} onClose={() => setInLoginModal(false)} />}
-        </div>
-    )
+      {inLoginModal && <UserForm show={inLoginModal} onClose={() => setInLoginModal(false)} />}
+    </div>
+  )
 }
 
 export default NavigationWrapper

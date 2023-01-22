@@ -6,49 +6,44 @@ import styles from "../../styles/sass/components/learn/LearnTopicButton.module.s
 import SessionMode from "../../domain/session/SessionMode"
 
 export interface LearnTopicButtonProps {
-    icon: IconDefinition | string
-    iconColour?: string
-    type: SessionMode
-    selected: SessionMode
-    className?: string
-    onClick: (mode: SessionMode) => void
+  icon: IconDefinition | string
+  iconColour?: string
+  type: SessionMode
+  selected: SessionMode
+  className?: string
+  onClick: (mode: SessionMode) => void
 }
 
 class LearnTopicButton extends Component<LearnTopicButtonProps> {
-    render() {
-        const { icon, type, selected, iconColour, className } = this.props
-        const isSelected = selected.displayName === type.displayName
-        const colour = isSelected ? iconColour : "#000"
-        const buttonClass = [className, isSelected ? styles.selected : styles.notSelected, styles.button].join(" ")
+  render() {
+    const { icon, type, selected, iconColour, className } = this.props
+    const isSelected = selected.displayName === type.displayName
+    const colour = isSelected ? iconColour : "#000"
+    const buttonClass = [className, isSelected ? styles.selected : styles.notSelected, styles.button].join(" ")
 
-        return (
-            <Button onClick={this.handleOnClick} className={buttonClass}>
-                {this.isFontAwesomeIcon() && (
-                    <FontAwesomeIcon
-                        icon={icon as IconDefinition}
-                        fixedWidth
-                        className={styles.icon}
-                        style={{ color: colour }}
-                    />
-                )}
+    return (
+      <Button onClick={this.handleOnClick} className={buttonClass}>
+        {this.isFontAwesomeIcon() && (
+          <FontAwesomeIcon icon={icon as IconDefinition} fixedWidth className={styles.icon} style={{ color: colour }} />
+        )}
 
-                {!this.isFontAwesomeIcon() && (
-                    <span className={styles.textIcon} style={{ color: colour }}>
-                        {icon}
-                    </span>
-                )}
+        {!this.isFontAwesomeIcon() && (
+          <span className={styles.textIcon} style={{ color: colour }}>
+            {icon}
+          </span>
+        )}
 
-                <p className={styles.name}>{type.displayName}</p>
-            </Button>
-        )
-    }
+        <p className={styles.name}>{type.displayName}</p>
+      </Button>
+    )
+  }
 
-    private handleOnClick = () => this.props.onClick(this.props.type)
+  private handleOnClick = () => this.props.onClick(this.props.type)
 
-    private isFontAwesomeIcon() {
-        const icon: IconDefinition | string = this.props.icon
-        return !(typeof icon === "string")
-    }
+  private isFontAwesomeIcon() {
+    const icon: IconDefinition | string = this.props.icon
+    return !(typeof icon === "string")
+  }
 }
 
 export default LearnTopicButton

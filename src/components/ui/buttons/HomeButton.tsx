@@ -4,27 +4,27 @@ import NavigationButton from "../NavigationButton"
 import { useTranslation } from "react-i18next"
 
 export interface HomeButtonProps {
-    className?: string
-    disabled?: boolean
+  className?: string
+  disabled?: boolean
 }
 
 const HomeButton = (props: HomeButtonProps) => {
-    const { t, ready } = useTranslation()
+  const { t, ready } = useTranslation()
 
-    return (
-        <NavigationButton
-            href="/home"
-            icon={faHome}
-            disableDropdown
-            id="home-button"
-            textLoading={!ready}
-            textPlacement="right"
-            disabled={props.disabled}
-            iconClass={menuStyles.icon}
-            textClass={menuStyles.linkText}
-            text={t("navigation.button.home")}
-        />
-    )
+  return (
+    <NavigationButton
+      href="/home"
+      icon={faHome}
+      disableDropdown
+      id="home-button"
+      textLoading={!ready}
+      textPlacement="right"
+      disabled={props.disabled}
+      iconClass={menuStyles.icon}
+      textClass={menuStyles.linkText}
+      text={t("navigation.button.home")}
+    />
+  )
 }
 
 export default HomeButton

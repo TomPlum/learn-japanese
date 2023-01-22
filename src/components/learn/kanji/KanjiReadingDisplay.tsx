@@ -9,70 +9,70 @@ import SpinnerController from "../../ui/SpinnerController"
 import Copyable from "../../ui/Copyable"
 
 export interface KanjiReadingDisplayProps {
-    type: ReadingType
-    showRomaji: boolean
-    readings: KanjiReading[]
+  type: ReadingType
+  showRomaji: boolean
+  readings: KanjiReading[]
 }
 
 const KanjiReadingDisplay = (props: KanjiReadingDisplayProps) => {
-    const { type, readings, showRomaji } = props
+  const { type, readings, showRomaji } = props
 
-    const [selected, setSelected] = useState(readings[0])
+  const [selected, setSelected] = useState(readings[0])
 
-    const getReadingFormatted = (): string => {
-        let formatted = selected?.kana ?? "N/A"
+  const getReadingFormatted = (): string => {
+    let formatted = selected?.kana ?? "N/A"
 
-        if (showRomaji) {
-            formatted += ` (${selected.romaji})`
-        }
-
-        return formatted
+    if (showRomaji) {
+      formatted += ` (${selected.romaji})`
     }
 
-    const getTitle = () => {
-        switch (type) {
-            case ReadingType.ON:
-                return "On-yomi Reading"
-            case ReadingType.KUN:
-                return "Kun-yomi Reading"
-        }
+    return formatted
+  }
+
+  const getTitle = () => {
+    switch (type) {
+      case ReadingType.ON:
+        return "On-yomi Reading"
+      case ReadingType.KUN:
+        return "Kun-yomi Reading"
     }
+  }
 
-    const getText = () => {
-        switch (type) {
-            case ReadingType.ON:
-                return Environment.variable("ONYOMI_DESC")
-            case ReadingType.KUN:
-                return Environment.variable("KUNYOMI_DESC")
-        }
+  const getText = () => {
+    switch (type) {
+      case ReadingType.ON:
+        return Environment.variable("ONYOMI_DESC")
+      case ReadingType.KUN:
+        return Environment.variable("KUNYOMI_DESC")
     }
+  }
 
-    return (
-        <div className={styles.wrapper}>
-            <SpinnerController
-                values={readings}
-                onChange={(value: KanjiReading) => setSelected(value)}
-                disabledTitle={`This kanji has only one Jōyō ${type.toLowerCase()} reading`}
-            />
+  return (
+    <div className={styles.wrapper}>
+      <SpinnerController
+        values={readings}
+        onChange={(value: KanjiReading) => setSelected(value)}
+        disabledTitle={`This kanji has only one Jōyō ${type.toLowerCase()} reading`}
+      />
 
-            <span className={[commonStyles.text, styles.reading].join(" ")}>
-                <Inspectable popover={{ title: getTitle(), text: getText() }}>
-                    <span className={commonStyles.label}>{type}</span>
-                </Inspectable>
+      <span className={[commonStyles.text, styles.reading].join(" ")}>
+        <Inspectable popover={{ title: getTitle(), text: getText() }}>
+          <span className={commonStyles.label}>{type}</span>
+        </Inspectable>
 
-                {readings.length > 0 ? (
-                    <>
-                        <span>: </span>
-                        <Copyable inline>
-                            <span>{getReadingFormatted()}</span>
-                        </Copyable>
-                    </>
-                ) : (
-                    <span title={`This kanji has no ${type.toLowerCase()} reading`}>: N/A</span>
-                )}
-            </span>
-        </div>
-    )
+        {readings.length > 0 ? (
+          <>
+            <span>: </span>
+            <Copyable inline>
+              <span>{getReadingFormatted()}</span>
+            </Copyable>
+          </>
+        ) : (
+          <span title={`This kanji has no ${type.toLowerCase()} reading`}>: N/A</span>
+        )}
+      </span>
+    </div>
+  )
 }
 
 export default KanjiReadingDisplay

@@ -8,18 +8,18 @@ const onClickHandler = jest.fn()
 let props: SettingsButtonProps
 
 beforeEach(() => {
-    props = {
-        name: "Test Button",
-        icon: { id: "test-button-icon", icon: faApple },
-        className: "testClass",
-        onClick: onClickHandler,
-        id: "test-button",
-        confirm: undefined
-    }
+  props = {
+    name: "Test Button",
+    icon: { id: "test-button-icon", icon: faApple },
+    className: "testClass",
+    onClick: onClickHandler,
+    id: "test-button",
+    confirm: undefined
+  }
 })
 
 test("Clicking the button should call the onClick event handler", () => {
-    const component = renderWithTranslation(<SettingsButton {...props} />)
-    fireEvent.click(component.getByText("Test Button"))
-    expect(onClickHandler).toHaveBeenCalled()
+  const component = renderWithTranslation(<SettingsButton {...props} />)
+  fireEvent.click(component.getByText("Test Button"))
+  expect(onClickHandler).toHaveBeenCalled()
 })

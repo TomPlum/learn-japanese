@@ -6,26 +6,27 @@ import { ConfidenceMenuStyle } from "../../domain/learn/spacedrepetition/Confide
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export interface ConfidenceButtonProps {
-    value: Confidence
-    className: string
-    disabled: boolean
-    selected: Confidence | undefined
-    onClick: (value: Confidence) => void
+  value: Confidence
+  className: string
+  disabled: boolean
+  selected: Confidence | undefined
+  onClick: (value: Confidence) => void
 }
 
 const ConfidenceButton = (props: ConfidenceButtonProps) => {
-    const { value, className, disabled, selected, onClick } = props
-    const preferences = useUserSelector((state) => state.user.user?.preferences)
+  const { value, className, disabled, selected, onClick } = props
+  const preferences = useUserSelector((state) => state.user.user?.preferences)
 
-    const handleClick = () => {
-        onClick(props.value)
-    }
+  const handleClick = () => {
+    onClick(props.value)
+  }
 
-    const buttonClass = disabled ? styles.disabled : styles.button
-    const selectedClass = selected === value ? styles.selected : undefined
+  const buttonClass = disabled ? styles.disabled : styles.button
+  const selectedClass = selected === value ? styles.selected : undefined
 
     return (
         <Button
+            block
             title={value.name}
             disabled={disabled}
             onClick={handleClick}

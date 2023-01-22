@@ -15,32 +15,32 @@ import MistakesCard from "../cards/MistakesCard"
 import StatisticsCard from "../cards/StatisticsCard"
 
 const UserDashboardLayout = () => {
-    return (
-        <Row className={styles.row} data-testid="user-dashboard">
-            <Col md={3} className={styles.col}>
-                <ProfileCard />
-                <SettingsCard />
-                <KanjiShowcaseCard />
-                <FeedbackCard />
-            </Col>
+  return (
+    <Row className={styles.row} data-testid="user-dashboard">
+      <Col md={3} className={styles.col}>
+        <ProfileCard />
+        <SettingsCard />
+        <KanjiShowcaseCard />
+        <FeedbackCard />
+      </Col>
 
-            <Col md={6}>
-                <PlayCard />
-                <ScrollableContainer className={styles.main} hideScrollBar>
-                    <FavouritesCard />
-                    <KanjiFlashCardsCard />
-                    <ActivityCard />
-                </ScrollableContainer>
-            </Col>
+      <Col md={6}>
+        <PlayCard />
+        <ScrollableContainer className={styles.main} hideScrollBar>
+          <FavouritesCard />
+          <KanjiFlashCardsCard />
+          <ActivityCard />
+        </ScrollableContainer>
+      </Col>
 
-            <Col md={3}>
-                <StreakCard />
-                <HighScoresCard />
-                <MistakesCard />
-                <StatisticsCard />
-            </Col>
-        </Row>
-    )
+      <Col md={3}>
+        <StreakCard />
+        <HighScoresCard />
+        <MistakesCard />
+        <StatisticsCard />
+      </Col>
+    </Row>
+  )
 }
 
 export default UserDashboardLayout

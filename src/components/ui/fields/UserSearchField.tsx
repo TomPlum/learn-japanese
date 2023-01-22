@@ -7,49 +7,49 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleNotch, faSearch } from "@fortawesome/free-solid-svg-icons"
 
 export interface UserSearchFieldProps {
-    disabled: boolean
-    className?: string
-    onSelect: (username: string) => void
+  disabled: boolean
+  className?: string
+  onSelect: (username: string) => void
 }
 
 const UserSearchField = (props: UserSearchFieldProps) => {
-    const { disabled, className, onSelect } = props
+  const { disabled, className, onSelect } = props
 
-    const [focused, setFocused] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const [results, setResults] = useState<string[]>([])
-    const [search, setSearch] = useState<string | undefined>(undefined)
+  const [focused, setFocused] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [results, setResults] = useState<string[]>([])
+  const [search, setSearch] = useState<string | undefined>(undefined)
 
-    const service = new UserService()
+  const service = new UserService()
 
-    useDebouncedEffect(
-        () => {
-            if (search) {
-                setLoading(true)
-                service
-                    .getPublicUsers(search)
-                    .then((response) => {
-                        setResults(response)
-                    })
-                    .finally(() => {
-                        setLoading(false)
-                    })
-            }
-        },
-        300,
-        [search]
-    )
+  useDebouncedEffect(
+    () => {
+      if (search) {
+        setLoading(true)
+        service
+          .getPublicUsers(search)
+          .then((response) => {
+            setResults(response)
+          })
+          .finally(() => {
+            setLoading(false)
+          })
+      }
+    },
+    300,
+    [search]
+  )
 
-    const handleSelect = (username: string) => {
-        setSearch("")
-        setFocused(false)
-        onSelect(username)
-    }
+  const handleSelect = (username: string) => {
+    setSearch("")
+    setFocused(false)
+    onSelect(username)
+  }
 
-    return (
-        <>
-            <InputGroup className={[styles.container, className].join(" ")}>
-                <InputGroup.Text className={styles.prepend}>
+  return (
+    <>
+      <InputGroup className={[styles.container, className].join(" ")}>
+        <InputGroup.Text className={styles.prepend}>
                     <FontAwesomeIcon
                         spin={loading}
                         className={styles.icon}
@@ -57,34 +57,34 @@ const UserSearchField = (props: UserSearchFieldProps) => {
                     />
                 </InputGroup.Text>
 
-                <Form.Control
-                    type="text"
-                    value={search}
-                    className={styles.input}
-                    disabled={disabled || loading}
-                    onFocus={() => setFocused(true)}
-                    // onBlur={() => setFocused(false)}
-                    data-testid="user-search-field"
-                    placeholder="Search for a user..."
-                    onChange={(e) => setSearch(e.target.value)}
-                />
-            </InputGroup>
+        <Form.Control
+          type="text"
+          value={search}
+          className={styles.input}
+          disabled={disabled || loading}
+          onFocus={() => setFocused(true)}
+          // onBlur={() => setFocused(false)}
+          data-testid="user-search-field"
+          placeholder="Search for a user..."
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </InputGroup>
 
-            {focused && search && (
-                <Fade in={focused}>
-                    <div className={styles.resultsWrapper} data-testid="user-search-field-results">
-                        {results.map((username) => (
-                            <p key={username} onClick={() => handleSelect(username)} className={styles.result}>
-                                {username}
-                            </p>
-                        ))}
+      {focused && search && (
+        <Fade in={focused}>
+          <div className={styles.resultsWrapper} data-testid="user-search-field-results">
+            {results.map((username) => (
+              <p key={username} onClick={() => handleSelect(username)} className={styles.result}>
+                {username}
+              </p>
+            ))}
 
-                        {search && results.length === 0 && <span className={styles.empty}>No results.</span>}
-                    </div>
-                </Fade>
-            )}
-        </>
-    )
+            {search && results.length === 0 && <span className={styles.empty}>No results.</span>}
+          </div>
+        </Fade>
+      )}
+    </>
+  )
 }
 
 export default UserSearchField

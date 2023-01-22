@@ -8,15 +8,15 @@ import dataSettingsReducer from "./slices/DataSettingsSlice"
 import sessionSettingsReducer from "./slices/SessionSettingsSlice"
 
 export const store = configureStore({
-    reducer: {
-        user: userReducer,
-        font: fontReducer,
-        notification: notificationReducer,
-        mode: modeReducer,
-        gameSettings: gameSettingsReducer,
-        dataSettings: dataSettingsReducer,
-        sessionSettings: sessionSettingsReducer
-    }
+  reducer: {
+    user: userReducer,
+    font: fontReducer,
+    notification: notificationReducer,
+    mode: modeReducer,
+    gameSettings: gameSettingsReducer,
+    dataSettings: dataSettingsReducer,
+    sessionSettings: sessionSettingsReducer
+  }
 })
 
 export type RootState = ReturnType<typeof store.getState>

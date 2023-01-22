@@ -4,99 +4,99 @@ import Arrays from "../../utility/Arrays"
 import { Learnable } from "../learn/Learnable"
 
 export class Kana extends Learnable {
-    private readonly _code: string
-    private readonly _romaji: string[]
-    private readonly _type: KanaType
-    private readonly _column: KanaColumn
-    private readonly _isDiacritical: boolean
+  private readonly _code: string
+  private readonly _romaji: string[]
+  private readonly _type: KanaType
+  private readonly _column: KanaColumn
+  private readonly _isDiacritical: boolean
 
-    constructor(code: string, romaji: string[], type: KanaType, column: KanaColumn, isDiacritical: boolean) {
-        super()
-        this._code = code
-        this._romaji = romaji
-        this._type = type
-        this._column = column
-        this._isDiacritical = isDiacritical
+  constructor(code: string, romaji: string[], type: KanaType, column: KanaColumn, isDiacritical: boolean) {
+    super()
+    this._code = code
+    this._romaji = romaji
+    this._type = type
+    this._column = column
+    this._isDiacritical = isDiacritical
+  }
+
+  public isDiagraph(): boolean {
+    return this._code.length === 2
+  }
+
+  public getFullRomajiString(): string {
+    const romaji = this.getRomaji()
+
+    if (romaji.length === 1) {
+      return romaji[0]
+    } else {
+      return romaji[0] + " (" + romaji[1] + ")"
+    }
+  }
+
+  public getHint(): string {
+    if (this.column === KanaColumn.OTHER) {
+      return "This kana is exceptional. It is not a consonant nor a vowel."
     }
 
-    public isDiagraph(): boolean {
-        return this._code.length === 2
+    let message: string
+    const diacritical = " Also, notice the diacritical mark."
+
+    if (this.isDiagraph()) {
+      message = "Diagraphs usually drop the 1st kana's 2nd letter when transcribed."
+    } else {
+      message = "This kana is from the '" + this.column + "' column in the " + this.type + " syllabary."
     }
 
-    public getFullRomajiString(): string {
-        const romaji = this.getRomaji()
+    return message + (this.isDiacritical ? diacritical : "")
+  }
 
-        if (romaji.length === 1) {
-            return romaji[0]
-        } else {
-            return romaji[0] + " (" + romaji[1] + ")"
-        }
-    }
+  public getBaseScore(): number {
+    return this.isDiagraph() ? 150 : 100
+  }
 
-    public getHint(): string {
-        if (this.column === KanaColumn.OTHER) {
-            return "This kana is exceptional. It is not a consonant nor a vowel."
-        }
+  get code(): string {
+    return this._code
+  }
 
-        let message: string
-        const diacritical = " Also, notice the diacritical mark."
+  get type(): KanaType {
+    return this._type
+  }
 
-        if (this.isDiagraph()) {
-            message = "Diagraphs usually drop the 1st kana's 2nd letter when transcribed."
-        } else {
-            message = "This kana is from the '" + this.column + "' column in the " + this.type + " syllabary."
-        }
+  get column(): KanaColumn {
+    return this._column
+  }
 
-        return message + (this.isDiacritical ? diacritical : "")
-    }
+  get isDiacritical(): boolean {
+    return this._isDiacritical
+  }
 
-    public getBaseScore(): number {
-        return this.isDiagraph() ? 150 : 100
-    }
+  getTitle(): string {
+    return this._type
+  }
 
-    get code(): string {
-        return this._code
-    }
+  getKana(): string[] {
+    return [this._code]
+  }
 
-    get type(): KanaType {
-        return this._type
-    }
+  getMeanings(): string[] {
+    return this._romaji
+  }
 
-    get column(): KanaColumn {
-        return this._column
-    }
+  getUniqueID(): string {
+    return this._code
+  }
 
-    get isDiacritical(): boolean {
-        return this._isDiacritical
-    }
+  getRomaji(): string[] {
+    return this._romaji
+  }
 
-    getTitle(): string {
-        return this._type
-    }
-
-    getKana(): string[] {
-        return [this._code]
-    }
-
-    getMeanings(): string[] {
-        return this._romaji
-    }
-
-    getUniqueID(): string {
-        return this._code
-    }
-
-    getRomaji(): string[] {
-        return this._romaji
-    }
-
-    public equals(other: any): boolean {
-        if (!other) return false
-        if (!(other instanceof Kana)) return false
-        if (!Arrays.areEqual(this.getRomaji(), other.getRomaji())) return false
-        if (other.type !== this.type) return false
-        if (other.column !== this.column) return false
-        if (other.isDiacritical !== this.isDiacritical) return false
-        return other.code === this.code
-    }
+  public equals(other: any): boolean {
+    if (!other) return false
+    if (!(other instanceof Kana)) return false
+    if (!Arrays.areEqual(this.getRomaji(), other.getRomaji())) return false
+    if (other.type !== this.type) return false
+    if (other.column !== this.column) return false
+    if (other.isDiacritical !== this.isDiacritical) return false
+    return other.code === this.code
+  }
 }

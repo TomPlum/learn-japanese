@@ -8,18 +8,18 @@ import { EnhancedStore } from "@reduxjs/toolkit"
 import "./i18n"
 
 interface LearnJapaneseProps {
-    store: EnhancedStore
-    location?: Location
+  store: EnhancedStore
+  location?: Location
 }
 
 const LearnJapanese = (props: LearnJapaneseProps) => {
-    const { store } = props
+  const { store } = props
 
-    return (
-        <Provider store={store}>
-            <Main />
-        </Provider>
-    )
+  return (
+    <Provider store={store}>
+      <Main />
+    </Provider>
+  )
 }
 
 export default LearnJapanese

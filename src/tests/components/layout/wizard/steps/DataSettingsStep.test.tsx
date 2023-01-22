@@ -9,33 +9,33 @@ const isValidHandler = jest.fn()
 let props: DataSettingsStepProps
 
 const setup = () => {
-    const component = render(<DataSettingsStep {...props} />)
-    return {
-        ...component
-    }
+  const component = render(<DataSettingsStep {...props} />)
+  return {
+    ...component
+  }
 }
 
 beforeEach(() => {
-    props = {
-        topic: Topic.KANA,
-        onSelect: onSelectHandler,
-        isValid: isValidHandler
-    }
+  props = {
+    topic: Topic.KANA,
+    onSelect: onSelectHandler,
+    isValid: isValidHandler
+  }
 })
 
 test("Should render the data settings form from the given topic", () => {
-    setup()
-    expect(screen.getByTestId("kana-settings-form-body")).toBeInTheDocument()
+  setup()
+  expect(screen.getByTestId("kana-settings-form-body")).toBeInTheDocument()
 })
 
 test("Should call the isValid event handler when the state of the data settings form changes", () => {
-    setup()
-    fireEvent.click(screen.getByTestId("hiragana"))
-    expect(isValidHandler).toHaveBeenLastCalledWith(false)
+  setup()
+  fireEvent.click(screen.getByTestId("hiragana"))
+  expect(isValidHandler).toHaveBeenLastCalledWith(false)
 })
 
 test("Should call the onSelect event handler when the state of the data settings form changes", () => {
-    setup()
-    fireEvent.click(screen.getByTestId("hiragana"))
-    expect(onSelectHandler).toHaveBeenLastCalledWith(new KanaSettingsBuilder().build())
+  setup()
+  fireEvent.click(screen.getByTestId("hiragana"))
+  expect(onSelectHandler).toHaveBeenLastCalledWith(new KanaSettingsBuilder().build())
 })
