@@ -162,7 +162,7 @@ const GenkiGrammarPage = () => {
         <div className={styles.searchWrapper}>
           <InputGroup className={styles.search}>
             <InputGroup.Text>
-                <FontAwesomeIcon icon={faSearch} />
+              <FontAwesomeIcon icon={faSearch} />
             </InputGroup.Text>
 
             <Form.Control

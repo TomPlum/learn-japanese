@@ -24,21 +24,20 @@ const ConfidenceButton = (props: ConfidenceButtonProps) => {
   const buttonClass = disabled ? styles.disabled : styles.button
   const selectedClass = selected === value ? styles.selected : undefined
 
-    return (
-        <Button
-            block
-            title={value.name}
-            disabled={disabled}
-            onClick={handleClick}
-            className={[className, buttonClass, selectedClass].join(" ")}
-        >
-            {preferences?.confidenceMenuStyle === ConfidenceMenuStyle.NUMBERS ? (
-                value.value + 1
-            ) : (
-                <FontAwesomeIcon icon={value.icon} />
-            )}
-        </Button>
-    )
+  return (
+    <Button
+      title={value.name}
+      disabled={disabled}
+      onClick={handleClick}
+      className={[className, buttonClass, selectedClass].join(" ")}
+    >
+      {preferences?.confidenceMenuStyle === ConfidenceMenuStyle.NUMBERS ? (
+        value.value + 1
+      ) : (
+        <FontAwesomeIcon icon={value.icon} />
+      )}
+    </Button>
+  )
 }
 
 export default ConfidenceButton

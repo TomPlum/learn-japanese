@@ -50,12 +50,8 @@ const UserSearchField = (props: UserSearchFieldProps) => {
     <>
       <InputGroup className={[styles.container, className].join(" ")}>
         <InputGroup.Text className={styles.prepend}>
-                    <FontAwesomeIcon
-                        spin={loading}
-                        className={styles.icon}
-                        icon={loading ? faCircleNotch : faSearch}
-                    />
-                </InputGroup.Text>
+          <FontAwesomeIcon spin={loading} className={styles.icon} icon={loading ? faCircleNotch : faSearch} />
+        </InputGroup.Text>
 
         <Form.Control
           type="text"

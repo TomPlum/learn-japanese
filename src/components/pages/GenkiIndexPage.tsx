@@ -59,32 +59,32 @@ const GenkiIndexPage = () => {
 
   const spring = useMemo(() => ({ type: "spring", damping: 50, stiffness: 100 }), [])
 
-    const {
-        // @ts-ignore
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        prepareRow,
-        // @ts-ignore
-        page,
-        // @ts-ignore
-        canPreviousPage,
-        // @ts-ignore
-        canNextPage,
-        rows,
-        // @ts-ignore
-        pageOptions,
-        // @ts-ignore
-        pageCount,
-        // @ts-ignore
-        gotoPage,
-        // @ts-ignore
-        nextPage,
-        // @ts-ignore
-        previousPage,
-        // @ts-ignore
-        setPageSize,
-        // @ts-ignore
+  const {
+    // @ts-ignore
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    // @ts-ignore
+    page,
+    // @ts-ignore
+    canPreviousPage,
+    // @ts-ignore
+    canNextPage,
+    rows,
+    // @ts-ignore
+    pageOptions,
+    // @ts-ignore
+    pageCount,
+    // @ts-ignore
+    gotoPage,
+    // @ts-ignore
+    nextPage,
+    // @ts-ignore
+    previousPage,
+    // @ts-ignore
+    setPageSize,
+    // @ts-ignore
     state: { pageIndex, globalFilter },
     // @ts-ignore
     setGlobalFilter
@@ -231,7 +231,7 @@ const GenkiIndexPage = () => {
                   const colourClass = row.original.lesson < 12 ? styles.genkiOne : styles.genkiTwo
                   return (
                     <motion.tr
-                                            // @ts-ignore
+                      // @ts-ignore
                       {...row.getRowProps({ layoutTransition: spring })}
                       className={colourClass}
                     >

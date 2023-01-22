@@ -37,7 +37,7 @@ const TablePagination = (props: TablePaginationProps) => {
   const genkiOneClasses = [styles.genki1, !genkiOne ? styles.off : "", styles.book].join(" ")
   const genkiTwoClasses = [styles.genki2, !genkiTwo ? styles.off : "", styles.book].join(" ")
 
-  const onChangeShow = (e:  ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const onChangeShow = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const quantity = Number(e.target.value)
     onChangeQuantity(quantity)
   }
@@ -104,8 +104,9 @@ const TablePagination = (props: TablePaginationProps) => {
           </Pagination>
         </Col>
 
-                <Col lg={2} md={3} xs={6}>
-                    <Form.Control as="select"
+        <Col lg={2} md={3} xs={6}>
+          <Form.Control
+            as="select"
             onChange={onChangeShow}
             title="Rows per Page"
             disabled={disabled}

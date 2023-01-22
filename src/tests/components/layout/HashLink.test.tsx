@@ -39,7 +39,7 @@ test("Should append the path property to the base name environment variable", ()
 test("Should set the href as an empty string if no path is passed", () => {
   props.path = undefined
   const { link } = setup()
-  expect(link.parentElement).toHaveProperty('href', 'http://localhost/')
+  expect(link.parentElement).toHaveProperty("href", "http://localhost/")
 })
 
 test("Passing a className property should append it to the link component", () => {
@@ -51,7 +51,7 @@ test("Passing a className property should append it to the link component", () =
 test("Should disable the link when the disabled property is passed as true", () => {
   props.disabled = true
   const { link } = setup()
-  expect(link.parentElement).toHaveClass('disabled')
+  expect(link.parentElement).toHaveClass("disabled")
 })
 
 test("Should call the onClick event handler when clicking the link", () => {

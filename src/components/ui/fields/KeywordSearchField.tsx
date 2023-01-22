@@ -106,7 +106,7 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
     <>
       <InputGroup className={[styles.inputGroup, className].join(" ")}>
         <InputGroup.Text>
-            <FontAwesomeIcon icon={faSearch} />
+          <FontAwesomeIcon icon={faSearch} />
         </InputGroup.Text>
 
         <Form.Control

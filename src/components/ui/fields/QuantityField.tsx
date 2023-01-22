@@ -27,7 +27,7 @@ const QuantityField = (props: QuantityFieldProps) => {
       <InputGroup.Text>
         <FontAwesomeIcon icon={faBalanceScale} className={styles.icon} fixedWidth />
         <span className={styles.description}>{t("label")}</span>
-    </InputGroup.Text>
+      </InputGroup.Text>
 
       <Form.Control
         required
