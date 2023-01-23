@@ -15,7 +15,7 @@ export interface GridItem {
 
 export interface GridItemProps<T extends GridItem> {
   value: T
-  style?: {}
+  style?: object
   id: string
   desc?: string
   small?: boolean

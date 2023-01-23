@@ -44,7 +44,7 @@ test("Save button should be disabled when the preset name field is empty", () =>
 })
 
 test("Blurring the input when editing the name should finish editing", () => {
-  const { name, save } = setup()
+  const { name } = setup()
 
   // Edit
   fireEvent.click(name)

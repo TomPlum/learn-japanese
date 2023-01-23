@@ -50,7 +50,7 @@ export default class ComponentTree {
    * @param props A function taking the leaf node and returning the new properties.
    * @return A copy of the whole element tree with the updated leaf node.
    */
-  public addPropsToLeafNode(props?: (el: React.ReactElement) => {}): ReactElement {
+  public addPropsToLeafNode(props?: (el: React.ReactElement) => object): ReactElement {
     let response: ReactNode
 
     const children: ReactElement[] = this.getAllChildren()

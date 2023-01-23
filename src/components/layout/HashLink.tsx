@@ -2,7 +2,7 @@ import { Nav } from "react-bootstrap"
 import React from "react"
 
 export interface HashLinkProps {
-  style?: {}
+  style?: object
   path?: string
   disabled?: boolean
   className?: string

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react"
+import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import GameResultScreen from "../../../components/results/GameResultScreen"
 import GameResult from "../../../domain/game/GameResult"
 import { Kana } from "../../../domain/kana/Kana"

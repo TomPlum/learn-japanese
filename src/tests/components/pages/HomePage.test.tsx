@@ -1,4 +1,3 @@
-import renderReduxConsumer from "../../renderReduxConsumer"
 import HomePage from "../../../components/pages/HomePage"
 import { store } from "../../../store"
 import { clearUser, setUser } from "../../../slices/UserSlice"

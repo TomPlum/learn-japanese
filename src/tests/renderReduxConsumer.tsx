@@ -4,7 +4,7 @@ import { Provider } from "react-redux"
 import { store as defaultStore } from "../store"
 import { Store } from "redux"
 
-const renderReduxConsumer = (component: ReactElement, store?: Store, initialState?: {}) => {
+const renderReduxConsumer = (component: ReactElement, store?: Store) => {
   const Wrapper = (props: { children?: ReactNode }) => (
     <Provider store={store ? store : defaultStore}>{props.children}</Provider>
   )

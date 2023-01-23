@@ -14,7 +14,7 @@ export interface FuriganaDisplayProps {
   chars: FuriganaCharacter[]
   position: FuriganaPosition
   className?: string
-  style?: {}
+  style?: object
 }
 
 const FuriganaDisplay = (props: FuriganaDisplayProps) => {

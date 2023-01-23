@@ -4,7 +4,7 @@ import { KanjiResult } from "../../service/KanjiService"
 export interface KanjiSearchResultProps {
   result: KanjiResult
   search: string
-  style?: {}
+  style?: object
   className?: string
   onClick: () => void
 }

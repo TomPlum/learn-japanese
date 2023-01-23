@@ -1,7 +1,7 @@
 import { Form, Nav, Overlay, Popover } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons"
-import React, { PropsWithChildren, ReactElement, ReactNode, useRef, useState } from "react"
+import React, { PropsWithChildren, ReactElement, ReactNode, ReactNodeArray, useRef, useState } from "react";
 import HashLink from "../layout/HashLink"
 import ScrollableContainer from "./ScrollableContainer"
 import ConditionalWrapper from "./ConditionalWrapper"
@@ -39,7 +39,7 @@ export interface ItemProps {
   iconClass?: string
   className?: string
   href?: string
-  style?: {}
+  style?: object
   onClick?: (value: string) => void
 }
 
@@ -209,7 +209,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
                 )}
               >
                 <>
-                  {React.Children.map(children, (child) => child)?.filter((child: ReactNode) => {
+                  {(React.Children.map(children, (child) => child) as ReactNodeArray)?.filter((child: ReactNode) => {
                     const value = (child as ReactElement).props.children.toString()
                     return search === "" || value.toLowerCase().includes(search.toLowerCase())
                   })}

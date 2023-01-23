@@ -6,7 +6,7 @@ import { faQuestion, IconDefinition } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export interface IconProps {
-  style?: {}
+  style?: object
   size?: string
   value: CustomIcon
   className?: string

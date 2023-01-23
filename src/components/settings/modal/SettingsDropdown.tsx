@@ -12,7 +12,7 @@ import Icon from "../../ui/menu/icon/Icon"
 import { CustomIcon } from "../../../domain/Icon"
 
 export interface SettingsDropdownOption {
-  style?: {}
+  style?: object
   name: string
   value?: string
   icon?: CustomIcon
