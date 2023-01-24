@@ -1,4 +1,4 @@
-import React, { Component, ReactElement } from "react"
+import React, { Component, PropsWithChildren, ReactElement } from "react";
 import Topic from "../../../domain/Topic"
 import { ListGroupItem } from "react-bootstrap"
 import styles from "../../../styles/sass/components/ui/select/TopicListOption.module.scss"
@@ -11,7 +11,7 @@ interface TopicListOptionProps {
   isHeading?: boolean
 }
 
-class TopicListOption extends Component<TopicListOptionProps> {
+class TopicListOption extends Component<PropsWithChildren<TopicListOptionProps>> {
   render() {
     const { type, text, isHeading, selected, children } = this.props
     return (

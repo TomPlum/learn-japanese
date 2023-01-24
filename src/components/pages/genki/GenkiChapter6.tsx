@@ -8,7 +8,6 @@ import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay"
 import { FirstMatch } from "../../ui/Underline"
 import QuoteDisplay from "../../ui/display/QuoteDisplay"
 import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
-import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
 import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
 
 const GenkiChapter6 = () => {

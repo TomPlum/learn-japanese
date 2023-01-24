@@ -58,7 +58,7 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
             return api(config)
           }
         })
-        .catch((err) => {
+        .catch(() => {
           return Promise.reject(failureErrorMessage)
         })
     }

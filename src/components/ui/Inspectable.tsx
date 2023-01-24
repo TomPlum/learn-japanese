@@ -1,4 +1,4 @@
-import React, { Component, ReactElement } from "react"
+import React, { Component, PropsWithChildren, ReactElement } from "react";
 import { OverlayTrigger } from "react-bootstrap"
 import PopOver, { PopOverProps } from "./PopOver"
 import styles from "../../styles/sass/components/ui/Inspectable.module.scss"
@@ -14,7 +14,7 @@ export type InspectableProps = {
   disableUnderline?: boolean
 }
 
-class Inspectable extends Component<InspectableProps> {
+class Inspectable extends Component<PropsWithChildren<InspectableProps>> {
   render() {
     const { popover, disabled, className, disableUnderline, placement, children } = this.props
 

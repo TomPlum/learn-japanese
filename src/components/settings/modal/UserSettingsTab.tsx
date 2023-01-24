@@ -3,16 +3,10 @@ import styles from "../../../styles/sass/components/settings/modal/UserSettingsT
 import SettingsButton from "./SettingsButton"
 import {
   faBookOpen,
-  faCalendarCheck,
   faChartPie,
-  faClock,
-  faFireAlt,
   faGlobe,
-  faGlobeAmericas,
   faMedal,
   faSkull,
-  faUserFriends,
-  faUserSecret,
   IconDefinition
 } from "@fortawesome/free-solid-svg-icons"
 import { faChrome, faFirefoxBrowser, faSafari } from "@fortawesome/free-brands-svg-icons"

@@ -1,4 +1,4 @@
-import { Container, Row } from "react-bootstrap"
+import { Container } from "react-bootstrap"
 import { Kanji } from "../../../domain/kanji/Kanji"
 import { CardFaceProps } from "../FlashCard"
 import DynamicDisplay from "../../ui/display/DynamicDisplay"

@@ -1,5 +1,5 @@
 import DashboardCard, { DashboardCardProps } from "../layout/card/DashboardCard"
-import { Button, Table } from "react-bootstrap"
+import { Table } from "react-bootstrap"
 import styles from "../../styles/sass/components/cards/HighScoresCard.module.scss"
 import DashboardCardHeader from "../layout/card/DashboardCardHeader"
 import { faCog } from "@fortawesome/free-solid-svg-icons"

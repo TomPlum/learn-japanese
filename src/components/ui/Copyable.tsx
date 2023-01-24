@@ -1,4 +1,4 @@
-import React, { Component, ReactElement } from "react"
+import React, { Component, PropsWithChildren, ReactElement } from "react";
 import { Overlay, Tooltip } from "react-bootstrap"
 import { Placement } from "react-bootstrap/Overlay"
 import ComponentTree from "../../utility/ComponentTree"
@@ -18,7 +18,7 @@ interface CopyableState {
   successTimeout: any
 }
 
-class Copyable extends Component<CopyableProps, CopyableState> {
+class Copyable extends Component<PropsWithChildren<CopyableProps>, CopyableState> {
   private readonly ref: React.RefObject<any>
 
   constructor(props: Readonly<CopyableProps> | CopyableProps) {

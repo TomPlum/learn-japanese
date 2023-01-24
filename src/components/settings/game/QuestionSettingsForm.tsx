@@ -214,4 +214,6 @@ const QuestionSettingsForm = forwardRef((props: QuestionSettingsFormProps, ref: 
   )
 })
 
+QuestionSettingsForm.displayName = 'QuestionSettingsForm'
+
 export default QuestionSettingsForm
