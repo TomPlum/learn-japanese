@@ -64,4 +64,6 @@ const TextQuestion = forwardRef((props: TextQuestionProps, ref: Ref<MemoryGameQu
   )
 })
 
+TextQuestion.displayName = 'TextQuestion'
+
 export default TextQuestion

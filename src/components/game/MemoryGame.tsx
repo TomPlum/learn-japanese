@@ -185,7 +185,9 @@ const MemoryGame = (props: MemoryGameProps) => {
       //Play the success sound effect
       getAudio(success)
         .play()
-        .catch(() => {})
+        .catch(e => {
+          console.log("Failed to play \"success sound effect\"", e)
+        })
 
       //Add the current question to the correct answers set.
       currentQuestion.forEach((question) => correctAnswers.add(question))
@@ -196,7 +198,9 @@ const MemoryGame = (props: MemoryGameProps) => {
         //Play the finish sound
         getAudio(finish)
           .play()
-          .catch(() => {})
+          .catch(e => {
+            console.log("Failed to play \"finished sound effect\"", e)
+          })
 
         //Stop the timer / countdown.
         timerRef.current?.stop()
@@ -214,7 +218,10 @@ const MemoryGame = (props: MemoryGameProps) => {
       //Play the wrong sound effect
       getAudio(wrong)
         .play()
-        .catch(() => {})
+        .catch(e => {
+          console.log("Failed to play \"wrong sound effect\"", e)
+        })
+
 
       //If the question was answered incorrectly, update the lives and wrong answer pool.
       setStreak(0)

@@ -1,7 +1,6 @@
 import styles from "../../../styles/sass/components/layout/editor/DashboardLayoutEditor.module.scss"
 import React from "react"
 import SettingsTabTitle from "../../settings/modal/SettingsTabTitle"
-import EditorCard from "./EditorCard"
 import EditorColumn from "./EditorColumn"
 
 export interface DashboardLayoutEditorProps {
