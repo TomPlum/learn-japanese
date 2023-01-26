@@ -73,7 +73,7 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
             {!hasNotifications && (
               <div className={styles.emptyWrapper}>
                 <FontAwesomeIcon icon={faCheck} className={styles.emptyIcon} size="lg" />
-                <p className={styles.emptyText}>You're all up to date!</p>
+                <p className={styles.emptyText}>You&apos;re all up to date!</p>
               </div>
             )}
 

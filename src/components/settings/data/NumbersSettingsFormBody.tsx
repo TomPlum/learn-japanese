@@ -77,7 +77,7 @@ const NumbersSettingsFormBody = (props: DataSettingsStepFormProps<NumbersSetting
           />
 
           <p className={age ? styles.description : styles.disabled}>
-            Exceptional pronunciations of numbers when referring to someone's ages in years.
+            Exceptional pronunciations of numbers when referring to someone&apos;s ages in years.
           </p>
 
           <ToggleSwitch
@@ -111,7 +111,7 @@ const NumbersSettingsFormBody = (props: DataSettingsStepFormProps<NumbersSetting
           />
 
           <p className={sequence ? styles.description : styles.disabled}>
-            Can't remember what this was supposed to be.
+            Can&apos;t remember what this was supposed to be.
           </p>
 
           <QuantityField

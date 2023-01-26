@@ -7,7 +7,7 @@ export interface QuestionSettingsStepProps {
 }
 
 const QuestionSettingsStep = (props: QuestionSettingsStepProps) => {
-  const { settings, onSelect } = props
+  const { onSelect } = props
 
   return <QuestionSettingsForm onChange={onSelect} />
 }

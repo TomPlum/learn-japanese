@@ -195,7 +195,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                 </div>
 
                 {!loading && ready && filtered.length === 0 && (
-                  <span className={styles.empty}>There's nothing that matches your filters.</span>
+                  <span className={styles.empty}>There&apos;s nothing that matches your filters.</span>
                 )}
               </ScrollableContainer>
             )}

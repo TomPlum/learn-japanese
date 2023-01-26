@@ -16,7 +16,9 @@ const WizardProgressStep = (props: WizardProgressStepProps) => {
   const { icon, title, disabled, className, stage, currentStage, onClick } = props
 
   const handleOnClick = () => {
-    onClick(stage)
+    if (!disabled) {
+      onClick(stage)
+    }
   }
 
   const getIconClassName = (): string => {
@@ -38,7 +40,7 @@ const WizardProgressStep = (props: WizardProgressStepProps) => {
       fixedWidth
       icon={icon}
       title={title}
-      onClick={!disabled ? handleOnClick : () => {}}
+      onClick={handleOnClick}
       data-testid={`wizard-progress-step-${stage}`}
       className={[getIconClassName(), className, styles.step].join(" ")}
     />

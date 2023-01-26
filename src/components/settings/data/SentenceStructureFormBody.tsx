@@ -88,7 +88,7 @@ const SentenceStructureFormBody = (props: DataSettingsStepFormProps<SentenceStru
           />
 
           <p className={expressions ? styles.description : styles.disabled}>
-            Common expressions used in every-day conversation. Most of these are taken from the "Expressions & Adverbs"
+            Common expressions used in every-day conversation. Most of these are taken from the &quot;Expressions & Adverbs&quot;
             section of the vocabulary page in the Genki textbook.
           </p>
 

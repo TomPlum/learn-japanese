@@ -1,4 +1,4 @@
-import { Component } from "react"
+import { Component, PropsWithChildren } from "react";
 import { Container, Row } from "react-bootstrap"
 import FlashCardResetButton from "../ui/buttons/FlashCardResetButton"
 import styles from "../../styles/sass/components/learn/FlashCardBack.module.scss"
@@ -10,7 +10,7 @@ export interface FlashCardBackProps {
   onReset: () => void
 }
 
-class FlashCardBack extends Component<FlashCardBackProps> {
+class FlashCardBack extends Component<PropsWithChildren<FlashCardBackProps>> {
   render() {
     const { title, className, borderColour, onReset, children } = this.props
 

@@ -191,7 +191,7 @@ const GenkiChapter5 = () => {
       <div>
         <p>
           With い-adjectives, you change the last い to かったです in the affirmative. In the negative, you only need to
-          change the present tense to くない to くなかったです. な-adjectives are again just like nouns. Don't confuse
+          change the present tense to くない to くなかったです. な-adjectives are again just like nouns. Don&apos;t confuse
           the two patterns, it is wrong to say{" "}
           <QuoteDisplay chapter={5} incorrect>
             さむいでした

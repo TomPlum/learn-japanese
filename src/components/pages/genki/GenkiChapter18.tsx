@@ -257,7 +257,7 @@ const GenkiChapter18 = () => {
           The <i>te</i>-form of a verb + しまう has two meanings.
         </p>
         <p>
-          Firstly, it indicates that one "carries out with determination" a plan described by the verb. This typically
+          Firstly, it indicates that one &quot;carries out with determination&quot; a plan described by the verb. This typically
           involves finishing something.
         </p>
         <GenkiExampleDisplay
@@ -270,7 +270,7 @@ const GenkiChapter18 = () => {
         />
 
         <p>
-          Secondly, it can also indicate a "lack of premeditation or control over how things turn out". This is
+          Secondly, it can also indicate a &quot;lack of premeditation or control over how things turn out&quot;. This is
           generally something that one regrets or you do something you do not intend.
           <GenkiFootnoteRef value={1} book={2} />
         </p>
@@ -312,8 +312,8 @@ const GenkiChapter18 = () => {
         <p>
           Both nuanced meanings focus on the discrepancy between our intentions and the state of the world when left on
           its own. The particular nuance used in a given sentence may be ambiguous. How the sentence is interpreted
-          depends on the assumptions the speaker has. For example, the first sentence above about "finishing a film"
-          could be interpreted as "I regrettably finished the film".
+          depends on the assumptions the speaker has. For example, the first sentence above about &quot;finishing a film&quot;
+          could be interpreted as &quot;I regrettably finished the film&quot;.
         </p>
 
         <hr className={styles.hr} />
@@ -552,7 +552,7 @@ const GenkiChapter18 = () => {
           }}
         />
 
-        <p>The form's structure can be summarised as;</p>
+        <p>The form&apos;s structure can be summarised as;</p>
 
         <GenkiStructureDisplay book={2} style={{ display: "flex", justifyContent: "space-evenly" }} width={350}>
           <div>

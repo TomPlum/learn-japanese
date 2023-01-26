@@ -17,9 +17,9 @@ const QuoteDisplay = (props: PropsWithChildren<QuoteDisplayProps>) => {
   return (
     <span className={wrapperClass}>
       {incorrect && <FontAwesomeIcon icon={faTimes} className={styles.wrong} fixedWidth title="Incorrect" />}
-      <span className={styles.quote}>"</span>
+      <span className={styles.quote}>&quot;</span>
       <span className={styles.value}>{children}</span>
-      <span className={styles.quote}>"</span>
+      <span className={styles.quote}>&quot;</span>
     </span>
   )
 }

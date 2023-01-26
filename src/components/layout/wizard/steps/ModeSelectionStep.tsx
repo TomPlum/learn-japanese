@@ -1,9 +1,8 @@
 import styles from "../../../../styles/sass/components/layout/wizard/steps/ModeSelectionStep.module.scss"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGraduationCap, faPlay } from "@fortawesome/free-solid-svg-icons"
-import { Environment } from "../../../../utility/Environment"
 import { AppMode } from "../../../../domain/AppMode"
 import { useTranslation } from "react-i18next"
 
