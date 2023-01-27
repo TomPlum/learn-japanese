@@ -12,7 +12,7 @@ import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
 import { Col, Container, Row } from "react-bootstrap"
 import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay"
 
-const GenkiChapter18 = () => {
+const UseGenkiChapter18 = () => {
   const c18p1: GrammarInfoProps = {
     chapter: 18,
     section: 1,
@@ -598,4 +598,4 @@ const GenkiChapter18 = () => {
   return { c18p1, c18p2, c18p3, c18p4, c18p5 }
 }
 
-export default GenkiChapter18
+export default UseGenkiChapter18

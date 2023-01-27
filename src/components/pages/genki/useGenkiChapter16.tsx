@@ -9,7 +9,7 @@ import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
 import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay"
 import GenkiUnderlineDisplay from "../../ui/genki/GenkiUnderlineDisplay"
 
-const GenkiChapter16 = () => {
+const UseGenkiChapter16 = () => {
   const c16p1: GrammarInfoProps = {
     chapter: 16,
     section: 1,
@@ -289,4 +289,4 @@ const GenkiChapter16 = () => {
   return { c16p1, c16p2, c16p3, c16p4, c16p5 }
 }
 
-export default GenkiChapter16
+export default UseGenkiChapter16

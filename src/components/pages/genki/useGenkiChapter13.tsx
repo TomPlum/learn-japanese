@@ -8,7 +8,7 @@ import { FirstMatch, Occurrences } from "../../ui/Underline"
 import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
 import { Col, Container, Row } from "react-bootstrap"
 
-const GenkiChapter13 = () => {
+const UseGenkiChapter13 = () => {
   const c13p1: GrammarInfoProps = {
     chapter: 13,
     section: 1,
@@ -272,4 +272,4 @@ const GenkiChapter13 = () => {
   return { c13p1, c13p2, c13p3, c13p4, c13p5, c13p6 }
 }
 
-export default GenkiChapter13
+export default UseGenkiChapter13

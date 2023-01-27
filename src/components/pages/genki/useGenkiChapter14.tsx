@@ -10,7 +10,7 @@ import GenkiRelativePsychologyCircle from "../../ui/genki/GenkiRelativePsycholog
 import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay"
 import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
 
-const GenkiChapter14 = () => {
+const UseGenkiChapter14 = () => {
   const c14p1: GrammarInfoProps = {
     chapter: 14,
     section: 1,
@@ -286,4 +286,4 @@ const GenkiChapter14 = () => {
   return { c14p1, c14p2, c14p3, c14p4, c14p5 }
 }
 
-export default GenkiChapter14
+export default UseGenkiChapter14

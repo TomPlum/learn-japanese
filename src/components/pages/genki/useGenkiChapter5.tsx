@@ -12,7 +12,7 @@ import { Col, Container, Row } from "react-bootstrap"
 import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay"
 import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
 
-const GenkiChapter5 = () => {
+const UseGenkiChapter5 = () => {
   const c5p1: GrammarInfoProps = {
     chapter: 5,
     section: 1,
@@ -550,4 +550,4 @@ const GenkiChapter5 = () => {
   return { c5p1, c5p2, c5p3, c5p4, c5p5, c5p6 }
 }
 
-export default GenkiChapter5
+export default UseGenkiChapter5

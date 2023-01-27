@@ -6,7 +6,7 @@ import GenkiTable from "../../ui/table/GenkiTable"
 import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay"
 import React from "react"
 
-const GenkiChapter4 = () => {
+const UseGenkiChapter4 = () => {
   const c4p1: GrammarInfoProps = {
     chapter: 4,
     section: 1,
@@ -390,4 +390,4 @@ const GenkiChapter4 = () => {
   return { c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8 }
 }
 
-export default GenkiChapter4
+export default UseGenkiChapter4

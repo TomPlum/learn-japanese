@@ -8,106 +8,48 @@ import ComponentTree from "../../utility/ComponentTree"
 import ValueSelector from "../ui/select/ValueSelector"
 import Arrays from "../../utility/Arrays"
 import { useDebouncedEffect } from "../../hooks"
-import GenkiChapter1 from "./genki/GenkiChapter1"
-import GenkiChapter2 from "./genki/GenkiChapter2"
-import GenkiChapter3 from "./genki/GenkiChapter3"
-import GenkiChapter4 from "./genki/GenkiChapter4"
-import GenkiChapter13 from "./genki/GenkiChapter13"
-import GenkiChapter14 from "./genki/GenkiChapter14"
-import GenkiChapter15 from "./genki/GenkiChapter15"
-import GenkiChapter16 from "./genki/GenkiChapter16"
-import GenkiChapter17 from "./genki/GenkiChapter17"
-import GenkiChapter5 from "./genki/GenkiChapter5"
-import GenkiChapter6 from "./genki/GenkiChapter6"
+import useGenkiChapter1 from "./genki/useGenkiChapter1"
+import useGenkiChapter2 from "./genki/useGenkiChapter2"
+import UseGenkiChapter3 from "./genki/useGenkiChapter3"
+import UseGenkiChapter4 from "./genki/useGenkiChapter4"
+import UseGenkiChapter13 from "./genki/useGenkiChapter13"
+import UseGenkiChapter14 from "./genki/useGenkiChapter14"
+import UseGenkiChapter15 from "./genki/useGenkiChapter15"
+import UseGenkiChapter16 from "./genki/useGenkiChapter16"
+import UseGenkiChapter17 from "./genki/useGenkiChapter17"
+import UseGenkiChapter5 from "./genki/useGenkiChapter5"
+import UseGenkiChapter6 from "./genki/useGenkiChapter6"
 import { scrollToTop } from "../../utility/Window"
-import GenkiChapter18 from "./genki/GenkiChapter18"
+import UseGenkiChapter18 from "./genki/useGenkiChapter18"
 import GenkiAnchorProvider from "../ui/genki/GenkiAnchorProvider"
 
 const GenkiGrammarPage = () => {
-  const { c1p1, c1p2, c1p3 } = GenkiChapter1()
-  const { c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7 } = GenkiChapter2()
-  const { c3p1, c3p2, c3p3, c3p4, c3p5, c3p6, c3p7, c3p8 } = GenkiChapter3()
-  const { c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8 } = GenkiChapter4()
-  const { c5p1, c5p2, c5p3, c5p4, c5p5, c5p6 } = GenkiChapter5()
-  const { c6p1, c6p2, c6p3, c6p4, c6p5, c6p6, c6p7 } = GenkiChapter6()
-  const { c13p1, c13p2, c13p3, c13p4, c13p5, c13p6 } = GenkiChapter13()
-  const { c14p1, c14p2, c14p3, c14p4, c14p5 } = GenkiChapter14()
-  const { c15p1, c15p2, c15p3, c15p4 } = GenkiChapter15()
-  const { c16p1, c16p2, c16p3, c16p4, c16p5 } = GenkiChapter16()
-  const { c17p1, c17p2, c17p3, c17p4, c17p5, c17p6 } = GenkiChapter17()
-  const { c18p1, c18p2, c18p3, c18p4, c18p5 } = GenkiChapter18()
+  const { c1p1, c1p2, c1p3 } = useGenkiChapter1()
+  const { c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7 } = useGenkiChapter2()
+  const { c3p1, c3p2, c3p3, c3p4, c3p5, c3p6, c3p7, c3p8 } = UseGenkiChapter3()
+  const { c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8 } = UseGenkiChapter4()
+  const { c5p1, c5p2, c5p3, c5p4, c5p5, c5p6 } = UseGenkiChapter5()
+  const { c6p1, c6p2, c6p3, c6p4, c6p5, c6p6, c6p7 } = UseGenkiChapter6()
+  const { c13p1, c13p2, c13p3, c13p4, c13p5, c13p6 } = UseGenkiChapter13()
+  const { c14p1, c14p2, c14p3, c14p4, c14p5 } = UseGenkiChapter14()
+  const { c15p1, c15p2, c15p3, c15p4 } = UseGenkiChapter15()
+  const { c16p1, c16p2, c16p3, c16p4, c16p5 } = UseGenkiChapter16()
+  const { c17p1, c17p2, c17p3, c17p4, c17p5, c17p6 } = UseGenkiChapter17()
+  const { c18p1, c18p2, c18p3, c18p4, c18p5 } = UseGenkiChapter18()
 
   const allGrammar: GrammarInfoProps[] = [
-    c1p1,
-    c1p2,
-    c1p3,
-    c2p1,
-    c2p2,
-    c2p3,
-    c2p4,
-    c2p5,
-    c2p6,
-    c2p7,
-    c3p1,
-    c3p2,
-    c3p3,
-    c3p4,
-    c3p5,
-    c3p6,
-    c3p7,
-    c3p8,
-    c4p1,
-    c4p2,
-    c4p3,
-    c4p4,
-    c4p5,
-    c4p6,
-    c4p7,
-    c4p8,
-    c5p1,
-    c5p2,
-    c5p3,
-    c5p4,
-    c5p5,
-    c5p6,
-    c6p1,
-    c6p2,
-    c6p3,
-    c6p4,
-    c6p5,
-    c6p6,
-    c6p7,
-    c13p1,
-    c13p2,
-    c13p3,
-    c13p4,
-    c13p5,
-    c13p6,
-    c14p1,
-    c14p2,
-    c14p3,
-    c14p4,
-    c14p5,
-    c15p1,
-    c15p2,
-    c15p3,
-    c15p4,
-    c16p1,
-    c16p2,
-    c16p3,
-    c16p4,
-    c16p5,
-    c17p1,
-    c17p2,
-    c17p3,
-    c17p4,
-    c17p5,
-    c17p6,
-    c18p1,
-    c18p2,
-    c18p3,
-    c18p4,
-    c18p5
+    c1p1, c1p2, c1p3,
+    c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7,
+    c3p1, c3p2, c3p3, c3p4, c3p5, c3p6, c3p7, c3p8,
+    c4p1, c4p2, c4p3, c4p4, c4p5, c4p6, c4p7, c4p8,
+    c5p1, c5p2, c5p3, c5p4, c5p5, c5p6,
+    c6p1, c6p2, c6p3, c6p4, c6p5, c6p6, c6p7,
+    c13p1, c13p2, c13p3, c13p4, c13p5, c13p6,
+    c14p1, c14p2, c14p3, c14p4, c14p5,
+    c15p1, c15p2, c15p3, c15p4,
+    c16p1, c16p2, c16p3, c16p4, c16p5,
+    c17p1, c17p2, c17p3, c17p4, c17p5, c17p6,
+    c18p1, c18p2, c18p3, c18p4, c18p5
   ]
 
   const [grammar, setGrammar] = useState(allGrammar)

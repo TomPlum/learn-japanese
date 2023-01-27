@@ -8,7 +8,7 @@ import { Col, Container, Row } from "react-bootstrap"
 import { FirstMatch, Occurrences } from "../../ui/Underline"
 import QuoteDisplay from "../../ui/display/QuoteDisplay"
 
-const GenkiChapter17 = () => {
+const UseGenkiChapter17 = () => {
   const c17p1: GrammarInfoProps = {
     chapter: 17,
     section: 1,
@@ -422,4 +422,4 @@ const GenkiChapter17 = () => {
   return { c17p1, c17p2, c17p3, c17p4, c17p5, c17p6 }
 }
 
-export default GenkiChapter17
+export default UseGenkiChapter17

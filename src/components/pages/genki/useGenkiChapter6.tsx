@@ -10,7 +10,7 @@ import QuoteDisplay from "../../ui/display/QuoteDisplay"
 import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
 import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
 
-const GenkiChapter6 = () => {
+const UseGenkiChapter6 = () => {
   const c6p1: GrammarInfoProps = {
     chapter: 6,
     section: 1,
@@ -398,4 +398,4 @@ const GenkiChapter6 = () => {
   return { c6p1, c6p2, c6p3, c6p4, c6p5, c6p6, c6p7 }
 }
 
-export default GenkiChapter6
+export default UseGenkiChapter6

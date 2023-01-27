@@ -5,7 +5,7 @@ import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.modul
 import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
 import { FirstMatch } from "../../ui/Underline"
 
-const GenkiChapter15 = () => {
+const UseGenkiChapter15 = () => {
   const c15p1: GrammarInfoProps = {
     chapter: 15,
     section: 1,
@@ -195,4 +195,4 @@ const GenkiChapter15 = () => {
   return { c15p1, c15p2, c15p3, c15p4 }
 }
 
-export default GenkiChapter15
+export default UseGenkiChapter15

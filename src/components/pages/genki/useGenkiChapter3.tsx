@@ -7,7 +7,7 @@ import GenkiHighlightDisplay from "../../ui/genki/GenkiHighlightDisplay"
 import QuoteDisplay from "../../ui/display/QuoteDisplay"
 import React from "react"
 
-const GenkiChapter3 = () => {
+const UseGenkiChapter3 = () => {
   const c3p1: GrammarInfoProps = {
     chapter: 3,
     section: 1,
@@ -391,4 +391,4 @@ const GenkiChapter3 = () => {
   return { c3p1, c3p2, c3p3, c3p4, c3p5, c3p6, c3p7, c3p8 }
 }
 
-export default GenkiChapter3
+export default UseGenkiChapter3

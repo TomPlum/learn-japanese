@@ -4,7 +4,7 @@ import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
 import React from "react"
 
-const GenkiChapter2 = () => {
+const useGenkiChapter2 = () => {
   const c2p1: GrammarInfoProps = {
     chapter: 2,
     section: 1,
@@ -266,4 +266,4 @@ const GenkiChapter2 = () => {
   return { c2p1, c2p2, c2p3, c2p4, c2p5, c2p6, c2p7 }
 }
 
-export default GenkiChapter2
+export default useGenkiChapter2
