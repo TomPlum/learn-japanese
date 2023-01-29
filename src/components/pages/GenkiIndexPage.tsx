@@ -45,7 +45,24 @@ const GenkiIndexPage = () => {
 
   const defaultColumn = useMemo(() => ({ minWidth: 50, maxWidth: 300 }), [])
 
-  const table = useTable(
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    page,
+    canPreviousPage,
+    canNextPage,
+    rows,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, globalFilter },
+    setGlobalFilter
+  } = useTable(
     {
       // @ts-ignore
       columns: columns,
@@ -58,37 +75,6 @@ const GenkiIndexPage = () => {
   )
 
   const spring = useMemo(() => ({ type: "spring", damping: 50, stiffness: 100 }), [])
-
-  const {
-    // @ts-ignore
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    prepareRow,
-    // @ts-ignore
-    page,
-    // @ts-ignore
-    canPreviousPage,
-    // @ts-ignore
-    canNextPage,
-    rows,
-    // @ts-ignore
-    pageOptions,
-    // @ts-ignore
-    pageCount,
-    // @ts-ignore
-    gotoPage,
-    // @ts-ignore
-    nextPage,
-    // @ts-ignore
-    previousPage,
-    // @ts-ignore
-    setPageSize,
-    // @ts-ignore
-    state: { pageIndex, globalFilter },
-    // @ts-ignore
-    setGlobalFilter
-  } = table
 
   const [error, setError] = useState<string | undefined>(undefined)
   const [loading, setLoading] = useState(false)

@@ -3,7 +3,7 @@ import { Kana } from "../../domain/kana/Kana"
 import styles from "../../styles/sass/components/layout/ParallaxBackground.module.scss"
 import Arrays from "../../utility/Arrays"
 import { v4 } from "uuid"
-import { useMousePosition, useWindowDimensions } from "../../hooks"
+import { useWindowDimensions } from "../../hooks"
 
 interface ParallaxBackgroundProps {
   kana: Kana[]
@@ -12,7 +12,6 @@ interface ParallaxBackgroundProps {
 const ParallaxBackground = (props: ParallaxBackgroundProps) => {
   const [kana, setKana] = useState<Kana[]>([])
   const { width, height } = useWindowDimensions()
-  const { x, y } = useMousePosition()
 
   useEffect(() => {
     setKana(Arrays.shuffle(getBackgroundKana()))

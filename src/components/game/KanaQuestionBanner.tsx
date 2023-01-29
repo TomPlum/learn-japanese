@@ -23,11 +23,11 @@ class KanaQuestionBanner extends Component<KanaQuestionBannerProps> {
     if (romaji.length > 1) {
       return (
         <>
-          <strong>'{romaji[0]}'</strong> or <strong>'{romaji[1]}'</strong>
+          <strong>&apos;{romaji[0]}&apos;</strong> or <strong>&apos;{romaji[1]}&apos;</strong>
         </>
       )
     } else {
-      return <strong>'{romaji[0]}'</strong>
+      return <strong>&apos;{romaji[0]}&apos;</strong>
     }
   }
 }
