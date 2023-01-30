@@ -96,4 +96,6 @@ const HintSettingsForm = forwardRef((props: HintSettingsFormProps, ref: Ref<Sett
   )
 })
 
+HintSettingsForm.displayName = "HintSettingsForm"
+
 export default HintSettingsForm

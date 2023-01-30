@@ -71,4 +71,6 @@ const LifeSettingsForm = forwardRef((props: LifeSettingsFormProps, ref: Ref<Sett
   )
 })
 
+LifeSettingsForm.displayName = "LifeSettingsForm"
+
 export default LifeSettingsForm

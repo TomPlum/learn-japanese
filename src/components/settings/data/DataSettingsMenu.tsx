@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, PropsWithChildren } from "react";
 import ScrollableContainer from "../../ui/ScrollableContainer"
 import { Button, Card, Col, Form } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -15,7 +15,7 @@ export interface DataSettingsMenuProps<T extends DataSettings> {
   onConfirm: (settings: T) => void
 }
 
-class DataSettingsMenu extends Component<DataSettingsMenuProps<any>> {
+class DataSettingsMenu extends Component<PropsWithChildren<DataSettingsMenuProps<any>>> {
   render() {
     const { title, icon, children, onQuit, onReset, onConfirm, isValid } = this.props
 

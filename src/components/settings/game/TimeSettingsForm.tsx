@@ -124,4 +124,6 @@ const TimeSettingsForm = forwardRef((props: TimeSettingsFormProps, ref: Ref<Sett
   )
 })
 
+TimeSettingsForm.displayName = "TimeSettingsForm"
+
 export default TimeSettingsForm

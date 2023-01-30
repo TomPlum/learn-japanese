@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import { Spinner } from "react-bootstrap"
 import styles from "../../../styles/sass/components/ui/loading/LoadingSpinner.module.scss"
 import { Variant } from "react-bootstrap/types"

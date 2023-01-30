@@ -30,4 +30,6 @@ const QuestionDisplay = React.forwardRef((props: QuestionDisplayProps, ref: Ref<
   )
 })
 
+QuestionDisplay.displayName = "QuestionDisplay"
+
 export default QuestionDisplay

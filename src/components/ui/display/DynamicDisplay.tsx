@@ -52,4 +52,6 @@ const DynamicDisplay = React.forwardRef((props: DynamicDisplayProps, ref: Ref<Dy
   )
 })
 
+DynamicDisplay.displayName = "DynamicDisplay"
+
 export default DynamicDisplay
