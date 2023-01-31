@@ -78,6 +78,7 @@ export const localStorageMock = (function () {
 })()
 
 Object.defineProperty(window, "localStorage", { value: localStorageMock })
+Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
 
 export const testUser: User = {
   username: "TomPlum42",

@@ -18,12 +18,9 @@ jest.mock("../../../../service/HighScoresService", () => {
 })
 
 beforeEach(() => {
-  // @ts-ignore
-  deviceDetect.isFirefox = false
-  // @ts-ignore
-  deviceDetect.isChrome = false
-  // @ts-ignore
-  deviceDetect.isSafari = false
+  Object.defineProperty(deviceDetect, 'isFirefox', { get: () => false });
+  Object.defineProperty(deviceDetect, 'isChrome', { get: () => false });
+  Object.defineProperty(deviceDetect, 'isSafari', { get: () => false });
 })
 
 test("Should render the profile visibility selector", async () => {
@@ -95,22 +92,19 @@ test("Should render the password confirmation modal when confirming to delete ac
 })
 
 test("Should render the firefox icon in the clear browser settings button when the browser is firefox", () => {
-  // @ts-ignore
-  deviceDetect.isFirefox = true
+  Object.defineProperty(deviceDetect, 'isFirefox', { get: () => true });
   const component = renderTranslatedReduxConsumer(<UserSettingsTab />)
   expect(within(component.getByTestId("clear-local-storage-button")).getByTestId("firefox-icon")).toBeInTheDocument()
 })
 
 test("Should render the safari icon in the clear browser settings button when the browser is firefox", () => {
-  // @ts-ignore
-  deviceDetect.isSafari = true
+  Object.defineProperty(deviceDetect, 'isSafari', { get: () => true });
   const component = renderTranslatedReduxConsumer(<UserSettingsTab />)
   expect(within(component.getByTestId("clear-local-storage-button")).getByTestId("safari-icon")).toBeInTheDocument()
 })
 
 test("Should render the chrome icon in the clear browser settings button when the browser is firefox", () => {
-  // @ts-ignore
-  deviceDetect.isChrome = true
+  Object.defineProperty(deviceDetect, 'isChrome', { get: () => true });
   const component = renderTranslatedReduxConsumer(<UserSettingsTab />)
   expect(within(component.getByTestId("clear-local-storage-button")).getByTestId("chrome-icon")).toBeInTheDocument()
 })
