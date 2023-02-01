@@ -1,5 +1,5 @@
 import styles from "../../styles/sass/components/pages/HomePage.module.scss"
-import { Container, Row } from "react-bootstrap"
+import { Container } from "react-bootstrap"
 import { useUserSelector } from "../../hooks"
 import UserDashboardLayout from "../layout/UserDashboardLayout"
 import AnonymousDashboardLayout from "../layout/AnonymousDashboardLayout"

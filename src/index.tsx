@@ -4,7 +4,6 @@ import "./styles/sass/index.scss"
 import LearnJapanese from "./LearnJapanese"
 import { store } from "./store"
 import { injectStore } from "./rest/Interceptors"
-import { worker } from "./mocks/browser"
 
 injectStore(store)
 

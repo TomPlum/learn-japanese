@@ -203,7 +203,7 @@ const UseGenkiChapter17 = () => {
           たら is one of several words in Japanese that refer to conditional <em>(if)</em> dependence.
         </p>
         <p>
-          When we say <QuoteDisplay chapter={17}>A　たら　B</QuoteDisplay> we must mean that B is valid, contingent on
+          When we say <QuoteDisplay chapter={17}>{"A　たら　B"}</QuoteDisplay> we must mean that B is valid, contingent on
           the fulfillment of A.
         </p>
 

@@ -8,7 +8,9 @@ const NotFoundPage = () => {
     <Container fluid className={styles.wrapper}>
       <div className={styles.content}>
         <h1 className={styles.heading}>Nani!?</h1>
-        <h3 className={styles.description}>There doesn't appear to be anything here.</h3>
+        <h3 className={styles.description}>
+          There doesn&apos;t appear to be anything here.
+        </h3>
 
         <Button className={styles.home} variant="outline-success" href="/home">
           <FontAwesomeIcon icon={faHome} fixedWidth className={styles.buttonIcon} />

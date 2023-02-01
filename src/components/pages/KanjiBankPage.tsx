@@ -163,14 +163,14 @@ const KanjiBankPage = () => {
               </div>
 
               <div className={styles.section}>
-                <p className={styles.label}>On'yomi Readings</p>
+                <p className={styles.label}>On&apos;yomi Readings</p>
                 <p className={styles.value}>
                   {highlightSearch("reading", getReadingKana(selected.value.getOnyomiReadings()))}
                 </p>
               </div>
 
               <div className={styles.section}>
-                <p className={styles.label}>Kun'yomi Readings</p>
+                <p className={styles.label}>Kun&apos;yomi Readings</p>
                 <p className={styles.value}>
                   {highlightSearch("reading", getReadingKana(selected.value.getKunyomiReadings()))}
                 </p>

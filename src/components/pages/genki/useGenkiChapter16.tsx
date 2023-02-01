@@ -81,8 +81,8 @@ const UseGenkiChapter16 = () => {
 
         <p>
           We use the te-form + もらう to say that we get, persuade or arrange for somebody to do something for us. In
-          other words, we "receive" somebody's favour. The person performing the action for us accompanied by the
-          particle に.
+          other words, we &quot;receive&quot; somebody&apos;s favour. The person performing the action for us accompanied by the
+          particle に.*/-
         </p>
         <p>For example:</p>
         <GenkiExampleDisplay
