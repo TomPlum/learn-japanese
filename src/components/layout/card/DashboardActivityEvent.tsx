@@ -51,11 +51,23 @@ const DashboardActivityEvent = (props: PropsWithChildren<DashboardActivityEventP
     <div className={[className, styles.wrapper].join(" ")} onClick={onClick}>
       <div className={styles.header}>
         <FontAwesomeIcon icon={icon} fixedWidth className={styles.icon} style={{ color: colour }} />
+
         <span>{name}</span>
-        <span className={styles.time}>{getElapsedTime(event.time)}</span>
-        <FontAwesomeIcon icon={faTimes} className={styles.dismiss} onClick={onDismiss} title={actions("dismiss")} />
+
+        <span className={styles.time}>
+          {getElapsedTime(event.time)}
+        </span>
+
+        <FontAwesomeIcon
+          icon={faTimes}
+          onClick={onDismiss}
+          title={actions("dismiss")}
+          className={styles.dismiss}
+        />
       </div>
-      <div>{children}</div>
+      <div>
+        {children}
+      </div>
     </div>
   )
 }
