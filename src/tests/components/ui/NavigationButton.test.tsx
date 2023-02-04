@@ -3,7 +3,6 @@ import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-l
 import { faSmile } from "@fortawesome/free-solid-svg-icons"
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons"
 import renderWithTranslation from "../../renderWithTranslation"
-import textLoading from "../../../components/ui/loading/TextLoading"
 
 const onShowHandler = jest.fn()
 const onHideHandler = jest.fn()

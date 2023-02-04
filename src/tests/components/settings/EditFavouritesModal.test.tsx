@@ -1,7 +1,6 @@
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
-import renderReduxConsumer from "../../renderReduxConsumer"
 import EditFavouritesModal from "../../../components/settings/EditFavouritesModal"
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import PresetBuilder from "../../../domain/session/PresetBuilder"

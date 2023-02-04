@@ -49,5 +49,5 @@ test("Should call the given render function if the user is authenticated and no 
 })
 
 const TestComponent = () => {
-  return <p>I'm a test component</p>
+  return <p>I&apos;m a test component</p>
 }

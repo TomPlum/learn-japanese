@@ -1,4 +1,3 @@
-import renderReduxConsumer from "../../../renderReduxConsumer"
 import NotificationSettingsTab from "../../../../components/settings/modal/NotificationsSettingsTab"
 import { fireEvent, within } from "@testing-library/react"
 import { store } from "../../../../store"

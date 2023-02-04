@@ -78,7 +78,9 @@ export const localStorageMock = (function () {
 })()
 
 Object.defineProperty(window, "localStorage", { value: localStorageMock })
-Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
+Object.defineProperty(window, 'scrollTo', { value: () => {
+  console.log("scrollTo() invoked in Jest test.")
+}, writable: true });
 
 export const testUser: User = {
   username: "TomPlum42",
