@@ -52,22 +52,20 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
       {!loading &&
         React.Children.map(children, (child) => {
           if (React.isValidElement(child)) {
-            switch ((child as React.ReactElement).type) {
+            const childElement = child as React.ReactElement;
+            switch (childElement.type) {
               case DashboardCardHeader: {
-                // @ts-ignore TODO: Fix these ignores in here + header component
-                return React.cloneElement(child, { error: error, onReload: onReload })
+                return React.cloneElement(childElement, { error: error, onReload: onReload })
               }
               case DashboardCardBody: {
                 if (!error) {
-                  // @ts-ignore
-                  return React.cloneElement(child, { size: size, updating: updating })
+                  return React.cloneElement(childElement, { size: size, updating: updating })
                 } else {
                   return null
                 }
               }
               case DashboardCardFooter: {
-                return React.cloneElement(child, {
-                  // @ts-ignore
+                return React.cloneElement(childElement, {
                   className: [styles.footer, child.props.className].join(" ")
                 })
               }
