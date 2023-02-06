@@ -1,4 +1,4 @@
-import { fireEvent } from "@testing-library/react"
+import { act, fireEvent } from "@testing-library/react";
 import HintSettingsForm from "../../../../components/settings/game/HintSettingsForm"
 import HintSettings, { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings"
 import { getValueLastCalledWith } from "../../../Queries"
@@ -60,9 +60,11 @@ test("Changing the quantity slider should update the hint quantity", () => {
   expect(getValueLastCalledWith<HintSettings>(onChangeHandler).quantity).toBe(8)
 })
 
-test("Calling reset should reset the HintSettings to their defaults", () => {
+test("Calling reset should reset the HintSettings to their defaults", async () => {
   const { enable } = setup()
   fireEvent.click(enable)
-  ref?.current?.reset()
-  expect(onChangeHandler).toHaveBeenLastCalledWith(new HintSettingsBuilder().isEnabled().withQuantity(3).build())
+  act(() => ref?.current?.reset())
+  expect(onChangeHandler).toHaveBeenLastCalledWith(
+    new HintSettingsBuilder().isEnabled().withQuantity(3).build()
+  )
 })
