@@ -1,11 +1,11 @@
-import renderReduxConsumer from "../../renderReduxConsumer"
 import ProfilePage from "../../../components/pages/ProfilePage"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { store } from "../../../store"
 import { testUser } from "../../../setupTests"
+import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer";
 
 const setup = () => {
-  const component = renderReduxConsumer(<ProfilePage />)
+  const component = renderTranslatedReduxConsumer(<ProfilePage />)
 
   return {
     edit: component.queryByTitle("Edit"),
