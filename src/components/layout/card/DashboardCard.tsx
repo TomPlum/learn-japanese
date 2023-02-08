@@ -55,11 +55,17 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
             const childElement = child as React.ReactElement;
             switch (childElement.type) {
               case DashboardCardHeader: {
-                return React.cloneElement(childElement, { error: error, onReload: onReload })
+                return React.cloneElement(childElement, {
+                  error: error,
+                  onReload: onReload
+                })
               }
               case DashboardCardBody: {
                 if (!error) {
-                  return React.cloneElement(childElement, { size: size, updating: updating })
+                  return React.cloneElement(childElement, {
+                    size: size,
+                    updating: updating
+                  })
                 } else {
                   return null
                 }
@@ -74,9 +80,12 @@ const DashboardCard = (props: PropsWithChildren<DashboardCardProps>) => {
               }
             }
           }
-        })}
+        })
+      }
 
-      <DashboardCardError active={!loading && !!error}>{error}</DashboardCardError>
+      <DashboardCardError active={!loading && !!error}>
+        {error}
+      </DashboardCardError>
     </div>
   )
 }

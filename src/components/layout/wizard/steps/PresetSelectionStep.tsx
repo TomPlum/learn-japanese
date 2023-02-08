@@ -39,24 +39,26 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
     isValid(true)
     setLoading(true)
     setError(undefined)
-    ;(user ? service.getAllPresets() : service.getDefaultPresets())
-      .then((response) => {
-        if (response.error) {
-          isValid(false)
-          setError(response.error)
-        } else {
-          setPlayPresets(response.play)
-          setLearnPresets(response.learn)
-          if (!preset) {
-            const availablePresets = mode === AppMode.PLAY ? response.play : response.learn
-            const defaultPreset = availablePresets.filter((preset) => preset.topicName === topic.name)[0]
-            onSelect(defaultPreset)
-          }
+
+    const presets = user ? service.getAllPresets() : service.getDefaultPresets()
+
+    presets.then((response) => {
+      if (response.error) {
+        isValid(false)
+        setError(response.error)
+      } else {
+        setPlayPresets(response.play)
+        setLearnPresets(response.learn)
+
+        if (!preset) {
+          const availablePresets = mode === AppMode.PLAY ? response.play : response.learn
+          const defaultPreset = availablePresets.filter((preset) => preset.topicName === topic.name)[0]
+          onSelect(defaultPreset)
         }
-      })
-      .finally(() => {
-        setLoading(false)
-      })
+      }
+    }).finally(() => {
+      setLoading(false)
+    })
   }, [])
 
   const onSelectPreset = (mode: SessionMode) => {
