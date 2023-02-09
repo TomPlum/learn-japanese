@@ -11,7 +11,7 @@ import {
   faSortUp
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from "react-table"
+import { HeaderGroup, Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from "react-table";
 import { AnimatePresence, motion } from "framer-motion"
 import TablePagination from "../ui/paging/TablePagination"
 import Copyable from "../ui/Copyable"
@@ -182,12 +182,11 @@ const GenkiIndexPage = () => {
             <thead>
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column: any) => (
+                  {headerGroup.headers.map((column: HeaderGroup<TableData>) => (
                     <motion.th
                       {...column.getHeaderProps({
                         // @ts-ignore
                         layoutTransition: spring,
-                        // @ts-ignore
                         ...column.getSortByToggleProps()
                       })}
                     >
@@ -211,7 +210,7 @@ const GenkiIndexPage = () => {
 
             <tbody {...getTableBodyProps()}>
               <AnimatePresence>
-                {page.map((row: Row<any>) => {
+                {page.map((row: Row<TableData>) => {
                   prepareRow(row)
 
                   const colourClass = row.original.lesson < 12 ? styles.genkiOne : styles.genkiTwo
