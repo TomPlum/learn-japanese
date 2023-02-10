@@ -375,15 +375,33 @@ const MemoryGame = (props: MemoryGameProps) => {
         </Col>
 
         <Col xs={4}>
-          {settings.question.score && <ScoreDisplay value={score} streak={streak} className={styles.score} />}
+          {settings.question.score && (
+            <ScoreDisplay
+              value={score}
+              streak={streak}
+              className={styles.score}
+            />
+          )}
         </Col>
 
         <Col xs={4} className={styles.lifeDisplayContainer}>
-          <LifeDisplay hearts={lives} className={styles.lives} enabled={settings.lives.enabled} />
+          <LifeDisplay
+            hearts={lives}
+            className={styles.lives}
+            enabled={settings.lives.enabled}
+          />
         </Col>
 
         <Col xs={4}>
-          {settings.time.timed && <Timer pausable ref={timerRef} onPaused={onPaused} className={styles.timer} />}
+          {settings.time.timed && (
+            <Timer
+              pausable
+              ref={timerRef}
+              onPaused={onPaused}
+              className={styles.timer}
+            />
+          )}
+
           {settings.time.countdown && (
             <CountDown
               ref={countdownRef}
@@ -403,9 +421,16 @@ const MemoryGame = (props: MemoryGameProps) => {
 
       <Row noGutters className={styles.footer}>
         <Col md={4} xs={5} className={styles.footerLeftCol}>
-          <SkipButton disabled={paused} onClick={handleSkip} className={styles.skip} />
+          <SkipButton
+            disabled={paused}
+            onClick={handleSkip}
+            className={styles.skip}
+          />
 
-          <VolumeController className={styles.volume} onVolumeChange={(value: number) => (volume = value)} />
+          <VolumeController
+            className={styles.volume}
+            onVolumeChange={(value: number) => (volume = value)}
+          />
         </Col>
 
         <Col md={8} xs={7} className={styles.footerRightCol}>
@@ -421,7 +446,11 @@ const MemoryGame = (props: MemoryGameProps) => {
               key={currentQuestion.map((q) => q.getUniqueID()).join("-")}
             />
 
-            <SubmitButton onClick={answerQuestion} className={styles.submit} disabled={!hasValidAnswer || paused} />
+            <SubmitButton
+              onClick={answerQuestion}
+              className={styles.submit}
+              disabled={!hasValidAnswer || paused}
+            />
           </ButtonGroup>
         </Col>
       </Row>
