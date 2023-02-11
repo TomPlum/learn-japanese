@@ -78,11 +78,11 @@ const MemoryGame = (props: MemoryGameProps) => {
     return Arrays.getRandomObjects(data, quantity)
   }
 
-  let volume = 0.7
   const { t } = useTranslation("translation", { keyPrefix: "memory-game" })
 
   const [score, setScore] = useState(0)
   const [streak, setStreak] = useState(0)
+  const [volume, setVolume] = useState(0.7)
   const [paused, setPaused] = useState(false)
   const [isQuitting, setIsQuitting] = useState(false)
   const [failedToAnswer, setFailedToAnswer] = useState(0)
@@ -429,7 +429,7 @@ const MemoryGame = (props: MemoryGameProps) => {
 
           <VolumeController
             className={styles.volume}
-            onVolumeChange={(value: number) => (volume = value)}
+            onVolumeChange={setVolume}
           />
         </Col>
 
