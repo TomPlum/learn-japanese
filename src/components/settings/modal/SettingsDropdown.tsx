@@ -64,9 +64,10 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
   }
 
   const translationKey = `settings.modal.${optionsKey}.options`
+  const optionValuesArray = t(translationKey, { returnObjects: true }) as SettingsDropdownOption[]
   const opts =
     options ??
-    t<string, SettingsDropdownOption[]>(translationKey, { returnObjects: true }).map((option) => {
+    optionValuesArray.map((option) => {
       return {
         name: option.name,
         value: option.value ?? option.name,

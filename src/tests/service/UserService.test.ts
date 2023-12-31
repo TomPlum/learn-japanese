@@ -19,7 +19,7 @@ RestClient.patchJSON = restJsonPatch
 let mockDate: typeof jest
 
 beforeEach(() => {
-  mockDate = jest.useFakeTimers("modern")
+  mockDate = jest.useFakeTimers()
 })
 
 describe("User Service", () => {

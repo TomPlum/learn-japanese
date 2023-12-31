@@ -1,4 +1,4 @@
-import { AxiosError, AxiosRequestConfig } from "axios"
+import { AxiosError, AxiosHeaders, AxiosRequestConfig } from "axios";
 import { clearUser, setAccessToken, setRefreshToken } from "../slices/UserSlice"
 import RestClient from "./RestClient"
 import { Environment } from "../utility/Environment"
@@ -6,6 +6,7 @@ import api from "./API"
 import { EnhancedStore } from "@reduxjs/toolkit"
 
 export interface RetryableAxiosRequestConfig extends AxiosRequestConfig {
+  headers: AxiosHeaders
   retry: boolean
 }
 

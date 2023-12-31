@@ -18,7 +18,7 @@ class MessageQueue {
   /** The unique key used to store the queue in local storage. */
   private static readonly _key = "mq"
 
-  private _interval: NodeJS.Timer | undefined = undefined
+  private _interval: NodeJS.Timeout | undefined = undefined
   private readonly _messages: Message<any>[] = []
 
   /**

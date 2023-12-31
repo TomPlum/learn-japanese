@@ -64,7 +64,7 @@ const GenkiIndexPage = () => {
     setGlobalFilter
   } = useTable(
     {
-      // @ts-ignore
+      // @ts-expect-error its broke
       columns: columns,
       data: useMemo(() => data.current, [data.current]),
       defaultColumn: defaultColumn
@@ -185,7 +185,7 @@ const GenkiIndexPage = () => {
                   {headerGroup.headers.map((column: HeaderGroup<TableData>) => (
                     <motion.th
                       {...column.getHeaderProps({
-                        // @ts-ignore
+                        // @ts-expect-error its broke
                         layoutTransition: spring,
                         ...column.getSortByToggleProps()
                       })}
@@ -216,13 +216,13 @@ const GenkiIndexPage = () => {
                   const colourClass = row.original.lesson < 12 ? styles.genkiOne : styles.genkiTwo
                   return (
                     <motion.tr
-                      // @ts-ignore
+                      // @ts-expect-error its broke
                       {...row.getRowProps({ layoutTransition: spring })}
                       className={colourClass}
                     >
                       {row.cells.map((cell) => {
                         return (
-                          // @ts-ignore
+                          // @ts-expect-error its broke
                           <motion.td {...cell.getCellProps({ layoutTransition: spring })}>
                             <Copyable valueProvider={(it) => it.props.cell.value}>
                               <span>{cell.render("Cell")}</span>
