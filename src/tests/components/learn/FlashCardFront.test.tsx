@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
 import FlashCardFront from "../../../components/learn/FlashCardFront"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 test("Should call the onClick event handler when clicking the card face", () => {
   const component = render(

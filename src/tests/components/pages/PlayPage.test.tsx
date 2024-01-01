@@ -17,14 +17,12 @@ import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/Q
 import LearnableField from "../../../domain/learn/LearnableField"
 import QuestionType from "../../../domain/game/QuestionType"
 
-const mockLearningDataService = jest.fn()
-jest.mock(
-  "../../../service/LearningDataService",
-  () =>
-    function () {
-      return { read: mockLearningDataService }
-    }
-)
+const mockLearningDataService = vi.fn()
+vi.mock("../../../service/LearningDataService", () => ({
+  default: function () {
+    return { read: mockLearningDataService }
+  }
+}))
 
 const dataSettings = new KanaSettingsBuilder()
   .withHiragana(true)

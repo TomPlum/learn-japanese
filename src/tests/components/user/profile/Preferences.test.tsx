@@ -4,20 +4,20 @@ import { testUser } from "../../../../setupTests"
 import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer"
 
 //Mock User Service
-const mockUserService = jest.fn()
-jest.mock("../../../../service/UserService", () => {
-  return function () {
+const mockUserService = vi.fn()
+vi.mock("../../../../service/UserService", () => ({
+  default: function () {
     return { updatePreferences: mockUserService }
   }
-})
+}))
 
 // Mock Font Service
-const mockFontService = jest.fn()
-jest.mock("../../../../service/FontService", () => {
-  return function () {
+const mockFontService = vi.fn()
+vi.mock("../../../../service/FontService", () => ({
+  default: function () {
     return { getFonts: mockFontService }
   }
-})
+}))
 
 const setup = () => {
   const component = renderTranslatedReduxConsumer(<Preferences user={testUser} />)

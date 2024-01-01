@@ -5,7 +5,7 @@ import KanaType from "../../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../../domain/kana/KanaColumn"
 import React from "react"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 let props: KanaDisplayProps
 

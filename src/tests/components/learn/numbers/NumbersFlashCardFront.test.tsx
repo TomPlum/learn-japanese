@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react"
 import NumbersFlashCardFront from "../../../../components/learn/numbers/NumbersFlashCardFront"
 import CommonData from "../../../../domain/learn/CommonData"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const number = new CommonData("1", ["いち"], "一", "Number", "1")
 

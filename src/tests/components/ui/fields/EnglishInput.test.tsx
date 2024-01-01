@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import EnglishInput, { EnglishInputProps } from "../../../../components/ui/fields/EnglishInput"
 import each from "jest-each"
 
-const onChangeHandler = jest.fn()
+const onChangeHandler = vi.fn()
 
 let props: EnglishInputProps
 

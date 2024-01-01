@@ -3,9 +3,9 @@ import KeywordSearchField, { KeywordSearchFieldProps } from "../../../../compone
 
 let props: KeywordSearchFieldProps
 
-const onChangeHandler = jest.fn()
-const onSubmitHandler = jest.fn()
-const onRemoveFilterHandler = jest.fn()
+const onChangeHandler = vi.fn()
+const onSubmitHandler = vi.fn()
+const onRemoveFilterHandler = vi.fn()
 
 beforeEach(() => {
   props = {
@@ -21,7 +21,7 @@ beforeEach(() => {
     ]
   }
 
-  jest.useFakeTimers()
+  vi.useFakeTimers()
 })
 
 const setup = () => {
@@ -35,7 +35,7 @@ const setup = () => {
 test("It should call the onChange event handler 300ms after entering a search term", () => {
   const { field } = setup()
   fireEvent.change(field, { target: { value: "person" } })
-  jest.advanceTimersByTime(300)
+  vi.advanceTimersByTime(300)
   expect(onChangeHandler).toHaveBeenLastCalledWith("person")
 })
 
@@ -147,7 +147,7 @@ test("It should render a second parameter tag if two key-value pairs are present
 test("It should call the onChange event handler with the search term if there is no keyword", () => {
   const { field } = setup()
   fireEvent.change(field, { target: { value: "counter" } })
-  jest.advanceTimersByTime(300)
+  vi.advanceTimersByTime(300)
   expect(onChangeHandler).toHaveBeenLastCalledWith("counter")
 })
 
@@ -155,7 +155,7 @@ test("It should not call onChange event handler if a space is entered with an in
   const { field } = setup()
   fireEvent.change(field, { target: { value: ">grade=" } })
   fireEvent.change(field, { target: { value: ">grade= " } })
-  jest.advanceTimersByTime(300)
+  vi.advanceTimersByTime(300)
   expect(onChangeHandler).not.toHaveBeenCalled()
 })
 

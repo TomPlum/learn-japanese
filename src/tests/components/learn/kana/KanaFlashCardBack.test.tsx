@@ -4,7 +4,7 @@ import { Kana } from "../../../../domain/kana/Kana"
 import KanaType from "../../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../../domain/kana/KanaColumn"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
 

@@ -17,18 +17,18 @@ import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/Ti
 import PresetBuilder from "../../../../domain/session/PresetBuilder"
 import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer"
 
-const mockGetAllPresets = jest.fn()
-const mockGetDefaultPresets = jest.fn()
-jest.mock("../../../../service/PresetService", () => {
-  return function () {
+const mockGetAllPresets = vi.fn()
+const mockGetDefaultPresets = vi.fn()
+vi.mock("../../../../service/PresetService", () => ({
+  default: function () {
     return {
       getAllPresets: mockGetAllPresets,
       getDefaultPresets: mockGetDefaultPresets
     }
   }
-})
+}))
 
-const onCloseHandler = jest.fn()
+const onCloseHandler = vi.fn()
 const history = createMemoryHistory()
 
 const playPreset = new PresetBuilder()

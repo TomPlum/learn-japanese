@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
 import Icon from "../../../../../components/ui/menu/icon/Icon"
 
-const onClickEventHandler = jest.fn()
+const onClickEventHandler = vi.fn()
 
 test("Should render the icon with a title equal to the name with the Fa prefix removed", () => {
   const component = render(<Icon value="FaAccessibleIcon" />)

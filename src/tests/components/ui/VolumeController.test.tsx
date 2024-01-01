@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import VolumeController from "../../../components/ui/VolumeController"
 
-const onVolumeChangeHandler = jest.fn()
+const onVolumeChangeHandler = vi.fn()
 
 const setup = () => {
   const component = render(<VolumeController onVolumeChange={onVolumeChangeHandler} />)

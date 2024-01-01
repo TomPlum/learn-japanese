@@ -18,16 +18,16 @@ import renderReduxConsumer from "../../renderReduxConsumer"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
 // Mock Event Handlers
-const onFinishHandler = jest.fn()
+const onFinishHandler = vi.fn()
 
 // Mock Imported Static Functions
-const shuffle = jest.fn()
-const getRandomObjects = jest.fn()
-const getRandomElements = jest.fn()
-const environment = jest.fn()
+const shuffle = vi.fn()
+const getRandomObjects = vi.fn()
+const getRandomElements = vi.fn()
+const environment = vi.fn()
 
 // Mock Audio (JSDom Doesn't Support)
-const playAudio = jest.fn()
+const playAudio = vi.fn()
 window.HTMLMediaElement.prototype.play = playAudio
 
 // Test Kana (Extracted here for reference equality purposes)
@@ -83,15 +83,15 @@ beforeEach(() => {
   })
 
   // Mock Audio - Promise returns undefined otherwise
-  playAudio.mockResolvedValue(jest.fn())
+  playAudio.mockResolvedValue(vi.fn())
 
-  jest.useFakeTimers()
+  vi.useFakeTimers()
 })
 
 afterEach(() => {
-  jest.runOnlyPendingTimers()
-  jest.useRealTimers()
-  jest.restoreAllMocks()
+  vi.runOnlyPendingTimers()
+  vi.useRealTimers()
+  vi.restoreAllMocks()
   cleanup()
 })
 
@@ -377,32 +377,32 @@ test("Answering all questions correctly should stop the timer", () => {
   const { submit } = setup()
 
   // Answer 1st correctly
-  jest.advanceTimersByTime(5000)
+  vi.advanceTimersByTime(5000)
   fireEvent.change(getRomajiInput(), { target: { value: "a" } })
   fireEvent.click(submit)
 
   // Answer 2nd correctly
-  jest.advanceTimersByTime(3000)
+  vi.advanceTimersByTime(3000)
   fireEvent.change(getRomajiInput(), { target: { value: "i" } })
   fireEvent.click(submit)
 
   // Answer 3rd correctly
-  jest.advanceTimersByTime(2000)
+  vi.advanceTimersByTime(2000)
   fireEvent.change(getRomajiInput(), { target: { value: "u" } })
   fireEvent.click(submit)
 
   // Answer 4th correctly
-  jest.advanceTimersByTime(2000)
+  vi.advanceTimersByTime(2000)
   fireEvent.change(getRomajiInput(), { target: { value: "e" } })
   fireEvent.click(submit)
 
   // Answer 5th correctly
-  jest.advanceTimersByTime(15000)
+  vi.advanceTimersByTime(15000)
   fireEvent.change(getRomajiInput(), { target: { value: "o" } })
   fireEvent.click(submit)
 
   // Advancing the timer to prove the timer has stopped
-  jest.advanceTimersByTime(10000)
+  vi.advanceTimersByTime(10000)
   expect(screen.getByText("00:27")).toBeInTheDocument()
 })
 
@@ -417,27 +417,27 @@ test("Answering all questions correctly should stop call the onFinish even handl
   const { submit } = setup()
 
   // Answer 1st correctly
-  jest.advanceTimersByTime(5000)
+  vi.advanceTimersByTime(5000)
   fireEvent.change(getRomajiInput(), { target: { value: "a" } })
   fireEvent.click(submit)
 
   // Answer 2nd correctly
-  jest.advanceTimersByTime(3000)
+  vi.advanceTimersByTime(3000)
   fireEvent.change(getRomajiInput(), { target: { value: "i" } })
   fireEvent.click(submit)
 
   // Answer 3rd correctly
-  jest.advanceTimersByTime(2000)
+  vi.advanceTimersByTime(2000)
   fireEvent.change(getRomajiInput(), { target: { value: "u" } })
   fireEvent.click(submit)
 
   // Answer 4th correctly
-  jest.advanceTimersByTime(5000)
+  vi.advanceTimersByTime(5000)
   fireEvent.change(getRomajiInput(), { target: { value: "e" } })
   fireEvent.click(submit)
 
   // Answer 5th correctly
-  jest.advanceTimersByTime(15000)
+  vi.advanceTimersByTime(15000)
   fireEvent.change(getRomajiInput(), { target: { value: "o" } })
   fireEvent.click(submit)
 
@@ -575,7 +575,7 @@ test("Answering incorrectly with 1 life remaining should call the onFinish event
   const { submit } = setup()
 
   // Advance the time, lets assume it took 12 seconds
-  jest.advanceTimersByTime(12000)
+  vi.advanceTimersByTime(12000)
 
   // Answer 1st correctly
   fireEvent.change(getRomajiInput(), { target: { value: "a" } })
@@ -787,7 +787,7 @@ test("Failing to correctly answer the question before the countdown finishes sho
   setup()
 
   expect(screen.getByText("あ")).toBeInTheDocument()
-  jest.advanceTimersByTime(6000)
+  vi.advanceTimersByTime(6000)
   expect(screen.getByText("い")).toBeInTheDocument()
 })
 
@@ -801,7 +801,7 @@ test("Failing to correctly answer the question before the countdown finishes sho
   setup()
 
   expect(screen.getByText("10")).toBeInTheDocument()
-  jest.advanceTimersByTime(6000)
+  vi.advanceTimersByTime(6000)
   expect(screen.getByText("9")).toBeInTheDocument()
 })
 
@@ -814,9 +814,9 @@ test("Failing to correctly answer the question before the countdown finishes sho
   setup()
 
   expect(screen.getByText("5")).toBeInTheDocument()
-  jest.advanceTimersByTime(3000)
+  vi.advanceTimersByTime(3000)
   expect(screen.getByText("2")).toBeInTheDocument()
-  jest.advanceTimersByTime(3000)
+  vi.advanceTimersByTime(3000)
   expect(screen.getByText("5")).toBeInTheDocument()
 })
 
@@ -837,7 +837,7 @@ test("Failing to correctly answer the question before the countdown finishes sho
   fireEvent.click(screen.getByText("Click to Reveal"))
 
   // Deplete countdown time
-  jest.advanceTimersByTime(6000)
+  vi.advanceTimersByTime(6000)
 
   // The hint quantity should be reduced by 1
   fireEvent.click(screen.getByTestId("hint-button"))
@@ -859,7 +859,7 @@ test("Failing to correctly answer the question before the countdown finishes sho
 
   // Deplete the countdown timer
   act(() => {
-    jest.advanceTimersByTime(6000)
+    vi.advanceTimersByTime(6000)
   })
 
   // We should have 5 on the next question

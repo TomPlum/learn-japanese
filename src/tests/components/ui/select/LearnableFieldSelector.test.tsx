@@ -6,7 +6,7 @@ import LearnableField from "../../../../domain/learn/LearnableField"
 import userEvent from "@testing-library/user-event"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 let props: LearnableFieldSelectorProps
 

@@ -2,12 +2,12 @@ import { fireEvent } from "@testing-library/react"
 import StreakCard from "../../../components/cards/StreakCard"
 import renderWithTranslation from "../../renderWithTranslation"
 
-const mockGetActivityStreak = jest.fn()
-jest.mock("../../../service/UserService", () => {
-  return function () {
+const mockGetActivityStreak = vi.fn()
+vi.mock("../../../service/UserService", () => ({
+  default: function () {
     return { getActivityStreak: mockGetActivityStreak }
   }
-})
+}))
 
 test("Should render the cards in the correct order when clicking right", async () => {
   mockGetActivityStreak.mockResolvedValueOnce(481)

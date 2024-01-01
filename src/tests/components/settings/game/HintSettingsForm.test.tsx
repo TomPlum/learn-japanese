@@ -6,7 +6,7 @@ import React from "react"
 import renderWithTranslation from "../../../renderWithTranslation"
 import { SettingsFormHandle } from "../../../../components/settings/game/GameSettingsMenu"
 
-const onChangeHandler = jest.fn()
+const onChangeHandler = vi.fn()
 const ref = React.createRef<SettingsFormHandle>()
 
 const setup = () => {

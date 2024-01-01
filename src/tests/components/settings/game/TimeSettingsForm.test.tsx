@@ -3,7 +3,7 @@ import TimeSettingsForm from "../../../../components/settings/game/TimeSettingsF
 import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onChangeHandler = jest.fn()
+const onChangeHandler = vi.fn()
 
 const setup = () => {
   const component = renderWithTranslation(<TimeSettingsForm onChange={onChangeHandler} />)

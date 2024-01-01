@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react"
 import TopicSelectionStep from "../../../../../components/layout/wizard/steps/TopicSelectionStep"
 import Topic from "../../../../../domain/Topic"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 test("Should render all the topics", () => {
   const component = render(<TopicSelectionStep topic={Topic.KANA} onSelect={onSelectHandler} />)

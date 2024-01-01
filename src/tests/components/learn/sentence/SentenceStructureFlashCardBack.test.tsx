@@ -3,7 +3,7 @@ import SentenceStructureFlashCardBack from "../../../../components/learn/sentenc
 import { getByTextWithMarkup } from "../../../Queries"
 import Definition from "../../../../domain/sentence/Definition"
 
-const onResetHandler = jest.fn()
+const onResetHandler = vi.fn()
 
 const adjective = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective")
 

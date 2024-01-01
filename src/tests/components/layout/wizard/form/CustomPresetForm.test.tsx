@@ -5,16 +5,16 @@ import { GameSettingsBuilder } from "../../../../../domain/session/settings/game
 import KanjiSettings from "../../../../../domain/session/settings/data/KanjiSettings"
 import renderWithTranslation from "../../../../renderWithTranslation"
 
-const mockPresetService = jest.fn()
-jest.mock("../../../../../service/PresetService", () => {
-  return function () {
+const mockPresetService = vi.fn()
+vi.mock("../../../../../service/PresetService", () => ({
+  default: function () {
     return { saveCustomPreset: mockPresetService }
   }
-})
+}))
 
 const settings = SessionSettings.forGame(new KanjiSettings([], []), new GameSettingsBuilder().build())
-const onSuccessHandler = jest.fn()
-const onCancelHandler = jest.fn()
+const onSuccessHandler = vi.fn()
+const onCancelHandler = vi.fn()
 
 let props: CustomPresetFormProps
 
@@ -29,7 +29,7 @@ const setup = () => {
 }
 
 beforeEach(() => {
-  jest.useFakeTimers()
+  vi.useFakeTimers()
 
   props = {
     settings: settings,
@@ -86,7 +86,7 @@ test("Clicking save when the form is valid should save the preset", async () => 
 
   // 2 seconds after success, the onSuccess event handler should be called
   expect(onSuccessHandler).not.toHaveBeenCalled()
-  jest.advanceTimersByTime(2000)
+  vi.advanceTimersByTime(2000)
   expect(onSuccessHandler).toHaveBeenCalled()
 })
 

@@ -2,7 +2,7 @@ import RomajiInput, { RomajiInputProps } from "../../../../components/ui/fields/
 import { fireEvent, render, screen } from "@testing-library/react"
 import each from "jest-each"
 
-const onChangeHandler = jest.fn()
+const onChangeHandler = vi.fn()
 
 let props: RomajiInputProps
 

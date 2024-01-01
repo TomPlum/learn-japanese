@@ -44,7 +44,7 @@ describe("Maps Utility", () => {
   })
 
   describe("Shuffle", () => {
-    const shuffle = jest.fn()
+    const shuffle = vi.fn()
     Arrays.shuffle = shuffle
 
     it("Should shuffle the keys and values", () => {

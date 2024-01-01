@@ -10,20 +10,20 @@ import { FlashCard } from "../../../domain/learn/FlashCard"
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
-const mockGetKanjiFlashCards = jest.fn()
-const mockUpdateKanjiFlashCard = jest.fn()
-const mockGetDaysTillNextReview = jest.fn()
-jest.mock("../../../service/SpacedRepetitionService", () => {
-  return function () {
+const mockGetKanjiFlashCards = vi.fn()
+const mockUpdateKanjiFlashCard = vi.fn()
+const mockGetDaysTillNextReview = vi.fn()
+vi.mock("../../../service/SpacedRepetitionService", () => ({
+  default: function () {
     return {
       getKanjiFlashCards: mockGetKanjiFlashCards,
       update: mockUpdateKanjiFlashCard,
       getDaysTillNextReview: mockGetDaysTillNextReview
     }
   }
-})
+}))
 
-const onFinishHandler = jest.fn()
+const onFinishHandler = vi.fn()
 
 const srd = new SpaceRepetitionDetails(2.5, 0, 0, "2021-11-26")
 const one = new FlashCard(

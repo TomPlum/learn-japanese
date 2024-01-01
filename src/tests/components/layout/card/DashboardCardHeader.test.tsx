@@ -3,7 +3,7 @@ import DashboardCardHeader from "../../../../components/layout/card/DashboardCar
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 import DashboardCardLink from "../../../../components/layout/card/DashboardCardLink"
 
-const onReloadHandler = jest.fn()
+const onReloadHandler = vi.fn()
 
 test("Should render the children", () => {
   const component = render(

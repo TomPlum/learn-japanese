@@ -5,9 +5,9 @@ import { store } from "../../../store"
 import { clearUser } from "../../../slices/UserSlice"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
-jest.mock("../../../service/AuthenticationService")
+vi.mock("../../../service/AuthenticationService")
 
-const onSuccessHandler = jest.fn()
+const onSuccessHandler = vi.fn()
 const loginService = auth.login as jest.MockedFunction<() => Promise<LoginResponse>>
 let registeredUsername: string | undefined = undefined
 let infoMessage: string | undefined = undefined

@@ -3,7 +3,7 @@ import LifeSettingsForm from "../../../../components/settings/game/LifeSettingsF
 import { LifeSettingsBuilder } from "../../../../domain/session/settings/game/LifeSettings"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onChangeHandler = jest.fn()
+const onChangeHandler = vi.fn()
 
 const setup = () => {
   const component = renderWithTranslation(<LifeSettingsForm onChange={onChangeHandler} />)

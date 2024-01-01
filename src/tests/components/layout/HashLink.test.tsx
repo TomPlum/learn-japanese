@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
 import HashLink, { HashLinkProps } from "../../../components/layout/HashLink"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 let props: HashLinkProps
 

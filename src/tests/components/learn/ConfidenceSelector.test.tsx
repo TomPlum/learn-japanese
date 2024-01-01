@@ -10,15 +10,15 @@ import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/Space
 import { FlashCard } from "../../../domain/learn/FlashCard"
 import { testUser } from "../../../setupTests"
 
-const mockGetDaysTillNextReview = jest.fn()
-jest.mock("../../../service/SpacedRepetitionService", () => {
-  return function () {
+const mockGetDaysTillNextReview = vi.fn()
+vi.mock("../../../service/SpacedRepetitionService", () => ({
+  default: function () {
     return { getDaysTillNextReview: mockGetDaysTillNextReview }
   }
-})
+}))
 
 let props: ConfidenceSelectorProps
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 const setup = () => {
   const component = renderReduxConsumer(<ConfidenceSelector {...props} />)

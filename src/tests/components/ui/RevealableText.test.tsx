@@ -3,7 +3,7 @@ import RevealableText, { RevealableTextProps } from "../../../components/ui/Reve
 
 let props: RevealableTextProps
 
-const onRevealHandler = jest.fn()
+const onRevealHandler = vi.fn()
 
 beforeEach(() => {
   props = {

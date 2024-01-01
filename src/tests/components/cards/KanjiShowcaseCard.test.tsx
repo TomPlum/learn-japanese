@@ -11,13 +11,13 @@ import { setFont } from "../../../slices/FontSlice"
 import { fireEvent, screen } from "@testing-library/react"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
-const mockKanjiService = jest.fn()
+const mockKanjiService = vi.fn()
 
-jest.mock("../../../service/KanjiService", () => {
-  return function () {
+vi.mock("../../../service/KanjiService", () => ({
+  default: function () {
     return { randomKanji: mockKanjiService }
   }
-})
+}))
 
 const kanji = new Kanji(
   "魚",

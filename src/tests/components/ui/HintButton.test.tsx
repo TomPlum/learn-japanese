@@ -5,7 +5,7 @@ import KanaType from "../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../domain/kana/KanaColumn"
 import renderWithTranslation from "../../renderWithTranslation"
 
-const onUseHandler = jest.fn()
+const onUseHandler = vi.fn()
 
 let props: HintButtonProps
 

@@ -10,9 +10,9 @@ import renderWithTranslation from "../../../renderWithTranslation"
 
 let props: DataSettingsMenuProps<SentenceStructureSettings>
 
-const onResetHandler = jest.fn()
-const onQuitHandler = jest.fn()
-const onConfirmHandler = jest.fn()
+const onResetHandler = vi.fn()
+const onQuitHandler = vi.fn()
+const onConfirmHandler = vi.fn()
 
 beforeEach(() => {
   props = {

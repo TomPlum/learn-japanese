@@ -8,6 +8,10 @@ import "@testing-library/jest-dom"
 // It fixes the 'regeneratorRuntime is not defined` error when running a test that consumes the function.
 import "regenerator-runtime/runtime"
 
+afterEach(() => {
+  cleanup()
+})
+
 //Test Environment
 // TODO: Can we tell the test script to use the vite test mode?
 // import dotenv from "dotenv"
@@ -29,6 +33,7 @@ window.matchMedia =
 import sizeMe from "react-sizeme"
 import { ConfidenceMenuStyle } from "./domain/learn/spacedrepetition/ConfidenceMenuStyle"
 import { User } from "./slices/UserSlice"
+import { cleanup } from "@testing-library/react";
 sizeMe.noPlaceholders = true
 
 declare global {

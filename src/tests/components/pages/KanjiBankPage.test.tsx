@@ -8,12 +8,12 @@ import JLTPLevel from "../../../domain/learn/JLTPLevel"
 import renderReduxConsumer from "../../renderReduxConsumer"
 import { Example } from "../../../domain/kanji/Example"
 
-const mockGetKanji = jest.fn()
-jest.mock("../../../service/KanjiService", () => {
-  return function () {
+const mockGetKanji = vi.fn()
+vi.mock("../../../service/KanjiService", () => ({
+  default: function() {
     return { filter: mockGetKanji }
   }
-})
+}))
 
 const one = new Kanji(
   "一",

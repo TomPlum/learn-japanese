@@ -2,8 +2,8 @@ import { fireEvent, render } from "@testing-library/react"
 import DashboardCardLink from "../../../../components/layout/card/DashboardCardLink"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 
-const onClickHandler = jest.fn()
-const onMouseDownHandler = jest.fn()
+const onClickHandler = vi.fn()
+const onMouseDownHandler = vi.fn()
 
 test("Should render the given text", () => {
   const component = render(<DashboardCardLink text="Example Text" />)

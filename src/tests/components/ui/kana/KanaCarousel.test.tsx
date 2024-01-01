@@ -6,7 +6,7 @@ import { KanaColumn } from "../../../../domain/kana/KanaColumn"
 import Arrays from "../../../../utility/Arrays"
 
 beforeEach(() => {
-  Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
+  Arrays.getRandomObject = vi.fn().mockImplementation((array: any[]) => {
     const element = array[0]
     return [element, array.splice(1, array.length - 1)]
   })

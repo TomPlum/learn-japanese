@@ -2,8 +2,8 @@ import { fireEvent, screen } from "@testing-library/react"
 import ConfirmModal from "../../../components/ui/ConfirmModal"
 import renderWithTranslation from "../../renderWithTranslation"
 
-const onConfirmHandler = jest.fn()
-const onDismissHandler = jest.fn()
+const onConfirmHandler = vi.fn()
+const onDismissHandler = vi.fn()
 
 const setup = () => {
   const component = renderWithTranslation(

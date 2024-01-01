@@ -9,7 +9,7 @@ import React from "react"
 import LearnableField from "../../../../domain/learn/LearnableField"
 import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer"
 
-const isValidHandler = jest.fn()
+const isValidHandler = vi.fn()
 
 const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
 const i = new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
@@ -27,7 +27,7 @@ const setup = () => {
 }
 
 beforeEach(() => {
-  const mockShuffle = jest.fn()
+  const mockShuffle = vi.fn()
   Arrays.shuffle = mockShuffle
   mockShuffle.mockImplementationOnce((array: any[]) => {
     return array

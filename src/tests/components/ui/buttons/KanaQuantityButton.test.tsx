@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
 import KanaQuantityButton from "../../../../components/ui/buttons/KanaQuantityButton"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 test("Clicking the button should call the onClick event handler with the kana quantity", () => {
   const component = render(<KanaQuantityButton cards={2} selected={2} onClick={onClickHandler} />)

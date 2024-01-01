@@ -4,19 +4,19 @@ import authService from "../../../service/AuthenticationService"
 import each from "jest-each"
 import renderWithTranslation from "../../renderWithTranslation"
 
-const onSuccessHandler = jest.fn()
-const mockRegister = jest.fn()
-const mockUsernameEligible = jest.fn()
-const mockEmailEligible = jest.fn()
+const onSuccessHandler = vi.fn()
+const mockRegister = vi.fn()
+const mockUsernameEligible = vi.fn()
+const mockEmailEligible = vi.fn()
 
-jest.mock("../../../service/UserService", () => {
-  return function () {
+vi.mock("../../../service/UserService", () => ({
+  default: function () {
     return {
       usernameExists: mockUsernameEligible,
       emailAlreadyRegistered: mockEmailEligible
     }
   }
-})
+}))
 
 beforeEach(() => {
   authService.register = mockRegister

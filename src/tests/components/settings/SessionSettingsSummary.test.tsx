@@ -14,7 +14,7 @@ import { WizardStep } from "../../../components/layout/wizard/SessionWizard"
 import SessionSettingsSummary from "../../../components/settings/SessionSettingsSummary"
 import renderWithTranslation from "../../renderWithTranslation"
 
-const onSelectStageHandler = jest.fn()
+const onSelectStageHandler = vi.fn()
 
 const gameSettings = new GameSettingsBuilder()
 const dataSettings = new KanjiSettingsBuilder()

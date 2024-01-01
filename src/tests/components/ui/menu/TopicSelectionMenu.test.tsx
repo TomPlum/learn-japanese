@@ -6,7 +6,7 @@ import { setApplicationMode } from "../../../../slices/ModeSlice"
 import { AppMode } from "../../../../domain/AppMode"
 import renderReduxConsumer from "../../../renderReduxConsumer"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 beforeEach(() => {
   store.dispatch(setApplicationMode(AppMode.PLAY))

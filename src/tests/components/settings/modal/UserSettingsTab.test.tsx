@@ -3,19 +3,19 @@ import UserSettingsTab from "../../../../components/settings/modal/UserSettingsT
 import * as deviceDetect from "react-device-detect"
 import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer"
 
-const mockClearLocalStorage = jest.fn()
-jest.mock("../../../../service/LocalStorageService", () => {
-  return function () {
+const mockClearLocalStorage = vi.fn()
+vi.mock("../../../../service/LocalStorageService", () => ({
+  default: function () {
     return { clear: mockClearLocalStorage }
   }
-})
+}))
 
-const mockDeleteHighScoresData = jest.fn()
-jest.mock("../../../../service/HighScoresService", () => {
-  return function () {
+const mockDeleteHighScoresData = vi.fn()
+vi.mock("../../../../service/HighScoresService", () => ({
+  default: function () {
     return { delete: mockDeleteHighScoresData }
   }
-})
+}))
 
 beforeEach(() => {
   Object.defineProperty(deviceDetect, 'isFirefox', { get: () => false });

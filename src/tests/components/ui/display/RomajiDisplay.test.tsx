@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import RomajiDisplay from "../../../../components/ui/display/RomajiDisplay"
 import { Environment } from "../../../../utility/Environment"
 
-const environment = jest.fn()
+const environment = vi.fn()
 
 beforeEach(() => {
   Environment.variable = environment

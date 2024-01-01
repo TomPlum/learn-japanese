@@ -7,8 +7,8 @@ import renderWithTranslation from "../../renderWithTranslation"
 
 let props: UserFormProps
 
-const onCloseHandler = jest.fn()
-const mockRegister = jest.fn()
+const onCloseHandler = vi.fn()
+const mockRegister = vi.fn()
 
 beforeEach(() => {
   authService.register = mockRegister

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import TopicSelector from "../../../../../components/layout/wizard/form/TopicSelector"
 import Topic from "../../../../../domain/Topic"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 test("Should default selected topic to the one passed in", () => {
   const component = render(<TopicSelector topic={Topic.BASICS} onSelect={onSelectHandler} />)

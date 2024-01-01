@@ -4,14 +4,14 @@ import GenkiDefinition from "../../../domain/learn/GenkiDefinition"
 import { findByTextWithElements } from "../../Queries"
 import userEvent from "@testing-library/user-event"
 
-const mockGetAllVocab = jest.fn()
-jest.mock("../../../service/GenkiService", () => {
-  return function () {
+const mockGetAllVocab = vi.fn()
+vi.mock("../../../service/GenkiService", () => ({
+  default: function () {
     return { getAllVocab: mockGetAllVocab }
   }
-})
+}))
 
-const mockClipboard = jest.fn()
+const mockClipboard = vi.fn()
 Object.assign(navigator, { clipboard: { writeText: mockClipboard } })
 
 beforeEach(() => {
@@ -19,7 +19,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  jest.clearAllMocks()
+  vi.clearAllMocks()
 })
 
 const setup = () => {

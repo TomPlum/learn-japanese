@@ -7,8 +7,8 @@ import { faGraduationCap, faPencilAlt } from "@fortawesome/free-solid-svg-icons"
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings"
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
 
-const onClickItemHandler = jest.fn()
-const onEditHandler = jest.fn()
+const onClickItemHandler = vi.fn()
+const onEditHandler = vi.fn()
 
 let gridProps: GridDisplayProps
 let itemProps: GridItemProps<PlayMode>

@@ -1,12 +1,12 @@
 import FontService from "../../service/FontService"
 import { localStorageMock } from "../../setupTests"
 
-const mockFontRepository = jest.fn()
-jest.mock("../../repository/FontRepository", () => {
-  return function () {
+const mockFontRepository = vi.fn()
+vi.mock("../../repository/FontRepository", () => ({
+  default: function () {
     return { read: mockFontRepository }
   }
-})
+}))
 
 const fonts = [
   { displayName: "Default", name: "" },

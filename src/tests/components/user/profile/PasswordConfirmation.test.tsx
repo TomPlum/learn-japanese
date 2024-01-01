@@ -4,8 +4,8 @@ import PopOver from "../../../../components/ui/PopOver"
 import authService from "../../../../service/AuthenticationService"
 import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer"
 
-const onDismissHandler = jest.fn()
-const deleteAccountService = jest.fn()
+const onDismissHandler = vi.fn()
+const deleteAccountService = vi.fn()
 
 const deleteAccountPopover = (
   <PopOver

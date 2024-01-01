@@ -2,7 +2,7 @@ import { createEvent, fireEvent, screen } from "@testing-library/react"
 import EditorColumn from "../../../../components/layout/editor/EditorColumn"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const mockGetData = jest.fn()
+const mockGetData = vi.fn()
 
 beforeEach(() => {
   mockGetData.mockReset()
@@ -35,7 +35,7 @@ test("Should remove the dropping class when dragging out of the column", () => {
 test("Should add the hidden class to the picked card when starting to drag one", () => {
   renderWithTranslation(<EditorColumn defaultCards={[{ name: "test-card", size: "sm" }]} />)
   const card = screen.getByTestId("editor-card-test-card")
-  fireEvent(card, createEvent.dragStart(card, { dataTransfer: { setData: jest.fn() } }))
+  fireEvent(card, createEvent.dragStart(card, { dataTransfer: { setData: vi.fn() } }))
   expect(card).toHaveClass("hidden")
 })
 
@@ -49,6 +49,6 @@ test("Should not add the hidden class to the other cards when starting to drag o
     />
   )
   const card = screen.getByTestId("editor-card-test-card")
-  fireEvent(card, createEvent.dragStart(card, { dataTransfer: { setData: jest.fn() } }))
+  fireEvent(card, createEvent.dragStart(card, { dataTransfer: { setData: vi.fn() } }))
   expect(screen.getByTestId("editor-card-other-card")).not.toHaveClass("hidden")
 })

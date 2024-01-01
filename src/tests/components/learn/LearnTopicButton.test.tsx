@@ -5,7 +5,7 @@ import LearnMode from "../../../domain/session/LearnMode"
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const mode = new LearnMode(
   1,

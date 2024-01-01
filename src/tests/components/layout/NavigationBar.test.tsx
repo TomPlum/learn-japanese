@@ -10,7 +10,7 @@ import { testUser } from "../../../setupTests"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
 const history = createMemoryHistory()
-const onLaunchLoginModalHandler = jest.fn()
+const onLaunchLoginModalHandler = vi.fn()
 
 let props: NavigationBarProps
 

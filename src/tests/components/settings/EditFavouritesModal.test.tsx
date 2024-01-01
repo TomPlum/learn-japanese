@@ -6,27 +6,27 @@ import { fireEvent, screen, waitFor } from "@testing-library/react"
 import PresetBuilder from "../../../domain/session/PresetBuilder"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
-const scrollIntoViewMock = jest.fn()
+const scrollIntoViewMock = vi.fn()
 window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock
 
-const onSuccessHandler = jest.fn()
-const onDismissHandler = jest.fn()
+const onSuccessHandler = vi.fn()
+const onDismissHandler = vi.fn()
 
 const eventHandlers = {
   onSuccess: onSuccessHandler,
   onDismiss: onDismissHandler
 }
 
-const mockGetAllPresets = jest.fn()
-const mockUpdateFavourites = jest.fn()
-jest.mock("../../../service/PresetService", () => {
-  return function () {
+const mockGetAllPresets = vi.fn()
+const mockUpdateFavourites = vi.fn()
+vi.mock("../../../service/PresetService", () => ({
+  default: function () {
     return {
       getAllPresets: mockGetAllPresets,
       updateFavourites: mockUpdateFavourites
     }
   }
-})
+}))
 
 const playPreset = new PresetBuilder()
   .withID(1)

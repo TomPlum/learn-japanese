@@ -6,12 +6,12 @@ import { ReadingType } from "../../../../domain/kanji/ReadingType"
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
 import JLTPLevel from "../../../../domain/learn/JLTPLevel"
 
-const mockKanjiRepository = jest.fn()
-jest.mock("../../../../repository/KanjiRepository", () => {
-  return function () {
+const mockKanjiRepository = vi.fn()
+vi.mock("../../../../repository/KanjiRepository", () => ({
+  default: function () {
     return { getByValue: mockKanjiRepository }
   }
-})
+}))
 
 const kanji = new Kanji(
   "鳥",

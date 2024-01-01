@@ -2,7 +2,7 @@ import { fireEvent, screen } from "@testing-library/react"
 import ConfigTypeStep, { ConfigTypeStepProps } from "../../../../../components/layout/wizard/steps/ConfigTypeStep"
 import renderWithTranslation from "../../../../renderWithTranslation"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 let props: ConfigTypeStepProps
 

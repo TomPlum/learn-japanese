@@ -8,7 +8,7 @@ import { Example } from "../../../../domain/kanji/Example"
 import renderReduxConsumer from "../../../renderReduxConsumer"
 import JLTPLevel from "../../../../domain/learn/JLTPLevel"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const kanji = new Kanji(
   "人",

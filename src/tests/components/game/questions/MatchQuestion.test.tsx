@@ -5,7 +5,7 @@ import renderReduxConsumer from "../../../renderReduxConsumer"
 
 let props: MatchQuestionProps
 
-const isValidHandler = jest.fn()
+const isValidHandler = vi.fn()
 const ref = React.createRef<MatchQuestion>()
 
 beforeEach(() => {

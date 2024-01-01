@@ -4,11 +4,12 @@ import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/r
 import { store } from "../../../../store"
 import { addNotification, clearNotifications } from "../../../../slices/NotificationSlice"
 import { v4 } from "uuid"
+import { Mock } from "vitest";
 
-const mockUUID = v4 as jest.MockedFunction<typeof v4>
-jest.mock("uuid", () => ({
-  ...jest.requireActual("uuid"),
-  v4: jest.fn()
+const mockUUID = v4 as Mock
+vi.mock("uuid", () => ({
+  ...vi.importActual("uuid"),
+  v4: vi.fn()
 }))
 
 const setup = () => {

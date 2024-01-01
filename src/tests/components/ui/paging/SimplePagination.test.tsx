@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import SimplePagination, { SimplePaginationProps } from "../../../../components/ui/paging/SimplePagination"
 
 let props: SimplePaginationProps
-const onPageChangeHandler = jest.fn()
+const onPageChangeHandler = vi.fn()
 
 beforeEach(() => {
   props = {

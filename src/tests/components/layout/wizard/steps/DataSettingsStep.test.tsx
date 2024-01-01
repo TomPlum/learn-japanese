@@ -3,8 +3,8 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import Topic from "../../../../../domain/Topic"
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings"
 
-const onSelectHandler = jest.fn()
-const isValidHandler = jest.fn()
+const onSelectHandler = vi.fn()
+const isValidHandler = vi.fn()
 
 let props: DataSettingsStepProps
 

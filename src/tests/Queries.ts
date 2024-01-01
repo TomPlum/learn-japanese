@@ -1,4 +1,5 @@
 import { Matcher, screen } from "@testing-library/react"
+import { Mock } from "vitest";
 
 export const getByTextWithMarkup = (text: string) => {
   const hasText = (node: Element) => node.textContent === text
@@ -38,7 +39,7 @@ export const findAllByTextWithElements = async (text: string): Promise<HTMLEleme
  * @param fn A Jest Mock function
  * @return value of the first parameter
  */
-export const getValueLastCalledWith = <T>(fn: jest.Mock): T => {
+export const getValueLastCalledWith = <T>(fn: Mock): T => {
   const calls = fn.mock.calls
   const lastCall = calls[calls.length - 1]
   return lastCall[0] //First arg

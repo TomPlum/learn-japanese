@@ -10,14 +10,14 @@ import renderReduxConsumer from "../../../renderReduxConsumer"
 import { testUser } from "../../../../setupTests"
 import { fireEvent } from "@testing-library/react"
 
-const mockUpdatePreferences = jest.fn()
-jest.mock("../../../../service/UserService", () => {
-  return function () {
+const mockUpdatePreferences = vi.fn()
+vi.mock("../../../../service/UserService", () => ({
+  default: function() {
     return { updatePreferences: mockUpdatePreferences }
   }
-})
+}))
 
-const onErrorHandler = jest.fn()
+const onErrorHandler = vi.fn()
 
 let props: SettingsBooleanButtonProps
 

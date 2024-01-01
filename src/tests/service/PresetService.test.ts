@@ -7,15 +7,15 @@ import PresetBuilder from "../../domain/session/PresetBuilder"
 import { KanjiSettingsBuilder } from "../../domain/session/settings/data/KanjiSettings"
 import PlayMode from "../../domain/session/PlayMode"
 
-const mockGetAllPresets = jest.fn()
-const mockGetDefaultPresets = jest.fn()
-const mockFavouritePresets = jest.fn()
-const mockDeleteFavouritePreset = jest.fn()
-const mockUpdateFavouritePresets = jest.fn()
-const mockSavePlayPreset = jest.fn()
-const mockSaveLearnPreset = jest.fn()
-jest.mock("../../repository/PresetRepository", () => {
-  return function () {
+const mockGetAllPresets = vi.fn()
+const mockGetDefaultPresets = vi.fn()
+const mockFavouritePresets = vi.fn()
+const mockDeleteFavouritePreset = vi.fn()
+const mockUpdateFavouritePresets = vi.fn()
+const mockSavePlayPreset = vi.fn()
+const mockSaveLearnPreset = vi.fn()
+vi.mock("../../repository/PresetRepository", () => ({
+  default: function () {
     return {
       getAllPresets: mockGetAllPresets,
       getDefaultPresets: mockGetDefaultPresets,
@@ -26,7 +26,7 @@ jest.mock("../../repository/PresetRepository", () => {
       updateFavouritePresets: mockUpdateFavouritePresets
     }
   }
-})
+}))
 
 const playPreset = new PresetBuilder()
   .withID(2)

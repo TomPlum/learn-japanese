@@ -5,7 +5,7 @@ import { Router, Switch } from "react-router-dom"
 
 let props: ProtectedRouteProps
 const history = createMemoryHistory()
-const mockRender = jest.fn()
+const mockRender = vi.fn()
 
 beforeEach(() => {
   props = {

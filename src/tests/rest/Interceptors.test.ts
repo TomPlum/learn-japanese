@@ -7,10 +7,10 @@ import { Environment } from "../../utility/Environment"
 import api from "../../rest/API"
 import { testUser } from "../../setupTests"
 
-jest.mock("../../rest/API")
+vi.mock("../../rest/API")
 const mockApi = api as jest.MockedFunction<typeof api>
-const mockPost = jest.fn()
-const mockEnvironment = jest.fn()
+const mockPost = vi.fn()
+const mockEnvironment = vi.fn()
 
 beforeEach(() => {
   RestClient.post = mockPost

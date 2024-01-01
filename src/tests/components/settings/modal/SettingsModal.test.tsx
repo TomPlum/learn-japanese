@@ -6,14 +6,14 @@ import { Preference } from "../../../../domain/user/Preference"
 import { testUser } from "../../../../setupTests"
 import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer"
 
-const mockFontService = jest.fn()
-jest.mock("../../../../service/FontService", () => {
-  return function () {
+const mockFontService = vi.fn()
+vi.mock("../../../../service/FontService", () => ({
+  default: function () {
     return { getFonts: mockFontService }
   }
-})
+}))
 
-const onCloseHandler = jest.fn()
+const onCloseHandler = vi.fn()
 
 let props: SettingsModalProps
 

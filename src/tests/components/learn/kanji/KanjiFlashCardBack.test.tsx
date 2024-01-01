@@ -10,8 +10,8 @@ import { getByTextWithMarkup } from "../../../Queries"
 import renderReduxConsumer from "../../../renderReduxConsumer"
 import JLTPLevel from "../../../../domain/learn/JLTPLevel"
 
-const onClickHandler = jest.fn()
-const mockEnvironment = jest.fn()
+const onClickHandler = vi.fn()
+const mockEnvironment = vi.fn()
 
 const kanji = new Kanji(
   "人",

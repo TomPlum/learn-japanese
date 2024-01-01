@@ -4,8 +4,8 @@ import { Kana } from "../../../domain/kana/Kana"
 import KanaType from "../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../domain/kana/KanaColumn"
 
-const onPracticeHandler = jest.fn()
-const onDismissHandler = jest.fn()
+const onPracticeHandler = vi.fn()
+const onDismissHandler = vi.fn()
 
 let props: LearningResultScreenProps
 

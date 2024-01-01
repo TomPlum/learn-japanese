@@ -7,7 +7,7 @@ import userEvent from "@testing-library/user-event"
 import LearnableField from "../../../../domain/learn/LearnableField"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 const setup = () => {
   const component = renderWithTranslation(<QuestionSettingsForm onChange={onSelectHandler} />)

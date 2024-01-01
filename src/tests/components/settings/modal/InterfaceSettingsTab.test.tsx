@@ -6,21 +6,21 @@ import { localStorageMock, testUser } from "../../../../setupTests"
 import { setFont } from "../../../../slices/FontSlice"
 import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer"
 
-const onEditDashboardLayoutHandler = jest.fn()
+const onEditDashboardLayoutHandler = vi.fn()
 
-const mockFontService = jest.fn()
-jest.mock("../../../../service/FontService", () => {
-  return function () {
+const mockFontService = vi.fn()
+vi.mock("../../../../service/FontService", () => ({
+  default: function () {
     return { getFonts: mockFontService }
   }
-})
+}))
 
-const mockUpdatePreferences = jest.fn()
-jest.mock("../../../../service/UserService", () => {
-  return function () {
+const mockUpdatePreferences = vi.fn()
+vi.mock("../../../../service/UserService", () => ({
+  default: function () {
     return { updatePreferences: mockUpdatePreferences }
   }
-})
+}))
 
 beforeEach(() => {
   store.dispatch(setUser(testUser))

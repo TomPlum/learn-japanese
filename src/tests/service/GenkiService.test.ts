@@ -2,7 +2,7 @@ import RestClient from "../../rest/RestClient"
 import GenkiService from "../../service/GenkiService"
 import GenkiDefinition from "../../domain/learn/GenkiDefinition"
 
-const mockGet = jest.fn()
+const mockGet = vi.fn()
 
 beforeEach(() => {
   RestClient.get = mockGet

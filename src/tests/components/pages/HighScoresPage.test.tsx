@@ -6,19 +6,19 @@ import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-l
 import { Router } from "react-router-dom"
 import { createMemoryHistory } from "history"
 
-const mockGetHighScoreEntriesPage = jest.fn()
-jest.mock("../../../service/HighScoresService", () => {
-  return function () {
+const mockGetHighScoreEntriesPage = vi.fn()
+vi.mock("../../../service/HighScoresService", () => ({
+  default: function () {
     return { getAllEntriesPage: mockGetHighScoreEntriesPage }
   }
-})
+}))
 
-const mockGetPublicUsers = jest.fn()
-jest.mock("../../../service/UserService", () => {
-  return function () {
+const mockGetPublicUsers = vi.fn()
+vi.mock("../../../service/UserService", () => ({
+  default: function () {
     return { getPublicUsers: mockGetPublicUsers }
   }
-})
+}))
 
 let history = createMemoryHistory()
 

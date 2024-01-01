@@ -3,7 +3,7 @@ import { faApple } from "@fortawesome/free-brands-svg-icons"
 import { SettingsType } from "../../../../components/settings/modal/SettingsModal"
 import { fireEvent, render } from "@testing-library/react"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 let props: SettingsTabProps
 

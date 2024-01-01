@@ -1,11 +1,11 @@
 import MessageQueue from "../../rest/MessageQueue"
 import RestClient from "../../rest/RestClient"
 
-const mockRestClient = jest.fn()
+const mockRestClient = vi.fn()
 
 beforeEach(() => {
   localStorage.removeItem("mq")
-  jest.useFakeTimers()
+  vi.useFakeTimers()
   RestClient.send = mockRestClient
 })
 
@@ -95,10 +95,10 @@ test("After enqueuing a message, it should automatically resolve it after 5 seco
   MessageQueue.fromLocalStorage()
 
   // Let's wait 4 seconds first, it shouldn't have resolved at this point
-  jest.advanceTimersByTime(4000)
+  vi.advanceTimersByTime(4000)
   expect(mockRestClient).not.toHaveBeenCalled()
 
   // Advance another second to make it 5
-  jest.advanceTimersByTime(1000)
+  vi.advanceTimersByTime(1000)
   expect(mockRestClient).toHaveBeenCalledWith("POST", "/update", { value: 1 })
 })

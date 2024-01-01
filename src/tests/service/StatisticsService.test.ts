@@ -1,7 +1,7 @@
 import RestClient from "../../rest/RestClient"
 import StatisticsService from "../../service/StatisticsService"
 
-const mockDelete = jest.fn()
+const mockDelete = vi.fn()
 
 beforeEach(() => {
   RestClient.delete = mockDelete

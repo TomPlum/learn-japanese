@@ -1,14 +1,15 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import NotificationDisplay, { NotificationDisplayProps } from "../../../../components/ui/display/NotificationDisplay"
 import { NotificationType } from "../../../../slices/NotificationSlice"
+import { VitestUtils } from "vitest";
 
-const onDismissHandler = jest.fn()
-let mockDate: typeof jest
+const onDismissHandler = vi.fn()
+let mockDate: VitestUtils
 
 let props: NotificationDisplayProps
 
 beforeEach(() => {
-  mockDate = jest.useFakeTimers()
+  mockDate = vi.useFakeTimers()
 
   props = {
     id: "1",

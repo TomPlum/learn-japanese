@@ -9,20 +9,20 @@ import { store } from "../../../../../store"
 import { testUser } from "../../../../../setupTests"
 import renderTranslatedReduxConsumer from "../../../../renderTranslatedReduxConsumer"
 
-const onSelectStageHandler = jest.fn()
+const onSelectStageHandler = vi.fn()
 
-const mockPresetService = jest.fn()
-jest.mock("../../../../../service/PresetService", () => {
-  return function () {
+const mockPresetService = vi.fn()
+vi.mock("../../../../../service/PresetService", () => ({
+  default: function () {
     return { saveCustomPreset: mockPresetService }
   }
-})
+}))
 
 const dataSettings = new KanjiSettingsBuilder()
 let settings: SessionSettings
 
 beforeEach(() => {
-  jest.useFakeTimers()
+  vi.useFakeTimers()
 })
 
 afterEach(() => {
@@ -86,7 +86,7 @@ test("Clicking the save button in the save preset form should hide the form and 
   // Click save and wait 2 seconds
   fireEvent.click(screen.getByText("Save"))
   expect(await screen.findByText('Saved "My Preset" successfully.')).toBeInTheDocument()
-  jest.advanceTimersByTime(2000)
+  vi.advanceTimersByTime(2000)
 
   // The save preset button should not re-render and the accordion should have collapsed
   expect(screen.queryByText("Save Preset")).not.toBeInTheDocument()
