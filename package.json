@@ -95,7 +95,7 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.11",
     "@types/jest-when": "^3.5.5",
-    "@types/node": "^18.0.6",
+    "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-bootstrap-range-slider": "^1.2.4",
     "@types/react-color": "^3.0.6",
