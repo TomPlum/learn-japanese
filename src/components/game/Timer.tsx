@@ -1,115 +1,111 @@
-import { Component } from "react"
+import React, { useEffect, useImperativeHandle, useState } from "react";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from "../../styles/sass/components/game/Timer.module.scss"
 
 export interface TimerProps {
-  end?: number
   className?: string
   pausable?: boolean
   onPaused?: () => void
 }
 
-interface TimerState {
-  start: number
-  current: number
-  interval: any
-  paused: boolean
-  isStopped: boolean
+export interface TimerHandle {
+  start: () => void
+  pause: () => void
+  stop: () => void
+  restart: () => void
+  getCurrentTime: () => string
 }
 
-class Timer extends Component<TimerProps, TimerState> {
-  constructor(props: TimerProps | Readonly<TimerProps>) {
-    super(props)
-    this.state = {
-      start: Date.now(),
-      current: Date.now(),
-      interval: undefined,
-      paused: false,
-      isStopped: false
+
+const Timer = React.forwardRef(({ pausable, onPaused, className }: TimerProps, ref: React.Ref<TimerHandle>) => {
+  const [start, setStart] = useState(Date.now())
+  const [current, setCurrent] = useState(Date.now())
+  const interval = React.useRef<NodeJS.Timeout>()
+  const [paused, setPaused] = useState(false)
+  const [isStopped, setIsStopped] = useState(false)
+
+  const startTimer = () => {
+    interval.current = setInterval(tick, 1000)
+    setPaused(false)
+    setIsStopped(false)
+  }
+
+  const stop = () => {
+    setPaused(true)
+    setIsStopped(true)
+    clearInterval(interval.current)
+  }
+
+  useImperativeHandle(ref, () => ({
+    start: startTimer,
+    stop,
+    pause,
+    restart: () => {
+      setStart(Date.now())
+      setCurrent(Date.now())
+      clearInterval(interval.current) // TODO: Was setInterval(undefined) in state?
+      setPaused(false)
+      setIsStopped(false)
+      startTimer()
+    },
+    getCurrentTime: () => formatTimeElapsed()
+  }))
+
+  const pause = () => {
+    console.log('Paused')
+    onChangePausedState()
+    setPaused(true)
+    clearInterval(interval.current)
+  }
+
+  const play = () => {
+    onChangePausedState()
+    interval.current = setInterval(tick, 1000)
+    setPaused(false)
+  }
+
+  const tick = () => setCurrent(currentValue => currentValue + 1000)
+
+  const onChangePausedState = () => {
+    if (onPaused) {
+      onPaused()
     }
   }
 
-  componentDidMount() {
-    this.start()
-  }
-
-  componentWillUnmount() {
-    this.stop()
-  }
-
-  render() {
-    const { paused, isStopped } = this.state
-    const { className, pausable } = this.props
-
-    return (
-      <div className={[className, styles.wrapper].join(" ")}>
-        {pausable && !isStopped && (
-          <FontAwesomeIcon
-            size="sm"
-            fixedWidth
-            className={styles.icon}
-            title={paused ? "Play" : "Pause"}
-            icon={paused ? faPlay : faPause}
-            onClick={paused ? this.play : this.pause}
-          />
-        )}
-
-        <span className={styles.time}>{this.formatTimeElapsed()}</span>
-      </div>
-    )
-  }
-
-  stop = () => {
-    this.setState({ paused: true, isStopped: true })
-    clearInterval(this.state.interval)
-  }
-
-  restart = () => {
-    this.setState(
-      {
-        start: Date.now(),
-        current: Date.now(),
-        interval: undefined,
-        paused: false,
-        isStopped: false
-      },
-      () => this.start()
-    )
-  }
-
-  getCurrentTime = () => this.formatTimeElapsed()
-
-  start = () => {
-    this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false, isStopped: false })
-  }
-
-  pause = () => {
-    this.onChangePausedState()
-    this.setState({ paused: true })
-    clearInterval(this.state.interval)
-  }
-
-  private play = () => {
-    this.onChangePausedState()
-    this.setState({ interval: setInterval(() => this.tick(), 1000), paused: false })
-  }
-
-  private tick = () => this.setState({ current: this.state.current + 1000 })
-
-  private onChangePausedState = () => {
-    if (this.props.onPaused) this.props.onPaused()
-  }
-
-  private formatTimeElapsed(): string {
-    const { start, current } = this.state
+  const formatTimeElapsed = (): string => {
     const delta = current - start
     const date = new Date(1000 * Math.round(delta / 1000))
     const hours = date.getUTCHours()
-    return (hours ? hours + ":" : "") + this.pad(date.getUTCMinutes()) + ":" + this.pad(date.getUTCSeconds())
+    return (hours ? hours + ":" : "") + pad(date.getUTCMinutes()) + ":" + pad(date.getUTCSeconds())
   }
 
-  private pad = (value: number) => ("0" + value).slice(-2)
-}
+  const pad = (value: number) => ("0" + value).slice(-2)
+
+  useEffect(() => {
+    startTimer()
+
+    return stop
+  }, [])
+
+  return (
+    <div className={[className, styles.wrapper].join(" ")}>
+      {pausable && !isStopped && (
+        <FontAwesomeIcon
+          size="sm"
+          fixedWidth
+          className={styles.icon}
+          title={paused ? "Play" : "Pause"}
+          icon={paused ? faPlay : faPause}
+          onClick={paused ? play : pause}
+        />
+      )}
+
+      <span className={styles.time}>{formatTimeElapsed()}</span>
+    </div>
+  )
+})
+
+Timer.displayName = 'Timer'
 
 export default Timer

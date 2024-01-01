@@ -1,5 +1,3 @@
-import React from "react"
-
 export interface KeyWordDataSummaryProps {
   words: string[]
   className?: string

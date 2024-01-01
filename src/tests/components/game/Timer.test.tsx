@@ -1,17 +1,6 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
-import Timer from "../../../components/game/Timer"
+import Timer, { TimerHandle } from "../../../components/game/Timer";
 import React from "react"
-
-beforeAll(() => {
-  const _jest = globalThis.jest;
-
-  globalThis.jest = {
-    ...globalThis.jest,
-    advanceTimersByTime: vi.advanceTimersByTime.bind(vi)
-  };
-
-  return () => void (globalThis.jest = _jest);
-})
 
 beforeEach(() => {
   vi.useFakeTimers({ shouldAdvanceTime: true })
@@ -86,6 +75,7 @@ test("After n seconds where n < 60, the timer text should render the current sec
   await waitFor(() => expect(screen.getByText("00:34")).toBeInTheDocument())
 })
 
+
 test("After n seconds where n > 60 and < 3600, the timer text should render the current seconds elapsed", async () => {
   render(<Timer />)
   await act(() => vi.advanceTimersByTime(62000))
@@ -99,32 +89,32 @@ test("After an hour has passed, the timer text should render the current time in
 })
 
 test("Invoking restart should reset the timer to 00:00", async () => {
-  const timer = React.createRef<Timer>()
+  const timer = React.createRef<TimerHandle>()
   render(<Timer ref={timer} />)
 
   await act(() => vi.advanceTimersByTime(5000))
   expect(await screen.findByText("00:05")).toBeInTheDocument()
 
-  timer.current?.restart()
+  act(() => timer.current?.restart())
 
   expect(await screen.findByText("00:00")).toBeInTheDocument()
 })
 
 test("Invoking stop should pause the timer", async () => {
-  const timer = React.createRef<Timer>()
+  const timer = React.createRef<TimerHandle>()
   render(<Timer ref={timer} />)
 
   await act(() => vi.advanceTimersByTime(5000))
   expect(await screen.findByText("00:05")).toBeInTheDocument()
 
-  timer.current?.stop()
+  act(() => timer.current?.stop())
   await act(() => vi.advanceTimersByTime(1000))
 
   expect(await screen.findByText("00:05")).toBeInTheDocument()
 })
 
 test("Invoking getCurrentTime should return the current time string", () => {
-  const timer = React.createRef<Timer>()
+  const timer = React.createRef<TimerHandle>()
   render(<Timer ref={timer} />)
 
   act(() => vi.advanceTimersByTime(5000))

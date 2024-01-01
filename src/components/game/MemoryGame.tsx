@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ButtonGroup, Col, Container, Row } from "react-bootstrap"
-import Timer from "./Timer"
+import Timer, { TimerHandle } from "./Timer";
 import LifeDisplay from "./LifeDisplay"
 import QuitButton from "../ui/buttons/QuitButton"
 import GameResult from "../../domain/game/GameResult"
@@ -52,7 +52,7 @@ export type MemoryGameQuestion = {
 const MemoryGame = (props: MemoryGameProps) => {
   const { data, settings, onFinish } = props
 
-  const timerRef = useRef<Timer>(null)
+  const timerRef = useRef<TimerHandle>(null)
   const countdownRef = useRef<CountDown>(null)
   const questionRef = useRef<any>(null) // TODO: Can we type as GameQuestion here?
 
