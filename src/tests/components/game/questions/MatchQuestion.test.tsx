@@ -36,15 +36,15 @@ const setup = () => {
 test("Answering all questions correctly should cause isCorrect() to return true", () => {
   const { questionOne, questionTwo, questionThree, answerOne, answerTwo, answerThree } = setup()
 
-  //Drag Question 1 -> Answer 1
+  // Drag Question 1 -> Answer 1
   fireEvent.mouseDown(questionOne)
   fireEvent.mouseUp(answerOne)
 
-  //Drag Question 2 -> Answer 2
+  // Drag Question 2 -> Answer 2
   fireEvent.mouseDown(questionTwo)
   fireEvent.mouseUp(answerTwo)
 
-  //Drag Question 3 -> Answer 3
+  // Drag Question 3 -> Answer 3
   fireEvent.mouseDown(questionThree)
   fireEvent.mouseUp(answerThree)
 

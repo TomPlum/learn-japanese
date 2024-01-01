@@ -48,7 +48,7 @@ beforeEach(() => {
   Environment.variable = environment
 
   // Mock timers
-  vi.useFakeTimers()
+  vi.useFakeTimers({ shouldAdvanceTime: true })
 
   // Mock window size
   matchMediaPolyfill(window)

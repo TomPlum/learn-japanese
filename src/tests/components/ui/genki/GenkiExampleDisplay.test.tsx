@@ -149,7 +149,7 @@ test("Should render the incorrect x-symbol when the incorrect property is passed
   const component = render(
     <GenkiExampleDisplay
       book={2}
-      incorrect={true}
+      incorrect
       jp={{ text: "このりんごはおいしそうです。" }}
       en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
     />
@@ -171,24 +171,24 @@ test("Should NOT render the incorrect x-symbol when the incorrect property is pa
   expect(component.queryByTestId("incorrect-example")).not.toBeInTheDocument()
 })
 
-test("Should render the english text with marginLeft 20px if the incorrect prop is passed as true", () => {
+test("Should render the english text with marginLeft 25px if the incorrect prop is passed as true", () => {
   const component = render(
     <GenkiExampleDisplay
       book={2}
-      incorrect={true}
+      incorrect
       jp={{ text: "このりんごはおいしそうです。" }}
       en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
     />
   )
 
-  expect(component.getByTestId("genki-example-en")).toHaveStyle({ marginLeft: "20px" })
+  expect(component.getByTestId("genki-example-en")).toHaveStyle({ marginLeft: "25px" })
 })
 
 test("Should render the comparison text with marginLeft 25px if the incorrect prop is passed as true", () => {
   const component = render(
     <GenkiExampleDisplay
       book={2}
-      incorrect={true}
+      incorrect
       jp={{ text: "このりんごはおいしそうです。" }}
       en={{ text: "This apple looks delicious.", underline: new FirstMatch("looks") }}
       compare={{ text: "comparison text.", underline: new FirstMatch("text") }}

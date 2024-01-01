@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import { Component } from "react"
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from "../../styles/sass/components/game/Timer.module.scss"

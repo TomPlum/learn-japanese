@@ -16,6 +16,7 @@ import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/Q
 import LearnableField from "../../../domain/learn/LearnableField"
 import renderReduxConsumer from "../../renderReduxConsumer"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
+import userEvent from "@testing-library/user-event";
 
 // Mock Event Handlers
 const onFinishHandler = vi.fn()
@@ -85,7 +86,7 @@ beforeEach(() => {
   // Mock Audio - Promise returns undefined otherwise
   playAudio.mockResolvedValue(vi.fn())
 
-  vi.useFakeTimers()
+  vi.useFakeTimers({ shouldAdvanceTime: true })
 })
 
 afterEach(() => {
@@ -840,7 +841,7 @@ test("Failing to correctly answer the question before the countdown finishes sho
   vi.advanceTimersByTime(6000)
 
   // The hint quantity should be reduced by 1
-  fireEvent.click(screen.getByTestId("hint-button"))
+  await userEvent.click(screen.getByTestId("hint-button"))
   expect(await screen.findByText("Need a hint? (4/5 remaining)")).toBeInTheDocument()
 })
 

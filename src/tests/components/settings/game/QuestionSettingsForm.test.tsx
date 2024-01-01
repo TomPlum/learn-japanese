@@ -111,31 +111,45 @@ test("The answer field should default to kana", () => {
   expect(answerFieldSelector).toHaveDisplayValue("Kana")
 })
 
-test("Selecting a question field value should remove it from the answer field selector", () => {
+test("Selecting a question field value should remove it from the answer field selector", async () => {
   const { questionFieldSelector, answerFieldSelector } = setup()
-  userEvent.selectOptions(questionFieldSelector, "Japanese")
-  expect(() => userEvent.selectOptions(answerFieldSelector, "Japanese")).toThrow(
-    'Value "Japanese" not found in options'
-  )
+  await userEvent.selectOptions(questionFieldSelector, "Japanese")
+  expect(questionFieldSelector).toHaveValue('learnable.field.japanese.name')
+
+  try {
+    // The Japanese option should not exist since the question field selector
+    // has it set above
+    await userEvent.selectOptions(answerFieldSelector, "Japanese")
+  } catch {
+    // It should not have changed and stay as its default kana value
+    expect(answerFieldSelector).toHaveValue('learnable.field.kana.name')
+  }
 })
 
-test("Selecting an answer field value should remove it from the question field selector", () => {
+test("Selecting an answer field value should remove it from the question field selector", async () => {
   const { questionFieldSelector, answerFieldSelector } = setup()
-  userEvent.selectOptions(answerFieldSelector, "English Meaning")
-  expect(() => userEvent.selectOptions(questionFieldSelector, "English Meaning")).toThrow(
-    'Value "English Meaning" not found in options'
-  )
+  await userEvent.selectOptions(answerFieldSelector, "English Meaning")
+  expect(answerFieldSelector).toHaveValue('learnable.field.meaning.name')
+
+  try {
+    // The English Meaning option should not exist since the answer field selector
+    // has it set above
+    await userEvent.selectOptions(questionFieldSelector, "English Meaning")
+  } catch {
+    // It should not have changed and stay as its default romaji value
+    expect(questionFieldSelector).toHaveValue('learnable.field.romaji.name')
+  }
 })
 
-test("Changing the question field should call the onSelect event handler with the updated settings", () => {
+test("Changing the question field should call the onSelect event handler with the updated settings", async () => {
   const { questionFieldSelector } = setup()
-  userEvent.selectOptions(questionFieldSelector, "English Meaning")
+  await userEvent.selectOptions(questionFieldSelector, "English Meaning")
   expect(getValueLastCalledWith<QuestionSettings>(onSelectHandler).questionField).toBe(LearnableField.MEANING)
 })
 
-test("Changing the answer field should call the onSelect event handler with the updated settings", () => {
+test("Changing the answer field should call the onSelect event handler with the updated settings", async () => {
   const { answerFieldSelector } = setup()
-  userEvent.selectOptions(answerFieldSelector, "On'Yomi Reading")
+  await userEvent.selectOptions(answerFieldSelector, "On'Yomi Reading")
   expect(getValueLastCalledWith<QuestionSettings>(onSelectHandler).answerField).toBe(LearnableField.ONYOMI_READING)
 })
 

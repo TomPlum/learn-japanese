@@ -91,7 +91,6 @@
     "@testing-library/jest-dom": "6.1.6",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.2",
-    "@types/jest": "^29.5.11",
     "@types/jest-when": "^3.5.5",
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
@@ -114,7 +113,6 @@
     "eslint": "^8.32.0",
     "eslint-plugin-react": "^7.32.1",
     "gh-pages": "^3.1.0",
-    "jest-silent-reporter": "^0.5.0",
     "jest-when": "^3.6.0",
     "jsdom": "^23.0.1",
     "mq-polyfill": "^1.1.8",
@@ -124,7 +122,6 @@
     "react-select-event": "^5.3.0",
     "redux-mock-store": "^1.5.4",
     "sass": "^1.69.6",
-    "ts-jest": "^29.1.1",
     "vite": "^5.0.10",
     "vite-plugin-node-polyfills": "^0.19.0",
     "vitest": "^1.1.1"
@@ -139,6 +136,10 @@
     },
     "msw": {
       "typescript": "$typescript"
+    },
+    "react-lineto": {
+      "react": "$react",
+      "react-dom": "$react-dom"
     }
   }
 }

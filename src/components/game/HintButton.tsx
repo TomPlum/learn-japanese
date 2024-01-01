@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLightbulb as solidBulb } from "@fortawesome/free-solid-svg-icons"
 import { faLightbulb as regularBulb } from "@fortawesome/free-regular-svg-icons"

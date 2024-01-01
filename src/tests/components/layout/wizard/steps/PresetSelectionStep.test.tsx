@@ -189,6 +189,9 @@ test("It should select the first preset if one is not passed as selected", async
 test("It should call the isValid event handler with false if the get all presets call fails", async () => {
   store.dispatch(setUser(testUser))
   mockGetAllPresets.mockResolvedValueOnce({ error: "Whoops." })
+
   setup()
-  expect(await isValidHandler).toHaveBeenLastCalledWith(false)
+
+  await waitFor(() => expect(isValidHandler).toHaveBeenCalledTimes(2))
+  expect(isValidHandler).toHaveBeenLastCalledWith(false)
 })

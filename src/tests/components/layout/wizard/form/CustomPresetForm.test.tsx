@@ -29,7 +29,7 @@ const setup = () => {
 }
 
 beforeEach(() => {
-  vi.useFakeTimers()
+  vi.useFakeTimers({ shouldAdvanceTime: true })
 
   props = {
     settings: settings,
