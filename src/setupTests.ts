@@ -9,8 +9,9 @@ import "@testing-library/jest-dom"
 import "regenerator-runtime/runtime"
 
 //Test Environment
-import dotenv from "dotenv"
-dotenv.config({ path: "./.env.test" })
+// TODO: Can we tell the test script to use the vite test mode?
+// import dotenv from "dotenv"
+// dotenv.config({ path: "./.env.test" })
 
 //Fixes Jest error.
 //See: https://github.com/akiran/react-slick/issues/742#issuecomment-298992238

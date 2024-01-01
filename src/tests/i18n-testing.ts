@@ -2,8 +2,8 @@ import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 import detector from "i18next-browser-languagedetector"
 import Backend from "i18next-http-backend"
-import english from "../../public/locales/en/translation.json"
-import japanese from "../../public/locales/jp/translation.json"
+import english from "locales/en/translation.json"
+import japanese from "locales/jp/translation.json"
 
 i18n
   .use(detector)
