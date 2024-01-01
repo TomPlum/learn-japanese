@@ -7,25 +7,27 @@ import ConditionalWrapper from "../ConditionalWrapper"
 import ScrollableContainer from "../ScrollableContainer"
 import styles from "../../../styles/sass/components/ui/select/ValueSelector.module.scss"
 
-export interface ValueSelectorOption<D, V> {
-  value: V
-  display: D
+export type ValueSelectorValue = any
+
+export interface ValueSelectorOption {
+  value: ValueSelectorValue
+  display: ValueSelectorValue
 }
 
-export interface ValueSelectorProps<D, V> {
+export interface ValueSelectorProps {
   id: string
   prefix?: string
-  values: ValueSelectorOption<D, V>[]
-  selected: V
+  values: ValueSelectorOption[]
+  selected: ValueSelectorValue
   disabled?: boolean
   className?: string
   itemClassName?: string
   placement?: Placement
   showBeforeScrolling?: number
-  onChange: (value: V) => void
+  onChange: (value: ValueSelectorValue) => void
 }
 
-const ValueSelector = <D, V>(props: ValueSelectorProps<D, V>) => {
+const ValueSelector = (props: ValueSelectorProps) => {
   const { id, prefix, values, selected, disabled, placement, className, itemClassName, showBeforeScrolling, onChange } =
     props
 
@@ -33,7 +35,7 @@ const ValueSelector = <D, V>(props: ValueSelectorProps<D, V>) => {
   const targetRef = useRef(null)
   const [show, setShow] = useState(false)
 
-  const handleChange = (option: ValueSelectorOption<D, V>) => {
+  const handleChange = (option: ValueSelectorOption) => {
     setShow(false)
     onChange(option.value)
   }

@@ -1,10 +1,10 @@
-import { Component } from "react"
+import { Component, ReactNode } from "react";
 import { Popover } from "react-bootstrap"
 import styles from "../../styles/sass/components/ui/PopOver.module.scss"
 
 export interface PopOverProps {
-  title: Element | JSX.Element | string
-  text: Element | JSX.Element | string
+  title: ReactNode | string
+  text: ReactNode | string
   className?: string
 }
 

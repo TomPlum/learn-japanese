@@ -79,7 +79,7 @@ class RestClient {
           status: response.status
         }
       })
-      .catch((e: AxiosError) => {
+      .catch((e: AxiosError<APIResponse<any>>) => {
         //console.log("An error occurred while making a request to " + endpoint, e);
         if (e.response) {
           if (e.response.status === 401) {

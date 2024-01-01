@@ -3,12 +3,12 @@ import styles from "../../styles/sass/components/learn/GrammarInfo.module.scss"
 import PageNumber from "../../domain/learn/PageNumber"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronDown, faChevronUp, faHashtag } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
+import { ReactNode, useState } from "react";
 
 export interface GrammarInfoProps {
   id?: string
   title: string
-  body: Element | JSX.Element | string
+  body: ReactNode | string
   chapter: number
   section: number
   page?: PageNumber

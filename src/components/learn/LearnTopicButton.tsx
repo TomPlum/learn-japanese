@@ -29,6 +29,8 @@ class LearnTopicButton extends Component<LearnTopicButtonProps> {
 
         {!this.isFontAwesomeIcon() && (
           <span className={styles.textIcon} style={{ color: colour }}>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-ignore */}
             {icon}
           </span>
         )}

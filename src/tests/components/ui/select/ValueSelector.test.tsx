@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event"
 
 const onChangeHandler = jest.fn()
 
-let props: ValueSelectorProps<number, number>
+let props: ValueSelectorProps
 
 beforeEach(() => {
   props = {

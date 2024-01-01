@@ -15,7 +15,7 @@ beforeEach(() => {
 test("Should render the landing page layout", async () => {
   createBrowserHistory().push("/example-base-path/")
   render(
-    <BrowserRouter>
+    <BrowserRouter >
       <LearnJapanese store={store} />
     </BrowserRouter>
   )

@@ -8,7 +8,7 @@ let mockDate: typeof jest
 let props: NotificationDisplayProps
 
 beforeEach(() => {
-  mockDate = jest.useFakeTimers("modern")
+  mockDate = jest.useFakeTimers()
 
   props = {
     id: "1",
