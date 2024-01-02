@@ -3,7 +3,7 @@ import { fireEvent, render } from "@testing-library/react"
 import NumbersFlashCardBack from "../../../../components/learn/numbers/NumbersFlashCardBack"
 import { getByTextWithMarkup } from "../../../Queries"
 
-const onResetHandler = jest.fn()
+const onResetHandler = vi.fn()
 
 const number = new CommonData("0", ["れい", "ゼロ", "マル"], "一", "Number", "0")
 

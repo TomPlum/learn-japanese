@@ -28,7 +28,7 @@ beforeEach(() => {
   }
 })
 
-const onCloseHandler = jest.fn()
+const onCloseHandler = vi.fn()
 
 const setup = () => {
   const component = renderTranslatedReduxConsumer(<GameResultScreen onClose={onCloseHandler} result={result} />)

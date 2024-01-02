@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import IconPicker from "../../../../../components/ui/menu/icon/IconPicker"
 import { Numbers } from "../../../../../utility/Numbers"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 const setup = () => {
   const component = render(<IconPicker onSelect={onSelectHandler} />)
@@ -61,7 +61,7 @@ test("Search for an icon that does not exist should render a message", async () 
 
 test("Clicking the random button should select a random icon", async () => {
   // Set the random
-  Numbers.randomInt = jest.fn().mockReturnValueOnce(5) // Index 5 is FaAdversal
+  Numbers.randomInt = vi.fn().mockReturnValueOnce(5) // Index 5 is FaAdversal
 
   // Should start as the default icon
   const { button } = setup()

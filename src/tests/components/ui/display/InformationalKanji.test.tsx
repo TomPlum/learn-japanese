@@ -4,14 +4,14 @@ import { Kanji } from "../../../../domain/kanji/Kanji"
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
 import JLTPLevel from "../../../../domain/learn/JLTPLevel"
 
-jest.mock("../../../../repository/KanjiRepository")
+vi.mock("../../../../repository/KanjiRepository")
 
-const mockKanjiRepository = jest.fn()
-jest.mock("../../../../repository/KanjiRepository", () => {
-  return function () {
+const mockKanjiRepository = vi.fn()
+vi.mock("../../../../repository/KanjiRepository", () => ({
+  default: function () {
     return { getByValue: mockKanjiRepository }
   }
-})
+}))
 
 const setup = () => {
   const component = render(<InformationalKanji value="猫" />)

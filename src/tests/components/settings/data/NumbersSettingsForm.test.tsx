@@ -6,10 +6,10 @@ import { faApple } from "@fortawesome/free-brands-svg-icons"
 import { getValueLastCalledWith } from "../../../Queries"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onConfirmHandler = jest.fn()
-const onResetHandler = jest.fn()
-const onQuitHandler = jest.fn()
-const isValidHandler = jest.fn()
+const onConfirmHandler = vi.fn()
+const onResetHandler = vi.fn()
+const onQuitHandler = vi.fn()
+const isValidHandler = vi.fn()
 
 let props: DataSettingsMenuProps<NumbersSettings>
 

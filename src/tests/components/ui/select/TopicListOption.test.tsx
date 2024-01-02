@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react"
 import TopicListOption from "../../../../components/ui/select/TopicListOption"
 import Topic from "../../../../domain/Topic"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 test("Clicking an option with a bound event handler should call it", () => {
   const component = render(<TopicListOption onClick={onClickHandler} type={Topic.NUMBERS} />)

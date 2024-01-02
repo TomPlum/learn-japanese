@@ -10,7 +10,7 @@ import {
   faStar,
   faTimes
 } from "@fortawesome/free-solid-svg-icons"
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import PresetService from "../../service/PresetService"
 import SessionMode from "../../domain/session/SessionMode"
 import LoadingSpinner from "../ui/loading/LoadingSpinner"

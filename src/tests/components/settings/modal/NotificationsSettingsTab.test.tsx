@@ -6,12 +6,12 @@ import { testUser } from "../../../../setupTests"
 import { Preference } from "../../../../domain/user/Preference"
 import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer"
 
-const mockUpdatePreferences = jest.fn()
-jest.mock("../../../../service/UserService", () => {
-  return function () {
+const mockUpdatePreferences = vi.fn()
+vi.mock("../../../../service/UserService", () => ({
+  default: function () {
     return { updatePreferences: mockUpdatePreferences }
   }
-})
+}))
 
 beforeEach(() => {
   store.dispatch(clearUser())

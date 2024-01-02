@@ -4,7 +4,7 @@ import { days, months, nouns, phrases } from "../../data/Calendar"
 import Definition from "../../domain/sentence/Definition"
 import { CalendarSettingsBuilder } from "../../domain/session/settings/data/CalendarSettings"
 
-jest.mock("../../data/Calendar")
+vi.mock("../../data/Calendar")
 
 const mockDays = days as jest.MockedFunction<() => DayData[]>
 const mockMonths = months as jest.MockedFunction<() => DayData[]>

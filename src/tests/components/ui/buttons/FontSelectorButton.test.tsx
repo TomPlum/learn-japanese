@@ -3,13 +3,13 @@ import FontSelectorButton from "../../../../components/ui/buttons/FontSelectorBu
 import { store } from "../../../../store"
 import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer"
 
-const mockGetSelectedFont = jest.fn()
-const mockGetFonts = jest.fn()
-jest.mock("../../../../service/FontService", () => {
-  return function () {
+const mockGetSelectedFont = vi.fn()
+const mockGetFonts = vi.fn()
+vi.mock("../../../../service/FontService", () => ({
+  default: function () {
     return { getSelectedFont: mockGetSelectedFont, getFonts: mockGetFonts }
   }
-})
+}))
 
 beforeEach(() => {
   mockGetSelectedFont.mockResolvedValueOnce({

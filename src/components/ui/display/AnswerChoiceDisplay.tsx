@@ -63,7 +63,12 @@ class AnswerChoiceDisplay extends Component<AnswerChoiceDisplayProps> {
           {index}
         </span>
 
-        <DynamicDisplay value={value} style={style} ref={this.display} className={[valueClass, clickable].join(" ")} />
+        <DynamicDisplay
+          value={value}
+          style={style}
+          ref={this.display}
+          className={[valueClass, clickable].join(" ")}
+        />
       </div>
     )
   }

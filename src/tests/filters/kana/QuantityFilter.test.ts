@@ -4,7 +4,7 @@ import { KanaColumn } from "../../../domain/kana/KanaColumn"
 import QuantityFilter from "../../../filters/kana/QuantityFilter"
 import Arrays from "../../../utility/Arrays"
 
-const getRandomElements = jest.fn()
+const getRandomElements = vi.fn()
 
 beforeEach(() => {
   Arrays.getRandomElements = getRandomElements

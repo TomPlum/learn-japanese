@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import { Component } from "react"
 import { ProgressBar } from "react-bootstrap"
 import styles from "../../styles/sass/components/ui/SessionProgressBar.module.scss"
 

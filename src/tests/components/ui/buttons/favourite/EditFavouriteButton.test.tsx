@@ -5,8 +5,8 @@ import EditFavouriteButton, {
 } from "../../../../../components/ui/buttons/favourite/EditFavouriteButton"
 import renderWithTranslation from "../../../../renderWithTranslation"
 
-const onAddHandler = jest.fn()
-const onCancelHandler = jest.fn()
+const onAddHandler = vi.fn()
+const onCancelHandler = vi.fn()
 
 let props: EditFavouriteButtonProps
 

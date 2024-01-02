@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import { Component } from "react"
 import { faHeart, faHeartBroken, faInfinity } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from "../../styles/sass/components/game/LifeDisplay.module.scss"

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
 import KanaRepository from "../../repository/KanaRepository"
 import { Kana } from "../../domain/kana/Kana"

@@ -12,14 +12,12 @@ import { KanaColumn } from "../../../domain/kana/KanaColumn"
 import Arrays from "../../../utility/Arrays"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
-const mockLearningDataService = jest.fn()
-jest.mock(
-  "../../../service/LearningDataService",
-  () =>
-    function () {
-      return { read: mockLearningDataService }
-    }
-)
+const mockLearningDataService = vi.fn()
+vi.mock("../../../service/LearningDataService", () => ({
+  default: function () {
+    return { read: mockLearningDataService }
+  }
+}))
 
 const dataSettings = new KanaSettingsBuilder()
   .withHiragana(true)
@@ -34,7 +32,7 @@ const history = createMemoryHistory()
 
 beforeEach(() => {
   // Mock getRandomObject so it always returns the first element
-  Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
+  Arrays.getRandomObject = vi.fn().mockImplementation((array: any[]) => {
     const objects = [...array]
     const firstKana = objects[0]
     objects.splice(0, 1)

@@ -1,5 +1,5 @@
 import Arrays from "../../utility/Arrays"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { FlashCard as FlashCardDomain } from "../../domain/learn/FlashCard"
 import Confidence from "../../domain/learn/spacedrepetition/Confidence"
 import styles from "../../styles/sass/components/learn/Learn.module.scss"

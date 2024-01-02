@@ -2,14 +2,14 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react"
 import UserSearchField from "../../../../components/ui/fields/UserSearchField"
 import userEvent from "@testing-library/user-event"
 
-const mockGetPublicUsers = jest.fn()
-jest.mock("../../../../service/UserService", () => {
-  return function () {
+const mockGetPublicUsers = vi.fn()
+vi.mock("../../../../service/UserService", () => ({
+  default: function () {
     return { getPublicUsers: mockGetPublicUsers }
   }
-})
+}))
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 test("Should start with an empty value in the field", () => {
   const component = render(<UserSearchField disabled={false} onSelect={onSelectHandler} />)

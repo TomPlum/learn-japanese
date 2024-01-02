@@ -6,7 +6,7 @@ import { getValueLastCalledWith } from "../../../../Queries"
 import { GridOptions } from "../../../../../domain/grid/GridOptions"
 import GridDisplayType from "../../../../../domain/grid/GridDisplayType"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 let props: GridDisplayOptionsProps
 

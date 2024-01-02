@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import LearningSessionResult from "../../domain/learn/LearningSessionResult"
 import { Learnable } from "../../domain/learn/Learnable"
 import { Button, Col, Container, Row } from "react-bootstrap"

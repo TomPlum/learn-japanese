@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from "react"
+import { ReactElement, ReactNode } from "react"
 import { render } from "@testing-library/react"
 import { I18nextProvider } from "react-i18next"
 import i18n from "./i18n-testing"

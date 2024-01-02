@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { faCheck, faFont } from "@fortawesome/free-solid-svg-icons"
 import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss"
 import NavigationButton from "../NavigationButton"

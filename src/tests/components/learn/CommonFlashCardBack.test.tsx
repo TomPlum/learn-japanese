@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
 import CommonFlashCardBack from "../../../components/learn/CommonFlashCardBack"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const kana = ["れい", "ゼロ", "マル"]
 const title = "Example Title"

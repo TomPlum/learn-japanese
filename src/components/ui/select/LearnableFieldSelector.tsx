@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { Form, OverlayTrigger } from "react-bootstrap"
 import LearnableField from "../../../domain/learn/LearnableField"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

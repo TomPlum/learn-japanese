@@ -10,18 +10,16 @@ import { PaginationRequest } from "../../rest/request/PaginationRequest"
 import JLTPLevel from "../../domain/learn/JLTPLevel"
 
 //Mock Kanji Converter
-const mockConverter = jest.fn()
-jest.mock(
-  "../../converter/KanjiConverter",
-  () =>
-    function () {
-      return { convert: mockConverter }
-    }
-)
+const mockConverter = vi.fn()
+vi.mock("../../converter/KanjiConverter", () => ({
+  default: function () {
+    return { convert: mockConverter }
+  }
+}))
 
 //Mock RestClient Methods
-const mockPost = jest.fn()
-const mockGet = jest.fn()
+const mockPost = vi.fn()
+const mockGet = vi.fn()
 
 const exampleKanji = new Kanji(
   "小",

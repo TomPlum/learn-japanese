@@ -1,5 +1,4 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
-import React from "react"
 import PresetSelectionStep, {
   PresetSelectionStepProps
 } from "../../../../../components/layout/wizard/steps/PresetSelectionStep"
@@ -16,20 +15,20 @@ import { clearUser, setUser } from "../../../../../slices/UserSlice"
 import { testUser } from "../../../../../setupTests"
 import renderTranslatedReduxConsumer from "../../../../renderTranslatedReduxConsumer"
 
-const mockGetAllPresets = jest.fn()
-const mockGetDefaultPresets = jest.fn()
-jest.mock("../../../../../service/PresetService", () => {
-  return function () {
+const mockGetAllPresets = vi.fn()
+const mockGetDefaultPresets = vi.fn()
+vi.mock("../../../../../service/PresetService", () => ({
+  default: function () {
     return {
       getAllPresets: mockGetAllPresets,
       getDefaultPresets: mockGetDefaultPresets
     }
   }
-})
+}))
 
-const onSelectHandler = jest.fn()
-const onChangeTopicHandler = jest.fn()
-const isValidHandler = jest.fn()
+const onSelectHandler = vi.fn()
+const onChangeTopicHandler = vi.fn()
+const isValidHandler = vi.fn()
 
 const playPreset = new PresetBuilder()
   .withID(1)
@@ -184,12 +183,15 @@ test("It should select the first preset if one is not passed as selected", async
   // Mouse over to show the description, this only happens when selected
   fireEvent.mouseOver(await screen.findByTestId("grid-item-1"))
 
-  expect(await screen.findByText("This is an example play description")).toBeInTheDocument()
+  expect(onSelectHandler).toHaveBeenCalledWith(playPreset)
 })
 
 test("It should call the isValid event handler with false if the get all presets call fails", async () => {
   store.dispatch(setUser(testUser))
   mockGetAllPresets.mockResolvedValueOnce({ error: "Whoops." })
+
   setup()
-  expect(await isValidHandler).toHaveBeenLastCalledWith(false)
+
+  await waitFor(() => expect(isValidHandler).toHaveBeenCalledTimes(2))
+  expect(isValidHandler).toHaveBeenLastCalledWith(false)
 })

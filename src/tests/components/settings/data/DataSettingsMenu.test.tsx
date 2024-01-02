@@ -5,10 +5,10 @@ import { faAddressCard } from "@fortawesome/free-solid-svg-icons"
 
 let props: DataSettingsMenuProps<KanaSettings>
 
-const onResetHandler = jest.fn()
-const onQuitHandler = jest.fn()
-const onConfirmHandler = jest.fn()
-const isValidHandler = jest.fn()
+const onResetHandler = vi.fn()
+const onQuitHandler = vi.fn()
+const onConfirmHandler = vi.fn()
+const isValidHandler = vi.fn()
 
 beforeEach(() => {
   props = {

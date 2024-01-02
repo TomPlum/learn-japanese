@@ -7,10 +7,10 @@ import { Environment } from "../../utility/Environment"
 import api from "../../rest/API"
 import { testUser } from "../../setupTests"
 
-jest.mock("../../rest/API")
+vi.mock("../../rest/API")
 const mockApi = api as jest.MockedFunction<typeof api>
-const mockPost = jest.fn()
-const mockEnvironment = jest.fn()
+const mockPost = vi.fn()
+const mockEnvironment = vi.fn()
 
 beforeEach(() => {
   RestClient.post = mockPost
@@ -144,7 +144,7 @@ describe("Axios Interceptors", () => {
         })
         expect(store.getState().user.user?.token).toBe("ACCESS_TOKEN")
         expect(store.getState().user.user?.refreshToken).toBe("REFRESH_TOKEN")
-        expect(mockApi).toHaveBeenCalledWith({ retry: true, url: "/user/set-nickname" })
+        expect(mockApi).toHaveBeenCalledWith({ retry: true, url: "/user/set-nickname", headers: new AxiosHeaders() })
       })
     })
 

@@ -1,7 +1,7 @@
 import Copyable from "../../../components/ui/Copyable"
 import { fireEvent, render } from "@testing-library/react"
 
-const mockClipboard = jest.fn()
+const mockClipboard = vi.fn()
 
 Object.defineProperty(navigator, "clipboard", {
     value: {

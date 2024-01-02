@@ -1,7 +1,7 @@
 import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap"
 import GrammarInfo, { GrammarInfoProps } from "../learn/GrammarInfo"
 import styles from "../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
-import React, { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUp, faSearch } from "@fortawesome/free-solid-svg-icons"
 import ComponentTree from "../../utility/ComponentTree"
@@ -55,7 +55,7 @@ const GenkiGrammarPage = () => {
   const [grammar, setGrammar] = useState(allGrammar)
   const [search, setSearch] = useState("")
   const [chapter, setChapter] = useState(1)
-  const [cleared, setCleared] = useState(true)
+  const [cleared] = useState(true)
 
   useDebouncedEffect(
     () => {

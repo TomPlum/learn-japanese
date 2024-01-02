@@ -2,7 +2,7 @@ import { fireEvent } from "@testing-library/react"
 import SubmitButton from "../../../../components/ui/buttons/SubmitButton"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 test("Should render 'check' by default", () => {
   const component = renderWithTranslation(<SubmitButton onClick={onClickHandler} />)

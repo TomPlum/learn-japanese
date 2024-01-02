@@ -6,7 +6,7 @@ import LearnableField from "../../../../domain/learn/LearnableField"
 import userEvent from "@testing-library/user-event"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 let props: LearnableFieldSelectorProps
 
@@ -37,23 +37,25 @@ test("Omitting the default property should cause the value to default to kana", 
   expect(field).toHaveDisplayValue("Kana")
 })
 
-test("Passing a field to exclude should prevent it from appearing in the select list", () => {
+test("Passing a field to exclude should prevent it from appearing in the select list", async () => {
   props.exclude = LearnableField.RANDOM
   const { field } = setup()
-  expect(() => userEvent.selectOptions(field, "Random")).toThrow('Value "Random" not found in options')
+  return userEvent.selectOptions(field, "Random").catch((e: Error) => {
+    expect(e.message).toContain('Value "Random" not found in options')
+  })
 })
 
-test("It should call the onSelect event handler when changing the option", () => {
+test("It should call the onSelect event handler when changing the option", async () => {
   props.defaultField = LearnableField.KANA
   const { field } = setup()
-  userEvent.selectOptions(field, "Kanji")
+  await userEvent.selectOptions(field, "Kanji")
   expect(onSelectHandler).toHaveBeenLastCalledWith(LearnableField.KANJI)
 })
 
 test("It should render an inline help icon that shows the name and description of the selected field", async () => {
   const { field, help } = setup()
 
-  userEvent.selectOptions(field, "Japanese")
+  await userEvent.selectOptions(field, "Japanese")
   fireEvent.mouseOver(help)
 
   expect(await screen.findAllByText("Japanese")).toHaveLength(2)

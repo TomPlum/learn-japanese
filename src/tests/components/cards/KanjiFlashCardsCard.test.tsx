@@ -7,12 +7,12 @@ import { Router } from "react-router-dom"
 import { createMemoryHistory } from "history"
 import renderWithTranslation from "../../renderWithTranslation"
 
-const mockGetKanjiFlashCards = jest.fn()
-jest.mock("../../../service/SpacedRepetitionService", () => {
-  return function () {
+const mockGetKanjiFlashCards = vi.fn()
+vi.mock("../../../service/SpacedRepetitionService", () => ({
+  default: function () {
     return { getKanjiFlashCards: mockGetKanjiFlashCards }
   }
-})
+}))
 
 const history = createMemoryHistory()
 

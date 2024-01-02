@@ -3,16 +3,16 @@ import renderReduxConsumer from "../../renderReduxConsumer"
 import { fireEvent } from "@testing-library/react"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
-const mockGetHideUserProfileHint = jest.fn()
-const mockSetHideUserProfileHint = jest.fn()
-jest.mock("../../../service/LocalStorageService", () => {
-  return function () {
+const mockGetHideUserProfileHint = vi.fn()
+const mockSetHideUserProfileHint = vi.fn()
+vi.mock("../../../service/LocalStorageService", () => ({
+  default: function () {
     return {
       getHideUserProfileHint: mockGetHideUserProfileHint,
       setHideUserProfileHint: mockSetHideUserProfileHint
     }
   }
-})
+}))
 
 test("It should render the profile card if the local storage does not contain a preference", () => {
   mockGetHideUserProfileHint.mockReturnValueOnce(false)

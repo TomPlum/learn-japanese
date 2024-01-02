@@ -2,7 +2,7 @@ import LifeSettingsStep from "../../../../../components/layout/wizard/steps/Life
 import { fireEvent, render } from "@testing-library/react"
 import { LifeSettingsBuilder } from "../../../../../domain/session/settings/game/LifeSettings"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 test("Should render the life settings form", () => {
   const component = render(<LifeSettingsStep onSelect={onSelectHandler} />)

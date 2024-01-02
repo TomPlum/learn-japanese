@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react"
 import CalendarFlashCardFront from "../../../../components/learn/calendar/CalendarFlashCardFront"
 import Definition from "../../../../domain/sentence/Definition"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const day = new Definition(["Monday"], "月曜日", "げつようび", "Day of the Week")
 

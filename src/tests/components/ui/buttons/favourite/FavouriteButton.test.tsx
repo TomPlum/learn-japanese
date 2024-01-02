@@ -6,7 +6,7 @@ import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
 import renderWithTranslation from "../../../../renderWithTranslation"
 
-const onStartHandler = jest.fn()
+const onStartHandler = vi.fn()
 
 let props: FavouriteButtonProps
 

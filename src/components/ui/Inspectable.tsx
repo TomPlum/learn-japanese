@@ -1,4 +1,4 @@
-import React, { Component, PropsWithChildren, ReactElement } from "react";
+import { Component, PropsWithChildren, ReactElement } from "react";
 import { OverlayTrigger } from "react-bootstrap"
 import PopOver, { PopOverProps } from "./PopOver"
 import styles from "../../styles/sass/components/ui/Inspectable.module.scss"

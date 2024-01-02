@@ -4,8 +4,8 @@ import Arrays from "../../../utility/Arrays"
 import { findByTextWithElements } from "../../Queries"
 
 beforeEach(() => {
-  jest.useFakeTimers()
-  Arrays.getRandomObject = jest.fn().mockImplementation(() => {
+  vi.useFakeTimers({ shouldAdvanceTime: true })
+  Arrays.getRandomObject = vi.fn().mockImplementation(() => {
     return ["test loading message", []]
   })
 })
@@ -23,7 +23,7 @@ test("Should display a random loading message if the loading screen is active", 
 test('Should display a "loading too slowly" message after 15 seconds when the loading screen is active', async () => {
   render(<LoadingScreen active={true} />)
   act(() => {
-    jest.advanceTimersByTime(15000)
+    vi.advanceTimersByTime(15000)
   })
   expect(
     await findByTextWithElements(

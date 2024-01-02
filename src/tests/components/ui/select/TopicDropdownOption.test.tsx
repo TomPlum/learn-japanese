@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react"
 import TopicDropdownOption from "../../../../components/ui/select/TopicDropdownOption"
 import Topic from "../../../../domain/Topic"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 test("Clicking on the option should call the onClick event handler", () => {
   const component = render(<TopicDropdownOption type={Topic.KANA} selected={Topic.KANA} onClick={onClickHandler} />)

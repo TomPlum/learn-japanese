@@ -1,5 +1,5 @@
 import styles from "../../../styles/sass/components/ui/fields/UserSearchField.module.scss"
-import React, { useState } from "react"
+import { useState } from "react"
 import { useDebouncedEffect } from "../../../hooks"
 import UserService from "../../../service/UserService"
 import { Fade, Form, InputGroup } from "react-bootstrap"

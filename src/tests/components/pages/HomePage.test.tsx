@@ -4,12 +4,12 @@ import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
-const mockGetActivityStreak = jest.fn()
-jest.mock("../../../service/UserService", () => {
-  return function () {
+const mockGetActivityStreak = vi.fn()
+vi.mock("../../../service/UserService", () => ({
+  default: function () {
     return { getActivityStreak: mockGetActivityStreak }
   }
-})
+}))
 
 beforeEach(() => {
   store.dispatch(clearUser())

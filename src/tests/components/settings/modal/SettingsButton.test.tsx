@@ -3,7 +3,7 @@ import SettingsButton, { SettingsButtonProps } from "../../../../components/sett
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 import { fireEvent } from "@testing-library/react"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 let props: SettingsButtonProps
 

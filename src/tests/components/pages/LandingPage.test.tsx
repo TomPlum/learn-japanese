@@ -12,15 +12,15 @@ import { Router } from "react-router-dom"
 import { createMemoryHistory } from "history"
 import renderWithTranslation from "../../renderWithTranslation"
 
-const environment = jest.fn()
-const shuffle = jest.fn()
-const getRandomObject = jest.fn()
-const mockKanaRepository = jest.fn()
-jest.mock("../../../repository/KanaRepository", () => {
-  return function () {
+const environment = vi.fn()
+const shuffle = vi.fn()
+const getRandomObject = vi.fn()
+const mockKanaRepository = vi.fn()
+vi.mock("../../../repository/KanaRepository", () => ({
+  default: function () {
     return { read: mockKanaRepository }
   }
-})
+}))
 
 const history = createMemoryHistory()
 
@@ -48,7 +48,7 @@ beforeEach(() => {
   Environment.variable = environment
 
   // Mock timers
-  jest.useFakeTimers()
+  vi.useFakeTimers({ shouldAdvanceTime: true })
 
   // Mock window size
   matchMediaPolyfill(window)
@@ -81,9 +81,9 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  jest.runOnlyPendingTimers()
-  jest.useRealTimers()
-  jest.restoreAllMocks()
+  vi.runOnlyPendingTimers()
+  vi.useRealTimers()
+  vi.restoreAllMocks()
 })
 
 test("Should render the leading heading", async () => {

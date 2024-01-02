@@ -6,7 +6,7 @@ import renderReduxConsumer from "../../../renderReduxConsumer"
 import { MemoryGameQuestion } from "../../../../components/game/MemoryGame"
 import renderTranslatedReduxConsumer from "../../../renderTranslatedReduxConsumer"
 
-const isValidHandler = jest.fn()
+const isValidHandler = vi.fn()
 const ref = React.createRef<MemoryGameQuestion>()
 
 let props: TextQuestionProps

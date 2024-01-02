@@ -5,10 +5,10 @@ import PlayWizardFooter, {
 import { AppMode } from "../../../../../domain/AppMode"
 import renderWithTranslation from "../../../../renderWithTranslation"
 
-const onNextHandler = jest.fn()
-const onBackHandler = jest.fn()
-const onPlayHandler = jest.fn()
-const onChangeStageHandler = jest.fn()
+const onNextHandler = vi.fn()
+const onBackHandler = vi.fn()
+const onPlayHandler = vi.fn()
+const onChangeStageHandler = vi.fn()
 
 let props: PlayWizardFooterProps
 

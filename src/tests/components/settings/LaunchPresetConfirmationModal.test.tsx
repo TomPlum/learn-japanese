@@ -15,7 +15,7 @@ import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 import { localStorageMock } from "../../../setupTests"
 
 const history = createMemoryHistory()
-const onDismissHandler = jest.fn()
+const onDismissHandler = vi.fn()
 
 const playPreset = new PresetBuilder()
   .withID(1)

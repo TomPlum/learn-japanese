@@ -5,7 +5,7 @@ import ModeSelectionStep, {
 import { AppMode } from "../../../../../domain/AppMode"
 import renderWithTranslation from "../../../../renderWithTranslation"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 let props: ModeSelectionStepProps
 

@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
 //Mock scrollIntoView() as it doesn't exist in JSDom
-const scrollIntoView = jest.fn()
+const scrollIntoView = vi.fn()
 window.HTMLElement.prototype.scrollIntoView = scrollIntoView
 
 const setup = () => {
@@ -18,7 +18,7 @@ const setup = () => {
 }
 
 beforeEach(() => {
-  const mockEnvironment = jest.fn()
+  const mockEnvironment = vi.fn()
   mockEnvironment.mockReturnValueOnce("/example-base-path/")
   mockEnvironment.mockReturnValueOnce("landing page description")
   Environment.variable = mockEnvironment

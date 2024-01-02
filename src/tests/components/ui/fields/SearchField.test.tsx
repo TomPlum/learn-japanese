@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import SearchField, { SearchFieldProps } from "../../../../components/ui/fields/SearchField"
 
-const onChangeHandler = jest.fn()
-const onClearHandler = jest.fn()
+const onChangeHandler = vi.fn()
+const onClearHandler = vi.fn()
 
 let props: SearchFieldProps
 

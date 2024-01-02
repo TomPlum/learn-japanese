@@ -3,7 +3,7 @@ import ValueSelector, { ValueSelectorProps } from "../../../../components/ui/sel
 import { findByTextWithElements, getAllByTextWithElements, getByTextWithElements } from "../../../Queries"
 import userEvent from "@testing-library/user-event"
 
-const onChangeHandler = jest.fn()
+const onChangeHandler = vi.fn()
 
 let props: ValueSelectorProps
 

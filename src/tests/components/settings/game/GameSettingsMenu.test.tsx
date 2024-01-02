@@ -1,9 +1,9 @@
 import { fireEvent, render } from "@testing-library/react"
 import GameSettingsMenu from "../../../../components/settings/game/GameSettingsMenu"
 
-const onQuitHandler = jest.fn()
-const onResetHandler = jest.fn()
-const onSelectHandler = jest.fn()
+const onQuitHandler = vi.fn()
+const onResetHandler = vi.fn()
+const onSelectHandler = vi.fn()
 
 const setup = () => {
   const component = render(

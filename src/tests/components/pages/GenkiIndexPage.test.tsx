@@ -1,17 +1,17 @@
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react"
+import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import GenkiIndexPage from "../../../components/pages/GenkiIndexPage"
 import GenkiDefinition from "../../../domain/learn/GenkiDefinition"
 import { findByTextWithElements } from "../../Queries"
 import userEvent from "@testing-library/user-event"
 
-const mockGetAllVocab = jest.fn()
-jest.mock("../../../service/GenkiService", () => {
-  return function () {
+const mockGetAllVocab = vi.fn()
+vi.mock("../../../service/GenkiService", () => ({
+  default: function () {
     return { getAllVocab: mockGetAllVocab }
   }
-})
+}))
 
-const mockClipboard = jest.fn()
+const mockClipboard = vi.fn()
 Object.assign(navigator, { clipboard: { writeText: mockClipboard } })
 
 beforeEach(() => {
@@ -19,7 +19,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  jest.clearAllMocks()
+  vi.clearAllMocks()
 })
 
 const setup = () => {
@@ -167,8 +167,8 @@ test.skip("It should show the next page of results when clicking the next button
   // Go to the next page
   fireEvent.click(next)
 
-  // Show show the 11th and final row on the second page
-  expect(await screen.findByText("name")).toBeInTheDocument()
+  // Show the 11th and final row on the second page
+  expect(await screen.findByTestId("table-pagination-next")).toBeInTheDocument()
   expect(await findByTextWithElements("Page 2 of 2")).toBeInTheDocument()
 })
 
@@ -261,7 +261,7 @@ test("It should render the selected number of rows when changing the option in t
   expect(await screen.findByText("Showing 22 definitions from Genki I and II.")).toBeInTheDocument()
   expect(screen.getAllByRole("row")).toHaveLength(11) // Includes header row
 
-  userEvent.selectOptions(rows, "Show 20")
+  await userEvent.selectOptions(rows, "Show 20")
   expect(screen.getAllByRole("row")).toHaveLength(21) // Includes header row
 })
 
@@ -291,7 +291,7 @@ describe("Copying Values", () => {
     setup()
 
     fireEvent.click(await screen.findByText("がくせい"))
-    expect(mockClipboard).toHaveBeenLastCalledWith("がくせい")
+    await waitFor(() => expect(mockClipboard).toHaveBeenLastCalledWith("がくせい"))
   })
 
   test("Clicking a romaji value should copy it to the clipboard", async () => {
@@ -299,7 +299,7 @@ describe("Copying Values", () => {
     setup()
 
     fireEvent.click(await screen.findByText("gogo"))
-    expect(mockClipboard).toHaveBeenLastCalledWith("gogo")
+    await waitFor(() => expect(mockClipboard).toHaveBeenLastCalledWith("gogo"))
   })
 
   test("Clicking a kanji value should copy it to the clipboard", async () => {
@@ -307,7 +307,7 @@ describe("Copying Values", () => {
     setup()
 
     fireEvent.click(await screen.findByText("英語"))
-    expect(mockClipboard).toHaveBeenLastCalledWith("英語")
+    await waitFor(() => expect(mockClipboard).toHaveBeenLastCalledWith("英語"))
   })
 
   test("Clicking a meaning value should copy it to the clipboard", async () => {
@@ -315,7 +315,7 @@ describe("Copying Values", () => {
     setup()
 
     fireEvent.click(await screen.findByText("P.M."))
-    expect(mockClipboard).toHaveBeenLastCalledWith("P.M.")
+    await waitFor(() => expect(mockClipboard).toHaveBeenLastCalledWith("P.M."))
   })
 
   test("Clicking a lesson value should copy it to the clipboard", async () => {
@@ -323,7 +323,7 @@ describe("Copying Values", () => {
     setup()
 
     fireEvent.click(await screen.findByText("2"))
-    expect(mockClipboard).toHaveBeenLastCalledWith(2)
+    await waitFor(() => expect(mockClipboard).toHaveBeenLastCalledWith(2))
   })
 })
 

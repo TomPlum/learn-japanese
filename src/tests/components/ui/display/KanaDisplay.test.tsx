@@ -1,11 +1,11 @@
-import { fireEvent, render, screen } from "@testing-library/react"
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import KanaDisplay, { KanaDisplayProps } from "../../../../components/ui/display/KanaDisplay"
 import { Kana } from "../../../../domain/kana/Kana"
 import KanaType from "../../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../../domain/kana/KanaColumn"
 import React from "react"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 let props: KanaDisplayProps
 
@@ -66,14 +66,14 @@ test("Notify incorrect should append the 'redKana' class to the kana character",
   const ref = React.createRef<KanaDisplay>()
   const { container, rerender } = render(<KanaDisplay {...props} ref={ref} />)
 
-  //Initially should have the regular kana class
+  // Initially should have the regular kana class
   expect(container?.firstChild?.childNodes[1]).toHaveClass("kana")
 
-  //Calling notifyIncorrect should append the redKana class
-  ref.current?.notifyIncorrect()
+  // Calling notifyIncorrect should append the redKana class
+  act(() => ref.current?.notifyIncorrect())
   expect(container?.firstChild?.childNodes[1]).toHaveClass("redKana")
 
-  //Upon next render, it should switch back to the kana class again
+  // Upon next render, it should switch back to the kana class again
   rerender(<KanaDisplay {...props} ref={ref} />)
   expect(container?.firstChild?.childNodes[1]).toHaveClass("kana")
 })

@@ -6,7 +6,7 @@ import KanaType from "../../../domain/kana/KanaType"
 import KanaFlashCardFront from "../../../components/learn/kana/KanaFlashCardFront"
 import KanaFlashCardBack from "../../../components/learn/kana/KanaFlashCardBack"
 
-const onFlipHandler = jest.fn()
+const onFlipHandler = vi.fn()
 
 const setup = () => {
   const component = render(

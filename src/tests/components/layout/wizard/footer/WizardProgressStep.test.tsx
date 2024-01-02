@@ -4,7 +4,7 @@ import WizardProgressStep, {
 } from "../../../../../components/layout/wizard/footer/WizardProgressStep"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 let props: WizardProgressStepProps
 

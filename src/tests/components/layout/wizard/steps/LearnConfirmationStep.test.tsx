@@ -6,7 +6,7 @@ import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
 import LearnSettings from "../../../../../domain/session/settings/LearnSettings"
 
-const onSelectStageHandler = jest.fn()
+const onSelectStageHandler = vi.fn()
 let props: LearnConfirmationStepProps
 
 const setup = () => {

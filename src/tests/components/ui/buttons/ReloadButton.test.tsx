@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import ReloadButton from "../../../../components/ui/buttons/ReloadButton"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 test("Clicking the button should call the onClick event handler", () => {
   render(<ReloadButton loading={false} onClick={onClickHandler} />)

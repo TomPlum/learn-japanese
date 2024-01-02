@@ -4,7 +4,7 @@ import QuestionType from "../../../../domain/game/QuestionType"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 let props: DisplayTypeButtonProps
 

@@ -1,5 +1,5 @@
 import styles from "../../../styles/sass/components/ui/display/QuoteDisplay.module.scss"
-import React, { PropsWithChildren } from "react"
+import { PropsWithChildren } from "react"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 

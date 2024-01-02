@@ -5,9 +5,9 @@ import { DataSettingsMenuProps } from "../../../../components/settings/data/Data
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onConfirmHandler = jest.fn()
-const onResetHandler = jest.fn()
-const onQuitHandler = jest.fn()
+const onConfirmHandler = vi.fn()
+const onResetHandler = vi.fn()
+const onQuitHandler = vi.fn()
 
 let props: DataSettingsMenuProps<KanaSettings>
 

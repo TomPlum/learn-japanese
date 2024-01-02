@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react"
 import Colour from "../../../../domain/colour/Colour"
 import BasicsFlashCardBack from "../../../../components/learn/basics/BasicsFlashCardBack"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const colour = new Colour("Red", "赤", "あか", "aka", "#ff0000")
 

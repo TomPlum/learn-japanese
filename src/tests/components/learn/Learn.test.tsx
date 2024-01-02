@@ -8,7 +8,7 @@ import KanaFlashCardBack from "../../../components/learn/kana/KanaFlashCardBack"
 import Arrays from "../../../utility/Arrays"
 import renderWithTranslation from "../../renderWithTranslation"
 
-const onFinishHandler = jest.fn()
+const onFinishHandler = vi.fn()
 
 const a = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
 const i = new Kana("い", ["i"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)
@@ -24,7 +24,7 @@ beforeEach(() => {
     card: { front: KanaFlashCardFront, back: KanaFlashCardBack }
   }
 
-  Arrays.getRandomObject = jest.fn().mockImplementation((array: any[]) => {
+  Arrays.getRandomObject = vi.fn().mockImplementation((array: any[]) => {
     const objects = [...array]
     const firstKana = objects[0]
     objects.splice(0, 1)
@@ -33,8 +33,8 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  jest.resetAllMocks()
-  jest.clearAllMocks()
+  vi.resetAllMocks()
+  vi.clearAllMocks()
 })
 
 const setup = () => {

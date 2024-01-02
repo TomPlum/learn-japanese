@@ -4,7 +4,7 @@ import PlayWizardProgress, {
 } from "../../../../../components/layout/wizard/footer/PlayWizardProgress"
 import { AppMode } from "../../../../../domain/AppMode"
 
-const onSelectStageHandler = jest.fn()
+const onSelectStageHandler = vi.fn()
 
 let props: PlayWizardProgressProps
 

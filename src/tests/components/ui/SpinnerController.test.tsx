@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
 import SpinnerController from "../../../components/ui/SpinnerController"
 
-const onChangeHandler = jest.fn()
+const onChangeHandler = vi.fn()
 
 test("Passing in a single reading should render a 1 on the controls section", () => {
   const component = render(<SpinnerController values={["v1"]} onChange={onChangeHandler} />)

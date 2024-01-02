@@ -1,4 +1,3 @@
-import React from "react"
 import LifeSettingsForm from "../../../settings/game/LifeSettingsForm"
 import LifeSettings from "../../../../domain/session/settings/game/LifeSettings"
 

@@ -10,14 +10,14 @@ import renderReduxConsumer from "../../../renderReduxConsumer"
 import { testUser } from "../../../../setupTests"
 import { fireEvent } from "@testing-library/react"
 
-const mockUpdatePreferences = jest.fn()
-jest.mock("../../../../service/UserService", () => {
-  return function () {
+const mockUpdatePreferences = vi.fn()
+vi.mock("../../../../service/UserService", () => ({
+  default: function() {
     return { updatePreferences: mockUpdatePreferences }
   }
-})
+}))
 
-const onErrorHandler = jest.fn()
+const onErrorHandler = vi.fn()
 
 let props: SettingsBooleanButtonProps
 
@@ -119,7 +119,7 @@ test("Should call the service with the correct parameters when clicking the butt
 
 test("Should call the service with the correct parameters when clicking the button in its falsy state", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  await store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: false }))
+  store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: false }))
 
   const component = renderReduxConsumer(<SettingsBooleanButton {...props} />)
   fireEvent.click(component.getByTestId("test-toggle"))
@@ -135,7 +135,7 @@ test("Should call the onError event handler with the response error if not succe
   fireEvent.click(component.getByTestId("test-toggle"))
   expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
 
-  expect(await onErrorHandler).toHaveBeenCalledWith("Something went wrong.")
+  expect(onErrorHandler).toHaveBeenCalledWith("Something went wrong.")
 })
 
 test("Should call the onError event handler with the response error if rejected", async () => {

@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
 import FlashCardBack from "../../../components/learn/FlashCardBack"
 
-const onResetHandler = jest.fn()
+const onResetHandler = vi.fn()
 
 test("Should call the onClick event handler when clicking the reset button", () => {
   const component = render(<FlashCardBack title="Example Title" onReset={onResetHandler} />)

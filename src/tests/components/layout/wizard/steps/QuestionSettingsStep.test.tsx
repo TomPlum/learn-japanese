@@ -5,7 +5,7 @@ import QuestionType from "../../../../../domain/game/QuestionType"
 import { getValueLastCalledWith } from "../../../../Queries"
 import renderWithTranslation from "../../../../renderWithTranslation"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 test("Should render the question settings form", () => {
   const component = render(<QuestionSettingsStep onSelect={onSelectHandler} />)

@@ -21,7 +21,7 @@ class SpinnerController<T> extends Component<SpinnerControllerProps<T>, SpinnerC
     }
   }
 
-  componentDidUpdate(prevProps: Readonly<SpinnerControllerProps<T>>, prevState: Readonly<SpinnerControllerState>) {
+  componentDidUpdate(_prevProps: Readonly<SpinnerControllerProps<T>>, prevState: Readonly<SpinnerControllerState>) {
     const { selected } = this.state
     const { values, onChange } = this.props
 

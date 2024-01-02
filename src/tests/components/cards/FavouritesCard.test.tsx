@@ -7,18 +7,18 @@ import renderReduxConsumer from "../../renderReduxConsumer"
 import PresetBuilder from "../../../domain/session/PresetBuilder"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
-const mockGetFavourites = jest.fn()
-const mockGetAllPresets = jest.fn()
-const mockUpdateFavourites = jest.fn()
-jest.mock("../../../service/PresetService", () => {
-  return function () {
+const mockGetFavourites = vi.fn()
+const mockGetAllPresets = vi.fn()
+const mockUpdateFavourites = vi.fn()
+vi.mock("../../../service/PresetService", () => ({
+  default: function () {
     return {
       getFavouritePresets: mockGetFavourites,
       getAllPresets: mockGetAllPresets,
       updateFavourites: mockUpdateFavourites
     }
   }
-})
+}))
 
 const playPreset = new PresetBuilder()
   .withID(1)

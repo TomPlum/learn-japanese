@@ -4,12 +4,12 @@ import renderReduxConsumer from "../../../renderReduxConsumer"
 import { testUser } from "../../../../setupTests"
 
 //Mock User Service
-const mockUserService = jest.fn()
-jest.mock("../../../../service/UserService", () => {
-  return function () {
+const mockUserService = vi.fn()
+vi.mock("../../../../service/UserService", () => ({
+  default: function () {
     return { setNickname: mockUserService }
   }
-})
+}))
 
 const user = testUser
 

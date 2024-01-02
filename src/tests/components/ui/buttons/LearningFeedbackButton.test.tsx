@@ -4,7 +4,7 @@ import LearningFeedbackButton, {
   LearningFeedbackButtonProps
 } from "../../../../components/ui/buttons/LearningFeedbackButton"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 let props: LearningFeedbackButtonProps
 

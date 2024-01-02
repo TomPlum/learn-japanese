@@ -7,7 +7,7 @@ import LearnSessionSettingsSummary, {
   LearnSessionSettingsSummaryProps
 } from "../../../components/settings/LearnSessionSettingsSummary"
 
-const onSelectStageHandler = jest.fn()
+const onSelectStageHandler = vi.fn()
 let props: LearnSessionSettingsSummaryProps
 
 const setup = () => {

@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react"
 import HintSettingsStep from "../../../../../components/layout/wizard/steps/HintSettingsStep"
 import { HintSettingsBuilder } from "../../../../../domain/session/settings/game/HintSettings"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 test("Should render the hint settings form", () => {
   const component = render(<HintSettingsStep onSelect={onSelectHandler} />)

@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
 import HashLink, { HashLinkProps } from "../../../components/layout/HashLink"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 let props: HashLinkProps
 
@@ -33,13 +33,13 @@ test("Should wrap child component", () => {
 
 test("Should append the path property to the base name environment variable", () => {
   const { link } = setup()
-  expect(link.parentElement).toHaveProperty("href", "http://localhost/example-base-path/path")
+  expect(link.parentElement).toHaveProperty("href", "http://localhost:3000/example-base-path/path")
 })
 
 test("Should set the href as an empty string if no path is passed", () => {
   props.path = undefined
   const { link } = setup()
-  expect(link.parentElement).toHaveProperty("href", "http://localhost/#")
+  expect(link.parentElement).toHaveProperty("href", "http://localhost:3000/#")
 })
 
 test("Passing a className property should append it to the link component", () => {

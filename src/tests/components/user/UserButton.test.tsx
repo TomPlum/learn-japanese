@@ -9,7 +9,7 @@ import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
 let props: UserButtonProps
 const history = createMemoryHistory()
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const user = { ...testUser }
 

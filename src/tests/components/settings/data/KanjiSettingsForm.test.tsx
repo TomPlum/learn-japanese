@@ -6,9 +6,9 @@ import { faPaintBrush } from "@fortawesome/free-solid-svg-icons"
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onConfirmHandler = jest.fn()
-const onResetHandler = jest.fn()
-const onQuitHandler = jest.fn()
+const onConfirmHandler = vi.fn()
+const onResetHandler = vi.fn()
+const onQuitHandler = vi.fn()
 
 let props: DataSettingsMenuProps<KanjiSettings>
 

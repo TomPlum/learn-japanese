@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import { Component } from "react"
 import { Kana } from "../../../domain/kana/Kana"
 import { Container } from "react-bootstrap"
 import DynamicCharacter, { CharacterStyleProps } from "../../game/DynamicCharacter"
@@ -29,7 +29,7 @@ class KanaDisplay extends Component<KanaDisplayProps, KanaDisplayState> {
     }
   }
 
-  componentDidUpdate(prevProps: Readonly<KanaDisplayProps>, prevState: Readonly<KanaDisplayState>) {
+  componentDidUpdate(_prevProps: Readonly<KanaDisplayProps>, prevState: Readonly<KanaDisplayState>) {
     if (prevState.isNotifyingIncorrect) {
       this.setState({ isNotifyingIncorrect: false })
     }

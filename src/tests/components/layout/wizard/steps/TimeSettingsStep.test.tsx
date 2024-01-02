@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react"
 import TimeSettingsStep from "../../../../../components/layout/wizard/steps/TimeSettingsStep"
 import { TimeSettingsBuilder } from "../../../../../domain/session/settings/game/TimeSettings"
 
-const onSelectHandler = jest.fn()
+const onSelectHandler = vi.fn()
 
 test("Should render the time settings form", () => {
   const component = render(<TimeSettingsStep onSelect={onSelectHandler} />)

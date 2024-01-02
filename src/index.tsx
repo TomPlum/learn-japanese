@@ -1,5 +1,5 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 import "./styles/sass/index.scss"
 import LearnJapanese from "./LearnJapanese"
 import { store } from "./store"
@@ -16,10 +16,9 @@ const prepareMockServiceWorker = async () => {
 }
 
 prepareMockServiceWorker().then(() => {
-  ReactDOM.render(
+  ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <LearnJapanese store={store} />
-    </React.StrictMode>,
-    document.getElementById("root")
+    </React.StrictMode>
   )
 })

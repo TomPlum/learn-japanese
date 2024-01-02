@@ -79,7 +79,7 @@ class VolumeController extends Component<VolumeControllerProps, VolumeController
 
   private hideVolume = () => this.setState({ showVolume: false })
 
-  private changeVolume = (e: React.ChangeEvent, value: number) => {
+  private changeVolume = (_e: React.ChangeEvent, value: number) => {
     this.setState({ volume: value })
     this.props.onVolumeChange?.(value / 100)
   }

@@ -5,7 +5,7 @@ import { fireEvent } from "@testing-library/react"
 import { testUser } from "../../../setupTests"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
-const onDismissHandler = jest.fn()
+const onDismissHandler = vi.fn()
 
 beforeEach(() => {
   store.dispatch(clearUser())

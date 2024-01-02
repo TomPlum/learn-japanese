@@ -5,7 +5,7 @@ import renderWithTranslation from "../../../renderWithTranslation"
 
 let props: AnswerInputFieldProps
 
-const onChangeHandler = jest.fn()
+const onChangeHandler = vi.fn()
 
 beforeEach(() => {
   props = {

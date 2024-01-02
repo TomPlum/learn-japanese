@@ -4,7 +4,6 @@ import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
 import { Col, Row } from "react-bootstrap"
 import GenkiTable from "../../ui/table/GenkiTable"
 import GenkiComparisonDisplay from "../../ui/genki/GenkiComparisonDisplay"
-import React from "react"
 
 const UseGenkiChapter4 = () => {
   const c4p1: GrammarInfoProps = {

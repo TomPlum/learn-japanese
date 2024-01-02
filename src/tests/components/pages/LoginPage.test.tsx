@@ -31,7 +31,7 @@ const validLoginResponse = {
   }
 }
 
-const mockLogin = jest.fn()
+const mockLogin = vi.fn()
 const history = createMemoryHistory()
 
 beforeEach(() => {

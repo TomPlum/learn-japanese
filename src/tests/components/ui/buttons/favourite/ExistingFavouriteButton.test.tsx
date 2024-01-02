@@ -5,8 +5,8 @@ import ExistingFavouriteButton, {
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 import renderWithTranslation from "../../../../renderWithTranslation"
 
-const onRemoveHandler = jest.fn()
-const onCancelHandler = jest.fn()
+const onRemoveHandler = vi.fn()
+const onCancelHandler = vi.fn()
 
 let props: ExistingFavouriteButtonProps
 

@@ -6,7 +6,7 @@ const popover = <PopOver title="Popover Title" text="Popover Text" />
 
 let props: GameInputFieldProps
 
-const onChangeHandler = jest.fn()
+const onChangeHandler = vi.fn()
 
 const setup = () => {
   const component = render(<GameInputField {...props} />)

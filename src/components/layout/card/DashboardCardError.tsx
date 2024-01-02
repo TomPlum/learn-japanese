@@ -1,5 +1,5 @@
 import styles from "../../../styles/sass/components/layout/card/DashboardCardError.module.scss"
-import React, { PropsWithChildren } from "react"
+import { PropsWithChildren } from "react"
 
 export interface DashboardCardErrorProps {
   active?: boolean

@@ -1,15 +1,14 @@
 import { fireEvent, screen } from "@testing-library/react"
-import React from "react"
 import AnswerChoiceDisplay, { AnswerChoiceDisplayProps } from "../../../../components/ui/display/AnswerChoiceDisplay"
 import renderReduxConsumer from "../../../renderReduxConsumer"
 
-const onClickHandler = jest.fn()
-const onMouseDownHandler = jest.fn()
-const onMouseUpHandler = jest.fn()
-const onMouseOverHandler = jest.fn()
-const onMouseOutHandler = jest.fn()
-const onTouchStart = jest.fn()
-const onTouchEnd = jest.fn()
+const onClickHandler = vi.fn()
+const onMouseDownHandler = vi.fn()
+const onMouseUpHandler = vi.fn()
+const onMouseOverHandler = vi.fn()
+const onMouseOutHandler = vi.fn()
+const onTouchStart = vi.fn()
+const onTouchEnd = vi.fn()
 
 let props: AnswerChoiceDisplayProps
 

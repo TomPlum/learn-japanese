@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react"
 import SentenceStructureFlashCardFront from "../../../../components/learn/sentence/SentenceStructureFlashCardFront"
 import Definition from "../../../../domain/sentence/Definition"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const adjective = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective")
 

@@ -7,15 +7,15 @@ import { store } from "../../../../store"
 import { clearUser, setPreference, setUser } from "../../../../slices/UserSlice"
 import { localStorageMock, testUser } from "../../../../setupTests"
 
-const mockUpdatePreferences = jest.fn()
-jest.mock("../../../../service/UserService", () => {
-  return function () {
+const mockUpdatePreferences = vi.fn()
+vi.mock("../../../../service/UserService", () => ({
+  default: function () {
     return { updatePreferences: mockUpdatePreferences }
   }
-})
+}))
 
-const onChangeHandler = jest.fn()
-const onErrorHandler = jest.fn()
+const onChangeHandler = vi.fn()
+const onErrorHandler = vi.fn()
 
 let props: SettingsDropdownProps
 

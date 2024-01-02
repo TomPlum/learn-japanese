@@ -4,10 +4,10 @@ import { faSmile } from "@fortawesome/free-solid-svg-icons"
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons"
 import renderWithTranslation from "../../renderWithTranslation"
 
-const onShowHandler = jest.fn()
-const onHideHandler = jest.fn()
-const onClickButtonHandler = jest.fn()
-const onClickItemHandler = jest.fn()
+const onShowHandler = vi.fn()
+const onHideHandler = vi.fn()
+const onClickButtonHandler = vi.fn()
+const onClickItemHandler = vi.fn()
 
 let buttonProps: NavigationButtonProps
 let itemProps: ItemProps

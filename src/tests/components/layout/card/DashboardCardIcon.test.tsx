@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react"
 import DashboardCardIcon from "../../../../components/layout/card/DashboardCardIcon"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 test("Should render the dashboard icon", () => {
   const component = render(<DashboardCardIcon icon={faApple} />)

@@ -3,7 +3,7 @@ import SkipButton from "../../../../components/ui/buttons/SkipButton"
 import each from "jest-each"
 import renderWithTranslation from "../../../renderWithTranslation"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const props = {
   size: {

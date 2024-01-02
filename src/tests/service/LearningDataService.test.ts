@@ -13,59 +13,47 @@ import { ReadingType } from "../../domain/kanji/ReadingType"
 import JLTPLevel from "../../domain/learn/JLTPLevel"
 import { Example } from "../../domain/kanji/Example"
 
-const mockKanaService = jest.fn()
-jest.mock(
-  "../../service/KanaService",
-  () =>
-    function () {
-      return { getKana: mockKanaService }
-    }
-)
+const mockKanaService = vi.fn()
+vi.mock("../../service/KanaService", () => ({
+  default: function () {
+    return { getKana: mockKanaService }
+  }
+}))
 
-const mockCalendarRepository = jest.fn()
-jest.mock(
-  "../../repository/CalendarRepository",
-  () =>
-    function () {
-      return { read: mockCalendarRepository }
-    }
-)
+const mockCalendarRepository = vi.fn()
+vi.mock("../../repository/CalendarRepository", () => ({
+  default: function () {
+    return { read: mockCalendarRepository }
+  }
+}))
 
-const mockGetKanji = jest.fn()
-jest.mock(
-  "../../service/KanjiService",
-  () =>
-    function () {
-      return { getKanjiPage: mockGetKanji }
-    }
-)
+const mockGetKanji = vi.fn()
+vi.mock("../../service/KanjiService", () => ({
+  default: function () {
+    return { getKanjiPage: mockGetKanji }
+  }
+}))
 
-const mockBasicsRepository = jest.fn()
-jest.mock(
-  "../../repository/BasicsRepository",
-  () =>
-    function () {
-      return { read: mockBasicsRepository }
-    }
-)
+const mockBasicsRepository = vi.fn()
+vi.mock("../../repository/BasicsRepository", () => ({
+  default: function () {
+    return { read: mockBasicsRepository }
+  }
+}))
 
-const mockNumbersRepository = jest.fn()
-jest.mock(
-  "../../repository/NumbersRepository",
-  () =>
-    function () {
-      return { read: mockNumbersRepository }
-    }
-)
+const mockNumbersRepository = vi.fn()
+vi.mock("../../repository/NumbersRepository", () => ({
+  default: function () {
+    return { read: mockNumbersRepository }
+  }
+}))
 
-const mockSentenceStructureRepository = jest.fn()
-jest.mock(
-  "../../repository/SentenceStructureRepository",
-  () =>
-    function () {
-      return { read: mockSentenceStructureRepository }
-    }
-)
+const mockSentenceStructureRepository = vi.fn()
+vi.mock("../../repository/SentenceStructureRepository", () => ({
+  default: function () {
+    return { read: mockSentenceStructureRepository }
+  }
+}))
 
 describe("Learn Data Repository", () => {
   const service = new LearningDataService()
@@ -104,8 +92,9 @@ describe("Learn Data Repository", () => {
 
   test("Should delegate to the BasicsRepository when the topic is Basics", () => {
     const config: DataSettings = new BasicsSettingsBuilder().withColours().build()
-    service.read(config)
-    expect(mockBasicsRepository).toHaveBeenCalledWith(config)
+    return service.read(config).then(() => {
+      expect(mockBasicsRepository).toHaveBeenCalledWith(config)
+    })
   })
 
   test("Should delegate to the NumbersRepository when the topic is Numbers & Counting", () => {

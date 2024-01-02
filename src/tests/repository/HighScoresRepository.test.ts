@@ -1,8 +1,8 @@
 import HighScoresRepository, { FindAllHighScoreEntries } from "../../repository/HighScoresRepository"
 import RestClient from "../../rest/RestClient"
 
-const mockGet = jest.fn()
-const mockPost = jest.fn()
+const mockGet = vi.fn()
+const mockPost = vi.fn()
 
 describe("High-Scores Repository", () => {
   const repository = new HighScoresRepository()

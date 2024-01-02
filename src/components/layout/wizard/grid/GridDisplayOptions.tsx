@@ -22,7 +22,7 @@ const GridDisplayOptions = (props: GridDisplayOptionsProps) => {
     onSelect({ type: type, size: size })
   }, [type, size])
 
-  const onGridItemSizeChange = (e: React.ChangeEvent, value: number) => {
+  const onGridItemSizeChange = (_e: React.ChangeEvent, value: number) => {
     setSize(value)
   }
 

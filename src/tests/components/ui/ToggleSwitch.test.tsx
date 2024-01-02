@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import ToggleSwitch, { ToggleSwitchProps } from "../../../components/ui/ToggleSwitch"
 
-const onChangeHandler = jest.fn()
+const onChangeHandler = vi.fn()
 
 let props: ToggleSwitchProps
 

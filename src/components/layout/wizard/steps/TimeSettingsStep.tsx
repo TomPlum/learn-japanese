@@ -1,4 +1,3 @@
-import React from "react"
 import TimeSettingsForm from "../../../settings/game/TimeSettingsForm"
 import TimeSettings from "../../../../domain/session/settings/game/TimeSettings"
 

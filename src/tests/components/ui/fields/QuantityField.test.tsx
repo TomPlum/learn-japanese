@@ -4,8 +4,8 @@ import renderWithTranslation from "../../../renderWithTranslation"
 
 let props: QuantityFieldProps
 
-const isValidHandler = jest.fn()
-const onChangeHandler = jest.fn()
+const isValidHandler = vi.fn()
+const onChangeHandler = vi.fn()
 
 beforeEach(() => {
   props = {

@@ -1,5 +1,4 @@
 import { Learnable } from "../../../domain/learn/Learnable"
-import React from "react"
 import { GameQuestionProps } from "../MemoryGame"
 import EnglishInput from "../../ui/fields/EnglishInput"
 import GameQuestion from "../../../domain/game/GameQuestion"

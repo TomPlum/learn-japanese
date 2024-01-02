@@ -6,7 +6,7 @@ import { createBrowserHistory } from "history"
 import { store } from "../store"
 
 beforeEach(() => {
-  const mockEnvironment = jest.fn()
+  const mockEnvironment = vi.fn()
   mockEnvironment.mockReturnValueOnce("/example-base-path/")
   mockEnvironment.mockReturnValueOnce("landing page description")
   Environment.variable = mockEnvironment

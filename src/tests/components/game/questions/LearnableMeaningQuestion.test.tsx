@@ -12,7 +12,7 @@ import React from "react"
 import Definition from "../../../../domain/sentence/Definition"
 import JLTPLevel from "../../../../domain/learn/JLTPLevel"
 
-const isValidHandler = jest.fn()
+const isValidHandler = vi.fn()
 const ref = React.createRef<LearnableMeaningQuestion>()
 
 const fish = new Kanji(

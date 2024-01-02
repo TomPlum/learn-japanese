@@ -2,7 +2,7 @@ import { rest } from "msw"
 import { api } from "../util"
 
 export const handlers = [
-  rest.get(`${api}/genki/all`, (req, res, ctx) => {
+  rest.get(`${api}/genki/all`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([

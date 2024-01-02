@@ -7,7 +7,7 @@ import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
 import { getByTextWithMarkup } from "../../Queries"
 
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 let props: KanjiSearchResultProps
 

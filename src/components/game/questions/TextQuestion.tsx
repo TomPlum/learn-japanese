@@ -1,4 +1,4 @@
-import React, { forwardRef, Ref, useImperativeHandle, useRef, useState } from "react"
+import { forwardRef, Ref, useImperativeHandle, useRef, useState } from "react"
 import { Col, Form, Row } from "react-bootstrap"
 import { GameQuestionProps, MemoryGameQuestion } from "../MemoryGame"
 import QuestionDisplay, { QuestionDisplayHandler } from "../../ui/display/QuestionDisplay"

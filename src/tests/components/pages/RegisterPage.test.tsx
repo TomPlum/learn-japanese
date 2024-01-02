@@ -8,19 +8,19 @@ import auth from "../../../service/AuthenticationService"
 import { testUser } from "../../../setupTests"
 import renderTranslatedReduxConsumer from "../../renderTranslatedReduxConsumer"
 
-const mockUsernameEligible = jest.fn()
-const mockEmailEligible = jest.fn()
-const mockRegister = jest.fn()
+const mockUsernameEligible = vi.fn()
+const mockEmailEligible = vi.fn()
+const mockRegister = vi.fn()
 const history = createMemoryHistory()
 
-jest.mock("../../../service/UserService", () => {
-  return function () {
+vi.mock("../../../service/UserService", () => ({
+  default: function () {
     return {
       usernameExists: mockUsernameEligible,
       emailAlreadyRegistered: mockEmailEligible
     }
   }
-})
+}))
 
 beforeEach(() => {
   auth.register = mockRegister

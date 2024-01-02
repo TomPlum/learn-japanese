@@ -7,7 +7,7 @@ import { setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 
 let props: ConfidenceButtonProps
-const onClickHandler = jest.fn()
+const onClickHandler = vi.fn()
 
 const setup = () => {
   const component = renderReduxConsumer(<ConfidenceButton {...props} />)

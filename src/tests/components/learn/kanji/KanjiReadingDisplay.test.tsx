@@ -9,7 +9,7 @@ const kunReading = new KanjiReading("minami", "みなみ", ReadingType.KUN)
 
 const onReadingTwo = new KanjiReading("koku", "こく", ReadingType.ON)
 
-const mockEnvironment = jest.fn()
+const mockEnvironment = vi.fn()
 
 beforeEach(() => {
   Environment.variable = mockEnvironment

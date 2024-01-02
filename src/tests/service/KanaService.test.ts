@@ -4,12 +4,12 @@ import { Kana } from "../../domain/kana/Kana"
 import KanaType from "../../domain/kana/KanaType"
 import { KanaColumn } from "../../domain/kana/KanaColumn"
 
-const mockGetKana = jest.fn()
-jest.mock("../../repository/KanaRepository", () => {
-  return function () {
+const mockGetKana = vi.fn()
+vi.mock("../../repository/KanaRepository", () => ({
+  default: function () {
     return { read: mockGetKana }
   }
-})
+}))
 
 const hiragana = [
   new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component } from "react"
+import { ChangeEvent, Component } from "react"
 import GameInputField from "./GameInputField"
 import PopOver from "../PopOver"
 

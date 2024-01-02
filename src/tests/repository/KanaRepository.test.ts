@@ -7,20 +7,21 @@ import { KanaData } from "../../data/DataTypes"
 import katakana from "../../data/Katakana"
 import { KanaSettingsBuilder } from "../../domain/session/settings/data/KanaSettings"
 import RestClient from "../../rest/RestClient"
+import { Mock } from "vitest";
 
-jest.mock("../../data/Hiragana")
-jest.mock("../../data/Katakana")
+vi.mock("../../data/Hiragana")
+vi.mock("../../data/Katakana")
 
-const mockConverter = jest.fn()
-jest.mock("../../converter/KanaConverter", () => {
-  return function () {
+const mockConverter = vi.fn()
+vi.mock("../../converter/KanaConverter", () => ({
+  default: function () {
     return { convert: mockConverter }
   }
-})
+}))
 
-const mockHiragana = hiragana as jest.MockedFunction<() => KanaData[]>
-const mockKatakana = katakana as jest.MockedFunction<() => KanaData[]>
-const mockGet = jest.fn()
+const mockHiragana = hiragana as Mock<KanaData[]>
+const mockKatakana = katakana as Mock<KanaData[]>
+const mockGet = vi.fn()
 
 const hiraganaResponse = [{ character: "あ", romaji: ["a"], column: "vowel", diacritical: false }]
 const katakanaResponse = [{ character: "ア", romaji: ["a"], column: "vowel", diacritical: false }]

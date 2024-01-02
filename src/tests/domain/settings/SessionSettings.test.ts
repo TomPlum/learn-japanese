@@ -46,8 +46,8 @@ describe("Session Settings", () => {
   })
 
   describe("From Preset Static Factory Constructor", () => {
-    const mockForGameConstructor = jest.fn()
-    const mockForLearningConstructor = jest.fn()
+    const mockForGameConstructor = vi.fn()
+    const mockForLearningConstructor = vi.fn()
 
     const gameSessionSettings = SessionSettings.forGame(dataSettings, gameSettings)
     const learnSessionSettings = SessionSettings.forLearning(dataSettings, learnSettings)

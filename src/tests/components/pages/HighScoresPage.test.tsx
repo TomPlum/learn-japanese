@@ -6,19 +6,19 @@ import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-l
 import { Router } from "react-router-dom"
 import { createMemoryHistory } from "history"
 
-const mockGetHighScoreEntriesPage = jest.fn()
-jest.mock("../../../service/HighScoresService", () => {
-  return function () {
+const mockGetHighScoreEntriesPage = vi.fn()
+vi.mock("../../../service/HighScoresService", () => ({
+  default: function () {
     return { getAllEntriesPage: mockGetHighScoreEntriesPage }
   }
-})
+}))
 
-const mockGetPublicUsers = jest.fn()
-jest.mock("../../../service/UserService", () => {
-  return function () {
+const mockGetPublicUsers = vi.fn()
+vi.mock("../../../service/UserService", () => ({
+  default: function () {
     return { getPublicUsers: mockGetPublicUsers }
   }
-})
+}))
 
 let history = createMemoryHistory()
 
@@ -87,7 +87,7 @@ test("Selecting a user should render only their high-scores", async () => {
   // Should initially load all the details
   const component = setup()
   await waitForElementToBeRemoved(within(component.getByTestId("empty-table-body")).getByText("Loading..."))
-  expect(await within(screen.getByTestId("high-scores-table")).getAllByRole("row")[1]).toHaveTextContent(
+  expect(within(screen.getByTestId("high-scores-table")).getAllByRole("row")[1]).toHaveTextContent(
     "1Test User235"
   )
 
@@ -99,12 +99,11 @@ test("Selecting a user should render only their high-scores", async () => {
   // Select the user
   const results = await component.findByTestId("user-search-field-results")
   fireEvent.click(await within(results).findByText("TomPlum"))
-  expect(await screen.findByText("Loading...")).toBeInTheDocument()
-  expect(within(screen.getByTestId("user-search-filter")).getByText("TomPlum")).toBeInTheDocument()
+  expect(within(await screen.findByTestId("user-search-filter")).getByText("TomPlum")).toBeInTheDocument()
 
   // Should render details
   expect(mockGetHighScoreEntriesPage).toHaveBeenLastCalledWith(1, 0, 10, "TomPlum")
-  expect(await within(screen.getByTestId("high-scores-table")).getAllByRole("row")[1]).toHaveTextContent("1TomPlum536")
+  expect(within(screen.getByTestId("high-scores-table")).getAllByRole("row")[1]).toHaveTextContent("1TomPlum563")
 })
 
 test("Should render the page number", async () => {

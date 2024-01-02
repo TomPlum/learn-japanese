@@ -12,7 +12,7 @@ export interface HashLinkProps {
 const HashLink = (props: React.PropsWithChildren<HashLinkProps>) => {
   const { path, className, disabled, style, children, onClick } = props
 
-  const href = path ? process.env.REACT_APP_BASE_PATH + path : ""
+  const href = path ? import.meta.env.VITE_BASE_PATH + path : ""
 
   return (
     <span onClick={onClick}>

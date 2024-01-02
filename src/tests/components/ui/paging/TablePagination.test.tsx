@@ -3,13 +3,13 @@ import TablePagination, { TablePaginationProps } from "../../../../components/ui
 import userEvent from "@testing-library/user-event"
 import { getByTextWithElements } from "../../../Queries"
 
-const onFirstPageHandler = jest.fn()
-const onNextPageHandler = jest.fn()
-const onPreviousPageHandler = jest.fn()
-const onLastPageHandler = jest.fn()
-const onChangeQuantityHandler = jest.fn()
-const onToggleFirstBookHandler = jest.fn()
-const onToggleSecondBookHandler = jest.fn()
+const onFirstPageHandler = vi.fn()
+const onNextPageHandler = vi.fn()
+const onPreviousPageHandler = vi.fn()
+const onLastPageHandler = vi.fn()
+const onChangeQuantityHandler = vi.fn()
+const onToggleFirstBookHandler = vi.fn()
+const onToggleSecondBookHandler = vi.fn()
 
 let props: TablePaginationProps
 
@@ -67,9 +67,9 @@ test("Clicking the previous button should call the onPreviousPage event handler"
   expect(onPreviousPageHandler).toHaveBeenCalled()
 })
 
-test("Selecting an option from the rows per page select should call the onChangeQuantity event handler", () => {
+test("Selecting an option from the rows per page select should call the onChangeQuantity event handler", async () => {
   const { rows } = setup()
-  userEvent.selectOptions(rows, "Show 20")
+  await userEvent.selectOptions(rows, "Show 20")
   expect(onChangeQuantityHandler).toHaveBeenCalledWith(20)
 })
 

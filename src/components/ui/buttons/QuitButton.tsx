@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import { Component } from "react"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
 import styles from "../../../styles/sass/components/ui/buttons/QuitButton.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

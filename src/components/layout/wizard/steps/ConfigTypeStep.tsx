@@ -1,5 +1,5 @@
 import { Button, Col, Container, Row } from "react-bootstrap"
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import styles from "../../../../styles/sass/components/layout/wizard/steps/ConfigTypeStep.module.scss"
 import { faHammer, faProjectDiagram } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

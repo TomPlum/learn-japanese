@@ -3,7 +3,6 @@ import PageNumber from "../../../domain/learn/PageNumber"
 import QuoteDisplay from "../../ui/display/QuoteDisplay"
 import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
 import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
-import React from "react"
 
 const useGenkiChapter1 = () => {
   const c1p1: GrammarInfoProps = {

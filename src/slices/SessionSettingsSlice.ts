@@ -68,7 +68,7 @@ export const sessionSettingsSlice = createSlice({
       state.lastLearnSession = value
       localStorage.setItem(LAST_LEARN_SESSION_KEY, JSON.stringify(value))
     },
-    setLastCustomSession: (state, action: PayloadAction<SessionSettings>) => {
+    setLastCustomSession: (_state, action: PayloadAction<SessionSettings>) => {
       const payload = action.payload
 
       const value: SessionSettingsState = {

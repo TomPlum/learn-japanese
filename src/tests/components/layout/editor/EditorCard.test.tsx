@@ -1,8 +1,8 @@
 import { createEvent, fireEvent, render } from "@testing-library/react"
 import EditorCard from "../../../../components/layout/editor/EditorCard"
 
-const onDragStartHandler = jest.fn()
-const mockSetData = jest.fn()
+const onDragStartHandler = vi.fn()
+const mockSetData = vi.fn()
 
 test("Should call the onDragStart event handler when dragging the card", () => {
   const { container } = render(<EditorCard name="test-card" size="sm" onDragStart={onDragStartHandler} />)

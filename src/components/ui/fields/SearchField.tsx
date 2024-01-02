@@ -1,7 +1,6 @@
 import { Form, InputGroup } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import React from "react"
 import styles from "../../../styles/sass/components/ui/fields/SearchField.module.scss"
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons"
 
