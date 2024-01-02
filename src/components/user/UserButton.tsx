@@ -1,4 +1,3 @@
-import React from "react"
 import { faChartBar, faDoorOpen, faTrophy, faUser, faUserCircle } from "@fortawesome/free-solid-svg-icons"
 import { useUserDispatch, useUserSelector } from "../../hooks"
 import { clearUser } from "../../slices/UserSlice"

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { useState } from "react"
+import { useState } from "react"
 import { Modal } from "react-bootstrap"
 import styles from "../../styles/sass/components/user/UserForm.module.scss"
 import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons"

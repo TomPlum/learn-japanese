@@ -1,5 +1,4 @@
 import { Notification, NotificationType } from "../../../slices/NotificationSlice"
-import React from "react"
 import styles from "../../../styles/sass/components/ui/display/NotificationDisplay.module.scss"
 import { faBell, faExclamationCircle, faInfoCircle, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

@@ -62,37 +62,37 @@ const Preferences = (props: PreferencesProps) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | undefined>(undefined)
 
-  const onSelectDefaultFont = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
+  const onSelectDefaultFont = (_eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
     setSelectedFont((event.target as HTMLSelectElement).textContent!)
     setChanges(true)
   }
 
-  const onSelectTheme = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
+  const onSelectTheme = (_eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
     setTheme((event.target as HTMLSelectElement).textContent!)
     setChanges(true)
   }
 
-  const onSelectLanguage = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
+  const onSelectLanguage = (_eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
     setLanguage((event.target as HTMLSelectElement).textContent!)
     setChanges(true)
   }
 
-  const onSelectHighScorePreference = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
+  const onSelectHighScorePreference = (_eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
     setHighScorePreference((event.target as HTMLSelectElement).textContent!)
     setChanges(true)
   }
 
-  const onSetAppMode = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
+  const onSetAppMode = (_eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
     setAppMode((event.target as HTMLSelectElement).textContent!)
     setChanges(true)
   }
 
-  const onSetCardsPerDay = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
+  const onSetCardsPerDay = (_eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
     setCardsPerDay(Number((event.target as HTMLSelectElement).textContent!))
     setChanges(true)
   }
 
-  const onSetConfidenceMenuStyle = (eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
+  const onSetConfidenceMenuStyle = (_eventKey: string | null, event: React.SyntheticEvent<unknown>) => {
     setConfidenceMenuStyle((event.target as HTMLSelectElement).textContent!)
     setChanges(true)
   }

@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import { Component } from "react"
 import { Kana } from "../../../domain/kana/Kana"
 import KanaTile from "./KanaTile"
 import StackGrid, { transitions } from "react-stack-grid"

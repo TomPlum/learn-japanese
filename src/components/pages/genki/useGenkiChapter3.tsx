@@ -5,7 +5,6 @@ import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.modul
 import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
 import GenkiHighlightDisplay from "../../ui/genki/GenkiHighlightDisplay"
 import QuoteDisplay from "../../ui/display/QuoteDisplay"
-import React from "react"
 
 const UseGenkiChapter3 = () => {
   const c3p1: GrammarInfoProps = {

@@ -19,7 +19,7 @@ export interface DashboardActivityEventProps {
 const DashboardActivityEvent = (props: PropsWithChildren<DashboardActivityEventProps>) => {
   const { event, className, onClick, onDismiss, children } = props
 
-  const { name, icon, colour, time } = event
+  const { name, icon, colour } = event
 
   const { t } = useTranslation("translation", { keyPrefix: "dashboard.card.activity.time" })
   const actions = useTranslation("translation", { keyPrefix: "action" }).t

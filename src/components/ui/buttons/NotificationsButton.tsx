@@ -1,7 +1,7 @@
 import { faBell, faCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Nav, Overlay, Popover } from "react-bootstrap"
-import React, { useRef, useState } from "react"
+import { useRef, useState } from "react"
 import menuStyles from "../../../styles/sass/components/layout/NavigationBar.module.scss"
 import { useNotificationDispatch, useNotificationSelector } from "../../../hooks"
 import NotificationDisplay from "../display/NotificationDisplay"

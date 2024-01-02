@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import UserService from "../../../service/UserService"
 import styles from "../../../styles/sass/components/ui/table/SingleUserHighScoresTable.module.scss"
 import { HighScoreEntry } from "../../../service/HighScoresService"
 import { Table } from "react-bootstrap"
@@ -8,12 +7,8 @@ export interface SingleUserHighScoresTableProps {
   user: string
 }
 
-const SingleUserHighScoresTable = (props: SingleUserHighScoresTableProps) => {
-  const { user } = props
-
-  const [entries, setEntries] = useState<HighScoreEntry[]>([])
-
-  const service = new UserService()
+const SingleUserHighScoresTable = (_props: SingleUserHighScoresTableProps) => {
+  const [entries] = useState<HighScoreEntry[]>([])
 
   useEffect(() => {}, [])
 
@@ -31,7 +26,6 @@ const SingleUserHighScoresTable = (props: SingleUserHighScoresTableProps) => {
           {entries
             .sort((a, b) => ((a.score ?? 0) < (b.score ?? 0) ? 1 : -1))
             .map((entry: HighScoreEntry, i: number) => {
-              const username = entry.user.name
               return (
                 <tr key={entry.user.id}>
                   <td>{i + 1}</td>

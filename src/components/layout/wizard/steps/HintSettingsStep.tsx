@@ -1,5 +1,4 @@
 import HintSettingsForm from "../../../settings/game/HintSettingsForm"
-import React from "react"
 import HintSettings from "../../../../domain/session/settings/game/HintSettings"
 
 export interface HintSettingsStepProps {

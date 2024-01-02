@@ -176,6 +176,6 @@ export default class Arrays {
    * @param end The last value in the array.
    */
   static range = (start: number, end: number): number[] => {
-    return Array.from({ length: end - start }, (v, k) => k + start)
+    return Array.from({ length: end - start }, (_v, k) => k + start)
   }
 }

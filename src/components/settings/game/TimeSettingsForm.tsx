@@ -1,4 +1,4 @@
-import React, { ChangeEvent, forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
+import { ChangeEvent, forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
 import { Col, Fade, Row } from "react-bootstrap"
 import TimeSettings, { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings"
 import styles from "../../../styles/sass/components/settings/game/TimeSettingsForm.module.scss"
@@ -62,7 +62,7 @@ const TimeSettingsForm = forwardRef((props: TimeSettingsFormProps, ref: Ref<Sett
     }
   }
 
-  const onChangeCountDownSeconds = (e: ChangeEvent, value: number) => {
+  const onChangeCountDownSeconds = (_e: ChangeEvent, value: number) => {
     setSecondsPerQuestion(value)
   }
 

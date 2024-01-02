@@ -1,5 +1,5 @@
 import styles from "../../../../styles/sass/components/layout/wizard/steps/ModeSelectionStep.module.scss"
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGraduationCap, faPlay } from "@fortawesome/free-solid-svg-icons"

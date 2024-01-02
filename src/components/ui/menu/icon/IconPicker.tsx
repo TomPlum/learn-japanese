@@ -1,5 +1,5 @@
 import styles from "../../../../styles/sass/components/ui/menu/icon/IconPicker.module.scss"
-import React, { useState } from "react"
+import { useState } from "react"
 import { Form, OverlayTrigger, Popover } from "react-bootstrap"
 import { iconList } from "../../../../icons"
 import { CustomIcon } from "../../../../domain/Icon"

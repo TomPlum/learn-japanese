@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Dropdown, ListGroup } from "react-bootstrap"
 import Topic from "../../../domain/Topic"
 import TopicListOption from "../select/TopicListOption"

@@ -1,5 +1,4 @@
 import { fireEvent, screen } from "@testing-library/react"
-import React from "react"
 import AnswerChoiceDisplay, { AnswerChoiceDisplayProps } from "../../../../components/ui/display/AnswerChoiceDisplay"
 import renderReduxConsumer from "../../../renderReduxConsumer"
 

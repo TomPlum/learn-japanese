@@ -13,4 +13,8 @@ export default class DiagraphFilter implements Filter<Kana> {
   apply(kana: Kana[]): Kana[] {
     return kana.filter((kana) => kana.isDiagraph() === this.include)
   }
+
+  includesDiacriticals() {
+    return this.includeDiacriticals
+  }
 }

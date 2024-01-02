@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import DashboardCard from "../layout/card/DashboardCard"
 import DashboardCardHeader from "../layout/card/DashboardCardHeader"
 import { faBell, faChess, faCog, faDesktop, faGraduationCap, faUser } from "@fortawesome/free-solid-svg-icons"

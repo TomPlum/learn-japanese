@@ -24,7 +24,7 @@ const HighScoresPage = () => {
   const [pageSize, setPageSize] = useState(10)
   const [pageNumber, setPageNumber] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
-  const [totalEntries, setTotalEntries] = useState(0)
+  const [, setTotalEntries] = useState(0)
   const [presets, setPresets] = useState<PlayMode[]>([])
   const [selectedPreset, setSelectedPreset] = useState(1)
   const [entries, setEntries] = useState<HighScoreEntry[]>([])

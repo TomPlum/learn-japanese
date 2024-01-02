@@ -154,7 +154,7 @@ describe("Arrays Utility", () => {
   describe("Take First", () => {
     it("Should return the first element", () => {
       const array = [1, 2, 3]
-      const [remaining, first] = Arrays.takeFirst(array)
+      const [, first] = Arrays.takeFirst(array)
       expect(first).toBe(1)
     })
 

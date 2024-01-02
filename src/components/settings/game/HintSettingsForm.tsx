@@ -40,7 +40,7 @@ const HintSettingsForm = forwardRef((props: HintSettingsFormProps, ref: Ref<Sett
     }
   }))
 
-  const onChangeHintQuantity = (e: React.ChangeEvent, value: number) => {
+  const onChangeHintQuantity = (_e: React.ChangeEvent, value: number) => {
     setQuantity(value)
   }
 

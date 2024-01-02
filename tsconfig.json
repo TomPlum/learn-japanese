@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2021", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "baseUrl": "./",
@@ -25,7 +25,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "decs.d.ts", "cypress/"],
-  "exclude": ["cypress.config.ts", "node_modules"],
+  "include": [
+    "src",
+    "decs.d.ts",
+    "cypress/"
+  ],
+  "exclude": ["cypress.config.ts", "cypress", "node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -55,7 +55,7 @@ export default class ComponentTree {
 
     const children: ReactElement[] = this.getAllChildren()
 
-    children.reverse().forEach((child: ReactNode, i: number) => {
+    children.reverse().forEach((_child: ReactNode, i: number) => {
       if (i === children.length - 1) {
         const leaf = children[i]
         response = React.cloneElement(leaf, props ? props(leaf) : leaf.props)

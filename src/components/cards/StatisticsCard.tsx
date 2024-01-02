@@ -21,13 +21,13 @@ const dummyKanaData = [
   { type: "Katakana", value: 78, fill: "#5cce3d" }
 ]
 
-const dummyOtherData = [
+/*const dummyOtherData = [
   { type: "Verbs", value: 10, fill: "#4189ff" },
   { type: "Adjectives", value: 50, fill: "#5dca41" },
   { type: "Adverbs", value: 22, fill: "#f59037" },
   { type: "Nouns", value: 67, fill: "#8f46ea" },
   { type: "Counters", value: 12, fill: "#d952d9" }
-]
+]*/
 
 enum StatView {
   PLAY,

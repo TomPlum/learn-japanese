@@ -1,7 +1,6 @@
 import styles from "../../../styles/sass/components/layout/card/DashboardCardLink.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronRight, IconDefinition } from "@fortawesome/free-solid-svg-icons"
-import React from "react"
 import { SafeAnchorProps } from "react-bootstrap"
 
 export interface DashboardCardLinkProps {

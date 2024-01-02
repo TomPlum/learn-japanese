@@ -1,5 +1,4 @@
 import { Form } from "react-bootstrap"
-import React from "react"
 import styles from "../../styles/sass/components/ui/ToggleSwitch.module.scss"
 
 export interface ToggleSwitchProps {

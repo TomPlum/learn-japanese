@@ -1,4 +1,4 @@
-import React, { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
+import { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
 import QuestionType from "../../../domain/game/QuestionType"
 import DisplayTypeButton from "../../ui/buttons/DisplayTypeButton"
 import {

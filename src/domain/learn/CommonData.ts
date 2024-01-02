@@ -25,6 +25,10 @@ export default class CommonData extends Learnable {
     this.example = example
   }
 
+  getQuestion() {
+    return this.question
+  }
+
   getKana(): string[] {
     return this.kana
   }

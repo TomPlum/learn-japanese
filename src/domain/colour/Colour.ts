@@ -20,6 +20,10 @@ export default class Colour extends Learnable {
     return this._colour
   }
 
+  get romaji(): string {
+    return this._romaji
+  }
+
   getKanjiVariation(): string | undefined {
     return this._kanji
   }

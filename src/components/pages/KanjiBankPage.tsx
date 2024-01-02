@@ -1,5 +1,5 @@
 import { Alert, Col, Container, Row } from "react-bootstrap"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import KanjiService, { KanjiResult } from "../../service/KanjiService"
 import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade"
 import LoadingSpinner from "../ui/loading/LoadingSpinner"
