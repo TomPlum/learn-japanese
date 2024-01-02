@@ -1,4 +1,4 @@
-import { Component } from "react"
+import React, { useEffect, useImperativeHandle, useState } from "react";
 
 export interface CountDownProps {
   value: number
@@ -6,57 +6,54 @@ export interface CountDownProps {
   onFinish: () => void
 }
 
-interface CountDownState {
-  remaining: number
-  interval: any
+export interface CountDownHandle {
+  stop: () => void
+  reset: () => void
 }
 
-class CountDown extends Component<CountDownProps, CountDownState> {
-  constructor(props: CountDownProps | Readonly<CountDownProps>) {
-    super(props)
-    this.state = {
-      remaining: this.props.value,
-      interval: undefined
+const CountDown = React.forwardRef(({ value, className, onFinish }: CountDownProps, ref: React.Ref<CountDownHandle>) => {
+  const interval = React.useRef<NodeJS.Timeout>()
+  const [remaining, setRemaining] = useState(value)
+
+  const reset = () => {
+    clearInterval(interval.current)
+    setRemaining(value)
+    start()
+  }
+
+  useImperativeHandle(ref, () => ({
+    reset,
+    stop: () => {
+      clearInterval(interval.current)
     }
-  }
+  }))
 
-  componentDidMount() {
-    this.start()
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.state.interval)
-  }
-
-  render() {
-    return (
-      <span className={this.props.className} title="Time Remaining">
-        {this.state.remaining}
-      </span>
-    )
-  }
-
-  reset = () => {
-    clearInterval(this.state.interval)
-    this.setState({ remaining: this.props.value, interval: undefined }, () => this.start())
-  }
-
-  stop = () => {
-    clearInterval(this.state.interval)
-    this.setState({ interval: undefined })
-  }
-
-  private decrement = () => {
-    const { remaining } = this.state
+  const decrement = () => {
     if (remaining === 0) {
-      this.props.onFinish()
-      this.reset()
+      onFinish()
+      reset()
     } else {
-      this.setState({ remaining: remaining - 1 })
+      setRemaining(current => current - 1)
     }
   }
 
-  private start = () => this.setState({ interval: setInterval(() => this.decrement(), 1000) })
-}
+  const start = () => {
+    interval.current = setInterval(decrement, 1000)
+  }
+
+  useEffect(() => {
+    start()
+
+    return () => clearInterval(interval.current)
+  })
+
+  return (
+    <span className={className} title="Time Remaining">
+      {remaining}
+    </span>
+  )
+})
+
+CountDown.displayName = 'CountDown'
 
 export default CountDown

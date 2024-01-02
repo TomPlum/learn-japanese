@@ -806,7 +806,7 @@ test("Failing to correctly answer the question before the countdown finishes sho
   expect(screen.getByText("9")).toBeInTheDocument()
 })
 
-test("Failing to correctly answer the question before the countdown finishes should reset the countdown", () => {
+test("Failing to correctly answer the question before the countdown finishes should reset the countdown", async () => {
   props.settings = new GameSettingsBuilder()
     .fromExisting(props.settings)
     .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
@@ -815,10 +815,12 @@ test("Failing to correctly answer the question before the countdown finishes sho
   setup()
 
   expect(screen.getByText("5")).toBeInTheDocument()
-  vi.advanceTimersByTime(3000)
-  expect(screen.getByText("2")).toBeInTheDocument()
-  vi.advanceTimersByTime(3000)
-  expect(screen.getByText("5")).toBeInTheDocument()
+
+  await act(() => vi.advanceTimersByTime(3000))
+  expect(await screen.findByText("2")).toBeInTheDocument()
+
+  await act(() => vi.advanceTimersByTime(3000))
+  expect(await screen.findByText("5")).toBeInTheDocument()
 })
 
 test("Failing to correctly answer the question before the countdown finishes should reduce the hints if one was used", async () => {

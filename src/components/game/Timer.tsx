@@ -19,11 +19,12 @@ export interface TimerHandle {
 
 
 const Timer = React.forwardRef(({ pausable, onPaused, className }: TimerProps, ref: React.Ref<TimerHandle>) => {
-  const [start, setStart] = useState(Date.now())
-  const [current, setCurrent] = useState(Date.now())
   const interval = React.useRef<NodeJS.Timeout>()
+
   const [paused, setPaused] = useState(false)
+  const [start, setStart] = useState(Date.now())
   const [isStopped, setIsStopped] = useState(false)
+  const [current, setCurrent] = useState(Date.now())
 
   const startTimer = () => {
     interval.current = setInterval(tick, 1000)
@@ -44,16 +45,15 @@ const Timer = React.forwardRef(({ pausable, onPaused, className }: TimerProps, r
     restart: () => {
       setStart(Date.now())
       setCurrent(Date.now())
-      clearInterval(interval.current) // TODO: Was setInterval(undefined) in state?
+      clearInterval(interval.current)
       setPaused(false)
       setIsStopped(false)
       startTimer()
     },
-    getCurrentTime: () => formatTimeElapsed()
+    getCurrentTime: formatTimeElapsed
   }))
 
   const pause = () => {
-    console.log('Paused')
     onChangePausedState()
     setPaused(true)
     clearInterval(interval.current)

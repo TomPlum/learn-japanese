@@ -5,7 +5,7 @@ import LifeDisplay from "./LifeDisplay"
 import QuitButton from "../ui/buttons/QuitButton"
 import GameResult from "../../domain/game/GameResult"
 import { GameFinishReason } from "../../domain/game/GameFinishReason"
-import CountDown from "./CountDown"
+import CountDown, { CountDownHandle } from "./CountDown";
 import QuestionType from "../../domain/game/QuestionType"
 import SessionProgressBar from "../ui/SessionProgressBar"
 import SubmitButton from "../ui/buttons/SubmitButton"
@@ -53,7 +53,7 @@ const MemoryGame = (props: MemoryGameProps) => {
   const { data, settings, onFinish } = props
 
   const timerRef = useRef<TimerHandle>(null)
-  const countdownRef = useRef<CountDown>(null)
+  const countdownRef = useRef<CountDownHandle>(null)
   const questionRef = useRef<any>(null) // TODO: Can we type as GameQuestion here?
 
   /**

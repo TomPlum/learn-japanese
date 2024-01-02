@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react"
-import CountDown, { CountDownProps } from "../../../components/game/CountDown"
+import { act, render, screen, waitFor } from "@testing-library/react";
+import CountDown, { CountDownHandle, CountDownProps } from "../../../components/game/CountDown";
 import React from "react"
 
 beforeEach(() => {
-  vi.useFakeTimers()
+  vi.useFakeTimers({ shouldAdvanceTime: true })
 })
 
 afterEach(() => {
@@ -19,48 +19,54 @@ const props: CountDownProps = {
   onFinish: onFinishHandler
 }
 
-test("On mount the timer should start counting down", () => {
+test("On mount the timer should start counting down", async () => {
   render(<CountDown {...props} />)
-  expect(screen.getByText("10")).toBeInTheDocument()
-  vi.advanceTimersByTime(1000)
-  expect(screen.getByText("9")).toBeInTheDocument()
+  expect(await screen.findByText("10")).toBeInTheDocument()
+
+  await act(() => vi.advanceTimersByTime(1000))
+  expect(await screen.findByText("9")).toBeInTheDocument()
 })
 
-test("Calling stop should stop the timer", () => {
-  const ref = React.createRef<CountDown>()
+test("Calling stop should stop the timer", async () => {
+  const ref = React.createRef<CountDownHandle>()
   render(<CountDown {...props} ref={ref} />)
 
-  vi.advanceTimersByTime(1000)
-  expect(screen.getByText("9")).toBeInTheDocument()
+  await act(() => vi.advanceTimersByTime(1000))
+  expect(await screen.findByText("9")).toBeInTheDocument()
 
-  ref.current?.stop()
-  vi.advanceTimersByTime(1000)
-  expect(screen.getByText("9")).toBeInTheDocument()
+  act(() => ref.current?.stop())
+  await act(() => vi.advanceTimersByTime(1000))
+  expect(await screen.findByText("9")).toBeInTheDocument()
 })
 
-test("Calling reset should restart the timer from the original value", () => {
-  const ref = React.createRef<CountDown>()
+test("Calling reset should restart the timer from the original value", async () => {
+  const ref = React.createRef<CountDownHandle>()
   render(<CountDown {...props} ref={ref} />)
 
-  vi.advanceTimersByTime(1000)
-  expect(screen.getByText("9")).toBeInTheDocument()
+  await act(() => vi.advanceTimersByTime(1000))
+  expect(await screen.findByText("9")).toBeInTheDocument()
 
-  ref.current?.reset()
-  expect(screen.getByText("10")).toBeInTheDocument()
+  act(() => ref.current?.reset())
+  expect(await screen.findByText("10")).toBeInTheDocument()
 })
 
-test("When the timer reaches 0 it should call the onFinish event handler", () => {
+test("When the timer reaches 0 it should call the onFinish event handler", async () => {
   render(<CountDown {...props} />)
-  vi.advanceTimersByTime(11000)
-  expect(onFinishHandler).toHaveBeenCalled()
+
+  await act(() => vi.advanceTimersByTime(10000))
+  expect(await screen.findByText("0")).toBeInTheDocument()
+
+  await act(() => vi.advanceTimersByTime(1000))
+  await waitFor(() => expect(onFinishHandler).toHaveBeenCalled())
 })
 
-test("When the timer reaches 0 it should reset back to its starting value", () => {
+test("When the timer reaches 0 it should reset back to its starting value", async () => {
   render(<CountDown {...props} />)
 
-  vi.advanceTimersByTime(5000)
-  expect(screen.getByText("5")).toBeInTheDocument()
+  await act(() => vi.advanceTimersByTime(5000))
+  expect(await screen.findByText("5")).toBeInTheDocument()
 
-  vi.advanceTimersByTime(6000)
-  expect(screen.getByText("10")).toBeInTheDocument()
+  await act(() => vi.advanceTimersByTime(5000))
+  await act(() => vi.advanceTimersByTime(1000))
+  expect(await screen.findByText("10")).toBeInTheDocument()
 })
