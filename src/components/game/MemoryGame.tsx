@@ -186,7 +186,7 @@ const MemoryGame = (props: MemoryGameProps) => {
       getAudio(success)
         .play()
         .catch(e => {
-          console.log("Failed to play \"success sound effect\"", e)
+          console.debug("Failed to play \"success sound effect\"", e)
         })
 
       //Add the current question to the correct answers set.
@@ -199,7 +199,7 @@ const MemoryGame = (props: MemoryGameProps) => {
         getAudio(finish)
           .play()
           .catch(e => {
-            console.log("Failed to play \"finished sound effect\"", e)
+            console.debug("Failed to play \"finished sound effect\"", e)
           })
 
         //Stop the timer / countdown.
@@ -219,7 +219,7 @@ const MemoryGame = (props: MemoryGameProps) => {
       getAudio(wrong)
         .play()
         .catch(e => {
-          console.log("Failed to play \"wrong sound effect\"", e)
+          console.debug("Failed to play \"wrong sound effect\"", e)
         })
 
 

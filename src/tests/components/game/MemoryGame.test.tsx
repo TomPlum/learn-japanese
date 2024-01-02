@@ -378,32 +378,32 @@ test("Answering all questions correctly should stop the timer", () => {
   const { submit } = setup()
 
   // Answer 1st correctly
-  vi.advanceTimersByTime(5000)
+  act(() => vi.advanceTimersByTime(5000))
   fireEvent.change(getRomajiInput(), { target: { value: "a" } })
   fireEvent.click(submit)
 
   // Answer 2nd correctly
-  vi.advanceTimersByTime(3000)
+  act(() => vi.advanceTimersByTime(3000))
   fireEvent.change(getRomajiInput(), { target: { value: "i" } })
   fireEvent.click(submit)
 
   // Answer 3rd correctly
-  vi.advanceTimersByTime(2000)
+  act(() => vi.advanceTimersByTime(2000))
   fireEvent.change(getRomajiInput(), { target: { value: "u" } })
   fireEvent.click(submit)
 
   // Answer 4th correctly
-  vi.advanceTimersByTime(2000)
+  act(() => vi.advanceTimersByTime(2000))
   fireEvent.change(getRomajiInput(), { target: { value: "e" } })
   fireEvent.click(submit)
 
   // Answer 5th correctly
-  vi.advanceTimersByTime(15000)
+  act(() => vi.advanceTimersByTime(15000))
   fireEvent.change(getRomajiInput(), { target: { value: "o" } })
   fireEvent.click(submit)
 
   // Advancing the timer to prove the timer has stopped
-  vi.advanceTimersByTime(10000)
+  act(() => vi.advanceTimersByTime(10000))
   expect(screen.getByText("00:27")).toBeInTheDocument()
 })
 
@@ -418,27 +418,27 @@ test("Answering all questions correctly should stop call the onFinish even handl
   const { submit } = setup()
 
   // Answer 1st correctly
-  vi.advanceTimersByTime(5000)
+  act(() => vi.advanceTimersByTime(5000))
   fireEvent.change(getRomajiInput(), { target: { value: "a" } })
   fireEvent.click(submit)
 
   // Answer 2nd correctly
-  vi.advanceTimersByTime(3000)
+  act(() => vi.advanceTimersByTime(3000))
   fireEvent.change(getRomajiInput(), { target: { value: "i" } })
   fireEvent.click(submit)
 
   // Answer 3rd correctly
-  vi.advanceTimersByTime(2000)
+  act(() => vi.advanceTimersByTime(2000))
   fireEvent.change(getRomajiInput(), { target: { value: "u" } })
   fireEvent.click(submit)
 
   // Answer 4th correctly
-  vi.advanceTimersByTime(5000)
+  act(() => vi.advanceTimersByTime(5000))
   fireEvent.change(getRomajiInput(), { target: { value: "e" } })
   fireEvent.click(submit)
 
   // Answer 5th correctly
-  vi.advanceTimersByTime(15000)
+  act(() => vi.advanceTimersByTime(15000))
   fireEvent.change(getRomajiInput(), { target: { value: "o" } })
   fireEvent.click(submit)
 
@@ -576,7 +576,7 @@ test("Answering incorrectly with 1 life remaining should call the onFinish event
   const { submit } = setup()
 
   // Advance the time, lets assume it took 12 seconds
-  vi.advanceTimersByTime(12000)
+  act(() => vi.advanceTimersByTime(12000))
 
   // Answer 1st correctly
   fireEvent.change(getRomajiInput(), { target: { value: "a" } })
@@ -779,7 +779,7 @@ test("Disabling the countdown should not render the countdown", () => {
   expect(screen.queryByTitle("Time Remaining")).not.toBeInTheDocument()
 })
 
-test("Failing to correctly answer the question before the countdown finishes should present the next kana", () => {
+test("Failing to correctly answer the question before the countdown finishes should present the next kana", async () => {
   props.settings = new GameSettingsBuilder()
     .fromExisting(props.settings)
     .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
@@ -788,11 +788,14 @@ test("Failing to correctly answer the question before the countdown finishes sho
   setup()
 
   expect(screen.getByText("あ")).toBeInTheDocument()
-  vi.advanceTimersByTime(6000)
+
+  await act(() => vi.advanceTimersByTime(5000))
+  await act(() => vi.advanceTimersByTime(1000))
+
   expect(screen.getByText("い")).toBeInTheDocument()
 })
 
-test("Failing to correctly answer the question before the countdown finishes should subtract a life if enabled", () => {
+test("Failing to correctly answer the question before the countdown finishes should subtract a life if enabled", async () => {
   props.settings = new GameSettingsBuilder()
     .fromExisting(props.settings)
     .withTimeSettings(new TimeSettingsBuilder().isCountDown().withSecondsPerQuestion(5).build())
@@ -802,8 +805,9 @@ test("Failing to correctly answer the question before the countdown finishes sho
   setup()
 
   expect(screen.getByText("10")).toBeInTheDocument()
-  vi.advanceTimersByTime(6000)
-  expect(screen.getByText("9")).toBeInTheDocument()
+  await act(() => vi.advanceTimersByTime(5000))
+  await act(() => vi.advanceTimersByTime(1000))
+  expect(await screen.findByText("9")).toBeInTheDocument()
 })
 
 test("Failing to correctly answer the question before the countdown finishes should reset the countdown", async () => {
@@ -819,7 +823,8 @@ test("Failing to correctly answer the question before the countdown finishes sho
   await act(() => vi.advanceTimersByTime(3000))
   expect(await screen.findByText("2")).toBeInTheDocument()
 
-  await act(() => vi.advanceTimersByTime(3000))
+  await act(() => vi.advanceTimersByTime(2000))
+  await act(() => vi.advanceTimersByTime(1000))
   expect(await screen.findByText("5")).toBeInTheDocument()
 })
 
@@ -840,7 +845,8 @@ test("Failing to correctly answer the question before the countdown finishes sho
   fireEvent.click(screen.getByText("Click to Reveal"))
 
   // Deplete countdown time
-  vi.advanceTimersByTime(6000)
+  await act(() => vi.advanceTimersByTime(5000))
+  await act(() => vi.advanceTimersByTime(1000))
 
   // The hint quantity should be reduced by 1
   await userEvent.click(screen.getByTestId("hint-button"))
@@ -861,9 +867,8 @@ test("Failing to correctly answer the question before the countdown finishes sho
   expect(await screen.findByText("Need a hint? (5/5 remaining)")).toBeInTheDocument()
 
   // Deplete the countdown timer
-  act(() => {
-    vi.advanceTimersByTime(6000)
-  })
+  await act(() => vi.advanceTimersByTime(5000))
+  await act(() => vi.advanceTimersByTime(1000))
 
   // We should have 5 on the next question
   fireEvent.click(screen.getByTestId("hint-button"))
