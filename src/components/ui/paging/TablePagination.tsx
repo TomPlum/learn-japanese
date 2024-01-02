@@ -81,7 +81,7 @@ const TablePagination = (props: TablePaginationProps) => {
               {disabled && <span className="text-muted">No Results</span>}
             </Pagination.Item>
 
-            <Pagination.Next onClick={onNextPage} disabled={!canNextPage} title="Next Page">
+            <Pagination.Next onClick={onNextPage} disabled={!canNextPage} title="Next Page" data-testid='table-pagination-next'>
               <FontAwesomeIcon icon={faChevronRight} size="sm" fixedWidth />
             </Pagination.Next>
 

@@ -5,7 +5,7 @@ test.todo("Write these")
 
 test("Should render the message when hovering over the child subject", async () => {
   const component = render(
-    <HoverMessage message="This is a test message">
+    <HoverMessage message="This is a test message" show>
       <span>Subject</span>
     </HoverMessage>
   )

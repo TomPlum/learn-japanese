@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from "@testing-library/react"
+import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import ConfirmationStep from "../../../../../components/layout/wizard/steps/ConfirmationStep"
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
 import { KanjiSettingsBuilder } from "../../../../../domain/session/settings/data/KanjiSettings"
@@ -22,7 +22,7 @@ const dataSettings = new KanjiSettingsBuilder()
 let settings: SessionSettings
 
 beforeEach(() => {
-  vi.useFakeTimers()
+  vi.useFakeTimers({ shouldAdvanceTime: true })
 })
 
 afterEach(() => {
@@ -66,7 +66,6 @@ test("Clicking the cancel button in the save preset form should stop rendering t
   expect(screen.getByText("Save Preset")).toBeInTheDocument()
 })
 
-//TODO: Fix the act() warning here. The setInSavePresetForm() call triggers it. Can't assert much else other than accordion visibility
 test("Clicking the save button in the save preset form should hide the form and button after 2 seconds", async () => {
   store.dispatch(setUser(testUser))
   mockPresetService.mockResolvedValueOnce({ success: true })
@@ -86,7 +85,7 @@ test("Clicking the save button in the save preset form should hide the form and 
   // Click save and wait 2 seconds
   fireEvent.click(screen.getByText("Save"))
   expect(await screen.findByText('Saved "My Preset" successfully.')).toBeInTheDocument()
-  vi.advanceTimersByTime(2000)
+  await act(() => vi.advanceTimersByTime(2000))
 
   // The save preset button should not re-render and the accordion should have collapsed
   expect(screen.queryByText("Save Preset")).not.toBeInTheDocument()

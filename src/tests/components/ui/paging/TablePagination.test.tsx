@@ -67,9 +67,9 @@ test("Clicking the previous button should call the onPreviousPage event handler"
   expect(onPreviousPageHandler).toHaveBeenCalled()
 })
 
-test("Selecting an option from the rows per page select should call the onChangeQuantity event handler", () => {
+test("Selecting an option from the rows per page select should call the onChangeQuantity event handler", async () => {
   const { rows } = setup()
-  userEvent.selectOptions(rows, "Show 20")
+  await userEvent.selectOptions(rows, "Show 20")
   expect(onChangeQuantityHandler).toHaveBeenCalledWith(20)
 })
 

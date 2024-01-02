@@ -9,6 +9,14 @@ export const getByTextWithMarkup = (text: string) => {
   })
 }
 
+export const findByTextWithMarkup = async (text: string) => {
+  const hasText = (node: Element) => node.textContent === text
+  return screen.findByText((_: any, node: any) => {
+    const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as Element))
+    return hasText(node) && childrenDontHaveText
+  })
+}
+
 export const getByTextWithElements = (text: string): HTMLElement => {
   return screen.getByText((content: Matcher, element: any) => {
     return content !== "" && element && element.textContent === text

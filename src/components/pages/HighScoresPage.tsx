@@ -115,9 +115,11 @@ const HighScoresPage = () => {
               values={presets.map((preset) => ({ display: t(preset.displayName), value: preset.id }))}
             />
           </div>
+
           <div>
             <UserSearchField disabled={loading} className={styles.search} onSelect={handleSelectUser} />
           </div>
+
           {username && (
             <div className={styles.userFilterToggle} data-testid="user-search-filter">
               <FontAwesomeIcon icon={faFilter} className={styles.filter} />

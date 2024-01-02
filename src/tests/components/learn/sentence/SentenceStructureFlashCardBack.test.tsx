@@ -1,42 +1,58 @@
-import { fireEvent, render } from "@testing-library/react"
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import SentenceStructureFlashCardBack from "../../../../components/learn/sentence/SentenceStructureFlashCardBack"
-import { getByTextWithMarkup } from "../../../Queries"
+import { findByTextWithMarkup } from "../../../Queries";
 import Definition from "../../../../domain/sentence/Definition"
+import { Kanji } from "../../../../domain/kanji/Kanji.ts"
+import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade.ts"
+import JLTPLevel from "../../../../domain/learn/JLTPLevel.ts"
+
+const mockKanjiRepository = vi.fn()
+vi.mock("repository/KanjiRepository.ts", () => ({
+  default: function () {
+    return { getByValue: mockKanjiRepository }
+  }
+}))
+
+beforeEach(() => {
+  mockKanjiRepository.mockResolvedValue(
+    new Kanji("面", [], ["screen"], KyoikuGrade.THREE, JLTPLevel.N5, "", [], 12, [])
+  )
+})
 
 const onResetHandler = vi.fn()
 
 const adjective = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective")
 
-test("Clicking the reset button should call the onReset event handler", () => {
+test("Clicking the reset button should call the onReset event handler", async () => {
   const component = render(
     <SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />
   )
   fireEvent.click(component.getByTitle("Reset"))
-  expect(onResetHandler).toHaveBeenCalled()
+  await waitFor(() => expect(onResetHandler).toHaveBeenCalled())
 })
 
-test("Should render the kanji variation", () => {
+test("Should render the kanji variation", async () => {
   render(<SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />)
-  expect(getByTextWithMarkup("面白い")).toBeInTheDocument()
+  expect(await findByTextWithMarkup("面白い")).toBeInTheDocument()
 })
 
-test("Should render the kana", () => {
+test("Should render the kana", async () => {
   const component = render(
     <SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />
   )
-  expect(component.getByText("おもしろい")).toBeInTheDocument()
+  expect(await component.findByText("おもしろい")).toBeInTheDocument()
 })
 
-test("Should render the romaji if passed as true", () => {
+test("Should render the romaji if passed as true", async () => {
   const component = render(
     <SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={true} />
   )
-  expect(component.getByText("omoshiroi")).toBeInTheDocument()
+  expect(await component.findByText("omoshiroi")).toBeInTheDocument()
 })
 
-test("Should render the romaji if passed as false", () => {
+test("Should render the romaji if passed as false", async () => {
   const component = render(
     <SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />
   )
-  expect(component.queryByText("omoshiroi")).not.toBeInTheDocument()
+  await waitFor(() => expect(component.queryByText("omoshiroi")).not.toBeInTheDocument())
 })

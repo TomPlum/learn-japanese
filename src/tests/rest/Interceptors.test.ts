@@ -144,7 +144,7 @@ describe("Axios Interceptors", () => {
         })
         expect(store.getState().user.user?.token).toBe("ACCESS_TOKEN")
         expect(store.getState().user.user?.refreshToken).toBe("REFRESH_TOKEN")
-        expect(mockApi).toHaveBeenCalledWith({ retry: true, url: "/user/set-nickname" })
+        expect(mockApi).toHaveBeenCalledWith({ retry: true, url: "/user/set-nickname", headers: new AxiosHeaders() })
       })
     })
 

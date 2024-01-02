@@ -11,13 +11,11 @@ import JLTPLevel from "../../domain/learn/JLTPLevel"
 
 //Mock Kanji Converter
 const mockConverter = vi.fn()
-vi.mock(
-  "../../converter/KanjiConverter",
-  () =>
-    function () {
-      return { convert: mockConverter }
-    }
-)
+vi.mock("../../converter/KanjiConverter", () => ({
+  default: function () {
+    return { convert: mockConverter }
+  }
+}))
 
 //Mock RestClient Methods
 const mockPost = vi.fn()

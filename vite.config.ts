@@ -9,6 +9,8 @@ export default defineConfig({
   resolve: {
     alias: {
       api: "/src/api",
+      domain: "/src/domain",
+      repository: "/src/repository",
       components: "/src/components",
       modules: "/src/modules",
       hooks: "/src/hooks",

@@ -102,15 +102,15 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
               {this.getConnectorRenderCondition(question) && (
                 <LineTo
                   delay={0}
-                  from={question}
-                  className={styles.connector}
                   toAnchor="left"
-                  fromAnchor="right"
+                  from={question}
                   borderWidth={5}
+                  fromAnchor="right"
+                  className={styles.connector}
+                  data-testid={question + "-connector"}
+                  to={this.getConnectorTarget(question)}
                   borderStyle={this.getConnectorStyle(question)}
                   borderColor={this.getConnectorColour(question)}
-                  to={this.getConnectorTarget(question)}
-                  data-testid={question + "-connector"}
                 />
               )}
             </Row>

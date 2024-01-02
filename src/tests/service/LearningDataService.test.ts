@@ -35,7 +35,7 @@ vi.mock("../../service/KanjiService", () => ({
 }))
 
 const mockBasicsRepository = vi.fn()
-vi.mock("../../service/BasicsRepository", () => ({
+vi.mock("../../repository/BasicsRepository", () => ({
   default: function () {
     return { read: mockBasicsRepository }
   }
@@ -92,8 +92,9 @@ describe("Learn Data Repository", () => {
 
   test("Should delegate to the BasicsRepository when the topic is Basics", () => {
     const config: DataSettings = new BasicsSettingsBuilder().withColours().build()
-    service.read(config)
-    expect(mockBasicsRepository).toHaveBeenCalledWith(config)
+    return service.read(config).then(() => {
+      expect(mockBasicsRepository).toHaveBeenCalledWith(config)
+    })
   })
 
   test("Should delegate to the NumbersRepository when the topic is Numbers & Counting", () => {

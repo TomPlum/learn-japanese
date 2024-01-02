@@ -139,8 +139,10 @@ test("Should call the update favourites service function and onSuccess callback 
   fireEvent.click(component.getByText("Save"))
 
   // Should update the favourites and call the onSuccess event handler
-  expect(await mockUpdateFavourites).toHaveBeenCalledWith([2], [3])
-  expect(onSuccessHandler).toHaveBeenCalled()
+  await waitFor(() => {
+    expect(mockUpdateFavourites).toHaveBeenCalledWith([2], [3])
+    expect(onSuccessHandler).toHaveBeenCalled()
+  })
 })
 
 test("Should deselect existing and new favourites when clicking them once selected", async () => {
@@ -170,8 +172,10 @@ test("Should deselect existing and new favourites when clicking them once select
   fireEvent.click(component.getByText("Save"))
 
   // Should update the favourites and call the onSuccess event handler
-  expect(await mockUpdateFavourites).toHaveBeenCalledWith([], [])
-  expect(onSuccessHandler).toHaveBeenCalled()
+  await waitFor(() => {
+    expect(mockUpdateFavourites).toHaveBeenCalledWith([], [])
+    expect(onSuccessHandler).toHaveBeenCalled()
+  })
 })
 
 test("Should toggle available play presets when clicking the filter play presets button", async () => {
