@@ -16,7 +16,7 @@
     "framer-motion": "^10.16.16",
     "globals": "^13.19.0",
     "i18next": "^23.7.13",
-    "peer": "^0.6.1",
+    "peer": "^1.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^1.6.4",
     "react-card-flip": "^1.2.2",
