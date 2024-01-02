@@ -25,13 +25,28 @@ const ActivityCard = () => {
   const getEvent = (type: ActivityEventType): ActivityEventDetails => {
     switch (type) {
       case ActivityEventType.LEARN: {
-        return { name: t("event.learn"), icon: faGraduationCap, colour: "#ffe53c", time: Date.now() }
+        return {
+          name: t("event.learn"),
+          icon: faGraduationCap,
+          colour: "#ffe53c",
+          time: Date.now()
+        }
       }
       case ActivityEventType.PLAY: {
-        return { name: t("event.play"), icon: faPlay, colour: "#2ec947", time: Date.now() - 1500000 }
+        return {
+          name: t("event.play"),
+          icon: faPlay,
+          colour: "#2ec947",
+          time: Date.now() - 1500000
+        }
       }
       case ActivityEventType.MISTAKES: {
-        return { name: t("event.mistakes"), icon: faEraser, colour: "#dc7bde", time: Date.now() - 10000000 }
+        return {
+          name: t("event.mistakes"),
+          icon: faEraser,
+          colour: "#dc7bde",
+          time: Date.now() - 10000000
+        }
       }
       case ActivityEventType.POST_REGISTRATION: {
         return {
