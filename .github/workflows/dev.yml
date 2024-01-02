@@ -3,13 +3,8 @@ run-name: Compilation & Quality Checks
 on:
   push:
     branches:
-      - dev
-  pull_request:
-    types:
-      - opened
-    branches:
       - '*'
-      - '!dev'
+
 jobs:
   build:
     runs-on: ubuntu-latest
