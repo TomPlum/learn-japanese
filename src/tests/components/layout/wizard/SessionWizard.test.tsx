@@ -208,7 +208,7 @@ test("Clicking the back button in a normal scenario should go back a single step
   expect(screen.getByTestId("wizard-mode-step")).toBeInTheDocument()
 })
 
-test("Clicking Start in the confirmation step for custom play should set the selected settings in the store", () => {
+test("Clicking Start in the confirmation step for custom play should set the selected settings in the store", async () => {
   // The Redux store should start empty
   expect(store.getState().gameSettings.settings).toBeUndefined()
   expect(store.getState().dataSettings.settings).toBeUndefined()
@@ -230,8 +230,8 @@ test("Clicking Start in the confirmation step for custom play should set the sel
   // Select some custom question settings
   fireEvent.click(screen.getByText("Multiple Choice"))
   fireEvent.click(screen.getByText("6"))
-  userEvent.selectOptions(screen.getAllByTestId("learnable-field-selector")[0], "Kanji")
-  userEvent.selectOptions(screen.getAllByTestId("learnable-field-selector")[1], "English Meaning")
+  await userEvent.selectOptions(screen.getAllByTestId("learnable-field-selector")[0], "Kanji")
+  await userEvent.selectOptions(screen.getAllByTestId("learnable-field-selector")[1], "English Meaning")
   fireEvent.click(next)
 
   // Change the hint settings

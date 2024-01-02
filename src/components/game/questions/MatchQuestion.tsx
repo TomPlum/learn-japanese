@@ -1,8 +1,7 @@
-import React from "react"
-import { GameQuestionProps } from "../MemoryGame"
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
+import { GameQuestionProps, MemoryGameQuestion } from "../MemoryGame";
 import { Col, Container, Row } from "react-bootstrap"
 import AnswerChoiceDisplay from "../../ui/display/AnswerChoiceDisplay"
-import GameQuestion from "../../../domain/game/GameQuestion"
 import LineTo from "react-lineto"
 import Maps from "../../../utility/Maps"
 import styles from "../../../styles/sass/components/game/questions/MatchQuestion.module.scss"
@@ -11,143 +10,63 @@ export interface MatchQuestionProps extends GameQuestionProps {
   data: Map<string, string>
 }
 
-interface MatchQuestionState {
-  answer: Map<string, string>
-  selected?: string
-  hoveredAnswer?: string
-  xCursor: number
-  yCursor: number
-}
+const MatchQuestion = React.forwardRef(({ data, isValid }: MatchQuestionProps, ref: React.Ref<MemoryGameQuestion>) => {
+  const container = React.createRef<HTMLDivElement>()
+  const values = useRef<Map<string, string>>(Maps.shuffle(data))
 
-class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState> {
-  private readonly container = React.createRef<HTMLDivElement>()
-  private readonly displays: Map<string, React.RefObject<AnswerChoiceDisplay>> = new Map()
-  private readonly values = new Map<string, string>()
+  const [xCursor, setXCursor] = useState<number>(0)
+  const [yCursor, setYCursor] = useState<number>(0)
+  const [selected, setSelected] = useState<string>()
+  const [hoveredAnswer, setHoveredAnswer] = useState<string>()
+  const [answer, setAnswer] = useState<Map<string, string>>(new Map())
+  const [displays, setDisplays] = useState<Map<string, React.RefObject<AnswerChoiceDisplay>>>(new Map())
 
-  constructor(props: Readonly<MatchQuestionProps> | MatchQuestionProps) {
-    super(props)
-
-    const keyValues = [...props.data.keys()].concat([...props.data.values()])
+  useEffect(() => {
+    const keyValues = [...data.keys()].concat([...data.values()])
     keyValues.forEach((value: string) => {
-      this.displays.set(value, React.createRef<AnswerChoiceDisplay>())
+      setDisplays(current => {
+        current.set(value, React.createRef<AnswerChoiceDisplay>())
+        return current
+      })
     })
 
-    this.values = Maps.shuffle(props.data)
+    container?.current?.addEventListener("mousemove", handleCursorMove)
+    container?.current?.addEventListener("touchmove", handleTouchMove)
 
-    this.state = {
-      answer: new Map(),
-      selected: undefined,
-      hoveredAnswer: undefined,
-      xCursor: 0,
-      yCursor: 0
+    return () => {
+      container?.current?.removeEventListener("mousemove", handleCursorMove)
+      container?.current?.removeEventListener("touchmove", handleTouchMove)
     }
-  }
+  }, [])
 
-  componentDidMount() {
-    this.container?.current?.addEventListener("mousemove", this.handleCursorMove)
-    this.container?.current?.addEventListener("touchmove", this.handleTouchMove)
-  }
+  useImperativeHandle(ref, () => ({
+    isCorrect:(): boolean => {
+      const isCorrect = Maps.areEqual(data, answer)
 
-  componentWillUnmount() {
-    this.container?.current?.removeEventListener("mousemove", this.handleCursorMove)
-    this.container?.current?.removeEventListener("touchmove", this.handleTouchMove)
-  }
+      if (!isCorrect) {
+        displays.forEach((ref: React.RefObject<AnswerChoiceDisplay>) => ref.current?.notifyIncorrect())
+        setSelected(undefined)
+        setHoveredAnswer(undefined)
+        setAnswer(new Map())
+      }
 
-  render() {
-    const { xCursor, yCursor } = this.state
-
-    return (
-      <Container className={styles.wrapper} ref={this.container} onMouseUp={this.resetSelected}>
-        <div style={{ left: xCursor, top: yCursor }} className={styles.cursor} />
-
-        {[...this.values.keys()].map((question: string, i: number) => {
-          const answer = this.values.get(question)!
-
-          return (
-            <Row className={[styles.row, "justify-content-around"].join(" ")} key={`row-${i}`}>
-              <Col xs={5} md={4}>
-                <AnswerChoiceDisplay
-                  value={question}
-                  ref={this.displays.get(question)}
-                  onMouseUp={this.resetSelected}
-                  onTouchEnd={this.resetSelected}
-                  onMouseDown={this.handleQuestionSelection}
-                  onTouchStart={this.handleQuestionSelection}
-                  style={{
-                    container: [question, styles.display],
-                    character: { className: this.getQuestionValueClassName(question) }
-                  }}
-                />
-              </Col>
-
-              <Col xs={2} md={4}></Col>
-
-              <Col xs={5} md={4}>
-                <AnswerChoiceDisplay
-                  value={answer}
-                  ref={this.displays.get(answer)}
-                  onMouseUp={this.handleAnswerAttempt}
-                  onTouchEnd={this.handleAnswerAttempt}
-                  onMouseDown={this.handleAnswerChange}
-                  onTouchStart={this.handleAnswerChange}
-                  onMouseOver={(value: string) => this.setState({ hoveredAnswer: value })}
-                  onMouseOut={this.resetHoveredAnswer}
-                  style={{
-                    container: [answer, styles.display],
-                    character: { className: this.getAnswerValueClassName(answer) }
-                  }}
-                />
-              </Col>
-
-              {this.getConnectorRenderCondition(question) && (
-                <LineTo
-                  delay={0}
-                  toAnchor="left"
-                  from={question}
-                  borderWidth={5}
-                  fromAnchor="right"
-                  className={styles.connector}
-                  data-testid={question + "-connector"}
-                  to={this.getConnectorTarget(question)}
-                  borderStyle={this.getConnectorStyle(question)}
-                  borderColor={this.getConnectorColour(question)}
-                />
-              )}
-            </Row>
-          )
-        })}
-      </Container>
-    )
-  }
-
-  isCorrect = (): boolean => {
-    const { data } = this.props
-    const { answer } = this.state
-    const isCorrect = Maps.areEqual(data, answer)
-
-    if (!isCorrect) {
-      this.displays.forEach((ref: React.RefObject<AnswerChoiceDisplay>) => ref.current?.notifyIncorrect())
-      this.setState({ selected: undefined, hoveredAnswer: undefined, answer: new Map() })
+      return isCorrect
     }
+  }))
 
-    return isCorrect
-  }
-
-  private handleAnswerAttempt = (selectedAnswer: string) => {
-    const { data, isValid } = this.props
-    const { answer, selected } = this.state
+  const handleAnswerAttempt = (selectedAnswer: string) => {
     const selectedAnswers = [...answer.values()]
 
     if (selected && !selectedAnswers.includes(selectedAnswer)) {
       answer.set(selected, selectedAnswer)
-      this.setState({ answer: answer, selected: undefined })
+      setAnswer(answer)
+      setSelected(undefined)
     }
 
     isValid(data.size === answer.size)
   }
 
-  private getQuestionValueClassName = (value: string): string => {
-    const { selected, answer } = this.state
+  const getQuestionValueClassName = (value: string): string => {
     if (answer.has(value)) {
       return styles.matched
     } else if (selected === value) {
@@ -157,8 +76,7 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
     }
   }
 
-  private getAnswerValueClassName = (value: string): string => {
-    const { selected, answer, hoveredAnswer } = this.state
+  const getAnswerValueClassName = (value: string): string => {
     if ([...answer.values()].includes(value)) {
       return styles.matched
     } else if (selected && hoveredAnswer === value) {
@@ -168,65 +86,127 @@ class MatchQuestion extends GameQuestion<MatchQuestionProps, MatchQuestionState>
     }
   }
 
-  private handleQuestionSelection = (value: string) => {
-    const { answer } = this.state
+  const handleQuestionSelection = (value: string) => {
     if (!answer.has(value)) {
-      this.setState({ selected: value })
+      setSelected(value)
     }
   }
 
-  private resetSelected = () => {
-    this.setState({ selected: undefined })
+  const resetSelected = () => {
+    setSelected(undefined)
   }
 
-  private resetHoveredAnswer = () => {
-    this.setState({ hoveredAnswer: undefined })
+  const resetHoveredAnswer = () => {
+    setHoveredAnswer(undefined)
   }
 
-  private handleCursorMove = (e: MouseEvent) => {
-    this.setState({ xCursor: e.pageX, yCursor: e.pageY })
+  const handleCursorMove = (e: MouseEvent) => {
+    setXCursor(e.pageX)
+    setYCursor(e.pageY)
   }
 
-  private handleTouchMove = (e: TouchEvent) => {
+  const handleTouchMove = (e: TouchEvent) => {
     const touch = e.touches[0]
-    this.setState({ xCursor: touch.pageX, yCursor: touch.pageY })
+    setXCursor(touch.pageX)
+    setYCursor(touch.pageY)
   }
 
-  private handleAnswerChange = (selectedAnswer: string) => {
-    const { answer } = this.state
+  const handleAnswerChange = (selectedAnswer: string) => {
     const answers = [...answer.values()]
     if (answers.includes(selectedAnswer)) {
       //Reverse mapping - gets the question for the selected answer
       const question = [...answer.entries()].filter((entry) => entry[1] === selectedAnswer)[0][0]
       answer.delete(question)
-      this.setState({ selected: question, answer: answer })
+      setSelected(question)
+      setAnswer(answer)
     }
   }
 
-  private getConnectorTarget = (question: string): string => {
-    const { answer } = this.state
+  const getConnectorTarget = (question: string): string => {
     if (answer.has(question)) {
       return answer.get(question)!
     }
     return styles.cursor
   }
 
-  private getConnectorRenderCondition = (question: string): boolean => {
-    const { selected, answer } = this.state
+  const getConnectorRenderCondition = (question: string): boolean => {
     const questionIsSelected = question === selected
     const questionHasMatchedAnswer = answer.has(question)
     return questionIsSelected || questionHasMatchedAnswer
   }
 
-  private getConnectorStyle = (question: string): string => {
-    const { answer } = this.state
+  const getConnectorStyle = (question: string): string => {
     return answer.has(question) ? "solid" : "dashed"
   }
 
-  private getConnectorColour = (question: string) => {
-    const { answer } = this.state
+  const getConnectorColour = (question: string) => {
     return answer.has(question) ? "#7a7a7a" : "#4594e9"
   }
-}
+
+  return (
+    <Container className={styles.wrapper} ref={container} onMouseUp={resetSelected}>
+      <div style={{ left: xCursor, top: yCursor }} className={styles.cursor} />
+
+      {[...values.current.keys()].map((question: string, i: number) => {
+        const answer = values.current.get(question)!
+
+        return (
+          <Row className={[styles.row, "justify-content-around"].join(" ")} key={`row-${i}`}>
+            <Col xs={5} md={4}>
+              <AnswerChoiceDisplay
+                value={question}
+                ref={displays.get(question)}
+                onMouseUp={resetSelected}
+                onTouchEnd={resetSelected}
+                onMouseDown={handleQuestionSelection}
+                onTouchStart={handleQuestionSelection}
+                style={{
+                  container: [question, styles.display],
+                  character: { className: getQuestionValueClassName(question) }
+                }}
+              />
+            </Col>
+
+            <Col xs={2} md={4} />
+
+            <Col xs={5} md={4}>
+              <AnswerChoiceDisplay
+                value={answer}
+                ref={displays.get(answer)}
+                onMouseOut={resetHoveredAnswer}
+                onMouseUp={handleAnswerAttempt}
+                onTouchEnd={handleAnswerAttempt}
+                onMouseDown={handleAnswerChange}
+                onTouchStart={handleAnswerChange}
+                onMouseOver={(value: string) => setHoveredAnswer(value)}
+                style={{
+                  container: [answer, styles.display],
+                  character: { className: getAnswerValueClassName(answer) }
+                }}
+              />
+            </Col>
+
+            {getConnectorRenderCondition(question) && (
+              <LineTo
+                delay={0}
+                toAnchor="left"
+                from={question}
+                borderWidth={5}
+                fromAnchor="right"
+                className={styles.connector}
+                to={getConnectorTarget(question)}
+                data-testid={question + "-connector"}
+                borderStyle={getConnectorStyle(question)}
+                borderColor={getConnectorColour(question)}
+              />
+            )}
+          </Row>
+        )
+      })}
+    </Container>
+  )
+})
+
+MatchQuestion.displayName = 'MatchQuestion'
 
 export default MatchQuestion

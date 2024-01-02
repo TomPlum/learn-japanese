@@ -4,7 +4,7 @@ import Arrays from "../../../utility/Arrays"
 import { findByTextWithElements } from "../../Queries"
 
 beforeEach(() => {
-  vi.useFakeTimers()
+  vi.useFakeTimers({ shouldAdvanceTime: true })
   Arrays.getRandomObject = vi.fn().mockImplementation(() => {
     return ["test loading message", []]
   })

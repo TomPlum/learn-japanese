@@ -183,7 +183,7 @@ test("It should select the first preset if one is not passed as selected", async
   // Mouse over to show the description, this only happens when selected
   fireEvent.mouseOver(await screen.findByTestId("grid-item-1"))
 
-  expect(await screen.findByText("This is an example play description")).toBeInTheDocument()
+  expect(onSelectHandler).toHaveBeenCalledWith(playPreset)
 })
 
 test("It should call the isValid event handler with false if the get all presets call fails", async () => {

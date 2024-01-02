@@ -267,7 +267,11 @@ const SessionWizard = (props: SessionWizardProps) => {
       <Modal.Body className={styles.modal}>
         <div className={styles.header}>
           <FontAwesomeIcon icon={icon} className={iconClass} />
-          <span className={styles.stage}>{name}</span>
+
+          <span className={styles.stage}>
+            {name}
+          </span>
+
           <FontAwesomeIcon
             fixedWidth
             icon={faTimes}
