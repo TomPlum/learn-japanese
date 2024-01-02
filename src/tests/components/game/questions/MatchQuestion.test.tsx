@@ -2,7 +2,7 @@ import { act, fireEvent, screen } from "@testing-library/react"
 import MatchQuestion, { MatchQuestionProps } from "../../../../components/game/questions/MatchQuestion"
 import React from "react"
 import renderReduxConsumer from "../../../renderReduxConsumer"
-import { MemoryGameQuestion } from "components/game/MemoryGame.tsx";
+import { MemoryGameQuestion } from "../../../../components/game/MemoryGame"
 
 let props: MatchQuestionProps
 

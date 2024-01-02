@@ -2,8 +2,9 @@ import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { GameQuestionProps, MemoryGameQuestion } from "../MemoryGame";
 import { Col, Container, Row } from "react-bootstrap"
 import AnswerChoiceDisplay from "../../ui/display/AnswerChoiceDisplay"
-import LineTo from "react-lineto"
 import Maps from "../../../utility/Maps"
+// @ts-ignore
+import LineTo from './LineTo'
 import styles from "../../../styles/sass/components/game/questions/MatchQuestion.module.scss"
 
 export interface MatchQuestionProps extends GameQuestionProps {

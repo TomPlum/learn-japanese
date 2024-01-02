@@ -33,6 +33,18 @@ export default defineConfig({
       modules: {
         classNameStrategy: 'non-scoped'
       }
-    }
+    },
+    coverage: {
+      reporter: ['text', 'html'],
+      exclude: [
+        'node_modules/',
+        'src/setupTests.ts',
+        'src/index.tsx',
+        'src/data/**',
+        'src/types/game/mode/**',
+        'src/types/learn/mode/**',
+        'src/tests/**'
+      ],
+    },
   }
 })
