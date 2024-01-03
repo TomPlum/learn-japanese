@@ -83,7 +83,7 @@ for root, dirs, files in os.walk("./src/components"):
                 for line in fileinput.input(f'{newDirectory}/{file}', inplace=1):
                     if line.startswith('import') and stylesNameCandidate in line:
                         # Updated the SASS module to its relative to the same dir
-                        print(f'import styles from \'./{stylesNameCandidate}\'')
+                        print(line.replace(stylesNameCandidate, f'{rawFileName}/{stylesNameCandidate}')
                     elif 'from' in line and '../' in line:
                         # Bump relative imports in the implementation file that was moved to the new sub folder
                         print(line.replace('../', '../../', 1).rstrip())
@@ -103,33 +103,14 @@ for root, dirs, files in os.walk("./src/components"):
                             lhs = line.split('from ')[0]
                             updatedImport = f'{lhs} from "./{rawFileName}"'
                             print(updatedImport)
-                        # elif f'/{rawFileName}' in line:
-                        #     # Update the implementation under tests import to be relative to current dir
-                        #     # This is for imports that have been broken into multiple lines, we just replace the last
-                        #     lhs = line.split('from ')[0]
-                        #     updatedImport = f'}} {lhs} from "./{rawFileName}'
-                        #     print(updatedImport)
                         elif line.startswith('import') and '../' in line:
                             # Bump relative imports in the test file that was moved to the new sub folder
                             print(line.replace('../', '../../', 1).rstrip())
                         else:
                             print(line.rstrip())
 
-                indexContents = 'export { default } from \'./' + rawFileName + '\''
+                # Write an index.ts file to the new folder
+                indexContents = 'export { default } from \'./' + rawFileName + '\'\nexport * from \'./' + rawFileName + '\''
                 print(indent, 'Creating index.ts in new folder with contents: ', indexContents)
                 index = open(newDirectory + '/index.ts', 'x')
                 index.write(indexContents)
-
-                # print(indent, 'Replacing imports')
-                # importsReplaced = []
-                # for tsxFile in tsxFiles:
-                #     for line in fileinput.input(tsxFile, inplace=1):
-                #         if line.startswith('import') and f'/{rawFileName}"' in line:
-                #             newImport = line.replace(f'/{rawFileName}"', f'{parentFolder}/{rawFileName}"')
-                #             importsReplaced.append(f'{line} replaced with {newImport}')
-                #             print(newImport.rstrip())
-                #         else:
-                #             print(line.rstrip())
-                #
-                # if len(importsReplaced) > 0:
-                #     print(indent, importsReplaced)
