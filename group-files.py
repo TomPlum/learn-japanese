@@ -83,7 +83,15 @@ for root, dirs, files in os.walk("./src/components"):
                 for line in fileinput.input(f'{newDirectory}/{file}', inplace=1):
                     if line.startswith('import') and stylesNameCandidate in line:
                         # Updated the SASS module to its relative to the same dir
-                        print(line.replace(stylesNameCandidate, f'{rawFileName}/{stylesNameCandidate}'))
+                            lhs = line.split('from ')[0]
+                            updatedImport = f'{lhs} from "./{stylesNameCandidate}"'
+                            print(updatedImport)
+#                         newRelativePath = line.replace(stylesNameCandidate, f'{rawFileName}/{stylesNameCandidate}')
+#                         parts = newRelativePath.split('/styles/')
+#                         stylePath = parts[1]
+#                         importDirective = parts[0].split(' from ')[0]
+#                         newAbsolutePath = f'{importDirective} from "styles/{stylePath}'
+#                         print(newAbsolutePath)
                     elif 'from' in line and '../' in line:
                         # Bump relative imports in the implementation file that was moved to the new sub folder
                         print(line.replace('../', '../../', 1).rstrip())
