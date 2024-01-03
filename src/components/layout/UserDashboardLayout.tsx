@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap"
-import styles from "../../styles/sass/components/pages/HomePage.module.scss"
+import styles from "components/pages/HomePage/HomePage.module.scss"
 import ProfileCard from "../cards/ProfileCard"
 import SettingsCard from "../cards/SettingsCard"
 import KanjiShowcaseCard from "../cards/KanjiShowcaseCard"

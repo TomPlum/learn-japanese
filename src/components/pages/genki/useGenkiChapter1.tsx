@@ -2,7 +2,7 @@ import { GrammarInfoProps } from "../../learn/GrammarInfo"
 import PageNumber from "../../../domain/learn/PageNumber"
 import QuoteDisplay from "../../ui/display/QuoteDisplay"
 import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import styles from "components/pages/GenkiGrammarPage/GenkiGrammarPage.module.scss"
 
 const useGenkiChapter1 = () => {
   const c1p1: GrammarInfoProps = {

@@ -19,6 +19,7 @@ export default defineConfig({
       context: "/src/context",
       views: "/src/views",
       styles: "/src/styles",
+      tests: "/src/tests",
       fonts: "/src/styles/fonts",
       stream: 'stream-browserify'
     }

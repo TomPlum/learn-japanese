@@ -1,4 +1,4 @@
-import styles from "../../../styles/sass/components/settings/data/NumbersSettingsForm.module.scss"
+import styles from "components/settings/data/NumbersSettingsForm/NumbersSettingsForm.module.scss"
 import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep"
 import NumbersSettings, { NumbersSettingsBuilder } from "../../../domain/session/settings/data/NumbersSettings"
 import { useEffect, useState } from "react"

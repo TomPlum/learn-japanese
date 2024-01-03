@@ -1,7 +1,7 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo"
 import PageNumber from "../../../domain/learn/PageNumber"
 import GenkiTable from "../../ui/table/GenkiTable"
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import styles from "components/pages/GenkiGrammarPage/GenkiGrammarPage.module.scss"
 import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
 import { FirstMatch, Occurrences } from "../../ui/Underline"
 import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"

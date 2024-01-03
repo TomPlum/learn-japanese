@@ -1,7 +1,7 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo"
 import PageNumber from "../../../domain/learn/PageNumber"
 import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import styles from "components/pages/GenkiGrammarPage/GenkiGrammarPage.module.scss"
 
 const useGenkiChapter2 = () => {
   const c2p1: GrammarInfoProps = {

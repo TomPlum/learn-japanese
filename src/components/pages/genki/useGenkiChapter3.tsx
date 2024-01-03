@@ -1,7 +1,7 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo"
 import PageNumber from "../../../domain/learn/PageNumber"
 import GenkiTable from "../../ui/table/GenkiTable"
-import styles from "../../../styles/sass/components/pages/GenkiGrammarPage.module.scss"
+import styles from "components/pages/GenkiGrammarPage/GenkiGrammarPage.module.scss"
 import GenkiExampleTable from "../../ui/genki/GenkiExampleTable"
 import GenkiHighlightDisplay from "../../ui/genki/GenkiHighlightDisplay"
 import QuoteDisplay from "../../ui/display/QuoteDisplay"
