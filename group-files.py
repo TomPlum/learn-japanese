@@ -84,9 +84,13 @@ for root, dirs, files in os.walk("./src/components"):
                     if line.startswith('import') and stylesNameCandidate in line:
                         # Updated the SASS module to its relative to the same dir
                         print(f'import styles from \'./{stylesNameCandidate}\'')
-                    elif line.startswith('import') and '../' in line:
+                    elif 'from' in line and '../' in line:
                         # Bump relative imports in the implementation file that was moved to the new sub folder
                         print(line.replace('../', '../../', 1).rstrip())
+                    elif 'from' in line and './' in line:
+                        # Bump relative imports in the implementation file that was moved to the new sub folder
+                        # These are imports for files that were in the same dir originally and start with ./
+                        print(line.replace('./', './../', 1).rstrip())
                     else:
                         print(line.rstrip())
 
