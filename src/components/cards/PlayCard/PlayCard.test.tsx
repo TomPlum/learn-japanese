@@ -12,6 +12,7 @@ import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameS
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
 import PresetBuilder from "../../../domain/session/PresetBuilder"
 import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import { BrowserRouter } from "react-router-dom";
 
 const playPreset = new PresetBuilder()
   .withID(1)
@@ -36,14 +37,14 @@ const learnPreset = new PresetBuilder()
   .build()
 
 test("Clicking the start button should launch the wizard", async () => {
-  const component = renderTranslatedReduxConsumer(<PlayCard />)
+  const component = renderTranslatedReduxConsumer(<BrowserRouter><PlayCard /></BrowserRouter>)
   fireEvent.click(component.getByTestId("launch-wizard"))
   expect(await screen.findByTestId("start-session-wizard")).toBeInTheDocument()
 })
 
 test("Closing the wizard should stop rendering it", async () => {
   // Launch Wizard
-  const component = renderTranslatedReduxConsumer(<PlayCard />)
+  const component = renderTranslatedReduxConsumer(<BrowserRouter><PlayCard /></BrowserRouter>)
   fireEvent.click(component.getByTestId("launch-wizard"))
   expect(await component.findByTestId("start-session-wizard")).toBeInTheDocument()
 
@@ -69,7 +70,7 @@ test("Should render the start last learn session with the correct title if the s
 
 test("Should render the launch preset dialog with the last play preset if one is present in the store", async () => {
   store.dispatch(setLastPlayPreset(playPreset))
-  const component = renderTranslatedReduxConsumer(<PlayCard />)
+  const component = renderTranslatedReduxConsumer(<BrowserRouter><PlayCard /></BrowserRouter>)
 
   fireEvent.click(component.getByTitle("Test Play"))
 
@@ -80,7 +81,7 @@ test("Should render the launch preset dialog with the last play preset if one is
 test("Should render the launch preset dialog with the last learn preset if one is present in the store", async () => {
   // Start with a learn session already in the redux store
   store.dispatch(setLastLearnPreset(learnPreset))
-  const component = renderTranslatedReduxConsumer(<PlayCard />)
+  const component = renderTranslatedReduxConsumer(<BrowserRouter><PlayCard /></BrowserRouter>)
 
   // Click the last learn session button
   fireEvent.click(component.getByTitle("Test Learn"))

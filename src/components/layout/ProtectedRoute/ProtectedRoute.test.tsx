@@ -1,53 +1,45 @@
-import { render, screen } from "@testing-library/react"
-import ProtectedRoute, { ProtectedRouteProps }  from "./ProtectedRoute"
-import { createMemoryHistory } from "history"
-import { Router, Switch } from "react-router-dom"
-
-let props: ProtectedRouteProps
-const history = createMemoryHistory()
-const mockRender = vi.fn()
-
-beforeEach(() => {
-  props = {
-    isAuthenticated: true
-  }
-})
-
-const setup = () => {
-  const component = render(
-    <Router history={history}>
-      <Switch>
-        <ProtectedRoute {...props} />
-      </Switch>
-    </Router>
-  )
-  return {
-    ...component
-  }
-}
+import { screen } from "@testing-library/react"
+import ProtectedRoute from "./ProtectedRoute"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer.tsx"
+import { store } from "../../../store.ts"
+import { clearUser, setUser } from "../../../slices/UserSlice.ts";
+import { testUser } from "../../../setupTests.ts"
 
 test("Should redirect to the main page if the user is not authenticated", () => {
-  props.isAuthenticated = false
-  try {
-    setup()
-  } catch (e) {
-    // TODO: Why does it infinitely loop? Causes React render stack overflow.
-  }
-  expect(history.location.pathname).toBe("/home")
+  store.dispatch(clearUser())
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <ProtectedRoute />
+    },
+    {
+      path: "/home",
+      element: <div data-testid="home" />
+    }
+  ])
+
+  renderTranslatedReduxConsumer(<RouterProvider router={router} />)
+
+  expect(window.location.pathname).toBe("/home")
 })
 
-test("Should render the given component if the user is authenticated", () => {
-  props.component = TestComponent
-  setup()
+test("Should render the router outlet component if the user is authenticated", () => {
+  store.dispatch(setUser(testUser))
+  
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <p>I&apos;m a test component</p>
+    },
+    {
+      path: "/home",
+      element: <div data-testid="home" />
+    }
+  ])
+  
+  renderTranslatedReduxConsumer(<RouterProvider router={router} />)
+
+  expect(window.location.pathname).toBe("/")
   expect(screen.getByText("I'm a test component")).toBeInTheDocument()
 })
-
-test("Should call the given render function if the user is authenticated and no component is passed", () => {
-  props.render = mockRender
-  setup()
-  expect(mockRender).toHaveBeenCalled()
-})
-
-const TestComponent = () => {
-  return <p>I&apos;m a test component</p>
-}

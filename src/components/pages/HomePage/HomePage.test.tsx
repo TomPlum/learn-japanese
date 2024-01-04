@@ -3,6 +3,7 @@ import { store } from "../../../store"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer.tsx";
+import { BrowserRouter } from "react-router-dom";
 
 const mockGetActivityStreak = vi.fn()
 vi.mock("../../../service/UserService", () => ({
@@ -19,7 +20,7 @@ test("Should render the user dashboard if there is a user logged in", async () =
   mockGetActivityStreak.mockResolvedValueOnce(10)
   store.dispatch(setUser(testUser))
 
-  const component = renderTranslatedReduxConsumer(<HomePage />)
+  const component = renderTranslatedReduxConsumer(<BrowserRouter><HomePage /></BrowserRouter>)
 
   // Wait for the streak card to load since its async
   expect(await component.findByText("Day 10")).toBeInTheDocument()

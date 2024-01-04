@@ -4,7 +4,11 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import svgr from '@svgr/rollup'
 
 export default defineConfig({
-  plugins: [react(), nodePolyfills(), svgr()],
+  plugins: [
+    react(),
+    nodePolyfills(),
+    svgr()
+  ],
   base: './',
   resolve: {
     alias: {

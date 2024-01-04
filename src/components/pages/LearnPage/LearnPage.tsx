@@ -10,7 +10,7 @@ import DataSettingsConverter from "../../../converter/DataSettingsConverter"
 import { useDataSettingsDispatch, useDataSettingsSelector } from "../../../hooks"
 import LearningDataService from "../../../service/LearningDataService"
 import styles  from "./LearnPage.module.scss"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { clearDataSettings } from "../../../slices/DataSettingsSlice"
 
 const LearnPage = () => {
@@ -20,7 +20,7 @@ const LearnPage = () => {
   const [sessionKey, setSessionKey] = useState(new SessionID())
   const [result, setResult] = useState<LearningSessionResult | undefined>(undefined)
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const dataSettingsDispatch = useDataSettingsDispatch()
   const dataSettingsData = useDataSettingsSelector((state) => state.dataSettings.settings)
@@ -42,7 +42,7 @@ const LearnPage = () => {
 
   const handleDismissResultsScreen = () => {
     dataSettingsDispatch(clearDataSettings())
-    history.push("/home")
+    navigate("/home")
   }
 
   const handleSessionCompletion = (result: LearningSessionResult) => {

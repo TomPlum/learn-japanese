@@ -2,13 +2,14 @@ import { fireEvent, screen } from "@testing-library/react"
 import UserButton, { UserButtonProps }  from "./UserButton"
 import { store } from "../../../store"
 import { clearUser, setUser } from "../../../slices/UserSlice"
-import { Router } from "react-router-dom"
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
+import { History } from "@remix-run/router";
 import { createMemoryHistory } from "history"
 import { testUser } from "../../../setupTests"
 import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
 
 let props: UserButtonProps
-const history = createMemoryHistory()
+const history = createMemoryHistory() as never as History
 const onClickHandler = vi.fn()
 
 const user = { ...testUser }
@@ -26,9 +27,9 @@ afterEach(() => {
 
 const setup = () => {
   const component = renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <UserButton {...props} />
-    </Router>
+    </HistoryRouter>
   )
   return {
     ...component

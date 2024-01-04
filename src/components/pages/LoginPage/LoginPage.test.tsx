@@ -1,12 +1,13 @@
 import { store } from "../../../store"
 import { clearUser, setUser } from "../../../slices/UserSlice"
-import { createMemoryHistory } from "history"
+import { createMemoryHistory } from "history";
 import LoginPage  from "./LoginPage"
-import { Router } from "react-router-dom"
 import { fireEvent, waitFor } from "@testing-library/react"
 import auth from "../../../service/AuthenticationService"
 import { testUser } from "../../../setupTests"
 import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import { History } from '@remix-run/router'
 
 const validLoginResponse = {
   username: "TomPlum42",
@@ -32,7 +33,7 @@ const validLoginResponse = {
 }
 
 const mockLogin = vi.fn()
-const history = createMemoryHistory()
+const history = createMemoryHistory() as never as History
 
 beforeEach(() => {
   auth.login = mockLogin
@@ -42,9 +43,9 @@ beforeEach(() => {
 test("Should redirect to the home page if the user is already logged in", () => {
   store.dispatch(setUser(testUser))
   renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <LoginPage />
-    </Router>
+    </HistoryRouter>
   )
   expect(history.location.pathname).toBe("/home")
 })
@@ -52,9 +53,9 @@ test("Should redirect to the home page if the user is already logged in", () => 
 test("Should render the login form when there is no user logged in", () => {
   store.dispatch(clearUser())
   const component = renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <LoginPage />
-    </Router>
+    </HistoryRouter>
   )
   expect(component.getByTestId("login-form")).toBeInTheDocument()
 })
@@ -63,9 +64,9 @@ test("Should redirect to the home page after successfully logging in", async () 
   // Start with no user
   store.dispatch(clearUser())
   const component = renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <LoginPage />
-    </Router>
+    </HistoryRouter>
   )
 
   // Log in
@@ -83,9 +84,9 @@ test("Should pass the username from the location query parameter into the login 
   store.dispatch(clearUser())
   history.push("/login?username=TestingUser")
   const component = renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <LoginPage />
-    </Router>
+    </HistoryRouter>
   )
   expect(component.getByPlaceholderText("Username")).toHaveValue("TestingUser")
 })
@@ -94,9 +95,9 @@ test("Should render the info message about session expiry when the query param i
   store.dispatch(clearUser())
   history.push("/login?session-expired=true")
   const component = renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <LoginPage />
-    </Router>
+    </HistoryRouter>
   )
   expect(component.getByText("Your session has expired. Please log-in again.")).toBeInTheDocument()
 })

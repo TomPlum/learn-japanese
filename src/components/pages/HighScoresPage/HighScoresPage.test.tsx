@@ -3,7 +3,8 @@ import { findByTextWithElements } from "tests/Queries"
 import renderWithTranslation from "tests/renderWithTranslation"
 import { when } from "jest-when"
 import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react"
-import { Router } from "react-router-dom"
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
+import { History } from "@remix-run/router"
 import { createMemoryHistory } from "history"
 
 const mockGetHighScoreEntriesPage = vi.fn()
@@ -24,9 +25,9 @@ let history = createMemoryHistory()
 
 const setup = () => {
   return renderWithTranslation(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <HighScoresPage />
-    </Router>
+    </HistoryRouter>
   )
 }
 

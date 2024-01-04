@@ -1,5 +1,4 @@
 import { fireEvent, screen } from "@testing-library/react"
-import { Router } from "react-router-dom"
 import NavigationBar, { NavigationBarProps }  from "./NavigationBar"
 import { createMemoryHistory } from "history"
 import { AppMode } from "../../../domain/AppMode"
@@ -8,17 +7,19 @@ import { setActive, setApplicationMode } from "../../../slices/ModeSlice"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
+import { History } from "@remix-run/router"
 
-const history = createMemoryHistory()
+const history = createMemoryHistory() as never as History
 const onLaunchLoginModalHandler = vi.fn()
 
 let props: NavigationBarProps
 
 const setup = () => {
   const component = renderTranslatedReduxConsumer(
-    <Router history={history}>
-      <NavigationBar {...props} />
-    </Router>
+      <HistoryRouter history={history}>
+        <NavigationBar {...props} />
+      </HistoryRouter>
   )
 
   return {

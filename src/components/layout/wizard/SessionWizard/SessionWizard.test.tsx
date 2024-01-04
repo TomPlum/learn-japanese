@@ -3,7 +3,8 @@ import SessionWizard  from "./SessionWizard"
 import userEvent from "@testing-library/user-event"
 import { store } from "../../../../store"
 import { createMemoryHistory } from "history"
-import { Router } from "react-router-dom"
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
+import { History } from "@remix-run/router";
 import { clearGameSettings } from "../../../../slices/GameSettingsSlice"
 import { clearDataSettings } from "../../../../slices/DataSettingsSlice"
 import { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings"
@@ -29,7 +30,7 @@ vi.mock("../../../../service/PresetService", () => ({
 }))
 
 const onCloseHandler = vi.fn()
-const history = createMemoryHistory()
+const history = createMemoryHistory() as never as History
 
 const playPreset = new PresetBuilder()
   .withID(1)
@@ -86,9 +87,9 @@ const playKanjiPreset = new PresetBuilder()
 
 const setup = () => {
   const component = renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <SessionWizard onClose={onCloseHandler} />
-    </Router>
+    </HistoryRouter>
   )
 
   return {
