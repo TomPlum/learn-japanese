@@ -18,5 +18,5 @@ test("Should render the home button", () => {
 
 test("Clicking the home button should direct the user to the home page", () => {
   const component = render(<NotFoundPage />)
-  expect(component.getByRole("link")).toHaveAttribute("href", "/home")
+  expect(component.getByRole("button")).toHaveAttribute("href", "/home")
 })

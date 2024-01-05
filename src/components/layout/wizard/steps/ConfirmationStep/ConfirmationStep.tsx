@@ -41,10 +41,10 @@ const ConfirmationStep = (props: ConfirmationStepProps) => {
       <Accordion>
         {showSave && (
           <HoverMessage message={t("login-message")} show={!user} id="save-preset-hover">
-            <Accordion.Toggle eventKey="save" as={Button} onClick={handleClickSave} variant="info" disabled={!user}>
+            <Accordion.Button eventKey="save" as={Button} onClick={handleClickSave} variant="info" disabled={!user}>
               <FontAwesomeIcon icon={faDownload} fixedWidth />
               <span>{t("save-preset")}</span>
-            </Accordion.Toggle>
+            </Accordion.Button>
           </HoverMessage>
         )}
 

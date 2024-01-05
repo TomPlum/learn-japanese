@@ -11,6 +11,7 @@ export interface AppModeButtonProps {
   className?: string
 }
 
+// TODO: I think this is redundant now and can be deleted, and the whole active state too?
 const AppModeButton = (props: AppModeButtonProps) => {
   const mode = useModeSelector((state) => state.mode.mode)
   const modeDispatcher = useModeDispatch()
