@@ -103,11 +103,9 @@ const GenkiGrammarPage = () => {
       <Row noGutters>
         <div className={styles.searchWrapper}>
           <InputGroup className={styles.search}>
-            <InputGroup.Prepend>
-              <InputGroup.Text>
-                <FontAwesomeIcon icon={faSearch} />
-              </InputGroup.Text>
-            </InputGroup.Prepend>
+            <InputGroup.Text>
+              <FontAwesomeIcon icon={faSearch} />
+            </InputGroup.Text>
 
             <Form.Control
               type="text"

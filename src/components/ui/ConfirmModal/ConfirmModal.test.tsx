@@ -13,7 +13,7 @@ const setup = () => {
     title: component.getByText("Title"),
     yes: component.getByText("Yes"),
     no: component.getByText("No"),
-    close: component.getByText("Close")
+    close: component.getByLabelText("Close")
   }
 }
 

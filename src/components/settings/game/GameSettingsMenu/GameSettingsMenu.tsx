@@ -4,7 +4,7 @@ import HintSettingsForm from "./../HintSettingsForm"
 import LifeSettingsForm from "./../LifeSettingsForm"
 import TimeSettingsForm from "./../TimeSettingsForm"
 import GameSettings, { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings"
-import { Button, Card, Col, Form, Nav, Tab } from "react-bootstrap"
+import { Button, Card, Col, Nav, Row, Tab } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faArrowLeft,
@@ -174,28 +174,28 @@ class GameSettingsMenu extends Component<GameSettingsMenuProps, GameSettingsMenu
             </Card.Body>
 
             <Card.Footer className={styles.footer}>
-              <Form.Row>
+              <Row>
                 <Col className={styles.noGuttersLeft}>
-                  <Button variant="danger" block onClick={() => this.props.onQuit()} className={styles.button}>
+                  <Button variant="danger" onClick={() => this.props.onQuit()} className={styles.button}>
                     <FontAwesomeIcon icon={faArrowLeft} />
                     <span className={styles.buttonText}> Back</span>
                   </Button>
                 </Col>
 
                 <Col className={[styles.noGuttersLeft, styles.noGuttersRight].join(" ")}>
-                  <Button variant="warning" block onClick={this.onReset} className={styles.button}>
+                  <Button variant="warning" onClick={this.onReset} className={styles.button}>
                     <FontAwesomeIcon icon={faUndo} />
                     <span className={styles.buttonText}> Reset</span>
                   </Button>
                 </Col>
 
                 <Col className={styles.noGuttersRight}>
-                  <Button variant="success" block onClick={this.onConfirmation} className={styles.button}>
+                  <Button variant="success" onClick={this.onConfirmation} className={styles.button}>
                     <FontAwesomeIcon icon={faCheck} />
                     <span className={styles.buttonText}> Confirm</span>
                   </Button>
                 </Col>
-              </Form.Row>
+              </Row>
             </Card.Footer>
           </Tab.Container>
         </Card>

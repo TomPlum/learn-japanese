@@ -245,7 +245,7 @@ test("Clicking the x button in the examples modal should dismiss it and stop ren
   expect(await screen.findByText("稚魚")).toBeInTheDocument()
 
   // Dismiss
-  fireEvent.click(screen.getByText("Close"))
+  fireEvent.click(screen.getByLabelText("Close"))
   expect(await screen.queryByText("稚魚")).not.toBeInTheDocument()
 })
 

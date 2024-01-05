@@ -1,8 +1,8 @@
 import React, { Component, PropsWithChildren, ReactElement } from "react";
 import { Overlay, Tooltip } from "react-bootstrap"
-import { Placement } from "react-bootstrap/Overlay"
 import ComponentTree from "../../../utility/ComponentTree"
 import styles  from "./Copyable.module.scss"
+import { Placement } from "react-bootstrap/types"
 
 export interface CopyableProps {
   className?: string

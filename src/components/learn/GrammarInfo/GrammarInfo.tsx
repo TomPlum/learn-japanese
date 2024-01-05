@@ -26,7 +26,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
   return (
     <Accordion className={styles.wrapper} data-testid={id}>
       <Container className={styles.container} fluid>
-        <Accordion.Toggle
+        <Accordion.Button
           as={Row}
           eventKey={title}
           style={headerStyle}
@@ -44,7 +44,7 @@ const GrammarInfo = (props: GrammarInfoProps) => {
           <Col className={styles.expanderWrapper}>
             <FontAwesomeIcon fixedWidth className={styles.expander} icon={expanded ? faChevronUp : faChevronDown} />
           </Col>
-        </Accordion.Toggle>
+        </Accordion.Button>
 
         <Accordion.Collapse eventKey={title}>
           <Container className={styles.body}>

@@ -40,14 +40,14 @@ const DashboardCardSettingsMenu = (props: PropsWithChildren<DashboardCardSetting
         onHide={() => setShow(false)}
       >
         <Popover id="card-settings-menu" data-testid="card-settings-menu" className={styles.popover}>
-          <Popover.Content className={styles.content}>
+          <Popover.Body className={styles.content}>
             {React.Children.map(children, (link) => {
               return React.cloneElement(link as ReactElement, {
                 className: styles.link,
                 onMouseDown: () => setShow(false)
               })
             })}
-          </Popover.Content>
+          </Popover.Body>
         </Popover>
       </Overlay>
     </span>

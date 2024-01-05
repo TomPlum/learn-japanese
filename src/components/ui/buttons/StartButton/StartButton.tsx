@@ -11,7 +11,7 @@ export interface StartButtonProps {
 class StartButton extends Component<StartButtonProps> {
   render() {
     return (
-      <Button variant="success" className={styles.button} block onClick={this.props.onClick}>
+      <Button variant="success" className={styles.button} onClick={this.props.onClick}>
         <FontAwesomeIcon size="xs" icon={faPlay} /> Start
       </Button>
     )

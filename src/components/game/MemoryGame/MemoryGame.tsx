@@ -355,7 +355,7 @@ const MemoryGame = (props: MemoryGameProps) => {
         <ConfirmModal onConfirm={onQuit} body={t("quit-body")} title={t("quit-title")} onDismiss={onDismissQuitModal} />
       )}
 
-      <Row noGutters className={styles.header}>
+      <Row noGutters className={[styles.header, "g-0"].join(" ")}>
         <Col xs={12}>
           <Row>
             <Col className={styles.quitWrapper}>
@@ -413,13 +413,13 @@ const MemoryGame = (props: MemoryGameProps) => {
         </Col>
       </Row>
 
-      <Row noGutters className={styles.questionWrapper}>
+      <Row noGutters className={[styles.questionWrapper, "g-0"].join(" ")}>
         <Col xs={12} className={styles.questionWrapperColumn}>
           {getQuestion()}
         </Col>
       </Row>
 
-      <Row noGutters className={styles.footer}>
+      <Row noGutters className={[styles.footer, "g-0"].join(" ")}>
         <Col md={4} xs={5} className={styles.footerLeftCol}>
           <SkipButton
             disabled={paused}

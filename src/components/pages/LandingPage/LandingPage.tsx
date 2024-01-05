@@ -82,7 +82,7 @@ const LandingPage = () => {
 
         <LoadingSpinner active={loading} variant="primary" />
 
-        <Row noGutters={true} className={styles.buttonContainer}>
+        <Row className={[styles.buttonContainer, "g-0"].join(" ")}>
           <Col xs={6} md={3} className={styles.buttonWrapper}>
             <Link to="/home">
               <Button className={styles.button} variant="outline-danger">

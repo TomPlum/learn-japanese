@@ -105,11 +105,9 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
   return (
     <>
       <InputGroup className={[styles.inputGroup, className].join(" ")}>
-        <InputGroup.Prepend>
-          <InputGroup.Text>
-            <FontAwesomeIcon icon={faSearch} />
-          </InputGroup.Text>
-        </InputGroup.Prepend>
+        <InputGroup.Text>
+          <FontAwesomeIcon icon={faSearch} />
+        </InputGroup.Text>
 
         <Form.Control
           type="text"
@@ -122,11 +120,9 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
         />
 
         {results && (
-          <InputGroup.Append>
-            <InputGroup.Text>
-              {results} Result{results > 1 ? "s" : ""}
-            </InputGroup.Text>
-          </InputGroup.Append>
+          <InputGroup.Text>
+            {results} Result{results > 1 ? "s" : ""}
+          </InputGroup.Text>
         )}
       </InputGroup>
 

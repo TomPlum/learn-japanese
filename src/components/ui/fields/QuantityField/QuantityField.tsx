@@ -24,12 +24,10 @@ const QuantityField = (props: QuantityFieldProps) => {
 
   return (
     <InputGroup hasValidation>
-      <InputGroup.Prepend>
-        <InputGroup.Text>
-          <FontAwesomeIcon icon={faBalanceScale} className={styles.icon} fixedWidth />
-          <span className={styles.description}>{t("label")}</span>
-        </InputGroup.Text>
-      </InputGroup.Prepend>
+      <InputGroup.Text>
+        <FontAwesomeIcon icon={faBalanceScale} className={styles.icon} fixedWidth />
+        <span className={styles.description}>{t("label")}</span>
+      </InputGroup.Text>
 
       <Form.Control
         required

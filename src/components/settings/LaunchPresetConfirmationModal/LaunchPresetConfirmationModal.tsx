@@ -71,8 +71,16 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
     <Modal {...modalProps}>
       <Modal.Body className={styles.modal}>
         <div className={styles.header}>
-          <Icon value={preset.icon} style={{ fill: preset.colour }} className={styles.icon} />
-          <span className={styles.name}>{t(preset.displayName)}</span>
+          <Icon
+            value={preset.icon}
+            className={styles.icon}
+            style={{ fill: preset.colour }}
+          />
+
+          <span className={styles.name}>
+            {t(preset.displayName)}
+          </span>
+
           <FontAwesomeIcon
             fixedWidth
             icon={faTimes}
@@ -85,6 +93,7 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
         <Fade in appear>
           <div className={styles.body}>
             {renderSettingsSummary()}
+
             <Button variant="success" onClick={handleStartSession}>
               <FontAwesomeIcon icon={faPlay} fixedWidth /> {t("action.start")}
             </Button>

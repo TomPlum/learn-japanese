@@ -29,11 +29,14 @@ const ProfileCard = (props: ProfileCardProps) => {
               data-testid="dismiss-profile-card"
             />
           )}
+
           <span className={["fa-layers", "fa-fw", styles.avatar].join(" ")}>
             <FontAwesomeIcon icon={faCircle} className={styles.circle} />
             <FontAwesomeIcon icon={faUserGraduate} className={styles.user} />
           </span>
+
           <p className={styles.name}>{user?.username ?? "User Profile"}</p>
+
           <a className={styles.profile} href={user ? "/profile" : "/register"}>
             {user ? t("go") : t("register")}
           </a>

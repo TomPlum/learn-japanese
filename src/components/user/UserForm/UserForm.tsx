@@ -33,7 +33,7 @@ const UserForm = (props: UserFormProps) => {
       show={show}
       data-testid="user-modal"
     >
-      <Modal.Header className={styles.header} closeButton onHide={onClose}>
+      <Modal.Header className={styles.header} closeButton closeLabel="Close" onHide={onClose}>
         <Modal.Title>
           <FontAwesomeIcon icon={login ? faUser : faUserPlus} fixedWidth className={styles.icon} />
           {login ? t("action.login") : t("action.register")}

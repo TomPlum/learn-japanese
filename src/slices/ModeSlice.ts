@@ -21,12 +21,9 @@ export const modeSlice = createSlice({
     },
     setApplicationMode: (state, action: PayloadAction<AppMode>) => {
       state.mode = action.payload
-    },
-    setActive: (state, action: PayloadAction<boolean>) => {
-      state.active = action.payload
     }
   }
 })
 
-export const { switchApplicationMode, setApplicationMode, setActive } = modeSlice.actions
+export const { switchApplicationMode, setApplicationMode } = modeSlice.actions
 export default modeSlice.reducer

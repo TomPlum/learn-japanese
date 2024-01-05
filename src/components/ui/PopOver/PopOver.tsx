@@ -14,10 +14,10 @@ class PopOver extends Component<PopOverProps> {
 
     return (
       <Popover id="popover" className={[styles.popover, className].join(" ")} {...rest}>
-        <Popover.Title as="h3" className={styles.title}>
+        <Popover.Header as="h3" className={styles.title}>
           {title}
-        </Popover.Title>
-        <Popover.Content className={styles.text}>{text}</Popover.Content>
+        </Popover.Header>
+        <Popover.Body className={styles.text}>{text}</Popover.Body>
       </Popover>
     )
   }

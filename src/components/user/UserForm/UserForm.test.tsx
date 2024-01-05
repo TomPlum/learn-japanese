@@ -27,7 +27,7 @@ const setup = () => {
   )
   return {
     switchForm: component.getByText("I don't have an account"),
-    close: component.getByText("Close"),
+    close: component.getByLabelText("Close"),
     ...component
   }
 }

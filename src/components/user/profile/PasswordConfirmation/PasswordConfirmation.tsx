@@ -81,11 +81,11 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <Button variant="success" onClick={props.onDismiss} block>
+      <Button variant="success" onClick={props.onDismiss} className={styles.changed}>
         {t("changed-mind")}
       </Button>
 
-      <Button variant="danger" onClick={deleteAccount} disabled={disabled} className={styles.confirm} block>
+      <Button variant="danger" onClick={deleteAccount} disabled={disabled} className={styles.confirm}>
         {loading && <FontAwesomeIcon icon={faSpinner} fixedWidth spin />}
         {t("delete-account")}
       </Button>

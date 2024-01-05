@@ -56,7 +56,7 @@ const IconPicker = (props: IconPickerProps) => {
 
   const popover = (
     <Popover id="icon-picker" data-testid="icon-picker" className={styles.popover}>
-      <Popover.Content>
+      <Popover.Body>
         {showPicker && (
           <ColourPicker className={styles.picker} onChange={handleChangeColour} onClose={() => setShowPicker(false)} />
         )}
@@ -98,7 +98,7 @@ const IconPicker = (props: IconPickerProps) => {
           </ScrollableContainer>
         )}
         <div>{icons.length === 0 && <p className={styles.notFound}>{`No icons found for "${search}".`}</p>}</div>
-      </Popover.Content>
+      </Popover.Body>
     </Popover>
   )
 

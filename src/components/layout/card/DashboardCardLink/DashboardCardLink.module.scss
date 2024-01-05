@@ -11,6 +11,7 @@
   color: $light-1;
   transition: all ease-in-out 0.2s;
   display: flex;
+  text-decoration: none;
   align-items: center;
   padding: 6px 20px;
   @include noSelect;

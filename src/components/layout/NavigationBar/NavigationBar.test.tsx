@@ -3,7 +3,7 @@ import NavigationBar, { NavigationBarProps }  from "./NavigationBar"
 import { createMemoryHistory } from "history"
 import { AppMode } from "../../../domain/AppMode"
 import { store } from "../../../store"
-import { setActive, setApplicationMode } from "../../../slices/ModeSlice"
+import { setApplicationMode } from "../../../slices/ModeSlice"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
@@ -35,7 +35,6 @@ beforeEach(() => {
   props = {
     onLaunchLoginModal: onLaunchLoginModalHandler
   }
-  store.dispatch(setActive(true))
   store.dispatch(setApplicationMode(AppMode.LEARN))
 })
 
@@ -44,20 +43,6 @@ test("Clicking the 'Home' button should route the user to the menu", async () =>
   expect(await screen.findByText("Home")).toBeInTheDocument()
   fireEvent.click(home)
   expect(history.location.pathname).toBe("/")
-})
-
-test("Passing active as false should disable the Login Button", async () => {
-  store.dispatch(setActive(false))
-  const { login } = setup()
-  expect(await screen.findByText("Home")).toBeInTheDocument()
-  expect(login).toHaveAttribute("aria-disabled", "true")
-})
-
-test("Passing active as false should disable the Home Button", async () => {
-  store.dispatch(setActive(false))
-  const { home } = setup()
-  expect(await screen.findByText("Home")).toBeInTheDocument()
-  expect(home).toHaveAttribute("aria-disabled", "true")
 })
 
 test("Clicking the login button while not logged in should call the onLaunchLogin event handler", async () => {

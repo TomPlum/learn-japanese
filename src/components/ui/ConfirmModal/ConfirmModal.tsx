@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Button, Modal } from "react-bootstrap"
 import styles  from "./ConfirmModal.module.scss"
 import { useTranslation } from "react-i18next"
+import { ModalProps } from "react-bootstrap/Modal";
 
 export interface ConfirmModalProps {
   title: string
@@ -26,7 +27,7 @@ const ConfirmModal = (props: ConfirmModalProps) => {
     onDismiss?.()
   }
 
-  const modalProps = {
+  const modalProps: ModalProps = {
     contentClassName: styles.content,
     dialogClassName: styles.dialog,
     show: show,
@@ -41,12 +42,15 @@ const ConfirmModal = (props: ConfirmModalProps) => {
         <span className={styles.title}>{title}</span>
       </Modal.Header>
 
-      <Modal.Body className={styles.body}>{body}</Modal.Body>
+      <Modal.Body className={styles.body}>
+        {body}
+      </Modal.Body>
 
       <Modal.Footer className={styles.footer}>
         <Button variant="success" onClick={handleYes} className={styles.yes}>
           {t("action.yes")}
         </Button>
+
         <Button variant="danger" onClick={handleNo} className={styles.no}>
           {t("action.no")}
         </Button>

@@ -1,7 +1,7 @@
 import styles  from "./DashboardCardLink.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronRight, IconDefinition } from "@fortawesome/free-solid-svg-icons"
-import { SafeAnchorProps } from "react-bootstrap"
+import { AnchorProps } from "react-bootstrap"
 
 export interface DashboardCardLinkProps {
   text: string
@@ -26,7 +26,7 @@ const DashboardCardLink = (props: DashboardCardLinkProps) => {
     }
   }
 
-  const anchorProps: SafeAnchorProps = {
+  const anchorProps: AnchorProps = {
     className: classes.join(" "),
     href: href,
     onClick: handleClick,

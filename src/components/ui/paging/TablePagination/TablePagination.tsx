@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { ChangeEvent, useState } from "react"
 import { Col, Container, Form, Pagination, Row } from "react-bootstrap"
 import styles  from "./TablePagination.module.scss"
 import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons"
@@ -37,7 +37,7 @@ const TablePagination = (props: TablePaginationProps) => {
   const genkiOneClasses = [styles.genki1, !genkiOne ? styles.off : "", styles.book].join(" ")
   const genkiTwoClasses = [styles.genki2, !genkiTwo ? styles.off : "", styles.book].join(" ")
 
-  const onChangeShow = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChangeShow = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const quantity = Number(e.target.value)
     onChangeQuantity(quantity)
   }
@@ -107,7 +107,6 @@ const TablePagination = (props: TablePaginationProps) => {
         <Col lg={2} md={3} xs={6}>
           <Form.Control
             as="select"
-            custom
             onChange={onChangeShow}
             title="Rows per Page"
             disabled={disabled}

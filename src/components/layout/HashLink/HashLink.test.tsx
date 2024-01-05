@@ -51,7 +51,7 @@ test("Passing a className property should append it to the link component", () =
 test("Should disable the link when the disabled property is passed as true", () => {
   props.disabled = true
   const { link } = setup()
-  expect(link.parentElement).toHaveAttribute("aria-disabled", "true")
+  expect(link.parentElement).toHaveClass("disabled")
 })
 
 test("Should call the onClick event handler when clicking the link", () => {
