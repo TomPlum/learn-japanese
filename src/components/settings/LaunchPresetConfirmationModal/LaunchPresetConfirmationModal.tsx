@@ -10,7 +10,7 @@ import SessionSettingsSummary from "./../SessionSettingsSummary"
 import { setDataSettings as setGlobalDataSettings } from "../../../slices/DataSettingsSlice"
 import GameSettings from "../../../domain/session/settings/game/GameSettings"
 import { setGameSettings, setSelectedPresetID } from "../../../slices/GameSettingsSlice"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useDataSettingsDispatch, useGameSettingsDispatch, useSessionSettingsDispatch } from "../../../hooks"
 import PlayMode from "../../../domain/session/PlayMode"
 import LearnSessionSettingsSummary from "./../LearnSessionSettingsSummary"
@@ -26,7 +26,7 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
   const { preset, onDismiss } = props
 
   const { t } = useTranslation()
-  const history = useHistory()
+  const navigate = useNavigate()
   const gameSettingsDispatcher = useGameSettingsDispatch()
   const dataSettingsDispatcher = useDataSettingsDispatch()
   const sessionSettingsDispatcher = useSessionSettingsDispatch()
@@ -40,10 +40,10 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
       gameSettingsDispatcher(setGameSettings(game))
       sessionSettingsDispatcher(setLastPlayPreset(preset))
       gameSettingsDispatcher(setSelectedPresetID(preset.id))
-      history.push("/play")
+      navigate("/play")
     } else {
       sessionSettingsDispatcher(setLastLearnPreset(preset))
-      history.push("/learn")
+      navigate("/learn")
     }
   }
 

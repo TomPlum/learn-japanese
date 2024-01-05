@@ -12,7 +12,7 @@ import {
   useGameSettingsDispatch,
   useGameSettingsSelector
 } from "../../../hooks"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { clearGameSettings } from "../../../slices/GameSettingsSlice"
 import { clearDataSettings } from "../../../slices/DataSettingsSlice"
 import DataSettingsConverter from "../../../converter/DataSettingsConverter"
@@ -26,7 +26,7 @@ const PlayPage = () => {
   const [sessionKey, setSessionKey] = useState(new SessionID())
   const [data, setData] = useState<Learnable[]>([])
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const gameSettingsDispatcher = useGameSettingsDispatch()
   const dataSettingsDispatcher = useDataSettingsDispatch()
@@ -63,11 +63,11 @@ const PlayPage = () => {
     setGameResult(undefined)
     gameSettingsDispatcher(clearGameSettings())
     dataSettingsDispatcher(clearDataSettings())
-    history.push("/home")
+    navigate("/home")
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid='play-page'>
       <LoadingScreen key={`${loading}`} active={loading} />
 
       {(!gameSettings || !dataSettings) && (

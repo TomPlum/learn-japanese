@@ -133,7 +133,7 @@ const KanjiBankPage = () => {
   const hasExamples = exampleQuantity > 0
 
   return (
-    <Container className={styles.wrapper}>
+    <Container className={styles.wrapper} data-testid='kanji-bank-page'>
       <Row>
         <Col lg={2} className={styles.info}>
           {selected && (

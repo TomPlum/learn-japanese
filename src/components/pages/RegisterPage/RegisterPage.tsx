@@ -1,22 +1,22 @@
 import { useUserSelector } from "../../../hooks"
-import { Redirect, useHistory } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import RegistrationForm from "../../user/RegistrationForm"
 import styles  from "./RegisterPage.module.scss"
 
 const RegisterPage = () => {
   const user = useUserSelector((state) => state.user).user
-  const history = useHistory()
+  const navigate = useNavigate()
 
   if (user) {
-    return <Redirect to="/home" />
+    return <Navigate to="/home" />
   }
 
   const handleRegistrationSuccess = (username: string) => {
-    history.push(`/login?=${username}`)
+    navigate(`/login?=${username}`)
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid='registration-page'>
       <div className={styles.form}>
         <RegistrationForm onSuccess={handleRegistrationSuccess} />
       </div>

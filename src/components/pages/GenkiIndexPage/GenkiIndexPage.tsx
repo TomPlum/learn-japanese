@@ -137,7 +137,7 @@ const GenkiIndexPage = () => {
   }
 
   return (
-    <Container fluid className={styles.wrapper}>
+    <Container fluid className={styles.wrapper} data-testid='genki-index-page'>
       {hasError && (
         <Alert variant="danger" className={styles.banner}>
           <FontAwesomeIcon icon={faExclamationCircle} className={styles.spinner} />

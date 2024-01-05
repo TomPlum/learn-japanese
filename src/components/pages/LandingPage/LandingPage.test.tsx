@@ -8,7 +8,8 @@ import { Environment } from "../../../utility/Environment"
 import matchMediaPolyfill from "mq-polyfill"
 import { getByTextWithMarkup } from "tests/Queries"
 import { when } from "jest-when"
-import { Router } from "react-router-dom"
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
+import { History } from "@remix-run/router"
 import { createMemoryHistory } from "history"
 import renderWithTranslation from "tests/renderWithTranslation"
 
@@ -22,13 +23,13 @@ vi.mock("../../../repository/KanaRepository", () => ({
   }
 }))
 
-const history = createMemoryHistory()
+const history = createMemoryHistory() as never as History
 
 const setup = () => {
   const component = renderWithTranslation(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <LandingPage />
-    </Router>
+    </HistoryRouter>
   )
 
   return {

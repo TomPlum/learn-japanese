@@ -6,6 +6,7 @@ import LearnSettings from "../../../domain/session/settings/LearnSettings"
 import renderReduxConsumer from "tests/renderReduxConsumer"
 import PresetBuilder from "../../../domain/session/PresetBuilder"
 import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import { BrowserRouter } from "react-router-dom";
 
 const mockGetFavourites = vi.fn()
 const mockGetAllPresets = vi.fn()
@@ -63,7 +64,7 @@ test("It should render an error if the service is call is rejected", async () =>
 
 test("Clicking a favourite button should render the confirmation modal", async () => {
   mockGetFavourites.mockResolvedValueOnce({ learn: [], play: [playPreset] })
-  const component = renderTranslatedReduxConsumer(<FavouritesCard />)
+  const component = renderTranslatedReduxConsumer(<BrowserRouter><FavouritesCard /></BrowserRouter>)
   expect(await component.findByText("Test Play")).toBeInTheDocument()
 
   fireEvent.mouseEnter(component.getByTestId("favourite-button-1").firstChild!)
@@ -75,7 +76,7 @@ test("Clicking a favourite button should render the confirmation modal", async (
 
 test("Clicking the close button in the confirm modal should stop rendering it", async () => {
   mockGetFavourites.mockResolvedValueOnce({ learn: [learnPreset], play: [] })
-  const component = renderReduxConsumer(<FavouritesCard />)
+  const component = renderTranslatedReduxConsumer(<BrowserRouter><FavouritesCard /></BrowserRouter>)
   expect(await component.findByText("Test Learn")).toBeInTheDocument()
 
   fireEvent.mouseEnter(component.getByTestId("favourite-button-2").firstChild!)

@@ -3,7 +3,8 @@ import KanjiFlashCardsCard  from "./KanjiFlashCardsCard"
 import Definition from "../../../domain/sentence/Definition"
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails"
 import { FlashCard } from "../../../domain/learn/FlashCard"
-import { Router } from "react-router-dom"
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
+import { History } from "@remix-run/router";
 import { createMemoryHistory } from "history"
 import renderWithTranslation from "tests/renderWithTranslation"
 
@@ -14,7 +15,7 @@ vi.mock("../../../service/SpacedRepetitionService", () => ({
   }
 }))
 
-const history = createMemoryHistory()
+const history = createMemoryHistory() as never as History
 
 const definition = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective")
 const spaceRepetitionDetails = new SpaceRepetitionDetails(2.5, 0, 0, "2021-12-12")
@@ -22,9 +23,9 @@ const flashCard = new FlashCard(1, definition, spaceRepetitionDetails)
 
 const setup = () => {
   const component = renderWithTranslation(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <KanjiFlashCardsCard />
-    </Router>
+    </HistoryRouter>
   )
   return {
     ...component
@@ -88,5 +89,5 @@ test("Should redirect to the learn kanji page when clicking the review button", 
   mockGetKanjiFlashCards.mockResolvedValue({ cards: [flashCard] })
   setup()
   fireEvent.click(await screen.findByText("Start Study Session"))
-  expect(history.entries.map((it) => it.pathname)).toContain("/learn/kanji")
+  expect(history.location.pathname).toBe("/learn/kanji")
 })

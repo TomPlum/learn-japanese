@@ -31,7 +31,6 @@ import DataSettings from "../../../../domain/session/settings/data/DataSettings"
 import { useDataSettingsDispatch, useGameSettingsDispatch } from "../../../../hooks"
 import { setGameSettings } from "../../../../slices/GameSettingsSlice"
 import { setDataSettings as setGlobalDataSettings } from "../../../../slices/DataSettingsSlice"
-import { useHistory } from "react-router-dom"
 import ModeSelectionStep from "./../steps/ModeSelectionStep"
 import { AppMode } from "../../../../domain/AppMode"
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings"
@@ -42,6 +41,7 @@ import { ModalProps } from "react-bootstrap/Modal"
 import SessionMode from "../../../../domain/session/SessionMode"
 import { useTranslation } from "react-i18next"
 import { SessionWizardProps, StageDetails, WizardStep } from "components/layout/wizard/SessionWizard/types.ts";
+import { useNavigate } from "react-router-dom"
 
 const SessionWizard = (props: SessionWizardProps) => {
   const { onClose } = props
@@ -59,7 +59,7 @@ const SessionWizard = (props: SessionWizardProps) => {
 
   const { MODE, TOPIC, TYPE, PRESET, QUESTION, LIVES, HINT, TIME, DATA, CONFIRM } = WizardStep
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const gameSettingsDispatcher = useGameSettingsDispatch()
   const dataSettingsDispatcher = useDataSettingsDispatch()
@@ -90,9 +90,9 @@ const SessionWizard = (props: SessionWizardProps) => {
     if (mode === AppMode.PLAY) {
       const game = custom ? settings.build() : (preset!.modeSettings as GameSettings)
       gameSettingsDispatcher(setGameSettings(game))
-      history.push("/play")
+      navigate("/play")
     } else {
-      history.push("/learn")
+      navigate("/learn")
     }
   }
 

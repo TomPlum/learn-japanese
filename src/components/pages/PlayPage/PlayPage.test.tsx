@@ -4,7 +4,8 @@ import { clearDataSettings, setDataSettings } from "../../../slices/DataSettings
 import { fireEvent, screen } from "@testing-library/react"
 import { createMemoryHistory } from "history"
 import { getByTextWithMarkup } from "tests/Queries"
-import { Router } from "react-router-dom"
+import { BrowserRouter, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { History } from "@remix-run/router"
 import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
 import Definition from "../../../domain/sentence/Definition"
 import { clearGameSettings, setGameSettings } from "../../../slices/GameSettingsSlice"
@@ -47,7 +48,7 @@ const gameSettings = new GameSettingsBuilder()
   )
   .build()
 
-const history = createMemoryHistory()
+const history = createMemoryHistory() as never as History
 
 afterEach(() => {
   store.dispatch(clearDataSettings())
@@ -60,7 +61,7 @@ test("Should render the game if game and data settings are present", async () =>
   store.dispatch(setGameSettings(gameSettings))
   store.dispatch(setDataSettings(dataSettings))
 
-  renderTranslatedReduxConsumer(<PlayPage />)
+  renderTranslatedReduxConsumer(<BrowserRouter><PlayPage /></BrowserRouter>)
 
   expect(await screen.findByTestId("memory-game")).toBeInTheDocument()
 })
@@ -69,7 +70,7 @@ test("Should render an error message if the game settings are undefined", () => 
   store.dispatch(clearGameSettings())
   store.dispatch(setDataSettings(dataSettings))
 
-  renderTranslatedReduxConsumer(<PlayPage />)
+  renderTranslatedReduxConsumer(<BrowserRouter><PlayPage /></BrowserRouter>)
 
   expect(mockLearningDataService).not.toHaveBeenCalled()
   expect(screen.queryByTestId("memory-game")).not.toBeInTheDocument()
@@ -81,7 +82,7 @@ test("Should render an error message if the data settings are undefined", () => 
   store.dispatch(setGameSettings(gameSettings))
   store.dispatch(clearDataSettings())
 
-  renderTranslatedReduxConsumer(<PlayPage />)
+  renderTranslatedReduxConsumer(<BrowserRouter><PlayPage /></BrowserRouter>)
 
   expect(mockLearningDataService).not.toHaveBeenCalled()
   expect(screen.queryByTestId("memory-game")).not.toBeInTheDocument()
@@ -97,9 +98,9 @@ test("Should render the results screen when exiting the game", async () => {
 
   // Render the page and wait for the game to load
   renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <PlayPage />
-    </Router>
+    </HistoryRouter>
   )
   expect(await screen.findByTestId("memory-game")).toBeInTheDocument()
 

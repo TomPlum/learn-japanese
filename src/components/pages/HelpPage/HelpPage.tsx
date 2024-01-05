@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 class HelpPage extends Component {
   render() {
     return (
-      <Container fluid className={styles.wrapper}>
+      <Container fluid className={styles.wrapper} data-testid='help-page'>
         <Container className={styles.content}>
           <Row>
             <Col>

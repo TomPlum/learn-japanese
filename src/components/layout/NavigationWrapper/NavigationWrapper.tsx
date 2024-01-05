@@ -1,18 +1,29 @@
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import NavigationBar from "./../NavigationBar"
 import UserForm from "../../user/UserForm"
 import styles  from "./NavigationWrapper.module.scss"
+import { Outlet, useLocation } from "react-router-dom";
 
-const NavigationWrapper = (props: { children?: ReactNode }) => {
+const NavigationWrapper = () => {
+  const location = useLocation()
   const [inLoginModal, setInLoginModal] = useState(false)
+
+  const isLandingPage = location.pathname === '/'
 
   return (
     <div className={styles.wrapper}>
-      <NavigationBar onLaunchLoginModal={() => setInLoginModal(true)} />
+      {!isLandingPage && (
+        <NavigationBar onLaunchLoginModal={() => setInLoginModal(true)} />
+      )}
 
-      {props.children}
+      <Outlet />
 
-      {inLoginModal && <UserForm show={inLoginModal} onClose={() => setInLoginModal(false)} />}
+      {inLoginModal && (
+        <UserForm
+          show={inLoginModal}
+          onClose={() => setInLoginModal(false)}
+        />
+      )}
     </div>
   )
 }

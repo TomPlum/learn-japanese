@@ -1,4 +1,4 @@
-import { Form, Nav, Overlay, Popover } from "react-bootstrap"
+import { Form, Overlay, Popover } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons"
 import React, { PropsWithChildren, ReactElement, ReactNode, ReactNodeArray, useRef, useState } from "react";
@@ -139,12 +139,12 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
 
   return (
     <div ref={ref} className={[styles.container, containerClass].join(" ")}>
-      <Nav.Link
-        className={linkClassName}
-        onClick={handleClick}
+      <HashLink
+        path={href}
         disabled={disabled}
+        onClick={handleClick}
+        className={linkClassName}
         data-testid={id + "-nav-link"}
-        href={href}
       >
         <div className={styles.button}>
           {isLeft && (
@@ -171,7 +171,7 @@ const NavigationButton = (props: PropsWithChildren<NavigationButtonProps>) => {
             </TextLoading>
           )}
         </div>
-      </Nav.Link>
+      </HashLink>
 
       <Overlay
         show={show}

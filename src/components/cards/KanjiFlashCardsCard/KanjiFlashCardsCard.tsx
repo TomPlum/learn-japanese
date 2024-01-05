@@ -4,7 +4,7 @@ import SpacedRepetitionService, { FlashCardsResponse } from "../../../service/Sp
 import { FlashCard } from "../../../domain/learn/FlashCard"
 import styles  from "./KanjiFlashCardsCard.module.scss"
 import { faGraduationCap, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import DashboardCard, { DashboardCardProps } from "../../layout/card/DashboardCard"
 import DashboardCardHeader from "../../layout/card/DashboardCardHeader"
 import DashboardCardLink from "../../layout/card/DashboardCardLink"
@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next"
 const KanjiFlashCardsCard = () => {
   const service = new SpacedRepetitionService()
 
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.flash-cards" })
   const actions = useTranslation("translation", { keyPrefix: "action" }).t
 
@@ -49,7 +49,7 @@ const KanjiFlashCardsCard = () => {
   }
 
   const onReview = () => {
-    history.push("/learn/kanji")
+    navigate("/learn/kanji")
   }
 
   const props: DashboardCardProps = {

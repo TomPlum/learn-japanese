@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react"
+import { ReactElement, ReactNode } from "react";
 import ConditionalWrapper from "../components/ui/ConditionalWrapper"
 import { I18nextProvider } from "react-i18next"
 import { Provider } from "react-redux"

@@ -4,8 +4,8 @@ import LaunchPresetConfirmationModal, {
 } from "../../../components/settings/LaunchPresetConfirmationModal"
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
-import { createMemoryHistory } from "history"
-import { Router } from "react-router-dom"
+import { createBrowserHistory } from "history";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { store } from "../../../store"
 import { clearGameSettings } from "../../../slices/GameSettingsSlice"
 import { clearDataSettings } from "../../../slices/DataSettingsSlice"
@@ -13,8 +13,9 @@ import PresetBuilder from "../../../domain/session/PresetBuilder"
 import { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings"
 import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
 import { localStorageMock } from "../../../setupTests"
+import { History } from "@remix-run/router";
 
-const history = createMemoryHistory()
+const history = createBrowserHistory() as never as History
 const onDismissHandler = vi.fn()
 
 const playPreset = new PresetBuilder()
@@ -41,9 +42,9 @@ let props: LaunchPresetConfirmationModalProps
 
 const setup = () => {
   const component = renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <LaunchPresetConfirmationModal {...props} />
-    </Router>
+    </HistoryRouter>
   )
 
   return {

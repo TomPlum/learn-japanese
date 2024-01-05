@@ -1,28 +1,14 @@
-import { Redirect, Route, RouteProps } from "react-router-dom"
-import React from "react"
+import { Navigate, Outlet } from "react-router-dom"
+import { useUserSelector } from "../../../hooks.ts"
 
-export interface ProtectedRouteProps extends RouteProps {
-  isAuthenticated: boolean
-}
+const ProtectedRoute = () => {
+  const user = useUserSelector((state) => state.user.user)
 
-const ProtectedRoute = (props: ProtectedRouteProps) => {
-  return (
-    <Route
-      render={(route) => {
-        if (!props.isAuthenticated) {
-          return <Redirect to={{ pathname: "/home", state: { from: route.location } }} />
-        }
+  if (!Boolean(user)) {
+    return <Navigate to={{ pathname: "/home" }} replace />
+  }
 
-        if (props.component) {
-          return React.createElement(props.component)
-        }
-
-        if (props.render) {
-          return props.render(route)
-        }
-      }}
-    />
-  )
+  return <Outlet />
 }
 
 export default ProtectedRoute

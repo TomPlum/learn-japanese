@@ -2,7 +2,8 @@ import { fireEvent, screen, waitFor } from "@testing-library/react"
 import RegisterPage  from "./RegisterPage"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { store } from "../../../store"
-import { Router } from "react-router-dom"
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
+import { History } from "@remix-run/router"
 import { createMemoryHistory } from "history"
 import auth from "../../../service/AuthenticationService"
 import { testUser } from "../../../setupTests"
@@ -11,7 +12,7 @@ import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
 const mockUsernameEligible = vi.fn()
 const mockEmailEligible = vi.fn()
 const mockRegister = vi.fn()
-const history = createMemoryHistory()
+const history = createMemoryHistory() as never as History
 
 vi.mock("../../../service/UserService", () => ({
   default: function () {
@@ -30,9 +31,9 @@ beforeEach(() => {
 test("Should render the registration form if there is no user logged in", () => {
   store.dispatch(clearUser())
   const component = renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <RegisterPage />
-    </Router>
+    </HistoryRouter>
   )
   expect(component.getByTestId("registration-form")).toBeInTheDocument()
 })
@@ -40,9 +41,9 @@ test("Should render the registration form if there is no user logged in", () => 
 test("Should redirect to the home page if the user is already logged in", () => {
   store.dispatch(setUser(testUser))
   renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <RegisterPage />
-    </Router>
+    </HistoryRouter>
   )
   expect(history.location.pathname).toBe("/home")
 })
@@ -50,9 +51,9 @@ test("Should redirect to the home page if the user is already logged in", () => 
 test("Should redirect to the sign-in page if the registration is successful", async () => {
   store.dispatch(clearUser())
   const component = renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <RegisterPage />
-    </Router>
+    </HistoryRouter>
   )
 
   // Fill in the form

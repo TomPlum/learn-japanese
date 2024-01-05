@@ -5,7 +5,8 @@ import { fireEvent, screen } from "@testing-library/react"
 import { createMemoryHistory } from "history"
 import { getByTextWithMarkup } from "tests/Queries"
 import LearnPage  from "./LearnPage"
-import { Router } from "react-router-dom"
+import { BrowserRouter, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { History } from "@remix-run/router"
 import { Kana } from "../../../domain/kana/Kana"
 import KanaType from "../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../domain/kana/KanaColumn"
@@ -28,7 +29,7 @@ const dataSettings = new KanaSettingsBuilder()
   .withQuantity(50)
   .build()
 
-const history = createMemoryHistory()
+const history = createMemoryHistory() as never as History
 
 beforeEach(() => {
   // Mock getRandomObject so it always returns the first element
@@ -48,7 +49,7 @@ test("Should render the learning session if the data settings are present", asyn
   mockLearningDataService.mockResolvedValueOnce([new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)])
   store.dispatch(setDataSettings(dataSettings))
 
-  renderTranslatedReduxConsumer(<LearnPage />)
+  renderTranslatedReduxConsumer(<BrowserRouter><LearnPage /></BrowserRouter>)
 
   expect(await screen.findByTestId("learn")).toBeInTheDocument()
 })
@@ -56,7 +57,7 @@ test("Should render the learning session if the data settings are present", asyn
 test("Should render an error message if the data settings are undefined", () => {
   store.dispatch(clearDataSettings())
 
-  renderTranslatedReduxConsumer(<LearnPage />)
+  renderTranslatedReduxConsumer(<BrowserRouter><LearnPage /></BrowserRouter>)
 
   expect(mockLearningDataService).not.toHaveBeenCalled()
   expect(screen.queryByTestId("memory-game")).not.toBeInTheDocument()
@@ -71,9 +72,9 @@ test("Should skip the results screen and redirect home if the user flips no card
 
   // Render the page and wait for the game to load
   renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <LearnPage />
-    </Router>
+    </HistoryRouter>
   )
   expect(await screen.findByTestId("learn")).toBeInTheDocument()
 
@@ -95,9 +96,9 @@ test("Should render the results screen if the user flips at least one card", asy
 
   // Render the page and wait for the game to load
   renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <LearnPage />
-    </Router>
+    </HistoryRouter>
   )
   expect(await screen.findByTestId("learn")).toBeInTheDocument()
 
@@ -132,9 +133,9 @@ test("Clicking 'Practice Mistakes' on the learning results screen should start a
 
   // Render the page and wait for the game to load
   renderTranslatedReduxConsumer(
-    <Router history={history}>
+    <HistoryRouter history={history}>
       <LearnPage />
-    </Router>
+    </HistoryRouter>
   )
   expect(await screen.findByTestId("learn")).toBeInTheDocument()
 

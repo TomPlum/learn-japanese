@@ -1,10 +1,14 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import svgr from '@svgr/rollup'
 
 export default defineConfig({
-  plugins: [react(), nodePolyfills(), svgr()],
+  plugins: [
+    react(),
+    nodePolyfills(),
+    svgr()
+  ],
   base: './',
   resolve: {
     alias: {
@@ -36,6 +40,7 @@ export default defineConfig({
       }
     },
     coverage: {
+      provider: 'v8',
       reporter: ['text', 'html'],
       exclude: [
         'node_modules/',
