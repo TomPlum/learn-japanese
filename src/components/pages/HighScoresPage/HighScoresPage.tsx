@@ -94,7 +94,7 @@ const HighScoresPage = () => {
   }
 
   return (
-    <Container className={styles.wrapper}>
+    <Container className={styles.wrapper} data-testid='high-scores-page'>
       <div className={styles.content}>
         <div className={styles.header}>
           <FontAwesomeIcon icon={faTrophy} className={styles.icon} />

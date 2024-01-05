@@ -64,7 +64,7 @@ const LearnPage = () => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid='learn-page'>
       <LoadingScreen key={`${loading}`} active={!!dataSettings && loading} />
 
       {!dataSettings && (

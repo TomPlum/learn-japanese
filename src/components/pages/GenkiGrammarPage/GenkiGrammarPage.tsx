@@ -99,7 +99,7 @@ const GenkiGrammarPage = () => {
   }
 
   return (
-    <Container className={styles.wrapper} fluid>
+    <Container className={styles.wrapper} fluid data-testid='genki-grammar-page'>
       <Row noGutters>
         <div className={styles.searchWrapper}>
           <InputGroup className={styles.search}>

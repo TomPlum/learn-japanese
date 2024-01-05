@@ -5,7 +5,7 @@ import styles  from "./NotFoundPage.module.scss"
 
 const NotFoundPage = () => {
   return (
-    <Container fluid className={styles.wrapper}>
+    <Container fluid className={styles.wrapper} data-testid='not-found-page'>
       <div className={styles.content}>
         <h1 className={styles.heading}>Nani!?</h1>
         <h3 className={styles.description}>

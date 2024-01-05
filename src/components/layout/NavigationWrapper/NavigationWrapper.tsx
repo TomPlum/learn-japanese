@@ -18,7 +18,12 @@ const NavigationWrapper = () => {
 
       <Outlet />
 
-      {inLoginModal && <UserForm show={inLoginModal} onClose={() => setInLoginModal(false)} />}
+      {inLoginModal && (
+        <UserForm
+          show={inLoginModal}
+          onClose={() => setInLoginModal(false)}
+        />
+      )}
     </div>
   )
 }

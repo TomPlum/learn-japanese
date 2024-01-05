@@ -1,7 +1,6 @@
 import "./styles/sass/LearnJapanese.module.scss"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css"
-import Main from "./components/layout/Main"
 import { Location } from "history"
 import { Provider } from "react-redux"
 import { EnhancedStore } from "@reduxjs/toolkit"
@@ -23,15 +22,16 @@ import LoginPage from "components/pages/LoginPage";
 import NotFoundPage from "components/pages/NotFoundPage";
 import ProtectedRoute from "components/layout/ProtectedRoute";
 import ProfilePage from "components/pages/ProfilePage";
+import NavigationWrapper from "components/layout/NavigationWrapper";
 
 interface LearnJapaneseProps {
   store: EnhancedStore
   location?: Location
 }
 
-export const router = createBrowserRouter([
+export const routerConfig = [
   {
-    element: <Main />,
+    element: <NavigationWrapper />,
     children: [
       {
         path: '/',
@@ -47,13 +47,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/learn',
-        element: <LearnPage />,
-        children: [
-          {
-            path: '/learn/kanji',
-            element: <LearnOnline />
-          }
-        ]
+        element: <LearnPage />
+      },
+      {
+        path: '/learn/kanji',
+        element: <LearnOnline />
       },
       {
         path: '/search',
@@ -102,11 +100,13 @@ export const router = createBrowserRouter([
       }
     ]
   }
-], { basename: import.meta.env.VITE_BASE_PATH  })
+]
 
-const LearnJapanese = (props: LearnJapaneseProps) => {
-  const { store } = props
+export const router = createBrowserRouter(routerConfig, {
+  basename: import.meta.env.VITE_BASE_PATH
+})
 
+const LearnJapanese = ({ store }: LearnJapaneseProps) => {
   return (
     <Provider store={store}>
       <RouterProvider router={router} />

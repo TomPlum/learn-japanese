@@ -16,7 +16,7 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid='registration-page'>
       <div className={styles.form}>
         <RegistrationForm onSuccess={handleRegistrationSuccess} />
       </div>

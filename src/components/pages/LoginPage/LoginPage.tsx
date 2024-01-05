@@ -16,7 +16,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid='login-page'>
       <div className={styles.form}>
         <LoadingSpinner
           active={!ready}

@@ -67,7 +67,7 @@ const PlayPage = () => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid='play-page'>
       <LoadingScreen key={`${loading}`} active={loading} />
 
       {(!gameSettings || !dataSettings) && (

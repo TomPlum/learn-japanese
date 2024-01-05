@@ -8,7 +8,7 @@ const LearnOnline = (_props: LearnOnlineProps) => {
   const [, setResult] = useState<OnlineLearningSessionResult | undefined>(undefined)
 
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%" }} data-testid='learn-online-page'>
       <KanjiFlashCards onFinish={(result) => setResult(result)} />
     </div>
   )

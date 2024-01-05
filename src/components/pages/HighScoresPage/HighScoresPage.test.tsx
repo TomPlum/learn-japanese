@@ -4,8 +4,8 @@ import renderWithTranslation from "tests/renderWithTranslation"
 import { when } from "jest-when"
 import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
-import { History } from "@remix-run/router"
 import { createMemoryHistory } from "history"
+import { History } from "@remix-run/router";
 
 const mockGetHighScoreEntriesPage = vi.fn()
 vi.mock("../../../service/HighScoresService", () => ({
@@ -21,7 +21,7 @@ vi.mock("../../../service/UserService", () => ({
   }
 }))
 
-let history = createMemoryHistory()
+let history = createMemoryHistory() as never as History
 
 const setup = () => {
   return renderWithTranslation(
@@ -32,7 +32,7 @@ const setup = () => {
 }
 
 beforeEach(() => {
-  history = createMemoryHistory()
+  history = createMemoryHistory() as never as History
 })
 
 test("Should load the high-scores and data and render the table on-load", async () => {
@@ -43,7 +43,7 @@ test("Should load the high-scores and data and render the table on-load", async 
 
 test("Should render the single user high-scores table when the user query pram is present", async () => {
   mockGetHighScoreEntriesPage.mockResolvedValue({ entries: [], pages: { total: 120, quantity: 10 } })
-  history = createMemoryHistory({ initialEntries: ["?user=TomPlum"] })
+  history = createMemoryHistory({ initialEntries: ["?user=TomPlum"] }) as never as History
   const component = setup()
   expect(await component.findByTestId("single-user-high-scores-table")).toBeInTheDocument()
   expect(await component.queryByTestId("high-scores-table")).not.toBeInTheDocument()
