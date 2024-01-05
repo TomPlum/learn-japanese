@@ -13,12 +13,14 @@
 .table thead th {
   border-top: none;
   color: $light-1;
+  background-color: $dark-2 !important;
   border-color: $light-2;
 }
 
 .table tr td {
   border-color: $light-3;
   transition: all ease-in-out 0.2s;
+  background-color: $dark-2 !important;
 }
 
 .table tr:hover {
@@ -32,6 +34,7 @@
 
 .more {
   color: $learn-colour;
+  text-decoration: none;
   opacity: 0.8;
   font-family: "Ciutadella Rounded Semi Bold", "Segoe UI", sans-serif;
   transition: all ease-in-out 0.15s;

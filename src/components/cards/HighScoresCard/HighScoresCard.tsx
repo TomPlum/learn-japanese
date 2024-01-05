@@ -23,7 +23,7 @@ const HighScoresCard = () => {
       </DashboardCard.Header>
 
       <DashboardCard.Body className={styles.body}>
-        <Table responsive hover className={styles.table}>
+        <Table responsive hover className={styles.table} variant='dark'>
           <thead>
             <tr>
               <th>{t("rank")}</th>
