@@ -1,4 +1,3 @@
-import MessageQueue from "../rest/MessageQueue"
 import { FlashCard } from "../domain/learn/FlashCard"
 import RestClient from "../rest/RestClient"
 import { KanjiResponseModel } from "./KanjiRepository"
@@ -15,7 +14,7 @@ export interface FlashCardsResponse {
 }
 
 class FlashCardRepository {
-  private readonly queue = MessageQueue.fromLocalStorage()
+  // private readonly queue = MessageQueue.fromLocalStorage()
   private readonly kanjiConverter = new KanjiConverter()
 
   /**

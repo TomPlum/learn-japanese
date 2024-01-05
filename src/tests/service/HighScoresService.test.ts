@@ -3,15 +3,15 @@ import HighScoresService from "../../service/HighScoresService"
 import { getValueLastCalledWith } from "../Queries"
 import { FindHighScoresRequest } from "../../repository/HighScoresRepository"
 
-const mockFindAll = jest.fn()
-const mockSave = jest.fn()
-jest.mock("../../repository/HighScoresRepository", () => {
-  return function () {
+const mockFindAll = vi.fn()
+const mockSave = vi.fn()
+vi.mock("../../repository/HighScoresRepository", () => ({
+  default: function () {
     return { findAll: mockFindAll, save: mockSave }
   }
-})
+}))
 
-const mockDelete = jest.fn()
+const mockDelete = vi.fn()
 beforeEach(() => {
   RestClient.delete = mockDelete
 })

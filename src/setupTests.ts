@@ -8,9 +8,14 @@ import "@testing-library/jest-dom"
 // It fixes the 'regeneratorRuntime is not defined` error when running a test that consumes the function.
 import "regenerator-runtime/runtime"
 
+afterEach(() => {
+  cleanup()
+})
+
 //Test Environment
-import dotenv from "dotenv"
-dotenv.config({ path: "./.env.test" })
+// TODO: Can we tell the test script to use the vite test mode?
+// import dotenv from "dotenv"
+// dotenv.config({ path: "./.env.test" })
 
 //Fixes Jest error.
 //See: https://github.com/akiran/react-slick/issues/742#issuecomment-298992238
@@ -28,6 +33,7 @@ window.matchMedia =
 import sizeMe from "react-sizeme"
 import { ConfidenceMenuStyle } from "./domain/learn/spacedrepetition/ConfidenceMenuStyle"
 import { User } from "./slices/UserSlice"
+import { cleanup } from "@testing-library/react";
 sizeMe.noPlaceholders = true
 
 declare global {
@@ -78,6 +84,9 @@ export const localStorageMock = (function () {
 })()
 
 Object.defineProperty(window, "localStorage", { value: localStorageMock })
+Object.defineProperty(window, 'scrollTo', { value: () => {
+  console.log("scrollTo() invoked in Jest test.")
+}, writable: true });
 
 export const testUser: User = {
   username: "TomPlum42",

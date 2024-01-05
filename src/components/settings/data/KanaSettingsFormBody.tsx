@@ -2,7 +2,7 @@ import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSetting
 import KanaSettings, { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
 import { Col, Row } from "react-bootstrap"
 import ToggleSwitch from "../../ui/ToggleSwitch"
-import styles from "../../../styles/sass/components/settings/data/KanaSettingsForm.module.scss"
+import styles from "components/settings/data/KanaSettingsForm/KanaSettingsForm.module.scss"
 import QuantityField from "../../ui/fields/QuantityField"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"

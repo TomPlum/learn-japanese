@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap"
-import styles from "../../../styles/sass/components/settings/data/SentenceStructureForm.module.scss"
+import styles from "components/settings/data/SentenceStructureForm/SentenceStructureForm.module.scss"
 import QuantityField from "../../ui/fields/QuantityField"
 import ToggleSwitch from "../../ui/ToggleSwitch"
 import { useEffect, useState } from "react"
@@ -88,7 +88,7 @@ const SentenceStructureFormBody = (props: DataSettingsStepFormProps<SentenceStru
           />
 
           <p className={expressions ? styles.description : styles.disabled}>
-            Common expressions used in every-day conversation. Most of these are taken from the "Expressions & Adverbs"
+            Common expressions used in every-day conversation. Most of these are taken from the &quot;Expressions & Adverbs&quot;
             section of the vocabulary page in the Genki textbook.
           </p>
 

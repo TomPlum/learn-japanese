@@ -1,8 +1,17 @@
 import { Matcher, screen } from "@testing-library/react"
+import { Mock } from "vitest";
 
 export const getByTextWithMarkup = (text: string) => {
   const hasText = (node: Element) => node.textContent === text
   return screen.getByText((_: any, node: any) => {
+    const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as Element))
+    return hasText(node) && childrenDontHaveText
+  })
+}
+
+export const findByTextWithMarkup = async (text: string) => {
+  const hasText = (node: Element) => node.textContent === text
+  return screen.findByText((_: any, node: any) => {
     const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as Element))
     return hasText(node) && childrenDontHaveText
   })
@@ -38,7 +47,7 @@ export const findAllByTextWithElements = async (text: string): Promise<HTMLEleme
  * @param fn A Jest Mock function
  * @return value of the first parameter
  */
-export const getValueLastCalledWith = <T>(fn: jest.Mock): T => {
+export const getValueLastCalledWith = <T>(fn: Mock): T => {
   const calls = fn.mock.calls
   const lastCall = calls[calls.length - 1]
   return lastCall[0] //First arg

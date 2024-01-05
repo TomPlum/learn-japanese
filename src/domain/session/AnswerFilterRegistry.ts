@@ -20,12 +20,6 @@ class AnswerFilterRegistry {
   ])
 
   /**
-   * @see getFilter
-   * @private Not to be instantiated.
-   */
-  private constructor() {}
-
-  /**
    * Retrieves the answer filter with the given ID.
    * @param id The ID of the filter.
    * @returns The matching filter or a default if not found.

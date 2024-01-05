@@ -3,9 +3,9 @@ import authentication, { LoginResponse } from "../../service/AuthenticationServi
 import { localStorageMock } from "../../setupTests"
 
 describe("Authentication Service", () => {
-  const restGet = jest.fn()
-  const restPost = jest.fn()
-  const restDelete = jest.fn()
+  const restGet = vi.fn()
+  const restPost = vi.fn()
+  const restDelete = vi.fn()
 
   beforeEach(() => {
     RestClient.get = restGet

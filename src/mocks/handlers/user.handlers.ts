@@ -2,7 +2,7 @@ import { rest } from "msw"
 import { api } from "../util"
 
 export const handlers = [
-  rest.post(`${api}/user/login`, (req, res, ctx) => {
+  rest.post(`${api}/user/login`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -35,7 +35,7 @@ export const handlers = [
       })
     )
   }),
-  rest.get(`${api}/user/exists`, (req, res, ctx) => {
+  rest.get(`${api}/user/exists`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -43,7 +43,7 @@ export const handlers = [
       })
     )
   }),
-  rest.post(`${api}/user/register`, (req, res, ctx) => {
+  rest.post(`${api}/user/register`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -53,10 +53,10 @@ export const handlers = [
       })
     )
   }),
-  rest.post(`${api}/user/is-authenticated`, (req, res, ctx) => {
+  rest.post(`${api}/user/is-authenticated`, (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json(true))
   }),
-  rest.post(`${api}/user/refresh-token`, (req, res, ctx) => {
+  rest.post(`${api}/user/refresh-token`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -66,13 +66,13 @@ export const handlers = [
       })
     )
   }),
-  rest.post(`${api}/user/set-nickname`, (req, res, ctx) => {
+  rest.post(`${api}/user/set-nickname`, (_req, res, ctx) => {
     return res(ctx.status(201))
   }),
-  rest.patch(`${api}/user/update-preferences`, (req, res, ctx) => {
+  rest.patch(`${api}/user/update-preferences`, (_req, res, ctx) => {
     return res(ctx.status(204))
   }),
-  rest.get(`${api}/user/preferences`, (req, res, ctx) => {
+  rest.get(`${api}/user/preferences`, (_req, res, ctx) => {
     return res(
       ctx.status(204),
       ctx.json({
@@ -92,7 +92,7 @@ export const handlers = [
       })
     )
   }),
-  rest.get(`${api}/user/usernames`, (req, res, ctx) => {
+  rest.get(`${api}/user/usernames`, (_req, res, ctx) => {
     return res(
       ctx.status(201),
       ctx.json({
@@ -100,7 +100,7 @@ export const handlers = [
       })
     )
   }),
-  rest.delete(`${api}/user/delete`, (req, res, ctx) => {
+  rest.delete(`${api}/user/delete`, (_req, res, ctx) => {
     return res(ctx.status(204))
   })
 ]

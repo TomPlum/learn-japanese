@@ -45421,7 +45421,7 @@ const kanji = [
 ]
 
 export const handlers = [
-  rest.get(`${api}/kanji/random`, (req, res, ctx) => {
+  rest.get(`${api}/kanji/random`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -45480,13 +45480,13 @@ export const handlers = [
       })
     )
   }),
-  rest.get(`${api}/kanji/random`, (req, res, ctx) => {
+  rest.get(`${api}/kanji/random`, (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json({}))
   }),
-  rest.get(`${api}/kanji/all`, (req, res, ctx) => {
+  rest.get(`${api}/kanji/all`, (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json(kanji))
   }),
-  rest.post(`${api}/kanji/by-filter`, (req, res, ctx) => {
+  rest.post(`${api}/kanji/by-filter`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({

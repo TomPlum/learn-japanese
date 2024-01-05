@@ -1,5 +1,5 @@
 import { injectStore, refreshTokenInterceptor, RetryableAxiosRequestConfig } from "../../rest/Interceptors"
-import { AxiosError } from "axios"
+import { AxiosError, AxiosHeaders } from "axios";
 import RestClient from "../../rest/RestClient"
 import { store } from "../../store"
 import { setAccessToken, setRefreshToken, setUser } from "../../slices/UserSlice"
@@ -7,10 +7,10 @@ import { Environment } from "../../utility/Environment"
 import api from "../../rest/API"
 import { testUser } from "../../setupTests"
 
-jest.mock("../../rest/API")
+vi.mock("../../rest/API")
 const mockApi = api as jest.MockedFunction<typeof api>
-const mockPost = jest.fn()
-const mockEnvironment = jest.fn()
+const mockPost = vi.fn()
+const mockEnvironment = vi.fn()
 
 beforeEach(() => {
   RestClient.post = mockPost
@@ -28,14 +28,17 @@ describe("Axios Interceptors", () => {
       store.dispatch(setUser(testUser)) // Assume session was active
       const error: AxiosError = {
         config: {
-          url: "https://japanese.tomplumpton.me/learn-japanese/user/refresh-token"
+          url: "https://japanese.tomplumpton.me/learn-japanese/user/refresh-token",
+          headers: new AxiosHeaders()
         },
         response: {
           data: {},
           status: 401,
           statusText: "Bad Request",
           headers: {},
-          config: {}
+          config: {
+            headers: new AxiosHeaders()
+          }
         },
         isAxiosError: false,
         toJSON: () => {
@@ -52,14 +55,17 @@ describe("Axios Interceptors", () => {
     it("Should not fire any requests and reject the promise if the URI is login", () => {
       const error: AxiosError = {
         config: {
-          url: "/user/login"
+          url: "/user/login",
+          headers: new AxiosHeaders()
         },
         response: {
           data: {},
           status: 401,
           statusText: "Bad Request",
           headers: {},
-          config: {}
+          config: {
+            headers: new AxiosHeaders()
+          }
         },
         isAxiosError: false,
         toJSON: () => {
@@ -78,6 +84,7 @@ describe("Axios Interceptors", () => {
     it("Should return not fire any requests and reject the promise if the URI is NOT login, but is NOT HTTP 401", () => {
       const config: RetryableAxiosRequestConfig = {
         url: "/user/login",
+        headers: new AxiosHeaders(),
         retry: true
       }
 
@@ -88,7 +95,9 @@ describe("Axios Interceptors", () => {
           status: 503,
           statusText: "Internal Server Error",
           headers: {},
-          config: {}
+          config: {
+            headers: new AxiosHeaders()
+          }
         },
         isAxiosError: false,
         toJSON: () => {
@@ -109,14 +118,17 @@ describe("Axios Interceptors", () => {
 
       const error: AxiosError = {
         config: {
-          url: "/user/set-nickname"
+          url: "/user/set-nickname",
+          headers: new AxiosHeaders()
         },
         response: {
           data: {},
           status: 401,
           statusText: "Bad Request",
           headers: {},
-          config: {}
+          config: {
+            headers: new AxiosHeaders()
+          }
         },
         isAxiosError: false,
         toJSON: () => {
@@ -132,7 +144,7 @@ describe("Axios Interceptors", () => {
         })
         expect(store.getState().user.user?.token).toBe("ACCESS_TOKEN")
         expect(store.getState().user.user?.refreshToken).toBe("REFRESH_TOKEN")
-        expect(mockApi).toHaveBeenCalledWith({ retry: true, url: "/user/set-nickname" })
+        expect(mockApi).toHaveBeenCalledWith({ retry: true, url: "/user/set-nickname", headers: new AxiosHeaders() })
       })
     })
 
@@ -141,14 +153,17 @@ describe("Axios Interceptors", () => {
       store.dispatch(setRefreshToken("ca6b68d4-85cb-45f5-b1fa-2ead8faa77ec"))
       const error: AxiosError = {
         config: {
-          url: "/user/set-nickname"
+          url: "/user/set-nickname",
+          headers: new AxiosHeaders()
         },
         response: {
           data: {},
           status: 401,
           statusText: "Bad Request",
           headers: {},
-          config: {}
+          config: {
+            headers: new AxiosHeaders()
+          }
         },
         isAxiosError: false,
         toJSON: () => {
@@ -167,14 +182,17 @@ describe("Axios Interceptors", () => {
       store.dispatch(setRefreshToken("ca6b68d4-85cb-45f5-b1fa-2ead8faa77ec"))
       const error: AxiosError = {
         config: {
-          url: "/user/set-nickname"
+          url: "/user/set-nickname",
+          headers: new AxiosHeaders()
         },
         response: {
           data: {},
           status: 401,
           statusText: "Bad Request",
           headers: {},
-          config: {}
+          config: {
+            headers: new AxiosHeaders()
+          }
         },
         isAxiosError: false,
         toJSON: () => {

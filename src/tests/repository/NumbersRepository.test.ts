@@ -5,7 +5,7 @@ import CommonData from "../../domain/learn/CommonData"
 import { CounterGroup } from "../../domain/numbers/CounterGroup"
 import { NumbersSettingsBuilder } from "../../domain/session/settings/data/NumbersSettings"
 
-jest.mock("../../data/Numbers")
+vi.mock("../../data/Numbers")
 
 describe("Numbers Repository", function () {
   const mockNumbers = numbers as jest.MockedFunction<() => NumbersData[]>

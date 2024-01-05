@@ -5,21 +5,22 @@ import { localStorageMock } from "../../setupTests"
 import { Preference } from "../../domain/user/Preference"
 import PatchRequest from "../../rest/request/patch/PatchRequest"
 import PatchReplaceOperation from "../../rest/request/patch/PatchReplaceOperation"
+import { VitestUtils } from "vitest";
 
-const restPut = jest.fn()
-const restGet = jest.fn()
-const restPost = jest.fn()
-const restJsonPatch = jest.fn()
+const restPut = vi.fn()
+const restGet = vi.fn()
+const restPost = vi.fn()
+const restJsonPatch = vi.fn()
 
 RestClient.put = restPut
 RestClient.get = restGet
 RestClient.post = restPost
 RestClient.patchJSON = restJsonPatch
 
-let mockDate: typeof jest
+let mockDate: VitestUtils
 
 beforeEach(() => {
-  mockDate = jest.useFakeTimers("modern")
+  mockDate = vi.useFakeTimers()
 })
 
 describe("User Service", () => {
@@ -209,7 +210,7 @@ describe("User Service", () => {
 
     it("test", () => {
       const arr = ["1", "2", "3"]
-      const func = jest.fn()
+      const func = vi.fn()
       func("test", { example: arr, example2: "test" })
       expect(func).toHaveBeenCalledWith("test", { example: ["1", "2", "3"], example2: "test" })
     })

@@ -26,8 +26,8 @@ describe("Component Tree", () => {
       const tree = new ComponentTree(
         (
           <Copyable>
-            <p>I'm first!</p>
-            <p>I'm second!</p>
+            <p>I&apos;m first!</p>
+            <p>I&apos;m second!</p>
           </Copyable>
         )
       )
@@ -40,10 +40,10 @@ describe("Component Tree", () => {
         (
           <Copyable>
             <p>
-              <span>I'm first!</span>
+              <span>I&apos;m first!</span>
             </p>
             <p>
-              <span>I'm second!</span>
+              <span>I&apos;m second!</span>
             </p>
           </Copyable>
         )
@@ -58,7 +58,7 @@ describe("Component Tree", () => {
           <Copyable>
             <div>
               <p>
-                <span>I'm a leaf!</span>
+                <span>I&apos;m a leaf!</span>
               </p>
             </div>
           </Copyable>
@@ -120,7 +120,7 @@ describe("Component Tree", () => {
 
   describe("Get String Children", () => {
     it("Should return the text content of an immediate child", () => {
-      const tree = new ComponentTree(<p>I'm some text content</p>)
+      const tree = new ComponentTree(<p>I&apos;m some text content</p>)
 
       const stringChildren = tree.getStringChildren()
 

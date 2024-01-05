@@ -20,19 +20,19 @@ class RestClient {
     return await RestClient.makeRestRequest<T>("GET", endpoint)
   }
 
-  static async post<T>(endpoint: string, body: {}): Promise<APIResponse<T>> {
+  static async post<T>(endpoint: string, body: object): Promise<APIResponse<T>> {
     return await RestClient.makeRestRequest<T>("POST", endpoint, body)
   }
 
-  static async put<T>(endpoint: string, body?: {}): Promise<APIResponse<T>> {
+  static async put<T>(endpoint: string, body?: object): Promise<APIResponse<T>> {
     return await RestClient.makeRestRequest<T>("PUT", endpoint, body)
   }
 
-  static async delete<T>(endpoint: string, body?: {}): Promise<APIResponse<T>> {
+  static async delete<T>(endpoint: string, body?: object): Promise<APIResponse<T>> {
     return await RestClient.makeRestRequest<T>("DELETE", endpoint, body)
   }
 
-  static async patch<T>(endpoint: string, body?: {}): Promise<APIResponse<T>> {
+  static async patch<T>(endpoint: string, body?: object): Promise<APIResponse<T>> {
     return await RestClient.makeRestRequest<T>("PATCH", endpoint, body)
   }
 
@@ -40,7 +40,7 @@ class RestClient {
     return await RestClient.makeRestRequest<T>("PATCH", endpoint, request.toJSON(), "application/json-patch+json")
   }
 
-  static async send<T>(method: Method, endpoint: string, body?: {}): Promise<APIResponse<T>> {
+  static async send<T>(method: Method, endpoint: string, body?: object): Promise<APIResponse<T>> {
     return await RestClient.makeRestRequest<T>(method, endpoint, body)
   }
 
@@ -79,7 +79,7 @@ class RestClient {
           status: response.status
         }
       })
-      .catch((e: AxiosError) => {
+      .catch((e: AxiosError<APIResponse<any>>) => {
         //console.log("An error occurred while making a request to " + endpoint, e);
         if (e.response) {
           if (e.response.status === 401) {

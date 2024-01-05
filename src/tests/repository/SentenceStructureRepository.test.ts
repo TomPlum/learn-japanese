@@ -6,7 +6,7 @@ import { VerbType } from "../../domain/sentence/VerbType"
 import Definition from "../../domain/sentence/Definition"
 import { SentenceStructureSettingsBuilder } from "../../domain/session/settings/data/SentenceStructureSettings"
 
-jest.mock("../../data/SentenceStructure")
+vi.mock("../../data/SentenceStructure")
 
 describe("Sentence Structure Repository", () => {
   const mockAdjectives = adjectives as jest.MockedFunction<() => AdjectiveData[]>

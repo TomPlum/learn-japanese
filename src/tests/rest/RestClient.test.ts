@@ -7,7 +7,7 @@ import PatchRequest from "../../rest/request/patch/PatchRequest"
 import PatchReplaceOperation from "../../rest/request/patch/PatchReplaceOperation"
 import { testUser } from "../../setupTests"
 
-jest.mock("../../rest/API")
+vi.mock("../../rest/API")
 const mockApi = api as jest.MockedFunction<typeof api>
 
 interface ExampleResponse {
@@ -15,7 +15,7 @@ interface ExampleResponse {
 }
 
 describe("Rest Client", () => {
-  const environment = jest.fn()
+  const environment = vi.fn()
 
   beforeEach(() => {
     Environment.variable = environment

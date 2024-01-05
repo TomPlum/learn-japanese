@@ -11,10 +11,6 @@ interface PlaySession {
   game: GameSettingState
 }
 
-interface LearnSession {
-  data: DataSettingsState
-}
-
 class LocalStorageService {
   private readonly gameSettingsConverter = new GameSettingsConverter()
   private readonly dataSettingsConverter = new DataSettingsConverter()

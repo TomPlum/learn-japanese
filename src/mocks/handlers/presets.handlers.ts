@@ -2,7 +2,7 @@ import { rest } from "msw"
 import { api } from "../util"
 
 export const handlers = [
-  rest.get(`${api}/presets/all`, (req, res, ctx) => {
+  rest.get(`${api}/presets/all`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -1943,7 +1943,7 @@ export const handlers = [
       })
     )
   }),
-  rest.get(`${api}/presets/default`, (req, res, ctx) => {
+  rest.get(`${api}/presets/default`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -3884,7 +3884,7 @@ export const handlers = [
       })
     )
   }),
-  rest.get(`${api}/presets/favourites`, (req, res, ctx) => {
+  rest.get(`${api}/presets/favourites`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -4029,7 +4029,7 @@ export const handlers = [
       })
     )
   }),
-  rest.get(`${api}/presets/custom`, (req, res, ctx) => {
+  rest.get(`${api}/presets/custom`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -4038,22 +4038,22 @@ export const handlers = [
       })
     )
   }),
-  rest.post(`${api}/presets/custom/play/save`, (req, res, ctx) => {
+  rest.post(`${api}/presets/custom/play/save`, (_req, res, ctx) => {
     return res(ctx.status(200))
   }),
-  rest.post(`${api}/presets/custom/learn/save`, (req, res, ctx) => {
+  rest.post(`${api}/presets/custom/learn/save`, (_req, res, ctx) => {
     return res(ctx.status(200))
   }),
-  rest.post(`${api}/presets/custom/learn/update`, (req, res, ctx) => {
+  rest.post(`${api}/presets/custom/learn/update`, (_req, res, ctx) => {
     return res(ctx.status(200))
   }),
-  rest.put(`${api}/presets/favourites/save`, (req, res, ctx) => {
+  rest.put(`${api}/presets/favourites/save`, (_req, res, ctx) => {
     return res(ctx.status(200))
   }),
-  rest.patch(`${api}/presets/favourites/update`, (req, res, ctx) => {
+  rest.patch(`${api}/presets/favourites/update`, (_req, res, ctx) => {
     return res(ctx.status(200))
   }),
-  rest.delete(`${api}/presets/favourites/delete`, (req, res, ctx) => {
+  rest.delete(`${api}/presets/favourites/delete`, (_req, res, ctx) => {
     return res(ctx.status(200))
   })
 ]

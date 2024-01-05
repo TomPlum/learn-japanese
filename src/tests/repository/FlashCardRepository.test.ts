@@ -9,23 +9,23 @@ import RestClient from "../../rest/RestClient"
 import { Example } from "../../domain/kanji/Example"
 import JLTPLevel from "../../domain/learn/JLTPLevel"
 
-const mockMessageQueue = jest.fn()
-jest.mock("../../rest/MessageQueue", () => {
-  return {
-    fromLocalStorage: jest.fn().mockImplementation(function () {
+const mockMessageQueue = vi.fn()
+vi.mock("../../rest/MessageQueue", () => ({
+  default: {
+    fromLocalStorage: vi.fn().mockImplementation(function () {
       return { enqueue: mockMessageQueue }
     })
   }
-})
+}))
 
-const mockGet = jest.fn()
+const mockGet = vi.fn()
 RestClient.get = mockGet
 
-const mockPost = jest.fn()
+const mockPost = vi.fn()
 RestClient.post = mockPost
 
 beforeEach(() => {
-  jest.resetAllMocks()
+  vi.resetAllMocks()
 })
 
 describe("Flash Card Repository", () => {

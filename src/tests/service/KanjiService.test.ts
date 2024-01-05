@@ -8,13 +8,13 @@ import { ReadingType } from "../../domain/kanji/ReadingType"
 import JLTPLevel from "../../domain/learn/JLTPLevel"
 
 //Mock Kanji Repository
-const mockRepoRead = jest.fn()
-const mockRepoGetBySearchTerm = jest.fn()
-const mockRepoGetByFilter = jest.fn()
-const mockGetRandom = jest.fn()
+const mockRepoRead = vi.fn()
+const mockRepoGetBySearchTerm = vi.fn()
+const mockRepoGetByFilter = vi.fn()
+const mockGetRandom = vi.fn()
 
-jest.mock("../../repository/KanjiRepository", () => {
-  return function () {
+vi.mock("../../repository/KanjiRepository", () => ({
+  default: function () {
     return {
       read: mockRepoRead,
       getByFilter: mockRepoGetByFilter,
@@ -22,7 +22,7 @@ jest.mock("../../repository/KanjiRepository", () => {
       getRandomKanji: mockGetRandom
     }
   }
-})
+}))
 
 const kanji = new Kanji(
   "魚",

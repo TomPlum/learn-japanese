@@ -2,7 +2,7 @@ import { rest } from "msw"
 import { api } from "../util"
 
 export const handlers = [
-  rest.get(`${api}/learn/flash-cards/kanji`, (req, res, ctx) => {
+  rest.get(`${api}/learn/flash-cards/kanji`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
@@ -1130,7 +1130,7 @@ export const handlers = [
       ])
     )
   }),
-  rest.post(`${api}/learn/flash-cards/kanji/update`, (req, res, ctx) => {
+  rest.post(`${api}/learn/flash-cards/kanji/update`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({

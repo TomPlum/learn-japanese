@@ -174,7 +174,7 @@ export default class UserService {
         }
         return []
       })
-      .catch((response) => {
+      .catch(() => {
         return []
       })
   }

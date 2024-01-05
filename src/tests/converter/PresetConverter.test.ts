@@ -8,27 +8,27 @@ import { GameSettingState } from "../../slices/GameSettingsSlice"
 import { KanaDataSettingsState } from "../../slices/DataSettingsSlice"
 import { SessionSettings } from "../../domain/session/settings/SessionSettings"
 
-const mockDataSettingsConverter = jest.fn()
-const mockDeserialiseDataSettings = jest.fn()
-jest.mock("../../converter/DataSettingsConverter", () => {
-  return function () {
+const mockDataSettingsConverter = vi.fn()
+const mockDeserialiseDataSettings = vi.fn()
+vi.mock("../../converter/DataSettingsConverter", () => ({
+  default: function () {
     return {
       convertRequest: mockDataSettingsConverter,
       deserialise: mockDeserialiseDataSettings
     }
   }
-})
+}))
 
-const mockGameSettingsConverter = jest.fn()
-const mockDeserialiseGameSettings = jest.fn()
-jest.mock("../../converter/GameSettingsConverter", () => {
-  return function () {
+const mockGameSettingsConverter = vi.fn()
+const mockDeserialiseGameSettings = vi.fn()
+vi.mock("../../converter/GameSettingsConverter", () => ({
+  default: function () {
     return {
       convertRequest: mockGameSettingsConverter,
       deserialise: mockDeserialiseGameSettings
     }
   }
-})
+}))
 
 const playPreset: CustomPresetDetails = {
   name: "Test Mode",

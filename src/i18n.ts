@@ -1,22 +1,24 @@
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
-import detector from "i18next-browser-languagedetector"
-import Backend from "i18next-http-backend"
+import english from 'locales/en/translation.json'
+import japanese from 'locales/jp/translation.json'
 
-i18n
-  .use(detector)
-  .use(Backend)
-  .use(initReactI18next)
-  .init({
-    defaultNS: "translation",
-    fallbackLng: "en",
-    backend: {
-      loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json`
+i18n.use(initReactI18next).init({
+  resources: {
+    en: {
+      translation: english
     },
-    react: {
-      useSuspense: false
+    jp: {
+      translation: japanese
     }
-  })
-  .then(() => console.log("Initialised React i18n"))
-
-export default i18n
+  },
+  lng: 'en',
+  fallbackLng: "jp",
+  interpolation: {
+    escapeValue: false
+  }
+}).then(() => {
+  console.debug('React i18n has been initialised.')
+}).catch(e => {
+  console.error('Failed to initialise React i18n.', e)
+})

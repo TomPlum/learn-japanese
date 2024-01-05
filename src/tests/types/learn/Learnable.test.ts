@@ -86,7 +86,7 @@ describe("Learnable", () => {
     })
 
     it.skip("Should throw an exception when passing in an unknown field type", () => {
-      const data = new Definition(["not much"], undefined, "あまり", "Adverb")
+      // const data = new Definition(["not much"], undefined, "あまり", "Adverb")
       //TODO: How can we test this without adding in an unused LearnableField export?
     })
   })

@@ -2,7 +2,7 @@ import { rest } from "msw"
 import { api } from "../util"
 
 export const handlers = [
-  rest.post(`${api}/high-scores/entry`, (req, res, ctx) => {
+  rest.post(`${api}/high-scores/entry`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -10,7 +10,7 @@ export const handlers = [
       })
     )
   }),
-  rest.get(`${api}/high-scores/entries/1`, (req, res, ctx) => {
+  rest.get(`${api}/high-scores/entries/1`, (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({

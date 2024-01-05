@@ -14,7 +14,7 @@ export interface HighScoreSubmitButtonProps {
 const HighScoreSubmitButton = (props: HighScoreSubmitButtonProps) => {
   const { presetId, time, score } = props
 
-  const [loading, setLoading] = useState(false)
+  const [, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
   const service = new HighScoresService()

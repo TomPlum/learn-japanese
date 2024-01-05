@@ -24,36 +24,32 @@ import Topic from "../../domain/Topic"
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons"
 import { SessionSettings } from "../../domain/session/settings/SessionSettings"
 
-const mockDataSettingsConverter = jest.fn()
-jest.mock(
-  "../../converter/DataSettingsConverter",
-  () =>
-    function () {
-      return { convert: mockDataSettingsConverter }
-    }
-)
+const mockDataSettingsConverter = vi.fn()
+vi.mock("../../converter/DataSettingsConverter", () => ({
+  default: function () {
+    return { convert: mockDataSettingsConverter }
+  }
+}))
 
-const mockGameSettingsConverter = jest.fn()
-jest.mock(
-  "../../converter/GameSettingsConverter",
-  () =>
-    function () {
-      return { convert: mockGameSettingsConverter }
-    }
-)
+const mockGameSettingsConverter = vi.fn()
+vi.mock("../../converter/GameSettingsConverter", () => ({
+  default: function () {
+    return { convert: mockGameSettingsConverter }
+  }
+}))
 
-const mockPresetConverter = jest.fn()
-jest.mock("../../converter/PresetConverter", () => {
-  return function () {
+const mockPresetConverter = vi.fn()
+vi.mock("../../converter/PresetConverter", () => ({
+  default: function () {
     return { convertRequest: mockPresetConverter }
   }
-})
+}))
 
 //Mock RestClient Methods
-const mockPost = jest.fn()
-const mockGet = jest.fn()
-const mockDelete = jest.fn()
-const mockPatch = jest.fn()
+const mockPost = vi.fn()
+const mockGet = vi.fn()
+const mockDelete = vi.fn()
+const mockPatch = vi.fn()
 
 beforeEach(() => {
   RestClient.post = mockPost

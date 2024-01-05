@@ -7,13 +7,13 @@ import each from "jest-each"
 import { FlashCard } from "../../domain/learn/FlashCard"
 import Definition from "../../domain/sentence/Definition"
 
-const mockGetKanjiFlashCards = jest.fn()
-const mockUpdateKanjiFlashCard = jest.fn()
-jest.mock("../../repository/FlashCardRepository", () => {
-  return function () {
+const mockGetKanjiFlashCards = vi.fn()
+const mockUpdateKanjiFlashCard = vi.fn()
+vi.mock("../../repository/FlashCardRepository", () => ({
+  default: function () {
     return { getKanjiFlashCards: mockGetKanjiFlashCards, update: mockUpdateKanjiFlashCard }
   }
-})
+}))
 
 describe("Spaced Repetition Service", () => {
   const learnable = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective")
@@ -21,7 +21,7 @@ describe("Spaced Repetition Service", () => {
 
   beforeEach(() => {
     //Set today's date as 4th September 2021 00:00:00
-    Date.now = jest.fn(() => new Date(Date.UTC(2021, 8, 4, 0, 0, 0)).valueOf())
+    Date.now = vi.fn(() => new Date(Date.UTC(2021, 8, 4, 0, 0, 0)).valueOf())
   })
 
   describe("Get Days Until", () => {
