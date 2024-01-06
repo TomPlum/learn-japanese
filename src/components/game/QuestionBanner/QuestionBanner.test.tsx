@@ -3,7 +3,7 @@ import { fireEvent, screen } from "@testing-library/react"
 import Definition from "../../../domain/sentence/Definition"
 import LearnableField from "../../../domain/learn/LearnableField"
 import { findByTextWithElements } from "__test-utils__/Queries"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 let props: QuestionBannerProps
 
@@ -13,7 +13,7 @@ const twoFields = new Definition(["meaning1", "meaning2"], undefined, "", "")
 const severalFields = new Definition(["meaning1", "meaning2", "meaning3", "meaning4"], undefined, "", "")
 
 const setup = () => {
-  const component = renderWithTranslation(<QuestionBanner {...props} />)
+  const component = render(<QuestionBanner {...props} />)
   return { ...component }
 }
 

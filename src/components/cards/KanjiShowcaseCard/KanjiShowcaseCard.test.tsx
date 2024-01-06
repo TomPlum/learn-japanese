@@ -5,11 +5,11 @@ import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
 import { Example } from "../../../domain/kanji/Example"
 import KanjiShowcaseCard  from "./KanjiShowcaseCard"
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import { render } from "__test-utils__"
 import { store } from "../../../store"
 import { setFont } from "../../../slices/FontSlice"
 import { fireEvent, screen } from "@testing-library/react"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const mockKanjiService = vi.fn()
 
@@ -65,7 +65,7 @@ const kanji3 = new Kanji(
 
 test("Should render the kanji character", async () => {
   mockKanjiService.mockResolvedValueOnce({ value: kanji })
-  const component = renderReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("魚")).toBeInTheDocument()
 })
 
@@ -73,51 +73,51 @@ test("Should render the kanji character in the globally selected font", async ()
   store.dispatch(setFont("test-font"))
   mockKanjiService.mockResolvedValueOnce({ value: kanji })
 
-  const component = renderReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
 
   expect(await component.findByText("魚")).toHaveStyle({ "font-family": "test-font" })
 })
 
 test("Should render the grade", async () => {
   mockKanjiService.mockResolvedValueOnce({ value: kanji })
-  const component = renderReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("2")).toBeInTheDocument()
 })
 
 test("Should render the JLPT level", async () => {
   mockKanjiService.mockResolvedValueOnce({ value: kanji })
-  const component = renderReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("N5")).toBeInTheDocument()
 })
 
 test("Should render the strokes", async () => {
   mockKanjiService.mockResolvedValueOnce({ value: kanji })
-  const component = renderReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("10")).toBeInTheDocument()
 })
 
 test("Should render the examples quantity", async () => {
   mockKanjiService.mockResolvedValueOnce({ value: kanji })
-  const component = renderReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("1")).toBeInTheDocument()
 })
 
 test("Should render the error if the service call fails", async () => {
   mockKanjiService.mockResolvedValueOnce({ error: "Failed to retrieve kanji." })
-  const component = renderReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("Failed to retrieve kanji.")).toBeInTheDocument()
 })
 
 test("Should render the error if the service call is rejected", async () => {
   mockKanjiService.mockRejectedValueOnce({ error: "Failed to retrieve kanji." })
-  const component = renderReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("Failed to retrieve kanji.")).toBeInTheDocument()
 })
 
 test("Clicking the shuffle button should render a new kanji", async () => {
   // Should render the first kanji initially
   mockKanjiService.mockResolvedValueOnce({ value: kanji })
-  const component = renderTranslatedReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("魚")).toBeInTheDocument()
 
   // Clicking the shuffle button should render the next
@@ -129,7 +129,7 @@ test("Clicking the shuffle button should render a new kanji", async () => {
 test("Should render a pop-over with the full meanings if they exceed 23 characters in length", async () => {
   // Render the kanji character with many meaning values
   mockKanjiService.mockResolvedValueOnce({ value: kanji3 })
-  const component = renderTranslatedReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("子")).toBeInTheDocument()
 
   // Hover over the trimmed meanings text
@@ -141,7 +141,7 @@ test("Should render a pop-over with the full meanings if they exceed 23 characte
 test("Should route to the kanji search page when clicking the link", async () => {
   // Render a kanji character
   mockKanjiService.mockResolvedValueOnce({ value: kanji })
-  const component = renderTranslatedReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("魚")).toBeInTheDocument()
 
   // Clicking the link should route to the kanji search page
@@ -151,7 +151,7 @@ test("Should route to the kanji search page when clicking the link", async () =>
 test("Should render the examples display modal when clicking the examples button", async () => {
   // Render a kanji that has at least 1 example
   mockKanjiService.mockResolvedValueOnce({ value: kanji })
-  const component = renderTranslatedReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("魚")).toBeInTheDocument()
 
   // Click the example icon button
@@ -168,7 +168,7 @@ test("Should render the examples display modal when clicking the examples button
 test("Clicking the examples button should not render the examples display if the kanji has none", async () => {
   // Render a kanji that has no examples
   mockKanjiService.mockResolvedValueOnce({ value: kanji3 })
-  const component = renderTranslatedReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("子")).toBeInTheDocument()
 
   // Click the example icon button
@@ -181,7 +181,7 @@ test("Clicking the examples button should not render the examples display if the
 test("If a kanji has multiple on readings, when hovering over it, it should render a pop-over with them all", async () => {
   // Render a kanji that has multiple on'yomi readings
   mockKanjiService.mockResolvedValueOnce({ value: kanji2 })
-  const component = renderTranslatedReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("子")).toBeInTheDocument()
 
   // Mouse over the displayed reading
@@ -195,7 +195,7 @@ test("If a kanji has multiple on readings, when hovering over it, it should rend
 test("If a kanji has multiple kun readings, when hovering over it, it should render a pop-over with them all", async () => {
   // Render a kanji that has multiple kun'yomi readings
   mockKanjiService.mockResolvedValueOnce({ value: kanji3 })
-  const component = renderTranslatedReduxConsumer(<KanjiShowcaseCard />)
+  const component = render(<KanjiShowcaseCard />)
   expect(await component.findByText("子")).toBeInTheDocument()
 
   // Mouse over the displayed reading

@@ -4,14 +4,14 @@ import { faApple } from "@fortawesome/free-brands-svg-icons"
 import PlayMode from "../../../../../domain/session/PlayMode"
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings"
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onStartHandler = vi.fn()
 
 let props: FavouriteButtonProps
 
 const setup = () => {
-  const component = renderWithTranslation(<FavouriteButton {...props} />)
+  const component = render(<FavouriteButton {...props} />)
   return {
     ...component
   }

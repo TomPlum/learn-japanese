@@ -3,10 +3,10 @@ import { store } from "../../../store"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import { fireEvent, screen } from "@testing-library/react"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(<SettingsCard />)
+  const component = render(<SettingsCard />)
   return {
     general: component.getByText("General Settings"),
     learn: component.getByText("Learn Settings"),

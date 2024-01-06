@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react"
 import ProtectedRoute from "./ProtectedRoute"
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer.tsx"
+import { render } from "__test-utils__"
 import { store } from "../../../store.ts"
 import { clearUser, setUser } from "../../../slices/UserSlice.ts";
 import { testUser } from "../../../setupTests.ts"
@@ -20,7 +20,7 @@ test("Should redirect to the main page if the user is not authenticated", () => 
     }
   ], { initialEntries: ['/'] })
 
-  renderTranslatedReduxConsumer(<RouterProvider router={router} />)
+  render(<RouterProvider router={router} />)
 
   expect(screen.getByTestId('home')).toBeInTheDocument()
 })
@@ -39,7 +39,7 @@ test("Should render the router outlet component if the user is authenticated", (
     }
   ])
   
-  renderTranslatedReduxConsumer(<RouterProvider router={router} />)
+  render(<RouterProvider router={router} />)
 
   expect(window.location.pathname).toBe("/")
   expect(screen.getByText("I'm a test component")).toBeInTheDocument()

@@ -3,7 +3,7 @@ import LoginForm  from "./LoginForm"
 import auth, { LoginResponse } from "../../../service/AuthenticationService"
 import { store } from "../../../store"
 import { clearUser } from "../../../slices/UserSlice"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 vi.mock("service/AuthenticationService")
 
@@ -42,7 +42,7 @@ const validLoginResponse: LoginResponse = {
 }
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <LoginForm onSuccess={onSuccessHandler} username={registeredUsername} info={infoMessage} />
   )
 

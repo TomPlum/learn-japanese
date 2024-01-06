@@ -2,10 +2,10 @@ import ProfilePage  from "./ProfilePage"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { store } from "../../../store"
 import { testUser } from "../../../setupTests"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer";
+import { render } from "__test-utils__";
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(<ProfilePage />)
+  const component = render(<ProfilePage />)
 
   return {
     edit: component.queryByTitle("Edit"),

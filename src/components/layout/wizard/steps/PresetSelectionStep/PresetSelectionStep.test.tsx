@@ -13,7 +13,7 @@ import LearnSettings from "../../../../../domain/session/settings/LearnSettings"
 import { store } from "../../../../../store"
 import { clearUser, setUser } from "../../../../../slices/UserSlice"
 import { testUser } from "../../../../../setupTests"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const mockGetAllPresets = vi.fn()
 const mockGetDefaultPresets = vi.fn()
@@ -72,7 +72,7 @@ const customPreset = new PresetBuilder()
 let props: PresetSelectionStepProps
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(<PresetSelectionStep {...props} />)
+  const component = render(<PresetSelectionStep {...props} />)
   return {
     topic: component.getByTestId("wizard-topic-selector"),
     ...component

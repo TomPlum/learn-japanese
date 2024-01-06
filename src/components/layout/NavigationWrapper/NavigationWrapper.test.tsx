@@ -1,10 +1,10 @@
 import { fireEvent, screen } from "@testing-library/react"
 import NavigationWrapper  from "./NavigationWrapper"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 import { MemoryRouter } from "react-router-dom";
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <MemoryRouter initialEntries={['/home']}>
       <NavigationWrapper />
     </MemoryRouter>

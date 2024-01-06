@@ -1,7 +1,7 @@
 import QuestionDisplay  from "./QuestionDisplay"
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import { render } from "__test-utils__"
 
 test("It should display the given string value", () => {
-  const component = renderReduxConsumer(<QuestionDisplay question="hello" />)
+  const component = render(<QuestionDisplay question="hello" />)
   expect(component.getByText("hello")).toBeInTheDocument()
 })

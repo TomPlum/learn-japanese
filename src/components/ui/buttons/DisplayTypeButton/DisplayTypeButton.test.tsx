@@ -2,7 +2,7 @@ import { fireEvent } from "@testing-library/react"
 import DisplayTypeButton, { DisplayTypeButtonProps }  from "./DisplayTypeButton"
 import QuestionType from "../../../../domain/game/QuestionType"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onClickHandler = vi.fn()
 
@@ -18,7 +18,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(<DisplayTypeButton {...props} />)
+  const component = render(<DisplayTypeButton {...props} />)
   return {
     button: component.getByText("Multiple Choice"),
     ...component

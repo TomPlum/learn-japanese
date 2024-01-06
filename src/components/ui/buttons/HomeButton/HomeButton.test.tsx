@@ -1,7 +1,7 @@
 import HomeButton  from "./HomeButton"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 test("It should render the text from the translation", () => {
-  const component = renderWithTranslation(<HomeButton />)
+  const component = render(<HomeButton />)
   expect(component.getByText("Home")).toBeInTheDocument()
 })

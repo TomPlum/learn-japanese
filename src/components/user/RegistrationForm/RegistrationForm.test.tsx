@@ -2,7 +2,7 @@ import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from "@testing-
 import RegistrationForm  from "./RegistrationForm"
 import authService from "../../../service/AuthenticationService"
 import each from "jest-each"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onSuccessHandler = vi.fn()
 const mockRegister = vi.fn()
@@ -25,7 +25,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(<RegistrationForm onSuccess={onSuccessHandler} />)
+  const component = render(<RegistrationForm onSuccess={onSuccessHandler} />)
   return {
     email: component.getByPlaceholderText("Enter email"),
     username: component.getByPlaceholderText("Username"),

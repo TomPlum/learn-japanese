@@ -3,7 +3,7 @@ import HintButton, { HintButtonProps }  from "./HintButton"
 import { Kana } from "../../../domain/kana/Kana"
 import KanaType from "../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../domain/kana/KanaColumn"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onUseHandler = vi.fn()
 
@@ -21,7 +21,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(<HintButton {...props} />)
+  const component = render(<HintButton {...props} />)
   return {
     button: component.getByTitle("Get a Hint"),
     ...component

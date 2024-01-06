@@ -1,12 +1,12 @@
 import { fireEvent, screen } from "@testing-library/react"
 import ConfirmModal  from "./ConfirmModal"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onConfirmHandler = vi.fn()
 const onDismissHandler = vi.fn()
 
 const setup = () => {
-  const component = renderWithTranslation(
+  const component = render(
     <ConfirmModal title={"Title"} body={"Body"} onConfirm={onConfirmHandler} onDismiss={onDismissHandler} />
   )
   return {

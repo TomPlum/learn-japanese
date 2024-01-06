@@ -11,7 +11,7 @@ import { when } from "jest-when"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { History } from "@remix-run/router"
 import { createMemoryHistory } from "history"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const environment = vi.fn()
 const shuffle = vi.fn()
@@ -26,7 +26,7 @@ vi.mock("repository/KanaRepository", () => ({
 const history = createMemoryHistory() as never as History
 
 const setup = () => {
-  const component = renderWithTranslation(
+  const component = render(
     <HistoryRouter history={history}>
       <LandingPage />
     </HistoryRouter>

@@ -6,7 +6,7 @@ import { createMemoryHistory } from "history"
 import { getByTextWithMarkup } from "__test-utils__/Queries"
 import { BrowserRouter, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { History } from "@remix-run/router"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 import Definition from "../../../domain/sentence/Definition"
 import { clearGameSettings, setGameSettings } from "../../../slices/GameSettingsSlice"
 import PlayPage  from "./PlayPage"
@@ -61,7 +61,7 @@ test("Should render the game if game and data settings are present", async () =>
   store.dispatch(setGameSettings(gameSettings))
   store.dispatch(setDataSettings(dataSettings))
 
-  renderTranslatedReduxConsumer(<BrowserRouter><PlayPage /></BrowserRouter>)
+  render(<BrowserRouter><PlayPage /></BrowserRouter>)
 
   expect(await screen.findByTestId("memory-game")).toBeInTheDocument()
 })
@@ -70,7 +70,7 @@ test("Should render an error message if the game settings are undefined", () => 
   store.dispatch(clearGameSettings())
   store.dispatch(setDataSettings(dataSettings))
 
-  renderTranslatedReduxConsumer(<BrowserRouter><PlayPage /></BrowserRouter>)
+  render(<BrowserRouter><PlayPage /></BrowserRouter>)
 
   expect(mockLearningDataService).not.toHaveBeenCalled()
   expect(screen.queryByTestId("memory-game")).not.toBeInTheDocument()
@@ -82,7 +82,7 @@ test("Should render an error message if the data settings are undefined", () => 
   store.dispatch(setGameSettings(gameSettings))
   store.dispatch(clearDataSettings())
 
-  renderTranslatedReduxConsumer(<BrowserRouter><PlayPage /></BrowserRouter>)
+  render(<BrowserRouter><PlayPage /></BrowserRouter>)
 
   expect(mockLearningDataService).not.toHaveBeenCalled()
   expect(screen.queryByTestId("memory-game")).not.toBeInTheDocument()
@@ -97,7 +97,7 @@ test("Should render the results screen when exiting the game", async () => {
   store.dispatch(setDataSettings(dataSettings))
 
   // Render the page and wait for the game to load
-  renderTranslatedReduxConsumer(
+  render(
     <HistoryRouter history={history}>
       <PlayPage />
     </HistoryRouter>

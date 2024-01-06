@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import FontSelectorButton  from "./FontSelectorButton"
 import { store } from "../../../../store"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const mockGetSelectedFont = vi.fn()
 const mockGetFonts = vi.fn()
@@ -26,7 +26,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(<FontSelectorButton />)
+  const component = render(<FontSelectorButton />)
   return {
     toggle: component.getByTestId("font-selector"),
     ...component

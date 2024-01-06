@@ -7,7 +7,7 @@ import { History } from "@remix-run/router"
 import { createMemoryHistory } from "history"
 import auth from "../../../service/AuthenticationService"
 import { testUser } from "../../../setupTests"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const mockUsernameEligible = vi.fn()
 const mockEmailEligible = vi.fn()
@@ -30,7 +30,7 @@ beforeEach(() => {
 
 test("Should render the registration form if there is no user logged in", () => {
   store.dispatch(clearUser())
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <HistoryRouter history={history}>
       <RegisterPage />
     </HistoryRouter>
@@ -40,7 +40,7 @@ test("Should render the registration form if there is no user logged in", () => 
 
 test("Should redirect to the home page if the user is already logged in", () => {
   store.dispatch(setUser(testUser))
-  renderTranslatedReduxConsumer(
+  render(
     <HistoryRouter history={history}>
       <RegisterPage />
     </HistoryRouter>
@@ -50,7 +50,7 @@ test("Should redirect to the home page if the user is already logged in", () => 
 
 test("Should redirect to the sign-in page if the registration is successful", async () => {
   store.dispatch(clearUser())
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <HistoryRouter history={history}>
       <RegisterPage />
     </HistoryRouter>

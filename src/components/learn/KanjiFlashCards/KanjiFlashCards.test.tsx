@@ -4,11 +4,11 @@ import { Kanji } from "../../../domain/kanji/Kanji"
 import { KanjiReading } from "../../../domain/kanji/KanjiReading"
 import { ReadingType } from "../../../domain/kanji/ReadingType"
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import { render } from "__test-utils__"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
 import { FlashCard } from "../../../domain/learn/FlashCard"
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const mockGetKanjiFlashCards = vi.fn()
 const mockUpdateKanjiFlashCard = vi.fn()
@@ -100,7 +100,7 @@ beforeEach(() => {
 })
 
 const setup = async () => {
-  const component = renderTranslatedReduxConsumer(<KanjiFlashCards {...props} />)
+  const component = render(<KanjiFlashCards {...props} />)
 
   const kanji = await component.findAllByText("一")
   kanji.forEach((el) => expect(el).toBeInTheDocument())
@@ -314,24 +314,24 @@ test("Marking a card as 'Forgotten' should increase the counter by 1", async () 
 
 test("Should render the error message if the service call succeeds but returns no cards", async () => {
   mockGetKanjiFlashCards.mockReset().mockResolvedValueOnce({ cards: undefined, error: "User has no cards." })
-  renderReduxConsumer(<KanjiFlashCards {...props} />)
+  render(<KanjiFlashCards {...props} />)
   expect(await screen.findByText("User has no cards."))
 })
 
 test("Should render a generic error message if the service call succeeds but returns no cards or error", async () => {
   mockGetKanjiFlashCards.mockReset().mockResolvedValueOnce({ cards: undefined })
-  renderReduxConsumer(<KanjiFlashCards {...props} />)
+  render(<KanjiFlashCards {...props} />)
   expect(await screen.findByText("An unknown error has occurred."))
 })
 
 test("Should render the error message if the service call fails", async () => {
   mockGetKanjiFlashCards.mockReset().mockRejectedValueOnce({ error: "An error has occurred." })
-  renderReduxConsumer(<KanjiFlashCards {...props} />)
+  render(<KanjiFlashCards {...props} />)
   expect(await screen.findByText("An error has occurred."))
 })
 
 test("Should render a generic error message if the service call fails but returns no error", async () => {
   mockGetKanjiFlashCards.mockReset().mockRejectedValueOnce({})
-  renderReduxConsumer(<KanjiFlashCards {...props} />)
+  render(<KanjiFlashCards {...props} />)
   expect(await screen.findByText("An unknown error has occurred."))
 })

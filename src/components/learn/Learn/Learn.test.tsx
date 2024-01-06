@@ -6,7 +6,7 @@ import Learn, { LearnProps }  from "./Learn"
 import KanaFlashCardFront from "../../../components/learn/kana/KanaFlashCardFront"
 import KanaFlashCardBack from "../../../components/learn/kana/KanaFlashCardBack"
 import Arrays from "../../../utility/Arrays"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onFinishHandler = vi.fn()
 
@@ -38,7 +38,7 @@ afterEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(<Learn {...props} />)
+  const component = render(<Learn {...props} />)
   return {
     remembered: component.getByTitle("I remembered it"),
     forgot: component.getByTitle("I couldn't remember it"),

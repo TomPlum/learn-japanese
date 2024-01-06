@@ -3,14 +3,14 @@ import ModeSelectionStep, {
   ModeSelectionStepProps
 } from "../../../../../components/layout/wizard/steps/ModeSelectionStep"
 import { AppMode } from "../../../../../domain/AppMode"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onSelectHandler = vi.fn()
 
 let props: ModeSelectionStepProps
 
 const setup = () => {
-  const component = renderWithTranslation(<ModeSelectionStep {...props} />)
+  const component = render(<ModeSelectionStep {...props} />)
   return {
     play: component.getByText("Play").parentElement,
     learn: component.getByText("Learn").parentElement,

@@ -12,7 +12,7 @@ import { getByTextWithElements } from "__test-utils__/Queries"
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
 import { WizardStep } from "../../../components/layout/wizard/SessionWizard/types.ts"
 import SessionSettingsSummary  from "./SessionSettingsSummary"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onSelectStageHandler = vi.fn()
 
@@ -89,7 +89,7 @@ test("Should render the intermediary text between the question type and answer f
 
 test("Should render the answer field name", () => {
   withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(KANA, ROMAJI).build()))
-  renderWithTranslation(<SessionSettingsSummary settings={settings} onSelectStage={onSelectStageHandler} />)
+  render(<SessionSettingsSummary settings={settings} onSelectStage={onSelectStageHandler} />)
   expect(screen.getByText("Rōmaji")).toBeInTheDocument()
 })
 
@@ -199,7 +199,7 @@ test("Should render an error message if the game settings are undefined", () => 
 
 test("Clicking the question field text should call the onSelectStage event handler with the correct stage", () => {
   withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(KANA, ROMAJI).build()))
-  renderWithTranslation(<SessionSettingsSummary settings={settings} onSelectStage={onSelectStageHandler} />)
+  render(<SessionSettingsSummary settings={settings} onSelectStage={onSelectStageHandler} />)
   fireEvent.click(screen.getByText("Kana"))
   expect(onSelectStageHandler).toHaveBeenLastCalledWith(WizardStep.QUESTION)
 })
@@ -213,7 +213,7 @@ test("Clicking the question type text should call the onSelectStage event handle
 
 test("Clicking the answer field text should call the onSelectStage event handler with the correct stage", () => {
   withGameSettings(gameSettings.withQuestionSettings(new QuestionSettingsBuilder().withFields(KANA, ROMAJI).build()))
-  renderWithTranslation(<SessionSettingsSummary settings={settings} onSelectStage={onSelectStageHandler} />)
+  render(<SessionSettingsSummary settings={settings} onSelectStage={onSelectStageHandler} />)
   fireEvent.click(screen.getByText("Rōmaji"))
   expect(onSelectStageHandler).toHaveBeenLastCalledWith(WizardStep.QUESTION)
 })

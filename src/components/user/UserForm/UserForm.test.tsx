@@ -3,7 +3,7 @@ import UserForm, { UserFormProps }  from "./UserForm"
 import { Provider } from "react-redux"
 import { store } from "../../../store"
 import authService from "../../../service/AuthenticationService"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 let props: UserFormProps
 
@@ -20,7 +20,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(
+  const component = render(
     <Provider store={store}>
       <UserForm {...props} />
     </Provider>

@@ -10,7 +10,7 @@ import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeS
 import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings"
 import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings"
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 let result: GameResult
 
@@ -31,7 +31,7 @@ beforeEach(() => {
 const onCloseHandler = vi.fn()
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(<GameResultScreen onClose={onCloseHandler} result={result} />)
+  const component = render(<GameResultScreen onClose={onCloseHandler} result={result} />)
   return {
     quit: component.getByText("Finish"),
     mistakes: component.getByText("View Mistakes"),

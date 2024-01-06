@@ -1,4 +1,4 @@
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import { render } from "__test-utils__"
 import NotificationsButton  from "./NotificationsButton"
 import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import { store } from "../../../../store"
@@ -13,7 +13,7 @@ vi.mock("uuid", () => ({
 }))
 
 const setup = () => {
-  const component = renderReduxConsumer(<NotificationsButton />)
+  const component = render(<NotificationsButton />)
   return {
     button: component.getByTestId("notifications-button"),
     ...component

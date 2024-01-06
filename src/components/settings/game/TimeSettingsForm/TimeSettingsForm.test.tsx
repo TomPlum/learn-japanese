@@ -1,12 +1,12 @@
 import { fireEvent, screen } from "@testing-library/react"
 import TimeSettingsForm  from "./TimeSettingsForm"
 import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onChangeHandler = vi.fn()
 
 const setup = () => {
-  const component = renderWithTranslation(<TimeSettingsForm onChange={onChangeHandler} />)
+  const component = render(<TimeSettingsForm onChange={onChangeHandler} />)
   return {
     timed: component.getByTestId("Timed"),
     countdown: component.getByTestId("Countdown"),

@@ -4,7 +4,7 @@ import { DataSettingsMenuProps } from "../../../../components/settings/data/Data
 import NumbersSettings, { NumbersSettingsBuilder } from "../../../../domain/session/settings/data/NumbersSettings"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 import { getValueLastCalledWith } from "__test-utils__/Queries"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onConfirmHandler = vi.fn()
 const onResetHandler = vi.fn()
@@ -14,7 +14,7 @@ const isValidHandler = vi.fn()
 let props: DataSettingsMenuProps<NumbersSettings>
 
 const setup = () => {
-  const component = renderWithTranslation(<NumbersSettingsForm {...props} />)
+  const component = render(<NumbersSettingsForm {...props} />)
   return {
     numbers: component.getByTestId("numbers"),
     counters: component.getByTestId("counters"),

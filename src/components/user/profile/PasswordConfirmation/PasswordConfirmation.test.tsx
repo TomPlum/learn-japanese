@@ -2,7 +2,7 @@ import { fireEvent, screen } from "@testing-library/react"
 import PasswordConfirmation  from "./PasswordConfirmation"
 import PopOver from "../../../../components/ui/PopOver"
 import authService from "../../../../service/AuthenticationService"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const onDismissHandler = vi.fn()
 const deleteAccountService = vi.fn()
@@ -16,7 +16,7 @@ const deleteAccountPopover = (
 )
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <PasswordConfirmation onDismiss={onDismissHandler} alertInfo={deleteAccountPopover} />
   )
 

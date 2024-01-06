@@ -1,12 +1,12 @@
 import { fireEvent } from "@testing-library/react"
 import LifeSettingsForm  from "./LifeSettingsForm"
 import { LifeSettingsBuilder } from "../../../../domain/session/settings/game/LifeSettings"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onChangeHandler = vi.fn()
 
 const setup = () => {
-  const component = renderWithTranslation(<LifeSettingsForm onChange={onChangeHandler} />)
+  const component = render(<LifeSettingsForm onChange={onChangeHandler} />)
   return {
     enable: component.getByTestId("enable-lives"),
     lives: component.getByTestId("life-quantity-slider"),

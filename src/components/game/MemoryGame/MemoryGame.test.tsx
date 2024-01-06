@@ -14,8 +14,8 @@ import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintS
 import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings"
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings"
 import LearnableField from "../../../domain/learn/LearnableField"
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
+import { render } from "__test-utils__"
 import userEvent from "@testing-library/user-event";
 
 // Mock Event Handlers
@@ -97,7 +97,7 @@ afterEach(() => {
 })
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(<MemoryGame {...props} />)
+  const component = render(<MemoryGame {...props} />)
   return {
     submit: component.getByText("Check"),
     skip: component.getByText("Skip"),
@@ -686,7 +686,7 @@ test("Disabling hints should render the HintButton in a disabled state", async (
   props.settings = new GameSettingsBuilder()
     .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
     .build()
-  renderReduxConsumer(<MemoryGame {...props} />)
+  render(<MemoryGame {...props} />)
   fireEvent.click(screen.getByTitle("Hints are disabled."))
   expect(await screen.findByText("Hints are disabled")).toBeInTheDocument()
 })

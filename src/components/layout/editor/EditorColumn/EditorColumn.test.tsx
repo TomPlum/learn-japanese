@@ -1,6 +1,6 @@
 import { createEvent, fireEvent, screen } from "@testing-library/react"
 import EditorColumn  from "./EditorColumn"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const mockGetData = vi.fn()
 
@@ -10,7 +10,7 @@ beforeEach(() => {
 
 test("Should render a card when dropping with valid details", () => {
   mockGetData.mockReturnValueOnce('{"name":"test-card","size":"sm"}')
-  const { container } = renderWithTranslation(<EditorColumn />)
+  const { container } = render(<EditorColumn />)
 
   const dropEvent = createEvent.drop(container.firstChild!, { dataTransfer: { getData: mockGetData } })
   fireEvent(container.firstChild!, dropEvent)
@@ -19,28 +19,28 @@ test("Should render a card when dropping with valid details", () => {
 })
 
 test("Should add the dropping class to the container when dragging over the column", () => {
-  const { container } = renderWithTranslation(<EditorColumn />)
+  const { container } = render(<EditorColumn />)
   const wrappingDiv = container.firstChild!
   fireEvent(wrappingDiv, createEvent.dragOver(wrappingDiv))
   expect(wrappingDiv).toHaveClass("dropping")
 })
 
 test("Should remove the dropping class when dragging out of the column", () => {
-  const { container } = renderWithTranslation(<EditorColumn />)
+  const { container } = render(<EditorColumn />)
   const wrappingDiv = container.firstChild!
   fireEvent(wrappingDiv, createEvent.dragExit(wrappingDiv))
   expect(wrappingDiv).not.toHaveClass("dropping")
 })
 
 test("Should add the hidden class to the picked card when starting to drag one", () => {
-  renderWithTranslation(<EditorColumn defaultCards={[{ name: "test-card", size: "sm" }]} />)
+  render(<EditorColumn defaultCards={[{ name: "test-card", size: "sm" }]} />)
   const card = screen.getByTestId("editor-card-test-card")
   fireEvent(card, createEvent.dragStart(card, { dataTransfer: { setData: vi.fn() } }))
   expect(card).toHaveClass("hidden")
 })
 
 test("Should not add the hidden class to the other cards when starting to drag one", () => {
-  renderWithTranslation(
+  render(
     <EditorColumn
       defaultCards={[
         { name: "test-card", size: "sm" },

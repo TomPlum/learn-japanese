@@ -5,12 +5,12 @@ import QuestionSettings from "../../../../domain/session/settings/game/QuestionS
 import { getValueLastCalledWith } from "__test-utils__/Queries"
 import userEvent from "@testing-library/user-event"
 import LearnableField from "../../../../domain/learn/LearnableField"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onSelectHandler = vi.fn()
 
 const setup = () => {
-  const component = renderWithTranslation(<QuestionSettingsForm onChange={onSelectHandler} />)
+  const component = render(<QuestionSettingsForm onChange={onSelectHandler} />)
   return {
     multipleChoiceButton: component.getByText("Multiple Choice"),
     textModeButton: component.getByText("Text"),

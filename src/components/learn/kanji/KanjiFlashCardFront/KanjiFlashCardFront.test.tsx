@@ -5,7 +5,7 @@ import { KanjiReading } from "../../../../domain/kanji/KanjiReading"
 import { ReadingType } from "../../../../domain/kanji/ReadingType"
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
 import { Example } from "../../../../domain/kanji/Example"
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import { render } from "__test-utils__"
 import JLTPLevel from "../../../../domain/learn/JLTPLevel"
 
 const onClickHandler = vi.fn()
@@ -23,7 +23,7 @@ const kanji = new Kanji(
 )
 
 test("Should call the onClick event handler when clicking the card", () => {
-  const component = renderReduxConsumer(<KanjiFlashCardFront data={kanji} onClick={onClickHandler} />)
+  const component = render(<KanjiFlashCardFront data={kanji} onClick={onClickHandler} />)
   fireEvent.click(component.getByText("人"))
   expect(onClickHandler).toHaveBeenCalled()
 })

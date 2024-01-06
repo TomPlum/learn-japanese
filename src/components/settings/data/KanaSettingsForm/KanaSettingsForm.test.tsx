@@ -3,7 +3,7 @@ import KanaSettingsForm  from "./KanaSettingsForm"
 import KanaSettings, { KanaSettingsBuilder } from "../../../../domain/session/settings/data/KanaSettings"
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu"
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onConfirmHandler = vi.fn()
 const onResetHandler = vi.fn()
@@ -22,7 +22,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(<KanaSettingsForm {...props} />)
+  const component = render(<KanaSettingsForm {...props} />)
   return {
     hiragana: component.getByTestId("hiragana"),
     katakana: component.getByTestId("katakana"),

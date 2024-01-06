@@ -3,7 +3,7 @@ import CustomPresetForm, { CustomPresetFormProps }  from "./CustomPresetForm"
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
 import KanjiSettings from "../../../../../domain/session/settings/data/KanjiSettings"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const mockPresetService = vi.fn()
 vi.mock("service/PresetService", () => ({
@@ -19,7 +19,7 @@ const onCancelHandler = vi.fn()
 let props: CustomPresetFormProps
 
 const setup = () => {
-  const component = renderWithTranslation(<CustomPresetForm {...props} />)
+  const component = render(<CustomPresetForm {...props} />)
   return {
     icon: component.getByTestId("icon-picker-selected"),
     name: component.getByText("My Preset"),

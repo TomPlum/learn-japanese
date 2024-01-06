@@ -1,9 +1,9 @@
 import { fireEvent, screen } from "@testing-library/react"
 import DangerZone  from "./DangerZone"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(<DangerZone />)
+  const component = render(<DangerZone />)
   return {
     unlock: component.getByTitle("Un-Lock"),
     clearLocalStorage: component.getByText("Clear"),

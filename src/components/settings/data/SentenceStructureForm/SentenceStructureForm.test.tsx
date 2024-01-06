@@ -6,7 +6,7 @@ import SentenceStructureSettings, {
 } from "../../../../domain/session/settings/data/SentenceStructureSettings"
 import { faSpellCheck } from "@fortawesome/free-solid-svg-icons"
 import { getValueLastCalledWith } from "__test-utils__/Queries"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 let props: DataSettingsMenuProps<SentenceStructureSettings>
 
@@ -26,7 +26,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(<SentenceStructureForm {...props} />)
+  const component = render(<SentenceStructureForm {...props} />)
   return {
     quantity: component.getByPlaceholderText("Quantity"),
     adverbs: component.getByTestId("adverb-switch"),

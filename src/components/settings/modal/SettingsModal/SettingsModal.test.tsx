@@ -4,7 +4,7 @@ import { store } from "../../../../store"
 import { setPreference, setUser } from "../../../../slices/UserSlice"
 import { Preference } from "../../../../domain/user/Preference"
 import { testUser } from "../../../../setupTests"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const mockFontService = vi.fn()
 vi.mock("service/FontService", () => ({
@@ -25,7 +25,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(<SettingsModal {...props} />)
+  const component = render(<SettingsModal {...props} />)
   return {
     general: component.getByTitle("General"),
     learn: component.getByTitle("Learn"),

@@ -2,7 +2,7 @@ import SettingsDropdown, { SettingsDropdownProps }  from "./SettingsDropdown"
 import { Preference } from "../../../../domain/user/Preference"
 import { faGlobe, faUserFriends } from "@fortawesome/free-solid-svg-icons"
 import { fireEvent, screen, waitFor, waitForElementToBeRemoved, within } from "@testing-library/react"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 import { store } from "../../../../store"
 import { clearUser, setPreference, setUser } from "../../../../slices/UserSlice"
 import { localStorageMock, testUser } from "../../../../setupTests"
@@ -39,12 +39,12 @@ afterEach(() => {
 })
 
 it("Should render the default selected option as the one from the user in the redux store", () => {
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
   expect(within(component.getByTestId("settings-dropdown-selected")).getByText("Friends Only")).toBeInTheDocument()
 })
 
 it("Should add the inspect class to the chevron when the dropdown menu is expanded", () => {
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   // Should start with the default class and no inspect class
   expect(component.getByTestId("settings-dropdown-chevron")).toHaveClass("chevron")
@@ -60,7 +60,7 @@ it("Should add the inspect class to the chevron when the dropdown menu is expand
 
 it("Should call the update service function with the correct preference at name", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   fireEvent.click(component.getByText("Friends Only"))
   fireEvent.click(await screen.findByText("Public"))
@@ -77,7 +77,7 @@ it("Should call the update service function with the correct preference at name"
 
 it("Should call the onChange event handled with the selected value name when the update call succeeds", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   fireEvent.click(component.getByText("Friends Only"))
   fireEvent.click(await screen.findByText("Public"))
@@ -89,7 +89,7 @@ it("Should call the onChange event handled with the selected value name when the
 
 it("Should not call the onChange event handled with the selected value name when the update call fails", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: false })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   fireEvent.click(component.getByText("Friends Only"))
   fireEvent.click(await screen.findByText("Public"))
@@ -101,7 +101,7 @@ it("Should not call the onChange event handled with the selected value name when
 
 it("Should update the selected option name if the update call succeeds", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   fireEvent.click(component.getByText("Friends Only"))
   fireEvent.click(await screen.findByText("Public"))
@@ -113,7 +113,7 @@ it("Should update the selected option name if the update call succeeds", async (
 
 it("Should not update the selected option name if the update call fails", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: false })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   fireEvent.click(component.getByText("Friends Only"))
   fireEvent.click(await screen.findByText("Public"))
@@ -126,7 +126,7 @@ it("Should not update the selected option name if the update call fails", async 
 it("Should update the selected preference in the user redux store if the update call succeeds", async () => {
   store.dispatch(setUser(testUser))
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   fireEvent.click(component.getByText("Friends Only"))
   fireEvent.click(await screen.findByText("Public"))
@@ -138,7 +138,7 @@ it("Should update the selected preference in the user redux store if the update 
 
 it("Should call the onError event handler with the returned error message if the update call fails", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: false, error: "Something went wrong." })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   fireEvent.click(component.getByText("Friends Only"))
   fireEvent.click(await screen.findByText("Public"))
@@ -150,7 +150,7 @@ it("Should call the onError event handler with the returned error message if the
 
 it("Should call the onError event handler with a default error message if the update call fails and doesn't return one", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: false, error: undefined })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   fireEvent.click(component.getByText("Friends Only"))
   fireEvent.click(await screen.findByText("Public"))
@@ -162,7 +162,7 @@ it("Should call the onError event handler with a default error message if the up
 
 it("Should call the onError event handler with the returned error message if the update call is rejected", async () => {
   mockUpdatePreferences.mockRejectedValueOnce({ error: "Something went wrong." })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   fireEvent.click(component.getByText("Friends Only"))
   fireEvent.click(await screen.findByText("Public"))
@@ -174,7 +174,7 @@ it("Should call the onError event handler with the returned error message if the
 
 it("Should call the onError event handler with a default error message if the update call is rejected and doesn't return one", async () => {
   mockUpdatePreferences.mockRejectedValueOnce({ error: undefined })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   fireEvent.click(component.getByText("Friends Only"))
   fireEvent.click(await screen.findByText("Public"))
@@ -185,13 +185,13 @@ it("Should call the onError event handler with a default error message if the up
 })
 
 it("Should render the button with the default 'Click to see options' title", () => {
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
   expect(component.getByTitle("Click to see options")).toBeInTheDocument()
 })
 
 it("Should render the button with a 'Saving your selection...' title when updating", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   // Expand the menu and select an option
   fireEvent.click(component.getByText("Friends Only"))
@@ -207,7 +207,7 @@ it("Should render the button with a 'Saving your selection...' title when updati
 
 it("Clicking the button while a previous selection is updating should not call the service again", async () => {
   mockUpdatePreferences.mockResolvedValue({ success: true })
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   // Expand the menu and select an option
   fireEvent.click(component.getByText("Friends Only"))
@@ -226,7 +226,7 @@ it("Clicking the button while a previous selection is updating should not call t
 })
 
 it("Should stop rendering the dropdown menu when blurring the button", async () => {
-  const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+  const component = render(<SettingsDropdown {...props} />)
 
   // Expand the menu
   fireEvent.click(component.getByText("Friends Only"))
@@ -246,7 +246,7 @@ describe("Language Preference", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.LANGUAGE, value: "日本語" }))
     mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
 
     // Switch from Japanese to English
     fireEvent.click(component.getByTestId("language-button"))
@@ -262,7 +262,7 @@ describe("Language Preference", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.LANGUAGE, value: "English" }))
     mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
 
     // Switch from English to Japanese
     fireEvent.click(component.getByTestId("language-button"))
@@ -283,7 +283,7 @@ describe("Default selected values from local storage", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.PROFILE_VISIBILITY, value: "Example Visibility" }))
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(within(component.getByTestId("settings-dropdown-selected")).getByText("Example")).toBeInTheDocument()
   })
 
@@ -297,7 +297,7 @@ describe("Default selected values from local storage", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.DEFAULT_KANJI_FONT, value: "Example Font" }))
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(within(component.getByTestId("settings-dropdown-selected")).getByText("Example Font")).toBeInTheDocument()
   })
 
@@ -311,7 +311,7 @@ describe("Default selected values from local storage", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.CONFIDENCE_MENU_STYLE, value: "Example Style" }))
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(within(component.getByTestId("settings-dropdown-selected")).getByText("Example Style")).toBeInTheDocument()
   })
 
@@ -325,7 +325,7 @@ describe("Default selected values from local storage", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.LANGUAGE, value: "Example Language" }))
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(
       within(component.getByTestId("settings-dropdown-selected")).getByText("Example Language")
     ).toBeInTheDocument()
@@ -341,7 +341,7 @@ describe("Default selected values from local storage", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.ROMAJI_VISIBILITY, value: "Example Visibility" }))
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(
       within(component.getByTestId("settings-dropdown-selected")).getByText("Example Visibility")
     ).toBeInTheDocument()
@@ -357,7 +357,7 @@ describe("Default selected values from local storage", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.HIGH_SCORES_BEHAVIOUR, value: "Example Behaviour" }))
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(
       within(component.getByTestId("settings-dropdown-selected")).getByText("Example Behaviour")
     ).toBeInTheDocument()
@@ -374,7 +374,7 @@ describe("Default selected values from local storage", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.FLASH_CARDS_QUANTITY, value: "15" }))
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(within(component.getByTestId("settings-dropdown-selected")).getByText("15")).toBeInTheDocument()
   })
 
@@ -388,7 +388,7 @@ describe("Default selected values from local storage", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.STREAK_CARD_VIEW, value: "Example View" }))
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(within(component.getByTestId("settings-dropdown-selected")).getByText("Example View")).toBeInTheDocument()
   })
 
@@ -403,7 +403,7 @@ describe("Default selected values from local storage", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.ACTIVITY_FEED_QUANTITY, value: "5" }))
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(within(component.getByTestId("settings-dropdown-selected")).getByText("5")).toBeInTheDocument()
   })
 
@@ -417,7 +417,7 @@ describe("Default selected values from local storage", () => {
     store.dispatch(setUser(testUser))
     store.dispatch(setPreference({ preference: Preference.THEME, value: "Test Theme" }))
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(within(component.getByTestId("settings-dropdown-selected")).getByText("Test Theme")).toBeInTheDocument()
   })
 
@@ -430,7 +430,7 @@ describe("Default selected values from local storage", () => {
 
     store.dispatch(clearUser())
 
-    const component = renderTranslatedReduxConsumer(<SettingsDropdown {...props} />)
+    const component = render(<SettingsDropdown {...props} />)
     expect(within(component.getByTestId("settings-dropdown-selected")).getByText("Unknown")).toBeInTheDocument()
   })
 })

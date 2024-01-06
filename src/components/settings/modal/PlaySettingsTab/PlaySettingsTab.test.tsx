@@ -1,9 +1,9 @@
 import PlaySettingsTab  from "./PlaySettingsTab"
 import { fireEvent, screen } from "@testing-library/react"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 test("Should render the high scores preference dropdown", async () => {
-  const component = renderTranslatedReduxConsumer(<PlaySettingsTab />)
+  const component = render(<PlaySettingsTab />)
 
   fireEvent.click(component.getByTestId("play-settings-high-score-selector"))
 

@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import Preferences  from "./Preferences"
 import { testUser } from "../../../../setupTests"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 //Mock User Service
 const mockUserService = vi.fn()
@@ -20,7 +20,7 @@ vi.mock("service/FontService", () => ({
 }))
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(<Preferences user={testUser} />)
+  const component = render(<Preferences user={testUser} />)
   return {
     font: component.getByTestId("font"),
     theme: component.getByText("Dark"),

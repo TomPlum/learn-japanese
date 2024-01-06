@@ -4,7 +4,7 @@ import { store } from "../../../../store"
 import { clearUser, setUser } from "../../../../slices/UserSlice"
 import { localStorageMock, testUser } from "../../../../setupTests"
 import { setFont } from "../../../../slices/FontSlice"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const onEditDashboardLayoutHandler = vi.fn()
 
@@ -33,7 +33,7 @@ afterEach(() => {
 
 test("Should render the main tab contents on initial render", async () => {
   mockFontService.mockResolvedValueOnce([{ name: "Test Font", displayName: "Test Font" }])
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
   )
   expect(await component.findByTestId("interface-settings-tab")).toBeInTheDocument()
@@ -41,7 +41,7 @@ test("Should render the main tab contents on initial render", async () => {
 
 test("Should call the onEditDashboard event handler after clicking the button", async () => {
   mockFontService.mockResolvedValueOnce([{ name: "Test Font", displayName: "Test Font" }])
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
   )
   fireEvent.click(await component.findByText("Open Layout Editor"))
@@ -50,7 +50,7 @@ test("Should call the onEditDashboard event handler after clicking the button", 
 
 test("Should render the theme selector dropdown", async () => {
   mockFontService.mockResolvedValueOnce([])
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
   )
 
@@ -67,7 +67,7 @@ test("Should render the font selector dropdown", async () => {
     { name: "Test Font", slug: "mincho" },
     { name: "Test Font2", slug: "gothic" }
   ])
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
   )
 
@@ -87,7 +87,7 @@ test("Should render the font selector dropdown", async () => {
 
 test("Should render the language selector dropdown", async () => {
   mockFontService.mockResolvedValueOnce([])
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
   )
 
@@ -100,7 +100,7 @@ test("Should render the language selector dropdown", async () => {
 
 test("Should render the confidence menu style selector dropdown", async () => {
   mockFontService.mockResolvedValueOnce([])
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
   )
 
@@ -115,7 +115,7 @@ test("Should call the i18n change language function with the correct english cod
   store.dispatch(setUser({ ...testUser, preferences: { ...testUser.preferences, language: "日本語" } }))
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
   mockFontService.mockResolvedValueOnce([])
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
   )
 
@@ -129,7 +129,7 @@ test("Should call the i18n change language function with the correct japanese co
   store.dispatch(setUser({ ...testUser, preferences: { ...testUser.preferences, language: "English" } }))
   mockFontService.mockResolvedValueOnce([])
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
   )
 

@@ -3,7 +3,7 @@ import { faApple } from "@fortawesome/free-brands-svg-icons"
 import EditFavouriteButton, {
   EditFavouriteButtonProps
 } from "../../../../../components/ui/buttons/favourite/EditFavouriteButton"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onAddHandler = vi.fn()
 const onCancelHandler = vi.fn()
@@ -11,7 +11,7 @@ const onCancelHandler = vi.fn()
 let props: EditFavouriteButtonProps
 
 const setup = () => {
-  const component = renderWithTranslation(<EditFavouriteButton {...props} />)
+  const component = render(<EditFavouriteButton {...props} />)
   return {
     ...component
   }

@@ -1,4 +1,4 @@
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 import SettingsButton, { SettingsButtonProps }  from "./SettingsButton"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 import { fireEvent } from "@testing-library/react"
@@ -19,7 +19,7 @@ beforeEach(() => {
 })
 
 test("Clicking the button should call the onClick event handler", () => {
-  const component = renderWithTranslation(<SettingsButton {...props} />)
+  const component = render(<SettingsButton {...props} />)
   fireEvent.click(component.getByText("Test Button"))
   expect(onClickHandler).toHaveBeenCalled()
 })

@@ -6,7 +6,7 @@ import { FlashCard } from "../../../domain/learn/FlashCard"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { History } from "@remix-run/router";
 import { createMemoryHistory } from "history"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const mockGetKanjiFlashCards = vi.fn()
 vi.mock("service/SpacedRepetitionService", () => ({
@@ -22,7 +22,7 @@ const spaceRepetitionDetails = new SpaceRepetitionDetails(2.5, 0, 0, "2021-12-12
 const flashCard = new FlashCard(1, definition, spaceRepetitionDetails)
 
 const setup = () => {
-  const component = renderWithTranslation(
+  const component = render(
     <HistoryRouter history={history}>
       <KanjiFlashCardsCard />
     </HistoryRouter>

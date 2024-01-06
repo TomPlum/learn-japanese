@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react"
 import ConfigTypeStep, { ConfigTypeStepProps }  from "./ConfigTypeStep"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onSelectHandler = vi.fn()
 
@@ -14,7 +14,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(<ConfigTypeStep {...props} />)
+  const component = render(<ConfigTypeStep {...props} />)
   return {
     preset: component.getByText("Preset"),
     custom: component.getByText("Custom"),

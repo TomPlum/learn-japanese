@@ -2,7 +2,7 @@ import NavigationButton, { ItemProps, NavigationButtonProps }  from "./Navigatio
 import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react"
 import { faSmile } from "@fortawesome/free-solid-svg-icons"
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onShowHandler = vi.fn()
 const onHideHandler = vi.fn()
@@ -46,7 +46,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(
+  const component = render(
     <NavigationButton {...buttonProps}>
       <NavigationButton.Item {...itemProps}>My Link</NavigationButton.Item>
 

@@ -4,7 +4,7 @@ import LearnableFieldSelector, {
 } from "../../../../components/ui/select/LearnableFieldSelector"
 import LearnableField from "../../../../domain/learn/LearnableField"
 import userEvent from "@testing-library/user-event"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onSelectHandler = vi.fn()
 
@@ -17,7 +17,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(<LearnableFieldSelector {...props} />)
+  const component = render(<LearnableFieldSelector {...props} />)
   return {
     field: component.getByTestId("learnable-field-selector"),
     help: component.getByTestId("field-help"),

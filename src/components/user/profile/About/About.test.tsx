@@ -1,6 +1,6 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import About  from "./About"
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import { render } from "__test-utils__"
 import { testUser } from "../../../../setupTests"
 
 //Mock User Service
@@ -14,7 +14,7 @@ vi.mock("service/UserService", () => ({
 const user = testUser
 
 const setup = () => {
-  const component = renderReduxConsumer(<About user={user} />)
+  const component = render(<About user={user} />)
 
   return {
     edit: component.queryByTitle("Edit"),

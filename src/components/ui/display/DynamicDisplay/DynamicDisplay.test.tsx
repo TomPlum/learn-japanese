@@ -1,16 +1,16 @@
 import { act, screen } from "@testing-library/react"
 import DynamicDisplay  from "./DynamicDisplay"
 import React from "react"
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import { render } from "__test-utils__"
 
 test("It should display the passed value", () => {
-  const component = renderReduxConsumer(<DynamicDisplay value="は" />)
+  const component = render(<DynamicDisplay value="は" />)
   expect(component.getByText("は")).toBeInTheDocument()
 })
 
 test("Notify incorrect should append the 'active' class to the value", () => {
   const ref = React.createRef<any>()
-  const { rerender } = renderReduxConsumer(<DynamicDisplay value="あ" ref={ref} />)
+  const { rerender } = render(<DynamicDisplay value="あ" ref={ref} />)
 
   //Initially should have the value class
   expect(screen.getByText("あ")).toHaveClass("value")

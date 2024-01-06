@@ -5,7 +5,7 @@ import { KanjiReading } from "../../../domain/kanji/KanjiReading"
 import { ReadingType } from "../../../domain/kanji/ReadingType"
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import { render } from "__test-utils__"
 import { Example } from "../../../domain/kanji/Example"
 
 const mockGetKanji = vi.fn()
@@ -61,7 +61,7 @@ const person = new Kanji(
 )
 
 const setup = () => {
-  const component = renderReduxConsumer(<KanjiBankPage />)
+  const component = render(<KanjiBankPage />)
   return {
     search: component.getByPlaceholderText("search"),
     pageSizeSelector: component.getByTestId("page-size-selector"),

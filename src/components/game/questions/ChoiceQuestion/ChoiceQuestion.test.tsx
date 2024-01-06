@@ -7,7 +7,7 @@ import Arrays from "../../../../utility/Arrays"
 import { getByTextWithElements } from "__test-utils__/Queries"
 import React from "react"
 import LearnableField from "../../../../domain/learn/LearnableField"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const isValidHandler = vi.fn()
 
@@ -20,7 +20,7 @@ let props: ChoiceQuestionProps
 const ref = React.createRef<KanaChoiceQuestion>()
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(<KanaChoiceQuestion {...props} ref={ref} />)
+  const component = render(<KanaChoiceQuestion {...props} ref={ref} />)
   return {
     ...component
   }

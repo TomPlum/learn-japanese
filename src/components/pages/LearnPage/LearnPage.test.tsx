@@ -11,7 +11,7 @@ import { Kana } from "../../../domain/kana/Kana"
 import KanaType from "../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../domain/kana/KanaColumn"
 import Arrays from "../../../utility/Arrays"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const mockLearningDataService = vi.fn()
 vi.mock("service/LearningDataService", () => ({
@@ -49,7 +49,7 @@ test("Should render the learning session if the data settings are present", asyn
   mockLearningDataService.mockResolvedValueOnce([new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)])
   store.dispatch(setDataSettings(dataSettings))
 
-  renderTranslatedReduxConsumer(<BrowserRouter><LearnPage /></BrowserRouter>)
+  render(<BrowserRouter><LearnPage /></BrowserRouter>)
 
   expect(await screen.findByTestId("learn")).toBeInTheDocument()
 })
@@ -57,7 +57,7 @@ test("Should render the learning session if the data settings are present", asyn
 test("Should render an error message if the data settings are undefined", () => {
   store.dispatch(clearDataSettings())
 
-  renderTranslatedReduxConsumer(<BrowserRouter><LearnPage /></BrowserRouter>)
+  render(<BrowserRouter><LearnPage /></BrowserRouter>)
 
   expect(mockLearningDataService).not.toHaveBeenCalled()
   expect(screen.queryByTestId("memory-game")).not.toBeInTheDocument()
@@ -71,7 +71,7 @@ test("Should skip the results screen and redirect home if the user flips no card
   store.dispatch(setDataSettings(dataSettings))
 
   // Render the page and wait for the game to load
-  renderTranslatedReduxConsumer(
+  render(
     <HistoryRouter history={history}>
       <LearnPage />
     </HistoryRouter>
@@ -95,7 +95,7 @@ test("Should render the results screen if the user flips at least one card", asy
   store.dispatch(setDataSettings(dataSettings))
 
   // Render the page and wait for the game to load
-  renderTranslatedReduxConsumer(
+  render(
     <HistoryRouter history={history}>
       <LearnPage />
     </HistoryRouter>
@@ -132,7 +132,7 @@ test("Clicking 'Practice Mistakes' on the learning results screen should start a
   store.dispatch(setDataSettings(dataSettings))
 
   // Render the page and wait for the game to load
-  renderTranslatedReduxConsumer(
+  render(
     <HistoryRouter history={history}>
       <LearnPage />
     </HistoryRouter>

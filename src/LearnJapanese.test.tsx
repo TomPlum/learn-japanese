@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react"
 import { createMemoryRouter, RouterProvider } from "react-router-dom"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer.tsx"
+import { render } from "__test-utils__"
 import { Environment } from "./utility/Environment.ts"
 import { routerConfig } from "./LearnJapanese.tsx"
 
@@ -13,7 +13,7 @@ const setup = (route = '') => {
     initialEntries: [route],
     initialIndex: 1
   })
-  renderTranslatedReduxConsumer(
+  render(
    <RouterProvider router={router} />
   )
 }

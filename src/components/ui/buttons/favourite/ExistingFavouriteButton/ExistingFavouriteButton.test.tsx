@@ -3,7 +3,7 @@ import ExistingFavouriteButton, {
   ExistingFavouriteButtonProps
 } from "../../../../../components/ui/buttons/favourite/ExistingFavouriteButton"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onRemoveHandler = vi.fn()
 const onCancelHandler = vi.fn()
@@ -11,7 +11,7 @@ const onCancelHandler = vi.fn()
 let props: ExistingFavouriteButtonProps
 
 const setup = () => {
-  const component = renderWithTranslation(<ExistingFavouriteButton {...props} />)
+  const component = render(<ExistingFavouriteButton {...props} />)
   return {
     ...component
   }

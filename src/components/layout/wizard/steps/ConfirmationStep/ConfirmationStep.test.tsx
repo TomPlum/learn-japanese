@@ -3,11 +3,11 @@ import ConfirmationStep  from "./ConfirmationStep"
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
 import { KanjiSettingsBuilder } from "../../../../../domain/session/settings/data/KanjiSettings"
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import { render } from "__test-utils__"
 import { clearUser, setUser } from "../../../../../slices/UserSlice"
 import { store } from "../../../../../store"
 import { testUser } from "../../../../../setupTests"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const onSelectStageHandler = vi.fn()
 
@@ -35,13 +35,13 @@ function withGameSettings(gameSettings: GameSettingsBuilder) {
 
 test("Should render the session settings summary text", () => {
   withGameSettings(new GameSettingsBuilder())
-  const component = renderReduxConsumer(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
+  const component = render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
   expect(component.getByTestId("session-settings-summary")).toBeInTheDocument()
 })
 
 test('Clicking the "Save Preset" button should render the custom preset form', () => {
   withGameSettings(new GameSettingsBuilder())
-  renderReduxConsumer(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
+  render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
   fireEvent.click(screen.getByText("Save Preset"))
   expect(screen.getByTestId("save-custom-preset-form")).toBeInTheDocument()
 })
@@ -49,7 +49,7 @@ test('Clicking the "Save Preset" button should render the custom preset form', (
 test("Clicking the cancel button in the save preset form should stop rendering the form", async () => {
   store.dispatch(setUser(testUser))
   withGameSettings(new GameSettingsBuilder())
-  renderReduxConsumer(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
+  render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
 
   // Render the form
   fireEvent.click(screen.getByText("Save Preset"))
@@ -70,7 +70,7 @@ test("Clicking the save button in the save preset form should hide the form and 
   store.dispatch(setUser(testUser))
   mockPresetService.mockResolvedValueOnce({ success: true })
   withGameSettings(new GameSettingsBuilder())
-  renderReduxConsumer(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
+  render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
 
   // Render the form and fill in the details
   fireEvent.click(screen.getByText("Save Preset"))
@@ -94,7 +94,7 @@ test("Clicking the save button in the save preset form should hide the form and 
 
 test("Hovering over the save button when there is no user in context should render a message", async () => {
   store.dispatch(clearUser())
-  renderTranslatedReduxConsumer(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
+  render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
   fireEvent.mouseOver(screen.getByText("Save Preset"))
   expect(await screen.findByText("You must be logged in to save.")).toBeInTheDocument()
 })

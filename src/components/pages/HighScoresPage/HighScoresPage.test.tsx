@@ -1,6 +1,6 @@
 import HighScoresPage  from "./HighScoresPage"
 import { findByTextWithElements } from "__test-utils__/Queries"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 import { when } from "jest-when"
 import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
@@ -24,7 +24,7 @@ vi.mock("service/UserService", () => ({
 let history = createMemoryHistory() as never as History
 
 const setup = () => {
-  return renderWithTranslation(
+  return render(
     <HistoryRouter history={history}>
       <HighScoresPage />
     </HistoryRouter>

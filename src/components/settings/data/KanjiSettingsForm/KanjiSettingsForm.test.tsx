@@ -4,7 +4,7 @@ import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
 import KanjiSettings, { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings"
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons"
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onConfirmHandler = vi.fn()
 const onResetHandler = vi.fn()
@@ -23,7 +23,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = renderWithTranslation(<KanjiSettingsForm {...props} />)
+  const component = render(<KanjiSettingsForm {...props} />)
   return {
     grade1: component.getByText("Grade 1"),
     grade2: component.getByText("Grade 2"),

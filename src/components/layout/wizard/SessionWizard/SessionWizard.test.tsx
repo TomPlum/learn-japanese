@@ -16,7 +16,7 @@ import QuestionType from "../../../../domain/game/QuestionType"
 import { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings"
 import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings"
 import PresetBuilder from "../../../../domain/session/PresetBuilder"
-import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
+import { render } from "__test-utils__"
 
 const mockGetAllPresets = vi.fn()
 const mockGetDefaultPresets = vi.fn()
@@ -86,7 +86,7 @@ const playKanjiPreset = new PresetBuilder()
   .build()
 
 const setup = () => {
-  const component = renderTranslatedReduxConsumer(
+  const component = render(
     <HistoryRouter history={history}>
       <SessionWizard onClose={onCloseHandler} />
     </HistoryRouter>

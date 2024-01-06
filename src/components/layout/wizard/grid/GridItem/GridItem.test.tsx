@@ -2,7 +2,7 @@ import GridItem, { GridItemProps }  from "./GridItem"
 import Topic from "../../../../../domain/Topic"
 import { fireEvent, screen } from "@testing-library/react"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
-import renderWithTranslation from "__test-utils__/renderWithTranslation"
+import { render } from "__test-utils__"
 
 const onEditHandler = vi.fn()
 const onClickHandler = vi.fn()
@@ -10,7 +10,7 @@ const onClickHandler = vi.fn()
 let props: GridItemProps<Topic>
 
 const setup = () => {
-  const component = renderWithTranslation(<GridItem {...props} />)
+  const component = render(<GridItem {...props} />)
   return {
     ...component
   }

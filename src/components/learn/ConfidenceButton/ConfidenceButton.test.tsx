@@ -1,7 +1,7 @@
 import { fireEvent } from "@testing-library/react"
 import ConfidenceButton, { ConfidenceButtonProps }  from "./ConfidenceButton"
 import Confidence from "../../../domain/learn/spacedrepetition/Confidence"
-import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import { render } from "__test-utils__"
 import { store } from "../../../store"
 import { setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
@@ -10,7 +10,7 @@ let props: ConfidenceButtonProps
 const onClickHandler = vi.fn()
 
 const setup = () => {
-  const component = renderReduxConsumer(<ConfidenceButton {...props} />)
+  const component = render(<ConfidenceButton {...props} />)
   return {
     button: component.getByText("6"),
     ...component
