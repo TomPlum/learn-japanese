@@ -5,6 +5,7 @@ import { faBell, faCircle, faCog, faCompass, faTimes, faUserGraduate } from "@fo
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import DashboardCardLink from "../../layout/card/DashboardCardLink"
 import { useTranslation } from "react-i18next"
+import HashLink from "components/layout/HashLink";
 
 export interface ProfileCardProps {
   onDismiss?: () => void
@@ -35,11 +36,13 @@ const ProfileCard = (props: ProfileCardProps) => {
             <FontAwesomeIcon icon={faUserGraduate} className={styles.user} />
           </span>
 
-          <p className={styles.name}>{user?.username ?? "User Profile"}</p>
+          <p className={styles.name}>
+            {user?.username ?? "User Profile"}
+          </p>
 
-          <a className={styles.profile} href={user ? "/profile" : "/register"}>
+          <HashLink className={styles.profile} path={user ? "/profile" : "/register"}>
             {user ? t("go") : t("register")}
-          </a>
+          </HashLink>
         </div>
 
         <div className={styles.linkWrapper}>
