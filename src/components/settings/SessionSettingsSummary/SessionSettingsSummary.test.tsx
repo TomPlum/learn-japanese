@@ -8,11 +8,11 @@ import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/Q
 import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings"
 import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings"
 import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings"
-import { getByTextWithElements } from "tests/Queries"
+import { getByTextWithElements } from "__test-utils__/Queries"
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
 import { WizardStep } from "../../../components/layout/wizard/SessionWizard/types.ts"
 import SessionSettingsSummary  from "./SessionSettingsSummary"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onSelectStageHandler = vi.fn()
 

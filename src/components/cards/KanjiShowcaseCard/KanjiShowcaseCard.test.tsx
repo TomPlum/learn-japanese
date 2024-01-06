@@ -5,15 +5,15 @@ import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
 import { Example } from "../../../domain/kanji/Example"
 import KanjiShowcaseCard  from "./KanjiShowcaseCard"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import { store } from "../../../store"
 import { setFont } from "../../../slices/FontSlice"
 import { fireEvent, screen } from "@testing-library/react"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const mockKanjiService = vi.fn()
 
-vi.mock("../../../service/KanjiService", () => ({
+vi.mock("service/KanjiService", () => ({
   default: function () {
     return { randomKanji: mockKanjiService }
   }

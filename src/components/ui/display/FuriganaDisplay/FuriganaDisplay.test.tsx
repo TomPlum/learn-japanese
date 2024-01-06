@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react"
 import FuriganaDisplay  from "./FuriganaDisplay"
-import { getByTextWithMarkup } from "tests/Queries"
+import { getByTextWithMarkup } from "__test-utils__/Queries"
 
 test("Should render each of the given characters with furigana at the bottom", () => {
   render(

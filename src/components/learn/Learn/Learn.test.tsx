@@ -6,7 +6,7 @@ import Learn, { LearnProps }  from "./Learn"
 import KanaFlashCardFront from "../../../components/learn/kana/KanaFlashCardFront"
 import KanaFlashCardBack from "../../../components/learn/kana/KanaFlashCardBack"
 import Arrays from "../../../utility/Arrays"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onFinishHandler = vi.fn()
 

@@ -4,10 +4,10 @@ import { Kana } from "../../../../domain/kana/Kana"
 import KanaType from "../../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../../domain/kana/KanaColumn"
 import Arrays from "../../../../utility/Arrays"
-import { getByTextWithElements } from "tests/Queries"
+import { getByTextWithElements } from "__test-utils__/Queries"
 import React from "react"
 import LearnableField from "../../../../domain/learn/LearnableField"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const isValidHandler = vi.fn()
 

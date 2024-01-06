@@ -1,4 +1,4 @@
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 import SettingsButton, { SettingsButtonProps }  from "./SettingsButton"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 import { fireEvent } from "@testing-library/react"

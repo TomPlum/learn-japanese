@@ -3,7 +3,7 @@ import ModeSelectionStep, {
   ModeSelectionStepProps
 } from "../../../../../components/layout/wizard/steps/ModeSelectionStep"
 import { AppMode } from "../../../../../domain/AppMode"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onSelectHandler = vi.fn()
 

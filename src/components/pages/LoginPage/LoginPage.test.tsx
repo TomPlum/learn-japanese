@@ -5,7 +5,7 @@ import LoginPage  from "./LoginPage"
 import { fireEvent, waitFor } from "@testing-library/react"
 import auth from "../../../service/AuthenticationService"
 import { testUser } from "../../../setupTests"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { History } from '@remix-run/router'
 

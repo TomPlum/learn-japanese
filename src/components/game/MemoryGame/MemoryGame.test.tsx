@@ -14,8 +14,8 @@ import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintS
 import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings"
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings"
 import LearnableField from "../../../domain/learn/LearnableField"
-import renderReduxConsumer from "tests/renderReduxConsumer"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 import userEvent from "@testing-library/user-event";
 
 // Mock Event Handlers

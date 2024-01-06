@@ -1,11 +1,11 @@
 import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import GenkiIndexPage  from "./GenkiIndexPage"
 import GenkiDefinition from "../../../domain/learn/GenkiDefinition"
-import { findByTextWithElements } from "tests/Queries"
+import { findByTextWithElements } from "__test-utils__/Queries"
 import userEvent from "@testing-library/user-event"
 
 const mockGetAllVocab = vi.fn()
-vi.mock("../../../service/GenkiService", () => ({
+vi.mock("service/GenkiService", () => ({
   default: function () {
     return { getAllVocab: mockGetAllVocab }
   }

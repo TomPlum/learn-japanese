@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react"
 import QuantityField, { QuantityFieldProps }  from "./QuantityField"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 let props: QuantityFieldProps
 

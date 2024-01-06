@@ -4,7 +4,7 @@ import Topic from "../../../../domain/Topic"
 import { store } from "../../../../store"
 import { setApplicationMode } from "../../../../slices/ModeSlice"
 import { AppMode } from "../../../../domain/AppMode"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 
 const onSelectHandler = vi.fn()
 

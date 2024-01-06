@@ -5,11 +5,11 @@ import { KanjiReading } from "../../../domain/kanji/KanjiReading"
 import { ReadingType } from "../../../domain/kanji/ReadingType"
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import { Example } from "../../../domain/kanji/Example"
 
 const mockGetKanji = vi.fn()
-vi.mock("../../../service/KanjiService", () => ({
+vi.mock("service/KanjiService", () => ({
   default: function() {
     return { filter: mockGetKanji }
   }

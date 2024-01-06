@@ -6,7 +6,7 @@ import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { History } from "@remix-run/router";
 import { createMemoryHistory } from "history"
 import { testUser } from "../../../setupTests"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 let props: UserButtonProps
 const history = createMemoryHistory() as never as History

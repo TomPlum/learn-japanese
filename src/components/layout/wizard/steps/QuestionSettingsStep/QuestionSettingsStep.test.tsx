@@ -2,8 +2,8 @@ import { fireEvent, render } from "@testing-library/react"
 import QuestionSettingsStep  from "./QuestionSettingsStep"
 import QuestionSettings from "../../../../../domain/session/settings/game/QuestionSettings"
 import QuestionType from "../../../../../domain/game/QuestionType"
-import { getValueLastCalledWith } from "tests/Queries"
-import renderWithTranslation from "tests/renderWithTranslation"
+import { getValueLastCalledWith } from "__test-utils__/Queries"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onSelectHandler = vi.fn()
 

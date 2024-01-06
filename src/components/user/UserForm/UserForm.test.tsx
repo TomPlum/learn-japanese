@@ -3,7 +3,7 @@ import UserForm, { UserFormProps }  from "./UserForm"
 import { Provider } from "react-redux"
 import { store } from "../../../store"
 import authService from "../../../service/AuthenticationService"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 let props: UserFormProps
 

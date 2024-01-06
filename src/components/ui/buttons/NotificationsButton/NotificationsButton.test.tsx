@@ -1,4 +1,4 @@
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import NotificationsButton  from "./NotificationsButton"
 import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import { store } from "../../../../store"

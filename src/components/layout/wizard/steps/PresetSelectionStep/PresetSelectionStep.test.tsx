@@ -4,7 +4,7 @@ import PresetSelectionStep, {
 } from "../../../../../components/layout/wizard/steps/PresetSelectionStep"
 import Topic from "../../../../../domain/Topic"
 import { AppMode } from "../../../../../domain/AppMode"
-import { getValueLastCalledWith } from "tests/Queries"
+import { getValueLastCalledWith } from "__test-utils__/Queries"
 import PlayMode from "../../../../../domain/session/PlayMode"
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings"
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
@@ -13,11 +13,11 @@ import LearnSettings from "../../../../../domain/session/settings/LearnSettings"
 import { store } from "../../../../../store"
 import { clearUser, setUser } from "../../../../../slices/UserSlice"
 import { testUser } from "../../../../../setupTests"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const mockGetAllPresets = vi.fn()
 const mockGetDefaultPresets = vi.fn()
-vi.mock("../../../../../service/PresetService", () => ({
+vi.mock("service/PresetService", () => ({
   default: function () {
     return {
       getAllPresets: mockGetAllPresets,

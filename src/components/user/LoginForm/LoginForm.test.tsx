@@ -3,9 +3,9 @@ import LoginForm  from "./LoginForm"
 import auth, { LoginResponse } from "../../../service/AuthenticationService"
 import { store } from "../../../store"
 import { clearUser } from "../../../slices/UserSlice"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
-vi.mock("../../../service/AuthenticationService")
+vi.mock("service/AuthenticationService")
 
 const onSuccessHandler = vi.fn()
 const loginService = auth.login as jest.MockedFunction<() => Promise<LoginResponse>>

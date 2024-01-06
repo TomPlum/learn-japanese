@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react"
 import { createMemoryRouter, RouterProvider } from "react-router-dom"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer.tsx"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer.tsx"
 import { Environment } from "./utility/Environment.ts"
 import { routerConfig } from "./LearnJapanese.tsx"
 

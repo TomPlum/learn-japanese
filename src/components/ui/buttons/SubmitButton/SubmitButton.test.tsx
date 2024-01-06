@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react"
 import SubmitButton  from "./SubmitButton"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onClickHandler = vi.fn()
 

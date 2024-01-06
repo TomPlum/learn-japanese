@@ -3,7 +3,7 @@ import { clearUser, setUser } from "../../../slices/UserSlice"
 import ProfileCard  from "./ProfileCard"
 import { fireEvent } from "@testing-library/react"
 import { testUser } from "../../../setupTests"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const onDismissHandler = vi.fn()
 

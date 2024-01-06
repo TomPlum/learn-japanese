@@ -1,7 +1,7 @@
 import { fireEvent, screen } from "@testing-library/react"
 import AnswerInputField, { AnswerInputFieldProps }  from "./AnswerInputField"
 import LearnableField from "../../../../domain/learn/LearnableField"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 let props: AnswerInputFieldProps
 

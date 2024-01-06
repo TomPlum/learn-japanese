@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react"
 import HelpButton  from "./HelpButton"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const setup = () => {
   const component = renderWithTranslation(<HelpButton />)

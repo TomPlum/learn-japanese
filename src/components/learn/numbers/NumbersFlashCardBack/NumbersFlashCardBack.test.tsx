@@ -1,7 +1,7 @@
 import CommonData from "../../../../domain/learn/CommonData"
 import { fireEvent, render } from "@testing-library/react"
 import NumbersFlashCardBack  from "./NumbersFlashCardBack"
-import { getByTextWithMarkup } from "tests/Queries"
+import { getByTextWithMarkup } from "__test-utils__/Queries"
 
 const onResetHandler = vi.fn()
 

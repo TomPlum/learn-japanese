@@ -1,11 +1,11 @@
 import AnonymousDashboardLayout  from "./AnonymousDashboardLayout"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import { fireEvent } from "@testing-library/react"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const mockGetHideUserProfileHint = vi.fn()
 const mockSetHideUserProfileHint = vi.fn()
-vi.mock("../../../service/LocalStorageService", () => ({
+vi.mock("service/LocalStorageService", () => ({
   default: function () {
     return {
       getHideUserProfileHint: mockGetHideUserProfileHint,

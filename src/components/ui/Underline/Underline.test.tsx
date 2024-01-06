@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react"
 import Underline, { FirstMatch, MultipleFirstMatch, Occurrences }  from "./Underline"
-import { getByTextWithElements, getByTextWithMarkup } from "tests/Queries"
+import { getByTextWithElements, getByTextWithMarkup } from "__test-utils__/Queries"
 
 describe("First Match Strategy", () => {
   test("Should render the whole text content from the immediate child component", () => {

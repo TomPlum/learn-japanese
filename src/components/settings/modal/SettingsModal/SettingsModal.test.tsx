@@ -4,10 +4,10 @@ import { store } from "../../../../store"
 import { setPreference, setUser } from "../../../../slices/UserSlice"
 import { Preference } from "../../../../domain/user/Preference"
 import { testUser } from "../../../../setupTests"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const mockFontService = vi.fn()
-vi.mock("../../../../service/FontService", () => ({
+vi.mock("service/FontService", () => ({
   default: function () {
     return { getFonts: mockFontService }
   }

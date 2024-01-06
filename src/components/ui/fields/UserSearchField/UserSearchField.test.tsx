@@ -3,7 +3,7 @@ import UserSearchField  from "./UserSearchField"
 import userEvent from "@testing-library/user-event"
 
 const mockGetPublicUsers = vi.fn()
-vi.mock("../../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return { getPublicUsers: mockGetPublicUsers }
   }

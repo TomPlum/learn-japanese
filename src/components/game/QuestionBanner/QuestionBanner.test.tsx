@@ -2,8 +2,8 @@ import QuestionBanner, { QuestionBannerProps }  from "./QuestionBanner"
 import { fireEvent, screen } from "@testing-library/react"
 import Definition from "../../../domain/sentence/Definition"
 import LearnableField from "../../../domain/learn/LearnableField"
-import { findByTextWithElements } from "tests/Queries"
-import renderWithTranslation from "tests/renderWithTranslation"
+import { findByTextWithElements } from "__test-utils__/Queries"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 let props: QuestionBannerProps
 

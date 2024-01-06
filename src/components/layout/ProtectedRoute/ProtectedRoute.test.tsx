@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react"
 import ProtectedRoute from "./ProtectedRoute"
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer.tsx"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer.tsx"
 import { store } from "../../../store.ts"
 import { clearUser, setUser } from "../../../slices/UserSlice.ts";
 import { testUser } from "../../../setupTests.ts"

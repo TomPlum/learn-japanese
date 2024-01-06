@@ -4,7 +4,7 @@ import LearnableFieldSelector, {
 } from "../../../../components/ui/select/LearnableFieldSelector"
 import LearnableField from "../../../../domain/learn/LearnableField"
 import userEvent from "@testing-library/user-event"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onSelectHandler = vi.fn()
 

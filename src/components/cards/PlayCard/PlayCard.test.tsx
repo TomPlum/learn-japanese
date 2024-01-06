@@ -11,7 +11,7 @@ import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaS
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
 import PresetBuilder from "../../../domain/session/PresetBuilder"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 import { BrowserRouter } from "react-router-dom";
 
 const playPreset = new PresetBuilder()

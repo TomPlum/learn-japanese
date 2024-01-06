@@ -4,7 +4,7 @@ import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
 import KanjiSettings, { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings"
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons"
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onConfirmHandler = vi.fn()
 const onResetHandler = vi.fn()

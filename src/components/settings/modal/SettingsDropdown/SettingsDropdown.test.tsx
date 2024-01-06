@@ -2,13 +2,13 @@ import SettingsDropdown, { SettingsDropdownProps }  from "./SettingsDropdown"
 import { Preference } from "../../../../domain/user/Preference"
 import { faGlobe, faUserFriends } from "@fortawesome/free-solid-svg-icons"
 import { fireEvent, screen, waitFor, waitForElementToBeRemoved, within } from "@testing-library/react"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 import { store } from "../../../../store"
 import { clearUser, setPreference, setUser } from "../../../../slices/UserSlice"
 import { localStorageMock, testUser } from "../../../../setupTests"
 
 const mockUpdatePreferences = vi.fn()
-vi.mock("../../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return { updatePreferences: mockUpdatePreferences }
   }

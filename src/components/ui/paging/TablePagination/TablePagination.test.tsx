@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import TablePagination, { TablePaginationProps }  from "./TablePagination"
 import userEvent from "@testing-library/user-event"
-import { getByTextWithElements } from "tests/Queries"
+import { getByTextWithElements } from "__test-utils__/Queries"
 
 const onFirstPageHandler = vi.fn()
 const onNextPageHandler = vi.fn()

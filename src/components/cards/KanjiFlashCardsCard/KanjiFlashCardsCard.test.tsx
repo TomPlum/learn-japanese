@@ -6,10 +6,10 @@ import { FlashCard } from "../../../domain/learn/FlashCard"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { History } from "@remix-run/router";
 import { createMemoryHistory } from "history"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const mockGetKanjiFlashCards = vi.fn()
-vi.mock("../../../service/SpacedRepetitionService", () => ({
+vi.mock("service/SpacedRepetitionService", () => ({
   default: function () {
     return { getKanjiFlashCards: mockGetKanjiFlashCards }
   }

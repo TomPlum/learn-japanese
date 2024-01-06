@@ -1,7 +1,7 @@
 import { fireEvent } from "@testing-library/react"
 import ConfidenceButton, { ConfidenceButtonProps }  from "./ConfidenceButton"
 import Confidence from "../../../domain/learn/spacedrepetition/Confidence"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import { store } from "../../../store"
 import { setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"

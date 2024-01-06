@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react"
 import GenkiUnderlineDisplay  from "./GenkiUnderlineDisplay"
-import { getByTextWithElements } from "tests/Queries"
+import { getByTextWithElements } from "__test-utils__/Queries"
 import { FirstMatch } from "../../../../components/ui/Underline"
 
 test("Should render the text content of the immediate child component", () => {

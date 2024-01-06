@@ -16,11 +16,11 @@ import QuestionType from "../../../../domain/game/QuestionType"
 import { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings"
 import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings"
 import PresetBuilder from "../../../../domain/session/PresetBuilder"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const mockGetAllPresets = vi.fn()
 const mockGetDefaultPresets = vi.fn()
-vi.mock("../../../../service/PresetService", () => ({
+vi.mock("service/PresetService", () => ({
   default: function () {
     return {
       getAllPresets: mockGetAllPresets,

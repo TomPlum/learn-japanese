@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import ValueSelector, { ValueSelectorProps }  from "./ValueSelector"
-import { findByTextWithElements, getAllByTextWithElements, getByTextWithElements } from "tests/Queries"
+import { findByTextWithElements, getAllByTextWithElements, getByTextWithElements } from "__test-utils__/Queries"
 import userEvent from "@testing-library/user-event"
 
 const onChangeHandler = vi.fn()

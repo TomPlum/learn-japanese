@@ -1,6 +1,6 @@
 import LearnSettingsTab  from "./LearnSettingsTab"
 import { fireEvent, screen } from "@testing-library/react"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 test("Should render the flash cards quantity dropdown", async () => {
   const component = renderTranslatedReduxConsumer(<LearnSettingsTab />)

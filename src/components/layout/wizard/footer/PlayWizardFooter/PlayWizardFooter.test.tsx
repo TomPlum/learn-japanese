@@ -3,7 +3,7 @@ import PlayWizardFooter, {
   PlayWizardFooterProps
 } from "../../../../../components/layout/wizard/footer/PlayWizardFooter"
 import { AppMode } from "../../../../../domain/AppMode"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onNextHandler = vi.fn()
 const onBackHandler = vi.fn()

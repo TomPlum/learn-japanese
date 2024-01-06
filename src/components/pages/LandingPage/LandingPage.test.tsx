@@ -6,18 +6,18 @@ import KanaType from "../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../domain/kana/KanaColumn"
 import { Environment } from "../../../utility/Environment"
 import matchMediaPolyfill from "mq-polyfill"
-import { getByTextWithMarkup } from "tests/Queries"
+import { getByTextWithMarkup } from "__test-utils__/Queries"
 import { when } from "jest-when"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { History } from "@remix-run/router"
 import { createMemoryHistory } from "history"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const environment = vi.fn()
 const shuffle = vi.fn()
 const getRandomObject = vi.fn()
 const mockKanaRepository = vi.fn()
-vi.mock("../../../repository/KanaRepository", () => ({
+vi.mock("repository/KanaRepository", () => ({
   default: function () {
     return { read: mockKanaRepository }
   }

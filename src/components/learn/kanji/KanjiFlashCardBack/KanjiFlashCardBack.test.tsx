@@ -6,8 +6,8 @@ import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
 import { Example } from "../../../../domain/kanji/Example"
 import KanjiFlashCardBack  from "./KanjiFlashCardBack"
 import { Environment } from "../../../../utility/Environment"
-import { getByTextWithMarkup } from "tests/Queries"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import { getByTextWithMarkup } from "__test-utils__/Queries"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import JLTPLevel from "../../../../domain/learn/JLTPLevel"
 
 const onClickHandler = vi.fn()

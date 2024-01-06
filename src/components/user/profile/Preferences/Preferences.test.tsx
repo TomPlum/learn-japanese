@@ -1,11 +1,11 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import Preferences  from "./Preferences"
 import { testUser } from "../../../../setupTests"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 //Mock User Service
 const mockUserService = vi.fn()
-vi.mock("../../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return { updatePreferences: mockUserService }
   }
@@ -13,7 +13,7 @@ vi.mock("../../../../service/UserService", () => ({
 
 // Mock Font Service
 const mockFontService = vi.fn()
-vi.mock("../../../../service/FontService", () => ({
+vi.mock("service/FontService", () => ({
   default: function () {
     return { getFonts: mockFontService }
   }

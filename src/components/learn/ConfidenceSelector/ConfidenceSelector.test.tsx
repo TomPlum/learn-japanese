@@ -1,7 +1,7 @@
 import { fireEvent, screen } from "@testing-library/react"
 import ConfidenceSelector, { ConfidenceSelectorProps }  from "./ConfidenceSelector"
 import Confidence from "../../../domain/learn/spacedrepetition/Confidence"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import { setUser } from "../../../slices/UserSlice"
 import { store } from "../../../store"
 import SpaceRepetitionFeedback from "../../../domain/learn/spacedrepetition/SpaceRepetitionFeedback"
@@ -11,7 +11,7 @@ import { FlashCard } from "../../../domain/learn/FlashCard"
 import { testUser } from "../../../setupTests"
 
 const mockGetDaysTillNextReview = vi.fn()
-vi.mock("../../../service/SpacedRepetitionService", () => ({
+vi.mock("service/SpacedRepetitionService", () => ({
   default: function () {
     return { getDaysTillNextReview: mockGetDaysTillNextReview }
   }

@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react"
 import ConfigTypeStep, { ConfigTypeStepProps }  from "./ConfigTypeStep"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onSelectHandler = vi.fn()
 

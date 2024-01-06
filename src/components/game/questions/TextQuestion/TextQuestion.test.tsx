@@ -2,9 +2,9 @@ import { act, fireEvent, screen } from "@testing-library/react"
 import TextQuestion, { TextQuestionProps }  from "./TextQuestion"
 import React from "react"
 import LearnableField from "../../../../domain/learn/LearnableField"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import { MemoryGameQuestion } from "../../../../components/game/MemoryGame"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const isValidHandler = vi.fn()
 const ref = React.createRef<MemoryGameQuestion>()

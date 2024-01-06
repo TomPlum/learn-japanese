@@ -3,7 +3,7 @@ import HintButton, { HintButtonProps }  from "./HintButton"
 import { Kana } from "../../../domain/kana/Kana"
 import KanaType from "../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../domain/kana/KanaColumn"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onUseHandler = vi.fn()
 

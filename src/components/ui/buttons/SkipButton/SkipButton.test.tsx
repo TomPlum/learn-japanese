@@ -1,7 +1,7 @@
 import { fireEvent, screen } from "@testing-library/react"
 import SkipButton  from "./SkipButton"
 import each from "jest-each"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onClickHandler = vi.fn()
 

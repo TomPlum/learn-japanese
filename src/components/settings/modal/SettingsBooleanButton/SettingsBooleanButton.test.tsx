@@ -6,12 +6,12 @@ import { faCrown } from "@fortawesome/free-solid-svg-icons"
 import { Preference } from "../../../../domain/user/Preference"
 import { store } from "../../../../store"
 import { clearUser, setPreference, setUser } from "../../../../slices/UserSlice"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import { testUser } from "../../../../setupTests"
 import { fireEvent } from "@testing-library/react"
 
 const mockUpdatePreferences = vi.fn()
-vi.mock("../../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function() {
     return { updatePreferences: mockUpdatePreferences }
   }

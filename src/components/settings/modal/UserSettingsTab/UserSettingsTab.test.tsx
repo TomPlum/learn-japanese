@@ -1,17 +1,17 @@
 import { fireEvent, screen, within } from "@testing-library/react"
 import UserSettingsTab  from "./UserSettingsTab"
 import * as deviceDetect from "react-device-detect"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const mockClearLocalStorage = vi.fn()
-vi.mock("../../../../service/LocalStorageService", () => ({
+vi.mock("service/LocalStorageService", () => ({
   default: function () {
     return { clear: mockClearLocalStorage }
   }
 }))
 
 const mockDeleteHighScoresData = vi.fn()
-vi.mock("../../../../service/HighScoresService", () => ({
+vi.mock("service/HighScoresService", () => ({
   default: function () {
     return { delete: mockDeleteHighScoresData }
   }

@@ -5,7 +5,7 @@ import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
 import { Example } from "../../../../domain/kanji/Example"
 import { fireEvent, render, screen } from "@testing-library/react"
 import KanjiExampleDisplay  from "./KanjiExampleDisplay"
-import { getByTextWithMarkup } from "tests/Queries"
+import { getByTextWithMarkup } from "__test-utils__/Queries"
 import JLTPLevel from "../../../../domain/learn/JLTPLevel"
 
 const readings = [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)]

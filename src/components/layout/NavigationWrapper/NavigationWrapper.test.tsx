@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react"
 import NavigationWrapper  from "./NavigationWrapper"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 import { MemoryRouter } from "react-router-dom";
 
 const setup = () => {

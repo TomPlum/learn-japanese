@@ -10,7 +10,7 @@ import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeS
 import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings"
 import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings"
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 let result: GameResult
 

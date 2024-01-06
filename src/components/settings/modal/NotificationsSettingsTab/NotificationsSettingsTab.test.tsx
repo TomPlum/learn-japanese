@@ -4,10 +4,10 @@ import { store } from "../../../../store"
 import { clearUser, setPreference, setUser } from "../../../../slices/UserSlice"
 import { testUser } from "../../../../setupTests"
 import { Preference } from "../../../../domain/user/Preference"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const mockUpdatePreferences = vi.fn()
-vi.mock("../../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return { updatePreferences: mockUpdatePreferences }
   }

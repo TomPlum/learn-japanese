@@ -2,14 +2,14 @@ import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from "@testing-
 import RegistrationForm  from "./RegistrationForm"
 import authService from "../../../service/AuthenticationService"
 import each from "jest-each"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onSuccessHandler = vi.fn()
 const mockRegister = vi.fn()
 const mockUsernameEligible = vi.fn()
 const mockEmailEligible = vi.fn()
 
-vi.mock("../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return {
       usernameExists: mockUsernameEligible,

@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react"
 import DefinitionList  from "./DefinitionList"
-import { getByTextWithMarkup } from "tests/Queries"
+import { getByTextWithMarkup } from "__test-utils__/Queries"
 
 test("Should display a single definition in inline mode", () => {
   const component = render(<DefinitionList words={["test"]} mode="inline" />)

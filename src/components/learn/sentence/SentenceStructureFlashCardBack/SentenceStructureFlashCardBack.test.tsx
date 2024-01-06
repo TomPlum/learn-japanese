@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import SentenceStructureFlashCardBack  from "./SentenceStructureFlashCardBack"
-import { findByTextWithMarkup } from "tests/Queries";
+import { findByTextWithMarkup } from "__test-utils__/Queries";
 import Definition from "../../../../domain/sentence/Definition"
 import { Kanji } from "../../../../domain/kanji/Kanji.ts"
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade.ts"

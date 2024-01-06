@@ -1,9 +1,9 @@
 import { fireEvent } from "@testing-library/react"
 import StreakCard  from "./StreakCard"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const mockGetActivityStreak = vi.fn()
-vi.mock("../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return { getActivityStreak: mockGetActivityStreak }
   }

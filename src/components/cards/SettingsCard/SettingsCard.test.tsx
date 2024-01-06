@@ -3,7 +3,7 @@ import { store } from "../../../store"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import { fireEvent, screen } from "@testing-library/react"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const setup = () => {
   const component = renderTranslatedReduxConsumer(<SettingsCard />)

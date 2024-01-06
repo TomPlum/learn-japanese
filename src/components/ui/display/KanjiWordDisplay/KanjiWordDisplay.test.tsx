@@ -7,7 +7,7 @@ import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
 import JLTPLevel from "../../../../domain/learn/JLTPLevel"
 
 const mockKanjiRepository = vi.fn()
-vi.mock("../../../../repository/KanjiRepository", () => ({
+vi.mock("repository/KanjiRepository", () => ({
   default: function () {
     return { getByValue: mockKanjiRepository }
   }

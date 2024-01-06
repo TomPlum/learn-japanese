@@ -5,8 +5,8 @@ import SentenceStructureSettings, {
   SentenceStructureSettingsBuilder
 } from "../../../../domain/session/settings/data/SentenceStructureSettings"
 import { faSpellCheck } from "@fortawesome/free-solid-svg-icons"
-import { getValueLastCalledWith } from "tests/Queries"
-import renderWithTranslation from "tests/renderWithTranslation"
+import { getValueLastCalledWith } from "__test-utils__/Queries"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 let props: DataSettingsMenuProps<SentenceStructureSettings>
 

@@ -11,7 +11,7 @@ import { clearGameSettings } from "../../../slices/GameSettingsSlice"
 import { clearDataSettings } from "../../../slices/DataSettingsSlice"
 import PresetBuilder from "../../../domain/session/PresetBuilder"
 import { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 import { localStorageMock } from "../../../setupTests"
 import { History } from "@remix-run/router";
 

@@ -1,6 +1,6 @@
 import { createEvent, fireEvent, screen } from "@testing-library/react"
 import EditorColumn  from "./EditorColumn"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const mockGetData = vi.fn()
 

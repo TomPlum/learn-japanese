@@ -4,19 +4,19 @@ import { store } from "../../../../store"
 import { clearUser, setUser } from "../../../../slices/UserSlice"
 import { localStorageMock, testUser } from "../../../../setupTests"
 import { setFont } from "../../../../slices/FontSlice"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const onEditDashboardLayoutHandler = vi.fn()
 
 const mockFontService = vi.fn()
-vi.mock("../../../../service/FontService", () => ({
+vi.mock("service/FontService", () => ({
   default: function () {
     return { getFonts: mockFontService }
   }
 }))
 
 const mockUpdatePreferences = vi.fn()
-vi.mock("../../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return { updatePreferences: mockUpdatePreferences }
   }

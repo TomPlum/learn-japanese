@@ -1,7 +1,7 @@
 import { act, screen } from "@testing-library/react"
 import DynamicDisplay  from "./DynamicDisplay"
 import React from "react"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 
 test("It should display the passed value", () => {
   const component = renderReduxConsumer(<DynamicDisplay value="は" />)

@@ -3,10 +3,10 @@ import CustomPresetForm, { CustomPresetFormProps }  from "./CustomPresetForm"
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
 import KanjiSettings from "../../../../../domain/session/settings/data/KanjiSettings"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const mockPresetService = vi.fn()
-vi.mock("../../../../../service/PresetService", () => ({
+vi.mock("service/PresetService", () => ({
   default: function () {
     return { saveCustomPreset: mockPresetService }
   }

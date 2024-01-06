@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react"
 import AnswerChoiceDisplay, { AnswerChoiceDisplayProps }  from "./AnswerChoiceDisplay"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 
 const onClickHandler = vi.fn()
 const onMouseDownHandler = vi.fn()

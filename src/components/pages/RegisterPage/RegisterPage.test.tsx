@@ -7,14 +7,14 @@ import { History } from "@remix-run/router"
 import { createMemoryHistory } from "history"
 import auth from "../../../service/AuthenticationService"
 import { testUser } from "../../../setupTests"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const mockUsernameEligible = vi.fn()
 const mockEmailEligible = vi.fn()
 const mockRegister = vi.fn()
 const history = createMemoryHistory() as never as History
 
-vi.mock("../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return {
       usernameExists: mockUsernameEligible,

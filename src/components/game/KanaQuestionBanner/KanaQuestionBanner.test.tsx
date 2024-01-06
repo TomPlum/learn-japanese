@@ -3,7 +3,7 @@ import KanaQuestionBanner  from "./KanaQuestionBanner"
 import { Kana } from "../../../domain/kana/Kana"
 import KanaType from "../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../domain/kana/KanaColumn"
-import { getByTextWithElements } from "tests/Queries"
+import { getByTextWithElements } from "__test-utils__/Queries"
 
 test("Regular kana should use the word 'kana' in the banner message", () => {
   const kana = new Kana("あ", ["a"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)

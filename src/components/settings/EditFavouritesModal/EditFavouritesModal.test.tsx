@@ -4,7 +4,7 @@ import LearnSettings from "../../../domain/session/settings/LearnSettings"
 import EditFavouritesModal  from "./EditFavouritesModal"
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import PresetBuilder from "../../../domain/session/PresetBuilder"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const scrollIntoViewMock = vi.fn()
 window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock
@@ -19,7 +19,7 @@ const eventHandlers = {
 
 const mockGetAllPresets = vi.fn()
 const mockUpdateFavourites = vi.fn()
-vi.mock("../../../service/PresetService", () => ({
+vi.mock("service/PresetService", () => ({
   default: function () {
     return {
       getAllPresets: mockGetAllPresets,

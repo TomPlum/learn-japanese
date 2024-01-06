@@ -5,7 +5,7 @@ import { ReadingType } from "../../../domain/kanji/ReadingType"
 import { Kanji } from "../../../domain/kanji/Kanji"
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
-import { getByTextWithMarkup } from "tests/Queries"
+import { getByTextWithMarkup } from "__test-utils__/Queries"
 
 const onClickHandler = vi.fn()
 

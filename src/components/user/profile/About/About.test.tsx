@@ -1,11 +1,11 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import About  from "./About"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import { testUser } from "../../../../setupTests"
 
 //Mock User Service
 const mockUserService = vi.fn()
-vi.mock("../../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return { setNickname: mockUserService }
   }

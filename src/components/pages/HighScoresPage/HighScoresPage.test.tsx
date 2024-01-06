@@ -1,6 +1,6 @@
 import HighScoresPage  from "./HighScoresPage"
-import { findByTextWithElements } from "tests/Queries"
-import renderWithTranslation from "tests/renderWithTranslation"
+import { findByTextWithElements } from "__test-utils__/Queries"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 import { when } from "jest-when"
 import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
@@ -8,14 +8,14 @@ import { createMemoryHistory } from "history"
 import { History } from "@remix-run/router";
 
 const mockGetHighScoreEntriesPage = vi.fn()
-vi.mock("../../../service/HighScoresService", () => ({
+vi.mock("service/HighScoresService", () => ({
   default: function () {
     return { getAllEntriesPage: mockGetHighScoreEntriesPage }
   }
 }))
 
 const mockGetPublicUsers = vi.fn()
-vi.mock("../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return { getPublicUsers: mockGetPublicUsers }
   }

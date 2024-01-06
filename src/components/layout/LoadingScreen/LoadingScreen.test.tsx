@@ -1,7 +1,7 @@
 import { act, render } from "@testing-library/react"
 import LoadingScreen  from "./LoadingScreen"
 import Arrays from "../../../utility/Arrays"
-import { findByTextWithElements } from "tests/Queries"
+import { findByTextWithElements } from "__test-utils__/Queries"
 
 beforeEach(() => {
   vi.useFakeTimers({ shouldAdvanceTime: true })

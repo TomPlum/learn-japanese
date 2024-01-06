@@ -3,10 +3,10 @@ import { store } from "../../../store"
 import { clearDataSettings, setDataSettings } from "../../../slices/DataSettingsSlice"
 import { fireEvent, screen } from "@testing-library/react"
 import { createMemoryHistory } from "history"
-import { getByTextWithMarkup } from "tests/Queries"
+import { getByTextWithMarkup } from "__test-utils__/Queries"
 import { BrowserRouter, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { History } from "@remix-run/router"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 import Definition from "../../../domain/sentence/Definition"
 import { clearGameSettings, setGameSettings } from "../../../slices/GameSettingsSlice"
 import PlayPage  from "./PlayPage"
@@ -19,7 +19,7 @@ import LearnableField from "../../../domain/learn/LearnableField"
 import QuestionType from "../../../domain/game/QuestionType"
 
 const mockLearningDataService = vi.fn()
-vi.mock("../../../service/LearningDataService", () => ({
+vi.mock("service/LearningDataService", () => ({
   default: function () {
     return { read: mockLearningDataService }
   }

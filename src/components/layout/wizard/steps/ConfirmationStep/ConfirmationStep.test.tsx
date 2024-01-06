@@ -3,16 +3,16 @@ import ConfirmationStep  from "./ConfirmationStep"
 import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
 import { KanjiSettingsBuilder } from "../../../../../domain/session/settings/data/KanjiSettings"
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import { clearUser, setUser } from "../../../../../slices/UserSlice"
 import { store } from "../../../../../store"
 import { testUser } from "../../../../../setupTests"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const onSelectStageHandler = vi.fn()
 
 const mockPresetService = vi.fn()
-vi.mock("../../../../../service/PresetService", () => ({
+vi.mock("service/PresetService", () => ({
   default: function () {
     return { saveCustomPreset: mockPresetService }
   }

@@ -3,7 +3,7 @@ import AppModeButton  from "./AppModeButton"
 import { AppMode } from "../../../../domain/AppMode"
 import { store } from "../../../../store"
 import { setApplicationMode } from "../../../../slices/ModeSlice"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 
 test("Clicking the button should change 'Learn' mode and display the 'Play' text and icon", () => {
   store.dispatch(setApplicationMode(AppMode.PLAY))

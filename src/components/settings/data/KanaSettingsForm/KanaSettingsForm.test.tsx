@@ -3,7 +3,7 @@ import KanaSettingsForm  from "./KanaSettingsForm"
 import KanaSettings, { KanaSettingsBuilder } from "../../../../domain/session/settings/data/KanaSettings"
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu"
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onConfirmHandler = vi.fn()
 const onResetHandler = vi.fn()

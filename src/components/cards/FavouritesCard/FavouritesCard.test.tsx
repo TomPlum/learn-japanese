@@ -3,15 +3,15 @@ import FavouritesCard  from "./FavouritesCard"
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import PresetBuilder from "../../../domain/session/PresetBuilder"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 import { BrowserRouter } from "react-router-dom";
 
 const mockGetFavourites = vi.fn()
 const mockGetAllPresets = vi.fn()
 const mockUpdateFavourites = vi.fn()
-vi.mock("../../../service/PresetService", () => ({
+vi.mock("service/PresetService", () => ({
   default: function () {
     return {
       getFavouritePresets: mockGetFavourites,

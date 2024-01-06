@@ -3,8 +3,8 @@ import NumbersSettingsForm  from "./NumbersSettingsForm"
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu"
 import NumbersSettings, { NumbersSettingsBuilder } from "../../../../domain/session/settings/data/NumbersSettings"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
-import { getValueLastCalledWith } from "tests/Queries"
-import renderWithTranslation from "tests/renderWithTranslation"
+import { getValueLastCalledWith } from "__test-utils__/Queries"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onConfirmHandler = vi.fn()
 const onResetHandler = vi.fn()

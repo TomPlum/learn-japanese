@@ -1,7 +1,7 @@
 import { fireEvent } from "@testing-library/react"
 import LifeSettingsForm  from "./LifeSettingsForm"
 import { LifeSettingsBuilder } from "../../../../domain/session/settings/game/LifeSettings"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onChangeHandler = vi.fn()
 

@@ -3,7 +3,7 @@ import ExistingFavouriteButton, {
   ExistingFavouriteButtonProps
 } from "../../../../../components/ui/buttons/favourite/ExistingFavouriteButton"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onRemoveHandler = vi.fn()
 const onCancelHandler = vi.fn()

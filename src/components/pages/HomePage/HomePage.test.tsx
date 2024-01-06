@@ -2,11 +2,11 @@ import HomePage  from "./HomePage"
 import { store } from "../../../store"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer.tsx";
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer.tsx";
 import { BrowserRouter } from "react-router-dom";
 
 const mockGetActivityStreak = vi.fn()
-vi.mock("../../../service/UserService", () => ({
+vi.mock("service/UserService", () => ({
   default: function () {
     return { getActivityStreak: mockGetActivityStreak }
   }

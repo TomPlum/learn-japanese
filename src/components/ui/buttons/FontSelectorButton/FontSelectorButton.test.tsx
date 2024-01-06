@@ -1,11 +1,11 @@
 import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import FontSelectorButton  from "./FontSelectorButton"
 import { store } from "../../../../store"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const mockGetSelectedFont = vi.fn()
 const mockGetFonts = vi.fn()
-vi.mock("../../../../service/FontService", () => ({
+vi.mock("service/FontService", () => ({
   default: function () {
     return { getSelectedFont: mockGetSelectedFont, getFonts: mockGetFonts }
   }

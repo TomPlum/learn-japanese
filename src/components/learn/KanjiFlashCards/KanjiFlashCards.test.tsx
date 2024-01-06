@@ -4,16 +4,16 @@ import { Kanji } from "../../../domain/kanji/Kanji"
 import { KanjiReading } from "../../../domain/kanji/KanjiReading"
 import { ReadingType } from "../../../domain/kanji/ReadingType"
 import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
 import { FlashCard } from "../../../domain/learn/FlashCard"
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const mockGetKanjiFlashCards = vi.fn()
 const mockUpdateKanjiFlashCard = vi.fn()
 const mockGetDaysTillNextReview = vi.fn()
-vi.mock("../../../service/SpacedRepetitionService", () => ({
+vi.mock("service/SpacedRepetitionService", () => ({
   default: function () {
     return {
       getKanjiFlashCards: mockGetKanjiFlashCards,

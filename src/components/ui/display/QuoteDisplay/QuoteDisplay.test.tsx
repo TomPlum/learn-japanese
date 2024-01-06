@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react"
 import QuoteDisplay  from "./QuoteDisplay"
-import { getByTextWithMarkup } from "tests/Queries"
+import { getByTextWithMarkup } from "__test-utils__/Queries"
 
 test("It should render the given text wrapped in quotation marks", () => {
   render(<QuoteDisplay chapter={1}>Tom is awesome.</QuoteDisplay>)

@@ -4,7 +4,7 @@ import { faApple } from "@fortawesome/free-brands-svg-icons"
 import PlayMode from "../../../../../domain/session/PlayMode"
 import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings"
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onStartHandler = vi.fn()
 

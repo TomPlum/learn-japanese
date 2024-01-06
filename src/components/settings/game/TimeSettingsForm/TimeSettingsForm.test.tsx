@@ -1,7 +1,7 @@
 import { fireEvent, screen } from "@testing-library/react"
 import TimeSettingsForm  from "./TimeSettingsForm"
 import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onChangeHandler = vi.fn()
 

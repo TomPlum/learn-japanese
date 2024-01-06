@@ -2,7 +2,7 @@ import { fireEvent, screen } from "@testing-library/react"
 import PasswordConfirmation  from "./PasswordConfirmation"
 import PopOver from "../../../../components/ui/PopOver"
 import authService from "../../../../service/AuthenticationService"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer"
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer"
 
 const onDismissHandler = vi.fn()
 const deleteAccountService = vi.fn()

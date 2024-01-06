@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react"
 import ConfirmModal  from "./ConfirmModal"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onConfirmHandler = vi.fn()
 const onDismissHandler = vi.fn()

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import GridDisplayOptions, {
   GridDisplayOptionsProps
 } from "../../../../../components/layout/wizard/grid/GridDisplayOptions"
-import { getValueLastCalledWith } from "tests/Queries"
+import { getValueLastCalledWith } from "__test-utils__/Queries"
 import { GridOptions } from "../../../../../domain/grid/GridOptions"
 import GridDisplayType from "../../../../../domain/grid/GridDisplayType"
 

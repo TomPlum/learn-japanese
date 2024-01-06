@@ -2,7 +2,7 @@ import { fireEvent } from "@testing-library/react"
 import DisplayTypeButton, { DisplayTypeButtonProps }  from "./DisplayTypeButton"
 import QuestionType from "../../../../domain/game/QuestionType"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
-import renderWithTranslation from "tests/renderWithTranslation"
+import renderWithTranslation from "__test-utils__/renderWithTranslation"
 
 const onClickHandler = vi.fn()
 

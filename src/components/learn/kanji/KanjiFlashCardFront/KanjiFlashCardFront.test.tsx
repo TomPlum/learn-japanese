@@ -5,7 +5,7 @@ import { KanjiReading } from "../../../../domain/kanji/KanjiReading"
 import { ReadingType } from "../../../../domain/kanji/ReadingType"
 import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
 import { Example } from "../../../../domain/kanji/Example"
-import renderReduxConsumer from "tests/renderReduxConsumer"
+import renderReduxConsumer from "__test-utils__/renderReduxConsumer"
 import JLTPLevel from "../../../../domain/learn/JLTPLevel"
 
 const onClickHandler = vi.fn()

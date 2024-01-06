@@ -2,7 +2,7 @@ import ProfilePage  from "./ProfilePage"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { store } from "../../../store"
 import { testUser } from "../../../setupTests"
-import renderTranslatedReduxConsumer from "tests/renderTranslatedReduxConsumer";
+import renderTranslatedReduxConsumer from "__test-utils__/renderTranslatedReduxConsumer";
 
 const setup = () => {
   const component = renderTranslatedReduxConsumer(<ProfilePage />)
