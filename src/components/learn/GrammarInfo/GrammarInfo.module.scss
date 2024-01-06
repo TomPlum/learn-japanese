@@ -21,16 +21,31 @@
   display: flex;
   align-items: center;
   height: 52px;
-  background-color: $dark-1;
+  background-color: $dark-1 !important;
   border-radius: 10px 10px 0 0;
+  box-shadow: none !important;
+  flex-grow: 1;
+  margin: 0;
+
+  &::after {
+    display: none;
+  }
 }
 
 @mixin body {
   font-family: "Ciutadella Rounded Medium", "Segoe UI", sans-serif;
-  width: 100%;
-  max-width: 1200px;
   background-color: $dark-2;
   border-radius: 0 0 10px 10px;
+  color: $light-1;
+  margin: 0 10px;
+}
+
+@mixin container {
+  background-color: $dark-3;
+  border-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @include phone {
@@ -40,11 +55,13 @@
   }
 
   .title {
+    color: $light-1;
     font-size: 1em;
     padding-left: 7px;
   }
 
   .container {
+    @include container;
     padding: 0;
   }
 
@@ -71,11 +88,13 @@
   }
 
   .title {
+    color: $light-1;
     font-size: 1.3em;
     padding-left: 10px;
   }
 
   .container {
+    @include container;
     padding: 0 15px;
   }
 
@@ -100,12 +119,13 @@
   }
 
   .title {
+    color: $light-1;
     font-size: 1.3em;
     padding-left: 10px;
   }
 
   .container {
-    padding: 0 15px;
+    @include container;
   }
 
   .page {
@@ -128,6 +148,7 @@
 }
 
 .expander {
+  color: $light-1;
   float: right;
   transition: ease-in-out all 0.2s;
 }
@@ -139,6 +160,7 @@
 .wrapper {
   color: $light-1;
   margin: 10px 0;
+  background-color: $dark-1;
 }
 
 .chapter {

@@ -22,7 +22,7 @@ const GenkiExampleTable = (props: GenkiExampleTableProps) => {
   const romajiGenerator = new RomajiGenerator()
 
   return (
-    <Table className={[styles.table, className].join(" ")} borderless size="sm">
+    <Table className={[styles.table, className].join(" ")} borderless size="sm" variant='dark'>
       {values.map((example) => {
         const { english, japanese } = example
 

@@ -1,4 +1,4 @@
-import { Accordion, Col, Container, Row } from "react-bootstrap"
+import { Accordion, Col, Row } from "react-bootstrap";
 import styles  from "./GrammarInfo.module.scss"
 import PageNumber from "../../../domain/learn/PageNumber"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -15,8 +15,7 @@ export interface GrammarInfoProps {
   preExpand?: boolean
 }
 
-const GrammarInfo = (props: GrammarInfoProps) => {
-  const { id, title, body, chapter, page, section, preExpand } = props
+const GrammarInfo = ({ id, title, body, chapter, page, section, preExpand }: GrammarInfoProps) => {
 
   const [expanded, setExpanded] = useState(preExpand)
 
@@ -25,12 +24,12 @@ const GrammarInfo = (props: GrammarInfoProps) => {
 
   return (
     <Accordion className={styles.wrapper} data-testid={id}>
-      <Container className={styles.container} fluid>
+      <Accordion.Item eventKey={`${chapter}${section}`} className={styles.container}>
         <Accordion.Button
           as={Row}
-          eventKey={title}
           style={headerStyle}
           className={styles.header}
+          eventKey={`${chapter}${section}`}
           onClick={() => setExpanded(!expanded)}
         >
           <Col className={styles.chapter}>
@@ -39,33 +38,37 @@ const GrammarInfo = (props: GrammarInfoProps) => {
             </div>
           </Col>
 
-          <Col className={styles.title}>{title}</Col>
+          <Col className={styles.title}>
+            {title}
+          </Col>
 
           <Col className={styles.expanderWrapper}>
-            <FontAwesomeIcon fixedWidth className={styles.expander} icon={expanded ? faChevronUp : faChevronDown} />
+            <FontAwesomeIcon
+              fixedWidth
+              className={styles.expander}
+              icon={expanded ? faChevronUp : faChevronDown}
+            />
           </Col>
         </Accordion.Button>
 
-        <Accordion.Collapse eventKey={title}>
-          <Container className={styles.body}>
-            <Row>
-              <Col>
-                <span>{body}</span>
-              </Col>
-            </Row>
+        <Accordion.Body className={styles.body}>
+          <Row>
+            <Col>
+              <span>{body}</span>
+            </Col>
+          </Row>
 
-            <Row className={styles.footer} noGutters>
-              <Col className={styles.page}>
-                <FontAwesomeIcon icon={faHashtag} fixedWidth />
-                <em>
-                  {page?.toString()} from Genki {chapter <= 12 ? "I" : "II"} (3rd Edition) - Chapter {chapter}, Section{" "}
-                  {section}.
-                </em>
-              </Col>
-            </Row>
-          </Container>
-        </Accordion.Collapse>
-      </Container>
+          <Row className={styles.footer} noGutters>
+            <Col className={styles.page}>
+              <FontAwesomeIcon icon={faHashtag} fixedWidth />
+              <em>
+                {page?.toString()} from Genki {chapter <= 12 ? "I" : "II"} (3rd Edition) - Chapter {chapter}, Section{" "}
+                {section}.
+              </em>
+            </Col>
+          </Row>
+        </Accordion.Body>
+      </Accordion.Item>
     </Accordion>
   )
 }

@@ -3,6 +3,10 @@
 .table {
   max-width: 1000px;
   color: $light-2;
+
+  * {
+    background-color: $dark-2 !important;
+  }
 }
 
 .jp,

@@ -15,7 +15,7 @@ const GenkiTable = (props: PropsWithChildren<GenkiTableProps>) => {
 
   return (
     <div className={[styles.wrapper, borderClass, className].join(" ")} style={{ maxWidth: maxWidth }}>
-      <Table className={styles.table} borderless size="sm">
+      <Table className={styles.table} borderless size="sm" variant='dark'>
         {children}
       </Table>
     </div>
