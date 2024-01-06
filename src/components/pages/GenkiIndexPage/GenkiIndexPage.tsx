@@ -11,7 +11,14 @@ import {
   faSortUp
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { HeaderGroup, Row, useAsyncDebounce, useGlobalFilter, usePagination, useSortBy, useTable } from "react-table";
+import {
+  Row,
+  getPaginationRowModel as paginationModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  useReactTable,
+  Header, Cell, flexRender, getCoreRowModel, ColumnDef
+} from "@tanstack/react-table";
 import { AnimatePresence, motion } from "framer-motion"
 import TablePagination from "../../ui/paging/TablePagination"
 import Copyable from "../../ui/Copyable"
@@ -32,53 +39,42 @@ const GenkiIndexPage = () => {
   const originalData = useRef<TableData[]>([])
   const data = useRef<TableData[]>([])
 
-  const columns = useMemo(
-    () => [
-      { Header: "Kana", accessor: "kana" },
-      { Header: "Rōmaji", accessor: "romaji" },
-      { Header: "Kanji", accessor: "kanji" },
-      { Header: "Meaning", accessor: "meaning" },
-      { Header: "Lesson", accessor: "lesson", width: 20 }
-    ],
-    []
-  )
-
-  const defaultColumn = useMemo(() => ({ minWidth: 50, maxWidth: 300 }), [])
+  const columns = useMemo<ColumnDef<TableData>[]>(() => [
+      { id: "kana", header: "Kana", accessorKey: "kana" },
+      { id: "romaji", header: "Rōmaji", accessorKey: "romaji" },
+      { id: "kanji", header: "Kanji", accessorKey: "kanji" },
+      { id: "meaning", header: "Meaning", accessorKey: "meaning" },
+      { id: "lesson", header: "Lesson", accessorKey: "lesson", width: 20 }
+  ], [])
 
   const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    prepareRow,
-    page,
-    canPreviousPage,
-    canNextPage,
-    rows,
-    pageOptions,
-    pageCount,
-    gotoPage,
+    getHeaderGroups,
+    getCanPreviousPage,
+    getCanNextPage,
+    getRowModel,
+    getPageOptions,
     nextPage,
+    setPageIndex,
     previousPage,
     setPageSize,
-    state: { pageIndex, globalFilter },
+    getPageCount,
+    getState,
     setGlobalFilter
-  } = useTable(
-    {
-      // @ts-expect-error its broke
-      columns: columns,
-      data: useMemo(() => data.current, [data.current]),
-      defaultColumn: defaultColumn
-    },
-    useGlobalFilter,
-    useSortBy,
-    usePagination
-  )
+  } = useReactTable({
+    columns: columns,
+    data: useMemo(() => data.current, [data.current]),
+    // defaultColumn: [columnHelper.display({ id: 'actions', minSize: 50, maxSize: 300 })],
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: paginationModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel()
+  })
 
-  const spring = useMemo(() => ({ type: "spring", damping: 50, stiffness: 100 }), [])
+  const { globalFilter, pagination } = getState()
 
-  const [error, setError] = useState<string | undefined>(undefined)
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState(globalFilter ?? "")
+  const [error, setError] = useState<string | undefined>(undefined)
 
   const hasError = !!error
 
@@ -118,7 +114,7 @@ const GenkiIndexPage = () => {
       })
   }
 
-  const onGlobalFilter = useAsyncDebounce((value: string) => setGlobalFilter(value), 200)
+  const onGlobalFilter = (value: string) => setGlobalFilter(value)
 
   const onToggleFirstBook = (enabled: boolean) => {
     if (enabled) {
@@ -164,7 +160,7 @@ const GenkiIndexPage = () => {
         value={search}
         disabled={loading || !!error}
         className={styles.search}
-        append={`${rows.length} Results`}
+        append={`${getRowModel().rows.length} Results`}
         onChange={(value: string) => {
           setSearch(value)
           onGlobalFilter(value)
@@ -178,28 +174,40 @@ const GenkiIndexPage = () => {
 
       {data.current && (
         <>
-          <table {...getTableProps()} className={styles.table}>
+          <table className={styles.table}>
             <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column: HeaderGroup<TableData>) => (
-                    <motion.th
-                      {...column.getHeaderProps({
-                        // @ts-expect-error its broke
-                        layoutTransition: spring,
-                        ...column.getSortByToggleProps()
-                      })}
-                    >
-                      <span>{column.render("Header")}</span>
+              {getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header: Header<TableData, unknown>) => (
+                    <motion.th key={header.id} onClick={() => header.column.getToggleSortingHandler()}>
                       <span>
-                        {column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <FontAwesomeIcon icon={faSortDown} className={styles.sort} title="Default Order" />
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </span>
+
+                      <span>
+                        {header.column.getIsSorted() ? (
+                          header.column.getIsSorted() == "desc" ? (
+                            <FontAwesomeIcon
+                              icon={faSortDown}
+                              title="Default Order"
+                              className={styles.sort}
+                            />
                           ) : (
-                            <FontAwesomeIcon icon={faSortUp} className={styles.sort} title="Sort Desc" />
+                            <FontAwesomeIcon
+                              icon={faSortUp}
+                              title="Sort Desc"
+                              className={styles.sort}
+                            />
                           )
                         ) : (
-                          <FontAwesomeIcon icon={faSort} className={styles.sort} title="Sort Asc" />
+                          <FontAwesomeIcon
+                            icon={faSort}
+                            title="Sort Asc"
+                            className={styles.sort}
+                          />
                         )}
                       </span>
                     </motion.th>
@@ -208,24 +216,17 @@ const GenkiIndexPage = () => {
               ))}
             </thead>
 
-            <tbody {...getTableBodyProps()}>
+            <tbody>
               <AnimatePresence>
-                {page.map((row: Row<TableData>) => {
-                  prepareRow(row)
-
+                {getRowModel().rows.map((row: Row<TableData>) => {
                   const colourClass = row.original.lesson < 12 ? styles.genkiOne : styles.genkiTwo
                   return (
-                    <motion.tr
-                      // @ts-expect-error its broke
-                      {...row.getRowProps({ layoutTransition: spring })}
-                      className={colourClass}
-                    >
-                      {row.cells.map((cell) => {
+                    <motion.tr key={row.id} className={colourClass}>
+                      {row.getVisibleCells().map((cell: Cell<TableData, any>) => {
                         return (
-                          // @ts-expect-error its broke
-                          <motion.td {...cell.getCellProps({ layoutTransition: spring })}>
-                            <Copyable valueProvider={(it) => it.props.cell.value}>
-                              <span>{cell.render("Cell")}</span>
+                          <motion.td key={cell.id}>
+                            <Copyable valueProvider={({ props }) => props.cell.getValue()}>
+                              <span>{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>
                             </Copyable>
                           </motion.td>
                         )
@@ -241,21 +242,21 @@ const GenkiIndexPage = () => {
             error={error}
             loading={loading}
             onRetry={loadTableData}
-            empty={rows.length === 0}
+            empty={getRowModel().rows.length === 0}
             emptyMessage={`No results for '${search}'...`}
           />
 
           <TablePagination
             onNextPage={nextPage}
-            canNextPage={canNextPage}
-            currentPage={pageIndex + 1}
             onPreviousPage={previousPage}
-            onFirstPage={() => gotoPage(0)}
-            totalPages={pageOptions.length}
-            canPreviousPage={canPreviousPage}
+            canNextPage={getCanNextPage()}
+            onFirstPage={() => setPageIndex(0)}
+            totalPages={getPageOptions().length}
             onToggleFirstBook={onToggleFirstBook}
+            currentPage={pagination.pageIndex + 1}
+            canPreviousPage={getCanPreviousPage()}
             onToggleSecondBook={onToggleSecondBook}
-            onLastPage={() => gotoPage(pageCount - 1)}
+            onLastPage={() => setPageIndex(getPageCount() - 1)}
             onChangeQuantity={(value: number) => setPageSize(value)}
           />
         </>
