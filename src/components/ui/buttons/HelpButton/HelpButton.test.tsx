@@ -3,7 +3,7 @@ import HelpButton  from "./HelpButton"
 import { render } from "__test-utils__"
 
 const setup = () => {
-  const component = render(<HelpButton />)
+  const { component } = render(<HelpButton />)
   return {
     button: component.getByTestId("help-button"),
     ...component

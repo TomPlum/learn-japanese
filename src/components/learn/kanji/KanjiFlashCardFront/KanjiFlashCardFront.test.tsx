@@ -23,7 +23,7 @@ const kanji = new Kanji(
 )
 
 test("Should call the onClick event handler when clicking the card", () => {
-  const component = render(<KanjiFlashCardFront data={kanji} onClick={onClickHandler} />)
+  const { component } = render(<KanjiFlashCardFront data={kanji} onClick={onClickHandler} />)
   fireEvent.click(component.getByText("人"))
   expect(onClickHandler).toHaveBeenCalled()
 })

@@ -17,7 +17,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<QuantityField {...props} />)
+  const { component }  = render(<QuantityField {...props} />)
   return {
     field: component.getByPlaceholderText("Quantity"),
     ...component

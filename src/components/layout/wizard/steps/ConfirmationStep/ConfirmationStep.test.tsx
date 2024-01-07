@@ -7,7 +7,6 @@ import { render } from "__test-utils__"
 import { clearUser, setUser } from "../../../../../slices/UserSlice"
 import { store } from "../../../../../store"
 import { testUser } from "../../../../../setupTests"
-import { render } from "__test-utils__"
 
 const onSelectStageHandler = vi.fn()
 
@@ -35,7 +34,7 @@ function withGameSettings(gameSettings: GameSettingsBuilder) {
 
 test("Should render the session settings summary text", () => {
   withGameSettings(new GameSettingsBuilder())
-  const component = render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
+  const { component } = render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
   expect(component.getByTestId("session-settings-summary")).toBeInTheDocument()
 })
 

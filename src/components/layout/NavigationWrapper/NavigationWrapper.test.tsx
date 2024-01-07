@@ -1,14 +1,9 @@
 import { fireEvent, screen } from "@testing-library/react"
 import NavigationWrapper  from "./NavigationWrapper"
 import { render } from "__test-utils__"
-import { MemoryRouter } from "react-router-dom";
 
 const setup = () => {
-  const component = render(
-    <MemoryRouter initialEntries={['/home']}>
-      <NavigationWrapper />
-    </MemoryRouter>
-  )
+  const { component } = render(<NavigationWrapper />, { url: '/home' })
 
   return {
     login: component.getByText("Login"),

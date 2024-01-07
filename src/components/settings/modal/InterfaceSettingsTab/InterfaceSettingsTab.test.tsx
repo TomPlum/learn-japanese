@@ -33,26 +33,20 @@ afterEach(() => {
 
 test("Should render the main tab contents on initial render", async () => {
   mockFontService.mockResolvedValueOnce([{ name: "Test Font", displayName: "Test Font" }])
-  const component = render(
-    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
-  )
+  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
   expect(await component.findByTestId("interface-settings-tab")).toBeInTheDocument()
 })
 
 test("Should call the onEditDashboard event handler after clicking the button", async () => {
   mockFontService.mockResolvedValueOnce([{ name: "Test Font", displayName: "Test Font" }])
-  const component = render(
-    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
-  )
+  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
   fireEvent.click(await component.findByText("Open Layout Editor"))
   expect(onEditDashboardLayoutHandler).toHaveBeenCalled()
 })
 
 test("Should render the theme selector dropdown", async () => {
   mockFontService.mockResolvedValueOnce([])
-  const component = render(
-    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
-  )
+  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
 
   fireEvent.click(component.getByTestId("interface-settings-theme-selector"))
 
@@ -67,9 +61,7 @@ test("Should render the font selector dropdown", async () => {
     { name: "Test Font", slug: "mincho" },
     { name: "Test Font2", slug: "gothic" }
   ])
-  const component = render(
-    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
-  )
+  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
 
   await waitForElementToBeRemoved(component.getByTestId("settings-dropdown-loading"))
   fireEvent.click(component.getByTestId("interface-settings-font-selector"))
@@ -87,9 +79,7 @@ test("Should render the font selector dropdown", async () => {
 
 test("Should render the language selector dropdown", async () => {
   mockFontService.mockResolvedValueOnce([])
-  const component = render(
-    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
-  )
+  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
 
   fireEvent.click(component.getByTestId("interface-settings-language-selector"))
 
@@ -100,9 +90,7 @@ test("Should render the language selector dropdown", async () => {
 
 test("Should render the confidence menu style selector dropdown", async () => {
   mockFontService.mockResolvedValueOnce([])
-  const component = render(
-    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
-  )
+  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
 
   fireEvent.click(component.getByTestId("interface-settings-confidence-menu-selector"))
 
@@ -115,9 +103,7 @@ test("Should call the i18n change language function with the correct english cod
   store.dispatch(setUser({ ...testUser, preferences: { ...testUser.preferences, language: "日本語" } }))
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
   mockFontService.mockResolvedValueOnce([])
-  const component = render(
-    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
-  )
+  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
 
   fireEvent.click(component.getByTestId("interface-settings-language-selector"))
   fireEvent.click(component.getByText("English"))
@@ -129,9 +115,7 @@ test("Should call the i18n change language function with the correct japanese co
   store.dispatch(setUser({ ...testUser, preferences: { ...testUser.preferences, language: "English" } }))
   mockFontService.mockResolvedValueOnce([])
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  const component = render(
-    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />
-  )
+  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
 
   fireEvent.click(component.getByTestId("interface-settings-language-selector"))
   fireEvent.click(component.getByText("Japanese"))

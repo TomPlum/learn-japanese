@@ -20,7 +20,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(
+  const { component } = render(
     <Provider store={store}>
       <UserForm {...props} />
     </Provider>

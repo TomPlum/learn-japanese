@@ -8,7 +8,6 @@ import { render } from "__test-utils__"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
 import { FlashCard } from "../../../domain/learn/FlashCard"
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails"
-import { render } from "__test-utils__"
 
 const mockGetKanjiFlashCards = vi.fn()
 const mockUpdateKanjiFlashCard = vi.fn()
@@ -100,7 +99,7 @@ beforeEach(() => {
 })
 
 const setup = async () => {
-  const component = render(<KanjiFlashCards {...props} />)
+  const { component }  = render(<KanjiFlashCards {...props} />)
 
   const kanji = await component.findAllByText("一")
   kanji.forEach((el) => expect(el).toBeInTheDocument())

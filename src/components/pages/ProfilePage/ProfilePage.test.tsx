@@ -5,7 +5,7 @@ import { testUser } from "../../../setupTests"
 import { render } from "__test-utils__";
 
 const setup = () => {
-  const component = render(<ProfilePage />)
+  const { component }  = render(<ProfilePage />)
 
   return {
     edit: component.queryByTitle("Edit"),

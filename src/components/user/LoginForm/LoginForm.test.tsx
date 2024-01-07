@@ -42,7 +42,7 @@ const validLoginResponse: LoginResponse = {
 }
 
 const setup = () => {
-  const component = render(
+  const { component } = render(
     <LoginForm onSuccess={onSuccessHandler} username={registeredUsername} info={infoMessage} />
   )
 

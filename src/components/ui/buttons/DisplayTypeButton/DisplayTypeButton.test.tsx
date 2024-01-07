@@ -18,7 +18,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<DisplayTypeButton {...props} />)
+  const { component } = render(<DisplayTypeButton {...props} />)
   return {
     button: component.getByText("Multiple Choice"),
     ...component

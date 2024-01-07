@@ -13,7 +13,7 @@ vi.mock("uuid", () => ({
 }))
 
 const setup = () => {
-  const component = render(<NotificationsButton />)
+  const { component } = render(<NotificationsButton />)
   return {
     button: component.getByTestId("notifications-button"),
     ...component

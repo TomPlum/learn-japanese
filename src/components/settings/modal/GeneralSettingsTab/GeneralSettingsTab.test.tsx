@@ -3,7 +3,7 @@ import { fireEvent, screen } from "@testing-library/react"
 import { render } from "__test-utils__"
 
 test("Should render the activity feed quantity settings dropdown", async () => {
-  const component = render(<GeneralSettingsTab />)
+  const { component } = render(<GeneralSettingsTab />)
 
   fireEvent.click(component.getByTestId("general-settings-activity-selector"))
 

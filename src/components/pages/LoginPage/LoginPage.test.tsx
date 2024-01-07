@@ -1,13 +1,10 @@
 import { store } from "../../../store"
 import { clearUser, setUser } from "../../../slices/UserSlice"
-import { createMemoryHistory } from "history";
 import LoginPage  from "./LoginPage"
 import { fireEvent, waitFor } from "@testing-library/react"
 import auth from "../../../service/AuthenticationService"
 import { testUser } from "../../../setupTests"
 import { render } from "__test-utils__"
-import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
-import { History } from '@remix-run/router'
 
 const validLoginResponse = {
   username: "TomPlum42",
@@ -33,7 +30,6 @@ const validLoginResponse = {
 }
 
 const mockLogin = vi.fn()
-const history = createMemoryHistory() as never as History
 
 beforeEach(() => {
   auth.login = mockLogin
@@ -42,32 +38,20 @@ beforeEach(() => {
 
 test("Should redirect to the home page if the user is already logged in", () => {
   store.dispatch(setUser(testUser))
-  render(
-    <HistoryRouter history={history}>
-      <LoginPage />
-    </HistoryRouter>
-  )
+  const { history } = render(<LoginPage />)
   expect(history.location.pathname).toBe("/home")
 })
 
 test("Should render the login form when there is no user logged in", () => {
   store.dispatch(clearUser())
-  const component = render(
-    <HistoryRouter history={history}>
-      <LoginPage />
-    </HistoryRouter>
-  )
+  const { component } = render(<LoginPage />)
   expect(component.getByTestId("login-form")).toBeInTheDocument()
 })
 
 test("Should redirect to the home page after successfully logging in", async () => {
   // Start with no user
   store.dispatch(clearUser())
-  const component = render(
-    <HistoryRouter history={history}>
-      <LoginPage />
-    </HistoryRouter>
-  )
+  const { component, history } = render(<LoginPage />)
 
   // Log in
   mockLogin.mockResolvedValueOnce(validLoginResponse)
@@ -82,22 +66,12 @@ test("Should redirect to the home page after successfully logging in", async () 
 
 test("Should pass the username from the location query parameter into the login form", () => {
   store.dispatch(clearUser())
-  history.push("/login?username=TestingUser")
-  const component = render(
-    <HistoryRouter history={history}>
-      <LoginPage />
-    </HistoryRouter>
-  )
+  const { component } = render(<LoginPage />, { url: "/login?username=TestingUser" })
   expect(component.getByPlaceholderText("Username")).toHaveValue("TestingUser")
 })
 
 test("Should render the info message about session expiry when the query param is passed as true", () => {
   store.dispatch(clearUser())
-  history.push("/login?session-expired=true")
-  const component = render(
-    <HistoryRouter history={history}>
-      <LoginPage />
-    </HistoryRouter>
-  )
+  const { component } = render(<LoginPage />, { url: "/login?session-expired=true" })
   expect(component.getByText("Your session has expired. Please log-in again.")).toBeInTheDocument()
 })

@@ -21,7 +21,7 @@ let props: ConfidenceSelectorProps
 const onSelectHandler = vi.fn()
 
 const setup = () => {
-  const component = render(<ConfidenceSelector {...props} />)
+  const { component }  = render(<ConfidenceSelector {...props} />)
   return {
     one: component.getByText("1"),
     two: component.getByText("2"),

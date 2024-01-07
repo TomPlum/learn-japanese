@@ -6,7 +6,7 @@ const onConfirmHandler = vi.fn()
 const onDismissHandler = vi.fn()
 
 const setup = () => {
-  const component = render(
+  const { component }  = render(
     <ConfirmModal title={"Title"} body={"Body"} onConfirm={onConfirmHandler} onDismiss={onDismissHandler} />
   )
   return {

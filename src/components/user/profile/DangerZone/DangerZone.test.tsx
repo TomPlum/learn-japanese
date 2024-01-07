@@ -3,7 +3,7 @@ import DangerZone  from "./DangerZone"
 import { render } from "__test-utils__"
 
 const setup = () => {
-  const component = render(<DangerZone />)
+  const { component } = render(<DangerZone />)
   return {
     unlock: component.getByTitle("Un-Lock"),
     clearLocalStorage: component.getByText("Clear"),

@@ -6,12 +6,10 @@ import LearningResultScreen from "../../results/LearningResultScreen"
 import { useEffect, useState } from "react"
 import { Learnable } from "../../../domain/learn/Learnable"
 import Arrays from "../../../utility/Arrays"
-import DataSettingsConverter from "../../../converter/DataSettingsConverter"
-import { useDataSettingsDispatch, useDataSettingsSelector } from "../../../hooks"
 import LearningDataService from "../../../service/LearningDataService"
 import styles  from "./LearnPage.module.scss"
 import { useNavigate } from "react-router-dom"
-import { clearDataSettings } from "../../../slices/DataSettingsSlice"
+import { useSessionSettingsContext } from "context/SessionSettingsContext";
 
 const LearnPage = () => {
   const [loading, setLoading] = useState(false)
@@ -22,9 +20,7 @@ const LearnPage = () => {
 
   const navigate = useNavigate()
 
-  const dataSettingsDispatch = useDataSettingsDispatch()
-  const dataSettingsData = useDataSettingsSelector((state) => state.dataSettings.settings)
-  const dataSettings = dataSettingsData ? new DataSettingsConverter().deserialise(dataSettingsData) : undefined
+  const { dataSettings, setDataSettings } = useSessionSettingsContext()
 
   useEffect(() => {
     if (dataSettings) {
@@ -38,10 +34,10 @@ const LearnPage = () => {
           setLoading(false)
         })
     }
-  }, [])
+  }, [dataSettings])
 
   const handleDismissResultsScreen = () => {
-    dataSettingsDispatch(clearDataSettings())
+    setDataSettings(undefined)
     navigate("/home")
   }
 
@@ -65,27 +61,44 @@ const LearnPage = () => {
 
   return (
     <div className={styles.wrapper} data-testid='learn-page'>
-      <LoadingScreen key={`${loading}`} active={!!dataSettings && loading} />
+      <LoadingScreen
+        key={`${loading}`}
+        active={!!dataSettings && loading}
+      />
 
       {!dataSettings && (
         <span>
-          <p className={styles.error}>Your session settings have gone walk-abouts!</p>
+          <p className={styles.error}>
+            Your session settings have gone walk-abouts!
+          </p>
+
           <p className={styles.message}>
             <span>{"Click"}</span>
+
             <a href="/home" className={styles.link}>
               {" here "}
             </a>
+
             <span>{"to go back home."}</span>
           </p>
         </span>
       )}
 
       {!showResults && data.length > 0 && dataSettings && (
-        <Learn data={data} key={sessionKey.value} card={dataSettings.topic.cards} onFinish={handleSessionCompletion} />
+        <Learn
+          data={data}
+          key={sessionKey.value}
+          card={dataSettings.topic.cards}
+          onFinish={handleSessionCompletion}
+        />
       )}
 
       {result && showResults && (
-        <LearningResultScreen result={result} onPractice={handlePractice} onDismiss={handleDismissResultsScreen} />
+        <LearningResultScreen
+          result={result}
+          onPractice={handlePractice}
+          onDismiss={handleDismissResultsScreen}
+        />
       )}
     </div>
   )

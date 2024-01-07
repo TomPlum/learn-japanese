@@ -2,7 +2,6 @@ import { act, fireEvent, screen } from "@testing-library/react"
 import TextQuestion, { TextQuestionProps }  from "./TextQuestion"
 import React from "react"
 import LearnableField from "../../../../domain/learn/LearnableField"
-import { render } from "__test-utils__"
 import { MemoryGameQuestion } from "../../../../components/game/MemoryGame"
 import { render } from "__test-utils__"
 
@@ -22,7 +21,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<TextQuestion {...props} ref={ref} />)
+  const { component } = render(<TextQuestion {...props} ref={ref} />)
   return {
     input: component.getByPlaceholderText("Rōmaji"),
     ...component

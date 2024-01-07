@@ -10,7 +10,7 @@ let props: ConfidenceButtonProps
 const onClickHandler = vi.fn()
 
 const setup = () => {
-  const component = render(<ConfidenceButton {...props} />)
+  const { component }  = render(<ConfidenceButton {...props} />)
   return {
     button: component.getByText("6"),
     ...component

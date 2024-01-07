@@ -26,7 +26,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<FontSelectorButton />)
+  const { component } = render(<FontSelectorButton />)
   return {
     toggle: component.getByTestId("font-selector"),
     ...component

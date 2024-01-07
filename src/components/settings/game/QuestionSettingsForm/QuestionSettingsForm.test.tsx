@@ -10,7 +10,7 @@ import { render } from "__test-utils__"
 const onSelectHandler = vi.fn()
 
 const setup = () => {
-  const component = render(<QuestionSettingsForm onChange={onSelectHandler} />)
+  const { component } = render(<QuestionSettingsForm onChange={onSelectHandler} />)
   return {
     multipleChoiceButton: component.getByText("Multiple Choice"),
     textModeButton: component.getByText("Text"),

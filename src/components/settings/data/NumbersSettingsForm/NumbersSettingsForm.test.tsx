@@ -14,7 +14,7 @@ const isValidHandler = vi.fn()
 let props: DataSettingsMenuProps<NumbersSettings>
 
 const setup = () => {
-  const component = render(<NumbersSettingsForm {...props} />)
+  const { component }  = render(<NumbersSettingsForm {...props} />)
   return {
     numbers: component.getByTestId("numbers"),
     counters: component.getByTestId("counters"),

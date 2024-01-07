@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { Col, Container, Form, Pagination, Row } from "react-bootstrap"
 import styles  from "./TablePagination.module.scss"
 import { faAngleDoubleLeft, faAngleDoubleRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons"

@@ -4,15 +4,12 @@ import { store } from "../../../store"
 import {
   clearLastLearnPreset,
   clearLastPlayPreset,
-  setLastLearnPreset,
-  setLastPlayPreset
 } from "../../../slices/SessionSettingsSlice"
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
 import PresetBuilder from "../../../domain/session/PresetBuilder"
 import { render } from "__test-utils__"
-import { BrowserRouter } from "react-router-dom";
 
 const playPreset = new PresetBuilder()
   .withID(1)
@@ -37,14 +34,14 @@ const learnPreset = new PresetBuilder()
   .build()
 
 test("Clicking the start button should launch the wizard", async () => {
-  const component = render(<BrowserRouter><PlayCard /></BrowserRouter>)
+  const { component } = render(<PlayCard />)
   fireEvent.click(component.getByTestId("launch-wizard"))
   expect(await screen.findByTestId("start-session-wizard")).toBeInTheDocument()
 })
 
 test("Closing the wizard should stop rendering it", async () => {
   // Launch Wizard
-  const component = render(<BrowserRouter><PlayCard /></BrowserRouter>)
+  const { component } = render(<PlayCard />)
   fireEvent.click(component.getByTestId("launch-wizard"))
   expect(await component.findByTestId("start-session-wizard")).toBeInTheDocument()
 
@@ -53,24 +50,25 @@ test("Closing the wizard should stop rendering it", async () => {
   fireEvent.click(await screen.findByText("Yes"))
 
   // Should stop rendering wizard
-  expect(await component.queryByTestId("start-session-wizard")).not.toBeInTheDocument()
+  expect(component.queryByTestId("start-session-wizard")).not.toBeInTheDocument()
 })
 
 test("Should render the start last play session with the correct title if the store is empty", () => {
   store.dispatch(clearLastPlayPreset())
-  const component = render(<PlayCard />)
+  const { component } = render(<PlayCard />)
   expect(component.getByTitle("You've not played anything recently.")).toBeInTheDocument()
 })
 
-test("Should render the start last learn session with the correct title if the store is empty", () => {
-  store.dispatch(clearLastLearnPreset())
-  const component = render(<PlayCard />)
+test("Should render the start last learn session with the correct title if there is no learn preset in context", () => {
+  const { component } = render(<PlayCard />)
   expect(component.getByTitle("You've not practiced anything recently.")).toBeInTheDocument()
 })
 
 test("Should render the launch preset dialog with the last play preset if one is present in the store", async () => {
-  store.dispatch(setLastPlayPreset(playPreset))
-  const component = render(<BrowserRouter><PlayCard /></BrowserRouter>)
+  const { component } = render(
+   <PlayCard />,
+    { sessionSettings: { lastPlayPreset: playPreset }}
+  )
 
   fireEvent.click(component.getByTitle("Test Play"))
 
@@ -80,8 +78,10 @@ test("Should render the launch preset dialog with the last play preset if one is
 
 test("Should render the launch preset dialog with the last learn preset if one is present in the store", async () => {
   // Start with a learn session already in the redux store
-  store.dispatch(setLastLearnPreset(learnPreset))
-  const component = render(<BrowserRouter><PlayCard /></BrowserRouter>)
+  const { component } = render(
+    <PlayCard />,
+    { sessionSettings: { lastLearnPreset: learnPreset } }
+  )
 
   // Click the last learn session button
   fireEvent.click(component.getByTitle("Test Learn"))
@@ -97,14 +97,14 @@ test("Should render the launch preset dialog with the last learn preset if one i
 
 test("Clicking the start last play session button when there are no setting should not launch the modal", async () => {
   store.dispatch(clearLastPlayPreset())
-  const component = render(<PlayCard />)
+  const { component } = render(<PlayCard />)
   fireEvent.click(component.getByTitle("You've not played anything recently."))
   expect(await screen.queryByTestId("launch-preset-confirmation")).not.toBeInTheDocument()
 })
 
 test("Clicking the start last learn session button when there are no setting should not launch the modal", async () => {
   store.dispatch(clearLastLearnPreset())
-  const component = render(<PlayCard />)
+  const { component } = render(<PlayCard />)
   fireEvent.click(component.getByTitle("You've not practiced anything recently."))
   expect(await screen.queryByTestId("launch-preset-confirmation")).not.toBeInTheDocument()
 })

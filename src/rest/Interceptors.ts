@@ -44,7 +44,7 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
   if (config && config.url === refreshEndpoint && error.response && error.response.status !== 200) {
     const username = store.getState().user.user.username
     store.dispatch(clearUser())
-    window.location.href = `/login?session-expired=true&username=${username}`
+    window.location.href = `${import.meta.env.VITE_BASE_PATH}/login?session-expired=true&username=${username}`
   }
 
   if (config.url !== "/user/login" && error.response) {

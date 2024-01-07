@@ -23,6 +23,7 @@ import NotFoundPage from "components/pages/NotFoundPage";
 import ProtectedRoute from "components/layout/ProtectedRoute";
 import ProfilePage from "components/pages/ProfilePage";
 import NavigationWrapper from "components/layout/NavigationWrapper";
+import SessionSettingsProvider from "context/SessionSettingsContext";
 
 interface LearnJapaneseProps {
   store: EnhancedStore
@@ -109,7 +110,9 @@ export const router = createBrowserRouter(routerConfig, {
 const LearnJapanese = ({ store }: LearnJapaneseProps) => {
   return (
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <SessionSettingsProvider>
+        <RouterProvider router={router} />
+      </SessionSettingsProvider>
     </Provider>
   )
 }

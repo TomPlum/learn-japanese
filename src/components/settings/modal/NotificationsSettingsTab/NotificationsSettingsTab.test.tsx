@@ -22,7 +22,7 @@ test("Should render the streak notifications toggle", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
   store.dispatch(setUser(testUser))
   store.dispatch(setPreference({ preference: Preference.STREAK_NOTIFICATIONS, value: true }))
-  const component = render(<NotificationSettingsTab />)
+  const { component } = render(<NotificationSettingsTab />)
 
   // It should default to the truthy text
   const notificationsToggle = component.getByTestId("streak-notifications-toggle")
@@ -46,7 +46,7 @@ test("Should render the mistakes reminder toggle", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
   store.dispatch(setUser(testUser))
   store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }))
-  const component = render(<NotificationSettingsTab />)
+  const { component } = render(<NotificationSettingsTab />)
 
   // It should default to the truthy text
   const mistakesToggle = component.getByTestId("mistakes-reminders-toggle")

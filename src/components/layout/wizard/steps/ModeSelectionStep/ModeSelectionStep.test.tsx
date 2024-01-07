@@ -10,7 +10,7 @@ const onSelectHandler = vi.fn()
 let props: ModeSelectionStepProps
 
 const setup = () => {
-  const component = render(<ModeSelectionStep {...props} />)
+  const { component } = render(<ModeSelectionStep {...props} />)
   return {
     play: component.getByText("Play").parentElement,
     learn: component.getByText("Learn").parentElement,

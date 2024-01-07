@@ -1,32 +1,36 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true
-  },
+  root: true,
+  env: { browser: true, es2020: true },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/jsx-runtime"
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended-type-checked',
+    'plugin:@typescript-eslint/stylistic-type-checked',
+    'plugin:react-hooks/recommended',
+    'plugin:react/recommended'
   ],
-  overrides: [],
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    ecmaFeatures: {
-      jsx: true
-    }
-  },
-  plugins: ["react", "@typescript-eslint"],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'backend/**'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['react-refresh'],
   rules: {
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
+    'semi': ['error', 'never'],
+    "react/react-in-jsx-scope": "off",
+    "object-curly-spacing": ['error', 'always'],
+    "quote-props": ['error', 'as-needed'],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "indent": ['warn', 2, { "SwitchCase": 1 }],
+    "@typescript-eslint/no-misused-promises": ["error", {
+      "checksVoidReturn": false
+    }]
   },
-  settings: {
-    react: {
-      version: "detect"
-    }
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
   }
 }

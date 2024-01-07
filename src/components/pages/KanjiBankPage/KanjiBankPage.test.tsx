@@ -61,7 +61,7 @@ const person = new Kanji(
 )
 
 const setup = () => {
-  const component = render(<KanjiBankPage />)
+  const { component } = render(<KanjiBankPage />)
   return {
     search: component.getByPlaceholderText("search"),
     pageSizeSelector: component.getByTestId("page-size-selector"),

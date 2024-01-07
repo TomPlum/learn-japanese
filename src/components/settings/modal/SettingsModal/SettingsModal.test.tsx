@@ -25,7 +25,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<SettingsModal {...props} />)
+  const { component } = render(<SettingsModal {...props} />)
   return {
     general: component.getByTitle("General"),
     learn: component.getByTitle("Learn"),

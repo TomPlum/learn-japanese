@@ -1,21 +1,22 @@
-import { fireEvent, screen } from "@testing-library/react"
-import LaunchPresetConfirmationModal, {
-  LaunchPresetConfirmationModalProps
-} from "../../../components/settings/LaunchPresetConfirmationModal"
+import { fireEvent, screen } from "@testing-library/react";
+import LaunchPresetConfirmationModal from "../../../components/settings/LaunchPresetConfirmationModal"
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
-import { createBrowserHistory } from "history";
-import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
-import { store } from "../../../store"
-import { clearGameSettings } from "../../../slices/GameSettingsSlice"
-import { clearDataSettings } from "../../../slices/DataSettingsSlice"
 import PresetBuilder from "../../../domain/session/PresetBuilder"
-import { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings"
+import KanjiSettings, { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings"
 import { render } from "__test-utils__"
 import { localStorageMock } from "../../../setupTests"
-import { History } from "@remix-run/router";
+import { SessionSettingsBag } from "context/SessionSettingsContext";
+import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
+import { LaunchPresetConfirmationModalProps } from "components/settings/LaunchPresetConfirmationModal/types.ts"
+import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings.ts";
+import QuestionType from "../../../domain/game/QuestionType.ts";
+import LearnableField from "../../../domain/learn/LearnableField.ts";
+import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings.ts";
+import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings.ts";
+import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings.ts";
+import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade.ts";
 
-const history = createBrowserHistory() as never as History
 const onDismissHandler = vi.fn()
 
 const playPreset = new PresetBuilder()
@@ -41,16 +42,12 @@ const learnPreset = new PresetBuilder()
 let props: LaunchPresetConfirmationModalProps
 
 const setup = () => {
-  const component = render(
-    <HistoryRouter history={history}>
-      <LaunchPresetConfirmationModal {...props} />
-    </HistoryRouter>
-  )
+  const response = render(<LaunchPresetConfirmationModal {...props} />)
 
   return {
-    start: component.getByText("Start"),
-    close: component.getByTitle("Close"),
-    ...component
+    start: response.component.getByText("Start"),
+    close: response.component.getByTitle("Close"),
+    ...response
   }
 }
 
@@ -59,11 +56,6 @@ beforeEach(() => {
     preset: playPreset,
     onDismiss: onDismissHandler
   }
-})
-
-afterEach(() => {
-  store.dispatch(clearGameSettings())
-  store.dispatch(clearDataSettings())
 })
 
 test("It should render the preset display name", () => {
@@ -89,51 +81,41 @@ test("It should call the onDismiss event handler when clicking the close button"
   expect(onDismissHandler).toHaveBeenCalled()
 })
 
-test("It should route to the play page and set the game and data settings in the redux store when starting", () => {
-  // The Redux store should start empty
-  expect(store.getState().gameSettings.settings).toBeUndefined()
-  expect(store.getState().dataSettings.settings).toBeUndefined()
-
-  const { start } = setup()
+test("It should route to the play page and set the game and data settings in context when starting", async () => {
+  const { history, onSessionSettingsContextValueChange } = render(
+    <LaunchPresetConfirmationModal {...props} />
+  )
 
   // Start the session with the preset config
-  fireEvent.click(start)
+  fireEvent.click(screen.getByTestId('launch-preset-start'))
 
-  // Starting the game should set the game and data settings in the Redux store
-  expect(store.getState().gameSettings.settings).toStrictEqual({
-    hints: {
-      enabled: true,
-      quantity: 0,
-      unlimited: false
-    },
-    lives: {
-      enabled: true,
-      quantity: 5
-    },
-    question: {
-      answerField: "learnable.field.romaji.name",
-      answerFilter: -1,
-      cards: 1,
-      quantity: 1,
-      questionField: "learnable.field.kana.name",
-      score: false,
-      type: "text"
-    },
-    time: {
-      countdown: false,
-      secondsPerQuestion: 0,
-      timed: false
-    }
-  })
-  expect(store.getState().dataSettings.settings).toStrictEqual({
-    grades: [1, 2, 3, 4, 5, 6, 8],
-    quantity: 25,
-    tags: [],
-    topic: "Jōyō Kanji"
-  })
+  // Starting the game should set the game and data settings in context
+  const sessionSettings = getValueLastCalledWith<SessionSettingsBag>(onSessionSettingsContextValueChange)
+
+  expect(sessionSettings.gameSettings).toStrictEqual(new GameSettingsBuilder()
+    .withQuestionSettings(
+      new QuestionSettingsBuilder()
+        .withType(QuestionType.TEXT)
+        .withFields(LearnableField.KANA, LearnableField.ROMAJI)
+        .withCardQuantity(1)
+        .withScoreTracking(false)
+        .build()
+    )
+    .withHintSettings(new HintSettingsBuilder().isEnabled().withQuantity(0).build())
+    .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(5).build())
+    .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(false).build())
+    .build()
+  )
+
+  expect(sessionSettings.dataSettings).toStrictEqual(new KanjiSettings(
+    [KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR, KyoikuGrade.FIVE, KyoikuGrade.SIX, KyoikuGrade.EIGHT],
+    [],
+    25
+  ))
 
   // It should also set the session settings with the preset
-  expect(store.getState().sessionSettings.lastPlaySession).toStrictEqual({
+  const lastPlaySession = getValueLastCalledWith<SessionSettingsBag>(onSessionSettingsContextValueChange).lastPlaySession
+  expect(lastPlaySession).toStrictEqual({
     colour: "#ffffff",
     data: {
       grades: [1, 2, 3, 4, 5, 6, 8],
@@ -180,26 +162,23 @@ test("It should route to the play page and set the game and data settings in the
 test("It should route to the learn page and set data settings in the redux store when starting", () => {
   props.preset = learnPreset
 
-  // The Redux store should start empty
-  expect(store.getState().gameSettings.settings).toBeUndefined()
-  expect(store.getState().dataSettings.settings).toBeUndefined()
-
-  const { start } = setup()
+  const { start, history, onSessionSettingsContextValueChange } = setup()
 
   // Start the session with the preset config
   fireEvent.click(start)
 
-  // Starting the game should set the data settings in the Redux store
-  expect(store.getState().gameSettings.settings).toBeUndefined()
-  expect(store.getState().dataSettings.settings).toStrictEqual({
-    grades: [1, 2, 3, 4, 5, 6, 8],
-    quantity: 25,
-    tags: [],
-    topic: "Jōyō Kanji"
-  })
+  // Starting the game should set the data settings in context
+  const sessionSettings = getValueLastCalledWith<SessionSettingsBag>(onSessionSettingsContextValueChange)
+
+  expect(sessionSettings.gameSettings).toBeUndefined()
+  expect(sessionSettings.dataSettings).toStrictEqual(new KanjiSettings(
+    [KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR, KyoikuGrade.FIVE, KyoikuGrade.SIX, KyoikuGrade.EIGHT],
+    [],
+    25
+  ))
 
   // It should also set the session settings for the learn preset
-  expect(store.getState().sessionSettings.lastLearnSession).toStrictEqual({
+  expect(sessionSettings.lastLearnSession).toStrictEqual({
     colour: "#fdb40e",
     data: {
       grades: [1, 2, 3, 4, 5, 6, 8],

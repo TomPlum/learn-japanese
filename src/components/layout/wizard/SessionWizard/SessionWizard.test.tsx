@@ -2,12 +2,9 @@ import { fireEvent, screen, waitFor } from "@testing-library/react"
 import SessionWizard  from "./SessionWizard"
 import userEvent from "@testing-library/user-event"
 import { store } from "../../../../store"
-import { createMemoryHistory } from "history"
-import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
-import { History } from "@remix-run/router";
 import { clearGameSettings } from "../../../../slices/GameSettingsSlice"
 import { clearDataSettings } from "../../../../slices/DataSettingsSlice"
-import { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings"
+import KanjiSettings, { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings"
 import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings"
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons"
 import { QuestionSettingsBuilder } from "../../../../domain/session/settings/game/QuestionSettings"
@@ -17,6 +14,10 @@ import { HintSettingsBuilder } from "../../../../domain/session/settings/game/Hi
 import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings"
 import PresetBuilder from "../../../../domain/session/PresetBuilder"
 import { render } from "__test-utils__"
+import { getValueLastCalledWith } from "__test-utils__/Queries";
+import { SessionSettingsBag } from "context/SessionSettingsContext";
+import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade.ts";
+import { LifeSettingsBuilder } from "../../../../domain/session/settings/game/LifeSettings.ts";
 
 const mockGetAllPresets = vi.fn()
 const mockGetDefaultPresets = vi.fn()
@@ -30,7 +31,6 @@ vi.mock("service/PresetService", () => ({
 }))
 
 const onCloseHandler = vi.fn()
-const history = createMemoryHistory() as never as History
 
 const playPreset = new PresetBuilder()
   .withID(1)
@@ -86,16 +86,12 @@ const playKanjiPreset = new PresetBuilder()
   .build()
 
 const setup = () => {
-  const component = render(
-    <HistoryRouter history={history}>
-      <SessionWizard onClose={onCloseHandler} />
-    </HistoryRouter>
-  )
+  const response = render(<SessionWizard onClose={onCloseHandler} />)
 
   return {
-    next: component.getByText("Next"),
-    close: component.getByTitle("Close"),
-    ...component
+    next: response.component.getByText("Next"),
+    close: response.component.getByTitle("Close"),
+    ...response
   }
 }
 
@@ -210,11 +206,7 @@ test("Clicking the back button in a normal scenario should go back a single step
 })
 
 test("Clicking Start in the confirmation step for custom play should set the selected settings in the store", async () => {
-  // The Redux store should start empty
-  expect(store.getState().gameSettings.settings).toBeUndefined()
-  expect(store.getState().dataSettings.settings).toBeUndefined()
-
-  const { next } = setup()
+  const { next, history, onSessionSettingsContextValueChange } = setup()
 
   // Select 'Play' mode
   fireEvent.click(screen.getByText("Play"))
@@ -252,51 +244,36 @@ test("Clicking Start in the confirmation step for custom play should set the sel
   fireEvent.change(screen.getByPlaceholderText("Quantity"), { target: { value: 50 } })
   fireEvent.click(next)
 
-  // Starting the game should set the game and data settings in the Redux store
+  // Starting the game should set the game and data settings in context
   fireEvent.click(screen.getByText("Start"))
-  expect(store.getState().gameSettings.settings).toStrictEqual({
-    hints: {
-      enabled: false,
-      quantity: 3,
-      unlimited: false
-    },
-    lives: {
-      enabled: true,
-      quantity: 0
-    },
-    question: {
-      answerField: "learnable.field.meaning.name",
-      answerFilter: -1,
-      cards: 6,
-      quantity: 1,
-      questionField: "learnable.field.kanji.name",
-      score: true,
-      type: "choice"
-    },
-    time: {
-      countdown: true,
-      secondsPerQuestion: 10,
-      timed: false
-    }
-  })
-  expect(store.getState().dataSettings.settings).toStrictEqual({
-    grades: [1],
-    quantity: 50,
-    tags: [],
-    topic: "Jōyō Kanji"
-  })
+  const sessionContext = getValueLastCalledWith<SessionSettingsBag>(onSessionSettingsContextValueChange)
+
+  expect(sessionContext.gameSettings).toStrictEqual(new GameSettingsBuilder()
+    .withQuestionSettings(
+      new QuestionSettingsBuilder()
+        .withType(QuestionType.CHOICE)
+        .withFields(LearnableField.KANJI, LearnableField.MEANING)
+        .withCardQuantity(6)
+        .withQuantity(1)
+        .withScoreTracking(true)
+        .build()
+    )
+    .withHintSettings(new HintSettingsBuilder().isEnabled(false).withQuantity(3).build())
+    .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(0).build())
+    .withTimeSettings(new TimeSettingsBuilder().isTimed(false).isCountDown(true).withSecondsPerQuestion(10).build())
+    .build()
+  )
+
+  expect(sessionContext.dataSettings).toStrictEqual(new KanjiSettings([KyoikuGrade.ONE], [], 50))
 
   // Should re-direct to the /play page
   expect(history.location.pathname).toBe("/play")
 })
 
 test("Clicking Start in the confirmation step for preset play should set the selected settings in the store", async () => {
-  // The Redux store should start empty
-  expect(store.getState().gameSettings.settings).toBeUndefined()
-  expect(store.getState().dataSettings.settings).toBeUndefined()
   mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playKanjiPreset] })
 
-  const { next } = setup()
+  const { next, history, onSessionSettingsContextValueChange } = setup()
 
   // Select 'Play' mode
   fireEvent.click(screen.getByText("Play"))
@@ -313,50 +290,39 @@ test("Clicking Start in the confirmation step for preset play should set the sel
   // Wait for presets to load
   expect(await screen.findByText("Kanji")).toBeInTheDocument()
 
-  // Starting the game should set the game and data settings in the Redux store
+  // Starting the game should set the game and data settings in context
   fireEvent.click(screen.getByText("Start"))
-  expect(store.getState().gameSettings.settings).toStrictEqual({
-    hints: {
-      enabled: false,
-      quantity: 0,
-      unlimited: false
-    },
-    lives: {
-      enabled: true,
-      quantity: 5
-    },
-    question: {
-      answerField: "learnable.field.kanji.name",
-      answerFilter: -1,
-      cards: 4,
-      quantity: 1,
-      questionField: "learnable.field.meaning.name",
-      score: true,
-      type: "choice"
-    },
-    time: {
-      countdown: false,
-      secondsPerQuestion: 0,
-      timed: true
-    }
-  })
-  expect(store.getState().dataSettings.settings).toStrictEqual({
-    grades: [1, 2, 3, 4, 5, 6, 8],
-    quantity: 25,
-    tags: [],
-    topic: "Jōyō Kanji"
-  })
+
+  const sessionContext = getValueLastCalledWith<SessionSettingsBag>(onSessionSettingsContextValueChange)
+
+  expect(sessionContext.gameSettings).toStrictEqual(new GameSettingsBuilder()
+    .withQuestionSettings(
+      new QuestionSettingsBuilder()
+        .withType(QuestionType.CHOICE)
+        .withFields(LearnableField.MEANING, LearnableField.KANJI)
+        .withCardQuantity(4)
+        .withQuantity(1)
+        .withScoreTracking(true)
+        .build()
+    )
+    .withHintSettings(new HintSettingsBuilder().isEnabled(false).withQuantity(0).build())
+    .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(5).build())
+    .withTimeSettings(new TimeSettingsBuilder().isTimed(true).isCountDown(false).withSecondsPerQuestion(0).build())
+    .build()
+  )
+
+  expect(sessionContext.dataSettings).toStrictEqual(new KanjiSettings(
+    [KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR, KyoikuGrade.FIVE, KyoikuGrade.SIX, KyoikuGrade.EIGHT],
+    [],
+    25
+  ))
 
   // Should re-direct to the /play page
   expect(history.location.pathname).toBe("/play")
 })
 
-test("Clicking Start in the confirmation step for custom learn should set the selected settings in the store", () => {
-  // The Redux store should start empty
-  expect(store.getState().gameSettings.settings).toBeUndefined()
-  expect(store.getState().dataSettings.settings).toBeUndefined()
-
-  const { next } = setup()
+test("Clicking Start in the confirmation step for custom learn should set the selected settings in context", () => {
+  const { next, history, onSessionSettingsContextValueChange } = setup()
 
   // Select 'Learn' mode
   fireEvent.click(screen.getByText("Learn"))
@@ -375,15 +341,12 @@ test("Clicking Start in the confirmation step for custom learn should set the se
   fireEvent.change(screen.getByPlaceholderText("Quantity"), { target: { value: 25 } })
   fireEvent.click(next)
 
-  // Starting the game should set the data settings in the Redux store
+  // Starting the game should set the data settings in context
   fireEvent.click(screen.getByText("Start"))
-  expect(store.getState().gameSettings.settings).toBeUndefined()
-  expect(store.getState().dataSettings.settings).toStrictEqual({
-    grades: [2],
-    quantity: 25,
-    tags: [],
-    topic: "Jōyō Kanji"
-  })
+
+  const sessionContext = getValueLastCalledWith<SessionSettingsBag>(onSessionSettingsContextValueChange)
+  expect(sessionContext.gameSettings).toBeUndefined()
+  expect(sessionContext.dataSettings).toStrictEqual(new KanjiSettings([KyoikuGrade.TWO], [], 25))
 
   // Should re-direct to the /learn page
   expect(history.location.pathname).toBe("/learn")

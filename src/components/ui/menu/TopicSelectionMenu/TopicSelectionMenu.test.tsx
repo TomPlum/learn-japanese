@@ -14,20 +14,20 @@ beforeEach(() => {
 
 //TODO: It says the dropdown is not visible but it is not...
 test.skip("Should render the list group when the viewport is sm or greater", () => {
-  const component = render(<TopicSelectionMenu onSelect={onSelectHandler} />)
+  const { component }  = render(<TopicSelectionMenu onSelect={onSelectHandler} />)
   expect(component.getByTestId("list-group-header")).toBeVisible()
   expect(component.getByTestId("list-group")).toBeVisible()
   expect(component.getByTestId("dropdown")).not.toBeVisible()
 })
 
 test("Selecting an option should call the onSelect handler", () => {
-  const component = render(<TopicSelectionMenu onSelect={onSelectHandler} />)
+  const { component }  = render(<TopicSelectionMenu onSelect={onSelectHandler} />)
   fireEvent.click(component.queryAllByText("Hiragana & Katakana")[1])
   expect(onSelectHandler).toHaveBeenCalledWith(Topic.KANA)
 })
 
 test("Clicking a heading should not call the onSelect event handler", () => {
-  const component = render(<TopicSelectionMenu onSelect={onSelectHandler} />)
+  const { component }  = render(<TopicSelectionMenu onSelect={onSelectHandler} />)
   fireEvent.click(component.getByText("Select Game Mode"))
   expect(onSelectHandler).not.toHaveBeenCalled()
 })

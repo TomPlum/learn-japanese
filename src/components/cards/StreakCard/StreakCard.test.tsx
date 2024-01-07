@@ -13,7 +13,7 @@ test("Should render the cards in the correct order when clicking right", async (
   mockGetActivityStreak.mockResolvedValueOnce(481)
 
   // Default Custom Date
-  const component = render(<StreakCard />)
+  const { component } = render(<StreakCard />)
   expect(await component.findByText("Day 481")).toBeInTheDocument()
 
   // Streak
@@ -33,7 +33,7 @@ test("Should render the cards in the correct order when clicking left", async ()
   mockGetActivityStreak.mockResolvedValueOnce(235)
 
   // Default Custom Date
-  const component = render(<StreakCard />)
+  const { component } = render(<StreakCard />)
   expect(await component.findByText("Day 235")).toBeInTheDocument()
 
   // Account Creation

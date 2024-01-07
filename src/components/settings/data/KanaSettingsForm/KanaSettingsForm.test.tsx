@@ -22,7 +22,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<KanaSettingsForm {...props} />)
+  const { component }  = render(<KanaSettingsForm {...props} />)
   return {
     hiragana: component.getByTestId("hiragana"),
     katakana: component.getByTestId("katakana"),

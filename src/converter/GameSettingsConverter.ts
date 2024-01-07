@@ -1,5 +1,4 @@
 import GameSettings, { GameSettingsBuilder } from "../domain/session/settings/game/GameSettings"
-import { GameSettingState } from "../slices/GameSettingsSlice"
 import { LifeSettingsBuilder } from "../domain/session/settings/game/LifeSettings"
 import { HintSettingsBuilder } from "../domain/session/settings/game/HintSettings"
 import { TimeSettingsBuilder } from "../domain/session/settings/game/TimeSettings"
@@ -7,6 +6,7 @@ import { QuestionSettingsBuilder } from "../domain/session/settings/game/Questio
 import LearnableField from "../domain/learn/LearnableField"
 import QuestionType from "../domain/game/QuestionType"
 import { GameConfigRequest, GameConfigResponse } from "../repository/PresetRepository"
+import { GameSettingState } from "context/SessionSettingsContext";
 
 class GameSettingsConverter {
   public convert(settings: GameConfigResponse): GameSettings {

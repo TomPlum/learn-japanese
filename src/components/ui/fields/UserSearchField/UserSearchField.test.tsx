@@ -53,7 +53,7 @@ test("Should show no results when none are returned", async () => {
   mockGetPublicUsers.mockResolvedValueOnce([])
   const component = render(<UserSearchField disabled={false} onSelect={onSelectHandler} />)
 
-  userEvent.type(component.getByTestId("user-search-field"), "Tom")
+  await userEvent.type(component.getByTestId("user-search-field"), "Tom")
 
   await waitFor(() => expect(component.getByText("No results.")).toBeInTheDocument())
 })

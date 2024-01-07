@@ -7,9 +7,9 @@ import {
 } from "../repository/PresetRepository"
 import GameSettingsConverter from "./GameSettingsConverter"
 import DataSettingsConverter from "./DataSettingsConverter"
-import { SessionSettingsState } from "../slices/SessionSettingsSlice"
 import LearnSettings from "../domain/session/settings/LearnSettings"
 import PresetBuilder from "../domain/session/PresetBuilder"
+import { SessionSettingsState } from "context/SessionSettingsContext";
 
 class PresetConverter {
   private readonly gameSettingsConverter = new GameSettingsConverter()

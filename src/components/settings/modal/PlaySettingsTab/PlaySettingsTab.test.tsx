@@ -3,7 +3,7 @@ import { fireEvent, screen } from "@testing-library/react"
 import { render } from "__test-utils__"
 
 test("Should render the high scores preference dropdown", async () => {
-  const component = render(<PlaySettingsTab />)
+  const { component } = render(<PlaySettingsTab />)
 
   fireEvent.click(component.getByTestId("play-settings-high-score-selector"))
 

@@ -31,7 +31,7 @@ beforeEach(() => {
 const onCloseHandler = vi.fn()
 
 const setup = () => {
-  const component = render(<GameResultScreen onClose={onCloseHandler} result={result} />)
+  const { component } = render(<GameResultScreen onClose={onCloseHandler} result={result} />)
   return {
     quit: component.getByText("Finish"),
     mistakes: component.getByText("View Mistakes"),

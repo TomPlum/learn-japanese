@@ -10,7 +10,7 @@ const onChangeHandler = vi.fn()
 const ref = React.createRef<SettingsFormHandle>()
 
 const setup = () => {
-  const component = render(<HintSettingsForm onChange={onChangeHandler} ref={ref} />)
+  const { component } = render(<HintSettingsForm onChange={onChangeHandler} ref={ref} />)
   return {
     enable: component.getByTestId("enable-hints"),
     quantity: component.getByTestId("hint-quantity-slider"),

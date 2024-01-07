@@ -3,7 +3,7 @@ import LearnButton  from "./LearnButton"
 import { render } from "__test-utils__"
 
 const setup = () => {
-  const component = render(<LearnButton />)
+  const { component } = render(<LearnButton />)
   return {
     button: component.getByTestId("learning-resources-button"),
     ...component

@@ -72,7 +72,7 @@ const customPreset = new PresetBuilder()
 let props: PresetSelectionStepProps
 
 const setup = () => {
-  const component = render(<PresetSelectionStep {...props} />)
+  const { component } = render(<PresetSelectionStep {...props} />)
   return {
     topic: component.getByTestId("wizard-topic-selector"),
     ...component

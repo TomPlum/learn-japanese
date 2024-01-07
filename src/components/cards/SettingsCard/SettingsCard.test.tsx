@@ -6,7 +6,7 @@ import { fireEvent, screen } from "@testing-library/react"
 import { render } from "__test-utils__"
 
 const setup = () => {
-  const component = render(<SettingsCard />)
+  const { component } = render(<SettingsCard />)
   return {
     general: component.getByText("General Settings"),
     learn: component.getByText("Learn Settings"),

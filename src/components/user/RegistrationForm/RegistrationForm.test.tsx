@@ -25,7 +25,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<RegistrationForm onSuccess={onSuccessHandler} />)
+  const { component } = render(<RegistrationForm onSuccess={onSuccessHandler} />)
   return {
     email: component.getByPlaceholderText("Enter email"),
     username: component.getByPlaceholderText("Username"),

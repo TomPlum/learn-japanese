@@ -46,7 +46,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(
+  const { component }  = render(
     <NavigationButton {...buttonProps}>
       <NavigationButton.Item {...itemProps}>My Link</NavigationButton.Item>
 

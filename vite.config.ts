@@ -14,6 +14,7 @@ export default defineConfig({
     alias: {
       "__test-utils__": "/src/__test-utils__",
       components: "/src/components",
+      context: "/src/context",
       converter: "/src/converter",
       data: "/src/data",
       domain: "/src/domain",

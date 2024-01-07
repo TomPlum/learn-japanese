@@ -23,7 +23,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<KanjiSettingsForm {...props} />)
+  const { component }  = render(<KanjiSettingsForm {...props} />)
   return {
     grade1: component.getByText("Grade 1"),
     grade2: component.getByText("Grade 2"),

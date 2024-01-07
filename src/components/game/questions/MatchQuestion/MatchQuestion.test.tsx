@@ -22,7 +22,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<MatchQuestion {...props} ref={ref} />)
+  const { component } = render(<MatchQuestion {...props} ref={ref} />)
   return {
     questionOne: component.getByText("pa"),
     questionTwo: component.getByText("yo"),

@@ -6,7 +6,7 @@ import { render } from "__test-utils__"
 const onChangeHandler = vi.fn()
 
 const setup = () => {
-  const component = render(<TimeSettingsForm onChange={onChangeHandler} />)
+  const { component } = render(<TimeSettingsForm onChange={onChangeHandler} />)
   return {
     timed: component.getByTestId("Timed"),
     countdown: component.getByTestId("Countdown"),

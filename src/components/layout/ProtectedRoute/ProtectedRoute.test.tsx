@@ -1,10 +1,10 @@
-import { screen } from "@testing-library/react"
+import { screen, render } from "@testing-library/react"
 import ProtectedRoute from "./ProtectedRoute"
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { render } from "__test-utils__"
 import { store } from "../../../store.ts"
 import { clearUser, setUser } from "../../../slices/UserSlice.ts";
 import { testUser } from "../../../setupTests.ts"
+import { Provider } from "react-redux";
 
 test("Should redirect to the main page if the user is not authenticated", () => {
   store.dispatch(clearUser())
@@ -20,7 +20,11 @@ test("Should redirect to the main page if the user is not authenticated", () => 
     }
   ], { initialEntries: ['/'] })
 
-  render(<RouterProvider router={router} />)
+  render(
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  )
 
   expect(screen.getByTestId('home')).toBeInTheDocument()
 })

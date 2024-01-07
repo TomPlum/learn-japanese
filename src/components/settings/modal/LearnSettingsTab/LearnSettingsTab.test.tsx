@@ -3,7 +3,7 @@ import { fireEvent, screen } from "@testing-library/react"
 import { render } from "__test-utils__"
 
 test("Should render the flash cards quantity dropdown", async () => {
-  const component = render(<LearnSettingsTab />)
+  const { component } = render(<LearnSettingsTab />)
 
   fireEvent.click(component.getByTestId("learn-settings-cards-selector"))
 
@@ -16,7 +16,7 @@ test("Should render the flash cards quantity dropdown", async () => {
 })
 
 test("Should render the romaji settings dropdown", async () => {
-  const component = render(<LearnSettingsTab />)
+  const { component } = render(<LearnSettingsTab />)
 
   fireEvent.click(component.getByTestId("learn-settings-romaji-selector"))
 

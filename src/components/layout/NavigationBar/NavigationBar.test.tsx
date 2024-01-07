@@ -1,32 +1,25 @@
 import { fireEvent, screen } from "@testing-library/react"
 import NavigationBar, { NavigationBarProps }  from "./NavigationBar"
-import { createMemoryHistory } from "history"
 import { AppMode } from "../../../domain/AppMode"
 import { store } from "../../../store"
 import { setApplicationMode } from "../../../slices/ModeSlice"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import { render } from "__test-utils__"
-import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
-import { History } from "@remix-run/router"
 
-const history = createMemoryHistory() as never as History
 const onLaunchLoginModalHandler = vi.fn()
 
 let props: NavigationBarProps
 
 const setup = () => {
-  const component = render(
-      <HistoryRouter history={history}>
-        <NavigationBar {...props} />
-      </HistoryRouter>
-  )
+  const { component, history } = render(<NavigationBar {...props} />)
 
   return {
     home: component.getByTestId("home-button-nav-link"),
     theme: component.getByTestId("theme-button"),
     font: component.getByTestId("font-selector"),
     login: component.getByTestId("user-button-nav-link"),
+    history,
     ...component
   }
 }
@@ -39,7 +32,7 @@ beforeEach(() => {
 })
 
 test("Clicking the 'Home' button should route the user to the menu", async () => {
-  const { home } = setup()
+  const { home, history } = setup()
   expect(await screen.findByText("Home")).toBeInTheDocument()
   fireEvent.click(home)
   expect(history.location.pathname).toBe("/")

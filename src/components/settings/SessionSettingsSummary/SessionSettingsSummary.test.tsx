@@ -3,7 +3,7 @@ import { KanjiSettingsBuilder } from "../../../domain/session/settings/data/Kanj
 import { SessionSettings } from "../../../domain/session/settings/SessionSettings"
 import LearnableField from "../../../domain/learn/LearnableField"
 import QuestionType from "../../../domain/game/QuestionType"
-import { fireEvent, render, screen } from "@testing-library/react"
+import { fireEvent, screen } from "@testing-library/react"
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings"
 import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings"
 import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings"

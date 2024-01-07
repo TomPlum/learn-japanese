@@ -6,18 +6,15 @@ import { faGamepad, faPlay, faUserGraduate } from "@fortawesome/free-solid-svg-i
 import SessionWizard from "../../layout/wizard/SessionWizard"
 import DashboardCard, { DashboardCardProps } from "../../layout/card/DashboardCard"
 import DashboardCardLink from "../../layout/card/DashboardCardLink"
-import { useSessionSettingsSelector } from "../../../hooks"
 import LaunchPresetConfirmationModal from "../../settings/LaunchPresetConfirmationModal"
 import PresetConverter from "../../../converter/PresetConverter"
 import SessionMode from "../../../domain/session/SessionMode"
-import { SessionSettingsState } from "../../../slices/SessionSettingsSlice"
 import { useTranslation } from "react-i18next"
+import { SessionSettingsState, useSessionSettingsContext } from "context/SessionSettingsContext";
 
 const PlayCard = () => {
-  const sessions = useSessionSettingsSelector((state) => state.sessionSettings)
+  const { lastPlaySession, lastLearnSession } = useSessionSettingsContext()
   const presetConverter = new PresetConverter()
-  const lastPlaySession = sessions.lastPlaySession
-  const lastLearnSession = sessions.lastLearnSession
 
   const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.play" })
   const presetName = useTranslation().t

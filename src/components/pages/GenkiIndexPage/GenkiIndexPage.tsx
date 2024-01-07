@@ -17,7 +17,7 @@ import {
   getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
-  Header, Cell, flexRender, getCoreRowModel, ColumnDef
+  Header, Cell, flexRender, getCoreRowModel, ColumnDef, SortingState
 } from "@tanstack/react-table";
 import { AnimatePresence, motion } from "framer-motion"
 import TablePagination from "../../ui/paging/TablePagination"
@@ -38,6 +38,7 @@ const GenkiIndexPage = () => {
   const service = new GenkiService()
   const originalData = useRef<TableData[]>([])
   const data = useRef<TableData[]>([])
+  const [sorting, setSorting] = useState<SortingState>([])
 
   const columns = useMemo<ColumnDef<TableData>[]>(() => [
       { id: "kana", header: "Kana", accessorKey: "kana" },
@@ -62,7 +63,11 @@ const GenkiIndexPage = () => {
     setGlobalFilter
   } = useReactTable({
     columns: columns,
+    state: {
+      sorting
+    },
     data: useMemo(() => data.current, [data.current]),
+    onSortingChange: setSorting,
     // defaultColumn: [columnHelper.display({ id: 'actions', minSize: 50, maxSize: 300 })],
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: paginationModel(),
@@ -179,7 +184,11 @@ const GenkiIndexPage = () => {
               {getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header: Header<TableData, unknown>) => (
-                    <motion.th key={header.id} onClick={() => header.column.getToggleSortingHandler()}>
+                    <motion.th
+                      key={header.id}
+                      className={styles.header}
+                      onClick={header.column.getToggleSortingHandler}
+                    >
                       <span>
                         {flexRender(
                           header.column.columnDef.header,
