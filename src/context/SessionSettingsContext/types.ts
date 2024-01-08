@@ -4,6 +4,13 @@ import DataSettings from "domain/session/settings/data/DataSettings.ts"
 import LearnSettings from "domain/session/settings/LearnSettings.ts"
 import GameSettings from "domain/session/settings/game/GameSettings.ts"
 
+export interface SessionSettingsContextProviderProps {
+  gameSettings?: GameSettings
+  dataSettings?: DataSettings
+  lastPlayPreset?: PlayMode
+  lastLearnPreset?: LearnMode
+}
+
 export interface SessionSettingsBag {
   preset?: number;
 

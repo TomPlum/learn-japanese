@@ -159,7 +159,7 @@ test("It should route to the play page and set the game and data settings in con
   expect(history.location.pathname).toBe("/play")
 })
 
-test("It should route to the learn page and set data settings in the redux store when starting", () => {
+test("It should route to the learn page and set data settings in the context when starting a learn preset", () => {
   props.preset = learnPreset
 
   const { start, history, onSessionSettingsContextValueChange } = setup()
@@ -167,7 +167,7 @@ test("It should route to the learn page and set data settings in the redux store
   // Start the session with the preset config
   fireEvent.click(start)
 
-  // Starting the game should set the data settings in context
+  // Starting the game should set the data settings in context, but leave game settings undefined
   const sessionSettings = getValueLastCalledWith<SessionSettingsBag>(onSessionSettingsContextValueChange)
 
   expect(sessionSettings.gameSettings).toBeUndefined()

@@ -64,7 +64,7 @@ test("Should render the start last learn session with the correct title if there
   expect(component.getByTitle("You've not practiced anything recently.")).toBeInTheDocument()
 })
 
-test("Should render the launch preset dialog with the last play preset if one is present in the store", async () => {
+test("Should render the launch preset dialog with the last play preset if it is present in local storage", async () => {
   const { component } = render(
    <PlayCard />,
     { sessionSettings: { lastPlayPreset: playPreset }}
@@ -76,7 +76,7 @@ test("Should render the launch preset dialog with the last play preset if one is
   expect(screen.getByText("Test Play")).toBeInTheDocument()
 })
 
-test("Should render the launch preset dialog with the last learn preset if one is present in the store", async () => {
+test("Should render the launch preset dialog with the last learn preset if one is present in local storage", async () => {
   // Start with a learn session already in the redux store
   const { component } = render(
     <PlayCard />,

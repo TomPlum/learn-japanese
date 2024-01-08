@@ -1,5 +1,11 @@
-import { PropsWithChildren, useCallback, useMemo, useState } from "react"
-import { DataSettingsState, GameSettingState, SessionSettingsBag, SessionSettingsState } from "./types.ts"
+import { PropsWithChildren, useCallback, useMemo, useState } from "react";
+import {
+  DataSettingsState,
+  GameSettingState,
+  SessionSettingsBag,
+  SessionSettingsContextProviderProps,
+  SessionSettingsState
+} from "./types.ts";
 import SessionSettingsContext from "context/SessionSettingsContext/SessionSettingsContext.tsx"
 import PlayMode from "domain/session/PlayMode.ts"
 import DataSettingsConverter from "converter/DataSettingsConverter.ts"
@@ -10,42 +16,65 @@ import DataSettings from "domain/session/settings/data/DataSettings.ts"
 import GameSettings from "domain/session/settings/game/GameSettings.ts"
 import { useLocalStorage } from "@uidotdev/usehooks"
 
-const SessionSettingsProvider = ({ children }: PropsWithChildren) => {
+const gameSettingsConverter = new GameSettingsConverter()
+const dataSettingsConverter = new DataSettingsConverter();
+
+const SessionSettingsProvider = ({
+   gameSettings,
+   dataSettings,
+   lastLearnPreset,
+   lastPlayPreset,
+   children
+}: PropsWithChildren<SessionSettingsContextProviderProps>) => {
   const [learnSettings, setLearnSettings] = useState<LearnSettings>()
   const [preset, setPreset] = useLocalStorage<number>("selected-preset-id")
-  const [gameSettings, setGameSettings] = useLocalStorage<GameSettingState| undefined>("game-config")
-  const [dataSettings, setDataSettings] = useLocalStorage<DataSettingsState| undefined>("data-config")
-  const [lastPlaySession, setLastPlaySession] = useLocalStorage<SessionSettingsState | undefined>("last-play-session")
-  const [lastLearnSession, setLastLearnSession] = useLocalStorage<SessionSettingsState| undefined>("last-learn-session")
+
+  const initialGameState = gameSettings ? gameSettingsConverter.serialise(gameSettings) : undefined
+  const [gameState, setGameSettings] = useLocalStorage<GameSettingState | undefined>("game-config", initialGameState)
+
+  const initialDataState = dataSettings ? dataSettingsConverter.serialise(dataSettings) : undefined
+  const [dataState, setDataSettings] = useLocalStorage<DataSettingsState | undefined>("data-config", initialDataState)
 
   const convertPlayModeToSessionState = useCallback((mode: PlayMode) => {
-    setLastPlaySession({
+    return {
       isPreset: true,
       topic: mode.topicName,
       id: mode.id,
       name: mode.displayName,
       icon: mode.icon.toString(),
       colour: mode.colour,
-      game: new GameSettingsConverter().serialise(mode.modeSettings as GameSettings),
-      data: new DataSettingsConverter().serialise(mode.dataSettings)
-    })
-  }, [setLastPlaySession])
+      game: gameSettingsConverter.serialise(mode.modeSettings as GameSettings),
+      data: dataSettingsConverter.serialise(mode.dataSettings)
+    }
+  }, [])
 
-  const convertLearnModeToSessionState = useCallback((mode: LearnMode) => {
-    setLastLearnSession({
+  const convertLearnModeToSessionState = useCallback((mode: LearnMode): SessionSettingsState => {
+    return {
       isPreset: true,
       topic: mode.topicName,
       id: mode.id,
       name: mode.displayName,
       icon: mode.icon.toString(),
       colour: mode.colour,
-      data: new DataSettingsConverter().serialise(mode.dataSettings)
-    })
-  }, [setLastLearnSession])
+      data: dataSettingsConverter.serialise(mode.dataSettings)
+    }
+  }, [])
+
+  const initialLastPlaySession = lastPlayPreset ? convertPlayModeToSessionState(lastPlayPreset) : undefined
+  const [lastPlaySession, setLastPlaySession] = useLocalStorage<SessionSettingsState | undefined>(
+    "last-play-session",
+    initialLastPlaySession
+  )
+
+  const initialLastLearnSession = lastLearnPreset ? convertLearnModeToSessionState(lastLearnPreset) : undefined
+  const [lastLearnSession, setLastLearnSession] = useLocalStorage<SessionSettingsState| undefined>(
+    "last-learn-session",
+    initialLastLearnSession
+  )
 
   const convertGameSettings = useCallback((settings?: GameSettings) => {
     if (settings) {
-      setGameSettings(new GameSettingsConverter().serialise(settings))
+      setGameSettings(gameSettingsConverter.serialise(settings))
     } else {
       setGameSettings(undefined)
     }
@@ -53,7 +82,7 @@ const SessionSettingsProvider = ({ children }: PropsWithChildren) => {
 
   const convertFromDataSettings = useCallback((settings?: DataSettings) => {
     if (settings) {
-      setDataSettings(new DataSettingsConverter().serialise(settings))
+      setDataSettings(dataSettingsConverter.serialise(settings))
     } else {
       setDataSettings(undefined)
     }
@@ -62,14 +91,14 @@ const SessionSettingsProvider = ({ children }: PropsWithChildren) => {
   const values: SessionSettingsBag = useMemo(
     () => ({
       lastLearnSession,
-      setLastLearnSession: convertLearnModeToSessionState,
+      setLastLearnSession: (preset: LearnMode) => setLastLearnSession(convertLearnModeToSessionState(preset)),
       lastPlaySession,
-      setLastPlaySession: convertPlayModeToSessionState,
-      gameSettings: gameSettings ? new GameSettingsConverter().deserialise(gameSettings) : undefined,
+      setLastPlaySession: (preset: PlayMode) => setLastPlaySession(convertPlayModeToSessionState(preset)),
+      gameSettings: gameState ? gameSettingsConverter.deserialise(gameState) : undefined,
       setGameSettings: convertGameSettings,
       learnSettings,
       setLearnSettings,
-      dataSettings: dataSettings ? new DataSettingsConverter().deserialise(dataSettings): undefined,
+      dataSettings: dataState ? dataSettingsConverter.deserialise(dataState): undefined,
       setDataSettings: convertFromDataSettings,
       preset,
       setPreset
@@ -79,11 +108,11 @@ const SessionSettingsProvider = ({ children }: PropsWithChildren) => {
       convertLearnModeToSessionState,
       lastPlaySession,
       convertPlayModeToSessionState,
-      gameSettings,
+      gameState,
       setGameSettings,
       learnSettings,
       setLearnSettings,
-      dataSettings,
+      dataState,
       setDataSettings,
       preset,
       setPreset

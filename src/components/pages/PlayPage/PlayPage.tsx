@@ -21,6 +21,7 @@ const PlayPage = () => {
   const navigate = useNavigate()
 
   const { gameSettings, dataSettings, preset, setGameSettings, setDataSettings } = useSessionSettingsContext()
+  console.log(gameSettings, dataSettings)
 
   useEffect(() => {
     if (!!dataSettings && !!gameSettings) {

@@ -17,43 +17,14 @@ import { Mock } from "vitest";
 
 interface BagInjector {
   onContextValueChange: (value: SessionSettingsBag) => void
-  sessionSettings?: {
-    dataSettings?: DataSettings
-    gameSettings?: GameSettings
-    learnSettings?: LearnSettings
-    lastLearnPreset?: LearnMode
-    lastPlayPreset?: PlayMode
-  }
 }
 
-const SessionSettingsContextInjector = ({ children, sessionSettings, onContextValueChange }: PropsWithChildren<BagInjector>) => {
+const SessionSettingsContextInjector = ({ children, onContextValueChange }: PropsWithChildren<BagInjector>) => {
   const value = useSessionSettingsContext()
-  const { setDataSettings, setLearnSettings, setGameSettings, setLastLearnSession, setLastPlaySession } = value
 
   useEffect(() => {
     onContextValueChange(value)
   }, [value, onContextValueChange]);
-
-  useEffect(() => {
-    setDataSettings(sessionSettings?.dataSettings)
-    setLearnSettings(sessionSettings?.learnSettings)
-    setGameSettings(sessionSettings?.gameSettings)
-
-    if (sessionSettings?.lastLearnPreset) {
-      setLastLearnSession(sessionSettings?.lastLearnPreset)
-    }
-
-    if (sessionSettings?.lastPlayPreset) {
-      setLastPlaySession(sessionSettings?.lastPlayPreset)
-    }
-  }, [
-    sessionSettings,
-    setDataSettings,
-    setLearnSettings,
-    setGameSettings,
-    setLastLearnSession,
-    setLastPlaySession
-  ])
 
   return <>{children}</>
 }
@@ -82,8 +53,13 @@ const render = (component: ReactElement, { url, sessionSettings }: RenderProps =
   const Wrapper = ({ children }: PropsWithChildren) => (
     <HistoryRouter history={history}>
       <I18nextProvider i18n={i18n} defaultNS="translation">
-        <SessionSettingsProvider>
-          <SessionSettingsContextInjector sessionSettings={sessionSettings} onContextValueChange={onSessionSettingsContextValueChange}>
+        <SessionSettingsProvider
+          gameSettings={sessionSettings?.gameSettings}
+          dataSettings={sessionSettings?.dataSettings}
+          lastLearnPreset={sessionSettings?.lastLearnPreset}
+          lastPlayPreset={sessionSettings?.lastPlayPreset}
+        >
+          <SessionSettingsContextInjector onContextValueChange={onSessionSettingsContextValueChange}>
             <Provider store={defaultStore}>
               {children}
             </Provider>
