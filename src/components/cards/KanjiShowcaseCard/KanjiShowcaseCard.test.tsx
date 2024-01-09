@@ -5,8 +5,6 @@ import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
 import { Example } from "../../../domain/kanji/Example"
 import KanjiShowcaseCard  from "./KanjiShowcaseCard"
-import { store } from "../../../store"
-import { setFont } from "../../../slices/FontSlice"
 import { fireEvent, screen } from "@testing-library/react"
 import { render } from "__test-utils__"
 
@@ -69,10 +67,9 @@ test("Should render the kanji character", async () => {
 })
 
 test("Should render the kanji character in the globally selected font", async () => {
-  store.dispatch(setFont("test-font"))
   mockKanjiService.mockResolvedValueOnce({ value: kanji })
 
-  const { component } = render(<KanjiShowcaseCard />)
+  const { component } = render(<KanjiShowcaseCard />, { font: 'test-font' })
 
   expect(await component.findByText("魚")).toHaveStyle({ "font-family": "test-font" })
 })

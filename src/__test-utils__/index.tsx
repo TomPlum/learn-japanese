@@ -14,13 +14,15 @@ import { History } from "@remix-run/router"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { createMemoryHistory } from "history";
 import { Mock } from "vitest";
+import FontProvider, { FontContextBag, useFontContext } from "context/FontContext";
 
-interface BagInjector {
-  onContextValueChange: (value: SessionSettingsBag) => void
+interface ContextListener<Bag> {
+  useContextHook: () => Bag
+  onContextValueChange: (value: Bag) => void
 }
 
-const SessionSettingsContextInjector = ({ children, onContextValueChange }: PropsWithChildren<BagInjector>) => {
-  const value = useSessionSettingsContext()
+const ReactContextListener = <Bag,> ({ children, useContextHook, onContextValueChange }: PropsWithChildren<ContextListener<Bag>>) => {
+  const value = useContextHook()
 
   useEffect(() => {
     onContextValueChange(value)
@@ -31,6 +33,7 @@ const SessionSettingsContextInjector = ({ children, onContextValueChange }: Prop
 
 export interface RenderProps {
   url?: string
+  font?: string
   sessionSettings?: {
     dataSettings?: DataSettings
     gameSettings?: GameSettings
@@ -42,12 +45,15 @@ export interface RenderProps {
 
 export interface RenderResponse {
   onSessionSettingsContextValueChange: Mock
+  onFontContextValueChange: Mock
   history: History
   component: RenderResult
 }
 
-const render = (component: ReactElement, { url, sessionSettings }: RenderProps = {}): RenderResponse => {
-  const onSessionSettingsContextValueChange = vi.fn()
+const render = (component: ReactElement, { url, font, sessionSettings }: RenderProps = {}): RenderResponse => {
+  const onSessionSettingsChange = vi.fn()
+  const onFontChange = vi.fn()
+
   const history = createMemoryHistory({ initialEntries: [url ?? '/'] }) as never as History
 
   const Wrapper = ({ children }: PropsWithChildren) => (
@@ -59,11 +65,15 @@ const render = (component: ReactElement, { url, sessionSettings }: RenderProps =
           lastLearnPreset={sessionSettings?.lastLearnPreset}
           lastPlayPreset={sessionSettings?.lastPlayPreset}
         >
-          <SessionSettingsContextInjector onContextValueChange={onSessionSettingsContextValueChange}>
-            <Provider store={defaultStore}>
-              {children}
-            </Provider>
-          </SessionSettingsContextInjector>
+          <ReactContextListener<SessionSettingsBag> useContextHook={useSessionSettingsContext} onContextValueChange={onSessionSettingsChange}>
+            <FontProvider initialFont={font}>
+              <ReactContextListener<FontContextBag> useContextHook={useFontContext} onContextValueChange={onFontChange}>
+                <Provider store={defaultStore}>
+                  {children}
+                </Provider>
+              </ReactContextListener>
+            </FontProvider>
+          </ReactContextListener>
         </SessionSettingsProvider>
       </I18nextProvider>
     </HistoryRouter>
@@ -71,7 +81,8 @@ const render = (component: ReactElement, { url, sessionSettings }: RenderProps =
 
   return {
     component: rtlRender(component, { wrapper: Wrapper }),
-    onSessionSettingsContextValueChange,
+    onSessionSettingsContextValueChange: onSessionSettingsChange,
+    onFontContextValueChange: onFontChange,
     history
   }
 }

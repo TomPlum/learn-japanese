@@ -2,12 +2,11 @@ import { useEffect, useState } from "react"
 import { faCheck, faFont } from "@fortawesome/free-solid-svg-icons"
 import menuStyles from "components/layout/NavigationBar/NavigationBar.module.scss"
 import NavigationButton from "../../NavigationButton"
-import { useFontDispatch } from "../../../../hooks"
 import { faCircle } from "@fortawesome/free-regular-svg-icons"
-import styles  from "./FontSelectorButton.module.scss"
-import { setFont } from "../../../../slices/FontSlice"
+import styles from "./FontSelectorButton.module.scss"
 import FontService from "../../../../service/FontService"
 import { useTranslation } from "react-i18next"
+import { useFontContext } from "context/FontContext";
 
 interface FontSelectorProps {
   className?: string
@@ -56,12 +55,12 @@ const FontSelectorButton = (props: FontSelectorProps) => {
       })
   }, [])
 
-  const fontDispatcher = useFontDispatch()
+  const { setFont } = useFontContext()
 
   const handleSelect = (value: string) => {
     const selected = fonts.find((font) => font.slug === map.get(value)) ?? defaultFont
     setSelected(selected)
-    fontDispatcher(setFont(selected.name))
+    setFont(selected.name)
   }
 
   return (

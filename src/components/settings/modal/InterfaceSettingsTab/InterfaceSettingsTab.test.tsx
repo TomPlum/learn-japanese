@@ -3,8 +3,9 @@ import InterfaceSettingsTab  from "./InterfaceSettingsTab"
 import { store } from "../../../../store"
 import { clearUser, setUser } from "../../../../slices/UserSlice"
 import { localStorageMock, testUser } from "../../../../setupTests"
-import { setFont } from "../../../../slices/FontSlice"
 import { render } from "__test-utils__"
+import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
+import { FontContextBag } from "context/FontContext";
 
 const onEditDashboardLayoutHandler = vi.fn()
 
@@ -56,12 +57,14 @@ test("Should render the theme selector dropdown", async () => {
 })
 
 test("Should render the font selector dropdown", async () => {
-  store.dispatch(setFont("test-font-slug"))
   mockFontService.mockResolvedValueOnce([
     { name: "Test Font", slug: "mincho" },
     { name: "Test Font2", slug: "gothic" }
   ])
-  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
+  const { component, onFontContextValueChange } = render(
+    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />,
+    { font: 'test-font-slug' }
+  )
 
   await waitForElementToBeRemoved(component.getByTestId("settings-dropdown-loading"))
   fireEvent.click(component.getByTestId("interface-settings-font-selector"))
@@ -74,7 +77,7 @@ test("Should render the font selector dropdown", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
   fireEvent.click(await screen.findByText("Gothic"))
   await waitForElementToBeRemoved(component.getByTestId("settings-dropdown-spinner"))
-  expect(await store.getState().font.selected).toBe("gothic")
+  expect(getValueLastCalledWith<FontContextBag>(onFontContextValueChange).font).toBe("gothic")
 })
 
 test("Should render the language selector dropdown", async () => {

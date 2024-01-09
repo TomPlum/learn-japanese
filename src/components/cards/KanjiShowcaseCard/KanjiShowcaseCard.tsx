@@ -4,7 +4,6 @@ import KanjiService from "../../../service/KanjiService"
 import { useEffect, useState } from "react"
 import { Kanji } from "../../../domain/kanji/Kanji"
 import styles  from "./KanjiShowcaseCard.module.scss"
-import { useFontSelector } from "../../../hooks"
 import Copyable from "../../ui/Copyable"
 import {
   faChalkboardTeacher,
@@ -18,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Inspectable from "../../ui/Inspectable"
 import ExampleDisplay from "../../ui/display/ExampleDisplay"
 import { useTranslation } from "react-i18next"
+import { useFontContext } from "context/FontContext";
 
 const KanjiShowcaseCard = () => {
   const MAX_MEANINGS_LENGTH = 23
@@ -29,7 +29,7 @@ const KanjiShowcaseCard = () => {
   const [inExamples, setInExamples] = useState(false)
 
   const service = new KanjiService()
-  const font = useFontSelector((state) => state.font.selected)
+  const { font } = useFontContext()
   const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.kanji-showcase" })
 
   const shuffleKanji = () => {

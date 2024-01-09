@@ -3,7 +3,7 @@ import React, { Ref, useImperativeHandle, useState } from "react"
 import { KanaDisplayStyle } from "./../KanaDisplay"
 import { Textfit } from "@tomplum/react-textfit"
 import styles  from "./DynamicDisplay.module.scss"
-import { useFontSelector } from "../../../../hooks"
+import { useFontContext } from "context/FontContext";
 
 export interface DynamicDisplayProps {
   value: string
@@ -18,7 +18,7 @@ export type DynamicDisplayHandle = {
 const DynamicDisplay = React.forwardRef(({ value, style, className }: DynamicDisplayProps, ref: Ref<DynamicDisplayHandle>) => {
   const [loading, setLoading] = useState(true)
   const [active, setActive] = useState(false)
-  const selectedFont = useFontSelector((state) => state.font.selected)
+  const { font: selectedFont } = useFontContext()
 
   useImperativeHandle(ref, () => ({
     notify: () => setActive(true)
