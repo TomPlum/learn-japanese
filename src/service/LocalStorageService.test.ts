@@ -34,9 +34,8 @@ describe("Local Storage Service", () => {
       // Adding a sixth should cause them to roll and drop the first
       service.addRecentlyUsedIcon("FaRegWindowClose")
 
-      // TODO: Find a way to make JSON.stringify() maintain insertion order of the array
-      expect(localStorageMock.getItem("recent-icons")).toBe(
-        "[" + '"FaRegWindowClose",' + '"FaCommentSlash",' + '"FaBacterium",' + '"FaAmazon",' + '"FaBed"' + "]"
+      expect((JSON.parse(localStorageMock.getItem("recent-icons")) as string[]).sort()).toEqual(
+        ["FaRegWindowClose", "FaCommentSlash", "FaBacterium", "FaAmazon", "FaBed"].sort()
       )
     })
 

@@ -1,7 +1,6 @@
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
-import { store } from "../../../store"
 import { fireEvent, screen } from "@testing-library/react"
-import { getByTextWithMarkup } from "__test-utils__/Queries"
+import { getByTextWithMarkup, getValueLastCalledWith } from "__test-utils__/Queries";
 import { render } from "__test-utils__"
 import Definition from "../../../domain/sentence/Definition"
 import PlayPage  from "./PlayPage"
@@ -12,6 +11,7 @@ import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeS
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings"
 import LearnableField from "../../../domain/learn/LearnableField"
 import QuestionType from "../../../domain/game/QuestionType"
+import { SessionSettingsBag } from "context/SessionSettingsContext";
 
 const mockLearningDataService = vi.fn()
 vi.mock("service/LearningDataService", () => ({
@@ -74,8 +74,13 @@ test("Should render an error message if the data settings are undefined", () => 
 test("Should render the results screen when exiting the game", async () => {
   // Set game and data settings
   mockLearningDataService.mockResolvedValueOnce([new Definition(["not much"], undefined, "あまり", "Adverb")])
+
   // Render the page and wait for the game to load
-  const { history } = render(<PlayPage />, { sessionSettings: { gameSettings, dataSettings }})
+  const { history, onSessionSettingsContextValueChange } = render(
+    <PlayPage />,
+    { sessionSettings: { gameSettings, dataSettings }}
+  )
+
   expect(await screen.findByTestId("memory-game")).toBeInTheDocument()
 
   // Close the game
@@ -88,9 +93,10 @@ test("Should render the results screen when exiting the game", async () => {
   // Click the finish button
   fireEvent.click(screen.getByText("Finish"))
 
-  // Should clear the settings from the Redux store
-  expect(store.getState().gameSettings.settings).toBeUndefined()
-  expect(store.getState().dataSettings.settings).toBeUndefined()
+  // Should clear the settings from context
+  const sessionSettings = getValueLastCalledWith<SessionSettingsBag>(onSessionSettingsContextValueChange);
+  expect(sessionSettings.dataSettings).toBeUndefined()
+  expect(sessionSettings.gameSettings).toBeUndefined()
 
   // Should re-direct to the home page
   expect(history.location.pathname).toBe("/home")

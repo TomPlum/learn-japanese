@@ -8,7 +8,7 @@ import { store } from "../../../../store"
 import { clearUser, setPreference, setUser } from "../../../../slices/UserSlice"
 import { render } from "__test-utils__"
 import { testUser } from "../../../../setupTests"
-import { fireEvent } from "@testing-library/react"
+import { fireEvent, waitFor } from "@testing-library/react";
 
 const mockUpdatePreferences = vi.fn()
 vi.mock("service/UserService", () => ({
@@ -133,9 +133,10 @@ test("Should call the onError event handler with the response error if not succe
 
   const { component } = render(<SettingsBooleanButton {...props} />)
   fireEvent.click(component.getByTestId("test-toggle"))
-  expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
 
-  expect(onErrorHandler).toHaveBeenCalledWith("Something went wrong.")
+  await waitFor(() => {
+    expect(onErrorHandler).toHaveBeenCalledWith("Something went wrong.")
+  })
 })
 
 test("Should call the onError event handler with the response error if rejected", async () => {

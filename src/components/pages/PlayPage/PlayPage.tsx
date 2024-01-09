@@ -20,8 +20,7 @@ const PlayPage = () => {
 
   const navigate = useNavigate()
 
-  const { gameSettings, dataSettings, preset, setGameSettings, setDataSettings } = useSessionSettingsContext()
-  console.log(gameSettings, dataSettings)
+  const { gameSettings, dataSettings, preset, clearGameSettings, clearDataSettings } = useSessionSettingsContext()
 
   useEffect(() => {
     if (!!dataSettings && !!gameSettings) {
@@ -46,8 +45,8 @@ const PlayPage = () => {
   const onGameResultMenuClose = () => {
     setInResultsScreen(false)
     setGameResult(undefined)
-    setGameSettings(undefined)
-    setDataSettings(undefined)
+    clearGameSettings()
+    clearDataSettings()
     navigate("/home")
   }
 

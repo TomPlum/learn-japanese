@@ -20,8 +20,6 @@ const NavigationBar = (props: NavigationBarProps) => {
 
   const active = useModeSelector((state) => state.mode.active)
   const user = useUserSelector((state) => state.user.user)
-  console.log('active', active)
-  console.log('user', user)
 
   return (
     <Navbar variant="dark" fixed="top" expand="md" className={styles.navbar} data-testid="navigation-bar">

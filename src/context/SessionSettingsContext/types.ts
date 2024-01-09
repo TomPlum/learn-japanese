@@ -20,9 +20,11 @@ export interface SessionSettingsBag {
 
   learnSettings?: LearnSettings
   setLearnSettings: (settings?: LearnSettings) => void
+  clearGameSettings: () => void
 
   dataSettings?: DataSettings
   setDataSettings: (settings?: DataSettings) => void
+  clearDataSettings: () => void
 
   lastPlaySession?: SessionSettingsState
   setLastPlaySession: (settings: PlayMode) => void

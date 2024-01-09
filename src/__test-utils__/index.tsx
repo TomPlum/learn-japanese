@@ -24,7 +24,7 @@ const SessionSettingsContextInjector = ({ children, onContextValueChange }: Prop
 
   useEffect(() => {
     onContextValueChange(value)
-  }, [value, onContextValueChange]);
+  }, [JSON.stringify(value), onContextValueChange]);
 
   return <>{children}</>
 }

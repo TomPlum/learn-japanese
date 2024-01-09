@@ -30,10 +30,10 @@ const SessionSettingsProvider = ({
   const [preset, setPreset] = useLocalStorage<number>("selected-preset-id")
 
   const initialGameState = gameSettings ? gameSettingsConverter.serialise(gameSettings) : undefined
-  const [gameState, setGameSettings] = useLocalStorage<GameSettingState | undefined>("game-config", initialGameState)
+  const [gameState, setGameSettings] = useState<GameSettingState | undefined>(initialGameState)
 
   const initialDataState = dataSettings ? dataSettingsConverter.serialise(dataSettings) : undefined
-  const [dataState, setDataSettings] = useLocalStorage<DataSettingsState | undefined>("data-config", initialDataState)
+  const [dataState, setDataSettings] = useState<DataSettingsState | undefined>(initialDataState)
 
   const convertPlayModeToSessionState = useCallback((mode: PlayMode) => {
     return {
@@ -76,6 +76,7 @@ const SessionSettingsProvider = ({
     if (settings) {
       setGameSettings(gameSettingsConverter.serialise(settings))
     } else {
+      localStorage.removeItem("game-config")
       setGameSettings(undefined)
     }
   }, [setGameSettings])
@@ -83,10 +84,16 @@ const SessionSettingsProvider = ({
   const convertFromDataSettings = useCallback((settings?: DataSettings) => {
     if (settings) {
       setDataSettings(dataSettingsConverter.serialise(settings))
-    } else {
-      setDataSettings(undefined)
     }
   }, [setDataSettings])
+
+  const clearDataSettings = useCallback(() => {
+    setDataSettings(undefined)
+  }, [])
+
+  const clearGameSettings = useCallback(() => {
+    setGameSettings(undefined)
+  }, [])
 
   const values: SessionSettingsBag = useMemo(
     () => ({
@@ -96,10 +103,12 @@ const SessionSettingsProvider = ({
       setLastPlaySession: (preset: PlayMode) => setLastPlaySession(convertPlayModeToSessionState(preset)),
       gameSettings: gameState ? gameSettingsConverter.deserialise(gameState) : undefined,
       setGameSettings: convertGameSettings,
+      clearGameSettings,
       learnSettings,
       setLearnSettings,
       dataSettings: dataState ? dataSettingsConverter.deserialise(dataState): undefined,
       setDataSettings: convertFromDataSettings,
+      clearDataSettings,
       preset,
       setPreset
     }),

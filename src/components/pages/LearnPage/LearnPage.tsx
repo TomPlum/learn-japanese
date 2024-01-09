@@ -20,7 +20,7 @@ const LearnPage = () => {
 
   const navigate = useNavigate()
 
-  const { dataSettings, setDataSettings } = useSessionSettingsContext()
+  const { dataSettings, clearDataSettings } = useSessionSettingsContext()
 
   useEffect(() => {
     if (dataSettings) {
@@ -37,7 +37,7 @@ const LearnPage = () => {
   }, [dataSettings])
 
   const handleDismissResultsScreen = () => {
-    setDataSettings(undefined)
+    clearDataSettings()
     navigate("/home")
   }
 
