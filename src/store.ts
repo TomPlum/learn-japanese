@@ -3,9 +3,6 @@ import userReducer from "./slices/UserSlice"
 import fontReducer from "./slices/FontSlice"
 import notificationReducer from "./slices/NotificationSlice"
 import modeReducer from "./slices/ModeSlice"
-import gameSettingsReducer from "./slices/GameSettingsSlice"
-import dataSettingsReducer from "./slices/DataSettingsSlice"
-import sessionSettingsReducer from "./slices/SessionSettingsSlice"
 
 export const store = configureStore({
   reducer: {
@@ -13,9 +10,6 @@ export const store = configureStore({
     font: fontReducer,
     notification: notificationReducer,
     mode: modeReducer,
-    gameSettings: gameSettingsReducer,
-    dataSettings: dataSettingsReducer,
-    sessionSettings: sessionSettingsReducer
   }
 })
 

@@ -35,7 +35,6 @@ import sizeMe from "react-sizeme"
 import { ConfidenceMenuStyle } from "./domain/learn/spacedrepetition/ConfidenceMenuStyle"
 import { User } from "./slices/UserSlice"
 import { cleanup } from "@testing-library/react";
-import { onSessionSettingsContextValueChange } from "__test-utils__";
 sizeMe.noPlaceholders = true
 
 declare global {

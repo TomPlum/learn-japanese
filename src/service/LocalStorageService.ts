@@ -2,9 +2,8 @@ import { CustomIcon, Icon } from "../domain/Icon"
 import { SessionSettings } from "../domain/session/settings/SessionSettings"
 import GameSettingsConverter from "../converter/GameSettingsConverter"
 import DataSettingsConverter from "../converter/DataSettingsConverter"
-import { DataSettingsState } from "../slices/DataSettingsSlice"
-import { GameSettingState } from "../slices/GameSettingsSlice"
 import LearnSettings from "../domain/session/settings/LearnSettings"
+import { DataSettingsState, GameSettingState } from "context/SessionSettingsContext";
 
 interface PlaySession {
   data: DataSettingsState

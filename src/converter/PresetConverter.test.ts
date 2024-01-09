@@ -3,9 +3,8 @@ import { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSetting
 import { GameSettingsBuilder } from "../domain/session/settings/game/GameSettings.ts"
 import { CustomPresetDetails, DataSettingsRequest, GameConfigRequest } from "../repository/PresetRepository.ts"
 import LearnSettings from "../domain/session/settings/LearnSettings.ts"
-import { KanaDataSettingsState } from "../slices/DataSettingsSlice.ts"
 import { SessionSettings } from "../domain/session/settings/SessionSettings.ts"
-import { GameSettingState, SessionSettingsState } from "context/SessionSettingsContext";
+import { GameSettingState, KanaDataSettingsState, SessionSettingsState } from "context/SessionSettingsContext";
 
 const mockDataSettingsConverter = vi.fn()
 const mockDeserialiseDataSettings = vi.fn()

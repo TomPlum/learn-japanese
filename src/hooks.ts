@@ -15,15 +15,6 @@ export const useNotificationSelector: TypedUseSelectorHook<RootState> = useSelec
 export const useModeDispatch = () => useDispatch<AppDispatch>()
 export const useModeSelector: TypedUseSelectorHook<RootState> = useSelector
 
-export const useGameSettingsDispatch = () => useDispatch<AppDispatch>()
-export const useGameSettingsSelector: TypedUseSelectorHook<RootState> = useSelector
-
-export const useDataSettingsDispatch = () => useDispatch<AppDispatch>()
-export const useDataSettingsSelector: TypedUseSelectorHook<RootState> = useSelector
-
-export const useSessionSettingsDispatch = () => useDispatch<AppDispatch>()
-export const useSessionSettingsSelector: TypedUseSelectorHook<RootState> = useSelector
-
 export const useDebouncedEffect = (effect: () => any, delay: number, deps: any[] = []) => {
   useEffect(() => {
     const handler = setTimeout(() => effect(), delay)

@@ -1,9 +1,6 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import SessionWizard  from "./SessionWizard"
 import userEvent from "@testing-library/user-event"
-import { store } from "../../../../store"
-import { clearGameSettings } from "../../../../slices/GameSettingsSlice"
-import { clearDataSettings } from "../../../../slices/DataSettingsSlice"
 import KanjiSettings, { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings"
 import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings"
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons"
@@ -94,11 +91,6 @@ const setup = () => {
     ...response
   }
 }
-
-beforeEach(() => {
-  store.dispatch(clearGameSettings())
-  store.dispatch(clearDataSettings())
-})
 
 test("Should render the mode step on initial render", () => {
   setup()

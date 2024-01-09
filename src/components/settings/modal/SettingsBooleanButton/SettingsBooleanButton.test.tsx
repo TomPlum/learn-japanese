@@ -146,7 +146,7 @@ test("Should call the onError event handler with the response error if rejected"
   fireEvent.click(component.getByTestId("test-toggle"))
   expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
 
-  expect(await onErrorHandler).toHaveBeenCalledWith("Something went wrong.")
+  expect(onErrorHandler).toHaveBeenCalledWith("Something went wrong.")
 })
 
 test("Should call the onError event handler with a default error message if failed and not provided", async () => {
@@ -156,7 +156,7 @@ test("Should call the onError event handler with a default error message if fail
   fireEvent.click(component.getByTestId("test-toggle"))
   expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
 
-  expect(await onErrorHandler).toHaveBeenCalledWith("Failed to update preference.")
+  expect(onErrorHandler).toHaveBeenCalledWith("Failed to update preference.")
 })
 
 test("Should call the onError event handler with a default error message if rejected and not provided", async () => {
@@ -166,5 +166,5 @@ test("Should call the onError event handler with a default error message if reje
   fireEvent.click(component.getByTestId("test-toggle"))
   expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
 
-  expect(await onErrorHandler).toHaveBeenCalledWith("Failed to update preference.")
+  expect(onErrorHandler).toHaveBeenCalledWith("Failed to update preference.")
 })

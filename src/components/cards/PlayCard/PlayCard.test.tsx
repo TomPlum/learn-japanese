@@ -1,10 +1,5 @@
 import { fireEvent, screen } from "@testing-library/react"
 import PlayCard  from "./PlayCard"
-import { store } from "../../../store"
-import {
-  clearLastLearnPreset,
-  clearLastPlayPreset,
-} from "../../../slices/SessionSettingsSlice"
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
 import LearnSettings from "../../../domain/session/settings/LearnSettings"
@@ -54,7 +49,6 @@ test("Closing the wizard should stop rendering it", async () => {
 })
 
 test("Should render the start last play session with the correct title if the store is empty", () => {
-  store.dispatch(clearLastPlayPreset())
   const { component } = render(<PlayCard />)
   expect(component.getByTitle("You've not played anything recently.")).toBeInTheDocument()
 })
@@ -96,14 +90,12 @@ test("Should render the launch preset dialog with the last learn preset if one i
 })
 
 test("Clicking the start last play session button when there are no setting should not launch the modal", async () => {
-  store.dispatch(clearLastPlayPreset())
   const { component } = render(<PlayCard />)
   fireEvent.click(component.getByTitle("You've not played anything recently."))
   expect(await screen.queryByTestId("launch-preset-confirmation")).not.toBeInTheDocument()
 })
 
 test("Clicking the start last learn session button when there are no setting should not launch the modal", async () => {
-  store.dispatch(clearLastLearnPreset())
   const { component } = render(<PlayCard />)
   fireEvent.click(component.getByTitle("You've not practiced anything recently."))
   expect(await screen.queryByTestId("launch-preset-confirmation")).not.toBeInTheDocument()

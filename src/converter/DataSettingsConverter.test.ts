@@ -9,14 +9,11 @@ import { BasicsSettingsBuilder } from "../domain/session/settings/data/BasicsSet
 import DataSettings from "../domain/session/settings/data/DataSettings.ts"
 import Topic from "../domain/Topic.ts"
 import {
-  KanaDataSettingsState,
-  KanjiDataSettingsState,
+  BasicsDataSettingsState, CalenderDataSettingsState,
+  DataSettingsState, KanaDataSettingsState, KanjiDataSettingsState,
   NumbersDataSettingsState,
-  SentenceStructureDataSettingsState,
-  CalenderDataSettingsState,
-  BasicsDataSettingsState,
-  DataSettingsState
-} from "../slices/DataSettingsSlice.ts"
+  SentenceStructureDataSettingsState
+} from "context/SessionSettingsContext";
 import {
   BasicsDataSettingsResponse,
   CalenderDataSettingsResponse,
