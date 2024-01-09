@@ -3,19 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Nav, Overlay, Popover } from "react-bootstrap"
 import { useRef, useState } from "react"
 import menuStyles from "components/layout/NavigationBar/NavigationBar.module.scss"
-import { useNotificationDispatch, useNotificationSelector } from "../../../../hooks"
 import NotificationDisplay from "../../display/NotificationDisplay"
-import { clearNotifications, removeNotification } from "../../../../slices/NotificationSlice"
 import styles  from "./NotificationsButton.module.scss"
+import { useNotificationContext } from "context/NotificationContext"
 
 export interface NotificationsButtonProps {
   className?: string
 }
 
-const NotificationsButton = (props: NotificationsButtonProps) => {
-  const { className } = props
-  const notifications = useNotificationSelector((state) => state.notification).notifications
-  const notificationDispatch = useNotificationDispatch()
+const NotificationsButton = ({ className }: NotificationsButtonProps) => {
+  const { notifications, clearNotifications, removeNotification } = useNotificationContext()
+
   const quantity = Object.keys(notifications).length
   const hasNotifications = quantity > 0
 
@@ -27,19 +25,12 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
     setShow(true)
   }
 
-  const handleClear = () => {
-    notificationDispatch(clearNotifications())
-  }
-
-  const handleNotificationDismiss = (id: string) => {
-    notificationDispatch(removeNotification(id))
-  }
-
   return (
     <div ref={ref} className={className}>
       <Nav.Link className={styles.link} onClick={handleClick}>
         <div ref={targetRef} className={styles.iconWrapper}>
           {hasNotifications && <div className={styles.circle} />}
+
           <FontAwesomeIcon
             fixedWidth
             icon={faBell}
@@ -64,7 +55,7 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                 <span className={styles.title}>
                   {quantity} Notification{quantity > 1 ? "s" : ""}
                 </span>
-                <span className={styles.clear} onClick={handleClear}>
+                <span className={styles.clear} onClick={clearNotifications}>
                   Clear
                 </span>
               </div>
@@ -84,9 +75,9 @@ const NotificationsButton = (props: NotificationsButtonProps) => {
                     <NotificationDisplay
                       id={id}
                       key={id}
+                      onDismiss={removeNotification}
                       className={styles.notification}
                       notification={notifications[id]}
-                      onDismiss={handleNotificationDismiss}
                     />
                   )
                 })}

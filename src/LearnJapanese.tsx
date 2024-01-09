@@ -25,6 +25,7 @@ import ProfilePage from "components/pages/ProfilePage";
 import NavigationWrapper from "components/layout/NavigationWrapper";
 import SessionSettingsProvider from "context/SessionSettingsContext";
 import FontProvider from "context/FontContext";
+import NotificationProvider from "context/NotificationContext";
 
 interface LearnJapaneseProps {
   store: EnhancedStore
@@ -112,9 +113,11 @@ const LearnJapanese = ({ store }: LearnJapaneseProps) => {
   return (
     <Provider store={store}>
       <SessionSettingsProvider>
-        <FontProvider>
-          <RouterProvider router={router} />
-        </FontProvider>
+        <NotificationProvider>
+          <FontProvider>
+            <RouterProvider router={router} />
+          </FontProvider>
+        </NotificationProvider>
       </SessionSettingsProvider>
     </Provider>
   )

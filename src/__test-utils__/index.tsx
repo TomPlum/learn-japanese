@@ -15,6 +15,11 @@ import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { createMemoryHistory } from "history";
 import { Mock } from "vitest";
 import FontProvider, { FontContextBag, useFontContext } from "context/FontContext";
+import NotificationProvider, {
+  NotificationContextBag,
+  NotificationList,
+  useNotificationContext
+} from "context/NotificationContext";
 
 interface ContextListener<Bag> {
   useContextHook: () => Bag
@@ -34,6 +39,7 @@ const ReactContextListener = <Bag,> ({ children, useContextHook, onContextValueC
 export interface RenderProps {
   url?: string
   font?: string
+  notifications?: NotificationList
   sessionSettings?: {
     dataSettings?: DataSettings
     gameSettings?: GameSettings
@@ -45,14 +51,16 @@ export interface RenderProps {
 
 export interface RenderResponse {
   onSessionSettingsContextValueChange: Mock
+  onNotificationContextValueChange: Mock
   onFontContextValueChange: Mock
   history: History
   component: RenderResult
 }
 
-const render = (component: ReactElement, { url, font, sessionSettings }: RenderProps = {}): RenderResponse => {
+const render = (component: ReactElement, { url, font, notifications, sessionSettings }: RenderProps = {}): RenderResponse => {
   const onSessionSettingsChange = vi.fn()
   const onFontChange = vi.fn()
+  const onNotificationChange = vi.fn()
 
   const history = createMemoryHistory({ initialEntries: [url ?? '/'] }) as never as History
 
@@ -65,12 +73,25 @@ const render = (component: ReactElement, { url, font, sessionSettings }: RenderP
           lastLearnPreset={sessionSettings?.lastLearnPreset}
           lastPlayPreset={sessionSettings?.lastPlayPreset}
         >
-          <ReactContextListener<SessionSettingsBag> useContextHook={useSessionSettingsContext} onContextValueChange={onSessionSettingsChange}>
+          <ReactContextListener<SessionSettingsBag>
+            useContextHook={useSessionSettingsContext}
+            onContextValueChange={onSessionSettingsChange}
+          >
             <FontProvider initialFont={font}>
-              <ReactContextListener<FontContextBag> useContextHook={useFontContext} onContextValueChange={onFontChange}>
-                <Provider store={defaultStore}>
-                  {children}
-                </Provider>
+              <ReactContextListener<FontContextBag>
+                useContextHook={useFontContext}
+                onContextValueChange={onFontChange}
+              >
+                <NotificationProvider initialNotifications={notifications}>
+                  <ReactContextListener<NotificationContextBag>
+                    useContextHook={useNotificationContext}
+                    onContextValueChange={onNotificationChange}
+                  >
+                    <Provider store={defaultStore}>
+                      {children}
+                    </Provider>
+                  </ReactContextListener>
+                </NotificationProvider>
               </ReactContextListener>
             </FontProvider>
           </ReactContextListener>
@@ -83,6 +104,7 @@ const render = (component: ReactElement, { url, font, sessionSettings }: RenderP
     component: rtlRender(component, { wrapper: Wrapper }),
     onSessionSettingsContextValueChange: onSessionSettingsChange,
     onFontContextValueChange: onFontChange,
+    onNotificationContextValueChange: onNotificationChange,
     history
   }
 }

@@ -8,9 +8,6 @@ export const useUserSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export const useFontDispatch = () => useDispatch<AppDispatch>()
 
-export const useNotificationDispatch = () => useDispatch<AppDispatch>()
-export const useNotificationSelector: TypedUseSelectorHook<RootState> = useSelector
-
 export const useDebouncedEffect = (effect: () => any, delay: number, deps: any[] = []) => {
   useEffect(() => {
     const handler = setTimeout(() => effect(), delay)
