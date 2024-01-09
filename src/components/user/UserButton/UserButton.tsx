@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next"
 
 export interface UserButtonProps {
   onClick: () => void
-  disabled: boolean
+  disabled?: boolean
 }
 
 const UserButton = (props: UserButtonProps) => {

@@ -11,9 +11,6 @@ export const useFontDispatch = () => useDispatch<AppDispatch>()
 export const useNotificationDispatch = () => useDispatch<AppDispatch>()
 export const useNotificationSelector: TypedUseSelectorHook<RootState> = useSelector
 
-export const useModeDispatch = () => useDispatch<AppDispatch>()
-export const useModeSelector: TypedUseSelectorHook<RootState> = useSelector
-
 export const useDebouncedEffect = (effect: () => any, delay: number, deps: any[] = []) => {
   useEffect(() => {
     const handler = setTimeout(() => effect(), delay)

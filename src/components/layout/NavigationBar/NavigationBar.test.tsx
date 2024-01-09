@@ -1,8 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react"
 import NavigationBar, { NavigationBarProps }  from "./NavigationBar"
-import { AppMode } from "../../../domain/AppMode"
 import { store } from "../../../store"
-import { setApplicationMode } from "../../../slices/ModeSlice"
 import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import { render } from "__test-utils__"
@@ -28,7 +26,6 @@ beforeEach(() => {
   props = {
     onLaunchLoginModal: onLaunchLoginModalHandler
   }
-  store.dispatch(setApplicationMode(AppMode.LEARN))
 })
 
 test("Clicking the 'Home' button should route the user to the menu", async () => {
