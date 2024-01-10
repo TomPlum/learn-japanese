@@ -1,9 +1,9 @@
 import { fireEvent, screen } from "@testing-library/react"
 import UserButton, { UserButtonProps }  from "./UserButton"
-import { store } from "../../../store"
-import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import { render } from "__test-utils__"
+import { User, UserContextBag } from "context/UserContext";
+import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
 
 let props: UserButtonProps
 const onClickHandler = vi.fn()
@@ -17,12 +17,8 @@ beforeEach(() => {
   }
 })
 
-afterEach(() => {
-  store.dispatch(clearUser())
-})
-
-const setup = () => {
-  const component = render(<UserButton {...props} />)
+const setup = (user?: User) => {
+  const component = render(<UserButton {...props} />, { user })
 
   return {
     ...component
@@ -30,14 +26,12 @@ const setup = () => {
 }
 
 test("Should display the users nickname if they have one and they are logged in", () => {
-  store.dispatch(setUser(user))
-  setup()
+  setup(user)
   expect(screen.getByText("Tom")).toBeInTheDocument()
 })
 
 test("Should display the users username if they don't have a nickname are logged in", () => {
-  store.dispatch(setUser({ ...testUser, nickname: undefined }))
-  setup()
+  setup({ ...testUser, nickname: undefined })
   expect(screen.getByText("TomPlum42")).toBeInTheDocument()
 })
 
@@ -47,8 +41,7 @@ test("Should display 'Login' when the user is not logged in", () => {
 })
 
 test("Clicking the button should show the dropdown menu if they are logged in", async () => {
-  store.dispatch(setUser(user))
-  setup()
+  setup(user)
 
   fireEvent.click(screen.getByText("Tom"))
 
@@ -70,29 +63,24 @@ test("Clicking the button should call the onClick event handler", () => {
   expect(onClickHandler).toHaveBeenCalled()
 })
 
-test("Clicking the logout button should clear the user from the redux store", async () => {
-  store.dispatch(setUser(user))
-  setup()
+test("Clicking the logout button should clear the user from context", async () => {
+  const { onUserContextValueChange } = setup(user)
 
-  //Click the button to show the dropdown menu
   fireEvent.click(screen.getByText("Tom"))
-
-  //Click logout
   fireEvent.click(await screen.findByText("Logout"))
 
-  expect(store.getState().user).toStrictEqual({ user: undefined })
+  expect(getValueLastCalledWith<UserContextBag>(onUserContextValueChange).user).toBeUndefined()
 })
 
 //TODO: Not working for some reason.
 test.skip("Clicking the high-scores option should route to the high-scores page", async () => {
-  store.dispatch(setUser(user))
-  const { history } = setup()
+  const { history } = setup(user)
 
   //Click the button to show the dropdown menu
   fireEvent.click(screen.getByText("Tom"))
 
   //Click high-scores
-  fireEvent.click(await screen.findByText("Highscores"))
+  fireEvent.click(await screen.findByTestId("high-scores-link"))
 
   expect(history.location.pathname).toBe("/high-scores")
 })

@@ -2,17 +2,13 @@ import { Card, Col, FormControl, Row } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle, faCircleNotch, faPencilAlt } from "@fortawesome/free-solid-svg-icons"
 import { ChangeEvent, useState } from "react"
-import { updateNickname, User } from "../../../../slices/UserSlice"
 import dayjs from "dayjs"
 import { Numbers } from "../../../../utility/Numbers"
 import UserService from "../../../../service/UserService"
 import UpdateResponse from "../../../../rest/response/UpdateResponse"
 import styles  from "./About.module.scss"
-import { useUserDispatch } from "../../../../hooks"
-
-export interface AboutProps {
-  user: User
-}
+import { useUserContext } from "context/UserContext";
+import { AboutProps } from "components/user/profile/About/types.ts";
 
 const About = (props: AboutProps) => {
   const [editing, setEditing] = useState(false)
@@ -20,7 +16,7 @@ const About = (props: AboutProps) => {
   const [nickname, setNickname] = useState<string>(props.user?.nickname ?? "-")
   const [error, setErrorMessage] = useState<string | undefined>(undefined)
 
-  const userDispatch = useUserDispatch()
+  const { setNickName } = useUserContext()
   const userService = new UserService()
 
   const onClickEdit = () => {
@@ -34,7 +30,7 @@ const About = (props: AboutProps) => {
 
     userService.setNickname(nickname).then((response: UpdateResponse) => {
       if (response.success) {
-        userDispatch(updateNickname(nickname))
+        setNickName(nickname)
       } else {
         setErrorMessage(response.error)
         setNickname(props.user.nickname ?? "-")

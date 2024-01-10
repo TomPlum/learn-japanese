@@ -20,6 +20,7 @@ import NotificationProvider, {
   NotificationList,
   useNotificationContext
 } from "context/NotificationContext";
+import UserProvider, { User, UserContextBag, useUserContext } from "context/UserContext";
 
 interface ContextListener<Bag> {
   useContextHook: () => Bag
@@ -40,6 +41,7 @@ export interface RenderProps {
   url?: string
   font?: string
   notifications?: NotificationList
+  user?: User
   sessionSettings?: {
     dataSettings?: DataSettings
     gameSettings?: GameSettings
@@ -50,6 +52,7 @@ export interface RenderProps {
 }
 
 export interface RenderResponse {
+  onUserContextValueChange: Mock
   onSessionSettingsContextValueChange: Mock
   onNotificationContextValueChange: Mock
   onFontContextValueChange: Mock
@@ -57,10 +60,17 @@ export interface RenderResponse {
   component: RenderResult
 }
 
-const render = (component: ReactElement, { url, font, notifications, sessionSettings }: RenderProps = {}): RenderResponse => {
+const render = (component: ReactElement, {
+  user,
+  url,
+  font,
+  notifications,
+  sessionSettings
+}: RenderProps = {}): RenderResponse => {
   const onSessionSettingsChange = vi.fn()
   const onFontChange = vi.fn()
   const onNotificationChange = vi.fn()
+  const onUserChange = vi.fn()
 
   const history = createMemoryHistory({ initialEntries: [url ?? '/'] }) as never as History
 
@@ -87,9 +97,16 @@ const render = (component: ReactElement, { url, font, notifications, sessionSett
                     useContextHook={useNotificationContext}
                     onContextValueChange={onNotificationChange}
                   >
-                    <Provider store={defaultStore}>
-                      {children}
-                    </Provider>
+                    <UserProvider initialUser={user}>
+                      <ReactContextListener<UserContextBag>
+                        useContextHook={useUserContext}
+                        onContextValueChange={onUserChange}
+                      >
+                        <Provider store={defaultStore}>
+                          {children}
+                        </Provider>
+                      </ReactContextListener>
+                    </UserProvider>
                   </ReactContextListener>
                 </NotificationProvider>
               </ReactContextListener>
@@ -105,6 +122,7 @@ const render = (component: ReactElement, { url, font, notifications, sessionSett
     onSessionSettingsContextValueChange: onSessionSettingsChange,
     onFontContextValueChange: onFontChange,
     onNotificationContextValueChange: onNotificationChange,
+    onUserContextValueChange: onUserChange,
     history
   }
 }

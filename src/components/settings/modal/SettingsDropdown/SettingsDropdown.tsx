@@ -1,44 +1,24 @@
 import styles  from "./SettingsDropdown.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faChevronDown, faChevronUp, faCircleNotch, faSpinner, IconDefinition } from "@fortawesome/free-solid-svg-icons"
+import { faChevronDown, faChevronUp, faCircleNotch, faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { useRef, useState } from "react"
 import { Overlay } from "react-bootstrap"
 import UserService from "../../../../service/UserService"
 import { Preference } from "../../../../domain/user/Preference"
-import { useUserDispatch, useUserSelector } from "../../../../hooks"
-import { setPreference } from "../../../../slices/UserSlice"
 import { useTranslation } from "react-i18next"
 import Icon from "../../../ui/menu/icon/Icon"
-import { CustomIcon } from "../../../../domain/Icon"
-
-export interface SettingsDropdownOption {
-  style?: object
-  name: string
-  value?: string
-  icon?: CustomIcon
-  className?: string
-}
-
-export interface SettingsDropdownProps {
-  id: string
-  loading?: boolean
-  optionsKey?: string
-  preference: Preference
-  buttonIcon?: IconDefinition
-  options?: SettingsDropdownOption[]
-  onChange?: (value: string) => void
-  onError?: (error: string) => void
-}
+import { useUserContext } from "context/UserContext";
+import { SettingsDropdownOption, SettingsDropdownProps } from "./types.ts";
 
 const SettingsDropdown = (props: SettingsDropdownProps) => {
   const { id, preference, loading, buttonIcon, options, optionsKey, onChange, onError } = props
 
   const { t } = useTranslation()
   const service = new UserService()
-  const userDispatch = useUserDispatch()
-  const preferences = useUserSelector((state) => state.user?.user?.preferences)
+  const { user, setPreference } = useUserContext()
 
   const getUserPreferenceValue = () => {
+    const preferences = user?.preferences
     switch (preference) {
       case Preference.DEFAULT_KANJI_FONT:
         return preferences?.kanjiFont
@@ -97,7 +77,7 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
       .then((response) => {
         if (response.success) {
           onChange?.(value)
-          userDispatch(setPreference({ preference, value: value }))
+          setPreference({ preference, value: value })
         } else {
           handleUpdateError(response)
         }

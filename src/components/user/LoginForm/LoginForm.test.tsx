@@ -4,6 +4,8 @@ import auth, { LoginResponse } from "../../../service/AuthenticationService"
 import { store } from "../../../store"
 import { clearUser } from "../../../slices/UserSlice"
 import { render } from "__test-utils__"
+import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
+import { UserContextBag } from "context/UserContext";
 
 vi.mock("service/AuthenticationService")
 
@@ -42,15 +44,16 @@ const validLoginResponse: LoginResponse = {
 }
 
 const setup = () => {
-  const { component } = render(
+  const response = render(
     <LoginForm onSuccess={onSuccessHandler} username={registeredUsername} info={infoMessage} />
   )
 
   return {
-    username: component.getByPlaceholderText("Username"),
-    password: component.getByPlaceholderText("Password"),
-    login: component.getByText("Login"),
-    ...component
+    form: response.component.getByTestId('login-form'),
+    username: response.component.getByPlaceholderText("Username"),
+    password: response.component.getByPlaceholderText("Password"),
+    login: response.component.getByText("Login"),
+    ...response
   }
 }
 
@@ -66,26 +69,26 @@ test("Should focus the username field on mount", () => {
 test("Pressing the enter key while the username and password are valid should invoke login", async () => {
   loginService.mockResolvedValueOnce(validLoginResponse)
 
-  const { username, password, container } = setup()
+  const { username, password, form } = setup()
 
   fireEvent.change(username, { target: { value: "TomPlum42" } })
   fireEvent.change(password, { target: { value: "Password" } })
-  fireEvent.keyDown(container, { key: "Enter", code: 13, charCode: 13 })
+  fireEvent.keyDown(form, { key: "Enter", code: 13, charCode: 13 })
 
   await waitFor(() => expect(onSuccessHandler).toHaveBeenCalled())
 })
 
 test("Pressing the enter key while the username is invalid should not call the onSuccess handler", () => {
-  const { password, container } = setup()
+  const { password, form } = setup()
   fireEvent.change(password, { target: { value: "Password" } })
-  fireEvent.keyDown(container, { key: "Enter", code: 13, charCode: 13 })
+  fireEvent.keyDown(form, { key: "Enter", code: 13, charCode: 13 })
   expect(onSuccessHandler).not.toHaveBeenCalled()
 })
 
 test("Pressing the enter key while the password is invalid should not call the onSuccess handler", () => {
-  const { username, container } = setup()
+  const { username, form } = setup()
   fireEvent.change(username, { target: { value: "Tom" } })
-  fireEvent.keyDown(container, { key: "Enter", code: 13, charCode: 13 })
+  fireEvent.keyDown(form, { key: "Enter", code: 13, charCode: 13 })
   expect(onSuccessHandler).not.toHaveBeenCalled()
 })
 
@@ -252,7 +255,7 @@ test("When the info prop is passed then it should not render the success alert",
 test("When successfully logging in, it should set the user object in the Redux store", async () => {
   loginService.mockResolvedValueOnce(validLoginResponse)
 
-  const { username, password, login } = setup()
+  const { username, password, login, onUserContextValueChange } = setup()
 
   // Enter Credentials
   fireEvent.change(username, { target: { value: "Tom" } })
@@ -261,7 +264,7 @@ test("When successfully logging in, it should set the user object in the Redux s
   // Login
   fireEvent.click(login)
   await waitFor(() => expect(onSuccessHandler).toHaveBeenCalled())
-  expect(store.getState().user.user).toStrictEqual({
+  expect(getValueLastCalledWith<UserContextBag>(onUserContextValueChange).user).toStrictEqual({
     creationDate: "2021-10-15",
     credentialsExpired: false,
     email: "tom@hotmail.com",

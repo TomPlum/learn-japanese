@@ -34,6 +34,7 @@ export interface NavigationButtonProps {
 }
 
 export interface ItemProps {
+  id?: string
   icon?: IconDefinition
   containerClass?: string
   iconClass?: string
@@ -44,7 +45,7 @@ export interface ItemProps {
 }
 
 const Item = (props: PropsWithChildren<ItemProps>) => {
-  const { icon, containerClass, iconClass, className, href, style, onClick, children } = props
+  const { id, icon, containerClass, iconClass, className, href, style, onClick, children } = props
 
   const handleClick = () => {
     onClick?.(children as string)
@@ -64,7 +65,7 @@ const Item = (props: PropsWithChildren<ItemProps>) => {
         />
       )}
 
-      <HashLink path={href} onClick={handleClick} className={linkClassName} style={style} key={key}>
+      <HashLink path={href} onClick={handleClick} className={linkClassName} style={style} key={key} data-testid={id}>
         {children}
       </HashLink>
     </div>
