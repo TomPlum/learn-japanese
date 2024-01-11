@@ -1,7 +1,7 @@
 import styles  from "./SettingsDropdown.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronDown, faChevronUp, faCircleNotch, faSpinner } from "@fortawesome/free-solid-svg-icons"
-import { useRef, useState } from "react"
+import { useMemo, useRef, useState } from "react";
 import { Overlay } from "react-bootstrap"
 import UserService from "../../../../service/UserService"
 import { Preference } from "../../../../domain/user/Preference"
@@ -17,8 +17,9 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
   const service = new UserService()
   const { user, setPreference } = useUserContext()
 
-  const getUserPreferenceValue = () => {
+  const userPreferenceValue = useMemo(() => {
     const preferences = user?.preferences
+
     switch (preference) {
       case Preference.DEFAULT_KANJI_FONT:
         return preferences?.kanjiFont
@@ -41,7 +42,7 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
       case Preference.THEME:
         return preferences?.theme
     }
-  }
+  }, [user?.preferences])?.toString()
 
   const translationKey = `settings.modal.${optionsKey}.options`
   const optionValuesArray = t(translationKey, { returnObjects: true }) as SettingsDropdownOption[]
@@ -58,7 +59,7 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
     })
 
   const getSelectedPreferenceValue = () =>
-    opts.find((it) => it.value === getUserPreferenceValue()?.toString()) ?? { name: "Unknown", value: "Unknown" }
+    opts.find((it) => it.value === userPreferenceValue) ?? { name: "Unknown", value: "Unknown" }
 
   const selected: SettingsDropdownOption = getSelectedPreferenceValue()
 
