@@ -366,8 +366,8 @@
           "heading": "Theme",
           "desc": "Switch between the dark and light variations of the user-interface theming.",
           "options": [
-            { "name": "Dark Mode", "value": "Dark Mode", "icon": "FaMoon", "className": "dark" },
-            { "name": "Light Mode", "value": "Light Mode", "icon": "FaLightbulb", "className": "light" }
+            { "name": "Dark Mode", "value": "Dark", "icon": "FaMoon", "className": "dark" },
+            { "name": "Light Mode", "value": "Light", "icon": "FaLightbulb", "className": "light" }
           ]
         },
         "kanji-font": {

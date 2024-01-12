@@ -366,8 +366,8 @@
           "heading": "テーマ",
           "desc": "ユーザー インターフェイス テーマのダーク バリエーションとライト バリエーションを切り替えます。",
           "options": [
-            { "name": "ダークモード", "value": "Dark Mode", "icon": "FaMoon", "className": "dark" },
-            { "name": "ライトモード", "value": "Light Mode", "icon": "FaLightbulb", "className": "light" }
+            { "name": "ダークモード", "value": "Dark", "icon": "FaMoon", "className": "dark" },
+            { "name": "ライトモード", "value": "Light", "icon": "FaLightbulb", "className": "light" }
           ]
         },
         "kanji-font": {
