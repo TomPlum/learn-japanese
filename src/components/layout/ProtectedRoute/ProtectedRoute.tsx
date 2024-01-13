@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom"
-import { useUserSelector } from "../../../hooks.ts"
+import { useUserContext } from "context/UserContext";
 
 const ProtectedRoute = () => {
-  const user = useUserSelector((state) => state.user.user)
+  const { user } = useUserContext()
 
   if (!Boolean(user)) {
     return <Navigate to={{ pathname: "/home" }} replace />

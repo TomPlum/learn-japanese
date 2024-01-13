@@ -3,16 +3,16 @@ import DashboardCard from "../../layout/card/DashboardCard"
 import DashboardCardHeader from "../../layout/card/DashboardCardHeader"
 import { faBell, faChess, faCog, faDesktop, faGraduationCap, faUser } from "@fortawesome/free-solid-svg-icons"
 import DashboardCardLink from "../../layout/card/DashboardCardLink"
-import { useUserSelector } from "../../../hooks"
 import styles  from "./SettingsCard.module.scss"
 import SettingsModal, { SettingsType } from "../../settings/modal/SettingsModal"
 import { useTranslation } from "react-i18next"
+import { useUserContext } from "context/UserContext";
 
 const SettingsCard = () => {
   const [showModal, setShowModal] = useState(false)
   const [settingsType, setSettingsType] = useState(SettingsType.GENERAL)
 
-  const user = useUserSelector((state) => state.user.user)
+  const { user } = useUserContext()
   const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.settings" })
 
   const link = {

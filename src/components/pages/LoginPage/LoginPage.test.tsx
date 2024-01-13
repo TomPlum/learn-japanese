@@ -1,5 +1,3 @@
-import { store } from "../../../store"
-import { clearUser, setUser } from "../../../slices/UserSlice"
 import LoginPage  from "./LoginPage"
 import { fireEvent, waitFor } from "@testing-library/react"
 import auth from "../../../service/AuthenticationService"
@@ -33,24 +31,20 @@ const mockLogin = vi.fn()
 
 beforeEach(() => {
   auth.login = mockLogin
-  store.dispatch(clearUser())
 })
 
 test("Should redirect to the home page if the user is already logged in", () => {
-  store.dispatch(setUser(testUser))
-  const { history } = render(<LoginPage />)
+  const { history } = render(<LoginPage />, { user: testUser })
   expect(history.location.pathname).toBe("/home")
 })
 
 test("Should render the login form when there is no user logged in", () => {
-  store.dispatch(clearUser())
   const { component } = render(<LoginPage />)
   expect(component.getByTestId("login-form")).toBeInTheDocument()
 })
 
 test("Should redirect to the home page after successfully logging in", async () => {
   // Start with no user
-  store.dispatch(clearUser())
   const { component, history } = render(<LoginPage />)
 
   // Log in
@@ -65,13 +59,11 @@ test("Should redirect to the home page after successfully logging in", async () 
 })
 
 test("Should pass the username from the location query parameter into the login form", () => {
-  store.dispatch(clearUser())
   const { component } = render(<LoginPage />, { url: "/login?username=TestingUser" })
   expect(component.getByPlaceholderText("Username")).toHaveValue("TestingUser")
 })
 
 test("Should render the info message about session expiry when the query param is passed as true", () => {
-  store.dispatch(clearUser())
   const { component } = render(<LoginPage />, { url: "/login?session-expired=true" })
   expect(component.getByText("Your session has expired. Please log-in again.")).toBeInTheDocument()
 })

@@ -2,8 +2,6 @@ import { screen, render } from "@testing-library/react"
 import { createMemoryRouter, RouterProvider } from "react-router-dom"
 import { Environment } from "./utility/Environment.ts"
 import { routerConfig } from "./LearnJapanese.tsx"
-import { Provider } from "react-redux";
-import { store } from "./store.ts";
 
 // Mock scrollIntoView() as it doesn't exist in JSDom
 const scrollIntoView = vi.fn()
@@ -15,9 +13,7 @@ const setup = (route = '') => {
     initialIndex: 1
   })
   render(
-   <Provider store={store}>
-     <RouterProvider router={router} />
-   </Provider>
+   <RouterProvider router={router} />
   )
 }
 

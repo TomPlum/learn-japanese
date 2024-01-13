@@ -1,9 +1,6 @@
 import "./styles/sass/LearnJapanese.module.scss"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css"
-import { Location } from "history"
-import { Provider } from "react-redux"
-import { EnhancedStore } from "@reduxjs/toolkit"
 import "./i18n"
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "components/pages/LandingPage";
@@ -27,11 +24,6 @@ import SessionSettingsProvider from "context/SessionSettingsContext";
 import FontProvider from "context/FontContext";
 import NotificationProvider from "context/NotificationContext";
 import UserProvider from "context/UserContext";
-
-interface LearnJapaneseProps {
-  store: EnhancedStore
-  location?: Location
-}
 
 export const routerConfig = [
   {
@@ -110,21 +102,19 @@ export const router = createBrowserRouter(routerConfig, {
   basename: import.meta.env.VITE_BASE_PATH
 })
 
-const LearnJapanese = ({ store }: LearnJapaneseProps) => {
+const LearnJapanese = () => {
   return (
-    <Provider store={store}>
-      <SessionSettingsProvider>
-        <NotificationProvider>
-          <FontProvider>
-            <UserProvider>
-              <RouterProvider
-                router={router}
-              />
-            </UserProvider>
-          </FontProvider>
-        </NotificationProvider>
-      </SessionSettingsProvider>
-    </Provider>
+    <SessionSettingsProvider>
+      <NotificationProvider>
+        <FontProvider>
+          <UserProvider>
+            <RouterProvider
+              router={router}
+            />
+          </UserProvider>
+        </FontProvider>
+      </NotificationProvider>
+    </SessionSettingsProvider>
   )
 }
 

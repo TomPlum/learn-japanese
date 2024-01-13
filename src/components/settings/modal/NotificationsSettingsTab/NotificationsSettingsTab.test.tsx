@@ -1,10 +1,8 @@
 import NotificationSettingsTab  from "./NotificationsSettingsTab"
 import { fireEvent, within } from "@testing-library/react"
-import { store } from "../../../../store"
-import { clearUser, setPreference, setUser } from "../../../../slices/UserSlice"
 import { testUser } from "../../../../setupTests"
-import { Preference } from "../../../../domain/user/Preference"
 import { render } from "__test-utils__"
+import { User } from "context/UserContext";
 
 const mockUpdatePreferences = vi.fn()
 vi.mock("service/UserService", () => ({
@@ -13,16 +11,11 @@ vi.mock("service/UserService", () => ({
   }
 }))
 
-beforeEach(() => {
-  store.dispatch(clearUser())
-})
-
 test("Should render the streak notifications toggle", async () => {
   // Start with the preference enabled
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  store.dispatch(setUser(testUser))
-  store.dispatch(setPreference({ preference: Preference.STREAK_NOTIFICATIONS, value: true }))
-  const { component } = render(<NotificationSettingsTab />)
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, streakNotifications: true }}
+  const { component } = render(<NotificationSettingsTab />, { user })
 
   // It should default to the truthy text
   const notificationsToggle = component.getByTestId("streak-notifications-toggle")
@@ -44,9 +37,8 @@ test("Should render the streak notifications toggle", async () => {
 test("Should render the mistakes reminder toggle", async () => {
   // Start with the preference enabled
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  store.dispatch(setUser(testUser))
-  store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }))
-  const { component } = render(<NotificationSettingsTab />)
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: true }}
+  const { component } = render(<NotificationSettingsTab />, { user })
 
   // It should default to the truthy text
   const mistakesToggle = component.getByTestId("mistakes-reminders-toggle")

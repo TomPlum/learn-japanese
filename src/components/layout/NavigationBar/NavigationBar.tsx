@@ -3,13 +3,13 @@ import FontSelectorButton from "../../ui/buttons/FontSelectorButton"
 import ThemeButton from "../../ui/buttons/ThemeButton"
 import UserButton from "../../user/UserButton"
 import LearnButton from "../../ui/buttons/LearnButton"
-import { useUserSelector } from "../../../hooks"
 import NotificationsButton from "../../ui/buttons/NotificationsButton"
 import HelpButton from "../../ui/buttons/HelpButton"
 import HomeButton from "../../ui/buttons/HomeButton"
 import styles  from "./NavigationBar.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
+import { useUserContext } from "context/UserContext";
 
 export interface NavigationBarProps {
   onLaunchLoginModal: () => void
@@ -18,7 +18,7 @@ export interface NavigationBarProps {
 const NavigationBar = (props: NavigationBarProps) => {
   const { onLaunchLoginModal } = props
 
-  const user = useUserSelector((state) => state.user.user)
+  const { user } = useUserContext()
 
   return (
     <Navbar variant="dark" fixed="top" expand="md" className={styles.navbar} data-testid="navigation-bar">

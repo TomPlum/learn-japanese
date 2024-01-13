@@ -2,7 +2,7 @@ import { Card, Table } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faRedo } from "@fortawesome/free-solid-svg-icons"
 import styles  from "./Ranks.module.scss"
-import { User } from "../../../../slices/UserSlice"
+import { User } from "context/UserContext";
 
 export interface RanksProps {
   user: User

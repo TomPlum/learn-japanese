@@ -1,16 +1,15 @@
 import { fireEvent, screen } from "@testing-library/react"
 import NavigationBar, { NavigationBarProps }  from "./NavigationBar"
-import { store } from "../../../store"
-import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import { render } from "__test-utils__"
+import { User } from "context/UserContext";
 
 const onLaunchLoginModalHandler = vi.fn()
 
 let props: NavigationBarProps
 
-const setup = () => {
-  const { component, history } = render(<NavigationBar {...props} />)
+const setup = (user?: User) => {
+  const { component, history } = render(<NavigationBar {...props} />, { user })
 
   return {
     home: component.getByTestId("home-button-nav-link"),
@@ -43,13 +42,11 @@ test("Clicking the login button while not logged in should call the onLaunchLogi
 })
 
 test("Should render the notifications button if the user is logged in", async () => {
-  store.dispatch(setUser(testUser))
-  setup()
+  setup(testUser)
   expect(await screen.findByTestId("notifications-button")).toBeInTheDocument()
 })
 
 test("Should not render the notifications button if the user is not logged in", async () => {
-  store.dispatch(clearUser())
   setup()
   expect(await screen.findByText("Home")).toBeInTheDocument()
   expect(screen.queryByTestId("notifications-button")).not.toBeInTheDocument()

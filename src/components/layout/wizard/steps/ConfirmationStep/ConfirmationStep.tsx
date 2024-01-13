@@ -6,9 +6,9 @@ import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { WizardStep } from "../../SessionWizard/types.ts"
 import SessionSettingsSummary from "../../../../settings/SessionSettingsSummary"
-import { useUserSelector } from "../../../../../hooks"
 import HoverMessage from "../../../../ui/HoverMessage"
 import { useTranslation } from "react-i18next"
+import { useUserContext } from "context/UserContext";
 
 export interface ConfirmationStepProps {
   settings: SessionSettings
@@ -18,7 +18,7 @@ export interface ConfirmationStepProps {
 const ConfirmationStep = (props: ConfirmationStepProps) => {
   const { settings, onSelectStage } = props
 
-  const user = useUserSelector((state) => state.user.user)
+  const { user } = useUserContext()
 
   const { t } = useTranslation("translation", { keyPrefix: "wizard.steps.confirmation" })
   const [inSavePresetForm, setInSavePresetForm] = useState(false)

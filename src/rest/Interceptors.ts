@@ -1,5 +1,4 @@
 import { AxiosError, AxiosHeaders, AxiosRequestConfig } from "axios";
-import { clearUser, setAccessToken, setRefreshToken } from "../slices/UserSlice"
 import RestClient from "./RestClient"
 import { Environment } from "../utility/Environment"
 import api from "./API"
@@ -43,7 +42,7 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
   const refreshEndpoint = `${Environment.variable("API_HOST_URI")}/user/refresh-token`
   if (config && config.url === refreshEndpoint && error.response && error.response.status !== 200) {
     const username = store.getState().user.user.username
-    store.dispatch(clearUser())
+    // store.dispatch(clearUser()) // TODO: Clear from context in JPUI-58
     window.location.href = `${import.meta.env.VITE_BASE_PATH}/login?session-expired=true&username=${username}`
   }
 
@@ -54,8 +53,8 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
       return RestClient.post<RefreshTokenResponse>("/user/refresh-token", { token: refreshToken })
         .then((response) => {
           if (response.data) {
-            store.dispatch(setAccessToken(response.data.accessToken))
-            store.dispatch(setRefreshToken(response.data.refreshToken))
+            // store.dispatch(setAccessToken(response.data.accessToken)) // TODO: Set access token in context in JPUI-58
+            // store.dispatch(setRefreshToken(response.data.refreshToken)) // TODO: Set refresh token in context in JPUI-58
             return api(config)
           }
         })

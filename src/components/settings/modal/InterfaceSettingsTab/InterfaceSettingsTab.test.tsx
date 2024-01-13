@@ -1,11 +1,10 @@
 import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react"
 import InterfaceSettingsTab  from "./InterfaceSettingsTab"
-import { store } from "../../../../store"
-import { clearUser, setUser } from "../../../../slices/UserSlice"
 import { localStorageMock, testUser } from "../../../../setupTests"
 import { render } from "__test-utils__"
 import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
 import { FontContextBag } from "context/FontContext";
+import { User } from "context/UserContext";
 
 const onEditDashboardLayoutHandler = vi.fn()
 
@@ -24,12 +23,7 @@ vi.mock("service/UserService", () => ({
 }))
 
 beforeEach(() => {
-  store.dispatch(setUser(testUser))
   localStorageMock.clear()
-})
-
-afterEach(() => {
-  store.dispatch(clearUser())
 })
 
 test("Should render the main tab contents on initial render", async () => {
@@ -103,10 +97,13 @@ test("Should render the confidence menu style selector dropdown", async () => {
 })
 
 test("Should call the i18n change language function with the correct english code", async () => {
-  store.dispatch(setUser({ ...testUser, preferences: { ...testUser.preferences, language: "日本語" } }))
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, language: "日本語" }}
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
   mockFontService.mockResolvedValueOnce([])
-  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
+  const { component } = render(
+    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />,
+    { user }
+  )
 
   fireEvent.click(component.getByTestId("interface-settings-language-selector"))
   fireEvent.click(component.getByText("English"))
@@ -115,10 +112,14 @@ test("Should call the i18n change language function with the correct english cod
 })
 
 test("Should call the i18n change language function with the correct japanese code", async () => {
-  store.dispatch(setUser({ ...testUser, preferences: { ...testUser.preferences, language: "English" } }))
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, language: "English" }}
   mockFontService.mockResolvedValueOnce([])
+
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  const { component } = render(<InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />)
+  const { component } = render(
+    <InterfaceSettingsTab onEditDashboardLayout={onEditDashboardLayoutHandler} />,
+    { user }
+  )
 
   fireEvent.click(component.getByTestId("interface-settings-language-selector"))
   fireEvent.click(component.getByText("Japanese"))

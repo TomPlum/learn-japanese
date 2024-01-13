@@ -2,8 +2,6 @@ import { render as rtlRender, RenderResult } from "@testing-library/react";
 import { PropsWithChildren, ReactElement, useEffect } from "react"
 import { I18nextProvider } from "react-i18next"
 import i18n from "__test-utils__/i18n-testing.ts"
-import { Provider } from "react-redux"
-import { store as defaultStore } from "../store.ts"
 import SessionSettingsProvider, { SessionSettingsBag, useSessionSettingsContext } from "context/SessionSettingsContext";
 import LearnMode from "domain/session/LearnMode.ts"
 import PlayMode from "domain/session/PlayMode.ts"
@@ -21,6 +19,7 @@ import NotificationProvider, {
   useNotificationContext
 } from "context/NotificationContext";
 import UserProvider, { User, UserContextBag, useUserContext } from "context/UserContext";
+import { localStorageMock } from "../setupTests.ts";
 
 interface ContextListener<Bag> {
   useContextHook: () => Bag
@@ -72,6 +71,10 @@ const render = (component: ReactElement, {
   const onNotificationChange = vi.fn()
   const onUserChange = vi.fn()
 
+  if (user) {
+    localStorageMock.setItem("user", JSON.stringify(user))
+  }
+
   const history = createMemoryHistory({ initialEntries: [url ?? '/'] }) as never as History
 
   const Wrapper = ({ children }: PropsWithChildren) => (
@@ -97,14 +100,12 @@ const render = (component: ReactElement, {
                     useContextHook={useNotificationContext}
                     onContextValueChange={onNotificationChange}
                   >
-                    <UserProvider initialUser={user}>
+                    <UserProvider>
                       <ReactContextListener<UserContextBag>
                         useContextHook={useUserContext}
                         onContextValueChange={onUserChange}
                       >
-                        <Provider store={defaultStore}>
-                          {children}
-                        </Provider>
+                        {children}
                       </ReactContextListener>
                     </UserProvider>
                   </ReactContextListener>

@@ -1,10 +1,10 @@
 import RestClient, { APIResponse } from "../rest/RestClient"
 import UpdateResponse from "../rest/response/UpdateResponse"
 import DataResponse from "../rest/response/DataResponse"
-import { User, UserPreferences } from "../slices/UserSlice"
 import PatchRequest from "../rest/request/patch/PatchRequest"
 import PatchReplaceOperation from "../rest/request/patch/PatchReplaceOperation"
 import { Preference } from "../domain/user/Preference"
+import { User, UserPreferences } from "context/UserContext";
 
 export interface UserPreferencesResponse {
   kanjiFont: string

@@ -1,7 +1,6 @@
 import { AxiosError, AxiosResponse, Method } from "axios"
 import { Environment } from "../utility/Environment"
 import api from "./API"
-import { store } from "../store"
 import { refreshTokenInterceptor } from "./Interceptors"
 import PatchRequest from "./request/patch/PatchRequest"
 
@@ -67,7 +66,7 @@ class RestClient {
       method: method,
       headers: {
         "Content-Type": contentType ?? "application/json",
-        Authorization: `Bearer ${store.getState().user.user?.token}`
+        // Authorization: `Bearer ${store.getState().user.user?.token}` TODO: Get token from context in JPUI-51
       },
       data: body ? JSON.stringify(body) : undefined
     })

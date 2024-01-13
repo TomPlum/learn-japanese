@@ -1,6 +1,6 @@
 import { fireEvent, screen } from "@testing-library/react"
 import UserButton, { UserButtonProps }  from "./UserButton"
-import { testUser } from "../../../setupTests"
+import { testUser } from "../../../setupTests";
 import { render } from "__test-utils__"
 import { User, UserContextBag } from "context/UserContext";
 import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
@@ -64,7 +64,7 @@ test("Clicking the button should call the onClick event handler", () => {
 })
 
 test("Clicking the logout button should clear the user from context", async () => {
-  const { onUserContextValueChange } = setup(user)
+  const { onUserContextValueChange } = setup(testUser)
 
   fireEvent.click(screen.getByText("Tom"))
   fireEvent.click(await screen.findByText("Logout"))
@@ -72,7 +72,7 @@ test("Clicking the logout button should clear the user from context", async () =
   expect(getValueLastCalledWith<UserContextBag>(onUserContextValueChange).user).toBeUndefined()
 })
 
-//TODO: Not working for some reason.
+// TODO: Not working for some reason.
 test.skip("Clicking the high-scores option should route to the high-scores page", async () => {
   const { history } = setup(user)
 

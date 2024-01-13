@@ -1,4 +1,3 @@
-import { useLocalStorage } from "@uidotdev/usehooks";
 import {
   SetPreferenceRequest,
   User,
@@ -9,9 +8,11 @@ import {
 import { PropsWithChildren, useCallback, useEffect, useMemo } from "react";
 import UserContext from "context/UserContext/UserContext.ts";
 import useSetPreference from "context/UserContext/useSetPreference.ts";
+import useLocalStorage from "hooks/useLocalStorage";
 
-const UserProvider = ({ initialUser, children }: PropsWithChildren<UserProviderProps>) => {
-  const [user, setUser] = useLocalStorage<User>("user", initialUser)
+const UserProvider = ({ children }: PropsWithChildren<UserProviderProps>) => {
+  const [user, setUser] = useLocalStorage<User>({ key: "user" })
+  console.log('user in provider', user)
   const { updateUserPreference } = useSetPreference()
 
   useEffect(() => {
@@ -21,14 +22,16 @@ const UserProvider = ({ initialUser, children }: PropsWithChildren<UserProviderP
   }, [user?.preferences.language]);
 
   const setPreferences = useCallback((preferences: UserPreferences) => {
-    if (user) {
-      setUser(current => {
+    setUser(current => {
+      if (current) {
         return {
           ...current,
           preferences
         }
-      })
-    }
+      }
+
+      return undefined
+    })
   }, [user, setUser])
 
   const setPreference = useCallback(({ preference, value }: SetPreferenceRequest) => {
@@ -39,40 +42,46 @@ const UserProvider = ({ initialUser, children }: PropsWithChildren<UserProviderP
   }, [user, setUser])
 
   const setAccessToken = useCallback((token: string) => {
-    if (user) {
-      setUser(current => {
+    setUser(current => {
+      if (current) {
         return {
           ...current,
           token: token
         }
-      })
-    }
+      }
+
+      return undefined
+    })
   }, [user, setUser])
 
   const setRefreshToken = useCallback((token: string) => {
-    if (user) {
-      setUser(current => {
+    setUser(current => {
+      if (current) {
         return {
           ...current,
           refreshToken: token
         }
-      })
-    }
+      }
+
+      return undefined
+    })
   }, [user, setUser])
 
   const setNickName = useCallback((name: string) => {
-    if (user) {
-      setUser(current => {
+    setUser(current => {
+      if (current) {
         return {
           ...current,
           nickname: name
         }
-      })
-    }
+      }
+
+      return undefined
+    })
   }, [user, setUser])
 
   const clearUser = useCallback(() => {
-    localStorage.removeItem('user')
+    setUser(undefined)
   }, [setUser])
 
   const values: UserContextBag = useMemo(() => ({

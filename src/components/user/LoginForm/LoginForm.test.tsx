@@ -1,8 +1,6 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import LoginForm  from "./LoginForm"
 import auth, { LoginResponse } from "../../../service/AuthenticationService"
-import { store } from "../../../store"
-import { clearUser } from "../../../slices/UserSlice"
 import { render } from "__test-utils__"
 import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
 import { UserContextBag } from "context/UserContext";
@@ -56,10 +54,6 @@ const setup = () => {
     ...response
   }
 }
-
-afterEach(() => {
-  store.dispatch(clearUser())
-})
 
 test("Should focus the username field on mount", () => {
   const { username } = setup()

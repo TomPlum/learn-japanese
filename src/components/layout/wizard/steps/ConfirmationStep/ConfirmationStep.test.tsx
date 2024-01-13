@@ -4,8 +4,6 @@ import { SessionSettings } from "../../../../../domain/session/settings/SessionS
 import { KanjiSettingsBuilder } from "../../../../../domain/session/settings/data/KanjiSettings"
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
 import { render } from "__test-utils__"
-import { clearUser, setUser } from "../../../../../slices/UserSlice"
-import { store } from "../../../../../store"
 import { testUser } from "../../../../../setupTests"
 
 const onSelectStageHandler = vi.fn()
@@ -22,10 +20,6 @@ let settings: SessionSettings
 
 beforeEach(() => {
   vi.useFakeTimers({ shouldAdvanceTime: true })
-})
-
-afterEach(() => {
-  store.dispatch(clearUser())
 })
 
 function withGameSettings(gameSettings: GameSettingsBuilder) {
@@ -46,9 +40,8 @@ test('Clicking the "Save Preset" button should render the custom preset form', (
 })
 
 test("Clicking the cancel button in the save preset form should stop rendering the form", async () => {
-  store.dispatch(setUser(testUser))
   withGameSettings(new GameSettingsBuilder())
-  render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
+  render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />, { user: testUser })
 
   // Render the form
   fireEvent.click(screen.getByText("Save Preset"))
@@ -66,10 +59,9 @@ test("Clicking the cancel button in the save preset form should stop rendering t
 })
 
 test("Clicking the save button in the save preset form should hide the form and button after 2 seconds", async () => {
-  store.dispatch(setUser(testUser))
   mockPresetService.mockResolvedValueOnce({ success: true })
   withGameSettings(new GameSettingsBuilder())
-  render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
+  render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />, { user: testUser })
 
   // Render the form and fill in the details
   fireEvent.click(screen.getByText("Save Preset"))
@@ -92,7 +84,6 @@ test("Clicking the save button in the save preset form should hide the form and 
 })
 
 test("Hovering over the save button when there is no user in context should render a message", async () => {
-  store.dispatch(clearUser())
   render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />)
   fireEvent.mouseOver(screen.getByText("Save Preset"))
   expect(await screen.findByText("You must be logged in to save.")).toBeInTheDocument()

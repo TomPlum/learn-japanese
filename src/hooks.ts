@@ -1,12 +1,5 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
-import type { AppDispatch, RootState } from "./store"
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import { useLocation } from "react-router-dom"
-
-export const useUserDispatch = () => useDispatch<AppDispatch>()
-export const useUserSelector: TypedUseSelectorHook<RootState> = useSelector
-
-export const useFontDispatch = () => useDispatch<AppDispatch>()
 
 export const useDebouncedEffect = (effect: () => any, delay: number, deps: any[] = []) => {
   useEffect(() => {

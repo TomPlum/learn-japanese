@@ -1,12 +1,11 @@
 import SettingsCard  from "./SettingsCard"
-import { store } from "../../../store"
-import { clearUser, setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 import { fireEvent, screen } from "@testing-library/react"
 import { render } from "__test-utils__"
+import { User } from "context/UserContext";
 
-const setup = () => {
-  const { component } = render(<SettingsCard />)
+const setup = (user?: User) => {
+  const { component } = render(<SettingsCard />, { user })
   return {
     general: component.getByText("General Settings"),
     learn: component.getByText("Learn Settings"),
@@ -18,13 +17,8 @@ const setup = () => {
   }
 }
 
-beforeEach(() => {
-  store.dispatch(clearUser())
-})
-
 test("Should render the correct settings sub-menu links when a user is logged in", () => {
-  store.dispatch(setUser(testUser))
-  const { general, learn, play, ui, notification, user } = setup()
+  const { general, learn, play, ui, notification, user } = setup(testUser)
 
   expect(general).toBeInTheDocument()
   expect(learn).toBeInTheDocument()
@@ -35,7 +29,6 @@ test("Should render the correct settings sub-menu links when a user is logged in
 })
 
 test("Should render the correct settings sub-menu links when a user is not logged in", () => {
-  store.dispatch(clearUser())
   const { general, learn, play, ui, notification, user } = setup()
 
   expect(general).toBeInTheDocument()
@@ -47,19 +40,17 @@ test("Should render the correct settings sub-menu links when a user is not logge
 })
 
 test("Should render the settings modal with the interface tab when clicking the respective link", async () => {
-  store.dispatch(setUser(testUser))
-  const { ui } = setup()
+  const { ui } = setup(testUser)
   fireEvent.click(ui)
   expect(await screen.findByTestId("interface-settings-tab")).toBeInTheDocument()
 })
 
 test("Dismissing the settings modal should stop rendering it", async () => {
-  store.dispatch(setUser(testUser))
-  const { general } = setup()
+  const { general } = setup(testUser)
 
   fireEvent.click(general)
   expect(await screen.findByTestId("settings-modal")).toBeInTheDocument()
 
   fireEvent.click(screen.getByTitle("Close"))
-  expect(await screen.queryByTestId("settings-modal")).not.toBeInTheDocument()
+  expect(screen.queryByTestId("settings-modal")).not.toBeInTheDocument()
 })

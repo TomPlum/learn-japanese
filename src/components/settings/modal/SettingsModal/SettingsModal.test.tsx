@@ -1,10 +1,8 @@
 import { fireEvent, screen } from "@testing-library/react"
 import SettingsModal, { SettingsModalProps, SettingsType }  from "./SettingsModal"
-import { store } from "../../../../store"
-import { setPreference, setUser } from "../../../../slices/UserSlice"
-import { Preference } from "../../../../domain/user/Preference"
 import { testUser } from "../../../../setupTests"
 import { render } from "__test-utils__"
+import { User } from "context/UserContext";
 
 const mockFontService = vi.fn()
 vi.mock("service/FontService", () => ({
@@ -24,8 +22,8 @@ beforeEach(() => {
   }
 })
 
-const setup = () => {
-  const { component } = render(<SettingsModal {...props} />)
+const setup = (user?: User) => {
+  const { component, onUserContextValueChange } = render(<SettingsModal {...props} />, { user })
   return {
     general: component.getByTitle("General"),
     learn: component.getByTitle("Learn"),
@@ -34,6 +32,7 @@ const setup = () => {
     notification: component.getByTitle("Notification"),
     user: component.getByTitle("User"),
     close: component.getByTitle("Close"),
+    onUserContextValueChange,
     ...component
   }
 }
@@ -99,11 +98,10 @@ test("It should render the user settings tab when clicking the tab", () => {
 })
 
 it("Should render the dashboard layout editor when launching it from the interface settings tab", async () => {
-  store.dispatch(setUser(testUser))
-  store.dispatch(setPreference({ preference: Preference.DEFAULT_KANJI_FONT, value: "default" }))
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, kanjiFont: "default" }}
   mockFontService.mockResolvedValue([{ name: "Test Font", slug: "default" }])
   props.type = SettingsType.INTERFACE
-  setup()
+  setup(user)
   expect(await screen.findByText("Default")).toBeInTheDocument()
 
   // Clicking the button should render the editor
