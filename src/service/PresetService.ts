@@ -29,7 +29,7 @@ class PresetService {
     return this.repository
       .getAllPresets()
       .then((response: Presets) => {
-        return { learn: response.learn, play: response.play, error: response.error }
+        return { learn: response.learn, play: response.play, error: '' }
       })
       .catch((response) => {
         return { learn: [], play: [], error: response.error }
@@ -44,7 +44,7 @@ class PresetService {
     return this.repository
       .getDefaultPresets()
       .then((response: Presets) => {
-        return { learn: response.learn, play: response.play, error: response.error }
+        return { learn: response.learn, play: response.play, error: '' }
       })
       .catch((response) => {
         return { learn: [], play: [], error: response.error }
@@ -59,21 +59,6 @@ class PresetService {
     return this.repository.getDefaultPresets().then((response: Presets) => {
       return response.play
     })
-  }
-
-  /**
-   * Retrieves a list of all favourite presets.
-   * @return Favourite learn and play presets.
-   */
-  public async getFavouritePresets(): Promise<LearnPlayPresets> {
-    return this.repository
-      .getFavouritePresets()
-      .then((response: Presets) => {
-        return { learn: response.learn, play: response.play, error: response.error }
-      })
-      .catch((response) => {
-        return { learn: [], play: [], error: response.error ?? response }
-      })
   }
 
   /**

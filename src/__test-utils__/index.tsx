@@ -20,6 +20,9 @@ import NotificationProvider, {
 } from "context/NotificationContext";
 import UserProvider, { User, UserContextBag, useUserContext } from "context/UserContext";
 import { localStorageMock } from "../setupTests.ts";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const testQueryClient = new QueryClient()
 
 interface ContextListener<Bag> {
   useContextHook: () => Bag
@@ -78,44 +81,46 @@ const render = (component: ReactElement, {
   const history = createMemoryHistory({ initialEntries: [url ?? '/'] }) as never as History
 
   const Wrapper = ({ children }: PropsWithChildren) => (
-    <HistoryRouter history={history}>
-      <I18nextProvider i18n={i18n} defaultNS="translation">
-        <SessionSettingsProvider
-          gameSettings={sessionSettings?.gameSettings}
-          dataSettings={sessionSettings?.dataSettings}
-          lastLearnPreset={sessionSettings?.lastLearnPreset}
-          lastPlayPreset={sessionSettings?.lastPlayPreset}
-        >
-          <ReactContextListener<SessionSettingsBag>
-            useContextHook={useSessionSettingsContext}
-            onContextValueChange={onSessionSettingsChange}
+    <QueryClientProvider client={testQueryClient}>
+      <HistoryRouter history={history}>
+        <I18nextProvider i18n={i18n} defaultNS="translation">
+          <SessionSettingsProvider
+            gameSettings={sessionSettings?.gameSettings}
+            dataSettings={sessionSettings?.dataSettings}
+            lastLearnPreset={sessionSettings?.lastLearnPreset}
+            lastPlayPreset={sessionSettings?.lastPlayPreset}
           >
-            <FontProvider initialFont={font}>
-              <ReactContextListener<FontContextBag>
-                useContextHook={useFontContext}
-                onContextValueChange={onFontChange}
-              >
-                <NotificationProvider initialNotifications={notifications}>
-                  <ReactContextListener<NotificationContextBag>
-                    useContextHook={useNotificationContext}
-                    onContextValueChange={onNotificationChange}
-                  >
-                    <UserProvider>
-                      <ReactContextListener<UserContextBag>
-                        useContextHook={useUserContext}
-                        onContextValueChange={onUserChange}
-                      >
-                        {children}
-                      </ReactContextListener>
-                    </UserProvider>
-                  </ReactContextListener>
-                </NotificationProvider>
-              </ReactContextListener>
-            </FontProvider>
-          </ReactContextListener>
-        </SessionSettingsProvider>
-      </I18nextProvider>
-    </HistoryRouter>
+            <ReactContextListener<SessionSettingsBag>
+              useContextHook={useSessionSettingsContext}
+              onContextValueChange={onSessionSettingsChange}
+            >
+              <FontProvider initialFont={font}>
+                <ReactContextListener<FontContextBag>
+                  useContextHook={useFontContext}
+                  onContextValueChange={onFontChange}
+                >
+                  <NotificationProvider initialNotifications={notifications}>
+                    <ReactContextListener<NotificationContextBag>
+                      useContextHook={useNotificationContext}
+                      onContextValueChange={onNotificationChange}
+                    >
+                      <UserProvider>
+                        <ReactContextListener<UserContextBag>
+                          useContextHook={useUserContext}
+                          onContextValueChange={onUserChange}
+                        >
+                          {children}
+                        </ReactContextListener>
+                      </UserProvider>
+                    </ReactContextListener>
+                  </NotificationProvider>
+                </ReactContextListener>
+              </FontProvider>
+            </ReactContextListener>
+          </SessionSettingsProvider>
+        </I18nextProvider>
+      </HistoryRouter>
+    </QueryClientProvider>
   )
 
   return {

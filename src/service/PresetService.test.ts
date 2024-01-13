@@ -83,29 +83,6 @@ describe("Preset Service", () => {
     })
   })
 
-  describe("Get Favourite Presets", () => {
-    it("Should return the presets from the repository when the call succeeds", () => {
-      mockFavouritePresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
-      return service.getFavouritePresets().then((response: LearnPlayPresets) => {
-        expect(response).toStrictEqual({ learn: [learnPreset], play: [playPreset], error: undefined })
-      })
-    })
-
-    it("Should return empty preset array if the repository call fails with an error message", () => {
-      mockFavouritePresets.mockRejectedValueOnce({ error: "Failed to retrieve favourite presets." })
-      return service.getFavouritePresets().then((response: LearnPlayPresets) => {
-        expect(response).toStrictEqual({ learn: [], play: [], error: "Failed to retrieve favourite presets." })
-      })
-    })
-
-    it("Should return the whole response body in the error field if an error isn't preset in the response", () => {
-      mockFavouritePresets.mockRejectedValueOnce("Failed to retrieve favourite presets.")
-      return service.getFavouritePresets().then((response: LearnPlayPresets) => {
-        expect(response.error).toStrictEqual("Failed to retrieve favourite presets.")
-      })
-    })
-  })
-
   describe("Get Play Presets", () => {
     it("Should return only the play presets", () => {
       mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })

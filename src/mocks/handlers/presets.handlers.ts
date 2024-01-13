@@ -1,11 +1,9 @@
-import { rest } from "msw"
+import { http, HttpResponse } from "msw";
 import { api } from "../util"
 
 export const handlers = [
-  rest.get(`${api}/presets/all`, (_req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
+  http.get(`${api}/presets/all`, () => {
+    return HttpResponse.json({
         learn: [
           {
             id: 33,
@@ -1941,12 +1939,9 @@ export const handlers = [
           }
         ]
       })
-    )
   }),
-  rest.get(`${api}/presets/default`, (_req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
+  http.get(`${api}/presets/default`, () => {
+    return HttpResponse.json({
         learn: [
           {
             id: 33,
@@ -3882,12 +3877,9 @@ export const handlers = [
           }
         ]
       })
-    )
   }),
-  rest.get(`${api}/presets/favourites`, (_req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
+  http.get(`${api}/presets/favourites`, () => {
+    return HttpResponse.json({
         play: [
           {
             id: 5,
@@ -4027,33 +4019,29 @@ export const handlers = [
           }
         ]
       })
-    )
   }),
-  rest.get(`${api}/presets/custom`, (_req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        learn: [],
-        play: []
-      })
-    )
+  http.get(`${api}/presets/custom`, () => {
+    return HttpResponse.json({
+      learn: [],
+      play: []
+    })
   }),
-  rest.post(`${api}/presets/custom/play/save`, (_req, res, ctx) => {
-    return res(ctx.status(200))
+  http.post(`${api}/presets/custom/play/save`, () => {
+    return new HttpResponse(null, { status: 200 })
   }),
-  rest.post(`${api}/presets/custom/learn/save`, (_req, res, ctx) => {
-    return res(ctx.status(200))
+  http.post(`${api}/presets/custom/learn/save`, () => {
+    return new HttpResponse(null, { status: 200 })
   }),
-  rest.post(`${api}/presets/custom/learn/update`, (_req, res, ctx) => {
-    return res(ctx.status(200))
+  http.post(`${api}/presets/custom/learn/update`, () => {
+    return new HttpResponse(null, { status: 200 })
   }),
-  rest.put(`${api}/presets/favourites/save`, (_req, res, ctx) => {
-    return res(ctx.status(200))
+  http.put(`${api}/presets/favourites/save`, () => {
+    return new HttpResponse(null, { status: 200 })
   }),
-  rest.patch(`${api}/presets/favourites/update`, (_req, res, ctx) => {
-    return res(ctx.status(200))
+  http.patch(`${api}/presets/favourites/update`, () => {
+    return new HttpResponse(null, { status: 200 })
   }),
-  rest.delete(`${api}/presets/favourites/delete`, (_req, res, ctx) => {
-    return res(ctx.status(200))
+  http.delete(`${api}/presets/favourites/delete`, () => {
+    return new HttpResponse(null, { status: 200 })
   })
 ]
