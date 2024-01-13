@@ -44,7 +44,7 @@ const HighScoreSubmitButton = (props: HighScoreSubmitButtonProps) => {
   }
 
   const renderButtonContent = () => {
-    switch (preference) {
+    switch (user?.preferences.highScoresBehaviour) {
       case HighScorePreference.NEVER_SUBMIT: {
         return <span>{t("not-submitted")}</span>
       }

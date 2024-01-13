@@ -2,7 +2,6 @@ import { AxiosError, AxiosHeaders, AxiosRequestConfig } from "axios";
 import RestClient from "./RestClient"
 import { Environment } from "../utility/Environment"
 import api from "./API"
-import { EnhancedStore } from "@reduxjs/toolkit"
 
 export interface RetryableAxiosRequestConfig extends AxiosRequestConfig {
   headers: AxiosHeaders
@@ -12,16 +11,6 @@ export interface RetryableAxiosRequestConfig extends AxiosRequestConfig {
 interface RefreshTokenResponse {
   accessToken: string
   refreshToken: string
-}
-
-let store: EnhancedStore
-
-/**
- * Injects the Redux store instance to avoid circular dependencies.
- * @param _store The store instance as injected into the global provider.
- */
-export const injectStore = (_store: EnhancedStore) => {
-  store = _store
 }
 
 /**
@@ -41,7 +30,7 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
 
   const refreshEndpoint = `${Environment.variable("API_HOST_URI")}/user/refresh-token`
   if (config && config.url === refreshEndpoint && error.response && error.response.status !== 200) {
-    const username = store.getState().user.user.username
+    const username = "{PLACEHOLDER}" // TODO: Get user from context in JPUI-58
     // store.dispatch(clearUser()) // TODO: Clear from context in JPUI-58
     window.location.href = `${import.meta.env.VITE_BASE_PATH}/login?session-expired=true&username=${username}`
   }
@@ -49,7 +38,7 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
   if (config.url !== "/user/login" && error.response) {
     if (error.response.status === 401 && !config.retry) {
       config.retry = true
-      const refreshToken = store.getState().user.user?.refreshToken
+      const refreshToken = "{PLACEHOLDER}}" // TODO: Get refresh token from context in JPUI-58
       return RestClient.post<RefreshTokenResponse>("/user/refresh-token", { token: refreshToken })
         .then((response) => {
           if (response.data) {
