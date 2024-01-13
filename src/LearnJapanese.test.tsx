@@ -1,6 +1,5 @@
-import { screen } from "@testing-library/react"
+import { screen, render } from "@testing-library/react"
 import { createMemoryRouter, RouterProvider } from "react-router-dom"
-import { render } from "__test-utils__"
 import { Environment } from "./utility/Environment.ts"
 import { routerConfig } from "./LearnJapanese.tsx"
 

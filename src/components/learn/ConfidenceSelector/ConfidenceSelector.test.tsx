@@ -2,8 +2,6 @@ import { fireEvent, screen } from "@testing-library/react"
 import ConfidenceSelector, { ConfidenceSelectorProps }  from "./ConfidenceSelector"
 import Confidence from "../../../domain/learn/spacedrepetition/Confidence"
 import { render } from "__test-utils__"
-import { setUser } from "../../../slices/UserSlice"
-import { store } from "../../../store"
 import SpaceRepetitionFeedback from "../../../domain/learn/spacedrepetition/SpaceRepetitionFeedback"
 import Definition from "../../../domain/sentence/Definition"
 import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails"
@@ -21,7 +19,7 @@ let props: ConfidenceSelectorProps
 const onSelectHandler = vi.fn()
 
 const setup = () => {
-  const component = render(<ConfidenceSelector {...props} />)
+  const { component }  = render(<ConfidenceSelector {...props} />, { user: testUser })
   return {
     one: component.getByText("1"),
     two: component.getByText("2"),
@@ -35,8 +33,6 @@ const setup = () => {
 }
 
 beforeEach(() => {
-  store.dispatch(setUser(testUser))
-
   mockGetDaysTillNextReview.mockReturnValue(5)
 
   const definition = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective")

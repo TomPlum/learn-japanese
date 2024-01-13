@@ -1,9 +1,6 @@
 import "./styles/sass/LearnJapanese.module.scss"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css"
-import { Location } from "history"
-import { Provider } from "react-redux"
-import { EnhancedStore } from "@reduxjs/toolkit"
 import "./i18n"
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "components/pages/LandingPage";
@@ -23,11 +20,10 @@ import NotFoundPage from "components/pages/NotFoundPage";
 import ProtectedRoute from "components/layout/ProtectedRoute";
 import ProfilePage from "components/pages/ProfilePage";
 import NavigationWrapper from "components/layout/NavigationWrapper";
-
-interface LearnJapaneseProps {
-  store: EnhancedStore
-  location?: Location
-}
+import SessionSettingsProvider from "context/SessionSettingsContext";
+import FontProvider from "context/FontContext";
+import NotificationProvider from "context/NotificationContext";
+import UserProvider from "context/UserContext";
 
 export const routerConfig = [
   {
@@ -106,11 +102,19 @@ export const router = createBrowserRouter(routerConfig, {
   basename: import.meta.env.VITE_BASE_PATH
 })
 
-const LearnJapanese = ({ store }: LearnJapaneseProps) => {
+const LearnJapanese = () => {
   return (
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <SessionSettingsProvider>
+      <NotificationProvider>
+        <FontProvider>
+          <UserProvider>
+            <RouterProvider
+              router={router}
+            />
+          </UserProvider>
+        </FontProvider>
+      </NotificationProvider>
+    </SessionSettingsProvider>
   )
 }
 

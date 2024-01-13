@@ -38,7 +38,7 @@ afterEach(() => {
 })
 
 const setup = () => {
-  const component = render(<Learn {...props} />)
+  const { component }  = render(<Learn {...props} />)
   return {
     remembered: component.getByTitle("I remembered it"),
     forgot: component.getByTitle("I couldn't remember it"),

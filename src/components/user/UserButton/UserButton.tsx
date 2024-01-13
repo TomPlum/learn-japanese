@@ -1,19 +1,17 @@
 import { faChartBar, faDoorOpen, faTrophy, faUser, faUserCircle } from "@fortawesome/free-solid-svg-icons"
-import { useUserDispatch, useUserSelector } from "../../../hooks"
-import { clearUser } from "../../../slices/UserSlice"
 import menuStyles from "components/layout/NavigationBar/NavigationBar.module.scss"
 import styles  from "./UserButton.module.scss"
 import NavigationButton from "../../ui/NavigationButton"
 import { useTranslation } from "react-i18next"
+import { useUserContext } from "context/UserContext";
 
 export interface UserButtonProps {
   onClick: () => void
-  disabled: boolean
+  disabled?: boolean
 }
 
 const UserButton = (props: UserButtonProps) => {
-  const userDispatch = useUserDispatch()
-  const user = useUserSelector((state) => state.user.user)
+  const { user, clearUser } = useUserContext()
   const { t } = useTranslation("translation", { keyPrefix: "navigation.button.user" })
 
   const getButtonText = (): string => {
@@ -26,10 +24,6 @@ const UserButton = (props: UserButtonProps) => {
     } else {
       return t("login")
     }
-  }
-
-  const handleLogout = () => {
-    userDispatch(clearUser())
   }
 
   return (
@@ -53,11 +47,11 @@ const UserButton = (props: UserButtonProps) => {
         {t("stats")}
       </NavigationButton.Item>
 
-      <NavigationButton.Item icon={faTrophy} iconClass={styles.highscores} href="/high-scores">
+      <NavigationButton.Item id='high-scores-link' icon={faTrophy} iconClass={styles.highscores} href="/high-scores">
         {t("high-scores")}
       </NavigationButton.Item>
 
-      <NavigationButton.Item icon={faDoorOpen} onClick={handleLogout} iconClass={styles.logout}>
+      <NavigationButton.Item icon={faDoorOpen} onClick={clearUser} iconClass={styles.logout}>
         {t("logout")}
       </NavigationButton.Item>
     </NavigationButton>

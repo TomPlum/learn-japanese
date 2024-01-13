@@ -5,7 +5,6 @@ import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
 import LoadingSpinner from "../../ui/loading/LoadingSpinner"
 import KanjiSearchResult from "../../ui/KanjiSearchResult"
 import StackGrid, { transitions } from "react-stack-grid"
-import { useFontSelector } from "../../../hooks"
 import { faSearchMinus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import ValueSelector from "../../ui/select/ValueSelector"
@@ -15,10 +14,11 @@ import { KanjiReading } from "../../../domain/kanji/KanjiReading"
 import ExampleDisplay from "../../ui/display/ExampleDisplay"
 import SimplePagination from "../../ui/paging/SimplePagination"
 import JLTPLevel from "../../../domain/learn/JLTPLevel"
+import { useFontContext } from "context/FontContext";
 
 const KanjiBankPage = () => {
   const service = new KanjiService()
-  const font = useFontSelector((state) => state.font.selected)
+  const { font } = useFontContext()
 
   const [kanji, setKanji] = useState<KanjiResult[]>([])
   const [selected, setSelected] = useState<KanjiResult | undefined>(undefined)

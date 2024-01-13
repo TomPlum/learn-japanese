@@ -12,7 +12,7 @@ import PresetService from "../../../../../service/PresetService"
 import PlayMode from "../../../../../domain/session/PlayMode"
 import LearnMode from "../../../../../domain/session/LearnMode"
 import { Alert } from "react-bootstrap"
-import { useUserSelector } from "../../../../../hooks"
+import { useUserContext } from "context/UserContext";
 
 export interface PresetSelectionStepProps {
   mode: AppMode
@@ -33,7 +33,7 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
   const [learnPresets, setLearnPresets] = useState<LearnMode[]>([])
 
   const service = new PresetService()
-  const user = useUserSelector((state) => state.user.user)
+  const { user } = useUserContext()
 
   useEffect(() => {
     isValid(true)

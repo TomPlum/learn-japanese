@@ -1,10 +1,10 @@
-import { useUserSelector } from "../../../hooks"
 import { Navigate, useNavigate } from "react-router-dom"
 import RegistrationForm from "../../user/RegistrationForm"
 import styles  from "./RegisterPage.module.scss"
+import { useUserContext } from "context/UserContext";
 
 const RegisterPage = () => {
-  const user = useUserSelector((state) => state.user).user
+  const { user } = useUserContext()
   const navigate = useNavigate()
 
   if (user) {

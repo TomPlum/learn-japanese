@@ -1,6 +1,5 @@
 import { Card, Col, Dropdown, Row } from "react-bootstrap"
 import React, { useEffect, useState } from "react"
-import { useUserDispatch } from "../../../../hooks"
 import { Font } from "../../../ui/buttons/FontSelectorButton"
 import { Theme } from "../../../../domain/Theme"
 import { Language } from "../../../../domain/Language"
@@ -8,20 +7,20 @@ import { HighScorePreference } from "../../../../domain/HighScorePreference"
 import { faCheckCircle, faCircleNotch, faRedo } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AppMode } from "../../../../domain/AppMode"
-import { setPreferences, User, UserPreferences } from "../../../../slices/UserSlice"
 import { CardsPerDay } from "../../../../domain/learn/spacedrepetition/CardsPerDay"
 import { ConfidenceMenuStyle } from "../../../../domain/learn/spacedrepetition/ConfidenceMenuStyle"
 import styles  from "./Preferences.module.scss"
 import UserService from "../../../../service/UserService"
 import FontService from "../../../../service/FontService"
 import { useTranslation } from "react-i18next"
+import { User, UserPreferences, useUserContext } from "context/UserContext";
 
 export interface PreferencesProps {
   user: User
 }
 
 const Preferences = (props: PreferencesProps) => {
-  const userDispatcher = useUserDispatch()
+  const { setPreferences } = useUserContext()
   const userService = new UserService()
   const fontService = new FontService()
   const { t } = useTranslation("translation", { keyPrefix: "settings.modal.interface.kanji-font.options" })
@@ -123,7 +122,7 @@ const Preferences = (props: PreferencesProps) => {
       .updatePreferences([])
       .then((response) => {
         if (response.success) {
-          userDispatcher(setPreferences(updatedPreferences))
+          setPreferences(updatedPreferences)
         } else {
           setError(response.error)
         }

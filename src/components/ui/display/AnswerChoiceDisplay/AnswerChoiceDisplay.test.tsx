@@ -88,13 +88,13 @@ test("Passing the index property when the display is blurred should not show the
 
 test("Passing a container style prop should cause that class to be applied to the container", () => {
   props.style = { container: ["containerClass"] }
-  const { container } = render(<AnswerChoiceDisplay {...props} />)
-  expect(container.firstChild).toHaveClass("containerClass")
+  const { component } = render(<AnswerChoiceDisplay {...props} />)
+  expect(component.container.firstChild).toHaveClass("containerClass")
 })
 
 test("Not passing a container style prop should default to the containers default class", () => {
-  const { container } = render(<AnswerChoiceDisplay {...props} />)
-  expect(container.firstChild).toHaveClass("wrapper")
+  const { component } = render(<AnswerChoiceDisplay {...props} />)
+  expect(component.container.firstChild).toHaveClass("wrapper")
 })
 
 test("If not notifying incorrect, but is blurred, the character should have the 'blur' class", () => {

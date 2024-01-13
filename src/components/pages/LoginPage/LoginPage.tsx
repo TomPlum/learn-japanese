@@ -1,13 +1,14 @@
-import { useQueryParams, useUserSelector } from "../../../hooks"
+import { useQueryParams } from "../../../hooks"
 import { Navigate, useNavigate } from "react-router-dom"
 import LoginForm from "../../user/LoginForm"
 import styles  from "./LoginPage.module.scss"
 import { useTranslation } from "react-i18next"
 import LoadingSpinner from "../../ui/loading/LoadingSpinner"
+import { useUserContext } from "context/UserContext";
 
 const LoginPage = () => {
   const { t, ready } = useTranslation("translation", { keyPrefix: "forms.login" })
-  const user = useUserSelector((state) => state.user).user
+  const { user } = useUserContext()
   const navigate = useNavigate()
   const params = useQueryParams()
 

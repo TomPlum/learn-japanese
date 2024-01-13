@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import NotificationDisplay, { NotificationDisplayProps }  from "./NotificationDisplay"
-import { NotificationType } from "../../../../slices/NotificationSlice"
 import { VitestUtils } from "vitest";
+import { NotificationType } from "context/NotificationContext";
 
 const onDismissHandler = vi.fn()
 let mockDate: VitestUtils

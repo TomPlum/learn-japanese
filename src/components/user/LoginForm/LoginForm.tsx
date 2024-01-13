@@ -3,10 +3,9 @@ import React, { useEffect, useRef, useState } from "react"
 import { Alert, Button, Form, Modal } from "react-bootstrap"
 import styles from "components/user/UserForm/UserForm.module.scss"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
-import { useUserDispatch } from "../../../hooks"
-import { setUser } from "../../../slices/UserSlice"
 import auth from "../../../service/AuthenticationService"
 import { useTranslation } from "react-i18next"
+import { useUserContext } from "context/UserContext";
 
 export interface LoginFormProps {
   info?: string
@@ -26,7 +25,7 @@ const LoginForm = (props: LoginFormProps) => {
   const usernameField = useRef<HTMLInputElement>(null)
   const passwordField = useRef<HTMLInputElement>(null)
 
-  const dispatchUser = useUserDispatch()
+  const { setUser } = useUserContext()
 
   const formValid = usernameValid && passwordValid
 
@@ -59,36 +58,34 @@ const LoginForm = (props: LoginFormProps) => {
     auth
       .login(username, password)
       .then((res) => {
-        dispatchUser(
-          setUser({
-            username: res.username,
-            email: res.email,
-            nickname: res.nickname,
-            roles: res.roles,
-            locked: res.locked,
-            expired: res.expired,
-            credentialsExpired: res.credentialsExpired,
-            enabled: res.enabled,
-            creationDate: res.creationDate,
-            token: res.token,
-            refreshToken: res.refreshToken,
-            preferences: {
-              kanjiFont: res.preferences.kanjiFont,
-              language: res.preferences.language,
-              theme: res.preferences.theme,
-              confidenceMenuStyle: res.preferences.confidenceMenuStyle,
-              highScoresBehaviour: res.preferences.highScoresBehaviour,
-              flashCardsQuantity: res.preferences.flashCardsQuantity,
-              defaultMode: res.preferences.defaultMode,
-              streakCardView: res.preferences.streakCardView,
-              profileVisibility: res.preferences.profileVisibility,
-              activityFeedQuantity: res.preferences.activityFeedQuantity,
-              romajiVisibility: res.preferences.romajiVisibility,
-              mistakesReminders: res.preferences.mistakesReminders,
-              streakNotifications: res.preferences.streakNotifications
-            }
-          })
-        )
+        setUser({
+          username: res.username,
+          email: res.email,
+          nickname: res.nickname,
+          roles: res.roles,
+          locked: res.locked,
+          expired: res.expired,
+          credentialsExpired: res.credentialsExpired,
+          enabled: res.enabled,
+          creationDate: res.creationDate,
+          token: res.token,
+          refreshToken: res.refreshToken,
+          preferences: {
+            kanjiFont: res.preferences.kanjiFont,
+            language: res.preferences.language,
+            theme: res.preferences.theme,
+            confidenceMenuStyle: res.preferences.confidenceMenuStyle,
+            highScoresBehaviour: res.preferences.highScoresBehaviour,
+            flashCardsQuantity: res.preferences.flashCardsQuantity,
+            defaultMode: res.preferences.defaultMode,
+            streakCardView: res.preferences.streakCardView,
+            profileVisibility: res.preferences.profileVisibility,
+            activityFeedQuantity: res.preferences.activityFeedQuantity,
+            romajiVisibility: res.preferences.romajiVisibility,
+            mistakesReminders: res.preferences.mistakesReminders,
+            streakNotifications: res.preferences.streakNotifications
+          }
+        })
 
         props.onSuccess()
       })

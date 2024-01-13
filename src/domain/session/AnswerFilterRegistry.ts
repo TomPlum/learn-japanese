@@ -11,7 +11,6 @@ class AnswerFilterRegistry {
     [
       1,
       (data: Learnable) => {
-        console.log(data)
         return new FilterChain<Kana>()
           .withFilter(new DiagraphFilter((data as Kana).isDiagraph()))
           .withFilter(new KanaTypeFilter((data as Kana).type, true))

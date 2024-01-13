@@ -36,10 +36,10 @@ test("Should render the name of the preset when not selected", () => {
 
 test("Clicking the button should call the onAdd event handler with the preset ID when not selected", () => {
   props.selected = false
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  const surface = container.firstChild?.firstChild!
+  const surface = component.container.firstChild?.firstChild!
   fireEvent.mouseEnter(surface)
 
   // Clicking the button should call the onAdd event handler
@@ -49,10 +49,10 @@ test("Clicking the button should call the onAdd event handler with the preset ID
 
 test("Clicking the button should call the onCancel event handler with the preset ID when selected", () => {
   props.selected = true
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  const surface = container.firstChild?.firstChild!
+  const surface = component.container.firstChild?.firstChild!
   fireEvent.mouseEnter(surface)
 
   // Clicking the button should call the onCancel event handler
@@ -62,17 +62,17 @@ test("Clicking the button should call the onCancel event handler with the preset
 
 test("Should render the favourite text hovering over the button if not selected", () => {
   props.selected = false
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  fireEvent.mouseEnter(container.firstChild?.firstChild!)
+  fireEvent.mouseEnter(component.container.firstChild?.firstChild!)
 
   // Should stop rendering the preset name and show the favourite text
   expect(screen.queryByText("Test Preset")).not.toBeInTheDocument()
   expect(screen.getByText("Favourite")).toBeInTheDocument()
 
   // Mouse out of the listening surface div
-  fireEvent.mouseOut(container.firstChild?.firstChild!)
+  fireEvent.mouseOut(component.container.firstChild?.firstChild!)
 
   // Should stop rendering the favourite text and re-render the preset name
   expect(screen.getByText("Test Preset")).toBeInTheDocument()
@@ -81,17 +81,17 @@ test("Should render the favourite text hovering over the button if not selected"
 
 test("Should render the cancel text hovering over the button if selected", () => {
   props.selected = true
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  fireEvent.mouseEnter(container.firstChild?.firstChild!)
+  fireEvent.mouseEnter(component.container.firstChild?.firstChild!)
 
   // Should stop rendering the preset name and show the cancel text
   expect(screen.queryByText("Test Preset")).not.toBeInTheDocument()
   expect(screen.getByText("Cancel")).toBeInTheDocument()
 
   // Mouse out of the listening surface div
-  fireEvent.mouseOut(container.firstChild?.firstChild!)
+  fireEvent.mouseOut(component.container.firstChild?.firstChild!)
 
   // Should stop rendering the cancel text and re-render the preset name
   expect(screen.getByText("Test Preset")).toBeInTheDocument()
@@ -100,6 +100,6 @@ test("Should render the cancel text hovering over the button if selected", () =>
 
 test("Should add the given class name to the container", () => {
   props.className = "testClassName"
-  const { container } = setup()
-  expect(container.firstChild).toHaveClass("testClassName")
+  const { component } = setup()
+  expect(component.container.firstChild).toHaveClass("testClassName")
 })

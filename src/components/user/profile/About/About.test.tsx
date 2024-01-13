@@ -14,7 +14,7 @@ vi.mock("service/UserService", () => ({
 const user = testUser
 
 const setup = () => {
-  const component = render(<About user={user} />)
+  const { component } = render(<About user={user} />)
 
   return {
     edit: component.queryByTitle("Edit"),

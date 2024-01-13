@@ -2,10 +2,9 @@ import { faCircleNotch, faQuestionCircle, IconDefinition } from "@fortawesome/fr
 import styles  from "./SettingsBooleanButton.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import UserService from "../../../../service/UserService"
-import { useUserDispatch, useUserSelector } from "../../../../hooks"
 import { Preference } from "../../../../domain/user/Preference"
-import { setPreference } from "../../../../slices/UserSlice"
 import { useState } from "react"
+import { useUserContext } from "context/UserContext";
 
 export interface BooleanStateProps {
   name: string
@@ -27,10 +26,11 @@ const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
   const { id, truthy, falsy, preference, enableHoverColours, onError } = props
 
   const service = new UserService()
-  const userDispatch = useUserDispatch()
-  const preferences = useUserSelector((state) => state.user?.user?.preferences)
+  const { user, setPreference } = useUserContext()
 
   const getUserPreferenceValue = (): boolean | undefined => {
+    const preferences = user?.preferences
+
     switch (preference) {
       case Preference.MISTAKES_REMINDERS:
         return preferences?.mistakesReminders
@@ -66,7 +66,7 @@ const SettingsBooleanButton = (props: SettingsBooleanButtonProps) => {
       .then((response) => {
         if (response.success) {
           setText((selected === truthy ? falsy : truthy).name)
-          userDispatch(setPreference(request))
+          setPreference(request)
         } else {
           handleUpdateError(response)
         }

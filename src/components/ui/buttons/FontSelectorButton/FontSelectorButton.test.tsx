@@ -1,7 +1,8 @@
 import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import FontSelectorButton  from "./FontSelectorButton"
-import { store } from "../../../../store"
 import { render } from "__test-utils__"
+import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
+import { FontContextBag } from "context/FontContext";
 
 const mockGetSelectedFont = vi.fn()
 const mockGetFonts = vi.fn()
@@ -26,10 +27,10 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<FontSelectorButton />)
+  const result = render(<FontSelectorButton />)
   return {
-    toggle: component.getByTestId("font-selector"),
-    ...component
+    toggle: result.component.getByTestId("font-selector"),
+    ...result
   }
 }
 
@@ -62,9 +63,9 @@ test("It should stop rendering the menu when clicking outside of the menu", asyn
   await waitForElementToBeRemoved(menu)
 })
 
-test("Clicking on a font should set that font in the Redux store", async () => {
+test("Clicking on a font should set that font in context", async () => {
   // Open the font selection menu
-  const { toggle } = setup()
+  const { toggle, onFontContextValueChange } = setup()
   fireEvent.click(toggle)
   expect(await screen.findByTestId("font-selector-menu")).toBeInTheDocument()
 
@@ -72,7 +73,7 @@ test("Clicking on a font should set that font in the Redux store", async () => {
   fireEvent.click(screen.getByText("Handwriting"))
 
   // Should update store
-  expect(store.getState().font.selected).toBe("SanafonMugi Handwriting")
+  expect(getValueLastCalledWith<FontContextBag>(onFontContextValueChange).font).toBe("SanafonMugi Handwriting")
 })
 
 it("Should set the selected font to an empty string if the service returns undefined", async () => {

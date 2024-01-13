@@ -4,11 +4,10 @@ import SettingsBooleanButton, {
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 import { faCrown } from "@fortawesome/free-solid-svg-icons"
 import { Preference } from "../../../../domain/user/Preference"
-import { store } from "../../../../store"
-import { clearUser, setPreference, setUser } from "../../../../slices/UserSlice"
 import { render } from "__test-utils__"
 import { testUser } from "../../../../setupTests"
-import { fireEvent } from "@testing-library/react"
+import { fireEvent, waitFor } from "@testing-library/react";
+import { User } from "context/UserContext";
 
 const mockUpdatePreferences = vi.fn()
 vi.mock("service/UserService", () => ({
@@ -40,42 +39,35 @@ beforeEach(() => {
     preference: Preference.MISTAKES_REMINDERS,
     enableHoverColours: false
   }
-
-  store.dispatch(setUser(testUser))
 })
 
-afterEach(() => {
-  store.dispatch(clearUser())
-})
-
-test("Should render the truthy text if the value from the Redux store is true", () => {
-  store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }))
-  const component = render(<SettingsBooleanButton {...props} />)
+test("Should render the truthy text if the value from context is true", () => {
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: true }}
+  const { component } = render(<SettingsBooleanButton {...props} />, { user })
   expect(component.getByText("Enabled")).toBeInTheDocument()
 })
 
-test("Should render the falsy text if the value from the Redux store is false", () => {
-  store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: false }))
-  const component = render(<SettingsBooleanButton {...props} />)
+test("Should render the falsy text if the value from context is false", () => {
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: false }}
+  const { component } = render(<SettingsBooleanButton {...props} />, { user })
   expect(component.getByText("Disabled")).toBeInTheDocument()
 })
 
-test("Should render an unknown text if the value from the Redux store is undefined", () => {
-  store.dispatch(clearUser())
-  const component = render(<SettingsBooleanButton {...props} />)
+test("Should render an unknown text if the value from context is undefined", () => {
+  const { component } = render(<SettingsBooleanButton {...props} />)
   expect(component.getByText("Unknown")).toBeInTheDocument()
 })
 
 test("Should render an unknown text if the passed preference is not known as a boolean property", () => {
   props.preference = Preference.THEME
-  const component = render(<SettingsBooleanButton {...props} />)
+  const { component } = render(<SettingsBooleanButton {...props} />)
   expect(component.getByText("Unknown")).toBeInTheDocument()
 })
 
-test("Should render the truthy hover text if the value from the Redux store is true and the mouse is over", () => {
+test("Should render the truthy hover text if the value from context is true and the mouse is over", () => {
   // Default the state to truthy so its enabled
-  store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }))
-  const component = render(<SettingsBooleanButton {...props} />)
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: true }}
+  const { component } = render(<SettingsBooleanButton {...props} />, { user })
 
   // Mousing over should render the falsy hover text
   fireEvent.mouseOver(component.getByTestId("test-toggle"))
@@ -86,17 +78,17 @@ test("Should render the truthy hover text if the value from the Redux store is t
   expect(component.getByText("Enabled")).toBeInTheDocument()
 })
 
-test("Should render the falsy hover text if the value from the Redux store is false and the mouse is over", () => {
-  store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: false }))
-  const component = render(<SettingsBooleanButton {...props} />)
+test("Should render the falsy hover text if the value from context is false and the mouse is over", () => {
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: false }}
+  const { component } = render(<SettingsBooleanButton {...props} />, { user })
   fireEvent.mouseOver(component.getByTestId("test-toggle"))
   expect(component.getByText("Enable Thing")).toBeInTheDocument()
 })
 
 test("Should continue rendering the default text value when hovering if no hover text is passed", () => {
   props.truthy.hover = undefined
-  store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }))
-  const component = render(<SettingsBooleanButton {...props} />)
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: true }}
+  const { component } = render(<SettingsBooleanButton {...props} />,  { user })
 
   // Should default to the enabled text
   expect(component.getByText("Enabled")).toBeInTheDocument()
@@ -108,9 +100,9 @@ test("Should continue rendering the default text value when hovering if no hover
 
 test("Should call the service with the correct parameters when clicking the button in its truthy state", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: true }))
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: true }}
 
-  const component = render(<SettingsBooleanButton {...props} />)
+  const { component } = render(<SettingsBooleanButton {...props} />, { user })
   fireEvent.click(component.getByTestId("test-toggle"))
   expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
 
@@ -119,9 +111,9 @@ test("Should call the service with the correct parameters when clicking the butt
 
 test("Should call the service with the correct parameters when clicking the button in its falsy state", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
-  store.dispatch(setPreference({ preference: Preference.MISTAKES_REMINDERS, value: false }))
+  const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: false }}
 
-  const component = render(<SettingsBooleanButton {...props} />)
+  const { component } = render(<SettingsBooleanButton {...props} />, { user })
   fireEvent.click(component.getByTestId("test-toggle"))
   expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
 
@@ -131,39 +123,40 @@ test("Should call the service with the correct parameters when clicking the butt
 test("Should call the onError event handler with the response error if not successful", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: false, error: "Something went wrong." })
 
-  const component = render(<SettingsBooleanButton {...props} />)
+  const { component } = render(<SettingsBooleanButton {...props} />)
+  fireEvent.click(component.getByTestId("test-toggle"))
+
+  await waitFor(() => {
+    expect(onErrorHandler).toHaveBeenCalledWith("Something went wrong.")
+  })
+})
+
+test("Should call the onError event handler with the response error if rejected", async () => {
+  mockUpdatePreferences.mockRejectedValueOnce({ error: "Something went wrong." })
+
+  const { component } = render(<SettingsBooleanButton {...props} />)
   fireEvent.click(component.getByTestId("test-toggle"))
   expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
 
   expect(onErrorHandler).toHaveBeenCalledWith("Something went wrong.")
 })
 
-test("Should call the onError event handler with the response error if rejected", async () => {
-  mockUpdatePreferences.mockRejectedValueOnce({ error: "Something went wrong." })
-
-  const component = render(<SettingsBooleanButton {...props} />)
-  fireEvent.click(component.getByTestId("test-toggle"))
-  expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
-
-  expect(await onErrorHandler).toHaveBeenCalledWith("Something went wrong.")
-})
-
 test("Should call the onError event handler with a default error message if failed and not provided", async () => {
   mockUpdatePreferences.mockResolvedValueOnce({ success: false, error: undefined })
 
-  const component = render(<SettingsBooleanButton {...props} />)
+  const { component } = render(<SettingsBooleanButton {...props} />)
   fireEvent.click(component.getByTestId("test-toggle"))
   expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
 
-  expect(await onErrorHandler).toHaveBeenCalledWith("Failed to update preference.")
+  expect(onErrorHandler).toHaveBeenCalledWith("Failed to update preference.")
 })
 
 test("Should call the onError event handler with a default error message if rejected and not provided", async () => {
   mockUpdatePreferences.mockRejectedValueOnce({ error: undefined })
 
-  const component = render(<SettingsBooleanButton {...props} />)
+  const { component } = render(<SettingsBooleanButton {...props} />, { user: testUser })
   fireEvent.click(component.getByTestId("test-toggle"))
   expect(await component.findByTestId("settings-boolean-button-spinner")).not.toBeInTheDocument()
 
-  expect(await onErrorHandler).toHaveBeenCalledWith("Failed to update preference.")
+  expect(onErrorHandler).toHaveBeenCalledWith("Failed to update preference.")
 })

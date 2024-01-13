@@ -10,6 +10,7 @@ import "regenerator-runtime/runtime"
 
 afterEach(() => {
   cleanup()
+  localStorageMock.clear()
 })
 
 //Test Environment
@@ -32,7 +33,7 @@ window.matchMedia =
 //Allows testing of components that are wrapped in the sizeMe HOC
 import sizeMe from "react-sizeme"
 import { ConfidenceMenuStyle } from "./domain/learn/spacedrepetition/ConfidenceMenuStyle"
-import { User } from "./slices/UserSlice"
+import { User } from "./context/UserContext"
 import { cleanup } from "@testing-library/react";
 sizeMe.noPlaceholders = true
 

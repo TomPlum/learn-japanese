@@ -19,7 +19,7 @@ beforeEach(() => {
 })
 
 test("Clicking the button should call the onClick event handler", () => {
-  const component = render(<SettingsButton {...props} />)
+  const { component } = render(<SettingsButton {...props} />)
   fireEvent.click(component.getByText("Test Button"))
   expect(onClickHandler).toHaveBeenCalled()
 })

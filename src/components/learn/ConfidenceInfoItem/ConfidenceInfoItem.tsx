@@ -1,8 +1,8 @@
 import Confidence from "../../../domain/learn/spacedrepetition/Confidence"
-import { useUserSelector } from "../../../hooks"
 import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles  from "./ConfidenceInfoItem.module.scss"
+import { useUserContext } from "context/UserContext";
 
 export interface ConfidenceInfoItemProps {
   confidence: Confidence
@@ -10,13 +10,13 @@ export interface ConfidenceInfoItemProps {
 }
 
 const ConfidenceInfoItem = (props: ConfidenceInfoItemProps) => {
-  const preferences = useUserSelector((state) => state.user.user?.preferences)
+  const { user } = useUserContext()
 
   const { confidence, className } = props
 
   return (
     <li>
-      {preferences?.confidenceMenuStyle === ConfidenceMenuStyle.NUMBERS ? (
+      {user?.preferences?.confidenceMenuStyle === ConfidenceMenuStyle.NUMBERS ? (
         <span className={className}>{confidence.value + 1}</span>
       ) : (
         <FontAwesomeIcon icon={confidence.icon} className={[className, styles.icon].join(" ")} />

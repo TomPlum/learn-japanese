@@ -1,17 +1,13 @@
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
-import { store } from "../../../store"
-import { clearDataSettings, setDataSettings } from "../../../slices/DataSettingsSlice"
 import { fireEvent, screen } from "@testing-library/react"
-import { createMemoryHistory } from "history"
-import { getByTextWithMarkup } from "__test-utils__/Queries"
+import { getByTextWithMarkup, getValueLastCalledWith } from "__test-utils__/Queries";
 import LearnPage  from "./LearnPage"
-import { BrowserRouter, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
-import { History } from "@remix-run/router"
 import { Kana } from "../../../domain/kana/Kana"
 import KanaType from "../../../domain/kana/KanaType"
 import { KanaColumn } from "../../../domain/kana/KanaColumn"
 import Arrays from "../../../utility/Arrays"
 import { render } from "__test-utils__"
+import { SessionSettingsBag } from "context/SessionSettingsContext";
 
 const mockLearningDataService = vi.fn()
 vi.mock("service/LearningDataService", () => ({
@@ -29,8 +25,6 @@ const dataSettings = new KanaSettingsBuilder()
   .withQuantity(50)
   .build()
 
-const history = createMemoryHistory() as never as History
-
 beforeEach(() => {
   // Mock getRandomObject so it always returns the first element
   Arrays.getRandomObject = vi.fn().mockImplementation((array: any[]) => {
@@ -41,23 +35,20 @@ beforeEach(() => {
   })
 })
 
-afterEach(() => {
-  store.dispatch(clearDataSettings())
-})
 
 test("Should render the learning session if the data settings are present", async () => {
   mockLearningDataService.mockResolvedValueOnce([new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)])
-  store.dispatch(setDataSettings(dataSettings))
 
-  render(<BrowserRouter><LearnPage /></BrowserRouter>)
+  render(
+    <LearnPage />,
+    { sessionSettings: { dataSettings }}
+  )
 
-  expect(await screen.findByTestId("learn")).toBeInTheDocument()
+  expect(await screen.findByTestId("learn-page")).toBeInTheDocument()
 })
 
 test("Should render an error message if the data settings are undefined", () => {
-  store.dispatch(clearDataSettings())
-
-  render(<BrowserRouter><LearnPage /></BrowserRouter>)
+  render(<LearnPage />)
 
   expect(mockLearningDataService).not.toHaveBeenCalled()
   expect(screen.queryByTestId("memory-game")).not.toBeInTheDocument()
@@ -68,14 +59,10 @@ test("Should render an error message if the data settings are undefined", () => 
 test("Should skip the results screen and redirect home if the user flips no cards over", async () => {
   // Set data settings
   mockLearningDataService.mockResolvedValueOnce([new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false)])
-  store.dispatch(setDataSettings(dataSettings))
 
   // Render the page and wait for the game to load
-  render(
-    <HistoryRouter history={history}>
-      <LearnPage />
-    </HistoryRouter>
-  )
+  const { history } = render(<LearnPage />, { sessionSettings: { dataSettings }})
+  expect(await screen.findByTestId("learn-page")).toBeInTheDocument()
   expect(await screen.findByTestId("learn")).toBeInTheDocument()
 
   // Close the session without having flipped any cards
@@ -92,15 +79,10 @@ test("Should render the results screen if the user flips at least one card", asy
     new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
     new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false)
   ])
-  store.dispatch(setDataSettings(dataSettings))
 
   // Render the page and wait for the game to load
-  render(
-    <HistoryRouter history={history}>
-      <LearnPage />
-    </HistoryRouter>
-  )
-  expect(await screen.findByTestId("learn")).toBeInTheDocument()
+  const { onSessionSettingsContextValueChange, history } = render(<LearnPage />, { sessionSettings: { dataSettings }})
+  expect(await screen.findByTestId("learn-page")).toBeInTheDocument()
 
   // Flip at least one card
   fireEvent.click(screen.getByText("え"))
@@ -116,8 +98,8 @@ test("Should render the results screen if the user flips at least one card", asy
   // Click the finish button
   fireEvent.click(screen.getByTitle("Quit"))
 
-  // Should clear the settings from the Redux store
-  expect(store.getState().dataSettings.settings).toBeUndefined()
+  // Should clear the settings from context
+  expect(getValueLastCalledWith<SessionSettingsBag>(onSessionSettingsContextValueChange).dataSettings).toBeUndefined()
 
   // Should re-direct to the home page
   expect(history.location.pathname).toBe("/home")
@@ -129,15 +111,10 @@ test("Clicking 'Practice Mistakes' on the learning results screen should start a
     new Kana("え", ["e"], KanaType.HIRAGANA, KanaColumn.VOWEL, false),
     new Kana("ア", ["a"], KanaType.KATAKANA, KanaColumn.VOWEL, false)
   ])
-  store.dispatch(setDataSettings(dataSettings))
 
   // Render the page and wait for the game to load
-  render(
-    <HistoryRouter history={history}>
-      <LearnPage />
-    </HistoryRouter>
-  )
-  expect(await screen.findByTestId("learn")).toBeInTheDocument()
+  render(<LearnPage />, { sessionSettings: { dataSettings }})
+  expect(await screen.findByTestId("learn-page")).toBeInTheDocument()
 
   // Complete the session
   fireEvent.click(screen.getByText("え")) // Flip the first card

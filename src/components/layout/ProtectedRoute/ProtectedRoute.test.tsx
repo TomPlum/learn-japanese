@@ -1,14 +1,9 @@
-import { screen } from "@testing-library/react"
+import { screen, render } from "@testing-library/react"
 import ProtectedRoute from "./ProtectedRoute"
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { render } from "__test-utils__"
-import { store } from "../../../store.ts"
-import { clearUser, setUser } from "../../../slices/UserSlice.ts";
-import { testUser } from "../../../setupTests.ts"
+import { localStorageMock, testUser } from "../../../setupTests.ts";
 
 test("Should redirect to the main page if the user is not authenticated", () => {
-  store.dispatch(clearUser())
-
   const router = createMemoryRouter([
     {
       path: "/",
@@ -20,13 +15,15 @@ test("Should redirect to the main page if the user is not authenticated", () => 
     }
   ], { initialEntries: ['/'] })
 
-  render(<RouterProvider router={router} />)
+  render(
+    <RouterProvider router={router} />
+  )
 
   expect(screen.getByTestId('home')).toBeInTheDocument()
 })
 
 test("Should render the router outlet component if the user is authenticated", () => {
-  store.dispatch(setUser(testUser))
+  localStorageMock.setItem("user", JSON.stringify(testUser))
 
   const router = createMemoryRouter([
     {

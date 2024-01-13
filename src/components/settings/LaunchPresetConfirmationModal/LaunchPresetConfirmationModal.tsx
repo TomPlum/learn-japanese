@@ -1,4 +1,3 @@
-import SessionMode from "../../../domain/session/SessionMode"
 import { ModalProps } from "react-bootstrap/Modal"
 import styles  from "./LaunchPresetConfirmationModal.module.scss"
 import { Button, Fade, Modal } from "react-bootstrap"
@@ -7,45 +6,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlay, faTimes } from "@fortawesome/free-solid-svg-icons"
 import Icon from "../../ui/menu/icon/Icon"
 import SessionSettingsSummary from "./../SessionSettingsSummary"
-import { setDataSettings as setGlobalDataSettings } from "../../../slices/DataSettingsSlice"
 import GameSettings from "../../../domain/session/settings/game/GameSettings"
-import { setGameSettings, setSelectedPresetID } from "../../../slices/GameSettingsSlice"
 import { useNavigate } from "react-router-dom"
-import { useDataSettingsDispatch, useGameSettingsDispatch, useSessionSettingsDispatch } from "../../../hooks"
 import PlayMode from "../../../domain/session/PlayMode"
 import LearnSessionSettingsSummary from "./../LearnSessionSettingsSummary"
-import { setLastLearnPreset, setLastPlayPreset } from "../../../slices/SessionSettingsSlice"
 import { useTranslation } from "react-i18next"
+import { useSessionSettingsContext } from "context/SessionSettingsContext"
+import { LaunchPresetConfirmationModalProps } from "./types.ts"
+import { useCallback } from "react";
 
-export interface LaunchPresetConfirmationModalProps {
-  preset: SessionMode
-  onDismiss: () => void
-}
-
-const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps) => {
-  const { preset, onDismiss } = props
-
+const LaunchPresetConfirmationModal = ({ preset, onDismiss }: LaunchPresetConfirmationModalProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const gameSettingsDispatcher = useGameSettingsDispatch()
-  const dataSettingsDispatcher = useDataSettingsDispatch()
-  const sessionSettingsDispatcher = useSessionSettingsDispatch()
+  const { setLastPlaySession, setLastLearnSession, setPreset, setGameSettings, setDataSettings } = useSessionSettingsContext()
 
-  const handleStartSession = () => {
-    const data = preset.dataSettings
-    dataSettingsDispatcher(setGlobalDataSettings(data))
+  const handleStartSession = useCallback(() => {
+    setDataSettings(preset.dataSettings)
 
     if (preset instanceof PlayMode) {
-      const game = preset.modeSettings as GameSettings
-      gameSettingsDispatcher(setGameSettings(game))
-      sessionSettingsDispatcher(setLastPlayPreset(preset))
-      gameSettingsDispatcher(setSelectedPresetID(preset.id))
+      setGameSettings(preset.modeSettings as GameSettings)
+      setLastPlaySession(preset)
+      setPreset(preset.id)
       navigate("/play")
     } else {
-      sessionSettingsDispatcher(setLastLearnPreset(preset))
+      setLastLearnSession(preset)
       navigate("/learn")
     }
-  }
+  }, [setDataSettings, preset, setGameSettings, setLastPlaySession, setPreset, navigate, setLastLearnSession])
 
   const modalProps: ModalProps = {
     show: true,
@@ -94,7 +81,7 @@ const LaunchPresetConfirmationModal = (props: LaunchPresetConfirmationModalProps
           <div className={styles.body}>
             {renderSettingsSummary()}
 
-            <Button variant="success" onClick={handleStartSession}>
+            <Button variant="success" onClick={handleStartSession} data-testid='launch-preset-start'>
               <FontAwesomeIcon icon={faPlay} fixedWidth /> {t("action.start")}
             </Button>
           </div>

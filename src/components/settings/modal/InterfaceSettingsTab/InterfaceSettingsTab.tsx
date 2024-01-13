@@ -7,9 +7,8 @@ import SettingsDropdown from "./../SettingsDropdown"
 import FontService from "../../../../service/FontService"
 import { Font } from "../../../ui/buttons/FontSelectorButton"
 import { Preference } from "../../../../domain/user/Preference"
-import { useFontDispatch } from "../../../../hooks"
-import { setFont } from "../../../../slices/FontSlice"
 import { useTranslation } from "react-i18next"
+import { useFontContext } from "context/FontContext";
 
 export interface InterfaceSettingsTabProps {
   onEditDashboardLayout: () => void
@@ -18,7 +17,7 @@ export interface InterfaceSettingsTabProps {
 const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
   const { onEditDashboardLayout } = props
 
-  const fontDispatcher = useFontDispatch()
+  const { setFont } = useFontContext()
   const fontService = new FontService()
 
   const [fonts, setFonts] = useState<Font[]>([])
@@ -31,7 +30,7 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
   }, [])
 
   const handleFontChange = (font: string) => {
-    fontDispatcher(setFont(font))
+    setFont(font)
   }
 
   const handleLanguageChange = async (language: string) => {

@@ -1,9 +1,9 @@
-import { useUserSelector } from "../../../hooks"
 import HighScoresService from "../../../service/HighScoresService"
 import { HighScorePreference } from "../../../domain/HighScorePreference"
 import { useTranslation } from "react-i18next"
 import { Button } from "react-bootstrap"
 import { useEffect, useState } from "react"
+import { useUserContext } from "context/UserContext";
 
 export interface HighScoreSubmitButtonProps {
   presetId: number
@@ -19,10 +19,10 @@ const HighScoreSubmitButton = (props: HighScoreSubmitButtonProps) => {
 
   const service = new HighScoresService()
   const { t } = useTranslation("translation", { keyPrefix: "memory-game.results-screen" })
-  const preference = useUserSelector((state) => state.user?.user?.preferences.highScoresBehaviour)
+  const { user } = useUserContext()
 
   useEffect(() => {
-    if (preference === HighScorePreference.AUTO_SUBMIT) {
+    if (user?.preferences.highScoresBehaviour === HighScorePreference.AUTO_SUBMIT) {
       submit()
     }
   }, [])
@@ -44,7 +44,7 @@ const HighScoreSubmitButton = (props: HighScoreSubmitButtonProps) => {
   }
 
   const renderButtonContent = () => {
-    switch (preference) {
+    switch (user?.preferences.highScoresBehaviour) {
       case HighScorePreference.NEVER_SUBMIT: {
         return <span>{t("not-submitted")}</span>
       }

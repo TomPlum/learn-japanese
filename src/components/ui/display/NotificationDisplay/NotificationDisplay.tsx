@@ -1,8 +1,8 @@
-import { Notification, NotificationType } from "../../../../slices/NotificationSlice"
 import styles  from "./NotificationDisplay.module.scss"
 import { faBell, faExclamationCircle, faInfoCircle, faTimes, IconDefinition } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import dayjs from "dayjs"
+import { NotificationType, Notification } from "context/NotificationContext";
 
 export interface NotificationDisplayProps {
   id: string
@@ -11,9 +11,7 @@ export interface NotificationDisplayProps {
   onDismiss: (id: string) => void
 }
 
-const NotificationDisplay = (props: NotificationDisplayProps) => {
-  const { id, notification, className, onDismiss } = props
-
+const NotificationDisplay = ({ id, notification, className, onDismiss }: NotificationDisplayProps) => {
   const handleDismiss = () => {
     onDismiss(id)
   }

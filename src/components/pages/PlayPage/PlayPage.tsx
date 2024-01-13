@@ -6,37 +6,21 @@ import SessionID from "../../../domain/session/SessionID"
 import LearningDataService from "../../../service/LearningDataService"
 import { useEffect, useState } from "react"
 import { Learnable } from "../../../domain/learn/Learnable"
-import {
-  useDataSettingsDispatch,
-  useDataSettingsSelector,
-  useGameSettingsDispatch,
-  useGameSettingsSelector
-} from "../../../hooks"
 import { useNavigate } from "react-router-dom"
-import { clearGameSettings } from "../../../slices/GameSettingsSlice"
-import { clearDataSettings } from "../../../slices/DataSettingsSlice"
-import DataSettingsConverter from "../../../converter/DataSettingsConverter"
-import GameSettingsConverter from "../../../converter/GameSettingsConverter"
 import styles  from "./PlayPage.module.scss"
+import { useSessionSettingsContext } from "context/SessionSettingsContext";
+import HashLink from "components/layout/HashLink";
 
 const PlayPage = () => {
   const [loading, setLoading] = useState(false)
-  const [inResultsScreen, setInResultsScreen] = useState(false)
-  const [gameResult, setGameResult] = useState<GameResult | undefined>(undefined)
-  const [sessionKey, setSessionKey] = useState(new SessionID())
   const [data, setData] = useState<Learnable[]>([])
+  const [inResultsScreen, setInResultsScreen] = useState(false)
+  const [sessionKey, setSessionKey] = useState(new SessionID())
+  const [gameResult, setGameResult] = useState<GameResult | undefined>(undefined)
 
   const navigate = useNavigate()
 
-  const gameSettingsDispatcher = useGameSettingsDispatch()
-  const dataSettingsDispatcher = useDataSettingsDispatch()
-
-  const gameSettingsData = useGameSettingsSelector((state) => state.gameSettings?.settings)
-  const dataSettingsData = useDataSettingsSelector((state) => state.dataSettings?.settings)
-  const selectedPresetId = useGameSettingsSelector((state) => state.gameSettings.presetId)
-
-  const gameSettings = gameSettingsData ? new GameSettingsConverter().deserialise(gameSettingsData) : undefined
-  const dataSettings = dataSettingsData ? new DataSettingsConverter().deserialise(dataSettingsData) : undefined
+  const { gameSettings, dataSettings, preset, clearGameSettings, clearDataSettings } = useSessionSettingsContext()
 
   useEffect(() => {
     if (!!dataSettings && !!gameSettings) {
@@ -50,7 +34,7 @@ const PlayPage = () => {
           setLoading(false)
         })
     }
-  }, [])
+  }, [dataSettings, gameSettings])
 
   const onGameFinish = (result: GameResult) => {
     setGameResult(result)
@@ -61,8 +45,8 @@ const PlayPage = () => {
   const onGameResultMenuClose = () => {
     setInResultsScreen(false)
     setGameResult(undefined)
-    gameSettingsDispatcher(clearGameSettings())
-    dataSettingsDispatcher(clearDataSettings())
+    clearGameSettings()
+    clearDataSettings()
     navigate("/home")
   }
 
@@ -75,9 +59,9 @@ const PlayPage = () => {
           <p className={styles.error}>It looks like your game settings are missing!</p>
           <p className={styles.message}>
             <span>{"Click"}</span>
-            <a href="/home" className={styles.link}>
+            <HashLink path="/home" className={styles.link}>
               {" here "}
-            </a>
+            </HashLink>
             <span>{"to go back home."}</span>
           </p>
         </span>
@@ -94,7 +78,11 @@ const PlayPage = () => {
       )}
 
       {inResultsScreen && gameResult && (
-        <GameResultScreen result={gameResult} presetId={selectedPresetId} onClose={onGameResultMenuClose} />
+        <GameResultScreen
+          presetId={preset}
+          result={gameResult}
+          onClose={onGameResultMenuClose}
+        />
       )}
     </div>
   )

@@ -3,9 +3,6 @@ import { findByTextWithElements } from "__test-utils__/Queries"
 import { render } from "__test-utils__"
 import { when } from "jest-when"
 import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react"
-import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
-import { createMemoryHistory } from "history"
-import { History } from "@remix-run/router";
 
 const mockGetHighScoreEntriesPage = vi.fn()
 vi.mock("service/HighScoresService", () => ({
@@ -21,30 +18,19 @@ vi.mock("service/UserService", () => ({
   }
 }))
 
-let history = createMemoryHistory() as never as History
-
-const setup = () => {
-  return render(
-    <HistoryRouter history={history}>
-      <HighScoresPage />
-    </HistoryRouter>
-  )
+const setup = (url?: string) => {
+  return render(<HighScoresPage />, { url })
 }
-
-beforeEach(() => {
-  history = createMemoryHistory() as never as History
-})
 
 test("Should load the high-scores and data and render the table on-load", async () => {
   mockGetHighScoreEntriesPage.mockResolvedValue({ entries: [], pages: { total: 120, quantity: 10 } })
-  const component = setup()
+  const { component } = setup()
   expect(await component.findByTestId("high-scores-table")).toBeInTheDocument()
 })
 
 test("Should render the single user high-scores table when the user query pram is present", async () => {
   mockGetHighScoreEntriesPage.mockResolvedValue({ entries: [], pages: { total: 120, quantity: 10 } })
-  history = createMemoryHistory({ initialEntries: ["?user=TomPlum"] }) as never as History
-  const component = setup()
+  const { component } = setup('?user=TomPlum')
   expect(await component.findByTestId("single-user-high-scores-table")).toBeInTheDocument()
   expect(await component.queryByTestId("high-scores-table")).not.toBeInTheDocument()
 })
@@ -55,13 +41,13 @@ test("Should render an error alert when the high-scores data response returns an
     pages: { total: 0, quantity: 0 },
     error: "It broke."
   })
-  const component = setup()
+  const { component } = setup()
   expect(await component.findByText("It broke.")).toBeInTheDocument()
 })
 
 test("Should render an error alert when the high-scores data is rejected and returns an error", async () => {
   mockGetHighScoreEntriesPage.mockRejectedValue({ error: "Something went really wrong." })
-  const component = setup()
+  const { component } = setup()
   expect(await component.findByText("Something went really wrong.")).toBeInTheDocument()
 })
 
@@ -86,7 +72,7 @@ test("Selecting a user should render only their high-scores", async () => {
   when(mockGetPublicUsers).calledWith("TomPlum").mockResolvedValue(["TomPlum"])
 
   // Should initially load all the details
-  const component = setup()
+  const { component } = setup()
   await waitForElementToBeRemoved(within(component.getByTestId("empty-table-body")).getByText("Loading..."))
   expect(within(screen.getByTestId("high-scores-table")).getAllByRole("row")[1]).toHaveTextContent(
     "1Test User235"

@@ -17,7 +17,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<LearnableFieldSelector {...props} />)
+  const { component } = render(<LearnableFieldSelector {...props} />)
   return {
     field: component.getByTestId("learnable-field-selector"),
     help: component.getByTestId("field-help"),

@@ -20,7 +20,7 @@ vi.mock("service/FontService", () => ({
 }))
 
 const setup = () => {
-  const component = render(<Preferences user={testUser} />)
+  const { component } = render(<Preferences user={testUser} />)
   return {
     font: component.getByTestId("font"),
     theme: component.getByText("Dark"),

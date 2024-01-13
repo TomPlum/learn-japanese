@@ -19,7 +19,7 @@ const onCancelHandler = vi.fn()
 let props: CustomPresetFormProps
 
 const setup = () => {
-  const component = render(<CustomPresetForm {...props} />)
+  const { component } = render(<CustomPresetForm {...props} />)
   return {
     icon: component.getByTestId("icon-picker-selected"),
     name: component.getByText("My Preset"),

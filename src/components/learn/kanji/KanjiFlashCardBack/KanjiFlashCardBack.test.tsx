@@ -30,43 +30,43 @@ beforeEach(() => {
 })
 
 test("Should call the onClick event handler when clicking the reset button", () => {
-  const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  const { component } = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
   fireEvent.click(component.getByTitle("Reset"))
   expect(onClickHandler).toHaveBeenCalled()
 })
 
 test("Should render the kanji", () => {
-  const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  const { component } = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
   expect(component.getAllByText("人").length).toBeGreaterThan(0)
 })
 
 test("Should render the on reading", () => {
-  const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  const { component } = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
   expect(component.getByText("じん")).toBeInTheDocument()
 })
 
 test("Should render the kun reading", () => {
-  const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  const { component } = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
   expect(component.getByText("ひと")).toBeInTheDocument()
 })
 
 test("Should render the meanings comma delimited", () => {
-  const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  const { component } = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
   expect(component.getByText("person, fake-example")).toBeInTheDocument()
 })
 
 test("Should render the grade", () => {
-  const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  const { component } = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
   expect(component.getByText("Grade 1 Kyōiku")).toBeInTheDocument()
 })
 
 test("Should render the kanji as a link to the source", () => {
-  const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  const { component } = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
   expect(component.getByTitle("Click for Wiki source")).toHaveAttribute("href", kanji.source)
 })
 
 test("Should render the examples display", () => {
-  const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  const { component } = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
   expect(component.getByText("外国人")).toBeInTheDocument()
   expect(getByTextWithMarkup("( がいこくじん )")).toBeInTheDocument()
   expect(component.getByText("foreigner")).toBeInTheDocument()
@@ -74,7 +74,7 @@ test("Should render the examples display", () => {
 
 test("Should display the meaning reading description when hovering over the 'Meaning' text", async () => {
   mockEnvironment.mockReturnValue("Example meaning desc")
-  const component = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
+  const { component } = render(<KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />)
 
   fireEvent.mouseOver(component.getByText("Meaning"))
 
@@ -83,8 +83,8 @@ test("Should display the meaning reading description when hovering over the 'Mea
 })
 
 test("Should assign a dynamic class to the container based on the grade", () => {
-  const { container } = render(
+  const { component } = render(
     <KanjiFlashCardBack data={kanji} onClick={onClickHandler} showRomaji={false} />
   )
-  expect(container.firstChild).toHaveClass("wrapper-grade-1")
+  expect(component.container.firstChild).toHaveClass("wrapper-grade-1")
 })

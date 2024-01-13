@@ -16,9 +16,7 @@ const deleteAccountPopover = (
 )
 
 const setup = () => {
-  const component = render(
-    <PasswordConfirmation onDismiss={onDismissHandler} alertInfo={deleteAccountPopover} />
-  )
+  const { component } = render(<PasswordConfirmation onDismiss={onDismissHandler} alertInfo={deleteAccountPopover} />)
 
   return {
     password: component.getByPlaceholderText("Password"),

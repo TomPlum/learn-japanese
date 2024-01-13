@@ -2,15 +2,13 @@ import { fireEvent } from "@testing-library/react"
 import ConfidenceButton, { ConfidenceButtonProps }  from "./ConfidenceButton"
 import Confidence from "../../../domain/learn/spacedrepetition/Confidence"
 import { render } from "__test-utils__"
-import { store } from "../../../store"
-import { setUser } from "../../../slices/UserSlice"
 import { testUser } from "../../../setupTests"
 
 let props: ConfidenceButtonProps
 const onClickHandler = vi.fn()
 
 const setup = () => {
-  const component = render(<ConfidenceButton {...props} />)
+  const { component }  = render(<ConfidenceButton {...props} />, { user: testUser })
   return {
     button: component.getByText("6"),
     ...component
@@ -25,8 +23,6 @@ beforeEach(() => {
     className: "menu",
     onClick: onClickHandler
   }
-
-  store.dispatch(setUser(testUser))
 })
 
 it("Should call the onClick event handler with the Confidence value upon clicking the button", () => {

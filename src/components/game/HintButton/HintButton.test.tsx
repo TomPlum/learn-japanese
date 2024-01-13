@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react"
+import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import HintButton, { HintButtonProps }  from "./HintButton"
 import { Kana } from "../../../domain/kana/Kana"
 import KanaType from "../../../domain/kana/KanaType"
@@ -21,7 +21,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<HintButton {...props} />)
+  const { component } = render(<HintButton {...props} />)
   return {
     button: component.getByTitle("Get a Hint"),
     ...component
@@ -117,11 +117,11 @@ test("Blurring the button should stop rendering the overlay", async () => {
 
 test("Should apply the 'disabled' className to the button when the user has exhausted all their hints", () => {
   props.remaining = 0
-  const { container } = setup()
-  expect(container?.firstChild).toHaveClass("disabled")
+  const component = setup()
+  expect(component.container?.firstChild).toHaveClass("disabled")
 })
 
 test("Should apply the default 'button' className to the button when the user has hints remaining", () => {
-  const { container } = setup()
-  expect(container?.firstChild).toHaveClass("button")
+  const component = setup()
+  expect(component.container?.firstChild).toHaveClass("button")
 })

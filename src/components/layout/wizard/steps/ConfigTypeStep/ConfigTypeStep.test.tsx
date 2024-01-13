@@ -14,7 +14,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<ConfigTypeStep {...props} />)
+  const { component } = render(<ConfigTypeStep {...props} />)
   return {
     preset: component.getByText("Preset"),
     custom: component.getByText("Custom"),

@@ -2,13 +2,12 @@ import { Alert, Button, FormControl } from "react-bootstrap"
 import InfoButton from "../../../ui/buttons/InfoButton"
 import { OverlayChildren } from "react-bootstrap/Overlay"
 import { useEffect, useRef, useState } from "react"
-import styles  from "./PasswordConfirmation.module.scss"
+import styles from "./PasswordConfirmation.module.scss"
 import authService from "../../../../service/AuthenticationService"
 import { faExclamationTriangle, faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useUserDispatch } from "../../../../hooks"
-import { clearUser } from "../../../../slices/UserSlice"
 import { useTranslation } from "react-i18next"
+import { useUserContext } from "context/UserContext";
 
 export interface PasswordConfirmationProps {
   alertInfo: OverlayChildren
@@ -16,7 +15,7 @@ export interface PasswordConfirmationProps {
 }
 
 const PasswordConfirmation = (props: PasswordConfirmationProps) => {
-  const userDispatch = useUserDispatch()
+  const { clearUser } = useUserContext()
 
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
@@ -37,7 +36,7 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
       .deleteAccount(password)
       .then((response) => {
         if (response.success) {
-          userDispatch(clearUser())
+          clearUser()
         } else {
           setError(response.error)
           setLoading(false)

@@ -6,7 +6,7 @@ import { render } from "__test-utils__"
 const onChangeHandler = vi.fn()
 
 const setup = () => {
-  const component = render(<LifeSettingsForm onChange={onChangeHandler} />)
+  const { component } = render(<LifeSettingsForm onChange={onChangeHandler} />)
   return {
     enable: component.getByTestId("enable-lives"),
     lives: component.getByTestId("life-quantity-slider"),

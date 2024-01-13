@@ -8,9 +8,6 @@ import { Environment } from "../../../utility/Environment"
 import matchMediaPolyfill from "mq-polyfill"
 import { getByTextWithMarkup } from "__test-utils__/Queries"
 import { when } from "jest-when"
-import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
-import { History } from "@remix-run/router"
-import { createMemoryHistory } from "history"
 import { render } from "__test-utils__"
 
 const environment = vi.fn()
@@ -23,14 +20,8 @@ vi.mock("repository/KanaRepository", () => ({
   }
 }))
 
-const history = createMemoryHistory() as never as History
-
 const setup = () => {
-  const component = render(
-    <HistoryRouter history={history}>
-      <LandingPage />
-    </HistoryRouter>
-  )
+  const { component, history } = render(<LandingPage />)
 
   return {
     play: screen.getByText("Play"),
@@ -40,6 +31,7 @@ const setup = () => {
     japaneseInspectable: screen.getByTestId("japanese-inspectable"),
     hiraganaInspectable: screen.getByTestId("hiragana-inspectable"),
     katakanaInspectable: screen.getByTestId("katakana-inspectable"),
+    history,
     ...component
   }
 }
@@ -138,28 +130,28 @@ test("Should render the kana carousel", async () => {
 })
 
 test("Clicking the play button should route the user to /home", async () => {
-  const { play } = setup()
+  const { play, history } = setup()
   expect(await screen.findByText("あ")).toBeInTheDocument()
   fireEvent.click(play)
   expect(history.location.pathname).toBe("/home")
 })
 
 test("Clicking the learn button should route the user to /home", async () => {
-  const { learn } = setup()
+  const { learn, history } = setup()
   expect(await screen.findByText("あ")).toBeInTheDocument()
   fireEvent.click(learn)
   expect(history.location.pathname).toBe("/home")
 })
 
 test("Clicking the search button should route the user to /search", async () => {
-  const { search } = setup()
+  const { search, history } = setup()
   expect(await screen.findByText("あ")).toBeInTheDocument()
   fireEvent.click(search)
   expect(history.location.pathname).toBe("/search")
 })
 
 test("Clicking the help button should route the user to /search", async () => {
-  const { help } = setup()
+  const { help, history } = setup()
   expect(await screen.findByText("あ")).toBeInTheDocument()
   fireEvent.click(help)
   expect(history.location.pathname).toBe("/help")

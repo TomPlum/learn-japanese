@@ -1,13 +1,4 @@
 import DataSettings from "../domain/session/settings/data/DataSettings"
-import {
-  BasicsDataSettingsState,
-  CalenderDataSettingsState,
-  DataSettingsState,
-  KanaDataSettingsState,
-  KanjiDataSettingsState,
-  NumbersDataSettingsState,
-  SentenceStructureDataSettingsState
-} from "../slices/DataSettingsSlice"
 import KanaSettings, { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSettings"
 import KanjiSettings, { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings"
 import NumbersSettings, { NumbersSettingsBuilder } from "../domain/session/settings/data/NumbersSettings"
@@ -34,6 +25,12 @@ import {
   SentenceStructureDataSettingsResponse
 } from "../repository/PresetRepository"
 import Topic from "../domain/Topic"
+import {
+  BasicsDataSettingsState, CalenderDataSettingsState,
+  DataSettingsState, KanaDataSettingsState, KanjiDataSettingsState,
+  NumbersDataSettingsState,
+  SentenceStructureDataSettingsState
+} from "context/SessionSettingsContext";
 
 class DataSettingsConverter {
   public convert(topic: Topic, settings: DataSettingsResponse): DataSettings {

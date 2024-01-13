@@ -13,29 +13,29 @@ const props = {
 }
 
 test("Clicking the button should call the onClick event handler", () => {
-  const component = render(<SkipButton onClick={onClickHandler} />)
+  const { component } = render(<SkipButton onClick={onClickHandler} />)
   fireEvent.click(component.getByText("Skip"))
   expect(onClickHandler).toHaveBeenCalled()
 })
 
 test("Passing the disabled prop as true should disable the button", () => {
-  const { container } = render(<SkipButton onClick={onClickHandler} disabled={true} />)
-  expect(container.firstChild).toBeDisabled()
+  const { component } = render(<SkipButton onClick={onClickHandler} disabled={true} />)
+  expect(component.container.firstChild).toBeDisabled()
 })
 
 test("Passing the disabled prop as false should not disable the button", () => {
-  const { container } = render(<SkipButton onClick={onClickHandler} disabled={false} />)
-  expect(container.firstChild).not.toBeDisabled()
+  const { component } = render(<SkipButton onClick={onClickHandler} disabled={false} />)
+  expect(component.container.firstChild).not.toBeDisabled()
 })
 
 test("Passing the disabled prop as true should append the 'disabled' class", () => {
-  const { container } = render(<SkipButton onClick={onClickHandler} disabled={true} />)
-  expect(container.firstChild).toHaveClass("disabled")
+  const { component } = render(<SkipButton onClick={onClickHandler} disabled={true} />)
+  expect(component.container.firstChild).toHaveClass("disabled")
 })
 
 test("Passing the disabled prop as false should append the 'button' class", () => {
-  const { container } = render(<SkipButton onClick={onClickHandler} disabled={false} />)
-  expect(container.firstChild).toHaveClass("button")
+  const { component } = render(<SkipButton onClick={onClickHandler} disabled={false} />)
+  expect(component.container.firstChild).toHaveClass("button")
 })
 
 each([undefined, null, 105, 50]).test(

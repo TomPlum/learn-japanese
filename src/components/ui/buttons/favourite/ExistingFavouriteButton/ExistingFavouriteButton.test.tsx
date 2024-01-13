@@ -37,10 +37,10 @@ test("Should render the name of the preset when not selected", () => {
 
 test("Clicking the button should call the onStart event handler with the favourite ID when not selected", () => {
   props.selected = false
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  const surface = container.firstChild?.firstChild!
+  const surface = component.container.firstChild?.firstChild!
   fireEvent.mouseEnter(surface)
 
   // Clicking the button should call the onRemove event handler
@@ -50,10 +50,10 @@ test("Clicking the button should call the onStart event handler with the favouri
 
 test("Clicking the button should call the onCancel event handler with the favourite ID when selected", () => {
   props.selected = true
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  const surface = container.firstChild?.firstChild!
+  const surface = component.container.firstChild?.firstChild!
   fireEvent.mouseEnter(surface)
 
   // Clicking the button should call the onCancel event handler
@@ -63,17 +63,17 @@ test("Clicking the button should call the onCancel event handler with the favour
 
 test("Should render the remove text hovering over the button if not selected", () => {
   props.selected = false
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  fireEvent.mouseEnter(container.firstChild?.firstChild!)
+  fireEvent.mouseEnter(component.container.firstChild?.firstChild!)
 
   // Should stop rendering the preset name and show the remove text
   expect(screen.queryByText("Test Preset")).not.toBeInTheDocument()
   expect(screen.getByText("Remove")).toBeInTheDocument()
 
   // Mouse out of the listening surface div
-  fireEvent.mouseOut(container.firstChild?.firstChild!)
+  fireEvent.mouseOut(component.container.firstChild?.firstChild!)
 
   // Should stop rendering the remove text and re-render the preset name
   expect(screen.getByText("Test Preset")).toBeInTheDocument()
@@ -82,17 +82,17 @@ test("Should render the remove text hovering over the button if not selected", (
 
 test("Should render the cancel text hovering over the button if selected", () => {
   props.selected = true
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  fireEvent.mouseEnter(container.firstChild?.firstChild!)
+  fireEvent.mouseEnter(component.container.firstChild?.firstChild!)
 
   // Should stop rendering the preset name and show the cancel text
   expect(screen.queryByText("Test Preset")).not.toBeInTheDocument()
   expect(screen.getByText("Cancel")).toBeInTheDocument()
 
   // Mouse out of the listening surface div
-  fireEvent.mouseOut(container.firstChild?.firstChild!)
+  fireEvent.mouseOut(component.container.firstChild?.firstChild!)
 
   // Should stop rendering the cancel text and re-render the preset name
   expect(screen.getByText("Test Preset")).toBeInTheDocument()

@@ -1,14 +1,8 @@
 import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
-import { store } from "../../../store"
-import { clearDataSettings, setDataSettings } from "../../../slices/DataSettingsSlice"
 import { fireEvent, screen } from "@testing-library/react"
-import { createMemoryHistory } from "history"
-import { getByTextWithMarkup } from "__test-utils__/Queries"
-import { BrowserRouter, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
-import { History } from "@remix-run/router"
+import { getByTextWithMarkup, getValueLastCalledWith } from "__test-utils__/Queries";
 import { render } from "__test-utils__"
 import Definition from "../../../domain/sentence/Definition"
-import { clearGameSettings, setGameSettings } from "../../../slices/GameSettingsSlice"
 import PlayPage  from "./PlayPage"
 import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings"
 import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
@@ -17,6 +11,7 @@ import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeS
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings"
 import LearnableField from "../../../domain/learn/LearnableField"
 import QuestionType from "../../../domain/game/QuestionType"
+import { SessionSettingsBag } from "context/SessionSettingsContext";
 
 const mockLearningDataService = vi.fn()
 vi.mock("service/LearningDataService", () => ({
@@ -48,29 +43,18 @@ const gameSettings = new GameSettingsBuilder()
   )
   .build()
 
-const history = createMemoryHistory() as never as History
-
-afterEach(() => {
-  store.dispatch(clearDataSettings())
-  store.dispatch(clearGameSettings())
-})
-
 // TODO: Why is the setDataSettings() dispatch saying its un-serialisable? Seems the whole Topic is the payload...
 test("Should render the game if game and data settings are present", async () => {
   mockLearningDataService.mockResolvedValueOnce([new Definition(["not much"], undefined, "あまり", "Adverb")])
-  store.dispatch(setGameSettings(gameSettings))
-  store.dispatch(setDataSettings(dataSettings))
 
-  render(<BrowserRouter><PlayPage /></BrowserRouter>)
+  render(<PlayPage />, { sessionSettings: { gameSettings, dataSettings }})
 
   expect(await screen.findByTestId("memory-game")).toBeInTheDocument()
 })
 
 test("Should render an error message if the game settings are undefined", () => {
-  store.dispatch(clearGameSettings())
-  store.dispatch(setDataSettings(dataSettings))
 
-  render(<BrowserRouter><PlayPage /></BrowserRouter>)
+  render(<PlayPage />, { sessionSettings: { gameSettings: undefined, dataSettings }})
 
   expect(mockLearningDataService).not.toHaveBeenCalled()
   expect(screen.queryByTestId("memory-game")).not.toBeInTheDocument()
@@ -79,10 +63,7 @@ test("Should render an error message if the game settings are undefined", () => 
 })
 
 test("Should render an error message if the data settings are undefined", () => {
-  store.dispatch(setGameSettings(gameSettings))
-  store.dispatch(clearDataSettings())
-
-  render(<BrowserRouter><PlayPage /></BrowserRouter>)
+  render(<PlayPage />, { sessionSettings: { dataSettings: undefined, gameSettings }})
 
   expect(mockLearningDataService).not.toHaveBeenCalled()
   expect(screen.queryByTestId("memory-game")).not.toBeInTheDocument()
@@ -93,15 +74,13 @@ test("Should render an error message if the data settings are undefined", () => 
 test("Should render the results screen when exiting the game", async () => {
   // Set game and data settings
   mockLearningDataService.mockResolvedValueOnce([new Definition(["not much"], undefined, "あまり", "Adverb")])
-  store.dispatch(setGameSettings(gameSettings))
-  store.dispatch(setDataSettings(dataSettings))
 
   // Render the page and wait for the game to load
-  render(
-    <HistoryRouter history={history}>
-      <PlayPage />
-    </HistoryRouter>
+  const { history, onSessionSettingsContextValueChange } = render(
+    <PlayPage />,
+    { sessionSettings: { gameSettings, dataSettings }}
   )
+
   expect(await screen.findByTestId("memory-game")).toBeInTheDocument()
 
   // Close the game
@@ -114,9 +93,10 @@ test("Should render the results screen when exiting the game", async () => {
   // Click the finish button
   fireEvent.click(screen.getByText("Finish"))
 
-  // Should clear the settings from the Redux store
-  expect(store.getState().gameSettings.settings).toBeUndefined()
-  expect(store.getState().dataSettings.settings).toBeUndefined()
+  // Should clear the settings from context
+  const sessionSettings = getValueLastCalledWith<SessionSettingsBag>(onSessionSettingsContextValueChange);
+  expect(sessionSettings.dataSettings).toBeUndefined()
+  expect(sessionSettings.gameSettings).toBeUndefined()
 
   // Should re-direct to the home page
   expect(history.location.pathname).toBe("/home")

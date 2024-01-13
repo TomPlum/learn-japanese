@@ -15,7 +15,6 @@ import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeS
 import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings"
 import LearnableField from "../../../domain/learn/LearnableField"
 import { render } from "__test-utils__"
-import { render } from "__test-utils__"
 import userEvent from "@testing-library/user-event";
 
 // Mock Event Handlers
@@ -97,7 +96,7 @@ afterEach(() => {
 })
 
 const setup = () => {
-  const component = render(<MemoryGame {...props} />)
+  const { component } = render(<MemoryGame {...props} />)
   return {
     submit: component.getByText("Check"),
     skip: component.getByText("Skip"),

@@ -10,10 +10,9 @@ import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data
 import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
 import PresetBuilder from "../../../../../domain/session/PresetBuilder"
 import LearnSettings from "../../../../../domain/session/settings/LearnSettings"
-import { store } from "../../../../../store"
-import { clearUser, setUser } from "../../../../../slices/UserSlice"
 import { testUser } from "../../../../../setupTests"
 import { render } from "__test-utils__"
+import { User } from "context/UserContext";
 
 const mockGetAllPresets = vi.fn()
 const mockGetDefaultPresets = vi.fn()
@@ -71,8 +70,8 @@ const customPreset = new PresetBuilder()
 
 let props: PresetSelectionStepProps
 
-const setup = () => {
-  const component = render(<PresetSelectionStep {...props} />)
+const setup = (user?: User) => {
+  const { component } = render(<PresetSelectionStep {...props} />, { user })
   return {
     topic: component.getByTestId("wizard-topic-selector"),
     ...component
@@ -90,17 +89,12 @@ beforeEach(() => {
   }
 })
 
-afterEach(() => {
-  store.dispatch(clearUser())
-})
-
 test("Should render the play preset options from the given presets when the mode is play", async () => {
   // Set the mode to 'Play' and preset
-  store.dispatch(setUser(testUser))
   mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
   props.mode = AppMode.PLAY
   props.preset = playPreset
-  setup()
+  setup(testUser)
 
   // Should render play presets
   expect(await screen.findByText("Short Play")).toBeInTheDocument()
@@ -109,11 +103,10 @@ test("Should render the play preset options from the given presets when the mode
 
 test("Should render the learn preset options from the given presets when the mode is learn", async () => {
   // Set the mode to 'Learn' and preset
-  store.dispatch(setUser(testUser))
   mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset, customPreset], play: [playPreset] })
   props.mode = AppMode.LEARN
   props.preset = learnPreset
-  setup()
+  setup(testUser)
 
   // Should render default learn preset and custom since user is logged in
   expect(await screen.findByText("Short Learn")).toBeInTheDocument()
@@ -123,7 +116,6 @@ test("Should render the learn preset options from the given presets when the mod
 
 test("Should render the default presets when there is no user logged in", async () => {
   // Set the mode to 'Learn' and preset
-  store.dispatch(clearUser())
   mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
   mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset, customPreset], play: [playPreset] })
   props.mode = AppMode.LEARN
@@ -136,23 +128,20 @@ test("Should render the default presets when there is no user logged in", async 
 })
 
 test("Should render an empty state message if no presets are returned", async () => {
-  store.dispatch(setUser(testUser))
   mockGetAllPresets.mockResolvedValueOnce({ learn: [], play: [] })
-  setup()
+  setup(testUser)
   expect(await screen.findByText("No presets available for this topic.")).toBeInTheDocument()
 })
 
 test("Should render an error message if the service call fails and returns one", async () => {
-  store.dispatch(setUser(testUser))
   mockGetAllPresets.mockResolvedValueOnce({ learn: [], play: [], error: "Failed to retrieve presets." })
-  setup()
+  setup(testUser)
   expect(await screen.findByText("Failed to retrieve presets.")).toBeInTheDocument()
 })
 
 test("Selecting a preset should call the onSelect event handler with that preset", async () => {
-  store.dispatch(setUser(testUser))
   mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
-  setup()
+  setup(testUser)
 
   fireEvent.click(await screen.findByText("Short Play"))
 
@@ -161,9 +150,8 @@ test("Selecting a preset should call the onSelect event handler with that preset
 })
 
 test("Selecting a preset should call the onChangeTopic event handler with that topic", async () => {
-  store.dispatch(setUser(testUser))
   mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
-  const { topic } = setup()
+  const { topic } = setup(testUser)
   await waitFor(() => expect(topic).not.toBeDisabled())
 
   // Change the topic to 'Basics'
@@ -187,10 +175,9 @@ test("It should select the first preset if one is not passed as selected", async
 })
 
 test("It should call the isValid event handler with false if the get all presets call fails", async () => {
-  store.dispatch(setUser(testUser))
   mockGetAllPresets.mockResolvedValueOnce({ error: "Whoops." })
 
-  setup()
+  setup(testUser)
 
   await waitFor(() => expect(isValidHandler).toHaveBeenCalledTimes(2))
   expect(isValidHandler).toHaveBeenLastCalledWith(false)

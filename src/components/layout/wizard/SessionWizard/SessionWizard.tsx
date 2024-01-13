@@ -26,11 +26,8 @@ import TimeSettingsStep from "./../steps/TimeSettingsStep"
 import DataSettingsStep from "./../steps/DataSettingsStep"
 import TopicSelectionStep from "./../steps/TopicSelectionStep"
 import Topic from "../../../../domain/Topic"
+import { useSessionSettingsContext } from "context/SessionSettingsContext";
 import GameSettings, { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings"
-import DataSettings from "../../../../domain/session/settings/data/DataSettings"
-import { useDataSettingsDispatch, useGameSettingsDispatch } from "../../../../hooks"
-import { setGameSettings } from "../../../../slices/GameSettingsSlice"
-import { setDataSettings as setGlobalDataSettings } from "../../../../slices/DataSettingsSlice"
 import ModeSelectionStep from "./../steps/ModeSelectionStep"
 import { AppMode } from "../../../../domain/AppMode"
 import { SessionSettings } from "../../../../domain/session/settings/SessionSettings"
@@ -42,6 +39,7 @@ import SessionMode from "../../../../domain/session/SessionMode"
 import { useTranslation } from "react-i18next"
 import { SessionWizardProps, StageDetails, WizardStep } from "components/layout/wizard/SessionWizard/types.ts";
 import { useNavigate } from "react-router-dom"
+import DataSettings from "domain/session/settings/data/DataSettings.ts";
 
 const SessionWizard = (props: SessionWizardProps) => {
   const { onClose } = props
@@ -54,15 +52,14 @@ const SessionWizard = (props: SessionWizardProps) => {
   const [confirmClose, setConfirmClose] = useState(false)
   const [stage, setStage] = useState(WizardStep.MODE)
   const [settings, setSettings] = useState(new GameSettingsBuilder())
-  const [dataSettings, setDataSettings] = useState<DataSettings | undefined>(undefined)
+  const [customDataSettings, setCustomDataSettings] = useState<DataSettings | undefined>(undefined)
   const [preset, setPreset] = useState<SessionMode | undefined>(undefined)
 
   const { MODE, TOPIC, TYPE, PRESET, QUESTION, LIVES, HINT, TIME, DATA, CONFIRM } = WizardStep
 
   const navigate = useNavigate()
 
-  const gameSettingsDispatcher = useGameSettingsDispatch()
-  const dataSettingsDispatcher = useDataSettingsDispatch()
+  const { setDataSettings, setGameSettings } = useSessionSettingsContext()
 
   const handleBack = () => {
     setValid(true)
@@ -84,12 +81,12 @@ const SessionWizard = (props: SessionWizardProps) => {
   }
 
   const handleStartSession = () => {
-    const data = custom ? dataSettings! : preset!.dataSettings
-    dataSettingsDispatcher(setGlobalDataSettings(data))
+    const data = custom ? customDataSettings! : preset!.dataSettings
+    setDataSettings(data)
 
     if (mode === AppMode.PLAY) {
       const game = custom ? settings.build() : (preset!.modeSettings as GameSettings)
-      gameSettingsDispatcher(setGameSettings(game))
+      setGameSettings(game)
       navigate("/play")
     } else {
       navigate("/learn")
@@ -190,7 +187,7 @@ const SessionWizard = (props: SessionWizardProps) => {
           body: (
             <DataSettingsStep
               topic={topic}
-              onSelect={(settings) => setDataSettings(settings)}
+              onSelect={(settings) => setCustomDataSettings(settings)}
               isValid={(valid) => setValid(valid)}
             />
           ),
@@ -206,12 +203,12 @@ const SessionWizard = (props: SessionWizardProps) => {
             mode === AppMode.PLAY ? (
               <ConfirmationStep
                 onSelectStage={(stage) => setStage(stage)}
-                settings={SessionSettings.forGame(dataSettings!, settings.build())}
+                settings={SessionSettings.forGame(customDataSettings!, settings.build())}
               />
             ) : (
               <LearnConfirmationStep
                 onSelectStage={(stage) => setStage(stage)}
-                settings={SessionSettings.forLearning(dataSettings!, new LearnSettings())}
+                settings={SessionSettings.forLearning(customDataSettings!, new LearnSettings())}
               />
             ),
           terminal: true

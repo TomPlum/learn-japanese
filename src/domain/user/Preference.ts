@@ -5,7 +5,7 @@ export enum Preference {
   DEFAULT_KANJI_FONT = "kanjiFont",
   LANGUAGE = "language",
   CONFIDENCE_MENU_STYLE = "confidenceMenuStyle",
-  FLASH_CARDS_QUANTITY = "flashCardsQuantity",
+  FLASH_CARDS_QUANTITY = "cardsPerDay",
   ROMAJI_VISIBILITY = "romajiVisibility",
   HIGH_SCORES_BEHAVIOUR = "highScoresBehaviour",
   STREAK_NOTIFICATIONS = "streakNotifications",

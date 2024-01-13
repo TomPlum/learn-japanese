@@ -1,11 +1,11 @@
 import DashboardCard from "../../layout/card/DashboardCard"
-import { useUserSelector } from "../../../hooks"
 import styles  from "./ProfileCard.module.scss"
 import { faBell, faCircle, faCog, faCompass, faTimes, faUserGraduate } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import DashboardCardLink from "../../layout/card/DashboardCardLink"
 import { useTranslation } from "react-i18next"
 import HashLink from "components/layout/HashLink";
+import { useUserContext } from "context/UserContext";
 
 export interface ProfileCardProps {
   onDismiss?: () => void
@@ -14,7 +14,7 @@ export interface ProfileCardProps {
 const ProfileCard = (props: ProfileCardProps) => {
   const { onDismiss } = props
 
-  const user = useUserSelector((state) => state.user.user)
+  const { user } = useUserContext()
   const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.profile" })
 
   return (

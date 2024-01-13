@@ -42,10 +42,10 @@ test("Should render the name of the button", () => {
 })
 
 test("Clicking the button should call the onStart event handler", () => {
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  const surface = container.firstChild?.firstChild!
+  const surface = component.container.firstChild?.firstChild!
   fireEvent.mouseEnter(surface)
 
   // Clicking the button should call the event handler
@@ -55,17 +55,17 @@ test("Clicking the button should call the onStart event handler", () => {
 
 test("Should render the start text when hovering over the button if not selected", () => {
   props.selected = false
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  fireEvent.mouseEnter(container.firstChild?.firstChild!)
+  fireEvent.mouseEnter(component.container.firstChild?.firstChild!)
 
   // Should stop rendering the preset name and show the start text
   expect(screen.queryByText("Test Button")).not.toBeInTheDocument()
   expect(screen.getByText("Start Play")).toBeInTheDocument()
 
   // Mouse out of the listening surface div
-  fireEvent.mouseOut(container.firstChild?.firstChild!)
+  fireEvent.mouseOut(component.container.firstChild?.firstChild!)
 
   // Should stop rendering the start text and re-render the preset name
   expect(screen.getByText("Test Button")).toBeInTheDocument()
@@ -74,10 +74,10 @@ test("Should render the start text when hovering over the button if not selected
 
 test("Should render the loading dots animation when selected is true", () => {
   props.selected = true
-  const { container } = setup()
+  const { component } = setup()
 
   // Mouse enter the listening surface div
-  const surface = container.firstChild?.firstChild!
+  const surface = component.container.firstChild?.firstChild!
   fireEvent.mouseEnter(surface)
 
   // Should render the loading dots

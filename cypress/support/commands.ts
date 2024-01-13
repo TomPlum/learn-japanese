@@ -1,5 +1,5 @@
 import { Topic } from "./Topic"
-import { User } from "../../src/slices/UserSlice"
+import { User } from "../../src/context/UserContext"
 import Response = Cypress.Response
 import RequestOptions = Cypress.RequestOptions
 import Chainable = Cypress.Chainable

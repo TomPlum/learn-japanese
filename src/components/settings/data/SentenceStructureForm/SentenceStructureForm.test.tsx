@@ -26,7 +26,7 @@ beforeEach(() => {
 })
 
 const setup = () => {
-  const component = render(<SentenceStructureForm {...props} />)
+  const { component }  = render(<SentenceStructureForm {...props} />)
   return {
     quantity: component.getByPlaceholderText("Quantity"),
     adverbs: component.getByTestId("adverb-switch"),
