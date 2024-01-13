@@ -41,19 +41,19 @@ beforeEach(() => {
   }
 })
 
-test("Should render the truthy text if the value from the Redux store is true", () => {
+test("Should render the truthy text if the value from context is true", () => {
   const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: true }}
   const { component } = render(<SettingsBooleanButton {...props} />, { user })
   expect(component.getByText("Enabled")).toBeInTheDocument()
 })
 
-test("Should render the falsy text if the value from the Redux store is false", () => {
+test("Should render the falsy text if the value from context is false", () => {
   const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: false }}
   const { component } = render(<SettingsBooleanButton {...props} />, { user })
   expect(component.getByText("Disabled")).toBeInTheDocument()
 })
 
-test("Should render an unknown text if the value from the Redux store is undefined", () => {
+test("Should render an unknown text if the value from context is undefined", () => {
   const { component } = render(<SettingsBooleanButton {...props} />)
   expect(component.getByText("Unknown")).toBeInTheDocument()
 })
@@ -64,7 +64,7 @@ test("Should render an unknown text if the passed preference is not known as a b
   expect(component.getByText("Unknown")).toBeInTheDocument()
 })
 
-test("Should render the truthy hover text if the value from the Redux store is true and the mouse is over", () => {
+test("Should render the truthy hover text if the value from context is true and the mouse is over", () => {
   // Default the state to truthy so its enabled
   const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: true }}
   const { component } = render(<SettingsBooleanButton {...props} />, { user })
@@ -78,7 +78,7 @@ test("Should render the truthy hover text if the value from the Redux store is t
   expect(component.getByText("Enabled")).toBeInTheDocument()
 })
 
-test("Should render the falsy hover text if the value from the Redux store is false and the mouse is over", () => {
+test("Should render the falsy hover text if the value from context is false and the mouse is over", () => {
   const user: User = { ...testUser, preferences: { ...testUser.preferences, mistakesReminders: false }}
   const { component } = render(<SettingsBooleanButton {...props} />, { user })
   fireEvent.mouseOver(component.getByTestId("test-toggle"))

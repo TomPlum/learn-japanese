@@ -246,7 +246,7 @@ test("When the info prop is passed then it should not render the success alert",
   expect(screen.queryByText("Registration successful. You can log-in below.")).not.toBeInTheDocument()
 })
 
-test("When successfully logging in, it should set the user object in the Redux store", async () => {
+test("When successfully logging in, it should set the user object in context", async () => {
   loginService.mockResolvedValueOnce(validLoginResponse)
 
   const { username, password, login, onUserContextValueChange } = setup()

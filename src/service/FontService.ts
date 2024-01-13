@@ -17,10 +17,7 @@ class FontService {
 
   /**
    * Retrieves the currently selected global kanji font.
-   *
    * Attempts to retrieve it from the browsers local storage.
-   * The font is cached by the Redux reducer as is dispatched by
-   * the font selector on the navigation bar.
    *
    * @return font The selected font, or else undefined if not set.
    */

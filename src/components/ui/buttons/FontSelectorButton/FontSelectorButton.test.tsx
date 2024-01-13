@@ -63,7 +63,7 @@ test("It should stop rendering the menu when clicking outside of the menu", asyn
   await waitForElementToBeRemoved(menu)
 })
 
-test("Clicking on a font should set that font in the Redux store", async () => {
+test("Clicking on a font should set that font in context", async () => {
   // Open the font selection menu
   const { toggle, onFontContextValueChange } = setup()
   fireEvent.click(toggle)

@@ -17,7 +17,7 @@ beforeEach(() => {
 // TODO: Restore in JPUI-58
 describe.skip("Axios Interceptors", () => {
   describe("Refresh Token Interceptor", () => {
-    it("Should clear the store if the failed request is the refresh-token endpoint", () => {
+    it("Should clear the context if the failed request is the refresh-token endpoint", () => {
       mockEnvironment.mockReturnValueOnce("https://japanese.tomplumpton.me/learn-japanese") // Mock Host URI
       const error: AxiosError = {
         config: {
@@ -105,7 +105,7 @@ describe.skip("Axios Interceptors", () => {
       })
     })
 
-    it("Should call the refresh-token endpoint with the refresh token from the Redux store", () => {
+    it("Should call the refresh-token endpoint with the refresh token from context", () => {
       mockPost.mockResolvedValueOnce({ data: { accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN" } })
       // store.dispatch(setRefreshToken("ca6b68d4-85cb-45f5-b1fa-2ead8faa77ec"))
 

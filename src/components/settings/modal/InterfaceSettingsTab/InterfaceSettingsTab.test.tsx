@@ -67,7 +67,7 @@ test("Should render the font selector dropdown", async () => {
   expect(await screen.findByText("Mincho")).toBeInTheDocument()
   expect(await screen.findByText("Gothic")).toBeInTheDocument()
 
-  // Selecting a font should store its slug in the Redux store
+  // Selecting a font should store its slug in context
   mockUpdatePreferences.mockResolvedValueOnce({ success: true })
   fireEvent.click(await screen.findByText("Gothic"))
   await waitForElementToBeRemoved(component.getByTestId("settings-dropdown-spinner"))

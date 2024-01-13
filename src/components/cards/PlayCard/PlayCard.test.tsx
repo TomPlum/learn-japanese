@@ -48,7 +48,7 @@ test("Closing the wizard should stop rendering it", async () => {
   expect(component.queryByTestId("start-session-wizard")).not.toBeInTheDocument()
 })
 
-test("Should render the start last play session with the correct title if the store is empty", () => {
+test("Should render the start last play session with the correct title if the context is empty", () => {
   const { component } = render(<PlayCard />)
   expect(component.getByTitle("You've not played anything recently.")).toBeInTheDocument()
 })
@@ -71,7 +71,7 @@ test("Should render the launch preset dialog with the last play preset if it is 
 })
 
 test("Should render the launch preset dialog with the last learn preset if one is present in local storage", async () => {
-  // Start with a learn session already in the redux store
+  // Start with a learn session already in context
   const { component } = render(
     <PlayCard />,
     { sessionSettings: { lastLearnPreset: learnPreset } }

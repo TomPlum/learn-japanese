@@ -197,7 +197,7 @@ test("Clicking the back button in a normal scenario should go back a single step
   expect(screen.getByTestId("wizard-mode-step")).toBeInTheDocument()
 })
 
-test("Clicking Start in the confirmation step for custom play should set the selected settings in the store", async () => {
+test("Clicking Start in the confirmation step for custom play should set the selected settings in context", async () => {
   const { next, history, onSessionSettingsContextValueChange } = setup()
 
   // Select 'Play' mode
@@ -262,7 +262,7 @@ test("Clicking Start in the confirmation step for custom play should set the sel
   expect(history.location.pathname).toBe("/play")
 })
 
-test("Clicking Start in the confirmation step for preset play should set the selected settings in the store", async () => {
+test("Clicking Start in the confirmation step for preset play should set the selected settings in context", async () => {
   mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playKanjiPreset] })
 
   const { next, history, onSessionSettingsContextValueChange } = setup()
