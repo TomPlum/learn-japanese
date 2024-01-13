@@ -1,12 +1,12 @@
-import { AxiosError, AxiosResponse, Method } from "axios"
+import { AxiosError, Method } from "axios"
 import { Environment } from "../utility/Environment"
 import api from "./API"
-import { refreshTokenInterceptor } from "./Interceptors"
 import PatchRequest from "./request/patch/PatchRequest"
 
-api.interceptors.response.use((response: AxiosResponse) => {
+// TODO: Restore in JPUI-58
+/*api.interceptors.response.use((response: AxiosResponse) => {
   return response
-}, refreshTokenInterceptor)
+}, refreshTokenInterceptor)*/
 
 export interface APIResponse<T> {
   data: T | undefined
