@@ -21,6 +21,7 @@ import EditFavouriteButton from "../../ui/buttons/favourite/EditFavouriteButton"
 import ConfirmModal from "../../ui/ConfirmModal"
 import ExistingFavouriteButton from "../../ui/buttons/favourite/ExistingFavouriteButton"
 import { useTranslation } from "react-i18next"
+import useGetPresets from "api/hooks/useGetPresets";
 
 export interface EditFavouritesModalProps {
   favourites: SessionMode[]
@@ -31,7 +32,6 @@ export interface EditFavouritesModalProps {
 const EditFavouritesModal = (props: EditFavouritesModalProps) => {
   const { favourites, onSuccess, onDismiss } = props
 
-  const [loading, setLoading] = useState(false)
   const [data, setData] = useState<SessionMode[]>([])
   const [filtered, setFiltered] = useState<SessionMode[]>([])
   const [error, setError] = useState<string | undefined>(undefined)
@@ -46,31 +46,19 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
   const { t, ready } = useTranslation()
   const presetsRef = useRef<HTMLParagraphElement>(null)
   const actions = useTranslation("translation", { keyPrefix: "action" }).t
+  const { data: presets, isPending } = useGetPresets()
 
   useEffect(() => {
-    setLoading(true)
-    service
-      .getAllPresets()
-      .then((response) => {
-        if (response.error) {
-          setError(response.error)
-        } else {
-          const favouritePlayIds = favourites.filter((it) => it instanceof PlayMode).map((it) => it.id)
-          const favouriteLearnIds = favourites.filter((it) => it instanceof LearnMode).map((it) => it.id)
-          const notFavouritePlay = response.play.filter((it) => !favouritePlayIds.includes(it.id))
-          const notFavouriteLearn = response.learn.filter((it) => !favouriteLearnIds.includes(it.id))
-          const notFavourite: SessionMode[] = notFavouriteLearn.concat(notFavouritePlay)
-          setData(notFavourite)
-          setFiltered(notFavourite)
-        }
-      })
-      .catch((response) => {
-        setError(response.error)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [])
+    if (presets) {
+      const favouritePlayIds = favourites.filter((it) => it instanceof PlayMode).map((it) => it.id)
+      const favouriteLearnIds = favourites.filter((it) => it instanceof LearnMode).map((it) => it.id)
+      const notFavouritePlay = presets.play.filter((it) => !favouritePlayIds.includes(it.id))
+      const notFavouriteLearn = presets.learn.filter((it) => !favouriteLearnIds.includes(it.id))
+      const notFavourite: SessionMode[] = notFavouriteLearn.concat(notFavouritePlay)
+      setFiltered(notFavourite)
+      setData(notFavourite)
+    }
+  }, [presets]);
 
   useEffect(() => {
     if (showPlay) {
@@ -136,8 +124,8 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
         )}
 
         <div className={styles.header}>
-          {!loading && ready && <FontAwesomeIcon icon={faStar} fixedWidth className={styles.icon} />}
-          <LoadingSpinner active={loading || !ready} variant="warning" className={styles.loading} />
+          {!isPending && ready && <FontAwesomeIcon icon={faStar} fixedWidth className={styles.icon} />}
+          <LoadingSpinner active={isPending || !ready} variant="warning" className={styles.loading} />
           <span className={styles.name}>{t("presets.edit.title")}</span>
           <FontAwesomeIcon
             fixedWidth
@@ -152,7 +140,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
           <div className={styles.body}>
             {error && <Alert variant="danger">{error}</Alert>}
 
-            {!loading && !error && ready && (
+            {!isPending && !error && ready && (
               <ScrollableContainer maxHeight={500} className={styles.scrollable}>
                 <p className={styles.heading}>Existing Favourites</p>
                 <div className={styles.favourites}>
@@ -194,7 +182,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                   ))}
                 </div>
 
-                {!loading && ready && filtered.length === 0 && (
+                {!isPending && ready && filtered.length === 0 && (
                   <span className={styles.empty}>There&apos;s nothing that matches your filters.</span>
                 )}
               </ScrollableContainer>
@@ -219,7 +207,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
             <FontAwesomeIcon icon={faGraduationCap} fixedWidth />
           </Button>
 
-          <Button variant="success" onClick={handleSave} disabled={loading || saving || !ready} className={styles.save}>
+          <Button variant="success" onClick={handleSave} disabled={isPending || saving || !ready} className={styles.save}>
             {saving ? <FontAwesomeIcon icon={faCircleNotch} fixedWidth spin /> : actions("save")}
           </Button>
         </div>

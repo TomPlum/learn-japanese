@@ -21,6 +21,5 @@ i18n
       useSuspense: false
     }
   })
-  .then(() => console.debug("Initialised i18n test configuration"))
 
 export default i18n

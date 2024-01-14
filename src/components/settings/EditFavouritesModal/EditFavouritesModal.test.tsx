@@ -1,13 +1,18 @@
-import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
-import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
-import LearnSettings from "../../../domain/session/settings/LearnSettings"
-import EditFavouritesModal  from "./EditFavouritesModal"
+import EditFavouritesModal from "./EditFavouritesModal"
 import { fireEvent, screen, waitFor } from "@testing-library/react"
-import PresetBuilder from "../../../domain/session/PresetBuilder"
 import { render } from "__test-utils__"
+import { server } from "__test-utils__/msw.ts";
+import {
+  useGetPresetsHandlers,
+  useGetPresetsHandlersError,
+  useGetPresetsHandlersLearnOnly, useGetPresetsHandlersPlayOnly
+} from "api/hooks/useGetPresets";
+import { KanaSettingsBuilder } from "domain/session/settings/data/KanaSettings.ts";
+import { GameSettingsBuilder } from "domain/session/settings/game/GameSettings.ts";
+import PresetBuilder from "domain/session/PresetBuilder.ts";
+import LearnSettings from "domain/session/settings/LearnSettings.ts";
 
 const scrollIntoViewMock = vi.fn()
-window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock
 
 const onSuccessHandler = vi.fn()
 const onDismissHandler = vi.fn()
@@ -16,17 +21,6 @@ const eventHandlers = {
   onSuccess: onSuccessHandler,
   onDismiss: onDismissHandler
 }
-
-const mockGetAllPresets = vi.fn()
-const mockUpdateFavourites = vi.fn()
-vi.mock("service/PresetService", () => ({
-  default: function () {
-    return {
-      getAllPresets: mockGetAllPresets,
-      updateFavourites: mockUpdateFavourites
-    }
-  }
-}))
 
 const playPreset = new PresetBuilder()
   .withID(1)
@@ -51,30 +45,24 @@ const learnPreset = new PresetBuilder()
   .build()
 
 test("Should render existing favourites if the service responds successfully", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   const { component } = render(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />)
 
   // Should render this as an existing favourite as it's passed in as one
   expect(await component.findByTestId("existing-favourite-button-4")).toBeInTheDocument()
 
   // This one is not passed in and should not.
-  expect(await component.queryByTestId("existing-favourite-button-3")).not.toBeInTheDocument()
+  expect(component.queryByTestId("existing-favourite-button-3")).not.toBeInTheDocument()
 })
 
 test("Should render an error alert if the service returns an error", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ error: "Failed to retrieve presets" })
+  server.use(...useGetPresetsHandlersError)
   const { component } = render(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />)
   expect(await component.findByText("Failed to retrieve presets"))
 })
 
-test("Should render an error alert if the service promise is rejected", async () => {
-  mockGetAllPresets.mockRejectedValueOnce({ error: "A network error occurred." })
-  const { component } = render(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />)
-  expect(await component.findByText("A network error occurred."))
-})
-
 test("Should call the onDismiss event handler when clicking close after making no changes", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [] })
+  server.use(...useGetPresetsHandlersLearnOnly)
   const { component } = render(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />)
   expect(await component.findByTestId("existing-favourite-button-4")).toBeInTheDocument()
 
@@ -84,7 +72,7 @@ test("Should call the onDismiss event handler when clicking close after making n
 })
 
 test("Should render a confirmation modal if the user has marked an existing favourite for deletion", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [] })
+  server.use(...useGetPresetsHandlersLearnOnly)
   const { component } = render(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />)
 
   // Mark the existing learn favourite for deletion
@@ -103,7 +91,7 @@ test("Should render a confirmation modal if the user has marked an existing favo
 })
 
 test("Should stop rendering the confirmation modal and not update favourites when clicking 'No'", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [], play: [playPreset] })
+  server.use(...useGetPresetsHandlersPlayOnly)
   const { component } = render(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />)
 
   // Mark the existing play favourite for deletion
@@ -122,7 +110,7 @@ test("Should stop rendering the confirmation modal and not update favourites whe
 
 test("Should call the update favourites service function and onSuccess callback when saving changes", async () => {
   // Return both the play and learn preset. The play is already a favourite.
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   const { component } = render(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />)
 
   // Mark the existing play favourite for deletion
@@ -147,7 +135,7 @@ test("Should call the update favourites service function and onSuccess callback 
 
 test("Should deselect existing and new favourites when clicking them once selected", async () => {
   // Return both the play and learn preset. The play is already a favourite.
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   const { component } = render(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />)
 
   // Mark the existing play favourite for deletion
@@ -180,7 +168,7 @@ test("Should deselect existing and new favourites when clicking them once select
 
 test("Should toggle available play presets when clicking the filter play presets button", async () => {
   // Return both the play and learn preset. The learn is already a favourite.
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   const { component } = render(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />)
 
   // It should start by rendering the available play preset and the existing learn
@@ -204,7 +192,7 @@ test("Should toggle available play presets when clicking the filter play presets
 
 test("Should toggle available learn presets when clicking the filter learn presets button", async () => {
   // Return both the play and learn preset. The play is already a favourite.
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   const { component } = render(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />)
 
   // It should start by rendering the available learn preset and the existing play
@@ -228,7 +216,7 @@ test("Should toggle available learn presets when clicking the filter learn prese
 
 test("Should render the error if the update favourites service function fails when saving changes", async () => {
   // Return both the play and learn preset. The play is already a favourite.
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   const { component } = render(<EditFavouritesModal favourites={[playPreset]} {...eventHandlers} />)
   await waitFor(() => expect(component.getByText("Save")).not.toBeDisabled())
 
@@ -249,7 +237,7 @@ test("Should render the error if the update favourites service function fails wh
 })
 
 test("Should render a help button in the existing favourites section when there are none", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   const { component } = render(<EditFavouritesModal favourites={[]} {...eventHandlers} />)
 
   const button = await component.findByText("You can select favourites below")
