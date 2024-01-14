@@ -1,5 +1,5 @@
 import LifeSettingsForm from "../../../../settings/game/LifeSettingsForm"
-import LifeSettings from "../../../../../domain/session/settings/game/LifeSettings"
+import LifeSettings from "types/session/settings/game/LifeSettings"
 
 export interface LifeSettingsStepProps {
   onSelect: (settings: LifeSettings) => void

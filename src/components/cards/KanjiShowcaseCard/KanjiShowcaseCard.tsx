@@ -2,7 +2,7 @@ import DashboardCard from "../../layout/card/DashboardCard"
 import DashboardCardHeader from "../../layout/card/DashboardCardHeader"
 import KanjiService from "../../../service/KanjiService"
 import { useEffect, useState } from "react"
-import { Kanji } from "../../../domain/kanji/Kanji"
+import { Kanji } from "types/kanji/Kanji"
 import styles  from "./KanjiShowcaseCard.module.scss"
 import Copyable from "../../ui/Copyable"
 import {

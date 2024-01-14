@@ -8,7 +8,7 @@ import "@testing-library/jest-dom"
 // It fixes the 'regeneratorRuntime is not defined` error when running a test that consumes the function.
 import "regenerator-runtime/runtime"
 
-import { ConfidenceMenuStyle } from "./domain/learn/spacedrepetition/ConfidenceMenuStyle"
+import { ConfidenceMenuStyle } from "types/learn/spacedrepetition/ConfidenceMenuStyle"
 import { User } from "./context/UserContext"
 import { cleanup } from "@testing-library/react"
 import { server } from "__test-utils__/msw.ts"

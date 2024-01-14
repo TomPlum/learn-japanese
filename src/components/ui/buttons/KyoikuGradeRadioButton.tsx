@@ -1,4 +1,4 @@
-import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
 import { Form } from "react-bootstrap"
 
 interface KyoikuGradeRadioButtonProps {

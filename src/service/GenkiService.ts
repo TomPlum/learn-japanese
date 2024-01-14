@@ -1,5 +1,5 @@
 import RestClient from "../rest/RestClient"
-import GenkiDefinition from "../domain/learn/GenkiDefinition"
+import GenkiDefinition from "types/learn/GenkiDefinition"
 
 interface GenkiResponseData {
   lesson: number

@@ -1,5 +1,5 @@
 import { Filter } from "../Filter"
-import { Learnable } from "../../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 
 /**
  * Filters out Learnable data objects that don't have one of the given tags.

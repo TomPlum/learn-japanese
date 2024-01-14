@@ -2,7 +2,7 @@ import SettingsTabTitle from "./../SettingsTabTitle"
 import { faCrown } from "@fortawesome/free-solid-svg-icons"
 import styles  from "./PlaySettingsTab.module.scss"
 import SettingsDropdown from "./../SettingsDropdown"
-import { Preference } from "../../../../domain/user/Preference"
+import { Preference } from "types/user/Preference"
 import { useTranslation } from "react-i18next"
 
 const PlaySettingsTab = () => {

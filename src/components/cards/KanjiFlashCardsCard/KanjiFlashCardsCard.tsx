@@ -1,7 +1,7 @@
 import { Col, Row } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import SpacedRepetitionService, { FlashCardsResponse } from "../../../service/SpacedRepetitionService"
-import { FlashCard } from "../../../domain/learn/FlashCard"
+import { FlashCard } from "types/learn/FlashCard"
 import styles  from "./KanjiFlashCardsCard.module.scss"
 import { faGraduationCap, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate } from "react-router-dom"

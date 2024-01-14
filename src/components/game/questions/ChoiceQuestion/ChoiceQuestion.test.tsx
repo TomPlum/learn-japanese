@@ -1,12 +1,12 @@
 import { act, fireEvent, screen } from "@testing-library/react"
 import KanaChoiceQuestion, { ChoiceQuestionProps }  from "./ChoiceQuestion"
-import { Kana } from "../../../../domain/kana/Kana"
-import KanaType from "../../../../domain/kana/KanaType"
-import { KanaColumn } from "../../../../domain/kana/KanaColumn"
+import { Kana } from "types/kana/Kana"
+import KanaType from "types/kana/KanaType"
+import { KanaColumn } from "types/kana/KanaColumn"
 import Arrays from "../../../../utility/Arrays"
 import { getByTextWithElements } from "__test-utils__/Queries"
 import React from "react"
-import LearnableField from "../../../../domain/learn/LearnableField"
+import LearnableField from "types/learn/LearnableField"
 import { render } from "__test-utils__"
 
 const isValidHandler = vi.fn()

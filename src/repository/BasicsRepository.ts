@@ -1,9 +1,9 @@
-import { Learnable } from "../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 import { colours } from "../data/Colours"
 import { ColourData } from "../data/DataTypes"
-import Colour from "../domain/colour/Colour"
+import Colour from "types/colour/Colour"
 import Repository from "./Repository"
-import BasicsSettings from "../domain/session/settings/data/BasicsSettings"
+import BasicsSettings from "types/session/settings/data/BasicsSettings"
 
 export default class BasicsRepository implements Repository<Learnable> {
   public read(settings: BasicsSettings): Promise<Learnable[]> {

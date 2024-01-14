@@ -7,13 +7,13 @@ import {
   SessionSettingsState
 } from "./types.ts";
 import SessionSettingsContext from "context/SessionSettingsContext/SessionSettingsContext.tsx"
-import PlayMode from "domain/session/PlayMode.ts"
+import PlayMode from "types/session/PlayMode.ts"
 import DataSettingsConverter from "converter/DataSettingsConverter.ts"
-import LearnMode from "domain/session/LearnMode.ts"
+import LearnMode from "types/session/LearnMode.ts"
 import GameSettingsConverter from "converter/GameSettingsConverter.ts"
-import LearnSettings from "domain/session/settings/LearnSettings.ts"
-import DataSettings from "domain/session/settings/data/DataSettings.ts"
-import GameSettings from "domain/session/settings/game/GameSettings.ts"
+import LearnSettings from "types/session/settings/LearnSettings.ts"
+import DataSettings from "types/session/settings/data/DataSettings.ts"
+import GameSettings from "types/session/settings/game/GameSettings.ts"
 import { useLocalStorage } from "@uidotdev/usehooks"
 
 const gameSettingsConverter = new GameSettingsConverter()

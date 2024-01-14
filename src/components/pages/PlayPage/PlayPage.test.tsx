@@ -1,16 +1,16 @@
-import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
 import { fireEvent, screen } from "@testing-library/react"
 import { getByTextWithMarkup, getValueLastCalledWith } from "__test-utils__/Queries";
 import { render } from "__test-utils__"
-import Definition from "../../../domain/sentence/Definition"
+import Definition from "types/sentence/Definition"
 import PlayPage  from "./PlayPage"
-import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings"
-import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
-import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings"
-import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings"
-import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings"
-import LearnableField from "../../../domain/learn/LearnableField"
-import QuestionType from "../../../domain/game/QuestionType"
+import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
+import { HintSettingsBuilder } from "types/session/settings/game/HintSettings"
+import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings"
+import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings"
+import LearnableField from "types/learn/LearnableField"
+import QuestionType from "types/game/QuestionType"
 import { SessionSettingsBag } from "context/SessionSettingsContext";
 
 const mockLearningDataService = vi.fn()

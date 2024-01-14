@@ -1,5 +1,5 @@
 import { Filter } from "../Filter"
-import { Learnable } from "../../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 
 export default class ExclusionFilter implements Filter<Learnable> {
   private readonly exclusion: Learnable

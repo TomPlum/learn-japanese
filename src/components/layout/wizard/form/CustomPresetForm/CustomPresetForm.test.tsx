@@ -1,8 +1,8 @@
 import { fireEvent, screen } from "@testing-library/react"
 import CustomPresetForm, { CustomPresetFormProps }  from "./CustomPresetForm"
-import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
-import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
-import KanjiSettings from "../../../../../domain/session/settings/data/KanjiSettings"
+import { SessionSettings } from "types/session/settings/SessionSettings"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
+import KanjiSettings from "types/session/settings/data/KanjiSettings"
 import { render } from "__test-utils__"
 
 const mockPresetService = vi.fn()

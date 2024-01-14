@@ -4,7 +4,7 @@ import { faChevronDown, faChevronUp, faCircleNotch, faSpinner } from "@fortaweso
 import { useMemo, useRef, useState } from "react";
 import { Overlay } from "react-bootstrap"
 import UserService from "../../../../service/UserService"
-import { Preference } from "../../../../domain/user/Preference"
+import { Preference } from "types/user/Preference"
 import { useTranslation } from "react-i18next"
 import Icon from "../../../ui/menu/icon/Icon"
 import { useUserContext } from "context/UserContext";

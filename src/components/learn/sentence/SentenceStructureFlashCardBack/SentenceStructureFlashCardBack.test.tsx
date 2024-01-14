@@ -1,10 +1,10 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import SentenceStructureFlashCardBack  from "./SentenceStructureFlashCardBack"
 import { findByTextWithMarkup } from "__test-utils__/Queries";
-import Definition from "../../../../domain/sentence/Definition"
-import { Kanji } from "../../../../domain/kanji/Kanji.ts"
-import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade.ts"
-import JLTPLevel from "../../../../domain/learn/JLTPLevel.ts"
+import Definition from "types/sentence/Definition"
+import { Kanji } from "types/kanji/Kanji.ts"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts"
+import JLTPLevel from "types/learn/JLTPLevel.ts"
 
 const mockKanjiRepository = vi.fn()
 vi.mock("repository/KanjiRepository.ts", () => ({

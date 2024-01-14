@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react"
 import KanaQuestionBanner  from "./KanaQuestionBanner"
-import { Kana } from "../../../domain/kana/Kana"
-import KanaType from "../../../domain/kana/KanaType"
-import { KanaColumn } from "../../../domain/kana/KanaColumn"
+import { Kana } from "types/kana/Kana"
+import KanaType from "types/kana/KanaType"
+import { KanaColumn } from "types/kana/KanaColumn"
 import { getByTextWithElements } from "__test-utils__/Queries"
 
 test("Regular kana should use the word 'kana' in the banner message", () => {

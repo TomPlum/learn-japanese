@@ -1,5 +1,5 @@
 import DataSettingsMenu, { DataSettingsMenuProps } from "./../DataSettingsMenu"
-import NumbersSettings, { NumbersSettingsBuilder } from "../../../../domain/session/settings/data/NumbersSettings"
+import NumbersSettings, { NumbersSettingsBuilder } from "types/session/settings/data/NumbersSettings"
 import { useState } from "react"
 import NumbersSettingsFormBody from "./../NumbersSettingsFormBody"
 

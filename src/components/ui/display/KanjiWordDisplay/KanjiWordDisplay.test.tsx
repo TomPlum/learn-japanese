@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import KanjiWordDisplay  from "./KanjiWordDisplay"
-import { Kanji } from "../../../../domain/kanji/Kanji"
-import { KanjiReading } from "../../../../domain/kanji/KanjiReading"
-import { ReadingType } from "../../../../domain/kanji/ReadingType"
-import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
-import JLTPLevel from "../../../../domain/learn/JLTPLevel"
+import { Kanji } from "types/kanji/Kanji"
+import { KanjiReading } from "types/kanji/KanjiReading"
+import { ReadingType } from "types/kanji/ReadingType"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
+import JLTPLevel from "types/learn/JLTPLevel"
 
 const mockKanjiRepository = vi.fn()
 vi.mock("repository/KanjiRepository", () => ({

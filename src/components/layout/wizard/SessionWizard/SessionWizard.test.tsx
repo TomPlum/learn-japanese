@@ -1,20 +1,20 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import SessionWizard  from "./SessionWizard"
 import userEvent from "@testing-library/user-event"
-import KanjiSettings, { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings"
-import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings"
+import KanjiSettings, { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons"
-import { QuestionSettingsBuilder } from "../../../../domain/session/settings/game/QuestionSettings"
-import LearnableField from "../../../../domain/learn/LearnableField"
-import QuestionType from "../../../../domain/game/QuestionType"
-import { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings"
-import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings"
-import PresetBuilder from "../../../../domain/session/PresetBuilder"
+import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings"
+import LearnableField from "types/learn/LearnableField"
+import QuestionType from "types/game/QuestionType"
+import { HintSettingsBuilder } from "types/session/settings/game/HintSettings"
+import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings"
+import PresetBuilder from "types/session/PresetBuilder"
 import { render } from "__test-utils__"
 import { getValueLastCalledWith } from "__test-utils__/Queries";
 import { SessionSettingsBag } from "context/SessionSettingsContext";
-import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade.ts";
-import { LifeSettingsBuilder } from "../../../../domain/session/settings/game/LifeSettings.ts";
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts";
+import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings.ts";
 
 const mockGetAllPresets = vi.fn()
 const mockGetDefaultPresets = vi.fn()

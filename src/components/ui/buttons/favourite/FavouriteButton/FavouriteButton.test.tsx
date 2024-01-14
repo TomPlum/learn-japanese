@@ -1,9 +1,9 @@
 import { fireEvent, screen } from "@testing-library/react"
 import FavouriteButton, { FavouriteButtonProps }  from "./FavouriteButton"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
-import PlayMode from "../../../../../domain/session/PlayMode"
-import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings"
-import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
+import PlayMode from "types/session/PlayMode"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
 import { render } from "__test-utils__"
 
 const onStartHandler = vi.fn()

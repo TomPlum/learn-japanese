@@ -2,7 +2,7 @@ import { fireEvent, screen } from "@testing-library/react"
 import ModeSelectionStep, {
   ModeSelectionStepProps
 } from "../../../../../components/layout/wizard/steps/ModeSelectionStep"
-import { AppMode } from "../../../../../domain/AppMode"
+import { AppMode } from "types/AppMode"
 import { render } from "__test-utils__"
 
 const onSelectHandler = vi.fn()

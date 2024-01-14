@@ -1,7 +1,7 @@
 import { Alert, Col, Container, Row } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import KanjiService, { KanjiResult } from "../../../service/KanjiService"
-import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
 import LoadingSpinner from "../../ui/loading/LoadingSpinner"
 import KanjiSearchResult from "../../ui/KanjiSearchResult"
 import StackGrid, { transitions } from "react-stack-grid"
@@ -10,10 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import ValueSelector from "../../ui/select/ValueSelector"
 import KeywordSearchField, { KeywordMeta } from "../../ui/fields/KeywordSearchField"
 import styles  from "./KanjiBankPage.module.scss"
-import { KanjiReading } from "../../../domain/kanji/KanjiReading"
+import { KanjiReading } from "types/kanji/KanjiReading"
 import ExampleDisplay from "../../ui/display/ExampleDisplay"
 import SimplePagination from "../../ui/paging/SimplePagination"
-import JLTPLevel from "../../../domain/learn/JLTPLevel"
+import JLTPLevel from "types/learn/JLTPLevel"
 import { useFontContext } from "context/FontContext";
 
 const KanjiBankPage = () => {

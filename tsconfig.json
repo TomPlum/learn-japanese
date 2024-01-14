@@ -7,8 +7,7 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
-      "*": ["./src/*"],
-      "domain/*": ["./src/domain/*"]
+      "*": ["./src/*"]
     },
     "types": ["vitest/globals", "vite/client"],
 

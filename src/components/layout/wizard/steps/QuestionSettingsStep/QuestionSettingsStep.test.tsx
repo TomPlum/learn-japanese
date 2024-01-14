@@ -1,7 +1,7 @@
 import { fireEvent } from "@testing-library/react"
 import QuestionSettingsStep  from "./QuestionSettingsStep"
-import QuestionSettings from "../../../../../domain/session/settings/game/QuestionSettings"
-import QuestionType from "../../../../../domain/game/QuestionType"
+import QuestionSettings from "types/session/settings/game/QuestionSettings"
+import QuestionType from "types/game/QuestionType"
 import { getValueLastCalledWith } from "__test-utils__/Queries"
 import { render } from "__test-utils__"
 

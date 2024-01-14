@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react"
 import CalendarFlashCardFront  from "./CalendarFlashCardFront"
-import Definition from "../../../../domain/sentence/Definition"
+import Definition from "types/sentence/Definition"
 
 const onClickHandler = vi.fn()
 

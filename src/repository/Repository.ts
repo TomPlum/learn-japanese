@@ -1,5 +1,5 @@
-import { Learnable } from "../domain/learn/Learnable"
-import DataSettings from "../domain/session/settings/data/DataSettings"
+import { Learnable } from "types/learn/Learnable"
+import DataSettings from "types/session/settings/data/DataSettings"
 import { Paged } from "./KanjiRepository"
 
 export default interface Repository<T extends Learnable> {

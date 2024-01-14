@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "api/queryKeys.ts";
 import { useCallback } from "react";
 
-import Topic from "../../../domain/Topic.ts";
-import PresetBuilder from "../../../domain/session/PresetBuilder.ts";
-import LearnSettings from "../../../domain/session/settings/LearnSettings.ts";
+import Topic from "types/Topic.ts";
+import PresetBuilder from "types/session/PresetBuilder.ts";
+import LearnSettings from "types/session/settings/LearnSettings.ts";
 import DataSettingsConverter from "converter/DataSettingsConverter.ts";
 import GameSettingsConverter from "converter/GameSettingsConverter.ts";
-import PlayMode from "../../../domain/session/PlayMode.ts";
-import LearnMode from "../../../domain/session/LearnMode.ts";
+import PlayMode from "types/session/PlayMode.ts";
+import LearnMode from "types/session/LearnMode.ts";
 import { LearnPresetResponse, PlayPresetResponse, Presets } from "repository/PresetRepository.ts";
 import { PresetsResponse } from "api/hooks/useGetPresets/types.ts";
 

@@ -1,10 +1,10 @@
-import GameSettings, { GameSettingsBuilder } from "../domain/session/settings/game/GameSettings"
-import { LifeSettingsBuilder } from "../domain/session/settings/game/LifeSettings"
-import { HintSettingsBuilder } from "../domain/session/settings/game/HintSettings"
-import { TimeSettingsBuilder } from "../domain/session/settings/game/TimeSettings"
-import { QuestionSettingsBuilder } from "../domain/session/settings/game/QuestionSettings"
-import LearnableField from "../domain/learn/LearnableField"
-import QuestionType from "../domain/game/QuestionType"
+import GameSettings, { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
+import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings"
+import { HintSettingsBuilder } from "types/session/settings/game/HintSettings"
+import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings"
+import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings"
+import LearnableField from "types/learn/LearnableField"
+import QuestionType from "types/game/QuestionType"
 import { GameConfigRequest, GameConfigResponse } from "../repository/PresetRepository"
 import { GameSettingState } from "context/SessionSettingsContext";
 

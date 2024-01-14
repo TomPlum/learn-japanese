@@ -1,13 +1,13 @@
-import { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSettings.ts"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts"
 import DataSettingsConverter from "./DataSettingsConverter.ts"
-import { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings.ts"
-import { KyoikuGrade } from "../domain/kanji/KyoikuGrade.ts"
-import { NumbersSettingsBuilder } from "../domain/session/settings/data/NumbersSettings.ts"
-import { SentenceStructureSettingsBuilder } from "../domain/session/settings/data/SentenceStructureSettings.ts"
-import { CalendarSettingsBuilder } from "../domain/session/settings/data/CalendarSettings.ts"
-import { BasicsSettingsBuilder } from "../domain/session/settings/data/BasicsSettings.ts"
-import DataSettings from "../domain/session/settings/data/DataSettings.ts"
-import Topic from "../domain/Topic.ts"
+import { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings.ts"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts"
+import { NumbersSettingsBuilder } from "types/session/settings/data/NumbersSettings.ts"
+import { SentenceStructureSettingsBuilder } from "types/session/settings/data/SentenceStructureSettings.ts"
+import { CalendarSettingsBuilder } from "types/session/settings/data/CalendarSettings.ts"
+import { BasicsSettingsBuilder } from "types/session/settings/data/BasicsSettings.ts"
+import DataSettings from "types/session/settings/data/DataSettings.ts"
+import Topic from "types/Topic.ts"
 import {
   BasicsDataSettingsState, CalenderDataSettingsState,
   DataSettingsState, KanaDataSettingsState, KanjiDataSettingsState,

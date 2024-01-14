@@ -1,7 +1,7 @@
 import styles  from "./SessionSettingsSummary.module.scss"
 import { WizardStep } from "../../layout/wizard/SessionWizard/types.ts"
-import QuestionType from "../../../domain/game/QuestionType"
-import { SessionSettings } from "../../../domain/session/settings/SessionSettings"
+import QuestionType from "types/game/QuestionType"
+import { SessionSettings } from "types/session/settings/SessionSettings"
 import { useTranslation } from "react-i18next"
 
 export interface SessionSettingsSummaryProps {

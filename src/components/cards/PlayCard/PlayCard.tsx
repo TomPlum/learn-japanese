@@ -8,7 +8,7 @@ import DashboardCard, { DashboardCardProps } from "../../layout/card/DashboardCa
 import DashboardCardLink from "../../layout/card/DashboardCardLink"
 import LaunchPresetConfirmationModal from "../../settings/LaunchPresetConfirmationModal"
 import PresetConverter from "../../../converter/PresetConverter"
-import SessionMode from "../../../domain/session/SessionMode"
+import SessionMode from "types/session/SessionMode"
 import { useTranslation } from "react-i18next"
 import { SessionSettingsState, useSessionSettingsContext } from "context/SessionSettingsContext";
 

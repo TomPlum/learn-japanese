@@ -1,8 +1,8 @@
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import ConfirmationStep  from "./ConfirmationStep"
-import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
-import { KanjiSettingsBuilder } from "../../../../../domain/session/settings/data/KanjiSettings"
-import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
+import { SessionSettings } from "types/session/settings/SessionSettings"
+import { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
 import { render } from "__test-utils__"
 import { testUser } from "../../../../../setupTests"
 

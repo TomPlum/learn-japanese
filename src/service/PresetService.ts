@@ -1,10 +1,10 @@
 import PresetRepository, { Presets } from "../repository/PresetRepository"
-import LearnMode from "../domain/session/LearnMode"
-import PlayMode from "../domain/session/PlayMode"
-import SessionMode from "../domain/session/SessionMode"
+import LearnMode from "types/session/LearnMode"
+import PlayMode from "types/session/PlayMode"
+import SessionMode from "types/session/SessionMode"
 import UpdateResponse from "../rest/response/UpdateResponse"
-import { SessionSettings } from "../domain/session/settings/SessionSettings"
-import { CustomIcon } from "../domain/Icon"
+import { SessionSettings } from "types/session/settings/SessionSettings"
+import { CustomIcon } from "types/Icon"
 
 export interface LearnPlayPresets {
   learn: LearnMode[]

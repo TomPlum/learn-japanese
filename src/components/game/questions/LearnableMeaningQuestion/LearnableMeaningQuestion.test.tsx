@@ -2,15 +2,15 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import LearnableMeaningQuestion, {
   LearnableMeaningQuestionProps
 } from "components/game/questions/LearnableMeaningQuestion"
-import { Kanji } from "../../../../domain/kanji/Kanji"
-import { KanjiReading } from "../../../../domain/kanji/KanjiReading"
-import { ReadingType } from "../../../../domain/kanji/ReadingType"
-import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
+import { Kanji } from "types/kanji/Kanji"
+import { KanjiReading } from "types/kanji/KanjiReading"
+import { ReadingType } from "types/kanji/ReadingType"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
 import each from "jest-each"
-import { Learnable } from "../../../../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 import React from "react"
-import Definition from "../../../../domain/sentence/Definition"
-import JLTPLevel from "../../../../domain/learn/JLTPLevel"
+import Definition from "types/sentence/Definition"
+import JLTPLevel from "types/learn/JLTPLevel"
 
 const isValidHandler = vi.fn()
 const ref = React.createRef<LearnableMeaningQuestion>()

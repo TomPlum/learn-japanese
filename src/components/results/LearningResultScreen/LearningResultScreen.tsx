@@ -2,10 +2,10 @@ import { Component } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEraser } from "@fortawesome/free-solid-svg-icons"
-import LearningSessionResult from "../../../domain/learn/LearningSessionResult"
+import LearningSessionResult from "types/learn/LearningSessionResult"
 import QuitButton from "../../ui/buttons/QuitButton"
 import styles  from "./LearningResultScreen.module.scss"
-import { Learnable } from "../../../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 import { PieChart, Pie, Cell } from "recharts"
 
 export interface LearningResultScreenProps {

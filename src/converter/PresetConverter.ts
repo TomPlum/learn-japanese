@@ -1,4 +1,4 @@
-import SessionMode from "../domain/session/SessionMode"
+import SessionMode from "types/session/SessionMode"
 import {
   CustomPresetDetails,
   LearnPresetRequest,
@@ -7,8 +7,8 @@ import {
 } from "../repository/PresetRepository"
 import GameSettingsConverter from "./GameSettingsConverter"
 import DataSettingsConverter from "./DataSettingsConverter"
-import LearnSettings from "../domain/session/settings/LearnSettings"
-import PresetBuilder from "../domain/session/PresetBuilder"
+import LearnSettings from "types/session/settings/LearnSettings"
+import PresetBuilder from "types/session/PresetBuilder"
 import { SessionSettingsState } from "context/SessionSettingsContext";
 
 class PresetConverter {

@@ -1,11 +1,11 @@
 import PresetService, { LearnPlayPresets } from "./PresetService.ts"
-import { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSettings.ts"
-import LearnSettings from "../domain/session/settings/LearnSettings.ts"
-import { GameSettingsBuilder } from "../domain/session/settings/game/GameSettings.ts"
-import { SessionSettings } from "../domain/session/settings/SessionSettings.ts"
-import PresetBuilder from "../domain/session/PresetBuilder.ts"
-import { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings.ts"
-import PlayMode from "../domain/session/PlayMode.ts"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts"
+import LearnSettings from "types/session/settings/LearnSettings.ts"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings.ts"
+import { SessionSettings } from "types/session/settings/SessionSettings.ts"
+import PresetBuilder from "types/session/PresetBuilder.ts"
+import { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings.ts"
+import PlayMode from "types/session/PlayMode.ts"
 
 const mockGetAllPresets = vi.fn()
 const mockGetDefaultPresets = vi.fn()

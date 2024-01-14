@@ -1,4 +1,4 @@
-import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
+import { SessionSettings } from "types/session/settings/SessionSettings"
 import { Accordion, Button } from "react-bootstrap"
 import { faDownload } from "@fortawesome/free-solid-svg-icons"
 import CustomPresetForm from "../../form/CustomPresetForm"

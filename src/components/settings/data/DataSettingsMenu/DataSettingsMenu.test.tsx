@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import DataSettingsMenu, { DataSettingsMenuProps }  from "./DataSettingsMenu"
-import KanaSettings from "../../../../domain/session/settings/data/KanaSettings"
+import KanaSettings from "types/session/settings/data/KanaSettings"
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons"
 
 let props: DataSettingsMenuProps<KanaSettings>

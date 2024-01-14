@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap"
-import SessionMode from "../../../../domain/session/SessionMode"
+import SessionMode from "types/session/SessionMode"
 
 export interface EditCustomPresetFormProps {
   preset: SessionMode

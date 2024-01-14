@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import InformationalKanji  from "./InformationalKanji"
-import { Kanji } from "../../../../domain/kanji/Kanji"
-import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
-import JLTPLevel from "../../../../domain/learn/JLTPLevel"
+import { Kanji } from "types/kanji/Kanji"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
+import JLTPLevel from "types/learn/JLTPLevel"
 
 vi.mock("repository/KanjiRepository")
 

@@ -1,5 +1,5 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo"
-import PageNumber from "../../../domain/learn/PageNumber"
+import PageNumber from "types/learn/PageNumber"
 import QuoteDisplay from "../../ui/display/QuoteDisplay"
 import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
 import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"

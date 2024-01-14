@@ -6,7 +6,7 @@ import SettingsTabTitle from "./../SettingsTabTitle"
 import SettingsDropdown from "./../SettingsDropdown"
 import FontService from "../../../../service/FontService"
 import { Font } from "../../../ui/buttons/FontSelectorButton"
-import { Preference } from "../../../../domain/user/Preference"
+import { Preference } from "types/user/Preference"
 import { useTranslation } from "react-i18next"
 import { useFontContext } from "context/FontContext";
 

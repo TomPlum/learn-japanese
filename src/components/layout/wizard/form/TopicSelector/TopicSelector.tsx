@@ -1,7 +1,7 @@
 import TopicDropdownOption from "../../../../ui/select/TopicDropdownOption"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
-import Topic from "../../../../../domain/Topic"
+import Topic from "types/Topic"
 import styles  from "./TopicSelector.module.scss"
 import { Dropdown } from "react-bootstrap"
 

@@ -1,10 +1,10 @@
 import KanjiConverter from "./KanjiConverter.ts"
 import { KanjiResponseModel } from "../repository/KanjiRepository.ts"
-import { ReadingType } from "../domain/kanji/ReadingType.ts"
-import { KanjiReading } from "../domain/kanji/KanjiReading.ts"
-import { KyoikuGrade } from "../domain/kanji/KyoikuGrade.ts"
-import { Example } from "../domain/kanji/Example.ts"
-import JLTPLevel from "../domain/learn/JLTPLevel.ts"
+import { ReadingType } from "types/kanji/ReadingType.ts"
+import { KanjiReading } from "types/kanji/KanjiReading.ts"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts"
+import { Example } from "types/kanji/Example.ts"
+import JLTPLevel from "types/learn/JLTPLevel.ts"
 
 describe("Kanji Converter", () => {
   const converter = new KanjiConverter()

@@ -1,10 +1,10 @@
 import Repository from "./Repository"
-import KanjiSettings from "../domain/session/settings/data/KanjiSettings"
-import { Kanji } from "../domain/kanji/Kanji"
+import KanjiSettings from "types/session/settings/data/KanjiSettings"
+import { Kanji } from "types/kanji/Kanji"
 import RestClient from "../rest/RestClient"
 import KanjiConverter from "../converter/KanjiConverter"
 import { PaginationRequest } from "../rest/request/PaginationRequest"
-import { Learnable } from "../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 
 export interface KanjiResponseModel {
   character: string

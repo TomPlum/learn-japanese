@@ -4,7 +4,7 @@ import { faPencilAlt, faPlusCircle, faSyncAlt } from "@fortawesome/free-solid-sv
 import styles  from "./FavouritesCard.module.scss"
 import { useState } from "react"
 import FavouriteButton from "../../ui/buttons/favourite/FavouriteButton"
-import SessionMode from "../../../domain/session/SessionMode"
+import SessionMode from "types/session/SessionMode"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import LaunchPresetConfirmationModal from "../../settings/LaunchPresetConfirmationModal"
 import EditFavouritesModal from "../../settings/EditFavouritesModal"

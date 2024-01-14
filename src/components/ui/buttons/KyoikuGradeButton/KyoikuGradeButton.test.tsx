@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react"
 import KyoikuGradeButton  from "./KyoikuGradeButton"
-import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
 
 const onClickHandler = vi.fn()
 

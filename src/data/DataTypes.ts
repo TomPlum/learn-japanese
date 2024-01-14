@@ -1,7 +1,7 @@
-import { KanaColumn } from "../domain/kana/KanaColumn"
-import { CounterGroup } from "../domain/numbers/CounterGroup"
-import { AdjectiveType } from "../domain/sentence/AdjectiveType"
-import { VerbType } from "../domain/sentence/VerbType"
+import { KanaColumn } from "types/kana/KanaColumn"
+import { CounterGroup } from "types/numbers/CounterGroup"
+import { AdjectiveType } from "types/sentence/AdjectiveType"
+import { VerbType } from "types/sentence/VerbType"
 
 export interface KanaData {
   name: string

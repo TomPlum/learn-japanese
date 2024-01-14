@@ -1,6 +1,6 @@
 import { ChangeEvent, forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
 import { Col, Fade, Row } from "react-bootstrap"
-import TimeSettings, { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings"
+import TimeSettings, { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings"
 import styles  from "./TimeSettingsForm.module.scss"
 import RangeSlider from "react-bootstrap-range-slider"
 import ScrollableContainer from "../../../ui/ScrollableContainer"

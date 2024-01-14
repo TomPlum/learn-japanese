@@ -1,5 +1,5 @@
 import TimeSettingsForm from "../../../../settings/game/TimeSettingsForm"
-import TimeSettings from "../../../../../domain/session/settings/game/TimeSettings"
+import TimeSettings from "types/session/settings/game/TimeSettings"
 
 export interface TimeSettingsStepProps {
   onSelect: (settings: TimeSettings) => void

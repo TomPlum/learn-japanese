@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap"
 import styles  from "./PlayWizardFooter.module.scss"
 import PlayWizardProgress from "./../PlayWizardProgress"
-import { AppMode } from "../../../../../domain/AppMode"
+import { AppMode } from "types/AppMode"
 import { useTranslation } from "react-i18next"
 
 export interface PlayWizardFooterProps {

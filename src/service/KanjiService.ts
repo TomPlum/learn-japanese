@@ -1,8 +1,8 @@
-import { Kanji } from "../domain/kanji/Kanji"
+import { Kanji } from "types/kanji/Kanji"
 import KanjiRepository from "../repository/KanjiRepository"
-import { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings"
-import { KyoikuGrade } from "../domain/kanji/KyoikuGrade"
-import JLTPLevel from "../domain/learn/JLTPLevel"
+import { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
+import JLTPLevel from "types/learn/JLTPLevel"
 
 export interface KanjiResult {
   value: Kanji

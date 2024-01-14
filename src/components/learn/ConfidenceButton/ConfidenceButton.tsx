@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap"
-import Confidence from "../../../domain/learn/spacedrepetition/Confidence"
+import Confidence from "types/learn/spacedrepetition/Confidence"
 import styles  from "./ConfidenceButton.module.scss"
-import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle"
+import { ConfidenceMenuStyle } from "types/learn/spacedrepetition/ConfidenceMenuStyle"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useUserContext } from "context/UserContext";
 

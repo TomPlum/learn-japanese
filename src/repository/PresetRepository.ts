@@ -1,15 +1,15 @@
 import RestClient from "../rest/RestClient"
-import LearnMode from "../domain/session/LearnMode"
+import LearnMode from "types/session/LearnMode"
 import DataSettingsConverter from "../converter/DataSettingsConverter"
-import Topic from "../domain/Topic"
-import LearnSettings from "../domain/session/settings/LearnSettings"
+import Topic from "types/Topic"
+import LearnSettings from "types/session/settings/LearnSettings"
 import GameSettingsConverter from "../converter/GameSettingsConverter"
-import PlayMode from "../domain/session/PlayMode"
+import PlayMode from "types/session/PlayMode"
 import UpdateResponse from "../rest/response/UpdateResponse"
 import PresetConverter from "../converter/PresetConverter"
-import { SessionSettings } from "../domain/session/settings/SessionSettings"
-import { CustomIcon } from "../domain/Icon"
-import PresetBuilder from "../domain/session/PresetBuilder"
+import { SessionSettings } from "types/session/settings/SessionSettings"
+import { CustomIcon } from "types/Icon"
+import PresetBuilder from "types/session/PresetBuilder"
 
 export interface PresetRequest {
   name: string

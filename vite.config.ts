@@ -20,7 +20,7 @@ export default defineConfig({
       context: "/src/context",
       converter: "/src/converter",
       data: "/src/data",
-      domain: "/src/domain",
+      types: "/src/types",
       filters: "/src/filters",
       hooks: "/src/hooks",
       locales: "/src/locales",

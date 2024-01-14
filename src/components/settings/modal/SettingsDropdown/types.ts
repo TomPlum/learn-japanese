@@ -1,5 +1,5 @@
-import { CustomIcon } from "domain/Icon.ts";
-import { Preference } from "domain/user/Preference.ts";
+import { CustomIcon } from "types/Icon.ts";
+import { Preference } from "types/user/Preference.ts";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
 export interface SettingsDropdownOption {

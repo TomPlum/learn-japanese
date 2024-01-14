@@ -1,11 +1,11 @@
 import KanjiService from "./KanjiService.ts"
-import { KyoikuGrade } from "../domain/kanji/KyoikuGrade.ts"
-import { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings.ts"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts"
+import { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings.ts"
 import { PaginationRequest } from "../rest/request/PaginationRequest.ts"
-import { Kanji } from "../domain/kanji/Kanji.ts"
-import { KanjiReading } from "../domain/kanji/KanjiReading.ts"
-import { ReadingType } from "../domain/kanji/ReadingType.ts"
-import JLTPLevel from "../domain/learn/JLTPLevel.ts"
+import { Kanji } from "types/kanji/Kanji.ts"
+import { KanjiReading } from "types/kanji/KanjiReading.ts"
+import { ReadingType } from "types/kanji/ReadingType.ts"
+import JLTPLevel from "types/learn/JLTPLevel.ts"
 
 //Mock Kanji Repository
 const mockRepoRead = vi.fn()

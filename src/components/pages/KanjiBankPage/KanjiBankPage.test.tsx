@@ -1,12 +1,12 @@
 import { fireEvent, screen } from "@testing-library/react"
 import KanjiBankPage  from "./KanjiBankPage"
-import { Kanji } from "../../../domain/kanji/Kanji"
-import { KanjiReading } from "../../../domain/kanji/KanjiReading"
-import { ReadingType } from "../../../domain/kanji/ReadingType"
-import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
-import JLTPLevel from "../../../domain/learn/JLTPLevel"
+import { Kanji } from "types/kanji/Kanji"
+import { KanjiReading } from "types/kanji/KanjiReading"
+import { ReadingType } from "types/kanji/ReadingType"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
+import JLTPLevel from "types/learn/JLTPLevel"
 import { render } from "__test-utils__"
-import { Example } from "../../../domain/kanji/Example"
+import { Example } from "types/kanji/Example"
 
 const mockGetKanji = vi.fn()
 vi.mock("service/KanjiService", () => ({

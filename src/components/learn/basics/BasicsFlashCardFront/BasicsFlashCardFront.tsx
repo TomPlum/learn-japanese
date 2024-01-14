@@ -3,7 +3,7 @@ import { CardFaceProps } from "../../FlashCard"
 import { Container } from "react-bootstrap"
 import { faFillDrip } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Colour from "../../../../domain/colour/Colour"
+import Colour from "types/colour/Colour"
 import styles  from "./BasicsFlashCardFront.module.scss"
 import DefinitionList from "../../DefinitionList"
 

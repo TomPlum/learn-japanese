@@ -1,5 +1,5 @@
 import { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
-import QuestionType from "../../../../domain/game/QuestionType"
+import QuestionType from "types/game/QuestionType"
 import DisplayTypeButton from "../../../ui/buttons/DisplayTypeButton"
 import {
   faChevronRight,
@@ -12,9 +12,9 @@ import {
 import { Col, Row } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import KanaQuantityButton from "../../../ui/buttons/KanaQuantityButton"
-import QuestionSettings, { QuestionSettingsBuilder } from "../../../../domain/session/settings/game/QuestionSettings"
+import QuestionSettings, { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings"
 import styles  from "./QuestionSettingsForm.module.scss"
-import LearnableField from "../../../../domain/learn/LearnableField"
+import LearnableField from "types/learn/LearnableField"
 import LearnableFieldSelector from "../../../ui/select/LearnableFieldSelector"
 import ScrollableContainer from "../../../ui/ScrollableContainer"
 import ToggleSwitch from "../../../ui/ToggleSwitch"

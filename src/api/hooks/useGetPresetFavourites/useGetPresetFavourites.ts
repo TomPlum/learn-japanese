@@ -6,15 +6,15 @@ import {
   FavouriteLearnPresetResponse,
   FavouritePlayPresetResponse
 } from "./types.ts";
-import Topic from "../../../domain/Topic.ts";
-import PresetBuilder from "../../../domain/session/PresetBuilder.ts";
-import LearnSettings from "../../../domain/session/settings/LearnSettings.ts";
+import Topic from "types/Topic.ts";
+import PresetBuilder from "types/session/PresetBuilder.ts";
+import LearnSettings from "types/session/settings/LearnSettings.ts";
 import DataSettingsConverter from "converter/DataSettingsConverter.ts";
 import GameSettingsConverter from "converter/GameSettingsConverter.ts";
 import { FavouritePresetsResponse } from "api/hooks/useGetPresetFavourites/types.ts";
-import PlayMode from "../../../domain/session/PlayMode.ts";
-import LearnMode from "../../../domain/session/LearnMode.ts";
-import SessionMode from "../../../domain/session/SessionMode.ts";
+import PlayMode from "types/session/PlayMode.ts";
+import LearnMode from "types/session/LearnMode.ts";
+import SessionMode from "types/session/SessionMode.ts";
 
 const dataSettingsConverter = new DataSettingsConverter()
 const gameSettingsConverter = new GameSettingsConverter()

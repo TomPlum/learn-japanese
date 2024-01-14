@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCog } from "@fortawesome/free-solid-svg-icons"
 import Inspectable from "../../../../ui/Inspectable"
 import ConditionalWrapper from "../../../../ui/ConditionalWrapper"
-import { CustomIcon } from "../../../../../domain/Icon"
+import { CustomIcon } from "types/Icon"
 import Icon from "../../../../ui/menu/icon/Icon"
 import { useTranslation } from "react-i18next"
 

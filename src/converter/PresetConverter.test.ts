@@ -1,9 +1,9 @@
 import PresetConverter from "./PresetConverter.ts"
-import { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSettings.ts"
-import { GameSettingsBuilder } from "../domain/session/settings/game/GameSettings.ts"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings.ts"
 import { CustomPresetDetails, DataSettingsRequest, GameConfigRequest } from "../repository/PresetRepository.ts"
-import LearnSettings from "../domain/session/settings/LearnSettings.ts"
-import { SessionSettings } from "../domain/session/settings/SessionSettings.ts"
+import LearnSettings from "types/session/settings/LearnSettings.ts"
+import { SessionSettings } from "types/session/settings/SessionSettings.ts"
 import { GameSettingState, KanaDataSettingsState, SessionSettingsState } from "context/SessionSettingsContext";
 
 const mockDataSettingsConverter = vi.fn()

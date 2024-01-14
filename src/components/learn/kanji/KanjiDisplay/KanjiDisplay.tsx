@@ -1,6 +1,6 @@
 import { Component } from "react"
 import { Container } from "react-bootstrap"
-import { Kanji } from "../../../../domain/kanji/Kanji"
+import { Kanji } from "types/kanji/Kanji"
 import styles  from "./KanjiDisplay.module.scss"
 import DynamicDisplay from "../../../ui/display/DynamicDisplay"
 

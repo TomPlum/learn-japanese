@@ -3,17 +3,17 @@ import { server } from "__test-utils__/msw.ts";
 import useGetPresets from "api/hooks/useGetPresets/useGetPresets.ts";
 import { useGetPresetsHandlers } from "api/hooks/useGetPresets/useGetPresets.handlers.ts";
 import { wrapper } from "__test-utils__";
-import LearnMode from "domain/session/LearnMode.ts";
-import LearnSettings from "domain/session/settings/LearnSettings.ts";
-import PlayMode from "domain/session/PlayMode.ts";
-import { GameSettingsBuilder } from "domain/session/settings/game/GameSettings.ts";
-import { LifeSettingsBuilder } from "domain/session/settings/game/LifeSettings.ts";
-import { HintSettingsBuilder } from "domain/session/settings/game/HintSettings.ts";
-import { TimeSettingsBuilder } from "domain/session/settings/game/TimeSettings.ts";
-import { QuestionSettingsBuilder } from "domain/session/settings/game/QuestionSettings.ts";
-import LearnableField from "domain/learn/LearnableField.ts";
-import QuestionType from "domain/game/QuestionType.ts";
-import { KanaSettingsBuilder } from "domain/session/settings/data/KanaSettings.ts";
+import LearnMode from "types/session/LearnMode.ts";
+import LearnSettings from "types/session/settings/LearnSettings.ts";
+import PlayMode from "types/session/PlayMode.ts";
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings.ts";
+import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings.ts";
+import { HintSettingsBuilder } from "types/session/settings/game/HintSettings.ts";
+import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings.ts";
+import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings.ts";
+import LearnableField from "types/learn/LearnableField.ts";
+import QuestionType from "types/game/QuestionType.ts";
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts";
 
 describe('Get Presets API Hook', () => {
   const gameSettings = new GameSettingsBuilder()
