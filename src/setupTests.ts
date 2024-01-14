@@ -8,9 +8,24 @@ import "@testing-library/jest-dom"
 // It fixes the 'regeneratorRuntime is not defined` error when running a test that consumes the function.
 import "regenerator-runtime/runtime"
 
+import { ConfidenceMenuStyle } from "./domain/learn/spacedrepetition/ConfidenceMenuStyle"
+import { User } from "./context/UserContext"
+import { cleanup } from "@testing-library/react"
+import { server } from "__test-utils__/msw.ts"
+
+beforeAll(() => {
+  server.listen({ onUnhandledRequest: 'error' })
+})
+
 afterEach(() => {
   cleanup()
+  server.resetHandlers()
+  testQueryClient.clear()
   localStorageMock.clear()
+})
+
+afterAll(() => {
+  server.close()
 })
 
 //Test Environment
@@ -32,9 +47,7 @@ window.matchMedia =
 
 //Allows testing of components that are wrapped in the sizeMe HOC
 import sizeMe from "react-sizeme"
-import { ConfidenceMenuStyle } from "./domain/learn/spacedrepetition/ConfidenceMenuStyle"
-import { User } from "./context/UserContext"
-import { cleanup } from "@testing-library/react";
+import { testQueryClient } from "__test-utils__";
 sizeMe.noPlaceholders = true
 
 declare global {

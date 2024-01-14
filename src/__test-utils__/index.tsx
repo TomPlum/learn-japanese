@@ -22,7 +22,17 @@ import UserProvider, { User, UserContextBag, useUserContext } from "context/User
 import { localStorageMock } from "../setupTests.ts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const testQueryClient = new QueryClient()
+export const testQueryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      retry: 0,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
+      refetchOnMount: true
+    }
+  }
+})
 
 interface ContextListener<Bag> {
   useContextHook: () => Bag

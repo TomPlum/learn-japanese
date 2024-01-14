@@ -65,7 +65,6 @@ const useGetPresetFavourites = () => {
     const { data  } = await client.get<FavouritePresetsResponse>("/presets/favourites")
     const learnPresets = convertFavouriteLearnPresets(data.learn)
     const playPresets = convertFavouritePlayPresets(data.play)
-
     return [...learnPresets, ...playPresets]
   }, [client])
 

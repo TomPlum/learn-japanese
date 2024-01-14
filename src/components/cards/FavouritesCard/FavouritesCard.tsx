@@ -16,13 +16,14 @@ import useGetPresetFavourites from "api/hooks/useGetPresetFavourites";
 const FavouritesCard = () => {
   const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.favourites" })
   const actions = useTranslation("translation", { keyPrefix: "action" }).t
-  const { data: presets, refetch, isLoading } = useGetPresetFavourites()
+  const { data: presets, refetch, isPending, isError } = useGetPresetFavourites()
 
   const [editing, setEditing] = useState(false)
-  const [error, setError] = useState<string | undefined>(undefined)
   const [confirm, setConfirm] = useState(false)
-  const [selected, setSelected] = useState<SessionMode | undefined>(undefined)
   const [updating, setUpdating] = useState(false)
+  const [selected, setSelected] = useState<SessionMode | undefined>(undefined)
+
+  const error = isError ? 'Failed to retrieve.' : undefined
 
   const handleStart = (preset: SessionMode) => {
     setConfirm(true)
@@ -36,7 +37,6 @@ const FavouritesCard = () => {
 
   const reload = () => {
     setUpdating(true)
-    setError(undefined)
     refetch().then(() => setUpdating(false))
   }
 
@@ -46,7 +46,7 @@ const FavouritesCard = () => {
   }
 
   return (
-    <DashboardCard className={styles.card} loading={isLoading && !ready} updating={updating} error={error}>
+    <DashboardCard className={styles.card} loading={isPending && !ready} updating={updating} error={error}>
       <DashboardCard.Header onReload={reload}>
         <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
 
