@@ -6,8 +6,8 @@ import styles  from "./CustomPresetForm.module.scss"
 import { SessionSettings } from "types/session/settings/SessionSettings"
 import IconPicker from "../../../../ui/menu/icon/IconPicker"
 import { CustomIcon } from "types/Icon"
-import PresetService from "../../../../../service/PresetService"
 import { useTranslation } from "react-i18next"
+import useSavePlayPreset from "api/hooks/useSavePlayPreset";
 
 export interface CustomPresetFormProps {
   settings: SessionSettings
@@ -15,18 +15,15 @@ export interface CustomPresetFormProps {
   onCancel: () => void
 }
 
-const CustomPresetForm = (props: CustomPresetFormProps) => {
-  const { settings, onSuccess, onCancel } = props
-
-  const service = new PresetService()
-
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [error, setError] = useState("")
+const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormProps) => {
   const [name, setName] = useState("")
-  const [icon, setIcon] = useState<CustomIcon>("FaRocket")
+  const [success, setSuccess] = useState(false)
   const [colour, setColour] = useState("#FFFFFF")
   const [editingName, setEditingName] = useState(false)
+  const [icon, setIcon] = useState<CustomIcon>("FaRocket")
+
+  const { mutateAsync: savePlayPreset, isPending: isSavePlayLoading, error: playError } = useSavePlayPreset()
+
   const { t } = useTranslation("translation", { keyPrefix: "forms.custom-preset" })
   const actions = useTranslation("translation", { keyPrefix: "action" }).t
 
@@ -34,29 +31,14 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     setName(e.target.value)
   }
 
-  const handleSave = () => {
-    setLoading(true)
+  const handleSave = async () => {
+    if (settings.gameSettings) {
+      await savePlayPreset({ meta: { name, icon, colour }, settings })
+      onSuccess()
+      setSuccess(true)
+    } else {
 
-    service
-      .saveCustomPreset({ name, icon, colour }, settings)
-      .then((response) => {
-        if (response.success) {
-          setSuccess(true)
-          setTimeout(() => onSuccess(), 2000)
-        } else {
-          if (response.error) {
-            setError(response.error)
-          } else {
-            setError(t("failed-to-save"))
-          }
-        }
-      })
-      .catch(() => {
-        setError(t("generic-error"))
-      })
-      .finally(() => {
-        setLoading(false)
-      })
+    }
   }
 
   const handleIconChange = (icon: CustomIcon, colour: string) => {
@@ -64,12 +46,12 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     setColour(colour)
   }
 
-  const disableSave = name === "" || loading
-  const saveIcon = loading ? faSpinner : faCheck
+  const disableSave = name === "" || isSavePlayLoading
+  const saveIcon = isSavePlayLoading ? faSpinner : faCheck
 
   return (
     <div data-testid="save-custom-preset-form">
-      {error && <Alert variant="danger">{error}</Alert>}
+      {playError && <Alert variant="danger">{t('failed-to-save')}</Alert>}
 
       {success && (
         <Alert variant="success">
@@ -114,11 +96,11 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
 
             <Form.Group as={Col} className={styles.buttonContainer}>
               <Button variant="primary" className={styles.button} disabled={disableSave} onClick={handleSave}>
-                <FontAwesomeIcon icon={saveIcon} spin={loading} fixedWidth className={styles.icon} />
+                <FontAwesomeIcon icon={saveIcon} spin={isSavePlayLoading} fixedWidth className={styles.icon} />
                 <span>{actions("save")}</span>
               </Button>
 
-              <Button variant="danger" onClick={onCancel} className={styles.button} disabled={loading}>
+              <Button variant="danger" onClick={onCancel} className={styles.button} disabled={isSavePlayLoading}>
                 <FontAwesomeIcon fixedWidth icon={faTimes} className={styles.icon} />
                 <span>{actions("cancel")}</span>
               </Button>

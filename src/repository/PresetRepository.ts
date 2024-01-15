@@ -15,6 +15,7 @@ export interface PresetRequest {
   name: string
   icon: string
   colour: string
+  description: string
   topic: string
   data: DataSettingsRequest
 }
