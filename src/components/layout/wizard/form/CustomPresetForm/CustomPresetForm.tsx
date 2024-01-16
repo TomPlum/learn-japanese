@@ -3,17 +3,11 @@ import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheck, faCheckCircle, faPencilAlt, faSpinner, faTimes } from "@fortawesome/free-solid-svg-icons"
 import styles  from "./CustomPresetForm.module.scss"
-import { SessionSettings } from "types/session/settings/SessionSettings"
 import IconPicker from "../../../../ui/menu/icon/IconPicker"
 import { CustomIcon } from "types/Icon"
 import { useTranslation } from "react-i18next"
 import useSavePlayPreset from "api/hooks/useSavePlayPreset";
-
-export interface CustomPresetFormProps {
-  settings: SessionSettings
-  onSuccess: () => void
-  onCancel: () => void
-}
+import { CustomPresetFormProps } from "components/layout/wizard/form/CustomPresetForm/types.ts";
 
 const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormProps) => {
   const [name, setName] = useState("")
@@ -34,8 +28,8 @@ const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormPro
   const handleSave = async () => {
     if (settings.gameSettings) {
       await savePlayPreset({ meta: { name, icon, colour }, settings })
-      onSuccess()
       setSuccess(true)
+      setTimeout(() => onSuccess(), 2000)
     } else {
 
     }

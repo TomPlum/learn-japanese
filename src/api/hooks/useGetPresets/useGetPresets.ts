@@ -11,12 +11,12 @@ import GameSettingsConverter from "converter/GameSettingsConverter.ts";
 import PlayMode from "types/session/PlayMode.ts";
 import LearnMode from "types/session/LearnMode.ts";
 import { LearnPresetResponse, PlayPresetResponse, Presets } from "repository/PresetRepository.ts";
-import { PresetsResponse } from "api/hooks/useGetPresets/types.ts";
+import { PresetsResponse, UseGetPresetsProps } from "api/hooks/useGetPresets/types.ts";
 
 const dataSettingsConverter = new DataSettingsConverter()
 const gameSettingsConverter = new GameSettingsConverter()
 
-const useGetPresets = () => {
+const useGetPresets = ({ enabled }: UseGetPresetsProps = { enabled: true }) => {
   const client = useClient()
 
   const convertLearnPreset = useCallback((data: LearnPresetResponse[]): LearnMode[] => {
@@ -68,7 +68,8 @@ const useGetPresets = () => {
 
   return useQuery({
     queryKey: [queryKeys.getPresets],
-    queryFn: getPresets
+    queryFn: getPresets,
+    enabled
   })
 }
 
