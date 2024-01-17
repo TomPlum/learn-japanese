@@ -1,53 +1,31 @@
-import { PresetsResponse } from "./types.ts";
-import { LearnPresetResponse } from "repository/PresetRepository.ts";
+import { DefaultPresetsResponse } from "./types.ts";
 
-const customLearnPresetResponse: LearnPresetResponse = {
-  id: 3,
-  name: "Test Custom Learn",
-  description: "An example custom learn preset desc",
-  topic: "Hiragana & Katakana",
-  icon: "faApple",
-  colour: "ffffff",
-  data: {
-    quantity: 50,
-    config: {
-      hiragana: true,
-      katakana: true,
-      diagraphs: true,
-      diacriticals: true,
-      onlyDiagraphs: false,
-      regular: true
-    }
-  }
-}
-
-export const useGetPresetsResponses: PresetsResponse = {
+export const useGetDefaultPresetsResponses: DefaultPresetsResponse = {
   learn: [
     {
-      id: 2,
-      name: "Test Learn",
+      id: 1,
+      name: "Example Learn Preset",
       description: "An example learn preset desc",
       topic: "Hiragana & Katakana",
       icon: "faApple",
-      colour: "ffffff",
+      colour: "#ffffff",
       data: {
         quantity: 50,
         config: {
           hiragana: true,
-          katakana: true,
-          diagraphs: true,
+          katakana: false,
+          diagraphs: false,
           diacriticals: true,
           onlyDiagraphs: false,
           regular: true
         }
       }
-    },
-    customLearnPresetResponse
+    }
   ],
   play: [
     {
         id: 1,
-        name: "Test Play",
+        name: "Example Play Preset",
         description: "An example play preset desc",
         topic: "Hiragana & Katakana",
         icon: "faApple",
@@ -56,8 +34,8 @@ export const useGetPresetsResponses: PresetsResponse = {
           quantity: 50,
           config: {
             hiragana: true,
-            katakana: true,
-            diagraphs: true,
+            katakana: false,
+            diagraphs: false,
             diacriticals: true,
             onlyDiagraphs: false,
             regular: true
@@ -66,12 +44,12 @@ export const useGetPresetsResponses: PresetsResponse = {
         game: {
           hints: {
             enabled: true,
-            quantity: 3,
+            quantity: 8,
             unlimited: false
           },
           lives: {
             enabled: true,
-            quantity: 10
+            quantity: 12
           },
           time: {
             timed: true,
@@ -81,18 +59,18 @@ export const useGetPresetsResponses: PresetsResponse = {
           question: {
             questionField: "learnable.field.kana.name",
             answerField: "learnable.field.romaji.name",
-            quantity: 0,
+            quantity: 150,
             score: true,
-            type: "text",
+            type: "choice",
             answerFilter: undefined,
-            cards: 0
+            cards: 4
           }
         }
       }
   ]
 }
 
-export const useGetPresetsResponsesLearnOnly: PresetsResponse = {
+export const useGetDefaultPresetsResponsesLearnOnly: DefaultPresetsResponse = {
   learn: [
     {
       id: 2,
@@ -117,7 +95,7 @@ export const useGetPresetsResponsesLearnOnly: PresetsResponse = {
   play: []
 }
 
-export const useGetPresetsResponsesPlayOnly: PresetsResponse = {
+export const useGetDefaultPresetsResponsesPlayOnly: DefaultPresetsResponse = {
   learn: [],
   play: [
     {
@@ -167,7 +145,7 @@ export const useGetPresetsResponsesPlayOnly: PresetsResponse = {
   ]
 }
 
-export const useGetPresetsResponsesEmpty: PresetsResponse = {
+export const useGetDefaultPresetsResponsesEmpty: DefaultPresetsResponse = {
   learn: [],
   play: []
 }

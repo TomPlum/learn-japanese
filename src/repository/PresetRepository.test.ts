@@ -1,10 +1,8 @@
 import RestClient from "../rest/RestClient.ts"
 import PresetRepository, {
   DataSettingsRequest,
-  GameConfigRequest,
   LearnPresetRequest,
   LearnPresetResponse,
-  PlayPresetRequest,
   PlayPresetResponse
 } from "./PresetRepository.ts"
 import { GameSettingsBuilder } from "types/session/settings/game/GameSettings.ts"
@@ -19,7 +17,6 @@ import LearnMode from "types/session/LearnMode.ts"
 import LearnSettings from "types/session/settings/LearnSettings.ts"
 import PlayMode from "types/session/PlayMode.ts"
 import Topic from "types/Topic.ts"
-import { faGraduationCap } from "@fortawesome/free-solid-svg-icons"
 import { SessionSettings } from "types/session/settings/SessionSettings.ts"
 
 const mockDataSettingsConverter = vi.fn()

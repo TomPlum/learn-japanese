@@ -13,17 +13,10 @@ import LearnSettings from "types/session/settings/LearnSettings"
 import { testUser } from "../../../../../setupTests"
 import { render } from "__test-utils__"
 import { User } from "context/UserContext";
-
-const mockGetAllPresets = vi.fn()
-const mockGetDefaultPresets = vi.fn()
-vi.mock("service/PresetService", () => ({
-  default: function () {
-    return {
-      getAllPresets: mockGetAllPresets,
-      getDefaultPresets: mockGetDefaultPresets
-    }
-  }
-}))
+import { server } from "__test-utils__/msw.ts";
+import { useGetPresetsHandlers, useGetPresetsHandlersEmpty, useGetPresetsHandlersError } from "api/hooks/useGetPresets";
+import { useGetDefaultPresetsHandlers } from "api/hooks/useGetDefaultPresets";
+import userEvent from "@testing-library/user-event";
 
 const onSelectHandler = vi.fn()
 const onChangeTopicHandler = vi.fn()
@@ -91,72 +84,73 @@ beforeEach(() => {
 
 test("Should render the play preset options from the given presets when the mode is play", async () => {
   // Set the mode to 'Play' and preset
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   props.mode = AppMode.PLAY
   props.preset = playPreset
   setup(testUser)
 
+  expect(await screen.findByTestId('presets')).toBeInTheDocument()
+
   // Should render play presets
-  expect(await screen.findByText("Short Play")).toBeInTheDocument()
-  expect(screen.queryByText("Short Learn")).not.toBeInTheDocument()
+  expect(await screen.findByTestId("grid-item-1")).toBeInTheDocument()
+  expect(screen.queryByTestId("grid-item-2")).not.toBeInTheDocument()
 })
 
 test("Should render the learn preset options from the given presets when the mode is learn", async () => {
   // Set the mode to 'Learn' and preset
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset, customPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   props.mode = AppMode.LEARN
   props.preset = learnPreset
   setup(testUser)
 
   // Should render default learn preset and custom since user is logged in
-  expect(await screen.findByText("Short Learn")).toBeInTheDocument()
-  expect(await screen.findByText("Custom Preset")).toBeInTheDocument()
-  expect(screen.queryByText("Short Play")).not.toBeInTheDocument()
+  expect(await screen.findByText("Test Learn")).toBeInTheDocument()
+  expect(await screen.findByText("Test Custom Learn")).toBeInTheDocument()
+  expect(screen.queryByText("Test Play")).not.toBeInTheDocument()
 })
 
 test("Should render the default presets when there is no user logged in", async () => {
   // Set the mode to 'Learn' and preset
-  mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset, customPreset], play: [playPreset] })
+  server.use(...[...useGetPresetsHandlers, ...useGetDefaultPresetsHandlers])
   props.mode = AppMode.LEARN
   props.preset = learnPreset
   setup()
 
   // Should render default learn presets
-  expect(await screen.findByText("Short Learn")).toBeInTheDocument()
-  expect(screen.queryByText("Custom Preset")).not.toBeInTheDocument()
+  expect(await screen.findByText("Example Learn Preset")).toBeInTheDocument()
+  expect(screen.queryByText("Test Custom Learn")).not.toBeInTheDocument()
 })
 
 test("Should render an empty state message if no presets are returned", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [], play: [] })
+  server.use(...useGetPresetsHandlersEmpty)
   setup(testUser)
   expect(await screen.findByText("No presets available for this topic.")).toBeInTheDocument()
 })
 
 test("Should render an error message if the service call fails and returns one", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [], play: [], error: "Failed to retrieve presets." })
+  server.use(...useGetPresetsHandlersError)
   setup(testUser)
   expect(await screen.findByText("Failed to retrieve presets.")).toBeInTheDocument()
 })
 
 test("Selecting a preset should call the onSelect event handler with that preset", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   setup(testUser)
 
-  fireEvent.click(await screen.findByText("Short Play"))
+  fireEvent.click(await screen.findByTestId("grid-item-1"))
 
-  expect(await screen.findByText("This is an example play description")).toBeInTheDocument()
+  expect(await screen.findByText("An example play preset desc")).toBeInTheDocument()
   expect(getValueLastCalledWith<PlayMode>(onSelectHandler).displayName).toBe("Test Play")
 })
 
 test("Selecting a preset should call the onChangeTopic event handler with that topic", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetsHandlers)
   const { topic } = setup(testUser)
   await waitFor(() => expect(topic).not.toBeDisabled())
 
   // Change the topic to 'Basics'
-  fireEvent.click(screen.getByText("Hiragana & Katakana"))
-  fireEvent.click(screen.getByText("Basics"))
+  await userEvent.click(screen.getByTestId("topic-selector-toggle"))
+  await userEvent.click(screen.getByText("Basics"))
 
   // Should call the event handler
   expect(onChangeTopicHandler).toHaveBeenLastCalledWith(Topic.BASICS)
@@ -165,7 +159,7 @@ test("Selecting a preset should call the onChangeTopic event handler with that t
 test("It should select the first preset if one is not passed as selected", async () => {
   props.preset = undefined
   props.mode = AppMode.PLAY
-  mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetDefaultPresetsHandlers)
   setup()
 
   // Mouse over to show the description, this only happens when selected
@@ -175,7 +169,7 @@ test("It should select the first preset if one is not passed as selected", async
 })
 
 test("It should call the isValid event handler with false if the get all presets call fails", async () => {
-  mockGetAllPresets.mockResolvedValueOnce({ error: "Whoops." })
+  server.use(...useGetPresetsHandlersError)
 
   setup(testUser)
 

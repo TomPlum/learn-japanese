@@ -1,4 +1,5 @@
 export const queryKeys = {
   getPresetFavourites: 'getPresetFavourites',
-  getPresets: 'getPresets'
+  getPresets: 'getPresets',
+  getDefaultPresets: 'getDefaultPresets',
 }
