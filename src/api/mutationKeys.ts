@@ -1,3 +1,4 @@
 export const mutationKeys = {
-  savePlayPreset: 'savePlayPreset'
+  savePlayPreset: 'savePlayPreset',
+  deleteFavouritePreset: 'deleteFavouritePreset'
 }
