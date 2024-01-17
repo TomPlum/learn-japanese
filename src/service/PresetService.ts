@@ -22,46 +22,6 @@ class PresetService {
   private readonly repository = new PresetRepository()
 
   /**
-   * Retrieves a list of all available presets.
-   * @return Learn and play presets.
-   */
-  public async getAllPresets(): Promise<LearnPlayPresets> {
-    return this.repository
-      .getAllPresets()
-      .then((response: Presets) => {
-        return { learn: response.learn, play: response.play, error: '' }
-      })
-      .catch((response) => {
-        return { learn: [], play: [], error: response.error }
-      })
-  }
-
-  /**
-   * Retrieves a list of all default (non-custom) presets.
-   * @return Default learn and play presets.
-   */
-  public async getDefaultPresets(): Promise<LearnPlayPresets> {
-    return this.repository
-      .getDefaultPresets()
-      .then((response: Presets) => {
-        return { learn: response.learn, play: response.play, error: '' }
-      })
-      .catch((response) => {
-        return { learn: [], play: [], error: response.error }
-      })
-  }
-
-  /**
-   * Retrieves a list of default play presets.
-   * @return presets - a list of play presets.
-   */
-  public async getPlayPresets(): Promise<PlayMode[]> {
-    return this.repository.getDefaultPresets().then((response: Presets) => {
-      return response.play
-    })
-  }
-
-  /**
    * Removes the given preset from the users favourites.
    * @param preset The preset to remove.
    */

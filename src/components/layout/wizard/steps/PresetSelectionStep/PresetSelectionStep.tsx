@@ -35,14 +35,12 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
 
   const {
     data: allPresets,
-    error: allPresetsError,
     isError: isAllPresetsError,
     isLoading: allPresetsLoading,
   } = useGetPresets({ enabled: Boolean(user) })
 
   const {
     data: defaultPresets,
-    error: defaultPresetsError,
     isError: isDefaultPresetsError,
     isLoading: defaultPresetsLoading,
   } = useGetDefaultPresets({ enabled: !Boolean(user) })

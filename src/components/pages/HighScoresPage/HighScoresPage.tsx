@@ -6,14 +6,13 @@ import styles  from "./HighScoresPage.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilter, faTimes, faTrophy } from "@fortawesome/free-solid-svg-icons"
 import ValueSelector from "../../ui/select/ValueSelector"
-import PresetService from "../../../service/PresetService"
-import PlayMode from "types/session/PlayMode"
 import { useTranslation } from "react-i18next"
 import TablePagination from "../../ui/paging/TablePagination"
 import EmptyTableBody from "../../ui/table/EmptyTableBody"
 import UserSearchField from "../../ui/fields/UserSearchField"
 import SingleUserHighScoresTable from "../../ui/table/SingleUserHighScoresTable"
 import { useSearchParams } from "react-router-dom"
+import useGetDefaultPresets from "api/hooks/useGetDefaultPresets";
 
 const HighScoresPage = () => {
   const { t } = useTranslation()
@@ -24,18 +23,18 @@ const HighScoresPage = () => {
   const [pageNumber, setPageNumber] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
   const [, setTotalEntries] = useState(0)
-  const [presets, setPresets] = useState<PlayMode[]>([])
   const [selectedPreset, setSelectedPreset] = useState(1)
   const [entries, setEntries] = useState<HighScoreEntry[]>([])
   const [username, setUsername] = useState<string | undefined>(undefined)
 
   const highScoresService = new HighScoresService()
-  const presetService = new PresetService()
-  const selectedPresetName = t(presets.find((preset) => preset.id === selectedPreset)?.displayName ?? "")
 
   const userQueryParamName = "user"
   const [searchParams, setSearchParams] = useSearchParams();
   const hasUserQueryParam = searchParams.has(userQueryParamName)
+
+  const { data: defaultPresets, refetch: refetchDefaultPresets } = useGetDefaultPresets()
+  const selectedPresetName = t(defaultPresets?.play.find((preset) => preset.id === selectedPreset)?.displayName ?? "")
 
   const getHighScoreEntries = () => {
     setError("")
@@ -60,15 +59,9 @@ const HighScoresPage = () => {
       })
   }
 
-  const getPresets = () => {
-    presetService.getPlayPresets().then((response) => {
-      setPresets(response)
-    })
-  }
-
   const preload = () => {
     getHighScoreEntries()
-    getPresets()
+    refetchDefaultPresets()
   }
 
   useEffect(preload, [])
@@ -103,14 +96,16 @@ const HighScoresPage = () => {
 
         <div className={styles.controls}>
           <div>
-            <ValueSelector
-              showBeforeScrolling={200}
-              selected={selectedPreset}
-              id="high-scores-preset-selector"
-              className={styles.presetSelector}
-              onChange={(id: number) => setSelectedPreset(id)}
-              values={presets.map((preset) => ({ display: t(preset.displayName), value: preset.id }))}
-            />
+            {defaultPresets && (
+              <ValueSelector
+                showBeforeScrolling={200}
+                selected={selectedPreset}
+                id="high-scores-preset-selector"
+                className={styles.presetSelector}
+                onChange={(id: number) => setSelectedPreset(id)}
+                values={defaultPresets.play.map((preset) => ({ display: t(preset.displayName), value: preset.id }))}
+              />
+            )}
           </div>
 
           <div>

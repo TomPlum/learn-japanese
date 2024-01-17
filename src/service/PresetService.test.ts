@@ -1,11 +1,10 @@
-import PresetService, { LearnPlayPresets } from "./PresetService.ts"
+import PresetService from "./PresetService.ts"
 import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts"
 import LearnSettings from "types/session/settings/LearnSettings.ts"
 import { GameSettingsBuilder } from "types/session/settings/game/GameSettings.ts"
 import { SessionSettings } from "types/session/settings/SessionSettings.ts"
 import PresetBuilder from "types/session/PresetBuilder.ts"
 import { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings.ts"
-import PlayMode from "types/session/PlayMode.ts"
 
 const mockGetAllPresets = vi.fn()
 const mockGetDefaultPresets = vi.fn()
@@ -50,47 +49,6 @@ const learnPreset = new PresetBuilder()
 
 describe("Preset Service", () => {
   const service = new PresetService()
-
-  describe("Get All Presets", () => {
-    it("Should return the presets from the repository when the call succeeds", () => {
-      mockGetAllPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
-      return service.getAllPresets().then((response: LearnPlayPresets) => {
-        expect(response).toStrictEqual({ learn: [learnPreset], play: [playPreset], error: undefined })
-      })
-    })
-
-    it("Should return empty preset array if the repository call fails with an error message", () => {
-      mockGetAllPresets.mockRejectedValueOnce({ error: "Failed to retrieve presets." })
-      return service.getAllPresets().then((response: LearnPlayPresets) => {
-        expect(response).toStrictEqual({ learn: [], play: [], error: "Failed to retrieve presets." })
-      })
-    })
-  })
-
-  describe("Get Default Presets", () => {
-    it("Should return the default presets from the repository when the call succeeds", () => {
-      mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
-      return service.getDefaultPresets().then((response: LearnPlayPresets) => {
-        expect(response).toStrictEqual({ learn: [learnPreset], play: [playPreset], error: undefined })
-      })
-    })
-
-    it("Should return empty preset array if the repository call fails with an error message", () => {
-      mockGetDefaultPresets.mockRejectedValueOnce({ error: "Failed to retrieve default presets." })
-      return service.getDefaultPresets().then((response: LearnPlayPresets) => {
-        expect(response).toStrictEqual({ learn: [], play: [], error: "Failed to retrieve default presets." })
-      })
-    })
-  })
-
-  describe("Get Play Presets", () => {
-    it("Should return only the play presets", () => {
-      mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
-      return service.getPlayPresets().then((response: PlayMode[]) => {
-        expect(response).toStrictEqual([playPreset])
-      })
-    })
-  })
 
   describe("Remove Favourite Preset", () => {
     it("Should call the delete preset favourite repository function", () => {
