@@ -8,6 +8,7 @@ import { CustomIcon } from "types/Icon"
 import { useTranslation } from "react-i18next"
 import useSavePlayPreset from "api/hooks/useSavePlayPreset";
 import { CustomPresetFormProps } from "components/layout/wizard/form/CustomPresetForm/types.ts";
+import useSaveLearnPreset from "api/hooks/useSaveLearnPreset";
 
 const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormProps) => {
   const [name, setName] = useState("")
@@ -16,7 +17,11 @@ const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormPro
   const [editingName, setEditingName] = useState(false)
   const [icon, setIcon] = useState<CustomIcon>("FaRocket")
 
-  const { mutateAsync: savePlayPreset, isPending: isSavePlayLoading, error: playError } = useSavePlayPreset()
+  const { mutateAsync: savePlayPreset, isPending: isSavePlayLoading, isError: playError } = useSavePlayPreset()
+  const { mutateAsync: saveLearnPreset, isPending: isSaveLearnLoading, isError: learnError } = useSaveLearnPreset()
+
+  const isLoading = isSavePlayLoading || isSaveLearnLoading
+  const error = playError || learnError
 
   const { t } = useTranslation("translation", { keyPrefix: "forms.custom-preset" })
   const actions = useTranslation("translation", { keyPrefix: "action" }).t
@@ -31,7 +36,9 @@ const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormPro
       setSuccess(true)
       setTimeout(() => onSuccess(), 2000)
     } else {
-
+      await saveLearnPreset({ meta: { name, icon, colour }, settings })
+      setSuccess(true)
+      setTimeout(() => onSuccess(), 2000)
     }
   }
 
@@ -40,12 +47,16 @@ const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormPro
     setColour(colour)
   }
 
-  const disableSave = name === "" || isSavePlayLoading
-  const saveIcon = isSavePlayLoading ? faSpinner : faCheck
+  const disableSave = name === "" || isLoading
+  const saveIcon = isLoading ? faSpinner : faCheck
 
   return (
     <div data-testid="save-custom-preset-form">
-      {playError && <Alert variant="danger">{t('failed-to-save')}</Alert>}
+      {error && (
+        <Alert variant="danger">
+          {t('failed-to-save')}
+        </Alert>
+      )}
 
       {success && (
         <Alert variant="success">
@@ -90,11 +101,11 @@ const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormPro
 
             <Form.Group as={Col} className={styles.buttonContainer}>
               <Button variant="primary" className={styles.button} disabled={disableSave} onClick={handleSave}>
-                <FontAwesomeIcon icon={saveIcon} spin={isSavePlayLoading} fixedWidth className={styles.icon} />
+                <FontAwesomeIcon icon={saveIcon} spin={isLoading} fixedWidth className={styles.icon} />
                 <span>{actions("save")}</span>
               </Button>
 
-              <Button variant="danger" onClick={onCancel} className={styles.button} disabled={isSavePlayLoading}>
+              <Button variant="danger" onClick={onCancel} className={styles.button} disabled={isLoading}>
                 <FontAwesomeIcon fixedWidth icon={faTimes} className={styles.icon} />
                 <span>{actions("cancel")}</span>
               </Button>

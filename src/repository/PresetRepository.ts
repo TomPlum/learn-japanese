@@ -275,65 +275,6 @@ class PresetRepository {
   }
 
   /**
-   * Retrieves a list of all presets from the API.
-   * Includes play, learn, and custom.
-   * @return A list of learn and play presets.
-   */
-  public async getAllPresets(): Promise<Presets> {
-    return RestClient.get<PresetsResponse>("/presets/all")
-      .then((response) => {
-        const data = response.data
-        if (data) {
-          const learn = this.convertLearnPresets(data.learn)
-          const play = this.convertPlayPresets(data.play)
-          return { learn: learn, play: play }
-        } else {
-          return Promise.reject({ error: "Failed to retrieve presets." })
-        }
-      })
-      .catch((response) => {
-        return { learn: [], play: [], error: response.error ?? "Failed to retrieve presets." }
-      })
-  }
-
-  /**
-   * Retrieves a list of all default presets from the API.
-   * Default presets are ones defined by the application and so
-   * are not custom created by a user.
-   * @return A list of all default learn and play presets.
-   */
-  public async getDefaultPresets(): Promise<Presets> {
-    return RestClient.get<PresetsResponse>("/presets/default")
-      .then((response) => {
-        const data = response.data
-        if (data) {
-          const learn = this.convertLearnPresets(data.learn)
-          const play = this.convertPlayPresets(data.play)
-          return { learn: learn, play: play }
-        } else {
-          return Promise.reject({ error: "Failed to retrieve presets." })
-        }
-      })
-      .catch((response) => {
-        return { learn: [], play: [], error: response.error ?? "Failed to retrieve presets." }
-      })
-  }
-
-  /**
-   * Removes the favourite with the given ID from the users' favourites.
-   * @param id The ID of the preset to remove.
-   */
-  public async deleteFavouritePreset(id: number): Promise<UpdateResponse> {
-    return RestClient.delete(`/presets/favourites/delete?=${id}`)
-      .then(() => {
-        return { success: true }
-      })
-      .catch((error) => {
-        return { success: false, error: error }
-      })
-  }
-
-  /**
    * Updates the users' favourites with the given additions and removals.
    * @param add Preset IDs to add to favourites.
    * @param remove Favourite IDs to remove.
