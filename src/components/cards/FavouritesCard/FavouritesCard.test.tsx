@@ -8,7 +8,7 @@ import {
   useGetPresetFavouritesHandlersLearnOnly,
   useGetPresetFavouritesHandlersNoPresets,
   useGetPresetFavouritesHandlersPlayOnly
-} from "api/hooks/useGetPresetFavourites"
+} from "api/hooks/presets/useGetPresetFavourites"
 
 const mockGetAllPresets = vi.fn()
 const mockUpdateFavourites = vi.fn()

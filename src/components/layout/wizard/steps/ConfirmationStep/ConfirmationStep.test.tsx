@@ -6,7 +6,7 @@ import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
 import { render } from "__test-utils__"
 import { testUser } from "../../../../../setupTests"
 import { server } from "__test-utils__/msw.ts";
-import { useSavePlayPresetHandlers } from "api/hooks/useSavePlayPreset";
+import { useSavePlayPresetHandlers } from "api/hooks/presets/useSavePlayPreset";
 
 const onSelectStageHandler = vi.fn()
 

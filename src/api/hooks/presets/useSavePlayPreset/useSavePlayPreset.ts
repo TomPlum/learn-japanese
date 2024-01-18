@@ -10,7 +10,7 @@ import {
 } from "repository/PresetRepository.ts"
 import UpdateResponse from "rest/response/UpdateResponse.ts"
 import { mutationKeys } from "api/mutationKeys.ts"
-import { SavePlayPresetMutationData } from "api/hooks/useSavePlayPreset/types.ts";
+import { SavePlayPresetMutationData } from "api/hooks/presets/useSavePlayPreset/types.ts";
 
 const dataSettingsConverter = new DataSettingsConverter()
 const gameSettingsConverter = new GameSettingsConverter()

@@ -3,9 +3,9 @@ import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons"
 import { SessionSettings } from "types/session/settings/SessionSettings.ts"
 import { server } from "__test-utils__/msw.ts";
-import { useSavePlayPresetHandlers } from "api/hooks/useSavePlayPreset/useSavePlayPreset.handlers.ts";
+import { useSavePlayPresetHandlers } from "api/hooks/presets/useSavePlayPreset/useSavePlayPreset.handlers.ts";
 import { renderHook, waitFor } from "@testing-library/react";
-import useSavePlayPreset from "api/hooks/useSavePlayPreset/useSavePlayPreset.ts";
+import useSavePlayPreset from "api/hooks/presets/useSavePlayPreset/useSavePlayPreset.ts";
 import { wrapper } from "__test-utils__";
 
 describe("Save Custom Play Preset API Hook", () => {

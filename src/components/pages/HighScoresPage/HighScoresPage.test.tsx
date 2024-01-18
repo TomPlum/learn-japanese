@@ -4,7 +4,7 @@ import { render } from "__test-utils__"
 import { when } from "jest-when"
 import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react"
 import { server } from "__test-utils__/msw.ts";
-import { useGetDefaultPresetsHandlers } from "api/hooks/useGetDefaultPresets";
+import { useGetDefaultPresetsHandlers } from "api/hooks/presets/useGetDefaultPresets";
 
 const mockGetHighScoreEntriesPage = vi.fn()
 vi.mock("service/HighScoresService", () => ({

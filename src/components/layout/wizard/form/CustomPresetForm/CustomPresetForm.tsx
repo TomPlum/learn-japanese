@@ -6,9 +6,9 @@ import styles  from "./CustomPresetForm.module.scss"
 import IconPicker from "../../../../ui/menu/icon/IconPicker"
 import { CustomIcon } from "types/Icon"
 import { useTranslation } from "react-i18next"
-import useSavePlayPreset from "api/hooks/useSavePlayPreset";
+import useSavePlayPreset from "api/hooks/presets/useSavePlayPreset";
 import { CustomPresetFormProps } from "components/layout/wizard/form/CustomPresetForm/types.ts";
-import useSaveLearnPreset from "api/hooks/useSaveLearnPreset";
+import useSaveLearnPreset from "api/hooks/presets/useSaveLearnPreset";
 
 const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormProps) => {
   const [name, setName] = useState("")

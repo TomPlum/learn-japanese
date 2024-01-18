@@ -4,9 +4,9 @@ import { SessionSettings } from "types/session/settings/SessionSettings.ts"
 import { server } from "__test-utils__/msw.ts"
 import { renderHook, waitFor } from "@testing-library/react"
 import { wrapper } from "__test-utils__"
-import { useSaveLearnPresetHandlers } from "api/hooks/useSaveLearnPreset/useSaveLearnPreset.handlers.ts"
+import { useSaveLearnPresetHandlers } from "api/hooks/presets/useSaveLearnPreset/useSaveLearnPreset.handlers.ts"
 import LearnSettings from "types/session/settings/LearnSettings.ts"
-import useSaveLearnPreset from "api/hooks/useSaveLearnPreset/useSaveLearnPreset.ts";
+import useSaveLearnPreset from "api/hooks/presets/useSaveLearnPreset/useSaveLearnPreset.ts";
 
 describe("Save Custom Learn Preset API Hook", () => {
   it("Should return true if the API call succeeds", async () => {

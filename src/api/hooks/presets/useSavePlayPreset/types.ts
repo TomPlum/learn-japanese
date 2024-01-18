@@ -1,11 +1,5 @@
 import { SessionSettings } from "types/session/settings/SessionSettings.ts";
-import { CustomIcon } from "types/Icon.ts";
-
-export interface CustomPresetMeta {
-  name: string
-  icon: CustomIcon
-  colour: string
-}
+import { CustomPresetMeta } from "api/hooks/presets/types.ts";
 
 export interface SavePlayPresetMutationData {
   meta: CustomPresetMeta

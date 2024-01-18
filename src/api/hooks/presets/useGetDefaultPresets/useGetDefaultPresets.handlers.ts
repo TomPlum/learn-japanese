@@ -2,7 +2,7 @@ import { http, HttpResponse, RequestHandler } from "msw";
 import {
   useGetDefaultPresetsResponses,
   useGetDefaultPresetsResponsesLearnOnly, useGetDefaultPresetsResponsesPlayOnly
-} from "api/hooks/useGetDefaultPresets/useGetDefaultPresets.responses.ts";
+} from "api/hooks/presets/useGetDefaultPresets/useGetDefaultPresets.responses.ts";
 
 export const useGetDefaultPresetsHandlers: RequestHandler[] = [
   http.get('*/presets/default', () => {

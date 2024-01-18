@@ -12,8 +12,8 @@ import PlayMode from "types/session/PlayMode"
 import LearnMode from "types/session/LearnMode"
 import { Alert } from "react-bootstrap"
 import { useUserContext } from "context/UserContext";
-import useGetPresets from "api/hooks/useGetPresets";
-import useGetDefaultPresets from "api/hooks/useGetDefaultPresets";
+import useGetPresets from "api/hooks/presets/useGetPresets";
+import useGetDefaultPresets from "api/hooks/presets/useGetDefaultPresets";
 
 export interface PresetSelectionStepProps {
   mode: AppMode

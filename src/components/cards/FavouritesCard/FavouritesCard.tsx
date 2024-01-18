@@ -11,7 +11,7 @@ import EditFavouritesModal from "../../settings/EditFavouritesModal"
 import DashboardCardLink from "../../layout/card/DashboardCardLink"
 import ScrollableContainer from "../../ui/ScrollableContainer"
 import { useTranslation } from "react-i18next"
-import useGetPresetFavourites from "api/hooks/useGetPresetFavourites";
+import useGetPresetFavourites from "api/hooks/presets/useGetPresetFavourites";
 
 const FavouritesCard = () => {
   const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.favourites" })

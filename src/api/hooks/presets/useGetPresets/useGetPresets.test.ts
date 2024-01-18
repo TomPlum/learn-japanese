@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { server } from "__test-utils__/msw.ts";
-import useGetPresets from "api/hooks/useGetPresets/useGetPresets.ts";
-import { useGetPresetsHandlers } from "api/hooks/useGetPresets/useGetPresets.handlers.ts";
+import useGetPresets from "api/hooks/presets/useGetPresets/useGetPresets.ts";
+import { useGetPresetsHandlers } from "api/hooks/presets/useGetPresets/useGetPresets.handlers.ts";
 import { wrapper } from "__test-utils__";
 import LearnMode from "types/session/LearnMode.ts";
 import LearnSettings from "types/session/settings/LearnSettings.ts";

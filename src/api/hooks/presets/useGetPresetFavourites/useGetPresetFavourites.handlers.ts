@@ -2,7 +2,7 @@ import { http, HttpResponse, RequestHandler } from "msw";
 import {
   useGetPresetFavouritesResponses, useGetPresetFavouritesResponsesEmpty, useGetPresetFavouritesResponsesLearnOnly,
   useGetPresetFavouritesResponsesPlayOnly
-} from "api/hooks/useGetPresetFavourites/useGetPresetFavourites.responses.ts";
+} from "api/hooks/presets/useGetPresetFavourites/useGetPresetFavourites.responses.ts";
 
 export const useGetPresetFavouritesHandlers: RequestHandler[] = [
   http.get('*/presets/favourites', () => {

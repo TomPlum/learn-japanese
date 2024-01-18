@@ -5,7 +5,7 @@ import DataSettingsConverter from "converter/DataSettingsConverter.ts"
 import { CustomPresetDetails, PresetRequest } from "repository/PresetRepository.ts"
 import UpdateResponse from "rest/response/UpdateResponse.ts"
 import { mutationKeys } from "api/mutationKeys.ts"
-import { SaveLearnPresetMutationData } from "api/hooks/useSaveLearnPreset/types.ts"
+import { SaveLearnPresetMutationData } from "api/hooks/presets/useSaveLearnPreset/types.ts"
 
 const dataSettingsConverter = new DataSettingsConverter()
 

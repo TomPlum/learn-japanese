@@ -5,7 +5,7 @@ import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
 import KanjiSettings from "types/session/settings/data/KanjiSettings"
 import { render } from "__test-utils__"
 import { server } from "__test-utils__/msw.ts";
-import { useSavePlayPresetHandlers, useSavePlayPresetHandlersError } from "api/hooks/useSavePlayPreset";
+import { useSavePlayPresetHandlers, useSavePlayPresetHandlersError } from "api/hooks/presets/useSavePlayPreset";
 import { CustomPresetFormProps } from "components/layout/wizard/form/CustomPresetForm/types.ts";
 
 const settings = SessionSettings.forGame(new KanjiSettings([], []), new GameSettingsBuilder().build())

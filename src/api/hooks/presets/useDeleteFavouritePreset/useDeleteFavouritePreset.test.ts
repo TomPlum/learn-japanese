@@ -1,8 +1,8 @@
 import { renderHook, waitFor } from "@testing-library/react"
 import { server } from "__test-utils__/msw.ts"
 import { wrapper } from "__test-utils__"
-import { useDeleteFavouritePresetHandlers } from "api/hooks/useDeleteFavouritePreset/useDeleteFavouritePreset.handlers.ts"
-import useDeleteFavouritePreset from "api/hooks/useDeleteFavouritePreset/useDeleteFavouritePreset.ts"
+import { useDeleteFavouritePresetHandlers } from "api/hooks/presets/useDeleteFavouritePreset/useDeleteFavouritePreset.handlers.ts"
+import useDeleteFavouritePreset from "api/hooks/presets/useDeleteFavouritePreset/useDeleteFavouritePreset.ts"
 
 describe("Delete Favourite Preset API Hook", () => {
   it("Should return success true when the deletion succeeds", async () => {

@@ -12,7 +12,7 @@ import EmptyTableBody from "../../ui/table/EmptyTableBody"
 import UserSearchField from "../../ui/fields/UserSearchField"
 import SingleUserHighScoresTable from "../../ui/table/SingleUserHighScoresTable"
 import { useSearchParams } from "react-router-dom"
-import useGetDefaultPresets from "api/hooks/useGetDefaultPresets";
+import useGetDefaultPresets from "api/hooks/presets/useGetDefaultPresets";
 
 const HighScoresPage = () => {
   const { t } = useTranslation()

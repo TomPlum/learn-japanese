@@ -6,7 +6,7 @@ import {
   useGetPresetsHandlers,
   useGetPresetsHandlersError,
   useGetPresetsHandlersLearnOnly, useGetPresetsHandlersPlayOnly
-} from "api/hooks/useGetPresets";
+} from "api/hooks/presets/useGetPresets";
 import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts";
 import { GameSettingsBuilder } from "types/session/settings/game/GameSettings.ts";
 import PresetBuilder from "types/session/PresetBuilder.ts";
@@ -14,7 +14,7 @@ import LearnSettings from "types/session/settings/LearnSettings.ts";
 import {
   useUpdatePresetFavouritesHandlers,
   useUpdatePresetFavouritesHandlersError
-} from "api/hooks/useUpdatePresetFavourites";
+} from "api/hooks/presets/useUpdatePresetFavourites";
 
 const scrollIntoViewMock = vi.fn()
 

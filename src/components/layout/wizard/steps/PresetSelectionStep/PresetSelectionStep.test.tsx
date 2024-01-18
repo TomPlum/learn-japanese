@@ -14,8 +14,8 @@ import { testUser } from "../../../../../setupTests"
 import { render } from "__test-utils__"
 import { User } from "context/UserContext";
 import { server } from "__test-utils__/msw.ts";
-import { useGetPresetsHandlers, useGetPresetsHandlersEmpty, useGetPresetsHandlersError } from "api/hooks/useGetPresets";
-import { useGetDefaultPresetsHandlers } from "api/hooks/useGetDefaultPresets";
+import { useGetPresetsHandlers, useGetPresetsHandlersEmpty, useGetPresetsHandlersError } from "api/hooks/presets/useGetPresets";
+import { useGetDefaultPresetsHandlers } from "api/hooks/presets/useGetDefaultPresets";
 import userEvent from "@testing-library/user-event";
 
 const onSelectHandler = vi.fn()

@@ -11,7 +11,7 @@ import GameSettingsConverter from "converter/GameSettingsConverter.ts";
 import PlayMode from "types/session/PlayMode.ts";
 import LearnMode from "types/session/LearnMode.ts";
 import { LearnPresetResponse, PlayPresetResponse, Presets } from "repository/PresetRepository.ts";
-import { PresetsResponse, UseGetPresetsProps } from "api/hooks/useGetPresets/types.ts";
+import { PresetsResponse, UseGetPresetsProps } from "api/hooks/presets/useGetPresets/types.ts";
 
 const dataSettingsConverter = new DataSettingsConverter()
 const gameSettingsConverter = new GameSettingsConverter()
