@@ -16,12 +16,12 @@ const useSaveLearnPreset = () => {
     name: preset.name,
     icon: preset.icon.toString(),
     colour: preset.colour.replace("#", ""),
-    description: "Custom play preset",
+    description: "Custom learn preset",
     topic: preset.settings.dataSettings.topic.name,
     data: dataSettingsConverter.convertRequest(preset.settings.dataSettings)
   }), [])
 
-  const savePlayPreset = useCallback(async ({ meta, settings }: SaveLearnPresetMutationData): Promise<UpdateResponse> => {
+  const saveLearnPreset = useCallback(async ({ meta, settings }: SaveLearnPresetMutationData): Promise<UpdateResponse> => {
     const details: CustomPresetDetails = { name: meta.name, icon: meta.icon, colour: meta.colour, settings: settings }
     const request = buildRequest(details)
     await client.post("/presets/custom/learn/save", request)
@@ -33,7 +33,7 @@ const useSaveLearnPreset = () => {
 
   return useMutation({
     mutationKey: [mutationKeys.saveLearnPreset],
-    mutationFn: savePlayPreset
+    mutationFn: saveLearnPreset
   })
 }
 

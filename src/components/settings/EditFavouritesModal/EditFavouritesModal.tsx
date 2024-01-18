@@ -11,7 +11,6 @@ import {
   faTimes
 } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useRef, useState } from "react"
-import PresetService from "../../../service/PresetService"
 import SessionMode from "types/session/SessionMode"
 import LoadingSpinner from "../../ui/loading/LoadingSpinner"
 import ScrollableContainer from "../../ui/ScrollableContainer"
@@ -22,6 +21,7 @@ import ConfirmModal from "../../ui/ConfirmModal"
 import ExistingFavouriteButton from "../../ui/buttons/favourite/ExistingFavouriteButton"
 import { useTranslation } from "react-i18next"
 import useGetPresets from "api/hooks/useGetPresets";
+import useUpdatePresetFavourites from "api/hooks/useUpdatePresetFavourites/useUpdatePresetFavourites.ts";
 
 export interface EditFavouritesModalProps {
   favourites: SessionMode[]
@@ -34,19 +34,18 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
 
   const [data, setData] = useState<SessionMode[]>([])
   const [filtered, setFiltered] = useState<SessionMode[]>([])
-  const [error, setError] = useState<string | undefined>(undefined)
   const [add, setAdd] = useState<number[]>([])
   const [remove, setRemove] = useState<number[]>([])
-  const [saving, setSaving] = useState(false)
   const [showPlay, setShowPlay] = useState(true)
   const [showLearn, setShowLearn] = useState(true)
   const [confirm, setConfirm] = useState(false)
 
-  const service = new PresetService()
   const { t, ready } = useTranslation()
   const presetsRef = useRef<HTMLParagraphElement>(null)
   const actions = useTranslation("translation", { keyPrefix: "action" }).t
-  const { data: presets, isPending } = useGetPresets()
+  const { data: presets, isPending, isError: isGetPresetsError } = useGetPresets()
+
+  const { mutateAsync: updateFavourites, isPending: saving, isError } = useUpdatePresetFavourites()
 
   useEffect(() => {
     if (presets) {
@@ -66,7 +65,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
     } else {
       setFiltered(filtered.filter((it) => !(it instanceof PlayMode)))
     }
-  }, [showPlay])
+  }, [data, showPlay])
 
   useEffect(() => {
     if (showLearn) {
@@ -87,16 +86,9 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
     "data-testid": "edit-favourites"
   }
 
-  const handleSave = () => {
-    setSaving(true)
-    service.updateFavourites(add, remove).then((response) => {
-      if (response.success) {
-        onSuccess()
-      } else {
-        setSaving(false)
-        setError(response.error)
-      }
-    })
+  const handleSave = async () => {
+    await updateFavourites({ add, remove })
+    onSuccess()
   }
 
   const handleDismiss = () => {
@@ -138,11 +130,24 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
 
         <Fade in appear>
           <div className={styles.body}>
-            {error && <Alert variant="danger">{error}</Alert>}
+            {isError && (
+              <Alert variant="danger">
+                Failed to update favourites.
+              </Alert>
+            )}
 
-            {!isPending && !error && ready && (
+            {isGetPresetsError && (
+              <Alert variant="danger">
+                Failed to retrieve presets.
+              </Alert>
+            )}
+
+            {!isPending && !isError && ready && (
               <ScrollableContainer maxHeight={500} className={styles.scrollable}>
-                <p className={styles.heading}>Existing Favourites</p>
+                <p className={styles.heading}>
+                  Existing Favourites
+                </p>
+
                 <div className={styles.favourites}>
                   {favourites.map((preset: SessionMode) => (
                     <ExistingFavouriteButton
@@ -156,6 +161,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                       onCancel={(id: number) => setRemove((existing) => existing.filter((it) => it !== id))}
                     />
                   ))}
+
                   {favourites.length === 0 && (
                     <p className={styles.empty} onClick={handleAddPresets}>
                       <FontAwesomeIcon icon={faArrowAltCircleDown} fixedWidth />
@@ -183,7 +189,9 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                 </div>
 
                 {!isPending && ready && filtered.length === 0 && (
-                  <span className={styles.empty}>There&apos;s nothing that matches your filters.</span>
+                  <span className={styles.empty}>
+                    There&apos;s nothing that matches your filters.
+                  </span>
                 )}
               </ScrollableContainer>
             )}
@@ -207,7 +215,13 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
             <FontAwesomeIcon icon={faGraduationCap} fixedWidth />
           </Button>
 
-          <Button variant="success" onClick={handleSave} disabled={isPending || saving || !ready} className={styles.save}>
+          <Button
+            variant="success"
+            onClick={handleSave}
+            className={styles.save}
+            disabled={isPending || saving || !ready}
+            data-testid='edit-favourites-save-button'
+          >
             {saving ? <FontAwesomeIcon icon={faCircleNotch} fixedWidth spin /> : actions("save")}
           </Button>
         </div>

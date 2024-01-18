@@ -1,5 +1,6 @@
 export const mutationKeys = {
   savePlayPreset: 'savePlayPreset',
   saveLearnPreset: 'saveLearnPreset',
-  deleteFavouritePreset: 'deleteFavouritePreset'
+  deleteFavouritePreset: 'deleteFavouritePreset',
+  updatePresetFavourites: 'updatePresetFavourites'
 }

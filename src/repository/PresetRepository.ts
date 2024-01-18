@@ -1,15 +1,9 @@
 import RestClient from "../rest/RestClient"
 import LearnMode from "types/session/LearnMode"
-import DataSettingsConverter from "../converter/DataSettingsConverter"
-import Topic from "types/Topic"
-import LearnSettings from "types/session/settings/LearnSettings"
-import GameSettingsConverter from "../converter/GameSettingsConverter"
 import PlayMode from "types/session/PlayMode"
 import UpdateResponse from "../rest/response/UpdateResponse"
-import PresetConverter from "../converter/PresetConverter"
 import { SessionSettings } from "types/session/settings/SessionSettings"
 import { CustomIcon } from "types/Icon"
-import PresetBuilder from "types/session/PresetBuilder"
 
 export interface PresetRequest {
   name: string
@@ -240,40 +234,6 @@ export interface CustomPresetDetails {
 }
 
 class PresetRepository {
-  private readonly presetConverter = new PresetConverter()
-  private readonly dataSettingsConverter = new DataSettingsConverter()
-  private readonly gameSettingsConverter = new GameSettingsConverter()
-
-  /**
-   * Saves a custom play preset for the current user.
-   * @param details The custom preset settings.
-   */
-  public async savePlayPreset(details: CustomPresetDetails): Promise<UpdateResponse> {
-    const request = this.presetConverter.convertRequest(details)
-    return RestClient.post<PresetRequest>("/presets/custom/play/save", request)
-      .then(() => {
-        return { success: true }
-      })
-      .catch((response) => {
-        return { success: false, error: response.error }
-      })
-  }
-
-  /**
-   * Saves a custom learn preset for the current user.
-   * @param details The custom preset.
-   */
-  public async saveLearnPreset(details: CustomPresetDetails): Promise<UpdateResponse> {
-    const request = this.presetConverter.convertRequest(details)
-    return RestClient.post("/presets/custom/learn/save", request)
-      .then(() => {
-        return { success: true }
-      })
-      .catch((response) => {
-        return { success: false, error: response.error }
-      })
-  }
-
   /**
    * Updates the users' favourites with the given additions and removals.
    * @param add Preset IDs to add to favourites.
@@ -287,44 +247,6 @@ class PresetRepository {
       .catch((response) => {
         return { success: false, error: response.error ?? response }
       })
-  }
-
-  //TODO: Move these to the PresetConverter class
-  private convertLearnPresets(data: LearnPresetResponse[]): LearnMode[] {
-    return data.map((preset: LearnPresetResponse) => {
-      const topic = Topic.fromName(preset.topic)
-      const dataSettings = this.dataSettingsConverter.convert(topic, preset.data)
-
-      return new PresetBuilder()
-        .withID(preset.id)
-        .withDisplayName(preset.name)
-        .withDescription(preset.description)
-        .withColour(preset.colour)
-        .withIcon(preset.icon)
-        .withDataSettings(dataSettings)
-        .withLearnSettings(new LearnSettings())
-        .withTopicName(preset.topic)
-        .build()
-    })
-  }
-
-  private convertPlayPresets(data: PlayPresetResponse[]): PlayMode[] {
-    return data.map((preset: PlayPresetResponse) => {
-      const topic = Topic.fromName(preset.topic)
-      const dataSettings = this.dataSettingsConverter.convert(topic, preset.data)
-      const gameSettings = this.gameSettingsConverter.convert(preset.game)
-
-      return new PresetBuilder()
-        .withID(preset.id)
-        .withDisplayName(preset.name)
-        .withDescription(preset.description)
-        .withColour(preset.colour)
-        .withIcon(preset.icon)
-        .withDataSettings(dataSettings)
-        .withGameSettings(gameSettings)
-        .withTopicName(preset.topic)
-        .build()
-    })
   }
 }
 
