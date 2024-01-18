@@ -22,16 +22,6 @@ class PresetService {
   private readonly repository = new PresetRepository()
 
   /**
-   * Removes the given preset from the users favourites.
-   * @param preset The preset to remove.
-   */
-  public async removeFavouritePreset(preset: SessionMode): Promise<UpdateResponse> {
-    return this.repository.deleteFavouritePreset(preset.id).then((response) => {
-      return { success: response.success, error: response.error }
-    })
-  }
-
-  /**
    * Updates the users favourites with the given additions and removals.
    * @param add An array of preset to add to the favourites.
    * @param remove An array of favourite presets to remove.

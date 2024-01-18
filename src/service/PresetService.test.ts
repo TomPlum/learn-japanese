@@ -3,8 +3,6 @@ import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts
 import LearnSettings from "types/session/settings/LearnSettings.ts"
 import { GameSettingsBuilder } from "types/session/settings/game/GameSettings.ts"
 import { SessionSettings } from "types/session/settings/SessionSettings.ts"
-import PresetBuilder from "types/session/PresetBuilder.ts"
-import { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings.ts"
 
 const mockGetAllPresets = vi.fn()
 const mockGetDefaultPresets = vi.fn()
@@ -27,51 +25,8 @@ vi.mock("repository/PresetRepository", () => ({
   }
 }))
 
-const playPreset = new PresetBuilder()
-  .withID(2)
-  .withDisplayName("Test Play")
-  .withColour("#ffffff")
-  .withIcon("FaAtom")
-  .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
-  .withGameSettings(new GameSettingsBuilder().build())
-  .withTopicName("Topic")
-  .build()
-
-const learnPreset = new PresetBuilder()
-  .withID(2)
-  .withDisplayName("Test Learn")
-  .withColour("#fdb40e")
-  .withIcon("あ")
-  .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
-  .withLearnSettings(new LearnSettings())
-  .withTopicName("Topic")
-  .build()
-
 describe("Preset Service", () => {
   const service = new PresetService()
-
-  describe("Remove Favourite Preset", () => {
-    it("Should call the delete preset favourite repository function", () => {
-      mockDeleteFavouritePreset.mockResolvedValueOnce({ success: true })
-      return service.removeFavouritePreset(playPreset).then(() => {
-        expect(mockDeleteFavouritePreset).toHaveBeenLastCalledWith(2)
-      })
-    })
-
-    it("Should return the success status from the repository", () => {
-      mockDeleteFavouritePreset.mockResolvedValueOnce({ success: false, error: "Failed to delete." })
-      return service.removeFavouritePreset(playPreset).then((response) => {
-        expect(response.success).toBe(false)
-      })
-    })
-
-    it("Should return the error message from the repository", () => {
-      mockDeleteFavouritePreset.mockResolvedValueOnce({ success: false, error: "Failed to delete." })
-      return service.removeFavouritePreset(playPreset).then((response) => {
-        expect(response.error).toBe("Failed to delete.")
-      })
-    })
-  })
 
   describe("Update Favourite presets", () => {
     it("Should call the update repository function with the given add and remove IDs", () => {
