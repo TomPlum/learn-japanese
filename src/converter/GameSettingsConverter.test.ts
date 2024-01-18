@@ -6,7 +6,7 @@ import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSet
 import LearnableField from "types/learn/LearnableField.ts"
 import QuestionType from "types/game/QuestionType.ts"
 import GameSettingsConverter from "./GameSettingsConverter.ts"
-import { GameConfigResponse } from "../repository/PresetRepository.ts"
+import { GameConfigResponse } from "api/hooks/presets/types.ts";
 
 describe("Game Settings Converter", () => {
   const converter = new GameSettingsConverter()

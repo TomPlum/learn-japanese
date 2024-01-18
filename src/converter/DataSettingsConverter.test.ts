@@ -21,7 +21,7 @@ import {
   KanjiDataSettingsResponse,
   NumbersDataSettingsResponse,
   SentenceStructureDataSettingsResponse
-} from "../repository/PresetRepository.ts"
+} from "api/hooks/presets/types.ts"
 
 describe("Data Settings Converter", () => {
   const converter = new DataSettingsConverter()

@@ -5,12 +5,11 @@ import DataSettingsConverter from "converter/DataSettingsConverter.ts"
 import GameSettingsConverter from "converter/GameSettingsConverter.ts"
 import {
   CustomPresetDetails,
-  PlayPresetRequest,
   PresetRequest
-} from "repository/PresetRepository.ts"
+} from "../types.ts"
 import UpdateResponse from "rest/response/UpdateResponse.ts"
 import { mutationKeys } from "api/mutationKeys.ts"
-import { SavePlayPresetMutationData } from "api/hooks/presets/useSavePlayPreset/types.ts";
+import { PlayPresetRequest, SavePlayPresetMutationData } from "api/hooks/presets/useSavePlayPreset/types.ts";
 
 const dataSettingsConverter = new DataSettingsConverter()
 const gameSettingsConverter = new GameSettingsConverter()

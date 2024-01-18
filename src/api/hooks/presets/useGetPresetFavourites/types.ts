@@ -1,4 +1,4 @@
-import { LearnPresetResponse, PlayPresetResponse, PresetResponse } from "repository/PresetRepository.ts";
+import { LearnPresetResponse, PlayPresetResponse, PresetResponse } from "../types.ts";
 
 export interface FavouritePresetsResponse {
   learn: FavouriteLearnPresetResponse[]

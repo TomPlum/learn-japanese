@@ -5,8 +5,42 @@ import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings"
 import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings"
 import LearnableField from "types/learn/LearnableField"
 import QuestionType from "types/game/QuestionType"
-import { GameConfigRequest, GameConfigResponse } from "../repository/PresetRepository"
 import { GameSettingState } from "context/SessionSettingsContext";
+import { GameConfigResponse } from "api/hooks/presets/types.ts";
+
+export interface HintConfigRequest {
+  enabled: boolean
+  quantity: number
+  unlimited: boolean
+}
+
+export interface LivesConfigRequest {
+  enabled: boolean
+  quantity: number
+}
+
+export interface TimeConfigRequest {
+  timed: boolean
+  countdown: boolean
+  secondsPerQuestion: number | undefined
+}
+
+interface QuestionConfigRequest {
+  questionField: string
+  answerField: string
+  type: string
+  cards: number
+  quantity: number
+  score: boolean
+  answerFilter: number | undefined
+}
+
+export interface GameConfigRequest {
+  hints: HintConfigRequest
+  lives: LivesConfigRequest
+  time: TimeConfigRequest
+  question: QuestionConfigRequest
+}
 
 class GameSettingsConverter {
   public convert(settings: GameConfigResponse): GameSettings {

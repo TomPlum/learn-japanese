@@ -21,7 +21,7 @@ import ConfirmModal from "../../ui/ConfirmModal"
 import ExistingFavouriteButton from "../../ui/buttons/favourite/ExistingFavouriteButton"
 import { useTranslation } from "react-i18next"
 import useGetPresets from "api/hooks/presets/useGetPresets";
-import useUpdatePresetFavourites from "api/hooks/presets/useUpdatePresetFavourites/useUpdatePresetFavourites.ts";
+import useUpdatePresetFavourites from "api/hooks/presets/useUpdatePresetFavourites";
 
 export interface EditFavouritesModalProps {
   favourites: SessionMode[]

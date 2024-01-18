@@ -1,5 +1,5 @@
 import { PresetsResponse } from "./types.ts";
-import { LearnPresetResponse } from "repository/PresetRepository.ts";
+import { LearnPresetResponse } from "api/hooks/presets/types.ts";
 
 const customLearnPresetResponse: LearnPresetResponse = {
   id: 3,

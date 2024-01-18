@@ -23,7 +23,7 @@ import {
   NumbersDataSettingsResponse,
   SentenceStructureDataSettingsRequest,
   SentenceStructureDataSettingsResponse
-} from "../repository/PresetRepository"
+} from "api/hooks/presets/types.ts"
 import Topic from "types/Topic"
 import {
   BasicsDataSettingsState, CalenderDataSettingsState,
