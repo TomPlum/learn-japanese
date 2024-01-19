@@ -52,7 +52,7 @@ describe('Get Default Presets API Hook', () => {
             1,
             "Example Learn Preset",
             "An example learn preset desc",
-            "ffffff",
+            "#ffffff",
             "faApple",
             dataSettings,
             new LearnSettings(),
