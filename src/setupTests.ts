@@ -99,8 +99,11 @@ export const localStorageMock = (function () {
 
 Object.defineProperty(window, "localStorage", { value: localStorageMock })
 Object.defineProperty(window, 'scrollTo', { value: () => {
-  console.log("scrollTo() invoked in Jest test.")
+  console.log("scrollTo() invoked in a unit test.")
 }, writable: true });
+
+export const scrollIntoViewMock = vi.fn()
+window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock
 
 export const testUser: User = {
   username: "TomPlum42",

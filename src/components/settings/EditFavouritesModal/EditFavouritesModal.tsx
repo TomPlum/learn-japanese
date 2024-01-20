@@ -43,7 +43,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
   const { t, ready } = useTranslation()
   const presetsRef = useRef<HTMLParagraphElement>(null)
   const actions = useTranslation("translation", { keyPrefix: "action" }).t
-  const { data: presets, isPending, isError: isGetPresetsError } = useGetPresets()
+  const { data: presets, isLoading, isError: isGetPresetsError } = useGetPresets()
 
   const { mutateAsync: updateFavourites, isPending: saving, isError } = useUpdatePresetFavourites()
 
@@ -116,8 +116,8 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
         )}
 
         <div className={styles.header}>
-          {!isPending && ready && <FontAwesomeIcon icon={faStar} fixedWidth className={styles.icon} />}
-          <LoadingSpinner active={isPending || !ready} variant="warning" className={styles.loading} />
+          {!isLoading && ready && <FontAwesomeIcon icon={faStar} fixedWidth className={styles.icon} />}
+          <LoadingSpinner active={isLoading || !ready} variant="warning" className={styles.loading} />
           <span className={styles.name}>{t("presets.edit.title")}</span>
           <FontAwesomeIcon
             fixedWidth
@@ -142,7 +142,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
               </Alert>
             )}
 
-            {!isPending && !isError && ready && (
+            {!isLoading && !isError && ready && (
               <ScrollableContainer maxHeight={500} className={styles.scrollable}>
                 <p className={styles.heading}>
                   Existing Favourites
@@ -173,6 +173,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                 <p className={styles.heading} ref={presetsRef}>
                   Available Presets
                 </p>
+
                 <div className={styles.favourites}>
                   {filtered.map((preset: SessionMode) => (
                     <EditFavouriteButton
@@ -188,7 +189,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                   ))}
                 </div>
 
-                {!isPending && ready && filtered.length === 0 && (
+                {!isLoading && ready && filtered.length === 0 && (
                   <span className={styles.empty}>
                     There&apos;s nothing that matches your filters.
                   </span>
@@ -219,7 +220,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
             variant="success"
             onClick={handleSave}
             className={styles.save}
-            disabled={isPending || saving || !ready}
+            disabled={isLoading || saving || !ready}
             data-testid='edit-favourites-save-button'
           >
             {saving ? <FontAwesomeIcon icon={faCircleNotch} fixedWidth spin /> : actions("save")}
