@@ -15,17 +15,12 @@ import { getValueLastCalledWith } from "__test-utils__/Queries";
 import { SessionSettingsBag } from "context/SessionSettingsContext";
 import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts";
 import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings.ts";
-
-const mockGetAllPresets = vi.fn()
-const mockGetDefaultPresets = vi.fn()
-vi.mock("service/PresetService", () => ({
-  default: function () {
-    return {
-      getAllPresets: mockGetAllPresets,
-      getDefaultPresets: mockGetDefaultPresets
-    }
-  }
-}))
+import { server } from "__test-utils__/msw.ts";
+import {
+  useGetDefaultPresetsHandlers,
+  useGetDefaultPresetsHandlersError
+} from "api/hooks/presets/useGetDefaultPresets";
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts";
 
 const onCloseHandler = vi.fn()
 
@@ -263,7 +258,7 @@ test("Clicking Start in the confirmation step for custom play should set the sel
 })
 
 test("Clicking Start in the confirmation step for preset play should set the selected settings in context", async () => {
-  mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playKanjiPreset] })
+  server.use(...useGetDefaultPresetsHandlers)
 
   const { next, history, onSessionSettingsContextValueChange } = setup()
 
@@ -271,8 +266,8 @@ test("Clicking Start in the confirmation step for preset play should set the sel
   fireEvent.click(screen.getByText("Play"))
   fireEvent.click(next)
 
-  // Select the 'Jōyō Kanji' Topic
-  fireEvent.click(screen.getByText("Jōyō Kanji"))
+  // Select the 'Hiragana & Katakana' Topic
+  fireEvent.click(screen.getByText("Hiragana & Katakana"))
   fireEvent.click(next)
 
   // Select the 'Preset' type
@@ -280,7 +275,7 @@ test("Clicking Start in the confirmation step for preset play should set the sel
   fireEvent.click(next)
 
   // Wait for presets to load
-  expect(await screen.findByText("Kanji")).toBeInTheDocument()
+  expect(await screen.findByText("Example Play Preset")).toBeInTheDocument()
 
   // Starting the game should set the game and data settings in context
   fireEvent.click(screen.getByText("Start"))
@@ -291,23 +286,25 @@ test("Clicking Start in the confirmation step for preset play should set the sel
     .withQuestionSettings(
       new QuestionSettingsBuilder()
         .withType(QuestionType.CHOICE)
-        .withFields(LearnableField.MEANING, LearnableField.KANJI)
+        .withFields(LearnableField.KANA, LearnableField.ROMAJI)
         .withCardQuantity(4)
-        .withQuantity(1)
+        .withQuantity(150)
         .withScoreTracking(true)
         .build()
     )
-    .withHintSettings(new HintSettingsBuilder().isEnabled(false).withQuantity(0).build())
-    .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(5).build())
+    .withHintSettings(new HintSettingsBuilder().isEnabled(true).withQuantity(8).build())
+    .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(12).build())
     .withTimeSettings(new TimeSettingsBuilder().isTimed(true).isCountDown(false).withSecondsPerQuestion(0).build())
     .build()
   )
 
-  expect(sessionContext.dataSettings).toStrictEqual(new KanjiSettings(
-    [KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR, KyoikuGrade.FIVE, KyoikuGrade.SIX, KyoikuGrade.EIGHT],
-    [],
-    25
-  ))
+  expect(sessionContext.dataSettings).toStrictEqual(
+    new KanaSettingsBuilder()
+      .withQuantity(50)
+      .withDiacriticals(true)
+      .withHiragana(true)
+      .build()
+  )
 
   // Should re-direct to the /play page
   expect(history.location.pathname).toBe("/play")
@@ -494,7 +491,7 @@ test("Switching from the type step and back again should maintain its selection 
 })
 
 test("Switching from the preset step and back again should maintain its selection state", async () => {
-  mockGetDefaultPresets.mockResolvedValue({ learn: [learnPreset], play: [playPreset, playBasics] })
+  server.use(...useGetDefaultPresetsHandlers)
   const { next } = setup()
 
   // Advance to the 'Preset' step
@@ -523,7 +520,7 @@ test("Switching from the preset step and back again should maintain its selectio
 })
 
 test("The start button should be disabled if the preset is undefined", async () => {
-  mockGetDefaultPresets.mockResolvedValueOnce({ error: "Something went wrong." })
+  server.use(...useGetDefaultPresetsHandlersError)
   const { next } = setup()
 
   fireEvent.click(next) // Go to topic selection
