@@ -1,4 +1,4 @@
-import { DefaultPresetsResponse } from "./types.ts";
+import { DefaultPresetsResponse } from "./types.ts"
 
 export const useGetDefaultPresetsResponses: DefaultPresetsResponse = {
   learn: [
@@ -24,49 +24,163 @@ export const useGetDefaultPresetsResponses: DefaultPresetsResponse = {
   ],
   play: [
     {
-        id: 1,
-        name: "Example Play Preset",
-        description: "An example play preset desc",
-        topic: "Hiragana & Katakana",
-        icon: "faApple",
-        colour: "ffffff",
-        data: {
-          quantity: 50,
-          config: {
-            hiragana: true,
-            katakana: false,
-            diagraphs: false,
-            diacriticals: true,
-            onlyDiagraphs: false,
-            regular: true
-          }
+      id: 2,
+      name: "Example Play Preset",
+      description: "An example play preset desc",
+      topic: "Hiragana & Katakana",
+      icon: "faApple",
+      colour: "ffffff",
+      data: {
+        quantity: 50,
+        config: {
+          hiragana: true,
+          katakana: false,
+          diagraphs: false,
+          diacriticals: true,
+          onlyDiagraphs: false,
+          regular: true
+        }
+      },
+      game: {
+        hints: {
+          enabled: true,
+          quantity: 8,
+          unlimited: false
         },
-        game: {
-          hints: {
-            enabled: true,
-            quantity: 8,
-            unlimited: false
-          },
-          lives: {
-            enabled: true,
-            quantity: 12
-          },
-          time: {
-            timed: true,
-            countdown: false,
-            secondsPerQuestion: 0
-          },
-          question: {
-            questionField: "learnable.field.kana.name",
-            answerField: "learnable.field.romaji.name",
-            quantity: 150,
-            score: true,
-            type: "choice",
-            answerFilter: undefined,
-            cards: 4
-          }
+        lives: {
+          enabled: true,
+          quantity: 12
+        },
+        time: {
+          timed: true,
+          countdown: false,
+          secondsPerQuestion: 0
+        },
+        question: {
+          questionField: "learnable.field.kana.name",
+          answerField: "learnable.field.romaji.name",
+          quantity: 150,
+          score: true,
+          type: "choice",
+          answerFilter: undefined,
+          cards: 4
         }
       }
+    }
+  ]
+}
+
+export const useGetDefaultPresetsResponsesMultiplePresets: DefaultPresetsResponse = {
+  learn: [
+    {
+      id: 2,
+      name: "Example Learn Preset",
+      description: "An example learn preset desc",
+      topic: "Hiragana & Katakana",
+      icon: "faApple",
+      colour: "#ffffff",
+      data: {
+        quantity: 50,
+        config: {
+          hiragana: true,
+          katakana: false,
+          diagraphs: false,
+          diacriticals: true,
+          onlyDiagraphs: false,
+          regular: true
+        }
+      }
+    }
+  ],
+  play: [
+    {
+      id: 1,
+      name: "Example Play Preset",
+      description: "An example play preset desc",
+      topic: "Hiragana & Katakana",
+      icon: "faApple",
+      colour: "ffffff",
+      data: {
+        quantity: 50,
+        config: {
+          hiragana: true,
+          katakana: false,
+          diagraphs: false,
+          diacriticals: true,
+          onlyDiagraphs: false,
+          regular: true
+        }
+      },
+      game: {
+        hints: {
+          enabled: true,
+          quantity: 8,
+          unlimited: false
+        },
+        lives: {
+          enabled: true,
+          quantity: 12
+        },
+        time: {
+          timed: true,
+          countdown: false,
+          secondsPerQuestion: 0
+        },
+        question: {
+          questionField: "learnable.field.kana.name",
+          answerField: "learnable.field.romaji.name",
+          quantity: 150,
+          score: true,
+          type: "choice",
+          answerFilter: undefined,
+          cards: 4
+        }
+      }
+    },
+    {
+      id: 3,
+      name: "Example Play Preset 2",
+      description: "An example play preset desc",
+      topic: "Basics",
+      icon: "FaAtom",
+      colour: "ffffff",
+      data: {
+        quantity: 50,
+        config: {
+          hiragana: true,
+          katakana: false,
+          diagraphs: false,
+          diacriticals: true,
+          onlyDiagraphs: false,
+          regular: true
+        }
+      },
+      game: {
+        hints: {
+          enabled: true,
+          quantity: 8,
+          unlimited: false
+        },
+        lives: {
+          enabled: true,
+          quantity: 12
+        },
+        time: {
+          timed: true,
+          countdown: false,
+          secondsPerQuestion: 0
+        },
+        question: {
+          questionField: "learnable.field.kana.name",
+          answerField: "learnable.field.romaji.name",
+          quantity: 150,
+          score: true,
+          type: "choice",
+          answerFilter: undefined,
+          cards: 4
+        }
+      }
+    }
   ]
 }
 

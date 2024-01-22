@@ -63,7 +63,7 @@ describe('Get Default Presets API Hook', () => {
         ],
         play: [
           new PlayMode(
-            1,
+            2,
             "Example Play Preset",
             "An example play preset desc",
             "ffffff",
