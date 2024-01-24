@@ -1,4 +1,4 @@
-import { rest } from "msw"
+import { HttpResponse, http } from "msw"
 import { api } from "../util"
 
 // @ts-ignore
@@ -45421,2129 +45421,2123 @@ const kanji = [
 ]
 
 export const handlers = [
-  rest.get(`${api}/kanji/random`, (_req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        character: "化",
-        grade: 3,
-        strokes: 4,
-        jlpt: 2,
-        source: "https://en.wiktionary.org/wiki/%E5%8C%96#Kanji",
-        meanings: ["take the form of", "enchant", "change", "influence", "delude"],
-        readings: [
-          {
-            value: "け",
-            type: "on"
-          },
-          {
-            value: "ばかす",
-            type: "kun"
-          },
-          {
-            value: "ばける",
-            type: "kun"
-          },
-          {
-            value: "か",
-            type: "on"
-          }
-        ],
-        examples: [
-          {
-            value: "文化",
-            kana: ["ぶんか"],
-            english: ["culture", "civilisation"]
-          },
-          {
-            value: "悪化",
-            kana: ["あっか"],
-            english: ["growing worse", "(suffer) deterioration"]
-          },
-          {
-            value: "強化",
-            kana: ["きょうか"],
-            english: ["intensify", "solidify", "strengthen", "reinforce"]
-          },
-          {
-            value: "変化",
-            kana: ["へんか"],
-            english: ["change", "alteration", "variation", "mutation"]
-          },
-          {
-            value: "化学",
-            kana: ["ばけがく", "かがく"],
-            english: ["chemistry"]
-          }
-        ],
-        tags: ["verb"]
-      })
-    )
+  http.get(`${api}/kanji/random`, () => {
+    return HttpResponse.json({
+      character: "化",
+      grade: 3,
+      strokes: 4,
+      jlpt: 2,
+      source: "https://en.wiktionary.org/wiki/%E5%8C%96#Kanji",
+      meanings: ["take the form of", "enchant", "change", "influence", "delude"],
+      readings: [
+        {
+          value: "け",
+          type: "on"
+        },
+        {
+          value: "ばかす",
+          type: "kun"
+        },
+        {
+          value: "ばける",
+          type: "kun"
+        },
+        {
+          value: "か",
+          type: "on"
+        }
+      ],
+      examples: [
+        {
+          value: "文化",
+          kana: ["ぶんか"],
+          english: ["culture", "civilisation"]
+        },
+        {
+          value: "悪化",
+          kana: ["あっか"],
+          english: ["growing worse", "(suffer) deterioration"]
+        },
+        {
+          value: "強化",
+          kana: ["きょうか"],
+          english: ["intensify", "solidify", "strengthen", "reinforce"]
+        },
+        {
+          value: "変化",
+          kana: ["へんか"],
+          english: ["change", "alteration", "variation", "mutation"]
+        },
+        {
+          value: "化学",
+          kana: ["ばけがく", "かがく"],
+          english: ["chemistry"]
+        }
+      ],
+      tags: ["verb"]
+    })
   }),
-  rest.get(`${api}/kanji/random`, (_req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({}))
+  http.get(`${api}/kanji/random`, () => {
+    return HttpResponse.json({})
   }),
-  rest.get(`${api}/kanji/all`, (_req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(kanji))
+  http.get(`${api}/kanji/all`, () => {
+    return HttpResponse.json(kanji)
   }),
-  rest.post(`${api}/kanji/by-filter`, (_req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        results: [
-          {
-            field: "meaning",
-            value: {
-              character: "一",
-              grade: 1,
-              strokes: 1,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E4%B8%80#Kanji",
-              meanings: ["one"],
-              readings: [
-                {
-                  value: "ひとつ",
-                  type: "kun"
-                },
-                {
-                  value: "ひと",
-                  type: "kun"
-                },
-                {
-                  value: "いち",
-                  type: "on"
-                },
-                {
-                  value: "いつ",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "一月",
-                  kana: ["いちがつ"],
-                  english: ["January"]
-                },
-                {
-                  value: "一つ",
-                  kana: ["ひとつ"],
-                  english: ["one"]
-                },
-                {
-                  value: "一番",
-                  kana: ["いちばん"],
-                  english: ["first", "number one", "game", "round", "best", "bout"]
-                },
-                {
-                  value: "一部",
-                  kana: ["いちぶ"],
-                  english: ["one part", "one section", "some", "one portion"]
-                },
-                {
-                  value: "一般",
-                  kana: ["いっぱん"],
-                  english: ["general", "universal", "ordinary", "liberal"]
-                }
-              ],
-              tags: ["number"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "右",
-              grade: 1,
-              strokes: 5,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%8F%B3#Kanji",
-              meanings: ["right"],
-              readings: [
-                {
-                  value: "ゆう",
-                  type: "on"
-                },
-                {
-                  value: "う",
-                  type: "on"
-                },
-                {
-                  value: "みぎ",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "右翼",
-                  kana: ["うよく"],
-                  english: ["right wing (political)"]
-                },
-                {
-                  value: "右手",
-                  kana: ["みぎて"],
-                  english: ["right hand"]
-                },
-                {
-                  value: "左右",
-                  kana: ["さゆう"],
-                  english: ["control", "influence", "left and right"]
-                }
-              ],
-              tags: ["direction"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "雨",
-              grade: 1,
-              strokes: 8,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E9%9B%A8#Kanji",
-              meanings: ["rain"],
-              readings: [
-                {
-                  value: "あめ",
-                  type: "kun"
-                },
-                {
-                  value: "あま",
-                  type: "kun"
-                },
-                {
-                  value: "う",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "雨",
-                  kana: ["あめ"],
-                  english: ["rain"]
-                },
-                {
-                  value: "雨水",
-                  kana: ["うすい", "あまみず"],
-                  english: ["rain water"]
-                },
-                {
-                  value: "雨量",
-                  kana: ["うりょう"],
-                  english: ["rainfall"]
-                },
-                {
-                  value: "梅雨",
-                  kana: ["つゆ", "ばいう"],
-                  english: ["rainy season"]
-                },
-                {
-                  value: "大雨",
-                  kana: ["おおあめ"],
-                  english: ["heavy rain"]
-                }
-              ],
-              tags: ["weather"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "円",
-              grade: 1,
-              strokes: 4,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%86%86#Kanji",
-              meanings: ["yen", "circle", "round"],
-              readings: [
-                {
-                  value: "まる",
-                  type: "kun"
-                },
-                {
-                  value: "えん",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "円安",
-                  kana: ["えんやす"],
-                  english: ["cheap yen"]
-                },
-                {
-                  value: "円相場",
-                  kana: ["えんそうば"],
-                  english: ["yen exchange rate"]
-                },
-                {
-                  value: "円高",
-                  kana: ["えんだか"],
-                  english: ["valued yen"]
-                },
-                {
-                  value: "円",
-                  kana: ["まる", "えん"],
-                  english: ["money", "Yen", "circle"]
-                },
-                {
-                  value: "一円",
-                  kana: ["いちえん"],
-                  english: ["whole district", "one yen", "throughout"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "王",
-              grade: 1,
-              strokes: 4,
-              jlpt: 2,
-              source: "https://en.wiktionary.org/wiki/%E7%8E%8B#Kanji",
-              meanings: ["rule", "king", "magnate"],
-              readings: [
-                {
-                  value: "きみ",
-                  type: "kun"
-                },
-                {
-                  value: "おう",
-                  type: "on"
-                },
-                {
-                  value: "おおきみ",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "王",
-                  kana: ["おう"],
-                  english: ["sovereign", "ruler", "monarch", "king"]
-                },
-                {
-                  value: "王座",
-                  kana: ["おうざ"],
-                  english: ["throne"]
-                },
-                {
-                  value: "女王",
-                  kana: ["じょおう"],
-                  english: ["queen"]
-                },
-                {
-                  value: "国王",
-                  kana: ["こくおう"],
-                  english: ["king"]
-                },
-                {
-                  value: "王国",
-                  kana: ["おうこく"],
-                  english: ["monarchy", "kingdom"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "音",
-              grade: 1,
-              strokes: 9,
-              jlpt: 3,
-              source: "https://en.wiktionary.org/wiki/%E9%9F%B3#Kanji",
-              meanings: ["noise", "sound"],
-              readings: [
-                {
-                  value: "ね",
-                  type: "kun"
-                },
-                {
-                  value: "おん",
-                  type: "on"
-                },
-                {
-                  value: "いん",
-                  type: "on"
-                },
-                {
-                  value: "おと",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "本音",
-                  kana: ["ほんね"],
-                  english: ["real intention", "motive"]
-                },
-                {
-                  value: "騒音",
-                  kana: ["そうおん"],
-                  english: ["noise"]
-                },
-                {
-                  value: "音",
-                  kana: ["おん", "おと", "ね"],
-                  english: ["noise", "sound"]
-                },
-                {
-                  value: "音声",
-                  kana: ["おんせい, おんじょう"],
-                  english: ["voice"]
-                },
-                {
-                  value: "音楽",
-                  kana: ["おんがく"],
-                  english: ["musical movement", "music"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "下",
-              grade: 1,
-              strokes: 3,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E4%B8%8B#Kanji",
-              meanings: ["descend", "low", "give", "inferior", "below", "down"],
-              readings: [
-                {
-                  value: "もと",
-                  type: "kun"
-                },
-                {
-                  value: "げ",
-                  type: "on"
-                },
-                {
-                  value: "か",
-                  type: "on"
-                },
-                {
-                  value: "した",
-                  type: "kun"
-                },
-                {
-                  value: "しも",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "下げる",
-                  kana: ["さげる"],
-                  english: ["to lower", "to move back", "to wear", "to hang"]
-                },
-                {
-                  value: "引き下げ",
-                  kana: ["ひきさげ"],
-                  english: ["reduction", "cut"]
-                },
-                {
-                  value: "下り",
-                  kana: ["くだり"],
-                  english: ["train"]
-                },
-                {
-                  value: "下院",
-                  kana: ["かいん"],
-                  english: ["house", "lower"]
-                },
-                {
-                  value: "下",
-                  kana: ["もと"],
-                  english: ["under"]
-                }
-              ],
-              tags: ["direction"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "火",
-              grade: 1,
-              strokes: 4,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E7%81%AB#Kanji",
-              meanings: ["fire"],
-              readings: [
-                {
-                  value: "か",
-                  type: "on"
-                },
-                {
-                  value: "ひ",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "火災",
-                  kana: ["かさい"],
-                  english: ["fire", "conflagration"]
-                },
-                {
-                  value: "火山",
-                  kana: ["かざん"],
-                  english: ["volcano"]
-                },
-                {
-                  value: "噴火",
-                  kana: ["ふんか"],
-                  english: ["eruption"]
-                },
-                {
-                  value: "火砕流",
-                  kana: ["かさいりゅう"],
-                  english: ["pyroclastic flow"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "花",
-              grade: 1,
-              strokes: 7,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E8%8A%B1#Kanji",
-              meanings: ["flower"],
-              readings: [
-                {
-                  value: "はな",
-                  type: "kun"
-                },
-                {
-                  value: "か",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "花見",
-                  kana: ["はなみ"],
-                  english: ["flowing viewing", "cherry blossom viewing"]
-                },
-                {
-                  value: "花火",
-                  kana: ["はなび"],
-                  english: ["fireworks"]
-                },
-                {
-                  value: "花",
-                  kana: ["はな"],
-                  english: ["petal", "bloom", "blossom", "flower"]
-                },
-                {
-                  value: "花びら",
-                  kana: ["はなびら", "かべん"],
-                  english: ["flower petal"]
-                },
-                {
-                  value: "花園",
-                  kana: ["はなぞの", "かえん"],
-                  english: ["flower garden"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "貝",
-              grade: 1,
-              strokes: 7,
-              jlpt: 2,
-              source: "https://en.wiktionary.org/wiki/%E8%B2%9D#Kanji",
-              meanings: ["shellfish"],
-              readings: [
-                {
-                  value: "ばい",
-                  type: "on"
-                },
-                {
-                  value: "かい",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "貝",
-                  kana: ["かい"],
-                  english: ["shell", "shellfish"]
-                },
-                {
-                  value: "貝",
-                  kana: ["ばい", "バイ"],
-                  english: ["Japanese babylon (species of shelled mollusk)"]
-                },
-                {
-                  value: "巻き貝",
-                  kana: ["まきがい"],
-                  english: ["snail", "spiral shell"]
-                },
-                {
-                  value: "貝殻",
-                  kana: ["かいがら"],
-                  english: ["shell"]
-                },
-                {
-                  value: "貝塚",
-                  kana: ["かいづか", "かいずか"],
-                  english: ["shell mound", "kitchen midden", "shell heap"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "学",
-              grade: 1,
-              strokes: 8,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%AD%A6#Kanji",
-              meanings: ["study", "learning", "science"],
-              readings: [
-                {
-                  value: "まなぶ",
-                  type: "kun"
-                },
-                {
-                  value: "がく",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "科学",
-                  kana: ["かがく"],
-                  english: ["science"]
-                },
-                {
-                  value: "学校",
-                  kana: ["がっこう"],
-                  english: ["school"]
-                },
-                {
-                  value: "医学",
-                  kana: ["いがく"],
-                  english: ["medicine", "medical science"]
-                },
-                {
-                  value: "大学",
-                  kana: ["だいがく"],
-                  english: ["secondary school"]
-                },
-                {
-                  value: "学生",
-                  kana: ["がくせい"],
-                  english: ["student"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "気",
-              grade: 1,
-              strokes: 6,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E6%B0%97#Kanji",
-              meanings: ["mood", "spirit", "atmosphere", "air", "mind"],
-              readings: [
-                {
-                  value: "いき",
-                  type: "kun"
-                },
-                {
-                  value: "き",
-                  type: "on"
-                },
-                {
-                  value: "け",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "気持ち",
-                  kana: ["きもち"],
-                  english: ["mood", "sensation", "feeling"]
-                },
-                {
-                  value: "人気",
-                  kana: ["にんき"],
-                  english: ["popular feeling", "business conditions", "popular"]
-                },
-                {
-                  value: "電気",
-                  kana: ["でんき"],
-                  english: ["light", "electricity"]
-                },
-                {
-                  value: "気",
-                  kana: ["き"],
-                  english: ["heart", "spirit", "disposition", "mind", "nature"]
-                },
-                {
-                  value: "景気",
-                  kana: ["けいき"],
-                  english: ["business", "state", "condition"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "休",
-              grade: 1,
-              strokes: 6,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E4%BC%91#Kanji",
-              meanings: ["rest"],
-              readings: [
-                {
-                  value: "やすむ",
-                  type: "kun"
-                },
-                {
-                  value: "きゅう",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "休暇",
-                  kana: ["きゅうか"],
-                  english: ["holiday", "day off", "furlough"]
-                },
-                {
-                  value: "休業",
-                  kana: ["きゅうぎょう"],
-                  english: ["closed (e.g. store)", "business suspended"]
-                },
-                {
-                  value: "休み",
-                  kana: ["やすみ"],
-                  english: ["holiday", "respite", "recess", "rest", "vacation"]
-                },
-                {
-                  value: "夏休み",
-                  kana: ["なつやすみ"],
-                  english: ["summer holiday"]
-                },
-                {
-                  value: "休日",
-                  kana: ["きゅうかきゅうか"],
-                  english: ["holiday", "day off"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "玉",
-              grade: 1,
-              strokes: 5,
-              jlpt: 2,
-              source: "https://en.wiktionary.org/wiki/%E7%8E%89#Kanji",
-              meanings: ["jewel", "ball"],
-              readings: [
-                {
-                  value: "たま",
-                  type: "kun"
-                },
-                {
-                  value: "ぎょく",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "玉",
-                  kana: ["たま"],
-                  english: ["pearl", "coin", "jewel", "testicles", "sphere", "ball"]
-                },
-                {
-                  value: "お年玉",
-                  kana: ["おとしだま"],
-                  english: ["New Year’s gift"]
-                },
-                {
-                  value: "替え玉",
-                  kana: ["かえだま"],
-                  english: ["double", "substitute"]
-                },
-                {
-                  value: "玉虫色",
-                  kana: ["たまむしいろ"],
-                  english: ["iridescent", "ambivalent", "equivocal"]
-                },
-                {
-                  value: "目玉",
-                  kana: ["めだま"],
-                  english: ["eyeball", "special feature", "centerpiece"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "金",
-              grade: 1,
-              strokes: 8,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E9%87%91#Kanji",
-              meanings: ["money", "gold"],
-              readings: [
-                {
-                  value: "かな",
-                  type: "kun"
-                },
-                {
-                  value: "こん",
-                  type: "on"
-                },
-                {
-                  value: "きん",
-                  type: "on"
-                },
-                {
-                  value: "かね",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "お金",
-                  kana: ["おかね"],
-                  english: ["money"]
-                },
-                {
-                  value: "献金",
-                  kana: ["けんきん"],
-                  english: ["contribution", "offering", "donation"]
-                },
-                {
-                  value: "金利",
-                  kana: ["きんり"],
-                  english: ["interest rates"]
-                },
-                {
-                  value: "金融",
-                  kana: ["きんゆう"],
-                  english: ["financing", "credit transacting"]
-                },
-                {
-                  value: "資金",
-                  kana: ["しきん"],
-                  english: ["funds", "capital"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "九",
-              grade: 1,
-              strokes: 2,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E4%B9%9D#Kanji",
-              meanings: ["nine"],
-              readings: [
-                {
-                  value: "く",
-                  type: "on"
-                },
-                {
-                  value: "ここの",
-                  type: "kun"
-                },
-                {
-                  value: "きゅう",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "九",
-                  kana: ["ここの", "ここ", "きゅう", "この", "く"],
-                  english: ["nine"]
-                },
-                {
-                  value: "十九",
-                  kana: ["じゅうきゅう"],
-                  english: ["nineteen"]
-                },
-                {
-                  value: "九州",
-                  kana: ["きゅうしゅう"],
-                  english: ["Kyushu"]
-                },
-                {
-                  value: "九十",
-                  kana: ["くじゅう", "きゅうじゅう"],
-                  english: ["ninety"]
-                },
-                {
-                  value: "九月",
-                  kana: ["くがつ"],
-                  english: ["September"]
-                }
-              ],
-              tags: ["number"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "空",
-              grade: 1,
-              strokes: 8,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E7%A9%BA#Kanji",
-              meanings: ["sky", "void", "empty"],
-              readings: [
-                {
-                  value: "そら",
-                  type: "kun"
-                },
-                {
-                  value: "くう",
-                  type: "on"
-                },
-                {
-                  value: "く",
-                  type: "on"
-                },
-                {
-                  value: "あく",
-                  type: "kun"
-                },
-                {
-                  value: "から",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "航空",
-                  kana: ["こうくう"],
-                  english: ["aviation"]
-                },
-                {
-                  value: "空",
-                  kana: ["から"],
-                  english: ["emptiness", "vacuum", "blank"]
-                },
-                {
-                  value: "航空機",
-                  kana: ["こうくうき"],
-                  english: ["aircraft", "aeroplane", "airplane"]
-                },
-                {
-                  value: "空港",
-                  kana: ["くうこう"],
-                  english: ["airport"]
-                },
-                {
-                  value: "空気",
-                  kana: ["くうき"],
-                  english: ["atmosphere", "air"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "月",
-              grade: 1,
-              strokes: 4,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E6%9C%88#Kanji",
-              meanings: ["moon", "month"],
-              readings: [
-                {
-                  value: "げつ",
-                  type: "on"
-                },
-                {
-                  value: "がつ",
-                  type: "on"
-                },
-                {
-                  value: "つき",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "一月",
-                  kana: ["いちがつ"],
-                  english: ["January"]
-                },
-                {
-                  value: "九月",
-                  kana: ["くがつ"],
-                  english: ["September"]
-                },
-                {
-                  value: "三月",
-                  kana: ["さんがつ"],
-                  english: ["March"]
-                },
-                {
-                  value: "五月",
-                  kana: ["ごがつ"],
-                  english: ["May"]
-                },
-                {
-                  value: "今月",
-                  kana: ["こんげつ"],
-                  english: ["this month"]
-                }
-              ],
-              tags: ["time"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "犬",
-              grade: 1,
-              strokes: 4,
-              jlpt: 3,
-              source: "https://en.wiktionary.org/wiki/%E7%8A%AC#Kanji",
-              meanings: ["dog"],
-              readings: [
-                {
-                  value: "いぬ",
-                  type: "kun"
-                },
-                {
-                  value: "けん",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "野犬",
-                  kana: ["やけん"],
-                  english: ["stray dog"]
-                },
-                {
-                  value: "愛犬",
-                  kana: ["あいけん"],
-                  english: ["pet dog"]
-                },
-                {
-                  value: "犬",
-                  kana: ["いぬ"],
-                  english: ["dog"]
-                },
-                {
-                  value: "盲導犬",
-                  kana: ["もうどうけん"],
-                  english: ["guide dog for the blind"]
-                },
-                {
-                  value: "飼い犬",
-                  kana: ["かいいぬ"],
-                  english: ["pet dog"]
-                }
-              ],
-              tags: ["animal"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "見",
-              grade: 1,
-              strokes: 7,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E8%A6%8B#Kanji",
-              meanings: ["see", "opinion"],
-              readings: [
-                {
-                  value: "げん",
-                  type: "on"
-                },
-                {
-                  value: "けん",
-                  type: "on"
-                },
-                {
-                  value: "みる",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "会見",
-                  kana: ["かいけん"],
-                  english: ["audience", "interview"]
-                },
-                {
-                  value: "見方",
-                  kana: ["みかた"],
-                  english: ["viewpoint"]
-                },
-                {
-                  value: "見直し",
-                  kana: ["みなおし"],
-                  english: ["revision", "reconsideration", "review"]
-                },
-                {
-                  value: "見通し",
-                  kana: ["みとおし"],
-                  english: ["outlook", "perspective", "unobstructed view"]
-                },
-                {
-                  value: "意見",
-                  kana: ["いけん"],
-                  english: ["opinion", "view"]
-                }
-              ],
-              tags: ["verb"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "五",
-              grade: 1,
-              strokes: 4,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E4%BA%94#Kanji",
-              meanings: ["five"],
-              readings: [
-                {
-                  value: "いつ",
-                  type: "kun"
-                },
-                {
-                  value: "ご",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "十五",
-                  kana: ["じゅうご"],
-                  english: ["fifteen"]
-                },
-                {
-                  value: "五",
-                  kana: ["い", "いつ", "ご"],
-                  english: ["five"]
-                },
-                {
-                  value: "五十",
-                  kana: ["い", "ごじゅう", "いそ"],
-                  english: ["fifty"]
-                },
-                {
-                  value: "五輪",
-                  kana: ["ごりん"],
-                  english: ["the Olympics"]
-                },
-                {
-                  value: "五月",
-                  kana: ["ごがつ"],
-                  english: ["May"]
-                }
-              ],
-              tags: ["number"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "口",
-              grade: 1,
-              strokes: 3,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%8F%A3#Kanji",
-              meanings: ["mouth"],
-              readings: [
-                {
-                  value: "くち",
-                  type: "kun"
-                },
-                {
-                  value: "く",
-                  type: "on"
-                },
-                {
-                  value: "こう",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "人口",
-                  kana: ["じんこう"],
-                  english: ["common talk", "population"]
-                },
-                {
-                  value: "窓口",
-                  kana: ["まどぐち"],
-                  english: ["teller window", "ticket window", "counter"]
-                },
-                {
-                  value: "口",
-                  kana: ["くち"],
-                  english: ["hole", "orifice", "mouth", "opening", "gap"]
-                },
-                {
-                  value: "入り口",
-                  kana: ["いりくち", "は", "はいりぐち", "いりぐち"],
-                  english: ["approach", "entrance", "mouth", "entry", "gate"]
-                },
-                {
-                  value: "口座",
-                  kana: ["こうざ"],
-                  english: ["account"]
-                }
-              ],
-              tags: ["body"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "校",
-              grade: 1,
-              strokes: 10,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E6%A0%A1#Kanji",
-              meanings: ["school", "printing", "exam"],
-              readings: [
-                {
-                  value: "きょう",
-                  type: "on"
-                },
-                {
-                  value: "こう",
-                  type: "on"
-                },
-                {
-                  value: "かせ",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "高校",
-                  kana: ["こうこう"],
-                  english: ["senior high school"]
-                },
-                {
-                  value: "高校生",
-                  kana: ["こうこうせい"],
-                  english: ["senior high school student"]
-                },
-                {
-                  value: "学校",
-                  kana: ["がっこう"],
-                  english: ["school"]
-                },
-                {
-                  value: "小学校",
-                  kana: ["しょうがっこう"],
-                  english: ["primary school", "elementary school"]
-                },
-                {
-                  value: "校長",
-                  kana: ["こうちょう"],
-                  english: ["headmaster", "principal"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "左",
-              grade: 1,
-              strokes: 5,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%B7%A6#Kanji",
-              meanings: ["left"],
-              readings: [
-                {
-                  value: "さ",
-                  type: "on"
-                },
-                {
-                  value: "ひだり",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "左右",
-                  kana: ["さゆう"],
-                  english: ["control", "influence", "left and right"]
-                },
-                {
-                  value: "向かって左",
-                  kana: ["むかってひだり"],
-                  english: ["on the left as one faces it"]
-                },
-                {
-                  value: "左翼",
-                  kana: ["さよく"],
-                  english: ["left wing (political)"]
-                }
-              ],
-              tags: ["direction"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "三",
-              grade: 1,
-              strokes: 3,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E4%B8%89#Kanji",
-              meanings: ["three"],
-              readings: [
-                {
-                  value: "み",
-                  type: "kun"
-                },
-                {
-                  value: "さん",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "三人",
-                  kana: ["みたり", "さんにん"],
-                  english: ["three people"]
-                },
-                {
-                  value: "三",
-                  kana: ["さん", "み"],
-                  english: ["three"]
-                },
-                {
-                  value: "三つ",
-                  kana: ["みっつ"],
-                  english: ["three things"]
-                },
-                {
-                  value: "三月",
-                  kana: ["さんがつ"],
-                  english: ["March"]
-                },
-                {
-                  value: "十三",
-                  kana: ["じゅうさん"],
-                  english: ["thirteen"]
-                }
-              ],
-              tags: ["number"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "山",
-              grade: 1,
-              strokes: 3,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%B1%B1#Kanji",
-              meanings: ["mountain"],
-              readings: [
-                {
-                  value: "さん",
-                  type: "on"
-                },
-                {
-                  value: "せん",
-                  type: "on"
-                },
-                {
-                  value: "やま",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "登山",
-                  kana: ["とざん"],
-                  english: ["mountain climbing"]
-                },
-                {
-                  value: "山形",
-                  kana: ["やまがた"],
-                  english: ["mountain shaped"]
-                },
-                {
-                  value: "青山",
-                  kana: ["せいざん"],
-                  english: ["blue or green mountain", "grave", "burial place"]
-                },
-                {
-                  value: "火山",
-                  kana: ["かざん"],
-                  english: ["volcano"]
-                },
-                {
-                  value: "山",
-                  kana: ["やま"],
-                  english: ["pile", "heap", "mountain", "climax", "critical point"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "四",
-              grade: 1,
-              strokes: 5,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%9B%9B#Kanji",
-              meanings: ["four"],
-              readings: [
-                {
-                  value: "よん",
-                  type: "kun"
-                },
-                {
-                  value: "よつ",
-                  type: "kun"
-                },
-                {
-                  value: "し",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "四十",
-                  kana: ["よそ", "よんじゅう", "しじゅう"],
-                  english: ["forty"]
-                },
-                {
-                  value: "四",
-                  kana: ["し", "よ", "よん"],
-                  english: ["four"]
-                },
-                {
-                  value: "四つ",
-                  kana: ["よっつ"],
-                  english: ["four things"]
-                },
-                {
-                  value: "十四",
-                  kana: ["じゅうよん", "じゅうし"],
-                  english: ["fourteen"]
-                },
-                {
-                  value: "四月",
-                  kana: ["しがつ"],
-                  english: ["April"]
-                }
-              ],
-              tags: ["number"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "子",
-              grade: 1,
-              strokes: 3,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%AD%90#Kanji",
-              meanings: ["child", "sign of the rat"],
-              readings: [
-                {
-                  value: "す",
-                  type: "on"
-                },
-                {
-                  value: "こ",
-                  type: "kun"
-                },
-                {
-                  value: "し",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "子供",
-                  kana: ["こども"],
-                  english: ["children"]
-                },
-                {
-                  value: "原子力",
-                  kana: ["げんしりょく"],
-                  english: ["atomic", "energy"]
-                },
-                {
-                  value: "子",
-                  kana: ["こ"],
-                  english: ["child"]
-                },
-                {
-                  value: "男子",
-                  kana: ["だんし"],
-                  english: ["young man", "youth"]
-                },
-                {
-                  value: "女子",
-                  kana: ["おなご", "じょし"],
-                  english: ["women", "girl"]
-                }
-              ],
-              tags: ["family"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "糸",
-              grade: 1,
-              strokes: 6,
-              jlpt: 2,
-              source: "https://en.wiktionary.org/wiki/%E7%B3%B8#Kanji",
-              meanings: ["thread"],
-              readings: [
-                {
-                  value: "いと",
-                  type: "kun"
-                },
-                {
-                  value: "し",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "生糸",
-                  kana: ["きいと"],
-                  english: ["raw silk thread"]
-                },
-                {
-                  value: "糸口",
-                  kana: ["いとぐち"],
-                  english: ["thread end", "beginning", "clue"]
-                },
-                {
-                  value: "毛糸",
-                  kana: ["けいと"],
-                  english: ["knitting wool"]
-                },
-                {
-                  value: "糸",
-                  kana: ["いと"],
-                  english: ["thread", "yarn", "string"]
-                },
-                {
-                  value: "撚糸",
-                  kana: ["ねんし"],
-                  english: ["twisted thread or yarn"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "字",
-              grade: 1,
-              strokes: 6,
-              jlpt: 3,
-              source: "https://en.wiktionary.org/wiki/%E5%AD%97#Kanji",
-              meanings: ["word", "letter", "section of village", "character"],
-              readings: [
-                {
-                  value: "あざ",
-                  type: "kun"
-                },
-                {
-                  value: "じ",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "黒字",
-                  kana: ["くろじ"],
-                  english: ["figure in black", "balance"]
-                },
-                {
-                  value: "赤字",
-                  kana: ["あかじ"],
-                  english: ["deficit"]
-                },
-                {
-                  value: "字",
-                  kana: ["あざ"],
-                  english: ["section of village"]
-                },
-                {
-                  value: "文字",
-                  kana: ["もんじ", "もじ"],
-                  english: ["letter (of alphabet", "character"]
-                },
-                {
-                  value: "数字",
-                  kana: ["すうじ"],
-                  english: ["numeral", "numeric character", "figure", "digit"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "耳",
-              grade: 1,
-              strokes: 6,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E8%80%B3#Kanji",
-              meanings: ["ear"],
-              readings: [
-                {
-                  value: "に",
-                  type: "on"
-                },
-                {
-                  value: "みみ",
-                  type: "kun"
-                },
-                {
-                  value: "じ",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "耳",
-                  kana: ["みみ"],
-                  english: ["crust", "hearing", "edge", "ear"]
-                },
-                {
-                  value: "耳目",
-                  kana: ["じもく"],
-                  english: ["one’s interest", "one’s attention", "eye and ear"]
-                },
-                {
-                  value: "中耳炎",
-                  kana: ["ちゅうじえん"],
-                  english: ["tympanitis (inflammation of middle ear)"]
-                },
-                {
-                  value: "耳打ち",
-                  kana: ["みみうち"],
-                  english: ["whisper into a person’s ear"]
-                },
-                {
-                  value: "耳鼻咽喉科",
-                  kana: ["じびいんこうか"],
-                  english: ["otorhinolaryngology", "nose and throat", "ear"]
-                }
-              ],
-              tags: ["body"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "七",
-              grade: 1,
-              strokes: 2,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E4%B8%83#Kanji",
-              meanings: ["seven"],
-              readings: [
-                {
-                  value: "なな",
-                  type: "kun"
-                },
-                {
-                  value: "しち",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "七",
-                  kana: ["なな", "な", "しち"],
-                  english: ["seven"]
-                },
-                {
-                  value: "七十",
-                  kana: ["ななじゅう", "ななそ", "しちじゅう"],
-                  english: ["seventy"]
-                },
-                {
-                  value: "四十七士",
-                  kana: ["しじゅうしちし"],
-                  english: ["The 47 Ronin"]
-                },
-                {
-                  value: "七月",
-                  kana: ["しちがつ"],
-                  english: ["July"]
-                },
-                {
-                  value: "十七",
-                  kana: ["じゅうなな", "じゅうしち"],
-                  english: ["seventeen"]
-                }
-              ],
-              tags: ["number"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "車",
-              grade: 1,
-              strokes: 7,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E8%BB%8A#Kanji",
-              meanings: ["car", "vehicle"],
-              readings: [
-                {
-                  value: "くるま",
-                  type: "kun"
-                },
-                {
-                  value: "しゃ",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "自転車",
-                  kana: ["じてんしゃ"],
-                  english: ["bicycle"]
-                },
-                {
-                  value: "乗用車",
-                  kana: ["じょうようしゃ"],
-                  english: ["passenger vehicle", "automobile"]
-                },
-                {
-                  value: "自動車",
-                  kana: ["じどうしゃ"],
-                  english: ["automobile"]
-                },
-                {
-                  value: "下車",
-                  kana: ["げしゃ"],
-                  english: ["alighting (from train, bus, etc.)"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "手",
-              grade: 1,
-              strokes: 4,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E6%89%8B#Kanji",
-              meanings: ["hand"],
-              readings: [
-                {
-                  value: "て",
-                  type: "kun"
-                },
-                {
-                  value: "しゅ",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "選手",
-                  kana: ["せんしゅ"],
-                  english: ["player (in game)", "team member"]
-                },
-                {
-                  value: "相手",
-                  kana: ["あいて"],
-                  english: ["companion", "company", "partner", "other party"]
-                },
-                {
-                  value: "大手",
-                  kana: ["おおて"],
-                  english: ["front castle gate", "both arms open"]
-                },
-                {
-                  value: "選手権",
-                  kana: ["せんしゅけん"],
-                  english: ["championship", "title (of champion)"]
-                }
-              ],
-              tags: ["body"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "十",
-              grade: 1,
-              strokes: 2,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%8D%81#Kanji",
-              meanings: ["ten"],
-              readings: [
-                {
-                  value: "と",
-                  type: "kun"
-                },
-                {
-                  value: "じゅう",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "十一",
-                  kana: ["じゅういち", "ジュウイチ"],
-                  english: ["eleven"]
-                },
-                {
-                  value: "十月",
-                  kana: ["じゅうがつ"],
-                  english: ["October"]
-                },
-                {
-                  value: "十",
-                  kana: ["じゅう", "と", "とお"],
-                  english: ["ten"]
-                },
-                {
-                  value: "十九",
-                  kana: ["じゅうきゅう"],
-                  english: ["nineteen"]
-                },
-                {
-                  value: "十一月",
-                  kana: ["じゅういちがつ"],
-                  english: ["November"]
-                }
-              ],
-              tags: ["number"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "出",
-              grade: 1,
-              strokes: 5,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%87%BA#Kanji",
-              meanings: ["leave", "exit"],
-              readings: [
-                {
-                  value: "で",
-                  type: "kun"
-                },
-                {
-                  value: "でる",
-                  type: "kun"
-                },
-                {
-                  value: "だす",
-                  type: "kun"
-                },
-                {
-                  value: "しゅつ",
-                  type: "on"
-                },
-                {
-                  value: "しゅち",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "出す",
-                  kana: ["だす"],
-                  english: ["to put out", "to take out", "to get out"]
-                },
-                {
-                  value: "進出",
-                  kana: ["しんしゅつ"],
-                  english: ["step forward", "advance"]
-                },
-                {
-                  value: "輸出",
-                  kana: ["ゆしゅつ", "しゅしゅつ"],
-                  english: ["export"]
-                },
-                {
-                  value: "出身",
-                  kana: ["しゅっしん"],
-                  english: ["person’s origin (town, city, country, etc.)"]
-                },
-                {
-                  value: "出場",
-                  kana: ["しゅつじょう"],
-                  english: ["(stage) appearance", "participation"]
-                }
-              ],
-              tags: []
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "女",
-              grade: 1,
-              strokes: 3,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%A5%B3#Kanji",
-              meanings: ["women", "female"],
-              readings: [
-                {
-                  value: "じょ",
-                  type: "on"
-                },
-                {
-                  value: "おんな",
-                  type: "kun"
-                },
-                {
-                  value: "にょ",
-                  type: "on"
-                }
-              ],
-              examples: [
-                {
-                  value: "女性",
-                  kana: ["じょせい"],
-                  english: ["women", "female", "feminine gender"]
-                },
-                {
-                  value: "男女",
-                  kana: ["だんじょ"],
-                  english: ["man and women"]
-                },
-                {
-                  value: "女",
-                  kana: ["おんな"],
-                  english: ["women"]
-                },
-                {
-                  value: "女子",
-                  kana: ["おなご", "じょし"],
-                  english: ["girl"]
-                },
-                {
-                  value: "彼女",
-                  kana: ["かのじょ"],
-                  english: ["sweetheart", "she", "girlfriend"]
-                }
-              ],
-              tags: ["family"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "小",
-              grade: 1,
-              strokes: 3,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E5%B0%8F#Kanji",
-              meanings: ["little", "small"],
-              readings: [
-                {
-                  value: "お",
-                  type: "kun"
-                },
-                {
-                  value: "しょう",
-                  type: "on"
-                },
-                {
-                  value: "こ",
-                  type: "kun"
-                },
-                {
-                  value: "ちいさい",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "小説",
-                  kana: ["しょうせつ"],
-                  english: ["novel", "short story"]
-                },
-                {
-                  value: "小選挙区",
-                  kana: ["しょうせんきょく"],
-                  english: ["small electoral district"]
-                },
-                {
-                  value: "小学校",
-                  kana: ["しょうがっこう"],
-                  english: ["primary school", "elementary school"]
-                },
-                {
-                  value: "中小企業",
-                  kana: ["ちゅうしょうきぎょう"],
-                  english: ["small to medium enterprises"]
-                },
-                {
-                  value: "小学生",
-                  kana: ["しょうがくせい"],
-                  english: ["elementary school student"]
-                }
-              ],
-              tags: ["size"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "上",
-              grade: 1,
-              strokes: 3,
-              jlpt: 4,
-              source: "https://en.wiktionary.org/wiki/%E4%B8%8A#Kanji",
-              meanings: ["up", "above"],
-              readings: [
-                {
-                  value: "じょう",
-                  type: "on"
-                },
-                {
-                  value: "うえ",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "史上",
-                  kana: ["しじょう"],
-                  english: ["historical"]
-                },
-                {
-                  value: "上がったり",
-                  kana: ["あがったり"],
-                  english: ["in a bad state", "poor", "doomed"]
-                },
-                {
-                  value: "事実上",
-                  kana: ["じじつじょう"],
-                  english: ["actually", "(as a) matter of fact", "in reality"]
-                },
-                {
-                  value: "上昇",
-                  kana: ["じょうしょう"],
-                  english: ["ascending", "climbing", "rising"]
-                },
-                {
-                  value: "上げ",
-                  kana: ["あげ"],
-                  english: ["rise in price", "making a tuck"]
-                }
-              ],
-              tags: ["direction"]
-            }
-          },
-          {
-            field: "meaning",
-            value: {
-              character: "森",
-              grade: 1,
-              strokes: 12,
-              jlpt: 3,
-              source: "https://en.wiktionary.org/wiki/%E6%A3%AE#Kanji",
-              meanings: ["woods", "forest"],
-              readings: [
-                {
-                  value: "しん",
-                  type: "on"
-                },
-                {
-                  value: "もり",
-                  type: "kun"
-                }
-              ],
-              examples: [
-                {
-                  value: "森羅万象",
-                  kana: ["しんらばんしょう"],
-                  english: ["all things in nature", "the whole creation"]
-                },
-                {
-                  value: "森厳",
-                  kana: ["しんげん"],
-                  english: ["solemn"]
-                },
-                {
-                  value: "森林",
-                  kana: ["しんりん"],
-                  english: ["woods", "forest"]
-                },
-                {
-                  value: "森",
-                  kana: ["もり"],
-                  english: ["forest", "grove"]
-                },
-                {
-                  value: "森閑",
-                  kana: ["しんかん"],
-                  english: ["silence"]
-                }
-              ],
-              tags: []
-            }
+  http.post(`${api}/kanji/by-filter`, () => {
+    return HttpResponse.json({
+      results: [
+        {
+          field: "meaning",
+          value: {
+            character: "一",
+            grade: 1,
+            strokes: 1,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E4%B8%80#Kanji",
+            meanings: ["one"],
+            readings: [
+              {
+                value: "ひとつ",
+                type: "kun"
+              },
+              {
+                value: "ひと",
+                type: "kun"
+              },
+              {
+                value: "いち",
+                type: "on"
+              },
+              {
+                value: "いつ",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "一月",
+                kana: ["いちがつ"],
+                english: ["January"]
+              },
+              {
+                value: "一つ",
+                kana: ["ひとつ"],
+                english: ["one"]
+              },
+              {
+                value: "一番",
+                kana: ["いちばん"],
+                english: ["first", "number one", "game", "round", "best", "bout"]
+              },
+              {
+                value: "一部",
+                kana: ["いちぶ"],
+                english: ["one part", "one section", "some", "one portion"]
+              },
+              {
+                value: "一般",
+                kana: ["いっぱん"],
+                english: ["general", "universal", "ordinary", "liberal"]
+              }
+            ],
+            tags: ["number"]
           }
-        ],
-        pages: 75,
-        total: 2998
-      })
-    )
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "右",
+            grade: 1,
+            strokes: 5,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%8F%B3#Kanji",
+            meanings: ["right"],
+            readings: [
+              {
+                value: "ゆう",
+                type: "on"
+              },
+              {
+                value: "う",
+                type: "on"
+              },
+              {
+                value: "みぎ",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "右翼",
+                kana: ["うよく"],
+                english: ["right wing (political)"]
+              },
+              {
+                value: "右手",
+                kana: ["みぎて"],
+                english: ["right hand"]
+              },
+              {
+                value: "左右",
+                kana: ["さゆう"],
+                english: ["control", "influence", "left and right"]
+              }
+            ],
+            tags: ["direction"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "雨",
+            grade: 1,
+            strokes: 8,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E9%9B%A8#Kanji",
+            meanings: ["rain"],
+            readings: [
+              {
+                value: "あめ",
+                type: "kun"
+              },
+              {
+                value: "あま",
+                type: "kun"
+              },
+              {
+                value: "う",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "雨",
+                kana: ["あめ"],
+                english: ["rain"]
+              },
+              {
+                value: "雨水",
+                kana: ["うすい", "あまみず"],
+                english: ["rain water"]
+              },
+              {
+                value: "雨量",
+                kana: ["うりょう"],
+                english: ["rainfall"]
+              },
+              {
+                value: "梅雨",
+                kana: ["つゆ", "ばいう"],
+                english: ["rainy season"]
+              },
+              {
+                value: "大雨",
+                kana: ["おおあめ"],
+                english: ["heavy rain"]
+              }
+            ],
+            tags: ["weather"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "円",
+            grade: 1,
+            strokes: 4,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%86%86#Kanji",
+            meanings: ["yen", "circle", "round"],
+            readings: [
+              {
+                value: "まる",
+                type: "kun"
+              },
+              {
+                value: "えん",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "円安",
+                kana: ["えんやす"],
+                english: ["cheap yen"]
+              },
+              {
+                value: "円相場",
+                kana: ["えんそうば"],
+                english: ["yen exchange rate"]
+              },
+              {
+                value: "円高",
+                kana: ["えんだか"],
+                english: ["valued yen"]
+              },
+              {
+                value: "円",
+                kana: ["まる", "えん"],
+                english: ["money", "Yen", "circle"]
+              },
+              {
+                value: "一円",
+                kana: ["いちえん"],
+                english: ["whole district", "one yen", "throughout"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "王",
+            grade: 1,
+            strokes: 4,
+            jlpt: 2,
+            source: "https://en.wiktionary.org/wiki/%E7%8E%8B#Kanji",
+            meanings: ["rule", "king", "magnate"],
+            readings: [
+              {
+                value: "きみ",
+                type: "kun"
+              },
+              {
+                value: "おう",
+                type: "on"
+              },
+              {
+                value: "おおきみ",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "王",
+                kana: ["おう"],
+                english: ["sovereign", "ruler", "monarch", "king"]
+              },
+              {
+                value: "王座",
+                kana: ["おうざ"],
+                english: ["throne"]
+              },
+              {
+                value: "女王",
+                kana: ["じょおう"],
+                english: ["queen"]
+              },
+              {
+                value: "国王",
+                kana: ["こくおう"],
+                english: ["king"]
+              },
+              {
+                value: "王国",
+                kana: ["おうこく"],
+                english: ["monarchy", "kingdom"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "音",
+            grade: 1,
+            strokes: 9,
+            jlpt: 3,
+            source: "https://en.wiktionary.org/wiki/%E9%9F%B3#Kanji",
+            meanings: ["noise", "sound"],
+            readings: [
+              {
+                value: "ね",
+                type: "kun"
+              },
+              {
+                value: "おん",
+                type: "on"
+              },
+              {
+                value: "いん",
+                type: "on"
+              },
+              {
+                value: "おと",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "本音",
+                kana: ["ほんね"],
+                english: ["real intention", "motive"]
+              },
+              {
+                value: "騒音",
+                kana: ["そうおん"],
+                english: ["noise"]
+              },
+              {
+                value: "音",
+                kana: ["おん", "おと", "ね"],
+                english: ["noise", "sound"]
+              },
+              {
+                value: "音声",
+                kana: ["おんせい, おんじょう"],
+                english: ["voice"]
+              },
+              {
+                value: "音楽",
+                kana: ["おんがく"],
+                english: ["musical movement", "music"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "下",
+            grade: 1,
+            strokes: 3,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E4%B8%8B#Kanji",
+            meanings: ["descend", "low", "give", "inferior", "below", "down"],
+            readings: [
+              {
+                value: "もと",
+                type: "kun"
+              },
+              {
+                value: "げ",
+                type: "on"
+              },
+              {
+                value: "か",
+                type: "on"
+              },
+              {
+                value: "した",
+                type: "kun"
+              },
+              {
+                value: "しも",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "下げる",
+                kana: ["さげる"],
+                english: ["to lower", "to move back", "to wear", "to hang"]
+              },
+              {
+                value: "引き下げ",
+                kana: ["ひきさげ"],
+                english: ["reduction", "cut"]
+              },
+              {
+                value: "下り",
+                kana: ["くだり"],
+                english: ["train"]
+              },
+              {
+                value: "下院",
+                kana: ["かいん"],
+                english: ["house", "lower"]
+              },
+              {
+                value: "下",
+                kana: ["もと"],
+                english: ["under"]
+              }
+            ],
+            tags: ["direction"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "火",
+            grade: 1,
+            strokes: 4,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E7%81%AB#Kanji",
+            meanings: ["fire"],
+            readings: [
+              {
+                value: "か",
+                type: "on"
+              },
+              {
+                value: "ひ",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "火災",
+                kana: ["かさい"],
+                english: ["fire", "conflagration"]
+              },
+              {
+                value: "火山",
+                kana: ["かざん"],
+                english: ["volcano"]
+              },
+              {
+                value: "噴火",
+                kana: ["ふんか"],
+                english: ["eruption"]
+              },
+              {
+                value: "火砕流",
+                kana: ["かさいりゅう"],
+                english: ["pyroclastic flow"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "花",
+            grade: 1,
+            strokes: 7,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E8%8A%B1#Kanji",
+            meanings: ["flower"],
+            readings: [
+              {
+                value: "はな",
+                type: "kun"
+              },
+              {
+                value: "か",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "花見",
+                kana: ["はなみ"],
+                english: ["flowing viewing", "cherry blossom viewing"]
+              },
+              {
+                value: "花火",
+                kana: ["はなび"],
+                english: ["fireworks"]
+              },
+              {
+                value: "花",
+                kana: ["はな"],
+                english: ["petal", "bloom", "blossom", "flower"]
+              },
+              {
+                value: "花びら",
+                kana: ["はなびら", "かべん"],
+                english: ["flower petal"]
+              },
+              {
+                value: "花園",
+                kana: ["はなぞの", "かえん"],
+                english: ["flower garden"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "貝",
+            grade: 1,
+            strokes: 7,
+            jlpt: 2,
+            source: "https://en.wiktionary.org/wiki/%E8%B2%9D#Kanji",
+            meanings: ["shellfish"],
+            readings: [
+              {
+                value: "ばい",
+                type: "on"
+              },
+              {
+                value: "かい",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "貝",
+                kana: ["かい"],
+                english: ["shell", "shellfish"]
+              },
+              {
+                value: "貝",
+                kana: ["ばい", "バイ"],
+                english: ["Japanese babylon (species of shelled mollusk)"]
+              },
+              {
+                value: "巻き貝",
+                kana: ["まきがい"],
+                english: ["snail", "spiral shell"]
+              },
+              {
+                value: "貝殻",
+                kana: ["かいがら"],
+                english: ["shell"]
+              },
+              {
+                value: "貝塚",
+                kana: ["かいづか", "かいずか"],
+                english: ["shell mound", "kitchen midden", "shell heap"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "学",
+            grade: 1,
+            strokes: 8,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%AD%A6#Kanji",
+            meanings: ["study", "learning", "science"],
+            readings: [
+              {
+                value: "まなぶ",
+                type: "kun"
+              },
+              {
+                value: "がく",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "科学",
+                kana: ["かがく"],
+                english: ["science"]
+              },
+              {
+                value: "学校",
+                kana: ["がっこう"],
+                english: ["school"]
+              },
+              {
+                value: "医学",
+                kana: ["いがく"],
+                english: ["medicine", "medical science"]
+              },
+              {
+                value: "大学",
+                kana: ["だいがく"],
+                english: ["secondary school"]
+              },
+              {
+                value: "学生",
+                kana: ["がくせい"],
+                english: ["student"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "気",
+            grade: 1,
+            strokes: 6,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E6%B0%97#Kanji",
+            meanings: ["mood", "spirit", "atmosphere", "air", "mind"],
+            readings: [
+              {
+                value: "いき",
+                type: "kun"
+              },
+              {
+                value: "き",
+                type: "on"
+              },
+              {
+                value: "け",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "気持ち",
+                kana: ["きもち"],
+                english: ["mood", "sensation", "feeling"]
+              },
+              {
+                value: "人気",
+                kana: ["にんき"],
+                english: ["popular feeling", "business conditions", "popular"]
+              },
+              {
+                value: "電気",
+                kana: ["でんき"],
+                english: ["light", "electricity"]
+              },
+              {
+                value: "気",
+                kana: ["き"],
+                english: ["heart", "spirit", "disposition", "mind", "nature"]
+              },
+              {
+                value: "景気",
+                kana: ["けいき"],
+                english: ["business", "state", "condition"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "休",
+            grade: 1,
+            strokes: 6,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E4%BC%91#Kanji",
+            meanings: ["rest"],
+            readings: [
+              {
+                value: "やすむ",
+                type: "kun"
+              },
+              {
+                value: "きゅう",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "休暇",
+                kana: ["きゅうか"],
+                english: ["holiday", "day off", "furlough"]
+              },
+              {
+                value: "休業",
+                kana: ["きゅうぎょう"],
+                english: ["closed (e.g. store)", "business suspended"]
+              },
+              {
+                value: "休み",
+                kana: ["やすみ"],
+                english: ["holiday", "respite", "recess", "rest", "vacation"]
+              },
+              {
+                value: "夏休み",
+                kana: ["なつやすみ"],
+                english: ["summer holiday"]
+              },
+              {
+                value: "休日",
+                kana: ["きゅうかきゅうか"],
+                english: ["holiday", "day off"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "玉",
+            grade: 1,
+            strokes: 5,
+            jlpt: 2,
+            source: "https://en.wiktionary.org/wiki/%E7%8E%89#Kanji",
+            meanings: ["jewel", "ball"],
+            readings: [
+              {
+                value: "たま",
+                type: "kun"
+              },
+              {
+                value: "ぎょく",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "玉",
+                kana: ["たま"],
+                english: ["pearl", "coin", "jewel", "testicles", "sphere", "ball"]
+              },
+              {
+                value: "お年玉",
+                kana: ["おとしだま"],
+                english: ["New Year’s gift"]
+              },
+              {
+                value: "替え玉",
+                kana: ["かえだま"],
+                english: ["double", "substitute"]
+              },
+              {
+                value: "玉虫色",
+                kana: ["たまむしいろ"],
+                english: ["iridescent", "ambivalent", "equivocal"]
+              },
+              {
+                value: "目玉",
+                kana: ["めだま"],
+                english: ["eyeball", "special feature", "centerpiece"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "金",
+            grade: 1,
+            strokes: 8,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E9%87%91#Kanji",
+            meanings: ["money", "gold"],
+            readings: [
+              {
+                value: "かな",
+                type: "kun"
+              },
+              {
+                value: "こん",
+                type: "on"
+              },
+              {
+                value: "きん",
+                type: "on"
+              },
+              {
+                value: "かね",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "お金",
+                kana: ["おかね"],
+                english: ["money"]
+              },
+              {
+                value: "献金",
+                kana: ["けんきん"],
+                english: ["contribution", "offering", "donation"]
+              },
+              {
+                value: "金利",
+                kana: ["きんり"],
+                english: ["interest rates"]
+              },
+              {
+                value: "金融",
+                kana: ["きんゆう"],
+                english: ["financing", "credit transacting"]
+              },
+              {
+                value: "資金",
+                kana: ["しきん"],
+                english: ["funds", "capital"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "九",
+            grade: 1,
+            strokes: 2,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E4%B9%9D#Kanji",
+            meanings: ["nine"],
+            readings: [
+              {
+                value: "く",
+                type: "on"
+              },
+              {
+                value: "ここの",
+                type: "kun"
+              },
+              {
+                value: "きゅう",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "九",
+                kana: ["ここの", "ここ", "きゅう", "この", "く"],
+                english: ["nine"]
+              },
+              {
+                value: "十九",
+                kana: ["じゅうきゅう"],
+                english: ["nineteen"]
+              },
+              {
+                value: "九州",
+                kana: ["きゅうしゅう"],
+                english: ["Kyushu"]
+              },
+              {
+                value: "九十",
+                kana: ["くじゅう", "きゅうじゅう"],
+                english: ["ninety"]
+              },
+              {
+                value: "九月",
+                kana: ["くがつ"],
+                english: ["September"]
+              }
+            ],
+            tags: ["number"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "空",
+            grade: 1,
+            strokes: 8,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E7%A9%BA#Kanji",
+            meanings: ["sky", "void", "empty"],
+            readings: [
+              {
+                value: "そら",
+                type: "kun"
+              },
+              {
+                value: "くう",
+                type: "on"
+              },
+              {
+                value: "く",
+                type: "on"
+              },
+              {
+                value: "あく",
+                type: "kun"
+              },
+              {
+                value: "から",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "航空",
+                kana: ["こうくう"],
+                english: ["aviation"]
+              },
+              {
+                value: "空",
+                kana: ["から"],
+                english: ["emptiness", "vacuum", "blank"]
+              },
+              {
+                value: "航空機",
+                kana: ["こうくうき"],
+                english: ["aircraft", "aeroplane", "airplane"]
+              },
+              {
+                value: "空港",
+                kana: ["くうこう"],
+                english: ["airport"]
+              },
+              {
+                value: "空気",
+                kana: ["くうき"],
+                english: ["atmosphere", "air"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "月",
+            grade: 1,
+            strokes: 4,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E6%9C%88#Kanji",
+            meanings: ["moon", "month"],
+            readings: [
+              {
+                value: "げつ",
+                type: "on"
+              },
+              {
+                value: "がつ",
+                type: "on"
+              },
+              {
+                value: "つき",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "一月",
+                kana: ["いちがつ"],
+                english: ["January"]
+              },
+              {
+                value: "九月",
+                kana: ["くがつ"],
+                english: ["September"]
+              },
+              {
+                value: "三月",
+                kana: ["さんがつ"],
+                english: ["March"]
+              },
+              {
+                value: "五月",
+                kana: ["ごがつ"],
+                english: ["May"]
+              },
+              {
+                value: "今月",
+                kana: ["こんげつ"],
+                english: ["this month"]
+              }
+            ],
+            tags: ["time"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "犬",
+            grade: 1,
+            strokes: 4,
+            jlpt: 3,
+            source: "https://en.wiktionary.org/wiki/%E7%8A%AC#Kanji",
+            meanings: ["dog"],
+            readings: [
+              {
+                value: "いぬ",
+                type: "kun"
+              },
+              {
+                value: "けん",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "野犬",
+                kana: ["やけん"],
+                english: ["stray dog"]
+              },
+              {
+                value: "愛犬",
+                kana: ["あいけん"],
+                english: ["pet dog"]
+              },
+              {
+                value: "犬",
+                kana: ["いぬ"],
+                english: ["dog"]
+              },
+              {
+                value: "盲導犬",
+                kana: ["もうどうけん"],
+                english: ["guide dog for the blind"]
+              },
+              {
+                value: "飼い犬",
+                kana: ["かいいぬ"],
+                english: ["pet dog"]
+              }
+            ],
+            tags: ["animal"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "見",
+            grade: 1,
+            strokes: 7,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E8%A6%8B#Kanji",
+            meanings: ["see", "opinion"],
+            readings: [
+              {
+                value: "げん",
+                type: "on"
+              },
+              {
+                value: "けん",
+                type: "on"
+              },
+              {
+                value: "みる",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "会見",
+                kana: ["かいけん"],
+                english: ["audience", "interview"]
+              },
+              {
+                value: "見方",
+                kana: ["みかた"],
+                english: ["viewpoint"]
+              },
+              {
+                value: "見直し",
+                kana: ["みなおし"],
+                english: ["revision", "reconsideration", "review"]
+              },
+              {
+                value: "見通し",
+                kana: ["みとおし"],
+                english: ["outlook", "perspective", "unobstructed view"]
+              },
+              {
+                value: "意見",
+                kana: ["いけん"],
+                english: ["opinion", "view"]
+              }
+            ],
+            tags: ["verb"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "五",
+            grade: 1,
+            strokes: 4,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E4%BA%94#Kanji",
+            meanings: ["five"],
+            readings: [
+              {
+                value: "いつ",
+                type: "kun"
+              },
+              {
+                value: "ご",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "十五",
+                kana: ["じゅうご"],
+                english: ["fifteen"]
+              },
+              {
+                value: "五",
+                kana: ["い", "いつ", "ご"],
+                english: ["five"]
+              },
+              {
+                value: "五十",
+                kana: ["い", "ごじゅう", "いそ"],
+                english: ["fifty"]
+              },
+              {
+                value: "五輪",
+                kana: ["ごりん"],
+                english: ["the Olympics"]
+              },
+              {
+                value: "五月",
+                kana: ["ごがつ"],
+                english: ["May"]
+              }
+            ],
+            tags: ["number"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "口",
+            grade: 1,
+            strokes: 3,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%8F%A3#Kanji",
+            meanings: ["mouth"],
+            readings: [
+              {
+                value: "くち",
+                type: "kun"
+              },
+              {
+                value: "く",
+                type: "on"
+              },
+              {
+                value: "こう",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "人口",
+                kana: ["じんこう"],
+                english: ["common talk", "population"]
+              },
+              {
+                value: "窓口",
+                kana: ["まどぐち"],
+                english: ["teller window", "ticket window", "counter"]
+              },
+              {
+                value: "口",
+                kana: ["くち"],
+                english: ["hole", "orifice", "mouth", "opening", "gap"]
+              },
+              {
+                value: "入り口",
+                kana: ["いりくち", "は", "はいりぐち", "いりぐち"],
+                english: ["approach", "entrance", "mouth", "entry", "gate"]
+              },
+              {
+                value: "口座",
+                kana: ["こうざ"],
+                english: ["account"]
+              }
+            ],
+            tags: ["body"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "校",
+            grade: 1,
+            strokes: 10,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E6%A0%A1#Kanji",
+            meanings: ["school", "printing", "exam"],
+            readings: [
+              {
+                value: "きょう",
+                type: "on"
+              },
+              {
+                value: "こう",
+                type: "on"
+              },
+              {
+                value: "かせ",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "高校",
+                kana: ["こうこう"],
+                english: ["senior high school"]
+              },
+              {
+                value: "高校生",
+                kana: ["こうこうせい"],
+                english: ["senior high school student"]
+              },
+              {
+                value: "学校",
+                kana: ["がっこう"],
+                english: ["school"]
+              },
+              {
+                value: "小学校",
+                kana: ["しょうがっこう"],
+                english: ["primary school", "elementary school"]
+              },
+              {
+                value: "校長",
+                kana: ["こうちょう"],
+                english: ["headmaster", "principal"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "左",
+            grade: 1,
+            strokes: 5,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%B7%A6#Kanji",
+            meanings: ["left"],
+            readings: [
+              {
+                value: "さ",
+                type: "on"
+              },
+              {
+                value: "ひだり",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "左右",
+                kana: ["さゆう"],
+                english: ["control", "influence", "left and right"]
+              },
+              {
+                value: "向かって左",
+                kana: ["むかってひだり"],
+                english: ["on the left as one faces it"]
+              },
+              {
+                value: "左翼",
+                kana: ["さよく"],
+                english: ["left wing (political)"]
+              }
+            ],
+            tags: ["direction"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "三",
+            grade: 1,
+            strokes: 3,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E4%B8%89#Kanji",
+            meanings: ["three"],
+            readings: [
+              {
+                value: "み",
+                type: "kun"
+              },
+              {
+                value: "さん",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "三人",
+                kana: ["みたり", "さんにん"],
+                english: ["three people"]
+              },
+              {
+                value: "三",
+                kana: ["さん", "み"],
+                english: ["three"]
+              },
+              {
+                value: "三つ",
+                kana: ["みっつ"],
+                english: ["three things"]
+              },
+              {
+                value: "三月",
+                kana: ["さんがつ"],
+                english: ["March"]
+              },
+              {
+                value: "十三",
+                kana: ["じゅうさん"],
+                english: ["thirteen"]
+              }
+            ],
+            tags: ["number"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "山",
+            grade: 1,
+            strokes: 3,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%B1%B1#Kanji",
+            meanings: ["mountain"],
+            readings: [
+              {
+                value: "さん",
+                type: "on"
+              },
+              {
+                value: "せん",
+                type: "on"
+              },
+              {
+                value: "やま",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "登山",
+                kana: ["とざん"],
+                english: ["mountain climbing"]
+              },
+              {
+                value: "山形",
+                kana: ["やまがた"],
+                english: ["mountain shaped"]
+              },
+              {
+                value: "青山",
+                kana: ["せいざん"],
+                english: ["blue or green mountain", "grave", "burial place"]
+              },
+              {
+                value: "火山",
+                kana: ["かざん"],
+                english: ["volcano"]
+              },
+              {
+                value: "山",
+                kana: ["やま"],
+                english: ["pile", "heap", "mountain", "climax", "critical point"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "四",
+            grade: 1,
+            strokes: 5,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%9B%9B#Kanji",
+            meanings: ["four"],
+            readings: [
+              {
+                value: "よん",
+                type: "kun"
+              },
+              {
+                value: "よつ",
+                type: "kun"
+              },
+              {
+                value: "し",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "四十",
+                kana: ["よそ", "よんじゅう", "しじゅう"],
+                english: ["forty"]
+              },
+              {
+                value: "四",
+                kana: ["し", "よ", "よん"],
+                english: ["four"]
+              },
+              {
+                value: "四つ",
+                kana: ["よっつ"],
+                english: ["four things"]
+              },
+              {
+                value: "十四",
+                kana: ["じゅうよん", "じゅうし"],
+                english: ["fourteen"]
+              },
+              {
+                value: "四月",
+                kana: ["しがつ"],
+                english: ["April"]
+              }
+            ],
+            tags: ["number"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "子",
+            grade: 1,
+            strokes: 3,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%AD%90#Kanji",
+            meanings: ["child", "sign of the rat"],
+            readings: [
+              {
+                value: "す",
+                type: "on"
+              },
+              {
+                value: "こ",
+                type: "kun"
+              },
+              {
+                value: "し",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "子供",
+                kana: ["こども"],
+                english: ["children"]
+              },
+              {
+                value: "原子力",
+                kana: ["げんしりょく"],
+                english: ["atomic", "energy"]
+              },
+              {
+                value: "子",
+                kana: ["こ"],
+                english: ["child"]
+              },
+              {
+                value: "男子",
+                kana: ["だんし"],
+                english: ["young man", "youth"]
+              },
+              {
+                value: "女子",
+                kana: ["おなご", "じょし"],
+                english: ["women", "girl"]
+              }
+            ],
+            tags: ["family"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "糸",
+            grade: 1,
+            strokes: 6,
+            jlpt: 2,
+            source: "https://en.wiktionary.org/wiki/%E7%B3%B8#Kanji",
+            meanings: ["thread"],
+            readings: [
+              {
+                value: "いと",
+                type: "kun"
+              },
+              {
+                value: "し",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "生糸",
+                kana: ["きいと"],
+                english: ["raw silk thread"]
+              },
+              {
+                value: "糸口",
+                kana: ["いとぐち"],
+                english: ["thread end", "beginning", "clue"]
+              },
+              {
+                value: "毛糸",
+                kana: ["けいと"],
+                english: ["knitting wool"]
+              },
+              {
+                value: "糸",
+                kana: ["いと"],
+                english: ["thread", "yarn", "string"]
+              },
+              {
+                value: "撚糸",
+                kana: ["ねんし"],
+                english: ["twisted thread or yarn"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "字",
+            grade: 1,
+            strokes: 6,
+            jlpt: 3,
+            source: "https://en.wiktionary.org/wiki/%E5%AD%97#Kanji",
+            meanings: ["word", "letter", "section of village", "character"],
+            readings: [
+              {
+                value: "あざ",
+                type: "kun"
+              },
+              {
+                value: "じ",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "黒字",
+                kana: ["くろじ"],
+                english: ["figure in black", "balance"]
+              },
+              {
+                value: "赤字",
+                kana: ["あかじ"],
+                english: ["deficit"]
+              },
+              {
+                value: "字",
+                kana: ["あざ"],
+                english: ["section of village"]
+              },
+              {
+                value: "文字",
+                kana: ["もんじ", "もじ"],
+                english: ["letter (of alphabet", "character"]
+              },
+              {
+                value: "数字",
+                kana: ["すうじ"],
+                english: ["numeral", "numeric character", "figure", "digit"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "耳",
+            grade: 1,
+            strokes: 6,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E8%80%B3#Kanji",
+            meanings: ["ear"],
+            readings: [
+              {
+                value: "に",
+                type: "on"
+              },
+              {
+                value: "みみ",
+                type: "kun"
+              },
+              {
+                value: "じ",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "耳",
+                kana: ["みみ"],
+                english: ["crust", "hearing", "edge", "ear"]
+              },
+              {
+                value: "耳目",
+                kana: ["じもく"],
+                english: ["one’s interest", "one’s attention", "eye and ear"]
+              },
+              {
+                value: "中耳炎",
+                kana: ["ちゅうじえん"],
+                english: ["tympanitis (inflammation of middle ear)"]
+              },
+              {
+                value: "耳打ち",
+                kana: ["みみうち"],
+                english: ["whisper into a person’s ear"]
+              },
+              {
+                value: "耳鼻咽喉科",
+                kana: ["じびいんこうか"],
+                english: ["otorhinolaryngology", "nose and throat", "ear"]
+              }
+            ],
+            tags: ["body"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "七",
+            grade: 1,
+            strokes: 2,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E4%B8%83#Kanji",
+            meanings: ["seven"],
+            readings: [
+              {
+                value: "なな",
+                type: "kun"
+              },
+              {
+                value: "しち",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "七",
+                kana: ["なな", "な", "しち"],
+                english: ["seven"]
+              },
+              {
+                value: "七十",
+                kana: ["ななじゅう", "ななそ", "しちじゅう"],
+                english: ["seventy"]
+              },
+              {
+                value: "四十七士",
+                kana: ["しじゅうしちし"],
+                english: ["The 47 Ronin"]
+              },
+              {
+                value: "七月",
+                kana: ["しちがつ"],
+                english: ["July"]
+              },
+              {
+                value: "十七",
+                kana: ["じゅうなな", "じゅうしち"],
+                english: ["seventeen"]
+              }
+            ],
+            tags: ["number"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "車",
+            grade: 1,
+            strokes: 7,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E8%BB%8A#Kanji",
+            meanings: ["car", "vehicle"],
+            readings: [
+              {
+                value: "くるま",
+                type: "kun"
+              },
+              {
+                value: "しゃ",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "自転車",
+                kana: ["じてんしゃ"],
+                english: ["bicycle"]
+              },
+              {
+                value: "乗用車",
+                kana: ["じょうようしゃ"],
+                english: ["passenger vehicle", "automobile"]
+              },
+              {
+                value: "自動車",
+                kana: ["じどうしゃ"],
+                english: ["automobile"]
+              },
+              {
+                value: "下車",
+                kana: ["げしゃ"],
+                english: ["alighting (from train, bus, etc.)"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "手",
+            grade: 1,
+            strokes: 4,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E6%89%8B#Kanji",
+            meanings: ["hand"],
+            readings: [
+              {
+                value: "て",
+                type: "kun"
+              },
+              {
+                value: "しゅ",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "選手",
+                kana: ["せんしゅ"],
+                english: ["player (in game)", "team member"]
+              },
+              {
+                value: "相手",
+                kana: ["あいて"],
+                english: ["companion", "company", "partner", "other party"]
+              },
+              {
+                value: "大手",
+                kana: ["おおて"],
+                english: ["front castle gate", "both arms open"]
+              },
+              {
+                value: "選手権",
+                kana: ["せんしゅけん"],
+                english: ["championship", "title (of champion)"]
+              }
+            ],
+            tags: ["body"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "十",
+            grade: 1,
+            strokes: 2,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%8D%81#Kanji",
+            meanings: ["ten"],
+            readings: [
+              {
+                value: "と",
+                type: "kun"
+              },
+              {
+                value: "じゅう",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "十一",
+                kana: ["じゅういち", "ジュウイチ"],
+                english: ["eleven"]
+              },
+              {
+                value: "十月",
+                kana: ["じゅうがつ"],
+                english: ["October"]
+              },
+              {
+                value: "十",
+                kana: ["じゅう", "と", "とお"],
+                english: ["ten"]
+              },
+              {
+                value: "十九",
+                kana: ["じゅうきゅう"],
+                english: ["nineteen"]
+              },
+              {
+                value: "十一月",
+                kana: ["じゅういちがつ"],
+                english: ["November"]
+              }
+            ],
+            tags: ["number"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "出",
+            grade: 1,
+            strokes: 5,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%87%BA#Kanji",
+            meanings: ["leave", "exit"],
+            readings: [
+              {
+                value: "で",
+                type: "kun"
+              },
+              {
+                value: "でる",
+                type: "kun"
+              },
+              {
+                value: "だす",
+                type: "kun"
+              },
+              {
+                value: "しゅつ",
+                type: "on"
+              },
+              {
+                value: "しゅち",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "出す",
+                kana: ["だす"],
+                english: ["to put out", "to take out", "to get out"]
+              },
+              {
+                value: "進出",
+                kana: ["しんしゅつ"],
+                english: ["step forward", "advance"]
+              },
+              {
+                value: "輸出",
+                kana: ["ゆしゅつ", "しゅしゅつ"],
+                english: ["export"]
+              },
+              {
+                value: "出身",
+                kana: ["しゅっしん"],
+                english: ["person’s origin (town, city, country, etc.)"]
+              },
+              {
+                value: "出場",
+                kana: ["しゅつじょう"],
+                english: ["(stage) appearance", "participation"]
+              }
+            ],
+            tags: []
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "女",
+            grade: 1,
+            strokes: 3,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%A5%B3#Kanji",
+            meanings: ["women", "female"],
+            readings: [
+              {
+                value: "じょ",
+                type: "on"
+              },
+              {
+                value: "おんな",
+                type: "kun"
+              },
+              {
+                value: "にょ",
+                type: "on"
+              }
+            ],
+            examples: [
+              {
+                value: "女性",
+                kana: ["じょせい"],
+                english: ["women", "female", "feminine gender"]
+              },
+              {
+                value: "男女",
+                kana: ["だんじょ"],
+                english: ["man and women"]
+              },
+              {
+                value: "女",
+                kana: ["おんな"],
+                english: ["women"]
+              },
+              {
+                value: "女子",
+                kana: ["おなご", "じょし"],
+                english: ["girl"]
+              },
+              {
+                value: "彼女",
+                kana: ["かのじょ"],
+                english: ["sweetheart", "she", "girlfriend"]
+              }
+            ],
+            tags: ["family"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "小",
+            grade: 1,
+            strokes: 3,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E5%B0%8F#Kanji",
+            meanings: ["little", "small"],
+            readings: [
+              {
+                value: "お",
+                type: "kun"
+              },
+              {
+                value: "しょう",
+                type: "on"
+              },
+              {
+                value: "こ",
+                type: "kun"
+              },
+              {
+                value: "ちいさい",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "小説",
+                kana: ["しょうせつ"],
+                english: ["novel", "short story"]
+              },
+              {
+                value: "小選挙区",
+                kana: ["しょうせんきょく"],
+                english: ["small electoral district"]
+              },
+              {
+                value: "小学校",
+                kana: ["しょうがっこう"],
+                english: ["primary school", "elementary school"]
+              },
+              {
+                value: "中小企業",
+                kana: ["ちゅうしょうきぎょう"],
+                english: ["small to medium enterprises"]
+              },
+              {
+                value: "小学生",
+                kana: ["しょうがくせい"],
+                english: ["elementary school student"]
+              }
+            ],
+            tags: ["size"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "上",
+            grade: 1,
+            strokes: 3,
+            jlpt: 4,
+            source: "https://en.wiktionary.org/wiki/%E4%B8%8A#Kanji",
+            meanings: ["up", "above"],
+            readings: [
+              {
+                value: "じょう",
+                type: "on"
+              },
+              {
+                value: "うえ",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "史上",
+                kana: ["しじょう"],
+                english: ["historical"]
+              },
+              {
+                value: "上がったり",
+                kana: ["あがったり"],
+                english: ["in a bad state", "poor", "doomed"]
+              },
+              {
+                value: "事実上",
+                kana: ["じじつじょう"],
+                english: ["actually", "(as a) matter of fact", "in reality"]
+              },
+              {
+                value: "上昇",
+                kana: ["じょうしょう"],
+                english: ["ascending", "climbing", "rising"]
+              },
+              {
+                value: "上げ",
+                kana: ["あげ"],
+                english: ["rise in price", "making a tuck"]
+              }
+            ],
+            tags: ["direction"]
+          }
+        },
+        {
+          field: "meaning",
+          value: {
+            character: "森",
+            grade: 1,
+            strokes: 12,
+            jlpt: 3,
+            source: "https://en.wiktionary.org/wiki/%E6%A3%AE#Kanji",
+            meanings: ["woods", "forest"],
+            readings: [
+              {
+                value: "しん",
+                type: "on"
+              },
+              {
+                value: "もり",
+                type: "kun"
+              }
+            ],
+            examples: [
+              {
+                value: "森羅万象",
+                kana: ["しんらばんしょう"],
+                english: ["all things in nature", "the whole creation"]
+              },
+              {
+                value: "森厳",
+                kana: ["しんげん"],
+                english: ["solemn"]
+              },
+              {
+                value: "森林",
+                kana: ["しんりん"],
+                english: ["woods", "forest"]
+              },
+              {
+                value: "森",
+                kana: ["もり"],
+                english: ["forest", "grove"]
+              },
+              {
+                value: "森閑",
+                kana: ["しんかん"],
+                english: ["silence"]
+              }
+            ],
+            tags: []
+          }
+        }
+      ],
+      pages: 75,
+      total: 2998
+    })
   })
 ]

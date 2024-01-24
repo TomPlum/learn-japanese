@@ -82,9 +82,9 @@ const PresetSelectionStep = (props: PresetSelectionStepProps) => {
   const TopicSelectionDropdown = () => (
     <TopicSelector
       topic={topic}
+      disabled={loading}
       onSelect={onSelectTopic}
       className={styles.topic}
-      disabled={loading}
     />
   )
 

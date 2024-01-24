@@ -14,7 +14,7 @@ export interface TopicSelectorProps {
 
 const TopicSelector = (props: TopicSelectorProps) => {
   const { topic, disabled, onSelect, className } = props
-
+console.log('isDisabled', disabled)
   const [selected, setSelected] = useState(topic)
 
   const handleChange = (topic: Topic) => {
@@ -26,15 +26,15 @@ const TopicSelector = (props: TopicSelectorProps) => {
     <div className={className}>
       <Dropdown className={styles.dropdown} data-testid="wizard-topic-selector">
         <Dropdown.Toggle
-          className={styles.toggle}
           id="topic-selector"
-          data-testid="topic-selector-toggle"
           disabled={disabled}
+          className={styles.toggle}
+          data-testid="topic-selector-toggle"
         >
           <FontAwesomeIcon fixedWidth icon={selected.icon} /> {selected.name}
         </Dropdown.Toggle>
 
-        <Dropdown.Menu className={styles.menu}>
+        <Dropdown.Menu className={styles.menu} data-testid='topic-selector-menu'>
           {Topic.ALL.map((topic: Topic) => (
             <TopicDropdownOption
               type={topic}

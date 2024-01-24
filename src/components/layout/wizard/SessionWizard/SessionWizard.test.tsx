@@ -18,7 +18,7 @@ import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings.ts
 import { server } from "__test-utils__/msw.ts";
 import {
   useGetDefaultPresetsHandlers,
-  useGetDefaultPresetsHandlersError
+  useGetDefaultPresetsHandlersError, useGetDefaultPresetsHandlersMultiplePresets
 } from "api/hooks/presets/useGetDefaultPresets";
 import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts";
 
@@ -491,7 +491,7 @@ test("Switching from the type step and back again should maintain its selection 
 })
 
 test("Switching from the preset step and back again should maintain its selection state", async () => {
-  server.use(...useGetDefaultPresetsHandlers)
+  server.use(...useGetDefaultPresetsHandlersMultiplePresets)
   const { next } = setup()
 
   // Advance to the 'Preset' step
@@ -500,11 +500,12 @@ test("Switching from the preset step and back again should maintain its selectio
 
   // Change the topic to 'Basics'
   await waitFor(() => expect(screen.getByTestId("wizard-topic-selector")).not.toBeDisabled())
-  fireEvent.click(screen.getByText("Hiragana & Katakana"))
-  fireEvent.click(screen.getByText("Basics"))
+  await userEvent.click(screen.getByTestId("topic-selector-toggle"))
+  expect(await screen.findByTestId("topic-selector-menu")).toBeInTheDocument()
+  fireEvent.click(await screen.findByText("Basics"))
 
   // Change the preset selection to 'Test Play'
-  fireEvent.click(screen.getByText("Test Play"))
+  fireEvent.click(screen.getByText("Example Play Preset 2"))
 
   // Go back to the 'Type' step
   fireEvent.click(screen.getByText("Back"))
@@ -516,7 +517,7 @@ test("Switching from the preset step and back again should maintain its selectio
   expect(screen.getByText("Basics")).toBeInTheDocument()
 
   // The 'Test Play' preset should still be selected
-  expect((await screen.findByText("Test Play")).parentElement).toHaveClass("selected")
+  expect((await screen.findByText("Example Play Preset 2")).parentElement).toHaveClass("selected")
 })
 
 test("The start button should be disabled if the preset is undefined", async () => {
