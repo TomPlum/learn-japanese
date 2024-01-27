@@ -38,8 +38,15 @@ const useSavePlayPreset = () => {
   }, [])
 
   const savePlayPreset = useCallback(async ({ meta, settings }: SavePlayPresetMutationData): Promise<UpdateResponse> => {
-    const details: CustomPresetDetails = { name: meta.name, icon: meta.icon, colour: meta.colour, settings: settings }
+    const details: CustomPresetDetails = {
+      name: meta.name,
+      icon: meta.icon,
+      colour: meta.colour,
+      settings: settings
+    }
+
     const request = buildRequest(details)
+
     await client.post("/presets/custom/play/save", request)
     
     return {
