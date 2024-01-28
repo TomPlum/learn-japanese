@@ -1,81 +1,27 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
-import SessionWizard  from "./SessionWizard"
+import SessionWizard from "./SessionWizard"
 import userEvent from "@testing-library/user-event"
-import KanjiSettings, { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings"
+import KanjiSettings from "types/session/settings/data/KanjiSettings"
 import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
-import { faPaintBrush } from "@fortawesome/free-solid-svg-icons"
 import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings"
 import LearnableField from "types/learn/LearnableField"
 import QuestionType from "types/game/QuestionType"
 import { HintSettingsBuilder } from "types/session/settings/game/HintSettings"
 import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings"
-import PresetBuilder from "types/session/PresetBuilder"
 import { render } from "__test-utils__"
-import { getValueLastCalledWith } from "__test-utils__/Queries";
-import { SessionSettingsBag } from "context/SessionSettingsContext";
-import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts";
-import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings.ts";
-import { server } from "__test-utils__/msw.ts";
+import { getValueLastCalledWith } from "__test-utils__/Queries"
+import { SessionSettingsBag } from "context/SessionSettingsContext"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts"
+import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings.ts"
+import { server } from "__test-utils__/msw.ts"
 import {
   useGetDefaultPresetsHandlers,
-  useGetDefaultPresetsHandlersError, useGetDefaultPresetsHandlersMultiplePresets
-} from "api/hooks/presets/useGetDefaultPresets";
-import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts";
+  useGetDefaultPresetsHandlersError,
+  useGetDefaultPresetsHandlersMultiplePresets
+} from "api/hooks/presets/useGetDefaultPresets"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts"
 
 const onCloseHandler = vi.fn()
-
-const playPreset = new PresetBuilder()
-  .withID(1)
-  .withDisplayName("Test Play")
-  .withColour("#ffffff")
-  .withIcon("FaAtom")
-  .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
-  .withGameSettings(new GameSettingsBuilder().build())
-  .withTopicName("Basics")
-  .build()
-
-const playBasics = new PresetBuilder()
-  .withID(2)
-  .withDisplayName("Basics2")
-  .withColour("#ffffff")
-  .withIcon("FaAtom")
-  .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
-  .withGameSettings(new GameSettingsBuilder().build())
-  .withTopicName("Basics")
-  .build()
-
-const learnPreset = new PresetBuilder()
-  .withID(1)
-  .withDisplayName("Test Learn")
-  .withColour("#fdb40e")
-  .withIcon("あ")
-  .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
-  .withGameSettings(new GameSettingsBuilder().build())
-  .withTopicName("Topic")
-  .build()
-
-const playKanjiPreset = new PresetBuilder()
-  .withID(1)
-  .withDisplayName("Kanji")
-  .withColour("#6857ee")
-  .withIcon(faPaintBrush)
-  .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
-  .withGameSettings(
-    new GameSettingsBuilder()
-      .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
-      .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
-      .withQuestionSettings(
-        new QuestionSettingsBuilder()
-          .withFields(LearnableField.MEANING, LearnableField.KANJI)
-          .withType(QuestionType.CHOICE)
-          .withCardQuantity(4)
-          .withScoreTracking(true)
-          .build()
-      )
-      .build()
-  )
-  .withTopicName("Jōyō Kanji")
-  .build()
 
 const setup = () => {
   const response = render(<SessionWizard onClose={onCloseHandler} />)

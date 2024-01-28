@@ -32,11 +32,15 @@ const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormPro
 
   const handleSave = async () => {
     if (settings.gameSettings) {
-      await savePlayPreset({ meta: { name, icon, colour }, settings })
+      try {
+        await savePlayPreset({ meta: { name, icon, colour }, settings })
+      } catch {}
       setSuccess(true)
       setTimeout(() => onSuccess(), 2000)
     } else {
-      await saveLearnPreset({ meta: { name, icon, colour }, settings })
+      try {
+        await saveLearnPreset({ meta: { name, icon, colour }, settings })
+      } catch {}
       setSuccess(true)
       setTimeout(() => onSuccess(), 2000)
     }
