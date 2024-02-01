@@ -60,8 +60,6 @@ const SettingsDropdown = (props: SettingsDropdownProps) => {
 
   const getSelectedPreferenceValue = () =>
     opts.find((it) => it.value === userPreferenceValue) ?? { name: "Unknown", value: "Unknown" }
-  console.log('user pref value', userPreferenceValue)
-  console.log('opts', opts)
 
   const selected: SettingsDropdownOption = getSelectedPreferenceValue()
 

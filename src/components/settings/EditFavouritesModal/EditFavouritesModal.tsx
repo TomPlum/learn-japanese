@@ -42,7 +42,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
 
   const { t, ready } = useTranslation()
   const presetsRef = useRef<HTMLParagraphElement>(null)
-  const actions = useTranslation("translation", { keyPrefix: "action" }).t
+  const { t: actions } = useTranslation("translation", { keyPrefix: "action" })
   const { data: presets, isLoading, isError: isGetPresetsError } = useGetPresets()
 
   const { mutateAsync: updateFavourites, isPending: saving, isError } = useUpdatePresetFavourites()
@@ -87,8 +87,10 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
   }
 
   const handleSave = async () => {
-    await updateFavourites({ add, remove })
-    onSuccess()
+    try {
+      await updateFavourites({ add, remove })
+      onSuccess()
+    } catch {}
   }
 
   const handleDismiss = () => {

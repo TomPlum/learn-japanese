@@ -18,7 +18,7 @@ const useGetKanjiByCharacter = (({ character }: GetKanjiByCharacterProps) => {
   }, [client])
 
   return useQuery({
-    queryKey: [queryKeys.getKanjiByCharacter],
+    queryKey: [queryKeys.getKanjiByCharacter, character],
     queryFn: getKanjiByCharacter
   })
 })
