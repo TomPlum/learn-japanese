@@ -10,6 +10,7 @@ import {
   useGetPresetFavouritesHandlersPlayOnly
 } from "api/hooks/presets/useGetPresetFavourites"
 import { useUpdatePresetFavouritesHandlers } from "api/hooks/presets/useUpdatePresetFavourites";
+import { useGetPresetsHandlers } from "api/hooks/presets/useGetPresets";
 
 test("It should render preset favourite buttons for each of the presets from the service", async () => {
   server.use(...useGetPresetFavouritesHandlers)
@@ -59,7 +60,7 @@ test("When there are no favourites it should render the add button", async () =>
 })
 
 test("Clicking the empty state add button should render the edit favourites modal", async () => {
-  server.use(...useGetPresetFavouritesHandlersNoPresets)
+  server.use(...useGetPresetFavouritesHandlersNoPresets, ...useGetPresetsHandlers)
   const { component } = render(<FavouritesCard />)
 
   fireEvent.click(await component.findByText("You can track your favourite presets here"))
@@ -67,7 +68,7 @@ test("Clicking the empty state add button should render the edit favourites moda
 })
 
 test("Clicking the edit button from the settings menu should render the edit favourites modal", async () => {
-  server.use(...useGetPresetFavouritesHandlersPlayOnly)
+  server.use(...useGetPresetFavouritesHandlersPlayOnly, ...useGetPresetsHandlers)
   const { component } = render(<FavouritesCard />)
 
   fireEvent.click(await component.findByTestId("dashboard-settings-menu-button"))
@@ -78,7 +79,7 @@ test("Clicking the edit button from the settings menu should render the edit fav
 
 test("Saving after updating favourites should reload the data", async () => {
   // Return a singular learn and a play preset
-  server.use(...useGetPresetFavouritesHandlers, ...useUpdatePresetFavouritesHandlers)
+  server.use(...useGetPresetFavouritesHandlers, ...useUpdatePresetFavouritesHandlers, ...useGetPresetsHandlers)
   const { component } = render(<FavouritesCard />)
 
   // Should render both favourites
@@ -92,7 +93,7 @@ test("Saving after updating favourites should reload the data", async () => {
 
   // Change something (Remove the test learn preset from favourites)
   fireEvent.click(await screen.findByTestId("existing-favourite-button-2"))
-  server.resetHandlers(...useGetPresetFavouritesHandlersPlayOnly, ...useUpdatePresetFavouritesHandlers)
+  server.resetHandlers(...useGetPresetFavouritesHandlersPlayOnly, ...useUpdatePresetFavouritesHandlers, ...useGetPresetsHandlers)
   fireEvent.click(screen.getByText("Save"))
 
   // Should render only the play favourite now

@@ -10,29 +10,52 @@ import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
 import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
 import PresetBuilder from "types/session/PresetBuilder"
 import LearnSettings from "types/session/settings/LearnSettings"
-import { testUser } from "../../../../../setupTests"
+import { testUser } from "setupTests.ts"
 import { render } from "__test-utils__"
 import { User } from "context/UserContext";
 import { server } from "__test-utils__/msw.ts";
 import { useGetPresetsHandlers, useGetPresetsHandlersEmpty, useGetPresetsHandlersError } from "api/hooks/presets/useGetPresets";
 import { useGetDefaultPresetsHandlers } from "api/hooks/presets/useGetDefaultPresets";
 import userEvent from "@testing-library/user-event";
+import { HintSettingsBuilder } from "types/session/settings/game/HintSettings.ts";
+import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings.ts";
+import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings.ts";
+import QuestionType from "types/game/QuestionType.ts";
+import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings.ts";
 
 const onSelectHandler = vi.fn()
 const onChangeTopicHandler = vi.fn()
 const isValidHandler = vi.fn()
 
 const playPreset = new PresetBuilder()
-  .withID(1)
-  .withDisplayName("Test Play")
-  .withDescription("This is an example play description")
-  .withColour("#ffffff")
-  .withIcon("FaAtom")
-  .withDataSettings(new KanaSettingsBuilder().build())
-  .withGameSettings(new GameSettingsBuilder().build())
+  .withID(2)
+  .withDisplayName("Example Play Preset")
+  .withDescription("An example play preset desc")
+  .withColour("ffffff")
+  .withIcon("faApple")
+  .withDataSettings(new KanaSettingsBuilder()
+    .withDiacriticals(true)
+    .withQuantity(50)
+    .withHiragana(true)
+    .build())
+  .withGameSettings(new GameSettingsBuilder()
+    .withHintSettings(new HintSettingsBuilder()
+      .withQuantity(8)
+      .build())
+    .withLifeSettings(new LifeSettingsBuilder()
+      .withQuantity(12)
+      .build())
+    .withQuestionSettings(new QuestionSettingsBuilder()
+      .withQuantity(150)
+      .withCardQuantity(4)
+      .withScoreTracking(true)
+      .withType(QuestionType.CHOICE)
+      .build())
+    .withTimeSettings(new TimeSettingsBuilder()
+      .isTimed(true)
+      .build())
+    .build())
   .withTopicName("Hiragana & Katakana")
-  .withShortName("Short Play")
-  .withFavouriteID(1)
   .build()
 
 const learnPreset = new PresetBuilder()
@@ -46,19 +69,6 @@ const learnPreset = new PresetBuilder()
   .withShortName("Short Learn")
   .withFavouriteID(2)
   .withDescription("TestLearnDescription")
-  .build()
-
-const customPreset = new PresetBuilder()
-  .withID(3)
-  .withDisplayName("Custom Learn Preset")
-  .withColour("#fdb40e")
-  .withIcon("あ")
-  .withDataSettings(new KanaSettingsBuilder().build())
-  .withLearnSettings(new LearnSettings())
-  .withTopicName("Hiragana & Katakana")
-  .withShortName("Custom Preset")
-  .withFavouriteID(3)
-  .isCustom()
   .build()
 
 let props: PresetSelectionStepProps
@@ -150,7 +160,8 @@ test("Selecting a preset should call the onChangeTopic event handler with that t
 
   // Change the topic to 'Basics'
   await userEvent.click(screen.getByTestId("topic-selector-toggle"))
-  await userEvent.click(screen.getByText("Basics"))
+  expect(await screen.findByTestId('topic-selector-menu')).toBeInTheDocument()
+  await userEvent.click(await screen.findByText("Basics"))
 
   // Should call the event handler
   expect(onChangeTopicHandler).toHaveBeenLastCalledWith(Topic.BASICS)
@@ -163,7 +174,7 @@ test("It should select the first preset if one is not passed as selected", async
   setup()
 
   // Mouse over to show the description, this only happens when selected
-  fireEvent.mouseOver(await screen.findByTestId("grid-item-1"))
+  fireEvent.mouseOver(await screen.findByTestId("grid-item-2"))
 
   expect(onSelectHandler).toHaveBeenCalledWith(playPreset)
 })
