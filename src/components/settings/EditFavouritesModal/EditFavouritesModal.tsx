@@ -10,7 +10,7 @@ import {
   faStar,
   faTimes
 } from "@fortawesome/free-solid-svg-icons"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react";
 import SessionMode from "types/session/SessionMode"
 import LoadingSpinner from "../../ui/loading/LoadingSpinner"
 import ScrollableContainer from "../../ui/ScrollableContainer"
@@ -22,16 +22,9 @@ import ExistingFavouriteButton from "../../ui/buttons/favourite/ExistingFavourit
 import { useTranslation } from "react-i18next"
 import useGetPresets from "api/hooks/presets/useGetPresets";
 import useUpdatePresetFavourites from "api/hooks/presets/useUpdatePresetFavourites";
+import { EditFavouritesModalProps } from "components/settings/EditFavouritesModal/types.ts";
 
-export interface EditFavouritesModalProps {
-  favourites: SessionMode[]
-  onSuccess: () => void
-  onDismiss: () => void
-}
-
-const EditFavouritesModal = (props: EditFavouritesModalProps) => {
-  const { favourites, onSuccess, onDismiss } = props
-
+const EditFavouritesModal = ({ favourites, onSuccess, onDismiss }: EditFavouritesModalProps) => {
   const [data, setData] = useState<SessionMode[]>([])
   const [filtered, setFiltered] = useState<SessionMode[]>([])
   const [add, setAdd] = useState<number[]>([])
@@ -59,21 +52,25 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
     }
   }, [presets]);
 
-  useEffect(() => {
-    if (showPlay) {
-      setFiltered(filtered.concat(data.filter((it) => it instanceof PlayMode)))
-    } else {
-      setFiltered(filtered.filter((it) => !(it instanceof PlayMode)))
-    }
-  }, [data, showPlay])
+  const handleToggleShowPlay = useCallback(() => {
+    setShowPlay(current => !current)
 
-  useEffect(() => {
-    if (showLearn) {
-      setFiltered(filtered.concat(data.filter((it) => it instanceof LearnMode)))
+    if (!showPlay) {
+      setFiltered(current => current.concat(data.filter((it) => it instanceof PlayMode)))
     } else {
-      setFiltered(filtered.filter((it) => !(it instanceof LearnMode)))
+      setFiltered(current => current.filter((it) => !(it instanceof PlayMode)))
     }
-  }, [showLearn])
+  }, [showPlay, filtered, data])
+
+  const handleToggleShowLearn = useCallback(() => {
+    setShowLearn(current => !current)
+
+    if (!showLearn) {
+      setFiltered(current => current.concat(data.filter((it) => it instanceof LearnMode)))
+    } else {
+      setFiltered(current => current.filter((it) => !(it instanceof LearnMode)))
+    }
+  }, [showLearn, filtered, data])
 
   const modalProps: ModalProps = {
     show: true,
@@ -118,9 +115,24 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
         )}
 
         <div className={styles.header}>
-          {!isLoading && ready && <FontAwesomeIcon icon={faStar} fixedWidth className={styles.icon} />}
-          <LoadingSpinner active={isLoading || !ready} variant="warning" className={styles.loading} />
-          <span className={styles.name}>{t("presets.edit.title")}</span>
+          {!isLoading && ready && (
+            <FontAwesomeIcon
+              fixedWidth
+              icon={faStar}
+              className={styles.icon
+            } />
+          )}
+
+          <LoadingSpinner
+            variant="warning"
+            className={styles.loading}
+            active={isLoading || !ready}
+          />
+
+          <span className={styles.name}>
+            {t("presets.edit.title")}
+          </span>
+
           <FontAwesomeIcon
             fixedWidth
             icon={faTimes}
@@ -151,18 +163,22 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                 </p>
 
                 <div className={styles.favourites}>
-                  {favourites.map((preset: SessionMode) => (
-                    <ExistingFavouriteButton
-                      key={preset.id}
-                      icon={preset.icon}
-                      name={preset.displayName}
-                      id={preset.favourite_id!}
-                      className={styles.favourite}
-                      selected={remove.includes(preset.favourite_id!)}
-                      onRemove={(id: number) => setRemove((existing) => existing.concat(id))}
-                      onCancel={(id: number) => setRemove((existing) => existing.filter((it) => it !== id))}
-                    />
-                  ))}
+                  {favourites.map((preset: SessionMode) => {
+                    const presetType = preset instanceof PlayMode ? 'play' : 'learn'
+
+                    return (
+                      <ExistingFavouriteButton
+                        icon={preset.icon}
+                        name={preset.displayName}
+                        id={preset.favourite_id!}
+                        className={styles.favourite}
+                        selected={remove.includes(preset.favourite_id!)}
+                        key={`existing-${presetType}-favourite-button-${preset.id}`}
+                        onRemove={(id: number) => setRemove((existing) => existing.concat(id))}
+                        onCancel={(id: number) => setRemove((existing) => existing.filter((it) => it !== id))}
+                      />
+                    )
+                  })}
 
                   {favourites.length === 0 && (
                     <p className={styles.empty} onClick={handleAddPresets}>
@@ -177,18 +193,21 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
                 </p>
 
                 <div className={styles.favourites}>
-                  {filtered.map((preset: SessionMode) => (
-                    <EditFavouriteButton
-                      id={preset.id}
-                      key={preset.id}
-                      icon={preset.icon}
-                      name={preset.displayName}
-                      className={styles.favourite}
-                      selected={add.includes(preset.id)}
-                      onAdd={(id: number) => setAdd((existing) => existing.concat(id))}
-                      onCancel={(id: number) => setAdd((existing) => existing.filter((it) => it !== id))}
-                    />
-                  ))}
+                  {filtered.map((preset: SessionMode) => {
+                    const presetType = preset instanceof PlayMode ? 'play' : 'learn'
+                    return (
+                      <EditFavouriteButton
+                        id={preset.id}
+                        icon={preset.icon}
+                        name={preset.displayName}
+                        className={styles.favourite}
+                        selected={add.includes(preset.id)}
+                        key={`edit-${presetType}-favourite-button-${preset.id}`}
+                        onAdd={(id: number) => setAdd((existing) => existing.concat(id))}
+                        onCancel={(id: number) => setAdd((existing) => existing.filter((it) => it !== id))}
+                      />
+                    )
+                  })}
                 </div>
 
                 {!isLoading && ready && filtered.length === 0 && (
@@ -203,7 +222,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
 
         <div className={styles.footer}>
           <Button
-            onClick={() => setShowPlay(!showPlay)}
+            onClick={handleToggleShowPlay}
             title={showPlay ? "Hide Play" : "Show Play"}
             className={[styles.play, !showPlay ? styles.disabled : ""].join(" ")}
           >
@@ -211,7 +230,7 @@ const EditFavouritesModal = (props: EditFavouritesModalProps) => {
           </Button>
 
           <Button
-            onClick={() => setShowLearn(!showLearn)}
+            onClick={handleToggleShowLearn}
             title={showLearn ? "Hide Learn" : "Show Learn"}
             className={[styles.learn, !showLearn ? styles.disabled : ""].join(" ")}
           >

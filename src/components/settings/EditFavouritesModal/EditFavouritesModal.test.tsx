@@ -166,7 +166,7 @@ test("Should deselect existing and new favourites when clicking them once select
 })
 
 test("Should toggle available play presets when clicking the filter play presets button", async () => {
-  // Return both the play and learn preset. The learn is already a favourite.
+  // Return both the play and learn preset. The learn preset is already a favourite.
   server.use(...useGetPresetsHandlers)
   const { component } = render(<EditFavouritesModal favourites={[learnPreset]} {...eventHandlers} />)
 
