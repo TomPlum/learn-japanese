@@ -14,15 +14,7 @@ import { Alert } from "react-bootstrap"
 import { useUserContext } from "context/UserContext";
 import useGetPresets from "api/hooks/presets/useGetPresets";
 import useGetDefaultPresets from "api/hooks/presets/useGetDefaultPresets";
-
-export interface PresetSelectionStepProps {
-  mode: AppMode
-  topic: Topic
-  preset?: SessionMode
-  isValid: (valid: boolean) => void
-  onSelect: (preset: SessionMode) => void
-  onChangeTopic: (topic: Topic) => void
-}
+import { PresetSelectionStepProps } from "components/layout/wizard/steps/PresetSelectionStep/types.ts";
 
 const PresetSelectionStep = (props: PresetSelectionStepProps) => {
   const { preset, mode, topic, onSelect, onChangeTopic, isValid } = props

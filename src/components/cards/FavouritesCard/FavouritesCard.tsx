@@ -78,7 +78,10 @@ const FavouritesCard = () => {
           </ScrollableContainer>
 
           {confirm && selected && (
-            <LaunchPresetConfirmationModal preset={selected} onDismiss={handleDismissConfirmation} />
+            <LaunchPresetConfirmationModal
+              preset={selected}
+              onDismiss={handleDismissConfirmation}
+            />
           )}
 
           {presets && editing && (

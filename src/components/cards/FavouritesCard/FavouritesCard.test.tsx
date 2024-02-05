@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react"
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import FavouritesCard from "./FavouritesCard"
 import { render } from "__test-utils__"
 import { server } from "__test-utils__/msw.ts"
@@ -98,7 +98,9 @@ test("Saving after updating favourites should reload the data", async () => {
 
   // Should render only the play favourite now
   expect(await component.findByTestId("favourite-button-1")).toBeInTheDocument()
-  expect(component.queryByText("Save")).not.toBeInTheDocument()
+  await waitFor(() => {
+    expect(component.queryByText("Save")).not.toBeInTheDocument()
+  })
 
   // Should stop rendering the edit modal
   expect(screen.queryByTestId("edit-favourites")).not.toBeInTheDocument()

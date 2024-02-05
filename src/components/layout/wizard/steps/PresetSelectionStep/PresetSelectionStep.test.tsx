@@ -1,7 +1,5 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
-import PresetSelectionStep, {
-  PresetSelectionStepProps
-} from "../../../../../components/layout/wizard/steps/PresetSelectionStep"
+import PresetSelectionStep from "../../../../../components/layout/wizard/steps/PresetSelectionStep"
 import Topic from "types/Topic"
 import { AppMode } from "types/AppMode"
 import { getValueLastCalledWith } from "__test-utils__/Queries"
@@ -22,6 +20,7 @@ import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings.ts
 import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings.ts";
 import QuestionType from "types/game/QuestionType.ts";
 import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings.ts";
+import { PresetSelectionStepProps } from "components/layout/wizard/steps/PresetSelectionStep/types.ts";
 
 const onSelectHandler = vi.fn()
 const onChangeTopicHandler = vi.fn()
@@ -145,10 +144,12 @@ test("Should render an error message if the service call fails and returns one",
 
 test("Selecting a preset should call the onSelect event handler with that preset", async () => {
   server.use(...useGetPresetsHandlers)
+  props.preset = undefined
   setup(testUser)
 
-  fireEvent.click(await screen.findByTestId("grid-item-1"))
+  await userEvent.click(await screen.findByTestId("grid-item-1"))
 
+  expect(await screen.findByTestId('inspectable')).toBeInTheDocument()
   expect(await screen.findByText("An example play preset desc")).toBeInTheDocument()
   expect(getValueLastCalledWith<PlayMode>(onSelectHandler).displayName).toBe("Test Play")
 })

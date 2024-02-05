@@ -14,7 +14,6 @@ export interface TopicSelectorProps {
 
 const TopicSelector = (props: TopicSelectorProps) => {
   const { topic, disabled, onSelect, className } = props
-console.log('isDisabled', disabled)
   const [selected, setSelected] = useState(topic)
 
   const handleChange = (topic: Topic) => {
