@@ -57,7 +57,7 @@ const useGetDefaultPresets = ({ enabled }: UseGetPresetsProps = { enabled: true 
   }, [])
 
   const getPresets = useCallback(async (): Promise<Presets> => {
-    const { data  } = await client.get<PresetsResponse>("/presets/default")
+    const { data } = await client.get<PresetsResponse>("/presets/default")
     const learnPresets = convertLearnPreset(data.learn)
     const playPresets = convertPlayPreset(data.play)
     return {
