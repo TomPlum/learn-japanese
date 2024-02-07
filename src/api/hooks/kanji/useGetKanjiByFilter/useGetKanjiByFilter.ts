@@ -10,6 +10,7 @@ import { KanjiResponseModel } from "api/hooks/kanji/types.ts";
 import { AxiosResponse } from 'axios'
 import { KanjiSearch } from "service/KanjiService.ts";
 import KanjiConverter from "converter/KanjiConverter.ts";
+import { queryKeys } from "api/queryKeys.ts";
 
 const converter = new KanjiConverter()
 
@@ -44,10 +45,10 @@ const useGetKanjiByFilter = ({ search, grades, levels, strokes, paging }: KanjiB
       pages: data.pages,
       quantity: data.total
     }
-  }, [client])
+  }, [client, search, grades, levels, strokes, paging])
 
   return useQuery({
-    queryKey: [],
+    queryKey: [queryKeys.getKanjiByFilter, search, grades, levels, strokes, paging.page, paging.size],
     queryFn: getKanjiByFilter
   })
 }

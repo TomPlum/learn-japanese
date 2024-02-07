@@ -1,4 +1,5 @@
 import { ExampleResponseModel, ReadingResponseModel } from "repository/KanjiRepository.ts";
+import { Kanji } from "types/kanji/Kanji.ts";
 
 export interface KanjiResponseModel {
   character: string
@@ -10,4 +11,9 @@ export interface KanjiResponseModel {
   readings: ReadingResponseModel[]
   examples: ExampleResponseModel[]
   tags: string[]
+}
+
+export interface KanjiResult {
+  value: Kanji
+  field?: string
 }
