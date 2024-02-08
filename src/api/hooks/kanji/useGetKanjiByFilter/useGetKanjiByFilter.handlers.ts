@@ -8,6 +8,12 @@ export const useGetKanjiByFilterHandlers: RequestHandler[] = [
   })
 ]
 
+export const useGetKanjiByFilterErrorHandlers: RequestHandler[] = [
+  http.post('*/kanji/by-filter', () => {
+    return HttpResponse.error()
+  })
+]
+
 export const useGetCustomKanjiByFilterHandlers = (response: KanjiSearchResponseModel): RequestHandler[] => {
   return [
     http.post('*/kanji/by-filter', () => {

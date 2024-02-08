@@ -1,6 +1,5 @@
 import { Alert, Col, Container, Row } from "react-bootstrap"
 import { useEffect, useState } from "react"
-import KanjiService, { KanjiResult } from "../../../service/KanjiService"
 import { KyoikuGrade } from "types/kanji/KyoikuGrade"
 import LoadingSpinner from "../../ui/loading/LoadingSpinner"
 import KanjiSearchResult from "../../ui/KanjiSearchResult"
@@ -15,9 +14,10 @@ import ExampleDisplay from "../../ui/display/ExampleDisplay"
 import SimplePagination from "../../ui/paging/SimplePagination"
 import JLTPLevel from "types/learn/JLTPLevel"
 import { useFontContext } from "context/FontContext";
+import useGetKanjiByFilter from "api/hooks/kanji/useGetKanjiByFilter";
+import { KanjiResult } from "api/hooks/kanji/types.ts";
 
 const KanjiBankPage = () => {
-  const service = new KanjiService()
   const { font } = useFontContext()
 
   const [kanji, setKanji] = useState<KanjiResult[]>([])
@@ -33,38 +33,34 @@ const KanjiBankPage = () => {
   const [levels, setLevels] = useState<JLTPLevel[]>([])
   const [strokes, setStrokes] = useState<number | undefined>(undefined)
 
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
   const [inExampleModal, setInExamplesModal] = useState(false)
 
+  const { data, isLoading, error, refetch } = useGetKanjiByFilter({
+    paging: {
+      page,
+      size: pageSize
+    },
+    search,
+    grades,
+    strokes,
+    levels
+  })
+
   useEffect(() => {
-    setError("")
-    setLoading(true)
+    if (data) {
+      setKanji(data.kanji)
+      setLastPage(data.pages)
+      setResults(data.quantity)
 
-    service
-      .filter(page, pageSize, search, grades, levels, strokes)
-      .then((response) => {
-        const data = response.kanji
+      if (data.kanji.length > 0) {
+        setSelected(data.kanji[0])
+      }
+    }
+  }, [data]);
 
-        setKanji(data)
-        setLastPage(response.pages)
-        setResults(response.quantity)
-
-        if (data && data.length > 0) {
-          setSelected(data[0])
-        }
-
-        if (response.error) {
-          setError(response.error)
-        }
-      })
-      .catch((response) => {
-        setError(response.error)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [page, pageSize, search, grades, levels, strokes])
+  useEffect(() => {
+    refetch()
+  }, [page, search, grades, levels, pageSize]);
 
   const onSearch = (parameters: KeywordMeta[]) => {
     parameters.forEach((meta: KeywordMeta) => {
@@ -208,17 +204,23 @@ const KanjiBankPage = () => {
 
         <Col lg={10} className={styles.rightSideWrapper}>
           {error && (
-            <Alert variant="danger" className={styles.error}>
-              {error}
+            <Alert variant="danger" className={styles.error} data-testid='kanji-bank-page-error'>
+              {error.message}
             </Alert>
           )}
 
-          <LoadingSpinner size="60px" active={loading} thickness="2em" variant="warning" className={styles.loading} />
+          <LoadingSpinner
+            size="60px"
+            thickness="2em"
+            variant="warning"
+            active={isLoading}
+            className={styles.loading}
+          />
 
           <div className={styles.header}>
             <KeywordSearchField
               results={results}
-              disabled={loading}
+              disabled={isLoading}
               onSubmit={onSearch}
               className={styles.search}
               onRemoveFilter={onRemoveSearchParam}
@@ -236,7 +238,7 @@ const KanjiBankPage = () => {
           )}
 
           <div className={styles.kanjiWrapper}>
-            {!error && !loading && search && kanji.length === 0 && (
+            {!error && !isLoading && search && kanji.length === 0 && (
               <div className={styles.emptyWrapper}>
                 <FontAwesomeIcon fixedWidth size="sm" className={styles.icon} icon={faSearchMinus} />
                 {<span>{`No results for '${search}'...`}</span>}
@@ -264,7 +266,7 @@ const KanjiBankPage = () => {
                   const value = result.value
                   const selectedClass =
                     value.getUniqueID() === selected?.value.getUniqueID() ? styles.highlight : styles.kanji
-                  const blurClass = loading ? styles.frosted : undefined
+                  const blurClass = isLoading ? styles.frosted : undefined
                   return (
                     <KanjiSearchResult
                       result={result}
@@ -283,7 +285,7 @@ const KanjiBankPage = () => {
           <div className={styles.footer}>
             <SimplePagination
               page={page}
-              disabled={loading}
+              disabled={isLoading}
               lastPage={lastPage}
               className={styles.pagination}
               onPageChange={(page: number) => setPage(page)}
@@ -292,7 +294,7 @@ const KanjiBankPage = () => {
             <ValueSelector
               prefix="Show"
               placement="top"
-              disabled={loading}
+              disabled={isLoading}
               selected={pageSize}
               id="page-size-selector"
               className={styles.pageSize}
