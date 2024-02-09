@@ -234,7 +234,10 @@ const KanjiBankPage = () => {
           </div>
 
           {inExampleModal && selected && (
-            <ExampleDisplay examples={selected.value.examples} onDismiss={() => setInExamplesModal(false)} />
+            <ExampleDisplay
+              examples={selected.value.examples}
+              onDismiss={() => setInExamplesModal(false)}
+            />
           )}
 
           <div className={styles.kanjiWrapper}>

@@ -96,6 +96,22 @@ const bird = new Kanji(
   8,
   []
 )
+const birdResponse: KanjiResponseModel = {
+  character: "鳥",
+  grade: 2,
+  jlpt: 5,
+  strokes: 9,
+  meanings: ["bird"],
+  examples: [],
+  source: "",
+  tags: [],
+  readings: [
+    {
+      value: "とり",
+      type: "on"
+    }
+  ]
+}
 const person = new Kanji(
   "人",
   [new KanjiReading("jin", "じん", ReadingType.ON)],
@@ -107,6 +123,23 @@ const person = new Kanji(
   1,
   ["people"]
 )
+
+const personResponse: KanjiResponseModel = {
+  character: "人",
+  grade: 1,
+  jlpt: 5,
+  strokes: 1,
+  meanings: ["person"],
+  examples: [],
+  source: "",
+  tags: [],
+  readings: [
+    {
+      value: "じん",
+      type: "on"
+    }
+  ]
+}
 
 const setup = () => {
   const { component } = render(<KanjiBankPage />)
@@ -363,14 +396,20 @@ test("Clicking a kanji should select it and display its tags", async () => {
 })
 
 test("Should render a hyphen for the tags value if the selected kanji has none", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: person, field: "meaning" },
-      { value: bird, field: "meaning" }
+  server.use(...useGetCustomKanjiByFilterHandlers({
+    results: [
+      {
+        field: 'meaning',
+        value: personResponse
+      },
+      {
+        field: 'meaning',
+        value: birdResponse
+      }
     ],
     pages: 5,
-    quantity: 124
-  })
+    total: 124
+  }))
   setup()
   expect(await screen.findByText("bird")).toBeInTheDocument()
 
