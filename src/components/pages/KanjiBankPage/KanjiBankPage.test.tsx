@@ -551,20 +551,19 @@ test("Dismissing a grade filter parameter should reset the grades to an empty ar
   expect(await screen.findByText("bird")).toBeInTheDocument()
 
   // Filter by grades 1 and 2 and return some other kanji, so it re-renders
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: one, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }, grades: [1, 2] })
   fireEvent.change(search, { target: { value: ">grade=1,2" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
+
+  // If the API request was made with the correct grades field value, it should return the one kanji
   expect(await screen.findByText("いち")).toBeInTheDocument()
 
-  // It should call the service with the selected grades
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [KyoikuGrade.ONE, KyoikuGrade.TWO], [], undefined)
-
   // Dismiss the grade filter
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: fish, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: fishResponse }], pages: 1, total: 1 }, grades: [] })
   fireEvent.click(screen.getByTestId("dismiss-tag-grade"))
-  expect(await screen.findByText("さかな")).toBeInTheDocument()
 
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [], [], undefined)
+  // If the API request was made with the correct grades field value (empty), it should return the fish kanji
+  expect(await screen.findByText("さかな")).toBeInTheDocument()
 })
 
 test("Dismissing a level filter parameter should reset the levels to an empty array", async () => {
