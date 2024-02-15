@@ -8,6 +8,10 @@ export interface GetKanjiByFilterMswArgs {
   grades?: number[]
   levels?: number[]
   strokes?: number
+  pagination?: {
+    page: number
+    size: number
+  }
 }
 
 export const useGetKanjiByFilterHandlers: RequestHandler[] = [
@@ -30,11 +34,23 @@ const logMismatchStubError = <T,>(field: string, actual: T, expected: T) => {
 }
 
 export const useGetCustomKanjiByFilterHandlers = ({
-   response, search, grades, levels, strokes
+   response, search, grades, levels, strokes, pagination
 }: GetKanjiByFilterMswArgs): RequestHandler[] => {
   return [
     http.post("*/kanji/by-filter", async ({ request }) => {
       const body = await request.json() as KanjiByFilterRequest
+
+      if (pagination) {
+        if (pagination.page != body.paging.page) {
+          logMismatchStubError('pageNumber', body.paging.page, pagination.page)
+          return HttpResponse.error()
+        }
+
+        if (pagination.size != body.paging.size) {
+          logMismatchStubError('pageSize', body.paging.size, pagination.size)
+          return HttpResponse.error()
+        }
+      }
 
       if (body.search) {
         if (body.search === search) {

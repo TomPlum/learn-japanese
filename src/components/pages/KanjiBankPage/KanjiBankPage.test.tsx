@@ -604,12 +604,18 @@ test("Dismissing a strokes filter parameter should reset the strokes to undefine
 
 test("Clicking the next page button should render the next page of kanji", async () => {
   // Start with just the "bird" kanji
-  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: birdResponse }], pages: 2, total: 1 }})
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: birdResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 0 }
+  })
   const { nextPage } = setup()
   expect(await screen.findByText("bird")).toBeInTheDocument()
 
   // Click the 'Next' button in the pagination controls
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: oneResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 1 }
+  })
   fireEvent.click(nextPage)
   expect(await screen.findByText("いち")).toBeInTheDocument()
 })
