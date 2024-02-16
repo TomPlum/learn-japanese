@@ -620,67 +620,50 @@ test("Clicking the next page button should render the next page of kanji", async
   expect(await screen.findByText("いち")).toBeInTheDocument()
 })
 
-test("Clicking the next page button should call the service with the next page number", async () => {
-  // Start with just the "person" kanji
-  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: personResponse }], pages: 2, total: 1 }})
-  const { nextPage } = setup()
-  expect(await screen.findByText("person")).toBeInTheDocument()
-
-  // Click the 'Next' button in the pagination controls
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 2, quantity: 1 })
-  fireEvent.click(nextPage)
-  expect(mockGetKanji).toHaveBeenLastCalledWith(1, 40, "", [], [], undefined)
-})
-
 test("Clicking the previous page button should render the previous page of kanji", async () => {
   // Start with just the "bird" kanji
-  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: birdResponse }], pages: 2, total: 1 }})
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: birdResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 0 }
+  })
   const { nextPage, prevPage } = setup()
   expect(await screen.findByText("bird")).toBeInTheDocument()
 
   // Click the 'Next' button in the pagination controls (so we can go back after)
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: oneResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 1 }
+  })
   fireEvent.click(nextPage)
   expect(await screen.findByText("いち")).toBeInTheDocument()
 
   // Click the 'Prev' button in the pagination controls
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: person, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: personResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 0 }
+  })
   fireEvent.click(prevPage)
   expect(await screen.findByText("じん")).toBeInTheDocument()
-})
-
-test("Clicking the previous page button should call the service with the previous page number", async () => {
-  // Start with just the "one" kanji
-  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 2, total: 1 }})
-  const { nextPage, prevPage } = setup()
-  expect(await screen.findByText("one")).toBeInTheDocument()
-
-  // Click the 'Next' button in the pagination controls (so we can go back after)
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 2, quantity: 1 })
-  fireEvent.click(nextPage)
-  expect(await screen.findByText("とり")).toBeInTheDocument()
-  expect(mockGetKanji).toHaveBeenLastCalledWith(1, 40, "", [], [], undefined)
-
-  // Click the 'Prev' button in the pagination controls
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: person, field: "meaning" }], pages: 2, quantity: 1 })
-  fireEvent.click(prevPage)
-  expect(await screen.findByText("じん")).toBeInTheDocument()
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [], [], undefined)
 })
 
 test("Changing the page size should call the service with the new value", async () => {
   // Start with just the "one" kanji
-  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 2, total: 1 }})
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: oneResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 0 }
+  })
   const { pageSizeSelector } = setup()
   expect(await screen.findByText("one")).toBeInTheDocument()
 
   // Click the page size selector and pick 'Show 60'
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: birdResponse }], pages: 2, total: 1 },
+    pagination: { size: 60, page: 0 }
+  })
   fireEvent.click(pageSizeSelector)
   expect(await screen.findByText("Show 60")).toBeInTheDocument()
   fireEvent.click(screen.getByText("Show 60"))
 
   // Should re-render
   expect(await screen.findByText("とり")).toBeInTheDocument()
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 60, "", [], [], undefined)
 })
