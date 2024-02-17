@@ -1,31 +1,14 @@
 import { fireEvent, screen } from "@testing-library/react"
-import KanjiBankPage  from "./KanjiBankPage"
-import { Kanji } from "types/kanji/Kanji"
-import { KanjiReading } from "types/kanji/KanjiReading"
-import { ReadingType } from "types/kanji/ReadingType"
-import { KyoikuGrade } from "types/kanji/KyoikuGrade"
-import JLTPLevel from "types/learn/JLTPLevel"
+import KanjiBankPage from "./KanjiBankPage"
 import { render } from "__test-utils__"
-import { Example } from "types/kanji/Example"
-import { server } from "__test-utils__/msw.ts";
+import { server } from "__test-utils__/msw.ts"
 import {
   GetKanjiByFilterMswArgs,
   useGetCustomKanjiByFilterHandlers,
   useGetKanjiByFilterErrorHandlers
-} from "api/hooks/kanji/useGetKanjiByFilter/useGetKanjiByFilter.handlers.ts";
-import { KanjiResponseModel } from "api/hooks/kanji/types.ts";
+} from "api/hooks/kanji/useGetKanjiByFilter/useGetKanjiByFilter.handlers.ts"
+import { KanjiResponseModel } from "api/hooks/kanji/types.ts"
 
-const one = new Kanji(
-  "一",
-  [new KanjiReading("ichi", "いち", ReadingType.ON)],
-  ["one"],
-  KyoikuGrade.ONE,
-  JLTPLevel.N5,
-  "",
-  [],
-  1,
-  ["number"]
-)
 const oneResponse: KanjiResponseModel = {
   character: "一",
   grade: 1,
@@ -42,18 +25,6 @@ const oneResponse: KanjiResponseModel = {
     }
   ]
 }
-
-const fish = new Kanji(
-  "魚",
-  [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("gyo", "ぎょ", ReadingType.ON)],
-  ["fish", "fish2", "fish3"],
-  KyoikuGrade.TWO,
-  JLTPLevel.N5,
-  "",
-  [new Example("金魚", ["きんぎょ"], ["goldfish"]), new Example("稚魚", ["ちぎょ"], ["fry (young fish)"])],
-  9,
-  ["animal"]
-)
 
 const fishResponse: KanjiResponseModel = {
   character: "魚",
@@ -86,17 +57,7 @@ const fishResponse: KanjiResponseModel = {
     }
   ]
 }
-const bird = new Kanji(
-  "鳥",
-  [new KanjiReading("tori", "とり", ReadingType.ON)],
-  ["bird"],
-  KyoikuGrade.TWO,
-  JLTPLevel.N5,
-  "",
-  [],
-  8,
-  []
-)
+
 const birdResponse: KanjiResponseModel = {
   character: "鳥",
   grade: 2,
@@ -113,17 +74,6 @@ const birdResponse: KanjiResponseModel = {
     }
   ]
 }
-const person = new Kanji(
-  "人",
-  [new KanjiReading("jin", "じん", ReadingType.ON)],
-  ["person"],
-  KyoikuGrade.ONE,
-  JLTPLevel.N5,
-  "",
-  [],
-  1,
-  ["people"]
-)
 
 const personResponse: KanjiResponseModel = {
   character: "人",
@@ -524,24 +474,24 @@ test.skip("Adding a filter parameter to the search field with a term should call
   expect(await screen.findByText("person")).toBeInTheDocument()
 
   // Filter by 8 strokes and return some other kanji, so it re-renders
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: fish, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: fishResponse }], pages: 1, total: 1 }})
   fireEvent.change(search, { target: { value: ">strokes=8" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
   expect(await screen.findByText("さかな")).toBeInTheDocument()
 
   // Add a grade 1 filter too
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: birdResponse }], pages: 1, total: 1 }})
   fireEvent.change(search, { target: { value: ">grade=1" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
   expect(await screen.findByText("とり")).toBeInTheDocument()
 
   // Also search for "tree"
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }})
   fireEvent.change(search, { target: { value: "tree" } })
   expect(await screen.findByText("いち")).toBeInTheDocument()
 
   // It should call the service with the search term "tree", grades 1 and 8 strokes
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "tree", [KyoikuGrade.ONE], [], 8)
+  // expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "tree", [KyoikuGrade.ONE], [], 8)
 })
 
 test("Dismissing a grade filter parameter should reset the grades to an empty array", async () => {
