@@ -246,68 +246,6 @@ describe("Kanji Repository", () => {
     })
   })
 
-  describe("Get By Filter", () => {
-    it("Should call the rest client with the correct endpoint", () => {
-      mockPost.mockResolvedValueOnce({ data: { results: [], pages: 5, total: 200 } })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).then(() => {
-        expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-filter", {
-          search: "person",
-          grades: [1, 2, 3],
-          levels: [5, 4],
-          strokes: 10,
-          paging: {
-            page: 0,
-            size: 10
-          }
-        })
-      })
-    })
-
-    it("Should return the data if the API call is successful and has data", () => {
-      mockPost.mockResolvedValueOnce({
-        data: { results: [{ field: "meaning", value: exampleKanji }], pages: 4, total: 100 }
-      })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).then((response) => {
-        expect(response.results).toStrictEqual([{ field: "meaning", value: exampleKanji }])
-      })
-    })
-
-    it("Should return an undefined error if the API call was successful and has data", () => {
-      mockPost.mockResolvedValueOnce({ data: { results: [{ field: "meaning", value: exampleKanji }] } })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).then((response) => {
-        expect(response.error).toBeUndefined()
-      })
-    })
-
-    it("Should return an empty results array if the API call was successful but with no data", () => {
-      mockPost.mockResolvedValueOnce({ data: undefined })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).then((response) => {
-        expect(response.results).toStrictEqual([])
-      })
-    })
-
-    it("Should return a generic error message if the the API call was successful but with no data", () => {
-      mockPost.mockResolvedValueOnce({ data: undefined })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).then((response) => {
-        expect(response.error).toBe("No data in response")
-      })
-    })
-
-    it("Should return an empty results array if the API call fails", () => {
-      mockPost.mockRejectedValueOnce({ data: undefined })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).catch((response) => {
-        expect(response.results).toStrictEqual([])
-      })
-    })
-
-    it("Should return the API error message if the API call fails", () => {
-      mockPost.mockRejectedValueOnce({ error: "An internal sever error occurred." })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).catch((response) => {
-        expect(response.error).toBe("An internal sever error occurred.")
-      })
-    })
-  })
-
   describe("Get Random Kanji", () => {
     it("Should call the API with the correct endpoint", () => {
       mockGet.mockResolvedValueOnce({})

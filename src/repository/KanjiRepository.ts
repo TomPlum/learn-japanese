@@ -54,14 +54,6 @@ interface KanjiSearchResults {
   error?: string
 }
 
-interface KanjiByFilterRequest {
-  search?: string
-  grades?: number[]
-  levels?: number[]
-  strokes?: number
-  paging: PaginationRequest
-}
-
 export interface Paged<T extends Learnable> {
   results: T[]
   pages: number
@@ -111,55 +103,6 @@ export default class KanjiRepository implements Repository<Kanji> {
   public async getBySearchTerm(page: number, pageSize: number, search: string): Promise<KanjiSearchResults> {
     const request: PaginationRequest = { page: page, size: pageSize }
     return RestClient.post<KanjiSearchResponseModel>("/kanji/by-term/" + search, request)
-      .then((response) => {
-        const data = response.data
-
-        if (data) {
-          return this.convertKanjiResponseModel(data)
-        }
-
-        return Promise.resolve({
-          results: [],
-          pages: 0,
-          quantity: 0,
-          error: "No data in response"
-        })
-      })
-      .catch((response) => {
-        return Promise.reject({ results: [], pages: 0, quantity: 0, error: response.error })
-      })
-  }
-
-  /**
-   * Retrieves all the kanji that match any of the given criteria.
-   * @param page The page to retrieve. Starts from 0.
-   * @param pageSize The size of the page.
-   * @param search The term to search by.
-   * @param grades The Kyouiku grades to filter by.
-   * @param levels The JLPT levels to filter by.
-   * @param strokes The number of strokes to filter by.
-   * @return results A collection of matching kanji and the field that it was matched on.
-   */
-  public async getByFilter(
-    page: number,
-    pageSize: number,
-    search: string,
-    grades: number[],
-    levels: number[],
-    strokes?: number
-  ): Promise<KanjiSearchResults> {
-    const request: KanjiByFilterRequest = {
-      search: search,
-      grades: grades,
-      levels: levels,
-      strokes: strokes,
-      paging: {
-        page: page,
-        size: pageSize
-      }
-    }
-
-    return RestClient.post<KanjiSearchResponseModel>("/kanji/by-filter", request)
       .then((response) => {
         const data = response.data
 

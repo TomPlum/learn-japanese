@@ -3,5 +3,6 @@ export const queryKeys = {
   getPresets: 'getPresets',
   getDefaultPresets: 'getDefaultPresets',
   getKanjiByCharacter: 'getKanjiByCharacter',
-  getKanjiByFilter: 'getKanjiByFilter'
+  getKanjiByFilter: 'getKanjiByFilter',
+  getRandomKanji: 'getRandomKanji'
 }
