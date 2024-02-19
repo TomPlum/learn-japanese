@@ -1,8 +1,6 @@
 import DashboardCard from "../../layout/card/DashboardCard"
 import DashboardCardHeader from "../../layout/card/DashboardCardHeader"
-import KanjiService from "../../../service/KanjiService"
-import { useEffect, useState } from "react"
-import { Kanji } from "types/kanji/Kanji"
+import { useState } from "react"
 import styles  from "./KanjiShowcaseCard.module.scss"
 import Copyable from "../../ui/Copyable"
 import {
@@ -18,44 +16,16 @@ import Inspectable from "../../ui/Inspectable"
 import ExampleDisplay from "../../ui/display/ExampleDisplay"
 import { useTranslation } from "react-i18next"
 import { useFontContext } from "context/FontContext";
+import useGetRandomKanji from "api/hooks/kanji/useGetRandomKanji";
 
 const KanjiShowcaseCard = () => {
   const MAX_MEANINGS_LENGTH = 23
 
-  const [loading, setLoading] = useState(false)
-  const [updating, setUpdating] = useState(false)
-  const [error, setError] = useState("")
-  const [kanji, setKanji] = useState<Kanji | undefined>(undefined)
   const [inExamples, setInExamples] = useState(false)
 
-  const service = new KanjiService()
   const { font } = useFontContext()
+  const { data: kanji, error, isLoading, refetch: shuffleKanji } = useGetRandomKanji()
   const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.kanji-showcase" })
-
-  const shuffleKanji = () => {
-    return service
-      .randomKanji()
-      .then((response) => {
-        if (response.error) {
-          setError(response.error)
-        } else {
-          setKanji(response.value)
-        }
-      })
-      .catch((response) => {
-        setError(response.error)
-      })
-  }
-
-  useEffect(() => {
-    setLoading(true)
-    shuffleKanji().finally(() => setLoading(false))
-  }, [])
-
-  const handleShuffle = () => {
-    setUpdating(true)
-    shuffleKanji().finally(() => setUpdating(false))
-  }
 
   const getTrimmedMeanings = () => {
     const meanings = kanji?.getMeanings().join(", ")
@@ -96,22 +66,36 @@ const KanjiShowcaseCard = () => {
   }
 
   return (
-    <DashboardCard loading={loading || !ready} updating={updating} error={error} height={300} id="kanji-showcase-card">
-      {inExamples && <ExampleDisplay examples={examples} onDismiss={() => setInExamples(false)} />}
+    <DashboardCard loading={isLoading || !ready} updating={isLoading} error={error?.message} height={300} id="kanji-showcase-card">
+      {inExamples && (
+        <ExampleDisplay
+          examples={examples}
+          onDismiss={() => setInExamples(false)}
+        />
+      )}
 
       <DashboardCard.Header>
-        <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
-        <DashboardCardHeader.Icon icon={faRandom} onClick={handleShuffle} disabled={updating} title={t("shuffle")} />
+        <DashboardCardHeader.Title>
+          {t("title")}
+        </DashboardCardHeader.Title>
+
+        <DashboardCardHeader.Icon
+          icon={faRandom}
+          disabled={isLoading}
+          title={t("shuffle")}
+          onClick={shuffleKanji}
+        />
       </DashboardCard.Header>
 
       <DashboardCard.Body className={styles.body}>
         <div className={styles.main}>
           <div className={styles.attributes}>
-            <div className={styles.attribute} title={t("grade")}>
+            <div className={styles.attribute} title={t("grade")} data-testid='kanji-showcase-grade'>
               <FontAwesomeIcon icon={faChalkboardTeacher} fixedWidth />
               <span>{kanji?.grade.value ?? "N/A"}</span>
             </div>
-            <div className={styles.attribute} title={t("jlpt")}>
+
+            <div className={styles.attribute} title={t("jlpt")} data-testid='kanji-showcase-jlpt'>
               <FontAwesomeIcon icon={faPencilAlt} fixedWidth />
               <span>{kanji?.jlpt.value ?? "?"}</span>
             </div>
@@ -126,11 +110,12 @@ const KanjiShowcaseCard = () => {
           </div>
 
           <div className={styles.attributes}>
-            <div className={styles.attribute} title={t("strokes")}>
+            <div className={styles.attribute} title={t("strokes")} data-testid='kanji-showcase-strokes'>
               <FontAwesomeIcon icon={faPaintBrush} fixedWidth />
               <span>{kanji?.strokes ?? "N/A"}</span>
             </div>
-            <div className={examplesClasses.join(" ")} title={t("examples")} onClick={handleViewExamples}>
+
+            <div className={examplesClasses.join(" ")} title={t("examples")} onClick={handleViewExamples} data-testid='kanji-showcase-example-count'>
               <FontAwesomeIcon icon={faListAlt} fixedWidth className={styles.icon} />
               <span>{kanji?.examples.length}</span>
             </div>
