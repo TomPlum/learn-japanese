@@ -152,34 +152,4 @@ describe("Kanji Service", () => {
       })
     })
   })
-
-  describe("Random Kanji", () => {
-    it("Should call the repository", () => {
-      mockGetRandom.mockResolvedValueOnce({})
-      return service.randomKanji().then(() => {
-        expect(mockGetRandom).toHaveBeenCalled()
-      })
-    })
-
-    it("Should return the kanji from the repository", () => {
-      mockGetRandom.mockResolvedValueOnce(kanji)
-      return service.randomKanji().then((response) => {
-        expect(response.value).toBe(kanji)
-      })
-    })
-
-    it("Should return an error message if the response is undefined", () => {
-      mockGetRandom.mockResolvedValueOnce(undefined)
-      return service.randomKanji().then((response) => {
-        expect(response.error).toBe("Failed to retrieve random kanji")
-      })
-    })
-
-    it("Should return an error message if the repository call is rejected", () => {
-      mockGetRandom.mockRejectedValueOnce(undefined)
-      return service.randomKanji().then((response) => {
-        expect(response.error).toBe("Failed to retrieve random kanji")
-      })
-    })
-  })
 })

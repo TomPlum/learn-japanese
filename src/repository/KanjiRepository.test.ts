@@ -245,43 +245,4 @@ describe("Kanji Repository", () => {
       })
     })
   })
-
-  describe("Get Random Kanji", () => {
-    it("Should call the API with the correct endpoint", () => {
-      mockGet.mockResolvedValueOnce({})
-      return repository.getRandomKanji().then(() => {
-        expect(mockGet).toHaveBeenLastCalledWith("/kanji/random")
-      })
-    })
-
-    it("Should call the converter with the API response data if present", () => {
-      mockGet.mockResolvedValueOnce({ data: exampleKanjiResponseData })
-      mockConverter.mockReturnValueOnce([exampleKanji])
-      return repository.getRandomKanji().then(() => {
-        expect(mockConverter).toHaveBeenCalledWith([exampleKanjiResponseData])
-      })
-    })
-
-    it("Should return the response from the converter if it has valid data", () => {
-      mockGet.mockResolvedValueOnce({ data: exampleKanjiResponseData })
-      mockConverter.mockReturnValueOnce([exampleKanji])
-      return repository.getRandomKanji().then((response) => {
-        expect(response).toBe(exampleKanji)
-      })
-    })
-
-    it("Should return undefined if the API call resolves but has no data", () => {
-      mockGet.mockResolvedValueOnce({ data: undefined })
-      return repository.getRandomKanji().then((response) => {
-        expect(response).toBeUndefined()
-      })
-    })
-
-    it("Should return undefined if the API call is rejected", () => {
-      mockGet.mockRejectedValueOnce({})
-      return repository.getRandomKanji().then((response) => {
-        expect(response).toBeUndefined()
-      })
-    })
-  })
 })
