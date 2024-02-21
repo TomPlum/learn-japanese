@@ -1,10 +1,10 @@
-import KanjiSettings from "types/session/settings/data/KanjiSettings.ts";
 import { PaginationRequest } from "rest/request/PaginationRequest.ts";
 import { KanjiResponseModel } from "repository/KanjiRepository.ts";
 import { Learnable } from "types/learn/Learnable.ts";
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts";
 
 export interface GetKanjiPageArgs {
-  settings: KanjiSettings,
+  grades?: KyoikuGrade[],
   pagination: PaginationRequest
 }
 

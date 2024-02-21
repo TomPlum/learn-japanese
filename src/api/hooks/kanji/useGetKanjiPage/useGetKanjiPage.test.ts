@@ -3,7 +3,6 @@ import { useGetKanjiPageHandlers } from "api/hooks/kanji/useGetKanjiPage/useGetK
 import { renderHook } from "@testing-library/react";
 import useGetKanjiPage from "api/hooks/kanji/useGetKanjiPage/useGetKanjiPage.ts";
 import { wrapper } from "__test-utils__";
-import KanjiSettings from "types/session/settings/data/KanjiSettings.ts";
 import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts";
 import { Kanji } from "types/kanji/Kanji.ts";
 import { Paged } from "api/hooks/kanji/useGetKanjiPage/types.ts";
@@ -19,7 +18,7 @@ describe('Get Kanji Page API Hook', () => {
     const { result } = renderHook(useGetKanjiPage, { wrapper })
 
     const response = await result.current.mutateAsync({
-      settings: new KanjiSettings([KyoikuGrade.TWO], [], 50),
+      grades: [KyoikuGrade.TWO],
       pagination: {
         page: 1,
         size: 10
