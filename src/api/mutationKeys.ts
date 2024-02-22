@@ -3,5 +3,6 @@ export const mutationKeys = {
   saveLearnPreset: 'saveLearnPreset',
   deleteFavouritePreset: 'deleteFavouritePreset',
   updatePresetFavourites: 'updatePresetFavourites',
-  getKanjiPage: 'getKanjiPage'
+  getKanjiPage: 'getKanjiPage',
+  getKanjiByTerm: 'getKanjiByTerm'
 }

@@ -18,6 +18,13 @@ const converter = new KanjiConverter()
 const useGetKanjiPage = () => {
   const client = useClient()
 
+  /**
+   * Retrieves a single page of kanji characters with the given size.
+   * Kyoiku grades can optionally be provided to narrow the search scope.
+   * @param page The page to retrieve. Starts from 0.
+   * @param size The size of the page.
+   * @param grades The grades to include. Omitting includes all.
+   */
   const getKanjiPage = useCallback(async ({
     grades,
     pagination = { page: 0, size: 9999 }
