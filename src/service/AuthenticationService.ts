@@ -3,20 +3,7 @@ import { UserPreferencesResponse } from "./UserService"
 import DataResponse from "../rest/response/DataResponse"
 import UpdateResponse from "../rest/response/UpdateResponse"
 
-export interface LoginResponse {
-  username: string
-  email: string
-  nickname?: string
-  roles: string[]
-  locked: boolean
-  expired: boolean
-  credentialsExpired: boolean
-  creationDate: string
-  enabled: boolean
-  token: string
-  refreshToken: string
-  preferences: UserPreferencesResponse
-}
+
 
 export interface SignUpResponse {
   username: string
