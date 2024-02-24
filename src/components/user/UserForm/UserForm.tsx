@@ -41,7 +41,7 @@ const UserForm = (props: UserFormProps) => {
       </Modal.Header>
 
       {login ? (
-        <LoginForm onSuccess={onClose} username={registeredUsername} />
+        <LoginForm onSuccess={onClose} registeredUsername={registeredUsername} />
       ) : (
         <RegistrationForm onSuccess={onSuccessfulRegistration} />
       )}

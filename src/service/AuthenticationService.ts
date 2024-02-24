@@ -1,5 +1,4 @@
-import RestClient, { APIResponse } from "../rest/RestClient"
-import { UserPreferencesResponse } from "./UserService"
+import RestClient from "../rest/RestClient"
 import DataResponse from "../rest/response/DataResponse"
 import UpdateResponse from "../rest/response/UpdateResponse"
 
@@ -27,27 +26,6 @@ const register = (
   })
 }
 
-const login = (username: string, password: string): Promise<LoginResponse> => {
-  return RestClient.post<LoginResponse>("/user/login", {
-    username: username,
-    password: password
-  })
-    .then((response: APIResponse<LoginResponse>) => {
-      if (response?.data?.token) {
-        localStorage.setItem("user", JSON.stringify(response.data))
-      } else {
-        return Promise.reject({ error: "An error occurred when trying to authenticate the user." })
-      }
-      return response.data
-    })
-    .catch((response: APIResponse<LoginResponse>) => {
-      if (response.status === 401) {
-        return Promise.reject("AUTHENTICATION_ERROR")
-      }
-      return Promise.reject("Unknown login error: " + response.error)
-    })
-}
-
 const logout = () => {
   localStorage.removeItem("user")
 }
@@ -68,4 +46,4 @@ const deleteAccount = (password: string): Promise<UpdateResponse> => {
     })
 }
 
-export default { register, login, logout, deleteAccount }
+export default { register, logout, deleteAccount }

@@ -6,3 +6,15 @@ export const useLoginHandlers: RequestHandler[] = [
     return HttpResponse.json(useLoginResponses)
   })
 ]
+
+export const useLoginBadRequestHandlers: RequestHandler[] = [
+  http.post('*/user/login', () => {
+    return new HttpResponse(null, { status: 401 })
+  })
+]
+
+export const useLoginErrorHandlers: RequestHandler[] = [
+  http.post('*/user/login', () => {
+    return HttpResponse.error()
+  })
+]

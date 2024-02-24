@@ -1,5 +1,5 @@
 import RestClient from "../rest/RestClient.ts"
-import authentication, { LoginResponse } from "./AuthenticationService.ts"
+import authentication from "./AuthenticationService.ts"
 import { localStorageMock } from "../setupTests.ts"
 
 describe("Authentication Service", () => {
@@ -15,108 +15,6 @@ describe("Authentication Service", () => {
 
   afterEach(() => {
     localStorageMock.clear()
-  })
-
-  describe("Login", () => {
-    it("Login should call the correct endpoint and request body", async () => {
-      restPost.mockResolvedValueOnce({ data: { token: "TOKEN" } })
-      return authentication.login("TomPlum", "MyPassword").then(() => {
-        expect(restPost).toHaveBeenLastCalledWith("/user/login", {
-          username: "TomPlum",
-          password: "MyPassword"
-        })
-      })
-    })
-
-    it("Should set the user in local storage if the response has a token", async () => {
-      const user: LoginResponse = {
-        username: "TomPlum42",
-        email: "tom@hotmail.com",
-        nickname: "Tom",
-        roles: ["admin"],
-        locked: false,
-        expired: false,
-        credentialsExpired: false,
-        creationDate: "2021-10-15",
-        enabled: true,
-        token: "TOKEN",
-        refreshToken: "REFRESH_TOKEN",
-        preferences: {
-          kanjiFont: "Gothic",
-          theme: "Dark Mode",
-          language: "English",
-          highScoresBehaviour: "Ask Each Time",
-          defaultMode: "Play",
-          flashCardsQuantity: 10,
-          confidenceMenuStyle: "Numbers 1 - 6",
-          activityFeedQuantity: 3,
-          mistakesReminders: true,
-          profileVisibility: "Public",
-          romajiVisibility: "Always Show",
-          streakCardView: "Streak",
-          streakNotifications: false
-        }
-      }
-
-      restPost.mockResolvedValueOnce({ data: user })
-
-      return authentication.login("TomPlum42", "MyPassword").then(() => {
-        expect(localStorageMock.getItem("user")).toBe(JSON.stringify(user))
-      })
-    })
-
-    it("Should reject with an error message if there is no JWT in the response", async () => {
-      const user = {
-        username: "TomPlum42",
-        email: "tom@hotmail.com",
-        nickname: "Tom",
-        roles: ["admin"],
-        locked: false,
-        expired: false,
-        credentialsExpired: false,
-        enabled: true
-      }
-
-      restPost.mockResolvedValueOnce({ data: user })
-
-      return authentication.login("TomPlum42", "MyPassword").catch((e) => {
-        expect(e).toEqual("Unknown login error: An error occurred when trying to authenticate the user.")
-      })
-    })
-
-    it("Should reject with AUTHENTICATION_ERROR if the API returns a 401", async () => {
-      restPost.mockRejectedValueOnce({ status: 401 })
-      return authentication.login("TomPlum42", "MyPassword").catch((e) => {
-        expect(e).toEqual("AUTHENTICATION_ERROR")
-      })
-    })
-
-    it("Should reject with an unknown error if the API returns an unknown response status code", async () => {
-      restPost.mockRejectedValueOnce({ status: 865, error: "Sad face" })
-      return authentication.login("TomPlum42", "MyPassword").catch((e) => {
-        expect(e).toEqual("Unknown login error: Sad face")
-      })
-    })
-
-    it("Should return the user details from the API if the call is successful", async () => {
-      const user = {
-        username: "TomPlum42",
-        email: "tom@hotmail.com",
-        nickname: "Tom",
-        roles: ["admin"],
-        locked: false,
-        expired: false,
-        credentialsExpired: false,
-        enabled: true,
-        token: "TOKEN"
-      }
-
-      restPost.mockResolvedValueOnce({ data: user })
-
-      return authentication.login("TomPlum42", "MyPassword").then((response) => {
-        expect(response).toStrictEqual(user)
-      })
-    })
   })
 
   describe("Registration", () => {
