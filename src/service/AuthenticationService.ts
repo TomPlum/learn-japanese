@@ -3,13 +3,6 @@ import DataResponse from "../rest/response/DataResponse"
 import UpdateResponse from "../rest/response/UpdateResponse"
 
 
-
-export interface SignUpResponse {
-  username: string
-  email: string
-  nickname?: string
-}
-
 const register = (
   username: string,
   email: string,

@@ -5,5 +5,6 @@ export const mutationKeys = {
   updatePresetFavourites: 'updatePresetFavourites',
   getKanjiPage: 'getKanjiPage',
   getKanjiByTerm: 'getKanjiByTerm',
-  login: 'login'
+  login: 'login',
+  register: 'register'
 }
