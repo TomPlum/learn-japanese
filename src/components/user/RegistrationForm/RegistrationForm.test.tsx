@@ -1,11 +1,14 @@
-import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react"
+import { fireEvent, screen, waitFor, waitForElementToBeRemoved, within } from "@testing-library/react";
 import RegistrationForm  from "./RegistrationForm"
-import authService from "../../../service/AuthenticationService"
 import each from "jest-each"
 import { render } from "__test-utils__"
+import { server } from "__test-utils__/msw.ts";
+import {
+  useRegisterUserErrorHandlers,
+  useRegisterUserHandlers
+} from "api/hooks/auth/useRegisterUser/useRegisterUser.handlers.ts";
 
 const onSuccessHandler = vi.fn()
-const mockRegister = vi.fn()
 const mockUsernameEligible = vi.fn()
 const mockEmailEligible = vi.fn()
 
@@ -19,7 +22,6 @@ vi.mock("service/UserService", () => ({
 }))
 
 beforeEach(() => {
-  authService.register = mockRegister
   mockUsernameEligible.mockResolvedValueOnce({ exists: false })
   mockEmailEligible.mockResolvedValueOnce({ exists: false })
 })
@@ -74,24 +76,17 @@ test("When all fields are valid, the register button should be enabled", async (
 })
 
 test("Clicking the register button when it is enabled should call the onSuccess event handler", async () => {
-  mockRegister.mockReset().mockResolvedValueOnce({ data: { success: true } })
+  server.use(...useRegisterUserHandlers)
   await setValidFields()
   fireEvent.click(screen.getByText("Register"))
   await waitFor(() => expect(onSuccessHandler).toHaveBeenCalledWith("TomPlum42"))
 })
 
 test("When register returns an error it should display it in an alert if the promise resolved", async () => {
-  mockRegister.mockReset().mockResolvedValueOnce({ error: "Internal Server Error." })
+  server.use(...useRegisterUserErrorHandlers)
   await setValidFields()
   fireEvent.click(screen.getByText("Register"))
-  await waitFor(() => expect(screen.getByText("Internal Server Error.")).toBeInTheDocument())
-})
-
-test("When register returns an error it should display it in an alert if the promise was rejected", async () => {
-  mockRegister.mockReset().mockRejectedValueOnce({ error: "Internal Server Error." })
-  await setValidFields()
-  fireEvent.click(screen.getByText("Register"))
-  await waitFor(() => expect(screen.getByText("Internal Server Error.")).toBeInTheDocument())
+  await waitFor(() => expect(within(screen.getByTestId("registration-form-error")).getByText('Network Error')).toBeInTheDocument())
 })
 
 test("Focusing the email field should show the info text", () => {

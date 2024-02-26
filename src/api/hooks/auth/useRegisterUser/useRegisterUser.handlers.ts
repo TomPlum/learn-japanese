@@ -6,3 +6,9 @@ export const useRegisterUserHandlers: RequestHandler[] = [
     return HttpResponse.json(useRegisterUserResponses)
   })
 ]
+
+export const useRegisterUserErrorHandlers: RequestHandler[] = [
+  http.post('*/user/register', () => {
+    return HttpResponse.error()
+  })
+]
