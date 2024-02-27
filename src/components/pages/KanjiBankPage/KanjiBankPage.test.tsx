@@ -538,18 +538,18 @@ test("Dismissing a strokes filter parameter should reset the strokes to undefine
   // Start with just the "bird" kanji
   stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: birdResponse }], pages: 1, total: 1 }})
   const { search } = setup()
-  expect(await screen.findByText("bird")).toBeInTheDocument()
+  expect(await screen.findByTestId("kanji-bank-selected-summary-鳥")).toBeInTheDocument()
 
   // Filter by 5 strokes and return some other kanji, so it re-renders
   stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }, strokes: 5 })
   fireEvent.change(search, { target: { value: ">strokes=5" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
-  expect(await screen.findByText("いち")).toBeInTheDocument()
+  expect(await screen.findByTestId("kanji-bank-selected-summary-一")).toBeInTheDocument()
 
-  // Dismiss the strokes filter
-  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: personResponse }], pages: 1, total: 1 }, strokes: 0 })
+  // Dismiss the strokes filter (no need to re-intercept as it'll hit the RQ cache and return from the first stub)
   fireEvent.click(screen.getByTestId("dismiss-tag-strokes"))
-  expect(await screen.findByText("じん")).toBeInTheDocument()
+  expect(await screen.findByTestId("kanji-bank-selected-summary-鳥")).toBeInTheDocument()
+  expect(await screen.queryByTestId("kanji-bank-selected-summary-一")).not.toBeInTheDocument()
 })
 
 test("Clicking the next page button should render the next page of kanji", async () => {

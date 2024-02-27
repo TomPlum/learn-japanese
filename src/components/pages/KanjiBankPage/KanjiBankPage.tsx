@@ -133,7 +133,7 @@ const KanjiBankPage = () => {
       <Row>
         <Col lg={2} className={styles.info}>
           {selected && (
-            <>
+            <div data-testid={`kanji-bank-selected-summary-${selected.value.getKanjiVariation()}`}>
               <div className={styles.section}>
                 <p className={styles.label}>Character</p>
                 <a className={styles.selected} href={selected.value.getJishoLink()} target="_blank" rel="noreferrer">
@@ -198,7 +198,7 @@ const KanjiBankPage = () => {
                   </p>
                 )}
               </div>
-            </>
+            </div>
           )}
         </Col>
 
