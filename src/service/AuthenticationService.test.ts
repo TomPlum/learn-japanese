@@ -17,47 +17,6 @@ describe("Authentication Service", () => {
     localStorageMock.clear()
   })
 
-  describe("Registration", () => {
-    it("Should call the correct endpoint and request body", async () => {
-      restPost.mockResolvedValueOnce({ data: { username: "TomPlum", email: "tom@hotmail.com" } })
-      return authentication.register("TomPlum", "tom@hotmail.com", "MyPassword", "Tom").then(() => {
-        expect(restPost).toHaveBeenLastCalledWith("/user/register", {
-          username: "TomPlum",
-          password: "MyPassword",
-          email: "tom@hotmail.com",
-          nickname: "Tom"
-        })
-      })
-    })
-
-    it("Should return an error if there is no data in the response", async () => {
-      restPost.mockResolvedValueOnce({ data: undefined })
-      return authentication.register("TomPlum", "tom@hotmail.com", "MyPassword", "Tom").then((response) => {
-        expect(response.error).toBe("No data returned post user-registration.")
-      })
-    })
-
-    it("Should return the user details from the API if the call is successful", async () => {
-      const user = { username: "TomPlum42", email: "tom@hotmail.com", nickname: "Tom" }
-      restPost.mockResolvedValueOnce({ data: user })
-      return authentication.register("TomPlum", "tom@hotmail.com", "MyPassword", "Tom").then((response) => {
-        expect(response).toStrictEqual({ success: true, data: user })
-      })
-    })
-  })
-
-  describe("Logout", () => {
-    it("Should clear the session from local storage", () => {
-      const user = { username: "TomPlum42" }
-      localStorageMock.setItem("user", JSON.stringify(user))
-      expect(localStorageMock.getItem("user")).toBe(JSON.stringify(user))
-
-      authentication.logout()
-
-      expect(localStorageMock.getItem("user")).toBeUndefined()
-    })
-  })
-
   describe("Delete Account", () => {
     it("Should call the correct endpoint and request body", async () => {
       restDelete.mockResolvedValueOnce({})

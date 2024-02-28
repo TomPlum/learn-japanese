@@ -8,7 +8,6 @@ import { useRegisterUserHandlers } from "api/hooks/auth/useRegisterUser/useRegis
 
 const mockUsernameEligible = vi.fn()
 const mockEmailEligible = vi.fn()
-const mockRegister = vi.fn()
 
 vi.mock("service/UserService", () => ({
   default: function () {
@@ -18,10 +17,6 @@ vi.mock("service/UserService", () => ({
     }
   }
 }))
-
-beforeEach(() => {
-  auth.register = mockRegister
-})
 
 test("Should render the registration form if there is no user logged in", () => {
   const { component } = render(<RegisterPage />)
