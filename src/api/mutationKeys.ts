@@ -6,5 +6,6 @@ export const mutationKeys = {
   getKanjiPage: 'getKanjiPage',
   getKanjiByTerm: 'getKanjiByTerm',
   login: 'login',
-  register: 'register'
+  register: 'register',
+  deleteUser: 'deleteUserAccount'
 }
