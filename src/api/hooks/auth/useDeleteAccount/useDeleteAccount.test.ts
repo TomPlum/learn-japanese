@@ -8,15 +8,23 @@ import useDeleteAccount from "api/hooks/auth/useDeleteAccount/useDeleteAccount.t
 import { wrapper } from "__test-utils__";
 import UpdateResponse from "rest/response/UpdateResponse.ts";
 import { useDeleteAccountResponses } from "api/hooks/auth/useDeleteAccount/useDeleteAccount.responses.ts";
+import * as mockUseUserContext from 'context/UserContext/useUserContext.ts'
 
 describe('Delete User Account API Hook', () => {
   it('should return a success response when the endpoint and HTTP method are correct', async () => {
     server.use(...useDeleteAccountHandlers)
+
+    const clearContextSpy = vi.fn()
+    vi.spyOn(mockUseUserContext, 'default').mockReturnValue({
+      clearUser: clearContextSpy
+    })
+
     const { result } = renderHook(useDeleteAccount, { wrapper })
     const response = await result.current.mutateAsync({
       password: 'test_password'
     })
-    // TODO: Assert clearUser() called
+
+    expect(clearContextSpy).toHaveBeenCalledTimes(1)
     expect(response).toStrictEqual<UpdateResponse>(useDeleteAccountResponses)
   })
 
