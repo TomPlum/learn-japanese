@@ -30,7 +30,7 @@ Over time, in-between work, this project has become a place where I just dump Ja
 
 1. `npm install`
 
-2. `npm run start:msw` or `npm run start`
+2. `npm run start:msw` (to run with stubbed API responses) or `npm run start` (needs back-end running)
 
 ## Kana
 
