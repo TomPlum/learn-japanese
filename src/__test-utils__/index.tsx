@@ -145,9 +145,11 @@ const render = (component: ReactElement, {
 
 const wrapper = ({ children }: PropsWithChildren) => {
   return (
-    <QueryClientProvider client={testQueryClient}>
-      {children}
-    </QueryClientProvider>
+    <UserProvider>
+      <QueryClientProvider client={testQueryClient}>
+        {children}
+      </QueryClientProvider>
+    </UserProvider>
   )
 }
 

@@ -9,7 +9,7 @@ import { AxiosResponse } from "axios";
 
 const useDeleteAccount = () => {
   const client = useClient()
-  const { clearUser } = useUserContext()
+  const { user, clearUser } = useUserContext()
 
   const deleteAccount = useCallback(async ({ password }: DeleteAccountArgs): Promise<UpdateResponse> => {
     try {
@@ -18,7 +18,9 @@ const useDeleteAccount = () => {
         AxiosResponse<UpdateResponse>,
         DeleteAccountArgs
       >('/user/delete', {
-        password
+        data: {
+          password
+        }
       })
 
       clearUser()
@@ -41,7 +43,7 @@ const useDeleteAccount = () => {
 
   return useMutation({
     mutationFn: deleteAccount,
-    mutationKey: [mutationKeys.deleteUser],
+    mutationKey: [mutationKeys.deleteUser, user?.username],
   })
 }
 
