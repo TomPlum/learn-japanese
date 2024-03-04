@@ -1,6 +1,5 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import RegisterPage  from "./RegisterPage"
-import auth from "../../../service/AuthenticationService"
 import { testUser } from "../../../setupTests"
 import { render } from "__test-utils__"
 import { server } from "__test-utils__/msw.ts";

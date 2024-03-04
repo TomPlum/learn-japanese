@@ -1,6 +1,5 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import UserForm, { UserFormProps }  from "./UserForm"
-import authService from "../../../service/AuthenticationService"
 import { render } from "__test-utils__"
 import { server } from "__test-utils__/msw.ts";
 import { useRegisterUserHandlers } from "api/hooks/auth/useRegisterUser/useRegisterUser.handlers.ts";
