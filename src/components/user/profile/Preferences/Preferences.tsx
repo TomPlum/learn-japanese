@@ -11,18 +11,16 @@ import { CardsPerDay } from "types/learn/spacedrepetition/CardsPerDay"
 import { ConfidenceMenuStyle } from "types/learn/spacedrepetition/ConfidenceMenuStyle"
 import styles  from "./Preferences.module.scss"
 import UserService from "../../../../service/UserService"
-import FontService from "../../../../service/FontService"
 import { useTranslation } from "react-i18next"
-import { User, UserPreferences, useUserContext } from "context/UserContext";
+import { UserPreferences, useUserContext } from "context/UserContext";
+import useFonts from "hooks/useFonts";
+import { PreferencesProps } from "components/user/profile/Preferences/types.ts";
 
-export interface PreferencesProps {
-  user: User
-}
 
 const Preferences = (props: PreferencesProps) => {
   const { setPreferences } = useUserContext()
   const userService = new UserService()
-  const fontService = new FontService()
+  const { getFonts } = useFonts()
   const { t } = useTranslation("translation", { keyPrefix: "settings.modal.interface.kanji-font.options" })
 
   useEffect(() => {
@@ -36,8 +34,7 @@ const Preferences = (props: PreferencesProps) => {
     setConfidenceMenuStyle(preferences.confidenceMenuStyle)
 
     setLoading(true)
-    fontService
-      .getFonts()
+    getFonts()
       .then((fonts) => {
         setFonts(fonts)
         setSelectedFont(fonts[0].name)
@@ -45,7 +42,7 @@ const Preferences = (props: PreferencesProps) => {
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+  }, [getFonts])
 
   const [fonts, setFonts] = useState<Font[]>([])
 
