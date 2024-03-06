@@ -4,48 +4,38 @@ import menuStyles from "components/layout/NavigationBar/NavigationBar.module.scs
 import NavigationButton from "../../NavigationButton"
 import { faCircle } from "@fortawesome/free-regular-svg-icons"
 import styles from "./FontSelectorButton.module.scss"
-import FontService from "../../../../service/FontService"
 import { useTranslation } from "react-i18next"
 import { useFontContext } from "context/FontContext";
-
-interface FontSelectorProps {
-  className?: string
-}
-
-export interface Font {
-  name: string
-  slug: string
-}
+import useFonts from "hooks/useFonts";
+import { Font, FontSelectorProps } from "components/ui/buttons/FontSelectorButton/types.ts";
 
 const FontSelectorButton = (props: FontSelectorProps) => {
-  const service = new FontService()
-
   const defaultFont = { name: "Default", slug: "default" }
-  const [fonts, setFonts] = useState<Font[]>([])
-  const [map, setMap] = useState(new Map())
-  const [selected, setSelected] = useState<Font>(defaultFont)
+
   const [open, setOpen] = useState(false)
+  const [map, setMap] = useState(new Map())
   const [loading, setLoading] = useState(false)
+  const [fonts, setFonts] = useState<Font[]>([])
+  const [selected, setSelected] = useState<Font>(defaultFont)
+
+  const { getSelectedFont, getFonts } = useFonts()
   const { t } = useTranslation("translation", { keyPrefix: "settings.modal.interface.kanji-font.options" })
 
   useEffect(() => {
     setLoading(true)
-    service
-      .getSelectedFont()
-      .then((response) => {
-        if (response) {
-          setSelected(response)
-        }
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [])
+
+    const selected = getSelectedFont()
+
+    if (selected) {
+      setSelected(selected)
+    }
+
+    setLoading(false)
+  }, [getSelectedFont])
 
   useEffect(() => {
     setLoading(true)
-    service
-      .getFonts()
+    getFonts()
       .then((response) => {
         setFonts(response)
         setMap(new Map(response.map((font) => [t(font.slug), font.slug])))
@@ -53,7 +43,7 @@ const FontSelectorButton = (props: FontSelectorProps) => {
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+  }, [getFonts])
 
   const { setFont } = useFontContext()
 

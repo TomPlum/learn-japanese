@@ -11,7 +11,7 @@ const fonts: Font[] =  [
   { slug: "mincho", name: "Appli Mincho" }
 ]
 
-export const useFonts = (): FontsResponse => {
+const useFonts = (): FontsResponse => {
   const getFonts = useCallback(() => {
     return Promise.resolve(fonts)
   }, [])
