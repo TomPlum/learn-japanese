@@ -36,33 +36,4 @@ describe("Font Service", () => {
       })
     })
   })
-
-  describe("Get Selected Font", () => {
-    it("Should call the font repository", () => {
-      return service.getSelectedFont().then(() => {
-        expect(mockFontRepository).toHaveBeenCalled()
-      })
-    })
-
-    it("Should return the font whose name matches the one in local storage", () => {
-      localStorageMock.setItem("font", "Appli Mincho")
-      return service.getSelectedFont().then((font) => {
-        expect(font?.name).toBe("Appli Mincho")
-      })
-    })
-
-    it("Should return undefined if the font is local storage doesn't match any in the repository response", () => {
-      localStorageMock.setItem("font", "Unknown Font")
-      return service.getSelectedFont().then((font) => {
-        expect(font).toBeUndefined()
-      })
-    })
-
-    it("Should return undefined if the repository call fails", () => {
-      mockFontRepository.mockReset().mockRejectedValueOnce({ error: "Oh dear." })
-      return service.getSelectedFont().then((font) => {
-        expect(font).toBeUndefined()
-      })
-    })
-  })
 })

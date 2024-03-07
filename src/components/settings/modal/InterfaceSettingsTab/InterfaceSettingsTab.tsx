@@ -4,11 +4,11 @@ import { useEffect, useState } from "react"
 import SettingsButton from "./../SettingsButton"
 import SettingsTabTitle from "./../SettingsTabTitle"
 import SettingsDropdown from "./../SettingsDropdown"
-import FontService from "../../../../service/FontService"
 import { Font } from "../../../ui/buttons/FontSelectorButton"
 import { Preference } from "types/user/Preference"
 import { useTranslation } from "react-i18next"
 import { useFontContext } from "context/FontContext";
+import useFonts from "hooks/useFonts";
 
 export interface InterfaceSettingsTabProps {
   onEditDashboardLayout: () => void
@@ -18,16 +18,16 @@ const InterfaceSettingsTab = (props: InterfaceSettingsTabProps) => {
   const { onEditDashboardLayout } = props
 
   const { setFont } = useFontContext()
-  const fontService = new FontService()
+  const { getFonts } = useFonts()
 
   const [fonts, setFonts] = useState<Font[]>([])
   const { t, i18n } = useTranslation("translation", { keyPrefix: "settings.modal.interface" })
 
   useEffect(() => {
-    fontService.getFonts().then((response) => {
+    getFonts().then((response) => {
       setFonts(response)
     })
-  }, [])
+  }, [getFonts])
 
   const handleFontChange = (font: string) => {
     setFont(font)
