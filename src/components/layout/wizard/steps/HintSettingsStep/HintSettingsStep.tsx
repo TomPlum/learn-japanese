@@ -1,5 +1,5 @@
 import HintSettingsForm from "../../../../settings/game/HintSettingsForm"
-import HintSettings from "../../../../../domain/session/settings/game/HintSettings"
+import HintSettings from "types/session/settings/game/HintSettings"
 
 export interface HintSettingsStepProps {
   onSelect: (settings: HintSettings) => void

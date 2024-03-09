@@ -12,7 +12,6 @@ import useLocalStorage from "hooks/useLocalStorage";
 
 const UserProvider = ({ children }: PropsWithChildren<UserProviderProps>) => {
   const [user, setUser] = useLocalStorage<User>({ key: "user" })
-  console.log('user in provider', user)
   const { updateUserPreference } = useSetPreference()
 
   useEffect(() => {

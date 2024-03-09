@@ -1,30 +1,24 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import SentenceStructureFlashCardBack  from "./SentenceStructureFlashCardBack"
 import { findByTextWithMarkup } from "__test-utils__/Queries";
-import Definition from "../../../../domain/sentence/Definition"
-import { Kanji } from "../../../../domain/kanji/Kanji.ts"
-import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade.ts"
-import JLTPLevel from "../../../../domain/learn/JLTPLevel.ts"
+import Definition from "types/sentence/Definition"
+import { server } from "__test-utils__/msw.ts";
+import {
+  useGetKanjiByCharacterHandlers
+} from "api/hooks/kanji/useGetKanjiByCharacter/useGetKanjiByCharacter.handlers.ts";
+import { render } from "__test-utils__";
 
-const mockKanjiRepository = vi.fn()
-vi.mock("repository/KanjiRepository.ts", () => ({
-  default: function () {
-    return { getByValue: mockKanjiRepository }
-  }
-}))
 
 beforeEach(() => {
-  mockKanjiRepository.mockResolvedValue(
-    new Kanji("面", [], ["screen"], KyoikuGrade.THREE, JLTPLevel.N5, "", [], 12, [])
-  )
+  server.use(...useGetKanjiByCharacterHandlers)
 })
 
 const onResetHandler = vi.fn()
 
-const adjective = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective")
+const adjective = new Definition(["small", "little"], "小さい", "ちいさい", "い Adjective")
 
 test("Clicking the reset button should call the onReset event handler", async () => {
-  const component = render(
+  const { component } = render(
     <SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />
   )
   fireEvent.click(component.getByTitle("Reset"))
@@ -33,26 +27,26 @@ test("Clicking the reset button should call the onReset event handler", async ()
 
 test("Should render the kanji variation", async () => {
   render(<SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />)
-  expect(await findByTextWithMarkup("面白い")).toBeInTheDocument()
+  expect(await findByTextWithMarkup("小さい")).toBeInTheDocument()
 })
 
 test("Should render the kana", async () => {
-  const component = render(
+  const { component } = render(
     <SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />
   )
-  expect(await component.findByText("おもしろい")).toBeInTheDocument()
+  expect(await component.findByText("ちいさい")).toBeInTheDocument()
 })
 
 test("Should render the romaji if passed as true", async () => {
-  const component = render(
+  const { component } = render(
     <SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={true} />
   )
-  expect(await component.findByText("omoshiroi")).toBeInTheDocument()
+  expect(await component.findByText("chīsai")).toBeInTheDocument()
 })
 
-test("Should render the romaji if passed as false", async () => {
-  const component = render(
+test("Should not render the romaji if passed as false", async () => {
+  const { component } = render(
     <SentenceStructureFlashCardBack data={adjective} onClick={onResetHandler} showRomaji={false} />
   )
-  await waitFor(() => expect(component.queryByText("omoshiroi")).not.toBeInTheDocument())
+  await waitFor(() => expect(component.queryByText("chiisai")).not.toBeInTheDocument())
 })

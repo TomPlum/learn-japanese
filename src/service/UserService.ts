@@ -3,7 +3,7 @@ import UpdateResponse from "../rest/response/UpdateResponse"
 import DataResponse from "../rest/response/DataResponse"
 import PatchRequest from "../rest/request/patch/PatchRequest"
 import PatchReplaceOperation from "../rest/request/patch/PatchReplaceOperation"
-import { Preference } from "../domain/user/Preference"
+import { Preference } from "types/user/Preference"
 import { User, UserPreferences } from "context/UserContext";
 
 export interface UserPreferencesResponse {

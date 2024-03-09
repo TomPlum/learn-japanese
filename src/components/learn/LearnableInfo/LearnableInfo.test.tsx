@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react"
 import LearnableInfo  from "./LearnableInfo"
-import Definition from "../../../domain/sentence/Definition"
+import Definition from "types/sentence/Definition"
 
 const adjective = new Definition(["interesting", "funny"], "面白い", "おもしろい", "い Adjective")
 

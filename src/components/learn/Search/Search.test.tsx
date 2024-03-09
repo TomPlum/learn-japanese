@@ -1,11 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import Search  from "./Search"
-import Definition from "../../../domain/sentence/Definition"
-import { Kanji } from "../../../domain/kanji/Kanji"
-import { KanjiReading } from "../../../domain/kanji/KanjiReading"
-import { ReadingType } from "../../../domain/kanji/ReadingType"
-import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
-import JLTPLevel from "../../../domain/learn/JLTPLevel"
+import Definition from "types/sentence/Definition"
+import { Kanji } from "types/kanji/Kanji"
+import { KanjiReading } from "types/kanji/KanjiReading"
+import { ReadingType } from "types/kanji/ReadingType"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
+import JLTPLevel from "types/learn/JLTPLevel"
 
 const setup = () => {
   const data = [

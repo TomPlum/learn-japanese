@@ -1,8 +1,8 @@
-import LearnMode from "domain/session/LearnMode.ts"
-import PlayMode from "domain/session/PlayMode.ts"
-import DataSettings from "domain/session/settings/data/DataSettings.ts"
-import LearnSettings from "domain/session/settings/LearnSettings.ts"
-import GameSettings from "domain/session/settings/game/GameSettings.ts"
+import LearnMode from "types/session/LearnMode.ts"
+import PlayMode from "types/session/PlayMode.ts"
+import DataSettings from "types/session/settings/data/DataSettings.ts"
+import LearnSettings from "types/session/settings/LearnSettings.ts"
+import GameSettings from "types/session/settings/game/GameSettings.ts"
 
 export interface SessionSettingsContextProviderProps {
   gameSettings?: GameSettings

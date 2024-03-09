@@ -1,6 +1,6 @@
-import { Kana } from "../../domain/kana/Kana.ts"
-import KanaType from "../../domain/kana/KanaType.ts"
-import { KanaColumn } from "../../domain/kana/KanaColumn.ts"
+import { Kana } from "types/kana/Kana.ts"
+import KanaType from "types/kana/KanaType.ts"
+import { KanaColumn } from "types/kana/KanaColumn.ts"
 import RegularKanaFilter from "./RegularKanaFilter.ts"
 
 describe("Regular Kana Filter", () => {

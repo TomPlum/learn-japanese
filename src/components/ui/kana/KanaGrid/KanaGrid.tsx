@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Kana } from "../../../../domain/kana/Kana"
+import { Kana } from "types/kana/Kana"
 import KanaTile from "./../KanaTile"
 import StackGrid, { transitions } from "react-stack-grid"
 import styles  from "./KanaGrid.module.scss"

@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Kana } from "../../../../domain/kana/Kana"
+import { Kana } from "types/kana/Kana"
 import { Container } from "react-bootstrap"
 import KanaDisplay, { KanaDisplayStyle } from "../../display/KanaDisplay"
 import Arrays from "../../../../utility/Arrays"

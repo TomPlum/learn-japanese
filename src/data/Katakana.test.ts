@@ -1,7 +1,7 @@
 import katakana from "./Katakana.ts"
 import each from "jest-each"
 import { KanaData } from "./DataTypes.ts"
-import { KanaColumn } from "../domain/kana/KanaColumn.ts"
+import { KanaColumn } from "types/kana/KanaColumn.ts"
 
 describe("Katakana", () => {
   describe("Unicode Mappings", () => {

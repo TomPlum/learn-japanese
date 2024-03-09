@@ -1,6 +1,6 @@
 import React from "react"
-import Topic from "../../../../../domain/Topic"
-import DataSettings from "../../../../../domain/session/settings/data/DataSettings"
+import Topic from "types/Topic"
+import DataSettings from "types/session/settings/data/DataSettings"
 import styles  from "./DataSettingsStep.module.scss"
 import ScrollableContainer from "../../../../ui/ScrollableContainer"
 

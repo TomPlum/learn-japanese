@@ -1,13 +1,13 @@
 import FlashCardRepository from "./FlashCardRepository.ts"
-import { FlashCard } from "../domain/learn/FlashCard.ts"
-import SpaceRepetitionDetails from "../domain/learn/spacedrepetition/SpaceRepetitionDetails.ts"
-import { Kanji } from "../domain/kanji/Kanji.ts"
-import { KanjiReading } from "../domain/kanji/KanjiReading.ts"
-import { ReadingType } from "../domain/kanji/ReadingType.ts"
-import { KyoikuGrade } from "../domain/kanji/KyoikuGrade.ts"
+import { FlashCard } from "types/learn/FlashCard.ts"
+import SpaceRepetitionDetails from "types/learn/spacedrepetition/SpaceRepetitionDetails.ts"
+import { Kanji } from "types/kanji/Kanji.ts"
+import { KanjiReading } from "types/kanji/KanjiReading.ts"
+import { ReadingType } from "types/kanji/ReadingType.ts"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts"
 import RestClient from "../rest/RestClient.ts"
-import { Example } from "../domain/kanji/Example.ts"
-import JLTPLevel from "../domain/learn/JLTPLevel.ts"
+import { Example } from "types/kanji/Example.ts"
+import JLTPLevel from "types/learn/JLTPLevel.ts"
 
 const mockMessageQueue = vi.fn()
 vi.mock("rest/MessageQueue", () => ({

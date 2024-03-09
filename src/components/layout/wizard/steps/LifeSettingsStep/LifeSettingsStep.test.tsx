@@ -1,6 +1,6 @@
 import LifeSettingsStep  from "./LifeSettingsStep"
 import { fireEvent, render } from "@testing-library/react"
-import { LifeSettingsBuilder } from "../../../../../domain/session/settings/game/LifeSettings"
+import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings"
 
 const onSelectHandler = vi.fn()
 

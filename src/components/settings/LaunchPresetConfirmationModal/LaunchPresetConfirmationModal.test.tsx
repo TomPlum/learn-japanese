@@ -1,21 +1,21 @@
 import { fireEvent, screen } from "@testing-library/react";
 import LaunchPresetConfirmationModal from "../../../components/settings/LaunchPresetConfirmationModal"
-import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
-import LearnSettings from "../../../domain/session/settings/LearnSettings"
-import PresetBuilder from "../../../domain/session/PresetBuilder"
-import KanjiSettings, { KanjiSettingsBuilder } from "../../../domain/session/settings/data/KanjiSettings"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
+import LearnSettings from "types/session/settings/LearnSettings"
+import PresetBuilder from "types/session/PresetBuilder"
+import KanjiSettings, { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings"
 import { render } from "__test-utils__"
 import { localStorageMock } from "../../../setupTests"
 import { SessionSettingsBag } from "context/SessionSettingsContext";
 import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
 import { LaunchPresetConfirmationModalProps } from "components/settings/LaunchPresetConfirmationModal/types.ts"
-import { QuestionSettingsBuilder } from "../../../domain/session/settings/game/QuestionSettings.ts";
-import QuestionType from "../../../domain/game/QuestionType.ts";
-import LearnableField from "../../../domain/learn/LearnableField.ts";
-import { HintSettingsBuilder } from "../../../domain/session/settings/game/HintSettings.ts";
-import { LifeSettingsBuilder } from "../../../domain/session/settings/game/LifeSettings.ts";
-import { TimeSettingsBuilder } from "../../../domain/session/settings/game/TimeSettings.ts";
-import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade.ts";
+import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings.ts";
+import QuestionType from "types/game/QuestionType.ts";
+import LearnableField from "types/learn/LearnableField.ts";
+import { HintSettingsBuilder } from "types/session/settings/game/HintSettings.ts";
+import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings.ts";
+import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings.ts";
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts";
 
 const onDismissHandler = vi.fn()
 

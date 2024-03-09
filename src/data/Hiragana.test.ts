@@ -1,6 +1,6 @@
 import hiragana from "./Hiragana.ts"
 import each from "jest-each"
-import { KanaColumn } from "../domain/kana/KanaColumn.ts"
+import { KanaColumn } from "types/kana/KanaColumn.ts"
 import { KanaData } from "./DataTypes.ts"
 
 describe("Hiragana", () => {

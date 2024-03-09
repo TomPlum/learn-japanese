@@ -3,8 +3,8 @@ import GridDisplayOptions, {
   GridDisplayOptionsProps
 } from "../../../../../components/layout/wizard/grid/GridDisplayOptions"
 import { getValueLastCalledWith } from "__test-utils__/Queries"
-import { GridOptions } from "../../../../../domain/grid/GridOptions"
-import GridDisplayType from "../../../../../domain/grid/GridDisplayType"
+import { GridOptions } from "types/grid/GridOptions"
+import GridDisplayType from "types/grid/GridDisplayType"
 
 const onSelectHandler = vi.fn()
 

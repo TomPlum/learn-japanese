@@ -1,10 +1,10 @@
 import Repository from "./Repository"
-import KanjiSettings from "../domain/session/settings/data/KanjiSettings"
-import { Kanji } from "../domain/kanji/Kanji"
+import KanjiSettings from "types/session/settings/data/KanjiSettings"
+import { Kanji } from "types/kanji/Kanji"
 import RestClient from "../rest/RestClient"
 import KanjiConverter from "../converter/KanjiConverter"
 import { PaginationRequest } from "../rest/request/PaginationRequest"
-import { Learnable } from "../domain/learn/Learnable"
+import { KanjiByGradeRequest, Paged, PagedKanjiResponseModel } from "api/hooks/kanji/useGetKanjiPage";
 
 export interface KanjiResponseModel {
   character: string
@@ -18,12 +18,6 @@ export interface KanjiResponseModel {
   tags: string[]
 }
 
-export interface PagedKanjiResponseModel {
-  results: KanjiResponseModel[]
-  pages: number
-  total: number
-}
-
 export interface ReadingResponseModel {
   value: string
   type: "kun" | "on"
@@ -33,12 +27,6 @@ export interface ExampleResponseModel {
   value: string
   kana: string[]
   english: string[]
-}
-
-interface KanjiByGradeRequest {
-  grades: number[]
-  quantity?: number
-  paging: PaginationRequest
 }
 
 interface KanjiSearchResponseModel {
@@ -52,20 +40,6 @@ interface KanjiSearchResults {
   pages: number
   quantity: number
   error?: string
-}
-
-interface KanjiByFilterRequest {
-  search?: string
-  grades?: number[]
-  levels?: number[]
-  strokes?: number
-  paging: PaginationRequest
-}
-
-export interface Paged<T extends Learnable> {
-  results: T[]
-  pages: number
-  quantity: number
 }
 
 export default class KanjiRepository implements Repository<Kanji> {
@@ -131,55 +105,6 @@ export default class KanjiRepository implements Repository<Kanji> {
   }
 
   /**
-   * Retrieves all the kanji that match any of the given criteria.
-   * @param page The page to retrieve. Starts from 0.
-   * @param pageSize The size of the page.
-   * @param search The term to search by.
-   * @param grades The Kyouiku grades to filter by.
-   * @param levels The JLPT levels to filter by.
-   * @param strokes The number of strokes to filter by.
-   * @return results A collection of matching kanji and the field that it was matched on.
-   */
-  public async getByFilter(
-    page: number,
-    pageSize: number,
-    search: string,
-    grades: number[],
-    levels: number[],
-    strokes?: number
-  ): Promise<KanjiSearchResults> {
-    const request: KanjiByFilterRequest = {
-      search: search,
-      grades: grades,
-      levels: levels,
-      strokes: strokes,
-      paging: {
-        page: page,
-        size: pageSize
-      }
-    }
-
-    return RestClient.post<KanjiSearchResponseModel>("/kanji/by-filter", request)
-      .then((response) => {
-        const data = response.data
-
-        if (data) {
-          return this.convertKanjiResponseModel(data)
-        }
-
-        return Promise.resolve({
-          results: [],
-          pages: 0,
-          quantity: 0,
-          error: "No data in response"
-        })
-      })
-      .catch((response) => {
-        return Promise.reject({ results: [], pages: 0, quantity: 0, error: response.error })
-      })
-  }
-
-  /**
    * Gets a single kanji by the given character.
    * @param value The kanji character to retrieve.
    * @return kanji The associated information for the request kanji or undefined if it doesn't exist.
@@ -191,20 +116,6 @@ export default class KanjiRepository implements Repository<Kanji> {
       })
       .catch((response) => {
         return Promise.reject(response)
-      })
-  }
-
-  /**
-   * Retrieves a single random kanji character.
-   * @return A random kanji.
-   */
-  public async getRandomKanji(): Promise<Kanji | undefined> {
-    return RestClient.get<KanjiResponseModel>("/kanji/random")
-      .then((response) => {
-        return response.data ? this.converter.convert([response.data])[0] : undefined
-      })
-      .catch(() => {
-        return undefined
       })
   }
 

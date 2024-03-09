@@ -1,11 +1,11 @@
 import KanaRepository from "./KanaRepository.ts"
-import { Kana } from "../domain/kana/Kana.ts"
-import KanaType from "../domain/kana/KanaType.ts"
-import { KanaColumn } from "../domain/kana/KanaColumn.ts"
+import { Kana } from "types/kana/Kana.ts"
+import KanaType from "types/kana/KanaType.ts"
+import { KanaColumn } from "types/kana/KanaColumn.ts"
 import hiragana from "../data/Hiragana.ts"
 import { KanaData } from "../data/DataTypes.ts"
 import katakana from "../data/Katakana.ts"
-import { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSettings.ts"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts"
 import RestClient from "../rest/RestClient.ts"
 import { Mock } from "vitest";
 

@@ -1,6 +1,6 @@
-import CommonData from "../../domain/learn/CommonData.ts"
+import CommonData from "types/learn/CommonData.ts"
 import MeaningFilter from "./MeaningFilter.ts"
-import { Learnable } from "../../domain/learn/Learnable.ts"
+import { Learnable } from "types/learn/Learnable.ts"
 import each from "jest-each"
 
 const data = [

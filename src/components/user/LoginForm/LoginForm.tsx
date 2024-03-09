@@ -1,46 +1,59 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap"
 import styles from "components/user/UserForm/UserForm.module.scss"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
-import auth from "../../../service/AuthenticationService"
 import { useTranslation } from "react-i18next"
-import { useUserContext } from "context/UserContext";
+import useLogin from "api/hooks/auth/useLogin";
 
 export interface LoginFormProps {
   info?: string
-  username?: string
+  registeredUsername?: string
   onSuccess: () => void
 }
 
-const LoginForm = (props: LoginFormProps) => {
+const LoginForm = ({ info, registeredUsername, onSuccess }: LoginFormProps) => {
   const { t, ready } = useTranslation()
-  const [username, setUsername] = useState(props.username ?? "")
-  const [password, setPassword] = useState("")
-  const [usernameValid, setUsernameValid] = useState(!!props.username)
-  const [passwordValid, setPasswordValid] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const { mutateAsync, isPending } = useLogin()
+
   const [error, setError] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordValid, setPasswordValid] = useState(false)
+  const [usernameValid, setUsernameValid] = useState(!!registeredUsername)
+  const [inputUsername, setInputUsername] = useState(registeredUsername ?? "")
 
   const usernameField = useRef<HTMLInputElement>(null)
   const passwordField = useRef<HTMLInputElement>(null)
 
-  const { setUser } = useUserContext()
-
   const formValid = usernameValid && passwordValid
 
+  const login = useCallback(async () => {
+    try {
+      await mutateAsync({ username: inputUsername, password })
+      onSuccess()
+    } catch (e) {
+      if (e === "AUTHENTICATION_ERROR") {
+        setPassword("")
+        setPasswordValid(false)
+        setError("Username or password is incorrect.")
+      } else {
+        setError("Sorry, an unknown error has occurred.")
+      }
+    }
+  }, [mutateAsync, onSuccess, inputUsername, password])
+
   useEffect(() => {
-    if (username) {
+    if (inputUsername) {
       passwordField.current?.focus()
     } else {
       usernameField?.current?.focus()
     }
-  }, [])
+  }, [inputUsername, usernameField, passwordField])
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = async (e: KeyboardEvent) => {
       if (formValid && e.key === "Enter") {
-        login()
+        await login()
         e.preventDefault()
         e.stopPropagation()
       }
@@ -50,62 +63,11 @@ const LoginForm = (props: LoginFormProps) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [username, password])
-
-  const login = () => {
-    setLoading(true)
-
-    auth
-      .login(username, password)
-      .then((res) => {
-        setUser({
-          username: res.username,
-          email: res.email,
-          nickname: res.nickname,
-          roles: res.roles,
-          locked: res.locked,
-          expired: res.expired,
-          credentialsExpired: res.credentialsExpired,
-          enabled: res.enabled,
-          creationDate: res.creationDate,
-          token: res.token,
-          refreshToken: res.refreshToken,
-          preferences: {
-            kanjiFont: res.preferences.kanjiFont,
-            language: res.preferences.language,
-            theme: res.preferences.theme,
-            confidenceMenuStyle: res.preferences.confidenceMenuStyle,
-            highScoresBehaviour: res.preferences.highScoresBehaviour,
-            flashCardsQuantity: res.preferences.flashCardsQuantity,
-            defaultMode: res.preferences.defaultMode,
-            streakCardView: res.preferences.streakCardView,
-            profileVisibility: res.preferences.profileVisibility,
-            activityFeedQuantity: res.preferences.activityFeedQuantity,
-            romajiVisibility: res.preferences.romajiVisibility,
-            mistakesReminders: res.preferences.mistakesReminders,
-            streakNotifications: res.preferences.streakNotifications
-          }
-        })
-
-        props.onSuccess()
-      })
-      .catch((e) => {
-        if (e === "AUTHENTICATION_ERROR") {
-          setPassword("")
-          setPasswordValid(false)
-          setError("Username or password is incorrect.")
-        } else {
-          setError("Sorry, an unknown error has occurred.")
-        }
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }
+  }, [inputUsername, password, login, formValid])
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const username = e.target.value
-    setUsername(username)
+    setInputUsername(username)
     setUsernameValid(username.length > 0)
   }
 
@@ -115,21 +77,36 @@ const LoginForm = (props: LoginFormProps) => {
     setPasswordValid(password.length > 0)
   }
 
-  const disabled = !formValid || loading || !ready
+  const disabled = !formValid || isPending || !ready
 
   return (
     <Modal.Body className={styles.body} data-testid="login-form">
-      {!!error && <Alert variant="danger">{error}</Alert>}
+      {!!error && (
+        <Alert variant="danger">
+          {error}
+        </Alert>
+      )}
 
-      {props.username && !props.info && <Alert variant="success">Registration successful. You can log-in below.</Alert>}
+      {registeredUsername && !info && (
+        <Alert variant="success">
+          Registration successful. You can log-in below.
+        </Alert>
+      )}
 
-      {props.info && !error && <Alert variant="warning">{props.info}</Alert>}
+      {info && !error && (
+        <Alert variant="warning">
+          {info}
+        </Alert>
+      )}
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>{t("forms.common.username")}</Form.Label>
+        <Form.Label>
+          {t("forms.common.username")}
+        </Form.Label>
+
         <Form.Control
           required
-          value={username}
+          value={inputUsername}
           ref={usernameField}
           isValid={usernameValid}
           className={styles.input}
@@ -164,7 +141,14 @@ const LoginForm = (props: LoginFormProps) => {
           disabled={disabled}
           data-testid="login-button"
         >
-          {(loading || !ready) && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="login-loading" />}{" "}
+          {(isPending || !ready) && (
+            <FontAwesomeIcon
+              spin
+              fixedWidth
+              icon={faSpinner}
+              data-testid="login-loading"
+            />
+          )}{" "}
           {t("action.login")}
         </Button>
       </Form.Group>

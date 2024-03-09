@@ -1,7 +1,7 @@
 import QuestionBanner, { QuestionBannerProps }  from "./QuestionBanner"
 import { fireEvent, screen } from "@testing-library/react"
-import Definition from "../../../domain/sentence/Definition"
-import LearnableField from "../../../domain/learn/LearnableField"
+import Definition from "types/sentence/Definition"
+import LearnableField from "types/learn/LearnableField"
 import { findByTextWithElements } from "__test-utils__/Queries"
 import { render } from "__test-utils__"
 

@@ -1,8 +1,8 @@
 import KanaService from "./KanaService.ts"
-import { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSettings.ts"
-import { Kana } from "../domain/kana/Kana.ts"
-import KanaType from "../domain/kana/KanaType.ts"
-import { KanaColumn } from "../domain/kana/KanaColumn.ts"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts"
+import { Kana } from "types/kana/Kana.ts"
+import KanaType from "types/kana/KanaType.ts"
+import { KanaColumn } from "types/kana/KanaColumn.ts"
 
 const mockGetKana = vi.fn()
 vi.mock("repository/KanaRepository", () => ({

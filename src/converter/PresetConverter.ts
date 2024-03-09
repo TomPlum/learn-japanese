@@ -1,38 +1,13 @@
-import SessionMode from "../domain/session/SessionMode"
-import {
-  CustomPresetDetails,
-  LearnPresetRequest,
-  PlayPresetRequest,
-  PresetRequest
-} from "../repository/PresetRepository"
+import SessionMode from "types/session/SessionMode"
 import GameSettingsConverter from "./GameSettingsConverter"
 import DataSettingsConverter from "./DataSettingsConverter"
-import LearnSettings from "../domain/session/settings/LearnSettings"
-import PresetBuilder from "../domain/session/PresetBuilder"
-import { SessionSettingsState } from "context/SessionSettingsContext";
+import LearnSettings from "types/session/settings/LearnSettings"
+import PresetBuilder from "types/session/PresetBuilder"
+import { SessionSettingsState } from "context/SessionSettingsContext"
 
 class PresetConverter {
   private readonly gameSettingsConverter = new GameSettingsConverter()
   private readonly dataSettingsConverter = new DataSettingsConverter()
-
-  public convertRequest(preset: CustomPresetDetails): PresetRequest {
-    const commonProperties = {
-      name: preset.name,
-      icon: preset.icon.toString(),
-      colour: preset.colour.replace("#", ""),
-      topic: preset.settings.dataSettings.topic.name,
-      data: this.dataSettingsConverter.convertRequest(preset.settings.dataSettings)
-    }
-
-    if (preset.settings.gameSettings) {
-      return {
-        ...commonProperties,
-        game: this.gameSettingsConverter.convertRequest(preset.settings.gameSettings)
-      } as PlayPresetRequest
-    } else {
-      return { ...commonProperties } as LearnPresetRequest
-    }
-  }
 
   public convertSessionSettings(settings: SessionSettingsState): SessionMode {
     const id = settings.id!

@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap"
 import styles from "components/user/UserForm/UserForm.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
-import authService from "../../../service/AuthenticationService"
 import UserService from "../../../service/UserService"
 import InfoButton from "../../ui/buttons/InfoButton"
 import PopOver from "../../ui/PopOver"
-import { useDebouncedEffect } from "../../../hooks"
+import { useDebouncedEffect } from "hooks"
 import { useTranslation } from "react-i18next"
+import useRegisterUser from "api/hooks/auth/useRegisterUser";
+import { RegistrationFormProps } from "components/user/RegistrationForm/types.ts";
 
-export interface RegistrationFormProps {
-  onSuccess: (username: string) => void
-}
 
-const RegistrationForm = (props: RegistrationFormProps) => {
-  const userService = new UserService()
-
+const RegistrationForm = ({ onSuccess }: RegistrationFormProps) => {
   const { t } = useTranslation()
+  const userService = new UserService()
+  const { mutateAsync: register, isPending } = useRegisterUser()
 
   const [email, setEmail] = useState("")
   const [username, setUsername] = useState("")
@@ -34,33 +32,24 @@ const RegistrationForm = (props: RegistrationFormProps) => {
   const [userExists, setUserExists] = useState(false)
   const [emailExists, setEmailExists] = useState(false)
 
-  const [loading, setLoading] = useState(false)
   const [userEligibilityLoading, setUserEligibilityLoading] = useState(false)
   const [emailEligibilityLoading, setEmailEligibilityLoading] = useState(false)
   const [error, setError] = useState<string | undefined>(undefined)
   const [emailFocused, setEmailFocused] = useState(false)
 
-  useDebouncedEffect(
-    () => {
-      if (validUsername) {
-        checkUsernameEligibility()
-      }
-    },
-    200,
-    [username]
-  )
+  useDebouncedEffect(() => {
+    if (validUsername) {
+      checkUsernameEligibility()
+    }
+  }, 200, [username])
 
-  useDebouncedEffect(
-    () => {
-      if (validEmail) {
-        checkEmailEligibility()
-      } else {
-        setEmailExists(false)
-      }
-    },
-    200,
-    [email]
-  )
+  useDebouncedEffect(() => {
+    if (validEmail) {
+      checkEmailEligibility()
+    } else {
+      setEmailExists(false)
+    }
+  }, 200, [email])
 
   useEffect(() => {
     setValidSecondPassword(password === secondPassword)
@@ -151,24 +140,20 @@ const RegistrationForm = (props: RegistrationFormProps) => {
     />
   )
 
-  const registerUser = () => {
-    setLoading(true)
-    setError(undefined)
+  const registerUser = useCallback(async () => {
+    try {
+      await register({
+        username,
+        email,
+        password,
+        nickname
+      })
 
-    authService
-      .register(username, email, password, nickname)
-      .then((response) => {
-        if (response.data) {
-          props.onSuccess(username)
-        } else {
-          setError(response.error)
-        }
-      })
-      .catch((response) => {
-        setError(response.error)
-        setLoading(false)
-      })
-  }
+      onSuccess(username)
+    } catch (error: Error) {
+      setError(error.message)
+    }
+  }, [register, username, email, password, nickname, onSuccess])
 
   const checkUsernameEligibility = () => {
     setUserEligibilityLoading(true)
@@ -214,7 +199,11 @@ const RegistrationForm = (props: RegistrationFormProps) => {
 
   return (
     <Modal.Body className={styles.body} data-testid="registration-form">
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && (
+        <Alert variant="danger" data-testid='registration-form-error'>
+          {error}
+        </Alert>
+      )}
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>{t("forms.common.email")}*</Form.Label>
@@ -232,15 +221,21 @@ const RegistrationForm = (props: RegistrationFormProps) => {
         />
 
         {emailFocused && email.length === 0 && (
-          <Form.Text className="text-muted">{t("forms.register.email-not-shared")}</Form.Text>
+          <Form.Text className="text-muted">
+            {t("forms.register.email-not-shared")}
+          </Form.Text>
         )}
 
         {emailExists && !emailEligibilityLoading && (
-          <Form.Text className="text-muted">{t("forms.register.email-taken")}</Form.Text>
+          <Form.Text className="text-muted">
+            {t("forms.register.email-taken")}
+          </Form.Text>
         )}
 
         {!emailExists && !emailEligibilityLoading && validEmail && (
-          <Form.Text className="text-muted">{t("forms.register.email-available")}</Form.Text>
+          <Form.Text className="text-muted">
+            {t("forms.register.email-available")}
+          </Form.Text>
         )}
 
         {emailEligibilityLoading && (
@@ -264,11 +259,15 @@ const RegistrationForm = (props: RegistrationFormProps) => {
         />
 
         {userExists && !userEligibilityLoading && (
-          <Form.Text className="text-muted">{t("forms.register.username-taken")}</Form.Text>
+          <Form.Text className="text-muted">
+            {t("forms.register.username-taken")}
+          </Form.Text>
         )}
 
         {!userExists && !userEligibilityLoading && validUsername && (
-          <Form.Text className="text-muted">{t("forms.register.username-available")}</Form.Text>
+          <Form.Text className="text-muted">
+            {t("forms.register.username-available")}
+          </Form.Text>
         )}
 
         {userEligibilityLoading && (
@@ -280,7 +279,10 @@ const RegistrationForm = (props: RegistrationFormProps) => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>{t("forms.common.nickname")}</Form.Label>
+        <Form.Label>
+          {t("forms.common.nickname")}
+        </Form.Label>
+
         <Form.Control
           value={nickname}
           isValid={validNickName}
@@ -292,7 +294,10 @@ const RegistrationForm = (props: RegistrationFormProps) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>{t("forms.common.password")}*</Form.Label>
+        <Form.Label>
+          {t("forms.common.password")}*
+        </Form.Label>
+
         <Form.Control
           required
           type="password"
@@ -313,7 +318,10 @@ const RegistrationForm = (props: RegistrationFormProps) => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>{t("forms.common.confirm-password")}*</Form.Label>
+        <Form.Label>
+          {t("forms.common.confirm-password")}*
+        </Form.Label>
+
         <Form.Control
           required
           type="password"
@@ -326,13 +334,23 @@ const RegistrationForm = (props: RegistrationFormProps) => {
         />
 
         {password !== secondPassword && validPassword && (
-          <Form.Text className="text-muted">{t("forms.register.passwords-dont-match")}</Form.Text>
+          <Form.Text className="text-muted">
+            {t("forms.register.passwords-dont-match")}
+          </Form.Text>
         )}
       </Form.Group>
 
       <Form.Group>
         <Button className={styles.button} variant="info" disabled={!isFormValid()} onClick={registerUser}>
-          {loading && <FontAwesomeIcon icon={faSpinner} spin fixedWidth data-testid="register-loading" />}{" "}
+          {isPending && (
+            <FontAwesomeIcon
+              spin
+              fixedWidth
+              icon={faSpinner}
+              data-testid="register-loading"
+            />
+          )}{" "}
+
           {t("action.register")}
         </Button>
       </Form.Group>

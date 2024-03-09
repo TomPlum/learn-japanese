@@ -3,11 +3,10 @@ import InfoButton from "../../../ui/buttons/InfoButton"
 import { OverlayChildren } from "react-bootstrap/Overlay"
 import { useEffect, useRef, useState } from "react"
 import styles from "./PasswordConfirmation.module.scss"
-import authService from "../../../../service/AuthenticationService"
 import { faExclamationTriangle, faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useTranslation } from "react-i18next"
-import { useUserContext } from "context/UserContext";
+import useDeleteAccount from "api/hooks/auth/useDeleteAccount";
 
 export interface PasswordConfirmationProps {
   alertInfo: OverlayChildren
@@ -15,37 +14,20 @@ export interface PasswordConfirmationProps {
 }
 
 const PasswordConfirmation = (props: PasswordConfirmationProps) => {
-  const { clearUser } = useUserContext()
-
   const [password, setPassword] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string>()
+  const { mutateAsync, isPending } = useDeleteAccount()
   const { t } = useTranslation("translation", { keyPrefix: "settings.modal.user.confirmation-modal" })
 
   const field = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     field.current?.focus()
-  }, [])
+  }, [field])
 
-  const deleteAccount = () => {
-    setLoading(true)
-    setError(undefined)
-
-    authService
-      .deleteAccount(password)
-      .then((response) => {
-        if (response.success) {
-          clearUser()
-        } else {
-          setError(response.error)
-          setLoading(false)
-        }
-      })
-      .catch((response) => {
-        setError(response.error)
-        setLoading(false)
-      })
+  const deleteAccount = async () => {
+    const { error } = await mutateAsync({ password })
+    setError(error)
   }
 
   const disabled = password.length === 0
@@ -85,7 +67,7 @@ const PasswordConfirmation = (props: PasswordConfirmationProps) => {
       </Button>
 
       <Button variant="danger" onClick={deleteAccount} disabled={disabled} className={styles.confirm}>
-        {loading && <FontAwesomeIcon icon={faSpinner} fixedWidth spin />}
+        {isPending && <FontAwesomeIcon icon={faSpinner} fixedWidth spin />}
         {t("delete-account")}
       </Button>
     </div>

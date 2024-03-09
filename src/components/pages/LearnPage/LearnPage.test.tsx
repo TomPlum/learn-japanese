@@ -1,10 +1,10 @@
-import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
 import { fireEvent, screen } from "@testing-library/react"
 import { getByTextWithMarkup, getValueLastCalledWith } from "__test-utils__/Queries";
 import LearnPage  from "./LearnPage"
-import { Kana } from "../../../domain/kana/Kana"
-import KanaType from "../../../domain/kana/KanaType"
-import { KanaColumn } from "../../../domain/kana/KanaColumn"
+import { Kana } from "types/kana/Kana"
+import KanaType from "types/kana/KanaType"
+import { KanaColumn } from "types/kana/KanaColumn"
 import Arrays from "../../../utility/Arrays"
 import { render } from "__test-utils__"
 import { SessionSettingsBag } from "context/SessionSettingsContext";

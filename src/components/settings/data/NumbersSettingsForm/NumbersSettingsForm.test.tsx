@@ -1,7 +1,7 @@
 import { fireEvent } from "@testing-library/react"
 import NumbersSettingsForm  from "./NumbersSettingsForm"
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu"
-import NumbersSettings, { NumbersSettingsBuilder } from "../../../../domain/session/settings/data/NumbersSettings"
+import NumbersSettings, { NumbersSettingsBuilder } from "types/session/settings/data/NumbersSettings"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 import { getValueLastCalledWith } from "__test-utils__/Queries"
 import { render } from "__test-utils__"

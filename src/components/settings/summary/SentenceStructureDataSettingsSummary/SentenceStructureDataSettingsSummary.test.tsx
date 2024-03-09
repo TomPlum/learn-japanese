@@ -1,4 +1,4 @@
-import { SentenceStructureSettingsBuilder } from "../../../../domain/session/settings/data/SentenceStructureSettings"
+import { SentenceStructureSettingsBuilder } from "types/session/settings/data/SentenceStructureSettings"
 import { render } from "@testing-library/react"
 import SentenceStructureDataSettingsSummary  from "./SentenceStructureDataSettingsSummary"
 

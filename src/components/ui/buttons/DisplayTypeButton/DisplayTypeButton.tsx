@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Button } from "react-bootstrap"
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons"
-import QuestionType from "../../../../domain/game/QuestionType"
+import QuestionType from "types/game/QuestionType"
 import styles  from "./DisplayTypeButton.module.scss"
 import { useTranslation } from "react-i18next"
 

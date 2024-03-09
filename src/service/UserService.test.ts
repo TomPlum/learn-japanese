@@ -2,7 +2,7 @@ import UserService, { UserPreferencesResponse, UserPreferenceUpdate } from "./Us
 import RestClient from "../rest/RestClient.ts"
 import DataResponse from "../rest/response/DataResponse.ts"
 import { localStorageMock } from "../setupTests.ts"
-import { Preference } from "../domain/user/Preference.ts"
+import { Preference } from "types/user/Preference.ts"
 import PatchRequest from "../rest/request/patch/PatchRequest.ts"
 import PatchReplaceOperation from "../rest/request/patch/PatchReplaceOperation.ts"
 import { VitestUtils } from "vitest";

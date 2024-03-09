@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react"
 import KanaSettingsForm  from "./KanaSettingsForm"
-import KanaSettings, { KanaSettingsBuilder } from "../../../../domain/session/settings/data/KanaSettings"
+import KanaSettings, { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu"
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons"
 import { render } from "__test-utils__"

@@ -1,6 +1,6 @@
-import { Kana } from "../domain/kana/Kana"
+import { Kana } from "types/kana/Kana"
 import KanaRepository from "../repository/KanaRepository"
-import KanaSettings from "../domain/session/settings/data/KanaSettings"
+import KanaSettings from "types/session/settings/data/KanaSettings"
 
 class KanaService {
   private readonly repository = new KanaRepository()

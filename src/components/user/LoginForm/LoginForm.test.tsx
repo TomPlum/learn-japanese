@@ -1,49 +1,29 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import LoginForm  from "./LoginForm"
-import auth, { LoginResponse } from "../../../service/AuthenticationService"
 import { render } from "__test-utils__"
 import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
 import { UserContextBag } from "context/UserContext";
+import { server } from "__test-utils__/msw.ts";
+import {
+  useLoginBadRequestHandlers,
+  useLoginErrorHandlers,
+  useLoginHandlers
+} from "api/hooks/auth/useLogin/useLogin.handlers.ts";
+import { useLoginResponses } from "api/hooks/auth/useLogin/useLogin.responses.ts";
 
 vi.mock("service/AuthenticationService")
 
 const onSuccessHandler = vi.fn()
-const loginService = auth.login as jest.MockedFunction<() => Promise<LoginResponse>>
 let registeredUsername: string | undefined = undefined
 let infoMessage: string | undefined = undefined
 
-const validLoginResponse: LoginResponse = {
-  username: "TomPlum42",
-  email: "tom@hotmail.com",
-  nickname: "Tom",
-  roles: ["admin"],
-  creationDate: "2021-10-15",
-  locked: false,
-  expired: false,
-  credentialsExpired: false,
-  enabled: true,
-  token: "TOKEN",
-  refreshToken: "REFRESH_TOKEN",
-  preferences: {
-    kanjiFont: "Gothic",
-    theme: "Dark Mode",
-    language: "English",
-    highScoresBehaviour: "Ask Each Time",
-    defaultMode: "Play",
-    flashCardsQuantity: 10,
-    confidenceMenuStyle: "Numbers 1 - 6",
-    profileVisibility: "Friends Only",
-    streakCardView: "Start Date",
-    romajiVisibility: "Ask Each Time",
-    streakNotifications: true,
-    mistakesReminders: true,
-    activityFeedQuantity: 3
-  }
-}
-
 const setup = () => {
   const response = render(
-    <LoginForm onSuccess={onSuccessHandler} username={registeredUsername} info={infoMessage} />
+    <LoginForm
+      info={infoMessage}
+      onSuccess={onSuccessHandler}
+      registeredUsername={registeredUsername}
+    />
   )
 
   return {
@@ -61,7 +41,7 @@ test("Should focus the username field on mount", () => {
 })
 
 test("Pressing the enter key while the username and password are valid should invoke login", async () => {
-  loginService.mockResolvedValueOnce(validLoginResponse)
+  server.use(...useLoginHandlers)
 
   const { username, password, form } = setup()
 
@@ -123,7 +103,7 @@ test("Entering a valid username and password should enable the Login button", ()
 })
 
 test("When the login API call returns successfully, then it should call the onSuccess event handler", async () => {
-  loginService.mockResolvedValueOnce(validLoginResponse)
+  server.use(...useLoginHandlers)
 
   const { username, password, login } = setup()
 
@@ -136,23 +116,8 @@ test("When the login API call returns successfully, then it should call the onSu
   await waitFor(() => expect(onSuccessHandler).toHaveBeenCalled())
 })
 
-test("Clicking the login button while the form is valid should call the authentication service", async () => {
-  loginService.mockResolvedValueOnce(validLoginResponse)
-
-  const { username, password, login } = setup()
-
-  //Enter Credentials
-  fireEvent.change(username, { target: { value: "TomPlum42" } })
-  fireEvent.change(password, { target: { value: "P4ssw0rd" } })
-
-  //Login
-  fireEvent.click(login)
-
-  await waitFor(() => expect(loginService).toHaveBeenLastCalledWith("TomPlum42", "P4ssw0rd"))
-})
-
 test("When the auth service returns an error, it should render a generic error message", async () => {
-  loginService.mockRejectedValue("It's broken")
+  server.use(...useLoginErrorHandlers)
 
   const { username, password, login } = setup()
 
@@ -167,7 +132,7 @@ test("When the auth service returns an error, it should render a generic error m
 })
 
 test("When the auth service returns an an authentication error then it should render an alert", async () => {
-  loginService.mockRejectedValue("AUTHENTICATION_ERROR")
+  server.use(...useLoginBadRequestHandlers)
 
   const { username, password, login } = setup()
 
@@ -182,7 +147,7 @@ test("When the auth service returns an an authentication error then it should re
 })
 
 test("When the auth service returns an an authentication error then it should remove the password value", async () => {
-  loginService.mockRejectedValue("AUTHENTICATION_ERROR")
+  server.use(...useLoginBadRequestHandlers)
 
   const { username, password, login } = setup()
 
@@ -199,7 +164,7 @@ test("When the auth service returns an an authentication error then it should re
 })
 
 test("When the auth service returns an an authentication error then it should invalidate the form", async () => {
-  loginService.mockRejectedValue("AUTHENTICATION_ERROR")
+  server.use(...useLoginBadRequestHandlers)
 
   const { username, password, login } = setup()
 
@@ -247,7 +212,7 @@ test("When the info prop is passed then it should not render the success alert",
 })
 
 test("When successfully logging in, it should set the user object in context", async () => {
-  loginService.mockResolvedValueOnce(validLoginResponse)
+  server.use(...useLoginHandlers)
 
   const { username, password, login, onUserContextValueChange } = setup()
 
@@ -258,32 +223,5 @@ test("When successfully logging in, it should set the user object in context", a
   // Login
   fireEvent.click(login)
   await waitFor(() => expect(onSuccessHandler).toHaveBeenCalled())
-  expect(getValueLastCalledWith<UserContextBag>(onUserContextValueChange).user).toStrictEqual({
-    creationDate: "2021-10-15",
-    credentialsExpired: false,
-    email: "tom@hotmail.com",
-    enabled: true,
-    expired: false,
-    locked: false,
-    nickname: "Tom",
-    preferences: {
-      activityFeedQuantity: 3,
-      confidenceMenuStyle: "Numbers 1 - 6",
-      defaultMode: "Play",
-      flashCardsQuantity: 10,
-      highScoresBehaviour: "Ask Each Time",
-      kanjiFont: "Gothic",
-      language: "English",
-      mistakesReminders: true,
-      profileVisibility: "Friends Only",
-      romajiVisibility: "Ask Each Time",
-      streakCardView: "Start Date",
-      streakNotifications: true,
-      theme: "Dark Mode"
-    },
-    refreshToken: "REFRESH_TOKEN",
-    roles: ["admin"],
-    token: "TOKEN",
-    username: "TomPlum42"
-  })
+  expect(getValueLastCalledWith<UserContextBag>(onUserContextValueChange).user).toStrictEqual(useLoginResponses)
 })

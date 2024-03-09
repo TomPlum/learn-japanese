@@ -3,30 +3,26 @@ import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheck, faCheckCircle, faPencilAlt, faSpinner, faTimes } from "@fortawesome/free-solid-svg-icons"
 import styles  from "./CustomPresetForm.module.scss"
-import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
 import IconPicker from "../../../../ui/menu/icon/IconPicker"
-import { CustomIcon } from "../../../../../domain/Icon"
-import PresetService from "../../../../../service/PresetService"
+import { CustomIcon } from "types/Icon"
 import { useTranslation } from "react-i18next"
+import useSavePlayPreset from "api/hooks/presets/useSavePlayPreset";
+import { CustomPresetFormProps } from "components/layout/wizard/form/CustomPresetForm/types.ts";
+import useSaveLearnPreset from "api/hooks/presets/useSaveLearnPreset";
 
-export interface CustomPresetFormProps {
-  settings: SessionSettings
-  onSuccess: () => void
-  onCancel: () => void
-}
-
-const CustomPresetForm = (props: CustomPresetFormProps) => {
-  const { settings, onSuccess, onCancel } = props
-
-  const service = new PresetService()
-
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [error, setError] = useState("")
+const CustomPresetForm = ({ settings, onSuccess, onCancel }: CustomPresetFormProps) => {
   const [name, setName] = useState("")
-  const [icon, setIcon] = useState<CustomIcon>("FaRocket")
+  const [success, setSuccess] = useState(false)
   const [colour, setColour] = useState("#FFFFFF")
   const [editingName, setEditingName] = useState(false)
+  const [icon, setIcon] = useState<CustomIcon>("FaRocket")
+
+  const { mutateAsync: savePlayPreset, isPending: isSavePlayLoading, isError: playError } = useSavePlayPreset()
+  const { mutateAsync: saveLearnPreset, isPending: isSaveLearnLoading, isError: learnError } = useSaveLearnPreset()
+
+  const isLoading = isSavePlayLoading || isSaveLearnLoading
+  const error = playError || learnError
+
   const { t } = useTranslation("translation", { keyPrefix: "forms.custom-preset" })
   const actions = useTranslation("translation", { keyPrefix: "action" }).t
 
@@ -34,29 +30,20 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     setName(e.target.value)
   }
 
-  const handleSave = () => {
-    setLoading(true)
-
-    service
-      .saveCustomPreset({ name, icon, colour }, settings)
-      .then((response) => {
-        if (response.success) {
-          setSuccess(true)
-          setTimeout(() => onSuccess(), 2000)
-        } else {
-          if (response.error) {
-            setError(response.error)
-          } else {
-            setError(t("failed-to-save"))
-          }
-        }
-      })
-      .catch(() => {
-        setError(t("generic-error"))
-      })
-      .finally(() => {
-        setLoading(false)
-      })
+  const handleSave = async () => {
+    if (settings.gameSettings) {
+      try {
+        await savePlayPreset({ meta: { name, icon, colour }, settings })
+      } catch {}
+      setSuccess(true)
+      setTimeout(() => onSuccess(), 2000)
+    } else {
+      try {
+        await saveLearnPreset({ meta: { name, icon, colour }, settings })
+      } catch {}
+      setSuccess(true)
+      setTimeout(() => onSuccess(), 2000)
+    }
   }
 
   const handleIconChange = (icon: CustomIcon, colour: string) => {
@@ -64,12 +51,16 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
     setColour(colour)
   }
 
-  const disableSave = name === "" || loading
-  const saveIcon = loading ? faSpinner : faCheck
+  const disableSave = name === "" || isLoading
+  const saveIcon = isLoading ? faSpinner : faCheck
 
   return (
     <div data-testid="save-custom-preset-form">
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && (
+        <Alert variant="danger">
+          {t('failed-to-save')}
+        </Alert>
+      )}
 
       {success && (
         <Alert variant="success">
@@ -114,11 +105,11 @@ const CustomPresetForm = (props: CustomPresetFormProps) => {
 
             <Form.Group as={Col} className={styles.buttonContainer}>
               <Button variant="primary" className={styles.button} disabled={disableSave} onClick={handleSave}>
-                <FontAwesomeIcon icon={saveIcon} spin={loading} fixedWidth className={styles.icon} />
+                <FontAwesomeIcon icon={saveIcon} spin={isLoading} fixedWidth className={styles.icon} />
                 <span>{actions("save")}</span>
               </Button>
 
-              <Button variant="danger" onClick={onCancel} className={styles.button} disabled={loading}>
+              <Button variant="danger" onClick={onCancel} className={styles.button} disabled={isLoading}>
                 <FontAwesomeIcon fixedWidth icon={faTimes} className={styles.icon} />
                 <span>{actions("cancel")}</span>
               </Button>

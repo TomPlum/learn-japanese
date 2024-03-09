@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import WizardProgressStep from "./../WizardProgressStep"
 import styles  from "./PlayWizardProgress.module.scss"
-import { AppMode } from "../../../../../domain/AppMode"
+import { AppMode } from "types/AppMode"
 
 export interface PlayWizardProgressProps {
   stage: number

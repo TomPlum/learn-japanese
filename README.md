@@ -28,9 +28,9 @@ Over time, in-between work, this project has become a place where I just dump Ja
 
 ## Local Setup
 
-`npm install`
+1. `npm install`
 
-`npm run start:msw`
+2. `npm run start:msw` (to run with stubbed API responses) or `npm run start` (needs back-end running)
 
 ## Kana
 

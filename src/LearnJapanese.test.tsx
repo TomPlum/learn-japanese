@@ -2,10 +2,7 @@ import { screen, render } from "@testing-library/react"
 import { createMemoryRouter, RouterProvider } from "react-router-dom"
 import { Environment } from "./utility/Environment.ts"
 import { routerConfig } from "./LearnJapanese.tsx"
-
-// Mock scrollIntoView() as it doesn't exist in JSDom
-const scrollIntoView = vi.fn()
-window.HTMLElement.prototype.scrollIntoView = scrollIntoView
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const setup = (route = '') => {
   const router = createMemoryRouter(routerConfig, {
@@ -13,7 +10,9 @@ const setup = (route = '') => {
     initialIndex: 1
   })
   render(
-   <RouterProvider router={router} />
+   <QueryClientProvider client={new QueryClient()}>
+     <RouterProvider router={router} />
+   </QueryClientProvider>
   )
 }
 
@@ -60,6 +59,7 @@ test("Navigating to the /help should route to the Help page", async () => {
 })
 
 test("Navigating to the /high-scores should route to the high scores page", async () => {
+  // TODO: Add Highscore MSW handlers here once relevant hooks converted
   setup('/high-scores')
   expect(await screen.findByTestId("high-scores-page")).toBeInTheDocument()
 })

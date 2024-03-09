@@ -1,6 +1,6 @@
 import React, { forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
 import { Col, Row } from "react-bootstrap"
-import HintSettings, { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings"
+import HintSettings, { HintSettingsBuilder } from "types/session/settings/game/HintSettings"
 import RangeSlider from "react-bootstrap-range-slider"
 import ScrollableContainer from "../../../ui/ScrollableContainer"
 import styles  from "./HintSettingsForm.module.scss"

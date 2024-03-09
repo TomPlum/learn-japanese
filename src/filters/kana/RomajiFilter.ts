@@ -1,5 +1,5 @@
 import { Filter } from "../Filter"
-import { Kana } from "../../domain/kana/Kana"
+import { Kana } from "types/kana/Kana"
 
 export default class RomajiFilter implements Filter<Kana> {
   private readonly search: string

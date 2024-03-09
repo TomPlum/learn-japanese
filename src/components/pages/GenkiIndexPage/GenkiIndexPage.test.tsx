@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import GenkiIndexPage  from "./GenkiIndexPage"
-import GenkiDefinition from "../../../domain/learn/GenkiDefinition"
+import GenkiDefinition from "types/learn/GenkiDefinition"
 import { findByTextWithElements } from "__test-utils__/Queries"
 import userEvent from "@testing-library/user-event"
 

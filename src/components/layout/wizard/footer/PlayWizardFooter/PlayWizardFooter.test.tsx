@@ -2,7 +2,7 @@ import { fireEvent } from "@testing-library/react"
 import PlayWizardFooter, {
   PlayWizardFooterProps
 } from "../../../../../components/layout/wizard/footer/PlayWizardFooter"
-import { AppMode } from "../../../../../domain/AppMode"
+import { AppMode } from "types/AppMode"
 import { render } from "__test-utils__"
 
 const onNextHandler = vi.fn()

@@ -1,16 +1,14 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import UserForm, { UserFormProps }  from "./UserForm"
-import authService from "../../../service/AuthenticationService"
 import { render } from "__test-utils__"
+import { server } from "__test-utils__/msw.ts";
+import { useRegisterUserHandlers } from "api/hooks/auth/useRegisterUser/useRegisterUser.handlers.ts";
 
 let props: UserFormProps
 
 const onCloseHandler = vi.fn()
-const mockRegister = vi.fn()
 
 beforeEach(() => {
-  authService.register = mockRegister
-
   props = {
     show: true,
     onClose: onCloseHandler
@@ -46,7 +44,7 @@ test("Clicking the close button should call the onClose event handler", async ()
 
 test("Successfully registering a user should switch to the log-in form", async () => {
   //Mock a successful registration response and render the component
-  mockRegister.mockResolvedValueOnce({ data: {} })
+  server.use(...useRegisterUserHandlers)
   setup()
   fireEvent.click(screen.getByText("I don't have an account"))
 

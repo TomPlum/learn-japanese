@@ -1,4 +1,4 @@
-import BasicsSettings from "../../../../domain/session/settings/data/BasicsSettings"
+import BasicsSettings from "types/session/settings/data/BasicsSettings"
 import KeyWordDataSummary from "./../KeyWordDataSummary"
 
 export interface BasicsDataSettingsSummaryProps {

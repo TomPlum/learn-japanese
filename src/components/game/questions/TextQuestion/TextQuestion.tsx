@@ -3,7 +3,7 @@ import { Col, Form, Row } from "react-bootstrap"
 import { GameQuestionProps, MemoryGameQuestion } from "../../MemoryGame"
 import QuestionDisplay, { QuestionDisplayHandler } from "../../../ui/display/QuestionDisplay"
 import AnswerInputField from "../../../ui/fields/AnswerInputField"
-import LearnableField from "../../../../domain/learn/LearnableField"
+import LearnableField from "types/learn/LearnableField"
 import styles  from "./TextQuestion.module.scss"
 import { useTranslation } from "react-i18next"
 

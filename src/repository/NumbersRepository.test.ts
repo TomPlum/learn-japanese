@@ -1,9 +1,9 @@
 import NumbersRepository from "./NumbersRepository.ts"
 import { CounterData, NumbersData } from "../data/DataTypes.ts"
 import numbers, { counters } from "../data/Numbers.ts"
-import CommonData from "../domain/learn/CommonData.ts"
-import { CounterGroup } from "../domain/numbers/CounterGroup.ts"
-import { NumbersSettingsBuilder } from "../domain/session/settings/data/NumbersSettings.ts"
+import CommonData from "types/learn/CommonData.ts"
+import { CounterGroup } from "types/numbers/CounterGroup.ts"
+import { NumbersSettingsBuilder } from "types/session/settings/data/NumbersSettings.ts"
 
 vi.mock("data/Numbers")
 

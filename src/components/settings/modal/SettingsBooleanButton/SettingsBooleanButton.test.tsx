@@ -3,7 +3,7 @@ import SettingsBooleanButton, {
 } from "../../../../components/settings/modal/SettingsBooleanButton"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 import { faCrown } from "@fortawesome/free-solid-svg-icons"
-import { Preference } from "../../../../domain/user/Preference"
+import { Preference } from "types/user/Preference"
 import { render } from "__test-utils__"
 import { testUser } from "../../../../setupTests"
 import { fireEvent, waitFor } from "@testing-library/react";

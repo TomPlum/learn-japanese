@@ -1,6 +1,6 @@
 import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react"
 import InterfaceSettingsTab  from "./InterfaceSettingsTab"
-import { localStorageMock, testUser } from "../../../../setupTests"
+import { localStorageMock, testUser } from "setupTests.ts"
 import { render } from "__test-utils__"
 import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
 import { FontContextBag } from "context/FontContext";
@@ -9,7 +9,7 @@ import { User } from "context/UserContext";
 const onEditDashboardLayoutHandler = vi.fn()
 
 const mockFontService = vi.fn()
-vi.mock("service/FontService", () => ({
+vi.mock("hooks/useFonts", () => ({
   default: function () {
     return { getFonts: mockFontService }
   }

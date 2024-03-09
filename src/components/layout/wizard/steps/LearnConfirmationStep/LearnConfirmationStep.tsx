@@ -1,4 +1,4 @@
-import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
+import { SessionSettings } from "types/session/settings/SessionSettings"
 import { WizardStep } from "../../SessionWizard/types.ts"
 import LearnSessionSettingsSummary from "../../../../settings/LearnSessionSettingsSummary"
 

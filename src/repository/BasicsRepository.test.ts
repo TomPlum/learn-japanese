@@ -1,5 +1,5 @@
 import BasicsRepository from "./BasicsRepository.ts"
-import BasicsSettings, { BasicsSettingsBuilder } from "../domain/session/settings/data/BasicsSettings.ts"
+import BasicsSettings, { BasicsSettingsBuilder } from "types/session/settings/data/BasicsSettings.ts"
 
 describe("Basic Repository", () => {
   const repository = new BasicsRepository()

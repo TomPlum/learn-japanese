@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react"
 import NumbersFlashCardFront  from "./NumbersFlashCardFront"
-import CommonData from "../../../../domain/learn/CommonData"
+import CommonData from "types/learn/CommonData"
 
 const onClickHandler = vi.fn()
 

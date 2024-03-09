@@ -1,4 +1,4 @@
-import { CustomIcon, Icon as IconType } from "../../../../../domain/Icon"
+import { CustomIcon, Icon as IconType } from "types/Icon"
 import React from "react"
 import * as CustomFontAwesomeIcon from "react-icons/fa"
 import styles  from "./Icon.module.scss"

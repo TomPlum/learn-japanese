@@ -1,9 +1,9 @@
 import { fireEvent, screen } from "@testing-library/react"
 import PlayCard  from "./PlayCard"
-import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
-import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
-import LearnSettings from "../../../domain/session/settings/LearnSettings"
-import PresetBuilder from "../../../domain/session/PresetBuilder"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
+import LearnSettings from "types/session/settings/LearnSettings"
+import PresetBuilder from "types/session/PresetBuilder"
 import { render } from "__test-utils__"
 
 const playPreset = new PresetBuilder()

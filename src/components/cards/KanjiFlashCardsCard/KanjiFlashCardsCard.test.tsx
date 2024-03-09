@@ -1,8 +1,8 @@
 import { fireEvent, screen } from "@testing-library/react"
 import KanjiFlashCardsCard  from "./KanjiFlashCardsCard"
-import Definition from "../../../domain/sentence/Definition"
-import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails"
-import { FlashCard } from "../../../domain/learn/FlashCard"
+import Definition from "types/sentence/Definition"
+import SpaceRepetitionDetails from "types/learn/spacedrepetition/SpaceRepetitionDetails"
+import { FlashCard } from "types/learn/FlashCard"
 import { render } from "__test-utils__"
 
 const mockGetKanjiFlashCards = vi.fn()

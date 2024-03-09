@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react"
-import { SessionSettings } from "../../../domain/session/settings/SessionSettings"
-import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
-import LearnSettings from "../../../domain/session/settings/LearnSettings"
+import { SessionSettings } from "types/session/settings/SessionSettings"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
+import LearnSettings from "types/session/settings/LearnSettings"
 import { WizardStep } from "../../../components/layout/wizard/SessionWizard/types"
 import LearnSessionSettingsSummary, {
   LearnSessionSettingsSummaryProps

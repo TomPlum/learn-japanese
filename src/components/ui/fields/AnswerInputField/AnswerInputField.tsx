@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react"
 import GameInputField from "./../GameInputField"
-import LearnableField from "../../../../domain/learn/LearnableField"
+import LearnableField from "types/learn/LearnableField"
 import PopOver from "../../PopOver"
 import { useTranslation } from "react-i18next"
 

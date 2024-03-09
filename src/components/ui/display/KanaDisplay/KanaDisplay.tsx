@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Kana } from "../../../../domain/kana/Kana"
+import { Kana } from "types/kana/Kana"
 import { Container } from "react-bootstrap"
 import DynamicCharacter, { CharacterStyleProps } from "../../../game/DynamicCharacter"
 import styles  from "./KanaDisplay.module.scss"

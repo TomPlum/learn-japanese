@@ -1,7 +1,7 @@
-import Topic from "../../../../../domain/Topic"
+import Topic from "types/Topic"
 import GridDisplay from "../../grid/GridDisplay"
 import GridItem from "../../grid/GridItem"
-import GridDisplayType from "../../../../../domain/grid/GridDisplayType"
+import GridDisplayType from "types/grid/GridDisplayType"
 
 export interface TopicSelectionStepProps {
   topic: Topic

@@ -1,5 +1,5 @@
 import { Filter } from "../Filter"
-import { Learnable } from "../../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 
 class KanjiFilter<T extends Learnable> implements Filter<T> {
   private readonly kanji: string

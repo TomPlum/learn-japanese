@@ -1,10 +1,10 @@
-import { Kanji } from "../../domain/kanji/Kanji.ts"
-import { KanjiReading } from "../../domain/kanji/KanjiReading.ts"
-import { ReadingType } from "../../domain/kanji/ReadingType.ts"
-import { KyoikuGrade } from "../../domain/kanji/KyoikuGrade.ts"
+import { Kanji } from "types/kanji/Kanji.ts"
+import { KanjiReading } from "types/kanji/KanjiReading.ts"
+import { ReadingType } from "types/kanji/ReadingType.ts"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts"
 import TagFilter from "./TagFilter.ts"
-import { Learnable } from "../../domain/learn/Learnable.ts"
-import JLTPLevel from "../../domain/learn/JLTPLevel.ts"
+import { Learnable } from "types/learn/Learnable.ts"
+import JLTPLevel from "types/learn/JLTPLevel.ts"
 
 const data = [
   new Kanji(

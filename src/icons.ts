@@ -1,4 +1,4 @@
-import { Icon } from "./domain/Icon"
+import { Icon } from "types/Icon"
 
 export const iconList: Icon[] = [
   "Fa500Px",

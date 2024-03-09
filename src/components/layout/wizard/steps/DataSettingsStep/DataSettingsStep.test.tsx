@@ -1,7 +1,7 @@
 import DataSettingsStep, { DataSettingsStepProps }  from "./DataSettingsStep"
 import { fireEvent, render, screen } from "@testing-library/react"
-import Topic from "../../../../../domain/Topic"
-import { KanaSettingsBuilder } from "../../../../../domain/session/settings/data/KanaSettings"
+import Topic from "types/Topic"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
 
 const onSelectHandler = vi.fn()
 const isValidHandler = vi.fn()

@@ -1,5 +1,5 @@
-import Confidence from "../../../domain/learn/spacedrepetition/Confidence"
-import { ConfidenceMenuStyle } from "../../../domain/learn/spacedrepetition/ConfidenceMenuStyle"
+import Confidence from "types/learn/spacedrepetition/Confidence"
+import { ConfidenceMenuStyle } from "types/learn/spacedrepetition/ConfidenceMenuStyle"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles  from "./ConfidenceInfoItem.module.scss"
 import { useUserContext } from "context/UserContext";

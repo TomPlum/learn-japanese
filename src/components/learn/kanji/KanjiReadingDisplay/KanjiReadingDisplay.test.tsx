@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import KanjiReadingDisplay  from "./KanjiReadingDisplay"
-import { ReadingType } from "../../../../domain/kanji/ReadingType"
-import { KanjiReading } from "../../../../domain/kanji/KanjiReading"
+import { ReadingType } from "types/kanji/ReadingType"
+import { KanjiReading } from "types/kanji/KanjiReading"
 import { Environment } from "../../../../utility/Environment"
 
 const onReading = new KanjiReading("nan", "なん", ReadingType.ON)

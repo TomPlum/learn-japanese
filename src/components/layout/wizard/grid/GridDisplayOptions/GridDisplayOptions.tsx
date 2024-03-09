@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faThLarge, faThList } from "@fortawesome/free-solid-svg-icons"
 import React, { useEffect, useState } from "react"
-import GridDisplayType from "../../../../../domain/grid/GridDisplayType"
-import { GridOptions } from "../../../../../domain/grid/GridOptions"
+import GridDisplayType from "types/grid/GridDisplayType"
+import { GridOptions } from "types/grid/GridOptions"
 import RangeSlider from "react-bootstrap-range-slider"
 import styles  from "./GridDisplayOptions.module.scss"
 

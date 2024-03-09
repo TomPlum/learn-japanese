@@ -1,37 +1,9 @@
 import LoginPage  from "./LoginPage"
 import { fireEvent, waitFor } from "@testing-library/react"
-import auth from "../../../service/AuthenticationService"
-import { testUser } from "../../../setupTests"
+import { testUser } from "setupTests"
 import { render } from "__test-utils__"
-
-const validLoginResponse = {
-  username: "TomPlum42",
-  email: "tom@hotmail.com",
-  nickname: "Tom",
-  roles: ["admin"],
-  creationDate: "2021-10-15",
-  locked: false,
-  expired: false,
-  credentialsExpired: false,
-  enabled: true,
-  token: "TOKEN",
-  refreshToken: "REFRESH_TOKEN",
-  preferences: {
-    defaultFont: "Gothic",
-    theme: "Dark Mode",
-    language: "English",
-    highScores: "Ask Each Time",
-    defaultMode: "Play",
-    cardsPerDay: 10,
-    confidenceMenuStyle: "Numbers 1 - 6"
-  }
-}
-
-const mockLogin = vi.fn()
-
-beforeEach(() => {
-  auth.login = mockLogin
-})
+import { server } from "__test-utils__/msw.ts";
+import { useLoginHandlers } from "api/hooks/auth/useLogin/useLogin.handlers.ts";
 
 test("Should redirect to the home page if the user is already logged in", () => {
   const { history } = render(<LoginPage />, { user: testUser })
@@ -48,7 +20,7 @@ test("Should redirect to the home page after successfully logging in", async () 
   const { component, history } = render(<LoginPage />)
 
   // Log in
-  mockLogin.mockResolvedValueOnce(validLoginResponse)
+  server.use(...useLoginHandlers)
   fireEvent.change(component.getByPlaceholderText("Username"), { target: { value: "TomPlum" } })
   fireEvent.change(component.getByPlaceholderText("Password"), { target: { value: "MyPassword123-" } })
 

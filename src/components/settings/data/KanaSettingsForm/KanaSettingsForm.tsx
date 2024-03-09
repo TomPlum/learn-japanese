@@ -1,5 +1,5 @@
 import { useState } from "react"
-import KanaSettings, { KanaSettingsBuilder } from "../../../../domain/session/settings/data/KanaSettings"
+import KanaSettings, { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
 import DataSettingsMenu, { DataSettingsMenuProps } from "./../DataSettingsMenu"
 import KanaSettingsFormBody from "./../KanaSettingsFormBody"
 

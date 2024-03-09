@@ -2,7 +2,7 @@ import SettingsTabTitle from "./../SettingsTabTitle"
 import styles from "components/settings/modal/InterfaceSettingsTab/InterfaceSettingsTab.module.scss"
 import SettingsDropdown from "./../SettingsDropdown"
 import { faRss } from "@fortawesome/free-solid-svg-icons"
-import { Preference } from "../../../../domain/user/Preference"
+import { Preference } from "types/user/Preference"
 import { useTranslation } from "react-i18next"
 
 const GeneralSettingsTab = () => {

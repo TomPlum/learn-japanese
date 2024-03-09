@@ -1,86 +1,27 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
-import SessionWizard  from "./SessionWizard"
+import SessionWizard from "./SessionWizard"
 import userEvent from "@testing-library/user-event"
-import KanjiSettings, { KanjiSettingsBuilder } from "../../../../domain/session/settings/data/KanjiSettings"
-import { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings"
-import { faPaintBrush } from "@fortawesome/free-solid-svg-icons"
-import { QuestionSettingsBuilder } from "../../../../domain/session/settings/game/QuestionSettings"
-import LearnableField from "../../../../domain/learn/LearnableField"
-import QuestionType from "../../../../domain/game/QuestionType"
-import { HintSettingsBuilder } from "../../../../domain/session/settings/game/HintSettings"
-import { TimeSettingsBuilder } from "../../../../domain/session/settings/game/TimeSettings"
-import PresetBuilder from "../../../../domain/session/PresetBuilder"
+import KanjiSettings from "types/session/settings/data/KanjiSettings"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
+import { QuestionSettingsBuilder } from "types/session/settings/game/QuestionSettings"
+import LearnableField from "types/learn/LearnableField"
+import QuestionType from "types/game/QuestionType"
+import { HintSettingsBuilder } from "types/session/settings/game/HintSettings"
+import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings"
 import { render } from "__test-utils__"
-import { getValueLastCalledWith } from "__test-utils__/Queries";
-import { SessionSettingsBag } from "context/SessionSettingsContext";
-import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade.ts";
-import { LifeSettingsBuilder } from "../../../../domain/session/settings/game/LifeSettings.ts";
-
-const mockGetAllPresets = vi.fn()
-const mockGetDefaultPresets = vi.fn()
-vi.mock("service/PresetService", () => ({
-  default: function () {
-    return {
-      getAllPresets: mockGetAllPresets,
-      getDefaultPresets: mockGetDefaultPresets
-    }
-  }
-}))
+import { getValueLastCalledWith } from "__test-utils__/Queries"
+import { SessionSettingsBag } from "context/SessionSettingsContext"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts"
+import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings.ts"
+import { server } from "__test-utils__/msw.ts"
+import {
+  useGetDefaultPresetsHandlers,
+  useGetDefaultPresetsHandlersError,
+  useGetDefaultPresetsHandlersMultiplePresets
+} from "api/hooks/presets/useGetDefaultPresets"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts"
 
 const onCloseHandler = vi.fn()
-
-const playPreset = new PresetBuilder()
-  .withID(1)
-  .withDisplayName("Test Play")
-  .withColour("#ffffff")
-  .withIcon("FaAtom")
-  .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
-  .withGameSettings(new GameSettingsBuilder().build())
-  .withTopicName("Basics")
-  .build()
-
-const playBasics = new PresetBuilder()
-  .withID(2)
-  .withDisplayName("Basics2")
-  .withColour("#ffffff")
-  .withIcon("FaAtom")
-  .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
-  .withGameSettings(new GameSettingsBuilder().build())
-  .withTopicName("Basics")
-  .build()
-
-const learnPreset = new PresetBuilder()
-  .withID(1)
-  .withDisplayName("Test Learn")
-  .withColour("#fdb40e")
-  .withIcon("あ")
-  .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
-  .withGameSettings(new GameSettingsBuilder().build())
-  .withTopicName("Topic")
-  .build()
-
-const playKanjiPreset = new PresetBuilder()
-  .withID(1)
-  .withDisplayName("Kanji")
-  .withColour("#6857ee")
-  .withIcon(faPaintBrush)
-  .withDataSettings(new KanjiSettingsBuilder().withQuantity(25).withJoyoKanji().build())
-  .withGameSettings(
-    new GameSettingsBuilder()
-      .withTimeSettings(new TimeSettingsBuilder().isTimed().build())
-      .withHintSettings(new HintSettingsBuilder().isEnabled(false).build())
-      .withQuestionSettings(
-        new QuestionSettingsBuilder()
-          .withFields(LearnableField.MEANING, LearnableField.KANJI)
-          .withType(QuestionType.CHOICE)
-          .withCardQuantity(4)
-          .withScoreTracking(true)
-          .build()
-      )
-      .build()
-  )
-  .withTopicName("Jōyō Kanji")
-  .build()
 
 const setup = () => {
   const response = render(<SessionWizard onClose={onCloseHandler} />)
@@ -263,7 +204,7 @@ test("Clicking Start in the confirmation step for custom play should set the sel
 })
 
 test("Clicking Start in the confirmation step for preset play should set the selected settings in context", async () => {
-  mockGetDefaultPresets.mockResolvedValueOnce({ learn: [learnPreset], play: [playKanjiPreset] })
+  server.use(...useGetDefaultPresetsHandlers)
 
   const { next, history, onSessionSettingsContextValueChange } = setup()
 
@@ -271,8 +212,8 @@ test("Clicking Start in the confirmation step for preset play should set the sel
   fireEvent.click(screen.getByText("Play"))
   fireEvent.click(next)
 
-  // Select the 'Jōyō Kanji' Topic
-  fireEvent.click(screen.getByText("Jōyō Kanji"))
+  // Select the 'Hiragana & Katakana' Topic
+  fireEvent.click(screen.getByText("Hiragana & Katakana"))
   fireEvent.click(next)
 
   // Select the 'Preset' type
@@ -280,7 +221,7 @@ test("Clicking Start in the confirmation step for preset play should set the sel
   fireEvent.click(next)
 
   // Wait for presets to load
-  expect(await screen.findByText("Kanji")).toBeInTheDocument()
+  expect(await screen.findByText("Example Play Preset")).toBeInTheDocument()
 
   // Starting the game should set the game and data settings in context
   fireEvent.click(screen.getByText("Start"))
@@ -291,23 +232,25 @@ test("Clicking Start in the confirmation step for preset play should set the sel
     .withQuestionSettings(
       new QuestionSettingsBuilder()
         .withType(QuestionType.CHOICE)
-        .withFields(LearnableField.MEANING, LearnableField.KANJI)
+        .withFields(LearnableField.KANA, LearnableField.ROMAJI)
         .withCardQuantity(4)
-        .withQuantity(1)
+        .withQuantity(150)
         .withScoreTracking(true)
         .build()
     )
-    .withHintSettings(new HintSettingsBuilder().isEnabled(false).withQuantity(0).build())
-    .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(5).build())
+    .withHintSettings(new HintSettingsBuilder().isEnabled(true).withQuantity(8).build())
+    .withLifeSettings(new LifeSettingsBuilder().isEnabled(true).withQuantity(12).build())
     .withTimeSettings(new TimeSettingsBuilder().isTimed(true).isCountDown(false).withSecondsPerQuestion(0).build())
     .build()
   )
 
-  expect(sessionContext.dataSettings).toStrictEqual(new KanjiSettings(
-    [KyoikuGrade.ONE, KyoikuGrade.TWO, KyoikuGrade.THREE, KyoikuGrade.FOUR, KyoikuGrade.FIVE, KyoikuGrade.SIX, KyoikuGrade.EIGHT],
-    [],
-    25
-  ))
+  expect(sessionContext.dataSettings).toStrictEqual(
+    new KanaSettingsBuilder()
+      .withQuantity(50)
+      .withDiacriticals(true)
+      .withHiragana(true)
+      .build()
+  )
 
   // Should re-direct to the /play page
   expect(history.location.pathname).toBe("/play")
@@ -494,7 +437,7 @@ test("Switching from the type step and back again should maintain its selection 
 })
 
 test("Switching from the preset step and back again should maintain its selection state", async () => {
-  mockGetDefaultPresets.mockResolvedValue({ learn: [learnPreset], play: [playPreset, playBasics] })
+  server.use(...useGetDefaultPresetsHandlersMultiplePresets)
   const { next } = setup()
 
   // Advance to the 'Preset' step
@@ -503,11 +446,12 @@ test("Switching from the preset step and back again should maintain its selectio
 
   // Change the topic to 'Basics'
   await waitFor(() => expect(screen.getByTestId("wizard-topic-selector")).not.toBeDisabled())
-  fireEvent.click(screen.getByText("Hiragana & Katakana"))
-  fireEvent.click(screen.getByText("Basics"))
+  await userEvent.click(screen.getByTestId("topic-selector-toggle"))
+  expect(await screen.findByTestId("topic-selector-menu")).toBeInTheDocument()
+  fireEvent.click(await screen.findByText("Basics"))
 
   // Change the preset selection to 'Test Play'
-  fireEvent.click(screen.getByText("Test Play"))
+  fireEvent.click(screen.getByText("Example Play Preset 2"))
 
   // Go back to the 'Type' step
   fireEvent.click(screen.getByText("Back"))
@@ -519,11 +463,11 @@ test("Switching from the preset step and back again should maintain its selectio
   expect(screen.getByText("Basics")).toBeInTheDocument()
 
   // The 'Test Play' preset should still be selected
-  expect((await screen.findByText("Test Play")).parentElement).toHaveClass("selected")
+  expect((await screen.findByText("Example Play Preset 2")).parentElement).toHaveClass("selected")
 })
 
 test("The start button should be disabled if the preset is undefined", async () => {
-  mockGetDefaultPresets.mockResolvedValueOnce({ error: "Something went wrong." })
+  server.use(...useGetDefaultPresetsHandlersError)
   const { next } = setup()
 
   fireEvent.click(next) // Go to topic selection

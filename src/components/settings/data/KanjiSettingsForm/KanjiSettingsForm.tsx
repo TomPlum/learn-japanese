@@ -1,4 +1,4 @@
-import KanjiSettings from "../../../../domain/session/settings/data/KanjiSettings"
+import KanjiSettings from "types/session/settings/data/KanjiSettings"
 import DataSettingsMenu, { DataSettingsMenuProps } from "./../DataSettingsMenu"
 import KanjiSettingsFormBody from "./../KanjiSettingsFormBody"
 import { useState } from "react"

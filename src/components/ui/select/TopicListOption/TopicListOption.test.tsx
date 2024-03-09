@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react"
 import TopicListOption  from "./TopicListOption"
-import Topic from "../../../../domain/Topic"
+import Topic from "types/Topic"
 
 const onClickHandler = vi.fn()
 

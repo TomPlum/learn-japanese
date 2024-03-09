@@ -1,5 +1,5 @@
 import QuestionSettingsForm from "../../../../settings/game/QuestionSettingsForm"
-import QuestionSettings from "../../../../../domain/session/settings/game/QuestionSettings"
+import QuestionSettings from "types/session/settings/game/QuestionSettings"
 
 export interface QuestionSettingsStepProps {
   settings?: QuestionSettings

@@ -1,4 +1,4 @@
-import SentenceStructureSettings from "../../../../domain/session/settings/data/SentenceStructureSettings"
+import SentenceStructureSettings from "types/session/settings/data/SentenceStructureSettings"
 import KeyWordDataSummary from "./../KeyWordDataSummary"
 
 export interface SentenceStructureDataSettingsSummaryProps {

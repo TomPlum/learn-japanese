@@ -3,11 +3,11 @@ import { PropsWithChildren, ReactElement, useEffect } from "react"
 import { I18nextProvider } from "react-i18next"
 import i18n from "__test-utils__/i18n-testing.ts"
 import SessionSettingsProvider, { SessionSettingsBag, useSessionSettingsContext } from "context/SessionSettingsContext";
-import LearnMode from "domain/session/LearnMode.ts"
-import PlayMode from "domain/session/PlayMode.ts"
-import DataSettings from "domain/session/settings/data/DataSettings.ts"
-import GameSettings from "domain/session/settings/game/GameSettings.ts"
-import LearnSettings from "domain/session/settings/LearnSettings.ts"
+import LearnMode from "types/session/LearnMode.ts"
+import PlayMode from "types/session/PlayMode.ts"
+import DataSettings from "types/session/settings/data/DataSettings.ts"
+import GameSettings from "types/session/settings/game/GameSettings.ts"
+import LearnSettings from "types/session/settings/LearnSettings.ts"
 import { History } from "@remix-run/router"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { createMemoryHistory } from "history";
@@ -20,6 +20,19 @@ import NotificationProvider, {
 } from "context/NotificationContext";
 import UserProvider, { User, UserContextBag, useUserContext } from "context/UserContext";
 import { localStorageMock } from "../setupTests.ts";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+export const testQueryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      retry: 0,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
+      refetchOnMount: true
+    }
+  }
+})
 
 interface ContextListener<Bag> {
   useContextHook: () => Bag
@@ -78,44 +91,46 @@ const render = (component: ReactElement, {
   const history = createMemoryHistory({ initialEntries: [url ?? '/'] }) as never as History
 
   const Wrapper = ({ children }: PropsWithChildren) => (
-    <HistoryRouter history={history}>
-      <I18nextProvider i18n={i18n} defaultNS="translation">
-        <SessionSettingsProvider
-          gameSettings={sessionSettings?.gameSettings}
-          dataSettings={sessionSettings?.dataSettings}
-          lastLearnPreset={sessionSettings?.lastLearnPreset}
-          lastPlayPreset={sessionSettings?.lastPlayPreset}
-        >
-          <ReactContextListener<SessionSettingsBag>
-            useContextHook={useSessionSettingsContext}
-            onContextValueChange={onSessionSettingsChange}
+    <QueryClientProvider client={testQueryClient}>
+      <HistoryRouter history={history}>
+        <I18nextProvider i18n={i18n} defaultNS="translation">
+          <SessionSettingsProvider
+            gameSettings={sessionSettings?.gameSettings}
+            dataSettings={sessionSettings?.dataSettings}
+            lastLearnPreset={sessionSettings?.lastLearnPreset}
+            lastPlayPreset={sessionSettings?.lastPlayPreset}
           >
-            <FontProvider initialFont={font}>
-              <ReactContextListener<FontContextBag>
-                useContextHook={useFontContext}
-                onContextValueChange={onFontChange}
-              >
-                <NotificationProvider initialNotifications={notifications}>
-                  <ReactContextListener<NotificationContextBag>
-                    useContextHook={useNotificationContext}
-                    onContextValueChange={onNotificationChange}
-                  >
-                    <UserProvider>
-                      <ReactContextListener<UserContextBag>
-                        useContextHook={useUserContext}
-                        onContextValueChange={onUserChange}
-                      >
-                        {children}
-                      </ReactContextListener>
-                    </UserProvider>
-                  </ReactContextListener>
-                </NotificationProvider>
-              </ReactContextListener>
-            </FontProvider>
-          </ReactContextListener>
-        </SessionSettingsProvider>
-      </I18nextProvider>
-    </HistoryRouter>
+            <ReactContextListener<SessionSettingsBag>
+              useContextHook={useSessionSettingsContext}
+              onContextValueChange={onSessionSettingsChange}
+            >
+              <FontProvider initialFont={font}>
+                <ReactContextListener<FontContextBag>
+                  useContextHook={useFontContext}
+                  onContextValueChange={onFontChange}
+                >
+                  <NotificationProvider initialNotifications={notifications}>
+                    <ReactContextListener<NotificationContextBag>
+                      useContextHook={useNotificationContext}
+                      onContextValueChange={onNotificationChange}
+                    >
+                      <UserProvider>
+                        <ReactContextListener<UserContextBag>
+                          useContextHook={useUserContext}
+                          onContextValueChange={onUserChange}
+                        >
+                          {children}
+                        </ReactContextListener>
+                      </UserProvider>
+                    </ReactContextListener>
+                  </NotificationProvider>
+                </ReactContextListener>
+              </FontProvider>
+            </ReactContextListener>
+          </SessionSettingsProvider>
+        </I18nextProvider>
+      </HistoryRouter>
+    </QueryClientProvider>
   )
 
   return {
@@ -128,6 +143,17 @@ const render = (component: ReactElement, {
   }
 }
 
+const wrapper = ({ children }: PropsWithChildren) => {
+  return (
+    <UserProvider>
+      <QueryClientProvider client={testQueryClient}>
+        {children}
+      </QueryClientProvider>
+    </UserProvider>
+  )
+}
+
 export {
-  render
+  render,
+  wrapper
 }

@@ -1,5 +1,5 @@
 import styles  from "./KanjiSearchResult.module.scss"
-import { KanjiResult } from "../../../service/KanjiService"
+import { KanjiResult } from "service/KanjiService.ts"
 
 export interface KanjiSearchResultProps {
   result: KanjiResult
@@ -66,7 +66,9 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
           {matching.substring(startIndex, valueStartIndex).trimLeft()}
         </span>
 
-        <strong className={styles.matching}>{matching.substring(valueStartIndex, valueEndIndex)}</strong>
+        <strong className={styles.matching}>
+          {matching.substring(valueStartIndex, valueEndIndex)}
+        </strong>
 
         <span>
           {matching.substring(valueEndIndex, endIndex + 1).trimRight()}
@@ -77,7 +79,7 @@ const KanjiSearchResult = (props: KanjiSearchResultProps) => {
   }
 
   return (
-    <div className={className}>
+    <div className={className} data-testid='kanji-result'>
       <p style={style} onClick={onClick}>
         {result.value.getKanjiVariation()}
       </p>

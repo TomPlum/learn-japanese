@@ -1,4 +1,4 @@
-import NumbersSettings from "../../../../domain/session/settings/data/NumbersSettings"
+import NumbersSettings from "types/session/settings/data/NumbersSettings"
 import KeyWordDataSummary from "./../KeyWordDataSummary"
 
 export interface NumbersDataSettingsSummaryProps {

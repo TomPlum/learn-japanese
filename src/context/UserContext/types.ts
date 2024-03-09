@@ -1,4 +1,4 @@
-import { Preference } from "domain/user/Preference.ts";
+import { Preference } from "types/user/Preference.ts";
 
 export interface UserProviderProps {
   initialUser?: User

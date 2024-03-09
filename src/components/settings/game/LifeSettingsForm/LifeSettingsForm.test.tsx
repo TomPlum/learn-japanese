@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react"
 import LifeSettingsForm  from "./LifeSettingsForm"
-import { LifeSettingsBuilder } from "../../../../domain/session/settings/game/LifeSettings"
+import { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings"
 import { render } from "__test-utils__"
 
 const onChangeHandler = vi.fn()

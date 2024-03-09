@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react"
 import HintSettingsStep  from "./HintSettingsStep"
-import { HintSettingsBuilder } from "../../../../../domain/session/settings/game/HintSettings"
+import { HintSettingsBuilder } from "types/session/settings/game/HintSettings"
 
 const onSelectHandler = vi.fn()
 

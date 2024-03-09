@@ -3,6 +3,10 @@ import PaginatedResponse from "../rest/response/PaginatedResponse"
 import { PaginationRequest } from "../rest/request/PaginationRequest"
 import UpdateResponse from "../rest/response/UpdateResponse"
 
+export interface AddHighScoreEntryResponse {
+  rank: number
+}
+
 export interface HighScoresEntryResponse {
   user: {
     id: number

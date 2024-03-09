@@ -1,4 +1,4 @@
-import { setupWorker } from "msw"
+import { setupWorker } from "msw/browser";
 
 import { handlers as user } from "./handlers/user.handlers"
 import { handlers as kanji } from "./handlers/kanji.handlers"

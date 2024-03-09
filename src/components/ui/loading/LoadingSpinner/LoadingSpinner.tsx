@@ -21,6 +21,7 @@ const LoadingSpinner = (props: LoadingSpinnerProps) => {
           title="Loading"
           animation="border"
           className={styles.spinner}
+          data-testid='loading-spinner'
           variant={variant ?? "primary"}
           style={{ width: size, height: size, fontSize: thickness }}
         />

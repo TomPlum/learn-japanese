@@ -35,13 +35,18 @@ const UserForm = (props: UserFormProps) => {
     >
       <Modal.Header className={styles.header} closeButton closeLabel="Close" onHide={onClose}>
         <Modal.Title>
-          <FontAwesomeIcon icon={login ? faUser : faUserPlus} fixedWidth className={styles.icon} />
+          <FontAwesomeIcon
+            fixedWidth
+            className={styles.icon}
+            icon={login ? faUser : faUserPlus}
+          />
+
           {login ? t("action.login") : t("action.register")}
         </Modal.Title>
       </Modal.Header>
 
       {login ? (
-        <LoginForm onSuccess={onClose} username={registeredUsername} />
+        <LoginForm onSuccess={onClose} registeredUsername={registeredUsername} />
       ) : (
         <RegistrationForm onSuccess={onSuccessfulRegistration} />
       )}

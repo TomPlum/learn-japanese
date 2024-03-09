@@ -13,7 +13,7 @@ vi.mock("service/UserService", () => ({
 
 // Mock Font Service
 const mockFontService = vi.fn()
-vi.mock("service/FontService", () => ({
+vi.mock('hooks/useFonts', () => ({
   default: function () {
     return { getFonts: mockFontService }
   }

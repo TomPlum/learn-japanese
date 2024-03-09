@@ -1,5 +1,5 @@
 import GridItem, { GridItemProps }  from "./GridItem"
-import Topic from "../../../../../domain/Topic"
+import Topic from "types/Topic"
 import { fireEvent, screen } from "@testing-library/react"
 import { faApple } from "@fortawesome/free-brands-svg-icons"
 import { render } from "__test-utils__"

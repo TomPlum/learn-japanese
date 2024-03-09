@@ -30,15 +30,11 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
   const [active, setActive] = useState<KeywordMeta[]>([])
   const [inParameter, setInParameter] = useState(false)
 
-  useDebouncedEffect(
-    () => {
-      if (!inParameter) {
-        onChange(search)
-      }
-    },
-    300,
-    [search]
-  )
+  useDebouncedEffect(() => {
+    if (!inParameter) {
+      onChange(search)
+    }
+  }, 300, [search])
 
   useEffect(() => {
     if (inParameter) {
@@ -128,8 +124,14 @@ const KeywordSearchField = (props: KeywordSearchFieldProps) => {
 
       <div className={styles.paramWrapper}>
         {active.map((keyword: KeywordMeta) => {
-          return <Keyword meta={keyword} key={keyword.key} onDismiss={handleDismiss} className={styles.parameter} />
-        })}
+          return (
+            <Keyword
+              meta={keyword}
+              key={keyword.key}
+              onDismiss={handleDismiss}
+              className={styles.parameter}
+            />
+          )})}
       </div>
     </>
   )

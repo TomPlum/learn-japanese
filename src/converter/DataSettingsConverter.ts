@@ -1,13 +1,13 @@
-import DataSettings from "../domain/session/settings/data/DataSettings"
-import KanaSettings, { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSettings"
-import KanjiSettings, { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings"
-import NumbersSettings, { NumbersSettingsBuilder } from "../domain/session/settings/data/NumbersSettings"
+import DataSettings from "types/session/settings/data/DataSettings"
+import KanaSettings, { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
+import KanjiSettings, { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings"
+import NumbersSettings, { NumbersSettingsBuilder } from "types/session/settings/data/NumbersSettings"
 import SentenceStructureSettings, {
   SentenceStructureSettingsBuilder
-} from "../domain/session/settings/data/SentenceStructureSettings"
-import CalendarSettings, { CalendarSettingsBuilder } from "../domain/session/settings/data/CalendarSettings"
-import BasicsSettings, { BasicsSettingsBuilder } from "../domain/session/settings/data/BasicsSettings"
-import { KyoikuGrade } from "../domain/kanji/KyoikuGrade"
+} from "types/session/settings/data/SentenceStructureSettings"
+import CalendarSettings, { CalendarSettingsBuilder } from "types/session/settings/data/CalendarSettings"
+import BasicsSettings, { BasicsSettingsBuilder } from "types/session/settings/data/BasicsSettings"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
 import {
   BasicsDataSettingsRequest,
   BasicsDataSettingsResponse,
@@ -23,8 +23,8 @@ import {
   NumbersDataSettingsResponse,
   SentenceStructureDataSettingsRequest,
   SentenceStructureDataSettingsResponse
-} from "../repository/PresetRepository"
-import Topic from "../domain/Topic"
+} from "api/hooks/presets/types.ts"
+import Topic from "types/Topic"
 import {
   BasicsDataSettingsState, CalenderDataSettingsState,
   DataSettingsState, KanaDataSettingsState, KanjiDataSettingsState,

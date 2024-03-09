@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react"
 import KanaDataSettingsSummary  from "./KanaDataSettingsSummary"
-import { KanaSettingsBuilder } from "../../../../domain/session/settings/data/KanaSettings"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
 
 let settings = new KanaSettingsBuilder()
 

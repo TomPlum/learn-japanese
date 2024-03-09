@@ -1,4 +1,4 @@
-import { Kana } from "../../domain/kana/Kana"
+import { Kana } from "types/kana/Kana"
 import { Filter } from "../Filter"
 import Arrays from "../../utility/Arrays"
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Kana } from "../../../domain/kana/Kana"
+import { Kana } from "types/kana/Kana"
 import styles  from "./ParallaxBackground.module.scss"
 import Arrays from "../../../utility/Arrays"
 import { v4 } from "uuid"

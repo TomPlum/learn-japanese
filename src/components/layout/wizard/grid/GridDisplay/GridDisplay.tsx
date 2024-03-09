@@ -1,12 +1,13 @@
 import React, { PropsWithChildren, ReactElement, useState } from "react"
 import GridDisplayOptions from "./../GridDisplayOptions"
-import { GridOptions } from "../../../../../domain/grid/GridOptions"
-import GridDisplayType from "../../../../../domain/grid/GridDisplayType"
+import { GridOptions } from "types/grid/GridOptions"
+import GridDisplayType from "types/grid/GridDisplayType"
 import styles  from "./GridDisplay.module.scss"
 import ScrollableContainer from "../../../../ui/ScrollableContainer"
 import LoadingSpinner from "../../../../ui/loading/LoadingSpinner"
 
 export interface GridDisplayProps {
+  id?: string
   loading?: boolean
   controls?: boolean
   className?: string
@@ -15,7 +16,7 @@ export interface GridDisplayProps {
 }
 
 const GridDisplay = (props: PropsWithChildren<GridDisplayProps>) => {
-  const { loading, children, controls, className, customOptions, defaultDisplayType } = props
+  const { id, loading, children, controls, className, customOptions, defaultDisplayType } = props
 
   const [options, setOptions] = useState<GridOptions>({ type: GridDisplayType.GRID, size: 80 })
 
@@ -33,7 +34,7 @@ const GridDisplay = (props: PropsWithChildren<GridDisplayProps>) => {
         )}
       </div>
 
-      <ScrollableContainer maxHeight={500}>
+      <ScrollableContainer id={id} maxHeight={500}>
         <LoadingSpinner variant="warning" active={loading ?? false} />
 
         {!loading && (

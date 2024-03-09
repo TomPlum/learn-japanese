@@ -1,12 +1,12 @@
-import { Kanji } from "../../../../domain/kanji/Kanji"
-import { KanjiReading } from "../../../../domain/kanji/KanjiReading"
-import { ReadingType } from "../../../../domain/kanji/ReadingType"
-import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
-import { Example } from "../../../../domain/kanji/Example"
+import { Kanji } from "types/kanji/Kanji"
+import { KanjiReading } from "types/kanji/KanjiReading"
+import { ReadingType } from "types/kanji/ReadingType"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
+import { Example } from "types/kanji/Example"
 import { fireEvent, render, screen } from "@testing-library/react"
 import KanjiExampleDisplay  from "./KanjiExampleDisplay"
 import { getByTextWithMarkup } from "__test-utils__/Queries"
-import JLTPLevel from "../../../../domain/learn/JLTPLevel"
+import JLTPLevel from "types/learn/JLTPLevel"
 
 const readings = [new KanjiReading("jin", "じん", ReadingType.ON), new KanjiReading("hito", "ひと", ReadingType.KUN)]
 const source = "https://en.wiktionary.org/wiki/%E4%BA%BA#Kanji"

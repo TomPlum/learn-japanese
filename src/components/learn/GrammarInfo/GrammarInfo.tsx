@@ -1,6 +1,6 @@
 import { Accordion, Col, Row } from "react-bootstrap";
 import styles  from "./GrammarInfo.module.scss"
-import PageNumber from "../../../domain/learn/PageNumber"
+import PageNumber from "types/learn/PageNumber"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronDown, faChevronUp, faHashtag } from "@fortawesome/free-solid-svg-icons"
 import { ReactNode, useState } from "react";

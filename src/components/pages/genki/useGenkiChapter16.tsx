@@ -1,5 +1,5 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo"
-import PageNumber from "../../../domain/learn/PageNumber"
+import PageNumber from "types/learn/PageNumber"
 import { Col, Container, Row } from "react-bootstrap"
 import GenkiRelativePsychologyCircle from "../../ui/genki/GenkiRelativePsychologyCircle"
 import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"

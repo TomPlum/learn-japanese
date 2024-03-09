@@ -1,12 +1,12 @@
 import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import FontSelectorButton  from "./FontSelectorButton"
-import { render } from "__test-utils__"
 import { getValueLastCalledWith } from "__test-utils__/Queries.ts";
 import { FontContextBag } from "context/FontContext";
+import { render } from "__test-utils__"
 
 const mockGetSelectedFont = vi.fn()
 const mockGetFonts = vi.fn()
-vi.mock("service/FontService", () => ({
+vi.mock('hooks/useFonts', () => ({
   default: function () {
     return { getSelectedFont: mockGetSelectedFont, getFonts: mockGetFonts }
   }

@@ -1,6 +1,6 @@
-import Definition from "../../domain/sentence/Definition.ts"
+import Definition from "types/sentence/Definition.ts"
 import KanaFilter from "./KanaFilter.ts"
-import { Learnable } from "../../domain/learn/Learnable.ts"
+import { Learnable } from "types/learn/Learnable.ts"
 import each from "jest-each"
 
 const data = [

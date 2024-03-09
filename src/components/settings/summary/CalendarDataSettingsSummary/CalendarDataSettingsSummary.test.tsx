@@ -1,4 +1,4 @@
-import { CalendarSettingsBuilder } from "../../../../domain/session/settings/data/CalendarSettings"
+import { CalendarSettingsBuilder } from "types/session/settings/data/CalendarSettings"
 import { render } from "@testing-library/react"
 import CalendarDataSettingsSummary  from "./CalendarDataSettingsSummary"
 

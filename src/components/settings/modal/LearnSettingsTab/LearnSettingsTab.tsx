@@ -2,7 +2,7 @@ import SettingsTabTitle from "./../SettingsTabTitle"
 import styles  from "./LearnSettingsTab.module.scss"
 import { faCopy, faFont } from "@fortawesome/free-solid-svg-icons"
 import SettingsDropdown from "./../SettingsDropdown"
-import { Preference } from "../../../../domain/user/Preference"
+import { Preference } from "types/user/Preference"
 import { useTranslation } from "react-i18next"
 
 const LearnSettingsTab = () => {

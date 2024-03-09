@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react"
 import TimeSettingsStep  from "./TimeSettingsStep"
-import { TimeSettingsBuilder } from "../../../../../domain/session/settings/game/TimeSettings"
+import { TimeSettingsBuilder } from "types/session/settings/game/TimeSettings"
 
 const onSelectHandler = vi.fn()
 

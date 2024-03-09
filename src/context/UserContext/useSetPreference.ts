@@ -1,5 +1,5 @@
 import { User } from "context/UserContext/types.ts";
-import { Preference } from "../../domain/user/Preference.ts";
+import { Preference } from "types/user/Preference.ts";
 
 const useSetPreference = () => {
   return {

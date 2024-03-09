@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react"
 import TopicSelectionStep  from "./TopicSelectionStep"
-import Topic from "../../../../../domain/Topic"
+import Topic from "types/Topic"
 
 const onSelectHandler = vi.fn()
 

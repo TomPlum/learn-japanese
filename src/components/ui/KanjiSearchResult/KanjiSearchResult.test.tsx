@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react"
 import KanjiSearchResult, { KanjiSearchResultProps }  from "./KanjiSearchResult"
-import { KanjiReading } from "../../../domain/kanji/KanjiReading"
-import { ReadingType } from "../../../domain/kanji/ReadingType"
-import { Kanji } from "../../../domain/kanji/Kanji"
-import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
-import JLTPLevel from "../../../domain/learn/JLTPLevel"
+import { KanjiReading } from "types/kanji/KanjiReading"
+import { ReadingType } from "types/kanji/ReadingType"
+import { Kanji } from "types/kanji/Kanji"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
+import JLTPLevel from "types/learn/JLTPLevel"
 import { getByTextWithMarkup } from "__test-utils__/Queries"
 
 const onClickHandler = vi.fn()

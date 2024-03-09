@@ -1,11 +1,11 @@
 import { fireEvent, screen } from "@testing-library/react"
 import ConfidenceSelector, { ConfidenceSelectorProps }  from "./ConfidenceSelector"
-import Confidence from "../../../domain/learn/spacedrepetition/Confidence"
+import Confidence from "types/learn/spacedrepetition/Confidence"
 import { render } from "__test-utils__"
-import SpaceRepetitionFeedback from "../../../domain/learn/spacedrepetition/SpaceRepetitionFeedback"
-import Definition from "../../../domain/sentence/Definition"
-import SpaceRepetitionDetails from "../../../domain/learn/spacedrepetition/SpaceRepetitionDetails"
-import { FlashCard } from "../../../domain/learn/FlashCard"
+import SpaceRepetitionFeedback from "types/learn/spacedrepetition/SpaceRepetitionFeedback"
+import Definition from "types/sentence/Definition"
+import SpaceRepetitionDetails from "types/learn/spacedrepetition/SpaceRepetitionDetails"
+import { FlashCard } from "types/learn/FlashCard"
 import { testUser } from "../../../setupTests"
 
 const mockGetDaysTillNextReview = vi.fn()

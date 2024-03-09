@@ -1,12 +1,12 @@
 import { KanjiResponseModel, ReadingResponseModel } from "../repository/KanjiRepository"
-import { Kanji } from "../domain/kanji/Kanji"
+import { Kanji } from "types/kanji/Kanji"
 import RomajiGenerator from "../utility/RomajiGenerator"
-import { KanjiReading } from "../domain/kanji/KanjiReading"
-import { ReadingType } from "../domain/kanji/ReadingType"
-import { KyoikuGrade } from "../domain/kanji/KyoikuGrade"
+import { KanjiReading } from "types/kanji/KanjiReading"
+import { ReadingType } from "types/kanji/ReadingType"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
 import { KanjiExample } from "../data/DataTypes"
-import { Example } from "../domain/kanji/Example"
-import JLTPLevel from "../domain/learn/JLTPLevel"
+import { Example } from "types/kanji/Example"
+import JLTPLevel from "types/learn/JLTPLevel"
 
 class KanjiConverter {
   private readonly romajiGenerator = new RomajiGenerator()

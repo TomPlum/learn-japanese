@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCog } from "@fortawesome/free-solid-svg-icons"
 import Inspectable from "../../../../ui/Inspectable"
 import ConditionalWrapper from "../../../../ui/ConditionalWrapper"
-import { CustomIcon } from "../../../../../domain/Icon"
+import { CustomIcon } from "types/Icon"
 import Icon from "../../../../ui/menu/icon/Icon"
 import { useTranslation } from "react-i18next"
 
@@ -51,11 +51,24 @@ const GridItem = <T extends GridItem>(props: GridItemProps<T>) => {
       )}
     >
       <Button onClick={handleOnClick} className={buttonClass} style={style} data-testid={`grid-item-${id}`}>
-        {editable && <FontAwesomeIcon icon={faCog} className={styles.edit} onClick={onEdit} title="Edit" />}
+        {editable && (
+          <FontAwesomeIcon
+            title="Edit"
+            icon={faCog}
+            onClick={onEdit}
+            className={styles.edit}
+          />
+        )}
 
-        <Icon value={icon} style={{ color: colour }} className={styles.icon} />
+        <Icon
+          value={icon}
+          className={styles.icon}
+          style={{ color: colour }}
+        />
 
-        <p className={styles.name}>{small ? shortName : longName}</p>
+        <p className={styles.name}>
+          {small ? shortName : longName}
+        </p>
       </Button>
     </ConditionalWrapper>
   )

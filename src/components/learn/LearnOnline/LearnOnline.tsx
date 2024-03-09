@@ -1,6 +1,6 @@
 import { useState } from "react"
 import KanjiFlashCards from "./../KanjiFlashCards"
-import { OnlineLearningSessionResult } from "../../../domain/learn/LearningSessionResult"
+import { OnlineLearningSessionResult } from "types/learn/LearningSessionResult"
 
 export interface LearnOnlineProps {}
 
