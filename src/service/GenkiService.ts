@@ -15,7 +15,7 @@ interface GenkiDefinitions {
 
 class GenkiService {
   /**
-   * Retrieves all of the vocabulary from all lesson in Genki I and II.
+   * Retrieves all the vocabulary from all lesson in Genki I and II.
    * @return data All vocabulary data.
    */
   public async getAllVocab(): Promise<GenkiDefinitions> {

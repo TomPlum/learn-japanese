@@ -4,5 +4,6 @@ export const queryKeys = {
   getDefaultPresets: 'getDefaultPresets',
   getKanjiByCharacter: 'getKanjiByCharacter',
   getKanjiByFilter: 'getKanjiByFilter',
-  getRandomKanji: 'getRandomKanji'
+  getRandomKanji: 'getRandomKanji',
+  getAllGenkiVocab: 'getAllGenkiVocab'
 }
