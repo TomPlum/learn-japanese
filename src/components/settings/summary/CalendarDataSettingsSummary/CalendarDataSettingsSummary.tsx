@@ -1,4 +1,4 @@
-import CalendarSettings from "../../../../domain/session/settings/data/CalendarSettings"
+import CalendarSettings from "types/session/settings/data/CalendarSettings"
 import KeyWordDataSummary from "./../KeyWordDataSummary"
 
 export interface CalendarDataSettingsSummaryProps {

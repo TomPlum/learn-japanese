@@ -1,9 +1,9 @@
-import SpaceRepetitionFeedback from "../domain/learn/spacedrepetition/SpaceRepetitionFeedback"
-import SpaceRepetitionDetails from "../domain/learn/spacedrepetition/SpaceRepetitionDetails"
+import SpaceRepetitionFeedback from "types/learn/spacedrepetition/SpaceRepetitionFeedback"
+import SpaceRepetitionDetails from "types/learn/spacedrepetition/SpaceRepetitionDetails"
 import FlashCardRepository from "../repository/FlashCardRepository"
 import { supermemo } from "supermemo"
 import dayjs from "dayjs"
-import { FlashCard } from "../domain/learn/FlashCard"
+import { FlashCard } from "types/learn/FlashCard"
 
 export interface FlashCardsResponse {
   cards?: FlashCard[]

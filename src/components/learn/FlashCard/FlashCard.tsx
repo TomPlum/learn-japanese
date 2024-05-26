@@ -1,6 +1,6 @@
 import React, { Component, ComponentClass, FunctionComponent } from "react"
 import ReactCardFlip from "react-card-flip"
-import { Learnable } from "../../../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 
 type CardFaceFront = FunctionComponent<CardFaceProps> | ComponentClass<any>
 type CardFaceBack = FunctionComponent<CardBackFaceProps> | ComponentClass<any>

@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react"
 import DisplayTypeButton, { DisplayTypeButtonProps }  from "./DisplayTypeButton"
-import QuestionType from "../../../../domain/game/QuestionType"
+import QuestionType from "types/game/QuestionType"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
 import { render } from "__test-utils__"
 

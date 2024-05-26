@@ -4,7 +4,7 @@ import RestClient from "./RestClient.ts"
 import { Environment } from "../utility/Environment.ts"
 import api from "./API.ts"
 
-vi.mock("rest/API")
+//vi.mock("rest/API")
 const mockApi = api as jest.MockedFunction<typeof api>
 const mockPost = vi.fn()
 const mockEnvironment = vi.fn()

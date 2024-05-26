@@ -2,7 +2,7 @@ import { faCircleNotch, faQuestionCircle, IconDefinition } from "@fortawesome/fr
 import styles  from "./SettingsBooleanButton.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import UserService from "../../../../service/UserService"
-import { Preference } from "../../../../domain/user/Preference"
+import { Preference } from "types/user/Preference"
 import { useState } from "react"
 import { useUserContext } from "context/UserContext";
 

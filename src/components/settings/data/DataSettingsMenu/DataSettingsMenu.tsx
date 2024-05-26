@@ -3,7 +3,7 @@ import ScrollableContainer from "../../../ui/ScrollableContainer"
 import { Button, Card, Col, Row } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft, faCheck, faUndo, IconDefinition } from "@fortawesome/free-solid-svg-icons"
-import DataSettings from "../../../../domain/session/settings/data/DataSettings"
+import DataSettings from "types/session/settings/data/DataSettings"
 import styles  from "./DataSettingsMenu.module.scss"
 
 export interface DataSettingsMenuProps<T extends DataSettings> {

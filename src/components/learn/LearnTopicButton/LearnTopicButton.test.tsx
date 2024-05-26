@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import LearnTopicButton, { LearnTopicButtonProps }  from "./LearnTopicButton"
 import { faCircle } from "@fortawesome/free-solid-svg-icons"
-import LearnMode from "../../../domain/session/LearnMode"
-import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
-import LearnSettings from "../../../domain/session/settings/LearnSettings"
+import LearnMode from "types/session/LearnMode"
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
+import LearnSettings from "types/session/settings/LearnSettings"
 
 const onClickHandler = vi.fn()
 

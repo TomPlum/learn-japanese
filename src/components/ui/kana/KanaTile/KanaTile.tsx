@@ -1,8 +1,8 @@
 import { Component } from "react"
-import { Kana } from "../../../../domain/kana/Kana"
+import { Kana } from "types/kana/Kana"
 import { Col, Container, Row } from "react-bootstrap"
 import styles  from "./KanaTile.module.scss"
-import KanaType from "../../../../domain/kana/KanaType"
+import KanaType from "types/kana/KanaType"
 import KanaTypeIndicator from "./../KanaTypeIndicator"
 import KanaDisplay from "../../display/KanaDisplay"
 

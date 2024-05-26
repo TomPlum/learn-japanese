@@ -1,67 +1,32 @@
-import { fireEvent, screen } from "@testing-library/react"
-import FavouritesCard  from "./FavouritesCard"
-import { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
-import { GameSettingsBuilder } from "../../../domain/session/settings/game/GameSettings"
-import LearnSettings from "../../../domain/session/settings/LearnSettings"
+import { fireEvent, screen, waitFor } from "@testing-library/react";
+import FavouritesCard from "./FavouritesCard"
 import { render } from "__test-utils__"
-import PresetBuilder from "../../../domain/session/PresetBuilder"
-
-const mockGetFavourites = vi.fn()
-const mockGetAllPresets = vi.fn()
-const mockUpdateFavourites = vi.fn()
-vi.mock("service/PresetService", () => ({
-  default: function () {
-    return {
-      getFavouritePresets: mockGetFavourites,
-      getAllPresets: mockGetAllPresets,
-      updateFavourites: mockUpdateFavourites
-    }
-  }
-}))
-
-const playPreset = new PresetBuilder()
-  .withID(1)
-  .withDisplayName("Test Play")
-  .withColour("#ffffff")
-  .withIcon("FaAtom")
-  .withDataSettings(new KanaSettingsBuilder().build())
-  .withGameSettings(new GameSettingsBuilder().build())
-  .withTopicName("Topic")
-  .withFavouriteID(1)
-  .build()
-
-const learnPreset = new PresetBuilder()
-  .withID(2)
-  .withDisplayName("Test Learn")
-  .withColour("#fdb40e")
-  .withIcon("あ")
-  .withDataSettings(new KanaSettingsBuilder().build())
-  .withLearnSettings(new LearnSettings())
-  .withTopicName("Topic")
-  .withFavouriteID(2)
-  .build()
+import { server } from "__test-utils__/msw.ts"
+import {
+  useGetPresetFavouritesHandlers,
+  useGetPresetFavouritesHandlersError,
+  useGetPresetFavouritesHandlersLearnOnly,
+  useGetPresetFavouritesHandlersNoPresets,
+  useGetPresetFavouritesHandlersPlayOnly
+} from "api/hooks/presets/useGetPresetFavourites"
+import { useUpdatePresetFavouritesHandlers } from "api/hooks/presets/useUpdatePresetFavourites";
+import { useGetPresetsHandlers } from "api/hooks/presets/useGetPresets";
 
 test("It should render preset favourite buttons for each of the presets from the service", async () => {
-  mockGetFavourites.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
+  server.use(...useGetPresetFavouritesHandlers)
   const { component } = render(<FavouritesCard />)
   expect(await component.findByText("Test Play")).toBeInTheDocument()
   expect(component.getByText("Test Learn")).toBeInTheDocument()
 })
 
-test("It should render an error if returned by the service", async () => {
-  mockGetFavourites.mockResolvedValueOnce({ learn: [], play: [], error: "Failed to retrieve." })
-  const { component } = render(<FavouritesCard />)
-  expect(await component.findByText("Failed to retrieve.")).toBeInTheDocument()
-})
-
 test("It should render an error if the service is call is rejected", async () => {
-  mockGetFavourites.mockRejectedValueOnce({ error: "Failed to retrieve." })
+  server.use(...useGetPresetFavouritesHandlersError)
   const { component } = render(<FavouritesCard />)
   expect(await component.findByText("Failed to retrieve.")).toBeInTheDocument()
 })
 
 test("Clicking a favourite button should render the confirmation modal", async () => {
-  mockGetFavourites.mockResolvedValueOnce({ learn: [], play: [playPreset] })
+  server.use(...useGetPresetFavouritesHandlersPlayOnly)
   const { component } = render(<FavouritesCard />)
   expect(await component.findByText("Test Play")).toBeInTheDocument()
 
@@ -73,7 +38,7 @@ test("Clicking a favourite button should render the confirmation modal", async (
 })
 
 test("Clicking the close button in the confirm modal should stop rendering it", async () => {
-  mockGetFavourites.mockResolvedValueOnce({ learn: [learnPreset], play: [] })
+  server.use(...useGetPresetFavouritesHandlersLearnOnly)
   const { component } = render(<FavouritesCard />)
   expect(await component.findByText("Test Learn")).toBeInTheDocument()
 
@@ -89,14 +54,13 @@ test("Clicking the close button in the confirm modal should stop rendering it", 
 })
 
 test("When there are no favourites it should render the add button", async () => {
-  mockGetFavourites.mockResolvedValueOnce({ learn: [], play: [] })
+  server.use(...useGetPresetFavouritesHandlersNoPresets)
   const { component } = render(<FavouritesCard />)
   expect(await component.findByText("You can track your favourite presets here")).toBeInTheDocument()
 })
 
 test("Clicking the empty state add button should render the edit favourites modal", async () => {
-  mockGetFavourites.mockResolvedValueOnce({ learn: [], play: [] })
-  mockGetAllPresets.mockResolvedValueOnce({})
+  server.use(...useGetPresetFavouritesHandlersNoPresets, ...useGetPresetsHandlers)
   const { component } = render(<FavouritesCard />)
 
   fireEvent.click(await component.findByText("You can track your favourite presets here"))
@@ -104,36 +68,18 @@ test("Clicking the empty state add button should render the edit favourites moda
 })
 
 test("Clicking the edit button from the settings menu should render the edit favourites modal", async () => {
-  mockGetFavourites.mockResolvedValueOnce({ learn: [], play: [playPreset] })
-  mockGetAllPresets.mockResolvedValueOnce({})
+  server.use(...useGetPresetFavouritesHandlersPlayOnly, ...useGetPresetsHandlers)
   const { component } = render(<FavouritesCard />)
 
   fireEvent.click(await component.findByTestId("dashboard-settings-menu-button"))
   fireEvent.click(await component.findByText("Edit"))
 
   expect(await screen.findByTestId("edit-favourites")).toBeInTheDocument()
-})
-
-test("Dismissing the edit favourites modal should stop rendering it and NOT call reload the favourites", async () => {
-  mockGetFavourites.mockResolvedValueOnce({ learn: [learnPreset], play: [playPreset] })
-  mockGetAllPresets.mockResolvedValueOnce({})
-  const { component } = render(<FavouritesCard />)
-
-  fireEvent.click(await component.findByTestId("dashboard-settings-menu-button"))
-  fireEvent.click(await component.findByText("Edit"))
-  expect(await screen.findByTestId("edit-favourites")).toBeInTheDocument()
-  expect(mockGetFavourites).toHaveBeenCalledTimes(1)
-
-  fireEvent.click(screen.getByTitle("Close"))
-  expect(await screen.queryByTestId("edit-favourites")).not.toBeInTheDocument()
-  expect(mockGetFavourites).toHaveBeenCalledTimes(1)
 })
 
 test("Saving after updating favourites should reload the data", async () => {
   // Return a singular learn and a play preset
-  mockGetFavourites.mockResolvedValue({ learn: [learnPreset], play: [playPreset] })
-  mockGetAllPresets.mockResolvedValueOnce({})
-  mockUpdateFavourites.mockResolvedValueOnce({ success: true })
+  server.use(...useGetPresetFavouritesHandlers, ...useUpdatePresetFavouritesHandlers, ...useGetPresetsHandlers)
   const { component } = render(<FavouritesCard />)
 
   // Should render both favourites
@@ -147,14 +93,15 @@ test("Saving after updating favourites should reload the data", async () => {
 
   // Change something (Remove the test learn preset from favourites)
   fireEvent.click(await screen.findByTestId("existing-favourite-button-2"))
-  expect(mockGetFavourites).toHaveBeenCalledTimes(1) // Won't have reloaded yet
+  server.resetHandlers(...useGetPresetFavouritesHandlersPlayOnly, ...useUpdatePresetFavouritesHandlers, ...useGetPresetsHandlers)
   fireEvent.click(screen.getByText("Save"))
 
-  // Should render both favourites (again)
+  // Should render only the play favourite now
   expect(await component.findByTestId("favourite-button-1")).toBeInTheDocument()
-  expect(await component.findByTestId("favourite-button-2")).toBeInTheDocument()
-  expect(mockGetFavourites).toHaveBeenCalledTimes(2) // Now it should reload and call for a second time
+  await waitFor(() => {
+    expect(component.queryByText("Save")).not.toBeInTheDocument()
+  })
 
   // Should stop rendering the edit modal
-  expect(await screen.queryByTestId("edit-favourites")).not.toBeInTheDocument()
+  expect(screen.queryByTestId("edit-favourites")).not.toBeInTheDocument()
 })

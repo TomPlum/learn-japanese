@@ -1,10 +1,12 @@
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import ConfirmationStep  from "./ConfirmationStep"
-import { SessionSettings } from "../../../../../domain/session/settings/SessionSettings"
-import { KanjiSettingsBuilder } from "../../../../../domain/session/settings/data/KanjiSettings"
-import { GameSettingsBuilder } from "../../../../../domain/session/settings/game/GameSettings"
+import { SessionSettings } from "types/session/settings/SessionSettings"
+import { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
 import { render } from "__test-utils__"
 import { testUser } from "../../../../../setupTests"
+import { server } from "__test-utils__/msw.ts";
+import { useSavePlayPresetHandlers } from "api/hooks/presets/useSavePlayPreset";
 
 const onSelectStageHandler = vi.fn()
 
@@ -59,7 +61,7 @@ test("Clicking the cancel button in the save preset form should stop rendering t
 })
 
 test("Clicking the save button in the save preset form should hide the form and button after 2 seconds", async () => {
-  mockPresetService.mockResolvedValueOnce({ success: true })
+  server.use(...useSavePlayPresetHandlers)
   withGameSettings(new GameSettingsBuilder())
   render(<ConfirmationStep settings={settings} onSelectStage={onSelectStageHandler} />, { user: testUser })
 

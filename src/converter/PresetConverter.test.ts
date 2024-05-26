@@ -1,10 +1,8 @@
 import PresetConverter from "./PresetConverter.ts"
-import { KanaSettingsBuilder } from "../domain/session/settings/data/KanaSettings.ts"
-import { GameSettingsBuilder } from "../domain/session/settings/game/GameSettings.ts"
-import { CustomPresetDetails, DataSettingsRequest, GameConfigRequest } from "../repository/PresetRepository.ts"
-import LearnSettings from "../domain/session/settings/LearnSettings.ts"
-import { SessionSettings } from "../domain/session/settings/SessionSettings.ts"
-import { GameSettingState, KanaDataSettingsState, SessionSettingsState } from "context/SessionSettingsContext";
+import { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings.ts"
+import { GameSettingsBuilder } from "types/session/settings/game/GameSettings.ts"
+import LearnSettings from "types/session/settings/LearnSettings.ts"
+import { GameSettingState, KanaDataSettingsState, SessionSettingsState } from "context/SessionSettingsContext"
 
 const mockDataSettingsConverter = vi.fn()
 const mockDeserialiseDataSettings = vi.fn()
@@ -28,96 +26,8 @@ vi.mock("converter/GameSettingsConverter", () => ({
   }
 }))
 
-const playPreset: CustomPresetDetails = {
-  name: "Test Mode",
-  icon: "FaGraduationCap",
-  colour: "#fdb40e",
-  settings: SessionSettings.forGame(new KanaSettingsBuilder().build(), new GameSettingsBuilder().build())
-}
-
-const learnPreset: CustomPresetDetails = {
-  name: "Test Learn",
-  icon: "あ",
-  colour: "#fdb40e",
-  settings: SessionSettings.forLearning(new KanaSettingsBuilder().build(), new LearnSettings())
-}
-
-const gameSettingsRequest: GameConfigRequest = {
-  hints: {
-    quantity: 8,
-    enabled: true,
-    unlimited: false
-  },
-  lives: {
-    quantity: 12,
-    enabled: true
-  },
-  time: {
-    timed: true,
-    countdown: false,
-    secondsPerQuestion: 0
-  },
-  question: {
-    cards: 4,
-    score: true,
-    type: "Multiple Choice",
-    quantity: 150,
-    answerField: "Rōmaji",
-    questionField: "Kana",
-    answerFilter: 0
-  }
-}
-
-const dataSettingsRequest: DataSettingsRequest = {
-  quantity: 50,
-  config: {
-    regular: true,
-    hiragana: true,
-    katakana: false,
-    diagraphs: false,
-    diacriticals: true,
-    onlyDiagraphs: false
-  }
-}
-
 describe("Preset Converter", () => {
   const converter = new PresetConverter()
-
-  describe("Convert API Request", () => {
-    it("Should convert the preset when it is of play type", () => {
-      mockGameSettingsConverter.mockReturnValueOnce(gameSettingsRequest)
-      mockDataSettingsConverter.mockReturnValueOnce(dataSettingsRequest)
-
-      const target = converter.convertRequest(playPreset)
-
-      expect(mockDataSettingsConverter).toHaveBeenLastCalledWith(playPreset.settings.dataSettings)
-      expect(mockGameSettingsConverter).toHaveBeenLastCalledWith(playPreset.settings.gameSettings)
-      expect(target).toStrictEqual({
-        name: "Test Mode",
-        icon: "FaGraduationCap",
-        colour: "fdb40e",
-        topic: "Hiragana & Katakana",
-        data: dataSettingsRequest,
-        game: gameSettingsRequest
-      })
-    })
-
-    it("Should convert the preset when it is of learn type", () => {
-      mockDataSettingsConverter.mockReturnValueOnce(dataSettingsRequest)
-
-      const target = converter.convertRequest(learnPreset)
-
-      expect(mockDataSettingsConverter).toHaveBeenLastCalledWith(learnPreset.settings.dataSettings)
-      expect(mockGameSettingsConverter).not.toHaveBeenCalled()
-      expect(target).toStrictEqual({
-        name: "Test Learn",
-        icon: "あ",
-        colour: "fdb40e",
-        topic: "Hiragana & Katakana",
-        data: dataSettingsRequest
-      })
-    })
-  })
 
   describe("Convert Session Settings", () => {
     const gameSettingsState: GameSettingState = {

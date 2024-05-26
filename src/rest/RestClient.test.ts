@@ -4,7 +4,7 @@ import api from "./API.ts"
 import PatchRequest from "./request/patch/PatchRequest.ts"
 import PatchReplaceOperation from "./request/patch/PatchReplaceOperation.ts"
 
-vi.mock("rest/API")
+//vi.mock("rest/API")
 const mockApi = api as jest.MockedFunction<typeof api>
 
 interface ExampleResponse {

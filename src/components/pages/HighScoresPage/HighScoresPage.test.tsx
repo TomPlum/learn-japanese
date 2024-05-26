@@ -3,6 +3,8 @@ import { findByTextWithElements } from "__test-utils__/Queries"
 import { render } from "__test-utils__"
 import { when } from "jest-when"
 import { fireEvent, screen, waitForElementToBeRemoved, within } from "@testing-library/react"
+import { server } from "__test-utils__/msw.ts";
+import { useGetDefaultPresetsHandlers } from "api/hooks/presets/useGetDefaultPresets";
 
 const mockGetHighScoreEntriesPage = vi.fn()
 vi.mock("service/HighScoresService", () => ({
@@ -19,6 +21,7 @@ vi.mock("service/UserService", () => ({
 }))
 
 const setup = (url?: string) => {
+  server.use(...useGetDefaultPresetsHandlers)
   return render(<HighScoresPage />, { url })
 }
 
@@ -32,7 +35,7 @@ test("Should render the single user high-scores table when the user query pram i
   mockGetHighScoreEntriesPage.mockResolvedValue({ entries: [], pages: { total: 120, quantity: 10 } })
   const { component } = setup('?user=TomPlum')
   expect(await component.findByTestId("single-user-high-scores-table")).toBeInTheDocument()
-  expect(await component.queryByTestId("high-scores-table")).not.toBeInTheDocument()
+  expect(component.queryByTestId("high-scores-table")).not.toBeInTheDocument()
 })
 
 test("Should render an error alert when the high-scores data response returns an error", async () => {

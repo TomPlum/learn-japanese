@@ -1,10 +1,10 @@
 import SentenceStructureRepository from "./SentenceStructureRepository.ts"
 import { AdjectiveData, AdverbData, ExpressionData, VerbData } from "../data/DataTypes.ts"
 import { adjectives, adverbs, expressions, verbs } from "../data/SentenceStructure.ts"
-import { AdjectiveType } from "../domain/sentence/AdjectiveType.ts"
-import { VerbType } from "../domain/sentence/VerbType.ts"
-import Definition from "../domain/sentence/Definition.ts"
-import { SentenceStructureSettingsBuilder } from "../domain/session/settings/data/SentenceStructureSettings.ts"
+import { AdjectiveType } from "types/sentence/AdjectiveType.ts"
+import { VerbType } from "types/sentence/VerbType.ts"
+import Definition from "types/sentence/Definition.ts"
+import { SentenceStructureSettingsBuilder } from "types/session/settings/data/SentenceStructureSettings.ts"
 
 vi.mock("data/SentenceStructure")
 

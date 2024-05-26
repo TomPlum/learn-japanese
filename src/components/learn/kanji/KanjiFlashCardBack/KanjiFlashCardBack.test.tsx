@@ -1,14 +1,14 @@
 import { fireEvent, screen } from "@testing-library/react"
-import { Kanji } from "../../../../domain/kanji/Kanji"
-import { KanjiReading } from "../../../../domain/kanji/KanjiReading"
-import { ReadingType } from "../../../../domain/kanji/ReadingType"
-import { KyoikuGrade } from "../../../../domain/kanji/KyoikuGrade"
-import { Example } from "../../../../domain/kanji/Example"
+import { Kanji } from "types/kanji/Kanji"
+import { KanjiReading } from "types/kanji/KanjiReading"
+import { ReadingType } from "types/kanji/ReadingType"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade"
+import { Example } from "types/kanji/Example"
 import KanjiFlashCardBack  from "./KanjiFlashCardBack"
 import { Environment } from "../../../../utility/Environment"
 import { getByTextWithMarkup } from "__test-utils__/Queries"
 import { render } from "__test-utils__"
-import JLTPLevel from "../../../../domain/learn/JLTPLevel"
+import JLTPLevel from "types/learn/JLTPLevel"
 
 const onClickHandler = vi.fn()
 const mockEnvironment = vi.fn()

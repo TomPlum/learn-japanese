@@ -1,6 +1,6 @@
 import { ChangeEvent, forwardRef, Ref, useEffect, useImperativeHandle, useState } from "react"
 import { Col, Row } from "react-bootstrap"
-import LifeSettings, { LifeSettingsBuilder } from "../../../../domain/session/settings/game/LifeSettings"
+import LifeSettings, { LifeSettingsBuilder } from "types/session/settings/game/LifeSettings"
 import RangeSlider from "react-bootstrap-range-slider"
 import ScrollableContainer from "../../../ui/ScrollableContainer"
 import styles  from "./LifeSettingsForm.module.scss"

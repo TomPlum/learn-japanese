@@ -1,130 +1,148 @@
-import { Kanji } from "../../../domain/kanji/Kanji"
-import { KanjiReading } from "../../../domain/kanji/KanjiReading"
-import { ReadingType } from "../../../domain/kanji/ReadingType"
-import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
-import JLTPLevel from "../../../domain/learn/JLTPLevel"
-import { Example } from "../../../domain/kanji/Example"
-import KanjiShowcaseCard  from "./KanjiShowcaseCard"
-import { fireEvent, screen } from "@testing-library/react"
+import KanjiShowcaseCard from "./KanjiShowcaseCard"
+import { fireEvent, screen, within } from "@testing-library/react";
 import { render } from "__test-utils__"
+import { server } from "__test-utils__/msw.ts"
+import {
+  useGetCustomRandomKanjiHandlers,
+  useGetRandomKanjiErrorHandlers
+} from "api/hooks/kanji/useGetRandomKanji/useGetRandomKanji.handlers.ts"
+import { KanjiResponseModel } from "api/hooks/kanji/types.ts"
 
-const mockKanjiService = vi.fn()
-
-vi.mock("service/KanjiService", () => ({
-  default: function () {
-    return { randomKanji: mockKanjiService }
-  }
-}))
-
-const kanji = new Kanji(
-  "魚",
-  [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("go", "ご", ReadingType.ON)],
-  ["fish"],
-  KyoikuGrade.TWO,
-  JLTPLevel.N5,
-  "https://jisho.org/魚",
-  [new Example("金魚", ["きんぎょ"], ["goldfish"])],
-  10,
-  ["animal"]
-)
-
-const kanji2 = new Kanji(
-  "子",
-  [
-    new KanjiReading("su", "す", ReadingType.ON),
-    new KanjiReading("shi", "し", ReadingType.ON),
-    new KanjiReading("ko", "こ", ReadingType.KUN)
+const fishKanjiResponse: KanjiResponseModel = {
+  character: "魚",
+  grade: 2,
+  jlpt: 5,
+  strokes: 11,
+  meanings: ["fish", "fish2", "fish3"],
+  examples: [
+    {
+      value: "金魚",
+      kana: ["きんぎょ"],
+      english: ["goldfish"]
+    },
+    {
+      value: "稚魚",
+      kana: ["ちぎょ"],
+      english: ["fry (young fish)"]
+    }
   ],
-  ["sign of the rat", "child"],
-  KyoikuGrade.TWO,
-  JLTPLevel.N5,
-  "https://jisho.org/子",
-  [new Example("女子", ["おなご", "じょし"], ["women", "girl"])],
-  3,
-  ["family"]
-)
+  source: "",
+  tags: ["animal"],
+  readings: [
+    {
+      value: "さかな",
+      type: "kun"
+    },
+    {
+      value: "ぎょ",
+      type: "on"
+    }
+  ]
+}
 
-const kanji3 = new Kanji(
-  "子",
-  [
-    new KanjiReading("sakana", "さかな", ReadingType.KUN),
-    new KanjiReading("uo", "うお", ReadingType.KUN),
-    new KanjiReading("go", "ご", ReadingType.ON)
-  ],
-  ["child", "boy", "young person", "infant"],
-  KyoikuGrade.TWO,
-  JLTPLevel.N5,
-  "https://jisho.org/魚",
-  [],
-  10,
-  ["animal"]
-)
+const birdKanjiResponse: KanjiResponseModel = {
+  character: "鳥",
+  grade: 2,
+  jlpt: 5,
+  strokes: 9,
+  meanings: ["bird"],
+  examples: [],
+  source: "",
+  tags: [],
+  readings: [
+    {
+      value: "とり",
+      type: "on"
+    }
+  ]
+}
+
+const childKanjiResponse: KanjiResponseModel = {
+  character: "子",
+  grade: 2,
+  jlpt: 5,
+  strokes: 10,
+  meanings: ["child", "boy", "young person", "infant"],
+  examples: [],
+  source: "",
+  tags: ['animal'],
+  readings: [
+    {
+      value: "す",
+      type: "on"
+    },
+    {
+      value: "し",
+      type: "on"
+    },
+    {
+      value: "こ",
+      type: "kun"
+    },
+    {
+      value: "ね",
+      type: "kun"
+    }
+  ]
+}
 
 test("Should render the kanji character", async () => {
-  mockKanjiService.mockResolvedValueOnce({ value: kanji })
+  server.use(...useGetCustomRandomKanjiHandlers(fishKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
   expect(await component.findByText("魚")).toBeInTheDocument()
 })
 
 test("Should render the kanji character in the globally selected font", async () => {
-  mockKanjiService.mockResolvedValueOnce({ value: kanji })
-
+  server.use(...useGetCustomRandomKanjiHandlers(fishKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />, { font: 'test-font' })
-
   expect(await component.findByText("魚")).toHaveStyle({ "font-family": "test-font" })
 })
 
 test("Should render the grade", async () => {
-  mockKanjiService.mockResolvedValueOnce({ value: kanji })
+  server.use(...useGetCustomRandomKanjiHandlers(fishKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
-  expect(await component.findByText("2")).toBeInTheDocument()
+  expect(await within(await component.findByTestId('kanji-showcase-grade')).findByText("2")).toBeInTheDocument()
 })
 
 test("Should render the JLPT level", async () => {
-  mockKanjiService.mockResolvedValueOnce({ value: kanji })
+  server.use(...useGetCustomRandomKanjiHandlers(fishKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
   expect(await component.findByText("N5")).toBeInTheDocument()
 })
 
 test("Should render the strokes", async () => {
-  mockKanjiService.mockResolvedValueOnce({ value: kanji })
+  server.use(...useGetCustomRandomKanjiHandlers(fishKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
-  expect(await component.findByText("10")).toBeInTheDocument()
+  expect(await within(await component.findByTestId('kanji-showcase-strokes')).findByText("11")).toBeInTheDocument()
 })
 
 test("Should render the examples quantity", async () => {
-  mockKanjiService.mockResolvedValueOnce({ value: kanji })
+  server.use(...useGetCustomRandomKanjiHandlers(fishKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
-  expect(await component.findByText("1")).toBeInTheDocument()
+  expect(await within(await component.findByTestId('kanji-showcase-example-count')).findByText("2")).toBeInTheDocument()
 })
 
 test("Should render the error if the service call fails", async () => {
-  mockKanjiService.mockResolvedValueOnce({ error: "Failed to retrieve kanji." })
+  server.use(...useGetRandomKanjiErrorHandlers)
   const { component } = render(<KanjiShowcaseCard />)
-  expect(await component.findByText("Failed to retrieve kanji.")).toBeInTheDocument()
-})
-
-test("Should render the error if the service call is rejected", async () => {
-  mockKanjiService.mockRejectedValueOnce({ error: "Failed to retrieve kanji." })
-  const { component } = render(<KanjiShowcaseCard />)
-  expect(await component.findByText("Failed to retrieve kanji.")).toBeInTheDocument()
+  expect(await component.findByText("Network Error")).toBeInTheDocument()
 })
 
 test("Clicking the shuffle button should render a new kanji", async () => {
   // Should render the first kanji initially
-  mockKanjiService.mockResolvedValueOnce({ value: kanji })
+  server.use(...useGetCustomRandomKanjiHandlers(fishKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
   expect(await component.findByText("魚")).toBeInTheDocument()
 
   // Clicking the shuffle button should render the next
-  mockKanjiService.mockResolvedValueOnce({ value: kanji2 })
+  server.use(...useGetCustomRandomKanjiHandlers(birdKanjiResponse))
   fireEvent.click(component.getByTitle("Shuffle"))
-  expect(await component.findByText("子")).toBeInTheDocument()
+  expect(await component.findByText("鳥")).toBeInTheDocument()
 })
 
 test("Should render a pop-over with the full meanings if they exceed 23 characters in length", async () => {
   // Render the kanji character with many meaning values
-  mockKanjiService.mockResolvedValueOnce({ value: kanji3 })
+  server.use(...useGetCustomRandomKanjiHandlers(childKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
   expect(await component.findByText("子")).toBeInTheDocument()
 
@@ -136,7 +154,7 @@ test("Should render a pop-over with the full meanings if they exceed 23 characte
 
 test("Should route to the kanji search page when clicking the link", async () => {
   // Render a kanji character
-  mockKanjiService.mockResolvedValueOnce({ value: kanji })
+  server.use(...useGetCustomRandomKanjiHandlers(fishKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
   expect(await component.findByText("魚")).toBeInTheDocument()
 
@@ -146,7 +164,7 @@ test("Should route to the kanji search page when clicking the link", async () =>
 
 test("Should render the examples display modal when clicking the examples button", async () => {
   // Render a kanji that has at least 1 example
-  mockKanjiService.mockResolvedValueOnce({ value: kanji })
+  server.use(...useGetCustomRandomKanjiHandlers(fishKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
   expect(await component.findByText("魚")).toBeInTheDocument()
 
@@ -158,12 +176,12 @@ test("Should render the examples display modal when clicking the examples button
 
   // Closing it should stop rendering it
   fireEvent.click(screen.getByLabelText("Close"))
-  expect(await screen.queryByTestId("kanji-example-display")).not.toBeInTheDocument()
+  expect(screen.queryByTestId("kanji-example-display")).not.toBeInTheDocument()
 })
 
 test("Clicking the examples button should not render the examples display if the kanji has none", async () => {
   // Render a kanji that has no examples
-  mockKanjiService.mockResolvedValueOnce({ value: kanji3 })
+  server.use(...useGetCustomRandomKanjiHandlers(childKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
   expect(await component.findByText("子")).toBeInTheDocument()
 
@@ -171,12 +189,12 @@ test("Clicking the examples button should not render the examples display if the
   fireEvent.click(component.getByTitle("Examples"))
 
   // Should NOT render the examples display modal
-  expect(await screen.queryByTestId("kanji-example-display")).not.toBeInTheDocument()
+  expect(screen.queryByTestId("kanji-example-display")).not.toBeInTheDocument()
 })
 
 test("If a kanji has multiple on readings, when hovering over it, it should render a pop-over with them all", async () => {
   // Render a kanji that has multiple on'yomi readings
-  mockKanjiService.mockResolvedValueOnce({ value: kanji2 })
+  server.use(...useGetCustomRandomKanjiHandlers(childKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
   expect(await component.findByText("子")).toBeInTheDocument()
 
@@ -190,14 +208,14 @@ test("If a kanji has multiple on readings, when hovering over it, it should rend
 
 test("If a kanji has multiple kun readings, when hovering over it, it should render a pop-over with them all", async () => {
   // Render a kanji that has multiple kun'yomi readings
-  mockKanjiService.mockResolvedValueOnce({ value: kanji3 })
+  server.use(...useGetCustomRandomKanjiHandlers(childKanjiResponse))
   const { component } = render(<KanjiShowcaseCard />)
   expect(await component.findByText("子")).toBeInTheDocument()
 
   // Mouse over the displayed reading
-  fireEvent.mouseOver(component.getByText("さかな"))
+  fireEvent.mouseOver(component.getByText("こ"))
 
   // Should render a pop-over modal with all the kun readings
   expect(await screen.findByText("Kun'Yomi Readings")).toBeInTheDocument()
-  expect(await screen.findByText("さかな, うお")).toBeInTheDocument()
+  expect(await screen.findByText("こ, ね")).toBeInTheDocument()
 })

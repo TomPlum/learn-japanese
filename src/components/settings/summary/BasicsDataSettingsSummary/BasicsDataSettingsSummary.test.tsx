@@ -1,4 +1,4 @@
-import { BasicsSettingsBuilder } from "../../../../domain/session/settings/data/BasicsSettings"
+import { BasicsSettingsBuilder } from "types/session/settings/data/BasicsSettings"
 import { render } from "@testing-library/react"
 import BasicsDataSettingsSummary  from "./BasicsDataSettingsSummary"
 

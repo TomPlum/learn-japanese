@@ -2,7 +2,7 @@ import SettingsTabTitle from "./../SettingsTabTitle"
 import styles from "../../../../styles/sass/components/settings/modal/NotificationSettingsTab.module.scss"
 import { faEraser, faFireAlt, faSnowflake } from "@fortawesome/free-solid-svg-icons"
 import SettingsBooleanButton from "./../SettingsBooleanButton"
-import { Preference } from "../../../../domain/user/Preference"
+import { Preference } from "types/user/Preference"
 import { useTranslation } from "react-i18next"
 
 const NotificationsSettingsTab = () => {

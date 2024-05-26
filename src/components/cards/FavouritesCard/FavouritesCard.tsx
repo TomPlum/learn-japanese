@@ -2,49 +2,28 @@ import DashboardCard from "../../layout/card/DashboardCard"
 import DashboardCardHeader from "../../layout/card/DashboardCardHeader"
 import { faPencilAlt, faPlusCircle, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
 import styles  from "./FavouritesCard.module.scss"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import FavouriteButton from "../../ui/buttons/favourite/FavouriteButton"
-import PresetService from "../../../service/PresetService"
-import SessionMode from "../../../domain/session/SessionMode"
+import SessionMode from "types/session/SessionMode"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import LaunchPresetConfirmationModal from "../../settings/LaunchPresetConfirmationModal"
 import EditFavouritesModal from "../../settings/EditFavouritesModal"
 import DashboardCardLink from "../../layout/card/DashboardCardLink"
 import ScrollableContainer from "../../ui/ScrollableContainer"
 import { useTranslation } from "react-i18next"
+import useGetPresetFavourites from "api/hooks/presets/useGetPresetFavourites";
 
 const FavouritesCard = () => {
   const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.favourites" })
   const actions = useTranslation("translation", { keyPrefix: "action" }).t
-  const [presets, setPresets] = useState<SessionMode[]>([])
+  const { data: presets, refetch, isPending, isError } = useGetPresetFavourites()
+
   const [editing, setEditing] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | undefined>(undefined)
   const [confirm, setConfirm] = useState(false)
-  const [selected, setSelected] = useState<SessionMode | undefined>(undefined)
   const [updating, setUpdating] = useState(false)
+  const [selected, setSelected] = useState<SessionMode | undefined>(undefined)
 
-  const service = new PresetService()
-
-  useEffect(() => {
-    setLoading(true)
-    loadPresets().finally(() => setLoading(false))
-  }, [])
-
-  const loadPresets = () => {
-    return service
-      .getFavouritePresets()
-      .then((response) => {
-        if (response.error) {
-          setError(response.error)
-        } else {
-          setPresets(response.learn.concat(response.play))
-        }
-      })
-      .catch((response) => {
-        setError(response.error)
-      })
-  }
+  const error = isError ? 'Failed to retrieve.' : undefined
 
   const handleStart = (preset: SessionMode) => {
     setConfirm(true)
@@ -58,8 +37,7 @@ const FavouritesCard = () => {
 
   const reload = () => {
     setUpdating(true)
-    setError(undefined)
-    loadPresets().finally(() => setUpdating(false))
+    refetch().then(() => setUpdating(false))
   }
 
   const handleDismissConfirmation = () => {
@@ -68,7 +46,7 @@ const FavouritesCard = () => {
   }
 
   return (
-    <DashboardCard className={styles.card} loading={loading && !ready} updating={updating} error={error}>
+    <DashboardCard className={styles.card} loading={isPending && !ready} updating={updating} error={error}>
       <DashboardCard.Header onReload={reload}>
         <DashboardCardHeader.Title>{t("title")}</DashboardCardHeader.Title>
 
@@ -80,7 +58,7 @@ const FavouritesCard = () => {
 
       <DashboardCard.Body className={styles.body}>
         <div className={styles.favourites}>
-          {presets.length === 0 && !error && (
+          {presets && presets.length === 0 && !error && (
             <p className={styles.emptyMessage} onClick={() => setEditing(true)}>
               <FontAwesomeIcon title="Add" icon={faPlusCircle} className={styles.emptyAddButton} />
               <span>You can track your favourite presets here</span>
@@ -88,7 +66,7 @@ const FavouritesCard = () => {
           )}
 
           <ScrollableContainer maxHeight={300} className={styles.favourites}>
-            {presets.map((preset: SessionMode) => (
+            {presets && presets.map((preset: SessionMode) => (
               <FavouriteButton
                 key={preset.id}
                 preset={preset}
@@ -100,10 +78,13 @@ const FavouritesCard = () => {
           </ScrollableContainer>
 
           {confirm && selected && (
-            <LaunchPresetConfirmationModal preset={selected} onDismiss={handleDismissConfirmation} />
+            <LaunchPresetConfirmationModal
+              preset={selected}
+              onDismiss={handleDismissConfirmation}
+            />
           )}
 
-          {editing && (
+          {presets && editing && (
             <EditFavouritesModal
               favourites={presets}
               onSuccess={handleFinishEditing}

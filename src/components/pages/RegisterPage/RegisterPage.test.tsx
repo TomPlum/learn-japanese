@@ -1,12 +1,12 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import RegisterPage  from "./RegisterPage"
-import auth from "../../../service/AuthenticationService"
 import { testUser } from "../../../setupTests"
 import { render } from "__test-utils__"
+import { server } from "__test-utils__/msw.ts";
+import { useRegisterUserHandlers } from "api/hooks/auth/useRegisterUser/useRegisterUser.handlers.ts";
 
 const mockUsernameEligible = vi.fn()
 const mockEmailEligible = vi.fn()
-const mockRegister = vi.fn()
 
 vi.mock("service/UserService", () => ({
   default: function () {
@@ -16,10 +16,6 @@ vi.mock("service/UserService", () => ({
     }
   }
 }))
-
-beforeEach(() => {
-  auth.register = mockRegister
-})
 
 test("Should render the registration form if there is no user logged in", () => {
   const { component } = render(<RegisterPage />)
@@ -35,7 +31,7 @@ test("Should redirect to the sign-in page if the registration is successful", as
   const { component, history } = render(<RegisterPage />)
 
   // Fill in the form
-  mockRegister.mockResolvedValueOnce({ success: true, data: {} })
+  server.use(...useRegisterUserHandlers)
   mockUsernameEligible.mockResolvedValueOnce({ exists: false })
   mockEmailEligible.mockResolvedValueOnce({ exists: false })
 

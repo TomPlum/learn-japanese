@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap"
 import FlashCardBack from "./../FlashCardBack"
 import { Component } from "react"
-import { LearningExample } from "../../../domain/learn/Learnable"
+import { LearningExample } from "types/learn/Learnable"
 import styles  from "./CommonFlashCardBack.module.scss"
 import RomajiGenerator from "../../../utility/RomajiGenerator"
 

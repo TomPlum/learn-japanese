@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Theme } from "../../../../domain/Theme"
+import { Theme } from "types/Theme"
 import { faLightbulb, faMoon } from "@fortawesome/free-solid-svg-icons"
 import menuStyles from "components/layout/NavigationBar/NavigationBar.module.scss"
 import styles  from "./ThemeButton.module.scss"

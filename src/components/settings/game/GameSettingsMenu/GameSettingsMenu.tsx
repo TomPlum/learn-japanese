@@ -3,7 +3,7 @@ import QuestionSettingsForm from "./../QuestionSettingsForm"
 import HintSettingsForm from "./../HintSettingsForm"
 import LifeSettingsForm from "./../LifeSettingsForm"
 import TimeSettingsForm from "./../TimeSettingsForm"
-import GameSettings, { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings"
+import GameSettings, { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
 import { Button, Card, Col, Nav, Row, Tab } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -15,10 +15,10 @@ import {
   faStopwatch,
   faUndo
 } from "@fortawesome/free-solid-svg-icons"
-import QuestionSettings from "../../../../domain/session/settings/game/QuestionSettings"
-import HintSettings from "../../../../domain/session/settings/game/HintSettings"
-import LifeSettings from "../../../../domain/session/settings/game/LifeSettings"
-import TimeSettings from "../../../../domain/session/settings/game/TimeSettings"
+import QuestionSettings from "types/session/settings/game/QuestionSettings"
+import HintSettings from "types/session/settings/game/HintSettings"
+import LifeSettings from "types/session/settings/game/LifeSettings"
+import TimeSettings from "types/session/settings/game/TimeSettings"
 import styles  from "./GameSettingsMenu.module.scss"
 
 export interface GameSettingsMenuProps {

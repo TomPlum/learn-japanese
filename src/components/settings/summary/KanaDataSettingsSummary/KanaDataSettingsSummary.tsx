@@ -1,4 +1,4 @@
-import KanaSettings from "../../../../domain/session/settings/data/KanaSettings"
+import KanaSettings from "types/session/settings/data/KanaSettings"
 
 export interface KanaDataSettingsSummaryProps {
   settings: KanaSettings

@@ -1,5 +1,5 @@
 import styles  from "./LearnSessionSettingsSummary.module.scss"
-import { SessionSettings } from "../../../domain/session/settings/SessionSettings"
+import { SessionSettings } from "types/session/settings/SessionSettings"
 import { WizardStep } from "components/layout/wizard/SessionWizard/types.ts"
 import DataSettingsSummary from "./../DataSettingsSummary"
 

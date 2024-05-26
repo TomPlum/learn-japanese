@@ -27,7 +27,7 @@ const LoginPage = () => {
 
         {ready && (
           <LoginForm
-            username={params.get("username") ?? ""}
+            registeredUsername={params.get("username") ?? ""}
             onSuccess={() => navigate("/home")}
             info={params.get("session-expired") ? t("session-expired") : undefined}
           />

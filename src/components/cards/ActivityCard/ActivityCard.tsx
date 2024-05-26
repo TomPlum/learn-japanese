@@ -14,7 +14,7 @@ import {
 import styles  from "./ActivityCard.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useTranslation } from "react-i18next"
-import { ActivityEventType } from "../../../domain/ActivityEventType"
+import { ActivityEventType } from "types/ActivityEventType"
 
 const ActivityCard = () => {
   const { t, ready } = useTranslation("translation", { keyPrefix: "dashboard.card.activity" })

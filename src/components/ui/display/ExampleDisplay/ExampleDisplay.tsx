@@ -1,4 +1,4 @@
-import { Example } from "../../../../domain/kanji/Example"
+import { Example } from "types/kanji/Example"
 import { Modal, Table } from "react-bootstrap"
 import styles  from "./ExampleDisplay.module.scss"
 

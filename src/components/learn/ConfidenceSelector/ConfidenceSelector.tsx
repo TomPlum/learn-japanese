@@ -1,4 +1,4 @@
-import Confidence from "../../../domain/learn/spacedrepetition/Confidence"
+import Confidence from "types/learn/spacedrepetition/Confidence"
 import { Col, Container, Row } from "react-bootstrap"
 import ConfidenceButton from "./../ConfidenceButton"
 import { useState } from "react"
@@ -9,8 +9,8 @@ import { faStar } from "@fortawesome/free-regular-svg-icons"
 import ConfidenceInfoItem from "./../ConfidenceInfoItem"
 import styles  from "./ConfidenceSelector.module.scss"
 import SpacedRepetitionService from "../../../service/SpacedRepetitionService"
-import SpaceRepetitionFeedback from "../../../domain/learn/spacedrepetition/SpaceRepetitionFeedback"
-import TemplateString from "../../../domain/TemplateString"
+import SpaceRepetitionFeedback from "types/learn/spacedrepetition/SpaceRepetitionFeedback"
+import TemplateString from "types/TemplateString"
 
 export interface ConfidenceSelectorProps {
   disabled: boolean

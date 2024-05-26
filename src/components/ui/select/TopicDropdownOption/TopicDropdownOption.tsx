@@ -1,5 +1,5 @@
 import { Component } from "react"
-import Topic from "../../../../domain/Topic"
+import Topic from "types/Topic"
 import { Dropdown } from "react-bootstrap"
 import styles from "../../../../styles/sass/components/layout/GameTypeMenuDropdownOption.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

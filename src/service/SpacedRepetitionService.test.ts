@@ -1,11 +1,11 @@
 import SpacedRepetitionService from "./SpacedRepetitionService.ts"
-import SpaceRepetitionFeedback from "../domain/learn/spacedrepetition/SpaceRepetitionFeedback.ts"
-import Confidence from "../domain/learn/spacedrepetition/Confidence.ts"
-import SpaceRepetitionDetails from "../domain/learn/spacedrepetition/SpaceRepetitionDetails.ts"
+import SpaceRepetitionFeedback from "types/learn/spacedrepetition/SpaceRepetitionFeedback.ts"
+import Confidence from "types/learn/spacedrepetition/Confidence.ts"
+import SpaceRepetitionDetails from "types/learn/spacedrepetition/SpaceRepetitionDetails.ts"
 import { getValueLastCalledWith } from "__test-utils__/Queries.ts"
 import each from "jest-each"
-import { FlashCard } from "../domain/learn/FlashCard.ts"
-import Definition from "../domain/sentence/Definition.ts"
+import { FlashCard } from "types/learn/FlashCard.ts"
+import Definition from "types/sentence/Definition.ts"
 
 const mockGetKanjiFlashCards = vi.fn()
 const mockUpdateKanjiFlashCard = vi.fn()

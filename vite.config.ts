@@ -2,22 +2,25 @@ import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import svgr from '@svgr/rollup'
+import tsconfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig({
   plugins: [
     react(),
     nodePolyfills(),
-    svgr()
+    svgr(),
+    tsconfigPaths()
   ],
   base: './',
   resolve: {
     alias: {
       "__test-utils__": "/src/__test-utils__",
+      api: "/src/api",
       components: "/src/components",
       context: "/src/context",
       converter: "/src/converter",
       data: "/src/data",
-      domain: "/src/domain",
+      types: "/src/types",
       filters: "/src/filters",
       hooks: "/src/hooks",
       locales: "/src/locales",

@@ -25,21 +25,21 @@ import LifeSettingsStep from "./../steps/LifeSettingsStep"
 import TimeSettingsStep from "./../steps/TimeSettingsStep"
 import DataSettingsStep from "./../steps/DataSettingsStep"
 import TopicSelectionStep from "./../steps/TopicSelectionStep"
-import Topic from "../../../../domain/Topic"
+import Topic from "types/Topic"
 import { useSessionSettingsContext } from "context/SessionSettingsContext";
-import GameSettings, { GameSettingsBuilder } from "../../../../domain/session/settings/game/GameSettings"
+import GameSettings, { GameSettingsBuilder } from "types/session/settings/game/GameSettings"
 import ModeSelectionStep from "./../steps/ModeSelectionStep"
-import { AppMode } from "../../../../domain/AppMode"
-import { SessionSettings } from "../../../../domain/session/settings/SessionSettings"
+import { AppMode } from "types/AppMode"
+import { SessionSettings } from "types/session/settings/SessionSettings"
 import ConfirmationStep from "./../steps/ConfirmationStep"
 import LearnConfirmationStep from "./../steps/LearnConfirmationStep"
-import LearnSettings from "../../../../domain/session/settings/LearnSettings"
+import LearnSettings from "types/session/settings/LearnSettings"
 import { ModalProps } from "react-bootstrap/Modal"
-import SessionMode from "../../../../domain/session/SessionMode"
+import SessionMode from "types/session/SessionMode"
 import { useTranslation } from "react-i18next"
 import { SessionWizardProps, StageDetails, WizardStep } from "components/layout/wizard/SessionWizard/types.ts";
 import { useNavigate } from "react-router-dom"
-import DataSettings from "domain/session/settings/data/DataSettings.ts";
+import DataSettings from "types/session/settings/data/DataSettings.ts";
 
 const SessionWizard = (props: SessionWizardProps) => {
   const { onClose } = props

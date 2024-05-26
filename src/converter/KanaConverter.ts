@@ -1,7 +1,7 @@
 import { KanaResponse } from "../repository/KanaRepository"
-import { Kana } from "../domain/kana/Kana"
-import KanaType from "../domain/kana/KanaType"
-import { KanaColumn } from "../domain/kana/KanaColumn"
+import { Kana } from "types/kana/Kana"
+import KanaType from "types/kana/KanaType"
+import { KanaColumn } from "types/kana/KanaColumn"
 
 class KanaConverter {
   public convert(response: KanaResponse, type: KanaType): Kana {

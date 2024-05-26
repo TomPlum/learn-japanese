@@ -3,7 +3,7 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons"
 import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles  from "./LearnTopicButton.module.scss"
-import SessionMode from "../../../domain/session/SessionMode"
+import SessionMode from "types/session/SessionMode"
 
 export interface LearnTopicButtonProps {
   icon: IconDefinition | string

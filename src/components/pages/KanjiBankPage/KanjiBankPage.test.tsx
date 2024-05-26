@@ -1,64 +1,96 @@
 import { fireEvent, screen } from "@testing-library/react"
-import KanjiBankPage  from "./KanjiBankPage"
-import { Kanji } from "../../../domain/kanji/Kanji"
-import { KanjiReading } from "../../../domain/kanji/KanjiReading"
-import { ReadingType } from "../../../domain/kanji/ReadingType"
-import { KyoikuGrade } from "../../../domain/kanji/KyoikuGrade"
-import JLTPLevel from "../../../domain/learn/JLTPLevel"
+import KanjiBankPage from "./KanjiBankPage"
 import { render } from "__test-utils__"
-import { Example } from "../../../domain/kanji/Example"
+import { server } from "__test-utils__/msw.ts"
+import {
+  GetKanjiByFilterMswArgs,
+  useGetCustomKanjiByFilterHandlers,
+  useGetKanjiByFilterErrorHandlers
+} from "api/hooks/kanji/useGetKanjiByFilter/useGetKanjiByFilter.handlers.ts"
+import { KanjiResponseModel } from "api/hooks/kanji/types.ts"
 
-const mockGetKanji = vi.fn()
-vi.mock("service/KanjiService", () => ({
-  default: function() {
-    return { filter: mockGetKanji }
-  }
-}))
+const oneResponse: KanjiResponseModel = {
+  character: "一",
+  grade: 1,
+  jlpt: 5,
+  strokes: 1,
+  meanings: ["one"],
+  examples: [],
+  source: "",
+  tags: ["number"],
+  readings: [
+    {
+      value: "いち",
+      type: "on"
+    }
+  ]
+}
 
-const one = new Kanji(
-  "一",
-  [new KanjiReading("ichi", "いち", ReadingType.ON)],
-  ["one"],
-  KyoikuGrade.ONE,
-  JLTPLevel.N5,
-  "",
-  [],
-  1,
-  ["number"]
-)
-const fish = new Kanji(
-  "魚",
-  [new KanjiReading("sakana", "さかな", ReadingType.KUN), new KanjiReading("gyo", "ぎょ", ReadingType.ON)],
-  ["fish", "fish2", "fish3"],
-  KyoikuGrade.TWO,
-  JLTPLevel.N5,
-  "",
-  [new Example("金魚", ["きんぎょ"], ["goldfish"]), new Example("稚魚", ["ちぎょ"], ["fry (young fish)"])],
-  9,
-  ["animal"]
-)
-const bird = new Kanji(
-  "鳥",
-  [new KanjiReading("tori", "とり", ReadingType.ON)],
-  ["bird"],
-  KyoikuGrade.TWO,
-  JLTPLevel.N5,
-  "",
-  [],
-  8,
-  []
-)
-const person = new Kanji(
-  "人",
-  [new KanjiReading("jin", "じん", ReadingType.ON)],
-  ["person"],
-  KyoikuGrade.ONE,
-  JLTPLevel.N5,
-  "",
-  [],
-  1,
-  ["people"]
-)
+const fishResponse: KanjiResponseModel = {
+  character: "魚",
+  grade: 2,
+  jlpt: 5,
+  strokes: 9,
+  meanings: ["fish", "fish2", "fish3"],
+  examples: [
+    {
+      value: "金魚",
+      kana: ["きんぎょ"],
+      english: ["goldfish"]
+    },
+    {
+      value: "稚魚",
+      kana: ["ちぎょ"],
+      english: ["fry (young fish)"]
+    }
+  ],
+  source: "",
+  tags: ["animal"],
+  readings: [
+    {
+      value: "さかな",
+      type: "kun"
+    },
+    {
+      value: "ぎょ",
+      type: 'on'
+    }
+  ]
+}
+
+const birdResponse: KanjiResponseModel = {
+  character: "鳥",
+  grade: 2,
+  jlpt: 5,
+  strokes: 9,
+  meanings: ["bird"],
+  examples: [],
+  source: "",
+  tags: [],
+  readings: [
+    {
+      value: "とり",
+      type: "on"
+    }
+  ]
+}
+
+const personResponse: KanjiResponseModel = {
+  character: "人",
+  grade: 1,
+  jlpt: 5,
+  strokes: 1,
+  meanings: ["person"],
+  examples: [],
+  source: "",
+  tags: [],
+  readings: [
+    {
+      value: "じん",
+      type: "on"
+    }
+  ]
+}
 
 const setup = () => {
   const { component } = render(<KanjiBankPage />)
@@ -73,61 +105,75 @@ const setup = () => {
   }
 }
 
+const stubGetKanjiByFilter = (config: GetKanjiByFilterMswArgs) => {
+  server.use(...useGetCustomKanjiByFilterHandlers(config))
+}
+
 test("It should load all the kanji from the first page on first render", async () => {
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 5, quantity: 124 })
+  stubGetKanjiByFilter({ response: { results: [{ value: oneResponse, field: 'meaning' }], pages: 5, total: 124 } })
   setup()
   expect(await screen.findByText("one")).toBeInTheDocument()
 })
 
 test("It should render the number of results returned", async () => {
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 5, quantity: 124 })
+  stubGetKanjiByFilter({ response: { results: [], pages: 5, total: 124 } })
   setup()
   expect(await screen.findByText("124 Results")).toBeInTheDocument()
 })
 
 test("It should render the number of pages", async () => {
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 5, quantity: 124 })
+  stubGetKanjiByFilter({ response: { results: [], pages: 5, total: 124 } })
   setup()
   expect(await screen.findByText("1 of 5")).toBeInTheDocument()
 })
 
 test("It should render the the error if the service call succeeds but returns an error message", async () => {
-  mockGetKanji.mockResolvedValueOnce({ kanji: [], pages: 5, quantity: 124, error: "Something went wrong." })
+  server.use(...useGetKanjiByFilterErrorHandlers)
   setup()
-  expect(await screen.findByText("Something went wrong.")).toBeInTheDocument()
-})
-
-test("It should render the the error message if the service call fails", async () => {
-  mockGetKanji.mockRejectedValueOnce({ error: "Something went really wrong." })
-  setup()
-  expect(await screen.findByText("Something went really wrong.")).toBeInTheDocument()
+  expect(await screen.findByTestId("kanji-bank-page-error")).toBeInTheDocument()
+  expect(await screen.findByText("Network Error")).toBeInTheDocument()
 })
 
 test("Clicking a kanji should select it and display its meanings", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: one, field: "meaning" },
-      { value: fish, field: "meaning" }
-    ],
-    pages: 5,
-    quantity: 124
+  stubGetKanjiByFilter({
+    response: {
+      results: [
+        {
+          field: 'meaning',
+          value: oneResponse
+        },
+        {
+          field: 'meaning',
+          value: fishResponse // <-- Fish must go second, so it doesn't get auto selected
+        }
+      ],
+      pages: 5,
+      total: 124
+    }
   })
   setup()
+
   expect(await screen.findByText("fish")).toBeInTheDocument()
-
   fireEvent.click(screen.getByText("魚"))
-
   expect(screen.getByText("fish, fish2, fish3")).toBeInTheDocument()
 })
 
 test("Clicking a kanji should select it and display its grade", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: one, field: "meaning" },
-      { value: fish, field: "meaning" }
-    ],
-    pages: 5,
-    quantity: 124
+  stubGetKanjiByFilter({
+    response: {
+      results: [
+        {
+          field: 'meaning',
+          value: oneResponse
+        },
+        {
+          field: 'meaning',
+          value: fishResponse
+        }
+      ],
+      pages: 5,
+      total: 124
+    }
   })
   setup()
   expect(await screen.findByText("fish")).toBeInTheDocument()
@@ -138,13 +184,21 @@ test("Clicking a kanji should select it and display its grade", async () => {
 })
 
 test("Clicking a kanji should select it and display its JLPT Level", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: bird, field: "meaning" },
-      { value: fish, field: "meaning" }
-    ],
-    pages: 5,
-    quantity: 124
+  stubGetKanjiByFilter({
+    response: {
+      results: [
+        {
+          field: 'meaning',
+          value: oneResponse
+        },
+        {
+          field: 'meaning',
+          value: fishResponse
+        }
+      ],
+      pages: 5,
+      total: 124
+    }
   })
   setup()
   expect(await screen.findByText("fish")).toBeInTheDocument()
@@ -155,13 +209,21 @@ test("Clicking a kanji should select it and display its JLPT Level", async () =>
 })
 
 test("Clicking a kanji should select it and display its On'yomi readings", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: one, field: "meaning" },
-      { value: fish, field: "meaning" }
-    ],
-    pages: 5,
-    quantity: 124
+  stubGetKanjiByFilter({
+    response: {
+      results: [
+        {
+          field: 'meaning',
+          value: oneResponse
+        },
+        {
+          field: 'meaning',
+          value: fishResponse
+        }
+      ],
+      pages: 5,
+      total: 124
+    }
   })
   setup()
   expect(await screen.findByText("fish")).toBeInTheDocument()
@@ -172,13 +234,21 @@ test("Clicking a kanji should select it and display its On'yomi readings", async
 })
 
 test("Clicking a kanji should select it and display its Kun'yomi readings", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: one, field: "meaning" },
-      { value: fish, field: "meaning" }
-    ],
-    pages: 5,
-    quantity: 124
+  stubGetKanjiByFilter({
+    response: {
+      results: [
+        {
+          field: 'meaning',
+          value: oneResponse
+        },
+        {
+          field: 'meaning',
+          value: fishResponse
+        }
+      ],
+      pages: 5,
+      total: 124
+    }
   })
   setup()
   expect(await screen.findByText("fish")).toBeInTheDocument()
@@ -189,13 +259,21 @@ test("Clicking a kanji should select it and display its Kun'yomi readings", asyn
 })
 
 test("Clicking a kanji should select it and display the first example", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: person, field: "meaning" },
-      { value: fish, field: "meaning" }
-    ],
-    pages: 5,
-    quantity: 124
+  stubGetKanjiByFilter({
+    response: {
+      results: [
+        {
+          field: 'meaning',
+          value: oneResponse
+        },
+        {
+          field: 'meaning',
+          value: fishResponse
+        }
+      ],
+      pages: 5,
+      total: 124
+    }
   })
   setup()
   expect(await screen.findByText("fish")).toBeInTheDocument()
@@ -207,13 +285,21 @@ test("Clicking a kanji should select it and display the first example", async ()
 })
 
 test("Clicking the kanji example should render the examples modal", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: person, field: "meaning" },
-      { value: fish, field: "meaning" }
-    ],
-    pages: 5,
-    quantity: 124
+  stubGetKanjiByFilter({
+    response: {
+      results: [
+        {
+          field: 'meaning',
+          value: oneResponse
+        },
+        {
+          field: 'meaning',
+          value: fishResponse
+        }
+      ],
+      pages: 5,
+      total: 124
+    }
   })
   setup()
   expect(await screen.findByText("fish")).toBeInTheDocument()
@@ -226,13 +312,21 @@ test("Clicking the kanji example should render the examples modal", async () => 
 })
 
 test("Clicking the x button in the examples modal should dismiss it and stop rendering it", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: bird, field: "meaning" },
-      { value: fish, field: "meaning" }
-    ],
-    pages: 5,
-    quantity: 124
+  stubGetKanjiByFilter({
+    response: {
+      results: [
+        {
+          field: 'meaning',
+          value: oneResponse
+        },
+        {
+          field: 'meaning',
+          value: fishResponse
+        }
+      ],
+      pages: 5,
+      total: 124
+    }
   })
   setup()
   expect(await screen.findByText("fish")).toBeInTheDocument()
@@ -250,13 +344,21 @@ test("Clicking the x button in the examples modal should dismiss it and stop ren
 })
 
 test("Clicking a kanji should select it and display its tags", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: one, field: "meaning" },
-      { value: fish, field: "meaning" }
-    ],
-    pages: 5,
-    quantity: 124
+  stubGetKanjiByFilter({
+    response: {
+      results: [
+        {
+          field: 'meaning',
+          value: oneResponse
+        },
+        {
+          field: 'meaning',
+          value: fishResponse
+        }
+      ],
+      pages: 5,
+      total: 124
+    }
   })
   setup()
   expect(await screen.findByText("fish")).toBeInTheDocument()
@@ -267,13 +369,21 @@ test("Clicking a kanji should select it and display its tags", async () => {
 })
 
 test("Should render a hyphen for the tags value if the selected kanji has none", async () => {
-  mockGetKanji.mockResolvedValueOnce({
-    kanji: [
-      { value: person, field: "meaning" },
-      { value: bird, field: "meaning" }
-    ],
-    pages: 5,
-    quantity: 124
+  stubGetKanjiByFilter({
+    response: {
+      results: [
+        {
+          field: 'meaning',
+          value: personResponse
+        },
+        {
+          field: 'meaning',
+          value: birdResponse
+        }
+      ],
+      pages: 5,
+      total: 124
+    }
   })
   setup()
   expect(await screen.findByText("bird")).toBeInTheDocument()
@@ -285,27 +395,26 @@ test("Should render a hyphen for the tags value if the selected kanji has none",
 
 test("Typing a search term into the search field should call the service with that term", async () => {
   // Start with just the "one" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }})
   const { search } = setup()
   expect(await screen.findByText("one")).toBeInTheDocument()
 
-  // Search for "fish" and make sure it's returned from the service
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: fish, field: "meaning" }], pages: 1, quantity: 1 })
+  // Search for "fish" with the API stub
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: fishResponse }], pages: 1, total: 1 }, search: 'fish' })
   fireEvent.change(search, { target: { value: "fish" } })
-  expect(await screen.findByText("さかな")).toBeInTheDocument()
 
-  // It should call the service with the search term "fish"
-  await expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "fish", [], [], undefined)
+  // If the API request was made with the correct search field value, it should return the fish kanji
+  expect(await screen.findByText("さかな")).toBeInTheDocument()
 })
 
 test("Searching for something that returns no results should display a feedback message", async () => {
   // Start with just the "one" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }})
   const { search } = setup()
   expect(await screen.findByText("one")).toBeInTheDocument()
 
   // Search for "fish", but make sure no data is returned from the service
-  mockGetKanji.mockResolvedValueOnce({ kanji: [], pages: 1, quantity: 0 })
+  stubGetKanjiByFilter({ response: { results: [], pages: 1, total: 1 }, search: 'fish' })
   fireEvent.change(search, { target: { value: "fish" } })
 
   // Expect a feedback message
@@ -314,221 +423,197 @@ test("Searching for something that returns no results should display a feedback 
 
 test("Adding a grade filter parameter to the search field should call the service with those grades", async () => {
   // Start with just the "one" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }})
   const { search } = setup()
   expect(await screen.findByText("one")).toBeInTheDocument()
 
   // Filter by grades 1 and 2 and return some other kanji, so it re-renders
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: fish, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: fishResponse }], pages: 1, total: 1 }, grades: [1, 2] })
   fireEvent.change(search, { target: { value: ">grade=1,2" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
-  expect(await screen.findByText("さかな")).toBeInTheDocument()
 
-  // It should call the service with grades 1 and 2
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [KyoikuGrade.ONE, KyoikuGrade.TWO], [], undefined)
+  // If the API request was made with the correct grades field value, it should return the fish kanji
+  expect(await screen.findByText("さかな")).toBeInTheDocument()
 })
 
 test("Adding a level filter parameter to the search field should call the service with those levels", async () => {
   // Start with just the "one" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }})
   const { search } = setup()
   expect(await screen.findByText("one")).toBeInTheDocument()
 
   // Filter by levels N5 and N4 and return some other kanji, so it re-renders
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: fish, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: fishResponse }], pages: 1, total: 1 }, levels: [4, 5] })
   fireEvent.change(search, { target: { value: ">level=N5,N4" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
   expect(await screen.findByText("さかな")).toBeInTheDocument()
 
-  // It should call the service with the N5 and N4 JLPT levels
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [], [JLTPLevel.N5, JLTPLevel.N4], undefined)
+  // If the API request was made with the correct levels field value, it should return the fish kanji
+  expect(await screen.findByText("さかな")).toBeInTheDocument()
 })
 
 test("Adding a strokes filter parameter to the search field should call the service with that number", async () => {
   // Start with just the "one" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }})
   const { search } = setup()
   expect(await screen.findByText("one")).toBeInTheDocument()
 
   // Filter by 8 strokes and return some other kanji, so it re-renders
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: fish, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: fishResponse }], pages: 1, total: 1 }, strokes: 8 })
   fireEvent.change(search, { target: { value: ">strokes=8" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
-  expect(await screen.findByText("さかな")).toBeInTheDocument()
 
-  // It should call the service with 8 strokes
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [], [], 8)
+  // If the API request was made with the correct strokes field value, it should return the fish kanji
+  expect(await screen.findByText("さかな")).toBeInTheDocument()
 })
 
 test.skip("Adding a filter parameter to the search field with a term should call the service with both", async () => {
   // Start with just the "person" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: person, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: personResponse }], pages: 1, total: 1 }})
   const { search } = setup()
   expect(await screen.findByText("person")).toBeInTheDocument()
 
   // Filter by 8 strokes and return some other kanji, so it re-renders
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: fish, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: fishResponse }], pages: 1, total: 1 }})
   fireEvent.change(search, { target: { value: ">strokes=8" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
   expect(await screen.findByText("さかな")).toBeInTheDocument()
 
   // Add a grade 1 filter too
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: birdResponse }], pages: 1, total: 1 }})
   fireEvent.change(search, { target: { value: ">grade=1" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
   expect(await screen.findByText("とり")).toBeInTheDocument()
 
   // Also search for "tree"
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }})
   fireEvent.change(search, { target: { value: "tree" } })
   expect(await screen.findByText("いち")).toBeInTheDocument()
 
   // It should call the service with the search term "tree", grades 1 and 8 strokes
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "tree", [KyoikuGrade.ONE], [], 8)
+  // expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "tree", [KyoikuGrade.ONE], [], 8)
 })
 
 test("Dismissing a grade filter parameter should reset the grades to an empty array", async () => {
   // Start with just the "bird" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: birdResponse }], pages: 1, total: 1 }})
   const { search } = setup()
   expect(await screen.findByText("bird")).toBeInTheDocument()
 
   // Filter by grades 1 and 2 and return some other kanji, so it re-renders
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: one, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }, grades: [1, 2] })
   fireEvent.change(search, { target: { value: ">grade=1,2" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
+
+  // If the API request was made with the correct grades field value, it should return the one kanji
   expect(await screen.findByText("いち")).toBeInTheDocument()
 
-  // It should call the service with the selected grades
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [KyoikuGrade.ONE, KyoikuGrade.TWO], [], undefined)
-
   // Dismiss the grade filter
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: fish, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: fishResponse }], pages: 1, total: 1 }, grades: [] })
   fireEvent.click(screen.getByTestId("dismiss-tag-grade"))
-  expect(await screen.findByText("さかな")).toBeInTheDocument()
 
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [], [], undefined)
+  // If the API request was made with the correct grades field value (empty), it should return the fish kanji
+  expect(await screen.findByText("さかな")).toBeInTheDocument()
 })
 
 test("Dismissing a level filter parameter should reset the levels to an empty array", async () => {
   // Start with just the "bird" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: birdResponse }], pages: 1, total: 1 }})
   const { search } = setup()
   expect(await screen.findByText("bird")).toBeInTheDocument()
 
-  // Filter by grades 1 and 2 and return some other kanji, so it re-renders
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: person, field: "meaning" }], pages: 1, quantity: 1 })
+  // Filter by levels N3 and N4 and return some other kanji, so it re-renders
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: personResponse }], pages: 1, total: 1 }, levels: [3, 4] })
   fireEvent.change(search, { target: { value: ">level=N3,N4" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
   expect(await screen.findByText("じん")).toBeInTheDocument()
 
-  // It should call the service with the selected levels
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [], [JLTPLevel.N3, JLTPLevel.N4], undefined)
-
   // Dismiss the level filter
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: bird, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: birdResponse }], pages: 1, total: 1 }, levels: [] })
   fireEvent.click(screen.getByTestId("dismiss-tag-level"))
   expect(await screen.findByText("とり")).toBeInTheDocument()
-
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [], [], undefined)
 })
 
 test("Dismissing a strokes filter parameter should reset the strokes to undefined", async () => {
   // Start with just the "bird" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: birdResponse }], pages: 1, total: 1 }})
   const { search } = setup()
-  expect(await screen.findByText("bird")).toBeInTheDocument()
+  expect(await screen.findByTestId("kanji-bank-selected-summary-鳥")).toBeInTheDocument()
 
   // Filter by 5 strokes and return some other kanji, so it re-renders
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: one, field: "meaning" }], pages: 1, quantity: 1 })
+  stubGetKanjiByFilter({ response: { results: [{ field: 'meaning', value: oneResponse }], pages: 1, total: 1 }, strokes: 5 })
   fireEvent.change(search, { target: { value: ">strokes=5" } })
   fireEvent.keyPress(search, { key: "Enter", code: 13, charCode: 13 })
-  expect(await screen.findByText("いち")).toBeInTheDocument()
+  expect(await screen.findByTestId("kanji-bank-selected-summary-一")).toBeInTheDocument()
 
-  // It should call the service with the selected stroke quantity
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [], [], 5)
-
-  // Dismiss the strokes filter
-  mockGetKanji.mockResolvedValue({ kanji: [{ value: person, field: "meaning" }], pages: 1, quantity: 1 })
+  // Dismiss the strokes filter (no need to re-intercept as it'll hit the RQ cache and return from the first stub)
   fireEvent.click(screen.getByTestId("dismiss-tag-strokes"))
-  expect(await screen.findByText("じん")).toBeInTheDocument()
-
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [], [], undefined)
+  expect(await screen.findByTestId("kanji-bank-selected-summary-鳥")).toBeInTheDocument()
+  expect(await screen.queryByTestId("kanji-bank-selected-summary-一")).not.toBeInTheDocument()
 })
 
 test("Clicking the next page button should render the next page of kanji", async () => {
   // Start with just the "bird" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: birdResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 0 }
+  })
   const { nextPage } = setup()
   expect(await screen.findByText("bird")).toBeInTheDocument()
 
   // Click the 'Next' button in the pagination controls
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: oneResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 1 }
+  })
   fireEvent.click(nextPage)
   expect(await screen.findByText("いち")).toBeInTheDocument()
-})
-
-test("Clicking the next page button should call the service with the next page number", async () => {
-  // Start with just the "person" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: person, field: "meaning" }], pages: 2, quantity: 1 })
-  const { nextPage } = setup()
-  expect(await screen.findByText("person")).toBeInTheDocument()
-
-  // Click the 'Next' button in the pagination controls
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 2, quantity: 1 })
-  fireEvent.click(nextPage)
-  expect(mockGetKanji).toHaveBeenLastCalledWith(1, 40, "", [], [], undefined)
 })
 
 test("Clicking the previous page button should render the previous page of kanji", async () => {
   // Start with just the "bird" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: birdResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 0 }
+  })
   const { nextPage, prevPage } = setup()
   expect(await screen.findByText("bird")).toBeInTheDocument()
 
   // Click the 'Next' button in the pagination controls (so we can go back after)
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: oneResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 1 }
+  })
   fireEvent.click(nextPage)
   expect(await screen.findByText("いち")).toBeInTheDocument()
 
   // Click the 'Prev' button in the pagination controls
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: person, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: personResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 0 }
+  })
   fireEvent.click(prevPage)
   expect(await screen.findByText("じん")).toBeInTheDocument()
-})
-
-test("Clicking the previous page button should call the service with the previous page number", async () => {
-  // Start with just the "one" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 2, quantity: 1 })
-  const { nextPage, prevPage } = setup()
-  expect(await screen.findByText("one")).toBeInTheDocument()
-
-  // Click the 'Next' button in the pagination controls (so we can go back after)
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 2, quantity: 1 })
-  fireEvent.click(nextPage)
-  expect(await screen.findByText("とり")).toBeInTheDocument()
-  expect(mockGetKanji).toHaveBeenLastCalledWith(1, 40, "", [], [], undefined)
-
-  // Click the 'Prev' button in the pagination controls
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: person, field: "meaning" }], pages: 2, quantity: 1 })
-  fireEvent.click(prevPage)
-  expect(await screen.findByText("じん")).toBeInTheDocument()
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 40, "", [], [], undefined)
 })
 
 test("Changing the page size should call the service with the new value", async () => {
   // Start with just the "one" kanji
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: one, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: oneResponse }], pages: 2, total: 1 },
+    pagination: { size: 40, page: 0 }
+  })
   const { pageSizeSelector } = setup()
   expect(await screen.findByText("one")).toBeInTheDocument()
 
   // Click the page size selector and pick 'Show 60'
-  mockGetKanji.mockResolvedValueOnce({ kanji: [{ value: bird, field: "meaning" }], pages: 2, quantity: 1 })
+  stubGetKanjiByFilter({
+    response: { results: [{ field: 'meaning', value: birdResponse }], pages: 2, total: 1 },
+    pagination: { size: 60, page: 0 }
+  })
   fireEvent.click(pageSizeSelector)
   expect(await screen.findByText("Show 60")).toBeInTheDocument()
   fireEvent.click(screen.getByText("Show 60"))
 
   // Should re-render
   expect(await screen.findByText("とり")).toBeInTheDocument()
-  expect(mockGetKanji).toHaveBeenLastCalledWith(0, 60, "", [], [], undefined)
 })

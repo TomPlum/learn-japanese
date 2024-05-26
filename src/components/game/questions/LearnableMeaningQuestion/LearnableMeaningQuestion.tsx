@@ -1,7 +1,7 @@
-import { Learnable } from "../../../../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 import { GameQuestionProps } from "../../MemoryGame"
 import EnglishInput from "../../../ui/fields/EnglishInput"
-import GameQuestion from "../../../../domain/game/GameQuestion"
+import GameQuestion from "types/game/GameQuestion"
 import styles  from "./LearnableMeaningQuestion.module.scss"
 
 export interface LearnableMeaningQuestionProps extends GameQuestionProps {

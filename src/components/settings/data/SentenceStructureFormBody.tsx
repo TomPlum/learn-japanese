@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep"
 import SentenceStructureSettings, {
   SentenceStructureSettingsBuilder
-} from "../../../domain/session/settings/data/SentenceStructureSettings"
+} from "types/session/settings/data/SentenceStructureSettings"
 
 const SentenceStructureFormBody = (props: DataSettingsStepFormProps<SentenceStructureSettings>) => {
   const { className, isValid, onChange } = props

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
-import GameResult from "../../../domain/game/GameResult"
+import GameResult from "types/game/GameResult"
 import Feedback from "./../Feedback"
 import {
   faAward,
@@ -15,7 +15,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock, faLightbulb } from "@fortawesome/free-regular-svg-icons"
 import styles  from "./GameResultScreen.module.scss"
-import { GameFinishReason } from "../../../domain/game/GameFinishReason"
+import { GameFinishReason } from "types/game/GameFinishReason"
 import HighScoreSubmitButton from "../../ui/buttons/HighScoreSubmitButton"
 
 export interface GameResultScreenProps {

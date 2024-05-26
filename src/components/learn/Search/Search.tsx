@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Learnable } from "../../../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 import SearchField from "../../ui/fields/SearchField"
 import { Container, Row } from "react-bootstrap"
 import LearnableInfo from "./../LearnableInfo"

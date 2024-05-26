@@ -1,4 +1,4 @@
-import SessionMode from "domain/session/SessionMode.ts";
+import SessionMode from "types/session/SessionMode.ts";
 
 export interface LaunchPresetConfirmationModalProps {
   preset: SessionMode

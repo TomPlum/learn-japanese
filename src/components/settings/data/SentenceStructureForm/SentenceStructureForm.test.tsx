@@ -3,7 +3,7 @@ import SentenceStructureForm  from "./SentenceStructureForm"
 import { DataSettingsMenuProps } from "../../../../components/settings/data/DataSettingsMenu"
 import SentenceStructureSettings, {
   SentenceStructureSettingsBuilder
-} from "../../../../domain/session/settings/data/SentenceStructureSettings"
+} from "types/session/settings/data/SentenceStructureSettings"
 import { faSpellCheck } from "@fortawesome/free-solid-svg-icons"
 import { getValueLastCalledWith } from "__test-utils__/Queries"
 import { render } from "__test-utils__"

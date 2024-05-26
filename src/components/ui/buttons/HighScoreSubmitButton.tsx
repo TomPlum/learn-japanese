@@ -1,5 +1,5 @@
 import HighScoresService from "../../../service/HighScoresService"
-import { HighScorePreference } from "../../../domain/HighScorePreference"
+import { HighScorePreference } from "types/HighScorePreference"
 import { useTranslation } from "react-i18next"
 import { Button } from "react-bootstrap"
 import { useEffect, useState } from "react"

@@ -1,6 +1,6 @@
 import RestClient from "../rest/RestClient.ts"
 import GenkiService from "./GenkiService.ts"
-import GenkiDefinition from "../domain/learn/GenkiDefinition.ts"
+import GenkiDefinition from "types/learn/GenkiDefinition.ts"
 
 const mockGet = vi.fn()
 

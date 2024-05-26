@@ -1,4 +1,4 @@
-import { NumbersSettingsBuilder } from "../../../../domain/session/settings/data/NumbersSettings"
+import { NumbersSettingsBuilder } from "types/session/settings/data/NumbersSettings"
 import { render } from "@testing-library/react"
 import NumbersDataSettingsSummary  from "./NumbersDataSettingsSummary"
 

@@ -1,8 +1,8 @@
-import { FlashCard } from "../domain/learn/FlashCard"
+import { FlashCard } from "types/learn/FlashCard"
 import RestClient from "../rest/RestClient"
 import { KanjiResponseModel } from "./KanjiRepository"
 import KanjiConverter from "../converter/KanjiConverter"
-import SpaceRepetitionDetails from "../domain/learn/spacedrepetition/SpaceRepetitionDetails"
+import SpaceRepetitionDetails from "types/learn/spacedrepetition/SpaceRepetitionDetails"
 
 export interface FlashCardsResponse {
   id: number

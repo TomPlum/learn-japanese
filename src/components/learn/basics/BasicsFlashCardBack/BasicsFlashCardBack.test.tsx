@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react"
-import Colour from "../../../../domain/colour/Colour"
+import Colour from "types/colour/Colour"
 import BasicsFlashCardBack  from "./BasicsFlashCardBack"
 
 const onClickHandler = vi.fn()

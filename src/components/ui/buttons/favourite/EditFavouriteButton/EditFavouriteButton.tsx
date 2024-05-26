@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { Fade } from "react-bootstrap"
 import Icon from "../../../menu/icon/Icon"
-import { CustomIcon } from "../../../../../domain/Icon"
+import { CustomIcon } from "types/Icon"
 import { useTranslation } from "react-i18next"
 
 export interface EditFavouriteButtonProps {

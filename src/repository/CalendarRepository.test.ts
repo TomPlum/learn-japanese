@@ -1,8 +1,8 @@
 import CalendarRepository from "./CalendarRepository.ts"
 import { DayData } from "../data/DataTypes.ts"
 import { days, months, nouns, phrases } from "../data/Calendar.ts"
-import Definition from "../domain/sentence/Definition.ts"
-import { CalendarSettingsBuilder } from "../domain/session/settings/data/CalendarSettings.ts"
+import Definition from "types/sentence/Definition.ts"
+import { CalendarSettingsBuilder } from "types/session/settings/data/CalendarSettings.ts"
 
 vi.mock("data/Calendar")
 

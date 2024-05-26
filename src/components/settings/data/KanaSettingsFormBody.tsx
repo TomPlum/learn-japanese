@@ -1,5 +1,5 @@
 import { DataSettingsStepFormProps } from "../../layout/wizard/steps/DataSettingsStep"
-import KanaSettings, { KanaSettingsBuilder } from "../../../domain/session/settings/data/KanaSettings"
+import KanaSettings, { KanaSettingsBuilder } from "types/session/settings/data/KanaSettings"
 import { Col, Row } from "react-bootstrap"
 import ToggleSwitch from "../../ui/ToggleSwitch"
 import styles from "components/settings/data/KanaSettingsForm/KanaSettingsForm.module.scss"

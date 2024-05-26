@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGraduationCap, faPlay } from "@fortawesome/free-solid-svg-icons"
-import { AppMode } from "../../../../../domain/AppMode"
+import { AppMode } from "types/AppMode"
 import { useTranslation } from "react-i18next"
 
 export interface ModeSelectionStepProps {

@@ -1,5 +1,5 @@
 import { GrammarInfoProps } from "../../learn/GrammarInfo"
-import PageNumber from "../../../domain/learn/PageNumber"
+import PageNumber from "types/learn/PageNumber"
 import GenkiStructureDisplay from "../../ui/genki/GenkiStructureDisplay"
 import GenkiExampleDisplay from "../../ui/genki/GenkiExampleDisplay"
 import styles from "components/pages/GenkiGrammarPage/GenkiGrammarPage.module.scss"

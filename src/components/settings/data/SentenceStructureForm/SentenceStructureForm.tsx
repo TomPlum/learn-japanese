@@ -2,7 +2,7 @@ import { useState } from "react"
 import DataSettingsMenu, { DataSettingsMenuProps } from "./../DataSettingsMenu"
 import SentenceStructureSettings, {
   SentenceStructureSettingsBuilder
-} from "../../../../domain/session/settings/data/SentenceStructureSettings"
+} from "types/session/settings/data/SentenceStructureSettings"
 import SentenceStructureFormBody from "./../SentenceStructureFormBody"
 
 const SentenceStructureForm = (props: DataSettingsMenuProps<SentenceStructureSettings>) => {

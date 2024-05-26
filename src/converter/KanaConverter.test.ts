@@ -1,7 +1,7 @@
 import KanaConverter from "./KanaConverter.ts"
 import { KanaResponse } from "../repository/KanaRepository.ts"
-import KanaType from "../domain/kana/KanaType.ts"
-import { KanaColumn } from "../domain/kana/KanaColumn.ts"
+import KanaType from "types/kana/KanaType.ts"
+import { KanaColumn } from "types/kana/KanaColumn.ts"
 
 describe("Kana Converter", () => {
   const converter = new KanaConverter()

@@ -1,8 +1,8 @@
 import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import HintButton, { HintButtonProps }  from "./HintButton"
-import { Kana } from "../../../domain/kana/Kana"
-import KanaType from "../../../domain/kana/KanaType"
-import { KanaColumn } from "../../../domain/kana/KanaColumn"
+import { Kana } from "types/kana/Kana"
+import KanaType from "types/kana/KanaType"
+import { KanaColumn } from "types/kana/KanaColumn"
 import { render } from "__test-utils__"
 
 const onUseHandler = vi.fn()

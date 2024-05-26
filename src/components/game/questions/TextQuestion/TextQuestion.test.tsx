@@ -1,7 +1,7 @@
 import { act, fireEvent, screen } from "@testing-library/react"
 import TextQuestion, { TextQuestionProps }  from "./TextQuestion"
 import React from "react"
-import LearnableField from "../../../../domain/learn/LearnableField"
+import LearnableField from "types/learn/LearnableField"
 import { MemoryGameQuestion } from "../../../../components/game/MemoryGame"
 import { render } from "__test-utils__"
 

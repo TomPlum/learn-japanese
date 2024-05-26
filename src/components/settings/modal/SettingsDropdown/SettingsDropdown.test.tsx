@@ -1,5 +1,5 @@
 import SettingsDropdown from "./SettingsDropdown"
-import { Preference } from "../../../../domain/user/Preference"
+import { Preference } from "types/user/Preference"
 import { faGlobe, faUserFriends } from "@fortawesome/free-solid-svg-icons"
 import { fireEvent, screen, waitFor, waitForElementToBeRemoved, within } from "@testing-library/react"
 import { render } from "__test-utils__"

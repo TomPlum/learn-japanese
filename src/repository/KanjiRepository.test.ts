@@ -1,13 +1,13 @@
 import KanjiRepository, { KanjiResponseModel } from "./KanjiRepository.ts"
-import { KyoikuGrade } from "../domain/kanji/KyoikuGrade.ts"
-import { KanjiSettingsBuilder } from "../domain/session/settings/data/KanjiSettings.ts"
+import { KyoikuGrade } from "types/kanji/KyoikuGrade.ts"
+import { KanjiSettingsBuilder } from "types/session/settings/data/KanjiSettings.ts"
 import RestClient from "../rest/RestClient.ts"
-import { Kanji } from "../domain/kanji/Kanji.ts"
-import { KanjiReading } from "../domain/kanji/KanjiReading.ts"
-import { ReadingType } from "../domain/kanji/ReadingType.ts"
-import { Example } from "../domain/kanji/Example.ts"
+import { Kanji } from "types/kanji/Kanji.ts"
+import { KanjiReading } from "types/kanji/KanjiReading.ts"
+import { ReadingType } from "types/kanji/ReadingType.ts"
+import { Example } from "types/kanji/Example.ts"
 import { PaginationRequest } from "../rest/request/PaginationRequest.ts"
-import JLTPLevel from "../domain/learn/JLTPLevel.ts"
+import JLTPLevel from "types/learn/JLTPLevel.ts"
 
 //Mock Kanji Converter
 const mockConverter = vi.fn()
@@ -159,59 +159,6 @@ describe("Kanji Repository", () => {
     })
   })
 
-  describe("Get By Search Term", () => {
-    it("Should call the rest client with the correct endpoint", () => {
-      mockPost.mockResolvedValueOnce({ data: { results: [], pages: 5, total: 200 } })
-      return repository.getBySearchTerm(0, 10, "student").then(() => {
-        expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-term/student", { page: 0, size: 10 })
-      })
-    })
-
-    it("Should return the data if the API call is successful and has data", () => {
-      mockPost.mockResolvedValueOnce({
-        data: { results: [{ field: "meaning", value: exampleKanji }], pages: 4, total: 100 }
-      })
-      return repository.getBySearchTerm(0, 10, "student").then((response) => {
-        expect(response.results).toStrictEqual([{ field: "meaning", value: exampleKanji }])
-      })
-    })
-
-    it("Should return an undefined error if the API call was successful and has data", () => {
-      mockPost.mockResolvedValueOnce({ data: { results: [{ field: "meaning", value: exampleKanji }] } })
-      return repository.getBySearchTerm(0, 10, "student").then((response) => {
-        expect(response.error).toBeUndefined()
-      })
-    })
-
-    it("Should return an empty results array if the API call was successful but with no data", () => {
-      mockPost.mockResolvedValueOnce({ data: undefined })
-      return repository.getBySearchTerm(0, 10, "student").then((response) => {
-        expect(response.results).toStrictEqual([])
-      })
-    })
-
-    it("Should return a generic error message if the the API call was successful but with no data", () => {
-      mockPost.mockResolvedValueOnce({ data: undefined })
-      return repository.getBySearchTerm(0, 10, "student").then((response) => {
-        expect(response.error).toBe("No data in response")
-      })
-    })
-
-    it("Should return an empty results array if the API call fails", () => {
-      mockPost.mockRejectedValueOnce({ data: undefined })
-      return repository.getBySearchTerm(0, 10, "student").catch((response) => {
-        expect(response.results).toStrictEqual([])
-      })
-    })
-
-    it("Should return the API error message if the API call fails", () => {
-      mockPost.mockRejectedValueOnce({ error: "An internal sever error occurred." })
-      return repository.getBySearchTerm(0, 10, "student").catch((response) => {
-        expect(response.error).toBe("An internal sever error occurred.")
-      })
-    })
-  })
-
   describe("Get By Value", () => {
     it("Should call the /kanji/by-character endpoint with the given kanji character", () => {
       mockGet.mockResolvedValueOnce({ data: exampleKanjiResponseData })
@@ -242,107 +189,6 @@ describe("Kanji Repository", () => {
       const kanjiCharacter = "小"
       return repository.getByValue(kanjiCharacter).catch((response) => {
         expect(response).toBe("Internal Server Error")
-      })
-    })
-  })
-
-  describe("Get By Filter", () => {
-    it("Should call the rest client with the correct endpoint", () => {
-      mockPost.mockResolvedValueOnce({ data: { results: [], pages: 5, total: 200 } })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).then(() => {
-        expect(mockPost).toHaveBeenLastCalledWith("/kanji/by-filter", {
-          search: "person",
-          grades: [1, 2, 3],
-          levels: [5, 4],
-          strokes: 10,
-          paging: {
-            page: 0,
-            size: 10
-          }
-        })
-      })
-    })
-
-    it("Should return the data if the API call is successful and has data", () => {
-      mockPost.mockResolvedValueOnce({
-        data: { results: [{ field: "meaning", value: exampleKanji }], pages: 4, total: 100 }
-      })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).then((response) => {
-        expect(response.results).toStrictEqual([{ field: "meaning", value: exampleKanji }])
-      })
-    })
-
-    it("Should return an undefined error if the API call was successful and has data", () => {
-      mockPost.mockResolvedValueOnce({ data: { results: [{ field: "meaning", value: exampleKanji }] } })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).then((response) => {
-        expect(response.error).toBeUndefined()
-      })
-    })
-
-    it("Should return an empty results array if the API call was successful but with no data", () => {
-      mockPost.mockResolvedValueOnce({ data: undefined })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).then((response) => {
-        expect(response.results).toStrictEqual([])
-      })
-    })
-
-    it("Should return a generic error message if the the API call was successful but with no data", () => {
-      mockPost.mockResolvedValueOnce({ data: undefined })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).then((response) => {
-        expect(response.error).toBe("No data in response")
-      })
-    })
-
-    it("Should return an empty results array if the API call fails", () => {
-      mockPost.mockRejectedValueOnce({ data: undefined })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).catch((response) => {
-        expect(response.results).toStrictEqual([])
-      })
-    })
-
-    it("Should return the API error message if the API call fails", () => {
-      mockPost.mockRejectedValueOnce({ error: "An internal sever error occurred." })
-      return repository.getByFilter(0, 10, "person", [1, 2, 3], [5, 4], 10).catch((response) => {
-        expect(response.error).toBe("An internal sever error occurred.")
-      })
-    })
-  })
-
-  describe("Get Random Kanji", () => {
-    it("Should call the API with the correct endpoint", () => {
-      mockGet.mockResolvedValueOnce({})
-      return repository.getRandomKanji().then(() => {
-        expect(mockGet).toHaveBeenLastCalledWith("/kanji/random")
-      })
-    })
-
-    it("Should call the converter with the API response data if present", () => {
-      mockGet.mockResolvedValueOnce({ data: exampleKanjiResponseData })
-      mockConverter.mockReturnValueOnce([exampleKanji])
-      return repository.getRandomKanji().then(() => {
-        expect(mockConverter).toHaveBeenCalledWith([exampleKanjiResponseData])
-      })
-    })
-
-    it("Should return the response from the converter if it has valid data", () => {
-      mockGet.mockResolvedValueOnce({ data: exampleKanjiResponseData })
-      mockConverter.mockReturnValueOnce([exampleKanji])
-      return repository.getRandomKanji().then((response) => {
-        expect(response).toBe(exampleKanji)
-      })
-    })
-
-    it("Should return undefined if the API call resolves but has no data", () => {
-      mockGet.mockResolvedValueOnce({ data: undefined })
-      return repository.getRandomKanji().then((response) => {
-        expect(response).toBeUndefined()
-      })
-    })
-
-    it("Should return undefined if the API call is rejected", () => {
-      mockGet.mockRejectedValueOnce({})
-      return repository.getRandomKanji().then((response) => {
-        expect(response).toBeUndefined()
       })
     })
   })

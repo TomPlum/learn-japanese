@@ -8,15 +8,25 @@ import "@testing-library/jest-dom"
 // It fixes the 'regeneratorRuntime is not defined` error when running a test that consumes the function.
 import "regenerator-runtime/runtime"
 
+import { ConfidenceMenuStyle } from "types/learn/spacedrepetition/ConfidenceMenuStyle"
+import { User } from "context/UserContext"
+import { cleanup } from "@testing-library/react"
+import { server } from "__test-utils__/msw.ts"
+
+beforeAll(() => {
+  server.listen({ onUnhandledRequest: 'error' })
+})
+
 afterEach(() => {
   cleanup()
+  server.resetHandlers()
+  testQueryClient.clear()
   localStorageMock.clear()
 })
 
-//Test Environment
-// TODO: Can we tell the test script to use the vite test mode?
-// import dotenv from "dotenv"
-// dotenv.config({ path: "./.env.test" })
+afterAll(() => {
+  server.close()
+})
 
 //Fixes Jest error.
 //See: https://github.com/akiran/react-slick/issues/742#issuecomment-298992238
@@ -32,9 +42,7 @@ window.matchMedia =
 
 //Allows testing of components that are wrapped in the sizeMe HOC
 import sizeMe from "react-sizeme"
-import { ConfidenceMenuStyle } from "./domain/learn/spacedrepetition/ConfidenceMenuStyle"
-import { User } from "./context/UserContext"
-import { cleanup } from "@testing-library/react";
+import { testQueryClient } from "__test-utils__";
 sizeMe.noPlaceholders = true
 
 declare global {
@@ -86,8 +94,11 @@ export const localStorageMock = (function () {
 
 Object.defineProperty(window, "localStorage", { value: localStorageMock })
 Object.defineProperty(window, 'scrollTo', { value: () => {
-  console.log("scrollTo() invoked in Jest test.")
+  console.log("scrollTo() invoked in a unit test.")
 }, writable: true });
+
+export const scrollIntoViewMock = vi.fn()
+window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock
 
 export const testUser: User = {
   username: "TomPlum42",

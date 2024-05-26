@@ -1,5 +1,5 @@
 import { Filter } from "../Filter"
-import { Learnable } from "../../domain/learn/Learnable"
+import { Learnable } from "types/learn/Learnable"
 
 /**
  * Filters out all Learnable objects whose kana values do not contain or match

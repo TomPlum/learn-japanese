@@ -24,6 +24,8 @@ import SessionSettingsProvider from "context/SessionSettingsContext";
 import FontProvider from "context/FontContext";
 import NotificationProvider from "context/NotificationContext";
 import UserProvider from "context/UserContext";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "api/queryClient.ts";
 
 export const routerConfig = [
   {
@@ -104,17 +106,19 @@ export const router = createBrowserRouter(routerConfig, {
 
 const LearnJapanese = () => {
   return (
-    <SessionSettingsProvider>
-      <NotificationProvider>
-        <FontProvider>
-          <UserProvider>
-            <RouterProvider
-              router={router}
-            />
-          </UserProvider>
-        </FontProvider>
-      </NotificationProvider>
-    </SessionSettingsProvider>
+    <QueryClientProvider client={queryClient}>
+      <SessionSettingsProvider>
+        <NotificationProvider>
+          <FontProvider>
+            <UserProvider>
+              <RouterProvider
+                router={router}
+              />
+            </UserProvider>
+          </FontProvider>
+        </NotificationProvider>
+      </SessionSettingsProvider>
+    </QueryClientProvider>
   )
 }
 

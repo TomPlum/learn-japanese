@@ -1,10 +1,10 @@
 import { fireEvent, screen } from "@testing-library/react"
 import QuestionSettingsForm  from "./QuestionSettingsForm"
-import QuestionType from "../../../../domain/game/QuestionType"
-import QuestionSettings from "../../../../domain/session/settings/game/QuestionSettings"
+import QuestionType from "types/game/QuestionType"
+import QuestionSettings from "types/session/settings/game/QuestionSettings"
 import { getValueLastCalledWith } from "__test-utils__/Queries"
 import userEvent from "@testing-library/user-event"
-import LearnableField from "../../../../domain/learn/LearnableField"
+import LearnableField from "types/learn/LearnableField"
 import { render } from "__test-utils__"
 
 const onSelectHandler = vi.fn()
