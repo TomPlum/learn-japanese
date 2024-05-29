@@ -1,5 +1,5 @@
 # Pull Base Imagine
-FROM node:20.12.2-alpine
+FROM node:20.14.0-alpine
 
 # Set Working Directory
 WORKDIR ./
