@@ -89,7 +89,7 @@
     "@typescript-eslint/parser": "^7.0.0",
     "@uidotdev/usehooks": "^2.4.1",
     "@vitejs/plugin-react": "^4.2.1",
-    "@vitest/coverage-v8": "^1.1.1",
+    "@vitest/coverage-v8": "^2.0.0",
     "axios-mock-adapter": "^1.20.0",
     "c8": "^10.0.0",
     "chai-match": "^1.1.1",
@@ -113,7 +113,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
     "vite-plugin-node-polyfills": "^0.22.0",
-    "vitest": "^1.1.1"
+    "vitest": "^2.0.0"
   },
   "msw": {
     "workerDirectory": "public"
